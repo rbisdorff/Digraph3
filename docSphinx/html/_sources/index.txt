@@ -7,7 +7,7 @@
 Technical Documentation of the Digraph resources!
 =================================================
 :Author: Raymond Bisdorff, University of Luxembourg FSTC/CSC
-:Version: $Revision: 1.6+$
+:Version: $Revision: 1.2 $
 :Copyright: R. Bisdorff 2012
 
 .. _Introduction-label:
@@ -15,7 +15,7 @@ Technical Documentation of the Digraph resources!
 Introduction
 ------------
 
-This Technical Manual describes the Python implementation ($Revision: 1.6+$) of generic resources for computing kernels and other qualified choices in bipolar-valued outranking digraphs. This computing ressource is useful in the filed of algorithmic decision sciences problems
+This Technical Manual describes the Python implementation ($Revision: 1.2 $) of generic resources for computing kernels and other qualified choices in bipolar-valued outranking digraphs. This computing ressource is useful in the filed of algorithmic decision sciences problems
 
 Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://charles-sanders-peirce.uni.lu/bisdorff/>, University of Luxembourg.
 
@@ -28,8 +28,9 @@ The Python development of these computing ressources offers the advantage of an 
 The Digraph source code is split into five interdependant modules, where the ``digraphs`` module is the master source.
 
 :ref:`digraphs-label`
-     main part of the source code with the top ``Digraph`` and the ``BipolarOutrankingDigraph`` classes; 
-
+     main part of the source code with the top ``Digraph`` and the old version (-Rev:1.630) ``BipolarOutrankingDigraph`` classes; 
+:ref:`outrankingDigraphs-label`
+     New version ``BipolarOutrankingDigraph`` classes; 
 :ref:`perfTabs-label` 
      everything needed for handling Rubis Performance Tableaux;
 :ref:`votingDigraphs-label` 
@@ -61,6 +62,18 @@ perfTabs module
 ---------------
 
 .. automodule:: perfTabs
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Introduction-label`
+
+.. _outrankingDigraphs-label:
+
+outrankingDigraphs module
+-------------------------
+
+.. automodule:: outrankingDigraphs
    :member-order: alphabetical
    :no-inherited-members:
    :members:

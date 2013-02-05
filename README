@@ -21,37 +21,26 @@
 
 Installation instructions:
 
-Either (easiest),
-   access the subversion repository on <leopold-loewen.uni.lu>
-	..$svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph
-or,
-   download the <tar.gz archive> from the ./dist directory and extract it somewhere and 
+..$svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
-cd to the svn or the extracted <Digraph> directory:
+cd to the svn or the extracted <Digraph3> directory:
 
-.. /Digraph$ make docHTML
+.. /Digraph3$ make docHTML
 generates the HTML documentation in the ./doc subdirectory
 (hyperlatex needed ..$ apt-get install hyperlatex)
 
-.. /Digraph$ make docPDF
+.. /Digraph3$ make docPDF
 generates a PDF document in the ./doc subdirectory
 
-.. /Digraph$ make tests
+.. /Digraph3$ make tests
 runs a nose test suite in the ./test directory
 (python nose package required  ..$ easy_install nose )
 
-.. /Digraph$ make verboseTests
+.. /Digraph3$ make verboseTests
 runs a verbose (with stdout not captured) nose test suite 
 
-../Digraph$ make install
+../Digraph3$ make install
 installs (with sudo !!) the digraphs module in the current running python environment 
-
-../Digraph$ make 2to3
-converts automatically the python.2 sources to python.3 and saves them into the py3 directory
-
-../Digraph$ sudo make install3
-installs (with sudo !!) the digraphs python.3  module in the python.3 environment, the case given 
-
 
 Enjoy !!
 R Bisdorff

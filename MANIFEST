@@ -10,7 +10,6 @@ makefile
 MANIFEST
 perrinMIS.c
 setup.py
-py3/setup.py
 gpl.txt
 doc/digraphsdoc.tex
 doc/blank.png
@@ -20,6 +19,7 @@ doc/rel_rubyExample.png
 doc/up.png
 doc/rel_rubyExample.eps
 doc/sedpngs
+test/nosetests
 test/noseTestsDigraph.py
 test/noseTestsOutrankingDigraph.py
 test/noseTestsSortingDigraph.py
