@@ -21,7 +21,7 @@ def testDefaultSortingDigraph():
     actions.sort()
     for x in actions:
         for c in s.orderedCategoryKeys():
-            if sorting[x][c] >= s.valuationdomain['med']:
+            if sorting[x][c]['categoryMembership'] >= s.valuationdomain['med']:
                 print('%s in %s = %.2f' % (x,c,sorting[x][c]['categoryMembership']))
     sorts = s.computePessimisticSorting(Comments=False)
     for c in s.orderedCategoryKeys():
@@ -42,7 +42,7 @@ def testRobustSortingDigraphClass():
     actions.sort()
     for x in actions:
         for c in s.orderedCategoryKeys():
-            if sorting[x][c] >= s.valuationdomain['med']:
+            if sorting[x][c]['categoryMembership'] >= s.valuationdomain['med']:
                 print('%s in %s = %.2f (%d)' % (x,c,sorting[x][c]['categoryMembership'],robustSorting[x][c]['categoryMembership']))
 
 def testShowSortingMethod():

@@ -440,7 +440,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         """
         import copy
         weightSum = Decimal('0.0')
-        p = Decimal(str(len(self.criteria)))
+        p= len(self.criteria)
+        #p = Decimal(str(len(self.criteria)))
         criteriaList = list(copy.deepcopy(self.criteria))
         criteria = []
         for i in range(p):
@@ -451,13 +452,13 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         if weightSum != Decimal('0.0'):
             Q = [Decimal('0.0') for i in range(p)]
             F = [Decimal('0.0') for i in range(p)]
-            F[0] = Decimal('1.0')/p
+            F[0] = Decimal('1.0')/Decimal(str(p))
             i = 1
             Q[0] = self.criteria[criteria[0][1]]['weight']/weightSum           
             for i in range(1,p):
                 qi = self.criteria[criteria[i][1]]['weight']/weightSum
                 Q[i] += Q[i-1] + qi
-                fi = Decimal('1.0')/p
+                fi = Decimal('1.0')/Decimal(str(p))
                 F[i] += F[i-1] + fi
                 i += 1
             gini = Decimal('0.0')
@@ -4617,7 +4618,7 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
                     pass
                 characteristics = []
                 for c in criteriaKey:
-                    for i in range(criteriaWeight[c]):
+                    for i in range(int(criteriaWeight[c])):
                         characteristics.append(criteriaRelation[c][x][y])
                 characteristics.sort(reverse=False)
                 n = len(characteristics)
@@ -4625,10 +4626,10 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
                 ## if n % 2 == 1:
                 m = (n+1)*percentile[0]
                 if m % percentile[1] == 0:
-                    k = m / percentile[1]
+                    k = m // percentile[1]
                     quantile = characteristics[k-1]
                 else:
-                    k = (m/percentile[1])
+                    k = (m//percentile[1])
                     quantile0 = characteristics[k-1]
                     quantile1 = characteristics[k]
                     if quantile1 <= Med:
