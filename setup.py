@@ -5,7 +5,7 @@
 from distutils.core import setup
 
 setup(name='digraphs',
-      version='Revision: 1.600+',
+      version='Python3: 2.0',
       py_modules=['digraphs','perfTabs','outrankingDigraphs','sortingDigraphs','votingDigraphs','linearOrders','iqagent'],
       license='http://ernst-schroeder.uni.lu/Digraph/digraph_copyright.html',
       url='http://ernst-schroeder.uni.lu/Digraph/',

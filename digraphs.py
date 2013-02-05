@@ -1463,7 +1463,7 @@ class Digraph(object):
                     Iso = Iso | set([frozenset(sCur)])
                     niso = len(Isos)
                     print('number of isomorph choices', niso)
-                    v[((2*self.order)/niso)-1] += 1
+                    v[((2*self.order)//niso)-1] += 1
                     if withListing:
                         print('isormorph choices')
                         for ch in Isos:
