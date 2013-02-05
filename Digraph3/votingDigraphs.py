@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # Python implementation of voting digraphs
 # Refactored from revision 1.549 of the digraphs module

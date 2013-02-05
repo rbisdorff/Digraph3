@@ -34,12 +34,12 @@ tests:
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
 		cp linearOrders.py test/
-		(cd test; nosetests -v noseTestsDigraph.py)
-		(cd test; nosetests -v noseTestsOutrankingDigraph.py)
-		(cd test; nosetests -v noseTestsPerfTab.py)
-		(cd test; nosetests -v noseTestsSortingDigraph.py)
-		(cd test; nosetests -v noseTestsVotingDigraph.py)
-		(cd test; nosetests -v noseTestsLinearOrder.py)
+		(cd test; ./nosetests -v noseTestsDigraph.py)
+		(cd test; ./nosetests -v noseTestsOutrankingDigraph.py)
+		(cd test; ./nosetests -v noseTestsPerfTab.py)
+		(cd test; ./nosetests -v noseTestsSortingDigraph.py)
+		(cd test; ./nosetests -v noseTestsVotingDigraph.py)
+		(cd test; ./nosetests -v noseTestsLinearOrder.py)
 
 verboseTests:
 		cp digraphs.py test/
