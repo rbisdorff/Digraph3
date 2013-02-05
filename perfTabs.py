@@ -32,7 +32,7 @@ from decimal import Decimal
 try:
     from xml.sax import *
 except:
-    print 'XML extension will not work with this Python version!'
+    print('XML extension will not work with this Python version!')
 
 class _XMLPerformanceTableauHandler(ContentHandler):
     """
@@ -275,7 +275,7 @@ class PerformanceTableau(object):
         
         if filePerfTab != None:
             fileName = filePerfTab + '.py'
-            execfile(fileName)
+            exec(compile(open(fileName).read(), fileName, 'exec'))
             self.name = str(filePerfTab)
             try:
                 self.actions = locals()['actions']
@@ -323,14 +323,14 @@ class PerformanceTableau(object):
         for g in criteria:
             w.append(criteria[g]['weight'])
         if Debug:
-            print 'weights = ', w
-        Eorig = range(len(w))
+            print('weights = ', w)
+        Eorig = list(range(len(w)))
         E = set(Eorig)
         OddWeightAlgebra = True
         for X in powerset(E):
             Xc = set(Eorig) - X
             if Debug:
-                print X, Xc
+                print(X, Xc)
             sumX = Decimal("0")
             for x in X:
                 sumX += w[x]
@@ -338,7 +338,7 @@ class PerformanceTableau(object):
             for x in Xc:
                 sumXc += w[x]
             if Debug:
-                print sumX, sumXc
+                print(sumX, sumXc)
             if sumX == sumXc:
                 #print sumX, sumXc
                 OddWeightAlgebra = False
@@ -384,7 +384,7 @@ class PerformanceTableau(object):
         """
         print Criteria with thresholds and weights.
         """
-        print '*----  criteria -----*'
+        print('*----  criteria -----*')
         sumWeights = Decimal('0.0')
         for g in self.criteria:
             sumWeights += self.criteria[g]['weight']
@@ -395,23 +395,23 @@ class PerformanceTableau(object):
                 criterionName = self.criteria[g]['name']
             except:
                 criterionName = ''
-            print g, repr(criterionName)
-            print '  Scale =', self.criteria[g]['scale']
+            print(g, repr(criterionName))
+            print('  Scale =', self.criteria[g]['scale'])
             if IntegerWeights:
-                print '  Weight = %d ' % (self.criteria[g]['weight'])
+                print('  Weight = %d ' % (self.criteria[g]['weight']))
             else:
                 weightg = self.criteria[g]['weight']/sumWeights
-                print '  Weight = %.3f ' % (weightg)
+                print('  Weight = %.3f ' % (weightg))
             try:
                 for th in self.criteria[g]['thresholds']:
                     if Debug:
-                        print '-->>>', th,self.criteria[g]['thresholds'][th][0],self.criteria[g]['thresholds'][th][1]
-                    print '  Threshold %s : %.2f + %.2fx' % (th,self.criteria[g]['thresholds'][th][0],self.criteria[g]['thresholds'][th][1]),
+                        print('-->>>', th,self.criteria[g]['thresholds'][th][0],self.criteria[g]['thresholds'][th][1])
+                    print('  Threshold %s : %.2f + %.2fx' % (th,self.criteria[g]['thresholds'][th][0],self.criteria[g]['thresholds'][th][1]), end=' ')
                     #print self.criteria[g]['thresholds'][th]
-                    print '; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug)
+                    print('; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug))
             except:
                 pass
-            print 
+            print() 
  
         
     def computePerformanceDifferences(self,comments = False, Debug = False):
@@ -422,7 +422,7 @@ class PerformanceTableau(object):
         if Debug:
             comments = True
         if comments:
-            print 'Compute performance differences on each criterion'
+            print('Compute performance differences on each criterion')
         criteriaList = [x for x in self.criteria]
         criteriaList.sort()
         actionsList = [x for x in self.actions]
@@ -443,16 +443,16 @@ class PerformanceTableau(object):
                     #diff.add(delta)
                     diffList.append(delta)
                     if Debug:
-                        print '-->> i,j, self.evaluation[actionsList[i]],self.evaluation[actionsList[j]], delta, ed,md', i,j, self.evaluation[c][actionsList[i]],self.evaluation[c][actionsList[j]], delta, ed,md,diffList
+                        print('-->> i,j, self.evaluation[actionsList[i]],self.evaluation[actionsList[j]], delta, ed,md', i,j, self.evaluation[c][actionsList[i]],self.evaluation[c][actionsList[j]], delta, ed,md,diffList)
             self.criteria[c]['minimalPerformanceDifference'] = ed
             self.criteria[c]['maximalPerformanceDifference'] = md
             #diffList = list(diff)
             diffList.sort()
             self.criteria[c]['performanceDifferences'] = diffList
             if comments:
-                print ' -->', c, ': ', self.criteria[c]['minimalPerformanceDifference'], self.criteria[c]['maximalPerformanceDifference']
-                print len(self.criteria[c]['performanceDifferences']),self.criteria[c]['performanceDifferences']
-                print self.criteria[c]['performanceDifferences'][0], self.criteria[c]['performanceDifferences'][-1]
+                print(' -->', c, ': ', self.criteria[c]['minimalPerformanceDifference'], self.criteria[c]['maximalPerformanceDifference'])
+                print(len(self.criteria[c]['performanceDifferences']),self.criteria[c]['performanceDifferences'])
+                print(self.criteria[c]['performanceDifferences'][0], self.criteria[c]['performanceDifferences'][-1])
 
     def computeActionCriterionPerformanceDifferences(self,refAction,refCriterion,comments = False, Debug = False):
         """
@@ -462,7 +462,7 @@ class PerformanceTableau(object):
         if Debug:
             comments = True
         if comments:
-            print 'Compute performance differences for action %s on criterion %s' % (refAction, refCriterion)
+            print('Compute performance differences for action %s on criterion %s' % (refAction, refCriterion))
 
         otherActionsList = [x for x in self.actions]
         otherActionsList.remove(refAction)
@@ -471,7 +471,7 @@ class PerformanceTableau(object):
             delta = abs(self.evaluation[refCriterion][refAction] - self.evaluation[refCriterion][x])
             diff.append(delta)
             if Debug:
-                print '-->> refAction, x, evaluation[refAction], evaluation[x], delta,diff', refAction,x, self.evaluation[refCriterion][refAction],self.evaluation[refCriterion][x], delta,diff
+                print('-->> refAction, x, evaluation[refAction], evaluation[x], delta,diff', refAction,x, self.evaluation[refCriterion][refAction],self.evaluation[refCriterion][x], delta,diff)
 
         diff.sort()
         return diff
@@ -481,7 +481,7 @@ class PerformanceTableau(object):
         renders the quantile of the performance of action on criterion
         """
         if Debug:
-            print action,criterion
+            print(action,criterion)
         perfx = self.evaluation[criterion][action]
         if perfx != -999:
             try:
@@ -499,9 +499,9 @@ class PerformanceTableau(object):
         renders a quantiles matrix action x criterion with the performance quantile of action on criterion
         """
         actionsList = [x for x in self.actions]
-        criteriaList = self.criteria.keys()
+        criteriaList = list(self.criteria.keys())
         if Debug:
-            print actionsList,criteriaList
+            print(actionsList,criteriaList)
         quantiles = {}
         for x in actionsList:
             quantiles[x] = self.computeActionQuantile(x,Debug)
@@ -528,7 +528,7 @@ class PerformanceTableau(object):
         minWeight = criteriaQuantiles[i][1]
         majority = float(sumWeights)/2.0
         if Debug:
-            print majority,i, currentWeight,minWeight, currentQuantile, minQuantile
+            print(majority,i, currentWeight,minWeight, currentQuantile, minQuantile)
         while minWeight < majority:
             i += 1
             currentQuantile = minQuantile
@@ -536,10 +536,10 @@ class PerformanceTableau(object):
             minQuantile = criteriaQuantiles[i][0] 
             minWeight += criteriaQuantiles[i][1]
         if Debug:
-            print i, currentWeight,minWeight, currentQuantile, minQuantile
+            print(i, currentWeight,minWeight, currentQuantile, minQuantile)
         actionQuantile = currentQuantile + (majority-currentWeight)/(minWeight-currentWeight)*(minQuantile-currentQuantile)
         if Debug:
-            print 'quantile for %s = %.3f' % (action,actionQuantile)
+            print('quantile for %s = %.3f' % (action,actionQuantile))
         return actionQuantile
 
             
@@ -562,7 +562,7 @@ class PerformanceTableau(object):
                 fo.write('"%s",' % x)
             else:
                 fo.write('"%s"\n' % x)
-        print '\nweights  | ', 
+        print('\nweights  | ', end=' ') 
         for g in criteriaList:
             fo.write('"%s",' % g)
             for i in range(n):
@@ -584,26 +584,26 @@ class PerformanceTableau(object):
         actionsList = [x for x in self.actions]
         actionsList.sort()
         html = '<table style="background-color:White;" border="1">\n'
-        print 'criteria | ',
+        print('criteria | ', end=' ')
         html += '<tr bgcolor="#9acd32"><th>criteria</th>'
         for g in criteriaList:
-            print str(g) + '\t',
+            print(str(g) + '\t', end=' ')
             html += '<th>%s</th>' % (g)
         html += '</tr>\n'
-        print '\nweights  | ', 
+        print('\nweights  | ', end=' ') 
         html += '<tr style="text-align: center;" bgcolor="#FFF79B"><td>weights</td>'
         for g in criteriaList:
-            print str(self.criteria[g]['weight']) + '\t',
+            print(str(self.criteria[g]['weight']) + '\t', end=' ')
             html += '<td >%s</td>' % (self.criteria[g]['weight'])
         html += '</tr>\n'        
-        print '\n-----------------------------------------------------'
+        print('\n-----------------------------------------------------')
         for x in actionsList:
-            print str(x) + '   | ',
+            print(str(x) + '   | ', end=' ')
             html += '<tr><th  bgcolor="#FFF79B">%s</th>' % (x)
             for g in criteriaList:
-                print '%.2f\t' % self.computeActionCriterionQuantile(x,g,Debug=False),
+                print('%.2f\t' % self.computeActionCriterionQuantile(x,g,Debug=False), end=' ')
                 html += '<td>%.2f</td>' % (self.computeActionCriterionQuantile(x,g,Debug=False))
-            print
+            print()
             html += '</tr>\n'
                                           
         html += '</table>\n'
@@ -650,7 +650,7 @@ class PerformanceTableau(object):
         """
         self.computeQuantiles()
         actionsSorting = []
-        for x in self.actions.keys():
+        for x in list(self.actions.keys()):
             actionsSorting.append((self.quantiles[x],x))
         actionsSorting.sort(reverse=True)
         return actionsSorting
@@ -664,28 +664,28 @@ class PerformanceTableau(object):
         if Debug:
             Comments = True
         if Comments:
-            print quantiles
+            print(quantiles)
         actionsPreorder = []
         currLevel = 0.0
         currEquivalenceClass = []
         for x in quantiles:
             if Debug:
-                print currLevel,x
+                print(currLevel,x)
             if x[0] >= currLevel:
                 currEquivalenceClass.append(x[1])
                 if Debug:
-                    print currEquivalenceClass
+                    print(currEquivalenceClass)
             else:
                 currEquivalenceClass.sort()
                 actionsPreorder.append(currEquivalenceClass)
                 if Debug:
-                    print actionsPreorder
+                    print(actionsPreorder)
                 currEquivalenceClass = [x[1]]
             currLevel = x[0]
         currEquivalenceClass.sort()
         actionsPreorder.append(currEquivalenceClass)
         if Comments:
-            print actionsPreorder
+            print(actionsPreorder)
         return actionsPreorder
 
     def showQuantileSort(self,Debug=False):
@@ -707,7 +707,7 @@ class PerformanceTableau(object):
             comments = True
             
         if comments:
-            print 'Installs default discrimination thresholds on each criterion'
+            print('Installs default discrimination thresholds on each criterion')
 
         self.computePerformanceDifferences(Debug,comments)
         criteriaList = [x for x in self.criteria]
@@ -717,13 +717,13 @@ class PerformanceTableau(object):
             vx = self.criteria[c]['performanceDifferences']
             nv = len(vx)
             if Debug:
-                print '=====>',c
-                print vx
-                print nv
+                print('=====>',c)
+                print(vx)
+                print(nv)
             threshold = {}
             for x in quantile:
                 if Debug:
-                    print '-->', x, quantile[x],
+                    print('-->', x, quantile[x], end=' ')
 
                 if quantile[x] == -1:
                     pass
@@ -736,7 +736,7 @@ class PerformanceTableau(object):
                         kq = int(math.floor(float(quantile[x]*(nv-1))/100.0))
                         r = ((nv-1)*quantile[x]) % 100
                         if Debug:
-                            print kq,r,
+                            print(kq,r, end=' ')
 
                         ## if kq == nv-1:
                         ##     kqplus = nv-1
@@ -744,7 +744,7 @@ class PerformanceTableau(object):
                         ##     kq_1 = kq - 1
                         threshold[x] = vx[kq] + (Decimal(str(r))/Decimal('100.0')) * (vx[kq+1]-vx[kq])
                         if Debug:
-                            print threshold[x]
+                            print(threshold[x])
 
             
             self.criteria[c]['thresholds'] = {}
@@ -752,8 +752,8 @@ class PerformanceTableau(object):
                 self.criteria[c]['thresholds'][x] = (threshold[x],Decimal('0.0'))
 
             if comments:
-                print 'criteria',c,' default thresholds:'
-                print self.criteria[c]['thresholds']
+                print('criteria',c,' default thresholds:')
+                print(self.criteria[c]['thresholds'])
 
 
     def computeThresholdPercentile(self,criterion, threshold, Debug=False):
@@ -767,23 +767,23 @@ class PerformanceTableau(object):
             self.computePerformanceDifferences(Debug=Debug)
             performanceDifferences = self.criteria[criterion]['performanceDifferences']
         if Debug:
-            print "performanceDifferences = ",performanceDifferences
+            print("performanceDifferences = ",performanceDifferences)
         try:
             quantile = self.criteria[criterion]['thresholds'][threshold][0]     
         except:
             return None
         if Debug:
-            print 'quantile', quantile
+            print('quantile', quantile)
         nv = len(performanceDifferences)
         i = 0
         while i < nv and performanceDifferences[i] <= quantile:
             if Debug:
-                print i, quantile, performanceDifferences[i]
+                print(i, quantile, performanceDifferences[i])
             i += 1
         percentile = float(i)/float(nv)
         if Debug:
-            print 'i = ', i, 'nv = ', nv
-            print 'percentile =', percentile
+            print('i = ', i, 'nv = ', nv)
+            print('percentile =', percentile)
         return percentile
 
     def computeVariableThresholdPercentile(self,criterion, threshold, Debug=False):
@@ -805,47 +805,47 @@ class PerformanceTableau(object):
         for a in actionsList:
             performanceDifferences = self.computeActionCriterionPerformanceDifferences(a,criterion,Debug)
             if Debug:
-                print 'performanceDifferences:', performanceDifferences
+                print('performanceDifferences:', performanceDifferences)
             na = len(performanceDifferences)
             total += na
             i = 0
             quantile = Decimal(str(th[0])) + abs(self.evaluation[criterion][a])*Decimal(str(th[1]))
             if Debug:
-                print 'a,na,self.evaluation[criterion][a],th[0],th[1],quantile',a,na,self.evaluation[criterion][a],th[0],th[1],quantile
+                print('a,na,self.evaluation[criterion][a],th[0],th[1],quantile',a,na,self.evaluation[criterion][a],th[0],th[1],quantile)
             while i < na and performanceDifferences[i] <= quantile:
                 if Debug:
-                    print 'i, quantile, performanceDifferences[i]',i, quantile, performanceDifferences[i]
+                    print('i, quantile, performanceDifferences[i]',i, quantile, performanceDifferences[i])
                 i += 1
             count += i
             if Debug:
-                print 'a,na,final i', a,na,i
+                print('a,na,final i', a,na,i)
         percentile = float(count)/float(total)
         if Debug:
-            print 'count = ', count, 'total = ', total
-            print 'percentile =', percentile   
+            print('count = ', count, 'total = ', total)
+            print('percentile =', percentile)   
         return percentile
 
     def showPerformanceTableau(self,sorted=True,ndigits=2):
         """
         Print the performance Tableau.
         """
-        print '*----  performance tableau -----*'
+        print('*----  performance tableau -----*')
         criteriaList = list(self.criteria)
         if sorted:
             criteriaList.sort()
         actionsList = list(self.actions)
         if sorted:
             actionsList.sort()
-        print   'criteria | weights |',
+        print('criteria | weights |', end=' ')
         for x in actionsList:
-            print '\''+str(x)+'\'  ',
-        print '\n---------|-----------------------------------------'
+            print('\''+str(x)+'\'  ', end=' ')
+        print('\n---------|-----------------------------------------')
         for g in criteriaList:
-            print '   \''+str(g)+'\'  |   '+str(self.criteria[g]['weight'])+'   | ',
+            print('   \''+str(g)+'\'  |   '+str(self.criteria[g]['weight'])+'   | ', end=' ')
             for x in actionsList:
                 formatString = '%% .%df ' % ndigits
-                print formatString % (self.evaluation[g][x]),
-            print      
+                print(formatString % (self.evaluation[g][x]), end=' ')
+            print()      
 
 
     def computeMinMaxEvaluations(self,criteria=None,actions=None):
@@ -943,23 +943,23 @@ class PerformanceTableau(object):
         """
         criteria = self.criteria
         evaluation = self.evaluation
-        print '*-------- show performance tableau -------*'
-        print 'Name         :', self.name
-        print 'Actions      :', self.actions
-        print 'Criteria     :'       
+        print('*-------- show performance tableau -------*')
+        print('Name         :', self.name)
+        print('Actions      :', self.actions)
+        print('Criteria     :')       
         for g in criteria:
-            print ' criterion name        :', g
-            print '   scale: ', criteria[g]['scale'],
-            print ', weight: %.3f ' % (criteria[g]['weight']),
+            print(' criterion name        :', g)
+            print('   scale: ', criteria[g]['scale'], end=' ')
+            print(', weight: %.3f ' % (criteria[g]['weight']), end=' ')
             try:
-                print '   thresholds:', criteria[g]['thresholds']
+                print('   thresholds:', criteria[g]['thresholds'])
             except:
                 pass
-            print
-        print 'Weights preorder :', self.weightPreorder
-        print 'Evaluations      :'
+            print()
+        print('Weights preorder :', self.weightPreorder)
+        print('Evaluations      :')
         for g in evaluation:
-            print g, evaluation[g]
+            print(g, evaluation[g])
 
     def showEvaluationStatistics(self):
         """
@@ -969,7 +969,7 @@ class PerformanceTableau(object):
         import math
         from decimal import Decimal
         
-        print '*---- Evaluation statistics ----*'
+        print('*---- Evaluation statistics ----*')
         average = Decimal('0.0')
         n = Decimal('0.0')
         for g in self.criteria:
@@ -977,21 +977,21 @@ class PerformanceTableau(object):
                 average += self.evaluation[g][x]
                 n += 1
         average = average/n
-        print 'average      : %2.2f ' % (average)
+        print('average      : %2.2f ' % (average))
         variance = Decimal('0.0')
         for g in self.criteria:
             for x in self.actions:
                 variance += (self.evaluation[g][x]-average)*(self.evaluation[g][x]-average)
         variance = variance/n
-        print 'variance     : %2.2f ' % (variance)
+        print('variance     : %2.2f ' % (variance))
         stddev = math.sqrt(variance)
-        print 'std deviation: %2.2f ' % (stddev)      
+        print('std deviation: %2.2f ' % (stddev))      
 
     def save(self,fileName='tempperftab',isDecimal=True,valueDigits=2):
         """
         Persistant storage of Performance Tableaux.
         """
-        print '*--- Saving performance tableau in file: <' + str(fileName) + '.py> ---*'
+        print('*--- Saving performance tableau in file: <' + str(fileName) + '.py> ---*')
         actions = self.actions
         criteria = self.criteria
         evaluation = self.evaluation
@@ -1041,7 +1041,7 @@ class PerformanceTableau(object):
         """
         save temporary performance tableau self in XML format.
         """
-        print '*----- saving performance tableau in XML format  -------------*'        
+        print('*----- saving performance tableau in XML format  -------------*')        
         nameExt = name+'.xml'
         fo = open(nameExt,'w')
         fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
@@ -1109,21 +1109,21 @@ class PerformanceTableau(object):
         fo.write('</evaluations>\n')        
         fo.write('</performancetableau>\n')         
         fo.close()
-        print 'File: ' + nameExt + ' saved !'
+        print('File: ' + nameExt + ' saved !')
 
     def saveXMLRubis(self,name='temp',category='Rubis',subcategory='new D2 version',author='digraphs Module (RB)',reference='saved from Python'):
         """
         save temporary performance tableau self in XML Rubis format.
         """
         import codecs
-        print '*----- saving performance tableau in XML Rubis format  -------------*'        
+        print('*----- saving performance tableau in XML Rubis format  -------------*')        
         nameExt = name+'.xml'
         fo = codecs.open(nameExt,'w',encoding='utf-8')
         fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
         fo.write('<?xml-stylesheet type="text/xsl" href="rubisPerformanceTableau.xsl"?>\n')
         #fo.write('<!DOCTYPE rubisPerformaceTableau SYSTEM "http://localhost/rubisServer/Schemas/rubisPerformanceTableau-1.0/rubisPerformanceTableau.dtd">\n')
         fo.write('<rubisPerformanceTableau xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="rubisPerformanceTableau.xsd" ')
-        fo.write('category="'+unicode(category)+'" subcategory="'+unicode(subcategory)+'">\n')
+        fo.write('category="'+str(category)+'" subcategory="'+str(subcategory)+'">\n')
         fo.write('<comment>Performance Tableau in XML Rubis format.</comment>\n')
         fo.write('<header>\n')
         fo.write('<name>')
@@ -1146,13 +1146,13 @@ class PerformanceTableau(object):
             fo.write('<action id="%s">\n' % (actionsList[i]))
             fo.write('<name>')
             try:
-                fo.write(unicode(actions[actionsList[i]]['name']))
+                fo.write(str(actions[actionsList[i]]['name']))
             except:
                 pass
             fo.write('</name>\n')
             fo.write('<comment>')
             try:
-                fo.write(unicode(actions[actionsList[i]]['comment']))
+                fo.write(str(actions[actionsList[i]]['comment']))
             except:
                 pass
             fo.write('</comment>\n')
@@ -1203,11 +1203,11 @@ class PerformanceTableau(object):
         fo.write('<comment>Rubis Performance Table.</comment>\n')
         for g in criteriaList:
             fo.write('<evaluation>\n')
-            fo.write('<criterionID>'+unicode(g)+'</criterionID>\n')
+            fo.write('<criterionID>'+str(g)+'</criterionID>\n')
             for i in range(na):
                 fo.write('<performance>\n')
                 fo.write('<actionID>')       
-                fo.write(unicode(actionsList[i]))
+                fo.write(str(actionsList[i]))
                 fo.write('</actionID>\n')                    
                 fo.write('<value>')
                 fo.write('%.2f' % (evaluation[g][actionsList[i]]) )
@@ -1217,7 +1217,7 @@ class PerformanceTableau(object):
         fo.write('</evaluations>\n')        
         fo.write('</rubisPerformanceTableau>\n')         
         fo.close()
-        print 'File: ' + nameExt + ' saved !'
+        print('File: ' + nameExt + ' saved !')
 
 
     def saveXMCDA(self,fileName='temp',category='New XMCDA Rubis format',user='digraphs Module (RB)',version='saved from Python session',variant='Rubis',valuationType='standard',servingD3=True):
@@ -1225,7 +1225,7 @@ class PerformanceTableau(object):
         save performance tableau object self in XMCDA format.
         """
         import codecs
-        print '*----- saving performance tableau in XMCDA format  -------------*'        
+        print('*----- saving performance tableau in XMCDA format  -------------*')        
         nameExt = fileName+'.xmcda'
         fo = codecs.open(nameExt,'w',encoding='utf-8')
         fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
@@ -1233,7 +1233,7 @@ class PerformanceTableau(object):
             fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcdaDefault.xsl"? -->\n')
         else:
             fo.write('<?xml-stylesheet type="text/xsl" href="xmcdaDefault.xsl"?>\n')
-        fo.write(unicode('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2008/UMCDA-ML-1.0 umcda-ml-1.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2008/UMCDA-ML-1.0" instanceID="void">\n'))
+        fo.write(str('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2008/UMCDA-ML-1.0 umcda-ml-1.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2008/UMCDA-ML-1.0" instanceID="void">\n'))
        # write description
         fo.write('<caseReference>\n')
         fo.write('<title>Performance Tableau in XMCDA format.</title>\n')   
@@ -1288,13 +1288,13 @@ class PerformanceTableau(object):
             fo.write('<description>\n')
             fo.write('<name>')
             try:
-                fo.write(unicode(actions[actionsList[i]]['name']))
+                fo.write(str(actions[actionsList[i]]['name']))
             except:
                 pass
             fo.write('</name>\n')
             fo.write('<comment>')
             try:
-                fo.write(unicode(actions[actionsList[i]]['comment']))
+                fo.write(str(actions[actionsList[i]]['comment']))
             except:
                 pass
             fo.write('</comment>\n')
@@ -1313,16 +1313,16 @@ class PerformanceTableau(object):
         fo.write('<type>%s</type>\n' % ('criteria'))
         fo.write('</description>\n')       
         for g in criteriaList:   
-            fo.write('<criterion id="%s" >\n' % (unicode(g)) )
+            fo.write('<criterion id="%s" >\n' % (str(g)) )
             fo.write('<description>\n')
             try:
-                fo.write('<name>%s</name>\n' % (unicode(criteria[g]['name'])) )
+                fo.write('<name>%s</name>\n' % (str(criteria[g]['name'])) )
             except:
-                fo.write('<name>%s</name>\n' % (unicode(g)) )
+                fo.write('<name>%s</name>\n' % (str(g)) )
                 
             fo.write('<type>%s</type>\n' % ('criterion'))            
             try:
-                fo.write('<comment>%s</comment>\n' % (unicode(criteria[g]['comment'])) )
+                fo.write('<comment>%s</comment>\n' % (str(criteria[g]['comment'])) )
             except:
                 fo.write('<comment>%s</comment>\n' % ('No comment') )
             fo.write('<version>%s</version>\n' % ('performance') )
@@ -1444,7 +1444,7 @@ class PerformanceTableau(object):
         fo.write('</description>\n')
         for g in criteriaList:
             fo.write('<criterionEvaluations>\n')
-            fo.write('<criterionID>'+unicode(g)+'</criterionID>\n')
+            fo.write('<criterionID>'+str(g)+'</criterionID>\n')
             try:
                 if self.criteria[g]['preferenceDirection'] == 'min':
                     pdir = -1
@@ -1456,7 +1456,7 @@ class PerformanceTableau(object):
             for i in range(na):
                 fo.write('<evaluation>\n')
                 fo.write('<alternativeID>')       
-                fo.write(unicode(actionsList[i]))
+                fo.write(str(actionsList[i]))
                 fo.write('</alternativeID>\n')                    
                 fo.write('<value><real>')
                 fo.write('%.2f' % (pdir*evaluation[g][actionsList[i]]) )
@@ -1466,7 +1466,7 @@ class PerformanceTableau(object):
         fo.write('</performanceTable>\n')        
         fo.write('</xmcda:XMCDA>\n')         
         fo.close()
-        print 'File: ' + nameExt + ' saved !'
+        print('File: ' + nameExt + ' saved !')
 
     def saveXMCDA2(self,fileName='temp',category='XMCDA 2.0 format',user='digraphs Module (RB)',version='saved from Python session',title='Performance Tableau in XMCDA-2.0 format.',variant='Rubis',valuationType='bipolar',servingD3=True,isStringIO=False,stringNA='NA',comment='produced by saveXMCDA2()',hasVeto=True):
         """
@@ -1474,15 +1474,15 @@ class PerformanceTableau(object):
         """
         import codecs
         if not isStringIO:
-            print '*----- saving performance tableau in XMCDA 2.0 format  -------------*'
+            print('*----- saving performance tableau in XMCDA 2.0 format  -------------*')
         nameExt = fileName+'.xml'
         if isStringIO:
             comment='produced by stringIO()'
-            import StringIO
+            import io
             ## ms = 100 * len(self.actions) + 500 * len(self.criteria) * 20 * len(self.evaluation)
             ## print 'estimated mapped memory size = %d' % (ms)
             ##fo = mmap.mmap(-1,ms)
-            fo = StringIO.StringIO()
+            fo = io.StringIO()
         else:
             #nameExt = fileName+'.xmcda2'
             fo = codecs.open(nameExt,'w',encoding='utf-8')
@@ -1491,14 +1491,14 @@ class PerformanceTableau(object):
             fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"? -->\n')
         else:
             fo.write('<?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"?>\n')
-        fo.write(unicode('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2009/XMCDA-2.0.0 http://www.decision-deck.org/xmcda/_downloads/XMCDA-2.0.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0" instanceID="void">\n'))
+        fo.write(str('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2009/XMCDA-2.0.0 http://www.decision-deck.org/xmcda/_downloads/XMCDA-2.0.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0" instanceID="void">\n'))
 
         # write description
         fo.write('<projectReference id="%s" name="%s">\n' % (fileName,nameExt))
-        fo.write('<title>%s</title>\n' % (unicode(title)) )  
+        fo.write('<title>%s</title>\n' % (str(title)) )  
         fo.write('<author>%s</author>\n' % (user) )
         fo.write('<version>%s</version>\n' % (version) )
-        fo.write('<comment>%s</comment>\n' % (unicode(comment)) )
+        fo.write('<comment>%s</comment>\n' % (str(comment)) )
         fo.write('</projectReference>\n')
 
         # write methodParameters
@@ -1532,14 +1532,14 @@ class PerformanceTableau(object):
         fo.write('</description>\n')                  
         for i in range(na):
             try:
-                actionName = unicode(actions[actionsList[i]]['name'])
+                actionName = str(actions[actionsList[i]]['name'])
             except:
                 actionName = ''
             fo.write('<alternative id="%s" name="%s" mcdaConcept="%s">\n' % (actionsList[i],actionName,'potentialDecisionAction'))
             fo.write('<description>\n')
             fo.write('<comment>')
             try:
-                fo.write(unicode(actions[actionsList[i]]['comment']))
+                fo.write(str(actions[actionsList[i]]['comment']))
             except:
                 pass
             fo.write('</comment>\n')
@@ -1559,14 +1559,14 @@ class PerformanceTableau(object):
         fo.write('</description>\n')       
         for g in criteriaList:
             try:
-                criterionName = unicode(criteria[g]['name'])
+                criterionName = str(criteria[g]['name'])
             except:
-                criterionName = unicode(g)
+                criterionName = str(g)
 
-            fo.write('<criterion id="%s" name="%s" mcdaConcept="%s">\n' % (unicode(g),criterionName,'criterion' ) )
+            fo.write('<criterion id="%s" name="%s" mcdaConcept="%s">\n' % (str(g),criterionName,'criterion' ) )
             fo.write('<description>\n')                
             try:
-                fo.write('<comment>%s</comment>\n' % (unicode(criteria[g]['comment'])) )
+                fo.write('<comment>%s</comment>\n' % (str(criteria[g]['comment'])) )
             except:
                 fo.write('<comment>%s</comment>\n' % ('No comment') )
             fo.write('<version>%s</version>\n' % ('performance') )
@@ -1694,7 +1694,7 @@ class PerformanceTableau(object):
         fo.write('</description>\n')
         for i in range(len(actionsList)):
             fo.write('<alternativePerformances>\n')
-            fo.write('<alternativeID>'+unicode(actionsList[i])+'</alternativeID>\n')
+            fo.write('<alternativeID>'+str(actionsList[i])+'</alternativeID>\n')
             for g in criteriaList:
                 try:
                     if self.criteria[g]['preferenceDirection'] == 'min':
@@ -1728,7 +1728,7 @@ class PerformanceTableau(object):
             return problemText
         else:
             fo.close()
-            print 'File: ' + nameExt + ' saved !'
+            print('File: ' + nameExt + ' saved !')
 
     def saveXMCDA2String(self,fileName='temp',category='XMCDA 2.0 format',user='digraphs Module (RB)',version='saved from Python session',title='Performance Tableau in XMCDA-2.0 format.',variant='Rubis',valuationType='bipolar',servingD3=True,comment='produced by stringIO()',stringNA='NA'):
         """
@@ -1737,20 +1737,20 @@ class PerformanceTableau(object):
         """
         import codecs
         nameExt = fileName+'.xml'
-        fo = unicode('')
+        fo = str('')
         fo += '<?xml version="1.0" encoding="UTF-8"?>\n'
         if servingD3:
             fo += '<!-- ?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"? -->\n'
         else:
             fo += '<?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"?>\n'
-        fo += unicode('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2009/XMCDA-2.0.0 http://www.decision-deck.org/xmcda/_downloads/XMCDA-2.0.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0" instanceID="void">\n')
+        fo += str('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2009/XMCDA-2.0.0 http://www.decision-deck.org/xmcda/_downloads/XMCDA-2.0.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0" instanceID="void">\n')
 
         # write description
         fo += '<projectReference id="%s" name="%s">\n' % (fileName,nameExt)
-        fo += '<title>%s</title>\n' % (unicode(title))  
-        fo += '<author>%s</author>\n' % (unicode(user)) 
-        fo += '<version>%s</version>\n' % (unicode(version)) 
-        fo += '<comment>%s</comment>\n' % (unicode(comment)) 
+        fo += '<title>%s</title>\n' % (str(title))  
+        fo += '<author>%s</author>\n' % (str(user)) 
+        fo += '<version>%s</version>\n' % (str(version)) 
+        fo += '<comment>%s</comment>\n' % (str(comment)) 
         fo += '</projectReference>\n'
 
         # write methodParameters
@@ -1784,14 +1784,14 @@ class PerformanceTableau(object):
         fo += '</description>\n'                  
         for i in range(na):
             try:
-                actionName = unicode(actions[actionsList[i]]['name'])
+                actionName = str(actions[actionsList[i]]['name'])
             except:
                 actionName = ''
             fo += '<alternative id="%s" name="%s" mcdaConcept="%s">\n' % (actionsList[i],actionName,'potentialDecisionAction')
             fo += '<description>\n'
             fo += '<comment>'
             try:
-                fo += unicode(actions[actionsList[i]]['comment'])
+                fo += str(actions[actionsList[i]]['comment'])
             except:
                 pass
             fo += '</comment>\n'
@@ -1811,14 +1811,14 @@ class PerformanceTableau(object):
         fo += '</description>\n'       
         for g in criteriaList:
             try:
-                criterionName = unicode(criteria[g]['name'])
+                criterionName = str(criteria[g]['name'])
             except:
-                criterionName = unicode(g)
+                criterionName = str(g)
 
-            fo += '<criterion id="%s" name="%s" mcdaConcept="%s">\n' % (unicode(g),criterionName,'criterion' )
+            fo += '<criterion id="%s" name="%s" mcdaConcept="%s">\n' % (str(g),criterionName,'criterion' )
             fo += '<description>\n'                
             try:
-                fo += '<comment>%s</comment>\n' % (unicode(criteria[g]['comment'])) 
+                fo += '<comment>%s</comment>\n' % (str(criteria[g]['comment'])) 
             except:
                 fo += '<comment>%s</comment>\n' % ('No comment')
             fo += '<version>%s</version>\n' % ('performance')
@@ -1937,7 +1937,7 @@ class PerformanceTableau(object):
         fo += '</description>\n'
         for i in range(len(actionsList)):
             fo += '<alternativePerformances>\n'
-            fo += '<alternativeID>'+unicode(actionsList[i])+'</alternativeID>\n'
+            fo += '<alternativeID>'+str(actionsList[i])+'</alternativeID>\n'
             for g in criteriaList:
                 fo += '<performance>\n'
                 fo += '<criterionID>'       
@@ -1999,7 +1999,7 @@ class PerformanceTableau(object):
                         diffxy = evaluation[g][x] - evaluation[g][y]
                         diffEvaluations.append(diffxy)
                         if Debug:
-                            print 'diffxy = evaluation[g][x] = evaluation[g][y]', diffxy, ' = ', evaluation[g][x], ' - ', evaluation[g][y]
+                            print('diffxy = evaluation[g][x] = evaluation[g][y]', diffxy, ' = ', evaluation[g][x], ' - ', evaluation[g][y])
                         if withOutput:
                             fo.write('%.2f\n' % diffxy)                
         if withOutput:
@@ -2021,15 +2021,15 @@ class PerformanceTableau(object):
         evaluation = self.evaluation
         actions = self.actions
         na = len(actions)
-        print '*-------- Performance tableau summary statistics -------*'
-        print 'Instance name      :', self.name
-        print '#Actions           :', na
-        print '#Criteria          :', nc
-        print '*Statistics per Criterion*'
+        print('*-------- Performance tableau summary statistics -------*')
+        print('Instance name      :', self.name)
+        print('#Actions           :', na)
+        print('#Criteria          :', nc)
+        print('*Statistics per Criterion*')
         averageSigma = Decimal('0.0')
         for g in criteriaKeys:
-            print 'Criterion name       :', g
-            print 'Criterion weight     :', self.criteria[g]['weight']
+            print('Criterion name       :', g)
+            print('Criterion weight     :', self.criteria[g]['weight'])
             averageEvaluation = Decimal('0.0')
             varianceEvaluation = Decimal('0.0')
             Max = Decimal(str(self.criteria[g]['scale'][1]))
@@ -2071,18 +2071,18 @@ class PerformanceTableau(object):
             stdDevEvaluation = math.sqrt(varianceEvaluation)
             try:
                 if self.criteria[g]['preferenceDirection'] == 'max':
-                    print '  criterion scale    : %.2f - %.2f' % (Min, Max)
+                    print('  criterion scale    : %.2f - %.2f' % (Min, Max))
                 else:
-                    print '  criterion scale    : %.2f - %.2f' % (-Max, Min)
+                    print('  criterion scale    : %.2f - %.2f' % (-Max, Min))
             except:
-                print '  criterion scale    : %.2f - %.2f' % (Min, Max)
-            print '  mean evaluation    : %.2f' % (averageEvaluation)
-            print '  standard deviation : %.2f' % (stdDevEvaluation)
-            print '  maximal evaluation : %.2f' % (maxEvaluation)
-            print '  quantile Q3 (x_75) : %.2f' % (quantileQ3)
-            print '  median evaluation  : %.2f' % (quantileQ2)
-            print '  quantile Q1 (x_25) : %.2f' % (quantileQ1)
-            print '  minimal evaluation : %.2f' % (minEvaluation)
+                print('  criterion scale    : %.2f - %.2f' % (Min, Max))
+            print('  mean evaluation    : %.2f' % (averageEvaluation))
+            print('  standard deviation : %.2f' % (stdDevEvaluation))
+            print('  maximal evaluation : %.2f' % (maxEvaluation))
+            print('  quantile Q3 (x_75) : %.2f' % (quantileQ3))
+            print('  median evaluation  : %.2f' % (quantileQ2))
+            print('  quantile Q1 (x_25) : %.2f' % (quantileQ1))
+            print('  minimal evaluation : %.2f' % (minEvaluation))
             averageAbsDiffEvaluation = Decimal('0.0')
             varianceDiffEvaluation = Decimal('0.0')
             nd = 0
@@ -2097,8 +2097,8 @@ class PerformanceTableau(object):
             ## averageDiffEvaluation == 0 per construction  
             varianceDiffEvaluation = varianceDiffEvaluation/Decimal(str(nd))
             stdDevDiffEvaluation = math.sqrt(varianceDiffEvaluation)
-            print '  mean absolute difference      : %.2f' % (averageAbsDiffEvaluation)
-            print '  standard difference deviation : %.2f' % (stdDevDiffEvaluation)
+            print('  mean absolute difference      : %.2f' % (averageAbsDiffEvaluation))
+            print('  standard difference deviation : %.2f' % (stdDevDiffEvaluation))
             averageSigma += Decimal(str(stdDevDiffEvaluation))
         averageSigma /= Decimal(str(nc))
         ## print ':', self.weightPreorder
@@ -2117,7 +2117,7 @@ class PerformanceTableau(object):
         highValue = Decimal(str(highValue))
         amplitude = highValue-lowValue
         if Debug:
-            print 'lowValue', lowValue, 'amplitude', amplitude
+            print('lowValue', lowValue, 'amplitude', amplitude)
         criterionKeys = [x for x in criteria]
         actionKeys = [x for x in actions]
         normEvaluation = {}
@@ -2127,11 +2127,11 @@ class PerformanceTableau(object):
             ghigh = Decimal(str(criteria[g]['scale'][1]))
             gamp = ghigh - glow
             if Debug:
-                print '-->> g, glow, ghigh, gamp', g, glow, ghigh, gamp
+                print('-->> g, glow, ghigh, gamp', g, glow, ghigh, gamp)
             for x in actionKeys:
                 evalx = abs(evaluation[g][x])
                 if Debug:
-                    print evalx
+                    print(evalx)
                 ## normEvaluation[g][x] = lowValue + ((evalx-glow)/gamp)*amplitude
                 try:
                     if criteria[g]['preferenceDirection'] == 'min':
@@ -2146,7 +2146,7 @@ class PerformanceTableau(object):
                     normEvaluation[g][x] = lowValue + ((evalx-glow)/gamp)*amplitude
                     
                 if Debug:
-                    print criteria[g]['preferenceDirection'], evaluation[g][x], normEvaluation[g][x]
+                    print(criteria[g]['preferenceDirection'], evaluation[g][x], normEvaluation[g][x])
         return normEvaluation
 
 
@@ -2249,7 +2249,7 @@ class RandomPerformanceTableau(PerformanceTableau):
         # generate actions
         if numberOfActions == None:
             numberOfActions = 13
-        actionsIndex = range(numberOfActions+1)
+        actionsIndex = list(range(numberOfActions+1))
         actionsIndex.remove(0)
         actionsList = []
         for a in actionsIndex:
@@ -2268,7 +2268,7 @@ class RandomPerformanceTableau(PerformanceTableau):
         if numberOfCriteria == None:
             numberOfCriteria = 7
         criteriaList = []
-        criteriaIndex = range(numberOfCriteria+1)
+        criteriaIndex = list(range(numberOfCriteria+1))
         criteriaIndex.remove(0)
         for g in criteriaIndex:
             if g < 10:
@@ -2314,7 +2314,7 @@ class RandomPerformanceTableau(PerformanceTableau):
                     sumWeights += weightScale[0]
             weightsList.reverse()
         else:
-            print '!!! Error: wrong criteria weight distribution mode: %s !!!!' % (weightDistribution)
+            print('!!! Error: wrong criteria weight distribution mode: %s !!!!' % (weightDistribution))
 
         # generate criteria dictionary
         criteria = {}
@@ -2401,7 +2401,7 @@ class RandomPerformanceTableau(PerformanceTableau):
                 alpha = commonMode[2][0]
                 beta = commonMode[2][1]
             if Debug:
-                print 'alpha,beta', alpha,beta
+                print('alpha,beta', alpha,beta)
             for g in criteria:
                 evaluation[g] = {}
                 for a in actionsList:
@@ -2409,7 +2409,7 @@ class RandomPerformanceTableau(PerformanceTableau):
                     randeval = (u * (M-m)) + m
                     evaluation[g][a] = Decimal(str(round(randeval,digits)))
                     if Debug:
-                        print 'xm,alpha,beta,u,m,M,randeval',xm,alpha,beta,u,m,M,randeval
+                        print('xm,alpha,beta,u,m,M,randeval',xm,alpha,beta,u,m,M,randeval)
 
         elif str(commonMode[0]) == 'normal':
             if commonMode[1] == None:
@@ -2432,8 +2432,8 @@ class RandomPerformanceTableau(PerformanceTableau):
 
         
         else:
-            print 'mode error in random evaluation generator !!'
-            print str(commonMode[0])
+            print('mode error in random evaluation generator !!')
+            print(str(commonMode[0]))
             sys.exit(1)
         self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
@@ -2463,7 +2463,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
         # generate actions
         if numberOfActions == None:
             numberOfActions = 13
-        actionsIndex = range(numberOfActions+1)
+        actionsIndex = list(range(numberOfActions+1))
         actionsIndex.remove(0)
         actionsList = []
         for a in actionsIndex:
@@ -2482,7 +2482,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
         if numberOfCriteria == None:
             numberOfCriteria = 7
         criteriaList = []
-        criteriaIndex = range(numberOfCriteria+1)
+        criteriaIndex = list(range(numberOfCriteria+1))
         criteriaIndex.remove(0)
         for g in criteriaIndex:
             if g < 10:
@@ -2517,7 +2517,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
                     sumWeights += weightScale[0]
             weightsList.reverse()
         else:
-            print '!!! Error: wrong criteria weight distribution mode: %s !!!!' % (weightDistribution)
+            print('!!! Error: wrong criteria weight distribution mode: %s !!!!' % (weightDistribution))
 
         # generate criteria dictionary
         criteria = {}
@@ -2585,7 +2585,7 @@ class FullRandomPerformanceTableau(PerformanceTableau):
         # generate random actions
         if numberOfActions == None:
             numberOfActions = random.randint(10,31)
-        actionsIndex = range(numberOfActions+1)
+        actionsIndex = list(range(numberOfActions+1))
         actionsIndex.remove(0)
         actionsList = []
         for a in actionsIndex:
@@ -2604,7 +2604,7 @@ class FullRandomPerformanceTableau(PerformanceTableau):
         if numberOfCriteria == None:
             numberOfCriteria = random.randint(5,21)
         criteriaList = []
-        criteriaIndex = range(numberOfCriteria+1)
+        criteriaIndex = list(range(numberOfCriteria+1))
         criteriaIndex.remove(0)
         for g in criteriaIndex:
             if g < 10:
@@ -2657,7 +2657,7 @@ class FullRandomPerformanceTableau(PerformanceTableau):
                     sumWeights += weightScale[0]
             weightsList.reverse()
         else:
-            print '!!! Error: wrong criteria weight distribution mode: %s !!!!' % (weightDistribution)
+            print('!!! Error: wrong criteria weight distribution mode: %s !!!!' % (weightDistribution))
 
         # generate criteria dictionary with random thresholds
         if commonScale == None:
@@ -2813,13 +2813,13 @@ class FullRandomPerformanceTableau(PerformanceTableau):
                     alpha = commonMode[2][0]
                     beta = commonMode[2][1]
                 if Debug:
-                    print 'alpha,beta', alpha,beta
+                    print('alpha,beta', alpha,beta)
                 for a in actionsList:
                     u = random.betavariate(alpha,beta)
                     randeval = (u * (M-m)) + m
                     evaluation[g][a] = Decimal(str(round(randeval,digits)))
                     if Debug:
-                        print 'xm,alpha,beta,u,m,M,randeval',xm,alpha,beta,u,m,M,randeval
+                        print('xm,alpha,beta,u,m,M,randeval',xm,alpha,beta,u,m,M,randeval)
                     
         # install self object attributes
 
@@ -2835,22 +2835,22 @@ class FullRandomPerformanceTableau(PerformanceTableau):
         """
         criteria = self.criteria
         evaluation = self.evaluation
-        print '*-------- show performance tableau -------*'
-        print 'Name         :', self.name
-        print 'Actions      :', self.actions
-        print 'Criteria     :'       
+        print('*-------- show performance tableau -------*')
+        print('Name         :', self.name)
+        print('Actions      :', self.actions)
+        print('Criteria     :')       
         for g in criteria:
-            print '  criterion name:', g,
-            print ', scale: ', criteria[g]['scale'],
-            print ', weight: %.3f ' % (criteria[g]['weight'])
-            print '  thresholds:', criteria[g]['thresholds']
-            print '  evaluations generation mode: ', criteria[g]['randomMode']
-            print
-        print '  Weights generation mode: ', self.criteriaWeightMode
-        print '  Weights preorder       : ', self.weightPreorder
-        print 'Evaluations            :'
+            print('  criterion name:', g, end=' ')
+            print(', scale: ', criteria[g]['scale'], end=' ')
+            print(', weight: %.3f ' % (criteria[g]['weight']))
+            print('  thresholds:', criteria[g]['thresholds'])
+            print('  evaluations generation mode: ', criteria[g]['randomMode'])
+            print()
+        print('  Weights generation mode: ', self.criteriaWeightMode)
+        print('  Weights preorder       : ', self.weightPreorder)
+        print('Evaluations            :')
         for g in evaluation:
-            print g, evaluation[g]
+            print(g, evaluation[g])
 
 class RandomCoalitionsPerformanceTableau(PerformanceTableau):
     """
@@ -2888,7 +2888,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
         if numberOfActions == None:
             #numberOfActions = random.randint(10,31)
             numberOfActions = 20
-        actionsIndex = range(numberOfActions+1)
+        actionsIndex = list(range(numberOfActions+1))
         actionsIndex.remove(0)
         actionsList = []
         for a in actionsIndex:
@@ -2909,7 +2909,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
             ## numberOfCriteria = random.randint(5,21)
             numberOfCriteria = 13
         criteriaList = []
-        criteriaIndex = range(numberOfCriteria+1)
+        criteriaIndex = list(range(numberOfCriteria+1))
         criteriaIndex.remove(0)
         for g in criteriaIndex:
             if g < 10:
@@ -2965,7 +2965,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                     sumWeights += weightScale[0]
             weightsList.reverse()
         else:
-            print '!!! Error: wrong criteria weight distribution mode: %s !!!!' % (weightDistribution)
+            print('!!! Error: wrong criteria weight distribution mode: %s !!!!' % (weightDistribution))
 
         # generate criteria dictionary with random thresholds
         if commonScale == None:
@@ -2991,7 +2991,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                 criterionCoalitionsList.append((chr(ord("A")+i),partition[i][1]))
             Coalitions = True
             if Debug:
-                print criterionCoalitionsList
+                print(criterionCoalitionsList)
         criteria = {}
 
         for gi in range(len(criteriaList)):
@@ -3002,7 +3002,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                     if g in criterionCoalition[1]:
                         criteria[g]['coalition'] = criterionCoalition[0]
                         if Debug:
-                            print '==>>>', criteria[g]['coalition']
+                            print('==>>>', criteria[g]['coalition'])
             elif Coalitions:
                 criterionCoalition = random.choice(criterionCoalitionsList)
                 criteria[g]['coalition'] = criterionCoalition[0]
@@ -3051,7 +3051,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
             for x in actionsList:
                 for c in criterionCoalitionsList:
                     if Debug:
-                        print criterionCoalitionsList,c
+                        print(criterionCoalitionsList,c)
                     self.actions[x][str(c[0])]=random.choice(coalitionSupportingType)
                     self.actions[x]['name'] = self.actions[x]['name'] + ' '+ str(c[0]) + str(self.actions[x][str(c[0])])                
                     
@@ -3145,11 +3145,11 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                             alpha = 2.0
                             beta = 1.0 / xm
                     if Debug:
-                        print 'alpha,beta', alpha,beta
+                        print('alpha,beta', alpha,beta)
                     u = random.betavariate(alpha,beta)
                     randeval = (u * (M-m)) + m
                     if Debug:
-                        print 'xm,alpha,beta,u,m,M,randeval',xm,alpha,beta,u,m,M,randeval
+                        print('xm,alpha,beta,u,m,M,randeval',xm,alpha,beta,u,m,M,randeval)
                     self.actions[a]['generators'][g] = ('beta',alpha,beta)
                     if OrdinalScales:
                         randeval /= 10.0
@@ -3263,7 +3263,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         # generate random actions
         if numberOfActions == None:
             numberOfActions = random.randint(10,31)
-        actionsIndex = range(numberOfActions+1)
+        actionsIndex = list(range(numberOfActions+1))
         actionsIndex.remove(0)
         actionsList = []
         for a in actionsIndex:
@@ -3285,7 +3285,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         if numberOfCriteria == None:
             numberOfCriteria = random.randint(5,21)
         criteriaList = []
-        criteriaIndex = range(numberOfCriteria+1)
+        criteriaIndex = list(range(numberOfCriteria+1))
         criteriaIndex.remove(0)
         for g in criteriaIndex:
             if g < 10:
@@ -3294,7 +3294,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                 criterionName = 'g'+str(g)
             criteriaList.append(criterionName)
         if Debug:
-            print criteriaList
+            print(criteriaList)
             
         # generate criteria dictionary
         ## if commonScale == None:
@@ -3329,7 +3329,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             ## t = time.time()
             ## random.seed(t)
             if Debug:
-                print "g, criteria[g]['scaleType'], criteria[g]['scale']", g, criteria[g]['scaleType'],
+                print("g, criteria[g]['scaleType'], criteria[g]['scale']", g, criteria[g]['scaleType'], end=' ')
 
             # commonScale parameter is obsolete
             commonScale = None
@@ -3348,7 +3348,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                 criterionScale = (0.0, 100.0)
             criteria[g]['scale'] = criterionScale
             if Debug:
-                print criteria[g]['scale']
+                print(criteria[g]['scale'])
 
         # generate random weights
         if weightDistribution == None:
@@ -3413,9 +3413,9 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                     weightsList.append(Decimal(str(weightScale[0])))
                     sumWeights += weightScale[0]
         else:
-            print '!!! Error: wrong criteria weight distribution mode: %s !!!!' % (weightDistribution)
+            print('!!! Error: wrong criteria weight distribution mode: %s !!!!' % (weightDistribution))
         if Debug:
-            print weightsList, sumWeights
+            print(weightsList, sumWeights)
 
         for i,g in enumerate(criteriaList):
             ## if Debug:
@@ -3427,7 +3427,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             i += 1
 
             if Debug:
-                print criteria[g]
+                print(criteria[g])
 
         # generate random evaluations
         ## x30=criterionScale[1]*0.3
@@ -3451,7 +3451,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             x50=criterionScale[0] + amplitude*0.5
             x70=criterionScale[0] + amplitude*0.7
             if Debug:
-                print 'g, criterionx30,x50,x70', g, criteria[g], x30,x50,x70
+                print('g, criterionx30,x50,x70', g, criteria[g], x30,x50,x70)
             evaluation[g] = {}
             if commonMode == None:
                 #randomMode = random.choice(randomLawsList)
@@ -3483,8 +3483,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             ##         commentString = randomMode[0]+', default, default'
                     
             if Debug:
-                print 'commonMode = ', commonMode
-                print 'randomMode = ', randomMode
+                print('commonMode = ', commonMode)
+                print('randomMode = ', randomMode)
                    
             criteria[g]['comment'] = 'Evaluation generator: ' + commentString
             digits = valueDigits
@@ -3605,7 +3605,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
 
  
         if Debug:
-            print evaluation
+            print(evaluation)
 
         ## # restrict ordinal criteria to integer (0 - 10) scale
         ## for g in criteriaList:
@@ -3626,10 +3626,10 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             if criteria[g]['scaleType'] == 'ordinal':
                 for a in actionsList:
                     if Debug:
-                        print '-- >>', evaluation[g][a],
+                        print('-- >>', evaluation[g][a], end=' ')
                     evaluation[g][a] = Decimal(str(round(evaluation[g][a],0)))
                     if Debug:
-                        print evaluation[g][a]
+                        print(evaluation[g][a])
             
         
             # generate discrimination thresholds
@@ -3639,7 +3639,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         self.weightPreorder = self.computeWeightPreorder()
         self.computePerformanceDifferences(Debug=False)
         if Debug:
-            print 'commonPercentiles=', commonPercentiles
+            print('commonPercentiles=', commonPercentiles)
         if commonPercentiles == None:
             quantile = {'ind':5, 'pref':10 , 'veto':95}
         else:
@@ -3650,13 +3650,13 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                 vx = self.criteria[c]['performanceDifferences']
                 nv = len(vx)
                 if Debug:
-                    print '=====>',c
-                    print vx
-                    print nv
+                    print('=====>',c)
+                    print(vx)
+                    print(nv)
                 threshold = {}
                 for x in quantile:
                     if Debug:
-                        print '-->', x, quantile[x],
+                        print('-->', x, quantile[x], end=' ')
 
                     if quantile[x] == -1:
                         pass
@@ -3669,7 +3669,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                             kq = int(math.floor(float(quantile[x]*(nv-1))/100.0))
                             r = ((nv-1)*quantile[x])% 100
                             if Debug:
-                                print kq,r,
+                                print(kq,r, end=' ')
 
                             ## if kq == nv-1:
                             ##     kqplus = nv-1
@@ -3677,7 +3677,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                             ##     kq_1 = kq - 1
                             threshold[x] = vx[kq] + (Decimal(str(r))/Decimal('100.0')) * (vx[kq+1]-vx[kq])
                             if Debug:
-                                print threshold[x]
+                                print(threshold[x])
 
 
 
@@ -3685,8 +3685,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                     self.criteria[c]['thresholds'][x] = (threshold[x],Decimal('0.0'))
 
             if Comments:
-                print 'criteria',c,' default thresholds:'
-                print self.criteria[c]['thresholds']
+                print('criteria',c,' default thresholds:')
+                print(self.criteria[c]['thresholds'])
 
 ## class OldRandomCBPerformanceTableau(PerformanceTableau):
 ##     """
@@ -4283,7 +4283,7 @@ class OldXMCDAPerformanceTableau(PerformanceTableau):
             try:
                 fo = open(fileNameExt,mode='r')
             except:
-                print "Error: file %s{.xmcda|.xml} not found !" % (fileName)
+                print("Error: file %s{.xmcda|.xml} not found !" % (fileName))
         
         xmcdaPerformanceTableau = ElementTree.parse(fo).getroot()
         # get description
@@ -4454,7 +4454,7 @@ class XMCDAPerformanceTableau(PerformanceTableau):
                 try:
                     fo = open(fileNameExt,mode='r')
                 except:
-                    print "Error: file %s{.xmcda(2)|.xml} not found !" % (fileName)
+                    print("Error: file %s{.xmcda(2)|.xml} not found !" % (fileName))
         
         xmcdaPerformanceTableau = ElementTree.parse(fo).getroot()
         # get description
@@ -4625,13 +4625,13 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
                 try:
                     fo = open(fileNameExt,mode='r')
                 except:
-                    print "Error: file %s{.xmcda2|.xml} not found !" % (fileName)
+                    print("Error: file %s{.xmcda2|.xml} not found !" % (fileName))
         else:
-            from StringIO import StringIO
+            from io import StringIO
             try:
                 fo = StringIO(stringInput)
             except:
-                print "Error: stringInput %s !" % (str(stringInput))
+                print("Error: stringInput %s !" % (str(stringInput)))
             
         XMCDA = ElementTree.parse(fo).getroot()
         # get name
@@ -4859,7 +4859,7 @@ if __name__ == "__main__":
     import sortingDigraphs
     import linearOrders
     
-    print '*-------- Testing classes and methods -------'
+    print('*-------- Testing classes and methods -------')
 
     ## t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
@@ -4897,14 +4897,14 @@ if __name__ == "__main__":
     ## ## for x in t.actions:
     ## ##     t.computeActionQuantile(x,Debug=True)
     
-    print '*------------------*'
-    print 'If you see this line all tests were passed successfully :-)'
-    print 'Enjoy !'
+    print('*------------------*')
+    print('If you see this line all tests were passed successfully :-)')
+    print('Enjoy !')
 
-    print '*************************************'
-    print '* R.B. August 2011                    *'
-    print '* $Revision: 1.37 $                *'                   
-    print '*************************************'
+    print('*************************************')
+    print('* R.B. August 2011                    *')
+    print('* $Revision: 1.37 $                *')                   
+    print('*************************************')
 
 #############################
 # Log record for changes:

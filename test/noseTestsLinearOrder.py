@@ -13,7 +13,7 @@ from linearOrders import *
 from decimal import Decimal
 
 def testExtendedPrudentDigraph():
-    print '*-------- Testing ExtendedPrudentDigraph class -------'
+    print('*-------- Testing ExtendedPrudentDigraph class -------')
     t = RandomCBPerformanceTableau(numberOfActions=13)
     t.save('testExtPrud')
     g = BipolarOutrankingDigraph(t)
@@ -23,7 +23,7 @@ def testExtendedPrudentDigraph():
 
 
 def testRankedPairsOrdering():
-    print '*-------- Testing RankedPairsOrder class -------'
+    print('*-------- Testing RankedPairsOrder class -------')
     t = RandomPerformanceTableau(numberOfActions=5)
     t.save()
     t.showPerformanceTableau()
@@ -36,32 +36,32 @@ def testRankedPairsOrdering():
     eprp.exportDigraphGraphViz('testdigraph')
 
 def testKohlerOrdering():
-    print "*==>> testing KohlerOrder Class ----*"
+    print("*==>> testing KohlerOrder Class ----*")
     t = RandomCBPerformanceTableau(numberOfActions=5)
     t.saveXMCDA2('testkohler')
     g = BipolarOutrankingDigraph(t)
     #g.showRelationTable()
     k = KohlerOrder(g,Debug=True)
-    print k.computeOrder()
+    print(k.computeOrder())
 
 def testNetFlowsOrdering():
-    print "*==>> testing NetFlowsOrder Class ----*"
+    print("*==>> testing NetFlowsOrder Class ----*")
     t = RandomCBPerformanceTableau(numberOfActions=5)
     t.saveXMCDA2('testkohler')
     g = BipolarOutrankingDigraph(t)
     #g.showRelationTable()
     nfo = NetFlowsOrder(g,coDual=False,Debug=True)
-    print nfo.computeOrder()
+    print(nfo.computeOrder())
 
 def testRandomLinearOrders():
-    print "*==>> testing RandomLinearOrder Class ----*"
+    print("*==>> testing RandomLinearOrder Class ----*")
     g1 = RandomLinearOrder(numberOfActions=10,Debug=True)
     g1.showRelationTable()
     g2 = RandomLinearOrder(numberOfActions=10,Debug=True)
     g2.showRelationTable()
-    print g1.computeBipolarCorrelation(g2)
+    print(g1.computeBipolarCorrelation(g2))
     g1 = RandomLinearOrder(numberOfActions=10,OutrankingModel=True,Debug=True)
     g1.showRelationTable()
     g2 = RandomLinearOrder(numberOfActions=10,OutrankingModel=True,Debug=True)
     g2.showRelationTable()
-    print g1.computeBipolarCorrelation(g2)
+    print(g1.computeBipolarCorrelation(g2))

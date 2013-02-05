@@ -95,7 +95,7 @@ class ExtendedPrudentDigraph(Digraph):
                 for cy in [z for z in gcdst.actions if z != cx]:
                     for y in cy:
                         if Debug:
-                            print 'cx, x,cy, y', cx,x,cy, y, gcdst.relation[cx][cy]
+                            print('cx, x,cy, y', cx,x,cy, y, gcdst.relation[cx][cy])
                         stRelation[x][y] = gcdst.relation[cx][cy]
         self.actions = deepcopy(other.actions)
         self.order = len(self.actions)
@@ -109,7 +109,7 @@ class ExtendedPrudentDigraph(Digraph):
             relation[x] = {}
             for y in actionsList:
                 if Debug:
-                    print 'omax([gp.relation[x][y],stRelation[x][y]])',x,y,[gp.relation[x][y],stRelation[x][y]]
+                    print('omax([gp.relation[x][y],stRelation[x][y]])',x,y,[gp.relation[x][y],stRelation[x][y]])
                 relation[x][y] = self.omax([gp.relation[x][y],stRelation[x][y]])    
                 ## if gp.relation[y][x] >= Med and stRelation[x][y] >= Med:
                 ##     relation[x][y] = max(gp.relation[y][x],stRelation[x][y])
@@ -175,7 +175,7 @@ class LinearOrder(Digraph):
         """
         import os
         if noSilent:
-            print '*---- exporting a dot file dor GraphViz tools ---------*'
+            print('*---- exporting a dot file dor GraphViz tools ---------*')
         #actionkeys = [x for x in self.actions]
         actionkeys = self.computeOrder()
         n = len(actionkeys)
@@ -188,7 +188,7 @@ class LinearOrder(Digraph):
             name = fileName
         dotName = name+'.dot'
         if noSilent:
-            print 'Exporting to '+dotName
+            print('Exporting to '+dotName)
         if bestChoice != set():
             rankBestString = '{rank=max; '
         if worstChoice != set():
@@ -222,12 +222,12 @@ class LinearOrder(Digraph):
         fo.write('}\n')
         fo.close()
         if noSilent:
-            print commandString
+            print(commandString)
         try:
             os.system(commandString)
         except:
             if noSilent:
-                print 'graphViz tools not avalaible! Please check installation.'
+                print('graphViz tools not avalaible! Please check installation.')
     
     def computeKemenyIndex(self, other):
         """
@@ -277,7 +277,7 @@ class RandomLinearOrder(LinearOrder):
         actionsList = [x for x in g.actions]
         random.shuffle(actionsList)
         if Debug:
-            print g.actions, actionsList
+            print(g.actions, actionsList)
         self.name = 'randomLinearOrder'
         self.actions = deepcopy(g.actions)
         self.order = len(self.actions)
@@ -293,7 +293,7 @@ class RandomLinearOrder(LinearOrder):
         self.gamma = self.gammaSets()
         self.notgamma = self.notGammaSets()
         if Debug:
-            print self.computeOrder()
+            print(self.computeOrder())
 
         
 ######   instantiable class of linear orders
@@ -327,14 +327,14 @@ class RankedPairsOrder(LinearOrder):
                 listPairs.append((-relation[x][y],(x,y),x,y))
         listPairs.sort(reverse=False)
         if Debug:
-            print listPairs
+            print(listPairs)
         
         # instatiates a Digraph template
         if isExtendedPrudent:
             prudentBetaLevel = other.computePrudentBetaLevel(Debug=Debug)
             if prudentBetaLevel > other.valuationdomain['med']:
                 if Debug:
-                    print 'Is extended prudent with level: %.2f !' % prudentBetaLevel
+                    print('Is extended prudent with level: %.2f !' % prudentBetaLevel)
                 g = ExtendedPrudentDigraph(other,\
                  prudentBetaLevel=prudentBetaLevel,\
                  CoDual=coDual,Debug=Debug)
@@ -394,14 +394,14 @@ class RankedPairsOrder(LinearOrder):
                     g.relation[x][y] = Med
 
         if Debug:
-            print 'Starting the ranked pairs rule with the following partial order:'
+            print('Starting the ranked pairs rule with the following partial order:')
             g.showRelationTable()
         for pair in listPairs:
             x = pair[2]
             y = pair[3]
             if g.relation[x][y] <= Med and g.relation[y][x] <= Med:
                 if Debug:
-                    print 'next pair: ', pair[1],relation[x][y]
+                    print('next pair: ', pair[1],relation[x][y])
                 relxy = g.relation[x][y]
                 if isValued and relation[x][y] > Med:
                     g.relation[x][y] = Decimal('2')
@@ -422,13 +422,13 @@ class RankedPairsOrder(LinearOrder):
                     Detected = g.detectChordlessCircuits()
                 if Detected:
                     if Debug:
-                        print 'Circuit detected !!'
+                        print('Circuit detected !!')
                     g.relation[x][y] = relxy
                     g.relation[y][x] = relyx         
                 else:
                     if Debug:
-                        print 'added: (%s,%s) characteristic: %.2f (%.1f)' % (x,y, other.relation[x][y],g.relation[x][y])
-                        print 'added: (%s,%s) characteristic: %.2f (%.1f)' % (y,x, other.relation[y][x],g.relation[y][x])
+                        print('added: (%s,%s) characteristic: %.2f (%.1f)' % (x,y, other.relation[x][y],g.relation[x][y]))
+                        print('added: (%s,%s) characteristic: %.2f (%.1f)' % (y,x, other.relation[y][x],g.relation[y][x]))
                 
         self.name = other.name + '_ranked'        
         self.actions = other.actions
@@ -437,7 +437,7 @@ class RankedPairsOrder(LinearOrder):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         if Debug:
-            print 'Ranked Pairs Order = ', self.computeOrder()
+            print('Ranked Pairs Order = ', self.computeOrder())
 
     
 class KohlerOrder(LinearOrder):
@@ -459,13 +459,13 @@ class KohlerOrder(LinearOrder):
             Max = otherCoDual.valuationdomain['max']
             if Debug:
                 otherCoDual.showRelationTable()
-                print otherCoDual.valuationdomain
+                print(otherCoDual.valuationdomain)
         else:
             relation = other.relation
             Max = other.valuationdomain['max']
             if Debug:
                 other.showRelationTable()
-                print other.valuationdomain
+                print(other.valuationdomain)
                 
             
         actions = [x for x in other.actions]
@@ -496,25 +496,25 @@ class KohlerOrder(LinearOrder):
                         if relation[x][y] < xmin:
                             xmin = relation[x][y]
                 if Debug:
-                    print 'x, xmin', x, xmin
+                    print('x, xmin', x, xmin)
                 maximin.append((xmin,x))
             maximin.sort()
             if Debug:
-                print maximin, maximin[-1][1]
+                print(maximin, maximin[-1][1])
             rank[maximin[-1][1]] = {'rank':k,'majorityMargin':maximin[-1][0]}
             actionsList.remove(maximin[-1][1])
             k += 1
             if Debug:
-                print 'actionsList', actionsList
+                print('actionsList', actionsList)
         if Debug:
-            print rank
+            print(rank)
 
         kohlerOrder = []
         for x in rank:
             kohlerOrder.append((rank[x]['rank'],x))
         kohlerOrder.sort()
         if Debug:
-            print 'Kohler ranks: ', kohlerOrder
+            print('Kohler ranks: ', kohlerOrder)
 
         n = len(g.actions)
         for i in range(n):
@@ -533,7 +533,7 @@ class KohlerOrder(LinearOrder):
         self.notGamma = self.notGammaSets()
         if Debug:
             self.showRelationTable()
-            print 'Kohler order: ', self.computeOrder()
+            print('Kohler order: ', self.computeOrder())
 
 class NetFlowsOrder(LinearOrder):
     """
@@ -555,7 +555,7 @@ class NetFlowsOrder(LinearOrder):
             Max = otherCoDual.valuationdomain['max']
             if Debug:
                 otherCoDual.showRelationTable()
-                print otherCoDual.valuationdomain
+                print(otherCoDual.valuationdomain)
                 #print netFlows
         else:
             relation = other.relation
@@ -563,7 +563,7 @@ class NetFlowsOrder(LinearOrder):
             Max = other.valuationdomain['max']
             if Debug:
                 other.showRelationTable()
-                print other.valuationdomain
+                print(other.valuationdomain)
                 #print netFlows
                 
             
@@ -589,11 +589,11 @@ class NetFlowsOrder(LinearOrder):
                 if y != x:
                     netflows[x] += relation[x][y] - relation[y][x]
             if Debug:
-                print 'netflow for %s = %.2f' % (x, netflows[x])
+                print('netflow for %s = %.2f' % (x, netflows[x]))
             netFlowsOrder.append((netflows[x],x))
         netFlowsOrder.sort(reverse=True)
         if Debug:
-            print netFlowsOrder
+            print(netFlowsOrder)
 
         n = len(g.actions)
         for i in range(n):
@@ -611,7 +611,7 @@ class NetFlowsOrder(LinearOrder):
         self.notGamma = self.notGammaSets()
         if Debug:
             self.showRelationTable()
-            print self.computeOrder()
+            print(self.computeOrder())
 
 
 ########  instantiates optimal linear orderings
@@ -639,11 +639,11 @@ class KemenyOrder(LinearOrder):
         relation = deepcopy(other.relation)
         kemenyOrder = other.computeKemenyOrder(orderLimit=orderLimit,Debug=Debug)
         if kemenyOrder == None:
-            print 'Intantiation error: unable to compute the Kemeny Order !!!'
-            print 'Digraph order %d is required to be lower than 8!' % n
+            print('Intantiation error: unable to compute the Kemeny Order !!!')
+            print('Digraph order %d is required to be lower than 8!' % n)
             return
         if Debug:
-            print KemenyOrder
+            print(KemenyOrder)
         # instatiates a Digraph template
         
         g = IndeterminateDigraph(order=n)
@@ -658,7 +658,7 @@ class KemenyOrder(LinearOrder):
                 x = kemenyOrder[0][i]
                 y = kemenyOrder[0][j]
                 if Debug:
-                    print x,y
+                    print(x,y)
                 g.relation[x][y] = Max
                 g.relation[y][x] = Min
 
@@ -666,7 +666,7 @@ class KemenyOrder(LinearOrder):
             g.relation[x][x] = Med
 
         if Debug:
-            print 'Kemeny ordered relation table:'
+            print('Kemeny ordered relation table:')
             g.showRelationTable()
 
         self.name = other.name + '_ranked'        
@@ -676,7 +676,7 @@ class KemenyOrder(LinearOrder):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         if Debug:
-            print 'Kemeny Order = ', self.computeOrder()
+            print('Kemeny Order = ', self.computeOrder())
 
 
 #----------test  linearOrders module classes  ----------------
@@ -685,7 +685,7 @@ if __name__ == "__main__":
     from time import time
     from digraphs import *
     from linearOrders import *
-    print """
+    print("""
     ****************************************************
     * Python linearOrders module                       *
     * depends on digraphs module  1.580 +              * 
@@ -696,9 +696,9 @@ if __name__ == "__main__":
     * This is free software, and you are welcome to    *
     * redistribute it if it remains free software.     *
     ****************************************************
-    """
+    """)
 
-    print '*-------- Testing class and methods -------'
+    print('*-------- Testing class and methods -------')
 
     ## t = RandomRankPerformanceTableau(numberOfActions=20)
     ## t.saveXMCDA2('testRP')
@@ -743,23 +743,23 @@ if __name__ == "__main__":
     g1.showRelationTable()
     g2 = RandomLinearOrder(numberOfActions=10,Debug=True)
     g2.showRelationTable()
-    print g1.computeBipolarCorrelation(g2)
+    print(g1.computeBipolarCorrelation(g2))
     g1 = RandomLinearOrder(OutrankingModel=True, Debug=True)
     g1.showRelationTable()
     g2 = RandomLinearOrder(OutrankingModel=True,Debug=True)
     g2.showRelationTable()
-    print g1.computeBipolarCorrelation(g2)
+    print(g1.computeBipolarCorrelation(g2))
     
     
     
-    print '*------------------*'
-    print 'If you see this line all tests were passed successfully :-)'
-    print 'Enjoy !'
+    print('*------------------*')
+    print('If you see this line all tests were passed successfully :-)')
+    print('Enjoy !')
         
-    print '*************************************'
-    print '* R.B. June 2011                    *'
-    print '* $Revision: 1.18 $                *'                   
-    print '*************************************'
+    print('*************************************')
+    print('* R.B. June 2011                    *')
+    print('* $Revision: 1.18 $                *')                   
+    print('*************************************')
 
 #############################
 # Log record for changes:

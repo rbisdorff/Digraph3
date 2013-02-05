@@ -11,7 +11,7 @@ from digraphs import *
 from decimal import Decimal
 
 def testPerformanceTableau():
-    print '==>> Testing Performance Tableau instantiation'
+    print('==>> Testing Performance Tableau instantiation')
     t = RandomPerformanceTableau()
     t.showAll()
     t.save('tempperftab')
@@ -21,13 +21,13 @@ def testPerformanceTableau():
     g.showAll()
 
 def testRandomPerformanceTableau():
-    print '==>> Testing Random Performance Tableau instantiation'
+    print('==>> Testing Random Performance Tableau instantiation')
     t = RandomPerformanceTableau(numberOfActions=10,numberOfCriteria=7,commonMode=('normal',50,20))
     t.showAll()
-    print t.computeWeightedAveragePerformances(isNormalized=True,lowValue=0.0,highValue=20.0)
+    print(t.computeWeightedAveragePerformances(isNormalized=True,lowValue=0.0,highValue=20.0))
 
 def testNormalizedPerformanceTableau():
-    print '*-------- Testing Normalization of Performance Tableaux  -------'
+    print('*-------- Testing Normalization of Performance Tableaux  -------')
     t = RandomCBPerformanceTableau()
     t.showCriteria()
     t.showPerformanceTableau()
@@ -36,38 +36,38 @@ def testNormalizedPerformanceTableau():
     tn.showPerformanceTableau()
 
 def testhasOddWeightsAlgebra():
-    print '*--------- Testing hasOddWeightsAlgebra test ------*'
+    print('*--------- Testing hasOddWeightsAlgebra test ------*')
     t = RandomCBPerformanceTableau(numberOfActions=10,numberOfCriteria=13,commonThresholds=None,commonPercentiles={'ind':5,'pref':10,'veto':90},weightDistribution="random", weightScale=None,integerWeights=True,commonScale=[0.0,100.0],commonMode=["normal",50.0,25.0],Debug=False)
-    print t.hasOddWeightAlgebra(Debug=True)
+    print(t.hasOddWeightAlgebra(Debug=True))
 
 def testRandomS3PerformanceTableau():
-    print '*==>> various tests for random performance tableaux -----*'
+    print('*==>> various tests for random performance tableaux -----*')
     t = RandomS3PerformanceTableau(numberOfActions=20,numberOfCriteria=13,commonThresholds=[(2.5,0.0),(5.0,0.0),(30.0,0.0)])
     t.saveXMCDA()
     #t = XMCDAPerformanceTableau('temp')
     g = Electre3OutrankingDigraph(t)
     #g = BipolarOutrankingDigraph(t)
     g.showVetos()
-    print g.showVetos(cutLevel=60.0,realVetosOnly=True)
+    print(g.showVetos(cutLevel=60.0,realVetosOnly=True))
     #g.showEvaluationStatistics()
-    print g.computeVetoesStatistics()
+    print(g.computeVetoesStatistics())
     g.showCriteria()
-    gini = g.computeConcentrationIndex(range(len(g.actions)),g.outDegreesDistribution())
-    print 'gini: %2.4f' % (gini)
+    gini = g.computeConcentrationIndex(list(range(len(g.actions))),g.outDegreesDistribution())
+    print('gini: %2.4f' % (gini))
     ## g.showStatistics()
     percentages = [0,20,33,40,50,60,66,75,80,100]
     percentiles = g.computeValuationPercentiles(g.actions,percentages)
-    print 'Percentiles:'
+    print('Percentiles:')
     for p in percentages:
-        print '%d : %.2f ' % (p,percentiles[p])
+        print('%d : %.2f ' % (p,percentiles[p]))
     percentiles = [20,33,40,50,60,66,75,80]
     percentages = g.computeValuationPercentages(g.actions,percentiles)
-    print 'Percentages: '
+    print('Percentages: ')
     for p in percentiles:
-        print '%d : %.3f ' % (p,percentages[p])
+        print('%d : %.3f ' % (p,percentages[p]))
 
 def testXMLSaveReadPerformanceTableau():
-    print '*==>> testing XML save and read performance tableaus ----*'
+    print('*==>> testing XML save and read performance tableaus ----*')
     t = RandomPerformanceTableau()
     t.showAll()
     t.saveXML(name='randperftabXML',category='standard',subcategory='random',author='RB',reference='Digraph implementation')
@@ -75,22 +75,22 @@ def testXMLSaveReadPerformanceTableau():
     t1.showAll()
     g = BipolarOutrankingDigraph(t1)
     g.showRubyChoice()
-    print 'Name : ',t1.name
-    print 'Actions : ', t1.actions
-    print 'Criteria : ', t1.criteria
-    print 'Evaluations :', t1.evaluation
+    print('Name : ',t1.name)
+    print('Actions : ', t1.actions)
+    print('Criteria : ', t1.criteria)
+    print('Evaluations :', t1.evaluation)
 
 def testPerformanceTableauStatistics():
-    print '*==>> performanceTableau statistics ---------*'
+    print('*==>> performanceTableau statistics ---------*')
     t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     t.showStatistics()
-    print t.computeNormalizedDiffEvaluations(lowValue=0.0,highValue=100.0,withOutput=True,Debug=True)
+    print(t.computeNormalizedDiffEvaluations(lowValue=0.0,highValue=100.0,withOutput=True,Debug=True))
     t = RandomCBPerformanceTableau()
     t.showStatistics()
     t.showEvaluationStatistics()
     
 def testXMCDAPerformanceTableauLoading():
-    print '*==>> XMCDA Performance tableau loading ---*'
+    print('*==>> XMCDA Performance tableau loading ---*')
     t = XMCDAPerformanceTableau('temp')
     t.showPerformanceTableau()
     g = BipolarOutrankingDigraph(t)
@@ -99,13 +99,13 @@ def testXMCDAPerformanceTableauLoading():
     gd = Digraph('testdecimal')
 
 def testPerformanceDifferencesPerCriteria():
-    print '*==>> verifying  performance differences per criteria ---*'
+    print('*==>> verifying  performance differences per criteria ---*')
     g = RandomBipolarOutrankingDigraph()
     g.showPerformanceTableau()
     g.computePerformanceDifferences(comments=True)
     
 def testCBPerformanceTableau(): 
-    print '*==>> random CB Performance Tableaux ------------*'
+    print('*==>> random CB Performance Tableaux ------------*')
     t = RandomCBPerformanceTableau(numberOfActions=10,\
                                    commonPercentiles={'ind':5,'pref':10,'veto':95},\
                                    weightDistribution="random",\
@@ -125,13 +125,13 @@ def testCBPerformanceTableau():
     #g.showRubyChoice()
 
 def testRandomS3PerformanceTableau():
-    print '*==>> random S3 Performance Tableaux ------------*'
+    print('*==>> random S3 Performance Tableaux ------------*')
     t = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=7,VariableGenerators=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(65.0,0.0)],commonMode=['beta',0.5,None],Debug=False,OrdinalScales=False,Coalitions=False,RandomCoalitions=True)
     t.saveXMCDA(fileName='randomS3PerformanceTableau',servingD3=False)
     for g in t.criteria:
-        print '==>>', g, t.computeThresholdPercentile(g,'ind')
+        print('==>>', g, t.computeThresholdPercentile(g,'ind'))
         for a in t.actions:
-            print t.actions[a]['generators'][g]
+            print(t.actions[a]['generators'][g])
     t = XMCDAPerformanceTableau('randomS3PerformanceTableau')
     g = Electre3OutrankingDigraph(t)
     #g.defaultDiscriminationThresholds()
@@ -143,23 +143,23 @@ def testRandomS3PerformanceTableau():
     g.showRubyChoice()
 
 def testPercentilesOfThresholds():
-    print '*---------- test percentiles of variable thresholds --------*' 
+    print('*---------- test percentiles of variable thresholds --------*') 
     t = RandomS3PerformanceTableau()
     t.computeDefaultDiscriminationThresholds(quantile={'ind':10.0,'pref':20.0,'weakVeto':90.0,'veto':95.0})
     for g in [y for y in t.criteria]:
-        print g, t.criteria[g]['thresholds']
+        print(g, t.criteria[g]['thresholds'])
         for th in t.criteria[g]['thresholds']:
-            print th
-            print ' variable:',
-            print t.computeVariableThresholdPercentile(g,th,Debug=False)
-            print ' constant:', 
-            print t.computeThresholdPercentile(g,th)
+            print(th)
+            print(' variable:', end=' ')
+            print(t.computeVariableThresholdPercentile(g,th,Debug=False))
+            print(' constant:', end=' ') 
+            print(t.computeThresholdPercentile(g,th))
     t.showPerformanceTableau()
     t.showCriteria(Debug=False)
 
 
 def testXMCDA2SaveReadPerformanceTableau():
-    print '*==>> save and read XMCDA-2.0 PerformanceTableau instances ----*'
+    print('*==>> save and read XMCDA-2.0 PerformanceTableau instances ----*')
     #t = RandomS3PerformanceTableau(numberOfActions=5,numberOfCriteria=15,weightDistribution="random",weightScale=(1,13),integerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
     #t.showAll()
     t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=7,weightDistribution="random",weightScale=(1,7),integerWeights=True)
@@ -175,12 +175,12 @@ def testXMCDA2SaveReadPerformanceTableau():
     g2.showRelationTable()
     
 def testStringIOXMCDA2Encoding():
-    print '*---- test mapped memory XMCDA2 encoding for performanceTableau ---*'
+    print('*---- test mapped memory XMCDA2 encoding for performanceTableau ---*')
     T = PerformanceTableau()
     problemTextmmap = T.saveXMCDA2(isStringIO=True)
     problemText = T.saveXMCDA2String()
     if problemTextmmap != problemText:
-        print 'Error'
+        print('Error')
         fo = open('problemTextmmap.txt','w')
         fo.write(problemTextmmap)
         fo.close()
@@ -190,12 +190,12 @@ def testStringIOXMCDA2Encoding():
         exit(1)
 
 def testMajorityQuantilesRanking():
-    print '*------ test majority qualtines extraction and ranking ----*'
+    print('*------ test majority qualtines extraction and ranking ----*')
     t = RandomCBPerformanceTableau(numberOfCriteria=7,numberOfActions=6,weightDistribution='random')
     t.showStatistics()
     t.showPerformanceTableau()
     html = t.showAllQuantiles()
-    print t.computeQuantiles(Debug=False)
+    print(t.computeQuantiles(Debug=False))
     t.showQuantileSort()
  
     
