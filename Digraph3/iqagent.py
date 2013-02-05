@@ -92,8 +92,8 @@ class IncrementalQuantileEstimator(object):
             # main loop over target p-values for interpolation
             target = (nt+nd)*pval[iq]
             if self.Debug:
-                print '-->> enter quantile iq: ', iq
-                print '        tnew, target ' ,tnew,target
+                print('-->> enter quantile iq: ', iq)
+                print('        tnew, target ' ,tnew,target)
             if tnew < target:
                 # find a succession of abcissa-ordinate pairs (qnew,tnew) that
                 # are the discontinuity of value or slope and break to perform
@@ -101,18 +101,18 @@ class IncrementalQuantileEstimator(object):
                 while True:
                     if self.Debug:
                         try:
-                            print 'iq, jq, nq, jd, nd, qile[jq], dbuf[jd]',\
-                                  iq, jq, nq, jd, nd, qile[jq], dbuf[jd]
+                            print('iq, jq, nq, jd, nd, qile[jq], dbuf[jd]',\
+                                  iq, jq, nq, jd, nd, qile[jq], dbuf[jd])
                         except:
-                            print '\niq, jq, nq, jd, nd, qile[jq]',\
-                                  iq, jq, nq, jd, nd, qile[jq]
+                            print('\niq, jq, nq, jd, nd, qile[jq]',\
+                                  iq, jq, nq, jd, nd, qile[jq])
                     if (jq < nq) and ( (jd >= nd) or (qile[jq] < dbuf[jd]) ):
                         # found slope discontinuity from old cdf
                         qnew = qile[jq]
                         tnew = jd + nt*pval[jq]
                         jq += 1
                         if self.Debug:
-                            print 'slope: tnew, target', tnew, target
+                            print('slope: tnew, target', tnew, target)
                         if tnew >= target:
                             break
                     else:
@@ -125,14 +125,14 @@ class IncrementalQuantileEstimator(object):
                                     * (qnew-qold)/(qile[jq]-qile[jq-1])
                         jd += 1
                         if self.Debug:
-                            print 'value 1: tnew, target', tnew, target
+                            print('value 1: tnew, target', tnew, target)
                         if tnew >= target:
                             break
                         told = tnew
                         tnew += 1.0
                         qold = qnew
                         if self.Debug:
-                            print 'value 2: tnew, target', tnew, target
+                            print('value 2: tnew, target', tnew, target)
                         if tnew >= target:
                             break
 
@@ -246,18 +246,18 @@ if __name__ == "__main__":
     for i in range(2000):
         iqAgent.add(random.gauss(20,20))
 
-    print iqAgent.report(0.0)
-    print iqAgent.report(0.25)
-    print iqAgent.report(0.5)
-    print iqAgent.report(0.75)
-    print iqAgent.report(1.0)
+    print(iqAgent.report(0.0))
+    print(iqAgent.report(0.25))
+    print(iqAgent.report(0.5))
+    print(iqAgent.report(0.75))
+    print(iqAgent.report(1.0))
 
     iqAgent.saveState('test.csv')
     iqAgent.loadState('test.csv')
 
-    print iqAgent.report(0.0)
-    print iqAgent.report(0.25)
-    print iqAgent.report(0.5)
-    print iqAgent.report(0.75)
-    print iqAgent.report(1.0)
+    print(iqAgent.report(0.0))
+    print(iqAgent.report(0.25))
+    print(iqAgent.report(0.5))
+    print(iqAgent.report(0.75))
+    print(iqAgent.report(1.0))
 

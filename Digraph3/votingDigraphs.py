@@ -59,7 +59,7 @@ class VotingProfile(object):
         
         if fileVotingProfile != None:
             fileName = fileVotingProfile+'.py'         
-            execfile(fileName)
+            exec(compile(open(fileName).read(), fileName, 'exec'))
             self.name = str(fileVotingProfile)
             self.candidates = locals()['candidates']
             self.voters = locals()['voters']
@@ -75,43 +75,43 @@ class VotingProfile(object):
         """
         Show method for <VotingProfile> instances.
         """
-        print '*------ VotingProfile instance: %s ------*' % self.name
+        print('*------ VotingProfile instance: %s ------*' % self.name)
         voters = [x for x in self.voters]
         voters.sort()
-        print 'Voters     : %s' % str(voters)
+        print('Voters     : %s' % str(voters))
         candidates = [x for x in self.candidates]
         candidates.sort()
-        print 'Candidates : %s' % str(candidates)
-        print 'Ballots'
+        print('Candidates : %s' % str(candidates))
+        print('Ballots')
         for v in voters:
-            print 'voting of voter %s (weight = %.1f)' % (v,self.voters[v]['weight'])
+            print('voting of voter %s (weight = %.1f)' % (v,self.voters[v]['weight']))
             self.showVoterBallot(v)
-            print '----------------------'
+            print('----------------------')
 
     def showVoterBallot(self, voter, hasIntegerValuation=False):
         """
         Show the actual voting of a voter.
         """
         candidates = [x for x in self.candidates]
-        print '  >  |',
+        print('  >  |', end=' ')
         for x in candidates:
-            print "'"+x+"', ",
-        print '\n-----|------------------------------------------------------------'
+            print("'"+x+"', ", end=' ')
+        print('\n-----|------------------------------------------------------------')
         for x in candidates:
-            print "'"+x+"' | ",
+            print("'"+x+"' | ", end=' ')
             for y in candidates:
                 if hasIntegerValuation:
-                    print '%d ' % (self.ballot[voter][x][y]),
+                    print('%d ' % (self.ballot[voter][x][y]), end=' ')
                 else:
-                    print '%.2f ' % (self.ballot[voter][x][y]),
-            print
-        print '\n'
+                    print('%.2f ' % (self.ballot[voter][x][y]), end=' ')
+            print()
+        print('\n')
             
     def save(self,name='tempVprofile'):
         """
         Persistant storage of an approval voting profile.
         """
-        print '*--- Saving voting profile in file: <' + str(name) + '.py> ---*'
+        print('*--- Saving voting profile in file: <' + str(name) + '.py> ---*')
         candidates = self.candidates
         voters = self.voters
         ballot = self.ballot
@@ -166,7 +166,7 @@ class LinearVotingProfile(VotingProfile):
             fileName = fileVotingProfile + '.py'
         ## else:
         ##     fileName = 'testapprovalvotingprofile.py'
-            execfile(fileName)
+            exec(compile(open(fileName).read(), fileName, 'exec'))
             self.name = str(fileVotingProfile)
             self.candidates = locals()['candidates']
             self.voters = locals()['voters']
@@ -211,7 +211,7 @@ class LinearVotingProfile(VotingProfile):
         Parameter:
             name of file (without <.py> extension!).
         """
-        print '*--- Saving linear profile in file: <' + str(name) + '.py> ---*'
+        print('*--- Saving linear profile in file: <' + str(name) + '.py> ---*')
         candidates = self.candidates
         voters = self.voters
         linearBallot = self.linearBallot
@@ -245,9 +245,9 @@ class LinearVotingProfile(VotingProfile):
         """
         show the linear ballots
         """
-        print 'voters\t candidates rankings'
+        print('voters\t candidates rankings')
         for v in self.voters:
-            print '%s: \t %s' % (str(v),str(self.linearBallot[v]))
+            print('%s: \t %s' % (str(v),str(self.linearBallot[v])))
             
 
     def computeRankAnalysis(self):
@@ -308,8 +308,8 @@ class LinearVotingProfile(VotingProfile):
             totalWeight += Decimal('%.3f' % (self.voters[v]['weight']) )
         halfWeight = totalWeight/Decimal("2.0")
         if Comments:
-            print 'Total number of votes = ', totalWeight
-            print 'Half of the Votes = ', halfWeight
+            print('Total number of votes = ', totalWeight)
+            print('Half of the Votes = ', halfWeight)
         candidatesList = [x for x in self.candidates]
         remainingCandidates = copy.copy(candidatesList)
         remainingLinearBallot = copy.deepcopy(self.linearBallot)
@@ -317,9 +317,9 @@ class LinearVotingProfile(VotingProfile):
         while len(remainingCandidates) > 1:
             uninominalVotes = self.computeUninominalVotes(remainingCandidates,remainingLinearBallot)
             if Comments:
-                print '>>> stage = ', stage
-                print '    remaining candidates', remainingCandidates
-                print '    uninominal votes', uninominalVotes
+                print('>>> stage = ', stage)
+                print('    remaining candidates', remainingCandidates)
+                print('    uninominal votes', uninominalVotes)
             minVotes = totalWeight
             maxVotes = Decimal("0.0")
             for x in uninominalVotes:
@@ -328,26 +328,26 @@ class LinearVotingProfile(VotingProfile):
                 if uninominalVotes[x] > maxVotes:
                     maxVotes = uninominalVotes[x]
             if Comments:
-                print '    minimal number of votes = ', minVotes
-                print '    maximal number of votes = ', maxVotes
+                print('    minimal number of votes = ', minVotes)
+                print('    maximal number of votes = ', maxVotes)
             if maxVotes <= halfWeight:
                 currentCandidates = set(remainingCandidates)
                 for x in currentCandidates:
                     if uninominalVotes[x] == minVotes:
                         if Comments:
-                            print '    candidate to remove = ', x 
+                            print('    candidate to remove = ', x) 
                         remainingCandidates.remove(x)
                         for v in voters:
                             remainingLinearBallot[v].remove(x)
                 if Comments:
-                    print '    remaining candidates = ', remainingCandidates
+                    print('    remaining candidates = ', remainingCandidates)
                     #print '    remaining ballots    = ', remainingLinearBallot
                 stage += 1
             else:
                 for x in remainingCandidates:
                     if uninominalVotes[x] == maxVotes:
                         if Comments:
-                            print '    candidate %s obtains an absolute majority' % x
+                            print('    candidate %s obtains an absolute majority' % x)
                         return [x]
         return remainingCandidates
 
@@ -374,19 +374,19 @@ class LinearVotingProfile(VotingProfile):
         """
         uv = self.computeUninominalVotes(self.candidates,self.linearBallot)
         if Comments:
-            print 'uninominal votes ', uv
+            print('uninominal votes ', uv)
         maxVotes = 0
         for x in self.candidates:
             if uv[x] > maxVotes:
                 maxVotes = uv[x]
         if Comments:
-            print 'maxVotes ', maxVotes
+            print('maxVotes ', maxVotes)
         simpleMajorityWinner = []
         for x in self.candidates:
             if uv[x] == maxVotes:
                 simpleMajorityWinner.append(x)
         if Comments:
-            print 'simple majority winner(s) ', simpleMajorityWinner 
+            print('simple majority winner(s) ', simpleMajorityWinner) 
         return simpleMajorityWinner
         
 class ApprovalVotingProfile(VotingProfile):
@@ -410,7 +410,7 @@ class ApprovalVotingProfile(VotingProfile):
             fileName = fileVotingProfile + '.py'
         ## else:
         ##     fileName = 'testapprovalvotingprofile.py'
-            execfile(fileName)
+            exec(compile(open(fileName).read(), fileName, 'exec'))
             self.name = str(fileVotingProfile)
             self.candidates = locals()['candidates']
             self.voters = locals()['voters']
@@ -427,7 +427,7 @@ class ApprovalVotingProfile(VotingProfile):
         """
         Renders the votes obtained by each candidates.
         """
-        print 'Voting results'
+        print('Voting results')
         candidates = [x for x in self.candidates]
         candidates.sort()
         votesPerCandidate = {}
@@ -442,7 +442,7 @@ class ApprovalVotingProfile(VotingProfile):
             results.append((int(votesPerCandidate[c]),c))
         results.sort(reverse=True)
         for c in results:       
-            print 'candidate: %s obtains %d votes' % (c[1],c[0] )
+            print('candidate: %s obtains %d votes' % (c[1],c[0] ))
 
     def computeBallot(self,approvalEquivalence=False,disapprovalEquivalence=False):
         """
@@ -486,7 +486,7 @@ class ApprovalVotingProfile(VotingProfile):
         Parameter:
             name of file (without <.py> extension!).
         """
-        print '*--- Saving AV profile in file: <' + str(name) + '.py> ---*'
+        print('*--- Saving AV profile in file: <' + str(name) + '.py> ---*')
         candidates = self.candidates
         voters = self.voters
         approvalBallot = self.approvalBallot
@@ -555,7 +555,7 @@ class RandomApprovalVotingProfile(ApprovalVotingProfile):
         candidates = self.candidates
         nc = len(candidates)
         for v in voters:
-            candidatesList = candidates.keys()
+            candidatesList = list(candidates.keys())
             approvalBallot[v] = []
             nb = random.randint(minSizeOfBallot,maxSizeOfBallot)
             for x in range(nb):
@@ -667,7 +667,7 @@ class RandomVotingProfile(VotingProfile):
                     ballot[v][candidatesList[i]][candidatesList[j]] = 0.0
             random.shuffle(candidatesList)
             if Debug:
-                print v, candidatesList
+                print(v, candidatesList)
             for i in range(nc):
                 for j in range(i+1,nc):
                     ballot[v][candidatesList[i]][candidatesList[j]] = 1.0
@@ -716,7 +716,7 @@ class CondorcetDigraph(Digraph):
             else:
                 self.relation = self.constructApprovalBallotRelation(hasIntegerValuation)                
         else:
-            print 'Error'
+            print('Error')
             sys.exit(1)
         #self.valuationdomain = {'min':Decimal('-1.0'),'med':Decimal('0.0'),'max':Decimal('1.0')}
         self.order = len(self.actions)
@@ -887,18 +887,18 @@ class CondorcetDigraph(Digraph):
                         if relation[x][y] < xmin:
                             xmin = relation[x][y]
                 if Debug:
-                    print 'x, xmin', x, xmin
+                    print('x, xmin', x, xmin)
                 maximin.append((xmin,x))
             maximin.sort()
             if Debug:
-                print maximin, maximin[-1][1]
+                print(maximin, maximin[-1][1])
             rank[maximin[-1][1]] = {'rank':k,'majorityMargin':maximin[-1][0]}
             actionsList.remove(maximin[-1][1])
             k += 1
             if Debug:
-                print 'actionsList', actionsList
+                print('actionsList', actionsList)
         if Debug:
-            print rank
+            print(rank)
         return rank
 
     def computeArrowRaynaudRanking(self,linearOrdered=True,Debug=False):
@@ -920,35 +920,35 @@ class CondorcetDigraph(Digraph):
                         if relation[x][y] > xmax:
                             xmax = relation[x][y]
                 if Debug:
-                    print 'x, xmax', x, xmax
+                    print('x, xmax', x, xmax)
                 minimax.append((xmax,x))
             minimax.sort()
             if Debug:
-                print minimax, minimax[0][1]
+                print(minimax, minimax[0][1])
             rank[minimax[0][1]] = {'rank':n-k+1,'majorityMargin':minimax[0][0]}
             actionsList.remove(minimax[0][1])
             k += 1
             if Debug:
-                print 'actionsList', actionsList
+                print('actionsList', actionsList)
         if Debug:
-            print rank
+            print(rank)
         return rank
 
 #----------test voting Digraph class ----------------
 if __name__ == "__main__":
     import sys,array
 
-    print '****************************************************'
-    print '* Python voting digraphs module                    *'
-    print '* $Revision$                                   *' 
-    print '* Copyright (C) 2006-2007 University of Luxembourg *'
-    print '* The module comes with ABSOLUTELY NO WARRANTY     *'
-    print '* to the extent permitted by the applicable law.   *'
-    print '* This is free software, and you are welcome to    *'
-    print '* redistribute it if it remains free software.     *'
-    print '****************************************************'
+    print('****************************************************')
+    print('* Python voting digraphs module                    *')
+    print('* $Revision$                                   *') 
+    print('* Copyright (C) 2006-2007 University of Luxembourg *')
+    print('* The module comes with ABSOLUTELY NO WARRANTY     *')
+    print('* to the extent permitted by the applicable law.   *')
+    print('* This is free software, and you are welcome to    *')
+    print('* redistribute it if it remains free software.     *')
+    print('****************************************************')
 
-    print '*-------- Testing classes and methods -------'
+    print('*-------- Testing classes and methods -------')
   
     ## v = RandomVotingProfile(hasRandomWeights=True,maxWeight=4,Debug=True)
     ## v.save('testprofile')
@@ -973,29 +973,29 @@ if __name__ == "__main__":
     ## for x in lvp.voters:
     ##    print x, lvp.linearBallot[x]
     lvp.showLinearBallots()
-    print lvp.computeRankAnalysis()
-    print lvp.computeBordaScores()
-    print lvp.computeBordaWinners()
-    print lvp.computeUninominalVotes(lvp.candidates,lvp.linearBallot)
-    print lvp.computeInstantRunoffWinner(Comments=True)
-    print lvp.computeSimpleMajorityWinner(Comments=True)
+    print(lvp.computeRankAnalysis())
+    print(lvp.computeBordaScores())
+    print(lvp.computeBordaWinners())
+    print(lvp.computeUninominalVotes(lvp.candidates,lvp.linearBallot))
+    print(lvp.computeInstantRunoffWinner(Comments=True))
+    print(lvp.computeSimpleMajorityWinner(Comments=True))
     
     c = CondorcetDigraph(lvp)
     c.exportGraphViz()
-    print 'Chordless circuits = ', c.computeChordlessCircuits()
-    print 'Condorcet Winner = ', c.computeCondorcetWinner()
+    print('Chordless circuits = ', c.computeChordlessCircuits())
+    print('Condorcet Winner = ', c.computeCondorcetWinner())
     m = len(lvp.voters)
     c.recodeValuation(-m,m)
     c.showRelationTable()
     
-    print '*------------------*'
-    print 'If you see this line all tests were passed successfully :-)'
-    print 'Enjoy !'
+    print('*------------------*')
+    print('If you see this line all tests were passed successfully :-)')
+    print('Enjoy !')
         
-    print '*************************************'
-    print '* R.B. September 2008               *'
-    print '* $Revision$                   *'                   
-    print '*************************************'
+    print('*************************************')
+    print('* R.B. September 2008               *')
+    print('* $Revision$                   *')                   
+    print('*************************************')
 
 #############################
 # Log record for changes:

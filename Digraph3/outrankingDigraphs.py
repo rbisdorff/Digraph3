@@ -167,11 +167,11 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         """
         quantileSorting = self.computeQuantileSort()
         if Debug:
-            print quantileSorting
+            print(quantileSorting)
         Max = Decimal('1')
         Med = Decimal('0')
         Min = Decimal('-1')
-        actions = self.actions.keys()
+        actions = list(self.actions.keys())
         n = len(actions)
         rankingRelation = {}
         for x in actions:
@@ -183,7 +183,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             for j in range(i+1,n):
                 y = quantileSorting[j][1]
                 if Debug:
-                    print x, y, quantileSorting[i][0], quantileSorting[j][0]
+                    print(x, y, quantileSorting[i][0], quantileSorting[j][0])
                 if quantileSorting[i][0] > quantileSorting[j][0]:
                     rankingRelation[x][y] = Max
                     rankingRelation[y][x] = Min
@@ -194,7 +194,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     rankingRelation[x][y] = Max
                     rankingRelation[y][x] = Max
                 if Debug:
-                    print rankingRelation[x][y],rankingRelation[y][x]
+                    print(rankingRelation[x][y],rankingRelation[y][x])
         return rankingRelation 
 
     ## def showRankingByChoosing(self):
@@ -294,23 +294,23 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             actions = self.actions
         else:
             actions = actionsSubset
-        print '* ---- Criterion %s Relation Table -----\n' % (criterion),
-        print ' S   | ',
+        print('* ---- Criterion %s Relation Table -----\n' % (criterion), end=' ')
+        print(' S   | ', end=' ')
         #actions = [x for x in actions]
         actionsList = [x for x in actions]
 
         actionsList.sort()
         
         for x in actionsList:
-            print "'"+x+"', ",
-        print '\n-----|------------------------------------------------------------'
+            print("'"+x+"', ", end=' ')
+        print('\n-----|------------------------------------------------------------')
         for x in actionsList:
-            print "'"+x+"' | ",
+            print("'"+x+"' | ", end=' ')
             for y in actionsList:
                 #print '%2.2f ' % (self.relation[x[1]][y[1]]),
-                print '%2.2f ' % (self.computeCriterionRelation(criterion,x,y)),
-            print
-        print '\n'
+                print('%2.2f ' % (self.computeCriterionRelation(criterion,x,y)), end=' ')
+            print()
+        print('\n')
 
     def computeAMPLData(self,OldValuation=False):
         """
@@ -320,15 +320,15 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         actionsList.sort()
         for x in actionsList:
             for y in actionsList:
-                print str(x)+str(y),
+                print(str(x)+str(y), end=' ')
                 for c in self.criteria:
                     value = self.computeCriterionRelation(c,x,y)
                     if OldValuation:                        
                         value = (value + Decimal("1.0"))/Decimal("2.0")
                     else:
                         value = self.computeCriterionRelation(c,x,y)
-                    print '%.1f' % (value),
-                print
+                    print('%.1f' % (value), end=' ')
+                print()
 
                 
 
@@ -390,7 +390,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         res = []
         for i in range(len(sigs)):
             if Debug:
-                print sigs[i], self.domin(sigs[i]) - self.absorb(sigs[i])
+                print(sigs[i], self.domin(sigs[i]) - self.absorb(sigs[i]))
             res.append((self.domin(sigs[i]) - self.absorb(sigs[i]),sigs[i],self.domin(sigs[i]),self.absorb(sigs[i])))
 
         res.sort(reverse=True)
@@ -398,10 +398,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
     
         if Comments:
             for x in res:
-                print "{%s} : %.3f " % ( [y for y in x[1]][0], (float(x[0]) + 100.0)/2.0 )
+                print("{%s} : %.3f " % ( [y for y in x[1]][0], (float(x[0]) + 100.0)/2.0 ))
 
         if Debug:
-            print res
+            print(res)
 
         self.recodeValuation(valuationdomain['min'],valuationdomain['max'])
 
@@ -645,9 +645,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             d = None
             pairwiseComparison = None
         if Debug:
-            print '>>> c,a,b,d', c,a,b,d
-            print 'ind,wp,p,wv,v', ind,wp,p,wv,v
-            print 'pairwiseComparison', pairwiseComparison
+            print('>>> c,a,b,d', c,a,b,d)
+            print('ind,wp,p,wv,v', ind,wp,p,wv,v)
+            print('pairwiseComparison', pairwiseComparison)
             
         return pairwiseComparison
 
@@ -739,31 +739,31 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         if isReturningHTML:
             html += '<h1>Criteria ordinal correlation index</h1>'
         else:
-            print 'Criteria ordinal correlation index'
+            print('Criteria ordinal correlation index')
         # header row
         if isReturningHTML:
             html += '<table border=1><tr bgcolor="#9acd32"><th>&tau;</th>'
         else:
-            print '     |',
+            print('     |', end=' ')
         for x in criteriaList:
             if isReturningHTML:
                 html += '<th bgcolor="#FFEEAA">%s</th>' % (x)
             else:
-                print '%5s  ' % (x),
+                print('%5s  ' % (x), end=' ')
         if isReturningHTML:
             html += '</tr>'
         else:
-            print
+            print()
             hline = '-----|'
             for i in range(len(criteriaList)+1):
                 hline += '-------'
-            print hline
+            print(hline)
         # table body
         for i in range(len(criteriaList)):
             if isReturningHTML:
                 html += '<tr><th bgcolor="#FFEEAA">%s</th>' % (criteriaList[i])
             else:
-                print '%4s |' %(criteriaList[i]),
+                print('%4s |' %(criteriaList[i]), end=' ')
             for j in range(len(criteriaList)):
                 if i <= j:
                     gi = criteriaList[i]
@@ -776,17 +776,17 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                             html += '<td bgcolor="#ffddff">%+2.2f</td>' % (index)
                             
                     else:
-                        print '%+2.2f  ' % (index),
+                        print('%+2.2f  ' % (index), end=' ')
                 else:
                     if isReturningHTML:
                         html += '<td>&nbsp;</td>'
                     else:
                         index = '       '
-                        print index,
+                        print(index, end=' ')
             if isReturningHTML:
                 html += '</tr>'
             else:
-                print
+                print()
         if isReturningHTML:
             html += '</table>'
         # render the result
@@ -854,16 +854,16 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             cred = min(degintstab,degextstab)
             criteriaHierarchy.append((-cred,degintstab,degextstab,cluster))
         criteriaHierarchy.sort()
-        print '*------ criteria clustering hierarchy ------*'
+        print('*------ criteria clustering hierarchy ------*')
         clustered = set()
         hierarchy = []
         for ch in criteriaHierarchy:
             hierarchy = hierarchy + [ch[3]]
             clustered |= set(ch[3])
             rest = actions - clustered
-            print 'Cluster: %s\n   Credibility level: %2.2f%%; Exterior stability: %2.2f%%; Interior stability: %2.2f%%' % ( str(ch[3]),(-ch[0]+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0'),(ch[2]+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0'),(ch[1]+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0'))
-            print '   Hierarchy: ', hierarchy
-            print
+            print('Cluster: %s\n   Credibility level: %2.2f%%; Exterior stability: %2.2f%%; Interior stability: %2.2f%%' % ( str(ch[3]),(-ch[0]+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0'),(ch[2]+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0'),(ch[1]+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0')))
+            print('   Hierarchy: ', hierarchy)
+            print()
 
     def saveActionsCorrelationTable(self,fileName='tempcorr.prn',delimiter=' ',Bipolar=True,Silent=False,Centered=False):
         """
@@ -904,7 +904,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.write('%2.2f\n' % (value))
         fo.close()
         if not Silent:
-            print 'Actions Correlation saved on file %s' % (fileName)
+            print('Actions Correlation saved on file %s' % (fileName))
         
         
     def saveCriteriaCorrelationTable(self,fileName='tempcorr.prn',delimiter=' ',Bipolar=True,Silent=False,Centered=False):
@@ -946,7 +946,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.write('%2.2f\n' % (value))
         fo.close()
         if not Silent:
-            print 'Criteria Correlation saved on file %s' % (fileName)
+            print('Criteria Correlation saved on file %s' % (fileName))
 
     def export3DplotOfCriteriaCorrelation(self,plotFileName="correlation",Type="pdf",Comments=False,bipolarFlag=False,dist=True,centeredFlag=False):
         """
@@ -956,7 +956,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         import time
         
         if Comments:
-            print '*----  export 3dplot of type %s -----' % (Type)
+            print('*----  export 3dplot of type %s -----' % (Type))
         import os
         criteriaList = [x for x in self.criteria]
         criteriaList.sort()
@@ -984,7 +984,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             else:
                 os.system('env calmat tempcorr.prg > /dev/null')
         except:
-            print 'Error: You need to install calmat !!!'
+            print('Error: You need to install calmat !!!')
             return
         # create R 3d scatter plot script
         if Type == "interactive":
@@ -1032,7 +1032,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             elif Type == "pdf":
                 fo.write('pdf("%s.pdf",width=6,height=6,bg="cornsilk",title="PCA of Criteria Correlation Index")\n' % (plotFileName) )
             else:
-                print 'Error: Plotting device %s not defined !' % (Type)
+                print('Error: Plotting device %s not defined !' % (Type))
                 return     
             fo.write('par(mfrow=c(2,2))\n')
             fo.write('plot(test.mat[,choose12],xlab=paste("axis 1:",valprop[choose12,2][1]*100,"%"),ylab=paste("axis 2:",valprop[choose12,2][2]*100,"%"),type="n",asp=1)\n')
@@ -1067,9 +1067,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 os.system('env R -q --vanilla < scatter.r > /dev/null 2> /dev/null')
             time.sleep(3)     
             if Comments:
-                print 'See %s.%s ! ' % (plotFileName,Type)
+                print('See %s.%s ! ' % (plotFileName,Type))
         except:
-            print 'Error: You need to install R !!!'
+            print('Error: You need to install R !!!')
 
     def export3DplotOfActionsCorrelation(self,plotFileName="correlation",Type="pdf",Comments=False,bipolarFlag=False,dist=True,centeredFlag=False):
         """
@@ -1079,7 +1079,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         import time
         
         if Comments:
-            print '*----  export 3dplot of type %s -----' % (Type)
+            print('*----  export 3dplot of type %s -----' % (Type))
         import os
         actionsList = [x for x in self.actions]
         actionsList.sort()
@@ -1107,7 +1107,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             else:
                 os.system('env calmat tempcorr.prg > /dev/null')
         except:
-            print 'Error: You need to install calmat !!!'
+            print('Error: You need to install calmat !!!')
             return
         # create R 3d scatter plot script
         if Type == "interactive":
@@ -1155,7 +1155,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             elif Type == "pdf":
                 fo.write('pdf("%s.pdf",width=6,height=6,bg="cornsilk",title="PCA of Actions Correlation Index")\n' % (plotFileName) )
             else:
-                print 'Error: Plotting device %s not defined !' % (Type)
+                print('Error: Plotting device %s not defined !' % (Type))
                 return     
             fo.write('par(mfrow=c(2,2))\n')
             fo.write('plot(test.mat[,choose12],xlab=paste("axis 1:",valprop[choose12,2][1]*100,"%"),ylab=paste("axis 2:",valprop[choose12,2][2]*100,"%"),type="n",asp=1)\n')
@@ -1190,9 +1190,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 os.system('env R -q --vanilla < scatter.r > /dev/null 2> /dev/null')
             time.sleep(3)     
             if Comments:
-                print 'See %s.%s ! ' % (plotFileName,Type)
+                print('See %s.%s ! ' % (plotFileName,Type))
         except:
-            print 'Error: You need to install R !!!'
+            print('Error: You need to install R !!!')
             
     def computePairwiseComparisons(self,hasSymmetricThresholds=True):
         """
@@ -1253,7 +1253,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         elif evaluation[c][a] + p <= evaluation[c][b]:
                             pairwiseComparisons[a][b]['lt'] += criteria[c]['weight']
                         else:
-                            print "Error: a,b,c,d,ind,wp,p",a,b,c,d,ind,wp,p
+                            print("Error: a,b,c,d,ind,wp,p",a,b,c,d,ind,wp,p)
                         #print "Debug: a,b,d,ind,wp,p",a,b,d,ind,wp,p,pairwiseComparisons[a][b]
                         
         return pairwiseComparisons
@@ -1265,13 +1265,13 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         a = [x for x in self.actions]
         a.sort()
         pc = self.computePairwiseComparisons()
-        print ' distribution of pairwise comparisons'
-        print ' a  b | "<" "<=" "==" ">=" ">" | "S"'
-        print '-----------------------------'
+        print(' distribution of pairwise comparisons')
+        print(' a  b | "<" "<=" "==" ">=" ">" | "S"')
+        print('-----------------------------')
         for i in range(len(a)):
             for j in range(i+1,len(a)):
-                print ' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[i],a[j],pc[a[i]][a[j]]['lt'],pc[a[i]][a[j]]['leq'],pc[a[i]][a[j]]['eq'],pc[a[i]][a[j]]['geq'],pc[a[i]][a[j]]['gt'],self.relation[a[i]][a[j]])
-                print ' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[j],a[i],pc[a[j]][a[i]]['lt'],pc[a[j]][a[i]]['leq'],pc[a[j]][a[i]]['eq'],pc[a[j]][a[i]]['geq'],pc[a[j]][a[i]]['gt'],self.relation[a[j]][a[i]])
+                print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[i],a[j],pc[a[i]][a[j]]['lt'],pc[a[i]][a[j]]['leq'],pc[a[i]][a[j]]['eq'],pc[a[i]][a[j]]['geq'],pc[a[i]][a[j]]['gt'],self.relation[a[i]][a[j]]))
+                print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[j],a[i],pc[a[j]][a[i]]['lt'],pc[a[j]][a[i]]['leq'],pc[a[j]][a[i]]['eq'],pc[a[j]][a[i]]['geq'],pc[a[j]][a[i]]['gt'],self.relation[a[j]][a[i]]))
 
 
     def showPairwiseComparison(self,a,b,hasSymetricThresholds=True,Debug=False,isReturningHTML=False,hasSymmetricThresholds=True):
@@ -1282,7 +1282,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         evaluation = self.evaluation
         criteria = self.criteria
         if Debug:
-            print 'a,b =', a, b
+            print('a,b =', a, b)
         if a != b:
             if isReturningHTML:
                 html  = '<h1>Pairwise Comparison<h/1>'
@@ -1292,10 +1292,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 html += '<th>crit.</th><th>wght.</th> <th>g(x)</th> <th>g(y)</th> <th>diff</th> <th>ind</th> <th>wp</th> <th>p</th> <th>concord</th> <th>wv</th> <th>v</th> <th>polarisation</th>'
                 html += '</tr>'
             else:
-                print '*------------  pairwise comparison ----*'
-                print 'Comparing actions : (%s, %s)' % (a,b)
-                print 'crit. wght.  g(x)  g(y)    diff  \t| ind     wp      p    concord \t|  wv   v   weak veto veto'
-                print '-------------------------------  \t ----------------------------- \t ----------------'                
+                print('*------------  pairwise comparison ----*')
+                print('Comparing actions : (%s, %s)' % (a,b))
+                print('crit. wght.  g(x)  g(y)    diff  \t| ind     wp      p    concord \t|  wv   v   weak veto veto')
+                print('-------------------------------  \t ----------------------------- \t ----------------')                
             concordance = 0
             sumWeights = 0
             criteriaList = [x for x in criteria]
@@ -1342,7 +1342,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         html += '<tr>'
                         html += '<td bgcolor="#FFEEAA" align="center">%s</td> <td>%.2f</td> <td>%2.2f</td> <td>%2.2f</td> <td>%+2.2f</td> <td>%s</td>  <td>%s</td>  <td>%s</td>   <td>%+.2f</td>' % (c,criteria[c]['weight'],evaluation[c][a],evaluation[c][b],d, str(ind),str(wp),str(p),lc0*criteria[c]['weight'])
                     else:
-                         print c, '  %.2f  %2.2f  %2.2f  %+2.2f \t| %s  %s  %s   %+.2f \t|' % (criteria[c]['weight'],evaluation[c][a],evaluation[c][b],d, str(ind),str(wp),str(p),lc0*criteria[c]['weight']),
+                         print(c, '  %.2f  %2.2f  %2.2f  %+2.2f \t| %s  %s  %s   %+.2f \t|' % (criteria[c]['weight'],evaluation[c][a],evaluation[c][b],d, str(ind),str(wp),str(p),lc0*criteria[c]['weight']), end=' ')
                     concordance = concordance + (lc0 * criteria[c]['weight'])
                     try:
                         wvx = criteria[c]['thresholds']['weakVeto'][0]
@@ -1372,38 +1372,38 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         if v != None:
                             if d >= v:
                                 if not isReturningHTML:
-                                    print '     %2.2f       %+2.2f' % (v, negativeVeto)
+                                    print('     %2.2f       %+2.2f' % (v, negativeVeto))
                                 else:
                                     html += '<td></td> <td> %2.2f</td> <td bgcolor="#ddffdd">%+2.2f</td>' % (v, negativeVeto)
                             elif d <= -v:
                                 if not isReturningHTML:
-                                    print '     %2.2f       %+2.2f' % (v, -veto)
+                                    print('     %2.2f       %+2.2f' % (v, -veto))
                                 else:
                                     html += '<td></td> <td> %2.2f</td> <td bgcolor="#ffddff">%+2.2f</td>' % (v, -veto)
                             else:
                                 if not isReturningHTML:                                
-                                    print
+                                    print()
                                 else:
                                     html += '</tr>'
                         elif wv != None:
                             if d >= wv:
                                 if not isReturningHTML:
-                                    print '%2.2f      %+2.2f' % (wv, negativeVeto)
+                                    print('%2.2f      %+2.2f' % (wv, negativeVeto))
                                 else:
                                     html += '<td>%2.2f</td><td></td> <td bgcolor="#ddffdd">%+2.2f</td>' % (wv, negativeVeto)
                             elif d <= -wv:
                                 if not isReturningHTML:
-                                    print '%2.2f      %+2.2f' % (wv, -veto)
+                                    print('%2.2f      %+2.2f' % (wv, -veto))
                                 else:
                                     html += '<td>%2.2f</td><td></td> <td bgcolor="#ffddff">%+2.2f</td>' % (wv, -veto)
                             else:
                                 if not isReturningHTML:
-                                    print
+                                    print()
                                 else:
                                     html += '</tr>'
                         else:
                             if not isReturningHTML:
-                                print
+                                print()
                             else:
                                 html += '</tr>'
                     else:
@@ -1412,23 +1412,23 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                             if wv != None:
                                 if v != None:
                                     if not isReturningHTML:
-                                        print ' %2.2f %2.2f %+2.2f' % (wv, v, veto)
+                                        print(' %2.2f %2.2f %+2.2f' % (wv, v, veto))
                                     else:
                                         html += '<td>%2.2f</td> <td> %2.2f</td> <td bgcolor="#ffddff">%+2.2f</td>' % (wv, v, veto)
                                 else:
                                     if not isReturningHTML:
-                                        print ' %2.2f       %+2.2f' % (wv, -veto)
+                                        print(' %2.2f       %+2.2f' % (wv, -veto))
                                     else:
                                         html += '<td>%2.2f</td> <td></td> <td bgcolor="#ffddff">%+2.2f</td>' % (wv, -veto)
                             else:
                                 if v != None:
                                     if not isReturningHTML:
-                                        print '       %2.2f %+2.2f' % (v, veto)
+                                        print('       %2.2f %+2.2f' % (v, veto))
                                     else:
                                         html += '<td></td> <td>%2.2f</td> <td bgcolor="#ffddff">%+2.2f</td>' % (v, -veto)
                                 else:
                                     if not isReturningHTML:
-                                        print
+                                        print()
                                     else:
                                         html += '</tr>'
                         
@@ -1443,12 +1443,12 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         eval_c_b = '%2.2f' % evaluation[c][b]
                     
                     if not isReturningHTML:
-                        print c,'    %s %s' % (eval_c_a,eval_c_b)
+                        print(c,'    %s %s' % (eval_c_a,eval_c_b))
                     else:
                         html += '<td bgcolor="#FFEEAA" align="center">%s</td> <td>%s</td><td>%s</td><td>%s</td><td></td><td></td><td></td><td></td><td>%.2f</td></tr>' % (c, criteria[c]['weight'],eval_c_a,eval_c_b, self.valuationdomain['med']*criteria[c]['weight'])
             if not isReturningHTML:
-                print '             ----------------------------------------'
-                print ' Valuation in range: %+.2f to %+.2f; global concordance: %+.2f' % (-sumWeights,sumWeights,concordance)
+                print('             ----------------------------------------')
+                print(' Valuation in range: %+.2f to %+.2f; global concordance: %+.2f' % (-sumWeights,sumWeights,concordance))
             else:
                 html += '</tr></table>'
                 html += '<b>Valuation in range: %+.2f to %+.2f; global concordance: %+.2f </b>' % (-sumWeights,sumWeights,concordance)
@@ -1469,14 +1469,14 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         specialize the general showAll method with criteria
         and performance tableau output
         """
-        print '*----- show detail -------------*'
-        print 'Digraph          :', self.name
-        print '*---- Actions ----*'
-        print self.actions
+        print('*----- show detail -------------*')
+        print('Digraph          :', self.name)
+        print('*---- Actions ----*')
+        print(self.actions)
         self.showCriteria()
         self.showPerformanceTableau()
-        print '*---- Valuation domain ----*'
-        print self.valuationdomain
+        print('*---- Valuation domain ----*')
+        print(self.valuationdomain)
         self.showRelationTable()
         self.showComponents()
         self.showPreKernels()
@@ -1502,8 +1502,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         if relation == None:
             relation = self.relation
             
-        print '* ---- Relation Table -----\n',
-        print ' S   | ',
+        print('* ---- Relation Table -----\n', end=' ')
+        print(' S   | ', end=' ')
         #actions = [x for x in actions]
         actionsList = []
         for x in actions:
@@ -1524,61 +1524,61 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             hasIntegerValuation = IntegerValues
         
         for x in actionsList:
-            print "'"+x[0]+"',  ",
-        print '\n-----|------------------------------------------------------------'
+            print("'"+x[0]+"',  ", end=' ')
+        print('\n-----|------------------------------------------------------------')
         for x in actionsList:
             if hasLatexFormat:
-                print "$"+x[0]+"$ & ",
+                print("$"+x[0]+"$ & ", end=' ')
             else:
-                print "'"+x[0]+"' |  ",
+                print("'"+x[0]+"' |  ", end=' ')
             for y in actionsList:
                 if hasIntegerValuation:
                     if hasLPDDenotation:
-                        print '%+d ' % (gnv.relation[x[1]][y[1]]),
+                        print('%+d ' % (gnv.relation[x[1]][y[1]]), end=' ')
                     elif hasLatexFormat:
-                        print '$%+d$ &' % (relation[x[1]][y[1]]),
+                        print('$%+d$ &' % (relation[x[1]][y[1]]), end=' ')
                     else:
-                        print '%+d ' % (relation[x[1]][y[1]]),
+                        print('%+d ' % (relation[x[1]][y[1]]), end=' ')
                 else:
                     if hasLPDDenotation:
-                        print '%+2.2f ' % (gnv.relation[x[1]][y[1]]),
+                        print('%+2.2f ' % (gnv.relation[x[1]][y[1]]), end=' ')
                     elif hasLatexFormat:
-                        print '$%+2.2f$ & ' % (relation[x[1]][y[1]]),       
+                        print('$%+2.2f$ & ' % (relation[x[1]][y[1]]), end=' ')       
                     else:
-                        print '%+2.2f ' % (relation[x[1]][y[1]]),
+                        print('%+2.2f ' % (relation[x[1]][y[1]]), end=' ')
                 
             if hasLatexFormat:
-                print ' \\cr'
+                print(' \\cr')
             else:
-                print
+                print()
             if hasLPDDenotation:
-                print "'"+x[0]+"' | ",
+                print("'"+x[0]+"' | ", end=' ')
                 for y in actionsList:
-                    print '(%+d,%+d)' % (largePerformanceDifferencesCount[x[1]][y[1]]['positive'],\
-                                          largePerformanceDifferencesCount[x[1]][y[1]]['negative']),
-                print
+                    print('(%+d,%+d)' % (largePerformanceDifferencesCount[x[1]][y[1]]['positive'],\
+                                          largePerformanceDifferencesCount[x[1]][y[1]]['negative']), end=' ')
+                print()
             
                 
-        print '\n'
+        print('\n')
 
     def showPerformanceTableau(self):
         """
         Print the performance Tableau.
         """
-        print '*----  performance tableau -----*'
+        print('*----  performance tableau -----*')
         criteriaList = list(self.criteria)
         criteriaList.sort()
         actionsList = list(self.actions)
         actionsList.sort()
-        print   'criteria | ',
+        print('criteria | ', end=' ')
         for x in actionsList:
-            print '\''+str(x)+'\'  ',
-        print '\n---------|-----------------------------------------'
+            print('\''+str(x)+'\'  ', end=' ')
+        print('\n---------|-----------------------------------------')
         for g in criteriaList:
-            print '   \''+str(g)+'\'  |',
+            print('   \''+str(g)+'\'  |', end=' ')
             for x in actionsList:
-                print '% .1f, ' % (self.evaluation[g][x]),
-            print      
+                print('% .1f, ' % (self.evaluation[g][x]), end=' ')
+            print()      
 
     def computeVetosShort(self):
         """
@@ -1623,32 +1623,32 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         """
         prints all veto situations observed in the OutrankingDigraph instance.
         """
-        print '*----  Veto situations ---'
+        print('*----  Veto situations ---')
         nv, realveto = self.computeVetosShort()
         vetos = self.vetos
         vetos.sort()
         if realVetosOnly:
-            print self.valuationdomain
+            print(self.valuationdomain)
             cutveto = 0
             if cutLevel == None:
                 cutLevel = self.valuationdomain['med']
             else:
                 cutLevel = Decimal(str(cutLevel))
             if cutLevel > self.valuationdomain['max']:
-                print "Error! min = %.3f, max = %.3f" % (self.valuationdomain['min'],self.valuationdomain['max'])
+                print("Error! min = %.3f, max = %.3f" % (self.valuationdomain['min'],self.valuationdomain['max']))
                 return None
-            print 'Real vetos at cut level: %.3f' % (cutLevel)
+            print('Real vetos at cut level: %.3f' % (cutLevel))
             for i in range(nv):
                 if self.vetos[i][0][2] > cutLevel:
-                    print 'self.vetos[i][0][2]=',self.vetos[i][0][2]
-                    print str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1])
+                    print('self.vetos[i][0][2]=',self.vetos[i][0][2])
+                    print(str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1]))
                     cutveto += 1
             return nv,realveto,cutveto
         else:            
-            print 'number of potential vetos: %d ' % (nv)
+            print('number of potential vetos: %d ' % (nv))
             for i in range(nv):
-                print str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1])
-            print 'number of real vetos: %d' % (realveto)
+                print(str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1]))
+            print('number of real vetos: %d' % (realveto))
             return nv,realveto
 
     ## transferred to perftabs.py module
@@ -1685,7 +1685,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         self.computeRubyChoice()
 
         if noSilent:
-            print '*----- saving digraph in XML format  -------------*'        
+            print('*----- saving digraph in XML format  -------------*')        
         nameExt = name+'.xml'
         fo = codecs.open(nameExt,'w',encoding='utf-8')
         fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
@@ -1695,18 +1695,18 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         else:
             fo.write('<!-- ?xml-stylesheet type="text/xsl" href="rubisOutrankingDigraph.xsl"? -->\n')
         fo.write('<rubisOutrankingDigraph xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="rubisOutrankingDigraph.xsd"')
-        fo.write(' category="' + unicode(category)+'" subcategory="'+unicode(subcategory)+'">\n')
+        fo.write(' category="' + str(category)+'" subcategory="'+str(subcategory)+'">\n')
 
         fo.write('<header>\n')
         fo.write('<comment>header declaration </comment>\n')
         fo.write('<name>')
-        fo.write(unicode(nameExt))
+        fo.write(str(nameExt))
         fo.write('</name>\n')       
         fo.write('<author>')
-        fo.write(unicode(author))
+        fo.write(str(author))
         fo.write('</author>\n')
         fo.write('<reference>')
-        fo.write(unicode(reference))
+        fo.write(str(reference))
         fo.write('</reference>\n')
         fo.write('</header>')
 
@@ -1715,16 +1715,16 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write('<actions>\n')
         fo.write('<comment>Potential decision actions </comment>\n')
         for x in actionsOrigList:
-            fo.write('<action id="'+unicode(x)+'">\n')
+            fo.write('<action id="'+str(x)+'">\n')
             fo.write('<name>')
             try:
-                fo.write(unicode(self.actions_orig[x]['name']))
+                fo.write(str(self.actions_orig[x]['name']))
             except:
                 pass
             fo.write('</name>\n')
             fo.write('<comment>')
             try:
-                fo.write(unicode(self.actions_orig[x]['comment'])) 
+                fo.write(str(self.actions_orig[x]['comment'])) 
             except:
                 pass
             fo.write('</comment>\n')
@@ -1737,16 +1737,16 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         criteriaList.sort()
         #print criteriaList
         for g in criteriaList:
-            fo.write('<criterion id="'+unicode(g)+'" category="performance">\n')
+            fo.write('<criterion id="'+str(g)+'" category="performance">\n')
             fo.write('<name>')
             try:
-                fo.write(unicode(self.criteria[g]['name']))
+                fo.write(str(self.criteria[g]['name']))
             except:
                 pass
             fo.write('</name>\n')
             fo.write('<comment>')
             try:
-                fo.write(unicode(self.criteria[g]['comment'])) 
+                fo.write(str(self.criteria[g]['comment'])) 
             except:
                 pass
             fo.write('</comment>\n')
@@ -1800,11 +1800,11 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write('<comment>performance table </comment>\n')
         for g in criteriaList:
             fo.write('<evaluation>\n')
-            fo.write('<criterionID>'+unicode(g)+'</criterionID>\n')
+            fo.write('<criterionID>'+str(g)+'</criterionID>\n')
             for x in actionsOrigList:
                 fo.write('<performance>\n')
                 fo.write('<actionID>')       
-                fo.write(unicode(x))
+                fo.write(str(x))
                 fo.write('</actionID>\n')                    
                 fo.write('<value>')
 ##                 fo.write(str(evaluation[g][x]))
@@ -1842,10 +1842,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             for y in actionsOrigList:
                 fo.write('<arc>\n')        
                 fo.write('<initialActionID>')
-                fo.write(unicode(x))
+                fo.write(str(x))
                 fo.write('</initialActionID>\n')                       
                 fo.write('<terminalActionID>')
-                fo.write(unicode(y))
+                fo.write(str(y))
                 fo.write('</terminalActionID>\n')                                             
                 fo.write('<value>')
 ##                 fo.write(str(relation[x][y]))
@@ -1863,10 +1863,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 arc = veto[0]
                 fo.write('<arc>\n')
                 fo.write('<initialActionID>')
-                fo.write(unicode(arc[0]))
+                fo.write(str(arc[0]))
                 fo.write('</initialActionID>\n')                       
                 fo.write('<terminalActionID>')
-                fo.write(unicode(arc[1]))
+                fo.write(str(arc[1]))
                 fo.write('</terminalActionID>\n')                                             
                 fo.write('<concordanceDegree>')
                 fo.write('%.2f' % (arc[2]))
@@ -1877,7 +1877,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 for v in situations:
                     fo.write('<vetoSituation>\n')
                     fo.write('<criterionID>')
-                    fo.write(unicode(v[0]))
+                    fo.write(str(v[0]))
                     fo.write('</criterionID>\n')
                     fo.write('<performanceDifference>')
                     fo.write('%.2f' % (v[1][1]))
@@ -1919,7 +1919,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.write('<cocaActions>\n')
             fo.write("<comment>weak COCA digraph actions' declaration </comment>\n")
             for x in cocaActionsList:
-                fo.write('<cocaAction id="'+unicode(x)+'">\n')
+                fo.write('<cocaAction id="'+str(x)+'">\n')
                 fo.write('<name>')
                 fo.write('chordless odd circuit')
                 fo.write('</name>\n')
@@ -1944,7 +1944,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 fo.write('<choiceActions>\n')
                 for x in ch[5]:
                     fo.write('<actionID>')
-                    fo.write(unicode(x))
+                    fo.write(str(x))
                     fo.write('</actionID>\n')
                 fo.write('</choiceActions>\n')              
                 fo.write('</choiceSet>\n')
@@ -1965,7 +1965,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 fo.write('<choiceActions>\n')
                 for x in ch[5]:
                     fo.write('<actionID>')
-                    fo.write(unicode(x))
+                    fo.write(str(x))
                     fo.write('</actionID>\n')
                 fo.write('</choiceActions>\n')              
                 fo.write('</choiceSet>\n')
@@ -1977,7 +1977,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         
         fo.close()
         if noSilent:
-            print 'File: ' + nameExt + ' saved !'
+            print('File: ' + nameExt + ' saved !')
 
 
 
@@ -1993,7 +1993,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             category = 'Robust Rubis'
 
         if comment:
-            print '*----- saving digraph in XMCDA format  -------------*'        
+            print('*----- saving digraph in XMCDA format  -------------*')        
         nameExt = fileName+'.xmcda'
         fo = codecs.open(nameExt,'w',encoding='utf-8')
         fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
@@ -2012,19 +2012,19 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 fo.write('<?xml-stylesheet type="text/xsl" href="xmcdaDefault.xsl"?>\n')
             else:
                 fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcdaDefault.xsl"? -->\n')     
-        fo.write('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n xsi:schemaLocation="http://www.decision-deck.org/2008/UMCDA-ML-1.0 umcda-ml-1.0.xsd"\n xmlns:xmcda="http://www.decision-deck.org/2008/UMCDA-ML-1.0" instanceID="%s">\n' % unicode(instanceID) )
+        fo.write('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n xsi:schemaLocation="http://www.decision-deck.org/2008/UMCDA-ML-1.0 umcda-ml-1.0.xsd"\n xmlns:xmcda="http://www.decision-deck.org/2008/UMCDA-ML-1.0" instanceID="%s">\n' % str(instanceID) )
 
         # write description
         fo.write('<caseReference>\n')
         # titles
         title = 'Rubis Best Choice Recommendation'
-        fo.write('<%s>%s</%s>\n' % ('title', unicode(title),'title') )
+        fo.write('<%s>%s</%s>\n' % ('title', str(title),'title') )
         try:
-            fo.write('<%s>%s</%s>\n' % ('subTitle', unicode(self.description['title']),'subTitle') )
+            fo.write('<%s>%s</%s>\n' % ('subTitle', str(self.description['title']),'subTitle') )
         except:
             pass
         try:
-            fo.write('<%s>%s</%s>\n' % ('subSubTitle', unicode(self.description['subTitle']),'subSubTitle') )
+            fo.write('<%s>%s</%s>\n' % ('subSubTitle', str(self.description['subTitle']),'subSubTitle') )
         except:
             pass
         # rest of case description including the bibliography
@@ -2034,22 +2034,22 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     fo.write('<bibliography>\n')
                     for bibEntry in [x for x in self.description[entry]]:
                         if bibEntry == 'description':
-                            fo.write('<description><subSubTitle>%s</subSubTitle></description>\n' % (unicode(self.description['bibliography']['description']['subSubTitle'])) )
+                            fo.write('<description><subSubTitle>%s</subSubTitle></description>\n' % (str(self.description['bibliography']['description']['subSubTitle'])) )
                         else:
-                            fo.write('<bibEntry>%s</bibEntry>\n' % (unicode(self.description['bibliography'][bibEntry])) )
+                            fo.write('<bibEntry>%s</bibEntry>\n' % (str(self.description['bibliography'][bibEntry])) )
                     fo.write('</bibliography>\n')
                 elif entry != 'title' and entry != 'subTitle' and entry != 'subSubTitle':
-                    fo.write('<%s>%s</%s>\n' % (entry, unicode(self.description[entry]),entry) )
+                    fo.write('<%s>%s</%s>\n' % (entry, str(self.description[entry]),entry) )
         except:
             if category == 'Robust Rubis':
                 fo.write('<title>Valued Outranking Robustness Digraph in XMCDA format</title>\n')
             else:
                 fo.write('<title>Valued Outranking Digraph in XMCDA format</title>\n') 
             fo.write('<id>%s</id>\n' % (fileName) )
-            fo.write('<name>%s</name>\n' % (unicode(self.name)) )
+            fo.write('<name>%s</name>\n' % (str(self.name)) )
             fo.write('<type>root</type>\n')
-            fo.write('<author>%s</author>\n' % (unicode(author)) )
-            fo.write('<version>%s</version>\n' % (unicode(reference)) )
+            fo.write('<author>%s</author>\n' % (str(author)) )
+            fo.write('<version>%s</version>\n' % (str(reference)) )
         fo.write('</caseReference>\n')
 
         # write methodData
@@ -2102,17 +2102,17 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write('<type>%s</type>\n' % ('alternatives'))
         fo.write('</description>\n')                  
         for x in origActionsList:
-            fo.write('<alternative id="'+unicode(x)+'">\n')
+            fo.write('<alternative id="'+str(x)+'">\n')
             fo.write('<description>\n')
             fo.write('<name>')
             try:
-                fo.write(unicode(self.actions_orig[x]['name']))
+                fo.write(str(self.actions_orig[x]['name']))
             except:
                 pass
             fo.write('</name>\n')
             fo.write('<comment>')
             try:
-                fo.write(unicode(self.actions_orig[x]['comment'])) 
+                fo.write(str(self.actions_orig[x]['comment'])) 
             except:
                 pass
             fo.write('</comment>\n')
@@ -2133,10 +2133,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.write('<comment>Chordless odd circuits added to the original outranking digraph.</comment>\n')
             fo.write('</description>\n')                  
             for x in cocaActionsList:
-                fo.write('<alternative id="'+unicode(self.actions[x]['name'])+'">\n')
+                fo.write('<alternative id="'+str(self.actions[x]['name'])+'">\n')
                 fo.write('<description>\n')
-                fo.write('<name>%s</name>\n' % (unicode(self.actions[x]['name']) ) )
-                fo.write('<comment>%s</comment>\n' % (unicode(self.actions[x]['comment'])) )
+                fo.write('<name>%s</name>\n' % (str(self.actions[x]['name']) ) )
+                fo.write('<comment>%s</comment>\n' % (str(self.actions[x]['comment'])) )
                 fo.write('</description>\n')   
                 fo.write('</alternative>\n')
             fo.write('</alternatives>\n')
@@ -2154,12 +2154,12 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.write('<criterion id="%s" >\n' % (g) )
             fo.write('<description>\n')
             try:
-                fo.write('<name>%s</name>\n' % (unicode(criteria[g]['name'])) )
+                fo.write('<name>%s</name>\n' % (str(criteria[g]['name'])) )
             except:
                 fo.write('<name>%s</name>\n' % ('nameless') )
             fo.write('<type>%s</type>\n' % ('criterion'))
             try:
-                fo.write('<comment>%s</comment>\n' % (unicode(criteria[g]['comment'])) )
+                fo.write('<comment>%s</comment>\n' % (str(criteria[g]['comment'])) )
             except:
                 fo.write('<comment>%s</comment>\n' % ('no comment') )
             fo.write('<version>%s</version>\n' % ('performance') )
@@ -2282,7 +2282,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write('</description>\n')
         for g in criteriaList:
             fo.write('<criterionEvaluations>\n')
-            fo.write('<criterionID>'+unicode(g)+'</criterionID>\n')
+            fo.write('<criterionID>'+str(g)+'</criterionID>\n')
             try:
                 if self.criteria[g]['preferenceDirection'] == 'min':
                     pdir = Decimal('-1')
@@ -2293,7 +2293,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             for i in range(len(origActionsList)):
                 fo.write('<evaluation>\n')
                 fo.write('<alternativeID>')       
-                fo.write(unicode(origActionsList[i]))
+                fo.write(str(origActionsList[i]))
                 fo.write('</alternativeID>\n')                    
                 fo.write('<value><real>')
                 fo.write('%.2f' % (pdir*evaluation[g][origActionsList[i]]) )
@@ -2320,10 +2320,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 for cj in range(cn):
                     fo.write('<arc>\n')        
                     fo.write('<from><criterionID>')
-                    fo.write(unicode(criteriaList[ci]))
+                    fo.write(str(criteriaList[ci]))
                     fo.write('</criterionID></from>\n')                       
                     fo.write('<to><criterionID>')
-                    fo.write(unicode(criteriaList[cj]))
+                    fo.write(str(criteriaList[cj]))
                     fo.write('</criterionID></to>\n')                                             
                     fo.write('<value><real>%2.2f' % (corr[criteriaList[ci]][criteriaList[cj]]) )
                     fo.write('</real></value>\n')                       
@@ -2376,10 +2376,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             for y in origActionsList:
                 fo.write('<arc>\n')        
                 fo.write('<from><alternativeID>')
-                fo.write(unicode(x))
+                fo.write(str(x))
                 fo.write('</alternativeID></from>\n')                       
                 fo.write('<to><alternativeID>')
-                fo.write(unicode(y))
+                fo.write(str(y))
                 fo.write('</alternativeID></to>\n')
                 try:
                     if self.methodData['parameter']['valuationType'] == 'integer':
@@ -2420,17 +2420,17 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     fo.write('<comment>concordance degree:%.2f</comment>\n' % (arc[2]) )
                     fo.write('</description>\n')
                     fo.write('<from><alternativeID>')
-                    fo.write(unicode(arc[0]))
+                    fo.write(str(arc[0]))
                     fo.write('</alternativeID></from>\n')                       
                     fo.write('<to><alternativeID>')
-                    fo.write(unicode(arc[1]))
+                    fo.write(str(arc[1]))
                     fo.write('</alternativeID></to>\n')                                             
                     situations = veto[1]
                     for v in situations:
                         fo.write('<values>\n')
                         fo.write('<description>\n')
                         fo.write('<id>')
-                        fo.write(unicode(v[0]))
+                        fo.write(str(v[0]))
                         fo.write('</id>\n')
                         fo.write('<comment>')
                         if arc[2] > Med:
@@ -2504,9 +2504,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     fo.write('<choiceMember>\n')
                     fo.write('<alternativeID>')
                     if isinstance(x,frozenset):
-                        fo.write(unicode(self.actions[x]['name']))
+                        fo.write(str(self.actions[x]['name']))
                     else:
-                        fo.write(unicode(x))
+                        fo.write(str(x))
                     fo.write('</alternativeID>\n')
                     fo.write('</choiceMember>\n')
                 fo.write('</choiceMembersList>\n')
@@ -2610,9 +2610,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         fo.write('<choiceMember>\n')
                         fo.write('<alternativeID>')
                         if isinstance(x,frozenset):
-                            fo.write(unicode(self.actions[x]['name']))
+                            fo.write(str(self.actions[x]['name']))
                         else:
-                            fo.write(unicode(x))
+                            fo.write(str(x))
                         fo.write('</alternativeID>\n')
                         fo.write('</choiceMember>\n')
                     fo.write('</choiceMembersList>\n')
@@ -2687,7 +2687,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.close()
         
         if comment:
-            print 'File: ' + nameExt + ' saved !'
+            print('File: ' + nameExt + ' saved !')
 
 #####    XMCDA 2.0            
 
@@ -2703,7 +2703,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             category = 'Robust Rubis'
 
         if comment:
-            print '*----- saving digraph in XMCDA 2.0 format  -------------*'        
+            print('*----- saving digraph in XMCDA 2.0 format  -------------*')        
         nameExt = fileName+'.xmcda2'
         #nameExt = fileName+'.xml'
         fo = codecs.open(nameExt,'w',encoding='utf-8')
@@ -2723,7 +2723,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 fo.write('<?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"?>\n')
             else:
                 fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"? -->\n')     
-        fo.write('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n xsi:schemaLocation="http://www.decision-deck.org/2009/XMCDA-2.0.0 http://www.decision-deck.org/xmcda/_downloads/XMCDA-2.0.0.xsd"\n xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0" instanceID="%s">\n' % unicode(instanceID) )
+        fo.write('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n xsi:schemaLocation="http://www.decision-deck.org/2009/XMCDA-2.0.0 http://www.decision-deck.org/xmcda/_downloads/XMCDA-2.0.0.xsd"\n xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0" instanceID="%s">\n' % str(instanceID) )
 
         # write description
         try:
@@ -2735,19 +2735,19 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         except:
             projectID = fileName
             
-        fo.write('<projectReference id="%s" name="%s">\n' % (unicode(projectID),unicode(projectName)))
+        fo.write('<projectReference id="%s" name="%s">\n' % (str(projectID),str(projectName)))
         # titles
         if category == 'Rubis':
             title = 'Rubis Best Choice Recommendation'
         elif category == 'Robust Rubis':
             title = 'Condorcet Robustness of a Rubis Best Choice Recommendation'
-        fo.write('<%s>%s</%s>\n' % ('title', unicode(title),'title') )
+        fo.write('<%s>%s</%s>\n' % ('title', str(title),'title') )
         try:
-            fo.write('<%s>%s</%s>\n' % ('subTitle', unicode(self.description['title']),'subTitle') )
+            fo.write('<%s>%s</%s>\n' % ('subTitle', str(self.description['title']),'subTitle') )
         except:
             pass
         try:
-            fo.write('<%s>%s</%s>\n' % ('subSubTitle', unicode(self.description['subTitle']),'subSubTitle') )
+            fo.write('<%s>%s</%s>\n' % ('subSubTitle', str(self.description['subTitle']),'subSubTitle') )
         except:
             pass
         # rest of case description including the bibliography
@@ -2757,15 +2757,15 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     fo.write('<bibliography>\n')
                     for bibEntry in [x for x in self.description[entry]]:
                         if bibEntry == 'description':
-                            fo.write('<description><subSubTitle>%s</subSubTitle></description>\n' % (unicode(self.description['bibliography']['description']['subSubTitle'])) )
+                            fo.write('<description><subSubTitle>%s</subSubTitle></description>\n' % (str(self.description['bibliography']['description']['subSubTitle'])) )
                         else:
-                            fo.write('<bibEntry>%s</bibEntry>\n' % (unicode(self.description['bibliography'][bibEntry])) )
+                            fo.write('<bibEntry>%s</bibEntry>\n' % (str(self.description['bibliography'][bibEntry])) )
                     fo.write('</bibliography>\n')
                 elif entry != 'title' and entry != 'subTitle' and entry != 'subSubTitle' and entry != 'name' and entry != 'id' and entry != 'type':
-                    fo.write('<%s>%s</%s>\n' % (entry, unicode(self.description[entry]),entry) )
+                    fo.write('<%s>%s</%s>\n' % (entry, str(self.description[entry]),entry) )
         except:
-            fo.write('<author>%s</author>\n' % (unicode(author)) )
-            fo.write('<version>%s</version>\n' % (unicode(reference)) )
+            fo.write('<author>%s</author>\n' % (str(author)) )
+            fo.write('<version>%s</version>\n' % (str(reference)) )
         fo.write('</projectReference>\n')
 
         # write methodParameters
@@ -2827,11 +2827,11 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             except:
                 alternativeName=x
             
-            fo.write('<alternative id="%s" name="%s">\n' % (unicode(x),unicode(alternativeName)) )
+            fo.write('<alternative id="%s" name="%s">\n' % (str(x),str(alternativeName)) )
             fo.write('<description>\n')
             fo.write('<comment>')
             try:
-                fo.write(unicode(self.actions_orig[x]['comment'])) 
+                fo.write(str(self.actions_orig[x]['comment'])) 
             except:
                 fo.write('potential decision actions')
             fo.write('</comment>\n')
@@ -2852,9 +2852,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.write('<comment>Chordless odd circuits added to the original outranking digraph.</comment>\n')
             fo.write('</description>\n')                  
             for x in cocaActionsList:
-                fo.write('<alternative id="%s" name="%s">\n' % (unicode(self.actions[x]['name']),unicode(self.actions[x]['name'])) )
+                fo.write('<alternative id="%s" name="%s">\n' % (str(self.actions[x]['name']),str(self.actions[x]['name'])) )
                 fo.write('<description>\n')
-                fo.write('<comment>%s</comment>\n' % (unicode(self.actions[x]['comment'])) )
+                fo.write('<comment>%s</comment>\n' % (str(self.actions[x]['comment'])) )
                 fo.write('</description>\n')
                 fo.write('<type>fictive</type>\n')
                 fo.write('</alternative>\n')
@@ -2871,14 +2871,14 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write('</description>\n')       
         for g in criteriaList:
             try:
-                criterionName = unicode(criteria[g]['name'])
+                criterionName = str(criteria[g]['name'])
             except:
                 criterionName = 'nameless'
             
             fo.write('<criterion id="%s" name="%s" mcdaConcept="%s">\n' % (g,criterionName,'criterion') )
             fo.write('<description>\n')
             try:
-                fo.write('<comment>%s</comment>\n' % (unicode(criteria[g]['comment'])) )
+                fo.write('<comment>%s</comment>\n' % (str(criteria[g]['comment'])) )
             except:
                 fo.write('<comment>%s</comment>\n' % ('no comment') )
             fo.write('<version>%s</version>\n' % ('performance') )
@@ -2999,7 +2999,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write('</description>\n')
         for i in range(len(origActionsList)):
             fo.write('<alternativePerformances>\n')
-            fo.write('<alternativeID>'+unicode(origActionsList[i])+'</alternativeID>\n')
+            fo.write('<alternativeID>'+str(origActionsList[i])+'</alternativeID>\n')
             for g in criteriaList:
                 fo.write('<performance>\n')
                 fo.write('<criterionID>')       
@@ -3044,10 +3044,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 for cj in range(cn):
                     fo.write('<pair>\n')        
                     fo.write('<initial><criterionID>')
-                    fo.write(unicode(criteriaList[ci]))
+                    fo.write(str(criteriaList[ci]))
                     fo.write('</criterionID></initial>\n')                       
                     fo.write('<terminal><criterionID>')
-                    fo.write(unicode(criteriaList[cj]))
+                    fo.write(str(criteriaList[cj]))
                     fo.write('</criterionID></terminal>\n')                                             
                     fo.write('<value><real>%2.2f' % (corr[criteriaList[ci]][criteriaList[cj]]) )
                     fo.write('</real></value>\n')                       
@@ -3114,10 +3114,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             for y in origActionsList:
                 fo.write('<pair>\n')        
                 fo.write('<initial><alternativeID>')
-                fo.write(unicode(x))
+                fo.write(str(x))
                 fo.write('</alternativeID></initial>\n')                       
                 fo.write('<terminal><alternativeID>')
-                fo.write(unicode(y))
+                fo.write(str(y))
                 fo.write('</alternativeID></terminal>\n')
                 try:
                     if self.methodData['parameter']['valuationType'] == 'integer':
@@ -3162,14 +3162,14 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     fo.write('<comment>concordance degree:%.2f</comment>\n' % (arc[2]) )
                     fo.write('</description>\n')
                     fo.write('<initial><alternativeID>')
-                    fo.write(unicode(arc[0]))
+                    fo.write(str(arc[0]))
                     fo.write('</alternativeID></initial>\n')                       
                     fo.write('<terminal><alternativeID>')
-                    fo.write(unicode(arc[1]))
+                    fo.write(str(arc[1]))
                     fo.write('</alternativeID></terminal>\n')                                             
                     situations = veto[1]
                     for v in situations:
-                        fo.write('<values id="%s">\n' % ( unicode(v[0]) ) )
+                        fo.write('<values id="%s">\n' % ( str(v[0]) ) )
                         fo.write('<description>\n')
                         fo.write('<comment>')
                         if arc[2] > Med:
@@ -3238,9 +3238,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     fo.write('<element>\n')
                     fo.write('<alternativeID>')
                     if isinstance(x,frozenset):
-                        fo.write(unicode(self.actions[x]['name']))
+                        fo.write(str(self.actions[x]['name']))
                     else:
-                        fo.write(unicode(x))
+                        fo.write(str(x))
                     fo.write('</alternativeID>\n')
                     fo.write('</element>\n')
                 if category == 'Robust Rubis':
@@ -3300,9 +3300,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         fo.write('<element>\n')
                         fo.write('<alternativeID>')
                         if isinstance(x,frozenset):
-                            fo.write(unicode(self.actions[x]['name']))
+                            fo.write(str(self.actions[x]['name']))
                         else:
-                            fo.write(unicode(x))
+                            fo.write(str(x))
                         fo.write('</alternativeID>\n')
                         fo.write('</element>\n')
                     if category == 'Robust Rubis':
@@ -3336,7 +3336,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.close()
         
         if comment:
-            print 'File: ' + nameExt + ' saved !'
+            print('File: ' + nameExt + ' saved !')
 
 
 
@@ -3397,13 +3397,13 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         prints all veto situations observed in the OutrankingDigraph instance.
         """
         if Comments:
-            print '*----  Veto situations ---'
+            print('*----  Veto situations ---')
         nv, realveto = self.computeVetosShort()
         vetos = self.vetos
         vetos.sort()
         if realVetosOnly:
             if Comments:
-                print self.valuationdomain
+                print(self.valuationdomain)
             cutveto = 0
             if cutLevel == None:
                 cutLevel = self.valuationdomain['med']
@@ -3411,25 +3411,25 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 cutLevel = Decimal(str(cutLevel))
             if cutLevel > self.valuationdomain['max']:
                 if Comments:
-                    print "Error! min = %.3f, max = %.3f" % (self.valuationdomain['min'],self.valuationdomain['max'])
+                    print("Error! min = %.3f, max = %.3f" % (self.valuationdomain['min'],self.valuationdomain['max']))
                 return None
             if Comments:
-                print 'Real vetos at cut level: %.3f' % (cutLevel)
+                print('Real vetos at cut level: %.3f' % (cutLevel))
             for i in range(nv):
                 if self.vetos[i][0][2] > cutLevel:
                     if Comments:
-                        print 'self.vetos[i][0][2]=',self.vetos[i][0][2]
-                        print str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1])
+                        print('self.vetos[i][0][2]=',self.vetos[i][0][2])
+                        print(str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1]))
                     cutveto += 1
             return nv,realveto,cutveto
         else:
             if Comments:
-                print 'number of potential vetos: %d ' % (nv)
+                print('number of potential vetos: %d ' % (nv))
             for i in range(nv):
                 if Comments:
-                    print str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1])
+                    print(str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1]))
             if Comments:
-                print 'number of real vetos: %d' % (realveto)
+                print('number of real vetos: %d' % (realveto))
             return nv,realveto
 
     def computeVetos(self,cutLevel=None,realVetosOnly = False):
@@ -3585,7 +3585,7 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         """
         Debug = False
         if Debug:
-            print 'd,ind,wp,p', d,ind,wp,p
+            print('d,ind,wp,p', d,ind,wp,p)
         if p != None:
             if   d < -p:
                 return Decimal('0')
@@ -3700,7 +3700,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         self.methodData = methodData
         
         # construct outranking relation
-        actionsKeys = self.actions.keys()
+        actionsKeys = list(self.actions.keys())
         self.relation = self.constructRelation(criteria,perfTab.evaluation,initial=actionsKeys,terminal=actionsKeys,hasNoVeto=hasNoVeto,hasBipolarVeto=hasBipolarVeto,hasSymmetricThresholds=True)
 
         # insert performance Data
@@ -3902,12 +3902,12 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                         vetoes = [-veto[c][0] for c in veto if veto[c][0] > Decimal('-1')]
                         negativeVetoes = [negativeVeto[c][0] for c in negativeVeto if negativeVeto[c][0] > Decimal('-1')]
                         if Debug:
-                            print 'vetoes = ', vetoes
-                            print 'negativeVetoes = ', negativeVetoes
+                            print('vetoes = ', vetoes)
+                            print('negativeVetoes = ', negativeVetoes)
                         omaxList = [concordindex] + vetoes + negativeVetoes
                         outrankindex = self.omax(omaxList,Debug=Debug)
                         if Debug:
-                            print 'a b outrankindex = ', a,b, outrankindex
+                            print('a b outrankindex = ', a,b, outrankindex)
                     else:
                         # hasBipolarVeto == False
                         vetoIndex = Decimal('-1.0')
@@ -4009,7 +4009,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             fo.write('\n')
         fo.close()
         if Comments:
-            print 'Single Criteria Netflows saved on file %s' % (fileName)
+            print('Single Criteria Netflows saved on file %s' % (fileName))
         
     def localConcordance(self,d,ind,wp,p):
         """
@@ -4404,7 +4404,7 @@ class BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             fo.write('\n')
         fo.close()
         if Comments:
-            print 'Single Criteria Netflows saved on file %s' % (fileName)
+            print('Single Criteria Netflows saved on file %s' % (fileName))
         
     def localConcordance(self,d,ind,wp,p):
         """
@@ -4572,9 +4572,9 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
             gx = BipolarOutrankingDigraph(t,coalition=[x])
             
             if Debug:
-                print 'criterion : ', x, t.criteria[x]['weight']
+                print('criterion : ', x, t.criteria[x]['weight'])
                 gx.showRelationTable()
-                print gx.vetos
+                print(gx.vetos)
             else:
                 pass
                 
@@ -4587,7 +4587,7 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
         for x in criteriaKey:
            for v in criteriaVeto[x]:
                 if Debug:
-                    print '===>>>> v :', v,v[0][1],v[0][2]
+                    print('===>>>> v :', v,v[0][1],v[0][2])
                 else:
                     pass
                 try:
@@ -4600,7 +4600,7 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
                         veto[v[0][0]][v[0][1]] = v[0][2]
                         
         if Debug:
-            print 'Vetoes ', veto
+            print('Vetoes ', veto)
         else:
             pass
 
@@ -4638,8 +4638,8 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
                     else:
                         quantile = Med
                 if Debug:
-                    print 'x,y,n,k', x,y,n,k
-                    print characteristics,
+                    print('x,y,n,k', x,y,n,k)
+                    print(characteristics, end=' ')
                 else:
                     pass
 
@@ -4999,19 +4999,19 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         """
         prints the relation valuation in ##.## format.
         """
-        print '* ---- Relation -----',
+        print('* ---- Relation -----', end=' ')
         for x in self.actions:
-            print
+            print()
             for y in self.actions:
-                print '('+str(x)+', '+str(y)+') = '+' %d ' % (self.relation[x][y])
-        print
+                print('('+str(x)+', '+str(y)+') = '+' %d ' % (self.relation[x][y]))
+        print()
 
 
     def savePy2Gprolog(self,name='temp'):
         """
         save digraph in gprolog version
         """
-        print '*----- saving digraph in gprolog format  -------------*'        
+        print('*----- saving digraph in gprolog format  -------------*')        
         Name = name+'.pl'
         fo = open(Name,'w')
         fo.write('/*------- data set ---------*\n')
@@ -5239,7 +5239,7 @@ class EquiSignificanceMajorityOutrankingDigraph(BipolarOutrankingDigraph,Perform
             for y in actionsList:
                 characteristicVector[x][y] = []
         if Debug:
-            print characteristicVector
+            print(characteristicVector)
         coalitionsRelation = {}
         for i in range(k):
             _g = BipolarOutrankingDigraph(perfTab,coalition=weightPreorder[i])
@@ -5264,7 +5264,7 @@ class EquiSignificanceMajorityOutrankingDigraph(BipolarOutrankingDigraph,Perform
                 else:
                     relation[x][y] = Med
                 if Debug:
-                    print x,y,relation[x][y]
+                    print(x,y,relation[x][y])
 
         return relation
                 
@@ -5293,7 +5293,7 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         
         weightPreorder = self.computeWeightPreorder()
         if Debug:
-            print 'weightPreorder=', weightPreorder
+            print('weightPreorder=', weightPreorder)
         #  constructing the bipolar semiotical references lsr
         lsr = []
         for c in criteria:
@@ -5317,8 +5317,8 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             k = k + 1
         losr.sort()
         if Debug:
-            print 'lsr', lsr            
-            print 'losr', losr
+            print('lsr', lsr)            
+            print('losr', losr)
         actions = [x for x in self.actions]
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
@@ -5389,8 +5389,8 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                         veto = veto + self.localVeto(d,wvv,vv)
                         counter = self.localConcordance(d,ind,wp,p)
                         if Debug:
-                            print '--> c,a,b,evaluation[c][a],evaluation[c][b], d', c,a,b,evaluation[c][a],evaluation[c][b], d
-                            print 'ind, wp, p, counter, veto', ind, wp, p, counter, veto
+                            print('--> c,a,b,evaluation[c][a],evaluation[c][b], d', c,a,b,evaluation[c][a],evaluation[c][b], d)
+                            print('ind, wp, p, counter, veto', ind, wp, p, counter, veto)
                         
                         v[c + '+'] = v[c + '+'] + counter
                         v[c + '-'] = v[c + '-'] + (Decimal('1.0') - counter)
@@ -5411,7 +5411,7 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     dcd.append((da[k][0],dcv))
                     k = k + 1
                 if Debug:
-                    print 'dcd', dcd
+                    print('dcd', dcd)
                 # negative distribution	 ------------------------
                 vn = {}
                 for i in lsr:
@@ -5472,7 +5472,7 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     dcg.append((dan[k][0],dcv))
                     k = k + 1
                 if Debug:
-                    print 'dcg' , dcg
+                    print('dcg' , dcg)
                 #  first order stochastic dominance
                 i = 0
                 j = 0
@@ -5523,8 +5523,8 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         """
         Debug = False
         if Debug:
-            print 'ordinal concordance locla concordance'
-            print 'd,ind,wp,p', d,ind,wp,p
+            print('ordinal concordance locla concordance')
+            print('d,ind,wp,p', d,ind,wp,p)
         if p != None:
             if   d <= -p:
                 return Decimal('0.0')
@@ -5687,8 +5687,8 @@ class UnanimousOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         """
         Debug = False
         if Debug:
-            print 'ordinal concordance locla concordance'
-            print 'd,ind,wp,p', d,ind,wp,p
+            print('ordinal concordance locla concordance')
+            print('d,ind,wp,p', d,ind,wp,p)
         if p != None:
             if   d <= -p:
                 return Decimal('-1.0')
@@ -5766,17 +5766,17 @@ class NewRobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         unanimous.recodeValuation(-1,1)
         
         if Debug:
-            print 'unanimous'
-            print unanimous.valuationdomain
+            print('unanimous')
+            print(unanimous.valuationdomain)
             unanimous.showRelationTable(hasIntegerValuation=True)
-            print 'equisignificant'
-            print equisignificant.valuationdomain
+            print('equisignificant')
+            print(equisignificant.valuationdomain)
             equisignificant.showRelationTable()
-            print 'ordinal'
-            print ordinal.valuationdomain
+            print('ordinal')
+            print(ordinal.valuationdomain)
             ordinal.showRelationTable()
-            print 'cardinal'
-            print cardinal.valuationdomain
+            print('cardinal')
+            print(cardinal.valuationdomain)
             cardinal.showRelationTable()
             
         try:
@@ -5813,7 +5813,7 @@ class NewRobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         cardinalRelation = self.cardinalRelation
         
         if Debug:
-            print self.valuationdomain
+            print(self.valuationdomain)
             
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
@@ -5873,14 +5873,14 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         unanimous = UnanimousOutrankingDigraph(filePerfTab)
         
         if Debug:
-            print 'unanimous'
-            print unanimous.valuationdomain
+            print('unanimous')
+            print(unanimous.valuationdomain)
             unanimous.showRelationTable()
-            print 'ordinal'
-            print ordinal.valuationdomain
+            print('ordinal')
+            print(ordinal.valuationdomain)
             ordinal.showRelationTable()
-            print 'cardinal'
-            print cardinal.valuationdomain
+            print('cardinal')
+            print(cardinal.valuationdomain)
             cardinal.showRelationTable()
             
         try:
@@ -5911,7 +5911,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         Debug = False
 
         if Debug:
-            print self.valuationdomain
+            print(self.valuationdomain)
             
         uMin = unanimous.valuationdomain['min']
         uMed = unanimous.valuationdomain['med']
@@ -6058,14 +6058,14 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                 p0.append(str(x)+str(y))
                                 setP0.add(pairwiseComparison[xy])
             if Comments:
-                print 'counts: 2  \t-2 \t1  \t-1 \t0'
-                print '        %d \t%d \t%d \t%d \t%d\n' % (count2,countm2,count1,countm1,count0)
-                print '        %d \t%d \t%d \t%d \t%d\n' % (countSave2,countSavem2,countSave1,countSavem1,countSave0)
-                print ' -----------------------------------------------------------'
-                print '        %d \t%d \t%d \t%d \t%d\n' % (count2-countSave2,countm2-countSavem2,count1-countSave1,countm1-countSavem1,count0-countSave0)
+                print('counts: 2  \t-2 \t1  \t-1 \t0')
+                print('        %d \t%d \t%d \t%d \t%d\n' % (count2,countm2,count1,countm1,count0))
+                print('        %d \t%d \t%d \t%d \t%d\n' % (countSave2,countSavem2,countSave1,countSavem1,countSave0))
+                print(' -----------------------------------------------------------')
+                print('        %d \t%d \t%d \t%d \t%d\n' % (count2-countSave2,countm2-countSavem2,count1-countSave1,countm1-countSavem1,count0-countSave0))
                 totalcount = count2+ countm2+count1+ countm1+count0
                 totalcountSave = countSave2+countSavem2+countSave1+countSavem1+countSave0
-                print 'totals: counts: %d, countsUnique: \t%d, reduction: %d\n' %(totalcount,totalcountSave,totalcount-totalcountSave)
+                print('totals: counts: %d, countsUnique: \t%d, reduction: %d\n' %(totalcount,totalcountSave,totalcount-totalcountSave))
         else:
             for x in actionsList:
                 for y in actionsList:
@@ -6156,7 +6156,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.computeRubyChoice()
 
         if comment:
-            print '*----- saving outranking robustness digraph in XML format  -------------*'        
+            print('*----- saving outranking robustness digraph in XML format  -------------*')        
         nameExt = name+'.xml'
         fo = codecs.open(nameExt,'w',encoding='utf-8')
         fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
@@ -6166,18 +6166,18 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         else:
             fo.write('<!-- ?xml-stylesheet type="text/xsl" href="robustRubisOutrankingDigraph.xsl"? -->\n')
         fo.write('<rubisOutrankingDigraph xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="rubisOutrankingDigraph.xsd"')
-        fo.write(' category="' + unicode(category)+'" subcategory="'+unicode(subcategory)+'">\n')
+        fo.write(' category="' + str(category)+'" subcategory="'+str(subcategory)+'">\n')
 
         fo.write('<header>\n')
         fo.write('<comment>header declaration </comment>\n')
         fo.write('<name>')
-        fo.write(unicode(nameExt))
+        fo.write(str(nameExt))
         fo.write('</name>\n')       
         fo.write('<author>')
-        fo.write(unicode(author))
+        fo.write(str(author))
         fo.write('</author>\n')
         fo.write('<reference>')
-        fo.write(unicode(reference))
+        fo.write(str(reference))
         fo.write('</reference>\n')
         fo.write('</header>')
 
@@ -6186,16 +6186,16 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         fo.write('<actions>\n')
         fo.write('<comment>Potential decision actions </comment>\n')
         for x in actionsOrigList:
-            fo.write('<action id="'+unicode(x)+'">\n')
+            fo.write('<action id="'+str(x)+'">\n')
             fo.write('<name>')
             try:
-                fo.write(unicode(self.actions_orig[x]['name']))
+                fo.write(str(self.actions_orig[x]['name']))
             except:
                 pass
             fo.write('</name>\n')
             fo.write('<comment>')
             try:
-                fo.write(unicode(self.actions_orig[x]['comment'])) 
+                fo.write(str(self.actions_orig[x]['comment'])) 
             except:
                 pass
             fo.write('</comment>\n')
@@ -6207,16 +6207,16 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         criteriaList = [g for g in self.criteria]
         criteriaList.sort()
         for g in criteriaList:
-            fo.write('<criterion id="'+unicode(g)+'" category="performance">\n')
+            fo.write('<criterion id="'+str(g)+'" category="performance">\n')
             fo.write('<name>')
             try:
-                fo.write(unicode(self.criteria[g]['name']))
+                fo.write(str(self.criteria[g]['name']))
             except:
                 pass
             fo.write('</name>\n')
             fo.write('<comment>')
             try:
-                fo.write(unicode(self.criteria[g]['comment'])) 
+                fo.write(str(self.criteria[g]['comment'])) 
             except:
                 pass
             fo.write('</comment>\n')
@@ -6265,11 +6265,11 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         fo.write('<comment>performance table </comment>\n')
         for g in criteriaList:
             fo.write('<evaluation>\n')
-            fo.write('<criterionID>'+unicode(g)+'</criterionID>\n')
+            fo.write('<criterionID>'+str(g)+'</criterionID>\n')
             for x in actionsOrigList:
                 fo.write('<performance>\n')
                 fo.write('<actionID>')       
-                fo.write(unicode(x))
+                fo.write(str(x))
                 fo.write('</actionID>\n')                    
                 fo.write('<value>')
 ##                 fo.write(str(evaluation[g][x]))
@@ -6302,10 +6302,10 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             for y in actionsOrigList:
                 fo.write('<arc>\n')        
                 fo.write('<initialActionID>')
-                fo.write(unicode(x))
+                fo.write(str(x))
                 fo.write('</initialActionID>\n')                       
                 fo.write('<terminalActionID>')
-                fo.write(unicode(y))
+                fo.write(str(y))
                 fo.write('</terminalActionID>\n')                                             
                 fo.write('<value>')
 ##                 fo.write(str(relation[x][y]))
@@ -6323,10 +6323,10 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 arc = veto[0]
                 fo.write('<arc>\n')
                 fo.write('<initialActionID>')
-                fo.write(unicode(arc[0]))
+                fo.write(str(arc[0]))
                 fo.write('</initialActionID>\n')                       
                 fo.write('<terminalActionID>')
-                fo.write(unicode(arc[1]))
+                fo.write(str(arc[1]))
                 fo.write('</terminalActionID>\n')                                             
                 fo.write('<concordanceDegree>')
                 fo.write('%.2f' % (arc[2]))
@@ -6337,7 +6337,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 for v in situations:
                     fo.write('<vetoSituation>\n')
                     fo.write('<criterionID>')
-                    fo.write(unicode(v[0]))
+                    fo.write(str(v[0]))
                     fo.write('</criterionID>\n')
                     fo.write('<performanceDifference>')
                     fo.write('%.2f' % (v[1][1]))
@@ -6379,7 +6379,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             fo.write('<cocaActions>')
             fo.write("<comment>weak COCA digraph actions' declaration </comment>\n")
             for x in cocaActionsList:
-                fo.write('<cocaAction id="'+unicode(self.actions[x]['name'])+'">\n')
+                fo.write('<cocaAction id="'+str(self.actions[x]['name'])+'">\n')
                 fo.write('<name>')
                 fo.write('chordless odd circuit')
                 fo.write('</name>\n')
@@ -6405,7 +6405,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 fo.write('<choiceActions>\n')
                 for x in ch[5]:
                     fo.write('<actionID>')
-                    fo.write(unicode(x))
+                    fo.write(str(x))
                     fo.write('</actionID>\n')
                 fo.write('</choiceActions>\n')              
                 fo.write('</choiceSet>\n')
@@ -6427,7 +6427,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 fo.write('<choiceActions>\n')
                 for x in ch[5]:
                     fo.write('<actionID>')
-                    fo.write(unicode(x))
+                    fo.write(str(x))
                     fo.write('</actionID>\n')
                 fo.write('</choiceActions>\n')              
                 fo.write('</choiceSet>\n')
@@ -6439,7 +6439,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         
         fo.close()
         if comment:
-            print 'File: ' + nameExt + ' saved !'
+            print('File: ' + nameExt + ' saved !')
 
     
             
@@ -6535,21 +6535,21 @@ class DissimilarityOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         """
         specialize the general showAll method for the dissimilarity case
         """
-        print '*----- show detail -------------*'
-        print 'Digraph          :', self.name
-        print 'Criteria         :', self.actions
-        print 'Valuation domain :', self.valuationdomain
-        print '*----  evaluated actions per criteria -----*'
-        print self.criteria
-        print '*----  evaluation tableau -----*'
+        print('*----- show detail -------------*')
+        print('Digraph          :', self.name)
+        print('Criteria         :', self.actions)
+        print('Valuation domain :', self.valuationdomain)
+        print('*----  evaluated actions per criteria -----*')
+        print(self.criteria)
+        print('*----  evaluation tableau -----*')
         for g in self.actions:
-            print g, ': ', self.evaluation[g]
-        print '*----  dissimilarity between criteria -----*'       
-        print self.relation
+            print(g, ': ', self.evaluation[g])
+        print('*----  dissimilarity between criteria -----*')       
+        print(self.relation)
         self.showComponents()
-        print '*----  neighbourhoods -----*'       
-        print 'Gamma        :', self.gamma
-        print 'Not Gamma    :', self.notGamma
+        print('*----  neighbourhoods -----*')       
+        print('Gamma        :', self.gamma)
+        print('Not Gamma    :', self.notGamma)
 
 class MultiCriteriaDissimilarityDigraph(OutrankingDigraph,PerformanceTableau):
     """
@@ -6651,7 +6651,7 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph,PerformanceTableau):
             elif d > h:
                 return Decimal('1.0')
             else:
-                print 'Error: should never come here !!!'
+                print('Error: should never come here !!!')
         elif wp != None:
             if d < wp:
                 return Decimal('-1.0')
@@ -6681,7 +6681,7 @@ if __name__ == "__main__":
     from linearOrders import KemenyOrder
     #from sortingDigraphs import SortingDigraph
     
-    print '*-------- Testing classes and methods -------'
+    print('*-------- Testing classes and methods -------')
 
     #t = RandomCoalitionsPerformanceTableau(numberOfActions=10,weightDistribution='equiobjectives')
     t = RandomCBPerformanceTableau(numberOfActions=15,weightDistribution='equiobjectives')
@@ -6691,20 +6691,20 @@ if __name__ == "__main__":
     g = BipolarOutrankingDigraph(t)
     g.recodeValuation(-1.0,1.0)
     g.showRelationTable()
-    print 'Strict Condorcet winners: ', g.condorcetWinners()
-    print '(Weak) Condorcet winners: ', g.weakCondorcetWinners()
+    print('Strict Condorcet winners: ', g.condorcetWinners())
+    print('(Weak) Condorcet winners: ', g.weakCondorcetWinners())
     
-    print '*Ranking by Choosing from the outranking digraph*'
+    print('*Ranking by Choosing from the outranking digraph*')
     t0 = time()
     g.computeRankingByChoosing(CoDual=False,Debug=False)
     g.showRankingByChoosing()
     gRankingByChoosingRelation = g.computeRankingByChoosingRelation()
     ## gmedrbc = g.computeOrdinalCorrelation(gRankingByChoosingRelation,MedianCut=True)
     ## print 'Correlation with median cut outranking: %.3f (%.3f)' % (gmedrbc['correlation'],gmedrbc['determination'])
-    print 'Execution time:', time()-t0, 'sec.'
+    print('Execution time:', time()-t0, 'sec.')
 
-    print
-    print '*Ranking by choosing from the codual outranking digraph*'
+    print()
+    print('*Ranking by choosing from the codual outranking digraph*')
     t0 = time()
     g.computeRankingByChoosing(CoDual=True,Debug=False)
     t1 = time()
@@ -6712,22 +6712,22 @@ if __name__ == "__main__":
     gcdRankingByChoosingRelation = g.computeRankingByChoosingRelation()
     ## gmedrbc = g.computeOrdinalCorrelation(gcdRankingByChoosingRelation,MedianCut=True)
     ## print 'Correlation with median cut outranking: %.3f (%.3f)' % (gmedrbc['correlation'],gmedrbc['determination'])
-    print 'Execution time:', t1-t0, 'sec.'
+    print('Execution time:', t1-t0, 'sec.')
 
-    print
-    print '*Ranking from Quantile Sorting*'
+    print()
+    print('*Ranking from Quantile Sorting*')
     t.computeQuantileSort()
     t.showQuantileSort()
     qsr = g.computeQuantileSortRelation()
     corr = g.computeBipolarCorrelation(qsr)
-    print 'Bipolar correlation of quantile sorting with outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination'])
+    print('Bipolar correlation of quantile sorting with outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination']))
     corr = g.computeBipolarCorrelation(qsr,MedianCut=True)
-    print 'Bipolar correlation of quantile sorting with median cut outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination'])
+    print('Bipolar correlation of quantile sorting with median cut outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination']))
 
-    print
-    print '*Iterating ranking by choosing after chordless odd circuits elimination*'
+    print()
+    print('*Iterating ranking by choosing after chordless odd circuits elimination*')
     g.iterateRankingByChoosing(Comments=True,Debug=False)
-    print g.computePrudentBestChoiceRecommendation()
+    print(g.computePrudentBestChoiceRecommendation())
     
 #############################
 # Log record for changes:

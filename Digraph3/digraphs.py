@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # Python implementation of digraphs 
-# Current revision $Revision: 1.697 $
-# Copyright (C) 2006-2012  Raymond Bisdorff
+# Baes on Python 2 $Revision: 1.697 $
+# Copyright (C) 2006-2013  Raymond Bisdorff
 #
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -20,8 +20,8 @@
 #
 #######################
 
-__version__ = "$Revision: 1.697 $"
-# $Source: /home/cvsroot/Digraph/digraphs.py,v $
+__version__ = "Branch: 3.3 $"
+# ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
 from digraphs import *
 from perfTabs import *
@@ -64,7 +64,7 @@ def powerset(S):
 try:
     from xml.sax import *
 except:
-    print 'XML extension will not work with this Python version!'
+    print('XML extension will not work with this Python version!')
 
 class _XMLDigraphHandler(ContentHandler):
     """
@@ -210,7 +210,7 @@ class Digraph(object):
             self.notGamma = self.notGammaSets()          
         else:
             fileName = file+'.py'
-            execfile(fileName)
+            exec(compile(open(fileName).read(), fileName, 'exec'))
             self.name = file
             self.actions = locals()['actionset']
             self.order = len(self.actions)
@@ -275,7 +275,7 @@ class Digraph(object):
                 else:
                     g.edges[vertex] = gMed                    
                 if Debug:
-                    print 'x,y,self.relation[x][y],self.relation[y][x],vertex,g.edges[vertex]', x,y,self.relation[x][y],self.relation[y][x],vertex,g.edges[vertex]
+                    print('x,y,self.relation[x][y],self.relation[y][x],vertex,g.edges[vertex]', x,y,self.relation[x][y],self.relation[y][x],vertex,g.edges[vertex])
         g.gamma = g.gammaSets()
         return g
 
@@ -294,7 +294,7 @@ class Digraph(object):
         for x in actions:
             for y in actions:
                 if Debug:
-                    print x,y, relation[x][y],relation[y][x],
+                    print(x,y, relation[x][y],relation[y][x], end=' ')
                 if x != y:
                     if relation[x][y] > self.valuationdomain['med']:
                         if relation[y][x] > self.valuationdomain['med']:
@@ -318,7 +318,7 @@ class Digraph(object):
                         else:
                             counts['?'] += 1
                 if Debug:
-                    print counts
+                    print(counts)
         nd = Decimal(str(n))
         if nd != Decimal('0'):
             counts['<'] = Decimal(str(counts['<']))/(nd*(nd-1))
@@ -364,13 +364,13 @@ class Digraph(object):
             for ch in currGcd.goodChoices:
                 k1 = currGcd.flatChoice(ch[5])
                 if Debug:
-                    print ch[5],k1
+                    print(ch[5],k1)
                 ck1 = list(set(currG.actions)-set(k1))
                 if len(ck1) > 0:
                     j += 1
                     k1Outranking = currG.computePairwiseClusterComparison(k1,ck1)
                     if Debug:
-                        print 'good', j, ch[5], k1, k1Outranking
+                        print('good', j, ch[5], k1, k1Outranking)
                     #bestChoiceCandidates.append((k1Outranking['P+'],k1))
                     bestChoiceCandidates.append( ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 ) )
                 else:
@@ -385,7 +385,7 @@ class Digraph(object):
                 #currGcd.save('currGcd_errorBest')
                 bestChoice = (self.valuationdomain['med'],[])
             if Debug:
-                print 'bestChoice', i, bestChoice, bestChoiceCandidates
+                print('bestChoice', i, bestChoice, bestChoiceCandidates)
 
             #currGcd.computeBadChoices(Comments=Debug)
             worstChoiceCandidates = []
@@ -393,13 +393,13 @@ class Digraph(object):
             for ch in currGcd.badChoices:
                 k1 = currGcd.flatChoice(ch[5])
                 if Debug:
-                    print ch[5],k1
+                    print(ch[5],k1)
                 ck1 = list(set(currG.actions)-set(k1))
                 if len(ck1) > 0:
                     j += 1
                     k1Outranked = currG.computePairwiseClusterComparison(k1,ck1)
                     if Debug:
-                        print 'worst', j, ch[5], k1, k1Outranked
+                        print('worst', j, ch[5], k1, k1Outranked)
                     worstChoiceCandidates.append( ( min(-k1Outranked['P+'],k1Outranked['P-']), k1 ) )
                 else:
                     worstChoiceCandidates.append((self.valuationdomain['max'],k1))
@@ -411,7 +411,7 @@ class Digraph(object):
                 #currGcd.save('currGcd_errorWorst')
                 worstChoice=(self.valuationdomain['med'],[])
             if Debug:
-                print 'worstChoice', i, worstChoice, worstChoiceCandidates
+                print('worstChoice', i, worstChoice, worstChoiceCandidates)
 
             if (bestChoice[1] != [] or worstChoice[1] != []):
                 rankingByChoosing.append((bestChoice,worstChoice))
@@ -429,12 +429,12 @@ class Digraph(object):
         if (bestChoice[1] == [] and worstChoice[1] == []):
             #### only a singleton choice or a failure quadruple left to rank
             if Debug:
-                print bestChoice,worstChoice
+                print(bestChoice,worstChoice)
             bestChoice = (self.valuationdomain['max'],remainingActions)
             worstChoice = (self.valuationdomain['max'],remainingActions)
             rankingByChoosing.append((bestChoice,worstChoice))            
             if Debug:
-                print rankingByChoosing
+                print(rankingByChoosing)
         elif len(remainingActions) == 2:
             i += 1
             currG.actions = remainingActions
@@ -449,13 +449,13 @@ class Digraph(object):
             for ch in currGcd.goodChoices:
                 k1 = currGcd.flatChoice(ch[5])
                 if Debug:
-                    print ch[5],k1
+                    print(ch[5],k1)
                 ck1 = list(set(currG.actions)-set(k1))
                 if len(ck1) > 0:
                     j += 1
                     k1Outranking = currG.computePairwiseClusterComparison(k1,ck1)
                     if Debug:
-                        print 'good', j, ch[5], k1, k1Outranking
+                        print('good', j, ch[5], k1, k1Outranking)
                     #bestChoiceCandidates.append((k1Outranking['P+'],k1))
                     bestChoiceCandidates.append( ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 ) )
                 else:
@@ -468,11 +468,11 @@ class Digraph(object):
                 #currGcd.save('currGcd_errorBest')
                 bestChoice = (self.valuationdomain['med'],[])
             if Debug:
-                print 'bestChoice', i, bestChoice, bestChoiceCandidates
+                print('bestChoice', i, bestChoice, bestChoiceCandidates)
             ## ### unique worst choice left
             k1 = list(set(currG.actions)-set(bestChoice[1]))
             if Debug:
-                print 'singleton worst choice left',k1
+                print('singleton worst choice left',k1)
             if len(k1) > 0:
                 ck1 = list(set(currG.actions)-set(k1))
                 k1Outranked = currG.computePairwiseClusterComparison(k1,ck1)
@@ -480,18 +480,18 @@ class Digraph(object):
             else:
                 worstChoice = (self.valuationdomain['max'],bestChoice[1])
             if Debug:
-                print 'worstChoice', i, worstChoice
+                print('worstChoice', i, worstChoice)
             rankingByChoosing.append((bestChoice,worstChoice))
             
         elif len(remainingActions) == 1:
             #### only a singleton choice or a failure quadruple left to rank
             if Debug:
-                print bestChoice,worstChoice
+                print(bestChoice,worstChoice)
             bestChoice = (self.valuationdomain['max'],remainingActions)
             worstChoice = (self.valuationdomain['max'],remainingActions)
             rankingByChoosing.append((bestChoice,worstChoice))            
             if Debug:
-                print rankingByChoosing
+                print(rankingByChoosing)
         self.rankingByChoosing = {'CoDual': CoDual, 'result': rankingByChoosing}
         return {'CoDual': CoDual, 'result': rankingByChoosing}
 
@@ -508,26 +508,26 @@ class Digraph(object):
 
         qualmaj0 = gcd.valuationdomain['med']
         if Comments:
-            print 'Ranking by choosing and rejecting after progressive cut elimination of chordless odd circuits'
-            print 'Initial determinateness of the outranking relation: %.3f' % self.computeDeterminateness()
+            print('Ranking by choosing and rejecting after progressive cut elimination of chordless odd circuits')
+            print('Initial determinateness of the outranking relation: %.3f' % self.computeDeterminateness())
             i = 0
         qualmaj = gcd.minimalValuationLevelForCircuitsElimination(Debug=Debug,Comments=Comments)
         self.rankingByChoosing = None
         while qualmaj > qualmaj0:
             if Comments:
                 i += 1
-                print '--> Iteration %d' % (i)
+                print('--> Iteration %d' % (i))
                 t0 = time()               
             if qualmaj < gcd.valuationdomain['max']:
                 pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
             else:
                 pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
             if Comments:
-                print 'Polarised determinateness = %.3f' % pg.computeDeterminateness()
+                print('Polarised determinateness = %.3f' % pg.computeDeterminateness())
             self.rankingByChoosing = pg.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
             if Comments:
                 self.showRankingByChoosing()
-                print 'Execution time:', time()-t0, 'sec.'
+                print('Execution time:', time()-t0, 'sec.')
                 ## pgRankingByChoosingRelation = self.computeRankingByChoosingRelation()
                 ## corr = self.computeOrdinalCorrelation(pgRankingByChoosingRelation)
                 ## print 'Ordinal (Kendall) correlation with outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination'])
@@ -552,7 +552,7 @@ class Digraph(object):
             self.rankingByChoosing['result'][0][0][1].sort()
             return self.rankingByChoosing['result'][0][0][1]
         except:
-            print "Error: no ranking by choosing result !!"
+            print("Error: no ranking by choosing result !!")
             return None
         
     def computePreorderRelation(self,preorder,Debug=False):
@@ -564,7 +564,7 @@ class Digraph(object):
         Max = Decimal('1')
         Med = Decimal('0')
         Min = Decimal('-1')
-        actions = self.actions.keys()
+        actions = list(self.actions.keys())
         currentActions = set(actions)
         preorderRelation = {}
         for x in actions:
@@ -575,7 +575,7 @@ class Digraph(object):
         for eqcl in preorder:
             currRest = currentActions - set(eqcl)
             if Debug:
-                print currentActions, eqcl, currRest
+                print(currentActions, eqcl, currRest)
             for x in eqcl:
                 for y in eqcl:
                     if x != y:
@@ -597,7 +597,7 @@ class Digraph(object):
         try:
             rankingByChoosing = self.rankingByChoosing['result']
         except:
-            print 'Error: first run computeRankingByChoosing(CoDual=T/F) !'
+            print('Error: first run computeRankingByChoosing(CoDual=T/F) !')
             return None
         
         Max = Decimal('1')
@@ -646,10 +646,10 @@ class Digraph(object):
         try:
             rankingByChoosing = self.rankingByChoosing['result']
         except:
-            print 'Error: You must first run self.computeRankingByChoosing(CoDual=True(default)|False) !'
+            print('Error: You must first run self.computeRankingByChoosing(CoDual=True(default)|False) !')
             #rankingByChoosing = self.computeRankingByChoosing(Debug,CoDual)
             return
-        print 'Ranking by Choosing and Rejecting'
+        print('Ranking by Choosing and Rejecting')
         space = ''
         n = len(rankingByChoosing)
         for i in range(n):
@@ -667,9 +667,9 @@ class Digraph(object):
             #print 'ibch, iwch, iach', i, ibch,iwch,iach
             ch = list(ibch) 
             ch.sort()
-            print ' %s%s%s Best Choice %s (%.2f)' % (space,i+1,nstr,ch,rankingByChoosing[i][0][0])
+            print(' %s%s%s Best Choice %s (%.2f)' % (space,i+1,nstr,ch,rankingByChoosing[i][0][0]))
             if len(iach) > 0 and i < n-1:
-                print '  %s Ambiguous Choice %s' % (space,list(iach))
+                print('  %s Ambiguous Choice %s' % (space,list(iach)))
                 space += '  '
             space += '  '
         for i in range(n):
@@ -690,19 +690,19 @@ class Digraph(object):
             ch.sort()
             if len(iach) > 0 and i > 0:
                 space = space[:-2] 
-                print '  %s Ambiguous Choice %s' % (space,list(iach))
-            print ' %s%s%s Worst Choice %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0])
+                print('  %s Ambiguous Choice %s' % (space,list(iach)))
+            print(' %s%s%s Worst Choice %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))
         if self.rankingByChoosing['CoDual']:
             corr1 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation())
-            print 'Ordinal bipolar correlation with codual (strict) outranking relation: %.3f (%.1f%%)' % (corr1['correlation'],corr1['determination']*Decimal('100'))
+            print('Ordinal bipolar correlation with codual (strict) outranking relation: %.3f (%.1f%%)' % (corr1['correlation'],corr1['determination']*Decimal('100')))
             corr2 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation(),MedianCut=True)
-            print 'Ordinal bipolar correlation with codual (strict) median cut outranking relation: %.3f (%.1f%%)' % (corr2['correlation'],corr2['determination']*Decimal('100'))
+            print('Ordinal bipolar correlation with codual (strict) median cut outranking relation: %.3f (%.1f%%)' % (corr2['correlation'],corr2['determination']*Decimal('100')))
 
         else:
             corr1 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation())
-            print 'Ordinal bipolar correlation with outranking relation: %.3f (%.1f%%)'% (corr1['correlation'],corr1['determination']*Decimal('100'))
+            print('Ordinal bipolar correlation with outranking relation: %.3f (%.1f%%)'% (corr1['correlation'],corr1['determination']*Decimal('100')))
             corr2 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation(),MedianCut=True)
-            print 'Ordinal bipolar correlation with median cut outranking relation: %.3f (%.1f%%)'% (corr2['correlation'],corr2['determination']*Decimal('100'))
+            print('Ordinal bipolar correlation with median cut outranking relation: %.3f (%.1f%%)'% (corr2['correlation'],corr2['determination']*Decimal('100')))
             
     def computeValuationStatistics(self,Sampling=False,Comments=False):
         """
@@ -729,7 +729,7 @@ class Digraph(object):
             var = squares / n2d - (mean * mean)
         stdDev = sqrt(var)
         if Comments:
-            print 'mean: %.5f, std. dev.: %.5f' % (mean,stdDev)
+            print('mean: %.5f, std. dev.: %.5f' % (mean,stdDev))
         return mean,stdDev
         
 
@@ -769,7 +769,7 @@ class Digraph(object):
             
         if not isinstance(other,(dict)):
             if Debug:
-                print 'inputting a Digraph instance'
+                print('inputting a Digraph instance')
             otherg = deepcopy(other)
             otherg.recodeValuation(-1,1)
             if MedianCut:
@@ -805,7 +805,7 @@ class Digraph(object):
                     determination += min( abs(g.relation[x][y]),abs(otherRelation[x][y]) )
                     #determination += abs(corr)
                     if Debug:
-                        print x,y,g.relation[x][y],otherRelation[x][y],correlation,determination
+                        print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)
         if determination > Decimal('0.0'):
             correlation /= determination
             return { 'MedianCut':MedianCut, 'correlation': correlation, 'determination': determination / Decimal(str(n2)) } 
@@ -1076,14 +1076,14 @@ class Digraph(object):
                 if relation[x][y] not in valuationList:
                     valuationList.append(relation[x][y])
         valuationList.sort()
-        print 'Credibility levels:', valuationList
+        print('Credibility levels:', valuationList)
         bestSingleChoices = copy.deepcopy(actions)
         i=0
         while bestSingleChoices != set():
             current = copy.deepcopy(bestSingleChoices)
             i += 1
-            print 'i_bestSingleChoices:', i,  bestSingleChoices
-            print 'level', valuationList[i]
+            print('i_bestSingleChoices:', i,  bestSingleChoices)
+            print('level', valuationList[i])
             for x in current:
                 #print 'x', x
                 notBest = False
@@ -1094,8 +1094,8 @@ class Digraph(object):
                 if notBest:
                     bestSingleChoices.remove(x)
                         
-        print 'final bestSingleChoice:', current
-        print 'leveal of credibility:',  valuationList[i-1]
+        print('final bestSingleChoice:', current)
+        print('leveal of credibility:',  valuationList[i-1])
         return (valuationList[i-1], current)
 
     def computeMoreOrLessUnrelatedPairs(self):
@@ -1221,7 +1221,7 @@ class Digraph(object):
         import copy
         Med = self.valuationdomain['med']
         if Debug:
-            print Med
+            print(Med)
         actions = set(self.actions)
         relation = copy.deepcopy(self.relation)
 
@@ -1233,7 +1233,7 @@ class Digraph(object):
                 
         if Debug:
             for x in actions:
-                print 'x, relation[x][x]', x, relation[x][x]
+                print('x, relation[x][x]', x, relation[x][x])
         for x in actions:
             if relation[x][x] > Med:
                 isCyclic = True
@@ -1253,20 +1253,20 @@ class Digraph(object):
         arevindex = {}
         for i in aindex:
             arevindex[str(aindex[i])] = i
-        print arevindex
+        print(arevindex)
         File0 = Name+'.dre'
         File1 = Name+'.auto'
-        print '# automorphisms extraction from dre file #'
-        print '# Using input file: ' + File0
+        print('# automorphisms extraction from dre file #')
+        print('# Using input file: ' + File0)
         String2 = "echo '<"+File0+' -m p >'+File1+" x' | dreadnaut"
-        print String2
+        print(String2)
         os.system(String2)
         try:
             f1 = open(File1,'r')
             noError = True
         except:
-            print 'The input file: ', File1,' could not be found!'
-            print "Be sure that nauty's dreadnaut programm is available!"
+            print('The input file: ', File1,' could not be found!')
+            print("Be sure that nauty's dreadnaut programm is available!")
             noError = False
         if noError:
             permutations = {}
@@ -1281,7 +1281,7 @@ class Digraph(object):
                         t = t + ts
                         ts = f1.readline()
                     permutation = t.split()
-                    print '# permutation = '+ str(nl)+str(permutation)
+                    print('# permutation = '+ str(nl)+str(permutation))
                     permutations[str(nl)] = {}
                     for i in range(len(permutation)):
                         permutations[str(nl)][str(arevindex[str(i+1)])] = str(arevindex[str(permutation[i])])
@@ -1313,23 +1313,23 @@ class Digraph(object):
         """
         Renders the generators of the automorphism group.
         """
-        print '*---- Automorphism group generators ----'
+        print('*---- Automorphism group generators ----')
         try:
             reflections = self.reflections
             permutations = self.permutations
             noError = True
         except:
-            print 'No permutations or reflections defined yet !!'
+            print('No permutations or reflections defined yet !!')
             noError = False
         if noError:
-            print 'Permutations'
+            print('Permutations')
             for g in permutations:
-                print self.permutations[g]
-            print 'Reflections'
+                print(self.permutations[g])
+            print('Reflections')
             for g in reflections:
-                print self.reflexions[g]
+                print(self.reflexions[g])
         else:
-            print 'Run self.automorphismGenerators()'
+            print('Run self.automorphismGenerators()')
  
     def showOrbits(self,InChoices,withListing=True):
         """
@@ -1341,20 +1341,20 @@ class Digraph(object):
             permutations = self.permutations
             noError = True
         except:
-            print 'No permutations or reflections defined yet !!'
-            print 'Run self.automorphismGenerators()'
+            print('No permutations or reflections defined yet !!')
+            print('Run self.automorphismGenerators()')
             noError=False
         if noError:
             Choices = InChoices.copy()
-            print '*--- Isomorphic reduction of choices'
+            print('*--- Isomorphic reduction of choices')
             Iso = set()
             v = [0 for i in range(1,self.automorphismGroupSize + 1)]
-            print 'Number of choices:', len(Choices)
+            print('Number of choices:', len(Choices))
             while Choices != set():
                 sCur = Choices.pop()
-                print
-                print 'current representative: ',sCur
-                print 'length   : ', len(sCur)
+                print()
+                print('current representative: ',sCur)
+                print('length   : ', len(sCur))
                 IsosCur = set([sCur])
                 Isos = set()
                 while IsosCur != Isos:
@@ -1382,26 +1382,26 @@ class Digraph(object):
                     IsosCur = IsosRes.copy()
                 Iso.add(sCur)
                 niso = len(Isos)
-                print 'number of isomorph choices', niso
+                print('number of isomorph choices', niso)
                 v[(self.automorphismGroupSize//niso)-1] += 1
                 if withListing:
-                    print 'isormorph choices'
+                    print('isormorph choices')
                     for ch in Isos:
-                        print list(ch)
-                print 'Number of choices before : ', len(Choices) + 1
+                        print(list(ch))
+                print('Number of choices before : ', len(Choices) + 1)
                 Choices = Choices - Isos
-                print 'Number of choices after  : ', len(Choices)
-            print
-            print '*---- Global result ----'
-            print 'Number of choices: ', len(InChoices)
-            print 'Number of orbits : ', len(Iso)
-            print 'Labelled representatives:'
+                print('Number of choices after  : ', len(Choices))
+            print()
+            print('*---- Global result ----')
+            print('Number of choices: ', len(InChoices))
+            print('Number of orbits : ', len(Iso))
+            print('Labelled representatives:')
             for ch in Iso:
-                print list(ch)
-            print
-            print '                     Symmetry vector'
-            print 'stabilizer size  : ', range(1,self.automorphismGroupSize + 1)
-            print 'frequency        : ', v
+                print(list(ch))
+            print()
+            print('                     Symmetry vector')
+            print('stabilizer size  : ', list(range(1,self.automorphismGroupSize + 1)))
+            print('frequency        : ', v)
             self.orbits = Iso
 
     def showOrbitsFromFile(self,InFile,withListing=True):
@@ -1415,13 +1415,13 @@ class Digraph(object):
             f1 = open(InFile,'r')
             noError = True
         except:
-            print 'No permutations or reflections defined yet !!'
-            print 'Run self.automorphismGenerators()'
+            print('No permutations or reflections defined yet !!')
+            print('Run self.automorphismGenerators()')
             noError = False
             
         if noError:
             actions = [x for x in self.actions]
-            print '*--- Isomorphic reduction of choices'
+            print('*--- Isomorphic reduction of choices')
             Iso = set()
             misset = set()
             v = [0 for i in range(1,self.order + 1)]
@@ -1433,8 +1433,8 @@ class Digraph(object):
                     if line[i] == '1':
                         sCur.add(actions[i])
                 if sCur not in misset:
-                    print 'current representative: ',sCur
-                    print 'length   : ', len(sCur)
+                    print('current representative: ',sCur)
+                    print('length   : ', len(sCur))
                     IsosCur = set([frozenset(sCur)])
                     Isos = set()
                     while IsosCur != Isos:
@@ -1462,25 +1462,25 @@ class Digraph(object):
                         IsosCur = IsosRes.copy()
                     Iso = Iso | set([frozenset(sCur)])
                     niso = len(Isos)
-                    print 'number of isomorph choices', niso
+                    print('number of isomorph choices', niso)
                     v[((2*self.order)/niso)-1] += 1
                     if withListing:
-                        print 'isormorph choices'
+                        print('isormorph choices')
                         for ch in Isos:
-                            print list(ch)
-                    print 'Number of choices before : ', len(misset) + 1
+                            print(list(ch))
+                    print('Number of choices before : ', len(misset) + 1)
                     misset = misset | Isos
-                    print 'Number of choices after  : ', len(misset)
-            print
-            print '*---- Global result ----'
-            print 'Labelled representatives:'
+                    print('Number of choices after  : ', len(misset))
+            print()
+            print('*---- Global result ----')
+            print('Labelled representatives:')
             for ch in Iso:
-                print list(ch)
-            print 
-            print 'Number of choices: ', len(misset)
-            print 'Number of orbits : ', len(Iso)
-            print 'symmetry vector  : ', range(1,self.order + 1)
-            print 'frequency        : ', v
+                print(list(ch))
+            print() 
+            print('Number of choices: ', len(misset))
+            print('Number of orbits : ', len(Iso))
+            print('symmetry vector  : ', list(range(1,self.order + 1)))
+            print('frequency        : ', v)
             self.orbits = Iso
 
     def readPerrinMisset(self,file):
@@ -1492,7 +1492,7 @@ class Digraph(object):
             noError = True
         except:
             noError = False
-            print 'The input file: ', file,' could not be found ?'
+            print('The input file: ', file,' could not be found ?')
 
         if noError:
             actions = [x for x in self.actions]
@@ -1520,7 +1520,7 @@ class Digraph(object):
             noError = True
         except:
             noError = False
-            print 'The input file: ', file,' could not be found ?'
+            print('The input file: ', file,' could not be found ?')
 
         if noError:
             actions = [x for x in self.actions]
@@ -1548,13 +1548,13 @@ class Digraph(object):
             reflections = self.reflections
             permutations = self.permutations
             if withListing:
-                print '*- ----------------"'
-                print 'Compute orbit of choice: ',choice
-                print 'follwoing  automorphisms of digraph: ', self.name
-                print 'Automorphism group size: ', self.automorphismGroupSize
-                print 'Generators:'
-                print 'Reflections: ', reflections
-                print 'Permutations: ', permutations
+                print('*- ----------------"')
+                print('Compute orbit of choice: ',choice)
+                print('follwoing  automorphisms of digraph: ', self.name)
+                print('Automorphism group size: ', self.automorphismGroupSize)
+                print('Generators:')
+                print('Reflections: ', reflections)
+                print('Permutations: ', permutations)
             IsosCur = set([choice])
             Isos = set()
             while IsosCur != Isos:
@@ -1581,47 +1581,47 @@ class Digraph(object):
                         IsosRes = IsosRes | set([cur])
                 IsosCur = IsosRes.copy()
             if withListing:
-                print 'Orbit size: ', len(Isos)
-                print 'List of isormorph choices'
+                print('Orbit size: ', len(Isos))
+                print('List of isormorph choices')
                 for ch in Isos:
-                    print list(ch)
+                    print(list(ch))
             return Isos
 
         except:
-            print 'No permutations or reflections defined yet !!'
-            print 'Run self.automorphismGenerators()'
+            print('No permutations or reflections defined yet !!')
+            print('Run self.automorphismGenerators()')
            
     def showActions(self):
         """
         presentation methods for digraphs actions
         """
-        print '*----- show digraphs actions --------------*'
+        print('*----- show digraphs actions --------------*')
         actionsList = [x for x in self.actions]
         actionsList.sort()
         for x in actionsList:
-            print     'key: ',x
+            print('key: ',x)
             try:
-                print '  short name:',self.actions[x]['shortName']
+                print('  short name:',self.actions[x]['shortName'])
             except:
                 pass
-            print     '  name:      ',self.actions[x]['name']
-            print     '  comment:   ',self.actions[x]['comment']
-            print
+            print('  name:      ',self.actions[x]['name'])
+            print('  comment:   ',self.actions[x]['comment'])
+            print()
            
     def showShort(self):
         """
         concise presentation method for genuine digraphs.
         """
-        print '*----- show short --------------*'
-        print 'Digraph          :', self.name
-        print 'Actions          :', self.actions
-        print 'Valuation domain :', self.valuationdomain
+        print('*----- show short --------------*')
+        print('Digraph          :', self.name)
+        print('Actions          :', self.actions)
+        print('Valuation domain :', self.valuationdomain)
         self.showComponents()
 
     def showAll(self):
-        print '*----- show detail -------------*'
-        print 'Digraph          :', self.name
-        print '*---- Actions ----*'
+        print('*----- show detail -------------*')
+        print('Digraph          :', self.name)
+        print('*---- Actions ----*')
         #actionsList = [x for x in self.actions]
         actionsList = []
         for x in self.actions:
@@ -1630,26 +1630,26 @@ class Digraph(object):
             else:
                 actionsList += [str(x)]
         actionsList.sort()
-        print actionsList
-        print '*---- Characteristic valuation domain ----*'
-        print self.valuationdomain
+        print(actionsList)
+        print('*---- Characteristic valuation domain ----*')
+        print(self.valuationdomain)
         self.showRelationTable()
         self.showComponents()
         gamma = self.gammaSets()
         notGamma = self.notGammaSets()
-        print 'Neighborhoods:'
-        print '  Gamma     :'
+        print('Neighborhoods:')
+        print('  Gamma     :')
         for x in gamma:
-            print '\'%s\': in => %s, out => %s' % (x,gamma[x][1],gamma[x][0])  
-        print '  Not Gamma :'
+            print('\'%s\': in => %s, out => %s' % (x,gamma[x][1],gamma[x][0]))  
+        print('  Not Gamma :')
         for x in notGamma:
-            print '\'%s\': in => %s, out => %s' % (x,notGamma[x][1],notGamma[x][0])  
+            print('\'%s\': in => %s, out => %s' % (x,notGamma[x][1],notGamma[x][0]))  
 
     def showRelation(self):
         """
         prints the relation valuation in ##.## format.
         """
-        print '* ---- Relation -----',
+        print('* ---- Relation -----', end=' ')
         actionsList = []
         for x in self.actions:
             if isinstance(x,frozenset):
@@ -1663,14 +1663,14 @@ class Digraph(object):
         except KeyError:
             hasIntegerValuation = False
         for x in actionsList:
-            print
+            print()
             for y in actionsList:
                 if hasIntegerValuation:
-                    print '('+str(x[0])+', '+str(y[0])+') = '+' % .2f ' % (self.relation[x[1]][y[1]])
+                    print('('+str(x[0])+', '+str(y[0])+') = '+' % .2f ' % (self.relation[x[1]][y[1]]))
                 else:
-                    print '('+str(x[0])+', '+str(y[0])+') = '+' %d ' % (self.relation[x[1]][y[1]])
+                    print('('+str(x[0])+', '+str(y[0])+') = '+' %d ' % (self.relation[x[1]][y[1]]))
                     
-        print
+        print()
 
     def showRelationTable(self,IntegerValues=False,actionsSubset= None,relation=None,ndigits=2):
         """
@@ -1682,8 +1682,8 @@ class Digraph(object):
             actions = actionsSubset
         if relation == None:
             relation = self.relation
-        print '* ---- Relation Table -----\n',
-        print ' S   | ',
+        print('* ---- Relation Table -----\n', end=' ')
+        print(' S   | ', end=' ')
         #actions = [x for x in actions]
         actionsList = []
         for x in actions:
@@ -1704,19 +1704,19 @@ class Digraph(object):
             hasIntegerValuation = IntegerValues
         
         for x in actionsList:
-            print "'"+x[0]+"'\t ",
-        print '\n-----|------------------------------------------------------------'
+            print("'"+x[0]+"'\t ", end=' ')
+        print('\n-----|------------------------------------------------------------')
         for x in actionsList:
-            print "'"+x[0]+"' | ",
+            print("'"+x[0]+"' | ", end=' ')
             for y in actionsList:
                 if hasIntegerValuation:
-                    print '%d\t' % (relation[x[1]][y[1]]),
+                    print('%d\t' % (relation[x[1]][y[1]]), end=' ')
                 else:
                     formatString = '%%2.%df\t' % ndigits
-                    print formatString % (relation[x[1]][y[1]]),
-            print
-        print '\n'
-        print 'Valuation domain: ', self.valuationdomain
+                    print(formatString % (relation[x[1]][y[1]]), end=' ')
+            print()
+        print('\n')
+        print('Valuation domain: ', self.valuationdomain)
 
     def htmlRelationTable(self,tableTitle='Relation Table',relationName=' R ',hasIntegerValues=False,actionsSubset= None,isColored=False):
         """
@@ -1794,26 +1794,26 @@ class Digraph(object):
         """
         Shows relation in nauty format.
         """
-        print '*----- show dre -------------*'        
+        print('*----- show dre -------------*')        
         actions = [x for x in self.actions]
         aindex = {}
         i = 1
-        print 'Actions index:'
+        print('Actions index:')
         for x in actions:
-            print i,': ', str(x) 
+            print(i,': ', str(x)) 
             aindex[x] = i
             i += 1
         Med = self.valuationdomain['med']
         relation = self.relation
         n = len(actions)
-        print 'n='+str(n)+' $=1 d g'
+        print('n='+str(n)+' $=1 d g')
         for x in actions:
             res = str(aindex[x]) + ': '
             for y in actions:
                 if relation[x][y] > Med:
                     res = res + str(aindex[y]) + ' '
             res = res + ';'
-            print res
+            print(res)
 
     def exportGraphViz(self,fileName=None, bestChoice=set(),worstChoice=set(),noSilent=True,graphType='png',graphSize='7,7'):
         """
@@ -1821,7 +1821,7 @@ class Digraph(object):
         """
         import os
         if noSilent:
-            print '*---- exporting a dot file dor GraphViz tools ---------*'
+            print('*---- exporting a dot file dor GraphViz tools ---------*')
         actionkeys = [x for x in self.actions]
         n = len(actionkeys)
         relation = self.relation
@@ -1833,7 +1833,7 @@ class Digraph(object):
             name = fileName
         dotName = name+'.dot'
         if noSilent:
-            print 'Exporting to '+dotName
+            print('Exporting to '+dotName)
         if bestChoice != set():
             rankBestString = '{rank=max; '
         if worstChoice != set():
@@ -1916,26 +1916,26 @@ class Digraph(object):
             #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
 
         if noSilent:
-            print commandString
+            print(commandString)
         try:
             os.system(commandString)
         except:
             if noSilent:
-                print 'graphViz tools not avalaible! Please check installation.'
+                print('graphViz tools not avalaible! Please check installation.')
 
 
     def savedre(self,name='temp'):
         """
         save digraph in nauty format.
         """
-        print '*----- saving digraph in nauty dre format  -------------*'        
+        print('*----- saving digraph in nauty dre format  -------------*')        
         actions = [x for x in self.actions]
         Name = name+'.dre'
         aindex = {}
         i = 1
-        print 'Actions index:'
+        print('Actions index:')
         for x in actions:
-            print i,': ', str(x) 
+            print(i,': ', str(x)) 
             aindex[x] = i
             i += 1
         Med = self.valuationdomain['med']
@@ -1957,7 +1957,7 @@ class Digraph(object):
         """
         save digraph in XML format.
         """
-        print '*----- saving digraph in XML format  -------------*'        
+        print('*----- saving digraph in XML format  -------------*')        
         actions = [x for x in self.actions]
         nameExt = name+'.xml'
         fo = open(nameExt,'w')
@@ -2012,13 +2012,13 @@ class Digraph(object):
         fo.write('</relation>\n')        
         fo.write('</digraph>\n')         
         fo.close()
-        print 'File: ' + nameExt + ' saved !'
+        print('File: ' + nameExt + ' saved !')
 
     def saveXMCDA(self,fileName='temp',relationName='R',category='random',subcategory='valued',author='digraphs Module (RB)',reference='saved from Python',valuationType='standard',servingD3=False):
         """
         save digraph in XMCDA format.
         """
-        print '*----- saving digraph in XML format  -------------*'        
+        print('*----- saving digraph in XML format  -------------*')        
         actions = [x for x in self.actions]
         nameExt = fileName+'.xmcda'
         fo = open(nameExt,'w')
@@ -2027,7 +2027,7 @@ class Digraph(object):
             fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcdaDefault.xsl"? -->\n')
         else:
             fo.write('<?xml-stylesheet type="text/xsl" href="xmcdaDefault.xsl"?>\n')            
-        fo.write(unicode('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2008/UMCDA-ML-1.0 umcda-ml-1.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2008/UMCDA-ML-1.0">\n'))
+        fo.write(str('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2008/UMCDA-ML-1.0 umcda-ml-1.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2008/UMCDA-ML-1.0">\n'))
         # write description
         fo.write('<caseReference>\n')
         fo.write('<title>Valued Digraph in XMCDA format</title>\n')  
@@ -2053,13 +2053,13 @@ class Digraph(object):
             fo.write('<description>\n')
             fo.write('<name>')
             try:
-                fo.write(unicode(actions[actionsList[i]]['name']))
+                fo.write(str(actions[actionsList[i]]['name']))
             except:
                 fo.write('nameless')
             fo.write('</name>\n')
             fo.write('<comment>')
             try:
-                fo.write(unicode(actions[actionsList[i]]['comment']))
+                fo.write(str(actions[actionsList[i]]['comment']))
             except:
                 fo.write('No comment')
             fo.write('</comment>\n')
@@ -2112,13 +2112,13 @@ class Digraph(object):
         fo.write('</relationOnAlternatives>\n')        
         fo.write('</xmcda:XMCDA>\n')         
         fo.close()
-        print 'File: ' + nameExt + ' saved !'
+        print('File: ' + nameExt + ' saved !')
 
     def saveXMCDA2(self,fileName='temp',relationName='R',relationType='binary',category='random',subcategory='valued',author='digraphs Module (RB)',reference='saved from Python',valuationType='standard',digits=2,servingD3=False):
         """
         save digraph in XMCDA format.
         """
-        print '*----- saving digraph in XML format  -------------*'        
+        print('*----- saving digraph in XML format  -------------*')        
         actions = [x for x in self.actions]
         nameExt = fileName+'.xmcda2'
         fo = open(nameExt,'w')
@@ -2127,7 +2127,7 @@ class Digraph(object):
             fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"? -->\n')
         else:
             fo.write('<?xml-stylesheet type="text/xsl" href="xmcdaXSL.xsl"?>\n')            
-        fo.write(unicode('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2009/UMCDA-2.0.0 file:../XMCDA-2.0.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0">\n'))
+        fo.write(str('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2009/UMCDA-2.0.0 file:../XMCDA-2.0.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0">\n'))
         # write description
         fo.write('<projectReference id="%s" name="%s">\n' % (fileName,self.name))
         fo.write('<title>Stored Digraph in XMCDA-2.0 format</title>\n')  
@@ -2150,7 +2150,7 @@ class Digraph(object):
         fo.write('</description>\n')                  
         for i in range(na):
             try:
-                alternativeName = unicode(actions[actionsList[i]]['name'])
+                alternativeName = str(actions[actionsList[i]]['name'])
             except:
                 alternativeName = 'nameless'
             
@@ -2158,7 +2158,7 @@ class Digraph(object):
             fo.write('<description>\n')
             fo.write('<comment>')
             try:
-                fo.write(unicode(actions[actionsList[i]]['comment']))
+                fo.write(str(actions[actionsList[i]]['comment']))
             except:
                 fo.write('No comment')
             fo.write('</comment>\n')
@@ -2229,7 +2229,7 @@ class Digraph(object):
         fo.write('</alternativesComparisons>\n')        
         fo.write('</xmcda:XMCDA>\n')         
         fo.close()
-        print 'File: ' + nameExt + ' saved !'
+        print('File: ' + nameExt + ' saved !')
 
 
     def computeDensities(self,choice):
@@ -2282,7 +2282,7 @@ class Digraph(object):
         rsd = 0.0
         rad = 0.0
         if level < Med or level >= Max:
-            print 'Error: robustness level too low or too high !!!'
+            print('Error: robustness level too low or too high !!!')
         else:
             for x in actions:
                 for y in actions:
@@ -2386,7 +2386,7 @@ class Digraph(object):
         levelsList = list(levels)
         levelsList.sort()
         if Debug:
-            print 'levelsList', levelsList
+            print('levelsList', levelsList)
         return levelsList
 
     def computePrudentBetaLevel(self, Debug=False):
@@ -2397,17 +2397,17 @@ class Digraph(object):
         Med = self.valuationdomain['med']
         valuationLevels= self.computeValuationLevels(Debug=Debug)
         if Debug:
-            print 'number of levels; %d' % len(valuationLevels)
+            print('number of levels; %d' % len(valuationLevels))
         valuationLevels.reverse()
         for i in range(len([x for x in valuationLevels if x > Med])):
             level = valuationLevels[i+1]
             if Debug:
-                print 'checking level: ', level
+                print('checking level: ', level)
             gp = PolarisedDigraph(self,level=level)         
             if len(gp.computeChordlessCircuits()) > 0:
                 if Debug:
                     gp.showChordlessCircuits()
-                    print 'prudent order level = %s (med = %.2f)' % (str(valuationLevels[i-1]),Med)
+                    print('prudent order level = %s (med = %.2f)' % (str(valuationLevels[i-1]),Med))
                 self.prudentBetaLevel = valuationLevels[i]
                 return self.prudentBetaLevel
             
@@ -2415,7 +2415,7 @@ class Digraph(object):
         if Debug:
             ## self.computeChordlessCircuits()
             ## self.showChordlessCircuits()
-            print 'prudent order level = %s = med' % str(Med)
+            print('prudent order level = %s = med' % str(Med))
         return Med
 
     def computeValuationPercentiles(self,choice, percentages, withValues=False):
@@ -2432,7 +2432,7 @@ class Digraph(object):
                     vx.append(relation[x][y])
         vx.sort()
         if withValues:
-            print 'values ', vx
+            print('values ', vx)
         nv = len(vx)
         percentile = {}
         for q in percentages:
@@ -2461,7 +2461,7 @@ class Digraph(object):
         vx.sort()
         nv = len(vx)
         if withValues:
-            print 'values ', vx
+            print('values ', vx)
         np = len(percentiles)
         rv = [0.0 for i in range(np)]
         for val in vx:
@@ -2517,7 +2517,7 @@ class Digraph(object):
         Computes digraph statistics like order, size and arc-density.
         """
         #import array
-        print '*----- general statistics -------------*'
+        print('*----- general statistics -------------*')
         nbrcomp = len(self.components())
         nbrstrcomp = len(self.strongComponents())
         actions = [x for x in self.actions]
@@ -2557,50 +2557,50 @@ class Digraph(object):
                     deter += abs(relation[x][y] - Med)
         deter /= order * (order-1) * (Max - Med)
         #  output results
-        print 'for digraph              : <' + str(self.name) + '.py>'
-        print 'order                    : ', self.order, 'nodes'
-        print 'size                     : ', self.size, 'arcs'
-        print '# undetermined           : ', self.undeterm, 'arcs'
-        print 'determinateness          : %.2f' % (deter)
-        print "arc density              : %.2f" % (density['arc'])
-        print "double arc density       : %.2f" % (density['double'])
-        print "single arc density       : %.2f" % (density['single'])
-        print "absence density          : %.2f" % (density['absence'])
-        print "strict single arc density: %.2f" % (density['strictSingle'])
-        print "strict absence density   : %.2f" % (density['strictAbsence'])
-        print '# components             : ', nbrcomp
-        print '# strong components      : ', nbrstrcomp
-        print 'transitivity degree      : %.2f' % (self.computeTransitivityDegree())
+        print('for digraph              : <' + str(self.name) + '.py>')
+        print('order                    : ', self.order, 'nodes')
+        print('size                     : ', self.size, 'arcs')
+        print('# undetermined           : ', self.undeterm, 'arcs')
+        print('determinateness          : %.2f' % (deter))
+        print("arc density              : %.2f" % (density['arc']))
+        print("double arc density       : %.2f" % (density['double']))
+        print("single arc density       : %.2f" % (density['single']))
+        print("absence density          : %.2f" % (density['absence']))
+        print("strict single arc density: %.2f" % (density['strictSingle']))
+        print("strict absence density   : %.2f" % (density['strictAbsence']))
+        print('# components             : ', nbrcomp)
+        print('# strong components      : ', nbrstrcomp)
+        print('transitivity degree      : %.2f' % (self.computeTransitivityDegree()))
         
-        print '                         : ', range(len(outDegrees))
-        print 'outdegrees distribution  : ', list(outDegrees)
-        print 'indegrees distribution   : ', list(inDegrees)
-        print 'mean outdegree           : %.2f' % (self.computeMeanOutDegree())
-        print 'mean indegree            : %.2f' % (self.computeMeanInDegree())
-        print '                         : ', range(len(symDegrees))
-        print 'symmetric degrees dist.  : ', list(symDegrees)
-        print 'mean symmetric degree    : %.2f' % (self.computeMeanSymDegree())
+        print('                         : ', list(range(len(outDegrees))))
+        print('outdegrees distribution  : ', list(outDegrees))
+        print('indegrees distribution   : ', list(inDegrees))
+        print('mean outdegree           : %.2f' % (self.computeMeanOutDegree()))
+        print('mean indegree            : %.2f' % (self.computeMeanInDegree()))
+        print('                         : ', list(range(len(symDegrees))))
+        print('symmetric degrees dist.  : ', list(symDegrees))
+        print('mean symmetric degree    : %.2f' % (self.computeMeanSymDegree()))
 
-        outgini = self.computeConcentrationIndex(range(len(outDegrees)),list(outDegrees))
-        ingini = self.computeConcentrationIndex(range(len(inDegrees)),list(inDegrees))
-        symgini = self.computeConcentrationIndex(range(len(symDegrees)),list(symDegrees))
-        print     'outdegrees concentration index   : %.4f' % (outgini)
-        print     'indegrees concentration index    : %.4f' % (ingini)
-        print     'symdegrees concentration index   : %.4f' % (symgini)
-        listindex = range(order)
+        outgini = self.computeConcentrationIndex(list(range(len(outDegrees))),list(outDegrees))
+        ingini = self.computeConcentrationIndex(list(range(len(inDegrees))),list(inDegrees))
+        symgini = self.computeConcentrationIndex(list(range(len(symDegrees))),list(symDegrees))
+        print('outdegrees concentration index   : %.4f' % (outgini))
+        print('indegrees concentration index    : %.4f' % (ingini))
+        print('symdegrees concentration index   : %.4f' % (symgini))
+        listindex = list(range(order))
         listindex.append('inf')
-        print     '                                 : ', listindex
-        print     'neighbourhood depths distribution: ', list(nbDepths)
+        print('                                 : ', listindex)
+        print('neighbourhood depths distribution: ', list(nbDepths))
         if meanLength != 'infinity':
-            print "mean neighbourhood depth         : %.2f " % (meanLength)
+            print("mean neighbourhood depth         : %.2f " % (meanLength))
         else:
-            print 'mean neighbourhood length        : ', meanLength
-        print     'digraph diameter                 : ', self.digraphDiameter
-        print     'agglomeration distribution       : '
+            print('mean neighbourhood length        : ', meanLength)
+        print('digraph diameter                 : ', self.digraphDiameter)
+        print('agglomeration distribution       : ')
         for i in range(order):
-            print actions[i],
-            print ": %.2f" % (self.agglomerationCoefficient[i])
-        print     "agglomeration coefficient        : %.2f" % (self.meanAgglomerationCoefficient)   
+            print(actions[i], end=' ')
+            print(": %.2f" % (self.agglomerationCoefficient[i]))
+        print("agglomeration coefficient        : %.2f" % (self.meanAgglomerationCoefficient))   
 
     def meanLength(self,Oriented=False):
         """
@@ -2866,31 +2866,31 @@ class Digraph(object):
         """
         n = len(X)
         #dg = self.outDegreesDistribution()
-        X = range(10)
+        X = list(range(10))
         N = [0,0,0,0,0,0,0,0,0,0,]
-        print 'Xi ', X, N
+        print('Xi ', X, N)
         Q = [0.0 for i in range(n)]
         F = [0.0 for i in range(n)]
         Qsum = 0.0
         for i in range(n):
             Qsum += X[i] * N[i]
-        print 'Qsum ',Qsum
+        print('Qsum ',Qsum)
         F[0] = float(X[0])/float(n)
         Q[0] = 0.0
         for i in range(1,n,1):
             qi = (X[i] * N[i])/Qsum
             Q[i] += Q[i-1] + qi
-            print 'Q[i] i ', i, Q[i]
+            print('Q[i] i ', i, Q[i])
             fi = float(N[i])/n
             F[i] += F[i-1] + fi
-            print 'i, F[i]', i, F
+            print('i, F[i]', i, F)
         f0 = float(N[0])/float(n)
         gini = 1.0 - (f0*Q[0])
-        print 'o gini ', gini
+        print('o gini ', gini)
         for i in range(1,n):
             fi = (float(N[i])/float(n))
             gini -= fi * (Q[i-1] + Q[i])
-            print 'i gini', i, gini
+            print('i gini', i, gini)
         return gini
 
     def computeConcentrationIndex(self,X,N):
@@ -3028,7 +3028,7 @@ class Digraph(object):
            Result in self.misset.
         """
         import time
-        print '*---  Maximal independent choices ---*'
+        print('*---  Maximal independent choices ---*')
         t0 = time.time()
         self.misset = set()
         actions = set(self.actions)
@@ -3037,14 +3037,14 @@ class Digraph(object):
         for choice in self.MISgen(actions,frozenset()):
             v[len(choice)] += 1
             if withListing:
-                print list(choice)
+                print(list(choice))
         t1 = time.time()
-        print 'number of solutions: ', len(self.misset)
-        print 'cardinality distribution'
-        print 'card.: ', range(n+1)
-        print 'freq.: ', v
-        print 'execution time: %.5f sec.' % (t1-t0)
-        print 'Results in self.misset'
+        print('number of solutions: ', len(self.misset))
+        print('cardinality distribution')
+        print('card.: ', list(range(n+1)))
+        print('freq.: ', v)
+        print('execution time: %.5f sec.' % (t1-t0))
+        print('Results in self.misset')
 
     def showMinDom(self,withListing=True):
         """
@@ -3052,7 +3052,7 @@ class Digraph(object):
            Result in self.domset.
         """
         import time
-        print '*--- Computing minimal dominant choices ---*'
+        print('*--- Computing minimal dominant choices ---*')
         t0 = time.time()
         actions = set(self.actions)
         cover = {}
@@ -3069,16 +3069,16 @@ class Digraph(object):
         for choice in self.minset:
             v[len(choice)] += 1
             if withListing:
-                print list(choice)
+                print(list(choice))
         t1 = time.time()
-        print 'number of solutions: ', len(self.minset)
-        print 'cardinality distribution'
-        print 'card.: ', range(n+1)
-        print 'freq.: ', v
-        print 'execution time: %.5f sec.' % (t1-t0)
-        print 'iteration history: ', len(self.minhistory)
+        print('number of solutions: ', len(self.minset))
+        print('cardinality distribution')
+        print('card.: ', list(range(n+1)))
+        print('freq.: ', v)
+        print('execution time: %.5f sec.' % (t1-t0))
+        print('iteration history: ', len(self.minhistory))
         self.domset = self.minset.copy()
-        print 'Results in self.domset'
+        print('Results in self.domset')
 
     def showMinAbs(self,withListing=True):
         """
@@ -3086,14 +3086,14 @@ class Digraph(object):
            Result in self.absset.
         """
         import time
-        print '*--- Computing minimal absorbent choices ---*'
+        print('*--- Computing minimal absorbent choices ---*')
         t0 = time.time()
         actions = set(self.actions)
         cover = {}
         for x in actions:
             cover[x]=self.gamma[x][0] | set([x])
         abs1 = (frozenset(list(actions)),cover)
-        print abs1
+        print(abs1)
         self.minset = set()
         self.minhistory = set()
         for choice in self.minimalChoices(abs1):
@@ -3103,22 +3103,22 @@ class Digraph(object):
         for choice in self.minset:
             v[len(choice)] += 1
             if withListing:
-                print list(choice)
+                print(list(choice))
         t1 = time.time()
-        print 'number of solutions: ', len(self.minset)
-        print 'cardinality distribution'
-        print 'card.: ', range(n+1)
-        print 'freq.: ', v
-        print 'execution time: %.5f sec.' % (t1-t0)
-        print 'iteration history: ', len(self.minhistory)
+        print('number of solutions: ', len(self.minset))
+        print('cardinality distribution')
+        print('card.: ', list(range(n+1)))
+        print('freq.: ', v)
+        print('execution time: %.5f sec.' % (t1-t0))
+        print('iteration history: ', len(self.minhistory))
         self.absset = self.minset.copy()
-        print 'Results in self.absset'
+        print('Results in self.absset')
 
     def showMaxDomIrred(self,withListing=True):
         """Computing maximal +irredundant choices:
            Result in self.domirset."""
         import time
-        print '*--- Computing maximal +irredundant choices ---*'
+        print('*--- Computing maximal +irredundant choices ---*')
         t0 = time.time()
         actions = set(self.actions)
         self.domirset = set()
@@ -3140,19 +3140,19 @@ class Digraph(object):
         for choice in self.domirset:
             v[len(choice)] += 1
             if withListing:
-                print list(choice)
-        print 'number of solutions: ', len(self.domirset)
-        print 'cardinality distribution'
-        print 'card.: ', range(n+1)
-        print 'freq.: ', v
-        print 'execution time: %.5f sec.' % (t1-t0)
-        print 'Results in self.domirset'
+                print(list(choice))
+        print('number of solutions: ', len(self.domirset))
+        print('cardinality distribution')
+        print('card.: ', list(range(n+1)))
+        print('freq.: ', v)
+        print('execution time: %.5f sec.' % (t1-t0))
+        print('Results in self.domirset')
 
     def showMaxAbsIrred(self,withListing=True):
         """Computing maximal -irredundant choices:
            Result in self.absirset."""
         import time
-        print '*--- Computing maximal -irredundant choices ---*'
+        print('*--- Computing maximal -irredundant choices ---*')
         t0 = time.time()
         actions = set(self.actions)
         self.absirset = set()
@@ -3174,13 +3174,13 @@ class Digraph(object):
         for choice in self.absirset:
             v[len(choice)] += 1
             if withListing:
-                print list(choice)
-        print 'number of solutions: ', len(self.absirset)
-        print 'cardinality distribution'
-        print 'card.: ', range(n+1)
-        print 'freq.: ', v
-        print 'execution time: %.5f sec.' % (t1-t0)
-        print 'Results in self.absirset'
+                print(list(choice))
+        print('number of solutions: ', len(self.absirset))
+        print('cardinality distribution')
+        print('card.: ', list(range(n+1)))
+        print('freq.: ', v)
+        print('execution time: %.5f sec.' % (t1-t0))
+        print('Results in self.absirset')
       
 
     def showPreKernels(self,withListing=True):
@@ -3189,7 +3189,7 @@ class Digraph(object):
         Result in self.dompreKernels and self.abspreKernels
         """
         import time
-        print '*--- Computing preKernels ---*'
+        print('*--- Computing preKernels ---*')
         actions = set(self.actions)
         n = len(actions)
         self.dompreKernels = set()
@@ -3203,37 +3203,37 @@ class Digraph(object):
                 self.abspreKernels.add(choice[0][0])
         t1 = time.time()
         if withListing:
-            print 'Dominant preKernels :'
+            print('Dominant preKernels :')
             for choice in self.dompreKernels:
-                print list(choice)
-                print '   independence : ', self.intstab(choice) 
-                print '   dominance    : ', self.domin(choice) 
-                print '   absorbency   : ', self.absorb(choice)
-                print '   covering     :  %.3f' % self.averageCoveringIndex(choice, direction='out')
-            print 'Absorbent preKernels :'
+                print(list(choice))
+                print('   independence : ', self.intstab(choice)) 
+                print('   dominance    : ', self.domin(choice)) 
+                print('   absorbency   : ', self.absorb(choice))
+                print('   covering     :  %.3f' % self.averageCoveringIndex(choice, direction='out'))
+            print('Absorbent preKernels :')
             for choice in self.abspreKernels:
-                print list(choice)
-                print '   independence : ', self.intstab(choice) 
-                print '   dominance    : ', self.domin(choice) 
-                print '   absorbency   : ', self.absorb(choice)
-                print '   covering     :  %.3f' % self.averageCoveringIndex(choice, direction='in')  
-        print '*----- statistics -----'
-        print 'graph name: ', self.name
-        print 'number of solutions'
-        print ' dominant kernels : ', len(self.dompreKernels)
-        print ' absorbent kernels: ', len(self.abspreKernels)                                        
-        print 'cardinality frequency distributions'
-        print 'cardinality     : ', range(n+1)
+                print(list(choice))
+                print('   independence : ', self.intstab(choice)) 
+                print('   dominance    : ', self.domin(choice)) 
+                print('   absorbency   : ', self.absorb(choice))
+                print('   covering     :  %.3f' % self.averageCoveringIndex(choice, direction='in'))  
+        print('*----- statistics -----')
+        print('graph name: ', self.name)
+        print('number of solutions')
+        print(' dominant kernels : ', len(self.dompreKernels))
+        print(' absorbent kernels: ', len(self.abspreKernels))                                        
+        print('cardinality frequency distributions')
+        print('cardinality     : ', list(range(n+1)))
         v = [0 for i in range(n+1)]
         for ch in self.dompreKernels:
             v[len(ch)] += 1
-        print 'dominant kernel : ',v
+        print('dominant kernel : ',v)
         v = [0 for i in range(n+1)]
         for ch in self.abspreKernels:
             v[len(ch)] += 1
-        print 'absorbent kernel: ',v
-        print 'Execution time  : %.5f sec.' % (t1-t0)
-        print 'Results in sets: dompreKernels and abspreKernels.'
+        print('absorbent kernel: ',v)
+        print('Execution time  : %.5f sec.' % (t1-t0))
+        print('Results in sets: dompreKernels and abspreKernels.')
 
     def computePreKernels(self):
         """
@@ -3299,12 +3299,12 @@ class Digraph(object):
         return ConComp
 
     def showComponents(self):
-        print '*--- Connected Components ---*'
+        print('*--- Connected Components ---*')
         k=1
         for Comp in self.components():
             component = list(Comp)
             component.sort()
-            print str(k) + ': ' + str(component)
+            print(str(k) + ': ' + str(component))
             xk = k + 1
 
     def collectcomps(self, x, A, ncomp):
@@ -3601,7 +3601,7 @@ class Digraph(object):
 
         oldAmplitude = oldMax - oldMin
         if Debug:
-            print oldMin, oldMed, oldMax, oldAmplitude
+            print(oldMin, oldMed, oldMax, oldAmplitude)
         
         newMin = Decimal(str(newMin))
         newMax = Decimal(str(newMax))       
@@ -3609,7 +3609,7 @@ class Digraph(object):
 
         newAmplitude = newMax - newMin
         if Debug:
-            print newMin, newMed, newMax, newAmplitude
+            print(newMin, newMed, newMax, newAmplitude)
 
         actions = self.actions
         oldrelation = self.relation
@@ -3626,7 +3626,7 @@ class Digraph(object):
                 else:
                     newrelation[x][y] = newMin + ((self.relation[x][y] - oldMin)/oldAmplitude)*newAmplitude
                     if Debug:
-                        print x,y,self.relation[x][y],newrelation[x][y]
+                        print(x,y,self.relation[x][y],newrelation[x][y])
         # install new values in self
         self.valuationdomain['max'] = newMax
         self.valuationdomain['min'] = newMin
@@ -3866,8 +3866,8 @@ class Digraph(object):
             restchoice.remove(x)
             for y in restchoice:
                 nbcly = self.readabsvector(y,relation)
-                nbclchoice = map(lambda i: max(nbclchoice[i],nbcly[i]), range(n))
-            resultx = max(map(lambda i: min(nbclx[i],self.contra(nbclchoice)[i]), range(n)))      
+                nbclchoice = [max(nbclchoice[i],nbcly[i]) for i in range(n)]
+            resultx = max([min(nbclx[i],self.contra(nbclchoice)[i]) for i in range(n)])      
             result = min(result, resultx)
         return result            
 
@@ -3908,8 +3908,8 @@ class Digraph(object):
             restchoice.remove(x)
             for y in restchoice:
                 nbcly = self.readdomvector(y,relation)
-                nbclchoice = map(lambda i: max(nbclchoice[i],nbcly[i]), range(n))
-            resultx = max(map(lambda i: min(nbclx[i],self.contra(nbclchoice)[i]), range(n)))      
+                nbclchoice = [max(nbclchoice[i],nbcly[i]) for i in range(n)]
+            resultx = max([min(nbclx[i],self.contra(nbclchoice)[i]) for i in range(n)])      
             result = min(result, resultx)
         return result                  
 
@@ -3947,7 +3947,7 @@ class Digraph(object):
     def save(self,fileName='tempdigraph',option=None,Decimal=True):
         """Persistent storage of a Digraph class instance in the form of
             a python source code file"""
-        print '*--- Saving digraph in file: <' + fileName + '.py> ---*'
+        print('*--- Saving digraph in file: <' + fileName + '.py> ---*')
         actions = self.actions
         relation = self.relation
         Min = self.valuationdomain['min']
@@ -4011,7 +4011,7 @@ class Digraph(object):
             #self.visitedArcs.add((n1,n2))
             #OddFlag = True
             if Debug:
-                print 'len(Pk)', Pk, len(Pk), len(Pk) % 2
+                print('len(Pk)', Pk, len(Pk), len(Pk) % 2)
 
             if Odd:
                 if (len(Pk) % 2) != 1:
@@ -4022,12 +4022,12 @@ class Digraph(object):
                 OddFlag = True
 
             if Debug:
-                print 'OddFlag: ', OddFlag
+                print('OddFlag: ', OddFlag)
             if OddFlag:
                 #Pk.append(n2)
                 self.xCC.append(Pk)
                 if Debug:
-                    print 'Chordless circuit certificate -->>> ', Pk           
+                    print('Chordless circuit certificate -->>> ', Pk)           
         else:
             detectedChordlessPath = False
             NBn1 = set(self.gamma[n1][0]-self.gamma[n1][1])
@@ -4052,12 +4052,12 @@ class Digraph(object):
                     if noChord:
                         P.append(n)
                         if Debug:
-                            print 'P,n2',P,n2
+                            print('P,n2',P,n2)
                         if self.chordlessPaths(P,n2,Odd,Comments,Debug):
                             detectedChordlessPath = True
             #self.visitedArcs.add((n1,n2))
             if Debug:
-                print 'No further chordless path from ',n1,' to ', n2
+                print('No further chordless path from ',n1,' to ', n2)
         return detectedChordlessPath
 
     def detectChordlessPath(self,Pk,n2,Comments=False,Debug=False):
@@ -4077,7 +4077,7 @@ class Digraph(object):
         if self.relation[n1][n2] > med and self.relation[n2][n1] <= med:
             Detected = True
             if Debug:
-                print 'Chordless circuit certificate -->>> ', Pk           
+                print('Chordless circuit certificate -->>> ', Pk)           
         else:
             Detected = False
             NBn1 = set(self.gamma[n1][0]-self.gamma[n1][1])
@@ -4098,7 +4098,7 @@ class Digraph(object):
                     if noChord:
                         P.append(n)
                         if Debug:
-                            print 'P,n2',P,n2
+                            print('P,n2',P,n2)
                         Detected = self.detectChordlessPath(P,n2,Comments,Debug)
                 if Detected:
                         break
@@ -4130,21 +4130,21 @@ class Digraph(object):
         elif os.path.exists('/opt/local/bin/detectChordlessCircuits'):
             os.system('/opt/local/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
         else:
-            print 'Error: detectChordlessCircuits binary could not be found !!!'
-        execfile(str(resultFile))
+            print('Error: detectChordlessCircuits binary could not be found !!!')
+        exec(compile(open(str(resultFile)).read(), str(resultFile), 'exec'))
         circuits = locals()['circuitsList']
         if circuits == []:
             Detected = False
         else:
             Detected = True
         if Debug:
-            print resultFile
-            print locals()['circuitsList']
+            print(resultFile)
+            print(locals()['circuitsList'])
             if Detected:
-                print 'A chordless circuit has been detected !'
+                print('A chordless circuit has been detected !')
             else:
-                print 'No chordless circuit has been detected !'
-            print 'certificate: ', circuits
+                print('No chordless circuit has been detected !')
+            print('certificate: ', circuits)
 
         return Detected
 
@@ -4161,7 +4161,7 @@ class Digraph(object):
         elif os.path.exists('/opt/local/bin/enumChordlessCircuitsInOutPiping'):
             p = Popen(args=['/opt/local/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
         else:
-            print 'Error: executable enumChordlessCircuitsInOutPiping not found !!!'
+            print('Error: executable enumChordlessCircuitsInOutPiping not found !!!')
         Med = self.valuationdomain['med']
         actions = [x for x in self.actions]
         relation = self.relation
@@ -4173,7 +4173,7 @@ class Digraph(object):
                         inputString += '%d %d \n' % (i+1,j+1)
         circuits = eval(p.communicate(input=inputString.encode('utf-8'))[0])
         if Debug:
-            print circuits
+            print(circuits)
         result = []
         for x in circuits:
             # !! a circuit has a length n + 1 !!
@@ -4222,12 +4222,12 @@ class Digraph(object):
         elif os.path.exists('/opt/local/bin/enumChordlessCircuits'):
             os.system('/opt/local/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
         else:
-            print 'Error: enumChordlessCircuits binary not found !!!'
-        execfile(str(resultFile))
+            print('Error: enumChordlessCircuits binary not found !!!')
+        exec(compile(open(str(resultFile)).read(), str(resultFile), 'exec'))
         circuits = locals()['circuitsList']
         if Debug:
-            print resultFile
-            print locals()['circuitsList']
+            print(resultFile)
+            print(locals()['circuitsList'])
         result = []
         for x in circuits:
             # !! a circuit has a length n + 1 !!
@@ -4259,9 +4259,9 @@ class Digraph(object):
         #import copy
         if Comments:
             if Odd:
-                print '*--- chordless odd circuits ---*'
+                print('*--- chordless odd circuits ---*')
             else:
-                print '*--- chordless circuits ---*'
+                print('*--- chordless circuits ---*')
         
         actionsList = list(self.actions)
         self.visitedArcs = set()
@@ -4270,14 +4270,14 @@ class Digraph(object):
         for x in actionsList:
             P = [x]
             if Comments:
-                print 'Starting from ', x
+                print('Starting from ', x)
             self.xCC = []
             if self.chordlessPaths(P,x,Odd,Comments,Debug):
                 chordlessCircuits += self.xCC
         self.chordlessCircuits = chordlessCircuits
         if Comments:
-            print 'result:', len(self.chordlessCircuits), 'circuit(s)'
-            print self.chordlessCircuits
+            print('result:', len(self.chordlessCircuits), 'circuit(s)')
+            print(self.chordlessCircuits)
 
         circuitsList = []
         for x in self.chordlessCircuits:
@@ -4291,7 +4291,7 @@ class Digraph(object):
         Returns a Boolean
         """
         if Comments:
-            print '* ---- detecting a chordless circuit, the case given. ----*'
+            print('* ---- detecting a chordless circuit, the case given. ----*')
 
         actionsList = list(self.actions)
         self.visitedArcs = set()
@@ -4300,16 +4300,16 @@ class Digraph(object):
         for x in actionsList:
             P = [x]
             if Comments:
-                print 'Starting from ', x
+                print('Starting from ', x)
             self.xCC = []
             if self.detectChordlessPath(P,x,Comments,Debug):
                 Detected = True
                 break
         if Comments:
             if Detected:
-                print 'A chordless circuit has been detected !'
+                print('A chordless circuit has been detected !')
             else:
-                print 'No chordless circuit has been detected !'
+                print('No chordless circuit has been detected !')
                 
         return Detected
 
@@ -4318,28 +4318,28 @@ class Digraph(object):
         """
         show methods for chordless circuits in CocaGraph
         """
-        print '*---- Chordless circuits ----*'
+        print('*---- Chordless circuits ----*')
         try:
             for (circList,circSet) in self.circuitsList:
                 deg = self.circuitMinCredibility(circSet)
-                print circList, ', credibility :', deg
-            print '%d circuits.' % (len(self.circuitsList))
+                print(circList, ', credibility :', deg)
+            print('%d circuits.' % (len(self.circuitsList)))
         except:
-            print 'No circuits computed. Run computeChordlessCircuits()!'
+            print('No circuits computed. Run computeChordlessCircuits()!')
 
 
     def showChordlessCircuits(self):
         """
         show methods for chordless circuits in CocaGraph
         """
-        print '*---- Chordless circuits ----*'
+        print('*---- Chordless circuits ----*')
         try:
             for (circList,circSet) in self.circuitsList:
                 deg = self.circuitMinCredibility(circSet)
-                print circList, ', credibility :', deg
-            print '%d circuits.' % (len(self.circuitsList))
+                print(circList, ', credibility :', deg)
+            print('%d circuits.' % (len(self.circuitsList)))
         except:
-            print 'No circuits computed. Run computeChordlessCircuits()!'
+            print('No circuits computed. Run computeChordlessCircuits()!')
 
     def minimalValuationLevelForCircuitsElimination(self,Debug=False,Comments=False):
         """
@@ -4360,14 +4360,14 @@ class Digraph(object):
         qualmaj = Med
         oddCircuitsList = [cc for cc in circuitsList if (len(cc[0])%2 == 1)]
         if Debug:
-            print 'Number of chordless circuits: ', len(circuitsList)
-            print circuitsList
-            print 'Number of chordless odd circuits: ', len(oddCircuitsList)
-            print oddCircuitsList
+            print('Number of chordless circuits: ', len(circuitsList))
+            print(circuitsList)
+            print('Number of chordless odd circuits: ', len(oddCircuitsList))
+            print(oddCircuitsList)
         for cc in oddCircuitsList:
             circuit = cc[0]
             if Debug:
-                print circuit
+                print(circuit)
             ccqualmaj = self.circuitMinCredibility(circuit)
             ## n = len(circuit)
             ## for i in range(n-1):
@@ -4383,11 +4383,11 @@ class Digraph(object):
             ##         if abs(self.relation[y][x]) < ccqualmaj:
             ##             ccqualmaj = abs(self.relation[y][x])
             if Debug:
-                print '==>>', circuit, ccqualmaj
+                print('==>>', circuit, ccqualmaj)
             qualmaj = max(qualmaj,ccqualmaj)
         if Debug or Comments:
-            print 'Number of chordless odd circuits: ', len(oddCircuitsList)
-            print 'Minimal cutting level for eliminating them: %.3f' % qualmaj
+            print('Number of chordless odd circuits: ', len(oddCircuitsList))
+            print('Minimal cutting level for eliminating them: %.3f' % qualmaj)
         return qualmaj
 
     ## def minimalValuationLevelForCircuitsEliminationOld(self,Debug=False):
@@ -4499,7 +4499,7 @@ class Digraph(object):
         Max = Decimal(str(self.valuationdomain['max']))
         Min = Decimal(str(self.valuationdomain['min']))
         #print v
-        nv = map(lambda x: Max - v[x] + Min , range(len(v)))
+        nv = [Max - v[x] + Min for x in range(len(v))]
         return nv
 
     def sharpvec(self, v, w):
@@ -4507,7 +4507,7 @@ class Digraph(object):
         Paramaters: choice characteristic vectors.
         Renders the sharpest of two characteristic vectors v and w.
         """
-        sv = map(lambda x: self.sharp(v[x],w[x]), range(len(v)))
+        sv = [self.sharp(v[x],w[x]) for x in range(len(v))]
         return sv
 
     def sharp(self, x, y):
@@ -4529,7 +4529,7 @@ class Digraph(object):
         Renders the inner product of two characteristic vetors.
         """
         res = Decimal(str(self.valuationdomain['min']))
-        for i in xrange(len(v1)):
+        for i in range(len(v1)):
             res = max(res, min(v1[i],v2[i]))
         return res
 
@@ -4629,10 +4629,10 @@ class Digraph(object):
         import copy,time
         if Debug:
             Comments = True
-        print '***********************'
-        print 'RuBis BCR'
+        print('***********************')
+        print('RuBis BCR')
         if Comments:
-            print 'All comments !!!'
+            print('All comments !!!')
         t0 = time.time()
         n0 = self.order
         _selfwcoc = CocaDigraph(self,Comments=Comments)
@@ -4644,8 +4644,8 @@ class Digraph(object):
             self.actions = copy.deepcopy(_selfwcoc.actions)
             self.order = len(self.actions)
             self.relation = copy.deepcopy(_selfwcoc.relation)
-        print 'List of pseudo-independent choices'
-        print self.actions
+        print('List of pseudo-independent choices')
+        print(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         if Debug:
@@ -4664,9 +4664,9 @@ class Digraph(object):
         self.computeGoodChoices(Comments=Comments)
         self.computeBadChoices(Comments=Comments)
         t1 = time.time()
-        print '* --- Rubis best choice recommendation(s) ---*'
-        print '  (in decreasing order of determinateness)   '
-        print 'Credibility domain: ', self.valuationdomain
+        print('* --- Rubis best choice recommendation(s) ---*')
+        print('  (in decreasing order of determinateness)   ')
+        print('Credibility domain: ', self.valuationdomain)
         Med = self.valuationdomain['med']
         bestChoice = set()
         worstChoice = set()
@@ -4678,26 +4678,26 @@ class Digraph(object):
                         #if gch[0] == bch[0]:
                         if gch[3] == gch[4]:
                             if Comments:
-                                print 'null choice '
+                                print('null choice ')
                                 self.showChoiceVector(gch)
                                 self.showChoiceVector(bch)
                             goodChoice = False
                         elif gch[4] > gch[3]:
                             if Comments:
-                                print 'outranked choice '
+                                print('outranked choice ')
                                 self.showChoiceVector(gch)
                                 self.showChoiceVector(bch)
                             goodChoice = False
                         else:
                             goodChoice = True
                 if goodChoice:
-                    print ' === >> potential BCR '
+                    print(' === >> potential BCR ')
                     self.showChoiceVector(gch)
                     if bestChoice == set():
                         bestChoice = gch[5]                   
             else:
                 if Comments:
-                    print 'non robust best choice '
+                    print('non robust best choice ')
                     self.showChoiceVector(gch)
         for bch in self.badChoices:
             if bch[0] <= Med:
@@ -4708,37 +4708,37 @@ class Digraph(object):
                         #if gch[0] == bch[0]:
                         if bch[3] == bch[4]:
                             if Comments:
-                                print 'null choice '
+                                print('null choice ')
                                 self.showChoiceVector(gch)
                                 self.showChoiceVector(bch)
                             badChoice = False
                             nullChoice = True
                         elif bch[3] > bch[4]:
                             if Comments:
-                                print 'outranking choice '
+                                print('outranking choice ')
                                 self.showChoiceVector(gch)
                                 self.showChoiceVector(bch)
                             badChoice = False
                         else:
                             badChoice = True
                 if badChoice:
-                    print ' === >> potential worst choice '
+                    print(' === >> potential worst choice ')
                     self.showChoiceVector(bch)
                     if worstChoice == set():
                         worstChoice = bch[5]
                 elif nullChoice:
-                    print ' === >> ambiguous choice '
+                    print(' === >> ambiguous choice ')
                     self.showChoiceVector(bch)
                     if worstChoice == set():
                         worstChoice = bch[5]
                      
             else:
                 if Comments:
-                    print 'non robust worst choice '
+                    print('non robust worst choice ')
                     self.showChoiceVector(bch)
-        print
-        print 'Execution time: %.3f seconds' % (t1-t0)
-        print '*****************************'
+        print()
+        print('Execution time: %.3f seconds' % (t1-t0))
+        print('*****************************')
         self.bestChoice = bestChoice
         self.worstChoice = worstChoice
         if nc > 0:
@@ -4766,7 +4766,7 @@ class Digraph(object):
         """
         import copy,time
         if Comments:
-            print '*--- computing the COCA digraph --*'
+            print('*--- computing the COCA digraph --*')
         
         n0 = self.order
         t0 = time.time()
@@ -4775,7 +4775,7 @@ class Digraph(object):
         n1 = _selfwcoc.order
         nc = n1 - n0
         if Comments:
-            print 'Execution time: %.3f seconds' % (t1-t0)
+            print('Execution time: %.3f seconds' % (t1-t0))
             _selfwcoc.showPreKernels()
         try:
             actions_orig = copy.deepcopy(self.actions_orig)
@@ -4853,7 +4853,7 @@ class Digraph(object):
                 temp.computePreKernels()
         for ker in temp.dompreKernels:
             if Comments:
-                print '--> kernel:', ker
+                print('--> kernel:', ker)
             choice = [y for y in ker]
             #choice.sort()
             degi = temp.intstab(ker)
@@ -4871,8 +4871,8 @@ class Digraph(object):
             veclowa = vec0_a
             vechigha = vec1_a
             if Comments:
-                print  'initial veclowa',veclowa
-                print  'initial vechigha', vechigha
+                print('initial veclowa',veclowa)
+                print('initial vechigha', vechigha)
             it = 1
             while veclowa != vechigha and it < 2*n*n:
                 veclowb = temp.matmult2(mat,veclowa)
@@ -4883,13 +4883,13 @@ class Digraph(object):
                 veclowa = veclow
                 vechigha = vechigh
                 if Comments:
-                    print  it, 'th veclowa  :',veclowa
-                    print  it, 'th vechigha :',vechigha
+                    print(it, 'th veclowa  :',veclowa)
+                    print(it, 'th vechigha :',vechigha)
                 it += 1
             if Comments:
-                print  'final veclowa  :', veclowa
-                print  'final vechigha :', vechigha
-                print  '#iterations    :', it
+                print('final veclowa  :', veclowa)
+                print('final vechigha :', vechigha)
+                print('#iterations    :', it)
             domvec = temp.sharpvec(veclowa,vechigha)
             determ = temp.determinateness(domvec)
             domChoicesSort.append([-determ,degirred,degi,degd,dega,str(choice),domvec])
@@ -4927,7 +4927,7 @@ class Digraph(object):
             self.computePreKernels()
         for ker in self.dompreKernels:
             if Comments:
-                print '--> kernel:', ker
+                print('--> kernel:', ker)
             choice = [y for y in ker]
             #choice.sort()
             degi = self.intstab(ker)
@@ -4943,7 +4943,7 @@ class Digraph(object):
                 if actions[x] in choice:
                     vecsol0[x] = Max
             if Comments:
-                print 'initial solution', vecsol0
+                print('initial solution', vecsol0)
             mat0 = [self.readdomvector(x,relation) for x in actions]
             mat = self.irreflex(mat0)
             vecsol = vecsol0
@@ -4952,13 +4952,13 @@ class Digraph(object):
             while it < 2*n*n:
                 vecsolfin = self.matmult2(mat,vecsol)
                 if Comments:
-                    print  it, 'th vecsol  :',vecsol
+                    print(it, 'th vecsol  :',vecsol)
                 veccur = self.contra(vecsolfin)
                 if vecsol == veccur : break
                 vecsol = veccur
                 it += 1
             if Comments:
-                print 'Final Solution=', vecsol
+                print('Final Solution=', vecsol)
             determ = self.determinateness(vecsol)
             domChoicesSort.append([-determ,degirred,degi,degd,dega,str(choice),vecsol])
         domChoicesSort.sort()
@@ -4984,7 +4984,7 @@ class Digraph(object):
             self.computePreKernels()
         for ker in self.abspreKernels:
             if Comments:
-                print '--> kernel:', ker
+                print('--> kernel:', ker)
             choice = [y for y in ker]
             #choice.sort()
             degi = self.intstab(ker)
@@ -5000,7 +5000,7 @@ class Digraph(object):
                 if actions[x] in choice:
                     vecsol0[x] = Max
             if Comments:
-                print 'initial solution', vecsol0
+                print('initial solution', vecsol0)
             mat0 = [self.readabsvector(x,relation) for x in actions]
             mat = self.irreflex(mat0)
             vecsol = vecsol0
@@ -5009,13 +5009,13 @@ class Digraph(object):
             while it < 2*n*n:
                 vecsolfin = self.matmult2(mat,vecsol)
                 if Comments:
-                    print  it, 'th vesol :',vecsol
+                    print(it, 'th vesol :',vecsol)
                 veccur = self.contra(vecsolfin)
                 if vecsol == veccur : break
                 vecsol = veccur
                 it += 1
             if Comments:
-                print 'Final Solution=', vecsol
+                print('Final Solution=', vecsol)
             determ = self.determinateness(vecsol)
             absChoicesSort.append([-determ,degirred,degi,degd,dega,str(choice),vecsol])
         absChoicesSort.sort()
@@ -5061,7 +5061,7 @@ class Digraph(object):
             temp.computePreKernels()
         for ker in temp.abspreKernels:
             if Comments:
-                print '--> kernel:', ker
+                print('--> kernel:', ker)
             choice = [y for y in ker]
             #choice.sort()
             degi = temp.intstab(ker)
@@ -5078,8 +5078,8 @@ class Digraph(object):
             veclowa = vec0_a
             vechigha = vec1_a
             if Comments:
-                print  'initial veclowa',veclowa
-                print  'initial vechigha', vechigha
+                print('initial veclowa',veclowa)
+                print('initial vechigha', vechigha)
             it = 1
             while veclowa != vechigha and it < 2*n*n:
                 veclowb = temp.matmult2(mat,veclowa)
@@ -5090,12 +5090,12 @@ class Digraph(object):
                 veclowa = veclow
                 vechigha = vechigh
                 if Comments:
-                    print  it, 'th veclowa  :',veclowa
-                    print  it, 'th vechigha :',vechigha
+                    print(it, 'th veclowa  :',veclowa)
+                    print(it, 'th vechigha :',vechigha)
                 it += 1
             if Comments:
-                print  'final veclowa',veclowa
-                print  'final vechigha', vechigha       
+                print('final veclowa',veclowa)
+                print('final vechigha', vechigha)       
             absvec = temp.sharpvec(veclowa,vechigha)
             determ = temp.determinateness(absvec)
             absChoicesSort.append([-determ,degirred,degi,degd,dega,str(choice),absvec])
@@ -5127,19 +5127,19 @@ class Digraph(object):
         dega = ch[4]
         choice = ch[5]
         vec = ch[6]
-        print '* choice              : ' + str(choice)
-        print '  +-irredundancy      : %.2f' % (degirred)
-        print '  independence        : %.2f' % (degi)
-        print '  dominance           : %.2f' % (degd)
-        print '  absorbency          : %.2f' % (dega)
-        print '  covering (%)' + '        : %.2f' % ( self.averageCoveringIndex(choice) * Decimal('100') )
-        print "  determinateness (%)",
-        print ': %.2f' % (determ)
-        print '  - characteristic vector = [',
+        print('* choice              : ' + str(choice))
+        print('  +-irredundancy      : %.2f' % (degirred))
+        print('  independence        : %.2f' % (degi))
+        print('  dominance           : %.2f' % (degd))
+        print('  absorbency          : %.2f' % (dega))
+        print('  covering (%)' + '        : %.2f' % ( self.averageCoveringIndex(choice) * Decimal('100') ))
+        print("  determinateness (%)", end=' ')
+        print(': %.2f' % (determ))
+        print('  - characteristic vector = [', end=' ')
         for i in range(len(actions)):
-            print '\'%s\': %.2f,' %  (str(actions[i]),vec[i]),
-        print ']'
-        print
+            print('\'%s\': %.2f,' %  (str(actions[i]),vec[i]), end=' ')
+        print(']')
+        print()
 
     def showGoodChoices(self,Recompute=True):
         """
@@ -5154,8 +5154,8 @@ class Digraph(object):
         actions = [x for x in temp.actions]
         n = len(actions)
         relation = temp.relation
-        print '*** Potentially good choices ***'
-        print '    valuationdomain', temp.valuationdomain
+        print('*** Potentially good choices ***')
+        print('    valuationdomain', temp.valuationdomain)
         domChoicesSort = []
         if 'dompreKernels' not in dir(temp) or Recompute:
             temp.computePreKernels()
@@ -5168,18 +5168,18 @@ class Digraph(object):
             degirred = temp.domirredval(ker,relation)
             degmd = min(degi,degd)
             domChoicesSort.append([-degmd,degirred,degi,degd,dega,str(choice)])
-        print 'domChoicesSort', domChoicesSort 
+        print('domChoicesSort', domChoicesSort) 
         for ch in domChoicesSort:
             choice = ch[5]
             degirred = ch[1]
             degi = ch[2]
             degd = ch[3]
             dega = ch[4]
-            print '* choice           : ' + str(choice)
-            print '  +irredundance    : %.2f' % (degirred)
-            print '  independence     : %.2f' % (degi)
-            print '  dominance        : %.2f' % (degd)
-            print '  absorbency       : %.2f' % (dega)
+            print('* choice           : ' + str(choice))
+            print('  +irredundance    : %.2f' % (degirred))
+            print('  independence     : %.2f' % (degi))
+            print('  dominance        : %.2f' % (degd))
+            print('  absorbency       : %.2f' % (dega))
             relation_k = temp.domkernelrestrict(eval(choice))
             vec1_a = [Max for i in range(n)]
             vec0_a = [Min for i in range(n)]
@@ -5196,12 +5196,12 @@ class Digraph(object):
                 veclowa = veclow
                 vechigha = vechigh
                 it += 1
-            print '  + characteristic vector = [',
+            print('  + characteristic vector = [', end=' ')
             bestvec = temp.sharpvec(veclowa,vechigha)
             for i in range(len(actions)):
-                print '\'' + str(actions[i]) + '\': ',bestvec[i], ' ',
-            print ']'
-            print
+                print('\'' + str(actions[i]) + '\': ',bestvec[i], ' ', end=' ')
+            print(']')
+            print()
 
     def irreflex(self,mat):
         """
@@ -5226,8 +5226,8 @@ class Digraph(object):
         actions = [x for x in temp.actions]
         #actions.sort()
         relation = temp.relation
-        print '*** Potentially bad choices ***'
-        print '    valuationdomain', temp.valuationdomain
+        print('*** Potentially bad choices ***')
+        print('    valuationdomain', temp.valuationdomain)
         absChoicesSort = []
         if 'abspreKernels' not in dir(temp) or Recompute:
             temp.computePreKernels()
@@ -5240,7 +5240,7 @@ class Digraph(object):
             degirred = temp.absirredval(ker,relation)
             degmd = min(degi,dega)
             absChoicesSort.append((-degmd,degirred,degi,degd,dega,str(choice)))
-        print 'absChoicesSort', absChoicesSort
+        print('absChoicesSort', absChoicesSort)
         absChoicesSort.sort()
         for ch in absChoicesSort:
             choice = ch[5]
@@ -5248,11 +5248,11 @@ class Digraph(object):
             degi = ch[2]
             degd = ch[3]
             dega = ch[4]
-            print '* choice           : ' + str(choice)
-            print '  -irredundance    : %.2f' % (degirred)
-            print '  independence     : %.2f' % (degi)
-            print '  dominance        : %.2f' % (degd)
-            print '  absorbency       : %.2f' % (dega)
+            print('* choice           : ' + str(choice))
+            print('  -irredundance    : %.2f' % (degirred))
+            print('  independence     : %.2f' % (degi))
+            print('  dominance        : %.2f' % (degd))
+            print('  absorbency       : %.2f' % (dega))
             relation_k = temp.abskernelrestrict(eval(choice))
             n = len(actions)
             vec1_a = [Max for i in range(n)]
@@ -5270,12 +5270,12 @@ class Digraph(object):
                 veclowa = veclow
                 vechigha = vechigh
                 it += 1
-            print '  - characteristic vector = [',
+            print('  - characteristic vector = [', end=' ')
             bestvec = temp.sharpvec(veclowa,vechigha)
             for i in range(len(actions)):
-                print '\'' + str(actions[i]) + '\': ',bestvec[i], ' ',
-            print ']'
-            print
+                print('\'' + str(actions[i]) + '\': ',bestvec[i], ' ', end=' ')
+            print(']')
+            print()
 
     def showMIS_AH(self,withListing=True):
         """
@@ -5295,7 +5295,7 @@ class Digraph(object):
         notGamma = self.notGammaSets()
         t0 = time.time()
         # MIS extraction
-        print '*---- MIS extraction ----'
+        print('*---- MIS extraction ----')
         t0 = time.time()
         # initialize MIS extraction
         hertzmisset = set()  # global MIS collector set to empty
@@ -5308,7 +5308,7 @@ class Digraph(object):
             S.add(i)
             gammaS = gammaS | gamma[i][0]
         if withListing:
-            print '===>>> Inital solution : ', list(S)
+            print('===>>> Inital solution : ', list(S))
         hertzmisset = hertzmisset | set([frozenset(S)])        
         # initialize all variables
         R = V - S
@@ -5384,29 +5384,29 @@ class Digraph(object):
         # end of algorithm
         t1 = time.time()
         if withListing:
-            print '*---- results ----*'
+            print('*---- results ----*')
         v = [0 for i in range(n+1)]
         mislen = set()
         for ch in hertzmisset:
             v[len(ch)] += 1
             if withListing:
-                print list(ch)
+                print(list(ch))
             mislen = mislen | set([len(ch)])
-        print '*---- statistics ----*'
-        print 'mis lengths      : ', range(self.order+1)
-        print 'frequency        : ', v
+        print('*---- statistics ----*')
+        print('mis lengths      : ', list(range(self.order+1)))
+        print('frequency        : ', v)
         mislenlist = list(mislen)
         mislenlist.sort()
-        print 'mis lengths      : ', mislenlist
-        print 'mis solutions    : ', len(hertzmisset)
-        print 'execution time   : %.5f sec.' % (t1 - t0)
-        print 'iteration history: ', hist
-        print 'result in self.hertzmisset'
-        print '*-----------------------------------*'
-        print "* Python implementation of Hertz's  *"
-        print '* algorithm for generating all MIS  *'
-        print '* R.B. version 7(6)-25-Apr-06       *'
-        print '*-----------------------------------*'
+        print('mis lengths      : ', mislenlist)
+        print('mis solutions    : ', len(hertzmisset))
+        print('execution time   : %.5f sec.' % (t1 - t0))
+        print('iteration history: ', hist)
+        print('result in self.hertzmisset')
+        print('*-----------------------------------*')
+        print("* Python implementation of Hertz's  *")
+        print('* algorithm for generating all MIS  *')
+        print('* R.B. version 7(6)-25-Apr-06       *')
+        print('*-----------------------------------*')
         # store global results
         self.mislen = mislenlist
         self.hertzmisset = hertzmisset
@@ -5461,22 +5461,22 @@ class Digraph(object):
                 newmisset = newmisset | set([frozenset(S)])
                 initmisset.append((len(S),frozenset(S)))
             R = R - S # further remaining unused nodes
-        print '\ninital MISs '
+        print('\ninital MISs ')
         # sorting MIS by increasing length
         initmisset.sort()
         i = 0
         for mis in initmisset:
-            print list(mis[1]), mis[0]
+            print(list(mis[1]), mis[0])
             i +=1
 
         # MIS extraction
-        print '*---- MIS extraction ----'
+        print('*---- MIS extraction ----')
         mislen = set()   # list of MIS length observed
         S = initmisset[i-1][1]  # start with largest init MIS
-        print '===>>> Initial solution : ', list(S)
+        print('===>>> Initial solution : ', list(S))
         ns = len(S)
 
-        print '--> iteration 0 '
+        print('--> iteration 0 ')
         mislen = mislen | set([ns])
 
         upmis = set()  # independent choices as MIS candidates
@@ -5489,9 +5489,9 @@ class Digraph(object):
         uphistory = set()
         while upmis != set():
             iter += 1  # next iteration init
-            print '--> up iteration: ', iter
+            print('--> up iteration: ', iter)
             upmisiter = copy.copy(upmis)
-            print 'potential choices: ', len(upmisiter)
+            print('potential choices: ', len(upmisiter))
             uphistory = uphistory | upmis
             upmis = set()
             # up movement
@@ -5517,27 +5517,27 @@ class Digraph(object):
                             upmis = upmis | set([frozenset(Srch)])
 
         t1 = time.time()
-        print '*---- results ----*'
+        print('*---- results ----*')
         v = [0 for i in range(n+1)]
         for ch in newmisset:
             v[len(ch)] += 1
             if withListing:
-                print list(ch)
-        print '*---- statistics ----*'
-        print 'mis lengths   : ', range(self.order+1)
-        print 'frequency     : ', v
+                print(list(ch))
+        print('*---- statistics ----*')
+        print('mis lengths   : ', list(range(self.order+1)))
+        print('frequency     : ', v)
         mislenlist = list(mislen)
         mislenlist.sort()
-        print 'mis lengths   : ', mislenlist
-        print 'mis solutions : ', len(newmisset)
-        print 'execution time: %.5f sec.' % (t1 - t0)
-        print 'up-history    : ', len(uphistory)
-        print 'result in self.newmisset'
-        print '*-----------------------------------*'
-        print "* Python implementation of Hertz's  *"
-        print '* algorithm for generating all MIS  *'
-        print '* R.B. version Ronda  April 2006    *'
-        print '*-----------------------------------*'
+        print('mis lengths   : ', mislenlist)
+        print('mis solutions : ', len(newmisset))
+        print('execution time: %.5f sec.' % (t1 - t0))
+        print('up-history    : ', len(uphistory))
+        print('result in self.newmisset')
+        print('*-----------------------------------*')
+        print("* Python implementation of Hertz's  *")
+        print('* algorithm for generating all MIS  *')
+        print('* R.B. version Ronda  April 2006    *')
+        print('*-----------------------------------*')
         # store global results
         self.mislen = mislenlist
         self.newmisset = newmisset
@@ -5595,19 +5595,19 @@ class Digraph(object):
                 self.newmisset = self.newmisset | set([frozenset(S)])
                 initmisset.append((len(S),frozenset(S)))
             R = R - S # further remaining unused nodes
-        print '\ninital MISs '
+        print('\ninital MISs ')
         # sorting MIS by increasing length
         initmisset.sort()
         for mis in initmisset:
-            print list(mis[1]), mis[0]
-        print '*---- same mises with up and down potentials ----'
+            print(list(mis[1]), mis[0])
+        print('*---- same mises with up and down potentials ----')
         self.upmis = set()    # independent choices as MIS candidates
         self.downmis = set()  # covering choices as MIS candidates
         self.mislen = set()   # list of MIS length observed
         for mis in initmisset:
             S = mis[1]
-            print '===>>> Inital solution : ', list(S)
-            print '--> compute MIS of same size ', len(S)
+            print('===>>> Inital solution : ', list(S))
+            print('--> compute MIS of same size ', len(S))
             s = 0
             ns = mis[0]
             self.mislen = self.mislen | set([ns])
@@ -5616,7 +5616,7 @@ class Digraph(object):
             iter = 0
             while self.upmis != set() or self.downmis != set():
                 iter += 1  # next iteration init
-                print '\n--> up iteration: ', iter
+                print('\n--> up iteration: ', iter)
                 self.upmisiter = self.upmis.copy()
                 self.upmis = set()
                 self.downmisiter = self.downmis.copy()
@@ -5636,7 +5636,7 @@ class Digraph(object):
                         s = 0
                         self.computeupdown1(s,Sch)
                 # down movement
-                print '\n*    <<< down potentials in', iter
+                print('\n*    <<< down potentials in', iter)
                 for Sch in self.downmisiter:
                     for v in Sch:
                         if self.gamma[v][0] & Sch != set():
@@ -5654,27 +5654,27 @@ class Digraph(object):
                                 if Sch | gammaSch == V:
                                     self.downmis = self.downmis | set([frozenset(Sch)])
 
-            print 'solutions: ', len(self.newmisset)
+            print('solutions: ', len(self.newmisset))
 
         t1 = time.time()
-        print '*---- results ----*'
+        print('*---- results ----*')
         v = [0 for i in range(n+1)]
         for ch in self.newmisset:
             v[len(ch)] += 1
             if withListing:
-                print list(ch)
-        print '*---- statistics ----*'
-        print 'mis lengths   : ', range(self.order+1)
-        print 'frequency     : ', v
-        print 'mis lengths   : ', list(self.mislen)
-        print 'mis solutions : ', len(self.newmisset)
-        print 'execution time: %.5f sec.' % (t1 - t0)
-        print 'result in self.newmisset'
-        print '*-----------------------------------*'
-        print "* Python implementation of Hertz's  *"
-        print '* algorithm for generating all MIS  *'
-        print '* R.B. April 2006                   *'
-        print '*-----------------------------------*'
+                print(list(ch))
+        print('*---- statistics ----*')
+        print('mis lengths   : ', list(range(self.order+1)))
+        print('frequency     : ', v)
+        print('mis lengths   : ', list(self.mislen))
+        print('mis solutions : ', len(self.newmisset))
+        print('execution time: %.5f sec.' % (t1 - t0))
+        print('result in self.newmisset')
+        print('*-----------------------------------*')
+        print("* Python implementation of Hertz's  *")
+        print('* algorithm for generating all MIS  *')
+        print('* R.B. April 2006                   *')
+        print('*-----------------------------------*')
         # restore original relation and neigborhooods
         self.relation = self.relationBackup
         self.gamma = self.gammaSets()
@@ -5688,7 +5688,7 @@ class Digraph(object):
         Min = self.valuationdomain['min']
         V = set(self.actions)
         R = V - S
-        print s, # recursion depth: traces the discovery of MISs
+        print(s, end=' ') # recursion depth: traces the discovery of MISs
         s += 1
         for v in S: # choose a leaving node
             Sv = S - set([v])
@@ -5760,12 +5760,12 @@ class Digraph(object):
                 self.newmisset = self.newmisset | set([frozenset(S)])
                 initmisset.append((len(S),frozenset(S)))
             R = R - S # further remaining unused nodes
-        print '\ninital MISs '
+        print('\ninital MISs ')
         # sorting MIS by increasing length
         initmisset.sort()
         for mis in initmisset:
-            print list(mis[1]), mis[0]
-        print '*---- same mises with up and down potentials ----'
+            print(list(mis[1]), mis[0])
+        print('*---- same mises with up and down potentials ----')
         self.upmis = set()    # independent choices as MIS candidates
         self.uphistory = set()
         self.downmis = set()  # covering choices as MIS candidates
@@ -5773,8 +5773,8 @@ class Digraph(object):
         self.mislen = set()   # list of MIS length observed
         for mis in initmisset:
             S = mis[1]
-            print '===>>> Inital solution : ', list(S)
-            print '--> compute MIS of same size ', len(S)
+            print('===>>> Inital solution : ', list(S))
+            print('--> compute MIS of same size ', len(S))
             s = 0
             ns = mis[0]
             self.mislen = self.mislen | set([ns])
@@ -5791,7 +5791,7 @@ class Digraph(object):
                 self.downmis = set()
                 V = set(self.actions)
                 # up movement
-                print '\n  >>> up iteration: ', iter
+                print('\n  >>> up iteration: ', iter)
                 for Sup in self.upmisiter:
                     Sch = Sup[0]
                     gammaSch = Sup[1]
@@ -5805,7 +5805,7 @@ class Digraph(object):
                         s = 0
                         self.computeupdown2(s,Sch)
                 # down movement
-                print '\n*    <<< down potentials in', iter
+                print('\n*    <<< down potentials in', iter)
                 for Sch in self.downmisiter:
                     for v in Sch:
                         if self.gamma[v][0] & Sch != set():
@@ -5827,27 +5827,27 @@ class Digraph(object):
                                 if Sch | gammaSch == V and Sch not in self.downhistory:
                                     self.downmis = self.downmis | set([frozenset(Sch)])
 
-            print 'solutions: ', len(self.newmisset)
+            print('solutions: ', len(self.newmisset))
 
         t1 = time.time()
-        print '*---- results ----*'
+        print('*---- results ----*')
         v = [0 for i in range(n+1)]
         for ch in self.newmisset:
             v[len(ch)] += 1
             if withListing:
-                print list(ch)
-        print '*---- statistics ----*'
-        print 'mis lengths   : ', range(self.order+1)
-        print 'frequency     : ', v
-        print 'mis lengths   : ', list(self.mislen)
-        print 'mis solutions : ', len(self.newmisset)
-        print 'execution time: %.5f sec.' % (t1 - t0)
-        print 'result in self.newmisset'
-        print '*-----------------------------------*'
-        print "* Python implementation of Hertz's  *"
-        print '* algorithm for generating all MIS  *'
-        print '* R.B. April 2006                   *'
-        print '*-----------------------------------*'
+                print(list(ch))
+        print('*---- statistics ----*')
+        print('mis lengths   : ', list(range(self.order+1)))
+        print('frequency     : ', v)
+        print('mis lengths   : ', list(self.mislen))
+        print('mis solutions : ', len(self.newmisset))
+        print('execution time: %.5f sec.' % (t1 - t0))
+        print('result in self.newmisset')
+        print('*-----------------------------------*')
+        print("* Python implementation of Hertz's  *")
+        print('* algorithm for generating all MIS  *')
+        print('* R.B. April 2006                   *')
+        print('*-----------------------------------*')
         # restore original relation and neigborhooods
         self.relation = self.relationBackup
         self.gamma = self.gammaSets()
@@ -5866,7 +5866,7 @@ class Digraph(object):
             self.newmisset = self.newmisset | newmis
             S = newmis.pop()
             R = V - S
-            print s, # recursion depth: traces the discovery of MISs
+            print(s, end=' ') # recursion depth: traces the discovery of MISs
             s += 1
             #Siter = copy.copy(S)
             for v in S: # choose a leaving node
@@ -5880,17 +5880,17 @@ class Digraph(object):
                         Svr = Sv | set([r])
                         if self.gamma[r][0] & Sv == set():  # independent                            
                             if Svr not in self.newmisset:
-                                print 'new MIS ', Svr
+                                print('new MIS ', Svr)
                                 newmis = newmis | set([frozenset(Svr)])
                         else:                            
                             if Svr not in self.downhistory: 
-                                print 'down->',Svr
+                                print('down->',Svr)
                                 self.downmis = self.downmis | set([frozenset(Svr)])
                     else:
                         if self.gamma[r][0] & Sv == set():  # independent
                             Svr = Sv | set([r])
                             if Svr not in self.uphistory:
-                                print 'up ->',Svr
+                                print('up ->',Svr)
                                 gammaSvr = gammaSv | self.gamma[r][0]
                                 self.upmis = self.upmis | set([(frozenset(Svr),frozenset(gammaSvr))])
 
@@ -5907,7 +5907,7 @@ class Digraph(object):
             self.newmisset = self.newmisset | newmis
             S = newmis.pop()
             R = V - S
-            print s, # recursion depth: traces the discovery of MISs
+            print(s, end=' ') # recursion depth: traces the discovery of MISs
             s += 1
             #Siter = copy.copy(S)
             for v in S: # choose a leaving node
@@ -5948,17 +5948,17 @@ class Digraph(object):
         Debug = False
 
         if comments:
-            print '* --- compute O Distance of two digraphs ---- *'
+            print('* --- compute O Distance of two digraphs ---- *')
         ODistance = 0.0
         actionsList1 = [x for x in op1.actions]
         actionsList2 = [x for x in op2.actions]
         if len(actionsList1) != len(actionsList2):
             ODistance = None
             if comments:
-                print 'actionsList1', actionsList1
-                print 'actionsList2', actionsList2
-                print 'Error: Actions sets are not comaptible ?'
-                print '       ODistance = None !!!'
+                print('actionsList1', actionsList1)
+                print('actionsList2', actionsList2)
+                print('Error: Actions sets are not comaptible ?')
+                print('       ODistance = None !!!')
         else:
             Minop1 = op1.valuationdomain['min']
             Maxop1 = op1.valuationdomain['max']
@@ -5971,15 +5971,15 @@ class Digraph(object):
                 for j in range(i+1,n):
                     ODistance += math.pow(op1.relation[actionsList1[i]][actionsList1[j]] - op2.relation[actionsList2[i]][actionsList2[j]],2)
                     if Debug:
-                        print '==>>',
-                        print actionsList1[i],actionsList1[j], 'op1 =',
-                        print op1.relation[actionsList1[i]][actionsList1[j]]
-                        print actionsList2[i],actionsList2[j], 'op2 =',
-                        print op2.relation[actionsList2[i]][actionsList2[j]]
-                        print 'ODistance +=', math.pow(op1.relation[actionsList1[i]][actionsList1[j]] - op2.relation[actionsList2[i]][actionsList2[j]],2)
+                        print('==>>', end=' ')
+                        print(actionsList1[i],actionsList1[j], 'op1 =', end=' ')
+                        print(op1.relation[actionsList1[i]][actionsList1[j]])
+                        print(actionsList2[i],actionsList2[j], 'op2 =', end=' ')
+                        print(op2.relation[actionsList2[i]][actionsList2[j]])
+                        print('ODistance +=', math.pow(op1.relation[actionsList1[i]][actionsList1[j]] - op2.relation[actionsList2[i]][actionsList2[j]],2))
             if comments:
-                print 'ODistance between',op1.name, ' and'
-                print op2.name, '=', ODistance
+                print('ODistance between',op1.name, ' and')
+                print(op2.name, '=', ODistance)
             op1.recodeValuation(Minop1,Maxop1)
             op2.recodeValuation(Minop1,Maxop2)
             
@@ -6004,7 +6004,7 @@ class Digraph(object):
         res = []
         for i in range(len(sigs)):
             if Debug:
-                print sigs[i], self.domin(sigs[i]) - self.absorb(sigs[i])
+                print(sigs[i], self.domin(sigs[i]) - self.absorb(sigs[i]))
             res.append((self.domin(sigs[i]) - self.absorb(sigs[i]),sigs[i],self.domin(sigs[i]),self.absorb(sigs[i])))
 
         res.sort(reverse=True)
@@ -6012,10 +6012,10 @@ class Digraph(object):
     
         if Comments:
             for x in res:
-                print "{%s} : %.3f " % ( [y for y in x[1]][0], (float(x[0]) + 100.0)/2.0 )
+                print("{%s} : %.3f " % ( [y for y in x[1]][0], (float(x[0]) + 100.0)/2.0 ))
 
         if Debug:
-            print res
+            print(res)
 
         self.recodeValuation(valuationdomain['min'],valuationdomain['max'])
 
@@ -6050,10 +6050,10 @@ class Digraph(object):
             else:
                 termsNuls.append(terms[i])
         if Debug:
-            print 'terms', terms
-            print 'termsPlus',termsPlus
-            print 'termsMinus', termsMinus
-            print 'termsNuls', termsNuls
+            print('terms', terms)
+            print('termsPlus',termsPlus)
+            print('termsMinus', termsMinus)
+            print('termsNuls', termsNuls)
         np = len(termsPlus)
         nm = len(termsMinus)
         if np > 0 and nm == 0:
@@ -6081,10 +6081,10 @@ class Digraph(object):
             else:
                 termsNuls.append(terms[i])
         if Debug:
-            print 'terms', terms
-            print 'termsPlus',termsPlus
-            print 'termsMinus', termsMinus
-            print 'termsNuls', termsNuls
+            print('terms', terms)
+            print('termsPlus',termsPlus)
+            print('termsMinus', termsMinus)
+            print('termsNuls', termsNuls)
         np = len(termsPlus)
         nm = len(termsMinus)
         if np > 0:
@@ -6116,18 +6116,18 @@ class Digraph(object):
                         if relation[x][y] < xmin:
                             xmin = relation[x][y]
                 if Debug:
-                    print 'x, xmin', x, xmin
+                    print('x, xmin', x, xmin)
                 maximin.append((xmin,x))
             maximin.sort()
             if Debug:
-                print maximin, maximin[-1][1]
+                print(maximin, maximin[-1][1])
             rank[maximin[-1][1]] = {'rank':k,'majorityMargin':maximin[-1][0]}
             actionsList.remove(maximin[-1][1])
             k += 1
             if Debug:
-                print 'actionsList', actionsList
+                print('actionsList', actionsList)
         if Debug:
-            print rank
+            print(rank)
         return rank
 
     def computeArrowRaynaudRanking(self,Debug=False):
@@ -6149,18 +6149,18 @@ class Digraph(object):
                         if relation[x][y] > xmax:
                             xmax = relation[x][y]
                 if Debug:
-                    print 'x, xmax', x, xmax
+                    print('x, xmax', x, xmax)
                 minimax.append((xmax,x))
             minimax.sort()
             if Debug:
-                print minimax, minimax[0][1]
+                print(minimax, minimax[0][1])
             rank[minimax[0][1]] = {'rank':n-k+1,'majorityMargin':minimax[0][0]}
             actionsList.remove(minimax[0][1])
             k += 1
             if Debug:
-                print 'actionsList', actionsList
+                print('actionsList', actionsList)
         if Debug:
-            print rank
+            print(rank)
         return rank
 
     def computeRankedPairsOrder(self,Cpp=False,Debug=False):
@@ -6195,7 +6195,7 @@ class Digraph(object):
         rankedPairs = [x[1] for x in listPairs] 
         for pair in rankedPairs:
             if Debug:
-                print 'next pair: ', pair
+                print('next pair: ', pair)
             x = pair[0]
             y = pair[1]
             if g.relation[x][y] == Min and g.relation[y][x] == Min:
@@ -6208,11 +6208,11 @@ class Digraph(object):
                     circ = g.computeChordlessCircuits()
                 if len(circ) != 0:
                     if Debug:
-                        print circ
+                        print(circ)
                     g.relation[x][y] = Min            
                 else:
                     if Debug:
-                        print 'added: (%s,%s) characteristic: %.2f' % (x,y, self.relation[x][y])
+                        print('added: (%s,%s) characteristic: %.2f' % (x,y, self.relation[x][y]))
                 
         g.gamma = g.gammaSets()
 
@@ -6225,7 +6225,7 @@ class Digraph(object):
         for x in outdegrees:
             rankedPairsOrder.append(x[1])
         if Debug:
-            print 'Ranked Pairs Order = ', rankedPairsOrder
+            print('Ranked Pairs Order = ', rankedPairsOrder)
         return rankedPairsOrder
 
         
@@ -6263,11 +6263,11 @@ class Digraph(object):
                     kemenyIndex = kcurr
                     kemenyOrder = list(a)
                     if Debug:
-                        print s, kemenyIndex
+                        print(s, kemenyIndex)
             if Debug:
-                print 'Probabilistic Kemeny Order = ', kemenyOrder
-                print 'Probabilistic Kemeny Index = ', kemenyIndex
-                print 'with samplesize :            ', sampleSize
+                print('Probabilistic Kemeny Order = ', kemenyOrder)
+                print('Probabilistic Kemeny Index = ', kemenyIndex)
+                print('with samplesize :            ', sampleSize)
 
 
         ## Exact computation of a Kemeny order
@@ -6285,16 +6285,16 @@ class Digraph(object):
                     for j in range(i+1,n):
                         kcurr += relation[a[i]][a[j]] - relation[a[j]][a[i]]
                 if Debug:
-                    print s, a, kcurr
+                    print(s, a, kcurr)
                 if kcurr >= kemenyIndex:
                     kemenyIndex = kcurr
                     kemenyOrder = list(a)
                     if Debug:
-                        print s, kemenyOrder, kemenyIndex
+                        print(s, kemenyOrder, kemenyIndex)
             if Debug:
-                print 'Exact Kemeny Order = ', kemenyOrder
-                print 'Exact Kemeny Index = ', kemenyIndex
-                print '# of permutations  = ', s
+                print('Exact Kemeny Order = ', kemenyOrder)
+                print('Exact Kemeny Index = ', kemenyIndex)
+                print('# of permutations  = ', s)
 
         return kemenyOrder, kemenyIndex
 
@@ -6352,11 +6352,11 @@ class Digraph(object):
                     slaterIndex = kcurr
                     slaterOrder = list(a)
                     if Debug:
-                        print s, slaterIndex
+                        print(s, slaterIndex)
             if Debug:
-                print 'Probabilistic Slater Order = ', slaterOrder
-                print 'Probabilistic Slater Index = ', slaterIndex
-                print 'with samplesize :            ', sampleSize
+                print('Probabilistic Slater Order = ', slaterOrder)
+                print('Probabilistic Slater Index = ', slaterIndex)
+                print('with samplesize :            ', sampleSize)
 
 
 ## Exact computation of a Slater order
@@ -6384,16 +6384,16 @@ class Digraph(object):
                                 kcurr += 1
                         #kcurr += copysign(1,relation[a[i]][a[j]]) - copysign(1,relation[a[j]][a[i]])
                 if Debug:
-                    print s, a, kcurr
+                    print(s, a, kcurr)
                 if kcurr >= slaterIndex:
                     slaterIndex = kcurr
                     slaterOrder = list(a)
                     if Debug:
-                        print s, slaterOrder, slaterIndex
+                        print(s, slaterOrder, slaterIndex)
             if Debug:
-                print 'Exact Slater Order = ', slaterOrder
-                print 'Exact Slater Index = ', slaterIndex
-                print '# of permutations  = ', s
+                print('Exact Slater Order = ', slaterOrder)
+                print('Exact Slater Index = ', slaterIndex)
+                print('# of permutations  = ', s)
 
         self.recodeValuation(minOrig,maxOrig)
         return slaterOrder, slaterIndex
@@ -6410,7 +6410,7 @@ class Digraph(object):
         from decimal import Decimal
         n = Decimal(str(len(K1)*len(K2)))
         if Debug:
-            print 'K1 = ', K1, ', K2 = ', K2, ', n = ', n
+            print('K1 = ', K1, ', K2 = ', K2, ', n = ', n)
 
         rK1SK2 = Decimal('0')
         rK2SK1 = Decimal('0')
@@ -6420,7 +6420,7 @@ class Digraph(object):
                 rK2SK1 += self.relation[y][x]
 
         if Debug:
-            print 'r(K1 >= K2) = ', rK1SK2/n, ' r(K2 >= K1) = ', rK2SK1/n
+            print('r(K1 >= K2) = ', rK1SK2/n, ' r(K2 >= K1) = ', rK2SK1/n)
 
         rK1IK2 = min(rK1SK2,rK2SK1)/n
         rK1PK2 = min(rK1SK2,-rK2SK1)/n
@@ -6428,10 +6428,10 @@ class Digraph(object):
         rK1RK2 = min(-rK1SK2,-rK2SK1)/n
 
         if Debug:
-            print 'r(K1 = K2) = %.2f' % rK1IK2
-            print 'r(K1 > K2) = %.2f' % rK1PK2
-            print 'r(K1 < K2) = %.2f' % rK2PK1
-            print 'r(K1 ? K2) = %.2f' % rK1RK2
+            print('r(K1 = K2) = %.2f' % rK1IK2)
+            print('r(K1 > K2) = %.2f' % rK1PK2)
+            print('r(K1 < K2) = %.2f' % rK2PK1)
+            print('r(K1 ? K2) = %.2f' % rK1RK2)
 
         return {'I': rK1IK2, 'P+': rK1PK2, 'P-' :rK2PK1, 'R' :  rK1RK2 }
 
@@ -6548,7 +6548,7 @@ class RankingByChoosingDigraph(Digraph):
         else:
             self.rankingByChoosing = other.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
         if Debug:
-            print self.rankingByChoosing 
+            print(self.rankingByChoosing) 
 
 
         self.relation = self.computeRankingByChoosingRelation(Debug=Debug)
@@ -6561,9 +6561,9 @@ class RankingByChoosingDigraph(Digraph):
         A show method for self.rankinByChoosing
         """
         if Debug:
-            print self.rankingByChoosing
+            print(self.rankingByChoosing)
         rankingByChoosing = self.rankingByChoosing['result']
-        print 'Ranking by Choosing Result'
+        print('Ranking by Choosing Result')
         space = ''
         n = len(rankingByChoosing)
         for i in range(n):
@@ -6580,9 +6580,9 @@ class RankingByChoosingDigraph(Digraph):
             iach = iwch & ibch
             ch = list(ibch) 
             ch.sort()
-            print ' %s%s%s Best Choice %s (%.2f)' % (space,i+1,nstr,ch,rankingByChoosing[i][0][0])
+            print(' %s%s%s Best Choice %s (%.2f)' % (space,i+1,nstr,ch,rankingByChoosing[i][0][0]))
             if len(iach) > 0 and i < n-1:
-                print '  %s Ambiguous Choice %s' % (space,list(iach))
+                print('  %s Ambiguous Choice %s' % (space,list(iach)))
                 space += '  '
             space += '  '
         for i in range(n):
@@ -6602,21 +6602,21 @@ class RankingByChoosingDigraph(Digraph):
             ch.sort()
             if len(iach) > 0 and i > 0:
                 space = space[:-2] 
-                print '  %s Ambiguous Choice %s' % (space,list(iach))
-            print ' %s%s%s Worst Choice %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0])
+                print('  %s Ambiguous Choice %s' % (space,list(iach)))
+            print(' %s%s%s Worst Choice %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))
         if Debug:
             self.showRelationTable(self.originalRelation)
         if self.rankingByChoosing['CoDual']:
             corr = self.computeOrdinalCorrelation(self.originalRelation,Debug=Debug)
-            print 'Ordinal Correlation with codual (strict) outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination'])
+            print('Ordinal Correlation with codual (strict) outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination']))
             corr = self.computeOrdinalCorrelation(self.originalRelation,MedianCut=True,Debug=Debug)
-            print 'Ordinal Correlation with codual (strict) median cut outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination'])
+            print('Ordinal Correlation with codual (strict) median cut outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination']))
 
         else:
             corr = self.computeOrdinalCorrelation(self.originalRelation,Debug=Debug)
-            print 'Ordinal Correlation with outranking relation: %.3f (%.3f)'% (corr['correlation'],corr['determination'])
+            print('Ordinal Correlation with outranking relation: %.3f (%.3f)'% (corr['correlation'],corr['determination']))
             corr = self.computeOrdinalCorrelation(self.originalRelation,MedianCut=True,Debug=Debug)
-            print 'Ordinal Correlation with median cut outranking relation: %.3f (%.3f)'% (corr['correlation'],corr['determination'])
+            print('Ordinal Correlation with median cut outranking relation: %.3f (%.3f)'% (corr['correlation'],corr['determination']))
          
 
 # ------ Preorder construction
@@ -6695,7 +6695,7 @@ class XORDigraph(Digraph):
         self.name = 'XORDigraph'
         if d1.order != d2.order:
             if Debug:
-                print "XORDigraph init ERROR:\n the input digraphs are not of the same order !" 
+                print("XORDigraph init ERROR:\n the input digraphs are not of the same order !") 
             return None        
         self.order = d1.order
         self.actions = copy.deepcopy(d1.actions)
@@ -6713,7 +6713,7 @@ class XORDigraph(Digraph):
             for y in actions:
                 xorRelation[x][y] = max( min(d1.relation[x][y],-d2.relation[x][y]), min(d2.relation[x][y],-d1.relation[x][y]) )
                 if Debug:
-                    print x,y,d1.relation[x][y],d2.relation[x][y],xorRelation[x][y]
+                    print(x,y,d1.relation[x][y],d2.relation[x][y],xorRelation[x][y])
 
         self.relation = xorRelation
         self.valuationdomain = {'min': Decimal("-1.0"),
@@ -6734,7 +6734,7 @@ class EquivalenceDigraph(Digraph):
         from copy import deepcopy
         self.name = 'EquivDigraph'
         if d1.order != d2.order:
-            print "EquivDigraph init ERROR:\n the input digraphs are not of the same order !" 
+            print("EquivDigraph init ERROR:\n the input digraphs are not of the same order !") 
             return None
 
         self.order = d1.order
@@ -6754,7 +6754,7 @@ class EquivalenceDigraph(Digraph):
             for y in actions:
                 equivRelation[x][y] = min( max(-d1.relation[x][y],d2.relation[x][y]), max(-d2.relation[x][y],d1.relation[x][y]) )
                 if Debug:
-                    print x,y,d1.relation[x][y],d2.relation[x][y],equivRelation[x][y]
+                    print(x,y,d1.relation[x][y],d2.relation[x][y],equivRelation[x][y])
 
         self.relation = equivRelation
         self.valuationdomain = {'min': Decimal("-1.0"),
@@ -6805,9 +6805,9 @@ class RandomDigraph(Digraph):
         """
         arcProbability = Decimal(str(arcProbability))
         if arcProbability > Decimal("1.0"):
-            print 'Error: arc probability too high !!'
+            print('Error: arc probability too high !!')
         elif arcProbability < Decimal("0.0"):
-            print 'Error: arc probability too low !!'
+            print('Error: arc probability too low !!')
         else:
             import copy
             g = RandomValuationDigraph(order=order,hasIntegerValuation=hasIntegerValuation)
@@ -6837,7 +6837,7 @@ class RandomValuationDigraph(Digraph):
         import random       
         self.name = 'randomValuationDigraph'
         self.order = order
-        actionlist = range(order+1)
+        actionlist = list(range(order+1))
         actionlist.remove(0)
         actions = []
         for x in actionlist:
@@ -6891,7 +6891,7 @@ class RandomWeakTournament(Digraph):
         
         self.name = 'randomWeakTournament'
         self.order = order
-        actionlist = range(order+1)
+        actionlist = list(range(order+1))
         actionlist.remove(0)
         actions = []
         for x in actionlist:
@@ -6968,7 +6968,7 @@ class RandomWeakTournament(Digraph):
         self.notGamma = self.notGammaSets()
 
         if Comments:
-             print self.order*(self.order-1), self.computeRelationalStructure()
+             print(self.order*(self.order-1), self.computeRelationalStructure())
 
                         
                             
@@ -7060,7 +7060,7 @@ class RandomTournament(Digraph):
         
         self.name = 'randomTournament'
         self.order = order
-        actionlist = range(order+1)
+        actionlist = list(range(order+1))
         actionlist.remove(0)
         actions = []
         for x in actionlist:
@@ -7120,11 +7120,11 @@ class RandomFixedSizeDigraph(Digraph):
         # check feasability
         r = (order * order) - order        
         if size > r :
-            print 'Graph not feasable (1) !!'
+            print('Graph not feasable (1) !!')
         else:
             self.name = 'randomFixedSize'
             self.order = order
-            actionlist = range(order+1)
+            actionlist = list(range(order+1))
             actionlist.remove(0)
             actions = []
             for x in actionlist:
@@ -7164,20 +7164,20 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
         # check feasability
         degree = max(degreeSequence)
         if degree >= order:
-            print '!!! Graph not feasable (1) !!!'
-            print 'Maximum degree > order !!!'
+            print('!!! Graph not feasable (1) !!!')
+            print('Maximum degree > order !!!')
         else:
             sumdegrees = 0
             for i in range(order):
                 sumdegrees += degreeSequence[i]
             r = sumdegrees % 2
             if r == 1:
-                print '!!! Graph not feasable (1) !!!'
-                print 'Odd sum of degrees : ',sumdegrees,'!!'
+                print('!!! Graph not feasable (1) !!!')
+                print('Odd sum of degrees : ',sumdegrees,'!!')
             else:
                 self.name = 'randomFixedDegreeSequence'
                 self.order = order
-                actionlist = range(order+1)
+                actionlist = list(range(order+1))
                 actionlist.remove(0)
                 actions = []
                 for x in actionlist:
@@ -7227,7 +7227,7 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
                             feasable = 0
                             break
                 if feasable == 0:
-                    print 'Graph not feasable (2) !!'
+                    print('Graph not feasable (2) !!')
                 else: 
                     for edge in edges:
                         relation[edge[0]][edge[1]] = Max
@@ -7253,7 +7253,7 @@ class RandomTree(Digraph):
         for x in nodes:
             actions[x] = {'name': 'node %s' % x}
         self.actions = actions
-        print actions
+        print(actions)
         precision = pow(10,ndigits)
         if hasIntegerValuation:
             self.valuationdomain = {'min':-precision, 'med':0, 'max':precision}
@@ -7263,7 +7263,7 @@ class RandomTree(Digraph):
         # init relation dictionary
         relation = {}
         nodeKeys = [x for x in actions]
-        print nodeKeys
+        print(nodeKeys)
         for x in nodeKeys:
             relation[x] = {}
             for y in nodeKeys:
@@ -7272,7 +7272,7 @@ class RandomTree(Digraph):
         pruefer = []
         for i in range(len(nodeKeys)-2):
             pruefer.append(choice(nodes))
-        print pruefer
+        print(pruefer)
         pairs = self.prufer_to_tree(pruefer)
         for (i,j) in pairs:
             relation[str(i+1)][str(j+1)] = Decimal('1.0')
@@ -7283,12 +7283,12 @@ class RandomTree(Digraph):
         
     def prufer_to_tree(self,a):
         tree = []
-        T = range(0, len(a)+2)
-        print T
+        T = list(range(0, len(a)+2))
+        print(T)
         # the degree of each node is how many times it appears
         # in the sequence
         deg = [1]*len(T)
-        print deg
+        print(deg)
         for i in a: deg[i] += 1
 
         # for each node label i in a, find the first node j with degree 1 and add
@@ -7321,11 +7321,11 @@ class RandomRegularDigraph(Digraph):
         # check feasability
         r = (order * degree) % 2
         if degree >= order or r == 1:
-            print 'Graph not feasable (1) !!'
+            print('Graph not feasable (1) !!')
         else:
             self.name = 'randomRegular'
             self.order = order
-            actionlist = range(order+1)
+            actionlist = list(range(order+1))
             actionlist.remove(0)
             actions = []
             for x in actionlist:
@@ -7366,7 +7366,7 @@ class RandomRegularDigraph(Digraph):
                         feasable = 0
                         break
             if feasable == 0:
-                print 'Graph not feasable (2) !!'
+                print('Graph not feasable (2) !!')
             else:
                 relation = {}
                 for x in actions:
@@ -7394,7 +7394,7 @@ class EmptyDigraph(Digraph):
         import sys,array,copy
         self.name = 'empty'
         self.order = order
-        actionlist = range(order+1)
+        actionlist = list(range(order+1))
         actionlist.remove(0)
         actions = []
         for x in actionlist:
@@ -7424,7 +7424,7 @@ class IndeterminateDigraph(Digraph):
         self.name = 'indeterminate'
         if other == None:
             self.order = order
-            actionlist = range(order+1)
+            actionlist = list(range(order+1))
             actionlist.remove(0)
             actions = []
             for x in actionlist:
@@ -7475,7 +7475,7 @@ class CirculantDigraph(Digraph):
         self.name = 'c'+str(order)
         self.order = order
         self.circulants = circulants
-        actionlist = range(order+1)
+        actionlist = list(range(order+1))
         actionlist.remove(0)
         actions = []
         for x in actionlist:
@@ -7508,10 +7508,10 @@ class CirculantDigraph(Digraph):
         self.notGamma = self.notGammaSets()
 
     def showShort(self):
-        print '*----- show short --------------*'
-        print 'Circulant graph : ', self.name
-        print 'Order           : ', self.order
-        print 'Circulants      : ', self.circulants
+        print('*----- show short --------------*')
+        print('Circulant graph : ', self.name)
+        print('Order           : ', self.order)
+        print('Circulants      : ', self.circulants)
 
 class KneserDigraph(Digraph):
     """
@@ -7532,7 +7532,7 @@ class KneserDigraph(Digraph):
         self.name = 'kneser-'+str(n)+'-'+str(j)
         self.n = n
         self.j = j
-        na = range(n+1)
+        na = list(range(n+1))
         na.remove(0)
         ob = set()
         for x in na:
@@ -7566,11 +7566,11 @@ class KneserDigraph(Digraph):
         self.notGamma = self.notGammaSets()
 
     def showShort(self):
-        print '*----- show short --------------*'
-        print 'Kneser graph    : ', self.name
-        print 'n               : ', self.n
-        print 'j               : ', self.j
-        print 'order           : ', self.order
+        print('*----- show short --------------*')
+        print('Kneser graph    : ', self.name)
+        print('n               : ', self.n)
+        print('j               : ', self.j)
+        print('order           : ', self.order)
 
 
 class GridDigraph(Digraph):
@@ -7593,9 +7593,9 @@ class GridDigraph(Digraph):
         self.name = 'grid-'+str(n)+'-'+str(m)
         self.n = n
         self.m = m
-        na = range(n+1)
+        na = list(range(n+1))
         na.remove(0)
-        ma = range(m+1)
+        ma = list(range(m+1))
         ma.remove(0)
         actions = []
         gridNodes={}
@@ -7723,11 +7723,11 @@ class GridDigraph(Digraph):
         self.notGamma = self.notGammaSets()
 
     def showShort(self):
-        print '*----- show short --------------*'
-        print 'Grid graph    : ', self.name
-        print 'n             : ', self.n
-        print 'm             : ', self.m
-        print 'order         : ', self.order
+        print('*----- show short --------------*')
+        print('Grid graph    : ', self.name)
+        print('n             : ', self.n)
+        print('m             : ', self.m)
+        print('order         : ', self.order)
 
 
 class CompleteDigraph(Digraph):
@@ -7743,7 +7743,7 @@ class CompleteDigraph(Digraph):
         import sys,array,copy
         self.name = 'complete'
         self.order = order
-        actionlist = range(order+1)
+        actionlist = list(range(order+1))
         actionlist.remove(0)
         actions = []
         for x in actionlist:
@@ -7812,7 +7812,7 @@ class PolarisedDigraph(Digraph):
         """
         Debug = False
         if Debug:
-            print 'Level, KeepValues,AlphaCut', level, KeepValues,AlphaCut
+            print('Level, KeepValues,AlphaCut', level, KeepValues,AlphaCut)
         actions = self.actions
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
@@ -7820,14 +7820,14 @@ class PolarisedDigraph(Digraph):
         level = Decimal(str(level))
         compLevel = Max - level + Min
         if level < Med:
-            print 'Cut Level :', level, 'too low !!!'
-            print self.valuationdomain
-            print 'Original relation not changed !!!'
+            print('Cut Level :', level, 'too low !!!')
+            print(self.valuationdomain)
+            print('Original relation not changed !!!')
             return relationin
         elif level > Max:
-            print 'Cut Level :', level, 'too high !!!'
-            print self.valuationdomain
-            print 'Original relation not changed !!!'
+            print('Cut Level :', level, 'too high !!!')
+            print(self.valuationdomain)
+            print('Original relation not changed !!!')
             return relationin          
         else:
             relationout = {}
@@ -7869,7 +7869,7 @@ class PolarisedDigraph(Digraph):
         """
         Debug = False
         if Debug:
-            print 'Level, KeepValues,AlphaCut', level, KeepValues,AlphaCut
+            print('Level, KeepValues,AlphaCut', level, KeepValues,AlphaCut)
         actions = self.actions
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
@@ -7925,9 +7925,9 @@ class MedianExtendedDigraph(Digraph):
         Med = self.valuationdomain['med']
         CompLevel = Max - Level + Min
         if Level < Med:
-            print 'Cut Level :', Level, 'too low !!!'
-            print self.valuationdomain
-            print 'Original relation not changed !!!'
+            print('Cut Level :', Level, 'too low !!!')
+            print(self.valuationdomain)
+            print('Original relation not changed !!!')
             return relationin
         else:
             relationout = {}
@@ -8229,7 +8229,7 @@ class WeakCocaDigraph(Digraph):
             self.relation = copy.deepcopy(digraph.relation)
         else:
             fileName = digraph + 'py'
-            execfile(fileName)
+            exec(compile(open(fileName).read(), fileName, 'exec'))
             self.name = digraph
             self.actions = locals()['actionset']
             self.valuationdomain = locals()['valuationdomain']
@@ -8320,18 +8320,18 @@ class WeakCocaDigraph(Digraph):
         new = self.order - order0
         if not silent:
             if self.order == order0:
-                print '  No weak circuits added !'
+                print('  No weak circuits added !')
             else:
-                print '  ',new,' weak circuit(s) added!'
+                print('  ',new,' weak circuit(s) added!')
 
     def showCircuits(self):
         """
         show methods for chordless odd circuits in CocaGraph
         """
-        print '*---- Chordless odd circuits ----*'
+        print('*---- Chordless odd circuits ----*')
         for circ in self.weakCircuits:
             deg = self.circuitMinCredibility(circ)
-            print list(circ), ', credibility :', deg
+            print(list(circ), ', credibility :', deg)
 
 #--------------------
 class CoceDigraph(Digraph):
@@ -8364,7 +8364,7 @@ class CoceDigraph(Digraph):
             self.relation = deepcopy(digraph.relation)
         else:
             fileName = digraph + 'py'
-            execfile(fileName)
+            exec(compile(open(fileName).read(), fileName, 'exec'))
             self.name = digraph
             self.actions = locals()['actionset']
             self.valuationdomain = locals()['valuationdomain']
@@ -8399,13 +8399,13 @@ class CoceDigraph(Digraph):
 
         qualmaj0 = gcd.valuationdomain['med']
         if Comments:
-            print 'Chorless odd circuits elimination'
+            print('Chorless odd circuits elimination')
             i = 0
         qualmaj = gcd.minimalValuationLevelForCircuitsElimination(Debug=Debug,Comments=Comments)
         while qualmaj > qualmaj0:
             if Comments:
                 i += 1
-                print '--> Iteration %d' % (i)
+                print('--> Iteration %d' % (i))
                 t0 = time()               
             if qualmaj < gcd.valuationdomain['max']:
                 pg = PolarisedDigraph(gcd,qualmaj,
@@ -8453,7 +8453,7 @@ class CocaDigraph(Digraph):
             self.relation = copy.deepcopy(digraph.relation)
         else:
             fileName = digraph + 'py'
-            execfile(fileName)
+            exec(compile(open(fileName).read(), fileName, 'exec'))
             self.name = digraph
             self.actions = locals()['actionset']
             self.valuationdomain = locals()['valuationdomain']
@@ -8483,7 +8483,7 @@ class CocaDigraph(Digraph):
             self.addCircuits(Comments=Comments)
             currentCircuits = set([x for cl,x in self.circuitsList])
             if Comments:
-                print 'initialCircuits, currentCircuits', initialCircuits, currentCircuits
+                print('initialCircuits, currentCircuits', initialCircuits, currentCircuits)
             newCircuits = currentCircuits - initialCircuits
 
     def addCircuits(self,Comments=False):
@@ -8502,7 +8502,7 @@ class CocaDigraph(Digraph):
         #ListActions = [frozenset([x]) for x in actions]
         circuitsList = self.circuitsList
         if Comments:
-            print 'list of circuits: ', circuitsList
+            print('list of circuits: ', circuitsList)
         valuationdomain = self.valuationdomain
         gamma = self.gamma
         relation = self.relation
@@ -8549,7 +8549,7 @@ class CocaDigraph(Digraph):
             name = 'chordless odd %d-circuit' % (len(cycle))
             actions[cycle] = {'name': cn, 'comment': name}
             if Comments:
-                print actions[cycle]
+                print(actions[cycle])
         #self.actions = list(actions)
         self.actions = actions
         self.order = len(actions)
@@ -8559,28 +8559,28 @@ class CocaDigraph(Digraph):
         new = self.order - order0
         if Comments:
             if self.order == order0:
-                print '  No circuits added !'
+                print('  No circuits added !')
             else:
-                print '  ',new,' circuit(s) added!'
+                print('  ',new,' circuit(s) added!')
                 
     def showCircuits(self):
         """
         show methods for chordless odd circuits in CocaGraph
         """
-        print '*---- Chordless circuits ----*'
+        print('*---- Chordless circuits ----*')
         for (circList,circSet) in self.circuitsList:
             deg = self.circuitMinCredibility(circSet)
-            print circList, ', credibility :', deg
-        print 'Coca graph of order %d with %d odd chordles circuits.' % (len(self.actions), len(self.circuitsList)) 
+            print(circList, ', credibility :', deg)
+        print('Coca graph of order %d with %d odd chordles circuits.' % (len(self.actions), len(self.circuitsList))) 
         #print len(aself.circuitsList),' cirduits
 
     def showComponents(self):
-        print '*--- Connected Components ---*'
+        print('*--- Connected Components ---*')
         k=1
         for Comp in self.components():
             component = list(Comp)
             #component.sort()
-            print str(k) + ': ' + str(component)
+            print(str(k) + ': ' + str(component))
             xk = k + 1
 
 #------------------------------------------
@@ -8592,7 +8592,7 @@ class StrongComponentsCollapsedDigraph(Digraph):
     def __init__(self,digraph=None):
 
         if digraph == None:
-           print 'Error: you must provide a valid digraph to the constructor!'
+           print('Error: you must provide a valid digraph to the constructor!')
         else:
            self.name = digraph.name + '_Scc'
            self.valuationdomain = digraph.valuationdomain
@@ -8627,9 +8627,9 @@ class StrongComponentsCollapsedDigraph(Digraph):
            self.notGamma = self.notGammaSets()
     
     def showComponents(self):
-        print 'short', '\t', 'content'
+        print('short', '\t', 'content')
         for x in self.actions:
-            print self.actions[x]['shortName'], '\t', self.actions[x]['name']
+            print(self.actions[x]['shortName'], '\t', self.actions[x]['name'])
 #-------------------------------------------------------      
 
 
@@ -8709,23 +8709,23 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             actions = self.actions
         else:
             actions = actionsSubset
-        print '* ---- Criterion %s Relation Table -----\n' % (criterion),
-        print ' S   | ',
+        print('* ---- Criterion %s Relation Table -----\n' % (criterion), end=' ')
+        print(' S   | ', end=' ')
         #actions = [x for x in actions]
         actionsList = [x for x in actions]
 
         actionsList.sort()
         
         for x in actionsList:
-            print "'"+x+"', ",
-        print '\n-----|------------------------------------------------------------'
+            print("'"+x+"', ", end=' ')
+        print('\n-----|------------------------------------------------------------')
         for x in actionsList:
-            print "'"+x+"' | ",
+            print("'"+x+"' | ", end=' ')
             for y in actionsList:
                 #print '%2.2f ' % (self.relation[x[1]][y[1]]),
-                print '%2.2f ' % (self.computeCriterionRelation(criterion,x,y)),
-            print
-        print '\n'
+                print('%2.2f ' % (self.computeCriterionRelation(criterion,x,y)), end=' ')
+            print()
+        print('\n')
 
     def computeAMPLData(self,OldValuation=False):
         """
@@ -8735,15 +8735,15 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         actionsList.sort()
         for x in actionsList:
             for y in actionsList:
-                print str(x)+str(y),
+                print(str(x)+str(y), end=' ')
                 for c in self.criteria:
                     value = self.computeCriterionRelation(c,x,y)
                     if OldValuation:                        
                         value = (value + Decimal("1.0"))/Decimal("2.0")
                     else:
                         value = self.computeCriterionRelation(c,x,y)
-                    print '%.1f' % (value),
-                print
+                    print('%.1f' % (value), end=' ')
+                print()
 
                 
 
@@ -8805,7 +8805,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         res = []
         for i in range(len(sigs)):
             if Debug:
-                print sigs[i], self.domin(sigs[i]) - self.absorb(sigs[i])
+                print(sigs[i], self.domin(sigs[i]) - self.absorb(sigs[i]))
             res.append((self.domin(sigs[i]) - self.absorb(sigs[i]),sigs[i],self.domin(sigs[i]),self.absorb(sigs[i])))
 
         res.sort(reverse=True)
@@ -8813,10 +8813,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
     
         if Comments:
             for x in res:
-                print "{%s} : %.3f " % ( [y for y in x[1]][0], (float(x[0]) + 100.0)/2.0 )
+                print("{%s} : %.3f " % ( [y for y in x[1]][0], (float(x[0]) + 100.0)/2.0 ))
 
         if Debug:
-            print res
+            print(res)
 
         self.recodeValuation(valuationdomain['min'],valuationdomain['max'])
 
@@ -9060,9 +9060,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             d = None
             pairwiseComparison = None
         if Debug:
-            print '>>> c,a,b,d', c,a,b,d
-            print 'ind,wp,p,wv,v', ind,wp,p,wv,v
-            print 'pairwiseComparison', pairwiseComparison
+            print('>>> c,a,b,d', c,a,b,d)
+            print('ind,wp,p,wv,v', ind,wp,p,wv,v)
+            print('pairwiseComparison', pairwiseComparison)
             
         return pairwiseComparison
 
@@ -9154,31 +9154,31 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         if isReturningHTML:
             html += '<h1>Criteria ordinal correlation index</h1>'
         else:
-            print 'Criteria ordinal correlation index'
+            print('Criteria ordinal correlation index')
         # header row
         if isReturningHTML:
             html += '<table border=1><tr bgcolor="#9acd32"><th>&tau;</th>'
         else:
-            print '     |',
+            print('     |', end=' ')
         for x in criteriaList:
             if isReturningHTML:
                 html += '<th bgcolor="#FFEEAA">%s</th>' % (x)
             else:
-                print '%5s  ' % (x),
+                print('%5s  ' % (x), end=' ')
         if isReturningHTML:
             html += '</tr>'
         else:
-            print
+            print()
             hline = '-----|'
             for i in range(len(criteriaList)+1):
                 hline += '-------'
-            print hline
+            print(hline)
         # table body
         for i in range(len(criteriaList)):
             if isReturningHTML:
                 html += '<tr><th bgcolor="#FFEEAA">%s</th>' % (criteriaList[i])
             else:
-                print '%4s |' %(criteriaList[i]),
+                print('%4s |' %(criteriaList[i]), end=' ')
             for j in range(len(criteriaList)):
                 if i <= j:
                     gi = criteriaList[i]
@@ -9191,17 +9191,17 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                             html += '<td bgcolor="#ffddff">%+2.2f</td>' % (index)
                             
                     else:
-                        print '%+2.2f  ' % (index),
+                        print('%+2.2f  ' % (index), end=' ')
                 else:
                     if isReturningHTML:
                         html += '<td>&nbsp;</td>'
                     else:
                         index = '       '
-                        print index,
+                        print(index, end=' ')
             if isReturningHTML:
                 html += '</tr>'
             else:
-                print
+                print()
         if isReturningHTML:
             html += '</table>'
         # render the result
@@ -9269,16 +9269,16 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             cred = min(degintstab,degextstab)
             criteriaHierarchy.append((-cred,degintstab,degextstab,cluster))
         criteriaHierarchy.sort()
-        print '*------ criteria clustering hierarchy ------*'
+        print('*------ criteria clustering hierarchy ------*')
         clustered = set()
         hierarchy = []
         for ch in criteriaHierarchy:
             hierarchy = hierarchy + [ch[3]]
             clustered |= set(ch[3])
             rest = actions - clustered
-            print 'Cluster: %s\n   Credibility level: %2.2f%%; Exterior stability: %2.2f%%; Interior stability: %2.2f%%' % ( str(ch[3]),(-ch[0]+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0'),(ch[2]+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0'),(ch[1]+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0'))
-            print '   Hierarchy: ', hierarchy
-            print
+            print('Cluster: %s\n   Credibility level: %2.2f%%; Exterior stability: %2.2f%%; Interior stability: %2.2f%%' % ( str(ch[3]),(-ch[0]+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0'),(ch[2]+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0'),(ch[1]+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0')))
+            print('   Hierarchy: ', hierarchy)
+            print()
 
     def saveActionsCorrelationTable(self,fileName='tempcorr.prn',delimiter=' ',Bipolar=True,Silent=False,Centered=False):
         """
@@ -9319,7 +9319,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.write('%2.2f\n' % (value))
         fo.close()
         if not Silent:
-            print 'Actions Correlation saved on file %s' % (fileName)
+            print('Actions Correlation saved on file %s' % (fileName))
         
         
     def saveCriteriaCorrelationTable(self,fileName='tempcorr.prn',delimiter=' ',Bipolar=True,Silent=False,Centered=False):
@@ -9361,7 +9361,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.write('%2.2f\n' % (value))
         fo.close()
         if not Silent:
-            print 'Criteria Correlation saved on file %s' % (fileName)
+            print('Criteria Correlation saved on file %s' % (fileName))
 
     def export3DplotOfCriteriaCorrelation(self,plotFileName="correlation",Type="pdf",Comments=False,bipolarFlag=False,dist=True,centeredFlag=False):
         """
@@ -9371,7 +9371,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         import time
         
         if Comments:
-            print '*----  export 3dplot of type %s -----' % (Type)
+            print('*----  export 3dplot of type %s -----' % (Type))
         import os
         criteriaList = [x for x in self.criteria]
         criteriaList.sort()
@@ -9399,7 +9399,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             else:
                 os.system('env calmat tempcorr.prg > /dev/null')
         except:
-            print 'Error: You need to install calmat !!!'
+            print('Error: You need to install calmat !!!')
             return
         # create R 3d scatter plot script
         if Type == "interactive":
@@ -9447,7 +9447,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             elif Type == "pdf":
                 fo.write('pdf("%s.pdf",width=6,height=6,bg="cornsilk",title="PCA of Criteria Correlation Index")\n' % (plotFileName) )
             else:
-                print 'Error: Plotting device %s not defined !' % (Type)
+                print('Error: Plotting device %s not defined !' % (Type))
                 return     
             fo.write('par(mfrow=c(2,2))\n')
             fo.write('plot(test.mat[,choose12],xlab=paste("axis 1:",valprop[choose12,2][1]*100,"%"),ylab=paste("axis 2:",valprop[choose12,2][2]*100,"%"),type="n",asp=1)\n')
@@ -9482,9 +9482,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 os.system('env R -q --vanilla < scatter.r > /dev/null 2> /dev/null')
             time.sleep(3)     
             if Comments:
-                print 'See %s.%s ! ' % (plotFileName,Type)
+                print('See %s.%s ! ' % (plotFileName,Type))
         except:
-            print 'Error: You need to install R !!!'
+            print('Error: You need to install R !!!')
 
     def export3DplotOfActionsCorrelation(self,plotFileName="correlation",Type="pdf",Comments=False,bipolarFlag=False,dist=True,centeredFlag=False):
         """
@@ -9494,7 +9494,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         import time
         
         if Comments:
-            print '*----  export 3dplot of type %s -----' % (Type)
+            print('*----  export 3dplot of type %s -----' % (Type))
         import os
         actionsList = [x for x in self.actions]
         actionsList.sort()
@@ -9522,7 +9522,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             else:
                 os.system('env calmat tempcorr.prg > /dev/null')
         except:
-            print 'Error: You need to install calmat !!!'
+            print('Error: You need to install calmat !!!')
             return
         # create R 3d scatter plot script
         if Type == "interactive":
@@ -9570,7 +9570,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             elif Type == "pdf":
                 fo.write('pdf("%s.pdf",width=6,height=6,bg="cornsilk",title="PCA of Actions Correlation Index")\n' % (plotFileName) )
             else:
-                print 'Error: Plotting device %s not defined !' % (Type)
+                print('Error: Plotting device %s not defined !' % (Type))
                 return     
             fo.write('par(mfrow=c(2,2))\n')
             fo.write('plot(test.mat[,choose12],xlab=paste("axis 1:",valprop[choose12,2][1]*100,"%"),ylab=paste("axis 2:",valprop[choose12,2][2]*100,"%"),type="n",asp=1)\n')
@@ -9605,9 +9605,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 os.system('env R -q --vanilla < scatter.r > /dev/null 2> /dev/null')
             time.sleep(3)     
             if Comments:
-                print 'See %s.%s ! ' % (plotFileName,Type)
+                print('See %s.%s ! ' % (plotFileName,Type))
         except:
-            print 'Error: You need to install R !!!'
+            print('Error: You need to install R !!!')
             
     def computePairwiseComparisons(self,hasSymmetricThresholds=True):
         """
@@ -9668,7 +9668,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         elif evaluation[c][a] + p <= evaluation[c][b]:
                             pairwiseComparisons[a][b]['lt'] += criteria[c]['weight']
                         else:
-                            print "Error: a,b,c,d,ind,wp,p",a,b,c,d,ind,wp,p
+                            print("Error: a,b,c,d,ind,wp,p",a,b,c,d,ind,wp,p)
                         #print "Debug: a,b,d,ind,wp,p",a,b,d,ind,wp,p,pairwiseComparisons[a][b]
                         
         return pairwiseComparisons
@@ -9680,13 +9680,13 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         a = [x for x in self.actions]
         a.sort()
         pc = self.computePairwiseComparisons()
-        print ' distribution of pairwise comparisons'
-        print ' a  b | "<" "<=" "==" ">=" ">" | "S"'
-        print '-----------------------------'
+        print(' distribution of pairwise comparisons')
+        print(' a  b | "<" "<=" "==" ">=" ">" | "S"')
+        print('-----------------------------')
         for i in range(len(a)):
             for j in range(i+1,len(a)):
-                print ' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[i],a[j],pc[a[i]][a[j]]['lt'],pc[a[i]][a[j]]['leq'],pc[a[i]][a[j]]['eq'],pc[a[i]][a[j]]['geq'],pc[a[i]][a[j]]['gt'],self.relation[a[i]][a[j]])
-                print ' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[j],a[i],pc[a[j]][a[i]]['lt'],pc[a[j]][a[i]]['leq'],pc[a[j]][a[i]]['eq'],pc[a[j]][a[i]]['geq'],pc[a[j]][a[i]]['gt'],self.relation[a[j]][a[i]])
+                print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[i],a[j],pc[a[i]][a[j]]['lt'],pc[a[i]][a[j]]['leq'],pc[a[i]][a[j]]['eq'],pc[a[i]][a[j]]['geq'],pc[a[i]][a[j]]['gt'],self.relation[a[i]][a[j]]))
+                print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[j],a[i],pc[a[j]][a[i]]['lt'],pc[a[j]][a[i]]['leq'],pc[a[j]][a[i]]['eq'],pc[a[j]][a[i]]['geq'],pc[a[j]][a[i]]['gt'],self.relation[a[j]][a[i]]))
 
 
     def showPairwiseComparison(self,a,b,hasSymetricThresholds=True,Debug=False,isReturningHTML=False,hasSymmetricThresholds=True):
@@ -9697,7 +9697,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         evaluation = self.evaluation
         criteria = self.criteria
         if Debug:
-            print 'a,b =', a, b
+            print('a,b =', a, b)
         if a != b:
             if isReturningHTML:
                 html  = '<h1>Pairwise Comparison<h/1>'
@@ -9707,10 +9707,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 html += '<th>crit.</th><th>wght.</th> <th>g(x)</th> <th>g(y)</th> <th>diff</th> <th>ind</th> <th>wp</th> <th>p</th> <th>concord</th> <th>wv</th> <th>v</th> <th>polarisation</th>'
                 html += '</tr>'
             else:
-                print '*------------  pairwise comparison ----*'
-                print 'Comparing actions : (%s, %s)' % (a,b)
-                print 'crit. wght.  g(x)  g(y)    diff  \t| ind     wp      p    concord \t|  wv   v   weak veto veto'
-                print '-------------------------------  \t ----------------------------- \t ----------------'                
+                print('*------------  pairwise comparison ----*')
+                print('Comparing actions : (%s, %s)' % (a,b))
+                print('crit. wght.  g(x)  g(y)    diff  \t| ind     wp      p    concord \t|  wv   v   weak veto veto')
+                print('-------------------------------  \t ----------------------------- \t ----------------')                
             concordance = 0
             sumWeights = 0
             criteriaList = [x for x in criteria]
@@ -9757,7 +9757,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         html += '<tr>'
                         html += '<td bgcolor="#FFEEAA" align="center">%s</td> <td>%.2f</td> <td>%2.2f</td> <td>%2.2f</td> <td>%+2.2f</td> <td>%s</td>  <td>%s</td>  <td>%s</td>   <td>%+.2f</td>' % (c,criteria[c]['weight'],evaluation[c][a],evaluation[c][b],d, str(ind),str(wp),str(p),lc0*criteria[c]['weight'])
                     else:
-                         print c, '  %.2f  %2.2f  %2.2f  %+2.2f \t| %s  %s  %s   %+.2f \t|' % (criteria[c]['weight'],evaluation[c][a],evaluation[c][b],d, str(ind),str(wp),str(p),lc0*criteria[c]['weight']),
+                         print(c, '  %.2f  %2.2f  %2.2f  %+2.2f \t| %s  %s  %s   %+.2f \t|' % (criteria[c]['weight'],evaluation[c][a],evaluation[c][b],d, str(ind),str(wp),str(p),lc0*criteria[c]['weight']), end=' ')
                     concordance = concordance + (lc0 * criteria[c]['weight'])
                     try:
                         wvx = criteria[c]['thresholds']['weakVeto'][0]
@@ -9787,38 +9787,38 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         if v != None:
                             if d >= v:
                                 if not isReturningHTML:
-                                    print '     %2.2f       %+2.2f' % (v, negativeVeto)
+                                    print('     %2.2f       %+2.2f' % (v, negativeVeto))
                                 else:
                                     html += '<td></td> <td> %2.2f</td> <td bgcolor="#ddffdd">%+2.2f</td>' % (v, negativeVeto)
                             elif d <= -v:
                                 if not isReturningHTML:
-                                    print '     %2.2f       %+2.2f' % (v, -veto)
+                                    print('     %2.2f       %+2.2f' % (v, -veto))
                                 else:
                                     html += '<td></td> <td> %2.2f</td> <td bgcolor="#ffddff">%+2.2f</td>' % (v, -veto)
                             else:
                                 if not isReturningHTML:                                
-                                    print
+                                    print()
                                 else:
                                     html += '</tr>'
                         elif wv != None:
                             if d >= wv:
                                 if not isReturningHTML:
-                                    print '%2.2f      %+2.2f' % (wv, negativeVeto)
+                                    print('%2.2f      %+2.2f' % (wv, negativeVeto))
                                 else:
                                     html += '<td>%2.2f</td><td></td> <td bgcolor="#ddffdd">%+2.2f</td>' % (wv, negativeVeto)
                             elif d <= -wv:
                                 if not isReturningHTML:
-                                    print '%2.2f      %+2.2f' % (wv, -veto)
+                                    print('%2.2f      %+2.2f' % (wv, -veto))
                                 else:
                                     html += '<td>%2.2f</td><td></td> <td bgcolor="#ffddff">%+2.2f</td>' % (wv, -veto)
                             else:
                                 if not isReturningHTML:
-                                    print
+                                    print()
                                 else:
                                     html += '</tr>'
                         else:
                             if not isReturningHTML:
-                                print
+                                print()
                             else:
                                 html += '</tr>'
                     else:
@@ -9827,23 +9827,23 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                             if wv != None:
                                 if v != None:
                                     if not isReturningHTML:
-                                        print ' %2.2f %2.2f %+2.2f' % (wv, v, veto)
+                                        print(' %2.2f %2.2f %+2.2f' % (wv, v, veto))
                                     else:
                                         html += '<td>%2.2f</td> <td> %2.2f</td> <td bgcolor="#ffddff">%+2.2f</td>' % (wv, v, veto)
                                 else:
                                     if not isReturningHTML:
-                                        print ' %2.2f       %+2.2f' % (wv, -veto)
+                                        print(' %2.2f       %+2.2f' % (wv, -veto))
                                     else:
                                         html += '<td>%2.2f</td> <td></td> <td bgcolor="#ffddff">%+2.2f</td>' % (wv, -veto)
                             else:
                                 if v != None:
                                     if not isReturningHTML:
-                                        print '       %2.2f %+2.2f' % (v, veto)
+                                        print('       %2.2f %+2.2f' % (v, veto))
                                     else:
                                         html += '<td></td> <td>%2.2f</td> <td bgcolor="#ffddff">%+2.2f</td>' % (v, -veto)
                                 else:
                                     if not isReturningHTML:
-                                        print
+                                        print()
                                     else:
                                         html += '</tr>'
                         
@@ -9858,12 +9858,12 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         eval_c_b = '%2.2f' % evaluation[c][b]
                     
                     if not isReturningHTML:
-                        print c,'    %s %s' % (eval_c_a,eval_c_b)
+                        print(c,'    %s %s' % (eval_c_a,eval_c_b))
                     else:
                         html += '<td bgcolor="#FFEEAA" align="center">%s</td> <td>%s</td><td>%s</td><td>%s</td><td></td><td></td><td></td><td></td><td>%.2f</td></tr>' % (c, criteria[c]['weight'],eval_c_a,eval_c_b, self.valuationdomain['med']*criteria[c]['weight'])
             if not isReturningHTML:
-                print '             ----------------------------------------'
-                print ' Valuation in range: %+.2f to %+.2f; global concordance: %+.2f' % (-sumWeights,sumWeights,concordance)
+                print('             ----------------------------------------')
+                print(' Valuation in range: %+.2f to %+.2f; global concordance: %+.2f' % (-sumWeights,sumWeights,concordance))
             else:
                 html += '</tr></table>'
                 html += '<b>Valuation in range: %+.2f to %+.2f; global concordance: %+.2f </b>' % (-sumWeights,sumWeights,concordance)
@@ -9884,14 +9884,14 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         specialize the general showAll method with criteria
         and performance tableau output
         """
-        print '*----- show detail -------------*'
-        print 'Digraph          :', self.name
-        print '*---- Actions ----*'
-        print self.actions
+        print('*----- show detail -------------*')
+        print('Digraph          :', self.name)
+        print('*---- Actions ----*')
+        print(self.actions)
         self.showCriteria()
         self.showPerformanceTableau()
-        print '*---- Valuation domain ----*'
-        print self.valuationdomain
+        print('*---- Valuation domain ----*')
+        print(self.valuationdomain)
         self.showRelationTable()
         self.showComponents()
         self.showPreKernels()
@@ -9914,8 +9914,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             actions = self.actions
         else:
             actions = actionsSubset
-        print '* ---- Relation Table -----\n',
-        print ' S   | ',
+        print('* ---- Relation Table -----\n', end=' ')
+        print(' S   | ', end=' ')
         #actions = [x for x in actions]
         actionsList = []
         for x in actions:
@@ -9936,61 +9936,61 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             hasIntegerValuation = IntegerValues
         
         for x in actionsList:
-            print "'"+x[0]+"',  ",
-        print '\n-----|------------------------------------------------------------'
+            print("'"+x[0]+"',  ", end=' ')
+        print('\n-----|------------------------------------------------------------')
         for x in actionsList:
             if hasLatexFormat:
-                print "$"+x[0]+"$ & ",
+                print("$"+x[0]+"$ & ", end=' ')
             else:
-                print "'"+x[0]+"' |  ",
+                print("'"+x[0]+"' |  ", end=' ')
             for y in actionsList:
                 if hasIntegerValuation:
                     if hasLPDDenotation:
-                        print '%+d ' % (gnv.relation[x[1]][y[1]]),
+                        print('%+d ' % (gnv.relation[x[1]][y[1]]), end=' ')
                     elif hasLatexFormat:
-                        print '$%+d$ &' % (self.relation[x[1]][y[1]]),
+                        print('$%+d$ &' % (self.relation[x[1]][y[1]]), end=' ')
                     else:
-                        print '%+d ' % (self.relation[x[1]][y[1]]),
+                        print('%+d ' % (self.relation[x[1]][y[1]]), end=' ')
                 else:
                     if hasLPDDenotation:
-                        print '%+2.2f ' % (gnv.relation[x[1]][y[1]]),
+                        print('%+2.2f ' % (gnv.relation[x[1]][y[1]]), end=' ')
                     elif hasLatexFormat:
-                        print '$%+2.2f$ & ' % (self.relation[x[1]][y[1]]),       
+                        print('$%+2.2f$ & ' % (self.relation[x[1]][y[1]]), end=' ')       
                     else:
-                        print '%+2.2f ' % (self.relation[x[1]][y[1]]),
+                        print('%+2.2f ' % (self.relation[x[1]][y[1]]), end=' ')
                 
             if hasLatexFormat:
-                print ' \\cr'
+                print(' \\cr')
             else:
-                print
+                print()
             if hasLPDDenotation:
-                print "'"+x[0]+"' | ",
+                print("'"+x[0]+"' | ", end=' ')
                 for y in actionsList:
-                    print '(%+d,%+d)' % (largePerformanceDifferencesCount[x[1]][y[1]]['positive'],\
-                                          largePerformanceDifferencesCount[x[1]][y[1]]['negative']),
-                print
+                    print('(%+d,%+d)' % (largePerformanceDifferencesCount[x[1]][y[1]]['positive'],\
+                                          largePerformanceDifferencesCount[x[1]][y[1]]['negative']), end=' ')
+                print()
             
                 
-        print '\n'
+        print('\n')
 
     def showPerformanceTableau(self):
         """
         Print the performance Tableau.
         """
-        print '*----  performance tableau -----*'
+        print('*----  performance tableau -----*')
         criteriaList = list(self.criteria)
         criteriaList.sort()
         actionsList = list(self.actions)
         actionsList.sort()
-        print   'criteria | ',
+        print('criteria | ', end=' ')
         for x in actionsList:
-            print '\''+str(x)+'\'  ',
-        print '\n---------|-----------------------------------------'
+            print('\''+str(x)+'\'  ', end=' ')
+        print('\n---------|-----------------------------------------')
         for g in criteriaList:
-            print '   \''+str(g)+'\'  |',
+            print('   \''+str(g)+'\'  |', end=' ')
             for x in actionsList:
-                print '% .1f, ' % (self.evaluation[g][x]),
-            print      
+                print('% .1f, ' % (self.evaluation[g][x]), end=' ')
+            print()      
 
     def computeVetosShort(self):
         """
@@ -10035,32 +10035,32 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         """
         prints all veto situations observed in the OutrankingDigraph instance.
         """
-        print '*----  Veto situations ---'
+        print('*----  Veto situations ---')
         nv, realveto = self.computeVetosShort()
         vetos = self.vetos
         vetos.sort()
         if realVetosOnly:
-            print self.valuationdomain
+            print(self.valuationdomain)
             cutveto = 0
             if cutLevel == None:
                 cutLevel = self.valuationdomain['med']
             else:
                 cutLevel = Decimal(str(cutLevel))
             if cutLevel > self.valuationdomain['max']:
-                print "Error! min = %.3f, max = %.3f" % (self.valuationdomain['min'],self.valuationdomain['max'])
+                print("Error! min = %.3f, max = %.3f" % (self.valuationdomain['min'],self.valuationdomain['max']))
                 return None
-            print 'Real vetos at cut level: %.3f' % (cutLevel)
+            print('Real vetos at cut level: %.3f' % (cutLevel))
             for i in range(nv):
                 if self.vetos[i][0][2] > cutLevel:
-                    print 'self.vetos[i][0][2]=',self.vetos[i][0][2]
-                    print str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1])
+                    print('self.vetos[i][0][2]=',self.vetos[i][0][2])
+                    print(str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1]))
                     cutveto += 1
             return nv,realveto,cutveto
         else:            
-            print 'number of potential vetos: %d ' % (nv)
+            print('number of potential vetos: %d ' % (nv))
             for i in range(nv):
-                print str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1])
-            print 'number of real vetos: %d' % (realveto)
+                print(str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1]))
+            print('number of real vetos: %d' % (realveto))
             return nv,realveto
 
     ## transferred to perftabs.py module
@@ -10097,7 +10097,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         self.computeRubyChoice()
 
         if noSilent:
-            print '*----- saving digraph in XML format  -------------*'        
+            print('*----- saving digraph in XML format  -------------*')        
         nameExt = name+'.xml'
         fo = codecs.open(nameExt,'w',encoding='utf-8')
         fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
@@ -10107,18 +10107,18 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         else:
             fo.write('<!-- ?xml-stylesheet type="text/xsl" href="rubisOutrankingDigraph.xsl"? -->\n')
         fo.write('<rubisOutrankingDigraph xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="rubisOutrankingDigraph.xsd"')
-        fo.write(' category="' + unicode(category)+'" subcategory="'+unicode(subcategory)+'">\n')
+        fo.write(' category="' + str(category)+'" subcategory="'+str(subcategory)+'">\n')
 
         fo.write('<header>\n')
         fo.write('<comment>header declaration </comment>\n')
         fo.write('<name>')
-        fo.write(unicode(nameExt))
+        fo.write(str(nameExt))
         fo.write('</name>\n')       
         fo.write('<author>')
-        fo.write(unicode(author))
+        fo.write(str(author))
         fo.write('</author>\n')
         fo.write('<reference>')
-        fo.write(unicode(reference))
+        fo.write(str(reference))
         fo.write('</reference>\n')
         fo.write('</header>')
 
@@ -10127,16 +10127,16 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write('<actions>\n')
         fo.write('<comment>Potential decision actions </comment>\n')
         for x in actionsOrigList:
-            fo.write('<action id="'+unicode(x)+'">\n')
+            fo.write('<action id="'+str(x)+'">\n')
             fo.write('<name>')
             try:
-                fo.write(unicode(self.actions_orig[x]['name']))
+                fo.write(str(self.actions_orig[x]['name']))
             except:
                 pass
             fo.write('</name>\n')
             fo.write('<comment>')
             try:
-                fo.write(unicode(self.actions_orig[x]['comment'])) 
+                fo.write(str(self.actions_orig[x]['comment'])) 
             except:
                 pass
             fo.write('</comment>\n')
@@ -10149,16 +10149,16 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         criteriaList.sort()
         #print criteriaList
         for g in criteriaList:
-            fo.write('<criterion id="'+unicode(g)+'" category="performance">\n')
+            fo.write('<criterion id="'+str(g)+'" category="performance">\n')
             fo.write('<name>')
             try:
-                fo.write(unicode(self.criteria[g]['name']))
+                fo.write(str(self.criteria[g]['name']))
             except:
                 pass
             fo.write('</name>\n')
             fo.write('<comment>')
             try:
-                fo.write(unicode(self.criteria[g]['comment'])) 
+                fo.write(str(self.criteria[g]['comment'])) 
             except:
                 pass
             fo.write('</comment>\n')
@@ -10212,11 +10212,11 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write('<comment>performance table </comment>\n')
         for g in criteriaList:
             fo.write('<evaluation>\n')
-            fo.write('<criterionID>'+unicode(g)+'</criterionID>\n')
+            fo.write('<criterionID>'+str(g)+'</criterionID>\n')
             for x in actionsOrigList:
                 fo.write('<performance>\n')
                 fo.write('<actionID>')       
-                fo.write(unicode(x))
+                fo.write(str(x))
                 fo.write('</actionID>\n')                    
                 fo.write('<value>')
 ##                 fo.write(str(evaluation[g][x]))
@@ -10254,10 +10254,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             for y in actionsOrigList:
                 fo.write('<arc>\n')        
                 fo.write('<initialActionID>')
-                fo.write(unicode(x))
+                fo.write(str(x))
                 fo.write('</initialActionID>\n')                       
                 fo.write('<terminalActionID>')
-                fo.write(unicode(y))
+                fo.write(str(y))
                 fo.write('</terminalActionID>\n')                                             
                 fo.write('<value>')
 ##                 fo.write(str(relation[x][y]))
@@ -10275,10 +10275,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 arc = veto[0]
                 fo.write('<arc>\n')
                 fo.write('<initialActionID>')
-                fo.write(unicode(arc[0]))
+                fo.write(str(arc[0]))
                 fo.write('</initialActionID>\n')                       
                 fo.write('<terminalActionID>')
-                fo.write(unicode(arc[1]))
+                fo.write(str(arc[1]))
                 fo.write('</terminalActionID>\n')                                             
                 fo.write('<concordanceDegree>')
                 fo.write('%.2f' % (arc[2]))
@@ -10289,7 +10289,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 for v in situations:
                     fo.write('<vetoSituation>\n')
                     fo.write('<criterionID>')
-                    fo.write(unicode(v[0]))
+                    fo.write(str(v[0]))
                     fo.write('</criterionID>\n')
                     fo.write('<performanceDifference>')
                     fo.write('%.2f' % (v[1][1]))
@@ -10331,7 +10331,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.write('<cocaActions>\n')
             fo.write("<comment>weak COCA digraph actions' declaration </comment>\n")
             for x in cocaActionsList:
-                fo.write('<cocaAction id="'+unicode(x)+'">\n')
+                fo.write('<cocaAction id="'+str(x)+'">\n')
                 fo.write('<name>')
                 fo.write('chordless odd circuit')
                 fo.write('</name>\n')
@@ -10356,7 +10356,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 fo.write('<choiceActions>\n')
                 for x in ch[5]:
                     fo.write('<actionID>')
-                    fo.write(unicode(x))
+                    fo.write(str(x))
                     fo.write('</actionID>\n')
                 fo.write('</choiceActions>\n')              
                 fo.write('</choiceSet>\n')
@@ -10377,7 +10377,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 fo.write('<choiceActions>\n')
                 for x in ch[5]:
                     fo.write('<actionID>')
-                    fo.write(unicode(x))
+                    fo.write(str(x))
                     fo.write('</actionID>\n')
                 fo.write('</choiceActions>\n')              
                 fo.write('</choiceSet>\n')
@@ -10389,7 +10389,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         
         fo.close()
         if noSilent:
-            print 'File: ' + nameExt + ' saved !'
+            print('File: ' + nameExt + ' saved !')
 
 
 
@@ -10405,7 +10405,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             category = 'Robust Rubis'
 
         if comment:
-            print '*----- saving digraph in XMCDA format  -------------*'        
+            print('*----- saving digraph in XMCDA format  -------------*')        
         nameExt = fileName+'.xmcda'
         fo = codecs.open(nameExt,'w',encoding='utf-8')
         fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
@@ -10424,19 +10424,19 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 fo.write('<?xml-stylesheet type="text/xsl" href="xmcdaDefault.xsl"?>\n')
             else:
                 fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcdaDefault.xsl"? -->\n')     
-        fo.write('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n xsi:schemaLocation="http://www.decision-deck.org/2008/UMCDA-ML-1.0 umcda-ml-1.0.xsd"\n xmlns:xmcda="http://www.decision-deck.org/2008/UMCDA-ML-1.0" instanceID="%s">\n' % unicode(instanceID) )
+        fo.write('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n xsi:schemaLocation="http://www.decision-deck.org/2008/UMCDA-ML-1.0 umcda-ml-1.0.xsd"\n xmlns:xmcda="http://www.decision-deck.org/2008/UMCDA-ML-1.0" instanceID="%s">\n' % str(instanceID) )
 
         # write description
         fo.write('<caseReference>\n')
         # titles
         title = 'Rubis Best Choice Recommendation'
-        fo.write('<%s>%s</%s>\n' % ('title', unicode(title),'title') )
+        fo.write('<%s>%s</%s>\n' % ('title', str(title),'title') )
         try:
-            fo.write('<%s>%s</%s>\n' % ('subTitle', unicode(self.description['title']),'subTitle') )
+            fo.write('<%s>%s</%s>\n' % ('subTitle', str(self.description['title']),'subTitle') )
         except:
             pass
         try:
-            fo.write('<%s>%s</%s>\n' % ('subSubTitle', unicode(self.description['subTitle']),'subSubTitle') )
+            fo.write('<%s>%s</%s>\n' % ('subSubTitle', str(self.description['subTitle']),'subSubTitle') )
         except:
             pass
         # rest of case description including the bibliography
@@ -10446,22 +10446,22 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     fo.write('<bibliography>\n')
                     for bibEntry in [x for x in self.description[entry]]:
                         if bibEntry == 'description':
-                            fo.write('<description><subSubTitle>%s</subSubTitle></description>\n' % (unicode(self.description['bibliography']['description']['subSubTitle'])) )
+                            fo.write('<description><subSubTitle>%s</subSubTitle></description>\n' % (str(self.description['bibliography']['description']['subSubTitle'])) )
                         else:
-                            fo.write('<bibEntry>%s</bibEntry>\n' % (unicode(self.description['bibliography'][bibEntry])) )
+                            fo.write('<bibEntry>%s</bibEntry>\n' % (str(self.description['bibliography'][bibEntry])) )
                     fo.write('</bibliography>\n')
                 elif entry != 'title' and entry != 'subTitle' and entry != 'subSubTitle':
-                    fo.write('<%s>%s</%s>\n' % (entry, unicode(self.description[entry]),entry) )
+                    fo.write('<%s>%s</%s>\n' % (entry, str(self.description[entry]),entry) )
         except:
             if category == 'Robust Rubis':
                 fo.write('<title>Valued Outranking Robustness Digraph in XMCDA format</title>\n')
             else:
                 fo.write('<title>Valued Outranking Digraph in XMCDA format</title>\n') 
             fo.write('<id>%s</id>\n' % (fileName) )
-            fo.write('<name>%s</name>\n' % (unicode(self.name)) )
+            fo.write('<name>%s</name>\n' % (str(self.name)) )
             fo.write('<type>root</type>\n')
-            fo.write('<author>%s</author>\n' % (unicode(author)) )
-            fo.write('<version>%s</version>\n' % (unicode(reference)) )
+            fo.write('<author>%s</author>\n' % (str(author)) )
+            fo.write('<version>%s</version>\n' % (str(reference)) )
         fo.write('</caseReference>\n')
 
         # write methodData
@@ -10514,17 +10514,17 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write('<type>%s</type>\n' % ('alternatives'))
         fo.write('</description>\n')                  
         for x in origActionsList:
-            fo.write('<alternative id="'+unicode(x)+'">\n')
+            fo.write('<alternative id="'+str(x)+'">\n')
             fo.write('<description>\n')
             fo.write('<name>')
             try:
-                fo.write(unicode(self.actions_orig[x]['name']))
+                fo.write(str(self.actions_orig[x]['name']))
             except:
                 pass
             fo.write('</name>\n')
             fo.write('<comment>')
             try:
-                fo.write(unicode(self.actions_orig[x]['comment'])) 
+                fo.write(str(self.actions_orig[x]['comment'])) 
             except:
                 pass
             fo.write('</comment>\n')
@@ -10545,10 +10545,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.write('<comment>Chordless odd circuits added to the original outranking digraph.</comment>\n')
             fo.write('</description>\n')                  
             for x in cocaActionsList:
-                fo.write('<alternative id="'+unicode(self.actions[x]['name'])+'">\n')
+                fo.write('<alternative id="'+str(self.actions[x]['name'])+'">\n')
                 fo.write('<description>\n')
-                fo.write('<name>%s</name>\n' % (unicode(self.actions[x]['name']) ) )
-                fo.write('<comment>%s</comment>\n' % (unicode(self.actions[x]['comment'])) )
+                fo.write('<name>%s</name>\n' % (str(self.actions[x]['name']) ) )
+                fo.write('<comment>%s</comment>\n' % (str(self.actions[x]['comment'])) )
                 fo.write('</description>\n')   
                 fo.write('</alternative>\n')
             fo.write('</alternatives>\n')
@@ -10566,12 +10566,12 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.write('<criterion id="%s" >\n' % (g) )
             fo.write('<description>\n')
             try:
-                fo.write('<name>%s</name>\n' % (unicode(criteria[g]['name'])) )
+                fo.write('<name>%s</name>\n' % (str(criteria[g]['name'])) )
             except:
                 fo.write('<name>%s</name>\n' % ('nameless') )
             fo.write('<type>%s</type>\n' % ('criterion'))
             try:
-                fo.write('<comment>%s</comment>\n' % (unicode(criteria[g]['comment'])) )
+                fo.write('<comment>%s</comment>\n' % (str(criteria[g]['comment'])) )
             except:
                 fo.write('<comment>%s</comment>\n' % ('no comment') )
             fo.write('<version>%s</version>\n' % ('performance') )
@@ -10694,7 +10694,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write('</description>\n')
         for g in criteriaList:
             fo.write('<criterionEvaluations>\n')
-            fo.write('<criterionID>'+unicode(g)+'</criterionID>\n')
+            fo.write('<criterionID>'+str(g)+'</criterionID>\n')
             try:
                 if self.criteria[g]['preferenceDirection'] == 'min':
                     pdir = Decimal('-1')
@@ -10705,7 +10705,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             for i in range(len(origActionsList)):
                 fo.write('<evaluation>\n')
                 fo.write('<alternativeID>')       
-                fo.write(unicode(origActionsList[i]))
+                fo.write(str(origActionsList[i]))
                 fo.write('</alternativeID>\n')                    
                 fo.write('<value><real>')
                 fo.write('%.2f' % (pdir*evaluation[g][origActionsList[i]]) )
@@ -10732,10 +10732,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 for cj in range(cn):
                     fo.write('<arc>\n')        
                     fo.write('<from><criterionID>')
-                    fo.write(unicode(criteriaList[ci]))
+                    fo.write(str(criteriaList[ci]))
                     fo.write('</criterionID></from>\n')                       
                     fo.write('<to><criterionID>')
-                    fo.write(unicode(criteriaList[cj]))
+                    fo.write(str(criteriaList[cj]))
                     fo.write('</criterionID></to>\n')                                             
                     fo.write('<value><real>%2.2f' % (corr[criteriaList[ci]][criteriaList[cj]]) )
                     fo.write('</real></value>\n')                       
@@ -10788,10 +10788,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             for y in origActionsList:
                 fo.write('<arc>\n')        
                 fo.write('<from><alternativeID>')
-                fo.write(unicode(x))
+                fo.write(str(x))
                 fo.write('</alternativeID></from>\n')                       
                 fo.write('<to><alternativeID>')
-                fo.write(unicode(y))
+                fo.write(str(y))
                 fo.write('</alternativeID></to>\n')
                 try:
                     if self.methodData['parameter']['valuationType'] == 'integer':
@@ -10832,17 +10832,17 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     fo.write('<comment>concordance degree:%.2f</comment>\n' % (arc[2]) )
                     fo.write('</description>\n')
                     fo.write('<from><alternativeID>')
-                    fo.write(unicode(arc[0]))
+                    fo.write(str(arc[0]))
                     fo.write('</alternativeID></from>\n')                       
                     fo.write('<to><alternativeID>')
-                    fo.write(unicode(arc[1]))
+                    fo.write(str(arc[1]))
                     fo.write('</alternativeID></to>\n')                                             
                     situations = veto[1]
                     for v in situations:
                         fo.write('<values>\n')
                         fo.write('<description>\n')
                         fo.write('<id>')
-                        fo.write(unicode(v[0]))
+                        fo.write(str(v[0]))
                         fo.write('</id>\n')
                         fo.write('<comment>')
                         if arc[2] > Med:
@@ -10916,9 +10916,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     fo.write('<choiceMember>\n')
                     fo.write('<alternativeID>')
                     if isinstance(x,frozenset):
-                        fo.write(unicode(self.actions[x]['name']))
+                        fo.write(str(self.actions[x]['name']))
                     else:
-                        fo.write(unicode(x))
+                        fo.write(str(x))
                     fo.write('</alternativeID>\n')
                     fo.write('</choiceMember>\n')
                 fo.write('</choiceMembersList>\n')
@@ -11022,9 +11022,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         fo.write('<choiceMember>\n')
                         fo.write('<alternativeID>')
                         if isinstance(x,frozenset):
-                            fo.write(unicode(self.actions[x]['name']))
+                            fo.write(str(self.actions[x]['name']))
                         else:
-                            fo.write(unicode(x))
+                            fo.write(str(x))
                         fo.write('</alternativeID>\n')
                         fo.write('</choiceMember>\n')
                     fo.write('</choiceMembersList>\n')
@@ -11099,7 +11099,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.close()
         
         if comment:
-            print 'File: ' + nameExt + ' saved !'
+            print('File: ' + nameExt + ' saved !')
 
 #####    XMCDA 2.0            
 
@@ -11115,7 +11115,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             category = 'Robust Rubis'
 
         if comment:
-            print '*----- saving digraph in XMCDA 2.0 format  -------------*'        
+            print('*----- saving digraph in XMCDA 2.0 format  -------------*')        
         nameExt = fileName+'.xmcda2'
         #nameExt = fileName+'.xml'
         fo = codecs.open(nameExt,'w',encoding='utf-8')
@@ -11135,7 +11135,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 fo.write('<?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"?>\n')
             else:
                 fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"? -->\n')     
-        fo.write('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n xsi:schemaLocation="http://www.decision-deck.org/2009/XMCDA-2.0.0 http://www.decision-deck.org/xmcda/_downloads/XMCDA-2.0.0.xsd"\n xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0" instanceID="%s">\n' % unicode(instanceID) )
+        fo.write('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n xsi:schemaLocation="http://www.decision-deck.org/2009/XMCDA-2.0.0 http://www.decision-deck.org/xmcda/_downloads/XMCDA-2.0.0.xsd"\n xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0" instanceID="%s">\n' % str(instanceID) )
 
         # write description
         try:
@@ -11147,19 +11147,19 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         except:
             projectID = fileName
             
-        fo.write('<projectReference id="%s" name="%s">\n' % (unicode(projectID),unicode(projectName)))
+        fo.write('<projectReference id="%s" name="%s">\n' % (str(projectID),str(projectName)))
         # titles
         if category == 'Rubis':
             title = 'Rubis Best Choice Recommendation'
         elif category == 'Robust Rubis':
             title = 'Condorcet Robustness of a Rubis Best Choice Recommendation'
-        fo.write('<%s>%s</%s>\n' % ('title', unicode(title),'title') )
+        fo.write('<%s>%s</%s>\n' % ('title', str(title),'title') )
         try:
-            fo.write('<%s>%s</%s>\n' % ('subTitle', unicode(self.description['title']),'subTitle') )
+            fo.write('<%s>%s</%s>\n' % ('subTitle', str(self.description['title']),'subTitle') )
         except:
             pass
         try:
-            fo.write('<%s>%s</%s>\n' % ('subSubTitle', unicode(self.description['subTitle']),'subSubTitle') )
+            fo.write('<%s>%s</%s>\n' % ('subSubTitle', str(self.description['subTitle']),'subSubTitle') )
         except:
             pass
         # rest of case description including the bibliography
@@ -11169,15 +11169,15 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     fo.write('<bibliography>\n')
                     for bibEntry in [x for x in self.description[entry]]:
                         if bibEntry == 'description':
-                            fo.write('<description><subSubTitle>%s</subSubTitle></description>\n' % (unicode(self.description['bibliography']['description']['subSubTitle'])) )
+                            fo.write('<description><subSubTitle>%s</subSubTitle></description>\n' % (str(self.description['bibliography']['description']['subSubTitle'])) )
                         else:
-                            fo.write('<bibEntry>%s</bibEntry>\n' % (unicode(self.description['bibliography'][bibEntry])) )
+                            fo.write('<bibEntry>%s</bibEntry>\n' % (str(self.description['bibliography'][bibEntry])) )
                     fo.write('</bibliography>\n')
                 elif entry != 'title' and entry != 'subTitle' and entry != 'subSubTitle' and entry != 'name' and entry != 'id' and entry != 'type':
-                    fo.write('<%s>%s</%s>\n' % (entry, unicode(self.description[entry]),entry) )
+                    fo.write('<%s>%s</%s>\n' % (entry, str(self.description[entry]),entry) )
         except:
-            fo.write('<author>%s</author>\n' % (unicode(author)) )
-            fo.write('<version>%s</version>\n' % (unicode(reference)) )
+            fo.write('<author>%s</author>\n' % (str(author)) )
+            fo.write('<version>%s</version>\n' % (str(reference)) )
         fo.write('</projectReference>\n')
 
         # write methodParameters
@@ -11239,11 +11239,11 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             except:
                 alternativeName=x
             
-            fo.write('<alternative id="%s" name="%s">\n' % (unicode(x),unicode(alternativeName)) )
+            fo.write('<alternative id="%s" name="%s">\n' % (str(x),str(alternativeName)) )
             fo.write('<description>\n')
             fo.write('<comment>')
             try:
-                fo.write(unicode(self.actions_orig[x]['comment'])) 
+                fo.write(str(self.actions_orig[x]['comment'])) 
             except:
                 fo.write('potential decision actions')
             fo.write('</comment>\n')
@@ -11264,9 +11264,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.write('<comment>Chordless odd circuits added to the original outranking digraph.</comment>\n')
             fo.write('</description>\n')                  
             for x in cocaActionsList:
-                fo.write('<alternative id="%s" name="%s">\n' % (unicode(self.actions[x]['name']),unicode(self.actions[x]['name'])) )
+                fo.write('<alternative id="%s" name="%s">\n' % (str(self.actions[x]['name']),str(self.actions[x]['name'])) )
                 fo.write('<description>\n')
-                fo.write('<comment>%s</comment>\n' % (unicode(self.actions[x]['comment'])) )
+                fo.write('<comment>%s</comment>\n' % (str(self.actions[x]['comment'])) )
                 fo.write('</description>\n')
                 fo.write('<type>fictive</type>\n')
                 fo.write('</alternative>\n')
@@ -11283,14 +11283,14 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write('</description>\n')       
         for g in criteriaList:
             try:
-                criterionName = unicode(criteria[g]['name'])
+                criterionName = str(criteria[g]['name'])
             except:
                 criterionName = 'nameless'
             
             fo.write('<criterion id="%s" name="%s" mcdaConcept="%s">\n' % (g,criterionName,'criterion') )
             fo.write('<description>\n')
             try:
-                fo.write('<comment>%s</comment>\n' % (unicode(criteria[g]['comment'])) )
+                fo.write('<comment>%s</comment>\n' % (str(criteria[g]['comment'])) )
             except:
                 fo.write('<comment>%s</comment>\n' % ('no comment') )
             fo.write('<version>%s</version>\n' % ('performance') )
@@ -11411,7 +11411,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write('</description>\n')
         for i in range(len(origActionsList)):
             fo.write('<alternativePerformances>\n')
-            fo.write('<alternativeID>'+unicode(origActionsList[i])+'</alternativeID>\n')
+            fo.write('<alternativeID>'+str(origActionsList[i])+'</alternativeID>\n')
             for g in criteriaList:
                 fo.write('<performance>\n')
                 fo.write('<criterionID>')       
@@ -11456,10 +11456,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 for cj in range(cn):
                     fo.write('<pair>\n')        
                     fo.write('<initial><criterionID>')
-                    fo.write(unicode(criteriaList[ci]))
+                    fo.write(str(criteriaList[ci]))
                     fo.write('</criterionID></initial>\n')                       
                     fo.write('<terminal><criterionID>')
-                    fo.write(unicode(criteriaList[cj]))
+                    fo.write(str(criteriaList[cj]))
                     fo.write('</criterionID></terminal>\n')                                             
                     fo.write('<value><real>%2.2f' % (corr[criteriaList[ci]][criteriaList[cj]]) )
                     fo.write('</real></value>\n')                       
@@ -11526,10 +11526,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             for y in origActionsList:
                 fo.write('<pair>\n')        
                 fo.write('<initial><alternativeID>')
-                fo.write(unicode(x))
+                fo.write(str(x))
                 fo.write('</alternativeID></initial>\n')                       
                 fo.write('<terminal><alternativeID>')
-                fo.write(unicode(y))
+                fo.write(str(y))
                 fo.write('</alternativeID></terminal>\n')
                 try:
                     if self.methodData['parameter']['valuationType'] == 'integer':
@@ -11574,14 +11574,14 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     fo.write('<comment>concordance degree:%.2f</comment>\n' % (arc[2]) )
                     fo.write('</description>\n')
                     fo.write('<initial><alternativeID>')
-                    fo.write(unicode(arc[0]))
+                    fo.write(str(arc[0]))
                     fo.write('</alternativeID></initial>\n')                       
                     fo.write('<terminal><alternativeID>')
-                    fo.write(unicode(arc[1]))
+                    fo.write(str(arc[1]))
                     fo.write('</alternativeID></terminal>\n')                                             
                     situations = veto[1]
                     for v in situations:
-                        fo.write('<values id="%s">\n' % ( unicode(v[0]) ) )
+                        fo.write('<values id="%s">\n' % ( str(v[0]) ) )
                         fo.write('<description>\n')
                         fo.write('<comment>')
                         if arc[2] > Med:
@@ -11650,9 +11650,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     fo.write('<element>\n')
                     fo.write('<alternativeID>')
                     if isinstance(x,frozenset):
-                        fo.write(unicode(self.actions[x]['name']))
+                        fo.write(str(self.actions[x]['name']))
                     else:
-                        fo.write(unicode(x))
+                        fo.write(str(x))
                     fo.write('</alternativeID>\n')
                     fo.write('</element>\n')
                 if category == 'Robust Rubis':
@@ -11712,9 +11712,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         fo.write('<element>\n')
                         fo.write('<alternativeID>')
                         if isinstance(x,frozenset):
-                            fo.write(unicode(self.actions[x]['name']))
+                            fo.write(str(self.actions[x]['name']))
                         else:
-                            fo.write(unicode(x))
+                            fo.write(str(x))
                         fo.write('</alternativeID>\n')
                         fo.write('</element>\n')
                     if category == 'Robust Rubis':
@@ -11748,7 +11748,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.close()
         
         if comment:
-            print 'File: ' + nameExt + ' saved !'
+            print('File: ' + nameExt + ' saved !')
 
 
 
@@ -11809,13 +11809,13 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         prints all veto situations observed in the OutrankingDigraph instance.
         """
         if Comments:
-            print '*----  Veto situations ---'
+            print('*----  Veto situations ---')
         nv, realveto = self.computeVetosShort()
         vetos = self.vetos
         vetos.sort()
         if realVetosOnly:
             if Comments:
-                print self.valuationdomain
+                print(self.valuationdomain)
             cutveto = 0
             if cutLevel == None:
                 cutLevel = self.valuationdomain['med']
@@ -11823,25 +11823,25 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 cutLevel = Decimal(str(cutLevel))
             if cutLevel > self.valuationdomain['max']:
                 if Comments:
-                    print "Error! min = %.3f, max = %.3f" % (self.valuationdomain['min'],self.valuationdomain['max'])
+                    print("Error! min = %.3f, max = %.3f" % (self.valuationdomain['min'],self.valuationdomain['max']))
                 return None
             if Comments:
-                print 'Real vetos at cut level: %.3f' % (cutLevel)
+                print('Real vetos at cut level: %.3f' % (cutLevel))
             for i in range(nv):
                 if self.vetos[i][0][2] > cutLevel:
                     if Comments:
-                        print 'self.vetos[i][0][2]=',self.vetos[i][0][2]
-                        print str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1])
+                        print('self.vetos[i][0][2]=',self.vetos[i][0][2])
+                        print(str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1]))
                     cutveto += 1
             return nv,realveto,cutveto
         else:
             if Comments:
-                print 'number of potential vetos: %d ' % (nv)
+                print('number of potential vetos: %d ' % (nv))
             for i in range(nv):
                 if Comments:
-                    print str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1])
+                    print(str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1]))
             if Comments:
-                print 'number of real vetos: %d' % (realveto)
+                print('number of real vetos: %d' % (realveto))
             return nv,realveto
 
     def computeVetos(self,cutLevel=None,realVetosOnly = False):
@@ -11997,7 +11997,7 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         """
         Debug = False
         if Debug:
-            print 'd,ind,wp,p', d,ind,wp,p
+            print('d,ind,wp,p', d,ind,wp,p)
         if p != None:
             if   d < -p:
                 return Decimal('0')
@@ -12112,7 +12112,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         self.methodData = methodData
         
         # construct outranking relation
-        actionsKeys = self.actions.keys()
+        actionsKeys = list(self.actions.keys())
         self.relation = self.constructRelation(criteria,perfTab.evaluation,initial=actionsKeys,terminal=actionsKeys,hasNoVeto=hasNoVeto,hasBipolarVeto=hasBipolarVeto,hasSymmetricThresholds=True)
 
         # insert performance Data
@@ -12314,12 +12314,12 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                         vetoes = [-veto[c][0] for c in veto if veto[c][0] > Decimal('-1')]
                         negativeVetoes = [negativeVeto[c][0] for c in negativeVeto if negativeVeto[c][0] > Decimal('-1')]
                         if Debug:
-                            print 'vetoes = ', vetoes
-                            print 'negativeVetoes = ', negativeVetoes
+                            print('vetoes = ', vetoes)
+                            print('negativeVetoes = ', negativeVetoes)
                         omaxList = [concordindex] + vetoes + negativeVetoes
                         outrankindex = self.omax(omaxList,Debug=Debug)
                         if Debug:
-                            print 'a b outrankindex = ', a,b, outrankindex
+                            print('a b outrankindex = ', a,b, outrankindex)
                     else:
                         # hasBipolarVeto == False
                         vetoIndex = Decimal('-1.0')
@@ -12421,7 +12421,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             fo.write('\n')
         fo.close()
         if Comments:
-            print 'Single Criteria Netflows saved on file %s' % (fileName)
+            print('Single Criteria Netflows saved on file %s' % (fileName))
         
     def localConcordance(self,d,ind,wp,p):
         """
@@ -12816,7 +12816,7 @@ class BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             fo.write('\n')
         fo.close()
         if Comments:
-            print 'Single Criteria Netflows saved on file %s' % (fileName)
+            print('Single Criteria Netflows saved on file %s' % (fileName))
         
     def localConcordance(self,d,ind,wp,p):
         """
@@ -12984,9 +12984,9 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
             gx = BipolarOutrankingDigraph(t,coalition=[x])
             
             if Debug:
-                print 'criterion : ', x, t.criteria[x]['weight']
+                print('criterion : ', x, t.criteria[x]['weight'])
                 gx.showRelationTable()
-                print gx.vetos
+                print(gx.vetos)
             else:
                 pass
                 
@@ -12999,7 +12999,7 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
         for x in criteriaKey:
            for v in criteriaVeto[x]:
                 if Debug:
-                    print '===>>>> v :', v,v[0][1],v[0][2]
+                    print('===>>>> v :', v,v[0][1],v[0][2])
                 else:
                     pass
                 try:
@@ -13012,7 +13012,7 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
                         veto[v[0][0]][v[0][1]] = v[0][2]
                         
         if Debug:
-            print 'Vetoes ', veto
+            print('Vetoes ', veto)
         else:
             pass
 
@@ -13050,8 +13050,8 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
                     else:
                         quantile = Med
                 if Debug:
-                    print 'x,y,n,k', x,y,n,k
-                    print characteristics,
+                    print('x,y,n,k', x,y,n,k)
+                    print(characteristics, end=' ')
                 else:
                     pass
 
@@ -13411,19 +13411,19 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         """
         prints the relation valuation in ##.## format.
         """
-        print '* ---- Relation -----',
+        print('* ---- Relation -----', end=' ')
         for x in self.actions:
-            print
+            print()
             for y in self.actions:
-                print '('+str(x)+', '+str(y)+') = '+' %d ' % (self.relation[x][y])
-        print
+                print('('+str(x)+', '+str(y)+') = '+' %d ' % (self.relation[x][y]))
+        print()
 
 
     def savePy2Gprolog(self,name='temp'):
         """
         save digraph in gprolog version
         """
-        print '*----- saving digraph in gprolog format  -------------*'        
+        print('*----- saving digraph in gprolog format  -------------*')        
         Name = name+'.pl'
         fo = open(Name,'w')
         fo.write('/*------- data set ---------*\n')
@@ -13646,7 +13646,7 @@ class EquiSignificanceMajorityOutrankingDigraph(BipolarOutrankingDigraph,Perform
             for y in actionsList:
                 characteristicVector[x][y] = []
         if Debug:
-            print characteristicVector
+            print(characteristicVector)
         coalitionsRelation = {}
         for i in range(k):
             _g = BipolarOutrankingDigraph(perfTab,coalition=weightPreorder[i])
@@ -13671,7 +13671,7 @@ class EquiSignificanceMajorityOutrankingDigraph(BipolarOutrankingDigraph,Perform
                 else:
                     relation[x][y] = Med
                 if Debug:
-                    print x,y,relation[x][y]
+                    print(x,y,relation[x][y])
 
         return relation
                 
@@ -13700,7 +13700,7 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         
         weightPreorder = self.computeWeightPreorder()
         if Debug:
-            print 'weightPreorder=', weightPreorder
+            print('weightPreorder=', weightPreorder)
         #  constructing the bipolar semiotical references lsr
         lsr = []
         for c in criteria:
@@ -13724,8 +13724,8 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             k = k + 1
         losr.sort()
         if Debug:
-            print 'lsr', lsr            
-            print 'losr', losr
+            print('lsr', lsr)            
+            print('losr', losr)
         actions = [x for x in self.actions]
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
@@ -13796,8 +13796,8 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                         veto = veto + self.localVeto(d,wvv,vv)
                         counter = self.localConcordance(d,ind,wp,p)
                         if Debug:
-                            print '--> c,a,b,evaluation[c][a],evaluation[c][b], d', c,a,b,evaluation[c][a],evaluation[c][b], d
-                            print 'ind, wp, p, counter, veto', ind, wp, p, counter, veto
+                            print('--> c,a,b,evaluation[c][a],evaluation[c][b], d', c,a,b,evaluation[c][a],evaluation[c][b], d)
+                            print('ind, wp, p, counter, veto', ind, wp, p, counter, veto)
                         
                         v[c + '+'] = v[c + '+'] + counter
                         v[c + '-'] = v[c + '-'] + (Decimal('1.0') - counter)
@@ -13818,7 +13818,7 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     dcd.append((da[k][0],dcv))
                     k = k + 1
                 if Debug:
-                    print 'dcd', dcd
+                    print('dcd', dcd)
                 # negative distribution	 ------------------------
                 vn = {}
                 for i in lsr:
@@ -13879,7 +13879,7 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     dcg.append((dan[k][0],dcv))
                     k = k + 1
                 if Debug:
-                    print 'dcg' , dcg
+                    print('dcg' , dcg)
                 #  first order stochastic dominance
                 i = 0
                 j = 0
@@ -13930,8 +13930,8 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         """
         Debug = False
         if Debug:
-            print 'ordinal concordance locla concordance'
-            print 'd,ind,wp,p', d,ind,wp,p
+            print('ordinal concordance locla concordance')
+            print('d,ind,wp,p', d,ind,wp,p)
         if p != None:
             if   d <= -p:
                 return Decimal('0.0')
@@ -14094,8 +14094,8 @@ class UnanimousOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         """
         Debug = False
         if Debug:
-            print 'ordinal concordance locla concordance'
-            print 'd,ind,wp,p', d,ind,wp,p
+            print('ordinal concordance locla concordance')
+            print('d,ind,wp,p', d,ind,wp,p)
         if p != None:
             if   d <= -p:
                 return Decimal('-1.0')
@@ -14173,17 +14173,17 @@ class NewRobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         unanimous.recodeValuation(-1,1)
         
         if Debug:
-            print 'unanimous'
-            print unanimous.valuationdomain
+            print('unanimous')
+            print(unanimous.valuationdomain)
             unanimous.showRelationTable(hasIntegerValuation=True)
-            print 'equisignificant'
-            print equisignificant.valuationdomain
+            print('equisignificant')
+            print(equisignificant.valuationdomain)
             equisignificant.showRelationTable()
-            print 'ordinal'
-            print ordinal.valuationdomain
+            print('ordinal')
+            print(ordinal.valuationdomain)
             ordinal.showRelationTable()
-            print 'cardinal'
-            print cardinal.valuationdomain
+            print('cardinal')
+            print(cardinal.valuationdomain)
             cardinal.showRelationTable()
             
         try:
@@ -14220,7 +14220,7 @@ class NewRobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         cardinalRelation = self.cardinalRelation
         
         if Debug:
-            print self.valuationdomain
+            print(self.valuationdomain)
             
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
@@ -14280,14 +14280,14 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         unanimous = UnanimousOutrankingDigraph(filePerfTab)
         
         if Debug:
-            print 'unanimous'
-            print unanimous.valuationdomain
+            print('unanimous')
+            print(unanimous.valuationdomain)
             unanimous.showRelationTable()
-            print 'ordinal'
-            print ordinal.valuationdomain
+            print('ordinal')
+            print(ordinal.valuationdomain)
             ordinal.showRelationTable()
-            print 'cardinal'
-            print cardinal.valuationdomain
+            print('cardinal')
+            print(cardinal.valuationdomain)
             cardinal.showRelationTable()
             
         try:
@@ -14318,7 +14318,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         Debug = False
 
         if Debug:
-            print self.valuationdomain
+            print(self.valuationdomain)
             
         uMin = unanimous.valuationdomain['min']
         uMed = unanimous.valuationdomain['med']
@@ -14465,14 +14465,14 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                 p0.append(str(x)+str(y))
                                 setP0.add(pairwiseComparison[xy])
             if Comments:
-                print 'counts: 2  \t-2 \t1  \t-1 \t0'
-                print '        %d \t%d \t%d \t%d \t%d\n' % (count2,countm2,count1,countm1,count0)
-                print '        %d \t%d \t%d \t%d \t%d\n' % (countSave2,countSavem2,countSave1,countSavem1,countSave0)
-                print ' -----------------------------------------------------------'
-                print '        %d \t%d \t%d \t%d \t%d\n' % (count2-countSave2,countm2-countSavem2,count1-countSave1,countm1-countSavem1,count0-countSave0)
+                print('counts: 2  \t-2 \t1  \t-1 \t0')
+                print('        %d \t%d \t%d \t%d \t%d\n' % (count2,countm2,count1,countm1,count0))
+                print('        %d \t%d \t%d \t%d \t%d\n' % (countSave2,countSavem2,countSave1,countSavem1,countSave0))
+                print(' -----------------------------------------------------------')
+                print('        %d \t%d \t%d \t%d \t%d\n' % (count2-countSave2,countm2-countSavem2,count1-countSave1,countm1-countSavem1,count0-countSave0))
                 totalcount = count2+ countm2+count1+ countm1+count0
                 totalcountSave = countSave2+countSavem2+countSave1+countSavem1+countSave0
-                print 'totals: counts: %d, countsUnique: \t%d, reduction: %d\n' %(totalcount,totalcountSave,totalcount-totalcountSave)
+                print('totals: counts: %d, countsUnique: \t%d, reduction: %d\n' %(totalcount,totalcountSave,totalcount-totalcountSave))
         else:
             for x in actionsList:
                 for y in actionsList:
@@ -14563,7 +14563,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.computeRubyChoice()
 
         if comment:
-            print '*----- saving outranking robustness digraph in XML format  -------------*'        
+            print('*----- saving outranking robustness digraph in XML format  -------------*')        
         nameExt = name+'.xml'
         fo = codecs.open(nameExt,'w',encoding='utf-8')
         fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
@@ -14573,18 +14573,18 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         else:
             fo.write('<!-- ?xml-stylesheet type="text/xsl" href="robustRubisOutrankingDigraph.xsl"? -->\n')
         fo.write('<rubisOutrankingDigraph xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="rubisOutrankingDigraph.xsd"')
-        fo.write(' category="' + unicode(category)+'" subcategory="'+unicode(subcategory)+'">\n')
+        fo.write(' category="' + str(category)+'" subcategory="'+str(subcategory)+'">\n')
 
         fo.write('<header>\n')
         fo.write('<comment>header declaration </comment>\n')
         fo.write('<name>')
-        fo.write(unicode(nameExt))
+        fo.write(str(nameExt))
         fo.write('</name>\n')       
         fo.write('<author>')
-        fo.write(unicode(author))
+        fo.write(str(author))
         fo.write('</author>\n')
         fo.write('<reference>')
-        fo.write(unicode(reference))
+        fo.write(str(reference))
         fo.write('</reference>\n')
         fo.write('</header>')
 
@@ -14593,16 +14593,16 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         fo.write('<actions>\n')
         fo.write('<comment>Potential decision actions </comment>\n')
         for x in actionsOrigList:
-            fo.write('<action id="'+unicode(x)+'">\n')
+            fo.write('<action id="'+str(x)+'">\n')
             fo.write('<name>')
             try:
-                fo.write(unicode(self.actions_orig[x]['name']))
+                fo.write(str(self.actions_orig[x]['name']))
             except:
                 pass
             fo.write('</name>\n')
             fo.write('<comment>')
             try:
-                fo.write(unicode(self.actions_orig[x]['comment'])) 
+                fo.write(str(self.actions_orig[x]['comment'])) 
             except:
                 pass
             fo.write('</comment>\n')
@@ -14614,16 +14614,16 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         criteriaList = [g for g in self.criteria]
         criteriaList.sort()
         for g in criteriaList:
-            fo.write('<criterion id="'+unicode(g)+'" category="performance">\n')
+            fo.write('<criterion id="'+str(g)+'" category="performance">\n')
             fo.write('<name>')
             try:
-                fo.write(unicode(self.criteria[g]['name']))
+                fo.write(str(self.criteria[g]['name']))
             except:
                 pass
             fo.write('</name>\n')
             fo.write('<comment>')
             try:
-                fo.write(unicode(self.criteria[g]['comment'])) 
+                fo.write(str(self.criteria[g]['comment'])) 
             except:
                 pass
             fo.write('</comment>\n')
@@ -14672,11 +14672,11 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         fo.write('<comment>performance table </comment>\n')
         for g in criteriaList:
             fo.write('<evaluation>\n')
-            fo.write('<criterionID>'+unicode(g)+'</criterionID>\n')
+            fo.write('<criterionID>'+str(g)+'</criterionID>\n')
             for x in actionsOrigList:
                 fo.write('<performance>\n')
                 fo.write('<actionID>')       
-                fo.write(unicode(x))
+                fo.write(str(x))
                 fo.write('</actionID>\n')                    
                 fo.write('<value>')
 ##                 fo.write(str(evaluation[g][x]))
@@ -14709,10 +14709,10 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             for y in actionsOrigList:
                 fo.write('<arc>\n')        
                 fo.write('<initialActionID>')
-                fo.write(unicode(x))
+                fo.write(str(x))
                 fo.write('</initialActionID>\n')                       
                 fo.write('<terminalActionID>')
-                fo.write(unicode(y))
+                fo.write(str(y))
                 fo.write('</terminalActionID>\n')                                             
                 fo.write('<value>')
 ##                 fo.write(str(relation[x][y]))
@@ -14730,10 +14730,10 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 arc = veto[0]
                 fo.write('<arc>\n')
                 fo.write('<initialActionID>')
-                fo.write(unicode(arc[0]))
+                fo.write(str(arc[0]))
                 fo.write('</initialActionID>\n')                       
                 fo.write('<terminalActionID>')
-                fo.write(unicode(arc[1]))
+                fo.write(str(arc[1]))
                 fo.write('</terminalActionID>\n')                                             
                 fo.write('<concordanceDegree>')
                 fo.write('%.2f' % (arc[2]))
@@ -14744,7 +14744,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 for v in situations:
                     fo.write('<vetoSituation>\n')
                     fo.write('<criterionID>')
-                    fo.write(unicode(v[0]))
+                    fo.write(str(v[0]))
                     fo.write('</criterionID>\n')
                     fo.write('<performanceDifference>')
                     fo.write('%.2f' % (v[1][1]))
@@ -14786,7 +14786,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             fo.write('<cocaActions>')
             fo.write("<comment>weak COCA digraph actions' declaration </comment>\n")
             for x in cocaActionsList:
-                fo.write('<cocaAction id="'+unicode(self.actions[x]['name'])+'">\n')
+                fo.write('<cocaAction id="'+str(self.actions[x]['name'])+'">\n')
                 fo.write('<name>')
                 fo.write('chordless odd circuit')
                 fo.write('</name>\n')
@@ -14812,7 +14812,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 fo.write('<choiceActions>\n')
                 for x in ch[5]:
                     fo.write('<actionID>')
-                    fo.write(unicode(x))
+                    fo.write(str(x))
                     fo.write('</actionID>\n')
                 fo.write('</choiceActions>\n')              
                 fo.write('</choiceSet>\n')
@@ -14834,7 +14834,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 fo.write('<choiceActions>\n')
                 for x in ch[5]:
                     fo.write('<actionID>')
-                    fo.write(unicode(x))
+                    fo.write(str(x))
                     fo.write('</actionID>\n')
                 fo.write('</choiceActions>\n')              
                 fo.write('</choiceSet>\n')
@@ -14846,7 +14846,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         
         fo.close()
         if comment:
-            print 'File: ' + nameExt + ' saved !'
+            print('File: ' + nameExt + ' saved !')
 
     
             
@@ -14942,21 +14942,21 @@ class DissimilarityOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         """
         specialize the general showAll method for the dissimilarity case
         """
-        print '*----- show detail -------------*'
-        print 'Digraph          :', self.name
-        print 'Criteria         :', self.actions
-        print 'Valuation domain :', self.valuationdomain
-        print '*----  evaluated actions per criteria -----*'
-        print self.criteria
-        print '*----  evaluation tableau -----*'
+        print('*----- show detail -------------*')
+        print('Digraph          :', self.name)
+        print('Criteria         :', self.actions)
+        print('Valuation domain :', self.valuationdomain)
+        print('*----  evaluated actions per criteria -----*')
+        print(self.criteria)
+        print('*----  evaluation tableau -----*')
         for g in self.actions:
-            print g, ': ', self.evaluation[g]
-        print '*----  dissimilarity between criteria -----*'       
-        print self.relation
+            print(g, ': ', self.evaluation[g])
+        print('*----  dissimilarity between criteria -----*')       
+        print(self.relation)
         self.showComponents()
-        print '*----  neighbourhoods -----*'       
-        print 'Gamma        :', self.gamma
-        print 'Not Gamma    :', self.notGamma
+        print('*----  neighbourhoods -----*')       
+        print('Gamma        :', self.gamma)
+        print('Not Gamma    :', self.notGamma)
 
 class MultiCriteriaDissimilarityDigraph(OutrankingDigraph,PerformanceTableau):
     """
@@ -15058,7 +15058,7 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph,PerformanceTableau):
             elif d > h:
                 return Decimal('1.0')
             else:
-                print 'Error: should never come here !!!'
+                print('Error: should never come here !!!')
         elif wp != None:
             if d < wp:
                 return Decimal('-1.0')
@@ -15181,7 +15181,7 @@ class XMCDADigraph(Digraph):
                 fileNameExt = fileName + '.xml'
                 fo = open(fileNameExt,'r')
             except:
-                print "Error: file %s{.xml|.xmcda}  not found" % (fileName)
+                print("Error: file %s{.xml|.xmcda}  not found" % (fileName))
         XMCDA = ElementTree.parse(fo).getroot()
         description = {}
         for elem in [x for x in XMCDA.find('caseReference').getchildren()]:
@@ -15270,9 +15270,9 @@ class XMCDA2Digraph(Digraph):
                 try:
                     fo = open(fileNameExt,'r')
                 except:
-                    print "Error: file %s  not found" % (fileNameExt)
+                    print("Error: file %s  not found" % (fileNameExt))
             
-        print "file %s is being read:" % (fileNameExt)
+        print("file %s is being read:" % (fileNameExt))
         XMCDA = ElementTree.parse(fo).getroot()
         try:
             self.name = XMCDA.attrib['name']
@@ -15352,15 +15352,15 @@ from outrankingDigraphs import *
 if __name__ == "__main__":
     import sys,array
 
-    print '****************************************************'
-    print '* Python digraphs module                           *'
-    print '* $Revision: 1.697 $                               *'                   
-    print '* Copyright (C) 2006-2007 University of Luxembourg *'
-    print '* The module comes with ABSOLUTELY NO WARRANTY     *'
-    print '* to the extent permitted by the applicable law.   *'
-    print '* This is free software, and you are welcome to    *'
-    print '* redistribute it if it remains free software.     *'
-    print '****************************************************'
+    print('****************************************************')
+    print('* Python digraphs module                           *')
+    print('* $Revision: 1.697 $                               *')                   
+    print('* Copyright (C) 2006-2007 University of Luxembourg *')
+    print('* The module comes with ABSOLUTELY NO WARRANTY     *')
+    print('* to the extent permitted by the applicable law.   *')
+    print('* This is free software, and you are welcome to    *')
+    print('* redistribute it if it remains free software.     *')
+    print('****************************************************')
 
     narg = len(sys.argv)
 
@@ -15376,16 +15376,16 @@ if __name__ == "__main__":
             t = RandomPerformanceTableau()
             g = BipolarOutrankingDigraph(t)
         elif sys.argv[1] == '-h' or sys.argv[1] == '--help' or sys.argv[1] == '-?':
-            print 'usage: digraphs.py [[-t|rt|v|av] <filename> | -r [n]] | -rt [[n] [m]]'
-            print '  <filename> of valid python digraph (without .py extension)'
-            print '  option = -t means valid performance tableau input.'
-            print '  option = -rt means  performance tableau input.'
-            print '  option = -v means valid voting profile input.'
-            print '  option = -av means valid approval voting profile input.'
-            print '  option = -r n : means a random digraph of order n (default n=10).'
-            print '  option = -rt n m : means an outranking digraph from a random'
-            print '                     performance tableau input with n actions and m criteria'
-            print '                     (default n = 10, m = 7).'
+            print('usage: digraphs.py [[-t|rt|v|av] <filename> | -r [n]] | -rt [[n] [m]]')
+            print('  <filename> of valid python digraph (without .py extension)')
+            print('  option = -t means valid performance tableau input.')
+            print('  option = -rt means  performance tableau input.')
+            print('  option = -v means valid voting profile input.')
+            print('  option = -av means valid approval voting profile input.')
+            print('  option = -r n : means a random digraph of order n (default n=10).')
+            print('  option = -rt n m : means an outranking digraph from a random')
+            print('                     performance tableau input with n actions and m criteria')
+            print('                     (default n = 10, m = 7).')
             sys.exit(1)        
         else:
             file = sys.argv[1] 
@@ -15414,31 +15414,31 @@ if __name__ == "__main__":
             t = RandomPerformanceTableau(numberOfActions=nActions,numberOfCriteria=mCriteria)
             g = BipolarOutrankingDigraph(t)      
     else:
-        print 'usage: digraphs.py [[-t|rt|v|av] <filename> | -r [n]] | -rt [[n] [m]]'
-        print '  <filename> of valid python digraph (without .py extension)'
-        print '  option = -t means valid performance tableau input.'
-        print '  option = -rt means  performance tableau input.'
-        print '  option = -v means valid voting profile input.'
-        print '  option = -av means valid approval voting profile input.'
-        print '  option = -r n : means a random digraph of order n (default n=10).'
-        print '  option = -rt n m : means an outranking digraph from a random'
-        print '                     performance tableau input with n actions and m criteria'
-        print '                     (default n = 10, m = 7).'
+        print('usage: digraphs.py [[-t|rt|v|av] <filename> | -r [n]] | -rt [[n] [m]]')
+        print('  <filename> of valid python digraph (without .py extension)')
+        print('  option = -t means valid performance tableau input.')
+        print('  option = -rt means  performance tableau input.')
+        print('  option = -v means valid voting profile input.')
+        print('  option = -av means valid approval voting profile input.')
+        print('  option = -r n : means a random digraph of order n (default n=10).')
+        print('  option = -rt n m : means an outranking digraph from a random')
+        print('                     performance tableau input with n actions and m criteria')
+        print('                     (default n = 10, m = 7).')
         sys.exit(1)        
     if noTest:
-        print '*------ Results -------"'
+        print('*------ Results -------"')
         g.showRelationTable()
         g.showAll()
         g.showStatistics()
         
     else:
-        print '*-------- Testing classes and methods -------'
+        print('*-------- Testing classes and methods -------')
         from time import time
 
         #t = RandomCBPerformanceTableau(numberOfActions=15)
         #g = BipolarOutrankingDigraph(t)
         g = RandomValuationDigraph()
-        print g.computePrudentBestChoiceRecommendation(CoDual=False,Comments=True)
+        print(g.computePrudentBestChoiceRecommendation(CoDual=False,Comments=True))
 
         ## coceg = CoceDigraph(g,Comments=True)
         ## #coceg.showStatistics()
@@ -15531,14 +15531,14 @@ if __name__ == "__main__":
         ## print d12,d23,d13
         
         
-        print '*------------------*'
-        print 'If you see this line all tests were passed successfully :-)'
-        print 'Enjoy !'
+        print('*------------------*')
+        print('If you see this line all tests were passed successfully :-)')
+        print('Enjoy !')
         
-    print '*************************************'
-    print '* R.B. July 2012                    *'
-    print '* $Revision: 1.697 $                *'                   
-    print '*************************************'
+    print('*************************************')
+    print('* R.B. July 2012                    *')
+    print('* $Revision: 1.697 $                *')                   
+    print('*************************************')
 
 #############################
 # Log record for changes:
