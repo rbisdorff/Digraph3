@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="performanceTableau.xsl"?>
+
+<!DOCTYPE digraph SYSTEM "digraphs.dtd">
+
+<performancetableau category="test" subcategory="test">
+	<header>
+		<name>testperftab</name>
+		<author>R. Bisdorff</author>
+		<reference>test XML implementation</reference>
+	</header>
+
+	<criteria>
+	  <criterion>
+
+	    <critname>g1</critname>
+	    <scale>
+	      <min>0.0</min>
+	      <max>1.0</max>
+	    </scale>
+	    <thresholds>
+	      <indifference>0.1</indifference>
+	      <preference>0.2</preference>
+	      <weakveto>0.6</weakveto>
+	      <veto>0.8</veto>
+	    </thresholds>
+	    <weight>1.0</weight>
+	  </criterion>
+
+	  <criterion>
+	    <critname>g2</critname>
+	    <scale>
+	      <min>0.0</min>
+	      <max>1.0</max>
+	    </scale>
+	    <thresholds>
+	      <indifference>0.1</indifference>
+	      <preference>0.2</preference>
+	      <weakveto>0.6</weakveto>
+	      <veto>0.8</veto>
+	    </thresholds>
+	    <weight>1.0</weight>
+	  </criterion>
+	  
+	  <criterion>
+	    <critname>g3</critname>
+	    <scale>
+	      <min>0.0</min>
+	      <max>1.0</max>
+	    </scale>
+	    <thresholds>
+	      <indifference>0.1</indifference>
+	      <preference>0.2</preference>
+	      <weakveto>0.6</weakveto>
+	      <veto>0.8</veto>
+	    </thresholds>
+	    <weight>1.0</weight>
+	  </criterion>
+	</criteria>
+
+	<actions>
+	  <action>a1</action>
+	  <action>a2</action>
+	  <action>a3</action>
+	</actions>
+
+	<evaluations>
+	  <evaluation>
+	    <critname>g1</critname>
+	    <evalactions>
+	      <action>a1</action>
+	      <value>0.5</value>
+	    </evalactions>
+	    <evalactions>
+	      <action>a2</action>
+	      <value>0.5</value>
+	    </evalactions>
+	    <evalactions>
+	      <action>a3</action>
+	      <value>0.5</value>
+	    </evalactions>
+	  </evaluation>
+
+	  <evaluation>
+	    <critname>g2</critname>
+	    <evalactions>
+	      <action>a1</action>
+	      <value>0.5</value>
+	    </evalactions>
+	    <evalactions>
+	      <action>a2</action>
+	      <value>0.5</value>
+	    </evalactions>
+	    <evalactions>
+	      <action>a3</action>
+	      <value>0.5</value>
+	    </evalactions>
+	  </evaluation>
+
+	  <evaluation>
+	    <critname>g3</critname>
+	    <evalactions>
+	      <action>a1</action>
+	      <value>0.5</value>
+	    </evalactions>
+	    <evalactions>
+	      <action>a2</action>
+	      <value>0.5</value>
+	    </evalactions>
+	    <evalactions>
+	      <action>a3</action>
+	      <value>0.5</value>
+	    </evalactions>
+	  </evaluation>
+	</evaluations>
+
+</performancetableau>

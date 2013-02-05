@@ -1,0 +1,41 @@
+<!ELEMENT node (#PCDATA)>
+<!ELEMENT i (#PCDATA)>
+<!ELEMENT t (#PCDATA)>
+<!ELEMENT v (#PCDATA)>
+<!ELEMENT nodes (node*)>
+<!ELEMENT arc (i,t,v)>
+<!ELEMENT valuationdomain (min,max)>
+<!ELEMENT min (#PCDATA)>
+<!ELEMENT max (#PCDATA)>
+<!ELEMENT relation (arc*)>
+<!ELEMENT header (name,author,reference)>
+<!ELEMENT author (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT reference (#PCDATA)>
+<!ELEMENT digraph (header,nodes,valuationdomain,relation)>
+
+<!ELEMENT scale (min,max)>
+<!ELEMENT indifference (#PCDATA)>
+<!ELEMENT preference (#PCDATA)>
+<!ELEMENT weakveto (#PCDATA)>
+<!ELEMENT veto (#PCDATA)>
+<!ELEMENT thresholds (indifference,preference,weakveto,veto)>
+<!ELEMENT critname (#PCDATA)>
+<!ELEMENT weight (#PCDATA)>
+<!ELEMENT criterion (critname,scale,thresholds,weight)>
+<!ELEMENT criteria (criterion*)>
+<!ELEMENT actions (action*)>
+<!ELEMENT action (#PCDATA)>
+<!ELEMENT value (#PCDATA)>
+<!ELEMENT evaluations (evaluation*)>
+<!ELEMENT evaluation (critname,evalactions*)>
+<!ELEMENT evalactions (action,value)>
+<!ELEMENT performancetableau (header,criteria,actions,evaluations)>
+
+<!ATTLIST digraph 
+      category CDATA "general" 
+      subcategory CDATA "general">
+
+<!ATTLIST performancetableau 
+      category CDATA "standard" 
+      subcategory CDATA "standard">

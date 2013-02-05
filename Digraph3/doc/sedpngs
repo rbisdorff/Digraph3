@@ -1,0 +1,8 @@
+#!/bin/bash
+echo Changing PNG files location
+for FN in *.html
+do
+	## echo changing $FN
+	sed 's/file:\/usr\/share\/hyperlatex\/icons\///g' $FN > /tmp/sedpngs.tmp
+	cp /tmp/sedpngs.tmp $FN
+done
