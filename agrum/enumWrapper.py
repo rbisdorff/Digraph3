@@ -1,4 +1,4 @@
-#!/usr/bin/env/python
+#!/usr/bin/env/python3
 
 def enumWrapper(graph,Odd=False,Debug=False):
     """
@@ -6,13 +6,13 @@ def enumWrapper(graph,Odd=False,Debug=False):
     """
     import os
     from tempfile import NamedTemporaryFile
-    fo = NamedTemporaryFile(delete=False)
+    fo = NamedTemporaryFile('w',delete=False)
     tempFileName = fo.name
     Med = graph.valuationdomain['med']
     actions = [x for x in graph.actions]
     actions.sort()
     relation = graph.relation
-    na = range(len(actions))
+    na = list(range(len(actions)))
     for i in na:
         for j in na:
             if i != j:
@@ -20,32 +20,32 @@ def enumWrapper(graph,Odd=False,Debug=False):
                     fo.write('%d %d\n' % (i+1,j+1))
     fo.close()
     if Debug:
-        print 'see file: ', tempFileName
+        print('see file: ', tempFileName)
     resultFile = tempFileName+'.py'
     try:
         os.system('enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
     except:
-        print 'Error !!!'
+        print('Error !!!')
         return None
     if Debug:
-        print resultFile
-    execfile(str(resultFile))
+        print(resultFile)
+    exec(compile(open(str(resultFile)).read(), str(resultFile), 'exec'))
     if Debug:
-        print locals()['circuitsList']
+        print(locals()['circuitsList'])
     circuits = locals()['circuitsList']
     result = []
     for x in circuits:
         r = len(x) % 2
         if Debug:
-            print x, r
+            print(x, r)
         if Odd:
             if r != 1:
                 oddCircuit = []
                 for ino in x[:-1]:
                     oddCircuit.append(actions[ino-1])
                 result.append( ( oddCircuit, frozenset(oddCircuit) ) )
-	else:
-	    Circuit = []
+        else:
+            Circuit = []
             for ino in x[:-1]:
                 Circuit.append(actions[ino-1])
             result.append( ( Circuit, frozenset(Circuit) ) )     
@@ -55,26 +55,26 @@ def enumWrapper(graph,Odd=False,Debug=False):
 # -------------   test pyWrapper
 from time import time
 from digraphs import *
-Na = 10
-OddFlagg = False
+Na = 50
+OddFlag=False
 t0 = time()
 t = RandomRankPerformanceTableau(numberOfActions=Na)
-t.save('testCpp')
-#t = PerformanceTableau('testCpp')
+#t.save('testCpp')
+t = PerformanceTableau('testCpp')
 g = BipolarOutrankingDigraph(t)
 #g.showRelationTable()
-print "Finished graph construction in ",time()-t0,'sec-'
+print("Finished graph construction in ",time()-t0,'sec.')
 t0 = time()
-resw = enumWrapper(g,Odd=OddFlagg,Debug=False)
-if OddFlagg:
-    print 'number of odd circuits = ', len(resw)
+resw = enumWrapper(g,Odd=OddFlag,Debug=False)
+if OddFlag:
+    print('number of odd chordless circuits = ', len(resw))
 else:
-    print 'number of circuits = ', len(resw)
-print 'C++/Agrum wrapper time = ', time() - t0
+    print('number of chordless circuits = ', len(resw))
+print('C++/Agrum wrapper time = ', time() - t0)
 to = time()
-res = g.computeChordlessCircuits(Odd=OddFlagg)
-if OddFlagg:
-    print 'number of odd circuits = ', len(res)
+res = g.computeChordlessCircuits(Odd=OddFlag)
+if OddFlag:
+    print('number of odd chordless circuits = ', len(res))
 else:
-    print 'number of circuits = ', len(res)
-print 'Python time = ', time() - t0
+    print('number of chordless circuits = ', len(res))
+print('Python time = ', time() - t0)
