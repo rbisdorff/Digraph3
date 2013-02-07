@@ -1,6 +1,6 @@
 #!/usr/bin/env/python
 
-def enumWrapper(graph,Debug=False):
+def enumWrapper(graph,Odd=False,Debug=False):
     """
     python wrapper for the C++/Agrum base chordless circuits enumeration
     """
@@ -38,28 +38,43 @@ def enumWrapper(graph,Debug=False):
         r = len(x) % 2
         if Debug:
             print x, r
-        if r != 1:
-            oddCircuit = []
+        if Odd:
+            if r != 1:
+                oddCircuit = []
+                for ino in x[:-1]:
+                    oddCircuit.append(actions[ino-1])
+                result.append( ( oddCircuit, frozenset(oddCircuit) ) )
+	else:
+	    Circuit = []
             for ino in x[:-1]:
-                oddCircuit.append(actions[ino-1])
-            result.append( ( oddCircuit, frozenset(oddCircuit) ) )        
+                Circuit.append(actions[ino-1])
+            result.append( ( Circuit, frozenset(Circuit) ) )     
     return result
 
     
 # -------------   test pyWrapper
 from time import time
 from digraphs import *
-t = RandomRankPerformanceTableau(numberOfActions=20)
-#t = XMCDA2PerformanceTableau('testCpp')
+Na = 10
+OddFlagg = False
+t0 = time()
+t = RandomRankPerformanceTableau(numberOfActions=Na)
+t.save('testCpp')
+#t = PerformanceTableau('testCpp')
 g = BipolarOutrankingDigraph(t)
 #g.showRelationTable()
-t0 = time()
 print "Finished graph construction in ",time()-t0,'sec-'
 t0 = time()
-resw = enumWrapper(g,Debug=False)
-print 'number of odd circuits = ', len(resw)
+resw = enumWrapper(g,Odd=OddFlagg,Debug=False)
+if OddFlagg:
+    print 'number of odd circuits = ', len(resw)
+else:
+    print 'number of circuits = ', len(resw)
 print 'C++/Agrum wrapper time = ', time() - t0
 to = time()
-res = g.computeChordlessCircuits()
-print 'number of odd circuits = ', len(res)
+res = g.computeChordlessCircuits(Odd=OddFlagg)
+if OddFlagg:
+    print 'number of odd circuits = ', len(res)
+else:
+    print 'number of circuits = ', len(res)
 print 'Python time = ', time() - t0
