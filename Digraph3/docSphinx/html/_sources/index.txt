@@ -7,19 +7,19 @@
 Technical Documentation of the Digraph resources!
 =================================================
 :Author: Raymond Bisdorff, University of Luxembourg FSTC/CSC
-:Version: $Revision: 1.2 $
-:Copyright: R. Bisdorff 2012
+:Version: $Revision: Python 3$
+:Copyright: R. Bisdorff 2013
 
 .. _Introduction-label:
 
 Introduction
 ------------
 
-This Technical Manual describes the Python implementation ($Revision: 1.2 $) of generic resources for computing kernels and other qualified choices in bipolar-valued outranking digraphs. This computing ressource is useful in the filed of algorithmic decision sciences problems
+This Technical Manual describes the Python-3 implementation of generic resources for computing kernels and other qualified choices in bipolar-valued outranking digraphs. This computing ressource is useful in the filed of algorithmic decision sciences problems
 
 Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://charles-sanders-peirce.uni.lu/bisdorff/>, University of Luxembourg.
 
-The Python following modules are based on the optimized in-built ``set`` class and therefore require at least  version 2.4.0 of Python.
+The Python following modules make extensivelyusage of the Decimal module and therefore work best with Python-3.3+.
 
 The basic idea of these Python modules is to make easy python interactive sessions or write short Python scripts for computing all kind of results from a bipolar valued outranking digraph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices etc. 
 
@@ -28,7 +28,7 @@ The Python development of these computing ressources offers the advantage of an 
 The Digraph source code is split into five interdependant modules, where the ``digraphs`` module is the master source.
 
 :ref:`digraphs-label`
-     main part of the source code with the top ``Digraph`` and the old version (-Rev:1.630) ``BipolarOutrankingDigraph`` classes; 
+     main part of the source code with the top ``Digraph`` and the old Python-2 version (-Rev:1.630) ``BipolarOutrankingDigraph`` classes; 
 :ref:`outrankingDigraphs-label`
      New version ``BipolarOutrankingDigraph`` classes; 
 :ref:`perfTabs-label` 
