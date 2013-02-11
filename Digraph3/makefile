@@ -25,7 +25,7 @@ docPDF:
 
 sphinx:
 		cd docSphinx; \
-		sphinx-build -E . html/
+		sphinx3-build -E . html/
 
 tests:
 		cp digraphs.py test/
