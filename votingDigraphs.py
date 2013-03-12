@@ -262,7 +262,8 @@ class LinearVotingProfile(VotingProfile):
         for v in self.voters:
             for i in range(n):
                 x = self.linearBallot[v][i]
-                ranks[x][i] += 1
+                #ranks[x][i] += 1
+                ranks[x][i] += self.voters[v]['weight']
         #print ranks
         return ranks
             
@@ -287,7 +288,9 @@ class LinearVotingProfile(VotingProfile):
         """
         BordaScores = self.computeBordaScores()
         n = len(self.candidates)
-        m = len(self.voters)
+        m = 0
+        for v in self.voters:
+            m += self.voters[v]['weight']
         BordaMinimum = n * m
         candidatesList = [x for x in self.candidates]
         for x in candidatesList:
