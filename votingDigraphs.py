@@ -71,7 +71,7 @@ class VotingProfile(object):
             self.voters = randv.voters
             self.ballot = randv.ballot
 
-    def showAll(self):
+    def showAll(self, WithBallots=True):
         """
         Show method for <VotingProfile> instances.
         """
@@ -82,11 +82,12 @@ class VotingProfile(object):
         candidates = [x for x in self.candidates]
         candidates.sort()
         print('Candidates : %s' % str(candidates))
-        print('Ballots')
-        for v in voters:
-            print('voting of voter %s (weight = %.1f)' % (v,self.voters[v]['weight']))
-            self.showVoterBallot(v)
-            print('----------------------')
+        if WithBallots:
+            print('Ballots')
+            for v in voters:
+                print('voting of voter %s (weight = %.1f)' % (v,self.voters[v]['weight']))
+                self.showVoterBallot(v)
+                print('----------------------')
 
     def showVoterBallot(self, voter, hasIntegerValuation=False):
         """
@@ -245,9 +246,9 @@ class LinearVotingProfile(VotingProfile):
         """
         show the linear ballots
         """
-        print('voters\t candidates rankings')
+        print('voters(weight)\t candidates rankings')
         for v in self.voters:
-            print('%s: \t %s' % (str(v),str(self.linearBallot[v])))
+            print('%s(%s): \t %s' % (str(v),str(self.voters[v]['weight']),str(self.linearBallot[v])))
             
 
     def computeRankAnalysis(self):
