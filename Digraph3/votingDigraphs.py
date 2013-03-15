@@ -26,15 +26,15 @@ from digraphs import *
 from decimal import Decimal
 
 #---------- voting profiles
-                
+
 class VotingProfile(object):
     """
     A general class for storing voting profiles.
-    
+
     General structure::
-    
+
 	candidates = {'a': ...,'b': ...,'c': ...,  ... }
-	voters = {                         
+	voters = {
         '1':{'weight':1.0},
         '2':{'weight':1.0},
         ...,
@@ -58,7 +58,7 @@ class VotingProfile(object):
     def __init__(self,fileVotingProfile=None):
         
         if fileVotingProfile != None:
-            fileName = fileVotingProfile+'.py'         
+            fileName = fileVotingProfile+'.py'
             exec(compile(open(fileName).read(), fileName, 'exec'))
             self.name = str(fileVotingProfile)
             self.candidates = locals()['candidates']
@@ -107,7 +107,7 @@ class VotingProfile(object):
                     print('%.2f ' % (self.ballot[voter][x][y]), end=' ')
             print()
         print('\n')
-            
+
     def save(self,name='tempVprofile'):
         """
         Persistant storage of an approval voting profile.
@@ -128,7 +128,7 @@ class VotingProfile(object):
             #fo.write('\'' + str(x) + '\': {\'name\': \'' + candidateName + '\'},\n')
             fo.write('\'%s\': {\'name\': \'%s\'},\n' % (x,candidateName) )
         fo.write('}\n')
-        fo.write('voters = {\n') 
+        fo.write('voters = {\n')
         for v in voters:
             fo.write('\'' +str(v)+'\': {\n')
             fo.write('\'weight\':'+str(voters[v]['weight'])+'},\n')
@@ -140,7 +140,7 @@ class VotingProfile(object):
                 fo.write('\'' + str(x) + '\':{' +'\n')
                 for y in candidates:
                     fo.write('\'' + str(y) + '\':' +str(ballot[v][x][y])+',\n')
-                fo.write('},\n')                             
+                fo.write('},\n')
             fo.write('},\n')
         fo.write( '}\n')
         fo.close()
@@ -150,7 +150,7 @@ class LinearVotingProfile(VotingProfile):
     A specialised class for linear voting profiles
 
     Structure::
-    
+
         candidates = {'a': ,'b':  ,'c', ..., ...}
         voters = {'1':{'weight':1.0},'2':{'weight':1.0}, ...}
         ## each specifies a a ranked list of candidates
@@ -160,7 +160,7 @@ class LinearVotingProfile(VotingProfile):
             '2' : ['a','b','c', ...],
             ...
             }
-            
+
     """
     def __init__(self,fileVotingProfile=None,numberOfCandidates=5,numberOfVoters=9):
         if fileVotingProfile != None:
@@ -208,7 +208,7 @@ class LinearVotingProfile(VotingProfile):
     def save(self,name='templinearprofile'):
         """
         Persistant storage of a linear voting profile.
-        
+
         Parameter:
             name of file (without <.py> extension!).
         """
@@ -228,7 +228,7 @@ class LinearVotingProfile(VotingProfile):
             #fo.write('\'' + str(x) + '\': {\'name\': \'' + str(x)+ '\'},\n')
             fo.write('\'%s\': {\'name\': \'%s\'},\n' % (x,candidateName) )
         fo.write('}\n')
-        fo.write('voters = {\n') 
+        fo.write('voters = {\n')
         for v in voters:
             fo.write('\'' +str(v)+'\': {\n')
             fo.write('\'weight\':'+str(voters[v]['weight'])+'},\n')
@@ -249,7 +249,7 @@ class LinearVotingProfile(VotingProfile):
         print('voters(weight)\t candidates rankings')
         for v in self.voters:
             print('%s(%s): \t %s' % (str(v),str(self.voters[v]['weight']),str(self.linearBallot[v])))
-            
+
 
     def computeRankAnalysis(self):
         """
@@ -267,7 +267,7 @@ class LinearVotingProfile(VotingProfile):
                 ranks[x][i] += self.voters[v]['weight']
         #print ranks
         return ranks
-            
+
     def computeBordaScores(self):
         """
         compute Borda scores from the rank analysis
@@ -281,7 +281,7 @@ class LinearVotingProfile(VotingProfile):
             for i in range(n):
                 BordaScores[x] += (i+1)*ranks[x][i]
         return BordaScores
-        
+
     def computeBordaWinners(self):
         """
         compute the Borda winner from the Borda scores, ie the list of
@@ -339,7 +339,7 @@ class LinearVotingProfile(VotingProfile):
                 for x in currentCandidates:
                     if uninominalVotes[x] == minVotes:
                         if Comments:
-                            print('    candidate to remove = ', x) 
+                            print('    candidate to remove = ', x)
                         remainingCandidates.remove(x)
                         for v in voters:
                             remainingLinearBallot[v].remove(x)
@@ -358,7 +358,7 @@ class LinearVotingProfile(VotingProfile):
     def computeUninominalVotes(self,candidates=None,linearBallot=None):
         """
         compute uninominal votes for each candidate in candidates sublist
-        and restricted linear ballots 
+        and restricted linear ballots
         """
         if candidates==None:
             candidates = self.candidates
@@ -390,15 +390,15 @@ class LinearVotingProfile(VotingProfile):
             if uv[x] == maxVotes:
                 simpleMajorityWinner.append(x)
         if Comments:
-            print('simple majority winner(s) ', simpleMajorityWinner) 
+            print('simple majority winner(s) ', simpleMajorityWinner)
         return simpleMajorityWinner
-        
+
 class ApprovalVotingProfile(VotingProfile):
     """
     A specialised class for approval voting profiles
 
     Structure::
-    
+
         candidates = {'a':  ,'b':  ,'c', ..., ...}
         voters = {'1':{'weight':1.0},'2':{'weight':1.0}, ...}
         ## each specifies the subset of candidates he approves on
@@ -407,7 +407,7 @@ class ApprovalVotingProfile(VotingProfile):
             '2' : ['a','b'],
             ...
             }
-            
+
     """
     def __init__(self,fileVotingProfile=None):
         if fileVotingProfile != None:
@@ -426,7 +426,7 @@ class ApprovalVotingProfile(VotingProfile):
             self.candidates = randv.candidates
             self.voters = randv.voters
             self.ballot = randv.ballot
-            
+
     def showResults(self):
         """
         Renders the votes obtained by each candidates.
@@ -445,13 +445,13 @@ class ApprovalVotingProfile(VotingProfile):
         for c in candidates:
             results.append((int(votesPerCandidate[c]),c))
         results.sort(reverse=True)
-        for c in results:       
+        for c in results:
             print('candidate: %s obtains %d votes' % (c[1],c[0] ))
 
     def computeBallot(self,approvalEquivalence=False,disapprovalEquivalence=False):
         """
         Computes a complete ballot from the approval Ballot.
-        
+
         Parameters:
             approvalEquivalence=False, disapprovalEquivalence=False.
         """
@@ -466,7 +466,7 @@ class ApprovalVotingProfile(VotingProfile):
                     ballot[v][x][y] = Decimal("0.0")
             voted = set(AVballot[v])
             non_voted = candidates - voted
-            if approvalEquivalence: 
+            if approvalEquivalence:
                 for x in voted:
                     for y in voted:
                         ballot[v][x][y] = Decimal("1.0")
@@ -479,14 +479,14 @@ class ApprovalVotingProfile(VotingProfile):
                     ballot[v][x][y] = Decimal("1.0")
                     ballot[v][y][x] = Decimal("-1.0")
             for x in candidates:
-                ballot[v][x][x] = Decimal("-1.0")            
+                ballot[v][x][x] = Decimal("-1.0")
         self.ballot = ballot
         return ballot
-        
+
     def save(self,name='tempAVprofile'):
         """
         Persistant storage of an approval voting profile.
-        
+
         Parameter:
             name of file (without <.py> extension!).
         """
@@ -506,7 +506,7 @@ class ApprovalVotingProfile(VotingProfile):
             #fo.write('\'' + str(x) + '\': {\'name\': \'' + str(x)+ '\'},\n')
             fo.write('\'%s\': {\'name\': \'%s\'},\n' % (x,candidateName) )
         fo.write('}\n')
-        fo.write('voters = {\n') 
+        fo.write('voters = {\n')
         for v in voters:
             fo.write('\'' +str(v)+'\': {\n')
             fo.write('\'weight\':'+str(voters[v]['weight'])+'},\n')
@@ -519,7 +519,7 @@ class ApprovalVotingProfile(VotingProfile):
             fo.write('],\n')
         fo.write( '}\n')
         fo.close()
-        
+
 
 class RandomApprovalVotingProfile(ApprovalVotingProfile):
     """
@@ -630,7 +630,7 @@ class RandomVotingProfile(VotingProfile):
         import random
         if seed != None:
             random.seed(seed)
-        
+
         votersList = [x for x in range(1,numberOfVoters + 1)]
         voters = {}
         for v in votersList:
@@ -685,7 +685,7 @@ class CondorcetDigraph(Digraph):
     bipolar-valued marginal pairwise majority difference digraphs.
 
     Parameters:
-    
+
         | stored voting profile (fileName of valid py code)
         | optional, coalition (sublist of voters)
 
@@ -699,7 +699,7 @@ class CondorcetDigraph(Digraph):
                 votingProfile = VotingProfile()
             elif approvalVoting:
                 votingProfile = ApprovalVotingProfile(argVotingProfile)
-            else:   
+            else:
                 votingProfile = VotingProfile(argVotingProfile)
         self.name = 'rel_' + votingProfile.name
         self.actions = copy.deepcopy(votingProfile.candidates)
@@ -718,7 +718,7 @@ class CondorcetDigraph(Digraph):
             if majorityMargins:
                 self.relation = self.constructMajorityMarginsRelation(hasIntegerValuation)
             else:
-                self.relation = self.constructApprovalBallotRelation(hasIntegerValuation)                
+                self.relation = self.constructApprovalBallotRelation(hasIntegerValuation)
         else:
             print('Error')
             sys.exit(1)
@@ -766,7 +766,7 @@ class CondorcetDigraph(Digraph):
                 else:
                     if not hasIntegerValuation and Max != Decimal('0'):
                         relation[x][y] /= Max
-                        
+
         return relation
 
     def constructMajorityMarginsRelation(self,hasIntegerValuation=True):
@@ -810,7 +810,7 @@ class CondorcetDigraph(Digraph):
         for x in actions:
             for y in actions:
                 if x == y:
-                    relation[x][y] = Med                    
+                    relation[x][y] = Med
                 else:
                     if not hasIntegerValuation and Max != Decimal('0'):
                         relation[x][y] /= Max
@@ -833,7 +833,7 @@ class CondorcetDigraph(Digraph):
             if winner:
                 CondorcetWinner.append(x)
         return CondorcetWinner
-    
+
 
     def constructBallotRelation(self,hasIntegerValuation):
         """
@@ -872,7 +872,7 @@ class CondorcetDigraph(Digraph):
         for x in actions:
             relation[x][x] = Med
         return relation
-  
+
     def computeKohlerRanking(self,linearOrdered=True,Debug=False):
         """
         Renders a ranking of the actions following Kohler's rule.
@@ -944,7 +944,7 @@ if __name__ == "__main__":
 
     print('****************************************************')
     print('* Python voting digraphs module                    *')
-    print('* $Revision$                                   *') 
+    print('* $Revision$                                   *')
     print('* Copyright (C) 2006-2007 University of Luxembourg *')
     print('* The module comes with ABSOLUTELY NO WARRANTY     *')
     print('* to the extent permitted by the applicable law.   *')
@@ -953,7 +953,7 @@ if __name__ == "__main__":
     print('****************************************************')
 
     print('*-------- Testing classes and methods -------')
-  
+
     ## v = RandomVotingProfile(hasRandomWeights=True,maxWeight=4,Debug=True)
     ## v.save('testprofile')
     ## v.showAll()
@@ -983,7 +983,7 @@ if __name__ == "__main__":
     print(lvp.computeUninominalVotes(lvp.candidates,lvp.linearBallot))
     print(lvp.computeInstantRunoffWinner(Comments=True))
     print(lvp.computeSimpleMajorityWinner(Comments=True))
-    
+
     c = CondorcetDigraph(lvp)
     c.exportGraphViz()
     print('Chordless circuits = ', c.computeChordlessCircuits())
@@ -991,14 +991,14 @@ if __name__ == "__main__":
     m = len(lvp.voters)
     c.recodeValuation(-m,m)
     c.showRelationTable()
-    
+
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
-        
+
     print('*************************************')
     print('* R.B. September 2008               *')
-    print('* $Revision$                   *')                   
+    print('* $Revision$                   *')
     print('*************************************')
 
 #############################
