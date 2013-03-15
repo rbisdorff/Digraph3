@@ -56,7 +56,7 @@ class VotingProfile(object):
 
     """
     def __init__(self,fileVotingProfile=None):
-        
+
         if fileVotingProfile != None:
             fileName = fileVotingProfile+'.py'
             exec(compile(open(fileName).read(), fileName, 'exec'))
