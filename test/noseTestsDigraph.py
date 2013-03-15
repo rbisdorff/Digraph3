@@ -1,5 +1,5 @@
 #######################
-# R. Bisdorff 
+# R. Bisdorff
 # digraphs.py module tests for nose
 #
 # ..$ easyinstall nose   # installing the nose test environment
@@ -8,6 +8,7 @@
 ########################
 
 from digraphs import *
+from outrankingDigraphs import *
 
 def testShowMethods():
 
@@ -35,7 +36,7 @@ def testQualChoices():
 
 def testRandomDigraph():
 
-    print('==>> Testing generating random digraphs') 
+    print('==>> Testing generating random digraphs')
     h = RandomDigraph(order=5)
     h.showStatistics()
     h.showAll()
@@ -56,13 +57,6 @@ def testEmptyCompleteDigraph():
     f = CompleteDigraph(valuationdomain=(-10,10))
     f.showAll()
     f.showStatistics()
-
-def testElectre3OutrankingDigraph():
-    print('==>> Testing Electre 3 Outranking Digraph instantiation')
-    g = RandomElectre3OutrankingDigraph(numberOfActions=5)
-    g.showAll()
-    g.showStatistics()
-    g.showPerformanceTableau()
 
 def testPerformanceTableau():
     print('==>> Testing Performance Tableau instantiation')
@@ -94,42 +88,6 @@ def testhasOddWeightsAlgebra():
     t = RandomCBPerformanceTableau(numberOfActions=10,numberOfCriteria=13,commonThresholds=None,commonPercentiles={'ind':5,'pref':10,'veto':90},weightDistribution="random", weightScale=None,integerWeights=True,commonScale=[0.0,100.0],commonMode=["normal",50.0,25.0],Debug=False)
     print(t.hasOddWeightAlgebra(Debug=True))
 
-
-def testOrdinalOutrankingDigraph():
-
-    print('==>> Testing Ordinal Outranking Digraph instantiation')
-    g = OrdinalOutrankingDigraph()
-    g.showAll()
-
-
-def testUnanimousOutrankingDigraph():
-
-    print('==>> Testing Unanimous Outranking Digraph instantiation')
-    g = UnanimousOutrankingDigraph()
-    g.showAll()
-
-def testRobustOutrankingDigraph():
-    print('==>> Testing Robust Outranking Digraph instantiation')
-    g = RobustOutrankingDigraph()
-    g.showAll()
-    g.showPreKernels()
-    g.showGoodChoices()
-    g.showBadChoices()
-
-def testDissimilarityDigraph():
-    print('==>> Testing Dissimilarity Digraph instantiation')
-    f = DissimilarityOutrankingDigraph()
-    f.showAll()
-    f.showStatistics()
-
-def testPolarisedOutrankingDigraph():
-    print('==>> Testing PolarisedOutrankingDigraph instantiation')
-    g = BipolarOutrankingDigraph()
-    print(g.valuationdomain)
-    ch = PolarisedOutrankingDigraph(g,level=50,AlphaCut=False,KeepValues=True)
-    ch.showAll()
-    ch.showStatistics()
-
 def testCirculantDigraph():
     print('==>> Testing CirculantDigraph instantiation')
     circ7 = CirculantDigraph()
@@ -152,13 +110,13 @@ def testKernelsGenerator():
     print('Dominant Kernels')
     for choice in g.generateDomPreKernels():
         print(list(choice))
-    print('Absorbent Kernels')           
+    print('Absorbent Kernels')
     for choice in g.generateAbsPreKernels():
         print(list(choice))
 
 def testHertzMisGenerator():
     print("==>> Testing Hertz's MIS generator")
-    c12 = CirculantDigraph(order=12) 
+    c12 = CirculantDigraph(order=12)
     c12.showMIS_AH()
 
 def testSymmetries():
@@ -179,7 +137,7 @@ def testPerrrinMis():
     print(g.misset)
     g.automorphismGenerators()
     g.showOrbitsFromFile('testreadmisset.dat')
-    g.showOrbits(g.misset)      
+    g.showOrbits(g.misset)
 
 def testRandomRegularDigraph():
     print("==>> Testing random regular graph generation")
@@ -243,41 +201,6 @@ def testKChoicesDigraph():
     g = RandomDigraph(order=5)
     h = kChoicesDigraph(g)
     h.showAll()
-
-def testElectre3OutrankingDigraph():
-    print('*==>> testing Electre III outranking Digraphs ----*')
-    t = FullRandomPerformanceTableau(numberOfActions=10)
-    g3 = Electre3OutrankingDigraph(t)
-    g3.showRelationTable()
-    g = BipolarOutrankingDigraph(t)
-    g.showRelationTable()
-
-def testForcedBestSingleChoice():
-    print('*==>> testing forced best single choice  ----*')
-    t = FullRandomPerformanceTableau(numberOfActions=15)
-    g = BipolarOutrankingDigraph(t)
-    g.showRubyChoice()
-    print(g.forcedBestSingleChoice())
-
-def testBipolarOutrankingDigraph():
-    print('*==>> bipolar outranking  ----*')
-    t = RandomPerformanceTableau()
-    g = BipolarOutrankingDigraph(t)
-    g.showAll()
-    print(g.valuationdomain)
-    print('unrelated pairs:')
-    print(g.computeUnrelatedPairs())
-    print('more or less unrelated pairs:')
-    print(g.computeMoreOrLessUnrelatedPairs())
-    g.showVetos()
-
-def testRuboyChoice():
-    print('*==>> Test ruby BCR ---*')
-    t = RandomPerformanceTableau(numberOfActions=7)
-    g = BipolarOutrankingDigraph(t)
-    g.showRelationTable()
-    g.showRubyChoice(Comments=True)
-    g.showStatistics()
 
 def testTransitivityDegree():
     print("==>> Testing the transitivity degree ---")
@@ -385,7 +308,7 @@ def testPerformanceTableauStatistics():
     t = RandomCBPerformanceTableau()
     t.showStatistics()
     t.showEvaluationStatistics()
-    
+
 def testMoreOrlessRelatedPairs():
     print('*==>> test more or less unrelated pairs extraction ---*')
     #g = BipolarIntegerOutrankingDigraph()
@@ -407,38 +330,6 @@ def testXMLRubisSaveReadMethods():
     g.saveXMLRubisOutrankingDigraph('testrel',servingD3=False)
     g.showVetos()
 
-def testXMLRubisIntegerOutrankingSave():
-    print('*==>> test rubisIntegerOutrankingDigraph XML saving ------------*')
-    t = FullRandomPerformanceTableau(numberOfActions=5,commonMode=['uniform',None,None],integerWeights=True)
-    t.saveXMLRubis()
-    gi = BipolarIntegerOutrankingDigraph(t)
-    gi.saveXMLRubisOutrankingDigraph('testint',servingD3=False)
-    gi.showRelationTable()
-    gi.showRubyChoice(Comments=True)
-
-def testRobustoutranking():
-    print('*==>> robust outranking ------------------*')
-    t0 = FullRandomPerformanceTableau(numberOfActions=7,numberOfCriteria=5)
-    t0.saveXMLRubis('testXMLRubis')
-    t = XMLRubisPerformanceTableau('testXMLRubis')
-    g = BipolarOutrankingDigraph(t)
-    g.saveXMLRubisOutrankingDigraph('test1',servingD3=False)
-    go = OrdinalOutrankingDigraph(t)
-    go.saveXMLRubisOutrankingDigraph('testo',servingD3=False)
-    gu = UnanimousOutrankingDigraph(t)
-    gu.saveXMLRubisOutrankingDigraph('testu',servingD3=False)
-    gc = BipolarOutrankingDigraph(t)
-    gc.saveXMLRubisOutrankingDigraph('testc',servingD3=False)
-    gr = RobustOutrankingDigraph(t)
-    gr.saveXMLRubisOutrankingDigraph('testr',servingD3=False)
-
-def testPairwiseComparisons():
-    print('*==>> test show pairwise comparison-------*')
-    g = BipolarOutrankingDigraph()
-    for x in g.actions:
-        for y in g.actions:
-            g.showPairwiseComparison(x,y)
-
 def testZoomingValuations():
     print('*==>> zooming the valuation of digraphs ------*')
     g = RandomValuationDigraph()
@@ -454,59 +345,12 @@ def testZoomingValuations():
     print(g.relation)
     g.showRelationTable()
 
-def testPairwiseCompleteComparisons():
-    print('*==>> test pairwise complete comparison-------*')
-    #t = FullRandomPerformanceTableau(numberOfActions=7,numberOfCriteria=5)
-    #t = XMLRubisPerformanceTableau('BMPTV-358rubis')
-    t = RandomCBPerformanceTableau(numberOfActions=10,numberOfCriteria=7)
-    #t = PerformanceTableau('testCorr')
-    #t = XMCDAPerformanceTableau('randomPerformanceTableau')
-    t.saveXMCDA('testCorr')
-    t = XMCDAPerformanceTableau('testCorr')
-    g = BipolarOutrankingDigraph(t) 
-    g.showCriteriaCorrelationTable()
-    g.showPerformanceTableau()
-    g.export3DplotOfCriteriaCorrelation('criteriaCorrelation',Type="pdf",Comments=True)
-    #g.export3DplotOfCriteriaCorrelation(Type="jpeg")
-    #g.export3DplotOfCriteriaCorrelation(Type="xfig")
-    #g.export3DplotOfCriteriaCorrelation(Type="interactive")
-
-def testCriteriaHierarchy():
-    print('*==>> show Criteria Hierarchy --------------*')
-    t = RandomPerformanceTableau(numberOfActions=7,numberOfCriteria=5,commonMode=('uniform',None,None))
-    ## t = XMCDAPerformanceTableau('thierrysChoice-xmcda')
-    ## print t.parameter
-    ## ## t = PerformanceTableau('studentenspiegel')
-    g = BipolarOutrankingDigraph(t)
-    #g.saveXMCDAOutrankingDigraph('testXMCDADigraph',valuationType='bipolar', relationName='Stilde')
-    g.showCriteriaCorrelationTable()
-    g.showCriteriaHierarchy()
-    #g.export3DplotOfCriteriaCorrelation(plotFileName="tempplot",Type="png",Comments=True,bipolarFlag=True,dist=False,centeredFlag=True)
-
-def testCriteriaNetFlows():
-    print('*==>> show Criteria net flows --------------*')
-    g = RandomBipolarOutrankingDigraph()
-    print(g.computeSingleCriteriaNetflows())
-    g.saveSingleCriterionNetflows()
-
 def testXMCDASaveReadDigraph():
     print('*==>> save XMCDA Digraph --------------*')
     g = RandomValuationDigraph()
     g.saveXMCDA('testXMCDADigraph',valuationType='bipolar', relationName='Stilde',servingD3=False)
     g = XMCDADigraph('testXMCDADigraph')
     g.showAll()
-
-def testXMCDARubisRecommendation():
-    print('*==>> save XMCDA Rubis Recommendation --------------*')
-    t = FullRandomPerformanceTableau(numberOfActions=10,numberOfCriteria=10)
-    #t = RandomPerformanceTableau(numberOfActions=10,numberOfCriteria=20,commonMode=('uniform',None,None))
-    t.saveXMCDA(servingD3=False)
-    #t.showAll()
-    #g = RobustOutrankingDigraph(t)
-    #g.saveXMCDAOutrankingDigraph('testXMCDAOutrankingDigraph',servingD3=False,variant='robustness',category='Robust Rubis',relationName='S_rob')
-    g = BipolarOutrankingDigraph(t)
-    g.saveXMCDAOutrankingDigraph('testXMCDAOutrankingDigraph',servingD3=False,variant='standard',category='Rubis',relationName='Stilde')
-
 
 def testWeakTournaments():
     print('*==>> weak tournaments ----*')
@@ -543,33 +387,6 @@ def testPerformanceDifferencesPerCriteria():
     g.showPerformanceTableau()
     g.computePerformanceDifferences(comments=True)
 
-def testDefaultDiscriminationThresholds():
-    print('* ---- verify default discrimination thresholds ----*')
-    t = RandomCBPerformanceTableau(numberOfActions=3,numberOfCriteria=3)
-    g = BipolarOutrankingDigraph(t)
-    print('outranking original')
-    g.showRelationTable()
-    g.showCriteria()
-    import copy
-    g.computeDefaultDiscriminationThresholds(quantile={'ind':10,'pref':20,'weakPreference':60,'veto':80},Debug=True)
-    g0 = copy.deepcopy(g)
-    g0.computeDefaultDiscriminationThresholds(quantile={'ind':0})
-    g0.relation=g.constructRelation(g.criteria,g.evaluation)
-    g0.name = 'rel_tournament'
-    print('weak tournament')        
-    g0.showRelationTable()
-    g0.showCriteria()
-    g0.computeODistance(g,comments=True)
-    gn = copy.deepcopy(g)
-    gn.computeDefaultDiscriminationThresholds(quantile={'ind':100})      
-    gn.relation=g.constructRelation(g.criteria,g.evaluation)
-    gn.name = 'rel_complete'
-    #g.showCriteria()
-    d0kn = gn.computeODistance(g0)
-    print('maximal distance:', d0kn)      
-    print('original distance:', gn.computeODistance(g))   
-    gn.showRelationTable()
-
 def testCocaDigraph():
     print('==>> Testing CocaGraph instantiation')
     g = RandomValuationDigraph(order=10)
@@ -586,19 +403,7 @@ def testCocaDigraph():
     #h.showRelationTable()
     #h.showRelation()
 
-def testRubisRanking():
-    print('*-------  test rubisRanking -----*')
-    t = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=5,integerWeights=False,commonPercentiles={'ind':10,'pref':20,'veto':60},valueDigits=4)
-    ## t.save('test',valueDigits=4)
-    ## t = PerformanceTableau('test')
-    ## t = XMCDAPerformanceTableau('Ronda08')
-    g = BipolarOutrankingDigraph(t)
-    print(g.valuationdomain)
-    ## g.showCriteriaCorrelationTable()
-    g.computeSingletonRanking(Comments = True)
-    print(g.valuationdomain)
-
-def testXORDigraph(): 
+def testXORDigraph():
     print('*----- test XORDigraph -----*')
     g1 = RandomBipolarOutrankingDigraph(numberOfActions = 10, numberOfCriteria=1)
     g1.showShort()
@@ -616,25 +421,6 @@ def testXORDigraph():
     print('bipolar K-Distance d(g2,g1) = ', g2.bipolarKDistance(g2))
     print('determination = ', g1.graphDetermination(), g2.graphDetermination(), gxor.graphDetermination())
 
-
-def testGlobalOutrankingCorrelation():
-    print('*----- test global outranking correlation -----*')
-    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=3)
-    g = BipolarOutrankingDigraph(t)
-    g.showRelationTable()
-    g.showCriteriaCorrelationTable()
-    criteriaList = [x for x in t.criteria]
-    medianKCorrelation = {}
-    print(criteriaList)
-    for x in criteriaList:
-        gx = BipolarOutrankingDigraph(t,coalition=[x])
-        print('crtierion : ',x)
-        gx.showRelationTable()
-        ## medianKCorrelation[x] = -((g.crispKDistance(gx)*Decimal("2.0")) - Decimal("1.0")) 
-        medianKCorrelation[x] = g.bipolarKDistance(gx) 
-        #print medianKCorrelation[x]
-    print('median K-Correlation:', medianKCorrelation)
-
 def testIndeterminateDigraph():
     print('*----- test IndeterminateDigraph -----*')
     g = RandomValuationDigraph()
@@ -642,23 +428,7 @@ def testIndeterminateDigraph():
     g.showShort()
     g.showRelationTable()
 
-def testMedianOutranking():
-    print('*----- test Median Outranking -----*')
-    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=10,integerWeights=True,Debug=False)
-    t.save('debugTest')
-    t = PerformanceTableau('debugTest')
-    g = BipolarOutrankingDigraph(t)
-    g.exportGraphViz('testg')
-    gm = MedianBipolarOutrankingDigraph(t,percentile=(7,12),Debug=False)
-    gm.showPreKernels()
-    gm.exportGraphViz('testgm')
-    gm.showRelationTable()
-    g.showRelationTable()
-    print(g.vetos)
-    g.showRubyChoice()
-    gm.showRubyChoice()
-
-def testCBPerformanceTableau(): 
+def testCBPerformanceTableau():
     print('*==>> random CB Performance Tableaux ------------*')
     t = RandomCBPerformanceTableau(numberOfActions=10,\
                                    commonPercentiles={'ind':5,'pref':10,'veto':95},\
@@ -697,7 +467,7 @@ def testRandomS3PerformanceTableau():
     g.showRubyChoice()
 
 def testPercentilesOfThresholds():
-    print('*---------- test percentiles of variable thresholds --------*') 
+    print('*---------- test percentiles of variable thresholds --------*')
     t = RandomS3PerformanceTableau()
     t.computeDefaultDiscriminationThresholds(quantile={'ind':10.0,'pref':20.0,'weakVeto':90.0,'veto':95.0})
     for g in [y for y in t.criteria]:
@@ -706,7 +476,7 @@ def testPercentilesOfThresholds():
             print(th)
             print(' variable:', end=' ')
             print(t.computeVariableThresholdPercentile(g,th,Debug=False))
-            print(' constant:', end=' ') 
+            print(' constant:', end=' ')
             print(t.computeThresholdPercentile(g,th))
     t.showPerformanceTableau()
     t.showCriteria(Debug=False)
@@ -735,7 +505,7 @@ def testAMPLDataFileGeneration():
     gr = RobustOutrankingDigraph(t)
     gr.saveAMPLDataFile(Unique=True,Comments=True)
     #gr.showCriteria()
-    gr.showRelationTable()             
+    gr.showRelationTable()
     #print go.relation['a13']['a11']
 
 def testXMCDA2SaveReadDigraph():
@@ -763,46 +533,8 @@ def testXMCDA2SaveReadPerformanceTableau():
     g2 = BipolarOutrankingDigraph(t2)
     g2.showRelationTable()
 
-def testElectre3OutrankingDigraph():
-    print('*----- test Electre3 outranking Digraph -----*')
-    t3 = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=13,weightDistribution="random",weightScale=(1,13),integerWeights=True,commonThresholds=[(2.5,0.1),(5.0,0.15),(50.0,0.0),(60.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None],Electre3=False, vetoProbability=0.5)
-    ## t3 = XMCDAPerformanceTableau('triPaquetsS3')
-    #t3.showCriteria()
-    ## gs3nv = Electre3OutrankingDigraph(t3,hasNoVeto=True)
-    gs3 = Electre3OutrankingDigraph(t3,hasNoVeto=False)
-    ## gs3.showCriteria()
-    print(gs3.computeVetos(realVetosOnly=True))
-    g = BipolarOutrankingDigraph(t3)
-    gnv = BipolarOutrankingDigraph(t3,hasNoVeto=True)
-    ## g.recodeValuation(0.0,100.0)
-    g.showRelationTable()
-    gnv.showRelationTable()
-    actionsList=[x for x in g.actions]
-    actionsList.sort()
-    for x in actionsList:
-        for y in actionsList:
-            print(x, y, gnv.relation[x][y]-g.relation[x][y])
-    g.showRelationTable()
-    gs3.showPairwiseComparison('a07','a03')
-    g.showPairwiseComparison('a07','a03')
-
-def testsaveXMCDA2RubisChoiceRecommendation():
-    print('*----- test saveXMCDA2RubisChoiceRecommendation -----*')
-    t = RandomS3PerformanceTableau(numberOfActions=5,numberOfCriteria=7,weightDistribution="random",weightScale=(1,1),integerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
-    #t = XMCDAPerformanceTableau('triPaquets')
-    t.saveXMCDA2('test')
-    t.saveXMCDA('test1')
-    t1 = XMCDAPerformanceTableau('test1')
-    t1 = XMCDA2PerformanceTableau('test')
-    t1.saveXMCDA2('test1')
-    g1 = BipolarOutrankingDigraph(t1)
-    g2 = BipolarOutrankingDigraph(t1)
-    g1.showRelationTable()
-    g2.showRelationTable()
-    g1.saveXMCDA2RubisChoiceRecommendation('testRubisChoiceRecommendation')
-
 def testChordlessOddCircuits():
-    
+
     print('*----- test chordlessCircuits extraction -----*')
     #g = RandomValuationDigraph(order=30)
     #g.exportGraphViz()
@@ -831,11 +563,6 @@ def testRandomTournament():
     t.showRelationTable()
     t = RandomTournament(order=5,valuationDomain={'min':Decimal('-10'),'med': Decimal('0'),'max':Decimal('10')})
     t.showRelationTable()
-
-def testXMCDA2RobustChoiceRecommendation():
-    print('*----- test XMCDA2 Robust Choice Recommendation -----*')
-    g = RobustOutrankingDigraph()
-    g.saveXMCDA2RubisChoiceRecommendation()
 
 def testChordlessCircuits():
     print('*----- test chordlessCircuits extraction -----*')
@@ -874,21 +601,6 @@ def testCoDualDigraph():
     gcd = CoDualDigraph(g)
     gcd.exportGraphViz('gcdtest')
 
-
-def testBipolarVetos():
-    print('*----- test bipolar vetos -----*')
-    t = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
-    t.save()
-    #t = PerformanceTableau('tempperftab')
-    gnv = BipolarOutrankingDigraph(t,hasBipolarVeto=True)
-    gnv.exportGraphViz('gnvtest')
-    g = BipolarOutrankingDigraph(t,hasBipolarVeto=False)
-    gnv.exportGraphViz('gtest')
-    asymg = AsymmetricPartialDigraph(g)
-    asymg.exportGraphViz('asymgtest')
-    asymgnv = AsymmetricPartialDigraph(gnv)
-    asymgnv.exportGraphViz('asymgnvtest')
-
 def testLPDCount():
     print('*---- test large performance differences count and denotation ----*')
     T = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(50.0,0.0),(60.0,0.0)])
@@ -914,14 +626,14 @@ def testEquiSignificanceMajorityOutrankingDigraph():
     g.showRelationTable()
     gr = NewRobustOutrankingDigraph(t)
     gr.showRelationTable()
-    
+
 def testStringIOXMCDA2Encoding():
     print('*---- test mapped memory XMCDA2 encoding for performanceTableau ---*')
     T = PerformanceTableau()
     problemTextmmap = T.saveXMCDA2(isStringIO=True)
     problemText = T.saveXMCDA2String()
     if problemTextmmap != problemText:
-        
+
         print('Error')
         fo = open('problemTextmmap.txt','w')
         fo.write(problemTextmmap)
@@ -929,10 +641,10 @@ def testStringIOXMCDA2Encoding():
         fo = open('problemText.txt','w')
         fo.write(problemText)
         fo.close()
-        
+
         exit(1)
-    
-    
+
+
 def testHTMLTables():
     print('*--- test rendering html formatted Performance and Relation Tables ---*')
     g = RandomOutrankingDigraph()
@@ -940,7 +652,7 @@ def testHTMLTables():
     t = RandomPerformanceTableau()
     print(t.htmlPerformanceTable())
 
-    
+
 def testCoveringIndex():
     print('*--- test computing the covering index for a choice ---*')
     g = RandomDigraph(order = 10,arcProbability=0.4)
@@ -964,7 +676,7 @@ def testRandomTree():
     t = RandomTree(numberOfNodes=10)
     t.showAll()
     t.exportGraphViz()
-        
+
 def testRankingRules():
     print('*-------- Testing Ranking Rules -------')
     t = RandomPerformanceTableau(numberOfActions=5)
@@ -984,39 +696,9 @@ def testRankingRules():
     print(gcd.computeRankedPairsOrder())
 
     gcd.computeKemenyOrder(Debug=True)
-    print(gcd.computeKemenyOrder(isProbabilistic=True, seed=1,sampleSize=500))    
+    print(gcd.computeKemenyOrder(isProbabilistic=True, seed=1,sampleSize=500))
     gcd.computeSlaterOrder(Debug=True)
     print(gcd.computeSlaterOrder(isProbabilistic=True, seed=1,sampleSize=500))
-
-## def testChordlessCircuitsCPPExtraction():
-##     print '*--- test C++/agrum enhanced chordless circuits extraction ----*'
-##     from time import time
-##     g = RandomBipolarOutrankingDigraph()
-##     t0 = time()
-##     print len(g.computeChordlessCircuits(Debug=False))
-##     print 'python time = ', time() - t0
-##     t0 = time()
-##     print len(g.computeCppInOutPipingChordlessCircuits(Debug=False))
-##     print 'cpp piping time = ', time() - t0
-##     t0 = time()
-##     print len(g.computeCppChordlessCircuits(Debug=False))
-##     print g.detectCppChordlessCircuits(Debug=True)
-##     print 'cpp file time = ', time() - t0
-##     t0 = time()
-##     gcoca1 = CocaDigraph(g,Cpp=False,Comments=False)
-##     print 'coca python time = ', time() - t0
-##     print len(gcoca1.actions)
-##     t0 = time()
-##     gcoca2 = CocaDigraph(g,Cpp=True,Comments=False)
-##     print 'coca cpp time = ', time() - t0
-##     print len(gcoca2.actions)
-##     t0 = time()
-##     gcoca3 = CocaDigraph(g,Cpp=True,Piping=True,Comments=False)
-##     print 'coca cpp piping time = ', time() - t0
-##     print len(gcoca3.actions)
-##     for xc in gcoca1.actions:
-##         if xc not in gcoca2.actions:
-##             print xc
 
 def testQuantilesRanking():
     print('*---- test quantiles ranking procedures -----*')
@@ -1040,7 +722,7 @@ def testPairwiseClusterComparison():
     K2 = actionsList[:5]
     print(g.valuationdomain)
     g.computePairwiseClusterComparison(K1, K2, Debug=True)
-    
+
 def testCoceDigraph():
     print('*----- test CoceDigraph class ----*')
     t = RandomCBPerformanceTableau(numberOfActions=10)
