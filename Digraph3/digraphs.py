@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# Python implementation of digraphs 
-# Baes on Python 2 $Revision: 1.697 $
+# Python3+ implementation of digraphs 
+# Based on Python 2 $Revision: 1.697 $
 # Copyright (C) 2006-2013  Raymond Bisdorff
 #
 #    This program is free software; you can redistribute it and/or modify
