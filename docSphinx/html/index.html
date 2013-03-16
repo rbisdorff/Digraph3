@@ -76,6 +76,8 @@
 <dl class="docutils">
 <dt><a class="reference internal" href="#digraphs-label"><em>digraphs module</em></a></dt>
 <dd>main part of the source code with the top <tt class="docutils literal"><span class="pre">Digraph</span></tt> and the old Python-2 version (-Rev:1.630) <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt> classes;</dd>
+<dt><a class="reference internal" href="#graphs-label"><em>graphs module</em></a></dt>
+<dd>specialization for undirected graphs with brigde to the main <tt class="docutils literal"><span class="pre">Digraph</span></tt> module ressources;</dd>
 <dt><a class="reference internal" href="#outrankingdigraphs-label"><em>outrankingDigraphs module</em></a></dt>
 <dd>New version <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt> classes;</dd>
 <dt><a class="reference internal" href="#perftabs-label"><em>perfTabs module</em></a></dt>
@@ -1988,6 +1990,109 @@ of chordless odd circuits augmented digraphs.</p>
 
 <p>Back to the <a class="reference internal" href="#introduction-label"><em>Introduction</em></a></p>
 </div>
+<div class="section" id="module-graphs">
+<span id="graphs-module"></span><span id="graphs-label"></span><h2>graphs module<a class="headerlink" href="#module-graphs" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="graphs.Graph">
+<em class="property">class </em><tt class="descclassname">graphs.</tt><tt class="descname">Graph</tt><big>(</big><em>fileName=None</em><big>)</big><a class="headerlink" href="#graphs.Graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>graph class implementation with a vertices and an edges dictionary
+and a gamma function from vertices to subsets of vertices</p>
+<dl class="method">
+<dt id="graphs.Graph.chordlessPaths">
+<tt class="descname">chordlessPaths</tt><big>(</big><em>Pk</em>, <em>v0</em>, <em>Comments=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#graphs.Graph.chordlessPaths" title="Permalink to this definition">¶</a></dt>
+<dd><p>recursice chordless precycle (len &gt; 3) construction
+Pk is the current pre chordless cycle
+v0 is the initial vertex of the precycle
+vn is the last vertex of the precycle</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphs.Graph.computeChordlessCycles">
+<tt class="descname">computeChordlessCycles</tt><big>(</big><em>Comments=True</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#graphs.Graph.computeChordlessCycles" title="Permalink to this definition">¶</a></dt>
+<dd><p>renders the set of all chordless cycles observed in a Graph
+intance</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphs.Graph.depthFirstSearch">
+<tt class="descname">depthFirstSearch</tt><big>(</big><em>Debug=False</em><big>)</big><a class="headerlink" href="#graphs.Graph.depthFirstSearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Depth first search through a graph</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphs.Graph.exportGraphViz">
+<tt class="descname">exportGraphViz</tt><big>(</big><em>fileName=None</em>, <em>noSilent=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em><big>)</big><a class="headerlink" href="#graphs.Graph.exportGraphViz" title="Permalink to this definition">¶</a></dt>
+<dd><p>export GraphViz dot file  for graph drawing filtering.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphs.Graph.gammaSets">
+<tt class="descname">gammaSets</tt><big>(</big><em>Debug=False</em><big>)</big><a class="headerlink" href="#graphs.Graph.gammaSets" title="Permalink to this definition">¶</a></dt>
+<dd><p>renders the gamma function as dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphs.Graph.graph2Digraph">
+<tt class="descname">graph2Digraph</tt><big>(</big><big>)</big><a class="headerlink" href="#graphs.Graph.graph2Digraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert a Graph object into a Digraph object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphs.Graph.save">
+<tt class="descname">save</tt><big>(</big><em>fileName='tempGraph'</em>, <em>option=None</em>, <em>Decimal=True</em><big>)</big><a class="headerlink" href="#graphs.Graph.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Persistent storage of a Graph class instance in the form of
+a python source code file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphs.Graph.saveEdges">
+<tt class="descname">saveEdges</tt><big>(</big><em>fileName='graphEdges'</em>, <em>Agrum=False</em>, <em>Decimal=True</em><big>)</big><a class="headerlink" href="#graphs.Graph.saveEdges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saving graph instances as list of edges, ie node node on each line
+for enumChordlessCycles C++/agrum progam</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphs.Graph.showShort">
+<tt class="descname">showShort</tt><big>(</big><big>)</big><a class="headerlink" href="#graphs.Graph.showShort" title="Permalink to this definition">¶</a></dt>
+<dd><p>generic show method for Graph instances</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="graphs.GridGraph">
+<em class="property">class </em><tt class="descclassname">graphs.</tt><tt class="descname">GridGraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationMin=-1</em>, <em>valuationMax=1</em><big>)</big><a class="headerlink" href="#graphs.GridGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#graphs.Graph" title="graphs.Graph"><tt class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></tt></a></p>
+<p>Parameters: n,m &gt; 0; valuationdomain ={&#8216;min&#8217;:m, &#8216;max&#8217;:M}.
+Specialization of the general Graph class for generating
+temporary Grid graphs of dimension n times m.
+Default instantiation (5 times 5 Grid Digraph):
+n = 5, m=5, valuationdomain = {&#8216;min&#8217;:-1.0,&#8217;max&#8217;:1.0}.</p>
+<dl class="method">
+<dt id="graphs.GridGraph.showShort">
+<tt class="descname">showShort</tt><big>(</big><big>)</big><a class="headerlink" href="#graphs.GridGraph.showShort" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="graphs.RandomGraph">
+<em class="property">class </em><tt class="descclassname">graphs.</tt><tt class="descname">RandomGraph</tt><big>(</big><em>order=5</em>, <em>edgeProbability=0.4</em><big>)</big><a class="headerlink" href="#graphs.RandomGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#graphs.Graph" title="graphs.Graph"><tt class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></tt></a></p>
+<p>Random instances of the Graph class
+Parameters:  order (positive integer) and edgeProbability (in [0,1])</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="graphs.RandomTree">
+<em class="property">class </em><tt class="descclassname">graphs.</tt><tt class="descname">RandomTree</tt><big>(</big><em>order=None</em>, <em>prueferCode=None</em>, <em>myseed=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#graphs.RandomTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#graphs.Graph" title="graphs.Graph"><tt class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></tt></a></p>
+<p>random instance of a tree generated from a random Prüfer code</p>
+</dd></dl>
+
+<p>Back to the <a class="reference internal" href="#introduction-label"><em>Introduction</em></a></p>
+</div>
 <div class="section" id="module-perfTabs">
 <span id="perftabs-module"></span><span id="perftabs-label"></span><h2>perfTabs module<a class="headerlink" href="#module-perfTabs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -3735,6 +3840,7 @@ a given bipolar-valued Digraph instance</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-digraphs">digraphs module</a></li>
+<li><a class="reference internal" href="#module-graphs">graphs module</a></li>
 <li><a class="reference internal" href="#module-perfTabs">perfTabs module</a></li>
 <li><a class="reference internal" href="#module-outrankingDigraphs">outrankingDigraphs module</a></li>
 <li><a class="reference internal" href="#module-votingDigraphs">votingDigraphs module</a></li>
