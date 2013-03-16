@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python3.2
 # EASY-INSTALL-ENTRY-SCRIPT: 'nose==1.2.1','console_scripts','nosetests'
 import sys
 from pkg_resources import load_entry_point
