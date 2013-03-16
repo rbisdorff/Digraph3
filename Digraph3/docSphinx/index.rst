@@ -29,6 +29,9 @@ The Digraph source code is split into five interdependant modules, where the ``d
 
 :ref:`digraphs-label`
      main part of the source code with the top ``Digraph`` and the old Python-2 version (-Rev:1.630) ``BipolarOutrankingDigraph`` classes; 
+
+:ref:`graphs-label`
+     specialization for undirected graphs with brigde to the main ``Digraph`` module ressources;
 :ref:`outrankingDigraphs-label`
      New version ``BipolarOutrankingDigraph`` classes; 
 :ref:`perfTabs-label` 
@@ -50,6 +53,18 @@ digraphs module
 ---------------
 
 .. automodule:: digraphs
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Introduction-label`
+
+.. _graphs-label:
+
+graphs module
+---------------
+
+.. automodule:: graphs
    :member-order: alphabetical
    :no-inherited-members:
    :members:
