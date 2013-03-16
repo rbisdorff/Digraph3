@@ -55,7 +55,7 @@ class Graph(object):
         dg.gamma = dg.gammaSets()
         dg.notGamma = dg.notGammaSets()
         return dg
-    
+
     def showShort(self):
         """
         generic show method for Graph instances
@@ -89,7 +89,7 @@ class Graph(object):
                     else:
                         fo.write('%s %s\n' % ( str(verticesKeys[i]),str(verticesKeys[j]) )  )
         fo.close()
-        
+
     def save(self,fileName='tempGraph',option=None,Decimal=True):
         """Persistent storage of a Graph class instance in the form of
             a python source code file"""
@@ -111,10 +111,10 @@ class Graph(object):
         fo.write('edges = {\n')
         for i in range(self.order):
             for j in range(i+1,self.order):
-                fo.write('frozenset([\'%s\',\'%s\']) : %d, \n' % (verticesKeys[i],verticesKeys[j],edges[frozenset([verticesKeys[i],verticesKeys[j]])]))	
+                fo.write('frozenset([\'%s\',\'%s\']) : %d, \n' % (verticesKeys[i],verticesKeys[j],edges[frozenset([verticesKeys[i],verticesKeys[j]])]))
         fo.write( '}\n')
         fo.close()
-    
+
     def gammaSets(self,Debug=False):
         """
         renders the gamma function as dictionary
@@ -136,7 +136,7 @@ class Graph(object):
                 gamma[e1].add(e2)
                 gamma[e2].add(e1)
         return gamma
-    
+
     def chordlessPaths(self,Pk,v0, Comments = False, Debug = False):
         """
         recursice chordless precycle (len > 3) construction
@@ -166,12 +166,12 @@ class Graph(object):
         if detectedChordlessCycle == False:
             NBvn = set(self.gamma[vn]) - set(Pk[1:len(Pk)])
             # exterior neighborhood of vn
-            
+
             if Debug:
                 print('vn, NBvn, Pk, Pk[1:len(Pk)] = ', vn, NBvn, Pk, Pk[1:len(Pk)])
             while NBvn != set():
                 # we try in turn all neighbours of vn
-                v = NBvn.pop()  
+                v = NBvn.pop()
                 vCP = set(Pk)
                 vCP.add(v)
                 vCP = frozenset(vCP)
@@ -266,20 +266,20 @@ class Graph(object):
                 except:
                     nodeName = str(vertexkeys[i])
             node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
-            node += '];\n'         
+            node += '];\n'
             fo.write(node)
         for i in range(n):
             for j in range(i+1, n):
                 if i != j:
                     edge = 'n'+str(i+1)
                     if edges[frozenset( [vertexkeys[i], vertexkeys[j]])] > Med:
-                             
+
                         edge0 = edge+'-- n'+str(j+1)+' [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;\n'
                         fo.write(edge0)
                     elif edges[frozenset([vertexkeys[i],vertexkeys[j]])] == Med:
                         edge0 = edge+'-- n'+str(j+1)+' [dir=both, color=grey, arrowhead=none, arrowtail=none] ;\n'
                         fo.write(edge0)
-                                
+
         fo.write('}\n')
         fo.close()
         if isinstance(self,(GridGraph,RandomTree)):
@@ -338,15 +338,15 @@ class Graph(object):
                         print('==>> Starting from %s ' % x)
                     visitVertex(self, x, Debug = Debug)
                     self.dfs.append(self.dfsx)
-                #self.vertices[x]['color'] = 2      
+                #self.vertices[x]['color'] = 2
                 #self.vertices[x]['endDate'] = self.date
-                
+
 
         # ---- main -----
         visitAllVertices(self, Debug=Debug)
         return self.dfs
-            
-            
+
+
 class RandomGraph(Graph):
     """
     Random instances of the Graph class
@@ -358,7 +358,7 @@ class RandomGraph(Graph):
         self.order = order
         vertices = dict()
         for i in range(order):
-            vertexKey = 'v%d' % (i+1)
+            vertexKey = 'v%s' % (str(i+1))
             vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
         self.valuationDomain = {'min':-1,'med':0,'max':1}
@@ -385,7 +385,7 @@ class GridGraph(Graph):
     """
 
     def __init__(self,n=5,m=5,valuationMin=-1,valuationMax=1):
-        
+
         self.name = 'grid-'+str(n)+'-'+str(m)
         self.n = n
         self.m = m
@@ -420,7 +420,7 @@ class GridGraph(Graph):
                             edges[frozenset([x,y])] = Max
                         else:
                             edges[frozenset([x,y])] = Min
-                    elif gridNodes[x][0] == gridNodes[y][0]:        
+                    elif gridNodes[x][0] == gridNodes[y][0]:
                         if gridNodes[x][1] == gridNodes[y][1]-1:
                             edges[frozenset([x,y])] = Max
                         elif gridNodes[x][1] == gridNodes[y][1]+1:
@@ -429,8 +429,8 @@ class GridGraph(Graph):
                             edges[frozenset([x,y])] = Min
                     else:
                         edges[frozenset([x,y])] = Min
-                    
-                      
+
+
         self.edges = edges
         self.gamma = self.gammaSets()
 
@@ -456,7 +456,7 @@ class RandomTree(Graph):
         self.order = order
         if Debug:
             print(self.name, self.order)
-            
+
         vertices = dict()
         for i in range(order):
             vertexKey = i
@@ -494,7 +494,7 @@ class RandomTree(Graph):
             degree[prueferCode[i]] += 1
         if Debug:
             print('degrees = ', degree)
-        
+
         for i in range(order-2):
             for j in list(self.vertices.keys()):
                 if degree[j] == 1:
@@ -512,7 +512,7 @@ class RandomTree(Graph):
         if Debug:
             print('gamma = ', self.gamma)
 
-        
+
 
 
 # --------------testing the module ----
@@ -527,7 +527,7 @@ if __name__ == '__main__':
     ## g.showShort()
     ## g.computeChordlessCycles(Comments=True,Debug=False)
     ## g.saveEdges(Agrum=True)
-    
+
     ## # put Debug to <True> to get a detailed execution trace of the algorithm
     ## g.exportGraphViz('randGraph')
     ## dg = g.graph2Digraph()
@@ -536,15 +536,15 @@ if __name__ == '__main__':
     ## dg.exportGraphViz('randdDigraph')
     ## dg.showStatistics()
     ## print "You may install graphviz and the digraphs module on your system"
-    
+
     #g = RandomTree(order=30)
     ## print t.prueferCode
     ## t.exportGraphViz()
     g = RandomGraph(order=10,edgeProbability=0.3)
     g.save()
+    g.showShort()
     #g = Graph('tempGraph')
     print(g.depthFirstSearch(Debug=True))
     g.exportGraphViz()
     for x in g.vertices:
         print(x, g.vertices[x]['startDate'], g.vertices[x]['endDate'])
-            
