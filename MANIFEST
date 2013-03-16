@@ -6,6 +6,7 @@ sortingDigraphs.py
 votingDigraphs.py
 linearOrders.py
 iqagent.py
+graphs.py
 makefile
 MANIFEST
 perrinMIS.c
