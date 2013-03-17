@@ -8,18 +8,43 @@ class Graph(object):
     """
     graph class implementation with a vertices and an edges dictionary
     and a gamma function from vertices to subsets of vertices
+
+    Example python3 session::
+       >>> from graphs import Graph
+       >>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
+       >>> g.showShort()
+       *----- show short --------------*
+    *---- short description of the graph ----*
+    Name             :  random
+    Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5']
+    Valuation domain :  {'med': 0, 'max': 1, 'min': -1}
+    Gamma function   : 
+    v1 -> ['v4']
+    v2 -> []
+    v3 -> ['v4']
+    v4 -> ['v1', 'v3']
+    v5 -> []
     """
-    def __init__(self, fileName=None):
+    def __init__(self, fileName=None, Empty=False, numberOfVertices=7, edgeProbability=0.5):
         """
         constructor for Graph objects
         """
         from decimal import Decimal
-        if fileName == None:
+        if Empty:
             self.name = 'emptyInstance'
             self.vertices = dict()
             self.edges = dict()
             self.valuationDomain = {'min':-1, 'med': 0, 'max':1}
             self.gamma = dict()
+        elif fileName==None:
+            g = RandomGraph(order=numberOfVertices,\
+                               edgeProbability=edgeProbability)
+            self.name = g.name
+            self.vertices = g.vertices
+            self.order = len(self.vertices)
+            self.edges = g.edges
+            self.valuationDomain = g.valuationDomain
+            self.gamma = self.gammaSets()
         else:
             fileNameExt = fileName+'.py'
             exec(compile(open(fileNameExt).read(), fileNameExt, 'exec'))
@@ -540,7 +565,7 @@ if __name__ == '__main__':
     #g = RandomTree(order=30)
     ## print t.prueferCode
     ## t.exportGraphViz()
-    g = RandomGraph(order=10,edgeProbability=0.3)
+    g = Graph(numberOfVertices=5,edgeProbability=0.3)
     g.save()
     g.showShort()
     #g = Graph('tempGraph')
