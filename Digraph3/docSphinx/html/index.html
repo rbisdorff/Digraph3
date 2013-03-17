@@ -1994,10 +1994,30 @@ of chordless odd circuits augmented digraphs.</p>
 <span id="graphs-module"></span><span id="graphs-label"></span><h2>graphs module<a class="headerlink" href="#module-graphs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="graphs.Graph">
-<em class="property">class </em><tt class="descclassname">graphs.</tt><tt class="descname">Graph</tt><big>(</big><em>fileName=None</em><big>)</big><a class="headerlink" href="#graphs.Graph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">graphs.</tt><tt class="descname">Graph</tt><big>(</big><em>fileName=None</em>, <em>Empty=False</em>, <em>numberOfVertices=7</em>, <em>edgeProbability=0.5</em><big>)</big><a class="headerlink" href="#graphs.Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>graph class implementation with a vertices and an edges dictionary
 and a gamma function from vertices to subsets of vertices</p>
+<dl class="docutils">
+<dt>Example python3 session::</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">Graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
+<span class="go">*----- show short --------------*</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p><em>&#8212;- short description of the graph &#8212;-</em>
+Name             :  random
+Vertices         :  [&#8216;v1&#8217;, &#8216;v2&#8217;, &#8216;v3&#8217;, &#8216;v4&#8217;, &#8216;v5&#8217;]
+Valuation domain :  {&#8216;med&#8217;: 0, &#8216;max&#8217;: 1, &#8216;min&#8217;: -1}
+Gamma function   : 
+v1 -&gt; [&#8216;v4&#8217;]
+v2 -&gt; []
+v3 -&gt; [&#8216;v4&#8217;]
+v4 -&gt; [&#8216;v1&#8217;, &#8216;v3&#8217;]
+v5 -&gt; []</p>
 <dl class="method">
 <dt id="graphs.Graph.chordlessPaths">
 <tt class="descname">chordlessPaths</tt><big>(</big><em>Pk</em>, <em>v0</em>, <em>Comments=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#graphs.Graph.chordlessPaths" title="Permalink to this definition">¶</a></dt>
