@@ -15,7 +15,7 @@ class Graph(object):
        >>> g.showShort()
        *----- show short --------------*
        *---- short description of the graph ----*
-       Name             :  random
+       Name             :  'random'
        Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5']
        Valuation domain :  {'med': 0, 'max': 1, 'min': -1}
        Gamma function   :
@@ -86,7 +86,7 @@ class Graph(object):
         generic show method for Graph instances
         """
         print('*---- short description of the graph ----*')
-        print('Name             : ', self.name)
+        print('Name             : \'%s\'' % (self.name) )
         vKeys = [x for x in self.vertices]
         vKeys.sort()
         print('Vertices         : ', vKeys)
