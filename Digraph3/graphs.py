@@ -27,7 +27,7 @@ class Graph(object):
     """
     def __init__(self, fileName=None, Empty=False, numberOfVertices=7, edgeProbability=0.5):
         """
-        constructor for Graph objects
+        Constructor for Graph objects.
         """
         from decimal import Decimal
         if Empty:
@@ -57,7 +57,7 @@ class Graph(object):
 
     def graph2Digraph(self):
         """
-        convert a Graph object into a Digraph object
+        Converts a Graph object into a Digraph object.
         """
         from copy import deepcopy
         from digraphs import EmptyDigraph
@@ -83,7 +83,7 @@ class Graph(object):
 
     def showShort(self):
         """
-        generic show method for Graph instances
+        Generic show method for Graph instances.
         """
         print('*---- short description of the graph ----*')
         print('Name             : \'%s\'' % (self.name) )
@@ -98,7 +98,7 @@ class Graph(object):
     def saveEdges(self,fileName='graphEdges',Agrum=False,Decimal=True):
         """
         Saving graph instances as list of edges, ie node node on each line
-        for enumChordlessCycles C++/agrum progam
+        for enumChordlessCycles C++/agrum progam.
         """
         print('*--- Saving graph edges in file: <' + fileName + '.text> ---*')
         verticesKeys = [x for x in self.vertices]
@@ -116,8 +116,9 @@ class Graph(object):
         fo.close()
 
     def save(self,fileName='tempGraph',option=None,Decimal=True):
-        """Persistent storage of a Graph class instance in the form of
-            a python source code file"""
+        """
+        Persistent storage of a Graph class instance in the form of a python source code file.
+        """
         print('*--- Saving graph in file: <' + fileName + '.py> ---*')
         verticesKeys = [x for x in self.vertices]
         verticesKeys.sort()
@@ -164,10 +165,10 @@ class Graph(object):
 
     def chordlessPaths(self,Pk,v0, Comments = False, Debug = False):
         """
-        recursice chordless precycle (len > 3) construction
-        Pk is the current pre chordless cycle
-        v0 is the initial vertex of the precycle
-        vn is the last vertex of the precycle
+        recursice chordless precycle (len > 3) construction:
+            Pk is the current pre chordless cycle
+            v0 is the initial vertex of the precycle
+            vn is the last vertex of the precycle
         """
         vn = Pk[-1]
         detectedChordlessCycle = False
@@ -234,8 +235,8 @@ class Graph(object):
 
     def computeChordlessCycles(self,Comments=True, Debug=False):
         """
-        renders the set of all chordless cycles observed in a Graph
-        intance
+        Renders the set of all chordless cycles observed in a Graph
+        intance.
         """
         verticesKeys = [x for x in self.vertices]
         self.visitedChordlessPaths = set()
@@ -256,7 +257,7 @@ class Graph(object):
 
     def exportGraphViz(self,fileName=None, noSilent=True,graphType='png',graphSize='7,7'):
         """
-        export GraphViz dot file  for graph drawing filtering.
+        Exports GraphViz dot file  for graph drawing filtering.
         """
         import os
         if noSilent:
@@ -325,7 +326,7 @@ class Graph(object):
         """
         def visitVertex(self, x, Debug = False):
             """
-            Visits all followers of vertex x
+            Visits all followers of vertex x.
             """
             self.vertices[x]['color'] = 1
             ## self.date += 1
@@ -375,7 +376,10 @@ class Graph(object):
 class RandomGraph(Graph):
     """
     Random instances of the Graph class
-    Parameters:  order (positive integer) and edgeProbability (in [0,1])
+
+    Parameters::
+        order (positive integer)
+        edgeProbability (in [0,1])
     """
     def __init__(self,order=5,edgeProbability=0.4):
         from random import random
@@ -402,11 +406,17 @@ class RandomGraph(Graph):
 
 class GridGraph(Graph):
     """
-    Parameters: n,m > 0; valuationdomain ={'min':m, 'max':M}.
+    Parameters::
+        n,m > 0
+        valuationdomain ={'min':m, 'max':M}
+
     Specialization of the general Graph class for generating
     temporary Grid graphs of dimension n times m.
-    Default instantiation (5 times 5 Grid Digraph):
-    n = 5, m=5, valuationdomain = {'min':-1.0,'max':1.0}.
+
+    Default instantiation (5 times 5 Grid Digraph)::
+        n = 5,
+        m=5,
+        valuationdomain = {'min':-1.0,'max':1.0}.
     """
 
     def __init__(self,n=5,m=5,valuationMin=-1,valuationMax=1):

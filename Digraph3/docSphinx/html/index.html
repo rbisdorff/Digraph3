@@ -1996,8 +1996,8 @@ of chordless odd circuits augmented digraphs.</p>
 <dt id="graphs.Graph">
 <em class="property">class </em><tt class="descclassname">graphs.</tt><tt class="descname">Graph</tt><big>(</big><em>fileName=None</em>, <em>Empty=False</em>, <em>numberOfVertices=7</em>, <em>edgeProbability=0.5</em><big>)</big><a class="headerlink" href="#graphs.Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
-<p>graph class implementation with a vertices and an edges dictionary
-and a gamma function from vertices to subsets of vertices</p>
+<p>Graph class implementation with a vertices and an edges dictionary
+and a gamma function (dictionary) from vertices to subsets of vertices.</p>
 <dl class="docutils">
 <dt>Example python3 session::</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">Graph</span>
@@ -2005,7 +2005,7 @@ and a gamma function from vertices to subsets of vertices</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*----- show short --------------*</span>
 <span class="go">*---- short description of the graph ----*</span>
-<span class="go">Name             :  random</span>
+<span class="go">Name             :  &#39;random&#39;</span>
 <span class="go">Vertices         :  [&#39;v1&#39;, &#39;v2&#39;, &#39;v3&#39;, &#39;v4&#39;, &#39;v5&#39;]</span>
 <span class="go">Valuation domain :  {&#39;med&#39;: 0, &#39;max&#39;: 1, &#39;min&#39;: -1}</span>
 <span class="go">Gamma function   :</span>
@@ -2021,7 +2021,7 @@ and a gamma function from vertices to subsets of vertices</p>
 <dl class="method">
 <dt id="graphs.Graph.chordlessPaths">
 <tt class="descname">chordlessPaths</tt><big>(</big><em>Pk</em>, <em>v0</em>, <em>Comments=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#graphs.Graph.chordlessPaths" title="Permalink to this definition">¶</a></dt>
-<dd><p>recursice chordless precycle (len &gt; 3) construction
+<dd><p>recursice chordless precycle (len &gt; 3) construction:
 Pk is the current pre chordless cycle
 v0 is the initial vertex of the precycle
 vn is the last vertex of the precycle</p>
@@ -2030,8 +2030,8 @@ vn is the last vertex of the precycle</p>
 <dl class="method">
 <dt id="graphs.Graph.computeChordlessCycles">
 <tt class="descname">computeChordlessCycles</tt><big>(</big><em>Comments=True</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#graphs.Graph.computeChordlessCycles" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders the set of all chordless cycles observed in a Graph
-intance</p>
+<dd><p>Renders the set of all chordless cycles observed in a Graph
+intance.</p>
 </dd></dl>
 
 <dl class="method">
@@ -2043,7 +2043,7 @@ intance</p>
 <dl class="method">
 <dt id="graphs.Graph.exportGraphViz">
 <tt class="descname">exportGraphViz</tt><big>(</big><em>fileName=None</em>, <em>noSilent=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em><big>)</big><a class="headerlink" href="#graphs.Graph.exportGraphViz" title="Permalink to this definition">¶</a></dt>
-<dd><p>export GraphViz dot file  for graph drawing filtering.</p>
+<dd><p>Exports GraphViz dot file  for graph drawing filtering.</p>
 </dd></dl>
 
 <dl class="method">
@@ -2055,27 +2055,26 @@ intance</p>
 <dl class="method">
 <dt id="graphs.Graph.graph2Digraph">
 <tt class="descname">graph2Digraph</tt><big>(</big><big>)</big><a class="headerlink" href="#graphs.Graph.graph2Digraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>convert a Graph object into a Digraph object</p>
+<dd><p>Converts a Graph object into a Digraph object.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="graphs.Graph.save">
 <tt class="descname">save</tt><big>(</big><em>fileName='tempGraph'</em>, <em>option=None</em>, <em>Decimal=True</em><big>)</big><a class="headerlink" href="#graphs.Graph.save" title="Permalink to this definition">¶</a></dt>
-<dd><p>Persistent storage of a Graph class instance in the form of
-a python source code file</p>
+<dd><p>Persistent storage of a Graph class instance in the form of a python source code file.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="graphs.Graph.saveEdges">
 <tt class="descname">saveEdges</tt><big>(</big><em>fileName='graphEdges'</em>, <em>Agrum=False</em>, <em>Decimal=True</em><big>)</big><a class="headerlink" href="#graphs.Graph.saveEdges" title="Permalink to this definition">¶</a></dt>
 <dd><p>Saving graph instances as list of edges, ie node node on each line
-for enumChordlessCycles C++/agrum progam</p>
+for enumChordlessCycles C++/agrum progam.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="graphs.Graph.showShort">
 <tt class="descname">showShort</tt><big>(</big><big>)</big><a class="headerlink" href="#graphs.Graph.showShort" title="Permalink to this definition">¶</a></dt>
-<dd><p>generic show method for Graph instances</p>
+<dd><p>Generic show method for Graph instances.</p>
 </dd></dl>
 
 </dd></dl>
@@ -2084,11 +2083,19 @@ for enumChordlessCycles C++/agrum progam</p>
 <dt id="graphs.GridGraph">
 <em class="property">class </em><tt class="descclassname">graphs.</tt><tt class="descname">GridGraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationMin=-1</em>, <em>valuationMax=1</em><big>)</big><a class="headerlink" href="#graphs.GridGraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#graphs.Graph" title="graphs.Graph"><tt class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></tt></a></p>
-<p>Parameters: n,m &gt; 0; valuationdomain ={&#8216;min&#8217;:m, &#8216;max&#8217;:M}.
-Specialization of the general Graph class for generating
-temporary Grid graphs of dimension n times m.
-Default instantiation (5 times 5 Grid Digraph):
-n = 5, m=5, valuationdomain = {&#8216;min&#8217;:-1.0,&#8217;max&#8217;:1.0}.</p>
+<dl class="docutils">
+<dt>Parameters::</dt>
+<dd>n,m &gt; 0
+valuationdomain ={&#8216;min&#8217;:m, &#8216;max&#8217;:M}</dd>
+</dl>
+<p>Specialization of the general Graph class for generating
+temporary Grid graphs of dimension n times m.</p>
+<dl class="docutils">
+<dt>Default instantiation (5 times 5 Grid Digraph)::</dt>
+<dd>n = 5,
+m=5,
+valuationdomain = {&#8216;min&#8217;:-1.0,&#8217;max&#8217;:1.0}.</dd>
+</dl>
 <dl class="method">
 <dt id="graphs.GridGraph.showShort">
 <tt class="descname">showShort</tt><big>(</big><big>)</big><a class="headerlink" href="#graphs.GridGraph.showShort" title="Permalink to this definition">¶</a></dt>
@@ -2100,8 +2107,12 @@ n = 5, m=5, valuationdomain = {&#8216;min&#8217;:-1.0,&#8217;max&#8217;:1.0}.</p
 <dt id="graphs.RandomGraph">
 <em class="property">class </em><tt class="descclassname">graphs.</tt><tt class="descname">RandomGraph</tt><big>(</big><em>order=5</em>, <em>edgeProbability=0.4</em><big>)</big><a class="headerlink" href="#graphs.RandomGraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#graphs.Graph" title="graphs.Graph"><tt class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></tt></a></p>
-<p>Random instances of the Graph class
-Parameters:  order (positive integer) and edgeProbability (in [0,1])</p>
+<p>Random instances of the Graph class</p>
+<dl class="docutils">
+<dt>Parameters::</dt>
+<dd>order (positive integer)
+edgeProbability (in [0,1])</dd>
+</dl>
 </dd></dl>
 
 <dl class="class">
