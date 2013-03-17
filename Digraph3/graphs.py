@@ -6,8 +6,8 @@
 
 class Graph(object):
     """
-    graph class implementation with a vertices and an edges dictionary
-    and a gamma function from vertices to subsets of vertices
+    Graph class implementation with a vertices and an edges dictionary
+    and a gamma function (dictionary) from vertices to subsets of vertices.
 
     Example python3 session::
        >>> from graphs import Graph
