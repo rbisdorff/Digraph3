@@ -14,16 +14,16 @@ class Graph(object):
        >>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
        >>> g.showShort()
        *----- show short --------------*
-    *---- short description of the graph ----*
-    Name             :  random
-    Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5']
-    Valuation domain :  {'med': 0, 'max': 1, 'min': -1}
-    Gamma function   : 
-    v1 -> ['v4']
-    v2 -> []
-    v3 -> ['v4']
-    v4 -> ['v1', 'v3']
-    v5 -> []
+       *---- short description of the graph ----*
+       Name             :  random
+       Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5']
+       Valuation domain :  {'med': 0, 'max': 1, 'min': -1}
+       Gamma function   :
+       v1 -> ['v4']
+       v2 -> []
+       v3 -> ['v4']
+       v4 -> ['v1', 'v3']
+       v5 -> []
     """
     def __init__(self, fileName=None, Empty=False, numberOfVertices=7, edgeProbability=0.5):
         """
