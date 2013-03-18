@@ -595,3 +595,7 @@ if __name__ == '__main__':
     g.exportGraphViz('randomGraph')
     for x in g.vertices:
         print(x, g.vertices[x]['startDate'], g.vertices[x]['endDate'])
+    g = GridGraph(n=5,m=5)
+    g.exportGraphViz('grid-5-5')
+    g = RandomTree(order=10)
+    g.exportGraphViz('randomTree')
