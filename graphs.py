@@ -9,7 +9,7 @@ class Graph(object):
     Graph class implementation with a vertices and an edges dictionary
     and a gamma function (dictionary) from vertices to subsets of vertices.
 
-    Example python3 session::
+    Example python3 session:
        >>> from graphs import Graph
        >>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
        >>> g.showShort()
@@ -258,6 +258,12 @@ class Graph(object):
     def exportGraphViz(self,fileName=None, noSilent=True,graphType='png',graphSize='7,7'):
         """
         Exports GraphViz dot file  for graph drawing filtering.
+
+        Example:
+           >>> g = Graph(numberOfVertices=5,edgeProbability=0.3)
+           >>> g.exportGraphViz('randomGraph'))
+        
+        .. image:: ../../randomGraph.png
         """
         import os
         if noSilent:
@@ -377,13 +383,13 @@ class RandomGraph(Graph):
     """
     Random instances of the Graph class
 
-    Parameters::
-        order (positive integer)
-        edgeProbability (in [0,1])
+    *Parameters*:
+        * order (positive integer)
+        * edgeProbability (in [0,1])
     """
     def __init__(self,order=5,edgeProbability=0.4):
         from random import random
-        self.name = 'random'
+        self.name = 'randomGraph'
         self.order = order
         vertices = dict()
         for i in range(order):
@@ -406,17 +412,17 @@ class RandomGraph(Graph):
 
 class GridGraph(Graph):
     """
-    Parameters::
-        n,m > 0
-        valuationdomain ={'min':m, 'max':M}
-
     Specialization of the general Graph class for generating
     temporary Grid graphs of dimension n times m.
 
-    Default instantiation (5 times 5 Grid Digraph)::
-        n = 5,
-        m=5,
-        valuationdomain = {'min':-1.0,'max':1.0}.
+    *Parameters*:
+        * n,m > 0
+        * valuationDomain ={'min':m, 'max':M}
+
+    Default instantiation (5 times 5 Grid Digraph):
+       * n = 5,
+       * m=5,
+       * valuationDomain = {'min':-1.0,'max':1.0}.
     """
 
     def __init__(self,n=5,m=5,valuationMin=-1,valuationMax=1):
@@ -580,6 +586,6 @@ if __name__ == '__main__':
     g.showShort()
     #g = Graph('tempGraph')
     print(g.depthFirstSearch(Debug=True))
-    g.exportGraphViz()
+    g.exportGraphViz('randomGraph')
     for x in g.vertices:
         print(x, g.vertices[x]['startDate'], g.vertices[x]['endDate'])

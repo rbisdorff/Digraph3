@@ -1999,7 +1999,7 @@ of chordless odd circuits augmented digraphs.</p>
 <p>Graph class implementation with a vertices and an edges dictionary
 and a gamma function (dictionary) from vertices to subsets of vertices.</p>
 <dl class="docutils">
-<dt>Example python3 session::</dt>
+<dt>Example python3 session:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">Graph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
@@ -2044,6 +2044,15 @@ intance.</p>
 <dt id="graphs.Graph.exportGraphViz">
 <tt class="descname">exportGraphViz</tt><big>(</big><em>fileName=None</em>, <em>noSilent=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em><big>)</big><a class="headerlink" href="#graphs.Graph.exportGraphViz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exports GraphViz dot file  for graph drawing filtering.</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;randomGraph&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<img alt="../../randomGraph.png" src="../../randomGraph.png" />
 </dd></dl>
 
 <dl class="method">
@@ -2083,18 +2092,22 @@ for enumChordlessCycles C++/agrum progam.</p>
 <dt id="graphs.GridGraph">
 <em class="property">class </em><tt class="descclassname">graphs.</tt><tt class="descname">GridGraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationMin=-1</em>, <em>valuationMax=1</em><big>)</big><a class="headerlink" href="#graphs.GridGraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#graphs.Graph" title="graphs.Graph"><tt class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></tt></a></p>
-<dl class="docutils">
-<dt>Parameters::</dt>
-<dd>n,m &gt; 0
-valuationdomain ={&#8216;min&#8217;:m, &#8216;max&#8217;:M}</dd>
-</dl>
 <p>Specialization of the general Graph class for generating
 temporary Grid graphs of dimension n times m.</p>
 <dl class="docutils">
-<dt>Default instantiation (5 times 5 Grid Digraph)::</dt>
-<dd>n = 5,
-m=5,
-valuationdomain = {&#8216;min&#8217;:-1.0,&#8217;max&#8217;:1.0}.</dd>
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>n,m &gt; 0</li>
+<li>valuationDomain ={&#8216;min&#8217;:m, &#8216;max&#8217;:M}</li>
+</ul>
+</dd>
+<dt>Default instantiation (5 times 5 Grid Digraph):</dt>
+<dd><ul class="first last simple">
+<li>n = 5,</li>
+<li>m=5,</li>
+<li>valuationDomain = {&#8216;min&#8217;:-1.0,&#8217;max&#8217;:1.0}.</li>
+</ul>
+</dd>
 </dl>
 <dl class="method">
 <dt id="graphs.GridGraph.showShort">
@@ -2109,9 +2122,12 @@ valuationdomain = {&#8216;min&#8217;:-1.0,&#8217;max&#8217;:1.0}.</dd>
 <dd><p>Bases: <a class="reference internal" href="#graphs.Graph" title="graphs.Graph"><tt class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></tt></a></p>
 <p>Random instances of the Graph class</p>
 <dl class="docutils">
-<dt>Parameters::</dt>
-<dd>order (positive integer)
-edgeProbability (in [0,1])</dd>
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>order (positive integer)</li>
+<li>edgeProbability (in [0,1])</li>
+</ul>
+</dd>
 </dl>
 </dd></dl>
 
