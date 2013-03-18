@@ -262,8 +262,8 @@ class Graph(object):
         Example:
            >>> g = Graph(numberOfVertices=5,edgeProbability=0.3)
            >>> g.exportGraphViz('randomGraph'))
-        
-        .. image:: ../../randomGraph.png
+
+        .. image:: randomGraph.png
         """
         import os
         if noSilent:
@@ -423,6 +423,10 @@ class GridGraph(Graph):
        * n = 5,
        * m=5,
        * valuationDomain = {'min':-1.0,'max':1.0}.
+
+    Example of 5x5 GridGraph instance:
+
+    .. image:: grid-5-5.png
     """
 
     def __init__(self,n=5,m=5,valuationMin=-1,valuationMax=1):
@@ -484,7 +488,9 @@ class GridGraph(Graph):
 
 class RandomTree(Graph):
     """
-    random instance of a tree generated from a random Prüfer code
+    Random instance of a tree generated from a random Prüfer code.
+
+    .. image:: randomTree.png
     """
     def __init__(self,order=None, prueferCode = None, myseed = None, Debug=False):
         from random import choice, seed
