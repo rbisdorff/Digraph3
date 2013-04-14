@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# Python3+ implementation of digraphs 
+# Python3+ implementation of digraphs
 # Based on Python 2 $Revision: 1.697 $
 # Copyright (C) 2006-2013  Raymond Bisdorff
 #
@@ -87,17 +87,17 @@ class _XMLDigraphHandler(ContentHandler):
     valuationdomain = {}
     relation = {}
 
-    
+
     def startElement(self,nodeName,attrs):
-        if nodeName == 'digraph':          
+        if nodeName == 'digraph':
             self.category = attrs.get("category", "")
             self.subcategory = attrs.get("subcategory", "")
-            
+
         if nodeName == 'name':
             self.inName = 1
-            
+
         if nodeName == 'nodes':
-            self.actions = []           
+            self.actions = []
 
         if nodeName == 'node':
             self.actionName = ''
@@ -121,11 +121,11 @@ class _XMLDigraphHandler(ContentHandler):
         if nodeName == 't':
             self.actionName = ''
             self.inAction = 1
-            
+
         if nodeName == 'v':
             self.valueText = ''
-            self.inValue = 1 
-            
+            self.inValue = 1
+
 
     def endElement(self,nodeName):
 
@@ -158,11 +158,11 @@ class _XMLDigraphHandler(ContentHandler):
 
         if nodeName == 'arc':
             self.relation[self.iAction][self.tAction] = eval(self.valueText)
-                       
+
     def characters(self, ch):
         if self.inName:
             self.digraphName += ch
-        if self.inAction: 
+        if self.inAction:
             self.actionName += ch
         if self.inMin:
             self.minText += ch
@@ -170,14 +170,14 @@ class _XMLDigraphHandler(ContentHandler):
             self.maxText += ch
         if self.inValue:
             self.valueText += ch
-       
-            
+
+
 #----------Digraph classes -----------------
 
 class Digraph(object):
     """
     General class of digraphs, R.B. March 2006:
-    
+
     Python data file format:
        * actionset = ['1','2','3','4','5']
        * valuationdomain = { 'min':0, 'med':1, 'max': 2}
@@ -193,7 +193,7 @@ class Digraph(object):
        Valuation domain : {'med': Decimal("0.5"), 'max': Decimal("1.0"), 'min': Decimal("0")}
        *--- Connected Components ---*
        1: ['1', '2', '3']
-       
+
     """
     def __init__(self,file=None,order=7):
         import digraphs,sys,copy
@@ -207,7 +207,7 @@ class Digraph(object):
             self.relation = copy.deepcopy(g.relation)
             self.convertRelationToDecimal()
             self.gamma = self.gammaSets()
-            self.notGamma = self.notGammaSets()          
+            self.notGamma = self.notGammaSets()
         else:
             fileName = file+'.py'
             exec(compile(open(fileName).read(), fileName, 'exec'))
@@ -241,7 +241,7 @@ class Digraph(object):
         new = ConverseDigraph(self)
         new.__class__ = self.__class__
         return new
-        
+
     def digraph2Graph(self,valuationDomain={'min':-1,'med':0,'max':1},Debug=False,conjunctiveConversion=True):
         """
         Convert a Digraph instance to a Graph instance.
@@ -273,7 +273,7 @@ class Digraph(object):
                 elif edgeValue < dgMed:
                     g.edges[vertex] = gMin
                 else:
-                    g.edges[vertex] = gMed                    
+                    g.edges[vertex] = gMed
                 if Debug:
                     print('x,y,self.relation[x][y],self.relation[y][x],vertex,g.edges[vertex]', x,y,self.relation[x][y],self.relation[y][x],vertex,g.edges[vertex])
         g.gamma = g.gammaSets()
@@ -309,7 +309,7 @@ class Digraph(object):
                         elif relation[y][x] < self.valuationdomain['med']:
                             counts['<>'] += 1
                         else:
-                            counts['<='] += 1                        
+                            counts['<='] += 1
                     else:  # relation[y][x] == self.valuationdomain['med']
                         if relation[y][x] > self.valuationdomain['med']:
                             counts['<='] += 1
@@ -327,7 +327,7 @@ class Digraph(object):
             counts['>='] = Decimal(str(counts['>=']))/(nd*(nd-1))
             counts['<>'] = Decimal(str(counts['<>']))/(nd*(nd-1))
             counts['='] = Decimal(str(counts['=']))/(nd*(nd-1))
-            counts['?'] = Decimal(str(counts['?']))/(nd*(nd-1))        
+            counts['?'] = Decimal(str(counts['?']))/(nd*(nd-1))
         return counts
 
 
@@ -432,7 +432,7 @@ class Digraph(object):
                 print(bestChoice,worstChoice)
             bestChoice = (self.valuationdomain['max'],remainingActions)
             worstChoice = (self.valuationdomain['max'],remainingActions)
-            rankingByChoosing.append((bestChoice,worstChoice))            
+            rankingByChoosing.append((bestChoice,worstChoice))
             if Debug:
                 print(rankingByChoosing)
         elif len(remainingActions) == 2:
@@ -482,14 +482,14 @@ class Digraph(object):
             if Debug:
                 print('worstChoice', i, worstChoice)
             rankingByChoosing.append((bestChoice,worstChoice))
-            
+
         elif len(remainingActions) == 1:
             #### only a singleton choice or a failure quadruple left to rank
             if Debug:
                 print(bestChoice,worstChoice)
             bestChoice = (self.valuationdomain['max'],remainingActions)
             worstChoice = (self.valuationdomain['max'],remainingActions)
-            rankingByChoosing.append((bestChoice,worstChoice))            
+            rankingByChoosing.append((bestChoice,worstChoice))
             if Debug:
                 print(rankingByChoosing)
         self.rankingByChoosing = {'CoDual': CoDual, 'result': rankingByChoosing}
@@ -517,7 +517,7 @@ class Digraph(object):
             if Comments:
                 i += 1
                 print('--> Iteration %d' % (i))
-                t0 = time()               
+                t0 = time()
             if qualmaj < gcd.valuationdomain['max']:
                 pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
             else:
@@ -554,13 +554,13 @@ class Digraph(object):
         except:
             print("Error: no ranking by choosing result !!")
             return None
-        
+
     def computePreorderRelation(self,preorder,Debug=False):
         """
         Renders the bipolar-valued relation obtained from
         a given preordering (list of lists) result.
         """
-        
+
         Max = Decimal('1')
         Med = Decimal('0')
         Min = Decimal('-1')
@@ -571,7 +571,7 @@ class Digraph(object):
             preorderRelation[x] = {}
             for y in actions:
                 preorderRelation[x][y] = Med
-                
+
         for eqcl in preorder:
             currRest = currentActions - set(eqcl)
             if Debug:
@@ -581,14 +581,14 @@ class Digraph(object):
                     if x != y:
                         preorderRelation[x][y] = Max
                         preorderRelation[y][x] = Max
-                        
+
             for x in eqcl:
                 for y in currRest:
                     preorderRelation[x][y] = Max
                     preorderRelation[y][x] = Min
             currentActions = currentActions - set(eqcl)
         return preorderRelation
-        
+
     def computeRankingByChoosingRelation(self,Debug=False):
         """
         Renders the bipolar-valued relation obtained from
@@ -599,7 +599,7 @@ class Digraph(object):
         except:
             print('Error: first run computeRankingByChoosing(CoDual=T/F) !')
             return None
-        
+
         Max = Decimal('1')
         Med = Decimal('0')
         Min = Decimal('-1')
@@ -665,7 +665,7 @@ class Digraph(object):
             iwch = set(rankingByChoosing[i][1][1])
             iach = iwch & ibch
             #print 'ibch, iwch, iach', i, ibch,iwch,iach
-            ch = list(ibch) 
+            ch = list(ibch)
             ch.sort()
             print(' %s%s%s Best Choice %s (%.2f)' % (space,i+1,nstr,ch,rankingByChoosing[i][0][0]))
             if len(iach) > 0 and i < n-1:
@@ -686,10 +686,10 @@ class Digraph(object):
             iwch = set(rankingByChoosing[n-i-1][1][1])
             iach = iwch & ibch
             #print 'ibch, iwch, iach', i, ibch,iwch,iach
-            ch = list(iwch) 
+            ch = list(iwch)
             ch.sort()
             if len(iach) > 0 and i > 0:
-                space = space[:-2] 
+                space = space[:-2]
                 print('  %s Ambiguous Choice %s' % (space,list(iach)))
             print(' %s%s%s Worst Choice %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))
         if self.rankingByChoosing['CoDual']:
@@ -703,7 +703,7 @@ class Digraph(object):
             print('Ordinal bipolar correlation with outranking relation: %.3f (%.1f%%)'% (corr1['correlation'],corr1['determination']*Decimal('100')))
             corr2 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation(),MedianCut=True)
             print('Ordinal bipolar correlation with median cut outranking relation: %.3f (%.1f%%)'% (corr2['correlation'],corr2['determination']*Decimal('100')))
-            
+
     def computeValuationStatistics(self,Sampling=False,Comments=False):
         """
         Renders the mean and variance of the valuation
@@ -731,7 +731,7 @@ class Digraph(object):
         if Comments:
             print('mean: %.5f, std. dev.: %.5f' % (mean,stdDev))
         return mean,stdDev
-        
+
 
     def computeBipolarCorrelation(self, other, MedianCut=False, Debug=False):
         """
@@ -743,22 +743,22 @@ class Digraph(object):
         If MedianCut=True, the correlation is computed on the median polarized relations.
 
         K = sum_{x != y} [ min( max(-self.relation[x][y]),other.relation[x][y]), max(self.relation[x][y],-other.relation[x][y]) ]
-            
+
         K /= sum_{x!=y} [ min(abs(self.relation[x][y]),abs(other.relation[x][y])) ]
-        
+
         .. warning::
 
              Renders a tuple with at position 0 the actual bipolar correlation index
              and in position 1 the minimal determination level D of self and
              the other relation.
-             
+
              D = sum_{x != y} min(abs(self.relation[x][y]),abs(other.relation[x][y])) / n(n-1)
 
              where n is the number of actions considered.
 
              The correlation index with a completely indeterminate relation
-             is by convention 0.0 at determination level 0.0 . 
-             
+             is by convention 0.0 at determination level 0.0 .
+
         """
         from copy import deepcopy
         g = deepcopy(self)
@@ -766,7 +766,7 @@ class Digraph(object):
         actions = [x for x in g.actions]
         if MedianCut:
             g = PolarisedDigraph(g,level=Decimal('0.0'),KeepValues=False,StrictCut=True)
-            
+
         if not isinstance(other,(dict)):
             if Debug:
                 print('inputting a Digraph instance')
@@ -793,7 +793,7 @@ class Digraph(object):
 
         correlation = Decimal('0.0')
         determination = Decimal('0.0')
-        
+
         n = len(actions)
         n2 = (n*(n-1))
         for x in actions:
@@ -801,17 +801,17 @@ class Digraph(object):
                 if x != y:
                     ###### Bipolar approach
                     corr = min( max(-g.relation[x][y],otherRelation[x][y]), max(g.relation[x][y],-otherRelation[x][y]) )
-                    correlation += corr 
+                    correlation += corr
                     determination += min( abs(g.relation[x][y]),abs(otherRelation[x][y]) )
                     #determination += abs(corr)
                     if Debug:
                         print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)
         if determination > Decimal('0.0'):
             correlation /= determination
-            return { 'MedianCut':MedianCut, 'correlation': correlation, 'determination': determination / Decimal(str(n2)) } 
+            return { 'MedianCut':MedianCut, 'correlation': correlation, 'determination': determination / Decimal(str(n2)) }
         else:
             return {'MedianCut':MedianCut, 'correlation': Decimal('0.0'), 'determination': determination}
-    
+
 
     def computeOrdinalCorrelation(self, other, MedianCut=False, Debug=False):
         """
@@ -831,29 +831,29 @@ class Digraph(object):
     ##         +min(abs(self.relation[x][y]),abs(other.relation[x][y])) if abs(\omin(self.relation[x][y],other.relation[x][y])) > 0.0;
 
     ##         -min(abs(self.relation[x][y]),abs(other.relation[x][y])) otherwise.
-            
+
     ##     K = K / sum_{x!=y} min(abs(self.relation[x][y]),abs(other.relation[x][y]))
-        
+
     ##     .. warning::
 
     ##          Renders a tuple with at position 0 the actual correlation index
     ##          and in position 1 the minimal determination level D of self and
     ##          the other relation.
-             
+
     ##          D = sum_{x != y} min(abs(self.relation[x][y]),abs(other.relation[x][y])) / n(n-1)
 
     ##          where n is the number of actions considered.
 
     ##          The correlation index with a completely undeterminate relation
     ##          is by convention 0.0 at determination level 0.0 .
-             
+
     ##     """
     ##     from copy import deepcopy
     ##     g = deepcopy(self)
     ##     g.recodeValuation(-1,1)
     ##     if MedianCut:
     ##         g = PolarisedDigraph(g,0.0,KeepValues=False,StrictCut=True)
-            
+
     ##     if isinstance(other,(Digraph,OutrankingDigraph)):
     ##         if Debug:
     ##             print 'inputting a Digraph instance'
@@ -896,7 +896,7 @@ class Digraph(object):
     ##                     print x,y,g.relation[x][y],otherRelation[x][y],correlation,determination
     ##     if determination > Decimal('0.0'):
     ##         correlation /= determination
-    ##         return {'MedianCut':MedianCut, 'correlation': correlation, 'determination': determination / Decimal(str(n2))} 
+    ##         return {'MedianCut':MedianCut, 'correlation': correlation, 'determination': determination / Decimal(str(n2))}
     ##     else:
     ##         return {'MedianCut':MedianCut, 'correlation': Decimal('0.0'), 'determination': determination}
 
@@ -915,7 +915,7 @@ class Digraph(object):
                         KemenyIndex += float(self.relation[x][y])
                     elif otherRelation[x][y] < Decimal('0'):
                         KemenyIndex -= float(self.relation[x][y])
-        return KemenyIndex 
+        return KemenyIndex
 
     def flatChoice(self,ch,Debug=False):
         """
@@ -933,7 +933,7 @@ class Digraph(object):
         if Debug:
             print(result)
         return result
-        
+
     def convertValuationToDecimal(self):
         """
         Convert the float valuation limits to Decimals.
@@ -963,7 +963,7 @@ class Digraph(object):
         .. warning::
 
              Obsolete! Is replaced by the self.computeBipolarCorrelation(other) Digraph method
-             
+
         """
         xor = XORDigraph(self,digraph,Debug)
         if Debug:
@@ -971,7 +971,7 @@ class Digraph(object):
         actions = [x for x in self.actions]
         n = len(actions)
         xor.recodeValuation(-1.0,1.0)
-        
+
         kDistance = Decimal("0.0")
         for x in actions:
             for y in actions:
@@ -996,10 +996,10 @@ class Digraph(object):
             xor.showRelationTable()
         actions = [x for x in self.actions]
         n = len(actions)
-        
+
         k2Distance = xor.size()
         k2Distance = Decimal(str(k2Distance)) / Decimal(str((n * (n-1))))
-        
+
         return k2Distance
 
     def bipolarKDistance(self, digraph,Debug=False):
@@ -1010,17 +1010,17 @@ class Digraph(object):
         .. warning::
 
              Obsolete! Is replaced by the self.computeBipolarCorrelation(other, MedianCut=True) Digraph method
-             
+
         """
         xor = XORDigraph(self,digraph,Debug)
         if Debug:
             xor.showRelationTable()
         actions = [x for x in self.actions]
         n = len(actions)
-                
+
         k2Distance = xor.coSize() - xor.size()
         k2Distance = Decimal(str(k2Distance)) / Decimal(str((n * (n-1))))
-        
+
         return k2Distance
 
     def weakCondorcetWinners(self):
@@ -1062,7 +1062,7 @@ class Digraph(object):
                 CW.append(x)
         CW.sort()
         return CW
-        
+
     def forcedBestSingleChoice(self):
         """
         Renders the set of most determined outranking singletons in self.
@@ -1093,7 +1093,7 @@ class Digraph(object):
                         notBest = True
                 if notBest:
                     bestSingleChoices.remove(x)
-                        
+
         print('final bestSingleChoice:', current)
         print('leveal of credibility:',  valuationList[i-1])
         return (valuationList[i-1], current)
@@ -1192,7 +1192,7 @@ class Digraph(object):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         return n1
-        
+
 
     def closeTransitive(self,Irreflexive=True):
         """
@@ -1211,7 +1211,7 @@ class Digraph(object):
         self.relation = copy.deepcopy(relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-        
+
     def isCyclic(self, Debug=True):
         """
         checks the cyclicity of self.relation by checking
@@ -1225,12 +1225,12 @@ class Digraph(object):
         actions = set(self.actions)
         relation = copy.deepcopy(self.relation)
 
-        isCyclic = False 
+        isCyclic = False
         for x in actions:
             for y in actions:
                 for z in actions:
                     relation[y][z] = max(relation[y][z],min(relation[y][x],relation[x][z]))
-                
+
         if Debug:
             for x in actions:
                 print('x, relation[x][x]', x, relation[x][x])
@@ -1238,7 +1238,7 @@ class Digraph(object):
             if relation[x][x] > Med:
                 isCyclic = True
                 break
-            
+
         return isCyclic
 
 
@@ -1303,12 +1303,12 @@ class Digraph(object):
                             break
                     #print eval(grpsize)
                     #t = f1.readline
-                    break	    
+                    break
             f1.close()
             self.reflections = {}
             self.permutations = permutations
             self.automorphismGroupSize = eval(grpsize)
-        
+
     def showAutomorphismGenerators(self):
         """
         Renders the generators of the automorphism group.
@@ -1330,7 +1330,7 @@ class Digraph(object):
                 print(self.reflexions[g])
         else:
             print('Run self.automorphismGenerators()')
- 
+
     def showOrbits(self,InChoices,withListing=True):
         """
         Prints the orbits of Choices along the automorphisms of
@@ -1418,7 +1418,7 @@ class Digraph(object):
             print('No permutations or reflections defined yet !!')
             print('Run self.automorphismGenerators()')
             noError = False
-            
+
         if noError:
             actions = [x for x in self.actions]
             print('*--- Isomorphic reduction of choices')
@@ -1476,7 +1476,7 @@ class Digraph(object):
             print('Labelled representatives:')
             for ch in Iso:
                 print(list(ch))
-            print() 
+            print()
             print('Number of choices: ', len(misset))
             print('Number of orbits : ', len(Iso))
             print('symmetry vector  : ', list(range(1,self.order + 1)))
@@ -1537,8 +1537,8 @@ class Digraph(object):
                 misset = misset | set([frozenset(mis)])
             #print 'Reading ' + str(nl) + ' MISs.'
             self.misset = misset
-            
-            
+
+
     def computeOrbit(self,choice,withListing=False):
         """
         renders the set of isomorph copies of a choice following
@@ -1590,7 +1590,7 @@ class Digraph(object):
         except:
             print('No permutations or reflections defined yet !!')
             print('Run self.automorphismGenerators()')
-           
+
     def showActions(self):
         """
         presentation methods for digraphs actions
@@ -1607,7 +1607,7 @@ class Digraph(object):
             print('  name:      ',self.actions[x]['name'])
             print('  comment:   ',self.actions[x]['comment'])
             print()
-           
+
     def showShort(self):
         """
         concise presentation method for genuine digraphs.
@@ -1640,10 +1640,10 @@ class Digraph(object):
         print('Neighborhoods:')
         print('  Gamma     :')
         for x in gamma:
-            print('\'%s\': in => %s, out => %s' % (x,gamma[x][1],gamma[x][0]))  
+            print('\'%s\': in => %s, out => %s' % (x,gamma[x][1],gamma[x][0]))
         print('  Not Gamma :')
         for x in notGamma:
-            print('\'%s\': in => %s, out => %s' % (x,notGamma[x][1],notGamma[x][0]))  
+            print('\'%s\': in => %s, out => %s' % (x,notGamma[x][1],notGamma[x][0]))
 
     def showRelation(self):
         """
@@ -1669,7 +1669,7 @@ class Digraph(object):
                     print('('+str(x[0])+', '+str(y[0])+') = '+' % .2f ' % (self.relation[x[1]][y[1]]))
                 else:
                     print('('+str(x[0])+', '+str(y[0])+') = '+' %d ' % (self.relation[x[1]][y[1]]))
-                    
+
         print()
 
     def showRelationTable(self,IntegerValues=False,actionsSubset= None,relation=None,ndigits=2):
@@ -1702,7 +1702,7 @@ class Digraph(object):
             hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
         except KeyError:
             hasIntegerValuation = IntegerValues
-        
+
         for x in actionsList:
             print("'"+x[0]+"'\t ", end=' ')
         print('\n-----|------------------------------------------------------------')
@@ -1752,7 +1752,7 @@ class Digraph(object):
             hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
         except KeyError:
             hasIntegerValuation = hasIntegerValues
-        
+
         for x in actionsList:
             if isColored:
                 s += '<th bgcolor="#FFF79B">%s</th>' % (x[0])
@@ -1789,18 +1789,18 @@ class Digraph(object):
             s += '</tr>'
         s += '</table>'
         return s
-         
+
     def showdre(self):
         """
         Shows relation in nauty format.
         """
-        print('*----- show dre -------------*')        
+        print('*----- show dre -------------*')
         actions = [x for x in self.actions]
         aindex = {}
         i = 1
         print('Actions index:')
         for x in actions:
-            print(i,': ', str(x)) 
+            print(i,': ', str(x))
             aindex[x] = i
             i += 1
         Med = self.valuationdomain['med']
@@ -1859,7 +1859,7 @@ class Digraph(object):
                 node += ', style = "filled", color = lightblue];\n'
                 rankWorstString += 'n'+str(i+1)+' '
             else:
-                node += '];\n'         
+                node += '];\n'
             fo.write(node)
         if bestChoice != set():
             rankBestString += '}\n'
@@ -1890,21 +1890,21 @@ class Digraph(object):
                     fo.write(edge0)
                 elif relation[actionkeys[i]][actionkeys[j]] > Med and relation[actionkeys[j]][actionkeys[i]] <  Med:
                     edge0 = edge+'-> n'+str(j+1)+' [dir=forward, color=black] ;\n'
-                    fo.write(edge0)                    
+                    fo.write(edge0)
                 elif relation[actionkeys[i]][actionkeys[j]] == Med and relation[actionkeys[j]][actionkeys[i]] <  Med:
                     edge0 = edge+'-> n'+str(j+1)+' [dir=forward, color=grey, arrowhead=empty] ;\n'
-                    fo.write(edge0)                    
+                    fo.write(edge0)
                 elif relation[actionkeys[i]][actionkeys[j]] < Med and relation[actionkeys[j]][actionkeys[i]] >  Med:
                     edge0 = edge+'-> n'+str(j+1)+' [dir=back, color=black] ;\n'
-                    fo.write(edge0)                    
+                    fo.write(edge0)
                 elif relation[actionkeys[i]][actionkeys[j]] < Med and relation[actionkeys[j]][actionkeys[i]] ==  Med:
                     edge0 = edge+'-> n'+str(j+1)+' [dir=back, color=grey, arrowtail=empty] ;\n'
-                    fo.write(edge0)                    
-                     
+                    fo.write(edge0)
+
         if bestChoice != set():
-            fo.write(rankBestString)        
+            fo.write(rankBestString)
         if worstChoice != set():
-            fo.write(rankWorstString)        
+            fo.write(rankWorstString)
         fo.write('}\n')
         fo.close()
         if type(self) == CirculantDigraph:
@@ -1928,14 +1928,14 @@ class Digraph(object):
         """
         save digraph in nauty format.
         """
-        print('*----- saving digraph in nauty dre format  -------------*')        
+        print('*----- saving digraph in nauty dre format  -------------*')
         actions = [x for x in self.actions]
         Name = name+'.dre'
         aindex = {}
         i = 1
         print('Actions index:')
         for x in actions:
-            print(i,': ', str(x)) 
+            print(i,': ', str(x))
             aindex[x] = i
             i += 1
         Med = self.valuationdomain['med']
@@ -1957,7 +1957,7 @@ class Digraph(object):
         """
         save digraph in XML format.
         """
-        print('*----- saving digraph in XML format  -------------*')        
+        print('*----- saving digraph in XML format  -------------*')
         actions = [x for x in self.actions]
         nameExt = name+'.xml'
         fo = open(nameExt,'w')
@@ -1969,7 +1969,7 @@ class Digraph(object):
         fo.write('<header>\n')
         fo.write('<name>')
         fo.write(nameExt)
-        fo.write('</name>\n')       
+        fo.write('</name>\n')
         fo.write('<author>')
         fo.write(author)
         fo.write('</author>\n')
@@ -1983,7 +1983,7 @@ class Digraph(object):
             fo.write('<node>')
             fo.write(str(x))
             fo.write('</node>\n')
-        fo.write('</nodes>\n')                
+        fo.write('</nodes>\n')
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
         fo.write('<valuationdomain>\n')
@@ -1994,23 +1994,23 @@ class Digraph(object):
         fo.write(str(Max))
         fo.write('</max>\n')
         fo.write('</valuationdomain>\n')
-        fo.write('<relation>\n')        
+        fo.write('<relation>\n')
         relation = self.relation
         for x in actions:
             for y in actions:
-                fo.write('<arc>\n')        
+                fo.write('<arc>\n')
                 fo.write('<i>')
                 fo.write(str(x))
-                fo.write('</i>\n')                       
+                fo.write('</i>\n')
                 fo.write('<t>')
                 fo.write(str(y))
-                fo.write('</t>\n')                                             
+                fo.write('</t>\n')
                 fo.write('<v>')
                 fo.write(str(relation[x][y]))
-                fo.write('</v>\n')                       
-                fo.write('</arc>\n')        
-        fo.write('</relation>\n')        
-        fo.write('</digraph>\n')         
+                fo.write('</v>\n')
+                fo.write('</arc>\n')
+        fo.write('</relation>\n')
+        fo.write('</digraph>\n')
         fo.close()
         print('File: ' + nameExt + ' saved !')
 
@@ -2018,7 +2018,7 @@ class Digraph(object):
         """
         save digraph in XMCDA format.
         """
-        print('*----- saving digraph in XML format  -------------*')        
+        print('*----- saving digraph in XML format  -------------*')
         actions = [x for x in self.actions]
         nameExt = fileName+'.xmcda'
         fo = open(nameExt,'w')
@@ -2026,11 +2026,11 @@ class Digraph(object):
         if servingD3:
             fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcdaDefault.xsl"? -->\n')
         else:
-            fo.write('<?xml-stylesheet type="text/xsl" href="xmcdaDefault.xsl"?>\n')            
+            fo.write('<?xml-stylesheet type="text/xsl" href="xmcdaDefault.xsl"?>\n')
         fo.write(str('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2008/UMCDA-ML-1.0 umcda-ml-1.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2008/UMCDA-ML-1.0">\n'))
         # write description
         fo.write('<caseReference>\n')
-        fo.write('<title>Valued Digraph in XMCDA format</title>\n')  
+        fo.write('<title>Valued Digraph in XMCDA format</title>\n')
         fo.write('<id>%s</id>\n' % (fileName) )
         fo.write('<name>%s</name>\n' % (self.name) )
         fo.write('<type>root</type>\n')
@@ -2047,7 +2047,7 @@ class Digraph(object):
         fo.write('<title>%s</title>\n' % ('List of Alternatives'))
         fo.write('<type>%s</type>\n' % ('alternatives'))
         fo.write('<comment>Potential decision actions.</comment>\n')
-        fo.write('</description>\n')                  
+        fo.write('</description>\n')
         for i in range(na):
             fo.write('<alternative id="%s">\n' % (actionsList[i]))
             fo.write('<description>\n')
@@ -2063,8 +2063,8 @@ class Digraph(object):
             except:
                 fo.write('No comment')
             fo.write('</comment>\n')
-            fo.write('</description>\n')                  
-            fo.write('<alternativeType>potential</alternativeType>\n') 
+            fo.write('</description>\n')
+            fo.write('<alternativeType>potential</alternativeType>\n')
             fo.write('</alternative>\n')
         fo.write('</alternatives>\n')
         # write valued binary Relation
@@ -2074,7 +2074,7 @@ class Digraph(object):
         fo.write('<name>%s</name>\n' % (relationName) )
         fo.write('<type>%s</type>\n' % ('valuedBinaryRelation'))
         fo.write('<comment>%s %s Digraph</comment>\n' % (category,subcategory) )
-        fo.write('</description>\n')                  
+        fo.write('</description>\n')
         fo.write('<valuationDomain>\n')
         fo.write('<description>\n')
         fo.write('<subTitle>%s</subTitle>\n' % ('Valuation Domain'))
@@ -2094,23 +2094,23 @@ class Digraph(object):
         except:
             pass
         fo.write('<comment>%s %s Digraph</comment>\n' % (category,subcategory) )
-        fo.write('</description>\n')                  
+        fo.write('</description>\n')
         relation = self.relation
         for x in actions:
             for y in actions:
-                fo.write('<arc>\n')        
+                fo.write('<arc>\n')
                 fo.write('<from><alternativeID>')
                 fo.write(str(x))
-                fo.write('</alternativeID></from>\n')                       
+                fo.write('</alternativeID></from>\n')
                 fo.write('<to><alternativeID>')
                 fo.write(str(y))
-                fo.write('</alternativeID></to>\n')                                             
+                fo.write('</alternativeID></to>\n')
                 fo.write('<value><real>%2.2f' % (relation[x][y]) )
-                fo.write('</real></value>\n')                       
+                fo.write('</real></value>\n')
                 fo.write('</arc>\n')
         fo.write('</arcs>\n')
-        fo.write('</relationOnAlternatives>\n')        
-        fo.write('</xmcda:XMCDA>\n')         
+        fo.write('</relationOnAlternatives>\n')
+        fo.write('</xmcda:XMCDA>\n')
         fo.close()
         print('File: ' + nameExt + ' saved !')
 
@@ -2118,7 +2118,7 @@ class Digraph(object):
         """
         save digraph in XMCDA format.
         """
-        print('*----- saving digraph in XML format  -------------*')        
+        print('*----- saving digraph in XML format  -------------*')
         actions = [x for x in self.actions]
         nameExt = fileName+'.xmcda2'
         fo = open(nameExt,'w')
@@ -2126,11 +2126,11 @@ class Digraph(object):
         if servingD3:
             fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"? -->\n')
         else:
-            fo.write('<?xml-stylesheet type="text/xsl" href="xmcdaXSL.xsl"?>\n')            
+            fo.write('<?xml-stylesheet type="text/xsl" href="xmcdaXSL.xsl"?>\n')
         fo.write(str('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2009/UMCDA-2.0.0 file:../XMCDA-2.0.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0">\n'))
         # write description
         fo.write('<projectReference id="%s" name="%s">\n' % (fileName,self.name))
-        fo.write('<title>Stored Digraph in XMCDA-2.0 format</title>\n')  
+        fo.write('<title>Stored Digraph in XMCDA-2.0 format</title>\n')
         #fo.write('<id>%s</id>\n' % (fileName) )
         #fo.write('<name>%s</name>\n' % (self.name) )
         #fo.write('<type>root</type>\n')
@@ -2147,13 +2147,13 @@ class Digraph(object):
         fo.write('<title>%s</title>\n' % ('Nodes of the digraph'))
         #fo.write('<type>%s</type>\n' % ('alternatives'))
         fo.write('<comment>Set of nodes of the digraph.</comment>\n')
-        fo.write('</description>\n')                  
+        fo.write('</description>\n')
         for i in range(na):
             try:
                 alternativeName = str(actions[actionsList[i]]['name'])
             except:
                 alternativeName = 'nameless'
-            
+
             fo.write('<alternative id="%s" name="%s">\n' % (actionsList[i],alternativeName))
             fo.write('<description>\n')
             fo.write('<comment>')
@@ -2162,10 +2162,10 @@ class Digraph(object):
             except:
                 fo.write('No comment')
             fo.write('</comment>\n')
-            fo.write('</description>\n')                  
-            fo.write('<type>real</type>\n') 
+            fo.write('</description>\n')
+            fo.write('<type>real</type>\n')
             fo.write('<active>true</active>\n')
-            fo.write('<reference>false</reference>\n')            
+            fo.write('<reference>false</reference>\n')
             fo.write('</alternative>\n')
         fo.write('</alternatives>\n')
         # write valued binary Relation
@@ -2175,7 +2175,7 @@ class Digraph(object):
         #fo.write('<name>%s</name>\n' % (relationName) )
         #fo.write('<type>%s</type>\n' % ('valuedBinaryRelation'))
         fo.write('<comment>%s %s Digraph</comment>\n' % (category,subcategory) )
-        fo.write('</description>\n')                  
+        fo.write('</description>\n')
         fo.write('<valuation name="valuationDomain">\n')
         fo.write('<description>\n')
         fo.write('<subTitle>%s</subTitle>\n' % ('Valuation Domain'))
@@ -2206,14 +2206,14 @@ class Digraph(object):
         except:
             pass
         fo.write('<comment>%s %s Digraph</comment>\n' % (category,subcategory) )
-        fo.write('</description>\n')                  
+        fo.write('</description>\n')
         relation = self.relation
         for x in actions:
             for y in actions:
-                fo.write('<pair>\n')        
+                fo.write('<pair>\n')
                 fo.write('<initial><alternativeID>')
                 fo.write(str(x))
-                fo.write('</alternativeID></initial>\n')                       
+                fo.write('</alternativeID></initial>\n')
                 fo.write('<terminal><alternativeID>')
                 fo.write(str(y))
                 fo.write('</alternativeID></terminal>\n')
@@ -2223,11 +2223,11 @@ class Digraph(object):
                     formatString = '%%2.%df' % (digits)
                 fo.write('<value><real>')
                 fo.write(formatString % (relation[x][y]) )
-                fo.write('</real></value>\n')                       
+                fo.write('</real></value>\n')
                 fo.write('</pair>\n')
         fo.write('</pairs>\n')
-        fo.write('</alternativesComparisons>\n')        
-        fo.write('</xmcda:XMCDA>\n')         
+        fo.write('</alternativesComparisons>\n')
+        fo.write('</xmcda:XMCDA>\n')
         fo.close()
         print('File: ' + nameExt + ' saved !')
 
@@ -2291,7 +2291,7 @@ class Digraph(object):
                             rdd += 1.0
                         if relation[x][y] > level:
                             if relation[y][x] < negLevel:
-                                rsd += 1.0                    
+                                rsd += 1.0
                         if relation[x][y] < negLevel and relation[y][x] < negLevel:
                             rad += 1.0
             rdd = rdd / (order*(order-1))
@@ -2300,7 +2300,7 @@ class Digraph(object):
         density = {}
         density['double'] = rdd
         density['single'] = rsd
-        density['absence'] = rad       
+        density['absence'] = rad
         return density
 
     def computeAllDensities(self,choice=None):
@@ -2336,7 +2336,7 @@ class Digraph(object):
                             ssd += 1.0
                             sd += 1.0
                         elif relation[y][x] == Med:
-                            sd += 1.0                       
+                            sd += 1.0
                     if relation[x][y] <= Med and relation[y][x] <= Med:
                         ad += 1.0
                     if relation[x][y] < Med and relation[y][x] < Med:
@@ -2353,7 +2353,7 @@ class Digraph(object):
         density['single'] = sd
         density['strictSingle'] = ssd
         density['absence'] = ad
-        density['strictAbsence'] = asd        
+        density['strictAbsence'] = asd
         return density
 
     def computeValuationLevels(self,choice=None, Debug=False):
@@ -2368,12 +2368,12 @@ class Digraph(object):
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
-        
+
         if choice == None:
             actions = [x for x in self.actions]
         else:
             actions = [x for x in choice]
-        
+
         relation = self.relation
 
         levels = set([Max,Min])
@@ -2403,14 +2403,14 @@ class Digraph(object):
             level = valuationLevels[i+1]
             if Debug:
                 print('checking level: ', level)
-            gp = PolarisedDigraph(self,level=level)         
+            gp = PolarisedDigraph(self,level=level)
             if len(gp.computeChordlessCircuits()) > 0:
                 if Debug:
                     gp.showChordlessCircuits()
                     print('prudent order level = %s (med = %.2f)' % (str(valuationLevels[i-1]),Med))
                 self.prudentBetaLevel = valuationLevels[i]
                 return self.prudentBetaLevel
-            
+
         self.prudentBetaLevel = Med
         if Debug:
             ## self.computeChordlessCircuits()
@@ -2492,7 +2492,7 @@ class Digraph(object):
                         averageValuation += self.relation[x][y]
                         determined += abs(self.relation[x][y])
         return averageValuation / determined
-    
+
     def computeDeterminateness(self):
         """
         Computes the Kendalll distance of self
@@ -2511,7 +2511,7 @@ class Digraph(object):
                     deter += abs(relation[x][y] - Med)
         deter /= order * (order-1) * (Max - Med)
         return deter
-       
+
     def showStatistics(self):
         """
         Computes digraph statistics like order, size and arc-density.
@@ -2522,7 +2522,7 @@ class Digraph(object):
         nbrstrcomp = len(self.strongComponents())
         actions = [x for x in self.actions]
         relation = self.relation
-        order = len(actions)       
+        order = len(actions)
         size,undeterm,arcDensity = self.sizeSubGraph(actions)
         self.size = size
         self.undeterm = undeterm
@@ -2540,11 +2540,11 @@ class Digraph(object):
             meanLength = 'infinity'
         else:
             meanLength = float(meanLength/order)
-            
+
         self.meanNeighbourhoodDepth = meanLength
-        
+
         self.digraphDiameter = self.diameter()
-        
+
         self.agglomerationCoefficient,self.meanAgglomerationCoefficient = self.agglomerationDistribution()
         # Outranking determinateness
         Max = self.valuationdomain['max']
@@ -2571,7 +2571,7 @@ class Digraph(object):
         print('# components             : ', nbrcomp)
         print('# strong components      : ', nbrstrcomp)
         print('transitivity degree      : %.2f' % (self.computeTransitivityDegree()))
-        
+
         print('                         : ', list(range(len(outDegrees))))
         print('outdegrees distribution  : ', list(outDegrees))
         print('indegrees distribution   : ', list(inDegrees))
@@ -2600,7 +2600,7 @@ class Digraph(object):
         for i in range(order):
             print(actions[i], end=' ')
             print(": %.2f" % (self.agglomerationCoefficient[i]))
-        print("agglomeration coefficient        : %.2f" % (self.meanAgglomerationCoefficient))   
+        print("agglomeration coefficient        : %.2f" % (self.meanAgglomerationCoefficient))
 
     def meanLength(self,Oriented=False):
         """
@@ -2690,7 +2690,7 @@ class Digraph(object):
         if ndl % 2 == 0:
             medpos = ndl//2
             medianOutDegree = outDegreesList[medpos]
-        else:    
+        else:
             medpos0 = ndl//2
             medpos1 = (ndl + 1)//2
             medianOutDegree =  (outDegreesList[medpos0] + outDegreesList[medpos1])/2
@@ -2713,7 +2713,7 @@ class Digraph(object):
         if ndl % 2 == 0:
             medpos = ndl//2
             medianSymDegree = symDegreesList[medpos]
-        else:    
+        else:
             medpos0 = ndl/2
             medpos1 = (ndl + 1)//2
             medianSymDegree =  (symDegreesList[medpos0] + symDegreesList[medpos1])/2
@@ -2735,7 +2735,7 @@ class Digraph(object):
         else:
             meanSymDegree = meanSymDegree/self.order
         return meanSymDegree
-         
+
     def diameter(self, Oriented = False):
         """
         Renders the (by default non-oriented) diameter of the digraph instance
@@ -2843,7 +2843,7 @@ class Digraph(object):
         if order == 0:
             meanCoeff = 0.0
         else:
-            meanCoeff /= order 
+            meanCoeff /= order
         return aggloCoeff, meanCoeff
 
     def outDegreesDistribution(self):
@@ -2908,7 +2908,7 @@ class Digraph(object):
         if Qsum != 0.0:
             Q = [0.0 for i in range(r)]
             F = [0.0 for i in range(r)]
-            F[0] = N[0]/n 
+            F[0] = N[0]/n
             Q[0] = (X[0] * N[0])/Qsum
             for i in range(1,r,1):
                 qi = (X[i] * N[i])/Qsum
@@ -2921,7 +2921,7 @@ class Digraph(object):
         else:
             gini = -1
         return gini
-    
+
     def inDegreesDistribution(self):
         """
         Renders the distribution of indegrees.
@@ -3021,7 +3021,7 @@ class Digraph(object):
                     componentx = componentx | set([y])
             strongComponents = strongComponents | set([frozenset(componentx)])
         return strongComponents
-    
+
     def showMIS(self,withListing=True):
         """
         Prints all maximal independent choices
@@ -3131,7 +3131,7 @@ class Digraph(object):
                 else:
                     if choice <= mir:
                         add = 0
-                        break              
+                        break
             if add == 1:
                 self.domirset.add(frozenset(choice))
         t1 = time.time()
@@ -3165,7 +3165,7 @@ class Digraph(object):
                 else:
                     if choice <= mir:
                         add = 0
-                        break              
+                        break
             if add == 1:
                 self.absirset.add(frozenset(choice))
         t1 = time.time()
@@ -3181,7 +3181,7 @@ class Digraph(object):
         print('freq.: ', v)
         print('execution time: %.5f sec.' % (t1-t0))
         print('Results in self.absirset')
-      
+
 
     def showPreKernels(self,withListing=True):
         """
@@ -3198,7 +3198,7 @@ class Digraph(object):
         for choice in self.independentChoices(self.singletons()):
             restactions = actions - choice[0][0]
             if restactions <= choice[0][1]:
-                self.dompreKernels.add(choice[0][0])           
+                self.dompreKernels.add(choice[0][0])
             if restactions <= choice[0][2]:
                 self.abspreKernels.add(choice[0][0])
         t1 = time.time()
@@ -3206,22 +3206,22 @@ class Digraph(object):
             print('Dominant preKernels :')
             for choice in self.dompreKernels:
                 print(list(choice))
-                print('   independence : ', self.intstab(choice)) 
-                print('   dominance    : ', self.domin(choice)) 
+                print('   independence : ', self.intstab(choice))
+                print('   dominance    : ', self.domin(choice))
                 print('   absorbency   : ', self.absorb(choice))
                 print('   covering     :  %.3f' % self.averageCoveringIndex(choice, direction='out'))
             print('Absorbent preKernels :')
             for choice in self.abspreKernels:
                 print(list(choice))
-                print('   independence : ', self.intstab(choice)) 
-                print('   dominance    : ', self.domin(choice)) 
+                print('   independence : ', self.intstab(choice))
+                print('   dominance    : ', self.domin(choice))
                 print('   absorbency   : ', self.absorb(choice))
-                print('   covering     :  %.3f' % self.averageCoveringIndex(choice, direction='in'))  
+                print('   covering     :  %.3f' % self.averageCoveringIndex(choice, direction='in'))
         print('*----- statistics -----')
         print('graph name: ', self.name)
         print('number of solutions')
         print(' dominant kernels : ', len(self.dompreKernels))
-        print(' absorbent kernels: ', len(self.abspreKernels))                                        
+        print(' absorbent kernels: ', len(self.abspreKernels))
         print('cardinality frequency distributions')
         print('cardinality     : ', list(range(n+1)))
         v = [0 for i in range(n+1)]
@@ -3247,7 +3247,7 @@ class Digraph(object):
         for choice in self.independentChoices(self.singletons()):
             restactions = actions - choice[0][0]
             if restactions <= choice[0][1]:
-                dompreKernels.add(choice[0][0])           
+                dompreKernels.add(choice[0][0])
             if restactions <= choice[0][2]:
                 abspreKernels.add(choice[0][0])
         self.dompreKernels = dompreKernels
@@ -3286,7 +3286,7 @@ class Digraph(object):
         for x in self.actions:
             A[x] = 0
         ncomp = 1
-        ConComp = [] 
+        ConComp = []
         for x in A:
             Comp = set()
             if A[x] == 0:
@@ -3355,8 +3355,8 @@ class Digraph(object):
         for x in self.actions:
             worstRanks[x] = self.order - outDegrees[x]
         return worstRanks
-         
-    
+
+
     def gammaSets(self):
         """ Renders the dictionary of neighborhoods {node: (dx,ax)}"""
         gamma = {}
@@ -3450,7 +3450,7 @@ class Digraph(object):
                 if self.relation[a][node] < Med:
                     nb.add(a)
         return nb
-    
+
     def singletons(self):
         """list of singletons and neighborhoods
            [(singx1, +nx1, -nx1, not(+nx1 or -nx1)),.... ]"""
@@ -3489,7 +3489,7 @@ class Digraph(object):
                 yield choice
             for choice in self.MISgen(S,I):
                 yield choice
-    
+
     def independentChoices(self,U):
         """
          Generator for all independent choices with neighborhoods
@@ -3556,7 +3556,7 @@ class Digraph(object):
             return Decimal("1.0")
         else:
             return Decimal("0.0")
-    
+
     def zoomValuation(self,zoomFactor=1.0):
         """
         Zooms in or out, depending on the value of the zoomFactor provided,
@@ -3564,7 +3564,7 @@ class Digraph(object):
         """
 
         zoomFactor = Decimal(str(zoomFactor))
-                             
+
         oldMax = self.valuationdomain['max']
         oldMin = self.valuationdomain['min']
         oldMed = self.valuationdomain['med']
@@ -3587,7 +3587,7 @@ class Digraph(object):
         self.valuationdomain['med'] = newMed
 
         self.relation = newRelation.copy()
- 
+
 
     def recodeValuation(self,newMin=-10.0,newMax=10.0,Debug=False):
         """
@@ -3602,9 +3602,9 @@ class Digraph(object):
         oldAmplitude = oldMax - oldMin
         if Debug:
             print(oldMin, oldMed, oldMax, oldAmplitude)
-        
+
         newMin = Decimal(str(newMin))
-        newMax = Decimal(str(newMax))       
+        newMax = Decimal(str(newMax))
         newMed = Decimal('%.3f' % ((newMax + newMin)/Decimal('2.0')))
 
         newAmplitude = newMax - newMin
@@ -3632,9 +3632,9 @@ class Digraph(object):
         self.valuationdomain['min'] = newMin
         self.valuationdomain['med'] = newMed
         self.valuationdomain['hasIntegerValuation'] = False
-        
+
         self.relation = deepcopy(newrelation)
-        
+
     def dominantChoices(self,S):
         """
         Generates all minimal dominant choices of a bipolar valued digraph.
@@ -3693,7 +3693,7 @@ class Digraph(object):
                     Sx[1][cover] = coverx
                 if covering:
                     for choice in self.minimalChoices(Sx):
-                        yield choice                 
+                        yield choice
 
     def absorbentChoices(self,S):
         """
@@ -3746,7 +3746,7 @@ class Digraph(object):
             for S in self.powerset(U1):
                 yield S
                 yield S | set([x])
-                    
+
     def plusirredundant(self,U):
         """
         Generates all +irredundant choices of a digraph.
@@ -3761,7 +3761,7 @@ class Digraph(object):
                 Sx = S | set([x])
                 if self.domirred(Sx) > Med:
                     yield Sx
-  
+
     def absirredundant(self,U):
         """
         Generates all -irredundant choices of a digraph.
@@ -3855,9 +3855,9 @@ class Digraph(object):
         n = len(actions)
         Min = Decimal(str(self.valuationdomain['min']))
         Med = Decimal(str(self.valuationdomain['med']))
-        Max = Decimal(str(self.valuationdomain['max']))        
+        Max = Decimal(str(self.valuationdomain['max']))
         for x in actions:
-            relation[x][x] = Max  
+            relation[x][x] = Max
         result = Max
         for x in choice:
             nbclx = self.readabsvector(x,relation)
@@ -3867,9 +3867,9 @@ class Digraph(object):
             for y in restchoice:
                 nbcly = self.readabsvector(y,relation)
                 nbclchoice = [max(nbclchoice[i],nbcly[i]) for i in range(n)]
-            resultx = max([min(nbclx[i],self.contra(nbclchoice)[i]) for i in range(n)])      
+            resultx = max([min(nbclx[i],self.contra(nbclchoice)[i]) for i in range(n)])
             result = min(result, resultx)
-        return result            
+        return result
 
     def domirredx(self,choice,x):
         """
@@ -3897,9 +3897,9 @@ class Digraph(object):
         n = len(actions)
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
-        Max = self.valuationdomain['max']        
+        Max = self.valuationdomain['max']
         for x in actions:
-            relation[x][x] = Max  
+            relation[x][x] = Max
         result = Max
         for x in choice:
             nbclx = self.readdomvector(x,relation)
@@ -3909,9 +3909,9 @@ class Digraph(object):
             for y in restchoice:
                 nbcly = self.readdomvector(y,relation)
                 nbclchoice = [max(nbclchoice[i],nbcly[i]) for i in range(n)]
-            resultx = max([min(nbclx[i],self.contra(nbclchoice)[i]) for i in range(n)])      
+            resultx = max([min(nbclx[i],self.contra(nbclchoice)[i]) for i in range(n)])
             result = min(result, resultx)
-        return result                  
+        return result
 
     def absirred(self,choice):
         """
@@ -3968,15 +3968,15 @@ class Digraph(object):
             fo.write('valuationdomain = {\'hasIntegerValuation\': False, \'min\': Decimal("'+str(Min)+'"),\'med\': Decimal("'+str(Med)+'"),\'max\': Decimal("'+str(Max)+'")}\n')
         else:
             fo.write('valuationdomain = {\'hasIntegerValuation\': True, \'min\': '+str(Min)+',\'med\': '+str(Med)+',\'max\': '+str(Max)+'}\n')
-            
+
         fo.write('relation = {\n')
         for x in actions:
-            fo.write('\'' + str(x) + '\': {\n')	
+            fo.write('\'' + str(x) + '\': {\n')
             for y in actions:
                 if not hasIntegerValuation:
                     fo.write('\'' + str(y) + '\': Decimal("' + str(relation[x][y]) + '"),\n')
                 else:
-                    fo.write('\'' + str(y) + '\':' + str(relation[x][y]) + ',\n')                    
+                    fo.write('\'' + str(y) + '\':' + str(relation[x][y]) + ',\n')
             fo.write('},\n')
         fo.write( '}\n')
         if option == 'withAutomorphismGenerators':
@@ -3990,7 +3990,7 @@ class Digraph(object):
                 for p in self.permutations[ga]:
                     fo.write('\''+str(p)+'\': \''+str(self.permutations[ga][p])+'\',\n')
                 fo.write('},\n')
-            fo.write('}\n')           
+            fo.write('}\n')
         fo.close()
 
     def chordlessPaths(self,Pk,n2,Odd=False,Comments=False,Debug=False):
@@ -4027,12 +4027,12 @@ class Digraph(object):
                 #Pk.append(n2)
                 self.xCC.append(Pk)
                 if Debug:
-                    print('Chordless circuit certificate -->>> ', Pk)           
+                    print('Chordless circuit certificate -->>> ', Pk)
         else:
             detectedChordlessPath = False
             NBn1 = set(self.gamma[n1][0]-self.gamma[n1][1])
             while NBn1 != set():
-                n = NBn1.pop()            
+                n = NBn1.pop()
                 if (n1,n) not in self.visitedArcs and (n,n1) not in self.visitedArcs:
                     P = list(Pk)
                     noChord = True
@@ -4073,16 +4073,16 @@ class Digraph(object):
         self.visitedArcs.add((n1,n2))
         self.visitedArcs.add((n2,n1))
         med = self.valuationdomain['med']
-        
+
         if self.relation[n1][n2] > med and self.relation[n2][n1] <= med:
             Detected = True
             if Debug:
-                print('Chordless circuit certificate -->>> ', Pk)           
+                print('Chordless circuit certificate -->>> ', Pk)
         else:
             Detected = False
             NBn1 = set(self.gamma[n1][0]-self.gamma[n1][1])
             while NBn1 != set():
-                n = NBn1.pop()            
+                n = NBn1.pop()
                 if (n1,n) not in self.visitedArcs and (n,n1) not in self.visitedArcs:
                     P = list(Pk)
                     noChord = True
@@ -4123,7 +4123,7 @@ class Digraph(object):
                     if relation[x][y] > Med:
                         fo.write('%d %d\n' % (i+1,j+1))
         fo.close()
-        
+
         resultFile = tempFileName+'.py'
         if os.path.exists('/usr/local/bin/detectChordlessCircuits'):
             os.system('/usr/local/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
@@ -4191,7 +4191,7 @@ class Digraph(object):
                 for ino in x[:-1]:
                     allCircuit.append(actions[ino-1])
                 result.append( ( allCircuit, frozenset(allCircuit) ) )
-        self.circuitsList = result        
+        self.circuitsList = result
         return result
 
     def computeCppChordlessCircuits(self,Odd=False,Debug=False):
@@ -4245,7 +4245,7 @@ class Digraph(object):
                 for ino in x[:-1]:
                     allCircuit.append(actions[ino-1])
                 result.append( ( allCircuit, frozenset(allCircuit) ) )
-        self.circuitsList = result        
+        self.circuitsList = result
         return result
 
     def computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
@@ -4262,11 +4262,11 @@ class Digraph(object):
                 print('*--- chordless odd circuits ---*')
             else:
                 print('*--- chordless circuits ---*')
-        
+
         actionsList = list(self.actions)
         self.visitedArcs = set()
         chordlessCircuits = []
-        
+
         for x in actionsList:
             P = [x]
             if Comments:
@@ -4296,7 +4296,7 @@ class Digraph(object):
         actionsList = list(self.actions)
         self.visitedArcs = set()
         Detected = False
-        
+
         for x in actionsList:
             P = [x]
             if Comments:
@@ -4310,10 +4310,10 @@ class Digraph(object):
                 print('A chordless circuit has been detected !')
             else:
                 print('No chordless circuit has been detected !')
-                
+
         return Detected
 
-        
+
     def showCircuits(self):
         """
         show methods for chordless circuits in CocaGraph
@@ -4455,7 +4455,7 @@ class Digraph(object):
                     deg = min(deg,max(relation[x][y],-relation[y][x]))
         x = circuit[-1]
         y = circuit[0]
-        deg = min(deg,max(relation[x][y],-relation[y][x]))                      
+        deg = min(deg,max(relation[x][y],-relation[y][x]))
         return deg
 
     ## def circuitMinCredibilityOld(self,circuit):
@@ -4586,7 +4586,7 @@ class Digraph(object):
                     relation_k[x][y] = relation[x][y]
                 else:
                     relation_k[x][y] = Med
-        return relation_k            
+        return relation_k
 
     def abskernelrestrict(self, choice):
         """
@@ -4658,7 +4658,7 @@ class Digraph(object):
         for choice in self.independentChoices(self.singletons()):
             restactions = actions - choice[0][0]
             if restactions <= choice[0][1]:
-                self.dompreKernels.add(choice[0][0])           
+                self.dompreKernels.add(choice[0][0])
             if restactions <= choice[0][2]:
                 self.abspreKernels.add(choice[0][0])
         self.computeGoodChoices(Comments=Comments)
@@ -4694,7 +4694,7 @@ class Digraph(object):
                     print(' === >> potential BCR ')
                     self.showChoiceVector(gch)
                     if bestChoice == set():
-                        bestChoice = gch[5]                   
+                        bestChoice = gch[5]
             else:
                 if Comments:
                     print('non robust best choice ')
@@ -4731,7 +4731,7 @@ class Digraph(object):
                     self.showChoiceVector(bch)
                     if worstChoice == set():
                         worstChoice = bch[5]
-                     
+
             else:
                 if Comments:
                     print('non robust worst choice ')
@@ -4746,7 +4746,7 @@ class Digraph(object):
             self.relation = copy.deepcopy(self.relation_orig)
             self.order = len(self.actions)
             self.gamma = self.gammaSets()
-            self.notGamma = self.notGammaSets()        
+            self.notGamma = self.notGammaSets()
         ## try:
         ##     self.worstChoice = self.badChoices[0][5]
         ## except:
@@ -4767,11 +4767,11 @@ class Digraph(object):
         import copy,time
         if Comments:
             print('*--- computing the COCA digraph --*')
-        
+
         n0 = self.order
         t0 = time.time()
         _selfwcoc = CocaDigraph(self,Comments=Comments)
-        t1 = time.time() 
+        t1 = time.time()
         n1 = _selfwcoc.order
         nc = n1 - n0
         if Comments:
@@ -4783,7 +4783,7 @@ class Digraph(object):
             actions_orig = copy.deepcopy(self.actions)
         self.actions_orig = actions_orig
         self.relation_orig = copy.deepcopy(self.relation)
-        
+
         self.actions = copy.deepcopy(_selfwcoc.actions)
         self.order = len(self.actions)
         self.relation = copy.deepcopy(_selfwcoc.relation)
@@ -4795,7 +4795,7 @@ class Digraph(object):
         for choice in self.independentChoices(self.singletons()):
             restactions = actions - choice[0][0]
             if restactions <= choice[0][1]:
-                self.dompreKernels.add(choice[0][0])           
+                self.dompreKernels.add(choice[0][0])
             if restactions <= choice[0][2]:
                 self.abspreKernels.add(choice[0][0])
         self.computeGoodChoices(Comments=Comments)
@@ -4804,7 +4804,7 @@ class Digraph(object):
         self.nullChoices = set()
         self.strictBadChoices = set()
         self.nonRobustChoices = set()
-        for gch in self.goodChoices:           
+        for gch in self.goodChoices:
             if gch[0] <= 0:
                 goodChoice = True
                 for bch in self.badChoices:
@@ -4829,9 +4829,9 @@ class Digraph(object):
         ##     self.relation = copy.deepcopy(self.relation_orig)
         ##     self.order = len(self.actions)
         ##     self.gamma = self.gammaSets()
-        ##     self.notGamma = self.notGammaSets()        
+        ##     self.notGamma = self.notGammaSets()
 
-         
+
 
     def computeGoodChoices(self,Comments=False):
         """
@@ -4839,6 +4839,7 @@ class Digraph(object):
         | [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]
         """
         import copy
+        from operator import itemgetter
         temp = copy.deepcopy(self)
         Max = Decimal(str(temp.valuationdomain['max']))
         Min = Decimal(str(temp.valuationdomain['min']))
@@ -4861,6 +4862,7 @@ class Digraph(object):
             degd = temp.domin(ker)
             degirred = temp.domirredval(ker,relation)
             degmd = min(degi,degd)
+            cover = temp.averageCoveringIndex(ker)
             relation_k = temp.domkernelrestrict(choice)
             n = len(actions)
             #vec1_a = array.array('f', [Max] * n)
@@ -4892,8 +4894,9 @@ class Digraph(object):
                 print('#iterations    :', it)
             domvec = temp.sharpvec(veclowa,vechigha)
             determ = temp.determinateness(domvec)
-            domChoicesSort.append([-determ,degirred,degi,degd,dega,str(choice),domvec])
+            domChoicesSort.append([-determ,degirred,degi,degd,dega,str(choice),domvec,cover])
         domChoicesSort.sort()
+        ## domChoicesSort.sort(reverse=True, key=itemgetter(7))
         ## for ch in domChoicesSort:
         ##     ch[5] = eval(ch[5])
         ## self.goodChoices = domChoicesSort
@@ -4906,8 +4909,9 @@ class Digraph(object):
                                     'degi':ch[2],
                                     'degd':ch[3],
                                     'dega':ch[4],
+                                    'cover':ch[7],
                                     'bpv':ch[6]}
-                    
+
         self.goodChoices = domChoicesSort
         return goodChoicesDic
 
@@ -4963,9 +4967,9 @@ class Digraph(object):
             domChoicesSort.append([-determ,degirred,degi,degd,dega,str(choice),vecsol])
         domChoicesSort.sort()
         for ch in domChoicesSort:
-            ch[5] = eval(ch[5])        
+            ch[5] = eval(ch[5])
         self.goodChoices = domChoicesSort
-        
+
 
     def computeBadPirlotChoices(self,Comments=False):
         """
@@ -5049,8 +5053,10 @@ class Digraph(object):
         | [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)absvec]
         """
         import copy
+        from operator import itemgetter
+
         temp = copy.deepcopy(self)
-        
+
         Max = Decimal(str(temp.valuationdomain['max']))
         Min = Decimal(str(temp.valuationdomain['min']))
         Med = Decimal(str(temp.valuationdomain['med']))
@@ -5068,6 +5074,7 @@ class Digraph(object):
             dega = temp.absorb(ker)
             degd = temp.domin(ker)
             degirred = temp.absirredval(ker,relation)
+            cover = temp.averageCoveringIndex(ker,direction="in")
             relation_k = temp.abskernelrestrict(choice)
             n = len(actions)
             #vec1_a = array.array('f', [Max] * n)
@@ -5095,22 +5102,24 @@ class Digraph(object):
                 it += 1
             if Comments:
                 print('final veclowa',veclowa)
-                print('final vechigha', vechigha)       
+                print('final vechigha', vechigha)
             absvec = temp.sharpvec(veclowa,vechigha)
             determ = temp.determinateness(absvec)
-            absChoicesSort.append([-determ,degirred,degi,degd,dega,str(choice),absvec])
+            absChoicesSort.append([-determ,degirred,degi,degd,dega,str(choice),absvec,cover])
         absChoicesSort.sort()
+        ## absChoicesSort.sort(reverse=True, key=itemgetter(7))
         ## for ch in absChoicesSort:
         ##     ch[5] = eval(ch[5])
         ## self.badChoices = absChoicesSort
         badChoicesDic = {}
         for ch in absChoicesSort:
-            ch[5] = eval(ch[5])        
+            ch[5] = eval(ch[5])
             badChoicesDic[frozenset(ch[5])] = {'determ':-ch[0],
                                     'degirred':ch[1],
                                     'degi':ch[2],
                                     'degd':ch[3],
                                     'dega':ch[4],
+                                    'cover':ch[7],
                                     'bpv':ch[6]}
         self.badChoices = absChoicesSort
         return badChoicesDic
@@ -5147,7 +5156,7 @@ class Digraph(object):
         """
         import array,copy
         temp = copy.deepcopy(self)
-        
+
         Max = temp.valuationdomain['max']
         Min = temp.valuationdomain['min']
         Med = temp.valuationdomain['med']
@@ -5168,7 +5177,7 @@ class Digraph(object):
             degirred = temp.domirredval(ker,relation)
             degmd = min(degi,degd)
             domChoicesSort.append([-degmd,degirred,degi,degd,dega,str(choice)])
-        print('domChoicesSort', domChoicesSort) 
+        print('domChoicesSort', domChoicesSort)
         for ch in domChoicesSort:
             choice = ch[5]
             degirred = ch[1]
@@ -5219,7 +5228,7 @@ class Digraph(object):
         """
         import copy
         temp = copy.deepcopy(self)
-        
+
         Max = temp.valuationdomain['max']
         Min = temp.valuationdomain['min']
         Med = temp.valuationdomain['med']
@@ -5257,7 +5266,7 @@ class Digraph(object):
             n = len(actions)
             vec1_a = [Max for i in range(n)]
             vec0_a = [Min for i in range(n)]
-            mat = [temp.readabsvector(x,relation_k) for x in actions]         
+            mat = [temp.readabsvector(x,relation_k) for x in actions]
             veclowa = vec0_a
             vechigha = vec1_a
             it = 1
@@ -5309,17 +5318,17 @@ class Digraph(object):
             gammaS = gammaS | gamma[i][0]
         if withListing:
             print('===>>> Inital solution : ', list(S))
-        hertzmisset = hertzmisset | set([frozenset(S)])        
+        hertzmisset = hertzmisset | set([frozenset(S)])
         # initialize all variables
         R = V - S
         ns = len(S)
         n = self.order
-        i = 0  
+        i = 0
         P  = [set() for x in range(n)]
         M  = [set() for x in range(n)]
         NR = [set() for x in range(n)]
         Q  = [set() for x in range(n)]
-        v  = [0     for x in range(n)]      
+        v  = [0     for x in range(n)]
         NON_R = set()
         OUI_R = set()
         NON_S = set()
@@ -5500,18 +5509,18 @@ class Digraph(object):
                 gammaSch = set()
                 for x in Sch:
                     gammaSch = gammaSch | self.gamma[x][0]
-                
+
                 while (Sch | gammaSch) != V:
                     i = random.choice(list(V-Sch-gammaSch))
                     Sch = Sch | set([i])
                     gammaSch = gammaSch | self.gamma[i][0]
-                    
+
                 if Sch not in newmisset:
                     mislen = mislen | set([len(Sch)])
                     newmisset = newmisset | set([frozenset(Sch)])
 
                     Rch = V - Sch
-                    for r in Rch:   # add a node from outside S   
+                    for r in Rch:   # add a node from outside S
                         Srch = (Sch - self.gamma[r][0]) | set([r]) # Sr independent
                         if Srch not in uphistory:
                             upmis = upmis | set([frozenset(Srch)])
@@ -5546,7 +5555,7 @@ class Digraph(object):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    
+
     def showMIS_UD(self,withListing=True):
         """
         Prints all MIS using the Hertz-Bisdorff method.
@@ -5695,7 +5704,7 @@ class Digraph(object):
             gammaSv = set() # recompute neighborhood
             for sv in Sv:
                 gammaSv = gammaSv | self.gamma[sv][0]
-            for r in R:   # add a node from outside S   
+            for r in R:   # add a node from outside S
                 Svr = Sv | set([r])
                 gammaSvr = gammaSv | self.gamma[r][0]
                 if gammaSvr & Svr == set(): # if independent
@@ -5704,7 +5713,7 @@ class Digraph(object):
                             #print 'MIS ', Svr
                             self.newmisset = self.newmisset | set([frozenset(Svr)])
                             self.computeupdown1(s,Svr)
-                    else:                   # indep. and not covering 
+                    else:                   # indep. and not covering
                         #print 'up ->',Svr
                         self.upmis = self.upmis | set([(frozenset(Svr),frozenset(gammaSvr))])
                 elif Svr | gammaSvr == V:   # covering but not independent
@@ -5779,7 +5788,7 @@ class Digraph(object):
             ns = mis[0]
             self.mislen = self.mislen | set([ns])
             V = set(self.actions)
-            self.computeupdown2(s,S)  # starting from S compute all MIS of same length 
+            self.computeupdown2(s,S)  # starting from S compute all MIS of same length
             iter = 0
             while self.upmis != set() or self.downmis != set():
                 iter += 1  # next iteration init
@@ -5822,7 +5831,7 @@ class Digraph(object):
                                 #elif Sch not in self.uphistory:
                                     #print 'up ->',Sch
                                     #self.upmis = self.upmis | set([(frozenset(Sch),frozenset(gammaSch))])
-                                    
+
                             else:
                                 if Sch | gammaSch == V and Sch not in self.downhistory:
                                     self.downmis = self.downmis | set([frozenset(Sch)])
@@ -5875,15 +5884,15 @@ class Digraph(object):
                 for sv in Sv:
                     gammaSv = gammaSv | self.gamma[sv][0]
                 privgammav = (self.gamma[v][0] | set([v])) - (gammaSv | Sv)
-                for r in R:   # add a node from outside S   
+                for r in R:   # add a node from outside S
                     if privgammav <= self.gamma[r][0]:  # covering
                         Svr = Sv | set([r])
-                        if self.gamma[r][0] & Sv == set():  # independent                            
+                        if self.gamma[r][0] & Sv == set():  # independent
                             if Svr not in self.newmisset:
                                 print('new MIS ', Svr)
                                 newmis = newmis | set([frozenset(Svr)])
-                        else:                            
-                            if Svr not in self.downhistory: 
+                        else:
+                            if Svr not in self.downhistory:
                                 print('down->',Svr)
                                 self.downmis = self.downmis | set([frozenset(Svr)])
                     else:
@@ -5915,8 +5924,8 @@ class Digraph(object):
                 gammaSv = set() # recompute neighborhood
                 for sv in Sv:
                     gammaSv = gammaSv | self.gamma[sv][0]
-                #privgammav = (self.gamma[v][0] | set([v])) - gammaSv 
-                for r in R:   # add a node from outside S   
+                #privgammav = (self.gamma[v][0] | set([v])) - gammaSv
+                for r in R:   # add a node from outside S
                     Svr = Sv | set([r])
                     gammaSvr = gammaSv | self.gamma[r][0]
                     if gammaSvr & Svr == set(): # if independent
@@ -5929,7 +5938,7 @@ class Digraph(object):
                                 #print 'up ->',Svr
                                 self.upmis = self.upmis | set([(frozenset(Svr),frozenset(gammaSvr))])
                     elif Svr | gammaSvr == V:   # covering but not independent
-                        if Svr not in self.downhistory: 
+                        if Svr not in self.downhistory:
                             #print 'down->',Svr
                             self.downmis = self.downmis | set([frozenset(Svr)])
 
@@ -5944,7 +5953,7 @@ class Digraph(object):
         import math,copy
 
         op1 = copy.deepcopy(self)
-        
+
         Debug = False
 
         if comments:
@@ -5982,8 +5991,8 @@ class Digraph(object):
                 print(op2.name, '=', ODistance)
             op1.recodeValuation(Minop1,Maxop1)
             op2.recodeValuation(Minop1,Maxop2)
-            
-        
+
+
         return ODistance
 
     def computeSingletonRanking(self,Comments = False, Debug = False):
@@ -5995,9 +6004,9 @@ class Digraph(object):
         import copy
 
         valuationdomain = copy.deepcopy(self.valuationdomain)
-        
+
         self.recodeValuation(0.0,100.0)
-        
+
 
         sigs = [x[0] for x in self.singletons()]
 
@@ -6009,7 +6018,7 @@ class Digraph(object):
 
         res.sort(reverse=True)
 
-    
+
         if Comments:
             for x in res:
                 print("{%s} : %.3f " % ( [y for y in x[1]][0], (float(x[0]) + 100.0)/2.0 ))
@@ -6027,10 +6036,10 @@ class Digraph(object):
         Renders and prints the sorted bipolar net determinatation of outrankingness
         minus outrankedness credibilities of all singleton choices.
         res = ((netdet,sigleton,dom,absorb)+)
-        
+
         """
         res = self.computeSingletonRanking(Comments,Debug)
-        return res 
+        return res
 
     def omax(self,L, Debug=False):
         """
@@ -6167,19 +6176,19 @@ class Digraph(object):
         """
         renders a ranking of the actions obtained from the
         ranked pairs rule.
-        """            
+        """
         relation = self.relation
         actions = [x for x in self.actions]
         actions.sort()
-        
+
         n = len(actions)
 
         listPairs = []
         for x in actions:
             for y in [z for z in actions if z != x]:
                 listPairs.append((-relation[x][y],(x,y),x,y))
-        listPairs.sort(reverse=False)        
-      
+        listPairs.sort(reverse=False)
+
         g = IndeterminateDigraph(order=n)
         g.actions = self.actions
         g.valuationdomain = {'min':Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
@@ -6191,15 +6200,15 @@ class Digraph(object):
             g.relation[x] = {}
             for y in g.actions:
                 g.relation[x][y] = Min
-        
-        rankedPairs = [x[1] for x in listPairs] 
+
+        rankedPairs = [x[1] for x in listPairs]
         for pair in rankedPairs:
             if Debug:
                 print('next pair: ', pair)
             x = pair[0]
             y = pair[1]
             if g.relation[x][y] == Min and g.relation[y][x] == Min:
-                g.relation[x][y] = Max        
+                g.relation[x][y] = Max
                 g.gamma = g.gammaSets()
                 g.notGamma = g.notGammaSets()
                 if Cpp:
@@ -6209,11 +6218,11 @@ class Digraph(object):
                 if len(circ) != 0:
                     if Debug:
                         print(circ)
-                    g.relation[x][y] = Min            
+                    g.relation[x][y] = Min
                 else:
                     if Debug:
                         print('added: (%s,%s) characteristic: %.2f' % (x,y, self.relation[x][y]))
-                
+
         g.gamma = g.gammaSets()
 
         outdegrees = []
@@ -6228,7 +6237,7 @@ class Digraph(object):
             print('Ranked Pairs Order = ', rankedPairsOrder)
         return rankedPairsOrder
 
-        
+
     def computeKemenyOrder(self,isProbabilistic=False, orderLimit=7, seed=None, sampleSize=1000, Debug=False):
         """
         renders a ranking of the actions with minimal Kemeny index.
@@ -6243,7 +6252,7 @@ class Digraph(object):
         actions = [x for x in self.actions]
         n = len(actions)
 
-        ## Monte Carlo computation of a Kemeny order 
+        ## Monte Carlo computation of a Kemeny order
         if isProbabilistic:
             if seed != None:
                 seed = seed
@@ -6317,12 +6326,12 @@ class Digraph(object):
         relationOrig = self.relation
         minOrig = self.valuationdomain['min']
         maxOrig = self.valuationdomain['max']
-        self.recodeValuation(-1,1)                                       
+        self.recodeValuation(-1,1)
         relation = self.relation
         actions = [x for x in self.actions]
         n = len(actions)
 
-        ## Monte Carlo computation of a Slater order 
+        ## Monte Carlo computation of a Slater order
         if isProbabilistic:
             if seed != None:
                 seed = seed
@@ -6347,7 +6356,7 @@ class Digraph(object):
                                 kcurr -= 1
                             elif relation[a[j]][a[i]] < 0:
                                 kcurr += 1
-                            
+
                 if kcurr > slaterIndex:
                     slaterIndex = kcurr
                     slaterOrder = list(a)
@@ -6465,7 +6474,7 @@ class CoDualDigraph(Digraph):
         try:
             self.evaluation = deepcopy(other.evaluation)
         except AttributeError:
-            pass    
+            pass
         self.actions = deepcopy(other.actions)
         self.order = len(self.actions)
         self.valuationdomain = deepcopy(other.valuationdomain)
@@ -6509,7 +6518,7 @@ class ConverseDigraph(Digraph):
         try:
             self.evaluation = deepcopy(other.evaluation)
         except AttributeError:
-            pass    
+            pass
         self.actions = deepcopy(other.actions)
         self.order = len(self.actions)
         self.valuationdomain = deepcopy(other.valuationdomain)
@@ -6542,13 +6551,13 @@ class RankingByChoosingDigraph(Digraph):
         self.valuationdomain = other.valuationdomain
 
         self.originalRelation = other.relation
-        
+
         if Iterate:
             self.rankingByChoosing = other.iterateRankingByChoosing(CoDual=CoDual,Comments=False,Debug=Debug)
         else:
             self.rankingByChoosing = other.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
         if Debug:
-            print(self.rankingByChoosing) 
+            print(self.rankingByChoosing)
 
 
         self.relation = self.computeRankingByChoosingRelation(Debug=Debug)
@@ -6578,7 +6587,7 @@ class RankingByChoosingDigraph(Digraph):
             ibch = set(rankingByChoosing[i][0][1])
             iwch = set(rankingByChoosing[i][1][1])
             iach = iwch & ibch
-            ch = list(ibch) 
+            ch = list(ibch)
             ch.sort()
             print(' %s%s%s Best Choice %s (%.2f)' % (space,i+1,nstr,ch,rankingByChoosing[i][0][0]))
             if len(iach) > 0 and i < n-1:
@@ -6598,10 +6607,10 @@ class RankingByChoosingDigraph(Digraph):
             ibch = set(rankingByChoosing[n-i-1][0][1])
             iwch = set(rankingByChoosing[n-i-1][1][1])
             iach = iwch & ibch
-            ch = list(iwch) 
+            ch = list(iwch)
             ch.sort()
             if len(iach) > 0 and i > 0:
-                space = space[:-2] 
+                space = space[:-2]
                 print('  %s Ambiguous Choice %s' % (space,list(iach)))
             print(' %s%s%s Worst Choice %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))
         if Debug:
@@ -6617,7 +6626,7 @@ class RankingByChoosingDigraph(Digraph):
             print('Ordinal Correlation with outranking relation: %.3f (%.3f)'% (corr['correlation'],corr['determination']))
             corr = self.computeOrdinalCorrelation(self.originalRelation,MedianCut=True,Debug=Debug)
             print('Ordinal Correlation with median cut outranking relation: %.3f (%.3f)'% (corr['correlation'],corr['determination']))
-         
+
 
 # ------ Preorder construction
 
@@ -6647,7 +6656,7 @@ class Preorder(Digraph):
         try:
             self.evaluation = deepcopy(other.evaluation)
         except AttributeError:
-            pass    
+            pass
         self.actions = deepcopy(other.actions)
         self.order = len(self.actions)
         self.valuationdomain = deepcopy(other.valuationdomain)
@@ -6659,7 +6668,7 @@ class Preorder(Digraph):
             relation[x] = {}
             for y in actionsList:
                 relation[x][y] = None
-            
+
         if direction == 'best':
             rank = other.bestRanks()
         else:
@@ -6668,7 +6677,7 @@ class Preorder(Digraph):
             x = actionsList[i]
             for j in range(i, len(actionsList)):
                 y = actionsList[j]
-                if rank[x] < rank[y]:  
+                if rank[x] < rank[y]:
                     relation[x][y] = Max
                     relation[y][x] = Min
                 elif rank[x] > rank[y]:
@@ -6676,18 +6685,18 @@ class Preorder(Digraph):
                     relation[y][x] = Max
                 else:
                     relation[x][y] = Max
-                    relation[y][x] = Max              
-                    
+                    relation[y][x] = Max
+
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-                
+
 # ------- XOR construction
 
 class XORDigraph(Digraph):
     """
     Instantiates the XOR digraph of two bipolar
-    digraphs d1 and d2 of same order. 
+    digraphs d1 and d2 of same order.
     """
 
     def __init__(self,d1,d2,Debug = False):
@@ -6695,8 +6704,8 @@ class XORDigraph(Digraph):
         self.name = 'XORDigraph'
         if d1.order != d2.order:
             if Debug:
-                print("XORDigraph init ERROR:\n the input digraphs are not of the same order !") 
-            return None        
+                print("XORDigraph init ERROR:\n the input digraphs are not of the same order !")
+            return None
         self.order = d1.order
         self.actions = copy.deepcopy(d1.actions)
 
@@ -6706,7 +6715,7 @@ class XORDigraph(Digraph):
         Mind2 = d2.valuationdomain['min']
         Maxd2 = d2.valuationdomain['max']
         d1.recodeValuation(-1.0,1.0)
-        d2.recodeValuation(-1.0,1.0)        
+        d2.recodeValuation(-1.0,1.0)
         xorRelation = {}
         for x in actions:
             xorRelation[x] = {}
@@ -6727,26 +6736,26 @@ class XORDigraph(Digraph):
 class EquivalenceDigraph(Digraph):
     """
     Instantiates the logical equivalence digraph of two bipolar
-    digraphs d1 and d2 of same order. Returns None if d1 and d2 are of different order 
+    digraphs d1 and d2 of same order. Returns None if d1 and d2 are of different order
     """
 
     def __init__(self,d1,d2,Debug = False):
         from copy import deepcopy
         self.name = 'EquivDigraph'
         if d1.order != d2.order:
-            print("EquivDigraph init ERROR:\n the input digraphs are not of the same order !") 
+            print("EquivDigraph init ERROR:\n the input digraphs are not of the same order !")
             return None
 
         self.order = d1.order
         self.actions = deepcopy(d1.actions)
         actions = [x for x in self.actions]
-        
+
         Mind1 = d1.valuationdomain['min']
         Maxd1 = d1.valuationdomain['max']
         Mind2 = d2.valuationdomain['min']
         Maxd2 = d2.valuationdomain['max']
         d1.recodeValuation(-1.0,1.0)
-        d2.recodeValuation(-1.0,1.0)        
+        d2.recodeValuation(-1.0,1.0)
 
         equivRelation = {}
         for x in actions:
@@ -6760,10 +6769,10 @@ class EquivalenceDigraph(Digraph):
         self.valuationdomain = {'min': Decimal("-1.0"),
                                 'med': Decimal("0.0"),
                                 'max': Decimal("1.0")}
-        
+
         d1.recodeValuation(Mind1,Maxd1)
         d2.recodeValuation(Mind2,Maxd2)
-        
+
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
@@ -6826,7 +6835,7 @@ class RandomDigraph(Digraph):
 class RandomValuationDigraph(Digraph):
     """
     Parameters:
-        order = n > 0 (default 9); ndigits (default=2) 
+        order = n > 0 (default 9); ndigits (default=2)
 
     Specialization of the general Digraph class for generating
     temporary irreflexive random graphs
@@ -6834,7 +6843,7 @@ class RandomValuationDigraph(Digraph):
     """
 
     def __init__(self,order=9, ndigits=2,Normalized=False,hasIntegerValuation=False):
-        import random       
+        import random
         self.name = 'randomValuationDigraph'
         self.order = order
         actionlist = list(range(order+1))
@@ -6868,9 +6877,9 @@ class RandomValuationDigraph(Digraph):
                     if hasIntegerValuation:
                         relation[x][y] = (2*random.randrange(start=0,stop=precision)) - precision
                     elif Normalized:
-                        relation[x][y] = (Decimal(str(round(float(random.randrange(start=0,stop=precision))/precision,ndigits))) * Decimal('2.0')) - Decimal('1.0')                                                 
+                        relation[x][y] = (Decimal(str(round(float(random.randrange(start=0,stop=precision))/precision,ndigits))) * Decimal('2.0')) - Decimal('1.0')
                     else:
-                        relation[x][y] = Decimal(str(round(float(random.randrange(start=0,stop=precision))/precision,ndigits)))                        
+                        relation[x][y] = Decimal(str(round(float(random.randrange(start=0,stop=precision))/precision,ndigits)))
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -6888,7 +6897,7 @@ class RandomWeakTournament(Digraph):
     def __init__(self,order=10,ndigits=2,hasIntegerValuation=False,weaknessDegree=0.25,Comments=False):
         import random
         from decimal import Decimal
-        
+
         self.name = 'randomWeakTournament'
         self.order = order
         actionlist = list(range(order+1))
@@ -6917,7 +6926,7 @@ class RandomWeakTournament(Digraph):
         random.shuffle(actionsList)
         weaknessDegree = Decimal(str(weaknessDegree))
         forwardDegree = (Decimal('1.0') - weaknessDegree)/Decimal('2')
-        
+
         #print actionsList
         n = len(actionsList)
         for i in range(n):
@@ -6954,15 +6963,15 @@ class RandomWeakTournament(Digraph):
                         else:
                             randeval1 = (Min + u1)/dPrecision
                             randeval2 = u2/dPrecision
-                        
+
                     if hasIntegerValuation:
                         relation[actionsList[i]][actionsList[j]] = Decimal(str(randeval1))
                         relation[actionsList[j]][actionsList[i]] = Decimal(str(randeval2))
                     else:
                         relation[actionsList[i]][actionsList[j]] = Decimal(str(round(randeval1,ndigits)))
                         relation[actionsList[j]][actionsList[i]] = Decimal(str(round(randeval2,ndigits)))
-                    
-                                        
+
+
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -6970,8 +6979,8 @@ class RandomWeakTournament(Digraph):
         if Comments:
              print(self.order*(self.order-1), self.computeRelationalStructure())
 
-                        
-                            
+
+
 
 ## class RandomWeakTournamentOld(Digraph):
 ##     """
@@ -6988,7 +6997,7 @@ class RandomWeakTournament(Digraph):
 ##     def __init__(self,order=10,ndigits=2,valuationDomain=None,Comments=False):
 ##         import random
 ##         from decimal import Decimal
-        
+
 ##         self.name = 'randomWeakTournament'
 ##         self.order = order
 ##         actionlist = range(order+1)
@@ -7035,13 +7044,13 @@ class RandomWeakTournament(Digraph):
 ##                         randeval = self.valuationdomain['min'] + (Decimal(str(u))*valuationRange)/Decimal(str(precision))
 ##                         relation[actionsList[j]][actionsList[i]] = Decimal(str(round(randeval,ndigits)))
 ##                 #print i, j, relation[actionsList[i]][actionsList[j]], relation[actionsList[j]][actionsList[i]]
-                        
-                        
+
+
 ##         self.relation = relation
 ##         self.gamma = self.gammaSets()
 ##         self.notGamma = self.notGammaSets()
 ##         if Comments:
-##            print self.order*(self.order-1), self.computeRelationalStructure() 
+##            print self.order*(self.order-1), self.computeRelationalStructure()
 
 
 class RandomTournament(Digraph):
@@ -7057,7 +7066,7 @@ class RandomTournament(Digraph):
     def __init__(self,order=10,ndigits=2,isCrisp=True,valuationDomain=None):
         import random
         from decimal import Decimal
-        
+
         self.name = 'randomTournament'
         self.order = order
         actionlist = list(range(order+1))
@@ -7100,8 +7109,8 @@ class RandomTournament(Digraph):
                         randeval = self.valuationdomain['min'] + Decimal(str(u))/Decimal(str(precision))*valuationRange
                         valuation = Decimal(str(round(randeval,ndigits)))
                         relation[actionsList[i]][actionsList[j]] = valuation
-                        relation[actionsList[j]][actionsList[i]] = self.valuationdomain['max'] - valuation + self.valuationdomain['min'] 
-                        
+                        relation[actionsList[j]][actionsList[i]] = self.valuationdomain['max'] - valuation + self.valuationdomain['min']
+
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -7116,9 +7125,9 @@ class RandomFixedSizeDigraph(Digraph):
 
     """
     def __init__(self,order=7,size=14):
-        import random,copy     
+        import random,copy
         # check feasability
-        r = (order * order) - order        
+        r = (order * order) - order
         if size > r :
             print('Graph not feasable (1) !!')
         else:
@@ -7144,7 +7153,7 @@ class RandomFixedSizeDigraph(Digraph):
                         allarcs.append((x,y))
             for i in range(size):
                 arc = random.choice(allarcs)
-                relation[arc[0]][arc[1]] = Max		
+                relation[arc[0]][arc[1]] = Max
                 allarcs.remove(arc)
             self.relation = relation.copy()
             self.gamma = self.gammaSets()
@@ -7160,7 +7169,7 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
 
     """
     def __init__(self,order=7,degreeSequence=[3,3,2,2,1,1,0]):
-        import random,copy     
+        import random,copy
         # check feasability
         degree = max(degreeSequence)
         if degree >= order:
@@ -7190,7 +7199,7 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
                 for x in actions:
                     relation[x] = {}
                     for y in actions:
-                        relation[x][y] = Min       
+                        relation[x][y] = Min
                 random.seed()
                 # create a random pairing
                 feasable = 0
@@ -7228,7 +7237,7 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
                             break
                 if feasable == 0:
                     print('Graph not feasable (2) !!')
-                else: 
+                else:
                     for edge in edges:
                         relation[edge[0]][edge[1]] = Max
                         relation[edge[1]][edge[0]] = Max
@@ -7280,7 +7289,7 @@ class RandomTree(Digraph):
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-        
+
     def prufer_to_tree(self,a):
         tree = []
         T = list(range(0, len(a)+2))
@@ -7317,7 +7326,7 @@ class RandomRegularDigraph(Digraph):
 
     """
     def __init__(self,order=7,degree=2):
-        import random,copy     
+        import random,copy
         # check feasability
         r = (order * degree) % 2
         if degree >= order or r == 1:
@@ -7372,7 +7381,7 @@ class RandomRegularDigraph(Digraph):
                 for x in actions:
                     relation[x] = {}
                     for y in actions:
-                        relation[x][y] = self.valuationdomain['min']           
+                        relation[x][y] = self.valuationdomain['min']
                 for edge in edges:
                     relation[edge[0]][edge[1]] = Decimal('1.0')
                     relation[edge[1]][edge[0]] = Decimal('1.0')
@@ -7380,7 +7389,7 @@ class RandomRegularDigraph(Digraph):
                 self.gamma = self.gammaSets()
                 self.notGamma = self.notGammaSets()
                 self.componentslist = self.components()
-        
+
 class EmptyDigraph(Digraph):
     """
     Parameters:
@@ -7451,7 +7460,7 @@ class IndeterminateDigraph(Digraph):
                 relation[x][y] = Med
         self.relation = relation
         self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()        
+        self.notGamma = self.notGammaSets()
 
 class CirculantDigraph(Digraph):
     """
@@ -7468,7 +7477,7 @@ class CirculantDigraph(Digraph):
         | order = 7,
         | valuationdomain = {'min':-1.0,'max':1.0},
         | circulants = [-1,1].
-    
+
     """
     def __init__(self,order=7,valuationdomain = {'min':Decimal('-1.0'),'max':Decimal('1.0')},circulants = [-1,1]):
         import sys,array,copy
@@ -7623,7 +7632,7 @@ class GridDigraph(Digraph):
                         relation[x][y] = Max
                     else:
                         relation[x][y] = Min
-                elif gridNodes[x][0] == gridNodes[y][0]:        
+                elif gridNodes[x][0] == gridNodes[y][0]:
                     if gridNodes[x][1] == gridNodes[y][1]-1:
                         relation[x][y] = Max
                     elif gridNodes[x][1] == gridNodes[y][1]+1:
@@ -7632,7 +7641,7 @@ class GridDigraph(Digraph):
                         relation[x][y] = Min
                 else:
                     relation[x][y] = Min
-                    
+
         if hasRandomOrientation:
             import random
             random.seed()
@@ -7656,25 +7665,25 @@ class GridDigraph(Digraph):
                                 relation[y][x] = Max
                         else:
                             relation[x][y] = Min
-                    elif gridNodes[x][0] == gridNodes[y][0]:        
+                    elif gridNodes[x][0] == gridNodes[y][0]:
                         if gridNodes[x][1] == gridNodes[y][1]-1:
                             if random.random() > 0.5:
                                 relation[x][y] = Max
                                 relation[y][x] = Min
                             else:
-                                relation[x][y] = Min                            
+                                relation[x][y] = Min
                                 relation[y][x] = Max
                         elif gridNodes[x][1] == gridNodes[y][1]+1:
                             if random.random() > 0.5:
                                 relation[x][y] = Max
                                 relation[y][x] = Min
                             else:
-                                relation[x][y] = Min                            
+                                relation[x][y] = Min
                                 relation[y][x] = Max
                         else:
                             relation[x][y] = Min
                     else:
-                        relation[x][y] = Min   
+                        relation[x][y] = Min
 
         elif hasMedianSplitOrientation:
             for x in actions:
@@ -7687,37 +7696,37 @@ class GridDigraph(Digraph):
                                 relation[y][x] = Min
                             else:
                                 relation[x][y] = Min
-                                relation[y][x] = Max                                
+                                relation[y][x] = Max
                         elif gridNodes[x][0] == gridNodes[y][0]+1:
                             if gridNodes[y][1] >= gridNodes[x][0]:
                                 relation[x][y] = Min
                                 relation[y][x] = Max
                             else:
                                 relation[x][y] = Max
-                                relation[y][x] = Min                                
+                                relation[y][x] = Min
                         else:
                             relation[x][y] = Min
-                            
-                    elif gridNodes[x][0] == gridNodes[y][0]:        
+
+                    elif gridNodes[x][0] == gridNodes[y][0]:
                         if gridNodes[x][1] == gridNodes[y][1]-1:
                             if gridNodes[y][1] >= gridNodes[x][0]:
                                 relation[x][y] = Min
                                 relation[y][x] = Max
                             else:
                                 relation[x][y] = Max
-                                relation[y][x] = Min                                
+                                relation[y][x] = Min
                         elif gridNodes[x][1] == gridNodes[y][1]+1:
                             if gridNodes[y][1] >= gridNodes[x][0]:
                                 relation[x][y] = Min
                                 relation[y][x] = Max
                             else:
                                 relation[x][y] = Max
-                                relation[y][x] = Min                                
+                                relation[y][x] = Min
                         else:
                             relation[x][y] = Min
                     else:
                         relation[x][y] = Min
-                        
+
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -7751,7 +7760,7 @@ class CompleteDigraph(Digraph):
         self.actions = actions
         Max = Decimal(str((valuationdomain[1])))
         Min = Decimal(str((valuationdomain[0])))
-        Med = (Max + Min)/2        
+        Med = (Max + Min)/2
         self.valuationdomain = {'min':Min,'med':Med,'max':Max}
         relation = {}
         for x in actions:
@@ -7760,7 +7769,7 @@ class CompleteDigraph(Digraph):
                 if x == y:
                     relation[x][y] = Min
                 else:
-                    relation[x][y] = Max                    
+                    relation[x][y] = Max
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -7784,7 +7793,7 @@ class PolarisedDigraph(Digraph):
             digraph = RandomValuationDigraph()
         self.valuationdomain = digraph.valuationdomain
         Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']       
+        Med = self.valuationdomain['med']
         if level == None:
             level = Max - (Max - Med)*Decimal('0.5')
         self.name = 'cut_' + str(level)+ '_' + str(digraph.name)
@@ -7798,7 +7807,7 @@ class PolarisedDigraph(Digraph):
                                                           level=level,
                                                           KeepValues=KeepValues,
                                                           StrictCut=StrictCut)
-            
+
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -7808,7 +7817,7 @@ class PolarisedDigraph(Digraph):
         Parameters: relation and cut level.
         Flags: KeepValues (True), AlphaCut(False, unilateral cut), StrictCut (False)
         Renders the polarised relation.
-        
+
         """
         Debug = False
         if Debug:
@@ -7828,7 +7837,7 @@ class PolarisedDigraph(Digraph):
             print('Cut Level :', level, 'too high !!!')
             print(self.valuationdomain)
             print('Original relation not changed !!!')
-            return relationin          
+            return relationin
         else:
             relationout = {}
             for a in actions:
@@ -7860,7 +7869,7 @@ class PolarisedDigraph(Digraph):
                                 relationout[a][b] = Min
                         else:
                             relationout[a][b] = Med
-        return relationout               
+        return relationout
 
     def constructAlphaCutRelation(self,relationin, level, KeepValues=True,AlphaCut=False,StrictCut=False):
         """
@@ -7888,7 +7897,7 @@ class PolarisedDigraph(Digraph):
                         relationout[a][b] = Max
                     else:
                         relationout[a][b] = Min
-        return relationout               
+        return relationout
 
 
 class MedianExtendedDigraph(Digraph):
@@ -7904,7 +7913,7 @@ class MedianExtendedDigraph(Digraph):
             digraph = RandomValuationDigraph()
         self.valuationdomain = digraph.valuationdomain
         Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']       
+        Med = self.valuationdomain['med']
         if Level == None:
             Level = Max - (Max - Med)*0.5
         self.name = 'cut_' + str(Level)+ '_' + str(digraph.name)
@@ -7938,11 +7947,11 @@ class MedianExtendedDigraph(Digraph):
                         relationout[a][b] = Med
                     else:
                         relationout[a][b] = relationin[a][b]
-        return relationout               
+        return relationout
 
 class DualDigraph(Digraph):
     """
-    Instantiates the dual Digraph object of a given other Digraph instance 
+    Instantiates the dual Digraph object of a given other Digraph instance
 
     """
     def __init__(self,other):
@@ -7959,12 +7968,12 @@ class DualDigraph(Digraph):
         try:
             self.evaluation = deepcopy(other.evaluation)
         except AttributeError:
-            pass            
+            pass
         self.valuationdomain = deepcopy(other.valuationdomain)
         Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']       
+        Med = self.valuationdomain['med']
         self.actions = deepcopy(other.actions)
-        self.order = len(self.actions)        
+        self.order = len(self.actions)
         self.relation = self.constructRelation(other.relation)
         self.__class__ = other.__class__
         self.gamma = self.gammaSets()
@@ -7974,7 +7983,7 @@ class DualDigraph(Digraph):
         """
         Renders the dual relation with formula:
         relationOut[a][b] = Max - relationIn[a][b] + Min
-        where Max (resp. Min) equals valuation maximum (resp. minimum). 
+        where Max (resp. Min) equals valuation maximum (resp. minimum).
         """
         actions = self.actions
         Min = self.valuationdomain['min']
@@ -7985,7 +7994,7 @@ class DualDigraph(Digraph):
             relationOut[a] = {}
             for b in actions:
                 relationOut[a][b] = Max - relationIn[a][b] + Min
-        return relationOut               
+        return relationOut
 
 class PreferenceDigraph(Digraph):
     """
@@ -7994,7 +8003,7 @@ class PreferenceDigraph(Digraph):
     def __init__(self,digraph):
         self.valuationdomain = digraph.valuationdomain
         Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']       
+        Med = self.valuationdomain['med']
         self.name = 'dual_' + str(digraph.name)
         self.actions = digraph.actions
         self.relation = self.constructRelation(digraph.relation)
@@ -8016,16 +8025,16 @@ class PreferenceDigraph(Digraph):
             relationOut[a] = {}
             for b in actions:
                 relationOut[a][b] = (relationIn[a][b] - relationIn[b][a])/Decimal('2.0')
-        return relationOut               
+        return relationOut
 
 class AsymmetricPartialDigraph(Digraph):
     """
-    Renders the asymmetric part of a Digraph instance 
+    Renders the asymmetric part of a Digraph instance
     """
     def __init__(self,digraph):
         self.valuationdomain = digraph.valuationdomain
         Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']       
+        Med = self.valuationdomain['med']
         self.name = 'asymmetric_' + str(digraph.name)
         self.actions = digraph.actions
         self.relation = self.constructRelation(digraph.relation)
@@ -8056,16 +8065,16 @@ class AsymmetricPartialDigraph(Digraph):
                     ## relationOut[a][b] = min(relationIn[a][b],Max-relationIn[b][a]+Min)
                 else:
                     relationOut[a][b] = Med
-        return relationOut               
+        return relationOut
 
 class AsymmetricDigraph(Digraph):
     """
-    Renders the asymmetric of a Digraph instance 
+    Renders the asymmetric of a Digraph instance
     """
     def __init__(self,digraph):
         self.valuationdomain = digraph.valuationdomain
         Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']       
+        Med = self.valuationdomain['med']
         self.name = 'asymmetric_' + str(digraph.name)
         self.actions = digraph.actions
         self.relation = self.constructRelation(digraph.relation)
@@ -8100,16 +8109,16 @@ class AsymmetricDigraph(Digraph):
                 ##     ## relationOut[a][b] = min(relationIn[a][b],Max-relationIn[b][a]+Min)
                 ## else:
                 ##     relationOut[a][b] = Med
-        return relationOut               
+        return relationOut
 
 class SymmetricPartialDigraph(Digraph):
     """
-    Renders the symmetric part of a Digraph instance 
+    Renders the symmetric part of a Digraph instance
     """
     def __init__(self,digraph):
         self.valuationdomain = digraph.valuationdomain
         Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']       
+        Med = self.valuationdomain['med']
         self.name = 'symmetric_' + str(digraph.name)
         self.actions = digraph.actions
         self.relation = self.constructRelation(digraph.relation)
@@ -8143,7 +8152,7 @@ class SymmetricPartialDigraph(Digraph):
                     ## relationOut[a][b] = min(relationIn[a][b],relationIn[b][a])
                 else:
                     relationOut[a][b] = Min
-        return relationOut               
+        return relationOut
 
 class kChoicesDigraph(Digraph):
     """
@@ -8163,7 +8172,7 @@ class kChoicesDigraph(Digraph):
 
         elif isinstance(digraph,(Digraph,OutrankingDigraph,RandomOutrankingDigraph)):
             self.name = str(digraph.name)
-        
+
         self.valuationdomain = digraph.valuationdomain.copy()
         dactions = [x for x in digraph.actions]
         drelation = copy.deepcopy(digraph.relation)
@@ -8179,7 +8188,7 @@ class kChoicesDigraph(Digraph):
         self.relation = self.computeRelation(drelation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
- 
+
 
     def computeRelation(self,relation):
         """
@@ -8196,9 +8205,9 @@ class kChoicesDigraph(Digraph):
                     for y in (ych-xch):
                         krelation[xch][ych] = max(krelation[xch][ych],relation[x][y])
         return krelation
-        
+
 #########
-    
+
 class WeakCocaDigraph(Digraph):
     """
     Parameters:
@@ -8234,13 +8243,13 @@ class WeakCocaDigraph(Digraph):
             self.actions = locals()['actionset']
             self.valuationdomain = locals()['valuationdomain']
             self.relation = locals()['relation']
-           
+
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         self.weakGamma = self.weakGammaSets()
         self.weakCircuits = set()
-        self.closureWeakChordlessOddCircuits(comment=silent)   
+        self.closureWeakChordlessOddCircuits(comment=silent)
 
     def closureWeakChordlessOddCircuits(self,comment=None):
         """
@@ -8252,7 +8261,7 @@ class WeakCocaDigraph(Digraph):
         else:
             silent = not(comment)
         #print 'closuresilent=', silent
-        while newCircuits != set():            
+        while newCircuits != set():
             coc = set(self.weakCircuits)
             self.weakChordlessOddCircuits(comment=silent)
             self.addWeakCircuits(comment=silent)
@@ -8299,7 +8308,7 @@ class WeakCocaDigraph(Digraph):
                         relxy = max(relxy,relation[x][y])
                         relxcn = relation[x]
                         relxcn[cn] = relxy
-                        relation[x] = relxcn				
+                        relation[x] = relxcn
             relcycle = {}
             for x in actions:
                 if x in cycle:
@@ -8369,7 +8378,7 @@ class CoceDigraph(Digraph):
             self.actions = locals()['actionset']
             self.valuationdomain = locals()['valuationdomain']
             self.relation = locals()['relation']
-           
+
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -8381,7 +8390,7 @@ class CoceDigraph(Digraph):
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
             self.weakGamma = self.weakGammaSets()
-            
+
 
     def iterateCocElimination(self,Comments=True,Debug=False):
         """
@@ -8406,7 +8415,7 @@ class CoceDigraph(Digraph):
             if Comments:
                 i += 1
                 print('--> Iteration %d' % (i))
-                t0 = time()               
+                t0 = time()
             if qualmaj < gcd.valuationdomain['max']:
                 pg = PolarisedDigraph(gcd,qualmaj,
                                       StrictCut=True,
@@ -8435,6 +8444,7 @@ class CocaDigraph(Digraph):
     """
     def __init__(self,digraph=None,Cpp=False,Piping=False,Comments=False):
         import random,sys,array,copy
+        from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
         ## if comment == None:
         ##     silent = True
         ## else:
@@ -8458,12 +8468,12 @@ class CocaDigraph(Digraph):
             self.actions = locals()['actionset']
             self.valuationdomain = locals()['valuationdomain']
             self.relation = locals()['relation']
-           
+
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         self.weakGamma = self.weakGammaSets()
-        self.closureChordlessOddCircuits(Cpp=Cpp,Piping=Piping,Comments=Comments)   
+        self.closureChordlessOddCircuits(Cpp=Cpp,Piping=Piping,Comments=Comments)
 
     def closureChordlessOddCircuits(self,Cpp=False,Piping=False,Comments=False):
         """
@@ -8498,7 +8508,7 @@ class CocaDigraph(Digraph):
                 actions[x] = {'name':x}
         else:
             actions = self.actions
-        
+
         #ListActions = [frozenset([x]) for x in actions]
         circuitsList = self.circuitsList
         if Comments:
@@ -8534,7 +8544,7 @@ class CocaDigraph(Digraph):
                         relxy = max(relxy,relation[x][y])
                         relxcn = relation[x]
                         relxcn[cycle] = relxy
-                        relation[x] = relxcn				
+                        relation[x] = relxcn
             relcycle = {}
             for x in actions:
                 if x in cycle:
@@ -8562,7 +8572,7 @@ class CocaDigraph(Digraph):
                 print('  No circuits added !')
             else:
                 print('  ',new,' circuit(s) added!')
-                
+
     def showCircuits(self):
         """
         show methods for chordless odd circuits in CocaGraph
@@ -8571,7 +8581,7 @@ class CocaDigraph(Digraph):
         for (circList,circSet) in self.circuitsList:
             deg = self.circuitMinCredibility(circSet)
             print(circList, ', credibility :', deg)
-        print('Coca graph of order %d with %d odd chordles circuits.' % (len(self.actions), len(self.circuitsList))) 
+        print('Coca graph of order %d with %d odd chordles circuits.' % (len(self.actions), len(self.circuitsList)))
         #print len(aself.circuitsList),' cirduits
 
     def showComponents(self):
@@ -8625,14 +8635,14 @@ class StrongComponentsCollapsedDigraph(Digraph):
            self.order = len(self.actions)
            self.gamma = self.gammaSets()
            self.notGamma = self.notGammaSets()
-    
+
     def showComponents(self):
         print('short', '\t', 'content')
         for x in self.actions:
             print(self.actions[x]['shortName'], '\t', self.actions[x]['name'])
-#-------------------------------------------------------      
-                
-                
+#-------------------------------------------------------
+
+
 # ------------ XML encoded stored Digraph instances
 
 class XMLDigraph24(Digraph):
@@ -8651,7 +8661,7 @@ class XMLDigraph24(Digraph):
         saxParser.parse(fo)
         self.name = xmlDigraph.name
         self.category = xmlDigraph.category
-        self.subcategory = xmlDigraph.subcategory  
+        self.subcategory = xmlDigraph.subcategory
         self.actions = xmlDigraph.actions
         self.valuationdomain = xmlDigraph.valuationdomain
         Min = xmlDigraph.valuationdomain['min']
@@ -8680,7 +8690,7 @@ class XMLDigraph(Digraph):
     xml.etree (for Python 2.5+).
 
     Param:
-        fileName (without the extension .xml). 
+        fileName (without the extension .xml).
     """
 
     def __init__(self,fileName='testsaveXML'):
@@ -8719,7 +8729,7 @@ class XMCDADigraph(Digraph):
     xml.etree (for Python 2.5+).
 
     Param:
-        fileName (without the extension .xmcda). 
+        fileName (without the extension .xmcda).
     """
 
     def __init__(self,fileName='temp'):
@@ -8749,7 +8759,7 @@ class XMCDADigraph(Digraph):
         try:
             self.reference = description['comment']
         except:
-            self.reference = 'XMCDA 1.0 Digraph input method.'        
+            self.reference = 'XMCDA 1.0 Digraph input method.'
         Min = Decimal(XMCDA.find('relationOnAlternatives').find('valuationDomain').find('minimum').getchildren().pop().text)
         Max = Decimal(XMCDA.find('relationOnAlternatives').find('valuationDomain').find('maximum').getchildren().pop().text)
         Med = Min + ((Max - Min)/Decimal('2.0'))
@@ -8763,7 +8773,7 @@ class XMCDADigraph(Digraph):
             id = alternative.attrib['id']
             actions[id] = {}
             for elem in [x for x in alternative.find('description').getchildren()]:
-                actions[id][elem.tag] = elem.text    
+                actions[id][elem.tag] = elem.text
         self.actions = actions
         relation = {}
         try:
@@ -8783,7 +8793,7 @@ class XMCDADigraph(Digraph):
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-        
+
     def showAll(self):
         try:
             if self.category == 'outranking':
@@ -8795,7 +8805,7 @@ class XMCDADigraph(Digraph):
                 Digraph.showAll(self)
         except:
             Digraph.showAll(self)
-            
+
 class XMCDA2Digraph(Digraph):
     """
     Specialization of the general Digraph class for reading
@@ -8803,7 +8813,7 @@ class XMCDA2Digraph(Digraph):
     xml.etree (for Python 2.5+).
 
     Param:
-        fileName (without the extension .xmcda). 
+        fileName (without the extension .xmcda).
     """
 
     def __init__(self,fileName='temp'):
@@ -8822,7 +8832,7 @@ class XMCDA2Digraph(Digraph):
                     fo = open(fileNameExt,'r')
                 except:
                     print("Error: file %s  not found" % (fileNameExt))
-            
+
         print("file %s is being read:" % (fileNameExt))
         XMCDA = ElementTree.parse(fo).getroot()
         try:
@@ -8841,7 +8851,7 @@ class XMCDA2Digraph(Digraph):
         try:
             self.reference = description['comment']
         except:
-            self.reference = 'XMCDA 1.0 Digraph input method.'        
+            self.reference = 'XMCDA 1.0 Digraph input method.'
 
         Min = Decimal(XMCDA.find('alternativesComparisons').find('valuation').find('quantitative').find('minimum').getchildren().pop().text)
         Max = Decimal(XMCDA.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').getchildren().pop().text)
@@ -8852,17 +8862,17 @@ class XMCDA2Digraph(Digraph):
         valuationdomain['max'] = Max
         self.valuationdomain = valuationdomain
 
-        
+
         actions = {}
         for alternative in XMCDA.find('alternatives').findall('alternative'):
             id = alternative.attrib['id']
             actions[id] = {}
             actions[id]['name'] = alternative.attrib['name']
             for elem in [x for x in alternative.find('description').getchildren()]:
-                actions[id][elem.tag] = elem.text    
+                actions[id][elem.tag] = elem.text
         self.actions = actions
 
-        
+
         relation = {}
         try:
             if XMCDA.find('alternativesComparisons').attribute['mcdaConcept'] == 'outrankingDigraph':
@@ -8881,7 +8891,7 @@ class XMCDA2Digraph(Digraph):
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-        
+
     def showAll(self):
         try:
             if self.category == 'outranking':
@@ -8896,7 +8906,7 @@ class XMCDA2Digraph(Digraph):
 
 ###  replace the old outrankingDigraphs
 from outrankingDigraphs import *
-            
+
 #############################################
 
 #----------test Digraph class ----------------
@@ -8905,7 +8915,7 @@ if __name__ == "__main__":
 
     print('****************************************************')
     print('* Python digraphs module                           *')
-    print('* $Revision: 1.697 $                               *')                   
+    print('* $Revision: 1.697 $                               *')
     print('* Copyright (C) 2006-2007 University of Luxembourg *')
     print('* The module comes with ABSOLUTELY NO WARRANTY     *')
     print('* to the extent permitted by the applicable law.   *')
@@ -8937,9 +8947,9 @@ if __name__ == "__main__":
             print('  option = -rt n m : means an outranking digraph from a random')
             print('                     performance tableau input with n actions and m criteria')
             print('                     (default n = 10, m = 7).')
-            sys.exit(1)        
+            sys.exit(1)
         else:
-            file = sys.argv[1] 
+            file = sys.argv[1]
             g = Digraph(file)
     elif narg == 3:
         if sys.argv[1] == '-r':
@@ -8963,7 +8973,7 @@ if __name__ == "__main__":
             nActions = int(sys.argv[2])
             mCriteria = int(sys.argv[3])
             t = RandomPerformanceTableau(numberOfActions=nActions,numberOfCriteria=mCriteria)
-            g = BipolarOutrankingDigraph(t)      
+            g = BipolarOutrankingDigraph(t)
     else:
         print('usage: digraphs.py [[-t|rt|v|av] <filename> | -r [n]] | -rt [[n] [m]]')
         print('  <filename> of valid python digraph (without .py extension)')
@@ -8975,26 +8985,63 @@ if __name__ == "__main__":
         print('  option = -rt n m : means an outranking digraph from a random')
         print('                     performance tableau input with n actions and m criteria')
         print('                     (default n = 10, m = 7).')
-        sys.exit(1)        
+        sys.exit(1)
     if noTest:
         print('*------ Results -------"')
         g.showRelationTable()
         g.showAll()
         g.showStatistics()
-        
+
     else:
         print('*-------- Testing classes and methods -------')
         from time import time
+        from operator import itemgetter
+        t = RandomCBPerformanceTableau(numberOfActions=15)
+        t.save('test')
+        t = PerformanceTableau('test')
+        g = BipolarOutrankingDigraph(t)
+        ## g = RandomValuationDigraph()
+        ## print(g.computePrudentBestChoiceRecommendation(CoDual=False,Comments=True))
 
-        #t = RandomCBPerformanceTableau(numberOfActions=15)
-        #g = BipolarOutrankingDigraph(t)
-        g = RandomValuationDigraph()
-        print(g.computePrudentBestChoiceRecommendation(CoDual=False,Comments=True))
 
         ## coceg = CoceDigraph(g,Comments=True)
         ## #coceg.showStatistics()
         ## coceg.computeChordlessCircuits()
-        ## #g.showRubisBestChoiceRecommendation()
+
+        ## g.showRubisBestChoiceRecommendation(Comments=True)
+        cog = CocaDigraph(g,Comments=True)
+        gcd = CoDualDigraph(cog)
+        gcd.computeGoodChoices()
+        gcd.computeBadChoices()
+        gcd.goodChoices.sort(key=itemgetter(7),reverse=True)
+        gcd.badChoices.sort(key=itemgetter(7),reverse=True)
+        print('==>> good choices')
+        for ch in gcd.goodChoices:
+            print(ch[5])
+            print(gcd.averageCoveringIndex(ch[5],direction="out"))
+            print(gcd.averageCoveringIndex(ch[5],direction='in'))
+        print('==>> bad choices')
+        for ch in gcd.badChoices:
+            print(ch[5])
+            print(gcd.averageCoveringIndex(ch[5],direction="in"))
+            print(gcd.averageCoveringIndex(ch[5],direction='out'))
+
+        cog = CoceDigraph(g,Comments=True)
+        gcd = CoDualDigraph(cog)
+        gcd.computeGoodChoices()
+        gcd.computeBadChoices()
+        gcd.goodChoices.sort(key=itemgetter(7),reverse=True)
+        gcd.badChoices.sort(key=itemgetter(7),reverse=True)
+        print('==>> good choices')
+        for ch in gcd.goodChoices:
+            print(ch[5])
+            print(gcd.averageCoveringIndex(ch[5],direction="out"))
+            print(gcd.averageCoveringIndex(ch[5],direction='in'))
+        print('==>> bad choices')
+        for ch in gcd.badChoices:
+            print(ch[5])
+            print(gcd.averageCoveringIndex(ch[5],direction="in"))
+            print(gcd.averageCoveringIndex(ch[5],direction='out'))
         ## #coceg.showRubisBestChoiceRecommendation()
 
         ## equivg = EquivalenceDigraph(g,coceg)
@@ -9028,9 +9075,9 @@ if __name__ == "__main__":
         ## tcd1 = CoDualDigraph(t1)
         ## tcd2 = CoDualDigraph(t2)
         ## tcd3 = CoDualDigraph(t3)
-        ## print tcd1.computeRelationalStructure()        
-        ## print tcd2.computeRelationalStructure()        
-        ## print tcd3.computeRelationalStructure()        
+        ## print tcd1.computeRelationalStructure()
+        ## print tcd2.computeRelationalStructure()
+        ## print tcd3.computeRelationalStructure()
         ## print 1,2,tcd1.computeBipolarCorrelation(tcd2)
         ## print 1,3,tcd1.computeBipolarCorrelation(tcd3)
         ## print 2,3,tcd2.computeBipolarCorrelation(tcd3)
@@ -9080,21 +9127,21 @@ if __name__ == "__main__":
         ## d13 = (-c13['correlation'] + Decimal('1'))/Decimal('2')
         ## d23 = (-c23['correlation'] + Decimal('1'))/Decimal('2')
         ## print d12,d23,d13
-        
-        
+
+
         print('*------------------*')
         print('If you see this line all tests were passed successfully :-)')
         print('Enjoy !')
-        
+
     print('*************************************')
     print('* R.B. July 2012                    *')
-    print('* $Revision: 1.697 $                *')                   
+    print('* $Revision: 1.697 $                *')
     print('*************************************')
 
 #############################
 # Log record for changes:
 # $Log: digraphs.py,v $
-# 
+#
 # Revision 1.696  2013/01/01 14:10:53  bisi
 # added computePrudentBestChoiceRecommendation() method to the Digraph class
 #
