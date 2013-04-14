@@ -8165,7 +8165,7 @@ class kChoicesDigraph(Digraph):
     """
     def __init__(self,digraph=None,k=3):
         import random,sys,array,copy
-
+        from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
         if digraph == None:
             digraph = RandomValuationDigraph()
             self.name = str(digraph.name)
@@ -8219,6 +8219,8 @@ class WeakCocaDigraph(Digraph):
     """
     def __init__(self,digraph=None,comment=None):
         import random,sys,array,copy
+        from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
+
         if comment == None:
             silent = True
         else:
@@ -8355,6 +8357,8 @@ class CoceDigraph(Digraph):
     def __init__(self,digraph=None,Cpp=False,Piping=False,Comments=False,Debug=False):
         import random,sys,array
         from copy import deepcopy
+        from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
+
         ## if comment == None:
         ##     silent = True
         ## else:
@@ -8905,13 +8909,16 @@ class XMCDA2Digraph(Digraph):
             Digraph.showAll(self)
 
 ###  replace the old outrankingDigraphs
-from outrankingDigraphs import *
+#from outrankingDigraphs import *
 
 #############################################
 
 #----------test Digraph class ----------------
 if __name__ == "__main__":
     import sys,array
+    from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
+    from votingDigraphs import CondorcetDigraph 
+
 
     print('****************************************************')
     print('* Python digraphs module                           *')
