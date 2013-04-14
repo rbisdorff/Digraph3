@@ -19,7 +19,7 @@ This Technical Manual describes the Python-3 implementation of generic resources
 
 Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://charles-sanders-peirce.uni.lu/bisdorff/>, University of Luxembourg.
 
-The Python following modules make extensivelyusage of the Decimal module and therefore work best with Python-3.3+.
+The following Python3 modules make extensively usage of the Decimal module and therefore work best with Python-3.3+.
 
 The basic idea of these Python modules is to make easy python interactive sessions or write short Python scripts for computing all kind of results from a bipolar valued outranking digraph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices etc. 
 
@@ -28,16 +28,15 @@ The Python development of these computing ressources offers the advantage of an 
 The Digraph source code is split into five interdependant modules, where the ``digraphs`` module is the master source.
 
 :ref:`digraphs-label`
-     main part of the source code with the top ``Digraph`` and the old Python-2 version (-Rev:1.630) ``BipolarOutrankingDigraph`` classes; 
-
+     main part of the source code with the generic ``Digraph`` class; 
 :ref:`graphs-label`
-     specialization for undirected graphs with brigde to the main ``Digraph`` module ressources;
+     specialization for undirected graphs with brigde to the ``Digraph`` module ressources;
 :ref:`outrankingDigraphs-label`
-     New version ``BipolarOutrankingDigraph`` classes; 
+     New Python3 versioned ``BipolarOutrankingDigraph`` classes; 
 :ref:`perfTabs-label` 
      everything needed for handling Rubis Performance Tableaux;
 :ref:`votingDigraphs-label` 
-     additional classes and methods for computing with election results;
+     additional classes and methods for computing election results;
 :ref:`sortingDigraphs-label`
      additional tools for solving sorting problems;
 :ref:`linearOrders-label` 
