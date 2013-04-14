@@ -20,6 +20,7 @@
 #
 #######################
 from digraphs import *
+from outrankingDigraphs import *
 from sortingDigraphs import *
 
 class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
@@ -29,7 +30,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
     Besides a valid PerformanceTableau instance we require a sorting profile,
     i.e.:
-    
+
          | a dictionary <categories> of categories with 'name', 'order' and 'comment'
          | a dictionary <criteriaCategoryLimits> with double entry:
 
@@ -38,7 +39,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                respecting the order of the categories.
 
     Template of required data::
-         
+
         self.categories = {'c01': { 'name': 'week','order': 0,
                                     'comment': 'lowest category',},
                            'c02': { 'name': 'ok','order': 1,
@@ -84,7 +85,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         .. note::
 
             We generally require an OutrankingDigraph instance g and a filename
-            where categories and a profile my be read from. If no such filename is given, then a default profile with five, equally spaced, categories is used on each criteria. By default lower closed limts of categories are supposed to be used in the sorting.  
+            where categories and a profile my be read from. If no such filename is given, then a default profile with five, equally spaced, categories is used on each criteria. By default lower closed limts of categories are supposed to be used in the sorting.
         """
 
         import copy
@@ -107,7 +108,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
         # keep a copy of the original actions set before adding the profiles
         self.actionsOrig = copy.deepcopy(self.actions)
-        
+
         # actionsOrig = self.actionsOrig
 
         #  input the profiles
@@ -116,10 +117,10 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             self.criteria = copy.deepcopy(perfTab.criteria)
             self.convertWeightFloatToDecimal()
             self.evaluation = copy.deepcopy(perfTab.evaluation)
-            self.convertEvaluationFloatToDecimal()           
+            self.convertEvaluationFloatToDecimal()
             if isinstance(argProfile,str): # input from stored instantiation
                 fileName = argProfile
-                fileNameExt = fileName + '.py'    
+                fileNameExt = fileName + '.py'
                 exec(compile(open(fileNameExt).read(), fileNameExt, 'exec'))
                 self.name = fileName
                 self.categories = copy.deepcopy(locals()['categories'])
@@ -135,10 +136,10 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             self.criteria = copy.deepcopy(normPerfTab.criteria)
             self.convertWeightFloatToDecimal()
             self.evaluation = copy.deepcopy(normPerfTab.evaluation)
-            self.convertEvaluationFloatToDecimal()           
+            self.convertEvaluationFloatToDecimal()
 
             # supposing all criteria scales between 0.0 and 100.0
-            
+
             lowValue = 0.0
             highValue = 100.00
             # with preference direction = max
@@ -147,7 +148,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             for i in range(0,100+k,k):
                 categories[str(i)] = {'name':str(i), 'order':i}
             self.categories = copy.deepcopy(categories)
-            
+
             criteriaCategoryLimits = {}
             criteriaCategoryLimits['lowerClosed'] = lowerClosed
             for g in self.criteria:
@@ -159,11 +160,11 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                         }
             self.criteriaCategoryLimits = copy.deepcopy(criteriaCategoryLimits)
 
-        # set the category limits type (lowerClosed = True is default) 
+        # set the category limits type (lowerClosed = True is default)
         self.criteriaCategoryLimits['lowerClosed'] = lowerClosed
         #print 'lowerClosed', lowerClosed
-        
-        # add the catogory limits to the actions set     
+
+        # add the catogory limits to the actions set
         self.profiles = {'min':{},'max':{}}
         self.profileLimits = set()
         for c in list(self.categories.keys()):
@@ -194,9 +195,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
                     self.evaluation[g][cMinKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['minimum']))
                     self.evaluation[g][cMaxKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['maximum']))
-                    
-                    
-        
+
+
+
         self.convertEvaluationFloatToDecimal()
 
         # construct outranking relation
@@ -204,7 +205,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             g = RobustOutrankingDigraph(self)
             self.valuationdomain = copy.deepcopy(g.valuationdomain)
             self.relation = copy.deepcopy(g.relation)
-        else:       
+        else:
             Min = Decimal('%.4f' % minValuation)
             Max = Decimal('%.4f' % maxValuation)
             Med = (Max + Min)/Decimal('2.0')
@@ -238,13 +239,13 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 for y in self.profileLimits:
                     for x in self.actions:
                         self.relation[x][y] = Med
-                
-            
+
+
         # init general digraph Data
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-        
+
     def htmlCriteriaCategoryLimits(self,tableTitle='Category limits'):
         """
         Renders category minimum and maximum limits for each criterion
@@ -253,7 +254,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         s = ''
         s += '<h1>%s</h1>' % tableTitle
         s += '<table border="1">'
-        
+
         criterionKeys = [x for x in self.criteria]
         categoryKeys = [x for x in self.categories]
         s += '<tr><th>Criteria</th>'
@@ -262,7 +263,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         s += '</tr>'
 
         for g in criterionKeys:
-            s += '<tr><th>%s</th></tr>' % (g)   
+            s += '<tr><th>%s</th></tr>' % (g)
             s += '<tr><th>Lower limit</th>'
             for c in categoryKeys:
                 #print '\t', c, (self.criteriaCategoryLimits[g][c]['minimum'],self.criteriaCategoryLimits[g][c]['maximum'])
@@ -276,7 +277,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
         s += '</table>'
         return s
- 
+
 
     def showCriteriaCategoryLimits(self):
         """
@@ -295,7 +296,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     print('\t%s [%s; %s[' % (c, self.criteriaCategoryLimits[g][c]['minimum'],self.criteriaCategoryLimits[g][c]['maximum']))
                 else:
                     print('\t%s ]%s; %s]' % (c, self.criteriaCategoryLimits[g][c]['minimum'],self.criteriaCategoryLimits[g][c]['maximum']))
-                    
+
     def getActionsKeys(self):
         """
         extract normal actions keys()
@@ -330,7 +331,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
-        
+
         actions = self.getActionsKeys()
         categories = self.orderedCategoryKeys()
 
@@ -340,7 +341,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             lowerClosed = True
 
         sorting = {}
-        
+
         for x in actions:
             sorting[x] = {}
             for c in categories:
@@ -354,12 +355,12 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     lowLimit = Max - self.relation[cMinKey][x] + Min
                     notHighLimit = self.relation[cMaxKey][x]
                 if Comments:
-                    print('%s in %s: low = %.2f, high = %.2f' % (x, c,self.relation[x][cMinKey],self.relation[x][cMaxKey]), end=' ') 
+                    print('%s in %s: low = %.2f, high = %.2f' % (x, c,self.relation[x][cMinKey],self.relation[x][cMaxKey]), end=' ')
                 categoryMembership = min(lowLimit,notHighLimit)
                 sorting[x][c]['lowLimit'] = lowLimit
                 sorting[x][c]['notHighLimit'] = notHighLimit
                 sorting[x][c]['categoryMembership'] = categoryMembership
-                
+
                 if Comments:
                     print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
 
@@ -375,7 +376,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         actions = self.getActionsKeys()
         categories = self.orderedCategoryKeys()
         Med = self.valuationdomain['med']
-        
+
         sorts = {}
         for c in categories:
             sorts[c] = set()
@@ -400,7 +401,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     break
             if overMin and overMax:
                 #print '\t %s: low = %.2f, high = %.2f' % (c,self.relation[x][cMinKey],self.relation[x][cMaxKey])
-                sorts[c].add(x)      
+                sorts[c].add(x)
         if Comments:
             print('Sorting results')
             for c in self.orderedCategoryKeys():
@@ -468,7 +469,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 cat.append('&lt;')
             else:
                 cat.append('<')
-                
+
             for i in range(len(cat)-1):
                 if lowerClosed:
                     print('[%s - %s[:' % (cat[i],cat[i+1]), end=' ')
@@ -484,7 +485,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                         html += '<tr><td bgcolor="#FFF79B">[%s - %s[</td>' % (cat[i],cat[i+1])
                         catString = str(categoryContent[cat[i]])
                         html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
-               
+
         if isReturningHTML:
             html += '</table>'
             return html
@@ -513,7 +514,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
         # write description
         fo.write('<projectReference id="%s" name="%s">\n' % (fileName,nameExt))
-        fo.write('<title>%s</title>\n' % (str(title)) )  
+        fo.write('<title>%s</title>\n' % (str(title)) )
         fo.write('<author>%s</author>\n' % (user) )
         fo.write('<version>%s</version>\n' % (version) )
         fo.write('<comment>%s</comment>\n' % (str(comment)) )
@@ -528,7 +529,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         fo.write('<categories mcdaConcept="%s">\n' % ('categories'))
         fo.write('<description>\n')
         fo.write('<subTitle>Sorting categories.</subTitle>\n')
-        fo.write('</description>\n')                  
+        fo.write('</description>\n')
         for i in range(na):
             try:
                 categoryName = str(categories[categoriesList[i]]['name'])
@@ -542,8 +543,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             except:
                 fo.write('None')
             fo.write('</comment>\n')
-            fo.write('</description>\n')                  
-            fo.write('<type>real</type>\n')  
+            fo.write('</description>\n')
+            fo.write('<type>real</type>\n')
             fo.write('<active>true</active>\n')
             fo.write('</category>\n')
         fo.write('</categories>\n')
@@ -557,7 +558,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         fo.write('<criteriaCategoryLimits mcdaConcept="categoryProfiles">\n')
         fo.write('<description>\n')
         fo.write('<subTitle>Sorting profiles.</subTitle>\n')
-        fo.write('</description>\n')       
+        fo.write('</description>\n')
         for g in criteriaList:
             for c in categoriesList:
                 try:
@@ -570,7 +571,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     categoryName = c
 
                 fo.write('<criterionCategoryLimits id="lim_%s_%s" mcdaConcept="%s">\n' % (criterionName,categoryName,'criterionCategoryLimits' ) )
-                fo.write('<description>\n')                
+                fo.write('<description>\n')
                 fo.write('<comment>%s</comment>\n' % ('No comment') )
                 fo.write('<version>%s</version>\n' % ('Rubis k-sorting') )
                 fo.write('</description>\n')
@@ -578,14 +579,14 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 fo.write('<categoryID>%s</categoryID>\n' % (categoryName) )
                 fo.write('<lowLimit><real>%.2f</real></lowLimit>\n' % (self.criteriaCategoryLimits[g][c]['minimum']) )
                 fo.write('<highLimit><real>%.2f</real></highLimit>\n' % (self.criteriaCategoryLimits[g][c]['maximum']) )
-                
+
                 fo.write('</criterionCategoryLimits>\n')
         fo.write('</criteriaCategoryLimits>\n')
         #########################
         fo.write('</xmcda:XMCDA>\n')
         if isStringIO:
             problemText = fo.getvalue()
-            fo.close            
+            fo.close
             return problemText
         else:
             fo.close()
@@ -599,7 +600,7 @@ if __name__ == "__main__":
     print("""
     ****************************************************
     * Python sortingDigraphs module                    *
-    * depends on BipolarOutrankingDigraph and          * 
+    * depends on BipolarOutrankingDigraph and          *
     * $Revision$                                *
     * Copyright (C) 2010 Raymond Bisdorff              *
     * The module comes with ABSOLUTELY NO WARRANTY     *
@@ -611,21 +612,21 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
 
-             
+
     t = RandomCBPerformanceTableau()
     t.save('test')
     s = SortingDigraph(t,lowerClosed=True)
     s.showSorting(Reverse=True)
     s1 = SortingDigraph(t,lowerClosed=False)
     s1.showSorting(Reverse=True)
-    
+
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
-        
+
     print('*************************************')
     print('* R.B. december 2010                *')
-    print('* $Revision$                     *')                   
+    print('* $Revision$                     *')
     print('*************************************')
 
 #############################
