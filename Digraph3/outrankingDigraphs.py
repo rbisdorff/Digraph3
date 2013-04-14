@@ -25,7 +25,6 @@ __version__ = "$Revision: 1.43 $"
 # $Source: /home/cvsroot/Digraph/outrankingDigraphs.py,v $
 
 from digraphs import *
-from outrankingDigraphs import *
 
 #-------------------------------------------
         
