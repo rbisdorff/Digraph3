@@ -69,21 +69,21 @@
 <span id="introduction-label"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This Technical Manual describes the Python-3 implementation of generic resources for computing kernels and other qualified choices in bipolar-valued outranking digraphs. This computing ressource is useful in the filed of algorithmic decision sciences problems</p>
 <p>Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff &lt;<a class="reference external" href="http://charles-sanders-peirce.uni.lu/bisdorff/">http://charles-sanders-peirce.uni.lu/bisdorff/</a>&gt;, University of Luxembourg.</p>
-<p>The Python following modules make extensivelyusage of the Decimal module and therefore work best with Python-3.3+.</p>
+<p>The following Python3 modules make extensively usage of the Decimal module and therefore work best with Python-3.3+.</p>
 <p>The basic idea of these Python modules is to make easy python interactive sessions or write short Python scripts for computing all kind of results from a bipolar valued outranking digraph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices etc.</p>
 <p>The Python development of these computing ressources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.</p>
 <p>The Digraph source code is split into five interdependant modules, where the <tt class="docutils literal"><span class="pre">digraphs</span></tt> module is the master source.</p>
 <dl class="docutils">
 <dt><a class="reference internal" href="#digraphs-label"><em>digraphs module</em></a></dt>
-<dd>main part of the source code with the top <tt class="docutils literal"><span class="pre">Digraph</span></tt> and the old Python-2 version (-Rev:1.630) <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt> classes;</dd>
+<dd>main part of the source code with the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class;</dd>
 <dt><a class="reference internal" href="#graphs-label"><em>graphs module</em></a></dt>
-<dd>specialization for undirected graphs with brigde to the main <tt class="docutils literal"><span class="pre">Digraph</span></tt> module ressources;</dd>
+<dd>specialization for undirected graphs with brigde to the <tt class="docutils literal"><span class="pre">Digraph</span></tt> module ressources;</dd>
 <dt><a class="reference internal" href="#outrankingdigraphs-label"><em>outrankingDigraphs module</em></a></dt>
-<dd>New version <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt> classes;</dd>
+<dd>New Python3 versioned <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt> classes;</dd>
 <dt><a class="reference internal" href="#perftabs-label"><em>perfTabs module</em></a></dt>
 <dd>everything needed for handling Rubis Performance Tableaux;</dd>
 <dt><a class="reference internal" href="#votingdigraphs-label"><em>votingDigraphs module</em></a></dt>
-<dd>additional classes and methods for computing with election results;</dd>
+<dd>additional classes and methods for computing election results;</dd>
 <dt><a class="reference internal" href="#sortingdigraphs-label"><em>sortingDigraphs module</em></a></dt>
 <dd>additional tools for solving sorting problems;</dd>
 <dt><a class="reference internal" href="#linearorders-label"><em>linearOrders module</em></a></dt>
