@@ -8,7 +8,8 @@
 ########################
 
 from digraphs import *
-from perfTabs import *
+#from perfTabs import *
+from outrankingDigraphs import *
 from linearOrders import *
 from decimal import Decimal
 

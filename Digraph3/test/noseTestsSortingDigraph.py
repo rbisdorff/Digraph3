@@ -9,6 +9,7 @@
 
 from digraphs import *
 
+
 ############# test sortingDigraphs ####################
 from sortingDigraphs import *
 
