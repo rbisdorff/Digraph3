@@ -526,6 +526,8 @@ class Digraph(object):
                 print('Polarised determinateness = %.3f' % pg.computeDeterminateness())
             if qualmaj > gcd.valuationdomain['med']:
                 self.rankingByChoosing = pg.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
+            elif i==1:
+                self.rankingByChoosing = pg.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
             if Comments:
                 self.showRankingByChoosing()
                 print('Execution time:', time()-t0, 'sec.')
