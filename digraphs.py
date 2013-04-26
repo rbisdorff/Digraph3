@@ -5172,7 +5172,7 @@ class Digraph(object):
         if 'dompreKernels' not in dir(temp) or Recompute:
             temp.computePreKernels()
         for ker in temp.dompreKernels:
-            choice = [y for y in ker]
+            choice = [str(y) for y in ker]
             choice.sort()
             degi = temp.intstab(ker)
             dega = temp.absorb(ker)
@@ -5244,7 +5244,7 @@ class Digraph(object):
         if 'abspreKernels' not in dir(temp) or Recompute:
             temp.computePreKernels()
         for ker in temp.abspreKernels:
-            choice = [y for y in ker]
+            choice = [str(y) for y in ker]
             choice.sort()
             degi = temp.intstab(ker)
             dega = temp.absorb(ker)

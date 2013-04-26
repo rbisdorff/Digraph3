@@ -8,6 +8,7 @@
 ########################
 
 from digraphs import *
+from outrankingDigraphs import *
 from decimal import Decimal
 
 def testPerformanceTableau():
