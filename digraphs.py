@@ -524,7 +524,8 @@ class Digraph(object):
                 pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
             if Comments:
                 print('Polarised determinateness = %.3f' % pg.computeDeterminateness())
-            self.rankingByChoosing = pg.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
+            if qualmaj > gcd.valuationdomain['med']:
+                self.rankingByChoosing = pg.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
             if Comments:
                 self.showRankingByChoosing()
                 print('Execution time:', time()-t0, 'sec.')
@@ -535,8 +536,7 @@ class Digraph(object):
                 ## print 'Ordinal (Kendall) correlation with median cut outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination'])
             qualmaj0 = qualmaj
             qualmaj = pg.minimalValuationLevelForCircuitsElimination(Debug=Debug,Comments=Comments)
-        if self.rankingByChoosing == None:
-            self.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
+        
         return self.rankingByChoosing
 
     def computePrudentBestChoiceRecommendation(self,CoDual=False,Comments=False,Debug=False):
