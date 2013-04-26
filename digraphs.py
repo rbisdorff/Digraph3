@@ -495,10 +495,10 @@ class Digraph(object):
         self.rankingByChoosing = {'CoDual': CoDual, 'result': rankingByChoosing}
         return {'CoDual': CoDual, 'result': rankingByChoosing}
 
-    def iterateRankingByChoosing(self,CoDual=False,Comments=True,Debug=False):
+    def iterateRankingByChoosing(self,Odd=False,CoDual=False,Comments=True,Debug=False):
         """
         Renders a ranking by choosing result when progressively eliminating
-        all chordless odd circuits with rising valuation cut levels.
+        all chordless (odd only) circuits with rising valuation cut levels.
         """
         from copy import deepcopy
         from time import time
@@ -508,10 +508,10 @@ class Digraph(object):
 
         qualmaj0 = gcd.valuationdomain['med']
         if Comments:
-            print('Ranking by choosing and rejecting after progressive cut elimination of chordless odd circuits')
+            print('Ranking by choosing and rejecting after progressive cut elimination of chordless (odd = %s) circuits' % (str(Odd)) )
             print('Initial determinateness of the outranking relation: %.3f' % self.computeDeterminateness())
             i = 0
-        qualmaj = gcd.minimalValuationLevelForCircuitsElimination(Debug=Debug,Comments=Comments)
+        qualmaj = gcd.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments)
         self.rankingByChoosing = None
         while qualmaj > qualmaj0:
             if Comments:
@@ -4341,7 +4341,7 @@ class Digraph(object):
         except:
             print('No circuits computed. Run computeChordlessCircuits()!')
 
-    def minimalValuationLevelForCircuitsElimination(self,Debug=False,Comments=False):
+    def minimalValuationLevelForCircuitsElimination(self,Odd=True,Debug=False,Comments=False):
         """
         renders the minimal valuation level <lambda> that eliminates all
         self.circuitsList stored odd chordless circuits from self.
@@ -4351,20 +4351,20 @@ class Digraph(object):
             The <lambda> level polarised may still contain newly appearing chordless odd circuits !
 
         """
-        try:
-            circuitslist = self.circuitslist
-        except:
-            self.computeChordlessCircuits(Odd=True,Comments=Debug)
-            circuitsList = self.circuitsList
+        # try:
+        #     circuitslist = self.circuitslist
+        # except:
+        self.computeChordlessCircuits(Odd=Odd,Comments=Debug)
+        circuitsList = self.circuitsList
         Med = self.valuationdomain['med']
         qualmaj = Med
         oddCircuitsList = [cc for cc in circuitsList if (len(cc[0])%2 == 1)]
-        if Debug:
+        if Comments:
             print('Number of chordless circuits: ', len(circuitsList))
             print(circuitsList)
             print('Number of chordless odd circuits: ', len(oddCircuitsList))
             print(oddCircuitsList)
-        for cc in oddCircuitsList:
+        for cc in circuitsList:
             circuit = cc[0]
             if Debug:
                 print(circuit)
@@ -4386,7 +4386,10 @@ class Digraph(object):
                 print('==>>', circuit, ccqualmaj)
             qualmaj = max(qualmaj,ccqualmaj)
         if Debug or Comments:
-            print('Number of chordless odd circuits: ', len(oddCircuitsList))
+            # if Odd:
+            #     print('Number of chordless odd circuits: ', len(oddCircuitsList))
+            # else:
+            #     print('Number of chordless circuits: ', len(circuitsList))
             print('Minimal cutting level for eliminating them: %.3f' % qualmaj)
         return qualmaj
 
@@ -8917,7 +8920,7 @@ class XMCDA2Digraph(Digraph):
 if __name__ == "__main__":
     import sys,array
     from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
-    from votingDigraphs import CondorcetDigraph 
+    from votingDigraphs import CondorcetDigraph
 
 
     print('****************************************************')
@@ -9007,6 +9010,7 @@ if __name__ == "__main__":
         t.save('test')
         t = PerformanceTableau('test')
         g = BipolarOutrankingDigraph(t)
+        g.iterateRankingByChoosing(Odd=False,Debug=True,CoDual=True)
         ## g = RandomValuationDigraph()
         ## print(g.computePrudentBestChoiceRecommendation(CoDual=False,Comments=True))
 
@@ -9016,39 +9020,39 @@ if __name__ == "__main__":
         ## coceg.computeChordlessCircuits()
 
         ## g.showRubisBestChoiceRecommendation(Comments=True)
-        cog = CocaDigraph(g,Comments=True)
-        gcd = CoDualDigraph(cog)
-        gcd.computeGoodChoices()
-        gcd.computeBadChoices()
-        gcd.goodChoices.sort(key=itemgetter(7),reverse=True)
-        gcd.badChoices.sort(key=itemgetter(7),reverse=True)
-        print('==>> good choices')
-        for ch in gcd.goodChoices:
-            print(ch[5])
-            print(gcd.averageCoveringIndex(ch[5],direction="out"))
-            print(gcd.averageCoveringIndex(ch[5],direction='in'))
-        print('==>> bad choices')
-        for ch in gcd.badChoices:
-            print(ch[5])
-            print(gcd.averageCoveringIndex(ch[5],direction="in"))
-            print(gcd.averageCoveringIndex(ch[5],direction='out'))
+        # cog = CocaDigraph(g,Comments=True)
+        # gcd = CoDualDigraph(cog)
+        # gcd.computeGoodChoices()
+        # gcd.computeBadChoices()
+        # gcd.goodChoices.sort(key=itemgetter(7),reverse=True)
+        # gcd.badChoices.sort(key=itemgetter(7),reverse=True)
+        # print('==>> good choices')
+        # for ch in gcd.goodChoices:
+        #     print(ch[5])
+        #     print(gcd.averageCoveringIndex(ch[5],direction="out"))
+        #     print(gcd.averageCoveringIndex(ch[5],direction='in'))
+        # print('==>> bad choices')
+        # for ch in gcd.badChoices:
+        #     print(ch[5])
+        #     print(gcd.averageCoveringIndex(ch[5],direction="in"))
+        #     print(gcd.averageCoveringIndex(ch[5],direction='out'))
 
-        cog = CoceDigraph(g,Comments=True)
-        gcd = CoDualDigraph(cog)
-        gcd.computeGoodChoices()
-        gcd.computeBadChoices()
-        gcd.goodChoices.sort(key=itemgetter(7),reverse=True)
-        gcd.badChoices.sort(key=itemgetter(7),reverse=True)
-        print('==>> good choices')
-        for ch in gcd.goodChoices:
-            print(ch[5])
-            print(gcd.averageCoveringIndex(ch[5],direction="out"))
-            print(gcd.averageCoveringIndex(ch[5],direction='in'))
-        print('==>> bad choices')
-        for ch in gcd.badChoices:
-            print(ch[5])
-            print(gcd.averageCoveringIndex(ch[5],direction="in"))
-            print(gcd.averageCoveringIndex(ch[5],direction='out'))
+        # cog = CoceDigraph(g,Comments=True)
+        # gcd = CoDualDigraph(cog)
+        # gcd.computeGoodChoices()
+        # gcd.computeBadChoices()
+        # gcd.goodChoices.sort(key=itemgetter(7),reverse=True)
+        # gcd.badChoices.sort(key=itemgetter(7),reverse=True)
+        # print('==>> good choices')
+        # for ch in gcd.goodChoices:
+        #     print(ch[5])
+        #     print(gcd.averageCoveringIndex(ch[5],direction="out"))
+        #     print(gcd.averageCoveringIndex(ch[5],direction='in'))
+        # print('==>> bad choices')
+        # for ch in gcd.badChoices:
+        #     print(ch[5])
+        #     print(gcd.averageCoveringIndex(ch[5],direction="in"))
+        #     print(gcd.averageCoveringIndex(ch[5],direction='out'))
         ## #coceg.showRubisBestChoiceRecommendation()
 
         ## equivg = EquivalenceDigraph(g,coceg)
