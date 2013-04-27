@@ -506,7 +506,7 @@ class Digraph(object):
             Comments=True
         gcd = deepcopy(self)
 
-        qualmaj0 = gcd.valuationdomain['med']
+        qualmaj0 = gcd.valuationdomain['min']
         if Comments:
             print('Ranking by choosing and rejecting after progressive cut elimination of chordless (odd = %s) circuits' % (str(Odd)) )
             print('Initial determinateness of the outranking relation: %.3f' % self.computeDeterminateness())
