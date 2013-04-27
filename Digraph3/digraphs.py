@@ -556,7 +556,7 @@ class Digraph(object):
             newLevel = pg.minimalValuationLevelForCircuitsElimination(Debug=Debug,Comments=Comments)
             qualmaj = min(maxLevel,newLevel)
         if i==0:
-            self.rankingByChoosing = pcd.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
+            self.rankingByChoosing = gcd.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
         return self.rankingByChoosing
 
     def computePrudentBestChoiceRecommendation(self,CoDual=False,Comments=False,Debug=False):
