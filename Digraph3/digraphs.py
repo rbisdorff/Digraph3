@@ -507,7 +507,10 @@ class Digraph(object):
         gcd = deepcopy(self)
 
         qualmaj0 = gcd.valuationdomain['min']
-        maxLevel = (gcd.valuationdomain['max']-gcd.valuationdomain['med'])/Decimal('2.0')
+        if Limited:
+            maxLevel = (gcd.valuationdomain['med'] + gcd.valuationdomain['max']-gcd.valuationdomain['med'])/Decimal('2.0')
+        else:
+            maxLevel = gcd.valuationdomain['max']
         if Comments:
             print('Ranking by choosing and rejecting after progressive cut elimination of chordless (odd = %s) circuits' % (str(Odd)) )
             print('Initial determinateness of the outranking relation: %.3f' % self.computeDeterminateness())
