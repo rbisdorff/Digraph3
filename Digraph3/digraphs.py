@@ -514,8 +514,8 @@ class Digraph(object):
         qualmaj = gcd.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments)
         self.rankingByChoosing = None
         while qualmaj > qualmaj0:
+            i += 1
             if Comments:
-                i += 1
                 print('--> Iteration %d' % (i))
                 t0 = time()
             if qualmaj < gcd.valuationdomain['max']:
