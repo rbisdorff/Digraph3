@@ -540,7 +540,7 @@ class Digraph(object):
                 ## corr = self.computeOrdinalCorrelation(pgRankingByChoosingRelation,MedianCut=True,Debug=Debug)
                 ## print 'Ordinal (Kendall) correlation with median cut outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination'])
             qualmaj0 = qualmaj
-            newlevel = pg.minimalValuationLevelForCircuitsElimination(Debug=Debug,Comments=Comments)
+            newLevel = pg.minimalValuationLevelForCircuitsElimination(Debug=Debug,Comments=Comments)
             qualmaj = min(maxLevel,newLevel)
         
         return self.rankingByChoosing
