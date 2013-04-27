@@ -495,7 +495,7 @@ class Digraph(object):
         self.rankingByChoosing = {'CoDual': CoDual, 'result': rankingByChoosing}
         return {'CoDual': CoDual, 'result': rankingByChoosing}
 
-    def iterateRankingByChoosing(self,Odd=False,CoDual=False,Comments=True,Debug=False):
+    def iterateRankingByChoosing(self,Odd=False,CoDual=False,Comments=True,Debug=False,Limited=False):
         """
         Renders a ranking by choosing result when progressively eliminating
         all chordless (odd only) circuits with rising valuation cut levels.
@@ -507,6 +507,7 @@ class Digraph(object):
         gcd = deepcopy(self)
 
         qualmaj0 = gcd.valuationdomain['min']
+        maxLevel = (gcd.valuationdomain['max']-gcd.valuationdomain['med'])/Decimal('2.0')
         if Comments:
             print('Ranking by choosing and rejecting after progressive cut elimination of chordless (odd = %s) circuits' % (str(Odd)) )
             print('Initial determinateness of the outranking relation: %.3f' % self.computeDeterminateness())
@@ -539,7 +540,8 @@ class Digraph(object):
                 ## corr = self.computeOrdinalCorrelation(pgRankingByChoosingRelation,MedianCut=True,Debug=Debug)
                 ## print 'Ordinal (Kendall) correlation with median cut outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination'])
             qualmaj0 = qualmaj
-            qualmaj = pg.minimalValuationLevelForCircuitsElimination(Debug=Debug,Comments=Comments)
+            newlevel = pg.minimalValuationLevelForCircuitsElimination(Debug=Debug,Comments=Comments)
+            qualmaj = min(maxLevel,newLevel)
         
         return self.rankingByChoosing
 
