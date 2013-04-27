@@ -508,12 +508,14 @@ class Digraph(object):
 
         qualmaj0 = gcd.valuationdomain['min']
         if Limited:
-            maxLevel = (gcd.valuationdomain['med'] + gcd.valuationdomain['max']-gcd.valuationdomain['med'])/Decimal('2.0')
+            maxLevel = (gcd.valuationdomain['med'] + gcd.valuationdomain['max']-gcd.valuationdomain['med'])/Decimal('4.0')
         else:
             maxLevel = gcd.valuationdomain['max']
         if Comments:
             print('Ranking by choosing and rejecting after progressive cut elimination of chordless (odd = %s) circuits' % (str(Odd)) )
+            print('Evaluation domain: [ %.3f ; %.3f ]' % (gcd.valuationdomain['min'],gcd.valuationdomain['max']))
             print('Initial determinateness of the outranking relation: %.3f' % self.computeDeterminateness())
+            print('Maximum level of circuits elimination: %.3f' % (maxLevel))
         i = 0
         qualmaj = gcd.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments)
         self.rankingByChoosing = None
@@ -522,10 +524,17 @@ class Digraph(object):
             if Comments:
                 print('--> Iteration %d' % (i))
                 t0 = time()
-            if qualmaj < gcd.valuationdomain['max']:
-                pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
+            if Limited:
+                if qualmaj < maxLevel:
+                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
+                else:
+                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
             else:
-                pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
+                if qualmaj < gcd.valuationdomain['max']:
+                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
+                else:
+                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
+                
             if Comments:
                 print('Polarised determinateness = %.3f' % pg.computeDeterminateness())
             if qualmaj > gcd.valuationdomain['med']:
