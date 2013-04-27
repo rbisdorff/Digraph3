@@ -510,7 +510,7 @@ class Digraph(object):
         if Comments:
             print('Ranking by choosing and rejecting after progressive cut elimination of chordless (odd = %s) circuits' % (str(Odd)) )
             print('Initial determinateness of the outranking relation: %.3f' % self.computeDeterminateness())
-            i = 0
+        i = 0
         qualmaj = gcd.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments)
         self.rankingByChoosing = None
         while qualmaj > qualmaj0:
