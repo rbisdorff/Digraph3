@@ -506,9 +506,9 @@ class Digraph(object):
             Comments=True
         gcd = deepcopy(self)
 
-        qualmaj0 = gcd.valuationdomain['min']
+        qualmaj0 = gcd.valuationdomain['med']
         if Limited:
-            maxLevel = (gcd.valuationdomain['med'] + gcd.valuationdomain['max']-gcd.valuationdomain['med'])/Decimal('4.0')
+            maxLevel = gcd.valuationdomain['med'] + (gcd.valuationdomain['max']-gcd.valuationdomain['med'])/Decimal('4.0')
         else:
             maxLevel = gcd.valuationdomain['max']
         if Comments:
@@ -525,13 +525,14 @@ class Digraph(object):
                 print('--> Iteration %d' % (i))
                 t0 = time()
             if Limited:
-                if qualmaj < maxLevel:
-                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
+                if qualmaj <= maxLevel:
+                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
                 else:
+                    qualmaj = qualmaj0
                     pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
             else:
                 if qualmaj < gcd.valuationdomain['max']:
-                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
+                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
                 else:
                     pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
                 
@@ -554,7 +555,8 @@ class Digraph(object):
             qualmaj0 = qualmaj
             newLevel = pg.minimalValuationLevelForCircuitsElimination(Debug=Debug,Comments=Comments)
             qualmaj = min(maxLevel,newLevel)
-        
+        if i==0:
+            self.rankingByChoosing = pcd.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
         return self.rankingByChoosing
 
     def computePrudentBestChoiceRecommendation(self,CoDual=False,Comments=False,Debug=False):
