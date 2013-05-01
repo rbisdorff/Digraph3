@@ -495,10 +495,14 @@ class Digraph(object):
         self.rankingByChoosing = {'CoDual': CoDual, 'result': rankingByChoosing}
         return {'CoDual': CoDual, 'result': rankingByChoosing}
 
-    def iterateRankingByChoosing(self,Odd=False,CoDual=False,Comments=True,Debug=False,Limited=False):
+    def iterateRankingByChoosing(self,Odd=False,CoDual=False,Comments=True,Debug=False,Limited=None):
         """
         Renders a ranking by choosing result when progressively eliminating
         all chordless (odd only) circuits with rising valuation cut levels.
+
+        Parameters
+            CoDual = False (default)/True
+            Limited = proportion (in [0,1]) * (max - med) valuationdomain
         """
         from copy import deepcopy
         from time import time
@@ -507,8 +511,8 @@ class Digraph(object):
         gcd = deepcopy(self)
 
         qualmaj0 = gcd.valuationdomain['med']
-        if Limited:
-            maxLevel = gcd.valuationdomain['med'] + (gcd.valuationdomain['max']-gcd.valuationdomain['med'])/Decimal('4.0')
+        if Limited != None:
+            maxLevel = gcd.valuationdomain['med'] + (gcd.valuationdomain['max']-gcd.valuationdomain['med'])*Decimal(str(Limited))
         else:
             maxLevel = gcd.valuationdomain['max']
         if Comments:
@@ -554,8 +558,8 @@ class Digraph(object):
                 ## print 'Ordinal (Kendall) correlation with median cut outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination'])
             qualmaj0 = qualmaj
             newLevel = pg.minimalValuationLevelForCircuitsElimination(Debug=Debug,Comments=Comments)
-            if Limited:
-                qualmaj = min(maxLevel,newLevel)
+            if Limited != None:
+                qualmaj = min(Limited,newLevel)
             else:
                 qualmaj = newLevel
             if Comments:
