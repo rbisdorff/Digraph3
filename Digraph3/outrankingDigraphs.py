@@ -6726,7 +6726,7 @@ if __name__ == "__main__":
 
     print()
     print('*Iterating ranking by choosing after chordless odd circuits elimination*')
-    g.iterateRankingByChoosing(Comments=True,Debug=False)
+    g.iterateRankingByChoosing(Comments=True,Debug=False,Limited=True)
     print(g.computePrudentBestChoiceRecommendation())
     
 #############################
