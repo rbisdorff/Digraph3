@@ -574,7 +574,7 @@ class Digraph(object):
         all odd chordless circuits with a minimal cut of the valuation.
         """
         from copy import deepcopy
-        self.rankingByChoosing = self.iterateRankingByChoosing(CoDual=CoDual,Comments=Comments,Debug=Debug)
+        self.rankingByChoosing = self.iterateRankingByChoosing(CoDual=CoDual,Comments=Comments,Debug=Debug,Limited=0.1)
         if Comments:
             self.showRankingByChoosing()
         try:
