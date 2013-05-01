@@ -526,13 +526,13 @@ class Digraph(object):
                 t0 = time()
             if Limited:
                 if qualmaj <= maxLevel:
-                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
+                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
                 else:
                     qualmaj = qualmaj0
-                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
+                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
             else:
                 if qualmaj < gcd.valuationdomain['max']:
-                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
+                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
                 else:
                     pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
                 
@@ -554,7 +554,12 @@ class Digraph(object):
                 ## print 'Ordinal (Kendall) correlation with median cut outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination'])
             qualmaj0 = qualmaj
             newLevel = pg.minimalValuationLevelForCircuitsElimination(Debug=Debug,Comments=Comments)
-            qualmaj = min(maxLevel,newLevel)
+            if Limited:
+                qualmaj = min(maxLevel,newLevel)
+            else:
+                qualmaj = newLevel
+            if Comments:
+                print(i,qualmaj0,newLevel,qualmaj)
         if i==0:
             self.rankingByChoosing = gcd.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
         return self.rankingByChoosing
