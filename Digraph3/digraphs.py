@@ -559,7 +559,7 @@ class Digraph(object):
             qualmaj0 = qualmaj
             newLevel = pg.minimalValuationLevelForCircuitsElimination(Debug=Debug,Comments=Comments)
             if Limited != None:
-                qualmaj = min(Limited,newLevel)
+                qualmaj = min(maxLevel,newLevel)
             else:
                 qualmaj = newLevel
             if Comments:
