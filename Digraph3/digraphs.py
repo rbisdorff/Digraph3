@@ -530,15 +530,15 @@ class Digraph(object):
                 t0 = time()
             if Limited:
                 if qualmaj <= maxLevel:
-                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
+                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
                 else:
                     qualmaj = qualmaj0
-                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
+                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
             else:
                 if qualmaj < gcd.valuationdomain['max']:
-                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
-                else:
                     pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
+                else:
+                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
                 
             if Comments:
                 print('Polarised determinateness = %.3f' % pg.computeDeterminateness())
