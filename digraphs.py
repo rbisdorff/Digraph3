@@ -530,16 +530,17 @@ class Digraph(object):
                 t0 = time()
             if Limited:
                 if qualmaj <= maxLevel:
-                    if qualmaj == gcd.valuationdomain['max']:
-                        pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
-                    else:
+                    if qualmaj < gcd.valuationdomain['max']:
+                        # strict cut only possible if < max
                         pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
+                    else:
+                        pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
                 else:
                     qualmaj = qualmaj0
-                    if qualmaj == gcd.valuationdomain['max']:
-                        pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
-                    else:
+                    if qualmaj < gcd.valuationdomain['max']:
                         pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
+                    else:
+                        pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
             else:
                 if qualmaj < gcd.valuationdomain['max']:
                     pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
