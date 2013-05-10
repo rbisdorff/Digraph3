@@ -576,7 +576,7 @@ class Digraph(object):
             self.rankingByChoosing['PolarizationLevel'] = qualmaj
         return self.rankingByChoosing
 
-    def optimalRankingByChoosing(self,Odd=False,CoDual=False,Comments=True,Debug=False,Limited=None):
+    def optimalRankingByChoosing(self,Odd=True,CoDual=False,Comments=False,Debug=False,Limited=None):
         """
         Renders a ranking by choosing result when progressively eliminating
         all chordless (odd only) circuits with rising valuation cut levels.
@@ -646,23 +646,8 @@ class Digraph(object):
             rankings.append((corr['correlation'],qualmaj,rkg))
             if Comments:
                 print(rankings)
-                        
-            # if qualmaj > gcd.valuationdomain['med']:
-            #     self.rankingByChoosing = pg.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
-            #     self.rankingByChoosing['PolarizationLevel'] = qualmaj
-            # elif i==1:
-            #     self.rankingByChoosing = pg.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
-            #     self.rankingByChoosing['PolarizationLevel'] = qualmaj
-            # if Comments:
-            #     self.showRankingByChoosing()
-            #     print('Execution time:', time()-t0, 'sec.')
-            #     ## pgRankingByChoosingRelation = self.computeRankingByChoosingRelation()
-            #     ## corr = self.computeOrdinalCorrelation(pgRankingByChoosingRelation)
-            #     ## print 'Ordinal (Kendall) correlation with outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination'])
-            #     ## corr = self.computeOrdinalCorrelation(pgRankingByChoosingRelation,MedianCut=True,Debug=Debug)
-            #     ## print 'Ordinal (Kendall) correlation with median cut outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination'])
             qualmaj0 = qualmaj
-            newLevel = pg.minimalValuationLevelForCircuitsElimination(Debug=Debug,Comments=Comments)
+            newLevel = pg.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments)
             if Limited != None:
                 qualmaj = min(maxLevel,newLevel)
             else:
@@ -670,13 +655,11 @@ class Digraph(object):
             if Comments:
                 print(i,qualmaj0,newLevel,qualmaj)
         if i==0:
-            
             self.rankingByChoosing = gcd.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
             self.rankingByChoosing['PolarizationLevel'] = qualmaj
         rankings.sort(reverse=True)
         self.rankingByChoosing = rankings[0][2]
         self.rankingByChoosing['PolarizationLevel'] =  rankings[0][1]
-        
         return rankings[0]
 
         
@@ -686,7 +669,7 @@ class Digraph(object):
         all odd chordless circuits with a minimal cut of the valuation.
         """
         from copy import deepcopy
-        self.rankingByChoosing = self.iterateRankingByChoosing(CoDual=CoDual,Comments=Comments,Debug=Debug,Limited=0.1)
+        self.optimalRankingByChoosing(CoDual=CoDual,Comments=Comments,Debug=Debug,Limited=0.1)
         if Comments:
             self.showRankingByChoosing()
         try:
@@ -9157,6 +9140,7 @@ if __name__ == "__main__":
         rankings = g.optimalRankingByChoosing(Odd=False,Debug=False,CoDual=True)
         print(rankings)
         g.showRankingByChoosing()
+        print('Prudent first choice: ',g.computePrudentBestChoiceRecommendation(Comments=True))
         
         #g.showRankingByChoosing()
         
