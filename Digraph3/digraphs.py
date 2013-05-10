@@ -576,6 +576,110 @@ class Digraph(object):
             self.rankingByChoosing['PolarizationLevel'] = qualmaj
         return self.rankingByChoosing
 
+    def optimalRankingByChoosing(self,Odd=False,CoDual=False,Comments=True,Debug=False,Limited=None):
+        """
+        Renders a ranking by choosing result when progressively eliminating
+        all chordless (odd only) circuits with rising valuation cut levels.
+
+        Parameters:
+        
+            * CoDual = False (default)/True
+            * Limited = proportion (in [0,1]) * (max - med) of valuationdomain
+
+        Returns the highest correlated rankingByChoosing with self or 
+        codual of self, depending on the CoDual flagg.
+        """
+        from copy import deepcopy
+        from time import time
+        if Debug:
+            Comments=True
+        g = deepcopy(self)
+        if CoDual:
+            gcd = ~(-g)
+        else:
+            gcd = deepcopy(g)
+
+        qualmaj0 = gcd.valuationdomain['min']
+        if Limited != None:
+            maxLevel = gcd.valuationdomain['med'] + (gcd.valuationdomain['max']-gcd.valuationdomain['med'])*Decimal(str(Limited))
+        else:
+            maxLevel = gcd.valuationdomain['max']
+        if Comments:
+            print('Ranking by choosing and rejecting after progressive cut elimination of chordless (odd = %s) circuits' % (str(Odd)) )
+            print('Evaluation domain: [ %.3f ; %.3f ]' % (gcd.valuationdomain['min'],gcd.valuationdomain['max']))
+            print('Initial determinateness of the outranking relation: %.3f' % self.computeDeterminateness())
+            print('Maximum level of circuits elimination: %.3f' % (maxLevel))
+        i = 0
+        #qualmaj = gcd.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments)
+        qualmaj = gcd.valuationdomain['med']
+        self.rankingByChoosing = None
+        rankings = []
+        while qualmaj > qualmaj0:
+            i += 1
+            if Comments:
+                print('--> Iteration %d' % (i))
+                t0 = time()
+            if Limited:
+                if qualmaj <= maxLevel:
+                    if qualmaj < gcd.valuationdomain['max']:
+                        # strict cut only possible if < max
+                        pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
+                    else:
+                        pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
+                else:
+                    qualmaj = qualmaj0
+                    if qualmaj < gcd.valuationdomain['max']:
+                        pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
+                    else:
+                        pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
+            else:
+                if qualmaj < gcd.valuationdomain['max']:
+                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
+                else:
+                    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
+                
+            if Comments:
+                print('Polarised determinateness = %.3f' % pg.computeDeterminateness())
+            rkg = pg.computeRankingByChoosing(CoDual=False,Debug=Debug)
+            pgr = pg.computeRankingByChoosingRelation()
+            corr = g.computeOrdinalCorrelation(pgr)
+            rankings.append((corr['correlation'],qualmaj,rkg))
+            if Comments:
+                print(rankings)
+                        
+            # if qualmaj > gcd.valuationdomain['med']:
+            #     self.rankingByChoosing = pg.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
+            #     self.rankingByChoosing['PolarizationLevel'] = qualmaj
+            # elif i==1:
+            #     self.rankingByChoosing = pg.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
+            #     self.rankingByChoosing['PolarizationLevel'] = qualmaj
+            # if Comments:
+            #     self.showRankingByChoosing()
+            #     print('Execution time:', time()-t0, 'sec.')
+            #     ## pgRankingByChoosingRelation = self.computeRankingByChoosingRelation()
+            #     ## corr = self.computeOrdinalCorrelation(pgRankingByChoosingRelation)
+            #     ## print 'Ordinal (Kendall) correlation with outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination'])
+            #     ## corr = self.computeOrdinalCorrelation(pgRankingByChoosingRelation,MedianCut=True,Debug=Debug)
+            #     ## print 'Ordinal (Kendall) correlation with median cut outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination'])
+            qualmaj0 = qualmaj
+            newLevel = pg.minimalValuationLevelForCircuitsElimination(Debug=Debug,Comments=Comments)
+            if Limited != None:
+                qualmaj = min(maxLevel,newLevel)
+            else:
+                qualmaj = newLevel
+            if Comments:
+                print(i,qualmaj0,newLevel,qualmaj)
+        if i==0:
+            
+            self.rankingByChoosing = gcd.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
+            self.rankingByChoosing['PolarizationLevel'] = qualmaj
+        rankings.sort(reverse=True)
+        self.rankingByChoosing = rankings[0][2]
+        self.rankingByChoosing['PolarizationLevel'] =  rankings[0][1]
+        
+        return rankings[0]
+
+        
     def computePrudentBestChoiceRecommendation(self,CoDual=False,Comments=False,Debug=False):
         """
         Renders the best choice recommendation after eliminating
@@ -9041,13 +9145,21 @@ if __name__ == "__main__":
 
     else:
         print('*-------- Testing classes and methods -------')
-        from time import time
-        from operator import itemgetter
-        t = RandomCBPerformanceTableau(numberOfActions=15)
-        t.save('test')
+        ##from time import time
+        ##from operator import itemgetter
+        #t = RandomCBPerformanceTableau(numberOfActions=20)
+        #t.save('test')
         t = PerformanceTableau('test')
         g = BipolarOutrankingDigraph(t)
-        g.iterateRankingByChoosing(Odd=False,Debug=True,CoDual=True)
+        g.iterateRankingByChoosing(Odd=False,Debug=False,CoDual=True)
+        g.showRankingByChoosing()
+        print('-----------------')
+        rankings = g.optimalRankingByChoosing(Odd=False,Debug=False,CoDual=True)
+        print(rankings)
+        g.showRankingByChoosing()
+        
+        #g.showRankingByChoosing()
+        
         ## g = RandomValuationDigraph()
         ## print(g.computePrudentBestChoiceRecommendation(CoDual=False,Comments=True))
 
