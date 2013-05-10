@@ -573,6 +573,7 @@ class Digraph(object):
                 print(i,qualmaj0,newLevel,qualmaj)
         if i==0:
             self.rankingByChoosing = gcd.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
+            self.rankingByChoosing['PolarizationLevel'] = qualmaj
         return self.rankingByChoosing
 
     def computePrudentBestChoiceRecommendation(self,CoDual=False,Comments=False,Debug=False):
