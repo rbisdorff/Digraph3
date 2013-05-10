@@ -622,7 +622,7 @@ class Digraph(object):
             if Limited:
                 if qualmaj <= maxLevel:
                     if qualmaj < gcd.valuationdomain['max']:
-                        # strict cut only possible if < max
+                        ## strict cut only possible if cut level qualmaj < max
                         pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
                     else:
                         pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
@@ -660,7 +660,7 @@ class Digraph(object):
         rankings.sort(reverse=True)
         self.rankingByChoosing = rankings[0][2]
         self.rankingByChoosing['PolarizationLevel'] =  rankings[0][1]
-        return rankings[0]
+        return self.rankingByChoosing
 
         
     def computePrudentBestChoiceRecommendation(self,CoDual=False,Comments=False,Debug=False):
