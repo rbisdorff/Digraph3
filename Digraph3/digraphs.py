@@ -645,7 +645,8 @@ class Digraph(object):
             if CoDual:
                 corr = g.computeOrdinalCorrelation(pgr)
             else:
-                corr = gcd.computeOrdinalCorrelation(pgr)
+		gcdcd = ~(-gcd)
+                corr = gcdcd.computeOrdinalCorrelation(pgr)
             rankings.append((corr['correlation'],qualmaj,rkg))
             if Comments:
                 print(rankings)
