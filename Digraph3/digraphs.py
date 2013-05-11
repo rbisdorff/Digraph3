@@ -576,7 +576,7 @@ class Digraph(object):
             self.rankingByChoosing['PolarizationLevel'] = qualmaj
         return self.rankingByChoosing
 
-    def optimalRankingByChoosing(self,Odd=True,CoDual=False,Comments=False,Debug=False,Limited=None):
+    def optimalRankingByChoosing(self,Odd=False,CoDual=False,Comments=False,Debug=False,Limited=None):
         """
         Renders a ranking by choosing result when progressively eliminating
         all chordless (odd only) circuits with rising valuation cut levels.
@@ -642,10 +642,14 @@ class Digraph(object):
                 print('Polarised determinateness = %.3f' % pg.computeDeterminateness())
             rkg = pg.computeRankingByChoosing(CoDual=False,Debug=Debug)
             pgr = pg.computeRankingByChoosingRelation()
-            corr = g.computeOrdinalCorrelation(pgr)
+            if CoDual:
+                corr = g.computeOrdinalCorrelation(pgr)
+            else:
+                corr = gcd.computeOrdinalCorrelation(pgr)
             rankings.append((corr['correlation'],qualmaj,rkg))
             if Comments:
                 print(rankings)
+                pg.showRankingByChoosing()
             qualmaj0 = qualmaj
             newLevel = pg.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments)
             if Limited != None:
@@ -658,6 +662,8 @@ class Digraph(object):
             self.rankingByChoosing = gcd.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
             self.rankingByChoosing['PolarizationLevel'] = qualmaj
         rankings.sort(reverse=True)
+        if Debug:
+            print(rankings)
         self.rankingByChoosing = rankings[0][2]
         self.rankingByChoosing['PolarizationLevel'] =  rankings[0][1]
         return self.rankingByChoosing
@@ -816,17 +822,17 @@ class Digraph(object):
                 space = space[:-2]
                 print('  %s Ambiguous Choice %s' % (space,list(iach)))
             print(' %s%s%s Worst Choice %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))
-        if self.rankingByChoosing['CoDual']:
-            corr1 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation())
-            print('Ordinal bipolar correlation with codual (strict) outranking relation: %.3f (%.1f%%)' % (corr1['correlation'],corr1['determination']*Decimal('100')))
-            corr2 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation(),MedianCut=True)
-            print('Ordinal bipolar correlation with codual (strict) median cut outranking relation: %.3f (%.1f%%)' % (corr2['correlation'],corr2['determination']*Decimal('100')))
+#        if self.rankingByChoosing['CoDual']:
+#            corr1 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation())
+#            print('Ordinal bipolar correlation with codual (strict) outranking relation: %.3f (%.1f%%)' % (corr1['correlation'],corr1['determination']*Decimal('100')))
+#            corr2 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation(),MedianCut=True)
+#            print('Ordinal bipolar correlation with codual (strict) median cut outranking relation: %.3f (%.1f%%)' % (corr2['correlation'],corr2['determination']*Decimal('100')))
 
-        else:
-            corr1 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation())
-            print('Ordinal bipolar correlation with outranking relation: %.3f (%.1f%%)'% (corr1['correlation'],corr1['determination']*Decimal('100')))
-            corr2 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation(),MedianCut=True)
-            print('Ordinal bipolar correlation with median cut outranking relation: %.3f (%.1f%%)'% (corr2['correlation'],corr2['determination']*Decimal('100')))
+#        else:
+        corr1 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation())
+        print('Ordinal bipolar correlation with outranking relation: %.3f (%.1f%%)'% (corr1['correlation'],corr1['determination']*Decimal('100')))
+        corr2 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation(),MedianCut=True)
+        print('Ordinal bipolar correlation with median cut outranking relation: %.3f (%.1f%%)'% (corr2['correlation'],corr2['determination']*Decimal('100')))
 
     def computeValuationStatistics(self,Sampling=False,Comments=False):
         """
