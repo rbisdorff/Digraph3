@@ -650,7 +650,8 @@ class Digraph(object):
                 corr = gcdcd.computeOrdinalCorrelation(pgr)
             rankings.append((corr['correlation'],qualmaj,rkg))
             if Comments:
-                print(rankings)
+                if Debug:
+                    print(rankings)
                 pg.showRankingByChoosing()
             qualmaj0 = qualmaj
             newLevel = pg.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments)
@@ -668,8 +669,11 @@ class Digraph(object):
             self.rankingByChoosing = gcd.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
             self.rankingByChoosing['PolarizationLevel'] = qualmaj
         rankings.sort(reverse=True)
-        if Debug:
-            print(rankings)
+        if Comments:
+            if Debug:
+                print(rankings)
+            self.showRankingByChoosing()
+                
         self.rankingByChoosing = rankings[0][2]
         self.rankingByChoosing['PolarizationLevel'] =  rankings[0][1]
         return self.rankingByChoosing
