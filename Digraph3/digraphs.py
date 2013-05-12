@@ -614,12 +614,12 @@ class Digraph(object):
         qualmaj = gcd.valuationdomain['med']
         self.rankingByChoosing = None
         rankings = []
-        while qualmaj > qualmaj0:
+        while qualmaj > qualmaj0 and qualmaj <= maxLevel:
             i += 1
             if Comments:
                 print('--> Iteration %d' % (i))
                 t0 = time()
-            if Limited:
+            if Limited != None:
                 if qualmaj <= maxLevel:
                     if qualmaj < gcd.valuationdomain['max']:
                         ## strict cut only possible if cut level qualmaj < max
@@ -628,16 +628,17 @@ class Digraph(object):
                         pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
                 else:
                     qualmaj = qualmaj0
-                    if qualmaj < gcd.valuationdomain['max']:
-                        pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
-                    else:
-                        pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
+                    #if qualmaj < gcd.valuationdomain['max']:
+                    #    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
+                    #else:
+                    #    pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
+
             else:
                 if qualmaj < gcd.valuationdomain['max']:
                     pg = PolarisedDigraph(gcd,qualmaj,StrictCut=True)
                 else:
                     pg = PolarisedDigraph(gcd,qualmaj,StrictCut=False)
-                
+              
             if Comments:
                 print('Polarised determinateness = %.3f' % pg.computeDeterminateness())
             rkg = pg.computeRankingByChoosing(CoDual=False,Debug=Debug)
@@ -654,11 +655,15 @@ class Digraph(object):
             qualmaj0 = qualmaj
             newLevel = pg.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments)
             if Limited != None:
-                qualmaj = min(maxLevel,newLevel)
+                if newLevel <= maxLevel:
+                    qualmaj = newLevel
+                else:
+                    qualmaj0 = qualmaj
             else:
                 qualmaj = newLevel
-            if Comments:
-                print(i,qualmaj0,newLevel,qualmaj)
+            if Debug:
+                print('i,qualmaj0,newLevel,maxLevel,qualmaj',i,qualmaj0,newLevel,maxLevel,qualmaj)
+            
         if i==0:
             self.rankingByChoosing = gcd.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
             self.rankingByChoosing['PolarizationLevel'] = qualmaj
