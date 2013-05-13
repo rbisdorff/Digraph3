@@ -601,7 +601,8 @@ class SortingByChoosingDigraph(Digraph):
         if digraph == None:
             digraph = RandomValuationDigraph()
         digraph.recodeValuation(-1.0,1.0)
-        self.name = deepcopy(digraph.name)
+        digraphName = 'sorting-'+digraph.name
+        self.name = deepcopy(digraphName)
         self.actions = deepcopy(digraph.actions)
         self.valuationdomain = deepcopy(digraph.valuationdomain)
         self.sortingByChoosing = digraph.optimalRankingByChoosing(CoDual=CoDual,Odd=Odd,Limited=Limited,Comments=Comments,Debug=False)
@@ -727,6 +728,7 @@ if __name__ == "__main__":
     g = BipolarOutrankingDigraph(t)
     s1 = SortingByChoosingDigraph(g,CoDual=True,Comments=False)
     s1.showSorting(Debug=False)
+    s1.exportGraphViz()
     print('Ordinal Correlation with given outranking')
     corr = g.computeOrdinalCorrelation(s1)
     print('Correlation  :', corr['correlation'])
