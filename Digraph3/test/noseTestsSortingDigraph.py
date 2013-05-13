@@ -83,3 +83,15 @@ def testLowerOpenClosedCategories():
     s1 = SortingDigraph(t,lowerClosed=False)
     s1.showSorting(Reverse=True)
 
+def testSortingByChoosingDigraph():
+    print('*-------- Testing SortingByChoosingDigraph class -------')
+    t = RandomCBPerformanceTableau(numberOfActions=10)
+    t.save('test')
+    g = BipolarOutrankingDigraph(t)
+    s1 = SortingByChoosingDigraph(g,CoDual=True,Comments=False)
+    s1.showSorting(Debug=False)
+    print('Ordinal Correlation with given outranking')
+    corr = g.computeOrdinalCorrelation(s1)
+    print('Correlation  :', corr['correlation'])
+    print('Determination:', corr['determination'])
+    g.showPerformanceTableau()

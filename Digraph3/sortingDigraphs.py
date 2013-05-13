@@ -656,7 +656,8 @@ class SortingByChoosingDigraph(Digraph):
             ch.sort()        
             print(' %s%s%s Choice %s (%.2f)' % (space,n,nstr,ch,sortingByChoosing[n-1][0][0]))
             space += '  '
-        ch = list(iwch-ibch)
+        #ch = list(iwch-ibch)
+        #ch.sort()
         if list(iach) != []:
              print(' %s Residual Choice %s' % (space,iach))
              #space = space[:-2]
@@ -689,6 +690,7 @@ class SortingByChoosingDigraph(Digraph):
             else:
                 ch = list(iwch-ibch)
                 if ch != []:
+                    ch.sort()
                     space = space[:-2]
                     print(' %s%s%s Last Choice %s (%.2f)' % (space,n-i,nstr,ch,sortingByChoosing[n-i-1][1][0]))
                     #space = space[:-2]
@@ -716,15 +718,21 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    t = RandomCBPerformanceTableau(numberOfActions=20)
+    t = RandomCBPerformanceTableau(numberOfActions=10)
     t.save('test')
     t = PerformanceTableau('test')
-    #s = SortingDigraph(t,lowerClosed=True)
-    #s.showSorting(Reverse=True)
+    s = SortingDigraph(t,lowerClosed=True)
+    s.showSorting(Reverse=True)
+    print('-----------------------------')
     g = BipolarOutrankingDigraph(t)
-    s1 = SortingByChoosingDigraph(g,CoDual=False,Comments=False)
-    print(g.computeOrdinalCorrelation(s1))
+    s1 = SortingByChoosingDigraph(g,CoDual=True,Comments=False)
     s1.showSorting(Debug=False)
+    print('Ordinal Correlation with given outranking')
+    corr = g.computeOrdinalCorrelation(s1)
+    print('Correlation  :', corr['correlation'])
+    print('Determination:', corr['determination'])
+    g.showPerformanceTableau()
+    
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
@@ -740,9 +748,6 @@ if __name__ == "__main__":
 # $Log: sortingDigraphs.py,v $
 # Revision 1.32  2012/05/09 10:51:43  bisi
 # GPL version 3 licensing installed
-#
-# Revision 1.31  2012/02/20 09:48:31  bisi
-# debugging
 #
 # Revision 1.30  2012/02/15 20:13:02  bisi
 # Added lower open categories sorting
