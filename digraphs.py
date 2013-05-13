@@ -598,6 +598,7 @@ class Digraph(object):
             gcd = ~(-g)
         else:
             gcd = deepcopy(g)
+            gcdcd = ~(-gcd)
 
         qualmaj0 = gcd.valuationdomain['min']
         if Limited != None:
@@ -646,13 +647,15 @@ class Digraph(object):
             if CoDual:
                 corr = g.computeOrdinalCorrelation(pgr)
             else:
-                gcdcd = ~(-gcd)
                 corr = gcdcd.computeOrdinalCorrelation(pgr)
             rankings.append((corr['correlation'],qualmaj,rkg))
             if Comments:
                 if Debug:
                     print(rankings)
-                pg.showRankingByChoosing()
+                if CoDual:
+                    g.showRankingByChoosing(rkg)
+                else:
+                    gcdcd.showRankingByChoosing(rkg)
             qualmaj0 = qualmaj
             newLevel = pg.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments)
             if Limited != None:
@@ -668,24 +671,28 @@ class Digraph(object):
         if i==0:
             self.rankingByChoosing = gcd.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
             self.rankingByChoosing['PolarizationLevel'] = qualmaj
-        rankings.sort(reverse=True)
+        else:
+            rankings.sort(reverse=True)
+            self.rankingByChoosing = rankings[0][2]
+            self.rankingByChoosing['PolarizationLevel'] =  rankings[0][1]
         if Comments:
             if Debug:
-                print(rankings)
-            self.showRankingByChoosing()
+               print(rankings)
+            if CoDual:
+                g.showRankingByChoosing(self.rankingByChoosing)
+            else:
+                gcdcd.showRankingByChoosing(self.rankingByChoosing)
                 
-        self.rankingByChoosing = rankings[0][2]
-        self.rankingByChoosing['PolarizationLevel'] =  rankings[0][1]
         return self.rankingByChoosing
 
         
-    def computePrudentBestChoiceRecommendation(self,CoDual=False,Comments=False,Debug=False):
+    def computePrudentBestChoiceRecommendation(self,CoDual=False,Comments=False,Debug=False,Limited=None):
         """
         Renders the best choice recommendation after eliminating
         all odd chordless circuits with a minimal cut of the valuation.
         """
         from copy import deepcopy
-        self.optimalRankingByChoosing(CoDual=CoDual,Comments=Comments,Debug=Debug,Limited=0.1)
+        self.optimalRankingByChoosing(CoDual=CoDual,Comments=Comments,Debug=Debug,Limited=Limited)
         if Comments:
             self.showRankingByChoosing()
         try:
@@ -729,16 +736,17 @@ class Digraph(object):
             currentActions = currentActions - set(eqcl)
         return preorderRelation
 
-    def computeRankingByChoosingRelation(self,Debug=False):
+    def computeRankingByChoosingRelation(self,rankingByChoosing=None,Debug=False):
         """
         Renders the bipolar-valued relation obtained from
         the self.rankingByChoosing result.
         """
-        try:
-            rankingByChoosing = self.rankingByChoosing['result']
-        except:
-            print('Error: first run computeRankingByChoosing(CoDual=T/F) !')
-            return None
+        if rankingByChoosing==None:
+            try:
+                rankingByChoosing = self.rankingByChoosing['result']
+            except:
+                print('Error: first run computeRankingByChoosing(CoDual=T/F) !')
+                return None
 
         Max = Decimal('1')
         Med = Decimal('0')
@@ -775,7 +783,7 @@ class Digraph(object):
             currActions = currActions - (ibch | iwch)
         return rankingRelation
 
-    def showRankingByChoosing(self):
+    def showRankingByChoosing(self,rankingByChoosing=None):
         """
         A show method for self.rankinByChoosing result.
 
@@ -783,12 +791,15 @@ class Digraph(object):
 
              The self.computeRankingByChoosing(CoDual=False/True) method instantiating the self.rankingByChoosing slot is pre-required !
         """
-        try:
-            rankingByChoosing = self.rankingByChoosing['result']
-        except:
-            print('Error: You must first run self.computeRankingByChoosing(CoDual=True(default)|False) !')
+        if rankingByChoosing == None:
+            try:
+                rankingByChoosing = self.rankingByChoosing['result']
+            except:
+                print('Error: You must first run self.computeRankingByChoosing(CoDual=True(default)|False) !')
             #rankingByChoosing = self.computeRankingByChoosing(Debug,CoDual)
-            return
+                return
+        else:
+            rankingByChoosing = rankingByChoosing['result']
         print('Ranking by Choosing and Rejecting')
         space = ''
         n = len(rankingByChoosing)
@@ -839,9 +850,9 @@ class Digraph(object):
 #            print('Ordinal bipolar correlation with codual (strict) median cut outranking relation: %.3f (%.1f%%)' % (corr2['correlation'],corr2['determination']*Decimal('100')))
 
 #        else:
-        corr1 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation())
+        corr1 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation(rankingByChoosing))
         print('Ordinal bipolar correlation with outranking relation: %.3f (%.1f%%)'% (corr1['correlation'],corr1['determination']*Decimal('100')))
-        corr2 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation(),MedianCut=True)
+        corr2 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation(rankingByChoosing),MedianCut=True)
         print('Ordinal bipolar correlation with median cut outranking relation: %.3f (%.1f%%)'% (corr2['correlation'],corr2['determination']*Decimal('100')))
 
     def computeValuationStatistics(self,Sampling=False,Comments=False):
@@ -9144,19 +9155,20 @@ if __name__ == "__main__":
 
     else:
         print('*-------- Testing classes and methods -------')
+        
         ##from time import time
         ##from operator import itemgetter
         #t = RandomCBPerformanceTableau(numberOfActions=20)
         #t.save('test')
         t = PerformanceTableau('test')
         g = BipolarOutrankingDigraph(t)
-        g.iterateRankingByChoosing(Odd=False,Debug=False,CoDual=True)
+        #g.iterateRankingByChoosing(Odd=False,Debug=False,CoDual=True)
+        #g.showRankingByChoosing()
+        #print('-----------------')
+        rankings = g.optimalRankingByChoosing(Odd=True,Debug=False,CoDual=True,Comments=True)
+        #print(rankings)
         g.showRankingByChoosing()
-        print('-----------------')
-        rankings = g.optimalRankingByChoosing(Odd=False,Debug=False,CoDual=True)
-        print(rankings)
-        g.showRankingByChoosing()
-        print('Prudent first choice: ',g.computePrudentBestChoiceRecommendation(Comments=True))
+        #print('Prudent first choice: ',g.computePrudentBestChoiceRecommendation(CoDual=True,Debug=False,Comments=True))
         
         #g.showRankingByChoosing()
         
