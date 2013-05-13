@@ -760,3 +760,19 @@ def testUnaryOperatorsNegationInverse():
     cdg1.showRelationTable()
     cd = CoDualDigraph(g1)
     cd.showRelationTable()
+
+def testOptimalRankingByChoosing():
+    print('*-------  test optimalRankingByChoosing method ------*')
+    t = RandomCBPerformanceTableau(numberOfActions=20)
+    t.save('test')
+    t = PerformanceTableau('test')
+    g = BipolarOutrankingDigraph(t)
+    g.iterateRankingByChoosing(Odd=False,Debug=False,CoDual=True)
+    g.showRankingByChoosing()
+    print('-----------------')
+    rankings = g.optimalRankingByChoosing(Odd=True,Debug=False,CoDual=True,Comments=True)
+    print(rankings)
+    g.showRankingByChoosing()
+    print('-----------------')
+    print('Prudent first choice: ',g.computePrudentBestChoiceRecommendation(CoDual=False,Debug=False,Comments=True))
+    
