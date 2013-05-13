@@ -612,7 +612,7 @@ class SortingByChoosingDigraph(Digraph):
         self.notGamma = self.notGammaSets()
         
         
-    def showSorting(self,sortingByChoosing=None):
+    def showSorting(self,sortingByChoosing=None,Debug=False):
         """
         A show method for self.sortingByChoosing result.
 
@@ -621,7 +621,8 @@ class SortingByChoosingDigraph(Digraph):
             sortingByChoosing = self.sortingByChoosing['result']
         else:
             sortingByChoosing = sortingByChoosing['result']
-        print('Sorting into first and last choices')
+            
+        print('Sorted by choosing into %d first and last choices' % (len(sortingByChoosing)) )
         space = ''
         n = len(sortingByChoosing)
         for i in range(n-1):
@@ -636,48 +637,61 @@ class SortingByChoosingDigraph(Digraph):
             ibch = set(sortingByChoosing[i][0][1])
             iwch = set(sortingByChoosing[i][1][1])
             iach = iwch & ibch
-            #print 'ibch, iwch, iach', i, ibch,iwch,iach
+            if Debug:
+                print( 'ibch, iwch, iach', i, ibch,iwch,iach)
             ch = list(ibch)
             ch.sort()
             print(' %s%s%s Choice %s (%.2f)' % (space,i+1,nstr,ch,sortingByChoosing[i][0][0]))
+            space += '  '
             if len(iach) > 0 and i < n-2:
-                print('  %s Ambiguous Choice %s' % (space,list(iach)))
+                print(' %s Ambiguous Choice %s' % (space,list(iach)))
                 space += '  '
         ibch = set(sortingByChoosing[n-1][0][1])
         iwch = set(sortingByChoosing[n-1][1][1])
         iach = iwch & ibch
-        print 'ibch, iwch, iach', i, ibch,iwch,iach
-        ch = list(ibch-iach)
-        if ch != []
+        if Debug:
+            print( 'n,ibch, iwch, iach',n, ibch,iwch,iach)
+        ch = list(ibch-iwch)
+        if ch != []:
             ch.sort()        
             print(' %s%s%s Choice %s (%.2f)' % (space,n,nstr,ch,sortingByChoosing[n-1][0][0]))
-            space += '  '                    
+            space += '  '
+        ch = list(iwch-ibch)
         if list(iach) != []:
-             print(' %s Residual Choice %s' % (space,ch,nthch))
-        
+             print(' %s Residual Choice %s' % (space,iach))
+             #space = space[:-2]
         for i in range(n):
+            if n-i == 1:
+                nstr ='st'
             elif n-i == 2:
                 nstr='nd'
             elif n-i == 3:
                 nstr='rd'
             else:
                 nstr='th'
-            space = space[:-2]
+            #space = space[:-2]
             ibch = set(sortingByChoosing[n-i-1][0][1])
             iwch = set(sortingByChoosing[n-i-1][1][1])
             iach = iwch & ibch
-            #print 'ibch, iwch, iach', i, ibch,iwch,iach
-            ch = list(iwch)
-            ch.sort()
-            if len(iach) > 0 and i > 0:
-                space = space[:-2]
-                print('  %s Ambiguous Choice %s' % (space,list(iach)))
-            if i == (n-1):
-                print(' Last Choice %s (%.2f)' % (ch,sortingByChoosing[n-i-1][1][0]))
+            if Debug:
+                print( 'i, ibch, iwch, iach', i, ibch,iwch,iach)
+            if i > 1:
+                ch = list(iwch)
+                ch.sort()
+                if len(iach) > 0:
+                    space = space[:-2]
+                    print(' %s Ambiguous Choice %s' % (space,list(iach)))
+                if i == (n-1):
+                    print(' Last Choice %s (%.2f)' % (ch,sortingByChoosing[n-i-1][1][0]))
+                else:
+                    space = space[:-2]
+                    print(' %s%s%s Last Choice %s (%.2f)' % (space,n-i,nstr,ch,sortingByChoosing[n-i-1][1][0]))
             else:
-                if i == 0:
-                
-                print(' %s%s%s Last Choice %s (%.2f)' % (space,n-i,nstr,ch,sortingByChoosing[n-i-1][1][0]))
+                ch = list(iwch-ibch)
+                if ch != []:
+                    space = space[:-2]
+                    print(' %s%s%s Last Choice %s (%.2f)' % (space,n-i,nstr,ch,sortingByChoosing[n-i-1][1][0]))
+                    #space = space[:-2]
 
 
 
@@ -702,15 +716,15 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    t = RandomCBPerformanceTableau()
+    t = RandomCBPerformanceTableau(numberOfActions=20)
     t.save('test')
     t = PerformanceTableau('test')
     #s = SortingDigraph(t,lowerClosed=True)
     #s.showSorting(Reverse=True)
     g = BipolarOutrankingDigraph(t)
-    s1 = SortingByChoosingDigraph(g,Comments=True)
+    s1 = SortingByChoosingDigraph(g,CoDual=False,Comments=False)
     print(g.computeOrdinalCorrelation(s1))
-    s1.showSorting()
+    s1.showSorting(Debug=False)
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
