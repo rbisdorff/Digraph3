@@ -592,10 +592,99 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             fo.close()
             print('File: ' + nameExt + ' saved !')
 
+class SortingByChoosingDigraph(Digraph):
+    """
+    Specialization of generic Digraph class for sorting by choosing results.
+    """
+    def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=None,Comments=False,Debug=False):
+        from copy import deepcopy
+        if digraph == None:
+            digraph = RandomValuationDigraph()
+        digraph.recodeValuation(-1.0,1.0)
+        self.name = deepcopy(digraph.name)
+        self.actions = deepcopy(digraph.actions)
+        self.valuationdomain = deepcopy(digraph.valuationdomain)
+        self.sortingByChoosing = digraph.optimalRankingByChoosing(CoDual=CoDual,Odd=Odd,Limited=Limited,Comments=Comments,Debug=False)
+        self.relation = digraph.computeRankingByChoosingRelation()
+        #self.relation = deepcopy(digraph.relation)
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        
+        
+    def showSorting(self,sortingByChoosing=None):
+        """
+        A show method for self.sortingByChoosing result.
+
+        """
+        if sortingByChoosing == None:
+            sortingByChoosing = self.sortingByChoosing['result']
+        else:
+            sortingByChoosing = sortingByChoosing['result']
+        print('Sorting into first and last choices')
+        space = ''
+        n = len(sortingByChoosing)
+        for i in range(n-1):
+            if i+1 == 1:
+                nstr='st'
+            elif i+1 == 2:
+                nstr='nd'
+            elif i+1 == 3:
+                nstr='rd'
+            else:
+                nstr='th'
+            ibch = set(sortingByChoosing[i][0][1])
+            iwch = set(sortingByChoosing[i][1][1])
+            iach = iwch & ibch
+            #print 'ibch, iwch, iach', i, ibch,iwch,iach
+            ch = list(ibch)
+            ch.sort()
+            print(' %s%s%s Choice %s (%.2f)' % (space,i+1,nstr,ch,sortingByChoosing[i][0][0]))
+            if len(iach) > 0 and i < n-2:
+                print('  %s Ambiguous Choice %s' % (space,list(iach)))
+                space += '  '
+        ibch = set(sortingByChoosing[n-1][0][1])
+        iwch = set(sortingByChoosing[n-1][1][1])
+        iach = iwch & ibch
+        print 'ibch, iwch, iach', i, ibch,iwch,iach
+        ch = list(ibch-iach)
+        if ch != []
+            ch.sort()        
+            print(' %s%s%s Choice %s (%.2f)' % (space,n,nstr,ch,sortingByChoosing[n-1][0][0]))
+            space += '  '                    
+        if list(iach) != []:
+             print(' %s Residual Choice %s' % (space,ch,nthch))
+        
+        for i in range(n):
+            elif n-i == 2:
+                nstr='nd'
+            elif n-i == 3:
+                nstr='rd'
+            else:
+                nstr='th'
+            space = space[:-2]
+            ibch = set(sortingByChoosing[n-i-1][0][1])
+            iwch = set(sortingByChoosing[n-i-1][1][1])
+            iach = iwch & ibch
+            #print 'ibch, iwch, iach', i, ibch,iwch,iach
+            ch = list(iwch)
+            ch.sort()
+            if len(iach) > 0 and i > 0:
+                space = space[:-2]
+                print('  %s Ambiguous Choice %s' % (space,list(iach)))
+            if i == (n-1):
+                print(' Last Choice %s (%.2f)' % (ch,sortingByChoosing[n-i-1][1][0]))
+            else:
+                if i == 0:
+                
+                print(' %s%s%s Last Choice %s (%.2f)' % (space,n-i,nstr,ch,sortingByChoosing[n-i-1][1][0]))
+
+
+
 #----------test SortingDigraph class ----------------
 if __name__ == "__main__":
     import sys,copy
-    from digraphs import *
+    from outrankingDigraphs import *
     from sortingDigraphs import *
     print("""
     ****************************************************
@@ -615,10 +704,13 @@ if __name__ == "__main__":
 
     t = RandomCBPerformanceTableau()
     t.save('test')
-    s = SortingDigraph(t,lowerClosed=True)
-    s.showSorting(Reverse=True)
-    s1 = SortingDigraph(t,lowerClosed=False)
-    s1.showSorting(Reverse=True)
+    t = PerformanceTableau('test')
+    #s = SortingDigraph(t,lowerClosed=True)
+    #s.showSorting(Reverse=True)
+    g = BipolarOutrankingDigraph(t)
+    s1 = SortingByChoosingDigraph(g,Comments=True)
+    print(g.computeOrdinalCorrelation(s1))
+    s1.showSorting()
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
