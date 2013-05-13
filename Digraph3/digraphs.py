@@ -590,7 +590,7 @@ class Digraph(object):
         codual of self, depending on the CoDual flagg.
         """
         from copy import deepcopy
-        from time import time
+        
         if Debug:
             Comments=True
         g = deepcopy(self)
@@ -619,7 +619,6 @@ class Digraph(object):
             i += 1
             if Comments:
                 print('--> Iteration %d' % (i))
-                t0 = time()
             if Limited != None:
                 if qualmaj <= maxLevel:
                     if qualmaj < gcd.valuationdomain['max']:
@@ -693,8 +692,8 @@ class Digraph(object):
         """
         from copy import deepcopy
         self.optimalRankingByChoosing(CoDual=CoDual,Comments=Comments,Debug=Debug,Limited=Limited)
-        if Comments:
-            self.showRankingByChoosing()
+        #if Comments:
+        #    self.showRankingByChoosing()
         try:
             self.rankingByChoosing['result'][0][0][1].sort()
             return self.rankingByChoosing['result'][0][0][1]
@@ -9158,17 +9157,18 @@ if __name__ == "__main__":
         
         ##from time import time
         ##from operator import itemgetter
-        #t = RandomCBPerformanceTableau(numberOfActions=20)
-        #t.save('test')
+        t = RandomCBPerformanceTableau(numberOfActions=20)
+        t.save('test')
         t = PerformanceTableau('test')
         g = BipolarOutrankingDigraph(t)
         #g.iterateRankingByChoosing(Odd=False,Debug=False,CoDual=True)
         #g.showRankingByChoosing()
-        #print('-----------------')
+        print('-----------------')
         rankings = g.optimalRankingByChoosing(Odd=True,Debug=False,CoDual=True,Comments=True)
         #print(rankings)
-        g.showRankingByChoosing()
-        #print('Prudent first choice: ',g.computePrudentBestChoiceRecommendation(CoDual=True,Debug=False,Comments=True))
+        #g.showRankingByChoosing()
+        print('-----------------')
+        print('Prudent first choice: ',g.computePrudentBestChoiceRecommendation(CoDual=False,Debug=False,Comments=True))
         
         #g.showRankingByChoosing()
         
