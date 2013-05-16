@@ -666,6 +666,51 @@ class SortingByChoosingDigraph(Digraph):
             else:
                 print(' %s%s%s Last Choice %s (%.2f)' % (space,n-i,nstr,ch,sortingByChoosing[n-i-1][1][0])) 
 
+class SortingByBestChoosingDigraph(Digraph):
+    """
+    Specialization of generic Digraph class for sorting by best-choosing results.
+    """
+    def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=None,Comments=False,Debug=False):
+        from copy import deepcopy
+        if digraph == None:
+            digraph = RandomValuationDigraph()
+        digraph.recodeValuation(-1.0,1.0)
+        digraphName = 'sorting-by-best'+digraph.name
+        self.name = deepcopy(digraphName)
+        self.actions = deepcopy(digraph.actions)
+        self.valuationdomain = deepcopy(digraph.valuationdomain)
+        self.sortingByBestChoosing = digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=False)
+        self.relation = digraph.computeRankingByBestChoosingRelation()
+        #self.relation = deepcopy(digraph.relation)
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        
+    def showSorting(self):
+        self.showRankingByBestChoosing(self.sortingByBestChoosing)
+
+class SortingByLastChoosingDigraph(Digraph):
+    """
+    Specialization of generic Digraph class for sorting-by-rejecting results.
+    """
+    def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=None,Comments=False,Debug=False):
+        from copy import deepcopy
+        if digraph == None:
+            digraph = RandomValuationDigraph()
+        digraph.recodeValuation(-1.0,1.0)
+        digraphName = 'sorting-by-last'+digraph.name
+        self.name = deepcopy(digraphName)
+        self.actions = deepcopy(digraph.actions)
+        self.valuationdomain = deepcopy(digraph.valuationdomain)
+        self.sortingByLastChoosing = digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=False)
+        self.relation = digraph.computeRankingByLastChoosingRelation()
+        #self.relation = deepcopy(digraph.relation)
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+    
+    def showSorting(self):
+        self.showRankingByLastChoosing(self.sortingByLastChoosing)
 
 #----------test SortingDigraph class ----------------
 if __name__ == "__main__":
@@ -688,30 +733,40 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    t = RandomCBPerformanceTableau(numberOfActions=10)
+    t = RandomCBPerformanceTableau(numberOfActions=20)
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
-    s = SortingDigraph(t,lowerClosed=True)
-    s.showSorting(Reverse=True)
+    #s = SortingDigraph(t,lowerClosed=True)
+    #s.showSorting(Reverse=True)
     print('-----------------------------')
     g = BipolarOutrankingDigraph(t)
-    s1 = SortingByChoosingDigraph(g,CoDual=True,Comments=False)
-    s1.showSorting(Debug=False)
+    
+    s = SortingByChoosingDigraph(g,Comments=True)
+    
+    s1 = SortingByBestChoosingDigraph(g,CoDual=True)
+    s1.showSorting()
+    s1.exportGraphViz()
     #s1.exportGraphViz()
     print('Ordinal Correlation with given outranking')
     corr = g.computeOrdinalCorrelation(s1)
     print('Correlation  : %.5f' % corr['correlation'])
     print('Determination: %.5f' % corr['determination'])
     #g.showPerformanceTableau()
-    s1 = SortingByChoosingDigraph(g,CoDual=False,Comments=False)
-    s1.showSorting(Debug=False)
+    s2 = SortingByLastChoosingDigraph(g,CoDual=True)
+    s2.showSorting()
+    s2.exportGraphViz()
     #print(s1.sortingByChoosing)
     #s1.exportGraphViz()
     print('Ordinal Correlation with given outranking')
-    corr = g.computeOrdinalCorrelation(s1)
+    corr = g.computeOrdinalCorrelation(s2)
     print('Correlation  : %.5f' % corr['correlation'])
     print('Determination: %.5f' % corr['determination'])
-    #g.showPerformanceTableau()
+    print('Ordinal Correlation between best- and last-choosing')
+    corr = s1.computeOrdinalCorrelation(s2)
+    print('Correlation  : %.5f' % corr['correlation'])
+    print('Determination: %.5f' % corr['determination'])
+    
+
     
 
     print('*------------------*')
