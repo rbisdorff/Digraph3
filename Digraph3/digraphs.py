@@ -330,6 +330,92 @@ class Digraph(object):
             counts['?'] = Decimal(str(counts['?']))/(nd*(nd-1))
         return counts
 
+    def computeRankingByLastChoosing(self,Debug=False,CoDual=False):
+        """
+        Computes a weak preordring of the self.actions by iterating
+        worst choice elagations.
+
+        Stores in self.rankingByLastChoosing['result'] a list of (P-,worstChoice) pairs
+        where P- gives the worst choice complement outranked
+        average valuation via the computePairwiseClusterComparison
+        method.
+
+        If self.rankingByChoosing['CoDual'] is True, the ranking-by-last-chossing 
+        was computed on the codual of self.
+        """
+        from copy import deepcopy
+        currG = deepcopy(self)
+        remainingActions = [x for x in self.actions]
+        rankingByLastChoosing = []
+        worstChoice = (None,None)
+        i = 0
+        while len(remainingActions) > 1 and worstChoice[1] != []:
+            i += 1
+            currG.actions = remainingActions
+            if CoDual:
+                currGcd = CoDualDigraph(currG)
+            else:
+                currGcd = deepcopy(currG)
+            currGcd.computeRubisChoice(Comments=False)
+            #currGcd.computeGoodChoices(Comments=Debug)
+
+            #currGcd.computeBadChoices(Comments=Debug)
+            worstChoiceCandidates = []
+            j = 0
+            for ch in currGcd.badChoices:
+                k1 = currGcd.flatChoice(ch[5])
+                if Debug:
+                    print(ch[5],k1)
+                ck1 = list(set(currG.actions)-set(k1))
+                if len(ck1) > 0:
+                    j += 1
+                    k1Outranked = currG.computePairwiseClusterComparison(k1,ck1)
+                    if Debug:
+                        print('worst', j, ch[5], k1, k1Outranked)
+                    worstChoiceCandidates.append( ( min(-k1Outranked['P+'],k1Outranked['P-']), k1 ) )
+                else:
+                    worstChoiceCandidates.append((self.valuationdomain['max'],k1))
+            worstChoiceCandidates.sort(reverse=True)
+            try:
+                worstChoice = worstChoiceCandidates[0]
+            except:
+                #print 'Error: no worst choice in currGcd'
+                #currGcd.save('currGcd_errorWorst')
+                worstChoice=(self.valuationdomain['med'],[])
+            if Debug:
+                print('worstChoice', i, worstChoice, worstChoiceCandidates)
+
+            if (worstChoice[1] != []):
+                rankingByLastChoosing.append(worstChoice)
+            if len(worstChoice[1]) > 0:
+                for x in worstChoice[1]:
+                    try:
+                        remainingActions.remove(x)
+                    except:
+                        pass
+            if Debug:
+                print( i, worstChoice, remainingActions, rankingByLastChoosing)
+        if (worstChoice[1] == []):
+            #### only a singleton choice or a failure quadruple left to rank
+            if Debug:
+                print(worstChoice)
+            worstChoice = (self.valuationdomain['max'],remainingActions)
+            rankingByLastChoosing.append(worstChoice)
+            if Debug:
+                print(rankingByLastChoosing)
+
+        elif len(remainingActions) == 1:
+            #### only a singleton choice or a failure quadruple left to rank
+            if Debug:
+                print(worstChoice)
+            worstChoice = (self.valuationdomain['max'],remainingActions)
+            rankingByLastChoosing.append(worstChoice)
+            if Debug:
+                print(rankingByLastChoosing)
+        
+        self.rankingByLastChoosing = {'CoDual': CoDual, 'result': rankingByLastChoosing}
+        return {'CoDual': CoDual, 'result': rankingByLastChoosing}
+
 
     def computeRankingByChoosing(self,Debug=False,CoDual=False):
         """
@@ -494,6 +580,125 @@ class Digraph(object):
                 print(rankingByChoosing)
         self.rankingByChoosing = {'CoDual': CoDual, 'result': rankingByChoosing}
         return {'CoDual': CoDual, 'result': rankingByChoosing}
+
+    def computeRankingByBestChoosing(self,Debug=False,CoDual=False):
+        """
+        Computes a weak preordring of the self.actions by recursive
+        best choice elagations.
+
+        Stores in self.rankingByBestChoosing['result'] a list of (P+,bestChoice) tuples
+        where P+ gives the best choice complement outranking
+        average valuation via the computePairwiseClusterComparison
+        method.
+
+        If self.rankingByBestChoosing['CoDual'] is True, 
+        the ranking-by-choosing was computed on the codual of self.
+        """
+        from copy import deepcopy
+        currG = deepcopy(self)
+        remainingActions = [x for x in self.actions]
+        rankingByBestChoosing = []
+        bestChoice = (None,None)
+        i = 0
+        while len(remainingActions) > 2 and bestChoice[1] != [] and i < 100:
+            i += 1
+            currG.actions = remainingActions
+            if CoDual:
+                currGcd = CoDualDigraph(currG)
+            else:
+                currGcd = deepcopy(currG)
+            currGcd.computeRubisChoice(Comments=Debug)
+            #currGcd.computeGoodChoices(Comments=Debug)
+            bestChoiceCandidates = []
+            j = 0
+            for ch in currGcd.goodChoices:
+                k1 = currGcd.flatChoice(ch[5])
+                if Debug:
+                    print(ch[5],k1)
+                ck1 = list(set(currG.actions)-set(k1))
+                if len(ck1) > 0:
+                    j += 1
+                    k1Outranking = currG.computePairwiseClusterComparison(k1,ck1)
+                    if Debug:
+                        print('good', j, ch[5], k1, k1Outranking)
+                    #bestChoiceCandidates.append((k1Outranking['P+'],k1))
+                    bestChoiceCandidates.append( ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 ) )
+                else:
+                    bestChoiceCandidates.append((self.valuationdomain['max'],k1))
+            #bestChoiceCandidates.sort(reverse=True)
+            bestChoiceCandidates = sorted(bestChoiceCandidates, key=lambda choice: str(choice[1]) ) # lexigr choices
+            bestChoiceCandidates = sorted(bestChoiceCandidates, key=lambda choice: -choice[0]) # sort by outranking power
+            try:
+                bestChoice = bestChoiceCandidates[0]
+            except:
+                #print 'Error: no best choice in currGcd!'
+                #currGcd.save('currGcd_errorBest')
+                bestChoice = (self.valuationdomain['med'],[])
+            if Debug:
+                print('bestChoice', i, bestChoice, bestChoiceCandidates)
+
+            if bestChoice[1] != []:
+                rankingByBestChoosing.append(bestChoice)
+
+            if len(bestChoice[1]) > 0:
+                for x in bestChoice[1]:
+                    remainingActions.remove(x)
+            if Debug:
+                print(i, bestChoice, remainingActions, rankingByBestChoosing)
+        if bestChoice[1] == []:
+            #### only a singleton choice or a failure quadruple left to rank
+            if Debug:
+                print(bestChoice)
+            bestChoice = (self.valuationdomain['max'],remainingActions)
+            rankingByBestChoosing.append(bestChoice)
+            if Debug:
+                print(rankingByBestChoosing)
+        elif len(remainingActions) == 2:
+            i += 1
+            currG.actions = remainingActions
+            if CoDual:
+                currGcd = CoDualDigraph(currG)
+            else:
+                currGcd = deepcopy(currG)
+            currGcd.computeRubisChoice(Comments=Debug)
+            #currGcd.computeGoodChoices(Comments=Debug)
+            bestChoiceCandidates = []
+            j = 0
+            for ch in currGcd.goodChoices:
+                k1 = currGcd.flatChoice(ch[5])
+                if Debug:
+                    print(ch[5],k1)
+                ck1 = list(set(currG.actions)-set(k1))
+                if len(ck1) > 0:
+                    j += 1
+                    k1Outranking = currG.computePairwiseClusterComparison(k1,ck1)
+                    if Debug:
+                        print('good', j, ch[5], k1, k1Outranking)
+                    #bestChoiceCandidates.append((k1Outranking['P+'],k1))
+                    bestChoiceCandidates.append( ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 ) )
+                else:
+                    bestChoiceCandidates.append((self.valuationdomain['max'],k1))
+            bestChoiceCandidates.sort(reverse=True)
+            try:
+                bestChoice = bestChoiceCandidates[0]
+            except:
+                #print 'Error: no best choice in currGcd!'
+                #currGcd.save('currGcd_errorBest')
+                bestChoice = (self.valuationdomain['med'],[])
+            if Debug:
+                print('bestChoice', i, bestChoice, bestChoiceCandidates)
+            rankingByBestChoosing.append(bestChoice)
+
+        elif len(remainingActions) == 1:
+            #### only a singleton choice or a failure quadruple left to rank
+            if Debug:
+                print(bestChoice)
+            bestChoice = (self.valuationdomain['max'],remainingActions)
+            rankingByBestChoosing.append(bestChoice)
+            if Debug:
+                print(rankingByBestChoosing)
+        self.rankingByBestChoosing = {'CoDual': CoDual, 'result': rankingByBestChoosing}
+        return {'CoDual': CoDual, 'result': rankingByBestChoosing}
 
     def iterateRankingByChoosing(self,Odd=False,CoDual=False,Comments=True,Debug=False,Limited=None):
         """
@@ -782,6 +987,80 @@ class Digraph(object):
             currActions = currActions - (ibch | iwch)
         return rankingRelation
 
+    def computeRankingByBestChoosingRelation(self,rankingByBestChoosing=None,Debug=False):
+        """
+        Renders the bipolar-valued relation obtained from
+        the self.rankingByBestChoosing result.
+        """
+        if rankingByBestChoosing==None:
+            try:
+                rankingByBestChoosing = self.rankingByBestChoosing['result']
+            except:
+                print('Error: first run computeRankingByBestChoosing(CoDual=T/F) !')
+                return None
+
+        Max = Decimal('1')
+        Med = Decimal('0')
+        Min = Decimal('-1')
+        actions = [x for x in self.actions]
+        currActions = set(actions)
+        rankingRelation = {}
+        for x in actions:
+            rankingRelation[x] = {}
+            for y in actions:
+                rankingRelation[x][y] = Med
+        n = len(rankingByBestChoosing)
+        for i in range(n):
+            ibch = set(rankingByBestChoosing[i][1])
+            ribch = set(currActions) - ibch
+            for x in ibch:
+                for y in ibch:
+                    if x != y:
+                        rankingRelation[x][y] = self.omax([rankingRelation[x][y],Max])
+                        rankingRelation[y][x] = self.omax([rankingRelation[x][y],Max])
+                for y in ribch:
+                    rankingRelation[x][y] = self.omax([rankingRelation[x][y],Max])
+                    rankingRelation[y][x] = self.omax([rankingRelation[y][x],Min])
+            currActions = currActions - ibch
+        return rankingRelation
+ 
+    def computeRankingByLastChoosingRelation(self,rankingByLastChoosing=None,Debug=False):
+        """
+        Renders the bipolar-valued relation obtained from
+        the self.rankingByLastChoosing result.
+        """
+        if rankingByLastChoosing==None:
+            try:
+                rankingByLastChoosing = self.rankingByLastChoosing['result']
+            except:
+                print('Error: first run computeRankingByLastChoosing(CoDual=T/F) !')
+                return None
+
+        Max = Decimal('1')
+        Med = Decimal('0')
+        Min = Decimal('-1')
+        actions = [x for x in self.actions]
+        currActions = set(actions)
+        rankingRelation = {}
+        for x in actions:
+            rankingRelation[x] = {}
+            for y in actions:
+                rankingRelation[x][y] = Med
+        n = len(rankingByLastChoosing)
+        for i in range(n):
+            iwch = set(rankingByLastChoosing[i][1])
+            riwch = set(currActions) - iwch
+            for x in iwch:
+                for y in iwch:
+                    if x != y:
+                        rankingRelation[x][y] = self.omax([rankingRelation[x][y],Max])
+                        rankingRelation[y][x] = self.omax([rankingRelation[x][y],Max])
+                for y in riwch:
+                    rankingRelation[x][y] = self.omax([rankingRelation[x][y],Min])
+                    rankingRelation[y][x] = self.omax([rankingRelation[y][x],Max])
+            currActions = currActions - iwch
+        return rankingRelation
+
     def showRankingByChoosing(self,rankingByChoosing=None):
         """
         A show method for self.rankinByChoosing result.
@@ -853,6 +1132,81 @@ class Digraph(object):
         print('Ordinal bipolar correlation with outranking relation: %.3f (%.1f%%)'% (corr1['correlation'],corr1['determination']*Decimal('100')))
         corr2 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation(rankingByChoosing),MedianCut=True)
         print('Ordinal bipolar correlation with median cut outranking relation: %.3f (%.1f%%)'% (corr2['correlation'],corr2['determination']*Decimal('100')))
+
+    def showRankingByLastChoosing(self,rankingByLastChoosing=None,Debug=None):
+        """
+        A show method for self.rankinByChoosing result.
+
+        .. warning::
+
+             The self.computeRankingByLastChoosing(CoDual=False/True) method instantiating the self.rankingByChoosing slot is pre-required !
+        """
+        if rankingByLastChoosing == None:
+            try:
+                rankingByLastChoosing = self.rankingByLastChoosing['result']
+            except:
+                print('Error: You must first run self.computeRankingByLastChoosing(CoDual=True(default)|False) !')
+                return
+        else:
+            rankingByLastChoosing = rankingByLastChoosing['result']
+        print('Ranking by recursively rejecting')
+        space = ''
+        n = len(rankingByLastChoosing)
+        for i in range(n):
+            if i+1 == 1:
+                nstr='st'
+            elif i+1 == 2:
+                nstr='nd'
+            elif i+1 == 3:
+                nstr='rd'
+            else:
+                nstr='th'
+            iwch = set(rankingByLastChoosing[i][1])
+            if Debug:
+                print( 'ibch, iwch, iach', i, ibch,iwch,iach)
+            ch = list(iwch)
+            ch.sort()
+            if nstr == 'st':
+                print(' Last Choice %s (%.2f)' % (ch,rankingByLastChoosing[i][0]))
+
+            else:
+                print(' %s%s%s Last Choice %s (%.2f)' % (space,i+1,nstr,ch,rankingByLastChoosing[i][0]))
+            space += '  '
+
+    
+    def showRankingByBestChoosing(self,rankingByBestChoosing=None):
+        """
+        A show method for self.rankinByBestChoosing result.
+
+        .. warning::
+
+             The self.computeRankingByBestChoosing(CoDual=False/True) method instantiating the self.rankingByBestChoosing slot is pre-required !
+        """
+        if rankingByBestChoosing == None:
+            try:
+                rankingByBestChoosing = self.rankingByBestChoosing['result']
+            except:
+                print('Error: You must first run self.computeRankingByBestChoosing(CoDual=True(default)|False) !')
+                return
+        else:
+            rankingByBestChoosing = rankingByBestChoosing['result']
+        print('Ranking by recursively best-choosing')
+        space = ''
+        n = len(rankingByBestChoosing)
+        for i in range(n):
+            if i+1 == 1:
+                nstr='st'
+            elif i+1 == 2:
+                nstr='nd'
+            elif i+1 == 3:
+                nstr='rd'
+            else:
+                nstr='th'
+            ibch = set(rankingByBestChoosing[i][1])
+            ch = list(ibch)
+            ch.sort()
+            print(' %s%s%s Best Choice %s (%.2f)' % (space,i+1,nstr,ch,rankingByBestChoosing[i][0]))
+            space += '  '
 
     def computeValuationStatistics(self,Sampling=False,Comments=False):
         """
@@ -9157,18 +9511,28 @@ if __name__ == "__main__":
         
         ##from time import time
         ##from operator import itemgetter
-        t = RandomCBPerformanceTableau(numberOfActions=20)
-        t.save('test')
-        t = PerformanceTableau('test')
+        #t = RandomCBPerformanceTableau(numberOfActions=20)
+        #t.save('test')
+        t = XMCDA2PerformanceTableau('uniSorting')
         g = BipolarOutrankingDigraph(t)
+        g.computeRankingByLastChoosing(CoDual=True,Debug=False)
+        g.showRankingByLastChoosing()
+        relLast = g.computeRankingByLastChoosingRelation()
+        #g.showRelationTable(relation=relLast)
+        print(g.computeOrdinalCorrelation(relLast))
+        g.computeRankingByBestChoosing(CoDual=True)
+        g.showRankingByBestChoosing()
+        relBest = g.computeRankingByBestChoosingRelation()
+        #g.showRelationTable(relation=relBest)
+        print(g.computeOrdinalCorrelation(relBest))
         #g.iterateRankingByChoosing(Odd=False,Debug=False,CoDual=True)
         #g.showRankingByChoosing()
-        print('-----------------')
-        rankings = g.optimalRankingByChoosing(Odd=True,Debug=False,CoDual=True,Comments=True)
+        #print('-----------------')
+        rankings = g.optimalRankingByChoosing(Odd=True,Debug=False,CoDual=True,Comments=False)
         #print(rankings)
-        #g.showRankingByChoosing()
-        print('-----------------')
-        print('Prudent first choice: ',g.computePrudentBestChoiceRecommendation(CoDual=False,Debug=False,Comments=True))
+        g.showRankingByChoosing()
+        #print('-----------------')
+        #print('Prudent first choice: ',g.computePrudentBestChoiceRecommendation(CoDual=False,Debug=False,Comments=True))
         
         #g.showRankingByChoosing()
         
