@@ -781,15 +781,15 @@ class Digraph(object):
             self.rankingByChoosing['PolarizationLevel'] = qualmaj
         return self.rankingByChoosing
 
-    def optimalRankingByChoosing(self,Odd=False,CoDual=False,Comments=False,Debug=False,Limited=None):
+    def optimalRankingByChoosing(self,Odd=True,CoDual=False,Comments=False,Debug=False,Limited=None):
         """
         Renders a ranking by choosing result when progressively eliminating
-        all chordless (odd only) circuits with rising valuation cut levels.
+        all chordless (odd only by default) circuits with rising valuation cut levels.
 
         Parameters:
         
             * CoDual = False (default)/True
-            * Limited = proportion (in [0,1]) * (max - med) of valuationdomain
+            * Limited = proportion (in [0,1]) * (max - med) of valuationdomain (default = None)
 
         Returns the highest correlated rankingByChoosing with self or 
         codual of self, depending on the CoDual flagg.
@@ -848,6 +848,7 @@ class Digraph(object):
                 print('Polarised determinateness = %.3f' % pg.computeDeterminateness())
             rkg = pg.computeRankingByChoosing(CoDual=False,Debug=Debug)
             pgr = pg.computeRankingByChoosingRelation()
+                
             if CoDual:
                 corr = g.computeOrdinalCorrelation(pgr)
             else:
@@ -7041,6 +7042,42 @@ class ConverseDigraph(Digraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
+class FusionDigraph(Digraph):
+    """
+    Instantiates the fusion of two given Digraph called dg1 and dg2.
+    """
+
+    def __init__(self,dg1,dg2):
+        from copy import deepcopy
+        self.name = 'fusion-'+dg1.name+'-'+dg2.name
+#        try:
+#            self.description = deepcopy(dg1.description)
+#        except AttributeError:
+#            pass
+#        try:
+#            self.criteria = deepcopy(dg1.criteria)
+#        except AttributeError:
+#            pass
+#        try:
+#            self.evaluation = deepcopy(dg1.evaluation)
+#        except AttributeError:
+#            pass
+        self.actions = deepcopy(dg1.actions)
+        self.order = len(dg1.actions)
+        self.valuationdomain = deepcopy(dg1.valuationdomain)
+        actionsList = list(self.actions)
+        max = self.valuationdomain['max']
+        min = self.valuationdomain['min']
+        fusionRelation = {}
+        for x in actionsList:
+            fusionRelation[x] = {}
+            for y in actionsList:
+                fusionRelation[x][y] = self.omin((dg1.relation[x][y],dg2.relation[x][y]))
+                
+        self.relation = fusionRelation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+
 # ------ Ranking By Choosing Digraph
 class RankingByChoosingDigraph(Digraph):
     """
@@ -9511,7 +9548,7 @@ if __name__ == "__main__":
         
         ##from time import time
         ##from operator import itemgetter
-        #t = RandomCBPerformanceTableau(numberOfActions=20)
+        #t = RandomCBPerformanceTableau(numberOfActions=7)
         #t.save('test')
         t = XMCDA2PerformanceTableau('uniSorting')
         g = BipolarOutrankingDigraph(t)
@@ -9523,8 +9560,16 @@ if __name__ == "__main__":
         g.computeRankingByBestChoosing(CoDual=True)
         g.showRankingByBestChoosing()
         relBest = g.computeRankingByBestChoosingRelation()
+        relFusion = {}
+        for x in g.actions:
+            relFusion[x] = {}
+            for y in g.actions:
+                relFusion[x][y] = g.omin((relBest[x][y],relLast[x][y]))
+          
         #g.showRelationTable(relation=relBest)
         print(g.computeOrdinalCorrelation(relBest))
+        print(g.computeOrdinalCorrelation(relFusion))
+        
         #g.iterateRankingByChoosing(Odd=False,Debug=False,CoDual=True)
         #g.showRankingByChoosing()
         #print('-----------------')
@@ -9540,129 +9585,6 @@ if __name__ == "__main__":
         ## print(g.computePrudentBestChoiceRecommendation(CoDual=False,Comments=True))
 
 
-        ## coceg = CoceDigraph(g,Comments=True)
-        ## #coceg.showStatistics()
-        ## coceg.computeChordlessCircuits()
-
-        ## g.showRubisBestChoiceRecommendation(Comments=True)
-        # cog = CocaDigraph(g,Comments=True)
-        # gcd = CoDualDigraph(cog)
-        # gcd.computeGoodChoices()
-        # gcd.computeBadChoices()
-        # gcd.goodChoices.sort(key=itemgetter(7),reverse=True)
-        # gcd.badChoices.sort(key=itemgetter(7),reverse=True)
-        # print('==>> good choices')
-        # for ch in gcd.goodChoices:
-        #     print(ch[5])
-        #     print(gcd.averageCoveringIndex(ch[5],direction="out"))
-        #     print(gcd.averageCoveringIndex(ch[5],direction='in'))
-        # print('==>> bad choices')
-        # for ch in gcd.badChoices:
-        #     print(ch[5])
-        #     print(gcd.averageCoveringIndex(ch[5],direction="in"))
-        #     print(gcd.averageCoveringIndex(ch[5],direction='out'))
-
-        # cog = CoceDigraph(g,Comments=True)
-        # gcd = CoDualDigraph(cog)
-        # gcd.computeGoodChoices()
-        # gcd.computeBadChoices()
-        # gcd.goodChoices.sort(key=itemgetter(7),reverse=True)
-        # gcd.badChoices.sort(key=itemgetter(7),reverse=True)
-        # print('==>> good choices')
-        # for ch in gcd.goodChoices:
-        #     print(ch[5])
-        #     print(gcd.averageCoveringIndex(ch[5],direction="out"))
-        #     print(gcd.averageCoveringIndex(ch[5],direction='in'))
-        # print('==>> bad choices')
-        # for ch in gcd.badChoices:
-        #     print(ch[5])
-        #     print(gcd.averageCoveringIndex(ch[5],direction="in"))
-        #     print(gcd.averageCoveringIndex(ch[5],direction='out'))
-        ## #coceg.showRubisBestChoiceRecommendation()
-
-        ## equivg = EquivalenceDigraph(g,coceg)
-
-        ## print equivg.computeDeterminateness()
-        ## print equivg.graphDetermination()
-        ## print g.computeBipolarCorrelation(equivg)
-        ## print g.computeOrdinalCorrelation(equivg)
-
-        ## print coceg.computeDeterminateness()
-        ## print coceg.graphDetermination()
-        ## print g.computeBipolarCorrelation(coceg)
-        ## print g.computeOrdinalCorrelation(coceg)
-
-        ## t1 = RandomWeakTournament(order=30,ndigits=3)
-        ## print t1.computeRelationalStructure()
-        ## #t.showRelationTable(ndigits=3)
-        ## t2 = RandomWeakTournament(order=30,weaknessDegree=0.5)
-        ## print t2.computeRelationalStructure()
-        ## #t.showRelationTable()
-        ## t3 = RandomWeakTournament(order=30,ndigits=1,hasIntegerValuation=True)
-        ## #t3.showRelationTable()
-        ## print t3.computeRelationalStructure()
-        ## #t.showRelationTable()=
-        ## print t1.computeAverageValuation()
-        ## print t2.computeAverageValuation()
-        ## print t3.computeAverageValuation()
-        ## print 1,2,t1.computeBipolarCorrelation(t2)
-        ## print 1,3,t1.computeBipolarCorrelation(t3)
-        ## print 2,3,t2.computeBipolarCorrelation(t3)
-        ## tcd1 = CoDualDigraph(t1)
-        ## tcd2 = CoDualDigraph(t2)
-        ## tcd3 = CoDualDigraph(t3)
-        ## print tcd1.computeRelationalStructure()
-        ## print tcd2.computeRelationalStructure()
-        ## print tcd3.computeRelationalStructure()
-        ## print 1,2,tcd1.computeBipolarCorrelation(tcd2)
-        ## print 1,3,tcd1.computeBipolarCorrelation(tcd3)
-        ## print 2,3,tcd2.computeBipolarCorrelation(tcd3)
-
-        ## e12 = EquivalenceDigraph(t1,t2)
-        ## print e12.computeCorrelation()
-        ## print e12.computeDeterminateness()
-        ## e13 = EquivalenceDigraph(t1,t3)
-        ## print e13.computeCorrelation()
-        ## print e13.computeDeterminateness()
-        ## e23 = EquivalenceDigraph(t2,t3)
-        ## print e23.computeCorrelation()
-        ## print e23.computeDeterminateness()
-
-        ## g1 = RandomBipolarOutrankingDigraph()
-        ## p1 = PolarisedDigraph(g1,level=g1.valuationdomain['med'],StrictCut=True,KeepValues=False)
-        ## g2 = RandomBipolarOutrankingDigraph()
-        ## p2 = PolarisedDigraph(g2,level=g2.valuationdomain['med'],StrictCut=True,KeepValues=False)
-        ## e12 = EquivalenceDigraph(p1,p2)
-
-        ## e12.showRelationTable()
-        ## #e12.exportGraphViz()
-        ## corr = e12.computeCorrelation()
-        ## dterm = e12.computeDeterminateness()
-        ## print dterm, corr, corr*dterm
-
-        ## #g1 = RandomValuationDigraph(Normalized=True,hasIntegerValuation=True)
-        ## g1 = RandomOutrankingDigraph()
-        ## g1.showRelationTable()
-        ## #g1.computeValuationStatistics(Comments=True)
-        ## dg1 = -g1
-        ## dg1.showRelationTable()
-        ## cg1 = ~g1
-        ## cg1.showRelationTable()
-        ## cdg1 = -(~g1)
-        ## cdg1.showRelationTable()
-        ## cd = CoDualDigraph(g1)
-        ## cd.showRelationTable()
-
-        ## g1 = RandomValuationDigraph()
-        ## g2 = RandomValuationDigraph()
-        ## g3 = RandomValuationDigraph()
-        ## c12 = g1.computeBipolarCorrelation(g2)
-        ## c13 = g1.computeBipolarCorrelation(g3)
-        ## c23 = g2.computeBipolarCorrelation(g3)
-        ## d12 = (-c12['correlation'] + Decimal('1'))/Decimal('2')
-        ## d13 = (-c13['correlation'] + Decimal('1'))/Decimal('2')
-        ## d23 = (-c23['correlation'] + Decimal('1'))/Decimal('2')
-        ## print d12,d23,d13
 
 
         print('*------------------*')
