@@ -712,6 +712,40 @@ class SortingByLastChoosingDigraph(Digraph):
     def showSorting(self):
         self.showRankingByLastChoosing(self.sortingByLastChoosing)
 
+class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
+    """
+    Specialization of generic Digraph class for sorting-by-rejecting results with prudent single elimination of chordless circuits.
+    """
+    def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=None,Comments=False,Debug=False):
+        from copy import deepcopy
+        if digraph == None:
+            digraph = RandomValuationDigraph()
+        digraph.recodeValuation(-1.0,1.0)
+        digraphName = 'sorting-by-prudent-choosing'+digraph.name
+        self.name = deepcopy(digraphName)
+        self.actions = deepcopy(digraph.actions)
+        self.valuationdomain = deepcopy(digraph.valuationdomain)
+        s1 = SortingByLastChoosingDigraph(digraph,CoDual=CoDual,Debug=False)
+        s2 = SortingByBestChoosingDigraph(digraph,CoDual=CoDual,Debug=False)
+        fus = FusionDigraph(s1,s2)
+        corrg = digraph.computeOrdinalCorrelation(fus)
+        cutLevel = digraph.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments)
+        gp = PolarisedDigraph(digraph,level=cutLevel,StrictCut=False)
+        
+        s1p = SortingByLastChoosingDigraph(gp,CoDual=CoDual,Debug=False)
+        s2p = SortingByBestChoosingDigraph(gp,CoDual=CoDual,Debug=False)
+        fusp = FusionDigraph(s1p,s2p)
+        corrgp = digraph.computeOrdinalCorrelation(fusp)
+        if corrgp['correlation'] > corrg['correlation']:
+            self.relation = deepcopy(fusp.relation)
+        else:
+            self.relation = deepcopy(fus.relation)
+        self.sortingByChoosing = self.computeRankingByChoosing(CoDual=CoDual)
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+    
+
 #----------test SortingDigraph class ----------------
 if __name__ == "__main__":
     import sys,copy
@@ -733,43 +767,49 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    #t = RandomCBPerformanceTableau(numberOfActions=20)
-    #t.saveXMCDA2('test')
-    t = XMCDA2PerformanceTableau('testCompetition')
+    t = RandomCBPerformanceTableau(numberOfActions=20)
+    t.saveXMCDA2('test')
+    #t = XMCDA2PerformanceTableau('testCompetition')
     #s = SortingDigraph(t,lowerClosed=True)
     #s.showSorting(Reverse=True)
     print('-----------------------------')
     g = BipolarOutrankingDigraph(t)
     
-    s = SortingByChoosingDigraph(g,Comments=True)
-    
+    s = SortingByPrudentChoosingDigraph(g,CoDual=True)
+    s.showSorting()
+    print('Best: Ordinal Correlation with given outranking')
+    corr = g.computeOrdinalCorrelation(s)
+    print('Correlation  : %.5f' % corr['correlation'])
+    print('Determination: %.5f' % corr['determination'])
+#    s = SortingByChoosingDigraph(g,Comments=True)
+#    
     s1 = SortingByBestChoosingDigraph(g,CoDual=True)
     s1.showSorting()
-    #s1.showRelationTable()
-    #s1.exportGraphViz()
+#    #s1.showRelationTable()
+#    #s1.exportGraphViz()
     print('Best: Ordinal Correlation with given outranking')
     corr = g.computeOrdinalCorrelation(s1)
     print('Correlation  : %.5f' % corr['correlation'])
     print('Determination: %.5f' % corr['determination'])
-    #g.showPerformanceTableau()
+#    #g.showPerformanceTableau()
     s2 = SortingByLastChoosingDigraph(g,CoDual=True)
     s2.showSorting()
-    #s2.showRelationTable()
-    #s2.exportGraphViz()
-    #print(s1.sortingByChoosing)
-    #s1.exportGraphViz()
-    print('Last: Ordinal Correlation with given outranking')
-    corr = g.computeOrdinalCorrelation(s2)
-    print('Correlation  : %.5f' % corr['correlation'])
-    print('Determination: %.5f' % corr['determination'])
-    print('Ordinal Correlation between Best- and Last-choosing')
-    corr = s1.computeOrdinalCorrelation(s2)
-    print('Correlation  : %.5f' % corr['correlation'])
-    print('Determination: %.5f' % corr['determination'])
-    
+#    #s2.showRelationTable()
+#    #s2.exportGraphViz()
+#    #print(s1.sortingByChoosing)
+#    #s1.exportGraphViz()
+#    print('Last: Ordinal Correlation with given outranking')
+#    corr = g.computeOrdinalCorrelation(s2)
+#    print('Correlation  : %.5f' % corr['correlation'])
+#    print('Determination: %.5f' % corr['determination'])
+#    print('Ordinal Correlation between Best- and Last-choosing')
+#    corr = s1.computeOrdinalCorrelation(s2)
+#    print('Correlation  : %.5f' % corr['correlation'])
+#    print('Determination: %.5f' % corr['determination'])
+#    
     fusion = FusionDigraph(s1,s2)
-    #fusion.showRelationTable()
-    #g.showRelationTable()
+#    #fusion.showRelationTable()
+#    #g.showRelationTable()
     print('Fusion: Ordinal Correlation with fusion ranking')
     corr = g.computeOrdinalCorrelation(fusion)
     print('Correlation  : %.5f' % corr['correlation'])
