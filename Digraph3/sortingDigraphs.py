@@ -775,6 +775,7 @@ if __name__ == "__main__":
     print('Correlation  : %.5f' % corr['correlation'])
     print('Determination: %.5f' % corr['determination'])
     fusion.computeRankingByChoosing(CoDual=True)
+    
     fusion.showRankingByChoosing()
     
 
