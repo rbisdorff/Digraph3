@@ -724,6 +724,7 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
         digraphName = 'sorting-by-prudent-choosing'+digraph.name
         self.name = deepcopy(digraphName)
         self.actions = deepcopy(digraph.actions)
+        self.order = len(self.actions)
         self.valuationdomain = deepcopy(digraph.valuationdomain)
         s1 = SortingByLastChoosingDigraph(digraph,CoDual=CoDual,Debug=False)
         s2 = SortingByBestChoosingDigraph(digraph,CoDual=CoDual,Debug=False)
@@ -741,7 +742,6 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
         else:
             self.relation = deepcopy(fus.relation)
         self.sortingByChoosing = self.computeRankingByChoosing(CoDual=CoDual)
-        self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
     
