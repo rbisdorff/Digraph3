@@ -731,8 +731,10 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
         fus = FusionDigraph(s1,s2)
         corrg = digraph.computeOrdinalCorrelation(fus)
         cutLevel = digraph.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments)
-        gp = PolarisedDigraph(digraph,level=cutLevel,StrictCut=False)
-        
+        if cutLevel < self.valuationdomain['max']
+            gp = PolarisedDigraph(digraph,level=cutLevel,StrictCut=True)
+        else:
+            gp = PolarisedDigraph(digraph,level=cutLevel,StrictCut=False)
         s1p = SortingByLastChoosingDigraph(gp,CoDual=CoDual,Debug=False)
         s2p = SortingByBestChoosingDigraph(gp,CoDual=CoDual,Debug=False)
         fusp = FusionDigraph(s1p,s2p)
