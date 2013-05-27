@@ -719,8 +719,9 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
     def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=0.5,Comments=False,Debug=False):
         from copy import deepcopy
         from decimal import Decimal
+        from time import time
         if Comments:
-            from time import time
+            
             t0 = time()
             print('------- Commenting sorting by prudent chossing ------')
         if digraph == None:
