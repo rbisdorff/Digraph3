@@ -787,8 +787,7 @@ if __name__ == "__main__":
     print('Correlation   : %.3f' % corr['correlation'])
     print('Determination : %.3f' % corr['determination'])
     print('Execution time: %.4f sec.' % (t1-t0))
-#    s = SortingByChoosingDigraph(g,Comments=True)
-#    
+
 #    s1 = SortingByBestChoosingDigraph(g,CoDual=True)
 #    s1.showSorting()
 #    #s1.showRelationTable()
@@ -798,6 +797,7 @@ if __name__ == "__main__":
 #    print('Correlation  : %.5f' % corr['correlation'])
 #    print('Determination: %.5f' % corr['determination'])
 #    #g.showPerformanceTableau()
+
 #    s2 = SortingByLastChoosingDigraph(g,CoDual=True)
 #    s2.showSorting()
 #    #s2.showRelationTable()
@@ -808,11 +808,12 @@ if __name__ == "__main__":
 #    corr = g.computeOrdinalCorrelation(s2)
 #    print('Correlation  : %.5f' % corr['correlation'])
 #    print('Determination: %.5f' % corr['determination'])
+
 #    print('Ordinal Correlation between Best- and Last-choosing')
 #    corr = s1.computeOrdinalCorrelation(s2)
 #    print('Correlation  : %.5f' % corr['correlation'])
-#    print('Determination: %.5f' % corr['determination'])
-#    
+#    print('Determination: %.5f' % corr['determination'])    
+
 #    fusion = FusionDigraph(s1,s2)
 #    #fusion.showRelationTable()
 #    #g.showRelationTable()
@@ -820,8 +821,7 @@ if __name__ == "__main__":
 #    corr = g.computeOrdinalCorrelation(fusion)
 #    print('Correlation  : %.5f' % corr['correlation'])
 #    print('Determination: %.5f' % corr['determination'])
-#    fusion.computeRankingByChoosing(CoDual=True)
-#    
+#    fusion.computeRankingByChoosing(CoDual=True)svn
 #    fusion.showRankingByChoosing()
     
 
