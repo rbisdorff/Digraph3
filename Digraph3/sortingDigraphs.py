@@ -718,6 +718,10 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
     """
     def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=None,Comments=False,Debug=False):
         from copy import deepcopy
+        if Comments:
+            from time import time
+            t0 = time()
+            print('------- Commenting sorting by prudent chossing ------')
         if digraph == None:
             digraph = RandomValuationDigraph()
         digraph.recodeValuation(-1.0,1.0)
@@ -729,24 +733,38 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
         s1 = SortingByLastChoosingDigraph(digraph,CoDual=CoDual,Debug=False)
         s2 = SortingByBestChoosingDigraph(digraph,CoDual=CoDual,Debug=False)
         fus = FusionDigraph(s1,s2)
-        corrg = digraph.computeOrdinalCorrelation(fus)
         cutLevel = digraph.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments)
         self.cutLevel = cutLevel
-        if cutLevel < self.valuationdomain['max']:
-            gp = PolarisedDigraph(digraph,level=cutLevel,StrictCut=True)
-        else:
-            gp = PolarisedDigraph(digraph,level=cutLevel,StrictCut=False)
-        s1p = SortingByLastChoosingDigraph(gp,CoDual=CoDual,Debug=False)
-        s2p = SortingByBestChoosingDigraph(gp,CoDual=CoDual,Debug=False)
-        fusp = FusionDigraph(s1p,s2p)
-        corrgp = digraph.computeOrdinalCorrelation(fusp)
-        if corrgp['correlation'] > corrg['correlation']:
-            self.relation = deepcopy(fusp.relation)
+        if cutLevel > self.valuationdomain['med']:
+            if cutLevel < self.valuationdomain['max']:
+                gp = PolarisedDigraph(digraph,level=cutLevel,StrictCut=True)
+            else:
+                gp = PolarisedDigraph(digraph,level=cutLevel,StrictCut=False)
+            s1p = SortingByLastChoosingDigraph(gp,CoDual=CoDual,Debug=False)
+            s2p = SortingByBestChoosingDigraph(gp,CoDual=CoDual,Debug=False)
+            fusp = FusionDigraph(s1p,s2p)
+            corrgp = digraph.computeOrdinalCorrelation(fusp)
+            corrg = digraph.computeOrdinalCorrelation(fus)
+            if corrgp['correlation'] > corrg['correlation']:
+                self.relation = deepcopy(fusp.relation)
+            else:
+                self.relation = deepcopy(fus.relation)
         else:
             self.relation = deepcopy(fus.relation)
         self.sortingByChoosing = self.computeRankingByChoosing(CoDual=CoDual)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+        t1 = time()
+        if Comments:
+            gdeter = digraph.computeDeterminateness()
+            self.showSorting()
+            print('Circuits elimination cut level: %.3f' % self.cutLevel)
+            print('Ordinal Correlation with given outranking')
+            corr = digraph.computeOrdinalCorrelation(self)
+            print('Correlation     : %.3f' % corr['correlation'])
+            print('Determinateness : %.3f (%.3f)' % (corr['determination'],gdeter))
+            print('Execution time  : %.4f sec.' % (t1-t0))
+        
     
 
 #----------test SortingDigraph class ----------------
@@ -758,7 +776,7 @@ if __name__ == "__main__":
     ****************************************************
     * Python sortingDigraphs module                    *
     * depends on BipolarOutrankingDigraph and          *
-    * $Revision$                                *
+    * $Revision$                                 *
     * Copyright (C) 2010 Raymond Bisdorff              *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
@@ -770,23 +788,24 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    t = RandomCBPerformanceTableau(numberOfActions=20)
+    t = RandomCBPerformanceTableau(numberOfActions=30)
     t.saveXMCDA2('test')
 #    t = XMCDA2PerformanceTableau('uniSorting')
     #s = SortingDigraph(t,lowerClosed=True)
     #s.showSorting(Reverse=True)
     print('------- testing sorting by prudent chossing ------')
     g = BipolarOutrankingDigraph(t)
-    
+    gdeter = g.computeDeterminateness()
     t0 = time()
-    s = SortingByPrudentChoosingDigraph(g,CoDual=True)
+    s = SortingByPrudentChoosingDigraph(g,CoDual=True,Comments=True)
     t1 = time()
-    s.showSorting()
-    print('Ordinal Correlation with given outranking')
-    corr = g.computeOrdinalCorrelation(s)
-    print('Correlation   : %.3f' % corr['correlation'])
-    print('Determination : %.3f' % corr['determination'])
-    print('Execution time: %.4f sec.' % (t1-t0))
+#    s.showSorting()
+#    print('Circuits elimination cut level: %.3f' % s.cutLevel)
+#    print('Ordinal Correlation with given outranking')
+#    corr = g.computeOrdinalCorrelation(s)
+#    print('Correlation     : %.3f' % corr['correlation'])
+#    print('Determinateness : %.3f (%.3f)' % (corr['determination'],gdeter))
+#    print('Execution time  : %.4f sec.' % (t1-t0))
 
 #    s1 = SortingByBestChoosingDigraph(g,CoDual=True)
 #    s1.showSorting()
@@ -831,7 +850,7 @@ if __name__ == "__main__":
 
     print('*************************************')
     print('* R.B. december 2010                *')
-    print('* $Revision$                     *')
+    print('* $Revision$                  *')
     print('*************************************')
 
 #############################
