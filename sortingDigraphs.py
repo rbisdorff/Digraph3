@@ -751,7 +751,7 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
 
 #----------test SortingDigraph class ----------------
 if __name__ == "__main__":
-    import sys,copy
+    from time import time
     from outrankingDigraphs import *
     from sortingDigraphs import *
     print("""
@@ -772,31 +772,34 @@ if __name__ == "__main__":
 
     t = RandomCBPerformanceTableau(numberOfActions=20)
     t.saveXMCDA2('test')
-    #t = XMCDA2PerformanceTableau('testCompetition')
+#    t = XMCDA2PerformanceTableau('uniSorting')
     #s = SortingDigraph(t,lowerClosed=True)
     #s.showSorting(Reverse=True)
-    print('-----------------------------')
+    print('------- testing sorting by prudent chossing ------')
     g = BipolarOutrankingDigraph(t)
     
+    t0 = time()
     s = SortingByPrudentChoosingDigraph(g,CoDual=True)
+    t1 = time()
     s.showSorting()
-    print('Best: Ordinal Correlation with given outranking')
+    print('Ordinal Correlation with given outranking')
     corr = g.computeOrdinalCorrelation(s)
-    print('Correlation  : %.5f' % corr['correlation'])
-    print('Determination: %.5f' % corr['determination'])
+    print('Correlation   : %.3f' % corr['correlation'])
+    print('Determination : %.3f' % corr['determination'])
+    print('Execution time: %.4f sec.' % (t1-t0))
 #    s = SortingByChoosingDigraph(g,Comments=True)
 #    
-    s1 = SortingByBestChoosingDigraph(g,CoDual=True)
-    s1.showSorting()
+#    s1 = SortingByBestChoosingDigraph(g,CoDual=True)
+#    s1.showSorting()
 #    #s1.showRelationTable()
 #    #s1.exportGraphViz()
-    print('Best: Ordinal Correlation with given outranking')
-    corr = g.computeOrdinalCorrelation(s1)
-    print('Correlation  : %.5f' % corr['correlation'])
-    print('Determination: %.5f' % corr['determination'])
+#    print('Best: Ordinal Correlation with given outranking')
+#    corr = g.computeOrdinalCorrelation(s1)
+#    print('Correlation  : %.5f' % corr['correlation'])
+#    print('Determination: %.5f' % corr['determination'])
 #    #g.showPerformanceTableau()
-    s2 = SortingByLastChoosingDigraph(g,CoDual=True)
-    s2.showSorting()
+#    s2 = SortingByLastChoosingDigraph(g,CoDual=True)
+#    s2.showSorting()
 #    #s2.showRelationTable()
 #    #s2.exportGraphViz()
 #    #print(s1.sortingByChoosing)
@@ -810,16 +813,16 @@ if __name__ == "__main__":
 #    print('Correlation  : %.5f' % corr['correlation'])
 #    print('Determination: %.5f' % corr['determination'])
 #    
-    fusion = FusionDigraph(s1,s2)
+#    fusion = FusionDigraph(s1,s2)
 #    #fusion.showRelationTable()
 #    #g.showRelationTable()
-    print('Fusion: Ordinal Correlation with fusion ranking')
-    corr = g.computeOrdinalCorrelation(fusion)
-    print('Correlation  : %.5f' % corr['correlation'])
-    print('Determination: %.5f' % corr['determination'])
-    fusion.computeRankingByChoosing(CoDual=True)
-    
-    fusion.showRankingByChoosing()
+#    print('Fusion: Ordinal Correlation with fusion ranking')
+#    corr = g.computeOrdinalCorrelation(fusion)
+#    print('Correlation  : %.5f' % corr['correlation'])
+#    print('Determination: %.5f' % corr['determination'])
+#    fusion.computeRankingByChoosing(CoDual=True)
+#    
+#    fusion.showRankingByChoosing()
     
 
     print('*------------------*')
@@ -834,29 +837,4 @@ if __name__ == "__main__":
 #############################
 # Log record for changes:
 # $Log: sortingDigraphs.py,v $
-# Revision 1.32  2012/05/09 10:51:43  bisi
-# GPL version 3 licensing installed
-#
-# Revision 1.30  2012/02/15 20:13:02  bisi
-# Added lower open categories sorting
-#
-# Revision 1.22  2011/04/26 12:12:55  bisi
-# added NormalizedPerformanceTableau Class
-#
-# Revision 1.13  2011/01/04 08:43:28  bisi
-# added isReturninHTML falg to showSorting method
-#
-# Revision 1.12  2011/01/02 14:25:59  bisi
-# Added XMCDA 2 export of profiles description,
-#  ie categories and criterionCategoryLimits.
-#
-# Revision 1.8  2010/12/27 10:04:56  bisi
-# enhanced sorting characteristics return
-#
-# Revision 1.4  2010/12/12 03:19:01  bisi
-# Added showSorting() method
-#
-# Revision 1.1  2010/12/11 19:39:32  bisi
-# Added sortingDigraphs.py submodule
-#
 #############################

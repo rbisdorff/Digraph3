@@ -8,7 +8,7 @@
 ########################
 
 from digraphs import *
-
+from time import time
 
 ############# test sortingDigraphs ####################
 from sortingDigraphs import *
@@ -75,7 +75,6 @@ def testIConstructorLowerOpenCategories():
 
 def testLowerOpenClosedCategories():
     print('*-------- Testing lowerClosedOpen Categories -------')
-
     t = RandomCBPerformanceTableau()
     t.save('test')
     s = SortingDigraph(t,lowerClosed=True)
@@ -95,3 +94,20 @@ def testSortingByChoosingDigraph():
     print('Correlation  :', corr['correlation'])
     print('Determination:', corr['determination'])
     g.showPerformanceTableau()
+    
+def testSortingByPrudentChoosingDigraph():
+    print('*-------- Testing SortingByPrudentChoosingDigraph class -------')
+    t = RandomCBPerformanceTableau(numberOfActions=20)
+    t.saveXMCDA2('test')
+    g = BipolarOutrankingDigraph(t)
+    t0 = time()
+    s = SortingByPrudentChoosingDigraph(g,CoDual=True)
+    t1 = time()
+    s.showSorting()
+    print('Ordinal Correlation with given outranking')
+    corr = g.computeOrdinalCorrelation(s)
+    print('Correlation   : %.3f' % corr['correlation'])
+    print('Determination : %.3f' % corr['determination'])
+    print('Execution time: %.4f sec.' % (t1-t0))
+ 
+    

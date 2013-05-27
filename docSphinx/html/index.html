@@ -690,7 +690,7 @@ a given preordering (list of lists) result.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computePrudentBestChoiceRecommendation">
-<tt class="descname">computePrudentBestChoiceRecommendation</tt><big>(</big><em>CoDual=False</em>, <em>Comments=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.computePrudentBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computePrudentBestChoiceRecommendation</tt><big>(</big><em>CoDual=False</em>, <em>Comments=False</em>, <em>Debug=False</em>, <em>Limited=None</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.computePrudentBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the best choice recommendation after eliminating
 all odd chordless circuits with a minimal cut of the valuation.</p>
 </dd></dl>
@@ -710,6 +710,26 @@ ranked pairs rule.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="digraphs.Digraph.computeRankingByBestChoosing">
+<tt class="descname">computeRankingByBestChoosing</tt><big>(</big><em>Debug=False</em>, <em>CoDual=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.computeRankingByBestChoosing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes a weak preordring of the self.actions by recursive
+best choice elagations.</p>
+<p>Stores in self.rankingByBestChoosing[&#8216;result&#8217;] a list of (P+,bestChoice) tuples
+where P+ gives the best choice complement outranking
+average valuation via the computePairwiseClusterComparison
+method.</p>
+<p>If self.rankingByBestChoosing[&#8216;CoDual&#8217;] is True, 
+the ranking-by-choosing was computed on the codual of self.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.computeRankingByBestChoosingRelation">
+<tt class="descname">computeRankingByBestChoosingRelation</tt><big>(</big><em>rankingByBestChoosing=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.computeRankingByBestChoosingRelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the bipolar-valued relation obtained from
+the self.rankingByBestChoosing result.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="digraphs.Digraph.computeRankingByChoosing">
 <tt class="descname">computeRankingByChoosing</tt><big>(</big><em>Debug=False</em>, <em>CoDual=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.computeRankingByChoosing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes a weak preordring of the self.actions by iterating
@@ -723,9 +743,29 @@ method.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computeRankingByChoosingRelation">
-<tt class="descname">computeRankingByChoosingRelation</tt><big>(</big><em>Debug=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.computeRankingByChoosingRelation" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeRankingByChoosingRelation</tt><big>(</big><em>rankingByChoosing=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.computeRankingByChoosingRelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the bipolar-valued relation obtained from
 the self.rankingByChoosing result.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.computeRankingByLastChoosing">
+<tt class="descname">computeRankingByLastChoosing</tt><big>(</big><em>Debug=False</em>, <em>CoDual=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.computeRankingByLastChoosing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes a weak preordring of the self.actions by iterating
+worst choice elagations.</p>
+<p>Stores in self.rankingByLastChoosing[&#8216;result&#8217;] a list of (P-,worstChoice) pairs
+where P- gives the worst choice complement outranked
+average valuation via the computePairwiseClusterComparison
+method.</p>
+<p>If self.rankingByChoosing[&#8216;CoDual&#8217;] is True, the ranking-by-last-chossing 
+was computed on the codual of self.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.computeRankingByLastChoosingRelation">
+<tt class="descname">computeRankingByLastChoosingRelation</tt><big>(</big><em>rankingByLastChoosing=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.computeRankingByLastChoosingRelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the bipolar-valued relation obtained from
+the self.rankingByLastChoosing result.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1071,9 +1111,14 @@ for a reflexive loop in its transitive closure
 
 <dl class="method">
 <dt id="digraphs.Digraph.iterateRankingByChoosing">
-<tt class="descname">iterateRankingByChoosing</tt><big>(</big><em>Odd=False</em>, <em>CoDual=False</em>, <em>Comments=True</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.iterateRankingByChoosing" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">iterateRankingByChoosing</tt><big>(</big><em>Odd=False</em>, <em>CoDual=False</em>, <em>Comments=True</em>, <em>Debug=False</em>, <em>Limited=None</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.iterateRankingByChoosing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a ranking by choosing result when progressively eliminating
 all chordless (odd only) circuits with rising valuation cut levels.</p>
+<dl class="docutils">
+<dt>Parameters</dt>
+<dd>CoDual = False (default)/True
+Limited = proportion (in [0,1]) * (max - med) valuationdomain</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1167,6 +1212,22 @@ computation</p>
 <tt class="descname">omin</tt><big>(</big><em>L</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.omin" title="Permalink to this definition">¶</a></dt>
 <dd><p>epistemic conjunction for bipolar outranking characteristics
 computation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.optimalRankingByChoosing">
+<tt class="descname">optimalRankingByChoosing</tt><big>(</big><em>Odd=True</em>, <em>CoDual=False</em>, <em>Comments=False</em>, <em>Debug=False</em>, <em>Limited=None</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.optimalRankingByChoosing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a ranking by choosing result when progressively eliminating
+all chordless (odd only by default) circuits with rising valuation cut levels.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li>CoDual = False (default)/True</li>
+<li>Limited = proportion (in [0,1]) * (max - med) of valuationdomain (default = None)</li>
+</ul>
+</div></blockquote>
+<p>Returns the highest correlated rankingByChoosing with self or 
+codual of self, depending on the CoDual flagg.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1408,12 +1469,32 @@ Result in self.dompreKernels and self.abspreKernels</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="digraphs.Digraph.showRankingByBestChoosing">
+<tt class="descname">showRankingByBestChoosing</tt><big>(</big><em>rankingByBestChoosing=None</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.showRankingByBestChoosing" title="Permalink to this definition">¶</a></dt>
+<dd><p>A show method for self.rankinByBestChoosing result.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The self.computeRankingByBestChoosing(CoDual=False/True) method instantiating the self.rankingByBestChoosing slot is pre-required !</p>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="digraphs.Digraph.showRankingByChoosing">
-<tt class="descname">showRankingByChoosing</tt><big>(</big><big>)</big><a class="headerlink" href="#digraphs.Digraph.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">showRankingByChoosing</tt><big>(</big><em>rankingByChoosing=None</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
 <dd><p>A show method for self.rankinByChoosing result.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">The self.computeRankingByChoosing(CoDual=False/True) method instantiating the self.rankingByChoosing slot is pre-required !</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.showRankingByLastChoosing">
+<tt class="descname">showRankingByLastChoosing</tt><big>(</big><em>rankingByLastChoosing=None</em>, <em>Debug=None</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.showRankingByLastChoosing" title="Permalink to this definition">¶</a></dt>
+<dd><p>A show method for self.rankinByChoosing result.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The self.computeRankingByLastChoosing(CoDual=False/True) method instantiating the self.rankingByChoosing slot is pre-required !</p>
 </div>
 </dd></dl>
 
@@ -1582,6 +1663,13 @@ digraphs d1 and d2 of same order. Returns None if d1 and d2 are of different ord
 equivalence valuations.</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="class">
+<dt id="digraphs.FusionDigraph">
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">FusionDigraph</tt><big>(</big><em>dg1</em>, <em>dg2</em><big>)</big><a class="headerlink" href="#digraphs.FusionDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
+<p>Instantiates the fusion of two given Digraph called dg1 and dg2.</p>
 </dd></dl>
 
 <dl class="class">
@@ -3658,6 +3746,50 @@ ballot = {     # voters x candidates x candidates
 </div>
 <div class="section" id="module-sortingDigraphs">
 <span id="sortingdigraphs-module"></span><span id="sortingdigraphs-label"></span><h2>sortingDigraphs module<a class="headerlink" href="#module-sortingDigraphs" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="sortingDigraphs.SortingByBestChoosingDigraph">
+<em class="property">class </em><tt class="descclassname">sortingDigraphs.</tt><tt class="descname">SortingByBestChoosingDigraph</tt><big>(</big><em>digraph=None</em>, <em>CoDual=True</em>, <em>Odd=True</em>, <em>Limited=None</em>, <em>Comments=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.SortingByBestChoosingDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
+<p>Specialization of generic Digraph class for sorting by best-choosing results.</p>
+<dl class="method">
+<dt id="sortingDigraphs.SortingByBestChoosingDigraph.showSorting">
+<tt class="descname">showSorting</tt><big>(</big><big>)</big><a class="headerlink" href="#sortingDigraphs.SortingByBestChoosingDigraph.showSorting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sortingDigraphs.SortingByChoosingDigraph">
+<em class="property">class </em><tt class="descclassname">sortingDigraphs.</tt><tt class="descname">SortingByChoosingDigraph</tt><big>(</big><em>digraph=None</em>, <em>CoDual=True</em>, <em>Odd=True</em>, <em>Limited=None</em>, <em>Comments=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.SortingByChoosingDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
+<p>Specialization of generic Digraph class for sorting by choosing results.</p>
+<dl class="method">
+<dt id="sortingDigraphs.SortingByChoosingDigraph.showSorting">
+<tt class="descname">showSorting</tt><big>(</big><em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.SortingByChoosingDigraph.showSorting" title="Permalink to this definition">¶</a></dt>
+<dd><p>A show method for self.sortingByChoosing result.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sortingDigraphs.SortingByLastChoosingDigraph">
+<em class="property">class </em><tt class="descclassname">sortingDigraphs.</tt><tt class="descname">SortingByLastChoosingDigraph</tt><big>(</big><em>digraph=None</em>, <em>CoDual=True</em>, <em>Odd=True</em>, <em>Limited=None</em>, <em>Comments=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.SortingByLastChoosingDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
+<p>Specialization of generic Digraph class for sorting-by-rejecting results.</p>
+<dl class="method">
+<dt id="sortingDigraphs.SortingByLastChoosingDigraph.showSorting">
+<tt class="descname">showSorting</tt><big>(</big><big>)</big><a class="headerlink" href="#sortingDigraphs.SortingByLastChoosingDigraph.showSorting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sortingDigraphs.SortingByPrudentChoosingDigraph">
+<em class="property">class </em><tt class="descclassname">sortingDigraphs.</tt><tt class="descname">SortingByPrudentChoosingDigraph</tt><big>(</big><em>digraph=None</em>, <em>CoDual=True</em>, <em>Odd=True</em>, <em>Limited=None</em>, <em>Comments=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.SortingByPrudentChoosingDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingByChoosingDigraph" title="sortingDigraphs.SortingByChoosingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingByChoosingDigraph</span></tt></a></p>
+<p>Specialization of generic Digraph class for sorting-by-rejecting results with prudent single elimination of chordless circuits.</p>
+</dd></dl>
+
 <dl class="class">
 <dt id="sortingDigraphs.SortingDigraph">
 <em class="property">class </em><tt class="descclassname">sortingDigraphs.</tt><tt class="descname">SortingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>argProfile=None</em>, <em>scaleSteps=5</em>, <em>minValuation=-100.0</em>, <em>maxValuation=100.0</em>, <em>isRobust=False</em>, <em>hasNoVeto=False</em>, <em>lowerClosed=True</em><big>)</big><a class="headerlink" href="#sortingDigraphs.SortingDigraph" title="Permalink to this definition">¶</a></dt>
