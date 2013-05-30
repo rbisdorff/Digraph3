@@ -714,14 +714,13 @@ class SortingByLastChoosingDigraph(Digraph):
 
 class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
     """
-    Specialization of generic Digraph class for sorting-by-rejecting results with prudent single elimination of chordless circuits.
+    Specialization of generic Digraph class for sorting-by-rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to the valuation domain maximum (1.0).
     """
-    def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=0.5,Comments=False,Debug=False):
+    def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=1.0,Comments=False,Debug=False):
         from copy import deepcopy
         from decimal import Decimal
         from time import time
-        if Comments:
-            
+        if Comments:          
             t0 = time()
             print('------- Commenting sorting by prudent chossing ------')
         if digraph == None:
@@ -759,8 +758,8 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
         self.sortingByChoosing = self.computeRankingByChoosing(CoDual=CoDual)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-        t1 = time()
         if Comments:
+            t1 = time()
             gdeter = digraph.computeDeterminateness()
             self.showSorting()
             print('Circuits cutting level limit  : %.3f' % Limited)
@@ -796,14 +795,14 @@ if __name__ == "__main__":
 
 #    t = RandomCBPerformanceTableau(numberOfActions=20)
 #    t.saveXMCDA2('test')
-    t = XMCDA2PerformanceTableau('test')
+    t = XMCDA2PerformanceTableau('uniSorting')
     #s = SortingDigraph(t,lowerClosed=True)
     #s.showSorting(Reverse=True)
     print('------- testing sorting by prudent chossing ------')
     g = BipolarOutrankingDigraph(t)
     gdeter = g.computeDeterminateness()
     t0 = time()
-    s = SortingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.5)
+    s = SortingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.333)
     t1 = time()
 #    s.showSorting()
 #    print('Circuits elimination cut level: %.3f' % s.cutLevel)
