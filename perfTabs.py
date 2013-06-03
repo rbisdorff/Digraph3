@@ -867,6 +867,19 @@ class PerformanceTableau(object):
             result[g]['minimum'] = evaluations[0]
             result[g]['maximum'] = evaluations[-1]
         return result
+        
+    def showHTMLPerformanceTableau(self,isSorted=True,ndigits=2):
+        """
+        shows the html version of the performance tableau in a browser window.
+        """
+        import webbrowser
+        fileName = '/tmp/performanceTable.html'
+        fo = open(fileName,'w')
+        fo.write(self.htmlPerformanceTable(isSorted=isSorted,ndigits=ndigits))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+           
             
     def htmlPerformanceTable(self,isSorted=True,ndigits=2):
         """

@@ -2223,6 +2223,19 @@ class Digraph(object):
         print('\n')
         print('Valuation domain: ', self.valuationdomain)
 
+    def showHTMLRelationTable(self):
+        """
+        Launches a browser window with the colored relation table of self.
+        """
+        import webbrowser
+        fileName = '/tmp/relationTable.html'
+        fo = open(fileName,'w')
+        fo.write(self.htmlRelationTable(isColored=True))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+        
+        
     def htmlRelationTable(self,tableTitle='Relation Table',relationName=' R ',hasIntegerValues=False,actionsSubset= None,isColored=False):
         """
         renders the relation valuation in actions X actions html table format.

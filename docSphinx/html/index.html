@@ -963,7 +963,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1382,6 +1382,12 @@ Renders the sharpest of two characteristic vectors v and w.</p>
 <dt id="digraphs.Digraph.showGoodChoices">
 <tt class="descname">showGoodChoices</tt><big>(</big><em>Recompute=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.showGoodChoices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Characteristic values for potentially good choices.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.showHTMLRelationTable">
+<tt class="descname">showHTMLRelationTable</tt><big>(</big><big>)</big><a class="headerlink" href="#digraphs.Digraph.showHTMLRelationTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Launches a browser window with the colored relation table of self.</p>
 </dd></dl>
 
 <dl class="method">
@@ -2290,7 +2296,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -2453,6 +2459,12 @@ the quantiles matrix action x criterion</p>
 <tt class="descname">showEvaluationStatistics</tt><big>(</big><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.showEvaluationStatistics" title="Permalink to this definition">¶</a></dt>
 <dd><p>renders the variance and standard deviation of
 the values observed in the performance Tableau.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="perfTabs.PerformanceTableau.showHTMLPerformanceTableau">
+<tt class="descname">showHTMLPerformanceTableau</tt><big>(</big><em>isSorted=True</em>, <em>ndigits=2</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows the html version of the performance tableau in a browser window.</p>
 </dd></dl>
 
 <dl class="method">
@@ -3231,7 +3243,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -3785,9 +3797,9 @@ ballot = {     # voters x candidates x candidates
 
 <dl class="class">
 <dt id="sortingDigraphs.SortingByPrudentChoosingDigraph">
-<em class="property">class </em><tt class="descclassname">sortingDigraphs.</tt><tt class="descname">SortingByPrudentChoosingDigraph</tt><big>(</big><em>digraph=None</em>, <em>CoDual=True</em>, <em>Odd=True</em>, <em>Limited=None</em>, <em>Comments=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.SortingByPrudentChoosingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">sortingDigraphs.</tt><tt class="descname">SortingByPrudentChoosingDigraph</tt><big>(</big><em>digraph=None</em>, <em>CoDual=True</em>, <em>Odd=True</em>, <em>Limited=1.0</em>, <em>Comments=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.SortingByPrudentChoosingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingByChoosingDigraph" title="sortingDigraphs.SortingByChoosingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingByChoosingDigraph</span></tt></a></p>
-<p>Specialization of generic Digraph class for sorting-by-rejecting results with prudent single elimination of chordless circuits.</p>
+<p>Specialization of generic Digraph class for sorting-by-rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to the valuation domain maximum (1.0).</p>
 </dd></dl>
 
 <dl class="class">
