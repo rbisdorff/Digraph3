@@ -674,7 +674,7 @@ class SortingByBestChoosingDigraph(Digraph):
         from copy import deepcopy
         if digraph == None:
             digraph = RandomValuationDigraph()
-        digraph.recodeValuation(-1.0,1.0)
+        #digraph.recodeValuation(-1.0,1.0)
         digraphName = 'sorting-by-best'+digraph.name
         self.name = deepcopy(digraphName)
         self.actions = deepcopy(digraph.actions)
@@ -697,7 +697,7 @@ class SortingByLastChoosingDigraph(Digraph):
         from copy import deepcopy
         if digraph == None:
             digraph = RandomValuationDigraph()
-        digraph.recodeValuation(-1.0,1.0)
+        #digraph.recodeValuation(-1.0,1.0)
         digraphName = 'sorting-by-last'+digraph.name
         self.name = deepcopy(digraphName)
         self.actions = deepcopy(digraph.actions)
@@ -725,12 +725,13 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
             print('------- Commenting sorting by prudent chossing ------')
         if digraph == None:
             digraph = RandomValuationDigraph()
-        digraph.recodeValuation(-1.0,1.0)
+        
         digraphName = 'sorting-by-prudent-choosing'+digraph.name
         self.name = deepcopy(digraphName)
         self.actions = deepcopy(digraph.actions)
         self.order = len(self.actions)
         self.valuationdomain = deepcopy(digraph.valuationdomain)
+        #self.recodeValuation(-1.0,1.0)
         s1 = SortingByLastChoosingDigraph(digraph,CoDual=CoDual,Debug=False)
         s2 = SortingByBestChoosingDigraph(digraph,CoDual=CoDual,Debug=False)
         fus = FusionDigraph(s1,s2)
@@ -747,9 +748,9 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
             corrgp = digraph.computeOrdinalCorrelation(fusp)
             corrg = digraph.computeOrdinalCorrelation(fus)
             if Comments:
-                print('Correlation with cutting    : %.3f' % corrgp['correlation'])
-                print('Correlation without cutting : %.3f' % corrg['correlation'])
-            if corrgp['correlation'] > corrg['correlation']:
+                print('Correlation with cutting    : %.3f (%.3f)' % (corrgp['correlation'],corrgp['determination']))
+                print('Correlation without cutting : %.3f (%.3f)' % (corrg['correlation'],corrg['determination']))
+            if (corrgp['correlation']*corrgp['determination']) > (corrg['correlation']*corrg['determination']):
                 self.relation = deepcopy(fusp.relation)
             else:
                 self.relation = deepcopy(fus.relation)
