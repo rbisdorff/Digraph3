@@ -854,6 +854,7 @@ class Digraph(object):
             else:
                 corr = gcdcd.computeOrdinalCorrelation(pgr)
             rankings.append((corr['correlation'],qualmaj,rkg))
+            #rankings.append((corr['correlation']*corr['determination'],qualmaj,rkg))
             if Comments:
                 if Debug:
                     print(rankings)

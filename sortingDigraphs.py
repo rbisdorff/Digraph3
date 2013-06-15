@@ -750,7 +750,8 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
             if Comments:
                 print('Correlation with cutting    : %.3f (%.3f)' % (corrgp['correlation'],corrgp['determination']))
                 print('Correlation without cutting : %.3f (%.3f)' % (corrg['correlation'],corrg['determination']))
-            if (corrgp['correlation']*corrgp['determination']) > (corrg['correlation']*corrg['determination']):
+            if corrgp['correlation'] > (corrg['correlation']:
+#            if (corrgp['correlation']*corrgp['determination']) > (corrg['correlation']*corrg['determination']):
                 self.relation = deepcopy(fusp.relation)
             else:
                 self.relation = deepcopy(fus.relation)
