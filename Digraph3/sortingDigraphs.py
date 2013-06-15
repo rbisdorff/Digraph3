@@ -716,7 +716,7 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
     """
     Specialization of generic Digraph class for sorting-by-rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to the valuation domain maximum (1.0).
     """
-    def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=1.0,Comments=False,Debug=False):
+    def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=0.2,Comments=False,Debug=False):
         from copy import deepcopy
         from decimal import Decimal
         from time import time
@@ -724,33 +724,35 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
             t0 = time()
             print('------- Commenting sorting by prudent chossing ------')
         if digraph == None:
-            digraph = RandomValuationDigraph()
-        
-        digraphName = 'sorting-by-prudent-choosing'+digraph.name
+            digraph_ = RandomValuationDigraph()
+        else:
+            digraph_ = deepcopy(digraph)
+        digraph_.recodeValuation(-1,1)
+        digraphName = 'sorting-by-prudent-choosing'+digraph_.name
         self.name = deepcopy(digraphName)
-        self.actions = deepcopy(digraph.actions)
+        self.actions = deepcopy(digraph_.actions)
         self.order = len(self.actions)
-        self.valuationdomain = deepcopy(digraph.valuationdomain)
+        self.valuationdomain = deepcopy(digraph_.valuationdomain)
         #self.recodeValuation(-1.0,1.0)
-        s1 = SortingByLastChoosingDigraph(digraph,CoDual=CoDual,Debug=False)
-        s2 = SortingByBestChoosingDigraph(digraph,CoDual=CoDual,Debug=False)
+        s1 = SortingByLastChoosingDigraph(digraph_,CoDual=CoDual,Debug=False)
+        s2 = SortingByBestChoosingDigraph(digraph_,CoDual=CoDual,Debug=False)
         fus = FusionDigraph(s1,s2)
-        cutLevel = min(digraph.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments),Decimal(Limited))
+        cutLevel = min(digraph_.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments),Decimal(Limited))
         self.cutLevel = cutLevel
         if cutLevel > self.valuationdomain['med']:
             if cutLevel < self.valuationdomain['max']:
-                gp = PolarisedDigraph(digraph,level=cutLevel,StrictCut=True)
+                gp = PolarisedDigraph(digraph_,level=cutLevel,StrictCut=True)
             else:
-                gp = PolarisedDigraph(digraph,level=cutLevel,StrictCut=False)
+                gp = PolarisedDigraph(digraph_,level=cutLevel,StrictCut=False)
             s1p = SortingByLastChoosingDigraph(gp,CoDual=CoDual,Debug=False)
             s2p = SortingByBestChoosingDigraph(gp,CoDual=CoDual,Debug=False)
             fusp = FusionDigraph(s1p,s2p)
-            corrgp = digraph.computeOrdinalCorrelation(fusp)
-            corrg = digraph.computeOrdinalCorrelation(fus)
+            corrgp = digraph_.computeOrdinalCorrelation(fusp)
+            corrg = digraph_.computeOrdinalCorrelation(fus)
             if Comments:
                 print('Correlation with cutting    : %.3f (%.3f)' % (corrgp['correlation'],corrgp['determination']))
                 print('Correlation without cutting : %.3f (%.3f)' % (corrg['correlation'],corrg['determination']))
-            if corrgp['correlation'] > (corrg['correlation']:
+            if corrgp['correlation'] > corrg['correlation']:
 #            if (corrgp['correlation']*corrgp['determination']) > (corrg['correlation']*corrg['determination']):
                 self.relation = deepcopy(fusp.relation)
             else:
@@ -762,12 +764,12 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
         self.notGamma = self.notGammaSets()
         if Comments:
             t1 = time()
-            gdeter = digraph.computeDeterminateness()
+            gdeter = digraph_.computeDeterminateness()
             self.showSorting()
             print('Circuits cutting level limit  : %.3f' % Limited)
             print('Circuits elimination cut level: %.3f' % self.cutLevel)
             print('Ordinal Correlation with given outranking')
-            corr = digraph.computeOrdinalCorrelation(self)
+            corr = digraph_.computeOrdinalCorrelation(self)
             print('Correlation     : %.3f' % corr['correlation'])
             print('Determinateness : %.3f (%.3f)' % (corr['determination'],gdeter))
             print('Execution time  : %.4f sec.' % (t1-t0))
@@ -795,17 +797,18 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-#    t = RandomCBPerformanceTableau(numberOfActions=20)
-#    t.saveXMCDA2('test')
+    t = RandomCBPerformanceTableau(numberOfActions=20)
+    t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('uniSorting')
     #s = SortingDigraph(t,lowerClosed=True)
     #s.showSorting(Reverse=True)
     print('------- testing sorting by prudent chossing ------')
     g = BipolarOutrankingDigraph(t)
+    #g.recodeValuation(-1,1)
     gdeter = g.computeDeterminateness()
     t0 = time()
-    s = SortingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.333)
-    t1 = time()
+    s = SortingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.2)
+#    t1 = time()
 #    s.showSorting()
 #    print('Circuits elimination cut level: %.3f' % s.cutLevel)
 #    print('Ordinal Correlation with given outranking')
