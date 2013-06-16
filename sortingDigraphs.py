@@ -714,9 +714,9 @@ class SortingByLastChoosingDigraph(Digraph):
 
 class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
     """
-    Specialization of generic Digraph class for sorting-by-rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to the valuation domain maximum (1.0).
+    Specialization of generic Digraph class for sorting-by-rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to 20% of the valuation domain maximum (1.0).
     """
-    def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=0.2,Comments=False,Debug=False):
+    def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=0.2,Comments=False,Debug=False,SplitCorrelation=True):
         from copy import deepcopy
         from decimal import Decimal
         from time import time
@@ -729,10 +729,10 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
             digraph_ = deepcopy(digraph)
         digraph_.recodeValuation(-1,1)
         digraphName = 'sorting-by-prudent-choosing'+digraph_.name
-        self.name = deepcopy(digraphName)
-        self.actions = deepcopy(digraph_.actions)
+        self.name = digraphName
+        self.actions = digraph_.actions
         self.order = len(self.actions)
-        self.valuationdomain = deepcopy(digraph_.valuationdomain)
+        self.valuationdomain = digraph_.valuationdomain
         #self.recodeValuation(-1.0,1.0)
         s1 = SortingByLastChoosingDigraph(digraph_,CoDual=CoDual,Debug=False)
         s2 = SortingByBestChoosingDigraph(digraph_,CoDual=CoDual,Debug=False)
@@ -750,13 +750,18 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
             corrgp = digraph_.computeOrdinalCorrelation(fusp)
             corrg = digraph_.computeOrdinalCorrelation(fus)
             if Comments:
-                print('Correlation with cutting    : %.3f (%.3f)' % (corrgp['correlation'],corrgp['determination']))
-                print('Correlation without cutting : %.3f (%.3f)' % (corrg['correlation'],corrg['determination']))
-            if corrgp['correlation'] > corrg['correlation']:
-#            if (corrgp['correlation']*corrgp['determination']) > (corrg['correlation']*corrg['determination']):
-                self.relation = deepcopy(fusp.relation)
+                print('Correlation with cutting    : %.3f x %.3f = %.3f' % (corrgp['correlation'],corrgp['determination'],corrgp['correlation']*corrgp['determination']))
+                print('Correlation without cutting : %.3f x %.3f = %.3f' % (corrg['correlation'],corrg['determination'],corrg['correlation']*corrg['determination']))
+            if SplitCorrelation:
+                if corrgp['correlation'] > corrg['correlation']:           
+                    self.relation = deepcopy(fusp.relation)
+                else:
+                    self.relation = deepcopy(fus.relation)
             else:
-                self.relation = deepcopy(fus.relation)
+                if (corrgp['correlation']*corrgp['determination']) > (corrg['correlation']*corrg['determination']):
+                    self.relation = deepcopy(fusp.relation)
+                else:
+                    self.relation = deepcopy(fus.relation)                
         else:
             self.relation = deepcopy(fus.relation)
         self.sortingByChoosing = self.computeRankingByChoosing(CoDual=CoDual)
@@ -799,7 +804,7 @@ if __name__ == "__main__":
 
     t = RandomCBPerformanceTableau(numberOfActions=20)
     t.saveXMCDA2('test')
-    t = XMCDA2PerformanceTableau('uniSorting')
+    #t = XMCDA2PerformanceTableau('uniSorting')
     #s = SortingDigraph(t,lowerClosed=True)
     #s.showSorting(Reverse=True)
     print('------- testing sorting by prudent chossing ------')
@@ -808,6 +813,7 @@ if __name__ == "__main__":
     gdeter = g.computeDeterminateness()
     t0 = time()
     s = SortingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.2)
+    s = SortingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.2,SplitCorrelation=False)
 #    t1 = time()
 #    s.showSorting()
 #    print('Circuits elimination cut level: %.3f' % s.cutLevel)
