@@ -197,6 +197,7 @@ class Digraph(object):
     """
     def __init__(self,file=None,order=7):
         import digraphs,sys,copy
+        from decimal import Decimal
         if file == None:
             g = digraphs.RandomValuationDigraph(order=order)
             self.name = g.name
@@ -210,19 +211,20 @@ class Digraph(object):
             self.notGamma = self.notGammaSets()
         else:
             fileName = file+'.py'
-            exec(compile(open(fileName).read(), fileName, 'exec'))
+            argDict = {}
+            exec(compile(open(fileName).read(), fileName, 'exec'), argDict)
             self.name = file
-            self.actions = locals()['actionset']
+            self.actions = argDict['actionset']
             self.order = len(self.actions)
-            self.valuationdomain = locals()['valuationdomain']
+            self.valuationdomain = argDict['valuationdomain']
             self.convertValuationToDecimal()
-            self.relation = locals()['relation']
+            self.relation = argDict['relation']
             self.convertRelationToDecimal()
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
         try:
-            self.reflections = locals()['reflections']
-            self.rotations = locals()['rotations']
+            self.reflections = argDict['reflections']
+            self.rotations = argDict['rotations']
         except:
             pass
 
@@ -4463,7 +4465,7 @@ class Digraph(object):
         else:
             return Max
 
-    def save(self,fileName='tempdigraph',option=None,Decimal=True):
+    def save(self,fileName='tempdigraph',option=None,DecimalValuation=True):
         """Persistent storage of a Digraph class instance in the form of
             a python source code file"""
         print('*--- Saving digraph in file: <' + fileName + '.py> ---*')
@@ -4475,6 +4477,8 @@ class Digraph(object):
         fileNameExt = str(fileName)+str('.py')
         fo = open(fileNameExt, 'w')
         fo.write('# automatically generated random irreflexive digraph\n')
+        if DecimalValuation:
+            fo.write('from decimal import Decimal\n')
         fo.write('actionset = [\n')
         for x in actions:
             fo.write('\'' + str(x) + '\',\n')
@@ -4482,7 +4486,7 @@ class Digraph(object):
         try:
             hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
         except KeyError:
-            hasIntegerValuation = not Decimal
+            hasIntegerValuation = not DecimalValuation
         if not hasIntegerValuation:
             fo.write('valuationdomain = {\'hasIntegerValuation\': False, \'min\': Decimal("'+str(Min)+'"),\'med\': Decimal("'+str(Med)+'"),\'max\': Decimal("'+str(Max)+'")}\n')
         else:
@@ -4650,15 +4654,16 @@ class Digraph(object):
             os.system('/opt/local/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
         else:
             print('Error: detectChordlessCircuits binary could not be found !!!')
-        exec(compile(open(str(resultFile)).read(), str(resultFile), 'exec'))
-        circuits = locals()['circuitsList']
+        argDict = {}
+        exec(compile(open(str(resultFile)).read(), str(resultFile), 'exec'),argDict)
+        circuits = argDict['circuitsList']
         if circuits == []:
             Detected = False
         else:
             Detected = True
         if Debug:
             print(resultFile)
-            print(locals()['circuitsList'])
+            print(argDict['circuitsList'])
             if Detected:
                 print('A chordless circuit has been detected !')
             else:
@@ -4742,11 +4747,12 @@ class Digraph(object):
             os.system('/opt/local/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
         else:
             print('Error: enumChordlessCircuits binary not found !!!')
-        exec(compile(open(str(resultFile)).read(), str(resultFile), 'exec'))
-        circuits = locals()['circuitsList']
+        argDict = {}
+        exec(compile(open(str(resultFile)).read(), str(resultFile), 'exec'),argDict)
+        circuits = argDict['circuitsList']
         if Debug:
             print(resultFile)
-            print(locals()['circuitsList'])
+            print(argDict['circuitsList'])
         result = []
         for x in circuits:
             # !! a circuit has a length n + 1 !!
@@ -8798,11 +8804,12 @@ class WeakCocaDigraph(Digraph):
             self.relation = copy.deepcopy(digraph.relation)
         else:
             fileName = digraph + 'py'
-            exec(compile(open(fileName).read(), fileName, 'exec'))
+            argDict = {}
+            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
             self.name = digraph
-            self.actions = locals()['actionset']
-            self.valuationdomain = locals()['valuationdomain']
-            self.relation = locals()['relation']
+            self.actions = argDict['actionset']
+            self.valuationdomain = argDict['valuationdomain']
+            self.relation = argDict['relation']
 
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
@@ -8935,11 +8942,12 @@ class CoceDigraph(Digraph):
             self.relation = deepcopy(digraph.relation)
         else:
             fileName = digraph + 'py'
-            exec(compile(open(fileName).read(), fileName, 'exec'))
+            argDict
+            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
             self.name = digraph
-            self.actions = locals()['actionset']
-            self.valuationdomain = locals()['valuationdomain']
-            self.relation = locals()['relation']
+            self.actions = argDict['actionset']
+            self.valuationdomain = argDict['valuationdomain']
+            self.relation = argDict['relation']
 
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
@@ -9025,11 +9033,12 @@ class CocaDigraph(Digraph):
             self.relation = copy.deepcopy(digraph.relation)
         else:
             fileName = digraph + 'py'
-            exec(compile(open(fileName).read(), fileName, 'exec'))
+            argDict = {}
+            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
             self.name = digraph
-            self.actions = locals()['actionset']
-            self.valuationdomain = locals()['valuationdomain']
-            self.relation = locals()['relation']
+            self.actions = argDict['actionset']
+            self.valuationdomain = argDict['valuationdomain']
+            self.relation = argDict['relation']
 
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
