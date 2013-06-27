@@ -121,10 +121,12 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             if isinstance(argProfile,str): # input from stored instantiation
                 fileName = argProfile
                 fileNameExt = fileName + '.py'
-                exec(compile(open(fileNameExt).read(), fileNameExt, 'exec'))
+                profile = {}
+                exec(compile(open(fileNameExt).read(), fileNameExt, 'exec'),profile)
+                #print(profile)
                 self.name = fileName
-                self.categories = copy.deepcopy(locals()['categories'])
-                self.criteriaCategoryLimits = copy.deepcopy(locals()['criteriaCategoryLimits'])
+                self.categories = profile['categories']
+                self.criteriaCategoryLimits = profile['criteriaCategoryLimits']
             else: # input from a profiles dictionary
                 self.name = 'sorting_with_given_profile'
                 self.categories = copy.deepcopy(argProfile['categories'])
@@ -804,16 +806,17 @@ if __name__ == "__main__":
 
     t = RandomCBPerformanceTableau(numberOfActions=20)
     t.saveXMCDA2('test')
-    #t = XMCDA2PerformanceTableau('uniSorting')
-    #s = SortingDigraph(t,lowerClosed=True)
+    t = XMCDA2PerformanceTableau('uniSorting')
+    #s = SortingDigraph(t,'tempProfile6')
+    #s.showSorting()
     #s.showSorting(Reverse=True)
     print('------- testing sorting by prudent chossing ------')
     g = BipolarOutrankingDigraph(t)
     #g.recodeValuation(-1,1)
-    gdeter = g.computeDeterminateness()
-    t0 = time()
+    #gdeter = g.computeDeterminateness()
+    #t0 = time()
     s = SortingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.2)
-    s = SortingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.2,SplitCorrelation=False)
+    #s = SortingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.2,SplitCorrelation=False)
 #    t1 = time()
 #    s.showSorting()
 #    print('Circuits elimination cut level: %.3f' % s.cutLevel)
