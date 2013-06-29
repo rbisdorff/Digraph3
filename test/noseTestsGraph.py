@@ -16,8 +16,10 @@ def testGridGraph():
 def testGraph():
     print('==>> Testing Graph instantiation')
     g = RandomGraph(order=7,edgeProbability=0.5)
-    g.save()
+    g.save('testGraph')
+    gs = Graph('testGraph')
     g.showShort()
+    gs.showShort()
     g.computeChordlessCycles(Comments=True,Debug=True)
     g.saveEdges(Agrum=True)
     g.exportGraphViz('testGraphViz')

@@ -47,12 +47,13 @@ class Graph(object):
             self.gamma = self.gammaSets()
         else:
             fileNameExt = fileName+'.py'
-            exec(compile(open(fileNameExt).read(), fileNameExt, 'exec'))
+            argDict = {}
+            exec(compile(open(fileNameExt).read(), fileNameExt, 'exec'),argDict)
             self.name = fileName
-            self.vertices = locals()['vertices']
+            self.vertices = argDict['vertices']
             self.order = len(self.vertices)
-            self.valuationDomain = locals()['valuationDomain']
-            self.edges = locals()['edges']
+            self.valuationDomain = argDict['valuationDomain']
+            self.edges = argDict['edges']
             self.gamma = self.gammaSets()
 
     def graph2Digraph(self):
