@@ -275,27 +275,28 @@ class PerformanceTableau(object):
         
         if filePerfTab != None:
             fileName = filePerfTab + '.py'
-            exec(compile(open(fileName).read(), fileName, 'exec'))
+            argDict = {}
+            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
             self.name = str(filePerfTab)
             try:
-                self.actions = locals()['actions']
+                self.actions = argDict['actions']
             except:
-                self.actions = locals()['actionset']
+                self.actions = argDict['actionset']
             try:
-                self.weightset = locals()['weightset']
-                self.thresholds = locals()['threshold']
+                self.weightset = argDict['weightset']
+                self.thresholds = argDict['threshold']
                 self.criteria = {}
-                for g in locals()['criteria']:
+                for g in argDict['criteria']:
                     self.criteria[g] = {'weight':Decimal(str(self.weightset[g])), 'thresholds': self.thresholds[g]}
                     
                 
             except:
-                self.criteria = locals()['criteria']
+                self.criteria = argDict['criteria']
             try:
-                self.weightPreorder = locals()['weightorder']
+                self.weightPreorder = argDict['weightorder']
             except:
                 self.weightPreorder = self.computeWeightPreorder()
-            self.evaluation = locals()['evaluation']
+            self.evaluation = argDict['evaluation']
         elif not isEmpty:
             import copy
             temp = RandomPerformanceTableau()
@@ -1011,6 +1012,7 @@ class PerformanceTableau(object):
         fileNameExt = str(fileName)+str('.py')
         fo = open(fileNameExt, 'w')
         fo.write('# Saved performance Tableau: \n')
+        fo.write('from decimal import Decimal\n')
         fo.write('actions = {\n')
         for x in actions:
             fo.write('\'%s\': {\'name\': \'%s\'},\n' %(x,x))
