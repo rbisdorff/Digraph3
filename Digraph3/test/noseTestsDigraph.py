@@ -258,7 +258,11 @@ def testRandomValuationDigraph():
     g = RandomValuationDigraph(ndigits=3)
     h = PolarisedDigraph(g,0.70)
     h.showRelationTable()
+    h.save('testPol')
+    hp = Digraph('testPol')
     g.showRelationTable()
+    g.save('testVal')
+    gs = Digraph('testVal')
 
 def testKneserDigraph():
     print('*==>> testing Kneser digraphs ------*')
