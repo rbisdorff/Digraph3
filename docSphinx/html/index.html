@@ -69,10 +69,13 @@
 <span id="introduction-label"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This Technical Manual describes the Python-3 implementation of generic resources for computing kernels and other qualified choices in bipolar-valued outranking digraphs. This computing ressource is useful in the filed of algorithmic decision sciences problems.</p>
 <dl class="docutils">
-<dt>Two downlaod options are give: and may be downloaded:</dt>
+<dt>Two downlaod options are given:</dt>
 <dd><ol class="first last arabic simple">
-<li>Either (easiest under Linux or Mac OS-X), by using a subversion client: ..$svn co <a class="reference external" href="http://leopold-loewenheim.uni.lu/svn/repos/Digraph3">http://leopold-loewenheim.uni.lu/svn/repos/Digraph3</a></li>
-<li>Or, download the distribution tar.gz archive: &lt;<a class="reference external" href="http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3:2.1.tar.gz">http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3:2.1.tar.gz</a>&gt;. Extracting the archive installs a working directory withh all necessary files.</li>
+<li>Either (easiest under Linux or Mac OS-X), by using a subversion client:
+..$svn co <a class="reference external" href="http://leopold-loewenheim.uni.lu/svn/repos/Digraph3">http://leopold-loewenheim.uni.lu/svn/repos/Digraph3</a></li>
+<li>Or, download the distribution tar.gz archive:
+&lt;<a class="reference external" href="http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3:2.1.tar.gz">http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3:2.1.tar.gz</a>&gt;.
+Extracting the archive installs a working directory withh all necessary files.</li>
 </ol>
 </dd>
 </dl>
@@ -971,7 +974,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2304,7 +2307,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3251,7 +3254,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
