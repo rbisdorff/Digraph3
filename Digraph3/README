@@ -25,12 +25,8 @@ Installation instructions:
 
 cd to the svn or the extracted <Digraph3> directory:
 
-.. /Digraph3$ make docHTML
-generates the HTML documentation in the ./doc subdirectory
-(hyperlatex needed ..$ apt-get install hyperlatex)
-
-.. /Digraph3$ make docPDF
-generates a PDF document in the ./doc subdirectory
+../Digraph3$ make install
+installs (with sudo !!) the digraphs module in the current running python environment 
 
 .. /Digraph3$ make tests
 runs a nose test suite in the ./test directory
@@ -39,8 +35,9 @@ runs a nose test suite in the ./test directory
 .. /Digraph3$ make verboseTests
 runs a verbose (with stdout not captured) nose test suite 
 
-../Digraph3$ make install
-installs (with sudo !!) the digraphs module in the current running python environment 
+Technical documentation is available under the following link:
+
+http://leopold-loewenheim.uni.lu/Digraph3/docSphinx/html/index.html
 
 Enjoy !!
 R Bisdorff
