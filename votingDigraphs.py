@@ -59,11 +59,12 @@ class VotingProfile(object):
 
         if fileVotingProfile != None:
             fileName = fileVotingProfile+'.py'
-            exec(compile(open(fileName).read(), fileName, 'exec'))
+            argDict = {}
+            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
             self.name = str(fileVotingProfile)
-            self.candidates = locals()['candidates']
-            self.voters = locals()['voters']
-            self.ballot = locals()['ballot']
+            self.candidates = argDict['candidates']
+            self.voters = argDict['voters']
+            self.ballot = argDict['ballot']
         else:
             randv = RandomVotingProfile()
             self.name = 'randomCondorcet'
@@ -167,11 +168,12 @@ class LinearVotingProfile(VotingProfile):
             fileName = fileVotingProfile + '.py'
         ## else:
         ##     fileName = 'testapprovalvotingprofile.py'
-            exec(compile(open(fileName).read(), fileName, 'exec'))
+            argDict = {}
+            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
             self.name = str(fileVotingProfile)
-            self.candidates = locals()['candidates']
-            self.voters = locals()['voters']
-            self.linearBallot = locals()['linearBallot']
+            self.candidates = argDict['candidates']
+            self.voters = argDict['voters']
+            self.linearBallot = argDict['linearBallot']
             self.ballot = self.computeBallot()
         else:
             randv = RandomLinearVotingProfile(numberOfCandidates=numberOfCandidates,
@@ -414,11 +416,12 @@ class ApprovalVotingProfile(VotingProfile):
             fileName = fileVotingProfile + '.py'
         ## else:
         ##     fileName = 'testapprovalvotingprofile.py'
-            exec(compile(open(fileName).read(), fileName, 'exec'))
+            argDict = {}
+            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
             self.name = str(fileVotingProfile)
-            self.candidates = locals()['candidates']
-            self.voters = locals()['voters']
-            self.approvalBallot = locals()['approvalBallot']
+            self.candidates = argDict['candidates']
+            self.voters = argDict['voters']
+            self.approvalBallot = argDict['approvalBallot']
             self.ballot = self.computeBallot()
         else:
             randv = RandomApprovalVotingProfile()
