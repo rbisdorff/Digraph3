@@ -15,14 +15,14 @@ Technical Documentation of the Digraph resources!
 Introduction
 ------------
 
-This Technical Manual describes the Python-3 implementation of generic resources for computing kernels and other qualified choices in bipolar-valued outranking digraphs. This computing ressource is useful in the filed of algorithmic decision sciences problems.
+This Technical Manual describes the Python-3 implementation of generic resources for computing kernels and other qualified choices in bipolar-valued outranking digraphs. This computing ressource is useful in the field of algorithmic decision sciences problems.
 
 Two downlaod options are given:
-    1. |Either (easiest under Linux or Mac OS-X), by using a subversion client: 
-       |..$svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
-    2. |Or, download the distribution tar.gz archive: 
-       |<http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3:2.1.tar.gz>. 
-       |Extracting the archive installs a working directory withh all necessary files.
+    1. Either (easiest under Linux or Mac OS-X), by using a subversion client: \n 
+       ..$svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
+    2. Or, download the distribution tar.gz archive: \n
+       <http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3:2.1.tar.gz>. \n
+       Extracting the archive installs a working directory with all necessary files.
 
 Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://charles-sanders-peirce.uni.lu/bisdorff/>, University of Luxembourg.
 
