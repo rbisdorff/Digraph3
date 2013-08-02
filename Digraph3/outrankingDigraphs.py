@@ -33,7 +33,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
     Abstract class for methods common to all
     outranking digraphs
     """
-    def __init__(self,argPerfTab=None,coalition=None):
+    def __init__(self,argPerfTab=None,coalition=None,hasNoVeto=False):
         import copy
         if isinstance(argPerfTab, (PerformanceTableau,RandomPerformanceTableau)):
             perfTab = argPerfTab
@@ -61,7 +61,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         self.convertWeightFloatToDecimal()
         self.evaluation = copy.deepcopy(perfTab.evaluation)
         self.convertEvaluationFloatToDecimal()
-        self.relation = self.constructRelation(criteria,perfTab.evaluation)
+        self.relation = self.constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)
         methodData = {}
         methodData['parameter'] = {'valuationType':'normalized','variant':'unipolar'}
         self.methodData = methodData
@@ -467,7 +467,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             gini = Decimal('-1')
         return gini
 
-    def constructRelation(self,criteria,evaluation):
+    def constructRelation(self,criteria,evaluation,hasNoVeto=False):
         """
         Parameters:
             PerfTab.criteria, PerfTab.evaluation.
@@ -5281,7 +5281,7 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     """
     
 
-    def constructRelation(self,criteria,evaluation,hasSymmetricThresholds=True):
+    def constructRelation(self,criteria,evaluation,hasSymmetricThresholds=True,hasNoVeto=False):
         """
         Parameters:
             PerfTab.criteria, PerfTab.evaluation.
@@ -5374,6 +5374,8 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                 wvv = wvx + wvy * abs(evaluation[c][a])
                         except:
                             wvv = None
+                        if hasNoVeto:
+                            wvv = None
                         try:
                             vx = criteria[c]['thresholds']['veto'][0]
                             vy = criteria[c]['thresholds']['veto'][1]
@@ -5382,6 +5384,8 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             else:
                                 vv = vx + vy * abs(evaluation[c][a])
                         except:
+                            vv = None
+                        if hasNoVeto:
                             vv = None
 
                         d = evaluation[c][a] - evaluation[c][b]
@@ -5594,7 +5598,7 @@ class UnanimousOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     temporary unanimous outranking digraphs
     """
 
-    def constructRelation(self,criteria,evaluation,hasSymmetricThresholds=True):
+    def constructRelation(self,criteria,evaluation,hasSymmetricThresholds=True,hasNoVeto=True):
         """
         Parameters: PerfTab.criteria, PerfTab.evaluation.
         Renders the biploar valued outranking relation from the data
@@ -5650,30 +5654,37 @@ class UnanimousOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                         lc0 = self.localConcordance(d,ind,wp,p)
                             
                         counter += lc0
-                        
-                        try:
-                            vx = criteria[c]['thresholds']['veto'][0]
-                            vy = criteria[c]['thresholds']['veto'][1]
-                            if hasSymmetricThresholds:
-                                v = vx + vy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
-                            else:
-                                v = vx + vy * abs(evaluation[c][a])
-                            veto = veto + self.localVeto(d, v)
-                        except:
-                            veto = veto + Decimal("0")
+                        if not hasNoVeto:
+                            try:
+                                vx = criteria[c]['thresholds']['veto'][0]
+                                vy = criteria[c]['thresholds']['veto'][1]
+                                if hasSymmetricThresholds:
+                                    v = vx + vy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                else:
+                                    v = vx + vy * abs(evaluation[c][a])
+                                veto = veto + self.localVeto(d, v)
+                            except:
+                                veto = veto + Decimal("0")
                     else:
                         nvc = nvc - 1
                         # under the universality condition nvc not to be used.
-       
-                if veto == Decimal("0"):
+                if not hasNoVeto:
+                    if veto == Decimal("0"):
+                        if counter ==  nc:
+                            relation[a][b] = Max
+                        elif counter == -nc:
+                            relation[a][b] = Min
+                        else:
+                            relation[a][b] = Med
+                    else:
+                        relation[a][b] = Min
+                else:
                     if counter ==  nc:
                         relation[a][b] = Max
                     elif counter == -nc:
                         relation[a][b] = Min
                     else:
                         relation[a][b] = Med
-                else:
-                    relation[a][b] = Min
                     
         for a in actions:
             relation[a][a] = Min
@@ -5857,7 +5868,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     Specialization of the general OutrankingDigraph class for 
     robustness anaylsis.
     """
-    def __init__(self, filePerfTab = None,Debug=False):
+    def __init__(self, filePerfTab = None,Debug=False,hasNoVeto=True):
         
         import copy
         
@@ -5868,9 +5879,9 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             self.name='robust_randomPerf'
         else:
             self.name = 'robust_' + filePerfTab.name
-        cardinal = BipolarOutrankingDigraph(filePerfTab)
-        ordinal  = OrdinalOutrankingDigraph(filePerfTab)
-        unanimous = UnanimousOutrankingDigraph(filePerfTab)
+        cardinal = BipolarOutrankingDigraph(filePerfTab,hasNoVeto=hasNoVeto)
+        ordinal  = OrdinalOutrankingDigraph(filePerfTab,hasNoVeto=hasNoVeto)
+        unanimous = UnanimousOutrankingDigraph(filePerfTab,hasNoVeto=hasNoVeto)
         
         if Debug:
             print('unanimous')
@@ -5899,11 +5910,11 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.valuationdomain = {'min':Decimal("-3"), 'med':Decimal("0"), 'max':Decimal("3")}
         self.cardinalRelation = copy.deepcopy(cardinal.relation)
         self.cardinalValuationdomain =  copy.deepcopy(cardinal.valuationdomain)
-        self.relation = self.constructRelation(unanimous, ordinal, cardinal)
+        self.relation = self.constructRelation(unanimous, ordinal, cardinal,hasNoVeto=hasNoVeto)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def constructRelation(self, unanimous, ordinal, cardinal):
+    def constructRelation(self, unanimous, ordinal, cardinal,hasNoVeto=True):
         """
         Parameters: normal -, ordinal -, and unanimous outranking relation.
         Help method for constructing robust outranking relation.
@@ -6684,50 +6695,57 @@ if __name__ == "__main__":
     print('*-------- Testing classes and methods -------')
 
     #t = RandomCoalitionsPerformanceTableau(numberOfActions=10,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=15,weightDistribution='equiobjectives')
+    #t = RandomCBPerformanceTableau(numberOfActions=5,weightDistribution='equiobjectives')
     #t = RandomPerformanceTableau(numberOfActions=10)
-    t.saveXMCDA2('test',servingD3=False)
+    #t.saveXMCDA2('test',servingD3=False)
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t)
+    gr = RobustOutrankingDigraph(t)
+    g.showCriteria()
+    g.showVetos()
     g.recodeValuation(-1.0,1.0)
     g.showRelationTable()
-    print('Strict Condorcet winners: ', g.condorcetWinners())
-    print('(Weak) Condorcet winners: ', g.weakCondorcetWinners())
-    
-    print('*Ranking by Choosing from the outranking digraph*')
-    t0 = time()
-    g.computeRankingByChoosing(CoDual=False,Debug=False)
-    g.showRankingByChoosing()
-    gRankingByChoosingRelation = g.computeRankingByChoosingRelation()
-    ## gmedrbc = g.computeOrdinalCorrelation(gRankingByChoosingRelation,MedianCut=True)
-    ## print 'Correlation with median cut outranking: %.3f (%.3f)' % (gmedrbc['correlation'],gmedrbc['determination'])
-    print('Execution time:', time()-t0, 'sec.')
+    #print('Strict Condorcet winners: ', g.condorcetWinners())
+    #print('(Weak) Condorcet winners: ', g.weakCondorcetWinners())
+    gr.showRelationTable()
+    #gnv = BipolarOutrankingDigraph(t,hasNoVeto=True)
+    #gnv.recodeValuation(-1,1)
+    #gnv.showRelationTable()
+    gr.showPairwiseComparison('a02','a05')
+    # print('*Ranking by Choosing from the outranking digraph*')
+    # t0 = time()
+    # g.computeRankingByChoosing(CoDual=False,Debug=False)
+    # g.showRankingByChoosing()
+    # gRankingByChoosingRelation = g.computeRankingByChoosingRelation()
+    # ## gmedrbc = g.computeOrdinalCorrelation(gRankingByChoosingRelation,MedianCut=True)
+    # ## print 'Correlation with median cut outranking: %.3f (%.3f)' % (gmedrbc['correlation'],gmedrbc['determination'])
+    # print('Execution time:', time()-t0, 'sec.')
 
-    print()
-    print('*Ranking by choosing from the codual outranking digraph*')
-    t0 = time()
-    g.computeRankingByChoosing(CoDual=True,Debug=False)
-    t1 = time()
-    g.showRankingByChoosing()
-    gcdRankingByChoosingRelation = g.computeRankingByChoosingRelation()
-    ## gmedrbc = g.computeOrdinalCorrelation(gcdRankingByChoosingRelation,MedianCut=True)
-    ## print 'Correlation with median cut outranking: %.3f (%.3f)' % (gmedrbc['correlation'],gmedrbc['determination'])
-    print('Execution time:', t1-t0, 'sec.')
+    # print()
+    # print('*Ranking by choosing from the codual outranking digraph*')
+    # t0 = time()
+    # g.computeRankingByChoosing(CoDual=True,Debug=False)
+    # t1 = time()
+    # g.showRankingByChoosing()
+    # gcdRankingByChoosingRelation = g.computeRankingByChoosingRelation()
+    # ## gmedrbc = g.computeOrdinalCorrelation(gcdRankingByChoosingRelation,MedianCut=True)
+    # ## print 'Correlation with median cut outranking: %.3f (%.3f)' % (gmedrbc['correlation'],gmedrbc['determination'])
+    # print('Execution time:', t1-t0, 'sec.')
 
-    print()
-    print('*Ranking from Quantile Sorting*')
-    t.computeQuantileSort()
-    t.showQuantileSort()
-    qsr = g.computeQuantileSortRelation()
-    corr = g.computeBipolarCorrelation(qsr)
-    print('Bipolar correlation of quantile sorting with outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination']))
-    corr = g.computeBipolarCorrelation(qsr,MedianCut=True)
-    print('Bipolar correlation of quantile sorting with median cut outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination']))
+    # print()
+    # print('*Ranking from Quantile Sorting*')
+    # t.computeQuantileSort()
+    # t.showQuantileSort()
+    # qsr = g.computeQuantileSortRelation()
+    # corr = g.computeBipolarCorrelation(qsr)
+    # print('Bipolar correlation of quantile sorting with outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination']))
+    # corr = g.computeBipolarCorrelation(qsr,MedianCut=True)
+    # print('Bipolar correlation of quantile sorting with median cut outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination']))
 
-    print()
-    print('*Iterating ranking by choosing after chordless odd circuits elimination*')
-    g.iterateRankingByChoosing(Comments=True,Debug=False,Limited=0.2)
-    print(g.computePrudentBestChoiceRecommendation())
+    # print()
+    # print('*Iterating ranking by choosing after chordless odd circuits elimination*')
+    # g.iterateRankingByChoosing(Comments=True,Debug=False,Limited=0.2)
+    # print(g.computePrudentBestChoiceRecommendation())
     
 #############################
 # Log record for changes:

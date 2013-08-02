@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 # Python3+ implementation of digraphs
 # Based on Python 2 $Revision: 1.697 $
 # Copyright (C) 2006-2013  Raymond Bisdorff
