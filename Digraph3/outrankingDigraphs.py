@@ -5176,9 +5176,9 @@ class EquiSignificanceMajorityOutrankingDigraph(BipolarOutrankingDigraph,Perform
         performanceTableau (fileName of valid py code)
 
     Specialization of the general OutrankingDigraph class for 
-    temporary ordinal outranking digraphs
+    temporary outranking digraphs with equisignificant criteria.
     """
-    def __init__(self,argPerfTab=None,coalition=None):
+    def __init__(self,argPerfTab=None,coalition=None,hasNoVeto=False):
         import copy
         if isinstance(argPerfTab, (PerformanceTableau,RandomPerformanceTableau)):
             perfTab = argPerfTab
@@ -5206,7 +5206,7 @@ class EquiSignificanceMajorityOutrankingDigraph(BipolarOutrankingDigraph,Perform
         self.convertWeightFloatToDecimal()
         self.evaluation = copy.deepcopy(perfTab.evaluation)
         self.convertEvaluationFloatToDecimal()
-        self.relation = self.constructRelation(perfTab)
+        self.relation = self.constructRelation(perfTab,hasNoVeto=hasNoVeto)
         methodData = {}
         methodData['parameter'] = {'valuationType':'integer','variant':'bipolar'}
         self.methodData = methodData
@@ -5215,7 +5215,7 @@ class EquiSignificanceMajorityOutrankingDigraph(BipolarOutrankingDigraph,Perform
         self.notGamma = self.notGammaSets()
 
 
-    def constructRelation(self,perfTab):
+    def constructRelation(self,perfTab,hasNoVeto=False):
         """
         Parameters:
             PerfTab.criteria, PerfTab.evaluation.
@@ -5242,7 +5242,7 @@ class EquiSignificanceMajorityOutrankingDigraph(BipolarOutrankingDigraph,Perform
             print(characteristicVector)
         coalitionsRelation = {}
         for i in range(k):
-            _g = BipolarOutrankingDigraph(perfTab,coalition=weightPreorder[i])
+            _g = BipolarOutrankingDigraph(perfTab,coalition=weightPreorder[i],hasNoVeto=hasNoVeto)
             _g.recodeValuation(-1,1)
             coalitionsRelation[i] = _g.relation
 
@@ -5756,7 +5756,7 @@ class NewRobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     Specialization of the general OutrankingDigraph class for 
     new robustness anaylsis.
     """
-    def __init__(self, filePerfTab = None,Debug=False):
+    def __init__(self, filePerfTab = None,Debug=False,hasNoVeto=True):
         
         import copy
         
@@ -5767,13 +5767,13 @@ class NewRobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             self.name='newrobust_randomPerf'
         else:
             self.name = 'newrobust_' + filePerfTab.name
-        cardinal = BipolarOutrankingDigraph(filePerfTab)
+        cardinal = BipolarOutrankingDigraph(filePerfTab,hasNoVeto=hasNoVeto)
         cardinal.recodeValuation(-1,1)
-        ordinal  = OrdinalOutrankingDigraph(filePerfTab)
+        ordinal  = OrdinalOutrankingDigraph(filePerfTab,hasNoVeto=hasNoVeto)
         ordinal.recodeValuation(-1,1)
-        equisignificant = EquiSignificanceMajorityOutrankingDigraph(filePerfTab)
+        equisignificant = EquiSignificanceMajorityOutrankingDigraph(filePerfTab,hasNoVeto=hasNoVeto)
         equisignificant.recodeValuation(-1,1)
-        unanimous = UnanimousOutrankingDigraph(filePerfTab)
+        unanimous = UnanimousOutrankingDigraph(filePerfTab,hasNoVeto=hasNoVeto)
         unanimous.recodeValuation(-1,1)
         
         if Debug:
@@ -6700,7 +6700,7 @@ if __name__ == "__main__":
     #t.saveXMCDA2('test',servingD3=False)
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t)
-    gr = RobustOutrankingDigraph(t)
+    gr = NewRobustOutrankingDigraph(t)
     g.showCriteria()
     g.showVetos()
     g.recodeValuation(-1.0,1.0)
