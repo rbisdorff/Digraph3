@@ -67,14 +67,14 @@
 </table>
 <div class="section" id="introduction">
 <span id="introduction-label"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>This Technical Manual describes the Python-3 implementation of generic resources for computing kernels and other qualified choices in bipolar-valued outranking digraphs. This computing ressource is useful in the field of algorithmic decision sciences problems.</p>
+<p>This Technical Manual describes the Python-3 implementation of generic resources for implementing decision aid algorithms in the context of bipolarly-valued outranking digraphs. This computing ressource is useful in the field of algorithmic decision theory and more specifically in outranking based multiple criteria decision aid.</p>
 <p>Two downlaod options are given:</p>
 <p>1. Either (easiest under Linux or Mac OS-X), by using a subversion client::
 ..$svn co <a class="reference external" href="http://leopold-loewenheim.uni.lu/svn/repos/Digraph3">http://leopold-loewenheim.uni.lu/svn/repos/Digraph3</a></p>
 <p>2. Or, download and extract the distribution tar.gz archive::
 <a class="reference external" href="http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3:2.1.tar.gz">http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3:2.1.tar.gz</a></p>
 <p>Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff &lt;<a class="reference external" href="http://charles-sanders-peirce.uni.lu/bisdorff/">http://charles-sanders-peirce.uni.lu/bisdorff/</a>&gt;, University of Luxembourg.</p>
-<p>A user manual is available here: <a class="reference external" href="http://ernst-schroeder.uni.lu/Digraph/doc/">http://ernst-schroeder.uni.lu/Digraph/doc/</a>
+<p>A <em>user manual</em> is available here: <a class="reference external" href="http://ernst-schroeder.uni.lu/Digraph/doc/">http://ernst-schroeder.uni.lu/Digraph/doc/</a>
 The following Python3 modules make extensive usage of the native Python Decimal module and therefore work best with Python-3.3+.</p>
 <p>The basic idea of these Python modules is to make easy python interactive sessions or write short Python scripts for computing all kind of results from a bipolar valued outranking digraph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices etc.</p>
 <p>The Python development of these computing ressources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.</p>
@@ -2302,7 +2302,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3004,17 +3004,17 @@ Renders the concordance index per criteria.</p>
 
 <dl class="class">
 <dt id="outrankingDigraphs.EquiSignificanceMajorityOutrankingDigraph">
-<em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">EquiSignificanceMajorityOutrankingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>coalition=None</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.EquiSignificanceMajorityOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">EquiSignificanceMajorityOutrankingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>coalition=None</em>, <em>hasNoVeto=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.EquiSignificanceMajorityOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></tt></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><tt class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd>performanceTableau (fileName of valid py code)</dd>
 </dl>
 <p>Specialization of the general OutrankingDigraph class for 
-temporary ordinal outranking digraphs</p>
+temporary outranking digraphs with equisignificant criteria.</p>
 <dl class="method">
 <dt id="outrankingDigraphs.EquiSignificanceMajorityOutrankingDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>perfTab</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.EquiSignificanceMajorityOutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">constructRelation</tt><big>(</big><em>perfTab</em>, <em>hasNoVeto=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.EquiSignificanceMajorityOutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Parameters:</dt>
 <dd>PerfTab.criteria, PerfTab.evaluation.</dd>
@@ -3077,7 +3077,7 @@ temporary multiple criteria based dissimilarity graphs.</p>
 
 <dl class="class">
 <dt id="outrankingDigraphs.NewRobustOutrankingDigraph">
-<em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">NewRobustOutrankingDigraph</tt><big>(</big><em>filePerfTab=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.NewRobustOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">NewRobustOutrankingDigraph</tt><big>(</big><em>filePerfTab=None</em>, <em>Debug=False</em>, <em>hasNoVeto=True</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.NewRobustOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></tt></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><tt class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -3096,7 +3096,7 @@ Help method for constructing robust outranking relation.</p>
 
 <dl class="class">
 <dt id="outrankingDigraphs.OrdinalOutrankingDigraph">
-<em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">OrdinalOutrankingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>coalition=None</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OrdinalOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">OrdinalOutrankingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>coalition=None</em>, <em>hasNoVeto=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OrdinalOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></tt></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><tt class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -3106,7 +3106,7 @@ Help method for constructing robust outranking relation.</p>
 temporary ordinal outranking digraphs</p>
 <dl class="method">
 <dt id="outrankingDigraphs.OrdinalOutrankingDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>criteria</em>, <em>evaluation</em>, <em>hasSymmetricThresholds=True</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OrdinalOutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">constructRelation</tt><big>(</big><em>criteria</em>, <em>evaluation</em>, <em>hasSymmetricThresholds=True</em>, <em>hasNoVeto=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OrdinalOutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Parameters:</dt>
 <dd>PerfTab.criteria, PerfTab.evaluation.</dd>
@@ -3140,7 +3140,7 @@ Renders the local veto state</p>
 
 <dl class="class">
 <dt id="outrankingDigraphs.OutrankingDigraph">
-<em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">OutrankingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>coalition=None</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">OutrankingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>coalition=None</em>, <em>hasNoVeto=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><tt class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></tt></a></p>
 <p>Abstract class for methods common to all
 outranking digraphs</p>
@@ -3225,7 +3225,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>criteria</em>, <em>evaluation</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">constructRelation</tt><big>(</big><em>criteria</em>, <em>evaluation</em>, <em>hasNoVeto=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Parameters:</dt>
 <dd>PerfTab.criteria, PerfTab.evaluation.</dd>
@@ -3249,7 +3249,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -3423,7 +3423,7 @@ Digraphs from random performance tableaux.</p>
 
 <dl class="class">
 <dt id="outrankingDigraphs.RobustOutrankingDigraph">
-<em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">RobustOutrankingDigraph</tt><big>(</big><em>filePerfTab=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.RobustOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">RobustOutrankingDigraph</tt><big>(</big><em>filePerfTab=None</em>, <em>Debug=False</em>, <em>hasNoVeto=True</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.RobustOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></tt></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><tt class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -3433,7 +3433,7 @@ Digraphs from random performance tableaux.</p>
 robustness anaylsis.</p>
 <dl class="method">
 <dt id="outrankingDigraphs.RobustOutrankingDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>unanimous</em>, <em>ordinal</em>, <em>cardinal</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.RobustOutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">constructRelation</tt><big>(</big><em>unanimous</em>, <em>ordinal</em>, <em>cardinal</em>, <em>hasNoVeto=True</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.RobustOutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parameters: normal -, ordinal -, and unanimous outranking relation.
 Help method for constructing robust outranking relation.</p>
 </dd></dl>
@@ -3460,7 +3460,7 @@ Help method for constructing robust outranking relation.</p>
 
 <dl class="class">
 <dt id="outrankingDigraphs.UnanimousOutrankingDigraph">
-<em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">UnanimousOutrankingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>coalition=None</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.UnanimousOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">UnanimousOutrankingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>coalition=None</em>, <em>hasNoVeto=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.UnanimousOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></tt></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><tt class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -3470,7 +3470,7 @@ Help method for constructing robust outranking relation.</p>
 temporary unanimous outranking digraphs</p>
 <dl class="method">
 <dt id="outrankingDigraphs.UnanimousOutrankingDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>criteria</em>, <em>evaluation</em>, <em>hasSymmetricThresholds=True</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.UnanimousOutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">constructRelation</tt><big>(</big><em>criteria</em>, <em>evaluation</em>, <em>hasSymmetricThresholds=True</em>, <em>hasNoVeto=True</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.UnanimousOutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parameters: PerfTab.criteria, PerfTab.evaluation.
 Renders the biploar valued outranking relation from the data
 of a given performance tableau instantiation PerfTab.</p>

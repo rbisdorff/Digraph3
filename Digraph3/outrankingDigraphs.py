@@ -6694,13 +6694,13 @@ if __name__ == "__main__":
     
     print('*-------- Testing classes and methods -------')
 
-    #t = RandomCoalitionsPerformanceTableau(numberOfActions=10,weightDistribution='equiobjectives')
-    #t = RandomCBPerformanceTableau(numberOfActions=5,weightDistribution='equiobjectives')
+    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
+    t = RandomCBPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
     #t = RandomPerformanceTableau(numberOfActions=10)
-    #t.saveXMCDA2('test',servingD3=False)
+    t.saveXMCDA2('test',servingD3=False)
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t)
-    gr = NewRobustOutrankingDigraph(t)
+    gr = RobustOutrankingDigraph(t)
     g.showCriteria()
     g.showVetos()
     g.recodeValuation(-1.0,1.0)
