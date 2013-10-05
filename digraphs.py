@@ -4515,6 +4515,56 @@ class Digraph(object):
             fo.write('}\n')
         fo.close()
 
+    def saveCSV(self,fileName='tempdigraph',Normalized=True,Dual=False,Converse=False):
+        """Persistent storage of a Digraph class instance in the form of
+            a csv file. """
+        from copy import deepcopy
+        import csv
+        com = ''
+        if Normalized:
+            com += 'normalized'
+            if Dual and Converse:
+                com += ' and codual'
+            elif Dual and not Converse:
+                com += ' and dual'
+            elif Converse:
+                com += ' and converse'
+        else:
+            if Dual and Converse:
+                com += 'codual'
+            elif Dual and not Converse:
+                com += 'dual'
+            elif Converse:
+                com += 'converse'
+        
+        print('*--- Saving %s digraph in file: %s.csv> ---*' % (com,fileName))
+        fileNameExt = str(fileName)+str('.csv')
+        fo = open(fileNameExt, 'w')
+        csvfo = csv.writer(fo,quoting=csv.QUOTE_NONNUMERIC)
+        actionsList = [x for x in self.actions]
+        actionsList.sort()
+        headerText = ["d"] + actionsList
+        csvfo.writerow(headerText)
+        dg = deepcopy(self)
+        if Normalized:
+            dg.recodeValuation(0,1)
+        Min = dg.valuationdomain['min']
+        if Dual:
+            dg = -dg
+        if Converse:
+            dg = ~dg
+        relation = dg.relation
+        for x in actionsList:
+            rowText = [x]
+            for y in actionsList:
+                if x == y:
+                    rowText.append(float(Min))
+                else:
+                    rowText.append(float(relation[x][y]))
+            print(rowText)
+            csvfo.writerow(rowText)
+        fo.close()
+
     def chordlessPaths(self,Pk,n2,Odd=False,Comments=False,Debug=False):
         """
         New procedure from Agrum study April 2009
@@ -9568,43 +9618,50 @@ if __name__ == "__main__":
     else:
         print('*-------- Testing classes and methods -------')
         
-        ##from time import time
-        ##from operator import itemgetter
-        #t = RandomCBPerformanceTableau(numberOfActions=7)
-        #t.save('test')
-        t = XMCDA2PerformanceTableau('uniSorting')
-        g = BipolarOutrankingDigraph(t)
-        g.computeRankingByLastChoosing(CoDual=True,Debug=False)
-        g.showRankingByLastChoosing()
-        relLast = g.computeRankingByLastChoosingRelation()
-        #g.showRelationTable(relation=relLast)
-        print(g.computeOrdinalCorrelation(relLast))
-        g.computeRankingByBestChoosing(CoDual=True)
-        g.showRankingByBestChoosing()
-        relBest = g.computeRankingByBestChoosingRelation()
-        relFusion = {}
-        for x in g.actions:
-            relFusion[x] = {}
-            for y in g.actions:
-                relFusion[x][y] = g.omin((relBest[x][y],relLast[x][y]))
-          
-        #g.showRelationTable(relation=relBest)
-        print(g.computeOrdinalCorrelation(relBest))
-        print(g.computeOrdinalCorrelation(relFusion))
-        
-        #g.iterateRankingByChoosing(Odd=False,Debug=False,CoDual=True)
-        #g.showRankingByChoosing()
-        #print('-----------------')
-        rankings = g.optimalRankingByChoosing(Odd=True,Debug=False,CoDual=True,Comments=False)
-        #print(rankings)
+        g = BipolarOutrankingDigraph()
+        g.showRelationTable()
+        g.saveCSV(Normalized=True,Dual=True,Converse=False)
+        g.iterateRankingByChoosing(g,Comments=True)
         g.showRankingByChoosing()
-        #print('-----------------')
-        #print('Prudent first choice: ',g.computePrudentBestChoiceRecommendation(CoDual=False,Debug=False,Comments=True))
         
-        #g.showRankingByChoosing()
         
-        ## g = RandomValuationDigraph()
-        ## print(g.computePrudentBestChoiceRecommendation(CoDual=False,Comments=True))
+#        ##from time import time
+#        ##from operator import itemgetter
+#        #t = RandomCBPerformanceTableau(numberOfActions=7)
+#        #t.save('test')
+#        t = XMCDA2PerformanceTableau('uniSorting')
+#        g = BipolarOutrankingDigraph(t)
+#        g.computeRankingByLastChoosing(CoDual=True,Debug=False)
+#        g.showRankingByLastChoosing()
+#        relLast = g.computeRankingByLastChoosingRelation()
+#        #g.showRelationTable(relation=relLast)
+#        print(g.computeOrdinalCorrelation(relLast))
+#        g.computeRankingByBestChoosing(CoDual=True)
+#        g.showRankingByBestChoosing()
+#        relBest = g.computeRankingByBestChoosingRelation()
+#        relFusion = {}
+#        for x in g.actions:
+#            relFusion[x] = {}
+#            for y in g.actions:
+#                relFusion[x][y] = g.omin((relBest[x][y],relLast[x][y]))
+#          
+#        #g.showRelationTable(relation=relBest)
+#        print(g.computeOrdinalCorrelation(relBest))
+#        print(g.computeOrdinalCorrelation(relFusion))
+#        
+#        #g.iterateRankingByChoosing(Odd=False,Debug=False,CoDual=True)
+#        #g.showRankingByChoosing()
+#        #print('-----------------')
+#        rankings = g.optimalRankingByChoosing(Odd=True,Debug=False,CoDual=True,Comments=False)
+#        #print(rankings)
+#        g.showRankingByChoosing()
+#        #print('-----------------')
+#        #print('Prudent first choice: ',g.computePrudentBestChoiceRecommendation(CoDual=False,Debug=False,Comments=True))
+#        
+#        #g.showRankingByChoosing()
+#        
+#        ## g = RandomValuationDigraph()
+#        ## print(g.computePrudentBestChoiceRecommendation(CoDual=False,Comments=True))
 
 
 
@@ -9621,6 +9678,9 @@ if __name__ == "__main__":
 #############################
 # Log record for changes:
 # $Log: digraphs.py,v $
+#
+# Revision +1.700 2013/10/05 17:22:53  bisi
+# added saveCSV() methoh to the Digraph class
 #
 # Revision 1.696  2013/01/01 14:10:53  bisi
 # added computePrudentBestChoiceRecommendation() method to the Digraph class
