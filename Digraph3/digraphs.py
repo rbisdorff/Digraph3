@@ -4515,7 +4515,7 @@ class Digraph(object):
             fo.write('}\n')
         fo.close()
 
-    def saveCSV(self,fileName='tempdigraph',Normalized=True,Dual=False,Converse=False):
+    def saveCSV(self,fileName='tempdigraph',Normalized=True,Dual=True,Converse=False):
         """Persistent storage of a Digraph class instance in the form of
             a csv file. """
         from copy import deepcopy
@@ -4547,8 +4547,9 @@ class Digraph(object):
         csvfo.writerow(headerText)
         dg = deepcopy(self)
         if Normalized:
-            dg.recodeValuation(0,1)
+            dg.recodeValuation(-1,1)
         Min = dg.valuationdomain['min']
+        Med = dg.valuationdomain['med']
         if Dual:
             dg = -dg
         if Converse:
@@ -9618,36 +9619,39 @@ if __name__ == "__main__":
     else:
         print('*-------- Testing classes and methods -------')
         
-        g = BipolarOutrankingDigraph()
+        t = RandomCBPerformanceTableau()
+        g = BipolarOutrankingDigraph(t)
+        g.save('test')
+        g = Digraph('test')
         g.showRelationTable()
-        g.saveCSV(Normalized=True,Dual=True,Converse=False)
-        g.iterateRankingByChoosing(g,Comments=True)
-        g.showRankingByChoosing()
+        g.saveCSV(Normalized=True,Dual=True,Converse=True)
+        #g.computeRankingByChoosing(g,CoDual=False)
+        #g.showRankingByChoosing()
         
         
 #        ##from time import time
 #        ##from operator import itemgetter
 #        #t = RandomCBPerformanceTableau(numberOfActions=7)
 #        #t.save('test')
-#        t = XMCDA2PerformanceTableau('uniSorting')
-#        g = BipolarOutrankingDigraph(t)
-#        g.computeRankingByLastChoosing(CoDual=True,Debug=False)
-#        g.showRankingByLastChoosing()
-#        relLast = g.computeRankingByLastChoosingRelation()
+#        #t = XMCDA2PerformanceTableau('uniSorting')
+#        #g = BipolarOutrankingDigraph(t)
+        g.computeRankingByLastChoosing(CoDual=True,Debug=False)
+        g.showRankingByLastChoosing()
+        relLast = g.computeRankingByLastChoosingRelation()
 #        #g.showRelationTable(relation=relLast)
 #        print(g.computeOrdinalCorrelation(relLast))
-#        g.computeRankingByBestChoosing(CoDual=True)
-#        g.showRankingByBestChoosing()
-#        relBest = g.computeRankingByBestChoosingRelation()
-#        relFusion = {}
-#        for x in g.actions:
-#            relFusion[x] = {}
-#            for y in g.actions:
-#                relFusion[x][y] = g.omin((relBest[x][y],relLast[x][y]))
+        g.computeRankingByBestChoosing(CoDual=True)
+        g.showRankingByBestChoosing()
+        relBest = g.computeRankingByBestChoosingRelation()
+        relFusion = {}
+        for x in g.actions:
+            relFusion[x] = {}
+            for y in g.actions:
+                relFusion[x][y] = g.omin((relBest[x][y],relLast[x][y]))
 #          
 #        #g.showRelationTable(relation=relBest)
-#        print(g.computeOrdinalCorrelation(relBest))
-#        print(g.computeOrdinalCorrelation(relFusion))
+        print(g.computeOrdinalCorrelation(relBest))
+        print(g.computeOrdinalCorrelation(relFusion))
 #        
 #        #g.iterateRankingByChoosing(Odd=False,Debug=False,CoDual=True)
 #        #g.showRankingByChoosing()
@@ -9680,7 +9684,7 @@ if __name__ == "__main__":
 # $Log: digraphs.py,v $
 #
 # Revision +1.700 2013/10/05 17:22:53  bisi
-# added saveCSV() methoh to the Digraph class
+# added saveCSV() method to the Digraph class
 #
 # Revision 1.696  2013/01/01 14:10:53  bisi
 # added computePrudentBestChoiceRecommendation() method to the Digraph class
