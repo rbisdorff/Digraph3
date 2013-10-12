@@ -2335,6 +2335,65 @@ class Digraph(object):
             res = res + ';'
             print(res)
 
+    def exportPrincipalImage(self, plotFileName="relationPCAImage",Type="png",Comments=False):
+        """
+        Export as PNG (default) or PDF the principal projection of the valued relation using the three principal eigen vectors.
+        """
+        
+        if Comments:
+            print('*----  export 3dplot of type %s -----' % (Type))
+        import os,time
+        
+        self.saveCSV('exportTemp')
+        fo = open('temp.r','w')
+        fo.write("x = read.csv('exportTemp.csv',row.names=1)\n")
+        fo.write("x = (x-colMeans(x))/(sapply(x,sd)*sqrt(length(t(x))))\n")
+        fo.write("X = as.matrix(x)\n")
+        fo.write("A = X %*% t(X)\n")
+        fo.write("E = eigen(A, symmetric=TRUE)\n")
+        fo.write("P = E$values * t(E$vectors)\n")
+        fo.write("valprop = E$values/sum(E$values)\n")
+        fo.write("pcaRes = list(x=X,eig=E,a=A,P=P,val=valprop)\n")
+        fo.write("val = pcaRes$val\n")
+        fo.write("nval = length(val)\n")
+        if Type == "png":
+            fo.write('png("%s.png",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
+        elif Type == "jpeg":
+            fo.write('jpeg("%s.jpg",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
+        elif Type == "xfig":
+            fo.write('xfig("%s.fig",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
+        elif Type == "pdf":
+            fo.write('pdf("%s.pdf",width=6,height=6,bg="cornsilk",title="PCA of relation valuation")\n' % (plotFileName) )
+        else:
+            print('Error: Plotting device %s not defined !' % (Type))
+            return
+        fo.write("par(mfrow=c(2,2))\n")
+        fo.write("a1 = 1\n")
+        fo.write("a2 = 2\n")
+        fo.write("a3 = 3\n")
+        fo.write('plot(pcaRes$P[a1,],pcaRes$P[a2,],"n",xlab=paste("axis 1:",val[a1]*100,"%"),ylab=paste("axis 2:",val[a2]*100,"%"),asp=1)\n')
+        fo.write("text(pcaRes$P[a1,],pcaRes$P[a2,],rownames(pcaRes$x))\n")
+        fo.write('abline(h=0,lty=2,col="gray")\n')
+        fo.write('abline(v=0,lty=2,col="gray")\n')
+        fo.write('plot(pcaRes$P[a2,],pcaRes$P[a3,],"n",xlab=paste("axis 2:",val[a2]*100,"%"),ylab=paste("axis 3:",val[a3]*100,"%"),asp=1)\n')
+        fo.write('text(pcaRes$P[a2,],pcaRes$P[a3,],rownames(pcaRes$x))\n')
+        fo.write('abline(h=0,lty=2,col="gray")\n')
+        fo.write('abline(v=0,lty=2,col="gray")\n')
+        fo.write('plot(pcaRes$P[a1,],pcaRes$P[a3,],"n",xlab=paste("axis 1:",val[a1]*100,"%"),ylab=paste("axis 3:",val[a3]*100,"%"),asp=1)\n')
+        fo.write('text(pcaRes$P[a1,],pcaRes$P[a3,],rownames(pcaRes$x))\n')
+        fo.write('abline(h=0,v=0,lty=2,col="gray")\n')
+        fo.write('barplot(val[a1:nval]*100,names.arg=a1:nval,main="Axis inertia (in %)",col="orangered")\n')
+        fo.write('dev.off()\n')
+        fo.close()
+        if Comments:
+            os.system('env R -q --vanilla --verbose < temp.r 2>&1')
+        else:
+            os.system('env R -q --vanilla < temp.r > /dev/null 2> /dev/null')
+        time.sleep(3)     
+        if Comments:
+            print('See %s.%s ! ' % (plotFileName,Type))
+        
+        
     def exportGraphViz(self,fileName=None, bestChoice=set(),worstChoice=set(),noSilent=True,graphType='png',graphSize='7,7'):
         """
         export GraphViz dot file  for graph drawing filtering.
@@ -9619,53 +9678,54 @@ if __name__ == "__main__":
     else:
         print('*-------- Testing classes and methods -------')
         
-        t = RandomCBPerformanceTableau()
+        t = RandomCBPerformanceTableau(numberOfActions=10)
         g = BipolarOutrankingDigraph(t)
         g.save('test')
         g = Digraph('test')
         g.showRelationTable()
-        g.saveCSV(Normalized=True,Dual=True,Converse=True)
+        #g.saveCSV(Normalized=True,Dual=True,Converse=True)
+        g.exportPrincipalImage(Comments=True,Type="pdf")
         #g.computeRankingByChoosing(g,CoDual=False)
         #g.showRankingByChoosing()
         
         
-#        ##from time import time
-#        ##from operator import itemgetter
-#        #t = RandomCBPerformanceTableau(numberOfActions=7)
-#        #t.save('test')
-#        #t = XMCDA2PerformanceTableau('uniSorting')
-#        #g = BipolarOutrankingDigraph(t)
-        g.computeRankingByLastChoosing(CoDual=True,Debug=False)
-        g.showRankingByLastChoosing()
-        relLast = g.computeRankingByLastChoosingRelation()
-#        #g.showRelationTable(relation=relLast)
-#        print(g.computeOrdinalCorrelation(relLast))
-        g.computeRankingByBestChoosing(CoDual=True)
-        g.showRankingByBestChoosing()
-        relBest = g.computeRankingByBestChoosingRelation()
-        relFusion = {}
-        for x in g.actions:
-            relFusion[x] = {}
-            for y in g.actions:
-                relFusion[x][y] = g.omin((relBest[x][y],relLast[x][y]))
-#          
-#        #g.showRelationTable(relation=relBest)
-        print(g.computeOrdinalCorrelation(relBest))
-        print(g.computeOrdinalCorrelation(relFusion))
-#        
-#        #g.iterateRankingByChoosing(Odd=False,Debug=False,CoDual=True)
-#        #g.showRankingByChoosing()
-#        #print('-----------------')
-#        rankings = g.optimalRankingByChoosing(Odd=True,Debug=False,CoDual=True,Comments=False)
-#        #print(rankings)
-#        g.showRankingByChoosing()
-#        #print('-----------------')
-#        #print('Prudent first choice: ',g.computePrudentBestChoiceRecommendation(CoDual=False,Debug=False,Comments=True))
-#        
-#        #g.showRankingByChoosing()
-#        
-#        ## g = RandomValuationDigraph()
-#        ## print(g.computePrudentBestChoiceRecommendation(CoDual=False,Comments=True))
+###        ##from time import time
+###        ##from operator import itemgetter
+###        #t = RandomCBPerformanceTableau(numberOfActions=7)
+###        #t.save('test')
+###        #t = XMCDA2PerformanceTableau('uniSorting')
+###        #g = BipolarOutrankingDigraph(t)
+##        g.computeRankingByLastChoosing(CoDual=True,Debug=False)
+##        g.showRankingByLastChoosing()
+##        relLast = g.computeRankingByLastChoosingRelation()
+###        #g.showRelationTable(relation=relLast)
+###        print(g.computeOrdinalCorrelation(relLast))
+##        g.computeRankingByBestChoosing(CoDual=True)
+##        g.showRankingByBestChoosing()
+##        relBest = g.computeRankingByBestChoosingRelation()
+##        relFusion = {}
+##        for x in g.actions:
+##            relFusion[x] = {}
+##            for y in g.actions:
+##                relFusion[x][y] = g.omin((relBest[x][y],relLast[x][y]))
+###          
+###        #g.showRelationTable(relation=relBest)
+##        print(g.computeOrdinalCorrelation(relBest))
+##        print(g.computeOrdinalCorrelation(relFusion))
+###        
+###        #g.iterateRankingByChoosing(Odd=False,Debug=False,CoDual=True)
+###        #g.showRankingByChoosing()
+###        #print('-----------------')
+###        rankings = g.optimalRankingByChoosing(Odd=True,Debug=False,CoDual=True,Comments=False)
+###        #print(rankings)
+###        g.showRankingByChoosing()
+###        #print('-----------------')
+###        #print('Prudent first choice: ',g.computePrudentBestChoiceRecommendation(CoDual=False,Debug=False,Comments=True))
+###        
+###        #g.showRankingByChoosing()
+###        
+###        ## g = RandomValuationDigraph()
+###        ## print(g.computePrudentBestChoiceRecommendation(CoDual=False,Comments=True))
 
 
 

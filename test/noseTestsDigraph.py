@@ -779,4 +779,14 @@ def testOptimalRankingByChoosing():
     g.showRankingByChoosing()
     print('-----------------')
     print('Prudent first choice: ',g.computePrudentBestChoiceRecommendation(CoDual=False,Debug=False,Comments=True))
-    
+
+def testExportRelationPCAImage():
+    print('*------- test exportRelationPCAImage --------*')
+    t = RandomCBPerformanceTableau(numberOfActions=10)
+    g = BipolarOutrankingDigraph(t)
+    g.save('test')
+    g = Digraph('test')
+    g.showRelationTable()
+    g.exportPrincipalImage(Comments=True,Type="pdf")
+
+
