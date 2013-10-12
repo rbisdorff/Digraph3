@@ -2335,7 +2335,7 @@ class Digraph(object):
             res = res + ';'
             print(res)
 
-    def exportPrincipalImage(self, plotFileName="relationPCAImage",Type="png",Comments=False):
+    def exportPrincipalImage(self, Reduced=False,plotFileName="relationPCAImage",Type="png",Comments=False):
         """
         Export as PNG (default) or PDF the principal projection of the valued relation using the three principal eigen vectors.
         """
@@ -2347,7 +2347,10 @@ class Digraph(object):
         self.saveCSV('exportTemp')
         fo = open('temp.r','w')
         fo.write("x = read.csv('exportTemp.csv',row.names=1)\n")
-        fo.write("x = (x-colMeans(x))/(sapply(x,sd)*sqrt(length(t(x))))\n")
+        if Reduced:
+            fo.write("x = (x-colMeans(x))/(sapply(x,sd)*sqrt(length(t(x))))\n")
+        else:
+            fo.write("x = (x-colMeans(x))\n")
         fo.write("X = as.matrix(x)\n")
         fo.write("A = X %*% t(X)\n")
         fo.write("E = eigen(A, symmetric=TRUE)\n")
@@ -9678,8 +9681,9 @@ if __name__ == "__main__":
     else:
         print('*-------- Testing classes and methods -------')
         
-        t = RandomCBPerformanceTableau(numberOfActions=10)
-        g = BipolarOutrankingDigraph(t)
+        #        t = RandomCBPerformanceTableau(numberOfActions=10)
+        #g = BipolarOutrankingDigraph(t)
+        g = CirculantDigraph()
         g.save('test')
         g = Digraph('test')
         g.showRelationTable()
