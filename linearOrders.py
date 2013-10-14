@@ -679,6 +679,69 @@ class KemenyOrder(LinearOrder):
         if Debug:
             print('Kemeny Order = ', self.computeOrder())
 
+########  instantiates principal scores' ordering
+
+class PrincipalOrder(LinearOrder):
+    """
+    instantiates the order from the scores obtained by the first
+    princiapl axis of the eigen deomposition of the covariance of the
+    outdegrees of the valued digraph 'other'.
+    """
+    def __init__(self,other,Debug=False):
+        """
+        constructor for generating a linear order
+        from a given other digraph by using the first principal eigen vector.
+        """
+        from copy import deepcopy
+        from decimal import Decimal
+        
+        Min = other.valuationdomain['min']
+        Max = other.valuationdomain['max']
+        Med = other.valuationdomain['med']
+        actionsList = [x for x in other.actions]
+        actionsList.sort()
+        n = len(actionsList)
+        relation = deepcopy(other.relation)
+        principalScores = other.computePrincipalOrder(Debug=Debug)
+        # [ (score1,action_(1), (score2,action_(2), ...] 
+        if principalScores == None:
+            print('Intantiation error: unable to compute the principal Order !!!')
+            return
+        if Debug:
+            print(principalScores)
+        # instatiates a Digraph template
+        
+        g = IndeterminateDigraph(order=n)
+        g.actions = deepcopy(other.actions)
+        Min = Decimal('-1.0')
+        Max = Decimal('1.0')
+        Med = Decimal('0.0')
+        g.valuationdomain = {'min': Min, 'med': Med, 'max': Max}
+        g.relation = deepcopy(other.relation)
+        for i in range(n):
+            for j in range(i+1,n):
+                x = principalScores[i][1]
+                y = principalScores[j][1]
+                if Debug:
+                    print(x,y)
+                g.relation[x][y] = Max
+                g.relation[y][x] = Min
+
+        for x in g.actions:
+            g.relation[x][x] = Max
+
+        if Debug:
+            print('principal ordered relation table:')
+            g.showRelationTable()
+
+        self.name = other.name + '_ranked'        
+        self.actions = other.actions
+        self.valuationdomain = other.valuationdomain
+        self.relation = deepcopy(g.relation)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        if Debug:
+            print('Principal Order = ', self.computeOrder())
 
 #----------test  linearOrders module classes  ----------------
 if __name__ == "__main__":
@@ -741,16 +804,18 @@ if __name__ == "__main__":
     ## ##)
 
     g1 = RandomLinearOrder(numberOfActions=10,Debug=True)
-    g1.showRelationTable()
-    g2 = RandomLinearOrder(numberOfActions=10,Debug=True)
-    g2.showRelationTable()
-    print(g1.computeBipolarCorrelation(g2))
-    g1 = RandomLinearOrder(OutrankingModel=True, Debug=True)
-    g1.showRelationTable()
-    g2 = RandomLinearOrder(OutrankingModel=True,Debug=True)
-    g2.showRelationTable()
-    print(g1.computeBipolarCorrelation(g2))
-    
+    p = PrincipalOrder(g1,Debug=True)
+    p.computeOrder()
+##    g1.showRelationTable()
+##    g2 = RandomLinearOrder(numberOfActions=10,Debug=True)
+##    g2.showRelationTable()
+##    print(g1.computeBipolarCorrelation(g2))
+##    g1 = RandomLinearOrder(OutrankingModel=True, Debug=True)
+##    g1.showRelationTable()
+##    g2 = RandomLinearOrder(OutrankingModel=True,Debug=True)
+##    g2.showRelationTable()
+##    print(g1.computeBipolarCorrelation(g2))
+##    
     
     
     print('*------------------*')

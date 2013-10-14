@@ -2355,45 +2355,50 @@ class Digraph(object):
         fo.write("A = X %*% t(X)\n")
         fo.write("E = eigen(A, symmetric=TRUE)\n")
         fo.write("P = E$values * t(E$vectors)\n")
-        fo.write("valprop = E$values/sum(E$values)\n")
-        fo.write("pcaRes = list(x=X,eig=E,a=A,P=P,val=valprop)\n")
-        fo.write("val = pcaRes$val\n")
-        fo.write("nval = length(val)\n")
-        if Type == "png":
-            fo.write('png("%s.png",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
-        elif Type == "jpeg":
-            fo.write('jpeg("%s.jpg",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
-        elif Type == "xfig":
-            fo.write('xfig("%s.fig",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
-        elif Type == "pdf":
-            fo.write('pdf("%s.pdf",width=6,height=6,bg="cornsilk",title="PCA of relation valuation")\n' % (plotFileName) )
+        fo.write("write.csv(t(P),'rotation.csv',row.names=F)\n")
+        if Type == None:
+            # no principal image is required
+            fo.close()
         else:
-            print('Error: Plotting device %s not defined !' % (Type))
-            return
-        fo.write("par(mfrow=c(2,2))\n")
-        fo.write("a1 = 1\n")
-        fo.write("a2 = 2\n")
-        fo.write("a3 = 3\n")
-        fo.write('plot(pcaRes$P[a1,],pcaRes$P[a2,],"n",xlab=paste("axis 1:",val[a1]*100,"%"),ylab=paste("axis 2:",val[a2]*100,"%"),asp=1)\n')
-        fo.write("text(pcaRes$P[a1,],pcaRes$P[a2,],rownames(pcaRes$x))\n")
-        fo.write('abline(h=0,lty=2,col="gray")\n')
-        fo.write('abline(v=0,lty=2,col="gray")\n')
-        fo.write('plot(pcaRes$P[a2,],pcaRes$P[a3,],"n",xlab=paste("axis 2:",val[a2]*100,"%"),ylab=paste("axis 3:",val[a3]*100,"%"),asp=1)\n')
-        fo.write('text(pcaRes$P[a2,],pcaRes$P[a3,],rownames(pcaRes$x))\n')
-        fo.write('abline(h=0,lty=2,col="gray")\n')
-        fo.write('abline(v=0,lty=2,col="gray")\n')
-        fo.write('plot(pcaRes$P[a1,],pcaRes$P[a3,],"n",xlab=paste("axis 1:",val[a1]*100,"%"),ylab=paste("axis 3:",val[a3]*100,"%"),asp=1)\n')
-        fo.write('text(pcaRes$P[a1,],pcaRes$P[a3,],rownames(pcaRes$x))\n')
-        fo.write('abline(h=0,v=0,lty=2,col="gray")\n')
-        fo.write('barplot(val[a1:nval]*100,names.arg=a1:nval,main="Axis inertia (in %)",col="orangered")\n')
-        fo.write('dev.off()\n')
-        fo.close()
+            fo.write("valprop = E$values/sum(E$values)\n")
+            fo.write("pcaRes = list(x=X,eig=E,a=A,P=P,val=valprop)\n")
+            fo.write("val = pcaRes$val\n")
+            fo.write("nval = length(val)\n")
+            if Type == "png":
+                fo.write('png("%s.png",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
+            elif Type == "jpeg":
+                fo.write('jpeg("%s.jpg",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
+            elif Type == "xfig":
+                fo.write('xfig("%s.fig",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
+            elif Type == "pdf":
+                fo.write('pdf("%s.pdf",width=6,height=6,bg="cornsilk",title="PCA of relation valuation")\n' % (plotFileName) )
+            else:
+                print('Error: Plotting device %s not defined !' % (Type))
+                return
+            fo.write("par(mfrow=c(2,2))\n")
+            fo.write("a1 = 1\n")
+            fo.write("a2 = 2\n")
+            fo.write("a3 = 3\n")
+            fo.write('plot(pcaRes$P[a1,],pcaRes$P[a2,],"n",xlab=paste("axis 1:",val[a1]*100,"%"),ylab=paste("axis 2:",val[a2]*100,"%"),asp=1)\n')
+            fo.write("text(pcaRes$P[a1,],pcaRes$P[a2,],rownames(pcaRes$x))\n")
+            fo.write('abline(h=0,lty=2,col="gray")\n')
+            fo.write('abline(v=0,lty=2,col="gray")\n')
+            fo.write('plot(pcaRes$P[a2,],pcaRes$P[a3,],"n",xlab=paste("axis 2:",val[a2]*100,"%"),ylab=paste("axis 3:",val[a3]*100,"%"),asp=1)\n')
+            fo.write('text(pcaRes$P[a2,],pcaRes$P[a3,],rownames(pcaRes$x))\n')
+            fo.write('abline(h=0,lty=2,col="gray")\n')
+            fo.write('abline(v=0,lty=2,col="gray")\n')
+            fo.write('plot(pcaRes$P[a1,],pcaRes$P[a3,],"n",xlab=paste("axis 1:",val[a1]*100,"%"),ylab=paste("axis 3:",val[a3]*100,"%"),asp=1)\n')
+            fo.write('text(pcaRes$P[a1,],pcaRes$P[a3,],rownames(pcaRes$x))\n')
+            fo.write('abline(h=0,v=0,lty=2,col="gray")\n')
+            fo.write('barplot(val[a1:nval]*100,names.arg=a1:nval,main="Axis inertia (in %)",col="orangered")\n')
+            fo.write('dev.off()\n')
+            fo.close()
         if Comments:
             os.system('env R -q --vanilla --verbose < temp.r 2>&1')
         else:
             os.system('env R -q --vanilla < temp.r > /dev/null 2> /dev/null')
         time.sleep(3)     
-        if Comments:
+        if Type != None and Comments:
             print('See %s.%s ! ' % (plotFileName,Type))
         
         
@@ -4577,7 +4582,7 @@ class Digraph(object):
             fo.write('}\n')
         fo.close()
 
-    def saveCSV(self,fileName='tempdigraph',Normalized=True,Dual=True,Converse=False):
+    def saveCSV(self,fileName='tempdigraph',Normalized=True,Dual=True,Converse=False,Diagonal=False):
         """Persistent storage of a Digraph class instance in the form of
             a csv file. """
         from copy import deepcopy
@@ -4606,6 +4611,7 @@ class Digraph(object):
         actionsList = [x for x in self.actions]
         actionsList.sort()
         headerText = ["d"] + actionsList
+        print(headerText)
         csvfo.writerow(headerText)
         dg = deepcopy(self)
         if Normalized:
@@ -4621,7 +4627,10 @@ class Digraph(object):
             rowText = [x]
             for y in actionsList:
                 if x == y:
-                    rowText.append(float(Min))
+                    if not Diagonal:
+                        rowText.append(float(Min))
+                    else:
+                        rowText.append(float(relation[x][y]))
                 else:
                     rowText.append(float(relation[x][y]))
             print(rowText)
@@ -6946,6 +6955,25 @@ class Digraph(object):
                 print('# of permutations  = ', s)
 
         return kemenyOrder, kemenyIndex
+
+    def computePrincipalOrder(self,Comments=True,Debug=False):
+        """
+        renders a ordered list of self.actions using the decreasing scores from the
+        first rincipal eigenvector of the covariance of the valued outdegrees of self. 
+
+        """
+        from csv import reader
+        self.exportPrincipalImage(Comments=Comments,Type=None)
+        fi = open('rotation.csv','r')
+        csvReader = reader(fi)
+        R = [x for x in csvReader]
+        listActions = [x for x in self.actions]
+        listActions.sort()
+        principalScores = [(Decimal(R[i+1][0]),listActions[i]) for i in range(len(listActions))]
+        principalScores.sort(reverse=True)
+        if Debug:
+            print(principalScores)
+        return principalScores
 
 
     def computeSlaterOrder(self,isProbabilistic=False, seed=None, sampleSize=1000, Debug=False):
@@ -9405,74 +9433,84 @@ class XMLDigraph(Digraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-class XMCDADigraph(Digraph):
+class XMLDigraph(Digraph):
     """
     Specialization of the general Digraph class for reading
-    stored XMCDA formatted digraphs. Using the inbuilt module
+    stored XML formatted digraphs. Using the inbuilt module
     xml.etree (for Python 2.5+).
 
     Param:
-        fileName (without the extension .xmcda).
+        fileName (without the extension .xml).
     """
 
-    def __init__(self,fileName='temp'):
+    def __init__(self,fileName='testsaveXML'):
         from xml.etree import ElementTree
-        try:
-            fileNameExt = fileName + '.xmcda'
-            fo = open(fileNameExt,'r')
-        except:
-            try:
-                fileNameExt = fileName + '.xml'
-                fo = open(fileNameExt,'r')
-            except:
-                print("Error: file %s{.xml|.xmcda}  not found" % (fileName))
-        XMCDA = ElementTree.parse(fo).getroot()
-        description = {}
-        for elem in [x for x in XMCDA.find('caseReference').getchildren()]:
-            description[elem.tag] = elem.text
-        self.description = description
-        try:
-            self.name = description['name']
-        except:
-            self.name ='temp'
-        try:
-            self.author = description['author']
-        except:
-            self.author = 'digraphs module (RB)'
-        try:
-            self.reference = description['comment']
-        except:
-            self.reference = 'XMCDA 1.0 Digraph input method.'
-        Min = Decimal(XMCDA.find('relationOnAlternatives').find('valuationDomain').find('minimum').getchildren().pop().text)
-        Max = Decimal(XMCDA.find('relationOnAlternatives').find('valuationDomain').find('maximum').getchildren().pop().text)
+        fileNameExt = fileName + '.xml'
+        fo = open(fileNameExt,'r')
+        digraph = ElementTree.parse(fo).getroot()
+        self.category = digraph.attrib['category']
+        self.subcategory = digraph.attrib['subcategory']
+        self.name = digraph.find('header').find('name').text
+        self.author = digraph.find('header').find('author').text
+        self.reference = digraph.find('header').find('reference').text
+        Min = Decimal(digraph.find('valuationdomain').find('min').text)
+        Max = Decimal(digraph.find('valuationdomain').find('max').text)
         Med = Min + ((Max - Min)/Decimal('2.0'))
         valuationdomain = {}
         valuationdomain['min'] = Min
         valuationdomain['med'] = Med
         valuationdomain['max'] = Max
         self.valuationdomain = valuationdomain
-        actions = {}
-        for alternative in XMCDA.find('alternatives').findall('alternative'):
-            id = alternative.attrib['id']
-            actions[id] = {}
-            for elem in [x for x in alternative.find('description').getchildren()]:
-                actions[id][elem.tag] = elem.text
+        actions = [action.text for action in digraph.find('nodes').findall('node')]
         self.actions = actions
         relation = {}
-        try:
-            if XMCDA.find('relationOnAlternatives').find('description').find('type').text == 'outrankingDigraph':
-                self.category = 'outranking'
-            else:
-                self.category = 'general'
-        except:
-            pass
         for x in actions:
             relation[x] = {}
-        for arc in XMCDA.find('relationOnAlternatives').find('arcs').findall('arc'):
-            try:
-                relation[arc.find('from').find('alternativeID').text][arc.find('to').find('alternativeID').text] = Decimal(arc.find('value').find('real').text)
-            except:
-                relation[arc.find('from').find('alternativeID').text][arc.find('to').find('alternativeID').text] = Decimal(arc.find('value').find('integer').text)
+        for arc in digraph.find('relation').findall('arc'):
+            relation[arc.find('i').text][arc.find('t').text] = Decimal(arc.find('v').text)
+        self.relation = relation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+
+class CSVDigraph(Digraph):
+    """
+    Specialization of the general Digraph class for reading
+    stored csv formatted digraphs. Using the inbuilt module csv.
+
+    Param:
+        fileName (without the extension .csv).
+    """
+
+    def __init__(self,fileName='temp',valuationMin=-1,valuationMax=1):
+        from csv import reader
+        
+        try:
+            fileNameExt = fileName + '.csv'
+            fi = open(fileNameExt,'r')
+            csvReader = reader(fi)
+            csvText = [x for x in csvReader]
+        except:
+            print("Error: File %s.csv not found !!" % (fileName))
+        
+        self.name = fileName
+        self.order = len(csvText)-1
+        self.reference = 'CSV Digraph input method.'
+        Min = Decimal(valuationMin)
+        Max = Decimal(valuationMax)
+        Med = Min + ((Max - Min)/Decimal('2.0'))
+        valuationdomain = {}
+        valuationdomain['min'] = Min
+        valuationdomain['med'] = Med
+        valuationdomain['max'] = Max
+        self.valuationdomain = valuationdomain
+        self.actions = [csvText[0][i] for i in range(1,self.order+1)]
+    
+        relation = {}
+        for i in range(1,self.order+1):
+            relation[csvText[i][0]] = {}
+            for j in range(1,self.order+1):
+                relation[csvText[i][0]][csvText[0][j]] = Decimal(csvText[i][j])
+        
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -9680,15 +9718,28 @@ if __name__ == "__main__":
 
     else:
         print('*-------- Testing classes and methods -------')
-        
-        #        t = RandomCBPerformanceTableau(numberOfActions=10)
-        #g = BipolarOutrankingDigraph(t)
-        g = CirculantDigraph()
+        from csv import reader
+        t = RandomCBPerformanceTableau(numberOfActions=10)
+        g = BipolarOutrankingDigraph(t)
+        #g = CirculantDigraph(order=5)
         g.save('test')
-        g = Digraph('test')
-        g.showRelationTable()
-        #g.saveCSV(Normalized=True,Dual=True,Converse=True)
-        g.exportPrincipalImage(Comments=True,Type="pdf")
+        #g = Digraph('test')
+        #g.showRelationTable()
+        #g.showAll()
+        #g.saveCSV('test',Normalized=True,Dual=True,Converse=True)
+        #gd = CSVDigraph('testR')
+        #gd.showRelationTable()
+        #gd.showAll()
+        g.computePrincipalOrder(Comments=True,Debug=True)
+##        g.exportPrincipalImage(Comments=True,Type="pdf")
+##        fi = open('rotation.csv','r')
+##        csvReader = reader(fi)
+##        R = [x for x in csvReader]
+##        listActions = [x for x in g.actions]
+##        listActions.sort()
+##        scores = [(Decimal(R[i+1][0]),listActions[i]) for i in range(len(listActions))]
+##        scores.sort(reverse=True)
+##        print(scores)
         #g.computeRankingByChoosing(g,CoDual=False)
         #g.showRankingByChoosing()
         
