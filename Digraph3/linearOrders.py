@@ -733,7 +733,11 @@ class PrincipalOrder(LinearOrder):
         if Debug:
             print('principal ordered relation table:')
             g.showRelationTable()
-
+        # check principal orientation with ordinal correlation sign
+        corr = other.computeOrdinalCorrelation(g.relation)
+        if corr['correlation'] < Decimal('0'):
+            g = ~(g)
+            
         self.name = other.name + '_ranked'        
         self.actions = other.actions
         self.valuationdomain = other.valuationdomain
@@ -802,10 +806,12 @@ if __name__ == "__main__":
     ## ## nfs = NetFlowsOrder(g,coDual=False,Debug=False)
     ## ## print 'Net flows        : ', nfs.computeOrder(), nfs.computeKemenyIndex(g
     ## ##)
-
-    g1 = RandomLinearOrder(numberOfActions=10,Debug=True)
-    p = PrincipalOrder(g1,Debug=True)
-    p.computeOrder()
+    from outrankingDigraphs import RandomBipolarOutrankingDigraph
+    g1 = RandomBipolarOutrankingDigraph()
+    #g1 = RandomLinearOrder(numberOfActions=10,Debug=True)
+    p = PrincipalOrder(g1,Debug=False)
+    print(p.computeOrder())
+    print(g1.computeOrdinalCorrelation(p))
 ##    g1.showRelationTable()
 ##    g2 = RandomLinearOrder(numberOfActions=10,Debug=True)
 ##    g2.showRelationTable()
