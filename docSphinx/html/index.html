@@ -94,6 +94,8 @@ The following Python3 modules make extensive usage of the native Python Decimal 
 <dd>additional tools for solving sorting problems;</dd>
 <dt><a class="reference internal" href="#linearorders-label"><em>linearOrders module</em></a></dt>
 <dd>additional tools for solving ranking problems.</dd>
+<dt><a class="reference internal" href="#rankingbychoosingdigraphs-label"><em>rankingByChoosingDigraphs module</em></a></dt>
+<dd>additional tools for solving ranking by choosing problems.</dd>
 </dl>
 <div class="toctree-wrapper compound">
 <ul class="simple">
@@ -2339,7 +2341,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3286,7 +3288,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4039,7 +4041,7 @@ a given bipolar-valued Digraph instance</p>
 
 <dl class="class">
 <dt id="linearOrders.PrincipalOrder">
-<em class="property">class </em><tt class="descclassname">linearOrders.</tt><tt class="descname">PrincipalOrder</tt><big>(</big><em>other</em>, <em>Colwise=False</em>, <em>imageType=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#linearOrders.PrincipalOrder" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">linearOrders.</tt><tt class="descname">PrincipalOrder</tt><big>(</big><em>other</em>, <em>Colwise=True</em>, <em>imageType=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#linearOrders.PrincipalOrder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#linearOrders.LinearOrder" title="linearOrders.LinearOrder"><tt class="xref py py-class docutils literal"><span class="pre">linearOrders.LinearOrder</span></tt></a></p>
 <p>instantiates the order from the scores obtained by the first
 princiapl axis of the eigen deomposition of the covariance of the
@@ -4059,6 +4061,17 @@ outdegrees of the valued digraph &#8216;other&#8217;.</p>
 <dd><p>Bases: <a class="reference internal" href="#linearOrders.LinearOrder" title="linearOrders.LinearOrder"><tt class="xref py py-class docutils literal"><span class="pre">linearOrders.LinearOrder</span></tt></a></p>
 <p>instantiates the Extended Prudent Ranked Pairs Order from
 a given bipolar-valued Digraph instance</p>
+</dd></dl>
+
+<p>Back to the <a class="reference internal" href="#introduction-label"><em>Introduction</em></a></p>
+</div>
+<div class="section" id="rankingbychoosingdigraphs-module">
+<span id="rankingbychoosingdigraphs-label"></span><h2>rankingByChoosingDigraphs module<a class="headerlink" href="#rankingbychoosingdigraphs-module" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-rankingByChoosingDigraphs"></span><dl class="class">
+<dt id="rankingByChoosingDigraphs.RankingByChoosingDigraph">
+<em class="property">class </em><tt class="descclassname">rankingByChoosingDigraphs.</tt><tt class="descname">RankingByChoosingDigraph</tt><big>(</big><em>other</em>, <em>Best=True</em>, <em>Last=True</em>, <em>CoDual=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#rankingByChoosingDigraphs.RankingByChoosingDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
+<p>Specialization of generic Digraph class for ranking by choosing results.</p>
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#introduction-label"><em>Introduction</em></a></p>
@@ -4092,6 +4105,7 @@ a given bipolar-valued Digraph instance</p>
 <li><a class="reference internal" href="#module-votingDigraphs">votingDigraphs module</a></li>
 <li><a class="reference internal" href="#module-sortingDigraphs">sortingDigraphs module</a></li>
 <li><a class="reference internal" href="#module-linearOrders">linearOrders module</a></li>
+<li><a class="reference internal" href="#rankingbychoosingdigraphs-module">rankingByChoosingDigraphs module</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
