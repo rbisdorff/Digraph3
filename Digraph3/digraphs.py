@@ -9537,6 +9537,90 @@ class CSVDigraph(Digraph):
         except:
             Digraph.showAll(self)
 
+class XMCDADigraph(Digraph):
+    """
+    Specialization of the general Digraph class for reading
+    stored XMCDA formatted digraphs. Using the inbuilt module
+    xml.etree (for Python 2.5+).
+
+    Param:
+        fileName (without the extension .xmcda). 
+    """
+
+    def __init__(self,fileName='temp'):
+        from xml.etree import ElementTree
+        try:
+            fileNameExt = fileName + '.xmcda'
+            fo = open(fileNameExt,'r')
+        except:
+            try:
+                fileNameExt = fileName + '.xml'
+                fo = open(fileNameExt,'r')
+            except:
+                print("Error: file %s{.xml|.xmcda}  not found" % (fileName))
+        XMCDA = ElementTree.parse(fo).getroot()
+        description = {}
+        for elem in [x for x in XMCDA.find('caseReference').getchildren()]:
+            description[elem.tag] = elem.text
+        self.description = description
+        try:
+            self.name = description['name']
+        except:
+            self.name ='temp'
+        try:
+            self.author = description['author']
+        except:
+            self.author = 'digraphs module (RB)'
+        try:
+            self.reference = description['comment']
+        except:
+            self.reference = 'XMCDA 1.0 Digraph input method.'        
+        Min = Decimal(XMCDA.find('relationOnAlternatives').find('valuationDomain').find('minimum').getchildren().pop().text)
+        Max = Decimal(XMCDA.find('relationOnAlternatives').find('valuationDomain').find('maximum').getchildren().pop().text)
+        Med = Min + ((Max - Min)/Decimal('2.0'))
+        valuationdomain = {}
+        valuationdomain['min'] = Min
+        valuationdomain['med'] = Med
+        valuationdomain['max'] = Max
+        self.valuationdomain = valuationdomain
+        actions = {}
+        for alternative in XMCDA.find('alternatives').findall('alternative'):
+            id = alternative.attrib['id']
+            actions[id] = {}
+            for elem in [x for x in alternative.find('description').getchildren()]:
+                actions[id][elem.tag] = elem.text    
+        self.actions = actions
+        relation = {}
+        try:
+            if XMCDA.find('relationOnAlternatives').find('description').find('type').text == 'outrankingDigraph':
+                self.category = 'outranking'
+            else:
+                self.category = 'general'
+        except:
+            pass
+        for x in actions:
+            relation[x] = {}
+        for arc in XMCDA.find('relationOnAlternatives').find('arcs').findall('arc'):
+            try:
+                relation[arc.find('from').find('alternativeID').text][arc.find('to').find('alternativeID').text] = Decimal(arc.find('value').find('real').text)
+            except:
+                relation[arc.find('from').find('alternativeID').text][arc.find('to').find('alternativeID').text] = Decimal(arc.find('value').find('integer').text)
+        self.relation = relation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        
+    def showAll(self):
+        try:
+            if self.category == 'outranking':
+                Digraph.showAll(self)
+                self.showPreKernels()
+                self.showGoodChoices()
+                self.showBadChoices()
+            else:
+                Digraph.showAll(self)
+        except:
+            Digraph.showAll(self)
+
 class XMCDA2Digraph(Digraph):
     """
     Specialization of the general Digraph class for reading
