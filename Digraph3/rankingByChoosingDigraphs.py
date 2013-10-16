@@ -73,7 +73,7 @@ class RankingByChoosingDigraph(Digraph):
                 for y in digraph.actions:
                     relFusion[x][y] = digraph.omin((relBest[x][y],relLast[x][y]))
             self.relation=relFusion
-            
+
         self.computeRankingByChoosing()
         if Debug:
             self.showRankingByChoosing()
@@ -83,25 +83,58 @@ class RankingByChoosingDigraph(Digraph):
         self.notGamma = self.notGammaSets()
 
 
+class PrincipalInOutDegreesOrdering(Digraph):
+    """
+    Specialization of generic Digraph class for ranking by fusion
+    of the principal orders of in- and outdegrees.
+    """
+    def __init__(self,other,imageType=None,plotFileName=None,Debug=False):
+        from copy import deepcopy
+        from linearOrders import PrincipalOrder
+        digraph = deepcopy(other)
+        digraph.recodeValuation(-1.0,1.0)
+        self.name = digraph.name
+        self.__class__ = digraph.__class__
+        self.actions = digraph.actions
+        self.order = len(self.actions)
+        self.valuationdomain = digraph.valuationdomain
+        pl = PrincipalOrder(digraph,Colwise=False,imageType=imageType,
+                            plotFileName=plotFileName,Debug=Debug)
+        pc = PrincipalOrder(digraph,Colwise=True,imageType=imageType,
+                            plotFileName=plotFileName,Debug=Debug)
+        pf = FusionDigraph(pl,pc)
+        self.relation = deepcopy(pf.relation)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        if Debug:
+            print(self.computeOrdinalCorrelation(digraph))
+
+        
+
 #----------test outrankingDigraphs classes ----------------
 if __name__ == "__main__":
 
     from outrankingDigraphs import *
-    from rankingByChoosingDigraphs import RankingByChoosingDigraph
+    from rankingByChoosingDigraphs import *
 
-    g = RandomBipolarOutrankingDigraph(numberOfActions=7)
+    g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=15)
     print('=== >>> best and last fusion (default)')
-    rcg0 = RankingByChoosingDigraph(g,Debug=True)
+    rcg0 = RankingByChoosingDigraph(g,Debug=False)
 ##    rcg.showRankingByChoosing()
 ##    rcg1 = RankingByChoosingDigraph(rcg,CoDual=True)
 ##    rcg1.showRankingByChoosing()
 ##    print(rcg1.computeOrdinalCorrelation(rcg))
     print('=== >>> best') 
-    rcg1 = RankingByChoosingDigraph(g,Best=True,Last=False,Debug=True)
+    rcg1 = RankingByChoosingDigraph(g,Best=True,Last=False,Debug=False)
     print('=== >>> last')
-    rcg2 = RankingByChoosingDigraph(g,Best=False,Last=True,Debug=True)
+    rcg2 = RankingByChoosingDigraph(g,Best=False,Last=True,Debug=False)
     print('=== >>> bipolar best and last')
-    rcg3 = RankingByChoosingDigraph(g,Best=False,Last=False,Debug=True)
+    rcg3 = RankingByChoosingDigraph(g,Best=False,Last=False,Debug=False)
+
+    rcf = PrincipalInOutDegreesOrdering(g,imageType="pdf",Debug=False)
+    rcf.computeRankingByChoosing()
+    rcf.showRankingByChoosing()
+    print(rcf.computeOrdinalCorrelation(g))
 
     
     

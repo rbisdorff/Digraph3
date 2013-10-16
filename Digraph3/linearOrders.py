@@ -687,7 +687,8 @@ class PrincipalOrder(LinearOrder):
     princiapl axis of the eigen deomposition of the covariance of the
     outdegrees of the valued digraph 'other'.
     """
-    def __init__(self,other,Colwise=True,imageType=None,Debug=False):
+    def __init__(self,other,Colwise=True,imageType=None,
+                 plotFileName="principalOrdering",Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph by using the first principal eigen vector.
@@ -704,6 +705,7 @@ class PrincipalOrder(LinearOrder):
         relation = deepcopy(other.relation)
         principalScores = other.computePrincipalOrder(Colwise=Colwise,
                                                       imageType=imageType,
+                                                      plotFileName=plotFileName,
                                                       Debug=Debug)
         # [ (score1,action_(1), (score2,action_(2), ...] 
         if principalScores == None:
