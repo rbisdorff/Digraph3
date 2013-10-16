@@ -2348,6 +2348,10 @@ class Digraph(object):
         import os,time
         if plotFileName == None:
             plotFileName = "%s_principalImage" % self.name
+        if Colwise:
+            plotFileName += "_Colwise"
+        else:
+            plotFileName += "_Rowwise"
         self.saveCSV('exportTemp')
         fo = open('temp.r','w')
         fo.write("x = read.csv('exportTemp.csv',row.names=1)\n")
@@ -2390,15 +2394,15 @@ class Digraph(object):
             fo.write("a2 = 2\n")
             fo.write("a3 = 3\n")
             fo.write('plot(pcaRes$P[a1,],pcaRes$P[a2,],"n",xlab=paste("axis 1:",val[a1]*100,"%"),ylab=paste("axis 2:",val[a2]*100,"%"),asp=1)\n')
-            fo.write("text(pcaRes$P[a1,],pcaRes$P[a2,],rownames(pcaRes$x))\n")
+            fo.write("text(pcaRes$P[a1,],pcaRes$P[a2,],rownames(pcaRes$x),cex=0.75)\n")
             fo.write('abline(h=0,lty=2,col="gray")\n')
             fo.write('abline(v=0,lty=2,col="gray")\n')
             fo.write('plot(pcaRes$P[a2,],pcaRes$P[a3,],"n",xlab=paste("axis 2:",val[a2]*100,"%"),ylab=paste("axis 3:",val[a3]*100,"%"),asp=1)\n')
-            fo.write('text(pcaRes$P[a2,],pcaRes$P[a3,],rownames(pcaRes$x))\n')
+            fo.write('text(pcaRes$P[a2,],pcaRes$P[a3,],rownames(pcaRes$x),cex=0.75)\n')
             fo.write('abline(h=0,lty=2,col="gray")\n')
             fo.write('abline(v=0,lty=2,col="gray")\n')
             fo.write('plot(pcaRes$P[a1,],pcaRes$P[a3,],"n",xlab=paste("axis 1:",val[a1]*100,"%"),ylab=paste("axis 3:",val[a3]*100,"%"),asp=1)\n')
-            fo.write('text(pcaRes$P[a1,],pcaRes$P[a3,],rownames(pcaRes$x))\n')
+            fo.write('text(pcaRes$P[a1,],pcaRes$P[a3,],rownames(pcaRes$x),cex=0.75)\n')
             fo.write('abline(h=0,v=0,lty=2,col="gray")\n')
             fo.write('barplot(val[a1:nval]*100,names.arg=a1:nval,main="Axis inertia (in %)",col="orangered")\n')
             fo.write('dev.off()\n')
@@ -6966,14 +6970,18 @@ class Digraph(object):
 
         return kemenyOrder, kemenyIndex
 
-    def computePrincipalOrder(self,Colwise=False,imageType=None,Comments=True,Debug=False):
+    def computePrincipalOrder(self, plotFileName=None,
+                              Colwise=False, imageType=None,
+                              Comments=True, Debug=False):
         """
         renders a ordered list of self.actions using the decreasing scores from the
         first rincipal eigenvector of the covariance of the valued outdegrees of self. 
 
         """
         from csv import reader
-        self.exportPrincipalImage(Colwise=Colwise,Comments=Comments,Type=imageType)
+        self.exportPrincipalImage(Colwise=Colwise,Comments=Comments,
+                                  Type=imageType,
+                                  plotFileName=plotFileName)
         fi = open('rotation.csv','r')
         csvReader = reader(fi)
         R = [x for x in csvReader]
