@@ -154,7 +154,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -715,7 +715,7 @@ a given preordering (list of lists) result.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computePrincipalOrder">
-<tt class="descname">computePrincipalOrder</tt><big>(</big><em>Colwise=False</em>, <em>imageType=None</em>, <em>Comments=True</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.computePrincipalOrder" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computePrincipalOrder</tt><big>(</big><em>plotFileName=None</em>, <em>Colwise=False</em>, <em>imageType=None</em>, <em>Comments=True</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.computePrincipalOrder" title="Permalink to this definition">¶</a></dt>
 <dd><p>renders a ordered list of self.actions using the decreasing scores from the
 first rincipal eigenvector of the covariance of the valued outdegrees of self.</p>
 </dd></dl>
@@ -995,7 +995,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1725,7 +1725,7 @@ equivalence valuations.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1756,7 +1756,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2341,7 +2341,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3288,7 +3288,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4041,7 +4041,7 @@ a given bipolar-valued Digraph instance</p>
 
 <dl class="class">
 <dt id="linearOrders.PrincipalOrder">
-<em class="property">class </em><tt class="descclassname">linearOrders.</tt><tt class="descname">PrincipalOrder</tt><big>(</big><em>other</em>, <em>Colwise=True</em>, <em>imageType=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#linearOrders.PrincipalOrder" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">linearOrders.</tt><tt class="descname">PrincipalOrder</tt><big>(</big><em>other</em>, <em>Colwise=True</em>, <em>imageType=None</em>, <em>plotFileName='principalOrdering'</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#linearOrders.PrincipalOrder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#linearOrders.LinearOrder" title="linearOrders.LinearOrder"><tt class="xref py py-class docutils literal"><span class="pre">linearOrders.LinearOrder</span></tt></a></p>
 <p>instantiates the order from the scores obtained by the first
 princiapl axis of the eigen deomposition of the covariance of the
@@ -4068,6 +4068,14 @@ a given bipolar-valued Digraph instance</p>
 <div class="section" id="rankingbychoosingdigraphs-module">
 <span id="rankingbychoosingdigraphs-label"></span><h2>rankingByChoosingDigraphs module<a class="headerlink" href="#rankingbychoosingdigraphs-module" title="Permalink to this headline">¶</a></h2>
 <span class="target" id="module-rankingByChoosingDigraphs"></span><dl class="class">
+<dt id="rankingByChoosingDigraphs.PrincipalInOutDegreesOrdering">
+<em class="property">class </em><tt class="descclassname">rankingByChoosingDigraphs.</tt><tt class="descname">PrincipalInOutDegreesOrdering</tt><big>(</big><em>other</em>, <em>imageType=None</em>, <em>plotFileName=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#rankingByChoosingDigraphs.PrincipalInOutDegreesOrdering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
+<p>Specialization of generic Digraph class for ranking by fusion
+of the principal orders of in- and outdegrees.</p>
+</dd></dl>
+
+<dl class="class">
 <dt id="rankingByChoosingDigraphs.RankingByChoosingDigraph">
 <em class="property">class </em><tt class="descclassname">rankingByChoosingDigraphs.</tt><tt class="descname">RankingByChoosingDigraph</tt><big>(</big><em>other</em>, <em>Best=True</em>, <em>Last=True</em>, <em>CoDual=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#rankingByChoosingDigraphs.RankingByChoosingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
