@@ -50,6 +50,8 @@ The Digraph source code is split into five interdependant modules, where the ``d
      additional tools for solving sorting problems;
 :ref:`linearOrders-label` 
      additional tools for solving ranking problems.
+:ref:`rankingByChoosingDigraphs-label` 
+     additional tools for solving ranking by choosing problems.
 
 
 .. toctree::
@@ -133,6 +135,18 @@ linearOrders module
 -------------------
 
 .. automodule:: linearOrders
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Introduction-label`
+
+.. _rankingByChoosingDigraphs-label:
+
+rankingByChoosingDigraphs module
+-------------------
+
+.. automodule:: rankingByChoosingDigraphs
    :member-order: alphabetical
    :no-inherited-members:
    :members:
