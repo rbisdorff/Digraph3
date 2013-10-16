@@ -687,7 +687,7 @@ class PrincipalOrder(LinearOrder):
     princiapl axis of the eigen deomposition of the covariance of the
     outdegrees of the valued digraph 'other'.
     """
-    def __init__(self,other,Colwise=False,imageType=None,Debug=False):
+    def __init__(self,other,Colwise=True,imageType=None,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph by using the first principal eigen vector.
@@ -815,8 +815,10 @@ if __name__ == "__main__":
     p = PrincipalOrder(g1,Colwise=False,imageType="pdf",Debug=False)
     print(p.computeOrder())
     print(g1.computeOrdinalCorrelation(p))
-    g1.showRankingByLastChoosing(g1.computeRankingByLastChoosing())
-    g1.showRankingByBestChoosing(g1.computeRankingByBestChoosing())
+    p.showRelationTable()
+    from rankingByChoosingDigraphs import *
+    rbc = RankingByChoosingDigraph(g1,Debug=True)
+    rbc.showRelationTable()
     
 ##    g1.showRelationTable()
 ##    g2 = RandomLinearOrder(numberOfActions=10,Debug=True)
