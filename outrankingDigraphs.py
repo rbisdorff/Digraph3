@@ -3644,7 +3644,11 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
 
     """
-    def __init__(self,argPerfTab=None,coalition=None,hasNoVeto=False,hasBipolarVeto=True):
+    def __init__(self,argPerfTab=None,
+                 coalition=None,
+                 hasNoVeto=False,
+                 hasBipolarVeto=True,
+                 Normalized=False):
         import copy
         if argPerfTab == None:
             perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
@@ -3664,10 +3668,14 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             self.actions = actions
         else:
             self.actions = copy.deepcopy(perfTab.actions)
-        
-        Min =   Decimal('-100.0')
-        Med =   Decimal('0.0')
-        Max =   Decimal('100.0')
+        if Normalized:
+            Min =   Decimal('-1.0')
+            Med =   Decimal('0.0')
+            Max =   Decimal('1.0')
+        else:
+            Min =   Decimal('-100.0')
+            Med =   Decimal('0.0')
+            Max =   Decimal('100.0')
         self.valuationdomain = {'min':Min,'med':Med,'max':Max}
 
         if coalition == None:
@@ -5130,11 +5138,26 @@ class RandomBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
     Specialization of the OutrankingDigraph class for generating temporary
     Digraphs from random performance tableaux.
     """
-    def __init__(self,numberOfActions=7, numberOfCriteria=7, weightDistribution='random', weightScale = [1,10], commonScale=[0.0,100.0], commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(80.0,0.0)], commonMode=('uniform',None,None),hasBipolarVeto=True):
+    def __init__(self,numberOfActions=7,
+                 numberOfCriteria=7,
+                 weightDistribution='random',
+                 weightScale = [1,10],
+                 commonScale=[0.0,100.0],
+                 commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(80.0,0.0)],
+                 commonMode=('uniform',None,None),
+                 hasBipolarVeto=True,
+                 Normalized=False):
         # generate random performance tableau
         import copy
-        tb = RandomPerformanceTableau(numberOfActions=numberOfActions,numberOfCriteria=numberOfCriteria, weightDistribution=weightDistribution, weightScale=weightScale, commonScale=commonScale, commonThresholds = commonThresholds, commonMode=commonMode)
-        g = BipolarOutrankingDigraph(tb,hasBipolarVeto=hasBipolarVeto)
+        tb = RandomPerformanceTableau(numberOfActions=numberOfActions,
+                                      numberOfCriteria=numberOfCriteria,
+                                      weightDistribution=weightDistribution,
+                                      weightScale=weightScale,
+                                      commonScale=commonScale,
+                                      commonThresholds = commonThresholds,
+                                      commonMode=commonMode)
+        g = BipolarOutrankingDigraph(tb,Normalized=Normalized,
+                                     hasBipolarVeto=hasBipolarVeto)
         self.name = copy.deepcopy(g.name)
         self.actions = copy.deepcopy(g.actions)
         self.criteria = copy.deepcopy(g.criteria)

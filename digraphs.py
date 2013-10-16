@@ -2335,7 +2335,10 @@ class Digraph(object):
             res = res + ';'
             print(res)
 
-    def exportPrincipalImage(self, Reduced=False,plotFileName="relationPCAImage",Type="png",Comments=False):
+    def exportPrincipalImage(self, Reduced=False,\
+                             Colwise=False,\
+                             plotFileName=None,\
+                             Type="png",Comments=False):
         """
         Export as PNG (default) or PDF the principal projection of the valued relation using the three principal eigen vectors.
         """
@@ -2343,10 +2346,13 @@ class Digraph(object):
         if Comments:
             print('*----  export 3dplot of type %s -----' % (Type))
         import os,time
-        
+        if plotFileName == None:
+            plotFileName = "%s_principalImage" % self.name
         self.saveCSV('exportTemp')
         fo = open('temp.r','w')
         fo.write("x = read.csv('exportTemp.csv',row.names=1)\n")
+        if Colwise:
+            fo.write("x = t(x)\n")
         if Reduced:
             fo.write("x = (x-colMeans(x))/(sapply(x,sd)*sqrt(length(t(x))))\n")
         else:
@@ -2365,13 +2371,17 @@ class Digraph(object):
             fo.write("val = pcaRes$val\n")
             fo.write("nval = length(val)\n")
             if Type == "png":
-                fo.write('png("%s.png",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
+                fo.write('png("%s.png",width=480,height=480,bg="cornsilk")\n'\
+                         % (plotFileName) )
             elif Type == "jpeg":
-                fo.write('jpeg("%s.jpg",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
+                fo.write('jpeg("%s.jpg",width=480,height=480,bg="cornsilk")\n'\
+                         % (plotFileName) )
             elif Type == "xfig":
-                fo.write('xfig("%s.fig",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
+                fo.write('xfig("%s.fig",width=480,height=480,bg="cornsilk")\n'\
+                         % (plotFileName) )
             elif Type == "pdf":
-                fo.write('pdf("%s.pdf",width=6,height=6,bg="cornsilk",title="PCA of relation valuation")\n' % (plotFileName) )
+                fo.write('pdf("%s.pdf",width=6,height=6,bg="cornsilk",title="PCA of relation valuation")\n'\
+                         % (plotFileName) )
             else:
                 print('Error: Plotting device %s not defined !' % (Type))
                 return
@@ -6956,14 +6966,14 @@ class Digraph(object):
 
         return kemenyOrder, kemenyIndex
 
-    def computePrincipalOrder(self,Comments=True,Debug=False):
+    def computePrincipalOrder(self,Colwise=False,imageType=None,Comments=True,Debug=False):
         """
         renders a ordered list of self.actions using the decreasing scores from the
         first rincipal eigenvector of the covariance of the valued outdegrees of self. 
 
         """
         from csv import reader
-        self.exportPrincipalImage(Comments=Comments,Type=None)
+        self.exportPrincipalImage(Colwise=Colwise,Comments=Comments,Type=imageType)
         fi = open('rotation.csv','r')
         csvReader = reader(fi)
         R = [x for x in csvReader]

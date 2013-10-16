@@ -687,7 +687,7 @@ class PrincipalOrder(LinearOrder):
     princiapl axis of the eigen deomposition of the covariance of the
     outdegrees of the valued digraph 'other'.
     """
-    def __init__(self,other,Debug=False):
+    def __init__(self,other,Colwise=False,imageType=None,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph by using the first principal eigen vector.
@@ -702,7 +702,9 @@ class PrincipalOrder(LinearOrder):
         actionsList.sort()
         n = len(actionsList)
         relation = deepcopy(other.relation)
-        principalScores = other.computePrincipalOrder(Debug=Debug)
+        principalScores = other.computePrincipalOrder(Colwise=Colwise,
+                                                      imageType=imageType,
+                                                      Debug=Debug)
         # [ (score1,action_(1), (score2,action_(2), ...] 
         if principalScores == None:
             print('Intantiation error: unable to compute the principal Order !!!')
@@ -807,11 +809,15 @@ if __name__ == "__main__":
     ## ## print 'Net flows        : ', nfs.computeOrder(), nfs.computeKemenyIndex(g
     ## ##)
     from outrankingDigraphs import RandomBipolarOutrankingDigraph
-    g1 = RandomBipolarOutrankingDigraph()
-    #g1 = RandomLinearOrder(numberOfActions=10,Debug=True)
-    p = PrincipalOrder(g1,Debug=False)
+    #g1 = RandomBipolarOutrankingDigraph(Normalized=True)
+    #g1.save('test')
+    g1 = Digraph('test')
+    p = PrincipalOrder(g1,Colwise=False,imageType="pdf",Debug=False)
     print(p.computeOrder())
     print(g1.computeOrdinalCorrelation(p))
+    g1.showRankingByLastChoosing(g1.computeRankingByLastChoosing())
+    g1.showRankingByBestChoosing(g1.computeRankingByBestChoosing())
+    
 ##    g1.showRelationTable()
 ##    g2 = RandomLinearOrder(numberOfActions=10,Debug=True)
 ##    g2.showRelationTable()
