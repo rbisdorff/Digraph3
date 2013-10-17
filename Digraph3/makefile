@@ -34,12 +34,16 @@ tests:
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
 		cp linearOrders.py test/
+		cp weaklyTransitiveDigraphs.py test/
+		cp graphs.py test/
 		(cd test; ./nosetests -v noseTestsDigraph.py)
 		(cd test; ./nosetests -v noseTestsOutrankingDigraph.py)
 		(cd test; ./nosetests -v noseTestsPerfTab.py)
 		(cd test; ./nosetests -v noseTestsSortingDigraph.py)
 		(cd test; ./nosetests -v noseTestsVotingDigraph.py)
 		(cd test; ./nosetests -v noseTestsLinearOrder.py)
+		(cd test; ./nosetests -v noseTestsWeaklyTransitiveDigraphs.py)
+		(cd test; ./nosetests -v noseTestsGraph.py)
 
 verboseTests:
 		cp digraphs.py test/
@@ -48,6 +52,7 @@ verboseTests:
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
 		cp linearOrders.py test/
+		cp weaklyTransitiveDigraphs.py test/
 		cp graphs.py test/
 		(cd test; ./nosetests -vs noseTestsDigraph.py)
 		(cd test; ./nosetests -vs noseTestsOutrankingDigraph.py)
@@ -55,6 +60,7 @@ verboseTests:
 		(cd test; ./nosetests -vs noseTestsSortingDigraph.py)
 		(cd test; ./nosetests -vs noseTestsVotingDigraph.py)
 		(cd test; ./nosetests -vs noseTestsLinearOrder.py)
+		(cd test; ./nosetests -vs noseTestsWeaklyTransitiveDigraphs.py)
 		(cd test; ./nosetests -vs noseTestsGraph.py)
 
 digraphsTests:
@@ -151,6 +157,28 @@ verboseLinearOrdersTests:
 		cp votingDigraphs.py test/
 		cp linearOrders.py test/
 		(cd test; ./nosetests -vs noseTestsLinearOrder.py)
+
+weaklyTransitiveDigraphsTests:
+		cp digraphs.py test/
+		cp outrankingDigraphs.py test/
+		cp perfTabs.py test/
+		cp sortingDigraphs.py test/
+		cp votingDigraphs.py test/
+		cp linearOrders.py test/
+		cp weaklyTransitiveDigraphs.py test/
+		cp graphs.py test/
+		(cd test; ./nosetests -v noseTestsWeaklyTransitiveDigraphs.py)
+
+verboseWeaklyTransitiveDigraphsTests:
+		cp digraphs.py test/
+		cp outrankingDigraphs.py test/
+		cp perfTabs.py test/
+		cp sortingDigraphs.py test/
+		cp votingDigraphs.py test/
+		cp linearOrders.py test/
+		cp weaklyTransitiveDigraphs.py test/
+		cp graphs.py test/
+		(cd test; ./nosetests -vs noseTestsWeaklyTransitiveDigraphs.py)
 
 install:
 		sudo python3 setup.py install
