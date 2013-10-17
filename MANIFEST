@@ -5,7 +5,7 @@ outrankingDigraphs.py
 sortingDigraphs.py
 votingDigraphs.py
 linearOrders.py
-rankingByChoosingDigraphs.py
+weaklyTransitiveDigraphs.py
 iqagent.py
 graphs.py
 makefile
