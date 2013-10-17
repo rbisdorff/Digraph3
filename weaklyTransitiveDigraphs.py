@@ -26,9 +26,71 @@ __version__ = "Branch: 3.3 $"
 from digraphs import *
 from perfTabs import *
 from outrankingDigraphs import *
-from rankingByChoosingDigraphs import *
+from weaklyTransitiveDigraphs import *
 
-class RankingByChoosingDigraph(Digraph):
+class WeaklyTransitiveDigraph(Digraph):
+    """
+    Abstract class for weakly transitive digraphs specialized methods.
+    """
+    def showPreOrder(self,rankingByChoosing=None):
+        """
+        A show method for self.rankinByChoosing result.
+        """
+        if rankingByChoosing == None:
+            try:
+                rankingByChoosing = self.rankingByChoosing['result']
+            except:
+                print('Error: You must first run self.computeRankingByChoosing(CoDual=True(default)|False) !')
+            #rankingByChoosing = self.computeRankingByChoosing(Debug,CoDual)
+                return
+        else:
+            rankingByChoosing = rankingByChoosing['result']
+        print('Ranking by Choosing and Rejecting')
+        space = ''
+        n = len(rankingByChoosing)
+        for i in range(n):
+            if i+1 == 1:
+                nstr='st'
+            elif i+1 == 2:
+                nstr='nd'
+            elif i+1 == 3:
+                nstr='rd'
+            else:
+                nstr='th'
+            ibch = set(rankingByChoosing[i][0][1])
+            iwch = set(rankingByChoosing[i][1][1])
+            iach = iwch & ibch
+            #print 'ibch, iwch, iach', i, ibch,iwch,iach
+            ch = list(ibch)
+            ch.sort()
+            print(' %s%s%s ranked %s (%.2f)' % (space,i+1,nstr,ch,rankingByChoosing[i][0][0]))
+            if len(iach) > 0 and i < n-1:
+                print('  %s Ambiguous Choice %s' % (space,list(iach)))
+                space += '  '
+            space += '  '
+        for i in range(n):
+            if n-i == 1:
+                nstr='st'
+            elif n-i == 2:
+                nstr='nd'
+            elif n-i == 3:
+                nstr='rd'
+            else:
+                nstr='th'
+            space = space[:-2]
+            ibch = set(rankingByChoosing[n-i-1][0][1])
+            iwch = set(rankingByChoosing[n-i-1][1][1])
+            iach = iwch & ibch
+            #print 'ibch, iwch, iach', i, ibch,iwch,iach
+            ch = list(iwch)
+            ch.sort()
+            if len(iach) > 0 and i > 0:
+                space = space[:-2]
+                print('  %s Ambiguous Choice %s' % (space,list(iach)))
+            print(' %s%s%s last ranked %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))        
+
+
+class RankingByChoosingDigraph(WeaklyTransitiveDigraph):
     """
     Specialization of generic Digraph class for ranking by choosing results.
     """
@@ -39,7 +101,7 @@ class RankingByChoosingDigraph(Digraph):
         digraph=deepcopy(other)
         digraph.recodeValuation(-1.0,1.0)
         self.name = digraph.name
-        self.__class__ = digraph.__class__
+        #self.__class__ = digraph.__class__
         self.actions = digraph.actions
         self.order = len(self.actions)
         self.valuationdomain = digraph.valuationdomain
@@ -83,7 +145,7 @@ class RankingByChoosingDigraph(Digraph):
         self.notGamma = self.notGammaSets()
 
 
-class PrincipalInOutDegreesOrdering(Digraph):
+class PrincipalInOutDegreesOrdering(WeaklyTransitiveDigraph):
     """
     Specialization of generic Digraph class for ranking by fusion
     of the principal orders of in- and outdegrees.
@@ -94,7 +156,7 @@ class PrincipalInOutDegreesOrdering(Digraph):
         digraph = deepcopy(other)
         digraph.recodeValuation(-1.0,1.0)
         self.name = digraph.name
-        self.__class__ = digraph.__class__
+        #self.__class__ = digraph.__class__
         self.actions = digraph.actions
         self.order = len(self.actions)
         self.valuationdomain = digraph.valuationdomain
@@ -106,6 +168,7 @@ class PrincipalInOutDegreesOrdering(Digraph):
         self.relation = deepcopy(pf.relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+        self.computeRankingByChoosing(CoDual=False)
         if Debug:
             print(self.computeOrdinalCorrelation(digraph))
 
@@ -115,25 +178,32 @@ class PrincipalInOutDegreesOrdering(Digraph):
 if __name__ == "__main__":
 
     from outrankingDigraphs import *
-    from rankingByChoosingDigraphs import *
+    from weaklyTransitiveDigraphs import *
 
     g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=15)
     print('=== >>> best and last fusion (default)')
     rcg0 = RankingByChoosingDigraph(g,Debug=False)
+    rcg0.showPreOrder()
+    print(rcg0.computeOrdinalCorrelation(g))
 ##    rcg.showRankingByChoosing()
 ##    rcg1 = RankingByChoosingDigraph(rcg,CoDual=True)
 ##    rcg1.showRankingByChoosing()
 ##    print(rcg1.computeOrdinalCorrelation(rcg))
     print('=== >>> best') 
     rcg1 = RankingByChoosingDigraph(g,Best=True,Last=False,Debug=False)
+    rcg1.showPreOrder()
+    print(rcg1.computeOrdinalCorrelation(g))
     print('=== >>> last')
     rcg2 = RankingByChoosingDigraph(g,Best=False,Last=True,Debug=False)
+    rcg2.showPreOrder()
+    print(rcg2.computeOrdinalCorrelation(g))
     print('=== >>> bipolar best and last')
     rcg3 = RankingByChoosingDigraph(g,Best=False,Last=False,Debug=False)
-
+    rcg3.showPreOrder()
+    print(rcg3.computeOrdinalCorrelation(g))
+    print('=== >>> principal preorder')
     rcf = PrincipalInOutDegreesOrdering(g,imageType="pdf",Debug=False)
-    rcf.computeRankingByChoosing()
-    rcf.showRankingByChoosing()
+    rcf.showPreOrder()
     print(rcf.computeOrdinalCorrelation(g))
 
     
