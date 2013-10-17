@@ -4596,7 +4596,8 @@ class Digraph(object):
             fo.write('}\n')
         fo.close()
 
-    def saveCSV(self,fileName='tempdigraph',Normalized=True,Dual=True,Converse=False,Diagonal=False):
+    def saveCSV(self,fileName='tempdigraph',Normalized=True,
+                Dual=True,Converse=False,Diagonal=False,Debug=False):
         """Persistent storage of a Digraph class instance in the form of
             a csv file. """
         from copy import deepcopy
@@ -4618,14 +4619,16 @@ class Digraph(object):
             elif Converse:
                 com += 'converse'
         
-        print('*--- Saving %s digraph in file: %s.csv> ---*' % (com,fileName))
+        if Debug:
+            print('*--- Saving %s digraph in file: %s.csv> ---*' % (com,fileName))
         fileNameExt = str(fileName)+str('.csv')
         fo = open(fileNameExt, 'w')
         csvfo = csv.writer(fo,quoting=csv.QUOTE_NONNUMERIC)
         actionsList = [x for x in self.actions]
         actionsList.sort()
         headerText = ["d"] + actionsList
-        print(headerText)
+        if Debug:
+            print(headerText)
         csvfo.writerow(headerText)
         dg = deepcopy(self)
         if Normalized:
@@ -4647,7 +4650,8 @@ class Digraph(object):
                         rowText.append(float(relation[x][y]))
                 else:
                     rowText.append(float(relation[x][y]))
-            print(rowText)
+            if Debug:
+                print(rowText)
             csvfo.writerow(rowText)
         fo.close()
 
