@@ -157,7 +157,13 @@ class PrincipalInOutDegreesOrdering(WeaklyTransitiveDigraph):
         digraph.recodeValuation(-1.0,1.0)
         self.name = digraph.name
         #self.__class__ = digraph.__class__
-        self.actions = digraph.actions
+        if isinstance(digraph.actions,list):
+            self.actions = {}
+            for x in digraph.actions:
+                self.actions[x] = {}
+                self.actions[x]['name'] = x
+        else:
+            self.actions = deepcopy(digraph.actions)
         self.order = len(self.actions)
         self.valuationdomain = digraph.valuationdomain
         pl = PrincipalOrder(digraph,Colwise=False,imageType=imageType,
@@ -165,29 +171,65 @@ class PrincipalInOutDegreesOrdering(WeaklyTransitiveDigraph):
         if Debug:
             print('Row wise: ')
             print(pl.principalRowwiseScores)
+        self.principalRowwiseScores = pl.principalRowwiseScores
+        for x in pl.principalRowwiseScores:
+            self.actions[x[1]]['principalRowwiseScore'] = x[0]
         pc = PrincipalOrder(digraph,Colwise=True,imageType=imageType,
                             plotFileName=plotFileName,Debug=Debug)
         if Debug:
             print('Column wise: ')
             print(pc.principalColwiseScores)
- 
+        self.principalColwiseScores = pc.principalColwiseScores
+        for x in pc.principalColwiseScores:
+            self.actions[x[1]]['principalColwiseScore'] = x[0]
         pf = FusionDigraph(pl,pc)
         self.relation = deepcopy(pf.relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-        self.computeRankingByChoosing(CoDual=False)
+        self.computeRankingByChoosing()
         if Debug:
             print(self.computeOrdinalCorrelation(digraph))
 
-        
+    def showPrincipalScores(self, ColwiseOrder=False, RowwiseOrder=False):
+        """
+        show the princiapl scores
+        """
+        print('List of principal scores')
+        if not ColwiseOrder and not RowwiseOrder:
+            print('action \t colwise \t rowwise')
+            for x in self.actions:
+                print('%s \t %.5f \t %.5f' %(x,
+                                             self.actions[x]['principalColwiseScore'],
+                                             self.actions[x]['principalRowwiseScore']))
+        elif ColwiseOrder:
+            print('Column wise covariance ordered')
+            print('action \t colwise \t rowwise')
+            for (y,x) in self.principalColwiseScores:
+                print('%s \t %.5f \t %.5f' %(x,
+                                             self.actions[x]['principalColwiseScore'],
+                                             self.actions[x]['principalRowwiseScore']))
+        else:
+            print('Row wise covariance ordered')
+            print('action \t colwise \t rowwise')
+            for (y,x) in self.principalRowwiseScores:
+                print('%s \t %.5f \t %.5f' %(x,
+                                             self.actions[x]['principalColwiseScore'],
+                                             self.actions[x]['principalRowwiseScore']))
+                
 
 #----------test outrankingDigraphs classes ----------------
 if __name__ == "__main__":
 
+    from digraphs import *
     from outrankingDigraphs import *
     from weaklyTransitiveDigraphs import *
 
-    g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=7)
+    #t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+    #                               numberOfActions=11)
+    #t.saveXMCDA2('test')
+    #g = BipolarOutrankingDigraph(t,Normalized=True)
+    #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
+    g = RandomValuationDigraph(order=11)
     print('=== >>> best and last fusion (default)')
     rcg0 = RankingByChoosingDigraph(g,Debug=False)
     rcg0.showPreOrder()
@@ -209,9 +251,12 @@ if __name__ == "__main__":
     rcg3.showPreOrder()
     print(rcg3.computeOrdinalCorrelation(g))
     print('=== >>> principal preorder')
-    rcf = PrincipalInOutDegreesOrdering(g,imageType="png",Debug=False)
+    rcf = PrincipalInOutDegreesOrdering(g,imageType=None,Debug=False)
     rcf.showPreOrder()
     print(rcf.computeOrdinalCorrelation(g))
+    #rcf.showPrincipalScores()
+    rcf.showPrincipalScores(ColwiseOrder=True)
+    #rcf.showPrincipalScores(RowwiseOrder=True)
 
     
     
