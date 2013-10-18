@@ -3668,14 +3668,9 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             self.actions = actions
         else:
             self.actions = copy.deepcopy(perfTab.actions)
-        if Normalized:
-            Min =   Decimal('-1.0')
-            Med =   Decimal('0.0')
-            Max =   Decimal('1.0')
-        else:
-            Min =   Decimal('-100.0')
-            Med =   Decimal('0.0')
-            Max =   Decimal('100.0')
+        Min =   Decimal('-100.0')
+        Med =   Decimal('0.0')
+        Max =   Decimal('100.0')
         self.valuationdomain = {'min':Min,'med':Med,'max':Max}
 
         if coalition == None:
@@ -3720,6 +3715,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             pass
         # init general digraph Data
         self.order = len(self.actions)
+        if Normalized:
+            self.recodeValuation(Min,Max)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
@@ -5156,7 +5153,7 @@ class RandomBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
                                       commonScale=commonScale,
                                       commonThresholds = commonThresholds,
                                       commonMode=commonMode)
-        g = BipolarOutrankingDigraph(tb,Normalized=Normalized,
+        g = BipolarOutrankingDigraph(tb,
                                      hasBipolarVeto=hasBipolarVeto)
         self.name = copy.deepcopy(g.name)
         self.actions = copy.deepcopy(g.actions)
@@ -5165,6 +5162,8 @@ class RandomBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
         self.relation = copy.deepcopy(g.relation)
         self.valuationdomain = copy.deepcopy(g.valuationdomain)
         self.order = len(self.actions)
+        if Normalized:
+            self.recodeValuation(-1,1)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 

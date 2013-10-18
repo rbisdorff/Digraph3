@@ -41,7 +41,7 @@ The Digraph source code is split into five interdependant modules, where the ``d
 :ref:`graphs-label`
      specialization for undirected graphs with brigde to the ``Digraph`` module ressources;
 :ref:`outrankingDigraphs-label`
-     New Python3 versioned ``BipolarOutrankingDigraph`` classes; 
+     new Python3 versioned ``BipolarOutrankingDigraph`` classes; 
 :ref:`perfTabs-label` 
      everything needed for handling Rubis Performance Tableaux;
 :ref:`votingDigraphs-label` 
@@ -49,8 +49,8 @@ The Digraph source code is split into five interdependant modules, where the ``d
 :ref:`sortingDigraphs-label`
      additional tools for solving sorting problems;
 :ref:`linearOrders-label` 
-     additional tools for solving ranking problems.
-:ref:`rankingByChoosingDigraphs-label` 
+     additional tools for solving linearly ranking problems.
+:ref:`weaklyTransitiveDigraphs-label` 
      additional tools for solving ranking by choosing problems.
 
 
@@ -141,12 +141,12 @@ linearOrders module
 
 Back to the :ref:`Introduction-label`
 
-.. _rankingByChoosingDigraphs-label:
+.. _weaklyTransitiveDigraphs-label:
 
-rankingByChoosingDigraphs module
+weaklyTransitiveDigraphs module
 -------------------
 
-.. automodule:: rankingByChoosingDigraphs
+.. automodule:: weaklyTransitiveDigraphs
    :member-order: alphabetical
    :no-inherited-members:
    :members:
