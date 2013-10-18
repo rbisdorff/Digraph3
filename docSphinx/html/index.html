@@ -1951,20 +1951,6 @@ temporary bipolar-valued weak tournaments</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="digraphs.RankingByChoosingDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">RankingByChoosingDigraph</tt><big>(</big><em>otherIn</em>, <em>CoDual=False</em>, <em>MedianCut=False</em>, <em>Debug=False</em>, <em>Iterate=False</em><big>)</big><a class="headerlink" href="#digraphs.RankingByChoosingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
-<p>Instantiates the digraph resulting from the
-ranking by choosing method applied to a Digraph object.</p>
-<dl class="method">
-<dt id="digraphs.RankingByChoosingDigraph.showRankingByChoosing">
-<tt class="descname">showRankingByChoosing</tt><big>(</big><em>Debug=False</em><big>)</big><a class="headerlink" href="#digraphs.RankingByChoosingDigraph.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
-<dd><p>A show method for self.rankinByChoosing</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
 <dt id="digraphs.StrongComponentsCollapsedDigraph">
 <em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">StrongComponentsCollapsedDigraph</tt><big>(</big><em>digraph=None</em><big>)</big><a class="headerlink" href="#digraphs.StrongComponentsCollapsedDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
@@ -2341,7 +2327,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3288,7 +3274,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4073,6 +4059,12 @@ a given bipolar-valued Digraph instance</p>
 <dd><p>Bases: <a class="reference internal" href="#weaklyTransitiveDigraphs.WeaklyTransitiveDigraph" title="weaklyTransitiveDigraphs.WeaklyTransitiveDigraph"><tt class="xref py py-class docutils literal"><span class="pre">weaklyTransitiveDigraphs.WeaklyTransitiveDigraph</span></tt></a></p>
 <p>Specialization of generic Digraph class for ranking by fusion
 of the principal orders of in- and outdegrees.</p>
+<dl class="method">
+<dt id="weaklyTransitiveDigraphs.PrincipalInOutDegreesOrdering.showPrincipalScores">
+<tt class="descname">showPrincipalScores</tt><big>(</big><em>ColwiseOrder=False</em>, <em>RowwiseOrder=False</em><big>)</big><a class="headerlink" href="#weaklyTransitiveDigraphs.PrincipalInOutDegreesOrdering.showPrincipalScores" title="Permalink to this definition">¶</a></dt>
+<dd><p>show the princiapl scores</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">

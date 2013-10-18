@@ -7262,98 +7262,99 @@ class FusionDigraph(Digraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-# ------ Ranking By Choosing Digraph
-class RankingByChoosingDigraph(Digraph):
-    """
-    Instantiates the digraph resulting from the
-    ranking by choosing method applied to a Digraph object.
-    """
-    def __init__(self,otherIn,CoDual=False,MedianCut=False,Debug=False,Iterate=False):
-        from copy import deepcopy
-        other = deepcopy(otherIn)
-        self.name = 'rbc-'+other.name
-        self.actions = other.actions
-        self.order = len(self.actions)
-
-        other.recodeValuation(-1,1)
-        self.valuationdomain = other.valuationdomain
-
-        self.originalRelation = other.relation
-
-        if Iterate:
-            self.rankingByChoosing = other.iterateRankingByChoosing(CoDual=CoDual,Comments=False,Debug=Debug)
-        else:
-            self.rankingByChoosing = other.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
-        if Debug:
-            print(self.rankingByChoosing)
-
-
-        self.relation = self.computeRankingByChoosingRelation(Debug=Debug)
-
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
-
-    def showRankingByChoosing(self,Debug=False):
-        """
-        A show method for self.rankinByChoosing
-        """
-        if Debug:
-            print(self.rankingByChoosing)
-        rankingByChoosing = self.rankingByChoosing['result']
-        print('Ranking by Choosing Result')
-        space = ''
-        n = len(rankingByChoosing)
-        for i in range(n):
-            if i+1 == 1:
-                nstr='st'
-            elif i+1 == 2:
-                nstr='nd'
-            elif i+1 == 3:
-                nstr='rd'
-            else:
-                nstr='th'
-            ibch = set(rankingByChoosing[i][0][1])
-            iwch = set(rankingByChoosing[i][1][1])
-            iach = iwch & ibch
-            ch = list(ibch)
-            ch.sort()
-            print(' %s%s%s Best Choice %s (%.2f)' % (space,i+1,nstr,ch,rankingByChoosing[i][0][0]))
-            if len(iach) > 0 and i < n-1:
-                print('  %s Ambiguous Choice %s' % (space,list(iach)))
-                space += '  '
-            space += '  '
-        for i in range(n):
-            if n-i == 1:
-                nstr='st'
-            elif n-i == 2:
-                nstr='nd'
-            elif n-i == 3:
-                nstr='rd'
-            else:
-                nstr='th'
-            space = space[:-2]
-            ibch = set(rankingByChoosing[n-i-1][0][1])
-            iwch = set(rankingByChoosing[n-i-1][1][1])
-            iach = iwch & ibch
-            ch = list(iwch)
-            ch.sort()
-            if len(iach) > 0 and i > 0:
-                space = space[:-2]
-                print('  %s Ambiguous Choice %s' % (space,list(iach)))
-            print(' %s%s%s Worst Choice %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))
-        if Debug:
-            self.showRelationTable(self.originalRelation)
-        if self.rankingByChoosing['CoDual']:
-            corr = self.computeOrdinalCorrelation(self.originalRelation,Debug=Debug)
-            print('Ordinal Correlation with codual (strict) outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination']))
-            corr = self.computeOrdinalCorrelation(self.originalRelation,MedianCut=True,Debug=Debug)
-            print('Ordinal Correlation with codual (strict) median cut outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination']))
-
-        else:
-            corr = self.computeOrdinalCorrelation(self.originalRelation,Debug=Debug)
-            print('Ordinal Correlation with outranking relation: %.3f (%.3f)'% (corr['correlation'],corr['determination']))
-            corr = self.computeOrdinalCorrelation(self.originalRelation,MedianCut=True,Debug=Debug)
-            print('Ordinal Correlation with median cut outranking relation: %.3f (%.3f)'% (corr['correlation'],corr['determination']))
+### ------ Ranking By Choosing Digraph
+##class RankingByChoosingDigraph(Digraph):
+##    """
+##    Instantiates the digraph resulting from the
+##    ranking by choosing method applied to a Digraph object.
+##    """
+##    def __init__(self,otherIn,CoDual=False,
+##                 MedianCut=False,Debug=False,Iterate=False):
+##        from copy import deepcopy
+##        other = deepcopy(otherIn)
+##        self.name = 'rbc-'+other.name
+##        self.actions = other.actions
+##        self.order = len(self.actions)
+##
+##        other.recodeValuation(-1,1)
+##        self.valuationdomain = other.valuationdomain
+##
+##        self.originalRelation = other.relation
+##
+##        if Iterate:
+##            self.rankingByChoosing = other.iterateRankingByChoosing(CoDual=CoDual,Comments=False,Debug=Debug)
+##        else:
+##            self.rankingByChoosing = other.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
+##        if Debug:
+##            print(self.rankingByChoosing)
+##
+##
+##        self.relation = self.computeRankingByChoosingRelation(Debug=Debug)
+##
+##        self.gamma = self.gammaSets()
+##        self.notGamma = self.notGammaSets()
+##
+##    def showRankingByChoosing(self,Debug=False):
+##        """
+##        A show method for self.rankinByChoosing
+##        """
+##        if Debug:
+##            print(self.rankingByChoosing)
+##        rankingByChoosing = self.rankingByChoosing['result']
+##        print('Ranking by Choosing Result')
+##        space = ''
+##        n = len(rankingByChoosing)
+##        for i in range(n):
+##            if i+1 == 1:
+##                nstr='st'
+##            elif i+1 == 2:
+##                nstr='nd'
+##            elif i+1 == 3:
+##                nstr='rd'
+##            else:
+##                nstr='th'
+##            ibch = set(rankingByChoosing[i][0][1])
+##            iwch = set(rankingByChoosing[i][1][1])
+##            iach = iwch & ibch
+##            ch = list(ibch)
+##            ch.sort()
+##            print(' %s%s%s Best Choice %s (%.2f)' % (space,i+1,nstr,ch,rankingByChoosing[i][0][0]))
+##            if len(iach) > 0 and i < n-1:
+##                print('  %s Ambiguous Choice %s' % (space,list(iach)))
+##                space += '  '
+##            space += '  '
+##        for i in range(n):
+##            if n-i == 1:
+##                nstr='st'
+##            elif n-i == 2:
+##                nstr='nd'
+##            elif n-i == 3:
+##                nstr='rd'
+##            else:
+##                nstr='th'
+##            space = space[:-2]
+##            ibch = set(rankingByChoosing[n-i-1][0][1])
+##            iwch = set(rankingByChoosing[n-i-1][1][1])
+##            iach = iwch & ibch
+##            ch = list(iwch)
+##            ch.sort()
+##            if len(iach) > 0 and i > 0:
+##                space = space[:-2]
+##                print('  %s Ambiguous Choice %s' % (space,list(iach)))
+##            print(' %s%s%s Worst Choice %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))
+##        if Debug:
+##            self.showRelationTable(self.originalRelation)
+##        if self.rankingByChoosing['CoDual']:
+##            corr = self.computeOrdinalCorrelation(self.originalRelation,Debug=Debug)
+##            print('Ordinal Correlation with codual (strict) outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination']))
+##            corr = self.computeOrdinalCorrelation(self.originalRelation,MedianCut=True,Debug=Debug)
+##            print('Ordinal Correlation with codual (strict) median cut outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination']))
+##
+##        else:
+##            corr = self.computeOrdinalCorrelation(self.originalRelation,Debug=Debug)
+##            print('Ordinal Correlation with outranking relation: %.3f (%.3f)'% (corr['correlation'],corr['determination']))
+##            corr = self.computeOrdinalCorrelation(self.originalRelation,MedianCut=True,Debug=Debug)
+##            print('Ordinal Correlation with median cut outranking relation: %.3f (%.3f)'% (corr['correlation'],corr['determination']))
 
 
 # ------ Preorder construction

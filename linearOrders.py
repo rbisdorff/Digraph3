@@ -748,16 +748,28 @@ class PrincipalOrder(LinearOrder):
         # check principal orientation with ordinal correlation sign
         corr = other.computeOrdinalCorrelation(g.relation)
         if corr['correlation'] < Decimal('0'):
+            ReverseScores = True
             g = ~(g)
-            
+        else:
+            ReverseScores = False
         self.name = other.name + '_ranked'        
         self.actions = deepcopy(other.actions)
         self.valuationdomain = other.valuationdomain
         self.relation = deepcopy(g.relation)
-        if Colwise:
-            self.principalColwiseScores = principalScores
+        if ReverseScores == False: 
+            if Colwise:
+                self.principalColwiseScores = principalScores
+            else:
+                self.principalRowwiseScores = principalScores
         else:
-            self.principalRowwiseScores = principalScores
+            if Colwise:
+                self.principalColwiseScores =\
+                    [(-x,y) for (x,y) in principalScores]
+                self.principalColwiseScores.sort(reverse=True)
+            else:
+                self.principalRowwiseScores =\
+                    [(-x,y) for (x,y) in principalScores]
+                self.principalRowwiseScores.sort(reverse=True)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         if Debug:
