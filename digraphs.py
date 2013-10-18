@@ -6983,6 +6983,7 @@ class Digraph(object):
 
         """
         from csv import reader
+        from operator import itemgetter, attrgetter
         self.exportPrincipalImage(Colwise=Colwise,Comments=Comments,
                                   Type=imageType,
                                   plotFileName=plotFileName)
@@ -6991,7 +6992,8 @@ class Digraph(object):
         R = [x for x in csvReader]
         listActions = [x for x in self.actions]
         listActions.sort()
-        principalScores = [(Decimal(R[i+1][0]),listActions[i]) for i in range(len(listActions))]
+        principalScores = [(Decimal(R[i+1][0]),listActions[i])\
+                           for i in range(len(listActions))]
         principalScores.sort(reverse=True)
         if Debug:
             print(principalScores)

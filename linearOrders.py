@@ -691,7 +691,15 @@ class PrincipalOrder(LinearOrder):
                  plotFileName="principalOrdering",Debug=False):
         """
         constructor for generating a linear order
-        from a given other digraph by using the first principal eigen vector.
+        from a given other digraph by using the first
+        principal eigen vector of the covariance
+        of the indegrees (Colwise=True/default) or
+        of the outdegrees (Colwise=False).
+
+        Implemented Image types are:
+        None/default, "pdf", "png" and "xfig".
+
+        The plot file name only matters with a non None image type.
         """
         from copy import deepcopy
         from decimal import Decimal
@@ -707,7 +715,7 @@ class PrincipalOrder(LinearOrder):
                                                       imageType=imageType,
                                                       plotFileName=plotFileName,
                                                       Debug=Debug)
-        # [ (score1,action_(1), (score2,action_(2), ...] 
+        # [ (score1,action_(1)), (score2,action_(2)), ...] 
         if principalScores == None:
             print('Intantiation error: unable to compute the principal Order !!!')
             return
@@ -726,8 +734,8 @@ class PrincipalOrder(LinearOrder):
             for j in range(i+1,n):
                 x = principalScores[i][1]
                 y = principalScores[j][1]
-                if Debug:
-                    print(x,y)
+                #if Debug:
+                #    print(x,y)
                 g.relation[x][y] = Max
                 g.relation[y][x] = Min
 
@@ -743,9 +751,13 @@ class PrincipalOrder(LinearOrder):
             g = ~(g)
             
         self.name = other.name + '_ranked'        
-        self.actions = other.actions
+        self.actions = deepcopy(other.actions)
         self.valuationdomain = other.valuationdomain
         self.relation = deepcopy(g.relation)
+        if Colwise:
+            self.principalColwiseScores = principalScores
+        else:
+            self.principalRowwiseScores = principalScores
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         if Debug:
@@ -811,16 +823,19 @@ if __name__ == "__main__":
     ## ## print 'Net flows        : ', nfs.computeOrder(), nfs.computeKemenyIndex(g
     ## ##)
     from outrankingDigraphs import RandomBipolarOutrankingDigraph
-    #g1 = RandomBipolarOutrankingDigraph(Normalized=True)
-    #g1.save('test')
+    from weaklyTransitiveDigraphs import *
+    g1 = RandomBipolarOutrankingDigraph(Normalized=True)
+    g1.save('test')
     g1 = Digraph('test')
-    p = PrincipalOrder(g1,Colwise=False,imageType="pdf",Debug=False)
+    g1.showRelationTable()
+    p = PrincipalOrder(g1,Colwise=True,imageType=None,Debug=False)
     print(p.computeOrder())
     print(g1.computeOrdinalCorrelation(p))
-    p.showRelationTable()
+    #p.showRelationTable()
     from rankingByChoosingDigraphs import *
-    rbc = RankingByChoosingDigraph(g1,Debug=True)
-    rbc.showRelationTable()
+    rbc = RankingByChoosingDigraph(g1,Debug=False)
+    #rbc.showRelationTable()
+    pio = PrincipalInOutDegreesOrdering(g1,Debug=True)
     
 ##    g1.showRelationTable()
 ##    g2 = RandomLinearOrder(numberOfActions=10,Debug=True)

@@ -162,8 +162,15 @@ class PrincipalInOutDegreesOrdering(WeaklyTransitiveDigraph):
         self.valuationdomain = digraph.valuationdomain
         pl = PrincipalOrder(digraph,Colwise=False,imageType=imageType,
                             plotFileName=plotFileName,Debug=Debug)
+        if Debug:
+            print('Row wise: ')
+            print(pl.principalRowwiseScores)
         pc = PrincipalOrder(digraph,Colwise=True,imageType=imageType,
                             plotFileName=plotFileName,Debug=Debug)
+        if Debug:
+            print('Column wise: ')
+            print(pc.principalColwiseScores)
+ 
         pf = FusionDigraph(pl,pc)
         self.relation = deepcopy(pf.relation)
         self.gamma = self.gammaSets()
@@ -180,7 +187,7 @@ if __name__ == "__main__":
     from outrankingDigraphs import *
     from weaklyTransitiveDigraphs import *
 
-    g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=15)
+    g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=7)
     print('=== >>> best and last fusion (default)')
     rcg0 = RankingByChoosingDigraph(g,Debug=False)
     rcg0.showPreOrder()
@@ -202,7 +209,7 @@ if __name__ == "__main__":
     rcg3.showPreOrder()
     print(rcg3.computeOrdinalCorrelation(g))
     print('=== >>> principal preorder')
-    rcf = PrincipalInOutDegreesOrdering(g,imageType="pdf",Debug=False)
+    rcf = PrincipalInOutDegreesOrdering(g,imageType="png",Debug=False)
     rcf.showPreOrder()
     print(rcf.computeOrdinalCorrelation(g))
 
