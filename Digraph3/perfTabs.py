@@ -2874,9 +2874,9 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
     Parameters:
         | numberOf Actions := 20 (default)
         | number of Criteria := 13 (default)
-        | weightDistribution := 'equisignificant' (default with all weights = 1.0), 'random', 'equiobjectives', 'fixed' (default w_1 = numberOfCriteria-1, w_{i!=1} = 1
+        | weightDistribution := 'equisignificant' (default with all weights = 1.0), 'random', 'fixed' (default w_1 = numberOfCriteria-1, w_{i!=1} = 1
         | weightScale := [1,numerOfCriteria[ (random default), [w_1, w_{i!=1] (fixed)
-        | interWeights := True (default) / False
+        | integerWeights := True (default) / False
         | commonScale := (0.0, 100.0) (default)
         | commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].
         | commonMode := ['triangular',50.0,0.50] (default), ['uniform',None,None], ['beta', None,None] (three alpha, beta combinations (5.8661,2.62203) chosen by default for high('+'), medium ('~') and low ('-') evaluations.
@@ -2891,7 +2891,14 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
         
     """
 
-    def __init__(self,numberOfActions = None, numberOfCriteria = None, weightDistribution = None, weightScale=None, integerWeights = True, commonScale = None, commonThresholds = None, commonMode = None, valueDigits=2, Coalitions=True, VariableGenerators=True,OrdinalScales=False,Debug=False,RandomCoalitions=False,vetoProbability=None,Electre3=True):
+    def __init__(self,numberOfActions = None, numberOfCriteria = None,
+                 weightDistribution = None, weightScale=None,
+                 integerWeights = True, commonScale = None,
+                 commonThresholds = None, commonMode = None,
+                 valueDigits=2, Coalitions=True, VariableGenerators=True,
+                 OrdinalScales=False, Debug=False, RandomCoalitions=False,
+                 vetoProbability=None, Electre3=True):
+        
         import sys,random,time,math
         self.name = 'randomCBperftab'
         # randomizer init
@@ -2967,7 +2974,9 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                     weightsList.append(Decimal(str(weightScale[0])))
                     sumWeights += weightScale[0]
             weightsList.reverse()
-        elif weightDistribution == 'equisignificant' or weightDistribution == 'equiobjectives':
+        elif weightDistribution == 'equisignificant'\
+          or weightDistribution == 'equiobjectives'\
+          or weightDistribution == 'equicoalitions':
             weightScale = (1,1)            
             weightsList = []
             sumWeights = Decimal('0.0')
@@ -3052,7 +3061,8 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                     thitems = ['ind','pref']
             criteria[g]['thresholds'] = {}
             for t in range(len(thitems)):
-                criteria[g]['thresholds'][thitems[t]] = (Decimal(str(thresholds[t][0])),Decimal(str(thresholds[t][1])))
+                criteria[g]['thresholds'][thitems[t]] =\
+                   (Decimal(str(thresholds[t][0])),Decimal(str(thresholds[t][1])))
                 
             criteria[g]['scale'] = commonScale
             if integerWeights:
@@ -3060,6 +3070,29 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
             else:
                 criteria[g]['weight'] = weightsList[gi] / sumWeights
 
+        # determine equisignificant coalitions
+        coalitionsCardinality = {}
+        for gi in range(len(criteriaList)):
+            g = criteriaList[gi]
+            try:
+                coalitionsCardinality[criteria[g]['coalition']] += 1
+            except:
+                coalitionsCardinality[criteria[g]['coalition']] = 1
+        if Debug:
+            print(coalitionsCardinality)
+        weightsProduct = 1
+        for coalition in coalitionsCardinality:
+            weightsProduct *= coalitionsCardinality[coalition]
+        if Debug:
+            print(weightsProduct)
+        if weightDistribution == 'equicoalitions':
+            for gi in range(len(criteriaList)):
+                g = criteriaList[gi]
+                criteria[g]['weight'] =\
+                    weightsProduct // coalitionsCardinality[criteria[g]['coalition']]
+                if Debug:
+                    print(criteria[g]['weight'])
+                
         # allocate (criterion,action) to coalition supporting type
         if Coalitions:
             coalitionSupportingType = ['+','~','-']
@@ -3068,7 +3101,8 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                     if Debug:
                         print(criterionCoalitionsList,c)
                     self.actions[x][str(c[0])]=random.choice(coalitionSupportingType)
-                    self.actions[x]['name'] = self.actions[x]['name'] + ' '+ str(c[0]) + str(self.actions[x][str(c[0])])                
+                    self.actions[x]['name'] =\
+                        self.actions[x]['name'] + ' '+ str(c[0]) + str(self.actions[x][str(c[0])])                
                     
         # generate evaluations
         evaluation = {}
@@ -4873,30 +4907,43 @@ if __name__ == "__main__":
     from outrankingDigraphs import *
     import sortingDigraphs
     import linearOrders
+    from weaklyTransitiveDigraphs import *
     
     print('*-------- Testing classes and methods -------')
 
     ## t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
     ## print t.computeNormalizedDiffEvaluations(lowValue=0.0,highValue=100.0,withOutput=True,Debug=False)
-    t = RandomCBPerformanceTableau(numberOfCriteria=1,numberOfActions=7,weightDistribution='equiobjectives')
-    #t = RandomCoalitionsPerformanceTableau(numberOfActions=8,numberOfCriteria=1,Coalitions=True,RandomCoalitions=False)
+    ## t = RandomCoalitionsPerformanceTableau(numberOfCriteria=13,
+##                                   numberOfActions=20,
+##                                   weightDistribution='equiobjectives',
+##                                   integerWeights=True,
+##                                   Debug=False)
+    t = RandomCoalitionsPerformanceTableau(numberOfActions=21,
+                                           numberOfCriteria=13,
+                                           Coalitions=False,
+                                           RandomCoalitions=True,
+                                           weightDistribution="equicoalitions")
     #t = PerformanceTableau('test')
-    t.saveXMCDA2('test',servingD3=False)
+    ## t.saveXMCDA2('test',servingD3=False)
     ## t.showAll()
-    ## t.showCriteria()
+    t.showCriteria(IntegerWeights=True)
     
     #t.showStatistics()
     ## t.showPerformanceTableau()
 
     ## html = t.showAllQuantiles()
     ## print t.computeQuantiles(Debug=False)
-    t.showQuantileSort()
-    ## g = BipolarOutrankingDigraph(t)
-    ## s = sortingDigraphs.SortingDigraph(g)
+    ## t.showQuantileSort()
+    g = BipolarOutrankingDigraph(t)
+    s = sortingDigraphs.SortingDigraph(g)
     ## s.showSorting()
-    ## g.computeRankingByChoosing(CoDual=False)
-    ## g.showRankingByChoosing()
+    g.computeRankingByChoosing(CoDual=False)
+    g.showRankingByChoosing()
+    prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
+    prg.showPreOrder()
+    print(g.computeOrdinalCorrelation(prg))
+    
     ## bestChoice = g.rankingByChoosing[0][0][1]
     ## worstChoice= g.rankingByChoosing[0][1][1]
     ## g.exportGraphViz(bestChoice=bestChoice, worstChoice=worstChoice)
