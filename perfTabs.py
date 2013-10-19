@@ -4914,18 +4914,18 @@ if __name__ == "__main__":
     ## t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
     ## print t.computeNormalizedDiffEvaluations(lowValue=0.0,highValue=100.0,withOutput=True,Debug=False)
-    ## t = RandomCoalitionsPerformanceTableau(numberOfCriteria=13,
-##                                   numberOfActions=20,
-##                                   weightDistribution='equiobjectives',
-##                                   integerWeights=True,
-##                                   Debug=False)
-    t = RandomCoalitionsPerformanceTableau(numberOfActions=21,
-                                           numberOfCriteria=13,
-                                           Coalitions=False,
-                                           RandomCoalitions=True,
-                                           weightDistribution="equicoalitions")
-    #t = PerformanceTableau('test')
-    ## t.saveXMCDA2('test',servingD3=False)
+    t = RandomCBPerformanceTableau(numberOfCriteria=13,
+                                   numberOfActions=20,
+                                   weightDistribution='equiobjectives',
+                                   integerWeights=True,
+                                   Debug=False)
+##  t = RandomCoalitionsPerformanceTableau(numberOfActions=21,
+##                                           numberOfCriteria=13,
+##                                           Coalitions=False,
+##                                           RandomCoalitions=True,
+##                                           weightDistribution="equicoalitions")
+    ## t = PerformanceTableau('test')
+    t.saveXMCDA2('test',servingD3=False)
     ## t.showAll()
     t.showCriteria(IntegerWeights=True)
     
