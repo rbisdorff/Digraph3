@@ -1051,7 +1051,7 @@ Renders dominant prekernel restricted relation.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.exportPrincipalImage">
-<tt class="descname">exportPrincipalImage</tt><big>(</big><em>Reduced=False</em>, <em>plotFileName='relationPCAImage'</em>, <em>Type='png'</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.exportPrincipalImage" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">exportPrincipalImage</tt><big>(</big><em>Reduced=False</em>, <em>Colwise=False</em>, <em>plotFileName=None</em>, <em>Type='png'</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.exportPrincipalImage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Export as PNG (default) or PDF the principal projection of the valued relation using the three principal eigen vectors.</p>
 </dd></dl>
 
@@ -2327,7 +2327,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -2555,9 +2555,9 @@ Cost versus Benefit oriented performance tableaux.</p>
 <dd><div class="first last line-block">
 <div class="line">numberOf Actions := 20 (default)</div>
 <div class="line">number of Criteria := 13 (default)</div>
-<div class="line">weightDistribution := &#8216;equisignificant&#8217; (default with all weights = 1.0), &#8216;random&#8217;, &#8216;equiobjectives&#8217;, &#8216;fixed&#8217; (default w_1 = numberOfCriteria-1, w_{i!=1} = 1</div>
+<div class="line">weightDistribution := &#8216;equisignificant&#8217; (default with all weights = 1.0), &#8216;random&#8217;, &#8216;fixed&#8217; (default w_1 = numberOfCriteria-1, w_{i!=1} = 1</div>
 <div class="line">weightScale := [1,numerOfCriteria[ (random default), [w_1, w_{i!=1] (fixed)</div>
-<div class="line">interWeights := True (default) / False</div>
+<div class="line">integerWeights := True (default) / False</div>
 <div class="line">commonScale := (0.0, 100.0) (default)</div>
 <div class="line">commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].</div>
 <div class="line">commonMode := [&#8216;triangular&#8217;,50.0,0.50] (default), [&#8216;uniform&#8217;,None,None], [&#8216;beta&#8217;, None,None] (three alpha, beta combinations (5.8661,2.62203) chosen by default for high(&#8216;+&#8217;), medium (&#8216;~&#8217;) and low (&#8216;-&#8216;) evaluations.</div>
@@ -3274,7 +3274,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
