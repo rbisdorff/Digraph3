@@ -10,6 +10,7 @@
 from digraphs import *
 from outrankingDigraphs import *
 from decimal import Decimal
+from weaklyTransitiveDigraphs import *
 
 def testPerformanceTableau():
     print('==>> Testing Performance Tableau instantiation')
@@ -113,21 +114,34 @@ def testCBPerformanceTableau():
                                    weightScale=[1,2],\
                                    integerWeights=True,\
                                    commonMode=["normal",50.0,25.0])
-    #t.showAll()
-    #t = RandomCBPerformanceTableau(numberOfActions=13,numberOfCriteria=20,integerWeights=True,comments=False)
     t.saveXMCDA(fileName='randomPerformanceTableau',servingD3=False)
     t.showCriteria(Debug=False)
-    #t = XMCDAPerformanceTableau('randomPerformanceTableau')
     g = BipolarOutrankingDigraph(t)
-    #g.showCriteriaCorrelationTable()
     g.exportGraphViz()
-    #t.showPerformanceTableau()
-    #g.showRelationTable()
-    #g.showRubyChoice()
+
+def testCoalitionsPerformanceTableau():
+    print('*==>> random Coalitions Performance Tableaux ------------*')
+    t = RandomCoalitionsPerformanceTableau(numberOfActions=13,
+                                           numberOfCriteria=21,
+                                           Coalitions=False,
+                                           RandomCoalitions=True,
+                                           weightDistribution="equicoalitions")
+    t.saveXMCDA2('test',servingD3=False)
+    t.showCriteria(IntegerWeights=True)
+    g = BipolarOutrankingDigraph(t)
+    g.computeRankingByChoosing(CoDual=False)
+    g.showRankingByChoosing()
+    prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
+    prg.showPreOrder()
+    print(g.computeOrdinalCorrelation(prg))
 
 def testRandomS3PerformanceTableau():
     print('*==>> random S3 Performance Tableaux ------------*')
-    t = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=7,VariableGenerators=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(65.0,0.0)],commonMode=['beta',0.5,None],Debug=False,OrdinalScales=False,Coalitions=False,RandomCoalitions=True)
+    t = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=7,
+    VariableGenerators=True,
+    commonThresholds=[(5.0,0.0),
+    (10.0,0.0),(65.0,0.0)],
+    commonMod['beta',0.5,None],Debug=False,OrdinalScales=False,Coalitions=False,RandomCoalitions=True)
     t.saveXMCDA(fileName='randomS3PerformanceTableau',servingD3=False)
     for g in t.criteria:
         print('==>>', g, t.computeThresholdPercentile(g,'ind'))
@@ -138,7 +152,6 @@ def testRandomS3PerformanceTableau():
     #g.defaultDiscriminationThresholds()
     g.showCriteria()
     g.showCriteriaCorrelationTable()
-    ## ## g.exportGraphViz()
     t.showPerformanceTableau()
     g.showRelationTable()
     g.showRubyChoice()
@@ -157,7 +170,6 @@ def testPercentilesOfThresholds():
             print(t.computeThresholdPercentile(g,th))
     t.showPerformanceTableau()
     t.showCriteria(Debug=False)
-
 
 def testXMCDA2SaveReadPerformanceTableau():
     print('*==>> save and read XMCDA-2.0 PerformanceTableau instances ----*')
@@ -198,5 +210,7 @@ def testMajorityQuantilesRanking():
     html = t.showAllQuantiles()
     print(t.computeQuantiles(Debug=False))
     t.showQuantileSort()
+    
+
  
     
