@@ -4926,39 +4926,18 @@ if __name__ == "__main__":
 ##                                           weightDistribution="equicoalitions")
     ## t = PerformanceTableau('test')
     t.saveXMCDA2('test',servingD3=False)
-    ## t.showAll()
     t.showCriteria(IntegerWeights=True)
-    
-    #t.showStatistics()
-    ## t.showPerformanceTableau()
-
-    ## html = t.showAllQuantiles()
-    ## print t.computeQuantiles(Debug=False)
-    ## t.showQuantileSort()
+    print(t.computeQuantiles(Debug=False))
+    t.showQuantileSort()
     g = BipolarOutrankingDigraph(t)
     s = sortingDigraphs.SortingDigraph(g)
-    ## s.showSorting()
+    s.showSorting()
     g.computeRankingByChoosing(CoDual=False)
     g.showRankingByChoosing()
     prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
     prg.showPreOrder()
     print(g.computeOrdinalCorrelation(prg))
-    
-    ## bestChoice = g.rankingByChoosing[0][0][1]
-    ## worstChoice= g.rankingByChoosing[0][1][1]
-    ## g.exportGraphViz(bestChoice=bestChoice, worstChoice=worstChoice)
-    ## rankingRelation = g.computeRankingByChoosingRelation()
-    ## quantileSortRelation = g.computeQuantileSortRelation()
-    ## g.recodeValuation(-1,1)
-    ## print g.computeOrdinalCorrelation(rankingRelation)
-    ## print g.computeOrdinalCorrelation(quantileSortRelation)
-    ## #k = linearOrders.KemenyOrder(g)
-    ## #print k.computeOrder()
-    ## g.showPerformanceTableau()
-    ## g.csvAllQuantiles()
-    ## ## for x in t.actions:
-    ## ##     t.computeActionQuantile(x,Debug=True)
-    
+     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
