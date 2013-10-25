@@ -121,10 +121,10 @@ def testCBPerformanceTableau():
 
 def testCoalitionsPerformanceTableau():
     print('*==>> random Coalitions Performance Tableaux ------------*')
-    t = RandomCoalitionsPerformanceTableau(numberOfActions=13,
-                                           numberOfCriteria=21,
-                                           Coalitions=False,
-                                           RandomCoalitions=True,
+    t = RandomCoalitionsPerformanceTableau(numberOfActions=13,\
+                                           numberOfCriteria=21,\
+                                           Coalitions=False,\
+                                           RandomCoalitions=True,\
                                            weightDistribution="equicoalitions")
     t.saveXMCDA2('test',servingD3=False)
     t.showCriteria(IntegerWeights=True)
@@ -137,11 +137,13 @@ def testCoalitionsPerformanceTableau():
 
 def testRandomS3PerformanceTableau():
     print('*==>> random S3 Performance Tableaux ------------*')
-    t = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=7,
-    VariableGenerators=True,
-    commonThresholds=[(5.0,0.0),
-    (10.0,0.0),(65.0,0.0)],
-    commonMod['beta',0.5,None],Debug=False,OrdinalScales=False,Coalitions=False,RandomCoalitions=True)
+    t = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=7,\
+                                   VariableGenerators=True,\
+                                   commonThresholds=[(5.0,0.0),(10.0,0.0),(65.0,0.0)],\
+                                   Debug=False,\
+                                   OrdinalScales=False,\
+                                   Coalitions=False,\
+                                   RandomCoalitions=True)
     t.saveXMCDA(fileName='randomS3PerformanceTableau',servingD3=False)
     for g in t.criteria:
         print('==>>', g, t.computeThresholdPercentile(g,'ind'))
@@ -173,9 +175,9 @@ def testPercentilesOfThresholds():
 
 def testXMCDA2SaveReadPerformanceTableau():
     print('*==>> save and read XMCDA-2.0 PerformanceTableau instances ----*')
-    #t = RandomS3PerformanceTableau(numberOfActions=5,numberOfCriteria=15,weightDistribution="random",weightScale=(1,13),integerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
+    t = RandomS3PerformanceTableau(numberOfActions=5,numberOfCriteria=15,weightDistribution="random",weightScale=(1,13),integerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
     #t.showAll()
-    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=7,weightDistribution="random",weightScale=(1,7),integerWeights=True)
+    #t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=7,weightDistribution="random",weightScale=(1,7),integerWeights=True)
     t.saveXMCDA('test')
     g = BipolarOutrankingDigraph(t)
     g.showRelationTable()
