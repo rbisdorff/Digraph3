@@ -2900,7 +2900,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                  vetoProbability=None, Electre3=True):
         
         import sys,random,time,math
-        self.name = 'randomCBperftab'
+        self.name = 'randomCoalitionsPerfTab'
         # randomizer init
         t = time.time()
         random.seed(t)
@@ -4914,16 +4914,16 @@ if __name__ == "__main__":
     ## t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
     ## print t.computeNormalizedDiffEvaluations(lowValue=0.0,highValue=100.0,withOutput=True,Debug=False)
-    t = RandomCBPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=20,
-                                   weightDistribution='equiobjectives',
-                                   integerWeights=True,
-                                   Debug=False)
-##  t = RandomCoalitionsPerformanceTableau(numberOfActions=21,
-##                                           numberOfCriteria=13,
-##                                           Coalitions=False,
-##                                           RandomCoalitions=True,
-##                                           weightDistribution="equicoalitions")
+##    t = RandomCBPerformanceTableau(numberOfCriteria=13,
+##                                   numberOfActions=20,
+##                                   weightDistribution='equiobjectives',
+##                                   integerWeights=True,
+##                                   Debug=False)
+    t = RandomCoalitionsPerformanceTableau(numberOfActions=21,
+                                           numberOfCriteria=13,
+                                           Coalitions=False,
+                                           RandomCoalitions=True,
+                                           weightDistribution="equicoalitions")
     ## t = PerformanceTableau('test')
     t.saveXMCDA2('test',servingD3=False)
     t.showCriteria(IntegerWeights=True)
@@ -4952,12 +4952,6 @@ if __name__ == "__main__":
 # $Log: perfTabs.py,v $
 # Revision 1.37  2012/12/24 15:18:21  bisi
 # compatibility patch for old (-2008) python performance tableaux
-#
-# Revision 1.36  2012/07/19 12:38:55  bisi
-# minor
-#
-# Revision 1.35  2012/07/17 06:14:47  bisi
-# sync
 #
 # Revision 1.34  2012/06/19 14:13:13  bisi
 # added quantile preording result
