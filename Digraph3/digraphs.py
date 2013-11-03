@@ -7563,53 +7563,55 @@ class RandomDigraph(Digraph):
 
 class RandomValuationDigraph(Digraph):
     """
-    Parameters:
-        | order = n > 0 (default 9)
-        | ndigits (default=2)
-        | Normalized = True (r in [-1,1] by default, r in [0,1] if False)
-        | hasIntegerValuation = False (default)
-
     Specialization of the general Digraph class for generating
-    temporary irreflexive random graphs
+    temporary uniformly valuated random digraphs.
+
+    *Parameters*:
+        * order = n > 0 (default 9)
+        * ndigits (default=2)
+        * Normalized = True (r in [-1,1] by default, r in [0,1] if False)
+        * hasIntegerValuation = False (default)
+
 
     Example python3 session:
-    >>> from digraphs import RandomValuationDigraph
-    >>> dg = RandomValuationDigraph(order=5,Normalized=True)
-    >>> dg.showAll()
-    *----- show detail -------------*
-    Digraph          : randomValuationDigraph
-    *---- Actions ----*
-    ['1', '2', '3', '4', '5']
-    *---- Characteristic valuation domain ----*
-    {'max': Decimal('1.0'), 'min': Decimal('-1.0'),
-     'med': Decimal('0.0'), 'hasIntegerValuation': False}
-    * ---- Relation Table -----
-      S   |  '1'    '2'	   '3'	  '4'	  '5'	  
-     -----|-----------------------------------
-      '1' |  0.00   0.28   0.46	 -0.66	 0.90	 
-      '2' | -0.08   0.00  -0.46	 -0.42	 0.52	 
-      '3' |  0.84  -0.10   0.00	 -0.54	 0.58	 
-      '4' |  0.90   0.88   0.90	  0.00	-0.38	 
-      '5' | -0.50   0.64   0.42	 -0.94	 0.00	 
-    *--- Connected Components ---*
-    1: ['1', '2', '3', '4', '5']
-    Neighborhoods:
-      Gamma     :
-    '4': in => set(), out => {'1', '2', '3'}
-    '5': in => {'1', '2', '3'}, out => {'2', '3'}
-    '1': in => {'4', '3'}, out => {'5', '2', '3'}
-    '2': in => {'4', '5', '1'}, out => {'5'}
-    '3': in => {'4', '5', '1'}, out => {'5', '1'}
-      Not Gamma :
-    '4': in => {'5', '1', '2', '3'}, out => {'5'}
-    '5': in => {'4'}, out => {'4', '1'}
-    '1': in => {'5', '2'}, out => {'4'}
-    '2': in => {'3'}, out => {'4', '1', '3'}
-    '3': in => {'2'}, out => {'4', '2'}
+        >>> from digraphs import RandomValuationDigraph
+        >>> dg = RandomValuationDigraph(order=5,Normalized=True)
+        >>> dg.showAll()
+        *----- show detail -------------*
+        Digraph          : randomValuationDigraph
+        *---- Actions ----*
+        ['1', '2', '3', '4', '5']
+        *---- Characteristic valuation domain ----*
+        {'max': Decimal('1.0'), 'min': Decimal('-1.0'),
+         'med': Decimal('0.0'), 'hasIntegerValuation': False}
+        * ---- Relation Table -----
+          S   |  '1'    '2'	   '3'	  '4'	  '5'	  
+         -----|-----------------------------------
+          '1' |  0.00   0.28   0.46	 -0.66	 0.90	 
+          '2' | -0.08   0.00  -0.46	 -0.42	 0.52	 
+          '3' |  0.84  -0.10   0.00	 -0.54	 0.58	 
+          '4' |  0.90   0.88   0.90	  0.00	-0.38	 
+          '5' | -0.50   0.64   0.42	 -0.94	 0.00	 
+        *--- Connected Components ---*
+        1: ['1', '2', '3', '4', '5']
+        Neighborhoods:
+          Gamma     :
+        '4': in => set(), out => {'1', '2', '3'}
+        '5': in => {'1', '2', '3'}, out => {'2', '3'}
+        '1': in => {'4', '3'}, out => {'5', '2', '3'}
+        '2': in => {'4', '5', '1'}, out => {'5'}
+        '3': in => {'4', '5', '1'}, out => {'5', '1'}
+          Not Gamma :
+        '4': in => {'5', '1', '2', '3'}, out => {'5'}
+        '5': in => {'4'}, out => {'4', '1'}
+        '1': in => {'5', '2'}, out => {'4'}
+        '2': in => {'3'}, out => {'4', '1', '3'}
+        '3': in => {'2'}, out => {'4', '2'}
 
-    >>> dg.exportGraphViz()
+        >>> dg.exportGraphViz()
 
     .. image:: randomValuationDigraph.png
+
     """
 
     def __init__(self,order=9, ndigits=2, Normalized=False, hasIntegerValuation=False):

@@ -154,7 +154,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -995,7 +995,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1725,7 +1725,7 @@ equivalence valuations.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1756,7 +1756,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1930,64 +1930,58 @@ temporary weak tournaments</p>
 <dt id="digraphs.RandomValuationDigraph">
 <em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">RandomValuationDigraph</tt><big>(</big><em>order=9</em>, <em>ndigits=2</em>, <em>Normalized=False</em>, <em>hasIntegerValuation=False</em><big>)</big><a class="headerlink" href="#digraphs.RandomValuationDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
+<p>Specialization of the general Digraph class for generating
+temporary uniformly valuated random digraphs.</p>
 <dl class="docutils">
-<dt>Parameters:</dt>
-<dd><div class="first last line-block">
-<div class="line">order = n &gt; 0 (default 9)</div>
-<div class="line">ndigits (default=2)</div>
-<div class="line">Normalized = True (r in [-1,1] by default, r in [0,1] if False)</div>
-<div class="line">hasIntegerValuation = False (default)</div>
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>order = n &gt; 0 (default 9)</li>
+<li>ndigits (default=2)</li>
+<li>Normalized = True (r in [-1,1] by default, r in [0,1] if False)</li>
+<li>hasIntegerValuation = False (default)</li>
+</ul>
+</dd>
+<dt>Example python3 session:</dt>
+<dd><div class="first highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
+<span class="go">*----- show detail -------------*</span>
+<span class="go">Digraph          : randomValuationDigraph</span>
+<span class="go">*---- Actions ----*</span>
+<span class="go">[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;]</span>
+<span class="go">*---- Characteristic valuation domain ----*</span>
+<span class="go">{&#39;max&#39;: Decimal(&#39;1.0&#39;), &#39;min&#39;: Decimal(&#39;-1.0&#39;),</span>
+<span class="go"> &#39;med&#39;: Decimal(&#39;0.0&#39;), &#39;hasIntegerValuation&#39;: False}</span>
+<span class="go">* ---- Relation Table -----</span>
+<span class="go">  S   |  &#39;1&#39;    &#39;2&#39;        &#39;3&#39;    &#39;4&#39;     &#39;5&#39;     </span>
+<span class="go"> -----|-----------------------------------</span>
+<span class="go">  &#39;1&#39; |  0.00   0.28   0.46      -0.66   0.90    </span>
+<span class="go">  &#39;2&#39; | -0.08   0.00  -0.46      -0.42   0.52    </span>
+<span class="go">  &#39;3&#39; |  0.84  -0.10   0.00      -0.54   0.58    </span>
+<span class="go">  &#39;4&#39; |  0.90   0.88   0.90       0.00  -0.38    </span>
+<span class="go">  &#39;5&#39; | -0.50   0.64   0.42      -0.94   0.00    </span>
+<span class="go">*--- Connected Components ---*</span>
+<span class="go">1: [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;]</span>
+<span class="go">Neighborhoods:</span>
+<span class="go">  Gamma     :</span>
+<span class="go">&#39;4&#39;: in =&gt; set(), out =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;3&#39;}</span>
+<span class="go">&#39;5&#39;: in =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;3&#39;}, out =&gt; {&#39;2&#39;, &#39;3&#39;}</span>
+<span class="go">&#39;1&#39;: in =&gt; {&#39;4&#39;, &#39;3&#39;}, out =&gt; {&#39;5&#39;, &#39;2&#39;, &#39;3&#39;}</span>
+<span class="go">&#39;2&#39;: in =&gt; {&#39;4&#39;, &#39;5&#39;, &#39;1&#39;}, out =&gt; {&#39;5&#39;}</span>
+<span class="go">&#39;3&#39;: in =&gt; {&#39;4&#39;, &#39;5&#39;, &#39;1&#39;}, out =&gt; {&#39;5&#39;, &#39;1&#39;}</span>
+<span class="go">  Not Gamma :</span>
+<span class="go">&#39;4&#39;: in =&gt; {&#39;5&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;}, out =&gt; {&#39;5&#39;}</span>
+<span class="go">&#39;5&#39;: in =&gt; {&#39;4&#39;}, out =&gt; {&#39;4&#39;, &#39;1&#39;}</span>
+<span class="go">&#39;1&#39;: in =&gt; {&#39;5&#39;, &#39;2&#39;}, out =&gt; {&#39;4&#39;}</span>
+<span class="go">&#39;2&#39;: in =&gt; {&#39;3&#39;}, out =&gt; {&#39;4&#39;, &#39;1&#39;, &#39;3&#39;}</span>
+<span class="go">&#39;3&#39;: in =&gt; {&#39;2&#39;}, out =&gt; {&#39;4&#39;, &#39;2&#39;}</span>
+</pre></div>
+</div>
+<div class="last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
+</pre></div>
 </div>
 </dd>
 </dl>
-<p>Specialization of the general Digraph class for generating
-temporary irreflexive random graphs</p>
-<p>Example python3 session:
-&gt;&gt;&gt; from digraphs import RandomValuationDigraph
-&gt;&gt;&gt; dg = RandomValuationDigraph(order=5,Normalized=True)
-&gt;&gt;&gt; dg.showAll()
-<em>&#8212;&#8211; show detail &#8212;&#8212;&#8212;&#8212;-</em>
-Digraph          : randomValuationDigraph
-<em>&#8212;- Actions &#8212;-</em>
-[&#8216;1&#8217;, &#8216;2&#8217;, &#8216;3&#8217;, &#8216;4&#8217;, &#8216;5&#8217;]
-<em>&#8212;- Characteristic valuation domain &#8212;-</em>
-{&#8216;max&#8217;: Decimal(&#8216;1.0&#8217;), &#8216;min&#8217;: Decimal(&#8216;-1.0&#8217;),</p>
-<blockquote>
-<div>&#8216;med&#8217;: Decimal(&#8216;0.0&#8217;), &#8216;hasIntegerValuation&#8217;: False}</div></blockquote>
-<ul class="simple">
-<li>&#8212;- Relation Table &#8212;&#8211;
-S   |  &#8216;1&#8217;    &#8216;2&#8217;    &#8216;3&#8217;    &#8216;4&#8217;     &#8216;5&#8217;</li>
-</ul>
-<blockquote>
-<div><dl class="docutils">
-<dt>&#8212;&#8211;<a href="#id1"><span class="problematic" id="id2">|</span></a>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</dt>
-<dd>&#8216;1&#8217; |  0.00   0.28   0.46  -0.66   0.90    
-&#8216;2&#8217; | -0.08   0.00  -0.46  -0.42   0.52    
-&#8216;3&#8217; |  0.84  -0.10   0.00  -0.54   0.58    
-&#8216;4&#8217; |  0.90   0.88   0.90   0.00  -0.38    
-&#8216;5&#8217; | -0.50   0.64   0.42  -0.94   0.00</dd>
-</dl>
-</div></blockquote>
-<p><em>&#8212; Connected Components &#8212;</em>
-1: [&#8216;1&#8217;, &#8216;2&#8217;, &#8216;3&#8217;, &#8216;4&#8217;, &#8216;5&#8217;]
-Neighborhoods:</p>
-<blockquote>
-<div>Gamma     :</div></blockquote>
-<p>&#8216;4&#8217;: in =&gt; set(), out =&gt; {&#8216;1&#8217;, &#8216;2&#8217;, &#8216;3&#8217;}
-&#8216;5&#8217;: in =&gt; {&#8216;1&#8217;, &#8216;2&#8217;, &#8216;3&#8217;}, out =&gt; {&#8216;2&#8217;, &#8216;3&#8217;}
-&#8216;1&#8217;: in =&gt; {&#8216;4&#8217;, &#8216;3&#8217;}, out =&gt; {&#8216;5&#8217;, &#8216;2&#8217;, &#8216;3&#8217;}
-&#8216;2&#8217;: in =&gt; {&#8216;4&#8217;, &#8216;5&#8217;, &#8216;1&#8217;}, out =&gt; {&#8216;5&#8217;}
-&#8216;3&#8217;: in =&gt; {&#8216;4&#8217;, &#8216;5&#8217;, &#8216;1&#8217;}, out =&gt; {&#8216;5&#8217;, &#8216;1&#8217;}</p>
-<blockquote>
-<div>Not Gamma :</div></blockquote>
-<p>&#8216;4&#8217;: in =&gt; {&#8216;5&#8217;, &#8216;1&#8217;, &#8216;2&#8217;, &#8216;3&#8217;}, out =&gt; {&#8216;5&#8217;}
-&#8216;5&#8217;: in =&gt; {&#8216;4&#8217;}, out =&gt; {&#8216;4&#8217;, &#8216;1&#8217;}
-&#8216;1&#8217;: in =&gt; {&#8216;5&#8217;, &#8216;2&#8217;}, out =&gt; {&#8216;4&#8217;}
-&#8216;2&#8217;: in =&gt; {&#8216;3&#8217;}, out =&gt; {&#8216;4&#8217;, &#8216;1&#8217;, &#8216;3&#8217;}
-&#8216;3&#8217;: in =&gt; {&#8216;2&#8217;}, out =&gt; {&#8216;4&#8217;, &#8216;2&#8217;}</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
-</pre></div>
-</div>
 <img alt="randomValuationDigraph.png" src="randomValuationDigraph.png" />
 </dd></dl>
 
@@ -2380,7 +2374,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3327,7 +3321,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
