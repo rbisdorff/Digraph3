@@ -55,11 +55,12 @@ def enumWrapper(graph,Odd=False,Debug=False):
 # -------------   test pyWrapper
 from time import time
 from digraphs import *
+from outrankingDigraphs import *
 Na = 50
 OddFlag=False
 t0 = time()
 t = RandomRankPerformanceTableau(numberOfActions=Na)
-#t.save('testCpp')
+t.save('testCpp')
 t = PerformanceTableau('testCpp')
 g = BipolarOutrankingDigraph(t)
 #g.showRelationTable()
