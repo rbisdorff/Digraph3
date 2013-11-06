@@ -7526,21 +7526,17 @@ class EquivalenceDigraph(Digraph):
 
 class RandomDigraph(Digraph):
     """
-    Parameters:
-        order = n > 0; 0.0 <= arc_probability <= 1.0
-
     Specialization of the general Digraph class for generating
-    temporary irreflexive random crisp digraphs
-    """
+    temporary crisp (irreflexive) random digraphs.
+    
+    *Parameters*:
+        * order (default = 10);
+        * arc_probability (in [0.,1.], default=0.5)
+        * 
+
+     """
 
     def __init__(self,order=10,arcProbability=0.5,hasIntegerValuation=False):
-        """
-        Constructor for RandomDigraph intances.
-
-        Parameters:
-           order, arcProbability, hasIntegerValuation.
-
-        """
         arcProbability = Decimal(str(arcProbability))
         if arcProbability > Decimal("1.0"):
             print('Error: arc probability too high !!')
@@ -7567,10 +7563,11 @@ class RandomValuationDigraph(Digraph):
     temporary uniformly valuated random digraphs.
 
     *Parameters*:
-        * order = n > 0 (default 9)
-        * ndigits (default=2)
-        * Normalized = True (r in [-1,1] by default, r in [0,1] if False)
-        * hasIntegerValuation = False (default)
+        * order > 0, number of arcs;
+        * ndigits > 0, number of digits if hasIntegerValuation = True;
+          Otherwise, decimal precision.
+        * Normalized = True (r in [-1,1], r in [0,1] if False/default);
+        * hasIntegerValuation = False (default).
 
 
     Example python3 session:
