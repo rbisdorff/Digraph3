@@ -1,9 +1,9 @@
 #
 # make file for compiling the C++/agrum sources
 #
-CC = g++
-CCFLAGS = -Wall -O4 -DNDEBUG
-INCLUDE = /usr/lib
+CC = g++-4.7
+CCFLAGS = -Wall -DNDEBUG -std=c++11
+INCLUDE = /usr/local/include
 INSTALL = /usr/local/bin
 LDagrum = agrum
 all:	
@@ -27,7 +27,7 @@ detect : digraphsDetectChordlessCircuits.o
 digraphsDetectChordlessCircuits.o : digraphsDetectChordlessCircuits.cpp
 	${CC} ${CCFLAGS} -c digraphsDetectChordlessCircuits.cpp -I${INCLUDE}
 
-install : enumChordlessCircuits detectChordlessCircuits
+install : enumChordlessCircuits enumChordlessCircuitsInOutPiping detectChordlessCircuits
 	cp enumChordlessCircuits ${INSTALL}
 	cp enumChordlessCircuitsInOutPiping ${INSTALL}
 	cp detectChordlessCircuits ${INSTALL}
