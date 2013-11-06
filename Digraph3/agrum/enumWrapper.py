@@ -56,7 +56,7 @@ def enumWrapper(graph,Odd=False,Debug=False):
 from time import time
 from digraphs import *
 from outrankingDigraphs import *
-Na = 50
+Na = 150
 OddFlag=False
 t0 = time()
 t = RandomRankPerformanceTableau(numberOfActions=Na)
