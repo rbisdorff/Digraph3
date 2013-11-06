@@ -4123,13 +4123,12 @@ class BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     """
     def __init__(self,argPerfTab=None,coalition=None):
         import copy
-        if isinstance(argPerfTab, (PerformanceTableau,RandomPerformanceTableau,FullRandomPerformanceTableau)):
-            perfTab = argPerfTab
+        if argPerfTab == None:
+            perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
+        elif isinstance(argPerfTab,(str)):
+            perfTab = PerformanceTableau(argPerfTab)
         else:
-            if argPerfTab == None:
-                perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
-            else:
-                perfTab = PerformanceTableau(argPerfTab)
+            perfTab = argPerfTab
         self.performanceTableau = perfTab
         self.name = 'rel_' + perfTab.name
         self.actions = copy.deepcopy(perfTab.actions)
@@ -6705,43 +6704,129 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph,PerformanceTableau):
                 return Decimal('1.0')
             else:
                 return Decimal('-1.0')
+
+class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
+    """
+    Randomly weighted bipolar outranking digraph.
+    """
+    def __init__(self,argPerfTab=None,
+                 nSim = 10,
+                 coalition=None,
+                 hasNoVeto=False,
+                 hasBipolarVeto=True,
+                 Normalized=False,
+                 Debug=False):
+        from copy import deepcopy
+        from random import triangular
+        if argPerfTab == None:
+            perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
+        elif isinstance(argPerfTab,(str)):
+            perfTab = PerformanceTableau(argPerfTab)
+        else:
+            perfTab = argPerfTab
+        bodg = BipolarOutrankingDigraph(argPerfTab=perfTab,coalition=coalition,\
+                                     hasNoVeto = hasNoVeto,\
+                                     hasBipolarVeto = hasBipolarVeto,\
+                                     Normalized=Normalized)
+        self.name = deepcopy(bodg.name)
+        self.actions = deepcopy(bodg.actions)
+        self.valuationdomain = deepcopy(bodg.valuationdomain)
+        self.criteria = deepcopy(bodg.criteria)
+        self.evlauation = deepcopy(bodg.evaluation)
+        self.relation = deepcopy(bodg.relation)
+        Min = self.valuationdomain['min']
+        Med = self.valuationdomain['med']
+        Max = self.valuationdomain['max']
+##        if Debug:
+##            self.showAll()
+        valuationObservations = {}
+        for x in self.actions:
+            valuationObservations[x] = {}
+            for y in self.actions:
+                #valuationDistribution[x][y] = {'Q0':0, 'Q1':0, 'Q2':0, 'Q3':0, 'Q4':0}
+                valuationObservations[x][y] = []
+        weights = {}
+        #sumWeights = Decimal('0')
+        for g in self.criteria:
+            weights[g] = self.criteria[g]['weight']
+            #sumWeights += weights[g]
+        if Debug:
+            print(weights)
+        #quantiles = {'Q1':Decimal('0.1'), 'Q2':Decimal('0.5'), 'Q3':Decimal('0.75')}
+        for sample in range(nSim):
+            if Debug:
+                print('===>>> sample %d ' % (sample+1) )
+            for g in self.criteria:
+                rw = Decimal('%.2f' % triangular(0,float(2*weights[g]),float(weights[g])))
+                perfTab.criteria[g]['weight'] = rw
+##                if Debug:
+##                    print(self.criteria[g]['weight'],rw)
+            bodgs = BipolarOutrankingDigraph(argPerfTab=perfTab,coalition=coalition,\
+                                             hasNoVeto = hasNoVeto,\
+                                             hasBipolarVeto = hasBipolarVeto,\
+                                             Normalized=Normalized)
+            for x in bodgs.actions:
+                for y in bodgs.actions:
+                    valuationObservations[x][y].append(bodgs.relation[x][y])
+        for x in self.actions:
+            for y in self.actions:
+                valuationObservations[x][y].sort()
+                if Debug:
+                    print(valuationObservations[x][y])
+                q = nSim//2
+                if (nSim % 2) == 0:    
+                    self.relation[x][y] = (valuationObservations[x][y][q] + valuationObservations[x][y][q+1])/Decimal('2')
+                else:
+                    self.relation[x][y] = (valuationObservations[x][y][q])
+        if Normalized:
+            self.recodeValuation(-1,1)
+        self.valuationObservations = deepcopy(valuationObservations)
+        if Debug:
+            print(self.valuationObservations)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
  
 #----------test outrankingDigraphs classes ----------------
 if __name__ == "__main__":
 
     import copy
     from time import time
-    from linearOrders import KemenyOrder
-    #from sortingDigraphs import SortingDigraph
+    from outrankingDigraphs import MonteCarloBipolarOutrankingDigraph
     
     print('*-------- Testing classes and methods -------')
 
-    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    #t = RandomPerformanceTableau(numberOfActions=10)
-    t.saveXMCDA2('test',servingD3=False)
-    t = XMCDA2PerformanceTableau('test')
+
+##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
+    t = RandomCBPerformanceTableau(numberOfActions=10,weightDistribution='equiobjectives')
     g = BipolarOutrankingDigraph(t)
-    gr = RobustOutrankingDigraph(t)
-    g.showCriteria()
-    g.showVetos()
-    g.recodeValuation(-1.0,1.0)
+    g.recodeValuation(-1,1)
     g.showRelationTable()
-    #print('Strict Condorcet winners: ', g.condorcetWinners())
-    #print('(Weak) Condorcet winners: ', g.weakCondorcetWinners())
-    gr.showRelationTable()
-    #gnv = BipolarOutrankingDigraph(t,hasNoVeto=True)
-    #gnv.recodeValuation(-1,1)
-    #gnv.showRelationTable()
-    gr.showPairwiseComparison('a02','a05')
-    # print('*Ranking by Choosing from the outranking digraph*')
-    # t0 = time()
-    # g.computeRankingByChoosing(CoDual=False,Debug=False)
-    # g.showRankingByChoosing()
-    # gRankingByChoosingRelation = g.computeRankingByChoosingRelation()
-    # ## gmedrbc = g.computeOrdinalCorrelation(gRankingByChoosingRelation,MedianCut=True)
-    # ## print 'Correlation with median cut outranking: %.3f (%.3f)' % (gmedrbc['correlation'],gmedrbc['determination'])
-    # print('Execution time:', time()-t0, 'sec.')
+    gmc = MonteCarloBipolarOutrankingDigraph(t,Normalized=True, nSim= 100)
+    gmc.showRelationTable()
+##    #t = RandomPerformanceTableau(numberOfActions=10)
+##    t.saveXMCDA2('test',servingD3=False)
+##    t = XMCDA2PerformanceTableau('test')
+##    g = BipolarOutrankingDigraph(t)
+##    gr = RobustOutrankingDigraph(t)
+##    g.showCriteria()
+##    g.showVetos()
+##    g.recodeValuation(-1.0,1.0)
+##    g.showRelationTable()
+##    #print('Strict Condorcet winners: ', g.condorcetWinners())
+##    #print('(Weak) Condorcet winners: ', g.weakCondorcetWinners())
+##    gr.showRelationTable()
+##    #gnv = BipolarOutrankingDigraph(t,hasNoVeto=True)
+##    #gnv.recodeValuation(-1,1)
+##    #gnv.showRelationTable()
+##    gr.showPairwiseComparison('a02','a05')
+##    # print('*Ranking by Choosing from the outranking digraph*')
+##    # t0 = time()
+##    # g.computeRankingByChoosing(CoDual=False,Debug=False)
+##    # g.showRankingByChoosing()
+##    # gRankingByChoosingRelation = g.computeRankingByChoosingRelation()
+##    # ## gmedrbc = g.computeOrdinalCorrelation(gRankingByChoosingRelation,MedianCut=True)
+##    # ## print 'Correlation with median cut outranking: %.3f (%.3f)' % (gmedrbc['correlation'],gmedrbc['determination'])
+##    # print('Execution time:', time()-t0, 'sec.')
 
     # print()
     # print('*Ranking by choosing from the codual outranking digraph*')
