@@ -1,4 +1,4 @@
-#!/usr/bin/env/python
+#!/usr/bin/env/python3
 
 def enumWrapper(graph,Debug=False):
     """
@@ -49,7 +49,7 @@ fo.write('# test Piping sampleSize = %d, order = %d, arc probability = %.1f\n' %
 fo.write('"piping", "nbp", "tempfile", "nbt"\n')
 
 for s in range(sampleSize):
-    print(s+1)
+    print((s+1))
     ## t0 = time()
     #t = RandomCBPerformanceTableau(numberOfActions=25)
     #t = XMCDA2PerformanceTableau('testCpp')
@@ -86,4 +86,4 @@ for s in range(sampleSize):
 
 fo.close
 
-print('see %s ' % fileName)
+print(('see %s ' % fileName))
