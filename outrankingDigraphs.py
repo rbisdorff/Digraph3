@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 # Python implementation of digraphs
 # sub-module for outranking digraphs
 # Current revision $Revision: 1.43 $
-# Copyright (C) 2006-2008  Raymond Bisdorff
+# Copyright (C) 2006-20013  Raymond Bisdorff
 #
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -22,7 +21,6 @@
 #######################
 
 __version__ = "$Revision: 1.43 $"
-# $Source: /home/cvsroot/Digraph/outrankingDigraphs.py,v $
 
 from digraphs import *
 
@@ -6741,11 +6739,16 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 ##        if Debug:
 ##            self.showAll()
         valuationObservations = {}
+        bins = range(-99,102)
+ 
+        frequency = {}
         for x in self.actions:
             valuationObservations[x] = {}
+            frequency[x] = {}
             for y in self.actions:
                 #valuationDistribution[x][y] = {'Q0':0, 'Q1':0, 'Q2':0, 'Q3':0, 'Q4':0}
                 valuationObservations[x][y] = []
+                frequency[x][y] = [0 for i in range(len(bins))]
         weights = {}
         #sumWeights = Decimal('0')
         for g in self.criteria:
@@ -6770,6 +6773,9 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             for x in self.actions:
                 for y in self.actions:
                     valuationObservations[x][y].append(srelation[x][y])
+                    for i in range(len(bins)):
+                        if srelation[x][y] < bins[i]:
+                            frequency[x][y][i] += 1
         for x in self.actions:
             for y in self.actions:
                 valuationObservations[x][y].sort()
@@ -6783,6 +6789,7 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         if Normalized:
             self.recodeValuation(-1,1)
         self.valuationObservations = deepcopy(valuationObservations)
+        self.frequency = deepcopy(frequency)
         if Debug:
             print(self.valuationObservations)
         self.gamma = self.gammaSets()
@@ -6799,12 +6806,17 @@ if __name__ == "__main__":
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=10,weightDistribution='equiobjectives')
+    t = RandomCBPerformanceTableau(numberOfActions=5,weightDistribution='equiobjectives')
+    t.save('test')
     g = BipolarOutrankingDigraph(t)
     g.recodeValuation(-1,1)
     g.showRelationTable()
-    gmc = MonteCarloBipolarOutrankingDigraph(t,Normalized=True, nSim= 100)
+    gmc = MonteCarloBipolarOutrankingDigraph(t,Normalized=True, nSim= 10)
     gmc.showRelationTable()
+    print(gmc.valuationObservations['a02']['a03'])
+    for i in range(-99,102):
+        print(i,gmc.frequency['a02']['a03'][i+99])
+    print(gmc.relation['a02']['a03'])
 ##    #t = RandomPerformanceTableau(numberOfActions=10)
 ##    t.saveXMCDA2('test',servingD3=False)
 ##    t = XMCDA2PerformanceTableau('test')
