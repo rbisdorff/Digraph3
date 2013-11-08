@@ -1480,7 +1480,12 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         self.showPreKernels()
 
 
-    def showRelationTable(self,IntegerValues=False,actionsSubset= None,hasLPDDenotation=False,hasLatexFormat=False,hasIntegerValuation=False,relation=None):
+    def showRelationTable(self,IntegerValues=False,
+                          actionsSubset= None,
+                          hasLPDDenotation=False,
+                          hasLatexFormat=False,
+                          hasIntegerValuation=False,
+                          relation=None):
         """
         prints the relation valuation in actions X actions table format.
         """
@@ -6708,7 +6713,7 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     Randomly weighted bipolar outranking digraph.
     """
     def __init__(self,argPerfTab=None,
-                 nSim = 10,
+                 sampleSize = 10,
                  coalition=None,
                  hasNoVeto=False,
                  hasBipolarVeto=True,
@@ -6728,6 +6733,7 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                                      Normalized=Normalized)
         self.name = deepcopy(bodg.name)
         self.actions = deepcopy(bodg.actions)
+        self.order = len(self.actions)
         self.valuationdomain = deepcopy(bodg.valuationdomain)
         self.criteria = deepcopy(bodg.criteria)
         self.evlauation = deepcopy(bodg.evaluation)
@@ -6739,8 +6745,10 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 ##        if Debug:
 ##            self.showAll()
         valuationObservations = {}
-        bins = range(-99,102)
- 
+        breaks = [(x,i) for i,x  in enumerate(range(-100,100))]
+        quantilesId = dict(breaks)
+        if Debug:
+            print(quantilesId)
         frequency = {}
         for x in self.actions:
             valuationObservations[x] = {}
@@ -6748,7 +6756,7 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             for y in self.actions:
                 #valuationDistribution[x][y] = {'Q0':0, 'Q1':0, 'Q2':0, 'Q3':0, 'Q4':0}
                 valuationObservations[x][y] = []
-                frequency[x][y] = [0 for i in range(len(bins))]
+                frequency[x][y] = [0 for i in range(len(breaks))]
         weights = {}
         #sumWeights = Decimal('0')
         for g in self.criteria:
@@ -6756,8 +6764,7 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             #sumWeights += weights[g]
         if Debug:
             print(weights)
-        #quantiles = {'Q1':Decimal('0.1'), 'Q2':Decimal('0.5'), 'Q3':Decimal('0.75')}
-        for sample in range(nSim):
+        for sample in range(sampleSize):
             if Debug:
                 print('===>>> sample %d ' % (sample+1) )
             for g in self.criteria:
@@ -6773,25 +6780,42 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             for x in self.actions:
                 for y in self.actions:
                     valuationObservations[x][y].append(srelation[x][y])
-                    for i in range(len(bins)):
-                        if srelation[x][y] < bins[i]:
+                    for i in range(len(breaks)):
+                        if srelation[x][y] <= breaks[i][0]:
                             frequency[x][y][i] += 1
+                            
+        relationP_value = {}
         for x in self.actions:
+            relationP_value[x] = {}
             for y in self.actions:
                 valuationObservations[x][y].sort()
-                if Debug:
+                if Debug and x == 'a04' and y == 'a05':
+                    print(x,y)
                     print(valuationObservations[x][y])
-                q = nSim//2
-                if (nSim % 2) == 0:    
+                
+                q = sampleSize//2
+                if (sampleSize % 2) == 0:    
                     self.relation[x][y] = (valuationObservations[x][y][q] + valuationObservations[x][y][q+1])/Decimal('2')
                 else:
                     self.relation[x][y] = (valuationObservations[x][y][q])
+                if Debug and x == 'a04' and y == 'a05':
+                    print(frequency[x][y])
+                    print(quantilesId)
+                    print(frequency[x][y][quantilesId[0]])
+                if self.relation[x][y] > 0:
+                    relationP_value[x][y] = 1.0 - float(frequency[x][y][quantilesId[0]])/float(sampleSize)
+                elif self.relation[x][y] <= 0:
+                    relationP_value[x][y] = float(frequency[x][y][quantilesId[0]])/float(sampleSize)
+                if Debug:
+                    print(relationP_value[x][y])
+        self.relationP_value = deepcopy(relationP_value)
         if Normalized:
             self.recodeValuation(-1,1)
-        self.valuationObservations = deepcopy(valuationObservations)
-        self.frequency = deepcopy(frequency)
         if Debug:
-            print(self.valuationObservations)
+            self.valuationObservations = deepcopy(valuationObservations)
+        self.frequency = deepcopy(frequency)
+##        if Debug:
+##            print(self.valuationObservations)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
  
@@ -6806,17 +6830,19 @@ if __name__ == "__main__":
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=5,weightDistribution='equiobjectives')
-    t.save('test')
+    #t = RandomCBPerformanceTableau(numberOfActions=5,weightDistribution='equiobjectives')
+    #t.save('test')
+    t = PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t)
     g.recodeValuation(-1,1)
     g.showRelationTable()
-    gmc = MonteCarloBipolarOutrankingDigraph(t,Normalized=True, nSim= 10)
-    gmc.showRelationTable()
-    print(gmc.valuationObservations['a02']['a03'])
-    for i in range(-99,102):
-        print(i,gmc.frequency['a02']['a03'][i+99])
-    print(gmc.relation['a02']['a03'])
+    gmc = MonteCarloBipolarOutrankingDigraph(t,Normalized=True, sampleSize= 100,Debug=True)
+    gmc.showRelationTable(hasLPDDenotation=True)
+##    print(gmc.valuationObservations['a02']['a03'])
+##    for i in range(-99,102):
+##        print(i,gmc.frequency['a02']['a03'][i+99])
+##    print(gmc.relation['a02']['a03'])
+    gmc.showRelationTable(relation=gmc.relationP_value)
 ##    #t = RandomPerformanceTableau(numberOfActions=10)
 ##    t.saveXMCDA2('test',servingD3=False)
 ##    t = XMCDA2PerformanceTableau('test')
