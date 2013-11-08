@@ -3716,7 +3716,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         # init general digraph Data
         self.order = len(self.actions)
         if Normalized:
-            self.recodeValuation(Min,Max)
+            self.recodeValuation(-1.0,1.0)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
@@ -6734,6 +6734,7 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.criteria = deepcopy(bodg.criteria)
         self.evlauation = deepcopy(bodg.evaluation)
         self.relation = deepcopy(bodg.relation)
+        self.recodeValuation(-100.0,100.0)
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
@@ -6761,13 +6762,14 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                 perfTab.criteria[g]['weight'] = rw
 ##                if Debug:
 ##                    print(self.criteria[g]['weight'],rw)
-            bodgs = BipolarOutrankingDigraph(argPerfTab=perfTab,coalition=coalition,\
-                                             hasNoVeto = hasNoVeto,\
-                                             hasBipolarVeto = hasBipolarVeto,\
-                                             Normalized=Normalized)
-            for x in bodgs.actions:
-                for y in bodgs.actions:
-                    valuationObservations[x][y].append(bodgs.relation[x][y])
+            srelation = self.constructRelation(perfTab.criteria,\
+                                               perfTab.evaluation,\
+                                               hasNoVeto = hasNoVeto,\
+                                               hasBipolarVeto = hasBipolarVeto,\
+                                               )
+            for x in self.actions:
+                for y in self.actions:
+                    valuationObservations[x][y].append(srelation[x][y])
         for x in self.actions:
             for y in self.actions:
                 valuationObservations[x][y].sort()
