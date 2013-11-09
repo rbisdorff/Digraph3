@@ -6726,7 +6726,7 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         elif isinstance(argPerfTab,(str)):
             perfTab = PerformanceTableau(argPerfTab)
         else:
-            perfTab = argPerfTab
+            perfTab = deepcopy(argPerfTab)
         bodg = BipolarOutrankingDigraph(argPerfTab=perfTab,coalition=coalition,\
                                      hasNoVeto = hasNoVeto,\
                                      hasBipolarVeto = hasBipolarVeto,\
@@ -6738,25 +6738,27 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.criteria = deepcopy(bodg.criteria)
         self.evlauation = deepcopy(bodg.evaluation)
         self.relation = deepcopy(bodg.relation)
+        # normalize valuation to percentages
         self.recodeValuation(-100.0,100.0)
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
-##        if Debug:
-##            self.showAll()
-        valuationObservations = {}
+        # bin breaks per percent unit
         breaks = [(x,i) for i,x  in enumerate(range(-100,100))]
+        # quantiles for cdf calls
         quantilesId = dict(breaks)
         if Debug:
             print(quantilesId)
+        # initialize frequency and observation dictionaries
         frequency = {}
+        valuationObservations = {}
         for x in self.actions:
             valuationObservations[x] = {}
             frequency[x] = {}
             for y in self.actions:
-                #valuationDistribution[x][y] = {'Q0':0, 'Q1':0, 'Q2':0, 'Q3':0, 'Q4':0}
                 valuationObservations[x][y] = []
                 frequency[x][y] = [0 for i in range(len(breaks))]
+        # 
         weights = {}
         #sumWeights = Decimal('0')
         for g in self.criteria:
