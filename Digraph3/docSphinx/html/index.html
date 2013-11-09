@@ -1856,12 +1856,17 @@ and the evaluation dictionary into self.</p>
 <dt id="digraphs.RandomDigraph">
 <em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">RandomDigraph</tt><big>(</big><em>order=10</em>, <em>arcProbability=0.5</em>, <em>hasIntegerValuation=False</em><big>)</big><a class="headerlink" href="#digraphs.RandomDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd>order = n &gt; 0; 0.0 &lt;= arc_probability &lt;= 1.0</dd>
-</dl>
 <p>Specialization of the general Digraph class for generating
-temporary irreflexive random crisp digraphs</p>
+temporary crisp (irreflexive) random digraphs.</p>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>order (default = 10);</li>
+<li>arc_probability (in [0.,1.], default=0.5)</li>
+<li></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="class">
@@ -1935,10 +1940,11 @@ temporary uniformly valuated random digraphs.</p>
 <dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
-<li>order = n &gt; 0 (default 9)</li>
-<li>ndigits (default=2)</li>
-<li>Normalized = True (r in [-1,1] by default, r in [0,1] if False)</li>
-<li>hasIntegerValuation = False (default)</li>
+<li>order &gt; 0, number of arcs;</li>
+<li>ndigits &gt; 0, number of digits if hasIntegerValuation = True;
+Otherwise, decimal precision.</li>
+<li>Normalized = True (r in [-1,1], r in [0,1] if False/default);</li>
+<li>hasIntegerValuation = False (default).</li>
 </ul>
 </dd>
 <dt>Example python3 session:</dt>
@@ -2374,7 +2380,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3321,7 +3327,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -3526,6 +3532,34 @@ Help method for constructing robust outranking relation.</p>
 <dt id="outrankingDigraphs.RobustOutrankingDigraph.showRelationTable">
 <tt class="descname">showRelationTable</tt><big>(</big><big>)</big><a class="headerlink" href="#outrankingDigraphs.RobustOutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>specialisation for integer values</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="outrankingDigraphs.StochasticBipolarOutrankingDigraph">
+<em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">StochasticBipolarOutrankingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>sampleSize=50</em>, <em>samplingSeed=None</em>, <em>errorLevel=0.05</em>, <em>coalition=None</em>, <em>hasNoVeto=False</em>, <em>hasBipolarVeto=True</em>, <em>Normalized=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.StochasticBipolarOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></tt></a></p>
+<p>Confident bipolar outranking digraph base on multiple criteria of uncertain significance.</p>
+<p>The digraph&#8217;s bipolar valuation represents the median of sampled outranking relations with a
+sufficient likelihood (default = 95%) to remain positive, repectively negative,
+over the possible criteria significance ranges.</p>
+<p>Each criterion i&#8217; significance weight is supposed to
+be a triangular random variables of mode w_i in the range 0 to 2*w_i.</p>
+<p><em>Parameters</em>:</p>
+<blockquote>
+<div><ul class="simple">
+<li>argPerfTab: PerformanceTableau instance or the name of a stored one.
+If None, a random instance is generated.</li>
+<li>sampleSize: number (default=50) of random weight vectors used for Monte Carlo simulation.</li>
+<li>errorLevel: frequency of valuation of opposite sign to the simulated median valuation.</li>
+<li>other standard parameters from the BipolarOutrankingDigraph class (see documentation).</li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="outrankingDigraphs.StochasticBipolarOutrankingDigraph.showRelationStatistics">
+<tt class="descname">showRelationStatistics</tt><big>(</big><em>argument='likelihoods'</em>, <em>actionsSubset=None</em>, <em>hasLatexFormat=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.StochasticBipolarOutrankingDigraph.showRelationStatistics" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints the relation statistics in actions X actions table format.</p>
 </dd></dl>
 
 </dd></dl>
