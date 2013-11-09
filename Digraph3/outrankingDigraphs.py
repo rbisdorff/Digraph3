@@ -6710,13 +6710,28 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph,PerformanceTableau):
 
 class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     """
-    Randomly weighted bipolar outranking digraph.
-    Valuation represents average (default) or median of sampled valuations.
+    Confident bipolar outranking digraph base on multiple criteria of uncertain significance.
+    
+    The digraph's bipolar valuation represents the median of sampled outranking relations with a
+    sufficient likelihood (default = 95%) to remain positive, repectively negative,
+    over the possible criteria significance ranges.
+
+    Each criterion i' significance weight is supposed to
+    be a triangular random variables of mode w_i in the range 0 to 2*w_i.
+
+    *Parameters*:
+
+        * argPerfTab: PerformanceTableau instance or the name of a stored one.
+          If None, a random instance is generated.
+        * sampleSize: number (default=50) of random weight vectors used for Monte Carlo simulation.
+        * errorLevel: frequency of valuation of opposite sign to the simulated median valuation.
+        * other standard parameters from the BipolarOutrankingDigraph class (see documentation).
+
     """
     def __init__(self,argPerfTab=None,
-                 sampleSize = 10,
+                 sampleSize = 50,
                  samplingSeed = None,
-                 errorLevel = 0.25,
+                 errorLevel = 0.05,
                  coalition=None,
                  hasNoVeto=False,
                  hasBipolarVeto=True,
@@ -6966,19 +6981,14 @@ if __name__ == "__main__":
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    #t = RandomCBPerformanceTableau(numberOfActions=13,numberOfCriteria=13,weightDistribution='equiobjectives')
-    #t.save('test')
+    t = RandomCBPerformanceTableau(numberOfActions=13,numberOfCriteria=13,weightDistribution='equiobjectives')
+    t.save('test')
     t = PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t)
     g.recodeValuation(-1,1)
     g.showRelationTable()
-    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True, sampleSize= 500,errorLevel=0.05,Debug=False,samplingSeed=1)
+    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True, sampleSize=100,errorLevel=0.05,Debug=False,samplingSeed=1)
     gmc.showRelationTable()
-##    print(gmc.valuationObservations['a02']['a03'])
-##    for i in range(-99,102):
-##        print(i,gmc.frequency['a02']['a03'][i+99])
-##    print(gmc.relation['a02']['a03'])
-##    gmc.showRelationStatistics('means')
     gmc.showRelationStatistics('medians')
     gmc.showRelationStatistics('likelihoods')
     grbc = RankingByChoosingDigraph(g)
