@@ -6708,25 +6708,34 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph,PerformanceTableau):
             else:
                 return Decimal('-1.0')
 
-class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
+class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     """
     Randomly weighted bipolar outranking digraph.
+    Valuation represents average (default) or median of sampled valuations.
     """
     def __init__(self,argPerfTab=None,
                  sampleSize = 10,
+                 samplingSeed = None,
+                 errorLevel = 0.25,
                  coalition=None,
                  hasNoVeto=False,
                  hasBipolarVeto=True,
                  Normalized=False,
                  Debug=False):
+        # getting module ressources and setting the random seed
         from copy import deepcopy
-        from random import triangular
+        from random import triangular, seed
+        if samplingSeed != None:
+            from random import seed
+            seed = samplingSeed
+        # getting performance tableau
         if argPerfTab == None:
             perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
         elif isinstance(argPerfTab,(str)):
             perfTab = PerformanceTableau(argPerfTab)
         else:
             perfTab = deepcopy(argPerfTab)
+        # initializing the bipolar outranking digraph
         bodg = BipolarOutrankingDigraph(argPerfTab=perfTab,coalition=coalition,\
                                      hasNoVeto = hasNoVeto,\
                                      hasBipolarVeto = hasBipolarVeto,\
@@ -6738,17 +6747,18 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.criteria = deepcopy(bodg.criteria)
         self.evlauation = deepcopy(bodg.evaluation)
         self.relation = deepcopy(bodg.relation)
+        
         # normalize valuation to percentages
         self.recodeValuation(-100.0,100.0)
-        Min = self.valuationdomain['min']
-        Med = self.valuationdomain['med']
-        Max = self.valuationdomain['max']
+        
         # bin breaks per percent unit
         breaks = [(x,i) for i,x  in enumerate(range(-100,100))]
+        
         # quantiles for cdf calls
         quantilesId = dict(breaks)
         if Debug:
             print(quantilesId)
+            
         # initialize frequency and observation dictionaries
         frequency = {}
         valuationObservations = {}
@@ -6758,15 +6768,14 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             for y in self.actions:
                 valuationObservations[x][y] = []
                 frequency[x][y] = [0 for i in range(len(breaks))]
-        # 
-        weights = {}
-        #sumWeights = Decimal('0')
-        for g in self.criteria:
-            weights[g] = self.criteria[g]['weight']
-            #sumWeights += weights[g]
+
+        # initialize the weight modes
+        weights = dict([(g,self.criteria[g]['weight']) for g in self.criteria])
+
         if Debug:
             print(weights)
         for sample in range(sampleSize):
+            print(sample)
             if Debug:
                 print('===>>> sample %d ' % (sample+1) )
             for g in self.criteria:
@@ -6786,10 +6795,11 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                         if srelation[x][y] <= breaks[i][0]:
                             frequency[x][y][i] += 1
                             
-        relationP_value = {}
+        self.relationStatistics = {}
         for x in self.actions:
-            relationP_value[x] = {}
+            self.relationStatistics[x] = {}
             for y in self.actions:
+                self.relationStatistics[x][y] = {}              
                 valuationObservations[x][y].sort()
                 if Debug and x == 'a04' and y == 'a05':
                     print(x,y)
@@ -6797,20 +6807,28 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                 
                 q = sampleSize//2
                 if (sampleSize % 2) == 0:    
-                    self.relation[x][y] = (valuationObservations[x][y][q] + valuationObservations[x][y][q+1])/Decimal('2')
+                    median = (valuationObservations[x][y][q] + valuationObservations[x][y][q+1])/Decimal('2')
                 else:
-                    self.relation[x][y] = (valuationObservations[x][y][q])
+                    median = (valuationObservations[x][y][q])
+                self.relationStatistics[x][y]['median'] = float(median)
                 if Debug and x == 'a04' and y == 'a05':
                     print(frequency[x][y])
                     print(quantilesId)
                     print(frequency[x][y][quantilesId[0]])
                 if self.relation[x][y] > 0:
-                    relationP_value[x][y] = 1.0 - float(frequency[x][y][quantilesId[0]])/float(sampleSize)
+                    self.relationStatistics[x][y]['likelihood'] = 1.0 - float(frequency[x][y][quantilesId[0]])/float(sampleSize)
                 elif self.relation[x][y] <= 0:
-                    relationP_value[x][y] = float(frequency[x][y][quantilesId[0]])/float(sampleSize)
+                    self.relationStatistics[x][y]['likelihood'] = float(frequency[x][y][quantilesId[0]])/float(sampleSize)
+                self._computeRelationStatistics(x,y,valuationObservations[x][y])
                 if Debug:
-                    print(relationP_value[x][y])
-        self.relationP_value = deepcopy(relationP_value)
+                    print(self.relationStatistics[x][y])
+                requiredLikelihood = 1.0 - errorLevel
+                if self.relationStatistics[x][y]['likelihood'] < requiredLikelihood:
+                    self.relation[x][y] = self.valuationdomain['med'])
+                else:
+                    self.relation[x][y] = Decimal('%.3f' % self.relationStatistics[x][y]['median'])
+                
+        #self.relationStatistics = deepcopy(relationStatistics)
         if Normalized:
             self.recodeValuation(-1,1)
         if Debug:
@@ -6820,31 +6838,149 @@ class MonteCarloBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 ##            print(self.valuationObservations)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+
+    def _computeRelationStatistics(self,x,y,valuationObservations):
+        """
+        computes the pairwise relation statistics from the sampled observations.
+        """
+        from math import sqrt
+        n = len(valuationObservations)
+        fn = float(n)
+        mean = 0.0
+        meansq2 = 0.0 
+        for v in valuationObservations:
+            fv = float(v)
+            mean += fv
+            meansq2 += (fv * fv)
+        mean /= fn
+        self.relationStatistics[x][y]['mean'] = mean
+        variance = (meansq2 / fn) - (mean*mean)
+        self.relationStatistics[x][y]['sd'] = sqrt(variance)
+        self.relationStatistics[x][y]['Q0'] = float(min(valuationObservations))
+        self.relationStatistics[x][y]['Q4'] = float(max(valuationObservations))
+
+
+    def showRelationStatistics(self,argument='likelihoods',
+                          actionsSubset= None,
+                          hasLatexFormat=False):
+        """
+        prints the relation statistics in actions X actions table format.
+        """
+##        if hasLPDDenotation:
+##            try:
+##                largePerformanceDifferencesCount = self.largePerformanceDifferencesCount
+##                gnv = BipolarOutrankingDigraph(self.performanceTableau,hasNoVeto=True)
+##                gnv.recodeValuation(self.valuationdomain['min'],self.valuationdomain['max'])
+##            except:
+        hasLPDDenotation = False
+            
+        if actionsSubset == None:
+            actions = self.actions
+        else:
+            actions = actionsSubset
+        relation = {}
+        for x in actions:
+            relation[x] = {}
+            for y in actions:
+                if argument == 'likelihoods':
+                    relation[x][y] = self.relationStatistics[x][y]['likelihood']
+                elif argument == 'medians':
+                    relation[x][y] = self.relationStatistics[x][y]['median']
+                elif argument == 'means':
+                    relation[x][y] = self.relationStatistics[x][y]['mean']
+                
+            
+        print('* ---- Relation statistics -----\n', end=' ')
+        if argument == 'likelihoods':
+            print(' p-val | ', end=' ')
+        elif argument == 'means':
+            print(' mean  | ', end=' ')
+        elif argument == 'medians':
+            print('  med  | ', end=' ')
+            
+        #actions = [x for x in actions]
+        actionsList = []
+        for x in actions:
+            if isinstance(x,frozenset):
+                try:
+                    actionsList += [(actions[x]['shortName'],x)]
+                except:
+                    actionsList += [(actions[x]['name'],x)]
+            else:
+                actionsList += [(x,x)]
+        actionsList.sort()
+
+##        try:
+##            hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
+##        except KeyError
+        hasIntegerValuation = False
+        
+        for x in actionsList:
+            print("'"+x[0]+"',  ", end=' ')
+        print('\n-----|------------------------------------------------------------')
+        for x in actionsList:
+            if hasLatexFormat:
+                print("$"+x[0]+"$ & ", end=' ')
+            else:
+                print("'"+x[0]+"' |  ", end=' ')
+            for y in actionsList:
+                if hasIntegerValuation:
+                    if hasLPDDenotation:
+                        print('%+d ' % (gnv.relation[x[1]][y[1]]), end=' ')
+                    elif hasLatexFormat:
+                        print('$%+d$ &' % (relation[x[1]][y[1]]), end=' ')
+                    else:
+                        print('%+d ' % (relation[x[1]][y[1]]), end=' ')
+                else:
+                    if hasLPDDenotation:
+                        print('%+2.2f ' % (gnv.relation[x[1]][y[1]]), end=' ')
+                    elif hasLatexFormat:
+                        print('$%+2.2f$ & ' % (relation[x[1]][y[1]]), end=' ')       
+                    else:
+                        print('%+2.2f ' % (relation[x[1]][y[1]]), end=' ')
+                
+            if hasLatexFormat:
+                print(' \\cr')
+            else:
+                print()
+            if hasLPDDenotation:
+                print("'"+x[0]+"' | ", end=' ')
+                for y in actionsList:
+                    print('(%+d,%+d)' % (largePerformanceDifferencesCount[x[1]][y[1]]['positive'],\
+                                          largePerformanceDifferencesCount[x[1]][y[1]]['negative']), end=' ')
+                print()
+            
+                
+        print('\n')
+        
  
 #----------test outrankingDigraphs classes ----------------
 if __name__ == "__main__":
 
     import copy
     from time import time
-    from outrankingDigraphs import MonteCarloBipolarOutrankingDigraph
+    from outrankingDigraphs import StochasticBipolarOutrankingDigraph
     
     print('*-------- Testing classes and methods -------')
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    #t = RandomCBPerformanceTableau(numberOfActions=5,weightDistribution='equiobjectives')
-    #t.save('test')
-    t = PerformanceTableau('test')
+    t = RandomCBPerformanceTableau(numberOfActions=13,numberOfCriteria=13,weightDistribution='equiobjectives')
+    t.save('test')
+    #t = PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t)
     g.recodeValuation(-1,1)
     g.showRelationTable()
-    gmc = MonteCarloBipolarOutrankingDigraph(t,Normalized=True, sampleSize= 100,Debug=True)
-    gmc.showRelationTable(hasLPDDenotation=True)
+    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True, sampleSize= 200,Debug=False,samplingSeed=1)
+    gmc.showRelationTable()
 ##    print(gmc.valuationObservations['a02']['a03'])
 ##    for i in range(-99,102):
 ##        print(i,gmc.frequency['a02']['a03'][i+99])
 ##    print(gmc.relation['a02']['a03'])
-    gmc.showRelationTable(relation=gmc.relationP_value)
+    gmc.showRelationStatistics('means')
+    gmc.showRelationStatistics('medians')
+    gmc.showRelationStatistics('likelihoods')
+
 ##    #t = RandomPerformanceTableau(numberOfActions=10)
 ##    t.saveXMCDA2('test',servingD3=False)
 ##    t = XMCDA2PerformanceTableau('test')
