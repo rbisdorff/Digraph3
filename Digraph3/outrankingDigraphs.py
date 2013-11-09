@@ -6824,7 +6824,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                     print(self.relationStatistics[x][y])
                 requiredLikelihood = 1.0 - errorLevel
                 if self.relationStatistics[x][y]['likelihood'] < requiredLikelihood:
-                    self.relation[x][y] = self.valuationdomain['med'])
+                    self.relation[x][y] = self.valuationdomain['med']
                 else:
                     self.relation[x][y] = Decimal('%.3f' % self.relationStatistics[x][y]['median'])
                 
@@ -6960,27 +6960,32 @@ if __name__ == "__main__":
     import copy
     from time import time
     from outrankingDigraphs import StochasticBipolarOutrankingDigraph
+    from weaklyTransitiveDigraphs import RankingByChoosingDigraph
     
     print('*-------- Testing classes and methods -------')
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=13,numberOfCriteria=13,weightDistribution='equiobjectives')
-    t.save('test')
-    #t = PerformanceTableau('test')
+    #t = RandomCBPerformanceTableau(numberOfActions=13,numberOfCriteria=13,weightDistribution='equiobjectives')
+    #t.save('test')
+    t = PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t)
     g.recodeValuation(-1,1)
     g.showRelationTable()
-    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True, sampleSize= 200,Debug=False,samplingSeed=1)
+    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True, sampleSize= 500,errorLevel=0.05,Debug=False,samplingSeed=1)
     gmc.showRelationTable()
 ##    print(gmc.valuationObservations['a02']['a03'])
 ##    for i in range(-99,102):
 ##        print(i,gmc.frequency['a02']['a03'][i+99])
 ##    print(gmc.relation['a02']['a03'])
-    gmc.showRelationStatistics('means')
+##    gmc.showRelationStatistics('means')
     gmc.showRelationStatistics('medians')
     gmc.showRelationStatistics('likelihoods')
-
+    grbc = RankingByChoosingDigraph(g)
+    grbc.showPreOrder()
+    gmcrbc = RankingByChoosingDigraph(gmc)
+    gmcrbc.showPreOrder()
+    
 ##    #t = RandomPerformanceTableau(numberOfActions=10)
 ##    t.saveXMCDA2('test',servingD3=False)
 ##    t = XMCDA2PerformanceTableau('test')

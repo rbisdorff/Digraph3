@@ -527,3 +527,30 @@ def testIterateRankingByChoosing():
     g = BipolarOutrankingDigraph(t)
     g.recodeValuation(-1.0,1.0)
     g.iterateRankingByChoosing(Comments=True,Debug=False)
+
+def testStochasticOutrankingDigraphs():
+    print('*------ test stochastic bipolar outranking digraphs ----*')
+    from outrankingDigraphs import StochasticBipolarOutrankingDigraph
+    from weaklyTransitiveDigraphs import RankingByChoosingDigraph
+    t = RandomCBPerformanceTableau(numberOfActions=13,\
+                                    numberOfCriteria=13,\
+                                    weightDistribution='equiobjectives')
+    t.save('test')
+    t = PerformanceTableau('test')
+    g = BipolarOutrankingDigraph(t)
+    g.recodeValuation(-1,1)
+    g.showRelationTable()
+    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
+                                             sampleSize=50,\
+                                             errorLevel=0.05,\
+                                             Debug=False,\
+                                             samplingSeed=1)
+    gmc.showRelationTable()
+    gmc.showRelationStatistics('medians')
+    gmc.showRelationStatistics('likelihoods')
+    grbc = RankingByChoosingDigraph(g)
+    grbc.showPreOrder()
+    gmcrbc = RankingByChoosingDigraph(gmc)
+    gmcrbc.showPreOrder()
+
+
