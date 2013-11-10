@@ -6762,6 +6762,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.criteria = deepcopy(bodg.criteria)
         self.evlauation = deepcopy(bodg.evaluation)
         self.relation = deepcopy(bodg.relation)
+        self.sampleSize = sampleSize
         
         # normalize valuation to percentages
         self.recodeValuation(-100.0,100.0)
@@ -6820,12 +6821,14 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                     print(x,y)
                     print(valuationObservations[x][y])
                 
-                q = sampleSize//2
-                if (sampleSize % 2) == 0:    
-                    median = (valuationObservations[x][y][q] + valuationObservations[x][y][q+1])/Decimal('2')
-                else:
-                    median = (valuationObservations[x][y][q])
-                self.relationStatistics[x][y]['median'] = float(median)
+##                q = sampleSize//2
+##                if (sampleSize % 2) == 0:    
+##                    median = (valuationObservations[x][y][q] + valuationObservations[x][y][q+1])/Decimal('2')
+##                else:
+##                    median = (valuationObservations[x][y][q])
+##                print(median,self._computeQuantile(0.5,valuationObservations[x][y]))
+
+                self.relationStatistics[x][y]['median'] = self._computeQuantile(0.5,valuationObservations[x][y])
                 if Debug and x == 'a04' and y == 'a05':
                     print(frequency[x][y])
                     print(quantilesId)
@@ -6854,16 +6857,29 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def _computeRelationStatistics(self,x,y,valuationObservations):
+    def _computeQuantile(self,p,observations):
+        """
+        computes the quantile of probability p of a list of observations.
+        """
+        from math import floor,ceil
+        n = len(observations)
+        q = (n+1)*p
+        flq = floor(q)
+        clq = ceil(q)
+        quantile = float(observations[int(flq)])\
+                   + (q-flq) * float(observations[int(clq)]- observations[int(flq)])
+        return quantile
+
+    def _computeRelationStatistics(self,x,y,observations):
         """
         computes the pairwise relation statistics from the sampled observations.
         """
         from math import sqrt
-        n = len(valuationObservations)
+        n = len(observations)
         fn = float(n)
         mean = 0.0
         meansq2 = 0.0 
-        for v in valuationObservations:
+        for v in observations:
             fv = float(v)
             mean += fv
             meansq2 += (fv * fv)
@@ -6871,8 +6887,10 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.relationStatistics[x][y]['mean'] = mean
         variance = (meansq2 / fn) - (mean*mean)
         self.relationStatistics[x][y]['sd'] = sqrt(variance)
-        self.relationStatistics[x][y]['Q0'] = float(min(valuationObservations))
-        self.relationStatistics[x][y]['Q4'] = float(max(valuationObservations))
+        self.relationStatistics[x][y]['Q0'] = float(min(observations))
+        self.relationStatistics[x][y]['Q1'] = self._computeQuantile(0.25,observations)
+        self.relationStatistics[x][y]['Q3'] = self._computeQuantile(0.75,observations)
+        self.relationStatistics[x][y]['Q4'] = float(max(observations))
 
 
     def showRelationStatistics(self,argument='likelihoods',
@@ -6981,16 +6999,29 @@ if __name__ == "__main__":
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=13,numberOfCriteria=13,weightDistribution='equiobjectives')
+    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=13,weightDistribution='equiobjectives')
     t.save('test')
-    t = PerformanceTableau('test')
+    #t = PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t)
     g.recodeValuation(-1,1)
     g.showRelationTable()
-    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True, sampleSize=100,errorLevel=0.05,Debug=False,samplingSeed=1)
+    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True, sampleSize=100,errorLevel=0.1,Debug=False,samplingSeed=1)
     gmc.showRelationTable()
     gmc.showRelationStatistics('medians')
     gmc.showRelationStatistics('likelihoods')
+    for x in gmc.actions:
+        for y in gmc.actions:
+            print('==>>',x,y)
+            print('Q4',gmc.relationStatistics[x][y]['Q4'])
+            print('Q3',gmc.relationStatistics[x][y]['Q3'])
+            print('Q2',gmc.relationStatistics[x][y]['median'])
+            print('mean',gmc.relationStatistics[x][y]['mean'])
+            print('Q3',gmc.relationStatistics[x][y]['Q1'])
+            print('Q4',gmc.relationStatistics[x][y]['Q0'])
+            print('pv',gmc.relationStatistics[x][y]['likelihood'])
+            print('sd',gmc.relationStatistics[x][y]['sd'])
+
+            
     grbc = RankingByChoosingDigraph(g)
     grbc.showPreOrder()
     gmcrbc = RankingByChoosingDigraph(gmc)
