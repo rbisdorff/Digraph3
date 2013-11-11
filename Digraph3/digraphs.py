@@ -219,7 +219,6 @@ class Digraph(object):
             self.convertValuationToDecimal()
             self.relation = copy.deepcopy(argDict['relation'])
             self.convertRelationToDecimal()
-            print(self.relation)
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
         try:
