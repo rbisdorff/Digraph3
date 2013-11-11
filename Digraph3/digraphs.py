@@ -3155,7 +3155,7 @@ class Digraph(object):
         for x in actions:
             for y in actions:
                 if x != y:
-                    print(relation[x][y], Med)
+                    # print(relation[x][y], Med)
                     deter += abs(relation[x][y] - Med)
         deter /= order * (order-1) * (Max - Med)
         #  output results
@@ -7537,7 +7537,7 @@ class RandomDigraph(Digraph):
 
      """
 
-    def __init__(self,order=10,arcProbability=0.5,hasIntegerValuation=True, Bipolar=False):
+    def __init__(self,order=9,arcProbability=0.5,hasIntegerValuation=True, Bipolar=False):
         arcProbability = Decimal(str(arcProbability))
         if arcProbability > Decimal("1.0"):
             print('Error: arc probability too high !!')

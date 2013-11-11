@@ -6859,14 +6859,19 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
     def _computeQuantile(self,p,observations):
         """
-        computes the quantile of probability p of a list of observations.
+        computes the quantile of probability p of a list of sorted observations.
         """
         from math import floor,ceil
         n = len(observations)
-        q = (n+1)*p
-        flq = floor(q)
-        clq = ceil(q)
-        quantile = float(observations[int(flq)])\
+        if p <= 0.0:
+            quantile = observations[0]
+        elif p >= 1.0:
+            quantile = observations[-1]        
+        else:
+            q = (n)*p
+            flq = floor(q)
+            clq = ceil(q)
+            quantile = float(observations[int(flq)])\
                    + (q-flq) * float(observations[int(clq)]- observations[int(flq)])
         return quantile
 
@@ -7000,8 +7005,8 @@ if __name__ == "__main__":
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
     t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=13,weightDistribution='equiobjectives')
-    t.save('test')
-    #t = PerformanceTableau('test')
+    t.saveXMCDA2('test')
+    #t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t)
     g.recodeValuation(-1,1)
     g.showRelationTable()
@@ -7016,8 +7021,8 @@ if __name__ == "__main__":
             print('Q3',gmc.relationStatistics[x][y]['Q3'])
             print('Q2',gmc.relationStatistics[x][y]['median'])
             print('mean',gmc.relationStatistics[x][y]['mean'])
-            print('Q3',gmc.relationStatistics[x][y]['Q1'])
-            print('Q4',gmc.relationStatistics[x][y]['Q0'])
+            print('Q1',gmc.relationStatistics[x][y]['Q1'])
+            print('Q0',gmc.relationStatistics[x][y]['Q0'])
             print('pv',gmc.relationStatistics[x][y]['likelihood'])
             print('sd',gmc.relationStatistics[x][y]['sd'])
 
