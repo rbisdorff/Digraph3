@@ -213,12 +213,13 @@ class Digraph(object):
             argDict = {}
             exec(compile(open(fileName).read(), fileName, 'exec'), argDict)
             self.name = file
-            self.actions = argDict['actionset']
+            self.actions = copy.deepcopy(argDict['actionset'])
             self.order = len(self.actions)
-            self.valuationdomain = argDict['valuationdomain']
+            self.valuationdomain = copy.deepcopy(argDict['valuationdomain'])
             self.convertValuationToDecimal()
-            self.relation = argDict['relation']
+            self.relation = copy.deepcopy(argDict['relation'])
             self.convertRelationToDecimal()
+            print(self.relation)
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
         try:
@@ -1451,7 +1452,7 @@ class Digraph(object):
 
     def convertRelationToDecimal(self):
         """
-        Convert the float valued self.relation in a decimal valued one.
+        Converts the float valued self.relation in a decimal valued one.
         """
         actions = [x for x in self.actions]
         relation = {}
@@ -1459,6 +1460,7 @@ class Digraph(object):
             relation[x] = {}
             for y in actions:
                 relation[x][y] = Decimal(str(self.relation[x][y]))
+        self.relation = relation
         return relation
 
     def bipolarKCorrelation(self, digraph,Debug=False):
@@ -3154,7 +3156,7 @@ class Digraph(object):
         for x in actions:
             for y in actions:
                 if x != y:
-                    #print relation[x][y], Med, relation[x][y] - Med
+                    print(relation[x][y], Med)
                     deter += abs(relation[x][y] - Med)
         deter /= order * (order-1) * (Max - Med)
         #  output results
@@ -7536,7 +7538,7 @@ class RandomDigraph(Digraph):
 
      """
 
-    def __init__(self,order=10,arcProbability=0.5,hasIntegerValuation=False):
+    def __init__(self,order=10,arcProbability=0.5,hasIntegerValuation=True, Bipolar=False):
         arcProbability = Decimal(str(arcProbability))
         if arcProbability > Decimal("1.0"):
             print('Error: arc probability too high !!')
@@ -7544,14 +7546,28 @@ class RandomDigraph(Digraph):
             print('Error: arc probability too low !!')
         else:
             import copy
-            g = RandomValuationDigraph(order=order,Normalized=True,hasIntegerValuation=hasIntegerValuation)
-            cutLevel = 1 - arcProbability
-            gp = PolarisedDigraph(digraph=g,level=cutLevel,AlphaCut=True)
+            from random import random
+##            g = RandomValuationDigraph(order=order,ndigits=0,hasIntegerValuation=hasIntegerValuation)
+##            cutLevel = 1 - arcProbability
+##            print(g.relation)
+##            gp = PolarisedDigraph(digraph=g,level=cutLevel,KeepValues=False,AlphaCut=True)
+##            gp.showRelationTable()
+            g = EmptyDigraph(order=order, valuationdomain=(0.0,1.0))
             self.actions = copy.deepcopy(g.actions)
-            self.valuationdomain = copy.deepcopy(gp.valuationdomain)
+            self.valuationdomain = copy.deepcopy(g.valuationdomain)
             self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
-            self.relation = copy.deepcopy(gp.relation)
-            self.order = g.order
+            self.relation = {}
+            for x in g.actions:
+                self.relation[x] = {}
+                for y in g.actions:
+                    if x == y:
+                        self.relation[x][y] = self.valuationdomain['min']
+                    else:
+                        if random() <= arcProbability:
+                            self.relation[x][y] = self.valuationdomain['max']
+                        else:
+                            self.relation[x][y] = self.valuationdomain['min']
+            self.order = order
             self.name = 'randomDigraph'
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
@@ -8560,14 +8576,16 @@ class PolarisedDigraph(Digraph):
         Med = self.valuationdomain['med']
         if level == None:
             level = Max - (Max - Med)*Decimal('0.5')
+        else:
+            level = Decimal(str(level))
         self.name = 'cut_' + str(level)+ '_' + str(digraph.name)
         self.actions = digraph.actions
         if AlphaCut:
-            self.relation = self.constructAlphaCutRelation(digraph.relation,
+            self.relation = self._constructAlphaCutRelation(digraph.relation,
                                                            level=level,
                                                            StrictCut=StrictCut)
         else:
-            self.relation = self.constructBetaCutRelation(digraph.relation,
+            self.relation = self._constructBetaCutRelation(digraph.relation,
                                                           level=level,
                                                           KeepValues=KeepValues,
                                                           StrictCut=StrictCut)
@@ -8576,7 +8594,7 @@ class PolarisedDigraph(Digraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def constructBetaCutRelation(self,relationin, level, KeepValues=True,AlphaCut=False,StrictCut=False):
+    def _constructBetaCutRelation(self,relationin, level, KeepValues=True,AlphaCut=False,StrictCut=False):
         """
         Parameters: relation and cut level.
         Flags: KeepValues (True), AlphaCut(False, unilateral cut), StrictCut (False)
@@ -8635,7 +8653,7 @@ class PolarisedDigraph(Digraph):
                             relationout[a][b] = Med
         return relationout
 
-    def constructAlphaCutRelation(self,relationin, level, KeepValues=True,AlphaCut=False,StrictCut=False):
+    def _constructAlphaCutRelation(self,relationin, level, KeepValues=True,AlphaCut=False,StrictCut=False):
         """
         Parameters: relation and cut level.
         Renders the polarised relation.
@@ -8653,14 +8671,26 @@ class PolarisedDigraph(Digraph):
             for b in actions:
                 if StrictCut:
                     if relationin[a][b] > level:
-                        relationout[a][b] = Max
+                        if KeepValues:
+                            relationout[a][b] = relationin[a][b]
+                        else:
+                            relationout[a][b] = Max
                     else:
-                        relationout[a][b] = Min
+                        if KeepValues:
+                            relationout[a][b] = Max - relationin[a][b] + Min
+                        else:    
+                            relationout[a][b] = Min
                 else:
                     if relationin[a][b] >= level:
-                        relationout[a][b] = Max
+                        if KeepValues:
+                            relationout[a][b] = relationin[a][b]
+                        else:
+                            relationout[a][b] = Max
                     else:
-                        relationout[a][b] = Min
+                        if KeepValues:
+                            relationout[a][b] = Max - relationin[a][b] + Min
+                        else:
+                            relationout[a][b] = Min
         return relationout
 
 
@@ -9863,10 +9893,18 @@ if __name__ == "__main__":
     else:
         print('*-------- Testing classes and methods -------')
         from csv import reader
-        t = RandomCBPerformanceTableau(numberOfActions=10)
-        g = BipolarOutrankingDigraph(t)
+
+        g = RandomDigraph()
+        g.showRelationTable()
+        g.save('debug')
+        f = Digraph('debug')
+        print(f.relation)
+        f.showStatistics()
+        
+        #t = RandomCBPerformanceTableau(numberOfActions=10)
+        #g = BipolarOutrankingDigraph(t)
         #g = CirculantDigraph(order=5)
-        g.save('test')
+        #g.save('test')
         #g = Digraph('test')
         #g.showRelationTable()
         #g.showAll()
@@ -9874,7 +9912,7 @@ if __name__ == "__main__":
         #gd = CSVDigraph('testR')
         #gd.showRelationTable()
         #gd.showAll()
-        g.computePrincipalOrder(Comments=True,Debug=True)
+        #g.computePrincipalOrder(Comments=True,Debug=True)
 ##        g.exportPrincipalImage(Comments=True,Type="pdf")
 ##        fi = open('rotation.csv','r')
 ##        csvReader = reader(fi)
