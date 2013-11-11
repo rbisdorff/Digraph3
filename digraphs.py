@@ -7544,7 +7544,7 @@ class RandomDigraph(Digraph):
             print('Error: arc probability too low !!')
         else:
             import copy
-            g = RandomValuationDigraph(order=order,hasIntegerValuation=hasIntegerValuation)
+            g = RandomValuationDigraph(order=order,Normalized=True,hasIntegerValuation=hasIntegerValuation)
             cutLevel = 1 - arcProbability
             gp = PolarisedDigraph(digraph=g,level=cutLevel,AlphaCut=True)
             self.actions = copy.deepcopy(g.actions)
