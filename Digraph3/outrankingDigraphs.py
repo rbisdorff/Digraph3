@@ -6755,20 +6755,20 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                                      hasNoVeto = hasNoVeto,\
                                      hasBipolarVeto = hasBipolarVeto,\
                                      Normalized=Normalized)
-        self.name = deepcopy(bodg.name)
+        self.name = bodg.name + '_MC'
+        self.sampleSize = sampleSize 
         self.actions = deepcopy(bodg.actions)
         self.order = len(self.actions)
         self.valuationdomain = deepcopy(bodg.valuationdomain)
         self.criteria = deepcopy(bodg.criteria)
         self.evlauation = deepcopy(bodg.evaluation)
         self.relation = deepcopy(bodg.relation)
-        self.sampleSize = sampleSize
         
         # normalize valuation to percentages
         self.recodeValuation(-100.0,100.0)
         
         # bin breaks per percent unit
-        breaks = [(x,i) for i,x  in enumerate(range(-100,100))]
+        breaks = [(x,i) for i,x  in enumerate(range(-100,101))]
         
         # quantiles for cdf calls
         quantilesId = dict(breaks)
@@ -6851,12 +6851,35 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             self.recodeValuation(-1,1)
         if Debug:
             self.valuationObservations = deepcopy(valuationObservations)
+        # sampled valuations r(x,y) are observed in standard bipolar percentages, i.e. [-100,100]
+        # the breaks are left closed integers and go from -100 to 100
+        # the quantileId disctionary gives the
         self.frequency = deepcopy(frequency)
+        self.quantilesId = deepcopy(quantilesId)
 ##        if Debug:
 ##            print(self.valuationObservations)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
+    def computeCDF(self,x,y,rValue):
+        """
+        computes the probability of a rValue of the sampled r(x,y) valuations.
+        """
+        from math import floor
+        fval = (-100.0 + (float(rValue) - float(self.valuationdomain['min']))\
+                /(float(self.valuationdomain['max'] - self.valuationdomain['min']))*200.0)
+        val = int(floor(fval))
+        #print(fval,val)
+        if val < 100:
+            #print(self.frequency[x][y][self.quantilesId[val]],self.frequency[x][y][self.quantilesId[val+1]])
+            Fval = float(self.frequency[x][y][self.quantilesId[val]])/float(self.sampleSize)
+            Fval1 = float(self.frequency[x][y][self.quantilesId[val+1]])/float(self.sampleSize)
+            prob = Fval + ((fval - val)*(Fval1 - Fval))
+        else:
+            Fval = float(self.frequency[x][y][self.quantilesId[val]])/float(self.sampleSize)
+            prob = Fval
+        return prob
+        
     def _computeQuantile(self,p,observations):
         """
         computes the quantile of probability p of a list of sorted observations.
@@ -7004,14 +7027,15 @@ if __name__ == "__main__":
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=13,weightDistribution='equiobjectives')
-    t.saveXMCDA2('test')
-    #t = XMCDA2PerformanceTableau('test')
+    #t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=13,weightDistribution='equiobjectives')
+    #t.saveXMCDA2('test')
+    t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t)
     g.recodeValuation(-1,1)
     g.showRelationTable()
     gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True, sampleSize=100,errorLevel=0.1,Debug=False,samplingSeed=1)
     gmc.showRelationTable()
+    gmc.recodeValuation(-100,100)
     gmc.showRelationStatistics('medians')
     gmc.showRelationStatistics('likelihoods')
     for x in gmc.actions:
@@ -7019,14 +7043,16 @@ if __name__ == "__main__":
             print('==>>',x,y)
             print('Q4',gmc.relationStatistics[x][y]['Q4'])
             print('Q3',gmc.relationStatistics[x][y]['Q3'])
+            print('probQ3',gmc.computeCDF(x,y,gmc.relationStatistics[x][y]['Q3']))
             print('Q2',gmc.relationStatistics[x][y]['median'])
             print('mean',gmc.relationStatistics[x][y]['mean'])
             print('Q1',gmc.relationStatistics[x][y]['Q1'])
+            print('probQ1',gmc.computeCDF(x,y,gmc.relationStatistics[x][y]['Q1']))
             print('Q0',gmc.relationStatistics[x][y]['Q0'])
             print('pv',gmc.relationStatistics[x][y]['likelihood'])
+            print('prob0',gmc.computeCDF(x,y,0.0))            
             print('sd',gmc.relationStatistics[x][y]['sd'])
-
-            
+ 
     grbc = RankingByChoosingDigraph(g)
     grbc.showPreOrder()
     gmcrbc = RankingByChoosingDigraph(gmc)
