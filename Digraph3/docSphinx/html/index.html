@@ -46,7 +46,13 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="technical-documentation-of-the-digraph-resources">
+  <dl class="docutils">
+<dt>sv.. graphs documentation master file, created by</dt>
+<dd>sphinx-quickstart on Mon Jan  2 22:15:21 2012.
+You can adapt this file completely to your liking, but it should at least
+contain the root <cite>toctree</cite> directive.</dd>
+</dl>
+<div class="section" id="technical-documentation-of-the-digraph-resources">
 <h1>Technical Documentation of the Digraph resources!<a class="headerlink" href="#technical-documentation-of-the-digraph-resources" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -2365,7 +2371,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -2753,57 +2759,6 @@ xml.etree (for Python 2.5+).</p>
 <p>Specialization of the standard OutrankingDigraph class for generating
 new bipolar ordinal-valued outranking digraphs.</p>
 <dl class="method">
-<dt id="outrankingDigraphs.BipolarIntegerOutrankingDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>criteria</em>, <em>evaluation</em>, <em>hasBipolarVeto=False</em>, <em>hasSymmetricThresholds=True</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.BipolarIntegerOutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Parameters:</dt>
-<dd>PerfTab.criteria, PerfTab.evaluation.</dd>
-</dl>
-<p>Renders the biploar valued outranking relation from the data
-of a given performance tableau instantiation PerfTab.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.BipolarIntegerOutrankingDigraph.localConcordance">
-<tt class="descname">localConcordance</tt><big>(</big><em>d</em>, <em>ind</em>, <em>wp</em>, <em>p</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.BipolarIntegerOutrankingDigraph.localConcordance" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Parameters:</dt>
-<dd><div class="first last line-block">
-<div class="line">d := diff observed, h := weak preference threshold,</div>
-<div class="line">p := prefrence threshold.</div>
-</div>
-</dd>
-</dl>
-<p>Renders the concordance index per criteria (Min,Med,Max)</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.BipolarIntegerOutrankingDigraph.localNegativeVeto">
-<tt class="descname">localNegativeVeto</tt><big>(</big><em>d</em>, <em>wv</em>, <em>v</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.BipolarIntegerOutrankingDigraph.localNegativeVeto" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Parameters:</dt>
-<dd><div class="first last line-block">
-<div class="line">d := diff observed, v (wv)  :=  (weak) veto threshold.</div>
-</div>
-</dd>
-</dl>
-<p>Renders the local negative veto state (Min,Med,Max).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.BipolarIntegerOutrankingDigraph.localVeto">
-<tt class="descname">localVeto</tt><big>(</big><em>d</em>, <em>wv</em>, <em>v</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.BipolarIntegerOutrankingDigraph.localVeto" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Parameters:</dt>
-<dd><div class="first last line-block">
-<div class="line">d := diff observed, v (wv)  :=  (weak) veto threshold.</div>
-</div>
-</dd>
-</dl>
-<p>Renders the local veto state (Min,Med,Max).</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="outrankingDigraphs.BipolarIntegerOutrankingDigraph.savePy2Gprolog">
 <tt class="descname">savePy2Gprolog</tt><big>(</big><em>name='temp'</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.BipolarIntegerOutrankingDigraph.savePy2Gprolog" title="Permalink to this definition">¶</a></dt>
 <dd><p>save digraph in gprolog version</p>
@@ -2845,58 +2800,9 @@ on criterion c.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="outrankingDigraphs.BipolarOutrankingDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>criteria</em>, <em>evaluation</em>, <em>initial=None</em>, <em>terminal=None</em>, <em>hasNoVeto=False</em>, <em>hasBipolarVeto=True</em>, <em>Debug=False</em>, <em>hasSymmetricThresholds=True</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.BipolarOutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the biploar valued outranking relation from the data
-of a given performance tableau instantiation PerfTab.</p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd><div class="first last line-block">
-<div class="line">PerfTab.criteria, PerfTab.evaluation,</div>
-<div class="line">inital nodes, terminal nodes, for restricted purposes </div>
-</div>
-</dd>
-<dt>Flags:</dt>
-<dd><div class="first last line-block">
-<div class="line">hasNoVeto = True inhibits taking into account large performances differences</div>
-<div class="line">hasBipolarVeto = False allows to revert (if False) to standard Electre veto handling</div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
 <dt id="outrankingDigraphs.BipolarOutrankingDigraph.criterionCharacteristicFunction">
 <tt class="descname">criterionCharacteristicFunction</tt><big>(</big><em>c</em>, <em>a</em>, <em>b</em>, <em>hasSymmetricThresholds=True</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.BipolarOutrankingDigraph.criterionCharacteristicFunction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the characteristic value of the comparison of a and b on criterion c.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.BipolarOutrankingDigraph.localConcordance">
-<tt class="descname">localConcordance</tt><big>(</big><em>d</em>, <em>ind</em>, <em>wp</em>, <em>p</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.BipolarOutrankingDigraph.localConcordance" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameters: d := diff observed, wp := weak preference threshold,
-ind := indiffrence threshold, p := prefrence threshold.
-Renders the concordance index per criteria (-1,0,1)</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.BipolarOutrankingDigraph.localNegativeVeto">
-<tt class="descname">localNegativeVeto</tt><big>(</big><em>d</em>, <em>wv</em>, <em>v</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.BipolarOutrankingDigraph.localNegativeVeto" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Parameters:</dt>
-<dd>d := diff observed, v (wv)  :=  (weak) veto threshold.</dd>
-</dl>
-<p>Renders the local negative veto state (-1,0,1).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.BipolarOutrankingDigraph.localVeto">
-<tt class="descname">localVeto</tt><big>(</big><em>d</em>, <em>wv</em>, <em>v</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.BipolarOutrankingDigraph.localVeto" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Parameters:</dt>
-<dd>d := diff observed, v (wv)  :=  (weak) veto threshold.</dd>
-</dl>
-<p>Renders the local veto state (-1,0,1).</p>
 </dd></dl>
 
 <dl class="method">
@@ -2928,42 +2834,9 @@ new bipolar ordinal-valued outranking digraphs.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="outrankingDigraphs.BipolarPreferenceDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>criteria</em>, <em>evaluation</em>, <em>hasNoVeto=False</em>, <em>hasBipolarVeto=False</em>, <em>hasSymmetricThresholds=True</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.BipolarPreferenceDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Parameters:</dt>
-<dd>PerfTab.criteria, PerfTab.evaluation.</dd>
-</dl>
-<p>Renders the biploar valued outranking relation from the data
-of a given performance tableau instantiation PerfTab.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="outrankingDigraphs.BipolarPreferenceDigraph.criterionCharacteristicFunction">
 <tt class="descname">criterionCharacteristicFunction</tt><big>(</big><em>c</em>, <em>a</em>, <em>b</em>, <em>hasSymmetricThresholds=True</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.BipolarPreferenceDigraph.criterionCharacteristicFunction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the characteristic value of the comparison of a and b on criterion c.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.BipolarPreferenceDigraph.localConcordance">
-<tt class="descname">localConcordance</tt><big>(</big><em>d</em>, <em>ind</em>, <em>wp</em>, <em>p</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.BipolarPreferenceDigraph.localConcordance" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameters: d := diff observed, wp := weak preference threshold,
-ind := indiffrence threshold, p := prefrence threshold.
-Renders the concordance index per criteria (-1,0,1)</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.BipolarPreferenceDigraph.localNegativeVeto">
-<tt class="descname">localNegativeVeto</tt><big>(</big><em>d</em>, <em>wv</em>, <em>v</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.BipolarPreferenceDigraph.localNegativeVeto" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameters: d := diff observed, v (wv)  :=  (weak) veto threshold.
-Renders the local negative veto state (-1,0,1).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.BipolarPreferenceDigraph.localVeto">
-<tt class="descname">localVeto</tt><big>(</big><em>d</em>, <em>wv</em>, <em>v</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.BipolarPreferenceDigraph.localVeto" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameters: d := diff observed, v (wv)  :=  (weak) veto threshold.
-Renders the local veto state (-1,0,1).</p>
 </dd></dl>
 
 <dl class="method">
@@ -2984,18 +2857,6 @@ Renders the local veto state (-1,0,1).</p>
 </dl>
 <p>Specialization of the OutrankingDigraph class for generating
 temporary dissimilarity random graphs</p>
-<dl class="method">
-<dt id="outrankingDigraphs.DissimilarityOutrankingDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>criteria</em>, <em>evaluation</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.DissimilarityOutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the valued dissimilarity relation between criteria.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.DissimilarityOutrankingDigraph.localDissimilarity">
-<tt class="descname">localDissimilarity</tt><big>(</big><em>d</em>, <em>h</em>, <em>q</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.DissimilarityOutrankingDigraph.localDissimilarity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders local dissimilarity between two criterial evaluations</p>
-</dd></dl>
-
 <dl class="method">
 <dt id="outrankingDigraphs.DissimilarityOutrankingDigraph.showAll">
 <tt class="descname">showAll</tt><big>(</big><big>)</big><a class="headerlink" href="#outrankingDigraphs.DissimilarityOutrankingDigraph.showAll" title="Permalink to this definition">¶</a></dt>
@@ -3032,32 +2893,6 @@ on criterion c.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="outrankingDigraphs.Electre3OutrankingDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>criteria</em>, <em>evaluation</em>, <em>hasNoVeto=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.Electre3OutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameters: PerfTab.criteria, PerfTab.evaluation.
-Renders the biploar valued outranking relation from the data
-of a given performance tableau instantiation PerfTab.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.Electre3OutrankingDigraph.localConcordance">
-<tt class="descname">localConcordance</tt><big>(</big><em>d</em>, <em>ind</em>, <em>wp</em>, <em>p</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.Electre3OutrankingDigraph.localConcordance" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameters: d := diff observed, ind := indifference threshold,
-wp := weak prefrence threshold,  p := prefrence threshold, 
-Renders the concordance index per criteria.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.Electre3OutrankingDigraph.localVeto">
-<tt class="descname">localVeto</tt><big>(</big><em>d</em>, <em>p</em>, <em>v</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.Electre3OutrankingDigraph.localVeto" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Parameters:</dt>
-<dd>d := diff observed, v := veto threshold.</dd>
-</dl>
-<p>Renders the local veto state</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="outrankingDigraphs.Electre3OutrankingDigraph.showVetos">
 <tt class="descname">showVetos</tt><big>(</big><em>cutLevel=None</em>, <em>realVetosOnly=False</em>, <em>Comments=True</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.Electre3OutrankingDigraph.showVetos" title="Permalink to this definition">¶</a></dt>
 <dd><p>prints all veto situations observed in the OutrankingDigraph instance.</p>
@@ -3075,17 +2910,6 @@ Renders the concordance index per criteria.</p>
 </dl>
 <p>Specialization of the general OutrankingDigraph class for 
 temporary outranking digraphs with equisignificant criteria.</p>
-<dl class="method">
-<dt id="outrankingDigraphs.EquiSignificanceMajorityOutrankingDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>perfTab</em>, <em>hasNoVeto=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.EquiSignificanceMajorityOutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Parameters:</dt>
-<dd>PerfTab.criteria, PerfTab.evaluation.</dd>
-</dl>
-<p>Renders the biploar valued outranking relation from the data
-of a given performance tableau instantiation PerfTab.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -3104,14 +2928,6 @@ for instance (50,100) or (1,2) renders Q2, (1,4) = Q1
 </dl>
 <p>Specialization of the standard OutrankingDigraph class for generating
 a median bipolar outranking digraph.</p>
-<dl class="method">
-<dt id="outrankingDigraphs.MedianBipolarOutrankingDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>t</em>, <em>percentile</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.MedianBipolarOutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameters: PerfTab.criteria, quantile (0 - 100)
-Renders the quantile-outranking relation from the data
-of a given performance tableau instantiation PerfTab.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -3124,18 +2940,6 @@ of a given performance tableau instantiation PerfTab.</p>
 </dl>
 <p>Specialization of the OutrankingDigraph class for generating
 temporary multiple criteria based dissimilarity graphs.</p>
-<dl class="method">
-<dt id="outrankingDigraphs.MultiCriteriaDissimilarityDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><big>)</big><a class="headerlink" href="#outrankingDigraphs.MultiCriteriaDissimilarityDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the valued dissimilarity relation between criteria.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.MultiCriteriaDissimilarityDigraph.localDissimilarity">
-<tt class="descname">localDissimilarity</tt><big>(</big><em>d</em>, <em>h</em>, <em>wp</em>, <em>p</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.MultiCriteriaDissimilarityDigraph.localDissimilarity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders local dissimilarity between two criterial evaluations</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -3148,13 +2952,6 @@ temporary multiple criteria based dissimilarity graphs.</p>
 </dl>
 <p>Specialization of the general OutrankingDigraph class for 
 new robustness anaylsis.</p>
-<dl class="method">
-<dt id="outrankingDigraphs.NewRobustOutrankingDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><big>)</big><a class="headerlink" href="#outrankingDigraphs.NewRobustOutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameters: normal -, equisignificant - ordinal -, and unanimous outranking relation.
-Help method for constructing robust outranking relation.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -3167,38 +2964,6 @@ Help method for constructing robust outranking relation.</p>
 </dl>
 <p>Specialization of the general OutrankingDigraph class for 
 temporary ordinal outranking digraphs</p>
-<dl class="method">
-<dt id="outrankingDigraphs.OrdinalOutrankingDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>criteria</em>, <em>evaluation</em>, <em>hasSymmetricThresholds=True</em>, <em>hasNoVeto=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OrdinalOutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Parameters:</dt>
-<dd>PerfTab.criteria, PerfTab.evaluation.</dd>
-</dl>
-<p>Renders the biploar valued outranking relation from the data
-of a given performance tableau instantiation PerfTab.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.OrdinalOutrankingDigraph.localConcordance">
-<tt class="descname">localConcordance</tt><big>(</big><em>d</em>, <em>ind</em>, <em>wp</em>, <em>p</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OrdinalOutrankingDigraph.localConcordance" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Parameters:</dt>
-<dd><div class="first last line-block">
-<div class="line">d := diff observed, h := indifference threshold,</div>
-<div class="line">p := prefrence threshold.</div>
-</div>
-</dd>
-</dl>
-<p>Renders the concordance index per criterion.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.OrdinalOutrankingDigraph.localVeto">
-<tt class="descname">localVeto</tt><big>(</big><em>d</em>, <em>wv</em>, <em>v</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OrdinalOutrankingDigraph.localVeto" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameters: d := diff observed, v := veto threshold.
-Renders the local veto state</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -3287,17 +3052,6 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="outrankingDigraphs.OutrankingDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>criteria</em>, <em>evaluation</em>, <em>hasNoVeto=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Parameters:</dt>
-<dd>PerfTab.criteria, PerfTab.evaluation.</dd>
-</dl>
-<p>Renders the biploar valued outranking relation from the data
-of a given performance tableau instantiation PerfTab.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.convertEvaluationFloatToDecimal">
 <tt class="descname">convertEvaluationFloatToDecimal</tt><big>(</big><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.convertEvaluationFloatToDecimal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert evaluations from obsolete float format to decimal format</p>
@@ -3312,7 +3066,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -3495,13 +3249,6 @@ Digraphs from random performance tableaux.</p>
 <p>Specialization of the general OutrankingDigraph class for 
 robustness anaylsis.</p>
 <dl class="method">
-<dt id="outrankingDigraphs.RobustOutrankingDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>unanimous</em>, <em>ordinal</em>, <em>cardinal</em>, <em>hasNoVeto=True</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.RobustOutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameters: normal -, ordinal -, and unanimous outranking relation.
-Help method for constructing robust outranking relation.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="outrankingDigraphs.RobustOutrankingDigraph.saveAMPLDataFile">
 <tt class="descname">saveAMPLDataFile</tt><big>(</big><em>name='temp'</em>, <em>Unique=False</em>, <em>Comments=True</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.RobustOutrankingDigraph.saveAMPLDataFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>save the ampl reverse data for cplex</p>
@@ -3573,29 +3320,6 @@ If None, a random instance is generated.</li>
 </dl>
 <p>Specialization of the general OutrankingDigraph class for 
 temporary unanimous outranking digraphs</p>
-<dl class="method">
-<dt id="outrankingDigraphs.UnanimousOutrankingDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>criteria</em>, <em>evaluation</em>, <em>hasSymmetricThresholds=True</em>, <em>hasNoVeto=True</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.UnanimousOutrankingDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameters: PerfTab.criteria, PerfTab.evaluation.
-Renders the biploar valued outranking relation from the data
-of a given performance tableau instantiation PerfTab.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.UnanimousOutrankingDigraph.localConcordance">
-<tt class="descname">localConcordance</tt><big>(</big><em>d</em>, <em>ind</em>, <em>wp</em>, <em>p</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.UnanimousOutrankingDigraph.localConcordance" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameters: d := diff observed, h := indifference threshold,
-p := prefrence threshold.
-Renders the concordance index per criterion.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.UnanimousOutrankingDigraph.localVeto">
-<tt class="descname">localVeto</tt><big>(</big><em>d</em>, <em>v</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.UnanimousOutrankingDigraph.localVeto" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameters: d := diff observed, v := veto threshold.
-Renders the local veto state</p>
-</dd></dl>
-
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#introduction-label"><em>Introduction</em></a></p>
@@ -4131,9 +3855,9 @@ a given bipolar-valued Digraph instance</p>
 
 <p>Back to the <a class="reference internal" href="#introduction-label"><em>Introduction</em></a></p>
 </div>
-<div class="section" id="weaklytransitivedigraphs-module">
-<span id="weaklytransitivedigraphs-label"></span><h2>weaklyTransitiveDigraphs module<a class="headerlink" href="#weaklytransitivedigraphs-module" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-weaklyTransitiveDigraphs"></span><dl class="class">
+<div class="section" id="module-weaklyTransitiveDigraphs">
+<span id="weaklytransitivedigraphs-module"></span><span id="weaklytransitivedigraphs-label"></span><h2>weaklyTransitiveDigraphs module<a class="headerlink" href="#module-weaklyTransitiveDigraphs" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
 <dt id="weaklyTransitiveDigraphs.PrincipalInOutDegreesOrdering">
 <em class="property">class </em><tt class="descclassname">weaklyTransitiveDigraphs.</tt><tt class="descname">PrincipalInOutDegreesOrdering</tt><big>(</big><em>other</em>, <em>imageType=None</em>, <em>plotFileName=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#weaklyTransitiveDigraphs.PrincipalInOutDegreesOrdering" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#weaklyTransitiveDigraphs.WeaklyTransitiveDigraph" title="weaklyTransitiveDigraphs.WeaklyTransitiveDigraph"><tt class="xref py py-class docutils literal"><span class="pre">weaklyTransitiveDigraphs.WeaklyTransitiveDigraph</span></tt></a></p>
@@ -4198,7 +3922,7 @@ of the principal orders of in- and outdegrees.</p>
 <li><a class="reference internal" href="#module-votingDigraphs">votingDigraphs module</a></li>
 <li><a class="reference internal" href="#module-sortingDigraphs">sortingDigraphs module</a></li>
 <li><a class="reference internal" href="#module-linearOrders">linearOrders module</a></li>
-<li><a class="reference internal" href="#weaklytransitivedigraphs-module">weaklyTransitiveDigraphs module</a></li>
+<li><a class="reference internal" href="#module-weaklyTransitiveDigraphs">weaklyTransitiveDigraphs module</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>

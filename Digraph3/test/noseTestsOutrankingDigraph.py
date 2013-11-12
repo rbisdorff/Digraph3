@@ -224,7 +224,7 @@ def testDefaultDiscriminationThresholds():
     g.computeDefaultDiscriminationThresholds(quantile={'ind':10,'pref':20,'weakPreference':60,'veto':80},Debug=True)
     g0 = copy.deepcopy(g)
     g0.computeDefaultDiscriminationThresholds(quantile={'ind':0})
-    g0.relation=g.constructRelation(g.criteria,g.evaluation)
+    g0.relation=g._constructRelation(g.criteria,g.evaluation)
     g0.name = 'rel_tournament'
     print('weak tournament')        
     g0.showRelationTable()
@@ -232,7 +232,7 @@ def testDefaultDiscriminationThresholds():
     g0.computeODistance(g,comments=True)
     gn = copy.deepcopy(g)
     gn.computeDefaultDiscriminationThresholds(quantile={'ind':100})      
-    gn.relation=g.constructRelation(g.criteria,g.evaluation)
+    gn.relation=g._constructRelation(g.criteria,g.evaluation)
     gn.name = 'rel_complete'
     #g.showCriteria()
     d0kn = gn.computeODistance(g0)

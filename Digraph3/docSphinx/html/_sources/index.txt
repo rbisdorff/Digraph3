@@ -1,4 +1,4 @@
-.. graphs documentation master file, created by
+sv.. graphs documentation master file, created by
    sphinx-quickstart on Mon Jan  2 22:15:21 2012.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -144,7 +144,7 @@ Back to the :ref:`Introduction-label`
 .. _weaklyTransitiveDigraphs-label:
 
 weaklyTransitiveDigraphs module
--------------------
+-------------------------------
 
 .. automodule:: weaklyTransitiveDigraphs
    :member-order: alphabetical
