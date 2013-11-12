@@ -54,108 +54,18 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             criteria = {}
             for g in coalition:
                 criteria[g] = perfTab.criteria[g]
-        #self.relation = self.constructRelation(criteria,perfTab.evaluation, self.weightPreorder)
+        #self.relation = self._constructRelation(criteria,perfTab.evaluation, self.weightPreorder)
         self.criteria = criteria
         self.convertWeightFloatToDecimal()
         self.evaluation = copy.deepcopy(perfTab.evaluation)
         self.convertEvaluationFloatToDecimal()
-        self.relation = self.constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)
+        self.relation = self._constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)
         methodData = {}
         methodData['parameter'] = {'valuationType':'normalized','variant':'unipolar'}
         self.methodData = methodData
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-
-    ## def computeRankingByChoosing(self,Debug=False,CoDual=True):
-    ##     """
-    ##     Computes a weak preordring of the self.actions by iterating
-    ##     jointly best and worst choice elagations.
-
-    ##     Stores in self.rankingByChoosing['result'] a list of ((P+,bestChoice),(P-,worstChoice)) pairs
-    ##     where P+ (resp. P-) gives the best (resp. worst) choice complement outranking
-    ##     (resp. outranked) average valuation via the computePairwiseClusterComparison
-    ##     method.
-
-    ##     If self.rankingByChoosing['CoDual'] is True, the ranking by chossing was computed on the codual of self.
-    ##     """
-    ##     from copy import deepcopy
-    ##     currG = deepcopy(self)
-    ##     remainingActions = list(self.actions.keys())
-    ##     rankingByChoosing = []
-    ##     i = 0
-    ##     while len(remainingActions) > 0  and i < len(self.actions):
-    ##         i += 1
-    ##         currG.actions = remainingActions
-    ##         if CoDual:
-    ##             currGcd = CoDualDigraph(currG)
-    ##         else:
-    ##             currGcd = deepcopy(currG)
-    ##         currGcd.computeRubisChoice(Comments=Debug)
-    ##         #currGcd.computeGoodChoices(Comments=Debug)
-    ##         bestChoiceCandidates = []
-    ##         for ch in currGcd.goodChoices:
-    ##             k1 = currGcd.flatChoice(ch[5])
-    ##             if Debug:
-    ##                 print ch[5],k1
-    ##             ck1 = list(set(currG.actions)-set(k1))
-    ##             if len(ck1) > 0:
-    ##                 k1Outranking = currG.computePairwiseClusterComparison(k1,ck1)
-    ##                 if Debug:
-    ##                     print 'good', i, ch[5], k1, k1Outranking
-    ##                 #bestChoiceCandidates.append((k1Outranking['P+'],k1))
-    ##                 bestChoiceCandidates.append( ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 ) )
-    ##             else:
-    ##                 bestChoiceCandidates.append((self.valuationdomain['max'],k1))
-    ##         bestChoiceCandidates.sort(reverse=True)
-    ##         try:
-    ##             bestChoice = bestChoiceCandidates[0]
-    ##         except:
-    ##             print 'Error: no best choice in currGcd!'
-    ##             currGcd.save('currGcd_errorBest')
-    ##             return None
-    ##         if Debug:
-    ##             print 'bestChoice', i, bestChoice, bestChoiceCandidates[0]
-
-    ##         #currGcd.computeBadChoices(Comments=Debug)
-    ##         worstChoiceCandidates = []
-    ##         for ch in currGcd.badChoices:
-    ##             k1 = currGcd.flatChoice(ch[5])
-    ##             if Debug:
-    ##                 print ch[5],k1
-    ##             ck1 = list(set(currG.actions)-set(k1))
-    ##             if len(ck1) > 0:
-    ##                 k1Outranked = currG.computePairwiseClusterComparison(k1,ck1)
-    ##                 if Debug:
-    ##                     print 'worst', i, ch[5], k1, k1Outranked
-    ##                 worstChoiceCandidates.append( ( min(-k1Outranked['P+'],k1Outranked['P-']), k1 ) )
-    ##             else:
-    ##                 worstChoiceCandidates.append((self.valuationdomain['max'],k1))
-    ##         worstChoiceCandidates.sort(reverse=True)
-    ##         try:
-    ##             worstChoice = worstChoiceCandidates[0]
-    ##         except:
-    ##             print 'Error: no worst choice in currGcd'
-    ##             currGcd.save('currGcd_errorWorst')
-    ##             return None
-    ##         if Debug:
-    ##             print 'worstChoice', i, worstChoice, worstChoiceCandidates[0]
-
-    ##         rankingByChoosing.append((bestChoice,worstChoice))
-
-    ##         if len(bestChoice[1]) > 0:
-    ##             for x in bestChoice[1]:
-    ##                 remainingActions.remove(x)
-    ##         if len(worstChoice[1]) > 0:
-    ##             for x in worstChoice[1]:
-    ##                 try:
-    ##                     remainingActions.remove(x)
-    ##                 except:
-    ##                     pass
-    ##         #print i, bestChoice, worstChoice, remainingActions, rankingByChoosing
-    ##     self.rankingByChoosing = {'CoDual': CoDual, 'result': rankingByChoosing}
-    ##     return {'CoDual': CoDual, 'result': rankingByChoosing}
-
 
     def computeQuantileSortRelation(self,Debug=False):
         """
@@ -192,73 +102,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     rankingRelation[y][x] = Max
                 if Debug:
                     print(rankingRelation[x][y],rankingRelation[y][x])
-        return rankingRelation 
-
-    ## def showRankingByChoosing(self):
-    ##     """
-    ##     A show method for self.rankinByChoosing result.
-
-    ##     ..warning:
-
-    ##          The self.computeRankingByChoosing(CoDual=False/True) method instantiating the self.rankingByChoosing slot is pre-required !
-    ##     """
-
-    ##     try:
-    ##         rankingByChoosing = self.rankingByChoosing['result']
-    ##     except:
-    ##         print 'Error: You must first run self.computeRankingByChoosing(CoDual=True(default)|False) !'
-    ##         #rankingByChoosing = self.computeRankingByChoosing(Debug,CoDual)
-    ##         return
-    ##     print 'Ranking by Choosing and Rejecting'
-    ##     space = ''
-    ##     n = len(rankingByChoosing)
-    ##     for i in range(n):
-    ##         if i+1 == 1:
-    ##             nstr='st'
-    ##         elif i+1 == 2:
-    ##             nstr='nd'
-    ##         elif i+1 == 3:
-    ##             nstr='rd'
-    ##         else:
-    ##             nstr='th'
-    ##         ibch = set(rankingByChoosing[i][0][1])
-    ##         iwch = set(rankingByChoosing[i][1][1])
-    ##         iach = iwch & ibch
-    ##         #print 'ibch, iwch, iach', i, ibch,iwch,iach
-    ##         ch = list(ibch) 
-    ##         ch.sort()
-    ##         print ' %s%s%s Best Choice %s (%.2f)' % (space,i+1,nstr,ch,rankingByChoosing[i][0][0])
-    ##         if len(iach) > 0 and i < n-1:
-    ##             print '  %s Ambiguous Choice %s' % (space,list(iach))
-    ##             space += '  '
-    ##         space += '  '
-    ##     for i in range(n):
-    ##         if n-i == 1:
-    ##             nstr='st'
-    ##         elif n-i == 2:
-    ##             nstr='nd'
-    ##         elif n-i == 3:
-    ##             nstr='rd'
-    ##         else:
-    ##             nstr='th'
-    ##         space = space[:-2]
-    ##         ibch = set(rankingByChoosing[n-i-1][0][1])
-    ##         iwch = set(rankingByChoosing[n-i-1][1][1])
-    ##         iach = iwch & ibch
-    ##         #print 'ibch, iwch, iach', i, ibch,iwch,iach
-    ##         ch = list(iwch) 
-    ##         ch.sort()
-    ##         if len(iach) > 0 and i > 0:
-    ##             space = space[:-2] 
-    ##             print '  %s Ambiguous Choice %s' % (space,list(iach))
-    ##         print ' %s%s%s Worst Choice %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0])
-    ##     corr = self.computeOrdinalCorrelation(self.computeRankingByChoosingRelation())
-    ##     if self.rankingByChoosing['CoDual']:
-            
-    ##         print 'Ordinal Correlation with codual (strict) outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination'])
-    ##     else:
-    ##         print 'Ordinal Correlation with outranking relation: %.3f (%.3f)'% (corr['correlation'],corr['determination'])
-        
+        return rankingRelation        
 
     def convertWeightFloatToDecimal(self):
         """
@@ -360,9 +204,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 d = self.evaluation[c][a] - self.evaluation[c][b]
 
                 if ind == None:
-                    return self.localConcordance(d,wp,p)
+                    return self._localConcordance(d,wp,p)
                 else:
-                    return self.localConcordance(d,ind,p)
+                    return self._localConcordance(d,ind,p)
             else:
                 return Decimal("0.5")
 
@@ -426,7 +270,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         
         """
         self.computeDefaultDiscriminationThresholds(quantile,Debug,comments)
-        self.relation = self.constructRelation(self.criteria,self.evaluation)
+        self.relation = self._constructRelation(self.criteria,self.evaluation)
 
     def computeWeightsConcentrationIndex(self):
         """
@@ -465,7 +309,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             gini = Decimal('-1')
         return gini
 
-    def constructRelation(self,criteria,evaluation,hasNoVeto=False):
+    def _constructRelation(self,criteria,evaluation,hasNoVeto=False):
         """
         Parameters:
             PerfTab.criteria, PerfTab.evaluation.
@@ -518,9 +362,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                             except:
                                 v = None
                             d = evaluation[c][a] - evaluation[c][b]
-                            lc0 = self.localConcordance(d,ind,wp,p)
+                            lc0 = self._localConcordance(d,ind,wp,p)
                             counter = counter + (lc0 * criteria[c]['weight'])
-                            testveto = self.localVeto(d,v)
+                            testveto = self._localVeto(d,v)
                             if criteria[c]['weight'] > Decimal('0'):
                                 veto = veto + testveto
                                 if testveto == Decimal('1'):
@@ -1329,7 +1173,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     except:
                         p = None
                     d = evaluation[c][a] - evaluation[c][b]
-                    lc0 = self.localConcordance(d,ind,wp,p)
+                    lc0 = self._localConcordance(d,ind,wp,p)
                     if ind != None:
                         ind = round(ind,2)
                     if wp != None:
@@ -1360,9 +1204,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                             v = vx + vy * abs(evaluation[c][a])
                     except:
                         v = None
-                    veto = self.localVeto(d,wv,v)
+                    veto = self._localVeto(d,wv,v)
                     try:
-                        negativeVeto = self.localNegativeVeto(d,wv,v)
+                        negativeVeto = self._localNegativeVeto(d,wv,v)
                         hasBipolarVeto = True
                     except:
                         hasBipolarVeto = False
@@ -1653,32 +1497,6 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 print(str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1]))
             print('number of real vetos: %d' % (realveto))
             return nv,realveto
-
-    ## transferred to perftabs.py module
-    ## def showEvaluationStatistics(self):
-    ##     """
-    ##     renders the variance and standard deviation of
-    ##     the values observed in the performance Tableau.
-    ##     """
-    ##     import math
-    ##     print '*---- Evaluation statistics ----*'
-    ##     average = Decimal('0.0')
-    ##     n = Decimal('0.0')
-    ##     for g in self.criteria:
-    ##         for x in self.actions:
-    ##             average += self.evaluation[g][x]
-    ##             n += 1
-    ##     average = average/n
-    ##     print 'average      : %2.2f ' % (average)
-    ##     variance = Decimal('0.0')
-    ##     for g in self.criteria:
-    ##         for x in self.actions:
-    ##             variance += (self.evaluation[g][x]-average)*(self.evaluation[g][x]-average)
-    ##     variance = variance/n
-    ##     print 'variance     : %2.2f ' % (variance)
-    ##     stddev = math.sqrt(variance)
-    ##     print 'std deviation: %2.2f ' % (stddev)      
-
 
     def saveXMLRubisOutrankingDigraph(self,name='temp',category='Rubis outranking digraph',subcategory='Choice recommendation',author='digraphs Module (RB)',reference='saved from Python',noSilent=False,servingD3=True):
         """
@@ -3374,7 +3192,7 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             criteria = {}
             for g in coalition:
                 criteria[g] = perfTab.criteria[g]
-        self.relation = self.constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)
+        self.relation = self._constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)
         self.criteria = criteria
         self.evaluation = copy.deepcopy(perfTab.evaluation)
         try:
@@ -3459,7 +3277,7 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             return nv,realveto
 
 
-    def constructRelation(self,criteria,evaluation,hasNoVeto=False):
+    def _constructRelation(self,criteria,evaluation,hasNoVeto=False):
         """
         Parameters: PerfTab.criteria, PerfTab.evaluation.
         Renders the biploar valued outranking relation from the data
@@ -3514,9 +3332,9 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             #q = bx + by * evaluation[c][a]
                             #v = vx + vy * evaluation[c][a]
                             d = evaluation[c][a] - evaluation[c][b]
-                            lc0 = self.localConcordance(d,h,h,p)
+                            lc0 = self._localConcordance(d,h,h,p)
                             counter = counter + (lc0 * criteria[c]['weight'])
-                            veto[c] = (self.localVeto(d,p,v),d,v)
+                            veto[c] = (self._localVeto(d,p,v),d,v)
                         else:
                             counter = counter + Decimal('0.5') * criteria[c]['weight']
                             veto[c] = (Decimal('0.0'),None,None)     
@@ -3574,13 +3392,13 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     p = None
                 d = self.evaluation[c][a] - self.evaluation[c][b]
 
-                return self.localConcordance(d,ind,wp,p)
+                return self._localConcordance(d,ind,wp,p)
 
             else:
                 return Decimal("0.5")
 
 
-    def localConcordance(self,d,ind,wp,p):
+    def _localConcordance(self,d,ind,wp,p):
         """
         Parameters: d := diff observed, ind := indifference threshold,
         wp := weak prefrence threshold,  p := prefrence threshold, 
@@ -3613,7 +3431,7 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 
             
 
-    def localVeto(self, d, p, v):
+    def _localVeto(self, d, p, v):
         """
         Parameters:
             d := diff observed, v := veto threshold.
@@ -3707,7 +3525,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         
         # construct outranking relation
         actionsKeys = list(self.actions.keys())
-        self.relation = self.constructRelation(criteria,perfTab.evaluation,initial=actionsKeys,terminal=actionsKeys,hasNoVeto=hasNoVeto,hasBipolarVeto=hasBipolarVeto,hasSymmetricThresholds=True)
+        self.relation = self._constructRelation(criteria,perfTab.evaluation,initial=actionsKeys,terminal=actionsKeys,hasNoVeto=hasNoVeto,hasBipolarVeto=hasBipolarVeto,hasSymmetricThresholds=True)
 
         # insert performance Data
         self.evaluation = copy.deepcopy(perfTab.evaluation)
@@ -3762,13 +3580,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     p = None
                 d = self.evaluation[c][a] - self.evaluation[c][b]
 
-                return self.localConcordance(d,ind,wp,p)
+                return self._localConcordance(d,ind,wp,p)
 
             else:
                 return Decimal("0.0")
             
 
-    def constructRelation(self,criteria,evaluation,initial=None,terminal=None,hasNoVeto=False,hasBipolarVeto=True,Debug=False,hasSymmetricThresholds=True):
+    def _constructRelation(self,criteria,evaluation,initial=None,terminal=None,hasNoVeto=False,hasBipolarVeto=True,Debug=False,hasSymmetricThresholds=True):
         """
         Renders the biploar valued outranking relation from the data
         of a given performance tableau instantiation PerfTab.
@@ -3846,7 +3664,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             except:
                                 p = None
                             d = evaluation[c][a] - evaluation[c][b]
-                            lc0 = self.localConcordance(d,ind,wp,p)
+                            lc0 = self._localConcordance(d,ind,wp,p)
                             ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
                             concordance = concordance + (lc0 * criteria[c]['weight'])
                             try:
@@ -3873,14 +3691,14 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                         v = vx + vy * abs(evaluation[c][a])
                             except:
                                 v = None
-                            veto[c] = (self.localVeto(d,wv,v),d,wv,v)
+                            veto[c] = (self._localVeto(d,wv,v),d,wv,v)
                             if veto[c][0] > Decimal('-1.0'):
                                 abvetos.append((c,veto[c]))
                                 largePerformanceDifferencesCount[a][b]['negative'] -= 1
                             ## if d < -wv:
                             ##     print 'd,wv,v,veto[c]',d,wv,v,veto[c]
                             if hasBipolarVeto:
-                                negativeVeto[c] = (self.localNegativeVeto(d,wv,v),d,wv,v)
+                                negativeVeto[c] = (self._localNegativeVeto(d,wv,v),d,wv,v)
                                 if negativeVeto[c][0] > Decimal('-1.0'):
                                     abNegativeVetos.append((c,negativeVeto[c]))
                                     largePerformanceDifferencesCount[a][b]['positive'] += 1
@@ -3974,7 +3792,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             except:
                 p = None
             d = evaluation[c][a] - evaluation[c][b]
-            return self.localConcordance(d,ind,wp,p)
+            return self._localConcordance(d,ind,wp,p)
         else:
             return Decimal('0.0')
 
@@ -4019,7 +3837,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         if Comments:
             print('Single Criteria Netflows saved on file %s' % (fileName))
         
-    def localConcordance(self,d,ind,wp,p):
+    def _localConcordance(self,d,ind,wp,p):
         """
         Parameters: d := diff observed, wp := weak preference threshold,
         ind := indiffrence threshold, p := prefrence threshold.
@@ -4061,7 +3879,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     return Decimal('1.0')                
             
 
-    def localVeto(self, d, wv, v):
+    def _localVeto(self, d, wv, v):
         """
         Parameters:
             d := diff observed, v (wv)  :=  (weak) veto threshold.
@@ -4087,7 +3905,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         else:
             return Decimal('-1.0')
 
-    def localNegativeVeto(self, d, wv, v):
+    def _localNegativeVeto(self, d, wv, v):
         """
         Parameters:
             d := diff observed, v (wv)  :=  (weak) veto threshold.
@@ -4166,7 +3984,7 @@ class BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             hasBipolarVeto = True
         self.methodData = methodData
         # construct outranking relation
-        self.relation = self.constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto,hasBipolarVeto=hasBipolarVeto)
+        self.relation = self._constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto,hasBipolarVeto=hasBipolarVeto)
 
         # insert performance Data
         self.evaluation = copy.deepcopy(perfTab.evaluation)
@@ -4181,7 +3999,7 @@ class BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.notGamma = self.notGammaSets()
 
 
-    def constructRelation(self,criteria,evaluation,hasNoVeto=False,hasBipolarVeto=False,hasSymmetricThresholds=True):
+    def _constructRelation(self,criteria,evaluation,hasNoVeto=False,hasBipolarVeto=False,hasSymmetricThresholds=True):
         """
         Parameters:
             PerfTab.criteria, PerfTab.evaluation.
@@ -4240,7 +4058,7 @@ class BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                             except:
                                 p = None
                             d = evaluation[c][a] - evaluation[c][b]
-                            lc0 = self.localConcordance(d,ind,wp,p)
+                            lc0 = self._localConcordance(d,ind,wp,p)
                             ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
                             concordance = concordance + (lc0 * criteria[c]['weight'])
                             try:
@@ -4267,11 +4085,11 @@ class BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                         v = vx + vy * abs(evaluation[c][a])
                             except:
                                 v = None
-                            veto[c] = (self.localVeto(d,wv,v),d,wv,v)
+                            veto[c] = (self._localVeto(d,wv,v),d,wv,v)
                             ## if d < -wv:
                             ##     print 'd,wv,v,veto[c]',d,wv,v,veto[c]
                             if hasBipolarVeto:
-                                negativeVeto[c] = (self.localNegativeVeto(d,wv,v),d,wv,v)
+                                negativeVeto[c] = (self._localNegativeVeto(d,wv,v),d,wv,v)
                                 ## if d > wv:
                                 ##     print 'd,wv,v,negativeVeto[c]',d,wv,v,negativeVeto[c] 
                         else:
@@ -4368,7 +4186,7 @@ class BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             except:
                 p = None
             d = evaluation[c][a] - evaluation[c][b]
-            return self.localConcordance(d,ind,wp,p)
+            return self._localConcordance(d,ind,wp,p)
         else:
             return Decimal('0.0')
 
@@ -4413,7 +4231,7 @@ class BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         if Comments:
             print('Single Criteria Netflows saved on file %s' % (fileName))
         
-    def localConcordance(self,d,ind,wp,p):
+    def _localConcordance(self,d,ind,wp,p):
         """
         Parameters: d := diff observed, wp := weak preference threshold,
         ind := indiffrence threshold, p := prefrence threshold.
@@ -4455,7 +4273,7 @@ class BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     return Decimal('1.0')                
             
 
-    def localVeto(self, d, wv, v):
+    def _localVeto(self, d, wv, v):
         """
         Parameters: d := diff observed, v (wv)  :=  (weak) veto threshold.
         Renders the local veto state (-1,0,1).
@@ -4478,7 +4296,7 @@ class BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         else:
             return Decimal('-1.0')
 
-    def localNegativeVeto(self, d, wv, v):
+    def _localNegativeVeto(self, d, wv, v):
         """
         Parameters: d := diff observed, v (wv)  :=  (weak) veto threshold.
         Renders the local negative veto state (-1,0,1).
@@ -4539,7 +4357,7 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
             criteria = {}
             for g in coalition:
                 criteria[g] = perfTab.criteria[g]
-        self.relation = self.constructRelation(perfTab,percentile,Debug)
+        self.relation = self._constructRelation(perfTab,percentile,Debug)
         self.criteria = criteria
         self.evaluation = copy.deepcopy(perfTab.evaluation)
         try:
@@ -4559,7 +4377,7 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def constructRelation(self,t,percentile,Debug=False):
+    def _constructRelation(self,t,percentile,Debug=False):
         """
         Parameters: PerfTab.criteria, quantile (0 - 100)
         Renders the quantile-outranking relation from the data
@@ -4722,14 +4540,14 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         
         if vetoType == "bipolar":
             hasBipolarVeto = True    
-        self.relation = self.constructRelation(criteria,evaluation,hasBipolarVeto=hasBipolarVeto,hasSymmetricThresholds=hasSymmetricThresholds)
+        self.relation = self._constructRelation(criteria,evaluation,hasBipolarVeto=hasBipolarVeto,hasSymmetricThresholds=hasSymmetricThresholds)
         
         self.evaluation = evaluation
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def constructRelation(self,criteria,evaluation,hasBipolarVeto=False,hasSymmetricThresholds=True):
+    def _constructRelation(self,criteria,evaluation,hasBipolarVeto=False,hasSymmetricThresholds=True):
         """
         Parameters:
             PerfTab.criteria, PerfTab.evaluation.
@@ -4798,7 +4616,7 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                                 
                             d = evaluation[c][a] - evaluation[c][b]
 
-                            lc0 = self.localConcordance(d,ind,wp,p)
+                            lc0 = self._localConcordance(d,ind,wp,p)
                             #print 'a,b,c,w,d,ind,wp,p,localConcordance(d,ind,wp,p)',a,b,c,criteria[c]['weight'],d,ind,wp,p,lc0
                             concordance = concordance + (lc0 * criteria[c]['weight'])
                             try:
@@ -4819,14 +4637,14 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                                     v = vx + vy * abs(evaluation[c][a])
                             except:
                                 v = None
-                            vetoindex = self.localVeto(d,wv,v)
+                            vetoindex = self._localVeto(d,wv,v)
                             veto[c] = (vetoindex,d,wv,v)
                             if veto[c][0] >  Min:
                                  abvetos.append((c,veto[c]))
                                  largePerformanceDifferencesCount[a][b]['negative'] -= 1
                                 
                             if hasBipolarVeto:
-                                negativeVetoindex = self.localNegativeVeto(d,wv,v)
+                                negativeVetoindex = self._localNegativeVeto(d,wv,v)
                                 negativeVeto[c] = (negativeVetoindex,d,wv,v)
                                 if negativeVeto[c][0] > Min:
                                     abNegativeVetos.append((c,negativeVeto[c]))
@@ -4891,7 +4709,7 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
             self.largePerformanceDifferencesCount = largePerformanceDifferencesCount
         return relation
 
-    def localConcordance(self,d,ind,wp,p):
+    def _localConcordance(self,d,ind,wp,p):
         """
         Parameters:
             | d := diff observed, h := weak preference threshold,
@@ -4940,7 +4758,7 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                     return Max                
             
 
-    def localVeto(self, d, wv, v):
+    def _localVeto(self, d, wv, v):
         """
         Parameters:
             | d := diff observed, v (wv)  :=  (weak) veto threshold.
@@ -4970,7 +4788,7 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         else:
             return Min
 
-    def localNegativeVeto(self, d, wv, v):
+    def _localNegativeVeto(self, d, wv, v):
         """
         Parameters:
             | d := diff observed, v (wv)  :=  (weak) veto threshold.
@@ -5119,7 +4937,7 @@ class RandomElectre3OutrankingDigraph(Electre3OutrankingDigraph,PerformanceTable
         Max = Decimal('100.0')
         self.valuationdomain = {'min':Min,'med':Med,'max':Max}
         # generate relation
-        self.relation = self.constructRelation(tb.criteria,tb.evaluation)
+        self.relation = self._constructRelation(tb.criteria,tb.evaluation)
         
         # standard Digraph parameters initialization
         self.order = len(self.actions)
@@ -5225,12 +5043,12 @@ class EquiSignificanceMajorityOutrankingDigraph(BipolarOutrankingDigraph,Perform
             criteria = {}
             for g in coalition:
                 criteria[g] = perfTab.criteria[g]
-        #self.relation = self.constructRelation(criteria,perfTab.evaluation, self.weightPreorder)
+        #self.relation = self._constructRelation(criteria,perfTab.evaluation, self.weightPreorder)
         self.criteria = criteria
         self.convertWeightFloatToDecimal()
         self.evaluation = copy.deepcopy(perfTab.evaluation)
         self.convertEvaluationFloatToDecimal()
-        self.relation = self.constructRelation(perfTab,hasNoVeto=hasNoVeto)
+        self.relation = self._constructRelation(perfTab,hasNoVeto=hasNoVeto)
         methodData = {}
         methodData['parameter'] = {'valuationType':'integer','variant':'bipolar'}
         self.methodData = methodData
@@ -5239,7 +5057,7 @@ class EquiSignificanceMajorityOutrankingDigraph(BipolarOutrankingDigraph,Perform
         self.notGamma = self.notGammaSets()
 
 
-    def constructRelation(self,perfTab,hasNoVeto=False):
+    def _constructRelation(self,perfTab,hasNoVeto=False):
         """
         Parameters:
             PerfTab.criteria, PerfTab.evaluation.
@@ -5305,7 +5123,7 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     """
     
 
-    def constructRelation(self,criteria,evaluation,hasSymmetricThresholds=True,hasNoVeto=False):
+    def _constructRelation(self,criteria,evaluation,hasSymmetricThresholds=True,hasNoVeto=False):
         """
         Parameters:
             PerfTab.criteria, PerfTab.evaluation.
@@ -5414,8 +5232,8 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
                         d = evaluation[c][a] - evaluation[c][b]
 
-                        veto = veto + self.localVeto(d,wvv,vv)
-                        counter = self.localConcordance(d,ind,wp,p)
+                        veto = veto + self._localVeto(d,wvv,vv)
+                        counter = self._localConcordance(d,ind,wp,p)
                         if Debug:
                             print('--> c,a,b,evaluation[c][a],evaluation[c][b], d', c,a,b,evaluation[c][a],evaluation[c][b], d)
                             print('ind, wp, p, counter, veto', ind, wp, p, counter, veto)
@@ -5479,7 +5297,7 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
                         d = evaluation[c][a] - evaluation[c][b]
                             
-                        counter = self.localConcordance(d,ind,wp,p)
+                        counter = self._localConcordance(d,ind,wp,p)
                             
                         vn[c + '+'] = vn[c + '+'] - counter + Decimal('1.0')
                         vn[c + '-'] = vn[c + '-'] + counter
@@ -5541,7 +5359,7 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             relation[a][a] = Min
         return relation
 
-    def localConcordance(self,d,ind,wp,p):
+    def _localConcordance(self,d,ind,wp,p):
         """
         Parameters:
             | d := diff observed, h := indifference threshold,
@@ -5588,7 +5406,7 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 else:
                     return Decimal('1.0')
 
-    def localVeto(self, d, wv,v):
+    def _localVeto(self, d, wv,v):
         """
         Parameters: d := diff observed, v := veto threshold.
         Renders the local veto state
@@ -5622,7 +5440,7 @@ class UnanimousOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     temporary unanimous outranking digraphs
     """
 
-    def constructRelation(self,criteria,evaluation,hasSymmetricThresholds=True,hasNoVeto=True):
+    def _constructRelation(self,criteria,evaluation,hasSymmetricThresholds=True,hasNoVeto=True):
         """
         Parameters: PerfTab.criteria, PerfTab.evaluation.
         Renders the biploar valued outranking relation from the data
@@ -5675,7 +5493,7 @@ class UnanimousOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             
                         d = evaluation[c][a] - evaluation[c][b]
 
-                        lc0 = self.localConcordance(d,ind,wp,p)
+                        lc0 = self._localConcordance(d,ind,wp,p)
                             
                         counter += lc0
                         if not hasNoVeto:
@@ -5686,7 +5504,7 @@ class UnanimousOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                     v = vx + vy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                 else:
                                     v = vx + vy * abs(evaluation[c][a])
-                                veto = veto + self.localVeto(d, v)
+                                veto = veto + self._localVeto(d, v)
                             except:
                                 veto = veto + Decimal("0")
                     else:
@@ -5714,7 +5532,7 @@ class UnanimousOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             relation[a][a] = Min
         return relation
 
-    def localConcordance(self,d,ind,wp,p):
+    def _localConcordance(self,d,ind,wp,p):
         """
         Parameters: d := diff observed, h := indifference threshold,
         p := prefrence threshold.
@@ -5761,7 +5579,7 @@ class UnanimousOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
             
 
-    def localVeto(self, d, v):
+    def _localVeto(self, d, v):
         """
         Parameters: d := diff observed, v := veto threshold.
         Renders the local veto state
@@ -5832,11 +5650,11 @@ class NewRobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.ordinalRelation = copy.deepcopy(ordinal.relation)
         self.equisignificantRelation = copy.deepcopy(equisignificant.relation)
         self.unanimousRelation = copy.deepcopy(unanimous.relation)
-        self.relation = self.constructRelation()
+        self.relation = self._constructRelation()
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def constructRelation(self):
+    def _constructRelation(self):
         """
         Parameters: normal -, equisignificant - ordinal -, and unanimous outranking relation.
         Help method for constructing robust outranking relation.
@@ -5934,11 +5752,11 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.valuationdomain = {'min':Decimal("-3"), 'med':Decimal("0"), 'max':Decimal("3")}
         self.cardinalRelation = copy.deepcopy(cardinal.relation)
         self.cardinalValuationdomain =  copy.deepcopy(cardinal.valuationdomain)
-        self.relation = self.constructRelation(unanimous, ordinal, cardinal,hasNoVeto=hasNoVeto)
+        self.relation = self._constructRelation(unanimous, ordinal, cardinal,hasNoVeto=hasNoVeto)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def constructRelation(self, unanimous, ordinal, cardinal,hasNoVeto=True):
+    def _constructRelation(self, unanimous, ordinal, cardinal,hasNoVeto=True):
         """
         Parameters: normal -, ordinal -, and unanimous outranking relation.
         Help method for constructing robust outranking relation.
@@ -6500,7 +6318,7 @@ class DissimilarityOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         Max = Decimal('100.0')
         self.valuationdomain = {'min':Min,'med':Med,'max':Max}
         weightPreorder = perfTab.computeWeightPreorder()
-        self.relation = self.constructRelation(perfTab.criteria, perfTab.evaluation)
+        self.relation = self._constructRelation(perfTab.criteria, perfTab.evaluation)
         self.criteria = perfTab.actions
         self.evaluation = perfTab.evaluation 
         actions = []
@@ -6511,7 +6329,7 @@ class DissimilarityOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def constructRelation(self,criteria,evaluation):
+    def _constructRelation(self,criteria,evaluation):
         """
         Renders the valued dissimilarity relation between criteria.
         """
@@ -6543,7 +6361,7 @@ class DissimilarityOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             qgb = qgbx + qgby * evaluation[gb][x]
                             h = max(hga,hgb)
                             q = max(qga,qgb)
-                            counter = counter + self.localDissimilarity(d, h, q)
+                            counter = counter + self._localDissimilarity(d, h, q)
                         else:
                             counter = counter + Decimal('0.5')
                     relation[ga][gb] = Decimal(str((round((counter/na*(Max-Min)))))) + Min
@@ -6552,7 +6370,7 @@ class DissimilarityOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         return relation
                 
 
-    def localDissimilarity(self, d, h, q):
+    def _localDissimilarity(self, d, h, q):
         """
         Renders local dissimilarity between two criterial evaluations
         """
@@ -6612,12 +6430,12 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph,PerformanceTableau):
         weightPreorder = perfTab.computeWeightPreorder()
         self.criteria = copy.deepcopy(perfTab.criteria)
         self.evaluation = copy.deepcopy(perfTab.evaluation)
-        self.relation = self.constructRelation()
+        self.relation = self._constructRelation()
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def constructRelation(self):
+    def _constructRelation(self):
         """
         Renders the valued dissimilarity relation between criteria.
         """
@@ -6658,7 +6476,7 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph,PerformanceTableau):
                                 p = px + py * evaluation[g][a]
                             except:
                                 p = None
-                            index = self.localDissimilarity(d,h,wp,p)
+                            index = self._localDissimilarity(d,h,wp,p)
 ##                             print d,h,wp,p
 ##                             print counter, index, criteria[g]['weight']
                             counter += index * criteria[g]['weight']
@@ -6671,7 +6489,7 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph,PerformanceTableau):
         return relation
                 
 
-    def localDissimilarity(self, d, h, wp, p):
+    def _localDissimilarity(self, d, h, wp, p):
         """
         Renders local dissimilarity between two criterial evaluations
         """
@@ -6799,7 +6617,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                 perfTab.criteria[g]['weight'] = rw
 ##                if Debug:
 ##                    print(self.criteria[g]['weight'],rw)
-            srelation = self.constructRelation(perfTab.criteria,\
+            srelation = self._constructRelation(perfTab.criteria,\
                                                perfTab.evaluation,\
                                                hasNoVeto = hasNoVeto,\
                                                hasBipolarVeto = hasBipolarVeto,\
