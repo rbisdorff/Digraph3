@@ -6864,6 +6864,13 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     def computeCDF(self,x,y,rValue):
         """
         computes the probability of a rValue of the sampled r(x,y) valuations.
+
+        *Parameters*:
+
+            * action key x
+            * action key y
+            * r(x,y)
+            
         """
         from math import floor
         fval = (-100.0 + (float(rValue) - float(self.valuationdomain['min']))\
