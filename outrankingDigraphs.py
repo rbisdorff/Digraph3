@@ -7034,8 +7034,8 @@ if __name__ == "__main__":
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    #t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=13,weightDistribution='equiobjectives')
-    #t.saveXMCDA2('test')
+    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=13,weightDistribution='equiobjectives')
+    t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t)
     g.recodeValuation(-1,1)
