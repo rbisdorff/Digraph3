@@ -540,7 +540,7 @@ def testStochasticOutrankingDigraphs():
     g = BipolarOutrankingDigraph(t)
     g.recodeValuation(-1,1)
     g.showRelationTable()
-    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
+    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=False,\
                                              sampleSize=50,\
                                              errorLevel=0.05,\
                                              Debug=False,\
@@ -548,6 +548,21 @@ def testStochasticOutrankingDigraphs():
     gmc.showRelationTable()
     gmc.showRelationStatistics('medians')
     gmc.showRelationStatistics('likelihoods')
+    for x in gmc.actions:
+        for y in gmc.actions:
+            print('==>>',x,y)
+            print('Q4',gmc.relationStatistics[x][y]['Q4'])
+            print('Q3',gmc.relationStatistics[x][y]['Q3'])
+            print('probQ3',gmc.computeCDF(x,y,gmc.relationStatistics[x][y]['Q3']))
+            print('Q2',gmc.relationStatistics[x][y]['median'])
+            print('mean',gmc.relationStatistics[x][y]['mean'])
+            print('Q1',gmc.relationStatistics[x][y]['Q1'])
+            print('probQ1',gmc.computeCDF(x,y,gmc.relationStatistics[x][y]['Q1']))
+            print('Q0',gmc.relationStatistics[x][y]['Q0'])
+            print('pv',gmc.relationStatistics[x][y]['likelihood'])
+            print('prob0',gmc.computeCDF(x,y,0.0))            
+            print('sd',gmc.relationStatistics[x][y]['sd'])
+    
     grbc = RankingByChoosingDigraph(g)
     grbc.showPreOrder()
     gmcrbc = RankingByChoosingDigraph(gmc)
