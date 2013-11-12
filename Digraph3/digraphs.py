@@ -1460,7 +1460,7 @@ class Digraph(object):
             for y in actions:
                 relation[x][y] = Decimal(str(self.relation[x][y]))
         self.relation = relation
-        return relation
+        #return relation
 
     def bipolarKCorrelation(self, digraph,Debug=False):
         """
