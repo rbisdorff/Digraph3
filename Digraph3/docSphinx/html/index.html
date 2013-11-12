@@ -154,7 +154,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -929,7 +929,7 @@ Renders the negation of a choice v characteristic&#8217;s vector.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.convertRelationToDecimal">
 <tt class="descname">convertRelationToDecimal</tt><big>(</big><big>)</big><a class="headerlink" href="#digraphs.Digraph.convertRelationToDecimal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert the float valued self.relation in a decimal valued one.</p>
+<dd><p>Converts the float valued self.relation in a decimal valued one.</p>
 </dd></dl>
 
 <dl class="method">
@@ -995,7 +995,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1725,7 +1725,7 @@ equivalence valuations.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1756,7 +1756,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1810,21 +1810,6 @@ AlphaCut=False/True,
 
 StrictCut=False/True</pre>
 </div>
-<dl class="method">
-<dt id="digraphs.PolarisedDigraph.constructAlphaCutRelation">
-<tt class="descname">constructAlphaCutRelation</tt><big>(</big><em>relationin</em>, <em>level</em>, <em>KeepValues=True</em>, <em>AlphaCut=False</em>, <em>StrictCut=False</em><big>)</big><a class="headerlink" href="#digraphs.PolarisedDigraph.constructAlphaCutRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameters: relation and cut level.
-Renders the polarised relation.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphs.PolarisedDigraph.constructBetaCutRelation">
-<tt class="descname">constructBetaCutRelation</tt><big>(</big><em>relationin</em>, <em>level</em>, <em>KeepValues=True</em>, <em>AlphaCut=False</em>, <em>StrictCut=False</em><big>)</big><a class="headerlink" href="#digraphs.PolarisedDigraph.constructBetaCutRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameters: relation and cut level.
-Flags: KeepValues (True), AlphaCut(False, unilateral cut), StrictCut (False)
-Renders the polarised relation.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -1854,7 +1839,7 @@ and the evaluation dictionary into self.</p>
 
 <dl class="class">
 <dt id="digraphs.RandomDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">RandomDigraph</tt><big>(</big><em>order=10</em>, <em>arcProbability=0.5</em>, <em>hasIntegerValuation=False</em><big>)</big><a class="headerlink" href="#digraphs.RandomDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">RandomDigraph</tt><big>(</big><em>order=9</em>, <em>arcProbability=0.5</em>, <em>hasIntegerValuation=True</em>, <em>Bipolar=False</em><big>)</big><a class="headerlink" href="#digraphs.RandomDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary crisp (irreflexive) random digraphs.</p>
@@ -2380,7 +2365,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3327,7 +3312,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -3556,6 +3541,20 @@ If None, a random instance is generated.</li>
 <li>other standard parameters from the BipolarOutrankingDigraph class (see documentation).</li>
 </ul>
 </div></blockquote>
+<dl class="method">
+<dt id="outrankingDigraphs.StochasticBipolarOutrankingDigraph.computeCDF">
+<tt class="descname">computeCDF</tt><big>(</big><em>x</em>, <em>y</em>, <em>rValue</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.StochasticBipolarOutrankingDigraph.computeCDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>computes the probability of a rValue of the sampled r(x,y) valuations.</p>
+<p><em>Parameters</em>:</p>
+<blockquote>
+<div><ul class="simple">
+<li>action key x</li>
+<li>action key y</li>
+<li>r(x,y)</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
 <dl class="method">
 <dt id="outrankingDigraphs.StochasticBipolarOutrankingDigraph.showRelationStatistics">
 <tt class="descname">showRelationStatistics</tt><big>(</big><em>argument='likelihoods'</em>, <em>actionsSubset=None</em>, <em>hasLatexFormat=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.StochasticBipolarOutrankingDigraph.showRelationStatistics" title="Permalink to this definition">¶</a></dt>
