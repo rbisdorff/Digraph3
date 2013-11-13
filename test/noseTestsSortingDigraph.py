@@ -68,7 +68,7 @@ def testIConstructorLowerOpenCategories():
     print('*-------- Testing lowerOpen Categories -------')
     s = SortingDigraph(scaleSteps=5)
     s.criteriaCategoryLimits['lowerClosed']= False
-    s.relation = s.constructRelation(s.criteria,s.evaluation,terminal=s.actionsOrig,initial=s.profileLimits,hasNoVeto=False, hasBipolarVeto=True)
+    s.relation = s._constructRelation(s.criteria,s.evaluation,terminal=s.actionsOrig,initial=s.profileLimits,hasNoVeto=False, hasBipolarVeto=True)
     s.sorting = s.computeSortingCharacteristics()
     s.showSorting(Reverse=True)
     s.showCriteriaCategoryLimits()

@@ -213,14 +213,14 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             Med = (Max + Min)/Decimal('2.0')
             self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
             if lowerClosed:
-                self.relation = self.constructRelation(self.criteria,
+                self.relation = self._constructRelation(self.criteria,
                                                        self.evaluation,
                                                        initial=self.actionsOrig,
                                                        terminal=self.profileLimits,
                                                        hasNoVeto=hasNoVeto,
                                                        hasBipolarVeto=True)
             else:
-                self.relation = self.constructRelation(self.criteria,
+                self.relation = self._constructRelation(self.criteria,
                                                        self.evaluation,
                                                        terminal=self.actionsOrig,
                                                        initial=self.profileLimits,
