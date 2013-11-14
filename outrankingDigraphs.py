@@ -6574,7 +6574,8 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                                      hasBipolarVeto = hasBipolarVeto,\
                                      Normalized=Normalized)
         self.name = bodg.name + '_MC'
-        self.sampleSize = sampleSize 
+        self.sampleSize = sampleSize
+        self.errorLevel = errorLevel
         self.actions = deepcopy(bodg.actions)
         self.order = len(self.actions)
         self.valuationdomain = deepcopy(bodg.valuationdomain)
@@ -6745,6 +6746,25 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.relationStatistics[x][y]['Q3'] = self._computeQuantile(0.75,observations)
         self.relationStatistics[x][y]['Q4'] = float(max(observations))
 
+    def showRelationTable(self,IntegerValues=False,
+                          actionsSubset= None,
+                          hasLPDDenotation=False,
+                          hasLatexFormat=False,
+                          hasIntegerValuation=False,
+                          relation=None):
+        """
+        specialising BipolarOutrankingDigraph.showRelationTable() for stochstic instances.
+        """
+        print('Stochastic outranking digraph %s' % self.name)
+        print('Sampling size: %d' % self.sampleSize)
+        print('Error level of Condorcet digraph: %.2f' % self.errorLevel)
+        BipolarOutrankingDigraph.showRelationTable(self,IntegerValues=IntegerValues,
+                          actionsSubset= actionsSubset,
+                          hasLPDDenotation=hasLPDDenotation,
+                          hasLatexFormat=hasLatexFormat,
+                          hasIntegerValuation=hasIntegerValuation,
+                          relation=relation)
+        
 
     def showRelationStatistics(self,argument='likelihoods',
                           actionsSubset= None,
@@ -6778,7 +6798,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             
         print('* ---- Relation statistics -----\n', end=' ')
         if argument == 'likelihoods':
-            print(' p-val | ', end=' ')
+            print(' 0 p-val | ', end=' ')
         elif argument == 'means':
             print(' mean  | ', end=' ')
         elif argument == 'medians':
