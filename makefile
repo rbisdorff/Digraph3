@@ -24,8 +24,8 @@ docPDF:
 		dvipdf digraphsdoc.dvi
 
 sphinx:
-		cd docSphinx; \
-		sphinx3-build -E . html/
+		(cd docSphinx; \
+		sphinx-build -E . html/ )
 
 tests:
 		cp digraphs.py test/
