@@ -1483,7 +1483,18 @@ class PerformanceTableau(object):
         fo.close()
         print('File: ' + nameExt + ' saved !')
 
-    def saveXMCDA2(self,fileName='temp',category='XMCDA 2.0 format',user='digraphs Module (RB)',version='saved from Python session',title='Performance Tableau in XMCDA-2.0 format.',variant='Rubis',valuationType='bipolar',servingD3=True,isStringIO=False,stringNA='NA',comment='produced by saveXMCDA2()',hasVeto=True):
+    def saveXMCDA2(self,fileName='temp',\
+                   category='XMCDA 2.0 format',\
+                   user='digraphs Module (RB)',\
+                   version='saved from Python session',\
+                   title='Performance Tableau in XMCDA-2.0 format.',\
+                   variant='Rubis',\
+                   valuationType='bipolar',\
+                   servingD3=True,\
+                   isStringIO=False,\
+                   stringNA='NA',\
+                   comment='produced by saveXMCDA2()',\
+                   hasVeto=True):
         """
         save performance tableau object self in XMCDA 2.0 format.
         """

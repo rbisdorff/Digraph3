@@ -23,6 +23,7 @@
 __version__ = "$Revision: 1.43 $"
 
 from digraphs import *
+from xmlrpc.client import ServerProxy
 
 #-------------------------------------------
         
@@ -6858,7 +6859,134 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             
                 
         print('\n')
+
+class RubisRestServer(ServerProxy):
+    """
+    Specialization of the standard OutrankingDigraph for accessing on-line
+    a Rubis Rest Solver
+
+    *Parameters*:
+    
+        * performanceTableau (fileName of valid XMCDA2 code, required)
+        * coalition (sublist of criteria, optional)
+
+
+    """
+    def __init__(self,host="http://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=False):
+        """
+        Rubis Rest Server connection.
+        """
+        import sys,xmlrpc.client
+        self.server = xmlrpc.client.ServerProxy(host)
         
+        if Debug:
+            print("host=%s" % host)
+            try:           
+                response = self.server.hello()
+                print (response['message'])
+                print("available service ports")
+                for m in self.server.system.listMethods():
+                    if 'system' not in m:
+                        print (m, self.server.system.methodHelp(m))
+
+            except xmlrpc.client.Fault as faultobj:
+                print ("Rubis Server error:", faultobj.faultCode)
+                print (">>> %s <<<" % faultobj.faultString)
+                return None
+
+            except:
+                print ("Client Error: '%s/%s'" % (sys.exc_info()[0],sys.exc_info()[1]))
+                return None
+            
+    def ping(self,Debug=False):
+        response = self.server.hello()
+        print(response['message'])
+        if Debug:
+            print("available service ports")
+            for m in self.server.system.listMethods():
+                if 'system' not in m:
+                    print (m, self.server.system.methodHelp(m))
+
+    def submitProblem(self,perfTab,\
+                      valuation='bipolar',\
+                      hasVeto=True,\
+                      argTitle='XMCDA 2.0 encoding',\
+                      Debug=False):
+        """
+        To directly submit PerformanceTableau instances.
+        """
+        self.name = perfTab.name
+        self.problemText = perfTab.saveXMCDA2(isStringIO=True,\
+                                         valuationType=valuation,\
+                                         servingD3=False,\
+                                         comment='Rubis Rest Server generated',\
+                                         hasVeto = hasVeto,
+                                         title = argTitle)
+        arg = {'problemFile': self.problemText}
+        if Debug:
+            print(arg)
+        answer = self.server.submitProblem(arg)
+        self.ticket = answer['ticket'] 
+        print(answer['message'])
+        print(answer['ticket'])
+        fileNameTicket = self.name+'Ticket.txt'
+        fo = open(fileNameTicket,'w')
+        fo.write(answer['ticket'])
+        fo.close()
+
+    def submitXMCDA2Problem(self,fileName,Debug=False):
+        """
+        To submit stored xmcda2 encoded performanceTableaux.
+        By default an .xml file extension is assumed!
+        """
+        print("Calling submitXMCDA2Problem(%s)" % fileName)
+        self.name = fileName
+        fileNameExt = fileName + '.xml'
+        fi = open(fileNameExt,'r')
+        self.problemText = fi.read()
+        fi.close()
+        arg = {'problemFile': self.problemText}
+        if Debug:
+            print(arg)
+        answer = self.server.submitProblem(arg)
+        self.ticket = answer['ticket'] 
+        print(answer['message'])
+        print(answer['ticket'])
+        fileNameTicket = fileName+'Ticket.txt'
+        fo = open(fileNameTicket,'w')
+        fo.write(answer['ticket'])
+        fo.close()
+
+    def _saveXMCDA2Solution(self,fileName=None,Debug=False):
+        if fileName == None:
+            fileNameExt = self.name+"Solution.xml"
+        else:
+            fileNameExt = fileName+"Solution.xml"
+        print("saving solution in file %s" %fileNameExt)
+        arg = {'ticket': self.ticket}
+        answer = self.server.requestSolution(arg)
+        print(answer['message'])
+        self.solution = answer['solution']
+        if Debug:
+            print(self.solution)
+        fo = open(fileNameExt,'w')
+        fo.write(self.solution)
+        fo.close()
+
+    def viewSolution(self,ticket=None):
+        import os,webbrowser
+        newTab = 2 # open in a new tab if possible
+        if ticket != None:
+            self.ticket = ticket
+        arg = {'ticket': self.ticket}
+        answer = self.server.requestSolutionHTML(arg)
+        fileName = str(self.name)+str(self.ticket)+"Solution.html"
+        fo = open(fileName,'w')
+        fo.write(answer['html'])
+        fo.close()
+        url = "file://"+os.getcwd()+"/%s" % fileName
+        webbrowser.open(url,new=newTab)
+
  
 #----------test outrankingDigraphs classes ----------------
 if __name__ == "__main__":
@@ -6867,41 +6995,50 @@ if __name__ == "__main__":
     from time import time
     from outrankingDigraphs import StochasticBipolarOutrankingDigraph
     from weaklyTransitiveDigraphs import RankingByChoosingDigraph
+    from outrankingDigraphs import RubisRestServer
     
     print('*-------- Testing classes and methods -------')
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=13,weightDistribution='equiobjectives')
+    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=7,weightDistribution='equiobjectives')
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
-    g = BipolarOutrankingDigraph(t)
-    g.recodeValuation(-1,1)
-    g.showRelationTable()
-    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True, sampleSize=100,errorLevel=0.1,Debug=False,samplingSeed=1)
-    gmc.showRelationTable()
-    gmc.recodeValuation(-100,100)
-    gmc.showRelationStatistics('medians')
-    gmc.showRelationStatistics('likelihoods')
-    for x in gmc.actions:
-        for y in gmc.actions:
-            print('==>>',x,y)
-            print('Q4',gmc.relationStatistics[x][y]['Q4'])
-            print('Q3',gmc.relationStatistics[x][y]['Q3'])
-            print('probQ3',gmc.computeCDF(x,y,gmc.relationStatistics[x][y]['Q3']))
-            print('Q2',gmc.relationStatistics[x][y]['median'])
-            print('mean',gmc.relationStatistics[x][y]['mean'])
-            print('Q1',gmc.relationStatistics[x][y]['Q1'])
-            print('probQ1',gmc.computeCDF(x,y,gmc.relationStatistics[x][y]['Q1']))
-            print('Q0',gmc.relationStatistics[x][y]['Q0'])
-            print('pv',gmc.relationStatistics[x][y]['likelihood'])
-            print('prob0',gmc.computeCDF(x,y,0.0))            
-            print('sd',gmc.relationStatistics[x][y]['sd'])
- 
-    grbc = RankingByChoosingDigraph(g)
-    grbc.showPreOrder()
-    gmcrbc = RankingByChoosingDigraph(gmc)
-    gmcrbc.showPreOrder()
+    solver = RubisRestServer(Debug=True)
+    solver.ping()
+    solver.submitProblem(t,Debug=True)
+    #solver.submitXMCDA2Problem('test',Debug=False)
+    sleep(10)
+    solver.viewSolution()
+    
+    
+##    g = BipolarOutrankingDigraph(t)
+##    g.recodeValuation(-1,1)
+##    g.showRelationTable()
+##    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True, sampleSize=100,errorLevel=0.1,Debug=False,samplingSeed=1)
+##    gmc.showRelationTable()
+##    gmc.recodeValuation(-100,100)
+##    gmc.showRelationStatistics('medians')
+##    gmc.showRelationStatistics('likelihoods')
+##    for x in gmc.actions:
+##        for y in gmc.actions:
+##            print('==>>',x,y)
+##            print('Q4',gmc.relationStatistics[x][y]['Q4'])
+##            print('Q3',gmc.relationStatistics[x][y]['Q3'])
+##            print('probQ3',gmc.computeCDF(x,y,gmc.relationStatistics[x][y]['Q3']))
+##            print('Q2',gmc.relationStatistics[x][y]['median'])
+##            print('mean',gmc.relationStatistics[x][y]['mean'])
+##            print('Q1',gmc.relationStatistics[x][y]['Q1'])
+##            print('probQ1',gmc.computeCDF(x,y,gmc.relationStatistics[x][y]['Q1']))
+##            print('Q0',gmc.relationStatistics[x][y]['Q0'])
+##            print('pv',gmc.relationStatistics[x][y]['likelihood'])
+##            print('prob0',gmc.computeCDF(x,y,0.0))            
+##            print('sd',gmc.relationStatistics[x][y]['sd'])
+## 
+##    grbc = RankingByChoosingDigraph(g)
+##    grbc.showPreOrder()
+##    gmcrbc = RankingByChoosingDigraph(gmc)
+##    gmcrbc.showPreOrder()
     
 ##    #t = RandomPerformanceTableau(numberOfActions=10)
 ##    t.saveXMCDA2('test',servingD3=False)
