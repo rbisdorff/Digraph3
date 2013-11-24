@@ -6872,8 +6872,8 @@ class RubisRestServer(ServerProxy):
 
     *Parameters*:
     
-        | performanceTableau (fileName of valid XMCDA2 code, required)
-        | coalition (sublist of criteria, optional)
+        * performanceTableau (fileName of valid XMCDA2 code, required)
+        * coalition (sublist of criteria, optional)
 
     Example Python3 session:
     
@@ -6887,20 +6887,16 @@ class RubisRestServer(ServerProxy):
         * R. Bisdorff (c) 2009-2013                     *
         * November 2013, version REST/D4 1.1            *
         *************************************************
-
         >>> from perfTabs import RandomCBPerformanceTableau
         >>> t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=7)
-
         >>> solver.submitProblem(t)
         The problem submission was successful !
         Server ticket: l4qfAP0RfBBvyjsL
-
         >>> solver.viewSolution()
         Created new window in existing browser session.
         >>> solver.saveXMCDA2Solution()
         The solution request was successful.
         Saving XMCDA 2.0 encoded solution in file Solutionl4qfAP0RfBBvyjsL.xml
-
         >>> ...
 
     """
@@ -6946,9 +6942,10 @@ class RubisRestServer(ServerProxy):
                       Debug=False):
         """
         Submit PerformanceTableau class instances.
+
         *Parameter*:
 
-             | valuation: 'bipolar', 'robust', 'integer'
+             * valuation: 'bipolar', 'robust', 'integer'
 
         """
         self.name = perfTab.name
@@ -7023,11 +7020,14 @@ class RubisRestServer(ServerProxy):
     def showSolution(self,ticket=None,valuation=None):
         """
         Show XMCDA 2.0 solution in a default browser window.
-        The valuation parameter sets the correct style sheet.
+        The valuation parameter may set the correct style sheet.
+        
 
         *Parameter*:
         
-            | valuation: 'bipolar' or 'robust',
+            * valuation: 'bipolar' or 'robust'.
+              By default the valuation type is set
+              automatically at problem submission.
 
         """
         import os,webbrowser
