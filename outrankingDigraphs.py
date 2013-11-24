@@ -6968,7 +6968,7 @@ class RubisRestServer(ServerProxy):
         fo.write(answer['ticket'])
         fo.close()
 
-    def submitXMCDA2Problem(self,fileName,Debug=False,valuation='bipolar'):
+    def submitXMCDA2Problem(self,fileName,valuation=None,Debug=False):
         """
         Submit stored XMCDA 2.0 encoded performance tableau.
 
@@ -7035,7 +7035,10 @@ class RubisRestServer(ServerProxy):
         if ticket != None:
             self.ticket = ticket
         if valuation == None:
-            valuation = self.valuation
+            try:
+                valuation = self.valuation
+            except:
+                valuation = 'bipolar'
         arg = {'ticket': self.ticket, 'valuation': valuation}
         answer = self._server.requestSolutionHTML(arg)
         try:
@@ -7062,14 +7065,14 @@ if __name__ == "__main__":
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=5,\
-                                   numberOfCriteria=7,\
-                                   weightDistribution='equiobjectives',
-                                   )
-    t.saveXMCDA2('test')
+    #t = RandomCBPerformanceTableau(numberOfActions=5,\
+    #                               numberOfCriteria=7,\
+    #                               weightDistribution='equiobjectives',
+    #                               )
+    #t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
-    solver = RubisRestServer(Debug=True)
-    solver.ping()
+    solver = RubisRestServer(host="http://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=True)
+    #solver.ping()
     solver.submitProblem(t,valuation='robust',Debug=True)
     #solver.submitXMCDA2Problem('test',Debug=False)
     #solver.viewSolution()
