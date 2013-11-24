@@ -6952,6 +6952,7 @@ class RubisRestServer(ServerProxy):
                                          comment='Rubis Rest Server generated',\
                                          hasVeto = hasVeto,
                                          title = argTitle)
+        self.valuation = valuation
         arg = {'problemFile': self.problemText}
         if Debug:
             print(arg)
@@ -6964,7 +6965,7 @@ class RubisRestServer(ServerProxy):
         fo.write(answer['ticket'])
         fo.close()
 
-    def submitXMCDA2Problem(self,fileName,Debug=False):
+    def submitXMCDA2Problem(self,fileName,Debug=False,valuation='bipolar'):
         """
         Submit stored XMCDA 2.0 encoded performance tableau.
 
@@ -6979,6 +6980,7 @@ class RubisRestServer(ServerProxy):
         fi = open(fileNameExt,'r')
         self.problemText = fi.read()
         fi.close()
+        self.valuation = valuation
         arg = {'problemFile': self.problemText}
         if Debug:
             print(arg)
@@ -7012,19 +7014,22 @@ class RubisRestServer(ServerProxy):
         except:
             print(answer['message'])
 
-    def viewSolution(self,ticket=None,valuation='bipolar'):
+    def showSolution(self,ticket=None,valuation=None):
         """
-        View XMCDA 2.0 solution in a default browser window.
+        Show XMCDA 2.0 solution in a default browser window.
+        The valuation parameter sets the correct style sheet.
 
         *Parameter":
         
-            * valuation: 'bipolar' or 'robust'
-            
+            * valuation: 'bipolar' or 'robust',
+
         """
         import os,webbrowser
         newTab = 2 # open in a new tab if possible
         if ticket != None:
             self.ticket = ticket
+        if valuation == None:
+            valuation = self.valuation
         arg = {'ticket': self.ticket, 'valuation': valuation}
         answer = self.server.requestSolutionHTML(arg)
         try:
