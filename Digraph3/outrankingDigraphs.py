@@ -6905,17 +6905,17 @@ class RubisRestServer(ServerProxy):
         Rubis Rest Server connection.
         """
         import sys,xmlrpc.client
-        self.server = xmlrpc.client.ServerProxy(host)
+        self._server = xmlrpc.client.ServerProxy(host)
         
         if Debug:
             print("host=%s" % host)
             try:           
-                response = self.server.hello()
+                response = self._server.hello()
                 print (response['message'])
                 print("available service ports")
-                for m in self.server.system.listMethods():
+                for m in self._server.system.listMethods():
                     if 'system' not in m:
-                        print (m, self.server.system.methodHelp(m))
+                        print (m, self._server.system.methodHelp(m))
 
             except xmlrpc.client.Fault as faultobj:
                 print ("Rubis Server error:", faultobj.faultCode)
@@ -6927,13 +6927,13 @@ class RubisRestServer(ServerProxy):
                 return None
             
     def ping(self,Debug=False):
-        response = self.server.hello()
+        response = self._server.hello()
         print(response['message'])
         if Debug:
             print("available service ports")
-            for m in self.server.system.listMethods():
+            for m in self._server.system.listMethods():
                 if 'system' not in m:
-                    print (m, self.server.system.methodHelp(m))
+                    print (m, self._server.system.methodHelp(m))
 
     def submitProblem(self,perfTab,\
                       valuation='bipolar',\
@@ -6959,7 +6959,7 @@ class RubisRestServer(ServerProxy):
         arg = {'problemFile': self.problemText}
         if Debug:
             print(arg)
-        answer = self.server.submitProblem(arg)
+        answer = self._server.submitProblem(arg)
         self.ticket = answer['ticket'] 
         print(answer['message'])
         print('Server ticket: %s' % answer['ticket'])
@@ -6987,7 +6987,7 @@ class RubisRestServer(ServerProxy):
         arg = {'problemFile': self.problemText}
         if Debug:
             print(arg)
-        answer = self.server.submitProblem(arg)
+        answer = self._server.submitProblem(arg)
         self.ticket = answer['ticket'] 
         print(answer['message'])
         print(answer['ticket'])
@@ -7005,7 +7005,7 @@ class RubisRestServer(ServerProxy):
         else:
             fileNameExt = fileName+"Solution.xml"
         arg = {'ticket': self.ticket}
-        answer = self.server.requestSolution(arg)
+        answer = self._server.requestSolution(arg)
         try:
             self.solution = answer['solution']
             if Debug:
@@ -7037,7 +7037,7 @@ class RubisRestServer(ServerProxy):
         if valuation == None:
             valuation = self.valuation
         arg = {'ticket': self.ticket, 'valuation': valuation}
-        answer = self.server.requestSolutionHTML(arg)
+        answer = self._server.requestSolutionHTML(arg)
         try:
             fileName = str(self.name)+str(self.ticket)+"Solution.html"
             fo = open(fileName,'w')
