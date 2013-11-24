@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1.625',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -1020,8 +1018,10 @@ Returns a boolean value</p>
 <dl class="method">
 <dt id="digraphs.Digraph.dominantChoices">
 <tt class="descname">dominantChoices</tt><big>(</big><em>S</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.dominantChoices" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates all minimal dominant choices of a bipolar valued digraph.
-Initiate with S = self.actions,copy().</p>
+<dd><dl class="docutils">
+<dt>Generates all minimal dominant choices of a bipolar valued digraph.</dt>
+<dd>Initiate with S = self.actions,copy().</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1444,8 +1444,10 @@ Renders the sharpest of two characteristic vectors v and w.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.showMIS">
 <tt class="descname">showMIS</tt><big>(</big><em>withListing=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.showMIS" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints all maximal independent choices
-Result in self.misset.</p>
+<dd><dl class="docutils">
+<dt>Prints all maximal independent choices</dt>
+<dd>Result in self.misset.</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1493,15 +1495,19 @@ Result in self.domirset.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.showMinAbs">
 <tt class="descname">showMinAbs</tt><big>(</big><em>withListing=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.showMinAbs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints minimal absorbent choices:
-Result in self.absset.</p>
+<dd><dl class="docutils">
+<dt>Prints minimal absorbent choices:</dt>
+<dd>Result in self.absset.</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showMinDom">
 <tt class="descname">showMinDom</tt><big>(</big><em>withListing=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.showMinDom" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints all minimal dominant choices:
-Result in self.domset.</p>
+<dd><dl class="docutils">
+<dt>Prints all minimal dominant choices:</dt>
+<dd>Result in self.domset.</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2190,10 +2196,12 @@ and a gamma function (dictionary) from vertices to subsets of vertices.</p>
 <dl class="method">
 <dt id="graphs.Graph.chordlessPaths">
 <tt class="descname">chordlessPaths</tt><big>(</big><em>Pk</em>, <em>v0</em>, <em>Comments=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#graphs.Graph.chordlessPaths" title="Permalink to this definition">¶</a></dt>
-<dd><p>recursice chordless precycle (len &gt; 3) construction:
-Pk is the current pre chordless cycle
+<dd><dl class="docutils">
+<dt>recursice chordless precycle (len &gt; 3) construction:</dt>
+<dd>Pk is the current pre chordless cycle
 v0 is the initial vertex of the precycle
-vn is the last vertex of the precycle</p>
+vn is the last vertex of the precycle</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2371,7 +2379,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3066,7 +3074,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4058,7 +4066,7 @@ of the principal orders of in- and outdegrees.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2012, Raymond Bisdorff.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
     </div>
   </body>
 </html>
