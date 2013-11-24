@@ -2371,7 +2371,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3066,7 +3066,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -3294,7 +3294,7 @@ a Rubis Rest Solver</p>
 <span class="go">* November 2013, version REST/D4 1.1            *</span>
 <span class="go">*************************************************</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>                                           <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">submitProblem</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="go">The problem submission was successful !</span>
 <span class="go">Server ticket: l4qfAP0RfBBvyjsL</span>
@@ -3302,7 +3302,7 @@ a Rubis Rest Solver</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Created</span> <span class="n">new</span> <span class="n">window</span> <span class="ow">in</span> <span class="n">existing</span> <span class="n">browser</span> <span class="n">session</span><span class="o">.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">saveXMCDA2Solution</span><span class="p">()</span>
 <span class="go">The solution request was successful.</span>
-<span class="go">Saving XMCDA 2.0 encoded solution in file l4qfAP0RfBBvyjsL_Solution.xml</span>
+<span class="go">Saving XMCDA 2.0 encoded solution in file Solutionl4qfAP0RfBBvyjsL.xml</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
 </pre></div>
 </div>
@@ -3320,6 +3320,19 @@ a Rubis Rest Solver</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="outrankingDigraphs.RubisRestServer.showSolution">
+<tt class="descname">showSolution</tt><big>(</big><em>ticket=None</em>, <em>valuation=None</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.RubisRestServer.showSolution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show XMCDA 2.0 solution in a default browser window.
+The valuation parameter sets the correct style sheet.</p>
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>Parameter&#8221;:</p>
+<blockquote>
+<div><ul class="simple">
+<li>valuation: &#8216;bipolar&#8217; or &#8216;robust&#8217;,</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
 <dt id="outrankingDigraphs.RubisRestServer.submitProblem">
 <tt class="descname">submitProblem</tt><big>(</big><em>perfTab</em>, <em>valuation='bipolar'</em>, <em>hasVeto=True</em>, <em>argTitle='XMCDA 2.0 encoding'</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.RubisRestServer.submitProblem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Submit PerformanceTableau class instances.
@@ -3333,18 +3346,12 @@ a Rubis Rest Solver</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.RubisRestServer.submitXMCDA2Problem">
-<tt class="descname">submitXMCDA2Problem</tt><big>(</big><em>fileName</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.RubisRestServer.submitXMCDA2Problem" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">submitXMCDA2Problem</tt><big>(</big><em>fileName</em>, <em>Debug=False</em>, <em>valuation='bipolar'</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.RubisRestServer.submitXMCDA2Problem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Submit stored XMCDA 2.0 encoded performance tableau.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">An &lt;<a href="#id1"><span class="problematic" id="id2">*</span></a>.xml&gt; file extension is assumed !</p>
+<p class="last">An &lt;<a href="#id3"><span class="problematic" id="id4">*</span></a>.xml&gt; file extension is assumed !</p>
 </div>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.RubisRestServer.viewSolution">
-<tt class="descname">viewSolution</tt><big>(</big><em>ticket=None</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.RubisRestServer.viewSolution" title="Permalink to this definition">¶</a></dt>
-<dd><p>View XMCDA 2.0 solution in a default browser window.</p>
 </dd></dl>
 
 </dd></dl>
