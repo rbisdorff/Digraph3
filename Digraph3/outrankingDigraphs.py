@@ -6887,8 +6887,7 @@ class RubisRestServer(ServerProxy):
         * November 2013, version REST/D4 1.1            *
         *************************************************
         >>> from perfTabs import RandomCBPerformanceTableau
-        >>> t = RandomCBPerformanceTableau(numberOfActions=5,\
-                                           numberOfCriteria=7)
+        >>> t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=7)
         >>> solver.submitProblem(t)
         The problem submission was successful !
         Server ticket: l4qfAP0RfBBvyjsL
@@ -6896,7 +6895,7 @@ class RubisRestServer(ServerProxy):
         >>> Created new window in existing browser session.
         >>> solver.saveXMCDA2Solution()
         The solution request was successful.
-        Saving XMCDA 2.0 encoded solution in file l4qfAP0RfBBvyjsL_Solution.xml
+        Saving XMCDA 2.0 encoded solution in file Solutionl4qfAP0RfBBvyjsL.xml
         >>> ...
 
     """
@@ -6997,7 +6996,7 @@ class RubisRestServer(ServerProxy):
         Save the solution in XMCDA 2.0 encoding.
         """
         if fileName == None:
-            fileNameExt = str(self.ticket)+"_Solution.xml"
+            fileNameExt = "Solution"+str(self.ticket)+".xml"
         else:
             fileNameExt = fileName+"Solution.xml"
         arg = {'ticket': self.ticket}
@@ -7013,15 +7012,20 @@ class RubisRestServer(ServerProxy):
         except:
             print(answer['message'])
 
-    def viewSolution(self,ticket=None):
+    def viewSolution(self,ticket=None,valuation='bipolar'):
         """
         View XMCDA 2.0 solution in a default browser window.
+
+        *Parameter":
+        
+            * valuation: 'bipolar' or 'robust'
+            
         """
         import os,webbrowser
         newTab = 2 # open in a new tab if possible
         if ticket != None:
             self.ticket = ticket
-        arg = {'ticket': self.ticket}
+        arg = {'ticket': self.ticket, 'valuation': valuation}
         answer = self.server.requestSolutionHTML(arg)
         try:
             fileName = str(self.name)+str(self.ticket)+"Solution.html"
@@ -7055,7 +7059,7 @@ if __name__ == "__main__":
     t = XMCDA2PerformanceTableau('test')
     solver = RubisRestServer(Debug=True)
     solver.ping()
-    solver.submitProblem(t,valuation='integer',Debug=True)
+    solver.submitProblem(t,valuation='robust',Debug=True)
     #solver.submitXMCDA2Problem('test',Debug=False)
     #solver.viewSolution()
     
