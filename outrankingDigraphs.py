@@ -6867,13 +6867,13 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
 class RubisRestServer(ServerProxy):
     """
-    Specialization of the standard OutrankingDigraph for accessing on-line
-    a Rubis Rest Solver
+    xmlrpc-cgi Proxy Server for accessing on-line
+    a Rubis Rest Solver.
 
     *Parameters*:
     
-        * performanceTableau (fileName of valid XMCDA2 code, required)
-        * coalition (sublist of criteria, optional)
+        | performanceTableau (fileName of valid XMCDA2 code, required)
+        | coalition (sublist of criteria, optional)
 
     Example Python3 session:
     
@@ -6948,7 +6948,8 @@ class RubisRestServer(ServerProxy):
         Submit PerformanceTableau class instances.
         *Parameter*:
 
-             * valuation: 'bipolar', 'robust', 'integer'
+             | valuation: 'bipolar', 'robust', 'integer'
+
         """
         self.name = perfTab.name
         self.problemText = perfTab.saveXMCDA2(isStringIO=True,\
@@ -6976,7 +6977,7 @@ class RubisRestServer(ServerProxy):
 
         .. warning::
 
-            An <*.xml> file extension is assumed !
+            An <_.xml> file extension is assumed !
             
         """
         print("Calling submitXMCDA2Problem(%s)" % fileName)
@@ -7024,9 +7025,9 @@ class RubisRestServer(ServerProxy):
         Show XMCDA 2.0 solution in a default browser window.
         The valuation parameter sets the correct style sheet.
 
-        *Parameter":
+        *Parameter*:
         
-            * valuation: 'bipolar' or 'robust',
+            | valuation: 'bipolar' or 'robust',
 
         """
         import os,webbrowser
