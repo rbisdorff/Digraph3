@@ -6876,6 +6876,7 @@ class RubisRestServer(ServerProxy):
         * coalition (sublist of criteria, optional)
 
     Example Python3 session:
+    
         >>> from outrankingDigraphs import RubisRestServer
         >>> solver = RubisRestServer()
         >>> solver.ping()
@@ -6886,16 +6887,20 @@ class RubisRestServer(ServerProxy):
         * R. Bisdorff (c) 2009-2013                     *
         * November 2013, version REST/D4 1.1            *
         *************************************************
+
         >>> from perfTabs import RandomCBPerformanceTableau
         >>> t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=7)
+
         >>> solver.submitProblem(t)
         The problem submission was successful !
         Server ticket: l4qfAP0RfBBvyjsL
+
         >>> solver.viewSolution()
-        >>> Created new window in existing browser session.
+        Created new window in existing browser session.
         >>> solver.saveXMCDA2Solution()
         The solution request was successful.
         Saving XMCDA 2.0 encoded solution in file Solutionl4qfAP0RfBBvyjsL.xml
+
         >>> ...
 
     """
