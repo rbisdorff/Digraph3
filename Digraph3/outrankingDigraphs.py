@@ -4486,10 +4486,12 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         | optional, coalition (sublist of criteria)
 
     Specialization of the standard OutrankingDigraph class for generating
-    new bipolar ordinal-valued outranking digraphs.
+    bipolar integer-valued outranking digraphs.
 
     """
-    def __init__(self,argPerfTab=None,coalition=None,hasBipolarVeto=False,hasSymmetricThresholds=True):
+    def __init__(self,argPerfTab=None,coalition=None,\
+                 hasBipolarVeto=True,\
+                 hasSymmetricThresholds=True):
         import copy
         if isinstance(argPerfTab, (PerformanceTableau,RandomPerformanceTableau)):
             perfTab = argPerfTab
@@ -4529,7 +4531,8 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         except:
             vetoType = 'normal'
             
-        methodData['parameter'] = {'valuationType':valuationType,'variant':variant, 'vetoType':vetoType}
+        methodData['parameter'] = {'valuationType':valuationType,\
+                                   'variant':variant, 'vetoType':vetoType}
         self.methodData = methodData
 
         Min = -totalWeight
@@ -4541,7 +4544,9 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         
         if vetoType == "bipolar":
             hasBipolarVeto = True    
-        self.relation = self._constructRelation(criteria,evaluation,hasBipolarVeto=hasBipolarVeto,hasSymmetricThresholds=hasSymmetricThresholds)
+        self.relation = self._constructRelation(criteria,evaluation,\
+                                                hasBipolarVeto=hasBipolarVeto,\
+                                                hasSymmetricThresholds=hasSymmetricThresholds)
         
         self.evaluation = evaluation
         self.order = len(self.actions)
@@ -6870,6 +6875,29 @@ class RubisRestServer(ServerProxy):
         * performanceTableau (fileName of valid XMCDA2 code, required)
         * coalition (sublist of criteria, optional)
 
+    Example Python3 session:
+        >>> from outrankingDigraphs import RubisRestServer
+        >>> solver = RubisRestServer()
+        >>> solver.ping()
+        *************************************************
+        * This is the Leopold-Loewenheim Apache Server  *
+        * of the University of Luxembourg.              *
+        * Welcome to the Rubis XMCDA 2.0 Web service    *
+        * R. Bisdorff (c) 2009-2013                     *
+        * November 2013, version REST/D4 1.1            *
+        *************************************************
+        >>> from perfTabs import RandomCBPerformanceTableau
+        >>> t = RandomCBPerformanceTableau(numberOfActions=5,\
+                                           numberOfCriteria=7)
+        >>> solver.submitProblem(t)
+        The problem submission was successful !
+        Server ticket: l4qfAP0RfBBvyjsL
+        >>> solver.viewSolution()
+        >>> Created new window in existing browser session.
+        >>> solver.saveXMCDA2Solution()
+        The solution request was successful.
+        Saving XMCDA 2.0 encoded solution in file l4qfAP0RfBBvyjsL_Solution.xml
+        >>> ...
 
     """
     def __init__(self,host="http://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=False):
@@ -6913,7 +6941,10 @@ class RubisRestServer(ServerProxy):
                       argTitle='XMCDA 2.0 encoding',\
                       Debug=False):
         """
-        To directly submit PerformanceTableau instances.
+        Submit PerformanceTableau class instances.
+        *Parameter*:
+
+             * valuation: 'bipolar', 'robust', 'integer'
         """
         self.name = perfTab.name
         self.problemText = perfTab.saveXMCDA2(isStringIO=True,\
@@ -6928,7 +6959,7 @@ class RubisRestServer(ServerProxy):
         answer = self.server.submitProblem(arg)
         self.ticket = answer['ticket'] 
         print(answer['message'])
-        print(answer['ticket'])
+        print('Server ticket: %s' % answer['ticket'])
         fileNameTicket = self.name+'Ticket.txt'
         fo = open(fileNameTicket,'w')
         fo.write(answer['ticket'])
@@ -6936,8 +6967,12 @@ class RubisRestServer(ServerProxy):
 
     def submitXMCDA2Problem(self,fileName,Debug=False):
         """
-        To submit stored xmcda2 encoded performanceTableaux.
-        By default an .xml file extension is assumed!
+        Submit stored XMCDA 2.0 encoded performance tableau.
+
+        .. warning::
+
+            An <*.xml> file extension is assumed !
+            
         """
         print("Calling submitXMCDA2Problem(%s)" % fileName)
         self.name = fileName
@@ -6957,42 +6992,53 @@ class RubisRestServer(ServerProxy):
         fo.write(answer['ticket'])
         fo.close()
 
-    def _saveXMCDA2Solution(self,fileName=None,Debug=False):
+    def saveXMCDA2Solution(self,fileName=None,Debug=False):
+        """
+        Save the solution in XMCDA 2.0 encoding.
+        """
         if fileName == None:
-            fileNameExt = self.name+"Solution.xml"
+            fileNameExt = str(self.ticket)+"_Solution.xml"
         else:
             fileNameExt = fileName+"Solution.xml"
-        print("saving solution in file %s" %fileNameExt)
         arg = {'ticket': self.ticket}
         answer = self.server.requestSolution(arg)
-        print(answer['message'])
-        self.solution = answer['solution']
-        if Debug:
-            print(self.solution)
-        fo = open(fileNameExt,'w')
-        fo.write(self.solution)
-        fo.close()
+        try:
+            self.solution = answer['solution']
+            if Debug:
+                print(self.solution)
+            fo = open(fileNameExt,'w')
+            fo.write(self.solution)
+            fo.close()
+            print("saving solution in file %s" %fileNameExt)
+        except:
+            print(answer['message'])
 
     def viewSolution(self,ticket=None):
+        """
+        View XMCDA 2.0 solution in a default browser window.
+        """
         import os,webbrowser
         newTab = 2 # open in a new tab if possible
         if ticket != None:
             self.ticket = ticket
         arg = {'ticket': self.ticket}
         answer = self.server.requestSolutionHTML(arg)
-        fileName = str(self.name)+str(self.ticket)+"Solution.html"
-        fo = open(fileName,'w')
-        fo.write(answer['html'])
-        fo.close()
-        url = "file://"+os.getcwd()+"/%s" % fileName
-        webbrowser.open(url,new=newTab)
+        try:
+            fileName = str(self.name)+str(self.ticket)+"Solution.html"
+            fo = open(fileName,'w')
+            fo.write(answer['html'])
+            fo.close()
+            url = "file://"+os.getcwd()+"/%s" % fileName
+            webbrowser.open(url,new=newTab)
+        except:
+            print(answer['message'])
 
  
 #----------test outrankingDigraphs classes ----------------
 if __name__ == "__main__":
 
     import copy
-    from time import time
+    from time import time, sleep
     from outrankingDigraphs import StochasticBipolarOutrankingDigraph
     from weaklyTransitiveDigraphs import RankingByChoosingDigraph
     from outrankingDigraphs import RubisRestServer
@@ -7001,15 +7047,17 @@ if __name__ == "__main__":
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=7,weightDistribution='equiobjectives')
+    t = RandomCBPerformanceTableau(numberOfActions=5,\
+                                   numberOfCriteria=7,\
+                                   weightDistribution='equiobjectives',
+                                   )
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     solver = RubisRestServer(Debug=True)
     solver.ping()
-    solver.submitProblem(t,Debug=True)
+    solver.submitProblem(t,valuation='integer',Debug=True)
     #solver.submitXMCDA2Problem('test',Debug=False)
-    sleep(10)
-    solver.viewSolution()
+    #solver.viewSolution()
     
     
 ##    g = BipolarOutrankingDigraph(t)
