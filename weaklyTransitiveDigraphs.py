@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 # Python3+ implementation of digraphs
 # Based on Python 2 $Revision: 1.697 $
-# Copyright (C) 2006-2013  Raymond Bisdorff
+# Copyright (C) 2006-2014  Raymond Bisdorff
 #
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -32,6 +31,7 @@ class WeaklyTransitiveDigraph(Digraph):
     """
     Abstract class for weakly transitive digraphs specialized methods.
     """
+    
     def showPreOrder(self,rankingByChoosing=None):
         """
         A show method for self.rankinByChoosing result.
@@ -89,6 +89,11 @@ class WeaklyTransitiveDigraph(Digraph):
                 print('  %s Ambiguous Choice %s' % (space,list(iach)))
             print(' %s%s%s last ranked %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))        
 
+    def showRankingByChoosing(self,rankingByChoosing=None):
+        """
+        Dummy name for showPreOrder() method
+        """
+        self.showPreOrder(rankingByChoosing=rankingByChoosing)        
 
 class RankingByChoosingDigraph(WeaklyTransitiveDigraph):
     """
@@ -224,15 +229,16 @@ if __name__ == "__main__":
     from outrankingDigraphs import *
     from weaklyTransitiveDigraphs import *
 
-    #t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-    #                               numberOfActions=11)
-    #t.saveXMCDA2('test')
-    #g = BipolarOutrankingDigraph(t,Normalized=True)
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                   numberOfActions=11)
+    t.saveXMCDA2('test')
+    g = BipolarOutrankingDigraph(t,Normalized=True)
     #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
-    g = RandomValuationDigraph(order=11)
+    #g = RandomValuationDigraph(order=11)
     print('=== >>> best and last fusion (default)')
     rcg0 = RankingByChoosingDigraph(g,Debug=False)
     rcg0.showPreOrder()
+    rcg0.showRankingByChoosing()
     print(rcg0.computeOrdinalCorrelation(g))
 ##    rcg.showRankingByChoosing()
 ##    rcg1 = RankingByChoosingDigraph(rcg,CoDual=True)
@@ -256,7 +262,7 @@ if __name__ == "__main__":
     print(rcf.computeOrdinalCorrelation(g))
     #rcf.showPrincipalScores()
     rcf.showPrincipalScores(ColwiseOrder=True)
-    #rcf.showPrincipalScores(RowwiseOrder=True)
+    rcf.showPrincipalScores(RowwiseOrder=True)
 
     
     

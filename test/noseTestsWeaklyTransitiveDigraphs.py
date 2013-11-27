@@ -10,11 +10,12 @@
 from outrankingDigraphs import *
 from weaklyTransitiveDigraphs import *
 
-def testWeakTransitiveConstructors():
+def testRankingByChoosingWithKernels():
     g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=15)
     print('=== >>> testing best and last fusion (default)')
     rcg0 = RankingByChoosingDigraph(g,Debug=False)
     rcg0.showPreOrder()
+    rcg0.showRankingByChoosing()
     print(rcg0.computeOrdinalCorrelation(g))
     print('=== >>> best') 
     rcg1 = RankingByChoosingDigraph(g,Best=True,Last=False,Debug=False)
@@ -28,7 +29,10 @@ def testWeakTransitiveConstructors():
     rcg3 = RankingByChoosingDigraph(g,Best=False,Last=False,Debug=False)
     rcg3.showPreOrder()
     print(rcg3.computeOrdinalCorrelation(g))
+    
+def testPrincipalInOutDegreesRanking():
     print('=== >>> principal preorder')
+    g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=15)
     rcf = PrincipalInOutDegreesOrdering(g,imageType="pdf",Debug=False)
     rcf.showPreOrder()
     print(rcf.computeOrdinalCorrelation(g))
