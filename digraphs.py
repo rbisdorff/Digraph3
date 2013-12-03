@@ -7229,10 +7229,14 @@ class ConverseDigraph(Digraph):
 
 class FusionDigraph(Digraph):
     """
-    Instantiates the fusion of two given Digraph called dg1 and dg2.
+    Instantiates the epistemic fusion of two given Digraph called dg1 and dg2.
+
+    Parameter:
+
+        * operator = "o-min" | "o-max" (epistemic conjunctive or dijunctive fusion)
     """
 
-    def __init__(self,dg1,dg2):
+    def __init__(self,dg1,dg2,operator="o-min"):
         from copy import deepcopy
         self.name = 'fusion-'+dg1.name+'-'+dg2.name
 #        try:
@@ -7257,8 +7261,12 @@ class FusionDigraph(Digraph):
         for x in actionsList:
             fusionRelation[x] = {}
             for y in actionsList:
-                fusionRelation[x][y] = self.omin((dg1.relation[x][y],dg2.relation[x][y]))
-                
+                if operator == "o-min":
+                    fusionRelation[x][y] = self.omin((dg1.relation[x][y],dg2.relation[x][y]))
+                elif operator == "o-max":
+                    fusionRelation[x][y] = self.omax((dg1.relation[x][y],dg2.relation[x][y]))
+                else:
+                    print('Error: invalid epistemic fusion operator %s' % operator)
         self.relation = fusionRelation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()

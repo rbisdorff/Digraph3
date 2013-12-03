@@ -100,7 +100,9 @@ class RankingByChoosingDigraph(WeaklyTransitiveDigraph):
     Specialization of generic Digraph class for ranking by choosing results.
     """
     def __init__(self,other,Best=True,
-                 Last=True,CoDual=False,
+                 Last=True,
+                 fusionOperator = "o-min",
+                 CoDual=False,
                  Debug=False):
         from copy import deepcopy
         digraph=deepcopy(other)
@@ -138,7 +140,13 @@ class RankingByChoosingDigraph(WeaklyTransitiveDigraph):
             for x in digraph.actions:
                 relFusion[x] = {}
                 for y in digraph.actions:
-                    relFusion[x][y] = digraph.omin((relBest[x][y],relLast[x][y]))
+                    if fusionOperator == "o-max":
+                        relFusion[x][y] = digraph.omax((relBest[x][y],relLast[x][y]))
+                    elif fusionOperator == "o-min":
+                        relFusion[x][y] = digraph.omin((relBest[x][y],relLast[x][y]))
+                    else:
+                        print('Error: invalid epistemic fusion operator %s' % operator)
+                      
             self.relation=relFusion
 
         self.computeRankingByChoosing()
@@ -155,7 +163,7 @@ class PrincipalInOutDegreesOrdering(WeaklyTransitiveDigraph):
     Specialization of generic Digraph class for ranking by fusion
     of the principal orders of in- and outdegrees.
     """
-    def __init__(self,other,imageType=None,plotFileName=None,Debug=False):
+    def __init__(self,other,fusionOperator="o-min",imageType=None,plotFileName=None,Debug=False):
         from copy import deepcopy
         from linearOrders import PrincipalOrder
         digraph = deepcopy(other)
@@ -187,7 +195,7 @@ class PrincipalInOutDegreesOrdering(WeaklyTransitiveDigraph):
         self.principalColwiseScores = pc.principalColwiseScores
         for x in pc.principalColwiseScores:
             self.actions[x[1]]['principalColwiseScore'] = x[0]
-        pf = FusionDigraph(pl,pc)
+        pf = FusionDigraph(pl,pc,operator=fusionOperator)
         self.relation = deepcopy(pf.relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -230,34 +238,42 @@ if __name__ == "__main__":
     from weaklyTransitiveDigraphs import *
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                   numberOfActions=11)
+                                   numberOfActions=15)
     t.saveXMCDA2('test')
+    t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
     #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
     #g = RandomValuationDigraph(order=11)
     print('=== >>> best and last fusion (default)')
-    rcg0 = RankingByChoosingDigraph(g,Debug=False)
+    rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-min",Debug=False)
     rcg0.showPreOrder()
-    rcg0.showRankingByChoosing()
+    print(rcg0.computeOrdinalCorrelation(g))
+    rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-max",Debug=False)
+    rcg0.showPreOrder()
     print(rcg0.computeOrdinalCorrelation(g))
 ##    rcg.showRankingByChoosing()
 ##    rcg1 = RankingByChoosingDigraph(rcg,CoDual=True)
 ##    rcg1.showRankingByChoosing()
 ##    print(rcg1.computeOrdinalCorrelation(rcg))
-    print('=== >>> best') 
-    rcg1 = RankingByChoosingDigraph(g,Best=True,Last=False,Debug=False)
-    rcg1.showPreOrder()
-    print(rcg1.computeOrdinalCorrelation(g))
-    print('=== >>> last')
-    rcg2 = RankingByChoosingDigraph(g,Best=False,Last=True,Debug=False)
-    rcg2.showPreOrder()
-    print(rcg2.computeOrdinalCorrelation(g))
-    print('=== >>> bipolar best and last')
-    rcg3 = RankingByChoosingDigraph(g,Best=False,Last=False,Debug=False)
-    rcg3.showPreOrder()
-    print(rcg3.computeOrdinalCorrelation(g))
-    print('=== >>> principal preorder')
-    rcf = PrincipalInOutDegreesOrdering(g,imageType=None,Debug=False)
+##    print('=== >>> best') 
+##    rcg1 = RankingByChoosingDigraph(g,Best=True,Last=False,Debug=False)
+##    rcg1.showPreOrder()
+##    print(rcg1.computeOrdinalCorrelation(g))
+##    print('=== >>> last')
+##    rcg2 = RankingByChoosingDigraph(g,Best=False,Last=True,Debug=False)
+##    rcg2.showPreOrder()
+##    print(rcg2.computeOrdinalCorrelation(g))
+##    print('=== >>> bipolar best and last')
+##    rcg3 = RankingByChoosingDigraph(g,Best=False,Last=False,Debug=False)
+##    rcg3.showPreOrder()
+##    print(rcg3.computeOrdinalCorrelation(g))
+##    print('=== >>> principal preorder')
+    rcf = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
+                                        imageType=None,Debug=False)
+    rcf.showPreOrder()
+    print(rcf.computeOrdinalCorrelation(g))
+    rcf = PrincipalInOutDegreesOrdering(g,fusionOperator="o-max",
+                                        imageType=None,Debug=False)
     rcf.showPreOrder()
     print(rcf.computeOrdinalCorrelation(g))
     #rcf.showPrincipalScores()
