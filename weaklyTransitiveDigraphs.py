@@ -239,11 +239,11 @@ if __name__ == "__main__":
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
                                    numberOfActions=15)
-    t.saveXMCDA2('test')
-    t = XMCDA2PerformanceTableau('test')
-    g = BipolarOutrankingDigraph(t,Normalized=True)
+    #t.saveXMCDA2('test')
+    #t = XMCDA2PerformanceTableau('test')
+    #g = BipolarOutrankingDigraph(t,Normalized=True)
     #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
-    #g = RandomValuationDigraph(order=11)
+    g = RandomValuationDigraph(order=11)
     print('=== >>> best and last fusion (default)')
     rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-min",Debug=False)
     rcg0.showPreOrder()
@@ -268,17 +268,17 @@ if __name__ == "__main__":
 ##    rcg3.showPreOrder()
 ##    print(rcg3.computeOrdinalCorrelation(g))
 ##    print('=== >>> principal preorder')
-    rcf = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
+    rcf1 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
                                         imageType=None,Debug=False)
-    rcf.showPreOrder()
-    print(rcf.computeOrdinalCorrelation(g))
-    rcf = PrincipalInOutDegreesOrdering(g,fusionOperator="o-max",
+    rcf1.showPreOrder()
+    print(rcf1.computeOrdinalCorrelation(g))
+    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-max",
                                         imageType=None,Debug=False)
-    rcf.showPreOrder()
-    print(rcf.computeOrdinalCorrelation(g))
+    rcf2.showPreOrder()
+    print(rcf2.computeOrdinalCorrelation(g))
     #rcf.showPrincipalScores()
-    rcf.showPrincipalScores(ColwiseOrder=True)
-    rcf.showPrincipalScores(RowwiseOrder=True)
+    rcf1.showPrincipalScores(ColwiseOrder=True)
+    rcf1.showPrincipalScores(RowwiseOrder=True)
 
     
     
