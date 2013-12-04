@@ -6977,7 +6977,7 @@ class Digraph(object):
 
     def computePrincipalOrder(self, plotFileName=None,
                               Colwise=False, imageType=None,
-                              Comments=True, Debug=False):
+                              Comments=False, Debug=False):
         """
         renders a ordered list of self.actions using the decreasing scores from the
         first rincipal eigenvector of the covariance of the valued outdegrees of self. 
