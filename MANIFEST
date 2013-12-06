@@ -5,7 +5,7 @@ outrankingDigraphs.py
 sortingDigraphs.py
 votingDigraphs.py
 linearOrders.py
-weaklyTransitiveDigraphs.py
+weakOrders.py
 iqagent.py
 graphs.py
 makefile
@@ -28,6 +28,7 @@ test/noseTestsSortingDigraph.py
 test/noseTestsPerfTab.py
 test/noseTestsVotingDigraph.py
 test/noseTestsLinearOrder.py
+test/noseTestsWeakOrders.py
 test/testAVprofile.py
 test/testapprovalvotingprofile.py
 test/testdecimal.py

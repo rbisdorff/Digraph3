@@ -835,7 +835,7 @@ if __name__ == "__main__":
     ## ## print 'Net flows        : ', nfs.computeOrder(), nfs.computeKemenyIndex(g
     ## ##)
     from outrankingDigraphs import RandomBipolarOutrankingDigraph
-    from weaklyTransitiveDigraphs import *
+    from weakOrders import *
     g1 = RandomBipolarOutrankingDigraph(Normalized=True)
     g1.save('test')
     g1 = Digraph('test')

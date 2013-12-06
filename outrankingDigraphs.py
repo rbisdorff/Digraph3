@@ -24,6 +24,7 @@ __version__ = "$Revision: 1.43 $"
 
 from digraphs import *
 from xmlrpc.client import ServerProxy
+from outrankingDigraphs import *
 
 #-------------------------------------------
         
@@ -7058,7 +7059,7 @@ if __name__ == "__main__":
     import copy
     from time import time, sleep
     from outrankingDigraphs import StochasticBipolarOutrankingDigraph
-    from weaklyTransitiveDigraphs import RankingByChoosingDigraph
+    from weakOrders import RankingByChoosingDigraph
     from outrankingDigraphs import RubisRestServer
     
     print('*-------- Testing classes and methods -------')

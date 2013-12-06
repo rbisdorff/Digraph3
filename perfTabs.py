@@ -4918,7 +4918,7 @@ if __name__ == "__main__":
     from outrankingDigraphs import *
     import sortingDigraphs
     import linearOrders
-    from weaklyTransitiveDigraphs import *
+    from weakOrders import *
     
     print('*-------- Testing classes and methods -------')
 
