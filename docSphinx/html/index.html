@@ -77,8 +77,8 @@ contain the root <cite>toctree</cite> directive.</dd>
 <p>Two downlaod options are given:</p>
 <p>1. Either (easiest under Linux or Mac OS-X), by using a subversion client::
 ..$svn co <a class="reference external" href="http://leopold-loewenheim.uni.lu/svn/repos/Digraph3">http://leopold-loewenheim.uni.lu/svn/repos/Digraph3</a></p>
-<p>2. Or, download and extract the distribution tar.gz archive::
-<a class="reference external" href="http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3:2.1.tar.gz">http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3:2.1.tar.gz</a></p>
+<p>2. Or, download and extract the latest distribution tar.gz archive::
+<a class="reference external" href="http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3-xxx.tar.gz">http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3-xxx.tar.gz</a></p>
 <p>Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff &lt;<a class="reference external" href="http://charles-sanders-peirce.uni.lu/bisdorff/">http://charles-sanders-peirce.uni.lu/bisdorff/</a>&gt;, University of Luxembourg.</p>
 <p>A <em>user manual</em> is available here: <a class="reference external" href="http://ernst-schroeder.uni.lu/Digraph/doc/">http://ernst-schroeder.uni.lu/Digraph/doc/</a>
 The following Python3 modules make extensive usage of the native Python Decimal module and therefore work best with Python-3.3+.</p>
@@ -100,7 +100,7 @@ The following Python3 modules make extensive usage of the native Python Decimal 
 <dd>additional tools for solving sorting problems;</dd>
 <dt><a class="reference internal" href="#linearorders-label"><em>linearOrders module</em></a></dt>
 <dd>additional tools for solving linearly ranking problems.</dd>
-<dt><a class="reference internal" href="#weaklytransitivedigraphs-label"><em>weaklyTransitiveDigraphs module</em></a></dt>
+<dt><a class="reference internal" href="#weakorders-label"><em>weakOrders module</em></a></dt>
 <dd>additional tools for solving ranking by choosing problems.</dd>
 </dl>
 <div class="toctree-wrapper compound">
@@ -1001,7 +1001,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2377,7 +2377,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3072,7 +3072,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -3954,43 +3954,43 @@ a given bipolar-valued Digraph instance</p>
 
 <p>Back to the <a class="reference internal" href="#introduction-label"><em>Introduction</em></a></p>
 </div>
-<div class="section" id="module-weaklyTransitiveDigraphs">
-<span id="weaklytransitivedigraphs-module"></span><span id="weaklytransitivedigraphs-label"></span><h2>weaklyTransitiveDigraphs module<a class="headerlink" href="#module-weaklyTransitiveDigraphs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-weakOrders">
+<span id="weakorders-module"></span><span id="weakorders-label"></span><h2>weakOrders module<a class="headerlink" href="#module-weakOrders" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="weaklyTransitiveDigraphs.PrincipalInOutDegreesOrdering">
-<em class="property">class </em><tt class="descclassname">weaklyTransitiveDigraphs.</tt><tt class="descname">PrincipalInOutDegreesOrdering</tt><big>(</big><em>other</em>, <em>fusionOperator='o-min'</em>, <em>imageType=None</em>, <em>plotFileName=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#weaklyTransitiveDigraphs.PrincipalInOutDegreesOrdering" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#weaklyTransitiveDigraphs.WeaklyTransitiveDigraph" title="weaklyTransitiveDigraphs.WeaklyTransitiveDigraph"><tt class="xref py py-class docutils literal"><span class="pre">weaklyTransitiveDigraphs.WeaklyTransitiveDigraph</span></tt></a></p>
+<dt id="weakOrders.PrincipalInOutDegreesOrdering">
+<em class="property">class </em><tt class="descclassname">weakOrders.</tt><tt class="descname">PrincipalInOutDegreesOrdering</tt><big>(</big><em>other</em>, <em>fusionOperator='o-min'</em>, <em>imageType=None</em>, <em>plotFileName=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#weakOrders.PrincipalInOutDegreesOrdering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#weakOrders.WeaklyTransitiveDigraph" title="weakOrders.WeaklyTransitiveDigraph"><tt class="xref py py-class docutils literal"><span class="pre">weakOrders.WeaklyTransitiveDigraph</span></tt></a></p>
 <p>Specialization of generic Digraph class for ranking by fusion
 of the principal orders of in- and outdegrees.</p>
 <dl class="method">
-<dt id="weaklyTransitiveDigraphs.PrincipalInOutDegreesOrdering.showPrincipalScores">
-<tt class="descname">showPrincipalScores</tt><big>(</big><em>ColwiseOrder=False</em>, <em>RowwiseOrder=False</em><big>)</big><a class="headerlink" href="#weaklyTransitiveDigraphs.PrincipalInOutDegreesOrdering.showPrincipalScores" title="Permalink to this definition">¶</a></dt>
+<dt id="weakOrders.PrincipalInOutDegreesOrdering.showPrincipalScores">
+<tt class="descname">showPrincipalScores</tt><big>(</big><em>ColwiseOrder=False</em>, <em>RowwiseOrder=False</em><big>)</big><a class="headerlink" href="#weakOrders.PrincipalInOutDegreesOrdering.showPrincipalScores" title="Permalink to this definition">¶</a></dt>
 <dd><p>show the princiapl scores</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="weaklyTransitiveDigraphs.RankingByChoosingDigraph">
-<em class="property">class </em><tt class="descclassname">weaklyTransitiveDigraphs.</tt><tt class="descname">RankingByChoosingDigraph</tt><big>(</big><em>other</em>, <em>Best=True</em>, <em>Last=True</em>, <em>fusionOperator='o-min'</em>, <em>CoDual=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#weaklyTransitiveDigraphs.RankingByChoosingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#weaklyTransitiveDigraphs.WeaklyTransitiveDigraph" title="weaklyTransitiveDigraphs.WeaklyTransitiveDigraph"><tt class="xref py py-class docutils literal"><span class="pre">weaklyTransitiveDigraphs.WeaklyTransitiveDigraph</span></tt></a></p>
+<dt id="weakOrders.RankingByChoosingDigraph">
+<em class="property">class </em><tt class="descclassname">weakOrders.</tt><tt class="descname">RankingByChoosingDigraph</tt><big>(</big><em>other</em>, <em>Best=True</em>, <em>Last=True</em>, <em>fusionOperator='o-min'</em>, <em>CoDual=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#weakOrders.RankingByChoosingDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#weakOrders.WeaklyTransitiveDigraph" title="weakOrders.WeaklyTransitiveDigraph"><tt class="xref py py-class docutils literal"><span class="pre">weakOrders.WeaklyTransitiveDigraph</span></tt></a></p>
 <p>Specialization of generic Digraph class for ranking by choosing results.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="weaklyTransitiveDigraphs.WeaklyTransitiveDigraph">
-<em class="property">class </em><tt class="descclassname">weaklyTransitiveDigraphs.</tt><tt class="descname">WeaklyTransitiveDigraph</tt><big>(</big><em>file=None</em>, <em>order=7</em><big>)</big><a class="headerlink" href="#weaklyTransitiveDigraphs.WeaklyTransitiveDigraph" title="Permalink to this definition">¶</a></dt>
+<dt id="weakOrders.WeaklyTransitiveDigraph">
+<em class="property">class </em><tt class="descclassname">weakOrders.</tt><tt class="descname">WeaklyTransitiveDigraph</tt><big>(</big><em>file=None</em>, <em>order=7</em><big>)</big><a class="headerlink" href="#weakOrders.WeaklyTransitiveDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <p>Abstract class for weakly transitive digraphs specialized methods.</p>
 <dl class="method">
-<dt id="weaklyTransitiveDigraphs.WeaklyTransitiveDigraph.showPreOrder">
-<tt class="descname">showPreOrder</tt><big>(</big><em>rankingByChoosing=None</em><big>)</big><a class="headerlink" href="#weaklyTransitiveDigraphs.WeaklyTransitiveDigraph.showPreOrder" title="Permalink to this definition">¶</a></dt>
+<dt id="weakOrders.WeaklyTransitiveDigraph.showPreOrder">
+<tt class="descname">showPreOrder</tt><big>(</big><em>rankingByChoosing=None</em><big>)</big><a class="headerlink" href="#weakOrders.WeaklyTransitiveDigraph.showPreOrder" title="Permalink to this definition">¶</a></dt>
 <dd><p>A show method for self.rankinByChoosing result.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="weaklyTransitiveDigraphs.WeaklyTransitiveDigraph.showRankingByChoosing">
-<tt class="descname">showRankingByChoosing</tt><big>(</big><em>rankingByChoosing=None</em><big>)</big><a class="headerlink" href="#weaklyTransitiveDigraphs.WeaklyTransitiveDigraph.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
+<dt id="weakOrders.WeaklyTransitiveDigraph.showRankingByChoosing">
+<tt class="descname">showRankingByChoosing</tt><big>(</big><em>rankingByChoosing=None</em><big>)</big><a class="headerlink" href="#weakOrders.WeaklyTransitiveDigraph.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dummy name for showPreOrder() method</p>
 </dd></dl>
 
@@ -4027,7 +4027,7 @@ of the principal orders of in- and outdegrees.</p>
 <li><a class="reference internal" href="#module-votingDigraphs">votingDigraphs module</a></li>
 <li><a class="reference internal" href="#module-sortingDigraphs">sortingDigraphs module</a></li>
 <li><a class="reference internal" href="#module-linearOrders">linearOrders module</a></li>
-<li><a class="reference internal" href="#module-weaklyTransitiveDigraphs">weaklyTransitiveDigraphs module</a></li>
+<li><a class="reference internal" href="#module-weakOrders">weakOrders module</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
