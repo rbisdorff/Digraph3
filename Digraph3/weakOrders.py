@@ -25,9 +25,9 @@ __version__ = "Branch: 3.3 $"
 from digraphs import *
 from perfTabs import *
 from outrankingDigraphs import *
-from weaklyTransitiveDigraphs import *
+from weakOrders import *
 
-class WeaklyTransitiveDigraph(Digraph):
+class WeakOrder(Digraph):
     """
     Abstract class for weakly transitive digraphs specialized methods.
     """
@@ -95,7 +95,7 @@ class WeaklyTransitiveDigraph(Digraph):
         """
         self.showPreOrder(rankingByChoosing=rankingByChoosing)        
 
-class RankingByChoosingDigraph(WeaklyTransitiveDigraph):
+class RankingByChoosingDigraph(WeakOrder):
     """
     Specialization of generic Digraph class for ranking by choosing results.
     """
@@ -158,7 +158,7 @@ class RankingByChoosingDigraph(WeaklyTransitiveDigraph):
         self.notGamma = self.notGammaSets()
 
 
-class PrincipalInOutDegreesOrdering(WeaklyTransitiveDigraph):
+class PrincipalInOutDegreesOrdering(WeakOrder):
     """
     Specialization of generic Digraph class for ranking by fusion
     of the principal orders of in- and outdegrees.
@@ -237,7 +237,7 @@ if __name__ == "__main__":
 
     from digraphs import *
     from outrankingDigraphs import *
-    from weaklyTransitiveDigraphs import *
+    from weakOrders import *
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
                                    numberOfActions=15)
