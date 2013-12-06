@@ -960,6 +960,54 @@ class Digraph(object):
         Min = Decimal('-1')
         actions = [x for x in self.actions]
         currActions = set(actions)
+        relation = self.relation
+        rankingRelation = {}
+        for x in actions:
+            rankingRelation[x] = {}
+            for y in actions:
+                rankingRelation[x][y] = Med
+        n = len(rankingByChoosing)
+        for i in range(n):
+            ibch = set(rankingByChoosing[i][0][1])
+            iwch = set(rankingByChoosing[i][1][1])
+            ribch = set(currActions) - ibch
+            for x in ibch:
+                for y in ibch:
+                    if x != y:
+                        rankingRelation[x][y] = self.omax([rankingRelation[x][y],abs(relation[x][y])])
+                        rankingRelation[y][x] = self.omax([rankingRelation[x][y],abs(relation[y][x])])
+                for y in ribch:
+                    rankingRelation[x][y] = self.omax([rankingRelation[x][y],abs(relation[x][y])])
+                    rankingRelation[y][x] = self.omax([rankingRelation[y][x],-abs(relation[y][x])])
+            riwch = set(currActions) - iwch
+            for y in iwch:
+                for x in iwch:
+                    if x != y:
+                        rankingRelation[x][y] = self.omax([rankingRelation[x][y],abs(relation[x][y])])
+                        rankingRelation[y][x] = self.omax([rankingRelation[y][x],abs(relation[y][x])])
+                for x in riwch:
+                    rankingRelation[x][y] = self.omax([rankingRelation[x][y],abs(relation[x][y])])
+                    rankingRelation[y][x] = self.omax([rankingRelation[y][x],-abs(relation[x][y])])
+            currActions = currActions - (ibch | iwch)
+        return rankingRelation
+
+    def computeRankingByChoosingRelationOld(self,rankingByChoosing=None,Debug=False):
+        """
+        Renders the bipolar-valued relation obtained from
+        the self.rankingByChoosing result.
+        """
+        if rankingByChoosing==None:
+            try:
+                rankingByChoosing = self.rankingByChoosing['result']
+            except:
+                print('Error: first run computeRankingByChoosing(CoDual=T/F) !')
+                return None
+
+        Max = Decimal('1')
+        Med = Decimal('0')
+        Min = Decimal('-1')
+        actions = [x for x in self.actions]
+        currActions = set(actions)
         rankingRelation = {}
         for x in actions:
             rankingRelation[x] = {}
@@ -1007,6 +1055,44 @@ class Digraph(object):
         Min = Decimal('-1')
         actions = [x for x in self.actions]
         currActions = set(actions)
+        relation = self.relation
+        rankingRelation = {}
+        for x in actions:
+            rankingRelation[x] = {}
+            for y in actions:
+                rankingRelation[x][y] = Med
+        n = len(rankingByBestChoosing)
+        for i in range(n):
+            ibch = set(rankingByBestChoosing[i][1])
+            ribch = set(currActions) - ibch
+            for x in ibch:
+                for y in ibch:
+                    if x != y:
+                        rankingRelation[x][y] = self.omax([rankingRelation[x][y],abs(relation[x][y])])
+                        rankingRelation[y][x] = self.omax([rankingRelation[y][x],abs(relation[y][x])])
+                for y in ribch:
+                    rankingRelation[x][y] = self.omax([rankingRelation[x][y],abs(relation[x][y])])
+                    rankingRelation[y][x] = self.omax([rankingRelation[y][x],-abs(relation[y][x])])
+            currActions = currActions - ibch
+        return rankingRelation
+
+    def computeRankingByBestChoosingRelationOld(self,rankingByBestChoosing=None,Debug=False):
+        """
+        Renders the bipolar-valued relation obtained from
+        the self.rankingByBestChoosing result.
+        """
+        if rankingByBestChoosing==None:
+            try:
+                rankingByBestChoosing = self.rankingByBestChoosing['result']
+            except:
+                print('Error: first run computeRankingByBestChoosing(CoDual=T/F) !')
+                return None
+
+        Max = Decimal('1')
+        Med = Decimal('0')
+        Min = Decimal('-1')
+        actions = [x for x in self.actions]
+        currActions = set(actions)
         rankingRelation = {}
         for x in actions:
             rankingRelation[x] = {}
@@ -1028,6 +1114,44 @@ class Digraph(object):
         return rankingRelation
  
     def computeRankingByLastChoosingRelation(self,rankingByLastChoosing=None,Debug=False):
+        """
+        Renders the bipolar-valued relation obtained from
+        the self.rankingByLastChoosing result.
+        """
+        if rankingByLastChoosing==None:
+            try:
+                rankingByLastChoosing = self.rankingByLastChoosing['result']
+            except:
+                print('Error: first run computeRankingByLastChoosing(CoDual=T/F) !')
+                return None
+
+        Max = Decimal('1')
+        Med = Decimal('0')
+        Min = Decimal('-1')
+        actions = [x for x in self.actions]
+        currActions = set(actions)
+        relation = self.relation
+        rankingRelation = {}
+        for x in actions:
+            rankingRelation[x] = {}
+            for y in actions:
+                rankingRelation[x][y] = Med
+        n = len(rankingByLastChoosing)
+        for i in range(n):
+            iwch = set(rankingByLastChoosing[i][1])
+            riwch = set(currActions) - iwch
+            for x in iwch:
+                for y in iwch:
+                    if x != y:
+                        rankingRelation[x][y] = self.omax([rankingRelation[x][y],abs(relation[x][y])])
+                        rankingRelation[y][x] = self.omax([rankingRelation[x][y],abs(relation[y][x])])
+                for y in riwch:
+                    rankingRelation[x][y] = self.omax([rankingRelation[x][y],-abs(relation[x][y])])
+                    rankingRelation[y][x] = self.omax([rankingRelation[y][x],abs(relation[y][x])])
+            currActions = currActions - iwch
+        return rankingRelation
+
+    def computeRankingByLastChoosingRelationOld(self,rankingByLastChoosing=None,Debug=False):
         """
         Renders the bipolar-valued relation obtained from
         the self.rankingByLastChoosing result.
