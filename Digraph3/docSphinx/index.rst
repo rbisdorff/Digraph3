@@ -141,7 +141,7 @@ linearOrders module
 
 Back to the :ref:`Introduction-label`
 
-.. _weaklyTransitiveDigraphs-label:
+.. _weakOrders-label:
 
 weakOrders module
 -------------------------------
