@@ -22,8 +22,8 @@ Two downlaod options are given:
 1. Either (easiest under Linux or Mac OS-X), by using a subversion client::
 ..$svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
        
-2. Or, download and extract the distribution tar.gz archive::
-http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3:2.1.tar.gz 
+2. Or, download and extract the latest distribution tar.gz archive::
+http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3-xxx.tar.gz 
 
 Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://charles-sanders-peirce.uni.lu/bisdorff/>, University of Luxembourg.
 
@@ -50,7 +50,7 @@ The Digraph source code is split into five interdependant modules, where the ``d
      additional tools for solving sorting problems;
 :ref:`linearOrders-label` 
      additional tools for solving linearly ranking problems.
-:ref:`weaklyTransitiveDigraphs-label` 
+:ref:`weakOrders-label` 
      additional tools for solving ranking by choosing problems.
 
 
@@ -143,10 +143,10 @@ Back to the :ref:`Introduction-label`
 
 .. _weaklyTransitiveDigraphs-label:
 
-weaklyTransitiveDigraphs module
+weakOrders module
 -------------------------------
 
-.. automodule:: weaklyTransitiveDigraphs
+.. automodule:: weakOrders
    :member-order: alphabetical
    :no-inherited-members:
    :members:
