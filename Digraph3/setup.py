@@ -8,7 +8,7 @@ setup(name='digraphs',
       version='Python3: 3.0',
       py_modules=['digraphs','perfTabs','outrankingDigraphs',\
         'sortingDigraphs','votingDigraphs',\
-        'linearOrders','weaklyTransitiveDigraphs',\
+        'linearOrders','weakOrders',\
         'iqagent','graphs'],
       license='http://ernst-schroeder.uni.lu/Digraph/digraph_copyright.html',
       url='http://leoopold-loewenheim.uni.lu/Digraph3/',
