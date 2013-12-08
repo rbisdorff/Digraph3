@@ -781,6 +781,8 @@ if __name__ == "__main__":
     from time import time
     from digraphs import *
     from linearOrders import *
+    from weakOrders import *
+
     print("""
     ****************************************************
     * Python linearOrders module                       *
@@ -835,7 +837,6 @@ if __name__ == "__main__":
     ## ## print 'Net flows        : ', nfs.computeOrder(), nfs.computeKemenyIndex(g
     ## ##)
     from outrankingDigraphs import RandomBipolarOutrankingDigraph
-    from weakOrders import *
     g1 = RandomBipolarOutrankingDigraph(Normalized=True)
     g1.save('test')
     g1 = Digraph('test')
@@ -844,7 +845,6 @@ if __name__ == "__main__":
     print(p.computeOrder())
     print(g1.computeOrdinalCorrelation(p))
     #p.showRelationTable()
-    from rankingByChoosingDigraphs import *
     rbc = RankingByChoosingDigraph(g1,Debug=False)
     #rbc.showRelationTable()
     pio = PrincipalInOutDegreesOrdering(g1,Debug=True)
