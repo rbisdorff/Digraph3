@@ -31,8 +31,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     Besides a valid PerformanceTableau instance we require a sorting profile,
     i.e.:
 
-         | a dictionary <categories> of categories with 'name', 'order' and 'comment'
-         | a dictionary <criteriaCategoryLimits> with double entry:
+         * a dictionary <categories> of categories with 'name', 'order' and 'comment'
+         * a dictionary <criteriaCategoryLimits> with double entry:
 
                [criteriakey][categoryKey] containing a ['minimum'] and
                a  ['maximum'] value in the scale of the criterion

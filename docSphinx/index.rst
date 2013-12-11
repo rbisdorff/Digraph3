@@ -1,14 +1,8 @@
-sv.. graphs documentation master file, created by
-   sphinx-quickstart on Mon Jan  2 22:15:21 2012.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-
 Technical Documentation of the Digraph resources!
 =================================================
 :Author: Raymond Bisdorff, University of Luxembourg FSTC/CSC
-:Version: $Revision: Python 3$
-:Copyright: R. Bisdorff 2013
+:Version: $Revision: Python 3.3$
+:Copyright: R. Bisdorff 2013-2014
 
 .. _Introduction-label:
 

@@ -29,7 +29,7 @@ from weakOrders import *
 
 class WeakOrder(Digraph):
     """
-    Abstract class for weakly transitive digraphs specialized methods.
+    Abstract class for weak orderings' specialized methods.
     """
     
     def showPreOrder(self,rankingByChoosing=None):
@@ -98,6 +98,54 @@ class WeakOrder(Digraph):
 class RankingByChoosingDigraph(WeakOrder):
     """
     Specialization of generic Digraph class for ranking by choosing results.
+    
+    Example python3 session:
+        >>> from outrankingDigraphs import *
+        >>> t = RandomCBPerformanceTableau(numberOfActions=7,\
+                numberOfCriteria=5,\ 
+                weightDistribution='equiobjectives')
+        >>> g = BipolarOutrankingDigraph(t,Normalized=True)
+        >>> g.showRelationTable()
+        * ---- Relation Table -----
+          S   | 'a01'  'a02'  'a03'  'a04'  'a05'  'a06'  'a07'   
+        ------|-------------------------------------------------
+        'a01' | +0.00  +0.00  +0.67  +0.00  -0.67  -0.33  -0.17  
+        'a02' | +0.00  +0.00  +1.00  +0.17  +0.00  -0.50  +0.33  
+        'a03' | -0.33  -1.00  +0.00  -1.00  -0.67  -1.00  -0.33  
+        'a04' | +0.00  +0.17  +1.00  +0.00  +0.00  -0.50  +0.00  
+        'a05' | +0.67  +0.00  +1.00  +0.00  +0.00  -0.33  +1.00  
+        'a06' | +0.67  +1.00  +1.00  +1.00  +0.33  +0.00  +0.33  
+        'a07' | +0.67  +0.00  +1.00  +0.00  -0.17  -0.33  +0.00 
+        >>> (~(-g)).exportGraphViz('weakOrdering')
+        *---- exporting a dot file for GraphViz tools ---------*
+        Exporting to converse-dual_rel_randomCBperftab.dot
+        dot -Grankdir=BT -Tpng converse-dual_rel_randomCBperftab.dot 
+            -o weakOrdering.png
+            
+        >>> from weakOrders import RankingByChoosingDigraph
+        >>> rbc = RankingByChoosingDigraph(g)
+        >>> rbc.showPreOrder()
+        Ranking by Choosing and Rejecting
+        1st ranked ['a06'] (0.50)
+            2nd ranked ['a02', 'a04', 'a05'] (0.14)
+            2nd last ranked ['a01', 'a04', 'a07'] (0.14)
+        1st last ranked ['a03'] (0.72)
+        
+        >>> rbc.showRelationTable(actionsSubset =\                
+                ['a06','a02','a05','a04','a01','a07','a03'],\
+                 Sorted = False)
+        * ---- Relation Table -----
+          S   | 'a06'  'a02'  'a05'  'a04'	'a01'  'a07'  'a03'	  
+        ------|-------------------------------------------------
+        'a06' | +0.00  +1.00  +0.33	 +1.00	+0.67  +0.33  +1.00	 
+        'a02' | -0.50  +0.00  +0.00  +0.00  +0.00  +0.33  +1.00	 
+        'a05' | -0.33  +0.00  +0.00  +0.00  +0.67  +1.00  +1.00	 
+        'a04' | -0.50  +0.00  +0.00	 +0.00	+0.00  +0.00  +1.00	 
+        'a01' | -0.33  +0.00  -0.67	 +0.00	+0.00  +0.00  +0.67	 
+        'a07' | -0.33  +0.00  -0.17	 +0.00	+0.00  +0.00  +1.00	 
+        'a03' | -1.00  -1.00  -0.67	 -1.00	-0.33  -0.33  +0.00	 
+
+    ..image:: weakOrdering.png
     """
     def __init__(self,other,Best=True,
                  Last=True,

@@ -2304,7 +2304,7 @@ class Digraph(object):
 
         print()
 
-    def showRelationTable(self,IntegerValues=False,actionsSubset= None,relation=None,ndigits=2):
+    def showRelationTable(self,Sorted=True,IntegerValues=False,actionsSubset= None,relation=None,ndigits=2):
         """
         prints the relation valuation in actions X actions table format.
         """
@@ -2326,7 +2326,8 @@ class Digraph(object):
                     actionsList += [(actions[x]['name'],x)]
             else:
                 actionsList += [(str(x),x)]
-        actionsList.sort()
+        if Sorted:
+            actionsList.sort()
         #print actionsList
         #actionsList.sort()
 
