@@ -101,7 +101,7 @@ class WeakOrder(Digraph):
         """ 
         actionsList = []
         if direction == "decreasing":            
-            ordering = self.computeRankingByBestChoosing()
+            ordering = self.computeRankingByBestChoosing(Debug=True)
         elif direction == "increasing":
             ordering = self.computeRankingByLastChoosing()
         else:
@@ -186,29 +186,31 @@ class RankingByChoosingDigraph(WeakOrder):
         self.order = len(self.actions)
         self.valuationdomain = digraph.valuationdomain
         if not Best and not Last:
-            self.rankingByChoosing = digraph.computeRankingByChoosing(CoDual=CoDual)
+            self.rankingByChoosing = digraph.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
             if Debug:
                 digraph.showRankingByChoosing()
             self.relation = digraph.computeRankingByChoosingRelation()
         elif Best and not Last:
-            digraph.computeRankingByBestChoosing(CoDual=CoDual)
+            digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=Debug)
             self.relation = digraph.computeRankingByBestChoosingRelation()
             if Debug:
                 digraph.showRankingByBestChoosing()
         elif Last and not Best:
-            digraph.computeRankingByLastChoosing(CoDual=CoDual)
+            digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=Debug)
             self.relation = digraph.computeRankingByLastChoosingRelation()
             if Debug:
                 digraph.showRankingByLastChoosing()
         else:
-            digraph.computeRankingByBestChoosing(CoDual=CoDual)
+            digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=False)
             relBest = digraph.computeRankingByBestChoosingRelation()
             if Debug:
                 digraph.showRankingByBestChoosing()
-            digraph.computeRankingByLastChoosing(CoDual=CoDual)
+                digraph.showRelationTable(relation=relBest)
+            digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=False)
             relLast = digraph.computeRankingByLastChoosingRelation()
             if Debug:
                 digraph.showRankingByLastChoosing()
+                digraph.showRelationTable(relation=relLast)
             relFusion = {}
             for x in digraph.actions:
                 relFusion[x] = {}
@@ -219,7 +221,8 @@ class RankingByChoosingDigraph(WeakOrder):
                         relFusion[x][y] = digraph.omin((relBest[x][y],relLast[x][y]))
                     else:
                         print('Error: invalid epistemic fusion operator %s' % operator)
-                      
+                    if Debug:
+                        print('!',x,y,relBest[x][y],relLast[x][y],relFusion[x][y])  
             self.relation=relFusion
 
         self.computeRankingByChoosing()
@@ -449,16 +452,17 @@ if __name__ == "__main__":
     from outrankingDigraphs import *
     from weakOrders import *
 
-    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=15)
-    t.saveXMCDA2('test')
-    #t = XMCDA2PerformanceTableau('test')
+#    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+#                                 numberOfActions=15)
+#    t.saveXMCDA2('test')
+    t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
     #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
     #g = RandomValuationDigraph(order=11)
     print('=== >>> best and last fusion (default)')
-    rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-min",Debug=False)
+    rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-min",Debug=True)
     rcg0.showPreOrder()
+    rcg0.showRelationTable()
     print(rcg0.computeOrdinalCorrelation(g))
     rcg0.showOrderedRelationTable(direction="decreasing")
     rcg0.showOrderedRelationTable(direction="increasing")
