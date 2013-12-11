@@ -241,7 +241,7 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
     a01 	 -3.19392 	 -5.36733
     a03 	 -18.51409 	 -21.09102
 
-    .. image:: proWeakOrderin_Colwise.png
+    .. image:: proWeakOrdering_Colwise.png
     
     """
     def __init__(self,other,fusionOperator="o-min",imageType=None,plotFileName=None,Debug=False):
