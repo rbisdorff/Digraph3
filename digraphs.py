@@ -396,6 +396,7 @@ class Digraph(object):
                         pass
             if Debug:
                 print( i, worstChoice, remainingActions, rankingByLastChoosing)
+
         if (worstChoice[1] == []):
             #### only a singleton choice or a failure quadruple left to rank
             if Debug:
@@ -601,7 +602,7 @@ class Digraph(object):
         rankingByBestChoosing = []
         bestChoice = (None,None)
         i = 0
-        while len(remainingActions) > 2 and bestChoice[1] != [] and i < 100:
+        while len(remainingActions) > 1 and bestChoice[1] != []:
             i += 1
             currG.actions = remainingActions
             if CoDual:
@@ -646,6 +647,7 @@ class Digraph(object):
                     remainingActions.remove(x)
             if Debug:
                 print(i, bestChoice, remainingActions, rankingByBestChoosing)
+
         if bestChoice[1] == []:
             #### only a singleton choice or a failure quadruple left to rank
             if Debug:
@@ -654,41 +656,6 @@ class Digraph(object):
             rankingByBestChoosing.append(bestChoice)
             if Debug:
                 print(rankingByBestChoosing)
-        elif len(remainingActions) == 2:
-            i += 1
-            currG.actions = remainingActions
-            if CoDual:
-                currGcd = CoDualDigraph(currG)
-            else:
-                currGcd = deepcopy(currG)
-            currGcd.computeRubisChoice(Comments=Debug)
-            #currGcd.computeGoodChoices(Comments=Debug)
-            bestChoiceCandidates = []
-            j = 0
-            for ch in currGcd.goodChoices:
-                k1 = currGcd.flatChoice(ch[5])
-                if Debug:
-                    print(ch[5],k1)
-                ck1 = list(set(currG.actions)-set(k1))
-                if len(ck1) > 0:
-                    j += 1
-                    k1Outranking = currG.computePairwiseClusterComparison(k1,ck1)
-                    if Debug:
-                        print('good', j, ch[5], k1, k1Outranking)
-                    #bestChoiceCandidates.append((k1Outranking['P+'],k1))
-                    bestChoiceCandidates.append( ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 ) )
-                else:
-                    bestChoiceCandidates.append((self.valuationdomain['max'],k1))
-            bestChoiceCandidates.sort(reverse=True)
-            try:
-                bestChoice = bestChoiceCandidates[0]
-            except:
-                #print 'Error: no best choice in currGcd!'
-                #currGcd.save('currGcd_errorBest')
-                bestChoice = (self.valuationdomain['med'],[])
-            if Debug:
-                print('bestChoice', i, bestChoice, bestChoiceCandidates)
-            rankingByBestChoosing.append(bestChoice)
 
         elif len(remainingActions) == 1:
             #### only a singleton choice or a failure quadruple left to rank
@@ -698,8 +665,69 @@ class Digraph(object):
             rankingByBestChoosing.append(bestChoice)
             if Debug:
                 print(rankingByBestChoosing)
+        
         self.rankingByBestChoosing = {'CoDual': CoDual, 'result': rankingByBestChoosing}
         return {'CoDual': CoDual, 'result': rankingByBestChoosing}
+
+##
+##
+##
+##              
+##        elif len(remainingActions) == 2:
+##            i += 1
+##            currG.actions = remainingActions
+##            if CoDual:
+##                currGcd = CoDualDigraph(currG)
+##            else:
+##                currGcd = deepcopy(currG)
+##            currGcd.computeRubisChoice(Comments=Debug)
+##            #currGcd.computeGoodChoices(Comments=Debug)
+##            bestChoiceCandidates = []
+##            j = 0
+##            for ch in currGcd.goodChoices:
+##                k1 = currGcd.flatChoice(ch[5])
+##                if Debug:
+##                    print(ch[5],k1)
+##                ck1 = list(set(currG.actions)-set(k1))
+##                if len(ck1) > 0:
+##                    j += 1
+##                    k1Outranking = currG.computePairwiseClusterComparison(k1,ck1)
+##                    if Debug:
+##                        print('good', j, ch[5], k1, k1Outranking)
+##                    #bestChoiceCandidates.append((k1Outranking['P+'],k1))
+##                    bestChoiceCandidates.append( ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 ) )
+##                else:
+##                    bestChoiceCandidates.append((self.valuationdomain['max'],k1))
+##            bestChoiceCandidates.sort(reverse=True)
+##            try:
+##                bestChoice = bestChoiceCandidates[0]
+##            except:
+##                #print 'Error: no best choice in currGcd!'
+##                #currGcd.save('currGcd_errorBest')
+##                bestChoice = (self.valuationdomain['med'],[])
+##            if Debug:
+##                print('bestChoice', i, bestChoice, bestChoiceCandidates)
+##            rankingByBestChoosing.append(bestChoice)
+##
+##        if (bestChoice[1] == []):
+##            #### only a singleton choice or a failure quadruple left to rank
+##            if Debug:
+##                print(bestChoice)
+##            bestChoice = (self.valuationdomain['max'],remainingActions)
+##            rankingByBestChoosing.append(bestChoice)
+##            if Debug:
+##                print(rankingByBestChoosing)
+##
+##        elif len(remainingActions) == 1:
+##            #### only a singleton choice or a failure quadruple left to rank
+##            if Debug:
+##                print(bestChoice)
+##            bestChoice = (self.valuationdomain['max'],remainingActions)
+##            rankingByBestChoosing.append(bestChoice)
+##            if Debug:
+##                print(rankingByBestChoosing)
+##        self.rankingByBestChoosing = {'CoDual': CoDual, 'result': rankingByBestChoosing}
+##        return {'CoDual': CoDual, 'result': rankingByBestChoosing}
 
     def iterateRankingByChoosing(self,Odd=False,CoDual=False,Comments=True,Debug=False,Limited=None):
         """
@@ -2304,7 +2332,12 @@ class Digraph(object):
 
         print()
 
-    def showRelationTable(self,Sorted=True,IntegerValues=False,actionsSubset= None,relation=None,ndigits=2):
+    def showRelationTable(self,Sorted=True,\
+                          IntegerValues=False,\
+                          actionsSubset= None,\
+                          relation=None,\
+                          ndigits=2,\
+                          ReflexiveTerms=True):
         """
         prints the relation valuation in actions X actions table format.
         """
@@ -2342,11 +2375,23 @@ class Digraph(object):
         for x in actionsList:
             print("'"+x[0]+"' | ", end=' ')
             for y in actionsList:
-                if hasIntegerValuation:
-                    print('%d\t' % (relation[x[1]][y[1]]), end=' ')
+                if x != y:
+                    if hasIntegerValuation:
+                        print('%d\t' % (relation[x[1]][y[1]]), end=' ')
+                    else:
+                        formatString = '%%2.%df\t' % ndigits
+                        print(formatString % (relation[x[1]][y[1]]), end=' ')
                 else:
-                    formatString = '%%2.%df\t' % ndigits
-                    print(formatString % (relation[x[1]][y[1]]), end=' ')
+                    if ReflexiveTerms:
+                        if hasIntegerValuation:
+                            print('%d\t' % (relation[x[1]][y[1]]), end=' ')
+                        else:
+                            formatString = '%%2.%df\t' % ndigits
+                            print(formatString % (relation[x[1]][y[1]]), end=' ')
+                    else:  
+                        formatString = ' - \t'
+                        print(formatString, end=' ')
+                    
             print()
         print('\n')
         print('Valuation domain: ', self.valuationdomain)

@@ -93,7 +93,31 @@ class WeakOrder(Digraph):
         """
         Dummy name for showPreOrder() method
         """
-        self.showPreOrder(rankingByChoosing=rankingByChoosing)        
+        self.showPreOrder(rankingByChoosing=rankingByChoosing)
+    
+    def showOrderedRelationTable(self,direction="decreasing"):
+        """
+        Showing the relation table in decreasing (default) or increasing order.
+        """ 
+        actionsList = []
+        if direction == "decreasing":            
+            ordering = self.computeRankingByBestChoosing()
+        elif direction == "increasing":
+            ordering = self.computeRankingByLastChoosing()
+        else:
+            print('Direction error !: %s is not a correct instruction (decreasing=default or increasing)' % direction)
+        for eq in ordering['result']:
+            print(eq[1])
+            eq = eq[1]
+            eq.sort()
+            for x in eq:
+                actionsList.append(x)
+        if len(actionsList) != len(self.actions):
+            print('Error !: missing action(s) %s in ordered table.')
+        self.showRelationTable(actionsSubset=actionsList,Sorted=False,ReflexiveTerms=False)
+            
+            
+                
 
 class RankingByChoosingDigraph(WeakOrder):
     """
@@ -205,6 +229,111 @@ class RankingByChoosingDigraph(WeakOrder):
                 
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+
+class RankingByBestChoosingDigraph(WeakOrder):
+    """
+    Specialization of abstrct WeakOrder class for computing a ranking by best-choosing.
+    """
+    def __init__(self,digraph,Normalized=True,CoDual=False,Debug=False):
+        from copy import deepcopy
+        digraphName = 'ranking-by-best'+digraph.name
+        self.name = deepcopy(digraphName)
+        self.actions = deepcopy(digraph.actions)
+        self.valuationdomain = deepcopy(digraph.valuationdomain)
+        self.rankingByBestChoosing = digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=False)
+        self.relation = digraph.computeRankingByBestChoosingRelation()
+        if Normalized:
+            self.recodeValuation(-1,1)
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        
+    def showPreOrder(self):
+        self.showRankingByBestChoosing(self.rankingByBestChoosing)
+
+class RankingByLastChoosingDigraph(WeakOrder):
+    """
+    Specialization of abstract WeakOrder class for computing a ranking by rejecting.
+    """
+    def __init__(self,digraph,Normalized=True,CoDual=False,Debug=False):
+        from copy import deepcopy
+        digraphName = 'ranking-by-last'+digraph.name
+        self.name = deepcopy(digraphName)
+        self.actions = deepcopy(digraph.actions)
+        self.valuationdomain = deepcopy(digraph.valuationdomain)
+        self.rankingByLastChoosing = digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=False)
+        self.relation = digraph.computeRankingByLastChoosingRelation()
+        if Normalized:
+            self.recodeValuation(-1,1)
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+    
+    def showPreOrder(self):
+        self.showRankingByLastChoosing(self.rankingByLastChoosing)
+
+class RankingByPrudentChoosingDigraph(RankingByChoosingDigraph):
+    """
+    Specialization for ranking-by-rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to 20% of the valuation domain maximum (1.0).
+    """
+    def __init__(self,digraph,CoDual=False,Normalized=True,Odd=True,Limited=0.2,Comments=False,Debug=False,SplitCorrelation=True):
+        from copy import deepcopy
+        from time import time
+        if Comments:          
+            t0 = time()
+            print('------- Commenting ranking by prudent choosing ------')
+        digraph_ = deepcopy(digraph)
+        if Normalized:
+            digraph_.recodeValuation(-1,1)
+        digraphName = 'sorting-by-prudent-choosing'+digraph_.name
+        self.name = digraphName
+        self.actions = deepcopy(digraph_.actions)
+        self.order = len(self.actions)
+        self.valuationdomain = deepcopy(digraph_.valuationdomain)
+        s1 = RankingByLastChoosingDigraph(digraph_,CoDual=CoDual,Debug=False)
+        s2 = RankingByBestChoosingDigraph(digraph_,CoDual=CoDual,Debug=False)
+        fus = FusionDigraph(s1,s2)
+        cutLevel = min(digraph_.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments),Decimal(Limited))
+        self.cutLevel = cutLevel
+        if cutLevel > self.valuationdomain['med']:
+            if cutLevel < self.valuationdomain['max']:
+                gp = PolarisedDigraph(digraph_,level=cutLevel,StrictCut=True)
+            else:
+                gp = PolarisedDigraph(digraph_,level=cutLevel,StrictCut=False)
+            s1p = RankingByLastChoosingDigraph(gp,CoDual=CoDual,Debug=False)
+            s2p = RankingByBestChoosingDigraph(gp,CoDual=CoDual,Debug=False)
+            fusp = FusionDigraph(s1p,s2p)
+            corrgp = digraph_.computeOrdinalCorrelation(fusp)
+            corrg = digraph_.computeOrdinalCorrelation(fus)
+            if Comments:
+                print('Correlation with cutting    : %.3f x %.3f = %.3f' % (corrgp['correlation'],corrgp['determination'],corrgp['correlation']*corrgp['determination']))
+                print('Correlation without cutting : %.3f x %.3f = %.3f' % (corrg['correlation'],corrg['determination'],corrg['correlation']*corrg['determination']))
+            if SplitCorrelation:
+                if corrgp['correlation'] > corrg['correlation']:           
+                    self.relation = deepcopy(fusp.relation)
+                else:
+                    self.relation = deepcopy(fus.relation)
+            else:
+                if (corrgp['correlation']*corrgp['determination']) > (corrg['correlation']*corrg['determination']):
+                    self.relation = deepcopy(fusp.relation)
+                else:
+                    self.relation = deepcopy(fus.relation)                
+        else:
+            self.relation = deepcopy(fus.relation)
+        self.rankingByChoosing = self.computeRankingByChoosing(CoDual=CoDual)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        if Comments:
+            t1 = time()
+            gdeter = digraph_.computeDeterminateness()
+            self.showPreOrder()
+            print('Circuits cutting level limit  : %.3f' % Limited)
+            print('Circuits elimination cut level: %.3f' % self.cutLevel)
+            print('Ordinal Correlation with given outranking')
+            corr = digraph_.computeOrdinalCorrelation(self)
+            print('Correlation     : %.3f' % corr['correlation'])
+            print('Determinateness : %.3f (%.3f)' % (corr['determination'],gdeter))
+            print('Execution time  : %.4f sec.' % (t1-t0))
 
 
 class PrincipalInOutDegreesOrdering(WeakOrder):
@@ -320,20 +449,24 @@ if __name__ == "__main__":
     from outrankingDigraphs import *
     from weakOrders import *
 
-    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                   numberOfActions=15)
+    #t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+    #                             numberOfActions=15)
     #t.saveXMCDA2('test')
-    #t = XMCDA2PerformanceTableau('test')
-    #g = BipolarOutrankingDigraph(t,Normalized=True)
+    t = XMCDA2PerformanceTableau('test')
+    g = BipolarOutrankingDigraph(t,Normalized=True)
     #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
-    g = RandomValuationDigraph(order=11)
+    #g = RandomValuationDigraph(order=11)
     print('=== >>> best and last fusion (default)')
     rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-min",Debug=False)
     rcg0.showPreOrder()
     print(rcg0.computeOrdinalCorrelation(g))
-    rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-max",Debug=False)
-    rcg0.showPreOrder()
-    print(rcg0.computeOrdinalCorrelation(g))
+    rcg0.showOrderedRelationTable(direction="decreasing")
+    rcg0.showOrderedRelationTable(direction="increasing")
+    
+#    rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-max",Debug=False)
+#    rcg0.showPreOrder()
+#    print(rcg0.computeOrdinalCorrelation(g))
+#    rcg0.showOrderedRelationTable()
 ##    rcg.showRankingByChoosing()
 ##    rcg1 = RankingByChoosingDigraph(rcg,CoDual=True)
 ##    rcg1.showRankingByChoosing()
@@ -351,17 +484,17 @@ if __name__ == "__main__":
 ##    rcg3.showPreOrder()
 ##    print(rcg3.computeOrdinalCorrelation(g))
 ##    print('=== >>> principal preorder')
-    rcf1 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
-                                        imageType=None,Debug=False)
-    rcf1.showPreOrder()
-    print(rcf1.computeOrdinalCorrelation(g))
-    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-max",
-                                        imageType=None,Debug=False)
-    rcf2.showPreOrder()
-    print(rcf2.computeOrdinalCorrelation(g))
-    #rcf.showPrincipalScores()
-    rcf1.showPrincipalScores(ColwiseOrder=True)
-    rcf1.showPrincipalScores(RowwiseOrder=True)
-
-    
-    
+#    rcf1 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
+#                                        imageType=None,Debug=False)
+#    rcf1.showPreOrder()
+#    print(rcf1.computeOrdinalCorrelation(g))
+#    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-max",
+#                                        imageType=None,Debug=False)
+#    rcf2.showPreOrder()
+#    print(rcf2.computeOrdinalCorrelation(g))
+#    #rcf.showPrincipalScores()
+#    rcf1.showPrincipalScores(ColwiseOrder=True)
+#    rcf1.showPrincipalScores(RowwiseOrder=True)
+#    rp = RankingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.2)
+#    rp.showOrderedRelationTable(direction="increasing")
+#    rp.showOrderedRelationTable()
