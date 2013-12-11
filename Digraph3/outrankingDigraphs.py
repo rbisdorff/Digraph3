@@ -1328,6 +1328,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
     def showRelationTable(self,IntegerValues=False,
                           actionsSubset= None,
+                          Sorted=True,
                           hasLPDDenotation=False,
                           hasLatexFormat=False,
                           hasIntegerValuation=False,
@@ -1363,7 +1364,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     actionsList += [(actions[x]['name'],x)]
             else:
                 actionsList += [(x,x)]
-        actionsList.sort()
+        if Sorted:
+            actionsList.sort()
         #print actionsList
         #actionsList.sort()
 
