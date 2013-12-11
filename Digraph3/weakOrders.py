@@ -120,8 +120,7 @@ class RankingByChoosingDigraph(WeakOrder):
         *---- exporting a dot file for GraphViz tools ---------*
         Exporting to converse-dual_rel_randomCBperftab.dot
         dot -Grankdir=BT -Tpng converse-dual_rel_randomCBperftab.dot 
-            -o weakOrdering.png
-            
+            -o weakOrdering.png        
         >>> from weakOrders import RankingByChoosingDigraph
         >>> rbc = RankingByChoosingDigraph(g)
         >>> rbc.showPreOrder()
@@ -130,7 +129,6 @@ class RankingByChoosingDigraph(WeakOrder):
             2nd ranked ['a02', 'a04', 'a05'] (0.14)
             2nd last ranked ['a01', 'a04', 'a07'] (0.14)
         1st last ranked ['a03'] (0.72)
-        
         >>> rbc.showRelationTable(actionsSubset =\                
                 ['a06','a02','a05','a04','a01','a07','a03'],\
                  Sorted = False)
@@ -145,7 +143,8 @@ class RankingByChoosingDigraph(WeakOrder):
         'a07' | -0.33  +0.00  -0.17	 +0.00	+0.00  +0.00  +1.00	 
         'a03' | -1.00  -1.00  -0.67	 -1.00	-0.33  -0.33  +0.00	 
 
-    ..image:: weakOrdering.png
+    .. image:: weakOrdering.png
+    
     """
     def __init__(self,other,Best=True,
                  Last=True,
