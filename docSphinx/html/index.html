@@ -995,7 +995,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1979,7 +1979,7 @@ Otherwise, decimal precision.</li>
 </div>
 </dd>
 </dl>
-<img alt="randomValuationDigraph.png" src="randomValuationDigraph.png" />
+<img alt="_images/randomValuationDigraph.png" src="_images/randomValuationDigraph.png" />
 </dd></dl>
 
 <dl class="class">
@@ -2221,7 +2221,7 @@ intance.</p>
 </div>
 </dd>
 </dl>
-<img alt="randomGraph.png" src="randomGraph.png" />
+<img alt="_images/randomGraph.png" src="_images/randomGraph.png" />
 </dd></dl>
 
 <dl class="method">
@@ -2279,7 +2279,7 @@ temporary Grid graphs of dimension n times m.</p>
 </dd>
 </dl>
 <p>Example of 5x5 GridGraph instance:</p>
-<img alt="grid-5-5.png" src="grid-5-5.png" />
+<img alt="_images/grid-5-5.png" src="_images/grid-5-5.png" />
 <dl class="method">
 <dt id="graphs.GridGraph.showShort">
 <tt class="descname">showShort</tt><big>(</big><big>)</big><a class="headerlink" href="#graphs.GridGraph.showShort" title="Permalink to this definition">¶</a></dt>
@@ -2307,7 +2307,7 @@ temporary Grid graphs of dimension n times m.</p>
 <em class="property">class </em><tt class="descclassname">graphs.</tt><tt class="descname">RandomTree</tt><big>(</big><em>order=None</em>, <em>prueferCode=None</em>, <em>myseed=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#graphs.RandomTree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#graphs.Graph" title="graphs.Graph"><tt class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></tt></a></p>
 <p>Random instance of a tree generated from a random Prüfer code.</p>
-<img alt="randomTree.png" src="randomTree.png" />
+<img alt="_images/randomTree.png" src="_images/randomTree.png" />
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#introduction-label"><em>Introduction</em></a></p>
@@ -2371,7 +2371,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3066,7 +3066,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4026,7 +4026,7 @@ ranking-by-Rubis-choosing orderings.</p>
 <span class="go">   -o weakOrdering.png </span>
 </pre></div>
 </div>
-<img alt="weakOrdering.png" src="weakOrdering.png" />
+<img alt="_images/weakOrdering.png" src="_images/weakOrdering.png" />
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showPreOrder</span><span class="p">()</span>
