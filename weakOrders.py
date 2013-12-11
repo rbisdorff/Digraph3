@@ -97,8 +97,8 @@ class WeakOrder(Digraph):
 
 class RankingByChoosingDigraph(WeakOrder):
     """
-    Specialization of the abstract WeakOrderclass for 
-    ranking-by-Rubis-choosing results.
+    Specialization of the abstract WeakOrder class for 
+    ranking-by-Rubis-choosing orderings.
     
     Example python3 session:
     
@@ -209,8 +209,40 @@ class RankingByChoosingDigraph(WeakOrder):
 
 class PrincipalInOutDegreesOrdering(WeakOrder):
     """
-    Specialization of generic Digraph class for ranking by fusion
-    of the principal orders of in- and outdegrees.
+    Specialization of abstract WeakOrder class for ranking by fusion
+    of the principal orders of the variance-covariance of in- 
+    (Colwise) and outdegrees (Rowwise).
+    
+    Example Python3 session with same outranking digraph g as shown in the RankingByChoosingDigraph example session (see below). 
+    
+    
+    >>> from weakOrders import PrincipalInOutDegreesOrdering
+    >>> pro = PrincipalInOutDegreesOrdering(g,imageType="png",\ 
+                     plotFileName="proWeakOrdering")
+    >>> pro.showPreOrder()
+    Ranking by Choosing and Rejecting
+     1st ranked ['a06'] (1.00)
+       2nd ranked ['a05'] (1.00)
+         3rd ranked ['a02'] (1.00)
+           4th ranked ['a04'] (1.00)
+           4th last ranked ['a04'] (1.00)
+         3rd last ranked ['a07'] (1.00)
+       2nd last ranked ['a01'] (1.00)
+     1st last ranked ['a03'] (1.00)
+    >>> pro.showPrincipalScores(ColwiseOrder=True)
+    List of principal scores
+    Column wise covariance ordered
+    action 	 colwise 	 rowwise
+    a06 	 15.52934 	 13.74739
+    a05 	 7.71195 	 4.95199
+    a02 	 3.40812 	 0.70554
+    a04 	 2.76502 	 0.15189
+    a07 	 0.66875 	 -1.77637
+    a01 	 -3.19392 	 -5.36733
+    a03 	 -18.51409 	 -21.09102
+
+    .. image:: proWeakOrderin_Colwise.png
+    
     """
     def __init__(self,other,fusionOperator="o-min",imageType=None,plotFileName=None,Debug=False):
         from copy import deepcopy
@@ -256,7 +288,7 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
 
     def showPrincipalScores(self, ColwiseOrder=False, RowwiseOrder=False):
         """
-        show the princiapl scores
+        showing the principal in- (Colwise) and out-degrees (Rowwise) scores.
         """
         print('List of principal scores')
         if not ColwiseOrder and not RowwiseOrder:
