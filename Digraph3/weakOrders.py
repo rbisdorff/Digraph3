@@ -449,10 +449,10 @@ if __name__ == "__main__":
     from outrankingDigraphs import *
     from weakOrders import *
 
-    #t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-    #                             numberOfActions=15)
-    #t.saveXMCDA2('test')
-    t = XMCDA2PerformanceTableau('test')
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                 numberOfActions=15)
+    t.saveXMCDA2('test')
+    #t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
     #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
     #g = RandomValuationDigraph(order=11)
