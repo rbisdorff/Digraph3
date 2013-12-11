@@ -97,7 +97,8 @@ class WeakOrder(Digraph):
 
 class RankingByChoosingDigraph(WeakOrder):
     """
-    Specialization of generic Digraph class for ranking by choosing results.
+    Specialization of the abstract WeakOrderclass for 
+    ranking-by-Rubis-choosing results.
     
     Example python3 session:
         >>> from outrankingDigraphs import *
@@ -120,7 +121,10 @@ class RankingByChoosingDigraph(WeakOrder):
         *---- exporting a dot file for GraphViz tools ---------*
         Exporting to converse-dual_rel_randomCBperftab.dot
         dot -Grankdir=BT -Tpng converse-dual_rel_randomCBperftab.dot 
-            -o weakOrdering.png        
+            -o weakOrdering.png 
+            
+    .. image:: weakOrdering.png
+   
         >>> from weakOrders import RankingByChoosingDigraph
         >>> rbc = RankingByChoosingDigraph(g)
         >>> rbc.showPreOrder()
@@ -142,8 +146,6 @@ class RankingByChoosingDigraph(WeakOrder):
         'a01' | -0.33  +0.00  -0.67	 +0.00	+0.00  +0.00  +0.67	 
         'a07' | -0.33  +0.00  -0.17	 +0.00	+0.00  +0.00  +1.00	 
         'a03' | -1.00  -1.00  -0.67	 -1.00	-0.33  -0.33  +0.00	 
-
-    .. image:: weakOrdering.png
     
     """
     def __init__(self,other,Best=True,
