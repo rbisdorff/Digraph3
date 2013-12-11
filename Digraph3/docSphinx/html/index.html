@@ -3957,12 +3957,41 @@ a given bipolar-valued Digraph instance</p>
 <dt id="weakOrders.PrincipalInOutDegreesOrdering">
 <em class="property">class </em><tt class="descclassname">weakOrders.</tt><tt class="descname">PrincipalInOutDegreesOrdering</tt><big>(</big><em>other</em>, <em>fusionOperator='o-min'</em>, <em>imageType=None</em>, <em>plotFileName=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#weakOrders.PrincipalInOutDegreesOrdering" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#weakOrders.WeakOrder" title="weakOrders.WeakOrder"><tt class="xref py py-class docutils literal"><span class="pre">weakOrders.WeakOrder</span></tt></a></p>
-<p>Specialization of generic Digraph class for ranking by fusion
-of the principal orders of in- and outdegrees.</p>
+<p>Specialization of abstract WeakOrder class for ranking by fusion
+of the principal orders of the variance-covariance of in- 
+(Colwise) and outdegrees (Rowwise).</p>
+<p>Example Python3 session with same outranking digraph g as shown in the RankingByChoosingDigraph example session (see below).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">PrincipalInOutDegreesOrdering</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span> <span class="o">=</span> <span class="n">PrincipalInOutDegreesOrdering</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">imageType</span><span class="o">=</span><span class="s">&quot;png&quot;</span><span class="p">,</span>\ 
+<span class="go">                 plotFileName=&quot;proWeakOrdering&quot;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span><span class="o">.</span><span class="n">showPreOrder</span><span class="p">()</span>
+<span class="go">Ranking by Choosing and Rejecting</span>
+<span class="go"> 1st ranked [&#39;a06&#39;] (1.00)</span>
+<span class="go">   2nd ranked [&#39;a05&#39;] (1.00)</span>
+<span class="go">     3rd ranked [&#39;a02&#39;] (1.00)</span>
+<span class="go">       4th ranked [&#39;a04&#39;] (1.00)</span>
+<span class="go">       4th last ranked [&#39;a04&#39;] (1.00)</span>
+<span class="go">     3rd last ranked [&#39;a07&#39;] (1.00)</span>
+<span class="go">   2nd last ranked [&#39;a01&#39;] (1.00)</span>
+<span class="go"> 1st last ranked [&#39;a03&#39;] (1.00)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span><span class="o">.</span><span class="n">showPrincipalScores</span><span class="p">(</span><span class="n">ColwiseOrder</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">List of principal scores</span>
+<span class="go">Column wise covariance ordered</span>
+<span class="go">action       colwise         rowwise</span>
+<span class="go">a06          15.52934        13.74739</span>
+<span class="go">a05          7.71195         4.95199</span>
+<span class="go">a02          3.40812         0.70554</span>
+<span class="go">a04          2.76502         0.15189</span>
+<span class="go">a07          0.66875         -1.77637</span>
+<span class="go">a01          -3.19392        -5.36733</span>
+<span class="go">a03          -18.51409       -21.09102</span>
+</pre></div>
+</div>
+<img alt="proWeakOrderin_Colwise.png" src="proWeakOrderin_Colwise.png" />
 <dl class="method">
 <dt id="weakOrders.PrincipalInOutDegreesOrdering.showPrincipalScores">
 <tt class="descname">showPrincipalScores</tt><big>(</big><em>ColwiseOrder=False</em>, <em>RowwiseOrder=False</em><big>)</big><a class="headerlink" href="#weakOrders.PrincipalInOutDegreesOrdering.showPrincipalScores" title="Permalink to this definition">¶</a></dt>
-<dd><p>show the princiapl scores</p>
+<dd><p>showing the principal in- (Colwise) and out-degrees (Rowwise) scores.</p>
 </dd></dl>
 
 </dd></dl>
@@ -3971,8 +4000,8 @@ of the principal orders of in- and outdegrees.</p>
 <dt id="weakOrders.RankingByChoosingDigraph">
 <em class="property">class </em><tt class="descclassname">weakOrders.</tt><tt class="descname">RankingByChoosingDigraph</tt><big>(</big><em>other</em>, <em>Best=True</em>, <em>Last=True</em>, <em>fusionOperator='o-min'</em>, <em>CoDual=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#weakOrders.RankingByChoosingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#weakOrders.WeakOrder" title="weakOrders.WeakOrder"><tt class="xref py py-class docutils literal"><span class="pre">weakOrders.WeakOrder</span></tt></a></p>
-<p>Specialization of the abstract WeakOrderclass for 
-ranking-by-Rubis-choosing results.</p>
+<p>Specialization of the abstract WeakOrder class for 
+ranking-by-Rubis-choosing orderings.</p>
 <p>Example python3 session:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>\ 
