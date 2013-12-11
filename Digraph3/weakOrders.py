@@ -101,7 +101,7 @@ class RankingByChoosingDigraph(WeakOrder):
     
     Example python3 session:
         >>> from outrankingDigraphs import *
-        >>> t = RandomCBPerformanceTableau(numberOfActions=7,\
+        >>> t = RandomCBPerformanceTableau(numberOfActions=7,\ 
                 numberOfCriteria=5,\ 
                 weightDistribution='equiobjectives')
         >>> g = BipolarOutrankingDigraph(t,Normalized=True)
@@ -129,9 +129,9 @@ class RankingByChoosingDigraph(WeakOrder):
             2nd ranked ['a02', 'a04', 'a05'] (0.14)
             2nd last ranked ['a01', 'a04', 'a07'] (0.14)
         1st last ranked ['a03'] (0.72)
-        >>> rbc.showRelationTable(actionsSubset =\                
-                ['a06','a02','a05','a04','a01','a07','a03'],\
-                 Sorted = False)
+        >>> rbc.showRelationTable(actionsSubset =\ 
+               ['a06','a02','a05','a04','a01','a07','a03'],\ 
+               Sorted = False)
         * ---- Relation Table -----
           S   | 'a06'  'a02'  'a05'  'a04'	'a01'  'a07'  'a03'	  
         ------|-------------------------------------------------
