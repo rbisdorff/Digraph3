@@ -101,7 +101,7 @@ class WeakOrder(Digraph):
         """ 
         actionsList = []
         if direction == "decreasing":            
-            ordering = self.computeRankingByBestChoosing(Debug=True)
+            ordering = self.computeRankingByBestChoosing(Debug=False)
         elif direction == "increasing":
             ordering = self.computeRankingByLastChoosing()
         else:
@@ -452,20 +452,21 @@ if __name__ == "__main__":
     from outrankingDigraphs import *
     from weakOrders import *
 
-#    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-#                                 numberOfActions=15)
-#    t.saveXMCDA2('test')
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                 numberOfActions=15)
+    t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
     #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
     #g = RandomValuationDigraph(order=11)
     print('=== >>> best and last fusion (default)')
-    rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-min",Debug=True)
+    rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-min",Debug=False)
     rcg0.showPreOrder()
     rcg0.showRelationTable()
     print(rcg0.computeOrdinalCorrelation(g))
     rcg0.showOrderedRelationTable(direction="decreasing")
     rcg0.showOrderedRelationTable(direction="increasing")
+    print(g.computeChordlessCircuits())
     
 #    rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-max",Debug=False)
 #    rcg0.showPreOrder()

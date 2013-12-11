@@ -1123,7 +1123,7 @@ class Digraph(object):
 ##            currActions = currActions - (ibch | iwch)
 ##        return rankingRelation
 
-    def computeRankingByBestChoosingRelation(self,rankingByBestChoosing=None,Debug=True):
+    def computeRankingByBestChoosingRelation(self,rankingByBestChoosing=None,Debug=False):
         """
         Renders the bipolar-valued relation obtained from
         the self.rankingByBestChoosing result.
