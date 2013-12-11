@@ -627,9 +627,9 @@ class Digraph(object):
                     bestChoiceCandidates.append( ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 ) )
                 else:
                     bestChoiceCandidates.append((self.valuationdomain['max'],k1))
-            #bestChoiceCandidates.sort(reverse=True)
-            bestChoiceCandidates = sorted(bestChoiceCandidates, key=lambda choice: str(choice[1]) ) # lexigr choices
-            bestChoiceCandidates = sorted(bestChoiceCandidates, key=lambda choice: -choice[0]) # sort by outranking power
+            bestChoiceCandidates.sort(reverse=True)
+            #bestChoiceCandidates = sorted(bestChoiceCandidates, key=lambda choice: str(choice[1]) ) # lexigr choices
+            #bestChoiceCandidates = sorted(bestChoiceCandidates, key=lambda choice: -choice[0]) # sort by outranking power
             try:
                 bestChoice = bestChoiceCandidates[0]
             except:
@@ -644,10 +644,12 @@ class Digraph(object):
 
             if len(bestChoice[1]) > 0:
                 for x in bestChoice[1]:
-                    remainingActions.remove(x)
+                    try:
+                        remainingActions.remove(x)
+                    except:
+                        pass
             if Debug:
                 print(i, bestChoice, remainingActions, rankingByBestChoosing)
-
         if bestChoice[1] == []:
             #### only a singleton choice or a failure quadruple left to rank
             if Debug:
@@ -656,6 +658,41 @@ class Digraph(object):
             rankingByBestChoosing.append(bestChoice)
             if Debug:
                 print(rankingByBestChoosing)
+##        elif len(remainingActions) == 2:
+##            i += 1
+##            currG.actions = remainingActions
+##            if CoDual:
+##                currGcd = CoDualDigraph(currG)
+##            else:
+##                currGcd = deepcopy(currG)
+##            currGcd.computeRubisChoice(Comments=Debug)
+##            #currGcd.computeGoodChoices(Comments=Debug)
+##            bestChoiceCandidates = []
+##            j = 0
+##            for ch in currGcd.goodChoices:
+##                k1 = currGcd.flatChoice(ch[5])
+##                if Debug:
+##                    print(ch[5],k1)
+##                ck1 = list(set(currG.actions)-set(k1))
+##                if len(ck1) > 0:
+##                    j += 1
+##                    k1Outranking = currG.computePairwiseClusterComparison(k1,ck1)
+##                    if Debug:
+##                        print('good', j, ch[5], k1, k1Outranking)
+##                    #bestChoiceCandidates.append((k1Outranking['P+'],k1))
+##                    bestChoiceCandidates.append( ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 ) )
+##                else:
+##                    bestChoiceCandidates.append((self.valuationdomain['max'],k1))
+##            bestChoiceCandidates.sort(reverse=True)
+##            try:
+##                bestChoice = bestChoiceCandidates[0]
+##            except:
+##                #print 'Error: no best choice in currGcd!'
+##                #currGcd.save('currGcd_errorBest')
+##                bestChoice = (self.valuationdomain['med'],[])
+##            if Debug:
+##                print('bestChoice', i, bestChoice, bestChoiceCandidates)
+##            rankingByBestChoosing.append(bestChoice)
 
         elif len(remainingActions) == 1:
             #### only a singleton choice or a failure quadruple left to rank
@@ -665,9 +702,29 @@ class Digraph(object):
             rankingByBestChoosing.append(bestChoice)
             if Debug:
                 print(rankingByBestChoosing)
-        
         self.rankingByBestChoosing = {'CoDual': CoDual, 'result': rankingByBestChoosing}
         return {'CoDual': CoDual, 'result': rankingByBestChoosing}
+
+##        if bestChoice[1] == []:
+##            #### only a singleton choice or a failure quadruple left to rank
+##            if Debug:
+##                print(bestChoice)
+##            bestChoice = (self.valuationdomain['max'],remainingActions)
+##            rankingByBestChoosing.append(bestChoice)
+##            if Debug:
+##                print(rankingByBestChoosing)
+##
+##        elif len(remainingActions) == 1:
+##            #### only a singleton choice or a failure quadruple left to rank
+##            if Debug:
+##                print(bestChoice)
+##            bestChoice = (self.valuationdomain['max'],remainingActions)
+##            rankingByBestChoosing.append(bestChoice)
+##            if Debug:
+##                print(rankingByBestChoosing)
+##        
+##        self.rankingByBestChoosing = {'CoDual': CoDual, 'result': rankingByBestChoosing}
+##        return {'CoDual': CoDual, 'result': rankingByBestChoosing}
 
 ##
 ##
@@ -1066,7 +1123,7 @@ class Digraph(object):
 ##            currActions = currActions - (ibch | iwch)
 ##        return rankingRelation
 
-    def computeRankingByBestChoosingRelation(self,rankingByBestChoosing=None,Debug=False):
+    def computeRankingByBestChoosingRelation(self,rankingByBestChoosing=None,Debug=True):
         """
         Renders the bipolar-valued relation obtained from
         the self.rankingByBestChoosing result.
@@ -1078,9 +1135,9 @@ class Digraph(object):
                 print('Error: first run computeRankingByBestChoosing(CoDual=T/F) !')
                 return None
 
-        Max = Decimal('1')
-        Med = Decimal('0')
-        Min = Decimal('-1')
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
         actions = [x for x in self.actions]
         currActions = set(actions)
         relation = self.relation
@@ -1095,51 +1152,25 @@ class Digraph(object):
             ribch = set(currActions) - ibch
             for x in ibch:
                 for y in ibch:
+                    if Debug and (x == 'a10' and y == 'a07') :
+                        print(x,y,rankingRelation[x][y],relation[x][y])
+                        print(y,x,rankingRelation[x][y],relation[y][x])
                     if x != y:
-                        rankingRelation[x][y] = self.omax([rankingRelation[x][y],abs(relation[x][y])])
-                        rankingRelation[y][x] = self.omax([rankingRelation[y][x],abs(relation[y][x])])
+                        rankingRelation[x][y] = self.omax([rankingRelation[x][y],\
+                                                           self.omin( [abs(relation[x][y]),abs(relation[y][x])] )])
+                        rankingRelation[y][x] = self.omax([rankingRelation[y][x],\
+                                                           self.omin( [abs(relation[y][x]),abs(relation[y][x])] )])
                 for y in ribch:
-                    rankingRelation[x][y] = self.omax([rankingRelation[x][y],abs(relation[x][y])])
-                    rankingRelation[y][x] = self.omax([rankingRelation[y][x],-abs(relation[y][x])])
+                    if Debug and (x == 'a10' and y == 'a07'):
+                        print(x,y,rankingRelation[x][y],relation[x][y])
+                        print(y,x,rankingRelation[x][y],relation[y][x])
+                    rankingRelation[x][y] = self.omax([rankingRelation[x][y],\
+                                                       self.omin([abs(relation[x][y]),abs(relation[y][x])])])
+                    rankingRelation[y][x] = self.omax([rankingRelation[y][x],\
+                                                       self.omin([-abs(relation[y][x]),-abs(relation[x][y])])])
             currActions = currActions - ibch
         return rankingRelation
 
-##    def computeRankingByBestChoosingRelationOld(self,rankingByBestChoosing=None,Debug=False):
-##        """
-##        Renders the bipolar-valued relation obtained from
-##        the self.rankingByBestChoosing result.
-##        """
-##        if rankingByBestChoosing==None:
-##            try:
-##                rankingByBestChoosing = self.rankingByBestChoosing['result']
-##            except:
-##                print('Error: first run computeRankingByBestChoosing(CoDual=T/F) !')
-##                return None
-##
-##        Max = Decimal('1')
-##        Med = Decimal('0')
-##        Min = Decimal('-1')
-##        actions = [x for x in self.actions]
-##        currActions = set(actions)
-##        rankingRelation = {}
-##        for x in actions:
-##            rankingRelation[x] = {}
-##            for y in actions:
-##                rankingRelation[x][y] = Med
-##        n = len(rankingByBestChoosing)
-##        for i in range(n):
-##            ibch = set(rankingByBestChoosing[i][1])
-##            ribch = set(currActions) - ibch
-##            for x in ibch:
-##                for y in ibch:
-##                    if x != y:
-##                        rankingRelation[x][y] = self.omax([rankingRelation[x][y],Max])
-##                        rankingRelation[y][x] = self.omax([rankingRelation[x][y],Max])
-##                for y in ribch:
-##                    rankingRelation[x][y] = self.omax([rankingRelation[x][y],Max])
-##                    rankingRelation[y][x] = self.omax([rankingRelation[y][x],Min])
-##            currActions = currActions - ibch
-##        return rankingRelation
  
     def computeRankingByLastChoosingRelation(self,rankingByLastChoosing=None,Debug=False):
         """
@@ -1170,12 +1201,22 @@ class Digraph(object):
             riwch = set(currActions) - iwch
             for x in iwch:
                 for y in iwch:
+##                    if Debug and (x == 'a10' and y == 'a08') :
+##                        print(x,y,rankingRelation[x][y],relation[x][y])
+##                        print(y,x,rankingRelation[x][y],relation[y][x])
                     if x != y:
-                        rankingRelation[x][y] = self.omax([rankingRelation[x][y],abs(relation[x][y])])
-                        rankingRelation[y][x] = self.omax([rankingRelation[x][y],abs(relation[y][x])])
+                        rankingRelation[x][y] = self.omax([rankingRelation[x][y],\
+                                                           self.omin( [abs(relation[x][y]),abs(relation[y][x])] )])
+                        rankingRelation[y][x] = self.omax([rankingRelation[y][x],\
+                                                           self.omin( [abs(relation[y][x]),abs(relation[y][x])] )])
                 for y in riwch:
-                    rankingRelation[x][y] = self.omax([rankingRelation[x][y],-abs(relation[x][y])])
-                    rankingRelation[y][x] = self.omax([rankingRelation[y][x],abs(relation[y][x])])
+##                    if Debug and (x == 'a10' and y == 'a08') :
+##                        print(x,y,rankingRelation[x][y],relation[x][y])
+##                        print(y,x,rankingRelation[x][y],relation[y][x])
+                    rankingRelation[x][y] = self.omax([rankingRelation[x][y],\
+                                                       self.omin([-abs(relation[x][y]),-abs(relation[y][x])])])
+                    rankingRelation[y][x] = self.omax([rankingRelation[y][x],\
+                                                       self.omin([abs(relation[y][x]),abs(relation[x][y])])])
             currActions = currActions - iwch
         return rankingRelation
 
