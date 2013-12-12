@@ -596,6 +596,8 @@ class Digraph(object):
         If self.rankingByBestChoosing['CoDual'] is True, 
         the ranking-by-choosing was computed on the codual of self.
         """
+        if Debug:
+            print("===>>>> debugging computeByBestChoosing() digraphs methods")
         from copy import deepcopy
         currG = deepcopy(self)
         remainingActions = [x for x in self.actions]
@@ -616,7 +618,7 @@ class Digraph(object):
             for ch in currGcd.goodChoices:
                 k1 = currGcd.flatChoice(ch[5])
                 if Debug:
-                    print(ch[5],k1)
+                    print('flatening the choice:',ch[5],k1)
                 ck1 = list(set(currG.actions)-set(k1))
                 if len(ck1) > 0:
                     j += 1
@@ -633,32 +635,36 @@ class Digraph(object):
             try:
                 bestChoice = bestChoiceCandidates[0]
             except:
-                #print 'Error: no best choice in currGcd!'
-                #currGcd.save('currGcd_errorBest')
+                if Debug:
+                    print('Error: no best choice in currGcd!')
+                    #currGcd.save('currGcd_errorBest')
                 bestChoice = (self.valuationdomain['med'],[])
             if Debug:
                 print('bestChoice', i, bestChoice, bestChoiceCandidates)
 
             if bestChoice[1] != []:
+                if Debug:
+                    print('bestChoice[1] != []:', bestChoice[1])
                 rankingByBestChoosing.append(bestChoice)
 
             if len(bestChoice[1]) > 0:
                 for x in bestChoice[1]:
-                    try:
                         remainingActions.remove(x)
-                    except:
-                        pass
             if Debug:
                 print(i, bestChoice, remainingActions, rankingByBestChoosing)
+
         if bestChoice[1] == []:
             #### only a singleton choice or a failure quadruple left to rank
             if Debug:
-                print(bestChoice)
+                print('bestChoice[1] == []:', bestChoice)
             bestChoice = (self.valuationdomain['max'],remainingActions)
             rankingByBestChoosing.append(bestChoice)
             if Debug:
                 print(rankingByBestChoosing)
+
         elif len(remainingActions) == 2:
+            if Debug:
+                print('len(remainingActions) == 2:',remainingActions)
             i += 1
             currG.actions = remainingActions
             if CoDual:
@@ -683,21 +689,30 @@ class Digraph(object):
                     bestChoiceCandidates.append( ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 ) )
                 else:
                     bestChoiceCandidates.append((self.valuationdomain['max'],k1))
+
             bestChoiceCandidates.sort(reverse=True)
+            if Debug:
+                print('bestChoice', i, bestChoice, bestChoiceCandidates)
+
             try:
                 bestChoice = bestChoiceCandidates[0]
             except:
                 #print 'Error: no best choice in currGcd!'
                 #currGcd.save('currGcd_errorBest')
                 bestChoice = (self.valuationdomain['med'],[])
-            if Debug:
-                print('bestChoice', i, bestChoice, bestChoiceCandidates)
             rankingByBestChoosing.append(bestChoice)
+            for x in bestChoice[1]:
+                remainingActions.remove(x)
+            if len(remainingActions) > 0:
+                lastBestChoice = (self.valuationdomain['max'],remainingActions)
+                rankingByBestChoosing.append(lastBestChoice)
+            if Debug:
+                print('lastBestChoice', i+1, lastBestChoice)
 
         elif len(remainingActions) == 1:
             #### only a singleton choice or a failure quadruple left to rank
             if Debug:
-                print(bestChoice)
+                print('!!! len(remainingActions) == 1: !!!', remainingActions)
             bestChoice = (self.valuationdomain['max'],remainingActions)
             rankingByBestChoosing.append(bestChoice)
             if Debug:
@@ -1066,27 +1081,27 @@ class Digraph(object):
             for y in actions:
                 rankingRelation[x][y] = Med
         n = len(rankingByBestChoosing)
+        if Debug:
+            print('rankingByBestChoosing',rankingByBestChoosing)
         for i in range(n):
             ibch = set(rankingByBestChoosing[i][1])
             ribch = set(currActions) - ibch
+            if Debug:
+                print('ibch,ribch',ibch,ribch)
             for x in ibch:
                 for y in ibch:
-                    if Debug and (x == 'a10' and y == 'a07') :
-                        print(x,y,rankingRelation[x][y],relation[x][y])
-                        print(y,x,rankingRelation[x][y],relation[y][x])
                     if x != y:
-                        rankingRelation[x][y] = self.omax([rankingRelation[x][y],\
-                                                           self.omin( [abs(relation[x][y]),abs(relation[y][x])] )])
-                        rankingRelation[y][x] = self.omax([rankingRelation[y][x],\
-                                                           self.omin( [abs(relation[y][x]),abs(relation[y][x])] )])
-                for y in ribch:
-                    if Debug and (x == 'a10' and y == 'a07'):
+                        rankingRelation[x][y] = self.omin( [abs(relation[x][y]),abs(relation[y][x])] )
+                        rankingRelation[y][x] = self.omin( [abs(relation[y][x]),abs(relation[y][x])] )
+                    if Debug and (x == 'a10' or y == 'a07') :
                         print(x,y,rankingRelation[x][y],relation[x][y])
-                        print(y,x,rankingRelation[x][y],relation[y][x])
-                    rankingRelation[x][y] = self.omax([rankingRelation[x][y],\
-                                                       self.omin([abs(relation[x][y]),abs(relation[y][x])])])
-                    rankingRelation[y][x] = self.omax([rankingRelation[y][x],\
-                                                       self.omin([-abs(relation[y][x]),-abs(relation[x][y])])])
+                        print(y,x,rankingRelation[y][x],relation[y][x])
+                for y in ribch:
+                    rankingRelation[x][y] = self.omin( [abs(relation[x][y]),abs(relation[y][x])] )
+                    rankingRelation[y][x] = -self.omin( [abs(relation[y][x]),abs(relation[x][y])] )
+                    if Debug and (x == 'a10' or y == 'a07'):
+                        print('+',x,y,rankingRelation[x][y],relation[x][y])
+                        print('-',y,x,rankingRelation[y][x],relation[y][x])
             currActions = currActions - ibch
         return rankingRelation
 
@@ -1124,18 +1139,14 @@ class Digraph(object):
 ##                        print(x,y,rankingRelation[x][y],relation[x][y])
 ##                        print(y,x,rankingRelation[x][y],relation[y][x])
                     if x != y:
-                        rankingRelation[x][y] = self.omax([rankingRelation[x][y],\
-                                                           self.omin( [abs(relation[x][y]),abs(relation[y][x])] )])
-                        rankingRelation[y][x] = self.omax([rankingRelation[y][x],\
-                                                           self.omin( [abs(relation[y][x]),abs(relation[y][x])] )])
+                        rankingRelation[x][y] = self.omin( [abs(relation[x][y]),abs(relation[y][x])] )
+                        rankingRelation[y][x] = self.omin( [abs(relation[y][x]),abs(relation[y][x])] )
                 for y in riwch:
 ##                    if Debug and (x == 'a10' and y == 'a08') :
 ##                        print(x,y,rankingRelation[x][y],relation[x][y])
 ##                        print(y,x,rankingRelation[x][y],relation[y][x])
-                    rankingRelation[x][y] = self.omax([rankingRelation[x][y],\
-                                                       self.omin([-abs(relation[x][y]),-abs(relation[y][x])])])
-                    rankingRelation[y][x] = self.omax([rankingRelation[y][x],\
-                                                       self.omin([abs(relation[y][x]),abs(relation[x][y])])])
+                    rankingRelation[x][y] = -self.omin( [abs(relation[x][y]),abs(relation[y][x])] )
+                    rankingRelation[y][x] = self.omin( [abs(relation[y][x]),abs(relation[x][y])] )
             currActions = currActions - iwch
         return rankingRelation
 
