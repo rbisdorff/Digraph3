@@ -243,13 +243,14 @@ class RankingByBestChoosingDigraph(WeakOrder):
         self.name = deepcopy(digraphName)
         self.actions = deepcopy(digraph.actions)
         self.valuationdomain = deepcopy(digraph.valuationdomain)
-        self.rankingByBestChoosing = digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=False)
+        digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=False)
         self.relation = digraph.computeRankingByBestChoosingRelation()
         if Normalized:
             self.recodeValuation(-1,1)
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+        self.computeRankingByBestChoosing()
         
     def showPreOrder(self):
         self.showRankingByBestChoosing(self.rankingByBestChoosing)
@@ -264,13 +265,14 @@ class RankingByLastChoosingDigraph(WeakOrder):
         self.name = deepcopy(digraphName)
         self.actions = deepcopy(digraph.actions)
         self.valuationdomain = deepcopy(digraph.valuationdomain)
-        self.rankingByLastChoosing = digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=False)
+        digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=False)
         self.relation = digraph.computeRankingByLastChoosingRelation()
         if Normalized:
             self.recodeValuation(-1,1)
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+        self.computeRankingByLastChoosing()
     
     def showPreOrder(self):
         self.showRankingByLastChoosing(self.rankingByLastChoosing)
