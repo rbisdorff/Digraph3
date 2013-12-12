@@ -602,7 +602,7 @@ class Digraph(object):
         rankingByBestChoosing = []
         bestChoice = (None,None)
         i = 0
-        while len(remainingActions) > 1 and bestChoice[1] != []:
+        while len(remainingActions) > 2 and bestChoice[1] != []:
             i += 1
             currG.actions = remainingActions
             if CoDual:
@@ -627,9 +627,9 @@ class Digraph(object):
                     bestChoiceCandidates.append( ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 ) )
                 else:
                     bestChoiceCandidates.append((self.valuationdomain['max'],k1))
-            bestChoiceCandidates.sort(reverse=True)
-            #bestChoiceCandidates = sorted(bestChoiceCandidates, key=lambda choice: str(choice[1]) ) # lexigr choices
-            #bestChoiceCandidates = sorted(bestChoiceCandidates, key=lambda choice: -choice[0]) # sort by outranking power
+            #bestChoiceCandidates.sort(reverse=True)
+            bestChoiceCandidates = sorted(bestChoiceCandidates, key=lambda choice: str(choice[1]) ) # lexigr choices
+            bestChoiceCandidates = sorted(bestChoiceCandidates, key=lambda choice: -choice[0]) # sort by outranking power
             try:
                 bestChoice = bestChoiceCandidates[0]
             except:
@@ -658,41 +658,41 @@ class Digraph(object):
             rankingByBestChoosing.append(bestChoice)
             if Debug:
                 print(rankingByBestChoosing)
-##        elif len(remainingActions) == 2:
-##            i += 1
-##            currG.actions = remainingActions
-##            if CoDual:
-##                currGcd = CoDualDigraph(currG)
-##            else:
-##                currGcd = deepcopy(currG)
-##            currGcd.computeRubisChoice(Comments=Debug)
-##            #currGcd.computeGoodChoices(Comments=Debug)
-##            bestChoiceCandidates = []
-##            j = 0
-##            for ch in currGcd.goodChoices:
-##                k1 = currGcd.flatChoice(ch[5])
-##                if Debug:
-##                    print(ch[5],k1)
-##                ck1 = list(set(currG.actions)-set(k1))
-##                if len(ck1) > 0:
-##                    j += 1
-##                    k1Outranking = currG.computePairwiseClusterComparison(k1,ck1)
-##                    if Debug:
-##                        print('good', j, ch[5], k1, k1Outranking)
-##                    #bestChoiceCandidates.append((k1Outranking['P+'],k1))
-##                    bestChoiceCandidates.append( ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 ) )
-##                else:
-##                    bestChoiceCandidates.append((self.valuationdomain['max'],k1))
-##            bestChoiceCandidates.sort(reverse=True)
-##            try:
-##                bestChoice = bestChoiceCandidates[0]
-##            except:
-##                #print 'Error: no best choice in currGcd!'
-##                #currGcd.save('currGcd_errorBest')
-##                bestChoice = (self.valuationdomain['med'],[])
-##            if Debug:
-##                print('bestChoice', i, bestChoice, bestChoiceCandidates)
-##            rankingByBestChoosing.append(bestChoice)
+        elif len(remainingActions) == 2:
+            i += 1
+            currG.actions = remainingActions
+            if CoDual:
+                currGcd = CoDualDigraph(currG)
+            else:
+                currGcd = deepcopy(currG)
+            currGcd.computeRubisChoice(Comments=Debug)
+            #currGcd.computeGoodChoices(Comments=Debug)
+            bestChoiceCandidates = []
+            j = 0
+            for ch in currGcd.goodChoices:
+                k1 = currGcd.flatChoice(ch[5])
+                if Debug:
+                    print(ch[5],k1)
+                ck1 = list(set(currG.actions)-set(k1))
+                if len(ck1) > 0:
+                    j += 1
+                    k1Outranking = currG.computePairwiseClusterComparison(k1,ck1)
+                    if Debug:
+                        print('good', j, ch[5], k1, k1Outranking)
+                    #bestChoiceCandidates.append((k1Outranking['P+'],k1))
+                    bestChoiceCandidates.append( ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 ) )
+                else:
+                    bestChoiceCandidates.append((self.valuationdomain['max'],k1))
+            bestChoiceCandidates.sort(reverse=True)
+            try:
+                bestChoice = bestChoiceCandidates[0]
+            except:
+                #print 'Error: no best choice in currGcd!'
+                #currGcd.save('currGcd_errorBest')
+                bestChoice = (self.valuationdomain['med'],[])
+            if Debug:
+                print('bestChoice', i, bestChoice, bestChoiceCandidates)
+            rankingByBestChoosing.append(bestChoice)
 
         elif len(remainingActions) == 1:
             #### only a singleton choice or a failure quadruple left to rank
@@ -704,87 +704,6 @@ class Digraph(object):
                 print(rankingByBestChoosing)
         self.rankingByBestChoosing = {'CoDual': CoDual, 'result': rankingByBestChoosing}
         return {'CoDual': CoDual, 'result': rankingByBestChoosing}
-
-##        if bestChoice[1] == []:
-##            #### only a singleton choice or a failure quadruple left to rank
-##            if Debug:
-##                print(bestChoice)
-##            bestChoice = (self.valuationdomain['max'],remainingActions)
-##            rankingByBestChoosing.append(bestChoice)
-##            if Debug:
-##                print(rankingByBestChoosing)
-##
-##        elif len(remainingActions) == 1:
-##            #### only a singleton choice or a failure quadruple left to rank
-##            if Debug:
-##                print(bestChoice)
-##            bestChoice = (self.valuationdomain['max'],remainingActions)
-##            rankingByBestChoosing.append(bestChoice)
-##            if Debug:
-##                print(rankingByBestChoosing)
-##        
-##        self.rankingByBestChoosing = {'CoDual': CoDual, 'result': rankingByBestChoosing}
-##        return {'CoDual': CoDual, 'result': rankingByBestChoosing}
-
-##
-##
-##
-##              
-##        elif len(remainingActions) == 2:
-##            i += 1
-##            currG.actions = remainingActions
-##            if CoDual:
-##                currGcd = CoDualDigraph(currG)
-##            else:
-##                currGcd = deepcopy(currG)
-##            currGcd.computeRubisChoice(Comments=Debug)
-##            #currGcd.computeGoodChoices(Comments=Debug)
-##            bestChoiceCandidates = []
-##            j = 0
-##            for ch in currGcd.goodChoices:
-##                k1 = currGcd.flatChoice(ch[5])
-##                if Debug:
-##                    print(ch[5],k1)
-##                ck1 = list(set(currG.actions)-set(k1))
-##                if len(ck1) > 0:
-##                    j += 1
-##                    k1Outranking = currG.computePairwiseClusterComparison(k1,ck1)
-##                    if Debug:
-##                        print('good', j, ch[5], k1, k1Outranking)
-##                    #bestChoiceCandidates.append((k1Outranking['P+'],k1))
-##                    bestChoiceCandidates.append( ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 ) )
-##                else:
-##                    bestChoiceCandidates.append((self.valuationdomain['max'],k1))
-##            bestChoiceCandidates.sort(reverse=True)
-##            try:
-##                bestChoice = bestChoiceCandidates[0]
-##            except:
-##                #print 'Error: no best choice in currGcd!'
-##                #currGcd.save('currGcd_errorBest')
-##                bestChoice = (self.valuationdomain['med'],[])
-##            if Debug:
-##                print('bestChoice', i, bestChoice, bestChoiceCandidates)
-##            rankingByBestChoosing.append(bestChoice)
-##
-##        if (bestChoice[1] == []):
-##            #### only a singleton choice or a failure quadruple left to rank
-##            if Debug:
-##                print(bestChoice)
-##            bestChoice = (self.valuationdomain['max'],remainingActions)
-##            rankingByBestChoosing.append(bestChoice)
-##            if Debug:
-##                print(rankingByBestChoosing)
-##
-##        elif len(remainingActions) == 1:
-##            #### only a singleton choice or a failure quadruple left to rank
-##            if Debug:
-##                print(bestChoice)
-##            bestChoice = (self.valuationdomain['max'],remainingActions)
-##            rankingByBestChoosing.append(bestChoice)
-##            if Debug:
-##                print(rankingByBestChoosing)
-##        self.rankingByBestChoosing = {'CoDual': CoDual, 'result': rankingByBestChoosing}
-##        return {'CoDual': CoDual, 'result': rankingByBestChoosing}
 
     def iterateRankingByChoosing(self,Odd=False,CoDual=False,Comments=True,Debug=False,Limited=None):
         """
