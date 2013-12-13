@@ -14,16 +14,16 @@ def testRankingByChoosingWithKernels():
     print('=== >>> testing best and last fusion (default)')
     g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=10)
     rcg0 = RankingByChoosingDigraph(g,Debug=False)
-    rcg0.showPreOrder()
+    rcg0.showWeakOrder()
     rcg0.showRankingByChoosing()
     print(rcg0.computeOrdinalCorrelation(g))
     print('=== >>> best') 
     rcg1 = RankingByBestChoosingDigraph(g,Debug=False)
-    rcg1.showPreOrder()
+    rcg1.showWeakOrder()
     print(rcg1.computeOrdinalCorrelation(g))
     print('=== >>> last')
     rcg2 = RankingByLastChoosingDigraph(g,Debug=False)
-    rcg2.showPreOrder()
+    rcg2.showWeakOrder()
     print(rcg2.computeOrdinalCorrelation(g))
 
 def testOrderedRelationTableShowing():
@@ -37,6 +37,6 @@ def testPrincipalInOutDegreesRanking():
     print('=== >>> principal preorder')
     g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=10)
     rcf = PrincipalInOutDegreesOrdering(g,imageType="pdf",Debug=False)
-    rcf.showPreOrder()
+    rcf.showWeakOrder()
     print(rcf.computeOrdinalCorrelation(g))
 

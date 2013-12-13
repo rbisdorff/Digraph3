@@ -154,7 +154,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -995,7 +995,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1731,7 +1731,7 @@ equivalence valuations.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1762,7 +1762,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2371,7 +2371,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3066,7 +3066,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -3964,7 +3964,7 @@ of the principal orders of the variance-covariance of in-
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">PrincipalInOutDegreesOrdering</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span> <span class="o">=</span> <span class="n">PrincipalInOutDegreesOrdering</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">imageType</span><span class="o">=</span><span class="s">&quot;png&quot;</span><span class="p">,</span>\ 
 <span class="go">                 plotFileName=&quot;proWeakOrdering&quot;)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span><span class="o">.</span><span class="n">showPreOrder</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span><span class="o">.</span><span class="n">showWeakOrder</span><span class="p">()</span>
 <span class="go">Ranking by Choosing and Rejecting</span>
 <span class="go"> 1st ranked [&#39;a06&#39;] (1.00)</span>
 <span class="go">   2nd ranked [&#39;a05&#39;] (1.00)</span>
@@ -4002,8 +4002,8 @@ of the principal orders of the variance-covariance of in-
 <dd><p>Bases: <a class="reference internal" href="#weakOrders.RankingByChoosingDigraph" title="weakOrders.RankingByChoosingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">weakOrders.RankingByChoosingDigraph</span></tt></a></p>
 <p>Specialization of abstrct WeakOrder class for computing a ranking by best-choosing.</p>
 <dl class="method">
-<dt id="weakOrders.RankingByBestChoosingDigraph.showPreOrder">
-<tt class="descname">showPreOrder</tt><big>(</big><big>)</big><a class="headerlink" href="#weakOrders.RankingByBestChoosingDigraph.showPreOrder" title="Permalink to this definition">¶</a></dt>
+<dt id="weakOrders.RankingByBestChoosingDigraph.showWeakOrder">
+<tt class="descname">showWeakOrder</tt><big>(</big><big>)</big><a class="headerlink" href="#weakOrders.RankingByBestChoosingDigraph.showWeakOrder" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -4041,7 +4041,7 @@ ranking-by-Rubis-choosing orderings.</p>
 <img alt="_images/weakOrdering.png" src="_images/weakOrdering.png" />
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showPreOrder</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showWeakOrder</span><span class="p">()</span>
 <span class="go">Ranking by Choosing and Rejecting</span>
 <span class="go">1st ranked [&#39;a06&#39;] (0.50)</span>
 <span class="go">    2nd ranked [&#39;a02&#39;, &#39;a04&#39;, &#39;a05&#39;] (0.14)</span>
@@ -4073,15 +4073,15 @@ ranking-by-Rubis-choosing orderings.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="weakOrders.RankingByChoosingDigraph.showPreOrder">
-<tt class="descname">showPreOrder</tt><big>(</big><em>rankingByChoosing=None</em><big>)</big><a class="headerlink" href="#weakOrders.RankingByChoosingDigraph.showPreOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>specialisation for RankingByChoosing Digraphs.</p>
+<dt id="weakOrders.RankingByChoosingDigraph.showRankingByChoosing">
+<tt class="descname">showRankingByChoosing</tt><big>(</big><em>rankingByChoosing=None</em><big>)</big><a class="headerlink" href="#weakOrders.RankingByChoosingDigraph.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dummy for showWeakOrder method</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="weakOrders.RankingByChoosingDigraph.showRankingByChoosing">
-<tt class="descname">showRankingByChoosing</tt><big>(</big><em>rankingByChoosing=None</em><big>)</big><a class="headerlink" href="#weakOrders.RankingByChoosingDigraph.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dummy for showPreOrder method</p>
+<dt id="weakOrders.RankingByChoosingDigraph.showWeakOrder">
+<tt class="descname">showWeakOrder</tt><big>(</big><em>rankingByChoosing=None</em><big>)</big><a class="headerlink" href="#weakOrders.RankingByChoosingDigraph.showWeakOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>specialisation for RankingByChoosing Digraphs.</p>
 </dd></dl>
 
 </dd></dl>
@@ -4092,8 +4092,8 @@ ranking-by-Rubis-choosing orderings.</p>
 <dd><p>Bases: <a class="reference internal" href="#weakOrders.RankingByChoosingDigraph" title="weakOrders.RankingByChoosingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">weakOrders.RankingByChoosingDigraph</span></tt></a></p>
 <p>Specialization of abstract WeakOrder class for computing a ranking by rejecting.</p>
 <dl class="method">
-<dt id="weakOrders.RankingByLastChoosingDigraph.showPreOrder">
-<tt class="descname">showPreOrder</tt><big>(</big><big>)</big><a class="headerlink" href="#weakOrders.RankingByLastChoosingDigraph.showPreOrder" title="Permalink to this definition">¶</a></dt>
+<dt id="weakOrders.RankingByLastChoosingDigraph.showWeakOrder">
+<tt class="descname">showWeakOrder</tt><big>(</big><big>)</big><a class="headerlink" href="#weakOrders.RankingByLastChoosingDigraph.showWeakOrder" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -4117,15 +4117,15 @@ ranking-by-Rubis-choosing orderings.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="weakOrders.WeakOrder.showPreOrder">
-<tt class="descname">showPreOrder</tt><big>(</big><em>rankingByChoosing=None</em><big>)</big><a class="headerlink" href="#weakOrders.WeakOrder.showPreOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>A show method for self.rankinByChoosing result.</p>
+<dt id="weakOrders.WeakOrder.showRankingByChoosing">
+<tt class="descname">showRankingByChoosing</tt><big>(</big><em>rankingByChoosing=None</em><big>)</big><a class="headerlink" href="#weakOrders.WeakOrder.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dummy name for showWeakOrder() method</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="weakOrders.WeakOrder.showRankingByChoosing">
-<tt class="descname">showRankingByChoosing</tt><big>(</big><em>rankingByChoosing=None</em><big>)</big><a class="headerlink" href="#weakOrders.WeakOrder.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dummy name for showPreOrder() method</p>
+<dt id="weakOrders.WeakOrder.showWeakOrder">
+<tt class="descname">showWeakOrder</tt><big>(</big><em>rankingByChoosing=None</em><big>)</big><a class="headerlink" href="#weakOrders.WeakOrder.showWeakOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>A show method for self.rankinByChoosing result.</p>
 </dd></dl>
 
 </dd></dl>
