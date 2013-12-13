@@ -32,7 +32,7 @@ class WeakOrder(Digraph):
     Abstract class for weak orderings' specialized methods.
     """
     
-    def showPreOrder(self,rankingByChoosing=None):
+    def showWeakOrder(self,rankingByChoosing=None):
         """
         A show method for self.rankinByChoosing result.
         """
@@ -91,29 +91,36 @@ class WeakOrder(Digraph):
 
     def showRankingByChoosing(self,rankingByChoosing=None):
         """
-        Dummy name for showPreOrder() method
+        Dummy name for showWeakOrder() method
         """
-        self.showPreOrder(rankingByChoosing=rankingByChoosing)
+        self.showWeakOrder(rankingByChoosing=rankingByChoosing)
     
     def showOrderedRelationTable(self,direction="decreasing",originalRelation=False):
         """
         Showing the relation table in decreasing (default) or increasing order.
         """ 
+
         actionsList = []
+        
         if direction == "decreasing":
+            print('Decrasing Weak Ordering')
+            self.showRankingByBestChoosing()
             try:
                 ordering = self.rankingByBestChoosing
             except:
                 ordering = self.computeRankingByBestChoosing(Debug=False)
         elif direction == "increasing":
+            print('Increasing Weak Ordering')
+            self.showRankingByLastChoosing()
             try:
                 ordering = self.rankingByLastChoosing
             except:
                 ordering = self.computeRankingByLastChoosing()
         else:
             print('Direction error !: %s is not a correct instruction (decreasing=default or increasing)' % direction)
+
         for eq in ordering['result']:
-            print(eq[1])
+            #print(eq[1])
             eq = eq[1]
             eq.sort()
             for x in eq:
@@ -125,11 +132,11 @@ class WeakOrder(Digraph):
             showRelation = self.originalRelation
         else:
             showRelation = self.relation
+            
         self.showRelationTable(actionsSubset=actionsList,\
                                 relation=showRelation,\
                                 Sorted=False,\
-                                ReflexiveTerms=False)
-            
+                                ReflexiveTerms=False)        
 
 class RankingByChoosingDigraph(WeakOrder):
     """
@@ -164,7 +171,7 @@ class RankingByChoosingDigraph(WeakOrder):
         
     >>> from weakOrders import RankingByChoosingDigraph
     >>> rbc = RankingByChoosingDigraph(g)
-    >>> rbc.showPreOrder()
+    >>> rbc.showWeakOrder()
     Ranking by Choosing and Rejecting
     1st ranked ['a06'] (0.50)
         2nd ranked ['a02', 'a04', 'a05'] (0.14)
@@ -250,7 +257,7 @@ class RankingByChoosingDigraph(WeakOrder):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def showPreOrder(self,rankingByChoosing=None):
+    def showWeakOrder(self,rankingByChoosing=None):
         """
         specialisation for RankingByChoosing Digraphs.
         """
@@ -260,13 +267,13 @@ class RankingByChoosingDigraph(WeakOrder):
             except:
                 rankingByChoosing = self.computeRankingByChoosing()
 
-        WeakOrder.showPreOrder(self,rankingByChoosing)
+        WeakOrder.showWeakOrder(self,rankingByChoosing)
 
     def showRankingByChoosing(self,rankingByChoosing=None):
         """
-        Dummy for showPreOrder method
+        Dummy for showWeakOrder method
         """
-        self.showPreOrder(rankingByChoosing=rankingByChoosing)
+        self.showWeakOrder(rankingByChoosing=rankingByChoosing)
 
     def computeRankingByBestChoosing(self,Forced=False):
         """
@@ -301,7 +308,7 @@ class RankingByBestChoosingDigraph(RankingByChoosingDigraph):
         self.notGamma = self.notGammaSets()
         self.rankingByBestChoosing = digraph.rankingByBestChoosing
         
-    def showPreOrder(self):
+    def showWeakOrder(self):
         self.showRankingByBestChoosing()
 
 
@@ -324,7 +331,7 @@ class RankingByLastChoosingDigraph(RankingByChoosingDigraph):
         self.notGamma = self.notGammaSets()
         self.rankingByLastChoosing = digraph.rankingByLastChoosing
     
-    def showPreOrder(self):
+    def showWeakOrder(self):
         self.showRankingByLastChoosing()
 
 
@@ -393,7 +400,7 @@ class RankingByPrudentChoosingDigraph(RankingByChoosingDigraph):
         if Comments:
             t1 = time()
             gdeter = digraph_.computeDeterminateness()
-            self.showPreOrder()
+            self.showWeakOrder()
             print('Circuits cutting level limit  : %.3f' % Limited)
             print('Circuits elimination cut level: %.3f' % self.cutLevel)
             print('Ordinal Correlation with given outranking')
@@ -415,7 +422,7 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
     >>> from weakOrders import PrincipalInOutDegreesOrdering
     >>> pro = PrincipalInOutDegreesOrdering(g,imageType="png",\ 
                      plotFileName="proWeakOrdering")
-    >>> pro.showPreOrder()
+    >>> pro.showWeakOrder()
     Ranking by Choosing and Rejecting
      1st ranked ['a06'] (1.00)
        2nd ranked ['a05'] (1.00)
@@ -525,7 +532,7 @@ if __name__ == "__main__":
     #g = RandomValuationDigraph(order=11)
     print('=== >>> best and last fusion (default)')
     rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-min",Debug=False)
-    rcg0.showPreOrder()
+    rcg0.showWeakOrder()
     rcg0.showRelationTable()
     print(rcg0.computeOrdinalCorrelation(g))
     rcg0.showOrderedRelationTable(direction="decreasing")
@@ -533,7 +540,7 @@ if __name__ == "__main__":
     print(g.computeChordlessCircuits())
 ##    
 #    rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-max",Debug=False)
-#    rcg0.showPreOrder()
+#    rcg0.showWeakOrder()
 #    print(rcg0.computeOrdinalCorrelation(g))
 #    rcg0.showOrderedRelationTable()
 ##    rcg.showRankingByChoosing()
@@ -542,24 +549,24 @@ if __name__ == "__main__":
 ##    print(rcg1.computeOrdinalCorrelation(rcg))
 ##    print('=== >>> best') 
 ##    rcg1 = RankingByChoosingDigraph(g,Best=True,Last=False,Debug=False)
-##    rcg1.showPreOrder()
+##    rcg1.showWeakOrder()
 ##    print(rcg1.computeOrdinalCorrelation(g))
 ##    print('=== >>> last')
 ##    rcg2 = RankingByChoosingDigraph(g,Best=False,Last=True,Debug=False)
-##    rcg2.showPreOrder()
+##    rcg2.showWeakOrder()
 ##    print(rcg2.computeOrdinalCorrelation(g))
 ##    print('=== >>> bipolar best and last')
 ##    rcg3 = RankingByChoosingDigraph(g,Best=False,Last=False,Debug=False)
-##    rcg3.showPreOrder()
+##    rcg3.showWeakOrder()
 ##    print(rcg3.computeOrdinalCorrelation(g))
-##    print('=== >>> principal preorder')
+##    print('=== >>> principal weak order')
 #    rcf1 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
 #                                        imageType=None,Debug=False)
-#    rcf1.showPreOrder()
+#    rcf1.showWeakOrder()
 #    print(rcf1.computeOrdinalCorrelation(g))
 #    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-max",
 #                                        imageType=None,Debug=False)
-#    rcf2.showPreOrder()
+#    rcf2.showWeakOrder()
 #    print(rcf2.computeOrdinalCorrelation(g))
 #    #rcf.showPrincipalScores()
 #    rcf1.showPrincipalScores(ColwiseOrder=True)
