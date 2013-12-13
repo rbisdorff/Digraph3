@@ -95,7 +95,7 @@ class WeakOrder(Digraph):
         """
         self.showPreOrder(rankingByChoosing=rankingByChoosing)
     
-    def showOrderedRelationTable(self,direction="decreasing"):
+    def showOrderedRelationTable(self,direction="decreasing",originalRelation=False):
         """
         Showing the relation table in decreasing (default) or increasing order.
         """ 
@@ -120,7 +120,15 @@ class WeakOrder(Digraph):
                 actionsList.append(x)
         if len(actionsList) != len(self.actions):
             print('Error !: missing action(s) %s in ordered table.')
-        self.showRelationTable(actionsSubset=actionsList,Sorted=False,ReflexiveTerms=False)
+
+        if originalRelation:
+            showRelation = self.originalRelation
+        else:
+            showRelation = self.relation
+        self.showRelationTable(actionsSubset=actionsList,\
+                                relation=showRelation,\
+                                Sorted=False,\
+                                ReflexiveTerms=False)
             
 
 class RankingByChoosingDigraph(WeakOrder):
@@ -162,24 +170,23 @@ class RankingByChoosingDigraph(WeakOrder):
         2nd ranked ['a02', 'a04', 'a05'] (0.14)
         2nd last ranked ['a01', 'a04', 'a07'] (0.14)
     1st last ranked ['a03'] (0.72)
-    >>> rbc.showRelationTable(actionsSubset =\ 
-            ['a06','a02','a05','a04','a01','a07','a03'],\ 
-            Sorted = False)
+    >>> rbc.showOrderedRelationTable(direction="decreasing")
     * ---- Relation Table -----
       S   | 'a06'  'a02'  'a05'  'a04'	'a01'  'a07'  'a03'	  
     ------|-------------------------------------------------
-    'a06' | +0.00  +1.00  +0.33	 +1.00	+0.67  +0.33  +1.00	 
-    'a02' | -0.50  +0.00  +0.00  +0.00  +0.00  +0.33  +1.00	 
-    'a05' | -0.33  +0.00  +0.00  +0.00  +0.67  +1.00  +1.00	 
-    'a04' | -0.50  +0.00  +0.00	 +0.00	+0.00  +0.00  +1.00	 
-    'a01' | -0.33  +0.00  -0.67	 +0.00	+0.00  +0.00  +0.67	 
-    'a07' | -0.33  +0.00  -0.17	 +0.00	+0.00  +0.00  +1.00	 
+    'a06' |   -    +1.00  +0.33	 +1.00	+0.67  +0.33  +1.00	 
+    'a02' | -0.50    -    +0.00  +0.00  +0.00  +0.33  +1.00	 
+    'a05' | -0.33  +0.00    -    +0.00  +0.67  +1.00  +1.00	 
+    'a04' | -0.50  +0.00  +0.00	   -    +0.00  +0.00  +1.00	 
+    'a01' | -0.33  +0.00  -0.67	 +0.00	  -    +0.00  +0.67	 
+    'a07' | -0.33  +0.00  -0.17	 +0.00	+0.00    -    +1.00	 
     'a03' | -1.00  -1.00  -0.67	 -1.00	-0.33  -0.33  +0.00	 
     """
     def __init__(self,other,
                  fusionOperator = "o-min",
                  CoDual=False,
                  Debug=False):
+        
         from copy import deepcopy
         digraph=deepcopy(other)
         digraph.recodeValuation(-1.0,1.0)
@@ -188,6 +195,7 @@ class RankingByChoosingDigraph(WeakOrder):
         self.actions = digraph.actions
         self.order = len(self.actions)
         self.valuationdomain = digraph.valuationdomain
+        self.originalRelation = digraph.relation
         
 ##        if not Best and not Last:
 ##            self.rankingByChoosing = digraph.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
@@ -211,6 +219,7 @@ class RankingByChoosingDigraph(WeakOrder):
 ##                digraph.showRankingByLastChoosing()
                 
 ##        else:
+        
         digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=Debug)
         relBest = digraph.computeRankingByBestChoosingRelation()
         if Debug:
@@ -516,8 +525,6 @@ if __name__ == "__main__":
     #g = RandomValuationDigraph(order=11)
     print('=== >>> best and last fusion (default)')
     rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-min",Debug=False)
-    rcg0.showPreOrder()
-    rcg0.computeRankingByChoosing()
     rcg0.showPreOrder()
     rcg0.showRelationTable()
     print(rcg0.computeOrdinalCorrelation(g))
