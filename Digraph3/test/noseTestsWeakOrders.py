@@ -11,28 +11,31 @@ from outrankingDigraphs import *
 from weakOrders import *
 
 def testRankingByChoosingWithKernels():
-    g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=15)
     print('=== >>> testing best and last fusion (default)')
+    g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=10)
     rcg0 = RankingByChoosingDigraph(g,Debug=False)
     rcg0.showPreOrder()
     rcg0.showRankingByChoosing()
     print(rcg0.computeOrdinalCorrelation(g))
     print('=== >>> best') 
-    rcg1 = RankingByChoosingDigraph(g,Best=True,Last=False,Debug=False)
+    rcg1 = RankingByBestChoosingDigraph(g,Debug=False)
     rcg1.showPreOrder()
     print(rcg1.computeOrdinalCorrelation(g))
     print('=== >>> last')
-    rcg2 = RankingByChoosingDigraph(g,Best=False,Last=True,Debug=False)
+    rcg2 = RankingByLastChoosingDigraph(g,Debug=False)
     rcg2.showPreOrder()
     print(rcg2.computeOrdinalCorrelation(g))
-    print('=== >>> bipolar best and last')
-    rcg3 = RankingByChoosingDigraph(g,Best=False,Last=False,Debug=False)
-    rcg3.showPreOrder()
-    print(rcg3.computeOrdinalCorrelation(g))
+
+def testOrderedRelationTableShowing():
+    print('=== >>> testing ordered relation tables showing')
+    g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=10)
+    rbc = RankingByChoosingDigraph(g,Debug=False)
+    rbc.showOrderedRelationTable()
+    rbc.showOrderedRelationTable(direction='increasing')
     
 def testPrincipalInOutDegreesRanking():
     print('=== >>> principal preorder')
-    g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=15)
+    g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=10)
     rcf = PrincipalInOutDegreesOrdering(g,imageType="pdf",Debug=False)
     rcf.showPreOrder()
     print(rcf.computeOrdinalCorrelation(g))
