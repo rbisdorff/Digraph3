@@ -100,10 +100,16 @@ class WeakOrder(Digraph):
         Showing the relation table in decreasing (default) or increasing order.
         """ 
         actionsList = []
-        if direction == "decreasing":            
-            ordering = self.computeRankingByBestChoosing(Debug=False)
+        if direction == "decreasing":
+            try:
+                ordering = self.rankingByBestChoosing
+            except:
+                ordering = self.computeRankingByBestChoosing(Debug=False)
         elif direction == "increasing":
-            ordering = self.computeRankingByLastChoosing()
+            try:
+                ordering = self.rankingByLastChoosing
+            except:
+                ordering = self.computeRankingByLastChoosing()
         else:
             print('Direction error !: %s is not a correct instruction (decreasing=default or increasing)' % direction)
         for eq in ordering['result']:
@@ -116,8 +122,6 @@ class WeakOrder(Digraph):
             print('Error !: missing action(s) %s in ordered table.')
         self.showRelationTable(actionsSubset=actionsList,Sorted=False,ReflexiveTerms=False)
             
-            
-                
 
 class RankingByChoosingDigraph(WeakOrder):
     """
@@ -172,8 +176,7 @@ class RankingByChoosingDigraph(WeakOrder):
     'a07' | -0.33  +0.00  -0.17	 +0.00	+0.00  +0.00  +1.00	 
     'a03' | -1.00  -1.00  -0.67	 -1.00	-0.33  -0.33  +0.00	 
     """
-    def __init__(self,other,Best=True,
-                 Last=True,
+    def __init__(self,other,
                  fusionOperator = "o-min",
                  CoDual=False,
                  Debug=False):
@@ -185,55 +188,92 @@ class RankingByChoosingDigraph(WeakOrder):
         self.actions = digraph.actions
         self.order = len(self.actions)
         self.valuationdomain = digraph.valuationdomain
-        if not Best and not Last:
-            self.rankingByChoosing = digraph.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
-            if Debug:
-                digraph.showRankingByChoosing()
-            self.relation = digraph.computeRankingByChoosingRelation()
-        elif Best and not Last:
-            digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=Debug)
-            self.relation = digraph.computeRankingByBestChoosingRelation()
-            if Debug:
-                digraph.showRankingByBestChoosing()
-        elif Last and not Best:
-            digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=Debug)
-            self.relation = digraph.computeRankingByLastChoosingRelation()
-            if Debug:
-                digraph.showRankingByLastChoosing()
-        else:
-            digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=False)
-            relBest = digraph.computeRankingByBestChoosingRelation()
-            if Debug:
-                digraph.showRankingByBestChoosing()
-                digraph.showRelationTable(relation=relBest)
-            digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=False)
-            relLast = digraph.computeRankingByLastChoosingRelation()
-            if Debug:
-                digraph.showRankingByLastChoosing()
-                digraph.showRelationTable(relation=relLast)
-            relFusion = {}
-            for x in digraph.actions:
-                relFusion[x] = {}
-                for y in digraph.actions:
-                    if fusionOperator == "o-max":
-                        relFusion[x][y] = digraph.omax((relBest[x][y],relLast[x][y]))
-                    elif fusionOperator == "o-min":
-                        relFusion[x][y] = digraph.omin((relBest[x][y],relLast[x][y]))
-                    else:
-                        print('Error: invalid epistemic fusion operator %s' % operator)
-                    if Debug:
-                        print('!',x,y,relBest[x][y],relLast[x][y],relFusion[x][y])  
-            self.relation=relFusion
-
+        
+##        if not Best and not Last:
+##            self.rankingByChoosing = digraph.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
+##            if Debug:
+##                digraph.showRankingByChoosing()
+##            self.relation = digraph.computeRankingByChoosingRelation()
+##            self.rankingByChoosing = digraph.rankingByChoosing
+##            
+##        elif Best and not Last:
+##            digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=Debug)
+##            self.relation = digraph.computeRankingByBestChoosingRelation()
+##            self.rankingByBestChoosing = digraph.rankingByBestChoosing
+##            if Debug:
+##                digraph.showRankingByBestChoosing()
+##                
+##        elif Last and not Best:
+##            digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=Debug)
+##            self.relation = digraph.computeRankingByLastChoosingRelation()
+##            self.rankingByLastChoosing = digraph.rankingByLastChoosing
+##            if Debug:
+##                digraph.showRankingByLastChoosing()
+                
+##        else:
+        digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=Debug)
+        relBest = digraph.computeRankingByBestChoosingRelation()
+        if Debug:
+            digraph.showRankingByBestChoosing()
+        digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=Debug)
+        relLast = digraph.computeRankingByLastChoosingRelation()
+        if Debug:
+            digraph.showRankingByLastChoosing()
+        relFusion = {}
+        for x in digraph.actions:
+            relFusion[x] = {}
+            for y in digraph.actions:
+                if fusionOperator == "o-max":
+                    relFusion[x][y] = digraph.omax((relBest[x][y],relLast[x][y]))
+                elif fusionOperator == "o-min":
+                    relFusion[x][y] = digraph.omin((relBest[x][y],relLast[x][y]))
+                else:
+                    print('Error: invalid epistemic fusion operator %s' % operator)
+                if Debug:
+                    print('!',x,y,relBest[x][y],relLast[x][y],relFusion[x][y])  
+        self.relation=relFusion
+        self.rankingByLastChoosing = deepcopy(digraph.rankingByLastChoosing)
+        self.rankingByBestChoosing = deepcopy(digraph.rankingByBestChoosing)
         self.computeRankingByChoosing()
         if Debug:
             self.showRankingByChoosing()
-            print(digraph.computeOrdinalCorrelation(self))
-                
+        
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-class RankingByBestChoosingDigraph(WeakOrder):
+    def showPreOrder(self,rankingByChoosing=None):
+        """
+        specialisation for RankingByChoosing Digraphs.
+        """
+        if rankingByChoosing == None:
+            try:
+                rankingByChoosing = self.rankingByChoosing
+            except:
+                rankingByChoosing = self.computeRankingByChoosing()
+
+        WeakOrder.showPreOrder(self,rankingByChoosing)
+
+    def showRankingByChoosing(self,rankingByChoosing=None):
+        """
+        Dummy for showPreOrder method
+        """
+        self.showPreOrder(rankingByChoosing=rankingByChoosing)
+
+    def computeRankingByBestChoosing(self,Forced=False):
+        """
+        Dummy for blocking recomputing without forcing. 
+        """
+        if Forced:
+            WeakOrder.computeRankingByBestChoosing(self)
+
+    def computeRankingByLastChoosing(self,Forced=False):
+        """
+        Dummy for blocking recomputing without forcing. 
+        """
+        if Forced:
+            WeakOrder.computeRankingByLastChoosing(self)
+ 
+class RankingByBestChoosingDigraph(RankingByChoosingDigraph):
     """
     Specialization of abstrct WeakOrder class for computing a ranking by best-choosing.
     """
@@ -250,12 +290,13 @@ class RankingByBestChoosingDigraph(WeakOrder):
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-        self.computeRankingByBestChoosing()
+        self.rankingByBestChoosing = digraph.rankingByBestChoosing
         
     def showPreOrder(self):
-        self.showRankingByBestChoosing(self.rankingByBestChoosing)
+        self.showRankingByBestChoosing()
 
-class RankingByLastChoosingDigraph(WeakOrder):
+
+class RankingByLastChoosingDigraph(RankingByChoosingDigraph):
     """
     Specialization of abstract WeakOrder class for computing a ranking by rejecting.
     """
@@ -272,10 +313,11 @@ class RankingByLastChoosingDigraph(WeakOrder):
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-        self.computeRankingByLastChoosing()
+        self.rankingByLastChoosing = digraph.rankingByLastChoosing
     
     def showPreOrder(self):
-        self.showRankingByLastChoosing(self.rankingByLastChoosing)
+        self.showRankingByLastChoosing()
+
 
 class RankingByPrudentChoosingDigraph(RankingByChoosingDigraph):
     """
@@ -316,16 +358,27 @@ class RankingByPrudentChoosingDigraph(RankingByChoosingDigraph):
             if SplitCorrelation:
                 if corrgp['correlation'] > corrg['correlation']:           
                     self.relation = deepcopy(fusp.relation)
+                    self.rankingByBestChoosing = sp2.rankingByBestChoosing
+                    self.rankingByLastChoosing = sp1.rankingByLastChoosing
                 else:
                     self.relation = deepcopy(fus.relation)
+                    self.rankingByBestChoosing = s2.rankingByBestChoosing
+                    self.rankingByLastChoosing = s1.rankingByLastChoosing
             else:
                 if (corrgp['correlation']*corrgp['determination']) > (corrg['correlation']*corrg['determination']):
                     self.relation = deepcopy(fusp.relation)
+                    self.rankingByBestChoosing = sp2.rankingByBestChoosing
+                    self.rankingByLastChoosing = sp1.rankingByLastChoosing
                 else:
                     self.relation = deepcopy(fus.relation)                
+                    self.rankingByBestChoosing = s2.rankingByBestChoosing
+                    self.rankingByLastChoosing = s1.rankingByLastChoosing
         else:
             self.relation = deepcopy(fus.relation)
-        self.rankingByChoosing = self.computeRankingByChoosing(CoDual=CoDual)
+            self.rankingByBestChoosing = s2.rankingByBestChoosing
+            self.rankingByLastChoosing = s1.rankingByLastChoosing
+
+        #self.rankingByChoosing = self.computeRankingByChoosing(CoDual=CoDual)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         if Comments:
@@ -455,7 +508,7 @@ if __name__ == "__main__":
     from weakOrders import *
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=15)
+                                 numberOfActions=5)
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
@@ -464,12 +517,14 @@ if __name__ == "__main__":
     print('=== >>> best and last fusion (default)')
     rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-min",Debug=False)
     rcg0.showPreOrder()
+    rcg0.computeRankingByChoosing()
+    rcg0.showPreOrder()
     rcg0.showRelationTable()
     print(rcg0.computeOrdinalCorrelation(g))
     rcg0.showOrderedRelationTable(direction="decreasing")
     rcg0.showOrderedRelationTable(direction="increasing")
     print(g.computeChordlessCircuits())
-    
+##    
 #    rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-max",Debug=False)
 #    rcg0.showPreOrder()
 #    print(rcg0.computeOrdinalCorrelation(g))
