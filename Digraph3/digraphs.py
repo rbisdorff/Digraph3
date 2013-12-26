@@ -1363,7 +1363,7 @@ class Digraph(object):
         return mean,stdDev
 
 
-    def computeBipolarCorrelation(self, other, MedianCut=False, Debug=False):
+    def computeBipolarCorrelation(self, other, MedianCut=False, filterRelation=None, Debug=False):
         """
         Renders the bipolar correlation K of a
         self.relation when compared
@@ -1372,6 +1372,12 @@ class Digraph(object):
 
         If MedianCut=True, the correlation is computed on the median polarized relations.
 
+        If filterRelation != None, the correlation is computed on the partial domain corresponding to the determined part of the filter relation.
+
+        .. warning::
+
+             Notice that the 'other' relation and/or the 'filterRelation', the case given, must be normalized !
+        
         K = sum_{x != y} [ min( max(-self.relation[x][y]),other.relation[x][y]), max(self.relation[x][y],-other.relation[x][y]) ]
 
         K /= sum_{x!=y} [ min(abs(self.relation[x][y]),abs(other.relation[x][y])) ]
@@ -1394,6 +1400,8 @@ class Digraph(object):
         g = deepcopy(self)
         g.recodeValuation(-1,1)
         actions = [x for x in g.actions]
+        Med = g.valuationdomain['med']
+        
         if MedianCut:
             g = PolarisedDigraph(g,level=Decimal('0.0'),KeepValues=False,StrictCut=True)
 
@@ -1406,8 +1414,7 @@ class Digraph(object):
                 otherg = PolarisedDigraph(otherg,level=Decimal('0.0'),KeepValues=False,StrictCut=True)
             otherRelation = otherg.relation
         else:
-            otherRelation = other
-            Med = g.valuationdomain['med']
+            otherRelation = deepcopy(other)
             if MedianCut:
                 for x in g.actions:
                     for y in g.actions:
@@ -1424,30 +1431,46 @@ class Digraph(object):
         correlation = Decimal('0.0')
         determination = Decimal('0.0')
 
-        n = len(actions)
-        n2 = (n*(n-1))
-        for x in actions:
-            for y in actions:
-                if x != y:
-                    ###### Bipolar approach
-                    corr = min( max(-g.relation[x][y],otherRelation[x][y]), max(g.relation[x][y],-otherRelation[x][y]) )
-                    correlation += corr
-                    determination += min( abs(g.relation[x][y]),abs(otherRelation[x][y]) )
-                    #determination += abs(corr)
-                    if Debug:
-                        print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)
+        if filterRelation == None:
+            n = len(actions)
+            n2 = (n*(n-1))
+            for x in actions:
+                for y in actions:
+                    if x != y:
+                        corr = min( max(-g.relation[x][y],otherRelation[x][y]), max(g.relation[x][y],-otherRelation[x][y]) )
+                        correlation += corr
+                        determination += min( abs(g.relation[x][y]),abs(otherRelation[x][y]) )
+                        if Debug:
+                            print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)
+        else:
+            n = len(actions)
+            n2 = (n*(n-1))
+            for x in actions:
+                for y in actions:
+                    if x != y:
+                        if filterRelation[x][y] != Med:
+                            corr = min( max(-g.relation[x][y],otherRelation[x][y]), max(g.relation[x][y],-otherRelation[x][y]) )
+                            correlation += corr
+                            determination += min( abs(g.relation[x][y]),abs(otherRelation[x][y]) )
+                            #determination += abs(corr)
+                            if Debug:
+                                print(x,y,g.relation[x][y],otherRelation[x][y],filterRelation[x][y],correlation,determination)
+                        
         if determination > Decimal('0.0'):
             correlation /= determination
-            return { 'MedianCut':MedianCut, 'correlation': correlation, 'determination': determination / Decimal(str(n2)) }
+            return { 'MedianCut':MedianCut, 'correlation': correlation,\
+                     'determination': determination / Decimal(str(n2)) }
         else:
-            return {'MedianCut':MedianCut, 'correlation': Decimal('0.0'), 'determination': determination}
+            return {'MedianCut':MedianCut, 'correlation': Decimal('0.0'),\
+                    'determination': determination}
 
 
-    def computeOrdinalCorrelation(self, other, MedianCut=False, Debug=False):
+    def computeOrdinalCorrelation(self, other, MedianCut=False, filterRelation=None, Debug=False):
         """
         obsolete: dummy replacement for Digraph.computeBipolarCorrelation method
         """
-        return self.computeBipolarCorrelation(other= other,MedianCut=MedianCut,Debug=Debug)
+        return self.computeBipolarCorrelation(other= other,MedianCut=MedianCut,\
+                                              filterRelation=filterRelation,Debug=Debug)
     ##     """
     ##     Renders the ordinal (Kendall) correlation K of a
     ##     self.relation when compared
@@ -10042,13 +10065,25 @@ if __name__ == "__main__":
     else:
         print('*-------- Testing classes and methods -------')
         from csv import reader
-
-        g = RandomDigraph()
-        g.showRelationTable()
-        g.save('debug')
-        f = Digraph('debug')
-        print(f.relation)
-        f.showStatistics()
+        
+##        g = RandomDigraph()
+##        g.showRelationTable()
+##        g.save('debug')
+##        f = Digraph('debug')
+##        print(f.relation)
+##        f.showStatistics()
+        t = RandomCBPerformanceTableau(numberOfActions=20,numberOfCriteria=13,weightDistribution='equiobjectives')
+        t .save('test')
+        t = PerformanceTableau('test')
+        g = BipolarOutrankingDigraph(t,Normalized=True)
+        from weakOrders import *
+        rbc = RankingByChoosingDigraph(g)
+        #rbc.showRelationTable()
+        pri = PrincipalInOutDegreesOrdering(g)
+        #pri.showRelationTable()
+        print(g.computeOrdinalCorrelation(rbc,Debug=False))
+        print(g.computeOrdinalCorrelation(pri,Debug=False))
+        print(g.computeOrdinalCorrelation(pri,filterRelation=rbc.relation,Debug=False))
         
         #t = RandomCBPerformanceTableau(numberOfActions=10)
         #g = BipolarOutrankingDigraph(t)
