@@ -6558,15 +6558,17 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     def __init__(self,argPerfTab=None,
                  sampleSize = 50,
                  samplingSeed = None,
+                 distribution = 'triangular',
                  errorLevel = 0.05,
                  coalition=None,
                  hasNoVeto=False,
                  hasBipolarVeto=True,
                  Normalized=False,
-                 Debug=False):
+                 Debug=False,
+                 SeeSampleCounter=False):
         # getting module ressources and setting the random seed
         from copy import deepcopy
-        from random import triangular, seed
+        from random import triangular, uniform, betavariate, seed
         if samplingSeed != None:
             from random import seed
             seed = samplingSeed
@@ -6619,11 +6621,21 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         if Debug:
             print(weights)
         for sample in range(sampleSize):
-            print(sample)
+            if SeeSampleCounter:
+                print(sample)
             if Debug:
                 print('===>>> sample %d ' % (sample+1) )
             for g in self.criteria:
-                rw = Decimal('%.2f' % triangular(0,float(2*weights[g]),float(weights[g])))
+                if distribution == 'triangular':
+                    rw = Decimal( '%.2f' % triangular(0,float(2*weights[g]),float(weights[g])) )
+                elif distribution == 'uniform':
+                    rw = Decimal( '%.2f' % uniform(0,float(2*weights[g])) )
+                elif distribution == 'beta(2,2)':
+                    rw = Decimal( '%.2f' % ( betavariate(2,2)*float(2*weights[g]) ) )
+                elif distribution == 'beta(12,12)':
+                    rw = Decimal( '%.2f' % ( betavariate(12,12)*float(2*weights[g]) ) )
+                else:
+                    print('Error: wrong distribution. Available laws: triangular (default), uniform, beta(2,2), beta(12,12)')        
                 perfTab.criteria[g]['weight'] = rw
 ##                if Debug:
 ##                    print(self.criteria[g]['weight'],rw)
@@ -7068,41 +7080,76 @@ if __name__ == "__main__":
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    #t = RandomCBPerformanceTableau(numberOfActions=5,\
-    #                               numberOfCriteria=7,\
-    #                               weightDistribution='equiobjectives',
-    #                               )
-    #t.saveXMCDA2('test')
+##    t = RandomCBPerformanceTableau(numberOfActions=5,\
+##                                   numberOfCriteria=7,\
+##                                   weightDistribution='equiobjectives',
+##                                   )
+##    t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
-    solver = RubisRestServer(host="http://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=True)
-    #solver.ping()
-    solver.submitProblem(t,valuation='robust',Debug=True)
-    #solver.submitXMCDA2Problem('test',Debug=False)
-    #solver.viewSolution()
+##    solver = RubisRestServer(host="http://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=True)
+##    #solver.ping()
+##    solver.submitProblem(t,valuation='robust',Debug=True)
+##    #solver.submitXMCDA2Problem('test',Debug=False)
+##    #solver.viewSolution()
     
     
-##    g = BipolarOutrankingDigraph(t)
-##    g.recodeValuation(-1,1)
-##    g.showRelationTable()
-##    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True, sampleSize=100,errorLevel=0.1,Debug=False,samplingSeed=1)
-##    gmc.showRelationTable()
-##    gmc.recodeValuation(-100,100)
-##    gmc.showRelationStatistics('medians')
-##    gmc.showRelationStatistics('likelihoods')
-##    for x in gmc.actions:
-##        for y in gmc.actions:
+    g = BipolarOutrankingDigraph(t)
+    g.recodeValuation(-1,1)
+    g.showRelationTable()
+
+    print('Triangular')
+    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
+                                             distribution='triangular',\
+                                             sampleSize=100,errorLevel=0.1,\
+                                             Debug=False,samplingSeed=1)
+    gmc.showRelationTable()
+    gmc.recodeValuation(-100,100)
+    gmc.showRelationStatistics('medians')
+    gmc.showRelationStatistics('likelihoods')
+
+    print('Uniform')
+    gmc1 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
+                                              distribution='uniform',\
+                                             sampleSize=100,errorLevel=0.1,\
+                                             Debug=False,samplingSeed=1)
+    gmc1.showRelationTable()
+    gmc1.recodeValuation(-100,100)
+    gmc1.showRelationStatistics('medians')
+    gmc1.showRelationStatistics('likelihoods')
+##    for x in gmc1.actions:
+##        for y in gmc1.actions:
 ##            print('==>>',x,y)
-##            print('Q4',gmc.relationStatistics[x][y]['Q4'])
-##            print('Q3',gmc.relationStatistics[x][y]['Q3'])
-##            print('probQ3',gmc.computeCDF(x,y,gmc.relationStatistics[x][y]['Q3']))
-##            print('Q2',gmc.relationStatistics[x][y]['median'])
-##            print('mean',gmc.relationStatistics[x][y]['mean'])
-##            print('Q1',gmc.relationStatistics[x][y]['Q1'])
-##            print('probQ1',gmc.computeCDF(x,y,gmc.relationStatistics[x][y]['Q1']))
-##            print('Q0',gmc.relationStatistics[x][y]['Q0'])
-##            print('pv',gmc.relationStatistics[x][y]['likelihood'])
-##            print('prob0',gmc.computeCDF(x,y,0.0))            
-##            print('sd',gmc.relationStatistics[x][y]['sd'])
+##            print('Q4',gmc1.relationStatistics[x][y]['Q4'])
+##            print('Q3',gmc1.relationStatistics[x][y]['Q3'])
+##            print('probQ3',gmc1.computeCDF(x,y,gmc1.relationStatistics[x][y]['Q3']))
+##            print('Q2',gmc1.relationStatistics[x][y]['median'])
+##            print('mean',gmc1.relationStatistics[x][y]['mean'])
+##            print('Q1',gmc1.relationStatistics[x][y]['Q1'])
+##            print('probQ1',gmc1.computeCDF(x,y,gmc1.relationStatistics[x][y]['Q1']))
+##            print('Q0',gmc1.relationStatistics[x][y]['Q0'])
+##            print('pv',gmc1.relationStatistics[x][y]['likelihood'])
+##            print('prob0',gmc1.computeCDF(x,y,0.0))            
+##            print('sd',gmc1.relationStatistics[x][y]['sd'])
+
+    print('Beta(2,2)')
+    gmc2 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
+                                              distribution='beta(2,2)',\
+                                             sampleSize=100,errorLevel=0.1,\
+                                             Debug=False,samplingSeed=1)
+    gmc2.showRelationTable()
+    gmc2.recodeValuation(-100,100)
+    gmc2.showRelationStatistics('medians')
+    gmc2.showRelationStatistics('likelihoods')
+
+    print('Beta(12,12)')
+    gmc3 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
+                                              distribution='beta(12,12)',\
+                                             sampleSize=100,errorLevel=0.1,\
+                                             Debug=False,samplingSeed=1)
+    gmc3.showRelationTable()
+    gmc3.recodeValuation(-100,100)
+    gmc3.showRelationStatistics('medians')
+    gmc3.showRelationStatistics('likelihoods')
 ## 
 ##    grbc = RankingByChoosingDigraph(g)
 ##    grbc.showPreOrder()
