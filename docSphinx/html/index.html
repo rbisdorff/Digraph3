@@ -154,7 +154,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -503,12 +503,17 @@ using the Pirlot&#8217;s fixpoint algorithm.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computeBipolarCorrelation">
-<tt class="descname">computeBipolarCorrelation</tt><big>(</big><em>other</em>, <em>MedianCut=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.computeBipolarCorrelation" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeBipolarCorrelation</tt><big>(</big><em>other</em>, <em>MedianCut=False</em>, <em>filterRelation=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.computeBipolarCorrelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the bipolar correlation K of a
 self.relation when compared
 with a given compatible (same actions set)) digraph or
 a [-1,1] valued compatible relation (same actions set).</p>
 <p>If MedianCut=True, the correlation is computed on the median polarized relations.</p>
+<p>If filterRelation != None, the correlation is computed on the partial domain corresponding to the determined part of the filter relation.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Notice that the &#8216;other&#8217; relation and/or the &#8216;filterRelation&#8217;, the case given, must be normalized !</p>
+</div>
 <p>K = sum_{x != y} [ min( max(-self.relation[x][y]),other.relation[x][y]), max(self.relation[x][y],-other.relation[x][y]) ]</p>
 <p>K /= sum_{x!=y} [ min(abs(self.relation[x][y]),abs(other.relation[x][y])) ]</p>
 <div class="admonition warning">
@@ -684,7 +689,7 @@ the automorphism of the digraph self</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computeOrdinalCorrelation">
-<tt class="descname">computeOrdinalCorrelation</tt><big>(</big><em>other</em>, <em>MedianCut=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.computeOrdinalCorrelation" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeOrdinalCorrelation</tt><big>(</big><em>other</em>, <em>MedianCut=False</em>, <em>filterRelation=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.computeOrdinalCorrelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>obsolete: dummy replacement for Digraph.computeBipolarCorrelation method</p>
 </dd></dl>
 
@@ -995,7 +1000,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1731,7 +1736,7 @@ equivalence valuations.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1762,7 +1767,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2371,7 +2376,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3066,7 +3071,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -3357,7 +3362,7 @@ automatically at problem submission.</li>
 
 <dl class="class">
 <dt id="outrankingDigraphs.StochasticBipolarOutrankingDigraph">
-<em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">StochasticBipolarOutrankingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>sampleSize=50</em>, <em>samplingSeed=None</em>, <em>errorLevel=0.05</em>, <em>coalition=None</em>, <em>hasNoVeto=False</em>, <em>hasBipolarVeto=True</em>, <em>Normalized=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.StochasticBipolarOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">StochasticBipolarOutrankingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>sampleSize=50</em>, <em>samplingSeed=None</em>, <em>distribution='triangular'</em>, <em>spread=1.0</em>, <em>errorLevel=0.1</em>, <em>coalition=None</em>, <em>hasNoVeto=False</em>, <em>hasBipolarVeto=True</em>, <em>Normalized=False</em>, <em>Debug=False</em>, <em>SeeSampleCounter=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.StochasticBipolarOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></tt></a></p>
 <p>Confident bipolar outranking digraph base on multiple criteria of uncertain significance.</p>
 <p>The digraph&#8217;s bipolar valuation represents the median of sampled outranking relations with a
@@ -3370,8 +3375,10 @@ be a triangular random variables of mode w_i in the range 0 to 2*w_i.</p>
 <div><ul class="simple">
 <li>argPerfTab: PerformanceTableau instance or the name of a stored one.
 If None, a random instance is generated.</li>
-<li>sampleSize: number (default=50) of random weight vectors used for Monte Carlo simulation.</li>
-<li>errorLevel: frequency of valuation of opposite sign to the simulated median valuation.</li>
+<li>sampleSize: number of random weight vectors used for Monte Carlo simulation.</li>
+<li>distribution: {triangular|uniform|beta(2,2)|beta(12,12)}, probability distribution used for generating random weights</li>
+<li>spread: weight range = weight mode +- (weight mode * spread)</li>
+<li>errorLevel: frequency of valuations of opposite sign compared to the median valuation.</li>
 <li>other standard parameters from the BipolarOutrankingDigraph class (see documentation).</li>
 </ul>
 </div></blockquote>
