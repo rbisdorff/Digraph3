@@ -568,6 +568,60 @@ def testStochasticOutrankingDigraphs():
     gmcrbc = RankingByChoosingDigraph(gmc)
     gmcrbc.showPreOrder()
 
+def testRandomWeightsLaws():
+    print('*------- test random laws for stochastic outranking ------*')
+    t = RandomCBPerformanceTableau(numberOfActions=5,\
+                                   numberOfCriteria=7,\
+                                   weightDistribution='equiobjectives',
+                                   )
+    t.saveXMCDA2('test')
+    t = XMCDA2PerformanceTableau('test')
+    g = BipolarOutrankingDigraph(t)
+    g.recodeValuation(-1,1)
+    g.showRelationTable()
+
+    print('Triangular')
+    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
+                                             distribution='triangular',\
+                                             sampleSize=100,errorLevel=0.1,\
+                                             Debug=False,samplingSeed=1)
+    gmc.showRelationTable()
+    gmc.recodeValuation(-100,100)
+    gmc.showRelationStatistics('medians')
+    gmc.showRelationStatistics('likelihoods')
+
+    print('Uniform')
+    gmc1 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
+                                              distribution='uniform',\
+                                              spread = 0.5,\
+                                             sampleSize=100,errorLevel=0.1,\
+                                             Debug=False,samplingSeed=1)
+    gmc1.showRelationTable()
+    gmc1.recodeValuation(-100,100)
+    gmc1.showRelationStatistics('medians')
+    gmc1.showRelationStatistics('likelihoods')
+
+    print('Beta(2,2)')
+    gmc2 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
+                                              distribution='beta(2,2)',\
+                                             sampleSize=100,errorLevel=0.1,\
+                                             Debug=False,samplingSeed=1)
+    gmc2.showRelationTable()
+    gmc2.recodeValuation(-100,100)
+    gmc2.showRelationStatistics('medians')
+    gmc2.showRelationStatistics('likelihoods')
+
+    print('Beta(12,12)')
+    gmc3 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
+                                              distribution='beta(12,12)',\
+                                              spread = 0.5,\
+                                             sampleSize=100,errorLevel=0.1,\
+                                             Debug=False,samplingSeed=1)
+    gmc3.showRelationTable()
+    gmc3.recodeValuation(-100,100)
+    gmc3.showRelationStatistics('medians')
+    gmc3.showRelationStatistics('likelihoods')
+
 def testRubisRestServer():
     print('*------ test RubisRestServer class ----*')
     from time import sleep

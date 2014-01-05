@@ -6550,8 +6550,10 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
         * argPerfTab: PerformanceTableau instance or the name of a stored one.
           If None, a random instance is generated.
-        * sampleSize: number (default=50) of random weight vectors used for Monte Carlo simulation.
-        * errorLevel: frequency of valuation of opposite sign to the simulated median valuation.
+        * sampleSize: number of random weight vectors used for Monte Carlo simulation.
+        * distribution: {triangular|uniform|beta(2,2)|beta(12,12)}, probability distribution used for generating random weights
+        * spread: weight range = weight mode +- (weight mode * spread)
+        * errorLevel: frequency of valuations of opposite sign compared to the median valuation.
         * other standard parameters from the BipolarOutrankingDigraph class (see documentation).
 
     """
@@ -6559,7 +6561,8 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                  sampleSize = 50,
                  samplingSeed = None,
                  distribution = 'triangular',
-                 errorLevel = 0.05,
+                 spread = 1.0,
+                 errorLevel = 0.1,
                  coalition=None,
                  hasNoVeto=False,
                  hasBipolarVeto=True,
@@ -6617,7 +6620,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
         # initialize the weight modes
         weights = dict([(g,self.criteria[g]['weight']) for g in self.criteria])
-
+        spread = Decimal(spread)
         if Debug:
             print(weights)
         for sample in range(sampleSize):
@@ -6626,16 +6629,20 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             if Debug:
                 print('===>>> sample %d ' % (sample+1) )
             for g in self.criteria:
+                lowerWeightLimit = float(weights[g]- (weights[g]*spread))
+                upperWeightLimit = float(weights[g] + (weights[g]*spread))
+                weightMode = float(weights[g])
+                weightRange = upperWeightLimit - lowerWeightLimit
                 if distribution == 'triangular':
-                    rw = Decimal( '%.2f' % triangular(0,float(2*weights[g]),float(weights[g])) )
+                    rw = Decimal( '%.2f' % triangular(lowerWeightLimit,upperWeightLimit,weightMode) )
                 elif distribution == 'uniform':
-                    rw = Decimal( '%.2f' % uniform(0,float(2*weights[g])) )
+                    rw = Decimal( '%.2f' % uniform(lowerWeightLimit,upperWeightLimit) )
                 elif distribution == 'beta(2,2)':
-                    rw = Decimal( '%.2f' % ( betavariate(2,2)*float(2*weights[g]) ) )
+                    rw = Decimal( '%.2f' % (lowerWeightLimit+(betavariate(2,2)*weightRange)) )
                 elif distribution == 'beta(12,12)':
-                    rw = Decimal( '%.2f' % ( betavariate(12,12)*float(2*weights[g]) ) )
+                    rw = Decimal( '%.2f' % (lowerWeightLimit+(betavariate(12,12)*weightRange)) )
                 else:
-                    print('Error: wrong distribution. Available laws: triangular (default), uniform, beta(2,2), beta(12,12)')        
+                    print('Error: wrong distribution %s. Available laws: triangular (default), uniform, beta(2,2), beta(12,12)' % distribution)        
                 perfTab.criteria[g]['weight'] = rw
 ##                if Debug:
 ##                    print(self.criteria[g]['weight'],rw)
@@ -7110,6 +7117,7 @@ if __name__ == "__main__":
     print('Uniform')
     gmc1 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
                                               distribution='uniform',\
+                                              spread=0.5,\
                                              sampleSize=100,errorLevel=0.1,\
                                              Debug=False,samplingSeed=1)
     gmc1.showRelationTable()
@@ -7144,6 +7152,7 @@ if __name__ == "__main__":
     print('Beta(12,12)')
     gmc3 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
                                               distribution='beta(12,12)',\
+                                              spread=0.5,\
                                              sampleSize=100,errorLevel=0.1,\
                                              Debug=False,samplingSeed=1)
     gmc3.showRelationTable()
