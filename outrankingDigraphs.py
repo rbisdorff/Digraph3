@@ -6708,7 +6708,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def _computeCDF(self,x,y,rValue):
+    def computeCDF(self,x,y,rValue):
         """
         computes by interpolation the likelihood of a given rValue with respect to the sampled r(x,y) valuations.
 
@@ -7131,14 +7131,14 @@ if __name__ == "__main__":
 ##            print('==>>',x,y)
 ##            print('Q4',gmc1.relationStatistics[x][y]['Q4'])
 ##            print('Q3',gmc1.relationStatistics[x][y]['Q3'])
-##            print('probQ3',gmc1.computeCDF(x,y,gmc1.relationStatistics[x][y]['Q3']))
+##            print('probQ3',gmc1._computeCDF(x,y,gmc1.relationStatistics[x][y]['Q3']))
 ##            print('Q2',gmc1.relationStatistics[x][y]['median'])
 ##            print('mean',gmc1.relationStatistics[x][y]['mean'])
 ##            print('Q1',gmc1.relationStatistics[x][y]['Q1'])
-##            print('probQ1',gmc1.computeCDF(x,y,gmc1.relationStatistics[x][y]['Q1']))
+##            print('probQ1',gmc1._computeCDF(x,y,gmc1.relationStatistics[x][y]['Q1']))
 ##            print('Q0',gmc1.relationStatistics[x][y]['Q0'])
 ##            print('pv',gmc1.relationStatistics[x][y]['likelihood'])
-##            print('prob0',gmc1.computeCDF(x,y,0.0))            
+##            print('prob0',gmc1._computeCDF(x,y,0.0))            
 ##            print('sd',gmc1.relationStatistics[x][y]['sd'])
 
     print('Beta(2,2)')
