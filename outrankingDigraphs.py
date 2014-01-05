@@ -6708,9 +6708,9 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def computeCDF(self,x,y,rValue):
+    def _computeCDF(self,x,y,rValue):
         """
-        computes the probability of a rValue of the sampled r(x,y) valuations.
+        computes by interpolation the likelihood of a given rValue with respect to the sampled r(x,y) valuations.
 
         *Parameters*:
 
@@ -6736,7 +6736,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         
     def _computeQuantile(self,p,observations):
         """
-        computes the quantile of probability p of a list of sorted observations.
+        computes by interpolation the quantile of probability p of a list of sorted observations.
         """
         from math import floor,ceil
         n = len(observations)
@@ -6754,7 +6754,9 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
     def _computeRelationStatistics(self,x,y,observations):
         """
-        computes the pairwise relation statistics from the sampled observations.
+        Computes the pairwise relation statistics from the sampled observations.
+        Results are stored in the self.relationStatistics[x][y] dictionary
+        with keys = 'sd','Q0,'Q1,'Q3','Q4'.
         """
         from math import sqrt
         n = len(observations)
