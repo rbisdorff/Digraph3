@@ -542,7 +542,7 @@ def testStochasticOutrankingDigraphs():
     g.showRelationTable()
     gmc = StochasticBipolarOutrankingDigraph(t,Normalized=False,\
                                              sampleSize=50,\
-                                             errorLevel=0.05,\
+                                             likelihood=0.05,\
                                              Debug=False,\
                                              samplingSeed=1)
     gmc.showRelationTable()
@@ -583,7 +583,7 @@ def testRandomWeightsLaws():
     print('Triangular')
     gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
                                              distribution='triangular',\
-                                             sampleSize=100,errorLevel=0.1,\
+                                             sampleSize=100,likelihood=0.1,\
                                              Debug=False,samplingSeed=1)
     gmc.showRelationTable()
     gmc.recodeValuation(-100,100)
@@ -594,7 +594,7 @@ def testRandomWeightsLaws():
     gmc1 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
                                               distribution='uniform',\
                                               spread = 0.5,\
-                                             sampleSize=100,errorLevel=0.1,\
+                                             sampleSize=100,likelihood=0.1,\
                                              Debug=False,samplingSeed=1)
     gmc1.showRelationTable()
     gmc1.recodeValuation(-100,100)
@@ -604,7 +604,7 @@ def testRandomWeightsLaws():
     print('Beta(2,2)')
     gmc2 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
                                               distribution='beta(2,2)',\
-                                             sampleSize=100,errorLevel=0.1,\
+                                             sampleSize=100,likelihood=0.1,\
                                              Debug=False,samplingSeed=1)
     gmc2.showRelationTable()
     gmc2.recodeValuation(-100,100)
@@ -615,7 +615,7 @@ def testRandomWeightsLaws():
     gmc3 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
                                               distribution='beta(12,12)',\
                                               spread = 0.5,\
-                                             sampleSize=100,errorLevel=0.1,\
+                                             sampleSize=100,likelihood=0.1,\
                                              Debug=False,samplingSeed=1)
     gmc3.showRelationTable()
     gmc3.recodeValuation(-100,100)
