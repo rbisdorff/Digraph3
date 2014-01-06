@@ -6537,10 +6537,10 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph,PerformanceTableau):
 
 class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     """
-    Confident bipolar outranking digraph base on multiple criteria of uncertain significance.
+    Stochastic bipolar outranking digraph base on multiple criteria of uncertain significance.
     
     The digraph's bipolar valuation represents the median of sampled outranking relations with a
-    sufficient likelihood (default = 95%) to remain positive, repectively negative,
+    sufficient likelihood (default = 90%) to remain positive, repectively negative,
     over the possible criteria significance ranges.
 
     Each criterion i' significance weight is supposed to
@@ -6553,7 +6553,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         * sampleSize: number of random weight vectors used for Monte Carlo simulation.
         * distribution: {triangular|uniform|beta(2,2)|beta(12,12)}, probability distribution used for generating random weights
         * spread: weight range = weight mode +- (weight mode * spread)
-        * errorLevel: frequency of valuations of opposite sign compared to the median valuation.
+        * likelihood: 1.0 - frequency of valuations of opposite sign compared to the median valuation.
         * other standard parameters from the BipolarOutrankingDigraph class (see documentation).
 
     """
@@ -6562,7 +6562,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                  samplingSeed = None,
                  distribution = 'triangular',
                  spread = 1.0,
-                 errorLevel = 0.1,
+                 likelihood = 0.9,
                  coalition=None,
                  hasNoVeto=False,
                  hasBipolarVeto=True,
@@ -6589,7 +6589,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                                      Normalized=Normalized)
         self.name = bodg.name + '_MC'
         self.sampleSize = sampleSize
-        self.errorLevel = errorLevel
+        self.likelihood = likelihood
         self.actions = deepcopy(bodg.actions)
         self.order = len(self.actions)
         self.valuationdomain = deepcopy(bodg.valuationdomain)
@@ -6599,6 +6599,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         
         # normalize valuation to percentages
         self.recodeValuation(-100.0,100.0)
+        Med = self.valuationdomain['med']
         
         # bin breaks per percent unit
         breaks = [(x,i) for i,x  in enumerate(range(-100,101))]
@@ -6680,14 +6681,14 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                     print(frequency[x][y])
                     print(quantilesId)
                     print(frequency[x][y][quantilesId[0]])
-                if self.relation[x][y] > 0:
+                if self.relation[x][y] > Med:
                     self.relationStatistics[x][y]['likelihood'] = 1.0 - float(frequency[x][y][quantilesId[0]])/float(sampleSize)
-                elif self.relation[x][y] <= 0:
+                elif self.relation[x][y] <= Med:
                     self.relationStatistics[x][y]['likelihood'] = float(frequency[x][y][quantilesId[0]])/float(sampleSize)
                 self._computeRelationStatistics(x,y,valuationObservations[x][y])
                 if Debug:
                     print(self.relationStatistics[x][y])
-                requiredLikelihood = 1.0 - errorLevel
+                requiredLikelihood = likelihood
                 if self.relationStatistics[x][y]['likelihood'] < requiredLikelihood:
                     self.relation[x][y] = self.valuationdomain['med']
                 else:
@@ -6787,7 +6788,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         """
         print('Stochastic outranking digraph %s' % self.name)
         print('Sampling size: %d' % self.sampleSize)
-        print('Error level of Condorcet digraph: %.2f' % self.errorLevel)
+        print('Likelihood of Condorcet digraph: %.2f' % self.likelihood)
         BipolarOutrankingDigraph.showRelationTable(self,IntegerValues=IntegerValues,
                           actionsSubset= actionsSubset,
                           hasLPDDenotation=hasLPDDenotation,
@@ -7089,11 +7090,11 @@ if __name__ == "__main__":
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-##    t = RandomCBPerformanceTableau(numberOfActions=5,\
-##                                   numberOfCriteria=7,\
-##                                   weightDistribution='equiobjectives',
-##                                   )
-##    t.saveXMCDA2('test')
+    t = RandomCBPerformanceTableau(numberOfActions=11,\
+                                   numberOfCriteria=7,\
+                                   weightDistribution='equiobjectives',
+                                   )
+    t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
 ##    solver = RubisRestServer(host="http://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=True)
 ##    #solver.ping()
@@ -7109,7 +7110,7 @@ if __name__ == "__main__":
     print('Triangular')
     gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
                                              distribution='triangular',\
-                                             sampleSize=100,errorLevel=0.1,\
+                                             sampleSize=100,\
                                              Debug=False,samplingSeed=1)
     gmc.showRelationTable()
     gmc.recodeValuation(-100,100)
@@ -7120,7 +7121,7 @@ if __name__ == "__main__":
     gmc1 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
                                               distribution='uniform',\
                                               spread=0.5,\
-                                             sampleSize=100,errorLevel=0.1,\
+                                             sampleSize=100,likelihood=0.9,\
                                              Debug=False,samplingSeed=1)
     gmc1.showRelationTable()
     gmc1.recodeValuation(-100,100)
@@ -7144,7 +7145,7 @@ if __name__ == "__main__":
     print('Beta(2,2)')
     gmc2 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
                                               distribution='beta(2,2)',\
-                                             sampleSize=100,errorLevel=0.1,\
+                                             sampleSize=100,likelihood=0.9,\
                                              Debug=False,samplingSeed=1)
     gmc2.showRelationTable()
     gmc2.recodeValuation(-100,100)
@@ -7155,7 +7156,7 @@ if __name__ == "__main__":
     gmc3 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
                                               distribution='beta(12,12)',\
                                               spread=0.5,\
-                                             sampleSize=100,errorLevel=0.1,\
+                                             sampleSize=100,likelihood=0.9,\
                                              Debug=False,samplingSeed=1)
     gmc3.showRelationTable()
     gmc3.recodeValuation(-100,100)
