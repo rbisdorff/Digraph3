@@ -7301,13 +7301,11 @@ class Digraph(object):
 
         return {'I': rK1IK2, 'P+': rK1PK2, 'P-' :rK2PK1, 'R' :  rK1RK2 }
 
-
-
-# ------ CoDual construction
+# ------ CoverDigraph construction
 
 class CoDualDigraph(Digraph):
     """
-    Instantiates the associated codual version from
+    Instantiates the associated codual digraph from
     a given Digraph called other.
 
     Instantiates as other.__class__ !
@@ -7316,7 +7314,7 @@ class CoDualDigraph(Digraph):
     and the evaluation dictionary into self.
     """
 
-    def __init__(self,other):
+    def __init__(self,other,Debug=False):
         from copy import deepcopy
         self.__class__ = other.__class__
         self.name = 'codual-'+other.name
@@ -7336,14 +7334,74 @@ class CoDualDigraph(Digraph):
         self.order = len(self.actions)
         self.valuationdomain = deepcopy(other.valuationdomain)
         actionsList = list(self.actions)
-        max = self.valuationdomain['max']
-        min = self.valuationdomain['min']
+        Max = self.valuationdomain['max']
+        Min = self.valuationdomain['min']
         relation = {}
         for x in actionsList:
             relation[x] = {}
             for y in actionsList:
-                relation[x][y] = max - other.relation[y][x] + min
+                relation[x][y] = Max - other.relation[y][x] + Min
         self.relation = relation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+
+
+# ------ CoDual construction
+
+class CoverDigraph(Digraph):
+    """
+    Instantiates the associated cover relation from
+    a given Digraph called other.
+
+    Instantiates as other.__class__ !
+
+    Copies the case given the description, the criteria
+    and the evaluation dictionary into self.
+    """
+
+    def __init__(self,other, Debug=False):
+        from copy import deepcopy
+        self.__class__ = other.__class__
+        self.name = 'cover-'+other.name
+        try:
+            self.description = deepcopy(other.description)
+        except AttributeError:
+            pass
+        try:
+            self.criteria = deepcopy(other.criteria)
+        except AttributeError:
+            pass
+        try:
+            self.evaluation = deepcopy(other.evaluation)
+        except AttributeError:
+            pass
+        self.actions = deepcopy(other.actions)
+        self.order = len(self.actions)
+        self.valuationdomain = deepcopy(other.valuationdomain)
+        actionsList = list(self.actions)
+        #Max = Decimal('2')*other.valuationdomain['max']
+        #Med = Decimal('0')
+        #Min = -Max
+        Min = self.valuationdomain['min']
+        Med = self.valuationdomain['med']
+        Max = self.valuationdomain['max']
+        relation = {}
+        for x in actionsList:
+            relation[x] = {}
+            for y in actionsList:
+                if y == x:
+                    relation[x][y] = Med
+                else:
+                    coverXY = Max
+                    for z in actionsList:
+                        if z != x and z != y:
+                            coverz = max(other.relation[x][z],(Max-other.relation[y][z]+Min))
+                            coverXY = min(coverXY,coverz)
+                            if Debug:
+                                print(x,y,z,other.relation[x][z],(Max-other.relation[y][z]+Min),coverz,coverXY)
+                    relation[x][y] = min(other.relation[x][y],coverXY)
+        self.relation = relation
+        #self.recodeValuation(other.valuationdomain['min'],other.valuationdomain['max'])
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
@@ -10072,18 +10130,23 @@ if __name__ == "__main__":
 ##        f = Digraph('debug')
 ##        print(f.relation)
 ##        f.showStatistics()
-        t = RandomCBPerformanceTableau(numberOfActions=20,numberOfCriteria=13,weightDistribution='equiobjectives')
+        t = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=5,weightDistribution='equiobjectives')
         t .save('test')
         t = PerformanceTableau('test')
         g = BipolarOutrankingDigraph(t,Normalized=True)
-        from weakOrders import *
-        rbc = RankingByChoosingDigraph(g)
-        #rbc.showRelationTable()
-        pri = PrincipalInOutDegreesOrdering(g)
-        #pri.showRelationTable()
-        print(g.computeOrdinalCorrelation(rbc,Debug=False))
-        print(g.computeOrdinalCorrelation(pri,Debug=False))
-        print(g.computeOrdinalCorrelation(pri,filterRelation=rbc.relation,Debug=False))
+        g.showRelationTable()
+        covg = CoverDigraph(g, Debug=False)
+        covg.showRelationTable()
+        g.showPreKernels()
+        covg.showPreKernels()
+##        from weakOrders import *
+##        rbc = RankingByChoosingDigraph(g)
+##        #rbc.showRelationTable()
+##        pri = PrincipalInOutDegreesOrdering(g)
+##        #pri.showRelationTable()
+##        print(g.computeOrdinalCorrelation(rbc,Debug=False))
+##        print(g.computeOrdinalCorrelation(pri,Debug=False))
+##        print(g.computeOrdinalCorrelation(pri,filterRelation=rbc.relation,Debug=False))
         
         #t = RandomCBPerformanceTableau(numberOfActions=10)
         #g = BipolarOutrankingDigraph(t)
