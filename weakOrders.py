@@ -192,9 +192,33 @@ class RankingByChoosingDigraph(WeakOrder):
     def __init__(self,other,
                  fusionOperator = "o-min",
                  CoDual=False,
-                 Debug=False):
+                 Debug=False,
+                 Threading=False):
         
         from copy import deepcopy
+        import threading
+
+        if Threading:
+            class myThread(threading.Thread):
+                def __init__(self, threadID, name, digraph, direction, Codual, Debug):
+                    threading.Thread.__init__(self)
+                    self.threadID = threadID
+                    self.name = name
+                    self.digraph = digraph
+                    self.direction = direction
+                    self.Codual = Codual
+                    self.Debug = Debug
+                def run(self):
+                    if Debug:
+                        print("Starting " + self.name)
+                    threadLock.acquire()
+                    if self.direction == 'best':
+                        self.digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=Debug)
+                    elif self.direction == 'worst':
+                        digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=Debug)
+
+                    threadLock.release()
+                    
         digraph=deepcopy(other)
         digraph.recodeValuation(-1.0,1.0)
         self.name = digraph.name
@@ -203,35 +227,29 @@ class RankingByChoosingDigraph(WeakOrder):
         self.order = len(self.actions)
         self.valuationdomain = digraph.valuationdomain
         self.originalRelation = digraph.relation
-        
-##        if not Best and not Last:
-##            self.rankingByChoosing = digraph.computeRankingByChoosing(CoDual=CoDual,Debug=Debug)
-##            if Debug:
-##                digraph.showRankingByChoosing()
-##            self.relation = digraph.computeRankingByChoosingRelation()
-##            self.rankingByChoosing = digraph.rankingByChoosing
-##            
-##        elif Best and not Last:
-##            digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=Debug)
-##            self.relation = digraph.computeRankingByBestChoosingRelation()
-##            self.rankingByBestChoosing = digraph.rankingByBestChoosing
-##            if Debug:
-##                digraph.showRankingByBestChoosing()
-##                
-##        elif Last and not Best:
-##            digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=Debug)
-##            self.relation = digraph.computeRankingByLastChoosingRelation()
-##            self.rankingByLastChoosing = digraph.rankingByLastChoosing
-##            if Debug:
-##                digraph.showRankingByLastChoosing()
                 
-##        else:
-        
-        digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=Debug)
+        if Threading:
+            threadLock = threading.Lock()
+            threads = []
+
+            threadBest = myThread(1,"ComputeBest",digraph,"best",CoDual,Debug)
+            threadWorst = myThread(2,"ComputeWorst",digraph,"worst",CoDual,Debug)
+            threadBest.start()
+            threadWorst.start()
+            threads.append(threadBest)
+            threads.append(threadWorst)
+
+            for th in threads:
+                th.join()
+            if Debug:
+                print('Exiting both computing threads')
+        else:
+            digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=Debug)
+            digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=Debug)
+            
         relBest = digraph.computeRankingByBestChoosingRelation()
         if Debug:
-            digraph.showRankingByBestChoosing()
-        digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=Debug)
+                digraph.showRankingByBestChoosing()
         relLast = digraph.computeRankingByLastChoosingRelation()
         if Debug:
             digraph.showRankingByLastChoosing()
@@ -521,7 +539,8 @@ if __name__ == "__main__":
 
     from digraphs import *
     from outrankingDigraphs import *
-    from weakOrders import *
+    import weakOrders
+    from time import time
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
                                  numberOfActions=5)
@@ -531,13 +550,24 @@ if __name__ == "__main__":
     #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
     #g = RandomValuationDigraph(order=11)
     print('=== >>> best and last fusion (default)')
-    rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-min",Debug=False)
-    rcg0.showWeakOrder()
-    rcg0.showRelationTable()
-    print(rcg0.computeOrdinalCorrelation(g))
-    rcg0.showOrderedRelationTable(direction="decreasing")
-    rcg0.showOrderedRelationTable(direction="increasing")
-    print(g.computeChordlessCircuits())
+    t0 = time()
+    rcg0 = weakOrders.RankingByChoosingDigraph(g,\
+                                                     fusionOperator="o-min",\
+                                                     Debug=False,\
+                                                     Threading=False)
+    print('execution time %s: ' % (str ( time()-t0 ) ) )
+    t0 = time()
+    rcg0 = weakOrders.RankingByChoosingDigraph(g,\
+                                                     fusionOperator="o-min",\
+                                                     Debug=False,\
+                                                     Threading=True)
+    print('execution time %s: ' % (str ( time()-t0 ) ) )
+##    rcg0.showWeakOrder()
+##    rcg0.showRelationTable()
+##    print(rcg0.computeOrdinalCorrelation(g))
+##    rcg0.showOrderedRelationTable(direction="decreasing")
+##    rcg0.showOrderedRelationTable(direction="increasing")
+##    print(g.computeChordlessCircuits())
 ##    
 #    rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-max",Debug=False)
 #    rcg0.showWeakOrder()
