@@ -196,53 +196,73 @@ class RankingByChoosingDigraph(WeakOrder):
                  Threading=False):
         
         from copy import deepcopy
-        import threading
+        from pickle import dumps, loads, load
 
         if Threading:
-            class myThread(threading.Thread):
-                def __init__(self, threadID, name, digraph, direction, Codual, Debug):
-                    threading.Thread.__init__(self)
+            from multiprocessing import Process, Lock
+            class myThread(Process):
+                def __init__(self, threadID, name, direction, Codual, Debug):
+                    Process.__init__(self)
                     self.threadID = threadID
                     self.name = name
-                    self.digraph = digraph
                     self.direction = direction
                     self.Codual = Codual
                     self.Debug = Debug
                 def run(self):
+                    from pickle import dumps, loads
                     if Debug:
                         print("Starting " + self.name)
                     threadLock.acquire()
+                    fi = open('dumpDigraph.py','rb')
+                    digraph = loads(fi.read())
+                    fi.close()
                     if self.direction == 'best':
-                        self.digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=Debug)
+                        fo = open('rbbc.py','wb')
+                        rbbc = digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=Debug)
+                        fo.write(dumps(rbbc,-1))
                     elif self.direction == 'worst':
-                        digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=Debug)
-
+                        fo = open('rbwc.py','wb')
+                        rbwc = digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=Debug)
+                        fo.write(dumps(rbwc,-1))
+                    fo.close()
                     threadLock.release()
                     
         digraph=deepcopy(other)
         digraph.recodeValuation(-1.0,1.0)
         self.name = digraph.name
         #self.__class__ = digraph.__class__
-        self.actions = digraph.actions
+        self.actions = deepcopy(digraph.actions)
         self.order = len(self.actions)
         self.valuationdomain = digraph.valuationdomain
         self.originalRelation = digraph.relation
-                
+
         if Threading:
-            threadLock = threading.Lock()
+            print('Threading ...')
+            fo = open('dumpDigraph.py','wb')
+            pd = dumps(digraph,-1)
+            fo.write(pd)
+            fo.close()
+            threadLock = Lock()
             threads = []
 
-            threadBest = myThread(1,"ComputeBest",digraph,"best",CoDual,Debug)
-            threadWorst = myThread(2,"ComputeWorst",digraph,"worst",CoDual,Debug)
+            threadBest = myThread(1,"ComputeBest","best",CoDual,Debug)
+            threadWorst = myThread(2,"ComputeWorst","worst",CoDual,Debug)
             threadBest.start()
-            threadWorst.start()
             threads.append(threadBest)
+            threadWorst.start()
             threads.append(threadWorst)
 
             for th in threads:
                 th.join()
-            if Debug:
-                print('Exiting both computing threads')
+            #if Debug:
+            print('Exiting both computing threads')
+            fi = open('rbbc.py','rb')
+            digraph.rankingByBestChoosing = loads(fi.read())
+            fi.close()
+            fi = open('rbwc.py','rb')
+            digraph.rankingByLastChoosing = loads(fi.read())
+            fi.close()
+            
         else:
             digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=Debug)
             digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=Debug)
@@ -543,7 +563,7 @@ if __name__ == "__main__":
     from time import time
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=5)
+                                 numberOfActions=20)
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
