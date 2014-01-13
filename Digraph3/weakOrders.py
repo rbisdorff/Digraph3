@@ -199,7 +199,7 @@ class RankingByChoosingDigraph(WeakOrder):
         from pickle import dumps, loads, load
 
         if Threading:
-            from multiprocessing import Process, Lock
+            from multiprocessing import Process, Lock, active_children
             class myThread(Process):
                 def __init__(self, threadID, name, direction, Codual, Debug):
                     Process.__init__(self)
@@ -212,7 +212,7 @@ class RankingByChoosingDigraph(WeakOrder):
                     from pickle import dumps, loads
                     if Debug:
                         print("Starting " + self.name)
-                    threadLock.acquire()
+                    #threadLock.acquire()
                     fi = open('dumpDigraph.py','rb')
                     digraph = loads(fi.read())
                     fi.close()
@@ -225,7 +225,7 @@ class RankingByChoosingDigraph(WeakOrder):
                         rbwc = digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=Debug)
                         fo.write(dumps(rbwc,-1))
                     fo.close()
-                    threadLock.release()
+                    #threadLock.release()
                     
         digraph=deepcopy(other)
         digraph.recodeValuation(-1.0,1.0)
@@ -242,19 +242,21 @@ class RankingByChoosingDigraph(WeakOrder):
             pd = dumps(digraph,-1)
             fo.write(pd)
             fo.close()
-            threadLock = Lock()
-            threads = []
+            #threadLock = Lock()
+            #threads = []
 
             threadBest = myThread(1,"ComputeBest","best",CoDual,Debug)
             threadWorst = myThread(2,"ComputeWorst","worst",CoDual,Debug)
             threadBest.start()
-            threads.append(threadBest)
+            #threads.append(threadBest)
             threadWorst.start()
-            threads.append(threadWorst)
+            #threads.append(threadWorst)
 
-            for th in threads:
-                th.join()
+            #for th in threads:
+            #    th.join()
             #if Debug:
+            while active_children() != []:
+                pass
             print('Exiting both computing threads')
             fi = open('rbbc.py','rb')
             digraph.rankingByBestChoosing = loads(fi.read())
@@ -563,7 +565,7 @@ if __name__ == "__main__":
     from time import time
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=20)
+                                 numberOfActions=25)
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
@@ -576,14 +578,16 @@ if __name__ == "__main__":
                                                      Debug=False,\
                                                      Threading=False)
     print('execution time %s: ' % (str ( time()-t0 ) ) )
+    rcg0.showWeakOrder()
+##    rcg0.showRelationTable()
     t0 = time()
-    rcg0 = weakOrders.RankingByChoosingDigraph(g,\
+    rcg1 = weakOrders.RankingByChoosingDigraph(g,\
                                                      fusionOperator="o-min",\
                                                      Debug=False,\
                                                      Threading=True)
     print('execution time %s: ' % (str ( time()-t0 ) ) )
-##    rcg0.showWeakOrder()
-##    rcg0.showRelationTable()
+    rcg1.showWeakOrder()
+##    rcg1.showRelationTable()
 ##    print(rcg0.computeOrdinalCorrelation(g))
 ##    rcg0.showOrderedRelationTable(direction="decreasing")
 ##    rcg0.showOrderedRelationTable(direction="increasing")
