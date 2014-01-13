@@ -199,7 +199,7 @@ class RankingByChoosingDigraph(WeakOrder):
         from pickle import dumps, loads, load
 
         if Threading:
-            from multiprocessing import Process, Lock, active_children
+            from multiprocessing import Process, Lock, active_children, cpu_count
             class myThread(Process):
                 def __init__(self, threadID, name, direction, Codual, Debug):
                     Process.__init__(self)
@@ -236,7 +236,7 @@ class RankingByChoosingDigraph(WeakOrder):
         self.valuationdomain = digraph.valuationdomain
         self.originalRelation = digraph.relation
 
-        if Threading:
+        if Threading and cpu_count()>2:
             print('Threading ...')
             fo = open('dumpDigraph.py','wb')
             pd = dumps(digraph,-1)
