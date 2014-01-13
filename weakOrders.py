@@ -487,9 +487,51 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
     .. image:: proWeakOrdering_Colwise.png
     
     """
-    def __init__(self,other,fusionOperator="o-min",imageType=None,plotFileName=None,Debug=False):
+    def __init__(self,other,fusionOperator="o-min",\
+                 imageType=None,\
+                 plotFileName=None,\
+                 Threading=False,\
+                 Debug=False):
         from copy import deepcopy
         from linearOrders import PrincipalOrder
+        from pickle import dumps, loads, load
+
+        if Threading:
+            from multiprocessing import Process, Lock, active_children, cpu_count
+            class myThread(Process):
+                def __init__(self, threadID, name, direction, imageType, plotFileName,Debug):
+                    Process.__init__(self)
+                    self.threadID = threadID
+                    self.name = name
+                    self.direction = direction
+                    self.imageType = imageType
+                    self.plotFileName = plotFileName
+                    self.Debug = Debug
+                def run(self):
+                    from pickle import dumps, loads
+                    if Debug:
+                        print("Starting " + self.name)
+                    fi = open('dumpDigraph.py','rb')
+                    digraph = loads(fi.read())
+                    fi.close()
+                    if self.direction == 'col':
+                        fo = open('priCol.py','wb')
+                        pc = PrincipalOrder(digraph,\
+                                            Colwise=True,\
+                                            imageType=imageType,\
+                                            plotFileName=plotFileName,\
+                                            Debug=Debug)
+                        fo.write(dumps(pc,-1))
+                    elif self.direction == 'row':
+                        fo = open('priRow.py','wb')
+                        pl = PrincipalOrder(digraph,\
+                                            Colwise=False,\
+                                            imageType=imageType,\
+                                            plotFileName=plotFileName,\
+                                            Debug=Debug)
+                        fo.write(dumps(pl,-1))
+                    fo.close()
+
         digraph = deepcopy(other)
         digraph.recodeValuation(-1.0,1.0)
         self.name = digraph.name
@@ -503,8 +545,42 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
             self.actions = deepcopy(digraph.actions)
         self.order = len(self.actions)
         self.valuationdomain = digraph.valuationdomain
-        pl = PrincipalOrder(digraph,Colwise=False,imageType=imageType,
-                            plotFileName=plotFileName,Debug=Debug)
+
+        if Threading and cpu_count()>2:
+            print('Threading ...')
+            fo = open('dumpDigraph.py','wb')
+            pd = dumps(digraph,-1)
+            fo.write(pd)
+            fo.close()
+            threadCol = myThread(1,"ComputeCol","col",\
+                                 imageType=imageType,\
+                                 plotFileName=plotFileName,\
+                                 Debug=Debug)
+            threadRow = myThread(1,"ComputeRow","row",\
+                                 imageType=imageType,\
+                                 plotFileName=plotFileName,\
+                                 Debug=Debug)
+            threadCol.start()
+            threadRow.start()
+            while active_children() != []:
+                pass
+            print('Exiting both computing threads')
+            fi = open('priCol.py','rb')
+            pc = loads(fi.read())
+            fi.close()
+            fi = open('priRow.py','rb')
+            pl = loads(fi.read())
+            fi.close()
+            
+        else:
+            pc = PrincipalOrder(digraph,Colwise=True,\
+                                imageType=imageType,\
+                                plotFileName=plotFileName,\
+                                Debug=Debug)
+            pl = PrincipalOrder(digraph,Colwise=False,\
+                                imageType=imageType,\
+                                plotFileName=plotFileName,\
+                                Debug=Debug)
         if Debug:
             print('Row wise: ')
             print(pl.principalRowwiseScores)
@@ -512,8 +588,6 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
         self.principalRowwiseScores = pl.principalRowwiseScores
         for x in pl.principalRowwiseScores:
             self.actions[x[1]]['principalRowwiseScore'] = x[0]
-        pc = PrincipalOrder(digraph,Colwise=True,imageType=imageType,
-                            plotFileName=plotFileName,Debug=Debug)
         if Debug:
             print('Column wise: ')
             print(pc.principalColwiseScores)
@@ -565,28 +639,28 @@ if __name__ == "__main__":
     from time import time
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=25)
+                                 numberOfActions=60)
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
     #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
     #g = RandomValuationDigraph(order=11)
-    print('=== >>> best and last fusion (default)')
-    t0 = time()
-    rcg0 = weakOrders.RankingByChoosingDigraph(g,\
-                                                     fusionOperator="o-min",\
-                                                     Debug=False,\
-                                                     Threading=False)
-    print('execution time %s: ' % (str ( time()-t0 ) ) )
-    rcg0.showWeakOrder()
-##    rcg0.showRelationTable()
-    t0 = time()
-    rcg1 = weakOrders.RankingByChoosingDigraph(g,\
-                                                     fusionOperator="o-min",\
-                                                     Debug=False,\
-                                                     Threading=True)
-    print('execution time %s: ' % (str ( time()-t0 ) ) )
-    rcg1.showWeakOrder()
+##    print('=== >>> best and last fusion (default)')
+##    t0 = time()
+##    rcg0 = weakOrders.RankingByChoosingDigraph(g,\
+##                                                     fusionOperator="o-min",\
+##                                                     Debug=False,\
+##                                                     Threading=False)
+##    print('execution time %s: ' % (str ( time()-t0 ) ) )
+##    rcg0.showWeakOrder()
+####    rcg0.showRelationTable()
+##    t0 = time()
+##    rcg1 = weakOrders.RankingByChoosingDigraph(g,\
+##                                                     fusionOperator="o-min",\
+##                                                     Debug=False,\
+##                                                     Threading=True)
+##    print('execution time %s: ' % (str ( time()-t0 ) ) )
+##    rcg1.showWeakOrder()
 ##    rcg1.showRelationTable()
 ##    print(rcg0.computeOrdinalCorrelation(g))
 ##    rcg0.showOrderedRelationTable(direction="decreasing")
@@ -613,10 +687,19 @@ if __name__ == "__main__":
 ##    rcg3 = RankingByChoosingDigraph(g,Best=False,Last=False,Debug=False)
 ##    rcg3.showWeakOrder()
 ##    print(rcg3.computeOrdinalCorrelation(g))
-##    print('=== >>> principal weak order')
-#    rcf1 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
-#                                        imageType=None,Debug=False)
-#    rcf1.showWeakOrder()
+    print('=== >>> principal weak order')
+    t0 = time()
+    rcf1 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
+                                           imageType=None,Debug=False,
+                                           Threading=False)
+    print('execution time %s: ' % (str ( time()-t0 ) ) )
+    t0 = time()
+    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
+                                           imageType=None,Debug=False,\
+                                           Threading=True)
+    print('execution time %s: ' % (str ( time()-t0 ) ) )
+    rcf1.showWeakOrder()
+    rcf2.showWeakOrder()
 #    print(rcf1.computeOrdinalCorrelation(g))
 #    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-max",
 #                                        imageType=None,Debug=False)

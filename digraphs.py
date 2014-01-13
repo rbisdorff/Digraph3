@@ -2518,7 +2518,10 @@ class Digraph(object):
         else:
             plotFileName += "_Rowwise"
         self.saveCSV('exportTemp')
-        fo = open('temp.r','w')
+        if Colwise:
+            fo = open('tempCol.r','w')
+        else:
+            fo = open('tempRow.r','w')
         fo.write("x = read.csv('exportTemp.csv',row.names=1)\n")
         if Colwise:
             fo.write("x = t(x)\n")
@@ -2530,7 +2533,10 @@ class Digraph(object):
         fo.write("A = X %*% t(X)\n")
         fo.write("E = eigen(A, symmetric=TRUE)\n")
         fo.write("P = E$values * t(E$vectors)\n")
-        fo.write("write.csv(t(P),'rotation.csv',row.names=F)\n")
+        if Colwise:
+            fo.write("write.csv(t(P),'rotationCol.csv',row.names=F)\n")
+        else:
+            fo.write("write.csv(t(P),'rotationRow.csv',row.names=F)\n")           
         if Type == None:
             # no principal image is required
             fo.close()
@@ -2573,9 +2579,16 @@ class Digraph(object):
             fo.write('dev.off()\n')
             fo.close()
         if Comments:
-            os.system('env R -q --vanilla --verbose < temp.r 2>&1')
+            if Colwise:
+                os.system('env R -q --vanilla --verbose < tempCol.r 2>&1')
+            else:
+                os.system('env R -q --vanilla --verbose < tempRow.r 2>&1')               
         else:
-            os.system('env R -q --vanilla < temp.r > /dev/null 2> /dev/null')
+            if Colwise:
+                os.system('env R -q --vanilla < tempCol.r > /dev/null 2> /dev/null')
+            else:
+                os.system('env R -q --vanilla < tempRow.r > /dev/null 2> /dev/null')
+                
         time.sleep(3)     
         if Type != None and Comments:
             print('See %s.%s ! ' % (plotFileName,Type))
@@ -7152,7 +7165,11 @@ class Digraph(object):
         self.exportPrincipalImage(Colwise=Colwise,Comments=Comments,
                                   Type=imageType,
                                   plotFileName=plotFileName)
-        fi = open('rotation.csv','r')
+        if Colwise:
+            fi = open('rotationCol.csv','r')
+        else:
+            fi = open('rotationRow.csv','r')
+            
         csvReader = reader(fi)
         R = [x for x in csvReader]
         listActions = [x for x in self.actions]
