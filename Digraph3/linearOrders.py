@@ -303,7 +303,7 @@ class RankedPairsOrder(LinearOrder):
     instantiates the Extended Prudent Ranked Pairs Order from
     a given bipolar-valued Digraph instance
     """
-    def __init__(self,other,coDual=False, Cpp=False, isValued=True,isExtendedPrudent=False,Debug=False):
+    def __init__(self,other,coDual=False, Cpp=False, isValued=False,isExtendedPrudent=False,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph following
@@ -476,7 +476,7 @@ class KohlerOrder(LinearOrder):
         # instatiates a Digraph template
         g = IndeterminateDigraph(order=n)
         g.actions = actions
-        g.valuationdomain = {'min':Decimal('-3'), 'med': Decimal('0'), 'max': Decimal('3')}
+        g.valuationdomain = {'min':Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
         g.relation = {}
         for x in g.actions:
             g.relation[x] = {}
