@@ -9,6 +9,7 @@
 
 from outrankingDigraphs import *
 from weakOrders import *
+from time import time
 
 def testRankingByChoosingWithKernels():
     print('=== >>> testing best and last fusion (default)')
@@ -40,3 +41,45 @@ def testPrincipalInOutDegreesRanking():
     rcf.showWeakOrder()
     print(rcf.computeOrdinalCorrelation(g))
 
+def testRBCThreadingOptions():
+    print('===>>> test threading option')
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                 numberOfActions=5)
+    t.saveXMCDA2('test')
+    t = XMCDA2PerformanceTableau('test')
+    g = BipolarOutrankingDigraph(t,Normalized=True)
+    print('=== >>> best and last fusion (default)')
+    t0 = time()
+    rcg0 = RankingByChoosingDigraph(g,\
+                                                     fusionOperator="o-min",\
+                                                     Debug=False,\
+                                                     Threading=False)
+    print('execution time %s: ' % (str ( time()-t0 ) ) )
+    rcg0.showWeakOrder()
+    t0 = time()
+    rcg1 = RankingByChoosingDigraph(g,\
+                                                     fusionOperator="o-min",\
+                                                     Debug=False,\
+                                                     Threading=True)
+    print('execution time %s: ' % (str ( time()-t0 ) ) )
+    rcg1.showWeakOrder()
+
+def testPRIThreadingOptions():
+    print('===>>> test threading option')
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                 numberOfActions=10)
+    t.saveXMCDA2('test')
+    t = XMCDA2PerformanceTableau('test')
+    g = BipolarOutrankingDigraph(t,Normalized=True)
+    t0 = time()
+    rcf1 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
+                                           imageType=None,Debug=False,
+                                           Threading=False)
+    print('execution time %s: ' % (str ( time()-t0 ) ) )
+    rcf1.showWeakOrder()
+    t0 = time()
+    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
+                                           imageType=None,Debug=False,\
+                                           Threading=True)
+    print('execution time %s: ' % (str ( time()-t0 ) ) )
+    rcf2.showWeakOrder()

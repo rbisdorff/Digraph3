@@ -193,7 +193,7 @@ class RankingByChoosingDigraph(WeakOrder):
                  fusionOperator = "o-min",
                  CoDual=False,
                  Debug=False,
-                 Threading=False):
+                 Threading=True):
         
         from copy import deepcopy
         from pickle import dumps, loads, load
@@ -490,7 +490,7 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
     def __init__(self,other,fusionOperator="o-min",\
                  imageType=None,\
                  plotFileName=None,\
-                 Threading=False,\
+                 Threading=True,\
                  Debug=False):
         from copy import deepcopy
         from linearOrders import PrincipalOrder
