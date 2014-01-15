@@ -145,7 +145,9 @@ class WeakOrder(Digraph):
         Digraph.exportGraphViz(self, fileName=fileName, bestChoice=bestChoice,worstChoice=worstChoice,noSilent=noSilent,graphType=graphType,graphSize=graphSize)
 
     def exportGraphViz(self,fileName=None,direction='best',\
-                                   noSilent=True,graphType='png',graphSize='7,7'):
+                       noSilent=True,graphType='png',\
+                       graphSize='7,7',\
+                       FontSize=10):
         """
         export GraphViz dot file for weak order (Hasse diagram) drawing filtering.
         """
@@ -172,7 +174,7 @@ class WeakOrder(Digraph):
         fo = open(dotName,'w')
         fo.write('digraph G {\n')
         fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nweakOrders module (graphviz), R. Bisdorff, 2011", size="')
+        fo.write('\\nweakOrders module (graphviz)\\n R. Bisdorff, 2011", size="')
         fo.write(graphSize),fo.write('"];\n')
         # nodes
         for x in actionKeys:
@@ -180,8 +182,8 @@ class WeakOrder(Digraph):
                 nodeName = self.actions[x]['shortName']
             except:
                 nodeName = str(x)
-            node = str(x)+' [shape = "circle", label = "' +nodeName+'", fontsize=8'
-            node += '];\n'
+            node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
+                   % (str(x),nodeName,FontSize)
             fo.write(node)
         # same ranks for Hasses equivalence classes
         if direction == 'best':
