@@ -136,7 +136,99 @@ class WeakOrder(Digraph):
         self.showRelationTable(actionsSubset=actionsList,\
                                 relation=showRelation,\
                                 Sorted=False,\
-                                ReflexiveTerms=False)        
+                                ReflexiveTerms=False)
+
+    def exportDigraphGraphViz(self,fileName=None, bestChoice=set(),worstChoice=set(),noSilent=True,graphType='png',graphSize='7,7'):
+        """
+        export GraphViz dot file for digraph drawing filtering.
+        """
+        Digraph.exportGraphViz(self, fileName=fileName, bestChoice=bestChoice,worstChoice=worstChoice,noSilent=noSilent,graphType=graphType,graphSize=graphSize)
+
+    def exportHasseDiagramGraphViz(self,fileName=None,direction='best',\
+                                   noSilent=True,graphType='png',graphSize='7,7'):
+        """
+        export GraphViz dot file for weak order (Hasse diagram) drawing filtering.
+        """
+        import os
+        from copy import deepcopy
+        if noSilent:
+            print('*---- exporting a dot file dor GraphViz tools ---------*')
+        actionKeys = [x for x in self.actions]
+        n = len(actionKeys)
+        relation = self.relation
+        Med = self.valuationdomain['med']
+        i = 0
+        if fileName == None:
+            name = self.name
+        else:
+            name = fileName
+        dotName = name+'.dot'
+        if noSilent:
+            print('Exporting to '+dotName)
+##        if bestChoice != set():
+##            rankBestString = '{rank=max; '
+##        if worstChoice != set():
+##            rankWorstString = '{rank=min; '
+        fo = open(dotName,'w')
+        fo.write('digraph G {\n')
+        fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
+        fo.write('\\ndigraphs module (graphviz), R. Bisdorff, 2011", size="')
+        fo.write(graphSize),fo.write('"];\n')
+        # nodes
+        for x in actionKeys:
+            try:
+                nodeName = self.actions[x]['shortName']
+            except:
+                nodeName = str(x)
+            node = str(x)+' [shape = "circle", label = "' +nodeName+'", fontsize=8'
+            node += '];\n'
+            fo.write(node)
+        # same ranks for Hasses equivalence classes
+        if direction == 'best':
+            rankingByChoosing = self.rankingByBestChoosing['result']
+        else:
+            rankingByLastChoosing = self.rankingByLastChoosing['result']
+        k = len(rankingByChoosing)
+        for i in range(k):
+            sameRank = '{ rank = same; '
+            ich = rankingByChoosing[i][1]
+            for x in ich:
+                sameRank += str(x)+'; '
+            sameRank += '}\n'
+            print(i,sameRank)
+            fo.write(sameRank)
+        # save original relation
+        originalRelation = deepcopy(self.relation)
+        
+        self.closeTransitive(Reverse=True)
+        for i in range(k-1):
+            ich = rankingByChoosing[i][1]
+            for x in ich:
+                for j in range(i+1,k):
+                    jch = rankingByChoosing[j][1]
+                    for y in jch:
+                        #edge = 'n'+str(i+1)+'-> n'+str(i+2)+' [dir=forward,style="setlinewidth(1)",color=black, arrowhead=normal] ;\n'
+                        if self.relation[x][y] > self.valuationdomain['med']:
+                            arcColor = 'black'
+                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s, arrowhead=forward] ;\n'\
+                                                    % (y,x,1,arcColor)
+                            fo.write(edge)                     
+                                                  
+        fo.write('}\n')
+        fo.close()
+        # restore original relation
+        self.relation = deepcopy(originalRelation)
+        
+        commandString = 'dot -Grankdir=TB -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+            #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        if noSilent:
+            print(commandString)
+        try:
+            os.system(commandString)
+        except:
+            if noSilent:
+                print('graphViz tools not avalaible! Please check installation.')
+
 
 class RankingByChoosingDigraph(WeakOrder):
     """
@@ -639,20 +731,21 @@ if __name__ == "__main__":
     from time import time
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=60)
+                                 numberOfActions=20)
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
     #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
     #g = RandomValuationDigraph(order=11)
-##    print('=== >>> best and last fusion (default)')
-##    t0 = time()
-##    rcg0 = weakOrders.RankingByChoosingDigraph(g,\
-##                                                     fusionOperator="o-min",\
-##                                                     Debug=False,\
-##                                                     Threading=False)
-##    print('execution time %s: ' % (str ( time()-t0 ) ) )
-##    rcg0.showWeakOrder()
+    print('=== >>> best and last fusion (default)')
+    t0 = time()
+    rcg0 = weakOrders.RankingByChoosingDigraph(g,\
+                                                     fusionOperator="o-min",\
+                                                     Debug=False,\
+                                                     Threading=False)
+    print('execution time %s: ' % (str ( time()-t0 ) ) )
+    rcg0.showRankingByBestChoosing()
+    rcg0.exportHasseDiagramGraphViz()
 ####    rcg0.showRelationTable()
 ##    t0 = time()
 ##    rcg1 = weakOrders.RankingByChoosingDigraph(g,\
@@ -687,19 +780,19 @@ if __name__ == "__main__":
 ##    rcg3 = RankingByChoosingDigraph(g,Best=False,Last=False,Debug=False)
 ##    rcg3.showWeakOrder()
 ##    print(rcg3.computeOrdinalCorrelation(g))
-    print('=== >>> principal weak order')
-    t0 = time()
-    rcf1 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
-                                           imageType=None,Debug=False,
-                                           Threading=False)
-    print('execution time %s: ' % (str ( time()-t0 ) ) )
-    t0 = time()
-    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
-                                           imageType=None,Debug=False,\
-                                           Threading=True)
-    print('execution time %s: ' % (str ( time()-t0 ) ) )
-    rcf1.showWeakOrder()
-    rcf2.showWeakOrder()
+##    print('=== >>> principal weak order')
+##    t0 = time()
+##    rcf1 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
+##                                           imageType=None,Debug=False,
+##                                           Threading=False)
+##    print('execution time %s: ' % (str ( time()-t0 ) ) )
+##    t0 = time()
+##    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
+##                                           imageType=None,Debug=False,\
+##                                           Threading=True)
+##    print('execution time %s: ' % (str ( time()-t0 ) ) )
+##    rcf1.showWeakOrder()
+##    rcf2.showWeakOrder()
 #    print(rcf1.computeOrdinalCorrelation(g))
 #    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-max",
 #                                        imageType=None,Debug=False)
