@@ -144,7 +144,7 @@ class WeakOrder(Digraph):
         """
         Digraph.exportGraphViz(self, fileName=fileName, bestChoice=bestChoice,worstChoice=worstChoice,noSilent=noSilent,graphType=graphType,graphSize=graphSize)
 
-    def exportHasseDiagramGraphViz(self,fileName=None,direction='best',\
+    def exportGraphViz(self,fileName=None,direction='best',\
                                    noSilent=True,graphType='png',graphSize='7,7'):
         """
         export GraphViz dot file for weak order (Hasse diagram) drawing filtering.
@@ -172,7 +172,7 @@ class WeakOrder(Digraph):
         fo = open(dotName,'w')
         fo.write('digraph G {\n')
         fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\ndigraphs module (graphviz), R. Bisdorff, 2011", size="')
+        fo.write('\\nweakOrders module (graphviz), R. Bisdorff, 2011", size="')
         fo.write(graphSize),fo.write('"];\n')
         # nodes
         for x in actionKeys:
@@ -214,7 +214,7 @@ class WeakOrder(Digraph):
                                                     % (y,x,1,arcColor)
                             fo.write(edge)                     
                                                   
-        fo.write('}\n')
+        fo.write('}\n \n')
         fo.close()
         # restore original relation
         self.relation = deepcopy(originalRelation)
@@ -731,7 +731,7 @@ if __name__ == "__main__":
     from time import time
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=20)
+                                 numberOfActions=10)
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
@@ -745,7 +745,7 @@ if __name__ == "__main__":
                                                      Threading=False)
     print('execution time %s: ' % (str ( time()-t0 ) ) )
     rcg0.showRankingByBestChoosing()
-    rcg0.exportHasseDiagramGraphViz()
+    rcg0.exportGraphViz()
 ####    rcg0.showRelationTable()
 ##    t0 = time()
 ##    rcg1 = weakOrders.RankingByChoosingDigraph(g,\
