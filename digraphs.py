@@ -1848,7 +1848,7 @@ class Digraph(object):
         return n1
 
 
-    def closeTransitive(self,Irreflexive=True):
+    def closeTransitive(self,Irreflexive=True,Reverse=False):
         """
         Produces the transitive closure of self.relation.
         """
@@ -1858,7 +1858,11 @@ class Digraph(object):
         for x in actions:
             for y in actions:
                 for z in actions:
-                    relation[y][z] = max(relation[y][z],min(relation[y][x],relation[x][z]))
+                    if Reverse:
+                        if min(relation[y][x],relation[x][z]) > self.valuationdomain['med']:
+                            relation[y][z] = self.valuationdomain['min']
+                    else:
+                        relation[y][z] = max(relation[y][z],min(relation[y][x],relation[x][z]))
         if Irreflexive:
             for x in actions:
                 relation[x][x] = self.valuationdomain['min']
