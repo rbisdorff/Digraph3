@@ -210,8 +210,8 @@ class WeakOrder(Digraph):
                         #edge = 'n'+str(i+1)+'-> n'+str(i+2)+' [dir=forward,style="setlinewidth(1)",color=black, arrowhead=normal] ;\n'
                         if self.relation[x][y] > self.valuationdomain['med']:
                             arcColor = 'black'
-                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s, arrowhead=forward] ;\n'\
-                                                    % (y,x,1,arcColor)
+                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n'\
+                                                    % (x,y,1,arcColor)
                             fo.write(edge)                     
                                                   
         fo.write('}\n \n')
