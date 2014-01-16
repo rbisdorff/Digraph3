@@ -310,6 +310,7 @@ class RankedPairsOrder(LinearOrder):
         the ranked pairs (Lexmin Dias-Lamboray) rule
         Parameter: isExtendedPrudent 
         """
+        from copy import deepcopy
         # construct ranked pairs
 
         if coDual:
@@ -432,9 +433,10 @@ class RankedPairsOrder(LinearOrder):
                         print('added: (%s,%s) characteristic: %.2f (%.1f)' % (y,x, other.relation[y][x],g.relation[y][x]))
                 
         self.name = other.name + '_ranked'        
-        self.actions = other.actions
+        self.actions = deepcopy(other.actions)
+        self.order = len(self.actions)
         self.valuationdomain = g.valuationdomain
-        self.relation = g.relation
+        self.relation = deepcopy(g.relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         if Debug:
@@ -452,7 +454,7 @@ class KohlerOrder(LinearOrder):
         from a given other digraph following
         the Kohler rule 
         """
-
+        from copy import deepcopy
         # construct ranked pairs
         if coDual:
             otherCoDual = CoDualDigraph(other)
@@ -527,9 +529,10 @@ class KohlerOrder(LinearOrder):
 
             
         self.name = other.name + '_ranked'        
-        self.actions = other.actions
-        self.valuationdomain = g.valuationdomain
-        self.relation = g.relation
+        self.actions = deepcopy(other.actions)
+        self.order = len(self.actions)
+        self.valuationdomain = deepcopy(g.valuationdomain)
+        self.relation = deepcopy(g.relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         if Debug:
@@ -606,6 +609,7 @@ class NetFlowsOrder(LinearOrder):
          
         self.name = other.name + '_ranked'        
         self.actions = other.actions
+        self.order = len(self.actions)
         self.valuationdomain = g.valuationdomain
         self.relation = g.relation
         self.gamma = self.gammaSets()
@@ -637,6 +641,7 @@ class KemenyOrder(LinearOrder):
         Med = other.valuationdomain['med']
         actionsList = [x for x in other.actions] 
         n = len(actionsList)
+        self.order = n
         relation = deepcopy(other.relation)
         kemenyOrder = other.computeKemenyOrder(orderLimit=orderLimit,Debug=Debug)
         if kemenyOrder == None:
@@ -672,6 +677,7 @@ class KemenyOrder(LinearOrder):
 
         self.name = other.name + '_ranked'        
         self.actions = deeepcopy(other.actions)
+        self.order = len(self.actions)
         self.valuationdomain = deepcopy(other.valuationdomain)
         self.relation = deepcopy(g.relation)
         self.gamma = self.gammaSets()
@@ -754,6 +760,7 @@ class PrincipalOrder(LinearOrder):
             ReverseScores = False
         self.name = other.name + '_ranked'        
         self.actions = deepcopy(other.actions)
+        self.order = len(self.actions)
         self.valuationdomain = other.valuationdomain
         self.relation = deepcopy(g.relation)
         if ReverseScores == False: 
