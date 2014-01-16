@@ -267,7 +267,6 @@ class RankingByChoosingDigraph(WeakOrder):
     'a05' |   +0.00  -0.67  -0.67  -1.00  +0.00  -0.17  +0.33  
     'a06' |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.00  +1.00  
     'a07' |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.17  +0.00  
-
     >>> from weakOrders import RankingByChoosingDigraph
     >>> rbc = RankingByChoosingDigraph(g)
     >>> rbc.showWeakOrder()
@@ -278,7 +277,6 @@ class RankingByChoosingDigraph(WeakOrder):
         3rd last ranked ['a06'] (1.00)
        2nd last ranked ['a07'] (0.50)
       1st last ranked ['a01', 'a05'] (0.58)
-
     >>> rbc.exportGraphViz('weakOrdering')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to converse-dual_rel_randomCBperftab.dot
@@ -352,22 +350,13 @@ class RankingByChoosingDigraph(WeakOrder):
             pd = dumps(digraph,-1)
             fo.write(pd)
             fo.close()
-            #threadLock = Lock()
-            #threads = []
-
             threadBest = myThread(1,"ComputeBest","best",CoDual,Debug)
             threadWorst = myThread(2,"ComputeWorst","worst",CoDual,Debug)
             threadBest.start()
-            #threads.append(threadBest)
             threadWorst.start()
-            #threads.append(threadWorst)
-
-            #for th in threads:
-            #    th.join()
-            #if Debug:
             while active_children() != []:
                 pass
-            print('Exiting both computing threads')
+            print('Exiting computing threads')
             fi = open('rbbc.py','rb')
             digraph.rankingByBestChoosing = loads(fi.read())
             fi.close()
@@ -381,7 +370,7 @@ class RankingByChoosingDigraph(WeakOrder):
             
         relBest = digraph.computeRankingByBestChoosingRelation()
         if Debug:
-                digraph.showRankingByBestChoosing()
+            digraph.showRankingByBestChoosing()
         relLast = digraph.computeRankingByLastChoosingRelation()
         if Debug:
             digraph.showRankingByLastChoosing()
@@ -441,7 +430,7 @@ class RankingByChoosingDigraph(WeakOrder):
  
 class RankingByBestChoosingDigraph(RankingByChoosingDigraph):
     """
-    Specialization of abstrct WeakOrder class for computing a ranking by best-choosing.
+    Specialization of abstract WeakOrder class for computing a ranking by best-choosing.
     """
     def __init__(self,digraph,Normalized=True,CoDual=False,Debug=False):
         from copy import deepcopy
