@@ -103,7 +103,7 @@ class WeakOrder(Digraph):
         actionsList = []
         
         if direction == "decreasing":
-            print('Decrasing Weak Ordering')
+            print('Decreasing Weak Ordering')
             self.showRankingByBestChoosing()
             try:
                 ordering = self.rankingByBestChoosing
@@ -153,6 +153,19 @@ class WeakOrder(Digraph):
         """
         import os
         from copy import deepcopy
+        if direction == 'best':
+            try:
+                rankingByChoosing = self.rankingByBestChoosing['result']
+            except:
+                self.computeRankingByBestChoosing()
+                rankingByChoosing = self.rankingByBestChoosing['result']
+        else:
+            try:
+                rankingByLastChoosing = self.rankingByLastChoosing['result']
+            except:
+                self.computeRankingByLastChoosing()
+                rankingByChoosing = self.rankingByLastChoosing['result']
+        
         if noSilent:
             print('*---- exporting a dot file dor GraphViz tools ---------*')
         actionKeys = [x for x in self.actions]
@@ -186,10 +199,6 @@ class WeakOrder(Digraph):
                    % (str(x),nodeName,fontSize)
             fo.write(node)
         # same ranks for Hasses equivalence classes
-        if direction == 'best':
-            rankingByChoosing = self.rankingByBestChoosing['result']
-        else:
-            rankingByLastChoosing = self.rankingByLastChoosing['result']
         k = len(rankingByChoosing)
         for i in range(k):
             sameRank = '{ rank = same; '
@@ -212,9 +221,12 @@ class WeakOrder(Digraph):
                         #edge = 'n'+str(i+1)+'-> n'+str(i+2)+' [dir=forward,style="setlinewidth(1)",color=black, arrowhead=normal] ;\n'
                         if self.relation[x][y] > self.valuationdomain['med']:
                             arcColor = 'black'
-                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n'\
-                                                    % (x,y,1,arcColor)
-                            fo.write(edge)                     
+                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (x,y,1,arcColor)
+                            fo.write(edge)
+                        elif self.relation[y][x] > self.valuationdomain['med']:
+                            arcColor = 'black'
+                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (y,x,1,arcColor)
+                            fo.write(edge)
                                                   
         fo.write('}\n \n')
         fo.close()
@@ -432,6 +444,7 @@ class RankingByBestChoosingDigraph(RankingByChoosingDigraph):
         digraphName = 'ranking-by-best'+digraph.name
         self.name = deepcopy(digraphName)
         self.actions = deepcopy(digraph.actions)
+        self.order = len(self.actions)
         self.valuationdomain = deepcopy(digraph.valuationdomain)
         digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=False)
         self.relation = digraph.computeRankingByBestChoosingRelation()
@@ -455,6 +468,7 @@ class RankingByLastChoosingDigraph(RankingByChoosingDigraph):
         digraphName = 'ranking-by-last'+digraph.name
         self.name = deepcopy(digraphName)
         self.actions = deepcopy(digraph.actions)
+        self.order = len(self.actions)
         self.valuationdomain = deepcopy(digraph.valuationdomain)
         digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=False)
         self.relation = digraph.computeRankingByLastChoosingRelation()
@@ -693,7 +707,9 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
         self.relation = deepcopy(pf.relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-        self.computeRankingByChoosing()
+        #self.computeRankingByChoosing()
+        #self.rankingByBestChoosing = pl.computeRankingByBestChoosing()
+        #self.rankingByLastChoosing = pc.computeRankingByLastChoosing()
         if Debug:
             print(self.computeOrdinalCorrelation(digraph))
 

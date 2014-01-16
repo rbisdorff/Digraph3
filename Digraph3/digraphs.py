@@ -1855,6 +1855,9 @@ class Digraph(object):
         import copy
         actions = set(self.actions)
         relation = copy.deepcopy(self.relation)
+        if Irreflexive:
+            for x in actions:
+                relation[x][x] = self.valuationdomain['min']        
         for x in actions:
             for y in actions:
                 for z in actions:
@@ -1863,9 +1866,6 @@ class Digraph(object):
                             relation[y][z] = self.valuationdomain['min']
                     else:
                         relation[y][z] = max(relation[y][z],min(relation[y][x],relation[x][z]))
-        if Irreflexive:
-            for x in actions:
-                relation[x][x] = self.valuationdomain['min']
         self.relation = copy.deepcopy(relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
