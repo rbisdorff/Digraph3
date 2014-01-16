@@ -258,16 +258,28 @@ class RankingByChoosingDigraph(WeakOrder):
     >>> g = BipolarOutrankingDigraph(t,Normalized=True)
     >>> g.showRelationTable()
     * ---- Relation Table -----
-      S   | 'a01'  'a02'  'a03'  'a04'  'a05'  'a06'  'a07'   
-    ------|-------------------------------------------------
-    'a01' | +0.00  +0.00  +0.67  +0.00  -0.67  -0.33  -0.17  
-    'a02' | +0.00  +0.00  +1.00  +0.17  +0.00  -0.50  +0.33  
-    'a03' | -0.33  -1.00  +0.00  -1.00  -0.67  -1.00  -0.33  
-    'a04' | +0.00  +0.17  +1.00  +0.00  +0.00  -0.50  +0.00  
-    'a05' | +0.67  +0.00  +1.00  +0.00  +0.00  -0.33  +1.00  
-    'a06' | +0.67  +1.00  +1.00  +1.00  +0.33  +0.00  +0.33  
-    'a07' | +0.67  +0.00  +1.00  +0.00  -0.17  -0.33  +0.00 
-    >>> (~(-g)).exportGraphViz('weakOrdering')
+      S   |   'a01'  'a02'  'a03'  'a04'  'a05'  'a06'  'a07'   
+     -----|------------------------------------------------------------
+    'a01' |   +0.00  -1.00  -1.00  -0.33  +0.00  +0.00  +0.00  
+    'a02' |   +1.00  +0.00  -0.17  +0.33  +1.00  +0.33  +0.67  
+    'a03' |   +1.00  +0.67  +0.00  +0.33  +0.67  +0.67  +0.67  
+    'a04' |   +0.33  +0.17  -0.33  +0.00  +1.00  +0.67  +0.67  
+    'a05' |   +0.00  -0.67  -0.67  -1.00  +0.00  -0.17  +0.33  
+    'a06' |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.00  +1.00  
+    'a07' |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.17  +0.00  
+
+    >>> from weakOrders import RankingByChoosingDigraph
+    >>> rbc = RankingByChoosingDigraph(g)
+    >>> rbc.showWeakOrder()
+    Ranking by Choosing and Rejecting
+      1st ranked ['a03'] (0.47)
+       2nd ranked ['a02', 'a04'] (0.58)
+        3rd ranked ['a06'] (1.00)
+        3rd last ranked ['a06'] (1.00)
+       2nd last ranked ['a07'] (0.50)
+      1st last ranked ['a01', 'a05'] (0.58)
+
+    >>> rbc.exportGraphViz('weakOrdering')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to converse-dual_rel_randomCBperftab.dot
     dot -Grankdir=BT -Tpng converse-dual_rel_randomCBperftab.dot 
@@ -275,25 +287,17 @@ class RankingByChoosingDigraph(WeakOrder):
         
     .. image:: weakOrdering.png
         
-    >>> from weakOrders import RankingByChoosingDigraph
-    >>> rbc = RankingByChoosingDigraph(g)
-    >>> rbc.showWeakOrder()
-    Ranking by Choosing and Rejecting
-    1st ranked ['a06'] (0.50)
-        2nd ranked ['a02', 'a04', 'a05'] (0.14)
-        2nd last ranked ['a01', 'a04', 'a07'] (0.14)
-    1st last ranked ['a03'] (0.72)
     >>> rbc.showOrderedRelationTable(direction="decreasing")
     * ---- Relation Table -----
-      S   | 'a06'  'a02'  'a05'  'a04'	'a01'  'a07'  'a03'	  
-    ------|-------------------------------------------------
-    'a06' |   -    +1.00  +0.33	 +1.00	+0.67  +0.33  +1.00	 
-    'a02' | -0.50    -    +0.00  +0.00  +0.00  +0.33  +1.00	 
-    'a05' | -0.33  +0.00    -    +0.00  +0.67  +1.00  +1.00	 
-    'a04' | -0.50  +0.00  +0.00	   -    +0.00  +0.00  +1.00	 
-    'a01' | -0.33  +0.00  -0.67	 +0.00	  -    +0.00  +0.67	 
-    'a07' | -0.33  +0.00  -0.17	 +0.00	+0.00    -    +1.00	 
-    'a03' | -1.00  -1.00  -0.67	 -1.00	-0.33  -0.33  +0.00	 
+      S   |  'a03'  'a04'  'a02'  'a06'  'a07'  'a01'  'a05'	  
+     -----|------------------------------------------------------------
+    'a03' |   -      0.33   0.17   0.33   0.33   1.00   0.67	 
+    'a04' |  -0.33    -     0.00   0.67   0.67   0.33   1.00	 
+    'a02' |  -0.17   0.00    -     0.33   0.67   1.00   0.67	 
+    'a06' |  -0.33  -0.67  -0.33    -     0.17   0.33   0.17	 
+    'a07' |  -0.33  -0.67  -0.67  -0.17	   -     0.33   0.33	 
+    'a01' |  -1.00  -0.33  -1.00  -0.33  -0.33    -     0.00	 
+    'a05' |  -0.67  -1.00  -0.67  -0.17  -0.33   0.00    - 	 
     """
     def __init__(self,other,
                  fusionOperator = "o-min",
