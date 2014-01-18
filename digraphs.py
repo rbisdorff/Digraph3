@@ -331,7 +331,7 @@ class Digraph(object):
             counts['?'] = Decimal(str(counts['?']))/(nd*(nd-1))
         return counts
 
-    def computeRankingByLastChoosing(self,Debug=False,CoDual=False):
+    def computeRankingByLastChoosing(self,CoDual=False,CppAgrum=False,Debug=False):
         """
         Computes a weak preordring of the self.actions by iterating
         worst choice elagations.
@@ -357,7 +357,7 @@ class Digraph(object):
                 currGcd = CoDualDigraph(currG)
             else:
                 currGcd = deepcopy(currG)
-            currGcd.computeRubisChoice(Comments=False)
+            currGcd.computeRubisChoice(CppAgrum=CppAgrum,Comments=False)
             #currGcd.computeGoodChoices(Comments=Debug)
 
             #currGcd.computeBadChoices(Comments=Debug)
@@ -419,7 +419,7 @@ class Digraph(object):
         return {'CoDual': CoDual, 'result': rankingByLastChoosing}
 
 
-    def computeRankingByChoosing(self,Debug=False,CoDual=False):
+    def computeRankingByChoosing(self,CppAgrum=False,Debug=False,CoDual=False):
         """
         Computes a weak preordring of the self.actions by iterating
         jointly best and worst choice elagations.
@@ -445,7 +445,7 @@ class Digraph(object):
                 currGcd = CoDualDigraph(currG)
             else:
                 currGcd = deepcopy(currG)
-            currGcd.computeRubisChoice(Comments=Debug)
+            currGcd.computeRubisChoice(CppAgrum=CppAgrum,Comments=Debug)
             #currGcd.computeGoodChoices(Comments=Debug)
             bestChoiceCandidates = []
             j = 0
@@ -583,7 +583,7 @@ class Digraph(object):
         self.rankingByChoosing = {'CoDual': CoDual, 'result': rankingByChoosing}
         return {'CoDual': CoDual, 'result': rankingByChoosing}
 
-    def computeRankingByBestChoosing(self,Debug=False,CoDual=False):
+    def computeRankingByBestChoosing(self,CoDual=False,CppAgrum=False,Debug=False,):
         """
         Computes a weak preordring of the self.actions by recursive
         best choice elagations.
@@ -611,7 +611,7 @@ class Digraph(object):
                 currGcd = CoDualDigraph(currG)
             else:
                 currGcd = deepcopy(currG)
-            currGcd.computeRubisChoice(Comments=Debug)
+            currGcd.computeRubisChoice(CppAgrum=CppAgrum,Comments=Debug)
             #currGcd.computeGoodChoices(Comments=Debug)
             bestChoiceCandidates = []
             j = 0
@@ -5601,17 +5601,21 @@ class Digraph(object):
         ## except:
         ##     self.worstChoice = set()
 
-    def computeRubyChoice(self,Comments=False):
+    def computeRubyChoice(self,CppAgrum=False,Comments=False):
         """
         dummy for computeRubisChoice()
         old versions compatibility.
         """
-        self.computeRubisChoice(Comments=Comments)
+        self.computeRubisChoice(CppAgrum=CppAgrum,Comments=Comments)
 
-    def computeRubisChoice(self,Comments=False):
+    def computeRubisChoice(self,CppAgrum=False,Comments=False):
         """
         Renders self.strictGoodChoices, self.nullChoices
         self.strictBadChoices, self.nonRobustChoices.
+
+
+        CppgArum = False (default | true : use C++/Agrum digraph library
+        for computing chordless circuits in self.
         """
         import copy,time
         if Comments:
@@ -5619,7 +5623,7 @@ class Digraph(object):
 
         n0 = self.order
         t0 = time.time()
-        _selfwcoc = CocaDigraph(self,Comments=Comments)
+        _selfwcoc = CocaDigraph(self,Cpp=CppAgrum,Comments=Comments)
         t1 = time.time()
         n1 = _selfwcoc.order
         nc = n1 - n0

@@ -187,7 +187,7 @@ class WeakOrder(Digraph):
         fo = open(dotName,'w')
         fo.write('digraph G {\n')
         fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nweakOrders module (graphviz)\\n R. Bisdorff, 2011", size="')
+        fo.write('\\nweakOrders module (graphviz)\\n R. Bisdorff, 2014", size="')
         fo.write(graphSize),fo.write('",fontsize=%d];\n' % fontSize)
         # nodes
         for x in actionKeys:
@@ -301,11 +301,17 @@ class RankingByChoosingDigraph(WeakOrder):
                  fusionOperator = "o-min",
                  CoDual=False,
                  Debug=False,
+                 CppAgrum=False,
                  Threading=True):
         
         from copy import deepcopy
         from pickle import dumps, loads, load
 
+        self.CoDual=CoDual
+        self.Debug=Debug
+        self.CppAgrum = CppAgrum
+        self.Threading = Threading
+        
         if Threading:
             from multiprocessing import Process, Lock, active_children, cpu_count
             class myThread(Process):
@@ -326,11 +332,11 @@ class RankingByChoosingDigraph(WeakOrder):
                     fi.close()
                     if self.direction == 'best':
                         fo = open('rbbc.py','wb')
-                        rbbc = digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=Debug)
+                        rbbc = digraph.computeRankingByBestChoosing(CppAgrum=CppAgrum,CoDual=CoDual,Debug=Debug)
                         fo.write(dumps(rbbc,-1))
                     elif self.direction == 'worst':
                         fo = open('rbwc.py','wb')
-                        rbwc = digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=Debug)
+                        rbwc = digraph.computeRankingByLastChoosing(CppAgrum=CppAgrum,CoDual=CoDual,Debug=Debug)
                         fo.write(dumps(rbwc,-1))
                     fo.close()
                     #threadLock.release()
@@ -365,8 +371,8 @@ class RankingByChoosingDigraph(WeakOrder):
             fi.close()
             
         else:
-            digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=Debug)
-            digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=Debug)
+            digraph.computeRankingByBestChoosing(CppAgrum=CppAgrum,CoDual=CoDual,Debug=Debug)
+            digraph.computeRankingByLastChoosing(CppAgrum=CppAgrum,CoDual=CoDual,Debug=Debug)
             
         relBest = digraph.computeRankingByBestChoosingRelation()
         if Debug:
@@ -391,7 +397,7 @@ class RankingByChoosingDigraph(WeakOrder):
         self.rankingByBestChoosing = deepcopy(digraph.rankingByBestChoosing)
         self.computeRankingByChoosing()
         if Debug:
-            self.showRankingByChoosing()
+            self.showRankingByChoosing(CppAgrum=CppAgrum,CoDual=CoDual,Debug=Debug)
         
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -404,7 +410,7 @@ class RankingByChoosingDigraph(WeakOrder):
             try:
                 rankingByChoosing = self.rankingByChoosing
             except:
-                rankingByChoosing = self.computeRankingByChoosing()
+                rankingByChoosing = self.computeRankingByChoosing(CoDual=self.CoDual,CppAgrum=self.CppAgrum)
 
         WeakOrder.showWeakOrder(self,rankingByChoosing)
 
@@ -419,14 +425,14 @@ class RankingByChoosingDigraph(WeakOrder):
         Dummy for blocking recomputing without forcing. 
         """
         if Forced:
-            WeakOrder.computeRankingByBestChoosing(self)
+            WeakOrder.computeRankingByBestChoosing(self,CoDual=self.CoDual,CppAgrum=self.CppAgrum)
 
     def computeRankingByLastChoosing(self,Forced=False):
         """
         Dummy for blocking recomputing without forcing. 
         """
         if Forced:
-            WeakOrder.computeRankingByLastChoosing(self)
+            WeakOrder.computeRankingByLastChoosing(self,CoDual=self.CoDual,CppAgrum=self.CppAgrum)
  
 class RankingByBestChoosingDigraph(RankingByChoosingDigraph):
     """
@@ -449,6 +455,9 @@ class RankingByBestChoosingDigraph(RankingByChoosingDigraph):
         self.rankingByBestChoosing = digraph.rankingByBestChoosing
         
     def showWeakOrder(self):
+        """
+        Specialisation of showWeakOrder() for ranking-by-best-choosing results.
+        """
         self.showRankingByBestChoosing()
 
 
@@ -473,6 +482,9 @@ class RankingByLastChoosingDigraph(RankingByChoosingDigraph):
         self.rankingByLastChoosing = digraph.rankingByLastChoosing
     
     def showWeakOrder(self):
+        """
+        Specialisation of showWeakOrder() for ranking-by-last-choosing results.
+        """
         self.showRankingByLastChoosing()
 
 
