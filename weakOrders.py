@@ -243,6 +243,17 @@ class WeakOrder(Digraph):
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
 
+##    def showWeakOrder(self,rankingByChoosing=None):
+##        """
+##        specialisation for RankingByChoosing Digraphs.
+##        """
+##        if rankingByChoosing == None:
+##            try:
+##                rankingByChoosing = self.rankingByChoosing
+##            except:
+##                rankingByChoosing = self.computeRankingByChoosing(CoDual=self.CoDual,CppAgrum=self.CppAgrum)
+##
+##        Digraph.showRankingByChoosing(self,rankingByChoosing)
 
 class RankingByChoosingDigraph(WeakOrder):
     """
@@ -402,17 +413,6 @@ class RankingByChoosingDigraph(WeakOrder):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def showWeakOrder(self,rankingByChoosing=None):
-        """
-        specialisation for RankingByChoosing Digraphs.
-        """
-        if rankingByChoosing == None:
-            try:
-                rankingByChoosing = self.rankingByChoosing
-            except:
-                rankingByChoosing = self.computeRankingByChoosing(CoDual=self.CoDual,CppAgrum=self.CppAgrum)
-
-        WeakOrder.showWeakOrder(self,rankingByChoosing)
 
     def showRankingByChoosing(self,rankingByChoosing=None):
         """
@@ -744,6 +744,38 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
                                              self.actions[x]['principalColwiseScore'],
                                              self.actions[x]['principalRowwiseScore']))
                 
+    def showWeakOrder(self,rankingByChoosing=None):
+        """
+        Specialisation for PrincipalInOutDegreesOrderings.
+        """
+        if rankingByChoosing == None:
+            try:
+                rankingByChoosing = self.rankingByChoosing
+            except:
+                rankingByChoosing = self.computeRankingByChoosing(CoDual=False,CppAgrum=False)
+
+        WeakOrder.showWeakOrder(self,rankingByChoosing)
+
+    def exportGraphViz(self,fileName=None,direction='ColwiseOrder',\
+                       Comments=True,graphType='png',\
+                       graphSize='7,7',\
+                       fontSize=10):
+        """
+        Specialisation for PincipalInOutDegrees class.
+
+        direction = "Colwise" (best to worst, default) | "Rowwise" (worst to best)
+        """
+        if direction == "Colwise":
+            direction = 'best'
+        else:
+            direction = 'worst'
+        WeakOrder.exportGraphViz(self, fileName=fileName,\
+                            direction=direction,\
+                            noSilent=Comments,\
+                            graphType=graphType,\
+                            graphSize=graphSize,\
+                            fontSize=fontSize)
+                            
 
 #----------test outrankingDigraphs classes ----------------
 if __name__ == "__main__":
@@ -761,14 +793,14 @@ if __name__ == "__main__":
     #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
     #g = RandomValuationDigraph(order=11)
     print('=== >>> best and last fusion (default)')
-    t0 = time()
-    rcg0 = weakOrders.RankingByChoosingDigraph(g,\
-                                                     fusionOperator="o-min",\
-                                                     Debug=False,\
-                                                     Threading=False)
-    print('execution time %s: ' % (str ( time()-t0 ) ) )
-    rcg0.showRankingByBestChoosing()
-    rcg0.exportGraphViz()
+##    t0 = time()
+##    rcg0 = weakOrders.RankingByChoosingDigraph(g,\
+##                                                     fusionOperator="o-min",\
+##                                                     Debug=False,\
+##                                                     Threading=False)
+##    print('execution time %s: ' % (str ( time()-t0 ) ) )
+##    rcg0.showRankingByBestChoosing()
+##    rcg0.exportGraphViz()
 ####    rcg0.showRelationTable()
 ##    t0 = time()
 ##    rcg1 = weakOrders.RankingByChoosingDigraph(g,\
@@ -809,12 +841,14 @@ if __name__ == "__main__":
 ##                                           imageType=None,Debug=False,
 ##                                           Threading=False)
 ##    print('execution time %s: ' % (str ( time()-t0 ) ) )
-##    t0 = time()
-##    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
-##                                           imageType=None,Debug=False,\
-##                                           Threading=True)
-##    print('execution time %s: ' % (str ( time()-t0 ) ) )
-##    rcf1.showWeakOrder()
+    t0 = time()
+    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
+                                           imageType=None,Debug=False,\
+                                           Threading=True)
+    print('execution time %s: ' % (str ( time()-t0 ) ) )
+    rcf2.showWeakOrder()
+    rcf2.exportGraphViz(fileName='testcw',direction="Colwise")
+    rcf2.exportGraphViz(fileName='testrw',direction="Colwise",graphType='pdf')
 ##    rcf2.showWeakOrder()
 #    print(rcf1.computeOrdinalCorrelation(g))
 #    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-max",
