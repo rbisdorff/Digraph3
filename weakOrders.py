@@ -161,7 +161,7 @@ class WeakOrder(Digraph):
                 rankingByChoosing = self.rankingByBestChoosing['result']
         else:
             try:
-                rankingByLastChoosing = self.rankingByLastChoosing['result']
+                rankingByChoosing = self.rankingByLastChoosing['result']
             except:
                 self.computeRankingByLastChoosing()
                 rankingByChoosing = self.rankingByLastChoosing['result']
