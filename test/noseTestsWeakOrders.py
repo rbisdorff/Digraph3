@@ -25,6 +25,7 @@ def testRankingByChoosingWithKernels():
     print('=== >>> last')
     rcg2 = RankingByLastChoosingDigraph(g,Debug=False)
     rcg2.showWeakOrder()
+    rcg2.exportGraphViz(direction="worst")
     print(rcg2.computeOrdinalCorrelation(g))
 
 def testOrderedRelationTableShowing():
@@ -40,6 +41,7 @@ def testPrincipalInOutDegreesRanking():
     rcf = PrincipalInOutDegreesOrdering(g,imageType="pdf",Debug=False)
     rcf.showWeakOrder()
     print(rcf.computeOrdinalCorrelation(g))
+    rcf.exportGraphViz(direction="Colwise")
 
 def testRBCThreadingOptions():
     print('===>>> test threading option')
