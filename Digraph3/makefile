@@ -183,3 +183,5 @@ verboseWeakOrdersTests:
 install:
 		sudo python3 setup.py install
 		sudo python3.3 setup.py install
+		sudo python3.4 setup.py install
+
