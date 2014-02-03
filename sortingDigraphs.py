@@ -724,7 +724,7 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
         from time import time
         if Comments:          
             t0 = time()
-            print('------- Commenting sorting by prudent chossing ------')
+            print('------- Commenting sorting by prudent choosing ------')
         if digraph == None:
             digraph_ = RandomValuationDigraph()
         else:
@@ -804,17 +804,16 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    t = RandomCBPerformanceTableau(numberOfActions=20)
+    t = RandomCBPerformanceTableau(numberOfActions=46)
     t.saveXMCDA2('test')
-    t = XMCDA2PerformanceTableau('uniSorting')
-    #s = SortingDigraph(t,'tempProfile6')
-    #s.showSorting()
+    #t = XMCDA2PerformanceTableau('uniSorting')
+    #s = SortingDigraph(t,lowerClosed=True)
     #s.showSorting(Reverse=True)
-    print('------- testing sorting by prudent chossing ------')
+    print('------- testing sorting by prudent choosing ------')
     g = BipolarOutrankingDigraph(t)
     #g.recodeValuation(-1,1)
     #gdeter = g.computeDeterminateness()
-    #t0 = time()
+    t0 = time()
     s = SortingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.2)
     #s = SortingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.2,SplitCorrelation=False)
 #    t1 = time()
@@ -825,7 +824,6 @@ if __name__ == "__main__":
 #    print('Correlation     : %.3f' % corr['correlation'])
 #    print('Determinateness : %.3f (%.3f)' % (corr['determination'],gdeter))
 #    print('Execution time  : %.4f sec.' % (t1-t0))
-
 #    s1 = SortingByBestChoosingDigraph(g,CoDual=True)
 #    s1.showSorting()
 #    #s1.showRelationTable()

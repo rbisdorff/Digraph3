@@ -4946,7 +4946,7 @@ if __name__ == "__main__":
     g.computeRankingByChoosing(CoDual=False)
     g.showRankingByChoosing()
     prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
-    prg.showPreOrder()
+    prg.showWeakOrder()
     print(g.computeOrdinalCorrelation(prg))
      
     print('*------------------*')
