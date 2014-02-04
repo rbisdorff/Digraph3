@@ -1694,7 +1694,10 @@ class Digraph(object):
                     break
             if Winner:
                 wCW.append(x)
-        wCW.sort()
+        try:
+            wCW.sort()
+        except:
+            pass
         return wCW
 
     def condorcetWinners(self):
@@ -1714,7 +1717,10 @@ class Digraph(object):
                     break
             if Winner:
                 CW.append(x)
-        CW.sort()
+        try:
+            CW.sort()
+        except:
+            pass
         return CW
 
     def forcedBestSingleChoice(self):
