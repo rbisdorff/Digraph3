@@ -252,16 +252,16 @@ class Digraph(object):
         g = Graph()
         g.name = deepcopy(self.name)
         g.vertices = deepcopy(self.actions)
+        g.order = len(g.vertices)
         g.valuationDomain = valuationDomain
         gMin = valuationDomain['min']
         gMed = valuationDomain['med']
         gMax = valuationDomain['max']
-        order = len(g.vertices)
         g.edges = {}
         verticesKeys = [x for x in g.vertices]
         dgMed = self.valuationdomain['med']
-        for i in range(order):
-            for j in range(i+1,order):
+        for i in range(g.order):
+            for j in range(i+1,g.order):
                 x = verticesKeys[i]
                 y = verticesKeys[j]
                 vertex = frozenset([x,y])
