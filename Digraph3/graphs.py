@@ -116,13 +116,14 @@ class Graph(object):
                         fo.write('%s %s\n' % ( str(verticesKeys[i]),str(verticesKeys[j]) )  )
         fo.close()
 
-    def save(self,fileName='tempGraph',option=None,Decimal=True):
+    def save(self,fileName='tempGraph',Debug=False):
         """
         Persistent storage of a Graph class instance in the form of a python source code file.
         """
         print('*--- Saving graph in file: <' + fileName + '.py> ---*')
         verticesKeys = [x for x in self.vertices]
         verticesKeys.sort()
+        #order = len(self.vertices)
         edges = self.edges
         Min = self.valuationDomain['min']
         Med = self.valuationDomain['med']
