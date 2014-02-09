@@ -243,6 +243,58 @@ class Digraph(object):
         new.__class__ = self.__class__
         return new
 
+    def topologicalSort(self,Debug=False):
+        """
+        If self is acyclic, adds topological sort number to each node of self
+        and renders ordered list of nodes. Otherwise renders None.
+        Source: M. Golumbic Algorithmic Graph heory and Perfect Graphs,
+        Annals Of Discrete Mathematics 57 2nd Ed. , Elsevier 2004, Algorithm 2.4 p.44.
+        """
+        def topSort(v,Debug=False):
+            if Debug:
+                print('in',self.i,v,self.gamma[v],self.dfsNbr[v],self.tsNbr[v])
+            self.i += 1
+            self.dfsNbr[v] = self.i
+            for w in self.gamma[v][0]:
+                if Debug:
+                    print('successer',w,'of',v)
+                if self.dfsNbr[w] == 0:
+                    topSort(w,Debug=Debug)
+                else:
+                    if self.tsNbr[w] == 0:
+                        self.Acyclic = False
+            self.tsNbr[v]=self.j
+            self.j -= 1
+            if Debug:
+                print('out',v,self.dfsNbr[v],self.tsNbr[v])
+
+        self.Acyclic = True
+        self.dfsNbr = {}
+        self.tsNbr = {}
+        for x in self.actions:
+            self.dfsNbr[x]=0
+            self.tsNbr[x]=0
+        self.j = len(self.actions)
+        self.i = 0
+        for x in self.actions:
+            if Debug:
+                print(x,self.gamma[x])
+            if self.dfsNbr[x] == 0:
+                topSort(x,Debug=Debug)
+
+        if self.Acyclic:
+            tsLevels = [(x,self.tsNbr[x]) for x in self.tsNbr]
+            ordering = [x[0] for x in sorted(tsLevels,\
+                                             key = lambda tsLevels: tsLevels[1])]
+            if Debug:
+                print(tsLevels,ordering)
+            return ordering
+        else:
+            if Debug:
+                print('Digraph instance %s is not acyclic!' % self.name)
+                print(self.dfsNbr,self.tsNbr)             
+            return None
+            
     def digraph2Graph(self,valuationDomain={'min':-1,'med':0,'max':1},Debug=False,conjunctiveConversion=True):
         """
         Convert a Digraph instance to a Graph instance.
@@ -10161,15 +10213,21 @@ if __name__ == "__main__":
 ##        f = Digraph('debug')
 ##        print(f.relation)
 ##        f.showStatistics()
-        t = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=5,weightDistribution='equiobjectives')
-        t .save('test')
+        #t = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=5,weightDistribution='equiobjectives')
+        #t .save('test')
         t = PerformanceTableau('test')
         g = BipolarOutrankingDigraph(t,Normalized=True)
-        g.showRelationTable()
-        covg = CoverDigraph(g, Debug=False)
-        covg.showRelationTable()
-        g.showPreKernels()
-        covg.showPreKernels()
+        from weakOrders import *
+        rbc = RankingByChoosingDigraph(g)
+        rbc.showWeakOrder()
+        #rbc.exportGraphViz()
+        #print(rbc.gamma)
+        print(rbc.topologicalSort(Debug=True))
+##        g.showRelationTable()
+##        covg = CoverDigraph(g, Debug=False)
+##        covg.showRelationTable()
+##        g.showPreKernels()
+##        covg.showPreKernels()
 ##        from weakOrders import *
 ##        rbc = RankingByChoosingDigraph(g)
 ##        #rbc.showRelationTable()
