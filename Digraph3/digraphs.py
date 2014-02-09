@@ -10213,8 +10213,8 @@ if __name__ == "__main__":
 ##        f = Digraph('debug')
 ##        print(f.relation)
 ##        f.showStatistics()
-        #t = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=5,weightDistribution='equiobjectives')
-        #t .save('test')
+        t = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=5,weightDistribution='equiobjectives')
+        t .save('test')
         t = PerformanceTableau('test')
         g = BipolarOutrankingDigraph(t,Normalized=True)
         from weakOrders import *
