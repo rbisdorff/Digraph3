@@ -1013,7 +1013,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1649,6 +1649,15 @@ Renders the arc density of the induced subgraph.</p>
 <dt id="digraphs.Digraph.symDegreesDistribution">
 <tt class="descname">symDegreesDistribution</tt><big>(</big><big>)</big><a class="headerlink" href="#digraphs.Digraph.symDegreesDistribution" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the distribution of symmetric degrees.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.topologicalSort">
+<tt class="descname">topologicalSort</tt><big>(</big><em>Debug=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.topologicalSort" title="Permalink to this definition">¶</a></dt>
+<dd><p>If self is acyclic, adds topological sort number to each node of self
+and renders ordered list of nodes. Otherwise renders None.
+Source: M. Golumbic Algorithmic Graph heory and Perfect Graphs,
+Annals Of Discrete Mathematics 57 2nd Ed. , Elsevier 2004, Algorithm 2.4 p.44.</p>
 </dd></dl>
 
 <dl class="method">
@@ -3491,10 +3500,43 @@ bipolar-valued marginal pairwise majority difference digraphs.</p>
 <p>Parameters:</p>
 <blockquote>
 <div><div class="line-block">
-<div class="line">stored voting profile (fileName of valid py code)</div>
+<div class="line">stored voting profile (fileName of valid py code) or voting profile object</div>
 <div class="line">optional, coalition (sublist of voters)</div>
 </div>
 </div></blockquote>
+<p>Example Python3 session</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">101</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">showLinearBallots</span><span class="p">()</span>
+<span class="go">v101(1.0):   [&#39;a5&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a4&#39;, &#39;a3&#39;]</span>
+<span class="go">v100(1.0):   [&#39;a4&#39;, &#39;a1&#39;, &#39;a5&#39;, &#39;a3&#39;, &#39;a2&#39;]</span>
+<span class="go">v89(1.0):    [&#39;a4&#39;, &#39;a5&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;]</span>
+<span class="go">v88(1.0):    [&#39;a3&#39;, &#39;a2&#39;, &#39;a5&#39;, &#39;a1&#39;, &#39;a4&#39;]</span>
+<span class="go">v87(1.0):    [&#39;a5&#39;, &#39;a2&#39;, &#39;a4&#39;, &#39;a3&#39;, &#39;a1&#39;]</span>
+<span class="go">v86(1.0):    [&#39;a5&#39;, &#39;a3&#39;, &#39;a1&#39;, &#39;a4&#39;, &#39;a2&#39;]</span>
+<span class="go">v85(1.0):    [&#39;a5&#39;, &#39;a3&#39;, &#39;a2&#39;, &#39;a4&#39;, &#39;a1&#39;]</span>
+<span class="go">v84(1.0):    [&#39;a3&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a4&#39;, &#39;a5&#39;]</span>
+<span class="gp">...</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">CondorcetDigraph</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+<span class="go">* ---- Relation Table -----</span>
+<span class="go"> S   |  &#39;a1&#39;  &#39;a2&#39;   &#39;a3&#39;   &#39;a4&#39;  &#39;a5&#39;        </span>
+<span class="go">-----|------------------------------------------------------------</span>
+<span class="go">&#39;a1&#39; |   -     33     9      11    21        </span>
+<span class="go">&#39;a2&#39; |  -33    -     -19     -1    -5        </span>
+<span class="go">&#39;a3&#39; |  -9     19    -       5     -1        </span>
+<span class="go">&#39;a4&#39; |  -11    1      -5     -     -9        </span>
+<span class="go">&#39;a5&#39; |  -21    5       1     9      -</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeCondorcetWinner</span><span class="p">()</span>
+<span class="go">[&#39;a1&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
+<span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go">Exporting to rel_randLinearProfile.dot</span>
+<span class="go">dot -Grankdir=BT -Tpng rel_randLinearProfile.dot -o rel_randLinearProfile.png</span>
+</pre></div>
+</div>
+<img alt="_images/rel_randLinearProfile.png" src="_images/rel_randLinearProfile.png" />
 <dl class="method">
 <dt id="votingDigraphs.CondorcetDigraph.computeArrowRaynaudRanking">
 <tt class="descname">computeArrowRaynaudRanking</tt><big>(</big><em>linearOrdered=True</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#votingDigraphs.CondorcetDigraph.computeArrowRaynaudRanking" title="Permalink to this definition">¶</a></dt>
@@ -3552,6 +3594,32 @@ linearBallot = {
     &#x27;2&#x27; : [&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;, ...],
     ...
     }</pre>
+</div>
+<p>Sample Python3 session</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">showLinearBallots</span><span class="p">()</span>
+<span class="go">voters(weight)       candidates rankings</span>
+<span class="go">v4(1.0):     [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;]</span>
+<span class="go">v5(1.0):     [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;]</span>
+<span class="go">v1(1.0):     [&#39;a2&#39;, &#39;a1&#39;, &#39;a3&#39;]</span>
+<span class="go">v2(1.0):     [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;]</span>
+<span class="go">v3(1.0):     [&#39;a1&#39;, &#39;a3&#39;, &#39;a2&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">computeRankAnalysis</span><span class="p">()</span>
+<span class="go">{&#39;a1&#39;: [4.0, 1.0, 0],</span>
+<span class="go"> &#39;a2&#39;: [1.0, 3.0, 1.0],</span>
+<span class="go"> &#39;a3&#39;: [0, 1.0, 4.0]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">computeUninominalVotes</span><span class="p">()</span>
+<span class="go">{&#39;a1&#39;: 4.0, &#39;a3&#39;: 0, &#39;a2&#39;: 1.0}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">computeSimpleMajorityWinner</span><span class="p">()</span>
+<span class="go">[&#39;a1&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">computeBordaScores</span><span class="p">()</span>
+<span class="go">{&#39;a1&#39;: 6.0, &#39;a3&#39;: 14.0, &#39;a2&#39;: 10.0}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">computeBordaWinners</span><span class="p">()</span>
+<span class="go">[&#39;a1&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">computeInstantRunoffWinner</span><span class="p">()</span>
+<span class="go">[&#39;a1&#39;]</span>
+</pre></div>
 </div>
 <dl class="method">
 <dt id="votingDigraphs.LinearVotingProfile.computeBallot">

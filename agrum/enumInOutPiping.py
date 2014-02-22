@@ -46,7 +46,7 @@ arcProbability = 0.1
 fileName = 'testPiping50-10.csv'
 fo = open(fileName,'w')
 fo.write('# test Piping sampleSize = %d, order = %d, arc probability = %.1f\n' %(sampleSize,order,arcProbability))
-fo.write('"piping", "nbp", "tempfile", "nbt"\n')
+fo.write('"piping","nbp","tempfile","nbt"\n')
 
 for s in range(sampleSize):
     print((s+1))
