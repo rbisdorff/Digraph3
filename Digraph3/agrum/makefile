@@ -1,7 +1,7 @@
 #
 # make file for compiling the C++/agrum sources
 #
-CC = g++-4.7
+CC = g++-4.8
 CCFLAGS = -Wall -DNDEBUG -std=c++11
 INCLUDE = /usr/local/include
 INSTALL = /usr/local/bin

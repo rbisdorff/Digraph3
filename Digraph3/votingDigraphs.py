@@ -161,6 +161,32 @@ class LinearVotingProfile(VotingProfile):
             ...
             }
 
+    Sample Python3 session
+    
+    >>> from votingDigraphs import *
+    >>> v = RandomLinearVotingProfile(numberOfVoters=5,numberOfCandidates=3)
+    >>> v.showLinearBallots()
+    voters(weight)	 candidates rankings
+    v4(1.0): 	 ['a1', 'a2', 'a3']
+    v5(1.0): 	 ['a1', 'a2', 'a3']
+    v1(1.0): 	 ['a2', 'a1', 'a3']
+    v2(1.0): 	 ['a1', 'a2', 'a3']
+    v3(1.0): 	 ['a1', 'a3', 'a2']
+    >>> v.computeRankAnalysis()
+    {'a1': [4.0, 1.0, 0],
+     'a2': [1.0, 3.0, 1.0],
+     'a3': [0, 1.0, 4.0]]
+    >>> v.computeUninominalVotes()
+    {'a1': 4.0, 'a3': 0, 'a2': 1.0}
+    >>> v.computeSimpleMajorityWinner()
+    ['a1']
+    >>> v.computeBordaScores()
+    {'a1': 6.0, 'a3': 14.0, 'a2': 10.0}
+    >>> v.computeBordaWinners()
+    ['a1']
+    >>> v.computeInstantRunoffWinner()
+    ['a1']
+
     """
     def __init__(self,fileVotingProfile=None,numberOfCandidates=5,numberOfVoters=9):
         if fileVotingProfile != None:
@@ -688,9 +714,44 @@ class CondorcetDigraph(Digraph):
 
     Parameters:
 
-        | stored voting profile (fileName of valid py code)
+        | stored voting profile (fileName of valid py code) or voting profile object
         | optional, coalition (sublist of voters)
 
+    Example Python3 session
+
+    >>> from votingDigraphs import *
+    >>> v = RandomLinearVotingProfile(numberOfVoters=101,numberOfCandidates=5)
+    >>> v.showLinearBallots()
+    v101(1.0): 	 ['a5', 'a1', 'a2', 'a4', 'a3']
+    v100(1.0): 	 ['a4', 'a1', 'a5', 'a3', 'a2']
+    v89(1.0): 	 ['a4', 'a5', 'a1', 'a2', 'a3']
+    v88(1.0): 	 ['a3', 'a2', 'a5', 'a1', 'a4']
+    v87(1.0): 	 ['a5', 'a2', 'a4', 'a3', 'a1']
+    v86(1.0): 	 ['a5', 'a3', 'a1', 'a4', 'a2']
+    v85(1.0): 	 ['a5', 'a3', 'a2', 'a4', 'a1']
+    v84(1.0): 	 ['a3', 'a1', 'a2', 'a4', 'a5']
+    ...
+    ...
+    >>> g = CondorcetDigraph(v,hasIntegerValuation=True)
+    >>> g.showRelationTable()
+    * ---- Relation Table -----
+     S   |  'a1'  'a2'	 'a3'	'a4'  'a5'	  
+    -----|------------------------------------------------------------
+    'a1' |   -	   33	  9	 11    21	 
+    'a2' |  -33	   -	 -19	 -1    -5	 
+    'a3' |  -9	   19	 -	 5     -1	 
+    'a4' |  -11	   1	  -5	 -     -9	 
+    'a5' |  -21	   5	   1	 9      -
+    >>> g.computeCondorcetWinner()
+    ['a1']
+    >>> g.exportGraphViz()
+    *---- exporting a dot file dor GraphViz tools ---------*
+    Exporting to rel_randLinearProfile.dot
+    dot -Grankdir=BT -Tpng rel_randLinearProfile.dot -o rel_randLinearProfile.png
+
+    .. image:: rel_randLinearProfile.png
+    
+    
     """
     def __init__(self,argVotingProfile=None,approvalVoting=False,coalition=None,majorityMargins=False,hasIntegerValuation=False):
         import copy
