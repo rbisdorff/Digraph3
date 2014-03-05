@@ -531,7 +531,7 @@ def testIterateRankingByChoosing():
 def testStochasticOutrankingDigraphs():
     print('*------ test stochastic bipolar outranking digraphs ----*')
     from outrankingDigraphs import StochasticBipolarOutrankingDigraph
-    from weaklyTransitiveDigraphs import RankingByChoosingDigraph
+    from weakOrders import RankingByChoosingDigraph
     t = RandomCBPerformanceTableau(numberOfActions=13,\
                                     numberOfCriteria=13,\
                                     weightDistribution='equiobjectives')
@@ -564,9 +564,9 @@ def testStochasticOutrankingDigraphs():
             print('sd',gmc.relationStatistics[x][y]['sd'])
     
     grbc = RankingByChoosingDigraph(g)
-    grbc.showPreOrder()
+    grbc.showWeakOrder()
     gmcrbc = RankingByChoosingDigraph(gmc)
-    gmcrbc.showPreOrder()
+    gmcrbc.showWeakOrder()
 
 def testRandomWeightsLaws():
     print('*------- test random laws for stochastic outranking ------*')
