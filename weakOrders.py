@@ -786,29 +786,29 @@ if __name__ == "__main__":
     from time import time
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=10)
+                                 numberOfActions=50)
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
     #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
     #g = RandomValuationDigraph(order=11)
     print('=== >>> best and last fusion (default)')
-##    t0 = time()
-##    rcg0 = weakOrders.RankingByChoosingDigraph(g,\
-##                                                     fusionOperator="o-min",\
-##                                                     Debug=False,\
-##                                                     Threading=False)
-##    print('execution time %s: ' % (str ( time()-t0 ) ) )
-##    rcg0.showRankingByBestChoosing()
-##    rcg0.exportGraphViz()
-####    rcg0.showRelationTable()
-##    t0 = time()
-##    rcg1 = weakOrders.RankingByChoosingDigraph(g,\
-##                                                     fusionOperator="o-min",\
-##                                                     Debug=False,\
-##                                                     Threading=True)
-##    print('execution time %s: ' % (str ( time()-t0 ) ) )
-##    rcg1.showWeakOrder()
+    t0 = time()
+    rcg0 = weakOrders.RankingByChoosingDigraph(g,\
+                                                     fusionOperator="o-min",\
+                                                     Debug=False,\
+                                                     Threading=False)
+    print('execution time %s: ' % (str ( time()-t0 ) ) )
+    rcg0.showRankingByBestChoosing()
+    rcg0.exportGraphViz()
+##    rcg0.showRelationTable()
+    t0 = time()
+    rcg1 = weakOrders.RankingByChoosingDigraph(g,\
+                                                     fusionOperator="o-min",\
+                                                     Debug=False,\
+                                                     Threading=True)
+    print('execution time %s: ' % (str ( time()-t0 ) ) )
+    rcg1.showWeakOrder()
 ##    rcg1.showRelationTable()
 ##    print(rcg0.computeOrdinalCorrelation(g))
 ##    rcg0.showOrderedRelationTable(direction="decreasing")
@@ -841,14 +841,14 @@ if __name__ == "__main__":
 ##                                           imageType=None,Debug=False,
 ##                                           Threading=False)
 ##    print('execution time %s: ' % (str ( time()-t0 ) ) )
-    t0 = time()
-    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
-                                           imageType=None,Debug=False,\
-                                           Threading=True)
-    print('execution time %s: ' % (str ( time()-t0 ) ) )
-    rcf2.showWeakOrder()
-    rcf2.exportGraphViz(fileName='testcw',direction="Colwise")
-    rcf2.exportGraphViz(fileName='testrw',direction="Colwise",graphType='pdf')
+##    t0 = time()
+##    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
+##                                           imageType=None,Debug=False,\
+##                                           Threading=True)
+##    print('execution time %s: ' % (str ( time()-t0 ) ) )
+##    rcf2.showWeakOrder()
+##    rcf2.exportGraphViz(fileName='testcw',direction="Colwise")
+##    rcf2.exportGraphViz(fileName='testrw',direction="Colwise",graphType='pdf')
 ##    rcf2.showWeakOrder()
 #    print(rcf1.computeOrdinalCorrelation(g))
 #    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-max",
