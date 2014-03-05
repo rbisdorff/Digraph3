@@ -676,7 +676,7 @@ class KemenyOrder(LinearOrder):
             g.showRelationTable()
 
         self.name = other.name + '_ranked'        
-        self.actions = deeepcopy(other.actions)
+        self.actions = deepcopy(other.actions)
         self.order = len(self.actions)
         self.valuationdomain = deepcopy(other.valuationdomain)
         self.relation = deepcopy(g.relation)
