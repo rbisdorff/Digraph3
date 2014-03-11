@@ -835,9 +835,8 @@ class QuantilesSortingDigraph(SortingDigraph):
                                  Decimal('0.5'),Decimal('0.75'),Decimal('1.0')]
             self.name = 'sorting_with_quartile_limits'
         elif limitingQuantiles == 'deciles':
-            limitingQuantiles = [Decimal('0.0'),Decimal('0.1'),\
-                                 Decimal('0.2'),Decimal('0.3'),\
-                                 Decimal('0.4'),Decimal('0.5'),\
+            limitingQuantiles = [Decimal('0.0'),Decimal('0.1'),Decimal('0.2'),\
+                                 Decimal('0.3'),Decimal('0.4'),Decimal('0.5'),\
                                  Decimal('0.6'),Decimal('0.7'),\
                                  Decimal('0.8'),Decimal('0.9'),Decimal('1.0')]
             self.name = 'sorting_with_quartile_limits'
@@ -865,17 +864,22 @@ class QuantilesSortingDigraph(SortingDigraph):
         k = len(limitingQuantiles)
         if LowerClosed:
             for i in range(0,k-1):
-                categories[str(i+1)] = {'name':'[%f;%f['\
-                %(limitingQuantiles[i],limitingQuantiles[i+1]), 'order':i}
+                categories[str(i+1)] = {'name':'[%.2f - %.2f['\
+                %(limitingQuantiles[i],limitingQuantiles[i+1]), 'order':i+1}
+            categories[str(k)] = {'name':'[%.2f - <['\
+                %(limitingQuantiles[k-1]), 'order':k}                 
         else:
+            categories[str(1)] = {'name':']< - %.2f]'\
+                %(limitingQuantiles[0]), 'order':1}                 
             for i in range(1,k):
-                categories[str(i)] = {'name':']%f;%f]'\
-                %(limitingQuantiles[i-1],limitingQuantiles[i]), 'order':i}
+                categories[str(i+1)] = {'name':']%.2f - %.2f]'\
+                %(limitingQuantiles[i-1],limitingQuantiles[i]), 'order':i+1}
             
         self.categories = deepcopy(categories)
 
         criteriaCategoryLimits = {}
         criteriaCategoryLimits['lowerClosed'] = LowerClosed
+        self.criteriaCategoryLimits = deepcopy(criteriaCategoryLimits)
         for g in self.criteria:
             gQuantiles = self._computeLimitingQuantiles(g,Debug=Debug)                
             criteriaCategoryLimits[g] = {}
@@ -977,8 +981,9 @@ class QuantilesSortingDigraph(SortingDigraph):
         Renders the list of limiting quantiles on criteria g
         """
         from math import floor
+        from copy import deepcopy
         gValues = []
-        for x in self.actions:
+        for x in self.actionsOrig:
             if Debug:
                 print('g,x,evaluation[g][x]',g,x,self.evaluation[g][x])
             if self.evaluation[g][x] != Decimal('-999'):
@@ -988,90 +993,88 @@ class QuantilesSortingDigraph(SortingDigraph):
         if Debug:
             print('g,n,gValues',g,n,gValues)
         nf = Decimal(str(n))
-        gQuantiles = []
+        limitingQuantiles = deepcopy(self.limitingQuantiles)
+        limitingQuantiles.sort()
+        LowerClosed = self.criteriaCategoryLimits['lowerClosed']
+        if LowerClosed:
+            gQuantiles = []
+        else:
+            if self.criteria[g]['preferenceDirection'] == 'min':
+                gQuantiles = [Decimal('-101.0')]
+            else:
+                gQuantiles = [Decimal('-1.0')]
         for q in self.limitingQuantiles:
             r = (nf * q)
             rq = int(floor(r))
-            if rq < n:
+            if Debug:
+                print('r,rq',r,rq, end=' ')
+            if rq < (n-1):
                 quantile = gValues[rq]\
                            + ((r-rq)*(gValues[rq+1]-gValues[rq]))
             elif rq == n:
                 quantile = max(gValues)
                               
             if Debug:
-                print('r,rq,quantile',r,rq,quantile)
+                print('quantile',quantile)
                               
             gQuantiles.append(quantile)
-                              
+        if Debug:
+            print(g,LowerClosed,self.criteria[g]['preferenceDirection'])
+        if LowerClosed:
+            if self.criteria[g]['preferenceDirection'] == 'min':
+                gQuantiles.append(Decimal('1.0'))
+            else:
+                gQuantiles.append(Decimal('101.0'))
         return gQuantiles
                 
-    def showSorting(self,Reverse=True,isReturningHTML=False):
+    def showSorting(self,Reverse=True,isReturningHTML=False,Debug=False):
         """
         Shows sorting results in decreasing or increasing (Reverse=False)
         order of the categories. If isReturningHTML is True (default = False)
         the method returns a htlm table with the sorting result.
         """
         #from string import replace
+        from copy import deepcopy
         categoryContent = self.computeCategoryContents()
+        categoryKeys = self.orderedCategoryKeys(Reverse=Reverse)
         try:
             lowerClosed = self.criteriaCategoryLimits['lowerClosed']
         except:
-            lowerClosed = true
+            lowerClosed = True
         if Reverse:
             print('\n*--- Sorting results in descending order ---*\n')
-            limprevc = '>'
             if isReturningHTML:
-                limprevc = '&gt;'
                 html = '<h2>Sorting results in descending order</h2>'
                 html += '<table style="background-color:White;" border="1"><tr bgcolor="#9acd32"><th>Categories</th><th>Assorting</th></tr>'
-            for c in self.orderedCategoryKeys(Reverse=Reverse):
-                limc = str(self.limitingQuantiles[int(c)-1])
-                if lowerClosed:
-                    print(']%s - %s]:' % (limprevc,limc), end=' ')
-                    print('\t',categoryContent[c])
-                    if isReturningHTML:
-                        html += '<tr><td bgcolor="#FFF79B">]%s - %s]</td>' % (limprevc,limc)
-                        catString = str(categoryContent[c])
-                        html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
-                else:
-                    print('[%s - %s[:' % (limprevc,limc), end=' ')
-                    print('\t',categoryContent[c])
-                    if isReturningHTML:
-                        html += '<tr><td bgcolor="#FFF79B">[%s - %s[</td>' % (limprevc,limc)
-                        catString = str(categoryContent[c])
-                        html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
-                prev_c = c
-                limprevc = str(self.limitingQuantiles[int(c)-1])
         else:
             print('\n*--- Sorting results in ascending order ---*\n')
             if isReturningHTML:
                 html = '<h2>Sorting results in ascending order</h2>'
                 html += '<table style="background-color:White;" border="1"><tr bgcolor="#9acd32"><th>Categories</th><th>Assorting</th></tr>'
-            cat = [x for x in self.orderedCategoryKeys(Reverse=Reverse)]
+##        if lowerClosed:
+##            #print('Lower closed categories')
+##        else:
+##            #print('Upper closed categories')
+        for c in categoryKeys:
+            print('%s:' % (self.categories[c]['name']), end=' ')
+            print('\t',categoryContent[c])
             if isReturningHTML:
-                cat.append('&lt;')
-            else:
-                cat.append('<')
-
-            for i in range(len(cat)-1):
-                cati = self.limitingQuantiles[int(cat[i])-1]
-                catip1 = self.limitingQuantiles[int(cat[i])]
-                if lowerClosed:
-##                    print('[%s - %s[:' % (cat[i],cat[i+1]), end=' ')
-##                    print('\t',categoryContent[cat[i]])
-                    print('[%s - %s[:' % (cati,catip1), end=' ')
-                    print('\t',categoryContent[cat[i]])
-                    if isReturningHTML:
-                        html += '<tr><td bgcolor="#FFF79B">]%s - %s]</td>' % (cati,catip1)
-                        catString = str(categoryContent[cat[i]])
-                        html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
-                else:
-                    print(']%s - %s]:' % (cati,catip1), end=' ')
-                    print('\t',categoryContent[cat[i]])
-                    if isReturningHTML:
-                        html += '<tr><td bgcolor="#FFF79B">[%s - %s[</td>' % (cati,catip1)
-                        catString = str(categoryContent[cat[i]])
-                        html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
+                #html += '<tr><td bgcolor="#FFF79B">[%s - %s[</td>' % (limprevc,limc)
+                html += '<tr><td bgcolor="#FFF79B">%</td>' % (self.categories[c]['name'])
+                catString = str(categoryContent[c])
+                html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
+##            if lowerClosed:
+##                print('Lower closed categories')
+##            else:
+##                print('Upper closed categories')
+##            for c in categoryKeys:
+##                print('%s:' % (self.categories[c]['name']), end=' ')
+##                print('\t',categoryContent[c])
+##                if isReturningHTML:
+##                    #html += '<tr><td bgcolor="#FFF79B">[%s - %s[</td>' % (limprevc,limc)
+##                    html += '<tr><td bgcolor="#FFF79B">%</td>' % (self.categories[c]['name'])
+##                    catString = str(categoryContent[c])
+##                    html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
 
         if isReturningHTML:
             html += '</table>'
@@ -1099,24 +1102,44 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    t = RandomCBPerformanceTableau(numberOfActions=10)
-    t.saveXMCDA2('test')
-##    t = XMCDA2PerformanceTableau('uniSorting')
-    t.showPerformanceTableau()
-##    s = QuantilesSortingDigraph(t,limitingQuantiles=[Decimal('0.0'),Decimal('0.2'),\
+    #t = RandomCBPerformanceTableau(numberOfActions=10)
+    #t.saveXMCDA2('test')
+    t = XMCDA2PerformanceTableau('test')
+    #t = XMCDA2PerformanceTableau('uniSorting')
+    #t.showPerformanceTableau()
+##    s0 = QuantilesSortingDigraph(t,limitingQuantiles=[Decimal('0.0'),Decimal('0.2'),\
 ##                                                    Decimal('0.4'),Decimal('0.6'),\
 ##                                                    Decimal('0.8'),Decimal('1.0')],
-##                                                    LowerClosed=False,Debug=False)
-    s = QuantilesSortingDigraph(t,limitingQuantiles="quartiles",
+##                                                    LowerClosed=True,Debug=False)
+    s0 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
                                 LowerClosed=False,
-                                Robust=True,Debug=False)
-    
+                                Robust=False,Debug=False)
+    print(s0.categories)
+##    for g in s0.criteria:
+##        print(g)
+##        print(s0._computeLimitingQuantiles(g,Debug=True))
+    #print(s0._computeLimitingQuantiles('g15',Debug=True))    
+    #print(s0._computeLimitingQuantiles('g16',Debug=True))    
     #s = SortingDigraph(t,lowerClosed=True)
-    s.showSorting(Reverse=True)
-    s.showSorting(Reverse=False)
-    s.showCriteriaCategoryLimits()
-    s.showRelationTable()
-    s.computeSortingCharacteristics(Comments=True)
+    s0.showSorting(Reverse=True)
+    s0.showSorting(Reverse=False)
+    #s0.showCriteriaCategoryLimits()
+    print(s0.computeCategoryContents())
+    s0.computeSortingCharacteristics(Comments=True)
+##    print('#################')
+##    s1 = QuantilesSortingDigraph(t,limitingQuantiles="quartiles",
+##                                LowerClosed=True,
+##                                Robust=False,Debug=False)
+##    print(s1.categories)
+##    for g in s1.criteria:
+##        print(g)
+##        print(s1._computeLimitingQuantiles(g))
+    #s = SortingDigraph(t,lowerClosed=True)
+    #s.showSorting(Reverse=True)
+    #s.showSorting(Reverse=False)
+    #s1.showCriteriaCategoryLimits()
+    #s.showRelationTable()
+    #s.computeSortingCharacteristics(Comments=True)
     #print('------- testing sorting by prudent choosing ------')
     #g = BipolarOutrankingDigraph(t)
                               
