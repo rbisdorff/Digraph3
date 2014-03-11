@@ -2155,24 +2155,28 @@ class PerformanceTableau(object):
             if Debug:
                 print('-->> g, glow, ghigh, gamp', g, glow, ghigh, gamp)
             for x in actionKeys:
-                evalx = abs(evaluation[g][x])
-                if Debug:
-                    print(evalx)
-                ## normEvaluation[g][x] = lowValue + ((evalx-glow)/gamp)*amplitude
-                try:
-                    if criteria[g]['preferenceDirection'] == 'min':
-                        sign = Decimal('-1')
-                    else:
-                        sign = Decimal('1')
-                    normEvaluation[g][x] = (lowValue + ((evalx-glow)/gamp)*amplitude)*sign
-                    ## else:
-                    ##     normEvaluation[g][x] = -(lowValue + ((evalx-glow)/gamp)*(-amplitude))
-                except:
-                    self.criteria[g]['preferenceDirection'] = 'max'
-                    normEvaluation[g][x] = lowValue + ((evalx-glow)/gamp)*amplitude
+                if evaluation[g][x] != Decimal('-999'):
+                    evalx = abs(evaluation[g][x])
+                    if Debug:
+                        print(evalx)
+                    ## normEvaluation[g][x] = lowValue + ((evalx-glow)/gamp)*amplitude
+                    try:
+                        if criteria[g]['preferenceDirection'] == 'min':
+                            sign = Decimal('-1')
+                        else:
+                            sign = Decimal('1')
+                        normEvaluation[g][x] = (lowValue + ((evalx-glow)/gamp)*amplitude)*sign
+                        ## else:
+                        ##     normEvaluation[g][x] = -(lowValue + ((evalx-glow)/gamp)*(-amplitude))
+                    except:
+                        self.criteria[g]['preferenceDirection'] = 'max'
+                        normEvaluation[g][x] = lowValue + ((evalx-glow)/gamp)*amplitude
+                        
+                    if Debug:
+                        print(criteria[g]['preferenceDirection'], evaluation[g][x], normEvaluation[g][x])
+                else:
+                    normEvaluation[g][x] = Decimal('-999')
                     
-                if Debug:
-                    print(criteria[g]['preferenceDirection'], evaluation[g][x], normEvaluation[g][x])
         return normEvaluation
 
 
