@@ -357,7 +357,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     lowLimit = Max - self.relation[cMinKey][x] + Min
                     notHighLimit = self.relation[cMaxKey][x]
                 if Comments:
-                    print('%s in %s: low = %.2f, high = %.2f' % (x, c,self.relation[x][cMinKey],self.relation[x][cMaxKey]), end=' ')
+                    print('%s in %s: low = %.2f, high = %.2f' % \
+                          (x, c,self.relation[x][cMinKey],self.relation[x][cMaxKey]), end=' ')
                 categoryMembership = min(lowLimit,notHighLimit)
                 sorting[x][c]['lowLimit'] = lowLimit
                 sorting[x][c]['notHighLimit'] = notHighLimit
@@ -781,7 +782,301 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
             print('Determinateness : %.3f (%.3f)' % (corr['determination'],gdeter))
             print('Execution time  : %.4f sec.' % (t1-t0))
         
-    
+class QuantilesSortingDigraph(SortingDigraph):
+    """
+    Specialisation of the sortingDigraph Class
+    for sorting of alternatives into quantiles delimited ordered classes.
+    """
+
+    def __init__(self,argPerfTab=None,
+                 limitingQuantiles=None,
+                 LowerClosed=True,
+                 hasNoVeto=False,
+                 minValuation=-100.0,
+                 maxValuation=100.0,
+                 Robust=False,
+                 Debug=False):
+        """
+        Constructor for QuantilesSortingDigraph instances.
+
+        .. note::
+
+            We generally require an OutrankingDigraph instance g or a valid filename.
+            If none is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.
+            By default lower closed limits of categories are supposed to be used in the sorting.
+        """
+
+        from copy import deepcopy
+        from decimal import Decimal
+
+        # import the performance tableau
+        if argPerfTab == None:
+            perfTab = RandomPerformanceTableau(numberOfActions=10,
+                                               numberOfCriteria=13)
+        else:
+            perfTab = argPerfTab
+        # normalize the actions as a dictionary construct
+        if isinstance(perfTab.actions,list):
+            actions = {}
+            for x in perfTab.actions:
+                actions[x] = {'name': str(x)}
+            self.actions = actions
+        else:
+            self.actions = deepcopy(perfTab.actions)
+
+        # keep a copy of the original actions set before adding the profiles
+        self.actionsOrig = deepcopy(self.actions)
+
+        # actionsOrig = self.actionsOrig
+
+        #  input the limiting quantiles
+        if limitingQuantiles == None or limitingQuantiles == 'quartiles':
+            limitingQuantiles = [Decimal('0.0'),Decimal('0.25'),\
+                                 Decimal('0.5'),Decimal('0.75'),Decimal('1.0')]
+            self.name = 'sorting_with_quartile_limits'
+        elif limitingQuantiles == 'deciles':
+            limitingQuantiles = [Decimal('0.0'),Decimal('0.1'),\
+                                 Decimal('0.2'),Decimal('0.3'),\
+                                 Decimal('0.4'),Decimal('0.5'),\
+                                 Decimal('0.6'),Decimal('0.7'),\
+                                 Decimal('0.8'),Decimal('0.9'),Decimal('1.0')]
+            self.name = 'sorting_with_quartile_limits'
+            
+        else:
+            self.name = 'sorting_with_given_quantiles'
+        self.limitingQuantiles = deepcopy(limitingQuantiles)
+
+        if Debug:
+            print('limitingQuantiles',self.limitingQuantiles)
+
+        #  normalizing the performance tableau
+        normPerfTab = NormalizedPerformanceTableau(perfTab)
+        self.criteria = deepcopy(normPerfTab.criteria)
+        self.convertWeightFloatToDecimal()
+        self.evaluation = deepcopy(normPerfTab.evaluation)
+        self.convertEvaluationFloatToDecimal()
+
+        # supposing all criteria scales between 0.0 and 100.0
+
+        lowValue = 0.0
+        highValue = 100.00
+        # with preference direction = max
+        categories = {}
+        k = len(limitingQuantiles)
+        if LowerClosed:
+            for i in range(0,k-1):
+                categories[str(i+1)] = {'name':'[%f;%f['\
+                %(limitingQuantiles[i],limitingQuantiles[i+1]), 'order':i}
+        else:
+            for i in range(1,k):
+                categories[str(i)] = {'name':']%f;%f]'\
+                %(limitingQuantiles[i-1],limitingQuantiles[i]), 'order':i}
+            
+        self.categories = deepcopy(categories)
+
+        criteriaCategoryLimits = {}
+        criteriaCategoryLimits['lowerClosed'] = LowerClosed
+        for g in self.criteria:
+            gQuantiles = self._computeLimitingQuantiles(g,Debug=Debug)                
+            criteriaCategoryLimits[g] = {}
+            for c in categories:
+                criteriaCategoryLimits[g][c]={
+                    'minimum':gQuantiles[(int(c)-1)],
+                    'maximum':gQuantiles[int(c)]
+                    }
+        self.criteriaCategoryLimits = deepcopy(criteriaCategoryLimits)
+
+        # set the category limits type (lowerClosed = True is default)
+        # self.criteriaCategoryLimits['lowerClosed'] = LowerClosed
+        # print 'lowerClosed', lowerClosed
+
+        # add the catogory limits to the actions set
+        self.profiles = {'min':{},'max':{}}
+        self.profileLimits = set()
+        for c in list(self.categories.keys()):
+            cMinKey = c+'-m'
+            cMaxKey = c+'-M'
+            self.profileLimits.add(cMinKey)
+            self.profileLimits.add(cMaxKey)
+            self.actions[cMinKey] = {'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
+            self.actions[cMaxKey] = {'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
+            self.profiles['min'][cMinKey] = {'category': c, 'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
+            self.profiles['max'][cMaxKey] = {'category': c, 'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
+            for g in list(self.criteria.keys()):
+                try:
+                    if self.criteria[g]['preferenceDirection'] == 'max':
+                        self.evaluation[g][cMinKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['minimum']))
+                        self.evaluation[g][cMaxKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['maximum']))
+                    elif self.criteria[g]['preferenceDirection'] == 'min':
+                        if not defaultProfiles:
+                            highValueg = Decimal(str(self.criteria[g]['scale'][1]))
+                        else:
+                            highValueg = Decimal(str(highValue))
+                        #print 'highValue = ', highValue
+                        self.evaluation[g][cMinKey] = -(highValueg - Decimal(str(self.criteriaCategoryLimits[g][c]['minimum'])))
+                        self.evaluation[g][cMaxKey] = -(highValueg - Decimal(str(self.criteriaCategoryLimits[g][c]['maximum'])))
+                    else:
+                        print('===>>>>> Error')
+                except:
+
+                    self.evaluation[g][cMinKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['minimum']))
+                    self.evaluation[g][cMaxKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['maximum']))
+
+
+
+        self.convertEvaluationFloatToDecimal()
+
+        # construct outranking relation
+        if Robust:
+            g = RobustOutrankingDigraph(self)
+            self.valuationdomain = deepcopy(g.valuationdomain)
+            self.relation = deepcopy(g.relation)
+        else:
+            Min = Decimal('%.4f' % minValuation)
+            Max = Decimal('%.4f' % maxValuation)
+            Med = (Max + Min)/Decimal('2.0')
+            self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
+            if LowerClosed:
+                self.relation = self._constructRelation(self.criteria,
+                                                       self.evaluation,
+                                                       initial=self.actionsOrig,
+                                                       terminal=self.profileLimits,
+                                                       hasNoVeto=hasNoVeto,
+                                                       hasBipolarVeto=True)
+            else:
+                self.relation = self._constructRelation(self.criteria,
+                                                       self.evaluation,
+                                                       terminal=self.actionsOrig,
+                                                       initial=self.profileLimits,
+                                                       hasNoVeto=hasNoVeto, hasBipolarVeto=True)
+            if LowerClosed:
+                for x in self.actionsOrig:
+                    for y in self.actionsOrig:
+                        self.relation[x][y] = Med
+                for x in self.profileLimits:
+                    self.relation[x] = {}
+                    for y in self.actions:
+                        self.relation[x][y] = Med
+            else:
+                for x in self.actionsOrig:
+                    self.relation[x] = {}
+                    for y in self.actionsOrig:
+                        self.relation[x][y] = Med
+                for y in self.profileLimits:
+                    for x in self.actions:
+                        self.relation[x][y] = Med
+
+
+        # init general digraph Data
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+
+    def _computeLimitingQuantiles(self,g,Debug=False):
+        """
+        Renders the list of limiting quantiles on criteria g
+        """
+        from math import floor
+        gValues = []
+        for x in self.actions:
+            if Debug:
+                print('g,x,evaluation[g][x]',g,x,self.evaluation[g][x])
+            if self.evaluation[g][x] != Decimal('-999'):
+                gValues.append(self.evaluation[g][x])
+        gValues.sort()
+        n = len(gValues)
+        if Debug:
+            print('g,n,gValues',g,n,gValues)
+        nf = Decimal(str(n))
+        gQuantiles = []
+        for q in self.limitingQuantiles:
+            r = (nf * q)
+            rq = int(floor(r))
+            if rq < n:
+                quantile = gValues[rq]\
+                           + ((r-rq)*(gValues[rq+1]-gValues[rq]))
+            elif rq == n:
+                quantile = max(gValues)
+                              
+            if Debug:
+                print('r,rq,quantile',r,rq,quantile)
+                              
+            gQuantiles.append(quantile)
+                              
+        return gQuantiles
+                
+    def showSorting(self,Reverse=True,isReturningHTML=False):
+        """
+        Shows sorting results in decreasing or increasing (Reverse=False)
+        order of the categories. If isReturningHTML is True (default = False)
+        the method returns a htlm table with the sorting result.
+        """
+        #from string import replace
+        categoryContent = self.computeCategoryContents()
+        try:
+            lowerClosed = self.criteriaCategoryLimits['lowerClosed']
+        except:
+            lowerClosed = true
+        if Reverse:
+            print('\n*--- Sorting results in descending order ---*\n')
+            limprevc = '>'
+            if isReturningHTML:
+                limprevc = '&gt;'
+                html = '<h2>Sorting results in descending order</h2>'
+                html += '<table style="background-color:White;" border="1"><tr bgcolor="#9acd32"><th>Categories</th><th>Assorting</th></tr>'
+            for c in self.orderedCategoryKeys(Reverse=Reverse):
+                limc = str(self.limitingQuantiles[int(c)-1])
+                if lowerClosed:
+                    print(']%s - %s]:' % (limprevc,limc), end=' ')
+                    print('\t',categoryContent[c])
+                    if isReturningHTML:
+                        html += '<tr><td bgcolor="#FFF79B">]%s - %s]</td>' % (limprevc,limc)
+                        catString = str(categoryContent[c])
+                        html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
+                else:
+                    print('[%s - %s[:' % (limprevc,limc), end=' ')
+                    print('\t',categoryContent[c])
+                    if isReturningHTML:
+                        html += '<tr><td bgcolor="#FFF79B">[%s - %s[</td>' % (limprevc,limc)
+                        catString = str(categoryContent[c])
+                        html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
+                prev_c = c
+                limprevc = str(self.limitingQuantiles[int(c)-1])
+        else:
+            print('\n*--- Sorting results in ascending order ---*\n')
+            if isReturningHTML:
+                html = '<h2>Sorting results in ascending order</h2>'
+                html += '<table style="background-color:White;" border="1"><tr bgcolor="#9acd32"><th>Categories</th><th>Assorting</th></tr>'
+            cat = [x for x in self.orderedCategoryKeys(Reverse=Reverse)]
+            if isReturningHTML:
+                cat.append('&lt;')
+            else:
+                cat.append('<')
+
+            for i in range(len(cat)-1):
+                cati = self.limitingQuantiles[int(cat[i])-1]
+                catip1 = self.limitingQuantiles[int(cat[i])]
+                if lowerClosed:
+##                    print('[%s - %s[:' % (cat[i],cat[i+1]), end=' ')
+##                    print('\t',categoryContent[cat[i]])
+                    print('[%s - %s[:' % (cati,catip1), end=' ')
+                    print('\t',categoryContent[cat[i]])
+                    if isReturningHTML:
+                        html += '<tr><td bgcolor="#FFF79B">]%s - %s]</td>' % (cati,catip1)
+                        catString = str(categoryContent[cat[i]])
+                        html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
+                else:
+                    print(']%s - %s]:' % (cati,catip1), end=' ')
+                    print('\t',categoryContent[cat[i]])
+                    if isReturningHTML:
+                        html += '<tr><td bgcolor="#FFF79B">[%s - %s[</td>' % (cati,catip1)
+                        catString = str(categoryContent[cat[i]])
+                        html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
+
+        if isReturningHTML:
+            html += '</table>'
+            return html
+
 
 #----------test SortingDigraph class ----------------
 if __name__ == "__main__":
@@ -804,17 +1099,31 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    t = RandomCBPerformanceTableau(numberOfActions=46)
+    t = RandomCBPerformanceTableau(numberOfActions=10)
     t.saveXMCDA2('test')
-    #t = XMCDA2PerformanceTableau('uniSorting')
+##    t = XMCDA2PerformanceTableau('uniSorting')
+    t.showPerformanceTableau()
+##    s = QuantilesSortingDigraph(t,limitingQuantiles=[Decimal('0.0'),Decimal('0.2'),\
+##                                                    Decimal('0.4'),Decimal('0.6'),\
+##                                                    Decimal('0.8'),Decimal('1.0')],
+##                                                    LowerClosed=False,Debug=False)
+    s = QuantilesSortingDigraph(t,limitingQuantiles="quartiles",
+                                LowerClosed=False,
+                                Robust=True,Debug=False)
+    
     #s = SortingDigraph(t,lowerClosed=True)
-    #s.showSorting(Reverse=True)
-    print('------- testing sorting by prudent choosing ------')
-    g = BipolarOutrankingDigraph(t)
+    s.showSorting(Reverse=True)
+    s.showSorting(Reverse=False)
+    s.showCriteriaCategoryLimits()
+    s.showRelationTable()
+    s.computeSortingCharacteristics(Comments=True)
+    #print('------- testing sorting by prudent choosing ------')
+    #g = BipolarOutrankingDigraph(t)
+                              
     #g.recodeValuation(-1,1)
     #gdeter = g.computeDeterminateness()
-    t0 = time()
-    s = SortingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.2)
+    #t0 = time()
+    #s = SortingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.2)
     #s = SortingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.2,SplitCorrelation=False)
 #    t1 = time()
 #    s.showSorting()
