@@ -2764,6 +2764,175 @@ class Digraph(object):
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
 
+    def exportD3(self,fileName=None, noSilent=True):
+        """
+        export an html file with a dynamic D3 forced graph .
+        """
+        import os
+        import json
+
+        if noSilent:
+            print('*---- exporting a html file ---------*')
+        actionkeys = [x for x in self.actions]
+        n = len(actionkeys)
+        relation = self.relation
+        Med = self.valuationdomain['med']
+        i = 0
+        if fileName == None:
+            name = self.name
+        else:
+            name = fileName
+        htmlName = name+'.html'
+        if noSilent:
+            print('Exporting to '+ htmlName)
+        
+        #dataset
+        #Example: dataset= '{"nodes":[{"name":"Gary","group":1},{"name":"Pit","group":1},],"links":[{"source":1,"target":0,"value":1},]}'
+        dataset = {"nodes":[],"links":[]}
+        for node in self.actions:
+            dataset["nodes"].append({"name": node ,"group":1})
+        for key in self.relation:
+            for link in self.relation[key]:
+                if link != key:
+                    if link > key:
+                        if self.relation[key][link] > Med:
+                           dataset["links"].append({"source":int(key)-1 , "target" : int(link)-1, "value":2}) 
+        do = open("dataset.json",'w')
+        do.write(json.dumps(dataset,indent=4 * ' '))
+        do.close()
+        fo = open(htmlName,'w')
+        fo.write('<!DOCTYPE html>\n')
+        fo.write('<meta charset="utf-8">\n')
+        fo.write('<script src="http://d3js.org/d3.v3.js"></script>\n')
+        fo.write('<style>\n')
+
+        fo.write('path.link {\n')
+        fo.write('fill: none;\n')
+        #dotted line
+        fo.write('stroke-dasharray: 3,3;\n')
+        #
+        fo.write('stroke: #000;\n')
+        fo.write('stroke-width: 1.5px;\n')
+        fo.write('}\n')
+
+        fo.write('circle {\n')
+        fo.write('fill: #ccc;\n')
+        fo.write('stroke: #fff;\n')
+        fo.write('stroke-width: 1.5px;\n')
+        fo.write('}\n')
+
+        fo.write('text {\n')
+        fo.write('fill: #000;\n')
+        fo.write('font: 12px sans-serif;\n')
+        fo.write('pointer-events: none;\n')
+        fo.write('text-anchor: middle;\n')
+        fo.write('}\n')
+
+        fo.write('</style>\n')
+        fo.write('<body>\n')
+        fo.write('<script>\n')
+
+        
+        fo.write('d3.json("dataset.json", function(error, links) {\n')
+        fo.write('var nodes = links.nodes;\n')
+
+        fo.write('var width = 960,\n')
+        fo.write('  height = 500;0\n')
+
+        fo.write('var force = d3.layout.force()\n')
+        fo.write('  .nodes(d3.values(nodes))\n')
+        fo.write('  .links(links.links)\n')
+        fo.write('  .size([width, height])\n')
+        fo.write('  .linkDistance(150)\n')
+        fo.write('  .charge(-3000)\n')
+        fo.write('  .on("tick", tick)\n')
+        fo.write('  .start();\n')
+
+        fo.write('var svg = d3.select("body").append("svg")\n')
+        fo.write('  .attr("width", width)\n')
+        fo.write('  .attr("height", height);\n')
+
+        #Arrows go here
+        fo.write('svg.append("svg:defs").selectAll("marker")\n')
+        fo.write('  .data(["end"])\n')      
+        fo.write('  .enter().append("svg:marker")\n')    
+        fo.write('  .attr("id", String)\n')
+        fo.write('  .attr("viewBox", "0 -5 10 10")\n')
+        fo.write('  .attr("refX", 28)\n')
+        fo.write('  .attr("refY", -1.0)\n')
+        fo.write('  .attr("markerWidth", 6)\n')
+        fo.write('  .attr("markerHeight", 6)\n')
+        fo.write('  .attr("orient", "auto")\n')
+        fo.write('  .append("svg:path")\n')
+        fo.write('  .attr("d", "M0,-5L10,0L0,5");\n')
+
+        fo.write('svg.append("svg:defs").selectAll("marker")\n')
+        fo.write('  .data(["start"])\n')      
+        fo.write('  .enter().append("svg:marker")\n')    
+        fo.write('  .attr("id", String)\n')
+        fo.write('  .attr("viewBox", "0 -5 10 10")\n')
+        fo.write('  .attr("refX", -18)\n')
+        fo.write('  .attr("refY", -1.0)\n')
+        fo.write('  .attr("markerWidth", 6)\n')
+        fo.write('  .attr("markerHeight", 6)\n')
+        fo.write('  .attr("orient", "auto")\n')
+        fo.write('  .append("svg:path")\n')
+        fo.write('  .attr("stroke", "black")')
+        fo.write('  .attr("fill", "none")')
+        fo.write('  .attr("stroke-width", 2)')
+        fo.write('  .attr("d", "M10,-5L0,0L10,5z");\n')
+
+        
+
+# add the links and the arrows
+        fo.write('var path = svg.append("svg:g").selectAll("path")\n')
+        fo.write('  .data(force.links())\n')
+        fo.write('  .enter().append("svg:path")\n')
+        fo.write('  .attr("class", function(d) { return "link " + d.type; })\n')
+        fo.write('  .attr("class", "link")\n')
+        fo.write('  .attr("marker-end", "url(#end)")\n')
+        fo.write('  .attr("marker-start", "url(#start)");\n')
+
+
+# define the nodes
+        fo.write('var node = svg.selectAll(".node")\n')
+        fo.write('  .data(force.nodes())\n')
+        fo.write('  .enter().append("g")\n')
+        fo.write('  .attr("class", "node")\n')
+        fo.write('  .call(force.drag);\n')
+
+# add the nodes
+        fo.write('node.append("circle")\n')
+        fo.write('.attr("r", 15);\n')
+
+# add the text 
+        fo.write('node.append("text")\n')
+        fo.write('  .attr("x", 0)\n')
+        fo.write('.attr("dy", ".35em")\n')
+        fo.write('.text(function(d) { return d.name; });\n')
+
+#add the curvy lines
+        fo.write('function tick() {\n')
+        fo.write('  path.attr("d", function(d) {\n')
+        fo.write('      var dx = d.target.x - d.source.x,\n')
+        fo.write('      dy = d.target.y - d.source.y,\n')
+        fo.write('      dr = Math.sqrt(dx * dx + dy * dy);\n')
+        fo.write('      return "M" + \n')
+        fo.write('      d.source.x + "," + \n')
+        fo.write('      d.source.y + "A" + \n')
+        fo.write('      dr + "," + dr + " 0 0,1 " + \n')
+        fo.write('      d.target.x + "," + \n')
+        fo.write('      d.target.y;\n')
+        fo.write('});\n')
+        fo.write('node\n')
+        fo.write('.attr("transform", function(d) {\n')
+        fo.write('return "translate(" + d.x + "," + d.y + ")"; });\n')
+        fo.write('}\n')
+        fo.write('});\n')
+        fo.write('</script>\n')
+        fo.write('</body>\n')
+        fo.write('</html>\n')
+        print(relation)
 
     def savedre(self,name='temp'):
         """
