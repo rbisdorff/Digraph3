@@ -358,7 +358,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     notHighLimit = self.relation[cMaxKey][x]
                 if Comments:
                     print('%s in %s: low = %.2f, high = %.2f' % \
-                          (x, c,self.relation[x][cMinKey],self.relation[x][cMaxKey]), end=' ')
+                          (x, c,lowLimit,notHighLimit), end=' ')
                 categoryMembership = min(lowLimit,notHighLimit)
                 sorting[x][c]['lowLimit'] = lowLimit
                 sorting[x][c]['notHighLimit'] = notHighLimit
@@ -1000,9 +1000,9 @@ class QuantilesSortingDigraph(SortingDigraph):
             gQuantiles = []
         else:
             if self.criteria[g]['preferenceDirection'] == 'min':
-                gQuantiles = [Decimal('-101.0')]
+                gQuantiles = [Decimal('-200.0')]
             else:
-                gQuantiles = [Decimal('-1.0')]
+                gQuantiles = [Decimal('-100.0')]
         for q in self.limitingQuantiles:
             r = (nf * q)
             rq = int(floor(r))
@@ -1022,9 +1022,9 @@ class QuantilesSortingDigraph(SortingDigraph):
             print(g,LowerClosed,self.criteria[g]['preferenceDirection'])
         if LowerClosed:
             if self.criteria[g]['preferenceDirection'] == 'min':
-                gQuantiles.append(Decimal('1.0'))
+                gQuantiles.append(Decimal('100.0'))
             else:
-                gQuantiles.append(Decimal('101.0'))
+                gQuantiles.append(Decimal('200.0'))
         return gQuantiles
                 
     def showSorting(self,Reverse=True,isReturningHTML=False,Debug=False):
@@ -1102,30 +1102,31 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    #t = RandomCBPerformanceTableau(numberOfActions=10)
-    #t.saveXMCDA2('test')
-    t = XMCDA2PerformanceTableau('test')
+    t = RandomCBPerformanceTableau(numberOfActions=50)
+    t.saveXMCDA2('test')
+    #t = XMCDA2PerformanceTableau('test')
     #t = XMCDA2PerformanceTableau('uniSorting')
-    #t.showPerformanceTableau()
-##    s0 = QuantilesSortingDigraph(t,limitingQuantiles=[Decimal('0.0'),Decimal('0.2'),\
-##                                                    Decimal('0.4'),Decimal('0.6'),\
-##                                                    Decimal('0.8'),Decimal('1.0')],
-##                                                    LowerClosed=True,Debug=False)
     s0 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
-                                LowerClosed=False,
+                                LowerClosed=True,
                                 Robust=False,Debug=False)
     print(s0.categories)
-##    for g in s0.criteria:
-##        print(g)
-##        print(s0._computeLimitingQuantiles(g,Debug=True))
-    #print(s0._computeLimitingQuantiles('g15',Debug=True))    
-    #print(s0._computeLimitingQuantiles('g16',Debug=True))    
-    #s = SortingDigraph(t,lowerClosed=True)
     s0.showSorting(Reverse=True)
     s0.showSorting(Reverse=False)
+
+###############   scratch #########################
+
     #s0.showCriteriaCategoryLimits()
-    print(s0.computeCategoryContents())
-    s0.computeSortingCharacteristics(Comments=True)
+    #print(s0.computeCategoryContents(Comments=True))
+    #s0.computeSortingCharacteristics(Comments=True)
+    #s0.showPairwiseComparison('a10','1-m')
+    #s0.showPairwiseComparison('1-m','a10')
+    #print(s0.relation['a10']['1-m'],s0.relation['1-m']['a10'])
+          
+    # s0cd = CoDualDigraph(s0)
+    # s0cd.showPairwiseComparison('a10','1-m')
+    # s0cd.showPairwiseComparison('1-m','a10')
+    # print(s0cd.relation['a10']['1-m'],s0cd.relation['1-m']['a10'])
+    # print(s0.criteria['g03'])
 ##    print('#################')
 ##    s1 = QuantilesSortingDigraph(t,limitingQuantiles="quartiles",
 ##                                LowerClosed=True,
