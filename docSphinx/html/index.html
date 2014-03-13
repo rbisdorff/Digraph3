@@ -154,7 +154,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1013,7 +1013,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1059,6 +1059,12 @@ Initiate with S = self.actions,copy().</p>
 <tt class="descname">domkernelrestrict</tt><big>(</big><em>choice</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.domkernelrestrict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parameter: prekernel
 Renders dominant prekernel restricted relation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.exportD3">
+<tt class="descname">exportD3</tt><big>(</big><em>fileName=None</em>, <em>noSilent=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.exportD3" title="Permalink to this definition">¶</a></dt>
+<dd><p>export an html file with a dynamic D3 forced graph .</p>
 </dd></dl>
 
 <dl class="method">
@@ -1758,7 +1764,7 @@ equivalence valuations.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1789,7 +1795,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2398,7 +2404,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3093,7 +3099,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -3774,6 +3780,22 @@ ballot = {     # voters x candidates x candidates
 </div>
 <div class="section" id="module-sortingDigraphs">
 <span id="sortingdigraphs-module"></span><span id="sortingdigraphs-label"></span><h2>sortingDigraphs module<a class="headerlink" href="#module-sortingDigraphs" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="sortingDigraphs.QuantilesSortingDigraph">
+<em class="property">class </em><tt class="descclassname">sortingDigraphs.</tt><tt class="descname">QuantilesSortingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=True</em>, <em>hasNoVeto=False</em>, <em>minValuation=-100.0</em>, <em>maxValuation=100.0</em>, <em>Robust=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></tt></a></p>
+<p>Specialisation of the sortingDigraph Class
+for sorting of alternatives into quantiles delimited ordered classes.</p>
+<dl class="method">
+<dt id="sortingDigraphs.QuantilesSortingDigraph.showSorting">
+<tt class="descname">showSorting</tt><big>(</big><em>Reverse=True</em>, <em>isReturningHTML=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.showSorting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows sorting results in decreasing or increasing (Reverse=False)
+order of the categories. If isReturningHTML is True (default = False)
+the method returns a htlm table with the sorting result.</p>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="class">
 <dt id="sortingDigraphs.SortingByBestChoosingDigraph">
 <em class="property">class </em><tt class="descclassname">sortingDigraphs.</tt><tt class="descname">SortingByBestChoosingDigraph</tt><big>(</big><em>digraph=None</em>, <em>CoDual=True</em>, <em>Odd=True</em>, <em>Limited=None</em>, <em>Comments=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.SortingByBestChoosingDigraph" title="Permalink to this definition">¶</a></dt>
