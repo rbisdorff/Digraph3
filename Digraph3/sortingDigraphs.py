@@ -835,12 +835,19 @@ class QuantilesSortingDigraph(SortingDigraph):
                                  Decimal('0.5'),Decimal('0.75'),Decimal('1.0')]
             self.name = 'sorting_with_quartile_limits'
         elif limitingQuantiles == 'deciles':
-            limitingQuantiles = [Decimal('0.0'),Decimal('0.1'),Decimal('0.2'),\
-                                 Decimal('0.3'),Decimal('0.4'),Decimal('0.5'),\
-                                 Decimal('0.6'),Decimal('0.7'),\
-                                 Decimal('0.8'),Decimal('0.9'),Decimal('1.0')]
-            self.name = 'sorting_with_quartile_limits'
-            
+            limitingQuantiles = self._computeQuantiles(10)
+##            limitingQuantiles = [Decimal('0.0'),Decimal('0.1'),Decimal('0.2'),\
+##                                 Decimal('0.3'),Decimal('0.4'),Decimal('0.5'),\
+##                                 Decimal('0.6'),Decimal('0.7'),\
+##                                 Decimal('0.8'),Decimal('0.9'),Decimal('1.0')]
+##            self.name = 'sorting_with_decile_limits'
+        elif limitingQuantiles == 'quintiles':
+            limitingQuantiles = self._computeQuantiles(5)
+            #self.name = 'sorting_with_quintile_limits'
+        elif limitingQuantiles == 'septiles':
+            limitingQuantiles = self._computeQuantiles(7)
+            #self.name = 'sorting_with_septile_limits'
+             
         else:
             self.name = 'sorting_with_given_quantiles'
         self.limitingQuantiles = deepcopy(limitingQuantiles)
@@ -976,6 +983,16 @@ class QuantilesSortingDigraph(SortingDigraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
+    def _computeQuantiles(self,n):
+        """
+        renders the limiting quantiles
+        """
+        limitingQuantiles = []
+        for i in range(n+1):
+            limitingQuantiles.append( Decimal(str(i)) / Decimal(str(n)) )
+        self.name = 'sorting_with_%d-tile_limits' % n
+        return limitingQuantiles
+                                         
     def _computeLimitingQuantiles(self,g,Debug=False):
         """
         Renders the list of limiting quantiles on criteria g
@@ -1102,11 +1119,11 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    t = RandomCBPerformanceTableau(numberOfActions=50)
-    t.saveXMCDA2('test')
+    #t = RandomCBPerformanceTableau(numberOfActions=50)
+    #t.saveXMCDA2('test')
     #t = XMCDA2PerformanceTableau('test')
-    #t = XMCDA2PerformanceTableau('uniSorting')
-    s0 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
+    t = XMCDA2PerformanceTableau('uniSorting')
+    s0 = QuantilesSortingDigraph(t,limitingQuantiles="septiles",
                                 LowerClosed=True,
                                 Robust=False,Debug=False)
     print(s0.categories)
