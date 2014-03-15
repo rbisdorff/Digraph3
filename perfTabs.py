@@ -2194,7 +2194,9 @@ class NormalizedPerformanceTableau(PerformanceTableau):
             perfTab = argPerfTab
         else:
             if argPerfTab == None:
-                perfTab = RandomPerformanceTableau()
+                #perfTab = RandomPerformanceTableau()
+                print('Error: a stored performance tableau is required !')
+                perfTab = None
             else:
                 perfTab = PerformanceTableau(argPerfTab)
         self.name = 'norm_'+ perfTab.name
