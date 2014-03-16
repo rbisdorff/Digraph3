@@ -12,6 +12,7 @@ from time import time
 
 ############# test sortingDigraphs ####################
 from sortingDigraphs import *
+from weakOrders import *
 
 def testDefaultSortingDigraph():
     print('*---- testing default instantiation of the SortingDigraph Class ---*')
@@ -109,5 +110,21 @@ def testSortingByPrudentChoosingDigraph():
     print('Correlation   : %.3f' % corr['correlation'])
     print('Determination : %.3f' % corr['determination'])
     print('Execution time: %.4f sec.' % (t1-t0))
- 
+
+def testQuantilesSortingDigraph():
+    print('*-------- Testing QuantilesSortingDigraph class -------')
+    t = RandomCBPerformanceTableau(numberOfActions=20)
+    t.saveXMCDA2('test')
+    s0 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
+                                LowerClosed=True,
+                                Robust=False,Debug=False)
+    print(s0.categories)
+    s0.showSorting(Reverse=True)
+    s0.showSorting(Reverse=False)
+    sortingRelation = s0.computeSortingRelation()
+    s0.showRelationTable(actionsSubset=s0.actionsOrig,relation=sortingRelation)
+    s0.showOrderedRelationTable()
+    s0.showWeakOrder()
+    s0.exportGraphViz(graphType="png")
+
     
