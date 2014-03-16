@@ -10,7 +10,7 @@
 from digraphs import *
 from outrankingDigraphs import *
 from decimal import Decimal
-from weaklyTransitiveDigraphs import *
+from weakOrders import *
 
 def testPerformanceTableau():
     print('==>> Testing Performance Tableau instantiation')
