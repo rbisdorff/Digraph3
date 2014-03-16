@@ -99,7 +99,6 @@ class WeakOrder(Digraph):
         """
         Showing the relation table in decreasing (default) or increasing order.
         """ 
-
         actionsList = []
         
         if direction == "decreasing":
@@ -133,7 +132,7 @@ class WeakOrder(Digraph):
         else:
             showRelation = self.relation
             
-        self.showRelationTable(actionsSubset=actionsList,\
+        Digraph.showRelationTable(self,actionsSubset=actionsList,\
                                 relation=showRelation,\
                                 Sorted=False,\
                                 ReflexiveTerms=False)

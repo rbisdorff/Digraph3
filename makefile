@@ -65,55 +65,101 @@ verboseTests:
 
 digraphsTests:
 		cp digraphs.py test/
-		cp outrankingDigraphs.py test/
 		cp perfTabs.py test/
+		cp outrankingDigraphs.py test/
+		cp sortingDigraphs.py test/
+		cp votingDigraphs.py test/
+		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
 		(cd test; nosetests3 -v noseTestsDigraph.py)
 
 verboseDigraphsTests:
 		cp digraphs.py test/
 		cp perfTabs.py test/
-		(cd test; nosetests3 -vs noseTestsDigraph.py)
-
-graphsTests:
-		cp graphs.py test/
-		cp digraphs.py test/
-		(cd test; nosetests3 -v noseTestsGraph.py)
-
-verboseGraphsTests:
-		cp graphs.py test/
-		cp digraphs.py test/
-		(cd test; nosetests3 -vs noseTestsGraph.py)
-
-perfTabsTests:
-		cp digraphs.py test/
-		cp outrankingDigraphs.py test/
-		cp perfTabs.py test/
-		(cd test; nosetests3 -v noseTestsPerfTab.py)
-
-verbosePerfTabsTests:
-		cp digraphs.py test/
-		cp outrankingDigraphs.py test/
-		cp perfTabs.py test/
-		(cd test; nosetests3 -vs noseTestsPerfTab.py)
-
-outrankingDigraphsTests:
-		cp digraphs.py test/
-		cp outrankingDigraphs.py test/
-		cp perfTabs.py test/
-		(cd test; nosetests3 -v noseTestsOutrankingDigraph.py)
-
-verboseOutrankingDigraphsTests:
-		cp digraphs.py test/
-		cp outrankingDigraphs.py test/
-		cp perfTabs.py test/
-		(cd test; nosetests3 -vs noseTestsOutrankingDigraph.py)
-
-sortingDigraphsTests:
-		cp digraphs.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
 		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
+		(cd test; nosetests3 -vs noseTestsDigraph.py)
+
+graphsTests:
+		cp digraphs.py test/
+		cp perfTabs.py test/
+		cp outrankingDigraphs.py test/
+		cp sortingDigraphs.py test/
+		cp votingDigraphs.py test/
+		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
+		(cd test; nosetests3 -v noseTestsGraph.py)
+
+verboseGraphsTests:
+		cp digraphs.py test/
+		cp perfTabs.py test/
+		cp outrankingDigraphs.py test/
+		cp sortingDigraphs.py test/
+		cp votingDigraphs.py test/
+		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
+		(cd test; nosetests3 -vs noseTestsGraph.py)
+
+perfTabsTests:
+		cp digraphs.py test/
+		cp perfTabs.py test/
+		cp outrankingDigraphs.py test/
+		cp sortingDigraphs.py test/
+		cp votingDigraphs.py test/
+		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
+		(cd test; nosetests3 -v noseTestsPerfTab.py)
+
+verbosePerfTabsTests:
+		cp digraphs.py test/
+		cp perfTabs.py test/
+		cp outrankingDigraphs.py test/
+		cp sortingDigraphs.py test/
+		cp votingDigraphs.py test/
+		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
+		(cd test; nosetests3 -vs noseTestsPerfTab.py)
+
+outrankingDigraphsTests:
+		cp digraphs.py test/
+		cp perfTabs.py test/
+		cp outrankingDigraphs.py test/
+		cp sortingDigraphs.py test/
+		cp votingDigraphs.py test/
+		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
+		(cd test; nosetests3 -v noseTestsOutrankingDigraph.py)
+
+verboseOutrankingDigraphsTests:
+		cp digraphs.py test/
+		cp perfTabs.py test/
+		cp outrankingDigraphs.py test/
+		cp sortingDigraphs.py test/
+		cp votingDigraphs.py test/
+		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
+		(cd test; nosetests3 -vs noseTestsOutrankingDigraph.py)
+
+sortingDigraphsTests:
+		cp digraphs.py test/
+		cp perfTabs.py test/
+		cp outrankingDigraphs.py test/
+		cp sortingDigraphs.py test/
+		cp votingDigraphs.py test/
+		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
 		(cd test; nosetests3 -v noseTestsSortingDigraph.py)
 
 verboseSortingDigraphsTests:
@@ -123,6 +169,8 @@ verboseSortingDigraphsTests:
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
 		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
 		(cd test; nosetests3 -vs noseTestsSortingDigraph.py)
 
 votingDigraphsTests:
@@ -131,22 +179,31 @@ votingDigraphsTests:
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
+		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
 		(cd test; nosetests3 -v noseTestsVotingDigraph.py)
 
 verboseVotingDigraphsTests:
 		cp digraphs.py test/
 		cp perfTabs.py test/
-		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
-		cp linearOrders.py test/
-		(cd test; nosetests3 -vs noseTestsVotingDigraph.py)
-
-linearOrdersTests:
-		cp digraphs.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
 		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
+		(cd test; nosetests3 -vs noseTestsVotingDigraph.py)
+
+linearOrdersTests:
+		cp digraphs.py test/
+		cp perfTabs.py test/
+		cp outrankingDigraphs.py test/
+		cp sortingDigraphs.py test/
+		cp votingDigraphs.py test/
+		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
 		(cd test; nosetests3 -v noseTestsLinearOrder.py)
 
 verboseLinearOrdersTests:
@@ -156,6 +213,8 @@ verboseLinearOrdersTests:
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
 		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
 		(cd test; nosetests3 -vs noseTestsLinearOrder.py)
 
 weakOrdersTests:

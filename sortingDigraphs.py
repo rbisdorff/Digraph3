@@ -22,6 +22,7 @@
 from digraphs import *
 from outrankingDigraphs import *
 from sortingDigraphs import *
+from weakOrders import *
 
 class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     """
@@ -241,7 +242,6 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 for y in self.profileLimits:
                     for x in self.actions:
                         self.relation[x][y] = Med
-
 
         # init general digraph Data
         self.order = len(self.actions)
@@ -782,7 +782,7 @@ class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
             print('Determinateness : %.3f (%.3f)' % (corr['determination'],gdeter))
             print('Execution time  : %.4f sec.' % (t1-t0))
         
-class QuantilesSortingDigraph(SortingDigraph):
+class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
     """
     Specialisation of the sortingDigraph Class
     for sorting of alternatives into quantiles delimited ordered classes.
@@ -977,9 +977,20 @@ class QuantilesSortingDigraph(SortingDigraph):
                     for x in self.actions:
                         self.relation[x][y] = Med
 
+        # compute weak ordering
+        sortingRelation = self.computeSortingRelation(Debug=Debug)
+        for x in self.actionsOrig:
+            for y in self.actionsOrig:
+                self.relation[x][y] = sortingRelation[x][y]
 
-        # init general digraph Data
+        # reset original action set
+        self.actions = self.actionsOrig
         self.order = len(self.actions)
+
+        # compute weak ordering by choosing
+        self.computeRankingByChoosing()
+        
+        # init general digraph Data
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
@@ -1097,7 +1108,42 @@ class QuantilesSortingDigraph(SortingDigraph):
             html += '</table>'
             return html
 
+    def computeSortingRelation(self,categoryContents=None,Debug=False):
+        """
+        constructs a bipolar sorting relation using the category contents.
+        """
+        if categoryContents == None:
+            categoryContents = self.computeCategoryContents()
+        categoryKeys = self.orderedCategoryKeys()
 
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        actions = [x for x in self.actionsOrig]
+        currActions = set(actions)
+        sortingRelation = {}
+        for x in actions:
+            sortingRelation[x] = {}
+            for y in actions:
+                sortingRelation[x][y] = Med
+                
+        if Debug:
+            print('categoryContents',categoryContents)
+        for i in categoryKeys:
+            ibch = set(categoryContents[i])
+            ribch = set(currActions) - ibch
+            if Debug:
+                print('ibch,ribch',ibch,ribch)
+            for x in ibch:
+                for y in ibch:
+                    sortingRelation[x][y] = Med
+                    sortingRelation[y][x] = Med
+                for y in ribch:
+                    sortingRelation[x][y] = Min
+                    sortingRelation[y][x] = Max
+            currActions = currActions - ibch
+        return sortingRelation
+           
 #----------test SortingDigraph class ----------------
 if __name__ == "__main__":
     from time import time
@@ -1119,16 +1165,22 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    #t = RandomCBPerformanceTableau(numberOfActions=50)
+    #t = RandomCBPerformanceTableau(numberOfActions=20)
     #t.saveXMCDA2('test')
-    #t = XMCDA2PerformanceTableau('test')
-    t = XMCDA2PerformanceTableau('uniSorting')
-    s0 = QuantilesSortingDigraph(t,limitingQuantiles="septiles",
+    t = XMCDA2PerformanceTableau('test')
+    #t = XMCDA2PerformanceTableau('uniSorting')
+    s0 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
                                 LowerClosed=True,
                                 Robust=False,Debug=False)
     print(s0.categories)
     s0.showSorting(Reverse=True)
     s0.showSorting(Reverse=False)
+    sortingRelation = s0.computeSortingRelation()
+    #s0.showRelationTable(actionsSubset=s0.actionsOrig,relation=sortingRelation)
+    s0.showOrderedRelationTable()
+    s0.showWeakOrder()
+    s0.exportGraphViz(graphType="png")
+    
 
 ###############   scratch #########################
 
