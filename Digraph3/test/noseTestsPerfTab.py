@@ -132,7 +132,7 @@ def testCoalitionsPerformanceTableau():
     g.computeRankingByChoosing(CoDual=False)
     g.showRankingByChoosing()
     prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
-    prg.showPreOrder()
+    prg.showWeakOrder()
     print(g.computeOrdinalCorrelation(prg))
 
 def testRandomS3PerformanceTableau():
@@ -205,7 +205,7 @@ def testStringIOXMCDA2Encoding():
         exit(1)
 
 def testMajorityQuantilesRanking():
-    print('*------ test majority qualtines extraction and ranking ----*')
+    print('*------ test majority qualtiles extraction and ranking ----*')
     t = RandomCBPerformanceTableau(numberOfCriteria=7,numberOfActions=6,weightDistribution='random')
     t.showStatistics()
     t.showPerformanceTableau()
