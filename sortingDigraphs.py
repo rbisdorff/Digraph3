@@ -1147,6 +1147,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
 #----------test SortingDigraph class ----------------
 if __name__ == "__main__":
     from time import time
+    from perfTabs import *
     from outrankingDigraphs import *
     from sortingDigraphs import *
     print("""
@@ -1165,10 +1166,11 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    #t = RandomCBPerformanceTableau(numberOfActions=20)
-    #t.saveXMCDA2('test')
-    t = XMCDA2PerformanceTableau('test')
-    #t = XMCDA2PerformanceTableau('uniSorting')
+##    t = RandomCBPerformanceTableau(numberOfActions=10)
+##    t.saveXMCDA2('test')
+##    t = XMCDA2PerformanceTableau('test')
+##    t.showQuantileSort()
+    t = XMCDA2PerformanceTableau('uniSorting')
     s0 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
                                 LowerClosed=True,
                                 Robust=False,Debug=False)
@@ -1177,10 +1179,11 @@ if __name__ == "__main__":
     s0.showSorting(Reverse=False)
     sortingRelation = s0.computeSortingRelation()
     #s0.showRelationTable(actionsSubset=s0.actionsOrig,relation=sortingRelation)
-    s0.showOrderedRelationTable()
+    #s0.showOrderedRelationTable()
     s0.showWeakOrder()
-    s0.exportGraphViz(graphType="png")
-    
+    s0.exportGraphViz(graphType="pdf")
+    g = BipolarOutrankingDigraph(t)
+    print(g.computeOrdinalCorrelation(s0))    
 
 ###############   scratch #########################
 
