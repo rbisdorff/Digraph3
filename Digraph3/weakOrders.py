@@ -152,6 +152,16 @@ class WeakOrder(Digraph):
         """
         import os
         from copy import deepcopy
+
+        def _safeName(t0):
+            t = t0.split(sep="-")
+            t1 = t[0]
+            n = len(t)
+            if n > 1:
+                for i in range(1,n):
+                    t1 += '%s%s' % ('_',t[i])
+            return t1
+                
         if direction == 'best':
             try:
                 rankingByChoosing = self.rankingByBestChoosing['result']
@@ -195,7 +205,7 @@ class WeakOrder(Digraph):
             except:
                 nodeName = str(x)
             node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
-                   % (str(x),nodeName,fontSize)
+                   % (str(_safeName(x)),_safeName(nodeName),fontSize)
             fo.write(node)
         # same ranks for Hasses equivalence classes
         k = len(rankingByChoosing)
@@ -203,7 +213,7 @@ class WeakOrder(Digraph):
             sameRank = '{ rank = same; '
             ich = rankingByChoosing[i][1]
             for x in ich:
-                sameRank += str(x)+'; '
+                sameRank += str(_safeName(x))+'; '
             sameRank += '}\n'
             print(i,sameRank)
             fo.write(sameRank)
@@ -220,11 +230,11 @@ class WeakOrder(Digraph):
                         #edge = 'n'+str(i+1)+'-> n'+str(i+2)+' [dir=forward,style="setlinewidth(1)",color=black, arrowhead=normal] ;\n'
                         if self.relation[x][y] > self.valuationdomain['med']:
                             arcColor = 'black'
-                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (x,y,1,arcColor)
+                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (_safeName(x),_safeName(y),1,arcColor)
                             fo.write(edge)
                         elif self.relation[y][x] > self.valuationdomain['med']:
                             arcColor = 'black'
-                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (y,x,1,arcColor)
+                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (_safeName(y),_safeName(x),1,arcColor)
                             fo.write(edge)
                                                   
         fo.write('}\n \n')
@@ -784,9 +794,9 @@ if __name__ == "__main__":
     import weakOrders
     from time import time
 
-    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=30)
-    t.saveXMCDA2('test')
+    #t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+    #                             numberOfActions=10)
+    #t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
     #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
