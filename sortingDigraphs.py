@@ -829,27 +829,11 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
 
         # actionsOrig = self.actionsOrig
 
-        #  input the limiting quantiles
-        if limitingQuantiles == None or limitingQuantiles == 'quartiles':
-            limitingQuantiles = [Decimal('0.0'),Decimal('0.25'),\
-                                 Decimal('0.5'),Decimal('0.75'),Decimal('1.0')]
-            self.name = 'sorting_with_quartile_limits'
-        elif limitingQuantiles == 'deciles':
-            limitingQuantiles = self._computeQuantiles(10)
-##            limitingQuantiles = [Decimal('0.0'),Decimal('0.1'),Decimal('0.2'),\
-##                                 Decimal('0.3'),Decimal('0.4'),Decimal('0.5'),\
-##                                 Decimal('0.6'),Decimal('0.7'),\
-##                                 Decimal('0.8'),Decimal('0.9'),Decimal('1.0')]
-##            self.name = 'sorting_with_decile_limits'
-        elif limitingQuantiles == 'quintiles':
-            limitingQuantiles = self._computeQuantiles(5)
-            #self.name = 'sorting_with_quintile_limits'
-        elif limitingQuantiles == 'septiles':
-            limitingQuantiles = self._computeQuantiles(7)
-            #self.name = 'sorting_with_septile_limits'
-             
-        else:
+        #  compute the limiting quantiles
+        if isinstance(limitingQuantiles,list):
             self.name = 'sorting_with_given_quantiles'
+        else:
+            limitingQuantiles = self._computeQuantiles(limitingQuantiles)
         self.limitingQuantiles = deepcopy(limitingQuantiles)
 
         if Debug:
@@ -1006,10 +990,34 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def _computeQuantiles(self,n):
+    def _computeQuantiles(self,x):
         """
         renders the limiting quantiles
         """
+        if isinstance(x,int):
+            n = x
+        elif x == None:
+            n = 4
+        elif x == 'bitiles':
+            n = 2
+        elif x == 'tritiles':
+            n = 3
+        elif x == 'quartiles':
+            n = 4
+        elif x == 'quintiles':
+            n = 5
+        elif x == 'sextiles':
+            n = 6
+        elif x == 'septiles':
+            n = 7
+        elif x == 'octiles':
+            n = 8
+        elif x == 'deciles':
+            n = 10
+        elif x == 'dodeciles':
+            n = 20
+        elif x == 'centiles':
+            n = 100
         limitingQuantiles = []
         for i in range(n+1):
             limitingQuantiles.append( Decimal(str(i)) / Decimal(str(n)) )
@@ -1178,13 +1186,14 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    t = RandomCBPerformanceTableau(numberOfActions=15,weightDistribution='equiobjectives')
+    t = RandomCBPerformanceTableau(numberOfActions=25,weightDistribution='equiobjectives')
 #    t = RandomPerformanceTableau(numberOfActions=15)
     t.saveXMCDA2('test')
-    t = XMCDA2PerformanceTableau('test')
+#    t = XMCDA2PerformanceTableau('test')
     t.showQuantileSort()
 #    t = XMCDA2PerformanceTableau('uniSorting')
-    s0 = QuantilesSortingDigraph(t,limitingQuantiles="quintiles",
+#    t = XMCDA2PerformanceTableau('spiegel2004')
+    s0 = QuantilesSortingDigraph(t,limitingQuantiles=100,
                                 LowerClosed=True,
                                 Debug=False)
     #print(s0.categories)
@@ -1193,18 +1202,18 @@ if __name__ == "__main__":
 ##    sortingRelation = s0.computeSortingRelation()
 ##    #s0.showRelationTable(actionsSubset=s0.actionsOrig,relation=sortingRelation)
 ##    #s0.showOrderedRelationTable()
-##    s0.showWeakOrder()
+    s0.showWeakOrder()
     s0.exportGraphViz('test1',graphType="pdf")
 ##    g = BipolarOutrankingDigraph(t)
 ##    print(g.computeOrdinalCorrelation(s0))    
-    s1 = QuantilesSortingDigraph(t,limitingQuantiles="quintiles",
-                                LowerClosed=True,
-                                outrankingType='likely',
-                                Debug=False)
-    #print(s1.categories)
-    s1.showSorting(Reverse=True)
-##    s0.showSorting(Reverse=False)
-    s1.exportGraphViz('test2',graphType="pdf")
+##    s1 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
+##                                LowerClosed=True,
+##                                outrankingType='likely',
+##                                Debug=False)
+##    #print(s1.categories)
+##    s1.showSorting(Reverse=True)
+####    s0.showSorting(Reverse=False)
+##    s1.exportGraphViz('test2',graphType="pdf")
 
 ###############   scratch #########################
 
