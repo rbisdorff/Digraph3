@@ -117,7 +117,8 @@ def testQuantilesSortingDigraph():
     t.saveXMCDA2('test')
     s0 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
                                 LowerClosed=True,
-                                Robust=False,Debug=False)
+                                outrankingType='bipolar',
+                                Debug=False)
     print(s0.categories)
     s0.showSorting(Reverse=True)
     s0.showSorting(Reverse=False)

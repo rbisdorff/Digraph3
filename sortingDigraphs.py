@@ -794,7 +794,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                  hasNoVeto=False,
                  minValuation=-100.0,
                  maxValuation=100.0,
-                 Robust=False,
+                 outrankingType = "bipolar",
                  Debug=False):
         """
         Constructor for QuantilesSortingDigraph instances.
@@ -938,10 +938,22 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         self.convertEvaluationFloatToDecimal()
 
         # construct outranking relation
-        if Robust:
+        if outrankingType == "robust":
             g = RobustOutrankingDigraph(self)
             self.valuationdomain = deepcopy(g.valuationdomain)
             self.relation = deepcopy(g.relation)
+        elif outrankingType == "likely":
+            g = StochasticBipolarOutrankingDigraph(self,
+                                                   sampleSize = 50,
+                                                   samplingSeed = None,
+                                                   hasNoVeto = hasNoVeto,
+                                                   Debug = Debug,
+                                                   spread = 1.0,
+                                                   likelihood = 0.9,
+                                                   distribution = 'triangular')
+            self.valuationdomain = deepcopy(g.valuationdomain)
+            self.relation = deepcopy(g.relation)
+            
         else:
             Min = Decimal('%.4f' % minValuation)
             Max = Decimal('%.4f' % maxValuation)
@@ -1166,24 +1178,33 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-##    t = RandomCBPerformanceTableau(numberOfActions=10)
-##    t.saveXMCDA2('test')
-##    t = XMCDA2PerformanceTableau('test')
-##    t.showQuantileSort()
-    t = XMCDA2PerformanceTableau('uniSorting')
-    s0 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
+    t = RandomCBPerformanceTableau(numberOfActions=15,weightDistribution='equiobjectives')
+#    t = RandomPerformanceTableau(numberOfActions=15)
+    t.saveXMCDA2('test')
+    t = XMCDA2PerformanceTableau('test')
+    t.showQuantileSort()
+#    t = XMCDA2PerformanceTableau('uniSorting')
+    s0 = QuantilesSortingDigraph(t,limitingQuantiles="quintiles",
                                 LowerClosed=True,
-                                Robust=False,Debug=False)
-    print(s0.categories)
+                                Debug=False)
+    #print(s0.categories)
     s0.showSorting(Reverse=True)
-    s0.showSorting(Reverse=False)
-    sortingRelation = s0.computeSortingRelation()
-    #s0.showRelationTable(actionsSubset=s0.actionsOrig,relation=sortingRelation)
-    #s0.showOrderedRelationTable()
-    s0.showWeakOrder()
-    s0.exportGraphViz(graphType="pdf")
-    g = BipolarOutrankingDigraph(t)
-    print(g.computeOrdinalCorrelation(s0))    
+##    s0.showSorting(Reverse=False)
+##    sortingRelation = s0.computeSortingRelation()
+##    #s0.showRelationTable(actionsSubset=s0.actionsOrig,relation=sortingRelation)
+##    #s0.showOrderedRelationTable()
+##    s0.showWeakOrder()
+    s0.exportGraphViz('test1',graphType="pdf")
+##    g = BipolarOutrankingDigraph(t)
+##    print(g.computeOrdinalCorrelation(s0))    
+    s1 = QuantilesSortingDigraph(t,limitingQuantiles="quintiles",
+                                LowerClosed=True,
+                                outrankingType='likely',
+                                Debug=False)
+    #print(s1.categories)
+    s1.showSorting(Reverse=True)
+##    s0.showSorting(Reverse=False)
+    s1.exportGraphViz('test2',graphType="pdf")
 
 ###############   scratch #########################
 
