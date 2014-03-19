@@ -2764,7 +2764,7 @@ class Digraph(object):
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
 
-    def exportD3(self,fileName=None, noSilent=True):
+    def exportD3(self,fileName=None, noSilent=True, debug = False):
         """
         export an html file with a dynamic D3 forced graph .
         """
@@ -2772,7 +2772,7 @@ class Digraph(object):
         import json
 
         if noSilent:
-            print('*---- exporting a html file ---------*')
+            print('*---- exporting as a html file ---------*')
         actionkeys = [x for x in self.actions]
         n = len(actionkeys)
         relation = self.relation
@@ -2786,37 +2786,67 @@ class Digraph(object):
         if noSilent:
             print('Exporting to '+ htmlName)
         
-        #dataset
-        #Example: dataset= '{"nodes":[{"name":"Gary","group":1},{"name":"Pit","group":1},],"links":[{"source":1,"target":0,"value":1},]}'
+        # Dataset
+        # Example: dataset= '{"nodes":[{"name":"Gary","group":1},{"name":"Pit","group":1},],"links":[{"source":1,"target":0,"value":1},]}'
         dataset = {"nodes":[],"links":[]}
         for node in self.actions:
-            dataset["nodes"].append({"name": node ,"group":1})
+            dataset["nodes"].append({"name": str(node) ,"group":1, "comment": self.actions[node]["comment"]})
         for key in self.relation:
             for link in self.relation[key]:
                 if link != key:
                     if link > key:
+                        # Arrow types:
+                        # r(a,b) > Med & r(b,a) < Med  a  --> b :0 done
+                        # r(a,b) < Med & r(b,a) > Med  a  <-- b :1 done
+                        # r(a,b) > Med & r(b,a) > Med  a <--> b :2 done
+                        # r(a,b) > Med & r(b,a) = Med  a o--> b :3 done
+                        # r(a,b) = Med & r(b,a) > Med  a <--o b :4 done
+                        # r(a,b) < Med & r(b,a) < Med  a      b :-1 done
+                        # r(a,b) < Med & r(b,a) = Med  a o..  b :5 done 
+                        # r(a,b) = Med & r(b,a) < Med  a  ..o b :6 done
+                        # r(a,b) = Med = r(b,a)        a o..o b :7 done
                         if self.relation[key][link] > Med:
-                           dataset["links"].append({"source":int(key)-1 , "target" : int(link)-1, "value":2}) 
+                            if self.relation[link][key] < Med:
+                                dataset["links"].append({"source":str(key) , "target" : str(link), "type":0})
+                            if self.relation[link][key] > Med:
+                                dataset["links"].append({"source":str(key) , "target" : str(link), "type":2})
+                            if self.relation[link][key] == Med:
+                                dataset["links"].append({"source":str(key) , "target" : str(link), "type":3})
+                        if self.relation[key][link] < Med:
+                            if self.relation[link][key] < Med:
+                                dataset["links"].append({"source":str(key) , "target" : str(link), "type": -1})
+                            if self.relation[link][key] > Med:
+                                dataset["links"].append({"source":str(key) , "target" : str(link), "type":1})
+                            if self.relation[link][key] == Med:
+                                dataset["links"].append({"source":str(key) , "target" : str(link), "type":5})
+                        if self.relation[key][link] == Med:
+                            if self.relation[link][key] == Med:
+                                dataset["links"].append({"source":str(key) , "target" : str(link), "type": 7})
+                            if self.relation[link][key] < Med:
+                                dataset["links"].append({"source":str(key) , "target" : str(link), "type": 6})
+                            if self.relation[link][key] > Med:
+                                dataset["links"].append({"source":str(key) , "target" : str(link), "type": 4})    
+        
         do = open("dataset.json",'w')
         do.write(json.dumps(dataset,indent=4 * ' '))
         do.close()
         fo = open(htmlName,'w')
+
         fo.write('<!DOCTYPE html>\n')
         fo.write('<meta charset="utf-8">\n')
-        fo.write('<script src="http://d3js.org/d3.v3.js"></script>\n')
+        fo.write('<script src="./js/d3.v3.js"></script>\n')
         fo.write('<style>\n')
 
         fo.write('path.link {\n')
         fo.write('fill: none;\n')
-        #dotted line
-        fo.write('stroke-dasharray: 3,3;\n')
-        #
+        fo.write('cursor: pointer;')
         fo.write('stroke: #000;\n')
-        fo.write('stroke-width: 1.5px;\n')
+        fo.write('stroke-width: 2px;\n')
         fo.write('}\n')
 
         fo.write('circle {\n')
-        fo.write('fill: #ccc;\n')
+        fo.write('fill: orange;\n')
+        fo.write('cursor: pointer;\n')
         fo.write('stroke: #fff;\n')
         fo.write('stroke-width: 1.5px;\n')
         fo.write('}\n')
@@ -2836,8 +2866,10 @@ class Digraph(object):
         fo.write('d3.json("dataset.json", function(error, links) {\n')
         fo.write('var nodes = links.nodes;\n')
 
-        fo.write('var width = 960,\n')
-        fo.write('  height = 500;0\n')
+       
+
+        fo.write('var width = 900,\n')
+        fo.write('  height = 700;0\n')
 
         fo.write('var force = d3.layout.force()\n')
         fo.write('  .nodes(d3.values(nodes))\n')
@@ -2852,66 +2884,147 @@ class Digraph(object):
         fo.write('  .attr("width", width)\n')
         fo.write('  .attr("height", height);\n')
 
-        #Arrows go here
+        # Arrows go here
         fo.write('svg.append("svg:defs").selectAll("marker")\n')
-        fo.write('  .data(["end"])\n')      
+        fo.write('  .data(["end-full"])\n')      
         fo.write('  .enter().append("svg:marker")\n')    
         fo.write('  .attr("id", String)\n')
         fo.write('  .attr("viewBox", "0 -5 10 10")\n')
-        fo.write('  .attr("refX", 28)\n')
-        fo.write('  .attr("refY", -1.0)\n')
+        fo.write('  .attr("refX", 23)\n')
+        fo.write('  .attr("refY", -0.6)\n')
         fo.write('  .attr("markerWidth", 6)\n')
         fo.write('  .attr("markerHeight", 6)\n')
         fo.write('  .attr("orient", "auto")\n')
         fo.write('  .append("svg:path")\n')
-        fo.write('  .attr("d", "M0,-5L10,0L0,5");\n')
+        fo.write('  .attr("d", "M0,-5L10,0L0,5z");\n')
 
         fo.write('svg.append("svg:defs").selectAll("marker")\n')
-        fo.write('  .data(["start"])\n')      
+        fo.write('  .data(["end-empty"])\n')      
         fo.write('  .enter().append("svg:marker")\n')    
         fo.write('  .attr("id", String)\n')
         fo.write('  .attr("viewBox", "0 -5 10 10")\n')
-        fo.write('  .attr("refX", -18)\n')
-        fo.write('  .attr("refY", -1.0)\n')
+        fo.write('  .attr("refX", 23)\n')
+        fo.write('  .attr("refY", -0.6)\n')
         fo.write('  .attr("markerWidth", 6)\n')
         fo.write('  .attr("markerHeight", 6)\n')
         fo.write('  .attr("orient", "auto")\n')
         fo.write('  .append("svg:path")\n')
         fo.write('  .attr("stroke", "black")')
-        fo.write('  .attr("fill", "none")')
+        fo.write('  .attr("fill", "white")')
+        fo.write('  .attr("stroke-width", 2)')
+        fo.write('  .attr("d", "M0,-5L10,0L0,5z");\n')
+
+        fo.write('svg.append("svg:defs").selectAll("marker")\n')
+        fo.write('  .data(["start-full"])\n')      
+        fo.write('  .enter().append("svg:marker")\n')    
+        fo.write('  .attr("id", String)\n')
+        fo.write('  .attr("viewBox", "0 -5 10 10")\n')
+        fo.write('  .attr("refX", -13)\n')
+        fo.write('  .attr("refY", -0.6)\n')
+        fo.write('  .attr("markerWidth", 6)\n')
+        fo.write('  .attr("markerHeight", 6)\n')
+        fo.write('  .attr("orient", "auto")\n')
+        fo.write('  .append("svg:path")\n')
+        fo.write('  .attr("d", "M10,-5L0,0L10,5z");\n')
+
+        fo.write('svg.append("svg:defs").selectAll("marker")\n')
+        fo.write('  .data(["start-empty"])\n')      
+        fo.write('  .enter().append("svg:marker")\n')    
+        fo.write('  .attr("id", String)\n')
+        fo.write('  .attr("viewBox", "0 -5 10 10")\n')
+        fo.write('  .attr("refX", -13)\n')
+        fo.write('  .attr("refY", -0.6)\n')
+        fo.write('  .attr("markerWidth", 6)\n')
+        fo.write('  .attr("markerHeight", 6)\n')
+        fo.write('  .attr("orient", "auto")\n')
+        fo.write('  .append("svg:path")\n')
+        fo.write('  .attr("stroke", "black")')
+        fo.write('  .attr("fill", "white")')
         fo.write('  .attr("stroke-width", 2)')
         fo.write('  .attr("d", "M10,-5L0,0L10,5z");\n')
 
-        
-
-# add the links and the arrows
+        # Add the links and the arrows
         fo.write('var path = svg.append("svg:g").selectAll("path")\n')
         fo.write('  .data(force.links())\n')
         fo.write('  .enter().append("svg:path")\n')
         fo.write('  .attr("class", function(d) { return "link " + d.type; })\n')
         fo.write('  .attr("class", "link")\n')
-        fo.write('  .attr("marker-end", "url(#end)")\n')
-        fo.write('  .attr("marker-start", "url(#start)");\n')
+        fo.write('  .attr("stroke-dasharray", function(d) { if(d.type == 5 || d.type ==6|| d.type ==7) return "3,3";})\n')
+        fo.write('  .attr("marker-end", function(d) { if(d.type == 4 || d.type ==6|| d.type ==7) return "url(#end-empty)"; if(d.type == 0 || d.type ==2|| d.type ==3) return "url(#end-full)";})\n')
+        fo.write('  .attr("marker-start", function(d) { if(d.type == 3|| d.type ==5|| d.type ==7) return "url(#start-empty)"; if(d.type == 1 || d.type ==2|| d.type ==4) return "url(#start-full)";});\n')
 
 
-# define the nodes
+        # define the nodes
         fo.write('var node = svg.selectAll(".node")\n')
         fo.write('  .data(force.nodes())\n')
         fo.write('  .enter().append("g")\n')
         fo.write('  .attr("class", "node")\n')
+        fo.write('  .on("dblclick", function(d) { alert("Name: " + d.name + "\\nComment: "+ d.comment); })\n')
         fo.write('  .call(force.drag);\n')
 
-# add the nodes
-        fo.write('node.append("circle")\n')
-        fo.write('.attr("r", 15);\n')
+        # Focus a node code
+        fo.write('var linkedByIndex = {};')
+        fo.write('var focusNode = function(d) {\n')
+        fo.write('var circle = d3.select(this);\n')
 
-# add the text 
+
+        fo.write('links.links.forEach(function(d) {')
+        fo.write('linkedByIndex[d.source.index + "," + d.target.index] = true;')
+        fo.write('});')
+        fo.write('node\n')
+        fo.write('  .transition(500)\n')
+        fo.write('  .style("opacity", function(o) {\n')
+        fo.write('      return isConnected(o, d) ? 1.0 : 0.2 ;})\n')
+        fo.write('  .style("fill", function(o) {\n')
+        fo.write('      if (isConnected(o, d)) {\n')
+        fo.write('          fillcolor = "green";\n')
+        fo.write('      }')
+        fo.write('      else if (isEqual(o, d)) {\n')
+        fo.write('          fillcolor = "hotpink";\n')
+        fo.write('      } else {\n')
+        fo.write('          fillcolor = "#000";\n')
+        fo.write('      }\n')
+        fo.write('  return fillcolor;\n')
+        fo.write('});\n')
+
+        fo.write('path\n')
+        fo.write('  .transition(500)\n')
+        fo.write('  .style("stroke-opacity", function(o) {\n')
+        fo.write('      return o.source === d || o.target === d ? 1 : 0.2;\n')
+        fo.write('  })\n')
+        fo.write('  .transition(500)\n')
+        fo.write('  .style("opacity", function(o) {\n')
+        fo.write('      return o.source === d || o.target === d ? 1 : 0.2;\n')
+        fo.write('});\n')
+        
+
+
+        fo.write('circle\n')
+        fo.write('  .transition(500)\n')
+        fo.write('}\n')
+        fo.write('function isConnected(a, b) {\n')
+        fo.write('  return linkedByIndex[b.index + "," + a.index] || linkedByIndex[a.index + "," + b.index] || isEqual(a,b);\n')
+        fo.write('}\n')
+        fo.write('function isEqual(a, b) {\n')
+        fo.write('  return a.index == b.index;\n')
+        fo.write('}\n')
+
+        # add the nodes
+        fo.write('node.append("circle")\n')
+        fo.write('  .attr("r", 15)\n')
+        fo.write('  .on("click", focusNode);')
+
+
+        # add the text 
         fo.write('node.append("text")\n')
         fo.write('  .attr("x", 0)\n')
-        fo.write('.attr("dy", ".35em")\n')
-        fo.write('.text(function(d) { return d.name; });\n')
+        fo.write('  .attr("dy", ".35em")\n')
+        fo.write('  .text(function(d) { return d.name; });\n')
 
-#add the curvy lines
+        
+
+
+        #add the curvy lines
         fo.write('function tick() {\n')
         fo.write('  path.attr("d", function(d) {\n')
         fo.write('      var dx = d.target.x - d.source.x,\n')
@@ -2932,7 +3045,11 @@ class Digraph(object):
         fo.write('</script>\n')
         fo.write('</body>\n')
         fo.write('</html>\n')
-        print(relation)
+        fo.close()
+        if noSilent:
+            print('*---- export done ---------*')
+            if debug:
+                print(self.actionsList)
 
     def savedre(self,name='temp'):
         """
@@ -8079,13 +8196,13 @@ class RandomValuationDigraph(Digraph):
         {'max': Decimal('1.0'), 'min': Decimal('-1.0'),
          'med': Decimal('0.0'), 'hasIntegerValuation': False}
         * ---- Relation Table -----
-          S   |  '1'    '2'	   '3'	  '4'	  '5'	  
+          S   |  '1'    '2'    '3'    '4'     '5'     
          -----|-----------------------------------
-          '1' |  0.00   0.28   0.46	 -0.66	 0.90	 
-          '2' | -0.08   0.00  -0.46	 -0.42	 0.52	 
-          '3' |  0.84  -0.10   0.00	 -0.54	 0.58	 
-          '4' |  0.90   0.88   0.90	  0.00	-0.38	 
-          '5' | -0.50   0.64   0.42	 -0.94	 0.00	 
+          '1' |  0.00   0.28   0.46  -0.66   0.90    
+          '2' | -0.08   0.00  -0.46  -0.42   0.52    
+          '3' |  0.84  -0.10   0.00  -0.54   0.58    
+          '4' |  0.90   0.88   0.90   0.00  -0.38    
+          '5' | -0.50   0.64   0.42  -0.94   0.00    
         *--- Connected Components ---*
         1: ['1', '2', '3', '4', '5']
         Neighborhoods:
