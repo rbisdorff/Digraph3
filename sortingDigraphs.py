@@ -860,10 +860,10 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
             categories[str(k)] = {'name':'[%.2f - <['\
                 %(limitingQuantiles[k-1]), 'order':k}                 
         else:
-            categories[str(0)] = {'name':']< - %.2f]'\
+            categories[str(1)] = {'name':']< - %.2f]'\
                 %(limitingQuantiles[1]), 'order':1}                 
             for i in range(1,k):
-                categories[str(i)] = {'name':']%.2f - %.2f]'\
+                categories[str(i+1)] = {'name':']%.2f - %.2f]'\
                 %(limitingQuantiles[i],limitingQuantiles[i+1]), 'order':i+1}
             
         self.categories = deepcopy(categories)
@@ -1024,7 +1024,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         self.name = 'sorting_with_%d-tile_limits' % n
         return limitingQuantiles
                                          
-    def _computeLimitingQuantiles(self,g,Debug=False):
+    def _computeLimitingQuantiles(self,g,Debug=True):
         """
         Renders the list of limiting quantiles on criteria g
         """
@@ -1040,15 +1040,23 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         n = len(gValues)
         if Debug:
             print('g,n,gValues',g,n,gValues)
-        nf = Decimal(str(n))
+        nf = Decimal(str(n+1))
         limitingQuantiles = deepcopy(self.limitingQuantiles)
         limitingQuantiles.sort()
+        if Debug:
+            print(limitingQuantiles)
         LowerClosed = self.criteriaCategoryLimits['lowerClosed']
+        if LowerClosed:
+            limitingQuantiles = limitingQuantiles[:-1]
+        else:
+            limitingQuantiles = limitingQuantiles[1:]
+        if Debug:
+            print(limitingQuantiles)
         # computing the quantiles on criterion g
         gQuantiles = []
         if LowerClosed:
             # we ignore the 1.00 quantile and replace it with +infty
-            for q in self.limitingQuantiles[:-1]:
+            for q in self.limitingQuantiles:
                 r = (nf * q)
                 rq = int(floor(r))
                 if Debug:
@@ -1056,34 +1064,33 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                 if rq < (n-1):
                     quantile = gValues[rq] + ((r-rq)*(gValues[rq+1]-gValues[rq]))
                 else:
-                    quantile = gValues[n-1]
+                    if self.criteria[g]['preferenceDirection'] == 'min':
+                        quantile = Decimal('100.0')
+                    else:
+                        quantile = Decimal('200.0')
                 if Debug:
                     print('quantile',quantile)
-                gQuantiles.append(quantile)
-            if self.criteria[g]['preferenceDirection'] == 'min':
-                gQuantiles.append(Decimal('100.0'))
-            else:
-                gQuantiles.append(Decimal('200.0'))
+                gQuantiles.append(quantile)               
 
         else:  # upper closed categories
             # we ignore the quantile 0.0 and replace it with -\infty            
-            if self.criteria[g]['preferenceDirection'] == 'min':
-                gQuantiles = [Decimal('-200.0')]
-            else:
-                gQuantiles = [Decimal('-100.0')]
-            for q in self.limitingQuantiles[1:]:
+            for q in self.limitingQuantiles:
                 r = (nf * q)
                 rq = int(floor(r))
                 if Debug:
                     print('r,rq',r,rq, end=' ')
-                if rq < (n-1):
+                if rq == 0:
+                    if self.criteria[g]['preferenceDirection'] == 'min':
+                        quantile = Decimal('-200.0')
+                    else:
+                        quantile = Decimal('-100.0')
+                elif rq < (n-1):
                     quantile = gValues[rq]\
                                + ((r-rq)*(gValues[rq+1]-gValues[rq]))
                 else:
                     quantile = gValues[n-1]
                 if Debug:
                     print('quantile',quantile)
-                                  
                 gQuantiles.append(quantile)
         if Debug:
             print(g,LowerClosed,self.criteria[g]['preferenceDirection'],gQuantiles)
@@ -1204,16 +1211,16 @@ if __name__ == "__main__":
 #    t = RandomPerformanceTableau(numberOfActions=15)
     #t.saveXMCDA2('test')
 #    t = XMCDA2PerformanceTableau('test')
-    t = PerformanceTableau('ex1perftab')
-    t.showQuantileSort()
-#    t = XMCDA2PerformanceTableau('uniSorting')
+    #t = PerformanceTableau('ex1perftab')
+    #t.showQuantileSort()
+    t = XMCDA2PerformanceTableau('uniSorting')
 #    t = XMCDA2PerformanceTableau('spiegel2004')
-    s0 = QuantilesSortingDigraph(t,limitingQuantiles="quartiles",
-                                LowerClosed=False,
-                                Debug=True)
+    s0 = QuantilesSortingDigraph(t,limitingQuantiles=100,
+                                LowerClosed=True,
+                                Debug=False)
     #print(s0.categories)
     s0.showSorting(Reverse=True)
-##    s0.showSorting(Reverse=False)
+    s0.showSorting(Reverse=False)
 ##    sortingRelation = s0.computeSortingRelation()
 ##    #s0.showRelationTable(actionsSubset=s0.actionsOrig,relation=sortingRelation)
 ##    #s0.showOrderedRelationTable()
