@@ -852,7 +852,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         highValue = 100.00
         # with preference direction = max
         categories = {}
-        k = len(limitingQuantiles)
+        k = len(limitingQuantiles)-1
         if LowerClosed:
             for i in range(0,k-1):
                 categories[str(i+1)] = {'name':'[%.2f - %.2f['\
@@ -860,11 +860,11 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
             categories[str(k)] = {'name':'[%.2f - <['\
                 %(limitingQuantiles[k-1]), 'order':k}                 
         else:
-            categories[str(1)] = {'name':']< - %.2f]'\
-                %(limitingQuantiles[0]), 'order':1}                 
+            categories[str(0)] = {'name':']< - %.2f]'\
+                %(limitingQuantiles[1]), 'order':1}                 
             for i in range(1,k):
-                categories[str(i+1)] = {'name':']%.2f - %.2f]'\
-                %(limitingQuantiles[i-1],limitingQuantiles[i]), 'order':i+1}
+                categories[str(i)] = {'name':']%.2f - %.2f]'\
+                %(limitingQuantiles[i],limitingQuantiles[i+1]), 'order':i+1}
             
         self.categories = deepcopy(categories)
 
@@ -1044,35 +1044,49 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         limitingQuantiles = deepcopy(self.limitingQuantiles)
         limitingQuantiles.sort()
         LowerClosed = self.criteriaCategoryLimits['lowerClosed']
+        # computing the quantiles on criterion g
+        gQuantiles = []
         if LowerClosed:
-            gQuantiles = []
-        else:
-            if self.criteria[g]['preferenceDirection'] == 'min':
-                gQuantiles = [Decimal('-200.0')]
-            else:
-                gQuantiles = [Decimal('-100.0')]
-        for q in self.limitingQuantiles:
-            r = (nf * q)
-            rq = int(floor(r))
-            if Debug:
-                print('r,rq',r,rq, end=' ')
-            if rq < (n-1):
-                quantile = gValues[rq]\
-                           + ((r-rq)*(gValues[rq+1]-gValues[rq]))
-            elif rq == n:
-                quantile = max(gValues)
-                              
-            if Debug:
-                print('quantile',quantile)
-                              
-            gQuantiles.append(quantile)
-        if Debug:
-            print(g,LowerClosed,self.criteria[g]['preferenceDirection'])
-        if LowerClosed:
+            # we ignore the 1.00 quantile and replace it with +infty
+            for q in self.limitingQuantiles[:-1]:
+                r = (nf * q)
+                rq = int(floor(r))
+                if Debug:
+                    print('r,rq',r,rq, end=' ')
+                if rq < (n-1):
+                    quantile = gValues[rq] + ((r-rq)*(gValues[rq+1]-gValues[rq]))
+                else:
+                    quantile = gValues[n-1]
+                if Debug:
+                    print('quantile',quantile)
+                gQuantiles.append(quantile)
             if self.criteria[g]['preferenceDirection'] == 'min':
                 gQuantiles.append(Decimal('100.0'))
             else:
                 gQuantiles.append(Decimal('200.0'))
+
+        else:  # upper closed categories
+            # we ignore the quantile 0.0 and replace it with -\infty            
+            if self.criteria[g]['preferenceDirection'] == 'min':
+                gQuantiles = [Decimal('-200.0')]
+            else:
+                gQuantiles = [Decimal('-100.0')]
+            for q in self.limitingQuantiles[1:]:
+                r = (nf * q)
+                rq = int(floor(r))
+                if Debug:
+                    print('r,rq',r,rq, end=' ')
+                if rq < (n-1):
+                    quantile = gValues[rq]\
+                               + ((r-rq)*(gValues[rq+1]-gValues[rq]))
+                else:
+                    quantile = gValues[n-1]
+                if Debug:
+                    print('quantile',quantile)
+                                  
+                gQuantiles.append(quantile)
+        if Debug:
+            print(g,LowerClosed,self.criteria[g]['preferenceDirection'],gQuantiles)
         return gQuantiles
                 
     def showSorting(self,Reverse=True,isReturningHTML=False,Debug=False):
@@ -1186,16 +1200,17 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    t = RandomCBPerformanceTableau(numberOfActions=25,weightDistribution='equiobjectives')
+    #t = RandomCBPerformanceTableau(numberOfActions=20,numberOfCriteria=1)
 #    t = RandomPerformanceTableau(numberOfActions=15)
-    t.saveXMCDA2('test')
+    #t.saveXMCDA2('test')
 #    t = XMCDA2PerformanceTableau('test')
+    t = PerformanceTableau('ex1perftab')
     t.showQuantileSort()
 #    t = XMCDA2PerformanceTableau('uniSorting')
 #    t = XMCDA2PerformanceTableau('spiegel2004')
-    s0 = QuantilesSortingDigraph(t,limitingQuantiles=100,
-                                LowerClosed=True,
-                                Debug=False)
+    s0 = QuantilesSortingDigraph(t,limitingQuantiles="quartiles",
+                                LowerClosed=False,
+                                Debug=True)
     #print(s0.categories)
     s0.showSorting(Reverse=True)
 ##    s0.showSorting(Reverse=False)
