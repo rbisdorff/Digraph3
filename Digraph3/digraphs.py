@@ -2791,7 +2791,7 @@ class Digraph(object):
         dataset = {"nodes":[],"links":[]}
         for node in self.actions:
         	if(isinstance(self.actions,dict)):
-        		if("comment" in self.actions):
+        		if("comment" in self.actions[node]):
         			dataset["nodes"].append({"name": str(node) ,"group":1, "comment": self.actions[node]["comment"]})
         		else:
 		         	dataset["nodes"].append({"name": str(node) ,"group":1, "comment": "none"})
