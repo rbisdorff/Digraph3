@@ -2785,48 +2785,48 @@ class Digraph(object):
         htmlName = name+'.html'
         if noSilent:
             print('Exporting to '+ htmlName)
-        
+            print(self.relation)
         # Dataset
         # Example: dataset= '{"nodes":[{"name":"Gary","group":1},{"name":"Pit","group":1},],"links":[{"source":1,"target":0,"value":1},]}'
         dataset = {"nodes":[],"links":[]}
         for node in self.actions:
-            dataset["nodes"].append({"name": str(node) ,"group":1, "comment": self.actions[node]["comment"]})
-        for key in self.relation:
-            for link in self.relation[key]:
-                if link != key:
-                    if link > key:
-                        # Arrow types:
-                        # r(a,b) > Med & r(b,a) < Med  a  --> b :0 done
-                        # r(a,b) < Med & r(b,a) > Med  a  <-- b :1 done
-                        # r(a,b) > Med & r(b,a) > Med  a <--> b :2 done
-                        # r(a,b) > Med & r(b,a) = Med  a o--> b :3 done
-                        # r(a,b) = Med & r(b,a) > Med  a <--o b :4 done
-                        # r(a,b) < Med & r(b,a) < Med  a      b :-1 done
-                        # r(a,b) < Med & r(b,a) = Med  a o..  b :5 done 
-                        # r(a,b) = Med & r(b,a) < Med  a  ..o b :6 done
-                        # r(a,b) = Med = r(b,a)        a o..o b :7 done
-                        if self.relation[key][link] > Med:
-                            if self.relation[link][key] < Med:
-                                dataset["links"].append({"source":str(key) , "target" : str(link), "type":0})
-                            if self.relation[link][key] > Med:
-                                dataset["links"].append({"source":str(key) , "target" : str(link), "type":2})
-                            if self.relation[link][key] == Med:
-                                dataset["links"].append({"source":str(key) , "target" : str(link), "type":3})
-                        if self.relation[key][link] < Med:
-                            if self.relation[link][key] < Med:
-                                dataset["links"].append({"source":str(key) , "target" : str(link), "type": -1})
-                            if self.relation[link][key] > Med:
-                                dataset["links"].append({"source":str(key) , "target" : str(link), "type":1})
-                            if self.relation[link][key] == Med:
-                                dataset["links"].append({"source":str(key) , "target" : str(link), "type":5})
-                        if self.relation[key][link] == Med:
-                            if self.relation[link][key] == Med:
-                                dataset["links"].append({"source":str(key) , "target" : str(link), "type": 7})
-                            if self.relation[link][key] < Med:
-                                dataset["links"].append({"source":str(key) , "target" : str(link), "type": 6})
-                            if self.relation[link][key] > Med:
-                                dataset["links"].append({"source":str(key) , "target" : str(link), "type": 4})    
+        	if(isinstance(self.actions,dict)):
+        		if("comment" in self.actions):
+        			dataset["nodes"].append({"name": str(node) ,"group":1, "comment": self.actions[node]["comment"]})
+        		else:
+		         	dataset["nodes"].append({"name": str(node) ,"group":1, "comment": "none"})
+	        else:
+	         	dataset["nodes"].append({"name": str(node) ,"group":1, "comment": "none"})
         
+        for i in range(n):
+            for j in range(i+1, n):
+            	# Arrow types:
+            	# r(a,b) > Med & r(b,a) < Med  a  --> b :0 done
+            	# r(a,b) < Med & r(b,a) > Med  a  <-- b :1 done
+            	# r(a,b) > Med & r(b,a) > Med  a <--> b :2 done
+            	# r(a,b) > Med & r(b,a) = Med  a o--> b :3 done
+            	# r(a,b) = Med & r(b,a) > Med  a <--o b :4 done
+            	# r(a,b) < Med & r(b,a) < Med  a      b :-1 done
+            	# r(a,b) < Med & r(b,a) = Med  a o..  b :5 done 
+            	# r(a,b) = Med & r(b,a) < Med  a  ..o b :6 done
+            	# r(a,b) = Med = r(b,a)        a o..o b :7 done
+            	if relation[actionkeys[i]][actionkeys[j]] > Med and relation[actionkeys[j]][actionkeys[i]] > Med:
+            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":2})
+            	elif relation[actionkeys[i]][actionkeys[j]] > Med and relation[actionkeys[j]][actionkeys[i]] == Med:
+            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":3})
+            	elif relation[actionkeys[i]][actionkeys[j]] == Med and relation[actionkeys[j]][actionkeys[i]] > Med:
+            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":4})
+            	elif relation[actionkeys[i]][actionkeys[j]] == Med and relation[actionkeys[j]][actionkeys[i]] == Med:
+            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":7})
+            	elif relation[actionkeys[i]][actionkeys[j]] > Med and relation[actionkeys[j]][actionkeys[i]] <  Med:
+            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":0})
+            	elif relation[actionkeys[i]][actionkeys[j]] == Med and relation[actionkeys[j]][actionkeys[i]] <  Med:
+            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":6})
+            	elif relation[actionkeys[i]][actionkeys[j]] < Med and relation[actionkeys[j]][actionkeys[i]] >  Med:
+            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":1})
+            	elif relation[actionkeys[i]][actionkeys[j]] < Med and relation[actionkeys[j]][actionkeys[i]] ==  Med:
+            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":5})
+
         do = open("dataset.json",'w')
         do.write(json.dumps(dataset,indent=4 * ' '))
         do.close()
