@@ -2778,6 +2778,7 @@ class Digraph(object):
         relation = self.relation
         Med = self.valuationdomain['med']
         i = 0
+        name=''
         if fileName == None:
             name = self.name
         else:
@@ -2833,7 +2834,11 @@ class Digraph(object):
         fo = open(htmlName,'w')
 
         fo.write('<!DOCTYPE html>\n')
-        fo.write('<meta charset="utf-8">\n')
+        fo.write('<html xmlns="http://www.w3.org/1999/xhtml">\n')
+        fo.write('<head>')
+        fo.write('<meta charset="utf-8">')
+
+        fo.write('<title>' + name + '</title>')
         fo.write('<script src="./js/d3.v3.js"></script>\n')
         fo.write('<style>\n')
 
@@ -2857,8 +2862,9 @@ class Digraph(object):
         fo.write('pointer-events: none;\n')
         fo.write('text-anchor: middle;\n')
         fo.write('}\n')
-
         fo.write('</style>\n')
+        fo.write('</head>')
+
         fo.write('<body>\n')
         fo.write('<script>\n')
 
