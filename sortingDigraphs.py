@@ -299,14 +299,19 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 else:
                     print('\t%s ]%s; %s]' % (c, self.criteriaCategoryLimits[g][c]['minimum'],self.criteriaCategoryLimits[g][c]['maximum']))
 
-    def getActionsKeys(self):
+    def getActionsKeys(self,action=None):
         """
         extract normal actions keys()
         """
-        actionsExt = set([x for x in list(self.actions.keys())])
         profiles_m = set([x for x in list(self.profiles['min'].keys())])
         profiles_M = set([x for x in list(self.profiles['max'].keys())])
-        return actionsExt - profiles_m - profiles_M
+        if action == None:
+            actionsExt = set([x for x in list(self.actions.keys())])
+            return actionsExt - profiles_m - profiles_M
+        else:
+            return set([action])
+            
+            
 
     def orderedCategoryKeys(self,Reverse=False):
         """
@@ -322,7 +327,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             orderedCategoryKeys.reverse()
         return orderedCategoryKeys
 
-    def computeSortingCharacteristics(self, Comments=False):
+    def computeSortingCharacteristics(self, action=None, Comments=False):
         """
         Renders a bipolar-valued bi-dictionary relation
         representing the degree of credibility of the
@@ -334,7 +339,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
 
-        actions = self.getActionsKeys()
+        actions = self.getActionsKeys(action)
+            
         categories = self.orderedCategoryKeys()
 
         try:
@@ -343,7 +349,6 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             lowerClosed = True
 
         sorting = {}
-
         for x in actions:
             sorting[x] = {}
             for c in categories:
@@ -368,6 +373,49 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
 
         return sorting
+
+    def showSortingCharacteristics(self, action=None):
+        """
+        Renders a bipolar-valued bi-dictionary relation
+        representing the degree of credibility of the
+        assertion that "action x in A belongs to category c in C",
+        ie x outranks low category limit and does not outrank
+        the high category limit.
+        """
+        Min = self.valuationdomain['min']
+        Med = self.valuationdomain['med']
+        Max = self.valuationdomain['max']
+
+        actions = self.getActionsKeys(action)
+            
+        categories = self.orderedCategoryKeys()
+
+        try:
+            lowerClosed = self.criteriaCategoryLimits['lowerClosed']
+        except:
+            lowerClosed = True
+
+        sorting = {}
+        print('x  in  K_k\t low\t\t notHigh\t\t category')
+
+        for x in actions:
+            sorting[x] = {}
+            for c in categories:
+                sorting[x][c] = {}
+                cMinKey= c+'-m'
+                cMaxKey= c+'-M'
+                if lowerClosed:
+                    lowLimit = self.relation[x][cMinKey]
+                    notHighLimit = Max - self.relation[x][cMaxKey] + Min
+                else:
+                    lowLimit = Max - self.relation[cMinKey][x] + Min
+                    notHighLimit = self.relation[cMaxKey][x]
+                print('%s in %s:\t' % (x, c), end=' ')
+                categoryMembership = min(lowLimit,notHighLimit)
+                sorting[x][c]['lowLimit'] = lowLimit
+                sorting[x][c]['notHighLimit'] = notHighLimit
+                sorting[x][c]['categoryMembership'] = categoryMembership
+                print('%.2f\t\t %.2f\t\t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
 
     def computePessimisticSorting(self, Comments=False):
         """
@@ -827,24 +875,22 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         # keep a copy of the original actions set before adding the profiles
         self.actionsOrig = deepcopy(self.actions)
 
-        # actionsOrig = self.actionsOrig
-
-        #  compute the limiting quantiles
-        if isinstance(limitingQuantiles,list):
-            self.name = 'sorting_with_given_quantiles'
-        else:
-            limitingQuantiles = self._computeQuantiles(limitingQuantiles)
-        self.limitingQuantiles = deepcopy(limitingQuantiles)
-
-        if Debug:
-            print('limitingQuantiles',self.limitingQuantiles)
-
         #  normalizing the performance tableau
         normPerfTab = NormalizedPerformanceTableau(perfTab)
         self.criteria = deepcopy(normPerfTab.criteria)
         self.convertWeightFloatToDecimal()
         self.evaluation = deepcopy(normPerfTab.evaluation)
         self.convertEvaluationFloatToDecimal()
+        
+        #  compute the limiting quantiles
+        if isinstance(limitingQuantiles,list):
+            self.name = 'sorting_with_given_quantiles'
+        else:
+            limitingQuantiles = self._computeQuantiles(limitingQuantiles,Debug=True)
+        self.limitingQuantiles = deepcopy(limitingQuantiles)
+
+        if Debug:
+            print('limitingQuantiles',self.limitingQuantiles)
 
         # supposing all criteria scales between 0.0 and 100.0
 
@@ -990,10 +1036,11 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def _computeQuantiles(self,x):
+    def _computeQuantiles(self,x,Debug=True):
         """
         renders the limiting quantiles
         """
+        from math import floor
         if isinstance(x,int):
             n = x
         elif x == None:
@@ -1018,6 +1065,21 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
             n = 20
         elif x == 'centiles':
             n = 100
+        elif x == 'automatic':
+            pth = [5]
+            for g in self.criteria:
+                try:
+                    pref = self.criteria[g]['thresholds']['ind'][0] + \
+                           (self.criteria[g]['thresholds']['ind'][1]*Decimal('100'))
+                    pth.append(pref)
+                except:
+                    pass
+            amp = max(Decimal('1'),min(pth))
+            n = int(floor(Decimal('100')/amp))
+            if Debug:
+                print('Detected preference thresholds = ',pth)
+                print('amplitude, n',amp,n)
+
         limitingQuantiles = []
         for i in range(n+1):
             limitingQuantiles.append( Decimal(str(i)) / Decimal(str(n)) )
@@ -1162,6 +1224,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         Min = self.valuationdomain['min']
         actions = [x for x in self.actionsOrig]
         currActions = set(actions)
+        #sortedActions = set()
         sortingRelation = {}
         for x in actions:
             sortingRelation[x] = {}
@@ -1176,6 +1239,9 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
             if Debug:
                 print('ibch,ribch',ibch,ribch)
             for x in ibch:
+##                for y in sortedActions:
+##                    sortingRelation[x][y] = Max
+##                    sortingRelation[y][x] = Min                    
                 for y in ibch:
                     sortingRelation[x][y] = Med
                     sortingRelation[y][x] = Med
@@ -1183,6 +1249,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                     sortingRelation[x][y] = Min
                     sortingRelation[y][x] = Max
             currActions = currActions - ibch
+##            sortedActions = sortedActions | ibch 
         return sortingRelation
            
 #----------test SortingDigraph class ----------------
@@ -1207,15 +1274,17 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    #t = RandomCBPerformanceTableau(numberOfActions=20,numberOfCriteria=1)
-#    t = RandomPerformanceTableau(numberOfActions=15)
-    #t.saveXMCDA2('test')
-#    t = XMCDA2PerformanceTableau('test')
+##    t = RandomCBPerformanceTableau(numberOfActions=25,
+##                                   numberOfCriteria=13,
+##                                   weightDistribution='equiobjectives')
+    t = RandomPerformanceTableau(numberOfActions=15)
+    t.saveXMCDA2('test')
+    #t = XMCDA2PerformanceTableau('test')
     #t = PerformanceTableau('ex1perftab')
     #t.showQuantileSort()
-    t = XMCDA2PerformanceTableau('uniSorting')
-#    t = XMCDA2PerformanceTableau('spiegel2004')
-    s0 = QuantilesSortingDigraph(t,limitingQuantiles=100,
+    #t = XMCDA2PerformanceTableau('uniSorting')
+    #t = XMCDA2PerformanceTableau('spiegel2004')
+    s0 = QuantilesSortingDigraph(t,limitingQuantiles='automatic',
                                 LowerClosed=True,
                                 Debug=False)
     #print(s0.categories)
@@ -1226,6 +1295,7 @@ if __name__ == "__main__":
 ##    #s0.showOrderedRelationTable()
     s0.showWeakOrder()
     s0.exportGraphViz('test1',graphType="pdf")
+    s0.showSortingCharacteristics('a08')
 ##    g = BipolarOutrankingDigraph(t)
 ##    print(g.computeOrdinalCorrelation(s0))    
 ##    s1 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
