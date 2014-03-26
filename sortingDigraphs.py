@@ -651,7 +651,8 @@ class SortingByChoosingDigraph(WeakOrder,Digraph):
     Example Python3 session:
 
     >>> from sortingDigraphs import *
-    >>> t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,weightDistribution='equiobjectives')
+    >>> t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,
+                                       weightDistribution='equiobjectives')
     >>> g = BipolarOutrankingDigraph(t)
     >>> s = SortingByChoosingDigraph(g,CoDual=True)
     Threading ...
@@ -667,6 +668,7 @@ class SortingByChoosingDigraph(WeakOrder,Digraph):
     dot -Grankdir=TB -Tpng sortingByChoosing.dot -o sortingByChoosing.png
 
     .. image:: sortingByChoosing.png
+    
     """
     from weakOrders import RankingByChoosingDigraph
     def __init__(self,digraph=None,CoDual=True):
