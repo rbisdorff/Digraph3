@@ -852,6 +852,29 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
             We generally require an OutrankingDigraph instance g or a valid filename.
             If none is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.
             By default lower closed limits of categories are supposed to be used in the sorting.
+
+        Example Python3 session:
+
+        >>> from sortingDigraphs import *
+        >>> t = RandomCBPerformanceTableau(numberOfActions=7,\
+                                           numberOfCriteria=5,\
+                                           weightDistribution='equiobjectives')
+        >>> qs = QuantilesSortingDigraph(t,limitingQuantiles=10)
+        >>> qs.showSorting()
+        *--- Sorting results in descending order ---*
+        [0.90 - <[: 	 []
+        [0.80 - 0.90[: 	 []
+        [0.70 - 0.80[: 	 []
+        [0.60 - 0.70[: 	 ['a02', 'a07']
+        [0.50 - 0.60[: 	 ['a02', 'a04', 'a05', 'a06']
+        [0.40 - 0.50[: 	 []
+        [0.30 - 0.40[: 	 []
+        [0.20 - 0.30[: 	 ['a03']
+        [0.10 - 0.20[: 	 ['a01']
+        [0.00 - 0.10[: 	 []
+        >>> qs.exportGraphViz('quantilesSorting')
+        
+        ..image:: quantilesSorting.png
         """
 
         from copy import deepcopy
@@ -1277,25 +1300,25 @@ if __name__ == "__main__":
 ##    t = RandomCBPerformanceTableau(numberOfActions=25,
 ##                                   numberOfCriteria=13,
 ##                                   weightDistribution='equiobjectives')
-    t = RandomPerformanceTableau(numberOfActions=15)
+    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=3)
     t.saveXMCDA2('test')
+    t.showPerformanceTableau()
     #t = XMCDA2PerformanceTableau('test')
     #t = PerformanceTableau('ex1perftab')
     #t.showQuantileSort()
     #t = XMCDA2PerformanceTableau('uniSorting')
     #t = XMCDA2PerformanceTableau('spiegel2004')
-    s0 = QuantilesSortingDigraph(t,limitingQuantiles='automatic',
-                                LowerClosed=True,
+    s0 = QuantilesSortingDigraph(t,limitingQuantiles='quintiles',
+                                LowerClosed=False,
                                 Debug=False)
     #print(s0.categories)
     s0.showSorting(Reverse=True)
-    s0.showSorting(Reverse=False)
+##    s0.showSorting(Reverse=False)
 ##    sortingRelation = s0.computeSortingRelation()
 ##    #s0.showRelationTable(actionsSubset=s0.actionsOrig,relation=sortingRelation)
 ##    #s0.showOrderedRelationTable()
     s0.showWeakOrder()
     s0.exportGraphViz('test1',graphType="pdf")
-    s0.showSortingCharacteristics('a08')
 ##    g = BipolarOutrankingDigraph(t)
 ##    print(g.computeOrdinalCorrelation(s0))    
 ##    s1 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
