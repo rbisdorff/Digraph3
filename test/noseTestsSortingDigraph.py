@@ -25,7 +25,7 @@ def testDefaultSortingDigraph():
         for c in s.orderedCategoryKeys():
             if sorting[x][c]['categoryMembership'] >= s.valuationdomain['med']:
                 print('%s in %s = %.2f' % (x,c,sorting[x][c]['categoryMembership']))
-    sorts = s.computePessimisticSorting(Comments=False)
+    sorts = s._computePessimisticSorting(Comments=False)
     for c in s.orderedCategoryKeys():
         print(c, sorts[c])
 
@@ -35,7 +35,7 @@ def testRobustSortingDigraphClass():
     s = SortingDigraph(t)
     srb = SortingDigraph(t,isRobust=True)
     s.showCriteriaCategoryLimits()
-    sorts = s.computePessimisticSorting(Comments=True)
+    sorts = s._computePessimisticSorting(Comments=True)
     for c in s.orderedCategoryKeys():
         print(c, sorts[c])
     sorting = s.computeSortingCharacteristics(Comments=True)
@@ -88,7 +88,7 @@ def testSortingByChoosingDigraph():
     t = RandomCBPerformanceTableau(numberOfActions=10)
     t.save('test')
     g = BipolarOutrankingDigraph(t)
-    s1 = SortingByChoosingDigraph(g,CoDual=True,Comments=False)
+    s1 = SortingByChoosingDigraph(g,CoDual=True)
     s1.showSorting(Debug=False)
     print('Ordinal Correlation with given outranking')
     corr = g.computeOrdinalCorrelation(s1)

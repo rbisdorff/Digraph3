@@ -176,7 +176,7 @@ class WeakOrder(Digraph):
                 rankingByChoosing = self.rankingByLastChoosing['result']
         
         if noSilent:
-            print('*---- exporting a dot file dor GraphViz tools ---------*')
+            print('*---- exporting a dot file for GraphViz tools ---------*')
         actionKeys = [x for x in self.actions]
         n = len(actionKeys)
         relation = self.relation
