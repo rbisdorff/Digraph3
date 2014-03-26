@@ -834,6 +834,37 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
     """
     Specialisation of the sortingDigraph Class
     for sorting of alternatives into quantiles delimited ordered classes.
+    
+    .. note::
+
+    We generally require an OutrankingDigraph instance g or a valid filename.
+    If none is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.
+    By default lower closed limits of categories are supposed to be used in the sorting.
+
+    Example Python3 session:
+
+    >>> from sortingDigraphs import *
+    >>> t = RandomCBPerformanceTableau(numberOfActions=7,\
+                                       numberOfCriteria=5,\
+                                       weightDistribution='equiobjectives')
+    >>> qs = QuantilesSortingDigraph(t,limitingQuantiles=10)
+    >>> qs.showSorting()
+    *--- Sorting results in descending order ---*
+    [0.90 - <[: 	 []
+    [0.80 - 0.90[: 	 []
+    [0.70 - 0.80[: 	 []
+    [0.60 - 0.70[: 	 ['a02', 'a07']
+    [0.50 - 0.60[: 	 ['a02', 'a04', 'a05', 'a06']
+    [0.40 - 0.50[: 	 []
+    [0.30 - 0.40[: 	 []
+    [0.20 - 0.30[: 	 ['a03']
+    [0.10 - 0.20[: 	 ['a01']
+    [0.00 - 0.10[: 	 []
+    >>> qs.exportGraphViz('quantilesSorting')
+    
+    ..image:: quantilesSorting.png
+        
+
     """
 
     def __init__(self,argPerfTab=None,
@@ -847,34 +878,6 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         """
         Constructor for QuantilesSortingDigraph instances.
 
-        .. note::
-
-            We generally require an OutrankingDigraph instance g or a valid filename.
-            If none is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.
-            By default lower closed limits of categories are supposed to be used in the sorting.
-
-        Example Python3 session::
-
-            >>> from sortingDigraphs import *
-            >>> t = RandomCBPerformanceTableau(numberOfActions=7,\
-                                               numberOfCriteria=5,\
-                                               weightDistribution='equiobjectives')
-            >>> qs = QuantilesSortingDigraph(t,limitingQuantiles=10)
-            >>> qs.showSorting()
-            *--- Sorting results in descending order ---*
-            [0.90 - <[: 	 []
-            [0.80 - 0.90[: 	 []
-            [0.70 - 0.80[: 	 []
-            [0.60 - 0.70[: 	 ['a02', 'a07']
-            [0.50 - 0.60[: 	 ['a02', 'a04', 'a05', 'a06']
-            [0.40 - 0.50[: 	 []
-            [0.30 - 0.40[: 	 []
-            [0.20 - 0.30[: 	 ['a03']
-            [0.10 - 0.20[: 	 ['a01']
-            [0.00 - 0.10[: 	 []
-            >>> qs.exportGraphViz('quantilesSorting')
-        
-        ..image:: quantilesSorting.png
         """
 
         from copy import deepcopy
