@@ -657,15 +657,12 @@ class SortingByChoosingDigraph(WeakOrder,Digraph):
     >>> s = SortingByChoosingDigraph(g,CoDual=True)
     Threading ...
     Exiting computing threads
+    >>> s.showSorting()Sorting by Choosing and Rejecting
+    1st Choice ['a03', 'a06'] (42.50)
+        2nd Choice ['a01', 'a02'] (39.58)
+        2nd Last Choice ['a04', 'a07'] (39.58)
+    Last Choice ['a05'] (61.11)
     >>> s.exportGraphViz('sortingByChoosing')
-    *---- exporting a dot file for GraphViz tools ---------*
-    Exporting to sortingByChoosing.dot
-    0 { rank = same; a02; }
-    1 { rank = same; a05; a01; a03; }
-    2 { rank = same; a07; }
-    3 { rank = same; a04; }
-    4 { rank = same; a06; }
-    dot -Grankdir=TB -Tpng sortingByChoosing.dot -o sortingByChoosing.png
 
     .. image:: sortingByChoosing.png
     
