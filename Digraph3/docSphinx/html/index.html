@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1.625',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -154,7 +152,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1013,7 +1011,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1032,8 +1030,10 @@ Returns a boolean value</p>
 <dl class="method">
 <dt id="digraphs.Digraph.dominantChoices">
 <tt class="descname">dominantChoices</tt><big>(</big><em>S</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.dominantChoices" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates all minimal dominant choices of a bipolar valued digraph.
-Initiate with S = self.actions,copy().</p>
+<dd><dl class="docutils">
+<dt>Generates all minimal dominant choices of a bipolar valued digraph.</dt>
+<dd>Initiate with S = self.actions,copy().</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1462,8 +1462,10 @@ Renders the sharpest of two characteristic vectors v and w.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.showMIS">
 <tt class="descname">showMIS</tt><big>(</big><em>withListing=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.showMIS" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints all maximal independent choices
-Result in self.misset.</p>
+<dd><dl class="docutils">
+<dt>Prints all maximal independent choices</dt>
+<dd>Result in self.misset.</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1511,15 +1513,19 @@ Result in self.domirset.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.showMinAbs">
 <tt class="descname">showMinAbs</tt><big>(</big><em>withListing=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.showMinAbs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints minimal absorbent choices:
-Result in self.absset.</p>
+<dd><dl class="docutils">
+<dt>Prints minimal absorbent choices:</dt>
+<dd>Result in self.absset.</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showMinDom">
 <tt class="descname">showMinDom</tt><big>(</big><em>withListing=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.showMinDom" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints all minimal dominant choices:
-Result in self.domset.</p>
+<dd><dl class="docutils">
+<dt>Prints all minimal dominant choices:</dt>
+<dd>Result in self.domset.</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1764,7 +1770,7 @@ equivalence valuations.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1795,7 +1801,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2223,10 +2229,12 @@ and a gamma function (dictionary) from vertices to subsets of vertices.</p>
 <dl class="method">
 <dt id="graphs.Graph.chordlessPaths">
 <tt class="descname">chordlessPaths</tt><big>(</big><em>Pk</em>, <em>v0</em>, <em>Comments=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#graphs.Graph.chordlessPaths" title="Permalink to this definition">¶</a></dt>
-<dd><p>recursice chordless precycle (len &gt; 3) construction:
-Pk is the current pre chordless cycle
+<dd><dl class="docutils">
+<dt>recursice chordless precycle (len &gt; 3) construction:</dt>
+<dd>Pk is the current pre chordless cycle
 v0 is the initial vertex of the precycle
-vn is the last vertex of the precycle</p>
+vn is the last vertex of the precycle</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -2404,7 +2412,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3099,7 +3107,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -3542,7 +3550,7 @@ bipolar-valued marginal pairwise majority difference digraphs.</p>
 <span class="go">dot -Grankdir=BT -Tpng rel_randLinearProfile.dot -o rel_randLinearProfile.png</span>
 </pre></div>
 </div>
-<img alt="_images/rel_randLinearProfile.png" src="_images/rel_randLinearProfile.png" />
+<img alt="rel_randLinearProfile.png" src="rel_randLinearProfile.png" />
 <dl class="method">
 <dt id="votingDigraphs.CondorcetDigraph.computeArrowRaynaudRanking">
 <tt class="descname">computeArrowRaynaudRanking</tt><big>(</big><em>linearOrdered=True</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#votingDigraphs.CondorcetDigraph.computeArrowRaynaudRanking" title="Permalink to this definition">¶</a></dt>
@@ -3786,6 +3794,29 @@ ballot = {     # voters x candidates x candidates
 <dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></tt></a>, <a class="reference internal" href="#weakOrders.WeakOrder" title="weakOrders.WeakOrder"><tt class="xref py py-class docutils literal"><span class="pre">weakOrders.WeakOrder</span></tt></a></p>
 <p>Specialisation of the sortingDigraph Class
 for sorting of alternatives into quantiles delimited ordered classes.</p>
+<p>We generally require an OutrankingDigraph instance g or a valid filename.
+If none is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.
+By default lower closed limits of categories are supposed to be used in the sorting.</p>
+<p>Example Python3 session:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>                                       <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>                                       <span class="n">weightDistribution</span><span class="o">=</span><span class="s">&#39;equiobjectives&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qs</span> <span class="o">=</span> <span class="n">QuantilesSortingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">limitingQuantiles</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qs</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
+<span class="go">*--- Sorting results in descending order ---*</span>
+<span class="go">[0.90 - &lt;[:          []</span>
+<span class="go">[0.80 - 0.90[:       []</span>
+<span class="go">[0.70 - 0.80[:       []</span>
+<span class="go">[0.60 - 0.70[:       [&#39;a02&#39;, &#39;a07&#39;]</span>
+<span class="go">[0.50 - 0.60[:       [&#39;a02&#39;, &#39;a04&#39;, &#39;a05&#39;, &#39;a06&#39;]</span>
+<span class="go">[0.40 - 0.50[:       []</span>
+<span class="go">[0.30 - 0.40[:       []</span>
+<span class="go">[0.20 - 0.30[:       [&#39;a03&#39;]</span>
+<span class="go">[0.10 - 0.20[:       [&#39;a01&#39;]</span>
+<span class="go">[0.00 - 0.10[:       []</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qs</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;quantilesSorting&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>..image:: quantilesSorting.png</p>
 <dl class="method">
 <dt id="sortingDigraphs.QuantilesSortingDigraph.computeSortingRelation">
 <tt class="descname">computeSortingRelation</tt><big>(</big><em>categoryContents=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.computeSortingRelation" title="Permalink to this definition">¶</a></dt>
@@ -4352,7 +4383,7 @@ ranking-by-Rubis-choosing orderings.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2012, Raymond Bisdorff.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
     </div>
   </body>
 </html>
