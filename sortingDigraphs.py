@@ -855,24 +855,24 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
 
         Example Python3 session::
 
-        >>> from sortingDigraphs import *
-        >>> t = RandomCBPerformanceTableau(numberOfActions=7,\
-                                           numberOfCriteria=5,\
-                                           weightDistribution='equiobjectives')
-        >>> qs = QuantilesSortingDigraph(t,limitingQuantiles=10)
-        >>> qs.showSorting()
-        *--- Sorting results in descending order ---*
-        [0.90 - <[: 	 []
-        [0.80 - 0.90[: 	 []
-        [0.70 - 0.80[: 	 []
-        [0.60 - 0.70[: 	 ['a02', 'a07']
-        [0.50 - 0.60[: 	 ['a02', 'a04', 'a05', 'a06']
-        [0.40 - 0.50[: 	 []
-        [0.30 - 0.40[: 	 []
-        [0.20 - 0.30[: 	 ['a03']
-        [0.10 - 0.20[: 	 ['a01']
-        [0.00 - 0.10[: 	 []
-        >>> qs.exportGraphViz('quantilesSorting')
+            >>> from sortingDigraphs import *
+            >>> t = RandomCBPerformanceTableau(numberOfActions=7,\
+                                               numberOfCriteria=5,\
+                                               weightDistribution='equiobjectives')
+            >>> qs = QuantilesSortingDigraph(t,limitingQuantiles=10)
+            >>> qs.showSorting()
+            *--- Sorting results in descending order ---*
+            [0.90 - <[: 	 []
+            [0.80 - 0.90[: 	 []
+            [0.70 - 0.80[: 	 []
+            [0.60 - 0.70[: 	 ['a02', 'a07']
+            [0.50 - 0.60[: 	 ['a02', 'a04', 'a05', 'a06']
+            [0.40 - 0.50[: 	 []
+            [0.30 - 0.40[: 	 []
+            [0.20 - 0.30[: 	 ['a03']
+            [0.10 - 0.20[: 	 ['a01']
+            [0.00 - 0.10[: 	 []
+            >>> qs.exportGraphViz('quantilesSorting')
         
         ..image:: quantilesSorting.png
         """
@@ -1186,6 +1186,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         Shows sorting results in decreasing or increasing (Reverse=False)
         order of the categories. If isReturningHTML is True (default = False)
         the method returns a htlm table with the sorting result.
+        
         """
         #from string import replace
         from copy import deepcopy
