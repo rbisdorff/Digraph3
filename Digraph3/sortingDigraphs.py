@@ -417,7 +417,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 sorting[x][c]['categoryMembership'] = categoryMembership
                 print('%.2f\t\t %.2f\t\t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
 
-    def computePessimisticSorting(self, Comments=False):
+    def _computePessimisticSorting(self, Comments=False):
         """
         Returns a dictionary with category keys gathering the actions per ordered category on
         the basis of a bipolar valued outranking relation Stilde with low and high category limt profiles.
@@ -643,25 +643,51 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             fo.close()
             print('File: ' + nameExt + ' saved !')
 
-class SortingByChoosingDigraph(Digraph):
+class SortingByChoosingDigraph(WeakOrder,Digraph):
     """
     Specialization of generic Digraph class for sorting by choosing results.
+    The sorting by choosing is by default operated on the codual digraph.
+
+    Example Python3 session:
+
+    >>> from sortingDigraphs import *
+    >>> t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,weightDistribution='equiobjectives')
+    >>> g = BipolarOutrankingDigraph(t)
+    >>> s = SortingByChoosingDigraph(g,CoDual=True)
+    Threading ...
+    Exiting computing threads
+    >>> s.exportGraphViz('sortingByChoosing')
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to sortingByChoosing.dot
+    0 { rank = same; a02; }
+    1 { rank = same; a05; a01; a03; }
+    2 { rank = same; a07; }
+    3 { rank = same; a04; }
+    4 { rank = same; a06; }
+    dot -Grankdir=TB -Tpng sortingByChoosing.dot -o sortingByChoosing.png
+
+    .. image:: sortingByChoosing.png
     """
-    def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=None,Comments=False,Debug=False):
+    from weakOrders import RankingByChoosingDigraph
+    def __init__(self,digraph=None,CoDual=True):
         from copy import deepcopy
         if digraph == None:
-            digraph = RandomValuationDigraph()
-        digraph.recodeValuation(-1.0,1.0)
-        digraphName = 'sorting-'+digraph.name
-        self.name = deepcopy(digraphName)
-        self.actions = deepcopy(digraph.actions)
-        self.valuationdomain = deepcopy(digraph.valuationdomain)
-        self.sortingByChoosing = digraph.optimalRankingByChoosing(CoDual=CoDual,Odd=Odd,Limited=Limited,Comments=Comments,Debug=False)
-        self.relation = digraph.computeRankingByChoosingRelation()
-        #self.relation = deepcopy(digraph.relation)
-        self.order = len(self.actions)
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
+            print('Error: A valid Digraph instance ,ust be provided !!')
+            #digraph = RandomValuationDigraph()
+        else:    
+            #digraph.recodeValuation(-1.0,1.0)
+            #digraphName = 'sorting-'+digraph.name
+            g = RankingByChoosingDigraph(digraph,CoDual=CoDual)
+            self.name = deepcopy(g.name)
+            self.actions = deepcopy(digraph.actions)
+            self.valuationdomain = deepcopy(g.valuationdomain)
+            self.sortingByChoosing = digraph.computeRankingByChoosing()
+            #self.relation = digraph.computeRankingByChoosingRelation()
+            #self.relation = deepcopy(digraph.relation)
+            self.relation = deepcopy(g.relation)
+            self.order = len(self.actions)
+            self.gamma = self.gammaSets()
+            self.notGamma = self.notGammaSets()
 
     def showSorting(self,Debug=False):
         """
@@ -837,11 +863,11 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
     
     .. note::
 
-    We generally require an OutrankingDigraph instance g or a valid filename.
-    If none is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.
-    By default lower closed limits of categories are supposed to be used in the sorting.
+        We generally require an OutrankingDigraph instance g or a valid filename.
+        If none is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.
+        By default lower closed limits of categories are supposed to be used in the sorting.
 
-    Example Python3 session
+    Example Python3 session:
 
     >>> from sortingDigraphs import *
     >>> t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,
@@ -862,8 +888,6 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
     >>> qs.exportGraphViz('quantilesSorting')
     
     .. image:: quantilesSorting.png
-        
-
     """
 
     def __init__(self,argPerfTab=None,
