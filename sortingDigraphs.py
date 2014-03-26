@@ -845,8 +845,8 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
 
     >>> from sortingDigraphs import *
     >>> t = RandomCBPerformanceTableau(numberOfActions=7,\
-                                       numberOfCriteria=5,\
-                                       weightDistribution='equiobjectives')
+    ...                                numberOfCriteria=5,\
+    ...                                weightDistribution='equiobjectives')
     >>> qs = QuantilesSortingDigraph(t,limitingQuantiles=10)
     >>> qs.showSorting()
     *--- Sorting results in descending order ---*
@@ -862,7 +862,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
     [0.00 - 0.10[: 	 []
     >>> qs.exportGraphViz('quantilesSorting')
     
-    ..image:: quantilesSorting.png
+    .. image:: quantilesSorting.png
         
 
     """
