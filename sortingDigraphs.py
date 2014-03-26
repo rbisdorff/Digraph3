@@ -841,11 +841,10 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
     If none is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.
     By default lower closed limits of categories are supposed to be used in the sorting.
 
-    Example Python3 session:
+    Example Python3 session
 
     >>> from sortingDigraphs import *
-    >>> t = RandomCBPerformanceTableau(numberOfActions=7,\
-    ...                                numberOfCriteria=5,\
+    >>> t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,
     ...                                weightDistribution='equiobjectives')
     >>> qs = QuantilesSortingDigraph(t,limitingQuantiles=10)
     >>> qs.showSorting()
