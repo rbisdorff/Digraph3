@@ -50,4 +50,5 @@ examples/xmcda2Rubis.xsl
 docSphinx/Makefile
 docSphinx/conf.py
 docSphinx/index.rst
+js/d3.v3.js
 
