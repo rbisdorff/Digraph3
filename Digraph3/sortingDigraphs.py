@@ -643,218 +643,218 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             fo.close()
             print('File: ' + nameExt + ' saved !')
 
-class SortingByChoosingDigraph(WeakOrder,Digraph):
-    """
-    Specialization of generic Digraph class for sorting by choosing results.
-    The sorting by choosing is by default operated on the codual digraph.
-
-    Example Python3 session:
-
-    >>> from sortingDigraphs import *
-    >>> t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,
-                                       weightDistribution='equiobjectives')
-    >>> g = BipolarOutrankingDigraph(t)
-    >>> s = SortingByChoosingDigraph(g,CoDual=True)
-    Threading ...
-    Exiting computing threads
-    >>> s.showSorting()Sorting by Choosing and Rejecting
-    1st Choice ['a03', 'a06'] (42.50)
-        2nd Choice ['a01', 'a02'] (39.58)
-        2nd Last Choice ['a04', 'a07'] (39.58)
-    Last Choice ['a05'] (61.11)
-    >>> s.exportGraphViz('sortingByChoosing')
-
-    .. image:: sortingByChoosing.png
-    
-    """
-    from weakOrders import RankingByChoosingDigraph
-    def __init__(self,digraph=None,CoDual=True):
-        from copy import deepcopy
-        if digraph == None:
-            print('Error: A valid Digraph instance ,ust be provided !!')
-            #digraph = RandomValuationDigraph()
-        else:    
-            #digraph.recodeValuation(-1.0,1.0)
-            #digraphName = 'sorting-'+digraph.name
-            g = RankingByChoosingDigraph(digraph,CoDual=CoDual)
-            self.name = deepcopy(g.name)
-            self.actions = deepcopy(digraph.actions)
-            self.valuationdomain = deepcopy(g.valuationdomain)
-            cddigraph = CoDualDigraph(digraph)
-            self.sortingByChoosing = cddigraph.computeRankingByChoosing()
-            #self.relation = digraph.computeRankingByChoosingRelation()
-            #self.relation = deepcopy(digraph.relation)
-            self.relation = deepcopy(g.relation)
-            self.order = len(self.actions)
-            self.gamma = self.gammaSets()
-            self.notGamma = self.notGammaSets()
-
-    def showSorting(self,Debug=False):
-        """
-        A show method for self.sortingByChoosing result.
-        """
-        sortingByChoosing = self.sortingByChoosing['result']
-        print('Sorting by Choosing and Rejecting')
-        space = ''
-        n = len(sortingByChoosing)
-        for i in range(n):
-            if i+1 == 1:
-                nstr='st'
-            elif i+1 == 2:
-                nstr='nd'
-            elif i+1 == 3:
-                nstr='rd'
-            else:
-                nstr='th'
-            ibch = set(sortingByChoosing[i][0][1])
-            iwch = set(sortingByChoosing[i][1][1])
-            iach = iwch & ibch
-            if Debug:
-                print('ibch, iwch, iach', i, ibch,iwch,iach)
-            ch = list(ibch)
-            ch.sort()
-            print(' %s%s%s Choice %s (%.2f)' % (space,i+1,nstr,ch,sortingByChoosing[i][0][0]))
-            if len(iach) > 0 and i < n-1:
-                print('  %s Ambiguous Choice %s' % (space,list(iach)))
-                space += '  '
-            space += '  '
-        for i in range(n):
-            if n-i == 1:
-                nstr='st'
-            elif n-i == 2:
-                nstr='nd'
-            elif n-i == 3:
-                nstr='rd'
-            else:
-                nstr='th'
-            space = space[:-2]
-            ibch = set(sortingByChoosing[n-i-1][0][1])
-            iwch = set(sortingByChoosing[n-i-1][1][1])
-            iach = iwch & ibch
-            if Debug:
-                print('ibch, iwch, iach', i, ibch,iwch,iach)
-            ch = list(iwch)
-            ch.sort()
-            if len(iach) > 0 and i > 0:
-                space = space[:-2]
-                print('  %s Ambiguous Choice %s' % (space,list(iach)))
-            if nstr == 'st':
-                print(' Last Choice %s (%.2f)' % (ch,sortingByChoosing[n-i-1][1][0]))        
-            else:
-                print(' %s%s%s Last Choice %s (%.2f)' % (space,n-i,nstr,ch,sortingByChoosing[n-i-1][1][0])) 
-
-class SortingByBestChoosingDigraph(Digraph):
-    """
-    Specialization of generic Digraph class for sorting by best-choosing results.
-    """
-    def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=None,Comments=False,Debug=False):
-        from copy import deepcopy
-        if digraph == None:
-            digraph = RandomValuationDigraph()
-        #digraph.recodeValuation(-1.0,1.0)
-        digraphName = 'sorting-by-best'+digraph.name
-        self.name = deepcopy(digraphName)
-        self.actions = deepcopy(digraph.actions)
-        self.valuationdomain = deepcopy(digraph.valuationdomain)
-        self.sortingByBestChoosing = digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=False)
-        self.relation = digraph.computeRankingByBestChoosingRelation()
-        #self.relation = deepcopy(digraph.relation)
-        self.order = len(self.actions)
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
-        
-    def showSorting(self):
-        self.showRankingByBestChoosing(self.sortingByBestChoosing)
-
-class SortingByLastChoosingDigraph(Digraph):
-    """
-    Specialization of generic Digraph class for sorting-by-rejecting results.
-    """
-    def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=None,Comments=False,Debug=False):
-        from copy import deepcopy
-        if digraph == None:
-            digraph = RandomValuationDigraph()
-        #digraph.recodeValuation(-1.0,1.0)
-        digraphName = 'sorting-by-last'+digraph.name
-        self.name = deepcopy(digraphName)
-        self.actions = deepcopy(digraph.actions)
-        self.valuationdomain = deepcopy(digraph.valuationdomain)
-        self.sortingByLastChoosing = digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=False)
-        self.relation = digraph.computeRankingByLastChoosingRelation()
-        #self.relation = deepcopy(digraph.relation)
-        self.order = len(self.actions)
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
-    
-    def showSorting(self):
-        self.showRankingByLastChoosing(self.sortingByLastChoosing)
-
-class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
-    """
-    Specialization of generic Digraph class for sorting-by-rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to 20% of the valuation domain maximum (1.0).
-    """
-    def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=0.2,Comments=False,Debug=False,SplitCorrelation=True):
-        from copy import deepcopy
-        from decimal import Decimal
-        from time import time
-        if Comments:          
-            t0 = time()
-            print('------- Commenting sorting by prudent choosing ------')
-        if digraph == None:
-            digraph_ = RandomValuationDigraph()
-        else:
-            digraph_ = deepcopy(digraph)
-        digraph_.recodeValuation(-1,1)
-        digraphName = 'sorting-by-prudent-choosing'+digraph_.name
-        self.name = digraphName
-        self.actions = digraph_.actions
-        self.order = len(self.actions)
-        self.valuationdomain = digraph_.valuationdomain
-        #self.recodeValuation(-1.0,1.0)
-        s1 = SortingByLastChoosingDigraph(digraph_,CoDual=CoDual,Debug=False)
-        s2 = SortingByBestChoosingDigraph(digraph_,CoDual=CoDual,Debug=False)
-        fus = FusionDigraph(s1,s2)
-        cutLevel = min(digraph_.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments),Decimal(Limited))
-        self.cutLevel = cutLevel
-        if cutLevel > self.valuationdomain['med']:
-            if cutLevel < self.valuationdomain['max']:
-                gp = PolarisedDigraph(digraph_,level=cutLevel,StrictCut=True)
-            else:
-                gp = PolarisedDigraph(digraph_,level=cutLevel,StrictCut=False)
-            s1p = SortingByLastChoosingDigraph(gp,CoDual=CoDual,Debug=False)
-            s2p = SortingByBestChoosingDigraph(gp,CoDual=CoDual,Debug=False)
-            fusp = FusionDigraph(s1p,s2p)
-            corrgp = digraph_.computeOrdinalCorrelation(fusp)
-            corrg = digraph_.computeOrdinalCorrelation(fus)
-            if Comments:
-                print('Correlation with cutting    : %.3f x %.3f = %.3f' % (corrgp['correlation'],corrgp['determination'],corrgp['correlation']*corrgp['determination']))
-                print('Correlation without cutting : %.3f x %.3f = %.3f' % (corrg['correlation'],corrg['determination'],corrg['correlation']*corrg['determination']))
-            if SplitCorrelation:
-                if corrgp['correlation'] > corrg['correlation']:           
-                    self.relation = deepcopy(fusp.relation)
-                else:
-                    self.relation = deepcopy(fus.relation)
-            else:
-                if (corrgp['correlation']*corrgp['determination']) > (corrg['correlation']*corrg['determination']):
-                    self.relation = deepcopy(fusp.relation)
-                else:
-                    self.relation = deepcopy(fus.relation)                
-        else:
-            self.relation = deepcopy(fus.relation)
-        self.sortingByChoosing = self.computeRankingByChoosing(CoDual=CoDual)
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
-        if Comments:
-            t1 = time()
-            gdeter = digraph_.computeDeterminateness()
-            self.showSorting()
-            print('Circuits cutting level limit  : %.3f' % Limited)
-            print('Circuits elimination cut level: %.3f' % self.cutLevel)
-            print('Ordinal Correlation with given outranking')
-            corr = digraph_.computeOrdinalCorrelation(self)
-            print('Correlation     : %.3f' % corr['correlation'])
-            print('Determinateness : %.3f (%.3f)' % (corr['determination'],gdeter))
-            print('Execution time  : %.4f sec.' % (t1-t0))
+##class SortingByChoosingDigraph(WeakOrder,Digraph):
+##    """
+##    Specialization of generic Digraph class for sorting by choosing results.
+##    The sorting by choosing is by default operated on the codual digraph.
+##
+##    Example Python3 session:
+##
+##    >>> from sortingDigraphs import *
+##    >>> t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,
+##                                       weightDistribution='equiobjectives')
+##    >>> g = BipolarOutrankingDigraph(t)
+##    >>> s = SortingByChoosingDigraph(g,CoDual=True)
+##    Threading ...
+##    Exiting computing threads
+##    >>> s.showSorting()Sorting by Choosing and Rejecting
+##    1st Choice ['a03', 'a06'] (42.50)
+##        2nd Choice ['a01', 'a02'] (39.58)
+##        2nd Last Choice ['a04', 'a07'] (39.58)
+##    Last Choice ['a05'] (61.11)
+##    >>> s.exportGraphViz('sortingByChoosing')
+##
+##    .. image:: sortingByChoosing.png
+##    
+##    """
+##    from weakOrders import RankingByChoosingDigraph
+##    def __init__(self,digraph=None,CoDual=True):
+##        from copy import deepcopy
+##        if digraph == None:
+##            print('Error: A valid Digraph instance ,ust be provided !!')
+##            #digraph = RandomValuationDigraph()
+##        else:    
+##            #digraph.recodeValuation(-1.0,1.0)
+##            #digraphName = 'sorting-'+digraph.name
+##            g = RankingByChoosingDigraph(digraph,CoDual=CoDual)
+##            self.name = deepcopy(g.name)
+##            self.actions = deepcopy(digraph.actions)
+##            self.valuationdomain = deepcopy(g.valuationdomain)
+##            cddigraph = CoDualDigraph(digraph)
+##            self.sortingByChoosing = cddigraph.computeRankingByChoosing()
+##            #self.relation = digraph.computeRankingByChoosingRelation()
+##            #self.relation = deepcopy(digraph.relation)
+##            self.relation = deepcopy(g.relation)
+##            self.order = len(self.actions)
+##            self.gamma = self.gammaSets()
+##            self.notGamma = self.notGammaSets()
+##
+##    def showSorting(self,Debug=False):
+##        """
+##        A show method for self.sortingByChoosing result.
+##        """
+##        sortingByChoosing = self.sortingByChoosing['result']
+##        print('Sorting by Choosing and Rejecting')
+##        space = ''
+##        n = len(sortingByChoosing)
+##        for i in range(n):
+##            if i+1 == 1:
+##                nstr='st'
+##            elif i+1 == 2:
+##                nstr='nd'
+##            elif i+1 == 3:
+##                nstr='rd'
+##            else:
+##                nstr='th'
+##            ibch = set(sortingByChoosing[i][0][1])
+##            iwch = set(sortingByChoosing[i][1][1])
+##            iach = iwch & ibch
+##            if Debug:
+##                print('ibch, iwch, iach', i, ibch,iwch,iach)
+##            ch = list(ibch)
+##            ch.sort()
+##            print(' %s%s%s Choice %s (%.2f)' % (space,i+1,nstr,ch,sortingByChoosing[i][0][0]))
+##            if len(iach) > 0 and i < n-1:
+##                print('  %s Ambiguous Choice %s' % (space,list(iach)))
+##                space += '  '
+##            space += '  '
+##        for i in range(n):
+##            if n-i == 1:
+##                nstr='st'
+##            elif n-i == 2:
+##                nstr='nd'
+##            elif n-i == 3:
+##                nstr='rd'
+##            else:
+##                nstr='th'
+##            space = space[:-2]
+##            ibch = set(sortingByChoosing[n-i-1][0][1])
+##            iwch = set(sortingByChoosing[n-i-1][1][1])
+##            iach = iwch & ibch
+##            if Debug:
+##                print('ibch, iwch, iach', i, ibch,iwch,iach)
+##            ch = list(iwch)
+##            ch.sort()
+##            if len(iach) > 0 and i > 0:
+##                space = space[:-2]
+##                print('  %s Ambiguous Choice %s' % (space,list(iach)))
+##            if nstr == 'st':
+##                print(' Last Choice %s (%.2f)' % (ch,sortingByChoosing[n-i-1][1][0]))        
+##            else:
+##                print(' %s%s%s Last Choice %s (%.2f)' % (space,n-i,nstr,ch,sortingByChoosing[n-i-1][1][0])) 
+##
+##class SortingByBestChoosingDigraph(Digraph):
+##    """
+##    Specialization of generic Digraph class for sorting by best-choosing results.
+##    """
+##    def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=None,Comments=False,Debug=False):
+##        from copy import deepcopy
+##        if digraph == None:
+##            digraph = RandomValuationDigraph()
+##        #digraph.recodeValuation(-1.0,1.0)
+##        digraphName = 'sorting-by-best'+digraph.name
+##        self.name = deepcopy(digraphName)
+##        self.actions = deepcopy(digraph.actions)
+##        self.valuationdomain = deepcopy(digraph.valuationdomain)
+##        self.sortingByBestChoosing = digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=False)
+##        self.relation = digraph.computeRankingByBestChoosingRelation()
+##        #self.relation = deepcopy(digraph.relation)
+##        self.order = len(self.actions)
+##        self.gamma = self.gammaSets()
+##        self.notGamma = self.notGammaSets()
+##        
+##    def showSorting(self):
+##        self.showRankingByBestChoosing(self.sortingByBestChoosing)
+##
+##class SortingByLastChoosingDigraph(Digraph):
+##    """
+##    Specialization of generic Digraph class for sorting-by-rejecting results.
+##    """
+##    def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=None,Comments=False,Debug=False):
+##        from copy import deepcopy
+##        if digraph == None:
+##            digraph = RandomValuationDigraph()
+##        #digraph.recodeValuation(-1.0,1.0)
+##        digraphName = 'sorting-by-last'+digraph.name
+##        self.name = deepcopy(digraphName)
+##        self.actions = deepcopy(digraph.actions)
+##        self.valuationdomain = deepcopy(digraph.valuationdomain)
+##        self.sortingByLastChoosing = digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=False)
+##        self.relation = digraph.computeRankingByLastChoosingRelation()
+##        #self.relation = deepcopy(digraph.relation)
+##        self.order = len(self.actions)
+##        self.gamma = self.gammaSets()
+##        self.notGamma = self.notGammaSets()
+##    
+##    def showSorting(self):
+##        self.showRankingByLastChoosing(self.sortingByLastChoosing)
+##
+##class SortingByPrudentChoosingDigraph(SortingByChoosingDigraph):
+##    """
+##    Specialization of generic Digraph class for sorting-by-rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to 20% of the valuation domain maximum (1.0).
+##    """
+##    def __init__(self,digraph=None,CoDual=True,Odd=True,Limited=0.2,Comments=False,Debug=False,SplitCorrelation=True):
+##        from copy import deepcopy
+##        from decimal import Decimal
+##        from time import time
+##        if Comments:          
+##            t0 = time()
+##            print('------- Commenting sorting by prudent choosing ------')
+##        if digraph == None:
+##            digraph_ = RandomValuationDigraph()
+##        else:
+##            digraph_ = deepcopy(digraph)
+##        digraph_.recodeValuation(-1,1)
+##        digraphName = 'sorting-by-prudent-choosing'+digraph_.name
+##        self.name = digraphName
+##        self.actions = digraph_.actions
+##        self.order = len(self.actions)
+##        self.valuationdomain = digraph_.valuationdomain
+##        #self.recodeValuation(-1.0,1.0)
+##        s1 = SortingByLastChoosingDigraph(digraph_,CoDual=CoDual,Debug=False)
+##        s2 = SortingByBestChoosingDigraph(digraph_,CoDual=CoDual,Debug=False)
+##        fus = FusionDigraph(s1,s2)
+##        cutLevel = min(digraph_.minimalValuationLevelForCircuitsElimination(Odd=Odd,Debug=Debug,Comments=Comments),Decimal(Limited))
+##        self.cutLevel = cutLevel
+##        if cutLevel > self.valuationdomain['med']:
+##            if cutLevel < self.valuationdomain['max']:
+##                gp = PolarisedDigraph(digraph_,level=cutLevel,StrictCut=True)
+##            else:
+##                gp = PolarisedDigraph(digraph_,level=cutLevel,StrictCut=False)
+##            s1p = SortingByLastChoosingDigraph(gp,CoDual=CoDual,Debug=False)
+##            s2p = SortingByBestChoosingDigraph(gp,CoDual=CoDual,Debug=False)
+##            fusp = FusionDigraph(s1p,s2p)
+##            corrgp = digraph_.computeOrdinalCorrelation(fusp)
+##            corrg = digraph_.computeOrdinalCorrelation(fus)
+##            if Comments:
+##                print('Correlation with cutting    : %.3f x %.3f = %.3f' % (corrgp['correlation'],corrgp['determination'],corrgp['correlation']*corrgp['determination']))
+##                print('Correlation without cutting : %.3f x %.3f = %.3f' % (corrg['correlation'],corrg['determination'],corrg['correlation']*corrg['determination']))
+##            if SplitCorrelation:
+##                if corrgp['correlation'] > corrg['correlation']:           
+##                    self.relation = deepcopy(fusp.relation)
+##                else:
+##                    self.relation = deepcopy(fus.relation)
+##            else:
+##                if (corrgp['correlation']*corrgp['determination']) > (corrg['correlation']*corrg['determination']):
+##                    self.relation = deepcopy(fusp.relation)
+##                else:
+##                    self.relation = deepcopy(fus.relation)                
+##        else:
+##            self.relation = deepcopy(fus.relation)
+##        self.sortingByChoosing = self.computeRankingByChoosing(CoDual=CoDual)
+##        self.gamma = self.gammaSets()
+##        self.notGamma = self.notGammaSets()
+##        if Comments:
+##            t1 = time()
+##            gdeter = digraph_.computeDeterminateness()
+##            self.showSorting()
+##            print('Circuits cutting level limit  : %.3f' % Limited)
+##            print('Circuits elimination cut level: %.3f' % self.cutLevel)
+##            print('Ordinal Correlation with given outranking')
+##            corr = digraph_.computeOrdinalCorrelation(self)
+##            print('Correlation     : %.3f' % corr['correlation'])
+##            print('Determinateness : %.3f (%.3f)' % (corr['determination'],gdeter))
+##            print('Execution time  : %.4f sec.' % (t1-t0))
         
 class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
     """
