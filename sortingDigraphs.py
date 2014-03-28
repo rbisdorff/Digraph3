@@ -474,7 +474,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 if sorting[x][c]['categoryMembership'] >= self.valuationdomain['med']:
                     categoryContent[c].append(x)
         return categoryContent
-
+                                                     
     def showSorting(self,Reverse=True,isReturningHTML=False):
         """
         Shows sorting results in decreasing or increasing (Reverse=False)
@@ -934,8 +934,14 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         #  compute the limiting quantiles
         if isinstance(limitingQuantiles,list):
             self.name = 'sorting_with_given_quantiles'
+            newLimitingQuantiles = []
+            for x in limitingQuantiles:
+                newLimitingQuantiles.append(Decimal(str(x)))
+            limitingQuantiles = newLimitingQuantiles
+            if Debug:
+                print('convert to decimal!',limitingQuantiles)
         else:
-            limitingQuantiles = self._computeQuantiles(limitingQuantiles,Debug=True)
+            limitingQuantiles = self._computeQuantiles(limitingQuantiles,Debug=Debug)
         self.limitingQuantiles = deepcopy(limitingQuantiles)
 
         if Debug:
@@ -951,16 +957,24 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         if LowerClosed:
             for i in range(0,k-1):
                 categories[str(i+1)] = {'name':'[%.2f - %.2f['\
-                %(limitingQuantiles[i],limitingQuantiles[i+1]), 'order':i+1}
+                %(limitingQuantiles[i],limitingQuantiles[i+1]),\
+                                'order':i+1,\
+                                'lowLimit': '[%.2f' % (limitingQuantiles[i]),
+                                'highLimit': '%.2f[' % (limitingQuantiles[i+1])}
             categories[str(k)] = {'name':'[%.2f - <['\
-                %(limitingQuantiles[k-1]), 'order':k}                 
+                %(limitingQuantiles[k-1]), 'order':k,\
+                                  'lowLimit': '[%.2f' % (limitingQuantiles[k-1]),\
+                                  'highLimit': '<['}                 
         else:
             categories[str(1)] = {'name':']< - %.2f]'\
-                %(limitingQuantiles[1]), 'order':1}                 
+                %(limitingQuantiles[1]), 'order':1,
+                    'highLimit': '%.2f]' % (limitingQuantiles[1]),\
+                    'lowLimit': ']<'}                                  
             for i in range(1,k):
                 categories[str(i+1)] = {'name':']%.2f - %.2f]'\
-                %(limitingQuantiles[i],limitingQuantiles[i+1]), 'order':i+1}
-            
+                %(limitingQuantiles[i],limitingQuantiles[i+1]), 'order':i+1,
+                        'lowLimit': ']%.2f' % (limitingQuantiles[i]),
+                        'highLimit': '%.2f]' % (limitingQuantiles[i+1])}
         self.categories = deepcopy(categories)
 
         criteriaCategoryLimits = {}
@@ -1301,6 +1315,38 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
             currActions = currActions - ibch
 ##            sortedActions = sortedActions | ibch 
         return sortingRelation
+
+    def showActionCategories(self,action,Debug=False):
+        """
+        renders the union of categories in which the given action is sorted positively or null into.
+        """
+        Med = self.valuationdomain['med']
+        sorting = self.computeSortingCharacteristics(action=action,Comments=Debug)
+        keys = []
+        for c in self.orderedCategoryKeys():
+            if sorting[action][c]['categoryMembership'] >= Med:
+                if sorting[action][c]['lowLimit'] > Med:
+                    lowLimit = sorting[action][c]['lowLimit']
+                if sorting[action][c]['notHighLimit'] > Med:
+                    notHighLimit = sorting[action][c]['notHighLimit']
+                keys.append(c)
+                if Debug:
+                    print(action, c, sorting[action][c])
+        n = len(keys)
+        credibility = min(lowLimit,notHighLimit)
+        if n == 0:
+            return None
+        elif n == 1:
+            print('%s in %s - %s with credibility: %.2f' % (action,\
+                                     self.categories[keys[0]]['lowLimit'],\
+                                     self.categories[keys[0]]['highLimit'],\
+                                     credibility) )
+        else:
+            print('%s in %s - %s with credibility: %.2f' % (action,\
+                                     self.categories[keys[0]]['lowLimit'],\
+                                     self.categories[keys[-1]]['highLimit'],\
+                                     credibility) )
+
            
 #----------test SortingDigraph class ----------------
 if __name__ == "__main__":
@@ -1324,28 +1370,37 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-##    t = RandomCBPerformanceTableau(numberOfActions=25,
-##                                   numberOfCriteria=13,
-##                                   weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=3)
+    t = RandomCBPerformanceTableau(numberOfActions=15,
+                                   numberOfCriteria=13,
+                                   weightDistribution='equiobjectives')
+    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
     t.saveXMCDA2('test')
-    t.showPerformanceTableau()
-    #t = XMCDA2PerformanceTableau('test')
+##    t.showPerformanceTableau()
+    t = XMCDA2PerformanceTableau('test')
     #t = PerformanceTableau('ex1perftab')
     #t.showQuantileSort()
     #t = XMCDA2PerformanceTableau('uniSorting')
     #t = XMCDA2PerformanceTableau('spiegel2004')
-    s0 = QuantilesSortingDigraph(t,limitingQuantiles='quintiles',
+    s0 = QuantilesSortingDigraph(t,limitingQuantiles=[0,0.333,0.667,1],
                                 LowerClosed=False,
                                 Debug=False)
     #print(s0.categories)
     s0.showSorting(Reverse=True)
+    for x in s0.actions:
+        s0.showActionCategories(x,Debug=False)
+    s1 = QuantilesSortingDigraph(t,limitingQuantiles=20,
+                                LowerClosed=True,
+                                Debug=False)
+    #print(s0.categories)
+    s1.showSorting(Reverse=True)
+    for x in s1.actions:
+        s1.showActionCategories(x,Debug=False)
 ##    s0.showSorting(Reverse=False)
 ##    sortingRelation = s0.computeSortingRelation()
 ##    #s0.showRelationTable(actionsSubset=s0.actionsOrig,relation=sortingRelation)
 ##    #s0.showOrderedRelationTable()
-    s0.showWeakOrder()
-    s0.exportGraphViz('test1',graphType="pdf")
+##    s0.showWeakOrder()
+##    s0.exportGraphViz('test1',graphType="pdf")
 ##    g = BipolarOutrankingDigraph(t)
 ##    print(g.computeOrdinalCorrelation(s0))    
 ##    s1 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
