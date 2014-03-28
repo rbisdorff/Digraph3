@@ -1347,6 +1347,18 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                                      self.categories[keys[-1]]['highLimit'],\
                                      credibility) )
 
+    def showActionsSortingResult(self,actionSubset=None):
+        """
+        shows the quantiles sorting result all (default) of a subset of the decision actions.
+        """
+        if actionSubset == None:
+            actions = [x for x in self.actions]
+        else:
+            actions = [x for x in actionSubset]
+        actions.sort()
+        print('Quantiles sorting result per decision action')
+        for x in actions:
+            self.showActionCategories(x)
            
 #----------test SortingDigraph class ----------------
 if __name__ == "__main__":
@@ -1373,7 +1385,7 @@ if __name__ == "__main__":
     t = RandomCBPerformanceTableau(numberOfActions=15,
                                    numberOfCriteria=13,
                                    weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
+##    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
     t.saveXMCDA2('test')
 ##    t.showPerformanceTableau()
     t = XMCDA2PerformanceTableau('test')
@@ -1388,13 +1400,17 @@ if __name__ == "__main__":
     s0.showSorting(Reverse=True)
     for x in s0.actions:
         s0.showActionCategories(x,Debug=False)
-    s1 = QuantilesSortingDigraph(t,limitingQuantiles=20,
+    s0.showActionsSortingResult()
+    s0.exportGraphViz('tests0',graphType="pdf")
+    s1 = QuantilesSortingDigraph(t,limitingQuantiles=[0,0.333,0.667,1],
                                 LowerClosed=True,
                                 Debug=False)
     #print(s0.categories)
     s1.showSorting(Reverse=True)
-    for x in s1.actions:
-        s1.showActionCategories(x,Debug=False)
+##    for x in s1.actions:
+##        s1.showActionCategories(x,Debug=False)
+    s1.showActionsSortingResult()
+    s1.exportGraphViz('tests1',graphType="pdf")
 ##    s0.showSorting(Reverse=False)
 ##    sortingRelation = s0.computeSortingRelation()
 ##    #s0.showRelationTable(actionsSubset=s0.actionsOrig,relation=sortingRelation)
