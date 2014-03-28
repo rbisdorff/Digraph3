@@ -112,7 +112,7 @@ def testLowerOpenClosedCategories():
 ##    print('Execution time: %.4f sec.' % (t1-t0))
 
 def testQuantilesSortingDigraph():
-    print('*-------- Testing QuantilesSortingDigraph class -------')
+    print('*-------- Testing QuantilesSortingDigraph class 1 -------')
     t = RandomCBPerformanceTableau(numberOfActions=20)
     t.saveXMCDA2('test')
     s0 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
@@ -128,4 +128,22 @@ def testQuantilesSortingDigraph():
     s0.showWeakOrder()
     s0.exportGraphViz(graphType="png")
 
-    
+def testActionsSortingResult():
+    print('*-------- Testing QuantilesSortingDigraph class 2 -------')
+    t = RandomCBPerformanceTableau(numberOfActions=15,
+                                   numberOfCriteria=13,
+                                   weightDistribution='equiobjectives')
+    s0 = QuantilesSortingDigraph(t,limitingQuantiles=[0,0.333,0.667,1],
+                                LowerClosed=False,
+                                Debug=False)
+    s0.showSorting(Reverse=True)
+    for x in s0.actions:
+        s0.showActionCategories(x,Debug=False)
+    s0.showActionsSortingResult()
+    s0.exportGraphViz('tests0',graphType="pdf")
+    s1 = QuantilesSortingDigraph(t,limitingQuantiles=20,
+                                LowerClosed=True,
+                                Debug=False)
+    s1.showSorting(Reverse=False)
+    s1.showActionsSortingResult()
+    s1.exportGraphViz('tests1',graphType="pdf")
