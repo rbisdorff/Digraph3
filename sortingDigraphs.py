@@ -1382,7 +1382,7 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    t = RandomCBPerformanceTableau(numberOfActions=15,
+    t = RandomCBPerformanceTableau(numberOfActions=20,
                                    numberOfCriteria=13,
                                    weightDistribution='equiobjectives')
 ##    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
@@ -1393,7 +1393,7 @@ if __name__ == "__main__":
     #t.showQuantileSort()
     #t = XMCDA2PerformanceTableau('uniSorting')
     #t = XMCDA2PerformanceTableau('spiegel2004')
-    s0 = QuantilesSortingDigraph(t,limitingQuantiles=[0,0.333,0.667,1],
+    s0 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
                                 LowerClosed=False,
                                 Debug=False)
     #print(s0.categories)
@@ -1402,7 +1402,7 @@ if __name__ == "__main__":
         s0.showActionCategories(x,Debug=False)
     s0.showActionsSortingResult()
     s0.exportGraphViz('tests0',graphType="pdf")
-    s1 = QuantilesSortingDigraph(t,limitingQuantiles=[0,0.333,0.667,1],
+    s1 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
                                 LowerClosed=True,
                                 Debug=False)
     #print(s0.categories)
