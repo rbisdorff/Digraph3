@@ -1013,7 +1013,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2404,7 +2404,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3099,7 +3099,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -3820,6 +3820,18 @@ By default lower closed limits of categories are supposed to be used in the sort
 </dd></dl>
 
 <dl class="method">
+<dt id="sortingDigraphs.QuantilesSortingDigraph.showActionCategories">
+<tt class="descname">showActionCategories</tt><big>(</big><em>action</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.showActionCategories" title="Permalink to this definition">¶</a></dt>
+<dd><p>renders the union of categories in which the given action is sorted positively or null into.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.QuantilesSortingDigraph.showActionsSortingResult">
+<tt class="descname">showActionsSortingResult</tt><big>(</big><em>actionSubset=None</em><big>)</big><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.showActionsSortingResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows the quantiles sorting result all (default) of a subset of the decision actions.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="sortingDigraphs.QuantilesSortingDigraph.showSorting">
 <tt class="descname">showSorting</tt><big>(</big><em>Reverse=True</em>, <em>isReturningHTML=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.showSorting" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shows sorting results in decreasing or increasing (Reverse=False)
@@ -3872,12 +3884,20 @@ respecting the order of the categories.</p>
 <p>A template named tempProfile.py is providied in the digraphs module distribution.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Adds the category low limit and high limit profiles as supplementary
+<p>Adds the category low limit and high limit profiles as supplementary
 entries to its actions set and adds the corresponding evaluations
 to the underlying genuine outranking digraph.
 If this digraph is needed without profiles further on,
 it is necessary to create a separate BipolarOutrankingDigraph
 from the same performance tableau !</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We generally require an OutrankingDigraph instance g and a filename
+where categories and a profile my be read from. If no such filename is given,
+then a default profile with five, equally spaced, categories is used
+on each criteria. By default lower-closed limts of categories are
+supposed to be used in the sorting.</p>
+</div>
 </div>
 <dl class="method">
 <dt id="sortingDigraphs.SortingDigraph.computeCategoryContents">

@@ -69,6 +69,14 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         If this digraph is needed without profiles further on,
         it is necessary to create a separate BipolarOutrankingDigraph
         from the same performance tableau !
+        
+        .. note::
+
+            We generally require an OutrankingDigraph instance g and a filename
+            where categories and a profile my be read from. If no such filename is given,
+            then a default profile with five, equally spaced, categories is used
+            on each criteria. By default lower-closed limts of categories are
+            supposed to be used in the sorting.
 
     """
 
@@ -83,10 +91,6 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         """
         Constructor for SortingDigraph instances.
 
-        .. note::
-
-            We generally require an OutrankingDigraph instance g and a filename
-            where categories and a profile my be read from. If no such filename is given, then a default profile with five, equally spaced, categories is used on each criteria. By default lower closed limts of categories are supposed to be used in the sorting.
         """
 
         import copy
@@ -242,6 +246,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 for y in self.profileLimits:
                     for x in self.actions:
                         self.relation[x][y] = Med
+
+        
 
         # init general digraph Data
         self.order = len(self.actions)
