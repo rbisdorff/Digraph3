@@ -2770,6 +2770,7 @@ class Digraph(object):
         """
         import os
         import json
+        import urllib
 
         if noSilent:
             print('*---- exporting as a html file ---------*')
@@ -2778,15 +2779,11 @@ class Digraph(object):
         relation = self.relation
         Med = self.valuationdomain['med']
         i = 0
-        name=''
         if fileName == None:
-            name = self.name
-        else:
-            name = fileName
-        htmlName = name+'.html'
+            fileName = self.name
+       
         if noSilent:
-            print('Exporting to '+ htmlName)
-            print(self.relation)
+            print('Fetching newest version')
         # Dataset
         # Example: dataset= '{"nodes":[{"name":"Gary","group":1},{"name":"Pit","group":1},],"links":[{"source":1,"target":0,"value":1},]}'
         dataset = {"nodes":[],"links":[]}
@@ -2798,7 +2795,6 @@ class Digraph(object):
 		         	dataset["nodes"].append({"name": str(node) ,"group":1, "comment": "none"})
 	        else:
 	         	dataset["nodes"].append({"name": str(node) ,"group":1, "comment": "none"})
-        
         for i in range(n):
             for j in range(i+1, n):
             	# Arrow types:
@@ -2812,246 +2808,34 @@ class Digraph(object):
             	# r(a,b) = Med & r(b,a) < Med  a  ..o b :6 done
             	# r(a,b) = Med = r(b,a)        a o..o b :7 done
             	if relation[actionkeys[i]][actionkeys[j]] > Med and relation[actionkeys[j]][actionkeys[i]] > Med:
-            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":2})
+            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":2, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
             	elif relation[actionkeys[i]][actionkeys[j]] > Med and relation[actionkeys[j]][actionkeys[i]] == Med:
-            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":3})
+            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":3, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
             	elif relation[actionkeys[i]][actionkeys[j]] == Med and relation[actionkeys[j]][actionkeys[i]] > Med:
-            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":4})
+            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":4, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
             	elif relation[actionkeys[i]][actionkeys[j]] == Med and relation[actionkeys[j]][actionkeys[i]] == Med:
-            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":7})
+            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":7, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
             	elif relation[actionkeys[i]][actionkeys[j]] > Med and relation[actionkeys[j]][actionkeys[i]] <  Med:
-            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":0})
+            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":0, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
             	elif relation[actionkeys[i]][actionkeys[j]] == Med and relation[actionkeys[j]][actionkeys[i]] <  Med:
-            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":6})
+            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":6, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
             	elif relation[actionkeys[i]][actionkeys[j]] < Med and relation[actionkeys[j]][actionkeys[i]] >  Med:
-            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":1})
+            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":1, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
             	elif relation[actionkeys[i]][actionkeys[j]] < Med and relation[actionkeys[j]][actionkeys[i]] ==  Med:
-            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":5})
+            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":5, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
 
         do = open("dataset.json",'w')
         do.write(json.dumps(dataset,indent=4 * ' '))
         do.close()
-        fo = open(htmlName,'w')
+        # load file from internet and copyfile("./small.html",)?
+        import urllib.request
+        with urllib.request.urlopen("http://leopold-loewenheim.uni.lu/WWWgary/html/small.html") as url:
+            s = url.read()
+            #I'm guessing this would output the html source code?
+            fo= open(fileName+'.html','wb')
+            fo.write(s)
+            fo.close()
 
-        fo.write('<!DOCTYPE html>\n')
-        fo.write('<html xmlns="http://www.w3.org/1999/xhtml">\n')
-        fo.write('<head>')
-        fo.write('<meta charset="utf-8">')
-
-        fo.write('<title>' + name + '</title>')
-        fo.write('<script src="./js/d3.v3.js"></script>\n')
-        fo.write('<style>\n')
-
-        fo.write('path.link {\n')
-        fo.write('fill: none;\n')
-        fo.write('cursor: pointer;')
-        fo.write('stroke: #000;\n')
-        fo.write('stroke-width: 2px;\n')
-        fo.write('}\n')
-
-        fo.write('circle {\n')
-        fo.write('fill: orange;\n')
-        fo.write('cursor: pointer;\n')
-        fo.write('stroke: #fff;\n')
-        fo.write('stroke-width: 1.5px;\n')
-        fo.write('}\n')
-
-        fo.write('text {\n')
-        fo.write('fill: #000;\n')
-        fo.write('font: 12px sans-serif;\n')
-        fo.write('pointer-events: none;\n')
-        fo.write('text-anchor: middle;\n')
-        fo.write('}\n')
-        fo.write('</style>\n')
-        fo.write('</head>')
-
-        fo.write('<body>\n')
-        fo.write('<script>\n')
-
-        
-        fo.write('d3.json("dataset.json", function(error, links) {\n')
-        fo.write('var nodes = links.nodes;\n')
-
-       
-
-        fo.write('var width = 900,\n')
-        fo.write('  height = 700;0\n')
-
-        fo.write('var force = d3.layout.force()\n')
-        fo.write('  .nodes(d3.values(nodes))\n')
-        fo.write('  .links(links.links)\n')
-        fo.write('  .size([width, height])\n')
-        fo.write('  .linkDistance(150)\n')
-        fo.write('  .charge(-3000)\n')
-        fo.write('  .on("tick", tick)\n')
-        fo.write('  .start();\n')
-
-        fo.write('var svg = d3.select("body").append("svg")\n')
-        fo.write('  .attr("width", width)\n')
-        fo.write('  .attr("height", height);\n')
-
-        # Arrows go here
-        fo.write('svg.append("svg:defs").selectAll("marker")\n')
-        fo.write('  .data(["end-full"])\n')      
-        fo.write('  .enter().append("svg:marker")\n')    
-        fo.write('  .attr("id", String)\n')
-        fo.write('  .attr("viewBox", "0 -5 10 10")\n')
-        fo.write('  .attr("refX", 23)\n')
-        fo.write('  .attr("refY", -0.6)\n')
-        fo.write('  .attr("markerWidth", 6)\n')
-        fo.write('  .attr("markerHeight", 6)\n')
-        fo.write('  .attr("orient", "auto")\n')
-        fo.write('  .append("svg:path")\n')
-        fo.write('  .attr("d", "M0,-5L10,0L0,5z");\n')
-
-        fo.write('svg.append("svg:defs").selectAll("marker")\n')
-        fo.write('  .data(["end-empty"])\n')      
-        fo.write('  .enter().append("svg:marker")\n')    
-        fo.write('  .attr("id", String)\n')
-        fo.write('  .attr("viewBox", "0 -5 10 10")\n')
-        fo.write('  .attr("refX", 23)\n')
-        fo.write('  .attr("refY", -0.6)\n')
-        fo.write('  .attr("markerWidth", 6)\n')
-        fo.write('  .attr("markerHeight", 6)\n')
-        fo.write('  .attr("orient", "auto")\n')
-        fo.write('  .append("svg:path")\n')
-        fo.write('  .attr("stroke", "black")')
-        fo.write('  .attr("fill", "white")')
-        fo.write('  .attr("stroke-width", 2)')
-        fo.write('  .attr("d", "M0,-5L10,0L0,5z");\n')
-
-        fo.write('svg.append("svg:defs").selectAll("marker")\n')
-        fo.write('  .data(["start-full"])\n')      
-        fo.write('  .enter().append("svg:marker")\n')    
-        fo.write('  .attr("id", String)\n')
-        fo.write('  .attr("viewBox", "0 -5 10 10")\n')
-        fo.write('  .attr("refX", -13)\n')
-        fo.write('  .attr("refY", -0.6)\n')
-        fo.write('  .attr("markerWidth", 6)\n')
-        fo.write('  .attr("markerHeight", 6)\n')
-        fo.write('  .attr("orient", "auto")\n')
-        fo.write('  .append("svg:path")\n')
-        fo.write('  .attr("d", "M10,-5L0,0L10,5z");\n')
-
-        fo.write('svg.append("svg:defs").selectAll("marker")\n')
-        fo.write('  .data(["start-empty"])\n')      
-        fo.write('  .enter().append("svg:marker")\n')    
-        fo.write('  .attr("id", String)\n')
-        fo.write('  .attr("viewBox", "0 -5 10 10")\n')
-        fo.write('  .attr("refX", -13)\n')
-        fo.write('  .attr("refY", -0.6)\n')
-        fo.write('  .attr("markerWidth", 6)\n')
-        fo.write('  .attr("markerHeight", 6)\n')
-        fo.write('  .attr("orient", "auto")\n')
-        fo.write('  .append("svg:path")\n')
-        fo.write('  .attr("stroke", "black")')
-        fo.write('  .attr("fill", "white")')
-        fo.write('  .attr("stroke-width", 2)')
-        fo.write('  .attr("d", "M10,-5L0,0L10,5z");\n')
-
-        # Add the links and the arrows
-        fo.write('var path = svg.append("svg:g").selectAll("path")\n')
-        fo.write('  .data(force.links())\n')
-        fo.write('  .enter().append("svg:path")\n')
-        fo.write('  .attr("class", function(d) { return "link " + d.type; })\n')
-        fo.write('  .attr("class", "link")\n')
-        fo.write('  .attr("stroke-dasharray", function(d) { if(d.type == 5 || d.type ==6|| d.type ==7) return "3,3";})\n')
-        fo.write('  .attr("marker-end", function(d) { if(d.type == 4 || d.type ==6|| d.type ==7) return "url(#end-empty)"; if(d.type == 0 || d.type ==2|| d.type ==3) return "url(#end-full)";})\n')
-        fo.write('  .attr("marker-start", function(d) { if(d.type == 3|| d.type ==5|| d.type ==7) return "url(#start-empty)"; if(d.type == 1 || d.type ==2|| d.type ==4) return "url(#start-full)";});\n')
-
-
-        # define the nodes
-        fo.write('var node = svg.selectAll(".node")\n')
-        fo.write('  .data(force.nodes())\n')
-        fo.write('  .enter().append("g")\n')
-        fo.write('  .attr("class", "node")\n')
-        fo.write('  .on("dblclick", function(d) { alert("Name: " + d.name + "\\nComment: "+ d.comment); })\n')
-        fo.write('  .call(force.drag);\n')
-
-        # Focus a node code
-        fo.write('var linkedByIndex = {};')
-        fo.write('var focusNode = function(d) {\n')
-        fo.write('var circle = d3.select(this);\n')
-
-
-        fo.write('links.links.forEach(function(d) {')
-        fo.write('linkedByIndex[d.source.index + "," + d.target.index] = true;')
-        fo.write('});')
-        fo.write('node\n')
-        fo.write('  .transition(500)\n')
-        fo.write('  .style("opacity", function(o) {\n')
-        fo.write('      return isConnected(o, d) ? 1.0 : 0.2 ;})\n')
-        fo.write('  .style("fill", function(o) {\n')
-        fo.write('      if (isConnected(o, d)) {\n')
-        fo.write('          fillcolor = "green";\n')
-        fo.write('      }')
-        fo.write('      else if (isEqual(o, d)) {\n')
-        fo.write('          fillcolor = "hotpink";\n')
-        fo.write('      } else {\n')
-        fo.write('          fillcolor = "#000";\n')
-        fo.write('      }\n')
-        fo.write('  return fillcolor;\n')
-        fo.write('});\n')
-
-        fo.write('path\n')
-        fo.write('  .transition(500)\n')
-        fo.write('  .style("stroke-opacity", function(o) {\n')
-        fo.write('      return o.source === d || o.target === d ? 1 : 0.2;\n')
-        fo.write('  })\n')
-        fo.write('  .transition(500)\n')
-        fo.write('  .style("opacity", function(o) {\n')
-        fo.write('      return o.source === d || o.target === d ? 1 : 0.2;\n')
-        fo.write('});\n')
-        
-
-
-        fo.write('circle\n')
-        fo.write('  .transition(500)\n')
-        fo.write('}\n')
-        fo.write('function isConnected(a, b) {\n')
-        fo.write('  return linkedByIndex[b.index + "," + a.index] || linkedByIndex[a.index + "," + b.index] || isEqual(a,b);\n')
-        fo.write('}\n')
-        fo.write('function isEqual(a, b) {\n')
-        fo.write('  return a.index == b.index;\n')
-        fo.write('}\n')
-
-        # add the nodes
-        fo.write('node.append("circle")\n')
-        fo.write('  .attr("r", 15)\n')
-        fo.write('  .on("click", focusNode);')
-
-
-        # add the text 
-        fo.write('node.append("text")\n')
-        fo.write('  .attr("x", 0)\n')
-        fo.write('  .attr("dy", ".35em")\n')
-        fo.write('  .text(function(d) { return d.name; });\n')
-
-        
-
-
-        #add the curvy lines
-        fo.write('function tick() {\n')
-        fo.write('  path.attr("d", function(d) {\n')
-        fo.write('      var dx = d.target.x - d.source.x,\n')
-        fo.write('      dy = d.target.y - d.source.y,\n')
-        fo.write('      dr = Math.sqrt(dx * dx + dy * dy);\n')
-        fo.write('      return "M" + \n')
-        fo.write('      d.source.x + "," + \n')
-        fo.write('      d.source.y + "A" + \n')
-        fo.write('      dr + "," + dr + " 0 0,1 " + \n')
-        fo.write('      d.target.x + "," + \n')
-        fo.write('      d.target.y;\n')
-        fo.write('});\n')
-        fo.write('node\n')
-        fo.write('.attr("transform", function(d) {\n')
-        fo.write('return "translate(" + d.x + "," + d.y + ")"; });\n')
-        fo.write('}\n')
-        fo.write('});\n')
-        fo.write('</script>\n')
-        fo.write('</body>\n')
-        fo.write('</html>\n')
-        fo.close()
         if noSilent:
             print('*---- export done ---------*')
             if debug:
