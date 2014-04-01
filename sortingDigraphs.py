@@ -59,16 +59,6 @@ class SortingDigraph(BipolarOutrankingDigraph,WeakOrder,PerformanceTableau):
          }
 
     A template named tempProfile.py is providied in the digraphs module distribution.
-
-
-    .. warning::
-
-        Adds the category low limit and high limit profiles as supplementary
-        entries to its actions set and adds the corresponding evaluations
-        to the underlying genuine outranking digraph.
-        If this digraph is needed without profiles further on,
-        it is necessary to create a separate BipolarOutrankingDigraph
-        from the same performance tableau !
         
     .. note::
 
@@ -77,6 +67,37 @@ class SortingDigraph(BipolarOutrankingDigraph,WeakOrder,PerformanceTableau):
         then a default profile with five, equally spaced, categories is used
         on each criteria. By default lower-closed limts of categories are
         supposed to be used in the sorting.
+
+    Example Python3 session
+
+    >>> from sortingDigraphs import SortingDigraph
+    >>> s = SortingDigraph() %% Based on a random performance tableau 
+    >>> [x for x in s.actions]
+    ['a07', 'a06', 'a05', 'a04', 'a03', 'a02', 'a01', 'a10', 'a09', 'a08']
+    >>> s.showSorting()
+    *--- Sorting results in descending order ---*
+    ]> - 100]:   []
+    ]100 - 80]:  ['a03', 'a09']
+    ]80 - 60]:   ['a02', 'a04', 'a05', 'a06', 'a07', 'a08']
+    ]60 - 40]:   ['a01', 'a10']
+    ]40 - 20]: 	 []
+    ]20 - 0]:    []
+    >>> s.showSortingCharacteristics('a10')
+    x  in  K_k	  r(x >= m_k)	r(x < M_k)  r(x in K_k)
+    a10 in [0-20[    100.00	 -85.98	      -85.98
+    a10 in [20-40[    85.98	 -49.53	      -49.53
+    a10 in [40-60[    49.53	  20.56	       20.56
+    a10 in [60-80[   -20.56	  34.58	      -20.56
+    a10 in [80-100[  -34.58	 100.00	      -34.58
+    a10 in [100-<[  -100.00	 100.00	     -100.00
+    >>> from outrankingDigraphs import BipolarOutrankingDigraph
+    >>> g = BipolarOutrankingDigraph(s)
+    >>> g.computeOrdinalCorrelation(s)
+    {'determination': Decimal('0.2438213914849428868120456904'),
+    'MedianCut': False,
+    'correlation': Decimal('0.6482112436115843270868824533')}
+    >>> 
+    
 
     """
 
@@ -451,26 +472,31 @@ class SortingDigraph(BipolarOutrankingDigraph,WeakOrder,PerformanceTableau):
         categories = self.orderedCategoryKeys()
 
         try:
-            lowerClosed = self.criteriaCategoryLimits['lowerClosed']
+            LowerClosed = self.criteriaCategoryLimits['lowerClosed']
         except:
-            lowerClosed = True
+            LowerClosed = True
 
         sorting = {}
-        print('x  in  K_k\t low\t\t notHigh\t\t category')
-
+        if LowerClosed:
+            print('x  in  K_k\t r(x >= m_k)\t r(x < M_k)\t r(x in K_k)')
+        else:
+            print('x  in  K_k\t r(m_k < x)\t r(M_k >= x)\t r(x in K_k)')
         for x in actions:
             sorting[x] = {}
             for c in categories:
                 sorting[x][c] = {}
                 cMinKey= c+'-m'
                 cMaxKey= c+'-M'
-                if lowerClosed:
+                if LowerClosed:
                     lowLimit = self.relation[x][cMinKey]
                     notHighLimit = Max - self.relation[x][cMaxKey] + Min
                 else:
                     lowLimit = Max - self.relation[cMinKey][x] + Min
                     notHighLimit = self.relation[cMaxKey][x]
-                print('%s in %s:\t' % (x, c), end=' ')
+                if LowerClosed:
+                    print('%s in [%s - [\t' % (x, c), end=' ')
+                else:
+                    print('%s in [ - %s[\t' % (x, c), end=' ')
                 categoryMembership = min(lowLimit,notHighLimit)
                 sorting[x][c]['lowLimit'] = lowLimit
                 sorting[x][c]['notHighLimit'] = notHighLimit
@@ -1453,10 +1479,12 @@ if __name__ == "__main__":
     #t.showQuantileSort()
     #t = XMCDA2PerformanceTableau('uniSorting')
     #t = XMCDA2PerformanceTableau('spiegel2004')
-    s = SortingDigraph(t)
+    s = SortingDigraph(t,lowerClosed=False)
     s.showSorting()
-    qs = QuantilesSortingDigraph(t,limitingQuantiles=7)
+    s.showSortingCharacteristics('a10')
+    qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=True)
     qs.showSorting()
+    qs.showSortingCharacteristics('a10')
     g = BipolarOutrankingDigraph(t)
     print(g.computeOrdinalCorrelation(s))
     print(g.computeOrdinalCorrelation(qs))
