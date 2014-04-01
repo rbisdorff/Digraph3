@@ -121,7 +121,7 @@
       .attr("y", function(d) { return (d.source.y + d.target.y) /2; }) 
     path
       .attr('d', function(d) {
-    var deltaX = d.target.x - d.source.x,
+        var deltaX = d.target.x - d.source.x,
         deltaY = d.target.y - d.source.y,
         dist = Math.sqrt(deltaX * deltaX + deltaY * deltaY),
         normX = deltaX / dist,
@@ -157,12 +157,12 @@
     .nodes(d3.values(nodes))
     .links(links.links)
     .size([width, height])
-    .linkDistance(60)
+    .linkDistance(160)
     .linkStrength(0.1)
     .charge(-1000)
     .on("tick", tick)
     .friction(0.9)
-    .gravity(0.2)
+    .gravity(0.1)
     .start();
 
   setTimeout(function() {
