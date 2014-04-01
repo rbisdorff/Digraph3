@@ -2785,7 +2785,7 @@ class Digraph(object):
         if noSilent:
             print('Fetching newest version')
         # Dataset
-        # Example: dataset= '{"nodes":[{"name":"Gary","group":1},{"name":"Pit","group":1},],"links":[{"source":1,"target":0,"value":1},]}'
+        # Example: dataset= '{"nodes":[{"name":"Gary","group":1},{"name":"Pit","group":1},],"links":[{"source":"Gary","target":"Pit","value":1},]}'
         dataset = {"nodes":[],"links":[]}
         for node in self.actions:
         	if(isinstance(self.actions,dict)):

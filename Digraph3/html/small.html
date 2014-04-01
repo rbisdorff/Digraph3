@@ -6,6 +6,8 @@
     Small Graph Template
   </title>
   <script src="http://leopold-loewenheim.uni.lu/WWWgary/js/d3.v3.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <style>
   path.link {
     fill: none;
@@ -36,6 +38,30 @@
    *
    */
   var linkedByIndex = {};
+
+  var unfocusNode = function(d) {
+    var circle = d3.select();
+    links.links.forEach(
+      function(d) {
+        linkedByIndex[d.source.index + "," + d.target.index] = true;
+    });
+    
+    	node
+     	 	.transition(500)
+      		.style("opacity", 1.0)
+     	 	.style("fill", "steelblue"); 
+    	path
+      		.transition(500)
+      		.style("stroke-opacity", 1 )
+      		.transition(500)
+      		.style("opacity", 1 );
+   		 circle
+      		.transition(500);
+   		 labels
+      		.transition(500)
+      		.style("opacity", 1 );
+	}
+  
   var focusNode = function(d) {
     var circle = d3.select();
     links.links.forEach(
@@ -50,12 +76,9 @@
         })
       .style("fill", 
         function(o) {
-          if (isConnected(o, d)) {
-              fillcolor = "orange";
+          if (isConnected(o, d) || isEqual(o,d)) {
+              fillcolor = "steelblue";
           }      
-          else if(isEqual(o,d)) {
-            fillcolor = "red";
-          }
           else {
             fillcolor ="#000"
           }
@@ -80,7 +103,8 @@
         function(o) {
           return o.source === d || o.target === d ? 1 : 0;
         });
-  }
+ 	 
+	}
 
   function isConnected(a, b) {
     return linkedByIndex[b.index + "," + a.index] || linkedByIndex[a.index + "," + b.index];
@@ -115,6 +139,7 @@
         });  
   }
 
+
   /*
    *
    *  Graph
@@ -122,13 +147,13 @@
    */
 
   var nodes = links.nodes;
-  var width = window.innerWidth,
-    height = window.innerHeight;
+  var width = 850,
+    height = 500;
   var force = d3.layout.force()
     .nodes(d3.values(nodes))
     .links(links.links)
     .size([width, height])
-    .linkDistance(150)
+    .linkDistance(200)
     .charge(-3000)
     .on("tick", tick)
     .friction(0.6)
@@ -137,7 +162,17 @@
 
   var svg = d3.select("body").append("svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height)
+  
+  svg.append("rect")
+   .attr("fill", "white")
+   .on("click",unfocusNode)
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .attr("fill", "#FAFAD2");
+  /*
+	Arrows
+  */
   svg.append("svg:defs").selectAll("marker")
     .data(["end-full"])
     .enter().append("svg:marker")
@@ -161,7 +196,10 @@
     .attr("markerHeight", 6)
     .attr("orient", "auto")
     .append("svg:path")
-    .attr("stroke", "black")  .attr("fill", "white")  .attr("stroke-width", 2)  .attr("d", "M0,-5L10,0L0,5z");
+    .attr("stroke", "black")  
+    .attr("fill", "white")  
+    .attr("stroke-width", 2)  
+    .attr("d", "M0,-5L10,0L0,5z");
   svg.append("svg:defs").selectAll("marker")
     .data(["start-full"])
     .enter().append("svg:marker")
@@ -189,6 +227,8 @@
     .attr("fill", "white")  
     .attr("stroke-width", 2)  
     .attr("d", "M10,-5L0,0L10,5z");
+  
+
   var path = svg.append("svg:g").selectAll("path")
     .data(force.links())
     .enter().append("svg:path")
@@ -223,16 +263,17 @@
     .data(links.nodes)
     .enter().append("g")
     .attr("class", "node")
-    .style("fill","orange")
+    .style("fill","steelblue")
     .call(force.drag);
 
   node.append("circle")
     .attr("r", 15)
-    .on("click", focusNode)
-    .on("dblclick", 
-      function(d) { 
-        alert("Name: " + d.name + "\nComment: "+ d.comment); 
-      });
+    .on("click", function() {})
+    .on("dblclick", focusNode)
+    .on("contextmenu", 
+    	function(){
+    		d3.event.preventDefault();}
+    );
 
   node.append("text")
     .attr("x", 0)
