@@ -252,9 +252,10 @@
   var labels = svg.selectAll('text')
     .data(links.links)
     .enter().append('text')
-    .attr("x", function(d) { return (d.source.y + d.target.y) / 2; }) 
-    .attr("y", function(d) { return (d.source.x + d.target.x) / 2; }) 
+    .attr("x", function(d) { return (d.source.y + d.target.y) / 2.5; }) 
+    .attr("y", function(d) { return (d.source.x + d.target.x) / 2.5; }) 
     .attr("text-anchor", "middle") 
+    .style("font-family", "Comic Sans MS")
     .text(function(d) {return d.type;}); 
 
 
@@ -278,6 +279,7 @@
   node.append("text")
     .attr("x", 0)
     .attr("dy", ".35em")
+    .style("font-family", "Comic Sans MS")
     .text(function(d) { return d.name; });
 
   });
