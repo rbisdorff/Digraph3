@@ -24,7 +24,7 @@ from outrankingDigraphs import *
 from sortingDigraphs import *
 from weakOrders import *
 
-class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
+class SortingDigraph(BipolarOutrankingDigraph,WeakOrder,PerformanceTableau):
     """
     Specialisation of the digraphs.BipolarOutrankingDigraph Class
     for Condorcet based multicriteria sorting of alternatives.
@@ -70,13 +70,13 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         it is necessary to create a separate BipolarOutrankingDigraph
         from the same performance tableau !
         
-        .. note::
+    .. note::
 
-            We generally require an OutrankingDigraph instance g and a filename
-            where categories and a profile my be read from. If no such filename is given,
-            then a default profile with five, equally spaced, categories is used
-            on each criteria. By default lower-closed limts of categories are
-            supposed to be used in the sorting.
+        We generally require an PerformanceTableau instance and a filename
+        where categories and a profile my be read from. If no such filename is given,
+        then a default profile with five, equally spaced, categories is used
+        on each criteria. By default lower-closed limts of categories are
+        supposed to be used in the sorting.
 
     """
 
@@ -87,13 +87,14 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                  maxValuation=100.0,
                  isRobust=False,
                  hasNoVeto=False,
-                 lowerClosed=True):
+                 lowerClosed=True,
+                 Debug=False):
         """
         Constructor for SortingDigraph instances.
 
         """
 
-        import copy
+        from copy import deepcopy
         from decimal import Decimal
 
         # import the performance tableau
@@ -109,19 +110,19 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 actions[x] = {'name': str(x)}
             self.actions = actions
         else:
-            self.actions = copy.deepcopy(perfTab.actions)
+            self.actions = deepcopy(perfTab.actions)
 
         # keep a copy of the original actions set before adding the profiles
-        self.actionsOrig = copy.deepcopy(self.actions)
+        self.actionsOrig = deepcopy(self.actions)
 
         # actionsOrig = self.actionsOrig
 
         #  input the profiles
         if argProfile != None:
             defaultProfiles = False
-            self.criteria = copy.deepcopy(perfTab.criteria)
+            self.criteria = deepcopy(perfTab.criteria)
             self.convertWeightFloatToDecimal()
-            self.evaluation = copy.deepcopy(perfTab.evaluation)
+            self.evaluation = deepcopy(perfTab.evaluation)
             self.convertEvaluationFloatToDecimal()
             if isinstance(argProfile,str): # input from stored instantiation
                 fileName = argProfile
@@ -134,15 +135,15 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 self.criteriaCategoryLimits = profile['criteriaCategoryLimits']
             else: # input from a profiles dictionary
                 self.name = 'sorting_with_given_profile'
-                self.categories = copy.deepcopy(argProfile['categories'])
-                self.criteriaCategoryLimits = copy.deepcopy(argProfile['criteriaCategoryLimits'])
+                self.categories = deepcopy(argProfile['categories'])
+                self.criteriaCategoryLimits = deepcopy(argProfile['criteriaCategoryLimits'])
         else:
             defaultProfiles = True
             self.name = 'sorting_with_default_profiles'
             normPerfTab = NormalizedPerformanceTableau(perfTab)
-            self.criteria = copy.deepcopy(normPerfTab.criteria)
+            self.criteria = deepcopy(normPerfTab.criteria)
             self.convertWeightFloatToDecimal()
-            self.evaluation = copy.deepcopy(normPerfTab.evaluation)
+            self.evaluation = deepcopy(normPerfTab.evaluation)
             self.convertEvaluationFloatToDecimal()
 
             # supposing all criteria scales between 0.0 and 100.0
@@ -154,7 +155,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             k = int(100 / scaleSteps)
             for i in range(0,100+k,k):
                 categories[str(i)] = {'name':str(i), 'order':i}
-            self.categories = copy.deepcopy(categories)
+            self.categories = deepcopy(categories)
 
             criteriaCategoryLimits = {}
             criteriaCategoryLimits['lowerClosed'] = lowerClosed
@@ -165,7 +166,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                         'minimum':int(c),
                         'maximum':int(c)+k
                         }
-            self.criteriaCategoryLimits = copy.deepcopy(criteriaCategoryLimits)
+            self.criteriaCategoryLimits = deepcopy(criteriaCategoryLimits)
 
         # set the category limits type (lowerClosed = True is default)
         self.criteriaCategoryLimits['lowerClosed'] = lowerClosed
@@ -210,8 +211,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         # construct outranking relation
         if isRobust:
             g = RobustOutrankingDigraph(self)
-            self.valuationdomain = copy.deepcopy(g.valuationdomain)
-            self.relation = copy.deepcopy(g.relation)
+            self.valuationdomain = deepcopy(g.valuationdomain)
+            self.relation = deepcopy(g.relation)
         else:
             Min = Decimal('%.4f' % minValuation)
             Max = Decimal('%.4f' % maxValuation)
@@ -247,7 +248,19 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     for x in self.actions:
                         self.relation[x][y] = Med
 
-        
+        # compute weak ordering
+        sortingRelation = self.computeSortingRelation(Debug=Debug)
+        for x in self.actionsOrig:
+            for y in self.actionsOrig:
+                self.relation[x][y] = sortingRelation[x][y]
+
+        # reset original action set
+        self.actions = deepcopy(self.actionsOrig)
+        self.order = len(self.actions)
+
+        # compute weak ordering by choosing
+        self.computeRankingByChoosing()
+
 
         # init general digraph Data
         self.order = len(self.actions)
@@ -285,6 +298,47 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
         s += '</table>'
         return s
+
+    def computeSortingRelation(self,categoryContents=None,Debug=False):
+        """
+        constructs a bipolar sorting relation using the category contents.
+        """
+        if categoryContents == None:
+            categoryContents = self.computeCategoryContents()
+        categoryKeys = self.orderedCategoryKeys()
+
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        actions = [x for x in self.actionsOrig]
+        currActions = set(actions)
+        #sortedActions = set()
+        sortingRelation = {}
+        for x in actions:
+            sortingRelation[x] = {}
+            for y in actions:
+                sortingRelation[x][y] = Med
+                
+        if Debug:
+            print('categoryContents',categoryContents)
+        for i in categoryKeys:
+            ibch = set(categoryContents[i])
+            ribch = set(currActions) - ibch
+            if Debug:
+                print('ibch,ribch',ibch,ribch)
+            for x in ibch:
+##                for y in sortedActions:
+##                    sortingRelation[x][y] = Max
+##                    sortingRelation[y][x] = Min                    
+                for y in ibch:
+                    sortingRelation[x][y] = Med
+                    sortingRelation[y][x] = Med
+                for y in ribch:
+                    sortingRelation[x][y] = Min
+                    sortingRelation[y][x] = Max
+            currActions = currActions - ibch
+##            sortedActions = sortedActions | ibch 
+        return sortingRelation
 
 
     def showCriteriaCategoryLimits(self):
@@ -1388,7 +1442,7 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    t = RandomCBPerformanceTableau(numberOfActions=20,
+    t = RandomCBPerformanceTableau(numberOfActions=10,
                                    numberOfCriteria=13,
                                    weightDistribution='equiobjectives')
 ##    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
@@ -1399,24 +1453,31 @@ if __name__ == "__main__":
     #t.showQuantileSort()
     #t = XMCDA2PerformanceTableau('uniSorting')
     #t = XMCDA2PerformanceTableau('spiegel2004')
-    s0 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
-                                LowerClosed=False,
-                                Debug=False)
-    #print(s0.categories)
-    s0.showSorting(Reverse=True)
-    for x in s0.actions:
-        s0.showActionCategories(x,Debug=False)
-    s0.showActionsSortingResult()
-    s0.exportGraphViz('tests0',graphType="pdf")
-    s1 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
-                                LowerClosed=True,
-                                Debug=False)
-    #print(s0.categories)
-    s1.showSorting(Reverse=True)
-##    for x in s1.actions:
-##        s1.showActionCategories(x,Debug=False)
-    s1.showActionsSortingResult()
-    s1.exportGraphViz('tests1',graphType="pdf")
+    s = SortingDigraph(t)
+    s.showSorting()
+    qs = QuantilesSortingDigraph(t,limitingQuantiles=7)
+    qs.showSorting()
+    g = BipolarOutrankingDigraph(t)
+    print(g.computeOrdinalCorrelation(s))
+    print(g.computeOrdinalCorrelation(qs))
+##    s0 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
+##                                LowerClosed=False,
+##                                Debug=False)
+##    #print(s0.categories)
+##    s0.showSorting(Reverse=True)
+##    for x in s0.actions:
+##        s0.showActionCategories(x,Debug=False)
+##    s0.showActionsSortingResult()
+##    s0.exportGraphViz('tests0',graphType="pdf")
+##    s1 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
+##                                LowerClosed=True,
+##                                Debug=False)
+##    #print(s0.categories)
+##    s1.showSorting(Reverse=True)
+####    for x in s1.actions:
+####        s1.showActionCategories(x,Debug=False)
+##    s1.showActionsSortingResult()
+##    s1.exportGraphViz('tests1',graphType="pdf")
 ##    s0.showSorting(Reverse=False)
 ##    sortingRelation = s0.computeSortingRelation()
 ##    #s0.showRelationTable(actionsSubset=s0.actionsOrig,relation=sortingRelation)
