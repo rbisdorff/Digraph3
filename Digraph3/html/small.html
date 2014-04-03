@@ -1,3 +1,27 @@
+<!--
+#
+# Html/JavaScript implementation of digraphs graph export
+# 
+# Copyright (C) 2014  Gary Cornelius
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License along
+#    with this program; if not, write to the Free Software Foundation, Inc.,
+#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+####################### 
+-->
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -31,14 +55,38 @@
 
 <body>
   <script>
-  d3.json("dataset.json", function(error, links) {
+  var links,labels;
+  var width = 900,
+    height = 700;
+  
+
+  var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+  var path = svg.selectAll("path");
+  var node = svg.selectAll(".node");
+  var labels = svg.selectAll("labels");
+
+  var force = d3.layout.force()
+    .size([width, height])
+    .linkDistance(400)
+    .linkStrength(1.5)
+    .charge(-5000)
+    .on("tick", tick)
+    .friction(0.1)
+    .gravity(0.1)
+    .start();
+
+  d3.json("dataset.json", function(json) {
+    links=json;
+    update();
+  })
   /*
    *
    *  Functions
    *
    */
   var linkedByIndex = {};
-
   var unfocusNode = function(d) {
     var circle = d3.select();
     links.links.forEach(
@@ -106,6 +154,10 @@
  	 
 	}
 
+  /*var hideFocus= function hideFocus(d) {
+        work in progress..
+  }*/
+
   function isConnected(a, b) {
     return linkedByIndex[b.index + "," + a.index] || linkedByIndex[a.index + "," + b.index];
   }
@@ -116,12 +168,12 @@
   
   
   function tick() {
-    labels
+    labels 
       .attr("x", function(d) { return (d.source.x + d.target.x) /2 ; }) 
       .attr("y", function(d) { return (d.source.y + d.target.y) /2; }) 
     path
       .attr('d', function(d) {
-        var deltaX = d.target.x - d.source.x,
+    var deltaX = d.target.x - d.source.x,
         deltaY = d.target.y - d.source.y,
         dist = Math.sqrt(deltaX * deltaX + deltaY * deltaY),
         normX = deltaX / dist,
@@ -148,32 +200,15 @@
    *  Graph
    *
    */
-
-  var nodes = links.nodes;
-  var width = 900,
-    height = 700;
+ function update () {
+   // 
  
-  var force = d3.layout.force()
-    .nodes(d3.values(nodes))
-    .links(links.links)
-    .size([width, height])
-    .linkDistance(160)
-    .linkStrength(0.1)
-    .charge(-1000)
-    .on("tick", tick)
-    .friction(0.9)
-    .gravity(0.1)
-    .start();
-
-  setTimeout(function() {
-    force.start();
-    }, 6000);  
-       
-
-  var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height)
+  var nodes = links.nodes;
   
+   force
+      .nodes(nodes)
+      .links(links.links)
+      .start();
   //Background
   svg.append("rect")
    .attr("fill", "white")
@@ -240,7 +275,7 @@
     .attr("d", "M10,-5L0,0L10,5z");
   
 
-  var path = svg.append("svg:g").selectAll("path")
+  path = svg.append("svg:g").selectAll("path")
     .data(force.links())
     .enter().append("svg:path")
     .attr("class", function(d) { return "link " + d.type; })
@@ -260,7 +295,7 @@
           return "url(#start-full)";
       });
 
-  var labels = svg.selectAll('text')
+  labels = svg.selectAll('text')
     .data(links.links)
     .enter().append('text')
     .attr("x", function(d) { return (d.source.y + d.target.y)/2 ; }) 
@@ -269,9 +304,9 @@
     .style("font-family", "Comic Sans MS")
     .text(function(d) {return d.value;}); 
 
+  
 
-
-  var node = svg.selectAll(".node")
+  node = svg.selectAll(".node")
     .data(links.nodes)
     .enter().append("g")
     .attr("class", "node")
@@ -281,7 +316,7 @@
   node.append("circle")
     .attr("r", 15)
     .on("click", function() {})
-    .on("dblclick", focusNode)
+    .on("dblclick", function(){})
     .on("contextmenu", 
     	function(){
     		d3.event.preventDefault();}
@@ -293,7 +328,7 @@
     .style("font-family", "Comic Sans MS")
     .text(function(d) { return d.name; });
 
-  });
+  };
   </script>
 </body>
 </html>
