@@ -27,11 +27,13 @@
 <head>
   <meta charset="utf-8">
   <title>
-    Small Graph Template
+    Graph Template
   </title>
+  <script src="http://code.jquery.com/jquery-1.7.2.js"></script>
+  <script src="http://www.trendskitchens.co.nz/jquery/contextmenu/jquery.contextmenu.r2.js"></script>
   <script src="http://leopold-loewenheim.uni.lu/WWWgary/js/d3.v3.js"></script>
-  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script src="graph.js"></script>
+  
   <style>
   path.link {
     fill: none;
@@ -41,8 +43,9 @@
     }
   .node circle {
     cursor: pointer;
-    stroke: white;
-    stroke-width: 1.0px;
+    stroke: #333;
+    stroke-width: 2px;
+    
     } 
   text {
     fill: #000;
@@ -50,285 +53,25 @@
     pointer-events: none;
     text-anchor: middle;
   }
+  circle:hover{
+    fill: lightpink;
+  }
   </style>
 </head>
 
 <body>
+  <div class="contextMenu" id="cntxtMenu">
+        <ul>
+            <li id="inspect"> Inspect</li>
+            <li id="mark"> Mark</li>
+        </ul>
+  </div>
+
   <script>
-  var links,labels;
-  var width = 900,
-    height = 700;
-  
-
-  var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-  var path = svg.selectAll("path");
-  var node = svg.selectAll(".node");
-  var labels = svg.selectAll("labels");
-
-  var force = d3.layout.force()
-    .size([width, height])
-    .linkDistance(400)
-    .linkStrength(1.5)
-    .charge(-5000)
-    .on("tick", tick)
-    .friction(0.1)
-    .gravity(0.1)
-    .start();
-
-  d3.json("dataset.json", function(json) {
-    links=json;
-    update();
-  })
-  /*
-   *
-   *  Functions
-   *
-   */
-  var linkedByIndex = {};
-  var unfocusNode = function(d) {
-    var circle = d3.select();
-    links.links.forEach(
-      function(d) {
-        linkedByIndex[d.source.index + "," + d.target.index] = true;
-    });
-    
-    	node
-     	 	.transition(500)
-      		.style("opacity", 1.0)
-     	 	.style("fill", "steelblue"); 
-    	path
-      		.transition(500)
-      		.style("stroke-opacity", 1 )
-      		.transition(500)
-      		.style("opacity", 1 );
-   		 circle
-      		.transition(500);
-   		 labels
-      		.transition(500)
-      		.style("opacity", 1 );
-	}
-  
-  var focusNode = function(d) {
-    var circle = d3.select();
-    links.links.forEach(
-      function(d) {
-        linkedByIndex[d.source.index + "," + d.target.index] = true;
-    });
-    node
-      .transition(500)
-      .style("opacity", 
-        function(o) {
-          return isConnected(o, d) || isEqual(o,d) ? 1.0 : 0.2 ;
-        })
-      .style("fill", 
-        function(o) {
-          if (isConnected(o, d) || isEqual(o,d)) {
-              fillcolor = "steelblue";
-          }      
-          else {
-            fillcolor ="#000"
-          }
-          return fillcolor;
-        }); 
-    path
-      .transition(500)
-      .style("stroke-opacity", 
-        function(o) {
-          return o.source === d || o.target === d ? 1 : 0.2;
-        })
-      .transition(500)
-      .style("opacity", 
-        function(o) {
-          return o.source === d || o.target === d ? 1 : 0.2;
-        });
-    circle
-      .transition(500);
-    labels
-      .transition(500)
-      .style("opacity", 
-        function(o) {
-          return o.source === d || o.target === d ? 1 : 0;
-        });
- 	 
-	}
-
-  /*var hideFocus= function hideFocus(d) {
-        work in progress..
-  }*/
-
-  function isConnected(a, b) {
-    return linkedByIndex[b.index + "," + a.index] || linkedByIndex[a.index + "," + b.index];
-  }
-  function isEqual(a, b) {
-    return a.index == b.index;
-  }
-  
-  
-  
-  function tick() {
-    labels 
-      .attr("x", function(d) { return (d.source.x + d.target.x) /2 ; }) 
-      .attr("y", function(d) { return (d.source.y + d.target.y) /2; }) 
-    path
-      .attr('d', function(d) {
-    var deltaX = d.target.x - d.source.x,
-        deltaY = d.target.y - d.source.y,
-        dist = Math.sqrt(deltaX * deltaX + deltaY * deltaY),
-        normX = deltaX / dist,
-        normY = deltaY / dist,
-        sourcePadding = d.left ? 17 : 12,
-        targetPadding = d.right ? 17 : 12,
-        sourceX = d.source.x + (sourcePadding * normX),
-        sourceY = d.source.y + (sourcePadding * normY),
-        targetX = d.target.x - (targetPadding * normX),
-        targetY = d.target.y - (targetPadding * normY);
-    return 'M' + sourceX + ',' + sourceY + 'L' + targetX + ',' + targetY;
-  });
-        
-    node
-      .attr("transform", 
-        function(d) {
-          return "translate(" + d.x + "," + d.y + ")"; 
-        });  
-  }
-
-
-  /*
-   *
-   *  Graph
-   *
-   */
- function update () {
-   // 
- 
-  var nodes = links.nodes;
-  
-   force
-      .nodes(nodes)
-      .links(links.links)
-      .start();
-  //Background
-  svg.append("rect")
-   .attr("fill", "white")
-   .on("click",unfocusNode)
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .attr("fill", "#FAFAD2");
-  /*
-	Arrows
-  */
-  svg.append("svg:defs").selectAll("marker")
-    .data(["end-full"])
-    .enter().append("svg:marker")
-    .attr("id", String)
-    .attr("viewBox", "0 -5 10 10")
-    .attr("refX", 13)
-    .attr("refY", -0.0)
-    .attr("markerWidth", 6)
-    .attr("markerHeight", 6)
-    .attr("orient", "auto")
-    .append("svg:path")
-    .attr("d", "M0,-5L10,0L0,5z");
-  svg.append("svg:defs").selectAll("marker")
-    .data(["end-empty"])
-    .enter().append("svg:marker")
-    .attr("id", String)
-    .attr("viewBox", "0 -5 10 10")
-    .attr("refX", 13)
-    .attr("refY", -0.0)
-    .attr("markerWidth", 6)
-    .attr("markerHeight", 6)
-    .attr("orient", "auto")
-    .append("svg:path")
-    .attr("stroke", "black")  
-    .attr("fill", "white")  
-    .attr("stroke-width", 2)  
-    .attr("d", "M0,-5L10,0L0,5z");
-  svg.append("svg:defs").selectAll("marker")
-    .data(["start-full"])
-    .enter().append("svg:marker")
-    .attr("id", String)
-    .attr("viewBox", "0 -5 10 10")
-    .attr("refX", -3)
-    .attr("refY", -0.0)
-    .attr("markerWidth", 6)
-    .attr("markerHeight", 6)
-    .attr("orient", "auto")
-    .append("svg:path")
-    .attr("d", "M10,-5L0,0L10,5z");
-  svg.append("svg:defs").selectAll("marker")
-    .data(["start-empty"])
-    .enter().append("svg:marker")
-    .attr("id", String)
-    .attr("viewBox", "0 -5 10 10")
-    .attr("refX", -3)
-    .attr("refY", -0.0)
-    .attr("markerWidth", 6)
-    .attr("markerHeight", 6)
-    .attr("orient", "auto")
-    .append("svg:path")
-    .attr("stroke", "black")  
-    .attr("fill", "white")  
-    .attr("stroke-width", 2)  
-    .attr("d", "M10,-5L0,0L10,5z");
-  
-
-  path = svg.append("svg:g").selectAll("path")
-    .data(force.links())
-    .enter().append("svg:path")
-    .attr("class", function(d) { return "link " + d.type; })
-    .attr("class", "link")
-    .attr("stroke-dasharray", function(d) { if(d.type == 5 || d.type ==6|| d.type ==7) return "3,3";})
-    .attr("marker-end", 
-      function(d) { 
-        if(d.type == 4 || d.type ==6|| d.type ==7) 
-          return "url(#end-empty)"; 
-        if(d.type == 0 || d.type ==2|| d.type ==3) 
-          return "url(#end-full)";})
-    .attr("marker-start", 
-      function(d) { 
-        if(d.type == 3|| d.type ==5|| d.type ==7) 
-          return "url(#start-empty)"; 
-        if(d.type == 1 || d.type ==2|| d.type ==4) 
-          return "url(#start-full)";
-      });
-
-  labels = svg.selectAll('text')
-    .data(links.links)
-    .enter().append('text')
-    .attr("x", function(d) { return (d.source.y + d.target.y)/2 ; }) 
-    .attr("y", function(d) { return (d.source.x + d.target.x)/2 ; }) 
-    //.attr("text-anchor", "middle") 
-    .style("font-family", "Comic Sans MS")
-    .text(function(d) {return d.value;}); 
-
-  
-
-  node = svg.selectAll(".node")
-    .data(links.nodes)
-    .enter().append("g")
-    .attr("class", "node")
-    .style("fill","steelblue")
-    .call(force.drag);
-
-  node.append("circle")
-    .attr("r", 15)
-    .on("click", function() {})
-    .on("dblclick", function(){})
-    .on("contextmenu", 
-    	function(){
-    		d3.event.preventDefault();}
-    );
-
-  node.append("text")
-    .attr("x", 0)
-    .attr("dy", ".35em")
-    .style("font-family", "Comic Sans MS")
-    .text(function(d) { return d.name; });
-
-  };
+   $(document).ready(function () {
+  loadGraph();
+});
+   
   </script>
 </body>
 </html>
