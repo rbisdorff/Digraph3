@@ -1,4 +1,469 @@
-/*
+def htmlmodel(name="graph"):
+    return '''
+<!--
+
+    Html/JavaScript implementation of digraphs graph export
+ 
+ Copyright (C) 2014  Gary Cornelius
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+ 
+-->
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <title>
+'''+name+'''
+  </title>
+  <script src="http://code.jquery.com/jquery-1.7.2.js"></script>
+  <script src="http://www.trendskitchens.co.nz/jquery/contextmenu/jquery.contextmenu.r2.js"></script>
+  <script src="d3.v3.js"></script>
+  <script src="digraph3lib.js"></script>
+  
+  <style>
+  path.link {
+    fill: none;
+    cursor: pointer;
+    stroke: #000;
+    stroke-width: 2px;
+    }
+  .node circle {
+    cursor: pointer;
+    stroke: #333;
+    stroke-width: 2px;
+    
+    } 
+  text {
+    fill: #000;
+    font: 12px sans-serif;
+    pointer-events: none;
+    text-anchor: middle;
+  }
+  circle:hover{
+    fill: lightpink;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="contextMenu" id="cntxtMenu">
+        <ul>
+            <li id="inspect"> Inspect</li>
+            <li id="mark"> Mark</li>
+        </ul>
+  </div>
+
+  <script>
+   $(document).ready(function () {
+  loadGraph();
+});
+   
+  </script>
+</body>
+</html>
+'''
+def javascript():
+    return '''
+    /*
+#
+# Html/JavaScript implementation of digraphs graph export
+# 
+# Copyright (C) 2014  Gary Cornelius
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License along
+#    with this program; if not, write to the Free Software Foundation, Inc.,
+#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+####################### 
+*/
+function loadGraph() {
+
+  var links,labels,tick,path;
+  var width = 900,
+    height = 700;
+  
+
+  var svg = d3.select("body").append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+  svg.append("svg:defs").selectAll("marker")
+    .data(["end-full"])
+    .enter().append("svg:marker")
+    .attr("id", String)
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", 13)
+    .attr("refY", -0.0)
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 6)
+    .attr("orient", "auto")
+    .append("svg:path")
+    .attr("d", "M0,-5L10,0L0,5z");
+  svg.append("svg:defs").selectAll("marker")
+    .data(["end-empty"])
+    .enter().append("svg:marker")
+    .attr("id", String)
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", 13)
+    .attr("refY", -0.0)
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 6)
+    .attr("orient", "auto")
+    .append("svg:path")
+    .attr("stroke", "black")  
+    .attr("fill", "white")  
+    .attr("stroke-width", 2)  
+    .attr("d", "M0,-5L10,0L0,5z");
+  svg.append("svg:defs").selectAll("marker")
+    .data(["start-full"])
+    .enter().append("svg:marker")
+    .attr("id", String)
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", -3)
+    .attr("refY", -0.0)
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 6)
+    .attr("orient", "auto")
+    .append("svg:path")
+    .attr("d", "M10,-5L0,0L10,5z");
+  svg.append("svg:defs").selectAll("marker")
+    .data(["start-empty"])
+    .enter().append("svg:marker")
+    .attr("id", String)
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", -3)
+    .attr("refY", -0.0)
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 6)
+    .attr("orient", "auto")
+    .append("svg:path")
+    .attr("stroke", "black")  
+    .attr("fill", "white")  
+    .attr("stroke-width", 2)  
+    .attr("d", "M10,-5L0,0L10,5z");
+
+  var rect = svg.append("rect");
+    
+
+  var node = svg.selectAll(".node"),
+      labels = svg.selectAll("labels");
+
+  var force = d3.layout.force()
+    .size([width, height])
+    .linkDistance(150)
+    .linkStrength(1.5)
+    .charge(-5000)
+    .friction(0.1)
+    .gravity(0.1)
+    
+
+  d3.json("dataset.json", function(error,json) {
+    links=json;
+    force
+      .nodes(links.nodes)
+      .links(links.links);
+    start(json);
+  });
+  /*
+   *
+   *  Functions
+   *
+   */
+  
+  
+  
+  /*
+  Implementation which works as follows:
+  - Select node
+  - Push non connected nodes  and edges in the background
+   -- Not good for bigger graphs.
+  */
+  var linkedByIndex = {};
+  var focusNode = function(d,i) {
+    var circle = d3.select();
+    links.links.forEach(
+      function(i) {
+        linkedByIndex[i.source.index + "," + i.target.index] = true;
+    });
+
+    node
+      .transition(500)
+      .style("opacity", 
+        function(o) {
+          return isConnected(o, d) || isEqual(o,d) ? 1 : 0.2 ;
+        })
+      .style("fill", 
+        function(o) {
+          return isConnected(o, d) || isEqual(o,d) ? "#F6FBFF":"#000";
+        }); 
+    path
+      .transition(500)
+      .style("opacity", 
+        function(o) {
+          return o.source.index === d.index || o.target.index === d.index ? 1 : 0.1;
+        });
+    circle
+      .transition(500);
+    labels
+      .transition(500)
+      .style("opacity", 
+        function(o) {
+          return o.source.index === d.index || o.target.index === d.index ? 1 : 0;
+        });
+
+   
+  }
+
+  /*
+  * 
+  * The unfocus fucntion of focusNode 
+  *
+  */
+  var unfocusNode = function unfocusNode(d) {
+      console.log("Refreshing graph!")
+      node
+        .transition(500)
+          .style("opacity", 1.0)
+          .style("fill", "#F6FBFF"); 
+      svg.selectAll(".link")
+          .transition(500)
+          .style("stroke-opacity", 1 )
+          .transition(500)
+          .style("opacity", 1 );
+       labels
+          .transition(500)
+          .style("opacity", 1 );
+      releaseNodes;
+      
+  }
+
+  /*
+  * The hiideFocus hides the nodes that are non connected to the selected nodes completely.
+  * Big graphs have now a much better overview.
+  */
+  var hideFocus= function hideFocus(d) {
+    /*
+    work in progress
+    */
+      
+  }
+  /*
+  *
+  * Inverse function of hideFocus.
+  *
+  */
+  var unhideFocus = function(d) {
+     /*
+    work in progress
+    */
+  }
+
+  var nodeContext = function nodeContext(d) {
+     
+     $('g.node').contextMenu('cntxtMenu',
+    {
+        itemStyle:
+        {
+            fontFamily : 'Arial',
+            fontSize: '13px'
+        },
+        bindings:
+        {
+            'inspect': function(t) {
+                focusNode(d);
+            },
+            'mark': function(t) {
+                node
+                .style("fill", function(o) {
+          return isEqual(o,d) ? "green" : "#F6FBFF";
+            });
+            }
+        }
+    });
+    d3.event.preventDefault();
+  }
+
+  var releaseNodes=function releaseNodes(d) {
+    d.fixed = false; 
+    tick();
+    force.start();
+  }
+  /*
+  * Stop force and free drag
+  */
+  var dragstart = function dragstart(d,i) {
+        force.stop();
+    }
+
+  var dragmove = function dragmove(d,i) {
+        d.px += d3.event.dx;
+        d.py += d3.event.dy;
+        d.x += d3.event.dx;
+        d.y += d3.event.dy; 
+        tick(); 
+    }
+
+  var dragend = function dragend(d,i) {
+        d.fixed = true; 
+        tick();
+        force.resume();
+    }
+
+
+
+  function isConnected(a, b) {
+    return linkedByIndex[b.index + "," + a.index] || linkedByIndex[a.index + "," + b.index];
+  }
+  function isEqual(a, b) {
+    return a.index == b.index;
+  }
+  
+  
+ 
+  /*
+   *
+   *  Graph
+   *
+   */
+ function start(json) {
+   // 
+  
+  //Background
+  rect
+    .attr("fill", "white")
+    .on("click",unfocusNode)
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .attr("fill", "#FAFAD2");
+  
+
+  path = svg.append("g").selectAll('path')
+    .data(force.links())
+    .enter().append("svg:path")
+    .attr("class", function(d) { return "link " + d.type; })
+    .attr("class", "link")
+    .style("opacity",1)
+    .attr("stroke-dasharray", function(d) { if(d.type == 5 || d.type ==6|| d.type ==7) return "3,3";})
+    .attr("marker-end", 
+      function(d) { 
+        if(d.type == 4 || d.type ==6|| d.type ==7) 
+          return "url(#end-empty)"; 
+        if(d.type == 0 || d.type ==2|| d.type ==3) 
+          return "url(#end-full)";})
+    .attr("marker-start", 
+      function(d) { 
+        if(d.type == 3|| d.type ==5|| d.type ==7) 
+          return "url(#start-empty)"; 
+        if(d.type == 1 || d.type ==2|| d.type ==4) 
+          return "url(#start-full)";
+      });
+
+  labels = svg.selectAll('text')
+    .data(force.links())
+    .enter().append('text')
+    .attr("x", function(d) { return (d.source.y); }) 
+    .attr("y", function(d) { return (d.source.x); }) 
+    //.attr("text-anchor", "middle") 
+    .style("font-size", "8")
+    .style("font-family", "Comic Sans MS")
+    .text(function(d) {return d.value;}); 
+
+  
+  var node_drag = d3.behavior.drag()
+        .on("dragstart", dragstart)
+        .on("drag", dragmove)
+        .on("dragend", dragend);
+
+  node = svg.selectAll(".node")
+    .data(force.nodes())
+    .enter().append("g")
+    .attr("class", "node")
+    .style("fill","#F6FBFF")
+    .on("dblclick",releaseNodes)
+    .on("dragstart", dragstart)
+    .on("drag", dragmove)
+    .on("dragend", dragend)
+    .on("contextmenu", nodeContext)
+    .call(node_drag);
+
+
+
+  node.append("circle")
+    .attr("r", 15);
+    
+
+  node.append("text")
+    .attr("dx", 0)
+    .attr("dy", ".35em")
+    .style("font-family", "Comic Sans MS")
+    .text(function(d) { return d.name; });
+    force.start();
+  
+
+  tick = function tick() {
+    labels
+      .attr("x", function(d) { return (d.source.x + d.target.x) /2 ; }) 
+      .attr("y", function(d) { return (d.source.y + d.target.y) /2; }) 
+    path
+      .attr('d', function(d) {
+    var deltaX = d.target.x - d.source.x,
+        deltaY = d.target.y - d.source.y,
+        dist = Math.sqrt(deltaX * deltaX + deltaY * deltaY),
+        normX = deltaX / dist,
+        normY = deltaY / dist,
+        sourcePadding = d.left ? 17 : 12,
+        targetPadding = d.right ? 17 : 12,
+        sourceX = d.source.x + (sourcePadding * normX),
+        sourceY = d.source.y + (sourcePadding * normY),
+        targetX = d.target.x - (targetPadding * normX),
+        targetY = d.target.y - (targetPadding * normY);
+    return 'M' + sourceX + ',' + sourceY + 'L' + targetX + ',' + targetY;
+  });
+        
+    node
+      .attr("transform", 
+        function(d) {
+          return "translate(" + d.x + "," + d.y + ")"; 
+        });  
+  }
+
+
+  force.on("tick",tick)
+   .start();
+   };
+  
+}
+'''
+
+def d3export():
+    return '''
+    /*
 Copyright (c) 2010-2014, Michael Bostock
 All rights reserved.
 
@@ -1979,7 +2444,7 @@ Additional features:
     } : callback;
   }
   d3.dsv = function(delimiter, mimeType) {
-    var reFormat = new RegExp('["' + delimiter + "\n]"), delimiterCode = delimiter.charCodeAt(0);
+    var reFormat = new RegExp('["' + delimiter + "\\n]"), delimiterCode = delimiter.charCodeAt(0);
     function dsv(url, row, callback) {
       if (arguments.length < 3) callback = row, row = null;
       var xhr = d3_xhr(url, mimeType, row == null ? response : typedResponse(row), callback);
@@ -2067,21 +2532,21 @@ Additional features:
         return fields.map(function(field) {
           return formatValue(row[field]);
         }).join(delimiter);
-      })).join("\n");
+      })).join("\\n");
     };
     dsv.formatRows = function(rows) {
-      return rows.map(formatRow).join("\n");
+      return rows.map(formatRow).join("\\n");
     };
     function formatRow(row) {
       return row.map(formatValue).join(delimiter);
     }
     function formatValue(text) {
-      return reFormat.test(text) ? '"' + text.replace(/\"/g, '""') + '"' : text;
+      return reFormat.test(text) ? '"' + text.replace(/\\"/g, '""') + '"' : text;
     }
     return dsv;
   };
   d3.csv = d3.dsv(",", "text/csv");
-  d3.tsv = d3.dsv("	", "text/tab-separated-values");
+  d3.tsv = d3.dsv(" ", "text/tab-separated-values");
   var d3_timer_queueHead, d3_timer_queueTail, d3_timer_interval, d3_timer_timeout, d3_timer_active, d3_timer_frame = d3_window[d3_vendorSymbol(d3_window, "requestAnimationFrame")] || function(callback) {
     setTimeout(callback, 17);
   };
@@ -6305,11 +6770,11 @@ Additional features:
         /*
         Changed lines. 
         */
-      	if(typeof o.source == "string" || typeof o.target == "string") {
-      		for (var k = 0; k < n; ++k) {
-				if (nodes[k].name === o.source) links[i].source = nodes[k].index;
-       			if (nodes[k].name === o.target) links[i].target = nodes[k].index;
-        	}
+        if(typeof o.source == "string" || typeof o.target == "string") {
+            for (var k = 0; k < n; ++k) {
+                if (nodes[k].name === o.source) links[i].source = nodes[k].index;
+                if (nodes[k].name === o.target) links[i].target = nodes[k].index;
+            }
         }
         /*
         */
@@ -9323,4 +9788,5 @@ Additional features:
   } else {
     this.d3 = d3;
   }
-}();
+}();'''
+

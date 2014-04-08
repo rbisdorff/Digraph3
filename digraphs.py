@@ -2771,6 +2771,7 @@ class Digraph(object):
         import os
         import json
         import urllib
+        import htmlmodel
 
         if noSilent:
             print('*---- exporting as a html file ---------*')
@@ -2824,17 +2825,30 @@ class Digraph(object):
             	elif relation[actionkeys[i]][actionkeys[j]] < Med and relation[actionkeys[j]][actionkeys[i]] ==  Med:
             		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":5, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
 
-        do = open("dataset.json",'w')
-        do.write(json.dumps(dataset,indent=4 * ' '))
-        do.close()
+        fw = open("dataset.json",'w')
+        fw.write(json.dumps(dataset,indent=4 * ' '))
+        fw.close()
+
+        fw = open("index.html",'w')
+        fw.write(htmlmodel.htmlmodel())
+        fw.close()
+
+        fw = open("digraph3lib.js",'w')
+        fw.write(htmlmodel.javascript())
+        fw.close()
+
+        fw = open("d3.v3.js",'w')
+        fw.write(htmlmodel.d3export())
+        fw.close()
+
         # load file from internet and copyfile("./small.html",)?
-        import urllib.request
-        with urllib.request.urlopen("http://leopold-loewenheim.uni.lu/WWWgary/html/small.html") as url:
-            s = url.read()
+        #import urllib.request
+        #with urllib.request.urlopen("http://leopold-loewenheim.uni.lu/WWWgary/html/small.html") as url:
+        #    s = url.read()
             #I'm guessing this would output the html source code?
-            fo= open(fileName+'.html','wb')
-            fo.write(s)
-            fo.close()
+        #    fo= open(fileName+'.html','wb')
+        #    fo.write(s)
+        #    fo.close()
 
         if noSilent:
             print('*---- export done ---------*')
