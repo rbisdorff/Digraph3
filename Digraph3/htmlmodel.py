@@ -1,5 +1,6 @@
 def htmlmodel(name="graph"):
     return '''
+
 <!--
 
     Html/JavaScript implementation of digraphs graph export
@@ -29,7 +30,7 @@ def htmlmodel(name="graph"):
 <head>
   <meta charset="utf-8">
   <title>
-'''+name+'''
+graph
   </title>
   <script src="http://code.jquery.com/jquery-1.7.2.js"></script>
   <script src="http://www.trendskitchens.co.nz/jquery/contextmenu/jquery.contextmenu.r2.js"></script>
@@ -64,8 +65,8 @@ def htmlmodel(name="graph"):
 <body>
   <div class="contextMenu" id="cntxtMenu">
         <ul>
-            <li id="inspect"> Inspect</li>
-            <li id="mark"> Mark</li>
+            <li id="inspect"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/1397325540_Black_Search.png" height="15px" width="15px" /> Inspect</li>
+            <li id="details"> Details</li>
         </ul>
   </div>
 
@@ -77,10 +78,11 @@ def htmlmodel(name="graph"):
   </script>
 </body>
 </html>
+
 '''
 def javascript():
     return '''
-    /*
+/*
 #
 # Html/JavaScript implementation of digraphs graph export
 # 
@@ -220,7 +222,10 @@ function loadGraph() {
         })
       .style("fill", 
         function(o) {
-          return isConnected(o, d) || isEqual(o,d) ? "#F6FBFF":"#000";
+          if(isConnected(o, d)) return "#F6FBFF";
+          else if(isEqual(o,d)) return "lightpink";
+          return "#000";
+
         }); 
     path
       .transition(500)
@@ -236,6 +241,7 @@ function loadGraph() {
         function(o) {
           return o.source.index === d.index || o.target.index === d.index ? 1 : 0;
         });
+    d.color="green";
 
    
   }
@@ -250,7 +256,7 @@ function loadGraph() {
       node
         .transition(500)
           .style("opacity", 1.0)
-          .style("fill", "#F6FBFF"); 
+          .style("fill", "#F6FBFF");
       svg.selectAll(".link")
           .transition(500)
           .style("stroke-opacity", 1 )
@@ -284,7 +290,7 @@ function loadGraph() {
     */
   }
 
-  var nodeContext = function nodeContext(d) {
+  var context_node = function context_node(d) {
      
      $('g.node').contextMenu('cntxtMenu',
     {
@@ -297,12 +303,10 @@ function loadGraph() {
         {
             'inspect': function(t) {
                 focusNode(d);
+
             },
-            'mark': function(t) {
-                node
-                .style("fill", function(o) {
-          return isEqual(o,d) ? "green" : "#F6FBFF";
-            });
+            'details': function(t) {
+                
             }
         }
     });
@@ -409,7 +413,7 @@ function loadGraph() {
     .on("dragstart", dragstart)
     .on("drag", dragmove)
     .on("dragend", dragend)
-    .on("contextmenu", nodeContext)
+    .on("contextmenu", context_node)
     .call(node_drag);
 
 
