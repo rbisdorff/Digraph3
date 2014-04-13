@@ -82,6 +82,7 @@ graph
 '''
 def javascript():
     return '''
+
 /*
 #
 # Html/JavaScript implementation of digraphs graph export
@@ -106,7 +107,7 @@ def javascript():
 */
 function loadGraph() {
 
-  var links,labels,tick,path;
+  var links,labels,labelt,tick,path;
   var width = 900,
     height = 700;
   
@@ -142,6 +143,7 @@ function loadGraph() {
     .attr("fill", "white")  
     .attr("stroke-width", 2)  
     .attr("d", "M0,-5L10,0L0,5z");
+
   svg.append("svg:defs").selectAll("marker")
     .data(["start-full"])
     .enter().append("svg:marker")
@@ -241,7 +243,12 @@ function loadGraph() {
         function(o) {
           return o.source.index === d.index || o.target.index === d.index ? 1 : 0;
         });
-    d.color="green";
+    labelt
+      .transition(500)
+      .style("opacity", 
+        function(o) {
+          return o.source.index === d.index || o.target.index === d.index ? 1 : 0;
+        });
 
    
   }
@@ -263,6 +270,9 @@ function loadGraph() {
           .transition(500)
           .style("opacity", 1 );
        labels
+          .transition(500)
+          .style("opacity", 1 );
+        labelt
           .transition(500)
           .style("opacity", 1 );
       releaseNodes;
@@ -388,15 +398,21 @@ function loadGraph() {
           return "url(#start-full)";
       });
 
-  labels = svg.selectAll('text')
+  labels = svg.append("g").selectAll('text')
     .data(force.links())
     .enter().append('text')
-    .attr("x", function(d) { return (d.source.y); }) 
-    .attr("y", function(d) { return (d.source.x); }) 
-    //.attr("text-anchor", "middle") 
-    .style("font-size", "8")
-    .style("font-family", "Comic Sans MS")
+    .attr("dy", ".78em")
+    .style("font-size", "12px")
     .text(function(d) {return d.value;}); 
+
+  labelt = svg.append("g").selectAll('text')
+    .data(force.links())
+    .enter().append('text')
+    .attr("dy", ".78em")
+    .style("font-size", "12px")
+    .text(function(d) {return d.value;}); 
+
+  
 
   
   var node_drag = d3.behavior.drag()
@@ -404,7 +420,7 @@ function loadGraph() {
         .on("drag", dragmove)
         .on("dragend", dragend);
 
-  node = svg.selectAll(".node")
+  node = svg.append("g").selectAll(".node")
     .data(force.nodes())
     .enter().append("g")
     .attr("class", "node")
@@ -432,8 +448,15 @@ function loadGraph() {
 
   tick = function tick() {
     labels
-      .attr("x", function(d) { return (d.source.x + d.target.x) /2 ; }) 
-      .attr("y", function(d) { return (d.source.y + d.target.y) /2; }) 
+      .attr("x", function(d) { return (((d.source.x + d.target.x) /2) + d.source.x)/2 ; }) 
+      .attr("y", function(d) { return (((d.source.y + d.target.y) /2) + d.source.y)/2; });
+
+    labelt
+      .attr("x", function(d) { return (((d.source.x + d.target.x) /2) + d.target.x)/2 ; }) 
+      .attr("y", function(d) { return (((d.source.y + d.target.y) /2) + d.target.y)/2; });
+
+    
+
     path
       .attr('d', function(d) {
     var deltaX = d.target.x - d.source.x,
@@ -463,11 +486,12 @@ function loadGraph() {
    };
   
 }
+
 '''
 
 def d3export():
     return '''
-    /*
+/*
 Copyright (c) 2010-2014, Michael Bostock
 All rights reserved.
 
