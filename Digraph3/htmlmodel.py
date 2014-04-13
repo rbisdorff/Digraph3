@@ -82,7 +82,6 @@ graph
 '''
 def javascript():
     return '''
-
 /*
 #
 # Html/JavaScript implementation of digraphs graph export
@@ -302,7 +301,7 @@ function loadGraph() {
 
   var context_node = function context_node(d) {
      
-     $('g.node').contextMenu('cntxtMenu',
+     $('g.node').contextMenu('cntxtNode',
     {
         itemStyle:
         {
@@ -316,6 +315,29 @@ function loadGraph() {
 
             },
             'details': function(t) {
+                
+            }
+        }
+    });
+    d3.event.preventDefault();
+  }
+
+  var context_main = function context_main(d) {
+     
+     $('rect').contextMenu('cntxtMenu',
+    {
+        itemStyle:
+        {
+            fontFamily : 'Arial',
+            fontSize: '13px'
+        },
+        bindings:
+        {
+            'import': function(t) {
+                $('input[type="file"]');
+
+            },
+            'export': function(t) {
                 
             }
         }
@@ -372,6 +394,7 @@ function loadGraph() {
   rect
     .attr("fill", "white")
     .on("click",unfocusNode)
+    .on("contextmenu", context_main)
     .attr("width", "100%")
     .attr("height", "100%")
     .attr("fill", "#FAFAD2");
@@ -486,7 +509,6 @@ function loadGraph() {
    };
   
 }
-
 '''
 
 def d3export():
