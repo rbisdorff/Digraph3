@@ -2958,7 +2958,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     if category == 'Robust Rubis':
                         fo.write('<values>\n')
                         fo.write('<value name="outranking"><real>%2.2f</real></value>\n' % (cardinalRelation[x][y]) )
-                        fo.write('<value name="robustness"><integer>%d</integer></value>\n' % (int(relation[x][y])) )
+                        if x == y:
+                            fo.write('<value name="robustness"><integer>%d</integer></value>\n' % (3) )
+                        else:
+                            fo.write('<value name="robustness"><integer>%d</integer></value>\n' % (int(relation[x][y])) )
                         fo.write('</values>\n') 
                     else:
                         fo.write('<value><real>%2.2f' % (relation[x][y]) )
