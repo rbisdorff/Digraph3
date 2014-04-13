@@ -50,7 +50,7 @@ graph
     stroke-width: 2px;
     
     } 
-  text {
+  .node text {
     fill: #000;
     font: 12px sans-serif;
     pointer-events: none;
@@ -63,10 +63,18 @@ graph
 </head>
 
 <body>
+  <div class="contextMenu" id="cntxtNode">
+        <ul>
+            <li id="inspect"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/info.png" height="15px" width="15px" /> Inspect</li>
+            <li id="details"> Details</li>
+        </ul>
+  </div>
+
   <div class="contextMenu" id="cntxtMenu">
         <ul>
-            <li id="inspect"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/1397325540_Black_Search.png" height="15px" width="15px" /> Inspect</li>
-            <li id="details"> Details</li>
+            <li id="reset"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/reset.png" height="15px" width="15px" /> Reset</li>
+            <li id="import"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/folder-open.png" height="15px" width="15px" /> Import</li>
+            <li id="export"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/save.png" height="15px" width="15px" /> Export</li>
         </ul>
   </div>
 
@@ -82,6 +90,7 @@ graph
 '''
 def javascript():
     return '''
+
 /*
 #
 # Html/JavaScript implementation of digraphs graph export
@@ -334,11 +343,19 @@ function loadGraph() {
         bindings:
         {
             'import': function(t) {
-                $('input[type="file"]');
-
+                /*
+                To be done later.
+                */
+                alert("Nothing to see here yet.")
             },
-            'export': function(t) {
-                
+            'export': function(t) {  
+                /*
+                To be done later
+                */
+                alert("Nothing to see here yet.")
+            },
+            'reset': function(t) {  
+                d3.selectAll("g").remove();
             }
         }
     });
@@ -509,6 +526,8 @@ function loadGraph() {
    };
   
 }
+
+
 '''
 
 def d3export():
