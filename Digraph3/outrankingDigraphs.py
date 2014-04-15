@@ -2949,8 +2949,12 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         fo.write('<value><integer>%d</integer></value>' % (relation[x][y]) )
                     elif category == 'Robust Rubis':
                         fo.write('<values>\n')
-                        fo.write('<value name="outranking"><integer>%d</integer></value>\n' % (cardinalRelation[x][y]) )
-                        fo.write('<value name="robustness"><integer>%d</integer></value>\n' % (relation[x][y]) )
+                        if x != y:
+                            fo.write('<value name="outranking"><integer>%d</integer></value>\n' % (cardinalRelation[x][y]) )
+                            fo.write('<value name="robustness"><integer>%d</integer></value>\n' % (relation[x][y]) )
+                        else:
+                            fo.write('<value name="outranking"><integer>%d</integer></value>\n' % (100) )
+                            fo.write('<value name="robustness"><integer>%d</integer></value>\n' % (3) )                            
                         fo.write('</values>\n')
                     else:
                         fo.write('<value><real>%2.2f</real></value>' % (relation[x][y]) )
@@ -2959,8 +2963,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         fo.write('<values>\n')
                         fo.write('<value name="outranking"><real>%2.2f</real></value>\n' % (cardinalRelation[x][y]) )
                         if x == y:
+                            fo.write('<value name="outranking"><real>%2.2f</real></value>\n' % (100) )
                             fo.write('<value name="robustness"><integer>%d</integer></value>\n' % (3) )
                         else:
+                            fo.write('<value name="outranking"><real>%2.2f</real></value>\n' % (cardinalRelation[x][y]) )
                             fo.write('<value name="robustness"><integer>%d</integer></value>\n' % (int(relation[x][y])) )
                         fo.write('</values>\n') 
                     else:
