@@ -5,7 +5,7 @@ def htmlmodel(name="graph"):
 
     Html/JavaScript implementation of digraphs graph export
  
- Copyright (C) 2014  Gary Cornelius
+ Copyright (C) 2014  Gary Cornelius - University of Luxembourg
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -59,13 +59,17 @@ graph
   circle:hover{
     fill: lightpink;
   }
+
+  image {
+    cursor: help;
+  }
   </style>
 </head>
 
 <body>
   <div class="contextMenu" id="cntxtNode">
         <ul>
-            <li id="inspect"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/info.png" height="15px" width="15px" /> Inspect</li>
+            <li id="inspect"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/inspect.png" height="15px" width="15px" /> Inspect</li>
             <li id="details"> Details</li>
         </ul>
   </div>
@@ -95,7 +99,7 @@ def javascript():
 #
 # Html/JavaScript implementation of digraphs graph export
 # 
-# Copyright (C) 2014  Gary Cornelius
+# Copyright (C) 2014  Gary Cornelius - University of Luxembourg
 #
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -415,6 +419,30 @@ function loadGraph() {
     .attr("width", "100%")
     .attr("height", "100%")
     .attr("fill", "#FAFAD2");
+
+  svg.append("text")
+    .attr("x", width-340)
+    .attr("y", height -20)
+    .text("D3 Data Driven Document, G. Cornelius, 2014");
+
+  svg.append("image")
+    .attr("width", 30)
+    .attr("height", 30)
+    .attr("xlink:href", "http://leopold-loewenheim.uni.lu/WWWgary/icons/info.png")
+    .attr("x", 10)
+    .on("click",function(o) {
+
+      alert( 
+        'MANUAL:\\n\\n'
+        + "\\t• Use your left mouse to drag and drop nodes.\\n\\n"
+        + '\\t• Once dragged a node is frozen and can be released by a simple double click.\\n\\n'
+        + '\\t• Right Click on the background lets you import and export XMCDA files or reset the graph.\\n\\n'
+        + '\\t•  Right-click on Nodes or Edges to get further information or edit their values.\\n\\n'
+        + '\\t•  Clicking on the background sets your graph back out of the "Zoom".\\n\\n'       
+    );
+    })
+    .attr("y",height-35);
+
   
 
   path = svg.append("g").selectAll('path')
@@ -495,8 +523,6 @@ function loadGraph() {
       .attr("x", function(d) { return (((d.source.x + d.target.x) /2) + d.target.x)/2 ; }) 
       .attr("y", function(d) { return (((d.source.y + d.target.y) /2) + d.target.y)/2; });
 
-    
-
     path
       .attr('d', function(d) {
     var deltaX = d.target.x - d.source.x,
@@ -510,8 +536,8 @@ function loadGraph() {
         sourceY = d.source.y + (sourcePadding * normY),
         targetX = d.target.x - (targetPadding * normX),
         targetY = d.target.y - (targetPadding * normY);
-    return 'M' + sourceX + ',' + sourceY + 'L' + targetX + ',' + targetY;
-  });
+        return 'M' + sourceX + ',' + sourceY + 'L' + targetX + ',' + targetY;
+      });
         
     node
       .attr("transform", 
@@ -526,7 +552,6 @@ function loadGraph() {
    };
   
 }
-
 
 '''
 
