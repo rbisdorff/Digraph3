@@ -2789,13 +2789,13 @@ class Digraph(object):
         # Example: dataset= '{"nodes":[{"name":"Gary","group":1},{"name":"Pit","group":1},],"links":[{"source":"Gary","target":"Pit","value":1},]}'
         dataset = {"nodes":[],"links":[]}
         for node in self.actions:
-        	if(isinstance(self.actions,dict)):
-        		if("comment" in self.actions[node]):
-        			dataset["nodes"].append({"name": str(node) ,"group":1, "comment": self.actions[node]["comment"]})
-        		else:
-		         	dataset["nodes"].append({"name": str(node) ,"group":1, "comment": "none"})
-	        else:
-	         	dataset["nodes"].append({"name": str(node) ,"group":1, "comment": "none"})
+            if(isinstance(self.actions,dict)):
+                if("comment" in self.actions[node]):
+                    dataset["nodes"].append({"name": str(node) ,"group":1, "comment": self.actions[node]["comment"]})
+                else:
+                    dataset["nodes"].append({"name": str(node) ,"group":1, "comment": "none"})
+            else:
+                dataset["nodes"].append({"name": str(node) ,"group":1, "comment": "none"})
         for i in range(n):
             for j in range(i+1, n):
             	# Arrow types:
@@ -2808,30 +2808,33 @@ class Digraph(object):
             	# r(a,b) < Med & r(b,a) = Med  a o..  b :5 done 
             	# r(a,b) = Med & r(b,a) < Med  a  ..o b :6 done
             	# r(a,b) = Med = r(b,a)        a o..o b :7 done
-            	if relation[actionkeys[i]][actionkeys[j]] > Med and relation[actionkeys[j]][actionkeys[i]] > Med:
-            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":2, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
-            	elif relation[actionkeys[i]][actionkeys[j]] > Med and relation[actionkeys[j]][actionkeys[i]] == Med:
-            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":3, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
-            	elif relation[actionkeys[i]][actionkeys[j]] == Med and relation[actionkeys[j]][actionkeys[i]] > Med:
-            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":4, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
-            	elif relation[actionkeys[i]][actionkeys[j]] == Med and relation[actionkeys[j]][actionkeys[i]] == Med:
-            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":7, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
-            	elif relation[actionkeys[i]][actionkeys[j]] > Med and relation[actionkeys[j]][actionkeys[i]] <  Med:
-            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":0, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
-            	elif relation[actionkeys[i]][actionkeys[j]] == Med and relation[actionkeys[j]][actionkeys[i]] <  Med:
-            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":6, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
-            	elif relation[actionkeys[i]][actionkeys[j]] < Med and relation[actionkeys[j]][actionkeys[i]] >  Med:
-            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":1, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
-            	elif relation[actionkeys[i]][actionkeys[j]] < Med and relation[actionkeys[j]][actionkeys[i]] ==  Med:
-            		dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":5, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
+                if relation[actionkeys[i]][actionkeys[j]] > Med and relation[actionkeys[j]][actionkeys[i]] > Med:
+                    dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":2, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
+                elif relation[actionkeys[i]][actionkeys[j]] > Med and relation[actionkeys[j]][actionkeys[i]] == Med:
+                    dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":3, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
+                elif relation[actionkeys[i]][actionkeys[j]] == Med and relation[actionkeys[j]][actionkeys[i]] > Med:
+                    dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":4, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
+                elif relation[actionkeys[i]][actionkeys[j]] == Med and relation[actionkeys[j]][actionkeys[i]] == Med:
+                    dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":7, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
+                elif relation[actionkeys[i]][actionkeys[j]] > Med and relation[actionkeys[j]][actionkeys[i]] <  Med:
+                    dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":0, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
+                elif relation[actionkeys[i]][actionkeys[j]] == Med and relation[actionkeys[j]][actionkeys[i]] <  Med:
+                    dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":6, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
+                elif relation[actionkeys[i]][actionkeys[j]] < Med and relation[actionkeys[j]][actionkeys[i]] >  Med:
+                    dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":1, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
+                elif relation[actionkeys[i]][actionkeys[j]] < Med and relation[actionkeys[j]][actionkeys[i]] ==  Med:
+                    dataset["links"].append({"source":str(actionkeys[i]) , "target" : str(actionkeys[j]), "type":5, "value" : str(relation[actionkeys[i]][actionkeys[j]])})
 
         fw = open("dataset.json",'w')
         fw.write(json.dumps(dataset,indent=4 * ' '))
         fw.close()
 
         fw = open("index.html",'w')
-        fw.write(htmlmodel.htmlmodel())
+        fw.write(htmlmodel.htmlmodel(name=self.name))
         fw.close()
+
+        self.saveXMCDA2(fileExt="xml")
+        
 
         fw = open("digraph3lib.js",'w')
         fw.write(htmlmodel.javascript())
@@ -3051,7 +3054,7 @@ class Digraph(object):
         """
         print('*----- saving digraph in XML format  -------------*')
         actions = [x for x in self.actions]
-        nameExt = fileName+fileExt
+        nameExt = fileName+"."+fileExt
         fo = open(nameExt,'w')
         fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
         if servingD3:

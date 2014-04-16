@@ -36,6 +36,8 @@ graph
   <script src="http://www.trendskitchens.co.nz/jquery/contextmenu/jquery.contextmenu.r2.js"></script>
   <script src="d3.v3.js"></script>
   <script src="digraph3lib.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   
   <style>
   path.link {
@@ -57,7 +59,7 @@ graph
     text-anchor: middle;
   }
   circle:hover{
-    fill: lightpink;
+    fill: aquamarine;
   }
 
   image {
@@ -81,6 +83,28 @@ graph
             <li id="export"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/save.png" height="15px" width="15px" /> Export</li>
         </ul>
   </div>
+<!--UPLOAD-->
+  <div class="modal fade" id="upModal" role="dialog" aria-labelledby="upModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Upload Data</h4>
+        </div>
+        <div class="modal-body">
+          <!-- INPUT -->
+         Choose your file: <br /> 
+      <input name="xml" type="file" id="xml" /> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          
+        </div>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
 
   <script>
    $(document).ready(function () {
@@ -117,6 +141,7 @@ def javascript():
 #
 ####################### 
 */
+var xmlinput;
 function loadGraph() {
 
   var links,labels,labelt,tick,path;
@@ -128,6 +153,7 @@ function loadGraph() {
       .attr("width", width)
       .attr("height", height);
 
+  //Create all arrow types.
   svg.append("svg:defs").selectAll("marker")
     .data(["end-full"])
     .enter().append("svg:marker")
@@ -197,15 +223,18 @@ function loadGraph() {
     .charge(-5000)
     .friction(0.1)
     .gravity(0.1)
-    
-
-  d3.json("dataset.json", function(error,json) {
-    links=json;
-    force
-      .nodes(links.nodes)
-      .links(links.links);
-    start(json);
+   reload();
+  
+  function reload() {
+    d3.selectAll("g").remove();
+    d3.json("dataset.json", function(error,json) {
+      links=json;
+      force
+        .nodes(links.nodes)
+        .links(links.links);
+      start(json);
   });
+  }
   /*
    *
    *  Functions
@@ -291,27 +320,12 @@ function loadGraph() {
       
   }
 
-  /*
-  * The hiideFocus hides the nodes that are non connected to the selected nodes completely.
-  * Big graphs have now a much better overview.
-  */
-  var hideFocus= function hideFocus(d) {
-    /*
-    work in progress
-    */
-      
-  }
+  
   /*
   *
-  * Inverse function of hideFocus.
+  *  Context-menu for right clicks on Nodes.
   *
   */
-  var unhideFocus = function(d) {
-     /*
-    work in progress
-    */
-  }
-
   var context_node = function context_node(d) {
      
      $('g.node').contextMenu('cntxtNode',
@@ -335,6 +349,11 @@ function loadGraph() {
     d3.event.preventDefault();
   }
 
+  /*
+  *
+  *  Context-menu for right clicks on Background.
+  *
+  */
   var context_main = function context_main(d) {
      
      $('rect').contextMenu('cntxtMenu',
@@ -346,11 +365,11 @@ function loadGraph() {
         },
         bindings:
         {
-            'import': function(t) {
+            'import': function(evt) {
                 /*
                 To be done later.
                 */
-                alert("Nothing to see here yet.")
+              importXML();
             },
             'export': function(t) {  
                 /*
@@ -359,7 +378,7 @@ function loadGraph() {
                 alert("Nothing to see here yet.")
             },
             'reset': function(t) {  
-                d3.selectAll("g").remove();
+                reload();
             }
         }
     });
@@ -402,7 +421,37 @@ function loadGraph() {
   }
   
   
- 
+  function importXML() {
+    var reader;
+              if (window.File && window.FileReader && window.FileList && window.Blob) {
+              //alert("Supported")
+                 $('#upModal').modal('show');
+                 function handleFileSelect(evt) {
+                  $('#upModal').modal('toggle');
+                  var files = document.getElementById('xml').files;
+                  if (!files.length) {
+                     alert('Please select a file!');
+                     return;
+                  }
+                  var file = files[0];
+                  var start =  0;
+                  var stop = file.size - 1;
+                  reader= new FileReader();
+                  var blob = file.slice(start, stop + 1);
+                  reader.readAsBinaryString(blob);
+                  
+                  reader.onloadend = function(evt) { xmlinput = evt.target.result; };
+
+                   }
+
+                 document.getElementById('xml').addEventListener('change', handleFileSelect, false);
+
+
+
+              } else {
+                alert('The File APIs are not fully supported in this browser.');
+              }
+  }
   /*
    *
    *  Graph
@@ -552,6 +601,7 @@ function loadGraph() {
    };
   
 }
+
 
 '''
 
