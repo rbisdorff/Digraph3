@@ -282,14 +282,15 @@ function initialize() {
    -- Not good for bigger graphs.
   */
   var linkedByIndex = {};
-  var focusNode = function(d,i) {
+  function focusNode(d) {
+    console.log("Focusing node " + d.name);
     var circle = d3.select();
-    links.links.forEach(
+    json.links.forEach(
       function(i) {
         linkedByIndex[i.source.index + "," + i.target.index] = true;
     });
 
-    node
+    svg.selectAll(".node")
       .transition(500)
       .style("opacity", 
         function(o) {
@@ -374,7 +375,7 @@ function initialize() {
 
             },
             'details': function(t) {
-                
+                alert(d.name)
             }
         }
     });
@@ -598,12 +599,13 @@ function initialize() {
         function(d) {
           return "translate(" + d.x + "," + d.y + ")"; 
         });  
-  }
+    }
 
 
   force.on("tick",tick)
    .start();
-   };
+   
+  }
   
 
 
