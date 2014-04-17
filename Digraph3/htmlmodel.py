@@ -94,10 +94,10 @@ graph
         <div class="modal-body">
           <!-- INPUT -->
          Choose your file: <br /> 
-      <input name="xml" type="file" id="xml" /> 
+      <input name="xml" type="file" id="xml" value=""/> 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
           
         </div>
 
@@ -108,8 +108,8 @@ graph
 
   <script>
    $(document).ready(function () {
-  loadGraph();
-});
+     initialize();
+    });
    
   </script>
 </body>
@@ -141,15 +141,17 @@ def javascript():
 #
 ####################### 
 */
-var xmlinput;
-function loadGraph() {
+//Some usefull global variables.
+var xmlinput="",json,links,labels,labelt,tick,path,rect,force,node,svg,height,width;
 
-  var links,labels,labelt,tick,path;
-  var width = 900,
+
+function initialize() {
+
+    width = 900;
     height = 700;
   
 
-  var svg = d3.select("body").append("svg")
+  svg = d3.select("body").append("svg")
       .attr("width", width)
       .attr("height", height);
 
@@ -210,38 +212,68 @@ function loadGraph() {
     .attr("stroke-width", 2)  
     .attr("d", "M10,-5L0,0L10,5z");
 
-  var rect = svg.append("rect");
+  rect = svg.append("rect");
     
 
-  var node = svg.selectAll(".node"),
+  node = svg.selectAll(".node"),
       labels = svg.selectAll("labels");
 
-  var force = d3.layout.force()
+  force = d3.layout.force()
     .size([width, height])
     .linkDistance(150)
     .linkStrength(1.5)
     .charge(-5000)
     .friction(0.1)
     .gravity(0.1)
-   reload();
-  
-  function reload() {
-    d3.selectAll("g").remove();
-    d3.json("dataset.json", function(error,json) {
-      links=json;
-      force
-        .nodes(links.nodes)
-        .links(links.links);
-      start(json);
-  });
+
+  rect
+    .attr("fill", "white")
+    .on("click",unfocusNode)
+    .on("contextmenu", context_main)
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .attr("fill", "#FAFAD2");
+
+  svg.append("text")
+    .attr("x", width-340)
+    .attr("y", height -20)
+    .text("D3 Data Driven Document, G. Cornelius, 2014");
+
+  svg.append("image")
+    .attr("width", 30)
+    .attr("height", 30)
+    .attr("xlink:href", "http://leopold-loewenheim.uni.lu/WWWgary/icons/info.png")
+    .attr("x", 10)
+    .on("click",function(o) {
+
+      alert( 
+        'MANUAL:\\n\\n'
+        + "\\t• Use your left mouse to drag and drop nodes.\\n\\n"
+        + '\\t• Once dragged a node is frozen and can be released by a simple double click.\\n\\n'
+        + '\\t• Right Click on the background lets you import and export XMCDA files or reset the graph.\\n\\n'
+        + '\\t•  Right-click on Nodes or Edges to get further information or edit their values.\\n\\n'
+        + '\\t•  Clicking on the background sets your graph back out of the "Zoom".\\n\\n'       
+    );
+    })
+    .attr("y",height-35);
   }
+  
   /*
    *
    *  Functions
    *
    */
   
+  function load() {
+    d3.selectAll("svg").remove();
+    initialize();
+    json = $.parseJSON(xmlinput);
+    force
+        .nodes(json.nodes)
+        .links(json.links);
+      start(json);
   
+  }
   
   /*
   Implementation which works as follows:
@@ -378,7 +410,10 @@ function loadGraph() {
                 alert("Nothing to see here yet.")
             },
             'reset': function(t) {  
-                reload();
+                d3.selectAll("svg").remove();
+                initialize();
+                load();
+                
             }
         }
     });
@@ -423,34 +458,33 @@ function loadGraph() {
   
   function importXML() {
     var reader;
-              if (window.File && window.FileReader && window.FileList && window.Blob) {
-              //alert("Supported")
-                 $('#upModal').modal('show');
-                 function handleFileSelect(evt) {
-                  $('#upModal').modal('toggle');
-                  var files = document.getElementById('xml').files;
-                  if (!files.length) {
-                     alert('Please select a file!');
-                     return;
-                  }
-                  var file = files[0];
-                  var start =  0;
-                  var stop = file.size - 1;
-                  reader= new FileReader();
-                  var blob = file.slice(start, stop + 1);
-                  reader.readAsBinaryString(blob);
-                  
-                  reader.onloadend = function(evt) { xmlinput = evt.target.result; };
+    $('#upModal').modal('show');
+      if (window.File && window.FileReader && window.FileList && window.Blob) {
+        function handleFileSelect(evt) {
+           var files = document.getElementById('xml').files;
+           if (!files.length) {
+             alert('Please select a file!');
+             return;
+          }
+          var file = files[0];
+          var start =  0;
+          var stop = file.size - 1;
+          reader= new FileReader();
+          var blob = file.slice(start, stop + 1);
+          reader.readAsBinaryString(blob); 
+          reader.onloadend = function(evt) { 
+              xmlinput = evt.target.result; 
+              load();
+              $('#upModal').modal('hide');
+          };
+          }
 
-                   }
+          document.getElementById('xml').addEventListener('change', handleFileSelect, false);
 
-                 document.getElementById('xml').addEventListener('change', handleFileSelect, false);
-
-
-
-              } else {
-                alert('The File APIs are not fully supported in this browser.');
-              }
+          } else {
+              alert('The File APIs are not fully supported in this browser.');
+          }
+   return
   }
   /*
    *
@@ -461,36 +495,7 @@ function loadGraph() {
    // 
   
   //Background
-  rect
-    .attr("fill", "white")
-    .on("click",unfocusNode)
-    .on("contextmenu", context_main)
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .attr("fill", "#FAFAD2");
-
-  svg.append("text")
-    .attr("x", width-340)
-    .attr("y", height -20)
-    .text("D3 Data Driven Document, G. Cornelius, 2014");
-
-  svg.append("image")
-    .attr("width", 30)
-    .attr("height", 30)
-    .attr("xlink:href", "http://leopold-loewenheim.uni.lu/WWWgary/icons/info.png")
-    .attr("x", 10)
-    .on("click",function(o) {
-
-      alert( 
-        'MANUAL:\\n\\n'
-        + "\\t• Use your left mouse to drag and drop nodes.\\n\\n"
-        + '\\t• Once dragged a node is frozen and can be released by a simple double click.\\n\\n'
-        + '\\t• Right Click on the background lets you import and export XMCDA files or reset the graph.\\n\\n'
-        + '\\t•  Right-click on Nodes or Edges to get further information or edit their values.\\n\\n'
-        + '\\t•  Clicking on the background sets your graph back out of the "Zoom".\\n\\n'       
-    );
-    })
-    .attr("y",height-35);
+  
 
   
 
@@ -600,7 +605,6 @@ function loadGraph() {
    .start();
    };
   
-}
 
 
 '''
