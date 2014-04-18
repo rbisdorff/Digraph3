@@ -263,6 +263,8 @@ function initialize(width=900, height=700) {
   function load() {
     d3.selectAll("svg").remove();
     initialize();
+    json={};
+    json = buildD3Json();
     force
         .nodes(json.nodes)
         .links(json.links);
@@ -406,10 +408,9 @@ function initialize(width=900, height=700) {
             },
             'reset': function(t) {
                 if(json != null) { 
-                console.log("Resetting Graph.") 
-                d3.selectAll("svg").remove();
-                initialize();
-                load();}
+                console.log("Resetting Graph.") ;
+                load();
+              }
                 
             }
         }
@@ -476,7 +477,6 @@ function initialize(width=900, height=700) {
               actions = result[0];
               relation = result[1];
               category = result[2];
-              json = buildD3Json();
               load();
               $('#upModal').modal('hide');
           };
