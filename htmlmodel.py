@@ -142,7 +142,7 @@ def javascript():
 ####################### 
 */
 //Some usefull global variables.
-var xmlinput="",json,links,labels,labelt,tick,path,rect,force,node,svg,height,width;
+var xmlinput="",json,links,labels,labelt,tick,path,rect,force,node,svg,height,width,actions={},relation={},Min,Max,Med;
 
 
 function initialize() {
@@ -267,7 +267,7 @@ function initialize() {
   function load() {
     d3.selectAll("svg").remove();
     initialize();
-    json = $.parseJSON(xmlinput);
+    json = buildD3Json();
     force
         .nodes(json.nodes)
         .links(json.links);
@@ -402,7 +402,7 @@ function initialize() {
                 /*
                 To be done later.
                 */
-              importXML();
+              importXMCDA2();
             },
             'export': function(t) {  
                 /*
@@ -410,10 +410,12 @@ function initialize() {
                 */
                 alert("Nothing to see here yet.")
             },
-            'reset': function(t) {  
+            'reset': function(t) {
+                if(json != null) { 
+                console.log("Resetting Graph.") 
                 d3.selectAll("svg").remove();
                 initialize();
-                load();
+                load();}
                 
             }
         }
@@ -426,6 +428,7 @@ function initialize() {
     tick();
     force.start();
   }
+
   /*
   * Stop force and free drag
   */
@@ -457,7 +460,7 @@ function initialize() {
   }
   
   
-  function importXML() {
+  function importXMCDA2() {
     var reader;
     $('#upModal').modal('show');
       if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -475,6 +478,10 @@ function initialize() {
           reader.readAsBinaryString(blob); 
           reader.onloadend = function(evt) { 
               xmlinput = evt.target.result; 
+              var result = parseXMCDA2();
+              actions = result[0];
+              relation=result[1];
+              buildD3Json(actions,relation);
               load();
               $('#upModal').modal('hide');
           };
@@ -487,19 +494,97 @@ function initialize() {
           }
    return
   }
+  
+  function parseXMCDA2() {
+      
+      var $xml = $($.parseXML(xmlinput));
+      //console.log($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').children().text());
+      var actions={},relation={};
+
+      Min = $xml.find('alternativesComparisons').find('valuation').find('quantitative').find('minimum').children().text();
+      Max = $xml.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').children().text();
+      Med = Min + ((Max - Min)/2.0);
+      
+      $xml.find("alternatives").find('alternative').each(
+        function() { 
+            var id = this.getAttribute('id');
+            actions[id] = {};
+            actions[id]['name'] = this.getAttribute('name');
+            $(this).find('description').children().each(function() {
+              actions[id][this.tagName] = $(this).text();
+            }
+              );
+        });
+
+      for(var x in actions) {
+        relation[x] = {}
+      }
+      $xml.find('alternativesComparisons').find('pairs').find('pair').each(
+        function() {
+          try{
+          relation[$(this).find('initial').find('alternativeID').text()][$(this).find('terminal').find('alternativeID').text()] = $(this).find('value').find('real').text();
+          }
+          catch(err) {
+          relation[$(this).find('initial').find('alternativeID').text()][$(this).find('terminal').find('alternativeID').text()] = $(this).find('value').find('integer').text();
+          }
+        });
+         
+      return [actions,relation];
+  }
+
+  function buildD3Json() {
+   var dataset = {"nodes":[],"links":[]}
+   var actionkeys=[];
+    for(node in actions){
+            actionkeys.push(node);
+            try {
+               dataset["nodes"].push({"name": node ,"group":1, "comment": actions[node]["comment"]});
+            }
+            catch(err) {
+                dataset["nodes"].push({"name": node ,"group":1, "comment": "none"});
+            }
+    }
+
+    for( var i=0;  i<actionkeys.length; i++ ){
+            for( var j=i+1;  j<actionkeys.length; j++ ){
+              // Arrow types:
+              // r(a,b) > Med & r(b,a) < Med  a  --> b :0 done
+              //r(a,b) < Med & r(b,a) > Med  a  <-- b :1 done
+              // r(a,b) > Med & r(b,a) > Med  a <--> b :2 done
+              // r(a,b) > Med & r(b,a) = Med  a o--> b :3 done
+              // r(a,b) = Med & r(b,a) > Med  a <--o b :4 done
+              // r(a,b) < Med & r(b,a) < Med  a      b :-1 done
+              // r(a,b) < Med & r(b,a) = Med  a o..  b :5 done 
+              // r(a,b) = Med & r(b,a) < Med  a  ..o b :6 done
+              // r(a,b) = Med = r(b,a)        a o..o b :7 done
+                if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] > Med)
+                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":2, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] == Med)
+                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":3, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                if(relation[actionkeys[i]][actionkeys[j]] == Med && relation[actionkeys[j]][actionkeys[i]] > Med)
+                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":4, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                if(relation[actionkeys[i]][actionkeys[j]] == Med && relation[actionkeys[j]][actionkeys[i]] == Med)
+                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":7, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] <  Med)
+                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":0, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                if(relation[actionkeys[i]][actionkeys[j]] == Med && relation[actionkeys[j]][actionkeys[i]] <  Med)
+                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":6, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                if(relation[actionkeys[i]][actionkeys[j]] < Med && relation[actionkeys[j]][actionkeys[i]] >  Med)
+                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":1, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                if(relation[actionkeys[i]][actionkeys[j]] < Med && relation[actionkeys[j]][actionkeys[i]] ==  Med)
+                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":5, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+              }
+    }
+  return dataset;
+  }
+
   /*
    *
-   *  Graph
+   *  Start the graph
    *
    */
  function start(json) {
-   // 
-  
-  //Background
-  
-
-  
-
+   
   path = svg.append("g").selectAll('path')
     .data(force.links())
     .enter().append("svg:path")
@@ -533,7 +618,7 @@ function initialize() {
     .enter().append('text')
     .attr("dy", ".78em")
     .style("font-size", "12px")
-    .text(function(d) {return d.value;}); 
+    .text(function(d) {return d.value2;}); 
 
   
 
@@ -607,8 +692,6 @@ function initialize() {
    
   }
   
-
-
 '''
 
 def d3export():
