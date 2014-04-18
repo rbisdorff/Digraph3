@@ -40,7 +40,7 @@ from time import time
 from digraphs import *
 
 sampleSize = 10
-order = 50
+order = 75
 arcProbability = 0.1
 
 fileName = 'testPiping50-10.csv'
