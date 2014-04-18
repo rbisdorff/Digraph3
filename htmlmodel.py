@@ -142,14 +142,10 @@ def javascript():
 ####################### 
 */
 //Some usefull global variables.
-var xmlinput="",json,links,labels,labelt,tick,path,rect,force,node,svg,height,width,actions={},relation={},Min,Max,Med;
+var xmlinput="",json,labels,labelt,path,force,svg,actions={},relation={},Min,Max,Med,category='';
 
 
-function initialize() {
-
-    width = 900;
-    height = 700;
-  
+function initialize(width=900, height=700) {
 
   svg = d3.select("body").append("svg")
       .attr("width", width)
@@ -267,12 +263,10 @@ function initialize() {
   function load() {
     d3.selectAll("svg").remove();
     initialize();
-    json = buildD3Json();
     force
         .nodes(json.nodes)
         .links(json.links);
       start(json);
-  
   }
   
   /*
@@ -478,10 +472,11 @@ function initialize() {
           reader.readAsBinaryString(blob); 
           reader.onloadend = function(evt) { 
               xmlinput = evt.target.result; 
-              var result = parseXMCDA2();
+              var result = parseXMCDA2(xmlinput);
               actions = result[0];
-              relation=result[1];
-              buildD3Json(actions,relation);
+              relation = result[1];
+              category = result[2];
+              json = buildD3Json();
               load();
               $('#upModal').modal('hide');
           };
@@ -492,14 +487,14 @@ function initialize() {
           } else {
               alert('The File APIs are not fully supported in this browser.');
           }
-   return
+   return 1;
   }
   
-  function parseXMCDA2() {
+  function parseXMCDA2(xmlinput) {
       
       var $xml = $($.parseXML(xmlinput));
       //console.log($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').children().text());
-      var actions={},relation={};
+      var actions={},relation={},category;
 
       Min = $xml.find('alternativesComparisons').find('valuation').find('quantitative').find('minimum').children().text();
       Max = $xml.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').children().text();
@@ -528,8 +523,15 @@ function initialize() {
           relation[$(this).find('initial').find('alternativeID').text()][$(this).find('terminal').find('alternativeID').text()] = $(this).find('value').find('integer').text();
           }
         });
+      var cat = $xml.find('alternativesComparisons').find('mcdaConcept').text();
+      if( cat=== 'outrankingDigraph'){
+        category = 'outranking';
+      }
+      else {
+        category = 'general';
+      }
          
-      return [actions,relation];
+      return [actions,relation,category];
   }
 
   function buildD3Json() {
@@ -575,7 +577,7 @@ function initialize() {
                     dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":5, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
               }
     }
-  return dataset;
+    return dataset;
   }
 
   /*
@@ -620,9 +622,6 @@ function initialize() {
     .style("font-size", "12px")
     .text(function(d) {return d.value2;}); 
 
-  
-
-  
   var node_drag = d3.behavior.drag()
         .on("dragstart", dragstart)
         .on("drag", dragmove)
@@ -640,11 +639,8 @@ function initialize() {
     .on("contextmenu", context_node)
     .call(node_drag);
 
-
-
   node.append("circle")
-    .attr("r", 15);
-    
+    .attr("r", 15);    
 
   node.append("text")
     .attr("dx", 0)
@@ -652,7 +648,6 @@ function initialize() {
     .style("font-family", "Comic Sans MS")
     .text(function(d) { return d.name; });
     force.start();
-  
 
   tick = function tick() {
     labels
@@ -664,20 +659,21 @@ function initialize() {
       .attr("y", function(d) { return (((d.source.y + d.target.y) /2) + d.target.y)/2; });
 
     path
-      .attr('d', function(d) {
-    var deltaX = d.target.x - d.source.x,
-        deltaY = d.target.y - d.source.y,
-        dist = Math.sqrt(deltaX * deltaX + deltaY * deltaY),
-        normX = deltaX / dist,
-        normY = deltaY / dist,
-        sourcePadding = d.left ? 17 : 12,
-        targetPadding = d.right ? 17 : 12,
-        sourceX = d.source.x + (sourcePadding * normX),
-        sourceY = d.source.y + (sourcePadding * normY),
-        targetX = d.target.x - (targetPadding * normX),
-        targetY = d.target.y - (targetPadding * normY);
-        return 'M' + sourceX + ',' + sourceY + 'L' + targetX + ',' + targetY;
-      });
+      .attr('d', 
+        function(d) {
+          var deltaX = d.target.x - d.source.x,
+          deltaY = d.target.y - d.source.y,
+          dist = Math.sqrt(deltaX * deltaX + deltaY * deltaY),
+          normX = deltaX / dist,
+          normY = deltaY / dist,
+          sourcePadding = d.left ? 17 : 12,
+          targetPadding = d.right ? 17 : 12,
+          sourceX = d.source.x + (sourcePadding * normX),
+          sourceY = d.source.y + (sourcePadding * normY),
+          targetX = d.target.x - (targetPadding * normX),
+          targetY = d.target.y - (targetPadding * normY);
+          return 'M' + sourceX + ',' + sourceY + 'L' + targetX + ',' + targetY;
+        });
         
     node
       .attr("transform", 
