@@ -44,7 +44,7 @@ graph
     fill: none;
     cursor: pointer;
     stroke: #000;
-    stroke-width: 2px;
+    stroke-width: 2.25px;
     }
   .node circle {
     cursor: pointer;
@@ -57,9 +57,14 @@ graph
     font: 12px sans-serif;
     pointer-events: none;
     text-anchor: middle;
+    user-select: none;
   }
   circle:hover{
     fill: aquamarine;
+  }
+  text {
+    user-select: none;
+    pointer-events:none;
   }
 
   image {
@@ -83,6 +88,13 @@ graph
             <li id="export"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/save.png" height="15px" width="15px" /> Export</li>
         </ul>
   </div>
+
+  <div class="contextMenu" id="cntxtEdge">
+        <ul>
+            <li id="details"> Details</li>
+        </ul>
+  </div>
+
 <!--UPLOAD-->
   <div class="modal fade" id="upModal" role="dialog" aria-labelledby="upModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -380,6 +392,32 @@ function initialize(width=900, height=700) {
 
   /*
   *
+  *  Context-menu for right clicks on Nodes.
+  *
+  */
+  var context_edge = function context_edge(d) {
+     
+     $('path').contextMenu('cntxtEdge',
+    {
+        itemStyle:
+        {
+            fontFamily : 'Arial',
+            fontSize: '13px'
+        },
+        bindings:
+        {
+            
+            'details': function(t) {
+                alert(d.target.name+ "|" + d.source.name);
+            }
+        }
+    });
+    d3.event.preventDefault();
+  }
+
+
+  /*
+  *
   *  Context-menu for right clicks on Background.
   *
   */
@@ -606,7 +644,8 @@ function initialize(width=900, height=700) {
           return "url(#start-empty)"; 
         if(d.type == 1 || d.type ==2|| d.type ==4) 
           return "url(#start-full)";
-      });
+      })
+      .on("contextmenu", context_edge);
 
   labels = svg.append("g").selectAll('text')
     .data(force.links())
@@ -688,8 +727,6 @@ function initialize(width=900, height=700) {
    
   }
   
-
-
 '''
 
 def d3export():
