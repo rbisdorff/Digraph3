@@ -496,9 +496,9 @@ function initialize(width=900, height=700) {
       //console.log($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').children().text());
       var actions={},relation={},category;
 
-      Min = $xml.find('alternativesComparisons').find('valuation').find('quantitative').find('minimum').children().text();
-      Max = $xml.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').children().text();
-      Med = Min + ((Max - Min)/2.0);
+      Min = Number($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('minimum').children().text());
+      Max = Number($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').children().text());
+      Med = Min + ((Max - Min)/Number(2.0));
       
       $xml.find("alternatives").find('alternative').each(
         function() { 
@@ -561,19 +561,19 @@ function initialize(width=900, height=700) {
               // r(a,b) = Med = r(b,a)        a o..o b :7 done
                 if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] > Med)
                     dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":2, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
-                if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] == Med)
+                else if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] == Med)
                     dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":3, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
-                if(relation[actionkeys[i]][actionkeys[j]] == Med && relation[actionkeys[j]][actionkeys[i]] > Med)
+                else if(relation[actionkeys[i]][actionkeys[j]] == Med && relation[actionkeys[j]][actionkeys[i]] > Med)
                     dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":4, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
-                if(relation[actionkeys[i]][actionkeys[j]] == Med && relation[actionkeys[j]][actionkeys[i]] == Med)
+                else if(relation[actionkeys[i]][actionkeys[j]] == Med && relation[actionkeys[j]][actionkeys[i]] == Med)
                     dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":7, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
-                if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] <  Med)
+                else if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] <  Med)
                     dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":0, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
-                if(relation[actionkeys[i]][actionkeys[j]] == Med && relation[actionkeys[j]][actionkeys[i]] <  Med)
+                else if(relation[actionkeys[i]][actionkeys[j]] == Med && relation[actionkeys[j]][actionkeys[i]] <  Med)
                     dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":6, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
-                if(relation[actionkeys[i]][actionkeys[j]] < Med && relation[actionkeys[j]][actionkeys[i]] >  Med)
+                else if(relation[actionkeys[i]][actionkeys[j]] < Med && relation[actionkeys[j]][actionkeys[i]] >  Med)
                     dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":1, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
-                if(relation[actionkeys[i]][actionkeys[j]] < Med && relation[actionkeys[j]][actionkeys[i]] ==  Med)
+                else if(relation[actionkeys[i]][actionkeys[j]] < Med && relation[actionkeys[j]][actionkeys[i]] ==  Med)
                     dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":5, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
               }
     }
@@ -688,6 +688,8 @@ function initialize(width=900, height=700) {
    
   }
   
+
+
 '''
 
 def d3export():
