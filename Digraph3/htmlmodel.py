@@ -44,7 +44,7 @@ graph
     fill: none;
     cursor: pointer;
     stroke: #000;
-    stroke-width: 2.25px;
+    stroke-width: 2.5px;
     }
   .node circle {
     cursor: pointer;
@@ -66,7 +66,6 @@ graph
     user-select: none;
     pointer-events:none;
   }
-
   image {
     cursor: help;
   }
@@ -77,7 +76,7 @@ graph
   <div class="contextMenu" id="cntxtNode">
         <ul>
             <li id="inspect"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/inspect.png" height="15px" width="15px" /> Inspect</li>
-            <li id="details"> Details</li>
+            <li id="editNode"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/edit.png" height="15px" width="15px" /> Edit</li>
         </ul>
   </div>
 
@@ -91,7 +90,7 @@ graph
 
   <div class="contextMenu" id="cntxtEdge">
         <ul>
-            <li id="details"> Details</li>
+          <li id="editEdge"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/edit.png" height="15px" width="15px" /> Edit</li>
         </ul>
   </div>
 
@@ -110,8 +109,67 @@ graph
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-          
+          <button id="open" type="button" class="btn btn-info">Open</button>
         </div>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+  <!-- Modal Node-->
+  <div class="modal fade" id="modNodeModal" role="dialog" aria-labelledby="modNodeModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Modify Node</h4>
+        </div>
+        <div class="modal-body">
+          <!-- INPUT -->
+  
+  <div class="form-group"> 
+  <input type="text" value="Node ID" class="form-control" maxlength="10" required readonly="readonly" name="nodeId" id="nodeId"> 
+  </div> 
+  <div class="form-group">
+   <input type="text" placeholder="Comment" class="form-control" maxlength="20" autofocus name="nodeComment" id="nodeComment"> 
+   </div>
+  
+  </div>
+  <div class="modal-footer">
+   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+   <button class="btn btn-primary" type='submit' name='save' onClick="saveNode()">Save changes</button>
+  </div>
+        
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <!-- Modal Edge-->
+  <div class="modal fade" id="modEdgeModal" role="dialog" aria-labelledby="modEdgeModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Modify Edge</h4>
+        </div>
+        <div class="modal-body">
+          <!-- INPUT -->
+  
+  <div class="form-group"> 
+  <input type="text" placeholder="Node Target" class="form-control" maxlength="10" required target="" name="nodeTarget" id="nodeTarget"> 
+  </div> 
+  <div class="form-group">
+   <input type="text" placeholder="Node Source" class="form-control" maxlength="20" required source="" name="nodeSource" id="nodeSource"> 
+   </div>
+  
+  </div>
+  <div class="modal-footer">
+   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+   <button class="btn btn-primary" type='submit' name='save' onClick="saveEdge()">Save changes</button>
+  </div>
+        
 
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -430,8 +488,8 @@ function initialize() {
                 focusNode(d);
 
             },
-            'details': function(t) {
-                alert(d.name)
+            'editNode': function(t) {
+                editNode(d);
             }
         }
     });
@@ -455,8 +513,8 @@ function initialize() {
         bindings:
         {
             
-            'details': function(t) {
-                alert(d.target.name+ "|" + d.source.name);
+            'editEdge': function(t) {
+                editEdge(d);
             }
         }
     });
@@ -548,6 +606,30 @@ function initialize() {
   function isEqual(a, b) {
     return a.index == b.index;
   }
+
+
+  function editNode(d) {
+    $('#modNodeModal').modal('show');
+    $('#nodeId').attr("value",d.name);
+    $('#nodeComment').attr("value",d.comment);
+  }
+  function saveNode() {
+    $('#modNodeModal').modal('hide');
+    actions[$('#nodeId').attr("value")]["comment"] =  $('#nodeComment').attr("value");
+    load();
+  }
+
+  function editEdge(d) {
+    $('#modEdgeModal').modal('show');
+    $('#nodeTarget').attr("value",relation[d.source.name][d.target.name]);
+    $('#nodeTarget').attr("target",d.target.name);
+    $('#nodeSource').attr("source",d.source.name);
+  }
+  function saveEdge() {
+    $('#modEdgeModal').modal('hide');
+    relation[$('#nodeSource').attr("source")][$('#nodeTarget').attr("target")] =  $('#nodeTarget').attr("value");
+    load();
+  }
   
   /*
   *
@@ -557,8 +639,8 @@ function initialize() {
   function importXMCDA2() {
     console.log("Importing XCDA2 file.")
     var reader;
-    $('#upModal').modal('show');
       if (window.File && window.FileReader && window.FileList && window.Blob) {
+        $('#upModal').modal('show');
         function handleFileSelect(evt) {
            var files = document.getElementById('xml').files;
            if (!files.length) {
@@ -582,7 +664,7 @@ function initialize() {
           };
           }
 
-          document.getElementById('xml').addEventListener('change', handleFileSelect, false);
+          document.getElementById('open').addEventListener('click', handleFileSelect, false);
 
           } else {
               alert('The File APIs are not fully supported in this browser.');
@@ -662,16 +744,17 @@ function initialize() {
 
     for( var i=0;  i<actionkeys.length; i++ ){
             for( var j=i+1;  j<actionkeys.length; j++ ){
-              // Arrow types:
-              // r(a,b) > Med & r(b,a) < Med  a  --> b :0 done
-              //r(a,b) < Med & r(b,a) > Med  a  <-- b :1 done
-              // r(a,b) > Med & r(b,a) > Med  a <--> b :2 done
-              // r(a,b) > Med & r(b,a) = Med  a o--> b :3 done
-              // r(a,b) = Med & r(b,a) > Med  a <--o b :4 done
-              // r(a,b) < Med & r(b,a) < Med  a      b :-1 done
-              // r(a,b) < Med & r(b,a) = Med  a o..  b :5 done 
-              // r(a,b) = Med & r(b,a) < Med  a  ..o b :6 done
-              // r(a,b) = Med = r(b,a)        a o..o b :7 done
+              /* Arrow types:
+              r(a,b) > Med & r(b,a) < Med  a  --> b :0 done
+              r(a,b) < Med & r(b,a) > Med  a  <-- b :1 done
+              r(a,b) > Med & r(b,a) > Med  a <--> b :2 done
+              r(a,b) > Med & r(b,a) = Med  a o--> b :3 done
+              r(a,b) = Med & r(b,a) > Med  a <--o b :4 done
+              r(a,b) < Med & r(b,a) < Med  a      b :-1 done
+              r(a,b) < Med & r(b,a) = Med  a o..  b :5 done 
+              r(a,b) = Med & r(b,a) < Med  a  ..o b :6 done
+              r(a,b) = Med = r(b,a)        a o..o b :7 done
+              */
                 if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] > Med)
                     dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":2, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
                 else if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] == Med)
@@ -693,6 +776,8 @@ function initialize() {
     }
     return dataset;
   }
+
+
 
   /*
    *
