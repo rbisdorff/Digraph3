@@ -158,10 +158,12 @@ graph
           <!-- INPUT -->
   
   <div class="form-group"> 
-  <input type="text" placeholder="Node Target" class="form-control" maxlength="10" required target="" name="nodeTarget" id="nodeTarget"> 
+  <p id="pnodetarget"></p>
+  <input type="text" placeholder="Node Target" class="form-control" maxlength="10" required target="" name="nodeTarget" id="nodeTarget"/> 
   </div> 
   <div class="form-group">
-   <input type="text" placeholder="Node Source" class="form-control" maxlength="20" required source="" name="nodeSource" id="nodeSource"> 
+   <p id="pnodesource"></p>
+   <input type="text" placeholder="Node Source" class="form-control" maxlength="20" required source="" name="nodeSource" id="nodeSource"/> 
    </div>
   
   </div>
@@ -184,6 +186,7 @@ graph
   </script>
 </body>
 </html>
+
 
 '''
 def javascript():
@@ -621,7 +624,13 @@ function initialize() {
 
   function editEdge(d) {
     $('#modEdgeModal').modal('show');
+    
     $('#nodeTarget').attr("value",relation[d.source.name][d.target.name]);
+    document.getElementById("pnodetarget").innerHTML=d.source.name + " --> " + d.target.name;
+    
+    $('#nodeSource').attr("value",relation[d.target.name][d.source.name]);
+    document.getElementById("pnodesource").innerHTML=d.target.name + " --> " + d.source.name;
+    
     $('#nodeTarget').attr("target",d.target.name);
     $('#nodeSource').attr("source",d.source.name);
   }
@@ -813,14 +822,14 @@ function initialize() {
     .enter().append('text')
     .attr("dy", ".78em")
     .style("font-size", "12px")
-    .text(function(d) {return d.value;}); 
+    .text(function(d) {return d.value2;}); 
 
   labelt = svg.append("g").selectAll('text')
     .data(force.links())
     .enter().append('text')
     .attr("dy", ".78em")
     .style("font-size", "12px")
-    .text(function(d) {return d.value2;}); 
+    .text(function(d) {return d.value;}); 
 
   var node_drag = d3.behavior.drag()
         .on("dragstart", dragstart)
