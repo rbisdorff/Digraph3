@@ -174,6 +174,11 @@ function initialize() {
       .attr("height", height);
 
   //Create all arrow types.
+  /*
+  *
+  * Full end arrow
+  *
+  */
   svg.append("svg:defs").selectAll("marker")
     .data(["end-full"])
     .enter().append("svg:marker")
@@ -188,6 +193,11 @@ function initialize() {
     .attr("orient", "auto")
     .append("svg:path")
     .attr("d", "M0,-5L10,0L0,5z");
+  /*
+  *
+  * Empty end arrow
+  *
+  */
   svg.append("svg:defs").selectAll("marker")
     .data(["end-empty"])
     .enter().append("svg:marker")
@@ -206,6 +216,11 @@ function initialize() {
     .attr("stroke-width", 2)  
     .attr("d", "M0,-5L10,0L0,5z");
 
+  /*
+  *
+  * Full start arrow
+  *
+  */
   svg.append("svg:defs").selectAll("marker")
     .data(["start-full"])
     .enter().append("svg:marker")
@@ -220,6 +235,12 @@ function initialize() {
     .attr("orient", "auto")
     .append("svg:path")
     .attr("d", "M10,-5L0,0L10,5z");
+
+  /*
+  *
+  * Empty start arrow
+  *
+  */
   svg.append("svg:defs").selectAll("marker")
     .data(["start-empty"])
     .enter().append("svg:marker")
@@ -238,12 +259,31 @@ function initialize() {
     .attr("stroke-width", 2)  
     .attr("d", "M10,-5L0,0L10,5z");
 
-  rect = svg.append("rect");
+  /*
+  *
+  * Append background rectangle
+  *
+  */
+  rect = svg.append("rect")
+  .on("click",unfocusNode)
+  .on("contextmenu", context_main)
+  .attr("width", "100%")
+  .attr("height", "100%")
+  .attr("fill", "#FAFAD2");
     
-
+  /*
+  *
+  * Select all nodes and labels and inizialize the variables.
+  *
+  */
   node = svg.selectAll(".node"),
-      labels = svg.selectAll("labels");
+  labels = svg.selectAll("labels");
 
+  /*
+  *
+  * Set up our force graph.
+  *
+  */
   force = d3.layout.force()
     .size([width, height])
     .linkDistance(150)
@@ -251,27 +291,18 @@ function initialize() {
     .charge(-5000)
     .friction(0.1)
     .gravity(0.1)
-
-  rect
-    .attr("fill", "white")
-    .on("click",unfocusNode)
-    .on("contextmenu", context_main)
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .attr("fill", "#FAFAD2");
+  
 
   svg.append("text")
     .attr("x", width-340)
     .attr("y", height -20)
     .text("D3 Data Driven Document, G. Cornelius, 2014");
-
   svg.append("image")
     .attr("width", 30)
     .attr("height", 30)
     .attr("xlink:href", "http://leopold-loewenheim.uni.lu/WWWgary/icons/info.png")
     .attr("x", 10)
     .on("click",function(o) {
-
       alert( 
         'MANUAL:\\n\\n'
         + "\\t• Use your left mouse to drag and drop nodes.\\n\\n"
@@ -501,15 +532,28 @@ function initialize() {
     }
 
 
-
+  /*
+  *
+  * Check if a node is connected to with another one.
+  *
+  */
   function isConnected(a, b) {
     return linkedByIndex[b.index + "," + a.index] || linkedByIndex[a.index + "," + b.index];
   }
+  /*
+  *
+  * Check if a node is equal to another one.
+  *
+  */
   function isEqual(a, b) {
     return a.index == b.index;
   }
   
-  
+  /*
+  *
+  * Open the import menu and load the file into the xml variable.
+  *
+  */
   function importXMCDA2() {
     console.log("Importing XCDA2 file.")
     var reader;
@@ -546,6 +590,11 @@ function initialize() {
    return 1;
   }
   
+  /*
+  *
+  * Parse our XMCDA2 file and load all important variables into memory.
+  *
+  */
   function parseXMCDA2(xmlinput) {
       console.log("Parsing XMCDA2 File.")
       var $xml = $($.parseXML(xmlinput));
@@ -590,6 +639,11 @@ function initialize() {
       return [actions,relation,category];
   }
 
+  /*
+  *
+  * Build a D3 Json file in order to initialize the graph with nodes and links.
+  *
+  */
   function buildD3Json(actions,relation) {
    console.log("Building D3 Json for graph visualization.")
    var dataset = {"nodes":[],"links":[]}
