@@ -153,11 +153,21 @@ def javascript():
 #
 ####################### 
 */
-//Some usefull global variables.
+
+/*
+*
+* Declaration of some usefull global variables
+*
+*/
 var xmlinput="",json,labels,labelt,path,force,svg,actions={},relation={},Min,Max,Med,category='';
 
-
-function initialize(width=900, height=700) {
+/*
+*
+* Initialization of our empty canvas.
+*
+*/
+function initialize() {
+  var width=900, height=700
 
   svg = d3.select("body").append("svg")
       .attr("width", width)
@@ -171,8 +181,10 @@ function initialize(width=900, height=700) {
     .attr("viewBox", "0 -5 10 10")
     .attr("refX", 13)
     .attr("refY", -0.0)
-    .attr("markerWidth", 6)
-    .attr("markerHeight", 6)
+    .attr("markerUnits","userSpaceOnUse")
+    .attr("stroke-dasharray",0)
+    .attr("markerWidth", 12)
+    .attr("markerHeight", 12)
     .attr("orient", "auto")
     .append("svg:path")
     .attr("d", "M0,-5L10,0L0,5z");
@@ -183,8 +195,10 @@ function initialize(width=900, height=700) {
     .attr("viewBox", "0 -5 10 10")
     .attr("refX", 13)
     .attr("refY", -0.0)
-    .attr("markerWidth", 6)
-    .attr("markerHeight", 6)
+    .attr("markerUnits","userSpaceOnUse")
+    .attr("stroke-dasharray",0)
+    .attr("markerWidth", 12)
+    .attr("markerHeight", 12)
     .attr("orient", "auto")
     .append("svg:path")
     .attr("stroke", "black")  
@@ -199,8 +213,10 @@ function initialize(width=900, height=700) {
     .attr("viewBox", "0 -5 10 10")
     .attr("refX", -3)
     .attr("refY", -0.0)
-    .attr("markerWidth", 6)
-    .attr("markerHeight", 6)
+    .attr("markerWidth", 12)
+    .attr("markerHeight", 12)
+    .attr("markerUnits","userSpaceOnUse")
+    .attr("stroke-dasharray",0)
     .attr("orient", "auto")
     .append("svg:path")
     .attr("d", "M10,-5L0,0L10,5z");
@@ -211,8 +227,10 @@ function initialize(width=900, height=700) {
     .attr("viewBox", "0 -5 10 10")
     .attr("refX", -3)
     .attr("refY", -0.0)
-    .attr("markerWidth", 6)
-    .attr("markerHeight", 6)
+    .attr("stroke-dasharray",0)
+    .attr("markerWidth", 12)
+    .attr("markerHeight", 12)
+    .attr("markerUnits","userSpaceOnUse")
     .attr("orient", "auto")
     .append("svg:path")
     .attr("stroke", "black")  
@@ -267,16 +285,15 @@ function initialize(width=900, height=700) {
   }
   
   /*
-   *
-   *  Functions
-   *
-   */
-  
+  *
+  * Load function called to load a graph or rebuild a graph.
+  * Attention: 
+  */  
   function load() {
     d3.selectAll("svg").remove();
     initialize();
-    json={};
-    json = buildD3Json();
+    json={"nodes": [],"links":[]};
+    json = buildD3Json(actions,relation);
     force
         .nodes(json.nodes)
         .links(json.links);
@@ -494,6 +511,7 @@ function initialize(width=900, height=700) {
   
   
   function importXMCDA2() {
+    console.log("Importing XCDA2 file.")
     var reader;
     $('#upModal').modal('show');
       if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -529,7 +547,7 @@ function initialize(width=900, height=700) {
   }
   
   function parseXMCDA2(xmlinput) {
-      
+      console.log("Parsing XMCDA2 File.")
       var $xml = $($.parseXML(xmlinput));
       //console.log($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').children().text());
       var actions={},relation={},category;
@@ -572,10 +590,13 @@ function initialize(width=900, height=700) {
       return [actions,relation,category];
   }
 
-  function buildD3Json() {
+  function buildD3Json(actions,relation) {
+   console.log("Building D3 Json for graph visualization.")
    var dataset = {"nodes":[],"links":[]}
    var actionkeys=[];
-    for(node in actions){
+   if(!Object.keys(actions).length == 0)
+   {
+   for(node in actions){
             actionkeys.push(node);
             try {
                dataset["nodes"].push({"name": node ,"group":1, "comment": actions[node]["comment"]});
@@ -614,6 +635,7 @@ function initialize(width=900, height=700) {
                 else if(relation[actionkeys[i]][actionkeys[j]] < Med && relation[actionkeys[j]][actionkeys[i]] ==  Med)
                     dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":5, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
               }
+    }
     }
     return dataset;
   }
