@@ -637,6 +637,7 @@ function initialize() {
   function saveEdge() {
     $('#modEdgeModal').modal('hide');
     relation[$('#nodeSource').attr("source")][$('#nodeTarget').attr("target")] =  $('#nodeTarget').attr("value");
+    relation[$('#nodeTarget').attr("target")][$('#nodeSource').attr("source")] =  $('#nodeSource').attr("value");
     load();
   }
   
