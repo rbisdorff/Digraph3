@@ -192,6 +192,7 @@ graph
 def javascript():
     return '''
 
+
 /*
 #
 # Html/JavaScript implementation of digraphs graph export
@@ -452,7 +453,7 @@ function initialize() {
   var unfocusNode = function unfocusNode(d) {
       console.log("Refreshing graph!")
       node
-        .transition(500)
+          .transition(500)
           .style("opacity", 1.0)
           .style("fill", "#F6FBFF");
       svg.selectAll(".link")
@@ -625,19 +626,19 @@ function initialize() {
   function editEdge(d) {
     $('#modEdgeModal').modal('show');
     
-    $('#nodeTarget').attr("value",relation[d.source.name][d.target.name]);
-    document.getElementById("pnodetarget").innerHTML=d.source.name + " --> " + d.target.name;
+    $('#nodeTarget').attr("value",relation[d.target.name][d.source.name]);
+    document.getElementById("pnodetarget").innerHTML=d.target.name + " --> " + d.source.name;
     
-    $('#nodeSource').attr("value",relation[d.target.name][d.source.name]);
-    document.getElementById("pnodesource").innerHTML=d.target.name + " --> " + d.source.name;
+    $('#nodeSource').attr("value",relation[d.source.name][d.target.name]);
+    document.getElementById("pnodesource").innerHTML=d.source.name + " --> " + d.target.name;
     
     $('#nodeTarget').attr("target",d.target.name);
     $('#nodeSource').attr("source",d.source.name);
   }
   function saveEdge() {
     $('#modEdgeModal').modal('hide');
-    relation[$('#nodeSource').attr("source")][$('#nodeTarget').attr("target")] =  $('#nodeTarget').attr("value");
-    relation[$('#nodeTarget').attr("target")][$('#nodeSource').attr("source")] =  $('#nodeSource').attr("value");
+    relation[$('#nodeSource').attr("source")][$('#nodeTarget').attr("target")] =  $('#nodeSource').attr("value");
+    relation[$('#nodeTarget').attr("target")][$('#nodeSource').attr("source")] =  $('#nodeTarget').attr("value");
     load();
   }
   
