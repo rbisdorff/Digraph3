@@ -1011,7 +1011,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1063,8 +1063,77 @@ Renders dominant prekernel restricted relation.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.exportD3">
-<tt class="descname">exportD3</tt><big>(</big><em>fileName=None</em>, <em>noSilent=True</em>, <em>debug=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.exportD3" title="Permalink to this definition">¶</a></dt>
-<dd><p>export an html file with a dynamic D3 forced graph .</p>
+<tt class="descname">exportD3</tt><big>(</big><em>fileName=None</em>, <em>noSilent=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.exportD3" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>fileName, name of the generated html file, default = None (index.html);</li>
+<li>noSilent, True = defaul;</li>
+</ul>
+</dd>
+</dl>
+<p>This function was made during my bachelor thesis at the University of Luxembourg. Gary Cornelius, 2014</p>
+<p>The idea was to find a way that allows you to easily get details about certain nodes or edges. 
+The function allows you to export a html file together with all the needed libraries, including the 
+D3 Library which we use for graph generation and the physics between nodes, which attracts or pushes nodes away from each other.</p>
+<p>Therefore in order to make it easyer for everyone to analyze certain nodes, it is i.e. possible to only show direct neightbours to this nodes, drag nodes around, etc.</p>
+<dl class="docutils">
+<dt><em>If the graph is an outrankingdigraphs</em>: </dt>
+<dd><ul class="first last simple">
+<li>It is only possible to add comments to nodes.</li>
+<li>A special json file containing all possible pairwiseComparisions is generated.</li>
+</ul>
+</dd>
+<dt><em>If the graph is a general graph</em>:</dt>
+<dd><ul class="first last simple">
+<li>It is possible to add/delete nodes and edges, as well as well as edit the value of these edges. (work in progress)</li>
+<li>No Json file is generated since it is not possible to make pairwiseComparisions on general graphs.</li>
+</ul>
+</dd>
+<dt><em>The generated files</em>:</dt>
+<dd><ul class="first last simple">
+<li>d3.js contains the D3 Data-driven Documents source code, containing one small addition that we made in order to be able to easyly import links with a different formatself.</li>
+<li>digraph3lib.js contains our library. This file contains everything that we need from import of an XMCDA2 file, visualization of the graph to export of the changed graph.</li>
+<li>temp.xmcda2, is the file that is exported by the saveXMCDA2 function.</li>
+</ul>
+</dd>
+<dt><em>Example 1</em>:</dt>
+<dd><ol class="first last arabic">
+<li><dl class="first docutils">
+<dt>python3 session:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportD3</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">index.html:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>Main Screen:</dt>
+<dd><img alt="_images/randomvaluation_d3_main.png" class="first last" src="_images/randomvaluation_d3_main.png" />
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Inspect function:</dt>
+<dd><img alt="_images/randomvaluation_d3_inspect.png" class="first last" src="_images/randomvaluation_d3_inspect.png" />
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">For the best possible experience you should be connected to the world wide web!</p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -2413,7 +2482,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3108,7 +3177,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -3552,7 +3621,7 @@ bipolar-valued marginal pairwise majority difference digraphs.</p>
 <span class="go">dot -Grankdir=BT -Tpng rel_randLinearProfile.dot -o rel_randLinearProfile.png</span>
 </pre></div>
 </div>
-<img alt="_images/rel_randLinearProfile.png" src="_images/rel_randLinearProfile.png" />
+<img alt="rel_randLinearProfile.png" src="rel_randLinearProfile.png" />
 <dl class="method">
 <dt id="votingDigraphs.CondorcetDigraph.computeArrowRaynaudRanking">
 <tt class="descname">computeArrowRaynaudRanking</tt><big>(</big><em>linearOrdered=True</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#votingDigraphs.CondorcetDigraph.computeArrowRaynaudRanking" title="Permalink to this definition">¶</a></dt>

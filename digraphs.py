@@ -2764,9 +2764,49 @@ class Digraph(object):
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
 
-    def exportD3(self,fileName=None, noSilent=True, debug = False):
+    def exportD3(self,fileName=None, noSilent=True):
         """
-        export an html file with a dynamic D3 forced graph .
+    *Parameters*:
+        * fileName, name of the generated html file, default = None (index.html);
+        * noSilent, True = defaul;
+
+    This function was made during my bachelor thesis at the University of Luxembourg. Gary Cornelius, 2014
+
+    The idea was to find a way that allows you to easily get details about certain nodes or edges. 
+    The function allows you to export a html file together with all the needed libraries, including the 
+    D3 Library which we use for graph generation and the physics between nodes, which attracts or pushes nodes away from each other.
+
+    Therefore in order to make it easyer for everyone to analyze certain nodes, it is i.e. possible to only show direct neightbours to this nodes, drag nodes around, etc.
+
+    *If the graph is an outrankingdigraphs*: 
+        * It is only possible to add comments to nodes. 
+        * A special json file containing all possible pairwiseComparisions is generated.
+    *If the graph is a general graph*:
+        * It is possible to add/delete nodes and edges, as well as well as edit the value of these edges. (work in progress)
+        * No Json file is generated since it is not possible to make pairwiseComparisions on general graphs.
+
+    *The generated files*:
+        * d3.js contains the D3 Data-driven Documents source code, containing one small addition that we made in order to be able to easyly import links with a different formatself.
+        * digraph3lib.js contains our library. This file contains everything that we need from import of an XMCDA2 file, visualization of the graph to export of the changed graph.
+        * temp.xmcda2, is the file that is exported by the saveXMCDA2 function.
+
+    *Example 1*:
+        #. python3 session:
+            >>> from digraphs import RandomValuationDigraph
+            >>> dg = RandomValuationDigraph(order=5,Normalized=True)
+            >>> dg.exportD3()
+    
+        #. index.html: 
+    
+            * Main Screen:
+                .. image:: randomvaluation_d3_main.png
+            * Inspect function:
+                .. image:: randomvaluation_d3_inspect.png
+
+    .. warning::
+
+            For the best possible experience you should be connected to the world wide web!
+
         """
         import os
         import json
@@ -2788,7 +2828,7 @@ class Digraph(object):
         fw.write(htmlmodel.htmlmodel(name=self.name))
         fw.close()
 
-        self.saveXMCDA2(fileExt="xml")
+        self.saveXMCDA2()
         
 
         fw = open("digraph3lib.js",'w')
@@ -2810,8 +2850,7 @@ class Digraph(object):
 
         if noSilent:
             print('*---- export done ---------*')
-            if debug:
-                print(self.actionsList)
+            
 
     def savedre(self,name='temp'):
         """
