@@ -1978,7 +1978,7 @@ class Digraph(object):
             x = listActions[i]
             for j in range(i+1,n):
                 y = listActions[j]
-                if relation[x][y] < Med and relation[y][x] < Med:
+                if relation[x][y] <= Med and relation[y][x] <= Med:
                     isWeaklyComplete = False
                     if Debug:
                         print('x,y,relation[x][y],relation[y][x]',\

@@ -791,4 +791,16 @@ def testExportPrincipalImage():
     g.showRelationTable()
     g.exportPrincipalImage()
 
+def testWeaklyCompleteness():
+    print('*------- test Weakly Completeness ------*')
+    g = RandomValuationDigraph()
+    g.showRelationTable()
+    print('Relation %s is weakly complete ? %s' % (g.name,str(g.isWeaklyComplete(Debug=True))))
+    t = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=5,weightDistribution='equiobjectives')
+    g = BipolarOutrankingDigraph(t,Normalized=True)
+    g.showRelationTable()
+    print('Relation %s is weakly complete ? %s' % (g.name,str(g.isWeaklyComplete(Debug=True))))
+    gcd = CoDualDigraph(g)
+    gcd.showRelationTable()
+    print('Relation %s is weakly complete ? %s' % (gcd.name,str(gcd.isWeaklyComplete(Debug=True))))    
 
