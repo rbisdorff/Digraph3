@@ -1928,7 +1928,7 @@ class Digraph(object):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def isCyclic(self, Debug=True):
+    def isCyclic(self, Debug=False):
         """
         checks the cyclicity of self.relation by checking
         for a reflexive loop in its transitive closure
@@ -1957,6 +1957,36 @@ class Digraph(object):
 
         return isCyclic
 
+    def isWeaklyComplete(self, Debug=False):
+        """
+        checks the weakly completeness property of self.relation by checking
+        for the absence of a link between two actions!!
+
+        .. warning::
+        
+            The reflexive links are ignored !!
+        """
+        Med = self.valuationdomain['med']
+        if Debug:
+            print('Med = ', Med)
+        listActions = [x for x in self.actions]
+        n = len(listActions)
+        relation = self.relation
+        
+        isWeaklyComplete = True
+        for i in range(n):
+            x = listActions[i]
+            for j in range(i+1,n):
+                y = listActions[j]
+                if relation[x][y] < Med and relation[y][x] < Med:
+                    isWeaklyComplete = False
+                    if Debug:
+                        print('x,y,relation[x][y],relation[y][x]',\
+                              x, y, relation[x][y], relation[y][x])
+                    break
+            if not isWeaklyComplete:
+                break
+        return isWeaklyComplete
 
     def automorphismGenerators(self):
         """
@@ -10293,9 +10323,9 @@ if __name__ == "__main__":
     else:
         print('*-------- Testing classes and methods -------')
         from csv import reader
-        
-##        g = RandomDigraph()
-##        g.showRelationTable()
+        g = RandomValuationDigraph()
+        print('Relation %s is weakly complete ? %s' % (g.name,str(g.isWeaklyComplete(Debug=True))))
+        g.showRelationTable()
 ##        g.save('debug')
 ##        f = Digraph('debug')
 ##        print(f.relation)
@@ -10304,12 +10334,15 @@ if __name__ == "__main__":
         t .save('test')
         t = PerformanceTableau('test')
         g = BipolarOutrankingDigraph(t,Normalized=True)
+        print('Relation %s is weakly complete ? %s' % (g.name,str(g.isWeaklyComplete())))
         from weakOrders import *
         rbc = RankingByChoosingDigraph(g)
         rbc.showWeakOrder()
         #rbc.exportGraphViz()
         #print(rbc.gamma)
         print(rbc.topologicalSort(Debug=True))
+        print('Relation %s is weakly complete ? %s' % (rbc.name,str(g.isWeaklyComplete())))
+       
 ##        g.showRelationTable()
 ##        covg = CoverDigraph(g, Debug=False)
 ##        covg.showRelationTable()
