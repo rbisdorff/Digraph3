@@ -1978,7 +1978,7 @@ class Digraph(object):
             x = listActions[i]
             for j in range(i+1,n):
                 y = listActions[j]
-                if relation[x][y] <= Med and relation[y][x] <= Med:
+                if relation[x][y] < Med and relation[y][x] < Med:
                     isWeaklyComplete = False
                     if Debug:
                         print('x,y,relation[x][y],relation[y][x]',\
@@ -1987,6 +1987,37 @@ class Digraph(object):
             if not isWeaklyComplete:
                 break
         return isWeaklyComplete
+
+    def isComplete(self, Debug=False):
+        """
+        checks the completeness property of self.relation by checking
+        for the absence of a link between two actions!!
+
+        .. warning::
+        
+            The reflexive links are ignored !!
+        """
+        Med = self.valuationdomain['med']
+        if Debug:
+            print('Med = ', Med)
+        listActions = [x for x in self.actions]
+        n = len(listActions)
+        relation = self.relation
+        
+        isComplete = True
+        for i in range(n):
+            x = listActions[i]
+            for j in range(i+1,n):
+                y = listActions[j]
+                if relation[x][y] <= Med and relation[y][x] <= Med:
+                    isComplete = False
+                    if Debug:
+                        print('x,y,relation[x][y],relation[y][x]',\
+                              x, y, relation[x][y], relation[y][x])
+                    break
+            if not isComplete:
+                break
+        return isComplete
 
     def automorphismGenerators(self):
         """
@@ -10324,6 +10355,7 @@ if __name__ == "__main__":
         print('*-------- Testing classes and methods -------')
         from csv import reader
         g = RandomValuationDigraph()
+        print('Relation %s is complete ? %s' % (g.name,str(g.isComplete(Debug=True))))
         print('Relation %s is weakly complete ? %s' % (g.name,str(g.isWeaklyComplete(Debug=True))))
         g.showRelationTable()
 ##        g.save('debug')
@@ -10334,14 +10366,16 @@ if __name__ == "__main__":
         t .save('test')
         t = PerformanceTableau('test')
         g = BipolarOutrankingDigraph(t,Normalized=True)
+        print('Relation %s is complete ? %s' % (g.name,str(g.isComplete(Debug=True))))
         print('Relation %s is weakly complete ? %s' % (g.name,str(g.isWeaklyComplete())))
-        from weakOrders import *
-        rbc = RankingByChoosingDigraph(g)
-        rbc.showWeakOrder()
-        #rbc.exportGraphViz()
-        #print(rbc.gamma)
-        print(rbc.topologicalSort(Debug=True))
-        print('Relation %s is weakly complete ? %s' % (rbc.name,str(g.isWeaklyComplete())))
+##        from weakOrders import *
+##        rbc = RankingByChoosingDigraph(g)
+##        rbc.showWeakOrder()
+##        #rbc.exportGraphViz()
+##        #print(rbc.gamma)
+##        print(rbc.topologicalSort(Debug=True))
+##        print('Relation %s is complete ? %s' % (gcd.name,str(gcd.isComplete(Debug=True))))
+##        print('Relation %s is weakly complete ? %s' % (rbc.name,str(g.isWeaklyComplete())))
        
 ##        g.showRelationTable()
 ##        covg = CoverDigraph(g, Debug=False)
