@@ -378,7 +378,7 @@ function initialize() {
     .size([width, height])
     .linkDistance(1)
     .linkStrength(0.1)
-    .charge(-2500)
+    .charge(-3500)
     .gravity(0.1)
   
 
