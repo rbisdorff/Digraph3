@@ -2827,13 +2827,13 @@ class Digraph(object):
 
     def exportD3(self,fileName=None, noSilent=True):
         """
+    This function was made during my bachelor thesis at the University of Luxembourg. Gary Cornelius, 2014
+    
     *Parameters*:
         * fileName, name of the generated html file, default = None (index.html);
-        * noSilent, True = defaul;
+        * noSilent, True = default;
 
-    This function was made during my bachelor thesis at the University of Luxembourg. Gary Cornelius, 2014
-
-    The idea was to find a way that allows you to easily get details about certain nodes or edges. 
+    The idea was to find a way that allows you to easily get details about certain nodes or edges of a directed graph. 
     The function allows you to export a html file together with all the needed libraries, including the 
     D3 Library which we use for graph generation and the physics between nodes, which attracts or pushes nodes away from each other.
 
