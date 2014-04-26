@@ -5,7 +5,7 @@ def htmlmodel(name="graph"):
 
     Html/JavaScript implementation of digraphs graph export
  
- Copyright (C) 2014  Gary Cornelius - University of Luxembourg
+    Copyright (C) 2014  Gary Cornelius - University of Luxembourg
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,7 +20,10 @@ def htmlmodel(name="graph"):
     You should have received a copy of the GNU General Public License along
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+-->
+<!--
 
+    Icons from: http://ionicons.com/ MIT Licensed
  
 -->
 
@@ -73,34 +76,37 @@ graph
 </head>
 
 <body>
+  <!-- Context Menu for Nodes -->
   <div class="contextMenu" id="cntxtNode">
         <ul>
             <li id="inspect"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/inspect.png" height="15px" width="15px" /> Inspect</li>
             <li id="editNode"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/edit.png" height="15px" width="15px" /> Edit</li>
         </ul>
   </div>
-
+  <!-- Context Menu for the background -->
   <div class="contextMenu" id="cntxtMenu">
         <ul>
+            <li id="new"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/new.png" height="15px" width="15px" /> New</li>
             <li id="reset"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/reset.png" height="15px" width="15px" /> Reset</li>
             <li id="import"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/folder-open.png" height="15px" width="15px" /> Import</li>
             <li id="export"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/save.png" height="15px" width="15px" /> Export</li>
         </ul>
   </div>
 
+  <!-- Context Menu for edges -->
   <div class="contextMenu" id="cntxtEdge">
         <ul>
           <li id="editEdge"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/edit.png" height="15px" width="15px" /> Edit</li>
         </ul>
   </div>
 
-<!--UPLOAD-->
+<!-- Import Modal -->
   <div class="modal fade" id="upModal" role="dialog" aria-labelledby="upModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Upload Data</h4>
+          <h4 class="modal-title">Import Data</h4>
         </div>
         <div class="modal-body">
           <!-- INPUT -->
@@ -108,8 +114,8 @@ graph
       <input name="xml" type="file" id="xml" value=""/> 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-          <button id="open" type="button" class="btn btn-info">Open</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancel</button>
+          <button id="open" type="button" class="btn btn-info"> Open</button>
         </div>
 
       </div><!-- /.modal-content -->
@@ -117,7 +123,31 @@ graph
   </div><!-- /.modal -->
 
 
-  <!-- Modal Node-->
+<!-- Export Modal -->
+  <div class="modal fade" id="downModal" role="dialog" aria-labelledby="downModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Import Data</h4>
+        </div>
+        <div class="modal-body">
+          <!-- INPUT -->
+         <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancel</button>
+         <button id="open" type="button" class="btn btn-info"> Download!</button>
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+  
+
+  <!-- Node Modal -->
   <div class="modal fade" id="modNodeModal" role="dialog" aria-labelledby="modNodeModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -131,8 +161,11 @@ graph
   <div class="form-group"> 
   <input type="text" value="Node ID" class="form-control" maxlength="10" required readonly="readonly" name="nodeId" id="nodeId"> 
   </div> 
+   <div class="form-group"> 
+  <input type="text" value="Node Name" class="form-control" maxlength="10" required name="nodename" id="nodename"> 
+  </div> 
   <div class="form-group">
-   <input type="text" placeholder="Comment" class="form-control" maxlength="20" autofocus name="nodeComment" id="nodeComment"> 
+   <input type="text" placeholder="Comment" class="form-control" maxlength="20" name="nodeComment" id="nodeComment"> 
    </div>
   
   </div>
@@ -146,7 +179,7 @@ graph
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
 
-  <!-- Modal Edge-->
+  <!-- Edge Modal -->
   <div class="modal fade" id="modEdgeModal" role="dialog" aria-labelledby="modEdgeModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -156,14 +189,13 @@ graph
         </div>
         <div class="modal-body">
           <!-- INPUT -->
-  
   <div class="form-group"> 
   <p id="pnodetarget"></p>
   <input type="text" placeholder="Node Target" class="form-control" maxlength="10" required target="" name="nodeTarget" id="nodeTarget"/> 
   </div> 
   <div class="form-group">
    <p id="pnodesource"></p>
-   <input type="text" placeholder="Node Source" class="form-control" maxlength="20" required source="" name="nodeSource" id="nodeSource"/> 
+   <input type="text" placeholder="Node Source" class="form-control" maxlength="10" required source="" name="nodeSource" id="nodeSource"/> 
    </div>
   
   </div>
@@ -171,8 +203,6 @@ graph
    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
    <button class="btn btn-primary" type='submit' name='save' onClick="saveEdge()">Save changes</button>
   </div>
-        
-
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
@@ -187,11 +217,9 @@ graph
 </body>
 </html>
 
-
 '''
 def javascript():
     return '''
-
 
 /*
 #
@@ -221,7 +249,7 @@ def javascript():
 * Declaration of some usefull global variables
 *
 */
-var xmlinput="",json,labels,labelt,path,force,svg,actions={},relation={},Min,Max,Med,category='';
+var xmlinput="",$xml,xmlDoc,json,labels,labelt,path,force,svg,actions={},relation={},Min,Max,Med,category='';
 
 /*
 *
@@ -348,10 +376,9 @@ function initialize() {
   */
   force = d3.layout.force()
     .size([width, height])
-    .linkDistance(150)
-    .linkStrength(1.5)
-    .charge(-5000)
-    .friction(0.1)
+    .linkDistance(1)
+    .linkStrength(0.1)
+    .charge(-2500)
     .gravity(0.1)
   
 
@@ -494,6 +521,7 @@ function initialize() {
             },
             'editNode': function(t) {
                 editNode(d);
+
             }
         }
     });
@@ -518,7 +546,14 @@ function initialize() {
         {
             
             'editEdge': function(t) {
-                editEdge(d);
+                if(category === 'general'){
+                   editEdge(d);
+                }
+                else
+                {
+                  alert("Operation not allowed with this graph type.")
+                } 
+                 
             }
         }
     });
@@ -542,6 +577,12 @@ function initialize() {
         },
         bindings:
         {
+            'new': function(evt) {
+                /*
+                To be done later.
+                */
+              alert("Create new graph!")
+            },
             'import': function(evt) {
                 /*
                 To be done later.
@@ -552,7 +593,7 @@ function initialize() {
                 /*
                 To be done later
                 */
-                alert("Nothing to see here yet.")
+                exportXMCDA2();
             },
             'reset': function(t) {
                 if(json != null) { 
@@ -616,10 +657,16 @@ function initialize() {
     $('#modNodeModal').modal('show');
     $('#nodeId').attr("value",d.name);
     $('#nodeComment').attr("value",d.comment);
+    $('#nodename').attr("value",d.fullName);
   }
-  function saveNode() {
+  function saveNode(d) {
     $('#modNodeModal').modal('hide');
-    actions[$('#nodeId').attr("value")]["comment"] =  $('#nodeComment').attr("value");
+    var comment = $('#nodeComment').attr("value");
+    var fullName = $('#nodename').attr("value");
+    actions[$('#nodeId').attr("value")]["comment"] =  comment;
+    actions[$('#nodeId').attr("value")]["name"] =  fullName;
+    $xml.find("alternatives").find('alternative[id="'+$("#nodeId").attr("value")+'"]').find('description').text(comment);
+    $xml.find("alternatives").find('alternative[id="'+$("#nodeId").attr("value")+'"]').attr('name',fullName);
     load();
   }
 
@@ -634,6 +681,7 @@ function initialize() {
     
     $('#nodeTarget').attr("target",d.target.name);
     $('#nodeSource').attr("source",d.source.name);
+
   }
   function saveEdge() {
     $('#modEdgeModal').modal('hide');
@@ -690,7 +738,8 @@ function initialize() {
   */
   function parseXMCDA2(xmlinput) {
       console.log("Parsing XMCDA2 File.")
-      var $xml = $($.parseXML(xmlinput));
+      xmlDoc = $.parseXML(xmlinput);
+      $xml = $( xmlDoc );
       //console.log($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').children().text());
       var actions={},relation={},category;
 
@@ -722,7 +771,7 @@ function initialize() {
           }
         });
       var cat = $xml.find('alternativesComparisons').find('mcdaConcept').text();
-      if( cat=== 'outrankingDigraph'){
+      if( cat === 'outrankingDigraph'){
         category = 'outranking';
       }
       else {
@@ -746,10 +795,10 @@ function initialize() {
    for(node in actions){
             actionkeys.push(node);
             try {
-               dataset["nodes"].push({"name": node ,"group":1, "comment": actions[node]["comment"]});
+               dataset["nodes"].push({"name": node ,"group":1, "comment": actions[node]["comment"],"fullName": actions[node]["name"]});
             }
             catch(err) {
-                dataset["nodes"].push({"name": node ,"group":1, "comment": "none"});
+                dataset["nodes"].push({"name": node ,"group":1, "comment": "none", "fullName":"nameless"});
             }
     }
 
@@ -788,6 +837,32 @@ function initialize() {
     return dataset;
   }
 
+  /*
+  *
+  *
+  * Export the XMCDA2 formatted graph.
+  *
+  */
+  function exportXMCDA2() {
+      //Export of Javascript variables cannot be done easily. This is a nasty work-around.
+      window.URL = window.webkitURL || window.URL;
+
+      var contentType = 'text/xmcda2';
+
+      var xmcda2File = new Blob([new XMLSerializer().serializeToString(xmlDoc)], {type: contentType});
+
+      var a = document.createElement('a');
+      a.download = 'data.xmcda2';
+      a.href = window.URL.createObjectURL(xmcda2File);
+      a.id="exportt";
+      a.textContent = 'Download XMCDA2';
+
+      a.dataset.downloadurl = [contentType, a.download, a.href].join(':');
+      $(a).appendTo("body")[0].click();
+      $("#exportt").remove();
+  }
+
+  
 
 
   /*
@@ -899,6 +974,7 @@ function initialize() {
    
   }
   
+
 '''
 
 def d3export():
