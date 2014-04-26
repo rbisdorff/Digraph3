@@ -152,7 +152,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1011,7 +1011,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1064,16 +1064,16 @@ Renders dominant prekernel restricted relation.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.exportD3">
 <tt class="descname">exportD3</tt><big>(</big><em>fileName=None</em>, <em>noSilent=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.exportD3" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
+<dd><p>This function was made during my bachelor thesis at the University of Luxembourg. Gary Cornelius, 2014</p>
+<dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
 <li>fileName, name of the generated html file, default = None (index.html);</li>
-<li>noSilent, True = defaul;</li>
+<li>noSilent, True = default;</li>
 </ul>
 </dd>
 </dl>
-<p>This function was made during my bachelor thesis at the University of Luxembourg. Gary Cornelius, 2014</p>
-<p>The idea was to find a way that allows you to easily get details about certain nodes or edges. 
+<p>The idea was to find a way that allows you to easily get details about certain nodes or edges of a directed graph. 
 The function allows you to export a html file together with all the needed libraries, including the 
 D3 Library which we use for graph generation and the physics between nodes, which attracts or pushes nodes away from each other.</p>
 <p>Therefore in order to make it easyer for everyone to analyze certain nodes, it is i.e. possible to only show direct neightbours to this nodes, drag nodes around, etc.</p>
@@ -1114,13 +1114,13 @@ D3 Library which we use for graph generation and the physics between nodes, whic
 <div><ul>
 <li><dl class="first docutils">
 <dt>Main Screen:</dt>
-<dd><img alt="randomvaluation_d3_main.png" class="first last" src="randomvaluation_d3_main.png" />
+<dd><img alt="_images/randomvaluation_d3_main.png" class="first last" src="_images/randomvaluation_d3_main.png" />
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>Inspect function:</dt>
-<dd><img alt="randomvaluation_d3_inspect.png" class="first last" src="randomvaluation_d3_inspect.png" />
+<dd><img alt="_images/randomvaluation_d3_inspect.png" class="first last" src="_images/randomvaluation_d3_inspect.png" />
 </dd>
 </dl>
 </li>
@@ -1861,7 +1861,7 @@ equivalence valuations.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1892,7 +1892,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -3643,7 +3643,7 @@ bipolar-valued marginal pairwise majority difference digraphs.</p>
 <span class="go">dot -Grankdir=BT -Tpng rel_randLinearProfile.dot -o rel_randLinearProfile.png</span>
 </pre></div>
 </div>
-<img alt="_images/rel_randLinearProfile.png" src="_images/rel_randLinearProfile.png" />
+<img alt="rel_randLinearProfile.png" src="rel_randLinearProfile.png" />
 <dl class="method">
 <dt id="votingDigraphs.CondorcetDigraph.computeArrowRaynaudRanking">
 <tt class="descname">computeArrowRaynaudRanking</tt><big>(</big><em>linearOrdered=True</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#votingDigraphs.CondorcetDigraph.computeArrowRaynaudRanking" title="Permalink to this definition">¶</a></dt>
