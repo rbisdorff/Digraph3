@@ -1299,6 +1299,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         if isReturningHTML:
             return html
 
+    
 
     def showShort(self):
         """
@@ -3171,8 +3172,6 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         
         if comment:
             print('File: ' + nameExt + ' saved !')
-
-
 
 class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     """

@@ -2825,7 +2825,7 @@ class Digraph(object):
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
 
-    def exportD3(self,fileName=None, noSilent=True):
+    def exportD3(self, fileName="index", noSilent=True):
         """
     This function was made during my bachelor thesis at the University of Luxembourg. Gary Cornelius, 2014
     
@@ -2881,7 +2881,7 @@ class Digraph(object):
         relation = self.relation
         Med = self.valuationdomain['med']
         i = 0
-        if fileName == None:
+        if fileName == "index":
             fileName = self.name
        
      
@@ -2900,15 +2900,22 @@ class Digraph(object):
         fw.write(htmlmodel.d3export())
         fw.close()
 
-        # load file from internet and copyfile("./small.html",)?
-        #import urllib.request
-        #with urllib.request.urlopen("http://leopold-loewenheim.uni.lu/WWWgary/html/small.html") as url:
-        #    s = url.read()
-            #I'm guessing this would output the html source code?
-        #    fo= open(fileName+'.html','wb')
-        #    fo.write(s)
-        #    fo.close()
-
+        pairwise={}
+        try:
+            for x in self.actions:
+                pairwise[x]={}
+            for x in actionkeys:
+                for y in actionkeys:
+                    if(not(x == y)):
+                        pairwise[x][y] =  str(self.showPairwiseComparison(x,y,isReturningHTML=True))
+        if noSilent:
+            print("File: showPairwise.json")
+        fw.write(str(pairwise))
+        fw = open("showPairwise.json","w")
+        fw.close()
+        except:
+            print("File: showPairwise.json - Graph not outranking.")
+        
         if noSilent:
             print('*---- export done ---------*')
             
