@@ -950,7 +950,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
     
     .. note::
 
-        We generally require an OutrankingDigraph instance g or a valid filename.
+        We generally require an PerformanceTableau instance or a valid filename.
         If none is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.
         By default lower closed limits of categories are supposed to be used in the sorting.
 
@@ -1135,8 +1135,13 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
             self.relation = deepcopy(g.relation)
             
         else:
-            Min = Decimal('%.4f' % minValuation)
-            Max = Decimal('%.4f' % maxValuation)
+            g = BipolarOutrankingDigraph(normPerfTab,hasNoVeto=hasNoVeto)
+            g.recodeValuation(minValuation,maxValuation)
+            self.relationOrig = deepcopy(g.relation)
+            Min = g.valuationdomain['min']
+            Max = g.valuationdomain['max']
+##            Min = Decimal(str(minValuation))
+##            Max = Decimal(str(maxValuation))
             Med = (Max + Min)/Decimal('2.0')
             self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
             if LowerClosed:
@@ -1155,6 +1160,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
             if LowerClosed:
                 for x in self.actionsOrig:
                     for y in self.actionsOrig:
+##                        self.relation[x][y] = g.relation[x][y]
                         self.relation[x][y] = Med
                 for x in self.profileLimits:
                     self.relation[x] = {}
@@ -1164,6 +1170,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                 for x in self.actionsOrig:
                     self.relation[x] = {}
                     for y in self.actionsOrig:
+##                        self.relation[x][y] = g.relation[x][y]
                         self.relation[x][y] = Med
                 for y in self.profileLimits:
                     for x in self.actions:
@@ -1180,7 +1187,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         self.order = len(self.actions)
 
         # compute weak ordering by choosing
-        self.computeRankingByChoosing()
+        self.computeRankingByChoosing(CoDual=True)
         
         # init general digraph Data
         self.gamma = self.gammaSets()
@@ -1369,17 +1376,22 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         if categoryContents == None:
             categoryContents = self.computeCategoryContents()
         categoryKeys = self.orderedCategoryKeys()
-
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
         actions = [x for x in self.actionsOrig]
         currActions = set(actions)
-        #sortedActions = set()
+        relation = self.relation
+#        relation = {}
         sortingRelation = {}
         for x in actions:
+#            relation[x] = {}
             sortingRelation[x] = {}
             for y in actions:
+#                if x != y:
+#                    relation[x][y] = Max
+#                else:
+#                    relation[x][y] = Med
                 sortingRelation[x][y] = Med
                 
         if Debug:
@@ -1390,17 +1402,17 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
             if Debug:
                 print('ibch,ribch',ibch,ribch)
             for x in ibch:
-##                for y in sortedActions:
-##                    sortingRelation[x][y] = Max
-##                    sortingRelation[y][x] = Min                    
                 for y in ibch:
+##                    sortingRelation[x][y] = self.omin( [abs(relation[x][y]),abs(relation[y][x])] )
+##                    sortingRelation[y][x] = self.omin( [abs(relation[y][x]),abs(relation[x][y])] )
                     sortingRelation[x][y] = Med
                     sortingRelation[y][x] = Med
                 for y in ribch:
+##                    sortingRelation[x][y] = -self.omin( [abs(relation[x][y]),abs(relation[y][x])] )
+##                    sortingRelation[y][x] = self.omin( [abs(relation[y][x]),abs(relation[x][y])] )
                     sortingRelation[x][y] = Min
                     sortingRelation[y][x] = Max
             currActions = currActions - ibch
-##            sortedActions = sortedActions | ibch 
         return sortingRelation
 
     def showActionCategories(self,action,Debug=False):
