@@ -2825,7 +2825,7 @@ class Digraph(object):
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
 
-    def exportD3(self, fileName="index", Comments=True):
+    def exportD3(self, fileName="index", noSilent=True):
         """
     This function was made during my bachelor thesis at the University of Luxembourg. Gary Cornelius, 2014
     
@@ -2874,7 +2874,7 @@ class Digraph(object):
         import urllib
         import htmlmodel
 
-        if Comments:
+        if noSilent:
             print('*---- exporting all needed files ---------*')
             
         actionkeys = [x for x in self.actions]
@@ -2888,16 +2888,20 @@ class Digraph(object):
         fw = open("index.html",'w')
         fw.write(htmlmodel.htmlmodel(name=self.name))
         fw.close()
-
-        self.saveXMCDA2()
-
+        if noSilent:
+            print("File: index.html generated!")
+        
         fw = open("digraph3lib.js",'w')
         fw.write(htmlmodel.javascript())
         fw.close()
+        if noSilent:
+            print("File: digraph3lib.js saved!")
 
         fw = open("d3.v3.js",'w')
         fw.write(htmlmodel.d3export())
         fw.close()
+        if noSilent:
+            print("File: d3.v3.js saved!")
 
         pairwise={}
         try:
@@ -2906,17 +2910,19 @@ class Digraph(object):
             for x in actionkeys:
                 for y in actionkeys:
                     if(not(x == y)):
-                        pairwise[x][y] =  str(self.showPairwiseComparison(x,y,isReturningHTML=True))
-                        
-            if Comments:
-                print("File: showPairwise.json")
-            fw.write(str(pairwise))
+                        pairwise[x][y] =  str(self.showPairwiseComparison(x,y,isReturningHTML=True))                    
             fw = open("showPairwise.json","w")
+            fw.write(str(pairwise))
             fw.close()
+            if noSilent:
+                print("File: showPairwise.json saved!")
         except:
-            print("File: showPairwise.json - Graph not outranking.")
+            if noSilent:
+                print("File: showPairwise.json NOT saved!")
+
+        self.saveXMCDA2()
             
-        if Comments:
+        if noSilent:
             print('*---- export done ---------*')
             
 
