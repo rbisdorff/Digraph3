@@ -1129,7 +1129,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print('a,b =', a, b)
         if a != b:
             if isReturningHTML:
-                html  = '<h1>Pairwise Comparison<h/1>'
+                html  = '<h1>Pairwise Comparison</h1>'
                 html += '<h2>Comparing actions : (%s,%s)</h2>' % (a,b)
                 html += '<table style="background-color:White" border="1">'
                 html += '<tr bgcolor="#9acd32">'
