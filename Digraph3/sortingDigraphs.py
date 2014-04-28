@@ -1187,7 +1187,8 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         self.order = len(self.actions)
 
         # compute weak ordering by choosing
-        self.computeRankingByChoosing(CoDual=True)
+##        if self.order < 20:
+##            self.computeRankingByChoosing(CoDual=True)
         
         # init general digraph Data
         self.gamma = self.gammaSets()
