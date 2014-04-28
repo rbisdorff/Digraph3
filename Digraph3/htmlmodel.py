@@ -1,6 +1,5 @@
 def htmlmodel(name="graph"):
     return '''
-
 <!--
 
     Html/JavaScript implementation of digraphs graph export
@@ -47,12 +46,12 @@ graph
     fill: none;
     cursor: pointer;
     stroke: #000;
-    stroke-width: 2.5px;
+    stroke-width: 4.0px;
     }
   .node circle {
     cursor: pointer;
     stroke: #333;
-    stroke-width: 2px;
+    stroke-width: 3px;
     
     } 
   .node text {
@@ -63,7 +62,7 @@ graph
     user-select: none;
   }
   circle:hover{
-    fill: aquamarine;
+   fill: aquamarine;
   }
   text {
     user-select: none;
@@ -96,7 +95,7 @@ graph
   <!-- Context Menu for edges -->
   <div class="contextMenu" id="cntxtEdge">
         <ul>
-          <li id="editEdge"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/edit.png" height="15px" width="15px" /> Edit</li>
+          <li id="inspectEdge"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/inspect.png" height="15px" width="15px" /> Inspect</li>
         </ul>
   </div>
 
@@ -121,31 +120,7 @@ graph
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-
-
-<!-- Export Modal -->
-  <div class="modal fade" id="downModal" role="dialog" aria-labelledby="downModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Import Data</h4>
-        </div>
-        <div class="modal-body">
-          <!-- INPUT -->
-         <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancel</button>
-         <button id="open" type="button" class="btn btn-info"> Download!</button>
-        </div>
-        <div class="modal-footer">
-          
-        </div>
-
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-
-  
+ 
 
   <!-- Node Modal -->
   <div class="modal fade" id="modNodeModal" role="dialog" aria-labelledby="modNodeModal" aria-hidden="true">
@@ -185,27 +160,58 @@ graph
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Modify Edge</h4>
+
+          <h4 class="modal-title">This is an example! Not actual data!</h4>
         </div>
         <div class="modal-body">
           <!-- INPUT -->
-  <div class="form-group"> 
-  <p id="pnodetarget"></p>
-  <input type="text" placeholder="Node Target" class="form-control" maxlength="10" required target="" name="nodeTarget" id="nodeTarget"/> 
-  </div> 
-  <div class="form-group">
-   <p id="pnodesource"></p>
-   <input type="text" placeholder="Node Source" class="form-control" maxlength="10" required source="" name="nodeSource" id="nodeSource"/> 
-   </div>
+    <div class="form-group"> 
+  <h1>Pairwise Comparison</h1><h2>Comparing actions : (a03,a08)</h2><table style="background-color:White" border="1"><tr bgcolor="#9acd32"><th>crit.</th><th>wght.</th> <th>g(x)</th> <th>g(y)</th> <th>diff</th> <th>ind</th> <th>wp</th> <th>p</th> <th>concord</th> <th>wv</th> <th>v</th> <th>polarisation</th></tr><tr><td bgcolor="#FFEEAA" align="center">g01</td> <td>1.00</td> <td>-70.48</td> <td>-79.96</td> <td>+9.48</td> <td>4.42</td>  <td>None</td>  <td>6.67</td>  <td>+1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g02</td> <td>1.00</td> <td>42.31</td> <td>77.72</td> <td>-35.41</td> <td>5.83</td>  <td>None</td>  <td>8.95</td>   <td>-1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g03</td> <td>1.00</td> <td>5.00</td> <td>7.00</td> <td>-2.00</td> <td>None</td>  <td>None</td>  <td>None</td>   <td>-1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g04</td> <td>1.00</td> <td>3.00</td> <td>5.00</td> <td>-2.00</td> <td>None</td>  <td>None</td>  <td>None</td>   <td>-1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g05</td> <td>1.00</td> <td>8.00</td> <td>6.00</td> <td>+2.00</td> <td>None</td>  <td>None</td>  <td>None</td>   <td>+1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g06</td> <td>1.00</td> <td>45.69</td> <td>43.57</td> <td>+2.12</td> <td>2.36</td>  <td>None</td>  <td>2.82</td>   <td>+1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g07</td> <td>1.00</td> <td>8.00</td> <td>9.00</td> <td>-1.00</td> <td>None</td>  <td>None</td>  <td>None</td>   <td>-1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g08</td> <td>1.00</td> <td>2.00</td> <td>4.00</td> <td>-2.00</td> <td>None</td>  <td>None</td>  <td>None</td>   <td>-1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g09</td> <td>1.00</td> <td>-44.55</td> <td>-25.11</td> <td>-19.44</td> <td>1.46</td>  <td>None</td>  <td>1.79</td>   <td>-1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g10</td> <td>1.00</td> <td>45.83</td> <td>75.83</td> <td>-30.00</td> <td>0.77</td>  <td>None</td>  <td>5.50</td>   <td>-1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g11</td> <td>1.00</td> <td>5.00</td> <td>7.00</td> <td>-2.00</td> <td>None</td>  <td>None</td>  <td>None</td>   <td>-1.00</td></tr></tr></table><b>Valuation in range: -11.00 to +11.00; global concordance: -5.00 </b>
+  </div>
+  
+  
   
   </div>
   <div class="modal-footer">
    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-   <button class="btn btn-primary" type='submit' name='save' onClick="saveEdge()">Save changes</button>
   </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
+
+  
+<!-- Info Modal -->
+  <div class="modal fade" id="infoModal" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Info</h4>
+        </div>
+        <div class="modal-body">
+          <!-- INPUT -->
+          <div class="form-group"> 
+             <p>
+        • Right-click on the background lets you import and export XMCDA2 encoded files or reset the graph.<br/><br/>     
+        • Use your left mouse to drag and drop nodes.<br/><br/>
+        • Once dragged a node is frozen and can be released by a simple double click.<br/><br/>
+        • Right-click on Nodes or Edges to get further information or edit their values.<br/><br/>
+        • Clicking on the background sets your graph back out of the inspect mode.<br/><br/>
+
+
+              </p>
+  
+          </div> 
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal"> Close</button>
+
+        </div>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
 
 
   <script>
@@ -220,7 +226,6 @@ graph
 '''
 def javascript():
     return '''
-
 /*
 #
 # Html/JavaScript implementation of digraphs graph export
@@ -257,6 +262,7 @@ var xmlinput="",$xml,xmlDoc,json,labels,labelt,path,force,svg,actions={},relatio
 *
 */
 function initialize() {
+  console.log("Initialization of our empty standart canvas.")
   var width=900, height=700
 
   svg = d3.select("body").append("svg")
@@ -392,14 +398,7 @@ function initialize() {
     .attr("xlink:href", "http://leopold-loewenheim.uni.lu/WWWgary/icons/info.png")
     .attr("x", 10)
     .on("click",function(o) {
-      alert( 
-        'MANUAL:\\n\\n'
-        + "\\t• Use your left mouse to drag and drop nodes.\\n\\n"
-        + '\\t• Once dragged a node is frozen and can be released by a simple double click.\\n\\n'
-        + '\\t• Right Click on the background lets you import and export XMCDA files or reset the graph.\\n\\n'
-        + '\\t•  Right-click on Nodes or Edges to get further information or edit their values.\\n\\n'
-        + '\\t•  Clicking on the background sets your graph back out of the "Zoom".\\n\\n'       
-    );
+      $('#infoModal').modal('show');  
     })
     .attr("y",height-35);
   }
@@ -418,6 +417,7 @@ function initialize() {
         .nodes(json.nodes)
         .links(json.links);
       start(json);
+
   }
   
   /*
@@ -439,7 +439,7 @@ function initialize() {
       .transition(500)
       .style("opacity", 
         function(o) {
-          return isConnected(o, d) || isEqual(o,d) ? 1 : 0.2 ;
+          return isConnected(o, d) || isEqual(o,d) ? 1 : 0.1 ;
         })
       .style("fill", 
         function(o) {
@@ -452,7 +452,7 @@ function initialize() {
       .transition(500)
       .style("opacity", 
         function(o) {
-          return o.source.index === d.index || o.target.index === d.index ? 1 : 0.1;
+          return o.source.index === d.index || o.target.index === d.index ? 1 : 0.05;
         });
     circle
       .transition(500);
@@ -474,11 +474,11 @@ function initialize() {
 
   /*
   * 
-  * The unfocus fucntion of focusNode 
+  * The unfocus function of focusNode 
   *
   */
   var unfocusNode = function unfocusNode(d) {
-      console.log("Refreshing graph!")
+      console.log("Unfocus node.");
       node
           .transition(500)
           .style("opacity", 1.0)
@@ -505,7 +505,7 @@ function initialize() {
   *
   */
   var context_node = function context_node(d) {
-     
+     console.log("Opening node context menu.");
      $('g.node').contextMenu('cntxtNode',
     {
         itemStyle:
@@ -534,8 +534,8 @@ function initialize() {
   *
   */
   var context_edge = function context_edge(d) {
-     
-     $('path').contextMenu('cntxtEdge',
+    console.log("Opening edge context menu.");
+    $('path').contextMenu('cntxtEdge',
     {
         itemStyle:
         {
@@ -545,9 +545,9 @@ function initialize() {
         bindings:
         {
             
-            'editEdge': function(t) {
+            'inspectEdge': function(t) {
                 if(category === 'general'){
-                   editEdge(d);
+                   inspectEdge(d);
                 }
                 else
                 {
@@ -567,9 +567,9 @@ function initialize() {
   *
   */
   var context_main = function context_main(d) {
-     
+     console.log("Opening main context menu.");
      $('rect').contextMenu('cntxtMenu',
-    {
+     {
         itemStyle:
         {
             fontFamily : 'Arial',
@@ -588,6 +588,7 @@ function initialize() {
                 To be done later.
                 */
               importXMCDA2();
+
             },
             'export': function(t) {  
                 /*
@@ -608,6 +609,7 @@ function initialize() {
   }
 
   var releaseNodes=function releaseNodes(d) {
+    console.log("Releasing node " + d.name);
     d.fixed = false; 
     tick();
     force.start();
@@ -616,25 +618,32 @@ function initialize() {
   /*
   * Stop force and free drag
   */
+  var draging=false;
   var dragstart = function dragstart(d,i) {
-        force.stop();
+        if(d3.event.sourceEvent.which==1){
+        draging=true
+        force.stop();}
     }
 
   var dragmove = function dragmove(d,i) {
-        d.px += d3.event.dx;
-        d.py += d3.event.dy;
-        d.x += d3.event.dx;
-        d.y += d3.event.dy; 
-        tick(); 
+        if(draging){
+        d.px += d3.event.dx
+        d.py += d3.event.dy
+        d.x += d3.event.dx
+        d.y += d3.event.dy
+        tick();} 
     }
 
   var dragend = function dragend(d,i) {
-        d.fixed = true; 
-        tick();
-        force.resume();
+        if(d3.event.sourceEvent.which==1){
+        d.fixed = true 
+        tick()
+        force.resume()
+        draging=false;}
     }
 
 
+  
   /*
   *
   * Check if a node is connected to with another one.
@@ -670,17 +679,10 @@ function initialize() {
     load();
   }
 
-  function editEdge(d) {
+  function inspectEdge(d) {
     $('#modEdgeModal').modal('show');
     
-    $('#nodeTarget').attr("value",relation[d.target.name][d.source.name]);
-    document.getElementById("pnodetarget").innerHTML=d.target.name + " --> " + d.source.name;
     
-    $('#nodeSource').attr("value",relation[d.source.name][d.target.name]);
-    document.getElementById("pnodesource").innerHTML=d.source.name + " --> " + d.target.name;
-    
-    $('#nodeTarget').attr("target",d.target.name);
-    $('#nodeSource').attr("source",d.source.name);
 
   }
   function saveEdge() {
@@ -695,6 +697,7 @@ function initialize() {
   * Open the import menu and load the file into the xml variable.
   *
   */
+  var test
   function importXMCDA2() {
     console.log("Importing XCDA2 file.")
     var reader;
@@ -707,11 +710,14 @@ function initialize() {
              return;
           }
           var file = files[0];
+          console.log(file)
+          test=file;
           var start =  0;
           var stop = file.size - 1;
           reader= new FileReader();
           var blob = file.slice(start, stop + 1);
-          reader.readAsBinaryString(blob); 
+          //readAsBinaryString() not in specifications.
+          reader.readAsText(blob); 
           reader.onloadend = function(evt) { 
               xmlinput = evt.target.result; 
               var result = parseXMCDA2(xmlinput);
@@ -719,7 +725,8 @@ function initialize() {
               relation = result[1];
               category = result[2];
               load();
-              $('#upModal').modal('hide');
+              var x = $('#upModal').modal('hide');
+              
           };
           }
 
@@ -764,10 +771,10 @@ function initialize() {
       $xml.find('alternativesComparisons').find('pairs').find('pair').each(
         function() {
           try{
-          relation[$(this).find('initial').find('alternativeID').text()][$(this).find('terminal').find('alternativeID').text()] = $(this).find('value').find('real').text();
+          relation[$(this).find('initial').find('alternativeID').text()][$(this).find('terminal').find('alternativeID').text()] = Math.floor(parseFloat($(this).find('value').find('real').text())*100)/100;
           }
           catch(err) {
-          relation[$(this).find('initial').find('alternativeID').text()][$(this).find('terminal').find('alternativeID').text()] = $(this).find('value').find('integer').text();
+          relation[$(this).find('initial').find('alternativeID').text()][$(this).find('terminal').find('alternativeID').text()] = parseInt($(this).find('value').find('integer').text());
           }
         });
       var cat = $xml.find('alternativesComparisons').find('mcdaConcept').text();
@@ -845,6 +852,7 @@ function initialize() {
   */
   function exportXMCDA2() {
       //Export of Javascript variables cannot be done easily. This is a nasty work-around.
+      console.log("Exporting current graph.")
       window.URL = window.webkitURL || window.URL;
 
       var contentType = 'text/xmcda2';
@@ -871,7 +879,7 @@ function initialize() {
    *
    */
  function start(json) {
-   
+  console.log("Drawing graph.")
   path = svg.append("g").selectAll('path')
     .data(force.links())
     .enter().append("svg:path")
@@ -971,10 +979,10 @@ function initialize() {
 
   force.on("tick",tick)
    .start();
+  
    
   }
   
-
 '''
 
 def d3export():
