@@ -435,7 +435,7 @@ class RankedPairsOrder(LinearOrder):
         self.name = other.name + '_ranked'        
         self.actions = deepcopy(other.actions)
         self.order = len(self.actions)
-        self.valuationdomain = g.valuationdomain
+        self.valuationdomain = deepcopy(g.valuationdomain)
         self.relation = deepcopy(g.relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -678,7 +678,7 @@ class KemenyOrder(LinearOrder):
         self.name = other.name + '_ranked'        
         self.actions = deepcopy(other.actions)
         self.order = len(self.actions)
-        self.valuationdomain = deepcopy(other.valuationdomain)
+        self.valuationdomain = deepcopy(g.valuationdomain)
         self.relation = deepcopy(g.relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -761,7 +761,7 @@ class PrincipalOrder(LinearOrder):
         self.name = other.name + '_ranked'        
         self.actions = deepcopy(other.actions)
         self.order = len(self.actions)
-        self.valuationdomain = other.valuationdomain
+        self.valuationdomain = deepcopy(g.valuationdomain)
         self.relation = deepcopy(g.relation)
         if ReverseScores == False: 
             if Colwise:
