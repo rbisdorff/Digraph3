@@ -2872,7 +2872,7 @@ class Digraph(object):
         import os
         import json
         import urllib
-        import htmlmodel
+        import htmlmodel,json
 
         if noSilent:
             print('*---- exporting all needed files ---------*')
@@ -2912,7 +2912,7 @@ class Digraph(object):
                     if(not(x == y)):
                         pairwise[x][y] =  str(self.showPairwiseComparison(x,y,isReturningHTML=True))                    
             fw = open("showPairwise.json","w")
-            fw.write(str(pairwise))
+            fw.write(json.dumps(pairwise))
             fw.close()
             if noSilent:
                 print("File: showPairwise.json saved!")
