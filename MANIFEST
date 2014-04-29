@@ -8,6 +8,7 @@ linearOrders.py
 weakOrders.py
 iqagent.py
 graphs.py
+htmlmodel.py
 makefile
 MANIFEST
 perrinMIS.c

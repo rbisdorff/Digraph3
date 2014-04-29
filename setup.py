@@ -9,7 +9,7 @@ setup(name='digraphs',
       py_modules=['digraphs','perfTabs','outrankingDigraphs',\
         'sortingDigraphs','votingDigraphs',\
         'linearOrders','weakOrders',\
-        'iqagent','graphs'],
+        'iqagent','graphs','htmlmodel'],
       license='http://ernst-schroeder.uni.lu/Digraph/digraph_copyright.html',
       url='http://leoopold-loewenheim.uni.lu/Digraph3/',
       description='Lets you add bipolar graph and digraphs methods to your applications',
