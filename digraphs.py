@@ -2902,7 +2902,6 @@ class Digraph(object):
         fw.close()
         if Comments:
             print("File: d3.v3.js saved!")
-
         pairwise={}
         try:
             for x in self.actions:
@@ -2910,22 +2909,23 @@ class Digraph(object):
             for x in actionkeys:
                 for y in actionkeys:
                     if(not(x == y)):
-                        pairwise[x][y] =  str(self.showPairwiseComparison(x,y,isReturningHTML=True))                    
-            fw = open("showPairwise.json","w")
-            fw.write(json.dumps(pairwise))
-            fw.close()
-            if Comments:
-                print("File: showPairwise.json saved!")
+                        pairwise[x][y] =  str(self.showPairwiseComparison(x,y,isReturningHTML=True))
         except:
-            if Comments:
-                print("File: showPairwise.json NOT saved!")
+            pairwise={}
+        d3export={}
+        self.saveXMCDA2(Comments=False,fileName="temp")
+        with open("temp.xmcda2","r") as myFile:
+            data=myFile.read().replace("\n","")
+        d3export["xmcda2"]= str(data)
+        d3export["pairwiseComparisions"] = str(json.dumps(pairwise))
 
-        self.saveXMCDA2()
-            
+        fw = open("d3export.json","w")
+        fw.write(json.dumps(d3export))
+        fw.close()
         if Comments:
+            print("File: d3export.json saved!")            
             print('*---- export done ---------*')
             
-
     def savedre(self,name='temp'):
         """
         save digraph in nauty format.
@@ -3116,11 +3116,12 @@ class Digraph(object):
         fo.close()
         print('File: ' + nameExt + ' saved !')
 
-    def saveXMCDA2(self,fileName='temp',fileExt='xmcda2',relationName='R',relationType='binary',category='random',subcategory='valued',author='digraphs Module (RB)',reference='saved from Python',valuationType='standard',digits=2,servingD3=False):
+    def saveXMCDA2(self,fileName='temp',fileExt='xmcda2',Comments=True,relationName='R',relationType='binary',category='random',subcategory='valued',author='digraphs Module (RB)',reference='saved from Python',valuationType='standard',digits=2,servingD3=False):
         """
         save digraph in XMCDA format.
         """
-        print('*----- saving digraph in XML format  -------------*')
+        if Comments:
+            print('*----- saving digraph in XML format  -------------*')
         actions = [x for x in self.actions]
         nameExt = fileName+"."+fileExt
         fo = open(nameExt,'w')
@@ -3231,7 +3232,8 @@ class Digraph(object):
         fo.write('</alternativesComparisons>\n')
         fo.write('</xmcda:XMCDA>\n')
         fo.close()
-        print('File: ' + nameExt + ' saved !')
+        if Comments:
+            print('File: ' + nameExt + ' saved !')
 
 
     def computeDensities(self,choice):
