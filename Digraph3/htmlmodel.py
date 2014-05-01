@@ -110,11 +110,9 @@ graph
         </div>
         <div class="modal-body">
           <!-- INPUT -->
-          Choose your XMCDA2 file: <br /> 
+          Choose your d3export file: <br /> 
       <input name="xml" type="file" id="xml" value=""/> 
-          Choose your pairwise comparision file:
-      <input name="json" type="file" id="json" value=""/> 
-
+         
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancel</button>
@@ -228,7 +226,6 @@ graph
 </body>
 </html>
 
-
 '''
 def javascript():
     return '''
@@ -260,7 +257,7 @@ def javascript():
 * Declaration of some usefull global variables
 *
 */
-var xmlinput="",$xml,xmlDoc,json,labels,labelt,path,force,svg,actions={},relation={},Min,Max,Med,category='';
+var xmlinput="",$xml,xmlDoc,pairwise,json,labels,labelt,path,force,svg,actions={},relation={},Min,Max,Med,category='';
 
 /*
 *
@@ -594,11 +591,7 @@ function initialize() {
               alert("Create new graph!")
             },
             'import': function(evt) {
-                /*
-                To be done later.
-                */
-              importXMCDA2();
-              importJSON();
+                importJSON();
 
             },
             'export': function(t) {  
@@ -703,56 +696,14 @@ function initialize() {
     relation[$('#nodeTarget').attr("target")][$('#nodeSource').attr("source")] =  $('#nodeTarget').attr("value");
     load();
   }
-  
+
   /*
   *
-  * Open the import menu and load the file into the pairwise variable.
+  * Open the import menu and load the file into the xmlinput and pairwise variables.
   *
   */
-  var pairwise
   function importJSON() {
     console.log("Importing JSON file.")
-    var reader;
-      if (window.File && window.FileReader && window.FileList && window.Blob) {
-        $('#upModal').modal('show');
-        function handleFileSelect(evt) {
-           var files = document.getElementById('json').files;
-           if (!files.length) {
-             alert('No JSON file selected. Pairwise comparision not available.');
-             $('#upModal').modal('hide');
-             return;
-          }
-          var file = files[0];
-          console.log(file)
-          test=file;
-          var start =  0;
-          var stop = file.size - 1;
-          reader= new FileReader();
-          var blob = file.slice(start, stop + 1);
-          //readAsBinaryString() not in specifications.
-          reader.readAsText(blob); 
-          reader.onloadend = function(evt) { 
-              pairwise = $.parseJSON(evt.target.result); 
-              var x = $('#upModal').modal('hide');
-            
-          };
-          }
-          document.getElementById('open').addEventListener('click', handleFileSelect, false);
-
-          } else {
-              alert('The File APIs are not fully supported in this browser.');
-          }
-   return 1;
-  }
-
-
-  /*
-  *
-  * Open the import menu and load the file into the xml variable.
-  *
-  */
-  function importXMCDA2() {
-    console.log("Importing XCDA2 file.")
     var reader;
       if (window.File && window.FileReader && window.FileList && window.Blob) {
         $('#upModal').modal('show');
@@ -772,7 +723,9 @@ function initialize() {
           //readAsBinaryString() not in specifications.
           reader.readAsText(blob); 
           reader.onloadend = function(evt) { 
-              xmlinput = evt.target.result; 
+              d3json=$.parseJSON(evt.target.result); 
+              xmlinput = d3json["xmcda2"];
+              pairwise=$.parseJSON(d3json["pairwiseComparisions"]);
               var result = parseXMCDA2(xmlinput);
               actions = result[0];
               relation = result[1];
@@ -1035,7 +988,7 @@ function initialize() {
   
    
   }
-   
+  
 '''
 
 def d3export():
