@@ -1,5 +1,6 @@
 def htmlmodel(name="graph"):
     return '''
+
 <!--
 
     Html/JavaScript implementation of digraphs graph export
@@ -49,8 +50,8 @@ graph
     stroke-width: 4.0px;
     }
   .node circle {
-    cursor: pointer;
-    stroke: #333;
+    cursor: move;
+    stroke: #000;
     stroke-width: 3px;
     
     } 
@@ -109,8 +110,11 @@ graph
         </div>
         <div class="modal-body">
           <!-- INPUT -->
-         Choose your file: <br /> 
+          Choose your XMCDA2 file: <br /> 
       <input name="xml" type="file" id="xml" value=""/> 
+          Choose your pairwise comparision file:
+      <input name="json" type="file" id="json" value=""/> 
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancel</button>
@@ -161,13 +165,14 @@ graph
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
-          <h4 class="modal-title">This is an example! Not actual data!</h4>
+          <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
           <!-- INPUT -->
-    <div class="form-group"> 
-  <h1>Pairwise Comparison</h1><h2>Comparing actions : (a03,a08)</h2><table style="background-color:White" border="1"><tr bgcolor="#9acd32"><th>crit.</th><th>wght.</th> <th>g(x)</th> <th>g(y)</th> <th>diff</th> <th>ind</th> <th>wp</th> <th>p</th> <th>concord</th> <th>wv</th> <th>v</th> <th>polarisation</th></tr><tr><td bgcolor="#FFEEAA" align="center">g01</td> <td>1.00</td> <td>-70.48</td> <td>-79.96</td> <td>+9.48</td> <td>4.42</td>  <td>None</td>  <td>6.67</td>  <td>+1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g02</td> <td>1.00</td> <td>42.31</td> <td>77.72</td> <td>-35.41</td> <td>5.83</td>  <td>None</td>  <td>8.95</td>   <td>-1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g03</td> <td>1.00</td> <td>5.00</td> <td>7.00</td> <td>-2.00</td> <td>None</td>  <td>None</td>  <td>None</td>   <td>-1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g04</td> <td>1.00</td> <td>3.00</td> <td>5.00</td> <td>-2.00</td> <td>None</td>  <td>None</td>  <td>None</td>   <td>-1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g05</td> <td>1.00</td> <td>8.00</td> <td>6.00</td> <td>+2.00</td> <td>None</td>  <td>None</td>  <td>None</td>   <td>+1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g06</td> <td>1.00</td> <td>45.69</td> <td>43.57</td> <td>+2.12</td> <td>2.36</td>  <td>None</td>  <td>2.82</td>   <td>+1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g07</td> <td>1.00</td> <td>8.00</td> <td>9.00</td> <td>-1.00</td> <td>None</td>  <td>None</td>  <td>None</td>   <td>-1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g08</td> <td>1.00</td> <td>2.00</td> <td>4.00</td> <td>-2.00</td> <td>None</td>  <td>None</td>  <td>None</td>   <td>-1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g09</td> <td>1.00</td> <td>-44.55</td> <td>-25.11</td> <td>-19.44</td> <td>1.46</td>  <td>None</td>  <td>1.79</td>   <td>-1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g10</td> <td>1.00</td> <td>45.83</td> <td>75.83</td> <td>-30.00</td> <td>0.77</td>  <td>None</td>  <td>5.50</td>   <td>-1.00</td></tr><tr><td bgcolor="#FFEEAA" align="center">g11</td> <td>1.00</td> <td>5.00</td> <td>7.00</td> <td>-2.00</td> <td>None</td>  <td>None</td>  <td>None</td>   <td>-1.00</td></tr></tr></table><b>Valuation in range: -11.00 to +11.00; global concordance: -5.00 </b>
-  </div>
+    <div class="form-group" > 
+    <div id="source"> </div>
+    <div id="target"> </div>
+    </div>
   
   
   
@@ -223,6 +228,7 @@ graph
 </body>
 </html>
 
+
 '''
 def javascript():
     return '''
@@ -263,8 +269,9 @@ var xmlinput="",$xml,xmlDoc,json,labels,labelt,path,force,svg,actions={},relatio
 */
 function initialize() {
   console.log("Initialization of our empty standart canvas.")
+  
   var width=900, height=700
-
+  d3.selectAll("svg").remove();
   svg = d3.select("body").append("svg")
       .attr("width", width)
       .attr("height", height);
@@ -382,7 +389,7 @@ function initialize() {
   */
   force = d3.layout.force()
     .size([width, height])
-    .linkDistance(1)
+    .linkDistance(250)
     .linkStrength(0.1)
     .charge(-3500)
     .gravity(0.1)
@@ -409,7 +416,6 @@ function initialize() {
   * Attention: 
   */  
   function load() {
-    d3.selectAll("svg").remove();
     initialize();
     json={"nodes": [],"links":[]};
     json = buildD3Json(actions,relation);
@@ -450,6 +456,10 @@ function initialize() {
         }); 
     path
       .transition(500)
+      .style("cursor", 
+        function(o) {
+           return o.source.index === d.index || o.target.index === d.index ? "pointer" : "default" ;
+        })
       .style("opacity", 
         function(o) {
           return o.source.index === d.index || o.target.index === d.index ? 1 : 0.05;
@@ -467,10 +477,9 @@ function initialize() {
       .style("opacity", 
         function(o) {
           return o.source.index === d.index || o.target.index === d.index ? 1 : 0;
-        });
-
-   
+        }); 
   }
+
 
   /*
   * 
@@ -487,7 +496,8 @@ function initialize() {
           .transition(500)
           .style("stroke-opacity", 1 )
           .transition(500)
-          .style("opacity", 1 );
+          .style("opacity", 1 )
+          .style("cursor", "pointer");
        labels
           .transition(500)
           .style("opacity", 1 );
@@ -588,6 +598,7 @@ function initialize() {
                 To be done later.
                 */
               importXMCDA2();
+              importJSON();
 
             },
             'export': function(t) {  
@@ -681,7 +692,8 @@ function initialize() {
 
   function inspectEdge(d) {
     $('#modEdgeModal').modal('show');
-    
+    $('#source').html((pairwise[d.source.name][d.target.name]).toString());
+    $('#target').html((pairwise[d.target.name][d.source.name]).toString());
     
 
   }
@@ -694,10 +706,51 @@ function initialize() {
   
   /*
   *
+  * Open the import menu and load the file into the pairwise variable.
+  *
+  */
+  var pairwise
+  function importJSON() {
+    console.log("Importing JSON file.")
+    var reader;
+      if (window.File && window.FileReader && window.FileList && window.Blob) {
+        $('#upModal').modal('show');
+        function handleFileSelect(evt) {
+           var files = document.getElementById('json').files;
+           if (!files.length) {
+             alert('No JSON file selected. Pairwise comparision not available.');
+             $('#upModal').modal('hide');
+             return;
+          }
+          var file = files[0];
+          console.log(file)
+          test=file;
+          var start =  0;
+          var stop = file.size - 1;
+          reader= new FileReader();
+          var blob = file.slice(start, stop + 1);
+          //readAsBinaryString() not in specifications.
+          reader.readAsText(blob); 
+          reader.onloadend = function(evt) { 
+              pairwise = $.parseJSON(evt.target.result); 
+              var x = $('#upModal').modal('hide');
+            
+          };
+          }
+          document.getElementById('open').addEventListener('click', handleFileSelect, false);
+
+          } else {
+              alert('The File APIs are not fully supported in this browser.');
+          }
+   return 1;
+  }
+
+
+  /*
+  *
   * Open the import menu and load the file into the xml variable.
   *
   */
-  var test
   function importXMCDA2() {
     console.log("Importing XCDA2 file.")
     var reader;
@@ -735,7 +788,7 @@ function initialize() {
           } else {
               alert('The File APIs are not fully supported in this browser.');
           }
-   return 1;
+   return ;
   }
   
   /*
@@ -774,7 +827,7 @@ function initialize() {
           relation[$(this).find('initial').find('alternativeID').text()][$(this).find('terminal').find('alternativeID').text()] = Math.floor(parseFloat($(this).find('value').find('real').text())*100)/100;
           }
           catch(err) {
-          relation[$(this).find('initial').find('alternativeID').text()][$(this).find('terminal').find('alternativeID').text()] = parseInt($(this).find('value').find('integer').text());
+          relation[$(this).find('initial').find('alternativeID').text()][$(this).find('terminal').find('alternativeID').text()] = Math.floor(parseInt($(this).find('value').find('integer').text())*100)/100;
           }
         });
       var cat = $xml.find('alternativesComparisons').find('mcdaConcept').text();
@@ -982,7 +1035,7 @@ function initialize() {
   
    
   }
-  
+   
 '''
 
 def d3export():

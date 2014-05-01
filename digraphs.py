@@ -2825,7 +2825,7 @@ class Digraph(object):
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
 
-    def exportD3(self, fileName="index", noSilent=True):
+    def exportD3(self, fileName="index", Comments=True):
         """
     This function was made during my bachelor thesis at the University of Luxembourg. Gary Cornelius, 2014
     
@@ -2874,7 +2874,7 @@ class Digraph(object):
         import urllib
         import htmlmodel,json
 
-        if noSilent:
+        if Comments:
             print('*---- exporting all needed files ---------*')
             
         actionkeys = [x for x in self.actions]
@@ -2888,19 +2888,19 @@ class Digraph(object):
         fw = open("index.html",'w')
         fw.write(htmlmodel.htmlmodel(name=self.name))
         fw.close()
-        if noSilent:
+        if Comments:
             print("File: index.html generated!")
         
         fw = open("digraph3lib.js",'w')
         fw.write(htmlmodel.javascript())
         fw.close()
-        if noSilent:
+        if Comments:
             print("File: digraph3lib.js saved!")
 
         fw = open("d3.v3.js",'w')
         fw.write(htmlmodel.d3export())
         fw.close()
-        if noSilent:
+        if Comments:
             print("File: d3.v3.js saved!")
 
         pairwise={}
@@ -2914,15 +2914,15 @@ class Digraph(object):
             fw = open("showPairwise.json","w")
             fw.write(json.dumps(pairwise))
             fw.close()
-            if noSilent:
+            if Comments:
                 print("File: showPairwise.json saved!")
         except:
-            if noSilent:
+            if Comments:
                 print("File: showPairwise.json NOT saved!")
 
         self.saveXMCDA2()
             
-        if noSilent:
+        if Comments:
             print('*---- export done ---------*')
             
 
