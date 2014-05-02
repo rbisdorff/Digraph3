@@ -2913,7 +2913,7 @@ class Digraph(object):
         except:
             pairwise={}
         d3export={}
-        self.saveXMCDA2(Comments=False,fileName="temp")
+        self.saveXMCDA2(fileName="temp")
         with open("temp.xmcda2","r") as myFile:
             data=myFile.read().replace("\n","")
         d3export["xmcda2"]= str(data)

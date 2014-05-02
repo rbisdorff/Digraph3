@@ -44,11 +44,13 @@ graph
   
   <style>
   path.link {
-    fill: none;
     cursor: pointer;
-    stroke: #000;
     stroke-width: 4.0px;
     }
+  path.link:hover{
+    stroke: orange;
+  }
+
   .node circle {
     cursor: move;
     stroke: #000;
@@ -81,6 +83,8 @@ graph
         <ul>
             <li id="inspect"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/inspect.png" height="15px" width="15px" /> Inspect</li>
             <li id="editNode"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/edit.png" height="15px" width="15px" /> Edit</li>
+            <li id="connectNode"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/connect.png" height="15px" width="15px" /> Connect</li>
+      
         </ul>
   </div>
   <!-- Context Menu for the background -->
@@ -97,6 +101,8 @@ graph
   <div class="contextMenu" id="cntxtEdge">
         <ul>
           <li id="inspectEdge"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/inspect.png" height="15px" width="15px" /> Inspect</li>
+          <li id="invertEdge"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/invert.png" height="15px" width="15px" /> Invert</li>
+          <li id="editEdge"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/edit.png" height="15px" width="15px" /> Edit</li>
         </ul>
   </div>
 
@@ -150,11 +156,35 @@ graph
    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
    <button class="btn btn-primary" type='submit' name='save' onClick="saveNode()">Save changes</button>
   </div>
-        
+  </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
+  <!-- Connect Node Modal -->
+  <div class="modal fade" id="connNodeModal" role="dialog" aria-labelledby="connNodeModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Connect Node</h4>
+        </div>
+        <div class="modal-body">
+          <!-- INPUT -->
+  
+  <div class="form-group"> 
+  Select a Node to connect to <select id="selectNode"> </select>
+  </div> 
+     
+  </div>
+  <div class="modal-footer">
+   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+   <button class="btn btn-primary" type='submit' name='save' onClick="saveConnectNode()">Save changes</button>
+  </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
+
+
 
   <!-- Edge Modal -->
   <div class="modal fade" id="modEdgeModal" role="dialog" aria-labelledby="modEdgeModal" aria-hidden="true">
@@ -171,9 +201,6 @@ graph
     <div id="source"> </div>
     <div id="target"> </div>
     </div>
-  
-  
-  
   </div>
   <div class="modal-footer">
    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -195,14 +222,12 @@ graph
           <!-- INPUT -->
           <div class="form-group"> 
              <p>
-        • Right-click on the background lets you import and export XMCDA2 encoded files or reset the graph.<br/><br/>     
+        • Right-click on the background lets you import Digraph3 Json encoded and export XMCDA2 encoded files or reset the graph.<br/><br/>     
         • Use your left mouse to drag and drop nodes.<br/><br/>
         • Once dragged a node is frozen and can be released by a simple double click.<br/><br/>
-        • Right-click on Nodes or Edges to get further information or edit their values.<br/><br/>
+        • Right-click on Nodes or Edges to get further information, edit their values or add connections between nodes.<br/><br/>
         • Clicking on the background sets your graph back out of the inspect mode.<br/><br/>
-
-
-              </p>
+            </p>
   
           </div> 
         </div>
@@ -215,6 +240,37 @@ graph
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
 
+
+ <!-- Edit Edge-->
+  <div class="modal fade" id="editEdgeModal" role="dialog" aria-labelledby="editEdgeModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Modify Edge</h4>
+        </div>
+        <div class="modal-body">
+          <!-- INPUT -->
+  
+  <div class="form-group"> 
+  <p id="pnodetarget"></p>
+  <input type="text" placeholder="Node Target" class="form-control" maxlength="10" required target="" name="nodeTarget" id="nodeTarget"/> 
+  </div> 
+  <div class="form-group">
+   <p id="pnodesource"></p>
+   <input type="text" placeholder="Node Source" class="form-control" maxlength="20" required source="" name="nodeSource" id="nodeSource"/> 
+   </div>
+  
+  </div>
+  <div class="modal-footer">
+   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+   <button class="btn btn-primary" type='submit' name='save' onClick="saveEdge()">Save changes</button>
+  </div>
+        
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
 
   <script>
@@ -257,7 +313,7 @@ def javascript():
 * Declaration of some usefull global variables
 *
 */
-var xmlinput="",$xml,xmlDoc,pairwise,json,labels,labelt,path,force,svg,actions={},relation={},Min,Max,Med,category='';
+var xmlinput="",$xml,xmlDoc,pairwise,json,labels,labelt,path,force,svg,actions={},relation={},valuationdomain={},Med,category='',current,type;
 
 /*
 *
@@ -279,10 +335,9 @@ function initialize() {
   * Full end arrow
   *
   */
-  svg.append("svg:defs").selectAll("marker")
-    .data(["end-full"])
-    .enter().append("svg:marker")
-    .attr("id", String)
+  var defs= svg.append("svg:defs");
+  defs.append("marker")
+    .attr("id", "end-full")
     .attr("viewBox", "0 -5 10 10")
     .attr("refX", 13)
     .attr("refY", -0.0)
@@ -298,10 +353,8 @@ function initialize() {
   * Empty end arrow
   *
   */
-  svg.append("svg:defs").selectAll("marker")
-    .data(["end-empty"])
-    .enter().append("svg:marker")
-    .attr("id", String)
+  defs.append("marker")
+    .attr("id", "end-empty")
     .attr("viewBox", "0 -5 10 10")
     .attr("refX", 13)
     .attr("refY", -0.0)
@@ -321,10 +374,8 @@ function initialize() {
   * Full start arrow
   *
   */
-  svg.append("svg:defs").selectAll("marker")
-    .data(["start-full"])
-    .enter().append("svg:marker")
-    .attr("id", String)
+  defs.append("marker")
+    .attr("id", "start-full")
     .attr("viewBox", "0 -5 10 10")
     .attr("refX", -3)
     .attr("refY", -0.0)
@@ -341,10 +392,8 @@ function initialize() {
   * Empty start arrow
   *
   */
-  svg.append("svg:defs").selectAll("marker")
-    .data(["start-empty"])
-    .enter().append("svg:marker")
-    .attr("id", String)
+  defs.append("marker")
+    .attr("id", "start-empty")
     .attr("viewBox", "0 -5 10 10")
     .attr("refX", -3)
     .attr("refY", -0.0)
@@ -391,6 +440,10 @@ function initialize() {
     .charge(-3500)
     .gravity(0.1)
   
+  type=svg.append("text")
+    .attr("x", width-120)
+    .attr("y", 20)
+    .text("Mode: 'general'");
 
   svg.append("text")
     .attr("x", width-340)
@@ -405,6 +458,12 @@ function initialize() {
       $('#infoModal').modal('show');  
     })
     .attr("y",height-35);
+
+    
+
+    window.onbeforeunload = function(){
+    return "Make sure to save your graph locally ;-)";
+  }; 
   }
   
   /*
@@ -422,6 +481,8 @@ function initialize() {
       start(json);
 
   }
+
+
   
   /*
   Implementation which works as follows:
@@ -478,6 +539,8 @@ function initialize() {
   }
 
 
+    
+    
   /*
   * 
   * The unfocus function of focusNode 
@@ -501,8 +564,7 @@ function initialize() {
         labelt
           .transition(500)
           .style("opacity", 1 );
-      releaseNodes;
-      
+      releaseNodes; 
   }
 
   
@@ -529,6 +591,14 @@ function initialize() {
             'editNode': function(t) {
                 editNode(d);
 
+            },
+            'connectNode':function(t) {
+                if(!(Object.keys(pairwise).length>0)) {
+               connectNode(d);
+              }
+              else 
+                alert("Connecting not allowed.")
+              
             }
         }
     });
@@ -553,14 +623,17 @@ function initialize() {
         {
             
             'inspectEdge': function(t) {
-                if(category === 'general'){
-                   inspectEdge(d);
-                }
-                else
-                {
-                  alert("Operation not allowed with this graph type.")
-                } 
-                 
+                inspectEdge(d);
+            },
+            'invertEdge':function(t) {
+                invertEdge(d);
+            },
+            'editEdge':function(t) {
+              if(!(Object.keys(pairwise).length>0)) {
+                editEdge(d);
+              }
+              else 
+                alert("Editing not allowed.")
             }
         }
     });
@@ -588,24 +661,22 @@ function initialize() {
                 /*
                 To be done later.
                 */
-              alert("Create new graph!")
+                initialize();
+                
             },
             'import': function(evt) {
                 importJSON();
 
             },
             'export': function(t) {  
-                /*
-                To be done later
-                */
+                buildXMCDA2();
                 exportXMCDA2();
             },
             'reset': function(t) {
                 if(json != null) { 
-                console.log("Resetting Graph.") ;
-                load();
-              }
-                
+                  console.log("Resetting Graph.") ;
+                  load();
+              } 
             }
         }
     });
@@ -665,6 +736,24 @@ function initialize() {
     return a.index == b.index;
   }
 
+  function connectNode(d){
+    var options = $("#selectNode");
+    $("#selectNode").empty();
+    for(var x in actions){
+     if(x != d.name) options.append($("<option />").val(x).text(x));    };
+    current=d;
+    $('#connNodeModal').modal('show');
+   
+  }
+  function saveConnectNode() {
+    $('#connNodeModal').modal('hide');
+    var e = document.getElementById("selectNode");
+    var neighbour = e.options[e.selectedIndex].text
+    relation[current.name][neighbour] = valuationdomain["Max"] +1;
+    relation[neighbour][current.name] = valuationdomain["Max"]+1
+    load();
+
+  }
 
   function editNode(d) {
     $('#modNodeModal').modal('show');
@@ -684,16 +773,49 @@ function initialize() {
   }
 
   function inspectEdge(d) {
-    $('#modEdgeModal').modal('show');
-    $('#source').html((pairwise[d.source.name][d.target.name]).toString());
-    $('#target').html((pairwise[d.target.name][d.source.name]).toString());
+    if (pairwise[d.source.name] != null){
+      $('#modEdgeModal').modal('show');
+      $('#source').html((pairwise[d.source.name][d.target.name]).toString());
+      $('#target').html((pairwise[d.target.name][d.source.name]).toString());
+    }
+    else {
+      alert("pairwiseComparision not possible with this graph.")
+    }
+  }
+
+  function invertEdge(d) {
+    if (pairwise[d.source.name] == null){
+      relation[d.source.name][d.target.name] =  Math.floor((-valuationdomain["Max"]+ relation[d.source.name][d.target.name] + valuationdomain["Min"])*100)/100;
+      relation[d.target.name][d.source.name] =  Math.floor((-valuationdomain["Max"]+ relation[d.target.name][d.source.name] + valuationdomain["Min"])*100)/100;
+      load();
+    }
+    else {
+      alert("Invert not possible.")
+    }
+  }
+
     
+
+function editEdge(d) {
+    $('#editEdgeModal').modal('show');
+    
+    $('#nodeTarget').attr("value",relation[d.target.name][d.source.name]);
+    document.getElementById("pnodetarget").innerHTML=d.target.name + " --> " + d.source.name;
+    
+    $('#nodeSource').attr("value",relation[d.source.name][d.target.name]);
+    document.getElementById("pnodesource").innerHTML=d.source.name + " --> " + d.target.name;
+    
+    $('#nodeTarget').attr("target",d.target.name);
+    $('#nodeSource').attr("source",d.source.name);
 
   }
   function saveEdge() {
-    $('#modEdgeModal').modal('hide');
+    $('#editEdgeModal').modal('hide');
+    if($('#nodeSource').attr("value")>=valuationdomain["Min"] && $('#nodeSource').attr("value") <= valuationdomain["Max"] && $('#nodeTarget').attr("value")>=valuationdomain["Min"] && $('#nodeTarget').attr("value") <= valuationdomain["Max"]){
     relation[$('#nodeSource').attr("source")][$('#nodeTarget').attr("target")] =  $('#nodeSource').attr("value");
     relation[$('#nodeTarget').attr("target")][$('#nodeSource').attr("source")] =  $('#nodeTarget').attr("value");
+    }
+    else alert("Error: Value must be between " + valuationdomain["Min"] + " and " + valuationdomain["Max"] +" !")
     load();
   }
 
@@ -731,11 +853,16 @@ function initialize() {
               relation = result[1];
               category = result[2];
               load();
+               if(Object.keys(pairwise).length>0) {
+                 type.text("Mode: 'outranking'")}
+               else {
+                  type.text("Mode : 'general'")
+                }
               var x = $('#upModal').modal('hide');
               
           };
           }
-
+         
           document.getElementById('open').addEventListener('click', handleFileSelect, false);
 
           } else {
@@ -754,11 +881,11 @@ function initialize() {
       xmlDoc = $.parseXML(xmlinput);
       $xml = $( xmlDoc );
       //console.log($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').children().text());
-      var actions={},relation={},category;
+      var actions={},category;
 
-      Min = Number($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('minimum').children().text());
-      Max = Number($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').children().text());
-      Med = Min + ((Max - Min)/Number(2.0));
+      valuationdomain["Min"] = Number($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('minimum').children().text());
+      valuationdomain["Max"] = Number($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').children().text());
+      valuationdomain["Med"]  = valuationdomain["Min"]  + ((valuationdomain["Max"]  - valuationdomain["Min"] )/Number(2.0));
       
       $xml.find("alternatives").find('alternative').each(
         function() { 
@@ -814,21 +941,24 @@ function initialize() {
                 dataset["nodes"].push({"name": node ,"group":1, "comment": "none", "fullName":"nameless"});
             }
     }
-
+    var Min=valuationdomain["Min"],Max=valuationdomain["Max"],Med=valuationdomain["Med"];
     for( var i=0;  i<actionkeys.length; i++ ){
             for( var j=i+1;  j<actionkeys.length; j++ ){
               /* Arrow types:
+              r(a,b) > MAX & r(b,a) > MAX  a -- b : -1 initialization
               r(a,b) > Med & r(b,a) < Med  a  --> b :0 done
               r(a,b) < Med & r(b,a) > Med  a  <-- b :1 done
               r(a,b) > Med & r(b,a) > Med  a <--> b :2 done
               r(a,b) > Med & r(b,a) = Med  a o--> b :3 done
               r(a,b) = Med & r(b,a) > Med  a <--o b :4 done
-              r(a,b) < Med & r(b,a) < Med  a      b :-1 done
+              r(a,b) < Med & r(b,a) < Med  a      b : nope
               r(a,b) < Med & r(b,a) = Med  a o..  b :5 done 
               r(a,b) = Med & r(b,a) < Med  a  ..o b :6 done
               r(a,b) = Med = r(b,a)        a o..o b :7 done
               */
-                if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] > Med)
+                if(relation[actionkeys[i]][actionkeys[j]] > Max && relation[actionkeys[j]][actionkeys[i]] > Max)
+                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":-1, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                else if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] > Med)
                     dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":2, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
                 else if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] == Med)
                     dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":3, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
@@ -844,7 +974,7 @@ function initialize() {
                     dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":1, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
                 else if(relation[actionkeys[i]][actionkeys[j]] < Med && relation[actionkeys[j]][actionkeys[i]] ==  Med)
                     dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":5, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
-              }
+                }
     }
     }
     return dataset;
@@ -862,7 +992,7 @@ function initialize() {
       window.URL = window.webkitURL || window.URL;
 
       var contentType = 'text/xmcda2';
-
+      try{
       var xmcda2File = new Blob([new XMLSerializer().serializeToString(xmlDoc)], {type: contentType});
 
       var a = document.createElement('a');
@@ -874,6 +1004,131 @@ function initialize() {
       a.dataset.downloadurl = [contentType, a.download, a.href].join(':');
       $(a).appendTo("body")[0].click();
       $("#exportt").remove();
+    }
+    catch(e) {
+      alert("Oops. Export not possible.")
+    }
+  }
+
+  /*
+  *
+  *
+  *
+  * Build a valid XMCDA2 tree
+  *
+  */
+  function buildXMCDA2(fileName,name,relationName,relationType,category,subcategory,author,reference,valuationType){
+        fileName= fileName || "temp";
+        name=name||"general";
+        relationName=relationName|| 'R';
+        relationType=relationType||'binary';
+        category=category||'random';
+        subcategory=subcategory||'valued'
+        author= author||"digraphs Module RB";
+        reference=reference||'saved from Javascript';
+        valuationType=valuationType||'standard';
+        var xmcda= '<?xml version="1.0" encoding="UTF-8"?>\\n'
+        xmcda = xmcda + '<?xml-stylesheet type="text/xsl" href="xmcdaXSL.xsl"?>\\n' 
+        xmcda = xmcda +'<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2009/UMCDA-2.0.0 file:../XMCDA-2.0.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0">\\n'
+        // write description
+        xmcda = xmcda + '<projectReference id="'+fileName+'" name="'+name+'">\\n' ;
+        xmcda=xmcda+'<title>Stored Digraph in XMCDA-2.0 format</title>\\n';
+        xmcda=xmcda+'<id>'+fileName+'</id>\\n';
+        xmcda=xmcda+'<name>'+name+'</name>\\n';
+        xmcda=xmcda+('<type>root</type>\\n');
+        xmcda=xmcda+('<user>'+author+'</user>\\n');
+        xmcda=xmcda+'<version>'+reference+'</version>\\n';
+        xmcda=xmcda+('</projectReference>\\n');
+        //write nodes
+        var na = actions.length;
+        xmcda=xmcda+('<alternatives mcdaConcept="Digraph nodes">\\n');
+        xmcda=xmcda+('<description>\\n');
+        xmcda=xmcda+('<title>Nodes of the digraph</title>\\n');
+        xmcda=xmcda+('<type>alternatives</type>\\n');
+        xmcda=xmcda+('<comment>Set of nodes of the digraph.</comment>\\n');
+        xmcda=xmcda+('</description>\\n');
+        var alternativeName="";
+        for(var x in actions){
+            try{
+                alternativeName = actions[x].name;
+              }
+            catch(err){
+                alternativeName = 'nameless';
+            }
+            xmcda=xmcda+('<alternative id="'+x+'" name="'+alternativeName+'">\\n');
+            xmcda=xmcda+('<description>\\n')
+            xmcda=xmcda+('<comment>')
+            try{
+                xmcda=xmcda+(actions[x]['comment'])}
+            catch(e){
+                fo.write('No comment')
+            }
+            xmcda=xmcda+('</comment>\\n')
+            xmcda=xmcda+('</description>\\n')
+            xmcda=xmcda+('<type>real</type>\\n')
+            xmcda=xmcda+('<active>true</active>\\n')
+            xmcda=xmcda+('<reference>false</reference>\\n')
+            xmcda=xmcda+('</alternative>\\n')
+        }
+        xmcda=xmcda+('</alternatives>\\n')
+        //write valued binary Relation
+        xmcda=xmcda+('<alternativesComparisons id="1" name="'+relationName+'">\\n')
+        xmcda=xmcda+('<description>\\n')
+        xmcda=xmcda+('<title>Randomly Valued Binary Relation</title>\\n')
+        xmcda=xmcda+('<comment>'+category+' '+subcategory+' %s Digraph</comment>\\n')
+        xmcda=xmcda+('</description>\\n')
+        xmcda=xmcda+('<valuation name="valuationDomain">\\n')
+        xmcda=xmcda+('<description>\\n')
+        xmcda=xmcda+('<subTitle>Valuation Domain</subTitle>\\n')
+        xmcda=xmcda+('</description>\\n')
+        xmcda=xmcda+('<quantitative>')
+        var Max = valuationdomain['Max'],
+        Min = valuationdomain['Min'];
+        if (valuationType === 'integer') {
+            xmcda=xmcda+('<minimum><integer>'+Math.floor(Min)+'</integer></minimum>\\n')
+            xmcda=xmcda+('<maximum><integer>'+Math.floor(Max)+'</integer></maximum>\\n')
+          }
+        else{
+            xmcda=xmcda+('<minimum><real>')
+            xmcda=xmcda+(Min)
+            xmcda=xmcda+('</real></minimum>\\n')
+            xmcda=xmcda+('<maximum><real>')
+            xmcda=xmcda+(Max)
+            xmcda=xmcda+('</real></maximum>\\n')
+          }
+        xmcda=xmcda+('</quantitative>\\n')
+        xmcda=xmcda+('</valuation>\\n')
+        xmcda=xmcda+('<comparisonType>'+relationName+'</comparisonType>\\n')
+        xmcda=xmcda+('<pairs>\\n')
+        xmcda=xmcda+('<description>\\n')
+        xmcda=xmcda+('<subTitle>Valued Adjacency Table</subTitle>\\n')
+
+        xmcda=xmcda+('<comment>'+category+' ' + subcategory+ ' Digraph</comment>\\n' )
+        xmcda=xmcda+('</description>\\n')
+        for(var x in actions){
+            for(var y in actions){
+                xmcda=xmcda+('<pair>\\n')
+                xmcda=xmcda+('<initial><alternativeID>')
+                xmcda=xmcda+x
+                xmcda=xmcda+('</alternativeID></initial>\\n')
+                xmcda=xmcda+('<terminal><alternativeID>')
+                xmcda=xmcda+y
+                xmcda=xmcda+('</alternativeID></terminal>\\n')
+                xmcda=xmcda+('<value><real>')
+                if(relation!={}){
+                xmcda=xmcda + relation[x][y];}
+                xmcda=xmcda+('</real></value>\\n')
+                xmcda=xmcda+('</pair>\\n')
+          }
+        }
+        xmcda=xmcda+('</pairs>\\n')
+        xmcda=xmcda+('</alternativesComparisons>\\n')
+        xmcda=xmcda+('</xmcda:XMCDA>\\n')
+       
+
+  xmlinput=xmcda;
+  parseXMCDA2(xmlinput)
+
   }
 
   
@@ -891,6 +1146,7 @@ function initialize() {
     .enter().append("svg:path")
     .attr("class", function(d) { return "link " + d.type; })
     .attr("class", "link")
+    .attr("stroke", function(d){if(d.type == -1 ){return "red";} else {return "#000";}} )
     .style("opacity",1)
     .attr("stroke-dasharray", function(d) { if(d.type == 5 || d.type ==6|| d.type ==7) return "3,3";})
     .attr("marker-end", 
@@ -913,19 +1169,20 @@ function initialize() {
     .enter().append('text')
     .attr("dy", ".78em")
     .style("font-size", "12px")
-    .text(function(d) {return d.value2;}); 
+    .text(function(d) {return d.value > valuationdomain["Max"] && d.value2 > valuationdomain["Max"] ? "" : d.value2;}); 
 
   labelt = svg.append("g").selectAll('text')
     .data(force.links())
     .enter().append('text')
     .attr("dy", ".78em")
     .style("font-size", "12px")
-    .text(function(d) {return d.value;}); 
+    .text(function(d) {return d.value > valuationdomain["Max"] && d.value2 > valuationdomain["Max"] ? "" : d.value;}); 
 
   var node_drag = d3.behavior.drag()
         .on("dragstart", dragstart)
         .on("drag", dragmove)
         .on("dragend", dragend);
+
 
   node = svg.append("g").selectAll(".node")
     .data(force.nodes())
@@ -988,7 +1245,7 @@ function initialize() {
   
    
   }
-  
+    
 '''
 
 def d3export():
