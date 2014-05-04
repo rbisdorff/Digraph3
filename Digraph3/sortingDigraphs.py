@@ -980,7 +980,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
     def __init__(self,argPerfTab=None,
                  limitingQuantiles=None,
                  LowerClosed=True,
-                 PrefThresholds=False,
+                 PrefThresholds=True,
                  hasNoVeto=False,
                  minValuation=-100.0,
                  maxValuation=100.0,
@@ -1245,7 +1245,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         self.name = 'sorting_with_%d-tile_limits' % n
         return limitingQuantiles
                                          
-    def _computeLimitingQuantiles(self,g,Debug=True,PrefThresholds=False):
+    def _computeLimitingQuantiles(self,g,Debug=True,PrefThresholds=True):
         """
         Renders the list of limiting quantiles on criteria g
         """
@@ -1260,8 +1260,8 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         gValues.sort()
         if PrefThresholds:
             try:
-                gPrefThrCst = self.criteria[g]['thresholds']['ind'][0]
-                gPrefThrSlope = self.criteria[g]['thresholds']['ind'][1]
+                gPrefThrCst = self.criteria[g]['thresholds']['pref'][0]
+                gPrefThrSlope = self.criteria[g]['thresholds']['pref'][1]
             except:
                 gPrefThrCst = Decimal('0')
                 gPrefThrSlope = Decimal('0')            
