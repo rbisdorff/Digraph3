@@ -2274,7 +2274,16 @@ class RandomPerformanceTableau(PerformanceTableau):
             }
 
     """
-    def __init__(self,numberOfActions = None, numberOfCriteria = None, weightDistribution = None, weightScale=None, integerWeights=True, commonScale = [0.0,100.0], commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0)], commonMode = None, valueDigits = 2, Debug = False):
+    def __init__(self,numberOfActions = None,\
+                 numberOfCriteria = None,\
+                 weightDistribution = None,\
+                 weightScale=None,\
+                 integerWeights=True,\
+                 commonScale = [0.0,100.0],\
+                 commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0)],\
+                 commonMode = None,\
+                 valueDigits = 2,\
+                 Debug = False):
         import sys,random,time,math
         self.name = 'randomperftab'
         
@@ -2466,7 +2475,7 @@ class RandomPerformanceTableau(PerformanceTableau):
         else:
             print('mode error in random evaluation generator !!')
             print(str(commonMode[0]))
-            sys.exit(1)
+            #sys.exit(1)
         self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
 
