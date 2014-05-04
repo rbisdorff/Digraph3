@@ -1069,7 +1069,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         criteriaCategoryLimits['lowerClosed'] = LowerClosed
         self.criteriaCategoryLimits = deepcopy(criteriaCategoryLimits)
         for g in self.criteria:
-            gQuantiles = self._computeLimitingQuantiles(g,Debug=Debug)                
+            gQuantiles = self._computeLimitingQuantiles(g,PrefThresholds=PrefThresholds,Debug=Debug)                
             criteriaCategoryLimits[g] = {}
             for c in categories:
                 criteriaCategoryLimits[g][c]={
