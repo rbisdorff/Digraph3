@@ -1260,8 +1260,8 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         gValues.sort()
         if PrefThresholds:
             try:
-                gPrefThrCst = self.criteria[g]['thresholds']['pref'][0]
-                gPrefThrSlope = self.criteria[g]['thresholds']['pref'][1]
+                gPrefThrCst = self.criteria[g]['thresholds']['ind'][0]
+                gPrefThrSlope = self.criteria[g]['thresholds']['ind'][1]
             except:
                 gPrefThrCst = Decimal('0')
                 gPrefThrSlope = Decimal('0')            
