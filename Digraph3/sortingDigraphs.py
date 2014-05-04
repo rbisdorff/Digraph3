@@ -1320,7 +1320,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                 else:
                     quantile = gValues[n-1]
                 if PrefThresholds:
-                    quantile -= gPrefThrCst - quantile*gPrefThrSlope
+                    quantile += gPrefThrCst + quantile*gPrefThrSlope
                 if Debug:
                     print('quantile',quantile)
                 gQuantiles.append(quantile)
