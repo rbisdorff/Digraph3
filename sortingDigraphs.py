@@ -980,6 +980,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
     def __init__(self,argPerfTab=None,
                  limitingQuantiles=None,
                  LowerClosed=True,
+                 PrefThresholds=False,
                  hasNoVeto=False,
                  minValuation=-100.0,
                  maxValuation=100.0,
@@ -1244,7 +1245,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         self.name = 'sorting_with_%d-tile_limits' % n
         return limitingQuantiles
                                          
-    def _computeLimitingQuantiles(self,g,Debug=True):
+    def _computeLimitingQuantiles(self,g,Debug=True,PrefThresholds=False):
         """
         Renders the list of limiting quantiles on criteria g
         """
@@ -1257,6 +1258,13 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
             if self.evaluation[g][x] != Decimal('-999'):
                 gValues.append(self.evaluation[g][x])
         gValues.sort()
+        if PrefThresholds:
+            try:
+                gPrefThrCst = self.criteria[g]['thresholds']['pref'][0]
+                gPrefThrSlope = self.criteria[g]['thresholds']['pref'][1]
+            except:
+                gPrefThrCst = Decimal('0')
+                gPrefThrSlope = Decimal('0')            
         n = len(gValues)
         if Debug:
             print('g,n,gValues',g,n,gValues)
@@ -1283,6 +1291,8 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                     print('r,rq',r,rq, end=' ')
                 if rq < (n-1):
                     quantile = gValues[rq] + ((r-rq)*(gValues[rq+1]-gValues[rq]))
+                    if PrefThresholds:
+                        quantile -= gPrefThrCst - quantile*gPrefThrSlope
                 else:
                     if self.criteria[g]['preferenceDirection'] == 'min':
                         quantile = Decimal('100.0')
@@ -1309,6 +1319,8 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                                + ((r-rq)*(gValues[rq+1]-gValues[rq]))
                 else:
                     quantile = gValues[n-1]
+                if PrefThresholds:
+                    quantile += gPrefThrCst + quantile*gPrefThrSlope
                 if Debug:
                     print('quantile',quantile)
                 gQuantiles.append(quantile)
