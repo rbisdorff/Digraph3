@@ -2831,7 +2831,7 @@ class Digraph(object):
     
     *Parameters*:
         * fileName, name of the generated html file, default = None (index.html);
-        * noSilent, True = default;
+        * Comments, True = default;
 
     The idea was to find a way that allows you to easily get details about certain nodes or edges of a directed graph. 
     The function allows you to export a html file together with all the needed libraries, including the 
@@ -2841,15 +2841,16 @@ class Digraph(object):
 
     *If the graph is an outrankingdigraphs*: 
         * It is only possible to add comments to nodes. 
-        * A special json file containing all possible pairwiseComparisions is generated.
+        * A special json array containing all possible pairwiseComparisions is generated.
     *If the graph is a general graph*:
-        * It is possible to add/delete nodes and edges, as well as well as edit the value of these edges. (work in progress)
+        * It is possible to add/delete nodes and edges, as well as well as edit the value of these edges.
+        * Edges can be added and removed. 
         * No Json file is generated since it is not possible to make pairwiseComparisions on general graphs.
 
     *The generated files*:
         * d3.js contains the D3 Data-driven Documents source code, containing one small addition that we made in order to be able to easyly import links with a different formatself.
         * digraph3lib.js contains our library. This file contains everything that we need from import of an XMCDA2 file, visualization of the graph to export of the changed graph.
-        * temp.xmcda2, is the file that is exported by the saveXMCDA2 function.
+        * d3export.json, is the JSON file that is exported with the format "{"xmcda2": "some xml","pairwiseComparisions":"{"a01": "some html",...}"}.
 
     *Example 1*:
         #. python3 session:
@@ -2865,8 +2866,9 @@ class Digraph(object):
                 .. image:: randomvaluation_d3_inspect.png
 
     .. warning::
-
-            For the best possible experience you should be connected to the world wide web!
+            If you want to use the automatic load in Chrome, try using the command: "python -m SimpleHTTPServer" and then access the index.html via "http://0.0.0.0:8000/index.html".
+            
+            For the best possible experience you should be connected to the world wide web! 
 
         """
         import os
@@ -2876,7 +2878,19 @@ class Digraph(object):
 
         if Comments:
             print('*---- exporting all needed files ---------*')
-            
+
+        file="d3export.json"
+        dst_dir=os.getcwd()
+        basename = os.path.basename(file)
+        head, tail = os.path.splitext(basename)
+        dst_file = os.path.join(dst_dir, basename)
+        # rename if necessary
+        count = 0
+        while os.path.exists(dst_file):
+            count += 1
+            dst_file = os.path.join(dst_dir, '%s-%d%s' % (head, count, tail))
+            print(dst_file)
+
         actionkeys = [x for x in self.actions]
         n = len(actionkeys)
         relation = self.relation
@@ -2885,11 +2899,18 @@ class Digraph(object):
         if fileName == "index":
             fileName = self.name
      
-        fw = open("index.html",'w')
-        fw.write(htmlmodel.htmlmodel(name=self.name))
+        if(count==0):
+            fw = open("index.html","w")
+            fw.write(htmlmodel.htmlmodel(jsonName="d3export.json"))
+            if Comments:
+                print("File: index.html generated!")
+        else:
+            fw = open("index-"+str(count)+".html",'w')
+            fw.write(htmlmodel.htmlmodel(jsonName="d3export-"+str(count)+".json"))
+            if Comments:
+                print("File: index-"+str(count)+".html generated!")
         fw.close()
-        if Comments:
-            print("File: index.html generated!")
+        
         
         fw = open("digraph3lib.js",'w')
         fw.write(htmlmodel.javascript())
@@ -2913,17 +2934,23 @@ class Digraph(object):
         except:
             pairwise={}
         d3export={}
-        self.saveXMCDA2(fileName="temp")
-        with open("temp.xmcda2","r") as myFile:
+        self.saveXMCDA2(fileName="temp-"+str(count))
+        with open("temp-"+str(count)+".xmcda2","r") as myFile:
             data=myFile.read().replace("\n","")
         d3export["xmcda2"]= str(data)
-        d3export["pairwiseComparisions"] = str(json.dumps(pairwise))
+        d3export["pairwiseComparisions"] = json.dumps(pairwise)
 
-        fw = open("d3export.json","w")
+        if(count==0):
+            fw = open("d3export.json","w")
+            if Comments:
+                print("File: d3export.json saved!") 
+        else:
+            fw = open("d3export-"+str(count)+".json","w")
+            if Comments:
+                print("File: d3export-"+str(count)+".json saved!") 
         fw.write(json.dumps(d3export))
         fw.close()
         if Comments:
-            print("File: d3export.json saved!")            
             print('*---- export done ---------*')
             
     def savedre(self,name='temp'):

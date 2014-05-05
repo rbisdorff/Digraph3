@@ -1,4 +1,4 @@
-def htmlmodel(name="graph"):
+def htmlmodel(jsonName=""):
     return '''
 
 <!--
@@ -35,12 +35,12 @@ def htmlmodel(name="graph"):
   <title>
 graph
   </title>
-  <script src="http://code.jquery.com/jquery-1.7.2.js"></script>
-  <script src="http://www.trendskitchens.co.nz/jquery/contextmenu/jquery.contextmenu.r2.js"></script>
+  <script src="http://leopold-loewenheim.uni.lu/WWWgary/js/jquery-1.7.2.js"></script>
+  <script src="http://leopold-loewenheim.uni.lu/WWWgary/js/jquery.contextmenu.r2.js"></script>
   <script src="d3.v3.js"></script>
   <script src="digraph3lib.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <script src="http://leopold-loewenheim.uni.lu/WWWgary/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="http://leopold-loewenheim.uni.lu/WWWgary/js/bootstrap.min.css">
   
   <style>
   path.link {
@@ -84,13 +84,14 @@ graph
             <li id="inspect"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/inspect.png" height="15px" width="15px" /> Inspect</li>
             <li id="editNode"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/edit.png" height="15px" width="15px" /> Edit</li>
             <li id="connectNode"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/connect.png" height="15px" width="15px" /> Connect</li>
-      
+            <li id="deleteNode"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/delete.png" height="15px" width="15px" /> Delete</li>
         </ul>
   </div>
   <!-- Context Menu for the background -->
   <div class="contextMenu" id="cntxtMenu">
         <ul>
             <li id="new"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/new.png" height="15px" width="15px" /> New</li>
+            <li id="add"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/add.png" height="15px" width="15px" /> Add Node</li>
             <li id="reset"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/reset.png" height="15px" width="15px" /> Reset</li>
             <li id="import"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/folder-open.png" height="15px" width="15px" /> Import</li>
             <li id="export"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/save.png" height="15px" width="15px" /> Export</li>
@@ -103,6 +104,7 @@ graph
           <li id="inspectEdge"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/inspect.png" height="15px" width="15px" /> Inspect</li>
           <li id="invertEdge"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/invert.png" height="15px" width="15px" /> Invert</li>
           <li id="editEdge"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/edit.png" height="15px" width="15px" /> Edit</li>
+          <li id="deleteEdge"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/delete.png" height="15px" width="15px" /> Delete</li>
         </ul>
   </div>
 
@@ -112,16 +114,16 @@ graph
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Import Data</h4>
+          <h4 class="modal-title">Choose your d3export file</h4>
         </div>
         <div class="modal-body">
           <!-- INPUT -->
-          Choose your d3export file: <br /> 
-      <input name="xml" type="file" id="xml" value=""/> 
+          <h4></h4> <input name="xml" type="file" id="xml" accept=".json" value=""/> 
+      
          
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancel</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel</button>
           <button id="open" type="button" class="btn btn-info"> Open</button>
         </div>
 
@@ -153,12 +155,41 @@ graph
   
   </div>
   <div class="modal-footer">
-   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-   <button class="btn btn-primary" type='submit' name='save' onClick="saveNode()">Save changes</button>
+   <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+   <button class="btn btn-primary" type='submit' name='save' onClick="saveNode()"> Save</button>
   </div>
   </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
+
+  <!-- New Modal -->
+  <div class="modal fade" id="newModal" role="dialog" aria-labelledby="newModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">New Graph</h4>
+        </div>
+        <div class="modal-body">
+          <!-- INPUT -->
+  <h4>Valuationdomain</h4>
+  <div class="form-group"> 
+  Min:<input type="text" value="0" class="form-control" maxlength="5" required name="min" id="min"> 
+  </div> 
+   <div class="form-group"> 
+  Max:<input type="text" value="0" class="form-control" maxlength="5" required name="max" id="max"> 
+  </div> 
+ 
+  
+  </div>
+  <div class="modal-footer">
+   <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel</button>
+   <button class="btn btn-primary" type='submit' name='new' id='new' onclick="newGraph()"> New</button>
+  </div>
+  </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
 
   <!-- Connect Node Modal -->
   <div class="modal fade" id="connNodeModal" role="dialog" aria-labelledby="connNodeModal" aria-hidden="true">
@@ -172,13 +203,13 @@ graph
           <!-- INPUT -->
   
   <div class="form-group"> 
-  Select a Node to connect to <select id="selectNode"> </select>
+  Select a Node to connect to node <select id="selectNode"> </select>
   </div> 
      
   </div>
   <div class="modal-footer">
-   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-   <button class="btn btn-primary" type='submit' name='save' onClick="saveConnectNode()">Save changes</button>
+   <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel</button>
+   <button class="btn btn-primary" type='submit' name='save' onClick="saveConnectNode()"> Save</button>
   </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -203,7 +234,7 @@ graph
     </div>
   </div>
   <div class="modal-footer">
-   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+   <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel</button>
   </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -232,7 +263,7 @@ graph
           </div> 
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal"> Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancel</button>
 
         </div>
 
@@ -264,7 +295,7 @@ graph
   </div>
   <div class="modal-footer">
    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-   <button class="btn btn-primary" type='submit' name='save' onClick="saveEdge()">Save changes</button>
+   <button class="btn btn-primary" type='submit' name='save' onClick="saveEdge()"> Save</button>
   </div>
         
 
@@ -273,14 +304,17 @@ graph
   </div><!-- /.modal -->
 
 
+ <div id="graph"> </div>
+
   <script>
    $(document).ready(function () {
-     initialize();
+     first_load("'''+jsonName+'''");
     });
    
   </script>
 </body>
 </html>
+
 
 '''
 def javascript():
@@ -313,7 +347,41 @@ def javascript():
 * Declaration of some usefull global variables
 *
 */
-var xmlinput="",$xml,xmlDoc,pairwise,json,labels,labelt,path,force,svg,actions={},relation={},valuationdomain={},Med,category='',current,type;
+var width,height,xmlinput="",$xml,xmlDoc,pairwise={},json,labels,labelt,path,force,svg,actions={},relation={},valuationdomain={},tooltip,category='',current,type;
+
+/*
+*
+* Loaded only on the first load of the web page in order to allow automatic loading of the d3export.json with the same ticker number.
+*
+*/
+function first_load(start) {
+    initialize();
+    if(start) {
+  $.support.cors = true;
+  $.ajax({
+  url: start,
+  async: false,
+  dataType: 'json',
+  success: function (data) {
+              d3json=data; 
+              xmlinput = d3json["xmcda2"];
+              pairwise=$.parseJSON(d3json["pairwiseComparisions"]);
+              var result = parseXMCDA2(xmlinput);
+              actions = result[0];
+              relation = result[1];
+              category = result[2];
+               if(Object.keys(pairwise).length>0) {
+                 type.text("Mode: 'outranking'")
+               }
+               else {
+                  type.text("Mode : 'general'")
+                }
+  load()
+  }
+});
+
+            
+}    }
 
 /*
 *
@@ -322,12 +390,13 @@ var xmlinput="",$xml,xmlDoc,pairwise,json,labels,labelt,path,force,svg,actions={
 */
 function initialize() {
   console.log("Initialization of our empty standart canvas.")
-  
-  var width=900, height=700
+
+  width=900, height=700
   d3.selectAll("svg").remove();
-  svg = d3.select("body").append("svg")
+  svg = d3.select("#graph").append("svg")
       .attr("width", width)
       .attr("height", height);
+
 
   //Create all arrow types.
   /*
@@ -438,12 +507,13 @@ function initialize() {
     .linkDistance(250)
     .linkStrength(0.1)
     .charge(-3500)
-    .gravity(0.1)
-  
+    .gravity(0.5)
+    .start();
+
   type=svg.append("text")
     .attr("x", width-120)
     .attr("y", 20)
-    .text("Mode: 'general'");
+    .text(function() { return Object.keys(pairwise).length <= 0 ?  "Mode: 'general'" : "Mode: 'outranking'"});
 
   svg.append("text")
     .attr("x", width-340)
@@ -462,7 +532,7 @@ function initialize() {
     
 
     window.onbeforeunload = function(){
-    return "Make sure to save your graph locally ;-)";
+    return "Make sure to save your graph locally.";
   }; 
   }
   
@@ -478,7 +548,8 @@ function initialize() {
     force
         .nodes(json.nodes)
         .links(json.links);
-      start(json);
+    
+    start(json)
 
   }
 
@@ -599,6 +670,18 @@ function initialize() {
               else 
                 alert("Connecting not allowed.")
               
+            },
+            'deleteNode':function(t) {
+              if(!(Object.keys(pairwise).length>0)) {
+                delete actions[d.name];
+                delete relation[d.name];
+                for(var x in relation) {
+                  delete relation[x][d.name]
+                }
+              load();
+              }
+              else 
+                alert("Deleting not allowed.")
             }
         }
     });
@@ -634,7 +717,18 @@ function initialize() {
               }
               else 
                 alert("Editing not allowed.")
+            },
+            'deleteEdge':function(t) {
+              if(!(Object.keys(pairwise).length>0)) {
+                delete relation[d.source.name][d.target.name];
+                delete relation[d.target.name][d.source.name];
+                force.stop()
+                load();
+              }
+              else 
+                alert("Deleting not allowed.")
             }
+
         }
     });
     d3.event.preventDefault();
@@ -658,10 +752,10 @@ function initialize() {
         bindings:
         {
             'new': function(evt) {
-                /*
-                To be done later.
-                */
-                initialize();
+                
+                $('#newModal').modal('show');  
+                    
+                        
                 
             },
             'import': function(evt) {
@@ -669,20 +763,60 @@ function initialize() {
 
             },
             'export': function(t) {  
-                buildXMCDA2();
-                exportXMCDA2();
+                exportXMCDA2(buildXMCDA2());
             },
             'reset': function(t) {
                 if(json != null) { 
                   console.log("Resetting Graph.") ;
                   load();
-              } 
+              }},
+              'add': function(t) {
+                if(!(Object.keys(pairwise).length>0)) {
+                  var id = prompt("Please enter a valid id for the node.");
+
+                       if (id!=null) {
+                  x =  id ;
+                  relation[x]={}
+                  relation[x][x]= Number(valuationdomain["Med"]);  
+                  actions[x] = {"name": "nameless","comment":"none"}
+                  };
+                  load();
+              }
+            } 
             }
-        }
+        
     });
     d3.event.preventDefault();
   }
 
+  /*
+  *
+  * Set all important values when creating a new graph. For the moment only valuationdomain min and max!
+  */
+  function newGraph() {
+                  var min = $('#min').attr("value"), max=$('#max').attr("value");
+                  if((isNaN(String(min)) || isNaN(String(max))) || !(min < max)) {
+                    alert("Please enter numeric values and Min < Max !")
+                  }
+                  else {
+                    pairwise={};
+                    actions={};
+                    relation={}
+                    xmlDoc=null;
+                    xmlinput="";
+                    initialize();
+                    valuationdomain["Min"] = Number(min);
+                    valuationdomain["Max"] = Number(max);
+                    valuationdomain["Med"]  = valuationdomain["Min"]  + ((valuationdomain["Max"]  - valuationdomain["Min"] )/Number(2.0));
+                    $('#newModal').modal('hide');  
+                  }
+
+  }
+
+  /*
+  *
+  * Release a node so it can move again freely according to physics.
+  */
   var releaseNodes=function releaseNodes(d) {
     console.log("Releasing node " + d.name);
     d.fixed = false; 
@@ -700,15 +834,25 @@ function initialize() {
         force.stop();}
     }
 
+  /*
+  *
+  * Method that is called while dragging a node.
+  */
   var dragmove = function dragmove(d,i) {
         if(draging){
         d.px += d3.event.dx
         d.py += d3.event.dy
         d.x += d3.event.dx
         d.y += d3.event.dy
-        tick();} 
+        tick();
+        } 
     }
 
+  /*
+  *
+  * Method called on mouseup. A dragged node is frozen at the current coordinates.
+  *
+  */
   var dragend = function dragend(d,i) {
         if(d3.event.sourceEvent.which==1){
         d.fixed = true 
@@ -736,6 +880,11 @@ function initialize() {
     return a.index == b.index;
   }
 
+  /*
+  *
+  * Function called by the connect modal in order to allow the user to select the node to which he wants to connect to.
+  *
+  */
   function connectNode(d){
     var options = $("#selectNode");
     $("#selectNode").empty();
@@ -745,6 +894,10 @@ function initialize() {
     $('#connNodeModal').modal('show');
    
   }
+  /*
+  *
+  * Save the new connection and reload the graph.
+  */
   function saveConnectNode() {
     $('#connNodeModal').modal('hide');
     var e = document.getElementById("selectNode");
@@ -752,15 +905,24 @@ function initialize() {
     relation[current.name][neighbour] = valuationdomain["Max"] +1;
     relation[neighbour][current.name] = valuationdomain["Max"]+1
     load();
-
   }
 
+  /*
+  *
+  * Function called by the editGraph modal if a user wants to edit the values of a node.
+  *
+  */
   function editNode(d) {
     $('#modNodeModal').modal('show');
     $('#nodeId').attr("value",d.name);
     $('#nodeComment').attr("value",d.comment);
     $('#nodename').attr("value",d.fullName);
   }
+
+  /*
+  *
+  * Save the edited node and reload the graph.
+  */
   function saveNode(d) {
     $('#modNodeModal').modal('hide');
     var comment = $('#nodeComment').attr("value");
@@ -772,6 +934,11 @@ function initialize() {
     load();
   }
 
+  /*
+  *
+  *  Function called to initialize the inspectEdge modal with the correct values.
+  *
+  */
   function inspectEdge(d) {
     if (pairwise[d.source.name] != null){
       $('#modEdgeModal').modal('show');
@@ -783,10 +950,15 @@ function initialize() {
     }
   }
 
+  /*
+  *
+  * Function called if we want to invert an Edge, and reload the graph afterwards.
+  * 
+  */
   function invertEdge(d) {
     if (pairwise[d.source.name] == null){
-      relation[d.source.name][d.target.name] =  Math.floor((-valuationdomain["Max"]+ relation[d.source.name][d.target.name] + valuationdomain["Min"])*100)/100;
-      relation[d.target.name][d.source.name] =  Math.floor((-valuationdomain["Max"]+ relation[d.target.name][d.source.name] + valuationdomain["Min"])*100)/100;
+      relation[d.source.name][d.target.name] =  (Math.floor((valuationdomain["Max"]- Number(relation[d.source.name][d.target.name]) + valuationdomain["Min"])*100)/100).toFixed(2);
+      relation[d.target.name][d.source.name] =  (Math.floor((valuationdomain["Max"]- Number(relation[d.target.name][d.source.name]) + valuationdomain["Min"])*100)/100).toFixed(2);
       load();
     }
     else {
@@ -795,7 +967,11 @@ function initialize() {
   }
 
     
-
+/*
+  *
+  * Function called by the editEdge modal if a user wants to edit the values of an Edge.
+  *
+  */
 function editEdge(d) {
     $('#editEdgeModal').modal('show');
     
@@ -809,11 +985,17 @@ function editEdge(d) {
     $('#nodeSource').attr("source",d.source.name);
 
   }
+
+  /*
+  *
+  * Save the edited edge and reload the graph.
+  */
   function saveEdge() {
-    $('#editEdgeModal').modal('hide');
+    
     if($('#nodeSource').attr("value")>=valuationdomain["Min"] && $('#nodeSource').attr("value") <= valuationdomain["Max"] && $('#nodeTarget').attr("value")>=valuationdomain["Min"] && $('#nodeTarget').attr("value") <= valuationdomain["Max"]){
-    relation[$('#nodeSource').attr("source")][$('#nodeTarget').attr("target")] =  $('#nodeSource').attr("value");
-    relation[$('#nodeTarget').attr("target")][$('#nodeSource').attr("source")] =  $('#nodeTarget').attr("value");
+    $('#editEdgeModal').modal('hide');
+    relation[$('#nodeSource').attr("source")][$('#nodeTarget').attr("target")] =  Number($('#nodeSource').attr("value")).toFixed(2);
+    relation[$('#nodeTarget').attr("target")][$('#nodeSource').attr("source")] =  Number($('#nodeTarget').attr("value")).toFixed(2);
     }
     else alert("Error: Value must be between " + valuationdomain["Min"] + " and " + valuationdomain["Max"] +" !")
     load();
@@ -836,16 +1018,16 @@ function editEdge(d) {
              return;
           }
           var file = files[0];
-          console.log(file)
-          test=file;
           var start =  0;
           var stop = file.size - 1;
           reader= new FileReader();
           var blob = file.slice(start, stop + 1);
           //readAsBinaryString() not in specifications.
           reader.readAsText(blob); 
+          actions={}
+          relation={}
           reader.onloadend = function(evt) { 
-              d3json=$.parseJSON(evt.target.result); 
+              try{d3json=$.parseJSON(evt.target.result); 
               xmlinput = d3json["xmcda2"];
               pairwise=$.parseJSON(d3json["pairwiseComparisions"]);
               var result = parseXMCDA2(xmlinput);
@@ -858,7 +1040,10 @@ function editEdge(d) {
                else {
                   type.text("Mode : 'general'")
                 }
-              var x = $('#upModal').modal('hide');
+              var x = $('#upModal').modal('hide');}
+              catch(err) {
+                alert("Unexpected format.")
+              }
               
           };
           }
@@ -885,7 +1070,7 @@ function editEdge(d) {
 
       valuationdomain["Min"] = Number($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('minimum').children().text());
       valuationdomain["Max"] = Number($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').children().text());
-      valuationdomain["Med"]  = valuationdomain["Min"]  + ((valuationdomain["Max"]  - valuationdomain["Min"] )/Number(2.0));
+      valuationdomain["Med"]  = Number(valuationdomain["Min"]  + ((valuationdomain["Max"]  - valuationdomain["Min"] )/2));
       
       $xml.find("alternatives").find('alternative').each(
         function() { 
@@ -904,10 +1089,10 @@ function editEdge(d) {
       $xml.find('alternativesComparisons').find('pairs').find('pair').each(
         function() {
           try{
-          relation[$(this).find('initial').find('alternativeID').text()][$(this).find('terminal').find('alternativeID').text()] = Math.floor(parseFloat($(this).find('value').find('real').text())*100)/100;
+          relation[$(this).find('initial').find('alternativeID').text()][$(this).find('terminal').find('alternativeID').text()] = (Math.floor(parseFloat($(this).find('value').find('real').text())*100)/100).toFixed(2);
           }
           catch(err) {
-          relation[$(this).find('initial').find('alternativeID').text()][$(this).find('terminal').find('alternativeID').text()] = Math.floor(parseInt($(this).find('value').find('integer').text())*100)/100;
+          relation[$(this).find('initial').find('alternativeID').text()][$(this).find('terminal').find('alternativeID').text()] = (Math.floor(parseInt($(this).find('value').find('integer').text())*100)/100).toFixed(2);
           }
         });
       var cat = $xml.find('alternativesComparisons').find('mcdaConcept').text();
@@ -942,7 +1127,8 @@ function editEdge(d) {
             }
     }
     var Min=valuationdomain["Min"],Max=valuationdomain["Max"],Med=valuationdomain["Med"];
-    for( var i=0;  i<actionkeys.length; i++ ){
+    if(Object.keys(relation).length >0){
+      for( var i=0;  i<actionkeys.length; i++ ){
             for( var j=i+1;  j<actionkeys.length; j++ ){
               /* Arrow types:
               r(a,b) > MAX & r(b,a) > MAX  a -- b : -1 initialization
@@ -975,7 +1161,8 @@ function editEdge(d) {
                 else if(relation[actionkeys[i]][actionkeys[j]] < Med && relation[actionkeys[j]][actionkeys[i]] ==  Med)
                     dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":5, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
                 }
-    }
+    }}
+    
     }
     return dataset;
   }
@@ -1002,7 +1189,7 @@ function editEdge(d) {
       a.textContent = 'Download XMCDA2';
 
       a.dataset.downloadurl = [contentType, a.download, a.href].join(':');
-      $(a).appendTo("body")[0].click();
+      $(a).appendTo("#graph")[0].click();
       $("#exportt").remove();
     }
     catch(e) {
@@ -1115,12 +1302,15 @@ function editEdge(d) {
                 xmcda=xmcda+y
                 xmcda=xmcda+('</alternativeID></terminal>\\n')
                 xmcda=xmcda+('<value><real>')
-                if(relation!={}){
+                if(relation[x][y] != null)
+                {
                 xmcda=xmcda + relation[x][y];}
+                else { xmcda=xmcda + Number(valuationdomain["Med"]);}
                 xmcda=xmcda+('</real></value>\\n')
                 xmcda=xmcda+('</pair>\\n')
-          }
+            }
         }
+        
         xmcda=xmcda+('</pairs>\\n')
         xmcda=xmcda+('</alternativesComparisons>\\n')
         xmcda=xmcda+('</xmcda:XMCDA>\\n')
@@ -1128,7 +1318,7 @@ function editEdge(d) {
 
   xmlinput=xmcda;
   parseXMCDA2(xmlinput)
-
+  return xmlinput;
   }
 
   
@@ -1245,7 +1435,7 @@ function editEdge(d) {
   
    
   }
-    
+  
 '''
 
 def d3export():
