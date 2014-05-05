@@ -152,7 +152,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1011,7 +1011,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1069,7 +1069,7 @@ Renders dominant prekernel restricted relation.</p>
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
 <li>fileName, name of the generated html file, default = None (index.html);</li>
-<li>noSilent, True = default;</li>
+<li>Comments, True = default;</li>
 </ul>
 </dd>
 </dl>
@@ -1081,12 +1081,13 @@ D3 Library which we use for graph generation and the physics between nodes, whic
 <dt><em>If the graph is an outrankingdigraphs</em>: </dt>
 <dd><ul class="first last simple">
 <li>It is only possible to add comments to nodes.</li>
-<li>A special json file containing all possible pairwiseComparisions is generated.</li>
+<li>A special json array containing all possible pairwiseComparisions is generated.</li>
 </ul>
 </dd>
 <dt><em>If the graph is a general graph</em>:</dt>
 <dd><ul class="first last simple">
-<li>It is possible to add/delete nodes and edges, as well as well as edit the value of these edges. (work in progress)</li>
+<li>It is possible to add/delete nodes and edges, as well as well as edit the value of these edges.</li>
+<li>Edges can be added and removed.</li>
 <li>No Json file is generated since it is not possible to make pairwiseComparisions on general graphs.</li>
 </ul>
 </dd>
@@ -1094,7 +1095,7 @@ D3 Library which we use for graph generation and the physics between nodes, whic
 <dd><ul class="first last simple">
 <li>d3.js contains the D3 Data-driven Documents source code, containing one small addition that we made in order to be able to easyly import links with a different formatself.</li>
 <li>digraph3lib.js contains our library. This file contains everything that we need from import of an XMCDA2 file, visualization of the graph to export of the changed graph.</li>
-<li>temp.xmcda2, is the file that is exported by the saveXMCDA2 function.</li>
+<li>d3export.json, is the JSON file that is exported with the format &#8220;{&#8220;xmcda2&#8221;: &#8220;some xml&#8221;,&#8221;pairwiseComparisions&#8221;:&#8221;{&#8220;a01&#8221;: &#8220;some html&#8221;,...}&#8221;}.</li>
 </ul>
 </dd>
 <dt><em>Example 1</em>:</dt>
@@ -1114,13 +1115,13 @@ D3 Library which we use for graph generation and the physics between nodes, whic
 <div><ul>
 <li><dl class="first docutils">
 <dt>Main Screen:</dt>
-<dd><img alt="_images/randomvaluation_d3_main.png" class="first last" src="_images/randomvaluation_d3_main.png" />
+<dd><img alt="randomvaluation_d3_main.png" class="first last" src="randomvaluation_d3_main.png" />
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>Inspect function:</dt>
-<dd><img alt="_images/randomvaluation_d3_inspect.png" class="first last" src="_images/randomvaluation_d3_inspect.png" />
+<dd><img alt="randomvaluation_d3_inspect.png" class="first last" src="randomvaluation_d3_inspect.png" />
 </dd>
 </dl>
 </li>
@@ -1132,6 +1133,7 @@ D3 Library which we use for graph generation and the physics between nodes, whic
 </dl>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
+<p>If you want to use the automatic load in Chrome, try using the command: &#8220;python -m SimpleHTTPServer&#8221; and then access the index.html via &#8220;<a class="reference external" href="http://0.0.0.0:8000/index.html">http://0.0.0.0:8000/index.html</a>&#8221;.</p>
 <p class="last">For the best possible experience you should be connected to the world wide web!</p>
 </div>
 </dd></dl>
@@ -1462,7 +1464,7 @@ a csv file.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.saveXMCDA2">
-<tt class="descname">saveXMCDA2</tt><big>(</big><em>fileName='temp'</em>, <em>fileExt='xmcda2'</em>, <em>relationName='R'</em>, <em>relationType='binary'</em>, <em>category='random'</em>, <em>subcategory='valued'</em>, <em>author='digraphs Module (RB)'</em>, <em>reference='saved from Python'</em>, <em>valuationType='standard'</em>, <em>digits=2</em>, <em>servingD3=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.saveXMCDA2" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">saveXMCDA2</tt><big>(</big><em>fileName='temp'</em>, <em>fileExt='xmcda2'</em>, <em>Comments=True</em>, <em>relationName='R'</em>, <em>relationType='binary'</em>, <em>category='random'</em>, <em>subcategory='valued'</em>, <em>author='digraphs Module (RB)'</em>, <em>reference='saved from Python'</em>, <em>valuationType='standard'</em>, <em>digits=2</em>, <em>servingD3=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.saveXMCDA2" title="Permalink to this definition">¶</a></dt>
 <dd><p>save digraph in XMCDA format.</p>
 </dd></dl>
 
@@ -1548,6 +1550,13 @@ Renders the sharpest of two characteristic vectors v and w.</p>
 <dt id="digraphs.Digraph.showHTMLRelationTable">
 <tt class="descname">showHTMLRelationTable</tt><big>(</big><big>)</big><a class="headerlink" href="#digraphs.Digraph.showHTMLRelationTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Launches a browser window with the colored relation table of self.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.showInteractiveGraph">
+<tt class="descname">showInteractiveGraph</tt><big>(</big><big>)</big><a class="headerlink" href="#digraphs.Digraph.showInteractiveGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the graph and all needed files for the visualization of an interactive graph generated by the exportD3() function.
+For best experience make sure to use Firefox, because other browser restrict the loading of local files.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1861,7 +1870,7 @@ equivalence valuations.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1892,7 +1901,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2504,7 +2513,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3199,7 +3208,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -3885,7 +3894,7 @@ ballot = {     # voters x candidates x candidates
 <span id="sortingdigraphs-module"></span><span id="sortingdigraphs-label"></span><h2>sortingDigraphs module<a class="headerlink" href="#module-sortingDigraphs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="sortingDigraphs.QuantilesSortingDigraph">
-<em class="property">class </em><tt class="descclassname">sortingDigraphs.</tt><tt class="descname">QuantilesSortingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=True</em>, <em>hasNoVeto=False</em>, <em>minValuation=-100.0</em>, <em>maxValuation=100.0</em>, <em>outrankingType='bipolar'</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">sortingDigraphs.</tt><tt class="descname">QuantilesSortingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=True</em>, <em>PrefThresholds=True</em>, <em>hasNoVeto=False</em>, <em>minValuation=-100.0</em>, <em>maxValuation=100.0</em>, <em>outrankingType='bipolar'</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></tt></a>, <a class="reference internal" href="#weakOrders.WeakOrder" title="weakOrders.WeakOrder"><tt class="xref py py-class docutils literal"><span class="pre">weakOrders.WeakOrder</span></tt></a></p>
 <p>Specialisation of the sortingDigraph Class
 for sorting of alternatives into quantiles delimited ordered classes.</p>
