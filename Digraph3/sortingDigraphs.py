@@ -1291,9 +1291,9 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                     print('r,rq',r,rq, end=' ')
                 if rq < (n-1):
                     quantile = gValues[rq] + ((r-rq)*(gValues[rq+1]-gValues[rq]))
-                    if PrefThresholds:
+                    if rq > 0 and PrefThresholds:
                         quantile += gPrefThrCst + quantile*gPrefThrSlope
-                else:
+                else :
                     if self.criteria[g]['preferenceDirection'] == 'min':
                         quantile = Decimal('100.0')
                     else:
@@ -1317,10 +1317,10 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                 elif rq < (n-1):
                     quantile = gValues[rq]\
                                + ((r-rq)*(gValues[rq+1]-gValues[rq]))
+                    if PrefThresholds:
+                        quantile -= gPrefThrCst - quantile*gPrefThrSlope
                 else:
                     quantile = gValues[n-1]
-                if PrefThresholds:
-                    quantile -= gPrefThrCst - quantile*gPrefThrSlope
                 if Debug:
                     print('quantile',quantile)
                 gQuantiles.append(quantile)
@@ -1494,27 +1494,47 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
 
-
-    t = RandomCBPerformanceTableau(numberOfActions=10,
-                                   numberOfCriteria=13,
+    nq = 10
+    t = RandomCBPerformanceTableau(numberOfActions=20,
+                                   numberOfCriteria=2,
                                    weightDistribution='equiobjectives')
 ##    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
     t.saveXMCDA2('test')
 ##    t.showPerformanceTableau()
     t = XMCDA2PerformanceTableau('test')
+    t.showCriteria()
+    g = BipolarOutrankingDigraph(t)
     #t = PerformanceTableau('ex1perftab')
     #t.showQuantileSort()
     #t = XMCDA2PerformanceTableau('uniSorting')
     #t = XMCDA2PerformanceTableau('spiegel2004')
-    s = SortingDigraph(t,lowerClosed=False)
-    s.showSorting()
-    s.showSortingCharacteristics('a10')
-    qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=True)
-    qs.showSorting()
-    qs.showSortingCharacteristics('a10')
-    g = BipolarOutrankingDigraph(t)
-    print(g.computeOrdinalCorrelation(s))
-    print(g.computeOrdinalCorrelation(qs))
+    #s = SortingDigraph(t,lowerClosed=False)
+    #s.showSorting()
+    #s.showSortingCharacteristics('a10')
+    qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
+                                  LowerClosed=True,
+                                  PrefThresholds=False)
+    qs0.showSorting()
+    qs0.showSortingCharacteristics('a10')
+    print(g.computeOrdinalCorrelation(qs0))
+    qs1 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
+                                  LowerClosed=True,
+                                  PrefThresholds = True)
+    qs1.showSorting()
+    qs1.showSortingCharacteristics('a10')
+    print(g.computeOrdinalCorrelation(qs1))
+    qs2 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
+                                  LowerClosed=False,
+                                  PrefThresholds=False)
+    qs2.showSorting()
+    qs2.showSortingCharacteristics('a10')
+    print(g.computeOrdinalCorrelation(qs2))
+    qs3 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
+                                  LowerClosed=False,
+                                  PrefThresholds = True)
+    qs3.showSorting()
+    qs3.showSortingCharacteristics('a10')
+    print(g.computeOrdinalCorrelation(qs3))
 ##    s0 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
 ##                                LowerClosed=False,
 ##                                Debug=False)
