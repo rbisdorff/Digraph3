@@ -1,6 +1,6 @@
 def htmlmodel(jsonName=""):
     return '''
-
+<!DOCTYPE html>
 <!--
 
     Html/JavaScript implementation of digraphs graph export
@@ -26,9 +26,6 @@ def htmlmodel(jsonName=""):
     Icons from: http://ionicons.com/ MIT Licensed
  
 -->
-
-
-<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8">
@@ -54,7 +51,7 @@ graph
   .node circle {
     cursor: move;
     stroke: #000;
-    stroke-width: 3px;
+    stroke-width: 3.5px;
     
     } 
   .node text {
@@ -81,35 +78,35 @@ graph
   <!-- Context Menu for Nodes -->
   <div class="contextMenu" id="cntxtNode">
         <ul>
-            <li id="inspect"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/inspect.png" height="15px" width="15px" /> Inspect</li>
-            <li id="editNode"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/edit.png" height="15px" width="15px" /> Edit</li>
-            <li id="connectNode"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/connect.png" height="15px" width="15px" /> Connect</li>
-            <li id="deleteNode"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/delete.png" height="15px" width="15px" /> Delete</li>
+            <li id="inspect"><img alt="Insepct" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/inspect.png" height="15" width="15" /> Inspect</li>
+            <li id="editNode"><img alt="Edit" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/edit.png" height="15" width="15" /> Edit</li>
+            <li id="connectNode"><img  alt="Connect" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/connect.png" height="15" width="15" /> Connect</li>
+            <li id="deleteNode"><img alt="Delete" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/delete.png" height="15" width="15" /> Delete</li>
         </ul>
   </div>
   <!-- Context Menu for the background -->
   <div class="contextMenu" id="cntxtMenu">
         <ul>
-            <li id="new"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/new.png" height="15px" width="15px" /> New</li>
-            <li id="add"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/add.png" height="15px" width="15px" /> Add Node</li>
-            <li id="reset"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/reset.png" height="15px" width="15px" /> Reset</li>
-            <li id="import"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/folder-open.png" height="15px" width="15px" /> Import</li>
-            <li id="export"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/save.png" height="15px" width="15px" /> Export</li>
+            <li id="new"><img alt="New" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/new.png" height="15" width="15" /> New</li>
+            <li id="add"><img alt="Add" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/add.png" height="15" width="15" /> Add Node</li>
+            <li id="reset"><img alt="Reset" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/reset.png" height="15" width="15" /> Reset</li>
+            <li id="import"><img alt="Import" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/folder-open.png" height="15" width="15" /> Import</li>
+            <li id="export"><img alt="Export" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/save.png" height="15" width="15" /> Export</li>
         </ul>
   </div>
 
   <!-- Context Menu for edges -->
   <div class="contextMenu" id="cntxtEdge">
         <ul>
-          <li id="inspectEdge"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/inspect.png" height="15px" width="15px" /> Inspect</li>
-          <li id="invertEdge"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/invert.png" height="15px" width="15px" /> Invert</li>
-          <li id="editEdge"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/edit.png" height="15px" width="15px" /> Edit</li>
-          <li id="deleteEdge"><img src="http://leopold-loewenheim.uni.lu/WWWgary/icons/delete.png" height="15px" width="15px" /> Delete</li>
+          <li id="inspectEdge"><img alt="Inspect" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/inspect.png" height="15" width="15" /> Inspect</li>
+          <li id="invertEdge"><img alt="Invert" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/invert.png" height="15" width="15" /> Invert</li>
+          <li id="editEdge"><img alt="Edit" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/edit.png" height="15" width="15" /> Edit</li>
+          <li id="deleteEdge"><img alt="Delete" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/delete.png" height="15" width="15" /> Delete</li>
         </ul>
   </div>
 
 <!-- Import Modal -->
-  <div class="modal fade" id="upModal" role="dialog" aria-labelledby="upModalLabel" aria-hidden="true">
+  <div class="modal fade" id="upModalLabel" role="dialog" aria-labelledby="upModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -118,7 +115,7 @@ graph
         </div>
         <div class="modal-body">
           <!-- INPUT -->
-          <h4></h4> <input name="xml" type="file" id="xml" accept=".json" value=""/> 
+          <h4></h4> <input name="xml" type="file" id="xml" accept="application/json"/> 
       
          
         </div>
@@ -184,7 +181,7 @@ graph
   </div>
   <div class="modal-footer">
    <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel</button>
-   <button class="btn btn-primary" type='submit' name='new' id='new' onclick="newGraph()"> New</button>
+   <button class="btn btn-primary" type='submit' name='new' onclick="newGraph()"> New</button>
   </div>
   </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -242,7 +239,7 @@ graph
 
   
 <!-- Info Modal -->
-  <div class="modal fade" id="infoModal" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+  <div class="modal fade" id="infoModalLabel" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -285,11 +282,11 @@ graph
   
   <div class="form-group"> 
   <p id="pnodetarget"></p>
-  <input type="text" placeholder="Node Target" class="form-control" maxlength="10" required target="" name="nodeTarget" id="nodeTarget"/> 
+  <input type="text" placeholder="Node Target" class="form-control" maxlength="10" required name="nodeTarget" id="nodeTarget"/> 
   </div> 
   <div class="form-group">
    <p id="pnodesource"></p>
-   <input type="text" placeholder="Node Source" class="form-control" maxlength="20" required source="" name="nodeSource" id="nodeSource"/> 
+   <input type="text" placeholder="Node Source" class="form-control" maxlength="20" required name="nodeSource" id="nodeSource"/> 
    </div>
   
   </div>
@@ -314,7 +311,6 @@ graph
   </script>
 </body>
 </html>
-
 
 '''
 def javascript():
@@ -505,7 +501,7 @@ function initialize() {
   force = d3.layout.force()
     .size([width, height])
     .linkDistance(250)
-    .linkStrength(0.1)
+    .linkStrength(0.2)
     .charge(-3500)
     .gravity(0.5)
     .start();
@@ -525,7 +521,7 @@ function initialize() {
     .attr("xlink:href", "http://leopold-loewenheim.uni.lu/WWWgary/icons/info.png")
     .attr("x", 10)
     .on("click",function(o) {
-      $('#infoModal').modal('show');  
+      $('#infoModalLabel').modal('show');  
     })
     .attr("y",height-35);
 
@@ -782,6 +778,8 @@ function initialize() {
                   };
                   load();
               }
+              else
+                alert("Adding nodes not allowed.")
             } 
             }
         
@@ -976,13 +974,13 @@ function editEdge(d) {
     $('#editEdgeModal').modal('show');
     
     $('#nodeTarget').attr("value",relation[d.target.name][d.source.name]);
-    document.getElementById("pnodetarget").innerHTML=d.target.name + " --> " + d.source.name;
+    document.getElementById("pnodetarget").innerHTML=d.target.name + " to " + d.source.name;
     
     $('#nodeSource').attr("value",relation[d.source.name][d.target.name]);
-    document.getElementById("pnodesource").innerHTML=d.source.name + " --> " + d.target.name;
+    document.getElementById("pnodesource").innerHTML=d.source.name + " to " + d.target.name;
     
-    $('#nodeTarget').attr("target",d.target.name);
-    $('#nodeSource').attr("source",d.source.name);
+    $('#nodeTarget').attr("name",d.target.name);
+    $('#nodeSource').attr("name",d.source.name);
 
   }
 
@@ -994,8 +992,8 @@ function editEdge(d) {
     
     if($('#nodeSource').attr("value")>=valuationdomain["Min"] && $('#nodeSource').attr("value") <= valuationdomain["Max"] && $('#nodeTarget').attr("value")>=valuationdomain["Min"] && $('#nodeTarget').attr("value") <= valuationdomain["Max"]){
     $('#editEdgeModal').modal('hide');
-    relation[$('#nodeSource').attr("source")][$('#nodeTarget').attr("target")] =  Number($('#nodeSource').attr("value")).toFixed(2);
-    relation[$('#nodeTarget').attr("target")][$('#nodeSource').attr("source")] =  Number($('#nodeTarget').attr("value")).toFixed(2);
+    relation[$('#nodeSource').attr("name")][$('#nodeTarget').attr("name")] =  ((Math.floor(Number($('#nodeSource').attr("value"))*100))/100).toFixed(2);
+    relation[$('#nodeTarget').attr("name")][$('#nodeSource').attr("name")] =  ((Math.floor(Number($('#nodeTarget').attr("value"))*100))/100).toFixed(2);
     }
     else alert("Error: Value must be between " + valuationdomain["Min"] + " and " + valuationdomain["Max"] +" !")
     load();
@@ -1010,7 +1008,7 @@ function editEdge(d) {
     console.log("Importing JSON file.")
     var reader;
       if (window.File && window.FileReader && window.FileList && window.Blob) {
-        $('#upModal').modal('show');
+        $('#upModalLabel').modal('show');
         function handleFileSelect(evt) {
            var files = document.getElementById('xml').files;
            if (!files.length) {
@@ -1035,15 +1033,16 @@ function editEdge(d) {
               relation = result[1];
               category = result[2];
               load();
+              var x = $('#upModalLabel').modal('hide');
                if(Object.keys(pairwise).length>0) {
                  type.text("Mode: 'outranking'")}
                else {
                   type.text("Mode : 'general'")
-                }
-              var x = $('#upModal').modal('hide');}
+                }}
               catch(err) {
-                alert("Unexpected format.")
+                alert("Unexpected format.");
               }
+
               
           };
           }
