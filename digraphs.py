@@ -2839,13 +2839,15 @@ class Digraph(object):
 
     Therefore in order to make it easyer for everyone to analyze certain nodes, it is i.e. possible to only show direct neightbours to this nodes, drag nodes around, etc.
 
-    *If the graph is an outrankingdigraphs*: 
-        * It is only possible to add comments to nodes. 
-        * A special json array containing all possible pairwiseComparisions is generated.
+    
+    *If the graph is an outrankingdigraphs*:
+        * Nodes can be dragged and only the name and comment can be edited. 
+        * Edges can be inspected but not edited for this purpose a special json array containing all possible pairwiseComparisions is generated.
+
     *If the graph is a general graph*:
-        * It is possible to add/delete nodes and edges, as well as well as edit the value of these edges.
-        * Edges can be added and removed. 
-        * No Json file is generated since it is not possible to make pairwiseComparisions on general graphs.
+        * Nodes can be dragged, added, removed and edited.
+        * Edges can be added, removed, inverted and edited. But edges cannot be inspected.
+        * The pairwiseComparisions key leads to an empty array {}.
 
     *The generated files*:
         * d3.js contains the D3 Data-driven Documents source code, containing one small addition that we made in order to be able to easyly import links with a different formatself.
@@ -2868,7 +2870,7 @@ class Digraph(object):
     .. warning::
             If you want to use the automatic load in Chrome, try using the command: "python -m SimpleHTTPServer" and then access the index.html via "http://0.0.0.0:8000/index.html".
             
-            For the best possible experience you should be connected to the world wide web! 
+            For the best possible experience you should be connected to the world wide web. 
 
         """
         import os
