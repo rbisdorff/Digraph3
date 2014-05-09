@@ -818,7 +818,7 @@ if __name__ == "__main__":
 
     from digraphs import *
     from outrankingDigraphs import *
-    import weakOrders
+    from weakOrders import *
     from time import time
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
@@ -872,7 +872,7 @@ if __name__ == "__main__":
 ##    rcg3.showWeakOrder()
 ##    print(rcg3.computeOrdinalCorrelation(g))
     print('=== >>> principal weak order')
-##    t0 = time()
+    t0 = time()
     rcf1 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
                                           imageType=None,Debug=False,
                                           Threading=False)
