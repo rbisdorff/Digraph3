@@ -377,7 +377,6 @@ class RankingByChoosingDigraph(WeakOrder):
             print('Threading ...')
             from tempfile import TemporaryDirectory
             with TemporaryDirectory() as tempDirName:
-            #tempDirName = mkdtemp()
                 digraphFileName = tempDirName +'/dumpDigraph.py'
                 if Debug:
                     print('temDirName, digraphFileName', tempDirName,digraphFileName)
@@ -633,18 +632,22 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
         if Threading:
             from multiprocessing import Process, Lock, active_children, cpu_count
             class myThread(Process):
-                def __init__(self, threadID, name, direction, imageType, plotFileName,Debug):
+                def __init__(self, threadID, name, direction,\
+                             tempDirName, imageType, plotFileName, Debug):
                     Process.__init__(self)
                     self.threadID = threadID
                     self.name = name
                     self.direction = direction
+                    self.workingDirectory = tempDirName
                     self.imageType = imageType
                     self.plotFileName = plotFileName
                     self.Debug = Debug
                 def run(self):
                     from pickle import dumps, loads
+                    from os import chdir
+                    chdir(self.workingDirectory)
                     if Debug:
-                        print("Starting " + self.name)
+                        print("Starting working in %s on %s" % (self.workingDirectory,self.name) )
                     fi = open('dumpDigraph.py','rb')
                     digraph = loads(fi.read())
                     fi.close()
@@ -682,29 +685,38 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
 
         if Threading and cpu_count()>2:
             print('Threading ...')
-            fo = open('dumpDigraph.py','wb')
-            pd = dumps(digraph,-1)
-            fo.write(pd)
-            fo.close()
-            threadCol = myThread(1,"ComputeCol","col",\
-                                 imageType=imageType,\
-                                 plotFileName=plotFileName,\
-                                 Debug=Debug)
-            threadRow = myThread(1,"ComputeRow","row",\
-                                 imageType=imageType,\
-                                 plotFileName=plotFileName,\
-                                 Debug=Debug)
-            threadCol.start()
-            threadRow.start()
-            while active_children() != []:
-                pass
-            print('Exiting both computing threads')
-            fi = open('priCol.py','rb')
-            pc = loads(fi.read())
-            fi.close()
-            fi = open('priRow.py','rb')
-            pl = loads(fi.read())
-            fi.close()
+            from tempfile import TemporaryDirectory
+            with TemporaryDirectory() as tempDirName:
+                digraphFileName = tempDirName +'/dumpDigraph.py'
+                if Debug:
+                    print('temDirName, digraphFileName', tempDirName,digraphFileName)
+                fo = open(digraphFileName,'wb')
+                pd = dumps(digraph,-1)
+                fo.write(pd)
+                fo.close()
+                threadCol = myThread(1,"ComputeCol","col",\
+                                     tempDirName,\
+                                     imageType=imageType,\
+                                     plotFileName=plotFileName,\
+                                     Debug=Debug)
+                threadRow = myThread(1,"ComputeRow","row",\
+                                     tempDirName,\
+                                     imageType=imageType,\
+                                     plotFileName=plotFileName,\
+                                     Debug=Debug)
+                threadCol.start()
+                threadRow.start()
+                while active_children() != []:
+                    pass
+                print('Exiting both computing threads')
+                priColFileName = tempDirName+'/priCol.py'
+                fi = open(priColFileName,'rb')
+                pc = loads(fi.read())
+                fi.close()
+                priRowFileName = tempDirName+'/priRow.py'
+                fi = open(priRowFileName,'rb')
+                pl = loads(fi.read())
+                fi.close()
             
         else:
             pc = PrincipalOrder(digraph,Colwise=True,\
@@ -719,14 +731,17 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
             print('Row wise: ')
             print(pl.principalRowwiseScores)
             pl.computeOrder()
-        self.principalRowwiseScores = pl.principalRowwiseScores
+            print(self.actions)
+            for x in pl.principalRowwiseScores:
+                print(x)
+        self.principalRowwiseScores = deepcopy(pl.principalRowwiseScores)
         for x in pl.principalRowwiseScores:
             self.actions[x[1]]['principalRowwiseScore'] = x[0]
         if Debug:
             print('Column wise: ')
             print(pc.principalColwiseScores)
             pc.computeOrder()
-        self.principalColwiseScores = pc.principalColwiseScores
+        self.principalColwiseScores = deepcopy(pc.principalColwiseScores)
         for x in pc.principalColwiseScores:
             self.actions[x[1]]['principalColwiseScore'] = x[0]
         pf = FusionDigraph(pl,pc,operator=fusionOperator)
@@ -806,30 +821,30 @@ if __name__ == "__main__":
     import weakOrders
     from time import time
 
-    #t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-    #                             numberOfActions=10)
-    #t.saveXMCDA2('test')
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                 numberOfActions=10)
+    t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
     #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
     #g = RandomValuationDigraph(order=11)
-    print('=== >>> best and last fusion (default)')
-    t0 = time()
-    rcg0 = weakOrders.RankingByChoosingDigraph(g,\
-                                                     fusionOperator="o-min",\
-                                                     Debug=False,\
-                                                     Threading=False)
-    print('execution time %s: ' % (str ( time()-t0 ) ) )
-    rcg0.showRankingByBestChoosing()
-    rcg0.exportGraphViz()
-##    rcg0.showRelationTable()
-    t0 = time()
-    rcg1 = weakOrders.RankingByChoosingDigraph(g,\
-                                               fusionOperator="o-min",\
-                                                     Debug=False,\
-                                                     Threading=True)
-    print('execution time %s: ' % (str ( time()-t0 ) ) )
-    rcg1.showWeakOrder()
+##    print('=== >>> best and last fusion (default)')
+##    t0 = time()
+##    rcg0 = weakOrders.RankingByChoosingDigraph(g,\
+##                                                     fusionOperator="o-min",\
+##                                                     Debug=False,\
+##                                                     Threading=False)
+##    print('execution time %s: ' % (str ( time()-t0 ) ) )
+##    rcg0.showRankingByBestChoosing()
+##    rcg0.exportGraphViz()
+####    rcg0.showRelationTable()
+##    t0 = time()
+##    rcg1 = weakOrders.RankingByChoosingDigraph(g,\
+##                                               fusionOperator="o-min",\
+##                                                     Debug=False,\
+##                                                     Threading=True)
+##    print('execution time %s: ' % (str ( time()-t0 ) ) )
+##    rcg1.showWeakOrder()
 ##    rcg1.showRelationTable()
 ##    print(rcg0.computeOrdinalCorrelation(g))
 ##    rcg0.showOrderedRelationTable(direction="decreasing")
@@ -856,18 +871,19 @@ if __name__ == "__main__":
 ##    rcg3 = RankingByChoosingDigraph(g,Best=False,Last=False,Debug=False)
 ##    rcg3.showWeakOrder()
 ##    print(rcg3.computeOrdinalCorrelation(g))
-##    print('=== >>> principal weak order')
+    print('=== >>> principal weak order')
 ##    t0 = time()
-##    rcf1 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
-##                                           imageType=None,Debug=False,
-##                                           Threading=False)
-##    print('execution time %s: ' % (str ( time()-t0 ) ) )
-##    t0 = time()
-##    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
-##                                           imageType=None,Debug=False,\
-##                                           Threading=True)
-##    print('execution time %s: ' % (str ( time()-t0 ) ) )
-##    rcf2.showWeakOrder()
+    rcf1 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
+                                          imageType=None,Debug=False,
+                                          Threading=False)
+    rcf1.showWeakOrder()
+    print('execution time %s: ' % (str ( time()-t0 ) ) )
+    t0 = time()
+    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
+                                           imageType=None,Debug=False,\
+                                           Threading=True)
+    rcf2.showWeakOrder()
+    print('execution time %s: ' % (str ( time()-t0 ) ) )
 ##    rcf2.exportGraphViz(fileName='testcw',direction="Colwise")
 ##    rcf2.exportGraphViz(fileName='testrw',direction="Colwise",graphType='pdf')
 ##    rcf2.showWeakOrder()
