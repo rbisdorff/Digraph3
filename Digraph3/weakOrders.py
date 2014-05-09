@@ -335,17 +335,20 @@ class RankingByChoosingDigraph(WeakOrder):
         if Threading:
             from multiprocessing import Process, Lock, active_children, cpu_count
             class myThread(Process):
-                def __init__(self, threadID, name, direction, Codual, Debug):
+                def __init__(self, threadID, name, direction, tempDirName, Codual, Debug):
                     Process.__init__(self)
                     self.threadID = threadID
                     self.name = name
                     self.direction = direction
+                    self.workingDirectory = tempDirName
                     self.Codual = Codual
                     self.Debug = Debug
                 def run(self):
                     from pickle import dumps, loads
+                    from os import chdir
+                    chdir(self.workingDirectory)
                     if Debug:
-                        print("Starting " + self.name)
+                        print("Starting working in %s on %s" % (self.workingDirectory, self.name))
                     #threadLock.acquire()
                     fi = open('dumpDigraph.py','rb')
                     digraph = loads(fi.read())
@@ -372,21 +375,28 @@ class RankingByChoosingDigraph(WeakOrder):
 
         if Threading and cpu_count()>2:
             print('Threading ...')
-            fo = open('dumpDigraph.py','wb')
+            from tempfile import mkdtemp
+            tempDirName = mkdtemp()
+            digraphFileName = tempDirName +'/dumpDigraph.py'
+            if Debug:
+                print('temDirName, digraphFileName', tempDirName,digraphFileName)
+            fo = open(digraphFileName,'wb')
             pd = dumps(digraph,-1)
             fo.write(pd)
             fo.close()
-            threadBest = myThread(1,"ComputeBest","best",CoDual,Debug)
-            threadWorst = myThread(2,"ComputeWorst","worst",CoDual,Debug)
+            threadBest = myThread(1,"ComputeBest","best",tempDirName,CoDual,Debug)
+            threadWorst = myThread(2,"ComputeWorst","worst",tempDirName,CoDual,Debug)
             threadBest.start()
             threadWorst.start()
             while active_children() != []:
                 pass
             print('Exiting computing threads')
-            fi = open('rbbc.py','rb')
+            rbbcFileName = tempDirName +'/rbbc.py'          
+            fi = open(rbbcFileName,'rb')
             digraph.rankingByBestChoosing = loads(fi.read())
             fi.close()
-            fi = open('rbwc.py','rb')
+            rbwcFileName = tempDirName + '/rbwc.py'
+            fi = open(rbwcFileName,'rb')
             digraph.rankingByLastChoosing = loads(fi.read())
             fi.close()
             
@@ -417,7 +427,7 @@ class RankingByChoosingDigraph(WeakOrder):
         self.rankingByBestChoosing = deepcopy(digraph.rankingByBestChoosing)
         self.computeRankingByChoosing()
         if Debug:
-            self.showRankingByChoosing(CppAgrum=CppAgrum,CoDual=CoDual,Debug=Debug)
+            self.showRankingByChoosing()
         
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -813,7 +823,7 @@ if __name__ == "__main__":
 ##    rcg0.showRelationTable()
     t0 = time()
     rcg1 = weakOrders.RankingByChoosingDigraph(g,\
-                                                     fusionOperator="o-min",\
+                                               fusionOperator="o-min",\
                                                      Debug=False,\
                                                      Threading=True)
     print('execution time %s: ' % (str ( time()-t0 ) ) )
