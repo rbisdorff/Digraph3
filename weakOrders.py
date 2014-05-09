@@ -375,30 +375,32 @@ class RankingByChoosingDigraph(WeakOrder):
 
         if Threading and cpu_count()>2:
             print('Threading ...')
-            from tempfile import mkdtemp
-            tempDirName = mkdtemp()
-            digraphFileName = tempDirName +'/dumpDigraph.py'
-            if Debug:
-                print('temDirName, digraphFileName', tempDirName,digraphFileName)
-            fo = open(digraphFileName,'wb')
-            pd = dumps(digraph,-1)
-            fo.write(pd)
-            fo.close()
-            threadBest = myThread(1,"ComputeBest","best",tempDirName,CoDual,Debug)
-            threadWorst = myThread(2,"ComputeWorst","worst",tempDirName,CoDual,Debug)
-            threadBest.start()
-            threadWorst.start()
-            while active_children() != []:
-                pass
-            print('Exiting computing threads')
-            rbbcFileName = tempDirName +'/rbbc.py'          
-            fi = open(rbbcFileName,'rb')
-            digraph.rankingByBestChoosing = loads(fi.read())
-            fi.close()
-            rbwcFileName = tempDirName + '/rbwc.py'
-            fi = open(rbwcFileName,'rb')
-            digraph.rankingByLastChoosing = loads(fi.read())
-            fi.close()
+            from tempfile import TemporaryDirectory
+            with TemporaryDirectory() as tempDirName:
+            #tempDirName = mkdtemp()
+                digraphFileName = tempDirName +'/dumpDigraph.py'
+                if Debug:
+                    print('temDirName, digraphFileName', tempDirName,digraphFileName)
+                fo = open(digraphFileName,'wb')
+                pd = dumps(digraph,-1)
+                fo.write(pd)
+                fo.close()
+                threadBest = myThread(1,"ComputeBest","best",tempDirName,CoDual,Debug)
+                threadWorst = myThread(2,"ComputeWorst","worst",tempDirName,CoDual,Debug)
+                threadBest.start()
+                threadWorst.start()
+                while active_children() != []:
+                    pass
+                print('Exiting computing threads')
+                rbbcFileName = tempDirName +'/rbbc.py'          
+                fi = open(rbbcFileName,'rb')
+                digraph.rankingByBestChoosing = loads(fi.read())
+                fi.close()
+                rbwcFileName = tempDirName + '/rbwc.py'
+                fi = open(rbwcFileName,'rb')
+                digraph.rankingByLastChoosing = loads(fi.read())
+                fi.close()
+            
             
         else:
             digraph.computeRankingByBestChoosing(CppAgrum=CppAgrum,CoDual=CoDual,Debug=Debug)
