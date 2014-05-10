@@ -2881,7 +2881,10 @@ class Digraph(object):
         if Comments:
             print('*---- exporting all needed files ---------*')
 
-        file="d3export.json"
+        if fileName == "index":
+            fileName = self.name
+
+        file=fileName+".json"
         dst_dir=os.getcwd()
         basename = os.path.basename(file)
         head, tail = os.path.splitext(basename)
@@ -2891,28 +2894,25 @@ class Digraph(object):
         while os.path.exists(dst_file):
             count += 1
             dst_file = os.path.join(dst_dir, '%s-%d%s' % (head, count, tail))
-            print(dst_file)
 
         actionkeys = [x for x in self.actions]
         n = len(actionkeys)
         relation = self.relation
         Med = self.valuationdomain['med']
-        i = 0
-        if fileName == "index":
-            fileName = self.name
+        
         pageName=""
         if(count==0):
-            fw = open("index.html","w")
-            fw.write(htmlmodel.htmlmodel(jsonName="d3export.json"))
-            pageName="index.html"
+            fw = open(fileName+".html","w")
+            fw.write(htmlmodel.htmlmodel(jsonName=fileName+".json"))
+            pageName=fileName+".html"
             if Comments:
-                print("File: index.html generated!")
+                print("File: "+fileName+".html generated!")
         else:
-            fw = open("index-"+str(count)+".html",'w')
-            fw.write(htmlmodel.htmlmodel(jsonName="d3export-"+str(count)+".json"))
-            pageName="index-"+str(count)+".html"
+            fw = open(fileName+"-"+str(count)+".html",'w')
+            fw.write(htmlmodel.htmlmodel(jsonName=fileName+"-"+str(count)+".json"))
+            pageName=fileName+"-"+str(count)+".html"
             if Comments:
-                print("File: index-"+str(count)+".html generated!")
+                print("File: "+fileName+"-"+str(count)+".html generated!")
         fw.close()
         
         
@@ -2945,13 +2945,13 @@ class Digraph(object):
         d3export["pairwiseComparisions"] = json.dumps(pairwise)
 
         if(count==0):
-            fw = open("d3export.json","w")
+            fw = open(fileName+".json","w")
             if Comments:
-                print("File: d3export.json saved!") 
+                print("File: "+fileName+".json saved!") 
         else:
-            fw = open("d3export-"+str(count)+".json","w")
+            fw = open(fileName+"-"+str(count)+".json","w")
             if Comments:
-                print("File: d3export-"+str(count)+".json saved!") 
+                print("File:"+fileName+"-"+str(count)+".json saved!") 
         fw.write(json.dumps(d3export))
         fw.close()
         if Comments:
