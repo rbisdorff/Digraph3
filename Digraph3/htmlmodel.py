@@ -89,6 +89,7 @@ graph
         <ul>
             <li id="new"><img alt="New" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/new.png" height="15" width="15" /> New</li>
             <li id="add"><img alt="Add" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/add.png" height="15" width="15" /> Add Node</li>
+            <li id="hide"><img alt="Hide" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/hide.png" height="15" width="15" /> Hide Undefined</li>
             <li id="reset"><img alt="Reset" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/reset.png" height="15" width="15" /> Reset</li>
             <li id="import"><img alt="Import" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/folder-open.png" height="15" width="15" /> Import</li>
             <li id="export"><img alt="Export" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/save.png" height="15" width="15" /> Export</li>
@@ -312,6 +313,7 @@ graph
 </body>
 </html>
 
+
 '''
 def javascript():
     return '''
@@ -340,15 +342,36 @@ def javascript():
 
 /*
 *
-* Declaration of some usefull global variables
+* Declaration of some usefull global variables:
+*
+* width = window width;
+* height = window height;
+* xmlinput= used to save the xml input string before it is parsed;
+* $xml = 
+* xmlDoc = contains the parsed XML Document as returned by JQuery's parseXML() function;
+* pairwise= contains the JSON array of pairwise comparisions in HTML format;
+* json = contains the json array of data, the JSON array is of the D3 Data format;
+* labels= global variable of all source label elements on an edge;
+* labelt = global variable for the set of all the target label elements in the dom;
+* path = global variable for the set of all path elements in the dom;
+* force = global varibale for the D3 force function;
+* freeze = value set to true if graph is frozen, false otherwise;
+* svg = global variable for the svg element in the Dom;
+* actions = global array containing all the nodes of a graph;
+* relation = global variable containing all the raltions of a graph;
+* valuationdomain = global variable containing the valuationdomain values valuationdomain["Min"], valuationdomain["Med"], valuationdomain["Max"];
+* category = global variable containing the type of a graph, outranking or general;
+* current = global variable to store the last selected node;
+* type_label = variable used for the type label on the top right corner of the graph;
 *
 */
-var width,height,xmlinput="",$xml,xmlDoc,pairwise={},json,labels,labelt,path,force,svg,actions={},relation={},valuationdomain={},tooltip,category='',current,type;
+var width,height,xmlinput="",$xml,xmlDoc,pairwise={},json,labels,labelt,path,force,freeze=false,svg,actions={},relation={},valuationdomain={},category='',current,type_label,graph_type;
 
 /*
 *
 * Loaded only on the first load of the web page in order to allow automatic loading of the d3export.json with the same ticker number.
-*
+* 
+* start = name of the default file that the graph should load;
 */
 function first_load(start) {
     initialize();
@@ -367,10 +390,10 @@ function first_load(start) {
               relation = result[1];
               category = result[2];
                if(Object.keys(pairwise).length>0) {
-                 type.text("Mode: 'outranking'")
+                 type_label.text("Mode: 'outranking'")
                }
                else {
-                  type.text("Mode : 'general'")
+                  type_label.text("Mode : 'general'")
                 }
   load()
   }
@@ -387,9 +410,9 @@ function first_load(start) {
 function initialize() {
   console.log("Initialization of our empty standart canvas.")
 
-  width=900, height=700
-  d3.selectAll("svg").remove();
-  svg = d3.select("#graph").append("svg")
+  width=$(window).width(), height=$(window).height(); //set width and height to the window size.;
+  d3.selectAll("svg").remove(); // remove the current svg element (together with all the edges and nodes);
+  svg = d3.select("#graph").append("svg") //append a new SVG element to the div tah with id="graph";
       .attr("width", width)
       .attr("height", height);
 
@@ -481,6 +504,18 @@ function initialize() {
   rect = svg.append("rect")
   .on("click",unfocusNode)
   .on("contextmenu", context_main)
+  .on("dblclick",function() 
+    {
+      if(freeze==true)
+      {
+        force.resume();
+        freeze=false;
+      } 
+      else {
+        force.stop();
+        freeze=true;
+      }
+    })
   .attr("width", "100%")
   .attr("height", "100%")
   .attr("fill", "#FAFAD2");
@@ -501,12 +536,12 @@ function initialize() {
   force = d3.layout.force()
     .size([width, height])
     .linkDistance(250)
-    .linkStrength(0.2)
+    .linkStrength(0.1)
     .charge(-3500)
     .gravity(0.5)
     .start();
 
-  type=svg.append("text")
+  type_label=svg.append("text")
     .attr("x", width-120)
     .attr("y", 20)
     .text(function() { return Object.keys(pairwise).length <= 0 ?  "Mode: 'general'" : "Mode: 'outranking'"});
@@ -537,15 +572,17 @@ function initialize() {
   * Load function called to load a graph or rebuild a graph.
   * Attention: 
   */  
-  function load() {
+  function load(hide) {
+    hide = hide || false;
+    freeze=false;
     initialize();
     json={"nodes": [],"links":[]};
-    json = buildD3Json(actions,relation);
+    json = buildD3Json(actions,relation,hide);
     force
         .nodes(json.nodes)
         .links(json.links);
     
-    start(json)
+    start(json);
 
   }
 
@@ -621,9 +658,7 @@ function initialize() {
           .style("fill", "#F6FBFF");
       svg.selectAll(".link")
           .transition(500)
-          .style("stroke-opacity", 1 )
-          .transition(500)
-          .style("opacity", 1 )
+          .style("opacity", 0.5 )
           .style("cursor", "pointer");
        labels
           .transition(500)
@@ -664,7 +699,7 @@ function initialize() {
                connectNode(d);
               }
               else 
-                alert("Connecting not allowed.")
+                alert("Connecting not allowed.");
               
             },
             'deleteNode':function(t) {
@@ -672,12 +707,12 @@ function initialize() {
                 delete actions[d.name];
                 delete relation[d.name];
                 for(var x in relation) {
-                  delete relation[x][d.name]
+                  delete relation[x][d.name];
                 }
               load();
               }
               else 
-                alert("Deleting not allowed.")
+                alert("Deleting not allowed.");
             }
         }
     });
@@ -712,17 +747,17 @@ function initialize() {
                 editEdge(d);
               }
               else 
-                alert("Editing not allowed.")
+                alert("Editing not allowed.");
             },
             'deleteEdge':function(t) {
               if(!(Object.keys(pairwise).length>0)) {
                 delete relation[d.source.name][d.target.name];
                 delete relation[d.target.name][d.source.name];
-                force.stop()
+                force.stop();
                 load();
               }
               else 
-                alert("Deleting not allowed.")
+                alert("Deleting not allowed.");
             }
 
         }
@@ -747,14 +782,14 @@ function initialize() {
         },
         bindings:
         {
-            'new': function(evt) {
+            'new': function(t) {
                 
-                $('#newModal').modal('show');  
-                    
-                        
-                
+                $('#newModal').modal('show');            
             },
-            'import': function(evt) {
+            'hide':function(t) {
+              load(hide=true);
+            },
+            'import': function(t) {
                 importJSON();
 
             },
@@ -772,14 +807,14 @@ function initialize() {
 
                        if (id!=null) {
                   x =  id ;
-                  relation[x]={}
+                  relation[x]={};
                   relation[x][x]= Number(valuationdomain["Med"]);  
-                  actions[x] = {"name": "nameless","comment":"none"}
+                  actions[x] = {"name": "nameless","comment":"none"};
                   };
                   load();
               }
               else
-                alert("Adding nodes not allowed.")
+                alert("Adding nodes not allowed.");
             } 
             }
         
@@ -794,12 +829,12 @@ function initialize() {
   function newGraph() {
                   var min = $('#min').attr("value"), max=$('#max').attr("value");
                   if((isNaN(String(min)) || isNaN(String(max))) || !(min < max)) {
-                    alert("Please enter numeric values and Min < Max !")
+                    alert("Please enter numeric values and Min < Max !");
                   }
                   else {
                     pairwise={};
                     actions={};
-                    relation={}
+                    relation={};
                     xmlDoc=null;
                     xmlinput="";
                     initialize();
@@ -828,8 +863,10 @@ function initialize() {
   var draging=false;
   var dragstart = function dragstart(d,i) {
         if(d3.event.sourceEvent.which==1){
-        draging=true
-        force.stop();}
+        draging=true;
+        force.stop();
+        freeze=true;
+      }
     }
 
   /*
@@ -838,10 +875,10 @@ function initialize() {
   */
   var dragmove = function dragmove(d,i) {
         if(draging){
-        d.px += d3.event.dx
-        d.py += d3.event.dy
-        d.x += d3.event.dx
-        d.y += d3.event.dy
+        d.px += d3.event.dx;
+        d.py += d3.event.dy;
+        d.x += d3.event.dx;
+        d.y += d3.event.dy;
         tick();
         } 
     }
@@ -853,10 +890,10 @@ function initialize() {
   */
   var dragend = function dragend(d,i) {
         if(d3.event.sourceEvent.which==1){
-        d.fixed = true 
-        tick()
-        force.resume()
-        draging=false;}
+        d.fixed = true; 
+        tick();
+        draging=false;
+        }
     }
 
 
@@ -887,7 +924,9 @@ function initialize() {
     var options = $("#selectNode");
     $("#selectNode").empty();
     for(var x in actions){
-     if(x != d.name) options.append($("<option />").val(x).text(x));    };
+     if(x != d.name) 
+      options.append($("<option />").val(x).text(x));    
+    };
     current=d;
     $('#connNodeModal').modal('show');
    
@@ -899,9 +938,9 @@ function initialize() {
   function saveConnectNode() {
     $('#connNodeModal').modal('hide');
     var e = document.getElementById("selectNode");
-    var neighbour = e.options[e.selectedIndex].text
+    var neighbour = e.options[e.selectedIndex].text;
     relation[current.name][neighbour] = valuationdomain["Max"] +1;
-    relation[neighbour][current.name] = valuationdomain["Max"]+1
+    relation[neighbour][current.name] = valuationdomain["Max"]+1;
     load();
   }
 
@@ -944,7 +983,7 @@ function initialize() {
       $('#target').html((pairwise[d.target.name][d.source.name]).toString());
     }
     else {
-      alert("pairwiseComparision not possible with this graph.")
+      alert("pairwiseComparision not possible with this graph.");
     }
   }
 
@@ -960,7 +999,7 @@ function initialize() {
       load();
     }
     else {
-      alert("Invert not possible.")
+      alert("Invert not possible.");
     }
   }
 
@@ -989,13 +1028,12 @@ function editEdge(d) {
   * Save the edited edge and reload the graph.
   */
   function saveEdge() {
-    
     if($('#nodeSource').attr("value")>=valuationdomain["Min"] && $('#nodeSource').attr("value") <= valuationdomain["Max"] && $('#nodeTarget').attr("value")>=valuationdomain["Min"] && $('#nodeTarget').attr("value") <= valuationdomain["Max"]){
     $('#editEdgeModal').modal('hide');
     relation[$('#nodeSource').attr("name")][$('#nodeTarget').attr("name")] =  ((Math.floor(Number($('#nodeSource').attr("value"))*100))/100).toFixed(2);
     relation[$('#nodeTarget').attr("name")][$('#nodeSource').attr("name")] =  ((Math.floor(Number($('#nodeTarget').attr("value"))*100))/100).toFixed(2);
     }
-    else alert("Error: Value must be between " + valuationdomain["Min"] + " and " + valuationdomain["Max"] +" !")
+    else alert("Error: Value must be between " + valuationdomain["Min"] + " and " + valuationdomain["Max"] +" !");
     load();
   }
 
@@ -1022,8 +1060,8 @@ function editEdge(d) {
           var blob = file.slice(start, stop + 1);
           //readAsBinaryString() not in specifications.
           reader.readAsText(blob); 
-          actions={}
-          relation={}
+          actions={};
+          relation={};
           reader.onloadend = function(evt) { 
               try{d3json=$.parseJSON(evt.target.result); 
               xmlinput = d3json["xmcda2"];
@@ -1035,9 +1073,9 @@ function editEdge(d) {
               load();
               var x = $('#upModalLabel').modal('hide');
                if(Object.keys(pairwise).length>0) {
-                 type.text("Mode: 'outranking'")}
+                 type_label.text("Mode: 'outranking'");}
                else {
-                  type.text("Mode : 'general'")
+                  type_label.text("Mode : 'general'");
                 }}
               catch(err) {
                 alert("Unexpected format.");
@@ -1064,13 +1102,20 @@ function editEdge(d) {
       console.log("Parsing XMCDA2 File.")
       xmlDoc = $.parseXML(xmlinput);
       $xml = $( xmlDoc );
-      //console.log($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').children().text());
       var actions={},category;
 
       valuationdomain["Min"] = Number($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('minimum').children().text());
       valuationdomain["Max"] = Number($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').children().text());
       valuationdomain["Med"]  = Number(valuationdomain["Min"]  + ((valuationdomain["Max"]  - valuationdomain["Min"] )/2));
       
+      fileName = $xml.find("projectReference").attr("id");
+      if(fileName.indexOf("outranking") > -1){
+        graph_type = "outranking";
+      }
+      else {
+        graph_type= "general"
+      }
+
       $xml.find("alternatives").find('alternative').each(
         function() { 
             var id = this.getAttribute('id');
@@ -1083,7 +1128,7 @@ function editEdge(d) {
         });
 
       for(var x in actions) {
-        relation[x] = {}
+        relation[x] = {};
       }
       $xml.find('alternativesComparisons').find('pairs').find('pair').each(
         function() {
@@ -1110,7 +1155,7 @@ function editEdge(d) {
   * Build a D3 Json file in order to initialize the graph with nodes and links.
   *
   */
-  function buildD3Json(actions,relation) {
+  function buildD3Json(actions,relation,hide) {
    console.log("Building D3 Json for graph visualization.")
    var dataset = {"nodes":[],"links":[]}
    var actionkeys=[];
@@ -1130,35 +1175,35 @@ function editEdge(d) {
       for( var i=0;  i<actionkeys.length; i++ ){
             for( var j=i+1;  j<actionkeys.length; j++ ){
               /* Arrow types:
+              r(a,b) < Med & r(b,a) < Med  a    b : -1
               r(a,b) > MAX & r(b,a) > MAX  a -- b : -1 initialization
               r(a,b) > Med & r(b,a) < Med  a  --> b :0 done
               r(a,b) < Med & r(b,a) > Med  a  <-- b :1 done
               r(a,b) > Med & r(b,a) > Med  a <--> b :2 done
               r(a,b) > Med & r(b,a) = Med  a o--> b :3 done
               r(a,b) = Med & r(b,a) > Med  a <--o b :4 done
-              r(a,b) < Med & r(b,a) < Med  a      b : nope
               r(a,b) < Med & r(b,a) = Med  a o..  b :5 done 
               r(a,b) = Med & r(b,a) < Med  a  ..o b :6 done
               r(a,b) = Med = r(b,a)        a o..o b :7 done
               */
                 if(relation[actionkeys[i]][actionkeys[j]] > Max && relation[actionkeys[j]][actionkeys[i]] > Max)
-                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":-1, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type": -1, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
                 else if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] > Med)
-                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":2, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type": 2, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
                 else if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] == Med)
-                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":3, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type": 3, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
                 else if(relation[actionkeys[i]][actionkeys[j]] == Med && relation[actionkeys[j]][actionkeys[i]] > Med)
-                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":4, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type": 4, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
                 else if(relation[actionkeys[i]][actionkeys[j]] == Med && relation[actionkeys[j]][actionkeys[i]] == Med)
-                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":7, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                  hide ? dataset:  dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type": 7, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
                 else if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] <  Med)
-                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":0, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type": 0, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
                 else if(relation[actionkeys[i]][actionkeys[j]] == Med && relation[actionkeys[j]][actionkeys[i]] <  Med)
-                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":6, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                  hide ? dataset: dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type": 6, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
                 else if(relation[actionkeys[i]][actionkeys[j]] < Med && relation[actionkeys[j]][actionkeys[i]] >  Med)
-                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":1, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type": 1, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
                 else if(relation[actionkeys[i]][actionkeys[j]] < Med && relation[actionkeys[j]][actionkeys[i]] ==  Med)
-                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type":5, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                  hide ? dataset: dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type": 5, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
                 }
     }}
     
@@ -1182,10 +1227,10 @@ function editEdge(d) {
       var xmcda2File = new Blob([new XMLSerializer().serializeToString(xmlDoc)], {type: contentType});
 
       var a = document.createElement('a');
-      a.download = 'data.xmcda2';
+      a.download = 'general_digraph.xmcda2';
       a.href = window.URL.createObjectURL(xmcda2File);
       a.id="exportt";
-      a.textContent = 'Download XMCDA2';
+      a.textContent = 'Download XMCDA2 file';
 
       a.dataset.downloadurl = [contentType, a.download, a.href].join(':');
       $(a).appendTo("#graph")[0].click();
@@ -1204,7 +1249,7 @@ function editEdge(d) {
   *
   */
   function buildXMCDA2(fileName,name,relationName,relationType,category,subcategory,author,reference,valuationType){
-        fileName= fileName || "temp";
+        fileName= fileName || "general_digraph";
         name=name||"general";
         relationName=relationName|| 'R';
         relationType=relationType||'binary';
@@ -1213,26 +1258,26 @@ function editEdge(d) {
         author= author||"digraphs Module RB";
         reference=reference||'saved from Javascript';
         valuationType=valuationType||'standard';
-        var xmcda= '<?xml version="1.0" encoding="UTF-8"?>\\n'
-        xmcda = xmcda + '<?xml-stylesheet type="text/xsl" href="xmcdaXSL.xsl"?>\\n' 
-        xmcda = xmcda +'<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2009/UMCDA-2.0.0 file:../XMCDA-2.0.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0">\\n'
+        var xmcda= '<?xml version="1.0" encoding="UTF-8"?>'
+        xmcda = xmcda + '<?xml-stylesheet type="text/xsl" href="xmcdaXSL.xsl"?>' 
+        xmcda = xmcda +'<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2009/UMCDA-2.0.0 file:../XMCDA-2.0.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0">'
         // write description
-        xmcda = xmcda + '<projectReference id="'+fileName+'" name="'+name+'">\\n' ;
-        xmcda=xmcda+'<title>Stored Digraph in XMCDA-2.0 format</title>\\n';
-        xmcda=xmcda+'<id>'+fileName+'</id>\\n';
-        xmcda=xmcda+'<name>'+name+'</name>\\n';
-        xmcda=xmcda+('<type>root</type>\\n');
-        xmcda=xmcda+('<user>'+author+'</user>\\n');
-        xmcda=xmcda+'<version>'+reference+'</version>\\n';
-        xmcda=xmcda+('</projectReference>\\n');
+        xmcda = xmcda + '<projectReference id="'+fileName+'" name="'+name+'">' ;
+        xmcda=xmcda+'<title>Stored Digraph in XMCDA-2.0 format</title>';
+        xmcda=xmcda+'<id>'+fileName+'</id>';
+        xmcda=xmcda+'<name>'+name+'</name>';
+        xmcda=xmcda+('<type>root</type>');
+        xmcda=xmcda+('<user>'+author+'</user>');
+        xmcda=xmcda+'<version>'+reference+'</version>';
+        xmcda=xmcda+('</projectReference>');
         //write nodes
         var na = actions.length;
-        xmcda=xmcda+('<alternatives mcdaConcept="Digraph nodes">\\n');
-        xmcda=xmcda+('<description>\\n');
-        xmcda=xmcda+('<title>Nodes of the digraph</title>\\n');
-        xmcda=xmcda+('<type>alternatives</type>\\n');
-        xmcda=xmcda+('<comment>Set of nodes of the digraph.</comment>\\n');
-        xmcda=xmcda+('</description>\\n');
+        xmcda=xmcda+('<alternatives mcdaConcept="Digraph nodes">');
+        xmcda=xmcda+('<description>');
+        xmcda=xmcda+('<title>Nodes of the digraph</title>');
+        xmcda=xmcda+('<type>alternatives</type>');
+        xmcda=xmcda+('<comment>Set of nodes of the digraph.</comment>');
+        xmcda=xmcda+('</description>');
         var alternativeName="";
         for(var x in actions){
             try{
@@ -1241,82 +1286,82 @@ function editEdge(d) {
             catch(err){
                 alternativeName = 'nameless';
             }
-            xmcda=xmcda+('<alternative id="'+x+'" name="'+alternativeName+'">\\n');
-            xmcda=xmcda+('<description>\\n')
-            xmcda=xmcda+('<comment>')
+            xmcda=xmcda+('<alternative id="'+x+'" name="'+alternativeName+'">');
+            xmcda=xmcda+('<description>');
+            xmcda=xmcda+('<comment>');
             try{
-                xmcda=xmcda+(actions[x]['comment'])}
+                xmcda=xmcda+(actions[x]['comment']);}
             catch(e){
-                fo.write('No comment')
+                xmcda=xmcda+('No comment');
             }
-            xmcda=xmcda+('</comment>\\n')
-            xmcda=xmcda+('</description>\\n')
-            xmcda=xmcda+('<type>real</type>\\n')
-            xmcda=xmcda+('<active>true</active>\\n')
-            xmcda=xmcda+('<reference>false</reference>\\n')
-            xmcda=xmcda+('</alternative>\\n')
+            xmcda=xmcda+('</comment>');
+            xmcda=xmcda+('</description>');
+            xmcda=xmcda+('<type>real</type>');
+            xmcda=xmcda+('<active>true</active>');
+            xmcda=xmcda+('<reference>false</reference>');
+            xmcda=xmcda+('</alternative>');
         }
-        xmcda=xmcda+('</alternatives>\\n')
+        xmcda=xmcda+('</alternatives>');
         //write valued binary Relation
-        xmcda=xmcda+('<alternativesComparisons id="1" name="'+relationName+'">\\n')
-        xmcda=xmcda+('<description>\\n')
-        xmcda=xmcda+('<title>Randomly Valued Binary Relation</title>\\n')
-        xmcda=xmcda+('<comment>'+category+' '+subcategory+' %s Digraph</comment>\\n')
-        xmcda=xmcda+('</description>\\n')
-        xmcda=xmcda+('<valuation name="valuationDomain">\\n')
-        xmcda=xmcda+('<description>\\n')
-        xmcda=xmcda+('<subTitle>Valuation Domain</subTitle>\\n')
-        xmcda=xmcda+('</description>\\n')
-        xmcda=xmcda+('<quantitative>')
+        xmcda=xmcda+('<alternativesComparisons id="1" name="'+relationName+'">');
+        xmcda=xmcda+('<description>');
+        xmcda=xmcda+('<title>Randomly Valued Binary Relation</title>');
+        xmcda=xmcda+('<comment>'+category+' '+subcategory+' %s Digraph</comment>');
+        xmcda=xmcda+('</description>');
+        xmcda=xmcda+('<valuation name="valuationDomain">');
+        xmcda=xmcda+('<description>');
+        xmcda=xmcda+('<subTitle>Valuation Domain</subTitle>');
+        xmcda=xmcda+('</description>');
+        xmcda=xmcda+('<quantitative>');
         var Max = valuationdomain['Max'],
         Min = valuationdomain['Min'];
         if (valuationType === 'integer') {
-            xmcda=xmcda+('<minimum><integer>'+Math.floor(Min)+'</integer></minimum>\\n')
-            xmcda=xmcda+('<maximum><integer>'+Math.floor(Max)+'</integer></maximum>\\n')
+            xmcda=xmcda+('<minimum><integer>'+Math.floor(Min)+'</integer></minimum>');
+            xmcda=xmcda+('<maximum><integer>'+Math.floor(Max)+'</integer></maximum>');
           }
         else{
-            xmcda=xmcda+('<minimum><real>')
-            xmcda=xmcda+(Min)
-            xmcda=xmcda+('</real></minimum>\\n')
-            xmcda=xmcda+('<maximum><real>')
-            xmcda=xmcda+(Max)
-            xmcda=xmcda+('</real></maximum>\\n')
+            xmcda=xmcda+('<minimum><real>');
+            xmcda=xmcda+(Min);
+            xmcda=xmcda+('</real></minimum>');
+            xmcda=xmcda+('<maximum><real>');
+            xmcda=xmcda+(Max);
+            xmcda=xmcda+('</real></maximum>');
           }
-        xmcda=xmcda+('</quantitative>\\n')
-        xmcda=xmcda+('</valuation>\\n')
-        xmcda=xmcda+('<comparisonType>'+relationName+'</comparisonType>\\n')
-        xmcda=xmcda+('<pairs>\\n')
-        xmcda=xmcda+('<description>\\n')
-        xmcda=xmcda+('<subTitle>Valued Adjacency Table</subTitle>\\n')
+        xmcda=xmcda+('</quantitative>');
+        xmcda=xmcda+('</valuation>');
+        xmcda=xmcda+('<comparisonType>'+relationName+'</comparisonType>');
+        xmcda=xmcda+('<pairs>');
+        xmcda=xmcda+('<description>');
+        xmcda=xmcda+('<subTitle>Valued Adjacency Table</subTitle>');
 
-        xmcda=xmcda+('<comment>'+category+' ' + subcategory+ ' Digraph</comment>\\n' )
-        xmcda=xmcda+('</description>\\n')
+        xmcda=xmcda+('<comment>'+category+' ' + subcategory+ ' Digraph</comment>' );
+        xmcda=xmcda+('</description>');
         for(var x in actions){
             for(var y in actions){
-                xmcda=xmcda+('<pair>\\n')
-                xmcda=xmcda+('<initial><alternativeID>')
-                xmcda=xmcda+x
-                xmcda=xmcda+('</alternativeID></initial>\\n')
-                xmcda=xmcda+('<terminal><alternativeID>')
-                xmcda=xmcda+y
-                xmcda=xmcda+('</alternativeID></terminal>\\n')
-                xmcda=xmcda+('<value><real>')
+                xmcda=xmcda+('<pair>');
+                xmcda=xmcda+('<initial><alternativeID>');
+                xmcda=xmcda+x;
+                xmcda=xmcda+('</alternativeID></initial>');
+                xmcda=xmcda+('<terminal><alternativeID>');
+                xmcda=xmcda+y;
+                xmcda=xmcda+('</alternativeID></terminal>');
+                xmcda=xmcda+('<value><real>');
                 if(relation[x][y] != null)
                 {
                 xmcda=xmcda + relation[x][y];}
                 else { xmcda=xmcda + Number(valuationdomain["Med"]);}
-                xmcda=xmcda+('</real></value>\\n')
-                xmcda=xmcda+('</pair>\\n')
+                xmcda=xmcda+('</real></value>');
+                xmcda=xmcda+('</pair>');
             }
         }
         
-        xmcda=xmcda+('</pairs>\\n')
-        xmcda=xmcda+('</alternativesComparisons>\\n')
-        xmcda=xmcda+('</xmcda:XMCDA>\\n')
+        xmcda=xmcda+('</pairs>');
+        xmcda=xmcda+('</alternativesComparisons>');
+        xmcda=xmcda+('</xmcda:XMCDA>');
        
 
   xmlinput=xmcda;
-  parseXMCDA2(xmlinput)
+  parseXMCDA2(xmlinput);
   return xmlinput;
   }
 
@@ -1336,7 +1381,7 @@ function editEdge(d) {
     .attr("class", function(d) { return "link " + d.type; })
     .attr("class", "link")
     .attr("stroke", function(d){if(d.type == -1 ){return "red";} else {return "#000";}} )
-    .style("opacity",1)
+    .style("opacity",0.5)
     .attr("stroke-dasharray", function(d) { if(d.type == 5 || d.type ==6|| d.type ==7) return "3,3";})
     .attr("marker-end", 
       function(d) { 
@@ -1429,12 +1474,13 @@ function editEdge(d) {
     }
 
 
+
   force.on("tick",tick)
    .start();
   
    
   }
-  
+    
 '''
 
 def d3export():
