@@ -160,6 +160,32 @@ graph
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
 
+ <!-- Add Node Modal -->
+  <div class="modal fade" id="addNodeModal" role="dialog" aria-labelledby="addNodeModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Add Node</h4>
+        </div>
+        <div class="modal-body">
+          <!-- INPUT -->
+  
+  <div class="form-group"> 
+  Enter a valid node id: <input type="text" value="" placeholder="ID" class="form-control" maxlength="10" required name="nodeAddId" id="nodeAddId"> 
+  </div> 
+  </div>
+  
+  <div class="modal-footer">
+   <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+   <button class="btn btn-primary" type='submit' name='save' onClick="addNode()"> Save</button>
+  </div>
+  </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+
   <!-- New Modal -->
   <div class="modal fade" id="newModal" role="dialog" aria-labelledby="newModal" aria-hidden="true">
     <div class="modal-dialog">
@@ -313,7 +339,6 @@ graph
 </body>
 </html>
 
-
 '''
 def javascript():
     return '''
@@ -363,9 +388,10 @@ def javascript():
 * category = global variable containing the type of a graph, outranking or general;
 * current = global variable to store the last selected node;
 * type_label = variable used for the type label on the top right corner of the graph;
+* graph_type = the variable used to describe the graph type and decide for the possible actions. choice: general, outranking
 *
 */
-var width,height,xmlinput="",$xml,xmlDoc,pairwise={},json,labels,labelt,path,force,freeze=false,svg,actions={},relation={},valuationdomain={},category='',current,type_label,graph_type;
+var width,height,xmlinput="",$xml,xmlDoc,pairwise={},json,labels,labelt,path,force,freeze=false,svg,actions={},relation={},valuationdomain={},category='',current,type_label,graph_type="general";
 
 /*
 *
@@ -389,12 +415,10 @@ function first_load(start) {
               actions = result[0];
               relation = result[1];
               category = result[2];
-               if(Object.keys(pairwise).length>0) {
-                 type_label.text("Mode: 'outranking'")
-               }
-               else {
-                  type_label.text("Mode : 'general'")
-                }
+              type_label.text("Mode: '"+graph_type+"'")
+               
+               
+                
   load()
   }
 });
@@ -409,7 +433,6 @@ function first_load(start) {
 */
 function initialize() {
   console.log("Initialization of our empty standart canvas.")
-
   width=$(window).width(), height=$(window).height(); //set width and height to the window size.;
   d3.selectAll("svg").remove(); // remove the current svg element (together with all the edges and nodes);
   svg = d3.select("#graph").append("svg") //append a new SVG element to the div tah with id="graph";
@@ -535,7 +558,7 @@ function initialize() {
   */
   force = d3.layout.force()
     .size([width, height])
-    .linkDistance(250)
+    .linkDistance(200)
     .linkStrength(0.1)
     .charge(-3500)
     .gravity(0.5)
@@ -544,7 +567,7 @@ function initialize() {
   type_label=svg.append("text")
     .attr("x", width-120)
     .attr("y", 20)
-    .text(function() { return Object.keys(pairwise).length <= 0 ?  "Mode: 'general'" : "Mode: 'outranking'"});
+    .text("Mode: '"+graph_type+"'");
 
   svg.append("text")
     .attr("x", width-340)
@@ -561,7 +584,6 @@ function initialize() {
     .attr("y",height-35);
 
     
-
     window.onbeforeunload = function(){
     return "Make sure to save your graph locally.";
   }; 
@@ -695,7 +717,7 @@ function initialize() {
 
             },
             'connectNode':function(t) {
-                if(!(Object.keys(pairwise).length>0)) {
+                if(graph_type ==="general") {
                connectNode(d);
               }
               else 
@@ -703,7 +725,7 @@ function initialize() {
               
             },
             'deleteNode':function(t) {
-              if(!(Object.keys(pairwise).length>0)) {
+              if(graph_type ==="general") {
                 delete actions[d.name];
                 delete relation[d.name];
                 for(var x in relation) {
@@ -743,14 +765,14 @@ function initialize() {
                 invertEdge(d);
             },
             'editEdge':function(t) {
-              if(!(Object.keys(pairwise).length>0)) {
+              if(graph_type ==="general") {
                 editEdge(d);
               }
               else 
                 alert("Editing not allowed.");
             },
             'deleteEdge':function(t) {
-              if(!(Object.keys(pairwise).length>0)) {
+              if(graph_type ==="general") {
                 delete relation[d.source.name][d.target.name];
                 delete relation[d.target.name][d.source.name];
                 force.stop();
@@ -802,24 +824,31 @@ function initialize() {
                   load();
               }},
               'add': function(t) {
-                if(!(Object.keys(pairwise).length>0)) {
-                  var id = prompt("Please enter a valid id for the node.");
-
-                       if (id!=null) {
-                  x =  id ;
-                  relation[x]={};
-                  relation[x][x]= Number(valuationdomain["Med"]);  
-                  actions[x] = {"name": "nameless","comment":"none"};
-                  };
-                  load();
-              }
-              else
-                alert("Adding nodes not allowed.");
-            } 
+                if(graph_type==="general") {
+                    $("#nodeAddId").attr("value","");
+                    $("#addNodeModal").modal("show");
+                  } else {
+                    alert("Adding nodes not allowed.");
+                  }
             }
-        
+        }
     });
     d3.event.preventDefault();
+  }
+
+  function addNode() {
+    var nodeid = $("#nodeAddId").attr("value");
+    if(nodeid ==="") {
+      alert("Invalid node id!")
+    }
+    else
+    {
+      relation[nodeid]={};
+      relation[nodeid][nodeid]= Number(valuationdomain["Med"]);  
+      actions[nodeid] = {"name": "nameless","comment":"none"};
+      load();
+      $("#addNodeModal").modal("hide");
+    }
   }
 
   /*
@@ -842,6 +871,8 @@ function initialize() {
                     valuationdomain["Max"] = Number(max);
                     valuationdomain["Med"]  = valuationdomain["Min"]  + ((valuationdomain["Max"]  - valuationdomain["Min"] )/Number(2.0));
                     $('#newModal').modal('hide');  
+                    graph_type="general";
+                    type_label.text("Mode : '"+graph_type+"'");
                   }
 
   }
@@ -969,6 +1000,7 @@ function initialize() {
     $xml.find("alternatives").find('alternative[id="'+$("#nodeId").attr("value")+'"]').find('description').text(comment);
     $xml.find("alternatives").find('alternative[id="'+$("#nodeId").attr("value")+'"]').attr('name',fullName);
     load();
+    
   }
 
   /*
@@ -1032,9 +1064,9 @@ function editEdge(d) {
     $('#editEdgeModal').modal('hide');
     relation[$('#nodeSource').attr("name")][$('#nodeTarget').attr("name")] =  ((Math.floor(Number($('#nodeSource').attr("value"))*100))/100).toFixed(2);
     relation[$('#nodeTarget').attr("name")][$('#nodeSource').attr("name")] =  ((Math.floor(Number($('#nodeTarget').attr("value"))*100))/100).toFixed(2);
+    load();
     }
     else alert("Error: Value must be between " + valuationdomain["Min"] + " and " + valuationdomain["Max"] +" !");
-    load();
   }
 
   /*
@@ -1044,6 +1076,7 @@ function editEdge(d) {
   */
   function importJSON() {
     console.log("Importing JSON file.")
+    graph_type="general";
     var reader;
       if (window.File && window.FileReader && window.FileList && window.Blob) {
         $('#upModalLabel').modal('show');
@@ -1063,7 +1096,8 @@ function editEdge(d) {
           actions={};
           relation={};
           reader.onloadend = function(evt) { 
-              try{d3json=$.parseJSON(evt.target.result); 
+            try{
+              d3json=$.parseJSON(evt.target.result); 
               xmlinput = d3json["xmcda2"];
               pairwise=$.parseJSON(d3json["pairwiseComparisions"]);
               var result = parseXMCDA2(xmlinput);
@@ -1072,14 +1106,12 @@ function editEdge(d) {
               category = result[2];
               load();
               var x = $('#upModalLabel').modal('hide');
-               if(Object.keys(pairwise).length>0) {
-                 type_label.text("Mode: 'outranking'");}
-               else {
-                  type_label.text("Mode : 'general'");
-                }}
-              catch(err) {
-                alert("Unexpected format.");
-              }
+              type_label.text("Mode: '" + graph_type +"'");
+            }
+               
+            catch(err){
+              alert("Unexpected format.");
+            }
 
               
           };
@@ -1088,7 +1120,7 @@ function editEdge(d) {
           document.getElementById('open').addEventListener('click', handleFileSelect, false);
 
           } else {
-              alert('The File APIs are not fully supported in this browser.');
+            alert('The File APIs are not fully supported in this browser.');
           }
    return ;
   }
@@ -1480,7 +1512,7 @@ function editEdge(d) {
   
    
   }
-    
+  
 '''
 
 def d3export():
