@@ -2903,20 +2903,7 @@ class Digraph(object):
         Med = self.valuationdomain['med']
         
         pageName=""
-        if(count==0):
-            fw = open(fileName+".html","w")
-            fw.write(htmlmodel.htmlmodel(jsonName=fileName+".json"))
-            pageName=fileName+".html"
-            if Comments:
-                print("File: "+fileName+".html generated!")
-        else:
-            fw = open(fileName+"-"+str(count)+".html",'w')
-            fw.write(htmlmodel.htmlmodel(jsonName=fileName+"-"+str(count)+".json"))
-            pageName=fileName+"-"+str(count)+".html"
-            if Comments:
-                print("File: "+fileName+"-"+str(count)+".html generated!")
-        fw.close()
-        
+              
         
         fw = open("digraph3lib.js",'w')
         fw.write(htmlmodel.javascript())
@@ -2952,15 +2939,30 @@ class Digraph(object):
         d3export["pairwiseComparisions"] = json.dumps(pairwise)
 
         if(count==0):
-            fw = open(fileName+".json","w")
+            fw = open(temp+".json","w")
             if Comments:
-                print("File: "+fileName+".json saved!") 
+                print("File: "+temp+".json saved!") 
         else:
-            fw = open(fileName+"-"+str(count)+".json","w")
+            fw = open(temp+"-"+str(count)+".json","w")
             if Comments:
-                print("File:"+fileName+"-"+str(count)+".json saved!") 
+                print("File:"+temp+"-"+str(count)+".json saved!") 
         fw.write(json.dumps(d3export))
         fw.close()
+
+        if(count==0):
+            fw = open(fileName+".html","w")
+            fw.write(htmlmodel.htmlmodel(jsonName=temp+".json"))
+            pageName=fileName+".html"
+            if Comments:
+                print("File: "+fileName+".html generated!")
+        else:
+            fw = open(fileName+"-"+str(count)+".html",'w')
+            fw.write(htmlmodel.htmlmodel(jsonName=temp+"-"+str(count)+".json"))
+            pageName=fileName+"-"+str(count)+".html"
+            if Comments:
+                print("File: "+fileName+"-"+str(count)+".html generated!")
+        fw.close()
+
         if Comments:
             print('*---- export done ---------*')
         return pageName
