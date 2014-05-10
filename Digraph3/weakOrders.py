@@ -780,17 +780,37 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
                                              self.actions[x]['principalColwiseScore'],
                                              self.actions[x]['principalRowwiseScore']))
                 
-    def showWeakOrder(self,rankingByChoosing=None):
+    def showWeakOrder(self, ColwiseOrder=False):
         """
         Specialisation for PrincipalInOutDegreesOrderings.
         """
-        if rankingByChoosing == None:
-            try:
-                rankingByChoosing = self.rankingByChoosing
-            except:
-                rankingByChoosing = self.computeRankingByChoosing(CoDual=False,CppAgrum=False)
+##        if rankingByChoosing == None:
+##            try:
+##                weakOrdering = self.rankingByChoosing
+##            except:
+##                weakOrdering = self.computeRankingByChoosing(CoDual=False,CppAgrum=False)
+        
+        if ColwiseOrder:
+            lps = self.principalColwiseScores
+        else:
+            lps = self.principalRowwiseScores
+        n = len(lps)
+        n2 = n//2
+        ordering = []
+        
+        for i in range(n2):
+            x = lps[i]
+            y = lps[n-i-1]
+            ordering.append( ( (x[0],[x[1]]),(y[0],[y[1]]) ) )
+        if 2*n2 < n:
+            x = lps[n2]
+            ordering.append( ( (x[0],[x[1]]),(x[0],[x[1]]) ) )
 
-        WeakOrder.showWeakOrder(self,rankingByChoosing)
+        weakOrdering = {'result':ordering}
+        #print(weakOrdering)
+
+        WeakOrder.showWeakOrder(self,weakOrdering)
+            
 
     def exportGraphViz(self,fileName=None,direction='ColwiseOrder',\
                        Comments=True,graphType='png',\
@@ -822,7 +842,7 @@ if __name__ == "__main__":
     from time import time
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=10)
+                                 numberOfActions=11)
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
@@ -876,7 +896,7 @@ if __name__ == "__main__":
     rcf1 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
                                           imageType=None,Debug=False,
                                           Threading=False)
-    rcf1.showWeakOrder()
+    rcf1.showWeakOrder(ColwiseOrder=True)
     print('execution time %s: ' % (str ( time()-t0 ) ) )
     t0 = time()
     rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
