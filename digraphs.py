@@ -2830,7 +2830,7 @@ class Digraph(object):
     This function was made during my bachelor thesis at the University of Luxembourg. Gary Cornelius, 2014
     
     *Parameters*:
-        * fileName, name of the generated html file, default = None (index.html);
+        * fileName, name of the generated html file, default = None (graph name as defined in python);
         * Comments, True = default;
 
     The idea was to find a way that allows you to easily get details about certain nodes or edges of a directed graph. 
@@ -2849,10 +2849,12 @@ class Digraph(object):
         * Edges can be added, removed, inverted and edited. But edges cannot be inspected.
         * The pairwiseComparisions key leads to an empty array {}.
 
+    In both cases, undefined edges can be hidden and reappear after a simple reload.(right click - reload)
+
     *The generated files*:
         * d3.js contains the D3 Data-driven Documents source code, containing one small addition that we made in order to be able to easyly import links with a different formatself.
         * digraph3lib.js contains our library. This file contains everything that we need from import of an XMCDA2 file, visualization of the graph to export of the changed graph.
-        * d3export.json, is the JSON file that is exported with the format "{"xmcda2": "some xml","pairwiseComparisions":"{"a01": "some html",...}"}.
+        * d3export.json, usually named after the python graph name followed by a ticket number if the file is already present. It is the JSON file that is exported with the format "{"xmcda2": "some xml","pairwiseComparisions":"{"a01": "some html",...}"}.
 
     *Example 1*:
         #. python3 session:
@@ -2938,8 +2940,13 @@ class Digraph(object):
         except:
             pairwise={}
         d3export={}
-        self.saveXMCDA2(fileName="temp-"+str(count))
-        with open("temp-"+str(count)+".xmcda2","r") as myFile:
+        if(pairwise):
+            temp = "outranking_"+fileName+"-"+str(count)
+            self.saveXMCDA2(fileName=temp)
+        else:
+            temp = "general_"+fileName+"-"+str(count)
+            self.saveXMCDA2(fileName=temp)
+        with open(temp+".xmcda2","r") as myFile:
             data=myFile.read().replace("\n","")
         d3export["xmcda2"]= str(data)
         d3export["pairwiseComparisions"] = json.dumps(pairwise)
