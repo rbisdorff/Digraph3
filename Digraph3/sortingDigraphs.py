@@ -24,7 +24,7 @@ from outrankingDigraphs import *
 from sortingDigraphs import *
 from weakOrders import *
 
-class SortingDigraph(BipolarOutrankingDigraph,WeakOrder,PerformanceTableau):
+class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     """
     Specialisation of the digraphs.BipolarOutrankingDigraph Class
     for Condorcet based multicriteria sorting of alternatives.
@@ -408,6 +408,82 @@ class SortingDigraph(BipolarOutrankingDigraph,WeakOrder,PerformanceTableau):
         if Reverse:
             orderedCategoryKeys.reverse()
         return orderedCategoryKeys
+
+    def computeWeakOrder(self,Descending=True):
+        """
+        Specialisation for QauntilesSortingDigraphs.
+        """
+        from decimal import Decimal
+        cC = self.computeCategoryContents()
+        
+        if Descending:
+            cCKeys = self.orderedCategoryKeys(Reverse = True)
+        else:
+            cCKeys = self.orderedCategoryKeys(Reverse = False)
+        n = len(cC)
+        n2 = n//2
+        ordering = []
+        
+        for i in range(n2):
+            if i == 0:
+                x = cC[cCKeys[i]]
+                y = cC[cCKeys[n-i-1]]
+                setx = set(x)
+                sety = set(y) - setx
+            else:
+                x = list(set(cC[cCKeys[i]]) - (setx | sety))
+                setx = setx | set(x)
+                y = list(set(cC[cCKeys[n-i-1]]) - (setx | sety))
+                sety = sety | set(y)
+            if x != [] or y != []:
+                ordering.append( ( (Decimal(str(i+1)),x),(Decimal(str(n-i)),y) ) )
+        if 2*n2 < n:
+            if n2 == 0:
+                x = cC[cCKeys[n2]]
+            else:
+                x = list(set(cC[cCKeys[n2]]) - (setx | sety))
+            ordering.append( ( (Decimal(str(n2+1)),x),(Decimal(str(n2+1)),x) ) )
+
+        #print(ordering)
+        
+        orderingList = []
+        n = len(ordering)
+        for i in range(n):
+            x = ordering[i][0][1]
+            if x != []:
+                orderingList.append(x)
+        for i in range(n):
+            y = ordering[n-i-1][1][1]
+            if y != []:
+                orderingList.append(y)
+                
+        return orderingList
+
+    def showOrderedRelationTable(self,direction="decreasing"):
+        """
+        Showing the relation table in decreasing (default) or increasing order.
+        """
+        if direction == "decreasing":
+            Descending = True
+        else:
+            Descending = False
+
+        weakOrdering = self.computeWeakOrder(Descending)
+        
+        actionsList = []
+        for eq in weakOrdering:
+            #print(eq)
+            eq.sort()
+            for x in eq:
+                actionsList.append(x)
+        if len(actionsList) != len(self.actions):
+            print('Error !: missing action(s) %s in ordered table.')
+            
+        Digraph.showRelationTable(self,actionsSubset=actionsList,\
+                                relation=self.relation,\
+                                Sorted=False,\
+                                ReflexiveTerms=False)
+
 
     def computeSortingCharacteristics(self, action=None, Comments=False):
         """
@@ -1255,85 +1331,85 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
 
 ##        return orderingList
 
-    def computeWeakOrder(self,Descending=True):
-        """
-        Specialisation for QauntilesSortingDigraphs.
-        """
-        from decimal import Decimal
-        cC = self.computeCategoryContents()
-        
-        if Descending:
-            cCKeys = self.orderedCategoryKeys(Reverse = True)
-        else:
-            cCKeys = self.orderedCategoryKeys(Reverse = False)
-        n = len(cC)
-        n2 = n//2
-        ordering = []
-        
-        for i in range(n2):
-            if i == 0:
-                x = cC[cCKeys[i]]
-                y = cC[cCKeys[n-i-1]]
-                setx = set(x)
-                sety = set(y) - setx
-            else:
-                x = list(set(cC[cCKeys[i]]) - (setx | sety))
-                setx = setx | set(x)
-                y = list(set(cC[cCKeys[n-i-1]]) - (setx | sety))
-                sety = sety | set(y)
-            if x != [] or y != []:
-                ordering.append( ( (Decimal(str(i+1)),x),(Decimal(str(n-i)),y) ) )
-        if 2*n2 < n:
-            if n2 == 0:
-                x = cC[cCKeys[n2]]
-            else:
-                x = list(set(cC[cCKeys[n2]]) - (setx | sety))
-            ordering.append( ( (Decimal(str(n2+1)),x),(Decimal(str(n2+1)),x) ) )
-
-        #print(ordering)
-        
-        orderingList = []
-        n = len(ordering)
-        for i in range(n):
-            x = ordering[i][0][1]
-            if x != []:
-                orderingList.append(x)
-        for i in range(n):
-            y = ordering[n-i-1][1][1]
-            if y != []:
-                orderingList.append(y)
-##            
+##    def computeWeakOrder(self,Descending=True):
+##        """
+##        Specialisation for QauntilesSortingDigraphs.
+##        """
+##        from decimal import Decimal
+##        cC = self.computeCategoryContents()
 ##        
-##        weakOrdering = {'result':ordering}
+##        if Descending:
+##            cCKeys = self.orderedCategoryKeys(Reverse = True)
+##        else:
+##            cCKeys = self.orderedCategoryKeys(Reverse = False)
+##        n = len(cC)
+##        n2 = n//2
+##        ordering = []
+##        
+##        for i in range(n2):
+##            if i == 0:
+##                x = cC[cCKeys[i]]
+##                y = cC[cCKeys[n-i-1]]
+##                setx = set(x)
+##                sety = set(y) - setx
+##            else:
+##                x = list(set(cC[cCKeys[i]]) - (setx | sety))
+##                setx = setx | set(x)
+##                y = list(set(cC[cCKeys[n-i-1]]) - (setx | sety))
+##                sety = sety | set(y)
+##            if x != [] or y != []:
+##                ordering.append( ( (Decimal(str(i+1)),x),(Decimal(str(n-i)),y) ) )
+##        if 2*n2 < n:
+##            if n2 == 0:
+##                x = cC[cCKeys[n2]]
+##            else:
+##                x = list(set(cC[cCKeys[n2]]) - (setx | sety))
+##            ordering.append( ( (Decimal(str(n2+1)),x),(Decimal(str(n2+1)),x) ) )
 ##
-##        WeakOrder.showWeakOrder(self,weakOrdering)
-
-        return orderingList
-
-    def showOrderedRelationTable(self,direction="decreasing"):
-        """
-        Showing the relation table in decreasing (default) or increasing order.
-        """
-        if direction == "decreasing":
-            Descending = True
-        else:
-            Descending = False
-
-        weakOrdering = self.computeWeakOrder(Descending)
-        
-        actionsList = []
-        for eq in weakOrdering:
-            #print(eq)
-            eq.sort()
-            for x in eq:
-                actionsList.append(x)
-        if len(actionsList) != len(self.actions):
-            print('Error !: missing action(s) %s in ordered table.')
-            
-        Digraph.showRelationTable(self,actionsSubset=actionsList,\
-                                relation=self.relation,\
-                                Sorted=False,\
-                                ReflexiveTerms=False)
+##        #print(ordering)
+##        
+##        orderingList = []
+##        n = len(ordering)
+##        for i in range(n):
+##            x = ordering[i][0][1]
+##            if x != []:
+##                orderingList.append(x)
+##        for i in range(n):
+##            y = ordering[n-i-1][1][1]
+##            if y != []:
+##                orderingList.append(y)
+####            
+####        
+####        weakOrdering = {'result':ordering}
+####
+####        WeakOrder.showWeakOrder(self,weakOrdering)
+##
+##        return orderingList
+##
+##    def showOrderedRelationTable(self,direction="decreasing"):
+##        """
+##        Showing the relation table in decreasing (default) or increasing order.
+##        """
+##        if direction == "decreasing":
+##            Descending = True
+##        else:
+##            Descending = False
+##
+##        weakOrdering = self.computeWeakOrder(Descending)
+##        
+##        actionsList = []
+##        for eq in weakOrdering:
+##            #print(eq)
+##            eq.sort()
+##            for x in eq:
+##                actionsList.append(x)
+##        if len(actionsList) != len(self.actions):
+##            print('Error !: missing action(s) %s in ordered table.')
+##            
+##        Digraph.showRelationTable(self,actionsSubset=actionsList,\
+##                                relation=self.relation,\
+##                                Sorted=False,\
+##                                ReflexiveTerms=False)
         
 
     def _computeQuantiles(self,x,Debug=True):
