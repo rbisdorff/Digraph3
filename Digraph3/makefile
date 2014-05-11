@@ -1,27 +1,12 @@
 ## makefile for digraphs module installation
-## R Bisdorff May 2011
+## R Bisdorff May 2014
+## version 3.3
 ########################
 .PHONY:	readme sphinx
 
 
 readme:
-		echo " digraphs python3 module installer $Revision: 3.3 $ \n R Bisdorff May 2014 University of Luxembourg\n usage: \n ..$ make docHTML # generates the html documentation\n ..$ make docPDF # generates the PDF document\n ..$ make tests # runs the nose tests\n ..$ make verbosetests # runs the verbose nose tests\n ..$ make install # installs on Ubuntu\n ..$ make 2to3 # converts py2 sources to py3 versions (see py3/*)\n ..$ make install3 # install Python 3 version"
-
-
-docHTML:
-		rm doc/*.html
-		cd doc ;\
-		hyperlatex digraphsdoc.tex ; \
-		./sedpngs ; \
-		ln -s digraphsdoc.html index.html
-
-docPDF:
-		(cd doc; latex digraphsdoc.tex)
-		cd doc; \
-                makeindex digraphsdoc.idx; \
-		latex digraphsdoc.tex ; \
-		latex digraphsdoc.tex ; \
-		dvipdf digraphsdoc.dvi
+		echo " Digraph3 python3 modules' installer \n (c) R Bisdorff 2013-2014 University of Luxembourg\n Usage: \n ..> make install # installs in Python3, Python3.3 and Python3.4 (Linux, Mac OS)\n ..> make tests # runs the nose tests\n ..> make verbosetests # runs the verbose nose tests\n ..> make pTests # runs all available nose tests with GNU parallel\n\n Technical documentation available here:\n http://leopold-loewenheim.uni.lu/Digraph3/docSphinx/html/index.html \n"
 
 sphinx:
 		(cd docSphinx; \
@@ -29,7 +14,7 @@ sphinx:
 
 pTests:
 		parallel --gnu cp {}.py test/ ::: digraphs perfTabs sortingDigraphs votingDigraphs linearOrders weakOrders graphs
-		(cd test; parallel --gnu nosetests3 -v ::: noseTests*.py )
+		(cd test; parallel --gnu -k nosetests3 -v ::: noseTests*.py )
 
 tests:
 		cp digraphs.py test/
