@@ -1188,12 +1188,55 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         self.order = len(self.actions)
 
         # compute weak ordering by choosing
+        
 ##        if self.order < 20:
 ##            self.computeRankingByChoosing(CoDual=True)
         
         # init general digraph Data
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+
+    def showWeakOrder(self,Descending=True):
+        """
+        Specialisation for QauntilesSortingDigraphs.
+        """
+        from decimal import Decimal
+        cC = self.computeCategoryContents()
+        cCKeys = [x for x in cC.keys()]
+        if Descending:
+            cCKeys.sort(reverse = True)
+        else:
+            cCKeys.sort(reverse = False)
+        n = len(cC)
+        n2 = n//2
+        ordering = []
+        
+        for i in range(n2):
+            if i == 0:
+                x = cC[cCKeys[i]]
+                y = cC[cCKeys[n-i-1]]
+                setx = set(x)
+                sety = set(y) - setx
+            else:
+                x = list(set(cC[cCKeys[i]]) - (setx | sety))
+                setx = setx | set(x)
+                y = list(set(cC[cCKeys[n-i-1]]) - (setx | sety))
+                sety = sety | set(y)
+            if x != [] or y != []:
+                ordering.append( ( (Decimal(str(i+1)),x),(Decimal(str(n-i)),y) ) )
+
+        if 2*n2 < n:
+            if n2 == 0:
+                x = cC[cCKeys[n2]]
+            else:
+                x = list(set(cC[cCKeys[n2]]) - (setx | sety))
+            ordering.append( ( (Decimal(str(n2+1)),x),(Decimal(str(n2+1)),x) ) )
+        
+        weakOrdering = {'result':ordering}
+
+        WeakOrder.showWeakOrder(self,weakOrdering)
+        
+        
 
     def _computeQuantiles(self,x,Debug=True):
         """
@@ -1495,15 +1538,15 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     nq = 10
-    t = RandomCBPerformanceTableau(numberOfActions=20,
-                                   numberOfCriteria=2,
-                                   weightDistribution='equiobjectives')
+##    t = RandomCBPerformanceTableau(numberOfActions=10,
+##                                   numberOfCriteria=2,
+##                                   weightDistribution='equiobjectives')
 ##    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
-    t.saveXMCDA2('test')
+##    t.saveXMCDA2('test')
 ##    t.showPerformanceTableau()
     t = XMCDA2PerformanceTableau('test')
-    t.showCriteria()
-    g = BipolarOutrankingDigraph(t)
+    #t.showCriteria()
+    #g = BipolarOutrankingDigraph(t)
     #t = PerformanceTableau('ex1perftab')
     #t.showQuantileSort()
     #t = XMCDA2PerformanceTableau('uniSorting')
@@ -1515,26 +1558,29 @@ if __name__ == "__main__":
                                   LowerClosed=True,
                                   PrefThresholds=False)
     qs0.showSorting()
-    qs0.showSortingCharacteristics('a10')
-    print(g.computeOrdinalCorrelation(qs0))
-    qs1 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
-                                  LowerClosed=True,
-                                  PrefThresholds = True)
-    qs1.showSorting()
-    qs1.showSortingCharacteristics('a10')
-    print(g.computeOrdinalCorrelation(qs1))
-    qs2 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
-                                  LowerClosed=False,
-                                  PrefThresholds=False)
-    qs2.showSorting()
-    qs2.showSortingCharacteristics('a10')
-    print(g.computeOrdinalCorrelation(qs2))
-    qs3 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
-                                  LowerClosed=False,
-                                  PrefThresholds = True)
-    qs3.showSorting()
-    qs3.showSortingCharacteristics('a10')
-    print(g.computeOrdinalCorrelation(qs3))
+    #qs0.showSortingCharacteristics('a10')
+    #print(g.computeOrdinalCorrelation(qs0))
+    qs0.showWeakOrder(Descending=False)
+    qs0.showWeakOrder(Descending=True)
+    
+##    qs1 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
+##                                  LowerClosed=True,
+##                                  PrefThresholds = True)
+##    qs1.showSorting()
+##    qs1.showSortingCharacteristics('a10')
+##    print(g.computeOrdinalCorrelation(qs1))
+##    qs2 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
+##                                  LowerClosed=False,
+##                                  PrefThresholds=False)
+##    qs2.showSorting()
+##    qs2.showSortingCharacteristics('a10')
+##    print(g.computeOrdinalCorrelation(qs2))
+##    qs3 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
+##                                  LowerClosed=False,
+##                                  PrefThresholds = True)
+##    qs3.showSorting()
+##    qs3.showSortingCharacteristics('a10')
+##    print(g.computeOrdinalCorrelation(qs3))
 ##    s0 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
 ##                                LowerClosed=False,
 ##                                Debug=False)
