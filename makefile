@@ -27,6 +27,10 @@ sphinx:
 		(cd docSphinx; \
 		sphinx-build -E . html/ )
 
+pTests:
+		parallel cp {}.py test/ ::: digraphs perfTabs sortingDigraphs votingDigraphs linearOrders weakOrders graphs
+		(cd test; parallel -k nosetests3 -v noseTests{}.py ::: Digraph OutrankingDigraph PerfTab SortingDigraph VotingDigraph LinearOrder WeakOrders Graph )
+
 tests:
 		cp digraphs.py test/
 		cp outrankingDigraphs.py test/
