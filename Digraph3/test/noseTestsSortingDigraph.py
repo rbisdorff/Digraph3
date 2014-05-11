@@ -125,7 +125,7 @@ def testQuantilesSortingDigraph():
     sortingRelation = s0.computeSortingRelation()
     s0.showRelationTable(actionsSubset=s0.actionsOrig,relation=sortingRelation)
     s0.showOrderedRelationTable()
-    s0.showWeakOrder()
+    s0.showWeakOrder(Descending=True)
     s0.exportGraphViz(graphType="png")
 
 def testActionsSortingResult():

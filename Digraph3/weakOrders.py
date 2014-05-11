@@ -426,8 +426,8 @@ class RankingByChoosingDigraph(WeakOrder):
         self.relation=relFusion
         self.rankingByLastChoosing = deepcopy(digraph.rankingByLastChoosing)
         self.rankingByBestChoosing = deepcopy(digraph.rankingByBestChoosing)
-        self.computeRankingByChoosing()
         if Debug:
+            self.computeRankingByChoosing()
             self.showRankingByChoosing()
         
         self.gamma = self.gammaSets()
@@ -438,7 +438,10 @@ class RankingByChoosingDigraph(WeakOrder):
         """
         Dummy for showWeakOrder method
         """
-        self.showWeakOrder(rankingByChoosing=rankingByChoosing)
+        if rankingByChoosing == None:
+            self.showWeakOrder(rankingByChoosing=self.computeRankingByChoosing())
+        else:
+            self.showWeakOrder(rankingByChoosing=rankingByChoosing)
 
     def computeRankingByBestChoosing(self,Forced=False):
         """
