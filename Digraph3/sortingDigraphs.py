@@ -1290,21 +1290,18 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                 x = list(set(cC[cCKeys[n2]]) - (setx | sety))
             ordering.append( ( (Decimal(str(n2+1)),x),(Decimal(str(n2+1)),x) ) )
 
-        print(ordering)
+        #print(ordering)
         
         orderingList = []
         n = len(ordering)
-        print(n)
         for i in range(n):
             x = ordering[i][0][1]
             if x != []:
                 orderingList.append(x)
-        print('1 ',orderingList)
-        for i in range(n2+1):
+        for i in range(n):
             y = ordering[n-i-1][1][1]
             if y != []:
                 orderingList.append(y)
-        print('2 ',orderingList)
 ##            
 ##        
 ##        weakOrdering = {'result':ordering}
@@ -1326,7 +1323,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         
         actionsList = []
         for eq in weakOrdering:
-            print(eq)
+            #print(eq)
             eq.sort()
             for x in eq:
                 actionsList.append(x)
