@@ -89,7 +89,7 @@ class WeakOrder(Digraph):
                 print('  %s Ambiguous Choice %s' % (space,list(iach)))
             print(' %s%s%s last ranked %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))        
 
-    def showRankingByChoosing(self,rankingByChoosing=None):
+    def showRankingByChoosing(self,actionsList=None,rankingByChoosing=None):
         """
         Dummy name for showWeakOrder() method
         """
@@ -98,7 +98,7 @@ class WeakOrder(Digraph):
     def showOrderedRelationTable(self,direction="decreasing",originalRelation=False):
         """
         Showing the relation table in decreasing (default) or increasing order.
-        """ 
+        """
         actionsList = []
         
         if direction == "decreasing":
