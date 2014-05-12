@@ -484,6 +484,128 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                 Sorted=False,\
                                 ReflexiveTerms=False)
 
+    def exportDigraphGraphViz(self,fileName=None, bestChoice=set(),worstChoice=set(),noSilent=True,graphType='png',graphSize='7,7'):
+        """
+        export GraphViz dot file for digraph drawing filtering.
+        """
+        Digraph.exportGraphViz(self, fileName=fileName, bestChoice=bestChoice,worstChoice=worstChoice,noSilent=noSilent,graphType=graphType,graphSize=graphSize)
+
+
+    def exportGraphViz(self,fileName=None,direction='decreasing',\
+                       noSilent=True,graphType='png',\
+                       graphSize='7,7',\
+                       fontSize=10):
+        """
+        export GraphViz dot file for weak order (Hasse diagram) drawing
+        filtering from SortingDigraph instances.
+        """
+        import os
+        from copy import deepcopy
+
+        def _safeName(t0):
+            t = t0.split(sep="-")
+            t1 = t[0]
+            n = len(t)
+            if n > 1:
+                for i in range(1,n):
+                    t1 += '%s%s' % ('_',t[i])
+            return t1
+                
+        if direction == 'decreasing':
+            ordering = self.computeWeakOrder(Descending=True)
+        else:
+            ordering = self.computeWeakOrder(Descending=False)
+            
+##            try:
+##                rankingByChoosing = self.rankingByBestChoosing['result']
+##            except:
+##                self.computeRankingByBestChoosing()
+##                rankingByChoosing = self.rankingByBestChoosing['result']
+##        else:
+            
+##            try:
+##                rankingByChoosing = self.rankingByLastChoosing['result']
+##            except:
+##                self.computeRankingByLastChoosing()
+##                rankingByChoosing = self.rankingByLastChoosing['result']
+        
+        if noSilent:
+            print('*---- exporting a dot file for GraphViz tools ---------*')
+        actionKeys = [x for x in self.actions]
+        n = len(actionKeys)
+        relation = self.relation
+        Med = self.valuationdomain['med']
+        i = 0
+        if fileName == None:
+            name = self.name
+        else:
+            name = fileName
+        dotName = name+'.dot'
+        if noSilent:
+            print('Exporting to '+dotName)
+##        if bestChoice != set():
+##            rankBestString = '{rank=max; '
+##        if worstChoice != set():
+##            rankWorstString = '{rank=min; '
+        fo = open(dotName,'w')
+        fo.write('digraph G {\n')
+        fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
+        fo.write('\\nweakOrders module (graphviz)\\n R. Bisdorff, 2014", size="')
+        fo.write(graphSize),fo.write('",fontsize=%d];\n' % fontSize)
+        # nodes
+        for x in actionKeys:
+            try:
+                nodeName = self.actions[x]['shortName']
+            except:
+                nodeName = str(x)
+            node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
+                   % (str(_safeName(x)),_safeName(nodeName),fontSize)
+            fo.write(node)
+        # same ranks for Hasses equivalence classes
+        k = len(ordering)
+        for i in range(k):
+            sameRank = '{ rank = same; '
+            ich = ordering[i]
+            for x in ich:
+                sameRank += str(_safeName(x))+'; '
+            sameRank += '}\n'
+            print(i,sameRank)
+            fo.write(sameRank)
+        # save original relation
+        originalRelation = deepcopy(self.relation)
+        
+        self.closeTransitive(Reverse=True)
+        for i in range(k-1):
+            ich = ordering[i]
+            for x in ich:
+                for j in range(i+1,k):
+                    jch = ordering[j]
+                    for y in jch:
+                        #edge = 'n'+str(i+1)+'-> n'+str(i+2)+' [dir=forward,style="setlinewidth(1)",color=black, arrowhead=normal] ;\n'
+                        if self.relation[x][y] > self.valuationdomain['med']:
+                            arcColor = 'black'
+                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (_safeName(x),_safeName(y),1,arcColor)
+                            fo.write(edge)
+                        elif self.relation[y][x] > self.valuationdomain['med']:
+                            arcColor = 'black'
+                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (_safeName(y),_safeName(x),1,arcColor)
+                            fo.write(edge)
+                                                  
+        fo.write('}\n \n')
+        fo.close()
+        # restore original relation
+        self.relation = deepcopy(originalRelation)
+        
+        commandString = 'dot -Grankdir=TB -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+            #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        if noSilent:
+            print(commandString)
+        try:
+            os.system(commandString)
+        except:
+            if noSilent:
+                print('graphViz tools not avalaible! Please check installation.')
+
 
     def computeSortingCharacteristics(self, action=None, Comments=False):
         """
@@ -1711,12 +1833,12 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
 
-    nq = 11
-##    t = RandomCBPerformanceTableau(numberOfActions=15,
-##                                   numberOfCriteria=2,
-##                                   weightDistribution='equiobjectives')
-####    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
-##    t.saveXMCDA2('test')
+    nq = 50
+    t = RandomCBPerformanceTableau(numberOfActions=15,
+                                   numberOfCriteria=13,
+                                   weightDistribution='equiobjectives')
+##    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
+    t.saveXMCDA2('test')
 ##    t.showPerformanceTableau()
     t = XMCDA2PerformanceTableau('test')
     #t.showCriteria()
@@ -1738,6 +1860,7 @@ if __name__ == "__main__":
     qs0.showWeakOrder(Descending=True)
     qs0.showOrderedRelationTable(direction="decreasing")
     qs0.showOrderedRelationTable(direction="increasing")
+    qs0.exportGraphViz()
     
 ##    qs1 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
 ##                                  LowerClosed=True,
