@@ -64,6 +64,15 @@ graph
   circle:hover{
    fill: aquamarine;
   }
+  svg {
+  background-color: #FFF;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  }
   text {
     user-select: none;
     pointer-events:none;
@@ -71,6 +80,8 @@ graph
   image {
     cursor: help;
   }
+
+
   </style>
 </head>
 
@@ -172,7 +183,7 @@ graph
           <!-- INPUT -->
   
   <div class="form-group"> 
-  Enter a valid node id: <input type="text" value="" placeholder="ID" class="form-control" maxlength="10" required name="nodeAddId" id="nodeAddId"> 
+  Enter a valid node id: <input type="text" value="" placeholder="ID" class="form-control" maxlength="10" autofocus required name="nodeAddId" id="nodeAddId"> 
   </div> 
   </div>
   
@@ -198,7 +209,7 @@ graph
           <!-- INPUT -->
   <h4>Valuationdomain</h4>
   <div class="form-group"> 
-  Min:<input type="text" value="0" class="form-control" maxlength="5" required name="min" id="min"> 
+  Min:<input type="text" value="0" class="form-control" autofocus maxlength="5" required name="min" id="min"> 
   </div> 
    <div class="form-group"> 
   Max:<input type="text" value="0" class="form-control" maxlength="5" required name="max" id="max"> 
@@ -391,7 +402,7 @@ def javascript():
 * graph_type = the variable used to describe the graph type and decide for the possible actions. choice: general, outranking
 *
 */
-var width,height,xmlinput="",$xml,xmlDoc,pairwise={},json,labels,labelt,path,force,freeze=false,svg,actions={},relation={},valuationdomain={},category='',current,type_label,graph_type="general";
+var width,height,xmlinput="",$xml,xmlDoc,pairwise={},json,labels,labelt,path,force,freeze=false,svg,actions={},relation={},valuationdomain={},current,ticker=0,type_label,graph_type="general";
 
 /*
 *
@@ -414,7 +425,6 @@ function first_load(start) {
               var result = parseXMCDA2(xmlinput);
               actions = result[0];
               relation = result[1];
-              category = result[2];
               type_label.text("Mode: '"+graph_type+"'")
                
                
@@ -531,6 +541,7 @@ function initialize() {
     {
       if(freeze==true)
       {
+        ticker=0;
         force.resume();
         freeze=false;
       } 
@@ -599,12 +610,15 @@ function initialize() {
     freeze=false;
     initialize();
     json={"nodes": [],"links":[]};
+    force
+        .nodes(json.nodes)
+        .links(json.links);
     json = buildD3Json(actions,relation,hide);
     force
         .nodes(json.nodes)
         .links(json.links);
     
-    start(json);
+    start();
 
   }
 
@@ -618,6 +632,7 @@ function initialize() {
   */
   var linkedByIndex = {};
   function focusNode(d) {
+    linkedByIndex={}
     console.log("Focusing node " + d.name);
     var circle = d3.select();
     json.links.forEach(
@@ -821,6 +836,7 @@ function initialize() {
             'reset': function(t) {
                 if(json != null) { 
                   console.log("Resetting Graph.") ;
+                  tick=0;
                   load();
               }},
               'add': function(t) {
@@ -1103,7 +1119,6 @@ function editEdge(d) {
               var result = parseXMCDA2(xmlinput);
               actions = result[0];
               relation = result[1];
-              category = result[2];
               load();
               var x = $('#upModalLabel').modal('hide');
               type_label.text("Mode: '" + graph_type +"'");
@@ -1171,15 +1186,9 @@ function editEdge(d) {
           relation[$(this).find('initial').find('alternativeID').text()][$(this).find('terminal').find('alternativeID').text()] = (Math.floor(parseInt($(this).find('value').find('integer').text())*100)/100).toFixed(2);
           }
         });
-      var cat = $xml.find('alternativesComparisons').find('mcdaConcept').text();
-      if( cat === 'outrankingDigraph'){
-        category = 'outranking';
-      }
-      else {
-        category = 'general';
-      }
+      
          
-      return [actions,relation,category];
+      return [actions,relation];
   }
 
   /*
@@ -1207,7 +1216,7 @@ function editEdge(d) {
       for( var i=0;  i<actionkeys.length; i++ ){
             for( var j=i+1;  j<actionkeys.length; j++ ){
               /* Arrow types:
-              r(a,b) < Med & r(b,a) < Med  a    b : -1
+              r(a,b) < Med & r(b,a) < Med  a    b : none
               r(a,b) > MAX & r(b,a) > MAX  a -- b : -1 initialization
               r(a,b) > Med & r(b,a) < Med  a  --> b :0 done
               r(a,b) < Med & r(b,a) > Med  a  <-- b :1 done
@@ -1223,9 +1232,9 @@ function editEdge(d) {
                 else if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] > Med)
                     dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type": 2, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
                 else if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] == Med)
-                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type": 3, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                  hide ? dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type": 0, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])}) : dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type": 3, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
                 else if(relation[actionkeys[i]][actionkeys[j]] == Med && relation[actionkeys[j]][actionkeys[i]] > Med)
-                    dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type": 4, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
+                  hide ? dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type": 1, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])}) : dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type": 4, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
                 else if(relation[actionkeys[i]][actionkeys[j]] == Med && relation[actionkeys[j]][actionkeys[i]] == Med)
                   hide ? dataset:  dataset["links"].push({"source":String(actionkeys[i]) , "target" : String(actionkeys[j]), "type": 7, "value" : String(relation[actionkeys[i]][actionkeys[j]]), "value2" : String(relation[actionkeys[j]][actionkeys[i]])});
                 else if(relation[actionkeys[i]][actionkeys[j]] > Med && relation[actionkeys[j]][actionkeys[i]] <  Med)
@@ -1284,7 +1293,7 @@ function editEdge(d) {
         fileName= fileName || "general_digraph";
         name=name||"general";
         relationName=relationName|| 'R';
-        relationType=relationType||'binary';
+        relationType=relationType||'general';
         category=category||'random';
         subcategory=subcategory||'valued'
         author= author||"digraphs Module RB";
@@ -1337,7 +1346,7 @@ function editEdge(d) {
         //write valued binary Relation
         xmcda=xmcda+('<alternativesComparisons id="1" name="'+relationName+'">');
         xmcda=xmcda+('<description>');
-        xmcda=xmcda+('<title>Randomly Valued Binary Relation</title>');
+        xmcda=xmcda+('<title>Randomly Valued Relation</title>');
         xmcda=xmcda+('<comment>'+category+' '+subcategory+' %s Digraph</comment>');
         xmcda=xmcda+('</description>');
         xmcda=xmcda+('<valuation name="valuationDomain">');
@@ -1393,7 +1402,7 @@ function editEdge(d) {
        
 
   xmlinput=xmcda;
-  parseXMCDA2(xmlinput);
+  xmlDoc = $.parseXML(xmlinput);
   return xmlinput;
   }
 
@@ -1405,7 +1414,7 @@ function editEdge(d) {
    *  Start the graph
    *
    */
- function start(json) {
+ function start() {
   console.log("Drawing graph.")
   path = svg.append("g").selectAll('path')
     .data(force.links())
@@ -1433,14 +1442,14 @@ function editEdge(d) {
   labels = svg.append("g").selectAll('text')
     .data(force.links())
     .enter().append('text')
-    .attr("dy", ".78em")
+    .attr("dy", ".9em")
     .style("font-size", "12px")
     .text(function(d) {return d.value > valuationdomain["Max"] && d.value2 > valuationdomain["Max"] ? "" : d.value2;}); 
 
   labelt = svg.append("g").selectAll('text')
     .data(force.links())
     .enter().append('text')
-    .attr("dy", ".78em")
+    .attr("dy", ".9em")
     .style("font-size", "12px")
     .text(function(d) {return d.value > valuationdomain["Max"] && d.value2 > valuationdomain["Max"] ? "" : d.value;}); 
 
@@ -1473,7 +1482,8 @@ function editEdge(d) {
     force.start();
 
   tick = function tick() {
-    labels
+    
+      labels
       .attr("x", function(d) { return (((d.source.x + d.target.x) /2) + d.source.x)/2 ; }) 
       .attr("y", function(d) { return (((d.source.y + d.target.y) /2) + d.source.y)/2; });
 
@@ -1503,7 +1513,14 @@ function editEdge(d) {
         function(d) {
           return "translate(" + d.x + "," + d.y + ")"; 
         });  
+    
+    if(ticker>50) {
+      force.stop();
+      freeze=true;
     }
+    ticker +=1;
+  }
+
 
 
 
@@ -1512,6 +1529,7 @@ function editEdge(d) {
   
    
   }
+
   
 '''
 
