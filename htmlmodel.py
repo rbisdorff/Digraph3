@@ -430,7 +430,7 @@ function first_load(start) {
                
                
                 
-  load()
+  load(hide_status)
   }
 });
 
@@ -608,7 +608,6 @@ function initialize() {
   * Attention: 
   */  
   function load(hide) {
-    hide = hide || false;
     freeze=false;
     initialize();
     json={"nodes": [],"links":[]};
@@ -748,7 +747,7 @@ function initialize() {
                 for(var x in relation) {
                   delete relation[x][d.name];
                 }
-              load();
+              load(hide_status);
               }
               else 
                 alert("Deleting not allowed.");
@@ -793,7 +792,7 @@ function initialize() {
                 delete relation[d.source.name][d.target.name];
                 delete relation[d.target.name][d.source.name];
                 force.stop();
-                load();
+                load(hide_status);
               }
               else 
                 alert("Deleting not allowed.");
@@ -812,6 +811,7 @@ function initialize() {
   */
   var context_main = function context_main(d) {
      console.log("Opening main context menu.");
+     $("#hide").html(function(){ if(hide_status){return '<img alt="Hide" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/hide.png" height="15" width="15" />Unhide';}else{return '<img alt="Hide" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/hide.png" height="15" width="15" />Hide edges';}});
      $('rect').contextMenu('cntxtMenu',
      {
         itemStyle:
@@ -822,12 +822,12 @@ function initialize() {
         bindings:
         {
             'new': function(t) {
-                
+                hide_status=false;
                 $('#newModal').modal('show');            
             },
             'hide':function(t) {
-              if(hide_status==false) {
-                hide_status=true;
+              if(hide_status == false) {
+               hide_status=true;
                load(hide_status);
               }
               else {
@@ -846,6 +846,7 @@ function initialize() {
                 if(json != null) { 
                   console.log("Resetting Graph.") ;
                   tick=0;
+                  hide_status=false;
                   load(hide_status);
               }},
               'add': function(t) {
@@ -871,7 +872,7 @@ function initialize() {
       relation[nodeid]={};
       relation[nodeid][nodeid]= Number(valuationdomain["Med"]);  
       actions[nodeid] = {"name": "nameless","comment":"none"};
-      load();
+      load(hide_status);
       $("#addNodeModal").modal("hide");
     }
   }
@@ -996,7 +997,7 @@ function initialize() {
     var neighbour = e.options[e.selectedIndex].text;
     relation[current.name][neighbour] = valuationdomain["Max"] +1;
     relation[neighbour][current.name] = valuationdomain["Max"]+1;
-    load();
+    load(hide_status);
   }
 
   /*
@@ -1023,7 +1024,7 @@ function initialize() {
     actions[$('#nodeId').attr("value")]["name"] =  fullName;
     $xml.find("alternatives").find('alternative[id="'+$("#nodeId").attr("value")+'"]').find('description').text(comment);
     $xml.find("alternatives").find('alternative[id="'+$("#nodeId").attr("value")+'"]').attr('name',fullName);
-    load();
+    load(hide_status);
     
   }
 
@@ -1052,7 +1053,7 @@ function initialize() {
     if (pairwise[d.source.name] == null){
       relation[d.source.name][d.target.name] =  (Math.floor((valuationdomain["Max"]- Number(relation[d.source.name][d.target.name]) + valuationdomain["Min"])*100)/100).toFixed(2);
       relation[d.target.name][d.source.name] =  (Math.floor((valuationdomain["Max"]- Number(relation[d.target.name][d.source.name]) + valuationdomain["Min"])*100)/100).toFixed(2);
-      load();
+      load(hide_status);
     }
     else {
       alert("Invert not possible.");
@@ -1088,7 +1089,7 @@ function editEdge(d) {
     $('#editEdgeModal').modal('hide');
     relation[$('#nodeSource').attr("name")][$('#nodeTarget').attr("name")] =  ((Math.floor(Number($('#nodeSource').attr("value"))*100))/100).toFixed(2);
     relation[$('#nodeTarget').attr("name")][$('#nodeSource').attr("name")] =  ((Math.floor(Number($('#nodeTarget').attr("value"))*100))/100).toFixed(2);
-    load();
+    load(hide_status);
     }
     else alert("Error: Value must be between " + valuationdomain["Min"] + " and " + valuationdomain["Max"] +" !");
   }
@@ -1127,7 +1128,7 @@ function editEdge(d) {
               var result = parseXMCDA2(xmlinput);
               actions = result[0];
               relation = result[1];
-              load();
+              load(hide_status);
               var x = $('#upModalLabel').modal('hide');
               type_label.text("Mode: '" + graph_type +"'");
             }
@@ -1522,7 +1523,7 @@ function editEdge(d) {
           return "translate(" + d.x + "," + d.y + ")"; 
         });  
     
-    if(ticker>50) {
+    if(ticker>100) {
       force.stop();
       freeze=true;
     }
