@@ -1767,9 +1767,10 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
             currActions = currActions - ibch
         return sortingRelation
 
-    def showActionCategories(self,action,Debug=False):
+    def showActionCategories(self,action,Debug=False,Comments=True):
         """
-        renders the union of categories in which the given action is sorted positively or null into.
+        Renders the union of categories in which the given action is sorted positively or null into.
+        Returns a tuple : action, lowest category key, highest category key, membership credibility !
         """
         Med = self.valuationdomain['med']
         sorting = self.computeSortingCharacteristics(action=action,Comments=Debug)
@@ -1788,15 +1789,25 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         if n == 0:
             return None
         elif n == 1:
-            print('%s in %s - %s with credibility: %.2f' % (action,\
+            if Comments:
+                print('%s in %s - %s with credibility: %.2f' % (action,\
                                      self.categories[keys[0]]['lowLimit'],\
                                      self.categories[keys[0]]['highLimit'],\
                                      credibility) )
+            return action,\
+                    keys[0],\
+                    keys[0],\
+                    credibility
         else:
-            print('%s in %s - %s with credibility: %.2f' % (action,\
+            if Comments:
+                print('%s in %s - %s with credibility: %.2f' % (action,\
                                      self.categories[keys[0]]['lowLimit'],\
                                      self.categories[keys[-1]]['highLimit'],\
                                      credibility) )
+            return action,\
+                    keys[0],\
+                    keys[-1],\
+                    credibility            
 
     def showActionsSortingResult(self,actionSubset=None):
         """
@@ -1833,12 +1844,12 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
 
-    nq = 50
-    t = RandomCBPerformanceTableau(numberOfActions=15,
-                                   numberOfCriteria=13,
-                                   weightDistribution='equiobjectives')
+    nq = 30
+##    t = RandomCBPerformanceTableau(numberOfActions=30,
+##                                   numberOfCriteria=13,
+##                                   weightDistribution='equiobjectives')
 ##    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
-    t.saveXMCDA2('test')
+##    t.saveXMCDA2('test')
 ##    t.showPerformanceTableau()
     t = XMCDA2PerformanceTableau('test')
     #t.showCriteria()
@@ -1854,13 +1865,16 @@ if __name__ == "__main__":
                                   LowerClosed=True,
                                   PrefThresholds=False)
     qs0.showSorting()
-    #qs0.showSortingCharacteristics('a10')
+    qs0.showActionsSortingResult()
+    for x in qs0.actions:
+        print(qs0.showActionCategories(x,Comments=False))
+        
     #print(g.computeOrdinalCorrelation(qs0))
-    qs0.showWeakOrder(Descending=False)
-    qs0.showWeakOrder(Descending=True)
-    qs0.showOrderedRelationTable(direction="decreasing")
-    qs0.showOrderedRelationTable(direction="increasing")
-    qs0.exportGraphViz()
+##    qs0.showWeakOrder(Descending=False)
+##    qs0.showWeakOrder(Descending=True)
+##    qs0.showOrderedRelationTable(direction="decreasing")
+##    qs0.showOrderedRelationTable(direction="increasing")
+##    qs0.exportGraphViz()
     
 ##    qs1 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
 ##                                  LowerClosed=True,
