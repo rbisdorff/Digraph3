@@ -288,11 +288,12 @@ graph
           <!-- INPUT -->
           <div class="form-group"> 
              <p>
-        • Right-click on the background lets you import Digraph3 Json encoded and export XMCDA2 encoded files or reset the graph.<br/><br/>     
-        • Use your left mouse to drag and drop nodes.<br/><br/>
-        • Once dragged a node is frozen and can be released by a simple double click.<br/><br/>
-        • Right-click on Nodes or Edges to get further information, edit their values or add connections between nodes.<br/><br/>
-        • Clicking on the background sets your graph back out of the inspect mode.<br/><br/>
+        • Use a left mouse-click to drag and drop nodes. Once dragged a node is frozen and can be released by a simple double click.<br/><br/>
+        • Right-click on the background lets you import Digraph3 JSON encoded and export XMCDA2 encoded files, hide undefined nodes or create a new graph from scratch.<br/><br/>     
+        • Right-click Nodes to get further information, edit their values or add connections between nodes.<br/><br/>
+        • Right-click edges to invert them,edit their value, delete them or to display the pairwise comparision table between two nodes.<br/><br/>
+        • One click on the background sets your graph back out of the inspect mode.<br/><br/>
+        • Double click on the background restarts the force of the graph.<br/><br/>
             </p>
   
           </div> 
@@ -402,7 +403,7 @@ def javascript():
 * graph_type = the variable used to describe the graph type and decide for the possible actions. choice: general, outranking
 *
 */
-var width,height,xmlinput="",$xml,xmlDoc,pairwise={},json,labels,labelt,path,force,freeze=false,svg,actions={},relation={},valuationdomain={},current,ticker=0,type_label,graph_type="general";
+var width,height,xmlinput="",$xml,xmlDoc,pairwise={},json,labels,labelt,path,force,freeze=false,svg,actions={},relation={},valuationdomain={},current,ticker=0,type_label,hide_status=false,graph_type="general";
 
 /*
 *
@@ -443,6 +444,7 @@ function first_load(start) {
 */
 function initialize() {
   console.log("Initialization of our empty standart canvas.")
+  ticker=0;
   width=$(window).width(), height=$(window).height(); //set width and height to the window size.;
   d3.selectAll("svg").remove(); // remove the current svg element (together with all the edges and nodes);
   svg = d3.select("#graph").append("svg") //append a new SVG element to the div tah with id="graph";
@@ -824,7 +826,14 @@ function initialize() {
                 $('#newModal').modal('show');            
             },
             'hide':function(t) {
-              load(hide=true);
+              if(hide_status==false) {
+                hide_status=true;
+               load(hide_status);
+              }
+              else {
+                hide_status=false;
+                load(hide_status);
+              }
             },
             'import': function(t) {
                 importJSON();
@@ -837,7 +846,7 @@ function initialize() {
                 if(json != null) { 
                   console.log("Resetting Graph.") ;
                   tick=0;
-                  load();
+                  load(hide_status);
               }},
               'add': function(t) {
                 if(graph_type==="general") {
@@ -900,7 +909,7 @@ function initialize() {
   var releaseNodes=function releaseNodes(d) {
     console.log("Releasing node " + d.name);
     d.fixed = false; 
-    tick();
+    ticker=0;
     force.start();
   }
 
@@ -911,8 +920,7 @@ function initialize() {
   var dragstart = function dragstart(d,i) {
         if(d3.event.sourceEvent.which==1){
         draging=true;
-        force.stop();
-        freeze=true;
+       
       }
     }
 
@@ -1025,7 +1033,7 @@ function initialize() {
   *
   */
   function inspectEdge(d) {
-    if (pairwise[d.source.name] != null){
+    if (graph_type != "general"){
       $('#modEdgeModal').modal('show');
       $('#source').html((pairwise[d.source.name][d.target.name]).toString());
       $('#target').html((pairwise[d.target.name][d.source.name]).toString());
