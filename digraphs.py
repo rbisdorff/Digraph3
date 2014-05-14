@@ -5279,6 +5279,8 @@ class Digraph(object):
             p = Popen(args=['/usr/local/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
         elif os.path.exists('/opt/local/bin/enumChordlessCircuitsInOutPiping'):
             p = Popen(args=['/opt/local/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
+        elif  os.path.exists('/home/users/rbisdorff/bin/enumChordlessCircuitsInOutPiping'):
+            p = Popen(args=['/home/users/rbisdorff/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
         else:
             print('Error: executable enumChordlessCircuitsInOutPiping not found !!!')
         Med = self.valuationdomain['med']
