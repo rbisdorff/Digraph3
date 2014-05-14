@@ -452,8 +452,8 @@ function initialize() {
       .attr("height", height);
 
 
-  //Create all arrow types.
   /*
+  * Create all arrow types.
   *
   * Full end arrow
   *
@@ -576,12 +576,19 @@ function initialize() {
     .charge(-3500)
     .gravity(0.5)
     .start();
-
+  /*
+  *
+  * Set up the text label that describes the type of the graph.
+  */
   type_label=svg.append("text")
     .attr("x", width-120)
     .attr("y", 20)
     .text("Mode: '"+graph_type+"'");
-
+  /*
+  *
+  * Set up the copyright text label and the info icon on the botom left.
+  *
+  */
   svg.append("text")
     .attr("x", width-340)
     .attr("y", height -20)
@@ -596,7 +603,11 @@ function initialize() {
     })
     .attr("y",height-35);
 
-    
+    /*
+    *
+    * Prompt a warning when attempting to close the window.
+    *
+    */
     window.onbeforeunload = function(){
     return "Make sure to save your graph locally.";
   }; 
@@ -627,9 +638,8 @@ function initialize() {
   
   /*
   Implementation which works as follows:
-  - Select node
-  - Push non connected nodes  and edges in the background
-   -- Not good for bigger graphs.
+  - Select node.
+  - Push non connected nodes and edges in the background.
   */
   var linkedByIndex = {};
   function focusNode(d) {
@@ -640,7 +650,10 @@ function initialize() {
       function(i) {
         linkedByIndex[i.source.index + "," + i.target.index] = true;
     });
-
+    /*
+    * Select all node elements, and set their opacity.
+    *
+    */
     svg.selectAll(".node")
       .transition(500)
       .style("opacity", 
@@ -654,6 +667,10 @@ function initialize() {
           return "#000";
 
         }); 
+    /*
+    *
+    * Select all path elements and set their opacity and cursor behaviour.
+    */
     path
       .transition(500)
       .style("cursor", 
@@ -664,14 +681,20 @@ function initialize() {
         function(o) {
           return o.source.index === d.index || o.target.index === d.index ? 1 : 0.05;
         });
-    circle
-      .transition(500);
+    /*
+    *
+    * Select all source labels and set their opacity.
+    */
     labels
       .transition(500)
       .style("opacity", 
         function(o) {
           return o.source.index === d.index || o.target.index === d.index ? 1 : 0;
         });
+    /*
+    *
+    * Select all target labels and set their opacity.
+    */
     labelt
       .transition(500)
       .style("opacity", 
@@ -690,22 +713,25 @@ function initialize() {
   */
   var unfocusNode = function unfocusNode(d) {
       console.log("Unfocus node.");
+      //Select all nodes and set their opacity.
       node
           .transition(500)
           .style("opacity", 1.0)
           .style("fill", "#F6FBFF");
-      svg.selectAll(".link")
+      //Select all path and set their opacity.
+      path
           .transition(500)
           .style("opacity", 0.5 )
           .style("cursor", "pointer");
-       labels
+      //Select all source labels and set their opacity.
+      labels
           .transition(500)
           .style("opacity", 1 );
-        labelt
+      //Select all target labels and set their opacity.
+      labelt
           .transition(500)
           .style("opacity", 1 );
-      releaseNodes; 
-  }
+    }
 
   
   /*
@@ -741,6 +767,7 @@ function initialize() {
               
             },
             'deleteNode':function(t) {
+              //Delete a node from actions and all it's relations from the relation dictionnary.
               if(graph_type ==="general") {
                 delete actions[d.name];
                 delete relation[d.name];
@@ -750,6 +777,7 @@ function initialize() {
               load(hide_status);
               }
               else 
+                //Alert if the graph is not of the type outranking.
                 alert("Deleting not allowed.");
             }
         }
@@ -781,6 +809,7 @@ function initialize() {
                 invertEdge(d);
             },
             'editEdge':function(t) {
+              // Edit the values of an edge.
               if(graph_type ==="general") {
                 editEdge(d);
               }
@@ -788,6 +817,7 @@ function initialize() {
                 alert("Editing not allowed.");
             },
             'deleteEdge':function(t) {
+              // Delete an edge from the relation dictionnary.
               if(graph_type ==="general") {
                 delete relation[d.source.name][d.target.name];
                 delete relation[d.target.name][d.source.name];
@@ -795,6 +825,7 @@ function initialize() {
                 load(hide_status);
               }
               else 
+                //Alert if the graph is not of the type outranking.
                 alert("Deleting not allowed.");
             }
 
@@ -862,8 +893,13 @@ function initialize() {
     d3.event.preventDefault();
   }
 
+  /*
+  *
+  * Function used to add nodes to the graph.
+  */
   function addNode() {
     var nodeid = $("#nodeAddId").attr("value");
+    //If no node id is selected prompt an alert and allows you to try again.
     if(nodeid ==="") {
       alert("Invalid node id!")
     }
@@ -1159,11 +1195,11 @@ function editEdge(d) {
       xmlDoc = $.parseXML(xmlinput);
       $xml = $( xmlDoc );
       var actions={},category;
-
+      // Get the valuation domain from the XML file and calculate the Medium value.
       valuationdomain["Min"] = Number($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('minimum').children().text());
       valuationdomain["Max"] = Number($xml.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').children().text());
       valuationdomain["Med"]  = Number(valuationdomain["Min"]  + ((valuationdomain["Max"]  - valuationdomain["Min"] )/2));
-      
+      // Select the filename and decide the graph type.
       fileName = $xml.find("projectReference").attr("id");
       if(fileName.indexOf("outranking") > -1){
         graph_type = "outranking";
@@ -1171,7 +1207,7 @@ function editEdge(d) {
       else {
         graph_type= "general"
       }
-
+      //Get all nodes from the XML file.
       $xml.find("alternatives").find('alternative').each(
         function() { 
             var id = this.getAttribute('id');
@@ -1186,6 +1222,7 @@ function editEdge(d) {
       for(var x in actions) {
         relation[x] = {};
       }
+      //Get all edges from the XML file.
       $xml.find('alternativesComparisons').find('pairs').find('pair').each(
         function() {
           try{
@@ -1196,7 +1233,7 @@ function editEdge(d) {
           }
         });
       
-         
+      // Return the actions and relation array.
       return [actions,relation];
   }
 
@@ -1209,6 +1246,7 @@ function editEdge(d) {
    console.log("Building D3 Json for graph visualization.")
    var dataset = {"nodes":[],"links":[]}
    var actionkeys=[];
+   // Put all the actions into the nodes array.
    if(!Object.keys(actions).length == 0)
    {
    for(node in actions){
@@ -1220,6 +1258,7 @@ function editEdge(d) {
                 dataset["nodes"].push({"name": node ,"group":1, "comment": "none", "fullName":"nameless"});
             }
     }
+    //Set the min, med and max value into variables.
     var Min=valuationdomain["Min"],Max=valuationdomain["Max"],Med=valuationdomain["Med"];
     if(Object.keys(relation).length >0){
       for( var i=0;  i<actionkeys.length; i++ ){
@@ -1425,6 +1464,7 @@ function editEdge(d) {
    */
  function start() {
   console.log("Drawing graph.")
+  //Select all path elements and initialize it's attributes.
   path = svg.append("g").selectAll('path')
     .data(force.links())
     .enter().append("svg:path")
@@ -1447,27 +1487,26 @@ function editEdge(d) {
           return "url(#start-full)";
       })
       .on("contextmenu", context_edge);
-
+  //Select all source labels and set it's attributes.
   labels = svg.append("g").selectAll('text')
     .data(force.links())
     .enter().append('text')
     .attr("dy", ".9em")
     .style("font-size", "12px")
     .text(function(d) {return d.value > valuationdomain["Max"] && d.value2 > valuationdomain["Max"] ? "" : d.value2;}); 
-
+  //Select all target labels and set it's attributes.
   labelt = svg.append("g").selectAll('text')
     .data(force.links())
     .enter().append('text')
     .attr("dy", ".9em")
     .style("font-size", "12px")
     .text(function(d) {return d.value > valuationdomain["Max"] && d.value2 > valuationdomain["Max"] ? "" : d.value;}); 
-
+  // Set the drag behaviour for D3.
   var node_drag = d3.behavior.drag()
         .on("dragstart", dragstart)
         .on("drag", dragmove)
         .on("dragend", dragend);
-
-
+  // Select all node elements and set it's attributes.
   node = svg.append("g").selectAll(".node")
     .data(force.nodes())
     .enter().append("g")
@@ -1479,17 +1518,17 @@ function editEdge(d) {
     .on("dragend", dragend)
     .on("contextmenu", context_node)
     .call(node_drag);
-
+  // Append a circle to  the nodes in order to color the nodes and set the sice, which allows us to append text to the nodes later.
   node.append("circle")
     .attr("r", 15);    
-
+  // Append text to nodes.
   node.append("text")
     .attr("dx", 0)
     .attr("dy", ".35em")
     .style("font-family", "Comic Sans MS")
     .text(function(d) { return d.name; });
     force.start();
-
+  //Tick function used to update the coordinates.
   tick = function tick() {
     
       labels
@@ -1532,14 +1571,12 @@ function editEdge(d) {
 
 
 
-
+  
   force.on("tick",tick)
    .start();
   
    
   }
-
-  
 '''
 
 def d3export():
