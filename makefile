@@ -13,7 +13,7 @@ sphinx:
 		sphinx-build -E . html/ )
 
 pTests:
-		parallel --gnu cp {}.py test/ ::: digraphs perfTabs sortingDigraphs votingDigraphs linearOrders weakOrders graphs
+		parallel --gnu cp {}.py test/ ::: digraphs outrankingDigraphs perfTabs sortingDigraphs votingDigraphs linearOrders weakOrders graphs
 		(cd test; parallel --gnu -k nosetests3 -v ::: noseTests*.py )
 
 tests:
@@ -232,4 +232,10 @@ install:
 		sudo python3 setup.py install
 		sudo python3.3 setup.py install
 		sudo python3.4 setup.py install
+
+installVenv:
+		python3 setup.py install
+		python3.3 setup.py install
+		python3.4 setup.py install
+
 
