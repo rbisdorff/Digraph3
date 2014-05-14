@@ -5247,6 +5247,8 @@ class Digraph(object):
             os.system('/usr/local/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
         elif os.path.exists('/opt/local/bin/detectChordlessCircuits'):
             os.system('/opt/local/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
+        elif os.path.exists('/home/users/rbisdorff/bin/detectChordlessCircuits'):
+            os.system('/home/users/rbisdorff/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
         else:
             print('Error: detectChordlessCircuits binary could not be found !!!')
         argDict = {}
@@ -5342,6 +5344,8 @@ class Digraph(object):
             os.system('/usr/local/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
         elif os.path.exists('/opt/local/bin/enumChordlessCircuits'):
             os.system('/opt/local/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
+        elif os.path.exists('/home/users/rbisdorff/bin/enumChordlessCircuits'):
+            os.system('/home/users/rbisdorff/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
         else:
             print('Error: enumChordlessCircuits binary not found !!!')
         argDict = {}
