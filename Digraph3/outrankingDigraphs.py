@@ -3598,7 +3598,14 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 return Decimal("0.0")
             
 
-    def _constructRelation(self,criteria,evaluation,initial=None,terminal=None,hasNoVeto=False,hasBipolarVeto=True,Debug=False,hasSymmetricThresholds=True):
+    def _constructRelation(self,criteria,\
+                           evaluation,\
+                           initial=None,\
+                           terminal=None,\
+                           hasNoVeto=False,\
+                           hasBipolarVeto=True,\
+                           Debug=False,\
+                           hasSymmetricThresholds=True):
         """
         Renders the biploar valued outranking relation from the data
         of a given performance tableau instantiation PerfTab.
