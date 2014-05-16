@@ -110,6 +110,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                  isRobust=False,
                  hasNoVeto=False,
                  lowerClosed=True,
+                 Threading=True,
                  Debug=False):
         """
         Constructor for SortingDigraph instances.
@@ -246,13 +247,16 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                        initial=self.actionsOrig,
                                                        terminal=self.profileLimits,
                                                        hasNoVeto=hasNoVeto,
-                                                       hasBipolarVeto=True)
+                                                       hasBipolarVeto=True,
+                                                        Threading=Threading)
             else:
                 self.relation = self._constructRelation(self.criteria,
                                                        self.evaluation,
                                                        terminal=self.actionsOrig,
                                                        initial=self.profileLimits,
-                                                       hasNoVeto=hasNoVeto, hasBipolarVeto=True)
+                                                       hasNoVeto=hasNoVeto,
+                                                        hasBipolarVeto=True,
+                                                        Threading=Threading)
             if lowerClosed:
                 for x in self.actionsOrig:
                     for y in self.actionsOrig:
@@ -301,8 +305,10 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         """
         Specialization of the corresponding BipolarOutrankingDigraph method
         """
+        from multiprocessing import cpu_count
+        
         ##
-        if not Threading:
+        if not Threading or cpu_count() < 6:
             return BipolarOutrankingDigraph._constructRelation(self,criteria,\
                                     evaluation,\
                                     initial=initial,\
@@ -317,7 +323,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             from pickle import dumps, loads, load
             from multiprocessing import Process, Lock,\
                                         active_children, cpu_count
-            Debug=True
+            #Debug=True
             class myThread(Process):
                 def __init__(self, threadID,iteration,\
                              InitialSplit, tempDirName,\
@@ -400,9 +406,10 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 nit = n//nbrCores
                 if nit*nbrCores < n:
                     nit += 1
-                print('nbr of jobs',n)
-                print('nbr of cores = ',nbrCores)    
-                print('nbr of iterations = ',nit)
+                if Debug:
+                    print('nbr of jobs',n)
+                    print('nbr of cores = ',nbrCores)    
+                    print('nbr of iterations = ',nit)
 
                 relation = {}
                 for x in initial:
@@ -411,7 +418,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                         relation[x][y] = self.valuationdomain['med']
                 i = 0
                 for j in range(nit):
-                    print('iteration = ',j+1)
+                    #print('iteration = ',j+1)
                     splitActions=[]
                     for k in range(nbrCores):
                         if i < n:
@@ -428,7 +435,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     while active_children() != []:
                         pass
                     
-                    print('Exiting computing threads')
+                    #print('Exiting computing threads')
                     for k in range(nbrCores):
                         fiName = tempDirName+'/splitActions-'+str(k)+'.py'
                         fi = open(fiName,'rb')
@@ -1137,6 +1144,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                  minValuation=-100.0,
                  maxValuation=100.0,
                  outrankingType = "bipolar",
+                 Threading=True,
                  Debug=False):
         """
         Constructor for QuantilesSortingDigraph instances.
@@ -1303,13 +1311,16 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                                                        initial=self.actionsOrig,
                                                        terminal=self.profileLimits,
                                                        hasNoVeto=hasNoVeto,
-                                                       hasBipolarVeto=True)
+                                                       hasBipolarVeto=True,
+                                                        Threading=Threading)
             else:
                 self.relation = self._constructRelation(self.criteria,
                                                        self.evaluation,
                                                        terminal=self.actionsOrig,
                                                        initial=self.profileLimits,
-                                                       hasNoVeto=hasNoVeto, hasBipolarVeto=True)
+                                                       hasNoVeto=hasNoVeto,
+                                                        hasBipolarVeto=True,
+                                                        Threading=Threading)
             if LowerClosed:
                 for x in self.actionsOrig:
                     for y in self.actionsOrig:
@@ -1798,12 +1809,12 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
 
-    nq = 5
-##    t = RandomCBPerformanceTableau(numberOfActions=30,
-##                                   numberOfCriteria=13,
-##                                   weightDistribution='equiobjectives')
+    nq = 50
+    t = RandomCBPerformanceTableau(numberOfActions=100,
+                                   numberOfCriteria=13,
+                                   weightDistribution='equiobjectives')
 ##    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
-##    t.saveXMCDA2('test')
+    t.saveXMCDA2('test')
 ##    t.showPerformanceTableau()
     t = XMCDA2PerformanceTableau('test')
     #t.showCriteria()
@@ -1815,13 +1826,23 @@ if __name__ == "__main__":
     #s = SortingDigraph(t,lowerClosed=False)
     #s.showSorting()
     #s.showSortingCharacteristics('a10')
+    t0 = time()
     qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
                                   LowerClosed=True,
                                   PrefThresholds=False)
-    qs0.showSorting()
-    qs0.showActionsSortingResult()
-    for x in qs0.actions:
-        print(qs0.showActionCategories(x,Comments=False))
+    print(time()-t0)
+    t0 = time()
+    qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
+                                  LowerClosed=True,
+                                  PrefThresholds=False,
+                                  Threading=False)
+    print(time()-t0)
+    
+    
+##    qs0.showSorting()
+##    qs0.showActionsSortingResult()
+##    for x in qs0.actions:
+##        print(qs0.showActionCategories(x,Comments=False))
         
     #print(g.computeOrdinalCorrelation(qs0))
 ##    qs0.showWeakOrder(Descending=False)
