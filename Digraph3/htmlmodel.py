@@ -377,7 +377,7 @@ def javascript():
 ####################### 
 */
 
-/*
+/**
 *
 * Declaration of some usefull global variables:
 *
@@ -405,12 +405,20 @@ def javascript():
 */
 var width,height,xmlinput="",$xml,xmlDoc,pairwise={},json,labels,labelt,path,force,freeze=false,svg,actions={},relation={},valuationdomain={},current,ticker=0,type_label,hide_status=false,graph_type="general";
 
-/*
-*
-* Loaded only on the first load of the web page in order to allow automatic loading of the d3export.json with the same ticker number.
-* 
-* start = name of the default file that the graph should load;
-*/
+
+////
+////
+//// BASIC FUNCTIONS
+////
+////
+
+/**
+ * Loaded only on the first load of the web page in order to allow automatic loading of the d3export.json with the same ticker number.
+ * start = name of the default file that the graph should load;
+ * @method first_load
+ * @param {} start
+ * @return 
+ */
 function first_load(start) {
     initialize();
     if(start) {
@@ -419,6 +427,12 @@ function first_load(start) {
   url: start,
   async: false,
   dataType: 'json',
+  /**
+   * Description
+   * @method success
+   * @param {} data
+   * @return 
+   */
   success: function (data) {
               d3json=data; 
               xmlinput = d3json["xmcda2"];
@@ -437,11 +451,11 @@ function first_load(start) {
             
 }    }
 
-/*
-*
-* Initialization of our empty canvas.
-*
-*/
+/**
+ * Initialization of our empty canvas.
+ * @method initialize
+ * @return 
+ */
 function initialize() {
   console.log("Initialization of our empty standart canvas.")
   ticker=0;
@@ -452,7 +466,7 @@ function initialize() {
       .attr("height", height);
 
 
-  /*
+  /**
   * Create all arrow types.
   *
   * Full end arrow
@@ -471,7 +485,7 @@ function initialize() {
     .attr("orient", "auto")
     .append("svg:path")
     .attr("d", "M0,-5L10,0L0,5z");
-  /*
+  /**
   *
   * Empty end arrow
   *
@@ -492,7 +506,7 @@ function initialize() {
     .attr("stroke-width", 2)  
     .attr("d", "M0,-5L10,0L0,5z");
 
-  /*
+  /**
   *
   * Full start arrow
   *
@@ -510,7 +524,7 @@ function initialize() {
     .append("svg:path")
     .attr("d", "M10,-5L0,0L10,5z");
 
-  /*
+  /**
   *
   * Empty start arrow
   *
@@ -531,7 +545,7 @@ function initialize() {
     .attr("stroke-width", 2)  
     .attr("d", "M10,-5L0,0L10,5z");
 
-  /*
+  /**
   *
   * Append background rectangle
   *
@@ -556,7 +570,7 @@ function initialize() {
   .attr("height", "100%")
   .attr("fill", "#FAFAD2");
     
-  /*
+  /**
   *
   * Select all nodes and labels and inizialize the variables.
   *
@@ -564,7 +578,7 @@ function initialize() {
   node = svg.selectAll(".node"),
   labels = svg.selectAll("labels");
 
-  /*
+  /**
   *
   * Set up our force graph.
   *
@@ -576,7 +590,7 @@ function initialize() {
     .charge(-3500)
     .gravity(0.5)
     .start();
-  /*
+  /**
   *
   * Set up the text label that describes the type of the graph.
   */
@@ -584,7 +598,7 @@ function initialize() {
     .attr("x", width-120)
     .attr("y", 20)
     .text("Mode: '"+graph_type+"'");
-  /*
+  /**
   *
   * Set up the copyright text label and the info icon on the botom left.
   *
@@ -603,21 +617,22 @@ function initialize() {
     })
     .attr("y",height-35);
 
-    /*
-    *
-    * Prompt a warning when attempting to close the window.
-    *
-    */
+    /**
+     * Prompt a warning when attempting to close the window.
+     * @method onbeforeunload
+     * @return Literal
+     */
     window.onbeforeunload = function(){
     return "Make sure to save your graph locally.";
   }; 
   }
   
-  /*
-  *
-  * Load function called to load a graph or rebuild a graph.
-  * Attention: 
-  */  
+  /**
+   * Load function called to load a graph or rebuild a graph. 
+   * @method load
+   * @param {} hide
+   * @return 
+   */
   function load(hide) {
     freeze=false;
     initialize();
@@ -634,14 +649,571 @@ function initialize() {
 
   }
 
-
-  
-  /*
-  Implementation which works as follows:
-  - Select node.
-  - Push non connected nodes and edges in the background.
+  /**
+  * Start the graph
+  * @method start
+  * @return 
   */
+ function start() {
+  console.log("Drawing graph.")
+  //Select all path elements and initialize it's attributes.
+  path = svg.append("g").selectAll('path')
+    .data(force.links())
+    .enter().append("svg:path")
+    .attr("class", function(d) { return "link " + d.type; })
+    .attr("class", "link")
+    .attr("stroke", function(d){if(d.type == -1 ){return "red";} else {return "#000";}} )
+    .style("opacity",0.5)
+    .attr("stroke-dasharray", function(d) { if(d.type == 5 || d.type ==6|| d.type ==7) return "3,3";})
+    .attr("marker-end", 
+      function(d) { 
+        if(d.type == 4 || d.type ==6|| d.type ==7) 
+          return "url(#end-empty)"; 
+        if(d.type == 0 || d.type ==2|| d.type ==3) 
+          return "url(#end-full)";})
+    .attr("marker-start", 
+      function(d) { 
+        if(d.type == 3|| d.type ==5|| d.type ==7) 
+          return "url(#start-empty)"; 
+        if(d.type == 1 || d.type ==2|| d.type ==4) 
+          return "url(#start-full)";
+      })
+      .on("contextmenu", context_edge);
+  //Select all source labels and set it's attributes.
+  labels = svg.append("g").selectAll('text')
+    .data(force.links())
+    .enter().append('text')
+    .attr("dy", ".9em")
+    .style("font-size", "12px")
+    .text(function(d) {return d.value > valuationdomain["Max"] && d.value2 > valuationdomain["Max"] ? "" : d.value2;}); 
+  //Select all target labels and set it's attributes.
+  labelt = svg.append("g").selectAll('text')
+    .data(force.links())
+    .enter().append('text')
+    .attr("dy", ".9em")
+    .style("font-size", "12px")
+    .text(function(d) {return d.value > valuationdomain["Max"] && d.value2 > valuationdomain["Max"] ? "" : d.value;}); 
+  // Set the drag behaviour for D3.
+  var node_drag = d3.behavior.drag()
+        .on("dragstart", dragstart)
+        .on("drag", dragmove)
+        .on("dragend", dragend);
+  // Select all node elements and set it's attributes.
+  node = svg.append("g").selectAll(".node")
+    .data(force.nodes())
+    .enter().append("g")
+    .attr("class", "node")
+    .style("fill","#F6FBFF")
+    .on("dblclick",releaseNodes)
+    .on("dragstart", dragstart)
+    .on("drag", dragmove)
+    .on("dragend", dragend)
+    .on("contextmenu", context_node)
+    .call(node_drag);
+  // Append a circle to  the nodes in order to color the nodes and set the sice, which allows us to append text to the nodes later.
+  node.append("circle")
+    .attr("r", 15);    
+  // Append text to nodes.
+  node.append("text")
+    .attr("dx", 0)
+    .attr("dy", ".35em")
+    .style("font-family", "Comic Sans MS")
+    .text(function(d) { return d.name; });
+    force.start();
+  /**
+   * Tick function used to update the coordinates.
+   * @return 
+   */
+  tick = function tick() {
+    
+      labels
+      .attr("x", function(d) { return (((d.source.x + d.target.x) /2) + d.source.x)/2 ; }) 
+      .attr("y", function(d) { return (((d.source.y + d.target.y) /2) + d.source.y)/2; });
+
+    labelt
+      .attr("x", function(d) { return (((d.source.x + d.target.x) /2) + d.target.x)/2 ; }) 
+      .attr("y", function(d) { return (((d.source.y + d.target.y) /2) + d.target.y)/2; });
+
+    path
+      .attr('d', 
+        function(d) {
+          var deltaX = d.target.x - d.source.x,
+          deltaY = d.target.y - d.source.y,
+          dist = Math.sqrt(deltaX * deltaX + deltaY * deltaY),
+          normX = deltaX / dist,
+          normY = deltaY / dist,
+          sourcePadding = d.left ? 17 : 12,
+          targetPadding = d.right ? 17 : 12,
+          sourceX = d.source.x + (sourcePadding * normX),
+          sourceY = d.source.y + (sourcePadding * normY),
+          targetX = d.target.x - (targetPadding * normX),
+          targetY = d.target.y - (targetPadding * normY);
+          return 'M' + sourceX + ',' + sourceY + 'L' + targetX + ',' + targetY;
+        });
+        
+    node
+      .attr("transform", 
+        function(d) {
+          return "translate(" + d.x + "," + d.y + ")"; 
+        });  
+    
+    if(ticker>100) {
+      force.stop();
+      freeze=true;
+    }
+    ticker +=1;
+  }
+
+
+
+
+  force.on("tick",tick)
+   .start();
+  
+   
+  }
+  
+  
+  ////
+  ////
+  ////  CONTEXT MENUS AND THEIR FUNCTIONS
+  ////
+  ////
+
+  /**
+   * Context-menu for right clicks on Nodes.
+   * @method context_node
+   * @param {} d
+   * @return 
+   */
+  var context_node = function context_node(d) {
+     console.log("Opening node context menu.");
+     $('g.node').contextMenu('cntxtNode',
+    {
+        itemStyle:
+        {
+            fontFamily : 'Arial',
+            fontSize: '13px'
+        },
+        bindings:
+        {
+            /**
+             * Description
+             * @param {} t
+             * @return 
+             */
+            'inspect': function(t) {
+                focusNode(d);
+
+            },
+            /**
+             * Description
+             * @param {} t
+             * @return 
+             */
+            'editNode': function(t) {
+                editNode(d);
+
+            },
+            /**
+             * Description
+             * @param {} t
+             * @return 
+             */
+            'connectNode':function(t) {
+                if(graph_type ==="general") {
+               connectNode(d);
+              }
+              else 
+                alert("Connecting not allowed.");
+              
+            },
+            /**
+             * Description
+             * @param {} t
+             * @return 
+             */
+            'deleteNode':function(t) {
+              //Delete a node from actions and all it's relations from the relation dictionnary.
+              if(graph_type ==="general") {
+                delete actions[d.name];
+                delete relation[d.name];
+                for(var x in relation) {
+                  delete relation[x][d.name];
+                }
+              load(hide_status);
+              }
+              else 
+                //Alert if the graph is not of the type outranking.
+                alert("Deleting not allowed.");
+            }
+        }
+    });
+    d3.event.preventDefault();
+  }
+
+  /**
+   * Context-menu for right clicks on Nodes.
+   * @method context_edge
+   * @param {} d
+   * @return 
+   */
+  var context_edge = function context_edge(d) {
+    console.log("Opening edge context menu.");
+    $('path').contextMenu('cntxtEdge',
+    {
+        itemStyle:
+        {
+            fontFamily : 'Arial',
+            fontSize: '13px'
+        },
+        bindings:
+        {
+            
+            /**
+             * Description
+             * @param {} t
+             * @return 
+             */
+            'inspectEdge': function(t) {
+                inspectEdge(d);
+            },
+            /**
+             * Description
+             * @param {} t
+             * @return 
+             */
+            'invertEdge':function(t) {
+                invertEdge(d);
+            },
+            /**
+             * Description
+             * @param {} t
+             * @return 
+             */
+            'editEdge':function(t) {
+              // Edit the values of an edge.
+              if(graph_type ==="general") {
+                editEdge(d);
+              }
+              else 
+                alert("Editing not allowed.");
+            },
+            /**
+             * Description
+             * @param {} t
+             * @return 
+             */
+            'deleteEdge':function(t) {
+              // Delete an edge from the relation dictionnary.
+              if(graph_type ==="general") {
+                delete relation[d.source.name][d.target.name];
+                delete relation[d.target.name][d.source.name];
+                force.stop();
+                load(hide_status);
+              }
+              else 
+                //Alert if the graph is not of the type outranking.
+                alert("Deleting not allowed.");
+            }
+
+        }
+    });
+    d3.event.preventDefault();
+  }
+
+
+  /**
+   * Context-menu for right clicks on Background.
+   * @method context_main
+   * @param {} d
+   * @return 
+   */
+  var context_main = function context_main(d) {
+     console.log("Opening main context menu.");
+     $("#hide").html(function(){ if(hide_status){return '<img alt="Hide" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/hide.png" height="15" width="15" />Unhide';}else{return '<img alt="Hide" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/hide.png" height="15" width="15" />Hide edges';}});
+     $('rect').contextMenu('cntxtMenu',
+     {
+        itemStyle:
+        {
+            fontFamily : 'Arial',
+            fontSize: '13px'
+        },
+        bindings:
+        {
+            /**
+             * Description
+             * @param {} t
+             * @return 
+             */
+            'new': function(t) {
+                hide_status=false;
+                $('#newModal').modal('show');            
+            },
+            /**
+             * Description
+             * @param {} t
+             * @return 
+             */
+            'hide':function(t) {
+              if(hide_status == false) {
+               hide_status=true;
+               load(hide_status);
+              }
+              else {
+                hide_status=false;
+                load(hide_status);
+              }
+            },
+            /**
+             * Description
+             * @param {} t
+             * @return 
+             */
+            'import': function(t) {
+                importJSON();
+
+            },
+            /**
+             * Description
+             * @param {} t
+             * @return 
+             */
+            'export': function(t) {  
+                exportXMCDA2(buildXMCDA2());
+            },
+            /**
+             * Description
+             * @param {} t
+             * @return 
+             */
+            'reset': function(t) {
+                if(json != null) { 
+                  console.log("Resetting Graph.") ;
+                  tick=0;
+                  hide_status=false;
+                  load(hide_status);
+              }},
+              /**
+               * Description
+               * @param {} t
+               * @return 
+               */
+              'add': function(t) {
+                if(graph_type==="general") {
+                    $("#nodeAddId").attr("value","");
+                    $("#addNodeModal").modal("show");
+                  } else {
+                    alert("Adding nodes not allowed.");
+                  }
+            }
+        }
+    });
+    d3.event.preventDefault();
+  }
+
+  /**
+   * Set all important values when creating a new graph. For the moment only valuationdomain min and max!
+   * @method newGraph
+   * @return 
+   */
+  function newGraph() {
+                  var min = $('#min').attr("value"), max=$('#max').attr("value");
+                  if((isNaN(String(min)) || isNaN(String(max))) || !(min < max)) {
+                    alert("Please enter numeric values and Min < Max !");
+                  }
+                  else {
+                    pairwise={};
+                    actions={};
+                    relation={};
+                    xmlDoc=null;
+                    xmlinput="";
+                    initialize();
+                    valuationdomain["Min"] = Number(min);
+                    valuationdomain["Max"] = Number(max);
+                    valuationdomain["Med"]  = valuationdomain["Min"]  + ((valuationdomain["Max"]  - valuationdomain["Min"] )/Number(2.0));
+                    $('#newModal').modal('hide');  
+                    graph_type="general";
+                    type_label.text("Mode : '"+graph_type+"'");
+                  }
+
+  }
+  /**
+  * Stop force and free drag
+  */
+  var draging=false;
+  /**
+   * Description
+   * @method dragstart
+   * @param {} d
+   * @param {} i
+   * @return 
+   */
+  var dragstart = function dragstart(d,i) {
+        if(d3.event.sourceEvent.which==1){
+        draging=true;
+       
+      }
+    }
+
+  /**
+   * Method that is called while dragging a node.
+   * @method dragmove
+   * @param {} d
+   * @param {} i
+   * @return 
+   */
+  var dragmove = function dragmove(d,i) {
+        if(draging){
+        d.px += d3.event.dx;
+        d.py += d3.event.dy;
+        d.x += d3.event.dx;
+        d.y += d3.event.dy;
+        tick();
+        } 
+    }
+
+  /**
+   * Method called on mouseup. A dragged node is frozen at the current coordinates.
+   * @method dragend
+   * @param {} d
+   * @param {} i
+   * @return 
+   */
+  var dragend = function dragend(d,i) {
+        if(d3.event.sourceEvent.which==1){
+        d.fixed = true; 
+        tick();
+        draging=false;
+        }
+    }
+  /**
+   * Check if a node is connected to with another one.
+   * @method isConnected
+   * @param {} a
+   * @param {} b
+   * @return LogicalExpression
+   */
+  function isConnected(a, b) {
+    return linkedByIndex[b.index + "," + a.index] || linkedByIndex[a.index + "," + b.index];
+  }
+  /**
+   * Check if a node is equal to another one.
+   * @method isEqual
+   * @param {} a
+   * @param {} b
+   * @return BinaryExpression
+   */
+  function isEqual(a, b) {
+    return a.index == b.index;
+  }
+ 
+  ////
+  ////
+  ////   NODE CONTROLS
+  ////
+  ////
+  /**
+   * Release a node so it can move again freely according to physics.
+   * @method releaseNodes
+   * @param {} d
+   * @return 
+   */
+  var releaseNodes=function releaseNodes(d) {
+    console.log("Releasing node " + d.name);
+    d.fixed = false; 
+    ticker=0;
+    force.start();
+  }
+  /**
+   * Function called by the connect modal in order to allow the user to select the node to which he wants to connect to.
+   * @method connectNode
+   * @param {} d
+   * @return 
+   */
+  function connectNode(d){
+    var options = $("#selectNode");
+    $("#selectNode").empty();
+    for(var x in actions){
+     if(x != d.name) 
+      options.append($("<option />").val(x).text(x));    
+    };
+    current=d;
+    $('#connNodeModal').modal('show');
+   
+  }
+  /**
+   * Save the new connection and reload the graph.
+   * @method saveConnectNode
+   * @return 
+   */
+  function saveConnectNode() {
+    $('#connNodeModal').modal('hide');
+    var e = document.getElementById("selectNode");
+    var neighbour = e.options[e.selectedIndex].text;
+    relation[current.name][neighbour] = valuationdomain["Max"] +1;
+    relation[neighbour][current.name] = valuationdomain["Max"]+1;
+    load(hide_status);
+  }
+  /**
+   * Function used to add nodes to the graph and refresh the graph later to include them.
+   * @method addNode
+   * @return 
+   */
+  function addNode() {
+    var nodeid = $("#nodeAddId").attr("value");
+    //If no node id is selected prompt an alert and allows you to try again.
+    if(nodeid ==="") {
+      alert("Invalid node id!")
+    }
+    else
+    {
+      relation[nodeid]={};
+      relation[nodeid][nodeid]= Number(valuationdomain["Med"]);  
+      actions[nodeid] = {"name": "nameless","comment":"none"};
+      load(hide_status);
+      $("#addNodeModal").modal("hide");
+    }
+  }
+  /**
+   * Function called by the editGraph modal if a user wants to edit the values of a node.
+   * @method editNode
+   * @param {} d
+   * @return 
+   */
+  function editNode(d) {
+    $('#modNodeModal').modal('show');
+    $('#nodeId').attr("value",d.name);
+    $('#nodeComment').attr("value",d.comment);
+    $('#nodename').attr("value",d.fullName);
+  }
+
+  /**
+   * Save the edited node and reload the graph.
+   * @method saveNode
+   * @param {} d
+   * @return 
+   */
+  function saveNode(d) {
+    $('#modNodeModal').modal('hide');
+    var comment = $('#nodeComment').attr("value");
+    var fullName = $('#nodename').attr("value");
+    actions[$('#nodeId').attr("value")]["comment"] =  comment;
+    actions[$('#nodeId').attr("value")]["name"] =  fullName;
+    $xml.find("alternatives").find('alternative[id="'+$("#nodeId").attr("value")+'"]').find('description').text(comment);
+    $xml.find("alternatives").find('alternative[id="'+$("#nodeId").attr("value")+'"]').attr('name',fullName);
+    load(hide_status);
+    
+  }
   var linkedByIndex = {};
+  /**
+   * Implementation which works as follows:
+   * - Select node.
+   * - Push non connected nodes and edges in the background.
+   * @method focusNode
+   * @param {} d
+   * @return 
+   */
   function focusNode(d) {
     linkedByIndex={}
     console.log("Focusing node " + d.name);
@@ -650,7 +1222,7 @@ function initialize() {
       function(i) {
         linkedByIndex[i.source.index + "," + i.target.index] = true;
     });
-    /*
+    /**
     * Select all node elements, and set their opacity.
     *
     */
@@ -667,7 +1239,7 @@ function initialize() {
           return "#000";
 
         }); 
-    /*
+    /**
     *
     * Select all path elements and set their opacity and cursor behaviour.
     */
@@ -681,7 +1253,7 @@ function initialize() {
         function(o) {
           return o.source.index === d.index || o.target.index === d.index ? 1 : 0.05;
         });
-    /*
+    /**
     *
     * Select all source labels and set their opacity.
     */
@@ -691,7 +1263,7 @@ function initialize() {
         function(o) {
           return o.source.index === d.index || o.target.index === d.index ? 1 : 0;
         });
-    /*
+    /**
     *
     * Select all target labels and set their opacity.
     */
@@ -706,11 +1278,12 @@ function initialize() {
 
     
     
-  /*
-  * 
-  * The unfocus function of focusNode 
-  *
-  */
+  /**
+   * The unfocus function of focusNode 
+   * @method unfocusNode
+   * @param {} d
+   * @return 
+   */
   var unfocusNode = function unfocusNode(d) {
       console.log("Unfocus node.");
       //Select all nodes and set their opacity.
@@ -733,342 +1306,18 @@ function initialize() {
           .style("opacity", 1 );
     }
 
-  
-  /*
-  *
-  *  Context-menu for right clicks on Nodes.
-  *
-  */
-  var context_node = function context_node(d) {
-     console.log("Opening node context menu.");
-     $('g.node').contextMenu('cntxtNode',
-    {
-        itemStyle:
-        {
-            fontFamily : 'Arial',
-            fontSize: '13px'
-        },
-        bindings:
-        {
-            'inspect': function(t) {
-                focusNode(d);
 
-            },
-            'editNode': function(t) {
-                editNode(d);
-
-            },
-            'connectNode':function(t) {
-                if(graph_type ==="general") {
-               connectNode(d);
-              }
-              else 
-                alert("Connecting not allowed.");
-              
-            },
-            'deleteNode':function(t) {
-              //Delete a node from actions and all it's relations from the relation dictionnary.
-              if(graph_type ==="general") {
-                delete actions[d.name];
-                delete relation[d.name];
-                for(var x in relation) {
-                  delete relation[x][d.name];
-                }
-              load(hide_status);
-              }
-              else 
-                //Alert if the graph is not of the type outranking.
-                alert("Deleting not allowed.");
-            }
-        }
-    });
-    d3.event.preventDefault();
-  }
-
-  /*
-  *
-  *  Context-menu for right clicks on Nodes.
-  *
-  */
-  var context_edge = function context_edge(d) {
-    console.log("Opening edge context menu.");
-    $('path').contextMenu('cntxtEdge',
-    {
-        itemStyle:
-        {
-            fontFamily : 'Arial',
-            fontSize: '13px'
-        },
-        bindings:
-        {
-            
-            'inspectEdge': function(t) {
-                inspectEdge(d);
-            },
-            'invertEdge':function(t) {
-                invertEdge(d);
-            },
-            'editEdge':function(t) {
-              // Edit the values of an edge.
-              if(graph_type ==="general") {
-                editEdge(d);
-              }
-              else 
-                alert("Editing not allowed.");
-            },
-            'deleteEdge':function(t) {
-              // Delete an edge from the relation dictionnary.
-              if(graph_type ==="general") {
-                delete relation[d.source.name][d.target.name];
-                delete relation[d.target.name][d.source.name];
-                force.stop();
-                load(hide_status);
-              }
-              else 
-                //Alert if the graph is not of the type outranking.
-                alert("Deleting not allowed.");
-            }
-
-        }
-    });
-    d3.event.preventDefault();
-  }
-
-
-  /*
-  *
-  *  Context-menu for right clicks on Background.
-  *
-  */
-  var context_main = function context_main(d) {
-     console.log("Opening main context menu.");
-     $("#hide").html(function(){ if(hide_status){return '<img alt="Hide" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/hide.png" height="15" width="15" />Unhide';}else{return '<img alt="Hide" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/hide.png" height="15" width="15" />Hide edges';}});
-     $('rect').contextMenu('cntxtMenu',
-     {
-        itemStyle:
-        {
-            fontFamily : 'Arial',
-            fontSize: '13px'
-        },
-        bindings:
-        {
-            'new': function(t) {
-                hide_status=false;
-                $('#newModal').modal('show');            
-            },
-            'hide':function(t) {
-              if(hide_status == false) {
-               hide_status=true;
-               load(hide_status);
-              }
-              else {
-                hide_status=false;
-                load(hide_status);
-              }
-            },
-            'import': function(t) {
-                importJSON();
-
-            },
-            'export': function(t) {  
-                exportXMCDA2(buildXMCDA2());
-            },
-            'reset': function(t) {
-                if(json != null) { 
-                  console.log("Resetting Graph.") ;
-                  tick=0;
-                  hide_status=false;
-                  load(hide_status);
-              }},
-              'add': function(t) {
-                if(graph_type==="general") {
-                    $("#nodeAddId").attr("value","");
-                    $("#addNodeModal").modal("show");
-                  } else {
-                    alert("Adding nodes not allowed.");
-                  }
-            }
-        }
-    });
-    d3.event.preventDefault();
-  }
-
-  /*
-  *
-  * Function used to add nodes to the graph.
-  */
-  function addNode() {
-    var nodeid = $("#nodeAddId").attr("value");
-    //If no node id is selected prompt an alert and allows you to try again.
-    if(nodeid ==="") {
-      alert("Invalid node id!")
-    }
-    else
-    {
-      relation[nodeid]={};
-      relation[nodeid][nodeid]= Number(valuationdomain["Med"]);  
-      actions[nodeid] = {"name": "nameless","comment":"none"};
-      load(hide_status);
-      $("#addNodeModal").modal("hide");
-    }
-  }
-
-  /*
-  *
-  * Set all important values when creating a new graph. For the moment only valuationdomain min and max!
-  */
-  function newGraph() {
-                  var min = $('#min').attr("value"), max=$('#max').attr("value");
-                  if((isNaN(String(min)) || isNaN(String(max))) || !(min < max)) {
-                    alert("Please enter numeric values and Min < Max !");
-                  }
-                  else {
-                    pairwise={};
-                    actions={};
-                    relation={};
-                    xmlDoc=null;
-                    xmlinput="";
-                    initialize();
-                    valuationdomain["Min"] = Number(min);
-                    valuationdomain["Max"] = Number(max);
-                    valuationdomain["Med"]  = valuationdomain["Min"]  + ((valuationdomain["Max"]  - valuationdomain["Min"] )/Number(2.0));
-                    $('#newModal').modal('hide');  
-                    graph_type="general";
-                    type_label.text("Mode : '"+graph_type+"'");
-                  }
-
-  }
-
-  /*
-  *
-  * Release a node so it can move again freely according to physics.
-  */
-  var releaseNodes=function releaseNodes(d) {
-    console.log("Releasing node " + d.name);
-    d.fixed = false; 
-    ticker=0;
-    force.start();
-  }
-
-  /*
-  * Stop force and free drag
-  */
-  var draging=false;
-  var dragstart = function dragstart(d,i) {
-        if(d3.event.sourceEvent.which==1){
-        draging=true;
-       
-      }
-    }
-
-  /*
-  *
-  * Method that is called while dragging a node.
-  */
-  var dragmove = function dragmove(d,i) {
-        if(draging){
-        d.px += d3.event.dx;
-        d.py += d3.event.dy;
-        d.x += d3.event.dx;
-        d.y += d3.event.dy;
-        tick();
-        } 
-    }
-
-  /*
-  *
-  * Method called on mouseup. A dragged node is frozen at the current coordinates.
-  *
-  */
-  var dragend = function dragend(d,i) {
-        if(d3.event.sourceEvent.which==1){
-        d.fixed = true; 
-        tick();
-        draging=false;
-        }
-    }
-
-
-  
-  /*
-  *
-  * Check if a node is connected to with another one.
-  *
-  */
-  function isConnected(a, b) {
-    return linkedByIndex[b.index + "," + a.index] || linkedByIndex[a.index + "," + b.index];
-  }
-  /*
-  *
-  * Check if a node is equal to another one.
-  *
-  */
-  function isEqual(a, b) {
-    return a.index == b.index;
-  }
-
-  /*
-  *
-  * Function called by the connect modal in order to allow the user to select the node to which he wants to connect to.
-  *
-  */
-  function connectNode(d){
-    var options = $("#selectNode");
-    $("#selectNode").empty();
-    for(var x in actions){
-     if(x != d.name) 
-      options.append($("<option />").val(x).text(x));    
-    };
-    current=d;
-    $('#connNodeModal').modal('show');
-   
-  }
-  /*
-  *
-  * Save the new connection and reload the graph.
-  */
-  function saveConnectNode() {
-    $('#connNodeModal').modal('hide');
-    var e = document.getElementById("selectNode");
-    var neighbour = e.options[e.selectedIndex].text;
-    relation[current.name][neighbour] = valuationdomain["Max"] +1;
-    relation[neighbour][current.name] = valuationdomain["Max"]+1;
-    load(hide_status);
-  }
-
-  /*
-  *
-  * Function called by the editGraph modal if a user wants to edit the values of a node.
-  *
-  */
-  function editNode(d) {
-    $('#modNodeModal').modal('show');
-    $('#nodeId').attr("value",d.name);
-    $('#nodeComment').attr("value",d.comment);
-    $('#nodename').attr("value",d.fullName);
-  }
-
-  /*
-  *
-  * Save the edited node and reload the graph.
-  */
-  function saveNode(d) {
-    $('#modNodeModal').modal('hide');
-    var comment = $('#nodeComment').attr("value");
-    var fullName = $('#nodename').attr("value");
-    actions[$('#nodeId').attr("value")]["comment"] =  comment;
-    actions[$('#nodeId').attr("value")]["name"] =  fullName;
-    $xml.find("alternatives").find('alternative[id="'+$("#nodeId").attr("value")+'"]').find('description').text(comment);
-    $xml.find("alternatives").find('alternative[id="'+$("#nodeId").attr("value")+'"]').attr('name',fullName);
-    load(hide_status);
-    
-  }
-
-  /*
-  *
-  *  Function called to initialize the inspectEdge modal with the correct values.
-  *
-  */
+  ////
+  ////
+  ////   EDGE CONTROLS
+  ////
+  ////
+  /**
+   * Function called to initialize the inspectEdge modal with the correct values.
+   * @method inspectEdge
+   * @param {} d
+   * @return 
+   */
   function inspectEdge(d) {
     if (graph_type != "general"){
       $('#modEdgeModal').modal('show');
@@ -1080,11 +1329,12 @@ function initialize() {
     }
   }
 
-  /*
-  *
-  * Function called if we want to invert an Edge, and reload the graph afterwards.
-  * 
-  */
+  /**
+   * Function called if we want to invert an Edge, and reload the graph afterwards.
+   * @method invertEdge
+   * @param {} d
+   * @return 
+   */
   function invertEdge(d) {
     if (pairwise[d.source.name] == null){
       relation[d.source.name][d.target.name] =  (Math.floor((valuationdomain["Max"]- Number(relation[d.source.name][d.target.name]) + valuationdomain["Min"])*100)/100).toFixed(2);
@@ -1097,11 +1347,12 @@ function initialize() {
   }
 
     
-/*
-  *
-  * Function called by the editEdge modal if a user wants to edit the values of an Edge.
-  *
-  */
+/**
+ * Function called by the editEdge modal if a user wants to edit the values of an Edge.
+ * @method editEdge
+ * @param {} d
+ * @return 
+ */
 function editEdge(d) {
     $('#editEdgeModal').modal('show');
     
@@ -1116,10 +1367,11 @@ function editEdge(d) {
 
   }
 
-  /*
-  *
-  * Save the edited edge and reload the graph.
-  */
+  /**
+   * Save the edited edge and reload the graph.
+   * @method saveEdge
+   * @return 
+   */
   function saveEdge() {
     if($('#nodeSource').attr("value")>=valuationdomain["Min"] && $('#nodeSource').attr("value") <= valuationdomain["Max"] && $('#nodeTarget').attr("value")>=valuationdomain["Min"] && $('#nodeTarget').attr("value") <= valuationdomain["Max"]){
     $('#editEdgeModal').modal('hide');
@@ -1130,17 +1382,23 @@ function editEdge(d) {
     else alert("Error: Value must be between " + valuationdomain["Min"] + " and " + valuationdomain["Max"] +" !");
   }
 
-  /*
-  *
-  * Open the import menu and load the file into the xmlinput and pairwise variables.
-  *
-  */
+  /**
+   * Open the import menu and load the file into the xmlinput and pairwise variables.
+   * @method importJSON
+   * @return 
+   */
   function importJSON() {
     console.log("Importing JSON file.")
     graph_type="general";
     var reader;
       if (window.File && window.FileReader && window.FileList && window.Blob) {
         $('#upModalLabel').modal('show');
+        /**
+         * Description
+         * @method handleFileSelect
+         * @param {} evt
+         * @return 
+         */
         function handleFileSelect(evt) {
            var files = document.getElementById('xml').files;
            if (!files.length) {
@@ -1156,6 +1414,12 @@ function editEdge(d) {
           reader.readAsText(blob); 
           actions={};
           relation={};
+          /**
+           * Description
+           * @method onloadend
+           * @param {} evt
+           * @return 
+           */
           reader.onloadend = function(evt) { 
             try{
               d3json=$.parseJSON(evt.target.result); 
@@ -1185,11 +1449,12 @@ function editEdge(d) {
    return ;
   }
   
-  /*
-  *
-  * Parse our XMCDA2 file and load all important variables into memory.
-  *
-  */
+  /**
+   * Parse our XMCDA2 file and load all important variables into memory.
+   * @method parseXMCDA2
+   * @param {} xmlinput
+   * @return ArrayExpression
+   */
   function parseXMCDA2(xmlinput) {
       console.log("Parsing XMCDA2 File.")
       xmlDoc = $.parseXML(xmlinput);
@@ -1237,11 +1502,14 @@ function editEdge(d) {
       return [actions,relation];
   }
 
-  /*
-  *
-  * Build a D3 Json file in order to initialize the graph with nodes and links.
-  *
-  */
+  /**
+   * Build a D3 Json file in order to initialize the graph with nodes and links.
+   * @method buildD3Json
+   * @param {} actions
+   * @param {} relation
+   * @param {} hide
+   * @return dataset
+   */
   function buildD3Json(actions,relation,hide) {
    console.log("Building D3 Json for graph visualization.")
    var dataset = {"nodes":[],"links":[]}
@@ -1300,12 +1568,11 @@ function editEdge(d) {
     return dataset;
   }
 
-  /*
-  *
-  *
-  * Export the XMCDA2 formatted graph.
-  *
-  */
+  /**
+   * Export the XMCDA2 formatted graph.
+   * @method exportXMCDA2
+   * @return 
+   */
   function exportXMCDA2() {
       //Export of Javascript variables cannot be done easily. This is a nasty work-around.
       console.log("Exporting current graph.")
@@ -1330,13 +1597,20 @@ function editEdge(d) {
     }
   }
 
-  /*
-  *
-  *
-  *
-  * Build a valid XMCDA2 tree
-  *
-  */
+  /**
+   * Build a valid XMCDA2 encoded file.
+   * @method buildXMCDA2
+   * @param {} fileName
+   * @param {} name
+   * @param {} relationName
+   * @param {} relationType
+   * @param {} category
+   * @param {} subcategory
+   * @param {} author
+   * @param {} reference
+   * @param {} valuationType
+   * @return xmlinput
+   */
   function buildXMCDA2(fileName,name,relationName,relationType,category,subcategory,author,reference,valuationType){
         fileName= fileName || "general_digraph";
         name=name||"general";
@@ -1452,130 +1726,6 @@ function editEdge(d) {
   xmlinput=xmcda;
   xmlDoc = $.parseXML(xmlinput);
   return xmlinput;
-  }
-
-  
-
-
-  /*
-   *
-   *  Start the graph
-   *
-   */
- function start() {
-  console.log("Drawing graph.")
-  //Select all path elements and initialize it's attributes.
-  path = svg.append("g").selectAll('path')
-    .data(force.links())
-    .enter().append("svg:path")
-    .attr("class", function(d) { return "link " + d.type; })
-    .attr("class", "link")
-    .attr("stroke", function(d){if(d.type == -1 ){return "red";} else {return "#000";}} )
-    .style("opacity",0.5)
-    .attr("stroke-dasharray", function(d) { if(d.type == 5 || d.type ==6|| d.type ==7) return "3,3";})
-    .attr("marker-end", 
-      function(d) { 
-        if(d.type == 4 || d.type ==6|| d.type ==7) 
-          return "url(#end-empty)"; 
-        if(d.type == 0 || d.type ==2|| d.type ==3) 
-          return "url(#end-full)";})
-    .attr("marker-start", 
-      function(d) { 
-        if(d.type == 3|| d.type ==5|| d.type ==7) 
-          return "url(#start-empty)"; 
-        if(d.type == 1 || d.type ==2|| d.type ==4) 
-          return "url(#start-full)";
-      })
-      .on("contextmenu", context_edge);
-  //Select all source labels and set it's attributes.
-  labels = svg.append("g").selectAll('text')
-    .data(force.links())
-    .enter().append('text')
-    .attr("dy", ".9em")
-    .style("font-size", "12px")
-    .text(function(d) {return d.value > valuationdomain["Max"] && d.value2 > valuationdomain["Max"] ? "" : d.value2;}); 
-  //Select all target labels and set it's attributes.
-  labelt = svg.append("g").selectAll('text')
-    .data(force.links())
-    .enter().append('text')
-    .attr("dy", ".9em")
-    .style("font-size", "12px")
-    .text(function(d) {return d.value > valuationdomain["Max"] && d.value2 > valuationdomain["Max"] ? "" : d.value;}); 
-  // Set the drag behaviour for D3.
-  var node_drag = d3.behavior.drag()
-        .on("dragstart", dragstart)
-        .on("drag", dragmove)
-        .on("dragend", dragend);
-  // Select all node elements and set it's attributes.
-  node = svg.append("g").selectAll(".node")
-    .data(force.nodes())
-    .enter().append("g")
-    .attr("class", "node")
-    .style("fill","#F6FBFF")
-    .on("dblclick",releaseNodes)
-    .on("dragstart", dragstart)
-    .on("drag", dragmove)
-    .on("dragend", dragend)
-    .on("contextmenu", context_node)
-    .call(node_drag);
-  // Append a circle to  the nodes in order to color the nodes and set the sice, which allows us to append text to the nodes later.
-  node.append("circle")
-    .attr("r", 15);    
-  // Append text to nodes.
-  node.append("text")
-    .attr("dx", 0)
-    .attr("dy", ".35em")
-    .style("font-family", "Comic Sans MS")
-    .text(function(d) { return d.name; });
-    force.start();
-  //Tick function used to update the coordinates.
-  tick = function tick() {
-    
-      labels
-      .attr("x", function(d) { return (((d.source.x + d.target.x) /2) + d.source.x)/2 ; }) 
-      .attr("y", function(d) { return (((d.source.y + d.target.y) /2) + d.source.y)/2; });
-
-    labelt
-      .attr("x", function(d) { return (((d.source.x + d.target.x) /2) + d.target.x)/2 ; }) 
-      .attr("y", function(d) { return (((d.source.y + d.target.y) /2) + d.target.y)/2; });
-
-    path
-      .attr('d', 
-        function(d) {
-          var deltaX = d.target.x - d.source.x,
-          deltaY = d.target.y - d.source.y,
-          dist = Math.sqrt(deltaX * deltaX + deltaY * deltaY),
-          normX = deltaX / dist,
-          normY = deltaY / dist,
-          sourcePadding = d.left ? 17 : 12,
-          targetPadding = d.right ? 17 : 12,
-          sourceX = d.source.x + (sourcePadding * normX),
-          sourceY = d.source.y + (sourcePadding * normY),
-          targetX = d.target.x - (targetPadding * normX),
-          targetY = d.target.y - (targetPadding * normY);
-          return 'M' + sourceX + ',' + sourceY + 'L' + targetX + ',' + targetY;
-        });
-        
-    node
-      .attr("transform", 
-        function(d) {
-          return "translate(" + d.x + "," + d.y + ")"; 
-        });  
-    
-    if(ticker>100) {
-      force.stop();
-      freeze=true;
-    }
-    ticker +=1;
-  }
-
-
-
-  
-  force.on("tick",tick)
-   .start();
-  
-   
   }
 '''
 
