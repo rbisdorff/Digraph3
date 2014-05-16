@@ -325,13 +325,12 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                         active_children, cpu_count
             #Debug=True
             class myThread(Process):
-                def __init__(self, threadID,iteration,\
+                def __init__(self, threadID,\
                              InitialSplit, tempDirName,\
                              hasNoVeto, hasBipolarVeto,\
                              hasSymmetricThresholds, Debug):
                     Process.__init__(self)
                     self.threadID = threadID
-                    self.iteration = iteration
                     self.InitialSplit = InitialSplit
                     self.workingDirectory = tempDirName
                     self.hasNoVeto = hasNoVeto
@@ -424,36 +423,36 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                         if i < n:
                             splitActions.append(actions2Split[i])
                         i += 1
-                        foName = tempDirName+'/splitActions-'+str(k)+'.py'
-                        fo = open(foName,'wb')
-                        spa = dumps(splitActions,-1)
-                        fo.write(spa)
-                        fo.close()
-                        splitThread = myThread(k,j,InitialSplit,tempDirName,hasNoVeto,hasBipolarVeto,hasSymmetricThresholds,Debug)
-                        splitThread.start()
+                    foName = tempDirName+'/splitActions-'+str(j)+'.py'
+                    fo = open(foName,'wb')
+                    spa = dumps(splitActions,-1)
+                    fo.write(spa)
+                    fo.close()
+                    splitThread = myThread(j,InitialSplit,tempDirName,hasNoVeto,hasBipolarVeto,hasSymmetricThresholds,Debug)
+                    splitThread.start()
                     
                     while active_children() != []:
                         pass
                     
                     #print('Exiting computing threads')
-                    for k in range(nbrCores):
-                        fiName = tempDirName+'/splitActions-'+str(k)+'.py'
-                        fi = open(fiName,'rb')
-                        splitActions = loads(fi.read())
-                        fi.close()
-                        fiName = tempDirName+'/splitRelation-'+str(k)+'.py'
-                        fi = open(fiName,'rb')
-                        splitRelation = loads(fi.read())
-                        fi.close()
-                        
-                        if InitialSplit:
-                            for x in splitActions:
-                                for y in terminal:
-                                    relation[x][y] = splitRelation[x][y]
-                        else:  
-                            for x in initial:
-                                for y in splitActions:
-                                    relation[x][y] = splitRelation[x][y]   
+                for j in range(nit):
+                    fiName = tempDirName+'/splitActions-'+str(j)+'.py'
+                    fi = open(fiName,'rb')
+                    splitActions = loads(fi.read())
+                    fi.close()
+                    fiName = tempDirName+'/splitRelation-'+str(j)+'.py'
+                    fi = open(fiName,'rb')
+                    splitRelation = loads(fi.read())
+                    fi.close()
+                    
+                    if InitialSplit:
+                        for x in splitActions:
+                            for y in terminal:
+                                relation[x][y] = splitRelation[x][y]
+                    else:  
+                        for x in initial:
+                            for y in splitActions:
+                                relation[x][y] = splitRelation[x][y]   
                 return relation
     
         
@@ -1809,8 +1808,8 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
 
-    nq = 50
-    t = RandomCBPerformanceTableau(numberOfActions=100,
+    nq = 20
+    t = RandomCBPerformanceTableau(numberOfActions=200,
                                    numberOfCriteria=13,
                                    weightDistribution='equiobjectives')
 ##    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
@@ -1831,15 +1830,14 @@ if __name__ == "__main__":
                                   LowerClosed=True,
                                   PrefThresholds=False)
     print(time()-t0)
-    t0 = time()
-    qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
+    qs0.showSorting()
+    t1 = time()
+    qs1 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
                                   LowerClosed=True,
                                   PrefThresholds=False,
                                   Threading=False)
-    print(time()-t0)
-    
-    
-##    qs0.showSorting()
+    print(time()-t1)   
+    qs1.showSorting()
 ##    qs0.showActionsSortingResult()
 ##    for x in qs0.actions:
 ##        print(qs0.showActionCategories(x,Comments=False))
