@@ -323,7 +323,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             from pickle import dumps, loads, load
             from multiprocessing import Process, Lock,\
                                         active_children, cpu_count
-            #Debug=True
+            Debug=True
             class myThread(Process):
                 def __init__(self, threadID,\
                              InitialSplit, tempDirName,\
@@ -1813,7 +1813,7 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     nq = 5
-    t = RandomCBPerformanceTableau(numberOfActions=340,
+    t = RandomCBPerformanceTableau(numberOfActions=200,
                                    numberOfCriteria=13,
                                    weightDistribution='equiobjectives')
 ##    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
@@ -1829,32 +1829,32 @@ if __name__ == "__main__":
     #s = SortingDigraph(t,lowerClosed=False)
     #s.showSorting()
     #s.showSortingCharacteristics('a10')
-##    t0 = time()
-##    qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
-##                                  LowerClosed=True,
-##                                  PrefThresholds=False,
-##                                  Threading=True,
-##                                  Debug=False)
-##    t1 = time()-t0
-##    t2 = time()
-##    qs1 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
-##                                  LowerClosed=True,
-##                                  PrefThresholds=False,
-##                                  Threading=False)
-##    t3 = time()-t2
-##    qs0.showSorting()
-##    qs1.showSorting()
-##    print('With and without threading: %s, %s' % (str(t1),str(t3)) )
-    
     t0 = time()
-    s0 = SortingDigraph(t,Threading=True,Debug=False)
+    qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
+                                  LowerClosed=True,
+                                  PrefThresholds=False,
+                                  Threading=True,
+                                  Debug=False)
     t1 = time()-t0
-    #s0.showSorting()
     t2 = time()
-    s1 = SortingDigraph(t,Threading=False)
+    qs1 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
+                                  LowerClosed=True,
+                                  PrefThresholds=False,
+                                  Threading=False)
     t3 = time()-t2
-    s1.showSorting()
+    qs0.showSorting()
+    qs1.showSorting()
     print('With and without threading: %s, %s' % (str(t1),str(t3)) )
+    
+##    t0 = time()
+##    s0 = SortingDigraph(t,Threading=True,Debug=False)
+##    t1 = time()-t0
+##    #s0.showSorting()
+##    t2 = time()
+##    s1 = SortingDigraph(t,Threading=False)
+##    t3 = time()-t2
+##    s1.showSorting()
+##    print('With and without threading: %s, %s' % (str(t1),str(t3)) )
         
 
     

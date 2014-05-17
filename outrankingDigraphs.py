@@ -3643,6 +3643,14 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         for a in initial:
             relation[a] = {}
             for b in terminal:
+##                # testing paralleization of relation construction method
+##                # for the sortingDigraph.QuantilesSortingDigraph constructor
+##                from time import sleep
+##                sleep(0.0007)
+##                # with nq = 5, #A = 200, #C = 13, and sleep(0,0007) we get
+##                # With and without threading: 51.05 sec., resp. 51.39 sec.
+##                # with sleep(0) we get
+##                # With and without threading: 7.25 sec., resp. 6.4 sec.
                 if a == b:
                     relation[a][b] = Decimal('0.0')
                 else:
