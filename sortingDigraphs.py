@@ -110,7 +110,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                  isRobust=False,
                  hasNoVeto=False,
                  lowerClosed=True,
-                 Threading=True,
+                 Threading=False,
                  Debug=False):
         """
         Constructor for SortingDigraph instances.
@@ -301,7 +301,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                            hasBipolarVeto=True,\
                            Debug=False,\
                            hasSymmetricThresholds=True,\
-                           Threading = True):
+                           Threading = False):
         """
         Specialization of the corresponding BipolarOutrankingDigraph method
         """
@@ -387,7 +387,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 fo.close()
                 
                 nbrCores = cpu_count()-2
-                print('nbr of cpus = ',nbrCores)
+                print('Nbr of cpus = ',nbrCores)
 
                 ni = len(initial)
                 nt = len(terminal)
@@ -399,16 +399,18 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     n = nt
                     actions2Split = list(terminal)
                     InitialSplit = False
-
-                #print('InitialSplit, actions2Split', InitialSplit, actions2Split)
+                if Debug:
+                    print('InitialSplit, actions2Split', InitialSplit, actions2Split)
             
                 nit = n//nbrCores
                 if nit*nbrCores < n:
-                    nit += 1
+                    nbrOfJobs = nbrCores + 1
+                else:
+                    nbrOfJobs = nbrCores
                 if Debug:
-                    print('nbr of jobs',n)
-                    print('nbr of cores = ',nbrCores)    
-                    print('nbr of iterations = ',nit)
+                    print('nbr of actions to split',n)
+                    print('nbr of jobs = ',nbrOfJobs)    
+                    print('nbr of splitActions = ',nit)
 
                 relation = {}
                 for x in initial:
@@ -416,13 +418,15 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     for y in terminal:
                         relation[x][y] = self.valuationdomain['med']
                 i = 0
-                for j in range(nit):
-                    #print('iteration = ',j+1)
+                for j in range(nbrOfJobs):
+                    print('iteration = ',j+1)
                     splitActions=[]
-                    for k in range(nbrCores):
+                    for k in range(nit):
                         if i < n:
                             splitActions.append(actions2Split[i])
                         i += 1
+                    if Debug:
+                        print(splitActions)
                     foName = tempDirName+'/splitActions-'+str(j)+'.py'
                     fo = open(foName,'wb')
                     spa = dumps(splitActions,-1)
@@ -431,11 +435,11 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     splitThread = myThread(j,InitialSplit,tempDirName,hasNoVeto,hasBipolarVeto,hasSymmetricThresholds,Debug)
                     splitThread.start()
                     
-                    while active_children() != []:
-                        pass
+                while active_children() != []:
+                    pass
                     
-                    #print('Exiting computing threads')
-                for j in range(nit):
+                print('Exiting computing threads')
+                for j in range(nbrOfJobs):
                     fiName = tempDirName+'/splitActions-'+str(j)+'.py'
                     fi = open(fiName,'rb')
                     splitActions = loads(fi.read())
@@ -1143,7 +1147,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                  minValuation=-100.0,
                  maxValuation=100.0,
                  outrankingType = "bipolar",
-                 Threading=True,
+                 Threading=False,
                  Debug=False):
         """
         Constructor for QuantilesSortingDigraph instances.
@@ -1808,14 +1812,14 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
 
-    nq = 20
-    t = RandomCBPerformanceTableau(numberOfActions=200,
+    nq = 5
+    t = RandomCBPerformanceTableau(numberOfActions=340,
                                    numberOfCriteria=13,
                                    weightDistribution='equiobjectives')
 ##    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
-    t.saveXMCDA2('test')
+##    t.saveXMCDA2('test')
 ##    t.showPerformanceTableau()
-    t = XMCDA2PerformanceTableau('test')
+##    t = XMCDA2PerformanceTableau('test')
     #t.showCriteria()
     #g = BipolarOutrankingDigraph(t)
     #t = PerformanceTableau('ex1perftab')
@@ -1825,162 +1829,34 @@ if __name__ == "__main__":
     #s = SortingDigraph(t,lowerClosed=False)
     #s.showSorting()
     #s.showSortingCharacteristics('a10')
-    t0 = time()
-    qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
-                                  LowerClosed=True,
-                                  PrefThresholds=False)
-    print(time()-t0)
-    qs0.showSorting()
-    t1 = time()
-    qs1 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
-                                  LowerClosed=True,
-                                  PrefThresholds=False,
-                                  Threading=False)
-    print(time()-t1)   
-    qs1.showSorting()
-##    qs0.showActionsSortingResult()
-##    for x in qs0.actions:
-##        print(qs0.showActionCategories(x,Comments=False))
-        
-    #print(g.computeOrdinalCorrelation(qs0))
-##    qs0.showWeakOrder(Descending=False)
-##    qs0.showWeakOrder(Descending=True)
-##    qs0.showOrderedRelationTable(direction="decreasing")
-##    qs0.showOrderedRelationTable(direction="increasing")
-##    qs0.exportGraphViz()
-    
+##    t0 = time()
+##    qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
+##                                  LowerClosed=True,
+##                                  PrefThresholds=False,
+##                                  Threading=True,
+##                                  Debug=False)
+##    t1 = time()-t0
+##    t2 = time()
 ##    qs1 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
 ##                                  LowerClosed=True,
-##                                  PrefThresholds = True)
+##                                  PrefThresholds=False,
+##                                  Threading=False)
+##    t3 = time()-t2
+##    qs0.showSorting()
 ##    qs1.showSorting()
-##    qs1.showSortingCharacteristics('a10')
-##    print(g.computeOrdinalCorrelation(qs1))
-##    qs2 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
-##                                  LowerClosed=False,
-##                                  PrefThresholds=False)
-##    qs2.showSorting()
-##    qs2.showSortingCharacteristics('a10')
-##    print(g.computeOrdinalCorrelation(qs2))
-##    qs3 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
-##                                  LowerClosed=False,
-##                                  PrefThresholds = True)
-##    qs3.showSorting()
-##    qs3.showSortingCharacteristics('a10')
-##    print(g.computeOrdinalCorrelation(qs3))
-##    s0 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
-##                                LowerClosed=False,
-##                                Debug=False)
-##    #print(s0.categories)
-##    s0.showSorting(Reverse=True)
-##    for x in s0.actions:
-##        s0.showActionCategories(x,Debug=False)
-##    s0.showActionsSortingResult()
-##    s0.exportGraphViz('tests0',graphType="pdf")
-##    s1 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
-##                                LowerClosed=True,
-##                                Debug=False)
-##    #print(s0.categories)
-##    s1.showSorting(Reverse=True)
-####    for x in s1.actions:
-####        s1.showActionCategories(x,Debug=False)
-##    s1.showActionsSortingResult()
-##    s1.exportGraphViz('tests1',graphType="pdf")
-##    s0.showSorting(Reverse=False)
-##    sortingRelation = s0.computeSortingRelation()
-##    #s0.showRelationTable(actionsSubset=s0.actionsOrig,relation=sortingRelation)
-##    #s0.showOrderedRelationTable()
-##    s0.showWeakOrder()
-##    s0.exportGraphViz('test1',graphType="pdf")
-##    g = BipolarOutrankingDigraph(t)
-##    print(g.computeOrdinalCorrelation(s0))    
-##    s1 = QuantilesSortingDigraph(t,limitingQuantiles="deciles",
-##                                LowerClosed=True,
-##                                outrankingType='likely',
-##                                Debug=False)
-##    #print(s1.categories)
-##    s1.showSorting(Reverse=True)
-####    s0.showSorting(Reverse=False)
-##    s1.exportGraphViz('test2',graphType="pdf")
+##    print('With and without threading: %s, %s' % (str(t1),str(t3)) )
+    
+    t0 = time()
+    s0 = SortingDigraph(t,Threading=True,Debug=False)
+    t1 = time()-t0
+    #s0.showSorting()
+    t2 = time()
+    s1 = SortingDigraph(t,Threading=False)
+    t3 = time()-t2
+    s1.showSorting()
+    print('With and without threading: %s, %s' % (str(t1),str(t3)) )
+        
 
-###############   scratch #########################
-
-    #s0.showCriteriaCategoryLimits()
-    #print(s0.computeCategoryContents(Comments=True))
-    #s0.computeSortingCharacteristics(Comments=True)
-    #s0.showPairwiseComparison('a10','1-m')
-    #s0.showPairwiseComparison('1-m','a10')
-    #print(s0.relation['a10']['1-m'],s0.relation['1-m']['a10'])
-          
-    # s0cd = CoDualDigraph(s0)
-    # s0cd.showPairwiseComparison('a10','1-m')
-    # s0cd.showPairwiseComparison('1-m','a10')
-    # print(s0cd.relation['a10']['1-m'],s0cd.relation['1-m']['a10'])
-    # print(s0.criteria['g03'])
-##    print('#################')
-##    s1 = QuantilesSortingDigraph(t,limitingQuantiles="quartiles",
-##                                LowerClosed=True,
-##                                Robust=False,Debug=False)
-##    print(s1.categories)
-##    for g in s1.criteria:
-##        print(g)
-##        print(s1._computeLimitingQuantiles(g))
-    #s = SortingDigraph(t,lowerClosed=True)
-    #s.showSorting(Reverse=True)
-    #s.showSorting(Reverse=False)
-    #s1.showCriteriaCategoryLimits()
-    #s.showRelationTable()
-    #s.computeSortingCharacteristics(Comments=True)
-    #print('------- testing sorting by prudent choosing ------')
-    #g = BipolarOutrankingDigraph(t)
-                              
-    #g.recodeValuation(-1,1)
-    #gdeter = g.computeDeterminateness()
-    #t0 = time()
-    #s = SortingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.2)
-    #s = SortingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.2,SplitCorrelation=False)
-#    t1 = time()
-#    s.showSorting()
-#    print('Circuits elimination cut level: %.3f' % s.cutLevel)
-#    print('Ordinal Correlation with given outranking')
-#    corr = g.computeOrdinalCorrelation(s)
-#    print('Correlation     : %.3f' % corr['correlation'])
-#    print('Determinateness : %.3f (%.3f)' % (corr['determination'],gdeter))
-#    print('Execution time  : %.4f sec.' % (t1-t0))
-#    s1 = SortingByBestChoosingDigraph(g,CoDual=True)
-#    s1.showSorting()
-#    #s1.showRelationTable()
-#    #s1.exportGraphViz()
-#    print('Best: Ordinal Correlation with given outranking')
-#    corr = g.computeOrdinalCorrelation(s1)
-#    print('Correlation  : %.5f' % corr['correlation'])
-#    print('Determination: %.5f' % corr['determination'])
-#    #g.showPerformanceTableau()
-
-#    s2 = SortingByLastChoosingDigraph(g,CoDual=True)
-#    s2.showSorting()
-#    #s2.showRelationTable()
-#    #s2.exportGraphViz()
-#    #print(s1.sortingByChoosing)
-#    #s1.exportGraphViz()
-#    print('Last: Ordinal Correlation with given outranking')
-#    corr = g.computeOrdinalCorrelation(s2)
-#    print('Correlation  : %.5f' % corr['correlation'])
-#    print('Determination: %.5f' % corr['determination'])
-
-#    print('Ordinal Correlation between Best- and Last-choosing')
-#    corr = s1.computeOrdinalCorrelation(s2)
-#    print('Correlation  : %.5f' % corr['correlation'])
-#    print('Determination: %.5f' % corr['determination'])    
-
-#    fusion = FusionDigraph(s1,s2)
-#    #fusion.showRelationTable()
-#    #g.showRelationTable()
-#    print('Fusion: Ordinal Correlation with fusion ranking')
-#    corr = g.computeOrdinalCorrelation(fusion)
-#    print('Correlation  : %.5f' % corr['correlation'])
-#    print('Determination: %.5f' % corr['determination'])
-#    fusion.computeRankingByChoosing(CoDual=True)svn
-#    fusion.showRankingByChoosing()
     
 
     print('*------------------*')
