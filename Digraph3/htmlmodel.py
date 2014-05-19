@@ -183,8 +183,15 @@ graph
           <!-- INPUT -->
   
   <div class="form-group"> 
-  Enter a valid node id: <input type="text" value="" placeholder="ID" class="form-control" maxlength="10" autofocus required name="nodeAddId" id="nodeAddId"> 
+  ID :<input type="text" value="" placeholder="ID" class="form-control" maxlength="10" autofocus required name="nodeAddId" id="nodeAddId"> 
   </div> 
+  <div class="form-group"> 
+  Name :<input type="text" placeholder="nameless" class="form-control" maxlength="10" required name="nodename" id="nodename_add"> 
+  </div> 
+  <div class="form-group">
+  Comment :<input type="text" placeholder="none" class="form-control" maxlength="20" name="nodeComment" id="nodeComment_add"> 
+   </div>
+
   </div>
   
   <div class="modal-footer">
@@ -294,6 +301,7 @@ graph
         • Right-click edges to invert them,edit their value, delete them or to display the pairwise comparision table between two nodes.<br/><br/>
         • One click on the background sets your graph back out of the inspect mode.<br/><br/>
         • Double click on the background restarts the force of the graph.<br/><br/>
+        • The graph is automatically frozen after 100 ticks.
             </p>
   
           </div> 
@@ -350,6 +358,7 @@ graph
   </script>
 </body>
 </html>
+
 
 '''
 def javascript():
@@ -1170,7 +1179,19 @@ function initialize() {
     {
       relation[nodeid]={};
       relation[nodeid][nodeid]= Number(valuationdomain["Med"]);  
-      actions[nodeid] = {"name": "nameless","comment":"none"};
+      name = $("#nodename_add").attr("value");
+      comment = $("#nodeComment_add").attr("value");
+      if((name === "")&&(comment != "")){
+       actions[nodeid] = {"name": "nameless","comment":comment};
+    } else if((name != "")&&(comment === "")) {
+      actions[nodeid] = {"name": name,"comment":"none"};
+    }
+    else if(((name != "")&&(comment != ""))){
+      actions[nodeid] = {"name": name,"comment":comment};
+    }
+    else {
+          actions[nodeid] = {"name": "nameless","comment":"none"};
+    }
       load(hide_status);
       $("#addNodeModal").modal("hide");
     }
@@ -1727,6 +1748,7 @@ function editEdge(d) {
   xmlDoc = $.parseXML(xmlinput);
   return xmlinput;
   }
+
 '''
 
 def d3export():
