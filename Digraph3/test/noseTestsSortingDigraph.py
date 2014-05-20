@@ -147,3 +147,23 @@ def testActionsSortingResult():
     s1.showSorting(Reverse=False)
     s1.showActionsSortingResult()
     s1.exportGraphViz('tests1',graphType="pdf")
+
+def testOptimalHarmonicQuantilesSortingDigraph():
+    print('*-------- Testing QuantilesSortingDigraph class 1 -------')
+    t = RandomCBPerformanceTableau(numberOfActions=20)
+    t.saveXMCDA2('test')
+    s0 = OptimalHarmonicQuantilesSortingDigraph(t,
+                                minQuantiles=4,
+                                maxQuantiles=200,
+                                LowerClosed=True,
+                                PrefThresholds=True,
+                                outrankingType='bipolar',
+                                Debug=False)
+    print(s0.categories)
+    s0.showSorting(Reverse=True)
+    s0.showSorting(Reverse=False)
+    sortingRelation = s0.computeSortingRelation()
+    s0.showRelationTable(actionsSubset=s0.actionsOrig,relation=sortingRelation)
+    s0.showOrderedRelationTable()
+    s0.showWeakOrder(Descending=True)
+    s0.exportGraphViz(graphType="pdf")

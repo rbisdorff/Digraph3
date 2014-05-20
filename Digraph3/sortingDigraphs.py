@@ -1104,7 +1104,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             fo.close()
             print('File: ' + nameExt + ' saved !')
 
-        
+    
 class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
     """
     Specialisation of the sortingDigraph Class
@@ -1790,6 +1790,75 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         for x in actions:
             self.showActionCategories(x)
 
+class OptimalHarmonicQuantilesSortingDigraph(QuantilesSortingDigraph):
+    """
+    Specialisation of the QuantilesSortingDigraph Class
+    for optimal sorting of alternatives into
+    quantiles delimited ordered classes.
+    """
+    def __init__(self,argPerfTab=None,
+                 minQuantiles=4,
+                 maxQuantiles=200,
+                 LowerClosed=True,
+                 PrefThresholds=True,
+                 hasNoVeto=False,
+                 minValuation=-100.0,
+                 maxValuation=100.0,
+                 outrankingType = "bipolar",
+                 Threading=False,
+                 Debug=False):
+        
+        from copy import deepcopy
+        if argPerfTab != None:
+            t = argPerfTab
+        else:
+            t = RandomCBPerformanceTableau()
+        g = BipolarOutrankingDigraph(t)
+        maxCorr = {'correlation': Decimal('-1.0')}
+        maxCorr['determination'] = Decimal('0.0')
+        qs = None
+        nbrActions = len(t.actions)
+        nq = nbrActions+1
+        divNbrActions = []
+        for i in range(minQuantiles,nq):
+            if (nbrActions%i) == 0:
+                divNbrActions.append(i)
+        if Debug:
+            print(divNbrActions)
+        testNQ = [(i+1) for i in divNbrActions]
+        for m in range(2,10):
+            if m*nbrActions < maxQuantiles:
+                testNQ.append((m*nbrActions)+1)
+        if Debug:
+            print(testNQ)
+        for nq in testNQ:
+            if Debug:
+                print( '%d-tiling' % (nq) )
+            qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,Threading=False)
+            qs0Corr = g.computeOrdinalCorrelation(qs0)
+            if Debug:
+                print( 'correlation0 = %.3f' % qs0Corr['correlation'] )
+            if qs0Corr['correlation']*qs0Corr['determination'] > maxCorr['correlation']*maxCorr['determination']:
+    #        if qs0Corr['correlation'] > maxCorr['correlation']:
+                maxqs = deepcopy(qs0)
+            
+        self.name = deepcopy(maxqs.name)
+        self.actions = deepcopy(maxqs.actions)
+        self.actionsOrig = deepcopy(maxqs.actionsOrig)
+        self.order = len(self.actions)
+        self.criteria = deepcopy(maxqs.criteria)
+        self.evaluation = deepcopy(maxqs.evaluation)
+        self.profiles = deepcopy(maxqs.profiles)
+        self.valuationdomain = deepcopy(maxqs.valuationdomain)
+        self.relation = deepcopy(maxqs.relation)
+        self.categories = deepcopy(maxqs.categories)
+        self.criteriaCategoryLimits = deepcopy(maxqs.criteriaCategoryLimits)
+        self.limitingQuantiles = deepcopy(maxqs.limitingQuantiles)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        
+        return None
+
            
 #----------test SortingDigraph class ----------------
 if __name__ == "__main__":
@@ -1812,10 +1881,19 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
 
-    nq = 5
-    t = RandomCBPerformanceTableau(numberOfActions=200,
+    #t = XMCDA2PerformanceTableau('uniSorting')
+    #t = XMCDA2PerformanceTableau('spiegel2004')
+    t = RandomCBPerformanceTableau(numberOfActions=20,
                                    numberOfCriteria=13,
                                    weightDistribution='equiobjectives')
+    qsh = OptimalHarmonicQuantilesSortingDigraph(t,
+                                  LowerClosed=True,
+                                  PrefThresholds=False,
+                                  Threading=True,
+                                  Debug=False)
+    qsh.showSorting()
+    qsh.exportGraphViz(graphType="pdf")
+    #qsh.showCriteriaCategoryLimits()
 ##    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
 ##    t.saveXMCDA2('test')
 ##    t.showPerformanceTableau()
@@ -1824,27 +1902,25 @@ if __name__ == "__main__":
     #g = BipolarOutrankingDigraph(t)
     #t = PerformanceTableau('ex1perftab')
     #t.showQuantileSort()
-    #t = XMCDA2PerformanceTableau('uniSorting')
-    #t = XMCDA2PerformanceTableau('spiegel2004')
     #s = SortingDigraph(t,lowerClosed=False)
     #s.showSorting()
     #s.showSortingCharacteristics('a10')
-    t0 = time()
-    qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
-                                  LowerClosed=True,
-                                  PrefThresholds=False,
-                                  Threading=True,
-                                  Debug=False)
-    t1 = time()-t0
-    t2 = time()
-    qs1 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
-                                  LowerClosed=True,
-                                  PrefThresholds=False,
-                                  Threading=False)
-    t3 = time()-t2
-    qs0.showSorting()
-    qs1.showSorting()
-    print('With and without threading: %s, %s' % (str(t1),str(t3)) )
+##    t0 = time()
+##    qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
+##                                  LowerClosed=True,
+##                                  PrefThresholds=False,
+##                                  Threading=True,
+##                                  Debug=False)
+##    t1 = time()-t0
+##    t2 = time()
+##    qs1 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
+##                                  LowerClosed=True,
+##                                  PrefThresholds=False,
+##                                  Threading=False)
+##    t3 = time()-t2
+##    qs0.showSorting()
+##    qs1.showSorting()
+##    print('With and without threading: %s, %s' % (str(t1),str(t3)) )
     
 ##    t0 = time()
 ##    s0 = SortingDigraph(t,Threading=True,Debug=False)
