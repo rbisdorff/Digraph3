@@ -1827,8 +1827,8 @@ class OptimalHarmonicQuantilesSortingDigraph(QuantilesSortingDigraph):
             print(divNbrActions)
         testNQ = [(i+1) for i in divNbrActions]
         for m in range(2,10):
-            if m*nbrActions < maxQuantiles:
-                testNQ.append((m*nbrActions)+1)
+            if m*(nbrActions+1) < maxQuantiles:
+                testNQ.append(m*(nbrActions+1))
         if Debug:
             print(testNQ)
         for nq in testNQ:
