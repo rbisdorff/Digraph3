@@ -1794,7 +1794,7 @@ class OptimalHarmonicQuantilesSortingDigraph(QuantilesSortingDigraph):
     """
     Specialisation of the QuantilesSortingDigraph Class
     for optimal sorting of alternatives into
-    quantiles delimited ordered classes.
+    quantiles delimited ordered classes. 
     """
     def __init__(self,argPerfTab=None,
                  minQuantiles=4,
@@ -1805,6 +1805,7 @@ class OptimalHarmonicQuantilesSortingDigraph(QuantilesSortingDigraph):
                  minValuation=-100.0,
                  maxValuation=100.0,
                  outrankingType = "bipolar",
+                 Prudent=True,
                  Threading=False,
                  Debug=False):
         
@@ -1838,10 +1839,14 @@ class OptimalHarmonicQuantilesSortingDigraph(QuantilesSortingDigraph):
             qs0Corr = g.computeOrdinalCorrelation(qs0)
             if Debug:
                 print( 'correlation0 = %.3f' % qs0Corr['correlation'] )
-            if qs0Corr['correlation']*qs0Corr['determination'] > maxCorr['correlation']*maxCorr['determination']:
-    #        if qs0Corr['correlation'] > maxCorr['correlation']:
-                maxCorr = deepcopy(qs0Corr)
-                maxqs = deepcopy(qs0)
+            if Prudent:
+                if qs0Corr['correlation'] > maxCorr['correlation']:
+                    maxCorr = deepcopy(qs0Corr)
+                    maxqs = deepcopy(qs0)                
+            else:
+                if qs0Corr['correlation']*qs0Corr['determination'] > maxCorr['correlation']*maxCorr['determination']:
+                    maxCorr = deepcopy(qs0Corr)
+                    maxqs = deepcopy(qs0)
             
         self.name = deepcopy(maxqs.name)
         self.actions = deepcopy(maxqs.actions)
@@ -1857,8 +1862,72 @@ class OptimalHarmonicQuantilesSortingDigraph(QuantilesSortingDigraph):
         self.limitingQuantiles = deepcopy(maxqs.limitingQuantiles)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+
+class OptimalQuantilesSortingDigraph(QuantilesSortingDigraph):
+    """
+    Specialisation of the QuantilesSortingDigraph Class
+    for optimal sorting of alternatives into
+    quantiles delimited ordered classes. 
+    """
+    def __init__(self,argPerfTab=None,
+                 minQuantiles=4,
+                 maxQuantiles=50,
+                 LowerClosed=True,
+                 PrefThresholds=True,
+                 hasNoVeto=False,
+                 minValuation=-100.0,
+                 maxValuation=100.0,
+                 outrankingType = "bipolar",
+                 Prudent=True,
+                 Threading=False,
+                 Debug=False):
         
-        return None
+        from copy import deepcopy
+        if argPerfTab != None:
+            t = argPerfTab
+        else:
+            t = RandomCBPerformanceTableau()
+        g = BipolarOutrankingDigraph(t)
+        maxCorr = {'correlation': Decimal('-1.0')}
+        maxCorr['determination'] = Decimal('0.0')
+        maxqs = None
+        maxnq = 20
+        for nq in range(maxQuantiles,minQuantiles,-1):
+            print( '%d-tiling' % (nq) )
+            qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
+                                         LowerClosed=True,
+                                         PrefThresholds=True,
+                                         hasNoVeto=False,
+                                         minValuation=-100.0,
+                                         maxValuation=100.0,
+                                         outrankingType = "bipolar",
+                                        Threading=False)
+            qs0Corr = g.computeOrdinalCorrelation(qs0)
+            if Debug:
+                print( 'correlation0 = %.3f' % qs0Corr['correlation'] )
+            if Prudent:
+                if qs0Corr['correlation'] > maxCorr['correlation']:
+                    maxCorr = deepcopy(qs0Corr)
+                    maxqs = deepcopy(qs0)                
+            else:
+                if qs0Corr['correlation']*qs0Corr['determination'] > maxCorr['correlation']*maxCorr['determination']:
+                    maxCorr = deepcopy(qs0Corr)
+                    maxqs = deepcopy(qs0)
+            
+        self.name = deepcopy(maxqs.name)
+        self.actions = deepcopy(maxqs.actions)
+        self.actionsOrig = deepcopy(maxqs.actionsOrig)
+        self.order = len(self.actions)
+        self.criteria = deepcopy(maxqs.criteria)
+        self.evaluation = deepcopy(maxqs.evaluation)
+        self.profiles = deepcopy(maxqs.profiles)
+        self.valuationdomain = deepcopy(maxqs.valuationdomain)
+        self.relation = deepcopy(maxqs.relation)
+        self.categories = deepcopy(maxqs.categories)
+        self.criteriaCategoryLimits = deepcopy(maxqs.criteriaCategoryLimits)
+        self.limitingQuantiles = deepcopy(maxqs.limitingQuantiles)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
 
            
 #----------test SortingDigraph class ----------------
@@ -1890,8 +1959,19 @@ if __name__ == "__main__":
     qsh = OptimalHarmonicQuantilesSortingDigraph(t,
                                   LowerClosed=True,
                                   PrefThresholds=False,
-                                  Threading=True,
+                                  Threading=False,
+                                  Prudent=False,
                                   Debug=False)
+    qsh.showSorting()
+    qsh.exportGraphViz(graphType="pdf")
+    qsopt = OptimalQuantilesSortingDigraph(t,
+                                    minQuantiles=4,
+                                    maxQuantiles=43,
+                                    LowerClosed=True,
+                                    PrefThresholds=False,
+                                    Prudent=True,       
+                                    Threading=False,
+                                    Debug=False)
     qsh.showSorting()
     qsh.exportGraphViz(graphType="pdf")
     #qsh.showCriteriaCategoryLimits()
