@@ -1840,6 +1840,7 @@ class OptimalHarmonicQuantilesSortingDigraph(QuantilesSortingDigraph):
                 print( 'correlation0 = %.3f' % qs0Corr['correlation'] )
             if qs0Corr['correlation']*qs0Corr['determination'] > maxCorr['correlation']*maxCorr['determination']:
     #        if qs0Corr['correlation'] > maxCorr['correlation']:
+                maxCorr = deepcopy(qs0Corr)
                 maxqs = deepcopy(qs0)
             
         self.name = deepcopy(maxqs.name)
