@@ -1467,6 +1467,7 @@ class Digraph(object):
             otherRelation = otherg.relation
         else:
             otherRelation = deepcopy(other)
+            
             if MedianCut:
                 for x in g.actions:
                     for y in g.actions:
@@ -2874,7 +2875,7 @@ class Digraph(object):
             * Inspect function:
                 .. image:: randomvaluation_d3_inspect.png
 
-    .. warning::
+    .. note::
             If you want to use the automatic load in Chrome, try using the command: "python -m SimpleHTTPServer" and then access the index.html via "http://0.0.0.0:8000/index.html".
             In order to load the CSS an active internet connection is needed! 
 
@@ -4651,10 +4652,14 @@ class Digraph(object):
         self.relation = newRelation.copy()
 
 
-    def recodeValuation(self,newMin=-10.0,newMax=10.0,Debug=False):
+    def recodeValuation(self,newMin=-1.0,newMax=1.0,Debug=False):
         """
         Recodes the characteristic valuation domain according
         to the parameters given.
+        .. note::
+
+            Default values gives a normalized valuation domain
+
         """
         from copy import deepcopy
         oldMax = self.valuationdomain['max']

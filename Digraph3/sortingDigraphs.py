@@ -1881,7 +1881,7 @@ class OptimalQuantilesSortingDigraph(QuantilesSortingDigraph):
         maxqs = None
         maxnq = 20
         for nq in range(maxQuantiles,minQuantiles,-1):
-            print( '%d-tiling' % (nq) )
+            #print( '%d-tiling' % (nq) )
             qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
                                          LowerClosed=True,
                                          PrefThresholds=True,
