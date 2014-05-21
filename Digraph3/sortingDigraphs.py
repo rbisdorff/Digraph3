@@ -1282,6 +1282,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         self.convertEvaluationFloatToDecimal()
 
         # construct outranking relation
+        self.hasNoVeto = hasNoVeto
         if outrankingType == "robust":
             g = RobustOutrankingDigraph(self)
             self.valuationdomain = deepcopy(g.valuationdomain)
@@ -1327,7 +1328,6 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
             if LowerClosed:
                 for x in self.actionsOrig:
                     for y in self.actionsOrig:
-##                        self.relation[x][y] = g.relation[x][y]
                         self.relation[x][y] = Med
                 for x in self.profileLimits:
                     self.relation[x] = {}
@@ -1337,7 +1337,6 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                 for x in self.actionsOrig:
                     self.relation[x] = {}
                     for y in self.actionsOrig:
-##                        self.relation[x][y] = g.relation[x][y]
                         self.relation[x][y] = Med
                 for y in self.profileLimits:
                     for x in self.actions:
@@ -1701,17 +1700,10 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         Min = self.valuationdomain['min']
         actions = [x for x in self.actionsOrig]
         currActions = set(actions)
-        relation = self.relation
-#        relation = {}
         sortingRelation = {}
         for x in actions:
-#            relation[x] = {}
             sortingRelation[x] = {}
             for y in actions:
-#                if x != y:
-#                    relation[x][y] = Max
-#                else:
-#                    relation[x][y] = Med
                 sortingRelation[x][y] = Med
                 
         if Debug:
@@ -1723,13 +1715,9 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                 print('ibch,ribch',ibch,ribch)
             for x in ibch:
                 for y in ibch:
-##                    sortingRelation[x][y] = self.omin( [abs(relation[x][y]),abs(relation[y][x])] )
-##                    sortingRelation[y][x] = self.omin( [abs(relation[y][x]),abs(relation[x][y])] )
                     sortingRelation[x][y] = Med
                     sortingRelation[y][x] = Med
                 for y in ribch:
-##                    sortingRelation[x][y] = -self.omin( [abs(relation[x][y]),abs(relation[y][x])] )
-##                    sortingRelation[y][x] = self.omin( [abs(relation[y][x]),abs(relation[x][y])] )
                     sortingRelation[x][y] = Min
                     sortingRelation[y][x] = Max
             currActions = currActions - ibch
@@ -1953,27 +1941,33 @@ if __name__ == "__main__":
 
     #t = XMCDA2PerformanceTableau('uniSorting')
     #t = XMCDA2PerformanceTableau('spiegel2004')
-    t = RandomCBPerformanceTableau(numberOfActions=20,
-                                   numberOfCriteria=13,
+    t = RandomCBPerformanceTableau(numberOfActions=10,
+                                   numberOfCriteria=7,
                                    weightDistribution='equiobjectives')
-    qsh = OptimalHarmonicQuantilesSortingDigraph(t,
-                                  LowerClosed=True,
-                                  PrefThresholds=False,
-                                  Threading=False,
-                                  Prudent=False,
-                                  Debug=False)
-    qsh.showSorting()
-    qsh.exportGraphViz(graphType="pdf")
-    qsopt = OptimalQuantilesSortingDigraph(t,
-                                    minQuantiles=4,
-                                    maxQuantiles=43,
-                                    LowerClosed=True,
-                                    PrefThresholds=False,
-                                    Prudent=True,       
-                                    Threading=False,
-                                    Debug=False)
-    qsh.showSorting()
-    qsh.exportGraphViz(graphType="pdf")
+    t.saveXMCDA2('test',servingD3=False)
+    qs0 = QuantilesSortingDigraph(t)
+    qs0.showOrderedRelationTable()
+    qs0.exportGraphViz('qs0')
+    qs0.showSorting()
+    
+##    qsh = OptimalHarmonicQuantilesSortingDigraph(t,
+##                                  LowerClosed=True,
+##                                  PrefThresholds=False,
+##                                  Threading=False,
+##                                  Prudent=False,
+##                                  Debug=False)
+##    qsh.showSorting()
+##    qsh.exportGraphViz(graphType="pdf")
+##    qsopt = OptimalQuantilesSortingDigraph(t,
+##                                    minQuantiles=4,
+##                                    maxQuantiles=43,
+##                                    LowerClosed=True,
+##                                    PrefThresholds=False,
+##                                    Prudent=True,       
+##                                    Threading=False,
+##                                    Debug=False)
+##    qsh.showSorting()
+##    qsh.exportGraphViz(graphType="pdf")
     #qsh.showCriteriaCategoryLimits()
 ##    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
 ##    t.saveXMCDA2('test')
