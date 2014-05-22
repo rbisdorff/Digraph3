@@ -1793,7 +1793,7 @@ class OptimalHarmonicQuantilesSortingDigraph(QuantilesSortingDigraph):
                  minValuation=-100.0,
                  maxValuation=100.0,
                  outrankingType = "bipolar",
-                 Prudent=True,
+                 Prudent=False,
                  Threading=False,
                  Debug=False):
         
@@ -1866,7 +1866,7 @@ class OptimalQuantilesSortingDigraph(QuantilesSortingDigraph):
                  minValuation=-100.0,
                  maxValuation=100.0,
                  outrankingType = "bipolar",
-                 Prudent=True,
+                 Prudent=False,
                  Threading=False,
                  Debug=False):
         
@@ -1880,27 +1880,36 @@ class OptimalQuantilesSortingDigraph(QuantilesSortingDigraph):
         maxCorr['determination'] = Decimal('0.0')
         maxqs = None
         maxnq = 20
-        for nq in range(maxQuantiles,minQuantiles,-1):
+        if Debug:
+            fo = open('debug.csv','w')
+            fo.write('"nqs","qsopt","qscorr","qsdeter"\n')
+        for nq in range(minQuantiles,maxQuantiles):
             #print( '%d-tiling' % (nq) )
             qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
                                          LowerClosed=True,
                                          PrefThresholds=True,
                                          hasNoVeto=False,
-                                         minValuation=-100.0,
-                                         maxValuation=100.0,
+                                         minValuation=-1.0,
+                                         maxValuation=1.0,
                                          outrankingType = "bipolar",
                                         Threading=False)
             qs0Corr = g.computeOrdinalCorrelation(qs0)
             if Debug:
-                print( 'correlation0 = %.3f' % qs0Corr['correlation'] )
+                fo.write('%d,%.6f,%.6f,%.6f\n' % (nq,qs0Corr['correlation']*qs0Corr['determination'],
+                                              qs0Corr['correlation'],qs0Corr['determination']))
+                print( '%d,%.6f,%.6f,%.6f\n' % (nq,qs0Corr['correlation']*qs0Corr['determination'],
+                                              qs0Corr['correlation'],qs0Corr['determination']))
             if Prudent:
                 if qs0Corr['correlation'] > maxCorr['correlation']:
                     maxCorr = deepcopy(qs0Corr)
                     maxqs = deepcopy(qs0)                
             else:
-                if qs0Corr['correlation']*qs0Corr['determination'] > maxCorr['correlation']*maxCorr['determination']:
+                if qs0Corr['correlation']*qs0Corr['determination'] >\
+                                    maxCorr['correlation']*maxCorr['determination']:
                     maxCorr = deepcopy(qs0Corr)
                     maxqs = deepcopy(qs0)
+        if Debug:
+            fo.close()
             
         self.name = deepcopy(maxqs.name)
         self.actions = deepcopy(maxqs.actions)
@@ -1941,15 +1950,15 @@ if __name__ == "__main__":
 
     #t = XMCDA2PerformanceTableau('uniSorting')
     #t = XMCDA2PerformanceTableau('spiegel2004')
-    t = RandomCBPerformanceTableau(numberOfActions=10,
+    t = RandomCBPerformanceTableau(numberOfActions=20,
                                    numberOfCriteria=7,
                                    weightDistribution='equiobjectives')
     t.saveXMCDA2('test',servingD3=False)
-    qs0 = QuantilesSortingDigraph(t)
-    qs0.showOrderedRelationTable()
-    qs0.exportGraphViz('qs0')
-    qs0.showSorting()
-    
+##    qs0 = QuantilesSortingDigraph(t,100)
+##    qs0.showOrderedRelationTable()
+##    qs0.exportGraphViz('qs0')
+##    qs0.showSorting()
+##    
 ##    qsh = OptimalHarmonicQuantilesSortingDigraph(t,
 ##                                  LowerClosed=True,
 ##                                  PrefThresholds=False,
@@ -1958,54 +1967,17 @@ if __name__ == "__main__":
 ##                                  Debug=False)
 ##    qsh.showSorting()
 ##    qsh.exportGraphViz(graphType="pdf")
-##    qsopt = OptimalQuantilesSortingDigraph(t,
-##                                    minQuantiles=4,
-##                                    maxQuantiles=43,
-##                                    LowerClosed=True,
-##                                    PrefThresholds=False,
-##                                    Prudent=True,       
-##                                    Threading=False,
-##                                    Debug=False)
-##    qsh.showSorting()
-##    qsh.exportGraphViz(graphType="pdf")
+    qsopt = OptimalQuantilesSortingDigraph(t,
+                                    minQuantiles=4,
+                                    maxQuantiles=50,
+                                    LowerClosed=True,
+                                    PrefThresholds=False,
+                                    Prudent=False,       
+                                    Threading=False,
+                                    Debug=True)
+    qsopt.showSorting()
+    qsopt.exportGraphViz(graphType="pdf")
     #qsh.showCriteriaCategoryLimits()
-##    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
-##    t.saveXMCDA2('test')
-##    t.showPerformanceTableau()
-##    t = XMCDA2PerformanceTableau('test')
-    #t.showCriteria()
-    #g = BipolarOutrankingDigraph(t)
-    #t = PerformanceTableau('ex1perftab')
-    #t.showQuantileSort()
-    #s = SortingDigraph(t,lowerClosed=False)
-    #s.showSorting()
-    #s.showSortingCharacteristics('a10')
-##    t0 = time()
-##    qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
-##                                  LowerClosed=True,
-##                                  PrefThresholds=False,
-##                                  Threading=True,
-##                                  Debug=False)
-##    t1 = time()-t0
-##    t2 = time()
-##    qs1 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
-##                                  LowerClosed=True,
-##                                  PrefThresholds=False,
-##                                  Threading=False)
-##    t3 = time()-t2
-##    qs0.showSorting()
-##    qs1.showSorting()
-##    print('With and without threading: %s, %s' % (str(t1),str(t3)) )
-    
-##    t0 = time()
-##    s0 = SortingDigraph(t,Threading=True,Debug=False)
-##    t1 = time()-t0
-##    #s0.showSorting()
-##    t2 = time()
-##    s1 = SortingDigraph(t,Threading=False)
-##    t3 = time()-t2
-##    s1.showSorting()
-##    print('With and without threading: %s, %s' % (str(t1),str(t3)) )
         
 
     

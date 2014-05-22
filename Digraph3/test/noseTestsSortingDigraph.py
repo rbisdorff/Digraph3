@@ -167,3 +167,29 @@ def testOptimalHarmonicQuantilesSortingDigraph():
     s0.showOrderedRelationTable()
     s0.showWeakOrder(Descending=True)
     s0.exportGraphViz(graphType="pdf")
+    
+def testOptimalQuantilesSortingDigraph():
+    print('*-------- Testing OptimalQuantilesSortingDigraph class and methods -------')
+    t = RandomCBPerformanceTableau(numberOfActions=10,
+                                   numberOfCriteria=7,
+                                   weightDistribution='equiobjectives')
+    t.saveXMCDA2('test',servingD3=False)
+    qsh = OptimalHarmonicQuantilesSortingDigraph(t,
+                                  LowerClosed=True,
+                                  PrefThresholds=False,
+                                  Threading=False,
+                                  Prudent=False,
+                                  Debug=False)
+    qsh.showSorting()
+    qsh.exportGraphViz(graphType="pdf")
+    qsopt = OptimalQuantilesSortingDigraph(t,
+                                    minQuantiles=4,
+                                    maxQuantiles=43,
+                                    LowerClosed=True,
+                                    PrefThresholds=False,
+                                    Prudent=False,       
+                                    Threading=False,
+                                    Debug=False)
+    qsopt.showSorting()
+    qsopt.exportGraphViz(graphType="pdf")
+
