@@ -580,7 +580,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             orderedCategoryKeys.reverse()
         return orderedCategoryKeys
 
-    def computeWeakOrder(self,Descending=True):
+    def computeWeakOrder(self,Descending=True,Debug=False):
         """
         Specialisation for QauntilesSortingDigraphs.
         """
@@ -591,6 +591,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             cCKeys = self.orderedCategoryKeys(Reverse = True)
         else:
             cCKeys = self.orderedCategoryKeys(Reverse = False)
+        if Debug:
+            print(cCKeys)
         n = len(cC)
         n2 = n//2
         ordering = []
@@ -613,9 +615,10 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 x = cC[cCKeys[n2]]
             else:
                 x = list(set(cC[cCKeys[n2]]) - (setx | sety))
-            ordering.append( ( (Decimal(str(n2+1)),x),(Decimal(str(n2+1)),x) ) )
+            ordering.append( ( (Decimal(str(n2+1)),x),(Decimal(str(n2+1)),[]) ) )
 
-        #print(ordering)
+        if Debug:
+            print(ordering)
         
         orderingList = []
         n = len(ordering)
@@ -670,7 +673,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     def exportGraphViz(self,fileName=None,direction='decreasing',\
                        noSilent=True,graphType='png',\
                        graphSize='7,7',\
-                       fontSize=10):
+                       fontSize=10, Debug=False):
         """
         export GraphViz dot file for weak order (Hasse diagram) drawing
         filtering from SortingDigraph instances.
@@ -691,6 +694,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             ordering = self.computeWeakOrder(Descending=True)
         else:
             ordering = self.computeWeakOrder(Descending=False)
+        if Debug:
+            print(ordering)
             
 ##            try:
 ##                rankingByChoosing = self.rankingByBestChoosing['result']
