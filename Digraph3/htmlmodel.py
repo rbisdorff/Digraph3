@@ -123,7 +123,7 @@ graph
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Choose your d3export file</h4>
+          <h4 class="modal-title">Choose your d3export JSON file</h4>
         </div>
         <div class="modal-body">
           <!-- INPUT -->
@@ -133,7 +133,7 @@ graph
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel</button>
-          <button id="open" type="button" class="btn btn-info"> Open</button>
+          <button id="open" type="button" class="btn btn-primary"> Open</button>
         </div>
 
       </div><!-- /.modal-content -->
@@ -214,7 +214,7 @@ graph
         </div>
         <div class="modal-body">
           <!-- INPUT -->
-  <h4>Valuationdomain</h4>
+  <h4>Valuation domain</h4>
   <div class="form-group"> 
   Min:<input type="text" placeholder="0" class="form-control" required autofocus maxlength="5" required name="min" id="min"> 
   </div> 
@@ -307,7 +307,7 @@ graph
           </div> 
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancel</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel</button>
 
         </div>
 
@@ -1747,7 +1747,7 @@ function editEdge(d) {
   xmlinput=xmcda;
   xmlDoc = $.parseXML(xmlinput);
   return xmlinput;
-  }  
+  }
 '''
 
 def d3export():
