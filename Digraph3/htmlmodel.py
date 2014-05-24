@@ -186,7 +186,7 @@ graph
   ID :<input type="text" value="" placeholder="ID" class="form-control" maxlength="10" autofocus required name="nodeAddId" id="nodeAddId"> 
   </div> 
   <div class="form-group"> 
-  Name :<input type="text" placeholder="nameless" class="form-control" maxlength="10" required name="nodename" id="nodename_add"> 
+  Name :<input type="text" placeholder="nameless" class="form-control" maxlength="10" name="nodename" id="nodename_add"> 
   </div> 
   <div class="form-group">
   Comment :<input type="text" placeholder="none" class="form-control" maxlength="20" name="nodeComment" id="nodeComment_add"> 
@@ -195,7 +195,7 @@ graph
   </div>
   
   <div class="modal-footer">
-   <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+   <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel</button>
    <button class="btn btn-primary" type='submit' name='save' onClick="addNode()"> Save</button>
   </div>
   </div><!-- /.modal-content -->
@@ -216,10 +216,10 @@ graph
           <!-- INPUT -->
   <h4>Valuationdomain</h4>
   <div class="form-group"> 
-  Min:<input type="text" value="0" class="form-control" autofocus maxlength="5" required name="min" id="min"> 
+  Min:<input type="text" placeholder="0" class="form-control" required autofocus maxlength="5" required name="min" id="min"> 
   </div> 
    <div class="form-group"> 
-  Max:<input type="text" value="0" class="form-control" maxlength="5" required name="max" id="max"> 
+  Max:<input type="text" placeholder="0" class="form-control" required maxlength="5" required name="max" id="max"> 
   </div> 
  
   
@@ -429,8 +429,8 @@ var width,height,xmlinput="",$xml,xmlDoc,pairwise={},json,labels,labelt,path,for
  * @return 
  */
 function first_load(start) {
-    initialize();
-    if(start) {
+  
+   initialize(); 
   $.support.cors = true;
   $.ajax({
   url: start,
@@ -454,11 +454,8 @@ function first_load(start) {
                
                 
   load(hide_status)
-  }
-});
-
-            
-}    }
+  }});
+}    
 
 /**
  * Initialization of our empty canvas.
@@ -957,6 +954,7 @@ function initialize() {
              */
             'new': function(t) {
                 hide_status=false;
+                setTimeout(function(){$('#min').focus();},500);
                 $('#newModal').modal('show');            
             },
             /**
@@ -1012,6 +1010,8 @@ function initialize() {
                 if(graph_type==="general") {
                     $("#nodeAddId").attr("value","");
                     $("#addNodeModal").modal("show");
+                    setTimeout(function(){$('#nodeAddId').focus();},500);
+
                   } else {
                     alert("Adding nodes not allowed.");
                   }
@@ -1747,8 +1747,7 @@ function editEdge(d) {
   xmlinput=xmcda;
   xmlDoc = $.parseXML(xmlinput);
   return xmlinput;
-  }
-
+  }  
 '''
 
 def d3export():
