@@ -682,13 +682,16 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         from copy import deepcopy
 
         def _safeName(t0):
-            t = t0.split(sep="-")
-            t1 = t[0]
-            n = len(t)
-            if n > 1:
-                for i in range(1,n):
-                    t1 += '%s%s' % ('_',t[i])
-            return t1
+            try:
+                t = t0.split(sep="-")
+                t1 = t[0]
+                n = len(t)
+                if n > 1:
+                    for i in range(1,n):
+                        t1 += '%s%s' % ('_',t[i])
+                return t1
+            except:
+                print('Error in nodeName: %s !!' % to)
                 
         if direction == 'decreasing':
             ordering = self.computeWeakOrder(Descending=True)
