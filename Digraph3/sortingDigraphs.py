@@ -1783,7 +1783,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         for x in actions:
             self.showActionCategories(x)
 
-class OptimalHarmonicQuantilesSortingDigraph(QuantilesSortingDigraph):
+class _OptimalHarmonicQuantilesSortingDigraph(QuantilesSortingDigraph):
     """
     Specialisation of the QuantilesSortingDigraph Class
     for optimal sorting of alternatives into
@@ -1964,7 +1964,7 @@ if __name__ == "__main__":
 ##    qs0.exportGraphViz('qs0')
 ##    qs0.showSorting()
 ##    
-##    qsh = OptimalHarmonicQuantilesSortingDigraph(t,
+##    qsh = _OptimalHarmonicQuantilesSortingDigraph(t,
 ##                                  LowerClosed=True,
 ##                                  PrefThresholds=False,
 ##                                  Threading=False,
