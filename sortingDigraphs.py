@@ -692,7 +692,6 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 return t1
             except:
                 print('Error in nodeName: %s !!' % t0, type(t0))
-                print
                 return t0
                 
         if direction == 'decreasing':
@@ -743,7 +742,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             try:
                 nodeName = self.actions[x]['shortName']
             except:
-                nodeName = x
+                nodeName = str(x)
             node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
                    % (str(_safeName(x)),_safeName(nodeName),fontSize)
             fo.write(node)
