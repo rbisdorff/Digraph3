@@ -692,6 +692,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 return t1
             except:
                 print('Error in nodeName: %s !!' % t0)
+                return t0
                 
         if direction == 'decreasing':
             ordering = self.computeWeakOrder(Descending=True)
