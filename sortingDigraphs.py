@@ -742,7 +742,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             try:
                 nodeName = self.actions[x]['shortName']
             except:
-                nodeName = str(x)
+                nodeName = x
             node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
                    % (str(_safeName(x)),_safeName(nodeName),fontSize)
             fo.write(node)
