@@ -2941,6 +2941,10 @@ class Digraph(object):
             self.saveXMCDA2(fileName=temp+"-"+str(count))
         with open(temp+"-"+str(count)+".xmcda2","r") as myFile:
             data=myFile.read().replace("\n","")
+        try:
+            os.remove(temp+"-"+str(count)+".xmcda2")
+        except OSError:
+            pass
         d3export["xmcda2"]= str(data)
         d3export["pairwiseComparisions"] = json.dumps(pairwise)
 
