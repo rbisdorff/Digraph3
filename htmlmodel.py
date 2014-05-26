@@ -412,7 +412,7 @@ def javascript():
 * graph_type = the variable used to describe the graph type and decide for the possible actions. choice: general, outranking
 *
 */
-var width,height,xmlinput="",$xml,xmlDoc,pairwise={},json,labels,labelt,path,force,freeze=false,svg,actions={},relation={},valuationdomain={},current,ticker=0,type_label,hide_status=false,graph_type="general";
+var width,height,xmlinput="",$xml,xmlDoc,pairwise={},json,labels,labelt,path,force,freeze=false,svg,actions={},relation={},valuationdomain={"Min" : 0 , "Max":1, "Med" : 0.5},current,ticker=0,type_label,hide_status=false,graph_type="general";
 
 
 ////
@@ -449,12 +449,13 @@ function first_load(start) {
               var result = parseXMCDA2(xmlinput);
               actions = result[0];
               relation = result[1];
-              type_label.text("Mode: '"+graph_type+"'")
-               
-               
+              type_label.text("Mode: '"+graph_type+"'");
                 
-  load(hide_status)
+               
+  load(hide_status);
+   
   }});
+
 }    
 
 /**
@@ -642,6 +643,7 @@ function initialize() {
   function load(hide) {
     freeze=false;
     initialize();
+
     json={"nodes": [],"links":[]};
     force
         .nodes(json.nodes)
@@ -652,6 +654,7 @@ function initialize() {
         .links(json.links);
     
     start();
+
 
   }
 
@@ -1748,6 +1751,7 @@ function editEdge(d) {
   xmlDoc = $.parseXML(xmlinput);
   return xmlinput;
   }
+
 '''
 
 def d3export():
