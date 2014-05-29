@@ -570,6 +570,30 @@ class RandomTree(Graph):
             print('gamma = ', self.gamma)
 
 class Q_Coloring(Graph):
+    """
+    Generate a q-coloring of of a graph via a Gibbs sampler.
+    
+        Example:
+           >>> g = GridGraph(n=8,m=8)
+           >>> g.showShort()
+           >>> g.exportGraphViz()
+           *----- show short --------------*
+           Grid graph    :  grid-8-8
+           n             :  8
+           m             :  8
+           order         :  64
+           >>> qc = Q_Coloring(g,colors=['gold','lightblue','lightcoral'])
+           Running a Gibbs Sampler for 2016 step !
+           >>> qc.checkFeasibility()
+           The q-coloring with 3 colors is feasible !!
+           >>> qc.exportGraphViz()
+           *---- exporting a dot file for GraphViz tools ---------*
+           Exporting to grid-8-8-qcoloring.dot
+           fdp -Tpng grid-8-8-qcoloring.dot -o grid-8-8-qcoloring.png
+           
+        .. image:: grid-8-8-qcoloring.png
+    """ 
+
     def __init__(self,g,colors=['white','gold','lightblue'],Nsim=None,Debug=False):
         from copy import deepcopy
         self.name = '%s-qcoloring' % g.name
@@ -637,23 +661,6 @@ class Q_Coloring(Graph):
         """
         Exports GraphViz dot file  for q-coloring drawing filtering.
 
-        Example:
-           >>> g = GridGraph(n=8,m=8)
-           >>> g.showShort()
-           >>> g.exportGraphViz()
-           *----- show short --------------*
-           Grid graph    :  grid-8-8
-           n             :  8
-           m             :  8
-           order         :  64
-           >>> qc = Q_Coloring(g,colors=['gold','lightblue','lightcoral'])
-           Running a Gibbs Sampler for 2016 step !
-           >>> qc.checkFeasibility()
-           >>>
-    qc.checkFeasibility(Comments=False)
-    qc.exportGraphViz()
-
-        .. image:: randomGraph.png
         """
         import os
         if noSilent:
