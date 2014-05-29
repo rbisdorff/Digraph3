@@ -571,7 +571,8 @@ class RandomTree(Graph):
 
 class Q_Coloring(Graph):
     """
-    Generate a q-coloring of of a graph via a Gibbs sampler.
+    Generate a q-coloring of of a graph via a Gibbs MCMC sampler in
+    Nsim simulation steps (default = len(graph.edges)).
     
         Example:
            >>> g = GridGraph(n=8,m=8)
@@ -594,7 +595,7 @@ class Q_Coloring(Graph):
         .. image:: grid-8-8-qcoloring.png
     """ 
 
-    def __init__(self,g,colors=['white','gold','lightblue'],Nsim=None,Debug=False):
+    def __init__(self,g,colors=['gold','lightcoral','lightblue'],Nsim=None,Debug=False):
         from copy import deepcopy
         self.name = '%s-qcoloring' % g.name
         self.vertices = deepcopy(g.vertices)
@@ -729,7 +730,7 @@ class Q_Coloring(Graph):
 # --------------testing the module ----
 if __name__ == '__main__':
 
-    g = GridGraph(n=8,m=8)
+    g = GridGraph(n=6,m=6)
     g.showShort()
     qc = Q_Coloring(g,colors=['gold','lightblue','lightcoral'],Debug=False)
     qc.checkFeasibility(Comments=True)
