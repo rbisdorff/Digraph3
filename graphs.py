@@ -571,15 +571,15 @@ class RandomTree(Graph):
 
 class Q_Coloring(Graph):
     """
-    Generate a q-coloring of of a graph via a Gibbs MCMC sampler in
+    Generate a q-coloring of a Graph instance via a Gibbs MCMC sampler in
     Nsim simulation steps (default = len(graph.edges)).
     
-        Example:
+        Example 3-coloring of a grid 6x6 :
            >>> g = GridGraph(n=6,m=6)
            >>> g.showShort()
            >>> g.exportGraphViz()
            *----- show short --------------*
-           Grid graph    :  grid-8-8
+           Grid graph    :  grid-6-6
            n             :  6
            m             :  6
            order         :  36
