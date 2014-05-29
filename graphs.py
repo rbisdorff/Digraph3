@@ -575,24 +575,24 @@ class Q_Coloring(Graph):
     Nsim simulation steps (default = len(graph.edges)).
     
         Example:
-           >>> g = GridGraph(n=8,m=8)
+           >>> g = GridGraph(n=6,m=6)
            >>> g.showShort()
            >>> g.exportGraphViz()
            *----- show short --------------*
            Grid graph    :  grid-8-8
-           n             :  8
-           m             :  8
-           order         :  64
+           n             :  6
+           m             :  6
+           order         :  36
            >>> qc = Q_Coloring(g,colors=['gold','lightblue','lightcoral'])
-           Running a Gibbs Sampler for 2016 step !
+           Running a Gibbs Sampler for 630 step !
            >>> qc.checkFeasibility()
            The q-coloring with 3 colors is feasible !!
            >>> qc.exportGraphViz()
            *---- exporting a dot file for GraphViz tools ---------*
-           Exporting to grid-8-8-qcoloring.dot
-           fdp -Tpng grid-8-8-qcoloring.dot -o grid-8-8-qcoloring.png
+           Exporting to grid-6-6-qcoloring.dot
+           fdp -Tpng grid-6-6-qcoloring.dot -o grid-6-6-qcoloring.png
            
-        .. image:: grid-8-8-qcoloring.png
+        .. image:: grid-6-6-qcoloring.png
     """ 
 
     def __init__(self,g,colors=['gold','lightcoral','lightblue'],Nsim=None,Debug=False):
