@@ -38,3 +38,10 @@ def testRandomTree():
     g.exportGraphViz('testTreeViz')
     for x in g.vertices:
         print(x, g.vertices[x]['startDate'], g.vertices[x]['endDate'])
+
+def testQColoring():
+    g = GridGraph(n=6,m=6)
+    g.showShort()
+    qc = Q_Coloring(g,colors=['gold','lightblue','lightcoral'],Debug=False)
+    qc.checkFeasibility(Comments=True)
+    qc.exportGraphViz()
