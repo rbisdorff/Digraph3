@@ -662,6 +662,34 @@ class Q_Coloring(Graph):
         """
         Exports GraphViz dot file  for q-coloring drawing filtering.
 
+        Example:
+            >>> g = Graph(numberOfVertices=10,edgeProbability=0.4)
+            >>> g.showShort()
+            *---- short description of the graph ----*
+            Name : 'randomGraph'
+            Vertices :  ['v1','v10','v2','v3','v4','v5','v6','v7','v8','v9']
+            Valuation domain :  {'max': 1, 'min': -1, 'med': 0}
+            Gamma function   : 
+            v1 -> ['v7', 'v2', 'v3', 'v5']
+            v10 -> ['v4']
+            v2 -> ['v1', 'v7', 'v8']
+            v3 -> ['v1', 'v7', 'v9']
+            v4 -> ['v5', 'v10']
+            v5 -> ['v6', 'v7', 'v1', 'v8', 'v4']
+            v6 -> ['v5', 'v8']
+            v7 -> ['v1', 'v5', 'v8', 'v2', 'v3']
+            v8 -> ['v6', 'v7', 'v2', 'v5']
+            v9 -> ['v3']
+            >>> qc = Q_Coloring(g,Nsim=1000)
+            Running a Gibbs Sampler for 1000 step !
+            >>> qc.checkFeasibility()
+            The q-coloring with 3 colors is feasible !!
+            >>> qc.exportGraphViz()
+            *---- exporting a dot file for GraphViz tools ---------*
+            Exporting to randomGraph-qcoloring.dot
+            fdp -Tpng randomGraph-qcoloring.dot -o randomGraph-qcoloring.png
+
+        .. image:: randomGraph-qcoloring.png
         """
         import os
         if noSilent:
