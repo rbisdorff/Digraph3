@@ -1011,7 +1011,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2487,6 +2487,38 @@ Nsim simulation steps (default = len(graph.edges)).</p>
 <dt id="graphs.Q_Coloring.exportGraphViz">
 <tt class="descname">exportGraphViz</tt><big>(</big><em>fileName=None</em>, <em>noSilent=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em><big>)</big><a class="headerlink" href="#graphs.Q_Coloring.exportGraphViz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exports GraphViz dot file  for q-coloring drawing filtering.</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
+<span class="go">*---- short description of the graph ----*</span>
+<span class="go">Name : &#39;randomGraph&#39;</span>
+<span class="go">Vertices :  [&#39;v1&#39;,&#39;v10&#39;,&#39;v2&#39;,&#39;v3&#39;,&#39;v4&#39;,&#39;v5&#39;,&#39;v6&#39;,&#39;v7&#39;,&#39;v8&#39;,&#39;v9&#39;]</span>
+<span class="go">Valuation domain :  {&#39;max&#39;: 1, &#39;min&#39;: -1, &#39;med&#39;: 0}</span>
+<span class="go">Gamma function   : </span>
+<span class="go">v1 -&gt; [&#39;v7&#39;, &#39;v2&#39;, &#39;v3&#39;, &#39;v5&#39;]</span>
+<span class="go">v10 -&gt; [&#39;v4&#39;]</span>
+<span class="go">v2 -&gt; [&#39;v1&#39;, &#39;v7&#39;, &#39;v8&#39;]</span>
+<span class="go">v3 -&gt; [&#39;v1&#39;, &#39;v7&#39;, &#39;v9&#39;]</span>
+<span class="go">v4 -&gt; [&#39;v5&#39;, &#39;v10&#39;]</span>
+<span class="go">v5 -&gt; [&#39;v6&#39;, &#39;v7&#39;, &#39;v1&#39;, &#39;v8&#39;, &#39;v4&#39;]</span>
+<span class="go">v6 -&gt; [&#39;v5&#39;, &#39;v8&#39;]</span>
+<span class="go">v7 -&gt; [&#39;v1&#39;, &#39;v5&#39;, &#39;v8&#39;, &#39;v2&#39;, &#39;v3&#39;]</span>
+<span class="go">v8 -&gt; [&#39;v6&#39;, &#39;v7&#39;, &#39;v2&#39;, &#39;v5&#39;]</span>
+<span class="go">v9 -&gt; [&#39;v3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span> <span class="o">=</span> <span class="n">Q_Coloring</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Nsim</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="go">Running a Gibbs Sampler for 1000 step !</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span><span class="o">.</span><span class="n">checkFeasibility</span><span class="p">()</span>
+<span class="go">The q-coloring with 3 colors is feasible !!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
+<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="go">Exporting to randomGraph-qcoloring.dot</span>
+<span class="go">fdp -Tpng randomGraph-qcoloring.dot -o randomGraph-qcoloring.png</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<img alt="_images/randomGraph-qcoloring.png" src="_images/randomGraph-qcoloring.png" />
 </dd></dl>
 
 <dl class="method">
@@ -2585,7 +2617,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3280,7 +3312,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
