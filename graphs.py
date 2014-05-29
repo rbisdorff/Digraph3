@@ -257,7 +257,10 @@ class Graph(object):
         return chordlessCyclesList
 
 
-    def exportGraphViz(self,fileName=None, noSilent=True,graphType='png',graphSize='7,7'):
+    def exportGraphViz(self,fileName=None,
+                       noSilent=True,
+                       graphType='png',
+                       graphSize='7,7'):
         """
         Exports GraphViz dot file  for graph drawing filtering.
 
@@ -300,7 +303,12 @@ class Graph(object):
                 except:
                     nodeName = str(vertexkeys[i])
             node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
-            node += '];\n'
+            try:
+                if self.vertices[vertexkeys[i]]['spin'] == 1:
+                    node += ', style = "filled", color = %s' % spinColor
+            except:
+                pass
+            node += '];\n'                
             fo.write(node)
         for i in range(n):
             for j in range(i+1, n):
@@ -561,12 +569,164 @@ class RandomTree(Graph):
         if Debug:
             print('gamma = ', self.gamma)
 
+class Q_Coloring(Graph):
+    def __init__(self,g,colors=['white','gold','lightblue'],Nsim=None,Debug=False):
+        from copy import deepcopy
+        self.name = '%s-qcoloring' % g.name
+        self.vertices = deepcopy(g.vertices)
+        self.colors = colors
+        self.valuationDomain = deepcopy(g.valuationDomain)
+        self.edges = deepcopy(g.edges)
+        self.gamma = deepcopy(g.gamma)
+        for v in self.vertices:
+            self.vertices[v]['color'] = colors[0]
+        if Nsim == None:
+            Nsim = len(self.edges)
+        self.Nsim = Nsim
+        self.generateFeasibleConfiguration(Debug=Debug)        
+    
+    def showConfiguration(self):
+        for v in self.vertices:
+            print(v,self.vertices[v]['color'])
+            
+    def generateFeasibleConfiguration(self,Debug=False):
+        from random import choice
+        print('Running a Gibbs Sampler for %d step !' % self.Nsim)
+        for s in range(self.Nsim):
+            verticesKeys = [v for v in self.vertices]
+            v = choice(verticesKeys)
+            neighborColors = [self.vertices[x]['color']\
+                                  for x in self.gamma[v]]
+            feasibleColors = list(set(self.colors) - set(neighborColors))
+            try:
+                self.vertices[v]['color'] = choice(feasibleColors)
+            except:
+                if Debug:
+                    print(s,v,'Warning !! Not feasible coloring')
+                self.vertices[v]['color'] = choice(self.colors)
+            if Debug:
+                print(s, v,  self.vertices[v]['color'])
 
+    def checkFeasibility(self,Comments=True,Debug=False):
+        infeasibleEdges = set()
+        for e in self.edges:
+            if self.edges[e] > self.valuationDomain['med']:
+                neighborColors = set([self.vertices[x]['color'] for x in e])
+                if len(neighborColors) < 2:
+                    if Debug:
+                        print('Infeasible Confirguration !! See edge %s' % e)
+                    infeasibleEdges.add(e)
+                else:
+                    if Debug:
+                        print(e,neighborColors)
+        if Comments:
+            if infeasibleEdges == set():
+                print('The q-coloring with %d colors is feasible !!'\
+                      % len(self.colors))
+            else:
+                print('The q-coloring with %d colors is apparently not feasible !!'\
+                      % len(self.colors))
+                print('Either augment Nsim=%d or add one more color'\
+                      % self.Nsim)
+        return infeasibleEdges              
+
+    def exportGraphViz(self,fileName=None,
+                       noSilent=True,
+                       graphType='png',
+                       graphSize='7,7'):
+        """
+        Exports GraphViz dot file  for q-coloring drawing filtering.
+
+        Example:
+           >>> g = GridGraph(n=8,m=8)
+           >>> g.showShort()
+           >>> g.exportGraphViz()
+           *----- show short --------------*
+           Grid graph    :  grid-8-8
+           n             :  8
+           m             :  8
+           order         :  64
+           >>> qc = Q_Coloring(g,colors=['gold','lightblue','lightcoral'])
+           Running a Gibbs Sampler for 2016 step !
+           >>> qc.checkFeasibility()
+           >>>
+    qc.checkFeasibility(Comments=False)
+    qc.exportGraphViz()
+
+        .. image:: randomGraph.png
+        """
+        import os
+        if noSilent:
+            print('*---- exporting a dot file for GraphViz tools ---------*')
+        vertexkeys = [x for x in self.vertices]
+        n = len(vertexkeys)
+        edges = self.edges
+        Med = self.valuationDomain['med']
+        i = 0
+        if fileName == None:
+            name = self.name
+        else:
+            name = fileName
+        dotName = name+'.dot'
+        if noSilent:
+            print('Exporting to '+dotName)
+        ## if bestChoice != set():
+        ##     rankBestString = '{rank=max; '
+        ## if worstChoice != set():
+        ##     rankWorstString = '{rank=min; '
+        fo = open(dotName,'w')
+        fo.write('strict graph G {\n')
+        fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2014", size="')
+        fo.write(graphSize),fo.write('"];\n')
+        for i in range(n):
+            try:
+                nodeName = str(self.vertices[vertexkeys[i]]['shortName'])
+            except:
+                try:
+                    nodeName = self.vertices[vertexkeys[i]]['name']
+                except:
+                    nodeName = str(vertexkeys[i])
+            node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
+            node += ', style = "filled", color = %s' \
+                    % self.vertices[vertexkeys[i]]['color']
+            node += '];\n'                
+            fo.write(node)
+        for i in range(n):
+            for j in range(i+1, n):
+                if i != j:
+                    edge = 'n'+str(i+1)
+                    if edges[frozenset( [vertexkeys[i], vertexkeys[j]])] > Med:
+
+                        edge0 = edge+'-- n'+str(j+1)+' [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;\n'
+                        fo.write(edge0)
+                    elif edges[frozenset([vertexkeys[i],vertexkeys[j]])] == Med:
+                        edge0 = edge+'-- n'+str(j+1)+' [dir=both, color=grey, arrowhead=none, arrowtail=none] ;\n'
+                        fo.write(edge0)
+
+        fo.write('}\n')
+        fo.close()
+        if isinstance(self,(GridGraph,RandomTree)):
+            commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        else:
+            commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        if noSilent:
+            print(commandString)
+        try:
+            os.system(commandString)
+        except:
+            if noSilent:
+                print('graphViz tools not avalaible! Please check installation.')
 
 
 # --------------testing the module ----
 if __name__ == '__main__':
 
+    g = GridGraph(n=8,m=8)
+    g.showShort()
+    qc = Q_Coloring(g,colors=['gold','lightblue','lightcoral'],Debug=False)
+    qc.checkFeasibility(Comments=True)
+    qc.exportGraphViz()
     ## # g = GridGraph(n=4,m=4)
     ## g = RandomGraph(order=7,edgeProbability=0.5)
     ## # comment out the next line and uncomment the previous for random instances
@@ -589,15 +749,15 @@ if __name__ == '__main__':
     #g = RandomTree(order=30)
     ## print t.prueferCode
     ## t.exportGraphViz()
-    g = Graph(numberOfVertices=5,edgeProbability=0.3)
-    g.save()
-    g.showShort()
-    #g = Graph('tempGraph')
-    print(g.depthFirstSearch(Debug=True))
-    g.exportGraphViz('randomGraph')
-    for x in g.vertices:
-        print(x, g.vertices[x]['startDate'], g.vertices[x]['endDate'])
-    g = GridGraph(n=5,m=5)
-    g.exportGraphViz('grid-5-5')
-    g = RandomTree(order=10)
-    g.exportGraphViz('randomTree')
+##    g = Graph(numberOfVertices=5,edgeProbability=0.3)
+##    g.save()
+##    g.showShort()
+##    #g = Graph('tempGraph')
+##    print(g.depthFirstSearch(Debug=True))
+##    g.exportGraphViz('randomGraph')
+##    for x in g.vertices:
+##        print(x, g.vertices[x]['startDate'], g.vertices[x]['endDate'])
+##    g = GridGraph(n=5,m=5)
+##    g.exportGraphViz('grid-5-5')
+##    g = RandomTree(order=10)
+##    g.exportGraphViz('randomTree')
