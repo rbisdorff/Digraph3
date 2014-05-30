@@ -2829,6 +2829,7 @@ class Digraph(object):
     def exportD3(self, fileName="index", Comments=True):
         """
     This function was made during my bachelor thesis at the University of Luxembourg. Gary Cornelius, 2014
+    The thesis document with more explanations can bbe found `here <http://leopold-loewenheim.uni.lu/Digraph3/literature/>`_
     
     *Parameters*:
         * fileName, name of the generated html file, default = None (graph name as defined in python);
