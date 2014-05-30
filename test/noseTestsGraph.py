@@ -45,3 +45,9 @@ def testQColoring():
     qc = Q_Coloring(g,nSim=1000,colors=['gold','lightblue','lightcoral'],Debug=False)
     qc.checkFeasibility(Comments=True)
     qc.exportGraphViz()
+
+def testIsingModel():
+    g = GridGraph(n=15,m=15)
+    g.showShort()
+    im = IsingModel(g,beta=0.3,nSim=100000,Debug=False)
+    im.exportGraphViz(colors=['lightblue','lightcoral'])
