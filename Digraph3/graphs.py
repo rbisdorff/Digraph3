@@ -30,6 +30,8 @@ class Graph(object):
         Constructor for Graph objects.
         """
         from decimal import Decimal
+        from copy import deepcopy
+        
         if Empty:
             self.name = 'emptyInstance'
             self.vertices = dict()
@@ -40,10 +42,11 @@ class Graph(object):
             g = RandomGraph(order=numberOfVertices,\
                                edgeProbability=edgeProbability)
             self.name = g.name
-            self.vertices = g.vertices
+            self.vertices = deep.copy(g.vertices)
             self.order = len(self.vertices)
-            self.edges = g.edges
-            self.valuationDomain = g.valuationDomain
+            self.edges = deepcopy(g.edges)
+            self.size = len(self.edges)
+            self.valuationDomain = deepcopy(g.valuationDomain)
             self.gamma = self.gammaSets()
         else:
             fileNameExt = fileName+'.py'
@@ -417,6 +420,7 @@ class RandomGraph(Graph):
                     else:
                         edges[edgeKey] = -1
         self.edges = edges
+        self.size = len(self.edges)
         self.gamma = self.gammaSets()
 
 
@@ -487,6 +491,7 @@ class GridGraph(Graph):
 
 
         self.edges = edges
+        self.size = len(edges)
         self.gamma = self.gammaSets()
 
     def showShort(self):
@@ -495,6 +500,7 @@ class GridGraph(Graph):
         print('n             : ', self.n)
         print('m             : ', self.m)
         print('order         : ', self.order)
+        print('size          : ', self.size)
 
 class RandomTree(Graph):
     """
@@ -564,7 +570,7 @@ class RandomTree(Graph):
         self.edges[lastEdgeKey] = self.valuationDomain['max']
         if Debug:
             print('updated edges = ', self.edges)
-
+        self.size = len(self.edges)
         self.gamma = self.gammaSets(Debug)
         if Debug:
             print('gamma = ', self.gamma)
@@ -595,20 +601,23 @@ class Q_Coloring(Graph):
         .. image:: grid-6-6-qcoloring.png
     """ 
 
-    def __init__(self,g,colors=['gold','lightcoral','lightblue'],nSim=None,Debug=False):
+    def __init__(self,g,colors=['gold','lightcoral','lightblue'],nSim=None,Comments=True,Debug=False):
         from copy import deepcopy
         self.name = '%s-qcoloring' % g.name
         self.vertices = deepcopy(g.vertices)
+        self.order = len(self.vertices)
         self.colors = colors
         self.valuationDomain = deepcopy(g.valuationDomain)
         self.edges = deepcopy(g.edges)
+        self.size = len(self.edges)
         self.gamma = deepcopy(g.gamma)
         for v in self.vertices:
             self.vertices[v]['color'] = colors[0]
         if nSim == None:
-            nSim = len(self.edges)
+            nSim = len(self.edges)*2
         self.nSim = nSim
-        self.generateFeasibleConfiguration(Debug=Debug)        
+        self.generateFeasibleConfiguration(Debug=Debug)
+        self.infeasibleEdges = self.checkFeasibility(Comments=Comments)
     
     def showConfiguration(self):
         for v in self.vertices:
@@ -785,17 +794,20 @@ class IsingModel(Graph):
         from copy import deepcopy
         self.name = '%s-ising' % g.name
         self.vertices = deepcopy(g.vertices)
+        self.order = len(self.vertices)
         self.valuationDomain = deepcopy(g.valuationDomain)
         self.edges = deepcopy(g.edges)
+        self.size = len(self.edges)
         self.gamma = deepcopy(g.gamma)
         for v in self.vertices:
             self.vertices[v]['spin'] = 0
         if nSim == None:
             nSim = len(self.edges)
         self.nSim = nSim
-        self.generateFeasibleConfiguration(beta=beta,Debug=Debug)
+        self.generateSpinConfiguration(beta=beta,Debug=Debug)
+        self.SpinEnergy = self.computeSpinEnergy()/self.size
 
-    def generateFeasibleConfiguration(self,beta=0,nSim=None,Debug=False):
+    def generateSpinConfiguration(self,beta=0,nSim=None,Debug=False):
         from random import choice, random
         from math import exp
         if nSim == None:
@@ -816,9 +828,23 @@ class IsingModel(Graph):
             else:
                 self.vertices[v]['spin'] = -1
             if Debug:
+                print('Spin energy: %d' % (self.computeSpinEnergy()) )
                 print('s,v,nPlus,nMinus,numerator,threshold,U,spin\n',\
                       s,v,nPlus,nMinus,numerator,threshold,U,self.vertices[v]['spin'])
 
+    def computeSpinEnergy(self):
+        """
+        Spin energy H(c) of a spin configuration is
+        H(c) = -sum_{{x,y} in self.edges}[spin_c(x)*spin_c(y)]
+        """
+        Hc = 0
+        for e in self.edges:
+            pair = list(e)
+            x = pair[0]
+            y = pair[1]
+            Hc -= self.vertices[x]['spin'] * self.vertices[y]['spin']
+        return Hc        
+    
     def exportGraphViz(self,fileName=None,
                        noSilent=True,
                        graphType='png',
@@ -905,14 +931,18 @@ if __name__ == '__main__':
     # Q-Colorings
     g = GridGraph(n=6,m=6)
     g.showShort()
-    qc = Q_Coloring(g,colors=['gold','lightblue','lightcoral'],Debug=False)
+    qc = Q_Coloring(g,nSim=1000,colors=['gold','lightblue','lightcoral'],Debug=False)
     qc.checkFeasibility(Comments=True)
     qc.exportGraphViz()
     # Ising Models
-    g = GridGraph(n=15,m=15)
+    g = GridGraph(n=5,m=5)
     g.showShort()
-    im = IsingModel(g,beta=0.3,nSim=100000,Debug=False)
+    im = IsingModel(g,beta=0.1,nSim=10000,Debug=False)
+    H = im.computeSpinEnergy()
+    print( 'Spin energy = %d/%d = %.3f' % (H,im.size,H/im.size) )
+    print(im.SpinEnergy)
     im.exportGraphViz()
+    im.save()
  
     ## # g = GridGraph(n=4,m=4)
     ## g = RandomGraph(order=7,edgeProbability=0.5)
