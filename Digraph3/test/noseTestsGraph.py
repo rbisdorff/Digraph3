@@ -42,6 +42,6 @@ def testRandomTree():
 def testQColoring():
     g = GridGraph(n=6,m=6)
     g.showShort()
-    qc = Q_Coloring(g,colors=['gold','lightblue','lightcoral'],Debug=False)
+    qc = Q_Coloring(g,nSim=1000,colors=['gold','lightblue','lightcoral'],Debug=False)
     qc.checkFeasibility(Comments=True)
     qc.exportGraphViz()
