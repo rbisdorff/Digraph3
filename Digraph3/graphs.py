@@ -757,14 +757,163 @@ class Q_Coloring(Graph):
                 print('graphViz tools not avalaible! Please check installation.')
 
 
+class IsingModel(Graph):
+    """
+    Specialisation of a Gibbs Sampler for the Ising model
+
+    Example:
+        >>> g = GridGraph(n=15,m=15)
+        >>> g.showShort()
+        *----- show short --------------*
+        Grid graph    :  grid-6-6
+        n             :  6
+        m             :  6
+        order         :  36
+        >>> im = IsingModel(g,beta=0.3,nSim=100000,Debug=False)
+        Running a Gibbs Sampler for 100000 step !
+        >>> im.exportGraphViz(colors=['lightblue','lightcoral'])
+        *---- exporting a dot file for GraphViz tools ---------*
+        Exporting to grid-15-15-ising.dot
+        fdp -Tpng grid-15-15-ising.dot -o grid-15-15-ising.png
+
+    .. image:: grid-15-15-ising.png
+
+    """
+    def __init__(self,g,beta=0,
+                nSim=None,
+                Debug=False):
+        from copy import deepcopy
+        self.name = '%s-ising' % g.name
+        self.vertices = deepcopy(g.vertices)
+        self.valuationDomain = deepcopy(g.valuationDomain)
+        self.edges = deepcopy(g.edges)
+        self.gamma = deepcopy(g.gamma)
+        for v in self.vertices:
+            self.vertices[v]['spin'] = 0
+        if nSim == None:
+            nSim = len(self.edges)
+        self.nSim = nSim
+        self.generateFeasibleConfiguration(beta=beta,Debug=Debug)
+
+    def generateFeasibleConfiguration(self,beta=0,nSim=None,Debug=False):
+        from random import choice, random
+        from math import exp
+        if nSim == None:
+            nSim = self.nSim
+        print('Running a Gibbs Sampler for %d step !' % nSim)
+        for s in range(nSim):
+            verticesKeys = [v for v in self.vertices]
+            v = choice(verticesKeys)
+            plusNeighbors = [x for x in self.gamma[v] if self.vertices[x]['spin'] == 1]
+            nPlus = len(plusNeighbors)
+            minusNeighbors = [x for x in self.gamma[v] if self.vertices[x]['spin'] == -1]
+            nMinus = len(minusNeighbors)
+            numerator = exp(2*beta*(nPlus-nMinus))
+            threshold = numerator/(numerator+1)
+            U = random()
+            if U < threshold:
+                self.vertices[v]['spin'] = 1
+            else:
+                self.vertices[v]['spin'] = -1
+            if Debug:
+                print('s,v,nPlus,nMinus,numerator,threshold,U,spin\n',\
+                      s,v,nPlus,nMinus,numerator,threshold,U,self.vertices[v]['spin'])
+
+    def exportGraphViz(self,fileName=None,
+                       noSilent=True,
+                       graphType='png',
+                       graphSize='7,7',
+                       colors=['gold','lightblue']):
+        """
+        Exports GraphViz dot file  for Ising models drawing filtering.
+
+        """
+        import os
+        if noSilent:
+            print('*---- exporting a dot file for GraphViz tools ---------*')
+        vertexkeys = [x for x in self.vertices]
+        n = len(vertexkeys)
+        edges = self.edges
+        Med = self.valuationDomain['med']
+        i = 0
+        if fileName == None:
+            name = self.name
+        else:
+            name = fileName
+        dotName = name+'.dot'
+        if noSilent:
+            print('Exporting to '+dotName)
+        ## if bestChoice != set():
+        ##     rankBestString = '{rank=max; '
+        ## if worstChoice != set():
+        ##     rankWorstString = '{rank=min; '
+        fo = open(dotName,'w')
+        fo.write('strict graph G {\n')
+        fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2014", size="')
+        fo.write(graphSize),fo.write('"];\n')
+        for i in range(n):
+            try:
+                nodeName = str(self.vertices[vertexkeys[i]]['shortName'])
+            except:
+                try:
+                    nodeName = self.vertices[vertexkeys[i]]['name']
+                except:
+                    nodeName = str(vertexkeys[i])
+            node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
+            if self.vertices[vertexkeys[i]]['spin'] == 1:
+                color=colors[0]
+            elif self.vertices[vertexkeys[i]]['spin'] == -1:
+                color=colors[1]
+            else:
+                color=None
+            if color != None:
+                node += ', style = "filled", color = %s' % color
+            node += '];\n'                
+            fo.write(node)
+        for i in range(n):
+            for j in range(i+1, n):
+                if i != j:
+                    edge = 'n'+str(i+1)
+                    if edges[frozenset( [vertexkeys[i], vertexkeys[j]])] > Med:
+
+                        edge0 = edge+'-- n'+str(j+1)+' [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;\n'
+                        fo.write(edge0)
+                    elif edges[frozenset([vertexkeys[i],vertexkeys[j]])] == Med:
+                        edge0 = edge+'-- n'+str(j+1)+' [dir=both, color=grey, arrowhead=none, arrowtail=none] ;\n'
+                        fo.write(edge0)
+
+        fo.write('}\n')
+        fo.close()
+        if isinstance(self,(GridGraph,RandomTree)):
+            commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        else:
+            commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        if noSilent:
+            print(commandString)
+        try:
+            os.system(commandString)
+        except:
+            if noSilent:
+                print('graphViz tools not avalaible! Please check installation.')
+
+
+
 # --------------testing the module ----
 if __name__ == '__main__':
 
+    # Q-Colorings
     g = GridGraph(n=6,m=6)
     g.showShort()
     qc = Q_Coloring(g,colors=['gold','lightblue','lightcoral'],Debug=False)
     qc.checkFeasibility(Comments=True)
     qc.exportGraphViz()
+    # Ising Models
+    g = GridGraph(n=15,m=15)
+    g.showShort()
+    im = IsingModel(g,beta=0.3,nSim=100000,Debug=False)
+    im.exportGraphViz()
+ 
     ## # g = GridGraph(n=4,m=4)
     ## g = RandomGraph(order=7,edgeProbability=0.5)
     ## # comment out the next line and uncomment the previous for random instances
