@@ -572,7 +572,7 @@ class RandomTree(Graph):
 class Q_Coloring(Graph):
     """
     Generate a q-coloring of a Graph instance via a Gibbs MCMC sampler in
-    Nsim simulation steps (default = len(graph.edges)).
+    nSim simulation steps (default = len(graph.edges)).
     
         Example 3-coloring of a grid 6x6 :
            >>> g = GridGraph(n=6,m=6)
@@ -595,7 +595,7 @@ class Q_Coloring(Graph):
         .. image:: grid-6-6-qcoloring.png
     """ 
 
-    def __init__(self,g,colors=['gold','lightcoral','lightblue'],Nsim=None,Debug=False):
+    def __init__(self,g,colors=['gold','lightcoral','lightblue'],nSim=None,Debug=False):
         from copy import deepcopy
         self.name = '%s-qcoloring' % g.name
         self.vertices = deepcopy(g.vertices)
@@ -605,19 +605,21 @@ class Q_Coloring(Graph):
         self.gamma = deepcopy(g.gamma)
         for v in self.vertices:
             self.vertices[v]['color'] = colors[0]
-        if Nsim == None:
-            Nsim = len(self.edges)
-        self.Nsim = Nsim
+        if nSim == None:
+            nSim = len(self.edges)
+        self.nSim = nSim
         self.generateFeasibleConfiguration(Debug=Debug)        
     
     def showConfiguration(self):
         for v in self.vertices:
             print(v,self.vertices[v]['color'])
             
-    def generateFeasibleConfiguration(self,Debug=False):
+    def generateFeasibleConfiguration(self,nSim=None,Debug=False):
         from random import choice
-        print('Running a Gibbs Sampler for %d step !' % self.Nsim)
-        for s in range(self.Nsim):
+        if nSim == None:
+            nSim = self.nSim
+        print('Running a Gibbs Sampler for %d step !' % nSim)
+        for s in range(nSim):
             verticesKeys = [v for v in self.vertices]
             v = choice(verticesKeys)
             neighborColors = [self.vertices[x]['color']\
@@ -651,8 +653,8 @@ class Q_Coloring(Graph):
             else:
                 print('The q-coloring with %d colors is apparently not feasible !!'\
                       % len(self.colors))
-                print('Either augment Nsim=%d or add one more color'\
-                      % self.Nsim)
+                print('Either augment nSim=%d or add one more color'\
+                      % self.nSim)
         return infeasibleEdges              
 
     def exportGraphViz(self,fileName=None,
