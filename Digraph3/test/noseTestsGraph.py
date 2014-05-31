@@ -69,3 +69,19 @@ def testMISModel():
     im.exportGraphViz(misColor='coral')
     im.save()
 
+def testMetropolisChain():
+    print('==>> Testing Metropolis chain class instantiation')
+    g = Graph(numberOfVertices=30,edgeProbability=0.2)
+    probs = {}
+    n = g.order
+    i = 0
+    for x in g.vertices:
+        probs[x] = (n - i)/(n*(n+1)/2)
+        i += 1
+    met = MetropolisChain(g,probs)
+    met.showShort()
+    states = [x for x in met.vertices]
+    frequency = met.checkSampling(states[0],nSim=30000)
+    for x in probs:
+        print(x,probs[x],frequency[x])
+
