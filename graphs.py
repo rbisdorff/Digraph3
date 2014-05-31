@@ -937,6 +937,63 @@ class IsingModel(Graph):
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
 
+class MetropolisChain(Graph):
+    """
+    Specialisation of the graph class for implementing a generic
+    Markov Chain sampler with a given probability distribution
+    probs = {'v1': x, 'v2': y, ...}
+
+    """
+    def __init__(self,g,
+                 probs = None):
+        from copy import deepcopy
+        from random import choice
+        self.name = '%s-metro' % g.name
+        self.vertices = deepcopy(g.vertices)
+        self.order = len(self.vertices)
+        if probs == None:
+            for v in self.vertices:
+                self.vertices[v]['prob'] = 1.0/self.order
+        else:
+            for v in self.vertices:
+                self.vertices[v]['prob'] = probs[v]       
+        self.valuationDomain = deepcopy(g.valuationDomain)
+        self.edges = deepcopy(g.edges)
+        self.size = len(self.edges)
+        self.gamma = deepcopy(g.gamma)
+
+    def transition(self,si,Debug=False):
+        from random import random,choice
+        neighborsSi = [x for x in self.gamma[si]]
+        di = len(self.gamma[si])
+        if di == 0:
+            return si
+        pi = self.vertices[si]['prob']
+        sj = choice(neighborsSi)
+        dj = len(self.gamma[sj])
+        pj = self.vertices[sj]['prob']
+        U = random()
+        threshold = min(1.0,(pj*di)/(pi*dj))
+        if Debug:
+            print(si,di,pi,sj,dj,pj,U,threshold)
+        if U < threshold:
+            return sj
+        else:
+            return si
+
+    def checkSampling(self,si,nSim):
+        frequency = {}
+        sc = si
+        for i in range(nSim):
+            sc = self.transition(sc)
+            try:
+                frequency[sc] += 1.0
+            except:
+                frequency[sc] = 1.0
+        for x in frequency:
+            frequency[x] /= nSim
+        return frequency    
+        
 class MISModel(Graph):
     """
     Specialisation of a Gibbs Sampler for the hard code model,
@@ -1117,74 +1174,46 @@ class MISModel(Graph):
 # --------------testing the module ----
 if __name__ == '__main__':
     from time import sleep
-    # Q-Colorings
-    g = Graph(numberOfVertices=30,edgeProbability=0.1)
-    #g = GridGraph(n=6,m=6)
-    g.showShort()
-    qc = Q_Coloring(g,nSim=100000,colors=['gold','lightcyan','lightcoral'],Debug=False)
-    qc.checkFeasibility(Comments=True)
-    qc.exportGraphViz()
-    # Ising Models
-    g = GridGraph(n=5,m=5)
-    g.showShort()
-    im = IsingModel(g,beta=0.1,nSim=10000,Debug=False)
-    H = im.computeSpinEnergy()
-    print( 'Spin energy = %d/%d = %.3f' % (H,im.size,H/im.size) )
-    print(im.SpinEnergy)
-    im.exportGraphViz()
-    im.save()
-    # MIS Models
-    g = GridGraph(n=10,m=10)
-    #g = Graph(numberOfVertices=30,edgeProbability=0.1)
-    g.showShort()
-    im = MISModel(g,nSim=100,beta=0.1,Debug=False)
-    im.checkMIS(Comments=True)
-    print('MIS       = ',im.mis)
-    print('Covered   = ',im.misCover)
-    print('Uncovered = ',im.unCovered)
-    print('MIS size  = ',len(im.mis))
-    im.exportGraphViz(misColor='coral')
-##    colors = ['gold','coral','lightcoral','grey','red','cyan','lightcyan']
-##    #im.save()
-##    for i in range(100):
-##        sleep(3)
-##        for v in im.vertices:
-##            im.vertices[v]['mis'] = 0
-##        im.generateMIS(nSim=1000)
-##        print(im.mis)
-##        im.exportGraphViz(misColor=colors[i%7])
- 
-    ## # g = GridGraph(n=4,m=4)
-    ## g = RandomGraph(order=7,edgeProbability=0.5)
-    ## # comment out the next line and uncomment the previous for random instances
-    ## # g = Graph('problem')
-    ## # g.save()
-    ## g = Graph('tempGraph')
-    ## g.showShort()
-    ## g.computeChordlessCycles(Comments=True,Debug=False)
-    ## g.saveEdges(Agrum=True)
-
-    ## # put Debug to <True> to get a detailed execution trace of the algorithm
-    ## g.exportGraphViz('randGraph')
-    ## dg = g.graph2Digraph()
-    ## dg.showShort()
-    ## dg.showRelationTable()
-    ## dg.exportGraphViz('randdDigraph')
-    ## dg.showStatistics()
-    ## print "You may install graphviz and the digraphs module on your system"
-
-    #g = RandomTree(order=30)
-    ## print t.prueferCode
-    ## t.exportGraphViz()
-##    g = Graph(numberOfVertices=5,edgeProbability=0.3)
-##    g.save()
+    g = Graph(numberOfVertices=30,edgeProbability=0.2)
+    probs = {}
+    n = g.order
+    i = 0
+    for x in g.vertices:
+        probs[x] = (n - i)/(n*(n+1)/2)
+        i += 1
+    sumProbs = 0.0
+    for x in probs:
+        sumProbs += probs[x]
+    met = MetropolisChain(g,probs)
+    #met.showShort()
+    states = [x for x in met.vertices]
+    frequency = met.checkSampling(states[0],nSim=30000)
+    for x in probs:
+        print(x,probs[x],frequency[x])
+##    # Q-Colorings
+##    g = Graph(numberOfVertices=30,edgeProbability=0.1)
+##    #g = GridGraph(n=6,m=6)
 ##    g.showShort()
-##    #g = Graph('tempGraph')
-##    print(g.depthFirstSearch(Debug=True))
-##    g.exportGraphViz('randomGraph')
-##    for x in g.vertices:
-##        print(x, g.vertices[x]['startDate'], g.vertices[x]['endDate'])
+##    qc = Q_Coloring(g,nSim=100000,colors=['gold','lightcyan','lightcoral'],Debug=False)
+##    qc.checkFeasibility(Comments=True)
+##    qc.exportGraphViz()
+##    # Ising Models
 ##    g = GridGraph(n=5,m=5)
-##    g.exportGraphViz('grid-5-5')
-##    g = RandomTree(order=10)
-##    g.exportGraphViz('randomTree')
+##    g.showShort()
+##    im = IsingModel(g,beta=0.1,nSim=10000,Debug=False)
+##    H = im.computeSpinEnergy()
+##    print( 'Spin energy = %d/%d = %.3f' % (H,im.size,H/im.size) )
+##    print(im.SpinEnergy)
+##    im.exportGraphViz()
+##    im.save()
+##    # MIS Models
+##    g = GridGraph(n=10,m=10)
+##    #g = Graph(numberOfVertices=30,edgeProbability=0.1)
+##    g.showShort()
+##    im = MISModel(g,nSim=100,beta=0.1,Debug=False)
+##    im.checkMIS(Comments=True)
+##    print('MIS       = ',im.mis)
+##    print('Covered   = ',im.misCover)
+##    print('Uncovered = ',im.unCovered)
+##    print('MIS size  = ',len(im.mis))
+##    im.exportGraphViz(misColor='coral')
