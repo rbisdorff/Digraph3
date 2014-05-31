@@ -42,7 +42,7 @@ class Graph(object):
             g = RandomGraph(order=numberOfVertices,\
                                edgeProbability=edgeProbability)
             self.name = g.name
-            self.vertices = deep.copy(g.vertices)
+            self.vertices = deepcopy(g.vertices)
             self.order = len(self.vertices)
             self.edges = deepcopy(g.edges)
             self.size = len(self.edges)
@@ -601,7 +601,9 @@ class Q_Coloring(Graph):
         .. image:: grid-6-6-qcoloring.png
     """ 
 
-    def __init__(self,g,colors=['gold','lightcoral','lightblue'],nSim=None,Comments=True,Debug=False):
+    def __init__(self,g,colors=['gold','lightcoral','lightblue'],
+                 nSim=None,maxIter=20,
+                 Comments=True,Debug=False):
         from copy import deepcopy
         self.name = '%s-qcoloring' % g.name
         self.vertices = deepcopy(g.vertices)
@@ -616,15 +618,23 @@ class Q_Coloring(Graph):
         if nSim == None:
             nSim = len(self.edges)*2
         self.nSim = nSim
-        self.generateFeasibleConfiguration(Debug=Debug)
-        self.infeasibleEdges = self.checkFeasibility(Comments=Comments)
+        infeasibleEdges = set([e for e in self.edges])
+        _iter = 0
+        while infeasibleEdges != set() and _iter < maxIter:
+            _iter += 1
+            print(_iter)
+            self.generateFeasibleConfiguration(step=_iter,Debug=Debug)
+            infeasibleEdges = self.checkFeasibility(Comments=Comments)
     
     def showConfiguration(self):
         for v in self.vertices:
             print(v,self.vertices[v]['color'])
             
-    def generateFeasibleConfiguration(self,nSim=None,Debug=False):
+    def generateFeasibleConfiguration(self,step=1,nSim=None,Debug=False):
         from random import choice
+        if step == 1:
+            for v in self.vertices:
+                self.vertices[v]['color'] = self.colors[0]           
         if nSim == None:
             nSim = self.nSim
         print('Running a Gibbs Sampler for %d step !' % nSim)
@@ -923,26 +933,221 @@ class IsingModel(Graph):
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
 
+class MISModel(Graph):
+    """
+    Specialisation of a Gibbs Sampler for the hard code model,
+    that is a random MIS generator.
+
+    Example:
+        >>> g = GridGraph(n=15,m=15)
+        >>> g.showShort()
+        *----- show short --------------*
+        Grid graph    :  grid-6-6
+        n             :  6
+        m             :  6
+        order         :  36
+        size
+        >>> mis = MISModel(g,nSim=100000,Debug=False)
+        Running a Gibbs Sampler for 100000 step !
+        >>> mis.exportGraphViz(colors=['lightblue','lightcoral'])
+        *---- exporting a dot file for GraphViz tools ---------*
+        Exporting to grid-15-15-mis.dot
+        fdp -Tpng grid-15-15-mis.dot -o grid-15-15-mis.png
+
+    .. image:: grid-15-15-mis.png
+
+    """
+    def __init__(self,g,beta=0,
+                nSim=None,
+                 maxIter=20,
+                Debug=False):
+        from copy import deepcopy
+        self.name = '%s-mis' % g.name
+        self.vertices = deepcopy(g.vertices)
+        self.order = len(self.vertices)
+        self.valuationDomain = deepcopy(g.valuationDomain)
+        self.edges = deepcopy(g.edges)
+        self.size = len(self.edges)
+        self.gamma = deepcopy(g.gamma)
+        if nSim == None:
+            nSim = len(self.edges)*10
+        self.nSim = nSim
+        for v in self.vertices:
+            self.vertices[v]['mis'] = 0
+        unCovered = set([x for x in self.vertices])
+        _iter = 0
+        while unCovered != set() and _iter < maxIter:
+            _iter += 1
+            print(_iter)
+            self.generateMIS(nSim=nSim,Debug=Debug)
+            mis,misCover,unCovered = self.checkMIS()
+
+    def generateMIS(self,nSim=None,Debug=False):
+        from random import choice
+        from math import exp
+        if nSim == None:
+            nSim = self.nSim
+##        for v in self.vertices:
+##            self.vertices[v]['mis'] = 0
+        print('Running a Gibbs Sampler for %d step !' % nSim)
+        for s in range(nSim):
+            verticesKeys = [v for v in self.vertices]
+            v = choice(verticesKeys)
+            neighbors = [x for x in self.gamma[v]]
+            Potential = True
+            for x in neighbors:
+                if self.vertices[x]['mis'] == 1:
+                    Potential = False
+                    break
+            if Potential:
+                self.vertices[v]['mis'] = 1
+            else:
+                self.vertices[v]['mis'] = -1
+            if Debug:               
+                print('s,v,neighbors,mis\n',\
+                      s,v,neighbors,self.vertices[v]['mis'])
+        self.mis,self.misCover,self.unCovered = self.checkMIS(Comments=Debug)
+
+    def checkMIS(self,Comments=True):
+        """
+        Verify maximality of independent set.
+
+        ..note::
+             Returns three sets: an independent choice,
+             the covered vertices, and the remaining uncovered vertices.
+             When the last set is empty, the independent choice is maximal.
+        """
+        cover = set()
+        mis = set()
+        for x in self.vertices:
+            if self.vertices[x]['mis'] == 1:
+                cover = cover | self.gamma[x]
+                mis.add(x)
+        misCover = mis | cover
+        unCovered = set(self.vertices.keys()) - misCover
+        if Comments:
+            if unCovered == set():
+                print(mis,' is maximal !')
+            else:
+                print(mis,' is not maximal, uncovered = ',unCovered)
+        return mis,misCover,unCovered
+    
+    def exportGraphViz(self,fileName=None,
+                       noSilent=True,
+                       graphType='png',
+                       graphSize='7,7',
+                       misColor='lightblue'):
+        """
+        Exports GraphViz dot file  for Ising models drawing filtering.
+
+        """
+        import os
+        if noSilent:
+            print('*---- exporting a dot file for GraphViz tools ---------*')
+        vertexkeys = [x for x in self.vertices]
+        n = len(vertexkeys)
+        edges = self.edges
+        Med = self.valuationDomain['med']
+        i = 0
+        if fileName == None:
+            name = self.name
+        else:
+            name = fileName
+        dotName = name+'.dot'
+        if noSilent:
+            print('Exporting to '+dotName)
+        ## if bestChoice != set():
+        ##     rankBestString = '{rank=max; '
+        ## if worstChoice != set():
+        ##     rankWorstString = '{rank=min; '
+        fo = open(dotName,'w')
+        fo.write('strict graph G {\n')
+        fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2014", size="')
+        fo.write(graphSize),fo.write('"];\n')
+        for i in range(n):
+            try:
+                nodeName = str(self.vertices[vertexkeys[i]]['shortName'])
+            except:
+                try:
+                    nodeName = self.vertices[vertexkeys[i]]['name']
+                except:
+                    nodeName = str(vertexkeys[i])
+            node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
+            if self.vertices[vertexkeys[i]]['mis'] == 1:
+                color=misColor
+            else:
+                color=None
+            if color != None:
+                node += ', style = "filled", color = %s' % color
+            node += '];\n'                
+            fo.write(node)
+        for i in range(n):
+            for j in range(i+1, n):
+                if i != j:
+                    edge = 'n'+str(i+1)
+                    if edges[frozenset( [vertexkeys[i], vertexkeys[j]])] > Med:
+
+                        edge0 = edge+'-- n'+str(j+1)+' [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;\n'
+                        fo.write(edge0)
+                    elif edges[frozenset([vertexkeys[i],vertexkeys[j]])] == Med:
+                        edge0 = edge+'-- n'+str(j+1)+' [dir=both, color=grey, arrowhead=none, arrowtail=none] ;\n'
+                        fo.write(edge0)
+
+        fo.write('}\n')
+        fo.close()
+        if isinstance(self,(GridGraph,RandomTree)):
+            commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        else:
+            commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        if noSilent:
+            print(commandString)
+        try:
+            os.system(commandString)
+        except:
+            if noSilent:
+                print('graphViz tools not avalaible! Please check installation.')
 
 
 # --------------testing the module ----
 if __name__ == '__main__':
-
+    from time import sleep
     # Q-Colorings
-    g = GridGraph(n=6,m=6)
+    g = Graph(numberOfVertices=30,edgeProbability=0.1)
+    #g = GridGraph(n=6,m=6)
     g.showShort()
-    qc = Q_Coloring(g,nSim=1000,colors=['gold','lightblue','lightcoral'],Debug=False)
+    qc = Q_Coloring(g,nSim=100000,colors=['gold','lightcyan','lightcoral'],Debug=False)
     qc.checkFeasibility(Comments=True)
     qc.exportGraphViz()
-    # Ising Models
-    g = GridGraph(n=5,m=5)
-    g.showShort()
-    im = IsingModel(g,beta=0.1,nSim=10000,Debug=False)
-    H = im.computeSpinEnergy()
-    print( 'Spin energy = %d/%d = %.3f' % (H,im.size,H/im.size) )
-    print(im.SpinEnergy)
-    im.exportGraphViz()
-    im.save()
+##    # Ising Models
+##    g = GridGraph(n=5,m=5)
+##    g.showShort()
+##    im = IsingModel(g,beta=0.1,nSim=10000,Debug=False)
+##    H = im.computeSpinEnergy()
+##    print( 'Spin energy = %d/%d = %.3f' % (H,im.size,H/im.size) )
+##    print(im.SpinEnergy)
+##    im.exportGraphViz()
+##    im.save()
+##    # MIS Models
+##    g = GridGraph(n=10,m=10)
+##    #g = Graph(numberOfVertices=30,edgeProbability=0.1)
+##    g.showShort()
+##    im = MISModel(g,nSim=100,beta=0.1,Debug=False)
+##    im.checkMIS(Comments=True)
+##    print('MIS       = ',im.mis)
+##    print('Covered   = ',im.misCover)
+##    print('Uncovered = ',im.unCovered)
+##    print('MIS size  = ',len(im.mis))
+##    im.exportGraphViz(misColor='coral')
+##    colors = ['gold','coral','lightcoral','grey','red','cyan','lightcyan']
+##    #im.save()
+##    for i in range(100):
+##        sleep(3)
+##        for v in im.vertices:
+##            im.vertices[v]['mis'] = 0
+##        im.generateMIS(nSim=1000)
+##        print(im.mis)
+##        im.exportGraphViz(misColor=colors[i%7])
  
     ## # g = GridGraph(n=4,m=4)
     ## g = RandomGraph(order=7,edgeProbability=0.5)
