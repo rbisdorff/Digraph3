@@ -35,13 +35,15 @@ class Graph(object):
         if Empty:
             self.name = 'emptyInstance'
             self.vertices = dict()
+            self.order = len(self.vertices)
             self.edges = dict()
+            self.size = len(self.edges)
             self.valuationDomain = {'min':-1, 'med': 0, 'max':1}
             self.gamma = dict()
         elif fileName==None:
             g = RandomGraph(order=numberOfVertices,\
                                edgeProbability=edgeProbability)
-            self.name = g.name
+            self.name = deepcopy(g.name)
             self.vertices = deepcopy(g.vertices)
             self.order = len(self.vertices)
             self.edges = deepcopy(g.edges)
@@ -57,6 +59,7 @@ class Graph(object):
             self.order = len(self.vertices)
             self.valuationDomain = argDict['valuationDomain']
             self.edges = argDict['edges']
+            self.size = len(self.edges)
             self.gamma = self.gammaSets()
 
     def graph2Digraph(self):
@@ -68,6 +71,7 @@ class Graph(object):
         dg = EmptyDigraph(order=self.order)
         dg.name = deepcopy(self.name)
         dg.actions = deepcopy(self.vertices)
+        dg.order = len(dg.actions)
         dg.valuationdomain = deepcopy(self.valuationDomain)
         dg.convertValuationToDecimal()
         dg.relations = {}
@@ -613,8 +617,8 @@ class Q_Coloring(Graph):
         self.edges = deepcopy(g.edges)
         self.size = len(self.edges)
         self.gamma = deepcopy(g.gamma)
-        for v in self.vertices:
-            self.vertices[v]['color'] = colors[0]
+##        for v in self.vertices:
+##            self.vertices[v]['color'] = colors[0]
         if nSim == None:
             nSim = len(self.edges)*2
         self.nSim = nSim
@@ -623,16 +627,16 @@ class Q_Coloring(Graph):
         while infeasibleEdges != set() and _iter < maxIter:
             _iter += 1
             print(_iter)
-            self.generateFeasibleConfiguration(step=_iter,Debug=Debug)
+            self.generateFeasibleConfiguration(Reset=True,Debug=Debug)
             infeasibleEdges = self.checkFeasibility(Comments=Comments)
     
     def showConfiguration(self):
         for v in self.vertices:
             print(v,self.vertices[v]['color'])
             
-    def generateFeasibleConfiguration(self,step=1,nSim=None,Debug=False):
+    def generateFeasibleConfiguration(self,Reset=True,nSim=None,Debug=False):
         from random import choice
-        if step == 1:
+        if Reset:
             for v in self.vertices:
                 self.vertices[v]['color'] = self.colors[0]           
         if nSim == None:
@@ -972,23 +976,24 @@ class MISModel(Graph):
         if nSim == None:
             nSim = len(self.edges)*10
         self.nSim = nSim
-        for v in self.vertices:
-            self.vertices[v]['mis'] = 0
+##        for v in self.vertices:
+##            self.vertices[v]['mis'] = 0
         unCovered = set([x for x in self.vertices])
         _iter = 0
         while unCovered != set() and _iter < maxIter:
             _iter += 1
             print(_iter)
-            self.generateMIS(nSim=nSim,Debug=Debug)
+            self.generateMIS(Reset=True,nSim=nSim,Debug=Debug)
             mis,misCover,unCovered = self.checkMIS()
 
-    def generateMIS(self,nSim=None,Debug=False):
+    def generateMIS(self,Reset=True,nSim=None,Debug=False):
         from random import choice
         from math import exp
         if nSim == None:
             nSim = self.nSim
-##        for v in self.vertices:
-##            self.vertices[v]['mis'] = 0
+        if Reset:
+            for v in self.vertices:
+                self.vertices[v]['mis'] = 0
         print('Running a Gibbs Sampler for %d step !' % nSim)
         for s in range(nSim):
             verticesKeys = [v for v in self.vertices]
@@ -1119,26 +1124,26 @@ if __name__ == '__main__':
     qc = Q_Coloring(g,nSim=100000,colors=['gold','lightcyan','lightcoral'],Debug=False)
     qc.checkFeasibility(Comments=True)
     qc.exportGraphViz()
-##    # Ising Models
-##    g = GridGraph(n=5,m=5)
-##    g.showShort()
-##    im = IsingModel(g,beta=0.1,nSim=10000,Debug=False)
-##    H = im.computeSpinEnergy()
-##    print( 'Spin energy = %d/%d = %.3f' % (H,im.size,H/im.size) )
-##    print(im.SpinEnergy)
-##    im.exportGraphViz()
-##    im.save()
-##    # MIS Models
-##    g = GridGraph(n=10,m=10)
-##    #g = Graph(numberOfVertices=30,edgeProbability=0.1)
-##    g.showShort()
-##    im = MISModel(g,nSim=100,beta=0.1,Debug=False)
-##    im.checkMIS(Comments=True)
-##    print('MIS       = ',im.mis)
-##    print('Covered   = ',im.misCover)
-##    print('Uncovered = ',im.unCovered)
-##    print('MIS size  = ',len(im.mis))
-##    im.exportGraphViz(misColor='coral')
+    # Ising Models
+    g = GridGraph(n=5,m=5)
+    g.showShort()
+    im = IsingModel(g,beta=0.1,nSim=10000,Debug=False)
+    H = im.computeSpinEnergy()
+    print( 'Spin energy = %d/%d = %.3f' % (H,im.size,H/im.size) )
+    print(im.SpinEnergy)
+    im.exportGraphViz()
+    im.save()
+    # MIS Models
+    g = GridGraph(n=10,m=10)
+    #g = Graph(numberOfVertices=30,edgeProbability=0.1)
+    g.showShort()
+    im = MISModel(g,nSim=100,beta=0.1,Debug=False)
+    im.checkMIS(Comments=True)
+    print('MIS       = ',im.mis)
+    print('Covered   = ',im.misCover)
+    print('Uncovered = ',im.unCovered)
+    print('MIS size  = ',len(im.mis))
+    im.exportGraphViz(misColor='coral')
 ##    colors = ['gold','coral','lightcoral','grey','red','cyan','lightcyan']
 ##    #im.save()
 ##    for i in range(100):
