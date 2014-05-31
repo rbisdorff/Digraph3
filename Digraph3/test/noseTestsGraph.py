@@ -25,6 +25,7 @@ def testGraph():
     g.exportGraphViz('testGraphViz')
 
 def testGraph2Digraph():
+    print('==>> Testing Graph2Digraph coversion')
     g = RandomGraph(order=7,edgeProbability=0.5)
     dg = g.graph2Digraph()
     dg.showShort()
@@ -33,6 +34,7 @@ def testGraph2Digraph():
     dg.showStatistics()
 
 def testRandomTree():
+    print('==>> Testing RandomTree class instantiation')
     g = RandomTree(order=30)
     print(g.depthFirstSearch(Debug=True))
     g.exportGraphViz('testTreeViz')
@@ -40,6 +42,7 @@ def testRandomTree():
         print(x, g.vertices[x]['startDate'], g.vertices[x]['endDate'])
 
 def testQColoring():
+    print('==>> Testing Q_Coloring class instantiation')
     g = GridGraph(n=6,m=6)
     g.showShort()
     qc = Q_Coloring(g,nSim=1000,colors=['gold','lightblue','lightcoral'],Debug=False)
@@ -47,7 +50,22 @@ def testQColoring():
     qc.exportGraphViz()
 
 def testIsingModel():
+    print('==>> Testing Ising Model class instantiation')
     g = GridGraph(n=15,m=15)
     g.showShort()
     im = IsingModel(g,beta=0.3,nSim=100000,Debug=False)
     im.exportGraphViz(colors=['lightblue','lightcoral'])
+
+def testMISModel():
+    print('==>> Testing MIS Model class instantiation')
+    g = Graph(numberOfVertices=30,edgeProbability=0.075)
+    g.showShort()
+    im = MISModel(g,beta=0.1,nSim=10000,Debug=False)
+    im.checkMIS(Comments=True)
+    print('MIS       = ',im.mis)
+    print('Covered   = ',im.misCover)
+    print('Uncovered = ',im.unCovered)
+    print('MIS size  = ',len(im.mis))
+    im.exportGraphViz(misColor='coral')
+    im.save()
+
