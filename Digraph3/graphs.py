@@ -1041,9 +1041,48 @@ class IsingModel(Graph):
 class MetropolisChain(Graph):
     """
     Specialisation of the graph class for implementing a generic
-    Markov Chain sampler with a given probability distribution
+    Metropolis Markov Chain Monte Carlo sampler with a given probability distribution
     probs = {'v1': x, 'v2': y, ...}
 
+    Usage example:
+        >>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
+        >>> g.showShort()
+        *---- short description of the graph ----*
+        Name             : 'randomGraph'
+        Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5']
+        Valuation domain :  {'max': 1, 'med': 0, 'min': -1}
+        Gamma function   : 
+        v1 -> ['v2', 'v3', 'v4']
+        v2 -> ['v1', 'v4']
+        v3 -> ['v5', 'v1']
+        v4 -> ['v2', 'v5', 'v1']
+        v5 -> ['v3', 'v4']        
+        >>> probs = {}
+        >>> n = g.order
+        >>> i = 0
+        >>> verticesList = [x for x in g.vertices]
+        >>> verticesList.sort()
+        >>> for v in verticesList:
+        ...     probs[v] = (n - i)/(n*(n+1)/2)
+        ...     i += 1
+        >>> met = MetropolisChain(g,probs)
+        >>> frequency = met.checkSampling(verticesList[0],nSim=30000)
+        >>> for v in verticesList:
+        ...     print(v,probs[v],frequency[v])
+        v1 0.3333 0.3343
+        v2 0.2666 0.2680
+        v3 0.2    0.2030 
+        v4 0.1333 0.1311
+        v5 0.0666 0.0635
+        >>> met.showTransitionMatrix()
+        * ---- Transition Matrix -----
+          Pij  | 'v1'    'v2'    'v3'    'v4'    'v5'	  
+          -----|-------------------------------------
+          'v1' |  0.23	 0.33	 0.30	 0.13	 0.00	 
+          'v2' |  0.42   0.42 	 0.00	 0.17	 0.00	 
+          'v3' |  0.50	 0.00	 0.33 	 0.00	 0.17	 
+          'v4' |  0.33	 0.33	 0.00	 0.08 	 0.25	 
+          'v5' |  0.00	 0.00	 0.50	 0.50	 0.00 	 
     """
     def __init__(self,g,
                  probs = None):
@@ -1159,7 +1198,7 @@ class MetropolisChain(Graph):
                           vertices=None,\
                           relation=None,\
                           ndigits=2,\
-                          ReflexiveTerms=False):
+                          ReflexiveTerms=True):
         """
         Prints on stdout the transition probabilities in
         vertices X vertices table format.
@@ -1406,34 +1445,35 @@ class MISModel(Graph):
 
 # --------------testing the module ----
 if __name__ == '__main__':
-    g = TriangularGraph(n=5,m=5)
-    #g.showShort()
-    g.exportGraphViz()
+##    g = TriangularGraph(n=5,m=5)
+##    #g.showShort()
+##    g.exportGraphViz()
     
-##    g = Graph(numberOfVertices=30,edgeProbability=0.2)
-##    g.save('test')
-##    probs = {}
-##    n = g.order
-##    i = 0
-##    verticesList = [x for x in g.vertices]
-##    verticesList.sort()
-##    for x in verticesList:
-##        probs[x] = (n - i)/(n*(n+1)/2)
-##        i += 1
-##    sumProbs = 0.0
-##    for x in verticesList:
-##        sumProbs += probs[x]
-##    met = MetropolisChain(g,probs)
-##    #met = MetropolisChain(g)
-##    #met.showShort()
-##    frequency = met.checkSampling(verticesList[0],nSim=30000)
-##    for x in verticesList:
-##        try:
-##            print(x,probs[x],frequency[x])
-##        except:
-##            print(x,0.0,0.0)
-##    met.showTransitionMatrix()
-##    met.saveCSVTransition()
+    g = Graph(numberOfVertices=5,edgeProbability=0.5)
+    g.showShort()
+    g.save('test')
+    probs = {}
+    n = g.order
+    i = 0
+    verticesList = [x for x in g.vertices]
+    verticesList.sort()
+    for x in verticesList:
+        probs[x] = (n - i)/(n*(n+1)/2)
+        i += 1
+    sumProbs = 0.0
+    for x in verticesList:
+        sumProbs += probs[x]
+    met = MetropolisChain(g,probs)
+    #met = MetropolisChain(g)
+    #met.showShort()
+    frequency = met.checkSampling(verticesList[0],nSim=30000)
+    for x in verticesList:
+        try:
+            print(x,probs[x],frequency[x])
+        except:
+            print(x,0.0,0.0)
+    met.showTransitionMatrix()
+    met.saveCSVTransition()
 ##    # Q-Colorings
 ##    g = Graph(numberOfVertices=30,edgeProbability=0.1)
 ##    #g = GridGraph(n=6,m=6)
