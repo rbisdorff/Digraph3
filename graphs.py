@@ -1251,7 +1251,7 @@ class MISModel(Graph):
                        graphSize='7,7',
                        misColor='lightblue'):
         """
-        Exports GraphViz dot file  for Ising models drawing filtering.
+        Exports GraphViz dot file  for MIS models drawing filtering.
 
         """
         import os
