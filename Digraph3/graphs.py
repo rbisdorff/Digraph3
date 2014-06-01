@@ -806,7 +806,6 @@ class IsingModel(Graph):
         fdp -Tpng grid-15-15-ising.dot -o grid-15-15-ising.png
 
     .. image:: grid-15-15-ising.png
-
     """
     def __init__(self,g,beta=0,
                 nSim=None,
@@ -960,7 +959,7 @@ class MetropolisChain(Graph):
         from copy import deepcopy
         from random import choice
         self.name = '%s-metro' % g.name
-        if isinstance(self.vertices,dict):
+        if isinstance(g.vertices,dict):
             self.vertices = deepcopy(g.vertices)
         else:
             self.vertices = dict()
@@ -1128,23 +1127,38 @@ class MISModel(Graph):
     that is a random MIS generator.
 
     Example:
-        >>> g = GridGraph(n=15,m=15)
+        >>> from digraphs import CirculantDigraph        
+        >>> dg = CirculantDigraph(order=15)
+        >>> g = dg.digraph2Graph()
         >>> g.showShort()
-        *----- show short --------------*
-        Grid graph    :  grid-6-6
-        n             :  6
-        m             :  6
-        order         :  36
-        size
-        >>> mis = MISModel(g,nSim=100000,Debug=False)
-        Running a Gibbs Sampler for 100000 step !
-        >>> mis.exportGraphViz(colors=['lightblue','lightcoral'])
+        *---- short description of the graph ----*
+        Name             : 'c15'
+        Vertices         :  ['1', '10', '11', '12', '13', '14', '15', '2', '3', '4', '5', '6', '7', '8', '9']
+        Valuation domain :  {'med': 0, 'min': -1, 'max': 1}
+        Gamma function   : 
+        1 -> ['2', '15']
+        10 -> ['11', '9']
+        11 -> ['10', '12']
+        12 -> ['13', '11']
+        13 -> ['12', '14']
+        14 -> ['15', '13']
+        15 -> ['1', '14']
+        2 -> ['1', '3']
+        3 -> ['2', '4']
+        4 -> ['3', '5']
+        5 -> ['6', '4']
+        6 -> ['7', '5']
+        7 -> ['6', '8']
+        8 -> ['7', '9']
+        9 -> ['10', '8']
+        >>> mis = MISModel(g)
+        Running a Gibbs Sampler for 1050 step !
+        >>> mis.exportGraphViz()
         *---- exporting a dot file for GraphViz tools ---------*
-        Exporting to grid-15-15-mis.dot
-        fdp -Tpng grid-15-15-mis.dot -o grid-15-15-mis.png
+        Exporting to c15-mis.dot
+        fdp -Tpng c15-mis.dot -o c15-mis.png
 
-    .. image:: grid-15-15-mis.png
-
+    .. image:: c15-mis.png
     """
     def __init__(self,g,
                 nSim=None,

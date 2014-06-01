@@ -60,7 +60,7 @@ def testMISModel():
     print('==>> Testing MIS Model class instantiation')
     g = Graph(numberOfVertices=30,edgeProbability=0.075)
     g.showShort()
-    im = MISModel(g,beta=0.1,nSim=10000,Debug=False)
+    im = MISModel(g,nSim=10000,Debug=False)
     im.checkMIS(Comments=True)
     print('MIS       = ',im.mis)
     print('Covered   = ',im.misCover)
