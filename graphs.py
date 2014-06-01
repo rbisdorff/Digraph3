@@ -711,7 +711,7 @@ class Q_Coloring(Graph):
             v7 -> ['v1', 'v5', 'v8', 'v2', 'v3']
             v8 -> ['v6', 'v7', 'v2', 'v5']
             v9 -> ['v3']
-            >>> qc = Q_Coloring(g,Nsim=1000)
+            >>> qc = Q_Coloring(g,nSim=1000)
             Running a Gibbs Sampler for 1000 step !
             >>> qc.checkFeasibility()
             The q-coloring with 3 colors is feasible !!
@@ -1024,13 +1024,12 @@ class MetropolisChain(Graph):
 
     def checkSampling(self,si,nSim):
         frequency = {}
+        for v in self.vertices:
+            frequency[v] = 0.0
         sc = si
         for i in range(nSim):
             sc = self.MCMCtransition(sc)
-            try:
-                frequency[sc] += 1.0
-            except:
-                frequency[sc] = 1.0
+            frequency[sc] += 1.0
         for x in frequency:
             frequency[x] /= nSim
         return frequency
@@ -1071,7 +1070,8 @@ class MetropolisChain(Graph):
                           ndigits=2,\
                           ReflexiveTerms=False):
         """
-        prints the relation valuation in actions X actions table format.
+        Prints on stdout the transition probabilities in
+        vertices X vertices table format.
         """
         if vertices == None:
             vertices = self.vertices
@@ -1095,12 +1095,6 @@ class MetropolisChain(Graph):
             verticesList.sort()
         print(verticesList)
         verticesList.sort()
-
-##        try:
-##            hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
-##        except KeyError:
-##            hasIntegerValuation = IntegerValues
-
         for x in verticesList:
             print("'"+x[0]+"'\t ", end=' ')
         print('\n-----|------------------------------------------------------------')
@@ -1116,8 +1110,7 @@ class MetropolisChain(Graph):
                         print(formatString % (relation[x[1]][y[1]]), end=' ')
                     else:  
                         formatString = ' - \t'
-                        print(formatString, end=' ')
-                    
+                        print(formatString, end=' ')                    
             print()
         print('\n')
         
@@ -1184,8 +1177,6 @@ class MISModel(Graph):
         if nSim == None:
             nSim = len(self.edges)*10
         self.nSim = nSim
-##        for v in self.vertices:
-##            self.vertices[v]['mis'] = 0
         unCovered = set([x for x in self.vertices])
         _iter = 0
         while unCovered != set() and _iter < maxIter:

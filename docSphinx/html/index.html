@@ -2597,7 +2597,8 @@ a csv file.</p>
 <dl class="method">
 <dt id="graphs.MetropolisChain.showTransitionMatrix">
 <tt class="descname">showTransitionMatrix</tt><big>(</big><em>Sorted=True</em>, <em>IntegerValues=False</em>, <em>vertices=None</em>, <em>relation=None</em>, <em>ndigits=2</em>, <em>ReflexiveTerms=False</em><big>)</big><a class="headerlink" href="#graphs.MetropolisChain.showTransitionMatrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>prints the relation valuation in actions X actions table format.</p>
+<dd><p>Prints on stdout the transition probabilities in
+vertices X vertices table format.</p>
 </dd></dl>
 
 </dd></dl>
@@ -2661,7 +2662,7 @@ nSim simulation steps (default = len(graph.edges)).</p>
 <span class="go">v7 -&gt; [&#39;v1&#39;, &#39;v5&#39;, &#39;v8&#39;, &#39;v2&#39;, &#39;v3&#39;]</span>
 <span class="go">v8 -&gt; [&#39;v6&#39;, &#39;v7&#39;, &#39;v2&#39;, &#39;v5&#39;]</span>
 <span class="go">v9 -&gt; [&#39;v3&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span> <span class="o">=</span> <span class="n">Q_Coloring</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Nsim</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span> <span class="o">=</span> <span class="n">Q_Coloring</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">nSim</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 <span class="go">Running a Gibbs Sampler for 1000 step !</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span><span class="o">.</span><span class="n">checkFeasibility</span><span class="p">()</span>
 <span class="go">The q-coloring with 3 colors is feasible !!</span>
@@ -2772,7 +2773,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3467,7 +3468,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
