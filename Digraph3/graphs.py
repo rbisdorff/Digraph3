@@ -506,6 +506,94 @@ class GridGraph(Graph):
         print('order         : ', self.order)
         print('size          : ', self.size)
 
+class TriangularGraph(Graph):
+    """
+    Specialization of the general Graph class for generating
+    temporary triangular graphs of dimension n times m.
+
+    *Parameters*:
+        * n,m > 0
+        * valuationDomain ={'min':m, 'max':M}
+
+    Default instantiation (5 times 5 Trinagular Digraph):
+       * n = 5,
+       * m=5,
+       * valuationDomain = {'min':-1.0,'max':1.0}.
+
+    Example of 5x5 GridGraph instance:
+
+    .. image:: triangular-5-5.png
+    """
+
+    def __init__(self,n=5,m=5,valuationMin=-1,valuationMax=1):
+
+        self.name = 'triangular-'+str(n)+'-'+str(m)
+        self.n = n
+        self.m = m
+        na = list(range(n+1))
+        na.remove(0)
+        ma = list(range(m+1))
+        ma.remove(0)
+        vertices = {}
+        gridNodes={}
+        for x in na:
+            for y in ma:
+                vertex = str(x)+'-'+str(y)
+                gridNodes[vertex]=(x,y)
+                vertices[vertex] = {'name': 'gridnode', 'shortName': vertex}
+        order = len(vertices)
+        self.order = order
+        self.vertices = vertices
+        self.gridNodes = gridNodes
+        Min = valuationMin
+        Max = valuationMax
+        Med = (Max + Min)//2
+        self.valuationDomain = {'min':Min,'med':Med,'max':Max}
+        edges = {} # instantiate edges
+        verticesKeys = [x for x in vertices]
+        for x in verticesKeys:
+            for y in verticesKeys:
+                if x != y:
+                    if gridNodes[x][1] == gridNodes[y][1]:
+                        if gridNodes[x][0] == gridNodes[y][0]-1 :
+                            edges[frozenset([x,y])] = Max
+                        elif gridNodes[x][0] == gridNodes[y][0]+1:
+                            edges[frozenset([x,y])] = Max
+                        else:
+                            edges[frozenset([x,y])] = Min
+                    elif gridNodes[x][0] == gridNodes[y][0]:
+                        if gridNodes[x][1] == gridNodes[y][1]-1:
+                            edges[frozenset([x,y])] = Max
+                        elif gridNodes[x][1] == gridNodes[y][1]+1:
+                            edges[frozenset([x,y])] = Max
+                        else:
+                            edges[frozenset([x,y])] = Min
+                    elif gridNodes[x][0] == gridNodes[y][0]-1:
+                        if gridNodes[x][1] == gridNodes[y][1]-1:
+                            edges[frozenset([x,y])] = Max
+                        else:
+                            edges[frozenset([x,y])] = Min
+                    elif gridNodes[x][0] == gridNodes[y][0]+1:
+                        if gridNodes[x][1] == gridNodes[y][1]+1:
+                            edges[frozenset([x,y])] = Max
+                        else:
+                            edges[frozenset([x,y])] = Min
+                    else:
+                        edges[frozenset([x,y])] = Min
+
+
+        self.edges = edges
+        self.size = len(edges)
+        self.gamma = self.gammaSets()
+
+    def showShort(self):
+        print('*----- show short --------------*')
+        print('Grid graph    : ', self.name)
+        print('n             : ', self.n)
+        print('m             : ', self.m)
+        print('order         : ', self.order)
+        print('size          : ', self.size)
+
 class RandomTree(Graph):
     """
     Random instance of a tree generated from a random Prüfer code.
@@ -873,6 +961,7 @@ class IsingModel(Graph):
                        noSilent=True,
                        graphType='png',
                        graphSize='7,7',
+                       edgeColor='black',
                        colors=['gold','lightblue']):
         """
         Exports GraphViz dot file  for Ising models drawing filtering.
@@ -927,7 +1016,9 @@ class IsingModel(Graph):
                     edge = 'n'+str(i+1)
                     if edges[frozenset( [vertexkeys[i], vertexkeys[j]])] > Med:
 
-                        edge0 = edge+'-- n'+str(j+1)+' [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;\n'
+                        edge0 = edge+'-- n'+str(j+1)+\
+                                ' [dir=both,style="setlinewidth(1)",color='+edgeColor+\
+                                ' arrowhead=none, arrowtail=none] ;\n'
                         fo.write(edge0)
                     elif edges[frozenset([vertexkeys[i],vertexkeys[j]])] == Med:
                         edge0 = edge+'-- n'+str(j+1)+' [dir=both, color=grey, arrowhead=none, arrowtail=none] ;\n'
@@ -1315,31 +1406,34 @@ class MISModel(Graph):
 
 # --------------testing the module ----
 if __name__ == '__main__':
-    from time import sleep
-    g = Graph(numberOfVertices=30,edgeProbability=0.2)
-    g.save('test')
-    probs = {}
-    n = g.order
-    i = 0
-    verticesList = [x for x in g.vertices]
-    verticesList.sort()
-    for x in verticesList:
-        probs[x] = (n - i)/(n*(n+1)/2)
-        i += 1
-    sumProbs = 0.0
-    for x in verticesList:
-        sumProbs += probs[x]
-    met = MetropolisChain(g,probs)
-    #met = MetropolisChain(g)
-    #met.showShort()
-    frequency = met.checkSampling(verticesList[0],nSim=30000)
-    for x in verticesList:
-        try:
-            print(x,probs[x],frequency[x])
-        except:
-            print(x,0.0,0.0)
-    met.showTransitionMatrix()
-    met.saveCSVTransition()
+    g = TriangularGraph(n=5,m=5)
+    #g.showShort()
+    g.exportGraphViz()
+    
+##    g = Graph(numberOfVertices=30,edgeProbability=0.2)
+##    g.save('test')
+##    probs = {}
+##    n = g.order
+##    i = 0
+##    verticesList = [x for x in g.vertices]
+##    verticesList.sort()
+##    for x in verticesList:
+##        probs[x] = (n - i)/(n*(n+1)/2)
+##        i += 1
+##    sumProbs = 0.0
+##    for x in verticesList:
+##        sumProbs += probs[x]
+##    met = MetropolisChain(g,probs)
+##    #met = MetropolisChain(g)
+##    #met.showShort()
+##    frequency = met.checkSampling(verticesList[0],nSim=30000)
+##    for x in verticesList:
+##        try:
+##            print(x,probs[x],frequency[x])
+##        except:
+##            print(x,0.0,0.0)
+##    met.showTransitionMatrix()
+##    met.saveCSVTransition()
 ##    # Q-Colorings
 ##    g = Graph(numberOfVertices=30,edgeProbability=0.1)
 ##    #g = GridGraph(n=6,m=6)
@@ -1350,11 +1444,11 @@ if __name__ == '__main__':
 ##    # Ising Models
 ##    g = GridGraph(n=5,m=5)
 ##    g.showShort()
-##    im = IsingModel(g,beta=0.1,nSim=10000,Debug=False)
+##    im = IsingModel(g,beta=0.441,nSim=30000,Debug=False)
 ##    H = im.computeSpinEnergy()
 ##    print( 'Spin energy = %d/%d = %.3f' % (H,im.size,H/im.size) )
 ##    print(im.SpinEnergy)
-##    im.exportGraphViz()
+##    im.exportGraphViz(edgeColor='lightgrey',graphSize="(5,5)",graphType="pdf",colors=['gold','coral'])
 ##    im.save()
 ##    # MIS Models
 ##    g = GridGraph(n=10,m=10)
