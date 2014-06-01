@@ -1225,7 +1225,7 @@ class MISModel(Graph):
         """
         Verify maximality of independent set.
 
-        ..note::
+        .. note::
              Returns three sets: an independent choice,
              the covered vertices, and the remaining uncovered vertices.
              When the last set is empty, the independent choice is maximal.
