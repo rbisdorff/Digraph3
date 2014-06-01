@@ -2507,7 +2507,9 @@ that is a random MIS generator.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*---- short description of the graph ----*</span>
 <span class="go">Name             : &#39;c15&#39;</span>
-<span class="go">Vertices         :  [&#39;1&#39;, &#39;10&#39;, &#39;11&#39;, &#39;12&#39;, &#39;13&#39;, &#39;14&#39;, &#39;15&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;]</span>
+<span class="go">Vertices         :  [&#39;1&#39;, &#39;10&#39;, &#39;11&#39;, &#39;12&#39;, &#39;13&#39;, &#39;14&#39;,</span>
+<span class="go">                     &#39;15&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;,</span>
+<span class="go">                     &#39;8&#39;, &#39;9&#39;]</span>
 <span class="go">Valuation domain :  {&#39;med&#39;: 0, &#39;min&#39;: -1, &#39;max&#39;: 1}</span>
 <span class="go">Gamma function   : </span>
 <span class="go">1 -&gt; [&#39;2&#39;, &#39;15&#39;]</span>
@@ -2527,6 +2529,8 @@ that is a random MIS generator.</p>
 <span class="go">9 -&gt; [&#39;10&#39;, &#39;8&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mis</span> <span class="o">=</span> <span class="n">MISModel</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">Running a Gibbs Sampler for 1050 step !</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mis</span><span class="o">.</span><span class="n">checkMIS</span><span class="p">()</span>
+<span class="go">{&#39;2&#39;,&#39;4&#39;,&#39;7&#39;,&#39;9&#39;,&#39;11&#39;,&#39;13&#39;,&#39;15&#39;}  is maximal !</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mis</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to c15-mis.dot</span>
@@ -2768,7 +2772,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3463,7 +3467,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">

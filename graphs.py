@@ -1133,7 +1133,9 @@ class MISModel(Graph):
         >>> g.showShort()
         *---- short description of the graph ----*
         Name             : 'c15'
-        Vertices         :  ['1', '10', '11', '12', '13', '14', '15', '2', '3', '4', '5', '6', '7', '8', '9']
+        Vertices         :  ['1', '10', '11', '12', '13', '14',
+                             '15', '2', '3', '4', '5', '6', '7',
+                             '8', '9']
         Valuation domain :  {'med': 0, 'min': -1, 'max': 1}
         Gamma function   : 
         1 -> ['2', '15']
@@ -1153,6 +1155,8 @@ class MISModel(Graph):
         9 -> ['10', '8']
         >>> mis = MISModel(g)
         Running a Gibbs Sampler for 1050 step !
+        >>> mis.checkMIS()
+        {'2','4','7','9','11','13','15'}  is maximal !
         >>> mis.exportGraphViz()
         *---- exporting a dot file for GraphViz tools ---------*
         Exporting to c15-mis.dot
