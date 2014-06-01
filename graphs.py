@@ -961,8 +961,34 @@ class MetropolisChain(Graph):
         self.edges = deepcopy(g.edges)
         self.size = len(self.edges)
         self.gamma = deepcopy(g.gamma)
+        self.transition = self.computeTransitionMatrix()
 
-    def transition(self,si,Debug=False):
+    def computeTransitionMatrix(self):
+        from decimal import Decimal
+        transition = {}
+        for si in self.vertices:
+            transition[si] = {}
+            di = len(self.gamma[si])
+            pi = self.vertices[si]['prob']
+            for sj in self.vertices:
+                if si != sj:
+                    if sj in self.gamma[si]:
+                        dj = len(self.gamma[sj])
+                        pj = self.vertices[sj]['prob']
+                        transition[si][sj] =\
+                                    Decimal( str( min(1.0,(pj*di)/(pi*dj))/di ) )
+                    else:
+                        transition[si][sj] = Decimal('0')
+                else:
+                    sp = 0.0
+                    for sx in self.gamma[si]:
+                        dx = len(self.gamma[sx])
+                        px = self.vertices[sx]['prob']
+                        sp += min(1.0,(px*di)/(pi*dx))/di
+                    transition[si][sj] = Decimal(str(1.0 - sp))
+        return transition
+                  
+    def MCMCtransition(self,si,Debug=False):
         from random import random,choice
         neighborsSi = [x for x in self.gamma[si]]
         di = len(self.gamma[si])
@@ -985,14 +1011,100 @@ class MetropolisChain(Graph):
         frequency = {}
         sc = si
         for i in range(nSim):
-            sc = self.transition(sc)
+            sc = self.MCMCtransition(sc)
             try:
                 frequency[sc] += 1.0
             except:
                 frequency[sc] = 1.0
         for x in frequency:
             frequency[x] /= nSim
-        return frequency    
+        return frequency
+
+    def saveCSVTransition(self,fileName='transition',Debug=False):
+        """Persistent storage of the transition matrix in the form of
+            a csv file. """
+        from copy import deepcopy
+        import csv
+        from decimal import Decimal
+        
+        if Debug:
+            print('*--- Saving transition matrix P_ij into file: %s.csv> ---*' %\
+                  (fileName))
+        fileNameExt = str(fileName)+str('.csv')
+        fo = open(fileNameExt, 'w')
+        csvfo = csv.writer(fo,quoting=csv.QUOTE_NONNUMERIC)
+        verticesList = [x for x in self.vertices]
+        verticesList.sort()
+        headerText = ["P_ij"] + verticesList
+        if Debug:
+            print(headerText)
+        csvfo.writerow(headerText)
+        relation = self.transition
+        for x in verticesList:
+            rowText = [x]
+            for y in verticesList:
+                rowText.append( Decimal('%.5f' % float(relation[x][y])) )
+            if Debug:
+                print(rowText)
+            csvfo.writerow(rowText)
+        fo.close()
+
+    def showTransitionMatrix(self,Sorted=True,\
+                          IntegerValues=False,\
+                          vertices=None,\
+                          relation=None,\
+                          ndigits=2,\
+                          ReflexiveTerms=False):
+        """
+        prints the relation valuation in actions X actions table format.
+        """
+        if vertices == None:
+            vertices = self.vertices
+        if relation == None:
+            try:
+                relation = self.transition
+            except:
+                relation = self.computeTransitionMatrix()
+        print('* ---- Transition Matrix -----\n', end=' ')
+        print(' S   | ', end=' ')
+        verticesList = []
+        for x in vertices:
+            if isinstance(x,frozenset):
+                try:
+                    verticesList += [(vertices[x]['shortName'],x)]
+                except:
+                    verticesList += [(verticess[x]['name'],x)]
+            else:
+                verticesList += [(str(x),x)]
+        if Sorted:
+            verticesList.sort()
+        print(verticesList)
+        verticesList.sort()
+
+##        try:
+##            hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
+##        except KeyError:
+##            hasIntegerValuation = IntegerValues
+
+        for x in verticesList:
+            print("'"+x[0]+"'\t ", end=' ')
+        print('\n-----|------------------------------------------------------------')
+        for x in verticesList:
+            print("'"+x[0]+"' | ", end=' ')
+            for y in verticesList:
+                if x != y:
+                    formatString = '%%2.%df\t' % ndigits
+                    print(formatString % (relation[x[1]][y[1]]), end=' ')
+                else:
+                    if ReflexiveTerms:
+                        formatString = '%%2.%df\t' % ndigits
+                        print(formatString % (relation[x[1]][y[1]]), end=' ')
+                    else:  
+                        formatString = ' - \t'
+                        print(formatString, end=' ')
+                    
+            print()
+        print('\n')
         
 class MISModel(Graph):
     """
@@ -1175,21 +1287,29 @@ class MISModel(Graph):
 if __name__ == '__main__':
     from time import sleep
     g = Graph(numberOfVertices=30,edgeProbability=0.2)
+    g.save('test')
     probs = {}
     n = g.order
     i = 0
-    for x in g.vertices:
+    verticesList = [x for x in g.vertices]
+    verticesList.sort()
+    for x in verticesList:
         probs[x] = (n - i)/(n*(n+1)/2)
         i += 1
     sumProbs = 0.0
-    for x in probs:
+    for x in verticesList:
         sumProbs += probs[x]
     met = MetropolisChain(g,probs)
+    #met = MetropolisChain(g)
     #met.showShort()
-    states = [x for x in met.vertices]
-    frequency = met.checkSampling(states[0],nSim=30000)
-    for x in probs:
-        print(x,probs[x],frequency[x])
+    frequency = met.checkSampling(verticesList[0],nSim=30000)
+    for x in verticesList:
+        try:
+            print(x,probs[x],frequency[x])
+        except:
+            print(x,0.0,0.0)
+    met.showTransitionMatrix()
+    met.saveCSVTransition()
 ##    # Q-Colorings
 ##    g = Graph(numberOfVertices=30,edgeProbability=0.1)
 ##    #g = GridGraph(n=6,m=6)
