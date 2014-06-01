@@ -610,13 +610,19 @@ class Q_Coloring(Graph):
                  Comments=True,Debug=False):
         from copy import deepcopy
         self.name = '%s-qcoloring' % g.name
-        self.vertices = deepcopy(g.vertices)
+        if isinstance(g.vertices,dict):
+            self.vertices = deepcopy(g.vertices)
+        else:
+            self.vertices = dict()
+            for v in g.vertices:
+                self.vertices[v] = {'name':v,'shortName':v}
         self.order = len(self.vertices)
-        self.colors = colors
+        self.colors = deepcopy(colors)
         self.valuationDomain = deepcopy(g.valuationDomain)
         self.edges = deepcopy(g.edges)
         self.size = len(self.edges)
         self.gamma = deepcopy(g.gamma)
+##        print(self.colors[0])
 ##        for v in self.vertices:
 ##            self.vertices[v]['color'] = colors[0]
         if nSim == None:
@@ -807,7 +813,12 @@ class IsingModel(Graph):
                 Debug=False):
         from copy import deepcopy
         self.name = '%s-ising' % g.name
-        self.vertices = deepcopy(g.vertices)
+        if isinstance(g.vertices,dict):
+            self.vertices = deepcopy(g.vertices)
+        else:
+            self.vertices = dict()
+            for v in g.vertices:
+                self.vertices[v] = {'name':v,'shortName':v}
         self.order = len(self.vertices)
         self.valuationDomain = deepcopy(g.valuationDomain)
         self.edges = deepcopy(g.edges)
@@ -949,7 +960,12 @@ class MetropolisChain(Graph):
         from copy import deepcopy
         from random import choice
         self.name = '%s-metro' % g.name
-        self.vertices = deepcopy(g.vertices)
+        if isinstance(self.vertices,dict):
+            self.vertices = deepcopy(g.vertices)
+        else:
+            self.vertices = dict()
+            for v in g.vertices:
+                self.vertices[v] = {'name':v,'shortName':v}
         self.order = len(self.vertices)
         if probs == None:
             for v in self.vertices:
@@ -1130,13 +1146,18 @@ class MISModel(Graph):
     .. image:: grid-15-15-mis.png
 
     """
-    def __init__(self,g,beta=0,
+    def __init__(self,g,
                 nSim=None,
                  maxIter=20,
                 Debug=False):
         from copy import deepcopy
         self.name = '%s-mis' % g.name
-        self.vertices = deepcopy(g.vertices)
+        if isinstance(g.vertices,dict):
+            self.vertices = deepcopy(g.vertices)
+        else:
+            self.vertices = dict()
+            for v in g.vertices:
+                self.vertices[v] = {'name':v,'shortName':v}
         self.order = len(self.vertices)
         self.valuationDomain = deepcopy(g.valuationDomain)
         self.edges = deepcopy(g.edges)
