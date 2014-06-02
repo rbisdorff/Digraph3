@@ -137,24 +137,29 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> method as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
+<dl class="docutils">
+<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> method as follows:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
 <span class="go">Exporting to tutorialGraph.dot</span>
 <span class="go">fdp -Tpng tutorialGraph.dot -o tutorialGraph.png</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 <a class="reference internal image-reference" href="_images/tutorialGraph.png"><img alt="_images/tutorialGraph.png" class="align-center" src="_images/tutorialGraph.png" style="width: 400px;" /></a>
-<p>Chordless cycles may be enumerated in the given graph like follows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
+<dl class="docutils">
+<dt>Chordless cycles may be enumerated in the given graph like follows:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeChordlessCycles</span><span class="p">()</span>
 <span class="go">Chordless cycle certificate --&gt;&gt;&gt;  [&#39;v5&#39;, &#39;v4&#39;, &#39;v2&#39;, &#39;v6&#39;, &#39;v5&#39;]</span>
 <span class="go">[([&#39;v5&#39;, &#39;v4&#39;, &#39;v2&#39;, &#39;v6&#39;, &#39;v5&#39;], frozenset({&#39;v5&#39;, &#39;v4&#39;, &#39;v2&#39;, &#39;v6&#39;}))]</span>
 </pre></div>
 </div>
-<p>And, a 3-coloring of the tutorial graph may be computed and plotted as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGrah&#39;</span><span class="p">)</span>
+</dd>
+<dt>And, a 3-coloring of the tutorial graph may be computed and plotted as follows:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGrah&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span> <span class="o">=</span> <span class="n">Q_Coloring</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">Running a Gibbs Sampler for 42 step !</span>
 <span class="go">The q-coloring with 3 colors is feasible !!</span>
@@ -172,9 +177,12 @@
 <span class="go">fdp -Tpng tutorial-3-coloring.dot -o tutorial-3-coloring.png</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 <a class="reference internal image-reference" href="_images/tutorial-3-coloring.png"><img alt="_images/tutorial-3-coloring.png" class="align-center" src="_images/tutorial-3-coloring.png" style="width: 400px;" /></a>
-<p>Actually, with the given tutorial graph instance, a 2-coloring is already feasible:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span> <span class="o">=</span> <span class="n">Q_Coloring</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;gold&#39;</span><span class="p">,</span><span class="s">&#39;coral&#39;</span><span class="p">])</span>
+<dl class="docutils">
+<dt>Actually, with the given tutorial graph instance, a 2-coloring is already feasible:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span> <span class="o">=</span> <span class="n">Q_Coloring</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;gold&#39;</span><span class="p">,</span><span class="s">&#39;coral&#39;</span><span class="p">])</span>
 <span class="go">Running a Gibbs Sampler for 42 step !</span>
 <span class="go">The q-coloring with 2 colors is feasible !!</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span><span class="o">.</span><span class="n">showConfiguration</span><span class="p">()</span>
@@ -191,10 +199,99 @@
 <span class="go">fdp -Tpng tutorial-2-coloring.dot -o tutorial-2-coloring.png</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 <a class="reference internal image-reference" href="_images/tutorial-2-coloring.png"><img alt="_images/tutorial-2-coloring.png" class="align-center" src="_images/tutorial-2-coloring.png" style="width: 400px;" /></a>
-<p>Special classes of graphs, like <em>n</em> x <em>m</em> rectangular or triangular grid graphs are available in the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module.</p>
-<p>For more information and more code examples look into the technical documentation of the <a class="reference internal" href="index.html#graphs-label"><em>graphs module</em></a>
-module.</p>
+<dl class="docutils">
+<dt>2-colorings define independent sets of vertices that are maximal in cardinality; for short called a MIS. Computing such MISs in a given <tt class="code docutils literal"><span class="pre">Graph</span></tt> instance may be achieved by converting the <tt class="code docutils literal"><span class="pre">Graph</span></tt> instance into a <tt class="code docutils literal"><span class="pre">Digraph</span></tt> instance. Here a <tt class="code docutils literal"><span class="pre">self.showMIS()</span></tt> method is proposed:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGrah&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">graph2Digraph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showMIS</span><span class="p">()</span>
+<span class="go">*---  Maximal independent choices ---*</span>
+<span class="go">[&#39;v5&#39;, &#39;v3&#39;, &#39;v7&#39;]</span>
+<span class="go">[&#39;v5&#39;, &#39;v7&#39;, &#39;v2&#39;]</span>
+<span class="go">[&#39;v6&#39;, &#39;v3&#39;, &#39;v4&#39;, &#39;v1&#39;]</span>
+<span class="go">[&#39;v6&#39;, &#39;v3&#39;, &#39;v7&#39;, &#39;v1&#39;]</span>
+<span class="go">[&#39;v7&#39;, &#39;v2&#39;, &#39;v1&#39;]</span>
+<span class="go">number of solutions:  5</span>
+<span class="go">cardinality distribution</span>
+<span class="go">card.:  [0, 1, 2, 3, 4, 5, 6, 7]</span>
+<span class="go">freq.:  [0, 0, 0, 3, 2, 0, 0, 0]</span>
+<span class="go">execution time: 0.00050 sec.</span>
+<span class="go">Results in self.misset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">misset</span>
+<span class="go">{frozenset({&#39;v6&#39;, &#39;v3&#39;, &#39;v7&#39;, &#39;v1&#39;}),</span>
+<span class="go"> frozenset({&#39;v5&#39;, &#39;v7&#39;, &#39;v2&#39;}),</span>
+<span class="go"> frozenset({&#39;v6&#39;, &#39;v3&#39;, &#39;v4&#39;, &#39;v1&#39;}),</span>
+<span class="go"> frozenset({&#39;v7&#39;, &#39;v2&#39;, &#39;v1&#39;}),</span>
+<span class="go"> frozenset({&#39;v5&#39;, &#39;v3&#39;, &#39;v7&#39;})}</span>
+</pre></div>
+</div>
+</dd>
+<dt>Special classes of graphs, like <em>n</em> x <em>m</em> rectangular or triangular grid graphs are available in the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module. For instance, we may use a Gibbs sampler again for simulating an Ising Model on such a grid:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GridGraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
+<span class="go">*----- show short --------------*</span>
+<span class="go">Grid graph    :  grid-6-6</span>
+<span class="go">n             :  6</span>
+<span class="go">m             :  6</span>
+<span class="go">order         :  36</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">IsingModel</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">beta</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span><span class="n">nSim</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="go">Running a Gibbs Sampler for 100000 step !</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;lightblue&#39;</span><span class="p">,</span><span class="s">&#39;lightcoral&#39;</span><span class="p">])</span>
+<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="go">Exporting to grid-15-15-ising.dot</span>
+<span class="go">fdp -Tpng grid-15-15-ising.dot -o grid-15-15-ising.png</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="_images/grid-15-15-ising.png"><img alt="_images/grid-15-15-ising.png" class="align-center" src="_images/grid-15-15-ising.png" style="width: 700px;" /></a>
+<dl class="docutils">
+<dt>Finally, we provide a specialisation of the <tt class="code docutils literal"><span class="pre">Graph</span></tt> for implementing a generic Metropolis Markov Chain Monte Carlo chain sampler simulating a given probability distribution probs = {‘v1’: x, ‘v2’: y, ...}:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
+<span class="go">*---- short description of the graph ----*</span>
+<span class="go">Name             : &#39;randomGraph&#39;</span>
+<span class="go">Vertices         :  [&#39;v1&#39;, &#39;v2&#39;, &#39;v3&#39;, &#39;v4&#39;, &#39;v5&#39;]</span>
+<span class="go">Valuation domain :  {&#39;max&#39;: 1, &#39;med&#39;: 0, &#39;min&#39;: -1}</span>
+<span class="go">Gamma function   :</span>
+<span class="go">v1 -&gt; [&#39;v2&#39;, &#39;v3&#39;, &#39;v4&#39;]</span>
+<span class="go">v2 -&gt; [&#39;v1&#39;, &#39;v4&#39;]</span>
+<span class="go">v3 -&gt; [&#39;v5&#39;, &#39;v1&#39;]</span>
+<span class="go">v4 -&gt; [&#39;v2&#39;, &#39;v5&#39;, &#39;v1&#39;]</span>
+<span class="go">v5 -&gt; [&#39;v3&#39;, &#39;v4&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">probs</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">order</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">verticesList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">vertices</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">verticesList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">verticesList</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">probs</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">met</span> <span class="o">=</span> <span class="n">MetropolisChain</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">probs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frequency</span> <span class="o">=</span> <span class="n">met</span><span class="o">.</span><span class="n">checkSampling</span><span class="p">(</span><span class="n">verticesList</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">nSim</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">verticesList</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">probs</span><span class="p">[</span><span class="n">v</span><span class="p">],</span><span class="n">frequency</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+<span class="go">v1 0.3333 0.3343</span>
+<span class="go">v2 0.2666 0.2680</span>
+<span class="go">v3 0.2    0.2030</span>
+<span class="go">v4 0.1333 0.1311</span>
+<span class="go">v5 0.0666 0.0635</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">met</span><span class="o">.</span><span class="n">showTransitionMatrix</span><span class="p">()</span>
+<span class="go">* ---- Transition Matrix -----</span>
+<span class="go">  Pij  | &#39;v1&#39;    &#39;v2&#39;    &#39;v3&#39;    &#39;v4&#39;    &#39;v5&#39;</span>
+<span class="go">  -----|-------------------------------------</span>
+<span class="go">  &#39;v1&#39; |  0.23   0.33    0.30    0.13    0.00</span>
+<span class="go">  &#39;v2&#39; |  0.42   0.42    0.00    0.17    0.00</span>
+<span class="go">  &#39;v3&#39; |  0.50   0.00    0.33    0.00    0.17</span>
+<span class="go">  &#39;v4&#39; |  0.33   0.33    0.00    0.08    0.25</span>
+<span class="go">  &#39;v5&#39; |  0.00   0.00    0.50    0.50    0.00</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>For more technical information and more code examples look into the technical documentation of the <a class="reference internal" href="index.html#graphs-label"><em>graphs module</em></a>.</p>
 <div class="section" id="using-the-digraph3-modules">
 <h3>Using the Digraph3 modules<a class="headerlink" href="#using-the-digraph3-modules" title="Permalink to this headline">¶</a></h3>
 <p>Simple execution will show a list of results concerning a randomly generated digraph. To make directly executable the code source, you will have to adapt, the case given, the first line of the source code accordingly to your Python3 installation directory.</p>
