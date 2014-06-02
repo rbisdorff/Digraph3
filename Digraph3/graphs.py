@@ -1315,7 +1315,7 @@ class MISModel(Graph):
             self.generateMIS(Reset=True,nSim=nSim,Debug=Debug)
             mis,misCover,unCovered = self.checkMIS()
 
-    def generateMIS(self,Reset=True,nSim=None,Debug=False):
+    def generateMIS(self,Reset=True,nSim=None,Comments=True,Debug=False):
         from random import choice
         from math import exp
         if nSim == None:
@@ -1323,7 +1323,8 @@ class MISModel(Graph):
         if Reset:
             for v in self.vertices:
                 self.vertices[v]['mis'] = 0
-        print('Running a Gibbs Sampler for %d step !' % nSim)
+        if Comments:
+            print('Running a Gibbs Sampler for %d step !' % nSim)
         for s in range(nSim):
             verticesKeys = [v for v in self.vertices]
             v = choice(verticesKeys)

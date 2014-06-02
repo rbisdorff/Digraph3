@@ -1428,13 +1428,14 @@ class Digraph(object):
 
         .. warning::
 
-             Notice that the 'other' relation and/or the 'filterRelation', the case given, must be normalized !
+             Notice that the 'other' relation and/or the 'filterRelation',
+             the case given, must both be normalized, ie [-1,1]-valued !
         
         K = sum_{x != y} [ min( max(-self.relation[x][y]),other.relation[x][y]), max(self.relation[x][y],-other.relation[x][y]) ]
 
         K /= sum_{x!=y} [ min(abs(self.relation[x][y]),abs(other.relation[x][y])) ]
 
-        .. warning::
+        .. note::
 
              Renders a tuple with at position 0 the actual bipolar correlation index
              and in position 1 the minimal determination level D of self and
@@ -2629,7 +2630,15 @@ class Digraph(object):
                              plotFileName=None,\
                              Type="png",Comments=False):
         """
-        Export as PNG (default) or PDF the principal projection of the valued relation using the three principal eigen vectors.
+        Export as PNG (default) or PDF the principal projection of
+        the valued relation using the three principal eigen vectors.
+
+        .. warning::
+        
+            The method, writing and reading temporary files: 
+            tempCol.r and rotationCol.csv, resp. tempRow.r and rotationRow.csv,
+            is hence not safe for multiprocessors' threading programs.
+
         """
         
         if Comments:
@@ -7460,7 +7469,13 @@ class Digraph(object):
                               Comments=False, Debug=False):
         """
         renders a ordered list of self.actions using the decreasing scores from the
-        first rincipal eigenvector of the covariance of the valued outdegrees of self. 
+        first rincipal eigenvector of the covariance of the valued outdegrees of self.
+
+        .. warning::
+
+           The method, relying on writing and reading temporary files in the current
+           working directory, is hence not threading and multiprocessing safe !
+           (see Digraph.exportPrincipalImage method)
 
         """
         from csv import reader
