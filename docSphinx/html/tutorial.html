@@ -69,22 +69,22 @@
 </div>
 <div class="section" id="working-with-the-graphs-module">
 <span id="tutorial-label"></span><h2>Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module<a class="headerlink" href="#working-with-the-graphs-module" title="Permalink to this headline">¶</a></h2>
-<p>A genuine simple graph without loops and multiple limks instance consists in:</p>
+<p>in this Digraph3 module, the main <tt class="code docutils literal"><span class="pre">Graph</span></tt> class provides a generic simple graph model, without loops and multiple links. A given object of this root class consists in:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>the vertices: a dictionary of vertices with &#8216;name&#8217; and &#8216;shortname&#8217; attributes,</li>
-<li>the edges: a dictionary with frozensets of pairs of vertices as entries carrying a bipolar-valued attribute characterising the link between them ( -1 means certainly no link, +1 means certainly a link, 0 means missing information),</li>
-<li>the valuation domain, a dictionary with three entries: the minimum (-1), the median (0) and the maximum characteristic value (+1),</li>
-<li>the gamma function: a dictionary containing the direct neighbors of each vertice.</li>
+<li>the graph <strong>vertices</strong> : a dictionary of vertices with &#8216;name&#8217; and &#8216;shortname&#8217; attributes,</li>
+<li>the graph <strong>valuation domain</strong> , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),</li>
+<li>the graph <strong>edges</strong> : a dictionary with frozensets of pairs of vertices as entries carrying a characteristic value in the range of the previous valuation domain,</li>
+<li>and its associated <strong>gamma function</strong> : a dictionary containing the direct neighbors of each vertice, automatically added by the object constructor.</li>
 </ol>
 </div></blockquote>
 <dl class="docutils">
-<dt>Example python3 session:</dt>
+<dt>Example Python3 session:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">Graph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*----- show short --------------*</span>
-<span class="go">Name             : &#39;tempGraph&#39;</span>
+<span class="go">Name             : &#39;randomGraph&#39;</span>
 <span class="go">Vertices         :  [&#39;v1&#39;, &#39;v2&#39;, &#39;v3&#39;, &#39;v4&#39;, &#39;v5&#39;, &#39;v6&#39;, &#39;v7&#39;]</span>
 <span class="go">Valuation domain :  {&#39;med&#39;: 0, &#39;max&#39;: 1, &#39;min&#39;: -1}</span>
 <span class="go">Gamma function   :</span>
@@ -137,17 +137,14 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<dl class="docutils">
-<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> method as follows:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
+<p>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> method as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
 <span class="go">Exporting to tutorialGraph.dot</span>
 <span class="go">fdp -Tpng tutorialGraph.dot -o tutorialGraph.png</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 <a class="reference internal image-reference" href="_images/tutorialGraph.png"><img alt="_images/tutorialGraph.png" class="align-center" src="_images/tutorialGraph.png" style="width: 400px;" /></a>
 <dl class="docutils">
 <dt>Chordless cycles may be enumerated in the given graph like follows:</dt>
@@ -203,7 +200,7 @@
 </dl>
 <a class="reference internal image-reference" href="_images/tutorial-2-coloring.png"><img alt="_images/tutorial-2-coloring.png" class="align-center" src="_images/tutorial-2-coloring.png" style="width: 400px;" /></a>
 <dl class="docutils">
-<dt>2-colorings define independent sets of vertices that are maximal in cardinality; for short called a MIS. Computing such MISs in a given <tt class="code docutils literal"><span class="pre">Graph</span></tt> instance may be achieved by converting the <tt class="code docutils literal"><span class="pre">Graph</span></tt> instance into a <tt class="code docutils literal"><span class="pre">Digraph</span></tt> instance. Here a <tt class="code docutils literal"><span class="pre">self.showMIS()</span></tt> method is proposed:</dt>
+<dt>2-colorings define independent sets of vertices that are maximal in cardinality; for short called a <strong>MIS</strong>. Computing such MISs in a given <tt class="code docutils literal"><span class="pre">Graph</span></tt> instance may be achieved by converting the <tt class="code docutils literal"><span class="pre">Graph</span></tt> instance into a <tt class="code docutils literal"><span class="pre">Digraph</span></tt> instance. Here a <tt class="code docutils literal"><span class="pre">self.showMIS()</span></tt> method is proposed:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGrah&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">graph2Digraph</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showMIS</span><span class="p">()</span>
@@ -228,7 +225,7 @@
 </pre></div>
 </div>
 </dd>
-<dt>Special classes of graphs, like <em>n</em> x <em>m</em> rectangular or triangular grid graphs are available in the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module. For instance, we may use a Gibbs sampler again for simulating an Ising Model on such a grid:</dt>
+<dt>Special classes of graphs, like <em>n</em> x <em>m</em> <strong>rectangular</strong> or <strong>triangular grids</strong> are available in the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module. For instance, we may use a Gibbs sampler again for simulating an Ising Model on such a grid:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GridGraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*----- show short --------------*</span>
@@ -246,9 +243,9 @@
 </div>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/grid-15-15-ising.png"><img alt="_images/grid-15-15-ising.png" class="align-center" src="_images/grid-15-15-ising.png" style="width: 700px;" /></a>
+<a class="reference internal image-reference" href="_images/grid-15-15-ising.png"><img alt="_images/grid-15-15-ising.png" class="align-center" src="_images/grid-15-15-ising.png" style="width: 600px;" /></a>
 <dl class="docutils">
-<dt>Finally, we provide a specialisation of the <tt class="code docutils literal"><span class="pre">Graph</span></tt> for implementing a generic Metropolis Markov Chain Monte Carlo chain sampler simulating a given probability distribution probs = {‘v1’: x, ‘v2’: y, ...}:</dt>
+<dt>Finally, we provide a specialisation of the <tt class="code docutils literal"><span class="pre">Graph</span></tt> class for implementing a generic <strong>Metropolis</strong> <em>Markov Chain Monte Carlo</em> chain sampler for simulating a random walk on the graph with given probability  <tt class="code docutils literal"><span class="pre">probs</span> <span class="pre">=</span> <span class="pre">{‘v1’:</span> <span class="pre">x,</span> <span class="pre">‘v2’:</span> <span class="pre">y,</span> <span class="pre">...}</span></tt> for visiting each vertice.</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*---- short description of the graph ----*</span>
@@ -291,7 +288,7 @@
 </div>
 </dd>
 </dl>
-<p>For more technical information and more code examples look into the technical documentation of the <a class="reference internal" href="index.html#graphs-label"><em>graphs module</em></a>.</p>
+<p>For more technical information and more code examples look into the technical documentation of the <a class="reference internal" href="index.html#graphs-label"><em>graphs module</em></a>. Those interested in algorithmic applications of Markov Chains may consult O. Häggström&#8217;s book: <a class="reference internal" href="#fmcaa" id="id1">[FMCAA]</a>.</p>
 <div class="section" id="using-the-digraph3-modules">
 <h3>Using the Digraph3 modules<a class="headerlink" href="#using-the-digraph3-modules" title="Permalink to this headline">¶</a></h3>
 <p>Simple execution will show a list of results concerning a randomly generated digraph. To make directly executable the code source, you will have to adapt, the case given, the first line of the source code accordingly to your Python3 installation directory.</p>
@@ -361,6 +358,15 @@ Enjoy !
 <li><a class="reference internal" href="index.html#introduction-label"><em>Introduction</em></a></li>
 </ul>
 </div>
+<div class="section" id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
+<table class="docutils citation" frame="void" id="fmcaa" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[FMCAA]</a></td><td>Olle Häggström. Finite Markov Chians and Algorithmic Applications. Cambridge University Press 2002.</td></tr>
+</tbody>
+</table>
+</div>
 
 
           </div>
@@ -378,6 +384,7 @@ Enjoy !
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
 </ul>
 
   <h3>This Page</h3>

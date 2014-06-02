@@ -14,19 +14,19 @@ Tutorial of the Digraph resources!
 Working with the :code:`graphs` module
 ......................................
 
-A genuine simple graph without loops and multiple limks instance consists in:
+in this Digraph3 module, the main :code:`Graph` class provides a generic **simple graph model**, without loops and multiple links. A given object of this root class consists in:
 
-    1. the vertices: a dictionary of vertices with 'name' and 'shortname' attributes,
-    2. the edges: a dictionary with frozensets of pairs of vertices as entries carrying a bipolar-valued attribute characterising the link between them ( -1 means certainly no link, +1 means certainly a link, 0 means missing information),
-    3. the valuation domain, a dictionary with three entries: the minimum (-1), the median (0) and the maximum characteristic value (+1),
-    4. the gamma function: a dictionary containing the direct neighbors of each vertice.
-     
-Example python3 session:
+    1. the graph **vertices** : a dictionary of vertices with 'name' and 'shortname' attributes,
+    2. the graph **valuation domain** , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),
+    3. the graph **edges** : a dictionary with frozensets of pairs of vertices as entries carrying a characteristic value in the range of the previous valuation domain,
+    4. and its associated **gamma function** : a dictionary containing the direct neighbors of each vertice, automatically added by the object constructor.
+
+Example Python3 session:
     >>> from graphs import Graph
     >>> g = Graph(numberOfVertices=7,edgeProbability=0.5)
     >>> g.showShort()
     *----- show short --------------*
-    Name             : 'tempGraph'
+    Name             : 'randomGraph'
     Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7']
     Valuation domain :  {'med': 0, 'max': 1, 'min': -1}
     Gamma function   : 
@@ -76,7 +76,8 @@ The saved Graph instance named :code:`tutorialGraph.py` is encoded in python3 as
 	frozenset(['v6','v7']) : -1, 
 	}
 
-The stored graph can be recalled and plotted with the generic :code:`exportGraphViz` method as follows:
+The stored graph can be recalled and plotted with the generic :code:`exportGraphViz` method as follows::
+
 	>>> g = Graph('tutorialGraph')
 	>>> g.exportGraphViz()
 	*---- exporting a dot file dor GraphViz tools ---------*
@@ -136,7 +137,7 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
    :width: 400 px
    :align: center
 
-2-colorings define independent sets of vertices that are maximal in cardinality; for short called a MIS. Computing such MISs in a given :code:`Graph` instance may be achieved by converting the :code:`Graph` instance into a :code:`Digraph` instance. Here a :code:`self.showMIS()` method is proposed:
+2-colorings define independent sets of vertices that are maximal in cardinality; for short called a **MIS**. Computing such MISs in a given :code:`Graph` instance may be achieved by converting the :code:`Graph` instance into a :code:`Digraph` instance. Here a :code:`self.showMIS()` method is proposed:
 	>>> g = Graph('tutorialGrah')
 	>>> dg = g.graph2Digraph()
 	>>> dg.showMIS()
@@ -159,7 +160,7 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
 	 frozenset({'v7', 'v2', 'v1'}), 
 	 frozenset({'v5', 'v3', 'v7'})}
 
-Special classes of graphs, like *n* x *m* rectangular or triangular grid graphs are available in the :code:`graphs` module. For instance, we may use a Gibbs sampler again for simulating an Ising Model on such a grid:
+Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids** are available in the :code:`graphs` module. For instance, we may use a Gibbs sampler again for simulating an Ising Model on such a grid:
 	>>> g = GridGraph(n=15,m=15)
 	>>> g.showShort()
 	*----- show short --------------*
@@ -175,10 +176,10 @@ Special classes of graphs, like *n* x *m* rectangular or triangular grid graphs 
 	fdp -Tpng grid-15-15-ising.dot -o grid-15-15-ising.png
 
 .. image:: grid-15-15-ising.png
-   :width: 700 px
+   :width: 600 px
    :align: center
 
-Finally, we provide a specialisation of the :code:`Graph` for implementing a generic Metropolis Markov Chain Monte Carlo chain sampler simulating a given probability distribution probs = {‘v1’: x, ‘v2’: y, ...}:
+Finally, we provide a specialisation of the :code:`Graph` class for implementing a generic **Metropolis** *Markov Chain Monte Carlo* chain sampler for simulating a random walk on the graph with given probability  :code:`probs = {‘v1’: x, ‘v2’: y, ...}` for visiting each vertice. 
 	>>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
 	>>> g.showShort()
 	*---- short description of the graph ----*
@@ -218,7 +219,8 @@ Finally, we provide a specialisation of the :code:`Graph` for implementing a gen
 	  'v4' |  0.33   0.33    0.00    0.08    0.25    
 	  'v5' |  0.00   0.00    0.50    0.50    0.00    
 
-For more technical information and more code examples look into the technical documentation of the :ref:`graphs-label`.
+For more technical information and more code examples look into the technical documentation of the :ref:`graphs-label`. Those interested in algorithmic applications of Markov Chains may consult O. Häggström's book: [FMCAA]_.
+
 
 Using the Digraph3 modules
 --------------------------
@@ -289,5 +291,9 @@ Indices and tables
 * :ref:`search`
 * :ref:`Introduction-label`
 
+References
+==========
+
+.. [FMCAA] Olle Häggström. Finite Markov Chians and Algorithmic Applications. Cambridge University Press 2002.
 
 
