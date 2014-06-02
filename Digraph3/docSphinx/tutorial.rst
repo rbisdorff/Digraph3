@@ -17,8 +17,9 @@ Working with the :code:`graphs` module
 A genuine simple graph without loops and multiple limks instance consists in:
 
     1. the vertices: a dictionary of vertices with 'name' and 'shortname' attributes,
-    2. the edges: a dictionary with frozensets of pairs of vertices as entries carrying a bipolar-valued attribute characterising the link between them ( -1 means no limk, +1 means a link, 0 models missing information).
-    3. the valuation domain, a dictionary with three entries: the minimum, the median and the maximum characteristic value.
+    2. the edges: a dictionary with frozensets of pairs of vertices as entries carrying a bipolar-valued attribute characterising the link between them ( -1 means certainly no link, +1 means certainly a link, 0 means missing information),
+    3. the valuation domain, a dictionary with three entries: the minimum (-1), the median (0) and the maximum characteristic value (+1),
+    4. the gamma function: a dictionary containing the direct neighbors of each vertice.
      
 Example python3 session:
     >>> from graphs import Graph
@@ -87,7 +88,14 @@ The stored graph can be recalled and plotted with the generic :code:`exportGraph
    :width: 400 px
    :align: center
 
-A 3-coloring of the tutorial graph may be computed and plotted as follows::
+Chordless cycles may be enumerated in the given graph like follows::
+
+	>>> g = Graph('tutorialGraph')
+	>>> g.computeChordlessCycles()
+	Chordless cycle certificate -->>>  ['v5', 'v4', 'v2', 'v6', 'v5']
+	[(['v5', 'v4', 'v2', 'v6', 'v5'], frozenset({'v5', 'v4', 'v2', 'v6'}))]
+
+And, a 3-coloring of the tutorial graph may be computed and plotted as follows::
 
 	>>> g = Graph('tutorialGrah')
 	>>> qc = Q_Coloring(g)
@@ -110,7 +118,29 @@ A 3-coloring of the tutorial graph may be computed and plotted as follows::
    :width: 400 px
    :align: center
 
-Special classes of graphs, like *n*X*m* rectangular or triangular grid graphs are available in the :code:`graphs` module.
+Actually, with the given tutorial graph instance, a 2-coloring is already feasible::
+
+	>>> qc = Q_Coloring(g,colors=['gold','coral'])
+	Running a Gibbs Sampler for 42 step !
+	The q-coloring with 2 colors is feasible !!
+	>>> qc.showConfiguration()
+	v5 gold
+	v3 coral
+	v7 gold
+	v2 gold
+	v4 coral
+	v1 coral
+	v6 coral
+	>>> qc.exportGraphViz('tutorial-2-coloring')
+	*---- exporting a dot file for GraphViz tools ---------*
+	Exporting to tutorial-2-coloring.dot
+	fdp -Tpng tutorial-2-coloring.dot -o tutorial-2-coloring.png
+
+.. image:: tutorial-2-coloring.png
+   :width: 400 px
+   :align: center
+
+Special classes of graphs, like *n* x *m* rectangular or triangular grid graphs are available in the :code:`graphs` module.
 
 For more information and more code examples look into the technical documentation of the :ref:`graphs-label`
 module.

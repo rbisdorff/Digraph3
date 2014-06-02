@@ -67,70 +67,15 @@
 <ul class="simple">
 </ul>
 </div>
-<div class="section" id="using-the-digraph3-modules">
-<span id="tutorial-label"></span><h2>Using the Digraph3 modules<a class="headerlink" href="#using-the-digraph3-modules" title="Permalink to this headline">¶</a></h2>
-<p>Simple execution will show a list of results concerning a randomly generated digraph. To make directly executable the code source, you will have to adapt, the case given, the first line of the source code accordingly to your Python3 installation directory.</p>
-<p>See the <a class="reference external" href="http://www.python.org/doc">http://www.python.org/doc</a> in case of troubles.</p>
-<p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre>[$Home/Digraph3]...$python3 digraphs.py
-****************************************************
-* Python digraphs module                           *
-* $Revision: 1.18 $                               *
-* Copyright (C) 2006-2007 University of Luxembourg *
-* The module comes with ABSOLUTELY NO WARRANTY     *
-* to the extent permitted by the applicable law.   *
-* This is free software, and you are welcome to    *
-* redistribute it if it remains free software.     *
-****************************************************
-*-------- Testing classes and methods -------
-==&gt;&gt; Testing RandomDigraph() class instantiation
-*----- show detail -------------*
-Digraph          : randomDigraph
-*---- Actions ----*
-[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;]
-*---- Characteristic valuation domain ----*
-{&#39;med&#39;: Decimal(&quot;0.5&quot;), &#39;min&#39;: Decimal(&quot;0&quot;), &#39;max&#39;: Decimal(&quot;1.0&quot;)}
-* ---- Relation Table -----
- S   |  &#39;1&#39;,  &#39;2&#39;,  &#39;3&#39;,  &#39;4&#39;,  &#39;5&#39;,
------|------------------------------------------------------------
- &#39;1&#39; |  0.00  0.00  0.00  1.00  0.00
- &#39;2&#39; |  0.00  0.00  1.00  1.00  1.00
- &#39;3&#39; |  1.00  1.00  0.00  1.00  1.00
- &#39;4&#39; |  0.00  1.00  1.00  0.00  1.00
- &#39;5&#39; |  0.00  1.00  0.00  0.00  0.00
-*--- Connected Components ---*
-1: [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;]
-Neighborhoods:
-Neighborhoods:
-  Gamma     :
-&#39;1&#39;: in =&gt; set([&#39;3&#39;]), out =&gt; set([&#39;4&#39;])
-&#39;2&#39;: in =&gt; set([&#39;3&#39;, &#39;4&#39;, &#39;5&#39;]), out =&gt; set([&#39;3&#39;, &#39;4&#39;, &#39;5&#39;])
-&#39;3&#39;: in =&gt; set([&#39;2&#39;, &#39;4&#39;]), out =&gt; set([&#39;1&#39;, &#39;2&#39;, &#39;4&#39;, &#39;5&#39;])
-&#39;4&#39;: in =&gt; set([&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]), out =&gt; set([&#39;2&#39;, &#39;3&#39;, &#39;5&#39;])
-&#39;5&#39;: in =&gt; set([&#39;2&#39;, &#39;3&#39;, &#39;4&#39;]), out =&gt; set([&#39;2&#39;])
-  Not Gamma :
-&#39;1&#39;: in =&gt; set([&#39;2&#39;, &#39;4&#39;, &#39;5&#39;]), out =&gt; set([&#39;2&#39;, &#39;3&#39;, &#39;5&#39;])
-&#39;2&#39;: in =&gt; set([&#39;1&#39;]), out =&gt; set([&#39;1&#39;])
-&#39;3&#39;: in =&gt; set([&#39;1&#39;, &#39;5&#39;]), out =&gt; set([])
-&#39;4&#39;: in =&gt; set([&#39;5&#39;]), out =&gt; set([&#39;1&#39;])
-&#39;5&#39;: in =&gt; set([&#39;1&#39;]), out =&gt; set([&#39;1&#39;, &#39;3&#39;, &#39;4&#39;])
-*------------------*
-If you see this line all tests were passed successfully :-)
-Enjoy !
-*************************************
-* R.B. May 2014               *
-* $Revision: 1.600+$                *
-*************************************
-</pre></div>
-</div>
 <div class="section" id="working-with-the-graphs-module">
-<h3>Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module<a class="headerlink" href="#working-with-the-graphs-module" title="Permalink to this headline">¶</a></h3>
+<span id="tutorial-label"></span><h2>Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module<a class="headerlink" href="#working-with-the-graphs-module" title="Permalink to this headline">¶</a></h2>
 <p>A genuine simple graph without loops and multiple limks instance consists in:</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li>the vertices: a dictionary of vertices with &#8216;name&#8217; and &#8216;shortname&#8217; attributes,</li>
-<li>the edges: a dictionary with frozensets of pairs of vertices as entries carrying a bipolar-valued attribute characterising the link between them ( -1 means no limk, +1 means a link, 0 models missing information).</li>
-<li>the valuation domain, a dictionary with three entries: the minimum, the median and the maximum characteristic value.</li>
+<li>the edges: a dictionary with frozensets of pairs of vertices as entries carrying a bipolar-valued attribute characterising the link between them ( -1 means certainly no link, +1 means certainly a link, 0 means missing information),</li>
+<li>the valuation domain, a dictionary with three entries: the minimum (-1), the median (0) and the maximum characteristic value (+1),</li>
+<li>the gamma function: a dictionary containing the direct neighbors of each vertice.</li>
 </ol>
 </div></blockquote>
 <dl class="docutils">
@@ -201,7 +146,14 @@ Enjoy !
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/tutorialGraph.png"><img alt="_images/tutorialGraph.png" class="align-center" src="_images/tutorialGraph.png" style="width: 400px;" /></a>
-<p>A 3-coloring of the tutorial graph may be computed and plotted as follows:</p>
+<p>Chordless cycles may be enumerated in the given graph like follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeChordlessCycles</span><span class="p">()</span>
+<span class="go">Chordless cycle certificate --&gt;&gt;&gt;  [&#39;v5&#39;, &#39;v4&#39;, &#39;v2&#39;, &#39;v6&#39;, &#39;v5&#39;]</span>
+<span class="go">[([&#39;v5&#39;, &#39;v4&#39;, &#39;v2&#39;, &#39;v6&#39;, &#39;v5&#39;], frozenset({&#39;v5&#39;, &#39;v4&#39;, &#39;v2&#39;, &#39;v6&#39;}))]</span>
+</pre></div>
+</div>
+<p>And, a 3-coloring of the tutorial graph may be computed and plotted as follows:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGrah&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span> <span class="o">=</span> <span class="n">Q_Coloring</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">Running a Gibbs Sampler for 42 step !</span>
@@ -221,9 +173,84 @@ Enjoy !
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/tutorial-3-coloring.png"><img alt="_images/tutorial-3-coloring.png" class="align-center" src="_images/tutorial-3-coloring.png" style="width: 400px;" /></a>
-<p>Special classes of graphs, like nXm rectangular or triangular grid graphs are available in the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module.</p>
+<p>Actually, with the given tutorial graph instance, a 2-coloring is already feasible:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span> <span class="o">=</span> <span class="n">Q_Coloring</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;gold&#39;</span><span class="p">,</span><span class="s">&#39;coral&#39;</span><span class="p">])</span>
+<span class="go">Running a Gibbs Sampler for 42 step !</span>
+<span class="go">The q-coloring with 2 colors is feasible !!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span><span class="o">.</span><span class="n">showConfiguration</span><span class="p">()</span>
+<span class="go">v5 gold</span>
+<span class="go">v3 coral</span>
+<span class="go">v7 gold</span>
+<span class="go">v2 gold</span>
+<span class="go">v4 coral</span>
+<span class="go">v1 coral</span>
+<span class="go">v6 coral</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorial-2-coloring&#39;</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="go">Exporting to tutorial-2-coloring.dot</span>
+<span class="go">fdp -Tpng tutorial-2-coloring.dot -o tutorial-2-coloring.png</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/tutorial-2-coloring.png"><img alt="_images/tutorial-2-coloring.png" class="align-center" src="_images/tutorial-2-coloring.png" style="width: 400px;" /></a>
+<p>Special classes of graphs, like <em>n</em> x <em>m</em> rectangular or triangular grid graphs are available in the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module.</p>
 <p>For more information and more code examples look into the technical documentation of the <a class="reference internal" href="index.html#graphs-label"><em>graphs module</em></a>
 module.</p>
+<div class="section" id="using-the-digraph3-modules">
+<h3>Using the Digraph3 modules<a class="headerlink" href="#using-the-digraph3-modules" title="Permalink to this headline">¶</a></h3>
+<p>Simple execution will show a list of results concerning a randomly generated digraph. To make directly executable the code source, you will have to adapt, the case given, the first line of the source code accordingly to your Python3 installation directory.</p>
+<p>See the <a class="reference external" href="http://www.python.org/doc">http://www.python.org/doc</a> in case of troubles.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>[$Home/Digraph3]...$python3 digraphs.py
+****************************************************
+* Python digraphs module                           *
+* $Revision: 1.18 $                               *
+* Copyright (C) 2006-2007 University of Luxembourg *
+* The module comes with ABSOLUTELY NO WARRANTY     *
+* to the extent permitted by the applicable law.   *
+* This is free software, and you are welcome to    *
+* redistribute it if it remains free software.     *
+****************************************************
+*-------- Testing classes and methods -------
+==&gt;&gt; Testing RandomDigraph() class instantiation
+*----- show detail -------------*
+Digraph          : randomDigraph
+*---- Actions ----*
+[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;]
+*---- Characteristic valuation domain ----*
+{&#39;med&#39;: Decimal(&quot;0.5&quot;), &#39;min&#39;: Decimal(&quot;0&quot;), &#39;max&#39;: Decimal(&quot;1.0&quot;)}
+* ---- Relation Table -----
+ S   |  &#39;1&#39;,  &#39;2&#39;,  &#39;3&#39;,  &#39;4&#39;,  &#39;5&#39;,
+-----|------------------------------------------------------------
+ &#39;1&#39; |  0.00  0.00  0.00  1.00  0.00
+ &#39;2&#39; |  0.00  0.00  1.00  1.00  1.00
+ &#39;3&#39; |  1.00  1.00  0.00  1.00  1.00
+ &#39;4&#39; |  0.00  1.00  1.00  0.00  1.00
+ &#39;5&#39; |  0.00  1.00  0.00  0.00  0.00
+*--- Connected Components ---*
+1: [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;]
+Neighborhoods:
+Neighborhoods:
+  Gamma     :
+&#39;1&#39;: in =&gt; set([&#39;3&#39;]), out =&gt; set([&#39;4&#39;])
+&#39;2&#39;: in =&gt; set([&#39;3&#39;, &#39;4&#39;, &#39;5&#39;]), out =&gt; set([&#39;3&#39;, &#39;4&#39;, &#39;5&#39;])
+&#39;3&#39;: in =&gt; set([&#39;2&#39;, &#39;4&#39;]), out =&gt; set([&#39;1&#39;, &#39;2&#39;, &#39;4&#39;, &#39;5&#39;])
+&#39;4&#39;: in =&gt; set([&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]), out =&gt; set([&#39;2&#39;, &#39;3&#39;, &#39;5&#39;])
+&#39;5&#39;: in =&gt; set([&#39;2&#39;, &#39;3&#39;, &#39;4&#39;]), out =&gt; set([&#39;2&#39;])
+  Not Gamma :
+&#39;1&#39;: in =&gt; set([&#39;2&#39;, &#39;4&#39;, &#39;5&#39;]), out =&gt; set([&#39;2&#39;, &#39;3&#39;, &#39;5&#39;])
+&#39;2&#39;: in =&gt; set([&#39;1&#39;]), out =&gt; set([&#39;1&#39;])
+&#39;3&#39;: in =&gt; set([&#39;1&#39;, &#39;5&#39;]), out =&gt; set([])
+&#39;4&#39;: in =&gt; set([&#39;5&#39;]), out =&gt; set([&#39;1&#39;])
+&#39;5&#39;: in =&gt; set([&#39;1&#39;]), out =&gt; set([&#39;1&#39;, &#39;3&#39;, &#39;4&#39;])
+*------------------*
+If you see this line all tests were passed successfully :-)
+Enjoy !
+*************************************
+* R.B. May 2014               *
+* $Revision: 1.600+$                *
+*************************************
+</pre></div>
+</div>
 <p>Back to the <a class="reference internal" href="index.html#introduction-label"><em>Introduction</em></a></p>
 </div>
 </div>
@@ -247,8 +274,8 @@ module.</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Tutorial of the Digraph resources!</a><ul>
-<li><a class="reference internal" href="#using-the-digraph3-modules">Using the Digraph3 modules</a><ul>
-<li><a class="reference internal" href="#working-with-the-graphs-module">Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module</a></li>
+<li><a class="reference internal" href="#working-with-the-graphs-module">Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module</a><ul>
+<li><a class="reference internal" href="#using-the-digraph3-modules">Using the Digraph3 modules</a></li>
 </ul>
 </li>
 </ul>
