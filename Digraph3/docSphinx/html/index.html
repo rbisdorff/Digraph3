@@ -153,7 +153,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1019,7 +1019,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1904,7 +1904,7 @@ equivalence valuations.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1935,7 +1935,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2333,9 +2333,10 @@ of chordless odd circuits augmented digraphs.</p>
 
 <p>Back to the <a class="reference internal" href="#introduction-label"><em>Introduction</em></a></p>
 </div>
-<div class="section" id="module-graphs">
-<span id="graphs-module"></span><span id="graphs-label"></span><h2>graphs module<a class="headerlink" href="#module-graphs" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="graphs-module">
+<span id="graphs-label"></span><h2>graphs module<a class="headerlink" href="#graphs-module" title="Permalink to this headline">¶</a></h2>
+<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#tutorial-label"><em>Working with the graphs module</em></a></p>
+<span class="target" id="module-graphs"></span><dl class="class">
 <dt id="graphs.Graph">
 <em class="property">class </em><tt class="descclassname">graphs.</tt><tt class="descname">Graph</tt><big>(</big><em>fileName=None</em>, <em>Empty=False</em>, <em>numberOfVertices=7</em>, <em>edgeProbability=0.5</em><big>)</big><a class="headerlink" href="#graphs.Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
@@ -2862,7 +2863,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3557,7 +3558,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4828,7 +4829,7 @@ ranking-by-Rubis-choosing orderings.</p>
 <li><a class="reference internal" href="#">Technical Documentation of the Digraph resources!</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#module-digraphs">digraphs module</a></li>
-<li><a class="reference internal" href="#module-graphs">graphs module</a></li>
+<li><a class="reference internal" href="#graphs-module">graphs module</a></li>
 <li><a class="reference internal" href="#module-perfTabs">perfTabs module</a></li>
 <li><a class="reference internal" href="#module-outrankingDigraphs">outrankingDigraphs module</a></li>
 <li><a class="reference internal" href="#module-votingDigraphs">votingDigraphs module</a></li>
