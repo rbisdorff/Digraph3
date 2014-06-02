@@ -11,65 +11,6 @@ Tutorial of the Digraph resources!
 
 .. _Tutorial-label:
 
-Using the Digraph3 modules
---------------------------
-
-Simple execution will show a list of results concerning a randomly generated digraph. To make directly executable the code source, you will have to adapt, the case given, the first line of the source code accordingly to your Python3 installation directory. 
-
-See the http://www.python.org/doc in case of troubles. 
-
-Example::
-
-	[$Home/Digraph3]...$python3 digraphs.py
-	****************************************************
-	* Python digraphs module                           *
-	* $Revision: 1.18 $                               *
-	* Copyright (C) 2006-2007 University of Luxembourg *
-	* The module comes with ABSOLUTELY NO WARRANTY     *
-	* to the extent permitted by the applicable law.   *
-	* This is free software, and you are welcome to    *
-	* redistribute it if it remains free software.     *
-	****************************************************
-	*-------- Testing classes and methods -------
-	==>> Testing RandomDigraph() class instantiation 
-	*----- show detail -------------*
-	Digraph          : randomDigraph
-	*---- Actions ----*
-	['1', '2', '3', '4', '5']
-	*---- Characteristic valuation domain ----*
-	{'med': Decimal("0.5"), 'min': Decimal("0"), 'max': Decimal("1.0")}
-	* ---- Relation Table -----
-	 S   |  '1',  '2',  '3',  '4',  '5',  
-	-----|------------------------------------------------------------
-	 '1' |  0.00  0.00  0.00  1.00  0.00 
-	 '2' |  0.00  0.00  1.00  1.00  1.00 
-	 '3' |  1.00  1.00  0.00  1.00  1.00 
-	 '4' |  0.00  1.00  1.00  0.00  1.00 
-	 '5' |  0.00  1.00  0.00  0.00  0.00 
-	*--- Connected Components ---*
-	1: ['1', '2', '3', '4', '5']
-	Neighborhoods:
-	Neighborhoods:
-	  Gamma     :
-	'1': in => set(['3']), out => set(['4'])
-	'2': in => set(['3', '4', '5']), out => set(['3', '4', '5'])
-	'3': in => set(['2', '4']), out => set(['1', '2', '4', '5'])
-	'4': in => set(['1', '2', '3']), out => set(['2', '3', '5'])
-	'5': in => set(['2', '3', '4']), out => set(['2'])
-	  Not Gamma :
-	'1': in => set(['2', '4', '5']), out => set(['2', '3', '5'])
-	'2': in => set(['1']), out => set(['1'])
-	'3': in => set(['1', '5']), out => set([])
-	'4': in => set(['5']), out => set(['1'])
-	'5': in => set(['1']), out => set(['1', '3', '4'])
-	*------------------*
-	If you see this line all tests were passed successfully :-)
-	Enjoy !
-	*************************************
-	* R.B. May 2014               *
-	* $Revision: 1.600+$                *
-	*************************************
-
 Working with the :code:`graphs` module
 ......................................
 
@@ -169,10 +110,69 @@ A 3-coloring of the tutorial graph may be computed and plotted as follows::
    :width: 400 px
    :align: center
 
-Special classes of graphs, like nXm rectangular or triangular grid graphs are available in the :code:`graphs` module.
+Special classes of graphs, like *n*X*m* rectangular or triangular grid graphs are available in the :code:`graphs` module.
 
 For more information and more code examples look into the technical documentation of the :ref:`graphs-label`
 module.
+
+Using the Digraph3 modules
+--------------------------
+
+Simple execution will show a list of results concerning a randomly generated digraph. To make directly executable the code source, you will have to adapt, the case given, the first line of the source code accordingly to your Python3 installation directory. 
+
+See the http://www.python.org/doc in case of troubles. 
+
+Example::
+
+	[$Home/Digraph3]...$python3 digraphs.py
+	****************************************************
+	* Python digraphs module                           *
+	* $Revision: 1.18 $                               *
+	* Copyright (C) 2006-2007 University of Luxembourg *
+	* The module comes with ABSOLUTELY NO WARRANTY     *
+	* to the extent permitted by the applicable law.   *
+	* This is free software, and you are welcome to    *
+	* redistribute it if it remains free software.     *
+	****************************************************
+	*-------- Testing classes and methods -------
+	==>> Testing RandomDigraph() class instantiation 
+	*----- show detail -------------*
+	Digraph          : randomDigraph
+	*---- Actions ----*
+	['1', '2', '3', '4', '5']
+	*---- Characteristic valuation domain ----*
+	{'med': Decimal("0.5"), 'min': Decimal("0"), 'max': Decimal("1.0")}
+	* ---- Relation Table -----
+	 S   |  '1',  '2',  '3',  '4',  '5',  
+	-----|------------------------------------------------------------
+	 '1' |  0.00  0.00  0.00  1.00  0.00 
+	 '2' |  0.00  0.00  1.00  1.00  1.00 
+	 '3' |  1.00  1.00  0.00  1.00  1.00 
+	 '4' |  0.00  1.00  1.00  0.00  1.00 
+	 '5' |  0.00  1.00  0.00  0.00  0.00 
+	*--- Connected Components ---*
+	1: ['1', '2', '3', '4', '5']
+	Neighborhoods:
+	Neighborhoods:
+	  Gamma     :
+	'1': in => set(['3']), out => set(['4'])
+	'2': in => set(['3', '4', '5']), out => set(['3', '4', '5'])
+	'3': in => set(['2', '4']), out => set(['1', '2', '4', '5'])
+	'4': in => set(['1', '2', '3']), out => set(['2', '3', '5'])
+	'5': in => set(['2', '3', '4']), out => set(['2'])
+	  Not Gamma :
+	'1': in => set(['2', '4', '5']), out => set(['2', '3', '5'])
+	'2': in => set(['1']), out => set(['1'])
+	'3': in => set(['1', '5']), out => set([])
+	'4': in => set(['5']), out => set(['1'])
+	'5': in => set(['1']), out => set(['1', '3', '4'])
+	*------------------*
+	If you see this line all tests were passed successfully :-)
+	Enjoy !
+	*************************************
+	* R.B. May 2014               *
+	* $Revision: 1.600+$                *
+	*************************************
 
 Back to the :ref:`Introduction-label`
 
