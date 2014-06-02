@@ -28,7 +28,9 @@ The basic idea of these Python modules is to make easy python interactive sessio
 
 The Python development of these computing ressources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java. 
 
-The Digraph source code is split into five interdependant modules, where the ``digraphs`` module is the master source.
+A tutorial with coding examples is available here: :ref:`Tutorial-label`
+
+The Digraph source code is split into several interdependant modules, where the ``digraphs`` module is the master source.
 
 :ref:`digraphs-label`
      main part of the source code with the generic ``Digraph`` class; 
@@ -46,6 +48,7 @@ The Digraph source code is split into five interdependant modules, where the ``d
      additional tools for solving linearly ranking problems.
 :ref:`weakOrders-label` 
      additional tools for solving ranking by choosing problems.
+
 
 
 .. toctree::
@@ -145,6 +148,7 @@ weakOrders module
    :no-inherited-members:
    :members:
 
+
 Back to the :ref:`Introduction-label`
 
 Indices and tables
@@ -153,6 +157,6 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
+* :ref:`Tutorial-label`
 
 
