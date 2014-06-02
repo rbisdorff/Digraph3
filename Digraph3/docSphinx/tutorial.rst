@@ -76,8 +76,7 @@ The saved Graph instance named :code:`tutorialGraph.py` is encoded in python3 as
 	frozenset(['v6','v7']) : -1, 
 	}
 
-The stored graph can be recalled and plotted with the generic :code:`exportGraphViz` method as follows::
-
+The stored graph can be recalled and plotted with the generic :code:`exportGraphViz` method as follows:
 	>>> g = Graph('tutorialGraph')
 	>>> g.exportGraphViz()
 	*---- exporting a dot file dor GraphViz tools ---------*
@@ -88,15 +87,13 @@ The stored graph can be recalled and plotted with the generic :code:`exportGraph
    :width: 400 px
    :align: center
 
-Chordless cycles may be enumerated in the given graph like follows::
-
+Chordless cycles may be enumerated in the given graph like follows:
 	>>> g = Graph('tutorialGraph')
 	>>> g.computeChordlessCycles()
 	Chordless cycle certificate -->>>  ['v5', 'v4', 'v2', 'v6', 'v5']
 	[(['v5', 'v4', 'v2', 'v6', 'v5'], frozenset({'v5', 'v4', 'v2', 'v6'}))]
 
-And, a 3-coloring of the tutorial graph may be computed and plotted as follows::
-
+And, a 3-coloring of the tutorial graph may be computed and plotted as follows:
 	>>> g = Graph('tutorialGrah')
 	>>> qc = Q_Coloring(g)
 	Running a Gibbs Sampler for 42 step !
@@ -118,8 +115,7 @@ And, a 3-coloring of the tutorial graph may be computed and plotted as follows::
    :width: 400 px
    :align: center
 
-Actually, with the given tutorial graph instance, a 2-coloring is already feasible::
-
+Actually, with the given tutorial graph instance, a 2-coloring is already feasible:
 	>>> qc = Q_Coloring(g,colors=['gold','coral'])
 	Running a Gibbs Sampler for 42 step !
 	The q-coloring with 2 colors is feasible !!
@@ -140,10 +136,89 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
    :width: 400 px
    :align: center
 
-Special classes of graphs, like *n* x *m* rectangular or triangular grid graphs are available in the :code:`graphs` module.
+2-colorings define independent sets of vertices that are maximal in cardinality; for short called a MIS. Computing such MISs in a given :code:`Graph` instance may be achieved by converting the :code:`Graph` instance into a :code:`Digraph` instance. Here a :code:`self.showMIS()` method is proposed:
+	>>> g = Graph('tutorialGrah')
+	>>> dg = g.graph2Digraph()
+	>>> dg.showMIS()
+	*---  Maximal independent choices ---*
+	['v5', 'v3', 'v7']
+	['v5', 'v7', 'v2']
+	['v6', 'v3', 'v4', 'v1']
+	['v6', 'v3', 'v7', 'v1']
+	['v7', 'v2', 'v1']
+	number of solutions:  5
+	cardinality distribution
+	card.:  [0, 1, 2, 3, 4, 5, 6, 7]
+	freq.:  [0, 0, 0, 3, 2, 0, 0, 0]
+	execution time: 0.00050 sec.
+	Results in self.misset
+	>>> dg.misset
+	{frozenset({'v6', 'v3', 'v7', 'v1'}), 
+	 frozenset({'v5', 'v7', 'v2'}), 
+	 frozenset({'v6', 'v3', 'v4', 'v1'}), 
+	 frozenset({'v7', 'v2', 'v1'}), 
+	 frozenset({'v5', 'v3', 'v7'})}
 
-For more information and more code examples look into the technical documentation of the :ref:`graphs-label`
-module.
+Special classes of graphs, like *n* x *m* rectangular or triangular grid graphs are available in the :code:`graphs` module. For instance, we may use a Gibbs sampler again for simulating an Ising Model on such a grid:
+	>>> g = GridGraph(n=15,m=15)
+	>>> g.showShort()
+	*----- show short --------------*
+	Grid graph    :  grid-6-6
+	n             :  6
+	m             :  6
+	order         :  36
+	>>> im = IsingModel(g,beta=0.3,nSim=100000,Debug=False)
+	Running a Gibbs Sampler for 100000 step !
+	>>> im.exportGraphViz(colors=['lightblue','lightcoral'])
+	*---- exporting a dot file for GraphViz tools ---------*
+	Exporting to grid-15-15-ising.dot
+	fdp -Tpng grid-15-15-ising.dot -o grid-15-15-ising.png
+
+.. image:: grid-15-15-ising.png
+   :width: 700 px
+   :align: center
+
+Finally, we provide a specialisation of the :code:`Graph` for implementing a generic Metropolis Markov Chain Monte Carlo chain sampler simulating a given probability distribution probs = {‘v1’: x, ‘v2’: y, ...}:
+	>>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
+	>>> g.showShort()
+	*---- short description of the graph ----*
+	Name             : 'randomGraph'
+	Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5']
+	Valuation domain :  {'max': 1, 'med': 0, 'min': -1}
+	Gamma function   : 
+	v1 -> ['v2', 'v3', 'v4']
+	v2 -> ['v1', 'v4']
+	v3 -> ['v5', 'v1']
+	v4 -> ['v2', 'v5', 'v1']
+	v5 -> ['v3', 'v4']        
+	>>> probs = {}
+	>>> n = g.order
+	>>> i = 0
+	>>> verticesList = [x for x in g.vertices]
+	>>> verticesList.sort()
+	>>> for v in verticesList:
+	...     probs[v] = (n - i)/(n*(n+1)/2)
+	...     i += 1
+	>>> met = MetropolisChain(g,probs)
+	>>> frequency = met.checkSampling(verticesList[0],nSim=30000)
+	>>> for v in verticesList:
+	...     print(v,probs[v],frequency[v])
+	v1 0.3333 0.3343
+	v2 0.2666 0.2680
+	v3 0.2    0.2030 
+	v4 0.1333 0.1311
+	v5 0.0666 0.0635
+	>>> met.showTransitionMatrix()
+	* ---- Transition Matrix -----
+	  Pij  | 'v1'    'v2'    'v3'    'v4'    'v5'     
+	  -----|-------------------------------------
+	  'v1' |  0.23   0.33    0.30    0.13    0.00    
+	  'v2' |  0.42   0.42    0.00    0.17    0.00    
+	  'v3' |  0.50   0.00    0.33    0.00    0.17    
+	  'v4' |  0.33   0.33    0.00    0.08    0.25    
+	  'v5' |  0.00   0.00    0.50    0.50    0.00    
+
+For more technical information and more code examples look into the technical documentation of the :ref:`graphs-label`.
 
 Using the Digraph3 modules
 --------------------------
