@@ -276,6 +276,9 @@ class Graph(object):
            >>> g.exportGraphViz('randomGraph'))
 
         .. image:: randomGraph.png
+           :alt: Random graph
+           :width: 300 px
+           :align: center
         """
         import os
         if noSilent:
@@ -445,6 +448,9 @@ class GridGraph(Graph):
     Example of 5x5 GridGraph instance:
 
     .. image:: grid-5-5.png
+       :alt: 5x5 grid instance
+       :width: 300 px
+       :align: center
     """
 
     def __init__(self,n=5,m=5,valuationMin=-1,valuationMax=1):
@@ -523,6 +529,9 @@ class TriangularGraph(Graph):
     Example of 5x5 GridGraph instance:
 
     .. image:: triangular-5-5.png
+       :alt: triangular 5x5 graph
+       :width: 300 px
+       :align: center
     """
 
     def __init__(self,n=5,m=5,valuationMin=-1,valuationMax=1):
@@ -691,6 +700,9 @@ class Q_Coloring(Graph):
            fdp -Tpng grid-6-6-qcoloring.dot -o grid-6-6-qcoloring.png
            
         .. image:: grid-6-6-qcoloring.png
+           :alt: 3 coloring of a 6x6 grid
+           :width: 300 px
+           :align: center
     """ 
 
     def __init__(self,g,colors=['gold','lightcoral','lightblue'],
@@ -809,6 +821,9 @@ class Q_Coloring(Graph):
             fdp -Tpng randomGraph-qcoloring.dot -o randomGraph-qcoloring.png
 
         .. image:: randomGraph-qcoloring.png
+            :alt: 3-coloring of a random graph
+            :width: 300 px
+            :align: center
         """
         import os
         if noSilent:
@@ -894,6 +909,9 @@ class IsingModel(Graph):
         fdp -Tpng grid-15-15-ising.dot -o grid-15-15-ising.png
 
     .. image:: grid-15-15-ising.png
+       :alt: ising configuration of a 15x15 grid with beta=0.3 
+       :width: 300 px
+       :align: center
     """
     def __init__(self,g,beta=0,
                 nSim=None,
@@ -1286,6 +1304,10 @@ class MISModel(Graph):
         fdp -Tpng c15-mis.dot -o c15-mis.png
 
     .. image:: c15-mis.png
+       :alt: 15-cycle with colored MIS
+       :width: 300 px
+       :align: center
+       
     """
     def __init__(self,g,
                 nSim=None,
@@ -1320,17 +1342,16 @@ class MISModel(Graph):
         from math import exp
         if nSim == None:
             nSim = self.nSim
+        verticesKeys = [v for v in self.vertices]
         if Reset:
-            for v in self.vertices:
+            for v in verticesKeys:
                 self.vertices[v]['mis'] = 0
         if Comments:
             print('Running a Gibbs Sampler for %d step !' % nSim)
         for s in range(nSim):
-            verticesKeys = [v for v in self.vertices]
             v = choice(verticesKeys)
-            neighbors = [x for x in self.gamma[v]]
             Potential = True
-            for x in neighbors:
+            for x in self.gamma[v]:
                 if self.vertices[x]['mis'] == 1:
                     Potential = False
                     break
@@ -1340,7 +1361,7 @@ class MISModel(Graph):
                 self.vertices[v]['mis'] = -1
             if Debug:               
                 print('s,v,neighbors,mis\n',\
-                      s,v,neighbors,self.vertices[v]['mis'])
+                      s,v,self.gamma[v],self.vertices[v]['mis'])
         self.mis,self.misCover,self.unCovered = self.checkMIS(Comments=Debug)
 
     def checkMIS(self,Comments=True):
