@@ -71,6 +71,8 @@ Back to the :ref:`Introduction-label`
 graphs module
 ---------------
 
+A tutorial with coding examples is available here: :ref:`Tutorial-label`
+
 .. automodule:: graphs
    :member-order: alphabetical
    :no-inherited-members:
