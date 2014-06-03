@@ -5,11 +5,141 @@ Tutorial of the Digraph resources!
 :Copyright: R. Bisdorff 2014
 
 
-.. toctree::
+.. toctree:: 
    :maxdepth: 2
 
-
 .. _Tutorial-label:
+
+Tuorial Content
+...............
+
+* :ref:`Download-Using-label`
+* :ref:`Digraphs-Tutorial-label`
+* :ref:`Graph-Tutorial-label`
+
+.. _Download-Using-label:
+
+Downloading and using the Digraph3 modules
+..........................................
+
+Using the Digraph3 modules is easy. You only need to have a Python system installed of version 3+. Notice that, from Version 3.3 version on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.
+
+Two downlaod options are given:
+
+1. Either (easiest under Linux or Mac OS-X), by using a subversion client::
+
+	..$svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
+
+2. Or, download and extract the latest distribution tar.gz archive::
+
+     http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3-xxx.tar.gz
+
+The basic idea of these Python modules is to make easy python interactive sessions or write short Python scripts for computing all kind of results from a bipolar valued outranking digraph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices etc.
+
+The Python development of these computing ressources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
+
+Back to :ref:`Tutorial-label`
+
+.. _Digraphs-Tutorial-label:
+
+Working with the :code:`digraphs` module
+........................................
+
+You may start an interactive Python3 session in the :code:`Digraph3` directory for exploring the classes and methods provided by the :code:`digraphs` module. To do so, enter the Python3 commands following the session prompts marqued with >>>. The lines without the prompt are output from the Python interpreter::
+
+	[\$HOME/Digraph]\$ python
+	Python 3.4.0 (default, Apr 11 2014, 13:05:11)
+	[GCC 4.8.2] on linux
+	Type "help", "copyright", "credits" or "license" for more information.
+	>>> from digraphs import Digraph
+	>>> g = Digraph('test/testdigraph')
+	>>> g.save('tutorialdigraph')
+	>>> ...
+
+All :code:`Digraph` object *g* contains at least the following subobjects: 
+
+   1. the digraph nodes called **actions** (decision actions): a list, set or dictionary of nodes with 'name' and 'shortname' attributes,
+   2. the digraph **valuationdomain** , a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),
+   3. the graph **relation** : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,
+   4. its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
+   5. its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.
+
+The g.save('tutorialdigraph') stores the digraph *g* in a file named :code:`tutorialdigraph.py` showing the following content::
+
+       # automatically generated random irreflexive digraph
+       actionset = ['1','2','3','4','5',]
+       valuationdomain = {'min': -1,
+                          'med': 0,
+                          'max': 1}
+       relation = {
+       '1': {'1':-1,'2':-1,'3':-1,'4':1,'5':-1},
+       '2': {'1':-1,'2':-1,'3':1,'4':-1,'5':-1},
+       '3': {'1':-1,'2':1,'3':-1,'4':-1,'5':1},
+       '4': {'1':1,'2':-1,'3':1,'4':-1,'5':1},
+       '5': {'1':1,'2':-1,'3':1,'4':-1,'5':-1}
+       }
+
+The :code:`Digraph.showAll()` method output reveals us that the digraph :code:`testdigraph.py` is a connected irreflexive digraph of order five evaluated in a valuation domain from -1 to 1.
+        >>> g = Digraph('tutorialdigraph')
+       	>>> g.showAll()
+	*----- show details --------------*
+	Digraph          : tutorialdigraph
+	Actions          : ['1', '2', '3', '4', '5']
+	Valuation domain : {'med': Decimal('0'), 
+                            'max': Decimal('1'), 
+                            'min': Decimal('-1')}
+        * ---- Relation Table -----
+          S   |  '1'	  '2'	  '3'	  '4'	  '5'	  
+         -----|------------------------------------------------------------
+          '1' |  -1.00	 -1.00	 -1.00	 +1.00	 -1.00	 
+          '2' |  -1.00	 -1.00	 +1.00	 -1.00	 -1.00	 
+          '3' |  -1.00	 +1.00	 -1.00	 -1.00	 +1.00	 
+          '4' |  +1.00	 -1.00	 +1.00	 -1.00	 +1.00	 
+          '5' |  +1.00	 -1.00	 +1.00	 -1.00	 -1.00	 
+	*--- Connected Components ---*
+	1: ['1', '2', '3', '4', '5']
+
+And the generic :code:`Digraph.exportGraphViz()` method generates a graphviz dot file and a png image of the tutorial digraph *g*:
+	>>> g.exportGraphViz()
+
+.. image:: testdigraph.png
+   :width: 300 px
+   :align: center
+
+Some simple methods are easily applicable to this instantiated Digraph object *g* , like the following :code:`Digraph.showStatistics()` method:
+	>>> g.showStatistics()
+	*----- general statistics -------------*
+	for digraph             : <testdigraph.py>
+	order                   :  5 nodes
+	size                    :  9 arcs
+	# undetermined          :  0 arcs
+	arc density             : 45.00
+	# components            :  1
+	                        :  [0, 1, 2, 3, 4]
+	outdegrees distribution :  [0, 2, 2, 1, 0]
+	indegrees distribution  :  [0, 2, 2, 1, 0]
+	degrees distribution    :  [0, 4, 4, 2, 0]
+	mean degree : 1.80
+	                                  :  [0, 1, 2, 3, 4, 'inf']
+	neighbourhood-depths distribution :  [0, 0, 2, 2, 1, 0]
+	mean neighbourhood depth : 2.80
+	digraph diameter :  4
+	agglomeration distribution :
+	1 : 50.00
+	2 : 0.00
+	3 : 16.67
+	4 : 50.00
+	5 : 50.00
+	agglomeration coefficient : 33.33
+	>>> ...
+
+
+
+Extensive technical documentation is available here :ref:`digraphs-label` . 
+
+Back to :ref:`Tutorial-label`
+
+.. _Graph-Tutorial-label:
 
 Working with the :code:`graphs` module
 ......................................
@@ -17,7 +147,7 @@ Working with the :code:`graphs` module
 in this Digraph3 module, the main :code:`Graph` class provides a generic **simple graph model**, without loops and multiple links. A given object of this root class consists in:
 
     1. the graph **vertices** : a dictionary of vertices with 'name' and 'shortname' attributes,
-    2. the graph **valuation domain** , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),
+    2. the graph **valuationDomain** , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),
     3. the graph **edges** : a dictionary with frozensets of pairs of vertices as entries carrying a characteristic value in the range of the previous valuation domain,
     4. and its associated **gamma function** : a dictionary containing the direct neighbors of each vertice, automatically added by the object constructor.
 
@@ -76,8 +206,7 @@ The saved Graph instance named :code:`tutorialGraph.py` is encoded in python3 as
 	frozenset(['v6','v7']) : -1, 
 	}
 
-The stored graph can be recalled and plotted with the generic :code:`exportGraphViz` method as follows::
-
+The stored graph can be recalled and plotted with the generic :code:`exportGraphViz` method as follows:
 	>>> g = Graph('tutorialGraph')
 	>>> g.exportGraphViz()
 	*---- exporting a dot file dor GraphViz tools ---------*
@@ -221,6 +350,7 @@ Finally, we provide a specialisation of the :code:`Graph` class for implementing
 
 For more technical information and more code examples look into the technical documentation of the :ref:`graphs-label`. Those interested in algorithmic applications of Markov Chains may consult O. Häggström's book: [FMCAA]_.
 
+Back to :ref:`Tutorial-label`
 
 Using the Digraph3 modules
 --------------------------
@@ -281,11 +411,13 @@ Example::
 	* $Revision: 1.600+$                *
 	*************************************
 
-Back to the :ref:`Introduction-label`
+Back to the :ref:`Tutorial-label`
 
 Indices and tables
 ==================
 
+* :ref:`Tutorial-label`
+* :ref:`Introduction-label`
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`

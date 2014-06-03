@@ -21,16 +21,13 @@ http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3-xxx.ta
 
 Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://charles-sanders-peirce.uni.lu/bisdorff/>, University of Luxembourg.
 
-A *user manual* is available here: http://ernst-schroeder.uni.lu/Digraph/doc/
-The following Python3 modules make extensive usage of the native Python Decimal module and therefore work best with Python-3.3+.
+A tutorial with coding examples is available here: :ref:`Tutorial-label`
 
 The basic idea of these Python modules is to make easy python interactive sessions or write short Python scripts for computing all kind of results from a bipolar valued outranking digraph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices etc. 
 
 The Python development of these computing ressources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java. 
 
-A tutorial with coding examples is available here: :ref:`Tutorial-label`
-
-The Digraph source code is split into several interdependant modules, where the ``digraphs`` module is the master source.
+The Digraph3 source code is split into several interdependant modules, where the ``digraphs`` module is the master source.
 
 :ref:`digraphs-label`
      main part of the source code with the generic ``Digraph`` class; 
