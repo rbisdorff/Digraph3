@@ -10,7 +10,7 @@ setup(name='digraphs',
         'sortingDigraphs','votingDigraphs',\
         'linearOrders','weakOrders',\
         'iqagent','graphs','htmlmodel'],
-      license='http://ernst-schroeder.uni.lu/Digraph/digraph_copyright.html',
+      license='http://leopold-loewenheim.uni.lu/Digraph3/digraph3_copyright.html',
       url='http://leoopold-loewenheim.uni.lu/Digraph3/',
       description='Lets you add bipolar graph and digraphs methods to your applications',
       author='Raymond Bisdorff',
