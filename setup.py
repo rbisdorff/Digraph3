@@ -5,7 +5,7 @@
 from distutils.core import setup
 
 setup(name='digraphs',
-      version='Python3: 3.1.445',
+      version='Python3.4 revision 751+',
       py_modules=['digraphs','perfTabs','outrankingDigraphs',\
         'sortingDigraphs','votingDigraphs',\
         'linearOrders','weakOrders',\
