@@ -64,7 +64,7 @@ All :code:`Digraph` object *g* contains at least the following subobjects:
    4. its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
    5. its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.
 
-The g.save('tutorialdigraph') stores the digraph *g* in a file named :code:`tutorialdigraph.py` showing the following content::
+The :code:`g.save('tutorialDigraph')` command stores the digraph *g* in a file named :code:`tutorialDigraph.py` with the following content::
 
        # automatically generated random irreflexive digraph
        actionset = ['1','2','3','4','5',]
@@ -79,8 +79,8 @@ The g.save('tutorialdigraph') stores the digraph *g* in a file named :code:`tuto
        '5': {'1':1,'2':-1,'3':1,'4':-1,'5':-1}
        }
 
-The :code:`Digraph.showAll()` method output reveals us that the digraph :code:`testdigraph.py` is a connected irreflexive digraph of order five evaluated in a valuation domain from -1 to 1.
-        >>> g = Digraph('tutorialdigraph')
+The :code:`Digraph.showAll()` method output reveals us that the digraph object loaded from file :code:`tutorialDigraph.py` is a connected irreflexive digraph of order five evaluated in a valuation domain from -1 to 1.
+        >>> g = Digraph('tutorialDigraph')
        	>>> g.showAll()
 	*----- show details --------------*
 	Digraph          : tutorialdigraph
@@ -99,9 +99,11 @@ The :code:`Digraph.showAll()` method output reveals us that the digraph :code:`t
 	*--- Connected Components ---*
 	1: ['1', '2', '3', '4', '5']
 
-And the generic :code:`Digraph.exportGraphViz()` method generates a graphviz dot file and a png image of the tutorial digraph *g*:
-	>>> g.exportGraphViz()
-
+And the :code:`Digraph.exportGraphViz()` method generates in the current working directory a :code:`tutorial.dot` file and a :code:`tutorialdigraph.png` picture of the tutorial digraph *g*, if the graphviz tools are installed on your system.:
+	>>> g.exportGraphViz('tutorialDigraph')
+        *---- exporting a dot file dor GraphViz tools ---------*
+        Exporting to tutorialDigraph.dot
+        dot -Grankdir=BT -Tpng tutorialDigraph.dot -o tutorialDigraph.png
 .. image:: testdigraph.png
    :width: 300 px
    :align: center
@@ -133,9 +135,21 @@ Some simple methods are easily applicable to this instantiated Digraph object *g
 	agglomeration coefficient : 33.33
 	>>> ...
 
+Some special classes of digraphs, like the :code:`CompleteDigraph`, the :code:`EmptyDigraph` or the oriented :code:`GridDigraph` class for instance, are readily available:
+        >>> from digraphs import GridDigraph
+	>>> grid = GridDigraph(n=5,m=5,hasMedianSplitOrientation=True)
+	>>> grid.exportGraphViz('tutorialGrid')
+	*---- exporting a dot file dor GraphViz tools ---------*
+	Exporting to tutorialGrid.dot
+	dot -Grankdir=BT -Tpng TutorialGrid.dot -o tutorialGrid.png
+
+.. image:: tutorialGrid.png
+   :width: 300 px
+   :align: center
 
 
-Extensive technical documentation is available here :ref:`digraphs-label` . 
+
+Extensive technical documentation of all the module ressources is shown here :ref:`digraphs-label` . 
 
 Back to :ref:`Tutorial-label`
 
