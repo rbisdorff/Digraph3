@@ -30,9 +30,9 @@ Two downlaod options are given:
 
      ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
-2. Or, download and extract the latest distribution tar.gz archive::
+2. Or, with a browser access, download and extract the latest distribution tar.gz archive from this page::
 
-     ..$ wget http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3-xxx.tar.gz
+     http://leopold-loewenheim.uni.lu/Digraph3/dist/
 
 The basic idea of these Python3 modules is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankins, linear ordering, etc. Most of the available computing ressources are meant to illustrate the *Algorithmic Decision Theory* course given in the University of Luxembourg Master in Information and Computer Science (MICS). 
 
