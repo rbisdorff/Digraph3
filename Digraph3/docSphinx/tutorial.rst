@@ -1,4 +1,4 @@
-Tutorial of the Digraph resources!
+Tutorial of the Digraph3 resources!
 =================================================
 :Author: Raymond Bisdorff, University of Luxembourg FSTC/CSC
 :Version: $Revision: Python 3.3+$
@@ -10,8 +10,8 @@ Tutorial of the Digraph resources!
 
 .. _Tutorial-label:
 
-Tuorial Content
-...............
+Tutorial Content
+................
 
 * :ref:`Download-Using-label`
 * :ref:`Digraphs-Tutorial-label`
@@ -22,7 +22,7 @@ Tuorial Content
 Downloading and using the Digraph3 modules
 ..........................................
 
-Using the Digraph3 modules is easy. You only need to have a Python system installed of version 3+. Notice that, from Version 3.3 version on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.
+Using the Digraph3 modules is easy. You only need to have a Python system installed of version 3+. Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.
 
 Two downlaod options are given:
 
@@ -34,7 +34,7 @@ Two downlaod options are given:
 
      http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3-xxx.tar.gz
 
-The basic idea of these Python modules is to make easy python interactive sessions or write short Python scripts for computing all kind of results from a bipolar valued outranking digraph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices etc.
+The basic idea of these Python3 modules is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankins, linear ordering, etc. Most of the available computing ressources are meant to illustrate the *Algorithmic Decision Theory* course given in the University of Luxembourg Master in Information and Computer Science (MICS). 
 
 The Python development of these computing ressources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
 
@@ -58,11 +58,11 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
 
 All :code:`Digraph` object *g* contains at least the following subobjects: 
 
-   1. the digraph nodes called **actions** (decision actions): a list, set or dictionary of nodes with 'name' and 'shortname' attributes,
-   2. the digraph **valuationdomain** , a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),
-   3. the graph **relation** : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,
-   4. its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
-   5. its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.
+1. the digraph nodes called **actions** (decision actions): a list, set or dictionary of nodes with 'name' and 'shortname' attributes,
+2. the digraph **valuationdomain** , a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),
+3. the graph **relation** : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,
+4. its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
+5. its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.
 
 The :code:`g.save('tutorialDigraph')` command stores the digraph *g* in a file named :code:`tutorialDigraph.py` with the following content::
 
@@ -161,10 +161,10 @@ Working with the :code:`graphs` module
 
 in this Digraph3 module, the main :code:`Graph` class provides a generic **simple graph model**, without loops and multiple links. A given object of this root class consists in:
 
-    1. the graph **vertices** : a dictionary of vertices with 'name' and 'shortname' attributes,
-    2. the graph **valuationDomain** , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),
-    3. the graph **edges** : a dictionary with frozensets of pairs of vertices as entries carrying a characteristic value in the range of the previous valuation domain,
-    4. and its associated **gamma function** : a dictionary containing the direct neighbors of each vertice, automatically added by the object constructor.
+1. the graph **vertices** : a dictionary of vertices with 'name' and 'shortname' attributes,
+2. the graph **valuationDomain** , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),
+3. the graph **edges** : a dictionary with frozensets of pairs of vertices as entries carrying a characteristic value in the range of the previous valuation domain,
+4. and its associated **gamma function** : a dictionary containing the direct neighbors of each vertice, automatically added by the object constructor.
 
 Example Python3 session:
     >>> from graphs import Graph
@@ -368,66 +368,67 @@ For more technical information and more code examples look into the technical do
 
 Back to :ref:`Tutorial-label`
 
-Using the Digraph3 modules
---------------------------
+..
+   Using the Digraph3 modules
+   --------------------------
 
-Simple execution will show a list of results concerning a randomly generated digraph. To make directly executable the code source, you will have to adapt, the case given, the first line of the source code accordingly to your Python3 installation directory. 
+   Simple execution will show a list of results concerning a randomly generated digraph. To make directly executable the code source, you will have to adapt, the case given, the first line of the source code accordingly to your Python3 installation directory. 
 
-See the http://www.python.org/doc in case of troubles. 
+   See the http://www.python.org/doc in case of troubles. 
 
-Example::
+   Example::
 
-	[$Home/Digraph3]...$python3 digraphs.py
-	****************************************************
-	* Python digraphs module                           *
-	* $Revision: 1.18 $                               *
-	* Copyright (C) 2006-2007 University of Luxembourg *
-	* The module comes with ABSOLUTELY NO WARRANTY     *
-	* to the extent permitted by the applicable law.   *
-	* This is free software, and you are welcome to    *
-	* redistribute it if it remains free software.     *
-	****************************************************
-	*-------- Testing classes and methods -------
-	==>> Testing RandomDigraph() class instantiation 
-	*----- show detail -------------*
-	Digraph          : randomDigraph
-	*---- Actions ----*
-	['1', '2', '3', '4', '5']
-	*---- Characteristic valuation domain ----*
-	{'med': Decimal("0.5"), 'min': Decimal("0"), 'max': Decimal("1.0")}
-	* ---- Relation Table -----
-	 S   |  '1',  '2',  '3',  '4',  '5',  
-	-----|------------------------------------------------------------
-	 '1' |  0.00  0.00  0.00  1.00  0.00 
-	 '2' |  0.00  0.00  1.00  1.00  1.00 
-	 '3' |  1.00  1.00  0.00  1.00  1.00 
-	 '4' |  0.00  1.00  1.00  0.00  1.00 
-	 '5' |  0.00  1.00  0.00  0.00  0.00 
-	*--- Connected Components ---*
-	1: ['1', '2', '3', '4', '5']
-	Neighborhoods:
-	Neighborhoods:
-	  Gamma     :
-	'1': in => set(['3']), out => set(['4'])
-	'2': in => set(['3', '4', '5']), out => set(['3', '4', '5'])
-	'3': in => set(['2', '4']), out => set(['1', '2', '4', '5'])
-	'4': in => set(['1', '2', '3']), out => set(['2', '3', '5'])
-	'5': in => set(['2', '3', '4']), out => set(['2'])
-	  Not Gamma :
-	'1': in => set(['2', '4', '5']), out => set(['2', '3', '5'])
-	'2': in => set(['1']), out => set(['1'])
-	'3': in => set(['1', '5']), out => set([])
-	'4': in => set(['5']), out => set(['1'])
-	'5': in => set(['1']), out => set(['1', '3', '4'])
-	*------------------*
-	If you see this line all tests were passed successfully :-)
-	Enjoy !
-	*************************************
-	* R.B. May 2014               *
-	* $Revision: 1.600+$                *
-	*************************************
+	   [$Home/Digraph3]...$python3 digraphs.py
+	   ****************************************************
+	   * Python digraphs module                           *
+	   * $Revision: 1.18 $                               *
+	   * Copyright (C) 2006-2007 University of Luxembourg *
+	   * The module comes with ABSOLUTELY NO WARRANTY     *
+	   * to the extent permitted by the applicable law.   *
+	   * This is free software, and you are welcome to    *
+	   * redistribute it if it remains free software.     *
+	   ****************************************************
+	   *-------- Testing classes and methods -------
+	   ==>> Testing RandomDigraph() class instantiation 
+	   *----- show detail -------------*
+	   Digraph          : randomDigraph
+	   *---- Actions ----*
+	   ['1', '2', '3', '4', '5']
+	   *---- Characteristic valuation domain ----*
+	   {'med': Decimal("0.5"), 'min': Decimal("0"), 'max': Decimal("1.0")}
+	   * ---- Relation Table -----
+	    S   |  '1',  '2',  '3',  '4',  '5',  
+	   -----|------------------------------------------------------------
+	    '1' |  0.00  0.00  0.00  1.00  0.00 
+	    '2' |  0.00  0.00  1.00  1.00  1.00 
+	    '3' |  1.00  1.00  0.00  1.00  1.00 
+	    '4' |  0.00  1.00  1.00  0.00  1.00 
+	    '5' |  0.00  1.00  0.00  0.00  0.00 
+	   *--- Connected Components ---*
+	   1: ['1', '2', '3', '4', '5']
+	   Neighborhoods:
+	   Neighborhoods:
+	     Gamma     :
+	   '1': in => set(['3']), out => set(['4'])
+	   '2': in => set(['3', '4', '5']), out => set(['3', '4', '5'])
+	   '3': in => set(['2', '4']), out => set(['1', '2', '4', '5'])
+	   '4': in => set(['1', '2', '3']), out => set(['2', '3', '5'])
+	   '5': in => set(['2', '3', '4']), out => set(['2'])
+	     Not Gamma :
+	   '1': in => set(['2', '4', '5']), out => set(['2', '3', '5'])
+	   '2': in => set(['1']), out => set(['1'])
+	   '3': in => set(['1', '5']), out => set([])
+	   '4': in => set(['5']), out => set(['1'])
+	   '5': in => set(['1']), out => set(['1', '3', '4'])
+	   *------------------*
+	   If you see this line all tests were passed successfully :-)
+	   Enjoy !
+	   *************************************
+	   * R.B. May 2014               *
+	   * $Revision: 1.600+$                *
+	   *************************************
 
-Back to the :ref:`Tutorial-label`
+   Back to the :ref:`Tutorial-label`
 
 Indices and tables
 ==================

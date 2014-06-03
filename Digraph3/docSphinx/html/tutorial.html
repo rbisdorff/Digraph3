@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial of the Digraph resources! &mdash; Digraph 1.625 documentation</title>
+    <title>Tutorial of the Digraph3 resources! &mdash; Digraph 1.625 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -44,8 +44,8 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="tutorial-of-the-digraph-resources">
-<h1>Tutorial of the Digraph resources!<a class="headerlink" href="#tutorial-of-the-digraph-resources" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="tutorial-of-the-digraph3-resources">
+<h1>Tutorial of the Digraph3 resources!<a class="headerlink" href="#tutorial-of-the-digraph3-resources" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -67,8 +67,8 @@
 <ul class="simple">
 </ul>
 </div>
-<div class="section" id="tuorial-content">
-<span id="tutorial-label"></span><h2>Tuorial Content<a class="headerlink" href="#tuorial-content" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="tutorial-content">
+<span id="tutorial-label"></span><h2>Tutorial Content<a class="headerlink" href="#tutorial-content" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><a class="reference internal" href="#download-using-label"><em>Downloading and using the Digraph3 modules</em></a></li>
 <li><a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a></li>
@@ -77,7 +77,7 @@
 </div>
 <div class="section" id="downloading-and-using-the-digraph3-modules">
 <span id="download-using-label"></span><h2>Downloading and using the Digraph3 modules<a class="headerlink" href="#downloading-and-using-the-digraph3-modules" title="Permalink to this headline">¶</a></h2>
-<p>Using the Digraph3 modules is easy. You only need to have a Python system installed of version 3+. Notice that, from Version 3.3 version on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.</p>
+<p>Using the Digraph3 modules is easy. You only need to have a Python system installed of version 3+. Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.</p>
 <p>Two downlaod options are given:</p>
 <ol class="arabic">
 <li><p class="first">Either (easiest under Linux or Mac OS-X), by using a subversion client:</p>
@@ -91,9 +91,9 @@
 </div>
 </li>
 </ol>
-<p>The basic idea of these Python modules is to make easy python interactive sessions or write short Python scripts for computing all kind of results from a bipolar valued outranking digraph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices etc.</p>
+<p>The basic idea of these Python3 modules is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankins, linear ordering, etc. Most of the available computing ressources are meant to illustrate the <em>Algorithmic Decision Theory</em> course given in the University of Luxembourg Master in Information and Computer Science (MICS).</p>
 <p>The Python development of these computing ressources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.</p>
-<p>Back to <a class="reference internal" href="#tutorial-label"><em>Tuorial Content</em></a></p>
+<p>Back to <a class="reference internal" href="#tutorial-label"><em>Tutorial Content</em></a></p>
 </div>
 <div class="section" id="working-with-the-digraphs-module">
 <span id="digraphs-tutorial-label"></span><h2>Working with the <tt class="code docutils literal"><span class="pre">digraphs</span></tt> module<a class="headerlink" href="#working-with-the-digraphs-module" title="Permalink to this headline">¶</a></h2>
@@ -109,15 +109,13 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 <p>All <tt class="code docutils literal"><span class="pre">Digraph</span></tt> object <em>g</em> contains at least the following subobjects:</p>
-<blockquote>
-<div><ol class="arabic simple">
+<ol class="arabic simple">
 <li>the digraph nodes called <strong>actions</strong> (decision actions): a list, set or dictionary of nodes with &#8216;name&#8217; and &#8216;shortname&#8217; attributes,</li>
 <li>the digraph <strong>valuationdomain</strong> , a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),</li>
 <li>the graph <strong>relation</strong> : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,</li>
 <li>its associated <strong>gamma function</strong> : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,</li>
 <li>its associated <strong>notGamma function</strong> : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.</li>
 </ol>
-</div></blockquote>
 <p>The <tt class="code docutils literal"><span class="pre">g.save('tutorialDigraph')</span></tt> command stores the digraph <em>g</em> in a file named <tt class="code docutils literal"><span class="pre">tutorialDigraph.py</span></tt> with the following content:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># automatically generated random irreflexive digraph</span>
 <span class="n">actionset</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;2&#39;</span><span class="p">,</span><span class="s">&#39;3&#39;</span><span class="p">,</span><span class="s">&#39;4&#39;</span><span class="p">,</span><span class="s">&#39;5&#39;</span><span class="p">,]</span>
@@ -209,19 +207,17 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 <a class="reference internal image-reference" href="_images/tutorialGrid.png"><img alt="_images/tutorialGrid.png" class="align-center" src="_images/tutorialGrid.png" style="width: 200px;" /></a>
 <p>Extensive technical documentation of all the module ressources is shown here <a class="reference internal" href="index.html#digraphs-label"><em>digraphs module</em></a> .</p>
-<p>Back to <a class="reference internal" href="#tutorial-label"><em>Tuorial Content</em></a></p>
+<p>Back to <a class="reference internal" href="#tutorial-label"><em>Tutorial Content</em></a></p>
 </div>
 <div class="section" id="working-with-the-graphs-module">
 <span id="graph-tutorial-label"></span><h2>Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module<a class="headerlink" href="#working-with-the-graphs-module" title="Permalink to this headline">¶</a></h2>
 <p>in this Digraph3 module, the main <tt class="code docutils literal"><span class="pre">Graph</span></tt> class provides a generic <strong>simple graph model</strong>, without loops and multiple links. A given object of this root class consists in:</p>
-<blockquote>
-<div><ol class="arabic simple">
+<ol class="arabic simple">
 <li>the graph <strong>vertices</strong> : a dictionary of vertices with &#8216;name&#8217; and &#8216;shortname&#8217; attributes,</li>
 <li>the graph <strong>valuationDomain</strong> , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),</li>
 <li>the graph <strong>edges</strong> : a dictionary with frozensets of pairs of vertices as entries carrying a characteristic value in the range of the previous valuation domain,</li>
 <li>and its associated <strong>gamma function</strong> : a dictionary containing the direct neighbors of each vertice, automatically added by the object constructor.</li>
 </ol>
-</div></blockquote>
 <dl class="docutils">
 <dt>Example Python3 session:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">Graph</span>
@@ -437,71 +433,13 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dd>
 </dl>
 <p>For more technical information and more code examples look into the technical documentation of the <a class="reference internal" href="index.html#graphs-label"><em>graphs module</em></a>. Those interested in algorithmic applications of Markov Chains may consult O. Häggström&#8217;s book: <a class="reference internal" href="#fmcaa" id="id1">[FMCAA]</a>.</p>
-<p>Back to <a class="reference internal" href="#tutorial-label"><em>Tuorial Content</em></a></p>
-<div class="section" id="using-the-digraph3-modules">
-<h3>Using the Digraph3 modules<a class="headerlink" href="#using-the-digraph3-modules" title="Permalink to this headline">¶</a></h3>
-<p>Simple execution will show a list of results concerning a randomly generated digraph. To make directly executable the code source, you will have to adapt, the case given, the first line of the source code accordingly to your Python3 installation directory.</p>
-<p>See the <a class="reference external" href="http://www.python.org/doc">http://www.python.org/doc</a> in case of troubles.</p>
-<p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre>[$Home/Digraph3]...$python3 digraphs.py
-****************************************************
-* Python digraphs module                           *
-* $Revision: 1.18 $                               *
-* Copyright (C) 2006-2007 University of Luxembourg *
-* The module comes with ABSOLUTELY NO WARRANTY     *
-* to the extent permitted by the applicable law.   *
-* This is free software, and you are welcome to    *
-* redistribute it if it remains free software.     *
-****************************************************
-*-------- Testing classes and methods -------
-==&gt;&gt; Testing RandomDigraph() class instantiation
-*----- show detail -------------*
-Digraph          : randomDigraph
-*---- Actions ----*
-[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;]
-*---- Characteristic valuation domain ----*
-{&#39;med&#39;: Decimal(&quot;0.5&quot;), &#39;min&#39;: Decimal(&quot;0&quot;), &#39;max&#39;: Decimal(&quot;1.0&quot;)}
-* ---- Relation Table -----
- S   |  &#39;1&#39;,  &#39;2&#39;,  &#39;3&#39;,  &#39;4&#39;,  &#39;5&#39;,
------|------------------------------------------------------------
- &#39;1&#39; |  0.00  0.00  0.00  1.00  0.00
- &#39;2&#39; |  0.00  0.00  1.00  1.00  1.00
- &#39;3&#39; |  1.00  1.00  0.00  1.00  1.00
- &#39;4&#39; |  0.00  1.00  1.00  0.00  1.00
- &#39;5&#39; |  0.00  1.00  0.00  0.00  0.00
-*--- Connected Components ---*
-1: [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;]
-Neighborhoods:
-Neighborhoods:
-  Gamma     :
-&#39;1&#39;: in =&gt; set([&#39;3&#39;]), out =&gt; set([&#39;4&#39;])
-&#39;2&#39;: in =&gt; set([&#39;3&#39;, &#39;4&#39;, &#39;5&#39;]), out =&gt; set([&#39;3&#39;, &#39;4&#39;, &#39;5&#39;])
-&#39;3&#39;: in =&gt; set([&#39;2&#39;, &#39;4&#39;]), out =&gt; set([&#39;1&#39;, &#39;2&#39;, &#39;4&#39;, &#39;5&#39;])
-&#39;4&#39;: in =&gt; set([&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]), out =&gt; set([&#39;2&#39;, &#39;3&#39;, &#39;5&#39;])
-&#39;5&#39;: in =&gt; set([&#39;2&#39;, &#39;3&#39;, &#39;4&#39;]), out =&gt; set([&#39;2&#39;])
-  Not Gamma :
-&#39;1&#39;: in =&gt; set([&#39;2&#39;, &#39;4&#39;, &#39;5&#39;]), out =&gt; set([&#39;2&#39;, &#39;3&#39;, &#39;5&#39;])
-&#39;2&#39;: in =&gt; set([&#39;1&#39;]), out =&gt; set([&#39;1&#39;])
-&#39;3&#39;: in =&gt; set([&#39;1&#39;, &#39;5&#39;]), out =&gt; set([])
-&#39;4&#39;: in =&gt; set([&#39;5&#39;]), out =&gt; set([&#39;1&#39;])
-&#39;5&#39;: in =&gt; set([&#39;1&#39;]), out =&gt; set([&#39;1&#39;, &#39;3&#39;, &#39;4&#39;])
-*------------------*
-If you see this line all tests were passed successfully :-)
-Enjoy !
-*************************************
-* R.B. May 2014               *
-* $Revision: 1.600+$                *
-*************************************
-</pre></div>
-</div>
-<p>Back to the <a class="reference internal" href="#tutorial-label"><em>Tuorial Content</em></a></p>
-</div>
+<p>Back to <a class="reference internal" href="#tutorial-label"><em>Tutorial Content</em></a></p>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><a class="reference internal" href="#tutorial-label"><em>Tuorial Content</em></a></li>
+<li><a class="reference internal" href="#tutorial-label"><em>Tutorial Content</em></a></li>
 <li><a class="reference internal" href="index.html#introduction-label"><em>Introduction</em></a></li>
 <li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
 <li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
@@ -527,14 +465,11 @@ Enjoy !
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Tutorial of the Digraph resources!</a><ul>
-<li><a class="reference internal" href="#tuorial-content">Tuorial Content</a></li>
+<li><a class="reference internal" href="#">Tutorial of the Digraph3 resources!</a><ul>
+<li><a class="reference internal" href="#tutorial-content">Tutorial Content</a></li>
 <li><a class="reference internal" href="#downloading-and-using-the-digraph3-modules">Downloading and using the Digraph3 modules</a></li>
 <li><a class="reference internal" href="#working-with-the-digraphs-module">Working with the <tt class="code docutils literal"><span class="pre">digraphs</span></tt> module</a></li>
-<li><a class="reference internal" href="#working-with-the-graphs-module">Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module</a><ul>
-<li><a class="reference internal" href="#using-the-digraph3-modules">Using the Digraph3 modules</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#working-with-the-graphs-module">Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
