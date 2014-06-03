@@ -104,6 +104,7 @@ And the :code:`Digraph.exportGraphViz()` method generates in the current working
         *---- exporting a dot file dor GraphViz tools ---------*
         Exporting to tutorialDigraph.dot
         dot -Grankdir=BT -Tpng tutorialDigraph.dot -o tutorialDigraph.png
+
 .. image:: testdigraph.png
    :width: 300 px
    :align: center
@@ -144,7 +145,7 @@ Some special classes of digraphs, like the :code:`CompleteDigraph`, the :code:`E
 	dot -Grankdir=BT -Tpng TutorialGrid.dot -o tutorialGrid.png
 
 .. image:: tutorialGrid.png
-   :width: 300 px
+   :width: 200 px
    :align: center
 
 
@@ -304,6 +305,7 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
 	 frozenset({'v5', 'v3', 'v7'})}
 
 Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids** are available in the :code:`graphs` module. For instance, we may use a Gibbs sampler again for simulating an Ising Model on such a grid:
+        >>> from graphs import GridGraph
 	>>> g = GridGraph(n=15,m=15)
 	>>> g.showShort()
 	*----- show short --------------*
