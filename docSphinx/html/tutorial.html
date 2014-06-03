@@ -118,7 +118,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <li>its associated <strong>notGamma function</strong> : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.</li>
 </ol>
 </div></blockquote>
-<p>The g.save(&#8216;tutorialdigraph&#8217;) stores the digraph <em>g</em> in a file named <tt class="code docutils literal"><span class="pre">tutorialdigraph.py</span></tt> showing the following content:</p>
+<p>The <tt class="code docutils literal"><span class="pre">g.save('tutorialDigraph')</span></tt> command stores the digraph <em>g</em> in a file named <tt class="code docutils literal"><span class="pre">tutorialDigraph.py</span></tt> with the following content:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># automatically generated random irreflexive digraph</span>
 <span class="n">actionset</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;2&#39;</span><span class="p">,</span><span class="s">&#39;3&#39;</span><span class="p">,</span><span class="s">&#39;4&#39;</span><span class="p">,</span><span class="s">&#39;5&#39;</span><span class="p">,]</span>
 <span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;min&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
@@ -134,8 +134,8 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 <dl class="docutils">
-<dt>The <tt class="code docutils literal"><span class="pre">Digraph.showAll()</span></tt> method output reveals us that the digraph <tt class="code docutils literal"><span class="pre">testdigraph.py</span></tt> is a connected irreflexive digraph of order five evaluated in a valuation domain from -1 to 1.</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="s">&#39;tutorialdigraph&#39;</span><span class="p">)</span>
+<dt>The <tt class="code docutils literal"><span class="pre">Digraph.showAll()</span></tt> method output reveals us that the digraph object loaded from file <tt class="code docutils literal"><span class="pre">tutorialDigraph.py</span></tt> is a connected irreflexive digraph of order five evaluated in a valuation domain from -1 to 1.</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="s">&#39;tutorialDigraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
 <span class="go">*----- show details --------------*</span>
 <span class="go">Digraph          : tutorialdigraph</span>
@@ -156,8 +156,11 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 </dd>
-<dt>And the generic <tt class="code docutils literal"><span class="pre">Digraph.exportGraphViz()</span></tt> method generates a graphviz dot file and a png image of the tutorial digraph <em>g</em>:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
+<dt>And the <tt class="code docutils literal"><span class="pre">Digraph.exportGraphViz()</span></tt> method generates in the current working directory a <tt class="code docutils literal"><span class="pre">tutorial.dot</span></tt> file and a <tt class="code docutils literal"><span class="pre">tutorialdigraph.png</span></tt> picture of the tutorial digraph <em>g</em>, if the graphviz tools are installed on your system.:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorialDigraph&#39;</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go">Exporting to tutorialDigraph.dot</span>
+<span class="go">dot -Grankdir=BT -Tpng tutorialDigraph.dot -o tutorialDigraph.png</span>
 </pre></div>
 </div>
 </dd>
@@ -193,8 +196,19 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 </dd>
+<dt>Some special classes of digraphs, like the <tt class="code docutils literal"><span class="pre">CompleteDigraph</span></tt>, the <tt class="code docutils literal"><span class="pre">EmptyDigraph</span></tt> or the oriented <tt class="code docutils literal"><span class="pre">GridDigraph</span></tt> class for instance, are readily available:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">GridDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span> <span class="o">=</span> <span class="n">GridDigraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">hasMedianSplitOrientation</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorialGrid&#39;</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go">Exporting to tutorialGrid.dot</span>
+<span class="go">dot -Grankdir=BT -Tpng TutorialGrid.dot -o tutorialGrid.png</span>
+</pre></div>
+</div>
+</dd>
 </dl>
-<p>Extensive technical documentation is available here <a class="reference internal" href="index.html#digraphs-label"><em>digraphs module</em></a> .</p>
+<a class="reference internal image-reference" href="_images/tutorialGrid.png"><img alt="_images/tutorialGrid.png" class="align-center" src="_images/tutorialGrid.png" style="width: 200px;" /></a>
+<p>Extensive technical documentation of all the module ressources is shown here <a class="reference internal" href="index.html#digraphs-label"><em>digraphs module</em></a> .</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Tuorial Content</em></a></p>
 </div>
 <div class="section" id="working-with-the-graphs-module">
@@ -359,7 +373,8 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 </dd>
 <dt>Special classes of graphs, like <em>n</em> x <em>m</em> <strong>rectangular</strong> or <strong>triangular grids</strong> are available in the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module. For instance, we may use a Gibbs sampler again for simulating an Ising Model on such a grid:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GridGraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">GridGraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GridGraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*----- show short --------------*</span>
 <span class="go">Grid graph    :  grid-6-6</span>
