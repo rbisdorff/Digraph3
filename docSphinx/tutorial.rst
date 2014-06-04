@@ -1,21 +1,18 @@
 Tutorial of the Digraph3 resources!
-=================================================
+===================================
 :Author: Raymond Bisdorff, University of Luxembourg FSTC/CSC
 :Version: $Revision: Python 3.3+$
 :Copyright: R. Bisdorff 2014
 
-
-.. toctree:: 
-   :maxdepth: 2
-
 .. _Tutorial-label:
 
-Tutorial Content
-................
+Content
+........
 
 * :ref:`Download-Using-label`
 * :ref:`Digraphs-Tutorial-label`
-* :ref:`Graph-Tutorial-label`
+* :ref:`Graphs-Tutorial-label`
+
 
 .. _Download-Using-label:
 
@@ -63,6 +60,9 @@ All :code:`Digraph` object *g* contains at least the following subobjects:
 3. the graph **relation** : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,
 4. its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
 5. its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.
+
+Technical documentation: :ref:`digraphs-label`
+
 
 The :code:`g.save('tutorialDigraph')` command stores the digraph *g* in a file named :code:`tutorialDigraph.py` with the following content::
 
@@ -154,17 +154,19 @@ Extensive technical documentation of all the module ressources is shown here :re
 
 Back to :ref:`Tutorial-label`
 
-.. _Graph-Tutorial-label:
+.. _Graphs-Tutorial-label:
 
 Working with the :code:`graphs` module
 ......................................
 
-in this Digraph3 module, the main :code:`Graph` class provides a generic **simple graph model**, without loops and multiple links. A given object of this root class consists in:
+In this Digraph3 module, the main :code:`Graph` class provides a generic **simple graph model**, without loops and multiple links. A given object of this root class consists in:
 
 1. the graph **vertices** : a dictionary of vertices with 'name' and 'shortname' attributes,
 2. the graph **valuationDomain** , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),
 3. the graph **edges** : a dictionary with frozensets of pairs of vertices as entries carrying a characteristic value in the range of the previous valuation domain,
 4. and its associated **gamma function** : a dictionary containing the direct neighbors of each vertice, automatically added by the object constructor.
+
+Technical documentation: :ref:`graphs-label`
 
 Example Python3 session:
     >>> from graphs import Graph
@@ -430,18 +432,19 @@ Back to :ref:`Tutorial-label`
 
    Back to the :ref:`Tutorial-label`
 
-Indices and tables
-==================
+Documents, indices and tables
+-----------------------------
 
-* :ref:`Tutorial-label`
-* :ref:`Introduction-label`
+* `Introduction <index.html>`_
+* `Reference manual <techDoc.html>`_
+* `Tutorial <tutorial.html>`_
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-* :ref:`Introduction-label`
+
 
 References
-==========
+----------
 
 .. [FMCAA] Olle Häggström. Finite Markov Chians and Algorithmic Applications. Cambridge University Press 2002.
 
