@@ -373,7 +373,8 @@ Back to :ref:`Tutorial-label`
 Computing the winner of an election
 ...................................
 
-The :ref:`votingDigraphs-label` provides resources for handling election results, like the ``LinearVotingProfile`` class. We consider an election involoving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored as two Python dicttionaries, one for the candidates and another one for the linear ballots::
+The :ref:`votingDigraphs-label` provides resources for handling election results, like the ``LinearVotingProfile`` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored as two Python dicttionaries, one for the candidates and another one for the linear ballots::
+    
     candidates = {'a': ,'b':  ,'c', ..., ...}
     voters = {'1':{'weight':1.0},'2':{'weight':1.0}, ...}
     ## each voter specifies a linearly ranked list of candidates
@@ -381,7 +382,8 @@ The :ref:`votingDigraphs-label` provides resources for handling election results
     linearBallot = {
     '1' : ['b','c','a', ...],
     '2' : ['a','b','c', ...],
-    ...}
+    ...
+    }
 
 The module provides a class for generating random instances of the the ``LinearVotingProfile`` class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result:
     >>> from votingDigraphs import *
