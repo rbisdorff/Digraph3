@@ -221,7 +221,7 @@ The saved Graph instance named :code:`tutorialGraph.py` is encoded in python3 as
 	frozenset(['v6','v7']) : -1, 
 	}
 
-The stored graph can be recalled and plotted with the generic :code:`exportGraphViz` [#]_ method as follows:
+The stored graph can be recalled and plotted with the generic :code:`exportGraphViz` [1]_ method as follows:
 	>>> g = Graph('tutorialGraph')
 	>>> g.exportGraphViz()
 	*---- exporting a dot file dor GraphViz tools ---------*
@@ -231,8 +231,6 @@ The stored graph can be recalled and plotted with the generic :code:`exportGraph
 .. image:: tutorialGraph.png
    :width: 400 px
    :align: center
-
-.. [#] The method is using the `graphviz <http://graphviz.org/>`_ tools.
  
 Chordless cycles may be enumerated in the given graph like follows:
 	>>> g = Graph('tutorialGraph')
@@ -458,7 +456,7 @@ A candidate *x*, showing a positive majority margin *M(x,y)*, is beating candida
     >>> cdg.computeCondorcetWinner()
     ['a1']  
     
-By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic ``Digraph`` class (see :ref:`Digraphs-Tutorial-label`), and especially its ``exportGraphViz`` method, for visualizing an election result:
+By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic ``Digraph`` class (see :ref:`Digraphs-Tutorial-label`), and especially its ``exportGraphViz`` method [1]_, for visualizing an election result:
    >>> cdg.exportGraphViz('tutorialLinearBallots')
    *---- exporting a dot file dor GraphViz tools ---------*
    Exporting to tutorialLinearBallots.dot
@@ -549,4 +547,7 @@ References
 
 .. [FMCAA] Olle Häggström. Finite Markov Chians and Algorithmic Applications. Cambridge University Press 2002.
 
+Footnotes
+.........
 
+.. [1] The ``exportGraphViz`` method is depending on drawing tools from `graphviz <http://graphviz.org/>`_. On Linux Ubuntu or Debian you may try ``sudo apt-get install graphviz`` to install them. There are ready ``dmg`` installers for Mac OS. 
