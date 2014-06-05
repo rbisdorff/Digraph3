@@ -284,7 +284,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 <dl class="docutils">
-<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id2" id="id1">[1]</a> method as follows:</dt>
+<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id4" id="id1">[1]</a> method as follows:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
@@ -295,12 +295,6 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/tutorialGraph.png"><img alt="_images/tutorialGraph.png" class="align-center" src="_images/tutorialGraph.png" style="width: 400px;" /></a>
-<table class="docutils footnote" frame="void" id="id2" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>The method is using the <a class="reference external" href="http://graphviz.org/">graphviz</a> tools.</td></tr>
-</tbody>
-</table>
 <dl class="docutils">
 <dt>Chordless cycles may be enumerated in the given graph like follows:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
@@ -444,7 +438,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 </dd>
 </dl>
-<p>For more technical information and more code examples, look into the technical documentation of the <a class="reference internal" href="techDoc.html#graphs-label"><em>graphs module</em></a>. Those interested in algorithmic applications of Markov Chains may consult O. Häggström&#8217;s book: <a class="reference internal" href="#fmcaa" id="id4">[FMCAA]</a>.</p>
+<p>For more technical information and more code examples, look into the technical documentation of the <a class="reference internal" href="techDoc.html#graphs-label"><em>graphs module</em></a>. Those interested in algorithmic applications of Markov Chains may consult O. Häggström&#8217;s book: <a class="reference internal" href="#fmcaa" id="id2">[FMCAA]</a>.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
 <div class="section" id="computing-the-winner-of-an-election">
@@ -548,7 +542,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method, for visualizing an election result:</dt>
+<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method <a class="footnote-reference" href="#id4" id="id3">[1]</a>, for visualizing an election result:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorialLinearBallots&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
 <span class="go">Exporting to tutorialLinearBallots.dot</span>
@@ -576,7 +570,16 @@ linearBallot = {
 <table class="docutils citation" frame="void" id="fmcaa" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[FMCAA]</a></td><td>Olle Häggström. Finite Markov Chians and Algorithmic Applications. Cambridge University Press 2002.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id2">[FMCAA]</a></td><td>Olle Häggström. Finite Markov Chians and Algorithmic Applications. Cambridge University Press 2002.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="footnotes">
+<h2>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id3">2</a>)</em> The <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method is depending on drawing tools from <a class="reference external" href="http://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></tt> to install them. There are ready <tt class="docutils literal"><span class="pre">dmg</span></tt> installers for Mac OS.</td></tr>
 </tbody>
 </table>
 </div>
@@ -598,6 +601,7 @@ linearBallot = {
 <li><a class="reference internal" href="#computing-the-winner-of-an-election">Computing the winner of an election</a></li>
 <li><a class="reference internal" href="#documents-indices-and-tables">Documents, indices and tables</a></li>
 <li><a class="reference internal" href="#references">References</a></li>
+<li><a class="reference internal" href="#footnotes">Footnotes</a></li>
 </ul>
 </li>
 </ul>
