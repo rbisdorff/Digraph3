@@ -443,16 +443,19 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 <div class="section" id="computing-the-winner-of-an-election">
 <span id="linearvoting-label"></span><h2>Computing the winner of an election<a class="headerlink" href="#computing-the-winner-of-an-election" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>The <a class="reference internal" href="techDoc.html#votingdigraphs-label"><em>votingDigraphs module</em></a> provides resources for handling election results, like the <tt class="docutils literal"><span class="pre">LinearVotingProfile</span></tt> class. We consider an election involoving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored as two Python dicttionaries, one for the candidates and another one for the linear ballots::</dt>
-<dd>candidates = {&#8216;a&#8217;: ,&#8217;b&#8217;:  ,&#8217;c&#8217;, ..., ...}
-voters = {&#8216;1&#8217;:{&#8216;weight&#8217;:1.0},&#8216;2&#8217;:{&#8216;weight&#8217;:1.0}, ...}
+<p>The <a class="reference internal" href="techDoc.html#votingdigraphs-label"><em>votingDigraphs module</em></a> provides resources for handling election results, like the <tt class="docutils literal"><span class="pre">LinearVotingProfile</span></tt> class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored as two Python dicttionaries, one for the candidates and another one for the linear ballots</p>
+<div class="highlight-python"><div class="highlight"><pre>candidates = {&#39;a&#39;: ,&#39;b&#39;:  ,&#39;c&#39;, ..., ...}
+voters = {&#39;1&#39;:{&#39;weight&#39;:1.0},&#39;2&#39;:{&#39;weight&#39;:1.0}, ...}
 ## each voter specifies a linearly ranked list of candidates
 ## from the best to the worst (without ties
 linearBallot = {
-&#8216;1&#8217; : [&#8216;b&#8217;,&#8217;c&#8217;,&#8217;a&#8217;, ...],
-&#8216;2&#8217; : [&#8216;a&#8217;,&#8217;b&#8217;,&#8217;c&#8217;, ...],
-...}</dd>
+&#39;1&#39; : [&#39;b&#39;,&#39;c&#39;,&#39;a&#39;, ...],
+&#39;2&#39; : [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;, ...],
+...
+}
+</pre></div>
+</div>
+<dl class="docutils">
 <dt>The module provides a class for generating random instances of the the <tt class="docutils literal"><span class="pre">LinearVotingProfile</span></tt> class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
