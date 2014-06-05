@@ -19,7 +19,6 @@ These pages describe the Python3 resources for implementing decision aid algorit
 .. toctree:: techDoc
    :maxdepth: 2
 
-
 Indices and tables
 ------------------
 
