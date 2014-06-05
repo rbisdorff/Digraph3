@@ -11,6 +11,7 @@ Content
 
 * :ref:`Download-Using-label`
 * :ref:`Digraphs-Tutorial-label`
+* :ref:`Digraph-Tools-label`
 * :ref:`Graphs-Tutorial-label`
 * :ref:`LinearVoting-label`
 
@@ -151,6 +152,183 @@ Some special classes of digraphs, like the :code:`CompleteDigraph`, the :code:`E
 For more information about its resources, see the technical documentation of the :ref:`digraphs-label` . 
 
 Back to :ref:`Tutorial-label`
+
+.. _Digraph-Tools-label:
+
+Tools for manipulating Digraph objects
+......................................
+
+We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7 and denoted **dg** modelling a binary relation (*xSy*) defined on the set of nodes of the digraph. For this purpose, the ``digraphs`` module provides conveniently a specific ``RandomValuationDigraph`` constructor:
+    >>> from digraphs import *
+    >>> dg = RandomValuationDigraph(order=7,Normalized=True)
+    >>> dg.save('tutRandValDigraph')
+
+With the ``save()`` method we may keep a backup version for future use of the random digraph stored in a file called *tutRandValDigraph.py*. The ``Digraph`` class now provides some generic methods for exploring a given digraph object, like the ``showShort()``, ``showAll()``, ``showRelationTable()`` and the ``showNeighborhoods()`` methods:
+    >>> dg.showShort()
+    *----- show summary -------------*
+    Digraph          : randomValuationDigraph
+    *---- Actions ----*
+    ['1', '2', '3', '4', '5', '6', '7']
+    *---- Characteristic valuation domain ----*
+    {'med': Decimal('0.0'), 'hasIntegerValuation': False, 
+    'min': Decimal('-1.0'), 'max': Decimal('1.0')}
+    *--- Connected Components ---*
+    1: ['1', '2', '3', '4', '5', '6', '7']
+    >>> dg.showRelationTable(ReflexiveTerms=False)
+    * ---- Relation Table -----
+    r(xSy) |  '1'    '2'   '3'  '4'   '5'    '6'  '7'	  
+    -------|------------------------------------------------------------
+    '1'    |   -   -0.48  0.70  0.86  0.30  0.38  0.44	 
+    '2'    | -0.22   -   -0.38  0.50  0.80 -0.54  0.02	 
+    '3'    | -0.42  0.08   -    0.70 -0.56  0.84 -1.00	 
+    '4'    |  0.44 -0.40 -0.62   -    0.04  0.66  0.76	 
+    '5'    |  0.32 -0.48 -0.46  0.64   -   -0.22 -0.52	 
+    '6'    | -0.84  0.00 -0.40 -0.96 -0.18   -   -0.22	 
+    '7'    |  0.88  0.72  0.82  0.52 -0.84  0.04  -	 
+    >>> dg.showNeighborhoods()
+    Neighborhoods osberved in digraph 'randomdomValuation' 
+    Gamma     :
+    '1': in => {'5', '7', '4'}, out => {'5', '7', '6', '3', '4'}
+    '2': in => {'7', '3'}, out => {'5', '7', '4'}
+    '3': in => {'7', '1'}, out => {'6', '2', '4'}
+    '4': in => {'5', '7', '1', '2', '3'}, out => {'5', '7', '1', '6'}
+    '5': in => {'1', '2', '4'}, out => {'1', '4'}
+    '6': in => {'7', '1', '3', '4'}, out => set()
+    '7': in => {'1', '2', '4'}, out => {'1', '2', '3', '4', '6'}
+     Not Gamma :
+    '1': in => {'6', '2', '3'}, out => {'2'}
+    '2': in => {'5', '1', '4'}, out => {'1', '6', '3'}
+    '3': in => {'5', '6', '2', '4'}, out => {'5', '7', '1'}
+    '4': in => {'6'}, out => {'2', '3'}
+    '5': in => {'7', '6', '3'}, out => {'7', '6', '2', '3'}
+    '6': in => {'5', '2'}, out => {'5', '7', '1', '3', '4'}
+    '7': in => {'5', '6', '3'}, out => {'5'}
+    
+.. warning::
+    
+    Notice that most Digraph class methods will ignore the reflexive couples by asuming that the relation is indeterminate (characteristic value put to median value) in this case.
+    
+We may have an even better insight into this random digraph dg by looking at a graphviz drawing:
+    >>> dg.exportGraphViz('tutRandValDigraph')
+    *---- exporting a dot file dor GraphViz tools ---------*
+    Exporting to tutRandValDigraph.dot
+    dot -Grankdir=BT -Tpng tutRandValDigraph.dot -o tutRandValDigraph.png
+
+.. image:: tutRandValDigraph.png
+   :width: 200 px
+   :align: center
+
+Notice the indeterminated relational situation (6*S*2) observed between node '6' and node '2'. The corresponding characteristic value r(6*S*2) = 0.0 is marked in grey with an openheaded arrow. We may extract both the symmetric as well as the assymetric part of digraph dg:
+    >>> asymDg = AsymmetricPartialDigraph(dg)
+    >>> asymDg.exportGraphViz()
+    >>> symDG = SymmetricPartialDigraph(dg)
+    >>> symDg.exportGraphViz()
+
+.. image:: asymSymParts.png
+   :width: 400 px
+   :align: center
+
+.. note::
+
+    Be aware that the partial objects *asymDg* and *symDg* put to an indeterminate characteristic value all not-asymmetric, respectively not-symmetric links between nodes. 
+
+We may recover from both partial objects again the original object dg with a **bipolar fusion** operator, also called **epistemic disjunction**, available via the ``FusionDigraph`` constructor:
+    >>> fusDg = FusionDigraph(asymDg,symDg)
+    >>> fusDg.showRelationTable()
+    * ---- Relation Table -----
+    r(xSy) |  '1'    '2'   '3'  '4'   '5'    '6'  '7'	  
+    -------|------------------------------------------------------------
+    '1'    |  0.00 -0.48  0.70  0.86  0.30  0.38  0.44	 
+    '2'    | -0.22  0.00 -0.38  0.50  0.80 -0.54  0.02	 
+    '3'    | -0.42  0.08  0.00  0.70 -0.56  0.84 -1.00	 
+    '4'    |  0.44 -0.40 -0.62  0.00  0.04  0.66  0.76	 
+    '5'    |  0.32 -0.48 -0.46  0.64  0.00 -0.22 -0.52	 
+    '6'    | -0.84  0.00 -0.40 -0.96 -0.18  0.00 -0.22	 
+    '7'    |  0.88  0.72  0.82  0.52 -0.84  0.04  0.00	 
+
+We may as readily compute the **dual**, the **converse** and the **codual** (dual and converse) of dg:
+    >>> ddg = DualDigraph(dg)
+    >>> ddg.showRelationTable()
+    -r(xSy) |  '1'    '2'   '3'  '4'   '5'    '6'  '7'	  
+    --------|------------------------------------------
+    '1 '    |  0.00  0.48 -0.70 -0.86 -0.30 -0.38 -0.44	 
+    '2'     |  0.22  0.00  0.38 -0.50  0.80  0.54 -0.02	 
+    '3'     |  0.42  0.08  0.00 -0.70  0.56 -0.84  1.00	 
+    '4'     | -0.44  0.40  0.62  0.00 -0.04 -0.66 -0.76	 
+    '5'     | -0.32  0.48  0.46 -0.64  0.00  0.22  0.52	 
+    '6'     |  0.84  0.00  0.40  0.96  0.18  0.00  0.22	 
+    '7'     |  0.88 -0.72 -0.82 -0.52  0.84 -0.04  0.00
+    >>> cdg = ConverseDigraph(dg)
+    >>> cdg.showRelationTable()
+    * ---- Relation Table -----
+     r(ySx) |  '1'    '2'   '3'   '4'   '5'   '6'   '7'	  
+    --------|------------------------------------------
+    '1'     |  0.00 -0.22 -0.42  0.44  0.32 -0.84  0.88	 
+    '2'     | -0.48  0.00  0.08 -0.40 -0.48  0.00  0.72	 
+    '3'     |  0.70 -0.38  0.00 -0.62 -0.46 -0.40  0.82	 
+    '4'     |  0.86  0.50  0.70  0.00  0.64 -0.96  0.52	 
+    '5'     |  0.30  0.80 -0.56  0.04  0.00 -0.18 -0.84	 
+    '6'     |  0.38 -0.54  0.84  0.66 -0.22  0.00  0.04	 
+    '7'     |  0.44  0.02 -1.00  0.76 -0.52 -0.22  0.00	 
+    >>> cddg = CoDualDigraph(dg)
+    >>> cddg.showRelationTable()
+    * ---- Relation Table -----
+    -r(ySx) |  '1'    '2'   '3'   '4'   '5'   '6'   '7'	    
+    --------|------------------------------------------------------------
+    '1'     |  0.00  0.22  0.42 -0.44 -0.32  0.84 -0.88	 
+    '2'     |  0.48  0.00 -0.08  0.40  0.48  0.00 -0.72	 
+    '3'     | -0.70  0.38  0.00  0.62  0.46  0.40 -0.82	 
+    '4'     | -0.86 -0.50 -0.70  0.00 -0.64  0.96 -0.52	 
+    '5'     | -0.30 -0.80  0.56 -0.04  0.00  0.18  0.84	 
+    '6'     | -0.38  0.54 -0.84 -0.66  0.22  0.00 -0.04	 
+    '7'     | -0.44 -0.02  1.00 -0.76  0.52  0.22  0.00	 
+
+Computing the dual, respectively the converse, may also be done with preprefixing the ``__neg__ (-)`` or the ``__invert__`` (~) operator. The codual of a Digraph object may thus as well be computed with a **composition** (in either order) of both operations:
+    >>> ddg = -dg   # dual of dg
+    >>> cdg = ~dg   # converse of dg
+    >>> cddg = -(~dg) = ~(-dg)  # codual of dg
+    >>> cddg.showRelationTable()
+    * ---- Relation Table -----
+    -r(ySx) |  '1'    '2'   '3'   '4'   '5'   '6'   '7'	    
+    --------|------------------------------------------------------------
+    '1'     |  0.00  0.22  0.42 -0.44 -0.32  0.84 -0.88	 
+    '2'     |  0.48  0.00 -0.08  0.40  0.48  0.00 -0.72	 
+    '3'     | -0.70  0.38  0.00  0.62  0.46  0.40 -0.82	 
+    '4'     | -0.86 -0.50 -0.70  0.00 -0.64  0.96 -0.52	 
+    '5'     | -0.30 -0.80  0.56 -0.04  0.00  0.18  0.84	 
+    '6'     | -0.38  0.54 -0.84 -0.66  0.22  0.00 -0.04	 
+    '7'     | -0.44 -0.02  1.00 -0.76  0.52  0.22  0.00	 
+
+Symmetric and transtive closure in site constructors are also available, Note that it is a good idea to previously make a backup version of dg, before going ahead with these in-site operations that drectly irreversibly modify the original dg object:
+    >>> dg.save('tutRandValDigraph')
+    >>> dg.closeSymmetric()
+    >>> dg.closeTransitive()
+    >>> dg.exportGraphViz('strongComponents')
+
+.. image:: strongComponents.png
+   :width: 200 px
+   :align: center
+
+As the original digraph **dg** was connected, the above symmetric and transitive closures will necessarily produce a single strong commponent, ie a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and contsruct the so reduced digraph. Here we get a single node gathering all the original set of nodes :
+    >>> sc = StrongComponentsCollapsedDigraph(dg)
+    >>> sc.showAll()
+    *----- show detail -----*
+    Digraph          : tutRandValDigraph_Scc
+    *---- Actions ----*
+    ['_7_1_2_6_5_3_4_']
+    * ---- Relation Table -----
+      S     |  'Scc_1'	  
+     -------|---------
+    'Scc_1' |  0.00	 
+    short 	 content
+    Scc_1 	 _7_1_2_6_5_3_4_
+    Neighborhoods:
+      Gamma     :
+    'frozenset({'7', '1', '2', '6', '5', '3', '4'})': in => set(), out => set()
+      Not Gamma :
+    'frozenset({'7', '1', '2', '6', '5', '3', '4'})': in => set(), out => set()
+    >>> ...
+
 
 .. _Graphs-Tutorial-label:
 
@@ -373,7 +551,7 @@ Back to :ref:`Tutorial-label`
 Computing the winner of an election
 ...................................
 
-The :ref:`votingDigraphs-label` provides resources for handling election results, like the ``LinearVotingProfile`` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored as two Python dicttionaries, one for the candidates and another one for the linear ballots::
+The :ref:`votingDigraphs-label` provides resources for handling election results [ADT-L2]_, like the ``LinearVotingProfile`` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored as two Python dicttionaries, one for the candidates and another one for the linear ballots::
     
     candidates = {'a': ,'b':  ,'c', ..., ...}
     voters = {'1':{'weight':1.0},'2':{'weight':1.0}, ...}
@@ -385,7 +563,7 @@ The :ref:`votingDigraphs-label` provides resources for handling election results
     ...
     }
 
-The module provides a class for generating random instances of the the ``LinearVotingProfile`` class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result:
+The module provides a class for generating random instances of the ``LinearVotingProfile`` class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result:
     >>> from votingDigraphs import *
     >>> v = RandomLinearVotingProfile(numberOfVoters=5,numberOfCandidates=3)
     >>> v.candidates
@@ -399,7 +577,7 @@ The module provides a class for generating random instances of the the ``LinearV
      'v5': ['a2', 'a3', 'a1'], 'v2': ['a3', 'a2', 'a1']}
      >>> ...
 
-Notice that the voters are all equi-significant in this example. Their linear ballots can be viewd with the ``showLinearBallots`` method:
+Notice that in this example, all voters are considered to be equi-significant. Their linear ballots can be viewd with the ``showLinearBallots`` method:
     >>> v.showLinearBallots()
     voters(weight)	 candidates rankings
     v4(1.0): 	 ['a1', 'a2', 'a3']
@@ -421,7 +599,7 @@ We may easily compute **uninominal votes**, ie how many times a candidate was ra
     ['a1','a3']
     >>> ...
 
-As we observe no absolute majority (3/5) for one of the candidate, we may compute, for instance the **instant runoff** winner instead:
+As we observe no absolute majority (3/5) for any candidate, we may compute, for instance the **instant runoff** winner instead:
     >>> v.computeInstantRunoffWinner()
     ['a1']
     >>> ...
@@ -435,7 +613,7 @@ We may also follow the Chevalier Borda's advice and, after a **rank analysis** o
     ['a1']
     >>> ... 
 
-In our randomly generated election results, we are lucky. The instant runoff winner and the Borda winner determine, both, candidate *a*. However, we could also follow the Marquis de Condorcet's advice, and compute the **majority margins** obtained by voting for each individual pair of candidates. For instance, candidate *a* is ranked four times before and once behind candidate *b*. Hence the majority margin *M(a,b)* is 4 - 1 = +3. These majority margins define on the set of candidates what we call the **Condorcet digraph**, a specialization of the ``Digraph`` class for handing such pairwise majority margins:
+In our randomly generated election results, we are lucky. The instant runoff winner and the Borda winner determine, both, candidate *a1*. However, we could also follow the Marquis de Condorcet's advice, and compute the **majority margins** obtained by voting for each individual pair of candidates. For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the majority margin *M(a1,a2)* is 4 - 1 = +3. These majority margins define on the set of candidates what we call the **Condorcet digraph**, a specialization of the ``Digraph`` class for handing such pairwise majority margins:
     >>> cdg = CondorcetDigraph(v,hasIntegerValuation=True)
     >>> cdg.showAll()
     *----- show detail -------------*
@@ -454,7 +632,7 @@ In our randomly generated election results, we are lucky. The instant runoff win
        'a2' |  -3    -	 -1	 
        'a3' |  -1    1	  -	 
 
-A candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in his row in the Condorcet digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommended to declare this candidate (she is always unique, why?) the winner of the election. Here we are lucky, it is again candidate 'a1' who is the **Condorcet winner**:
+A candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in his row in the Condorcet digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommended to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner**:
     >>> cdg.computeCondorcetWinner()
     ['a1']  
     
@@ -469,7 +647,6 @@ By seeing the majority margins like a bipolarly-valued characteristic function f
    :align: center
  
 Many more tools for exploiting voting results are available, see the thechnical documentation of the :ref:`votingDiGraphs-label`.
-
 
 ..
    Using the Digraph3 modules
@@ -549,7 +726,11 @@ References
 
 .. [FMCAA] Olle Häggström. Finite Markov Chians and Algorithmic Applications. Cambridge University Press 2002.
 
+.. [ADT-L2] R. Bisdorff, *Who wins the election*. MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( `downloadable here <_static/adtVoting-2x2.pdf>`_ ) 
+
+
 Footnotes
 .........
 
 .. [1] The ``exportGraphViz`` method is depending on drawing tools from `graphviz <http://graphviz.org/>`_. On Linux Ubuntu or Debian you may try ``sudo apt-get install graphviz`` to install them. There are ready ``dmg`` installers for Mac OS. 
+

@@ -76,6 +76,7 @@
 <ul class="simple">
 <li><a class="reference internal" href="#download-using-label"><em>Downloading and using the Digraph3 modules</em></a></li>
 <li><a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a></li>
+<li><a class="reference internal" href="#digraph-tools-label"><em>Tools for manipulating Digraph objects</em></a></li>
 <li><a class="reference internal" href="#graphs-tutorial-label"><em>Working with the graphs module</em></a></li>
 <li><a class="reference internal" href="#linearvoting-label"><em>Computing the winner of an election</em></a></li>
 </ul>
@@ -214,6 +215,199 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <p>For more information about its resources, see the technical documentation of the <a class="reference internal" href="techDoc.html#digraphs-label"><em>digraphs module</em></a> .</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
+<div class="section" id="tools-for-manipulating-digraph-objects">
+<span id="digraph-tools-label"></span><h2>Tools for manipulating Digraph objects<a class="headerlink" href="#tools-for-manipulating-digraph-objects" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>We are starting this tutorial with generating a randomly [-1;1]-valued (<em>Normalized=True</em>) digraph of order 7 and denoted <strong>dg</strong> modelling a binary relation (<em>xSy</em>) defined on the set of nodes of the digraph. For this purpose, the <tt class="docutils literal"><span class="pre">digraphs</span></tt> module provides conveniently a specific <tt class="docutils literal"><span class="pre">RandomValuationDigraph</span></tt> constructor:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>With the <tt class="docutils literal"><span class="pre">save()</span></tt> method we may keep a backup version for future use of the random digraph stored in a file called <em>tutRandValDigraph.py</em>. The <tt class="docutils literal"><span class="pre">Digraph</span></tt> class now provides some generic methods for exploring a given digraph object, like the <tt class="docutils literal"><span class="pre">showShort()</span></tt>, <tt class="docutils literal"><span class="pre">showAll()</span></tt>, <tt class="docutils literal"><span class="pre">showRelationTable()</span></tt> and the <tt class="docutils literal"><span class="pre">showNeighborhoods()</span></tt> methods:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
+<span class="go">*----- show summary -------------*</span>
+<span class="go">Digraph          : randomValuationDigraph</span>
+<span class="go">*---- Actions ----*</span>
+<span class="go">[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;]</span>
+<span class="go">*---- Characteristic valuation domain ----*</span>
+<span class="go">{&#39;med&#39;: Decimal(&#39;0.0&#39;), &#39;hasIntegerValuation&#39;: False,</span>
+<span class="go">&#39;min&#39;: Decimal(&#39;-1.0&#39;), &#39;max&#39;: Decimal(&#39;1.0&#39;)}</span>
+<span class="go">*--- Connected Components ---*</span>
+<span class="go">1: [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="go">* ---- Relation Table -----</span>
+<span class="go">r(xSy) |  &#39;1&#39;    &#39;2&#39;   &#39;3&#39;  &#39;4&#39;   &#39;5&#39;    &#39;6&#39;  &#39;7&#39;</span>
+<span class="go">-------|------------------------------------------------------------</span>
+<span class="go">&#39;1&#39;    |   -   -0.48  0.70  0.86  0.30  0.38  0.44</span>
+<span class="go">&#39;2&#39;    | -0.22   -   -0.38  0.50  0.80 -0.54  0.02</span>
+<span class="go">&#39;3&#39;    | -0.42  0.08   -    0.70 -0.56  0.84 -1.00</span>
+<span class="go">&#39;4&#39;    |  0.44 -0.40 -0.62   -    0.04  0.66  0.76</span>
+<span class="go">&#39;5&#39;    |  0.32 -0.48 -0.46  0.64   -   -0.22 -0.52</span>
+<span class="go">&#39;6&#39;    | -0.84  0.00 -0.40 -0.96 -0.18   -   -0.22</span>
+<span class="go">&#39;7&#39;    |  0.88  0.72  0.82  0.52 -0.84  0.04  -</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showNeighborhoods</span><span class="p">()</span>
+<span class="go">Neighborhoods osberved in digraph &#39;randomdomValuation&#39;</span>
+<span class="go">Gamma     :</span>
+<span class="go">&#39;1&#39;: in =&gt; {&#39;5&#39;, &#39;7&#39;, &#39;4&#39;}, out =&gt; {&#39;5&#39;, &#39;7&#39;, &#39;6&#39;, &#39;3&#39;, &#39;4&#39;}</span>
+<span class="go">&#39;2&#39;: in =&gt; {&#39;7&#39;, &#39;3&#39;}, out =&gt; {&#39;5&#39;, &#39;7&#39;, &#39;4&#39;}</span>
+<span class="go">&#39;3&#39;: in =&gt; {&#39;7&#39;, &#39;1&#39;}, out =&gt; {&#39;6&#39;, &#39;2&#39;, &#39;4&#39;}</span>
+<span class="go">&#39;4&#39;: in =&gt; {&#39;5&#39;, &#39;7&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;}, out =&gt; {&#39;5&#39;, &#39;7&#39;, &#39;1&#39;, &#39;6&#39;}</span>
+<span class="go">&#39;5&#39;: in =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;4&#39;}, out =&gt; {&#39;1&#39;, &#39;4&#39;}</span>
+<span class="go">&#39;6&#39;: in =&gt; {&#39;7&#39;, &#39;1&#39;, &#39;3&#39;, &#39;4&#39;}, out =&gt; set()</span>
+<span class="go">&#39;7&#39;: in =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;4&#39;}, out =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;6&#39;}</span>
+<span class="go"> Not Gamma :</span>
+<span class="go">&#39;1&#39;: in =&gt; {&#39;6&#39;, &#39;2&#39;, &#39;3&#39;}, out =&gt; {&#39;2&#39;}</span>
+<span class="go">&#39;2&#39;: in =&gt; {&#39;5&#39;, &#39;1&#39;, &#39;4&#39;}, out =&gt; {&#39;1&#39;, &#39;6&#39;, &#39;3&#39;}</span>
+<span class="go">&#39;3&#39;: in =&gt; {&#39;5&#39;, &#39;6&#39;, &#39;2&#39;, &#39;4&#39;}, out =&gt; {&#39;5&#39;, &#39;7&#39;, &#39;1&#39;}</span>
+<span class="go">&#39;4&#39;: in =&gt; {&#39;6&#39;}, out =&gt; {&#39;2&#39;, &#39;3&#39;}</span>
+<span class="go">&#39;5&#39;: in =&gt; {&#39;7&#39;, &#39;6&#39;, &#39;3&#39;}, out =&gt; {&#39;7&#39;, &#39;6&#39;, &#39;2&#39;, &#39;3&#39;}</span>
+<span class="go">&#39;6&#39;: in =&gt; {&#39;5&#39;, &#39;2&#39;}, out =&gt; {&#39;5&#39;, &#39;7&#39;, &#39;1&#39;, &#39;3&#39;, &#39;4&#39;}</span>
+<span class="go">&#39;7&#39;: in =&gt; {&#39;5&#39;, &#39;6&#39;, &#39;3&#39;}, out =&gt; {&#39;5&#39;}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Notice that most Digraph class methods will ignore the reflexive couples by asuming that the relation is indeterminate (characteristic value put to median value) in this case.</p>
+</div>
+<dl class="docutils">
+<dt>We may have an even better insight into this random digraph dg by looking at a graphviz drawing:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go">Exporting to tutRandValDigraph.dot</span>
+<span class="go">dot -Grankdir=BT -Tpng tutRandValDigraph.dot -o tutRandValDigraph.png</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="_images/tutRandValDigraph.png"><img alt="_images/tutRandValDigraph.png" class="align-center" src="_images/tutRandValDigraph.png" style="width: 200px;" /></a>
+<dl class="docutils">
+<dt>Notice the indeterminated relational situation (6*S*2) observed between node &#8216;6&#8217; and node &#8216;2&#8217;. The corresponding characteristic value r(6*S*2) = 0.0 is marked in grey with an openheaded arrow. We may extract both the symmetric as well as the assymetric part of digraph dg:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">asymDg</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asymDg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">symDG</span> <span class="o">=</span> <span class="n">SymmetricPartialDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">symDg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="_images/asymSymParts.png"><img alt="_images/asymSymParts.png" class="align-center" src="_images/asymSymParts.png" style="width: 400px;" /></a>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Be aware that the partial objects <em>asymDg</em> and <em>symDg</em> put to an indeterminate characteristic value all not-asymmetric, respectively not-symmetric links between nodes.</p>
+</div>
+<dl class="docutils">
+<dt>We may recover from both partial objects again the original object dg with a <strong>bipolar fusion</strong> operator, also called <strong>epistemic disjunction</strong>, available via the <tt class="docutils literal"><span class="pre">FusionDigraph</span></tt> constructor:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">fusDg</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">asymDg</span><span class="p">,</span><span class="n">symDg</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fusDg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+<span class="go">* ---- Relation Table -----</span>
+<span class="go">r(xSy) |  &#39;1&#39;    &#39;2&#39;   &#39;3&#39;  &#39;4&#39;   &#39;5&#39;    &#39;6&#39;  &#39;7&#39;</span>
+<span class="go">-------|------------------------------------------------------------</span>
+<span class="go">&#39;1&#39;    |  0.00 -0.48  0.70  0.86  0.30  0.38  0.44</span>
+<span class="go">&#39;2&#39;    | -0.22  0.00 -0.38  0.50  0.80 -0.54  0.02</span>
+<span class="go">&#39;3&#39;    | -0.42  0.08  0.00  0.70 -0.56  0.84 -1.00</span>
+<span class="go">&#39;4&#39;    |  0.44 -0.40 -0.62  0.00  0.04  0.66  0.76</span>
+<span class="go">&#39;5&#39;    |  0.32 -0.48 -0.46  0.64  0.00 -0.22 -0.52</span>
+<span class="go">&#39;6&#39;    | -0.84  0.00 -0.40 -0.96 -0.18  0.00 -0.22</span>
+<span class="go">&#39;7&#39;    |  0.88  0.72  0.82  0.52 -0.84  0.04  0.00</span>
+</pre></div>
+</div>
+</dd>
+<dt>We may as readily compute the <strong>dual</strong>, the <strong>converse</strong> and the <strong>codual</strong> (dual and converse) of dg:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ddg</span> <span class="o">=</span> <span class="n">DualDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ddg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+<span class="go">-r(xSy) |  &#39;1&#39;    &#39;2&#39;   &#39;3&#39;  &#39;4&#39;   &#39;5&#39;    &#39;6&#39;  &#39;7&#39;</span>
+<span class="go">--------|------------------------------------------</span>
+<span class="go">&#39;1 &#39;    |  0.00  0.48 -0.70 -0.86 -0.30 -0.38 -0.44</span>
+<span class="go">&#39;2&#39;     |  0.22  0.00  0.38 -0.50  0.80  0.54 -0.02</span>
+<span class="go">&#39;3&#39;     |  0.42  0.08  0.00 -0.70  0.56 -0.84  1.00</span>
+<span class="go">&#39;4&#39;     | -0.44  0.40  0.62  0.00 -0.04 -0.66 -0.76</span>
+<span class="go">&#39;5&#39;     | -0.32  0.48  0.46 -0.64  0.00  0.22  0.52</span>
+<span class="go">&#39;6&#39;     |  0.84  0.00  0.40  0.96  0.18  0.00  0.22</span>
+<span class="go">&#39;7&#39;     |  0.88 -0.72 -0.82 -0.52  0.84 -0.04  0.00</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span> <span class="o">=</span> <span class="n">ConverseDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+<span class="go">* ---- Relation Table -----</span>
+<span class="go"> r(ySx) |  &#39;1&#39;    &#39;2&#39;   &#39;3&#39;   &#39;4&#39;   &#39;5&#39;   &#39;6&#39;   &#39;7&#39;</span>
+<span class="go">--------|------------------------------------------</span>
+<span class="go">&#39;1&#39;     |  0.00 -0.22 -0.42  0.44  0.32 -0.84  0.88</span>
+<span class="go">&#39;2&#39;     | -0.48  0.00  0.08 -0.40 -0.48  0.00  0.72</span>
+<span class="go">&#39;3&#39;     |  0.70 -0.38  0.00 -0.62 -0.46 -0.40  0.82</span>
+<span class="go">&#39;4&#39;     |  0.86  0.50  0.70  0.00  0.64 -0.96  0.52</span>
+<span class="go">&#39;5&#39;     |  0.30  0.80 -0.56  0.04  0.00 -0.18 -0.84</span>
+<span class="go">&#39;6&#39;     |  0.38 -0.54  0.84  0.66 -0.22  0.00  0.04</span>
+<span class="go">&#39;7&#39;     |  0.44  0.02 -1.00  0.76 -0.52 -0.22  0.00</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cddg</span> <span class="o">=</span> <span class="n">CoDualDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cddg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+<span class="go">* ---- Relation Table -----</span>
+<span class="go">-r(ySx) |  &#39;1&#39;    &#39;2&#39;   &#39;3&#39;   &#39;4&#39;   &#39;5&#39;   &#39;6&#39;   &#39;7&#39;</span>
+<span class="go">--------|------------------------------------------------------------</span>
+<span class="go">&#39;1&#39;     |  0.00  0.22  0.42 -0.44 -0.32  0.84 -0.88</span>
+<span class="go">&#39;2&#39;     |  0.48  0.00 -0.08  0.40  0.48  0.00 -0.72</span>
+<span class="go">&#39;3&#39;     | -0.70  0.38  0.00  0.62  0.46  0.40 -0.82</span>
+<span class="go">&#39;4&#39;     | -0.86 -0.50 -0.70  0.00 -0.64  0.96 -0.52</span>
+<span class="go">&#39;5&#39;     | -0.30 -0.80  0.56 -0.04  0.00  0.18  0.84</span>
+<span class="go">&#39;6&#39;     | -0.38  0.54 -0.84 -0.66  0.22  0.00 -0.04</span>
+<span class="go">&#39;7&#39;     | -0.44 -0.02  1.00 -0.76  0.52  0.22  0.00</span>
+</pre></div>
+</div>
+</dd>
+<dt>Computing the dual, respectively the converse, may also be done with preprefixing the <tt class="docutils literal"><span class="pre">__neg__</span> <span class="pre">(-)</span></tt> or the <tt class="docutils literal"><span class="pre">__invert__</span></tt> (~) operator. The codual of a Digraph object may thus as well be computed with a <strong>composition</strong> (in either order) of both operations:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ddg</span> <span class="o">=</span> <span class="o">-</span><span class="n">dg</span>   <span class="c"># dual of dg</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span> <span class="o">=</span> <span class="o">~</span><span class="n">dg</span>   <span class="c"># converse of dg</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cddg</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="o">~</span><span class="n">dg</span><span class="p">)</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">dg</span><span class="p">)</span>  <span class="c"># codual of dg</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cddg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+<span class="go">* ---- Relation Table -----</span>
+<span class="go">-r(ySx) |  &#39;1&#39;    &#39;2&#39;   &#39;3&#39;   &#39;4&#39;   &#39;5&#39;   &#39;6&#39;   &#39;7&#39;</span>
+<span class="go">--------|------------------------------------------------------------</span>
+<span class="go">&#39;1&#39;     |  0.00  0.22  0.42 -0.44 -0.32  0.84 -0.88</span>
+<span class="go">&#39;2&#39;     |  0.48  0.00 -0.08  0.40  0.48  0.00 -0.72</span>
+<span class="go">&#39;3&#39;     | -0.70  0.38  0.00  0.62  0.46  0.40 -0.82</span>
+<span class="go">&#39;4&#39;     | -0.86 -0.50 -0.70  0.00 -0.64  0.96 -0.52</span>
+<span class="go">&#39;5&#39;     | -0.30 -0.80  0.56 -0.04  0.00  0.18  0.84</span>
+<span class="go">&#39;6&#39;     | -0.38  0.54 -0.84 -0.66  0.22  0.00 -0.04</span>
+<span class="go">&#39;7&#39;     | -0.44 -0.02  1.00 -0.76  0.52  0.22  0.00</span>
+</pre></div>
+</div>
+</dd>
+<dt>Symmetric and transtive closure in site constructors are also available, Note that it is a good idea to previously make a backup version of dg, before going ahead with these in-site operations that drectly irreversibly modify the original dg object:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">closeSymmetric</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;strongComponents&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="_images/strongComponents.png"><img alt="_images/strongComponents.png" class="align-center" src="_images/strongComponents.png" style="width: 200px;" /></a>
+<dl class="docutils">
+<dt>As the original digraph <strong>dg</strong> was connected, the above symmetric and transitive closures will necessarily produce a single strong commponent, ie a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and contsruct the so reduced digraph. Here we get a single node gathering all the original set of nodes :</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span> <span class="o">=</span> <span class="n">StrongComponentsCollapsedDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
+<span class="go">*----- show detail -----*</span>
+<span class="go">Digraph          : tutRandValDigraph_Scc</span>
+<span class="go">*---- Actions ----*</span>
+<span class="go">[&#39;_7_1_2_6_5_3_4_&#39;]</span>
+<span class="go">* ---- Relation Table -----</span>
+<span class="go">  S     |  &#39;Scc_1&#39;</span>
+<span class="go"> -------|---------</span>
+<span class="go">&#39;Scc_1&#39; |  0.00</span>
+<span class="go">short        content</span>
+<span class="go">Scc_1        _7_1_2_6_5_3_4_</span>
+<span class="go">Neighborhoods:</span>
+<span class="go">  Gamma     :</span>
+<span class="go">&#39;frozenset({&#39;7&#39;, &#39;1&#39;, &#39;2&#39;, &#39;6&#39;, &#39;5&#39;, &#39;3&#39;, &#39;4&#39;})&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="go">  Not Gamma :</span>
+<span class="go">&#39;frozenset({&#39;7&#39;, &#39;1&#39;, &#39;2&#39;, &#39;6&#39;, &#39;5&#39;, &#39;3&#39;, &#39;4&#39;})&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
 <div class="section" id="working-with-the-graphs-module">
 <span id="graphs-tutorial-label"></span><h2>Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module<a class="headerlink" href="#working-with-the-graphs-module" title="Permalink to this headline">¶</a></h2>
 <p>In this Digraph3 module, the main <tt class="code docutils literal"><span class="pre">Graph</span></tt> class provides a generic <strong>simple graph model</strong>, without loops and multiple links. A given object of this root class consists in:</p>
@@ -284,7 +478,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 <dl class="docutils">
-<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id4" id="id1">[1]</a> method as follows:</dt>
+<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id5" id="id1">[1]</a> method as follows:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
@@ -443,7 +637,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 <div class="section" id="computing-the-winner-of-an-election">
 <span id="linearvoting-label"></span><h2>Computing the winner of an election<a class="headerlink" href="#computing-the-winner-of-an-election" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="techDoc.html#votingdigraphs-label"><em>votingDigraphs module</em></a> provides resources for handling election results, like the <tt class="docutils literal"><span class="pre">LinearVotingProfile</span></tt> class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored as two Python dicttionaries, one for the candidates and another one for the linear ballots</p>
+<p>The <a class="reference internal" href="techDoc.html#votingdigraphs-label"><em>votingDigraphs module</em></a> provides resources for handling election results <a class="reference internal" href="#adt-l2" id="id3">[ADT-L2]</a>, like the <tt class="docutils literal"><span class="pre">LinearVotingProfile</span></tt> class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored as two Python dicttionaries, one for the candidates and another one for the linear ballots:</p>
 <div class="highlight-python"><div class="highlight"><pre>candidates = {&#39;a&#39;: ,&#39;b&#39;:  ,&#39;c&#39;, ..., ...}
 voters = {&#39;1&#39;:{&#39;weight&#39;:1.0},&#39;2&#39;:{&#39;weight&#39;:1.0}, ...}
 ## each voter specifies a linearly ranked list of candidates
@@ -456,7 +650,7 @@ linearBallot = {
 </pre></div>
 </div>
 <dl class="docutils">
-<dt>The module provides a class for generating random instances of the the <tt class="docutils literal"><span class="pre">LinearVotingProfile</span></tt> class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result:</dt>
+<dt>The module provides a class for generating random instances of the <tt class="docutils literal"><span class="pre">LinearVotingProfile</span></tt> class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">candidates</span>
@@ -472,7 +666,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>Notice that the voters are all equi-significant in this example. Their linear ballots can be viewd with the <tt class="docutils literal"><span class="pre">showLinearBallots</span></tt> method:</dt>
+<dt>Notice that in this example, all voters are considered to be equi-significant. Their linear ballots can be viewd with the <tt class="docutils literal"><span class="pre">showLinearBallots</span></tt> method:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">showLinearBallots</span><span class="p">()</span>
 <span class="go">voters(weight)       candidates rankings</span>
 <span class="go">v4(1.0):     [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;]</span>
@@ -500,7 +694,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>As we observe no absolute majority (3/5) for one of the candidate, we may compute, for instance the <strong>instant runoff</strong> winner instead:</dt>
+<dt>As we observe no absolute majority (3/5) for any candidate, we may compute, for instance the <strong>instant runoff</strong> winner instead:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">computeInstantRunoffWinner</span><span class="p">()</span>
 <span class="go">[&#39;a1&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
@@ -518,7 +712,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>In our randomly generated election results, we are lucky. The instant runoff winner and the Borda winner determine, both, candidate <em>a</em>. However, we could also follow the Marquis de Condorcet&#8217;s advice, and compute the <strong>majority margins</strong> obtained by voting for each individual pair of candidates. For instance, candidate <em>a</em> is ranked four times before and once behind candidate <em>b</em>. Hence the majority margin <em>M(a,b)</em> is 4 - 1 = +3. These majority margins define on the set of candidates what we call the <strong>Condorcet digraph</strong>, a specialization of the <tt class="docutils literal"><span class="pre">Digraph</span></tt> class for handing such pairwise majority margins:</dt>
+<dt>In our randomly generated election results, we are lucky. The instant runoff winner and the Borda winner determine, both, candidate <em>a1</em>. However, we could also follow the Marquis de Condorcet&#8217;s advice, and compute the <strong>majority margins</strong> obtained by voting for each individual pair of candidates. For instance, candidate <em>a1</em> is ranked four times before and once behind candidate <em>a2</em>. Hence the majority margin <em>M(a1,a2)</em> is 4 - 1 = +3. These majority margins define on the set of candidates what we call the <strong>Condorcet digraph</strong>, a specialization of the <tt class="docutils literal"><span class="pre">Digraph</span></tt> class for handing such pairwise majority margins:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span> <span class="o">=</span> <span class="n">CondorcetDigraph</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
 <span class="go">*----- show detail -------------*</span>
@@ -539,13 +733,13 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>A candidate <em>x</em>, showing a positive majority margin <em>M(x,y)</em>, is beating candidate <em>y</em>  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in his row in the Condorcet digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommended to declare this candidate (she is always unique, why?) the winner of the election. Here we are lucky, it is again candidate &#8216;a1&#8217; who is the <strong>Condorcet winner</strong>:</dt>
+<dt>A candidate <em>x</em>, showing a positive majority margin <em>M(x,y)</em>, is beating candidate <em>y</em>  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in his row in the Condorcet digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommended to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate <em>a1</em> who is hence the <strong>Condorcet winner</strong>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">computeCondorcetWinner</span><span class="p">()</span>
 <span class="go">[&#39;a1&#39;]</span>
 </pre></div>
 </div>
 </dd>
-<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method <a class="footnote-reference" href="#id4" id="id3">[1]</a>, for visualizing an election result:</dt>
+<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method <a class="footnote-reference" href="#id5" id="id4">[1]</a>, for visualizing an election result:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorialLinearBallots&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
 <span class="go">Exporting to tutorialLinearBallots.dot</span>
@@ -576,13 +770,22 @@ linearBallot = {
 <tr><td class="label"><a class="fn-backref" href="#id2">[FMCAA]</a></td><td>Olle Häggström. Finite Markov Chians and Algorithmic Applications. Cambridge University Press 2002.</td></tr>
 </tbody>
 </table>
+<table class="docutils citation" frame="void" id="adt-l2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[ADT-L2]</a></td><td><ol class="first last upperalpha simple" start="18">
+<li>Bisdorff, <em>Who wins the election</em>. MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( <a class="reference external" href="_static/adtVoting-2x2.pdf">downloadable here</a> )</li>
+</ol>
+</td></tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="footnotes">
 <h2>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h2>
-<table class="docutils footnote" frame="void" id="id4" rules="none">
+<table class="docutils footnote" frame="void" id="id5" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id3">2</a>)</em> The <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method is depending on drawing tools from <a class="reference external" href="http://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></tt> to install them. There are ready <tt class="docutils literal"><span class="pre">dmg</span></tt> installers for Mac OS.</td></tr>
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id4">2</a>)</em> The <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method is depending on drawing tools from <a class="reference external" href="http://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></tt> to install them. There are ready <tt class="docutils literal"><span class="pre">dmg</span></tt> installers for Mac OS.</td></tr>
 </tbody>
 </table>
 </div>
@@ -600,6 +803,7 @@ linearBallot = {
 <li><a class="reference internal" href="#content">Content</a></li>
 <li><a class="reference internal" href="#downloading-and-using-the-digraph3-modules">Downloading and using the Digraph3 modules</a></li>
 <li><a class="reference internal" href="#working-with-the-digraphs-module">Working with the <tt class="code docutils literal"><span class="pre">digraphs</span></tt> module</a></li>
+<li><a class="reference internal" href="#tools-for-manipulating-digraph-objects">Tools for manipulating Digraph objects</a></li>
 <li><a class="reference internal" href="#working-with-the-graphs-module">Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module</a></li>
 <li><a class="reference internal" href="#computing-the-winner-of-an-election">Computing the winner of an election</a></li>
 <li><a class="reference internal" href="#documents-indices-and-tables">Documents, indices and tables</a></li>
