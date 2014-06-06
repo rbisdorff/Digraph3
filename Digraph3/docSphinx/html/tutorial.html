@@ -218,14 +218,14 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <div class="section" id="tools-for-manipulating-digraph-objects">
 <span id="digraph-tools-label"></span><h2>Tools for manipulating Digraph objects<a class="headerlink" href="#tools-for-manipulating-digraph-objects" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>We are starting this tutorial with generating a randomly [-1;1]-valued (<em>Normalized=True</em>) digraph of order 7 and denoted <strong>dg</strong> modelling a binary relation (<em>xSy</em>) defined on the set of nodes of the digraph. For this purpose, the <tt class="docutils literal"><span class="pre">digraphs</span></tt> module provides conveniently a specific <tt class="docutils literal"><span class="pre">RandomValuationDigraph</span></tt> constructor:</dt>
+<dt>We are starting this tutorial with generating a randomly [-1;1]-valued (<em>Normalized=True</em>) digraph of order 7, denoted <em>dg</em> and modelling a binary relation (<em>xSy</em>) defined on the set of nodes of <em>dg</em>. For this purpose, the <tt class="docutils literal"><span class="pre">digraphs</span></tt> module provides conveniently a specific <tt class="docutils literal"><span class="pre">RandomValuationDigraph</span></tt> constructor:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
-<dt>With the <tt class="docutils literal"><span class="pre">save()</span></tt> method we may keep a backup version for future use of the random digraph stored in a file called <em>tutRandValDigraph.py</em>. The <tt class="docutils literal"><span class="pre">Digraph</span></tt> class now provides some generic methods for exploring a given digraph object, like the <tt class="docutils literal"><span class="pre">showShort()</span></tt>, <tt class="docutils literal"><span class="pre">showAll()</span></tt>, <tt class="docutils literal"><span class="pre">showRelationTable()</span></tt> and the <tt class="docutils literal"><span class="pre">showNeighborhoods()</span></tt> methods:</dt>
+<dt>With the <tt class="docutils literal"><span class="pre">save()</span></tt> method we may keep a backup version for future use of <em>dg</em> which will be stored in a file called <em>tutRandValDigraph.py</em> in the current working directory. The <tt class="docutils literal"><span class="pre">Digraph</span></tt> class now provides some generic methods for exploring a given <tt class="docutils literal"><span class="pre">Digraph</span></tt> object, like the <tt class="docutils literal"><span class="pre">showShort()</span></tt>, <tt class="docutils literal"><span class="pre">showAll()</span></tt>, <tt class="docutils literal"><span class="pre">showRelationTable()</span></tt> and the <tt class="docutils literal"><span class="pre">showNeighborhoods()</span></tt> methods:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*----- show summary -------------*</span>
 <span class="go">Digraph          : randomValuationDigraph</span>
@@ -271,10 +271,10 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (characteristic value put to median value 0.00) in this case.</p>
+<p class="last">Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value <em>r(xSx)</em> for all action <em>x</em> is put to the median, i.e. indeterminate, value) in this case.</p>
 </div>
 <dl class="docutils">
-<dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object dg by looking at a graphviz drawing:</dt>
+<dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id7" id="id2">[1]</a> drawing:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
 <span class="go">Exporting to tutRandValDigraph.dot</span>
@@ -284,9 +284,8 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/tutRandValDigraph.png"><img alt="_images/tutRandValDigraph.png" class="align-center" src="_images/tutRandValDigraph.png" style="width: 200px;" /></a>
-<p>Notice the indeterminated relational situation (6*S*2) observed between node &#8216;6&#8217; and node &#8216;2&#8217;. The corresponding characteristic value, denoted r(6*S*2), is 0.00 and marked in grey with an openheaded arrow.</p>
 <dl class="docutils">
-<dt>We may now extract both the symmetric as well as the assymetric part of digraph dg:</dt>
+<dt>Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the indeterminated relational situation (<em>r(6S2) = 0.00</em>) observed between nodes &#8216;6&#8217; and &#8216;2&#8217;. The corresponding link is marked in grey with an open arrowhead in the drawing. We may now extract both this symmetric as well as this asymetric part of digraph <em>dg</em> with the help of two corresponding constructors:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">,</span> <span class="n">SymmetricPartialDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">asymDg</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">asymDg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
@@ -297,12 +296,12 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/asymSymParts.png"><img alt="_images/asymSymParts.png" class="align-center" src="_images/asymSymParts.png" style="width: 400px;" /></a>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
 <p class="last">Be aware that the partial objects <em>asymDg</em> and <em>symDg</em> put to the indeterminate characteristic value all not-asymmetric, respectively not-symmetric links between nodes.</p>
 </div>
 <dl class="docutils">
-<dt>Observe that we may recover from both partial objects the original digraph dg with a <strong>bipolar fusion</strong> operator, also called <strong>epistemic disjunction</strong>, available via the <tt class="docutils literal"><span class="pre">FusionDigraph</span></tt> constructor:</dt>
+<dt>We may recover object <em>dg</em> from both partial objects <em>asymDg</em> and <em>symDg</em> with a <strong>bipolar fusion</strong> constructor, also called <strong>epistemic disjunction</strong>, available via the <tt class="docutils literal"><span class="pre">FusionDigraph</span></tt> class:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">FusionDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fusDg</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">asymDg</span><span class="p">,</span><span class="n">symDg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fusDg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
@@ -359,7 +358,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 </dd>
-<dt>Computing the dual, respectively the converse, may also be done with preprefixing the <tt class="docutils literal"><span class="pre">__neg__</span> <span class="pre">(-)</span></tt> or the <tt class="docutils literal"><span class="pre">__invert__</span></tt> (~) operator. The codual of a Digraph object may thus as well be computed with a <strong>composition</strong> (in either order) of both operations:</dt>
+<dt>Computing the dual, respectively the converse, may also be done with prefixing the <tt class="docutils literal"><span class="pre">__neg__</span> <span class="pre">(-)</span></tt> or the <tt class="docutils literal"><span class="pre">__invert__</span></tt> (~) operator. The codual of a Digraph object may, hence, as well be computed with a <strong>composition</strong> (in either order) of both operations:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ddg</span> <span class="o">=</span> <span class="o">-</span><span class="n">dg</span>   <span class="c"># dual of dg</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span> <span class="o">=</span> <span class="o">~</span><span class="n">dg</span>   <span class="c"># converse of dg</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cddg</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="o">~</span><span class="n">dg</span><span class="p">)</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">dg</span><span class="p">)</span>  <span class="c"># codual of dg</span>
@@ -377,7 +376,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 </dd>
-<dt>Symmetric and transtive closure in site constructors are also available, Note that it is a good idea to previously make a backup version of dg, before going ahead with these in-site operations that irreversibly modify the original dg object:</dt>
+<dt>Symmetric and transtive closure in site constructors are also available, Note that it is a good idea,before going ahead with these in-site operations that irreversibly modify the original dg object, to previously make a backup version of <em>dg</em> :</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">closeSymmetric</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">()</span>
@@ -388,7 +387,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 <a class="reference internal image-reference" href="_images/strongComponents.png"><img alt="_images/strongComponents.png" class="align-center" src="_images/strongComponents.png" style="width: 200px;" /></a>
 <dl class="docutils">
-<dt>As the original digraph <strong>dg</strong> was connected, the above symmetric and transitive closures will necessarily produce a single strong commponent, ie a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Here we get a single node gathering all the original set of nodes :</dt>
+<dt>As the original digraph <em>dg</em> was connected (see above the result of the <tt class="docutils literal"><span class="pre">dg.showShort()</span></tt> command), both to the symmetric and transitive closures together, will necessarily produce a single strong commponent, i.e. a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Using <tt class="docutils literal"><span class="pre">StrongComponentsCollapsedDigraph</span></tt> constructor here will render a single hyper-node gathering all the original nodes :</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">StrongComponentsCollapsedDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span> <span class="o">=</span> <span class="n">StrongComponentsCollapsedDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
@@ -483,7 +482,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 <dl class="docutils">
-<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id5" id="id1">[1]</a> method as follows:</dt>
+<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id7" id="id3">[1]</a> method as follows:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
@@ -637,12 +636,12 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 </dd>
 </dl>
-<p>For more technical information and more code examples, look into the technical documentation of the <a class="reference internal" href="techDoc.html#graphs-label"><em>graphs module</em></a>. Those interested in algorithmic applications of Markov Chains may consult O. Häggström&#8217;s book: <a class="reference internal" href="#fmcaa" id="id2">[FMCAA]</a>.</p>
+<p>For more technical information and more code examples, look into the technical documentation of the <a class="reference internal" href="techDoc.html#graphs-label"><em>graphs module</em></a>. Those interested in algorithmic applications of Markov Chains may consult O. Häggström&#8217;s book: <a class="reference internal" href="#fmcaa" id="id4">[FMCAA]</a>.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
 <div class="section" id="computing-the-winner-of-an-election">
 <span id="linearvoting-label"></span><h2>Computing the winner of an election<a class="headerlink" href="#computing-the-winner-of-an-election" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="techDoc.html#votingdigraphs-label"><em>votingDigraphs module</em></a> provides resources for handling election results <a class="reference internal" href="#adt-l2" id="id3">[ADT-L2]</a>, like the <tt class="docutils literal"><span class="pre">LinearVotingProfile</span></tt> class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored as two Python dicttionaries, one for the candidates and another one for the linear ballots:</p>
+<p>The <a class="reference internal" href="techDoc.html#votingdigraphs-label"><em>votingDigraphs module</em></a> provides resources for handling election results <a class="reference internal" href="#adt-l2" id="id5">[ADT-L2]</a>, like the <tt class="docutils literal"><span class="pre">LinearVotingProfile</span></tt> class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored as two Python dicttionaries, one for the candidates and another one for the linear ballots:</p>
 <div class="highlight-python"><div class="highlight"><pre>candidates = {&#39;a&#39;: ,&#39;b&#39;:  ,&#39;c&#39;, ..., ...}
 voters = {&#39;1&#39;:{&#39;weight&#39;:1.0},&#39;2&#39;:{&#39;weight&#39;:1.0}, ...}
 ## each voter specifies a linearly ranked list of candidates
@@ -744,7 +743,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method <a class="footnote-reference" href="#id5" id="id4">[1]</a>, for visualizing an election result:</dt>
+<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method <a class="footnote-reference" href="#id7" id="id6">[1]</a>, for visualizing an election result:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorialLinearBallots&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
 <span class="go">Exporting to tutorialLinearBallots.dot</span>
@@ -772,13 +771,13 @@ linearBallot = {
 <table class="docutils citation" frame="void" id="fmcaa" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[FMCAA]</a></td><td>Olle Häggström. Finite Markov Chians and Algorithmic Applications. Cambridge University Press 2002.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id4">[FMCAA]</a></td><td>Olle Häggström. Finite Markov Chians and Algorithmic Applications. Cambridge University Press 2002.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="adt-l2" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[ADT-L2]</a></td><td><ol class="first last upperalpha simple" start="18">
+<tr><td class="label"><a class="fn-backref" href="#id5">[ADT-L2]</a></td><td><ol class="first last upperalpha simple" start="18">
 <li>Bisdorff, <em>Who wins the election</em>. MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( <a class="reference external" href="_static/adtVoting-2x2.pdf">downloadable here</a> )</li>
 </ol>
 </td></tr>
@@ -787,10 +786,10 @@ linearBallot = {
 </div>
 <div class="section" id="footnotes">
 <h2>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h2>
-<table class="docutils footnote" frame="void" id="id5" rules="none">
+<table class="docutils footnote" frame="void" id="id7" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id4">2</a>)</em> The <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method is depending on drawing tools from <a class="reference external" href="http://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></tt> to install them. There are ready <tt class="docutils literal"><span class="pre">dmg</span></tt> installers for Mac OS.</td></tr>
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>, <a class="fn-backref" href="#id6">3</a>)</em> The <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method is depending on drawing tools from <a class="reference external" href="http://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></tt> to install them. There are ready <tt class="docutils literal"><span class="pre">dmg</span></tt> installers for Mac OS.</td></tr>
 </tbody>
 </table>
 </div>
