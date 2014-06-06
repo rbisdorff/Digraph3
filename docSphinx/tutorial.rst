@@ -158,7 +158,7 @@ Back to :ref:`Tutorial-label`
 Tools for manipulating Digraph objects
 ......................................
 
-We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7, denoted *dg* and modelling a binary relation (*xSy*) defined on the set of nodes of *dg*. For this purpose, the ``digraphs`` module provides conveniently a specific ``RandomValuationDigraph`` constructor:
+We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7, denoted *dg* and modelling a binary relation (*x S y*) defined on the set of nodes of *dg*. For this purpose, the ``digraphs`` module provides conveniently a specific ``RandomValuationDigraph`` constructor:
     >>> from digraphs import RandomValuationDigraph
     >>> dg = RandomValuationDigraph(order=7,Normalized=True)
     >>> dg.save('tutRandValDigraph')
@@ -206,7 +206,7 @@ With the ``save()`` method we may keep a backup version for future use of *dg* w
     
 .. warning::
     
-    Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value *r(xSx)* for all action *x* is put to the median, i.e. indeterminate, value) in this case.
+    Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value *r(x S x)* for all action *x* is put to the median, i.e. indeterminate, value) in this case.
     
 We may have an even better insight into the ``Digraph`` object *dg* by looking at a `graphviz <http://graphviz.org/>`_ [1]_ drawing:
     >>> dg.exportGraphViz('tutRandValDigraph')
@@ -215,10 +215,10 @@ We may have an even better insight into the ``Digraph`` object *dg* by looking a
     dot -Grankdir=BT -Tpng tutRandValDigraph.dot -o tutRandValDigraph.png
 
 .. image:: tutRandValDigraph.png
-   :width: 200 px
+   :width: 300 px
    :align: center
 
-Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the indeterminated relational situation (*r(6S2) = 0.00*) observed between nodes '6' and '2'. The corresponding link is marked in grey with an open arrowhead in the drawing. We may now extract both this symmetric as well as this asymetric part of digraph *dg* with the help of two corresponding constructors:
+Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the indeterminated relational situation (*r(6 S 2) = 0.00*) observed between nodes '6' and '2'. The corresponding link is marked in grey with an open arrowhead in the drawing. We may now extract both this symmetric as well as this asymetric part of digraph *dg* with the help of two corresponding constructors:
     >>> from digraphs import AsymmetricPartialDigraph, SymmetricPartialDigraph
     >>> asymDg = AsymmetricPartialDigraph(dg)
     >>> asymDg.exportGraphViz()

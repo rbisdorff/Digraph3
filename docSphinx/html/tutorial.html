@@ -218,7 +218,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <div class="section" id="tools-for-manipulating-digraph-objects">
 <span id="digraph-tools-label"></span><h2>Tools for manipulating Digraph objects<a class="headerlink" href="#tools-for-manipulating-digraph-objects" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>We are starting this tutorial with generating a randomly [-1;1]-valued (<em>Normalized=True</em>) digraph of order 7, denoted <em>dg</em> and modelling a binary relation (<em>xSy</em>) defined on the set of nodes of <em>dg</em>. For this purpose, the <tt class="docutils literal"><span class="pre">digraphs</span></tt> module provides conveniently a specific <tt class="docutils literal"><span class="pre">RandomValuationDigraph</span></tt> constructor:</dt>
+<dt>We are starting this tutorial with generating a randomly [-1;1]-valued (<em>Normalized=True</em>) digraph of order 7, denoted <em>dg</em> and modelling a binary relation (<em>x S y</em>) defined on the set of nodes of <em>dg</em>. For this purpose, the <tt class="docutils literal"><span class="pre">digraphs</span></tt> module provides conveniently a specific <tt class="docutils literal"><span class="pre">RandomValuationDigraph</span></tt> constructor:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
@@ -271,7 +271,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value <em>r(xSx)</em> for all action <em>x</em> is put to the median, i.e. indeterminate, value) in this case.</p>
+<p class="last">Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value <em>r(x S x)</em> for all action <em>x</em> is put to the median, i.e. indeterminate, value) in this case.</p>
 </div>
 <dl class="docutils">
 <dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id7" id="id2">[1]</a> drawing:</dt>
@@ -283,9 +283,9 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/tutRandValDigraph.png"><img alt="_images/tutRandValDigraph.png" class="align-center" src="_images/tutRandValDigraph.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="_images/tutRandValDigraph.png"><img alt="_images/tutRandValDigraph.png" class="align-center" src="_images/tutRandValDigraph.png" style="width: 300px;" /></a>
 <dl class="docutils">
-<dt>Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the indeterminated relational situation (<em>r(6S2) = 0.00</em>) observed between nodes &#8216;6&#8217; and &#8216;2&#8217;. The corresponding link is marked in grey with an open arrowhead in the drawing. We may now extract both this symmetric as well as this asymetric part of digraph <em>dg</em> with the help of two corresponding constructors:</dt>
+<dt>Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the indeterminated relational situation (<em>r(6 S 2) = 0.00</em>) observed between nodes &#8216;6&#8217; and &#8216;2&#8217;. The corresponding link is marked in grey with an open arrowhead in the drawing. We may now extract both this symmetric as well as this asymetric part of digraph <em>dg</em> with the help of two corresponding constructors:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">,</span> <span class="n">SymmetricPartialDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">asymDg</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">asymDg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
