@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial of the Digraph3 resources! &mdash; Digraph 1.625 documentation</title>
+    <title>Tutorial of the Digraph3 resources &mdash; Digraph3 3.4-769 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1.625',
+        VERSION:     '3.4-769',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,9 +23,9 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Digraph 1.625 documentation" href="index.html" />
-    <link rel="next" title="Technical Documentation of the Digraph3 resources" href="techDoc.html" />
-    <link rel="prev" title="Documentation of the Digraph3 resources!" href="index.html" /> 
+    <link rel="top" title="Digraph3 3.4-769 documentation" href="index.html" />
+    <link rel="next" title="Technical Reference of the Digraph3 modules" href="techDoc.html" />
+    <link rel="prev" title="Documentation of the Digraph3 resources" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -38,12 +38,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="techDoc.html" title="Technical Documentation of the Digraph3 resources"
+          <a href="techDoc.html" title="Technical Reference of the Digraph3 modules"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Documentation of the Digraph3 resources!"
+          <a href="index.html" title="Documentation of the Digraph3 resources"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Digraph 1.625 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Digraph3 3.4-769 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -53,7 +53,7 @@
           <div class="body">
             
   <div class="section" id="tutorial-of-the-digraph3-resources">
-<h1>Tutorial of the Digraph3 resources!<a class="headerlink" href="#tutorial-of-the-digraph3-resources" title="Permalink to this headline">¶</a></h1>
+<h1>Tutorial of the Digraph3 resources<a class="headerlink" href="#tutorial-of-the-digraph3-resources" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -61,7 +61,7 @@
 <tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body"><p class="first">Raymond Bisdorff, University of Luxembourg FSTC/CSC</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Version:</th><td class="field-body"><p class="first">$Revision: Python 3.3+$</p>
+<tr class="field-even field"><th class="field-name">Version:</th><td class="field-body"><p class="first">Revision: Python 3.4</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Copyright:</th><td class="field-body"><ol class="first last upperalpha simple" start="18">
@@ -740,7 +740,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>A candidate <em>x</em>, showing a positive majority margin <em>M(x,y)</em>, is beating candidate <em>y</em>  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in his row in the Condorcet digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommended to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate <em>a1</em> who is hence the <strong>Condorcet winner</strong>:</dt>
+<dt>A candidate <em>x</em>, showing a positive majority margin <em>M(x,y)</em>, is beating candidate <em>y</em>  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the Condorcet digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommended to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate <em>a1</em> who is hence the <strong>Condorcet winner</strong>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">computeCondorcetWinner</span><span class="p">()</span>
 <span class="go">[&#39;a1&#39;]</span>
 </pre></div>
@@ -774,16 +774,13 @@ linearBallot = {
 <table class="docutils citation" frame="void" id="fmcaa" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[FMCAA]</a></td><td>Olle Häggström. <em>Finite Markov Chians and Algorithmic Applications</em>. Cambridge University Press 2002.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id4">[FMCAA]</a></td><td>Häggström, Olle <em>Finite Markov Chians and Algorithmic Applications</em>. Cambridge University Press 2002.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="adt-l2" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id5">[ADT-L2]</a></td><td><ol class="first last upperalpha simple" start="18">
-<li>Bisdorff, <em>Who wins the election</em>. MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( <a class="reference external" href="_static/adtVoting-2x2.pdf">downloadable here</a> )</li>
-</ol>
-</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id5">[ADT-L2]</a></td><td>Bisdorff, Raymond <em>Who wins the election</em>. MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( <a class="reference external" href="_static/adtVoting-2x2.pdf">downloadable here</a> )</td></tr>
 </tbody>
 </table>
 </div>
@@ -806,7 +803,7 @@ linearBallot = {
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Tutorial of the Digraph3 resources!</a><ul>
+<li><a class="reference internal" href="#">Tutorial of the Digraph3 resources</a><ul>
 <li><a class="reference internal" href="#content">Content</a></li>
 <li><a class="reference internal" href="#downloading-and-using-the-digraph3-modules">Downloading and using the Digraph3 modules</a></li>
 <li><a class="reference internal" href="#working-with-the-digraphs-module">Working with the <tt class="code docutils literal"><span class="pre">digraphs</span></tt> module</a></li>
@@ -822,10 +819,10 @@ linearBallot = {
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
-                        title="previous chapter">Documentation of the Digraph3 resources!</a></p>
+                        title="previous chapter">Documentation of the Digraph3 resources</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="techDoc.html"
-                        title="next chapter">Technical Documentation of the Digraph3 resources</a></p>
+                        title="next chapter">Technical Reference of the Digraph3 modules</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/tutorial.txt"
@@ -858,16 +855,16 @@ linearBallot = {
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="techDoc.html" title="Technical Documentation of the Digraph3 resources"
+          <a href="techDoc.html" title="Technical Reference of the Digraph3 modules"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Documentation of the Digraph3 resources!"
+          <a href="index.html" title="Documentation of the Digraph3 resources"
              >previous</a> |</li>
-        <li><a href="index.html">Digraph 1.625 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Digraph3 3.4-769 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2012, Raymond Bisdorff.
+        &copy; Copyright 2012-2014, Raymond Bisdorff.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>

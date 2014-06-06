@@ -1,7 +1,7 @@
-Tutorial of the Digraph3 resources!
-===================================
+Tutorial of the Digraph3 resources
+==================================
 :Author: Raymond Bisdorff, University of Luxembourg FSTC/CSC
-:Version: $Revision: Python 3.3+$
+:Version: Revision: Python 3.4
 :Copyright: R. Bisdorff 2014
 
 .. _Tutorial-label:
@@ -640,7 +640,7 @@ In our randomly generated election results, we are lucky. The instant runoff win
        'a2' |  -3    -	 -1	 
        'a3' |  -1    1	  -	 
 
-A candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in his row in the Condorcet digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommended to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner**:
+A candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the Condorcet digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommended to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner**:
     >>> cdg.computeCondorcetWinner()
     ['a1']  
     
@@ -732,9 +732,9 @@ Documents, indices and tables
 References
 ..........
 
-.. [FMCAA] Olle Häggström. *Finite Markov Chians and Algorithmic Applications*. Cambridge University Press 2002.
+.. [FMCAA] Häggström, Olle *Finite Markov Chians and Algorithmic Applications*. Cambridge University Press 2002.
 
-.. [ADT-L2] R. Bisdorff, *Who wins the election*. MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( `downloadable here <_static/adtVoting-2x2.pdf>`_ )
+.. [ADT-L2] Bisdorff, Raymond *Who wins the election*. MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( `downloadable here <_static/adtVoting-2x2.pdf>`_ )
 
 Footnotes
 .........

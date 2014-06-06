@@ -2424,6 +2424,20 @@ class Digraph(object):
         for x in notGamma:
             print('\'%s\': in => %s, out => %s' % (x,notGamma[x][1],notGamma[x][0]))
 
+    def showNeighborhoods(self):
+        """
+        Lists the gamma and the notGamma function of self.
+        """
+        gamma = self.gammaSets()
+        notGamma = self.notGammaSets()
+        print('Neighborhoods:')
+        print('  Gamma     :')
+        for x in gamma:
+            print('\'%s\': in => %s, out => %s' % (x,gamma[x][1],gamma[x][0]))
+        print('  Not Gamma :')
+        for x in notGamma:
+            print('\'%s\': in => %s, out => %s' % (x,notGamma[x][1],notGamma[x][0]))        
+
     def showRelation(self):
         """
         prints the relation valuation in ##.## format.
@@ -7250,18 +7264,19 @@ class Digraph(object):
             print('terms', terms)
             print('termsPlus',termsPlus)
             print('termsMinus', termsMinus)
-            print('termsNull', termsNuls)
+            print('termsNuls', termsNuls)
         np = len(termsPlus)
         nm = len(termsMinus)
-        nn = len(termsNuls)
-        if nn > 0:
-            return Med
-        elif np > 0 and nm == 0:
-            return min(termsPlus)
-        elif nm > 0 and np == 0:
-            return max(termsMinus)
+        if np > 0:
+            if nm > 0:
+                return Med
+            else:
+                return min(termsPlus)
         else:
-            return Med
+            if nm > 0:
+                return max(termsMinus)
+            else:
+                return Med
 
     def computeKohlerRanking(self,Debug=False):
         """
@@ -7792,7 +7807,7 @@ class FusionDigraph(Digraph):
         * operator = "o-min" | "o-max" (epistemic conjunctive or dijunctive fusion)
     """
 
-    def __init__(self,dg1,dg2,operator="o-max"):
+    def __init__(self,dg1,dg2,operator="o-min"):
         from copy import deepcopy
         self.name = 'fusion-'+dg1.name+'-'+dg2.name
 #        try:
