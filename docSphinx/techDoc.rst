@@ -1,7 +1,7 @@
-Technical Documentation of the Digraph3 resources
-=================================================
+Technical Reference of the Digraph3 modules
+===========================================
 :Author: Raymond Bisdorff, University of Luxembourg FSTC/CSC
-:Version: $Revision: Python 3.3$
+:Version: Revision: Python 3.4
 :Copyright: R. Bisdorff 2013-2014
 
 .. _Technical-label:
@@ -21,28 +21,28 @@ http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3-xxx.ta
 
 Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://charles-sanders-peirce.uni.lu/bisdorff/>, University of Luxembourg.
 
+To be fully functional, the Digraph3 resources mainly need the `graphviz <http://graphviz.org>`_ tools and the `R statistics resources <http://www.r-project.org>`_ to be installed. When exploring digraph isomorphisms, the `nauty <http://www.cs.sunysb.edu/~algorith/implement/nauty/implement.shtml>`_ isomorphism testing program is required. two specific criteria and actions clustering methods of the Digraph class furthermore require the `calmat <http://leopold-loewenheim.uni.lu/svn/repos/Calmat/>`_ matrix computing resource to be installed. 
+
 **Organisation of the Digraph3 python3 source code**
 
-The Digraph3 source code is split into several interdependant modules, where the ``digraphs`` module is the master source.
+The Digraph3 source code is split into several interdependent modules, where the ``digraphs`` module is the master source.
 
-:ref:`digraphs-label`
-     main part of the source code with the generic ``Digraph`` class; 
-:ref:`graphs-label`
-     specialization for undirected graphs with brigde to the ``Digraph`` module ressources;
-:ref:`outrankingDigraphs-label`
-     new Python3 versioned ``BipolarOutrankingDigraph`` classes; 
-:ref:`perfTabs-label` 
-     everything needed for handling Rubis Performance Tableaux;
-:ref:`votingDigraphs-label` 
-     additional classes and methods for computing election results;
-:ref:`sortingDigraphs-label`
-     additional tools for solving sorting problems;
-:ref:`linearOrders-label` 
-     additional tools for solving linearly ranking problems.
-:ref:`weakOrders-label` 
-     additional tools for solving ranking by choosing problems.
-
-
+* :ref:`digraphs-label`  
+     main part of the Digraph3 source code with the root `Digraph <techDoc.html#digraphs.Digraph>`_ class;
+* :ref:`graphs-label`
+     specialization for undirected graphs with the root `Graph <techDoc.html#graphs.Graph>`_ class and a brigde to the ``digraphs`` module resources;
+* :ref:`outrankingDigraphs-label`
+     new Python3 versioned root `OutrankingDigraph <techDoc.html#outrankingDigraphs.OutrankingDigraph>`_ class and specializations; 
+* :ref:`perfTabs-label` 
+     everything needed for handling Multiple Criteria Decision Aid performance tableaux with root `PerformaceTableau <techDoc.html#perfTabs.PerformanceTableau>`_ class;
+* :ref:`votingDigraphs-label` 
+     additional classes and methods for computing election results with main `LinearVotingProfile <techDoc.html#votingDigraphs.LinearVotingProfile>`_ class;
+* :ref:`sortingDigraphs-label`
+     additional tools for solving sorting problems with the root `SortingDigraph <techDoc.html#sortingDigraphs.SortingDigraph>`_ class;
+* :ref:`linearOrders-label` 
+     additional tools for solving linearly ranking problems with the root `LinearOrder <techDoc.html#linearOrders.LinearOrder>`_ class;
+* :ref:`weakOrders-label` 
+     additional tools for solving ranking by choosing problems with root `WeakOrder <techDoc.html#weakOrders.WeakOrder>`_ class.
 
 .. toctree::
    :maxdepth: 2

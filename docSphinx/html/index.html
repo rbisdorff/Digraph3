@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Documentation of the Digraph3 resources! &mdash; Digraph 1.625 documentation</title>
+    <title>Documentation of the Digraph3 resources &mdash; Digraph3 3.4-769 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1.625',
+        VERSION:     '3.4-769',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,8 +23,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Digraph 1.625 documentation" href="#" />
-    <link rel="next" title="Tutorial of the Digraph3 resources!" href="tutorial.html" /> 
+    <link rel="top" title="Digraph3 3.4-769 documentation" href="#" />
+    <link rel="next" title="Tutorial of the Digraph3 resources" href="tutorial.html" /> 
   </head>
   <body>
     <div class="related">
@@ -37,9 +37,9 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="tutorial.html" title="Tutorial of the Digraph3 resources!"
+          <a href="tutorial.html" title="Tutorial of the Digraph3 resources"
              accesskey="N">next</a> |</li>
-        <li><a href="#">Digraph 1.625 documentation</a> &raquo;</li> 
+        <li><a href="#">Digraph3 3.4-769 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -49,7 +49,7 @@
           <div class="body">
             
   <div class="section" id="documentation-of-the-digraph3-resources">
-<h1>Documentation of the Digraph3 resources!<a class="headerlink" href="#documentation-of-the-digraph3-resources" title="Permalink to this headline">¶</a></h1>
+<h1>Documentation of the Digraph3 resources<a class="headerlink" href="#documentation-of-the-digraph3-resources" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -57,7 +57,7 @@
 <tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body"><p class="first">Raymond Bisdorff, University of Luxembourg FSTC/CSC</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Version:</th><td class="field-body"><p class="first">$Revision: Python 3.4$</p>
+<tr class="field-even field"><th class="field-name">Version:</th><td class="field-body"><p class="first">Revision: Python 3.4</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Copyright:</th><td class="field-body"><ol class="first last upperalpha simple" start="18">
@@ -69,11 +69,11 @@
 </table>
 <div class="section" id="introduction">
 <span id="introduction-label"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>These pages describe the Python3 resources for implementing decision aid algorithms in the context of a bipolarly-valued outranking approach. These computing ressources are useful in the field of algorithmic decision theory and more specifically in outranking based multiple criteria decision aid.</p>
+<p>This documentation describes the Python3 resources for implementing decision aid algorithms in the context of a bipolarly-valued outranking approach <a class="footnote-reference" href="#id2" id="id1">[1]</a> . These computing ressources are useful in the field of algorithmic decision theory and more specifically in outranking based multiple criteria decision aid.</p>
 <p><strong>Parts of the documentation:</strong></p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial of the Digraph3 resources!</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial of the Digraph3 resources</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#content">Content</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#downloading-and-using-the-digraph3-modules">Downloading and using the Digraph3 modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#working-with-the-digraphs-module">Working with the <tt class="code docutils literal"><span class="pre">digraphs</span></tt> module</a></li>
@@ -89,7 +89,7 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="techDoc.html">Technical Documentation of the Digraph3 resources</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="techDoc.html">Technical Reference of the Digraph3 modules</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="techDoc.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="techDoc.html#digraphs-module">digraphs module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="techDoc.html#graphs-module">graphs module</a></li>
@@ -113,6 +113,18 @@
 <li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
 <li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
 </ul>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><ol class="first last upperalpha simple" start="18">
+<li>Bisdorff (2013) &#8220;On Polarizing Outranking Relations with Large Performance Differences&#8221; <em>Journal of Multi-Criteria Decision Analysis</em> (Wiley) <strong>20</strong>:3-12</li>
+</ol>
+</td></tr>
+</tbody>
+</table>
 <p>See <a class="reference external" href="http://leopold-loewenheim.uni.lu/Digraph3/digraph3_copyright.html">Copyright</a></p>
 </div>
 </div>
@@ -125,18 +137,19 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Documentation of the Digraph3 resources!</a><ul>
+<li><a class="reference internal" href="#">Documentation of the Digraph3 resources</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a><ul>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Next topic</h4>
   <p class="topless"><a href="tutorial.html"
-                        title="next chapter">Tutorial of the Digraph3 resources!</a></p>
+                        title="next chapter">Tutorial of the Digraph3 resources</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/index.txt"
@@ -169,13 +182,13 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="tutorial.html" title="Tutorial of the Digraph3 resources!"
+          <a href="tutorial.html" title="Tutorial of the Digraph3 resources"
              >next</a> |</li>
-        <li><a href="#">Digraph 1.625 documentation</a> &raquo;</li> 
+        <li><a href="#">Digraph3 3.4-769 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2012, Raymond Bisdorff.
+        &copy; Copyright 2012-2014, Raymond Bisdorff.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
