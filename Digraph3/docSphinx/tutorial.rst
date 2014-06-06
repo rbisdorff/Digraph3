@@ -158,12 +158,12 @@ Back to :ref:`Tutorial-label`
 Tools for manipulating Digraph objects
 ......................................
 
-We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7 and denoted **dg** modelling a binary relation (*xSy*) defined on the set of nodes of the digraph. For this purpose, the ``digraphs`` module provides conveniently a specific ``RandomValuationDigraph`` constructor:
-    >>> from digraphs import *
+We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7, denoted *dg* and modelling a binary relation (*xSy*) defined on the set of nodes of *dg*. For this purpose, the ``digraphs`` module provides conveniently a specific ``RandomValuationDigraph`` constructor:
+    >>> from digraphs import RandomValuationDigraph
     >>> dg = RandomValuationDigraph(order=7,Normalized=True)
     >>> dg.save('tutRandValDigraph')
 
-With the ``save()`` method we may keep a backup version for future use of the random digraph stored in a file called *tutRandValDigraph.py*. The ``Digraph`` class now provides some generic methods for exploring a given digraph object, like the ``showShort()``, ``showAll()``, ``showRelationTable()`` and the ``showNeighborhoods()`` methods:
+With the ``save()`` method we may keep a backup version for future use of *dg* which will be stored in a file called *tutRandValDigraph.py* in the current working directory. The ``Digraph`` class now provides some generic methods for exploring a given ``Digraph`` object, like the ``showShort()``, ``showAll()``, ``showRelationTable()`` and the ``showNeighborhoods()`` methods:
     >>> dg.showShort()
     *----- show summary -------------*
     Digraph          : randomValuationDigraph
@@ -206,9 +206,9 @@ With the ``save()`` method we may keep a backup version for future use of the ra
     
 .. warning::
     
-    Notice that most Digraph class methods will ignore the reflexive couples by asuming that the relation is indeterminate (characteristic value put to median value) in this case.
+    Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value *r(xSx)* for all action *x* is put to the median, i.e. indeterminate, value) in this case.
     
-We may have an even better insight into this random digraph dg by looking at a graphviz drawing:
+We may have an even better insight into the ``Digraph`` object *dg* by looking at a `graphviz <http://graphviz.org/>`_ [1]_ drawing:
     >>> dg.exportGraphViz('tutRandValDigraph')
     *---- exporting a dot file dor GraphViz tools ---------*
     Exporting to tutRandValDigraph.dot
@@ -218,7 +218,8 @@ We may have an even better insight into this random digraph dg by looking at a g
    :width: 200 px
    :align: center
 
-Notice the indeterminated relational situation (6*S*2) observed between node '6' and node '2'. The corresponding characteristic value r(6*S*2) = 0.0 is marked in grey with an openheaded arrow. We may extract both the symmetric as well as the assymetric part of digraph dg:
+Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the indeterminated relational situation (*r(6S2) = 0.00*) observed between nodes '6' and '2'. The corresponding link is marked in grey with an open arrowhead in the drawing. We may now extract both this symmetric as well as this asymetric part of digraph *dg* with the help of two corresponding constructors:
+    >>> from digraphs import AsymmetricPartialDigraph, SymmetricPartialDigraph
     >>> asymDg = AsymmetricPartialDigraph(dg)
     >>> asymDg.exportGraphViz()
     >>> symDG = SymmetricPartialDigraph(dg)
@@ -228,11 +229,12 @@ Notice the indeterminated relational situation (6*S*2) observed between node '6'
    :width: 400 px
    :align: center
 
-.. note::
+.. warning::
 
-    Be aware that the partial objects *asymDg* and *symDg* put to an indeterminate characteristic value all not-asymmetric, respectively not-symmetric links between nodes. 
+    Be aware that the partial objects *asymDg* and *symDg* put to the indeterminate characteristic value all not-asymmetric, respectively not-symmetric links between nodes. 
 
-We may recover from both partial objects again the original object dg with a **bipolar fusion** operator, also called **epistemic disjunction**, available via the ``FusionDigraph`` constructor:
+We may recover object *dg* from both partial objects *asymDg* and *symDg* with a **bipolar fusion** constructor, also called **epistemic disjunction**, available via the ``FusionDigraph`` class:
+    >>> from digraphs import FusionDigraph
     >>> fusDg = FusionDigraph(asymDg,symDg)
     >>> fusDg.showRelationTable()
     * ---- Relation Table -----
@@ -247,6 +249,7 @@ We may recover from both partial objects again the original object dg with a **b
     '7'    |  0.88  0.72  0.82  0.52 -0.84  0.04  0.00	 
 
 We may as readily compute the **dual**, the **converse** and the **codual** (dual and converse) of dg:
+    >>> from digraphs import DualDigraph, ConverseDigraph, CoDualDigraph
     >>> ddg = DualDigraph(dg)
     >>> ddg.showRelationTable()
     -r(xSy) |  '1'    '2'   '3'  '4'   '5'    '6'  '7'	  
@@ -283,7 +286,7 @@ We may as readily compute the **dual**, the **converse** and the **codual** (dua
     '6'     | -0.38  0.54 -0.84 -0.66  0.22  0.00 -0.04	 
     '7'     | -0.44 -0.02  1.00 -0.76  0.52  0.22  0.00	 
 
-Computing the dual, respectively the converse, may also be done with preprefixing the ``__neg__ (-)`` or the ``__invert__`` (~) operator. The codual of a Digraph object may thus as well be computed with a **composition** (in either order) of both operations:
+Computing the dual, respectively the converse, may also be done with prefixing the ``__neg__ (-)`` or the ``__invert__`` (~) operator. The codual of a Digraph object may, hence, as well be computed with a **composition** (in either order) of both operations:
     >>> ddg = -dg   # dual of dg
     >>> cdg = ~dg   # converse of dg
     >>> cddg = -(~dg) = ~(-dg)  # codual of dg
@@ -299,7 +302,7 @@ Computing the dual, respectively the converse, may also be done with preprefixin
     '6'     | -0.38  0.54 -0.84 -0.66  0.22  0.00 -0.04	 
     '7'     | -0.44 -0.02  1.00 -0.76  0.52  0.22  0.00	 
 
-Symmetric and transtive closure in site constructors are also available, Note that it is a good idea to previously make a backup version of dg, before going ahead with these in-site operations that drectly irreversibly modify the original dg object:
+Symmetric and transtive closure in site constructors are also available, Note that it is a good idea,before going ahead with these in-site operations that irreversibly modify the original dg object, to previously make a backup version of *dg* :
     >>> dg.save('tutRandValDigraph')
     >>> dg.closeSymmetric()
     >>> dg.closeTransitive()
@@ -309,7 +312,8 @@ Symmetric and transtive closure in site constructors are also available, Note th
    :width: 200 px
    :align: center
 
-As the original digraph **dg** was connected, the above symmetric and transitive closures will necessarily produce a single strong commponent, ie a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and contsruct the so reduced digraph. Here we get a single node gathering all the original set of nodes :
+As the original digraph *dg* was connected (see above the result of the ``dg.showShort()`` command), both to the symmetric and transitive closures together, will necessarily produce a single strong commponent, i.e. a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Using ``StrongComponentsCollapsedDigraph`` constructor here will render a single hyper-node gathering all the original nodes :
+    >>> from digraphs import StrongComponentsCollapsedDigraph
     >>> sc = StrongComponentsCollapsedDigraph(dg)
     >>> sc.showAll()
     *----- show detail -----*

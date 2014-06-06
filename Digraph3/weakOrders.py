@@ -318,7 +318,7 @@ class RankingByChoosingDigraph(WeakOrder):
     'a05' |  -0.67  -1.00  -0.67  -0.17  -0.33   0.00    - 	 
     """
     def __init__(self,other,
-                 fusionOperator = "o-min",
+                 fusionOperator = "o-max",
                  CoDual=False,
                  Debug=False,
                  CppAgrum=False,
@@ -623,7 +623,7 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
     .. image:: proWeakOrdering_Colwise.png
     
     """
-    def __init__(self,other,fusionOperator="o-min",\
+    def __init__(self,other,fusionOperator="o-max",\
                  imageType=None,\
                  plotFileName=None,\
                  Threading=True,\
