@@ -732,10 +732,9 @@ Documents, indices and tables
 References
 ..........
 
-.. [FMCAA] Olle Häggström. Finite Markov Chians and Algorithmic Applications. Cambridge University Press 2002.
+.. [FMCAA] Olle Häggström. *Finite Markov Chians and Algorithmic Applications*. Cambridge University Press 2002.
 
-.. [ADT-L2] R. Bisdorff, *Who wins the election*. MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( `downloadable here <_static/adtVoting-2x2.pdf>`_ ) 
-
+.. [ADT-L2] R. Bisdorff, *Who wins the election*. MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( `downloadable here <_static/adtVoting-2x2.pdf>`_ )
 
 Footnotes
 .........
