@@ -333,6 +333,7 @@ As the original digraph *dg* was connected (see above the result of the ``dg.sho
     'frozenset({'7', '1', '2', '6', '5', '3', '4'})': in => set(), out => set()
     >>> ...
 
+Back to :ref:`Tutorial-label`
 
 .. _Graphs-Tutorial-label:
 
@@ -486,8 +487,8 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
 	 frozenset({'v7', 'v2', 'v1'}), 
 	 frozenset({'v5', 'v3', 'v7'})}
 
-Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids** are available in the :code:`graphs` module. For instance, we may use a Gibbs sampler again for simulating an Ising Model on such a grid:
-        >>> from graphs import GridGraph
+Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids** are available in the :code:`graphs` module. For instance, we may use a Gibbs sampler again for simulating an **Ising Model** on such a grid:
+        >>> from graphs import GridGraph. IsingModel
 	>>> g = GridGraph(n=15,m=15)
 	>>> g.showShort()
 	*----- show short --------------*
@@ -506,7 +507,8 @@ Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids*
    :width: 600 px
    :align: center
 
-Finally, we provide a specialisation of the :code:`Graph` class for implementing a generic **Metropolis** *Markov Chain Monte Carlo* chain sampler for simulating a random walk on the graph with given probability  :code:`probs = {‘v1’: x, ‘v2’: y, ...}` for visiting each vertice. 
+Finally, we provide a specialisation of the :code:`Graph` class for implementing a generic **Metropolis MCMC** (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  :code:`probs = {‘v1’: x, ‘v2’: y, ...}` for visiting each vertice. 
+        >>> from graphs import MetropolisChain
 	>>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
 	>>> g.showShort()
 	*---- short description of the graph ----*
@@ -519,13 +521,13 @@ Finally, we provide a specialisation of the :code:`Graph` class for implementing
 	v3 -> ['v5', 'v1']
 	v4 -> ['v2', 'v5', 'v1']
 	v5 -> ['v3', 'v4']        
-	>>> probs = {}
-	>>> n = g.order
+	>>> probs = {}  # initialise a potential stationary probability vector 
+	>>> n = g.order # for instance: probs[v_i] = n-i/Sum(1:n) for i in 1:n
 	>>> i = 0
 	>>> verticesList = [x for x in g.vertices]
 	>>> verticesList.sort()
 	>>> for v in verticesList:
-	...     probs[v] = (n - i)/(n*(n+1)/2)
+	...     probs[v] = (n - i)/(n*(n+1)/2) 
 	...     i += 1
 	>>> met = MetropolisChain(g,probs)
 	>>> frequency = met.checkSampling(verticesList[0],nSim=30000)
@@ -546,7 +548,9 @@ Finally, we provide a specialisation of the :code:`Graph` class for implementing
 	  'v4' |  0.33   0.33    0.00    0.08    0.25    
 	  'v5' |  0.00   0.00    0.50    0.50    0.00    
 
-For more technical information and more code examples, look into the technical documentation of the :ref:`graphs-label`. Those interested in algorithmic applications of Markov Chains may consult O. Häggström's book: [FMCAA]_.
+The ``checkSampling()`` method generates a randomwalk of *nSim=30000* steps on the given graph and records by the way the observed relative frequency with which each vertice is passed by. In this exmaple, the stationary transition probability distribution, shown by the ``showTransitionMatrix()`` method above, is quite adequately simulated.
+ 
+For more technical information and more code examples, look into the technical documentation of the :ref:`graphs-label`. For the readers interested in algorithmic applications of Markov Chains we may may recommend consulting O. Häggström's 2002 book: [FMCAA]_.
 
 Back to :ref:`Tutorial-label`
 
