@@ -7250,19 +7250,18 @@ class Digraph(object):
             print('terms', terms)
             print('termsPlus',termsPlus)
             print('termsMinus', termsMinus)
-            print('termsNuls', termsNuls)
+            print('termsNull', termsNuls)
         np = len(termsPlus)
         nm = len(termsMinus)
-        if np > 0:
-            if nm > 0:
-                return Med
-            else:
-                return min(termsPlus)
+        nn = len(termsNuls)
+        if nn > 0:
+            return Med
+        elif np > 0 and nm == 0:
+            return min(termsPlus)
+        elif nm > 0 and np == 0:
+            return max(termsMinus)
         else:
-            if nm > 0:
-                return max(termsMinus)
-            else:
-                return Med
+            return Med
 
     def computeKohlerRanking(self,Debug=False):
         """
@@ -7793,7 +7792,7 @@ class FusionDigraph(Digraph):
         * operator = "o-min" | "o-max" (epistemic conjunctive or dijunctive fusion)
     """
 
-    def __init__(self,dg1,dg2,operator="o-min"):
+    def __init__(self,dg1,dg2,operator="o-max"):
         from copy import deepcopy
         self.name = 'fusion-'+dg1.name+'-'+dg2.name
 #        try:

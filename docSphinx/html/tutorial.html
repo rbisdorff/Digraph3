@@ -219,7 +219,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <span id="digraph-tools-label"></span><h2>Tools for manipulating Digraph objects<a class="headerlink" href="#tools-for-manipulating-digraph-objects" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>We are starting this tutorial with generating a randomly [-1;1]-valued (<em>Normalized=True</em>) digraph of order 7 and denoted <strong>dg</strong> modelling a binary relation (<em>xSy</em>) defined on the set of nodes of the digraph. For this purpose, the <tt class="docutils literal"><span class="pre">digraphs</span></tt> module provides conveniently a specific <tt class="docutils literal"><span class="pre">RandomValuationDigraph</span></tt> constructor:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 </pre></div>
@@ -271,10 +271,10 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Notice that most Digraph class methods will ignore the reflexive couples by asuming that the relation is indeterminate (characteristic value put to median value) in this case.</p>
+<p class="last">Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (characteristic value put to median value 0.00) in this case.</p>
 </div>
 <dl class="docutils">
-<dt>We may have an even better insight into this random digraph dg by looking at a graphviz drawing:</dt>
+<dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object dg by looking at a graphviz drawing:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
 <span class="go">Exporting to tutRandValDigraph.dot</span>
@@ -284,9 +284,11 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/tutRandValDigraph.png"><img alt="_images/tutRandValDigraph.png" class="align-center" src="_images/tutRandValDigraph.png" style="width: 200px;" /></a>
+<p>Notice the indeterminated relational situation (6*S*2) observed between node &#8216;6&#8217; and node &#8216;2&#8217;. The corresponding characteristic value, denoted r(6*S*2), is 0.00 and marked in grey with an openheaded arrow.</p>
 <dl class="docutils">
-<dt>Notice the indeterminated relational situation (6*S*2) observed between node &#8216;6&#8217; and node &#8216;2&#8217;. The corresponding characteristic value r(6*S*2) = 0.0 is marked in grey with an openheaded arrow. We may extract both the symmetric as well as the assymetric part of digraph dg:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">asymDg</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
+<dt>We may now extract both the symmetric as well as the assymetric part of digraph dg:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">,</span> <span class="n">SymmetricPartialDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asymDg</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">asymDg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">symDG</span> <span class="o">=</span> <span class="n">SymmetricPartialDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">symDg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
@@ -297,11 +299,12 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <a class="reference internal image-reference" href="_images/asymSymParts.png"><img alt="_images/asymSymParts.png" class="align-center" src="_images/asymSymParts.png" style="width: 400px;" /></a>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Be aware that the partial objects <em>asymDg</em> and <em>symDg</em> put to an indeterminate characteristic value all not-asymmetric, respectively not-symmetric links between nodes.</p>
+<p class="last">Be aware that the partial objects <em>asymDg</em> and <em>symDg</em> put to the indeterminate characteristic value all not-asymmetric, respectively not-symmetric links between nodes.</p>
 </div>
 <dl class="docutils">
-<dt>We may recover from both partial objects again the original object dg with a <strong>bipolar fusion</strong> operator, also called <strong>epistemic disjunction</strong>, available via the <tt class="docutils literal"><span class="pre">FusionDigraph</span></tt> constructor:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">fusDg</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">asymDg</span><span class="p">,</span><span class="n">symDg</span><span class="p">)</span>
+<dt>Observe that we may recover from both partial objects the original digraph dg with a <strong>bipolar fusion</strong> operator, also called <strong>epistemic disjunction</strong>, available via the <tt class="docutils literal"><span class="pre">FusionDigraph</span></tt> constructor:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">FusionDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fusDg</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">asymDg</span><span class="p">,</span><span class="n">symDg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fusDg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
 <span class="go">* ---- Relation Table -----</span>
 <span class="go">r(xSy) |  &#39;1&#39;    &#39;2&#39;   &#39;3&#39;  &#39;4&#39;   &#39;5&#39;    &#39;6&#39;  &#39;7&#39;</span>
@@ -317,7 +320,8 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 </dd>
 <dt>We may as readily compute the <strong>dual</strong>, the <strong>converse</strong> and the <strong>codual</strong> (dual and converse) of dg:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ddg</span> <span class="o">=</span> <span class="n">DualDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">DualDigraph</span><span class="p">,</span> <span class="n">ConverseDigraph</span><span class="p">,</span> <span class="n">CoDualDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ddg</span> <span class="o">=</span> <span class="n">DualDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ddg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
 <span class="go">-r(xSy) |  &#39;1&#39;    &#39;2&#39;   &#39;3&#39;  &#39;4&#39;   &#39;5&#39;    &#39;6&#39;  &#39;7&#39;</span>
 <span class="go">--------|------------------------------------------</span>
@@ -373,7 +377,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 </dd>
-<dt>Symmetric and transtive closure in site constructors are also available, Note that it is a good idea to previously make a backup version of dg, before going ahead with these in-site operations that drectly irreversibly modify the original dg object:</dt>
+<dt>Symmetric and transtive closure in site constructors are also available, Note that it is a good idea to previously make a backup version of dg, before going ahead with these in-site operations that irreversibly modify the original dg object:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">closeSymmetric</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">()</span>
@@ -384,8 +388,9 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 <a class="reference internal image-reference" href="_images/strongComponents.png"><img alt="_images/strongComponents.png" class="align-center" src="_images/strongComponents.png" style="width: 200px;" /></a>
 <dl class="docutils">
-<dt>As the original digraph <strong>dg</strong> was connected, the above symmetric and transitive closures will necessarily produce a single strong commponent, ie a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and contsruct the so reduced digraph. Here we get a single node gathering all the original set of nodes :</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span> <span class="o">=</span> <span class="n">StrongComponentsCollapsedDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
+<dt>As the original digraph <strong>dg</strong> was connected, the above symmetric and transitive closures will necessarily produce a single strong commponent, ie a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Here we get a single node gathering all the original set of nodes :</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">StrongComponentsCollapsedDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span> <span class="o">=</span> <span class="n">StrongComponentsCollapsedDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
 <span class="go">*----- show detail -----*</span>
 <span class="go">Digraph          : tutRandValDigraph_Scc</span>

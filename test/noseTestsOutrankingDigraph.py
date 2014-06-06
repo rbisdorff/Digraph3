@@ -622,24 +622,24 @@ def testRandomWeightsLaws():
     gmc3.showRelationStatistics('medians')
     gmc3.showRelationStatistics('likelihoods')
 
-def testRubisRestServer():
-    print('*------ test RubisRestServer class ----*')
-    from time import sleep
-    t = RandomCBPerformanceTableau(numberOfActions=5,\
-                                   numberOfCriteria=7,\
-                                   weightDistribution='equiobjectives',
-                                   )
-    t.saveXMCDA2('test')
-    t = XMCDA2PerformanceTableau('test')
-    solver1 = RubisRestServer(Debug=True)
-    solver1.ping()
-    solver1.submitProblem(t,valuation='robust',Debug=True)
-    #solver.submitXMCDA2Problem('test',Debug=False)
-    #solver.showSolution()
-    sleep(5)
-    solver1.saveXMCDA2Solution()
-    solver2 = RubisRestServer(Debug=True)
-    solver2.submitXMCDA2Problem('test',Debug=False)
-    #solver.showSolution()
-    sleep(5)
-    solver2.saveXMCDA2Solution()
+##def testRubisRestServer():
+##    print('*------ test RubisRestServer class ----*')
+##    from time import sleep
+##    t = RandomCBPerformanceTableau(numberOfActions=5,\
+##                                   numberOfCriteria=7,\
+##                                   weightDistribution='equiobjectives',
+##                                   )
+##    t.saveXMCDA2('test')
+##    t = XMCDA2PerformanceTableau('test')
+##    solver1 = RubisRestServer(Debug=True)
+##    solver1.ping()
+##    solver1.submitProblem(t,valuation='robust',Debug=True)
+##    #solver.submitXMCDA2Problem('test',Debug=False)
+##    #solver.showSolution()
+##    sleep(5)
+##    solver1.saveXMCDA2Solution()
+##    solver2 = RubisRestServer(Debug=True)
+##    solver2.submitXMCDA2Problem('test',Debug=False)
+##    #solver.showSolution()
+##    sleep(5)
+##    solver2.saveXMCDA2Solution()
