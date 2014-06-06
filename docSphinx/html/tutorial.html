@@ -411,6 +411,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 </dd>
 </dl>
+<p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
 <div class="section" id="working-with-the-graphs-module">
 <span id="graphs-tutorial-label"></span><h2>Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module<a class="headerlink" href="#working-with-the-graphs-module" title="Permalink to this headline">¶</a></h2>
@@ -572,8 +573,8 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 </dd>
-<dt>Special classes of graphs, like <em>n</em> x <em>m</em> <strong>rectangular</strong> or <strong>triangular grids</strong> are available in the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module. For instance, we may use a Gibbs sampler again for simulating an Ising Model on such a grid:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">GridGraph</span>
+<dt>Special classes of graphs, like <em>n</em> x <em>m</em> <strong>rectangular</strong> or <strong>triangular grids</strong> are available in the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module. For instance, we may use a Gibbs sampler again for simulating an <strong>Ising Model</strong> on such a grid:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">GridGraph</span><span class="o">.</span> <span class="n">IsingModel</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GridGraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*----- show short --------------*</span>
@@ -593,8 +594,9 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 <a class="reference internal image-reference" href="_images/grid-15-15-ising.png"><img alt="_images/grid-15-15-ising.png" class="align-center" src="_images/grid-15-15-ising.png" style="width: 600px;" /></a>
 <dl class="docutils">
-<dt>Finally, we provide a specialisation of the <tt class="code docutils literal"><span class="pre">Graph</span></tt> class for implementing a generic <strong>Metropolis</strong> <em>Markov Chain Monte Carlo</em> chain sampler for simulating a random walk on the graph with given probability  <tt class="code docutils literal"><span class="pre">probs</span> <span class="pre">=</span> <span class="pre">{‘v1’:</span> <span class="pre">x,</span> <span class="pre">‘v2’:</span> <span class="pre">y,</span> <span class="pre">...}</span></tt> for visiting each vertice.</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<dt>Finally, we provide a specialisation of the <tt class="code docutils literal"><span class="pre">Graph</span></tt> class for implementing a generic <strong>Metropolis MCMC</strong> (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  <tt class="code docutils literal"><span class="pre">probs</span> <span class="pre">=</span> <span class="pre">{‘v1’:</span> <span class="pre">x,</span> <span class="pre">‘v2’:</span> <span class="pre">y,</span> <span class="pre">...}</span></tt> for visiting each vertice.</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">MetropolisChain</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*---- short description of the graph ----*</span>
 <span class="go">Name             : &#39;randomGraph&#39;</span>
@@ -606,8 +608,8 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <span class="go">v3 -&gt; [&#39;v5&#39;, &#39;v1&#39;]</span>
 <span class="go">v4 -&gt; [&#39;v2&#39;, &#39;v5&#39;, &#39;v1&#39;]</span>
 <span class="go">v5 -&gt; [&#39;v3&#39;, &#39;v4&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">probs</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">order</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">probs</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c"># initialise a potential stationary probability vector</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">order</span> <span class="c"># for instance: probs[v_i] = n-i/Sum(1:n) for i in 1:n</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">verticesList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">vertices</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">verticesList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
@@ -636,7 +638,8 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 </dd>
 </dl>
-<p>For more technical information and more code examples, look into the technical documentation of the <a class="reference internal" href="techDoc.html#graphs-label"><em>graphs module</em></a>. Those interested in algorithmic applications of Markov Chains may consult O. Häggström&#8217;s book: <a class="reference internal" href="#fmcaa" id="id4">[FMCAA]</a>.</p>
+<p>The <tt class="docutils literal"><span class="pre">checkSampling()</span></tt> method generates a randomwalk of <em>nSim=30000</em> steps on the given graph and records by the way the observed relative frequency with which each vertice is passed by. In this exmaple, the stationary transition probability distribution, shown by the <tt class="docutils literal"><span class="pre">showTransitionMatrix()</span></tt> method above, is quite adequately simulated.</p>
+<p>For more technical information and more code examples, look into the technical documentation of the <a class="reference internal" href="techDoc.html#graphs-label"><em>graphs module</em></a>. For the readers interested in algorithmic applications of Markov Chains we may may recommend consulting O. Häggström&#8217;s 2002 book: <a class="reference internal" href="#fmcaa" id="id4">[FMCAA]</a>.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
 <div class="section" id="computing-the-winner-of-an-election">
