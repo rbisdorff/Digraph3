@@ -231,7 +231,30 @@ Double links are drawn in bold black with an arrowhead at each end, whereas sing
 
 .. warning::
 
-    Be aware that the partial objects *asymDg* and *symDg* put to the indeterminate characteristic value all not-asymmetric, respectively not-symmetric links between nodes. 
+    Be aware that the partial objects *asymDg* and *symDg* put to the indeterminate characteristic value all not-asymmetric, respectively links between nodes. 
+
+Here for illustration the relation constructor of the ``AsymmetricPartialDigraph`` class::
+
+	def constructRelation(self):
+	    actions = self.actions
+	    Min = self.valuationdomain['min']
+	    Max = self.valuationdomain['max']
+	    Med = self.valuationdomain['med']
+	    relationIn = self.relation
+	    relationOut = {}
+	    for a in actions:
+		relationOut[a] = {}
+		for b in actions:
+		    if a != b:
+			if relationIn[a][b] >= Med and relationIn[b][a] <= Med:
+			    relationOut[a][b] = relationIn[a][b]
+			elif relationIn[a][b] <= Med and relationIn[b][a] >= Med:
+			    relationOut[a][b] = relationIn[a][b]
+			else:
+			    relationOut[a][b] = Med
+		    else:
+			relationOut[a][b] = Med
+	    return relationOut
 
 We may recover object *dg* from both partial objects *asymDg* and *symDg* with a **bipolar fusion** constructor, also called **epistemic disjunction**, available via the ``FusionDigraph`` class:
     >>> from digraphs import FusionDigraph
