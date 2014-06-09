@@ -2851,8 +2851,9 @@ class Digraph(object):
 
     def exportD3(self, fileName="index", Comments=True):
         """
-    This function was made during my bachelor thesis at the University of Luxembourg. Gary Cornelius, 2014
-    The thesis document with more explanations can bbe found `here <http://leopold-loewenheim.uni.lu/Digraph3/literature/>`_
+    This function was designed and implemented by Gary Cornelius, 2014 for his bachelor thesis at the University of Luxembourg. 
+    The thesis document with more explanations can be found
+    `here <http://leopold-loewenheim.uni.lu/Digraph3/literature/>`_ .
     
     *Parameters*:
         * fileName, name of the generated html file, default = None (graph name as defined in python);
@@ -2866,6 +2867,7 @@ class Digraph(object):
         * A way to only inspect a node and it's neighbours 
         * Dynamic draging and freezing of the graph
         * Export of a newly created general graph
+
     You can find the list of fututres in the Section below which is arranged according to the graph type.
     
     *If the graph is an outrankingdigraphs*:
@@ -2892,14 +2894,14 @@ class Digraph(object):
             or
             >> dg.showInteractiveGraph()
     
-        #. index.html: 
-    
+        #. index.html:   
             * Main Screen:
                 .. image:: randomvaluation_d3_main.png
             * Inspect function:
                 .. image:: randomvaluation_d3_inspect.png
 
     .. note::
+    
             If you want to use the automatic load in Chrome, try using the command: "python -m SimpleHTTPServer" and then access the index.html via "http://0.0.0.0:8000/index.html".
             In order to load the CSS an active internet connection is needed! 
 
@@ -4101,7 +4103,7 @@ class Digraph(object):
 
     def strongComponents(self, setPotential = False):
         """
-        renders the set of strong components of self.
+        Renders the set of strong components of self.
         """
         neighbourhoods = self.neighbourhoodCollection(Oriented = True, Potential = setPotential)
         strongComponents = set()
@@ -4115,8 +4117,9 @@ class Digraph(object):
 
     def showMIS(self,withListing=True):
         """
-        Prints all maximal independent choices
-           Result in self.misset.
+        Prints all maximal independent choices:
+            Result in self.misset.
+
         """
         import time
         print('*---  Maximal independent choices ---*')
@@ -4140,7 +4143,8 @@ class Digraph(object):
     def showMinDom(self,withListing=True):
         """
         Prints all minimal dominant choices:
-           Result in self.domset.
+            Result in self.domset.
+
         """
         import time
         print('*--- Computing minimal dominant choices ---*')
@@ -4174,7 +4178,8 @@ class Digraph(object):
     def showMinAbs(self,withListing=True):
         """
         Prints minimal absorbent choices:
-           Result in self.absset.
+            Result in self.absset.
+
         """
         import time
         print('*--- Computing minimal absorbent choices ---*')
@@ -4206,8 +4211,11 @@ class Digraph(object):
         print('Results in self.absset')
 
     def showMaxDomIrred(self,withListing=True):
-        """Computing maximal +irredundant choices:
-           Result in self.domirset."""
+        """
+        Computing maximal +irredundant choices:
+           Result in self.domirset.
+
+        """
         import time
         print('*--- Computing maximal +irredundant choices ---*')
         t0 = time.time()
@@ -4240,8 +4248,11 @@ class Digraph(object):
         print('Results in self.domirset')
 
     def showMaxAbsIrred(self,withListing=True):
-        """Computing maximal -irredundant choices:
-           Result in self.absirset."""
+        """
+        Computing maximal -irredundant choices:
+            Result in self.absirset.
+
+        """
         import time
         print('*--- Computing maximal -irredundant choices ---*')
         t0 = time.time()
@@ -4276,8 +4287,9 @@ class Digraph(object):
 
     def showPreKernels(self,withListing=True):
         """
-        Printing dominant and absorbent preKernels
-        Result in self.dompreKernels and self.abspreKernels
+        Printing dominant and absorbent preKernels:
+            Result in self.dompreKernels and self.abspreKernels
+
         """
         import time
         print('*--- Computing preKernels ---*')
@@ -4328,8 +4340,8 @@ class Digraph(object):
 
     def computePreKernels(self):
         """
-        computing dominant and absorbent preKernels
-        Result in self.dompreKernels and self.abspreKernels
+        computing dominant and absorbent preKernels:
+            Result in self.dompreKernels and self.abspreKernels
         """
         actions = set(self.actions)
         n = len(actions)
@@ -4347,8 +4359,7 @@ class Digraph(object):
 
     def generateDomPreKernels(self):
         """
-        Generate all dominant prekernels from independent
-        choices generator.
+        Generate all dominant prekernels from independent choices generator.
         """
         actions = set(self.actions)
         for item in self.independentChoices(self.singletons()):
@@ -4360,8 +4371,7 @@ class Digraph(object):
 
     def generateAbsPreKernels(self):
         """
-        Generate all absorbent prekernels from independent
-        choices generator.
+        Generate all absorbent prekernels from independent choices generator.
         """
         actions = set(self.actions)
         for item in self.independentChoices(self.singletons()):
@@ -4466,17 +4476,6 @@ class Digraph(object):
             weakGamma[x] = (dx,ax)
         return weakGamma
 
-    ## def quasiGammaSets(self,Epsilon=None):
-    ##     """ Renders the dictionary of neighborhoods {node: (dx,ax)}"""
-    ##     if Epsilon == None:
-    ##         Threshold = 0.1*(self.valuationdomain['max']-self.valuationdomain['min'])
-    ##     quasiGamma = {}
-    ##     for x in self.actions:
-    ##         dx = self.quasiDneighbors(x)
-    ##         ax = self.quasiAneighbors(x)
-    ##         quasiGamma[x] = (dx,ax)
-    ##     return quasiGamma/home/bisi/Desktop/CBCVS/Digraph/digraphs.py
-
     def notGammaSets(self):
         """ Renders the dictionary of not neighborhoods {node: (dx,ax)} """
         notGamma = {}
@@ -4554,10 +4553,14 @@ class Digraph(object):
 
     def MISgen(self,S,I):
         """
-        generator of maximal independent choices
-        S ::= remaining nodes; I ::= current independent choice
-        inititalize: self.MISgen(self.actionscopy(),set())
-        (voir Byskov 2004)
+        generator of maximal independent choices (voir Byskov 2004):
+            * S ::= remaining nodes;
+            * I ::= current independent choice
+
+        .. note::    
+
+                Inititalize: self.MISgen(self.actionscopy(),set())
+             
         """
         if S == set():
             add = 1
@@ -4583,10 +4586,13 @@ class Digraph(object):
 
     def independentChoices(self,U):
         """
-         Generator for all independent choices with neighborhoods
-         of a bipolar valued digraph.
-         Initiate with U = self.singletons().
-         Yields [(independent choice, domnb, absnb, indnb)].
+        Generator for all independent choices with neighborhoods of a bipolar valued digraph:
+
+        .. note::
+        
+               * Initiate with U = self.singletons().
+               * Yields [(independent choice, domnb, absnb, indnb)].
+
         """
         if U == []:
             yield [(frozenset(),set(),set(),set(self.actions))]
@@ -4684,6 +4690,7 @@ class Digraph(object):
         """
         Recodes the characteristic valuation domain according
         to the parameters given.
+
         .. note::
 
             Default values gives a normalized valuation domain
@@ -4733,7 +4740,11 @@ class Digraph(object):
     def dominantChoices(self,S):
         """
         Generates all minimal dominant choices of a bipolar valued digraph.
-           Initiate with S = self.actions,copy().
+
+        .. note::
+
+             Initiate with S = self.actions,copy().
+             
         """
         Med = self.valuationdomain['med']
         add = 1
@@ -4759,8 +4770,11 @@ class Digraph(object):
         Generates all dominant or absorbent choices of a bipolar
         valued digraph.
 
-        Initiate with:
-           S = (actions, dict of dominant or absorbent closed neighborhoods), see showMinDom and showMinAbs methods.
+        .. note:
+
+           * Initiate with S = (actions, dict of dominant or absorbent closed neighborhoods)
+           * See showMinDom and showMinAbs methods.
+
         """
         if S[0] not in self.minhistory:
             self.minhistory = self.minhistory | set([frozenset(S[0])])
@@ -9135,15 +9149,9 @@ class CompleteDigraph(Digraph):
 
 class PolarisedDigraph(Digraph):
     """
-    ... parameters::
-
-        digraph + beta cut level between Med and Max.
-
-        KeepValues=True/False,
-
-        AlphaCut=False/True,
-
-        StrictCut=False/True
+    Renders the polarised valuation of digraph:
+         * If AlphaCut = True a genuine one-sided True-oriented cut is operated.
+         * If StrictCut = True, the cut level value is not included.
 
     """
     def __init__(self,digraph=None,level=None,KeepValues=True,AlphaCut=False,StrictCut=False):
@@ -9323,7 +9331,12 @@ class MedianExtendedDigraph(Digraph):
 
 class DualDigraph(Digraph):
     """
-    Instantiates the dual Digraph object of a given other Digraph instance
+    Instantiates the dual Digraph object of a given other Digraph instance.
+
+    The relation constructor returns the dual of self.relation with formula:
+        relationOut[a][b] = Max - self.relation[a][b] + Min
+        where Max (resp. Min) equals valuation maximum (resp. minimum).
+
 
     """
     def __init__(self,other):
@@ -9346,12 +9359,12 @@ class DualDigraph(Digraph):
         Med = self.valuationdomain['med']
         self.actions = deepcopy(other.actions)
         self.order = len(self.actions)
-        self.relation = self.constructRelation(other.relation)
+        self.relation = self._constructRelation(other.relation)
         self.__class__ = other.__class__
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def constructRelation(self,relationIn):
+    def _constructRelation(self,relationIn):
         """
         Renders the dual relation with formula:
         relationOut[a][b] = Max - relationIn[a][b] + Min
@@ -9378,16 +9391,12 @@ class PreferenceDigraph(Digraph):
         Med = self.valuationdomain['med']
         self.name = 'dual_' + str(digraph.name)
         self.actions = digraph.actions
-        self.relation = self.constructRelation(digraph.relation)
+        self.relation = self._constructRelation(digraph.relation)
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def constructRelation(self,relationIn):
-        """
-        Parameters: relation
-        Renders the polarised relation.
-        """
+    def _constructRelation(self,relationIn):
         actions = self.actions
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
@@ -9402,6 +9411,12 @@ class PreferenceDigraph(Digraph):
 class AsymmetricPartialDigraph(Digraph):
     """
     Renders the asymmetric part of a Digraph instance
+
+    .. warning::
+
+         Note that the non asymmetric pairs are all put to the median indeterminate
+         characteristic value!
+
     """
     def __init__(self,digraph):
         self.valuationdomain = digraph.valuationdomain
@@ -9409,15 +9424,14 @@ class AsymmetricPartialDigraph(Digraph):
         Med = self.valuationdomain['med']
         self.name = 'asymmetric_' + str(digraph.name)
         self.actions = digraph.actions
-        self.relation = self.constructRelation(digraph.relation)
+        self.relation = self._constructRelation(digraph.relation)
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def constructRelation(self,relationIn):
+    def _constructRelation(self,relationIn):
         """
-        Parameters: relation and cut level.
-        Renders the polarised relation.
+        Returns the asymmetric part of the relationIn
         """
         actions = self.actions
         Min = self.valuationdomain['min']
@@ -9439,53 +9453,58 @@ class AsymmetricPartialDigraph(Digraph):
                     relationOut[a][b] = Med
         return relationOut
 
-class AsymmetricDigraph(Digraph):
-    """
-    Renders the asymmetric of a Digraph instance
-    """
-    def __init__(self,digraph):
-        self.valuationdomain = digraph.valuationdomain
-        Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']
-        self.name = 'asymmetric_' + str(digraph.name)
-        self.actions = digraph.actions
-        self.relation = self.constructRelation(digraph.relation)
-        self.order = len(self.actions)
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
-
-    def constructRelation(self,relationIn):
-        """
-        Parameters:
-            relation and cut level.
-
-        Renders the polarised relation.
-
-        """
-        actions = self.actions
-        Min = self.valuationdomain['min']
-        Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']
-        relationOut = {}
-        for a in actions:
-            relationOut[a] = {}
-            for b in actions:
-                relationOut[a][b] = min( relationIn[a][b], (Max-relationIn[b][a]+Min) )
-                ## if a != b:
-                ##     if relationIn[a][b] >= Med and relationIn[b][a] <= Med:
-                ##         relationOut[a][b] = relationIn[a][b]
-                ##     elif relationIn[a][b] <= Med and relationIn[b][a] >= Med:
-                ##         relationOut[a][b] = relationIn[a][b]
-                ##     else:
-                ##         relationOut[a][b] = Med
-                ##     ## relationOut[a][b] = min(relationIn[a][b],Max-relationIn[b][a]+Min)
-                ## else:
-                ##     relationOut[a][b] = Med
-        return relationOut
+##class AsymmetricDigraph(Digraph):
+##    """
+##    Renders the asymmetric of a Digraph instance
+##    """
+##    def __init__(self,digraph):
+##        self.valuationdomain = digraph.valuationdomain
+##        Max = self.valuationdomain['max']
+##        Med = self.valuationdomain['med']
+##        self.name = 'asymmetric_' + str(digraph.name)
+##        self.actions = digraph.actions
+##        self.relation = self.constructRelation(digraph.relation)
+##        self.order = len(self.actions)
+##        self.gamma = self.gammaSets()
+##        self.notGamma = self.notGammaSets()
+##
+##    def constructRelation(self,relationIn):
+##        """
+##        Parameters:
+##            relation and cut level.
+##
+##        Renders the polarised relation.
+##
+##        """
+##        actions = self.actions
+##        Min = self.valuationdomain['min']
+##        Max = self.valuationdomain['max']
+##        Med = self.valuationdomain['med']
+##        relationOut = {}
+##        for a in actions:
+##            relationOut[a] = {}
+##            for b in actions:
+##                relationOut[a][b] = min( relationIn[a][b], (Max-relationIn[b][a]+Min) )
+##                ## if a != b:
+##                ##     if relationIn[a][b] >= Med and relationIn[b][a] <= Med:
+##                ##         relationOut[a][b] = relationIn[a][b]
+##                ##     elif relationIn[a][b] <= Med and relationIn[b][a] >= Med:
+##                ##         relationOut[a][b] = relationIn[a][b]
+##                ##     else:
+##                ##         relationOut[a][b] = Med
+##                ##     ## relationOut[a][b] = min(relationIn[a][b],Max-relationIn[b][a]+Min)
+##                ## else:
+##                ##     relationOut[a][b] = Med
+##        return relationOut
 
 class SymmetricPartialDigraph(Digraph):
     """
-    Renders the symmetric part of a Digraph instance
+    Renders the symmetric part of a Digraph instance.
+    
+    ..caution::
+
+           The not symmetric links of relationIn are all put to the meadian characteristics value!.
+           
     """
     def __init__(self,digraph):
         self.valuationdomain = digraph.valuationdomain
@@ -9493,17 +9512,14 @@ class SymmetricPartialDigraph(Digraph):
         Med = self.valuationdomain['med']
         self.name = 'symmetric_' + str(digraph.name)
         self.actions = digraph.actions
-        self.relation = self.constructRelation(digraph.relation)
+        self.relation = self._constructRelation(digraph.relation)
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def constructRelation(self,relationIn):
+    def _constructRelation(self,relationIn):
         """
-        Parameters:
-            relation and cut level.
-
-        Renders the polarised relation.
+        Returns the symmetric part of the relationIn.
 
         """
         actions = self.actions

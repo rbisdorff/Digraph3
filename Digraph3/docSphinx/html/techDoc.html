@@ -138,34 +138,15 @@
 <span id="digraphs-label"></span><h2>digraphs module<a class="headerlink" href="#digraphs-module" title="Permalink to this headline">¶</a></h2>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#digraphs-tutorial-label"><em>Working with the digraphs module</em></a></p>
 <span class="target" id="module-digraphs"></span><dl class="class">
-<dt id="digraphs.AsymmetricDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">AsymmetricDigraph</tt><big>(</big><em>digraph</em><big>)</big><a class="headerlink" href="#digraphs.AsymmetricDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
-<p>Renders the asymmetric of a Digraph instance</p>
-<dl class="method">
-<dt id="digraphs.AsymmetricDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>relationIn</em><big>)</big><a class="headerlink" href="#digraphs.AsymmetricDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Parameters:</dt>
-<dd>relation and cut level.</dd>
-</dl>
-<p>Renders the polarised relation.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
 <dt id="digraphs.AsymmetricPartialDigraph">
 <em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">AsymmetricPartialDigraph</tt><big>(</big><em>digraph</em><big>)</big><a class="headerlink" href="#digraphs.AsymmetricPartialDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <p>Renders the asymmetric part of a Digraph instance</p>
-<dl class="method">
-<dt id="digraphs.AsymmetricPartialDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>relationIn</em><big>)</big><a class="headerlink" href="#digraphs.AsymmetricPartialDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameters: relation and cut level.
-Renders the polarised relation.</p>
-</dd></dl>
-
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Note that the non asymmetric pairs are all put to the median indeterminate
+characteristic value!</p>
+</div>
 </dd></dl>
 
 <dl class="class">
@@ -349,10 +330,18 @@ and the evaluation dictionary into self.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.MISgen">
 <tt class="descname">MISgen</tt><big>(</big><em>S</em>, <em>I</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.MISgen" title="Permalink to this definition">¶</a></dt>
-<dd><p>generator of maximal independent choices
-S ::= remaining nodes; I ::= current independent choice
-inititalize: self.MISgen(self.actionscopy(),set())
-(voir Byskov 2004)</p>
+<dd><dl class="docutils">
+<dt>generator of maximal independent choices (voir Byskov 2004):</dt>
+<dd><ul class="first last simple">
+<li>S ::= remaining nodes;</li>
+<li>I ::= current independent choice</li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Inititalize: self.MISgen(self.actionscopy(),set())</p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -752,8 +741,10 @@ where one and only one item is strictly positive.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.computePreKernels">
 <tt class="descname">computePreKernels</tt><big>(</big><big>)</big><a class="headerlink" href="#digraphs.Digraph.computePreKernels" title="Permalink to this definition">¶</a></dt>
-<dd><p>computing dominant and absorbent preKernels
-Result in self.dompreKernels and self.abspreKernels</p>
+<dd><dl class="docutils">
+<dt>computing dominant and absorbent preKernels:</dt>
+<dd>Result in self.dompreKernels and self.abspreKernels</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1053,7 +1044,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1072,10 +1063,11 @@ Returns a boolean value</p>
 <dl class="method">
 <dt id="digraphs.Digraph.dominantChoices">
 <tt class="descname">dominantChoices</tt><big>(</big><em>S</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.dominantChoices" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Generates all minimal dominant choices of a bipolar valued digraph.</dt>
-<dd>Initiate with S = self.actions,copy().</dd>
-</dl>
+<dd><p>Generates all minimal dominant choices of a bipolar valued digraph.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Initiate with S = self.actions,copy().</p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -1106,8 +1098,9 @@ Renders dominant prekernel restricted relation.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.exportD3">
 <tt class="descname">exportD3</tt><big>(</big><em>fileName='index'</em>, <em>Comments=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.exportD3" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function was made during my bachelor thesis at the University of Luxembourg. Gary Cornelius, 2014
-The thesis document with more explanations can bbe found <a class="reference external" href="http://leopold-loewenheim.uni.lu/Digraph3/literature/">here</a></p>
+<dd><p>This function was designed and implemented by Gary Cornelius, 2014 for his bachelor thesis at the University of Luxembourg. 
+The thesis document with more explanations can be found
+<a class="reference external" href="http://leopold-loewenheim.uni.lu/Digraph3/literature/">here</a> .</p>
 <dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -1167,23 +1160,24 @@ D3 Library which we use for graph generation and the physics between nodes, whic
 </dd>
 </dl>
 </li>
-<li><p class="first">index.html:</p>
-<blockquote>
-<div><ul>
+<li><dl class="first docutils">
+<dt>index.html:   </dt>
+<dd><ul class="first last">
 <li><dl class="first docutils">
 <dt>Main Screen:</dt>
-<dd><img alt="randomvaluation_d3_main.png" class="first last" src="randomvaluation_d3_main.png" />
+<dd><img alt="_images/randomvaluation_d3_main.png" class="first last" src="_images/randomvaluation_d3_main.png" />
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>Inspect function:</dt>
-<dd><img alt="randomvaluation_d3_inspect.png" class="first last" src="randomvaluation_d3_inspect.png" />
+<dd><img alt="_images/randomvaluation_d3_inspect.png" class="first last" src="_images/randomvaluation_d3_inspect.png" />
 </dd>
 </dl>
 </li>
 </ul>
-</div></blockquote>
+</dd>
+</dl>
 </li>
 </ol>
 </dd>
@@ -1235,15 +1229,13 @@ is hence not safe for multiprocessors&#8217; threading programs.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.generateAbsPreKernels">
 <tt class="descname">generateAbsPreKernels</tt><big>(</big><big>)</big><a class="headerlink" href="#digraphs.Digraph.generateAbsPreKernels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate all absorbent prekernels from independent
-choices generator.</p>
+<dd><p>Generate all absorbent prekernels from independent choices generator.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.generateDomPreKernels">
 <tt class="descname">generateDomPreKernels</tt><big>(</big><big>)</big><a class="headerlink" href="#digraphs.Digraph.generateDomPreKernels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate all dominant prekernels from independent
-choices generator.</p>
+<dd><p>Generate all dominant prekernels from independent choices generator.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1273,10 +1265,14 @@ choices generator.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.independentChoices">
 <tt class="descname">independentChoices</tt><big>(</big><em>U</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.independentChoices" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generator for all independent choices with neighborhoods
-of a bipolar valued digraph.
-Initiate with U = self.singletons().
-Yields [(independent choice, domnb, absnb, indnb)].</p>
+<dd><p>Generator for all independent choices with neighborhoods of a bipolar valued digraph:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>Initiate with U = self.singletons().</li>
+<li>Yields [(independent choice, domnb, absnb, indnb)].</li>
+</ul>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -1372,10 +1368,6 @@ matrix multiply vector by inner production</p>
 <tt class="descname">minimalChoices</tt><big>(</big><em>S</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.minimalChoices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates all dominant or absorbent choices of a bipolar
 valued digraph.</p>
-<dl class="docutils">
-<dt>Initiate with:</dt>
-<dd>S = (actions, dict of dominant or absorbent closed neighborhoods), see showMinDom and showMinAbs methods.</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1503,10 +1495,10 @@ dominant out vector.</p>
 <dt id="digraphs.Digraph.recodeValuation">
 <tt class="descname">recodeValuation</tt><big>(</big><em>newMin=-1.0</em>, <em>newMax=1.0</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.recodeValuation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recodes the characteristic valuation domain according
-to the parameters given.
-.. note:</p>
-<div class="highlight-python"><div class="highlight"><pre>Default values gives a normalized valuation domain
-</pre></div>
+to the parameters given.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Default values gives a normalized valuation domain</p>
 </div>
 </dd></dl>
 
@@ -1631,7 +1623,7 @@ For best experience make sure to use Firefox, because other browser restrict the
 <dt id="digraphs.Digraph.showMIS">
 <tt class="descname">showMIS</tt><big>(</big><em>withListing=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.showMIS" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
-<dt>Prints all maximal independent choices</dt>
+<dt>Prints all maximal independent choices:</dt>
 <dd>Result in self.misset.</dd>
 </dl>
 </dd></dl>
@@ -1667,15 +1659,19 @@ Result saved in self.newmisset.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.showMaxAbsIrred">
 <tt class="descname">showMaxAbsIrred</tt><big>(</big><em>withListing=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.showMaxAbsIrred" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computing maximal -irredundant choices:
-Result in self.absirset.</p>
+<dd><dl class="docutils">
+<dt>Computing maximal -irredundant choices:</dt>
+<dd>Result in self.absirset.</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showMaxDomIrred">
 <tt class="descname">showMaxDomIrred</tt><big>(</big><em>withListing=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.showMaxDomIrred" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computing maximal +irredundant choices:
-Result in self.domirset.</p>
+<dd><dl class="docutils">
+<dt>Computing maximal +irredundant choices:</dt>
+<dd>Result in self.domirset.</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1719,8 +1715,10 @@ the digraph self by reading in the 0-1 misset file format.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.showPreKernels">
 <tt class="descname">showPreKernels</tt><big>(</big><em>withListing=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.showPreKernels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Printing dominant and absorbent preKernels
-Result in self.dompreKernels and self.abspreKernels</p>
+<dd><dl class="docutils">
+<dt>Printing dominant and absorbent preKernels:</dt>
+<dd>Result in self.dompreKernels and self.abspreKernels</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1828,7 +1826,7 @@ Renders the arc density of the induced subgraph.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.strongComponents">
 <tt class="descname">strongComponents</tt><big>(</big><em>setPotential=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.strongComponents" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders the set of strong components of self.</p>
+<dd><p>Renders the set of strong components of self.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1891,15 +1889,12 @@ the bipolar valuation of a digraph.</p>
 <dt id="digraphs.DualDigraph">
 <em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">DualDigraph</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#digraphs.DualDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
-<p>Instantiates the dual Digraph object of a given other Digraph instance</p>
-<dl class="method">
-<dt id="digraphs.DualDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>relationIn</em><big>)</big><a class="headerlink" href="#digraphs.DualDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the dual relation with formula:
-relationOut[a][b] = Max - relationIn[a][b] + Min
-where Max (resp. Min) equals valuation maximum (resp. minimum).</p>
-</dd></dl>
-
+<p>Instantiates the dual Digraph object of a given other Digraph instance.</p>
+<dl class="docutils">
+<dt>The relation constructor returns the dual of self.relation with formula:</dt>
+<dd>relationOut[a][b] = Max - self.relation[a][b] + Min
+where Max (resp. Min) equals valuation maximum (resp. minimum).</dd>
+</dl>
 </dd></dl>
 
 <dl class="class">
@@ -2020,16 +2015,14 @@ Renders the polarised relation.</p>
 <dt id="digraphs.PolarisedDigraph">
 <em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">PolarisedDigraph</tt><big>(</big><em>digraph=None</em>, <em>level=None</em>, <em>KeepValues=True</em>, <em>AlphaCut=False</em>, <em>StrictCut=False</em><big>)</big><a class="headerlink" href="#digraphs.PolarisedDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
-<p>... parameters:</p>
-<div class="highlight-python"><div class="highlight"><pre>digraph + beta cut level between Med and Max.
-
-KeepValues=True/False,
-
-AlphaCut=False/True,
-
-StrictCut=False/True
-</pre></div>
-</div>
+<dl class="docutils">
+<dt>Renders the polarised valuation of digraph:</dt>
+<dd><ul class="first last simple">
+<li>If AlphaCut = True a genuine one-sided True-oriented cut is operated.</li>
+<li>If StrictCut = True, the cut level value is not included.</li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="class">
@@ -2037,13 +2030,6 @@ StrictCut=False/True
 <em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">PreferenceDigraph</tt><big>(</big><em>digraph</em><big>)</big><a class="headerlink" href="#digraphs.PreferenceDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <p>Initiates the valued difference S(a,b) - S(b,a) of a Digraph instance.</p>
-<dl class="method">
-<dt id="digraphs.PreferenceDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>relationIn</em><big>)</big><a class="headerlink" href="#digraphs.PreferenceDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parameters: relation
-Renders the polarised relation.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -2224,17 +2210,11 @@ temporary bipolar-valued weak tournaments</p>
 <dt id="digraphs.SymmetricPartialDigraph">
 <em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">SymmetricPartialDigraph</tt><big>(</big><em>digraph</em><big>)</big><a class="headerlink" href="#digraphs.SymmetricPartialDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
-<p>Renders the symmetric part of a Digraph instance</p>
-<dl class="method">
-<dt id="digraphs.SymmetricPartialDigraph.constructRelation">
-<tt class="descname">constructRelation</tt><big>(</big><em>relationIn</em><big>)</big><a class="headerlink" href="#digraphs.SymmetricPartialDigraph.constructRelation" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Parameters:</dt>
-<dd>relation and cut level.</dd>
-</dl>
-<p>Renders the polarised relation.</p>
-</dd></dl>
-
+<p>Renders the symmetric part of a Digraph instance.</p>
+<p>..caution:</p>
+<div class="highlight-python"><div class="highlight"><pre>The not symmetric links of relationIn are all put to the meadian characteristics value!.
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="class">
@@ -2903,7 +2883,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3598,7 +3578,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
