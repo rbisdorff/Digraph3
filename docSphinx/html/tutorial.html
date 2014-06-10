@@ -785,15 +785,15 @@ linearBallot = {
 </div>
 <div class="section" id="working-with-the-outrankingdigraphs-module">
 <span id="outrankingdigraphs-tutorial-label"></span><h2>Working with the <tt class="docutils literal"><span class="pre">outrankingDigraphs</span></tt> module<a class="headerlink" href="#working-with-the-outrankingdigraphs-module" title="Permalink to this headline">¶</a></h2>
+<p>See also the technical documentation of the <a class="reference internal" href="techDoc.html#outrankingdigraphs-label"><em>outrankingDigraphs module</em></a>.</p>
 <p>In this <em>Digraph3</em> module, the root <tt class="code docutils literal"><span class="pre">OutrankingDiraph</span></tt> class provides a generic <strong>outranking digraph model</strong>. A given object of this class consists in:</p>
 <ol class="arabic simple">
 <li>a potential set of decision <strong>actions</strong> : a dictionary describing the potential decision actions or alternatives with &#8216;name&#8217; and &#8216;comment&#8217; attributes,</li>
 <li>a coherent family of <strong>criteria</strong>: a dictionary of criteria functions used for measurung the performance of each potential decision action with respect to the preference dimension captured by each criterion,</li>
 <li>the <strong>evaluations</strong>: a dictionary of performance evaluations for each decision action or alternative on each criterion function.</li>
-<li>the digraph <strong>valuationDomain</strong> , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),</li>
-<li>the <strong>outranking relation</strong> : a double dictionary defined on the cartesian product of the set of decision  actions and giving the credibility of pairwise outranking situation between each couple of decision alternative computed on the basis of the evaluations observed on the performance</li>
+<li>the digraph <strong>valuationdomain</strong>, a dictionary with three entries: the <em>minimum</em> (-100, means certainly no link), the <em>median</em> (0, means missing information) and the <em>maximum</em> characteristic value (+100, means certainly a link),</li>
+<li>the <strong>outranking relation</strong> : a double dictionary defined on the cartesian product of the set of decision alternatives capturing the credibility of the pairwise <em>outranking situation</em> computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.</li>
 </ol>
-<p>See the technical documentation of the <a class="reference internal" href="techDoc.html#outrankingdigraphs-label"><em>outrankingDigraphs module</em></a>.</p>
 <dl class="docutils">
 <dt>With the help of the <tt class="docutils literal"><span class="pre">RandomBipolarOutrankingDigraph</span></tt> class, let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted &#8220;a01*. <em>a02</em>, ..., <em>a07</em>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
@@ -814,7 +814,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>In this example we consider furthermore a family of seven equisignificant cardinal criteria functions$g01*, <em>g02</em>, ..., <em>g07</em>, measurng the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation&#8217;s uncertainty and imprecision, each criteron function <em>g1$ to *g7</em> admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations:</dt>
+<dt>In this example we consider furthermore a family of seven equisignificant cardinal criteria functions $g01*, <em>g02</em>, ..., <em>g07</em>, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation&#8217;s uncertainty and imprecision, each criteron function <em>g1$ to *g7</em> admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
 <span class="go">*----  criteria -----*</span>
 <span class="go">g01 &#39;digraphs.RandomPerformanceTableau() instance&#39;</span>
