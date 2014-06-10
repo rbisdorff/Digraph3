@@ -14,6 +14,7 @@ Content
 * :ref:`Digraph-Tools-label`
 * :ref:`Graphs-Tutorial-label`
 * :ref:`LinearVoting-label`
+* :ref:`OutrankingDigraphs-Tutorial-label`
 
 .. _Download-Using-label:
 
@@ -235,7 +236,7 @@ Double links are drawn in bold black with an arrowhead at each end, whereas sing
 
 Here for illustration the relation constructor of the ``AsymmetricPartialDigraph`` class::
 
-	def constructRelation(self):
+	def _constructRelation(self):
 	    actions = self.actions
 	    Min = self.valuationdomain['min']
 	    Max = self.valuationdomain['max']
@@ -363,7 +364,7 @@ Back to :ref:`Tutorial-label`
 Working with the :code:`graphs` module
 ......................................
 
-In this Digraph3 module, the main :code:`Graph` class provides a generic **simple graph model**, without loops and multiple links. A given object of this root class consists in:
+In this Digraph3 module, the root :code:`Graph` class provides a generic **simple graph model**, without loops and multiple links. A given object of this class consists in:
 
 1. the graph **vertices** : a dictionary of vertices with 'name' and 'shortname' attributes,
 2. the graph **valuationDomain** , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),
@@ -679,67 +680,166 @@ By seeing the majority margins like a bipolarly-valued characteristic function f
  
 Many more tools for exploiting voting results are available, see the thechnical documentation of the :ref:`votingDiGraphs-label`.
 
-..
-   Using the Digraph3 modules
-   --------------------------
+Back to :ref:`Tutorial-label`
 
-   Simple execution will show a list of results concerning a randomly generated digraph. To make directly executable the code source, you will have to adapt, the case given, the first line of the source code accordingly to your Python3 installation directory. 
+.. _OutrankingDigraphs-Tutorial-label:
 
-   See the http://www.python.org/doc in case of troubles. 
+Working with the ``outrankingDigraphs`` module
+..............................................
 
-   Example::
+In this *Digraph3* module, the root :code:`OutrankingDiraph` class provides a generic **outranking digraph model**. A given object of this class consists in:
 
-	   [$Home/Digraph3]...$python3 digraphs.py
-	   ****************************************************
-	   * Python digraphs module                           *
-	   * $Revision: 1.18 $                               *
-	   * Copyright (C) 2006-2007 University of Luxembourg *
-	   * The module comes with ABSOLUTELY NO WARRANTY     *
-	   * to the extent permitted by the applicable law.   *
-	   * This is free software, and you are welcome to    *
-	   * redistribute it if it remains free software.     *
-	   ****************************************************
-	   *-------- Testing classes and methods -------
-	   ==>> Testing RandomDigraph() class instantiation 
-	   *----- show detail -------------*
-	   Digraph          : randomDigraph
-	   *---- Actions ----*
-	   ['1', '2', '3', '4', '5']
-	   *---- Characteristic valuation domain ----*
-	   {'med': Decimal("0.5"), 'min': Decimal("0"), 'max': Decimal("1.0")}
-	   * ---- Relation Table -----
-	    S   |  '1',  '2',  '3',  '4',  '5',  
-	   -----|------------------------------------------------------------
-	    '1' |  0.00  0.00  0.00  1.00  0.00 
-	    '2' |  0.00  0.00  1.00  1.00  1.00 
-	    '3' |  1.00  1.00  0.00  1.00  1.00 
-	    '4' |  0.00  1.00  1.00  0.00  1.00 
-	    '5' |  0.00  1.00  0.00  0.00  0.00 
-	   *--- Connected Components ---*
-	   1: ['1', '2', '3', '4', '5']
-	   Neighborhoods:
-	   Neighborhoods:
-	     Gamma     :
-	   '1': in => set(['3']), out => set(['4'])
-	   '2': in => set(['3', '4', '5']), out => set(['3', '4', '5'])
-	   '3': in => set(['2', '4']), out => set(['1', '2', '4', '5'])
-	   '4': in => set(['1', '2', '3']), out => set(['2', '3', '5'])
-	   '5': in => set(['2', '3', '4']), out => set(['2'])
-	     Not Gamma :
-	   '1': in => set(['2', '4', '5']), out => set(['2', '3', '5'])
-	   '2': in => set(['1']), out => set(['1'])
-	   '3': in => set(['1', '5']), out => set([])
-	   '4': in => set(['5']), out => set(['1'])
-	   '5': in => set(['1']), out => set(['1', '3', '4'])
-	   *------------------*
-	   If you see this line all tests were passed successfully :-)
-	   Enjoy !
-	   *************************************
-	   * R.B. May 2014               *
-	   * $Revision: 1.600+$                *
-	   *************************************
+1. a potential set of decision **actions** : a dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
+2. a coherent family of **criteria**: a dictionary of criteria functions used for measurung the performance of each potential decision action with respect to the preference dimension captured by each criterion,
+3. the **evaluations**: a dictionary of performance evaluations for each decision action or alternative on each criterion function. 
+4. the digraph **valuationDomain** , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),
+5. the **outranking relation** : a double dictionary defined on the cartesian product of the set of decision  actions and giving the credibility of pairwise outranking situation between each couple of decision alternative computed on the basis of the evaluations observed on the performance 
 
-   Back to the :ref:`Tutorial-label`
+See the technical documentation of the :ref:`outrankingDigraphs-label`.
+
+With the help of the ``RandomBipolarOutrankingDigraph`` class, let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted "a01*. *a02*, ..., *a07*:
+       >>> from outrankingDigraphs import *
+       >>> odg = RandomBipolarOutrankingDigraph()
+       >>> odg.showActions()
+       *----- show digraphs actions --------------*
+       key:  a01
+       name:       random decision action
+       comment:    RandomPerformanceTableau() generated.
+       key:  a02
+       name:       random decision action
+       comment:    RandomPerformanceTableau() generated.
+       ...
+       ...
+       key:  a07
+       name:       random decision action
+       comment:    RandomPerformanceTableau() generated.
+
+In this example we consider furthermore a family of seven equisignificant cardinal criteria functions$g01*, *g02*, ..., *g07*, measurng the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation's uncertainty and imprecision, each criteron function *g1$ to *g7* admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations: 
+        >>> odg.showCriteria()
+	*----  criteria -----*
+	g01 'digraphs.RandomPerformanceTableau() instance'
+	  Scale = [0.0, 100.0]
+	  Weight = 3.0
+	  Threshold pref : 20.00 + 0.00x ; percentile:  0.2857142857142857
+	  Threshold ind : 10.00 + 0.00x ; percentile:  0.09523809523809523
+	  Threshold veto : 80.00 + 0.00x ; percentile:  1.0
+	g02 'digraphs.RandomPerformanceTableau() instance'
+	  Scale = [0.0, 100.0]
+	  Weight = 3.0
+	  Threshold pref : 20.00 + 0.00x ; percentile:  0.3333333333333333
+	  Threshold ind : 10.00 + 0.00x ; percentile:  0.19047619047619047
+	  Threshold veto : 80.00 + 0.00x ; percentile:  0.9523809523809523
+	...
+	...
+	g07 'digraphs.RandomPerformanceTableau() instance'
+	  Scale = [0.0, 100.0]
+	  Weight = 10.0
+	  Threshold pref : 20.00 + 0.00x ; percentile:  0.47619047619047616
+	  Threshold ind : 10.00 + 0.00x ; percentile:  0.23809523809523808
+	  Threshold veto : 80.00 + 0.00x ; percentile:  1.0
+
+The performance evaluations of each decision alternative on each criterion is described in a performance tableau:
+	>>> odg.showPerformanceTableau()
+	*----  performance tableau -----*
+	criteria |  'a01'   'a02'   'a03'   'a04'   'a05'   'a06'   'a07'   
+	---------|-----------------------------------------
+	   'g01'  |  9.6,   48.8,   21.7,   37.3,   81.9,   48.7,   87.7,  
+	   'g02'  |  90.9,   11.8,   96.6,   41.0,   34.0,   53.9,   46.3,  
+	   'g03'  |  97.8,   46.4,   83.3,   30.9,   61.5,   85.4,   82.5,  
+	   'g04'  |  40.5,   43.6,   53.2,   17.5,   38.6,   21.5,   67.6,  
+	   'g05'  |  33.0,   40.7,   96.4,   55.1,   46.2,   58.1,   52.6,  
+	   'g06'  |  47.6,   19.0,   92.7,   55.3,   51.7,   26.6,   40.4,  
+	   'g07'  |  41.2,   64.0,   87.7,   71.6,   57.8,   59.3,   34.7,  
+
+Considering this performance tableau, the class constructor computes the characteristic value r(x S y) of the pairwise ouranking relation "x S y" (see [BIS-2013]_) in a default valuation domain [-100.0,+100.0] whith 0.0 as indetermiate median value. The semantics of r(x S y) are the following:
+    1. If r(x S y) > 0.0 it is more *True* than *False* that *x outranks y*, i.e. alternative x is at least as well performing than alternative y **and** there is no considerable negative performance difference observed in disfavour of x,
+    2. If r(x S y) < 0.0 it is more *False* than *True* that *x outranks y*, i.e. alternative x is **not** at least as well performing than alternative y **and** there is no considerable positive performance difference observed in favour of x,
+    3. If r(x S y) = 0.0 it is *indeterminate* whether *x outranks yor not*.
+
+The resulting bipolarly valued outranking relation may be inspected with the following command:
+	>>> odg.showRelationTable()
+	* ---- Relation Table -----
+	r(x S y)|   'a01'   'a02'   'a03'   'a04'   'a05'   'a06'   'a07'   
+	--------|--------------------------------------------------------------
+	 'a01'  |   +0.00  +29.73  -29.73  +13.51  +48.65  +40.54  +48.65  
+	 'a02'  |  +13.51   +0.00 -100.00  +37.84  +13.51  +43.24  -37.84  
+	 'a03'  |  +83.78 +100.00   +0.00  +91.89  +83.78  +83.78  +70.27  
+	 'a04'  |  +24.32  +48.65  -56.76   +0.00  +24.32  +51.35  +24.32  
+	 'a05'  |  +51.35 +100.00  -70.27  +72.97   +0.00  +51.35  +32.43  
+	 'a06'  |  +16.22  +72.97  -51.35  +35.14  +32.43   +0.00  +37.84  
+	 'a07'  |  +67.57  +45.95  -24.32  +27.03  +27.03  +45.95   +0.00  
+	>>> odg.valuationdomain
+	{'min': Decimal('-100.0'), 'max': Decimal('100.0'), 'med': Decimal('0.0')}
+
+From above given semantics, we may consider that *a01* outranks *a02* (r(a01 S a02) > 0.0), but not *a03* (r(a01 S a03) < 0.0). In order to make understandable the characteristic values shown in the relation table above, we may furthermore have a look at the pairwsie multiple criteria comparison between alternatives *a01* and *a02*:
+	>>> odg.showPairwiseComparison('a01','a02')
+	*------------  pairwise comparison ----*
+	Comparing actions : (a01, a02)
+	crit. wght.  g(x)  g(y)    diff  	| ind     p    concord 	|
+	------------------------------- ---------------------------------
+	g01   3.00  9.56  48.84  -39.28 	| 10.00  20.00   -3.00 	| 
+	g02   3.00  90.94  11.79  +79.15 	| 10.00  20.00   +3.00 	| 
+	g03   6.00  97.79  46.36  +51.43 	| 10.00  20.00   +6.00 	| 
+	g04   5.00  40.53  43.61  -3.08 	| 10.00  20.00   +5.00 	| 
+	g05   3.00  33.04  40.67  -7.63 	| 10.00  20.00   +3.00 	| 
+	g06   7.00  47.57  19.00  +28.57 	| 10.00  20.00   +7.00 	| 
+	g07   10.00  41.21  63.95  -22.74 	| 10.00  20.00   -10.00 | 
+	----------------------------------------------------------------
+	Valuation in range: -37.00 to +37.00; global concordance: +11.00
+
+The outranking valuation characteristic appears as **majority margin** resulting from the difference of the weights of the criteria in favor of the statement that alternative *a01* is at least well perforaming as altenative *a02*. No considerable performance difference being observed, no veto or counter.veto situation is triggered in this pairwsie comparison. Such a case is, however, observed for instance when we pairwise compare the performances of alternatives *a03* and *a02*:
+	>>> odg.showPairwiseComparison('a03','a02')
+	*------------  pairwise comparison ----*
+	Comparing actions : (a03, a02)
+	crit. wght.  g(x)  g(y)    diff  	| ind     p    concord 	|  v  veto/counter-
+	-----------------------------------------------------------------------------------
+	g01   3.00  21.73  48.84  -27.11 	| 10.00  20.00   -3.00 	| 
+	g02   3.00  96.56  11.79  +84.77 	| 10.00  20.00   +3.00 	|  80.00  +1.00
+	g03   6.00  83.35  46.36  +36.99 	| 10.00  20.00   +6.00 	| 
+	g04   5.00  53.22  43.61  +9.61 	| 10.00  20.00   +5.00 	| 
+	g05   3.00  96.42  40.67  +55.75 	| 10.00  20.00   +3.00 	| 
+	g06   7.00  92.65  19.00  +73.65 	| 10.00  20.00   +7.00 	| 
+	g07   10.00  87.70  63.95  +23.75 	| 10.00  20.00   +10.00	| 
+	-----------------------------------------------------------------------------------
+	 Valuation in range: -37.00 to +37.00; global concordance: +31.00
+
+This time, we observe a positive polarisation (r(a02 S a03) = +100.0) due to the considerable out-performance of *a03* against *a02* on criterion g02 (see second row in the relation table above). We notice therefore a positively polarised *certainly confirmed* outranking situation in this case [BIS-2013]_. 
+
+All outranking digraphs, being of root type ``Digraph``, inherit the methods available under this class. The characteristic valuation domain of an outranking digraph may be recoded with the ``Digraph.recodeValutaion()`` method below to the integer range [-37,+37], i.e. plus or minus the global significance of the family of criteria considered in this example instance:
+	>>> odg.recodeValuation(-37,+37)
+	>>> odg.valuationdomain['hasIntegerValuation'] = True
+	>>> Digraph.showRelationTable(odg)
+	* ---- Relation Table -----
+	* ---- Relation Table -----
+	  S   | 'a01'   'a02'	'a03'  'a04'   'a05'   'a06'   'a07'	  
+	-----|------------------------------------------------------------
+	'a01' |    0	 +11	 -11	 +5	+17	+14	+17	 
+	'a02' |   +5	   0	 -37	+13	 +5	+15	-14	 
+	'a03' |  +31	 +37	   0	+34     +31	+31	+26	 
+	'a04' |   +9	 +18	 -21	  0	 +9	+19	 +9	 
+	'a05' |  +19	 +37	 -26	+27	  0	+19	+12	 
+	'a06' |   +6	 +27	 -19	+13	+12	  0	+14	 
+	'a07' |  +25	 +17	  -9	 +9	 +9	+17	  0	 
+	Valuation domain:  {'hasIntegerValuation': True, 'min': Decimal('-37'), 
+			    'max': Decimal('37'), 'med': Decimal('0.000')}
+
+.. note::
+
+ Notice that the reflexive self comparison r(x S x) is set by default to the median valuation value 0, these reflexive terms of the binary relation being generally ignored in most of the ``Digraph`` methods. 
+
+From the theory [BIS-2013]_ we know that the bipolarly outranking relation is **weakly complete**, i.e. if r(x S y) < 0.0 then r(y S x) >= 0.0 . From this property follows that the bipiolarly valued outranking relation verifies the coduality principle: the dual of the converse of the outranking corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing: 
+	>>> cdodg = CoDualDigraph(odg)
+	>>> cdodg.exportGraphViz()
+	*---- exporting a dot file dor GraphViz tools ---------*
+	Exporting to codual-rel_randomperftab.dot
+	dot -Grankdir=BT -Tpng codual-rel_randomperftab.dot -o codual-rel_randomperftab.png
+	>>> ...
+
+.. image:: codualOdg.png
+   :width: 300 px
+   :align: center
+
+It becaomes readily clear from the picture above that alternative *a03* strictly outranks in fact all the other alternatives. Hence, *a03* appears as **Condorcet winner** and my be considered a good candidate for a best choice recommendation in this preference modelling example.  
 
 Documents, indices and tables
 .............................
@@ -758,6 +858,8 @@ References
 .. [FMCAA] Häggström, Olle *Finite Markov Chians and Algorithmic Applications*. Cambridge University Press 2002.
 
 .. [ADT-L2] Bisdorff, Raymond *Who wins the election*. MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( `downloadable here <_static/adtVoting-2x2.pdf>`_ )
+
+.. [BIS-2013] R. Bisdorff (2013) "On Polarizing Outranking Relations with Large Performance Differences" *Journal of Multi-Criteria Decision Analysis* (Wiley) **20**:3-12 (downloadable preprint `PDF file <http://charles-sanders-peirce.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf>`_ 403.5 Kb).
 
 Footnotes
 .........
