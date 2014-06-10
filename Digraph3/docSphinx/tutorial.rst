@@ -855,7 +855,7 @@ As with all Digraph instances, it is possible to store permanently a copy of the
 	*----- saving performance tableau in XMCDA 2.0 format  -------------*
 	File: tutorialPerfTab.xml saved !
 
-The resulting XML file my be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (`see here <_static/tutorialPerfTab.xml>`_). Hitting ``Ctrl U`` in Firefox will opoen a window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau. Reinstantiating again a corresponding updated *odg* object goes like follow:
+The resulting XML file my be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (`see here <_static/tutorialPerfTab.xml>`_). Hitting ``Ctrl U`` in Firefox will open a browser window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau instance. Reinstantiating again a corresponding updated *odg* object goes like follow:
         >>> pt = XMCDA2PerformanceTableau('tutorialPerfTab') 
         >>> odg = BipolarOutrankingDigraph(t)
 	>>> odg.showRelationTable()
@@ -872,7 +872,7 @@ The resulting XML file my be visualized in a browser window (other than Chrome o
    
 We recover the original bipolarly valued outranking characteristics, and we may restart again the preference modelling process. 
 
-Many more tools for exploiting bipolarly valued outranking digraphs are available in the Digraph3 resources (see the thechnical documentation of the :ref:`outrankingDiGraphs-label`).
+Many more tools for exploiting bipolarly valued outranking digraphs are available in the Digraph3 resources (see the thechnical documentation of the :ref:`outrankingDiGraphs-label` and the :ref:`perfTabs-label`).
 
 Back to :ref:`Tutorial-label`
 
