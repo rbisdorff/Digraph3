@@ -795,7 +795,7 @@ linearBallot = {
 <li>the <strong>outranking relation</strong> : a double dictionary defined on the Cartesian product of the set of decision alternatives capturing the credibility of the pairwise <em>outranking situation</em> computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.</li>
 </ol>
 <dl class="docutils">
-<dt>With the help of the <tt class="docutils literal"><span class="pre">RandomBipolarOutrankingDigraph</span></tt> class (of type <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt>) , let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted &#8220;a01*. <em>a02</em>, ..., <em>a07</em>:</dt>
+<dt>With the help of the <tt class="docutils literal"><span class="pre">RandomBipolarOutrankingDigraph</span></tt> class (of type <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt>) , let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted <em>a01</em>, <em>a02</em>, ..., <em>a07</em>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
@@ -814,7 +814,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>In this example we consider furthermore a family of seven equisignificant cardinal criteria functions $g01*, <em>g02</em>, ..., <em>g07</em>, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation&#8217;s uncertainty and imprecision, each criterion function <em>g1$ to *g7</em> admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations:</dt>
+<dt>In this example we consider furthermore a family of seven equisignificant cardinal criteria functions <em>g01</em>, <em>g02</em>, ..., <em>g07</em>, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation&#8217;s uncertainty and imprecision, each criterion function <em>g1$ to *g7</em> admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
 <span class="go">*----  criteria -----*</span>
 <span class="go">g01 &#39;digraphs.RandomPerformanceTableau() instance&#39;</span>
@@ -840,7 +840,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>The performance evaluations of each decision alternative on each criterion is described in a performance tableau:</dt>
+<dt>The performance evaluations of each decision alternative on each criterion are gathered in a <em>performance tableau</em>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
 <span class="go">*----  performance tableau -----*</span>
 <span class="go">criteria |  &#39;a01&#39;   &#39;a02&#39;   &#39;a03&#39;   &#39;a04&#39;   &#39;a05&#39;   &#39;a06&#39;   &#39;a07&#39;</span>
@@ -862,7 +862,7 @@ linearBallot = {
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/tutorialPerfTab.png"><img alt="_images/tutorialPerfTab.png" class="align-center" src="_images/tutorialPerfTab.png" style="width: 400px;" /></a>
-<p>It is worthwhile noticing that <em>green</em> and <em>red</em> marked evaluations indicate best, respectively worst, performances of an alternative on a criterion. In this example, we may hence notice that alternative <em>a03</em> is in fact best performing on four out of seven criteria.</p>
+<p>It is worthwhile noticing that <em>green</em> and <em>red</em> marked evaluations indicate <em>best</em>, respectively <em>worst</em>, performances of an alternative on a criterion. In this example, we may hence notice that alternative <em>a03</em> is in fact best performing on <em>four</em> out of <em>seven</em> criteria.</p>
 <dl class="docutils">
 <dt>Considering the given performance tableau, the <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt> class constructor computes the characteristic value r(x S y) of a pairwise outranking relation &#8220;x S y&#8221; (see <a class="reference internal" href="#bis-2013" id="id7">[BIS-2013]</a>) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:</dt>
 <dd><ol class="first last arabic simple">
@@ -892,16 +892,16 @@ linearBallot = {
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s">&#39;a01&#39;</span><span class="p">,</span><span class="s">&#39;a02&#39;</span><span class="p">)</span>
 <span class="go">*------------  pairwise comparison ----*</span>
 <span class="go">Comparing actions : (a01, a02)</span>
-<span class="go">crit. wght.  g(x)  g(y)    diff         | ind     p    concord  |</span>
+<span class="go">crit. wght.   g(x)  g(y)    diff        | ind     p    concord  |</span>
 <span class="go">------------------------------- ---------------------------------</span>
-<span class="go">g01   3.00  9.56  48.84  -39.28         | 10.00  20.00   -3.00  |</span>
-<span class="go">g02   3.00  90.94  11.79  +79.15        | 10.00  20.00   +3.00  |</span>
-<span class="go">g03   6.00  97.79  46.36  +51.43        | 10.00  20.00   +6.00  |</span>
-<span class="go">g04   5.00  40.53  43.61  -3.08         | 10.00  20.00   +5.00  |</span>
-<span class="go">g05   3.00  33.04  40.67  -7.63         | 10.00  20.00   +3.00  |</span>
-<span class="go">g06   7.00  47.57  19.00  +28.57        | 10.00  20.00   +7.00  |</span>
-<span class="go">g07   10.00  41.21  63.95  -22.74       | 10.00  20.00   -10.00 |</span>
-<span class="go">----------------------------------------------------------------</span>
+<span class="go">g01    3.00   9.56  48.84  -39.28       | 10.00  20.00   -3.00  |</span>
+<span class="go">g02    3.00  90.94  11.79  +79.15       | 10.00  20.00   +3.00  |</span>
+<span class="go">g03    6.00  97.79  46.36  +51.43       | 10.00  20.00   +6.00  |</span>
+<span class="go">g04    5.00  40.53  43.61   -3.08       | 10.00  20.00   +5.00  |</span>
+<span class="go">g05    3.00  33.04  40.67   -7.63       | 10.00  20.00   +3.00  |</span>
+<span class="go">g06    7.00  47.57  19.00  +28.57       | 10.00  20.00   +7.00  |</span>
+<span class="go">g07   10.00  41.21  63.95  -22.74       | 10.00  20.00  -10.00  |</span>
+<span class="go">-----------------------------------------------------------------</span>
 <span class="go">Valuation in range: -37.00 to +37.00; global concordance: +11.00</span>
 </pre></div>
 </div>
@@ -910,15 +910,15 @@ linearBallot = {
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s">&#39;a03&#39;</span><span class="p">,</span><span class="s">&#39;a02&#39;</span><span class="p">)</span>
 <span class="go">*------------  pairwise comparison ----*</span>
 <span class="go">Comparing actions : (a03, a02)</span>
-<span class="go">crit. wght.  g(x)  g(y)    diff         | ind     p    concord  |  v  veto/counter-</span>
+<span class="go">crit.  wght.  g(x)  g(y)    diff        | ind     p    concord  |  v  veto/counter-</span>
 <span class="go">-----------------------------------------------------------------------------------</span>
-<span class="go">g01   3.00  21.73  48.84  -27.11        | 10.00  20.00   -3.00  |</span>
-<span class="go">g02   3.00  96.56  11.79  +84.77        | 10.00  20.00   +3.00  |  80.00  +1.00</span>
-<span class="go">g03   6.00  83.35  46.36  +36.99        | 10.00  20.00   +6.00  |</span>
-<span class="go">g04   5.00  53.22  43.61  +9.61         | 10.00  20.00   +5.00  |</span>
-<span class="go">g05   3.00  96.42  40.67  +55.75        | 10.00  20.00   +3.00  |</span>
-<span class="go">g06   7.00  92.65  19.00  +73.65        | 10.00  20.00   +7.00  |</span>
-<span class="go">g07   10.00  87.70  63.95  +23.75       | 10.00  20.00   +10.00 |</span>
+<span class="go">g01    3.00  21.73  48.84  -27.11       | 10.00  20.00   -3.00  |</span>
+<span class="go">g02    3.00  96.56  11.79  +84.77       | 10.00  20.00   +3.00  |  80.00  +1.00</span>
+<span class="go">g03    6.00  83.35  46.36  +36.99       | 10.00  20.00   +6.00  |</span>
+<span class="go">g04    5.00  53.22  43.61   +9.61       | 10.00  20.00   +5.00  |</span>
+<span class="go">g05    3.00  96.42  40.67  +55.75       | 10.00  20.00   +3.00  |</span>
+<span class="go">g06    7.00  92.65  19.00  +73.65       | 10.00  20.00   +7.00  |</span>
+<span class="go">g07   10.00  87.70  63.95  +23.75       | 10.00  20.00  +10.00  |</span>
 <span class="go">-----------------------------------------------------------------------------------</span>
 <span class="go"> Valuation in range: -37.00 to +37.00; global concordance: +31.00</span>
 </pre></div>
