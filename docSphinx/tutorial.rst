@@ -697,7 +697,7 @@ In this *Digraph3* module, the root :code:`OutrankingDiraph` class provides a ge
 4. the digraph **valuationdomain**, a dictionary with three entries: the *minimum* (-100, means certainly no link), the *median* (0, means missing information) and the *maximum* characteristic value (+100, means certainly a link),
 5. the **outranking relation** : a double dictionary defined on the Cartesian product of the set of decision alternatives capturing the credibility of the pairwise *outranking situation* computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.   
 
-With the help of the ``RandomBipolarOutrankingDigraph`` class (of type ``BipolarOutrankingDigraph``) , let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted "a01*. *a02*, ..., *a07*:
+With the help of the ``RandomBipolarOutrankingDigraph`` class (of type ``BipolarOutrankingDigraph``) , let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted *a01*, *a02*, ..., *a07*:
        >>> from outrankingDigraphs import *
        >>> odg = RandomBipolarOutrankingDigraph()
        >>> odg.showActions()
@@ -714,7 +714,7 @@ With the help of the ``RandomBipolarOutrankingDigraph`` class (of type ``Bipolar
        name:       random decision action
        comment:    RandomPerformanceTableau() generated.
 
-In this example we consider furthermore a family of seven equisignificant cardinal criteria functions $g01*, *g02*, ..., *g07*, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation's uncertainty and imprecision, each criterion function *g1$ to *g7* admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations: 
+In this example we consider furthermore a family of seven equisignificant cardinal criteria functions *g01*, *g02*, ..., *g07*, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation's uncertainty and imprecision, each criterion function *g1$ to *g7* admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations: 
         >>> odg.showCriteria()
 	*----  criteria -----*
 	g01 'digraphs.RandomPerformanceTableau() instance'
@@ -738,7 +738,7 @@ In this example we consider furthermore a family of seven equisignificant cardin
 	  Threshold ind : 10.00 + 0.00x ; percentile:  0.23809523809523808
 	  Threshold veto : 80.00 + 0.00x ; percentile:  1.0
 
-The performance evaluations of each decision alternative on each criterion is described in a performance tableau:
+The performance evaluations of each decision alternative on each criterion are gathered in a *performance tableau*:
 	>>> odg.showPerformanceTableau()
 	*----  performance tableau -----*
 	criteria |  'a01'   'a02'   'a03'   'a04'   'a05'   'a06'   'a07'   
@@ -758,7 +758,7 @@ We may visualize the same performance tableau in a colorful setting in the defau
    :width: 400 px
    :align: center
 
-It is worthwhile noticing that *green* and *red* marked evaluations indicate best, respectively worst, performances of an alternative on a criterion. In this example, we may hence notice that alternative *a03* is in fact best performing on four out of seven criteria.
+It is worthwhile noticing that *green* and *red* marked evaluations indicate *best*, respectively *worst*, performances of an alternative on a criterion. In this example, we may hence notice that alternative *a03* is in fact best performing on *four* out of *seven* criteria.
 
 Considering the given performance tableau, the ``BipolarOutrankingDigraph`` class constructor computes the characteristic value r(x S y) of a pairwise outranking relation "x S y" (see [BIS-2013]_) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:
     1. If r(x S y) > 0.0 it is more *True* than *False* that *x outranks y*, i.e. alternative x is at least as well performing than alternative y **and** there is no considerable negative performance difference observed in disfavour of x,
@@ -784,31 +784,31 @@ From above given semantics, we may consider that *a01* outranks *a02* (r(a01 S a
 	>>> odg.showPairwiseComparison('a01','a02')
 	*------------  pairwise comparison ----*
 	Comparing actions : (a01, a02)
-	crit. wght.  g(x)  g(y)    diff  	| ind     p    concord 	|
+	crit. wght.   g(x)  g(y)    diff  	| ind     p    concord 	|
 	------------------------------- ---------------------------------
-	g01   3.00  9.56  48.84  -39.28 	| 10.00  20.00   -3.00 	| 
-	g02   3.00  90.94  11.79  +79.15 	| 10.00  20.00   +3.00 	| 
-	g03   6.00  97.79  46.36  +51.43 	| 10.00  20.00   +6.00 	| 
-	g04   5.00  40.53  43.61  -3.08 	| 10.00  20.00   +5.00 	| 
-	g05   3.00  33.04  40.67  -7.63 	| 10.00  20.00   +3.00 	| 
-	g06   7.00  47.57  19.00  +28.57 	| 10.00  20.00   +7.00 	| 
-	g07   10.00  41.21  63.95  -22.74 	| 10.00  20.00   -10.00 | 
-	----------------------------------------------------------------
+	g01    3.00   9.56  48.84  -39.28 	| 10.00  20.00   -3.00 	| 
+	g02    3.00  90.94  11.79  +79.15 	| 10.00  20.00   +3.00 	| 
+	g03    6.00  97.79  46.36  +51.43 	| 10.00  20.00   +6.00 	| 
+	g04    5.00  40.53  43.61   -3.08 	| 10.00  20.00   +5.00 	| 
+	g05    3.00  33.04  40.67   -7.63 	| 10.00  20.00   +3.00 	| 
+	g06    7.00  47.57  19.00  +28.57 	| 10.00  20.00   +7.00 	| 
+	g07   10.00  41.21  63.95  -22.74 	| 10.00  20.00  -10.00  | 
+	-----------------------------------------------------------------
 	Valuation in range: -37.00 to +37.00; global concordance: +11.00
 
 The outranking valuation characteristic appears as **majority margin** resulting from the difference of the weights of the criteria in favor of the statement that alternative *a01* is at least well performing as alternative *a02*. No considerable performance difference being observed, no veto or counter.veto situation is triggered in this pairwise comparison. Such a case is, however, observed for instance when we pairwise compare the performances of alternatives *a03* and *a02*:
 	>>> odg.showPairwiseComparison('a03','a02')
 	*------------  pairwise comparison ----*
 	Comparing actions : (a03, a02)
-	crit. wght.  g(x)  g(y)    diff  	| ind     p    concord 	|  v  veto/counter-
+	crit.  wght.  g(x)  g(y)    diff  	| ind     p    concord 	|  v  veto/counter-
 	-----------------------------------------------------------------------------------
-	g01   3.00  21.73  48.84  -27.11 	| 10.00  20.00   -3.00 	| 
-	g02   3.00  96.56  11.79  +84.77 	| 10.00  20.00   +3.00 	|  80.00  +1.00
-	g03   6.00  83.35  46.36  +36.99 	| 10.00  20.00   +6.00 	| 
-	g04   5.00  53.22  43.61  +9.61 	| 10.00  20.00   +5.00 	| 
-	g05   3.00  96.42  40.67  +55.75 	| 10.00  20.00   +3.00 	| 
-	g06   7.00  92.65  19.00  +73.65 	| 10.00  20.00   +7.00 	| 
-	g07   10.00  87.70  63.95  +23.75 	| 10.00  20.00   +10.00	| 
+	g01    3.00  21.73  48.84  -27.11 	| 10.00  20.00   -3.00 	| 
+	g02    3.00  96.56  11.79  +84.77 	| 10.00  20.00   +3.00 	|  80.00  +1.00
+	g03    6.00  83.35  46.36  +36.99 	| 10.00  20.00   +6.00 	| 
+	g04    5.00  53.22  43.61   +9.61 	| 10.00  20.00   +5.00 	| 
+	g05    3.00  96.42  40.67  +55.75 	| 10.00  20.00   +3.00 	| 
+	g06    7.00  92.65  19.00  +73.65 	| 10.00  20.00   +7.00 	| 
+	g07   10.00  87.70  63.95  +23.75 	| 10.00  20.00  +10.00	| 
 	-----------------------------------------------------------------------------------
 	 Valuation in range: -37.00 to +37.00; global concordance: +31.00
 
