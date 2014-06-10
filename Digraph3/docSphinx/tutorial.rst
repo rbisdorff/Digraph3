@@ -687,15 +687,15 @@ Back to :ref:`Tutorial-label`
 Working with the ``outrankingDigraphs`` module
 ..............................................
 
+See also the technical documentation of the :ref:`outrankingDigraphs-label`.
+
 In this *Digraph3* module, the root :code:`OutrankingDiraph` class provides a generic **outranking digraph model**. A given object of this class consists in:
 
 1. a potential set of decision **actions** : a dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
 2. a coherent family of **criteria**: a dictionary of criteria functions used for measurung the performance of each potential decision action with respect to the preference dimension captured by each criterion,
 3. the **evaluations**: a dictionary of performance evaluations for each decision action or alternative on each criterion function. 
-4. the digraph **valuationDomain** , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),
-5. the **outranking relation** : a double dictionary defined on the cartesian product of the set of decision  actions and giving the credibility of pairwise outranking situation between each couple of decision alternative computed on the basis of the evaluations observed on the performance 
-
-See the technical documentation of the :ref:`outrankingDigraphs-label`.
+4. the digraph **valuationdomain**, a dictionary with three entries: the *minimum* (-100, means certainly no link), the *median* (0, means missing information) and the *maximum* characteristic value (+100, means certainly a link),
+5. the **outranking relation** : a double dictionary defined on the cartesian product of the set of decision alternatives capturing the credibility of the pairwise *outranking situation* computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.   
 
 With the help of the ``RandomBipolarOutrankingDigraph`` class, let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted "a01*. *a02*, ..., *a07*:
        >>> from outrankingDigraphs import *
@@ -714,7 +714,7 @@ With the help of the ``RandomBipolarOutrankingDigraph`` class, let us generate f
        name:       random decision action
        comment:    RandomPerformanceTableau() generated.
 
-In this example we consider furthermore a family of seven equisignificant cardinal criteria functions$g01*, *g02*, ..., *g07*, measurng the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation's uncertainty and imprecision, each criteron function *g1$ to *g7* admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations: 
+In this example we consider furthermore a family of seven equisignificant cardinal criteria functions $g01*, *g02*, ..., *g07*, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation's uncertainty and imprecision, each criteron function *g1$ to *g7* admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations: 
         >>> odg.showCriteria()
 	*----  criteria -----*
 	g01 'digraphs.RandomPerformanceTableau() instance'
