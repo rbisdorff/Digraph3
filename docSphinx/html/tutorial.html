@@ -966,6 +966,16 @@ linearBallot = {
 </dl>
 <a class="reference internal image-reference" href="_images/codualOdg.png"><img alt="_images/codualOdg.png" class="align-center" src="_images/codualOdg.png" style="width: 300px;" /></a>
 <p>It becomes readily clear now from the picture above that alternative <em>a03</em> strictly outranks in fact all the other alternatives. Hence, <em>a03</em> appears as <strong>Condorcet winner</strong> and my be recommended as best decision action in this illustrative preference modelling exercise.</p>
+<dl class="docutils">
+<dt>As with all Digraph instances, it is also possible to store permanently a copy of the outranking digraph. As the outranking relation is automatically computed by the class constructor on the basis of a given performance tableau, it is sufficient to save only the latter. For this purpose we are chosing the XMCDA 2.00 XML encoding provided by the Decision Deck Project:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">PerformanceTableau</span><span class="o">.</span><span class="n">saveXMCDA2</span><span class="p">(</span><span class="n">odg</span><span class="p">,</span><span class="s">&#39;tutorialPerfTab&#39;</span><span class="p">)</span>
+<span class="go">*----- saving performance tableau in XMCDA 2.0 format  -------------*</span>
+<span class="go">File: tutorialPerfTab.xml saved !</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>The resulting XML file my be loaded in a browser other than Chrome with a corresponding XMCDA style sheet <a class="reference external" href="_static/tutorialPerfTab.xml">like this</a>.</p>
 </div>
 <div class="section" id="documents-indices-and-tables">
 <h2>Documents, indices and tables<a class="headerlink" href="#documents-indices-and-tables" title="Permalink to this headline">¶</a></h2>
