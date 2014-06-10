@@ -275,7 +275,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <p class="last">Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value <em>r(x S x)</em> for all action <em>x</em> is put to the median, i.e. indeterminate, value) in this case.</p>
 </div>
 <dl class="docutils">
-<dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id10" id="id2">[1]</a> drawing:</dt>
+<dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id11" id="id2">[1]</a> drawing:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
 <span class="go">Exporting to tutRandValDigraph.dot</span>
@@ -507,7 +507,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 <dl class="docutils">
-<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id10" id="id3">[1]</a> method as follows:</dt>
+<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id11" id="id3">[1]</a> method as follows:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
@@ -770,7 +770,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method <a class="footnote-reference" href="#id10" id="id6">[1]</a>, for visualizing an election result:</dt>
+<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method <a class="footnote-reference" href="#id11" id="id6">[1]</a>, for visualizing an election result:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorialLinearBallots&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
 <span class="go">Exporting to tutorialLinearBallots.dot</span>
@@ -795,7 +795,7 @@ linearBallot = {
 <li>the <strong>outranking relation</strong> : a double dictionary defined on the cartesian product of the set of decision alternatives capturing the credibility of the pairwise <em>outranking situation</em> computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.</li>
 </ol>
 <dl class="docutils">
-<dt>With the help of the <tt class="docutils literal"><span class="pre">RandomBipolarOutrankingDigraph</span></tt> class, let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted &#8220;a01*. <em>a02</em>, ..., <em>a07</em>:</dt>
+<dt>With the help of the <tt class="docutils literal"><span class="pre">RandomBipolarOutrankingDigraph</span></tt> class (of type <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt>) , let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted &#8220;a01*. <em>a02</em>, ..., <em>a07</em>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
@@ -844,22 +844,31 @@ linearBallot = {
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
 <span class="go">*----  performance tableau -----*</span>
 <span class="go">criteria |  &#39;a01&#39;   &#39;a02&#39;   &#39;a03&#39;   &#39;a04&#39;   &#39;a05&#39;   &#39;a06&#39;   &#39;a07&#39;</span>
-<span class="go">---------|-----------------------------------------</span>
-<span class="go">   &#39;g01&#39;  |  9.6,   48.8,   21.7,   37.3,   81.9,   48.7,   87.7,</span>
-<span class="go">   &#39;g02&#39;  |  90.9,   11.8,   96.6,   41.0,   34.0,   53.9,   46.3,</span>
-<span class="go">   &#39;g03&#39;  |  97.8,   46.4,   83.3,   30.9,   61.5,   85.4,   82.5,</span>
-<span class="go">   &#39;g04&#39;  |  40.5,   43.6,   53.2,   17.5,   38.6,   21.5,   67.6,</span>
-<span class="go">   &#39;g05&#39;  |  33.0,   40.7,   96.4,   55.1,   46.2,   58.1,   52.6,</span>
-<span class="go">   &#39;g06&#39;  |  47.6,   19.0,   92.7,   55.3,   51.7,   26.6,   40.4,</span>
-<span class="go">   &#39;g07&#39;  |  41.2,   64.0,   87.7,   71.6,   57.8,   59.3,   34.7,</span>
+<span class="go">---------|------------------------------------------------------</span>
+<span class="go">  &#39;g01&#39;  |   9.6    48.8    21.7    37.3    81.9    48.7    87.7</span>
+<span class="go">  &#39;g02&#39;  |  90.9    11.8    96.6    41.0    34.0    53.9    46.3</span>
+<span class="go">  &#39;g03&#39;  |  97.8    46.4    83.3    30.9    61.5    85.4    82.5</span>
+<span class="go">  &#39;g04&#39;  |  40.5    43.6    53.2    17.5    38.6    21.5    67.6</span>
+<span class="go">  &#39;g05&#39;  |  33.0    40.7    96.4    55.1    46.2    58.1    52.6</span>
+<span class="go">  &#39;g06&#39;  |  47.6    19.0    92.7    55.3    51.7    26.6    40.4</span>
+<span class="go">  &#39;g07&#39;  |  41.2    64.0    87.7    71.6    57.8    59.3    34.7</span>
 </pre></div>
 </div>
 </dd>
-<dt>Considering this performance tableau, the class constructor computes the characteristic value r(x S y) of the pairwise ouranking relation &#8220;x S y&#8221; (see <a class="reference internal" href="#bis-2013" id="id7">[BIS-2013]</a>) in a default valuation domain [-100.0,+100.0] whith 0.0 as indetermiate median value. The semantics of r(x S y) are the following:</dt>
+<dt>We may visualize the same pertformance tableau in a colourful setting in the default system browser with the command:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dog</span><span class="o">.</span><span class="n">showHTMLPerformanceTableau</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="_images/tutorialPerfTab.png"><img alt="_images/tutorialPerfTab.png" class="align-center" src="_images/tutorialPerfTab.png" style="width: 300px;" /></a>
+<p>It is wothwhile noticing that <em>green</em> and <em>red</em> marked evaluations indicate best, respectively worst, performances of an alternative on a criterion. In this example, we may hence notice that alternative <em>a03</em> is in fact best performing on four out of seven criteria.</p>
+<dl class="docutils">
+<dt>Considering the given performance tableau, the <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt> class constructor computes the characteristic value r(x S y) of a pairwise ouranking relation &#8220;x S y&#8221; (see <a class="reference internal" href="#bis-2013" id="id7">[BIS-2013]</a>) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:</dt>
 <dd><ol class="first last arabic simple">
 <li>If r(x S y) &gt; 0.0 it is more <em>True</em> than <em>False</em> that <em>x outranks y</em>, i.e. alternative x is at least as well performing than alternative y <strong>and</strong> there is no considerable negative performance difference observed in disfavour of x,</li>
 <li>If r(x S y) &lt; 0.0 it is more <em>False</em> than <em>True</em> that <em>x outranks y</em>, i.e. alternative x is <strong>not</strong> at least as well performing than alternative y <strong>and</strong> there is no considerable positive performance difference observed in favour of x,</li>
-<li>If r(x S y) = 0.0 it is <em>indeterminate</em> whether <em>x outranks yor not</em>.</li>
+<li>If r(x S y) = 0.0 it is <em>indeterminate</em> whether <em>x outranks y or not</em>.</li>
 </ol>
 </dd>
 <dt>The resulting bipolarly valued outranking relation may be inspected with the following command:</dt>
@@ -944,19 +953,19 @@ linearBallot = {
 <p class="last">Notice that the reflexive self comparison r(x S x) is set by default to the median valuation value 0, these reflexive terms of the binary relation being generally ignored in most of the <tt class="docutils literal"><span class="pre">Digraph</span></tt> methods.</p>
 </div>
 <dl class="docutils">
-<dt>From the theory <a class="reference internal" href="#bis-2013" id="id9">[BIS-2013]</a> we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if r(x S y) &lt; 0.0 then r(y S x) &gt;= 0.0 . From this property follows that the bipiolarly valued outranking relation verifies the coduality principle: the dual of the converse of the outranking corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing:</dt>
+<dt>From the theory <a class="reference internal" href="#bis-2013" id="id9">[BIS-2013]</a> we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if r(x S y) &lt; 0.0 then r(y S x) &gt;= 0.0 . From this property follows that the bipiolarly valued outranking relation verifies the coduality principle: the dual of the converse of the outranking corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id11" id="id10">[1]</a>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span> <span class="o">=</span> <span class="n">CoDualDigraph</span><span class="p">(</span><span class="n">odg</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
-<span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
-<span class="go">Exporting to codual-rel_randomperftab.dot</span>
-<span class="go">dot -Grankdir=BT -Tpng codual-rel_randomperftab.dot -o codual-rel_randomperftab.png</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;codualOdg&#39;</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="go">Exporting to codualOdg.dot</span>
+<span class="go">dot -Grankdir=BT -Tpng codualOdg.dot -o codualOdg.png</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
 </pre></div>
 </div>
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/codualOdg.png"><img alt="_images/codualOdg.png" class="align-center" src="_images/codualOdg.png" style="width: 300px;" /></a>
-<p>It becaomes readily clear from the picture above that alternative <em>a03</em> strictly outranks in fact all the other alternatives. Hence, <em>a03</em> appears as <strong>Condorcet winner</strong> and my be considered a good candidate for a best choice recommendation in this preference modelling example.</p>
+<p>It becomes readily clear now from the picture above that alternative <em>a03</em> strictly outranks in fact all the other alternatives. Hence, <em>a03</em> appears as <strong>Condorcet winner</strong> and my be recommended as best decision action in this illustrative preference modelling exercise.</p>
 </div>
 <div class="section" id="documents-indices-and-tables">
 <h2>Documents, indices and tables<a class="headerlink" href="#documents-indices-and-tables" title="Permalink to this headline">¶</a></h2>
@@ -995,10 +1004,10 @@ linearBallot = {
 </div>
 <div class="section" id="footnotes">
 <h2>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h2>
-<table class="docutils footnote" frame="void" id="id10" rules="none">
+<table class="docutils footnote" frame="void" id="id11" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>, <a class="fn-backref" href="#id6">3</a>)</em> The <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method is depending on drawing tools from <a class="reference external" href="http://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></tt> to install them. There are ready <tt class="docutils literal"><span class="pre">dmg</span></tt> installers for Mac OS.</td></tr>
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>, <a class="fn-backref" href="#id6">3</a>, <a class="fn-backref" href="#id10">4</a>)</em> The <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method is depending on drawing tools from <a class="reference external" href="http://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></tt> to install them. There are ready <tt class="docutils literal"><span class="pre">dmg</span></tt> installers for Mac OS.</td></tr>
 </tbody>
 </table>
 </div>
