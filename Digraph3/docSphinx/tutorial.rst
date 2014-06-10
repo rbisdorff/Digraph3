@@ -848,7 +848,14 @@ From the theory [BIS-2013]_ we know that the bipolarly outranking relation is **
    :width: 300 px
    :align: center
 
-It becomes readily clear now from the picture above that alternative *a03* strictly outranks in fact all the other alternatives. Hence, *a03* appears as **Condorcet winner** and my be recommended as best decision action in this illustrative preference modelling exercise.  
+It becomes readily clear now from the picture above that alternative *a03* strictly outranks in fact all the other alternatives. Hence, *a03* appears as **Condorcet winner** and my be recommended as best decision action in this illustrative preference modelling exercise. 
+
+As with all Digraph instances, it is also possible to store permanently a copy of the outranking digraph. As the outranking relation is automatically computed by the class constructor on the basis of a given performance tableau, it is sufficient to save only the latter. For this purpose we are chosing the XMCDA 2.00 XML encoding provided by the Decision Deck Project:
+	>>> PerformanceTableau.saveXMCDA2(odg,'tutorialPerfTab')
+	*----- saving performance tableau in XMCDA 2.0 format  -------------*
+	File: tutorialPerfTab.xml saved !
+
+The resulting XML file my be loaded in a browser other than Chrome with a corresponding XMCDA style sheet `like this <_static/tutorialPerfTab.xml>`_.
 
 Documents, indices and tables
 .............................
