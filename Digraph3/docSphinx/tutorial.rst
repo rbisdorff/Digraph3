@@ -850,12 +850,31 @@ From the theory [BIS-2013]_ we know that the bipolarly outranking relation is **
 
 It becomes readily clear now from the picture above that alternative *a03* strictly outranks in fact all the other alternatives. Hence, *a03* appears as **Condorcet winner** and my be recommended as best decision action in this illustrative preference modelling exercise. 
 
-As with all Digraph instances, it is also possible to store permanently a copy of the outranking digraph. As the outranking relation is automatically computed by the class constructor on the basis of a given performance tableau, it is sufficient to save only the latter. For this purpose we are chosing the XMCDA 2.00 XML encoding provided by the Decision Deck Project:
+As with all Digraph instances, it is also possible to store permanently a copy of the outranking digraph. As the outranking relation is automatically computed by the class constructor on the basis of a given performance tableau, it is sufficient to save only the latter. For this purpose we are chosing the `XMCDA 2.00 <http://www.decision-deck.org/xmcda/>`_ XML encoding provided by the Decision Deck Project (see http://www.decision-deck.org/):
 	>>> PerformanceTableau.saveXMCDA2(odg,'tutorialPerfTab')
 	*----- saving performance tableau in XMCDA 2.0 format  -------------*
 	File: tutorialPerfTab.xml saved !
 
-The resulting XML file my be loaded in a browser other than Chrome with a corresponding XMCDA style sheet `like this <_static/tutorialPerfTab.xml>`_.
+The resulting XML file my be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet `like this <_static/tutorialPerfTab.xml>`_. ``Ctrl U`` in Firefox will also show the xml encoded raw text. It is noww possible to edit as needed the given performance tableau. Reinstantiating again the updated *odg* object goes like follow:
+        >>> odg = BipolarOutrankingDigraph('tutorialPerfTab')
+        >>> odg = BipolarOutrankingDigraph(t)
+	>>> odg.showRelationTable()
+	* ---- Relation Table -----
+	  S   |  'a01'     'a02'   'a03'   'a04'   'a05'   'a06'   'a07'   
+	------|------------------------------------------------------------
+	'a01' |   +0.00   +29.73  -29.73  +13.51  +48.65  +40.54  +48.65  
+	'a02' |   +13.51  +0.00  -100.00  +37.84  +13.51  +43.24  -37.84  
+	'a03' |   +83.78  +100.00  +0.00  +91.89  +83.78  +83.78  +70.27  
+	'a04' |   +24.32  +48.65  -56.76   +0.00  +24.32  +51.35  +24.32  
+	'a05' |   +51.35  +100.00  -70.27  +72.97  +0.00  +51.35  +32.43  
+	'a06' |   +16.22  +72.97  -51.35  +35.14  +32.43   +0.00  +37.84  
+	'a07' |   +67.57  +45.95  -24.32  +27.03  +27.03  +45.95   +0.00  
+   
+And we may restart again the preference modelling process. 
+
+Many more tools for exploiting bipolarly valued outranking digraphs  are available, see the thechnical documentation of the :ref:`outrankingDiGraphs-label`.
+
+Back to :ref:`Tutorial-label`
 
 Documents, indices and tables
 .............................
