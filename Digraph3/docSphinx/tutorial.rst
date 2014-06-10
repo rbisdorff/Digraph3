@@ -697,7 +697,7 @@ In this *Digraph3* module, the root :code:`OutrankingDiraph` class provides a ge
 4. the digraph **valuationdomain**, a dictionary with three entries: the *minimum* (-100, means certainly no link), the *median* (0, means missing information) and the *maximum* characteristic value (+100, means certainly a link),
 5. the **outranking relation** : a double dictionary defined on the cartesian product of the set of decision alternatives capturing the credibility of the pairwise *outranking situation* computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.   
 
-With the help of the ``RandomBipolarOutrankingDigraph`` class, let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted "a01*. *a02*, ..., *a07*:
+With the help of the ``RandomBipolarOutrankingDigraph`` class (of type ``BipolarOutrankingDigraph``) , let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted "a01*. *a02*, ..., *a07*:
        >>> from outrankingDigraphs import *
        >>> odg = RandomBipolarOutrankingDigraph()
        >>> odg.showActions()
@@ -742,19 +742,28 @@ The performance evaluations of each decision alternative on each criterion is de
 	>>> odg.showPerformanceTableau()
 	*----  performance tableau -----*
 	criteria |  'a01'   'a02'   'a03'   'a04'   'a05'   'a06'   'a07'   
-	---------|-----------------------------------------
-	   'g01'  |  9.6,   48.8,   21.7,   37.3,   81.9,   48.7,   87.7,  
-	   'g02'  |  90.9,   11.8,   96.6,   41.0,   34.0,   53.9,   46.3,  
-	   'g03'  |  97.8,   46.4,   83.3,   30.9,   61.5,   85.4,   82.5,  
-	   'g04'  |  40.5,   43.6,   53.2,   17.5,   38.6,   21.5,   67.6,  
-	   'g05'  |  33.0,   40.7,   96.4,   55.1,   46.2,   58.1,   52.6,  
-	   'g06'  |  47.6,   19.0,   92.7,   55.3,   51.7,   26.6,   40.4,  
-	   'g07'  |  41.2,   64.0,   87.7,   71.6,   57.8,   59.3,   34.7,  
+	---------|------------------------------------------------------
+	  'g01'  |   9.6    48.8    21.7    37.3    81.9    48.7    87.7  
+	  'g02'  |  90.9    11.8    96.6    41.0    34.0    53.9    46.3  
+	  'g03'  |  97.8    46.4    83.3    30.9    61.5    85.4    82.5  
+	  'g04'  |  40.5    43.6    53.2    17.5    38.6    21.5    67.6  
+	  'g05'  |  33.0    40.7    96.4    55.1    46.2    58.1    52.6  
+	  'g06'  |  47.6    19.0    92.7    55.3    51.7    26.6    40.4  
+	  'g07'  |  41.2    64.0    87.7    71.6    57.8    59.3    34.7  
 
-Considering this performance tableau, the class constructor computes the characteristic value r(x S y) of the pairwise ouranking relation "x S y" (see [BIS-2013]_) in a default valuation domain [-100.0,+100.0] whith 0.0 as indetermiate median value. The semantics of r(x S y) are the following:
+We may visualize the same pertformance tableau in a colourful setting in the default system browser with the command:
+        >>> dog.showHTMLPerformanceTableau()
+
+.. image:: tutorialPerfTab.png
+   :width: 300 px
+   :align: center
+
+It is wothwhile noticing that *green* and *red* marked evaluations indicate best, respectively worst, performances of an alternative on a criterion. In this example, we may hence notice that alternative *a03* is in fact best performing on four out of seven criteria.
+
+Considering the given performance tableau, the ``BipolarOutrankingDigraph`` class constructor computes the characteristic value r(x S y) of a pairwise ouranking relation "x S y" (see [BIS-2013]_) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:
     1. If r(x S y) > 0.0 it is more *True* than *False* that *x outranks y*, i.e. alternative x is at least as well performing than alternative y **and** there is no considerable negative performance difference observed in disfavour of x,
     2. If r(x S y) < 0.0 it is more *False* than *True* that *x outranks y*, i.e. alternative x is **not** at least as well performing than alternative y **and** there is no considerable positive performance difference observed in favour of x,
-    3. If r(x S y) = 0.0 it is *indeterminate* whether *x outranks yor not*.
+    3. If r(x S y) = 0.0 it is *indeterminate* whether *x outranks y or not*.
 
 The resulting bipolarly valued outranking relation may be inspected with the following command:
 	>>> odg.showRelationTable()
@@ -827,19 +836,19 @@ All outranking digraphs, being of root type ``Digraph``, inherit the methods ava
 
  Notice that the reflexive self comparison r(x S x) is set by default to the median valuation value 0, these reflexive terms of the binary relation being generally ignored in most of the ``Digraph`` methods. 
 
-From the theory [BIS-2013]_ we know that the bipolarly outranking relation is **weakly complete**, i.e. if r(x S y) < 0.0 then r(y S x) >= 0.0 . From this property follows that the bipiolarly valued outranking relation verifies the coduality principle: the dual of the converse of the outranking corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing: 
+From the theory [BIS-2013]_ we know that the bipolarly outranking relation is **weakly complete**, i.e. if r(x S y) < 0.0 then r(y S x) >= 0.0 . From this property follows that the bipiolarly valued outranking relation verifies the coduality principle: the dual of the converse of the outranking corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing [1]_: 
 	>>> cdodg = CoDualDigraph(odg)
-	>>> cdodg.exportGraphViz()
-	*---- exporting a dot file dor GraphViz tools ---------*
-	Exporting to codual-rel_randomperftab.dot
-	dot -Grankdir=BT -Tpng codual-rel_randomperftab.dot -o codual-rel_randomperftab.png
+	>>> cdodg.exportGraphViz('codualOdg')
+	*---- exporting a dot file for GraphViz tools ---------*
+	Exporting to codualOdg.dot
+	dot -Grankdir=BT -Tpng codualOdg.dot -o codualOdg.png
 	>>> ...
 
 .. image:: codualOdg.png
    :width: 300 px
    :align: center
 
-It becaomes readily clear from the picture above that alternative *a03* strictly outranks in fact all the other alternatives. Hence, *a03* appears as **Condorcet winner** and my be considered a good candidate for a best choice recommendation in this preference modelling example.  
+It becomes readily clear now from the picture above that alternative *a03* strictly outranks in fact all the other alternatives. Hence, *a03* appears as **Condorcet winner** and my be recommended as best decision action in this illustrative preference modelling exercise.  
 
 Documents, indices and tables
 .............................
