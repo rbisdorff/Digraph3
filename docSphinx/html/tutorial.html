@@ -814,28 +814,28 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>In this example we consider furthermore a family of seven equisignificant cardinal criteria functions <em>g01</em>, <em>g02</em>, ..., <em>g07</em>, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation&#8217;s uncertainty and imprecision, each criterion function <em>g1$ to *g7</em> admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations:</dt>
+<dt>In this example we consider furthermore a family of seven equisignificant cardinal criteria functions <em>g01</em>, <em>g02</em>, ..., <em>g07</em>, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation&#8217;s uncertainty and imprecision, each criterion function <em>g1</em> to <em>g7</em> admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
 <span class="go">*----  criteria -----*</span>
 <span class="go">g01 &#39;digraphs.RandomPerformanceTableau() instance&#39;</span>
 <span class="go">  Scale = [0.0, 100.0]</span>
 <span class="go">  Weight = 3.0</span>
-<span class="go">  Threshold pref : 20.00 + 0.00x ; percentile:  0.2857142857142857</span>
-<span class="go">  Threshold ind : 10.00 + 0.00x ; percentile:  0.09523809523809523</span>
+<span class="go">  Threshold pref : 20.00 + 0.00x ; percentile:  0.28</span>
+<span class="go">  Threshold ind : 10.00 + 0.00x ; percentile:  0.095</span>
 <span class="go">  Threshold veto : 80.00 + 0.00x ; percentile:  1.0</span>
 <span class="go">g02 &#39;digraphs.RandomPerformanceTableau() instance&#39;</span>
 <span class="go">  Scale = [0.0, 100.0]</span>
 <span class="go">  Weight = 3.0</span>
-<span class="go">  Threshold pref : 20.00 + 0.00x ; percentile:  0.3333333333333333</span>
-<span class="go">  Threshold ind : 10.00 + 0.00x ; percentile:  0.19047619047619047</span>
-<span class="go">  Threshold veto : 80.00 + 0.00x ; percentile:  0.9523809523809523</span>
+<span class="go">  Threshold pref : 20.00 + 0.00x ; percentile:  0.33</span>
+<span class="go">  Threshold ind : 10.00 + 0.00x ; percentile:  0.19</span>
+<span class="go">  Threshold veto : 80.00 + 0.00x ; percentile:  0.95</span>
 <span class="gp">...</span>
 <span class="gp">...</span>
 <span class="go">g07 &#39;digraphs.RandomPerformanceTableau() instance&#39;</span>
 <span class="go">  Scale = [0.0, 100.0]</span>
 <span class="go">  Weight = 10.0</span>
-<span class="go">  Threshold pref : 20.00 + 0.00x ; percentile:  0.47619047619047616</span>
-<span class="go">  Threshold ind : 10.00 + 0.00x ; percentile:  0.23809523809523808</span>
+<span class="go">  Threshold pref : 20.00 + 0.00x ; percentile:  0.476</span>
+<span class="go">  Threshold ind : 10.00 + 0.00x ; percentile:  0.238</span>
 <span class="go">  Threshold veto : 80.00 + 0.00x ; percentile:  1.0</span>
 </pre></div>
 </div>
@@ -855,7 +855,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>We may visualize the same performance tableau in a colorful setting in the default system browser with the command:</dt>
+<dt>We may visualize the same performance tableau in a more colorful setting in the default system browser with the command:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dog</span><span class="o">.</span><span class="n">showHTMLPerformanceTableau</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -953,8 +953,8 @@ linearBallot = {
 <p class="last">Notice that the reflexive self comparison r(x S x) is set by default to the median valuation value 0, these reflexive terms of the binary relation being generally ignored in most of the <tt class="docutils literal"><span class="pre">Digraph</span></tt> methods.</p>
 </div>
 <dl class="docutils">
-<dt>From the theory <a class="reference internal" href="#bis-2013" id="id9">[BIS-2013]</a> we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if r(x S y) &lt; 0.0 then r(y S x) &gt;= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual of the converse of the outranking corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id11" id="id10">[1]</a>:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span> <span class="o">=</span> <span class="n">CoDualDigraph</span><span class="p">(</span><span class="n">odg</span><span class="p">)</span>
+<dt>From the theory <a class="reference internal" href="#bis-2013" id="id9">[BIS-2013]</a> we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if r(x S y) &lt; 0.0 then r(y S x) &gt;= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id11" id="id10">[1]</a>:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="o">~</span><span class="n">odg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;codualOdg&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to codualOdg.dot</span>
@@ -967,15 +967,15 @@ linearBallot = {
 <a class="reference internal image-reference" href="_images/codualOdg.png"><img alt="_images/codualOdg.png" class="align-center" src="_images/codualOdg.png" style="width: 300px;" /></a>
 <p>It becomes readily clear now from the picture above that alternative <em>a03</em> strictly outranks in fact all the other alternatives. Hence, <em>a03</em> appears as <strong>Condorcet winner</strong> and my be recommended as best decision action in this illustrative preference modelling exercise.</p>
 <dl class="docutils">
-<dt>As with all Digraph instances, it is also possible to store permanently a copy of the outranking digraph. As the outranking relation is automatically computed by the class constructor on the basis of a given performance tableau, it is sufficient to save only the latter. For this purpose we are chosing the <a class="reference external" href="http://www.decision-deck.org/xmcda/">XMCDA 2.00</a> XML encoding provided by the Decision Deck Project (see <a class="reference external" href="http://www.decision-deck.org/">http://www.decision-deck.org/</a>):</dt>
+<dt>As with all Digraph instances, it is possible to store permanently a copy of the outranking digraph <em>odg</em>. As its outranking relation is automatically generated by the <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt> class constructor on the basis of a given performance tableau, it is sufficient to save only the latter. For this purpose we are using the <a class="reference external" href="http://www.decision-deck.org/xmcda/">XMCDA 2.00</a> XML encoding scheme of MCDA data, as provided by the Decision Deck Project (see <a class="reference external" href="http://www.decision-deck.org/">http://www.decision-deck.org/</a>):</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">PerformanceTableau</span><span class="o">.</span><span class="n">saveXMCDA2</span><span class="p">(</span><span class="n">odg</span><span class="p">,</span><span class="s">&#39;tutorialPerfTab&#39;</span><span class="p">)</span>
 <span class="go">*----- saving performance tableau in XMCDA 2.0 format  -------------*</span>
 <span class="go">File: tutorialPerfTab.xml saved !</span>
 </pre></div>
 </div>
 </dd>
-<dt>The resulting XML file my be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet <a class="reference external" href="_static/tutorialPerfTab.xml">like this</a>. <tt class="docutils literal"><span class="pre">Ctrl</span> <span class="pre">U</span></tt> in Firefox will also show the xml encoded raw text. It is noww possible to edit as needed the given performance tableau. Reinstantiating again the updated <em>odg</em> object goes like follow:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="s">&#39;tutorialPerfTab&#39;</span><span class="p">)</span>
+<dt>The resulting XML file my be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (<a class="reference external" href="_static/tutorialPerfTab.xml">see here</a>). Hitting <tt class="docutils literal"><span class="pre">Ctrl</span> <span class="pre">U</span></tt> in Firefox will opoen a window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau. Reinstantiating again a corresponding updated <em>odg</em> object goes like follow:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span> <span class="o">=</span> <span class="n">XMCDA2PerfotmanceTableau</span><span class="p">(</span><span class="s">&#39;tutorialPerfTab&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
 <span class="go">* ---- Relation Table -----</span>
@@ -992,8 +992,8 @@ linearBallot = {
 </div>
 </dd>
 </dl>
-<p>And we may restart again the preference modelling process.</p>
-<p>Many more tools for exploiting bipolarly valued outranking digraphs  are available, see the thechnical documentation of the <a class="reference internal" href="techDoc.html#outrankingdigraphs-label"><em>outrankingDigraphs module</em></a>.</p>
+<p>We recover the original bipolarly valued outranking characteristics, and we may restart again the preference modelling process.</p>
+<p>Many more tools for exploiting bipolarly valued outranking digraphs are available in the Digraph3 resources (see the thechnical documentation of the <a class="reference internal" href="techDoc.html#outrankingdigraphs-label"><em>outrankingDigraphs module</em></a>).</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
 <div class="section" id="documents-indices-and-tables">

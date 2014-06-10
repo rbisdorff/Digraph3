@@ -714,28 +714,28 @@ With the help of the ``RandomBipolarOutrankingDigraph`` class (of type ``Bipolar
        name:       random decision action
        comment:    RandomPerformanceTableau() generated.
 
-In this example we consider furthermore a family of seven equisignificant cardinal criteria functions *g01*, *g02*, ..., *g07*, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation's uncertainty and imprecision, each criterion function *g1$ to *g7* admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations: 
+In this example we consider furthermore a family of seven equisignificant cardinal criteria functions *g01*, *g02*, ..., *g07*, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation's uncertainty and imprecision, each criterion function *g1* to *g7* admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations: 
         >>> odg.showCriteria()
 	*----  criteria -----*
 	g01 'digraphs.RandomPerformanceTableau() instance'
 	  Scale = [0.0, 100.0]
 	  Weight = 3.0
-	  Threshold pref : 20.00 + 0.00x ; percentile:  0.2857142857142857
-	  Threshold ind : 10.00 + 0.00x ; percentile:  0.09523809523809523
+	  Threshold pref : 20.00 + 0.00x ; percentile:  0.28
+	  Threshold ind : 10.00 + 0.00x ; percentile:  0.095
 	  Threshold veto : 80.00 + 0.00x ; percentile:  1.0
 	g02 'digraphs.RandomPerformanceTableau() instance'
 	  Scale = [0.0, 100.0]
 	  Weight = 3.0
-	  Threshold pref : 20.00 + 0.00x ; percentile:  0.3333333333333333
-	  Threshold ind : 10.00 + 0.00x ; percentile:  0.19047619047619047
-	  Threshold veto : 80.00 + 0.00x ; percentile:  0.9523809523809523
+	  Threshold pref : 20.00 + 0.00x ; percentile:  0.33
+	  Threshold ind : 10.00 + 0.00x ; percentile:  0.19
+	  Threshold veto : 80.00 + 0.00x ; percentile:  0.95
 	...
 	...
 	g07 'digraphs.RandomPerformanceTableau() instance'
 	  Scale = [0.0, 100.0]
 	  Weight = 10.0
-	  Threshold pref : 20.00 + 0.00x ; percentile:  0.47619047619047616
-	  Threshold ind : 10.00 + 0.00x ; percentile:  0.23809523809523808
+	  Threshold pref : 20.00 + 0.00x ; percentile:  0.476
+	  Threshold ind : 10.00 + 0.00x ; percentile:  0.238
 	  Threshold veto : 80.00 + 0.00x ; percentile:  1.0
 
 The performance evaluations of each decision alternative on each criterion are gathered in a *performance tableau*:
@@ -751,7 +751,7 @@ The performance evaluations of each decision alternative on each criterion are g
 	  'g06'  |  47.6    19.0    92.7    55.3    51.7    26.6    40.4  
 	  'g07'  |  41.2    64.0    87.7    71.6    57.8    59.3    34.7  
 
-We may visualize the same performance tableau in a colorful setting in the default system browser with the command:
+We may visualize the same performance tableau in a more colorful setting in the default system browser with the command:
         >>> dog.showHTMLPerformanceTableau()
 
 .. image:: tutorialPerfTab.png
@@ -836,8 +836,8 @@ All outranking digraphs, being of root type ``Digraph``, inherit the methods ava
 
  Notice that the reflexive self comparison r(x S x) is set by default to the median valuation value 0, these reflexive terms of the binary relation being generally ignored in most of the ``Digraph`` methods. 
 
-From the theory [BIS-2013]_ we know that the bipolarly outranking relation is **weakly complete**, i.e. if r(x S y) < 0.0 then r(y S x) >= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual of the converse of the outranking corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing [1]_: 
-	>>> cdodg = CoDualDigraph(odg)
+From the theory [BIS-2013]_ we know that the bipolarly outranking relation is **weakly complete**, i.e. if r(x S y) < 0.0 then r(y S x) >= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing [1]_: 
+	>>> cdodg = -(~odg)
 	>>> cdodg.exportGraphViz('codualOdg')
 	*---- exporting a dot file for GraphViz tools ---------*
 	Exporting to codualOdg.dot
@@ -850,13 +850,13 @@ From the theory [BIS-2013]_ we know that the bipolarly outranking relation is **
 
 It becomes readily clear now from the picture above that alternative *a03* strictly outranks in fact all the other alternatives. Hence, *a03* appears as **Condorcet winner** and my be recommended as best decision action in this illustrative preference modelling exercise. 
 
-As with all Digraph instances, it is also possible to store permanently a copy of the outranking digraph. As the outranking relation is automatically computed by the class constructor on the basis of a given performance tableau, it is sufficient to save only the latter. For this purpose we are chosing the `XMCDA 2.00 <http://www.decision-deck.org/xmcda/>`_ XML encoding provided by the Decision Deck Project (see http://www.decision-deck.org/):
+As with all Digraph instances, it is possible to store permanently a copy of the outranking digraph *odg*. As its outranking relation is automatically generated by the ``BipolarOutrankingDigraph`` class constructor on the basis of a given performance tableau, it is sufficient to save only the latter. For this purpose we are using the `XMCDA 2.00 <http://www.decision-deck.org/xmcda/>`_ XML encoding scheme of MCDA data, as provided by the Decision Deck Project (see http://www.decision-deck.org/):
 	>>> PerformanceTableau.saveXMCDA2(odg,'tutorialPerfTab')
 	*----- saving performance tableau in XMCDA 2.0 format  -------------*
 	File: tutorialPerfTab.xml saved !
 
-The resulting XML file my be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet `like this <_static/tutorialPerfTab.xml>`_. ``Ctrl U`` in Firefox will also show the xml encoded raw text. It is noww possible to edit as needed the given performance tableau. Reinstantiating again the updated *odg* object goes like follow:
-        >>> odg = BipolarOutrankingDigraph('tutorialPerfTab')
+The resulting XML file my be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (`see here <_static/tutorialPerfTab.xml>`_). Hitting ``Ctrl U`` in Firefox will opoen a window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau. Reinstantiating again a corresponding updated *odg* object goes like follow:
+        >>> pt = XMCDA2PerfotmanceTableau('tutorialPerfTab') 
         >>> odg = BipolarOutrankingDigraph(t)
 	>>> odg.showRelationTable()
 	* ---- Relation Table -----
@@ -870,9 +870,9 @@ The resulting XML file my be visualized in a browser window (other than Chrome o
 	'a06' |   +16.22  +72.97  -51.35  +35.14  +32.43   +0.00  +37.84  
 	'a07' |   +67.57  +45.95  -24.32  +27.03  +27.03  +45.95   +0.00  
    
-And we may restart again the preference modelling process. 
+We recover the original bipolarly valued outranking characteristics, and we may restart again the preference modelling process. 
 
-Many more tools for exploiting bipolarly valued outranking digraphs  are available, see the thechnical documentation of the :ref:`outrankingDiGraphs-label`.
+Many more tools for exploiting bipolarly valued outranking digraphs are available in the Digraph3 resources (see the thechnical documentation of the :ref:`outrankingDiGraphs-label`).
 
 Back to :ref:`Tutorial-label`
 
