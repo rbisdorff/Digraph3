@@ -23,7 +23,7 @@ Downloading and using the Digraph3 modules
 
 Using the Digraph3 modules is easy. You only need to have installed on your system the `Python <https://www.python.org/doc/>` programming language installed of version 3+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.
 
-Two downlaod options are given:
+Two download options are given:
 
 1. Either (easiest under Linux or Mac OS-X), by using a subversion client::
 
@@ -33,9 +33,9 @@ Two downlaod options are given:
 
      http://leopold-loewenheim.uni.lu/Digraph3/dist/
 
-The basic idea of these Python3 modules is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankins, linear ordering, etc. Most of the available computing ressources are meant to illustrate the *Algorithmic Decision Theory* course given in the University of Luxembourg Master in Information and Computer Science (MICS). 
+The basic idea of these Python3 modules is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankins, linear ordering, etc. Most of the available computing resources are meant to illustrate the *Algorithmic Decision Theory* course given in the University of Luxembourg Master in Information and Computer Science (MICS). 
 
-The Python development of these computing ressources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
+The Python development of these computing res-sources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
 
 Back to :ref:`Tutorial-label`
 
@@ -44,7 +44,7 @@ Back to :ref:`Tutorial-label`
 Working with the :code:`digraphs` module
 ........................................
 
-You may start an interactive Python3 session in the :code:`Digraph3` directory for exploring the classes and methods provided by the :code:`digraphs` module. To do so, enter the Python3 commands following the session prompts marqued with >>>. The lines without the prompt are output from the Python interpreter::
+You may start an interactive Python3 session in the :code:`Digraph3` directory for exploring the classes and methods provided by the :code:`digraphs` module. To do so, enter the Python3 commands following the session prompts marked with >>>. The lines without the prompt are output from the Python interpreter::
 
 	[\$HOME/Digraph3]\$ python
 	Python 3.4.0 (default, Apr 11 2014, 13:05:11)
@@ -55,13 +55,13 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
 	>>> g.save('tutorialdigraph')
 	>>> ...
 
-All :code:`Digraph` object *g* contains at least the following subobjects: 
+All :code:`Digraph` object *g* contains at least the following sub-objects: 
 
 1. the digraph nodes called **actions** (decision actions): a list, set or dictionary of nodes with 'name' and 'shortname' attributes,
 2. the digraph **valuationdomain** , a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),
 3. the graph **relation** : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,
 4. its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
-5. its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor. See the refrence manual of the :ref:`digraphs-label`.
+5. its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor. See the reference manual of the :ref:`digraphs-label`.
 
 
 The :code:`g.save('tutorialDigraph')` command stores the digraph *g* in a file named :code:`tutorialDigraph.py` with the following content::
@@ -101,7 +101,7 @@ The :code:`Digraph.showAll()` method output reveals us that the digraph object l
 
 And the :code:`Digraph.exportGraphViz()` method generates in the current working directory a :code:`tutorial.dot` file and a :code:`tutorialdigraph.png` picture of the tutorial digraph *g*, if the `graphviz <http://graphviz.org/>`_ tools are installed on your system.:
 	>>> g.exportGraphViz('tutorialDigraph')
-        *---- exporting a dot file dor GraphViz tools ---------*
+        *---- exporting a dot file do GraphViz tools ---------*
         Exporting to tutorialDigraph.dot
         dot -Grankdir=BT -Tpng tutorialDigraph.dot -o tutorialDigraph.png
 
@@ -140,7 +140,7 @@ Some special classes of digraphs, like the :code:`CompleteDigraph`, the :code:`E
         >>> from digraphs import GridDigraph
 	>>> grid = GridDigraph(n=5,m=5,hasMedianSplitOrientation=True)
 	>>> grid.exportGraphViz('tutorialGrid')
-	*---- exporting a dot file dor GraphViz tools ---------*
+	*---- exporting a dot file for GraphViz tools ---------*
 	Exporting to tutorialGrid.dot
 	dot -Grankdir=BT -Tpng TutorialGrid.dot -o tutorialGrid.png
 
@@ -211,7 +211,7 @@ With the ``save()`` method we may keep a backup version for future use of *dg* w
     
 We may have an even better insight into the ``Digraph`` object *dg* by looking at a `graphviz <http://graphviz.org/>`_ [1]_ drawing:
     >>> dg.exportGraphViz('tutRandValDigraph')
-    *---- exporting a dot file dor GraphViz tools ---------*
+    *---- exporting a dot file for GraphViz tools ---------*
     Exporting to tutRandValDigraph.dot
     dot -Grankdir=BT -Tpng tutRandValDigraph.dot -o tutRandValDigraph.png
 
@@ -219,7 +219,7 @@ We may have an even better insight into the ``Digraph`` object *dg* by looking a
    :width: 300 px
    :align: center
 
-Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the indeterminated relational situation (*r(6 S 2) = 0.00*) observed between nodes '6' and '2'. The corresponding link is marked in grey with an open arrowhead in the drawing. We may now extract both this symmetric as well as this asymetric part of digraph *dg* with the help of two corresponding constructors:
+Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (*r(6 S 2) = 0.00*) observed between nodes '6' and '2'. The corresponding link is marked in gray with an open arrowhead in the drawing. We may now extract both this symmetric as well as this asymmetric part of digraph *dg* with the help of two corresponding constructors:
     >>> from digraphs import AsymmetricPartialDigraph, SymmetricPartialDigraph
     >>> asymDg = AsymmetricPartialDigraph(dg)
     >>> asymDg.exportGraphViz()
@@ -431,7 +431,7 @@ The saved Graph instance named :code:`tutorialGraph.py` is encoded in python3 as
 The stored graph can be recalled and plotted with the generic :code:`exportGraphViz` [1]_ method as follows:
 	>>> g = Graph('tutorialGraph')
 	>>> g.exportGraphViz()
-	*---- exporting a dot file dor GraphViz tools ---------*
+	*---- exporting a dot file for GraphViz tools ---------*
 	Exporting to tutorialGraph.dot
 	fdp -Tpng tutorialGraph.dot -o tutorialGraph.png
 
@@ -670,7 +670,7 @@ A candidate *x*, showing a positive majority margin *M(x,y)*, is beating candida
     
 By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic ``Digraph`` class (see :ref:`Digraphs-Tutorial-label`), and especially its ``exportGraphViz`` method [1]_, for visualizing an election result:
    >>> cdg.exportGraphViz('tutorialLinearBallots')
-   *---- exporting a dot file dor GraphViz tools ---------*
+   *---- exporting a dot file for GraphViz tools ---------*
    Exporting to tutorialLinearBallots.dot
    dot -Grankdir=BT -Tpng tutorialLinearBallots.dot -o tutorialLinearBallots.png
 
@@ -692,10 +692,10 @@ See also the technical documentation of the :ref:`outrankingDigraphs-label`.
 In this *Digraph3* module, the root :code:`OutrankingDiraph` class provides a generic **outranking digraph model**. A given object of this class consists in:
 
 1. a potential set of decision **actions** : a dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
-2. a coherent family of **criteria**: a dictionary of criteria functions used for measurung the performance of each potential decision action with respect to the preference dimension captured by each criterion,
+2. a coherent family of **criteria**: a dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
 3. the **evaluations**: a dictionary of performance evaluations for each decision action or alternative on each criterion function. 
 4. the digraph **valuationdomain**, a dictionary with three entries: the *minimum* (-100, means certainly no link), the *median* (0, means missing information) and the *maximum* characteristic value (+100, means certainly a link),
-5. the **outranking relation** : a double dictionary defined on the cartesian product of the set of decision alternatives capturing the credibility of the pairwise *outranking situation* computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.   
+5. the **outranking relation** : a double dictionary defined on the Cartesian product of the set of decision alternatives capturing the credibility of the pairwise *outranking situation* computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.   
 
 With the help of the ``RandomBipolarOutrankingDigraph`` class (of type ``BipolarOutrankingDigraph``) , let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted "a01*. *a02*, ..., *a07*:
        >>> from outrankingDigraphs import *
@@ -714,7 +714,7 @@ With the help of the ``RandomBipolarOutrankingDigraph`` class (of type ``Bipolar
        name:       random decision action
        comment:    RandomPerformanceTableau() generated.
 
-In this example we consider furthermore a family of seven equisignificant cardinal criteria functions $g01*, *g02*, ..., *g07*, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation's uncertainty and imprecision, each criteron function *g1$ to *g7* admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations: 
+In this example we consider furthermore a family of seven equisignificant cardinal criteria functions $g01*, *g02*, ..., *g07*, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation's uncertainty and imprecision, each criterion function *g1$ to *g7* admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations: 
         >>> odg.showCriteria()
 	*----  criteria -----*
 	g01 'digraphs.RandomPerformanceTableau() instance'
@@ -751,16 +751,16 @@ The performance evaluations of each decision alternative on each criterion is de
 	  'g06'  |  47.6    19.0    92.7    55.3    51.7    26.6    40.4  
 	  'g07'  |  41.2    64.0    87.7    71.6    57.8    59.3    34.7  
 
-We may visualize the same pertformance tableau in a colourful setting in the default system browser with the command:
+We may visualize the same performance tableau in a colorful setting in the default system browser with the command:
         >>> dog.showHTMLPerformanceTableau()
 
 .. image:: tutorialPerfTab.png
-   :width: 300 px
+   :width: 400 px
    :align: center
 
-It is wothwhile noticing that *green* and *red* marked evaluations indicate best, respectively worst, performances of an alternative on a criterion. In this example, we may hence notice that alternative *a03* is in fact best performing on four out of seven criteria.
+It is worthwhile noticing that *green* and *red* marked evaluations indicate best, respectively worst, performances of an alternative on a criterion. In this example, we may hence notice that alternative *a03* is in fact best performing on four out of seven criteria.
 
-Considering the given performance tableau, the ``BipolarOutrankingDigraph`` class constructor computes the characteristic value r(x S y) of a pairwise ouranking relation "x S y" (see [BIS-2013]_) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:
+Considering the given performance tableau, the ``BipolarOutrankingDigraph`` class constructor computes the characteristic value r(x S y) of a pairwise outranking relation "x S y" (see [BIS-2013]_) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:
     1. If r(x S y) > 0.0 it is more *True* than *False* that *x outranks y*, i.e. alternative x is at least as well performing than alternative y **and** there is no considerable negative performance difference observed in disfavour of x,
     2. If r(x S y) < 0.0 it is more *False* than *True* that *x outranks y*, i.e. alternative x is **not** at least as well performing than alternative y **and** there is no considerable positive performance difference observed in favour of x,
     3. If r(x S y) = 0.0 it is *indeterminate* whether *x outranks y or not*.
@@ -780,7 +780,7 @@ The resulting bipolarly valued outranking relation may be inspected with the fol
 	>>> odg.valuationdomain
 	{'min': Decimal('-100.0'), 'max': Decimal('100.0'), 'med': Decimal('0.0')}
 
-From above given semantics, we may consider that *a01* outranks *a02* (r(a01 S a02) > 0.0), but not *a03* (r(a01 S a03) < 0.0). In order to make understandable the characteristic values shown in the relation table above, we may furthermore have a look at the pairwsie multiple criteria comparison between alternatives *a01* and *a02*:
+From above given semantics, we may consider that *a01* outranks *a02* (r(a01 S a02) > 0.0), but not *a03* (r(a01 S a03) < 0.0). In order to make understandable the characteristic values shown in the relation table above, we may furthermore have a look at the pairwise multiple criteria comparison between alternatives *a01* and *a02*:
 	>>> odg.showPairwiseComparison('a01','a02')
 	*------------  pairwise comparison ----*
 	Comparing actions : (a01, a02)
@@ -796,7 +796,7 @@ From above given semantics, we may consider that *a01* outranks *a02* (r(a01 S a
 	----------------------------------------------------------------
 	Valuation in range: -37.00 to +37.00; global concordance: +11.00
 
-The outranking valuation characteristic appears as **majority margin** resulting from the difference of the weights of the criteria in favor of the statement that alternative *a01* is at least well perforaming as altenative *a02*. No considerable performance difference being observed, no veto or counter.veto situation is triggered in this pairwsie comparison. Such a case is, however, observed for instance when we pairwise compare the performances of alternatives *a03* and *a02*:
+The outranking valuation characteristic appears as **majority margin** resulting from the difference of the weights of the criteria in favor of the statement that alternative *a01* is at least well performing as alternative *a02*. No considerable performance difference being observed, no veto or counter.veto situation is triggered in this pairwise comparison. Such a case is, however, observed for instance when we pairwise compare the performances of alternatives *a03* and *a02*:
 	>>> odg.showPairwiseComparison('a03','a02')
 	*------------  pairwise comparison ----*
 	Comparing actions : (a03, a02)
@@ -836,7 +836,7 @@ All outranking digraphs, being of root type ``Digraph``, inherit the methods ava
 
  Notice that the reflexive self comparison r(x S x) is set by default to the median valuation value 0, these reflexive terms of the binary relation being generally ignored in most of the ``Digraph`` methods. 
 
-From the theory [BIS-2013]_ we know that the bipolarly outranking relation is **weakly complete**, i.e. if r(x S y) < 0.0 then r(y S x) >= 0.0 . From this property follows that the bipiolarly valued outranking relation verifies the coduality principle: the dual of the converse of the outranking corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing [1]_: 
+From the theory [BIS-2013]_ we know that the bipolarly outranking relation is **weakly complete**, i.e. if r(x S y) < 0.0 then r(y S x) >= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual of the converse of the outranking corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing [1]_: 
 	>>> cdodg = CoDualDigraph(odg)
 	>>> cdodg.exportGraphViz('codualOdg')
 	*---- exporting a dot file for GraphViz tools ---------*
