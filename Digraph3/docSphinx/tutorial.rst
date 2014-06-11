@@ -7,7 +7,7 @@ Tutorial of the Digraph3 resources
 .. _Tutorial-label:
 
 Content
-........
+-------
 
 * :ref:`Download-Using-label`
 * :ref:`Digraphs-Tutorial-label`
@@ -19,9 +19,12 @@ Content
 .. _Download-Using-label:
 
 Downloading and using the Digraph3 modules
-..........................................
+------------------------------------------
 
 Using the Digraph3 modules is easy. You only need to have installed on your system the `Python <https://www.python.org/doc/>` programming language installed of version 3+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.
+
+Download options
+................
 
 Two download options are given:
 
@@ -33,16 +36,19 @@ Two download options are given:
 
      http://leopold-loewenheim.uni.lu/Digraph3/dist/
 
+Purpose
+.......
+
 The basic idea of these Python3 modules is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankins, linear ordering, etc. Most of the available computing resources are meant to illustrate the *Algorithmic Decision Theory* course given in the University of Luxembourg Master in Information and Computer Science (MICS). 
 
-The Python development of these computing res-sources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
+The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
 
 Back to :ref:`Tutorial-label`
 
 .. _Digraphs-Tutorial-label:
 
 Working with the :code:`digraphs` module
-........................................
+----------------------------------------
 
 You may start an interactive Python3 session in the :code:`Digraph3` directory for exploring the classes and methods provided by the :code:`digraphs` module. To do so, enter the Python3 commands following the session prompts marked with >>>. The lines without the prompt are output from the Python interpreter::
 
@@ -55,6 +61,9 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
 	>>> g.save('tutorialdigraph')
 	>>> ...
 
+Structure of a ``Digraph`` object
+.................................
+
 All :code:`Digraph` object *g* contains at least the following sub-objects: 
 
 1. the digraph nodes called **actions** (decision actions): a list, set or dictionary of nodes with 'name' and 'shortname' attributes,
@@ -63,6 +72,8 @@ All :code:`Digraph` object *g* contains at least the following sub-objects:
 4. its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
 5. its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor. See the reference manual of the :ref:`digraphs-label`.
 
+Permanent storage
+.................
 
 The :code:`g.save('tutorialDigraph')` command stores the digraph *g* in a file named :code:`tutorialDigraph.py` with the following content::
 
@@ -78,6 +89,9 @@ The :code:`g.save('tutorialDigraph')` command stores the digraph *g* in a file n
        '4': {'1':1,'2':-1,'3':1,'4':-1,'5':1},
        '5': {'1':1,'2':-1,'3':1,'4':-1,'5':-1}
        }
+
+Inspecting a ``Digraph`` object
+...............................
 
 The :code:`Digraph.showAll()` method output reveals us that the digraph object loaded from file :code:`tutorialDigraph.py` is a connected irreflexive digraph of order five evaluated in a valuation domain from -1 to 1.
         >>> g = Digraph('tutorialDigraph')
@@ -136,6 +150,9 @@ Some simple methods are easily applicable to this instantiated Digraph object *g
 	agglomeration coefficient : 33.33
 	>>> ...
 
+Special classes of digraphs
+...........................
+
 Some special classes of digraphs, like the :code:`CompleteDigraph`, the :code:`EmptyDigraph` or the oriented :code:`GridDigraph` class for instance, are readily available:
         >>> from digraphs import GridDigraph
 	>>> grid = GridDigraph(n=5,m=5,hasMedianSplitOrientation=True)
@@ -157,7 +174,10 @@ Back to :ref:`Tutorial-label`
 .. _Digraph-Tools-label:
 
 Tools for manipulating Digraph objects
-......................................
+--------------------------------------
+
+Inspecting a random digraph
+...........................
 
 We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7, denoted *dg* and modelling a binary relation (*x S y*) defined on the set of nodes of *dg*. For this purpose, the ``digraphs`` module provides conveniently a specific ``RandomValuationDigraph`` constructor:
     >>> from digraphs import RandomValuationDigraph
@@ -208,7 +228,10 @@ With the ``save()`` method we may keep a backup version for future use of *dg* w
 .. warning::
     
     Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value *r(x S x)* for all action *x* is put to the median, i.e. indeterminate, value) in this case.
-    
+
+Exporting a graphviz drawing
+............................
+
 We may have an even better insight into the ``Digraph`` object *dg* by looking at a `graphviz <http://graphviz.org/>`_ [1]_ drawing:
     >>> dg.exportGraphViz('tutRandValDigraph')
     *---- exporting a dot file for GraphViz tools ---------*
@@ -219,7 +242,12 @@ We may have an even better insight into the ``Digraph`` object *dg* by looking a
    :width: 300 px
    :align: center
 
-Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (*r(6 S 2) = 0.00*) observed between nodes '6' and '2'. The corresponding link is marked in gray with an open arrowhead in the drawing. We may now extract both this symmetric as well as this asymmetric part of digraph *dg* with the help of two corresponding constructors:
+Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (*r(6 S 2) = 0.00*) observed between nodes '6' and '2'. The corresponding link is marked in gray with an open arrowhead in the drawing. 
+
+Asymmetric and symmetric parts
+..............................
+
+We may now extract both this symmetric as well as this asymmetric part of digraph *dg* with the help of two corresponding constructors:
     >>> from digraphs import AsymmetricPartialDigraph, SymmetricPartialDigraph
     >>> asymDg = AsymmetricPartialDigraph(dg)
     >>> asymDg.exportGraphViz()
@@ -271,6 +299,9 @@ We may recover object *dg* from both partial objects *asymDg* and *symDg* with a
     '5'    |  0.32 -0.48 -0.46  0.64  0.00 -0.22 -0.52	 
     '6'    | -0.84  0.00 -0.40 -0.96 -0.18  0.00 -0.22	 
     '7'    |  0.88  0.72  0.82  0.52 -0.84  0.04  0.00	 
+
+Dual, converse and coduals
+..........................
 
 We may as readily compute the **dual**, the **converse** and the **codual** (dual and converse) of dg:
     >>> from digraphs import DualDigraph, ConverseDigraph, CoDualDigraph
@@ -326,6 +357,9 @@ Computing the dual, respectively the converse, may also be done with prefixing t
     '6'     | -0.38  0.54 -0.84 -0.66  0.22  0.00 -0.04	 
     '7'     | -0.44 -0.02  1.00 -0.76  0.52  0.22  0.00	 
 
+Symmetric and transitive closure
+................................
+
 Symmetric and transtive closure in site constructors are also available, Note that it is a good idea,before going ahead with these in-site operations that irreversibly modify the original dg object, to previously make a backup version of *dg*. The simplest storage method, always provide by the generic ``Digraph.save()`` writes out in a named file the python content in string representation:
     >>> dg.save('tutRandValDigraph')
     >>> dg.closeSymmetric()
@@ -356,6 +390,9 @@ As the original digraph *dg* was connected (see above the result of the ``dg.sho
       Not Gamma :
     'frozenset({'7', '1', '2', '6', '5', '3', '4'})': in => set(), out => set()
     >>> ...
+
+Saving the digraph in CSV format
+................................ 
 
 Sometimes it is required to exchange the graph valuation data in CSV format with a statistical package like `R <http://www.r-project.org/>`_. For this purpose it is possible to export the digraph data into a CSV file. The valuation domain is hereby normalized by default to the range [-1,1] and the diagonal put by defalut to to the minimal value -1:
 	>>> dg = Digraph('tutRandValDigraph')
@@ -389,7 +426,10 @@ Back to :ref:`Tutorial-label`
 .. _Graphs-Tutorial-label:
 
 Working with the :code:`graphs` module
-......................................
+--------------------------------------
+
+Structure of a ``Graph`` object
+...............................
 
 In this Digraph3 module, the root :code:`Graph` class provides a generic **simple graph model**, without loops and multiple links. A given object of this class consists in:
 
@@ -472,6 +512,9 @@ Chordless cycles may be enumerated in the given graph like follows:
 	Chordless cycle certificate -->>>  ['v5', 'v4', 'v2', 'v6', 'v5']
 	[(['v5', 'v4', 'v2', 'v6', 'v5'], frozenset({'v5', 'v4', 'v2', 'v6'}))]
 
+q-coloring of a graph
+.....................
+
 And, a 3-coloring of the tutorial graph may be computed and plotted as follows:
 	>>> g = Graph('tutorialGrah')
 	>>> qc = Q_Coloring(g)
@@ -515,6 +558,9 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
    :width: 400 px
    :align: center
 
+MIS enumeration
+...............
+
 2-colorings define independent sets of vertices that are maximal in cardinality; for short called a **MIS**. Computing such MISs in a given :code:`Graph` instance may be achieved by converting the :code:`Graph` instance into a :code:`Digraph` instance. Here a :code:`self.showMIS()` method is proposed:
 	>>> g = Graph('tutorialGrah')
 	>>> dg = g.graph2Digraph()
@@ -538,6 +584,9 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
 	 frozenset({'v7', 'v2', 'v1'}), 
 	 frozenset({'v5', 'v3', 'v7'})}
 
+Grids and the Ising model
+.........................
+
 Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids** are available in the :code:`graphs` module. For instance, we may use a Gibbs sampler again for simulating an **Ising Model** on such a grid:
         >>> from graphs import GridGraph. IsingModel
 	>>> g = GridGraph(n=15,m=15)
@@ -557,6 +606,9 @@ Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids*
 .. image:: grid-15-15-ising.png
    :width: 600 px
    :align: center
+
+Metropolis random walks
+............................
 
 Finally, we provide a specialisation of the :code:`Graph` class for implementing a generic **Metropolis MCMC** (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  :code:`probs = {‘v1’: x, ‘v2’: y, ...}` for visiting each vertice. 
         >>> from graphs import MetropolisChain
@@ -608,7 +660,10 @@ Back to :ref:`Tutorial-label`
 .. _LinearVoting-label:
 
 Computing the winner of an election
-...................................
+-----------------------------------
+
+Linear voting profiles
+......................
 
 The :ref:`votingDigraphs-label` provides resources for handling election results [ADT-L2]_, like the ``LinearVotingProfile`` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored as two Python dicttionaries, one for the candidates and another one for the linear ballots::
     
@@ -651,6 +706,9 @@ Editing of the linear voting profile may be acheived by storing the data in a fi
     *--- Saving linear profile in file: <tutorialLinearVotingProfile.py> ---*
     >>> v = LinearVotingProfile('tutorialLinearVotingProfile')
 
+Computing the winner
+....................
+
 We may easily compute **uninominal votes**, ie how many times a candidate was ranked first, and who is consequently the **simple majority** winner(s) in this election. 
     >>> v.computeUninominalVotes()
     {'a2': 1.0, 'a1': 2.0, 'a3': 2.0}
@@ -671,6 +729,9 @@ We may also follow the Chevalier Borda's advice and, after a **rank analysis** o
     >>> v.computeBordaWinners()
     ['a1']
     >>> ... 
+
+The Condorcet winner
+....................
 
 In our randomly generated election results, we are lucky. The instant runoff winner and the Borda winner determine, both, candidate *a1*. However, we could also follow the Marquis de Condorcet's advice, and compute the **majority margins** obtained by voting for each individual pair of candidates. For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the majority margin *M(a1,a2)* is 4 - 1 = +3. These majority margins define on the set of candidates what we call the **Condorcet digraph**, a specialization of the ``Digraph`` class for handing such pairwise majority margins:
     >>> cdg = CondorcetDigraph(v,hasIntegerValuation=True)
@@ -712,9 +773,12 @@ Back to :ref:`Tutorial-label`
 .. _OutrankingDigraphs-Tutorial-label:
 
 Working with the ``outrankingDigraphs`` module
-..............................................
+----------------------------------------------
 
 See also the technical documentation of the :ref:`outrankingDigraphs-label`.
+
+Structure of an outranking digraph
+..................................
 
 In this *Digraph3* module, the root :code:`OutrankingDiraph` class provides a generic **outranking digraph model**. A given object of this class consists in:
 
@@ -790,6 +854,9 @@ We may visualize the same performance tableau in a more colorful setting in the 
 
 It is worthwhile noticing that *green* and *red* marked evaluations indicate *best*, respectively *worst*, performances of an alternative on a criterion. In this example, we may hence notice that alternative *a03* is in fact best performing on *four* out of *seven* criteria.
 
+Semantics of the bipolar valuation
+..................................
+
 Considering the given performance tableau, the ``BipolarOutrankingDigraph`` class constructor computes the characteristic value r(x S y) of a pairwise outranking relation "x S y" (see [BIS-2013]_) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:
     1. If r(x S y) > 0.0 it is more *True* than *False* that *x outranks y*, i.e. alternative x is at least as well performing than alternative y **and** there is no considerable negative performance difference observed in disfavour of x,
     2. If r(x S y) < 0.0 it is more *False* than *True* that *x outranks y*, i.e. alternative x is **not** at least as well performing than alternative y **and** there is no considerable positive performance difference observed in favour of x,
@@ -809,6 +876,9 @@ The resulting bipolarly valued outranking relation may be inspected with the fol
 	 'a07'  |  +67.57  +45.95  -24.32  +27.03  +27.03  +45.95   +0.00  
 	>>> odg.valuationdomain
 	{'min': Decimal('-100.0'), 'max': Decimal('100.0'), 'med': Decimal('0.0')}
+
+Pairwise multiple criteria comparisons
+......................................
 
 From above given semantics, we may consider that *a01* outranks *a02* (r(a01 S a02) > 0.0), but not *a03* (r(a01 S a03) < 0.0). In order to make understandable the characteristic values shown in the relation table above, we may furthermore have a look at the pairwise multiple criteria comparison between alternatives *a01* and *a02*:
 	>>> odg.showPairwiseComparison('a01','a02')
@@ -845,6 +915,9 @@ The outranking valuation characteristic appears as **majority margin** resulting
 
 This time, we observe a positive polarisation (r(a02 S a03) = +100.0) due to the considerable out-performance of *a03* against *a02* on criterion g02 (see second row in the relation table above). We notice therefore a positively polarised *certainly confirmed* outranking situation in this case [BIS-2013]_. 
 
+Recoding the valuation
+......................
+
 All outranking digraphs, being of root type ``Digraph``, inherit the methods available under this class. The characteristic valuation domain of an outranking digraph may be recoded with the ``Digraph.recodeValutaion()`` method below to the integer range [-37,+37], i.e. plus or minus the global significance of the family of criteria considered in this example instance:
 	>>> odg.recodeValuation(-37,+37)
 	>>> odg.valuationdomain['hasIntegerValuation'] = True
@@ -868,6 +941,9 @@ All outranking digraphs, being of root type ``Digraph``, inherit the methods ava
 
  Notice that the reflexive self comparison r(x S x) is set by default to the median valuation value 0, these reflexive terms of the binary relation being generally ignored in most of the ``Digraph`` methods. 
 
+Strict outranking via the codual digraph
+........................................
+
 From the theory [BIS-2013]_ we know that the bipolarly outranking relation is **weakly complete**, i.e. if r(x S y) < 0.0 then r(y S x) >= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing [1]_: 
 	>>> cdodg = -(~odg)
 	>>> cdodg.exportGraphViz('codualOdg')
@@ -881,6 +957,9 @@ From the theory [BIS-2013]_ we know that the bipolarly outranking relation is **
    :align: center
 
 It becomes readily clear now from the picture above that alternative *a03* strictly outranks in fact all the other alternatives. Hence, *a03* appears as **Condorcet winner** and my be recommended as best decision action in this illustrative preference modelling exercise. 
+
+XMCDA 2.0 storage 
+.................
 
 As with all Digraph instances, it is possible to store permanently a copy of the outranking digraph *odg*. As its outranking relation is automatically generated by the ``BipolarOutrankingDigraph`` class constructor on the basis of a given performance tableau, it is sufficient to save only the latter. For this purpose we are using the `XMCDA 2.00 <http://www.decision-deck.org/xmcda/>`_ XML encoding scheme of MCDA data, as provided by the Decision Deck Project (see http://www.decision-deck.org/):
 	>>> PerformanceTableau.saveXMCDA2(odg,'tutorialPerfTab')
@@ -910,12 +989,19 @@ Many more tools for exploiting bipolarly valued outranking digraphs are availabl
 
 Back to :ref:`Tutorial-label`
 
-Documents, indices and tables
-.............................
+Links and appendices
+--------------------
+
+Documents
+.........
 
 * `Introduction <index.html>`_
 * `Reference manual <techDoc.html>`_
 * `Tutorial <tutorial.html>`_
+
+Indices and tables
+..................
+
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
