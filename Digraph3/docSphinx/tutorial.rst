@@ -326,7 +326,7 @@ Computing the dual, respectively the converse, may also be done with prefixing t
     '6'     | -0.38  0.54 -0.84 -0.66  0.22  0.00 -0.04	 
     '7'     | -0.44 -0.02  1.00 -0.76  0.52  0.22  0.00	 
 
-Symmetric and transtive closure in site constructors are also available, Note that it is a good idea,before going ahead with these in-site operations that irreversibly modify the original dg object, to previously make a backup version of *dg* :
+Symmetric and transtive closure in site constructors are also available, Note that it is a good idea,before going ahead with these in-site operations that irreversibly modify the original dg object, to previously make a backup version of *dg*. The simplest storage method, always provide by the generic ``Digraph.save()`` writes out in a named file the python content in string representation:
     >>> dg.save('tutRandValDigraph')
     >>> dg.closeSymmetric()
     >>> dg.closeTransitive()
@@ -356,6 +356,33 @@ As the original digraph *dg* was connected (see above the result of the ``dg.sho
       Not Gamma :
     'frozenset({'7', '1', '2', '6', '5', '3', '4'})': in => set(), out => set()
     >>> ...
+
+Sometimes it is required to exchange the graph valuation data in CSV format with a statistical package like `R <http://www.r-project.org/>`_. For this purpose it is possible to export the digraph data into a CSV file. The valuation domain is hereby normalized by default to the range [-1,1] and the diagonal put by defalut to to the minimal value -1:
+	>>> dg = Digraph('tutRandValDigraph')
+	>>> dg.saveCSV('tutRandValDigraph')
+	# content of file tutRandValDigraph.csv
+	"d","1","2","3","4","5","6","7"
+	"1",-1.0,0.48,-0.7,-0.86,-0.3,-0.38,-0.44
+	"2",0.22,-1.0,0.38,-0.5,-0.8,0.54,-0.02
+	"3",0.42,-0.08,-1.0,-0.7,0.56,-0.84,1.0
+	"4",-0.44,0.4,0.62,-1.0,-0.04,-0.66,-0.76
+	"5",-0.32,0.48,0.46,-0.64,-1.0,0.22,0.52
+	"6",0.84,0.0,0.4,0.96,0.18,-1.0,0.22
+	"7",-0.88,-0.72,-0.82,-0.52,0.84,-0.04,-1.0
+
+It is possible to reload a Digraph instance from its previously saved CSV file content:
+	>>> dgcsv = CSVDigraph('tutRandValDigraph')
+	>>> dgcsv.showRelationTable(ReflexiveTerms=False)
+	* ---- Relation Table -----
+	r(xSy) |   '1'   '2'   '3'   '4'   '5'   '6'   '7'	  
+	-------|------------------------------------------------------------
+	'1'    |   -   -0.48  0.70  0.86  0.30  0.38  0.44	 
+	'2'    | -0.22   -   -0.38  0.50  0.80 -0.54  0.02	 
+	'3'    | -0.42  0.08   -    0.70 -0.56  0.84 -1.00	 
+	'4'    |  0.44 -0.40 -0.62   -    0.04  0.66  0.76	 
+	'5'    |  0.32 -0.48 -0.46  0.64   -   -0.22 -0.52	 
+	'6'    | -0.84  0.00 -0.40 -0.96 -0.18   -   -0.22	 
+	'7'    |  0.88  0.72  0.82  0.52 -0.84  0.04   -	 
 
 Back to :ref:`Tutorial-label`
 
@@ -876,6 +903,7 @@ The resulting XML file my be visualized in a browser window (other than Chrome o
 	'a06' |   +16.22  +72.97  -51.35  +35.14  +32.43   +0.00  +37.84  
 	'a07' |   +67.57  +45.95  -24.32  +27.03  +27.03  +45.95   +0.00  
 	>>> ...
+
 We recover the original bipolarly valued outranking characteristics, and we may restart again the preference modelling process. 
 
 Many more tools for exploiting bipolarly valued outranking digraphs are available in the Digraph3 resources (see the thechnical documentation of the :ref:`outrankingDiGraphs-label` and the :ref:`perfTabs-label`).
