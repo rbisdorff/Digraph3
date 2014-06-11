@@ -255,9 +255,9 @@ We may now extract both this symmetric as well as this asymmetric part of digrap
    :width: 400 px
    :align: center
 
-.. warning::
+.. note::
 
-    Be aware that the partial objects *asymDg* and *symDg* put to the indeterminate characteristic value all not-asymmetric, respectively links between nodes. 
+    Notice that the partial objects *asymDg* and *symDg* put to the indeterminate characteristic value all not-asymmetric, respectively not-symmetric links between nodes. 
 
 Here for illustration the relation constructor of the ``AsymmetricPartialDigraph`` class::
 
