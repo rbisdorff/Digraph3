@@ -422,7 +422,76 @@ It is possible to reload a Digraph instance from its previously saved CSV file c
 	'4'    |  0.44 -0.40 -0.62   -    0.04  0.66  0.76	 
 	'5'    |  0.32 -0.48 -0.46  0.64   -   -0.22 -0.52	 
 	'6'    | -0.84  0.00 -0.40 -0.96 -0.18   -   -0.22	 
-	'7'    |  0.88  0.72  0.82  0.52 -0.84  0.04   -	 
+	'7'    |  0.88  0.72  0.82  0.52 -0.84  0.04   -
+
+Complete, empty and indeterminate digraphs
+..........................................
+
+Let us finally mention some special universal classes of digraphs that are readily available in the ``digraphs`` module, like the ``CompleteDigraph``, the ``EmptyDigraph`` and the ``IndeterminateDigraph`` classes, which put all characteristic values respectively to the *maximum*, the *minimum* or the median *indeterminate* characteristic value:
+	>>> from diggraphs import CompleteDigraph, EmptyDigraph, IndeterminateDigraph
+	>>> help(CompleteDigraph)
+	Help on class CompleteDigraph in module digraphs:
+	class CompleteDigraph(Digraph)
+	 |  Parameters:
+	 |      order > 0; valuationdomain=(Min,Max).
+	 |  Specialization of the general Digraph class for generating
+	 |  temporary complete graphs of order 5 in {-1,0,1} by default.
+	 |  Method resolution order:
+	 |      CompleteDigraph
+	 |      Digraph
+	 |      builtins.object
+	...
+        >>> e = EmptyDigraph(order=5)
+	>>> e.showRelationTable()
+	* ---- Relation Table -----
+	  S   |  '1'	  '2'	  '3'	  '4'	  '5'	  
+	---- -|---------------------------------------
+	'1'   |  -1.00	 -1.00	 -1.00	 -1.00	 -1.00	 
+	'2'   |  -1.00	 -1.00	 -1.00	 -1.00	 -1.00	 
+	'3'   |  -1.00	 -1.00	 -1.00	 -1.00	 -1.00	 
+	'4'   |  -1.00	 -1.00	 -1.00	 -1.00	 -1.00	 
+	'5'   |  -1.00	 -1.00	 -1.00	 -1.00	 -1.00
+	>>> e.showNeighborhoods() 
+	Neighborhoods:
+	  Gamma     :
+	'1': in => set(), out => set()
+	'2': in => set(), out => set()
+	'5': in => set(), out => set()
+	'3': in => set(), out => set()
+	'4': in => set(), out => set()
+	  Not Gamma :
+	'1': in => {'2', '4', '5', '3'}, out => {'2', '4', '5', '3'}
+	'2': in => {'1', '4', '5', '3'}, out => {'1', '4', '5', '3'}
+	'5': in => {'1', '2', '4', '3'}, out => {'1', '2', '4', '3'}
+	'3': in => {'1', '2', '4', '5'}, out => {'1', '2', '4', '5'}
+	'4': in => {'1', '2', '5', '3'}, out => {'1', '2', '5', '3'}
+	>>> i = IndeterminateDigraph()
+	* ---- Relation Table -----
+	  S   |  '1'	  '2'	  '3'	  '4'	  '5'	  
+	------|--------------------------------------
+	'1'   |  0.00	 0.00	 0.00	 0.00	 0.00	 
+	'2'   |  0.00	 0.00	 0.00	 0.00	 0.00	 
+	'3'   |  0.00	 0.00	 0.00	 0.00	 0.00	 
+	'4'   |  0.00	 0.00	 0.00	 0.00	 0.00	 
+	'5'   |  0.00	 0.00	 0.00	 0.00	 0.00	 
+	>>> i.showNeighborhoods()
+	Neighborhoods:
+	  Gamma     :
+	'1': in => set(), out => set()
+	'2': in => set(), out => set()
+	'5': in => set(), out => set()
+	'3': in => set(), out => set()
+	'4': in => set(), out => set()
+	  Not Gamma :
+	'1': in => set(), out => set()
+	'2': in => set(), out => set()
+	'5': in => set(), out => set()
+	'3': in => set(), out => set()
+	'4': in => set(), out => set()
+
+.. note::
+
+       Notice the subtle difference between the neighborhoods of an *empty* and the neighborhoods of an *indeterminate* digraph instance. In the first kind, the neighborhoods are known to completely *empty* whereas, in the latter, *nothing is known* about the actual neighborhoods of the nodes. These two cases illustrate well why in the case of bipolarly valued digraphs, we need both a *gamma* **and** a *notGamma* function.
 
 Back to :ref:`Tutorial-label`
 
@@ -434,7 +503,7 @@ Working with the :code:`graphs` module
 Structure of a ``Graph`` object
 ...............................
 
-In this Digraph3 module, the root :code:`Graph` class provides a generic **simple graph model**, without loops and multiple links. A given object of this class consists in:
+In the ``graphs`` module, the root :code:`Graph` class provides a generic **simple graph model**, without loops and multiple links. A given object of this class consists in:
 
 1. the graph **vertices** : a dictionary of vertices with 'name' and 'shortname' attributes,
 2. the graph **valuationDomain** , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),

@@ -85,7 +85,7 @@
 <span id="digraphs-tutorial-label"></span><h2>Working with the <tt class="code docutils literal"><span class="pre">digraphs</span></tt> module<a class="headerlink" href="#working-with-the-digraphs-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="downloading-of-the-digraph3-resources">
 <h3>Downloading of the Digraph3 resources<a class="headerlink" href="#downloading-of-the-digraph3-resources" title="Permalink to this headline">¶</a></h3>
-<p>Using the Digraph3 modules is easy. You only need to have installed on your system the <cite>Python &lt;https://www.python.org/doc/&gt;</cite> programming language installed of version 3+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.</p>
+<p>Using the Digraph3 modules is easy. You only need to have installed on your system the <a class="reference external" href="https://www.python.org/doc/">Python</a> programming language installed of version 3+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.</p>
 <p>Two download options are given:</p>
 <ol class="arabic">
 <li><p class="first">Either (easiest under Linux or Mac OS-X), by using a subversion client:</p>
@@ -514,6 +514,79 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 </dd>
 </dl>
+</div>
+<div class="section" id="complete-empty-and-indeterminate-digraphs">
+<h3>Complete, empty and indeterminate digraphs<a class="headerlink" href="#complete-empty-and-indeterminate-digraphs" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Let us finally mention some special universal classes of digraphs that are readily available in the <tt class="docutils literal"><span class="pre">digraphs</span></tt> module, like the <tt class="docutils literal"><span class="pre">CompleteDigraph</span></tt>, the <tt class="docutils literal"><span class="pre">EmptyDigraph</span></tt> and the <tt class="docutils literal"><span class="pre">IndeterminateDigraph</span></tt> classes, which put all characteristic values respectively to the <em>maximum</em>, the <em>minimum</em> or the median <em>indeterminate</em> characteristic value:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">diggraphs</span> <span class="kn">import</span> <span class="n">CompleteDigraph</span><span class="p">,</span> <span class="n">EmptyDigraph</span><span class="p">,</span> <span class="n">IndeterminateDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="n">CompleteDigraph</span><span class="p">)</span>
+<span class="go">Help on class CompleteDigraph in module digraphs:</span>
+<span class="go">class CompleteDigraph(Digraph)</span>
+<span class="go"> |  Parameters:</span>
+<span class="go"> |      order &gt; 0; valuationdomain=(Min,Max).</span>
+<span class="go"> |  Specialization of the general Digraph class for generating</span>
+<span class="go"> |  temporary complete graphs of order 5 in {-1,0,1} by default.</span>
+<span class="go"> |  Method resolution order:</span>
+<span class="go"> |      CompleteDigraph</span>
+<span class="go"> |      Digraph</span>
+<span class="go"> |      builtins.object</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">EmptyDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+<span class="go">* ---- Relation Table -----</span>
+<span class="go">  S   |  &#39;1&#39;      &#39;2&#39;     &#39;3&#39;     &#39;4&#39;     &#39;5&#39;</span>
+<span class="go">---- -|---------------------------------------</span>
+<span class="go">&#39;1&#39;   |  -1.00   -1.00   -1.00   -1.00   -1.00</span>
+<span class="go">&#39;2&#39;   |  -1.00   -1.00   -1.00   -1.00   -1.00</span>
+<span class="go">&#39;3&#39;   |  -1.00   -1.00   -1.00   -1.00   -1.00</span>
+<span class="go">&#39;4&#39;   |  -1.00   -1.00   -1.00   -1.00   -1.00</span>
+<span class="go">&#39;5&#39;   |  -1.00   -1.00   -1.00   -1.00   -1.00</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">showNeighborhoods</span><span class="p">()</span>
+<span class="go">Neighborhoods:</span>
+<span class="go">  Gamma     :</span>
+<span class="go">&#39;1&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="go">&#39;2&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="go">&#39;5&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="go">&#39;3&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="go">&#39;4&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="go">  Not Gamma :</span>
+<span class="go">&#39;1&#39;: in =&gt; {&#39;2&#39;, &#39;4&#39;, &#39;5&#39;, &#39;3&#39;}, out =&gt; {&#39;2&#39;, &#39;4&#39;, &#39;5&#39;, &#39;3&#39;}</span>
+<span class="go">&#39;2&#39;: in =&gt; {&#39;1&#39;, &#39;4&#39;, &#39;5&#39;, &#39;3&#39;}, out =&gt; {&#39;1&#39;, &#39;4&#39;, &#39;5&#39;, &#39;3&#39;}</span>
+<span class="go">&#39;5&#39;: in =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;4&#39;, &#39;3&#39;}, out =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;4&#39;, &#39;3&#39;}</span>
+<span class="go">&#39;3&#39;: in =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;4&#39;, &#39;5&#39;}, out =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;4&#39;, &#39;5&#39;}</span>
+<span class="go">&#39;4&#39;: in =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;5&#39;, &#39;3&#39;}, out =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;5&#39;, &#39;3&#39;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">IndeterminateDigraph</span><span class="p">()</span>
+<span class="go">* ---- Relation Table -----</span>
+<span class="go">  S   |  &#39;1&#39;      &#39;2&#39;     &#39;3&#39;     &#39;4&#39;     &#39;5&#39;</span>
+<span class="go">------|--------------------------------------</span>
+<span class="go">&#39;1&#39;   |  0.00    0.00    0.00    0.00    0.00</span>
+<span class="go">&#39;2&#39;   |  0.00    0.00    0.00    0.00    0.00</span>
+<span class="go">&#39;3&#39;   |  0.00    0.00    0.00    0.00    0.00</span>
+<span class="go">&#39;4&#39;   |  0.00    0.00    0.00    0.00    0.00</span>
+<span class="go">&#39;5&#39;   |  0.00    0.00    0.00    0.00    0.00</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="o">.</span><span class="n">showNeighborhoods</span><span class="p">()</span>
+<span class="go">Neighborhoods:</span>
+<span class="go">  Gamma     :</span>
+<span class="go">&#39;1&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="go">&#39;2&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="go">&#39;5&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="go">&#39;3&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="go">&#39;4&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="go">  Not Gamma :</span>
+<span class="go">&#39;1&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="go">&#39;2&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="go">&#39;5&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="go">&#39;3&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="go">&#39;4&#39;: in =&gt; set(), out =&gt; set()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Notice the subtle difference between the neighborhoods of an <em>empty</em> and the neighborhoods of an <em>indeterminate</em> digraph instance. In the first kind, the neighborhoods are known to completely <em>empty</em> whereas, in the latter, <em>nothing is known</em> about the actual neighborhoods of the nodes. These two cases illustrate well why in the case of bipolarly valued digraphs, we need both a <em>gamma</em> <strong>and</strong> a <em>notGamma</em> function.</p>
+</div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
 </div>
@@ -521,7 +594,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <span id="graphs-tutorial-label"></span><h2>Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module<a class="headerlink" href="#working-with-the-graphs-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="structure-of-a-graph-object">
 <h3>Structure of a <tt class="docutils literal"><span class="pre">Graph</span></tt> object<a class="headerlink" href="#structure-of-a-graph-object" title="Permalink to this headline">¶</a></h3>
-<p>In this Digraph3 module, the root <tt class="code docutils literal"><span class="pre">Graph</span></tt> class provides a generic <strong>simple graph model</strong>, without loops and multiple links. A given object of this class consists in:</p>
+<p>In the <tt class="docutils literal"><span class="pre">graphs</span></tt> module, the root <tt class="code docutils literal"><span class="pre">Graph</span></tt> class provides a generic <strong>simple graph model</strong>, without loops and multiple links. A given object of this class consists in:</p>
 <ol class="arabic simple">
 <li>the graph <strong>vertices</strong> : a dictionary of vertices with &#8216;name&#8217; and &#8216;shortname&#8217; attributes,</li>
 <li>the graph <strong>valuationDomain</strong> , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),</li>
@@ -1218,6 +1291,7 @@ linearBallot = {
 <li><a class="reference internal" href="#symmetric-and-transitive-closures">Symmetric and transitive closures</a></li>
 <li><a class="reference internal" href="#strong-components">Strong components</a></li>
 <li><a class="reference internal" href="#saving-and-reloading-in-csv-format">Saving and reloading in CSV format</a></li>
+<li><a class="reference internal" href="#complete-empty-and-indeterminate-digraphs">Complete, empty and indeterminate digraphs</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#working-with-the-graphs-module">Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module</a><ul>
