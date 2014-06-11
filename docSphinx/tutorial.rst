@@ -713,6 +713,7 @@ With the help of the ``RandomBipolarOutrankingDigraph`` class (of type ``Bipolar
        key:  a07
        name:       random decision action
        comment:    RandomPerformanceTableau() generated.
+       >>> ...
 
 In this example we consider furthermore a family of seven equisignificant cardinal criteria functions *g01*, *g02*, ..., *g07*, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation's uncertainty and imprecision, each criterion function *g1* to *g7* admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations: 
         >>> odg.showCriteria()
@@ -749,10 +750,12 @@ The performance evaluations of each decision alternative on each criterion are g
 	  'g04'  |  40.5    43.6    53.2    17.5    38.6    21.5    67.6  
 	  'g05'  |  33.0    40.7    96.4    55.1    46.2    58.1    52.6  
 	  'g06'  |  47.6    19.0    92.7    55.3    51.7    26.6    40.4  
-	  'g07'  |  41.2    64.0    87.7    71.6    57.8    59.3    34.7  
+	  'g07'  |  41.2    64.0    87.7    71.6    57.8    59.3    34.7
+	>>> ...
 
 We may visualize the same performance tableau in a more colorful setting in the default system browser with the command:
         >>> dog.showHTMLPerformanceTableau()
+        >>> ...
 
 .. image:: tutorialPerfTab.png
    :width: 400 px
@@ -811,6 +814,7 @@ The outranking valuation characteristic appears as **majority margin** resulting
 	g07   10.00  87.70  63.95  +23.75 	| 10.00  20.00  +10.00	| 
 	-----------------------------------------------------------------------------------
 	 Valuation in range: -37.00 to +37.00; global concordance: +31.00
+	>>> ...
 
 This time, we observe a positive polarisation (r(a02 S a03) = +100.0) due to the considerable out-performance of *a03* against *a02* on criterion g02 (see second row in the relation table above). We notice therefore a positively polarised *certainly confirmed* outranking situation in this case [BIS-2013]_. 
 
@@ -831,6 +835,7 @@ All outranking digraphs, being of root type ``Digraph``, inherit the methods ava
 	'a07' |  +25	 +17	  -9	 +9	 +9	+17	  0	 
 	Valuation domain:  {'hasIntegerValuation': True, 'min': Decimal('-37'), 
 			    'max': Decimal('37'), 'med': Decimal('0.000')}
+        >>> ...
 
 .. note::
 
@@ -854,6 +859,7 @@ As with all Digraph instances, it is possible to store permanently a copy of the
 	>>> PerformanceTableau.saveXMCDA2(odg,'tutorialPerfTab')
 	*----- saving performance tableau in XMCDA 2.0 format  -------------*
 	File: tutorialPerfTab.xml saved !
+	>>> ...
 
 The resulting XML file my be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (`see here <_static/tutorialPerfTab.xml>`_). Hitting ``Ctrl U`` in Firefox will open a browser window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau instance. Reinstantiating again a corresponding updated *odg* object goes like follow:
         >>> pt = XMCDA2PerformanceTableau('tutorialPerfTab') 
@@ -869,7 +875,7 @@ The resulting XML file my be visualized in a browser window (other than Chrome o
 	'a05' |   +51.35  +100.00  -70.27  +72.97  +0.00  +51.35  +32.43  
 	'a06' |   +16.22  +72.97  -51.35  +35.14  +32.43   +0.00  +37.84  
 	'a07' |   +67.57  +45.95  -24.32  +27.03  +27.03  +45.95   +0.00  
-   
+	>>> ...
 We recover the original bipolarly valued outranking characteristics, and we may restart again the preference modelling process. 
 
 Many more tools for exploiting bipolarly valued outranking digraphs are available in the Digraph3 resources (see the thechnical documentation of the :ref:`outrankingDiGraphs-label` and the :ref:`perfTabs-label`).
