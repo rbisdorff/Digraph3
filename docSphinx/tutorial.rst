@@ -9,22 +9,22 @@ Tutorial of the Digraph3 resources
 Content
 -------
 
-* :ref:`Download-Using-label`
 * :ref:`Digraphs-Tutorial-label`
 * :ref:`Digraph-Tools-label`
 * :ref:`Graphs-Tutorial-label`
 * :ref:`LinearVoting-label`
 * :ref:`OutrankingDigraphs-Tutorial-label`
 
-.. _Download-Using-label:
+.. _Digraphs-Tutorial-label:
 
-Downloading and using the Digraph3 modules
-------------------------------------------
+Working with the :code:`digraphs` module
+----------------------------------------
 
-Using the Digraph3 modules is easy. You only need to have installed on your system the `Python <https://www.python.org/doc/>` programming language installed of version 3+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.
 
-Download options
-................
+Downloading of the Digraph3 resources
+.....................................
+
+Using the Digraph3 modules is easy. You only need to have installed on your system the `Python <https://www.python.org/doc/>`_ programming language installed of version 3+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.
 
 Two download options are given:
 
@@ -43,12 +43,8 @@ The basic idea of these Python3 modules is to make easy python interactive sessi
 
 The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
 
-Back to :ref:`Tutorial-label`
-
-.. _Digraphs-Tutorial-label:
-
-Working with the :code:`digraphs` module
-----------------------------------------
+Starting an interactive python3 session
+.......................................
 
 You may start an interactive Python3 session in the :code:`Digraph3` directory for exploring the classes and methods provided by the :code:`digraphs` module. To do so, enter the Python3 commands following the session prompts marked with >>>. The lines without the prompt are output from the Python interpreter::
 
@@ -57,14 +53,14 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
 	[GCC 4.8.2] on linux
 	Type "help", "copyright", "credits" or "license" for more information.
 	>>> from digraphs import Digraph
-	>>> g = Digraph('test/testdigraph')
-	>>> g.save('tutorialdigraph')
+	>>> dg = Digraph('test/testdigraph')
+	>>> dg.save('tutorialdigraph')
 	>>> ...
 
 Structure of a ``Digraph`` object
 .................................
 
-All :code:`Digraph` object *g* contains at least the following sub-objects: 
+All :code:`Digraph` object *dg* contains at least the following sub-objects: 
 
 1. the digraph nodes called **actions** (decision actions): a list, set or dictionary of nodes with 'name' and 'shortname' attributes,
 2. the digraph **valuationdomain** , a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),
@@ -72,10 +68,10 @@ All :code:`Digraph` object *g* contains at least the following sub-objects:
 4. its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
 5. its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor. See the reference manual of the :ref:`digraphs-label`.
 
-Permanent storage
-.................
+Permanent storage of digraphs
+.............................
 
-The :code:`g.save('tutorialDigraph')` command stores the digraph *g* in a file named :code:`tutorialDigraph.py` with the following content::
+The :code:`dg.save('tutorialDigraph')` command stores the digraph *dg* in a file named :code:`tutorialDigraph.py` with the following content::
 
        # automatically generated random irreflexive digraph
        actionset = ['1','2','3','4','5',]
@@ -90,12 +86,13 @@ The :code:`g.save('tutorialDigraph')` command stores the digraph *g* in a file n
        '5': {'1':1,'2':-1,'3':1,'4':-1,'5':-1}
        }
 
+
 Inspecting a ``Digraph`` object
 ...............................
 
-The :code:`Digraph.showAll()` method output reveals us that the digraph object loaded from file :code:`tutorialDigraph.py` is a connected irreflexive digraph of order five evaluated in a valuation domain from -1 to 1.
-        >>> g = Digraph('tutorialDigraph')
-       	>>> g.showAll()
+We may reload a previously saved ``Digraph`` instance from the file named :code:`tutorialDigraph.py` with the ``Digraph`` class constructor and the :code:`Digraph.showAll()` method output reveals us that *dg* is a connected irreflexive digraph of order five evaluated in a valuation domain from -1 to 1.
+        >>> dg = Digraph('tutorialDigraph')
+       	>>> dg.showAll()
 	*----- show details --------------*
 	Digraph          : tutorialdigraph
 	Actions          : ['1', '2', '3', '4', '5']
@@ -113,8 +110,8 @@ The :code:`Digraph.showAll()` method output reveals us that the digraph object l
 	*--- Connected Components ---*
 	1: ['1', '2', '3', '4', '5']
 
-And the :code:`Digraph.exportGraphViz()` method generates in the current working directory a :code:`tutorial.dot` file and a :code:`tutorialdigraph.png` picture of the tutorial digraph *g*, if the `graphviz <http://graphviz.org/>`_ tools are installed on your system.:
-	>>> g.exportGraphViz('tutorialDigraph')
+The :code:`Digraph.exportGraphViz()` method generates in the current working directory a :code:`tutorial.dot` file and a :code:`tutorialdigraph.png` picture of the tutorial digraph *g*, if the `graphviz <http://graphviz.org/>`_ tools are installed on your system.:
+	>>> dg.exportGraphViz('tutorialDigraph')
         *---- exporting a dot file do GraphViz tools ---------*
         Exporting to tutorialDigraph.dot
         dot -Grankdir=BT -Tpng tutorialDigraph.dot -o tutorialDigraph.png
@@ -123,10 +120,10 @@ And the :code:`Digraph.exportGraphViz()` method generates in the current working
    :width: 300 px
    :align: center
 
-Some simple methods are easily applicable to this instantiated Digraph object *g* , like the following :code:`Digraph.showStatistics()` method:
-	>>> g.showStatistics()
+Some simple methods are easily applicable to this instantiated Digraph object *dg* , like the following :code:`Digraph.showStatistics()` method:
+	>>> dg.showStatistics()
 	*----- general statistics -------------*
-	for digraph             : <testdigraph.py>
+	for digraph             : <tutorialdigraph.py>
 	order                   :  5 nodes
 	size                    :  9 arcs
 	# undetermined          :  0 arcs

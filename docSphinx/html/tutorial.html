@@ -74,7 +74,6 @@
 <div class="section" id="content">
 <span id="tutorial-label"></span><h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference internal" href="#download-using-label"><em>Downloading and using the Digraph3 modules</em></a></li>
 <li><a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a></li>
 <li><a class="reference internal" href="#digraph-tools-label"><em>Tools for manipulating Digraph objects</em></a></li>
 <li><a class="reference internal" href="#graphs-tutorial-label"><em>Working with the graphs module</em></a></li>
@@ -82,11 +81,11 @@
 <li><a class="reference internal" href="#outrankingdigraphs-tutorial-label"><em>Working with the outrankingDigraphs module</em></a></li>
 </ul>
 </div>
-<div class="section" id="downloading-and-using-the-digraph3-modules">
-<span id="download-using-label"></span><h2>Downloading and using the Digraph3 modules<a class="headerlink" href="#downloading-and-using-the-digraph3-modules" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="working-with-the-digraphs-module">
+<span id="digraphs-tutorial-label"></span><h2>Working with the <tt class="code docutils literal"><span class="pre">digraphs</span></tt> module<a class="headerlink" href="#working-with-the-digraphs-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="downloading-of-the-digraph3-resources">
+<h3>Downloading of the Digraph3 resources<a class="headerlink" href="#downloading-of-the-digraph3-resources" title="Permalink to this headline">¶</a></h3>
 <p>Using the Digraph3 modules is easy. You only need to have installed on your system the <cite>Python &lt;https://www.python.org/doc/&gt;</cite> programming language installed of version 3+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.</p>
-<div class="section" id="download-options">
-<h3>Download options<a class="headerlink" href="#download-options" title="Permalink to this headline">¶</a></h3>
 <p>Two download options are given:</p>
 <ol class="arabic">
 <li><p class="first">Either (easiest under Linux or Mac OS-X), by using a subversion client:</p>
@@ -105,25 +104,24 @@
 <h3>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h3>
 <p>The basic idea of these Python3 modules is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankins, linear ordering, etc. Most of the available computing resources are meant to illustrate the <em>Algorithmic Decision Theory</em> course given in the University of Luxembourg Master in Information and Computer Science (MICS).</p>
 <p>The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.</p>
-<p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
-</div>
-<div class="section" id="working-with-the-digraphs-module">
-<span id="digraphs-tutorial-label"></span><h2>Working with the <tt class="code docutils literal"><span class="pre">digraphs</span></tt> module<a class="headerlink" href="#working-with-the-digraphs-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="starting-an-interactive-python3-session">
+<h3>Starting an interactive python3 session<a class="headerlink" href="#starting-an-interactive-python3-session" title="Permalink to this headline">¶</a></h3>
 <p>You may start an interactive Python3 session in the <tt class="code docutils literal"><span class="pre">Digraph3</span></tt> directory for exploring the classes and methods provided by the <tt class="code docutils literal"><span class="pre">digraphs</span></tt> module. To do so, enter the Python3 commands following the session prompts marked with &gt;&gt;&gt;. The lines without the prompt are output from the Python interpreter:</p>
 <div class="highlight-python"><div class="highlight"><pre>[\$HOME/Digraph3]\$ python
 Python 3.4.0 (default, Apr 11 2014, 13:05:11)
 [GCC 4.8.2] on linux
 Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
 &gt;&gt;&gt; from digraphs import Digraph
-&gt;&gt;&gt; g = Digraph(&#39;test/testdigraph&#39;)
-&gt;&gt;&gt; g.save(&#39;tutorialdigraph&#39;)
+&gt;&gt;&gt; dg = Digraph(&#39;test/testdigraph&#39;)
+&gt;&gt;&gt; dg.save(&#39;tutorialdigraph&#39;)
 &gt;&gt;&gt; ...
 </pre></div>
 </div>
+</div>
 <div class="section" id="structure-of-a-digraph-object">
 <h3>Structure of a <tt class="docutils literal"><span class="pre">Digraph</span></tt> object<a class="headerlink" href="#structure-of-a-digraph-object" title="Permalink to this headline">¶</a></h3>
-<p>All <tt class="code docutils literal"><span class="pre">Digraph</span></tt> object <em>g</em> contains at least the following sub-objects:</p>
+<p>All <tt class="code docutils literal"><span class="pre">Digraph</span></tt> object <em>dg</em> contains at least the following sub-objects:</p>
 <ol class="arabic simple">
 <li>the digraph nodes called <strong>actions</strong> (decision actions): a list, set or dictionary of nodes with &#8216;name&#8217; and &#8216;shortname&#8217; attributes,</li>
 <li>the digraph <strong>valuationdomain</strong> , a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),</li>
@@ -132,9 +130,9 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <li>its associated <strong>notGamma function</strong> : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor. See the reference manual of the <a class="reference internal" href="techDoc.html#digraphs-label"><em>digraphs module</em></a>.</li>
 </ol>
 </div>
-<div class="section" id="permanent-storage">
-<h3>Permanent storage<a class="headerlink" href="#permanent-storage" title="Permalink to this headline">¶</a></h3>
-<p>The <tt class="code docutils literal"><span class="pre">g.save('tutorialDigraph')</span></tt> command stores the digraph <em>g</em> in a file named <tt class="code docutils literal"><span class="pre">tutorialDigraph.py</span></tt> with the following content:</p>
+<div class="section" id="permanent-storage-of-digraphs">
+<h3>Permanent storage of digraphs<a class="headerlink" href="#permanent-storage-of-digraphs" title="Permalink to this headline">¶</a></h3>
+<p>The <tt class="code docutils literal"><span class="pre">dg.save('tutorialDigraph')</span></tt> command stores the digraph <em>dg</em> in a file named <tt class="code docutils literal"><span class="pre">tutorialDigraph.py</span></tt> with the following content:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># automatically generated random irreflexive digraph</span>
 <span class="n">actionset</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;2&#39;</span><span class="p">,</span><span class="s">&#39;3&#39;</span><span class="p">,</span><span class="s">&#39;4&#39;</span><span class="p">,</span><span class="s">&#39;5&#39;</span><span class="p">,]</span>
 <span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;min&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
@@ -153,9 +151,9 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <div class="section" id="inspecting-a-digraph-object">
 <h3>Inspecting a <tt class="docutils literal"><span class="pre">Digraph</span></tt> object<a class="headerlink" href="#inspecting-a-digraph-object" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>The <tt class="code docutils literal"><span class="pre">Digraph.showAll()</span></tt> method output reveals us that the digraph object loaded from file <tt class="code docutils literal"><span class="pre">tutorialDigraph.py</span></tt> is a connected irreflexive digraph of order five evaluated in a valuation domain from -1 to 1.</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="s">&#39;tutorialDigraph&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
+<dt>We may reload a previously saved <tt class="docutils literal"><span class="pre">Digraph</span></tt> instance from the file named <tt class="code docutils literal"><span class="pre">tutorialDigraph.py</span></tt> with the <tt class="docutils literal"><span class="pre">Digraph</span></tt> class constructor and the <tt class="code docutils literal"><span class="pre">Digraph.showAll()</span></tt> method output reveals us that <em>dg</em> is a connected irreflexive digraph of order five evaluated in a valuation domain from -1 to 1.</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="s">&#39;tutorialDigraph&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
 <span class="go">*----- show details --------------*</span>
 <span class="go">Digraph          : tutorialdigraph</span>
 <span class="go">Actions          : [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;]</span>
@@ -175,8 +173,8 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 </dd>
-<dt>And the <tt class="code docutils literal"><span class="pre">Digraph.exportGraphViz()</span></tt> method generates in the current working directory a <tt class="code docutils literal"><span class="pre">tutorial.dot</span></tt> file and a <tt class="code docutils literal"><span class="pre">tutorialdigraph.png</span></tt> picture of the tutorial digraph <em>g</em>, if the <a class="reference external" href="http://graphviz.org/">graphviz</a> tools are installed on your system.:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorialDigraph&#39;</span><span class="p">)</span>
+<dt>The <tt class="code docutils literal"><span class="pre">Digraph.exportGraphViz()</span></tt> method generates in the current working directory a <tt class="code docutils literal"><span class="pre">tutorial.dot</span></tt> file and a <tt class="code docutils literal"><span class="pre">tutorialdigraph.png</span></tt> picture of the tutorial digraph <em>g</em>, if the <a class="reference external" href="http://graphviz.org/">graphviz</a> tools are installed on your system.:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorialDigraph&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file do GraphViz tools ---------*</span>
 <span class="go">Exporting to tutorialDigraph.dot</span>
 <span class="go">dot -Grankdir=BT -Tpng tutorialDigraph.dot -o tutorialDigraph.png</span>
@@ -186,10 +184,10 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 <a class="reference internal image-reference" href="_images/testdigraph.png"><img alt="_images/testdigraph.png" class="align-center" src="_images/testdigraph.png" style="width: 300px;" /></a>
 <dl class="docutils">
-<dt>Some simple methods are easily applicable to this instantiated Digraph object <em>g</em> , like the following <tt class="code docutils literal"><span class="pre">Digraph.showStatistics()</span></tt> method:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showStatistics</span><span class="p">()</span>
+<dt>Some simple methods are easily applicable to this instantiated Digraph object <em>dg</em> , like the following <tt class="code docutils literal"><span class="pre">Digraph.showStatistics()</span></tt> method:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showStatistics</span><span class="p">()</span>
 <span class="go">*----- general statistics -------------*</span>
-<span class="go">for digraph             : &lt;testdigraph.py&gt;</span>
+<span class="go">for digraph             : &lt;tutorialdigraph.py&gt;</span>
 <span class="go">order                   :  5 nodes</span>
 <span class="go">size                    :  9 arcs</span>
 <span class="go"># undetermined          :  0 arcs</span>
@@ -1201,14 +1199,12 @@ linearBallot = {
   <ul>
 <li><a class="reference internal" href="#">Tutorial of the Digraph3 resources</a><ul>
 <li><a class="reference internal" href="#content">Content</a></li>
-<li><a class="reference internal" href="#downloading-and-using-the-digraph3-modules">Downloading and using the Digraph3 modules</a><ul>
-<li><a class="reference internal" href="#download-options">Download options</a></li>
-<li><a class="reference internal" href="#purpose">Purpose</a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#working-with-the-digraphs-module">Working with the <tt class="code docutils literal"><span class="pre">digraphs</span></tt> module</a><ul>
+<li><a class="reference internal" href="#downloading-of-the-digraph3-resources">Downloading of the Digraph3 resources</a></li>
+<li><a class="reference internal" href="#purpose">Purpose</a></li>
+<li><a class="reference internal" href="#starting-an-interactive-python3-session">Starting an interactive python3 session</a></li>
 <li><a class="reference internal" href="#structure-of-a-digraph-object">Structure of a <tt class="docutils literal"><span class="pre">Digraph</span></tt> object</a></li>
-<li><a class="reference internal" href="#permanent-storage">Permanent storage</a></li>
+<li><a class="reference internal" href="#permanent-storage-of-digraphs">Permanent storage of digraphs</a></li>
 <li><a class="reference internal" href="#inspecting-a-digraph-object">Inspecting a <tt class="docutils literal"><span class="pre">Digraph</span></tt> object</a></li>
 <li><a class="reference internal" href="#special-classes-of-digraphs">Special classes of digraphs</a></li>
 </ul>
