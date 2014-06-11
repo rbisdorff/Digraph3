@@ -608,7 +608,7 @@ Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids*
    :align: center
 
 Metropolis random walks
-............................
+.......................
 
 Finally, we provide a specialisation of the :code:`Graph` class for implementing a generic **Metropolis MCMC** (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  :code:`probs = {‘v1’: x, ‘v2’: y, ...}` for visiting each vertice. 
         >>> from graphs import MetropolisChain
