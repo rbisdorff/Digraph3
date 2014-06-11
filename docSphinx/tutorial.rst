@@ -1011,7 +1011,7 @@ All outranking digraphs, being of root type ``Digraph``, inherit the methods ava
 
 .. note::
 
- Notice that the reflexive self comparison r(x S x) is set by default to the median valuation value 0, these reflexive terms of the binary relation being generally ignored in most of the ``Digraph`` methods. 
+ Notice that the reflexive self comparison characteristic r(x S x) is set by default to the median indeterminate valuation value 0; the reflexive terms of binary relation being generally ignored in most of the ``Digraph3`` resources. 
 
 Strict outranking via the codual digraph
 ........................................
