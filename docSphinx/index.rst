@@ -14,7 +14,7 @@ This documentation describes the Python3 resources for implementing decision aid
 **Parts of the documentation:**
 
 .. toctree:: tutorial
-   :maxdepth: 2
+   :maxdepth: 3
    
 .. toctree:: techDoc
    :maxdepth: 2

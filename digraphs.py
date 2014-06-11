@@ -10167,7 +10167,7 @@ class CSVDigraph(Digraph):
 
     def __init__(self,fileName='temp',valuationMin=-1,valuationMax=1):
         from csv import reader
-        
+
         try:
             fileNameExt = fileName + '.csv'
             fi = open(fileNameExt,'r')

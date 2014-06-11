@@ -85,6 +85,8 @@
 <div class="section" id="downloading-and-using-the-digraph3-modules">
 <span id="download-using-label"></span><h2>Downloading and using the Digraph3 modules<a class="headerlink" href="#downloading-and-using-the-digraph3-modules" title="Permalink to this headline">¶</a></h2>
 <p>Using the Digraph3 modules is easy. You only need to have installed on your system the <cite>Python &lt;https://www.python.org/doc/&gt;</cite> programming language installed of version 3+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.</p>
+<div class="section" id="download-options">
+<h3>Download options<a class="headerlink" href="#download-options" title="Permalink to this headline">¶</a></h3>
 <p>Two download options are given:</p>
 <ol class="arabic">
 <li><p class="first">Either (easiest under Linux or Mac OS-X), by using a subversion client:</p>
@@ -98,9 +100,13 @@
 </div>
 </li>
 </ol>
+</div>
+<div class="section" id="purpose">
+<h3>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h3>
 <p>The basic idea of these Python3 modules is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankins, linear ordering, etc. Most of the available computing resources are meant to illustrate the <em>Algorithmic Decision Theory</em> course given in the University of Luxembourg Master in Information and Computer Science (MICS).</p>
-<p>The Python development of these computing res-sources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.</p>
+<p>The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
+</div>
 </div>
 <div class="section" id="working-with-the-digraphs-module">
 <span id="digraphs-tutorial-label"></span><h2>Working with the <tt class="code docutils literal"><span class="pre">digraphs</span></tt> module<a class="headerlink" href="#working-with-the-digraphs-module" title="Permalink to this headline">¶</a></h2>
@@ -115,6 +121,8 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 &gt;&gt;&gt; ...
 </pre></div>
 </div>
+<div class="section" id="structure-of-a-digraph-object">
+<h3>Structure of a <tt class="docutils literal"><span class="pre">Digraph</span></tt> object<a class="headerlink" href="#structure-of-a-digraph-object" title="Permalink to this headline">¶</a></h3>
 <p>All <tt class="code docutils literal"><span class="pre">Digraph</span></tt> object <em>g</em> contains at least the following sub-objects:</p>
 <ol class="arabic simple">
 <li>the digraph nodes called <strong>actions</strong> (decision actions): a list, set or dictionary of nodes with &#8216;name&#8217; and &#8216;shortname&#8217; attributes,</li>
@@ -123,6 +131,9 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <li>its associated <strong>gamma function</strong> : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,</li>
 <li>its associated <strong>notGamma function</strong> : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor. See the reference manual of the <a class="reference internal" href="techDoc.html#digraphs-label"><em>digraphs module</em></a>.</li>
 </ol>
+</div>
+<div class="section" id="permanent-storage">
+<h3>Permanent storage<a class="headerlink" href="#permanent-storage" title="Permalink to this headline">¶</a></h3>
 <p>The <tt class="code docutils literal"><span class="pre">g.save('tutorialDigraph')</span></tt> command stores the digraph <em>g</em> in a file named <tt class="code docutils literal"><span class="pre">tutorialDigraph.py</span></tt> with the following content:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># automatically generated random irreflexive digraph</span>
 <span class="n">actionset</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;2&#39;</span><span class="p">,</span><span class="s">&#39;3&#39;</span><span class="p">,</span><span class="s">&#39;4&#39;</span><span class="p">,</span><span class="s">&#39;5&#39;</span><span class="p">,]</span>
@@ -138,6 +149,9 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <span class="p">}</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="inspecting-a-digraph-object">
+<h3>Inspecting a <tt class="docutils literal"><span class="pre">Digraph</span></tt> object<a class="headerlink" href="#inspecting-a-digraph-object" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>The <tt class="code docutils literal"><span class="pre">Digraph.showAll()</span></tt> method output reveals us that the digraph object loaded from file <tt class="code docutils literal"><span class="pre">tutorialDigraph.py</span></tt> is a connected irreflexive digraph of order five evaluated in a valuation domain from -1 to 1.</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="s">&#39;tutorialDigraph&#39;</span><span class="p">)</span>
@@ -201,6 +215,11 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 </dd>
+</dl>
+</div>
+<div class="section" id="special-classes-of-digraphs">
+<h3>Special classes of digraphs<a class="headerlink" href="#special-classes-of-digraphs" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
 <dt>Some special classes of digraphs, like the <tt class="code docutils literal"><span class="pre">CompleteDigraph</span></tt>, the <tt class="code docutils literal"><span class="pre">EmptyDigraph</span></tt> or the oriented <tt class="code docutils literal"><span class="pre">GridDigraph</span></tt> class for instance, are readily available:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">GridDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span> <span class="o">=</span> <span class="n">GridDigraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">hasMedianSplitOrientation</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -216,8 +235,11 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <p>For more information about its resources, see the technical documentation of the <a class="reference internal" href="techDoc.html#digraphs-label"><em>digraphs module</em></a> .</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
+</div>
 <div class="section" id="tools-for-manipulating-digraph-objects">
 <span id="digraph-tools-label"></span><h2>Tools for manipulating Digraph objects<a class="headerlink" href="#tools-for-manipulating-digraph-objects" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="inspecting-a-random-digraph">
+<h3>Inspecting a random digraph<a class="headerlink" href="#inspecting-a-random-digraph" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>We are starting this tutorial with generating a randomly [-1;1]-valued (<em>Normalized=True</em>) digraph of order 7, denoted <em>dg</em> and modelling a binary relation (<em>x S y</em>) defined on the set of nodes of <em>dg</em>. For this purpose, the <tt class="docutils literal"><span class="pre">digraphs</span></tt> module provides conveniently a specific <tt class="docutils literal"><span class="pre">RandomValuationDigraph</span></tt> constructor:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
@@ -274,6 +296,9 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <p class="first admonition-title">Warning</p>
 <p class="last">Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value <em>r(x S x)</em> for all action <em>x</em> is put to the median, i.e. indeterminate, value) in this case.</p>
 </div>
+</div>
+<div class="section" id="exporting-a-graphviz-drawing">
+<h3>Exporting a graphviz drawing<a class="headerlink" href="#exporting-a-graphviz-drawing" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id11" id="id2">[1]</a> drawing:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
@@ -285,8 +310,12 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/tutRandValDigraph.png"><img alt="_images/tutRandValDigraph.png" class="align-center" src="_images/tutRandValDigraph.png" style="width: 300px;" /></a>
+<p>Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (<em>r(6 S 2) = 0.00</em>) observed between nodes &#8216;6&#8217; and &#8216;2&#8217;. The corresponding link is marked in gray with an open arrowhead in the drawing.</p>
+</div>
+<div class="section" id="asymmetric-and-symmetric-parts">
+<h3>Asymmetric and symmetric parts<a class="headerlink" href="#asymmetric-and-symmetric-parts" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (<em>r(6 S 2) = 0.00</em>) observed between nodes &#8216;6&#8217; and &#8216;2&#8217;. The corresponding link is marked in gray with an open arrowhead in the drawing. We may now extract both this symmetric as well as this asymmetric part of digraph <em>dg</em> with the help of two corresponding constructors:</dt>
+<dt>We may now extract both this symmetric as well as this asymmetric part of digraph <em>dg</em> with the help of two corresponding constructors:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">,</span> <span class="n">SymmetricPartialDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">asymDg</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">asymDg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
@@ -342,6 +371,11 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 </dd>
+</dl>
+</div>
+<div class="section" id="dual-converse-and-coduals">
+<h3>Dual, converse and coduals<a class="headerlink" href="#dual-converse-and-coduals" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
 <dt>We may as readily compute the <strong>dual</strong>, the <strong>converse</strong> and the <strong>codual</strong> (dual and converse) of dg:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">DualDigraph</span><span class="p">,</span> <span class="n">ConverseDigraph</span><span class="p">,</span> <span class="n">CoDualDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ddg</span> <span class="o">=</span> <span class="n">DualDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
@@ -400,6 +434,11 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 </dd>
+</dl>
+</div>
+<div class="section" id="symmetric-and-transitive-closure">
+<h3>Symmetric and transitive closure<a class="headerlink" href="#symmetric-and-transitive-closure" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
 <dt>Symmetric and transtive closure in site constructors are also available, Note that it is a good idea,before going ahead with these in-site operations that irreversibly modify the original dg object, to previously make a backup version of <em>dg</em>. The simplest storage method, always provide by the generic <tt class="docutils literal"><span class="pre">Digraph.save()</span></tt> writes out in a named file the python content in string representation:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">closeSymmetric</span><span class="p">()</span>
@@ -434,6 +473,11 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 </dd>
+</dl>
+</div>
+<div class="section" id="saving-the-digraph-in-csv-format">
+<h3>Saving the digraph in CSV format<a class="headerlink" href="#saving-the-digraph-in-csv-format" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
 <dt>Sometimes it is required to exchange the graph valuation data in CSV format with a statistical package like <a class="reference external" href="http://www.r-project.org/">R</a>. For this purpose it is possible to export the digraph data into a CSV file. The valuation domain is hereby normalized by default to the range [-1,1] and the diagonal put by defalut to to the minimal value -1:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">saveCSV</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
@@ -468,8 +512,11 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
+</div>
 <div class="section" id="working-with-the-graphs-module">
 <span id="graphs-tutorial-label"></span><h2>Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module<a class="headerlink" href="#working-with-the-graphs-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="structure-of-a-graph-object">
+<h3>Structure of a <tt class="docutils literal"><span class="pre">Graph</span></tt> object<a class="headerlink" href="#structure-of-a-graph-object" title="Permalink to this headline">¶</a></h3>
 <p>In this Digraph3 module, the root <tt class="code docutils literal"><span class="pre">Graph</span></tt> class provides a generic <strong>simple graph model</strong>, without loops and multiple links. A given object of this class consists in:</p>
 <ol class="arabic simple">
 <li>the graph <strong>vertices</strong> : a dictionary of vertices with &#8216;name&#8217; and &#8216;shortname&#8217; attributes,</li>
@@ -558,6 +605,11 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 </dd>
+</dl>
+</div>
+<div class="section" id="q-coloring-of-a-graph">
+<h3>q-coloring of a graph<a class="headerlink" href="#q-coloring-of-a-graph" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
 <dt>And, a 3-coloring of the tutorial graph may be computed and plotted as follows:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGrah&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span> <span class="o">=</span> <span class="n">Q_Coloring</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
@@ -602,6 +654,9 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/tutorial-2-coloring.png"><img alt="_images/tutorial-2-coloring.png" class="align-center" src="_images/tutorial-2-coloring.png" style="width: 400px;" /></a>
+</div>
+<div class="section" id="mis-enumeration">
+<h3>MIS enumeration<a class="headerlink" href="#mis-enumeration" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>2-colorings define independent sets of vertices that are maximal in cardinality; for short called a <strong>MIS</strong>. Computing such MISs in a given <tt class="code docutils literal"><span class="pre">Graph</span></tt> instance may be achieved by converting the <tt class="code docutils literal"><span class="pre">Graph</span></tt> instance into a <tt class="code docutils literal"><span class="pre">Digraph</span></tt> instance. Here a <tt class="code docutils literal"><span class="pre">self.showMIS()</span></tt> method is proposed:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGrah&#39;</span><span class="p">)</span>
@@ -628,6 +683,11 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 </dd>
+</dl>
+</div>
+<div class="section" id="grids-and-the-ising-model">
+<h3>Grids and the Ising model<a class="headerlink" href="#grids-and-the-ising-model" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
 <dt>Special classes of graphs, like <em>n</em> x <em>m</em> <strong>rectangular</strong> or <strong>triangular grids</strong> are available in the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module. For instance, we may use a Gibbs sampler again for simulating an <strong>Ising Model</strong> on such a grid:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">GridGraph</span><span class="o">.</span> <span class="n">IsingModel</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GridGraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
@@ -648,6 +708,9 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/grid-15-15-ising.png"><img alt="_images/grid-15-15-ising.png" class="align-center" src="_images/grid-15-15-ising.png" style="width: 600px;" /></a>
+</div>
+<div class="section" id="metropolis-random-walks">
+<h3>Metropolis random walks<a class="headerlink" href="#metropolis-random-walks" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>Finally, we provide a specialisation of the <tt class="code docutils literal"><span class="pre">Graph</span></tt> class for implementing a generic <strong>Metropolis MCMC</strong> (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  <tt class="code docutils literal"><span class="pre">probs</span> <span class="pre">=</span> <span class="pre">{‘v1’:</span> <span class="pre">x,</span> <span class="pre">‘v2’:</span> <span class="pre">y,</span> <span class="pre">...}</span></tt> for visiting each vertice.</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">MetropolisChain</span>
@@ -697,8 +760,11 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <p>For more technical information and more code examples, look into the technical documentation of the <a class="reference internal" href="techDoc.html#graphs-label"><em>graphs module</em></a>. For the readers interested in algorithmic applications of Markov Chains we may may recommend consulting O. Häggström&#8217;s 2002 book: <a class="reference internal" href="#fmcaa" id="id4">[FMCAA]</a>.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
+</div>
 <div class="section" id="computing-the-winner-of-an-election">
 <span id="linearvoting-label"></span><h2>Computing the winner of an election<a class="headerlink" href="#computing-the-winner-of-an-election" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="linear-voting-profiles">
+<h3>Linear voting profiles<a class="headerlink" href="#linear-voting-profiles" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="techDoc.html#votingdigraphs-label"><em>votingDigraphs module</em></a> provides resources for handling election results <a class="reference internal" href="#adt-l2" id="id5">[ADT-L2]</a>, like the <tt class="docutils literal"><span class="pre">LinearVotingProfile</span></tt> class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored as two Python dicttionaries, one for the candidates and another one for the linear ballots:</p>
 <div class="highlight-python"><div class="highlight"><pre>candidates = {&#39;a&#39;: ,&#39;b&#39;:  ,&#39;c&#39;, ..., ...}
 voters = {&#39;1&#39;:{&#39;weight&#39;:1.0},&#39;2&#39;:{&#39;weight&#39;:1.0}, ...}
@@ -747,6 +813,11 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
+</dl>
+</div>
+<div class="section" id="computing-the-winner">
+<h3>Computing the winner<a class="headerlink" href="#computing-the-winner" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
 <dt>We may easily compute <strong>uninominal votes</strong>, ie how many times a candidate was ranked first, and who is consequently the <strong>simple majority</strong> winner(s) in this election.</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">computeUninominalVotes</span><span class="p">()</span>
 <span class="go">{&#39;a2&#39;: 1.0, &#39;a1&#39;: 2.0, &#39;a3&#39;: 2.0}</span>
@@ -774,6 +845,11 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
+</dl>
+</div>
+<div class="section" id="the-condorcet-winner">
+<h3>The Condorcet winner<a class="headerlink" href="#the-condorcet-winner" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
 <dt>In our randomly generated election results, we are lucky. The instant runoff winner and the Borda winner determine, both, candidate <em>a1</em>. However, we could also follow the Marquis de Condorcet&#8217;s advice, and compute the <strong>majority margins</strong> obtained by voting for each individual pair of candidates. For instance, candidate <em>a1</em> is ranked four times before and once behind candidate <em>a2</em>. Hence the majority margin <em>M(a1,a2)</em> is 4 - 1 = +3. These majority margins define on the set of candidates what we call the <strong>Condorcet digraph</strong>, a specialization of the <tt class="docutils literal"><span class="pre">Digraph</span></tt> class for handing such pairwise majority margins:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span> <span class="o">=</span> <span class="n">CondorcetDigraph</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
@@ -814,9 +890,12 @@ linearBallot = {
 <p>Many more tools for exploiting voting results are available, see the thechnical documentation of the <a class="reference internal" href="techDoc.html#votingdigraphs-label"><em>votingDigraphs module</em></a>.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
+</div>
 <div class="section" id="working-with-the-outrankingdigraphs-module">
 <span id="outrankingdigraphs-tutorial-label"></span><h2>Working with the <tt class="docutils literal"><span class="pre">outrankingDigraphs</span></tt> module<a class="headerlink" href="#working-with-the-outrankingdigraphs-module" title="Permalink to this headline">¶</a></h2>
 <p>See also the technical documentation of the <a class="reference internal" href="techDoc.html#outrankingdigraphs-label"><em>outrankingDigraphs module</em></a>.</p>
+<div class="section" id="structure-of-an-outranking-digraph">
+<h3>Structure of an outranking digraph<a class="headerlink" href="#structure-of-an-outranking-digraph" title="Permalink to this headline">¶</a></h3>
 <p>In this <em>Digraph3</em> module, the root <tt class="code docutils literal"><span class="pre">OutrankingDiraph</span></tt> class provides a generic <strong>outranking digraph model</strong>. A given object of this class consists in:</p>
 <ol class="arabic simple">
 <li>a potential set of decision <strong>actions</strong> : a dictionary describing the potential decision actions or alternatives with &#8216;name&#8217; and &#8216;comment&#8217; attributes,</li>
@@ -897,6 +976,9 @@ linearBallot = {
 </dl>
 <a class="reference internal image-reference" href="_images/tutorialPerfTab.png"><img alt="_images/tutorialPerfTab.png" class="align-center" src="_images/tutorialPerfTab.png" style="width: 400px;" /></a>
 <p>It is worthwhile noticing that <em>green</em> and <em>red</em> marked evaluations indicate <em>best</em>, respectively <em>worst</em>, performances of an alternative on a criterion. In this example, we may hence notice that alternative <em>a03</em> is in fact best performing on <em>four</em> out of <em>seven</em> criteria.</p>
+</div>
+<div class="section" id="semantics-of-the-bipolar-valuation">
+<h3>Semantics of the bipolar valuation<a class="headerlink" href="#semantics-of-the-bipolar-valuation" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>Considering the given performance tableau, the <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt> class constructor computes the characteristic value r(x S y) of a pairwise outranking relation &#8220;x S y&#8221; (see <a class="reference internal" href="#bis-2013" id="id7">[BIS-2013]</a>) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:</dt>
 <dd><ol class="first last arabic simple">
@@ -922,6 +1004,11 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
+</dl>
+</div>
+<div class="section" id="pairwise-multiple-criteria-comparisons">
+<h3>Pairwise multiple criteria comparisons<a class="headerlink" href="#pairwise-multiple-criteria-comparisons" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
 <dt>From above given semantics, we may consider that <em>a01</em> outranks <em>a02</em> (r(a01 S a02) &gt; 0.0), but not <em>a03</em> (r(a01 S a03) &lt; 0.0). In order to make understandable the characteristic values shown in the relation table above, we may furthermore have a look at the pairwise multiple criteria comparison between alternatives <em>a01</em> and <em>a02</em>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s">&#39;a01&#39;</span><span class="p">,</span><span class="s">&#39;a02&#39;</span><span class="p">)</span>
 <span class="go">*------------  pairwise comparison ----*</span>
@@ -961,6 +1048,9 @@ linearBallot = {
 </dd>
 </dl>
 <p>This time, we observe a positive polarisation (r(a02 S a03) = +100.0) due to the considerable out-performance of <em>a03</em> against <em>a02</em> on criterion g02 (see second row in the relation table above). We notice therefore a positively polarised <em>certainly confirmed</em> outranking situation in this case <a class="reference internal" href="#bis-2013" id="id8">[BIS-2013]</a>.</p>
+</div>
+<div class="section" id="recoding-the-valuation">
+<h3>Recoding the valuation<a class="headerlink" href="#recoding-the-valuation" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>All outranking digraphs, being of root type <tt class="docutils literal"><span class="pre">Digraph</span></tt>, inherit the methods available under this class. The characteristic valuation domain of an outranking digraph may be recoded with the <tt class="docutils literal"><span class="pre">Digraph.recodeValutaion()</span></tt> method below to the integer range [-37,+37], i.e. plus or minus the global significance of the family of criteria considered in this example instance:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="o">-</span><span class="mi">37</span><span class="p">,</span><span class="o">+</span><span class="mi">37</span><span class="p">)</span>
@@ -988,6 +1078,9 @@ linearBallot = {
 <p class="first admonition-title">Note</p>
 <p class="last">Notice that the reflexive self comparison r(x S x) is set by default to the median valuation value 0, these reflexive terms of the binary relation being generally ignored in most of the <tt class="docutils literal"><span class="pre">Digraph</span></tt> methods.</p>
 </div>
+</div>
+<div class="section" id="strict-outranking-via-the-codual-digraph">
+<h3>Strict outranking via the codual digraph<a class="headerlink" href="#strict-outranking-via-the-codual-digraph" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>From the theory <a class="reference internal" href="#bis-2013" id="id9">[BIS-2013]</a> we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if r(x S y) &lt; 0.0 then r(y S x) &gt;= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id11" id="id10">[1]</a>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="o">~</span><span class="n">odg</span><span class="p">)</span>
@@ -1002,6 +1095,9 @@ linearBallot = {
 </dl>
 <a class="reference internal image-reference" href="_images/codualOdg.png"><img alt="_images/codualOdg.png" class="align-center" src="_images/codualOdg.png" style="width: 300px;" /></a>
 <p>It becomes readily clear now from the picture above that alternative <em>a03</em> strictly outranks in fact all the other alternatives. Hence, <em>a03</em> appears as <strong>Condorcet winner</strong> and my be recommended as best decision action in this illustrative preference modelling exercise.</p>
+</div>
+<div class="section" id="xmcda-2-0-storage">
+<h3>XMCDA 2.0 storage<a class="headerlink" href="#xmcda-2-0-storage" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>As with all Digraph instances, it is possible to store permanently a copy of the outranking digraph <em>odg</em>. As its outranking relation is automatically generated by the <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt> class constructor on the basis of a given performance tableau, it is sufficient to save only the latter. For this purpose we are using the <a class="reference external" href="http://www.decision-deck.org/xmcda/">XMCDA 2.00</a> XML encoding scheme of MCDA data, as provided by the Decision Deck Project (see <a class="reference external" href="http://www.decision-deck.org/">http://www.decision-deck.org/</a>):</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">PerformanceTableau</span><span class="o">.</span><span class="n">saveXMCDA2</span><span class="p">(</span><span class="n">odg</span><span class="p">,</span><span class="s">&#39;tutorialPerfTab&#39;</span><span class="p">)</span>
@@ -1034,19 +1130,27 @@ linearBallot = {
 <p>Many more tools for exploiting bipolarly valued outranking digraphs are available in the Digraph3 resources (see the thechnical documentation of the <a class="reference internal" href="techDoc.html#outrankingdigraphs-label"><em>outrankingDigraphs module</em></a> and the <a class="reference internal" href="techDoc.html#perftabs-label"><em>perfTabs module</em></a>).</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
-<div class="section" id="documents-indices-and-tables">
-<h2>Documents, indices and tables<a class="headerlink" href="#documents-indices-and-tables" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="links-and-appendices">
+<h2>Links and appendices<a class="headerlink" href="#links-and-appendices" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="documents">
+<h3>Documents<a class="headerlink" href="#documents" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><a class="reference external" href="index.html">Introduction</a></li>
 <li><a class="reference external" href="techDoc.html">Reference manual</a></li>
 <li><a class="reference external" href="tutorial.html">Tutorial</a></li>
+</ul>
+</div>
+<div class="section" id="indices-and-tables">
+<h3>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
 <li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
 <li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
 <li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
 </ul>
 </div>
 <div class="section" id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
 <table class="docutils citation" frame="void" id="fmcaa" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
@@ -1070,13 +1174,14 @@ linearBallot = {
 </table>
 </div>
 <div class="section" id="footnotes">
-<h2>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h2>
+<h3>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h3>
 <table class="docutils footnote" frame="void" id="id11" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>, <a class="fn-backref" href="#id6">3</a>, <a class="fn-backref" href="#id10">4</a>)</em> The <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method is depending on drawing tools from <a class="reference external" href="http://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></tt> to install them. There are ready <tt class="docutils literal"><span class="pre">dmg</span></tt> installers for Mac OS.</td></tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
 
@@ -1090,15 +1195,57 @@ linearBallot = {
   <ul>
 <li><a class="reference internal" href="#">Tutorial of the Digraph3 resources</a><ul>
 <li><a class="reference internal" href="#content">Content</a></li>
-<li><a class="reference internal" href="#downloading-and-using-the-digraph3-modules">Downloading and using the Digraph3 modules</a></li>
-<li><a class="reference internal" href="#working-with-the-digraphs-module">Working with the <tt class="code docutils literal"><span class="pre">digraphs</span></tt> module</a></li>
-<li><a class="reference internal" href="#tools-for-manipulating-digraph-objects">Tools for manipulating Digraph objects</a></li>
-<li><a class="reference internal" href="#working-with-the-graphs-module">Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module</a></li>
-<li><a class="reference internal" href="#computing-the-winner-of-an-election">Computing the winner of an election</a></li>
-<li><a class="reference internal" href="#working-with-the-outrankingdigraphs-module">Working with the <tt class="docutils literal"><span class="pre">outrankingDigraphs</span></tt> module</a></li>
-<li><a class="reference internal" href="#documents-indices-and-tables">Documents, indices and tables</a></li>
+<li><a class="reference internal" href="#downloading-and-using-the-digraph3-modules">Downloading and using the Digraph3 modules</a><ul>
+<li><a class="reference internal" href="#download-options">Download options</a></li>
+<li><a class="reference internal" href="#purpose">Purpose</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#working-with-the-digraphs-module">Working with the <tt class="code docutils literal"><span class="pre">digraphs</span></tt> module</a><ul>
+<li><a class="reference internal" href="#structure-of-a-digraph-object">Structure of a <tt class="docutils literal"><span class="pre">Digraph</span></tt> object</a></li>
+<li><a class="reference internal" href="#permanent-storage">Permanent storage</a></li>
+<li><a class="reference internal" href="#inspecting-a-digraph-object">Inspecting a <tt class="docutils literal"><span class="pre">Digraph</span></tt> object</a></li>
+<li><a class="reference internal" href="#special-classes-of-digraphs">Special classes of digraphs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tools-for-manipulating-digraph-objects">Tools for manipulating Digraph objects</a><ul>
+<li><a class="reference internal" href="#inspecting-a-random-digraph">Inspecting a random digraph</a></li>
+<li><a class="reference internal" href="#exporting-a-graphviz-drawing">Exporting a graphviz drawing</a></li>
+<li><a class="reference internal" href="#asymmetric-and-symmetric-parts">Asymmetric and symmetric parts</a></li>
+<li><a class="reference internal" href="#dual-converse-and-coduals">Dual, converse and coduals</a></li>
+<li><a class="reference internal" href="#symmetric-and-transitive-closure">Symmetric and transitive closure</a></li>
+<li><a class="reference internal" href="#saving-the-digraph-in-csv-format">Saving the digraph in CSV format</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#working-with-the-graphs-module">Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module</a><ul>
+<li><a class="reference internal" href="#structure-of-a-graph-object">Structure of a <tt class="docutils literal"><span class="pre">Graph</span></tt> object</a></li>
+<li><a class="reference internal" href="#q-coloring-of-a-graph">q-coloring of a graph</a></li>
+<li><a class="reference internal" href="#mis-enumeration">MIS enumeration</a></li>
+<li><a class="reference internal" href="#grids-and-the-ising-model">Grids and the Ising model</a></li>
+<li><a class="reference internal" href="#metropolis-random-walks">Metropolis random walks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#computing-the-winner-of-an-election">Computing the winner of an election</a><ul>
+<li><a class="reference internal" href="#linear-voting-profiles">Linear voting profiles</a></li>
+<li><a class="reference internal" href="#computing-the-winner">Computing the winner</a></li>
+<li><a class="reference internal" href="#the-condorcet-winner">The Condorcet winner</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#working-with-the-outrankingdigraphs-module">Working with the <tt class="docutils literal"><span class="pre">outrankingDigraphs</span></tt> module</a><ul>
+<li><a class="reference internal" href="#structure-of-an-outranking-digraph">Structure of an outranking digraph</a></li>
+<li><a class="reference internal" href="#semantics-of-the-bipolar-valuation">Semantics of the bipolar valuation</a></li>
+<li><a class="reference internal" href="#pairwise-multiple-criteria-comparisons">Pairwise multiple criteria comparisons</a></li>
+<li><a class="reference internal" href="#recoding-the-valuation">Recoding the valuation</a></li>
+<li><a class="reference internal" href="#strict-outranking-via-the-codual-digraph">Strict outranking via the codual digraph</a></li>
+<li><a class="reference internal" href="#xmcda-2-0-storage">XMCDA 2.0 storage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#links-and-appendices">Links and appendices</a><ul>
+<li><a class="reference internal" href="#documents">Documents</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 <li><a class="reference internal" href="#references">References</a></li>
 <li><a class="reference internal" href="#footnotes">Footnotes</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
