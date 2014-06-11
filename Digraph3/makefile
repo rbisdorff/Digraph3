@@ -12,6 +12,17 @@ sphinx:
 		(cd docSphinx; \
 		sphinx-build -E . html/ )
 
+pydocs:
+		cp digraphs.py pyDoc/
+		cp outrankingDigraphs.py pyDoc/
+		cp perfTabs.py pyDoc/
+		cp sortingDigraphs.py pyDoc/
+		cp votingDigraphs.py pyDoc/
+		cp linearOrders.py pyDoc/
+		cp weakOrders.py pyDoc/
+		cp graphs.py pyDoc/
+		(cd pyDoc; pydoc3 -w ./)
+
 pTests:
 		parallel --gnu cp {}.py test/ ::: digraphs outrankingDigraphs perfTabs sortingDigraphs votingDigraphs linearOrders weakOrders graphs
 		(cd test; parallel --gnu -k nosetests3 -v ::: noseTests*.py )

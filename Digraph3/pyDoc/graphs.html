@@ -1,0 +1,798 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module graphs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>graphs</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/graphs.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/graphs.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;-*-&nbsp;coding:utf-8&nbsp;-*-<br>
+#&nbsp;&nbsp;Python&nbsp;3&nbsp;graphs.py&nbsp;module<br>
+#&nbsp;&nbsp;Copyright&nbsp;(C)&nbsp;&nbsp;2011-2013&nbsp;Raymond&nbsp;Bisdorff<br>
+#############################################</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="graphs.html#Graph">Graph</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="graphs.html#GridGraph">GridGraph</a>
+</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#IsingModel">IsingModel</a>
+</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#MISModel">MISModel</a>
+</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#MetropolisChain">MetropolisChain</a>
+</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#Q_Coloring">Q_Coloring</a>
+</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#RandomGraph">RandomGraph</a>
+</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#RandomTree">RandomTree</a>
+</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#TriangularGraph">TriangularGraph</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Graph">class <strong>Graph</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Graph">Graph</a>&nbsp;class&nbsp;implementation&nbsp;with&nbsp;a&nbsp;vertices&nbsp;and&nbsp;an&nbsp;edges&nbsp;dictionary<br>
+and&nbsp;a&nbsp;gamma&nbsp;function&nbsp;(dictionary)&nbsp;from&nbsp;vertices&nbsp;to&nbsp;subsets&nbsp;of&nbsp;vertices.<br>
+&nbsp;<br>
+Example&nbsp;python3&nbsp;session:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;<a href="#Graph">Graph</a><br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.5)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#Graph-showShort">showShort</a>()<br>
+&nbsp;&nbsp;&nbsp;*-----&nbsp;show&nbsp;short&nbsp;--------------*<br>
+&nbsp;&nbsp;&nbsp;*----&nbsp;short&nbsp;description&nbsp;of&nbsp;the&nbsp;graph&nbsp;----*<br>
+&nbsp;&nbsp;&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;'random'<br>
+&nbsp;&nbsp;&nbsp;Vertices&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;['v1',&nbsp;'v2',&nbsp;'v3',&nbsp;'v4',&nbsp;'v5']<br>
+&nbsp;&nbsp;&nbsp;Valuation&nbsp;domain&nbsp;:&nbsp;&nbsp;{'med':&nbsp;0,&nbsp;'max':&nbsp;1,&nbsp;'min':&nbsp;-1}<br>
+&nbsp;&nbsp;&nbsp;Gamma&nbsp;function&nbsp;&nbsp;&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;v1&nbsp;-&gt;&nbsp;['v4']<br>
+&nbsp;&nbsp;&nbsp;v2&nbsp;-&gt;&nbsp;[]<br>
+&nbsp;&nbsp;&nbsp;v3&nbsp;-&gt;&nbsp;['v4']<br>
+&nbsp;&nbsp;&nbsp;v4&nbsp;-&gt;&nbsp;['v1',&nbsp;'v3']<br>
+&nbsp;&nbsp;&nbsp;v5&nbsp;-&gt;&nbsp;[]<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Graph-__init__"><strong>__init__</strong></a>(self, fileName=None, Empty=False, numberOfVertices=7, edgeProbability=0.5)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;objects.</tt></dd></dl>
+
+<dl><dt><a name="Graph-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, v0, Comments=False, Debug=False)</dt><dd><tt>recursice&nbsp;chordless&nbsp;precycle&nbsp;(len&nbsp;&gt;&nbsp;3)&nbsp;construction:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Pk&nbsp;is&nbsp;the&nbsp;current&nbsp;pre&nbsp;chordless&nbsp;cycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v0&nbsp;is&nbsp;the&nbsp;initial&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;vn&nbsp;is&nbsp;the&nbsp;last&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle</tt></dd></dl>
+
+<dl><dt><a name="Graph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="Graph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="Graph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#Graph-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="Graph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="Graph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Graph-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="Graph-saveEdges"><strong>saveEdges</strong></a>(self, fileName='graphEdges', Agrum=False, Decimal=True)</dt><dd><tt>Saving&nbsp;graph&nbsp;instances&nbsp;as&nbsp;list&nbsp;of&nbsp;edges,&nbsp;ie&nbsp;node&nbsp;node&nbsp;on&nbsp;each&nbsp;line<br>
+for&nbsp;enumChordlessCycles&nbsp;C++/agrum&nbsp;progam.</tt></dd></dl>
+
+<dl><dt><a name="Graph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GridGraph">class <strong>GridGraph</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Specialization&nbsp;of&nbsp;the&nbsp;general&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;for&nbsp;generating<br>
+temporary&nbsp;Grid&nbsp;graphs&nbsp;of&nbsp;dimension&nbsp;n&nbsp;times&nbsp;m.<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;n,m&nbsp;&gt;&nbsp;0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;valuationDomain&nbsp;={'min':m,&nbsp;'max':M}<br>
+&nbsp;<br>
+Default&nbsp;instantiation&nbsp;(5&nbsp;times&nbsp;5&nbsp;Grid&nbsp;Digraph):<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;n&nbsp;=&nbsp;5,<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;m=5,<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;valuationDomain&nbsp;=&nbsp;{'min':-1.0,'max':1.0}.<br>
+&nbsp;<br>
+Example&nbsp;of&nbsp;5x5&nbsp;<a href="#GridGraph">GridGraph</a>&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;grid-5-5.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;5x5&nbsp;grid&nbsp;instance<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#GridGraph">GridGraph</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="GridGraph-__init__"><strong>__init__</strong></a>(self, n=5, m=5, valuationMin=-1, valuationMax=1)</dt></dl>
+
+<dl><dt><a name="GridGraph-showShort"><strong>showShort</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="GridGraph-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, v0, Comments=False, Debug=False)</dt><dd><tt>recursice&nbsp;chordless&nbsp;precycle&nbsp;(len&nbsp;&gt;&nbsp;3)&nbsp;construction:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Pk&nbsp;is&nbsp;the&nbsp;current&nbsp;pre&nbsp;chordless&nbsp;cycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v0&nbsp;is&nbsp;the&nbsp;initial&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;vn&nbsp;is&nbsp;the&nbsp;last&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#GridGraph-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-saveEdges"><strong>saveEdges</strong></a>(self, fileName='graphEdges', Agrum=False, Decimal=True)</dt><dd><tt>Saving&nbsp;graph&nbsp;instances&nbsp;as&nbsp;list&nbsp;of&nbsp;edges,&nbsp;ie&nbsp;node&nbsp;node&nbsp;on&nbsp;each&nbsp;line<br>
+for&nbsp;enumChordlessCycles&nbsp;C++/agrum&nbsp;progam.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="IsingModel">class <strong>IsingModel</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Specialisation&nbsp;of&nbsp;a&nbsp;Gibbs&nbsp;Sampler&nbsp;for&nbsp;the&nbsp;Ising&nbsp;model<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#GridGraph">GridGraph</a>(n=15,m=15)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#IsingModel-showShort">showShort</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*-----&nbsp;show&nbsp;short&nbsp;--------------*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Grid&nbsp;graph&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;grid-6-6<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;6<br>
+&nbsp;&nbsp;&nbsp;&nbsp;m&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;6<br>
+&nbsp;&nbsp;&nbsp;&nbsp;order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;36<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;im&nbsp;=&nbsp;<a href="#IsingModel">IsingModel</a>(g,beta=0.3,nSim=100000,Debug=False)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Running&nbsp;a&nbsp;Gibbs&nbsp;Sampler&nbsp;for&nbsp;100000&nbsp;step&nbsp;!<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;im.<a href="#IsingModel-exportGraphViz">exportGraphViz</a>(colors=['lightblue','lightcoral'])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*----&nbsp;exporting&nbsp;a&nbsp;dot&nbsp;file&nbsp;for&nbsp;GraphViz&nbsp;tools&nbsp;---------*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Exporting&nbsp;to&nbsp;grid-15-15-ising.dot<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fdp&nbsp;-Tpng&nbsp;grid-15-15-ising.dot&nbsp;-o&nbsp;grid-15-15-ising.png<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;grid-15-15-ising.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;ising&nbsp;configuration&nbsp;of&nbsp;a&nbsp;15x15&nbsp;grid&nbsp;with&nbsp;beta=0.3&nbsp;<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#IsingModel">IsingModel</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="IsingModel-__init__"><strong>__init__</strong></a>(self, g, beta=0, nSim=None, Debug=False)</dt></dl>
+
+<dl><dt><a name="IsingModel-computeSpinEnergy"><strong>computeSpinEnergy</strong></a>(self)</dt><dd><tt>Spin&nbsp;energy&nbsp;H(c)&nbsp;of&nbsp;a&nbsp;spin&nbsp;configuration&nbsp;is<br>
+H(c)&nbsp;=&nbsp;-sum_{{x,y}&nbsp;in&nbsp;self.<strong>edges</strong>}[spin_c(x)*spin_c(y)]</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', edgeColor='black', colors=['gold', 'lightblue'])</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;Ising&nbsp;models&nbsp;drawing&nbsp;filtering.</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-generateSpinConfiguration"><strong>generateSpinConfiguration</strong></a>(self, beta=0, nSim=None, Debug=False)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="IsingModel-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, v0, Comments=False, Debug=False)</dt><dd><tt>recursice&nbsp;chordless&nbsp;precycle&nbsp;(len&nbsp;&gt;&nbsp;3)&nbsp;construction:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Pk&nbsp;is&nbsp;the&nbsp;current&nbsp;pre&nbsp;chordless&nbsp;cycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v0&nbsp;is&nbsp;the&nbsp;initial&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;vn&nbsp;is&nbsp;the&nbsp;last&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-saveEdges"><strong>saveEdges</strong></a>(self, fileName='graphEdges', Agrum=False, Decimal=True)</dt><dd><tt>Saving&nbsp;graph&nbsp;instances&nbsp;as&nbsp;list&nbsp;of&nbsp;edges,&nbsp;ie&nbsp;node&nbsp;node&nbsp;on&nbsp;each&nbsp;line<br>
+for&nbsp;enumChordlessCycles&nbsp;C++/agrum&nbsp;progam.</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MISModel">class <strong>MISModel</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Specialisation&nbsp;of&nbsp;a&nbsp;Gibbs&nbsp;Sampler&nbsp;for&nbsp;the&nbsp;hard&nbsp;code&nbsp;model,<br>
+that&nbsp;is&nbsp;a&nbsp;random&nbsp;MIS&nbsp;generator.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;CirculantDigraph&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;dg&nbsp;=&nbsp;CirculantDigraph(order=15)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;dg.digraph2Graph()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#MISModel-showShort">showShort</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*----&nbsp;short&nbsp;description&nbsp;of&nbsp;the&nbsp;graph&nbsp;----*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;'c15'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Vertices&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;['1',&nbsp;'10',&nbsp;'11',&nbsp;'12',&nbsp;'13',&nbsp;'14',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'15',&nbsp;'2',&nbsp;'3',&nbsp;'4',&nbsp;'5',&nbsp;'6',&nbsp;'7',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'8',&nbsp;'9']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Valuation&nbsp;domain&nbsp;:&nbsp;&nbsp;{'med':&nbsp;0,&nbsp;'min':&nbsp;-1,&nbsp;'max':&nbsp;1}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Gamma&nbsp;function&nbsp;&nbsp;&nbsp;:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;-&gt;&nbsp;['2',&nbsp;'15']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;10&nbsp;-&gt;&nbsp;['11',&nbsp;'9']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;11&nbsp;-&gt;&nbsp;['10',&nbsp;'12']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;12&nbsp;-&gt;&nbsp;['13',&nbsp;'11']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;13&nbsp;-&gt;&nbsp;['12',&nbsp;'14']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;14&nbsp;-&gt;&nbsp;['15',&nbsp;'13']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;15&nbsp;-&gt;&nbsp;['1',&nbsp;'14']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;-&gt;&nbsp;['1',&nbsp;'3']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;-&gt;&nbsp;['2',&nbsp;'4']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;-&gt;&nbsp;['3',&nbsp;'5']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;-&gt;&nbsp;['6',&nbsp;'4']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;6&nbsp;-&gt;&nbsp;['7',&nbsp;'5']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;7&nbsp;-&gt;&nbsp;['6',&nbsp;'8']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;8&nbsp;-&gt;&nbsp;['7',&nbsp;'9']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;9&nbsp;-&gt;&nbsp;['10',&nbsp;'8']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;mis&nbsp;=&nbsp;<a href="#MISModel">MISModel</a>(g)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Running&nbsp;a&nbsp;Gibbs&nbsp;Sampler&nbsp;for&nbsp;1050&nbsp;step&nbsp;!<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;mis.<a href="#MISModel-checkMIS">checkMIS</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{'2','4','7','9','11','13','15'}&nbsp;&nbsp;is&nbsp;maximal&nbsp;!<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;mis.<a href="#MISModel-exportGraphViz">exportGraphViz</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*----&nbsp;exporting&nbsp;a&nbsp;dot&nbsp;file&nbsp;for&nbsp;GraphViz&nbsp;tools&nbsp;---------*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Exporting&nbsp;to&nbsp;c15-mis.dot<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fdp&nbsp;-Tpng&nbsp;c15-mis.dot&nbsp;-o&nbsp;c15-mis.png<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;c15-mis.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;15-cycle&nbsp;with&nbsp;colored&nbsp;MIS<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#MISModel">MISModel</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="MISModel-__init__"><strong>__init__</strong></a>(self, g, nSim=None, maxIter=20, Debug=False)</dt></dl>
+
+<dl><dt><a name="MISModel-checkMIS"><strong>checkMIS</strong></a>(self, Comments=True)</dt><dd><tt>Verify&nbsp;maximality&nbsp;of&nbsp;independent&nbsp;set.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;three&nbsp;sets:&nbsp;an&nbsp;independent&nbsp;choice,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;covered&nbsp;vertices,&nbsp;and&nbsp;the&nbsp;remaining&nbsp;uncovered&nbsp;vertices.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When&nbsp;the&nbsp;last&nbsp;set&nbsp;is&nbsp;empty,&nbsp;the&nbsp;independent&nbsp;choice&nbsp;is&nbsp;maximal.</tt></dd></dl>
+
+<dl><dt><a name="MISModel-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', misColor='lightblue')</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;MIS&nbsp;models&nbsp;drawing&nbsp;filtering.</tt></dd></dl>
+
+<dl><dt><a name="MISModel-generateMIS"><strong>generateMIS</strong></a>(self, Reset=True, nSim=None, Comments=True, Debug=False)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="MISModel-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, v0, Comments=False, Debug=False)</dt><dd><tt>recursice&nbsp;chordless&nbsp;precycle&nbsp;(len&nbsp;&gt;&nbsp;3)&nbsp;construction:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Pk&nbsp;is&nbsp;the&nbsp;current&nbsp;pre&nbsp;chordless&nbsp;cycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v0&nbsp;is&nbsp;the&nbsp;initial&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;vn&nbsp;is&nbsp;the&nbsp;last&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle</tt></dd></dl>
+
+<dl><dt><a name="MISModel-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="MISModel-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="MISModel-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="MISModel-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="MISModel-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="MISModel-saveEdges"><strong>saveEdges</strong></a>(self, fileName='graphEdges', Agrum=False, Decimal=True)</dt><dd><tt>Saving&nbsp;graph&nbsp;instances&nbsp;as&nbsp;list&nbsp;of&nbsp;edges,&nbsp;ie&nbsp;node&nbsp;node&nbsp;on&nbsp;each&nbsp;line<br>
+for&nbsp;enumChordlessCycles&nbsp;C++/agrum&nbsp;progam.</tt></dd></dl>
+
+<dl><dt><a name="MISModel-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MetropolisChain">class <strong>MetropolisChain</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Specialisation&nbsp;of&nbsp;the&nbsp;graph&nbsp;class&nbsp;for&nbsp;implementing&nbsp;a&nbsp;generic<br>
+Metropolis&nbsp;Markov&nbsp;Chain&nbsp;Monte&nbsp;Carlo&nbsp;sampler&nbsp;with&nbsp;a&nbsp;given&nbsp;probability&nbsp;distribution<br>
+probs&nbsp;=&nbsp;{'v1':&nbsp;x,&nbsp;'v2':&nbsp;y,&nbsp;...}<br>
+&nbsp;<br>
+Usage&nbsp;example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.5)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#MetropolisChain-showShort">showShort</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*----&nbsp;short&nbsp;description&nbsp;of&nbsp;the&nbsp;graph&nbsp;----*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;'randomGraph'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Vertices&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;['v1',&nbsp;'v2',&nbsp;'v3',&nbsp;'v4',&nbsp;'v5']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Valuation&nbsp;domain&nbsp;:&nbsp;&nbsp;{'max':&nbsp;1,&nbsp;'med':&nbsp;0,&nbsp;'min':&nbsp;-1}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Gamma&nbsp;function&nbsp;&nbsp;&nbsp;:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v1&nbsp;-&gt;&nbsp;['v2',&nbsp;'v3',&nbsp;'v4']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v2&nbsp;-&gt;&nbsp;['v1',&nbsp;'v4']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v3&nbsp;-&gt;&nbsp;['v5',&nbsp;'v1']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v4&nbsp;-&gt;&nbsp;['v2',&nbsp;'v5',&nbsp;'v1']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v5&nbsp;-&gt;&nbsp;['v3',&nbsp;'v4']&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;probs&nbsp;=&nbsp;{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;n&nbsp;=&nbsp;g.order<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;i&nbsp;=&nbsp;0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;verticesList&nbsp;=&nbsp;[x&nbsp;for&nbsp;x&nbsp;in&nbsp;g.vertices]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;verticesList.sort()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;for&nbsp;v&nbsp;in&nbsp;verticesList:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;probs[v]&nbsp;=&nbsp;(n&nbsp;-&nbsp;i)/(n*(n+1)/2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;+=&nbsp;1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;met&nbsp;=&nbsp;<a href="#MetropolisChain">MetropolisChain</a>(g,probs)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;frequency&nbsp;=&nbsp;met.<a href="#MetropolisChain-checkSampling">checkSampling</a>(verticesList[0],nSim=30000)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;for&nbsp;v&nbsp;in&nbsp;verticesList:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(v,probs[v],frequency[v])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v1&nbsp;0.3333&nbsp;0.3343<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v2&nbsp;0.2666&nbsp;0.2680<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v3&nbsp;0.2&nbsp;&nbsp;&nbsp;&nbsp;0.2030&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v4&nbsp;0.1333&nbsp;0.1311<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v5&nbsp;0.0666&nbsp;0.0635<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;met.<a href="#MetropolisChain-showTransitionMatrix">showTransitionMatrix</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;----&nbsp;Transition&nbsp;Matrix&nbsp;-----<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pij&nbsp;&nbsp;|&nbsp;'v1'&nbsp;&nbsp;&nbsp;&nbsp;'v2'&nbsp;&nbsp;&nbsp;&nbsp;'v3'&nbsp;&nbsp;&nbsp;&nbsp;'v4'&nbsp;&nbsp;&nbsp;&nbsp;'v5'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----|-------------------------------------<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'v1'&nbsp;|&nbsp;&nbsp;0.23&nbsp;&nbsp;&nbsp;0.33&nbsp;&nbsp;&nbsp;&nbsp;0.30&nbsp;&nbsp;&nbsp;&nbsp;0.13&nbsp;&nbsp;&nbsp;&nbsp;0.00&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'v2'&nbsp;|&nbsp;&nbsp;0.42&nbsp;&nbsp;&nbsp;0.42&nbsp;&nbsp;&nbsp;&nbsp;0.00&nbsp;&nbsp;&nbsp;&nbsp;0.17&nbsp;&nbsp;&nbsp;&nbsp;0.00&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'v3'&nbsp;|&nbsp;&nbsp;0.50&nbsp;&nbsp;&nbsp;0.00&nbsp;&nbsp;&nbsp;&nbsp;0.33&nbsp;&nbsp;&nbsp;&nbsp;0.00&nbsp;&nbsp;&nbsp;&nbsp;0.17&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'v4'&nbsp;|&nbsp;&nbsp;0.33&nbsp;&nbsp;&nbsp;0.33&nbsp;&nbsp;&nbsp;&nbsp;0.00&nbsp;&nbsp;&nbsp;&nbsp;0.08&nbsp;&nbsp;&nbsp;&nbsp;0.25&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'v5'&nbsp;|&nbsp;&nbsp;0.00&nbsp;&nbsp;&nbsp;0.00&nbsp;&nbsp;&nbsp;&nbsp;0.50&nbsp;&nbsp;&nbsp;&nbsp;0.50&nbsp;&nbsp;&nbsp;&nbsp;0.00<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#MetropolisChain">MetropolisChain</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="MetropolisChain-MCMCtransition"><strong>MCMCtransition</strong></a>(self, si, Debug=False)</dt></dl>
+
+<dl><dt><a name="MetropolisChain-__init__"><strong>__init__</strong></a>(self, g, probs=None)</dt></dl>
+
+<dl><dt><a name="MetropolisChain-checkSampling"><strong>checkSampling</strong></a>(self, si, nSim)</dt></dl>
+
+<dl><dt><a name="MetropolisChain-computeTransitionMatrix"><strong>computeTransitionMatrix</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="MetropolisChain-saveCSVTransition"><strong>saveCSVTransition</strong></a>(self, fileName='transition', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;the&nbsp;transition&nbsp;matrix&nbsp;in&nbsp;the&nbsp;form&nbsp;of<br>
+a&nbsp;csv&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-showTransitionMatrix"><strong>showTransitionMatrix</strong></a>(self, Sorted=True, IntegerValues=False, vertices=None, relation=None, ndigits=2, ReflexiveTerms=True)</dt><dd><tt>Prints&nbsp;on&nbsp;stdout&nbsp;the&nbsp;transition&nbsp;probabilities&nbsp;in<br>
+vertices&nbsp;X&nbsp;vertices&nbsp;table&nbsp;format.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="MetropolisChain-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, v0, Comments=False, Debug=False)</dt><dd><tt>recursice&nbsp;chordless&nbsp;precycle&nbsp;(len&nbsp;&gt;&nbsp;3)&nbsp;construction:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Pk&nbsp;is&nbsp;the&nbsp;current&nbsp;pre&nbsp;chordless&nbsp;cycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v0&nbsp;is&nbsp;the&nbsp;initial&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;vn&nbsp;is&nbsp;the&nbsp;last&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#MetropolisChain-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-saveEdges"><strong>saveEdges</strong></a>(self, fileName='graphEdges', Agrum=False, Decimal=True)</dt><dd><tt>Saving&nbsp;graph&nbsp;instances&nbsp;as&nbsp;list&nbsp;of&nbsp;edges,&nbsp;ie&nbsp;node&nbsp;node&nbsp;on&nbsp;each&nbsp;line<br>
+for&nbsp;enumChordlessCycles&nbsp;C++/agrum&nbsp;progam.</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Q_Coloring">class <strong>Q_Coloring</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Generate&nbsp;a&nbsp;q-coloring&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;instance&nbsp;via&nbsp;a&nbsp;Gibbs&nbsp;MCMC&nbsp;sampler&nbsp;in<br>
+nSim&nbsp;simulation&nbsp;steps&nbsp;(default&nbsp;=&nbsp;len(graph.edges)).<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Example&nbsp;3-coloring&nbsp;of&nbsp;a&nbsp;grid&nbsp;6x6&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#GridGraph">GridGraph</a>(n=6,m=6)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#Q_Coloring-showShort">showShort</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#Q_Coloring-exportGraphViz">exportGraphViz</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*-----&nbsp;show&nbsp;short&nbsp;--------------*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grid&nbsp;graph&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;grid-6-6<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;6<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;6<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;36<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;qc&nbsp;=&nbsp;<a href="#Q_Coloring">Q_Coloring</a>(g,colors=['gold','lightblue','lightcoral'])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Running&nbsp;a&nbsp;Gibbs&nbsp;Sampler&nbsp;for&nbsp;630&nbsp;step&nbsp;!<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;qc.<a href="#Q_Coloring-checkFeasibility">checkFeasibility</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;q-coloring&nbsp;with&nbsp;3&nbsp;colors&nbsp;is&nbsp;feasible&nbsp;!!<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;qc.<a href="#Q_Coloring-exportGraphViz">exportGraphViz</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*----&nbsp;exporting&nbsp;a&nbsp;dot&nbsp;file&nbsp;for&nbsp;GraphViz&nbsp;tools&nbsp;---------*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exporting&nbsp;to&nbsp;grid-6-6-qcoloring.dot<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fdp&nbsp;-Tpng&nbsp;grid-6-6-qcoloring.dot&nbsp;-o&nbsp;grid-6-6-qcoloring.png<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;image::&nbsp;grid-6-6-qcoloring.png<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:alt:&nbsp;3&nbsp;coloring&nbsp;of&nbsp;a&nbsp;6x6&nbsp;grid<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#Q_Coloring">Q_Coloring</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Q_Coloring-__init__"><strong>__init__</strong></a>(self, g, colors=['gold', 'lightcoral', 'lightblue'], nSim=None, maxIter=20, Comments=True, Debug=False)</dt></dl>
+
+<dl><dt><a name="Q_Coloring-checkFeasibility"><strong>checkFeasibility</strong></a>(self, Comments=True, Debug=False)</dt></dl>
+
+<dl><dt><a name="Q_Coloring-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;q-coloring&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=10,edgeProbability=0.4)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#Q_Coloring-showShort">showShort</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*----&nbsp;short&nbsp;description&nbsp;of&nbsp;the&nbsp;graph&nbsp;----*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;:&nbsp;'randomGraph'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Vertices&nbsp;:&nbsp;&nbsp;['v1','v10','v2','v3','v4','v5','v6','v7','v8','v9']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Valuation&nbsp;domain&nbsp;:&nbsp;&nbsp;{'max':&nbsp;1,&nbsp;'min':&nbsp;-1,&nbsp;'med':&nbsp;0}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Gamma&nbsp;function&nbsp;&nbsp;&nbsp;:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v1&nbsp;-&gt;&nbsp;['v7',&nbsp;'v2',&nbsp;'v3',&nbsp;'v5']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v10&nbsp;-&gt;&nbsp;['v4']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v2&nbsp;-&gt;&nbsp;['v1',&nbsp;'v7',&nbsp;'v8']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v3&nbsp;-&gt;&nbsp;['v1',&nbsp;'v7',&nbsp;'v9']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v4&nbsp;-&gt;&nbsp;['v5',&nbsp;'v10']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v5&nbsp;-&gt;&nbsp;['v6',&nbsp;'v7',&nbsp;'v1',&nbsp;'v8',&nbsp;'v4']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v6&nbsp;-&gt;&nbsp;['v5',&nbsp;'v8']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v7&nbsp;-&gt;&nbsp;['v1',&nbsp;'v5',&nbsp;'v8',&nbsp;'v2',&nbsp;'v3']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v8&nbsp;-&gt;&nbsp;['v6',&nbsp;'v7',&nbsp;'v2',&nbsp;'v5']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v9&nbsp;-&gt;&nbsp;['v3']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;qc&nbsp;=&nbsp;<a href="#Q_Coloring">Q_Coloring</a>(g,nSim=1000)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Running&nbsp;a&nbsp;Gibbs&nbsp;Sampler&nbsp;for&nbsp;1000&nbsp;step&nbsp;!<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;qc.<a href="#Q_Coloring-checkFeasibility">checkFeasibility</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;q-coloring&nbsp;with&nbsp;3&nbsp;colors&nbsp;is&nbsp;feasible&nbsp;!!<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;qc.<a href="#Q_Coloring-exportGraphViz">exportGraphViz</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*----&nbsp;exporting&nbsp;a&nbsp;dot&nbsp;file&nbsp;for&nbsp;GraphViz&nbsp;tools&nbsp;---------*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Exporting&nbsp;to&nbsp;randomGraph-qcoloring.dot<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fdp&nbsp;-Tpng&nbsp;randomGraph-qcoloring.dot&nbsp;-o&nbsp;randomGraph-qcoloring.png<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph-qcoloring.png<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:alt:&nbsp;3-coloring&nbsp;of&nbsp;a&nbsp;random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-generateFeasibleConfiguration"><strong>generateFeasibleConfiguration</strong></a>(self, Reset=True, nSim=None, Debug=False)</dt></dl>
+
+<dl><dt><a name="Q_Coloring-showConfiguration"><strong>showConfiguration</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="Q_Coloring-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, v0, Comments=False, Debug=False)</dt><dd><tt>recursice&nbsp;chordless&nbsp;precycle&nbsp;(len&nbsp;&gt;&nbsp;3)&nbsp;construction:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Pk&nbsp;is&nbsp;the&nbsp;current&nbsp;pre&nbsp;chordless&nbsp;cycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v0&nbsp;is&nbsp;the&nbsp;initial&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;vn&nbsp;is&nbsp;the&nbsp;last&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-saveEdges"><strong>saveEdges</strong></a>(self, fileName='graphEdges', Agrum=False, Decimal=True)</dt><dd><tt>Saving&nbsp;graph&nbsp;instances&nbsp;as&nbsp;list&nbsp;of&nbsp;edges,&nbsp;ie&nbsp;node&nbsp;node&nbsp;on&nbsp;each&nbsp;line<br>
+for&nbsp;enumChordlessCycles&nbsp;C++/agrum&nbsp;progam.</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RandomGraph">class <strong>RandomGraph</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Random&nbsp;instances&nbsp;of&nbsp;the&nbsp;<a href="#Graph">Graph</a>&nbsp;class<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;order&nbsp;(positive&nbsp;integer)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;edgeProbability&nbsp;(in&nbsp;[0,1])<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#RandomGraph">RandomGraph</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="RandomGraph-__init__"><strong>__init__</strong></a>(self, order=5, edgeProbability=0.4)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="RandomGraph-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, v0, Comments=False, Debug=False)</dt><dd><tt>recursice&nbsp;chordless&nbsp;precycle&nbsp;(len&nbsp;&gt;&nbsp;3)&nbsp;construction:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Pk&nbsp;is&nbsp;the&nbsp;current&nbsp;pre&nbsp;chordless&nbsp;cycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v0&nbsp;is&nbsp;the&nbsp;initial&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;vn&nbsp;is&nbsp;the&nbsp;last&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#RandomGraph-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-saveEdges"><strong>saveEdges</strong></a>(self, fileName='graphEdges', Agrum=False, Decimal=True)</dt><dd><tt>Saving&nbsp;graph&nbsp;instances&nbsp;as&nbsp;list&nbsp;of&nbsp;edges,&nbsp;ie&nbsp;node&nbsp;node&nbsp;on&nbsp;each&nbsp;line<br>
+for&nbsp;enumChordlessCycles&nbsp;C++/agrum&nbsp;progam.</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RandomTree">class <strong>RandomTree</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Random&nbsp;instance&nbsp;of&nbsp;a&nbsp;tree&nbsp;generated&nbsp;from&nbsp;a&nbsp;random&nbsp;Prüfer&nbsp;code.<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomTree.png<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#RandomTree">RandomTree</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="RandomTree-__init__"><strong>__init__</strong></a>(self, order=None, prueferCode=None, myseed=None, Debug=False)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="RandomTree-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, v0, Comments=False, Debug=False)</dt><dd><tt>recursice&nbsp;chordless&nbsp;precycle&nbsp;(len&nbsp;&gt;&nbsp;3)&nbsp;construction:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Pk&nbsp;is&nbsp;the&nbsp;current&nbsp;pre&nbsp;chordless&nbsp;cycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v0&nbsp;is&nbsp;the&nbsp;initial&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;vn&nbsp;is&nbsp;the&nbsp;last&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#RandomTree-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-saveEdges"><strong>saveEdges</strong></a>(self, fileName='graphEdges', Agrum=False, Decimal=True)</dt><dd><tt>Saving&nbsp;graph&nbsp;instances&nbsp;as&nbsp;list&nbsp;of&nbsp;edges,&nbsp;ie&nbsp;node&nbsp;node&nbsp;on&nbsp;each&nbsp;line<br>
+for&nbsp;enumChordlessCycles&nbsp;C++/agrum&nbsp;progam.</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TriangularGraph">class <strong>TriangularGraph</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Specialization&nbsp;of&nbsp;the&nbsp;general&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;for&nbsp;generating<br>
+temporary&nbsp;triangular&nbsp;graphs&nbsp;of&nbsp;dimension&nbsp;n&nbsp;times&nbsp;m.<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;n,m&nbsp;&gt;&nbsp;0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;valuationDomain&nbsp;={'min':m,&nbsp;'max':M}<br>
+&nbsp;<br>
+Default&nbsp;instantiation&nbsp;(5&nbsp;times&nbsp;5&nbsp;Trinagular&nbsp;Digraph):<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;n&nbsp;=&nbsp;5,<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;m=5,<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;valuationDomain&nbsp;=&nbsp;{'min':-1.0,'max':1.0}.<br>
+&nbsp;<br>
+Example&nbsp;of&nbsp;5x5&nbsp;<a href="#GridGraph">GridGraph</a>&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;triangular-5-5.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;triangular&nbsp;5x5&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#TriangularGraph">TriangularGraph</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TriangularGraph-__init__"><strong>__init__</strong></a>(self, n=5, m=5, valuationMin=-1, valuationMax=1)</dt></dl>
+
+<dl><dt><a name="TriangularGraph-showShort"><strong>showShort</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="TriangularGraph-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, v0, Comments=False, Debug=False)</dt><dd><tt>recursice&nbsp;chordless&nbsp;precycle&nbsp;(len&nbsp;&gt;&nbsp;3)&nbsp;construction:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Pk&nbsp;is&nbsp;the&nbsp;current&nbsp;pre&nbsp;chordless&nbsp;cycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;v0&nbsp;is&nbsp;the&nbsp;initial&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;vn&nbsp;is&nbsp;the&nbsp;last&nbsp;vertex&nbsp;of&nbsp;the&nbsp;precycle</tt></dd></dl>
+
+<dl><dt><a name="TriangularGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="TriangularGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="TriangularGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#TriangularGraph-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="TriangularGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="TriangularGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="TriangularGraph-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="TriangularGraph-saveEdges"><strong>saveEdges</strong></a>(self, fileName='graphEdges', Agrum=False, Decimal=True)</dt><dd><tt>Saving&nbsp;graph&nbsp;instances&nbsp;as&nbsp;list&nbsp;of&nbsp;edges,&nbsp;ie&nbsp;node&nbsp;node&nbsp;on&nbsp;each&nbsp;line<br>
+for&nbsp;enumChordlessCycles&nbsp;C++/agrum&nbsp;progam.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>
