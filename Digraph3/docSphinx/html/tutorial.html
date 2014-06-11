@@ -324,11 +324,11 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/asymSymParts.png"><img alt="_images/asymSymParts.png" class="align-center" src="_images/asymSymParts.png" style="width: 400px;" /></a>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Be aware that the partial objects <em>asymDg</em> and <em>symDg</em> put to the indeterminate characteristic value all not-asymmetric, respectively links between nodes.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Notice that the partial objects <em>asymDg</em> and <em>symDg</em> put to the indeterminate characteristic value all not-asymmetric, respectively not-symmetric links between nodes.</p>
 </div>
-<p>Here for illustration the relation constructor of the <tt class="docutils literal"><span class="pre">AsymmetricPartialDigraph</span></tt> class:</p>
+<p>Here below, for illustration the source code of <em>relation</em> constructor of the <tt class="docutils literal"><span class="pre">AsymmetricPartialDigraph</span></tt> class:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">_constructRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
     <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s">&#39;min&#39;</span><span class="p">]</span>
@@ -454,7 +454,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <div class="section" id="strong-components">
 <h3>Strong components<a class="headerlink" href="#strong-components" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>As the original digraph <em>dg</em> was connected (see above the result of the <tt class="docutils literal"><span class="pre">dg.showShort()</span></tt> command), both to the symmetric and transitive closures together, will necessarily produce a single strong commponent, i.e. a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Using <tt class="docutils literal"><span class="pre">StrongComponentsCollapsedDigraph</span></tt> constructor here will render a single hyper-node gathering all the original nodes :</dt>
+<dt>As the original digraph <em>dg</em> was connected (see above the result of the <tt class="docutils literal"><span class="pre">dg.showShort()</span></tt> command), both the symmetric and transitive closures operated together, will necessarily produce a single strong commponent, i.e. a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Using the <tt class="docutils literal"><span class="pre">StrongComponentsCollapsedDigraph</span></tt> constructor here will render a single hyper-node gathering all the original nodes :</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">StrongComponentsCollapsedDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span> <span class="o">=</span> <span class="n">StrongComponentsCollapsedDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
@@ -482,7 +482,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <div class="section" id="saving-and-reloading-in-csv-format">
 <h3>Saving and reloading in CSV format<a class="headerlink" href="#saving-and-reloading-in-csv-format" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>Sometimes it is required to exchange the graph valuation data in CSV format with a statistical package like <a class="reference external" href="http://www.r-project.org/">R</a>. For this purpose it is possible to export the digraph data into a CSV file. The valuation domain is hereby normalized by default to the range [-1,1] and the diagonal put by defalut to to the minimal value -1:</dt>
+<dt>Sometimes it is required to exchange the graph valuation data in CSV format with a statistical package like <a class="reference external" href="http://www.r-project.org/">R</a>. For this purpose it is possible to export the digraph data into a CSV file. The valuation domain is hereby normalized by default to the range [-1,1] and the diagonal put by defalut to the minimal value -1:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">saveCSV</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 <span class="go"># content of file tutRandValDigraph.csv</span>
@@ -585,7 +585,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Notice the subtle difference between the neighborhoods of an <em>empty</em> and the neighborhoods of an <em>indeterminate</em> digraph instance. In the first kind, the neighborhoods are known to completely <em>empty</em> whereas, in the latter, <em>nothing is known</em> about the actual neighborhoods of the nodes. These two cases illustrate well why in the case of bipolarly valued digraphs, we need both a <em>gamma</em> <strong>and</strong> a <em>notGamma</em> function.</p>
+<p class="last">Notice the subtle difference between the neighborhoods of an <em>empty</em> and the neighborhoods of an <em>indeterminate</em> digraph instance. In the first kind, the neighborhoods are known to be completely <em>empty</em> whereas, in the latter, <em>nothing is known</em> about the actual neighborhoods of the nodes. These two cases illustrate why in the case of a bipolar valuation domain, we need both a <em>gamma</em> <strong>and</strong> a <em>notGamma</em> function.</p>
 </div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
@@ -1124,7 +1124,7 @@ linearBallot = {
 </div>
 </dd>
 </dl>
-<p>This time, we observe a positive polarisation (r(a02 S a03) = +100.0) due to the considerable out-performance of <em>a03</em> against <em>a02</em> on criterion g02 (see second row in the relation table above). We notice therefore a positively polarised <em>certainly confirmed</em> outranking situation in this case <a class="reference internal" href="#bis-2013" id="id8">[BIS-2013]</a>.</p>
+<p>This time, we observe a considerable out-performance of <em>a03</em> against <em>a02</em> on criterion g02 (see second row in the relation table above). We therefore notice a positively polarised <em>certainly confirmed</em> outranking situation in this case <a class="reference internal" href="#bis-2013" id="id8">[BIS-2013]</a>.</p>
 </div>
 <div class="section" id="recoding-the-valuation">
 <h3>Recoding the valuation<a class="headerlink" href="#recoding-the-valuation" title="Permalink to this headline">¶</a></h3>
@@ -1171,7 +1171,7 @@ linearBallot = {
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/codualOdg.png"><img alt="_images/codualOdg.png" class="align-center" src="_images/codualOdg.png" style="width: 300px;" /></a>
-<p>It becomes readily clear now from the picture above that alternative <em>a03</em> strictly outranks in fact all the other alternatives. Hence, <em>a03</em> appears as <strong>Condorcet winner</strong> and my be recommended as best decision action in this illustrative preference modelling exercise.</p>
+<p>It becomes readily clear now from the picture above that alternative <em>a03</em> strictly outranks in fact all the other alternatives. Hence, <em>a03</em> appears as <strong>Condorcet winner</strong> and may be recommended as <em>best decision action</em> in this illustrative preference modelling exercise.</p>
 </div>
 <div class="section" id="xmcda-2-0-storage">
 <h3>XMCDA 2.0 storage<a class="headerlink" href="#xmcda-2-0-storage" title="Permalink to this headline">¶</a></h3>

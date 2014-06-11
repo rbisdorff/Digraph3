@@ -259,7 +259,7 @@ We may now extract both this symmetric as well as this asymmetric part of digrap
 
     Notice that the partial objects *asymDg* and *symDg* put to the indeterminate characteristic value all not-asymmetric, respectively not-symmetric links between nodes. 
 
-Here for illustration the relation constructor of the ``AsymmetricPartialDigraph`` class::
+Here below, for illustration the source code of *relation* constructor of the ``AsymmetricPartialDigraph`` class::
 
 	def _constructRelation(self):
 	    actions = self.actions
@@ -373,7 +373,7 @@ Symmetric and transtive closure in site constructors are also available, Note th
 Strong components
 .................
 
-As the original digraph *dg* was connected (see above the result of the ``dg.showShort()`` command), both to the symmetric and transitive closures together, will necessarily produce a single strong commponent, i.e. a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Using ``StrongComponentsCollapsedDigraph`` constructor here will render a single hyper-node gathering all the original nodes :
+As the original digraph *dg* was connected (see above the result of the ``dg.showShort()`` command), both the symmetric and transitive closures operated together, will necessarily produce a single strong commponent, i.e. a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Using the ``StrongComponentsCollapsedDigraph`` constructor here will render a single hyper-node gathering all the original nodes :
     >>> from digraphs import StrongComponentsCollapsedDigraph
     >>> sc = StrongComponentsCollapsedDigraph(dg)
     >>> sc.showAll()
@@ -397,7 +397,7 @@ As the original digraph *dg* was connected (see above the result of the ``dg.sho
 Saving and reloading in CSV format
 .................................. 
 
-Sometimes it is required to exchange the graph valuation data in CSV format with a statistical package like `R <http://www.r-project.org/>`_. For this purpose it is possible to export the digraph data into a CSV file. The valuation domain is hereby normalized by default to the range [-1,1] and the diagonal put by defalut to to the minimal value -1:
+Sometimes it is required to exchange the graph valuation data in CSV format with a statistical package like `R <http://www.r-project.org/>`_. For this purpose it is possible to export the digraph data into a CSV file. The valuation domain is hereby normalized by default to the range [-1,1] and the diagonal put by defalut to the minimal value -1:
 	>>> dg = Digraph('tutRandValDigraph')
 	>>> dg.saveCSV('tutRandValDigraph')
 	# content of file tutRandValDigraph.csv
@@ -491,7 +491,7 @@ Let us finally mention some special universal classes of digraphs that are readi
 
 .. note::
 
-       Notice the subtle difference between the neighborhoods of an *empty* and the neighborhoods of an *indeterminate* digraph instance. In the first kind, the neighborhoods are known to completely *empty* whereas, in the latter, *nothing is known* about the actual neighborhoods of the nodes. These two cases illustrate well why in the case of bipolarly valued digraphs, we need both a *gamma* **and** a *notGamma* function.
+       Notice the subtle difference between the neighborhoods of an *empty* and the neighborhoods of an *indeterminate* digraph instance. In the first kind, the neighborhoods are known to be completely *empty* whereas, in the latter, *nothing is known* about the actual neighborhoods of the nodes. These two cases illustrate why in the case of a bipolar valuation domain, we need both a *gamma* **and** a *notGamma* function.
 
 Back to :ref:`Tutorial-label`
 
@@ -985,7 +985,7 @@ The outranking valuation characteristic appears as **majority margin** resulting
 	 Valuation in range: -37.00 to +37.00; global concordance: +31.00
 	>>> ...
 
-This time, we observe a positive polarisation (r(a02 S a03) = +100.0) due to the considerable out-performance of *a03* against *a02* on criterion g02 (see second row in the relation table above). We notice therefore a positively polarised *certainly confirmed* outranking situation in this case [BIS-2013]_. 
+This time, we observe a considerable out-performance of *a03* against *a02* on criterion g02 (see second row in the relation table above). We therefore notice a positively polarised *certainly confirmed* outranking situation in this case [BIS-2013]_. 
 
 Recoding the valuation
 ......................
@@ -1028,7 +1028,7 @@ From the theory [BIS-2013]_ we know that the bipolarly outranking relation is **
    :width: 300 px
    :align: center
 
-It becomes readily clear now from the picture above that alternative *a03* strictly outranks in fact all the other alternatives. Hence, *a03* appears as **Condorcet winner** and my be recommended as best decision action in this illustrative preference modelling exercise. 
+It becomes readily clear now from the picture above that alternative *a03* strictly outranks in fact all the other alternatives. Hence, *a03* appears as **Condorcet winner** and may be recommended as *best decision action* in this illustrative preference modelling exercise. 
 
 XMCDA 2.0 storage 
 .................
