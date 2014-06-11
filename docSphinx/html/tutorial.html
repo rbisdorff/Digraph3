@@ -400,7 +400,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 </dd>
-<dt>Symmetric and transtive closure in site constructors are also available, Note that it is a good idea,before going ahead with these in-site operations that irreversibly modify the original dg object, to previously make a backup version of <em>dg</em> :</dt>
+<dt>Symmetric and transtive closure in site constructors are also available, Note that it is a good idea,before going ahead with these in-site operations that irreversibly modify the original dg object, to previously make a backup version of <em>dg</em>. The simplest storage method, always provide by the generic <tt class="docutils literal"><span class="pre">Digraph.save()</span></tt> writes out in a named file the python content in string representation:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">closeSymmetric</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">()</span>
@@ -431,6 +431,37 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <span class="go">  Not Gamma :</span>
 <span class="go">&#39;frozenset({&#39;7&#39;, &#39;1&#39;, &#39;2&#39;, &#39;6&#39;, &#39;5&#39;, &#39;3&#39;, &#39;4&#39;})&#39;: in =&gt; set(), out =&gt; set()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
+</pre></div>
+</div>
+</dd>
+<dt>Sometimes it is required to exchange the graph valuation data in CSV format with a statistical package like <a class="reference external" href="http://www.r-project.org/">R</a>. For this purpose it is possible to export the digraph data into a CSV file. The valuation domain is hereby normalized by default to the range [-1,1] and the diagonal put by defalut to to the minimal value -1:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">saveCSV</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
+<span class="go"># content of file tutRandValDigraph.csv</span>
+<span class="go">&quot;d&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;</span>
+<span class="go">&quot;1&quot;,-1.0,0.48,-0.7,-0.86,-0.3,-0.38,-0.44</span>
+<span class="go">&quot;2&quot;,0.22,-1.0,0.38,-0.5,-0.8,0.54,-0.02</span>
+<span class="go">&quot;3&quot;,0.42,-0.08,-1.0,-0.7,0.56,-0.84,1.0</span>
+<span class="go">&quot;4&quot;,-0.44,0.4,0.62,-1.0,-0.04,-0.66,-0.76</span>
+<span class="go">&quot;5&quot;,-0.32,0.48,0.46,-0.64,-1.0,0.22,0.52</span>
+<span class="go">&quot;6&quot;,0.84,0.0,0.4,0.96,0.18,-1.0,0.22</span>
+<span class="go">&quot;7&quot;,-0.88,-0.72,-0.82,-0.52,0.84,-0.04,-1.0</span>
+</pre></div>
+</div>
+</dd>
+<dt>It is possible to reload a Digraph instance from its previously saved CSV file content:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dgcsv</span> <span class="o">=</span> <span class="n">CSVDigraph</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dgcsv</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="go">* ---- Relation Table -----</span>
+<span class="go">r(xSy) |   &#39;1&#39;   &#39;2&#39;   &#39;3&#39;   &#39;4&#39;   &#39;5&#39;   &#39;6&#39;   &#39;7&#39;</span>
+<span class="go">-------|------------------------------------------------------------</span>
+<span class="go">&#39;1&#39;    |   -   -0.48  0.70  0.86  0.30  0.38  0.44</span>
+<span class="go">&#39;2&#39;    | -0.22   -   -0.38  0.50  0.80 -0.54  0.02</span>
+<span class="go">&#39;3&#39;    | -0.42  0.08   -    0.70 -0.56  0.84 -1.00</span>
+<span class="go">&#39;4&#39;    |  0.44 -0.40 -0.62   -    0.04  0.66  0.76</span>
+<span class="go">&#39;5&#39;    |  0.32 -0.48 -0.46  0.64   -   -0.22 -0.52</span>
+<span class="go">&#39;6&#39;    | -0.84  0.00 -0.40 -0.96 -0.18   -   -0.22</span>
+<span class="go">&#39;7&#39;    |  0.88  0.72  0.82  0.52 -0.84  0.04   -</span>
 </pre></div>
 </div>
 </dd>
