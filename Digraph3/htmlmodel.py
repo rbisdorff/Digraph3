@@ -363,6 +363,7 @@ graph
 '''
 def javascript():
     return '''
+
 /*
 #
 # Html/JavaScript implementation of digraphs graph export
@@ -1413,7 +1414,6 @@ function editEdge(d) {
    */
   function importJSON() {
     console.log("Importing JSON file.")
-    graph_type="general";
     var reader;
       if (window.File && window.FileReader && window.FileList && window.Blob) {
         $('#upModalLabel').modal('show');
@@ -1751,7 +1751,6 @@ function editEdge(d) {
   xmlDoc = $.parseXML(xmlinput);
   return xmlinput;
   }
-
 '''
 
 def d3export():
