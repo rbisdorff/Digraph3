@@ -237,7 +237,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 </div>
 <div class="section" id="tools-for-manipulating-digraph-objects">
-<span id="digraph-tools-label"></span><h2>Tools for manipulating Digraph objects<a class="headerlink" href="#tools-for-manipulating-digraph-objects" title="Permalink to this headline">¶</a></h2>
+<span id="digraph-tools-label"></span><h2>Tools for manipulating <tt class="docutils literal"><span class="pre">Digraph</span></tt> objects<a class="headerlink" href="#tools-for-manipulating-digraph-objects" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="inspecting-a-random-digraph">
 <h3>Inspecting a random digraph<a class="headerlink" href="#inspecting-a-random-digraph" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
@@ -297,8 +297,8 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <p class="last">Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value <em>r(x S x)</em> for all action <em>x</em> is put to the median, i.e. indeterminate, value) in this case.</p>
 </div>
 </div>
-<div class="section" id="exporting-a-graphviz-drawing">
-<h3>Exporting a graphviz drawing<a class="headerlink" href="#exporting-a-graphviz-drawing" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="graphviz-drawings">
+<h3>Graphviz drawings<a class="headerlink" href="#graphviz-drawings" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id11" id="id2">[1]</a> drawing:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
@@ -353,6 +353,9 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
     <span class="k">return</span> <span class="n">relationOut</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="digraph-fusion-by-epistemic-disjunction">
+<h3>Digraph fusion by epistemic disjunction<a class="headerlink" href="#digraph-fusion-by-epistemic-disjunction" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>We may recover object <em>dg</em> from both partial objects <em>asymDg</em> and <em>symDg</em> with a <strong>bipolar fusion</strong> constructor, also called <strong>epistemic disjunction</strong>, available via the <tt class="docutils literal"><span class="pre">FusionDigraph</span></tt> class:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">FusionDigraph</span>
@@ -373,10 +376,10 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dd>
 </dl>
 </div>
-<div class="section" id="dual-converse-and-coduals">
-<h3>Dual, converse and coduals<a class="headerlink" href="#dual-converse-and-coduals" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="dual-converse-and-codual-digraphs">
+<h3>Dual, converse and codual digraphs<a class="headerlink" href="#dual-converse-and-codual-digraphs" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>We may as readily compute the <strong>dual</strong>, the <strong>converse</strong> and the <strong>codual</strong> (dual and converse) of dg:</dt>
+<dt>We may as readily compute the <strong>dual</strong>, the <strong>converse</strong> and the <strong>codual</strong> (dual and converse) of <em>dg</em>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">DualDigraph</span><span class="p">,</span> <span class="n">ConverseDigraph</span><span class="p">,</span> <span class="n">CoDualDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ddg</span> <span class="o">=</span> <span class="n">DualDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ddg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
@@ -436,8 +439,8 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dd>
 </dl>
 </div>
-<div class="section" id="symmetric-and-transitive-closure">
-<h3>Symmetric and transitive closure<a class="headerlink" href="#symmetric-and-transitive-closure" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="symmetric-and-transitive-closures">
+<h3>Symmetric and transitive closures<a class="headerlink" href="#symmetric-and-transitive-closures" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>Symmetric and transtive closure in site constructors are also available, Note that it is a good idea,before going ahead with these in-site operations that irreversibly modify the original dg object, to previously make a backup version of <em>dg</em>. The simplest storage method, always provide by the generic <tt class="docutils literal"><span class="pre">Digraph.save()</span></tt> writes out in a named file the python content in string representation:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
@@ -449,6 +452,9 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/strongComponents.png"><img alt="_images/strongComponents.png" class="align-center" src="_images/strongComponents.png" style="width: 200px;" /></a>
+</div>
+<div class="section" id="strong-components">
+<h3>Strong components<a class="headerlink" href="#strong-components" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>As the original digraph <em>dg</em> was connected (see above the result of the <tt class="docutils literal"><span class="pre">dg.showShort()</span></tt> command), both to the symmetric and transitive closures together, will necessarily produce a single strong commponent, i.e. a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Using <tt class="docutils literal"><span class="pre">StrongComponentsCollapsedDigraph</span></tt> constructor here will render a single hyper-node gathering all the original nodes :</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">StrongComponentsCollapsedDigraph</span>
@@ -475,8 +481,8 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dd>
 </dl>
 </div>
-<div class="section" id="saving-the-digraph-in-csv-format">
-<h3>Saving the digraph in CSV format<a class="headerlink" href="#saving-the-digraph-in-csv-format" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="saving-and-reloading-in-csv-format">
+<h3>Saving and reloading in CSV format<a class="headerlink" href="#saving-and-reloading-in-csv-format" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>Sometimes it is required to exchange the graph valuation data in CSV format with a statistical package like <a class="reference external" href="http://www.r-project.org/">R</a>. For this purpose it is possible to export the digraph data into a CSV file. The valuation domain is hereby normalized by default to the range [-1,1] and the diagonal put by defalut to to the minimal value -1:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
@@ -1207,13 +1213,15 @@ linearBallot = {
 <li><a class="reference internal" href="#special-classes-of-digraphs">Special classes of digraphs</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#tools-for-manipulating-digraph-objects">Tools for manipulating Digraph objects</a><ul>
+<li><a class="reference internal" href="#tools-for-manipulating-digraph-objects">Tools for manipulating <tt class="docutils literal"><span class="pre">Digraph</span></tt> objects</a><ul>
 <li><a class="reference internal" href="#inspecting-a-random-digraph">Inspecting a random digraph</a></li>
-<li><a class="reference internal" href="#exporting-a-graphviz-drawing">Exporting a graphviz drawing</a></li>
+<li><a class="reference internal" href="#graphviz-drawings">Graphviz drawings</a></li>
 <li><a class="reference internal" href="#asymmetric-and-symmetric-parts">Asymmetric and symmetric parts</a></li>
-<li><a class="reference internal" href="#dual-converse-and-coduals">Dual, converse and coduals</a></li>
-<li><a class="reference internal" href="#symmetric-and-transitive-closure">Symmetric and transitive closure</a></li>
-<li><a class="reference internal" href="#saving-the-digraph-in-csv-format">Saving the digraph in CSV format</a></li>
+<li><a class="reference internal" href="#digraph-fusion-by-epistemic-disjunction">Digraph fusion by epistemic disjunction</a></li>
+<li><a class="reference internal" href="#dual-converse-and-codual-digraphs">Dual, converse and codual digraphs</a></li>
+<li><a class="reference internal" href="#symmetric-and-transitive-closures">Symmetric and transitive closures</a></li>
+<li><a class="reference internal" href="#strong-components">Strong components</a></li>
+<li><a class="reference internal" href="#saving-and-reloading-in-csv-format">Saving and reloading in CSV format</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#working-with-the-graphs-module">Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module</a><ul>

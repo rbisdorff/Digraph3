@@ -173,8 +173,8 @@ Back to :ref:`Tutorial-label`
 
 .. _Digraph-Tools-label:
 
-Tools for manipulating Digraph objects
---------------------------------------
+Tools for manipulating ``Digraph`` objects
+------------------------------------------
 
 Inspecting a random digraph
 ...........................
@@ -229,8 +229,8 @@ With the ``save()`` method we may keep a backup version for future use of *dg* w
     
     Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value *r(x S x)* for all action *x* is put to the median, i.e. indeterminate, value) in this case.
 
-Exporting a graphviz drawing
-............................
+Graphviz drawings
+.................
 
 We may have an even better insight into the ``Digraph`` object *dg* by looking at a `graphviz <http://graphviz.org/>`_ [1]_ drawing:
     >>> dg.exportGraphViz('tutRandValDigraph')
@@ -285,6 +285,9 @@ Here for illustration the relation constructor of the ``AsymmetricPartialDigraph
 			relationOut[a][b] = Med
 	    return relationOut
 
+Digraph fusion by epistemic disjunction
+.......................................
+
 We may recover object *dg* from both partial objects *asymDg* and *symDg* with a **bipolar fusion** constructor, also called **epistemic disjunction**, available via the ``FusionDigraph`` class:
     >>> from digraphs import FusionDigraph
     >>> fusDg = FusionDigraph(asymDg,symDg)
@@ -300,10 +303,10 @@ We may recover object *dg* from both partial objects *asymDg* and *symDg* with a
     '6'    | -0.84  0.00 -0.40 -0.96 -0.18  0.00 -0.22	 
     '7'    |  0.88  0.72  0.82  0.52 -0.84  0.04  0.00	 
 
-Dual, converse and coduals
-..........................
+Dual, converse and codual digraphs
+..................................
 
-We may as readily compute the **dual**, the **converse** and the **codual** (dual and converse) of dg:
+We may as readily compute the **dual**, the **converse** and the **codual** (dual and converse) of *dg*:
     >>> from digraphs import DualDigraph, ConverseDigraph, CoDualDigraph
     >>> ddg = DualDigraph(dg)
     >>> ddg.showRelationTable()
@@ -357,8 +360,8 @@ Computing the dual, respectively the converse, may also be done with prefixing t
     '6'     | -0.38  0.54 -0.84 -0.66  0.22  0.00 -0.04	 
     '7'     | -0.44 -0.02  1.00 -0.76  0.52  0.22  0.00	 
 
-Symmetric and transitive closure
-................................
+Symmetric and transitive closures
+.................................
 
 Symmetric and transtive closure in site constructors are also available, Note that it is a good idea,before going ahead with these in-site operations that irreversibly modify the original dg object, to previously make a backup version of *dg*. The simplest storage method, always provide by the generic ``Digraph.save()`` writes out in a named file the python content in string representation:
     >>> dg.save('tutRandValDigraph')
@@ -369,6 +372,9 @@ Symmetric and transtive closure in site constructors are also available, Note th
 .. image:: strongComponents.png
    :width: 200 px
    :align: center
+
+Strong components
+.................
 
 As the original digraph *dg* was connected (see above the result of the ``dg.showShort()`` command), both to the symmetric and transitive closures together, will necessarily produce a single strong commponent, i.e. a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Using ``StrongComponentsCollapsedDigraph`` constructor here will render a single hyper-node gathering all the original nodes :
     >>> from digraphs import StrongComponentsCollapsedDigraph
@@ -391,8 +397,8 @@ As the original digraph *dg* was connected (see above the result of the ``dg.sho
     'frozenset({'7', '1', '2', '6', '5', '3', '4'})': in => set(), out => set()
     >>> ...
 
-Saving the digraph in CSV format
-................................ 
+Saving and reloading in CSV format
+.................................. 
 
 Sometimes it is required to exchange the graph valuation data in CSV format with a statistical package like `R <http://www.r-project.org/>`_. For this purpose it is possible to export the digraph data into a CSV file. The valuation domain is hereby normalized by default to the range [-1,1] and the diagonal put by defalut to to the minimal value -1:
 	>>> dg = Digraph('tutRandValDigraph')
