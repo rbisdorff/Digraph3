@@ -993,12 +993,8 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>Now, we cannot find any completely positive row in the relation table. No one of the five candidates is beating all the others with an absolute majority of votes. There is no Condorcet winner anymore. In fact, when looking at a graphviz drawing of this Condorcet digraph, we may observe three chordless circuits: (<em>a1</em> &gt; <em>a2</em> &gt; <em>a3</em> &gt; <em>a1</em>), (<em>a1</em> &gt; <em>a2</em> &gt; <em>a4</em> &gt; <em>a1</em>), and (<em>a2</em> &gt; <em>a4</em> &gt; <em>a5</em> &gt; <em>a2</em>). And, we can detect and enumerate such chordless circuits with the <tt class="docutils literal"><span class="pre">Digraph.computeChaordlessCircuits()</span></tt> method:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
-<span class="go">[([&#39;a2&#39;, &#39;a3&#39;, &#39;a1&#39;], frozenset({&#39;a2&#39;, &#39;a3&#39;, &#39;a1&#39;})),</span>
-<span class="go"> ([&#39;a2&#39;, &#39;a4&#39;, &#39;a5&#39;], frozenset({&#39;a2&#39;, &#39;a5&#39;, &#39;a4&#39;})),</span>
-<span class="go"> ([&#39;a2&#39;, &#39;a4&#39;, &#39;a1&#39;], frozenset({&#39;a2&#39;, &#39;a1&#39;, &#39;a4&#39;}))]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;cycles&#39;</span><span class="p">)</span>
+<dt>Now, we cannot find any completely positive row in the relation table. No one of the five candidates is beating all the others with an absolute majority of votes. There is no Condorcet winner anymore. In fact, when looking at a graphviz drawing of this Condorcet digraph, we may observe cyclic preferences, like (<em>a1</em> &gt; <em>a2</em> &gt; <em>a3</em> &gt; <em>a1</em>) for instance.</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;cycles&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
 <span class="go">Exporting to cycles.dot</span>
 <span class="go">dot -Grankdir=BT -Tpng cycles.dot -o cycles.png</span>
@@ -1006,7 +1002,17 @@ linearBallot = {
 </div>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/cycles.png"><img alt="_images/cycles.png" class="align-center" src="_images/cycles.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/cycles.png"><img alt="_images/cycles.png" class="align-center" src="_images/cycles.png" style="width: 200px;" /></a>
+<dl class="docutils">
+<dt>But, there may be many cycles appearing in a digraph, and, we may detect and enumerate all minimal chordless circuits in a Digraph instance with the <tt class="docutils literal"><span class="pre">computeChaordlessCircuits()</span></tt> method:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
+<span class="go">[([&#39;a2&#39;, &#39;a3&#39;, &#39;a1&#39;], frozenset({&#39;a2&#39;, &#39;a3&#39;, &#39;a1&#39;})),</span>
+<span class="go"> ([&#39;a2&#39;, &#39;a4&#39;, &#39;a5&#39;], frozenset({&#39;a2&#39;, &#39;a5&#39;, &#39;a4&#39;})),</span>
+<span class="go"> ([&#39;a2&#39;, &#39;a4&#39;, &#39;a1&#39;], frozenset({&#39;a2&#39;, &#39;a1&#39;, &#39;a4&#39;}))]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 <p>Condorcet&#8217;s approach for determining the winner of an election is hence not decisive in all circomstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see <a class="reference internal" href="#bis-2008" id="id8">[BIS-2008]</a>).</p>
 <p>Many more tools for exploiting voting results are available, see the thechnical documentation of the <a class="reference internal" href="techDoc.html#votingdigraphs-label"><em>votingDigraphs module</em></a>.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>

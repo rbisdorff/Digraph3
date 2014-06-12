@@ -864,19 +864,21 @@ Usually, when aggregating linear ballots, there appear cyclic social preferences
     'a4'  |  0.56  -0.11   0.33	   -	  0.11	 
     'a5'  |  0.33   0.11   0.11	 -0.11	   -	 
     
-Now, we cannot find any completely positive row in the relation table. No one of the five candidates is beating all the others with an absolute majority of votes. There is no Condorcet winner anymore. In fact, when looking at a graphviz drawing of this Condorcet digraph, we may observe three chordless circuits: (*a1* > *a2* > *a3* > *a1*), (*a1* > *a2* > *a4* > *a1*), and (*a2* > *a4* > *a5* > *a2*). And, we can detect and enumerate such chordless circuits with the ``Digraph.computeChaordlessCircuits()`` method:
-    >>> cdg.computeChordlessCircuits()
-    [(['a2', 'a3', 'a1'], frozenset({'a2', 'a3', 'a1'})), 
-     (['a2', 'a4', 'a5'], frozenset({'a2', 'a5', 'a4'})), 
-     (['a2', 'a4', 'a1'], frozenset({'a2', 'a1', 'a4'}))]
+Now, we cannot find any completely positive row in the relation table. No one of the five candidates is beating all the others with an absolute majority of votes. There is no Condorcet winner anymore. In fact, when looking at a graphviz drawing of this Condorcet digraph, we may observe cyclic preferences, like (*a1* > *a2* > *a3* > *a1*) for instance. 
     >>> cdg.exportGraphViz('cycles')
     *---- exporting a dot file dor GraphViz tools ---------*
     Exporting to cycles.dot
     dot -Grankdir=BT -Tpng cycles.dot -o cycles.png
 
 .. image:: cycles.png
-   :width: 300 px
+   :width: 200 px
    :align: center
+
+But, there may be many cycles appearing in a digraph, and, we may detect and enumerate all minimal chordless circuits in a Digraph instance with the ``computeChaordlessCircuits()`` method:
+    >>> cdg.computeChordlessCircuits()
+    [(['a2', 'a3', 'a1'], frozenset({'a2', 'a3', 'a1'})), 
+     (['a2', 'a4', 'a5'], frozenset({'a2', 'a5', 'a4'})), 
+     (['a2', 'a4', 'a1'], frozenset({'a2', 'a1', 'a4'}))]
 
 Condorcet's approach for determining the winner of an election is hence not decisive in all circomstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see [BIS-2008]_). 
 
