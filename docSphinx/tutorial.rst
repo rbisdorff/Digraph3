@@ -863,10 +863,6 @@ Usually, when aggregating linear ballots, there appear cyclic social preferences
     'a3'  |  0.11  -0.11    -	 -0.33	 -0.11	 
     'a4'  |  0.56  -0.11   0.33	   -	  0.11	 
     'a5'  |  0.33   0.11   0.11	 -0.11	   -	 
-
-.. image:: cycles.png
-   :width: 300 px
-   :align: center
     
 Now, we cannot find any completely positive row in the relation table. No one of the five candidates is beating all the others with an absolute majority of votes. There is no Condorcet winner anymore. In fact, we may observe in this Condorcet digraph three chordless circuits: (*a1* > *a2* > *a3* > *a1*), (*a1* > *a2* > *a4* > *a1*), and (*a2* > *a4* > *a5* > *a2*).
     >>> cdg.computeChordlessCircuits()
@@ -877,6 +873,10 @@ Now, we cannot find any completely positive row in the relation table. No one of
     *---- exporting a dot file dor GraphViz tools ---------*
     Exporting to cycles.dot
     dot -Grankdir=BT -Tpng cycles.dot -o cycles.png
+
+.. image:: cycles.png
+   :width: 300 px
+   :align: center
 
 Condorcet's approach for determining the winner of an election is hence not decisive in all circomstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see [BIS-2008]_). 
 
