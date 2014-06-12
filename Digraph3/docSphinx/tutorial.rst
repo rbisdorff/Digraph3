@@ -737,7 +737,7 @@ Computing the winner of an election
 Linear voting profiles
 ......................
 
-The :ref:`votingDigraphs-label` provides resources for handling election results [ADT-L2]_, like the ``LinearVotingProfile`` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored as two Python dicttionaries, one for the candidates and another one for the linear ballots::
+The :ref:`votingDigraphs-label` provides resources for handling election results [ADT-L2]_, like the ``LinearVotingProfile`` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two Python dictionaries, one for the candidates and another one for the linear ballots::
     
     candidates = {'a': ,'b':  ,'c', ..., ...}
     voters = {'1':{'weight':1.0},'2':{'weight':1.0}, ...}
@@ -781,19 +781,19 @@ Editing of the linear voting profile may be acheived by storing the data in a fi
 Computing the winner
 ....................
 
-We may easily compute **uninominal votes**, ie how many times a candidate was ranked first, and who is consequently the **simple majority** winner(s) in this election. 
+We may easily compute **uninominal votes**, i.e. how many times a candidate was ranked first, and see who is consequently the **simple majority** winner(s) in this election. 
     >>> v.computeUninominalVotes()
     {'a2': 1.0, 'a1': 2.0, 'a3': 2.0}
     >>> v.computeSimpleMajorityWinner()
     ['a1','a3']
     >>> ...
 
-As we observe no absolute majority (3/5) for any candidate, we may compute, for instance the **instant runoff** winner instead:
+As we observe no absolute majority (3/5) of votes for any of the three candidate, we may look for the **instant runoff** winner instead (see [ADT-L2]_):
     >>> v.computeInstantRunoffWinner()
     ['a1']
     >>> ...
 
-We may also follow the Chevalier Borda's advice and, after a **rank analysis** of the linear ballots, compute the **Borda score** of each candidate and hence determine the **Borda winner(s)**:
+We may also follow the Chevalier de Borda's advice and, after a **rank analysis** of the linear ballots, compute the **Borda score** of each candidate and hence determine the **Borda winner(s)**:
     >>> v.computeRankAnalysis()
     {'a2': [1.0, 1.0, 3.0], 'a1': [2.0, 3.0, 0], 'a3': [2.0, 1.0, 2.0]}
     >>> v.computeBordaScores()
@@ -805,7 +805,7 @@ We may also follow the Chevalier Borda's advice and, after a **rank analysis** o
 The Condorcet winner
 ....................
 
-In our randomly generated election results, we are lucky. The instant runoff winner and the Borda winner determine, both, candidate *a1*. However, we could also follow the Marquis de Condorcet's advice, and compute the **majority margins** obtained by voting for each individual pair of candidates. For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the majority margin *M(a1,a2)* is 4 - 1 = +3. These majority margins define on the set of candidates what we call the **Condorcet digraph**, a specialization of the ``Digraph`` class for handing such pairwise majority margins:
+In our randomly generated election results, we are lucky: The instant runoff winner and the Borda winner both are candidate *a1*. However, we could also follow the Marquis de Condorcet's advice, and compute the **majority margins** obtained by voting for each individual pair of candidates. For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the majority margin *M(a1,a2)* is 4 - 1 = +3. These majority margins define on the set of candidates what we call the **Condorcet digraph**, a specialization of the ``Digraph`` class for handling such pairwise majority margins:
     >>> cdg = CondorcetDigraph(v,hasIntegerValuation=True)
     >>> cdg.showAll()
     *----- show detail -------------*
@@ -824,7 +824,7 @@ In our randomly generated election results, we are lucky. The instant runoff win
        'a2' |  -3    -	 -1	 
        'a3' |  -1    1	  -	 
 
-A candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the Condorcet digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommended to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner**:
+A candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the Condorcet digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner**:
     >>> cdg.computeCondorcetWinner()
     ['a1']  
     
@@ -837,7 +837,49 @@ By seeing the majority margins like a bipolarly-valued characteristic function f
 .. image:: tutorialLinearBallots.png
    :width: 300 px
    :align: center
- 
+
+Cyclic social preferences
+.........................
+
+Usually, when aggregating linear ballots, there appear cyclic social preferences. Let us consider for instance the following linear voting profile, construct the corresponding Condorcet digraph:
+    >>> v.showLinearBallots()
+    voters(weight)	 candidates rankings
+    v1(1.0): 	 ['a1', 'a3', 'a5', 'a2', 'a4']
+    v2(1.0): 	 ['a1', 'a2', 'a4', 'a3', 'a5']
+    v3(1.0): 	 ['a5', 'a2', 'a4', 'a3', 'a1']
+    v4(1.0): 	 ['a3', 'a4', 'a1', 'a5', 'a2']
+    v5(1.0): 	 ['a4', 'a2', 'a3', 'a5', 'a1']
+    v6(1.0): 	 ['a2', 'a4', 'a5', 'a1', 'a3']
+    v7(1.0): 	 ['a5', 'a4', 'a3', 'a1', 'a2']
+    v8(1.0): 	 ['a2', 'a4', 'a5', 'a1', 'a3']
+    v9(1.0): 	 ['a5', 'a3', 'a4', 'a1', 'a2']
+    >>> cdg = CondorcetDigraph(v)
+    >>> cdg.showRelationTable()
+    * ---- Relation Table -----
+      S   |  'a1'   'a2'   'a3'	  'a4'	  'a5'	  
+    ------|----------------------------------------
+    'a1'  |   -     0.11  -0.11	 -0.56	 -0.33	 
+    'a2'  | -0.11    -	   0.11	  0.11	 -0.11	 
+    'a3'  |  0.11  -0.11    -	 -0.33	 -0.11	 
+    'a4'  |  0.56  -0.11   0.33	   -	  0.11	 
+    'a5'  |  0.33   0.11   0.11	 -0.11	   -	 
+
+.. image:: cycles.png
+   :width: 300 px
+   :align: center
+    
+Now, we cannot find any completely positive row in the relation table. Therefore we cannot determine anymore a Condorcet winner. In fact, we may observe in this Condorcet digraph three cyclic preferences: (*a1* > *a2* > *a3* > *a1*), (*a1* > *a2* > *a4* > *a1*), and (*a2* > *a4* > *a5* > *a2*):
+    >>> cdg.computeChordlessCircuits()
+    [(['a2', 'a3', 'a1'], frozenset({'a2', 'a3', 'a1'})), 
+     (['a2', 'a4', 'a5'], frozenset({'a2', 'a5', 'a4'})), 
+     (['a2', 'a4', 'a1'], frozenset({'a2', 'a1', 'a4'}))]
+    >>> cdg.exportGraphViz('cycles')
+    *---- exporting a dot file dor GraphViz tools ---------*
+    Exporting to cycles.dot
+    dot -Grankdir=BT -Tpng cycles.dot -o cycles.png
+
+Condorcet's approach for determining the winner of an election is hence not decisive in all circomstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see [BIS-2008]_). 
+
 Many more tools for exploiting voting results are available, see the thechnical documentation of the :ref:`votingDiGraphs-label`.
 
 Back to :ref:`Tutorial-label`
@@ -1087,6 +1129,8 @@ References
 .. [ADT-L2] Bisdorff, Raymond *Who wins the election*. MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( `downloadable here <_static/adtVoting-2x2.pdf>`_ )
 
 .. [BIS-2013] R. Bisdorff (2013) "On Polarizing Outranking Relations with Large Performance Differences" *Journal of Multi-Criteria Decision Analysis* (Wiley) **20**:3-12 (downloadable preprint `PDF file <http://charles-sanders-peirce.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf>`_ 403.5 Kb).
+
+.. [BIS-2008] R. Bisdorff, P. Meyer and M. Roubens (2008) "RUBIS: a bipolar-valued outranking method for the choice problem". 4OR, *A Quarterly Journal of Operations Research* Springer-Verlag Volume 6 Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version `PDF file 271.5Kb <http://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf>`_) 
 
 Footnotes
 .........
