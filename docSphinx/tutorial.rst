@@ -841,7 +841,7 @@ By seeing the majority margins like a bipolarly-valued characteristic function f
 Cyclic social preferences
 .........................
 
-Usually, when aggregating linear ballots, there appear cyclic social preferences. Let us consider for instance the following linear voting profile, construct the corresponding Condorcet digraph:
+Usually, when aggregating linear ballots, there appear cyclic social preferences. Let us consider for instance the following linear voting profile and construct the corresponding Condorcet digraph:
     >>> v.showLinearBallots()
     voters(weight)	 candidates rankings
     v1(1.0): 	 ['a1', 'a3', 'a5', 'a2', 'a4']
