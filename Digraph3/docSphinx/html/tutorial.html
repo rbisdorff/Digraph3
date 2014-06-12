@@ -993,10 +993,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-</dl>
-<a class="reference internal image-reference" href="_images/cycles.png"><img alt="_images/cycles.png" class="align-center" src="_images/cycles.png" style="width: 300px;" /></a>
-<dl class="docutils">
-<dt>Now, we cannot find any completely positive row in the relation table. Therefore we cannot determine anymore a Condorcet winner. In fact, we may observe in this Condorcet digraph three chordless circuits: (<em>a1</em> &gt; <em>a2</em> &gt; <em>a3</em> &gt; <em>a1</em>), (<em>a1</em> &gt; <em>a2</em> &gt; <em>a4</em> &gt; <em>a1</em>), and (<em>a2</em> &gt; <em>a4</em> &gt; <em>a5</em> &gt; <em>a2</em>).</dt>
+<dt>Now, we cannot find any completely positive row in the relation table. No one of the five candidates is beating all the others with an absolute majority of votes. There is no Condorcet winner anymore. In fact, we may observe in this Condorcet digraph three chordless circuits: (<em>a1</em> &gt; <em>a2</em> &gt; <em>a3</em> &gt; <em>a1</em>), (<em>a1</em> &gt; <em>a2</em> &gt; <em>a4</em> &gt; <em>a1</em>), and (<em>a2</em> &gt; <em>a4</em> &gt; <em>a5</em> &gt; <em>a2</em>).</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
 <span class="go">[([&#39;a2&#39;, &#39;a3&#39;, &#39;a1&#39;], frozenset({&#39;a2&#39;, &#39;a3&#39;, &#39;a1&#39;})),</span>
 <span class="go"> ([&#39;a2&#39;, &#39;a4&#39;, &#39;a5&#39;], frozenset({&#39;a2&#39;, &#39;a5&#39;, &#39;a4&#39;})),</span>
@@ -1009,6 +1006,7 @@ linearBallot = {
 </div>
 </dd>
 </dl>
+<a class="reference internal image-reference" href="_images/cycles.png"><img alt="_images/cycles.png" class="align-center" src="_images/cycles.png" style="width: 300px;" /></a>
 <p>Condorcet&#8217;s approach for determining the winner of an election is hence not decisive in all circomstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see <a class="reference internal" href="#bis-2008" id="id8">[BIS-2008]</a>).</p>
 <p>Many more tools for exploiting voting results are available, see the thechnical documentation of the <a class="reference internal" href="techDoc.html#votingdigraphs-label"><em>votingDigraphs module</em></a>.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
