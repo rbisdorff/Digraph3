@@ -993,7 +993,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>Now, we cannot find any completely positive row in the relation table. No one of the five candidates is beating all the others with an absolute majority of votes. There is no Condorcet winner anymore. In fact, we may observe in this Condorcet digraph three chordless circuits: (<em>a1</em> &gt; <em>a2</em> &gt; <em>a3</em> &gt; <em>a1</em>), (<em>a1</em> &gt; <em>a2</em> &gt; <em>a4</em> &gt; <em>a1</em>), and (<em>a2</em> &gt; <em>a4</em> &gt; <em>a5</em> &gt; <em>a2</em>).</dt>
+<dt>Now, we cannot find any completely positive row in the relation table. No one of the five candidates is beating all the others with an absolute majority of votes. There is no Condorcet winner anymore. In fact, when looking at a graphviz drawing of this Condorcet digraph, we may observe three chordless circuits: (<em>a1</em> &gt; <em>a2</em> &gt; <em>a3</em> &gt; <em>a1</em>), (<em>a1</em> &gt; <em>a2</em> &gt; <em>a4</em> &gt; <em>a1</em>), and (<em>a2</em> &gt; <em>a4</em> &gt; <em>a5</em> &gt; <em>a2</em>). And, we can detect and enumerate such chordless circuits with the <tt class="docutils literal"><span class="pre">Digraph.computeChaordlessCircuits()</span></tt> method:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
 <span class="go">[([&#39;a2&#39;, &#39;a3&#39;, &#39;a1&#39;], frozenset({&#39;a2&#39;, &#39;a3&#39;, &#39;a1&#39;})),</span>
 <span class="go"> ([&#39;a2&#39;, &#39;a4&#39;, &#39;a5&#39;], frozenset({&#39;a2&#39;, &#39;a5&#39;, &#39;a4&#39;})),</span>
