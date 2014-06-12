@@ -298,7 +298,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <div class="section" id="graphviz-drawings">
 <h3>Graphviz drawings<a class="headerlink" href="#graphviz-drawings" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id11" id="id2">[1]</a> drawing:</dt>
+<dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id13" id="id2">[1]</a> drawing:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to tutRandValDigraph.dot</span>
@@ -662,7 +662,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 <dl class="docutils">
-<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id11" id="id3">[1]</a> method as follows:</dt>
+<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id13" id="id3">[1]</a> method as follows:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
@@ -842,7 +842,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <span id="linearvoting-label"></span><h2>Computing the winner of an election<a class="headerlink" href="#computing-the-winner-of-an-election" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="linear-voting-profiles">
 <h3>Linear voting profiles<a class="headerlink" href="#linear-voting-profiles" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference internal" href="techDoc.html#votingdigraphs-label"><em>votingDigraphs module</em></a> provides resources for handling election results <a class="reference internal" href="#adt-l2" id="id5">[ADT-L2]</a>, like the <tt class="docutils literal"><span class="pre">LinearVotingProfile</span></tt> class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored as two Python dicttionaries, one for the candidates and another one for the linear ballots:</p>
+<p>The <a class="reference internal" href="techDoc.html#votingdigraphs-label"><em>votingDigraphs module</em></a> provides resources for handling election results <a class="reference internal" href="#adt-l2" id="id5">[ADT-L2]</a>, like the <tt class="docutils literal"><span class="pre">LinearVotingProfile</span></tt> class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two Python dictionaries, one for the candidates and another one for the linear ballots:</p>
 <div class="highlight-python"><div class="highlight"><pre>candidates = {&#39;a&#39;: ,&#39;b&#39;:  ,&#39;c&#39;, ..., ...}
 voters = {&#39;1&#39;:{&#39;weight&#39;:1.0},&#39;2&#39;:{&#39;weight&#39;:1.0}, ...}
 ## each voter specifies a linearly ranked list of candidates
@@ -895,7 +895,7 @@ linearBallot = {
 <div class="section" id="computing-the-winner">
 <h3>Computing the winner<a class="headerlink" href="#computing-the-winner" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>We may easily compute <strong>uninominal votes</strong>, ie how many times a candidate was ranked first, and who is consequently the <strong>simple majority</strong> winner(s) in this election.</dt>
+<dt>We may easily compute <strong>uninominal votes</strong>, i.e. how many times a candidate was ranked first, and see who is consequently the <strong>simple majority</strong> winner(s) in this election.</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">computeUninominalVotes</span><span class="p">()</span>
 <span class="go">{&#39;a2&#39;: 1.0, &#39;a1&#39;: 2.0, &#39;a3&#39;: 2.0}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">computeSimpleMajorityWinner</span><span class="p">()</span>
@@ -904,14 +904,14 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>As we observe no absolute majority (3/5) for any candidate, we may compute, for instance the <strong>instant runoff</strong> winner instead:</dt>
+<dt>As we observe no absolute majority (3/5) of votes for any of the three candidate, we may look for the <strong>instant runoff</strong> winner instead (see <a class="reference internal" href="#adt-l2" id="id6">[ADT-L2]</a>):</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">computeInstantRunoffWinner</span><span class="p">()</span>
 <span class="go">[&#39;a1&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
 </pre></div>
 </div>
 </dd>
-<dt>We may also follow the Chevalier Borda&#8217;s advice and, after a <strong>rank analysis</strong> of the linear ballots, compute the <strong>Borda score</strong> of each candidate and hence determine the <strong>Borda winner(s)</strong>:</dt>
+<dt>We may also follow the Chevalier de Borda&#8217;s advice and, after a <strong>rank analysis</strong> of the linear ballots, compute the <strong>Borda score</strong> of each candidate and hence determine the <strong>Borda winner(s)</strong>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">computeRankAnalysis</span><span class="p">()</span>
 <span class="go">{&#39;a2&#39;: [1.0, 1.0, 3.0], &#39;a1&#39;: [2.0, 3.0, 0], &#39;a3&#39;: [2.0, 1.0, 2.0]}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">computeBordaScores</span><span class="p">()</span>
@@ -927,7 +927,7 @@ linearBallot = {
 <div class="section" id="the-condorcet-winner">
 <h3>The Condorcet winner<a class="headerlink" href="#the-condorcet-winner" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>In our randomly generated election results, we are lucky. The instant runoff winner and the Borda winner determine, both, candidate <em>a1</em>. However, we could also follow the Marquis de Condorcet&#8217;s advice, and compute the <strong>majority margins</strong> obtained by voting for each individual pair of candidates. For instance, candidate <em>a1</em> is ranked four times before and once behind candidate <em>a2</em>. Hence the majority margin <em>M(a1,a2)</em> is 4 - 1 = +3. These majority margins define on the set of candidates what we call the <strong>Condorcet digraph</strong>, a specialization of the <tt class="docutils literal"><span class="pre">Digraph</span></tt> class for handing such pairwise majority margins:</dt>
+<dt>In our randomly generated election results, we are lucky: The instant runoff winner and the Borda winner both are candidate <em>a1</em>. However, we could also follow the Marquis de Condorcet&#8217;s advice, and compute the <strong>majority margins</strong> obtained by voting for each individual pair of candidates. For instance, candidate <em>a1</em> is ranked four times before and once behind candidate <em>a2</em>. Hence the majority margin <em>M(a1,a2)</em> is 4 - 1 = +3. These majority margins define on the set of candidates what we call the <strong>Condorcet digraph</strong>, a specialization of the <tt class="docutils literal"><span class="pre">Digraph</span></tt> class for handling such pairwise majority margins:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span> <span class="o">=</span> <span class="n">CondorcetDigraph</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
 <span class="go">*----- show detail -------------*</span>
@@ -948,13 +948,13 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>A candidate <em>x</em>, showing a positive majority margin <em>M(x,y)</em>, is beating candidate <em>y</em>  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the Condorcet digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommended to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate <em>a1</em> who is hence the <strong>Condorcet winner</strong>:</dt>
+<dt>A candidate <em>x</em>, showing a positive majority margin <em>M(x,y)</em>, is beating candidate <em>y</em>  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the Condorcet digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate <em>a1</em> who is hence the <strong>Condorcet winner</strong>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">computeCondorcetWinner</span><span class="p">()</span>
 <span class="go">[&#39;a1&#39;]</span>
 </pre></div>
 </div>
 </dd>
-<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method <a class="footnote-reference" href="#id11" id="id6">[1]</a>, for visualizing an election result:</dt>
+<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method <a class="footnote-reference" href="#id13" id="id7">[1]</a>, for visualizing an election result:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorialLinearBallots&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to tutorialLinearBallots.dot</span>
@@ -964,6 +964,52 @@ linearBallot = {
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/tutorialLinearBallots.png"><img alt="_images/tutorialLinearBallots.png" class="align-center" src="_images/tutorialLinearBallots.png" style="width: 300px;" /></a>
+</div>
+<div class="section" id="cyclic-social-preferences">
+<h3>Cyclic social preferences<a class="headerlink" href="#cyclic-social-preferences" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Usually, when aggregating linear ballots, there appear cyclic social preferences. Let us consider for instance the following linear voting profile, construct the corresponding Condorcet digraph:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">showLinearBallots</span><span class="p">()</span>
+<span class="go">voters(weight)       candidates rankings</span>
+<span class="go">v1(1.0):     [&#39;a1&#39;, &#39;a3&#39;, &#39;a5&#39;, &#39;a2&#39;, &#39;a4&#39;]</span>
+<span class="go">v2(1.0):     [&#39;a1&#39;, &#39;a2&#39;, &#39;a4&#39;, &#39;a3&#39;, &#39;a5&#39;]</span>
+<span class="go">v3(1.0):     [&#39;a5&#39;, &#39;a2&#39;, &#39;a4&#39;, &#39;a3&#39;, &#39;a1&#39;]</span>
+<span class="go">v4(1.0):     [&#39;a3&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a5&#39;, &#39;a2&#39;]</span>
+<span class="go">v5(1.0):     [&#39;a4&#39;, &#39;a2&#39;, &#39;a3&#39;, &#39;a5&#39;, &#39;a1&#39;]</span>
+<span class="go">v6(1.0):     [&#39;a2&#39;, &#39;a4&#39;, &#39;a5&#39;, &#39;a1&#39;, &#39;a3&#39;]</span>
+<span class="go">v7(1.0):     [&#39;a5&#39;, &#39;a4&#39;, &#39;a3&#39;, &#39;a1&#39;, &#39;a2&#39;]</span>
+<span class="go">v8(1.0):     [&#39;a2&#39;, &#39;a4&#39;, &#39;a5&#39;, &#39;a1&#39;, &#39;a3&#39;]</span>
+<span class="go">v9(1.0):     [&#39;a5&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a2&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span> <span class="o">=</span> <span class="n">CondorcetDigraph</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+<span class="go">* ---- Relation Table -----</span>
+<span class="go">  S   |  &#39;a1&#39;   &#39;a2&#39;   &#39;a3&#39;   &#39;a4&#39;    &#39;a5&#39;</span>
+<span class="go">------|----------------------------------------</span>
+<span class="go">&#39;a1&#39;  |   -     0.11  -0.11  -0.56   -0.33</span>
+<span class="go">&#39;a2&#39;  | -0.11    -     0.11   0.11   -0.11</span>
+<span class="go">&#39;a3&#39;  |  0.11  -0.11    -    -0.33   -0.11</span>
+<span class="go">&#39;a4&#39;  |  0.56  -0.11   0.33    -      0.11</span>
+<span class="go">&#39;a5&#39;  |  0.33   0.11   0.11  -0.11     -</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="_images/cycles.png"><img alt="_images/cycles.png" class="align-center" src="_images/cycles.png" style="width: 300px;" /></a>
+<dl class="docutils">
+<dt>Now, we cannot find any completely positive row in the relation table. Therefore we cannot determine anymore a Condorcet winner. In fact, we may observe in this Condorcet digraph three cyclic preferences: (<em>a1</em> &gt; <em>a2</em> &gt; <em>a3</em> &gt; <em>a1</em>), (<em>a1</em> &gt; <em>a2</em> &gt; <em>a4</em> &gt; <em>a1</em>), and (<em>a2</em> &gt; <em>a4</em> &gt; <em>a5</em> &gt; <em>a2</em>):</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
+<span class="go">[([&#39;a2&#39;, &#39;a3&#39;, &#39;a1&#39;], frozenset({&#39;a2&#39;, &#39;a3&#39;, &#39;a1&#39;})),</span>
+<span class="go"> ([&#39;a2&#39;, &#39;a4&#39;, &#39;a5&#39;], frozenset({&#39;a2&#39;, &#39;a5&#39;, &#39;a4&#39;})),</span>
+<span class="go"> ([&#39;a2&#39;, &#39;a4&#39;, &#39;a1&#39;], frozenset({&#39;a2&#39;, &#39;a1&#39;, &#39;a4&#39;}))]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;cycles&#39;</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go">Exporting to cycles.dot</span>
+<span class="go">dot -Grankdir=BT -Tpng cycles.dot -o cycles.png</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>Condorcet&#8217;s approach for determining the winner of an election is hence not decisive in all circomstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see <a class="reference internal" href="#bis-2008" id="id8">[BIS-2008]</a>).</p>
 <p>Many more tools for exploiting voting results are available, see the thechnical documentation of the <a class="reference internal" href="techDoc.html#votingdigraphs-label"><em>votingDigraphs module</em></a>.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
@@ -1057,7 +1103,7 @@ linearBallot = {
 <div class="section" id="semantics-of-the-bipolar-valuation">
 <h3>Semantics of the bipolar valuation<a class="headerlink" href="#semantics-of-the-bipolar-valuation" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>Considering the given performance tableau, the <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt> class constructor computes the characteristic value r(x S y) of a pairwise outranking relation &#8220;x S y&#8221; (see <a class="reference internal" href="#bis-2013" id="id7">[BIS-2013]</a>) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:</dt>
+<dt>Considering the given performance tableau, the <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt> class constructor computes the characteristic value r(x S y) of a pairwise outranking relation &#8220;x S y&#8221; (see <a class="reference internal" href="#bis-2013" id="id9">[BIS-2013]</a>) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:</dt>
 <dd><ol class="first last arabic simple">
 <li>If r(x S y) &gt; 0.0 it is more <em>True</em> than <em>False</em> that <em>x outranks y</em>, i.e. alternative x is at least as well performing than alternative y <strong>and</strong> there is no considerable negative performance difference observed in disfavour of x,</li>
 <li>If r(x S y) &lt; 0.0 it is more <em>False</em> than <em>True</em> that <em>x outranks y</em>, i.e. alternative x is <strong>not</strong> at least as well performing than alternative y <strong>and</strong> there is no considerable positive performance difference observed in favour of x,</li>
@@ -1124,7 +1170,7 @@ linearBallot = {
 </div>
 </dd>
 </dl>
-<p>This time, we observe a considerable out-performance of <em>a03</em> against <em>a02</em> on criterion g02 (see second row in the relation table above). We therefore notice a positively polarised <em>certainly confirmed</em> outranking situation in this case <a class="reference internal" href="#bis-2013" id="id8">[BIS-2013]</a>.</p>
+<p>This time, we observe a considerable out-performance of <em>a03</em> against <em>a02</em> on criterion g02 (see second row in the relation table above). We therefore notice a positively polarised <em>certainly confirmed</em> outranking situation in this case <a class="reference internal" href="#bis-2013" id="id10">[BIS-2013]</a>.</p>
 </div>
 <div class="section" id="recoding-the-valuation">
 <h3>Recoding the valuation<a class="headerlink" href="#recoding-the-valuation" title="Permalink to this headline">¶</a></h3>
@@ -1159,7 +1205,7 @@ linearBallot = {
 <div class="section" id="strict-outranking-via-the-codual-digraph">
 <h3>Strict outranking via the codual digraph<a class="headerlink" href="#strict-outranking-via-the-codual-digraph" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>From the theory <a class="reference internal" href="#bis-2013" id="id9">[BIS-2013]</a> we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if r(x S y) &lt; 0.0 then r(y S x) &gt;= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id11" id="id10">[1]</a>:</dt>
+<dt>From the theory <a class="reference internal" href="#bis-2013" id="id11">[BIS-2013]</a> we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if r(x S y) &lt; 0.0 then r(y S x) &gt;= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id13" id="id12">[1]</a>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="o">~</span><span class="n">odg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;codualOdg&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
@@ -1237,14 +1283,23 @@ linearBallot = {
 <table class="docutils citation" frame="void" id="adt-l2" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id5">[ADT-L2]</a></td><td>Bisdorff, Raymond <em>Who wins the election</em>. MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( <a class="reference external" href="_static/adtVoting-2x2.pdf">downloadable here</a> )</td></tr>
+<tr><td class="label">[ADT-L2]</td><td><em>(<a class="fn-backref" href="#id5">1</a>, <a class="fn-backref" href="#id6">2</a>)</em> Bisdorff, Raymond <em>Who wins the election</em>. MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( <a class="reference external" href="_static/adtVoting-2x2.pdf">downloadable here</a> )</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="bis-2013" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[BIS-2013]</td><td><em>(<a class="fn-backref" href="#id7">1</a>, <a class="fn-backref" href="#id8">2</a>, <a class="fn-backref" href="#id9">3</a>)</em> <ol class="last upperalpha simple" start="18">
+<tr><td class="label">[BIS-2013]</td><td><em>(<a class="fn-backref" href="#id9">1</a>, <a class="fn-backref" href="#id10">2</a>, <a class="fn-backref" href="#id11">3</a>)</em> <ol class="last upperalpha simple" start="18">
 <li>Bisdorff (2013) &#8220;On Polarizing Outranking Relations with Large Performance Differences&#8221; <em>Journal of Multi-Criteria Decision Analysis</em> (Wiley) <strong>20</strong>:3-12 (downloadable preprint <a class="reference external" href="http://charles-sanders-peirce.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf">PDF file</a> 403.5 Kb).</li>
+</ol>
+</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="bis-2008" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8">[BIS-2008]</a></td><td><ol class="first last upperalpha simple" start="18">
+<li>Bisdorff, P. Meyer and M. Roubens (2008) &#8220;RUBIS: a bipolar-valued outranking method for the choice problem&#8221;. 4OR, <em>A Quarterly Journal of Operations Research</em> Springer-Verlag Volume 6 Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version <a class="reference external" href="http://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf">PDF file 271.5Kb</a>)</li>
 </ol>
 </td></tr>
 </tbody>
@@ -1252,10 +1307,10 @@ linearBallot = {
 </div>
 <div class="section" id="footnotes">
 <h3>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h3>
-<table class="docutils footnote" frame="void" id="id11" rules="none">
+<table class="docutils footnote" frame="void" id="id13" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>, <a class="fn-backref" href="#id6">3</a>, <a class="fn-backref" href="#id10">4</a>)</em> The <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method is depending on drawing tools from <a class="reference external" href="http://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></tt> to install them. There are ready <tt class="docutils literal"><span class="pre">dmg</span></tt> installers for Mac OS.</td></tr>
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>, <a class="fn-backref" href="#id7">3</a>, <a class="fn-backref" href="#id12">4</a>)</em> The <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method is depending on drawing tools from <a class="reference external" href="http://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></tt> to install them. There are ready <tt class="docutils literal"><span class="pre">dmg</span></tt> installers for Mac OS.</td></tr>
 </tbody>
 </table>
 </div>
@@ -1306,6 +1361,7 @@ linearBallot = {
 <li><a class="reference internal" href="#linear-voting-profiles">Linear voting profiles</a></li>
 <li><a class="reference internal" href="#computing-the-winner">Computing the winner</a></li>
 <li><a class="reference internal" href="#the-condorcet-winner">The Condorcet winner</a></li>
+<li><a class="reference internal" href="#cyclic-social-preferences">Cyclic social preferences</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#working-with-the-outrankingdigraphs-module">Working with the <tt class="docutils literal"><span class="pre">outrankingDigraphs</span></tt> module</a><ul>
