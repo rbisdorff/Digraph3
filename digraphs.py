@@ -5491,29 +5491,33 @@ class Digraph(object):
 
         return Detected
 
-
     def showCircuits(self):
         """
-        show methods for chordless circuits in CocaGraph
+        show methods for circuits observed in a Digraph instance.
         """
-        print('*---- Chordless circuits ----*')
         try:
-            for (circList,circSet) in self.circuitsList:
-                deg = self.circuitMinCredibility(circSet)
-                print(circList, ', credibility :', deg)
-            print('%d circuits.' % (len(self.circuitsList)))
+            if len(self.circuitsList) == 0:
+                print('No circuits observed in this digraph.')
+            else:
+                print('*---- Chordless circuits ----*')
+                for (circList,circSet) in self.circuitsList:
+                    deg = self.circuitMinCredibility(circList)
+                    print(circList, ', credibility :', deg)
+                print('%d circuits.' % (len(self.circuitsList)))
         except:
-            print('No circuits computed. Run computeChordlessCircuits()!')
+            print('No circuits yet computed. Run computeChordlessCircuits()!')
 
 
     def showChordlessCircuits(self):
         """
-        show methods for chordless circuits in CocaGraph
+        show methods for (chordless) circuits in a Digraph.
+        Dummy for showCircuits().
         """
+        Digraph.showCircuits(self)
         print('*---- Chordless circuits ----*')
         try:
             for (circList,circSet) in self.circuitsList:
-                deg = self.circuitMinCredibility(circSet)
+                deg = self.circuitMinCredibility(circList)
                 print(circList, ', credibility :', deg)
             print('%d circuits.' % (len(self.circuitsList)))
         except:
