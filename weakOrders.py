@@ -834,13 +834,170 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
                             graphType=graphType,\
                             graphSize=graphSize,\
                             fontSize=fontSize)
-                            
+
+from sortingDigraphs import SortingDigraph                        
+class QsRbcWeakOrder(WeakOrder,SortingDigraph):
+    """
+    Refinig a quantiles sorting result
+    with a local ranking-by-choosing of the category contents.
+
+    *Parameter*:
+          * limitingQuantiles are set by default to len(actions)//2
+    """
+    def __init__(self,
+                 argPerfTab=None,
+                 limitingQuantiles=None,
+                 LowerClosed=True,
+                 PrefThresholds=True,
+                 hasNoVeto=False,
+                 minValuation=-1.0,
+                 maxValuation=1.0,
+                 outrankingType = "bipolar",
+                 Threading=False,
+                 Debug=False):
+        
+        from copy import deepcopy
+        from sortingDigraphs import QuantilesSortingDigraph
+        # import the performance tableau
+        if argPerfTab == None:
+            perfTab = RandomPerformanceTableau(numberOfActions=10,
+                                               numberOfCriteria=13)
+        else:
+            perfTab = argPerfTab
+
+        if limitingQuantiles == None:
+            limitingQuantiles = len(perfTab.actions) // 2
+            
+        qs = QuantilesSortingDigraph(argPerfTab,
+                     limitingQuantiles=limitingQuantiles,
+                     LowerClosed=LowerClosed,
+                     PrefThresholds=PrefThresholds,
+                     hasNoVeto=hasNoVeto,
+                     minValuation=minValuation,
+                     maxValuation=maxValuation,
+                     outrankingType = outrankingType,
+                     Threading=Threading,
+                     Debug=False)
+        catContent = qs.computeCategoryContents()
+        if Debug:
+            qs.showSorting()
+
+        qsRelation = deepcopy(qs.relation) 
+        catRelation = {}
+        catRbc = {}
+        for c in qs.orderedCategoryKeys(Reverse=True):
+            if Debug:
+                print(c, len(catContent[c]))
+            if len(catContent[c]) > 0:
+                currActions = list(catContent[c])
+                for x in currActions:
+                    for y in currActions:
+                        qs.relation[x][y] = qs.relationOrig[x][y]
+                catCRbc = qs.computeRankingByChoosing(currActions)
+                if Debug:
+                    print(c,catCRbc)
+                catRbc[c] = deepcopy(catCRbc['result'])
+                currActions = list(catContent[c])
+                catRelation[c] = qs.computeRankingByChoosingRelation(\
+                    actionsSubset=currActions,\
+                    rankingByChoosing=catCRbc['result'],\
+                    Debug=False)
+        qs.catRbc = deepcopy(catRbc)
+        qs.relation = deepcopy(qsRelation)
+    
+##        for c in qs.orderedCategoryKeys():
+##            for x in catContent[c]:
+##                for y in catContent[c]:
+##                    qs.relation[x][y] = catRelation[c][x][y]
+
+        self.name = 'qsrbc-'+qs.name
+        self.actions = deepcopy(qs.actions)
+        self.order = len(self.actions)
+        self.criteria = deepcopy(qs.criteria)
+        self.evaluation = deepcopy(qs.evaluation)
+        self.categories = deepcopy(qs.categories)
+        self.criteriaCategoryLimits = deepcopy(qs.criteriaCategoryLimits)
+        self.profiles = deepcopy(qs.profiles)
+        self.relationOrig = deepcopy(qs.relationOrig)
+        self.relation = deepcopy(qs.relation)
+        self.catRbc = deepcopy(qs.catRbc)
+        self.valuationdomain = deepcopy(qs.valuationdomain)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+
+    def computeWeakOrder(self,DescendingOrder=True,Comments=False,Debug=False):
+        """
+        specialisation of the showWeakOrder method
+        """
+        if Debug:
+            Comments=True
+        preWeakOrdering = []
+        for c in self.orderedCategoryKeys(Reverse=DescendingOrder):
+            if c in self.catRbc:
+                ordering = [ch for ch in self.catRbc[c]]
+                if Debug:
+                    print(c,qsrbc.categories[c]['name'], ordering)
+                    print('best ranked')
+                for i in range(len(ordering)):
+                    if Debug:
+                        print(ordering[i][0][1])
+                    preWeakOrdering.append(ordering[i][0][1])
+                if Debug:
+                    print('worst ranked')
+                for i in range(len(ordering)-1,-1,-1):
+                    if Debug:
+                        print(ordering[i][1][1])
+                    preWeakOrdering.append(ordering[i][1][1])
+        remainingActions = set([x for x in self.actions])
+        weakOrdering = []
+        for ch in preWeakOrdering:
+            if Debug:
+                print(weakOrdering,ch,remainingActions)
+            eqcl = []
+            for x in ch:
+                if x in remainingActions:
+                    eqcl.append(x)
+            if eqcl != []:
+                weakOrdering.append(eqcl)
+                remainingActions = remainingActions - set(eqcl)
+        if Comments:
+            print(weakOrdering)
+        return weakOrdering
+                    
+        return weakOrdering
+    
+    def showOrderedRelationTable(self,direction="decreasing",originalRelation=False):
+        """
+        Showing the relation table in decreasing (default) or increasing order.
+        """
+        if direction == "decreasing":
+            DescendingOrder = True
+        else:
+            DescendingOrder = False
+        weakOrdering = self.computeWeakOrder(DescendingOrder=DescendingOrder)
+        actionsList = []
+        for ch in weakOrdering:
+            ch.sort()
+            for x in ch:
+                actionsList.append(x)
+        if len(actionsList) != len(self.actions):
+            print('Error: missing actions!')
+        if originalRelation:
+            showRelation = self.originalRelation
+        else:
+            showRelation = self.relation
+            
+        Digraph.showRelationTable(self,actionsSubset=actionsList,\
+                                relation=showRelation,\
+                                Sorted=False,\
+                                ReflexiveTerms=False)
 
 #----------test outrankingDigraphs classes ----------------
 if __name__ == "__main__":
 
     from digraphs import *
     from outrankingDigraphs import *
+    from sortingDigraphs import *
     from weakOrders import *
     from time import time
 
@@ -849,6 +1006,18 @@ if __name__ == "__main__":
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
+    t0 = time()
+    #limitingQuantiles = len(t.actions) // 2
+    limitingQuantiles = 10
+    qsrbc = QsRbcWeakOrder(t,limitingQuantiles,Debug=False)
+    print(time()-t0)
+    qsrbc.showSorting()
+    weakOrdering = qsrbc.computeWeakOrder(Comments=False,Debug=False)
+    print(weakOrdering)
+    qsrbc.showOrderedRelationTable()
+    qsrbc.exportGraphViz()
+    print(g.computeOrdinalCorrelation(qsrbc))
+
     #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
     #g = RandomValuationDigraph(order=11)
 ##    print('=== >>> best and last fusion (default)')
@@ -894,19 +1063,19 @@ if __name__ == "__main__":
 ##    rcg3 = RankingByChoosingDigraph(g,Best=False,Last=False,Debug=False)
 ##    rcg3.showWeakOrder()
 ##    print(rcg3.computeOrdinalCorrelation(g))
-    print('=== >>> principal weak order')
-    t0 = time()
-    rcf1 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
-                                          imageType=None,Debug=False,
-                                          Threading=False)
-    rcf1.showWeakOrder(ColwiseOrder=True)
-    print('execution time %s: ' % (str ( time()-t0 ) ) )
-    t0 = time()
-    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
-                                           imageType=None,Debug=False,\
-                                           Threading=True)
-    rcf2.showWeakOrder()
-    print('execution time %s: ' % (str ( time()-t0 ) ) )
+##    print('=== >>> principal weak order')
+##    t0 = time()
+##    rcf1 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
+##                                          imageType=None,Debug=False,
+##                                          Threading=False)
+##    rcf1.showWeakOrder(ColwiseOrder=True)
+##    print('execution time %s: ' % (str ( time()-t0 ) ) )
+##    t0 = time()
+##    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
+##                                           imageType=None,Debug=False,\
+##                                           Threading=True)
+##    rcf2.showWeakOrder()
+##    print('execution time %s: ' % (str ( time()-t0 ) ) )
 ##    rcf2.exportGraphViz(fileName='testcw',direction="Colwise")
 ##    rcf2.exportGraphViz(fileName='testrw',direction="Colwise",graphType='pdf')
 ##    rcf2.showWeakOrder()
