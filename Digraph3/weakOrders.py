@@ -876,7 +876,7 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
                      minValuation=minValuation,
                      maxValuation=maxValuation,
                      outrankingType = outrankingType,
-                     Threading=Threading,
+                     Threading=False,
                      Debug=False)
         catContent = qs.computeCategoryContents()
         if Debug:
@@ -1005,6 +1005,186 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
                                 relation=showRelation,\
                                 Sorted=False,\
                                 ReflexiveTerms=False)
+                       
+class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
+    """
+    Refinig a quantiles sorting result
+    with a multiprocessing of local ranking-by-choosing of the category contents.
+
+    *Parameter*:
+          * limitingQuantiles are set by default to len(actions)//2
+    """
+    def __init__(self,
+                 argPerfTab=None,
+                 limitingQuantiles=None,
+                 LowerClosed=True,
+                 PrefThresholds=True,
+                 hasNoVeto=False,
+                 minValuation=-1.0,
+                 maxValuation=1.0,
+                 outrankingType = "bipolar",
+                 Threading=True,
+                 Debug=False):
+        
+        from copy import deepcopy
+        from sortingDigraphs import QuantilesSortingDigraph
+        # import the performance tableau
+        if argPerfTab == None:
+            perfTab = RandomPerformanceTableau(numberOfActions=10,
+                                               numberOfCriteria=13)
+        else:
+            perfTab = argPerfTab
+
+        if limitingQuantiles == None:
+            limitingQuantiles = len(perfTab.actions) // 2
+            
+        qs = QuantilesSortingDigraph(argPerfTab,
+                     limitingQuantiles=limitingQuantiles,
+                     LowerClosed=LowerClosed,
+                     PrefThresholds=PrefThresholds,
+                     hasNoVeto=hasNoVeto,
+                     minValuation=minValuation,
+                     maxValuation=maxValuation,
+                     outrankingType = outrankingType,
+                     Threading=False,
+                     Debug=False)
+        catContent = qs.computeCategoryContents()
+        if Debug:
+            qs.showSorting()
+        qsRelation = deepcopy(qs.relation)
+        from multiprocessing import cpu_count
+        if Threading and cpu_count() > 4:
+            from pickle import dumps, loads, load
+            from multiprocessing import Process, Lock, active_children
+            class myThread(Process):
+                def __init__(self, categID,\
+                             tempDirName,\
+                             Debug):
+                    Process.__init__(self)
+                    self.categID = categID
+                    self.workingDirectory = tempDirName
+                    self.Debug = Debug
+                def run(self):
+                    from pickle import dumps, loads
+                    from os import chdir
+                    chdir(self.workingDirectory)
+                    if Debug:
+                        print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+                    fi = open('dumpQs.py','rb')
+                    digraph = loads(fi.read())
+                    fi.close()
+                    fiName = 'catContent-'+str(self.categID)+'.py'
+                    fi = open(fiName,'rb')
+                    catContent = loads(fi.read())
+                    fi.close()
+                    if Debug:
+                        print(self.categID,catContent)
+                    if len(catContent) > 0:
+                        currActions = list(catContent)
+                        for x in currActions:
+                            for y in currActions:
+                                digraph.relation[x][y] = digraph.relationOrig[x][y]
+                        catCRbc = digraph.computeRankingByChoosing(currActions)
+                        if Debug:
+                            print(self.categID,catCRbc)
+                        catRbc = deepcopy(catCRbc['result'])
+                        currActions = list(catContent)
+                        catRelation = digraph.computeRankingByChoosingRelation(\
+                                        actionsSubset=currActions,\
+                                        rankingByChoosing=catCRbc['result'],\
+                                        Debug=False)
+                        splitCatRelation = [catRbc,catRelation]
+                    else:
+                        splitCatRelation = [[],[]]
+                    foName = 'splitCatRelation-'+str(self.categID)+'.py'
+                    fo = open(foName,'wb')                                            
+                    fo.write(dumps(splitCatRelation,-1))
+                    fo.close()
+            print('Threading ... !')
+            from tempfile import TemporaryDirectory
+            with TemporaryDirectory() as tempDirName:
+                qsFileName = tempDirName +'/dumpQs.py'
+                if Debug:
+                    print('temDirName, qsFileName', tempDirName,qsFileName)
+                fo = open(qsFileName,'wb')
+                qsDp = dumps(qs,-1)
+                fo.write(qsDp)
+                fo.close()
+                nbrCores = cpu_count()-2
+                print('Nbr of cpus = ',nbrCores)
+                for c in qs.orderedCategoryKeys(Reverse=True):
+                    print('Threading categ', c, len(catContent[c]))
+                    if Debug:
+                        print(catContent[c])
+                    foName = tempDirName+'/catContent-'+str(c)+'.py'
+                    fo = open(foName,'wb')
+                    spa = dumps(catContent[c],-1)
+                    fo.write(spa)
+                    fo.close()
+                    splitThread = myThread(c,tempDirName,
+                                           Debug)
+                    splitThread.start()
+                while active_children() != []:
+                    pass
+                print('Exiting computing threads')
+                catRelation = {}
+                catRbc = {}
+                for j in qs.orderedCategoryKeys(Reverse=True):
+                    fiName = tempDirName+'/splitCatRelation-'+str(j)+'.py'
+                    fi = open(fiName,'rb')
+                    splitCatRelation = loads(fi.read())
+                    fi.close()
+                    if Debug:
+                        print(j, 'catRbc',splitCatRelation[0])
+                        print(j,'catRelation', splitCatRelation[1])
+                    catRbc[j] = splitCatRelation[0]
+                    catRelation[j] = splitCatRelation[1] 
+        else:
+            catRelation = {}
+            catRbc = {}
+            for c in qs.orderedCategoryKeys(Reverse=True):
+                if Debug:
+                    print(c, len(catContent[c]))
+                if len(catContent[c]) > 0:
+                    currActions = list(catContent[c])
+                    for x in currActions:
+                        for y in currActions:
+                            qs.relation[x][y] = qs.relationOrig[x][y]
+                    catCRbc = qs.computeRankingByChoosing(currActions)
+                    if Debug:
+                        print(c,catCRbc)
+                    catRbc[c] = deepcopy(catCRbc['result'])
+                    currActions = list(catContent[c])
+                    catRelation[c] = qs.computeRankingByChoosingRelation(\
+                        actionsSubset=currActions,\
+                        rankingByChoosing=catCRbc['result'],\
+                        Debug=False)
+
+        qs.catRbc = deepcopy(catRbc)
+        qs.relation = deepcopy(qsRelation)
+    
+##        for c in qs.orderedCategoryKeys():
+##            for x in catContent[c]:
+##                for y in catContent[c]:
+##                    qs.relation[x][y] = catRelation[c][x][y]
+
+        self.name = 'qsrbc-'+qs.name
+        self.actions = deepcopy(qs.actions)
+        self.order = len(self.actions)
+        self.criteria = deepcopy(qs.criteria)
+        self.evaluation = deepcopy(qs.evaluation)
+        self.categories = deepcopy(qs.categories)
+        self.criteriaCategoryLimits = deepcopy(qs.criteriaCategoryLimits)
+        self.profiles = deepcopy(qs.profiles)
+        self.valuationdomain = deepcopy(qs.valuationdomain)
+        self.catRbc = deepcopy(qs.catRbc)
+        self.relationOrig = deepcopy(qs.relationOrig)
+        self.relation = deepcopy(qs.relation)
+        self._constructRelation()
+        self.catRbc = deepcopy(qs.catRbc)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()        
+
 
 #----------test outrankingDigraphs classes ----------------
 if __name__ == "__main__":
@@ -1016,39 +1196,48 @@ if __name__ == "__main__":
     from time import time
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=30)
+                                 numberOfActions=150)
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
-    t0 = time()
-    #limitingQuantiles = len(t.actions) // 2
-    limitingQuantiles = 10
-    qs = QuantilesSortingDigraph(t,g.order)
-    qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,Debug=False)
+    limitingQuantiles = len(t.actions) // 3
+    #limitingQuantiles = 20
+    #qs = QuantilesSortingDigraph(t,g.order)
+##    t0 = time()
+##    qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,Debug=False)
+##    print(time()-t0)
+##    qsrbc.showSorting()
+##    weakOrdering = qsrbc.computeWeakOrder(Comments=False,Debug=False)
+##    print(weakOrdering)
+    t0=time()
+    qsrbcwt = QsRbcWeakOrderingWithThreading(t,limitingQuantiles,Debug=False)
     print(time()-t0)
-    qsrbc.showSorting()
-    weakOrdering = qsrbc.computeWeakOrder(Comments=False,Debug=False)
+    #qsrbcwt.showSorting()
+    weakOrdering = qsrbcwt.computeWeakOrder(Comments=False,Debug=False)
     print(weakOrdering)
-    #qsrbc.showOrderedRelationTable()
-    qsrbc.exportGraphViz()
-    rbc = RankingByChoosingDigraph(g,Threading=False)
-    rbc.exportGraphViz()
-    qscorr = g.computeOrdinalCorrelation(qs)
-    print('qs',qscorr['correlation'],\
-          qscorr['correlation']*qscorr['determination'])
-    qsrbccorr = g.computeOrdinalCorrelation(qsrbc)
-    print('qsrbc', qsrbccorr['correlation'],\
-          qsrbccorr['correlation']*qsrbccorr['determination'])
-    rbccorr = g.computeOrdinalCorrelation(rbc)
-    print('rbc',rbccorr['correlation'],\
-          rbccorr['correlation']*rbccorr['determination'])
-    crosscorr = qsrbc.computeOrdinalCorrelation(rbc)
-    print('qsrbc<->rbc',crosscorr['correlation'],\
-          crosscorr['correlation']*crosscorr['determination'])
-    crosscorr = qsrbc.computeOrdinalCorrelation(qs)
-    print('qsrbc<->qs',crosscorr['correlation'],\
-          crosscorr['correlation']*crosscorr['determination'])
     
+##    weakOrdering = qsrbc.computeWeakOrder(Comments=False,Debug=False)
+##    print(weakOrdering)
+##    #qsrbc.showOrderedRelationTable()
+##    qsrbc.exportGraphViz()
+##    rbc = RankingByChoosingDigraph(g,Threading=False)
+##    rbc.exportGraphViz()
+##    qscorr = g.computeOrdinalCorrelation(qs)
+##    print('qs',qscorr['correlation'],\
+##          qscorr['correlation']*qscorr['determination'])
+##    qsrbccorr = g.computeOrdinalCorrelation(qsrbc)
+##    print('qsrbc', qsrbccorr['correlation'],\
+##          qsrbccorr['correlation']*qsrbccorr['determination'])
+##    rbccorr = g.computeOrdinalCorrelation(rbc)
+##    print('rbc',rbccorr['correlation'],\
+##          rbccorr['correlation']*rbccorr['determination'])
+##    crosscorr = qsrbc.computeOrdinalCorrelation(rbc)
+##    print('qsrbc<->rbc',crosscorr['correlation'],\
+##          crosscorr['correlation']*crosscorr['determination'])
+##    crosscorr = qsrbc.computeOrdinalCorrelation(qs)
+##    print('qsrbc<->qs',crosscorr['correlation'],\
+##          crosscorr['correlation']*crosscorr['determination'])
+##    
     #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
     #g = RandomValuationDigraph(order=11)
 ##    print('=== >>> best and last fusion (default)')
