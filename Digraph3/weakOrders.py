@@ -1007,7 +1007,7 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
                                 ReflexiveTerms=False)
 ##################
 
-def jobTask(categID):
+def _jobTask(categID):
     from pickle import dumps, loads, load
     from copy import deepcopy
     print("Starting working on category %d" % (categID), end=" ")
@@ -1105,8 +1105,9 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                 
             print('Threading ... !')
             from tempfile import TemporaryDirectory
-            from os import chdir
+            from os import getcwd, chdir
             with TemporaryDirectory() as tempDirName:
+                cwd = getcwd()
                 chdir(tempDirName)
                 qsFileName = 'dumpQs.py'
                 if Debug:
@@ -1127,7 +1128,7 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                 print(filledCategKeys)
 
                 with Pool(processes=Nproc) as pool:
-                    for res in pool.imap_unordered(jobTask,filledCategKeys):
+                    for res in pool.imap_unordered(_jobTask,filledCategKeys):
                         print(res)
                 
                 print('Finished all threads')
@@ -1143,95 +1144,9 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                             print(j, 'catRbc',splitCatRelation[0])
                             print(j,'catRelation', splitCatRelation[1])
                         catRbc[j] = splitCatRelation[0]
-                        catRelation[j] = splitCatRelation[1] 
-                 
-##            from multiprocessing import Process, Lock, active_children
-##            class myThread(Process):
-##                def __init__(self, categID,\
-##                             tempDirName,\
-##                             Debug):
-##                    Process.__init__(self)
-##                    self.categID = categID
-##                    self.workingDirectory = tempDirName
-##                    self.Debug = Debug
-##                def run(self):
-##                    from pickle import dumps, loads
-##                    from os import chdir
-##                    chdir(self.workingDirectory)
-##                    if Debug:
-##                        print("Starting working in %s on %s" % (self.workingDirectory, self.name))
-##                    fi = open('dumpQs.py','rb')
-##                    digraph = loads(fi.read())
-##                    fi.close()
-##                    fiName = 'catContent-'+str(self.categID)+'.py'
-##                    fi = open(fiName,'rb')
-##                    catContent = loads(fi.read())
-##                    fi.close()
-##                    if Debug:
-##                        print(self.categID,catContent)
-##                    if len(catContent) > 0:
-##                        currActions = list(catContent)
-##                        for x in currActions:
-##                            for y in currActions:
-##                                digraph.relation[x][y] = digraph.relationOrig[x][y]
-##                        catCRbc = digraph.computeRankingByChoosing(currActions)
-##                        if Debug:
-##                            print(self.categID,catCRbc)
-##                        catRbc = deepcopy(catCRbc['result'])
-##                        currActions = list(catContent)
-##                        catRelation = digraph.computeRankingByChoosingRelation(\
-##                                        actionsSubset=currActions,\
-##                                        rankingByChoosing=catCRbc['result'],\
-##                                        Debug=False)
-##                        splitCatRelation = [catRbc,catRelation]
-##                    else:
-##                        splitCatRelation = [[],[]]
-##                    foName = 'splitCatRelation-'+str(self.categID)+'.py'
-##                    fo = open(foName,'wb')                                            
-##                    fo.write(dumps(splitCatRelation,-1))
-##                    fo.close()
-##            print('Threading ... !')
-##            from tempfile import TemporaryDirectory
-##            with TemporaryDirectory() as tempDirName:
-##                qsFileName = tempDirName +'/dumpQs.py'
-##                if Debug:
-##                    print('temDirName, qsFileName', tempDirName,qsFileName)
-##                fo = open(qsFileName,'wb')
-##                qsDp = dumps(qs,-1)
-##                fo.write(qsDp)
-##                fo.close()
-##                nbrCores = cpu_count()-2
-##                print('Nbr of cpus = ',nbrCores)
-##                for c in qs.orderedCategoryKeys(Reverse=True):
-##                    nc = len(catContent[c])
-##                    if nc > 0:
-##                        print('Threading categ', c, nc)
-##                        if Debug:
-##                            print(catContent[c])
-##                        foName = tempDirName+'/catContent-'+str(c)+'.py'
-##                        fo = open(foName,'wb')
-##                        spa = dumps(catContent[c],-1)
-##                        fo.write(spa)
-##                        fo.close()
-##                        splitThread = myThread(c,tempDirName,
-##                                           Debug)
-##                        splitThread.start()
-##                while active_children() != []:
-##                    pass
-##                print('Exiting computing threads')
-##                catRelation = {}
-##                catRbc = {}
-##                for j in qs.orderedCategoryKeys(Reverse=True):
-##                    if len(catContent[j]) > 0:
-##                        fiName = tempDirName+'/splitCatRelation-'+str(j)+'.py'
-##                        fi = open(fiName,'rb')
-##                        splitCatRelation = loads(fi.read())
-##                        fi.close()
-##                        if Debug:
-##                            print(j, 'catRbc',splitCatRelation[0])
-##                            print(j,'catRelation', splitCatRelation[1])
-##                        catRbc[j] = splitCatRelation[0]
-##                        catRelation[j] = splitCatRelation[1] 
+                        catRelation[j] = splitCatRelation[1]
+                chdir(cwd)
+                  
         else:
             catRelation = {}
             catRbc = {}
@@ -1253,13 +1168,8 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                         rankingByChoosing=catCRbc['result'],\
                         Debug=False)
 
-        qs.catRbc = deepcopy(catRbc)
-        qs.relation = deepcopy(qsRelation)
-    
-##        for c in qs.orderedCategoryKeys():
-##            for x in catContent[c]:
-##                for y in catContent[c]:
-##                    qs.relation[x][y] = catRelation[c][x][y]
+        #qs.catRbc = deepcopy(catRbc)
+        #qs.relation = deepcopy(qsRelation)
 
         self.name = 'qsrbc-'+qs.name
         self.actions = deepcopy(qs.actions)
@@ -1270,50 +1180,14 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
         self.criteriaCategoryLimits = deepcopy(qs.criteriaCategoryLimits)
         self.profiles = deepcopy(qs.profiles)
         self.valuationdomain = deepcopy(qs.valuationdomain)
-        self.catRbc = deepcopy(qs.catRbc)
+        self.catRbc = deepcopy(catRbc)
         self.relationOrig = deepcopy(qs.relationOrig)
-        self.relation = deepcopy(qs.relation)
+        self.relation = deepcopy(qsRelation)
         self._constructRelation()
-        self.catRbc = deepcopy(qs.catRbc)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
 
-##    def jobTask(categId):
-##        from pickle import dumps, loads, load
-##        print("Starting working on category %d" % (categID))
-##        fi = open('dumpQs.py','rb')
-##        digraph = loads(fi.read())
-##        fi.close()
-##        fiName = 'catContent-'+str(categID)+'.py'
-##        fi = open(fiName,'rb')
-##        catContent = loads(fi.read())
-##        fi.close()
-##        if Debug:
-##            print(self.categID,catContent)
-##        if len(catContent) > 0:
-##            currActions = list(catContent)
-##            for x in currActions:
-##                for y in currActions:
-##                    digraph.relation[x][y] = digraph.relationOrig[x][y]
-##            catCRbc = digraph.computeRankingByChoosing(currActions)
-##            if Debug:
-##                print(self.categID,catCRbc)
-##            catRbc = deepcopy(catCRbc['result'])
-##            currActions = list(catContent)
-##            catRelation = digraph.computeRankingByChoosingRelation(\
-##                            actionsSubset=currActions,\
-##                            rankingByChoosing=catCRbc['result'],\
-##                            Debug=False)
-##            splitCatRelation = [catRbc,catRelation]
-##        else:
-##            splitCatRelation = [[],[]]
-##        foName = 'splitCatRelation-'+str(categID)+'.py'
-##        fo = open(foName,'wb')                                            
-##        fo.write(dumps(splitCatRelation,-1))
-##        fo.close()
-##        writestr = 'Finished category %d' % categID
-##        return writestr
 
 #----------test outrankingDigraphs classes ----------------
 if __name__ == "__main__":
