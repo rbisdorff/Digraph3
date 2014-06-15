@@ -1113,9 +1113,9 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                 nbrCores = cpu_count()-2
                 print('Nbr of cpus = ',nbrCores)
                 for c in qs.orderedCategoryKeys(Reverse=True):
-                    nc = len(catContent[c]
+                    nc = len(catContent[c])
                     if nc > 0:
-                        print('Threading categ', c, ))
+                        print('Threading categ', c, nc)
                         if Debug:
                             print(catContent[c])
                         foName = tempDirName+'/catContent-'+str(c)+'.py'
@@ -1132,7 +1132,7 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                 catRelation = {}
                 catRbc = {}
                 for j in qs.orderedCategoryKeys(Reverse=True):
-                    if len(catContent[c] > 0:
+                    if len(catContent[j]) > 0:
                         fiName = tempDirName+'/splitCatRelation-'+str(j)+'.py'
                         fi = open(fiName,'rb')
                         splitCatRelation = loads(fi.read())
@@ -1199,7 +1199,7 @@ if __name__ == "__main__":
     from time import time
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=150)
+                                 numberOfActions=50)
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
