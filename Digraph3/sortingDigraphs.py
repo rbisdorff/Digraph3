@@ -22,7 +22,7 @@
 from digraphs import *
 from outrankingDigraphs import *
 from sortingDigraphs import *
-from weakOrders import *
+#from weakOrders import *
 
 class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     """
@@ -1113,7 +1113,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             fo.close()
             print('File: ' + nameExt + ' saved !')
 
-    
+from weakOrders import WeakOrder
 class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
     """
     Specialisation of the sortingDigraph Class
