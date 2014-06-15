@@ -918,22 +918,27 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
         self.categories = deepcopy(qs.categories)
         self.criteriaCategoryLimits = deepcopy(qs.criteriaCategoryLimits)
         self.profiles = deepcopy(qs.profiles)
+        self.valuationdomain = deepcopy(qs.valuationdomain)
         self.catRbc = deepcopy(qs.catRbc)
         self.relationOrig = deepcopy(qs.relationOrig)
         self.relation = deepcopy(qs.relation)
         self._constructRelation()
         self.catRbc = deepcopy(qs.catRbc)
-        self.valuationdomain = deepcopy(qs.valuationdomain)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()        
 
     def _constructRelation(self):
+        """
+        Instantiates the weak order by taking the codual of the preoder !
+        """
         weakOrdering = self.computeWeakOrder()
         relation = self.computePreorderRelation(weakOrdering)
         actionsList = [x for x in self.actions]
+        Max = self.valuationdomain['max']
+        Min = self.valuationdomain['min']
         for x in actionsList:
             for y in actionsList:
-                self.relation[x][y] = relation[x][y] 
+                self.relation[x][y] = Max - relation[y][x] + Min 
 
     def computeWeakOrder(self,DescendingOrder=True,Comments=False,Debug=False):
         """
@@ -1018,6 +1023,7 @@ if __name__ == "__main__":
     t0 = time()
     #limitingQuantiles = len(t.actions) // 2
     limitingQuantiles = 10
+    qs = QuantilesSortingDigraph(t,g.order)
     qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,Debug=False)
     print(time()-t0)
     qsrbc.showSorting()
@@ -1025,8 +1031,24 @@ if __name__ == "__main__":
     print(weakOrdering)
     #qsrbc.showOrderedRelationTable()
     qsrbc.exportGraphViz()
-    print(g.computeOrdinalCorrelation(qsrbc))
-
+    rbc = RankingByChoosingDigraph(g,Threading=False)
+    rbc.exportGraphViz()
+    qscorr = g.computeOrdinalCorrelation(qs)
+    print('qs',qscorr['correlation'],\
+          qscorr['correlation']*qscorr['determination'])
+    qsrbccorr = g.computeOrdinalCorrelation(qsrbc)
+    print('qsrbc', qsrbccorr['correlation'],\
+          qsrbccorr['correlation']*qsrbccorr['determination'])
+    rbccorr = g.computeOrdinalCorrelation(rbc)
+    print('rbc',rbccorr['correlation'],\
+          rbccorr['correlation']*rbccorr['determination'])
+    crosscorr = qsrbc.computeOrdinalCorrelation(rbc)
+    print('qsrbc<->rbc',crosscorr['correlation'],\
+          crosscorr['correlation']*crosscorr['determination'])
+    crosscorr = qsrbc.computeOrdinalCorrelation(qs)
+    print('qsrbc<->qs',crosscorr['correlation'],\
+          crosscorr['correlation']*crosscorr['determination'])
+    
     #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
     #g = RandomValuationDigraph(order=11)
 ##    print('=== >>> best and last fusion (default)')
