@@ -836,7 +836,7 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
                             fontSize=fontSize)
 
 from sortingDigraphs import SortingDigraph                        
-class QsRbcWeakOrder(WeakOrder,SortingDigraph):
+class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
     """
     Refinig a quantiles sorting result
     with a local ranking-by-choosing of the category contents.
@@ -918,12 +918,22 @@ class QsRbcWeakOrder(WeakOrder,SortingDigraph):
         self.categories = deepcopy(qs.categories)
         self.criteriaCategoryLimits = deepcopy(qs.criteriaCategoryLimits)
         self.profiles = deepcopy(qs.profiles)
+        self.catRbc = deepcopy(qs.catRbc)
         self.relationOrig = deepcopy(qs.relationOrig)
         self.relation = deepcopy(qs.relation)
+        self._constructRelation()
         self.catRbc = deepcopy(qs.catRbc)
         self.valuationdomain = deepcopy(qs.valuationdomain)
         self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
+        self.notGamma = self.notGammaSets()        
+
+    def _constructRelation(self):
+        weakOrdering = self.computeWeakOrder()
+        relation = self.computePreorderRelation(weakOrdering)
+        actionsList = [x for x in self.actions]
+        for x in actionsList:
+            for y in actionsList:
+                self.relation[x][y] = relation[x][y] 
 
     def computeWeakOrder(self,DescendingOrder=True,Comments=False,Debug=False):
         """
@@ -963,8 +973,7 @@ class QsRbcWeakOrder(WeakOrder,SortingDigraph):
         if Comments:
             print(weakOrdering)
         return weakOrdering
-                    
-        return weakOrdering
+
     
     def showOrderedRelationTable(self,direction="decreasing",originalRelation=False):
         """
@@ -1002,19 +1011,19 @@ if __name__ == "__main__":
     from time import time
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=11)
+                                 numberOfActions=30)
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
     t0 = time()
     #limitingQuantiles = len(t.actions) // 2
     limitingQuantiles = 10
-    qsrbc = QsRbcWeakOrder(t,limitingQuantiles,Debug=False)
+    qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,Debug=False)
     print(time()-t0)
     qsrbc.showSorting()
     weakOrdering = qsrbc.computeWeakOrder(Comments=False,Debug=False)
     print(weakOrdering)
-    qsrbc.showOrderedRelationTable()
+    #qsrbc.showOrderedRelationTable()
     qsrbc.exportGraphViz()
     print(g.computeOrdinalCorrelation(qsrbc))
 

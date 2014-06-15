@@ -85,3 +85,21 @@ def testPRIThreadingOptions():
                                            Threading=True)
     print('execution time %s: ' % (str ( time()-t0 ) ) )
     rcf2.showWeakOrder()
+
+def testQsRbcOrdering():
+    print('===>>> test QsRbcOrdering class methods---------')
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                 numberOfActions=30)
+    g = BipolarOutrankingDigraph(t,Normalized=True)
+    t0 = time()
+    #limitingQuantiles = len(t.actions) // 2
+    limitingQuantiles = 10
+    qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,Debug=False)
+    print(time()-t0)
+    qsrbc.showSorting()
+    weakOrdering = qsrbc.computeWeakOrder(Comments=False,Debug=False)
+    print(weakOrdering)
+    qsrbc.showOrderedRelationTable()
+    qsrbc.exportGraphViz()
+    print(g.computeOrdinalCorrelation(qsrbc))
+    
