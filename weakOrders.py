@@ -1113,32 +1113,35 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                 nbrCores = cpu_count()-2
                 print('Nbr of cpus = ',nbrCores)
                 for c in qs.orderedCategoryKeys(Reverse=True):
-                    print('Threading categ', c, len(catContent[c]))
-                    if Debug:
-                        print(catContent[c])
-                    foName = tempDirName+'/catContent-'+str(c)+'.py'
-                    fo = open(foName,'wb')
-                    spa = dumps(catContent[c],-1)
-                    fo.write(spa)
-                    fo.close()
-                    splitThread = myThread(c,tempDirName,
+                    nc = len(catContent[c]
+                    if nc > 0:
+                        print('Threading categ', c, ))
+                        if Debug:
+                            print(catContent[c])
+                        foName = tempDirName+'/catContent-'+str(c)+'.py'
+                        fo = open(foName,'wb')
+                        spa = dumps(catContent[c],-1)
+                        fo.write(spa)
+                        fo.close()
+                        splitThread = myThread(c,tempDirName,
                                            Debug)
-                    splitThread.start()
+                        splitThread.start()
                 while active_children() != []:
                     pass
                 print('Exiting computing threads')
                 catRelation = {}
                 catRbc = {}
                 for j in qs.orderedCategoryKeys(Reverse=True):
-                    fiName = tempDirName+'/splitCatRelation-'+str(j)+'.py'
-                    fi = open(fiName,'rb')
-                    splitCatRelation = loads(fi.read())
-                    fi.close()
-                    if Debug:
-                        print(j, 'catRbc',splitCatRelation[0])
-                        print(j,'catRelation', splitCatRelation[1])
-                    catRbc[j] = splitCatRelation[0]
-                    catRelation[j] = splitCatRelation[1] 
+                    if len(catContent[c] > 0:
+                        fiName = tempDirName+'/splitCatRelation-'+str(j)+'.py'
+                        fi = open(fiName,'rb')
+                        splitCatRelation = loads(fi.read())
+                        fi.close()
+                        if Debug:
+                            print(j, 'catRbc',splitCatRelation[0])
+                            print(j,'catRelation', splitCatRelation[1])
+                        catRbc[j] = splitCatRelation[0]
+                        catRelation[j] = splitCatRelation[1] 
         else:
             catRelation = {}
             catRbc = {}
