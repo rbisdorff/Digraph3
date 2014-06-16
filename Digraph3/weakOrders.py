@@ -1259,7 +1259,7 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
 ##                catRelation = {}
 ##                catRbc = {}
                 for c in range(1,nwo+1):
-                    if len(catContent[c]) > 1:
+                    if len(catContent[c]) > 0:
                         fiName = 'splitCatRelation-'+str(c)+'.py'
                         fi = open(fiName,'rb')
                         splitCatRelation = loads(fi.read())
