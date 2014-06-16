@@ -881,6 +881,7 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
                      minValuation=minValuation,
                      maxValuation=maxValuation,
                      outrankingType = outrankingType,
+                     CompleteOutranking = True,
                      Threading=False,
                      Debug=False)
         catContent = {}
@@ -1187,6 +1188,7 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                      minValuation=minValuation,
                      maxValuation=maxValuation,
                      outrankingType = outrankingType,
+                     CompleteOutranking = True,                
                      Threading=False,
                      Debug=False)
         
