@@ -1153,9 +1153,10 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                  LowerClosed=True,
                  PrefThresholds=True,
                  hasNoVeto=False,
-                 minValuation=-100.0,
-                 maxValuation=100.0,
+                 minValuation=-1.0,
+                 maxValuation=1.0,
                  outrankingType = "bipolar",
+                 CompleteOutranking = True,
                  Threading=False,
                  Debug=False):
         """
@@ -1309,13 +1310,15 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
             self.relation = deepcopy(g.relation)
             
         else:
-            g = BipolarOutrankingDigraph(normPerfTab,hasNoVeto=hasNoVeto)
-            g.recodeValuation(minValuation,maxValuation)
-            self.relationOrig = deepcopy(g.relation)
-            Min = g.valuationdomain['min']
-            Max = g.valuationdomain['max']
-##            Min = Decimal(str(minValuation))
-##            Max = Decimal(str(maxValuation))
+            if CompleteOutranking:
+                g = BipolarOutrankingDigraph(normPerfTab,hasNoVeto=hasNoVeto)
+                g.recodeValuation(minValuation,maxValuation)
+                self.relationOrig = deepcopy(g.relation)
+                Min = g.valuationdomain['min']
+                Max = g.valuationdomain['max']
+            else:
+                Min = Decimal(str(minValuation))
+                Max = Decimal(str(maxValuation))
             Med = (Max + Min)/Decimal('2.0')
             self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
             if LowerClosed:
