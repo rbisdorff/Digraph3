@@ -481,7 +481,7 @@ class Digraph(object):
         (resp. outranked) average valuation via the computePairwiseClusterComparison
         method.
 
-        If self.rankingByChoosing['CoDual'] is True, the ranking by chossing was computed on the codual of self.
+        If self.rankingByChoosing['CoDual'] is True, the ranking-by-choosing was computed on the codual of self.
         """
         from copy import deepcopy
         currG = deepcopy(self)
@@ -641,7 +641,7 @@ class Digraph(object):
 
     def computeRankingByBestChoosing(self,CoDual=False,CppAgrum=False,Debug=False,):
         """
-        Computes a weak preordring of the self.actions by recursive
+        Computes a weak preordering of the self.actions by recursive
         best choice elagations.
 
         Stores in self.rankingByBestChoosing['result'] a list of (P+,bestChoice) tuples

@@ -1201,6 +1201,9 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                 print(i+1,weakOrdering[i])        
 
         qsRelation = deepcopy(qs.relation)
+
+        catRelation = {}
+        catRbc = {}
         from multiprocessing import Pool, cpu_count
         if Threading:
             from pickle import dumps, loads, load
@@ -1226,12 +1229,26 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                 fo.close()
                 filledCategKeys = []
                 for c in range(1,nwo+1):
-                    filledCategKeys.append(int(c))
-                    foName = 'catContent-'+str(c)+'.py'
-                    fo = open(foName,'wb')
-                    spa = dumps(catContent[c],-1)
-                    fo.write(spa)
-                    fo.close()
+                    if len(catContent[c]) > 1:
+                        filledCategKeys.append(int(c))
+                        foName = 'catContent-'+str(c)+'.py'
+                        fo = open(foName,'wb')
+                        spa = dumps(catContent[c],-1)
+                        fo.write(spa)
+                        fo.close()
+                    elif len(catContent[c]) > 0:
+                        currActions = list(catContent[c])
+                        for x in currActions:
+                            for y in currActions:
+                                qs.relation[x][y] = qs.relationOrig[x][y]
+                        catCRbc = qs.computeRankingByChoosing(currActions)
+                        catRbc[c] = deepcopy(catCRbc['result'])
+                        currActions = list(catContent[c])
+                        catRelation[c] = qs.computeRankingByChoosingRelation(\
+                                        actionsSubset=currActions,\
+                                        rankingByChoosing=catCRbc['result'],\
+                                        Debug=False)
+
                 print(filledCategKeys)
 
                 with Pool(processes=Nproc) as pool:
@@ -1239,9 +1256,10 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                         print(res)
                 
                 print('Finished all threads')
-                catRelation = {}
-                catRbc = {}
+##                catRelation = {}
+##                catRbc = {}
                 for c in range(1,nwo+1):
+                    if len(catContent[c]) > 1:
                         fiName = 'splitCatRelation-'+str(c)+'.py'
                         fi = open(fiName,'rb')
                         splitCatRelation = loads(fi.read())
@@ -1254,8 +1272,8 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                 chdir(cwd)
                   
         else:
-            catRelation = {}
-            catRbc = {}
+##            catRelation = {}
+##            catRbc = {}
             for c in range(1,nwo+1):
                 if Debug:
                     print(c, len(catContent[c]))
@@ -1305,7 +1323,7 @@ if __name__ == "__main__":
     from time import time
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=200)
+                                 numberOfActions=50)
     t.saveXMCDA2('test')
     #t = XMCDA2PerformanceTableau('test')
     #g = BipolarOutrankingDigraph(t,Normalized=True)
@@ -1323,7 +1341,7 @@ if __name__ == "__main__":
     t0=time()
     qsrbcwt = QsRbcWeakOrderingWithThreading(t,limitingQuantiles,
                                              cores=8,
-                                             Debug=False)
+                                             Debug=True)
     t2 = time()-t0
     qsrbcwt.showSorting()
     qsrbcwt.showQsRbcRanking(DescendingOrder=False)
