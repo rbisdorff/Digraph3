@@ -1102,7 +1102,8 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
         """
         show the ranking-by-sorting refinement of the quantiles sorting result
         """
-        self.computeQsRbcRanking(DescendingOrder=DescendingOrder,Comments=True)
+        print(self.computeQsRbcRanking(DescendingOrder=DescendingOrder,
+                                       Comments=False))
 
 ##################
 
@@ -1188,9 +1189,15 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                      outrankingType = outrankingType,
                      Threading=False,
                      Debug=False)
-        catContent = qs.computeCategoryContents()
-        if Debug:
-            qs.showSorting()
+        
+        catContent = {}
+        weakOrdering = qs.computeWeakOrder()
+        nwo = len(weakOrdering)
+        for i in range(nwo):
+            catContent[i+1] = weakOrdering[i]
+            if Debug:
+                print(i+1,weakOrdering[i])        
+
         qsRelation = deepcopy(qs.relation)
         from multiprocessing import Pool, cpu_count
         if Threading:
@@ -1216,14 +1223,13 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                 fo.write(qsDp)
                 fo.close()
                 filledCategKeys = []
-                for c in qs.orderedCategoryKeys(Reverse=True):
-                    if len(catContent[c]) > 0:
-                        filledCategKeys.append(int(c))
-                        foName = 'catContent-'+str(c)+'.py'
-                        fo = open(foName,'wb')
-                        spa = dumps(catContent[c],-1)
-                        fo.write(spa)
-                        fo.close()
+                for c in range(1,nwo+1):
+                    filledCategKeys.append(int(c))
+                    foName = 'catContent-'+str(c)+'.py'
+                    fo = open(foName,'wb')
+                    spa = dumps(catContent[c],-1)
+                    fo.write(spa)
+                    fo.close()
                 print(filledCategKeys)
 
                 with Pool(processes=Nproc) as pool:
@@ -1233,23 +1239,22 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                 print('Finished all threads')
                 catRelation = {}
                 catRbc = {}
-                for j in qs.orderedCategoryKeys(Reverse=True):
-                    if len(catContent[j]) > 0:
-                        fiName = 'splitCatRelation-'+str(j)+'.py'
+                for c in range(1,nwo+1):
+                        fiName = 'splitCatRelation-'+str(c)+'.py'
                         fi = open(fiName,'rb')
                         splitCatRelation = loads(fi.read())
                         fi.close()
                         if Debug:
-                            print(j, 'catRbc',splitCatRelation[0])
-                            print(j,'catRelation', splitCatRelation[1])
-                        catRbc[j] = splitCatRelation[0]
-                        catRelation[j] = splitCatRelation[1]
+                            print(c,'catRbc',splitCatRelation[0])
+                            print(c,'catRelation',splitCatRelation[1])
+                        catRbc[c] = splitCatRelation[0]
+                        catRelation[c] = splitCatRelation[1]
                 chdir(cwd)
                   
         else:
             catRelation = {}
             catRbc = {}
-            for c in qs.orderedCategoryKeys(Reverse=True):
+            for c in range(1,nwo+1):
                 if Debug:
                     print(c, len(catContent[c]))
                 if len(catContent[c]) > 0:
@@ -1297,27 +1302,31 @@ if __name__ == "__main__":
     from weakOrders import *
     from time import time
 
-##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-##                                 numberOfActions=30)
-##    t.saveXMCDA2('test')
-    t = XMCDA2PerformanceTableau('test')
-    g = BipolarOutrankingDigraph(t,Normalized=True)
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                 numberOfActions=200)
+    t.saveXMCDA2('test')
+    #t = XMCDA2PerformanceTableau('test')
+    #g = BipolarOutrankingDigraph(t,Normalized=True)
     limitingQuantiles = len(t.actions) // 2
-    #limitingQuantiles = 20
+    #limitingQuantiles = 100
     #qs = QuantilesSortingDigraph(t,g.order)
     t0 = time()
-    qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,Debug=True)
-    print(time()-t0)
+    qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,Debug=False)
+    t1 = time()-t0
     qsrbc.showSorting()
-    qsrbc.computeQsRbcRanking(Debug=True)
-    qsrbc.showQsRbcRanking(DescendingOrder=False)
-    qsrbc.exportGraphViz()
-    qsrbc.showOrderedRelationTable()
-##    t0=time()
-##    qsrbcwt = QsRbcWeakOrderingWithThreading(t,limitingQuantiles,
-##                                             cores=8,
-##                                             Debug=False)
-##    print(time()-t0)
+    #qsrbc.computeQsRbcRanking(Debug=True)
+    qsrbc.showQsRbcRanking(DescendingOrder=True)
+    #qsrbc.exportGraphViz()
+    #qsrbc.showOrderedRelationTable()
+    t0=time()
+    qsrbcwt = QsRbcWeakOrderingWithThreading(t,limitingQuantiles,
+                                             cores=8,
+                                             Debug=False)
+    t2 = time()-t0
+    qsrbcwt.showSorting()
+    qsrbcwt.showQsRbcRanking(DescendingOrder=False)
+    print('qsrbc',t1,'qsrbcwt',t2)
+    
 ##    actionsCategories = {}
 ##    
 ##    for x in qsrbcwt.actions:
