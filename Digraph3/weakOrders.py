@@ -1229,25 +1229,25 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                 fo.close()
                 filledCategKeys = []
                 for c in range(1,nwo+1):
-                    if len(catContent[c]) > 1:
+                    if len(catContent[c]) > 0:
                         filledCategKeys.append(int(c))
                         foName = 'catContent-'+str(c)+'.py'
                         fo = open(foName,'wb')
                         spa = dumps(catContent[c],-1)
                         fo.write(spa)
                         fo.close()
-                    elif len(catContent[c]) > 0:
-                        currActions = list(catContent[c])
-                        for x in currActions:
-                            for y in currActions:
-                                qs.relation[x][y] = qs.relationOrig[x][y]
-                        catCRbc = qs.computeRankingByChoosing(currActions)
-                        catRbc[c] = deepcopy(catCRbc['result'])
-                        currActions = list(catContent[c])
-                        catRelation[c] = qs.computeRankingByChoosingRelation(\
-                                        actionsSubset=currActions,\
-                                        rankingByChoosing=catCRbc['result'],\
-                                        Debug=False)
+##                    elif len(catContent[c]) > 0:
+##                        currActions = list(catContent[c])
+##                        for x in currActions:
+##                            for y in currActions:
+##                                qs.relation[x][y] = qs.relationOrig[x][y]
+##                        catCRbc = qs.computeRankingByChoosing(currActions)
+##                        catRbc[c] = deepcopy(catCRbc['result'])
+##                        currActions = list(catContent[c])
+##                        catRelation[c] = qs.computeRankingByChoosingRelation(\
+##                                        actionsSubset=currActions,\
+##                                        rankingByChoosing=catCRbc['result'],\
+##                                        Debug=False)
 
                 print(filledCategKeys)
 
