@@ -1118,11 +1118,11 @@ def _jobTask(categID):
     fi = open(fiName,'rb')
     pt = loads(fi.read())
     fi.close()
-    digraph = BipolarOutrankingDigraph(pt)
+    digraph = BipolarOutrankingDigraph(pt,Normalized=True)
     catContent = [x for x in digraph.actions]
     nc = len(catContent)
     print(nc)
-    print(catContent)
+    #print(catContent)
     if nc > 0:
         currActions = list(catContent)
         catCRbc = digraph.computeRankingByChoosing(currActions)
@@ -1200,7 +1200,9 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                          maxValuation=maxValuation,
                          outrankingType = outrankingType,
                          CompleteOutranking = True)
-        
+
+        Max = qs.valuationdomain['max']
+        Med = qs.valuationdomain['med']
         catContent = {}
         weakOrdering = qs.computeWeakOrder()
         nwo = len(weakOrdering)
@@ -1230,7 +1232,8 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                 chdir(tempDirName)
                 filledCategKeys = []
                 for c in range(1,nwo+1):
-                    if len(catContent[c]) > 0:
+                    nc = len(catContent[c])
+                    if nc > 1:
                         filledCategKeys.append(int(c))
                         pt = PartialPerformanceTableau(perfTab,actionsSubset=catContent[c])
                         foName = 'partialPerfTab-'+str(c)+'.py'
@@ -1238,7 +1241,7 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                         ptDp = dumps(pt,-1)
                         fo.write(ptDp)
                         fo.close()
-
+                        
                 print(filledCategKeys)
 
                 with Pool(processes=Nproc) as pool:
@@ -1248,7 +1251,9 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                 print('Finished all threads')
 
                 for c in range(1,nwo+1):
-                    if len(catContent[c]) > 0:
+                    
+                    nc = len(catContent[c])
+                    if nc > 1:
                         fiName = 'splitCatRelation-'+str(c)+'.py'
                         fi = open(fiName,'rb')
                         splitCatRelation = loads(fi.read())
@@ -1258,6 +1263,17 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                             print(c,'catRelation',splitCatRelation[1])
                         catRbc[c] = splitCatRelation[0]
                         catRelation[c] = splitCatRelation[1]
+                    elif nc == 1:
+                        if Debug:
+                            print('singleton category %d : %d' % (c,nc))
+                            print(catContent[c])
+                        for x in catContent[c]:
+                            catRbc[c] = [((Max,[x]),(Max,[x]))]
+                            catRelation[c] = {str(x): {str(x): Med}}
+                        if Debug:
+                            print(c,'catRbc',catRbc[c])
+                            print(c,'catRelation',catRelation[c])
+
                 chdir(cwd)
                   
         else:
@@ -1314,9 +1330,9 @@ if __name__ == "__main__":
     from time import time
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=50)
+                                 numberOfActions=30)
     t.saveXMCDA2('test')
-    #t = XMCDA2PerformanceTableau('uniSorting')
+    t = XMCDA2PerformanceTableau('test')
     #g = BipolarOutrankingDigraph(t,Normalized=True)
     limitingQuantiles = len(t.actions) // 2
     #limitingQuantiles = 100
@@ -1333,7 +1349,7 @@ if __name__ == "__main__":
     qsrbcwt = QsRbcWeakOrderingWithThreading(t,limitingQuantiles,
                                              cores=8,
                                              Threading=True,
-                                             Debug=False)
+                                             Debug=True)
     t2 = time()-t0
     qsrbcwt.showSorting()
     qsrbcwt.showQsRbcRanking(DescendingOrder=False)
