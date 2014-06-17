@@ -1322,10 +1322,10 @@ if __name__ == "__main__":
     from weakOrders import *
     from time import time
 
-    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=50)
-    t.saveXMCDA2('test')
-    #t = XMCDA2PerformanceTableau('test')
+##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+##                                 numberOfActions=50)
+##    t.saveXMCDA2('test')
+    t = XMCDA2PerformanceTableau('uniSorting')
     #g = BipolarOutrankingDigraph(t,Normalized=True)
     limitingQuantiles = len(t.actions) // 2
     #limitingQuantiles = 100
@@ -1336,12 +1336,12 @@ if __name__ == "__main__":
     qsrbc.showSorting()
     #qsrbc.computeQsRbcRanking(Debug=True)
     qsrbc.showQsRbcRanking(DescendingOrder=True)
-    #qsrbc.exportGraphViz()
+    qsrbc.exportGraphViz(graphType="pdf")
     #qsrbc.showOrderedRelationTable()
     t0=time()
     qsrbcwt = QsRbcWeakOrderingWithThreading(t,limitingQuantiles,
                                              cores=8,
-                                             Debug=True)
+                                             Debug=False)
     t2 = time()-t0
     qsrbcwt.showSorting()
     qsrbcwt.showQsRbcRanking(DescendingOrder=False)
