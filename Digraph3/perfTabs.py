@@ -287,7 +287,8 @@ class PerformanceTableau(object):
                 self.thresholds = argDict['threshold']
                 self.criteria = {}
                 for g in argDict['criteria']:
-                    self.criteria[g] = {'weight':Decimal(str(self.weightset[g])), 'thresholds': self.thresholds[g]}
+                    self.criteria[g] = {'weight':Decimal(str(self.weightset[g])),
+                                        'thresholds': self.thresholds[g]}
                     
                 
             except:
@@ -2179,7 +2180,40 @@ class PerformanceTableau(object):
                     
         return normEvaluation
 
+#-----------------------
+class PartialPerformanceTableau(PerformanceTableau):
+    """
+    Constructor for partial performance tableaux.
+    """
+    def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None):
+        from copy import deepcopy
+        
+        self.name = 'partial-'+inPerfTab.name
 
+        if actionsSubset != None:
+            self.actions = {}
+            for x in actionsSubset:
+                self.actions[x] = deepcopy(inPerfTab.actions[x])
+        else:
+            self.actions = deepcopy(inPerfTab.actions)
+
+        if criteriaSubset != None:
+            self.criteria = {}
+            for g in criteriaSubset:
+                self.criteria[g] = deepcopy(inPerfTab.criteria[g])
+        else:
+            self.criteria = deepcopy(inPerfTab.criteria)
+
+        self.weightPreorder = self.computeWeightPreorder()
+
+        self.evaluation = {}
+        actionsKeys = [x for x in self.actions]
+        criteriaKeys = [g for g in self.criteria]
+        for g in criteriaKeys:
+            self.evaluation[g] = {}
+            for x in actionsKeys:
+                self.evaluation[g][x] = deepcopy(inPerfTab.evaluation[g][x])
+                                    
 # ----------------------
 class NormalizedPerformanceTableau(PerformanceTableau):
     """
@@ -4945,24 +4979,30 @@ if __name__ == "__main__":
 ##                                   weightDistribution='equiobjectives',
 ##                                   integerWeights=True,
 ##                                   Debug=False)
-    t = RandomCoalitionsPerformanceTableau(numberOfActions=21,
-                                           numberOfCriteria=13,
+    t = RandomCoalitionsPerformanceTableau(numberOfActions=10,
+                                           numberOfCriteria=5,
                                            Coalitions=False,
                                            RandomCoalitions=True,
                                            weightDistribution="equicoalitions")
-    ## t = PerformanceTableau('test')
-    t.saveXMCDA2('test',servingD3=False)
-    t.showCriteria(IntegerWeights=True)
-    print(t.computeQuantiles(Debug=False))
-    t.showQuantileSort()
-    g = BipolarOutrankingDigraph(t)
-    s = sortingDigraphs.SortingDigraph(g)
-    s.showSorting()
-    g.computeRankingByChoosing(CoDual=False)
-    g.showRankingByChoosing()
-    prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
-    prg.showWeakOrder()
-    print(g.computeOrdinalCorrelation(prg))
+    t.showAll()
+    pt1 = PartialPerformanceTableau(t)
+    pt1.showAll()
+    pt2 = PartialPerformanceTableau(t,actionsSubset=['a01','a02'],criteriaSubset=['g01','g03'])
+    pt2.showAll()
+    
+##    ## t = PerformanceTableau('test')
+##    t.saveXMCDA2('test',servingD3=False)
+##    t.showCriteria(IntegerWeights=True)
+##    print(t.computeQuantiles(Debug=False))
+##    t.showQuantileSort()
+##    g = BipolarOutrankingDigraph(t)
+##    s = sortingDigraphs.SortingDigraph(g)
+##    s.showSorting()
+##    g.computeRankingByChoosing(CoDual=False)
+##    g.showRankingByChoosing()
+##    prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
+##    prg.showWeakOrder()
+##    print(g.computeOrdinalCorrelation(prg))
      
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
