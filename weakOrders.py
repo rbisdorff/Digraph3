@@ -1109,24 +1109,22 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
 ##################
 
 def _jobTask(categID):
+    
     from pickle import dumps, loads, load
     from copy import deepcopy
+    from outrankingDigraphs import BipolarOutrankingDigraph
     print("Starting working on category %d" % (categID), end=" ")
-    fi = open('dumpQs.py','rb')
-    digraph = loads(fi.read())
-    fi.close()
-    fiName = 'catContent-'+str(categID)+'.py'
+    fiName = 'partialPerfTab-'+str(categID)+'.py'
     fi = open(fiName,'rb')
-    catContent = loads(fi.read())
+    pt = loads(fi.read())
+    fi.close()
+    digraph = BipolarOutrankingDigraph(pt)
+    catContent = [x for x in digraph.actions]
     nc = len(catContent)
     print(nc)
-    fi.close()
-    #print(categID,catContent)
+    print(catContent)
     if nc > 0:
         currActions = list(catContent)
-        for x in currActions:
-            for y in currActions:
-                digraph.relation[x][y] = digraph.relationOrig[x][y]
         catCRbc = digraph.computeRankingByChoosing(currActions)
         #print(categID,catCRbc)
         catRbc = deepcopy(catCRbc['result'])
@@ -1170,6 +1168,8 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
         
         from copy import deepcopy
         from sortingDigraphs import QuantilesSortingDigraph
+        from multiprocessing import Pool, cpu_count
+
         # import the performance tableau
         if argPerfTab == None:
             perfTab = RandomPerformanceTableau(numberOfActions=10,
@@ -1179,18 +1179,27 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
 
         if limitingQuantiles == None:
             limitingQuantiles = len(perfTab.actions) // 2
-            
-        qs = QuantilesSortingDigraph(argPerfTab,
-                     limitingQuantiles=limitingQuantiles,
-                     LowerClosed=LowerClosed,
-                     PrefThresholds=PrefThresholds,
-                     hasNoVeto=hasNoVeto,
-                     minValuation=minValuation,
-                     maxValuation=maxValuation,
-                     outrankingType = outrankingType,
-                     CompleteOutranking = True,                
-                     Threading=False,
-                     Debug=False)
+
+        if Threading and cpu_count() > 2:    
+            qs = QuantilesSortingDigraph(perfTab,
+                         limitingQuantiles=limitingQuantiles,
+                         LowerClosed=LowerClosed,
+                         PrefThresholds=PrefThresholds,
+                         hasNoVeto=hasNoVeto,
+                         minValuation=minValuation,
+                         maxValuation=maxValuation,
+                         outrankingType = outrankingType,
+                         CompleteOutranking = False)                
+        else:
+            qs = QuantilesSortingDigraph(perfTab,
+                         limitingQuantiles=limitingQuantiles,
+                         LowerClosed=LowerClosed,
+                         PrefThresholds=PrefThresholds,
+                         hasNoVeto=hasNoVeto,
+                         minValuation=minValuation,
+                         maxValuation=maxValuation,
+                         outrankingType = outrankingType,
+                         CompleteOutranking = True)
         
         catContent = {}
         weakOrdering = qs.computeWeakOrder()
@@ -1204,8 +1213,7 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
 
         catRelation = {}
         catRbc = {}
-        from multiprocessing import Pool, cpu_count
-        if Threading:
+        if Threading and cpu_count() > 2:
             from pickle import dumps, loads, load
             ###
             if cores == None:
@@ -1220,34 +1228,16 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
             with TemporaryDirectory() as tempDirName:
                 cwd = getcwd()
                 chdir(tempDirName)
-                qsFileName = 'dumpQs.py'
-                if Debug:
-                    print('temDirName, qsFileName', tempDirName,qsFileName)
-                fo = open(qsFileName,'wb')
-                qsDp = dumps(qs,-1)
-                fo.write(qsDp)
-                fo.close()
                 filledCategKeys = []
                 for c in range(1,nwo+1):
                     if len(catContent[c]) > 0:
                         filledCategKeys.append(int(c))
-                        foName = 'catContent-'+str(c)+'.py'
+                        pt = PartialPerformanceTableau(perfTab,actionsSubset=catContent[c])
+                        foName = 'partialPerfTab-'+str(c)+'.py'
                         fo = open(foName,'wb')
-                        spa = dumps(catContent[c],-1)
-                        fo.write(spa)
+                        ptDp = dumps(pt,-1)
+                        fo.write(ptDp)
                         fo.close()
-##                    elif len(catContent[c]) > 0:
-##                        currActions = list(catContent[c])
-##                        for x in currActions:
-##                            for y in currActions:
-##                                qs.relation[x][y] = qs.relationOrig[x][y]
-##                        catCRbc = qs.computeRankingByChoosing(currActions)
-##                        catRbc[c] = deepcopy(catCRbc['result'])
-##                        currActions = list(catContent[c])
-##                        catRelation[c] = qs.computeRankingByChoosingRelation(\
-##                                        actionsSubset=currActions,\
-##                                        rankingByChoosing=catCRbc['result'],\
-##                                        Debug=False)
 
                 print(filledCategKeys)
 
@@ -1256,8 +1246,7 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                         print(res)
                 
                 print('Finished all threads')
-##                catRelation = {}
-##                catRbc = {}
+
                 for c in range(1,nwo+1):
                     if len(catContent[c]) > 0:
                         fiName = 'splitCatRelation-'+str(c)+'.py'
@@ -1272,8 +1261,7 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                 chdir(cwd)
                   
         else:
-##            catRelation = {}
-##            catRbc = {}
+            ## without threading
             for c in range(1,nwo+1):
                 if Debug:
                     print(c, len(catContent[c]))
@@ -1305,7 +1293,10 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
         self.profiles = deepcopy(qs.profiles)
         self.valuationdomain = deepcopy(qs.valuationdomain)
         self.catRbc = deepcopy(catRbc)
-        self.relationOrig = deepcopy(qs.relationOrig)
+        try:
+            self.relationOrig = deepcopy(qs.relationOrig)
+        except:
+            pass
         self.relation = deepcopy(qsRelation)
         self._constructRelation()
         self.gamma = self.gammaSets()
@@ -1322,10 +1313,10 @@ if __name__ == "__main__":
     from weakOrders import *
     from time import time
 
-##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-##                                 numberOfActions=50)
-##    t.saveXMCDA2('test')
-    t = XMCDA2PerformanceTableau('uniSorting')
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                 numberOfActions=50)
+    t.saveXMCDA2('test')
+    #t = XMCDA2PerformanceTableau('uniSorting')
     #g = BipolarOutrankingDigraph(t,Normalized=True)
     limitingQuantiles = len(t.actions) // 2
     #limitingQuantiles = 100
@@ -1341,6 +1332,7 @@ if __name__ == "__main__":
     t0=time()
     qsrbcwt = QsRbcWeakOrderingWithThreading(t,limitingQuantiles,
                                              cores=8,
+                                             Threading=True,
                                              Debug=False)
     t2 = time()-t0
     qsrbcwt.showSorting()

@@ -4973,7 +4973,6 @@ if __name__ == "__main__":
 
     ## t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
-    ## print t.computeNormalizedDiffEvaluations(lowValue=0.0,highValue=100.0,withOutput=True,Debug=False)
 ##    t = RandomCBPerformanceTableau(numberOfCriteria=13,
 ##                                   numberOfActions=20,
 ##                                   weightDistribution='equiobjectives',
