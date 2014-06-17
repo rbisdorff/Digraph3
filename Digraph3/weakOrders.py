@@ -884,8 +884,9 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
                      CompleteOutranking = True,
                      Threading=False,
                      Debug=False)
+
         catContent = {}
-        weakOrdering = qs.computeWeakOrder()
+        weakOrdering = QsRbcWeakOrdering.computeWeakOrder(qs)
         nwo = len(weakOrdering)
         for i in range(nwo):
             catContent[i+1] = weakOrdering[i]
@@ -1169,6 +1170,7 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
         from copy import deepcopy
         from sortingDigraphs import QuantilesSortingDigraph
         from multiprocessing import Pool, cpu_count
+        from time import time
 
         # import the performance tableau
         if argPerfTab == None:
@@ -1179,7 +1181,8 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
 
         if limitingQuantiles == None:
             limitingQuantiles = len(perfTab.actions) // 2
-
+        print('Computing the %d-quantiles sorting digraph ...')
+        t0 = time()
         if Threading and cpu_count() > 2:    
             qs = QuantilesSortingDigraph(perfTab,
                          limitingQuantiles=limitingQuantiles,
@@ -1200,11 +1203,18 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                          maxValuation=maxValuation,
                          outrankingType = outrankingType,
                          CompleteOutranking = True)
-
+        print('execution time: %.4f' % (time() - t0))
+        
         Max = qs.valuationdomain['max']
         Med = qs.valuationdomain['med']
         catContent = {}
-        weakOrdering = qs.computeWeakOrder()
+##        weakOrdering = qs.computeWeakOrder()
+##        nwo = len(weakOrdering)
+##        for i in range(nwo):
+##            catContent[i+1] = weakOrdering[i]
+##            if Debug:
+##                print(i+1,weakOrdering[i])        
+        weakOrdering = QsRbcWeakOrdering.computeWeakOrder(qs)
         nwo = len(weakOrdering)
         for i in range(nwo):
             catContent[i+1] = weakOrdering[i]
@@ -1231,7 +1241,9 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                 cwd = getcwd()
                 chdir(tempDirName)
                 filledCategKeys = []
+                print('Preparing the thread data ...')
                 for c in range(1,nwo+1):
+                    print('%d/%d' %(c,nwo))
                     nc = len(catContent[c])
                     if nc > 1:
                         filledCategKeys.append(int(c))
@@ -1342,7 +1354,6 @@ if __name__ == "__main__":
     t1 = time()-t0
     qsrbc.showSorting()
     #qsrbc.computeQsRbcRanking(Debug=True)
-    qsrbc.showQsRbcRanking(DescendingOrder=True)
     qsrbc.exportGraphViz(graphType="pdf")
     #qsrbc.showOrderedRelationTable()
     t0=time()
@@ -1352,7 +1363,8 @@ if __name__ == "__main__":
                                              Debug=True)
     t2 = time()-t0
     qsrbcwt.showSorting()
-    qsrbcwt.showQsRbcRanking(DescendingOrder=False)
+    qsrbc.showQsRbcRanking(DescendingOrder=True)
+    qsrbcwt.showQsRbcRanking(DescendingOrder=True)
     print('qsrbc',t1,'qsrbcwt',t2)
     
 ##    actionsCategories = {}
