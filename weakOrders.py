@@ -1246,7 +1246,7 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                     print('%d/%d %d' %(c,nwo,nc))
                     if nc > 1:
                         filledCategKeys.append(int(c))
-                        pt = PartialPerformanceTableau(perfTab,actionsSubset=catContent[c])
+                        pt = PartialPerformanceTableau(perfTab,actionsSubset=catContent[c])                     
                         foName = 'partialPerfTab-'+str(c)+'.py'
                         fo = open(foName,'wb')
                         ptDp = dumps(pt,-1)
