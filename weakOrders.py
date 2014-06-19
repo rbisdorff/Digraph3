@@ -1123,8 +1123,8 @@ def _jobTask(categID):
     from pickle import dumps, loads, load
     from copy import deepcopy
     from outrankingDigraphs import BipolarOutrankingDigraph
-    from linearOrders import RankedPairsOrder
-    maxCatContent = 50
+    from linearOrders import RankedPairsOrder, KohlerOrder
+    maxCatContent = 10
     print("Starting working on category %d" % (categID), end=" ")
     fiName = 'partialPerfTab-'+str(categID)+'.py'
     fi = open(fiName,'rb')
@@ -1141,23 +1141,27 @@ def _jobTask(categID):
         currActions = list(catContent)
         try:
             catCRbc = digraph.computeRankingByChoosing()
-            #print(categID,catCRbc)
-            catRbc = deepcopy(catCRbc['result'])
-            currActions = list(catContent)
-            catRelation = digraph.computeRankingByChoosingRelation(\
-                            #actionsSubset=currActions,\
-                            rankingByChoosing=catCRbc['result'],\
-                            Debug=False)
         except:
-            rp = RankedPairsOrder(digraph)
-            catRbc = rp.computeRankingByChoosing()
-            catRelation = rp.computeRankingByChoosingRelation()
-    
-    else:
-        rp = RankedPairsOrder(digraph)
-        catRbc = rp.computeRankingByChoosing()
-        catRelation = rp.computeRankingByChoosingRelation()
+##            rp = RankedPairsOrder(digraph)
+##            catRbc = rp.computeRankingByChoosing()
+            ko = KohlerOrder(digraph)
+            catCRbc = ko.computeRankingByChoosing()
         
+    else:
+        print('==>>> Ranked Pairs')
+##        rp = RankedPairsOrder(digraph)
+##        catCRbc = rp.computeRankingByChoosing()
+        ko = KohlerOrder(digraph)
+        catCRbc = ko.computeRankingByChoosing()
+
+    catRbc = deepcopy(catCRbc['result'])
+    currActions = list(catContent)
+    catRelation = digraph.computeRankingByChoosingRelation(\
+                        actionsSubset=currActions,\
+                        rankingByChoosing=catRbc,\
+                        Debug=False)
+    
+    #print(catRbc,catRelation)
     splitCatRelation = [catRbc,catRelation]
 
     foName = 'splitCatRelation-'+str(categID)+'.py'
@@ -1427,9 +1431,8 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
             if Debug:
                 print(ordering,n)
             for i in range(n):
-                if ordering[i][0][1] != []:
-                    ranking.append(ordering[i][0][1])
-                    remainingActions = remainingActions - set(ordering[i][0][1])
+                ranking.append(ordering[i][0][1])
+                remainingActions = remainingActions - set(ordering[i][0][1])
             for i in range(n-1,-1,-1):
                 restOrdering = set(ordering[i][1][1]) & remainingActions
                 if restOrdering != set():
@@ -1546,11 +1549,11 @@ if __name__ == "__main__":
     from weakOrders import *
     from time import time
 
-    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=50)
-    t.saveXMCDA2('test')
+##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+##                                numberOfActions=100)
+##    t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
-    #g = BipolarOutrankingDigraph(t,Normalized=True)
+    g = BipolarOutrankingDigraph(t,Normalized=True)
     limitingQuantiles = len(t.actions) // 2
     #limitingQuantiles = 100
     #qs = QuantilesSortingDigraph(t,g.order)
@@ -1558,7 +1561,7 @@ if __name__ == "__main__":
     qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,Threading=False,Debug=False)
     t1 = time()-t0
     qsrbc.showSorting()
-    #qsrbc.computeQsRbcRanking(Debug=True)
+    qsrbc.computeQsRbcRanking(Debug=True)
     qsrbc.exportGraphViz(graphType="pdf")
     #qsrbc.showOrderedRelationTable()
     t0=time()
@@ -1571,6 +1574,13 @@ if __name__ == "__main__":
     qsrbc.showQsRbcRanking(DescendingOrder=True)
     qsrbcwt.showQsRbcRanking(DescendingOrder=True)
     print('qsrbc',t1,'qsrbcwt',t2)
+    corr = g.computeOrdinalCorrelation(qsrbc)
+    print('qsrbc',corr['correlation'],\
+          corr['correlation']*corr['determination'])
+    corr = g.computeOrdinalCorrelation(qsrbcwt)
+    print('qsrbcwt', corr['correlation'],\
+          corr['correlation']*corr['determination'])
+    
     
 ##    actionsCategories = {}
 ##    
