@@ -1374,7 +1374,7 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
         Instantiates the weak order by taking the codual of the
         preoder obtained from the actions categories intervals !
         """
-        preOrdering = self.computeQsRbcRanking(Debug=False)
+        preOrdering = self.computeWeakOrder(Debug=False)
         relation = self.computePreorderRelation(preOrdering)
         actionsList = [x for x in self.actions]
         Max = self.valuationdomain['max']
@@ -1427,8 +1427,9 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
             if Debug:
                 print(ordering,n)
             for i in range(n):
-                ranking.append(ordering[i][0][1])
-                remainingActions = remainingActions - set(ordering[i][0][1])
+                if ordering[i][0][1] != []:
+                    ranking.append(ordering[i][0][1])
+                    remainingActions = remainingActions - set(ordering[i][0][1])
             for i in range(n-1,-1,-1):
                 restOrdering = set(ordering[i][1][1]) & remainingActions
                 if restOrdering != set():
