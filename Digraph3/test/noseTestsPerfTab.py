@@ -117,7 +117,7 @@ def testPerformanceDifferencesPerCriteria():
     print('*==>> verifying  performance differences per criteria ---*')
     g = RandomBipolarOutrankingDigraph()
     g.showPerformanceTableau()
-    g.computePerformanceDifferences(comments=True)
+    g.computePerformanceDifferences(Comments=True)
     
 def testCBPerformanceTableau(): 
     print('*==>> random CB Performance Tableaux ------------*')
