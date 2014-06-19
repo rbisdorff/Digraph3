@@ -1115,16 +1115,20 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
 
 def _jobTask(categID):
     """
-    task for threads in QsRbcRanking
-    !!! Parameter: maximum allowed local catContent for rbc is set to 50,
-        Above this cardinality, Tideman's ranked pairs heuristics is used
+    Task definition for multiprocessing threaded jobs in QsRbcRanking.
+    
+    .. note::
+    
+          Parameter maxContent: maximum allowed local catContent for rbc
+          is set to 50. Above this cardinality,
+          Tideman's ranked pairs heuristics is used.
     """
     
     from pickle import dumps, loads, load
     from copy import deepcopy
     from outrankingDigraphs import BipolarOutrankingDigraph
     from linearOrders import RankedPairsOrder, KohlerOrder
-    maxCatContent = 10
+    maxCatContent = 50
     print("Starting working on category %d" % (categID), end=" ")
     fiName = 'partialPerfTab-'+str(categID)+'.py'
     fi = open(fiName,'rb')
