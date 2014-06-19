@@ -1110,33 +1110,56 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
 ##################
 
 def _jobTask(categID):
+    """
+    task for threads in QsRbcRanking
+    !!! Parameter: maximum allowed local catContent is set to 50
+    """
     
     from pickle import dumps, loads, load
     from copy import deepcopy
     from outrankingDigraphs import BipolarOutrankingDigraph
+    maxCatContent = 50
     print("Starting working on category %d" % (categID), end=" ")
     fiName = 'partialPerfTab-'+str(categID)+'.py'
     fi = open(fiName,'rb')
     pt = loads(fi.read())
     fi.close()
     digraph = BipolarOutrankingDigraph(pt,Normalized=True)
+    Max = digraph.valuationdomain['max']
+    Med = digraph.valuationdomain['med']
     catContent = [x for x in digraph.actions]
     nc = len(catContent)
-    print(nc)
+    print(nc,maxCatContent)
     #print(catContent)
-    if nc > 0:
+    if nc < maxCatContent:
         currActions = list(catContent)
-        catCRbc = digraph.computeRankingByChoosing(currActions)
-        #print(categID,catCRbc)
-        catRbc = deepcopy(catCRbc['result'])
-        currActions = list(catContent)
-        catRelation = digraph.computeRankingByChoosingRelation(\
-                        actionsSubset=currActions,\
-                        rankingByChoosing=catCRbc['result'],\
-                        Debug=False)
-        splitCatRelation = [catRbc,catRelation]
+        try:
+            catCRbc = digraph.computeRankingByChoosing(currActions)
+            #print(categID,catCRbc)
+            catRbc = deepcopy(catCRbc['result'])
+            currActions = list(catContent)
+            catRelation = digraph.computeRankingByChoosingRelation(\
+                            actionsSubset=currActions,\
+                            rankingByChoosing=catCRbc['result'],\
+                            Debug=False)
+        except:
+            catRbc = [((Max,catContent),(Max,catContent))]
+            catRelation = {}
+            for x in catContent:
+                catRelation[x] = {}
+                for y in catContent:
+                    catRelation[x][y] = Med
+    
     else:
-        splitCatRelation = [[],[]]
+        catRbc = [((Max,catContent),(Max,catContent))]
+        catRelation = {}
+        for x in catContent:
+            catRelation[x] = {}
+            for y in catContent:
+                catRelation[x][y] = Med
+        
+    splitCatRelation = [catRbc,catRelation]
+
     foName = 'splitCatRelation-'+str(categID)+'.py'
     fo = open(foName,'wb')                                            
     fo.write(dumps(splitCatRelation,-1))
@@ -1193,6 +1216,7 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                          minValuation=minValuation,
                          maxValuation=maxValuation,
                          outrankingType = outrankingType,
+                         Threading=True,
                          CompleteOutranking = False)                
         else:
             qs = QuantilesSortingDigraph(perfTab,
@@ -1280,8 +1304,8 @@ class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
                         if Debug:
                             print('singleton category %d : %d' % (c,nc))
                             print(catContent[c])
+                        catRbc[c] = [((Max,catContent[c]),(Max,catContent[c]))]
                         for x in catContent[c]:
-                            catRbc[c] = [((Max,[x]),(Max,[x]))]
                             catRelation[c] = {str(x): {str(x): Med}}
                         if Debug:
                             print(c,'catRbc',catRbc[c])

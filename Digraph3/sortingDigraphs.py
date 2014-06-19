@@ -323,7 +323,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             from pickle import dumps, loads, load
             from multiprocessing import Process, Lock,\
                                         active_children, cpu_count
-            Debug=True
+            #Debug=True
             class myThread(Process):
                 def __init__(self, threadID,\
                              InitialSplit, tempDirName,\
