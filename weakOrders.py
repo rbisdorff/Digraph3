@@ -1112,12 +1112,14 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
 def _jobTask(categID):
     """
     task for threads in QsRbcRanking
-    !!! Parameter: maximum allowed local catContent is set to 50
+    !!! Parameter: maximum allowed local catContent for rbc is set to 50,
+        Above this cardinality, Tideman's ranked pairs heuristics is used
     """
     
     from pickle import dumps, loads, load
     from copy import deepcopy
     from outrankingDigraphs import BipolarOutrankingDigraph
+    from linearOrders import RankedPairsOrder
     maxCatContent = 50
     print("Starting working on category %d" % (categID), end=" ")
     fiName = 'partialPerfTab-'+str(categID)+'.py'
@@ -1131,32 +1133,37 @@ def _jobTask(categID):
     nc = len(catContent)
     print(nc,maxCatContent)
     #print(catContent)
-    if nc < maxCatContent:
+    if nc <= maxCatContent:
         currActions = list(catContent)
         try:
-            catCRbc = digraph.computeRankingByChoosing(currActions)
+            catCRbc = digraph.computeRankingByChoosing()
             #print(categID,catCRbc)
             catRbc = deepcopy(catCRbc['result'])
             currActions = list(catContent)
             catRelation = digraph.computeRankingByChoosingRelation(\
-                            actionsSubset=currActions,\
+                            #actionsSubset=currActions,\
                             rankingByChoosing=catCRbc['result'],\
                             Debug=False)
         except:
-            catRbc = [((Max,catContent),(Max,catContent))]
-            catRelation = {}
-            for x in catContent:
-                catRelation[x] = {}
-                for y in catContent:
-                    catRelation[x][y] = Med
+            rp = RankedPairsOrder(digraph)
+            catRbc = rp.computeRankingByChoosing()
+            catRelation = rp.computeRankingByChoosingRelation()
+##            catRbc = [((Max,catContent),(Max,catContent))]
+##            catRelation = {}
+##            for x in catContent:
+##                catRelation[x] = {}
+##                for y in catContent:
+##                    catRelation[x][y] = Med
     
     else:
-        catRbc = [((Max,catContent),(Max,catContent))]
-        catRelation = {}
-        for x in catContent:
-            catRelation[x] = {}
-            for y in catContent:
-                catRelation[x][y] = Med
+        rp = RankedPairsOrder(digraph)
+        catRbc = rp.computeRankingByChoosing()
+        catRelation = rp.computeRankingByChoosingRelation()
+##        catRelation = {}
+##        for x in catContent:
+##            catRelation[x] = {}
+##            for y in catContent:
+##                catRelation[x][y] = Med
         
     splitCatRelation = [catRbc,catRelation]
 
