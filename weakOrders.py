@@ -835,20 +835,362 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
                             graphSize=graphSize,\
                             fontSize=fontSize)
 
-from sortingDigraphs import SortingDigraph                        
+##class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
+##    """
+##    Refinig a quantiles sorting result
+##    with a ranking-by-choosing of the local quantile equivalence classes
+##    of less than 50 items.
+##    For larger quantile equivalence classes, Tideman's ranked pairs heuristic
+##    is used insted.
+##
+##    *Parameter*:
+##          * limitingQuantiles are set by default to len(actions)//2
+##            for outranking digraph orders below 200.
+##            For higher orders, centiles are used by default.
+##
+##    .. note::
+##
+##          The weakording is instantiated as strict ordering!
+##          
+##    """
+##    def __init__(self,
+##                 argPerfTab=None,
+##                 limitingQuantiles=None,
+##                 LowerClosed=True,
+##                 PrefThresholds=True,
+##                 hasNoVeto=False,
+##                 minValuation=-1.0,
+##                 maxValuation=1.0,
+##                 outrankingType = "bipolar",
+##                 Threading=False,
+##                 Debug=False):
+##        
+##        from copy import deepcopy
+##        from sortingDigraphs import QuantilesSortingDigraph
+##        # import the performance tableau
+##        if argPerfTab == None:
+##            perfTab = RandomPerformanceTableau(numberOfActions=10,
+##                                               numberOfCriteria=13)
+##        else:
+##            perfTab = argPerfTab
+##
+##        if limitingQuantiles == None:
+##            limitingQuantiles = len(perfTab.actions) // 2
+##            
+##        qs = QuantilesSortingDigraph(argPerfTab,
+##                     limitingQuantiles=limitingQuantiles,
+##                     LowerClosed=LowerClosed,
+##                     PrefThresholds=PrefThresholds,
+##                     hasNoVeto=hasNoVeto,
+##                     minValuation=minValuation,
+##                     maxValuation=maxValuation,
+##                     outrankingType = outrankingType,
+##                     CompleteOutranking = True,
+##                     Threading=False,
+##                     Debug=False)
+##
+##        catContent = {}
+##        weakOrdering = QsRbcWeakOrdering.computeWeakOrder(qs)
+##        nwo = len(weakOrdering)
+##        for i in range(nwo):
+##            catContent[i+1] = weakOrdering[i]
+##            if Debug:
+##                print(i+1,weakOrdering[i])
+##        #catContent = qs.computeCategoryContents()
+##        
+##
+##        qsRelation = deepcopy(qs.relation) 
+##        catRelation = {}
+##        catRbc = {}
+##        for c in range(1,nwo+1):
+##            if Debug:
+##                print(c, len(catContent[c]))
+##            if len(catContent[c]) > 0:
+##                currActions = list(catContent[c])
+##                for x in currActions:
+##                    for y in currActions:
+##                        qs.relation[x][y] = qs.relationOrig[x][y]
+##                catCRbc = qs.computeRankingByChoosing(currActions)
+##                if Debug:
+##                    print(c,catCRbc)
+##                catRbc[c] = deepcopy(catCRbc['result'])
+##                currActions = list(catContent[c])
+##                catRelation[c] = qs.computeRankingByChoosingRelation(\
+##                    actionsSubset=currActions,\
+##                    rankingByChoosing=catCRbc['result'],\
+##                    Debug=False)
+##        qs.catRbc = deepcopy(catRbc)
+##        qs.relation = deepcopy(qsRelation)
+##    
+####        for i in range(nwo):
+####            c = i+1
+####            for x in catContent[c]:
+####                for y in catContent[c]:
+####                    qs.relation[x][y] = catRelation[c][x][y]
+##
+##        self.name = 'qsrbc-'+qs.name
+##        self.actions = deepcopy(qs.actions)
+##        self.order = len(self.actions)
+##        self.criteria = deepcopy(qs.criteria)
+##        self.evaluation = deepcopy(qs.evaluation)
+##        self.categories = deepcopy(qs.categories)
+##        self.criteriaCategoryLimits = deepcopy(qs.criteriaCategoryLimits)
+##        self.profiles = deepcopy(qs.profiles)
+##        self.valuationdomain = deepcopy(qs.valuationdomain)
+##        self.catRbc = deepcopy(qs.catRbc)
+##        self.relationOrig = deepcopy(qs.relationOrig)
+##        self.relation = deepcopy(qs.relation)
+##        self._constructRelation()
+##        self.gamma = self.gammaSets()
+##        self.notGamma = self.notGammaSets()        
+##
+##    def _constructRelation(self):
+##        """
+##        Instantiates the weak order by taking the codual of the
+##        preoder obtained from the actions categories intervals !
+##        """
+##        preOrdering = self.computeQsRbcRanking(Debug=False)
+##        relation = self.computePreorderRelation(preOrdering)
+##        actionsList = [x for x in self.actions]
+##        Max = self.valuationdomain['max']
+##        Min = self.valuationdomain['min']
+##        for x in actionsList:
+##            for y in actionsList:
+##                #self.relation[x][y] = relation[x][y]
+##                self.relation[x][y] = Max - relation[y][x] + Min 
+##
+##    def computeWeakOrder(self,DescendingOrder=True,Comments=False,Debug=False):
+##        """
+##        specialisation of the showWeakOrder method
+##        """
+##        if Comments:
+##            Debug=True
+##        actionsCategories = {}
+##        for x in self.actions:
+##            a,lowCateg,highCateg,credibility =\
+##                     self.showActionCategories(x,Comments=Debug)
+##            try:
+##                actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+##            except:
+##                actionsCategories[(int(highCateg),int(lowCateg))] = [a]
+##        actionsCategIntervals = []
+##        for interval in actionsCategories:
+##            actionsCategIntervals.append([interval, actionsCategories[interval]])
+##        actionsCategIntervals.sort(reverse=DescendingOrder)
+##        weakOrdering = []
+##        for item in actionsCategIntervals:
+##            if Debug:
+##                print(item)
+##            weakOrdering.append(item[1])
+##        return weakOrdering
+##
+##    def computeQsRbcRanking(self,DescendingOrder=True,
+##                            Comments=False,
+##                            Debug=False):
+##        """                                                                     
+##        Render the ranking result of QsRbcWeakOrdering constructor                              
+##        """
+##        if Debug:
+##            Comments=True
+##        rbcResult = [(i,self.catRbc[i]) for i in self.catRbc]
+##        rbcResult.sort()
+##        ranking = []
+##        remainingActions = set([x for x in self.actions])
+##        for it in rbcResult:
+##            ordering = it[1]
+##            n = len(ordering)
+##            if Debug:
+##                print(ordering,n)
+##            for i in range(n):
+##                ranking.append(ordering[i][0][1])
+##                remainingActions = remainingActions - set(ordering[i][0][1])
+##            for i in range(n-1,-1,-1):
+##                restOrdering = set(ordering[i][1][1]) & remainingActions
+##                if restOrdering != set():
+##                    ranking.append(list(restOrdering))
+##                    remainingActions = remainingActions - restOrdering
+##        rankcopy = list(ranking)
+##        for i in range(len(rankcopy)-1):
+##            if rankcopy[i] == rankcopy[i+1]:
+##                if Debug:
+##                    print('double',rankcopy[i])
+##                ranking.remove(rankcopy[i])
+##        if not DescendingOrder:
+##            ranking.reverse()
+##        if Comments:
+##            print(rankcopy)
+##            print(ranking)
+##        return ranking
+##            
+##    
+##    def showOrderedRelationTable(self,direction="decreasing",originalRelation=False):
+##        """
+##        Showing the relation table in decreasing (default) or increasing order.
+##        """
+##        if direction == "decreasing":
+##            DescendingOrder = True
+##        else:
+##            DescendingOrder = False
+##        weakOrdering = self.computeQsRbcRanking(DescendingOrder=DescendingOrder)
+##        actionsList = []
+##        for ch in weakOrdering:
+##            ch.sort()
+##            for x in ch:
+##                actionsList.append(x)
+##        if len(actionsList) != len(self.actions):
+##            print('Error: missing or double actions!')
+##        if originalRelation:
+##            showRelation = self.originalRelation
+##        else:
+##            showRelation = self.relation
+##            
+##        Digraph.showRelationTable(self,actionsSubset=actionsList,\
+##                                relation=showRelation,\
+##                                Sorted=False,\
+##                                ReflexiveTerms=False)
+##
+##    def showActionCategories(self,action,Debug=False,Comments=True):
+##        """
+##        Renders the union of categories in which the given action is sorted positively or null into.
+##        Returns a tuple : action, lowest category key, highest category key, membership credibility !
+##        """
+##        Med = self.valuationdomain['med']
+##        sorting = self.computeSortingCharacteristics(action=action,Comments=Debug)
+##        keys = []
+##        for c in self.orderedCategoryKeys():
+##            if sorting[action][c]['categoryMembership'] >= Med:
+##                if sorting[action][c]['lowLimit'] > Med:
+##                    lowLimit = sorting[action][c]['lowLimit']
+##                if sorting[action][c]['notHighLimit'] > Med:
+##                    notHighLimit = sorting[action][c]['notHighLimit']
+##                keys.append(c)
+##                if Debug:
+##                    print(action, c, sorting[action][c])
+##        n = len(keys)
+##        credibility = min(lowLimit,notHighLimit)
+##        if n == 0:
+##            return None
+##        elif n == 1:
+##            if Comments:
+##                print('%s in %s - %s with credibility: %.2f' % (action,\
+##                                     self.categories[keys[0]]['lowLimit'],\
+##                                     self.categories[keys[0]]['highLimit'],\
+##                                     credibility) )
+##            return action,\
+##                    keys[0],\
+##                    keys[0],\
+##                    credibility
+##        else:
+##            if Comments:
+##                print('%s in %s - %s with credibility: %.2f' % (action,\
+##                                     self.categories[keys[0]]['lowLimit'],\
+##                                     self.categories[keys[-1]]['highLimit'],\
+##                                     credibility) )
+##            return action,\
+##                    keys[0],\
+##                    keys[-1],\
+##                    credibility            
+##
+##    def showActionsSortingResult(self,actionSubset=None):
+##        """
+##        shows the quantiles sorting result all (default) of a subset of the decision actions.
+##        """
+##        if actionSubset == None:
+##            actions = [x for x in self.actions]
+##        else:
+##            actions = [x for x in actionSubset]
+##        actions.sort()
+##        print('Quantiles sorting result per decision action')
+##        for x in actions:
+##            self.showActionCategories(x)
+##
+##    def showQsRbcRanking(self,DescendingOrder=True):
+##        """
+##        show the ranking-by-sorting refinement of the quantiles sorting result
+##        """
+##        print(self.computeQsRbcRanking(DescendingOrder=DescendingOrder,
+##                                       Comments=False))
+
+##################
+
+def _jobTask(categID):
+    """
+    task for threads in QsRbcRanking
+    !!! Parameter: maximum allowed local catContent for rbc is set to 50,
+        Above this cardinality, Tideman's ranked pairs heuristics is used
+    """
+    
+    from pickle import dumps, loads, load
+    from copy import deepcopy
+    from outrankingDigraphs import BipolarOutrankingDigraph
+    from linearOrders import RankedPairsOrder
+    maxCatContent = 50
+    print("Starting working on category %d" % (categID), end=" ")
+    fiName = 'partialPerfTab-'+str(categID)+'.py'
+    fi = open(fiName,'rb')
+    pt = loads(fi.read())
+    fi.close()
+    digraph = BipolarOutrankingDigraph(pt,Normalized=True)
+    Max = digraph.valuationdomain['max']
+    Med = digraph.valuationdomain['med']
+    catContent = [x for x in digraph.actions]
+    nc = len(catContent)
+    print(nc,maxCatContent)
+    #print(catContent)
+    if nc <= maxCatContent:
+        currActions = list(catContent)
+        try:
+            catCRbc = digraph.computeRankingByChoosing()
+            #print(categID,catCRbc)
+            catRbc = deepcopy(catCRbc['result'])
+            currActions = list(catContent)
+            catRelation = digraph.computeRankingByChoosingRelation(\
+                            #actionsSubset=currActions,\
+                            rankingByChoosing=catCRbc['result'],\
+                            Debug=False)
+        except:
+            rp = RankedPairsOrder(digraph)
+            catRbc = rp.computeRankingByChoosing()
+            catRelation = rp.computeRankingByChoosingRelation()
+    
+    else:
+        rp = RankedPairsOrder(digraph)
+        catRbc = rp.computeRankingByChoosing()
+        catRelation = rp.computeRankingByChoosingRelation()
+        
+    splitCatRelation = [catRbc,catRelation]
+
+    foName = 'splitCatRelation-'+str(categID)+'.py'
+    fo = open(foName,'wb')                                            
+    fo.write(dumps(splitCatRelation,-1))
+    fo.close()
+    writestr = 'Finished category %d %d' % (categID,nc)
+    return writestr
+#####
+
+from sortingDigraphs import SortingDigraph                                               
 class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
     """
     Refinig a quantiles sorting result
-    with a local ranking-by-choosing of the category contents.
+    with a ranking-by-choosing of the local quantile equivalence classes
+    of less than 50 items.
+    For larger quantile equivalence classes, Tideman's ranked pairs heuristic
+    is used insted.
 
     *Parameter*:
           * limitingQuantiles are set by default to len(actions)//2
+            for outranking digraph orders below 200.
+            For higher orders, centiles are used by default.
+
+          * threading is on by default for cpu with more than 2 cores.
 
     .. note::
 
-          The weakording is instantiated as strict ordering!
+          The weakording is instantiated as strict ordering! And for larger orders
+          a consistent size of several Giga bytes cpu memory is required.
           
     """
+
     def __init__(self,
                  argPerfTab=None,
                  limitingQuantiles=None,
@@ -858,11 +1200,15 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
                  minValuation=-1.0,
                  maxValuation=1.0,
                  outrankingType = "bipolar",
-                 Threading=False,
+                 Threading=True,
+                 cores=None,
                  Debug=False):
         
         from copy import deepcopy
         from sortingDigraphs import QuantilesSortingDigraph
+        from multiprocessing import Pool, cpu_count
+        from time import time
+
         # import the performance tableau
         if argPerfTab == None:
             perfTab = RandomPerformanceTableau(numberOfActions=10,
@@ -870,59 +1216,139 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
         else:
             perfTab = argPerfTab
 
-        if limitingQuantiles == None:
-            limitingQuantiles = len(perfTab.actions) // 2
-            
-        qs = QuantilesSortingDigraph(argPerfTab,
-                     limitingQuantiles=limitingQuantiles,
-                     LowerClosed=LowerClosed,
-                     PrefThresholds=PrefThresholds,
-                     hasNoVeto=hasNoVeto,
-                     minValuation=minValuation,
-                     maxValuation=maxValuation,
-                     outrankingType = outrankingType,
-                     CompleteOutranking = True,
-                     Threading=False,
-                     Debug=False)
+        na = len(perfTab.actions)
 
+        if limitingQuantiles == None:
+            if na < 200:
+                limitingQuantiles = na // 2
+            else:
+                limitingQuantiles = 100
+                
+        print('Computing the %d-quantiles sorting digraph ...' % (limitingQuantiles))
+        t0 = time()
+        if Threading and cpu_count() > 2:    
+            qs = QuantilesSortingDigraph(perfTab,
+                         limitingQuantiles=limitingQuantiles,
+                         LowerClosed=LowerClosed,
+                         PrefThresholds=PrefThresholds,
+                         hasNoVeto=hasNoVeto,
+                         minValuation=minValuation,
+                         maxValuation=maxValuation,
+                         outrankingType = outrankingType,
+                         Threading=True,
+                         CompleteOutranking = False)                
+        else:
+            qs = QuantilesSortingDigraph(perfTab,
+                         limitingQuantiles=limitingQuantiles,
+                         LowerClosed=LowerClosed,
+                         PrefThresholds=PrefThresholds,
+                         hasNoVeto=hasNoVeto,
+                         minValuation=minValuation,
+                         maxValuation=maxValuation,
+                         outrankingType = outrankingType,
+                         CompleteOutranking = True)
+        print('execution time: %.4f' % (time() - t0))
+        
+        Max = qs.valuationdomain['max']
+        Med = qs.valuationdomain['med']
         catContent = {}
+##        weakOrdering = qs.computeWeakOrder()
+##        nwo = len(weakOrdering)
+##        for i in range(nwo):
+##            catContent[i+1] = weakOrdering[i]
+##            if Debug:
+##                print(i+1,weakOrdering[i])        
         weakOrdering = QsRbcWeakOrdering.computeWeakOrder(qs)
         nwo = len(weakOrdering)
         for i in range(nwo):
             catContent[i+1] = weakOrdering[i]
             if Debug:
-                print(i+1,weakOrdering[i])
-        #catContent = qs.computeCategoryContents()
-        
+                print(i+1,weakOrdering[i])        
 
-        qsRelation = deepcopy(qs.relation) 
+        qsRelation = deepcopy(qs.relation)
+
         catRelation = {}
         catRbc = {}
-        for c in range(1,nwo+1):
-            if Debug:
-                print(c, len(catContent[c]))
-            if len(catContent[c]) > 0:
-                currActions = list(catContent[c])
-                for x in currActions:
-                    for y in currActions:
-                        qs.relation[x][y] = qs.relationOrig[x][y]
-                catCRbc = qs.computeRankingByChoosing(currActions)
+        if Threading and cpu_count() > 2:
+            from pickle import dumps, loads, load
+            if cores == None:
+                cores = 8
+            Nproc = cpu_count()
+            if Nproc > cores:
+                Nproc = cores
+            from tempfile import TemporaryDirectory
+            from os import getcwd, chdir
+            with TemporaryDirectory() as tempDirName:
+                cwd = getcwd()
+                chdir(tempDirName)
+                filledCategKeys = []
+                print('Preparing the thread data ...')
+                t0 = time()
+                for c in range(1,nwo+1):
+                    nc = len(catContent[c])
+                    print('%d/%d %d' %(c,nwo,nc))
+                    if nc > 1:
+                        filledCategKeys.append(int(c))
+                        pt = PartialPerformanceTableau(perfTab,actionsSubset=catContent[c])                     
+                        foName = 'partialPerfTab-'+str(c)+'.py'
+                        fo = open(foName,'wb')
+                        ptDp = dumps(pt,-1)
+                        fo.write(ptDp)
+                        fo.close()
+                t1 = time()        
+                print(filledCategKeys)
+                print('%d of %d' % (len(filledCategKeys),nwo))
+                print('Execution time: %.4f sec.' % (t1-t0))
+                
+                print('Threading ... !')
+                t0 = time()
+                with Pool(processes=Nproc) as pool:
+                    for res in pool.imap_unordered(_jobTask,filledCategKeys):
+                        print(res)
+                t1 = time()
+                print('Finished all threads in %.4f sec.' % (t1-t0) )
+                for c in range(1,nwo+1):                    
+                    nc = len(catContent[c])
+                    if nc > 1:
+                        fiName = 'splitCatRelation-'+str(c)+'.py'
+                        fi = open(fiName,'rb')
+                        splitCatRelation = loads(fi.read())
+                        fi.close()
+                        if Debug:
+                            print(c,'catRbc',splitCatRelation[0])
+                            print(c,'catRelation',splitCatRelation[1])
+                        catRbc[c] = splitCatRelation[0]
+                        catRelation[c] = splitCatRelation[1]
+                    elif nc == 1:
+                        if Debug:
+                            print('singleton category %d : %d' % (c,nc))
+                            print(catContent[c])
+                        catRbc[c] = [((Max,catContent[c]),(Max,catContent[c]))]
+                        for x in catContent[c]:
+                            catRelation[c] = {str(x): {str(x): Med}}
+                        if Debug:
+                            print(c,'catRbc',catRbc[c])
+                            print(c,'catRelation',catRelation[c])               
+                chdir(cwd)                
+        else:
+            ## without threading
+            for c in range(1,nwo+1):
                 if Debug:
-                    print(c,catCRbc)
-                catRbc[c] = deepcopy(catCRbc['result'])
-                currActions = list(catContent[c])
-                catRelation[c] = qs.computeRankingByChoosingRelation(\
-                    actionsSubset=currActions,\
-                    rankingByChoosing=catCRbc['result'],\
-                    Debug=False)
-        qs.catRbc = deepcopy(catRbc)
-        qs.relation = deepcopy(qsRelation)
-    
-##        for i in range(nwo):
-##            c = i+1
-##            for x in catContent[c]:
-##                for y in catContent[c]:
-##                    qs.relation[x][y] = catRelation[c][x][y]
+                    print(c, len(catContent[c]))
+                if len(catContent[c]) > 0:
+                    currActions = list(catContent[c])
+                    for x in currActions:
+                        for y in currActions:
+                            qs.relation[x][y] = qs.relationOrig[x][y]
+                    catCRbc = qs.computeRankingByChoosing(currActions)
+                    if Debug:
+                        print(c,catCRbc)
+                    catRbc[c] = deepcopy(catCRbc['result'])
+                    currActions = list(catContent[c])
+                    catRelation[c] = qs.computeRankingByChoosingRelation(\
+                        actionsSubset=currActions,\
+                        rankingByChoosing=catCRbc['result'],\
+                        Debug=False)
 
         self.name = 'qsrbc-'+qs.name
         self.actions = deepcopy(qs.actions)
@@ -933,12 +1359,15 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
         self.criteriaCategoryLimits = deepcopy(qs.criteriaCategoryLimits)
         self.profiles = deepcopy(qs.profiles)
         self.valuationdomain = deepcopy(qs.valuationdomain)
-        self.catRbc = deepcopy(qs.catRbc)
-        self.relationOrig = deepcopy(qs.relationOrig)
-        self.relation = deepcopy(qs.relation)
+        self.catRbc = deepcopy(catRbc)
+        try:
+            self.relationOrig = deepcopy(qs.relationOrig)
+        except:
+            pass
+        self.relation = deepcopy(qsRelation)
         self._constructRelation()
         self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()        
+        self.notGamma = self.notGammaSets()
 
     def _constructRelation(self):
         """
@@ -1107,256 +1536,6 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
         print(self.computeQsRbcRanking(DescendingOrder=DescendingOrder,
                                        Comments=False))
 
-##################
-
-def _jobTask(categID):
-    """
-    task for threads in QsRbcRanking
-    !!! Parameter: maximum allowed local catContent for rbc is set to 50,
-        Above this cardinality, Tideman's ranked pairs heuristics is used
-    """
-    
-    from pickle import dumps, loads, load
-    from copy import deepcopy
-    from outrankingDigraphs import BipolarOutrankingDigraph
-    from linearOrders import RankedPairsOrder
-    maxCatContent = 50
-    print("Starting working on category %d" % (categID), end=" ")
-    fiName = 'partialPerfTab-'+str(categID)+'.py'
-    fi = open(fiName,'rb')
-    pt = loads(fi.read())
-    fi.close()
-    digraph = BipolarOutrankingDigraph(pt,Normalized=True)
-    Max = digraph.valuationdomain['max']
-    Med = digraph.valuationdomain['med']
-    catContent = [x for x in digraph.actions]
-    nc = len(catContent)
-    print(nc,maxCatContent)
-    #print(catContent)
-    if nc <= maxCatContent:
-        currActions = list(catContent)
-        try:
-            catCRbc = digraph.computeRankingByChoosing()
-            #print(categID,catCRbc)
-            catRbc = deepcopy(catCRbc['result'])
-            currActions = list(catContent)
-            catRelation = digraph.computeRankingByChoosingRelation(\
-                            #actionsSubset=currActions,\
-                            rankingByChoosing=catCRbc['result'],\
-                            Debug=False)
-        except:
-            rp = RankedPairsOrder(digraph)
-            catRbc = rp.computeRankingByChoosing()
-            catRelation = rp.computeRankingByChoosingRelation()
-##            catRbc = [((Max,catContent),(Max,catContent))]
-##            catRelation = {}
-##            for x in catContent:
-##                catRelation[x] = {}
-##                for y in catContent:
-##                    catRelation[x][y] = Med
-    
-    else:
-        rp = RankedPairsOrder(digraph)
-        catRbc = rp.computeRankingByChoosing()
-        catRelation = rp.computeRankingByChoosingRelation()
-##        catRelation = {}
-##        for x in catContent:
-##            catRelation[x] = {}
-##            for y in catContent:
-##                catRelation[x][y] = Med
-        
-    splitCatRelation = [catRbc,catRelation]
-
-    foName = 'splitCatRelation-'+str(categID)+'.py'
-    fo = open(foName,'wb')                                            
-    fo.write(dumps(splitCatRelation,-1))
-    fo.close()
-    writestr = 'Finished category %d %d' % (categID,nc)
-    return writestr
-#####
-                       
-class QsRbcWeakOrderingWithThreading(QsRbcWeakOrdering):
-    """
-    Refinig a quantiles sorting result
-    with a multiprocessing of local ranking-by-choosing of the category contents.
-
-    *Parameter*:
-          * limitingQuantiles are set by default to len(actions)//2
-
-    """
-
-    def __init__(self,
-                 argPerfTab=None,
-                 limitingQuantiles=None,
-                 LowerClosed=True,
-                 PrefThresholds=True,
-                 hasNoVeto=False,
-                 minValuation=-1.0,
-                 maxValuation=1.0,
-                 outrankingType = "bipolar",
-                 Threading=True,
-                 cores=None,
-                 Debug=False):
-        
-        from copy import deepcopy
-        from sortingDigraphs import QuantilesSortingDigraph
-        from multiprocessing import Pool, cpu_count
-        from time import time
-
-        # import the performance tableau
-        if argPerfTab == None:
-            perfTab = RandomPerformanceTableau(numberOfActions=10,
-                                               numberOfCriteria=13)
-        else:
-            perfTab = argPerfTab
-
-        if limitingQuantiles == None:
-            limitingQuantiles = len(perfTab.actions) // 2
-        print('Computing the %d-quantiles sorting digraph ...' % (limitingQuantiles))
-        t0 = time()
-        if Threading and cpu_count() > 2:    
-            qs = QuantilesSortingDigraph(perfTab,
-                         limitingQuantiles=limitingQuantiles,
-                         LowerClosed=LowerClosed,
-                         PrefThresholds=PrefThresholds,
-                         hasNoVeto=hasNoVeto,
-                         minValuation=minValuation,
-                         maxValuation=maxValuation,
-                         outrankingType = outrankingType,
-                         Threading=True,
-                         CompleteOutranking = False)                
-        else:
-            qs = QuantilesSortingDigraph(perfTab,
-                         limitingQuantiles=limitingQuantiles,
-                         LowerClosed=LowerClosed,
-                         PrefThresholds=PrefThresholds,
-                         hasNoVeto=hasNoVeto,
-                         minValuation=minValuation,
-                         maxValuation=maxValuation,
-                         outrankingType = outrankingType,
-                         CompleteOutranking = True)
-        print('execution time: %.4f' % (time() - t0))
-        
-        Max = qs.valuationdomain['max']
-        Med = qs.valuationdomain['med']
-        catContent = {}
-##        weakOrdering = qs.computeWeakOrder()
-##        nwo = len(weakOrdering)
-##        for i in range(nwo):
-##            catContent[i+1] = weakOrdering[i]
-##            if Debug:
-##                print(i+1,weakOrdering[i])        
-        weakOrdering = QsRbcWeakOrdering.computeWeakOrder(qs)
-        nwo = len(weakOrdering)
-        for i in range(nwo):
-            catContent[i+1] = weakOrdering[i]
-            if Debug:
-                print(i+1,weakOrdering[i])        
-
-        qsRelation = deepcopy(qs.relation)
-
-        catRelation = {}
-        catRbc = {}
-        if Threading and cpu_count() > 2:
-            from pickle import dumps, loads, load
-            if cores == None:
-                cores = 8
-            Nproc = cpu_count()
-            if Nproc > cores:
-                Nproc = cores
-            from tempfile import TemporaryDirectory
-            from os import getcwd, chdir
-            with TemporaryDirectory() as tempDirName:
-                cwd = getcwd()
-                chdir(tempDirName)
-                filledCategKeys = []
-                print('Preparing the thread data ...')
-                t0 = time()
-                for c in range(1,nwo+1):
-                    nc = len(catContent[c])
-                    print('%d/%d %d' %(c,nwo,nc))
-                    if nc > 1:
-                        filledCategKeys.append(int(c))
-                        pt = PartialPerformanceTableau(perfTab,actionsSubset=catContent[c])                     
-                        foName = 'partialPerfTab-'+str(c)+'.py'
-                        fo = open(foName,'wb')
-                        ptDp = dumps(pt,-1)
-                        fo.write(ptDp)
-                        fo.close()
-                t1 = time()        
-                print(filledCategKeys)
-                print('%d of %d' % (len(filledCategKeys),nwo))
-                print('Execution time: %.4f sec.' % (t1-t0))
-                
-                print('Threading ... !')
-                t0 = time()
-                with Pool(processes=Nproc) as pool:
-                    for res in pool.imap_unordered(_jobTask,filledCategKeys):
-                        print(res)
-                t1 = time()
-                print('Finished all threads in %.4f sec.' % (t1-t0) )
-                for c in range(1,nwo+1):                    
-                    nc = len(catContent[c])
-                    if nc > 1:
-                        fiName = 'splitCatRelation-'+str(c)+'.py'
-                        fi = open(fiName,'rb')
-                        splitCatRelation = loads(fi.read())
-                        fi.close()
-                        if Debug:
-                            print(c,'catRbc',splitCatRelation[0])
-                            print(c,'catRelation',splitCatRelation[1])
-                        catRbc[c] = splitCatRelation[0]
-                        catRelation[c] = splitCatRelation[1]
-                    elif nc == 1:
-                        if Debug:
-                            print('singleton category %d : %d' % (c,nc))
-                            print(catContent[c])
-                        catRbc[c] = [((Max,catContent[c]),(Max,catContent[c]))]
-                        for x in catContent[c]:
-                            catRelation[c] = {str(x): {str(x): Med}}
-                        if Debug:
-                            print(c,'catRbc',catRbc[c])
-                            print(c,'catRelation',catRelation[c])               
-                chdir(cwd)                
-        else:
-            ## without threading
-            for c in range(1,nwo+1):
-                if Debug:
-                    print(c, len(catContent[c]))
-                if len(catContent[c]) > 0:
-                    currActions = list(catContent[c])
-                    for x in currActions:
-                        for y in currActions:
-                            qs.relation[x][y] = qs.relationOrig[x][y]
-                    catCRbc = qs.computeRankingByChoosing(currActions)
-                    if Debug:
-                        print(c,catCRbc)
-                    catRbc[c] = deepcopy(catCRbc['result'])
-                    currActions = list(catContent[c])
-                    catRelation[c] = qs.computeRankingByChoosingRelation(\
-                        actionsSubset=currActions,\
-                        rankingByChoosing=catCRbc['result'],\
-                        Debug=False)
-
-        self.name = 'qsrbc-'+qs.name
-        self.actions = deepcopy(qs.actions)
-        self.order = len(self.actions)
-        self.criteria = deepcopy(qs.criteria)
-        self.evaluation = deepcopy(qs.evaluation)
-        self.categories = deepcopy(qs.categories)
-        self.criteriaCategoryLimits = deepcopy(qs.criteriaCategoryLimits)
-        self.profiles = deepcopy(qs.profiles)
-        self.valuationdomain = deepcopy(qs.valuationdomain)
-        self.catRbc = deepcopy(catRbc)
-        try:
-            self.relationOrig = deepcopy(qs.relationOrig)
-        except:
-            pass
-        self.relation = deepcopy(qsRelation)
-        self._constructRelation()
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
-
 #----------test outrankingDigraphs classes ----------------
 if __name__ == "__main__":
 
@@ -1375,16 +1554,16 @@ if __name__ == "__main__":
     #limitingQuantiles = 100
     #qs = QuantilesSortingDigraph(t,g.order)
     t0 = time()
-    qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,Debug=False)
+    qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,Threading=False,Debug=False)
     t1 = time()-t0
     qsrbc.showSorting()
     #qsrbc.computeQsRbcRanking(Debug=True)
     qsrbc.exportGraphViz(graphType="pdf")
     #qsrbc.showOrderedRelationTable()
     t0=time()
-    qsrbcwt = QsRbcWeakOrderingWithThreading(t,limitingQuantiles,
+    qsrbcwt = QsRbcWeakOrdering(t,limitingQuantiles,
                                              cores=8,
-                                             Threading=True,
+#                                             Threading=True,
                                              Debug=False)
     t2 = time()-t0
     qsrbcwt.showSorting()
