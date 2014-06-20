@@ -1123,51 +1123,61 @@ def _jobTask(categID):
           is set to 50. Above this cardinality,
           Tideman's ranked pairs heuristics is used.
     """
-    
+    from tempfile import TemporaryDirectory
+    from os import getcwd, chdir
     from pickle import dumps, loads, load
     from copy import deepcopy
     from outrankingDigraphs import BipolarOutrankingDigraph
-    from linearOrders import RankedPairsOrder, KohlerOrder
+    #from linearOrders import RankedPairsOrder, KohlerOrder
+    from weakOrders import PrincipalInOutDegreesOrdering
     maxCatContent = 50
     print("Starting working on category %d" % (categID), end=" ")
     fiName = 'partialPerfTab-'+str(categID)+'.py'
     fi = open(fiName,'rb')
     pt = loads(fi.read())
     fi.close()
-    digraph = BipolarOutrankingDigraph(pt,Normalized=True)
-    Max = digraph.valuationdomain['max']
-    Med = digraph.valuationdomain['med']
-    catContent = [x for x in digraph.actions]
-    nc = len(catContent)
-    print(nc,maxCatContent)
-    #print(catContent)
-    if nc <= maxCatContent:
+    with TemporaryDirectory() as TempDirName:
+        cwd = getcwd()
+        chdir(TempDirName)
+        digraph = BipolarOutrankingDigraph(pt,Normalized=True)
+        Max = digraph.valuationdomain['max']
+        Med = digraph.valuationdomain['med']
+        catContent = [x for x in digraph.actions]
+        nc = len(catContent)
+        print(nc,maxCatContent)
+        #print(catContent)
+        if nc <= maxCatContent:
+            currActions = list(catContent)
+            try:
+                catCRbc = digraph.computeRankingByChoosing()
+            except:
+    ##            rp = RankedPairsOrder(digraph)
+    ##            catRbc = rp.computeRankingByChoosing()
+                print('==>>> Failed RBC: Principal ranking')
+##                ko = KohlerOrder(digraph)
+##                catCRbc = ko.computeRankingByChoosing()
+                pri = PrincipalInOutDegreesOrdering(digraph,Threading=False)
+                catCRbc = pri.computeRankingByChoosing()
+            
+        else:
+            print('==>>> Exceeds %d: Principal ranking' % maxCatContent)
+    ##        rp = RankedPairsOrder(digraph)
+    ##        catCRbc = rp.computeRankingByChoosing()
+##            ko = KohlerOrder(digraph)
+##            catCRbc = ko.computeRankingByChoosing()
+            pri = PrincipalInOutDegreesOrdering(digraph,Threading=False)
+            catCRbc = pri.computeRankingByChoosing()
+
+        catRbc = deepcopy(catCRbc['result'])
         currActions = list(catContent)
-        try:
-            catCRbc = digraph.computeRankingByChoosing()
-        except:
-##            rp = RankedPairsOrder(digraph)
-##            catRbc = rp.computeRankingByChoosing()
-            ko = KohlerOrder(digraph)
-            catCRbc = ko.computeRankingByChoosing()
+        catRelation = digraph.computeRankingByChoosingRelation(\
+                            actionsSubset=currActions,\
+                            rankingByChoosing=catRbc,\
+                            Debug=False)
         
-    else:
-        print('==>>> Kohler\'s ranking')
-##        rp = RankedPairsOrder(digraph)
-##        catCRbc = rp.computeRankingByChoosing()
-        ko = KohlerOrder(digraph)
-        catCRbc = ko.computeRankingByChoosing()
-
-    catRbc = deepcopy(catCRbc['result'])
-    currActions = list(catContent)
-    catRelation = digraph.computeRankingByChoosingRelation(\
-                        actionsSubset=currActions,\
-                        rankingByChoosing=catRbc,\
-                        Debug=False)
-    
-    #print(catRbc,catRelation)
-    splitCatRelation = [catRbc,catRelation]
-
+        #print(catRbc,catRelation)
+        splitCatRelation = [catRbc,catRelation]
+        chdir(cwd)
     foName = 'splitCatRelation-'+str(categID)+'.py'
     fo = open(foName,'wb')                                            
     fo.write(dumps(splitCatRelation,-1))
