@@ -1152,7 +1152,7 @@ def _jobTask(categID):
             catCRbc = ko.computeRankingByChoosing()
         
     else:
-        print('==>>> Ranked Pairs')
+        print('==>>> Kohler\'s ranking')
 ##        rp = RankedPairsOrder(digraph)
 ##        catCRbc = rp.computeRankingByChoosing()
         ko = KohlerOrder(digraph)
