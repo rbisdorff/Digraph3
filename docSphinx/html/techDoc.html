@@ -168,7 +168,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -791,7 +791,7 @@ ranked pairs rule.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.computeRankingByBestChoosing">
 <tt class="descname">computeRankingByBestChoosing</tt><big>(</big><em>CoDual=False</em>, <em>CppAgrum=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.computeRankingByBestChoosing" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes a weak preordring of the self.actions by recursive
+<dd><p>Computes a weak preordering of the self.actions by recursive
 best choice elagations.</p>
 <p>Stores in self.rankingByBestChoosing[&#8216;result&#8217;] a list of (P+,bestChoice) tuples
 where P+ gives the best choice complement outranking
@@ -817,7 +817,7 @@ jointly best and worst choice elagations.</p>
 where P+ (resp. P-) gives the best (resp. worst) choice complement outranking
 (resp. outranked) average valuation via the computePairwiseClusterComparison
 method.</p>
-<p>If self.rankingByChoosing[&#8216;CoDual&#8217;] is True, the ranking by chossing was computed on the codual of self.</p>
+<p>If self.rankingByChoosing[&#8216;CoDual&#8217;] is True, the ranking-by-choosing was computed on the codual of self.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1044,7 +1044,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1940,7 +1940,7 @@ equivalence valuations.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1971,7 +1971,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2860,6 +2860,13 @@ xml.etree (for Python 2.5+).</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="perfTabs.PartialPerformanceTableau">
+<em class="property">class </em><tt class="descclassname">perfTabs.</tt><tt class="descname">PartialPerformanceTableau</tt><big>(</big><em>inPerfTab</em>, <em>actionsSubset=None</em>, <em>criteriaSubset=None</em><big>)</big><a class="headerlink" href="#perfTabs.PartialPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><tt class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></tt></a></p>
+<p>Constructor for partial performance tableaux.</p>
+</dd></dl>
+
+<dl class="class">
 <dt id="perfTabs.PerformanceTableau">
 <em class="property">class </em><tt class="descclassname">perfTabs.</tt><tt class="descname">PerformanceTableau</tt><big>(</big><em>filePerfTab=None</em>, <em>isEmpty=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
@@ -2883,8 +2890,14 @@ xml.etree (for Python 2.5+).</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="perfTabs.PerformanceTableau.computeCriterionPerformanceDifferences">
+<tt class="descname">computeCriterionPerformanceDifferences</tt><big>(</big><em>c</em>, <em>Comments=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeCriterionPerformanceDifferences" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the ordered list of all observed performance differences on the given criterion.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -2903,12 +2916,12 @@ in dictionary form: {&#8216;g&#8217;: {&#8216;minimum&#8217;: x, &#8216;maximum&
 <dd><p>renders and csv stores (withOutput=True) the
 list of normalized evaluation differences observed on the family of criteria
 Is only adequate if all criteria have the same
-evaluation scale. Therefore the performance tableai is normalized to 0.0-100.0 scales.</p>
+evaluation scale. Therefore the performance tableau is normalized to 0.0-100.0 scales.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computePerformanceDifferences">
-<tt class="descname">computePerformanceDifferences</tt><big>(</big><em>comments=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computePerformanceDifferences" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computePerformanceDifferences</tt><big>(</big><em>Comments=False</em>, <em>Debug=False</em>, <em>NotPermanentDiffs=True</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computePerformanceDifferences" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds to the criteria dictionary the ordered list of all observed performance differences.</p>
 </dd></dl>
 
@@ -3579,7 +3592,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4274,7 +4287,7 @@ quantiles delimited ordered classes.</p>
 
 <dl class="class">
 <dt id="sortingDigraphs.QuantilesSortingDigraph">
-<em class="property">class </em><tt class="descclassname">sortingDigraphs.</tt><tt class="descname">QuantilesSortingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=True</em>, <em>PrefThresholds=True</em>, <em>hasNoVeto=False</em>, <em>minValuation=-100.0</em>, <em>maxValuation=100.0</em>, <em>outrankingType='bipolar'</em>, <em>Threading=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">sortingDigraphs.</tt><tt class="descname">QuantilesSortingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=True</em>, <em>PrefThresholds=True</em>, <em>hasNoVeto=False</em>, <em>minValuation=-1.0</em>, <em>maxValuation=1.0</em>, <em>outrankingType='bipolar'</em>, <em>CompleteOutranking=True</em>, <em>Threading=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></tt></a>, <a class="reference internal" href="#weakOrders.WeakOrder" title="weakOrders.WeakOrder"><tt class="xref py py-class docutils literal"><span class="pre">weakOrders.WeakOrder</span></tt></a></p>
 <p>Specialisation of the sortingDigraph Class
 for sorting of alternatives into quantiles delimited ordered classes.</p>
@@ -4445,7 +4458,7 @@ the high category limit.</p>
 <dl class="method">
 <dt id="sortingDigraphs.SortingDigraph.computeWeakOrder">
 <tt class="descname">computeWeakOrder</tt><big>(</big><em>Descending=True</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.SortingDigraph.computeWeakOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Specialisation for QauntilesSortingDigraphs.</p>
+<dd><p>Specialisation for QuantilesSortingDigraphs.</p>
 </dd></dl>
 
 <dl class="method">
@@ -4684,21 +4697,51 @@ of the principal orders of the variance-covariance of in-
 
 <dl class="class">
 <dt id="weakOrders.QsRbcWeakOrdering">
-<em class="property">class </em><tt class="descclassname">weakOrders.</tt><tt class="descname">QsRbcWeakOrdering</tt><big>(</big><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=True</em>, <em>PrefThresholds=True</em>, <em>hasNoVeto=False</em>, <em>minValuation=-1.0</em>, <em>maxValuation=1.0</em>, <em>outrankingType='bipolar'</em>, <em>Threading=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#weakOrders.QsRbcWeakOrdering" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">weakOrders.</tt><tt class="descname">QsRbcWeakOrdering</tt><big>(</big><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=True</em>, <em>PrefThresholds=True</em>, <em>hasNoVeto=False</em>, <em>minValuation=-1.0</em>, <em>maxValuation=1.0</em>, <em>outrankingType='bipolar'</em>, <em>Threading=True</em>, <em>cores=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#weakOrders.QsRbcWeakOrdering" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#weakOrders.WeakOrder" title="weakOrders.WeakOrder"><tt class="xref py py-class docutils literal"><span class="pre">weakOrders.WeakOrder</span></tt></a>, <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></tt></a></p>
 <p>Refinig a quantiles sorting result
-with a local ranking-by-choosing of the category contents.</p>
+with a ranking-by-choosing of the local quantile equivalence classes
+of less than 50 items.
+For larger quantile equivalence classes, Tideman&#8217;s ranked pairs heuristic
+is used insted.</p>
 <dl class="docutils">
 <dt><em>Parameter</em>:</dt>
 <dd><ul class="first last simple">
-<li>limitingQuantiles are set by default to len(actions)//2</li>
+<li>limitingQuantiles are set by default to len(actions)//2
+for outranking digraph orders below 200.
+For higher orders, centiles are used by default.</li>
+<li>threading is on by default for cpu with more than 2 cores.</li>
 </ul>
 </dd>
 </dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The weakording is instantiated as strict ordering! And for larger orders
+a consistent size of several Giga bytes cpu memory is required.</p>
+</div>
+<dl class="method">
+<dt id="weakOrders.QsRbcWeakOrdering.computeQsRbcRanking">
+<tt class="descname">computeQsRbcRanking</tt><big>(</big><em>DescendingOrder=True</em>, <em>Comments=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#weakOrders.QsRbcWeakOrdering.computeQsRbcRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Render the ranking result of QsRbcWeakOrdering constructor</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="weakOrders.QsRbcWeakOrdering.computeWeakOrder">
 <tt class="descname">computeWeakOrder</tt><big>(</big><em>DescendingOrder=True</em>, <em>Comments=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#weakOrders.QsRbcWeakOrdering.computeWeakOrder" title="Permalink to this definition">¶</a></dt>
 <dd><p>specialisation of the showWeakOrder method</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="weakOrders.QsRbcWeakOrdering.showActionCategories">
+<tt class="descname">showActionCategories</tt><big>(</big><em>action</em>, <em>Debug=False</em>, <em>Comments=True</em><big>)</big><a class="headerlink" href="#weakOrders.QsRbcWeakOrdering.showActionCategories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the union of categories in which the given action is sorted positively or null into.
+Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="weakOrders.QsRbcWeakOrdering.showActionsSortingResult">
+<tt class="descname">showActionsSortingResult</tt><big>(</big><em>actionSubset=None</em><big>)</big><a class="headerlink" href="#weakOrders.QsRbcWeakOrdering.showActionsSortingResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows the quantiles sorting result all (default) of a subset of the decision actions.</p>
 </dd></dl>
 
 <dl class="method">
@@ -4707,21 +4750,12 @@ with a local ranking-by-choosing of the category contents.</p>
 <dd><p>Showing the relation table in decreasing (default) or increasing order.</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="weakOrders.QsRbcWeakOrdering.showQsRbcRanking">
+<tt class="descname">showQsRbcRanking</tt><big>(</big><em>DescendingOrder=True</em><big>)</big><a class="headerlink" href="#weakOrders.QsRbcWeakOrdering.showQsRbcRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>show the ranking-by-sorting refinement of the quantiles sorting result</p>
 </dd></dl>
 
-<dl class="class">
-<dt id="weakOrders.QsRbcWeakOrderingWithThreading">
-<em class="property">class </em><tt class="descclassname">weakOrders.</tt><tt class="descname">QsRbcWeakOrderingWithThreading</tt><big>(</big><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=True</em>, <em>PrefThresholds=True</em>, <em>hasNoVeto=False</em>, <em>minValuation=-1.0</em>, <em>maxValuation=1.0</em>, <em>outrankingType='bipolar'</em>, <em>Threading=True</em>, <em>cores=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#weakOrders.QsRbcWeakOrderingWithThreading" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#weakOrders.QsRbcWeakOrdering" title="weakOrders.QsRbcWeakOrdering"><tt class="xref py py-class docutils literal"><span class="pre">weakOrders.QsRbcWeakOrdering</span></tt></a></p>
-<p>Refinig a quantiles sorting result
-with a multiprocessing of local ranking-by-choosing of the category contents.</p>
-<dl class="docutils">
-<dt><em>Parameter</em>:</dt>
-<dd><ul class="first last simple">
-<li>limitingQuantiles are set by default to len(actions)//2</li>
-</ul>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="class">
