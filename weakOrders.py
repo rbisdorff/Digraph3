@@ -1563,9 +1563,9 @@ if __name__ == "__main__":
     from weakOrders import *
     from time import time
 
-##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-##                                numberOfActions=100)
-##    t.saveXMCDA2('test')
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                numberOfActions=100)
+    t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)
     limitingQuantiles = len(t.actions) // 2
