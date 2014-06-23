@@ -782,6 +782,29 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
                 print('%s \t %.5f \t %.5f' %(x,
                                              self.actions[x]['principalColwiseScore'],
                                              self.actions[x]['principalRowwiseScore']))
+
+    def computeWeakOrder(self, ColwiseOrder=False):
+        """
+        Specialisation for PrincipalInOutDegreesOrderings.
+        """        
+        if ColwiseOrder:
+            lps = self.principalColwiseScores
+        else:
+            lps = self.principalRowwiseScores
+        n = len(lps)
+        n2 = n//2
+        ordering = []
+        
+        for i in range(n2):
+            x = lps[i]
+            y = lps[n-i-1]
+            ordering.append( ( (x[0],[x[1]]),(y[0],[y[1]]) ) )
+        if 2*n2 < n:
+            x = lps[n2]
+            ordering.append( ( (x[0],[x[1]]),(x[0],[x[1]]) ) )
+
+        weakOrdering = {'result':ordering}
+        return weakOrdering
                 
     def showWeakOrder(self, ColwiseOrder=False):
         """
@@ -1157,7 +1180,7 @@ def _jobTask(categID):
 ##                ko = KohlerOrder(digraph)
 ##                catCRbc = ko.computeRankingByChoosing()
                 pri = PrincipalInOutDegreesOrdering(digraph,Threading=False)
-                catCRbc = pri.computeRankingByChoosing()
+                catCRbc = pri.computeWeakOrder()
             
         else:
             print('==>>> Exceeds %d: Principal ranking' % maxCatContent)
@@ -1166,7 +1189,7 @@ def _jobTask(categID):
 ##            ko = KohlerOrder(digraph)
 ##            catCRbc = ko.computeRankingByChoosing()
             pri = PrincipalInOutDegreesOrdering(digraph,Threading=False)
-            catCRbc = pri.computeRankingByChoosing()
+            catCRbc = pri.computeWeakOrder()
 
         catRbc = deepcopy(catCRbc['result'])
         currActions = list(catContent)
