@@ -1153,7 +1153,7 @@ def _jobTask(categID):
     from outrankingDigraphs import BipolarOutrankingDigraph
     #from linearOrders import RankedPairsOrder, KohlerOrder
     from weakOrders import PrincipalInOutDegreesOrdering
-    maxCatContent = 50
+    maxCatContent = 40
     print("Starting working on category %d" % (categID), end=" ")
     fiName = 'partialPerfTab-'+str(categID)+'.py'
     fi = open(fiName,'rb')
@@ -1174,22 +1174,30 @@ def _jobTask(categID):
             try:
                 catCRbc = digraph.computeRankingByChoosing()
             except:
-    ##            rp = RankedPairsOrder(digraph)
-    ##            catRbc = rp.computeRankingByChoosing()
                 print('==>>> Failed RBC: Principal ranking')
+##              rp = RankedPairsOrder(digraph)
+##              catRbc = rp.computeRankingByChoosing()
 ##                ko = KohlerOrder(digraph)
 ##                catCRbc = ko.computeRankingByChoosing()
-                pri = PrincipalInOutDegreesOrdering(digraph,Threading=False)
-                catCRbc = pri.computeWeakOrder()
-            
+                try:
+                    pri = PrincipalInOutDegreesOrdering(digraph,Threading=False)
+                    catCRbc = pri.computeWeakOrder()
+                except:
+                    catCRbc = {'result': \
+                               [((digraph.valuationdomain['max'],catContent),\
+                                (digraph.valuationdomain['max'],catContent))]}
         else:
             print('==>>> Exceeds %d: Principal ranking' % maxCatContent)
-    ##        rp = RankedPairsOrder(digraph)
-    ##        catCRbc = rp.computeRankingByChoosing()
+##            rp = RankedPairsOrder(digraph)
+##            catCRbc = rp.computeRankingByChoosing()
 ##            ko = KohlerOrder(digraph)
 ##            catCRbc = ko.computeRankingByChoosing()
-            pri = PrincipalInOutDegreesOrdering(digraph,Threading=False)
-            catCRbc = pri.computeWeakOrder()
+            try:
+                pri = PrincipalInOutDegreesOrdering(digraph,Threading=False)
+                catCRbc = pri.computeWeakOrder()
+            except:
+                catCRbc = {'result': [((digraph.valuationdomain['max'],catContent),\
+                                       (digraph.valuationdomain['max'],catContent))]}
 
         catRbc = deepcopy(catCRbc['result'])
         currActions = list(catContent)
