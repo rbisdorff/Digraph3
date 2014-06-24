@@ -1251,6 +1251,7 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
                  outrankingType = "bipolar",
                  Threading=True,
                  cores=None,
+                 Comments=True,
                  Debug=False):
         
         from copy import deepcopy
@@ -1272,8 +1273,8 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
                 limitingQuantiles = na // 2
             else:
                 limitingQuantiles = 100
-                
-        print('Computing the %d-quantiles sorting digraph ...' % (limitingQuantiles))
+        if Comments:        
+            print('Computing the %d-quantiles sorting digraph ...' % (limitingQuantiles))
         t0 = time()
         if Threading and cpu_count() > 2:    
             qs = QuantilesSortingDigraph(perfTab,
@@ -1296,7 +1297,9 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
                          maxValuation=maxValuation,
                          outrankingType = outrankingType,
                          CompleteOutranking = True)
-        print('execution time: %.4f' % (time() - t0))
+        self.tqs = time() - t0
+        if Comments:
+            print('execution time: %.4f' % (self.tqs))
         
         Max = qs.valuationdomain['max']
         Med = qs.valuationdomain['med']
@@ -1344,18 +1347,19 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
                         ptDp = dumps(pt,-1)
                         fo.write(ptDp)
                         fo.close()
-                t1 = time()        
-                print(filledCategKeys)
-                print('%d of %d' % (len(filledCategKeys),nwo))
-                print('Execution time: %.4f sec.' % (t1-t0))
+                t1 = time()
+                if Comments:
+                    print(filledCategKeys)
+                    print('%d of %d' % (len(filledCategKeys),nwo))
+                    print('Execution time: %.4f sec.' % (t1-t0))
                 
                 print('Threading ... !')
                 t0 = time()
                 with Pool(processes=Nproc) as pool:
                     for res in pool.imap_unordered(_jobTask,filledCategKeys):
                         print(res)
-                t1 = time()
-                print('Finished all threads in %.4f sec.' % (t1-t0) )
+                self.trbc = time() - t0
+                print('Finished all threads in %.4f sec.' % (self.trbc) )
                 for c in range(1,nwo+1):                    
                     nc = len(catContent[c])
                     if nc > 1:
@@ -1381,6 +1385,8 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
                 chdir(cwd)                
         else:
             ## without threading
+            if Comments:
+                print('Without threading ...')
             for c in range(1,nwo+1):
                 if Debug:
                     print(c, len(catContent[c]))
