@@ -46,9 +46,9 @@ The Python development of these computing resources offers the advantage of an e
 Starting an interactive python3 session
 .......................................
 
-You may start an interactive Python3 session in the :code:`Digraph3` directory for exploring the classes and methods provided by the :code:`digraphs` module. To do so, enter the Python3 commands following the session prompts marked with >>>. The lines without the prompt are output from the Python interpreter::
+You may start an interactive Python3 session in the :code:`Digraph3` directory for exploring the classes and methods provided by the :code:`digraphs` module. To do so, enter the ``python3`` commands following the session prompts marked with >>>. The lines without the prompt are output from the Python interpreter::
 
-	[\$HOME/Digraph3]\$ python
+	[\$HOME/Digraph3]\$ python3
 	Python 3.4.0 (default, Apr 11 2014, 13:05:11)
 	[GCC 4.8.2] on linux
 	Type "help", "copyright", "credits" or "license" for more information.
