@@ -9,7 +9,7 @@ Documentation of the Digraph3 resources
 Introduction
 ------------
 
-This documentation describes the Python3 resources for implementing decision aid algorithms in the context of a bipolarly-valued outranking approach [1]_ . These computing ressources are useful in the field of algorithmic decision theory and more specifically in outranking based multiple criteria decision aid.
+This documentation describes the Python3 resources for implementing decision aid algorithms in the context of a bipolarly-valued outranking approach [1]_ . These computing resources are useful in the field of algorithmic decision theory and more specifically in outranking based multiple criteria decision aid.
 
 **Parts of the documentation:**
 
