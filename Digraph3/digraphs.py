@@ -7493,6 +7493,7 @@ class Digraph(object):
             kemenyIndex = Decimal(str(n)) * Decimal(str(n)) * Min
             kemenyOrder = list(actions)
             s = 1
+            maximalOrders = []
             for a in all_perms(kemenyOrder):
                 kcurr = Decimal('0.0')
                 s += 1
@@ -7501,16 +7502,23 @@ class Digraph(object):
                         kcurr += relation[a[i]][a[j]] - relation[a[j]][a[i]]
                 if Debug:
                     print(s, a, kcurr)
-                if kcurr >= kemenyIndex:
+                if kcurr > kemenyIndex:
                     kemenyIndex = kcurr
                     kemenyOrder = list(a)
+                    maximalOrders = [kemenyOrder]
                     if Debug:
-                        print(s, kemenyOrder, kemenyIndex)
+                        print(maximalOrders)
+                elif kcurr == kemenyIndex:
+                    maximalOrders.append(list(a))
+                    if Debug:
+                        print(maximalOrders)
+                    
+            self.maximalOrders = maximalOrders
             if Debug:
-                print('Exact Kemeny Order = ', kemenyOrder)
+                print('Exact Kemeny Orders = ', kemenyOrder)
                 print('Exact Kemeny Index = ', kemenyIndex)
                 print('# of permutations  = ', s)
-
+            
         return kemenyOrder, kemenyIndex
 
     def computePrincipalOrder(self, plotFileName=None,

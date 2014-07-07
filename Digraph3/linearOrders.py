@@ -649,7 +649,7 @@ class KemenyOrder(LinearOrder):
             print('Digraph order %d is required to be lower than 8!' % n)
             return
         if Debug:
-            print(KemenyOrder)
+            print(KemenyOrder,other.maximalOrders)
         # instatiates a Digraph template
         
         g = IndeterminateDigraph(order=n)
