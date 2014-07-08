@@ -2724,7 +2724,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             try:
                 fo.write('<preferenceDirection>%s</preferenceDirection>\n' % (criteria[g]['preferenceDirection']) )
                 if criteria[g]['preferenceDirection'] == 'min':
-                    pdir = -1
+                    #pdir = -1
+                    pdir = 1
                 else:
                     pdir = 1
             except:
