@@ -1,0 +1,607 @@
+<html xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Decision-Deck UMCDA-ML-2.0 application</title>
+</head>
+<body>
+<h1><font color="#0000bb">Decision-Deck UMCDA-ML-2.0 Application</font></h1>
+
+<h2><font color="#bb0000">Rubis Best Choice Recommendation</font></h2>
+<h3><font color="#0000bb">XMCDA 2.0 encoding</font></h3>
+
+    Comment: <em>produced by stringIO()</em><br>
+
+    Version: saved from Python session<br>
+
+    Author: digraphs Module (RB)<br>
+<h3>Content</h3>
+<ul>
+<li><a href="#choice">Choice Recommendation</a></li>
+<li><a href="#graph">Outranking digraph</a></li>
+<li><a href="#alternatives">Potential decision actions</a></li>
+<li><a href="#performance">Performance table</a></li>
+<li><a href="#criteria">Family of criteria</a></li>
+<li><a href="#correlation">Criteria ordinal correlation</a></li>
+<li><a href="#outranking">Outranking relation</a></li>
+<li><a href="#vetos">Veto situations</a></li>
+<li><a href="#notice">Notice</a></li>
+</ul>
+
+
+<h3><font color="#0000bb">Method data</font></h3>
+
+    Comment: <em>Rubis best choice recommendation in XMCDA format.</em><br>
+
+    Version: 1.0<br>
+
+<table cellpadding="1" border="1">
+<tr>
+<th bgcolor="#9acd32">Parameter</th>
+<th bgcolor="#9acd32">Value</th>
+<th bgcolor="#9acd32">Comment</th>
+</tr>
+<tr>
+<td bgcolor="#FFF79B">variant</td>
+<td>
+Rubis
+</td>
+<td></td>
+</tr>
+<tr>
+<td bgcolor="#FFF79B">valuationType</td>
+<td>
+bipolar
+</td>
+<td></td>
+</tr>
+<tr>
+<td bgcolor="#FFF79B">vetoType</td>
+<td>
+normal
+</td>
+<td></td>
+</tr>
+</table>
+
+<a name="alternatives"></a>
+<h2><font color="#bb0000">List of Alternatives</font></h2>
+<h3><font color="#0000bb">Potential decision actions.</font></h3>
+<table border="1">
+<tr bgcolor="#9acd32">
+<th>#</th>
+<th>Identifyer</th>
+<th>Name</th>
+<th>Comment</th>
+</tr>
+<tr>
+<td>1</td>
+<th bgcolor="#FFF79B">Ar</th>
+<td>Campus Arguelles</td>
+<td>Madrid centre.</td>
+</tr>
+<tr>
+<td>2</td>
+<th bgcolor="#FFF79B">Lr</th>
+<td>La Rozas</td>
+<td>West of Madrid centre.</td>
+</tr>
+<tr>
+<td>3</td>
+<th bgcolor="#FFF79B">Ma</th>
+<td>Majadahonda</td>
+<td>West of Madrid centre.</td>
+</tr>
+<tr>
+<td>4</td>
+<th bgcolor="#FFF79B">Mo</th>
+<td>Campus Moncloa</td>
+<td>Madrid centre. Same location as San Dominique.</td>
+</tr>
+<tr>
+<td>5</td>
+<th bgcolor="#FFF79B">Mp</th>
+<td>Campus Monteprincipe</td>
+<td>South West of Madrid centre.</td>
+</tr>
+<tr>
+<td>6</td>
+<th bgcolor="#FFF79B">Po</th>
+<td>Pozuelo</td>
+<td>Sout West of Madrid centre.</td>
+</tr>
+<tr>
+<td>7</td>
+<th bgcolor="#FFF79B">Sd</th>
+<td>San Dominique</td>
+<td>Madrid centre. Same loaction as Campus Moncloa</td>
+</tr>
+</table>
+<a name="criteria"></a>
+<h2><font color="#bb0000">Rubis family of criteria.</font></h2>
+<table border="1">
+<tr bgcolor="#9acd32">
+<th rowspan="2">#</th>
+<th rowspan="2">Identifyer</th>
+<th rowspan="2">Name</th>
+<th rowspan="2">Comment</th>
+<th rowspan="2">Weight</th>
+<th colspan="3">Scale</th>
+<th colspan="5">Thresholds</th>
+</tr>
+<tr bgcolor="#9acd32">
+<th>direction</th>
+<th>min</th>
+<th>max</th>
+<th>indifference</th>
+<th>weak preference</th>
+<th>preference</th>
+<th>weak veto</th>
+<th>veto</th>
+</tr>
+<tr>
+<td align="center">1</td>
+<th bgcolor="#FFF79B">ACC</th>
+<td>Accessibility to Madrid city centre</td>
+<td>In minutes. The metropolitan area
+  of Madrid covers a wide area, causing transportation accessibility
+  to be of importantance when choosing a site for a new facility. In a
+  city with heavy traffic congestion, the actual distance might not
+  correlate with accessibility, and therefore we have chosen to
+  measure it in minutes by public transportation from a central
+  transport hub.</td>
+<td align="center">0.30</td>
+<td align="center">min</td>
+<td align="center">30.00</td>
+<td align="center">60.00</td>
+<td align="center">
+
+6.50
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+12.50
+
+</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<th bgcolor="#FFF79B">COP</th>
+<td>land and construction prize</td>
+<td>The sites have differing
+  costs of location and construction depending on the building
+  location (e.g. residential zone, city center or outskirts).</td>
+<td align="center">0.30</td>
+<td align="center">min</td>
+<td align="center">3000000.00</td>
+<td align="center">5500000.00</td>
+<td align="center">
+
+10000.00
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+100000.00
+
+</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<th bgcolor="#FFF79B">EFF</th>
+<td>Effects to the city landscape</td>
+<td>Government regulations define that
+  effects to urban landscape, green spaces, and cultural heritage must
+  be estimated. We measure them with odinal ranking number from best (1rst) to worst (7th).</td>
+<td align="center">0.10</td>
+<td align="center">min</td>
+<td align="center">1.00</td>
+<td align="center">7.00</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">4</td>
+<th bgcolor="#FFF79B">MAC</th>
+<td>maintenance costs of the facility</td>
+<td>In euros / month, measured by
+  estimating total fixed and variable costs (supplies, personnel,
+  taxes, etc).</td>
+<td align="center">0.10</td>
+<td align="center">min</td>
+<td align="center">20000.00</td>
+<td align="center">50000.00</td>
+<td align="center">
+0.00 + -0.03x
+
+</td>
+<td align="center"></td>
+<td align="center">
+0.00 + -0.08x
+
+</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<th bgcolor="#FFF79B">SIZ</th>
+<td>Size (in children) of the kindergarten</td>
+<td>size (in children) of the kindergarten to be
+  built as measured with a number of day-care places. The Spanish
+  government regulates \citep{BOE:2005,BOE:2007} the maximum number of children
+  for $m^2$ and the required common services. The number of day-care
+  places can be derived from the estimated building specifications.</td>
+<td align="center">0.20</td>
+<td align="center">max</td>
+<td align="center">100.00</td>
+<td align="center">300.00</td>
+<td align="center">
+
+1.50
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+3.00
+
+</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</table>
+
+<h2><font color="#bb0000">Rubis Performance Table</font></h2>
+<table border="1">
+<tr bgcolor="#9acd32">
+<th>alternative</th>
+<th bgcolor="#FFF79B">ACC</th>
+<th bgcolor="#FFF79B">COP</th>
+<th bgcolor="#FFF79B">EFF</th>
+<th bgcolor="#FFF79B">MAC</th>
+<th bgcolor="#FFF79B">SIZ</th>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">Ar</th>
+<td align="right">36.67</td>
+<td align="right">5238520.00</td>
+<td align="right">5.00</td>
+<td align="right">31750.00</td>
+<td align="right">167.00</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">Lr</th>
+<td align="right">49.00</td>
+<td align="right">3904800.00</td>
+<td align="right">2.00</td>
+<td align="right">38000.00</td>
+<td align="right">201.00</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">Ma</th>
+<td align="right">46.33</td>
+<td align="right">3146000.00</td>
+<td align="right">4.00</td>
+<td align="right">30500.00</td>
+<td align="right">159.00</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">Mo</th>
+<td align="right">39.17</td>
+<td align="right">4729000.00</td>
+<td align="right">7.00</td>
+<td align="right">29000.00</td>
+<td align="right">159.00</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">Mp</th>
+<td align="right">52.50</td>
+<td align="right">3937880.00</td>
+<td align="right">3.00</td>
+<td align="right">43500.00</td>
+<td align="right">234.00</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">Po</th>
+<td align="right">42.83</td>
+<td align="right">3317270.00</td>
+<td align="right">1.00</td>
+<td align="right">31750.00</td>
+<td align="right">167.00</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">Sd</th>
+<td align="right">38.33</td>
+<td align="right">4068450.00</td>
+<td align="right">6.00</td>
+<td align="right">26250.00</td>
+<td align="right">134.00</td>
+</tr>
+</table>
+<a name="correlation"></a>
+
+<h2><font color="#bb0000">Ordinal Criteria Correlation Index</font></h2>
+
+    Comment: <em>Generalisation of Kendall's τ to nested homogeneous semiorders.</em><br>
+
+correlation<table border="1">
+<tr bgcolor="#9acd32">
+<th>relation</th>
+<th bgcolor="#FFF79B">ACC</th>
+<th bgcolor="#FFF79B">COP</th>
+<th bgcolor="#FFF79B">EFF</th>
+<th bgcolor="#FFF79B">MAC</th>
+<th bgcolor="#FFF79B">SIZ</th>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">ACC</th>
+<td bgcolor="#ddffdd" align="right">1.00</td>
+<td bgcolor="#ffddff" align="right">-1.00</td>
+<td bgcolor="#ffddff" align="right">-0.90</td>
+<td bgcolor="#ffddff" align="right">-0.52</td>
+<td bgcolor="#ffddff" align="right">-0.90</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">COP</th>
+<td bgcolor="#ffddff" align="right">-1.00</td>
+<td bgcolor="#ddffdd" align="right">1.00</td>
+<td bgcolor="#ffddff" align="right">-0.90</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+<td bgcolor="#ffddff" align="right">-0.14</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">EFF</th>
+<td bgcolor="#ffddff" align="right">-0.90</td>
+<td bgcolor="#ffddff" align="right">-0.90</td>
+<td bgcolor="#ddffdd" align="right">1.00</td>
+<td bgcolor="#ffddff" align="right">-0.90</td>
+<td bgcolor="#ffddff" align="right">-1.00</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">MAC</th>
+<td bgcolor="#ffddff" align="right">-0.52</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+<td bgcolor="#ffddff" align="right">-0.90</td>
+<td bgcolor="#ddffdd" align="right">1.00</td>
+<td bgcolor="#ffddff" align="right">-0.90</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">SIZ</th>
+<td bgcolor="#ffddff" align="right">-0.90</td>
+<td bgcolor="#ffddff" align="right">-0.14</td>
+<td bgcolor="#ffddff" align="right">-1.00</td>
+<td bgcolor="#ffddff" align="right">-0.90</td>
+<td bgcolor="#ddffdd" align="right">1.00</td>
+</tr>
+</table>
+<h3><font color="#bb0000">Principal component analysis of the criteria correlation index</font></h3>
+<div style="text-align: left;">
+<p><a href="http://leopold-loewenheim.uni.lu/rubisServer/Images/similarityPlot-MSllvkdSXrOhkQZ7.pdf">
+      See PDF graphic file for better image quality and zooming options</a>
+        (generated with R).</p>
+<img src="http://leopold-loewenheim.uni.lu/rubisServer/Images/similarityPlot-MSllvkdSXrOhkQZ7.jpg">
+</div>
+<h2><a name="graph"><font color="#bb0000">Significantly Concordant Outranking Graph</font></a></h2>
+<p>(<i><b> Black arrows</b> indicate outranking situations supported by a criteria coalition 
+      of positive significance, i.e. gathering more than 50% of the global criteria significance weights.
+      <b>Empty arrow heads</b> indicate an indeterminate outranking situation.</i>)</p>
+<div style="text-align: left;">
+<p><a href="http://leopold-loewenheim.uni.lu/rubisServer/Images/rubisGraph-MSllvkdSXrOhkQZ7.pdf">
+      See PDF graphic file for better image quality and zooming options</a>
+        (generated with GraphViz).</p>
+<img src="http://leopold-loewenheim.uni.lu/rubisServer/Images/rubisGraph-MSllvkdSXrOhkQZ7.png">
+</div>
+<a name="outranking"></a>
+
+<h2><font color="#bb0000">Bipolar-valued Outranking Relation</font></h2>
+
+    Comment: <em>Rubis Choice Recommendation Relation</em><br>
+
+
+<h3><font color="#0000bb">Valuation Domain</font></h3>
+
+    Comment: <em>Significance degrees</em><br>
+<table cellpadding="1" border="1">
+<tr>
+<td bgcolor="#FFF79B">Maximum</td>
+<td bgcolor="#ddffdd" align="right">100</td>
+</tr>
+<tr>
+<td bgcolor="#FFF79B">Median</td>
+<td bgcolor="#dddddd" align="right">0</td>
+</tr>
+<tr>
+<td bgcolor="#FFF79B">Minimum</td>
+<td bgcolor="#ffddff" align="right">-100</td>
+</tr>
+</table>
+
+<h3><font color="#0000bb">Valued Adjacency Table</font></h3>
+
+    Comment: <em>Pairwise outranking significance degrees in the range: -100.00 to 100.00</em><br>
+<table border="1">
+<tr bgcolor="#9acd32">
+<th></th>
+<th bgcolor="#FFF79B">Ar</th>
+<th bgcolor="#FFF79B">Lr</th>
+<th bgcolor="#FFF79B">Ma</th>
+<th bgcolor="#FFF79B">Mo</th>
+<th bgcolor="#FFF79B">Mp</th>
+<th bgcolor="#FFF79B">Po</th>
+<th bgcolor="#FFF79B">Sd</th>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">Ar</th>
+<td bgcolor="#dddddd" align="right">0.00</td>
+<td bgcolor="#ffddff" align="right">-20.00</td>
+<td bgcolor="#ddffdd" align="right">10.00</td>
+<td bgcolor="#ddffdd" align="right">20.00</td>
+<td bgcolor="#ffddff" align="right">-20.00</td>
+<td bgcolor="#ddffdd" align="right">20.00</td>
+<td bgcolor="#ddffdd" align="right">20.00</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">Lr</th>
+<td bgcolor="#ddffdd" align="right">50.00</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+<td bgcolor="#ddffdd" align="right">20.00</td>
+<td bgcolor="#ddffdd" align="right">50.00</td>
+<td bgcolor="#ddffdd" align="right">60.00</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+<td bgcolor="#ddffdd" align="right">50.00</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">Ma</th>
+<td bgcolor="#ddffdd" align="right">30.00</td>
+<td bgcolor="#ddffdd" align="right">40.00</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+<td bgcolor="#ddffdd" align="right">60.00</td>
+<td bgcolor="#ddffdd" align="right">40.00</td>
+<td bgcolor="#ddffdd" align="right">40.00</td>
+<td bgcolor="#ddffdd" align="right">50.00</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">Mo</th>
+<td bgcolor="#ddffdd" align="right">40.00</td>
+<td bgcolor="#ffddff" align="right">-20.00</td>
+<td bgcolor="#ddffdd" align="right">20.00</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+<td bgcolor="#ffddff" align="right">-20.00</td>
+<td bgcolor="#ffddff" align="right">-20.00</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">Mp</th>
+<td bgcolor="#ddffdd" align="right">20.00</td>
+<td bgcolor="#ddffdd" align="right">30.00</td>
+<td bgcolor="#ddffdd" align="right">20.00</td>
+<td bgcolor="#ddffdd" align="right">20.00</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+<td bgcolor="#ffddff" align="right">-30.00</td>
+<td bgcolor="#ddffdd" align="right">20.00</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">Po</th>
+<td bgcolor="#ddffdd" align="right">100.00</td>
+<td bgcolor="#ddffdd" align="right">60.00</td>
+<td bgcolor="#ddffdd" align="right">30.00</td>
+<td bgcolor="#ddffdd" align="right">80.00</td>
+<td bgcolor="#ddffdd" align="right">60.00</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+<td bgcolor="#ddffdd" align="right">80.00</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">Sd</th>
+<td bgcolor="#ddffdd" align="right">40.00</td>
+<td bgcolor="#ffddff" align="right">-20.00</td>
+<td bgcolor="#ffddff" align="right">-20.00</td>
+<td bgcolor="#ddffdd" align="right">60.00</td>
+<td bgcolor="#ffddff" align="right">-20.00</td>
+<td bgcolor="#ffddff" align="right">-20.00</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+</tr>
+</table>
+
+<a name="choice"></a>
+<h2><font color="#bb0000">Rubis Choice Recommendation</font></h2>
+
+    Comment: <em>In decreasing order of determinateness. All values expressed in %. </em><br>
+<table border="1">
+<tr bgcolor="#9acd32">
+<th>#</th>
+<th>Choice set</th>
+<th>Determinateness</th>
+<th>Outrankingness</th>
+<th>Outrankedness</th>
+<th>Comment</th>
+</tr>
+<tr>
+<td>1</td>
+<th bgcolor="#FFF79B">{
+           Po,
+           }
+           </th>
+<td align="center">65.00</td>
+<td align="center">65.00</td>
+<td align="center">35.00</td>
+<td>Best choice</td>
+</tr>
+<tr>
+<td>2</td>
+<th bgcolor="#FFF79B">{
+           Ma,
+           }
+           </th>
+<td align="center">65.00</td>
+<td align="center">65.00</td>
+<td align="center">40.00</td>
+<td>Best choice</td>
+</tr>
+</table>
+<a name="choice"></a>
+<h3><font color="#0000bb">Potentially Bad Choices</font></h3>
+
+    Comment: <em>All values expressed in %.</em><br>
+<table border="1">
+<tr bgcolor="#9acd32">
+<th>#</th>
+<th>Choice set</th>
+<th>Determinateness</th>
+<th>Outrankedness</th>
+<th>Outrankingness</th>
+<th>Comment</th>
+</tr>
+<tr>
+<td>1</td>
+<th bgcolor="#add8e6">{
+           Ar,
+           }
+           </th>
+<td align="center">60.00</td>
+<td align="center">60.00</td>
+<td align="center">40.00</td>
+<td>Bad choice</td>
+</tr>
+<tr>
+<td>2</td>
+<th bgcolor="#add8e6">{
+           Mo,
+           }
+           </th>
+<td align="center">60.00</td>
+<td align="center">60.00</td>
+<td align="center">40.00</td>
+<td>Bad choice</td>
+</tr>
+</table>
+<br><h2>Content</h2>
+<ul>
+<li><a href="#choice">Choice Recommendation</a></li>
+<li><a href="#graph">Outranking digraph</a></li>
+<li><a href="#alternatives">Potential decision actions</a></li>
+<li><a href="#performance">Performance table</a></li>
+<li><a href="#criteria">Family of criteria</a></li>
+<li><a href="#correlation">Criteria ordinal correlation</a></li>
+<li><a href="#outranking">Outranking relation</a></li>
+<li><a href="#vetos">Veto situations</a></li>
+<li><a href="#notice">Notice</a></li>
+</ul>
+<hr>
+<h2><a name="notice"><font color="#bb0000">Notice</font></a></h2>
+<p>Bisdorff R., Meyer P., Roubens M., <b>Rubis</b>: A new methodology for the choice decision problem. 4OR, 
+      <em>A Quarterly Journal of Operational Research</em>, Springer (2008), Vol 6 Number 2 pp. 143-165, DOI 10.1007/s10288-007-0045-5.
+    <a href="http://sma.uni.lu/bisdorff/documents/HyperKernels.pdf">PDF preprint version</a>.</p>
+<p>Online documentation: <a href="http://sma.uni.lu/d2cms">Decision Deck Project</a><br><b>Rubis XSL Transformation to HTML</b> R. Bisdorff, $Revision: 1.6 $<br><a href="http://www.decision-deck.org/xmcda">XMCDA 2.0 Schema</a> P. Meyer and Th. Veneziano 2009 <br>
+           Copyright © 2009 DECISION DECK Consortium</p>
+</body>
+</html>
