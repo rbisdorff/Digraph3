@@ -1,0 +1,1053 @@
+<html xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Decision-Deck UMCDA-ML-2.0 application</title>
+</head>
+<body>
+<h1><font color="#0000bb">Decision-Deck UMCDA-ML-2.0 Application</font></h1>
+
+<h2><font color="#bb0000">Rubis Best Choice Recommendation</font></h2>
+<h3><font color="#0000bb">XMCDA 2.0 encoding</font></h3>
+
+    Comment: <em>produced by stringIO()</em><br>
+
+    Author: digraphs Module (RB)<br>
+
+    Version: saved from Python session<br>
+<h3>Content</h3>
+<ul>
+<li><a href="#choice">Choice Recommendation</a></li>
+<li><a href="#graph">Outranking digraph</a></li>
+<li><a href="#alternatives">Potential decision actions</a></li>
+<li><a href="#performance">Performance table</a></li>
+<li><a href="#criteria">Family of criteria</a></li>
+<li><a href="#correlation">Criteria ordinal correlation</a></li>
+<li><a href="#outranking">Outranking relation</a></li>
+<li><a href="#vetos">Veto situations</a></li>
+<li><a href="#notice">Notice</a></li>
+</ul>
+
+
+<h3><font color="#0000bb">Method data</font></h3>
+
+    Comment: <em>Rubis best choice recommendation in XMCDA format.</em><br>
+
+    Version: 1.0<br>
+
+<table cellpadding="1" border="1">
+<tr>
+<th bgcolor="#9acd32">Parameter</th>
+<th bgcolor="#9acd32">Value</th>
+<th bgcolor="#9acd32">Comment</th>
+</tr>
+<tr>
+<td bgcolor="#FFF79B">variant</td>
+<td>
+Rubis
+</td>
+<td></td>
+</tr>
+<tr>
+<td bgcolor="#FFF79B">valuationType</td>
+<td>
+bipolar
+</td>
+<td></td>
+</tr>
+<tr>
+<td bgcolor="#FFF79B">vetoType</td>
+<td>
+normal
+</td>
+<td></td>
+</tr>
+</table>
+
+<a name="alternatives"></a>
+<h2><font color="#bb0000">List of Alternatives</font></h2>
+<h3><font color="#0000bb">Potential decision actions.</font></h3>
+<table border="1">
+<tr bgcolor="#9acd32">
+<th>#</th>
+<th>Identifyer</th>
+<th>Name</th>
+<th>Comment</th>
+</tr>
+<tr>
+<td>1</td>
+<th bgcolor="#FFF79B">a01</th>
+<td>alternative 1</td>
+<td>Once through</td>
+</tr>
+<tr>
+<td>2</td>
+<th bgcolor="#FFF79B">a02</th>
+<td>alternative 2</td>
+<td>After cooling tower with natutal air flow</td>
+</tr>
+<tr>
+<td>3</td>
+<th bgcolor="#FFF79B">a03</th>
+<td>alternative 3</td>
+<td>Half-closed cycle with fixed concentration factor and forced air flow</td>
+</tr>
+<tr>
+<td>4</td>
+<th bgcolor="#FFF79B">a04</th>
+<td>alternative 4</td>
+<td>Half-closed cycle with fixed concentration factor and hybrid air flow</td>
+</tr>
+<tr>
+<td>5</td>
+<th bgcolor="#FFF79B">a05</th>
+<td>alternative 5</td>
+<td>Half-closed cycle with fixed concentration factor and natural air flow</td>
+</tr>
+<tr>
+<td>6</td>
+<th bgcolor="#FFF79B">a06</th>
+<td>alternative 6</td>
+<td>Half-closed cycle with variable concentration factor and natural air flow</td>
+</tr>
+<tr>
+<td>7</td>
+<th bgcolor="#FFF79B">a07</th>
+<td>alternative 7</td>
+<td>Air condenser with forced air flow</td>
+</tr>
+</table>
+<a name="criteria"></a>
+<h2><font color="#bb0000">Rubis family of criteria.</font></h2>
+<table border="1">
+<tr bgcolor="#9acd32">
+<th rowspan="2">#</th>
+<th rowspan="2">Identifyer</th>
+<th rowspan="2">Name</th>
+<th rowspan="2">Comment</th>
+<th rowspan="2">Weight</th>
+<th colspan="3">Scale</th>
+<th colspan="5">Thresholds</th>
+</tr>
+<tr bgcolor="#9acd32">
+<th>direction</th>
+<th>min</th>
+<th>max</th>
+<th>indifference</th>
+<th>weak preference</th>
+<th>preference</th>
+<th>weak veto</th>
+<th>veto</th>
+</tr>
+<tr>
+<td align="center">1</td>
+<th bgcolor="#FFF79B">bi</th>
+<td>biological impact</td>
+<td>impact of the local ecosystem</td>
+<td align="center">2.00</td>
+<td align="center">max</td>
+<td align="center">0.00</td>
+<td align="center">10.00</td>
+<td align="center">
+
+0.50
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+1.00
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+6.00
+
+</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<th bgcolor="#FFF79B">cost</th>
+<td>total costs</td>
+<td>Investment, running, maintenance and dismantling costs</td>
+<td align="center">8.00</td>
+<td align="center">max</td>
+<td align="center">0.00</td>
+<td align="center">10.00</td>
+<td align="center">
+
+0.50
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+1.00
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+6.00
+
+</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<th bgcolor="#FFF79B">cs</th>
+<td>chemical spill</td>
+<td>release of traced of chemicals used for cleaning the system in the environment</td>
+<td align="center">2.00</td>
+<td align="center">max</td>
+<td align="center">0.00</td>
+<td align="center">10.00</td>
+<td align="center">
+
+0.50
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+1.00
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+6.00
+
+</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<th bgcolor="#FFF79B">hi</th>
+<td>heat input</td>
+<td>impact of the heat release locally</td>
+<td align="center">2.00</td>
+<td align="center">max</td>
+<td align="center">0.00</td>
+<td align="center">10.00</td>
+<td align="center">
+
+0.50
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+1.00
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+6.00
+
+</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<th bgcolor="#FFF79B">hp</th>
+<td>health of personnel</td>
+<td>health risks faced by the workers on the site</td>
+<td align="center">1.00</td>
+<td align="center">max</td>
+<td align="center">0.00</td>
+<td align="center">10.00</td>
+<td align="center">
+
+0.50
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+1.00
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+6.00
+
+</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<th bgcolor="#FFF79B">hr</th>
+<td>health of residents</td>
+<td>health risks faced by residents living in the neighborhood of the site</td>
+<td align="center">1.00</td>
+<td align="center">max</td>
+<td align="center">0.00</td>
+<td align="center">10.00</td>
+<td align="center">
+
+0.50
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+1.00
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+6.00
+
+</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<th bgcolor="#FFF79B">im</th>
+<td>im</td>
+<td>image of the site as perceved by the public</td>
+<td align="center">1.00</td>
+<td align="center">max</td>
+<td align="center">0.00</td>
+<td align="center">10.00</td>
+<td align="center">
+
+0.50
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+1.00
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+6.00
+
+</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<th bgcolor="#FFF79B">no</th>
+<td>noise</td>
+<td>noise generated by the functioning of the cooling system</td>
+<td align="center">1.00</td>
+<td align="center">max</td>
+<td align="center">0.00</td>
+<td align="center">10.00</td>
+<td align="center">
+
+0.50
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+1.00
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+6.00
+
+</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<th bgcolor="#FFF79B">sp</th>
+<td>safety of personnel</td>
+<td>risk of accidents at work faced by the personnel</td>
+<td align="center">1.00</td>
+<td align="center">max</td>
+<td align="center">0.00</td>
+<td align="center">10.00</td>
+<td align="center">
+
+0.50
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+5.00
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+6.00
+
+</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<th bgcolor="#FFF79B">sr</th>
+<td>safety of residents</td>
+<td>risk of accidents faced by the residents and other persons in the neighborhood of the site</td>
+<td align="center">1.00</td>
+<td align="center">max</td>
+<td align="center">0.00</td>
+<td align="center">100.00</td>
+<td align="center">
+
+0.50
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+1.00
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+6.00
+
+</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<th bgcolor="#FFF79B">tm</th>
+<td>intake</td>
+<td>intake of matter from the environment which is not entirely restored to the environment in its initial state</td>
+<td align="center">2.00</td>
+<td align="center">max</td>
+<td align="center">0.00</td>
+<td align="center">10.00</td>
+<td align="center">
+
+0.50
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+1.00
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+6.00
+
+</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<th bgcolor="#FFF79B">vi</th>
+<td>view</td>
+<td>harmonious visual integration in the landscape</td>
+<td align="center">1.00</td>
+<td align="center">max</td>
+<td align="center">0.00</td>
+<td align="center">10.00</td>
+<td align="center">
+
+0.50
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+1.00
+
+</td>
+<td align="center"></td>
+<td align="center">
+
+6.00
+
+</td>
+</tr>
+</table>
+
+<h2><font color="#bb0000">Rubis Performance Table</font></h2>
+<table border="1">
+<tr bgcolor="#9acd32">
+<th>alternative</th>
+<th bgcolor="#FFF79B">bi</th>
+<th bgcolor="#FFF79B">cost</th>
+<th bgcolor="#FFF79B">cs</th>
+<th bgcolor="#FFF79B">hi</th>
+<th bgcolor="#FFF79B">hp</th>
+<th bgcolor="#FFF79B">hr</th>
+<th bgcolor="#FFF79B">im</th>
+<th bgcolor="#FFF79B">no</th>
+<th bgcolor="#FFF79B">sp</th>
+<th bgcolor="#FFF79B">sr</th>
+<th bgcolor="#FFF79B">tm</th>
+<th bgcolor="#FFF79B">vi</th>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">a01</th>
+<td align="right">2.82</td>
+<td align="right">3.45</td>
+<td align="right">4.64</td>
+<td align="right">1.82</td>
+<td align="right">7.36</td>
+<td align="right">7.64</td>
+<td align="right">6.55</td>
+<td align="right">8.91</td>
+<td align="right">7.82</td>
+<td align="right">8.00</td>
+<td align="right">2.27</td>
+<td align="right">8.18</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">a02</th>
+<td align="right">4.00</td>
+<td align="right">0.47</td>
+<td align="right">4.64</td>
+<td align="right">4.09</td>
+<td align="right">5.09</td>
+<td align="right">6.45</td>
+<td align="right">3.09</td>
+<td align="right">5.73</td>
+<td align="right">5.64</td>
+<td align="right">6.45</td>
+<td align="right">2.64</td>
+<td align="right">3.36</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">a03</th>
+<td align="right">4.82</td>
+<td align="right">3.22</td>
+<td align="right">4.64</td>
+<td align="right">5.27</td>
+<td align="right">4.18</td>
+<td align="right">5.27</td>
+<td align="right">4.27</td>
+<td align="right">3.18</td>
+<td align="right">5.27</td>
+<td align="right">6.55</td>
+<td align="right">4.55</td>
+<td align="right">3.91</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">a04</th>
+<td align="right">5.00</td>
+<td align="right">1.52</td>
+<td align="right">4.64</td>
+<td align="right">5.18</td>
+<td align="right">4.55</td>
+<td align="right">5.73</td>
+<td align="right">4.91</td>
+<td align="right">3.45</td>
+<td align="right">5.36</td>
+<td align="right">6.45</td>
+<td align="right">5.09</td>
+<td align="right">4.27</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">a05</th>
+<td align="right">4.73</td>
+<td align="right">2.01</td>
+<td align="right">4.09</td>
+<td align="right">4.91</td>
+<td align="right">4.82</td>
+<td align="right">6.18</td>
+<td align="right">4.09</td>
+<td align="right">5.36</td>
+<td align="right">5.55</td>
+<td align="right">6.45</td>
+<td align="right">4.55</td>
+<td align="right">3.36</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">a06</th>
+<td align="right">4.45</td>
+<td align="right">2.00</td>
+<td align="right">5.36</td>
+<td align="right">4.64</td>
+<td align="right">3.91</td>
+<td align="right">5.45</td>
+<td align="right">4.27</td>
+<td align="right">3.27</td>
+<td align="right">5.18</td>
+<td align="right">6.55</td>
+<td align="right">4.64</td>
+<td align="right">3.82</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">a07</th>
+<td align="right">9.00</td>
+<td align="right">0.00</td>
+<td align="right">9.36</td>
+<td align="right">8.55</td>
+<td align="right">7.91</td>
+<td align="right">8.81</td>
+<td align="right">8.18</td>
+<td align="right">3.45</td>
+<td align="right">6.55</td>
+<td align="right">8.00</td>
+<td align="right">9.18</td>
+<td align="right">6.09</td>
+</tr>
+</table>
+<a name="correlation"></a>
+
+<h2><font color="#bb0000">Ordinal Criteria Correlation Index</font></h2>
+
+    Comment: <em>Generalisation of Kendall's τ to nested homogeneous semiorders.</em><br>
+
+correlation<table border="1">
+<tr bgcolor="#9acd32">
+<th>relation</th>
+<th bgcolor="#FFF79B">bi</th>
+<th bgcolor="#FFF79B">cost</th>
+<th bgcolor="#FFF79B">cs</th>
+<th bgcolor="#FFF79B">hi</th>
+<th bgcolor="#FFF79B">hp</th>
+<th bgcolor="#FFF79B">hr</th>
+<th bgcolor="#FFF79B">im</th>
+<th bgcolor="#FFF79B">no</th>
+<th bgcolor="#FFF79B">sp</th>
+<th bgcolor="#FFF79B">sr</th>
+<th bgcolor="#FFF79B">tm</th>
+<th bgcolor="#FFF79B">vi</th>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">bi</th>
+<td bgcolor="#ddffdd" align="right">1.00</td>
+<td bgcolor="#ffddff" align="right">-0.71</td>
+<td bgcolor="#ffddff" align="right">-0.38</td>
+<td bgcolor="#ddffdd" align="right">0.71</td>
+<td bgcolor="#ffddff" align="right">-0.14</td>
+<td bgcolor="#ffddff" align="right">-0.19</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+<td bgcolor="#ffddff" align="right">-0.81</td>
+<td bgcolor="#ffddff" align="right">-0.43</td>
+<td bgcolor="#ddffdd" align="right">0.05</td>
+<td bgcolor="#ddffdd" align="right">0.29</td>
+<td bgcolor="#ffddff" align="right">-0.05</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">cost</th>
+<td bgcolor="#ffddff" align="right">-0.71</td>
+<td bgcolor="#ddffdd" align="right">1.00</td>
+<td bgcolor="#ffddff" align="right">-0.90</td>
+<td bgcolor="#ffddff" align="right">-0.62</td>
+<td bgcolor="#ffddff" align="right">-0.52</td>
+<td bgcolor="#ffddff" align="right">-0.43</td>
+<td bgcolor="#ffddff" align="right">-0.14</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+<td bgcolor="#ffddff" align="right">-0.71</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+<td bgcolor="#ffddff" align="right">-0.43</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">cs</th>
+<td bgcolor="#ffddff" align="right">-0.38</td>
+<td bgcolor="#ffddff" align="right">-0.90</td>
+<td bgcolor="#ddffdd" align="right">1.00</td>
+<td bgcolor="#ffddff" align="right">-0.29</td>
+<td bgcolor="#ffddff" align="right">-0.43</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+<td bgcolor="#ffddff" align="right">-0.90</td>
+<td bgcolor="#ffddff" align="right">-0.62</td>
+<td bgcolor="#ffddff" align="right">-0.24</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+<td bgcolor="#ffddff" align="right">-0.24</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">hi</th>
+<td bgcolor="#ddffdd" align="right">0.71</td>
+<td bgcolor="#ffddff" align="right">-0.62</td>
+<td bgcolor="#ffddff" align="right">-0.29</td>
+<td bgcolor="#ddffdd" align="right">1.00</td>
+<td bgcolor="#ffddff" align="right">-0.24</td>
+<td bgcolor="#ffddff" align="right">-0.29</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+<td bgcolor="#ffddff" align="right">-0.90</td>
+<td bgcolor="#ffddff" align="right">-0.62</td>
+<td bgcolor="#ffddff" align="right">-0.14</td>
+<td bgcolor="#ddffdd" align="right">0.29</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">hp</th>
+<td bgcolor="#ffddff" align="right">-0.14</td>
+<td bgcolor="#ffddff" align="right">-0.52</td>
+<td bgcolor="#ffddff" align="right">-0.43</td>
+<td bgcolor="#ffddff" align="right">-0.24</td>
+<td bgcolor="#ddffdd" align="right">1.00</td>
+<td bgcolor="#ddffdd" align="right">0.71</td>
+<td bgcolor="#ddffdd" align="right">0.14</td>
+<td bgcolor="#ffddff" align="right">-0.14</td>
+<td bgcolor="#ffddff" align="right">-0.62</td>
+<td bgcolor="#ddffdd" align="right">0.33</td>
+<td bgcolor="#ffddff" align="right">-0.48</td>
+<td bgcolor="#ddffdd" align="right">0.24</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">hr</th>
+<td bgcolor="#ffddff" align="right">-0.19</td>
+<td bgcolor="#ffddff" align="right">-0.43</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+<td bgcolor="#ffddff" align="right">-0.29</td>
+<td bgcolor="#ddffdd" align="right">0.71</td>
+<td bgcolor="#ddffdd" align="right">1.00</td>
+<td bgcolor="#ddffdd" align="right">0.14</td>
+<td bgcolor="#ddffdd" align="right">0.05</td>
+<td bgcolor="#ffddff" align="right">-0.52</td>
+<td bgcolor="#ddffdd" align="right">0.43</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+<td bgcolor="#ddffdd" align="right">0.33</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">im</th>
+<td bgcolor="#dddddd" align="right">0.00</td>
+<td bgcolor="#ffddff" align="right">-0.14</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+<td bgcolor="#ddffdd" align="right">0.14</td>
+<td bgcolor="#ddffdd" align="right">0.14</td>
+<td bgcolor="#ddffdd" align="right">1.00</td>
+<td bgcolor="#ffddff" align="right">-0.43</td>
+<td bgcolor="#ffddff" align="right">-0.71</td>
+<td bgcolor="#ddffdd" align="right">0.24</td>
+<td bgcolor="#ddffdd" align="right">0.33</td>
+<td bgcolor="#ddffdd" align="right">0.24</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">no</th>
+<td bgcolor="#ffddff" align="right">-0.81</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+<td bgcolor="#ffddff" align="right">-0.90</td>
+<td bgcolor="#ffddff" align="right">-0.90</td>
+<td bgcolor="#ffddff" align="right">-0.14</td>
+<td bgcolor="#ddffdd" align="right">0.05</td>
+<td bgcolor="#ffddff" align="right">-0.43</td>
+<td bgcolor="#ddffdd" align="right">1.00</td>
+<td bgcolor="#ffddff" align="right">-0.62</td>
+<td bgcolor="#ffddff" align="right">-0.14</td>
+<td bgcolor="#ffddff" align="right">-0.81</td>
+<td bgcolor="#ffddff" align="right">-0.05</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">sp</th>
+<td bgcolor="#ffddff" align="right">-0.43</td>
+<td bgcolor="#ffddff" align="right">-0.71</td>
+<td bgcolor="#ffddff" align="right">-0.62</td>
+<td bgcolor="#ffddff" align="right">-0.62</td>
+<td bgcolor="#ffddff" align="right">-0.62</td>
+<td bgcolor="#ffddff" align="right">-0.52</td>
+<td bgcolor="#ffddff" align="right">-0.71</td>
+<td bgcolor="#ffddff" align="right">-0.62</td>
+<td bgcolor="#ddffdd" align="right">1.00</td>
+<td bgcolor="#ffddff" align="right">-0.05</td>
+<td bgcolor="#ffddff" align="right">-0.62</td>
+<td bgcolor="#ffddff" align="right">-0.43</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">sr</th>
+<td bgcolor="#ddffdd" align="right">0.05</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+<td bgcolor="#ffddff" align="right">-0.24</td>
+<td bgcolor="#ffddff" align="right">-0.14</td>
+<td bgcolor="#ddffdd" align="right">0.33</td>
+<td bgcolor="#ddffdd" align="right">0.43</td>
+<td bgcolor="#ddffdd" align="right">0.24</td>
+<td bgcolor="#ffddff" align="right">-0.14</td>
+<td bgcolor="#ffddff" align="right">-0.05</td>
+<td bgcolor="#ddffdd" align="right">1.00</td>
+<td bgcolor="#ffddff" align="right">-0.19</td>
+<td bgcolor="#ddffdd" align="right">0.52</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">tm</th>
+<td bgcolor="#ddffdd" align="right">0.29</td>
+<td bgcolor="#ffddff" align="right">-0.43</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+<td bgcolor="#ddffdd" align="right">0.29</td>
+<td bgcolor="#ffddff" align="right">-0.48</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+<td bgcolor="#ddffdd" align="right">0.33</td>
+<td bgcolor="#ffddff" align="right">-0.81</td>
+<td bgcolor="#ffddff" align="right">-0.62</td>
+<td bgcolor="#ffddff" align="right">-0.19</td>
+<td bgcolor="#ddffdd" align="right">1.00</td>
+<td bgcolor="#ffddff" align="right">-0.19</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">vi</th>
+<td bgcolor="#ffddff" align="right">-0.05</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+<td bgcolor="#ffddff" align="right">-0.24</td>
+<td bgcolor="#ffddff" align="right">-0.33</td>
+<td bgcolor="#ddffdd" align="right">0.24</td>
+<td bgcolor="#ddffdd" align="right">0.33</td>
+<td bgcolor="#ddffdd" align="right">0.24</td>
+<td bgcolor="#ffddff" align="right">-0.05</td>
+<td bgcolor="#ffddff" align="right">-0.43</td>
+<td bgcolor="#ddffdd" align="right">0.52</td>
+<td bgcolor="#ffddff" align="right">-0.19</td>
+<td bgcolor="#ddffdd" align="right">1.00</td>
+</tr>
+</table>
+<h3><font color="#bb0000">Principal component analysis of the criteria correlation index</font></h3>
+<div style="text-align: left;">
+<p><a href="http://leopold-loewenheim.uni.lu/rubisServer/Images/similarityPlot-OW6fegnRZQJTkF34.pdf">
+      See PDF graphic file for better image quality and zooming options</a>
+        (generated with R).</p>
+<img src="http://leopold-loewenheim.uni.lu/rubisServer/Images/similarityPlot-OW6fegnRZQJTkF34.jpg">
+</div>
+<h2><a name="graph"><font color="#bb0000">Significantly Concordant Outranking Graph</font></a></h2>
+<p>(<i><b> Black arrows</b> indicate outranking situations supported by a criteria coalition 
+      of positive significance, i.e. gathering more than 50% of the global criteria significance weights.
+      <b>Empty arrow heads</b> indicate an indeterminate outranking situation.</i>)</p>
+<div style="text-align: left;">
+<p><a href="http://leopold-loewenheim.uni.lu/rubisServer/Images/rubisGraph-OW6fegnRZQJTkF34.pdf">
+      See PDF graphic file for better image quality and zooming options</a>
+        (generated with GraphViz).</p>
+<img src="http://leopold-loewenheim.uni.lu/rubisServer/Images/rubisGraph-OW6fegnRZQJTkF34.png">
+</div>
+<a name="outranking"></a>
+
+<h2><font color="#bb0000">Bipolar-valued Outranking Relation</font></h2>
+
+    Comment: <em>Rubis Choice Recommendation Relation</em><br>
+
+
+<h3><font color="#0000bb">Valuation Domain</font></h3>
+
+    Comment: <em>Significance degrees</em><br>
+<table cellpadding="1" border="1">
+<tr>
+<td bgcolor="#FFF79B">Maximum</td>
+<td bgcolor="#ddffdd" align="right">100</td>
+</tr>
+<tr>
+<td bgcolor="#FFF79B">Median</td>
+<td bgcolor="#dddddd" align="right">0</td>
+</tr>
+<tr>
+<td bgcolor="#FFF79B">Minimum</td>
+<td bgcolor="#ffddff" align="right">-100</td>
+</tr>
+</table>
+
+<h3><font color="#0000bb">Valued Adjacency Table</font></h3>
+
+    Comment: <em>Pairwise outranking significance degrees in the range: -100.00 to 100.00</em><br>
+<table border="1">
+<tr bgcolor="#9acd32">
+<th></th>
+<th bgcolor="#FFF79B">a01</th>
+<th bgcolor="#FFF79B">a02</th>
+<th bgcolor="#FFF79B">a03</th>
+<th bgcolor="#FFF79B">a04</th>
+<th bgcolor="#FFF79B">a05</th>
+<th bgcolor="#FFF79B">a06</th>
+<th bgcolor="#FFF79B">a07</th>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">a01</th>
+<td bgcolor="#dddddd" align="right">0.00</td>
+<td bgcolor="#ddffdd" align="right">65.22</td>
+<td bgcolor="#ddffdd" align="right">47.83</td>
+<td bgcolor="#ddffdd" align="right">47.83</td>
+<td bgcolor="#ddffdd" align="right">47.83</td>
+<td bgcolor="#ddffdd" align="right">39.13</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">a02</th>
+<td bgcolor="#ffddff" align="right">-26.09</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+<td bgcolor="#ffddff" align="right">-26.09</td>
+<td bgcolor="#ffddff" align="right">-34.78</td>
+<td bgcolor="#ffddff" align="right">-13.04</td>
+<td bgcolor="#ffddff" align="right">-13.04</td>
+<td bgcolor="#ffddff" align="right">-100.00</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">a03</th>
+<td bgcolor="#ddffdd" align="right">43.48</td>
+<td bgcolor="#ddffdd" align="right">78.26</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+<td bgcolor="#ddffdd" align="right">86.96</td>
+<td bgcolor="#ddffdd" align="right">82.61</td>
+<td bgcolor="#ddffdd" align="right">91.30</td>
+<td bgcolor="#ffddff" align="right">-17.39</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">a04</th>
+<td bgcolor="#ffddff" align="right">-26.09</td>
+<td bgcolor="#ddffdd" align="right">82.61</td>
+<td bgcolor="#ddffdd" align="right">30.43</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+<td bgcolor="#ddffdd" align="right">91.30</td>
+<td bgcolor="#ddffdd" align="right">91.30</td>
+<td bgcolor="#ffddff" align="right">-17.39</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">a05</th>
+<td bgcolor="#ffddff" align="right">-34.78</td>
+<td bgcolor="#ddffdd" align="right">91.30</td>
+<td bgcolor="#ddffdd" align="right">17.39</td>
+<td bgcolor="#ddffdd" align="right">73.91</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+<td bgcolor="#ddffdd" align="right">82.61</td>
+<td bgcolor="#ffddff" align="right">-17.39</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">a06</th>
+<td bgcolor="#ffddff" align="right">-26.09</td>
+<td bgcolor="#ddffdd" align="right">73.91</td>
+<td bgcolor="#ddffdd" align="right">21.74</td>
+<td bgcolor="#ddffdd" align="right">73.91</td>
+<td bgcolor="#ddffdd" align="right">82.61</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+<td bgcolor="#ffddff" align="right">-17.39</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B">a07</th>
+<td bgcolor="#ddffdd" align="right">100.00</td>
+<td bgcolor="#ddffdd" align="right">100.00</td>
+<td bgcolor="#ddffdd" align="right">30.43</td>
+<td bgcolor="#ddffdd" align="right">30.43</td>
+<td bgcolor="#ddffdd" align="right">21.74</td>
+<td bgcolor="#ddffdd" align="right">30.43</td>
+<td bgcolor="#dddddd" align="right">0.00</td>
+</tr>
+</table>
+
+<a name="vetos"></a>
+
+<h2><font color="#bb0000">Vetoes</font></h2>
+
+
+<h3><font color="#0000bb">Effective and potential veto situations</font></h3>
+<p>(The <b>concordance degree</b> of an outranking statement (an arc) results from the 
+      difference between the significance (the sum of weights) of the coalition of criteria 
+      in favour and the significance of the coalition of criteria in disfavour of this statement.)</p>
+<ol>
+<li>Veto against <b>a02 outranks
+            a07</b> (
+          concordance degree:-17.39)
+           <table border="1">
+<tr bgcolor="#9acd32">
+<th>criterion</th>
+<th>performance difference</th>
+<th>status</th>
+<th>characteristic</th>
+</tr>
+<tr>
+<th bgcolor="#FFF79B" align="center">tm</th>
+<td align="center">-6.54</td>
+<td>potential veto</td>
+<td align="center">1.00</td>
+</tr>
+</table>
+<br>
+</li>
+<li>Veto against <b>a01 outranks
+            a07</b> (
+          concordance degree:8.70)
+           <table border="1">
+<tr bgcolor="#9acd32">
+<th>criterion</th>
+<th>performance difference</th>
+<th>status</th>
+<th>characteristic</th>
+</tr>
+<tr>
+<th bgcolor="#FFF79B" align="center">bi</th>
+<td align="center">-6.18</td>
+<td>effective veto</td>
+<td align="center">1.00</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B" align="center">tm</th>
+<td align="center">-6.91</td>
+<td>effective veto</td>
+<td align="center">1.00</td>
+</tr>
+<tr>
+<th bgcolor="#FFF79B" align="center">hi</th>
+<td align="center">-6.73</td>
+<td>effective veto</td>
+<td align="center">1.00</td>
+</tr>
+</table>
+<br>
+</li>
+</ol>
+
+<a name="choice"></a>
+<h2><font color="#bb0000">Rubis Choice Recommendation</font></h2>
+
+    Comment: <em>In decreasing order of determinateness. All values expressed in %. </em><br>
+<table border="1">
+<tr bgcolor="#9acd32">
+<th>#</th>
+<th>Choice set</th>
+<th>Determinateness</th>
+<th>Outrankingness</th>
+<th>Outrankedness</th>
+<th>Comment</th>
+</tr>
+<tr>
+<td>1</td>
+<th bgcolor="#FFF79B">{
+           a07,
+           }
+           </th>
+<td align="center">60.87</td>
+<td align="center">60.87</td>
+<td align="center">0.00</td>
+<td>Best choice</td>
+</tr>
+</table>
+<a name="choice"></a>
+<h3><font color="#0000bb">Potentially Bad Choices</font></h3>
+
+    Comment: <em>All values expressed in %.</em><br>
+<table border="1">
+<tr bgcolor="#9acd32">
+<th>#</th>
+<th>Choice set</th>
+<th>Determinateness</th>
+<th>Outrankedness</th>
+<th>Outrankingness</th>
+<th>Comment</th>
+</tr>
+<tr>
+<td>1</td>
+<th bgcolor="#add8e6">{
+           a02,
+           }
+           </th>
+<td align="center">82.61</td>
+<td align="center">82.61</td>
+<td align="center">0.00</td>
+<td>Bad choice</td>
+</tr>
+</table>
+<br><h2>Content</h2>
+<ul>
+<li><a href="#choice">Choice Recommendation</a></li>
+<li><a href="#graph">Outranking digraph</a></li>
+<li><a href="#alternatives">Potential decision actions</a></li>
+<li><a href="#performance">Performance table</a></li>
+<li><a href="#criteria">Family of criteria</a></li>
+<li><a href="#correlation">Criteria ordinal correlation</a></li>
+<li><a href="#outranking">Outranking relation</a></li>
+<li><a href="#vetos">Veto situations</a></li>
+<li><a href="#notice">Notice</a></li>
+</ul>
+<hr>
+<h2><a name="notice"><font color="#bb0000">Notice</font></a></h2>
+<p>Bisdorff R., Meyer P., Roubens M., <b>Rubis</b>: A new methodology for the choice decision problem. 4OR, 
+      <em>A Quarterly Journal of Operational Research</em>, Springer (2008), Vol 6 Number 2 pp. 143-165, DOI 10.1007/s10288-007-0045-5.
+    <a href="http://sma.uni.lu/bisdorff/documents/HyperKernels.pdf">PDF preprint version</a>.</p>
+<p>Online documentation: <a href="http://sma.uni.lu/d2cms">Decision Deck Project</a><br><b>Rubis XSL Transformation to HTML</b> R. Bisdorff, $Revision: 1.6 $<br><a href="http://www.decision-deck.org/xmcda">XMCDA 2.0 Schema</a> P. Meyer and Th. Veneziano 2009 <br>
+           Copyright © 2009 DECISION DECK Consortium</p>
+</body>
+</html>
