@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"?>
+<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2009/XMCDA-2.0.0 http://www.decision-deck.org/xmcda/_downloads/XMCDA-2.0.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0" instanceID="void">
+<projectReference id="kindergarten" name="kindergarten.xml">
+<title>Site selection for a university kindergarten in Madrid</title>
+<author>T. Tervonen, G. Fernandez Barberis, J. Rui Figueira and M. C. Escribano</author>
+<version>RB July 2014</version>
+<comment>Comment of Handbook chapter 8</comment>
+</projectReference>
+<methodParameters id="Rubis" name="Rubis best choice method" mcdaConcept="methodData">
+<description>
+<subTitle>Method parameters</subTitle>
+<version>1.0</version>
+</description>
+<parameters>
+<parameter name="variant">
+<value>
+<label>Rubis</label>
+</value>
+</parameter>
+<parameter name="valuationType">
+<value>
+<label>bipolar</label>
+</value>
+</parameter>
+</parameters>
+</methodParameters>
+<alternatives mcdaConcept="alternatives">
+<description>
+<subTitle>Potential decision actions.</subTitle>
+</description>
+<alternative id="Mp" name="Campus Monteprincipe" mcdaConcept="potentialDecisionAction">
+<description>
+<comment>South West of Madrid centre.</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="Mo" name="Campus Moncloa" mcdaConcept="potentialDecisionAction">
+<description>
+<comment>Madrid centre. Same location as San Dominique.</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="Ar" name="Campus Arguelles" mcdaConcept="potentialDecisionAction">
+<description>
+<comment>Madrid centre.</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="Sd" name="San Dominique" mcdaConcept="potentialDecisionAction">
+<description>
+<comment>Madrid centre. Same loaction as Campus Moncloa</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="Ma" name="Majadahonda" mcdaConcept="potentialDecisionAction">
+<description>
+<comment>West of Madrid centre.</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="Po" name="Pozuelo" mcdaConcept="potentialDecisionAction">
+<description>
+<comment>Sout West of Madrid centre.</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="Lr" name="La Rozas" mcdaConcept="potentialDecisionAction">
+<description>
+<comment>West of Madrid centre.</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+</alternatives>
+
+<criteria mcdaConcept="criteria">
+
+<description>
+<subTitle>Family of criteria.</subTitle>
+</description>
+
+<criterion id="ACC" name="Accessibility to Madrid city centre" mcdaConcept="criterion">
+<description>
+<comment>In minutes. The metropolitan area
+  of Madrid covers a wide area, causing transportation accessibility
+  to be of importantance when choosing a site for a new facility. In a
+  city with heavy traffic congestion, the actual distance might not
+  correlate with accessibility, and therefore we have chosen to
+  measure it in minutes by public transportation from a central
+  transport hub.</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>0.3</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>min</preferenceDirection>
+<minimum><real>30.00</real></minimum>
+<maximum><real>60.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>6.5</real>
+</constant>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>12.5</real>
+</constant>
+</threshold>
+<!--<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">-->
+<!--<constant>-->
+<!--<real>63.25</real>-->
+<!--</constant>-->
+<!--</threshold>-->
+</thresholds>
+</criterion>
+
+<criterion id="SIZ" name="Size (in children) of the kindergarten" mcdaConcept="criterion">
+<description>
+<comment>size (in children) of the kindergarten to be
+  built as measured with a number of day-care places. The Spanish
+  government regulates \citep{BOE:2005,BOE:2007} the maximum number of children
+  for $m^2$ and the required common services. The number of day-care
+  places can be derived from the estimated building specifications.</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>0.2</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>100.00</real></minimum>
+<maximum><real>300.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>1.5</real>
+</constant>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>3</real>
+</constant>
+</threshold>
+<!--<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">-->
+<!--<constant>-->
+<!--<real>50.49</real>-->
+<!--</constant>-->
+<!--</threshold>-->
+</thresholds>
+</criterion>
+
+
+<criterion id="COP" name="land and construction prize" mcdaConcept="criterion">
+<description>
+<comment>The sites have differing
+  costs of location and construction depending on the building
+  location (e.g. residential zone, city center or outskirts).</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>0.3</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>min</preferenceDirection>
+<minimum><real>3000000.00</real></minimum>
+<maximum><real>5500000.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>10000.00</real>
+</constant>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>100000.00</real>
+</constant>
+</threshold>
+<!--<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">-->
+<!--<constant>-->
+<!--<real>50.49</real>-->
+<!--</constant>-->
+<!--</threshold>-->
+</thresholds>
+</criterion>
+
+<criterion id="EFF" name="Effects to the city landscape" mcdaConcept="criterion">
+<description>
+<comment>Government regulations define that
+  effects to urban landscape, green spaces, and cultural heritage must
+  be estimated. We measure them with odinal ranking number from best (1rst) to worst (7th).</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>0.1</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>min</preferenceDirection>
+<minimum><real>1.00</real></minimum>
+<maximum><real>7.00</real></maximum>
+</quantitative>
+</scale>
+</criterion>
+
+<criterion id="MAC" name="maintenance costs of the facility" mcdaConcept="criterion">
+<description>
+<comment>In euros / month, measured by
+  estimating total fixed and variable costs (supplies, personnel,
+  taxes, etc).</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>0.1</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>min</preferenceDirection>
+<minimum><real>20000.00</real></minimum>
+<maximum><real>50000.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope>
+<real>0.03</real>
+</slope>
+<intercept>
+<real>0.00</real>
+</intercept>
+</linear>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope>
+<real>0.08</real>
+</slope>
+<intercept>
+<real>0.00</real>
+</intercept>
+</linear>
+</threshold>
+<!--<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">-->
+<!--<constant>-->
+<!--<real>67.76</real>-->
+<!--</constant>-->
+<!--</threshold>-->
+</thresholds>
+</criterion>
+
+</criteria>
+
+<performanceTable mcdaConcept="performanceTable">
+<description>
+<subTitle>Rubis Performance Table.</subTitle>
+</description>
+<alternativePerformances>
+<alternativeID>Mp</alternativeID>
+<performance>
+<criterionID>ACC</criterionID>
+<value><real>52.5</real></value>
+</performance>
+<performance>
+<criterionID>SIZ</criterionID>
+<value><real>234</real></value>
+</performance>
+<performance>
+<criterionID>COP</criterionID>
+<value><real>3937880.00</real></value>
+</performance>
+<performance>
+<criterionID>EFF</criterionID>
+<value><real>3.0</real></value>
+</performance>
+<performance>
+<criterionID>MAC</criterionID>
+<value><real>43500.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>Mo</alternativeID>
+<performance>
+<criterionID>ACC</criterionID>
+<value><real>39.17</real></value>
+</performance>
+<performance>
+<criterionID>SIZ</criterionID>
+<value><real>159.00</real></value>
+</performance>
+<performance>
+<criterionID>COP</criterionID>
+<value><real>4729000.00</real></value>
+</performance>
+<performance>
+<criterionID>EFF</criterionID>
+<value><real>7.0</real></value>
+</performance>
+<performance>
+<criterionID>MAC</criterionID>
+<value><real>29000.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>Ar</alternativeID>
+<performance>
+<criterionID>ACC</criterionID>
+<value><real>36.67</real></value>
+</performance>
+<performance>
+<criterionID>SIZ</criterionID>
+<value><real>167.0</real></value>
+</performance>
+<performance>
+<criterionID>COP</criterionID>
+<value><real>5238520.00</real></value>
+</performance>
+<performance>
+<criterionID>EFF</criterionID>
+<value><real>5.0</real></value>
+</performance>
+<performance>
+<criterionID>MAC</criterionID>
+<value><real>31750.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>Sd</alternativeID>
+<performance>
+<criterionID>ACC</criterionID>
+<value><real>38.33</real></value>
+</performance>
+<performance>
+<criterionID>SIZ</criterionID>
+<value><real>134.00</real></value>
+</performance>
+<performance>
+<criterionID>COP</criterionID>
+<value><real>4068450</real></value>
+</performance>
+<performance>
+<criterionID>EFF</criterionID>
+<value><real>6.0</real></value>
+</performance>
+<performance>
+<criterionID>MAC</criterionID>
+<value><real>26250.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>Ma</alternativeID>
+<performance>
+<criterionID>ACC</criterionID>
+<value><real>46.33</real></value>
+</performance>
+<performance>
+<criterionID>SIZ</criterionID>
+<value><real>159.0</real></value>
+</performance>
+<performance>
+<criterionID>COP</criterionID>
+<value><real>3146000.00</real></value>
+</performance>
+<performance>
+<criterionID>EFF</criterionID>
+<value><real>4.0</real></value>
+</performance>
+<performance>
+<criterionID>MAC</criterionID>
+<value><real>30500.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>Po</alternativeID>
+<performance>
+<criterionID>ACC</criterionID>
+<value><real>42.83</real></value>
+</performance>
+<performance>
+<criterionID>SIZ</criterionID>
+<value><real>167.0</real></value>
+</performance>
+<performance>
+<criterionID>COP</criterionID>
+<value><real>3317270.00</real></value>
+</performance>
+<performance>
+<criterionID>EFF</criterionID>
+<value><real>1.0</real></value>
+</performance>
+<performance>
+<criterionID>MAC</criterionID>
+<value><real>31750.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>Lr</alternativeID>
+<performance>
+<criterionID>ACC</criterionID>
+<value><real>49.00</real></value>
+</performance>
+<performance>
+<criterionID>SIZ</criterionID>
+<value><real>201.0</real></value>
+</performance>
+<performance>
+<criterionID>COP</criterionID>
+<value><real>3904800.00</real></value>
+</performance>
+<performance>
+<criterionID>EFF</criterionID>
+<value><real>2.0</real></value>
+</performance>
+<performance>
+<criterionID>MAC</criterionID>
+<value><real>38000.00</real></value>
+</performance>
+</alternativePerformances>
+</performanceTable>
+</xmcda:XMCDA>
