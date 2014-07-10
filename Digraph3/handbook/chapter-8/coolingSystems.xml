@@ -7,7 +7,7 @@
 <author>M. Pirlot, J. Teghem, B. Ulungu, L. Divivier, P. Bulens, C. Goffin</author>
 <version>Average assessments of all evaluators</version>
 <comment>XMCDA-2.0.0 prepared and modified by R. Bisdorff, August 2010</comment>
-    <bibliography><bibEntry>Choosing a colling system for a power plant in Belgium. Chapter in R. Bisdorff, L. Dias, V. Mousseau and M. Pirlot, Evaluation and Decision Models with Multiple Criteria: Case Studies. Springer forthcoming.</bibEntry></bibliography>
+    <bibliography><bibEntry>Choosing a cooling system for a power plant in Belgium. Chapter 8 in R. Bisdorff, L. Dias, V. Mousseau and M. Pirlot, Evaluation and Decision Models with Multiple Criteria: Case Studies. Springer forthcoming.</bibEntry></bibliography>
     </projectReference>
 <methodParameters id="Rubis" name="Rubis best choice method" mcdaConcept="methodData">
 <description>
