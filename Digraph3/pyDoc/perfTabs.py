@@ -287,7 +287,8 @@ class PerformanceTableau(object):
                 self.thresholds = argDict['threshold']
                 self.criteria = {}
                 for g in argDict['criteria']:
-                    self.criteria[g] = {'weight':Decimal(str(self.weightset[g])), 'thresholds': self.thresholds[g]}
+                    self.criteria[g] = {'weight':Decimal(str(self.weightset[g])),
+                                        'thresholds': self.thresholds[g]}
                     
                 
             except:
@@ -415,20 +416,23 @@ class PerformanceTableau(object):
             print() 
  
         
-    def computePerformanceDifferences(self,comments = False, Debug = False):
+    def computePerformanceDifferences(self,Comments = False,
+                                      Debug = False,
+                                      NotPermanentDiffs=True):
         """
         Adds to the criteria dictionary the ordered list of all observed performance differences.
         """
         
         if Debug:
-            comments = True
-        if comments:
+            Comments = True
+        if Comments:
             print('Compute performance differences on each criterion')
         criteriaList = [x for x in self.criteria]
         criteriaList.sort()
         actionsList = [x for x in self.actions]
         n = len(actionsList)
-
+        if NotPermanentDiffs:
+            performanceDifferences = {}
         for c in criteriaList:
             ed = Decimal(str(self.criteria[c]['scale'][1])) - Decimal(str(self.criteria[c]['scale'][0]))
             md = Decimal('0')
@@ -449,12 +453,56 @@ class PerformanceTableau(object):
             self.criteria[c]['maximalPerformanceDifference'] = md
             #diffList = list(diff)
             diffList.sort()
-            self.criteria[c]['performanceDifferences'] = diffList
-            if comments:
-                print(' -->', c, ': ', self.criteria[c]['minimalPerformanceDifference'], self.criteria[c]['maximalPerformanceDifference'])
-                print(len(self.criteria[c]['performanceDifferences']),self.criteria[c]['performanceDifferences'])
-                print(self.criteria[c]['performanceDifferences'][0], self.criteria[c]['performanceDifferences'][-1])
+            if NotPermanentDiffs:
+                performanceDifferences[c] = diffList
+            else:
+                self.criteria[c]['performanceDifferences'] = diffList
+                if Comments:
+                    print(' -->', c, ': ', self.criteria[c]['minimalPerformanceDifference'], self.criteria[c]['maximalPerformanceDifference'])
+                    print(len(self.criteria[c]['performanceDifferences']),self.criteria[c]['performanceDifferences'])
+                    print(self.criteria[c]['performanceDifferences'][0], self.criteria[c]['performanceDifferences'][-1])
 
+        if NotPermanentDiffs:
+            return performanceDifferences
+
+    def computeCriterionPerformanceDifferences(self,c, Comments = False,
+                                      Debug = False):
+        """
+        Renders the ordered list of all observed performance differences on the given criterion.
+        """
+        
+        if Debug:
+            Comments = True
+        if Comments:
+            print('Compute performance differences on criterion %s' % c)
+        actionsList = [x for x in self.actions]
+        n = len(actionsList)
+        ed = Decimal(str(self.criteria[c]['scale'][1])) - Decimal(str(self.criteria[c]['scale'][0]))
+        md = Decimal('0')
+        #diff = set()
+        diffList = []
+        for i in range(n):
+            for j in range(i+1,n):
+                delta = abs(self.evaluation[c][actionsList[i]] - self.evaluation[c][actionsList[j]])
+                if delta < ed:
+                    ed = delta
+                if delta > md:
+                    md = delta
+                #diff.add(delta)
+                diffList.append(delta)
+                if Debug:
+                    print('-->> i,j, self.evaluation[actionsList[i]],self.evaluation[actionsList[j]], delta, ed,md', i,j, self.evaluation[c][actionsList[i]],self.evaluation[c][actionsList[j]], delta, ed,md,diffList)
+        self.criteria[c]['minimalPerformanceDifference'] = ed
+        self.criteria[c]['maximalPerformanceDifference'] = md
+        #diffList = list(diff)
+        diffList.sort()
+        if Comments:
+            print(' -->', c, ': ', self.criteria[c]['minimalPerformanceDifference'], self.criteria[c]['maximalPerformanceDifference'])
+            print(len(diffList),diffList)
+            print(diffList[0], diffList[-1])
+        
+        return diffList
+            
     def computeActionCriterionPerformanceDifferences(self,refAction,refCriterion,comments = False, Debug = False):
         """
         computes the performances differences observed between the reference action and the others on the given criterion
@@ -695,7 +743,10 @@ class PerformanceTableau(object):
         """
         self.computeQuantilePreorder(Debug=Debug,Comments=True)
  
-    def computeDefaultDiscriminationThresholds(self, quantile = {'ind':10,'pref':20,'weakVeto':60,'veto':80}, Debug = False, comments = False):
+    def computeDefaultDiscriminationThresholds(self,
+                                               quantile = {'ind':10,'pref':20,'weakVeto':60,'veto':80},
+                                               Debug = False,
+                                               Comments = False):
         """
         updates the discrimination thresholds with the percentiles
         from the performance differences.
@@ -705,17 +756,18 @@ class PerformanceTableau(object):
         import math
         
         if Debug:
-            comments = True
+            Comments = True
             
-        if comments:
+        if Comments:
             print('Installs default discrimination thresholds on each criterion')
 
-        self.computePerformanceDifferences(Debug,comments)
+        performanceDifferences = self.computePerformanceDifferences(Debug=Debug,Comments=Comments)
         criteriaList = [x for x in self.criteria]
         criteriaList.sort()
         
         for c in criteriaList:
-            vx = self.criteria[c]['performanceDifferences']
+            #vx = self.criteria[c]['performanceDifferences']
+            vx = performanceDifferences[c]
             nv = len(vx)
             if Debug:
                 print('=====>',c)
@@ -752,12 +804,12 @@ class PerformanceTableau(object):
             for x in threshold:
                 self.criteria[c]['thresholds'][x] = (threshold[x],Decimal('0.0'))
 
-            if comments:
+            if Comments:
                 print('criteria',c,' default thresholds:')
                 print(self.criteria[c]['thresholds'])
 
 
-    def computeThresholdPercentile(self,criterion, threshold, Debug=False):
+    def computeThresholdPercentile(self,criterion,threshold, Debug=False):
         """
         computes for a given criterion the quantile
         of the performance differences of a given constant threshold.
@@ -765,8 +817,9 @@ class PerformanceTableau(object):
         try:
             performanceDifferences = self.criteria[criterion]['performanceDifferences']
         except:
-            self.computePerformanceDifferences(Debug=Debug)
-            performanceDifferences = self.criteria[criterion]['performanceDifferences']
+            #self.computePerformanceDifferences(Debug=Debug)
+            #performanceDifferences = self.criteria[criterion]['performanceDifferences']
+            performanceDifferences = self.computeCriterionPerformanceDifferences(criterion)
         if Debug:
             print("performanceDifferences = ",performanceDifferences)
         try:
@@ -1356,7 +1409,8 @@ class PerformanceTableau(object):
             try:
                 fo.write('<preferenceDirection>%s</preferenceDirection>\n' % (criteria[g]['preferenceDirection']) )
                 if criteria[g]['preferenceDirection'] == 'min':
-                    pdir = -1
+                    #pdir = -1
+                    pdir = 1
                 else:
                     pdir = 1
  
@@ -1610,7 +1664,8 @@ class PerformanceTableau(object):
             try:
                 fo.write('<preferenceDirection>%s</preferenceDirection>\n' % (criteria[g]['preferenceDirection']) )
                 if criteria[g]['preferenceDirection'] == 'min':
-                    pdir = -1
+                    #pdir = -1
+                    pdir = 1
                 else:
                     pdir = 1
 
@@ -1862,7 +1917,8 @@ class PerformanceTableau(object):
             try:
                 fo += '<preferenceDirection>%s</preferenceDirection>\n' % (criteria[g]['preferenceDirection'])
                 if criteria[g]['preferenceDirection'] == 'min':
-                    pdir = -1
+                    #pdir = -1
+                    pdir = 1
                 else:
                     pdir = 1
 
@@ -2004,7 +2060,7 @@ class PerformanceTableau(object):
         renders and csv stores (withOutput=True) the
         list of normalized evaluation differences observed on the family of criteria
         Is only adequate if all criteria have the same
-        evaluation scale. Therefore the performance tableai is normalized to 0.0-100.0 scales.
+        evaluation scale. Therefore the performance tableau is normalized to 0.0-100.0 scales.
         """
         self.normalizeEvaluations(lowValue=lowValue,highValue=highValue)
         if Debug:
@@ -2179,7 +2235,40 @@ class PerformanceTableau(object):
                     
         return normEvaluation
 
+#-----------------------
+class PartialPerformanceTableau(PerformanceTableau):
+    """
+    Constructor for partial performance tableaux.
+    """
+    def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None):
+        from copy import deepcopy
+        
+        self.name = 'partial-'+inPerfTab.name
 
+        if actionsSubset != None:
+            self.actions = {}
+            for x in actionsSubset:
+                self.actions[x] = deepcopy(inPerfTab.actions[x])
+        else:
+            self.actions = deepcopy(inPerfTab.actions)
+
+        if criteriaSubset != None:
+            self.criteria = {}
+            for g in criteriaSubset:
+                self.criteria[g] = deepcopy(inPerfTab.criteria[g])
+        else:
+            self.criteria = deepcopy(inPerfTab.criteria)
+
+        self.weightPreorder = self.computeWeightPreorder()
+
+        self.evaluation = {}
+        actionsKeys = [x for x in self.actions]
+        criteriaKeys = [g for g in self.criteria]
+        for g in criteriaKeys:
+            self.evaluation[g] = {}
+            for x in actionsKeys:
+                self.evaluation[g][x] = deepcopy(inPerfTab.evaluation[g][x])
+                                    
 # ----------------------
 class NormalizedPerformanceTableau(PerformanceTableau):
     """
@@ -3712,7 +3801,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         self.criteria = copy.deepcopy(criteria)
         self.evaluation = copy.deepcopy(evaluation)
         self.weightPreorder = self.computeWeightPreorder()
-        self.computePerformanceDifferences(Debug=False)
+        performanceDifferences = self.computePerformanceDifferences(NotPermanentDiffs=True,Debug=False)
         if Debug:
             print('commonPercentiles=', commonPercentiles)
         if commonPercentiles == None:
@@ -3722,7 +3811,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         for c in criteriaList:
             if self.criteria[c]['scaleType'] == 'cardinal':
                 self.criteria[c]['thresholds'] = {}
-                vx = self.criteria[c]['performanceDifferences']
+                #vx = self.criteria[c]['performanceDifferences']
+                vx = performanceDifferences[c]
                 nv = len(vx)
                 if Debug:
                     print('=====>',c)
@@ -4939,30 +5029,36 @@ if __name__ == "__main__":
 
     ## t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
-    ## print t.computeNormalizedDiffEvaluations(lowValue=0.0,highValue=100.0,withOutput=True,Debug=False)
-##    t = RandomCBPerformanceTableau(numberOfCriteria=13,
-##                                   numberOfActions=20,
-##                                   weightDistribution='equiobjectives',
-##                                   integerWeights=True,
-##                                   Debug=False)
-    t = RandomCoalitionsPerformanceTableau(numberOfActions=21,
-                                           numberOfCriteria=13,
-                                           Coalitions=False,
-                                           RandomCoalitions=True,
-                                           weightDistribution="equicoalitions")
-    ## t = PerformanceTableau('test')
-    t.saveXMCDA2('test',servingD3=False)
-    t.showCriteria(IntegerWeights=True)
-    print(t.computeQuantiles(Debug=False))
-    t.showQuantileSort()
-    g = BipolarOutrankingDigraph(t)
-    s = sortingDigraphs.SortingDigraph(g)
-    s.showSorting()
-    g.computeRankingByChoosing(CoDual=False)
-    g.showRankingByChoosing()
-    prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
-    prg.showWeakOrder()
-    print(g.computeOrdinalCorrelation(prg))
+    t = RandomCBPerformanceTableau(numberOfCriteria=13,
+                                   numberOfActions=20,
+                                   weightDistribution='equiobjectives',
+                                   integerWeights=True,
+                                   Debug=False)
+##    t = RandomCoalitionsPerformanceTableau(numberOfActions=10,
+##                                           numberOfCriteria=5,
+##                                           Coalitions=False,
+##                                           RandomCoalitions=True,
+##                                           weightDistribution="equicoalitions")
+    t.showAll()
+    t.save('testSize1')
+    pt1 = PartialPerformanceTableau(t)
+    pt1.showAll()
+    pt2 = PartialPerformanceTableau(t,actionsSubset=['a01','a02'],criteriaSubset=['g01','g03'])
+    pt2.showAll()
+    
+##    ## t = PerformanceTableau('test')
+##    t.saveXMCDA2('test',servingD3=False)
+##    t.showCriteria(IntegerWeights=True)
+##    print(t.computeQuantiles(Debug=False))
+##    t.showQuantileSort()
+##    g = BipolarOutrankingDigraph(t)
+##    s = sortingDigraphs.SortingDigraph(g)
+##    s.showSorting()
+##    g.computeRankingByChoosing(CoDual=False)
+##    g.showRankingByChoosing()
+##    prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
+##    prg.showWeakOrder()
+##    print(g.computeOrdinalCorrelation(prg))
      
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

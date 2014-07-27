@@ -56,6 +56,7 @@
 <dt><font face="helvetica, arial"><a href="perfTabs.html#FullRandomPerformanceTableau">FullRandomPerformanceTableau</a>
 </font></dt><dt><font face="helvetica, arial"><a href="perfTabs.html#NormalizedPerformanceTableau">NormalizedPerformanceTableau</a>
 </font></dt><dt><font face="helvetica, arial"><a href="perfTabs.html#OldXMCDAPerformanceTableau">OldXMCDAPerformanceTableau</a>
+</font></dt><dt><font face="helvetica, arial"><a href="perfTabs.html#PartialPerformanceTableau">PartialPerformanceTableau</a>
 </font></dt><dt><font face="helvetica, arial"><a href="perfTabs.html#RandomCBPerformanceTableau">RandomCBPerformanceTableau</a>
 </font></dt><dt><font face="helvetica, arial"><a href="perfTabs.html#RandomCoalitionsPerformanceTableau">RandomCoalitionsPerformanceTableau</a>
 </font></dt><dd>
@@ -102,7 +103,9 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="FullRandomPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
-<dl><dt><a name="FullRandomPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="FullRandomPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
+
+<dl><dt><a name="FullRandomPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'weakVeto': 60, 'veto': 80, 'ind': 10, 'pref': 20}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -112,9 +115,9 @@ in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum'
 <dl><dt><a name="FullRandomPerformanceTableau-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
 list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
-evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableai&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
+evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
-<dl><dt><a name="FullRandomPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, comments=False, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+<dl><dt><a name="FullRandomPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
 <dl><dt><a name="FullRandomPerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;<a href="#FullRandomPerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -212,7 +215,9 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="NormalizedPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
-<dl><dt><a name="NormalizedPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="NormalizedPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
+
+<dl><dt><a name="NormalizedPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'weakVeto': 60, 'veto': 80, 'ind': 10, 'pref': 20}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -222,9 +227,9 @@ in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum'
 <dl><dt><a name="NormalizedPerformanceTableau-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
 list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
-evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableai&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
+evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
-<dl><dt><a name="NormalizedPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, comments=False, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+<dl><dt><a name="NormalizedPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
 <dl><dt><a name="NormalizedPerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;<a href="#NormalizedPerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -326,7 +331,9 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="OldXMCDAPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
-<dl><dt><a name="OldXMCDAPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="OldXMCDAPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
+
+<dl><dt><a name="OldXMCDAPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'weakVeto': 60, 'veto': 80, 'ind': 10, 'pref': 20}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -336,9 +343,9 @@ in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum'
 <dl><dt><a name="OldXMCDAPerformanceTableau-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
 list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
-evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableai&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
+evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
-<dl><dt><a name="OldXMCDAPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, comments=False, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+<dl><dt><a name="OldXMCDAPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
 <dl><dt><a name="OldXMCDAPerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;<a href="#OldXMCDAPerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -414,6 +421,118 @@ Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">Perfo
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PartialPerformanceTableau">class <strong>PartialPerformanceTableau</strong></a>(<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Constructor&nbsp;for&nbsp;partial&nbsp;performance&nbsp;tableaux.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="perfTabs.html#PartialPerformanceTableau">PartialPerformanceTableau</a></dd>
+<dd><a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="PartialPerformanceTableau-__init__"><strong>__init__</strong></a>(self, inPerfTab, actionsSubset=None, criteriaSubset=None)</dt></dl>
+
+<hr>
+Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>:<br>
+<dl><dt><a name="PartialPerformanceTableau-computeActionCriterionPerformanceDifferences"><strong>computeActionCriterionPerformanceDifferences</strong></a>(self, refAction, refCriterion, comments=False, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;performances&nbsp;differences&nbsp;observed&nbsp;between&nbsp;the&nbsp;reference&nbsp;action&nbsp;and&nbsp;the&nbsp;others&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-computeActionCriterionQuantile"><strong>computeActionCriterionQuantile</strong></a>(self, action, criterion, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;quantile&nbsp;of&nbsp;the&nbsp;performance&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'weakVeto': 60, 'veto': 80, 'ind': 10, 'pref': 20}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+from&nbsp;the&nbsp;performance&nbsp;differences.<br>
+Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-computeMinMaxEvaluations"><strong>computeMinMaxEvaluations</strong></a>(self, criteria=None, actions=None)</dt><dd><tt>renders&nbsp;minimum&nbsp;and&nbsp;maximum&nbsp;performances&nbsp;on&nbsp;each&nbsp;criterion<br>
+in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum':&nbsp;x}}</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
+list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
+Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
+evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;<a href="#PartialPerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-computeQuantileSort"><strong>computeQuantileSort</strong></a>(self)</dt><dd><tt>shows&nbsp;a&nbsp;sorting&nbsp;of&nbsp;the&nbsp;actions&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-computeQuantiles"><strong>computeQuantiles</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion&nbsp;with&nbsp;the&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-computeThresholdPercentile"><strong>computeThresholdPercentile</strong></a>(self, criterion, threshold, Debug=False)</dt><dd><tt>computes&nbsp;for&nbsp;a&nbsp;given&nbsp;criterion&nbsp;the&nbsp;quantile<br>
+of&nbsp;the&nbsp;performance&nbsp;differences&nbsp;of&nbsp;a&nbsp;given&nbsp;constant&nbsp;threshold.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-computeVariableThresholdPercentile"><strong>computeVariableThresholdPercentile</strong></a>(self, criterion, threshold, Debug=False)</dt><dd><tt>computes&nbsp;for&nbsp;a&nbsp;given&nbsp;criterion&nbsp;the&nbsp;quantile<br>
+of&nbsp;the&nbsp;performance&nbsp;differences&nbsp;of&nbsp;a&nbsp;given&nbsp;threshold.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-computeWeightPreorder"><strong>computeWeightPreorder</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;weight&nbsp;preorder&nbsp;following&nbsp;from&nbsp;the&nbsp;given<br>
+criteria&nbsp;weights&nbsp;in&nbsp;a&nbsp;list&nbsp;of&nbsp;increasing&nbsp;equivalence<br>
+lists&nbsp;of&nbsp;criteria.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-computeWeightedAveragePerformances"><strong>computeWeightedAveragePerformances</strong></a>(self, isNormalized=False, lowValue=0.0, highValue=100.0, isListRanked=False)</dt><dd><tt>Compute&nbsp;normalized&nbsp;weighted&nbsp;average&nbsp;scores<br>
+Normalization&nbsp;transforms&nbsp;by&nbsp;default&nbsp;all&nbsp;the&nbsp;scores&nbsp;into&nbsp;a<br>
+common&nbsp;0-100&nbsp;scale.&nbsp;A&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;parameter<br>
+can&nbsp;be&nbsp;provided&nbsp;for&nbsp;a&nbsp;specific&nbsp;normalisation.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-csvAllQuantiles"><strong>csvAllQuantiles</strong></a>(self, fileName='quantiles')</dt><dd><tt>save&nbsp;quantiles&nbsp;matrix&nbsp;criterionxaction&nbsp;in&nbsp;CSV&nbsp;format</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
+Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=True, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-normalizeEvaluations"><strong>normalizeEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, Debug=False)</dt><dd><tt>recode&nbsp;the&nbsp;evaluations&nbsp;between&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;on&nbsp;all&nbsp;criteria</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-save"><strong>save</strong></a>(self, fileName='tempperftab', isDecimal=True, valueDigits=2)</dt><dd><tt>Persistant&nbsp;storage&nbsp;of&nbsp;Performance&nbsp;Tableaux.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-saveXMCDA"><strong>saveXMCDA</strong></a>(self, fileName='temp', category='New XMCDA Rubis format', user='digraphs Module (RB)', version='saved from Python session', variant='Rubis', valuationType='standard', servingD3=True)</dt><dd><tt>save&nbsp;performance&nbsp;tableau&nbsp;<a href="builtins.html#object">object</a>&nbsp;self&nbsp;in&nbsp;XMCDA&nbsp;format.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-saveXMCDA2"><strong>saveXMCDA2</strong></a>(self, fileName='temp', category='XMCDA 2.0 format', user='digraphs Module (RB)', version='saved from Python session', title='Performance Tableau in XMCDA-2.0 format.', variant='Rubis', valuationType='bipolar', servingD3=True, isStringIO=False, stringNA='NA', comment='produced by saveXMCDA2()', hasVeto=True)</dt><dd><tt>save&nbsp;performance&nbsp;tableau&nbsp;<a href="builtins.html#object">object</a>&nbsp;self&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-saveXMCDA2String"><strong>saveXMCDA2String</strong></a>(self, fileName='temp', category='XMCDA 2.0 format', user='digraphs Module (RB)', version='saved from Python session', title='Performance Tableau in XMCDA-2.0 format.', variant='Rubis', valuationType='bipolar', servingD3=True, comment='produced by stringIO()', stringNA='NA')</dt><dd><tt>save&nbsp;performance&nbsp;tableau&nbsp;<a href="builtins.html#object">object</a>&nbsp;self&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format.<br>
+!!!&nbsp;obsolete:&nbsp;replaced&nbsp;by&nbsp;the&nbsp;isStringIO&nbsp;in&nbsp;the&nbsp;saveXMCDA2&nbsp;method&nbsp;!!!</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-saveXML"><strong>saveXML</strong></a>(self, name='temp', category='standard', subcategory='standard', author='digraphs Module (RB)', reference='saved from Python')</dt><dd><tt>save&nbsp;temporary&nbsp;performance&nbsp;tableau&nbsp;self&nbsp;in&nbsp;XML&nbsp;format.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-saveXMLRubis"><strong>saveXMLRubis</strong></a>(self, name='temp', category='Rubis', subcategory='new D2 version', author='digraphs Module (RB)', reference='saved from Python')</dt><dd><tt>save&nbsp;temporary&nbsp;performance&nbsp;tableau&nbsp;self&nbsp;in&nbsp;XML&nbsp;Rubis&nbsp;format.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>Show&nbsp;fonction&nbsp;for&nbsp;performance&nbsp;tableau</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-showAllQuantiles"><strong>showAllQuantiles</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;html&nbsp;string&nbsp;showing&nbsp;the&nbsp;table&nbsp;of<br>
+the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-showCriteria"><strong>showCriteria</strong></a>(self, IntegerWeights=False, Debug=False)</dt><dd><tt>print&nbsp;Criteria&nbsp;with&nbsp;thresholds&nbsp;and&nbsp;weights.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-showEvaluationStatistics"><strong>showEvaluationStatistics</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;variance&nbsp;and&nbsp;standard&nbsp;deviation&nbsp;of<br>
+the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, ndigits=2)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#PartialPerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#PartialPerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
+on&nbsp;each&nbsp;criteria.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="PerformanceTableau">class <strong>PerformanceTableau</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
@@ -428,7 +547,9 @@ Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">Perfo
 
 <dl><dt><a name="PerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
-<dl><dt><a name="PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="PerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'weakVeto': 60, 'veto': 80, 'ind': 10, 'pref': 20}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -438,9 +559,9 @@ in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum'
 <dl><dt><a name="PerformanceTableau-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
 list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
-evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableai&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
+evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
-<dl><dt><a name="PerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, comments=False, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+<dl><dt><a name="PerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
 <dl><dt><a name="PerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;<a href="#PerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -553,7 +674,9 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="RandomCBPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
-<dl><dt><a name="RandomCBPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="RandomCBPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
+
+<dl><dt><a name="RandomCBPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'weakVeto': 60, 'veto': 80, 'ind': 10, 'pref': 20}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -563,9 +686,9 @@ in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum'
 <dl><dt><a name="RandomCBPerformanceTableau-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
 list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
-evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableai&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
+evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
-<dl><dt><a name="RandomCBPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, comments=False, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+<dl><dt><a name="RandomCBPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
 <dl><dt><a name="RandomCBPerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;<a href="#RandomCBPerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -681,7 +804,9 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="RandomCoalitionsPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
-<dl><dt><a name="RandomCoalitionsPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="RandomCoalitionsPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
+
+<dl><dt><a name="RandomCoalitionsPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'weakVeto': 60, 'veto': 80, 'ind': 10, 'pref': 20}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -691,9 +816,9 @@ in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum'
 <dl><dt><a name="RandomCoalitionsPerformanceTableau-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
 list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
-evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableai&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
+evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
-<dl><dt><a name="RandomCoalitionsPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, comments=False, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+<dl><dt><a name="RandomCoalitionsPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
 <dl><dt><a name="RandomCoalitionsPerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;<a href="#RandomCoalitionsPerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -834,7 +959,9 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="RandomPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
-<dl><dt><a name="RandomPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="RandomPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
+
+<dl><dt><a name="RandomPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'weakVeto': 60, 'veto': 80, 'ind': 10, 'pref': 20}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -844,9 +971,9 @@ in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum'
 <dl><dt><a name="RandomPerformanceTableau-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
 list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
-evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableai&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
+evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
-<dl><dt><a name="RandomPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, comments=False, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+<dl><dt><a name="RandomPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
 <dl><dt><a name="RandomPerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;<a href="#RandomPerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -951,7 +1078,9 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="RandomRankPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
-<dl><dt><a name="RandomRankPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="RandomRankPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
+
+<dl><dt><a name="RandomRankPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'weakVeto': 60, 'veto': 80, 'ind': 10, 'pref': 20}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -961,9 +1090,9 @@ in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum'
 <dl><dt><a name="RandomRankPerformanceTableau-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
 list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
-evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableai&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
+evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
-<dl><dt><a name="RandomRankPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, comments=False, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+<dl><dt><a name="RandomRankPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
 <dl><dt><a name="RandomRankPerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;<a href="#RandomRankPerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -1062,7 +1191,9 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="RandomS3PerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
-<dl><dt><a name="RandomS3PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="RandomS3PerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
+
+<dl><dt><a name="RandomS3PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'weakVeto': 60, 'veto': 80, 'ind': 10, 'pref': 20}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1072,9 +1203,9 @@ in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum'
 <dl><dt><a name="RandomS3PerformanceTableau-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
 list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
-evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableai&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
+evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
-<dl><dt><a name="RandomS3PerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, comments=False, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+<dl><dt><a name="RandomS3PerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
 <dl><dt><a name="RandomS3PerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;<a href="#RandomS3PerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -1181,7 +1312,9 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="XMCDA2PerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
-<dl><dt><a name="XMCDA2PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="XMCDA2PerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
+
+<dl><dt><a name="XMCDA2PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'weakVeto': 60, 'veto': 80, 'ind': 10, 'pref': 20}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1191,9 +1324,9 @@ in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum'
 <dl><dt><a name="XMCDA2PerformanceTableau-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
 list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
-evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableai&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
+evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
-<dl><dt><a name="XMCDA2PerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, comments=False, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+<dl><dt><a name="XMCDA2PerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2PerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;<a href="#XMCDA2PerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -1296,7 +1429,9 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="XMCDAPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
-<dl><dt><a name="XMCDAPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="XMCDAPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
+
+<dl><dt><a name="XMCDAPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'weakVeto': 60, 'veto': 80, 'ind': 10, 'pref': 20}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1306,9 +1441,9 @@ in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum'
 <dl><dt><a name="XMCDAPerformanceTableau-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
 list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
-evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableai&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
+evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
-<dl><dt><a name="XMCDAPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, comments=False, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+<dl><dt><a name="XMCDAPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
 <dl><dt><a name="XMCDAPerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;<a href="#XMCDAPerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -1407,7 +1542,9 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="XMLPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
-<dl><dt><a name="XMLPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="XMLPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
+
+<dl><dt><a name="XMLPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'weakVeto': 60, 'veto': 80, 'ind': 10, 'pref': 20}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1417,9 +1554,9 @@ in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum'
 <dl><dt><a name="XMLPerformanceTableau-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
 list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
-evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableai&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
+evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
-<dl><dt><a name="XMLPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, comments=False, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+<dl><dt><a name="XMLPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
 <dl><dt><a name="XMLPerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;<a href="#XMLPerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -1523,7 +1660,9 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="XMLRubisPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
-<dl><dt><a name="XMLRubisPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="XMLRubisPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
+
+<dl><dt><a name="XMLRubisPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'weakVeto': 60, 'veto': 80, 'ind': 10, 'pref': 20}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1533,9 +1672,9 @@ in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum'
 <dl><dt><a name="XMLRubisPerformanceTableau-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
 list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
-evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableai&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
+evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
-<dl><dt><a name="XMLRubisPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, comments=False, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+<dl><dt><a name="XMLRubisPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
 <dl><dt><a name="XMLRubisPerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;<a href="#XMLRubisPerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 

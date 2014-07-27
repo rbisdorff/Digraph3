@@ -432,7 +432,7 @@ bipolarly&nbsp;polarised&nbsp;digraph&nbsp;doesn't&nbsp;contain&nbsp;a&nbsp;chor
 <dl><dt><a name="CondorcetDigraph-computeRankedPairsOrder"><strong>computeRankedPairsOrder</strong></a>(self, Cpp=False, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;the<br>
 ranked&nbsp;pairs&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-computeRankingByBestChoosing"><strong>computeRankingByBestChoosing</strong></a>(self, CoDual=False, CppAgrum=False, Debug=False)</dt><dd><tt>Computes&nbsp;a&nbsp;weak&nbsp;preordring&nbsp;of&nbsp;the&nbsp;self.<strong>actions</strong>&nbsp;by&nbsp;recursive<br>
+<dl><dt><a name="CondorcetDigraph-computeRankingByBestChoosing"><strong>computeRankingByBestChoosing</strong></a>(self, CoDual=False, CppAgrum=False, Debug=False)</dt><dd><tt>Computes&nbsp;a&nbsp;weak&nbsp;preordering&nbsp;of&nbsp;the&nbsp;self.<strong>actions</strong>&nbsp;by&nbsp;recursive<br>
 best&nbsp;choice&nbsp;elagations.<br>
 &nbsp;<br>
 Stores&nbsp;in&nbsp;self.<strong>rankingByBestChoosing</strong>['result']&nbsp;a&nbsp;list&nbsp;of&nbsp;(P+,bestChoice)&nbsp;tuples<br>
@@ -446,7 +446,7 @@ the&nbsp;ranking-by-choosing&nbsp;was&nbsp;computed&nbsp;on&nbsp;the&nbsp;codual
 <dl><dt><a name="CondorcetDigraph-computeRankingByBestChoosingRelation"><strong>computeRankingByBestChoosingRelation</strong></a>(self, rankingByBestChoosing=None, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
 the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;result.</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-computeRankingByChoosing"><strong>computeRankingByChoosing</strong></a>(self, CppAgrum=False, Debug=False, CoDual=False)</dt><dd><tt>Computes&nbsp;a&nbsp;weak&nbsp;preordring&nbsp;of&nbsp;the&nbsp;self.<strong>actions</strong>&nbsp;by&nbsp;iterating<br>
+<dl><dt><a name="CondorcetDigraph-computeRankingByChoosing"><strong>computeRankingByChoosing</strong></a>(self, actionsSubset=None, CppAgrum=False, Debug=False, CoDual=False)</dt><dd><tt>Computes&nbsp;a&nbsp;weak&nbsp;preordring&nbsp;of&nbsp;the&nbsp;self.<strong>actions</strong>&nbsp;by&nbsp;iterating<br>
 jointly&nbsp;best&nbsp;and&nbsp;worst&nbsp;choice&nbsp;elagations.<br>
 &nbsp;<br>
 Stores&nbsp;in&nbsp;self.<strong>rankingByChoosing</strong>['result']&nbsp;a&nbsp;list&nbsp;of&nbsp;((P+,bestChoice),(P-,worstChoice))&nbsp;pairs<br>
@@ -454,9 +454,9 @@ where&nbsp;P+&nbsp;(resp.&nbsp;P-)&nbsp;gives&nbsp;the&nbsp;best&nbsp;(resp.&nbs
 (resp.&nbsp;outranked)&nbsp;average&nbsp;valuation&nbsp;via&nbsp;the&nbsp;computePairwiseClusterComparison<br>
 method.<br>
 &nbsp;<br>
-If&nbsp;self.<strong>rankingByChoosing</strong>['CoDual']&nbsp;is&nbsp;True,&nbsp;the&nbsp;ranking&nbsp;by&nbsp;chossing&nbsp;was&nbsp;computed&nbsp;on&nbsp;the&nbsp;codual&nbsp;of&nbsp;self.</tt></dd></dl>
+If&nbsp;self.<strong>rankingByChoosing</strong>['CoDual']&nbsp;is&nbsp;True,&nbsp;the&nbsp;ranking-by-choosing&nbsp;was&nbsp;computed&nbsp;on&nbsp;the&nbsp;codual&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-computeRankingByChoosingRelation"><strong>computeRankingByChoosingRelation</strong></a>(self, rankingByChoosing=None, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
+<dl><dt><a name="CondorcetDigraph-computeRankingByChoosingRelation"><strong>computeRankingByChoosingRelation</strong></a>(self, rankingByChoosing=None, actionsSubset=None, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
 the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;result.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-computeRankingByLastChoosing"><strong>computeRankingByLastChoosing</strong></a>(self, CoDual=False, CppAgrum=False, Debug=False)</dt><dd><tt>Computes&nbsp;a&nbsp;weak&nbsp;preordring&nbsp;of&nbsp;the&nbsp;self.<strong>actions</strong>&nbsp;by&nbsp;iterating<br>
@@ -566,7 +566,7 @@ Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="CondorcetDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'max': 1, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -817,9 +817,10 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="CondorcetDigraph-showChoiceVector"><strong>showChoiceVector</strong></a>(self, ch)</dt><dd><tt>show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-showChordlessCircuits"><strong>showChordlessCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;chordless&nbsp;circuits&nbsp;in&nbsp;CocaGraph</tt></dd></dl>
+<dl><dt><a name="CondorcetDigraph-showChordlessCircuits"><strong>showChordlessCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;(chordless)&nbsp;circuits&nbsp;in&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>.<br>
+Dummy&nbsp;for&nbsp;<a href="#CondorcetDigraph-showCircuits">showCircuits</a>().</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-showCircuits"><strong>showCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;chordless&nbsp;circuits&nbsp;in&nbsp;CocaGraph</tt></dd></dl>
+<dl><dt><a name="CondorcetDigraph-showCircuits"><strong>showCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;circuits&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-showComponents"><strong>showComponents</strong></a>(self)</dt></dl>
 
