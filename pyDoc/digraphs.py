@@ -471,7 +471,7 @@ class Digraph(object):
         return {'CoDual': CoDual, 'result': rankingByLastChoosing}
 
 
-    def computeRankingByChoosing(self,CppAgrum=False,Debug=False,CoDual=False):
+    def computeRankingByChoosing(self,actionsSubset=None,CppAgrum=False,Debug=False,CoDual=False):
         """
         Computes a weak preordring of the self.actions by iterating
         jointly best and worst choice elagations.
@@ -481,11 +481,14 @@ class Digraph(object):
         (resp. outranked) average valuation via the computePairwiseClusterComparison
         method.
 
-        If self.rankingByChoosing['CoDual'] is True, the ranking by chossing was computed on the codual of self.
+        If self.rankingByChoosing['CoDual'] is True, the ranking-by-choosing was computed on the codual of self.
         """
         from copy import deepcopy
         currG = deepcopy(self)
-        remainingActions = [x for x in self.actions]
+        if actionsSubset == None:
+            remainingActions = [x for x in self.actions]
+        else:
+            remainingActions = actionsSubset
         rankingByChoosing = []
         bestChoice = (None,None)
         worstChoice = (None,None)
@@ -632,12 +635,13 @@ class Digraph(object):
             rankingByChoosing.append((bestChoice,worstChoice))
             if Debug:
                 print(rankingByChoosing)
+                
         self.rankingByChoosing = {'CoDual': CoDual, 'result': rankingByChoosing}
         return {'CoDual': CoDual, 'result': rankingByChoosing}
 
     def computeRankingByBestChoosing(self,CoDual=False,CppAgrum=False,Debug=False,):
         """
-        Computes a weak preordring of the self.actions by recursive
+        Computes a weak preordering of the self.actions by recursive
         best choice elagations.
 
         Stores in self.rankingByBestChoosing['result'] a list of (P+,bestChoice) tuples
@@ -1014,22 +1018,29 @@ class Digraph(object):
             currentActions = currentActions - set(eqcl)
         return preorderRelation
 
-    def computeRankingByChoosingRelation(self,rankingByChoosing=None,Debug=False):
+    def computeRankingByChoosingRelation(self,rankingByChoosing=None,actionsSubset=None,Debug=False):
         """
         Renders the bipolar-valued relation obtained from
         the self.rankingByChoosing result.
         """
+        from copy import deepcopy
         if rankingByChoosing==None:
             try:
                 rankingByChoosing = self.rankingByChoosing['result']
             except:
                 print('Error: first run computeRankingByChoosing(CoDual=T/F) !')
                 return None
-
+        if Debug:
+            print('actionsSubset,rankingByChoosing',actionsSubset,rankingByChoosing)
         Max = Decimal('1')
         Med = Decimal('0')
         Min = Decimal('-1')
-        actions = [x for x in self.actions]
+        if actionsSubset==None:
+            actions = [x for x in self.actions]
+        else:
+            actions = deepcopy(actionsSubset)
+        if Debug:
+            print(actions)
         currActions = set(actions)
         relation = self.relation
         rankingRelation = {}
@@ -1037,17 +1048,23 @@ class Digraph(object):
             rankingRelation[x] = {}
             for y in actions:
                 rankingRelation[x][y] = Med
+                #print(x,y,rankingRelation[x][y])
         n = len(rankingByChoosing)
         for i in range(n):
             ibch = set(rankingByChoosing[i][0][1])
             iwch = set(rankingByChoosing[i][1][1])
             ribch = set(currActions) - ibch
+            if Debug:
+                print(ibch,iwch,ribch)
             for x in ibch:
                 for y in ibch:
                     if x != y:
                         rankingRelation[x][y] = self.omax([rankingRelation[x][y],abs(relation[x][y])])
                         rankingRelation[y][x] = self.omax([rankingRelation[x][y],abs(relation[y][x])])
                 for y in ribch:
+                    #print(x,y)
+                    #print(rankingRelation[x][y])
+                    #print(relation[x][y])
                     rankingRelation[x][y] = self.omax([rankingRelation[x][y],abs(relation[x][y])])
                     rankingRelation[y][x] = self.omax([rankingRelation[y][x],-abs(relation[y][x])])
             riwch = set(currActions) - iwch
@@ -5491,29 +5508,33 @@ class Digraph(object):
 
         return Detected
 
-
     def showCircuits(self):
         """
-        show methods for chordless circuits in CocaGraph
+        show methods for circuits observed in a Digraph instance.
         """
-        print('*---- Chordless circuits ----*')
         try:
-            for (circList,circSet) in self.circuitsList:
-                deg = self.circuitMinCredibility(circSet)
-                print(circList, ', credibility :', deg)
-            print('%d circuits.' % (len(self.circuitsList)))
+            if len(self.circuitsList) == 0:
+                print('No circuits observed in this digraph.')
+            else:
+                print('*---- Chordless circuits ----*')
+                for (circList,circSet) in self.circuitsList:
+                    deg = self.circuitMinCredibility(circList)
+                    print(circList, ', credibility :', deg)
+                print('%d circuits.' % (len(self.circuitsList)))
         except:
-            print('No circuits computed. Run computeChordlessCircuits()!')
+            print('No circuits yet computed. Run computeChordlessCircuits()!')
 
 
     def showChordlessCircuits(self):
         """
-        show methods for chordless circuits in CocaGraph
+        show methods for (chordless) circuits in a Digraph.
+        Dummy for showCircuits().
         """
+        Digraph.showCircuits(self)
         print('*---- Chordless circuits ----*')
         try:
             for (circList,circSet) in self.circuitsList:
-                deg = self.circuitMinCredibility(circSet)
+                deg = self.circuitMinCredibility(circList)
                 print(circList, ', credibility :', deg)
             print('%d circuits.' % (len(self.circuitsList)))
         except:
@@ -7472,6 +7493,7 @@ class Digraph(object):
             kemenyIndex = Decimal(str(n)) * Decimal(str(n)) * Min
             kemenyOrder = list(actions)
             s = 1
+            maximalOrders = []
             for a in all_perms(kemenyOrder):
                 kcurr = Decimal('0.0')
                 s += 1
@@ -7480,16 +7502,23 @@ class Digraph(object):
                         kcurr += relation[a[i]][a[j]] - relation[a[j]][a[i]]
                 if Debug:
                     print(s, a, kcurr)
-                if kcurr >= kemenyIndex:
+                if kcurr > kemenyIndex:
                     kemenyIndex = kcurr
                     kemenyOrder = list(a)
+                    maximalOrders = [kemenyOrder]
                     if Debug:
-                        print(s, kemenyOrder, kemenyIndex)
+                        print(maximalOrders)
+                elif kcurr == kemenyIndex:
+                    maximalOrders.append(list(a))
+                    if Debug:
+                        print(maximalOrders)
+                    
+            self.maximalOrders = maximalOrders
             if Debug:
-                print('Exact Kemeny Order = ', kemenyOrder)
+                print('Exact Kemeny Orders = ', kemenyOrder)
                 print('Exact Kemeny Index = ', kemenyIndex)
                 print('# of permutations  = ', s)
-
+            
         return kemenyOrder, kemenyIndex
 
     def computePrincipalOrder(self, plotFileName=None,
@@ -10167,7 +10196,7 @@ class CSVDigraph(Digraph):
 
     def __init__(self,fileName='temp',valuationMin=-1,valuationMax=1):
         from csv import reader
-        
+
         try:
             fileNameExt = fileName + '.csv'
             fi = open(fileNameExt,'r')
@@ -10487,9 +10516,20 @@ if __name__ == "__main__":
 
     else:
         print('*-------- Testing classes and methods -------')
-        from csv import reader
-        g = RandomValuationDigraph()
-        g.showAll()
+        #from csv import reader
+        #g = RandomValuationDigraph()
+        #g.showAll()
+        from outrankingDigraphs import BipolarOutrankingDigraph
+        from perfTabs import RandomCBPerformanceTableau
+        t = RandomCBPerformanceTableau(numberOfActions=15)
+        t.saveXMCDA2('test')
+        g = BipolarOutrankingDigraph(t)
+        g.showPreKernels()
+        g.computeRubisChoice()
+        print(g.dompreKernels)
+        print(g.abspreKernels)
+        
+        
         
 ##        print('Relation %s is complete ? %s' % (g.name,str(g.isComplete(Debug=True))))
 ##        print('Relation %s is weakly complete ? %s' % (g.name,str(g.isWeaklyComplete(Debug=True))))
