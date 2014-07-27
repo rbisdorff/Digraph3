@@ -422,7 +422,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 i = 0
                 actionsRemain = set(actions2Split)
                 for j in range(nbrOfJobs):
-                    print('iteration = ',j+1)
+                    print('iteration = ',j+1,end=" ")
                     splitActions=[]
                     for k in range(nit):
                         if j < (nbrOfJobs -1) and i < n:
@@ -430,6 +430,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                         else:
                             splitActions = list(actionsRemain)
                         i += 1
+                    print(len(splitActions))
                     if Debug:
                         print(splitActions)
                     actionsRemain = actionsRemain - set(splitActions)
