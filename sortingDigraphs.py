@@ -388,7 +388,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 fo.write(pd)
                 fo.close()
                 
-                nbrCores = cpu_count()-2
+                nbrCores = cpu_count()-1
                 print('Nbr of cpus = ',nbrCores)
 
                 ni = len(initial)
