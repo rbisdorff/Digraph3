@@ -1612,7 +1612,7 @@ if __name__ == "__main__":
     qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,Threading=False,Debug=False)
     t1 = time()-t0
     qsrbc.showSorting()
-    qsrbc.computeQsRbcRanking(Debug=True)
+    qsrbc.computeQsRbcRanking(Debug=False)
     qsrbc.exportGraphViz(graphType="pdf")
     #qsrbc.showOrderedRelationTable()
     t0=time()

@@ -2361,60 +2361,60 @@ class QuantilesRankingDigraph(QuantilesSortingDigraph):
                                 Sorted=False,\
                                 ReflexiveTerms=False)
 
-    def showActionCategories(self,action,Debug=False,Comments=True):
-        """
-        Renders the union of categories in which the given action is sorted positively or null into.
-        Returns a tuple : action, lowest category key, highest category key, membership credibility !
-        """
-        Med = self.valuationdomain['med']
-        sorting = self.computeSortingCharacteristics(action=action,Comments=Debug)
-        keys = []
-        for c in self.orderedCategoryKeys():
-            if sorting[action][c]['categoryMembership'] >= Med:
-                if sorting[action][c]['lowLimit'] > Med:
-                    lowLimit = sorting[action][c]['lowLimit']
-                if sorting[action][c]['notHighLimit'] > Med:
-                    notHighLimit = sorting[action][c]['notHighLimit']
-                keys.append(c)
-                if Debug:
-                    print(action, c, sorting[action][c])
-        n = len(keys)
-        credibility = min(lowLimit,notHighLimit)
-        if n == 0:
-            return None
-        elif n == 1:
-            if Comments:
-                print('%s in %s - %s with credibility: %.2f' % (action,\
-                                     self.categories[keys[0]]['lowLimit'],\
-                                     self.categories[keys[0]]['highLimit'],\
-                                     credibility) )
-            return action,\
-                    keys[0],\
-                    keys[0],\
-                    credibility
-        else:
-            if Comments:
-                print('%s in %s - %s with credibility: %.2f' % (action,\
-                                     self.categories[keys[0]]['lowLimit'],\
-                                     self.categories[keys[-1]]['highLimit'],\
-                                     credibility) )
-            return action,\
-                    keys[0],\
-                    keys[-1],\
-                    credibility            
-
-    def showActionsSortingResult(self,actionSubset=None):
-        """
-        shows the quantiles sorting result all (default) of a subset of the decision actions.
-        """
-        if actionSubset == None:
-            actions = [x for x in self.actions]
-        else:
-            actions = [x for x in actionSubset]
-        actions.sort()
-        print('Quantiles sorting result per decision action')
-        for x in actions:
-            self.showActionCategories(x)
+##    def showActionCategories(self,action,Debug=False,Comments=True):
+##        """
+##        Renders the union of categories in which the given action is sorted positively or null into.
+##        Returns a tuple : action, lowest category key, highest category key, membership credibility !
+##        """
+##        Med = self.valuationdomain['med']
+##        sorting = self.computeSortingCharacteristics(action=action,Comments=Debug)
+##        keys = []
+##        for c in self.orderedCategoryKeys():
+##            if sorting[action][c]['categoryMembership'] >= Med:
+##                if sorting[action][c]['lowLimit'] > Med:
+##                    lowLimit = sorting[action][c]['lowLimit']
+##                if sorting[action][c]['notHighLimit'] > Med:
+##                    notHighLimit = sorting[action][c]['notHighLimit']
+##                keys.append(c)
+##                if Debug:
+##                    print(action, c, sorting[action][c])
+##        n = len(keys)
+##        credibility = min(lowLimit,notHighLimit)
+##        if n == 0:
+##            return None
+##        elif n == 1:
+##            if Comments:
+##                print('%s in %s - %s with credibility: %.2f' % (action,\
+##                                     self.categories[keys[0]]['lowLimit'],\
+##                                     self.categories[keys[0]]['highLimit'],\
+##                                     credibility) )
+##            return action,\
+##                    keys[0],\
+##                    keys[0],\
+##                    credibility
+##        else:
+##            if Comments:
+##                print('%s in %s - %s with credibility: %.2f' % (action,\
+##                                     self.categories[keys[0]]['lowLimit'],\
+##                                     self.categories[keys[-1]]['highLimit'],\
+##                                     credibility) )
+##            return action,\
+##                    keys[0],\
+##                    keys[-1],\
+##                    credibility            
+##
+##    def showActionsSortingResult(self,actionSubset=None):
+##        """
+##        shows the quantiles sorting result all (default) of a subset of the decision actions.
+##        """
+##        if actionSubset == None:
+##            actions = [x for x in self.actions]
+##        else:
+##            actions = [x for x in actionSubset]
+##        actions.sort()
+##        print('Quantiles sorting result per decision action')
+##        for x in actions:
+##            self.showActionCategories(x)
 
     def showQsRbcRanking(self,Descending=True):
         """

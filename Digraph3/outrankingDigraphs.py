@@ -3482,7 +3482,9 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  coalition=None,
                  hasNoVeto=False,
                  hasBipolarVeto=True,
-                 Normalized=False):
+                 Normalized=False,
+                 Threading=False,
+                 Debug=False):
         import copy
         if argPerfTab == None:
             perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
@@ -3535,10 +3537,6 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             hasBipolarVeto = True
             
         self.methodData = methodData
-        
-        # construct outranking relation
-        actionsKeys = list(self.actions.keys())
-        self.relation = self._constructRelation(criteria,perfTab.evaluation,initial=actionsKeys,terminal=actionsKeys,hasNoVeto=hasNoVeto,hasBipolarVeto=hasBipolarVeto,hasSymmetricThresholds=True)
 
         # insert performance Data
         self.evaluation = copy.deepcopy(perfTab.evaluation)
@@ -3549,6 +3547,19 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             pass
         # init general digraph Data
         self.order = len(self.actions)
+        
+        # construct outranking relation
+        actionsKeys = list(self.actions.keys())
+        self.relation = self._constructRelationWithThreading(criteria,
+                                                perfTab.evaluation,
+                                                initial=actionsKeys,
+                                                terminal=actionsKeys,
+                                                hasNoVeto=hasNoVeto,
+                                                hasBipolarVeto=hasBipolarVeto,
+                                                hasSymmetricThresholds=True,
+                                                Threading=Threading,
+                                                             Debug=Debug)
+
         if Normalized:
             self.recodeValuation(-1.0,1.0)
         self.gamma = self.gammaSets()
@@ -3598,6 +3609,186 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             else:
                 return Decimal("0.0")
             
+    def _constructRelationWithThreading(self,criteria,\
+                           evaluation,\
+                           initial=None,\
+                           terminal=None,\
+                           hasNoVeto=False,\
+                           hasBipolarVeto=True,\
+                           Debug=False,\
+                           hasSymmetricThresholds=True,\
+                           Threading = False):
+        """
+        Specialization of the corresponding BipolarOutrankingDigraph method
+        """
+        from multiprocessing import cpu_count
+        
+        ##
+        if not Threading or cpu_count() < 6:
+            return self._constructRelation(criteria,\
+                                    evaluation,\
+                                    initial=initial,\
+                                    terminal=terminal,\
+                                    hasNoVeto=hasNoVeto,\
+                                    hasBipolarVeto=hasBipolarVeto,\
+                                    Debug=Debug,\
+                                    hasSymmetricThresholds=hasSymmetricThresholds)
+        ##
+        else:  # parallel computation
+            from copy import deepcopy
+            from pickle import dumps, loads, load
+            from multiprocessing import Process, Lock,\
+                                        active_children, cpu_count
+            #Debug=True
+            class myThread(Process):
+                def __init__(self, threadID,\
+                             InitialSplit, tempDirName,\
+                             hasNoVeto, hasBipolarVeto,\
+                             hasSymmetricThresholds, Debug):
+                    Process.__init__(self)
+                    self.threadID = threadID
+                    self.InitialSplit = InitialSplit
+                    self.workingDirectory = tempDirName
+                    self.hasNoVeto = hasNoVeto
+                    self.hasBipolarVeto = hasBipolarVeto,
+                    hasSymmetricThresholds = hasSymmetricThresholds,
+                    self.Debug = Debug
+                def run(self):
+                    from pickle import dumps, loads
+                    from os import chdir
+                    chdir(self.workingDirectory)
+                    if Debug:
+                        print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+                    fi = open('dumpSelf.py','rb')
+                    digraph = loads(fi.read())
+                    fi.close()
+                    fiName = 'splitActions-'+str(self.threadID)+'.py'
+                    fi = open(fiName,'rb')
+                    splitActions = loads(fi.read())
+                    fi.close()
+                    foName = 'splitRelation-'+str(self.threadID)+'.py'
+                    fo = open(foName,'wb')
+                    if self.InitialSplit:
+                        splitRelation = BipolarOutrankingDigraph._constructRelation(digraph,digraph.criteria,\
+                                            digraph.evaluation,\
+                                            initial=splitActions,\
+                                            #terminal=terminal,\
+                                            hasNoVeto=hasNoVeto,\
+                                            hasBipolarVeto=hasBipolarVeto,\
+                                            Debug=False,\
+                                            hasSymmetricThresholds=hasSymmetricThresholds)
+                    else:
+                        splitRelation = BipolarOutrankingDigraph._constructRelation(digraph,digraph.criteria,\
+                                            digraph.evaluation,\
+                                            #initial=initial,\
+                                            terminal=splitActions,\
+                                            hasNoVeto=hasNoVeto,\
+                                            hasBipolarVeto=hasBipolarVeto,\
+                                            Debug=False,\
+                                            hasSymmetricThresholds=hasSymmetricThresholds)
+                    fo.write(dumps(splitRelation,-1))
+                    fo.close()
+            
+            print('Threading ...')
+            from tempfile import TemporaryDirectory
+            with TemporaryDirectory() as tempDirName:
+                from copy import deepcopy
+                selfDp = deepcopy(self)
+                selfFileName = tempDirName +'/dumpSelf.py'
+                if Debug:
+                    print('temDirName, selfFileName', tempDirName,selfFileName)
+                fo = open(selfFileName,'wb')
+                pd = dumps(selfDp,-1)
+                fo.write(pd)
+                fo.close()
+                
+                nbrCores = cpu_count()-1
+                print('Nbr of cpus = ',nbrCores)
+
+                ni = len(initial)
+                nt = len(terminal)
+                if ni > nt:
+                    n = ni
+                    actions2Split = list(initial)
+                    InitialSplit = True
+                else:
+                    n = nt
+                    actions2Split = list(terminal)
+                    InitialSplit = False
+                if Debug:
+                    print('InitialSplit, actions2Split', InitialSplit, actions2Split)
+            
+                nit = n//nbrCores
+                if nit*nbrCores < n:
+                    nbrOfJobs = nbrCores + 1
+                else:
+                    nbrOfJobs = nbrCores
+                if Debug:
+                    print('nbr of actions to split',n)
+                    print('nbr of jobs = ',nbrOfJobs)    
+                    print('nbr of splitActions = ',nit)
+
+                relation = {}
+                for x in initial:
+                    relation[x] = {}
+                    for y in terminal:
+                        relation[x][y] = self.valuationdomain['med']
+                i = 0
+                actionsRemain = set(actions2Split)
+                for j in range(nbrOfJobs):
+                    print('iteration = ',j+1,end=" ")
+                    splitActions=[]
+                    for k in range(nit):
+                        if j < (nbrOfJobs -1) and i < n:
+                            splitActions.append(actions2Split[i])
+                        else:
+                            splitActions = list(actionsRemain)
+                        i += 1
+                    print(len(splitActions))
+                    if Debug:
+                        print(splitActions)
+                    actionsRemain = actionsRemain - set(splitActions)
+                    if Debug:
+                        print(actionsRemain)
+                    foName = tempDirName+'/splitActions-'+str(j)+'.py'
+                    fo = open(foName,'wb')
+                    spa = dumps(splitActions,-1)
+                    fo.write(spa)
+                    fo.close()
+                    splitThread = myThread(j,InitialSplit,
+                                           tempDirName,hasNoVeto,hasBipolarVeto,
+                                           hasSymmetricThresholds,Debug)
+                    splitThread.start()
+                    
+                while active_children() != []:
+                    pass
+                    
+                print('Exiting computing threads')
+                for j in range(nbrOfJobs):
+                    if Debug:
+                        print('job',j)
+                    fiName = tempDirName+'/splitActions-'+str(j)+'.py'
+                    fi = open(fiName,'rb')
+                    splitActions = loads(fi.read())
+                    if Debug:
+                        print('splitActions',splitActions)
+                    fi.close()
+                    fiName = tempDirName+'/splitRelation-'+str(j)+'.py'
+                    fi = open(fiName,'rb')
+                    splitRelation = loads(fi.read())
+                    if Debug:
+                        print('splitRelation',splitRelation)
+                    fi.close()
+                    
+                    if InitialSplit:
+                        for x in splitActions:
+                            for y in terminal:
+                                relation[x][y] = splitRelation[x][y]
+                    else:  
+                        for x in initial:
+                            for y in splitActions:
+                                relation[x][y] = splitRelation[x][y]   
+                return relation
 
     def _constructRelation(self,criteria,\
                            evaluation,\
@@ -7114,7 +7305,7 @@ if __name__ == "__main__":
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=11,\
+    t = RandomCBPerformanceTableau(numberOfActions=100,\
                                    numberOfCriteria=7,\
                                    weightDistribution='equiobjectives',
                                    )
@@ -7127,65 +7318,66 @@ if __name__ == "__main__":
 ##    #solver.viewSolution()
     
     
-    g = BipolarOutrankingDigraph(t)
-    g.recodeValuation(-1,1)
-    g.showRelationTable()
+    t0=time();g = BipolarOutrankingDigraph(t,Threading=False);print(time()-t0)
+    #g.showRelationTable()
+    t0=time();g = BipolarOutrankingDigraph(t,Threading=True,Debug=False);print(time()-t0)
+    #g.showRelationTable()
 
-    print('Triangular')
-    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
-                                             distribution='triangular',\
-                                             sampleSize=100,\
-                                             Debug=False,samplingSeed=1)
-    gmc.showRelationTable()
-    gmc.recodeValuation(-100,100)
-    gmc.showRelationStatistics('medians')
-    gmc.showRelationStatistics('likelihoods')
-
-    print('Uniform')
-    gmc1 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
-                                              distribution='uniform',\
-                                              spread=0.5,\
-                                             sampleSize=100,likelihood=0.9,\
-                                             Debug=False,samplingSeed=1)
-    gmc1.showRelationTable()
-    gmc1.recodeValuation(-100,100)
-    gmc1.showRelationStatistics('medians')
-    gmc1.showRelationStatistics('likelihoods')
-##    for x in gmc1.actions:
-##        for y in gmc1.actions:
-##            print('==>>',x,y)
-##            print('Q4',gmc1.relationStatistics[x][y]['Q4'])
-##            print('Q3',gmc1.relationStatistics[x][y]['Q3'])
-##            print('probQ3',gmc1._computeCDF(x,y,gmc1.relationStatistics[x][y]['Q3']))
-##            print('Q2',gmc1.relationStatistics[x][y]['median'])
-##            print('mean',gmc1.relationStatistics[x][y]['mean'])
-##            print('Q1',gmc1.relationStatistics[x][y]['Q1'])
-##            print('probQ1',gmc1._computeCDF(x,y,gmc1.relationStatistics[x][y]['Q1']))
-##            print('Q0',gmc1.relationStatistics[x][y]['Q0'])
-##            print('pv',gmc1.relationStatistics[x][y]['likelihood'])
-##            print('prob0',gmc1._computeCDF(x,y,0.0))            
-##            print('sd',gmc1.relationStatistics[x][y]['sd'])
-
-    print('Beta(2,2)')
-    gmc2 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
-                                              distribution='beta(2,2)',\
-                                             sampleSize=100,likelihood=0.9,\
-                                             Debug=False,samplingSeed=1)
-    gmc2.showRelationTable()
-    gmc2.recodeValuation(-100,100)
-    gmc2.showRelationStatistics('medians')
-    gmc2.showRelationStatistics('likelihoods')
-
-    print('Beta(12,12)')
-    gmc3 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
-                                              distribution='beta(12,12)',\
-                                              spread=0.5,\
-                                             sampleSize=100,likelihood=0.9,\
-                                             Debug=False,samplingSeed=1)
-    gmc3.showRelationTable()
-    gmc3.recodeValuation(-100,100)
-    gmc3.showRelationStatistics('medians')
-    gmc3.showRelationStatistics('likelihoods')
+##    print('Triangular')
+##    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
+##                                             distribution='triangular',\
+##                                             sampleSize=100,\
+##                                             Debug=False,samplingSeed=1)
+##    gmc.showRelationTable()
+##    gmc.recodeValuation(-100,100)
+##    gmc.showRelationStatistics('medians')
+##    gmc.showRelationStatistics('likelihoods')
+##
+##    print('Uniform')
+##    gmc1 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
+##                                              distribution='uniform',\
+##                                              spread=0.5,\
+##                                             sampleSize=100,likelihood=0.9,\
+##                                             Debug=False,samplingSeed=1)
+##    gmc1.showRelationTable()
+##    gmc1.recodeValuation(-100,100)
+##    gmc1.showRelationStatistics('medians')
+##    gmc1.showRelationStatistics('likelihoods')
+####    for x in gmc1.actions:
+####        for y in gmc1.actions:
+####            print('==>>',x,y)
+####            print('Q4',gmc1.relationStatistics[x][y]['Q4'])
+####            print('Q3',gmc1.relationStatistics[x][y]['Q3'])
+####            print('probQ3',gmc1._computeCDF(x,y,gmc1.relationStatistics[x][y]['Q3']))
+####            print('Q2',gmc1.relationStatistics[x][y]['median'])
+####            print('mean',gmc1.relationStatistics[x][y]['mean'])
+####            print('Q1',gmc1.relationStatistics[x][y]['Q1'])
+####            print('probQ1',gmc1._computeCDF(x,y,gmc1.relationStatistics[x][y]['Q1']))
+####            print('Q0',gmc1.relationStatistics[x][y]['Q0'])
+####            print('pv',gmc1.relationStatistics[x][y]['likelihood'])
+####            print('prob0',gmc1._computeCDF(x,y,0.0))            
+####            print('sd',gmc1.relationStatistics[x][y]['sd'])
+##
+##    print('Beta(2,2)')
+##    gmc2 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
+##                                              distribution='beta(2,2)',\
+##                                             sampleSize=100,likelihood=0.9,\
+##                                             Debug=False,samplingSeed=1)
+##    gmc2.showRelationTable()
+##    gmc2.recodeValuation(-100,100)
+##    gmc2.showRelationStatistics('medians')
+##    gmc2.showRelationStatistics('likelihoods')
+##
+##    print('Beta(12,12)')
+##    gmc3 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
+##                                              distribution='beta(12,12)',\
+##                                              spread=0.5,\
+##                                             sampleSize=100,likelihood=0.9,\
+##                                             Debug=False,samplingSeed=1)
+##    gmc3.showRelationTable()
+##    gmc3.recodeValuation(-100,100)
+##    gmc3.showRelationStatistics('medians')
+##    gmc3.showRelationStatistics('likelihoods')
 ## 
 ##    grbc = RankingByChoosingDigraph(g)
 ##    grbc.showPreOrder()
