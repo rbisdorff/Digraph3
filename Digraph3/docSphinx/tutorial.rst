@@ -874,7 +874,7 @@ Now, we cannot find any completely positive row in the relation table. No one of
    :width: 200 px
    :align: center
 
-But, there may be many cycles appearing in a digraph, and, we may detect and enumerate all minimal chordless circuits in a Digraph instance with the ``computeChaordlessCircuits()`` method:
+But, there may be many cycles appearing in a digraph, and, we may detect and enumerate all minimal chordless circuits in a Digraph instance with the ``computeChordlessCircuits()`` method:
     >>> cdg.computeChordlessCircuits()
     [(['a2', 'a3', 'a1'], frozenset({'a2', 'a3', 'a1'})), 
      (['a2', 'a4', 'a5'], frozenset({'a2', 'a5', 'a4'})), 
