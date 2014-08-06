@@ -901,6 +901,62 @@ class PerformanceTableau(object):
                 print(formatString % (self.evaluation[g][x]), end=' ')
             print()      
 
+    def saveCSV(self,fileName='tempPerfTab',Sorted=True,actionsList=None,ndigits=2,Debug=False):
+        """1
+        Store the performance Tableau self Actions x Criteria in CSV format.
+        """
+        import itertools as IT
+        import collections
+
+        def flatten(iterable, ltypes=collections.Iterable):
+            remainder = iter(iterable)
+            while True:
+                first = next(remainder)
+                if isinstance(first, ltypes) and not isinstance(first, str):
+                    remainder = IT.chain(first, remainder)
+                else:
+                    yield first
+        
+        fileNameExt = fileName + '.csv'        
+        print('*Storing performance tableau in CSV format in file %s'\
+              % fileNameExt)
+        criteriaList = list(self.criteria.keys())
+        if sorted:
+            criteriaList.sort()
+        n = len(criteriaList)
+        if Debug:
+            print(criteriaList)
+        if actionsList == None:
+            actionsList = list(self.actions.keys())
+            if sorted:
+                actionsList.sort()
+        else:
+            actionsList = flatten(actionsList)
+        if Debug:
+            print(actionsList)
+        formatStr = '%%.%.df' % ndigits
+        if Debug:
+            print('formatString:',formatStr)
+        fo = open(fileNameExt,'w')
+        ## header row
+        writeStr = '"actions",'
+        for i in range(n-1):
+            writeStr += '"%s",' % criteriaList[i]
+        writeStr += '"%s"\n' % criteriaList[n-1]
+        if Debug:
+            print(writeStr)
+        fo.write(writeStr)
+        ## writing performance data
+        for x in actionsList:
+            writeStr = '"%s",' % x
+            for i in range(n-1):
+                writeStr += formatStr % self.evaluation[criteriaList[i]][x] + ','
+            writeStr += formatStr % self.evaluation[criteriaList[n-1]][x] + '\n'
+            if Debug:
+                print(writeStr)
+            fo.write(writeStr)
+        fo.close()
+        
 
     def computeMinMaxEvaluations(self,criteria=None,actions=None):
         """
@@ -969,6 +1025,106 @@ class PerformanceTableau(object):
                 else:
                     html += '<td>&#32;</td>'
             html += '</tr>'
+        html += '</table>'
+        return html
+
+    def showHTMLPerformanceHeatmap(self,criteriaList=None,
+                                   actionsList=None,ndigits=2):
+        """
+        shows the html heatmap version of the performance tableau in a browser window.
+        """
+        import webbrowser
+        fileName = '/tmp/performanceHeatmap.html'
+        fo = open(fileName,'w')
+        fo.write(self.htmlPerformanceHeatmap(criteriaList=criteriaList,
+                                             actionsList=actionsList,
+                                             ndigits=ndigits))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+
+    def htmlPerformanceHeatmap(self,criteriaList=None,
+                               actionsList=None,
+                               ndigits=2,
+                               Debug=False):
+        """
+        Renders the Brewer RdYlGn 9-colored heatmap of the performance table
+        actions x criteria in html format.
+        """
+        import itertools as IT
+        import collections
+        from decimal import Decimal
+
+        def flatten(iterable, ltypes=collections.Iterable):
+            remainder = iter(iterable)
+            while True:
+                first = next(remainder)
+                if isinstance(first, ltypes) and not isinstance(first, str):
+                    remainder = IT.chain(first, remainder)
+                else:
+                    yield first
+
+        brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#CF302F"'),
+                               (Decimal('0.2222'),'"#ED6C49"'),
+                               (Decimal('0.3333'),'"#F6AE66"'),
+                               (Decimal('0.4444'),'"#F9E2BE"'),
+                               (Decimal('0.5555'),'"#FCFFCD"'),
+                               (Decimal('0.6666'),'"#D5F28F"'),
+                               (Decimal('0.7777'),'"#A3DC70"'),
+                               (Decimal('0.8888'),'"#68BF67"'),
+                               (Decimal('1.0001'),'"#2A9954"')]
+        nc = len(brewerRdYlGn9Colors)
+        backGroundColor   = '"#FFFFFF"'
+        columnHeaderColor = '"#CCFFFF"'
+        rowHeaderColor    = '"#FFFFFF"'
+        html = '<h1>Performance heatmap</h1>'
+        
+        if criteriaList == None:
+            criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
+            criteriaWeightsList.sort(reverse=True)
+            criteriaList = [g[1] for g in criteriaWeightsList]
+        if actionsList == None:
+            actionsList = list(self.actions.keys())
+            actionsList.sort()
+        else:
+            actionsList = [x for x in flatten(actionsList)]
+        quantileColor={}
+        for x in actionsList:
+            quantileColor[x] = {}
+            for g in criteriaList:
+                quantilexg = self.computeActionCriterionQuantile(x,g)
+                if Debug:
+                    print(x,g,quantilexg)
+                for i in range(nc):
+                    #print(i, brewerRdYlGn9Colors[i][0])
+                    if quantilexg < brewerRdYlGn9Colors[i][0]:
+                        quantileColor[x][g] = brewerRdYlGn9Colors[i][1]
+                        break
+                if Debug:
+                    print(quantileColor[x][g])
+        
+        html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
+        html += '<tr bgcolor=%s><th>criterion</th>' % (columnHeaderColor)
+        for g in criteriaList:
+            html += '<th bgcolor=%s>%s</th>' % (columnHeaderColor,str(g))
+        html += '</tr>\n'
+        html += '<tr bgcolor=%s><th>weight</th>' % (columnHeaderColor)
+        for g in criteriaList:
+            html += '<th bgcolor=%s>%s</th>' % (columnHeaderColor,str(self.criteria[g]['weight']))
+        html += '</tr>\n'
+        if Debug:
+            print(html)
+        for x in actionsList:
+            html += '<tr><th bgcolor=%s>%s</th>' % (rowHeaderColor,str(x))
+            for g in criteriaList:
+                if self.evaluation[g][x] != Decimal("-999"):
+                    formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
+                    html += formatString % (self.evaluation[g][x])
+                else:
+                    html += '<td bgcolor=%s>&#32;</td>' % brewerRdYlGn9Colors[4][1]
+                if Debug:
+                    print(html)
+            html += '</tr>\n'
         html += '</table>'
         return html
 
@@ -5027,24 +5183,30 @@ if __name__ == "__main__":
     
     print('*-------- Testing classes and methods -------')
 
-    ## t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
+    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
-    t = RandomCBPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=20,
-                                   weightDistribution='equiobjectives',
-                                   integerWeights=True,
-                                   Debug=False)
-##    t = RandomCoalitionsPerformanceTableau(numberOfActions=10,
-##                                           numberOfCriteria=5,
+##    t = RandomCBPerformanceTableau(numberOfCriteria=13,
+##                                   numberOfActions=21,
+##                                   weightDistribution='equiobjectives',
+##                                   integerWeights=True,
+##                                   Debug=False)
+##    t = RandomCoalitionsPerformanceTableau(numberOfActions=20,
+##                                           numberOfCriteria=13,
 ##                                           Coalitions=False,
 ##                                           RandomCoalitions=True,
 ##                                           weightDistribution="equicoalitions")
     t.showAll()
-    t.save('testSize1')
-    pt1 = PartialPerformanceTableau(t)
-    pt1.showAll()
-    pt2 = PartialPerformanceTableau(t,actionsSubset=['a01','a02'],criteriaSubset=['g01','g03'])
-    pt2.showAll()
+    from weakOrders import *
+    qsrbc = QsRbcWeakOrdering(t,10)
+    qsrbc.showSorting()
+    actionsList = qsrbc.computeQsRbcRanking()
+    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
+    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=False))
+    t.showHTMLPerformanceHeatmap(actionsList=actionsList)
+##    pt1 = PartialPerformanceTableau(t)
+##    pt1.showAll()
+##    pt2 = PartialPerformanceTableau(t,actionsSubset=['a01','a02'],criteriaSubset=['g01','g03'])
+##    pt2.showAll()
     
 ##    ## t = PerformanceTableau('test')
 ##    t.saveXMCDA2('test',servingD3=False)

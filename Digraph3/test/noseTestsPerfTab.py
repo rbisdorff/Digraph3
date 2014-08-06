@@ -226,6 +226,29 @@ def testMajorityQuantilesRanking():
     print(t.computeQuantiles(Debug=False))
     t.showQuantileSort()
     
+def testPartialPerfTabs():
+    print('*------ test partial performance tableau object ----*')
+    t = RandomCBPerformanceTableau(numberOfCriteria=13,
+                                   numberOfActions=20,
+                                   weightDistribution='equiobjectives',
+                                   integerWeights=True,
+                                   Debug=False)
+    t.showAll()
+    t.save('testSize1')
+    pt1 = PartialPerformanceTableau(t)
+    pt1.showAll()
+    pt2 = PartialPerformanceTableau(t,actionsSubset=['a01','a02'],
+                                    criteriaSubset=['g01','g03'])
+    pt2.showAll()
+    
+def testSaveCSV():
+    print('*---- test CSV storing of performance table ----*')
+    t = RandomCBPerformanceTableau(numberOfCriteria=5,
+                                   numberOfActions=7,
+                                   weightDistribution='equiobjectives',
+                                   integerWeights=True,
+                                   Debug=False)
+    t.showAll()
+    t.saveCSV('testCSVSaving',Sorted=True,Debug=True)
 
- 
     
