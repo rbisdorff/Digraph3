@@ -963,7 +963,7 @@ The performance evaluations of each decision alternative on each criterion are g
 Browsing the performance tableau
 ................................
 
-We may visualize the same performance tableau in a colorws setting in the default system browser with the command:
+We may visualize the same performance tableau in a two-colors setting in the default system browser with the command:
         >>> odg.showHTMLPerformanceTableau()
         >>> ...
 
