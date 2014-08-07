@@ -960,8 +960,11 @@ The performance evaluations of each decision alternative on each criterion are g
 	  'g07'  |  41.2    64.0    87.7    71.6    57.8    59.3    34.7
 	>>> ...
 
-We may visualize the same performance tableau in a more colorful setting in the default system browser with the command:
-        >>> dog.showHTMLPerformanceTableau()
+Browsing the performance tableau
+................................
+
+We may visualize the same performance tableau in a colorws setting in the default system browser with the command:
+        >>> odg.showHTMLPerformanceTableau()
         >>> ...
 
 .. image:: tutorialPerfTab.png
@@ -969,6 +972,19 @@ We may visualize the same performance tableau in a more colorful setting in the 
    :align: center
 
 It is worthwhile noticing that *green* and *red* marked evaluations indicate *best*, respectively *worst*, performances of an alternative on a criterion. In this example, we may hence notice that alternative *a03* is in fact best performing on *four* out of *seven* criteria.
+
+We may, furthermore, rank the alternatives on the basis of the weighted marginal quintiles and visualize the same performance tableau in an even more colorful and sorted setting:
+        >>> from weakOrders import QSRbcWeakOrdering
+        >>> qsrbc = QsRbcWeakOrdering(odg,10)
+        >>> ordering = qsrbc.computeQsRbcRanking()
+        >>> odg.showHTMLPerformanceHeatmap(ordering,colorLevels=5)
+        >>> ...
+
+.. image:: tutorialHeatmap.png
+   :width: 400 px
+   :align: center
+
+There is no doubt that action *a03*, with a performance in the highest quintile in five out of seven criteria, appears definitely to be best performing. Action *a07* shows an average performance on nearly all the criteria, wheras action *a02* appears to be the weakest alternative.
 
 Semantics of the bipolar valuation
 ..................................
