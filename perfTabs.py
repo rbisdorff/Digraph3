@@ -1028,7 +1028,7 @@ class PerformanceTableau(object):
         html += '</table>'
         return html
 
-    def showHTMLPerformanceHeatmap(self,criteriaList=None,
+    def showHTMLPerformanceHeatmap(self,colorLevels=7,criteriaList=None,
                                    actionsList=None,ndigits=2):
         """
         shows the html heatmap version of the performance tableau in a browser window.
@@ -1038,7 +1038,8 @@ class PerformanceTableau(object):
         fo = open(fileName,'w')
         fo.write(self.htmlPerformanceHeatmap(criteriaList=criteriaList,
                                              actionsList=actionsList,
-                                             ndigits=ndigits))
+                                             ndigits=ndigits,
+                                             colorLevels=colorLevels))
         fo.close()
         url = 'file://'+fileName
         webbrowser.open_new(url)
@@ -1046,7 +1047,7 @@ class PerformanceTableau(object):
     def htmlPerformanceHeatmap(self,criteriaList=None,
                                actionsList=None,
                                ndigits=2,
-                               colorPalette=None,
+                               colorLevels=None,
                                Debug=False):
         """
         Renders the Brewer RdYlGn 9-colored heatmap of the performance table
@@ -1100,9 +1101,14 @@ class PerformanceTableau(object):
                                (Decimal('0.8'),'"#D9EF8B"'),
                                (Decimal('1.0'),'"#A6D96A"')
                                ]
-        
-        if colorPalette == None:
+        if colorLevels == None:
+            colorLevels = 7
+        if colorLevels == 7:
             colorPalette = brewerRdYlGn7Colors
+        elif colorLevels == 9:
+            colorPalette = brewerRdYlGn9Colors
+        elif colorLevels == 5:
+            colorPalette = brewerRdYlGn5Colors
         nc = len(colorPalette)
         backGroundColor   = '"#FFFFFF"'
         naColor           = '"#FFFFFF"'
@@ -5243,13 +5249,14 @@ if __name__ == "__main__":
 ##    t.showAll()
 ##    t.saveXMCDA2('test')
 ##    t = XMCDA2PerformanceTableau('spiegel2004')
+    t = XMCDA2PerformanceTableau('uniSorting')
     from weakOrders import *
-    qsrbc = QsRbcWeakOrdering(t,10)
+    qsrbc = QsRbcWeakOrdering(t,10,Threading=False)
     qsrbc.showSorting()
     actionsList = qsrbc.computeQsRbcRanking()
 ##    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
 ##    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=True))
-    t.showHTMLPerformanceHeatmap(actionsList=actionsList)
+    t.showHTMLPerformanceHeatmap(actionsList=actionsList,colorLevels=9)
 ##    t.showHTMLPerformanceHeatmap()
 ##    pt1 = PartialPerformanceTableau(t)
 ##    pt1.showAll()
