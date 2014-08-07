@@ -1046,6 +1046,7 @@ class PerformanceTableau(object):
     def htmlPerformanceHeatmap(self,criteriaList=None,
                                actionsList=None,
                                ndigits=2,
+                               colorPalette=None,
                                Debug=False):
         """
         Renders the Brewer RdYlGn 9-colored heatmap of the performance table
@@ -1064,20 +1065,49 @@ class PerformanceTableau(object):
                 else:
                     yield first
 
-        brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#CF302F"'),
-                               (Decimal('0.2222'),'"#ED6C49"'),
-                               (Decimal('0.3333'),'"#F6AE66"'),
-                               (Decimal('0.4444'),'"#F9E2BE"'),
-                               (Decimal('0.5555'),'"#FCFFCD"'),
-                               (Decimal('0.6666'),'"#D5F28F"'),
-                               (Decimal('0.7777'),'"#A3DC70"'),
-                               (Decimal('0.8888'),'"#68BF67"'),
-                               (Decimal('1.0001'),'"#2A9954"')]
-        nc = len(brewerRdYlGn9Colors)
+##        brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#CF302F"'),
+##                               (Decimal('0.2222'),'"#ED6C49"'),
+##                               (Decimal('0.3333'),'"#F6AE66"'),
+##                               (Decimal('0.4444'),'"#F9E2BE"'),
+##                               (Decimal('0.5555'),'"#FCFFCD"'),
+##                               (Decimal('0.6666'),'"#D5F28F"'),
+##                               (Decimal('0.7777'),'"#A3DC70"'),
+##                               (Decimal('0.8888'),'"#68BF67"'),
+##                               (Decimal('1.0001'),'"#2A9954"')]
+                    
+        brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#D53E4F"'),
+                               (Decimal('0.2222'),'"#F46D43"'),
+                               (Decimal('0.3333'),'"#FDAE61"'),
+                               (Decimal('0.4444'),'"#FEE08B"'),
+                               (Decimal('0.5555'),'"#FFFFBF"'),
+                               (Decimal('0.6666'),'"#D9EF8B"'),
+                               (Decimal('0.7777'),'"#A6D96A"'),
+                               (Decimal('0.8888'),'"#65BD63"'),
+                               (Decimal('1.000'),'"#1A9850"')]
+        brewerRdYlGn7Colors = [
+                               (Decimal('0.1429'),'"#F46D43"'),
+                               (Decimal('0.2857'),'"#FDAE61"'),
+                               (Decimal('0.4286'),'"#FEE08B"'),
+                               (Decimal('0.5714'),'"#FFFFBF"'),
+                               (Decimal('0.7143'),'"#D9EF8B"'),
+                               (Decimal('0.8571'),'"#A6D96A"'),
+                               (Decimal('1.0000'),'"#65BD63"')
+                               ]
+        brewerRdYlGn5Colors = [
+                               (Decimal('0.2'),'"#FDAE61"'),
+                               (Decimal('0.4'),'"#FEE08B"'),
+                               (Decimal('0.6'),'"#FFFFBF"'),
+                               (Decimal('0.8'),'"#D9EF8B"'),
+                               (Decimal('1.0'),'"#A6D96A"')
+                               ]
+        
+        if colorPalette == None:
+            colorPalette = brewerRdYlGn7Colors
+        nc = len(colorPalette)
         backGroundColor   = '"#FFFFFF"'
         columnHeaderColor = '"#CCFFFF"'
         rowHeaderColor    = '"#FFFFFF"'
-        html = '<h1>Performance heatmap</h1>'
+        html = '<h2>Performance heatmap</h2>'
         
         if criteriaList == None:
             criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
@@ -1096,9 +1126,9 @@ class PerformanceTableau(object):
                 if Debug:
                     print(x,g,quantilexg)
                 for i in range(nc):
-                    #print(i, brewerRdYlGn9Colors[i][0])
-                    if quantilexg < brewerRdYlGn9Colors[i][0]:
-                        quantileColor[x][g] = brewerRdYlGn9Colors[i][1]
+                    #print(i, colorPalette[i][0])
+                    if quantilexg <= colorPalette[i][0]:
+                        quantileColor[x][g] = colorPalette[i][1]
                         break
                 if Debug:
                     print(quantileColor[x][g])
@@ -1121,11 +1151,20 @@ class PerformanceTableau(object):
                     formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
                     html += formatString % (self.evaluation[g][x])
                 else:
-                    html += '<td bgcolor=%s>&#32;</td>' % brewerRdYlGn9Colors[4][1]
+                    html += '<td bgcolor=%s>&#32;</td>' % colorPalette[4][1]
                 if Debug:
                     print(html)
             html += '</tr>\n'
-        html += '</table>'
+        html += '</table>\n'
+        html += '<p>Color legend</p>\n'
+        html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
+        html += '<tr bgcolor=%s><th>quantile</th>' % (columnHeaderColor)
+        for col in range(nc):
+            html += '<th bgcolor=%s>%s</th>' % (colorPalette[col][1],str(colorPalette[col][0]))
+        html += '</tr>\n'
+        html += '</table>\n'
+        
+        
         return html
 
     def computeWeightPreorder(self):
@@ -3146,7 +3185,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
         | numberOf Actions := 20 (default)
         | number of Criteria := 13 (default)
         | weightDistribution := 'equisignificant' (default with all weights = 1.0), 'random', 'fixed' (default w_1 = numberOfCriteria-1, w_{i!=1} = 1
-        | weightScale := [1,numerOfCriteria[ (random default), [w_1, w_{i!=1] (fixed)
+        | weightScale := [1,numerOfCriteria] (random default), [w_1, w_{i!=1] (fixed)
         | integerWeights := True (default) / False
         | commonScale := (0.0, 100.0) (default)
         | commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].
@@ -5183,26 +5222,30 @@ if __name__ == "__main__":
     
     print('*-------- Testing classes and methods -------')
 
-    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
+##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
 ##    t = RandomCBPerformanceTableau(numberOfCriteria=13,
 ##                                   numberOfActions=21,
 ##                                   weightDistribution='equiobjectives',
 ##                                   integerWeights=True,
 ##                                   Debug=False)
-##    t = RandomCoalitionsPerformanceTableau(numberOfActions=20,
-##                                           numberOfCriteria=13,
-##                                           Coalitions=False,
-##                                           RandomCoalitions=True,
-##                                           weightDistribution="equicoalitions")
+    t = RandomCoalitionsPerformanceTableau(numberOfActions=20,
+                                           numberOfCriteria=13,
+                                           Coalitions=False,
+                                           RandomCoalitions=True,
+                                           weightDistribution="equicoalitions",
+                                           Debug=True)
     t.showAll()
+    t.saveXMCDA2('test')
+    t = XMCDA2PerformanceTableau('test')
     from weakOrders import *
     qsrbc = QsRbcWeakOrdering(t,10)
     qsrbc.showSorting()
     actionsList = qsrbc.computeQsRbcRanking()
-    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
-    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=False))
+##    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
+##    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=False))
     t.showHTMLPerformanceHeatmap(actionsList=actionsList)
+##    t.showHTMLPerformanceHeatmap()
 ##    pt1 = PartialPerformanceTableau(t)
 ##    pt1.showAll()
 ##    pt2 = PartialPerformanceTableau(t,actionsSubset=['a01','a02'],criteriaSubset=['g01','g03'])

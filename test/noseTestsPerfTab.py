@@ -251,4 +251,14 @@ def testSaveCSV():
     t.showAll()
     t.saveCSV('testCSVSaving',Sorted=True,Debug=True)
 
+def testHTMPerformanceHeatmap():
+    print('*------ test performance heatmap -----*')
+    t = RandomCBPerformanceTableau(numberOfCriteria=5,
+                                   numberOfActions=7,
+                                   weightDistribution='equiobjectives',
+                                   integerWeights=True,
+                                   Debug=False)
+    actionsList = [x for x in t.actions.keys()]
+    criterionList = [g for g in t.criteria.keys()]
+    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=True))
     
