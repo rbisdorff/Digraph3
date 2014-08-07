@@ -1100,7 +1100,7 @@ linearBallot = {
 <h3>Browsing the performance tableau<a class="headerlink" href="#browsing-the-performance-tableau" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>We may visualize the same performance tableau in a colorws setting in the default system browser with the command:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dog</span><span class="o">.</span><span class="n">showHTMLPerformanceTableau</span><span class="p">()</span>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showHTMLPerformanceTableau</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
 </pre></div>
 </div>
@@ -1111,16 +1111,16 @@ linearBallot = {
 <dl class="docutils">
 <dt>We may, furthermore, rank the alternatives on the basis of the weighted marginal quintiles and visualize the same performance tableau in an even more colorful and sorted setting:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">QSRbcWeakOrdering</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">qsrbc</span> <span class="o">=</span> <span class="n">QsRbcWeakOrdering</span><span class="p">(</span><span class="n">dog</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qsrbc</span> <span class="o">=</span> <span class="n">QsRbcWeakOrdering</span><span class="p">(</span><span class="n">odg</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ordering</span> <span class="o">=</span> <span class="n">qsrbc</span><span class="o">.</span><span class="n">computeQsRbcRanking</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dog</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">ordering</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">ordering</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
 </pre></div>
 </div>
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/tutorialHeatmap.png"><img alt="_images/tutorialHeatmap.png" class="align-center" src="_images/tutorialHeatmap.png" style="width: 400px;" /></a>
-<p>There is no doubt that action <em>a03</em>, with a performance in the highest quintile in five out of seven criteria, appears definitely to be best performing. Action <em>a07</em> shows an average performance on nearly all the criteria, wheras action <em>a02</em> appears to be the weakest alternative.</p>
+<p>There is no doubt that action <em>a03</em>, with a performance in the highest quintile in five out of seven criteria, appears definitely to be best performing. Action <em>a05</em> shows a more or less average performance on most criteria, wheras action <em>a02</em> appears to be the weakest alternative.</p>
 </div>
 <div class="section" id="semantics-of-the-bipolar-valuation">
 <h3>Semantics of the bipolar valuation<a class="headerlink" href="#semantics-of-the-bipolar-valuation" title="Permalink to this headline">¶</a></h3>

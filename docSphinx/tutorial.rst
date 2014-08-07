@@ -984,7 +984,7 @@ We may, furthermore, rank the alternatives on the basis of the weighted marginal
    :width: 400 px
    :align: center
 
-There is no doubt that action *a03*, with a performance in the highest quintile in five out of seven criteria, appears definitely to be best performing. Action *a07* shows an average performance on nearly all the criteria, wheras action *a02* appears to be the weakest alternative.
+There is no doubt that action *a03*, with a performance in the highest quintile in five out of seven criteria, appears definitely to be best performing. Action *a05* shows a more or less average performance on most criteria, wheras action *a02* appears to be the weakest alternative.
 
 Semantics of the bipolar valuation
 ..................................
