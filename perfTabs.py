@@ -1105,6 +1105,7 @@ class PerformanceTableau(object):
             colorPalette = brewerRdYlGn7Colors
         nc = len(colorPalette)
         backGroundColor   = '"#FFFFFF"'
+        naColor           = '"#FFFFFF"'
         columnHeaderColor = '"#CCFFFF"'
         rowHeaderColor    = '"#FFFFFF"'
         html = '<h2>Performance heatmap</h2>'
@@ -1125,11 +1126,15 @@ class PerformanceTableau(object):
                 quantilexg = self.computeActionCriterionQuantile(x,g)
                 if Debug:
                     print(x,g,quantilexg)
-                for i in range(nc):
-                    #print(i, colorPalette[i][0])
-                    if quantilexg <= colorPalette[i][0]:
-                        quantileColor[x][g] = colorPalette[i][1]
-                        break
+                if quantilexg != 'NA':
+                    for i in range(nc):
+                        #print(i, colorPalette[i][0])
+                        
+                        if quantilexg <= colorPalette[i][0]:
+                            quantileColor[x][g] = colorPalette[i][1]
+                            break
+                else:
+                    quantileColor[x][g] = naColor
                 if Debug:
                     print(quantileColor[x][g])
         
@@ -1151,7 +1156,7 @@ class PerformanceTableau(object):
                     formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
                     html += formatString % (self.evaluation[g][x])
                 else:
-                    html += '<td bgcolor=%s>&#32;</td>' % colorPalette[4][1]
+                    html += '<td bgcolor=%s>NA</td>' % naColor
                 if Debug:
                     print(html)
             html += '</tr>\n'
@@ -5224,26 +5229,26 @@ if __name__ == "__main__":
 
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
-##    t = RandomCBPerformanceTableau(numberOfCriteria=13,
-##                                   numberOfActions=21,
-##                                   weightDistribution='equiobjectives',
-##                                   integerWeights=True,
-##                                   Debug=False)
-    t = RandomCoalitionsPerformanceTableau(numberOfActions=20,
-                                           numberOfCriteria=13,
-                                           Coalitions=False,
-                                           RandomCoalitions=True,
-                                           weightDistribution="equicoalitions",
-                                           Debug=True)
-    t.showAll()
-    t.saveXMCDA2('test')
-    t = XMCDA2PerformanceTableau('test')
+    t = RandomCBPerformanceTableau(numberOfCriteria=13,
+                                   numberOfActions=21,
+                                   weightDistribution='equiobjectives',
+                                   integerWeights=True,
+                                   Debug=False)
+##    t = RandomCoalitionsPerformanceTableau(numberOfActions=20,
+##                                           numberOfCriteria=13,
+##                                           Coalitions=False,
+##                                           RandomCoalitions=True,
+##                                           weightDistribution="equicoalitions",
+##                                           Debug=True)
+##    t.showAll()
+##    t.saveXMCDA2('test')
+##    t = XMCDA2PerformanceTableau('spiegel2004')
     from weakOrders import *
     qsrbc = QsRbcWeakOrdering(t,10)
     qsrbc.showSorting()
     actionsList = qsrbc.computeQsRbcRanking()
 ##    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
-##    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=False))
+##    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=True))
     t.showHTMLPerformanceHeatmap(actionsList=actionsList)
 ##    t.showHTMLPerformanceHeatmap()
 ##    pt1 = PartialPerformanceTableau(t)
