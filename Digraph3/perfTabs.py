@@ -5236,7 +5236,7 @@ if __name__ == "__main__":
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
     t = RandomCBPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=21,
+                                   numberOfActions=200,
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
                                    Debug=False)
@@ -5249,9 +5249,9 @@ if __name__ == "__main__":
 ##    t.showAll()
 ##    t.saveXMCDA2('test')
 ##    t = XMCDA2PerformanceTableau('spiegel2004')
-    t = XMCDA2PerformanceTableau('uniSorting')
+##    t = XMCDA2PerformanceTableau('uniSorting')
     from weakOrders import *
-    qsrbc = QsRbcWeakOrdering(t,10,Threading=False)
+    qsrbc = QsRbcWeakOrdering(t,25,Threading=True)
     qsrbc.showSorting()
     actionsList = qsrbc.computeQsRbcRanking()
 ##    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
