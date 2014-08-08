@@ -59,6 +59,19 @@ def powerset(S):
             yield set([e]) | X
             yield X
 
+# flattens a list of lists into a flat list
+import itertools as IT
+import collections
+
+def flatten(iterable, ltypes=collections.Iterable):
+    remainder = iter(iterable)
+    while True:
+        first = next(remainder)
+        if isinstance(first, ltypes) and not isinstance(first, str):
+            remainder = IT.chain(first, remainder)
+        else:
+            yield first
+
 #----------XML handling class -----------------
 try:
     from xml.sax import *
@@ -2546,20 +2559,32 @@ class Digraph(object):
         print('\n')
         print('Valuation domain: ', self.valuationdomain)
 
-    def showHTMLRelationTable(self):
+    def showHTMLRelationTable(self,actionsList=None,
+                              IntegerValues=False,
+                              Colored=True,
+                              tableTitle='Valued Adjacency Matrix',
+                              relationName='r(x S y)'):
         """
         Launches a browser window with the colored relation table of self.
         """
         import webbrowser
         fileName = '/tmp/relationTable.html'
         fo = open(fileName,'w')
-        fo.write(self.htmlRelationTable(isColored=True))
+        fo.write(self.htmlRelationTable(actionsSubset=actionsList,
+                                        isColored=Colored,
+                                        hasIntegerValues=IntegerValues,
+                                        tableTitle=tableTitle,
+                                        relationName=relationName))
         fo.close()
         url = 'file://'+fileName
         webbrowser.open_new(url)
         
         
-    def htmlRelationTable(self,tableTitle='Relation Table',relationName=' R ',hasIntegerValues=False,actionsSubset= None,isColored=False):
+    def htmlRelationTable(self,tableTitle='Valued Relation Table',
+                          relationName='r(x R y)',
+                          hasIntegerValues=False,
+                          actionsSubset= None,
+                          isColored=False):
         """
         renders the relation valuation in actions X actions html table format.
         """
@@ -2585,7 +2610,8 @@ class Digraph(object):
                     actionsList += [(actions[x]['name'],x)]
             else:
                 actionsList += [(str(x),str(x))]
-        actionsList.sort()
+        if actionsSubset == None:
+            actionsList.sort()
         #print actionsList
         #actionsList.sort()
 
