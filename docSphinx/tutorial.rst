@@ -432,7 +432,7 @@ It is as well possible to show a colored version of the valued relation table in
    :width: 400 px
    :align: center
 
-Positive arcs are shown in green and negative in red. Indetermiate links, like the diagonal ones, are shown in gray.
+Positive arcs are shown in green and negative in red. Indetermiate -zero-valued- links, like the reflexive diagonal ones or the link between node *6* and node *2*, are shown in gray.
 
 Complete, empty and indeterminate digraphs
 ..........................................
