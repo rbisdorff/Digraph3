@@ -424,6 +424,16 @@ It is possible to reload a Digraph instance from its previously saved CSV file c
 	'6'    | -0.84  0.00 -0.40 -0.96 -0.18   -   -0.22	 
 	'7'    |  0.88  0.72  0.82  0.52 -0.84  0.04   -
 
+It is as well possible to show a colored version of the valued relation table in a system browser window tab:
+        >>> dgcsv.showHTMLRelationTable(tableTitle="Tutorial random digraph")
+	>>> ...
+
+.. image:: htmlTutorialDigraph.png
+   :width: 400 px
+   :align: center
+
+Positive arcs are shown in green and negative in red. Indetermiate links, like the diagonal ones, are shown in gray.
+
 Complete, empty and indeterminate digraphs
 ..........................................
 
