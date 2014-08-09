@@ -1028,8 +1028,10 @@ class PerformanceTableau(object):
         html += '</table>'
         return html
 
-    def showHTMLPerformanceHeatmap(self,colorLevels=7,criteriaList=None,
-                                   actionsList=None,ndigits=2):
+    def showHTMLPerformanceHeatmap(self,actionsList=None,
+                                   criteriaList=None,
+                                   colorLevels=7,
+                                   ndigits=2):
         """
         shows the html heatmap version of the performance tableau in a browser window.
         """
@@ -1053,18 +1055,19 @@ class PerformanceTableau(object):
         Renders the Brewer RdYlGn 9-colored heatmap of the performance table
         actions x criteria in html format.
         """
-        import itertools as IT
-        import collections
+        #import itertools as IT
+        #import collections
         from decimal import Decimal
+        from digraphs import flatten
 
-        def flatten(iterable, ltypes=collections.Iterable):
-            remainder = iter(iterable)
-            while True:
-                first = next(remainder)
-                if isinstance(first, ltypes) and not isinstance(first, str):
-                    remainder = IT.chain(first, remainder)
-                else:
-                    yield first
+##        def flatten(iterable, ltypes=collections.Iterable):
+##            remainder = iter(iterable)
+##            while True:
+##                first = next(remainder)
+##                if isinstance(first, ltypes) and not isinstance(first, str):
+##                    remainder = IT.chain(first, remainder)
+##                else:
+##                    yield first
 
 ##        brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#CF302F"'),
 ##                               (Decimal('0.2222'),'"#ED6C49"'),
@@ -1109,6 +1112,8 @@ class PerformanceTableau(object):
             colorPalette = brewerRdYlGn9Colors
         elif colorLevels == 5:
             colorPalette = brewerRdYlGn5Colors
+        else:
+            colorPalette = brewerRdYlGn7Colors
         nc = len(colorPalette)
         backGroundColor   = '"#FFFFFF"'
         naColor           = '"#FFFFFF"'

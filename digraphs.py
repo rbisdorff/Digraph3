@@ -1173,14 +1173,18 @@ class Digraph(object):
             for x in ibch:
                 for y in ibch:
                     if x != y:
-                        rankingRelation[x][y] = self.omin( [abs(relation[x][y]),abs(relation[y][x])] )
-                        rankingRelation[y][x] = self.omin( [abs(relation[y][x]),abs(relation[x][y])] )
+                        rankingRelation[x][y] = min( [abs(relation[x][y]),abs(relation[y][x])] )
+                        rankingRelation[y][x] = min( [abs(relation[y][x]),abs(relation[x][y])] )
+##                        rankingRelation[x][y] = self.omin( [rankingRelation[x][y],abs(relation[y][x])] )
+##                        rankingRelation[y][x] = self.omin( [rankingRelation[y][x],abs(relation[x][y])] )
 ##                    if Debug and (x == 'a10' or y == 'a07') :
 ##                        print(x,y,rankingRelation[x][y],relation[x][y])
 ##                        print(y,x,rankingRelation[y][x],relation[y][x])
                 for y in ribch:
-                    rankingRelation[x][y] = self.omin( [abs(relation[x][y]),abs(relation[y][x])] )
-                    rankingRelation[y][x] = -self.omin( [abs(relation[y][x]),abs(relation[x][y])] )
+##                    rankingRelation[x][y] = self.omin( [rankingRelation[x][y],abs(relation[y][x])] )
+##                    rankingRelation[y][x] = self.omin( [rankingRelation[y][x],-abs(relation[x][y])] )
+                    rankingRelation[x][y] = min( [abs(relation[x][y]),abs(relation[y][x])] )
+                    rankingRelation[y][x] = -min( [abs(relation[y][x]),abs(relation[x][y])] )
 ##                    if Debug and (x == 'a10' or y == 'a07'):
 ##                        print('+',x,y,rankingRelation[x][y],relation[x][y])
 ##                        print('-',y,x,rankingRelation[y][x],relation[y][x])
@@ -1221,14 +1225,18 @@ class Digraph(object):
 ##                        print(x,y,rankingRelation[x][y],relation[x][y])
 ##                        print(y,x,rankingRelation[x][y],relation[y][x])
                     if x != y:
-                        rankingRelation[x][y] = self.omin( [abs(relation[x][y]),abs(relation[y][x])] )
-                        rankingRelation[y][x] = self.omin( [abs(relation[y][x]),abs(relation[x][y])] )
+##                        rankingRelation[x][y] = self.omin( [rankingRelation[x][y],abs(relation[y][x])] )
+##                        rankingRelation[y][x] = self.omin( [rankingRelation[y][x],abs(relation[x][y])] )
+                        rankingRelation[x][y] = min( [abs(relation[x][y]),abs(relation[y][x])] )
+                        rankingRelation[y][x] = min( [abs(relation[y][x]),abs(relation[x][y])] )
                 for y in riwch:
 ##                    if Debug and (x == 'a10' and y == 'a08') :
 ##                        print(x,y,rankingRelation[x][y],relation[x][y])
 ##                        print(y,x,rankingRelation[x][y],relation[y][x])
-                    rankingRelation[x][y] = -self.omin( [abs(relation[x][y]),abs(relation[y][x])] )
-                    rankingRelation[y][x] = self.omin( [abs(relation[y][x]),abs(relation[x][y])] )
+##                    rankingRelation[x][y] = self.omin( [rankingRelation[x][y],-abs(relation[y][x])] )
+##                    rankingRelation[y][x] = self.omin( [rankingRelation[y][x],abs(relation[x][y])] )
+                    rankingRelation[x][y] = -min( [abs(relation[x][y]),abs(relation[y][x])] )
+                    rankingRelation[y][x] = min( [abs(relation[y][x]),abs(relation[x][y])] )
             currActions = currActions - iwch
         return rankingRelation
 
