@@ -1031,6 +1031,7 @@ class PerformanceTableau(object):
     def showHTMLPerformanceHeatmap(self,actionsList=None,
                                    criteriaList=None,
                                    colorLevels=7,
+                                   pageTitle=None,
                                    ndigits=2):
         """
         shows the html heatmap version of the performance tableau in a browser window.
@@ -1038,10 +1039,13 @@ class PerformanceTableau(object):
         import webbrowser
         fileName = '/tmp/performanceHeatmap.html'
         fo = open(fileName,'w')
+        if pageTitle == None:
+            pageTitle = 'Heatmap of performance tableau %s' % self.name
         fo.write(self.htmlPerformanceHeatmap(criteriaList=criteriaList,
                                              actionsList=actionsList,
                                              ndigits=ndigits,
-                                             colorLevels=colorLevels))
+                                             colorLevels=colorLevels,
+                                             pageTitle=pageTitle))
         fo.close()
         url = 'file://'+fileName
         webbrowser.open_new(url)
@@ -1050,6 +1054,7 @@ class PerformanceTableau(object):
                                actionsList=None,
                                ndigits=2,
                                colorLevels=None,
+                               pageTitle='Performance Heatmap',
                                Debug=False):
         """
         Renders the Brewer RdYlGn 9-colored heatmap of the performance table
@@ -1119,7 +1124,7 @@ class PerformanceTableau(object):
         naColor           = '"#FFFFFF"'
         columnHeaderColor = '"#CCFFFF"'
         rowHeaderColor    = '"#FFFFFF"'
-        html = '<h2>Performance heatmap</h2>'
+        html = '<h2>%s</h2>' % pageTitle
         
         if criteriaList == None:
             criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
