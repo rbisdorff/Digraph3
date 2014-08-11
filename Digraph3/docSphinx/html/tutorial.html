@@ -1532,13 +1532,13 @@ linearBallot = {
 <span class="go">*----  performance tableau -----*</span>
 <span class="go">criteria |   weights |     &#39;A&#39;      &#39;B&#39;      &#39;C&#39;       &#39;D&#39;       &#39;E&#39;       &#39;F&#39;       &#39;G&#39;</span>
 <span class="go">---------|---------------------------------------------------------------------------------</span>
-<span class="go">&#39;C&#39;      |   45.00   | -35000.00 -17800.00 -6700.00 -14100.00 -34800.00 -18600.00 -12000.00</span>
-<span class="go">&#39;Cf&#39;     |    6.00   |      0.00    100.00    10.00     30.00     60.00     80.00     50.00</span>
-<span class="go">&#39;P&#39;      |    3.00   |     90.00     30.00   100.00     90.00     70.00      0.00     80.00</span>
-<span class="go">&#39;Pr&#39;     |   32.00   |    100.00     20.00    80.00     70.00     40.00      0.00     60.00</span>
-<span class="go">&#39;St&#39;     |   23.00   |    100.00     10.00     0.00     30.00     90.00     70.00     20.00</span>
-<span class="go">&#39;V&#39;      |   26.00   |     60.00     80.00    70.00     50.00     60.00      0.00    100.00</span>
-<span class="go">&#39;W&#39;      |   10.00   |     75.00     30.00     0.00     55.00    100.00      0.00     50.00</span>
+<span class="go">&#39;C&#39;      |    3.00   | -35000.00 -17800.00 -6700.00 -14100.00 -34800.00 -18600.00 -12000.00</span>
+<span class="go">&#39;Cf&#39;     |    1.00   |      0.00    100.00    10.00     30.00     60.00     80.00     50.00</span>
+<span class="go">&#39;P&#39;      |    1.00   |     90.00     30.00   100.00     90.00     70.00      0.00     80.00</span>
+<span class="go">&#39;Pr&#39;     |    1.00   |    100.00     20.00    80.00     70.00     40.00      0.00     60.00</span>
+<span class="go">&#39;St&#39;     |    1.00   |    100.00     10.00     0.00     30.00     90.00     70.00     20.00</span>
+<span class="go">&#39;V&#39;      |    1.00   |     60.00     80.00    70.00     50.00     60.00      0.00    100.00</span>
+<span class="go">&#39;W&#39;      |    1.00   |     75.00     30.00     0.00     55.00    100.00      0.00     50.00</span>
 </pre></div>
 </div>
 </dd>
@@ -1621,7 +1621,7 @@ linearBallot = {
 <div class="section" id="ranking-the-potential-decision-alternatives">
 <h3>Ranking the potential decision alternatives<a class="headerlink" href="#ranking-the-potential-decision-alternatives" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>Indeed, when pairwisely comparing the performances of alternatives <em>D</em> and <em>G</em>, we notice that, with the given preference discrimination thresholds, alternative <em>G</em> is actually <strong>certainly</strong> <em>at least as good as</em> alternative <em>D</em> ( r(<em>G</em> outranks <em>D</em>) = 100%).</dt>
+<dt>Indeed, when comparing the performances of alternatives <em>D</em> and <em>G</em>, we notice that, with the given preference discrimination thresholds, alternative <em>G</em> is actually <strong>certainly</strong> <em>at least as good as</em> alternative <em>D</em> ( r(<em>G</em> outranks <em>D</em>) = 100%).</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s">&#39;G&#39;</span><span class="p">,</span><span class="s">&#39;D&#39;</span><span class="p">)</span>
 <span class="go">*------------  pairwise comparison ----*</span>
 <span class="go">Comparing actions : (G, D)</span>
