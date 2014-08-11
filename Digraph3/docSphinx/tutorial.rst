@@ -14,6 +14,7 @@ Content
 * :ref:`Graphs-Tutorial-label`
 * :ref:`LinearVoting-label`
 * :ref:`OutrankingDigraphs-Tutorial-label`
+* :ref:`Rubis-Tutorial-label`
 
 .. _Digraphs-Tutorial-label:
 
@@ -1130,6 +1131,228 @@ We recover the original bipolarly valued outranking characteristics, and we may 
 Many more tools for exploiting bipolarly valued outranking digraphs are available in the Digraph3 resources (see the thechnical documentation of the :ref:`outrankingDiGraphs-label` and the :ref:`perfTabs-label`).
 
 Back to :ref:`Tutorial-label`
+
+.. _Rubis-Tutorial-label:
+
+Computing a best choice recommendation
+--------------------------------------
+
+Best office site choice for an SME?
+...................................
+
+A SME, specialized in printing an copy services, has to move into new offices, and the CEO has gathered seven potential sites:
+
+  ====================== ==== ==================================================
+   address                ID   Comment
+  ====================== ==== ==================================================
+   Avenue de la liberté   A    High standing city centre
+   Bonnevoie              B    Industrial environment
+   Cessange               C    Residential suburb location
+   Dommeldange            D    Industrial suburb environment
+   Esch-Belval            E    New and ambitious urbanization far from the city
+   Fentange               F    Out in the countryside
+   Avenue de la Gare      G    Main town shopping street
+  ====================== ==== ==================================================
+
+Three objectives are guiding his eventual choice:
+      1. minimize the yearly costs induced by the moving,
+      2. maximize the future turnover of the SME,
+      3. maximize the new working conditions.
+
+The decision consequences to take into account for evaluating each potential office site with respect to each of the three objectives are the following:
+
+   ==================== ==== ============ =========================================
+    Objective            ID   Name         Comment
+   ==================== ==== ============ =========================================
+    Yearly costs         C    Costs        Annual rent, charges, and cleaning
+    Future turnover      St   Standing     Image and presentation
+    Future turnover      V    Visibility   Circulation of potential customers 
+    Future turnover      Pr   Proximity    Distance from town center
+    Working conditions   W    Space        Working space
+    Working conditions   Cf   Comfort      Quality of office equipments
+    Working conditions   P    Parking      Available parking facilities
+   ==================== ==== ============ =========================================
+
+The evaluation of the seven potential sites on each criterion are gathered in trhe following performance tableau:
+   ============= ======== ======== ======== ======== ======== ======== ======== ======== 
+    Criterion     weight   A        B        C        D        E         F         G
+   ============= ======== ======== ======== ======== ======== ======== ======== ========
+    Cost          3        35.0K€   17.8K€   6.7K€    14.1K€   34.8K€   18.6K€   12.0K€
+    Prox          1        100      20       80       70       40       0        60
+    Visi          1        60       80       70       50       60       0        100
+    Stan          1        100      10       0        30       90       70       20
+    Wksp          1        75       30       0        55       100      0        50
+    Wkcf          1        0        100      10       30       60       80       50
+    Park          1        90       30       100      90       70       0        80
+   ============= ======== ======== ======== ======== ======== ======== ======== ========
+
+Except the costs, all other criteria are evaluated on a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice that site *A* is the most expensive, but also 100% satisfying the *Proximity* as well as the  *Standing* criterion. Whereas the site *C* is the cheapest one; providing however no satisfaction at all with respect to the *Standing* and the *Working Space* criteria.   
+
+What is the best office site we may recommend to the CEO in view of this performance tableau?
+
+Inspecting the Performance Tableau
+..................................
+
+The XMCDA 2.0 encoded version of this performance tableau is available for downloading here `officeChoice.xml`_.
+
+   .. _officeChoice.xml: _static/officeChoice.xml
+
+We may inspect the performance tableau data as with the  help of the :ref:`perfTabs-label` module.
+    >>> from perfTabs import *
+    >>> t = XMCDA2PerformanceTableau('officeChoice')
+    >>> help(t) # for discovering all the methods available
+    >>> 
+    >>> t.showCriteria()
+    *----  criteria -----*
+    C 'Costs'
+    Scale = (Decimal('0.00'), Decimal('50000.00'))
+    Weight = 0.333 
+    Threshold ind : 1000.00 + 0.00x ; percentile:  0.095
+    Threshold pref : 2500.00 + 0.00x ; percentile:  0.143
+    Cf 'Comfort'
+    Scale = (Decimal('0.00'), Decimal('100.00'))
+    Weight = 0.111 
+    Threshold veto : 80.00 + 0.00x ; percentile:  0.905
+    Threshold ind : 10.00 + 0.00x ; percentile:  0.095
+    Threshold pref : 20.00 + 0.00x ; percentile:  0.286
+    ...
+    >>> 
+
+Concerning annual costs, we notice that the CEO considers an indifference threshold of 1000€ and a preference discrimination threshold of 2500€. On the qualitative criteria, like *Working Comfort*, a significant preference is given with a performance difference of 20%. A better comparison of the performances is shown by the html heatmap:
+    >>> t.showHTMLPerformanceHeatmap(colorLevels=5)
+
+.. image:: officeChoiceHeatmap.png
+   :width: 600 px
+   :align: center
+
+Good compromise decision alternatives appear to be sites *D* and *G*.
+
+Inspecting the outranking digraph
+.................................
+
+We are going to compute the bipolar-valued outranking digraph from the given performance tableau *t*. The `showHTMLRelationTable` method shows the resulting bipolarly-valued adjacency matrix in a system browser window:
+    >>> from outrankingDigraphs import BipolarOutrankingDigraph
+    >>> g = BipolarOutrankingDigraph(t)
+    >>> g.showHTMLRelationTable()
+
+.. image:: officeChoiceOutranking.png
+   :width: 400 px
+   :align: center
+
+We may notice here that Alternative *D* is **positively outranking** all other potential office sites (a *Condorcet winner*). But alternatives *A* (the most expensive) and *C* (the cheapest) are *not* outranked by any other site; they are in fact **weak** *Condorcet winners*.  
+    >>> g.condorcetWinners()
+    ['D']
+    >>> g.weakCondorcetWinners()
+    ['A', 'C', 'D']
+
+We may get even more insight in the apparent outraking situations when looking at the Condorcet digraph:
+    >>> g.exportGraphViz('officeChoice')
+    *---- exporting a dot file dor GraphViz tools ---------*
+    Exporting to officeChoice.dot
+    dot -Grankdir=BT -Tpng officeChoice.dot -o officeChoice.png
+
+.. image:: officeChoice.png
+   :width: 400 px
+   :align: center
+
+
+Computing the Rubis best choice recommendation
+..............................................
+
+A best choice recommendation, following the Rubis outranking method is provided by the Rubis Rest server:
+    >>> from outrankingDigraphs import RubisRestServer
+    >>> solver = RubisRestServer()
+    >>> solver.ping()
+    *************************************************
+    * This is the Leopold-Loewenheim Apache Server  *
+    * of the University of Luxembourg.              *
+    * Welcome to the Rubis XMCDA 2.0 Web service    *
+    * R. Bisdorff (c) 2009-2013                     *
+    * November 2013, version REST/D4 1.1            *
+    *************************************************
+
+We may submit the given performance tableau:
+    >>> solver.submitProblem(t)
+    The problem submission was successful !
+    Server ticket: 1BYyGVwV866hSNZo
+
+With the given ticket, saved in a text file in the working directory, we may request from the solver the corresponding Rubis best choice recommendation:
+    >>> solver.showSolution()
+
+and, in a system browser window, browse the `solution file`_.
+
+   .. _solution file: _static/officeChoice.xml1BYyGVwV866hSNZoSolution.html
+
+Here, we find confirmed that alternative *D* appears to be the most convincing best choice candidate. Yet, what about alternative *G*, the other good compromise we have noticed from the performance heatmap above.
+
+Ranking the potential decision alternatives
+...........................................
+
+Indeed, when pairwisely comparing the performances of alternatives *D* and *G*, we notice that, with the given preference discrimination thresholds, alternative *G* is actually dominating alternative *D* ( r(*G* outranks *D*) = 100%). 
+    >>> g.showPairwiseComparison('G','D')
+    *------------  pairwise comparison ----*
+    Comparing actions : (G, D)
+    crit. wght.  g(x)      g(y)    diff.  |   ind     pref    concord 	|
+    --------------------------------------------------------------------- 	 
+    C   3.00 -12000.00 -14100.00 +2100.00 | 1000.00 2500.00   +3.00 	| 
+    Cf  1.00     50.00     30.00   +20.00 |   10.00   20.00   +1.00 	| 
+    P   1.00     80.00     90.00   -10.00 |   10.00   20.00   +1.00 	| 
+    Pr  1.00     60.00     70.00   -10.00 |   10.00   20.00   +1.00 	| 
+    St  1.00     20.00     30.00   -10.00 |   10.00   20.00   +1.00 	| 
+    V   1.00    100.00     50.00   +50.00 |   10.00   20.00   +1.00 	| 
+    W   1.00     50.00     55.00    -5.00 |   10.00   20.00   +1.00 	| 
+    ---------------------------------------------------------------------
+    Valuation in range: -9.00 to +9.00; global concordance: +9.00
+
+However, we may notice also that the cheapest alternative *C* is strictly outranking alternative *G*:
+    >>> g.showPairwiseComparison('C','G')
+    *------------  pairwise comparison ----*
+    Comparing actions : (C, G)/(G, C)
+    crit. wght.   g(x)     g(y)      diff.  |   ind.   pref.   	(C,G)/(G,C) |
+    -------------------------------------------------------------------------
+    C     3.00 -6700.00 -12000.00  +5300.00 | 1000.00 2500.00   +3.00/-3.00 | 
+    Cf    1.00    10.00     50.00    -40.00 |   10.00   20.00   -1.00/+1.00 | 
+    P     1.00   100.00     80.00    +20.00 |   10.00   20.00   +1.00/-1.00 | 
+    Pr    1.00    80.00     60.00    +20.00 |   10.00   20.00   +1.00/-1.00 | 
+    St    1.00     0.00     20.00    -20.00 |   10.00   20.00   -1.00/+1.00 | 
+    V     1.00    70.00    100.00    -30.00 |   10.00   20.00   -1.00/+1.00 | 
+    W     1.00     0.00     50.00    -50.00 |   10.00   20.00   -1.00/+1.00 | 
+    -------------------------------------------------------------------------
+    Valuation in range: -9.00 to +9.00; global concordance: +1.00/-1.00
+
+
+From :ref:`weakOrders-label` module, we may apply the RankingByChoosing constructor to the strict (co-dual) outranking digraph:
+    >>> from weakOrders import RankingByChoosingDigraph
+    >>> rbc = RankingByChoosingDigraph((~(-g)))
+    Threading ...
+    Exiting computing threads
+    >>> rbc.showRankingByChoosing()
+    Ranking by Choosing and Rejecting
+    1st ranked ['D'] (0.28)
+       2nd ranked ['C', 'G'] (0.17)
+       2nd last ranked ['B', 'C', 'E'] (0.22)
+    1st last ranked ['A', 'F'] (0.50)
+    >>> rbc.exportGraphViz('officeChoiceRanking')
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to officeChoiceRanking.dot
+    0 { rank = same; A; C; D; }
+    1 { rank = same; G; } 
+    2 { rank = same; E; B; }
+    3 { rank = same; F; }
+    dot -Grankdir=TB -Tpng officeChoiceRanking.dot -o officeChoiceRanking.png
+
+.. image:: officeChoiceRanking.png
+   :width: 200 px
+   :align: center
+
+In this ranking-by-choosing method, where we operate an epistemic fusion of iterated best and worst choices, alternative *D* is again ranked before the alternative compromise solution *G*. But the apparent ranking result stresses furthermore the fact that the most expensive site *A*, and the cheapest site *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation. 
+
+The best choice depends hence from the very importance the CEO is attaching to the three objectives he is considering. In this setting here, where he considers all three objectives to be **equi-significant**, *D* gives actually the best choice. If costs don' play much role, it would be better to move to site *A*, and if costs do matter a lot, the cheapest alternative *C* would become the best choice indeed. 
+
+It might be worth, as an exercise, to modify this balance one of the other way, by raising and/or lowering the importance of minimizing the overall costs. 
+
+Back to :ref:`Tutorial-label`
+
 
 Links and appendices
 --------------------

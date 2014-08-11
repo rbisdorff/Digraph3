@@ -79,6 +79,7 @@
 <li><a class="reference internal" href="#graphs-tutorial-label"><em>Working with the graphs module</em></a></li>
 <li><a class="reference internal" href="#linearvoting-label"><em>Computing the winner of an election</em></a></li>
 <li><a class="reference internal" href="#outrankingdigraphs-tutorial-label"><em>Working with the outrankingDigraphs module</em></a></li>
+<li><a class="reference internal" href="#rubis-tutorial-label"><em>Computing a best choice recommendation</em></a></li>
 </ul>
 </div>
 <div class="section" id="working-with-the-digraphs-module">
@@ -1284,6 +1285,398 @@ linearBallot = {
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
 </div>
+<div class="section" id="computing-a-best-choice-recommendation">
+<span id="rubis-tutorial-label"></span><h2>Computing a best choice recommendation<a class="headerlink" href="#computing-a-best-choice-recommendation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="best-office-site-choice-for-an-sme">
+<h3>Best office site choice for an SME?<a class="headerlink" href="#best-office-site-choice-for-an-sme" title="Permalink to this headline">¶</a></h3>
+<p>A SME, specialized in printing an copy services, has to move into new offices, and the CEO has gathered seven potential sites:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="5%" />
+<col width="66%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">address</th>
+<th class="head">ID</th>
+<th class="head">Comment</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Avenue de la liberté</td>
+<td>A</td>
+<td>High standing city centre</td>
+</tr>
+<tr class="row-odd"><td>Bonnevoie</td>
+<td>B</td>
+<td>Industrial environment</td>
+</tr>
+<tr class="row-even"><td>Cessange</td>
+<td>C</td>
+<td>Residential suburb location</td>
+</tr>
+<tr class="row-odd"><td>Dommeldange</td>
+<td>D</td>
+<td>Industrial suburb environment</td>
+</tr>
+<tr class="row-even"><td>Esch-Belval</td>
+<td>E</td>
+<td>New and ambitious urbanization far from the city</td>
+</tr>
+<tr class="row-odd"><td>Fentange</td>
+<td>F</td>
+<td>Out in the countryside</td>
+</tr>
+<tr class="row-even"><td>Avenue de la Gare</td>
+<td>G</td>
+<td>Main town shopping street</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="docutils">
+<dt>Three objectives are guiding his eventual choice:</dt>
+<dd><ol class="first last arabic simple">
+<li>minimize the yearly costs induced by the moving,</li>
+<li>maximize the future turnover of the SME,</li>
+<li>maximize the new working conditions.</li>
+</ol>
+</dd>
+</dl>
+<p>The decision consequences to take into account for evaluating each potential office site with respect to each of the three objectives are the following:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="5%" />
+<col width="16%" />
+<col width="53%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Objective</th>
+<th class="head">ID</th>
+<th class="head">Name</th>
+<th class="head">Comment</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Yearly costs</td>
+<td>C</td>
+<td>Costs</td>
+<td>Annual rent, charges, and cleaning</td>
+</tr>
+<tr class="row-odd"><td>Future turnover</td>
+<td>St</td>
+<td>Standing</td>
+<td>Image and presentation</td>
+</tr>
+<tr class="row-even"><td>Future turnover</td>
+<td>V</td>
+<td>Visibility</td>
+<td>Circulation of potential customers</td>
+</tr>
+<tr class="row-odd"><td>Future turnover</td>
+<td>Pr</td>
+<td>Proximity</td>
+<td>Distance from town center</td>
+</tr>
+<tr class="row-even"><td>Working conditions</td>
+<td>W</td>
+<td>Space</td>
+<td>Working space</td>
+</tr>
+<tr class="row-odd"><td>Working conditions</td>
+<td>Cf</td>
+<td>Comfort</td>
+<td>Quality of office equipments</td>
+</tr>
+<tr class="row-even"><td>Working conditions</td>
+<td>P</td>
+<td>Parking</td>
+<td>Available parking facilities</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="docutils">
+<dt>The evaluation of the seven potential sites on each criterion are gathered in trhe following performance tableau:</dt>
+<dd><table border="1" class="first last docutils">
+<colgroup>
+<col width="17%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Criterion</th>
+<th class="head">weight</th>
+<th class="head">A</th>
+<th class="head">B</th>
+<th class="head">C</th>
+<th class="head">D</th>
+<th class="head">E</th>
+<th class="head">F</th>
+<th class="head">G</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Cost</td>
+<td>3</td>
+<td>35.0K€</td>
+<td>17.8K€</td>
+<td>6.7K€</td>
+<td>14.1K€</td>
+<td>34.8K€</td>
+<td>18.6K€</td>
+<td>12.0K€</td>
+</tr>
+<tr class="row-odd"><td>Prox</td>
+<td>1</td>
+<td>100</td>
+<td>20</td>
+<td>80</td>
+<td>70</td>
+<td>40</td>
+<td>0</td>
+<td>60</td>
+</tr>
+<tr class="row-even"><td>Visi</td>
+<td>1</td>
+<td>60</td>
+<td>80</td>
+<td>70</td>
+<td>50</td>
+<td>60</td>
+<td>0</td>
+<td>100</td>
+</tr>
+<tr class="row-odd"><td>Stan</td>
+<td>1</td>
+<td>100</td>
+<td>10</td>
+<td>0</td>
+<td>30</td>
+<td>90</td>
+<td>70</td>
+<td>20</td>
+</tr>
+<tr class="row-even"><td>Wksp</td>
+<td>1</td>
+<td>75</td>
+<td>30</td>
+<td>0</td>
+<td>55</td>
+<td>100</td>
+<td>0</td>
+<td>50</td>
+</tr>
+<tr class="row-odd"><td>Wkcf</td>
+<td>1</td>
+<td>0</td>
+<td>100</td>
+<td>10</td>
+<td>30</td>
+<td>60</td>
+<td>80</td>
+<td>50</td>
+</tr>
+<tr class="row-even"><td>Park</td>
+<td>1</td>
+<td>90</td>
+<td>30</td>
+<td>100</td>
+<td>90</td>
+<td>70</td>
+<td>0</td>
+<td>80</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>Except the costs, all other criteria are evaluated on a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice that site <em>A</em> is the most expensive, but also 100% satisfying the <em>Proximity</em> as well as the  <em>Standing</em> criterion. Whereas the site <em>C</em> is the cheapest one; providing however no satisfaction at all with respect to the <em>Standing</em> and the <em>Working Space</em> criteria.</p>
+<p>What is the best office site we may recommend to the CEO in view of this performance tableau?</p>
+</div>
+<div class="section" id="inspecting-the-performance-tableau">
+<h3>Inspecting the Performance Tableau<a class="headerlink" href="#inspecting-the-performance-tableau" title="Permalink to this headline">¶</a></h3>
+<p>The XMCDA 2.0 encoded version of this performance tableau is available for downloading here <a class="reference external" href="_static/officeChoice.xml">officeChoice.xml</a>.</p>
+<blockquote>
+<div></div></blockquote>
+<dl class="docutils">
+<dt>We may inspect the performance tableau data as with the  help of the <a class="reference internal" href="techDoc.html#perftabs-label"><em>perfTabs module</em></a> module.</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">XMCDA2PerformanceTableau</span><span class="p">(</span><span class="s">&#39;officeChoice&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="c"># for discovering all the methods available</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
+<span class="go">*----  criteria -----*</span>
+<span class="go">C &#39;Costs&#39;</span>
+<span class="go">Scale = (Decimal(&#39;0.00&#39;), Decimal(&#39;50000.00&#39;))</span>
+<span class="go">Weight = 0.333</span>
+<span class="go">Threshold ind : 1000.00 + 0.00x ; percentile:  0.095</span>
+<span class="go">Threshold pref : 2500.00 + 0.00x ; percentile:  0.143</span>
+<span class="go">Cf &#39;Comfort&#39;</span>
+<span class="go">Scale = (Decimal(&#39;0.00&#39;), Decimal(&#39;100.00&#39;))</span>
+<span class="go">Weight = 0.111</span>
+<span class="go">Threshold veto : 80.00 + 0.00x ; percentile:  0.905</span>
+<span class="go">Threshold ind : 10.00 + 0.00x ; percentile:  0.095</span>
+<span class="go">Threshold pref : 20.00 + 0.00x ; percentile:  0.286</span>
+<span class="gp">...</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Concerning annual costs, we notice that the CEO considers an indifference threshold of 1000€ and a preference discrimination threshold of 2500€. On the qualitative criteria, like <em>Working Comfort</em>, a significant preference is given with a performance difference of 20%. A better comparison of the performances is shown by the html heatmap:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="_images/officeChoiceHeatmap.png"><img alt="_images/officeChoiceHeatmap.png" class="align-center" src="_images/officeChoiceHeatmap.png" style="width: 600px;" /></a>
+<p>Good compromise decision alternatives appear to be sites <em>D</em> and <em>G</em>.</p>
+</div>
+<div class="section" id="inspecting-the-outranking-digraph">
+<h3>Inspecting the outranking digraph<a class="headerlink" href="#inspecting-the-outranking-digraph" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>We are going to compute the bipolar-valued outranking digraph from the given performance tableau <em>t</em>. The <cite>showHTMLRelationTable</cite> method shows the resulting bipolarly-valued adjacency matrix in a system browser window:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="_images/officeChoiceOutranking.png"><img alt="_images/officeChoiceOutranking.png" class="align-center" src="_images/officeChoiceOutranking.png" style="width: 400px;" /></a>
+<dl class="docutils">
+<dt>We may notice here that Alternative <em>D</em> is <strong>positively outranking</strong> all other potential office sites (a <em>Condorcet winner</em>). But alternatives <em>A</em> (the most expensive) and <em>C</em> (the cheapest) are <em>not</em> outranked by any other site; they are in fact <strong>weak</strong> <em>Condorcet winners</em>.</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">condorcetWinners</span><span class="p">()</span>
+<span class="go">[&#39;D&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">weakCondorcetWinners</span><span class="p">()</span>
+<span class="go">[&#39;A&#39;, &#39;C&#39;, &#39;D&#39;]</span>
+</pre></div>
+</div>
+</dd>
+<dt>We may get even more insight in the apparent outraking situations when looking at the Condorcet digraph:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;officeChoice&#39;</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go">Exporting to officeChoice.dot</span>
+<span class="go">dot -Grankdir=BT -Tpng officeChoice.dot -o officeChoice.png</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="_images/officeChoice.png"><img alt="_images/officeChoice.png" class="align-center" src="_images/officeChoice.png" style="width: 400px;" /></a>
+</div>
+<div class="section" id="computing-the-rubis-best-choice-recommendation">
+<h3>Computing the Rubis best choice recommendation<a class="headerlink" href="#computing-the-rubis-best-choice-recommendation" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>A best choice recommendation, following the Rubis outranking method is provided by the Rubis Rest server:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RubisRestServer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="n">RubisRestServer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
+<span class="go">*************************************************</span>
+<span class="go">* This is the Leopold-Loewenheim Apache Server  *</span>
+<span class="go">* of the University of Luxembourg.              *</span>
+<span class="go">* Welcome to the Rubis XMCDA 2.0 Web service    *</span>
+<span class="go">* R. Bisdorff (c) 2009-2013                     *</span>
+<span class="go">* November 2013, version REST/D4 1.1            *</span>
+<span class="go">*************************************************</span>
+</pre></div>
+</div>
+</dd>
+<dt>We may submit the given performance tableau:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">submitProblem</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="go">The problem submission was successful !</span>
+<span class="go">Server ticket: 1BYyGVwV866hSNZo</span>
+</pre></div>
+</div>
+</dd>
+<dt>With the given ticket, saved in a text file in the working directory, we may request from the solver the corresponding Rubis best choice recommendation:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">showSolution</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>and, in a system browser window, browse the <a class="reference external" href="_static/officeChoice.xml1BYyGVwV866hSNZoSolution.html">solution file</a>.</p>
+<blockquote>
+<div></div></blockquote>
+<p>Here, we find confirmed that alternative <em>D</em> appears to be the most convincing best choice candidate. Yet, what about alternative <em>G</em>, the other good compromise we have noticed from the performance heatmap above.</p>
+</div>
+<div class="section" id="ranking-the-potential-decision-alternatives">
+<h3>Ranking the potential decision alternatives<a class="headerlink" href="#ranking-the-potential-decision-alternatives" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Indeed, when pairwisely comparing the performances of alternatives <em>D</em> and <em>G</em>, we notice that, with the given preference discrimination thresholds, alternative <em>G</em> is actually dominating alternative <em>D</em> ( r(<em>G</em> outranks <em>D</em>) = 100%).</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s">&#39;G&#39;</span><span class="p">,</span><span class="s">&#39;D&#39;</span><span class="p">)</span>
+<span class="go">*------------  pairwise comparison ----*</span>
+<span class="go">Comparing actions : (G, D)</span>
+<span class="go">crit. wght.  g(x)      g(y)    diff.  |   ind     pref    concord   |</span>
+<span class="go">---------------------------------------------------------------------</span>
+<span class="go">C   3.00 -12000.00 -14100.00 +2100.00 | 1000.00 2500.00   +3.00     |</span>
+<span class="go">Cf  1.00     50.00     30.00   +20.00 |   10.00   20.00   +1.00     |</span>
+<span class="go">P   1.00     80.00     90.00   -10.00 |   10.00   20.00   +1.00     |</span>
+<span class="go">Pr  1.00     60.00     70.00   -10.00 |   10.00   20.00   +1.00     |</span>
+<span class="go">St  1.00     20.00     30.00   -10.00 |   10.00   20.00   +1.00     |</span>
+<span class="go">V   1.00    100.00     50.00   +50.00 |   10.00   20.00   +1.00     |</span>
+<span class="go">W   1.00     50.00     55.00    -5.00 |   10.00   20.00   +1.00     |</span>
+<span class="go">---------------------------------------------------------------------</span>
+<span class="go">Valuation in range: -9.00 to +9.00; global concordance: +9.00</span>
+</pre></div>
+</div>
+</dd>
+<dt>However, we may notice also that the cheapest alternative <em>C</em> is strictly outranking alternative <em>G</em>:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">,</span><span class="s">&#39;G&#39;</span><span class="p">)</span>
+<span class="go">*------------  pairwise comparison ----*</span>
+<span class="go">Comparing actions : (C, G)/(G, C)</span>
+<span class="go">crit. wght.   g(x)     g(y)      diff.  |   ind.   pref.    (C,G)/(G,C) |</span>
+<span class="go">-------------------------------------------------------------------------</span>
+<span class="go">C     3.00 -6700.00 -12000.00  +5300.00 | 1000.00 2500.00   +3.00/-3.00 |</span>
+<span class="go">Cf    1.00    10.00     50.00    -40.00 |   10.00   20.00   -1.00/+1.00 |</span>
+<span class="go">P     1.00   100.00     80.00    +20.00 |   10.00   20.00   +1.00/-1.00 |</span>
+<span class="go">Pr    1.00    80.00     60.00    +20.00 |   10.00   20.00   +1.00/-1.00 |</span>
+<span class="go">St    1.00     0.00     20.00    -20.00 |   10.00   20.00   -1.00/+1.00 |</span>
+<span class="go">V     1.00    70.00    100.00    -30.00 |   10.00   20.00   -1.00/+1.00 |</span>
+<span class="go">W     1.00     0.00     50.00    -50.00 |   10.00   20.00   -1.00/+1.00 |</span>
+<span class="go">-------------------------------------------------------------------------</span>
+<span class="go">Valuation in range: -9.00 to +9.00; global concordance: +1.00/-1.00</span>
+</pre></div>
+</div>
+</dd>
+<dt>From <a class="reference internal" href="techDoc.html#weakorders-label"><em>weakOrders module</em></a> module, we may apply the RankingByChoosing constructor to the strict (co-dual) outranking digraph:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">((</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)))</span>
+<span class="go">Threading ...</span>
+<span class="go">Exiting computing threads</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showRankingByChoosing</span><span class="p">()</span>
+<span class="go">Ranking by Choosing and Rejecting</span>
+<span class="go">1st ranked [&#39;D&#39;] (0.28)</span>
+<span class="go">   2nd ranked [&#39;C&#39;, &#39;G&#39;] (0.17)</span>
+<span class="go">   2nd last ranked [&#39;B&#39;, &#39;C&#39;, &#39;E&#39;] (0.22)</span>
+<span class="go">1st last ranked [&#39;A&#39;, &#39;F&#39;] (0.50)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;officeChoiceRanking&#39;</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="go">Exporting to officeChoiceRanking.dot</span>
+<span class="go">0 { rank = same; A; C; D; }</span>
+<span class="go">1 { rank = same; G; }</span>
+<span class="go">2 { rank = same; E; B; }</span>
+<span class="go">3 { rank = same; F; }</span>
+<span class="go">dot -Grankdir=TB -Tpng officeChoiceRanking.dot -o officeChoiceRanking.png</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="_images/officeChoiceRanking.png"><img alt="_images/officeChoiceRanking.png" class="align-center" src="_images/officeChoiceRanking.png" style="width: 200px;" /></a>
+<p>In this ranking-by-choosing method, where we operate an epistemic fusion of iterated best and worst choices, alternative <em>D</em> is again ranked before the alternative compromise solution <em>G</em>. But the apparent ranking result stresses furthermore the fact that the most expensive site <em>A</em>, and the cheapest site <em>C</em>, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation.</p>
+<p>The best choice depends hence from the very importance the CEO is attaching to the three objectives he is considering. In this setting here, where he considers all three objectives to be <strong>equi-significant</strong>, <em>D</em> gives actually the best choice. If costs don&#8217; play much role, it would be better to move to site <em>A</em>, and if costs do matter a lot, the cheapest alternative <em>C</em> would become the best choice indeed.</p>
+<p>It might be worth, as an exercise, to modify this balance one of the other way, by raising and/or lowering the importance of minimizing the overall costs.</p>
+<p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
+</div>
+</div>
 <div class="section" id="links-and-appendices">
 <h2>Links and appendices<a class="headerlink" href="#links-and-appendices" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="documents">
@@ -1402,6 +1795,14 @@ linearBallot = {
 <li><a class="reference internal" href="#recoding-the-valuation">Recoding the valuation</a></li>
 <li><a class="reference internal" href="#strict-outranking-via-the-codual-digraph">Strict outranking via the codual digraph</a></li>
 <li><a class="reference internal" href="#xmcda-2-0-storage">XMCDA 2.0 storage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#computing-a-best-choice-recommendation">Computing a best choice recommendation</a><ul>
+<li><a class="reference internal" href="#best-office-site-choice-for-an-sme">Best office site choice for an SME?</a></li>
+<li><a class="reference internal" href="#inspecting-the-performance-tableau">Inspecting the Performance Tableau</a></li>
+<li><a class="reference internal" href="#inspecting-the-outranking-digraph">Inspecting the outranking digraph</a></li>
+<li><a class="reference internal" href="#computing-the-rubis-best-choice-recommendation">Computing the Rubis best choice recommendation</a></li>
+<li><a class="reference internal" href="#ranking-the-potential-decision-alternatives">Ranking the potential decision alternatives</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#links-and-appendices">Links and appendices</a><ul>

@@ -1153,15 +1153,23 @@ class PerformanceTableau(object):
                     quantileColor[x][g] = naColor
                 if Debug:
                     print(quantileColor[x][g])
-        
+        # legend            
+##        html += '<i>Color legend: </i>\n'
+##        html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
+##        html += '<tr bgcolor=%s><th>quantile</th>' % (columnHeaderColor)
+##        for col in range(nc):
+##            html += '<td bgcolor=%s>%s</td>' % (colorPalette[col][1],str(colorPalette[col][0]))
+##        html += '</tr>\n'
+##        html += '</table>\n'
+        # heatmap
         html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
-        html += '<tr bgcolor=%s><th>criterion</th>' % (columnHeaderColor)
+        html += '<tr bgcolor=%s><th>criteria</th>' % (columnHeaderColor)
         for g in criteriaList:
-            html += '<th bgcolor=%s>%s</th>' % (columnHeaderColor,str(g))
+            html += '<th>%s</th>' % (str(g))
         html += '</tr>\n'
-        html += '<tr bgcolor=%s><th>weight</th>' % (columnHeaderColor)
+        html += '<tr><th bgcolor=%s>weights</th>' % (columnHeaderColor)
         for g in criteriaList:
-            html += '<th bgcolor=%s>%s</th>' % (columnHeaderColor,str(self.criteria[g]['weight']))
+            html += '<td align="center">%s</td>' % (str(self.criteria[g]['weight']))
         html += '</tr>\n'
         if Debug:
             print(html)
@@ -1177,14 +1185,14 @@ class PerformanceTableau(object):
                     print(html)
             html += '</tr>\n'
         html += '</table>\n'
-        html += '<p>Color legend</p>\n'
+        # legend
+        html += '<i>Color legend: </i>\n'
         html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
         html += '<tr bgcolor=%s><th>quantile</th>' % (columnHeaderColor)
         for col in range(nc):
-            html += '<th bgcolor=%s>%s</th>' % (colorPalette[col][1],str(colorPalette[col][0]))
+            html += '<td bgcolor=%s>%s</td>' % (colorPalette[col][1],str(colorPalette[col][0]))
         html += '</tr>\n'
         html += '</table>\n'
-        
         
         return html
 
