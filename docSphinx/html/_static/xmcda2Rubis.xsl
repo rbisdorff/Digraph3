@@ -25,8 +25,7 @@ Copyright (C) 2009 DECISION DECK Consortium
     <p><b>Rubis XSLT to HTML stylesheet (R. Bisdorff):</b> $Revision: 1.7 $ <br/>
           UMCDA-ML <a href="http://www.decision-deck.org/xmcda">XMCDA 2.0 Schema</a><br/>
           Raymond Bisdorff (University of Luxembourg), Patrick Meyer (Telecom Bretagne) and Thomas Veneziano (University of Luxembourg)March 2009<br/>
-          Copyright © 2009 <a href="http://www.decision-deck.org/">DECISION DECK Consortium</a><br/>
-          <a href="javascript:void(document.location='view-source:'+document.location)">View the source of this document.</a></p>
+          Copyright © 2009 <a href="http://www.decision-deck.org/">DECISION DECK Consortium</a></p>
    </body>
   </html>
 </xsl:template>
@@ -566,8 +565,9 @@ Copyright (C) 2009 DECISION DECK Consortium
    <xsl:for-each select="key('currentCriterion', $allCriteria)">
       <xsl:variable name="currentCriterion" select="./@id"></xsl:variable>
        <xsl:call-template name="performanceRow">
-         <xsl:with-param name="currentAlternative" select="$currentAlternative" />
-         <xsl:with-param name="currentCriterion" select="$currentCriterion"/>
+         <xsl:with-param name="currentAlternative" select="$currentAlternative">
+         </xsl:with-param>
+         <xsl:with-param name="currentCriterion" select="$currentCriterion"></xsl:with-param>
        </xsl:call-template>
       </xsl:for-each>
   </tr>
