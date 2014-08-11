@@ -1230,7 +1230,7 @@ Good compromise decision alternatives appear to be sites *D* and *G*.
 Inspecting the outranking digraph
 .................................
 
-We are going to compute the bipolar-valued outranking digraph from the given performance tableau *t*. The `showHTMLRelationTable` method shows the resulting bipolarly-valued adjacency matrix in a system browser window:
+We are going to compute the bipolar outranking digraph (see [BIS-2013]_) from the given performance tableau *t*. The `showHTMLRelationTable` method shows the resulting bipolarly-valued adjacency matrix in a system browser window:
     >>> from outrankingDigraphs import BipolarOutrankingDigraph
     >>> g = BipolarOutrankingDigraph(t)
     >>> g.showHTMLRelationTable()
@@ -1259,7 +1259,7 @@ We may get even more insight in the apparent outraking situations when looking a
 Computing the Rubis best choice recommendation
 ..............................................
 
-A best choice recommendation, following the Rubis outranking method is provided by the Rubis Rest server:
+A best choice recommendation, following the Rubis outranking method (see [BIS-2008]_) is provided by the Rubis Rest server:
     >>> from outrankingDigraphs import RubisRestServer
     >>> solver = RubisRestServer()
     >>> solver.ping()
