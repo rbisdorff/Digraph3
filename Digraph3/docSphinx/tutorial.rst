@@ -1288,7 +1288,7 @@ Here, we find confirmed that alternative *D* appears to be the most convincing b
 Ranking the potential decision alternatives
 ...........................................
 
-Indeed, when pairwisely comparing the performances of alternatives *D* and *G*, we notice that, with the given preference discrimination thresholds, alternative *G* is actually dominating alternative *D* ( r(*G* outranks *D*) = 100%). 
+Indeed, when pairwisely comparing the performances of alternatives *D* and *G*, we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D* ( r(*G* outranks *D*) = 100%). 
     >>> g.showPairwiseComparison('G','D')
     *------------  pairwise comparison ----*
     Comparing actions : (G, D)
