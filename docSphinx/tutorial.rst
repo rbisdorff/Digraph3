@@ -1220,13 +1220,13 @@ We may inspect the performance tableau data with the computing resources provide
     *----  performance tableau -----*
     criteria |   weights |     'A'      'B'      'C'       'D'       'E'       'F'       'G'   
     ---------|---------------------------------------------------------------------------------
-    'C'      |   45.00   | -35000.00 -17800.00 -6700.00 -14100.00 -34800.00 -18600.00 -12000.00  
-    'Cf'     |    6.00   |      0.00    100.00    10.00     30.00     60.00     80.00     50.00  
-    'P'      |    3.00   |     90.00     30.00   100.00     90.00     70.00      0.00     80.00  
-    'Pr'     |   32.00   |    100.00     20.00    80.00     70.00     40.00      0.00     60.00  
-    'St'     |   23.00   |    100.00     10.00     0.00     30.00     90.00     70.00     20.00  
-    'V'      |   26.00   |     60.00     80.00    70.00     50.00     60.00      0.00    100.00  
-    'W'      |   10.00   |     75.00     30.00     0.00     55.00    100.00      0.00     50.00  
+    'C'      |    3.00   | -35000.00 -17800.00 -6700.00 -14100.00 -34800.00 -18600.00 -12000.00  
+    'Cf'     |    1.00   |      0.00    100.00    10.00     30.00     60.00     80.00     50.00  
+    'P'      |    1.00   |     90.00     30.00   100.00     90.00     70.00      0.00     80.00  
+    'Pr'     |    1.00   |    100.00     20.00    80.00     70.00     40.00      0.00     60.00  
+    'St'     |    1.00   |    100.00     10.00     0.00     30.00     90.00     70.00     20.00  
+    'V'      |    1.00   |     60.00     80.00    70.00     50.00     60.00      0.00    100.00  
+    'W'      |    1.00   |     75.00     30.00     0.00     55.00    100.00      0.00     50.00  
 
 Concerning annual costs, we notice that the CEO considers an indifference threshold of 1000€ and a preference discrimination threshold of 2500€. On the qualitative criteria, like *Working Comfort*, a significant preference is given with a performance difference of 20%. A better comparison of the performances is shown by the html heatmap:
     >>> t.showHTMLPerformanceHeatmap(colorLevels=5)
@@ -1298,7 +1298,7 @@ Here, we find confirmed that alternative *D* appears to be the most convincing b
 Ranking the potential decision alternatives
 ...........................................
 
-Indeed, when pairwisely comparing the performances of alternatives *D* and *G*, we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D* ( r(*G* outranks *D*) = 100%). 
+Indeed, when comparing the performances of alternatives *D* and *G*, we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D* ( r(*G* outranks *D*) = 100%). 
     >>> g.showPairwiseComparison('G','D')
     *------------  pairwise comparison ----*
     Comparing actions : (G, D)

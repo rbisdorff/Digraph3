@@ -93,7 +93,7 @@
 <version>performance</version>
 </description>
 <active>true</active>
-<criterionValue><value><real>45.00</real></value></criterionValue>
+<criterionValue><value><real>3.00</real></value></criterionValue>
 <scale>
 <quantitative>
 <preferenceDirection>min</preferenceDirection>
@@ -128,7 +128,7 @@
 <version>performance</version>
 </description>
 <active>true</active>
-<criterionValue><value><real>6.00</real></value></criterionValue>
+<criterionValue><value><real>1.00</real></value></criterionValue>
 <scale>
 <quantitative>
 <preferenceDirection>max</preferenceDirection>
@@ -163,7 +163,7 @@
 <version>performance</version>
 </description>
 <active>true</active>
-<criterionValue><value><real>3.00</real></value></criterionValue>
+<criterionValue><value><real>1.00</real></value></criterionValue>
 <scale>
 <quantitative>
 <preferenceDirection>max</preferenceDirection>
@@ -198,7 +198,7 @@
 <version>performance</version>
 </description>
 <active>true</active>
-<criterionValue><value><real>32.00</real></value></criterionValue>
+<criterionValue><value><real>1.00</real></value></criterionValue>
 <scale>
 <quantitative>
 <preferenceDirection>max</preferenceDirection>
@@ -233,7 +233,7 @@
 <version>performance</version>
 </description>
 <active>true</active>
-<criterionValue><value><real>23.00</real></value></criterionValue>
+<criterionValue><value><real>1.00</real></value></criterionValue>
 <scale>
 <quantitative>
 <preferenceDirection>max</preferenceDirection>
@@ -268,7 +268,7 @@
 <version>performance</version>
 </description>
 <active>true</active>
-<criterionValue><value><real>26.00</real></value></criterionValue>
+<criterionValue><value><real>1.00</real></value></criterionValue>
 <scale>
 <quantitative>
 <preferenceDirection>max</preferenceDirection>
@@ -303,7 +303,7 @@
 <version>performance</version>
 </description>
 <active>true</active>
-<criterionValue><value><real>10.00</real></value></criterionValue>
+<criterionValue><value><real>1.00</real></value></criterionValue>
 <scale>
 <quantitative>
 <preferenceDirection>max</preferenceDirection>
