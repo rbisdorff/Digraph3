@@ -1140,7 +1140,7 @@ Computing a best choice recommendation
 Best office site choice for an SME?
 ...................................
 
-A SME, specialized in printing an copy services, has to move into new offices, and the CEO has gathered seven potential sites:
+A SME, specialized in printing an copy services, has to move into new offices, and its CEO has gathered seven potential office sites:
 
   ====================== ==== ==================================================
    address                ID   Comment
@@ -1154,7 +1154,7 @@ A SME, specialized in printing an copy services, has to move into new offices, a
    Avenue de la Gare      G    Main town shopping street
   ====================== ==== ==================================================
 
-Three objectives are guiding his eventual choice:
+Three objectives are guiding his choice:
       1. minimize the yearly costs induced by the moving,
       2. maximize the future turnover of the SME,
       3. maximize the new working conditions.
@@ -1177,18 +1177,18 @@ The evaluation of the seven potential sites on each criterion are gathered in tr
    ============= ======== ======== ======== ======== ======== ======== ======== ======== 
     Criterion     weight   A        B        C        D        E         F         G
    ============= ======== ======== ======== ======== ======== ======== ======== ========
-    Cost          3        35.0K€   17.8K€   6.7K€    14.1K€   34.8K€   18.6K€   12.0K€
-    Prox          1        100      20       80       70       40       0        60
-    Visi          1        60       80       70       50       60       0        100
-    Stan          1        100      10       0        30       90       70       20
-    Wksp          1        75       30       0        55       100      0        50
-    Wkcf          1        0        100      10       30       60       80       50
-    Park          1        90       30       100      90       70       0        80
+    Cost          3.0     35.0K€   17.8K€   6.7K€    14.1K€   34.8K€   18.6K€   12.0K€
+    Prox          1.0     100      20       80       70       40       0        60
+    Visi          1.0     60       80       70       50       60       0        100
+    Stan          1.0     100      10       0        30       90       70       20
+    Wksp          1.0     75       30       0        55       100      0        50
+    Wkcf          1.0     0        100      10       30       60       80       50
+    Park          1.0     90       30       100      90       70       0        80
    ============= ======== ======== ======== ======== ======== ======== ======== ========
 
-Except the costs, all other criteria are evaluated on a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice that site *A* is the most expensive, but also 100% satisfying the *Proximity* as well as the  *Standing* criterion. Whereas the site *C* is the cheapest one; providing however no satisfaction at all with respect to the *Standing* and the *Working Space* criteria.   
+Except the costs, all other criteria are evaluated on a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice that site *A* is the most expensive, but also 100% satisfying the *Proximity* as well as the  *Standing* criterion. Whereas the site *C* is the cheapest one; providing however no satisfaction at all with respect to the *Standing* and the *Working Space* criteria. All criteria are considered to incommensurable. The three objectives are furthermore considered to be *equi-important* (total weight = 3.0) with each criterion supporting a given objective being *equi-significant* (weight = 1.0). 
 
-What is the best office site we may recommend to the CEO in view of this performance tableau?
+In view of this performance tableau, what is now the office site we may recommend as **best choice** to the CEO?
 
 Inspecting the Performance Tableau
 ..................................
@@ -1197,7 +1197,7 @@ The XMCDA 2.0 encoded version of this performance tableau is available for downl
 
    .. _officeChoice.xml: _static/officeChoice.xml
 
-We may inspect the performance tableau data as with the  help of the :ref:`perfTabs-label` module.
+We may inspect the performance tableau data with the computing resources provided by the :ref:`perfTabs-label` module.
     >>> from perfTabs import *
     >>> t = XMCDA2PerformanceTableau('officeChoice')
     >>> help(t) # for discovering all the methods available
@@ -1216,7 +1216,17 @@ We may inspect the performance tableau data as with the  help of the :ref:`perfT
     Threshold ind : 10.00 + 0.00x ; percentile:  0.095
     Threshold pref : 20.00 + 0.00x ; percentile:  0.286
     ...
-    >>> 
+    >>> >>> t.showPerformanceTableau()
+    *----  performance tableau -----*
+    criteria |   weights |     'A'      'B'      'C'       'D'       'E'       'F'       'G'   
+    ---------|---------------------------------------------------------------------------------
+    'C'      |   45.00   | -35000.00 -17800.00 -6700.00 -14100.00 -34800.00 -18600.00 -12000.00  
+    'Cf'     |    6.00   |      0.00    100.00    10.00     30.00     60.00     80.00     50.00  
+    'P'      |    3.00   |     90.00     30.00   100.00     90.00     70.00      0.00     80.00  
+    'Pr'     |   32.00   |    100.00     20.00    80.00     70.00     40.00      0.00     60.00  
+    'St'     |   23.00        100.00     10.00     0.00     30.00     90.00     70.00     20.00  
+    'V'      |   26.00  |      60.00     80.00    70.00     50.00     60.00      0.00    100.00  
+    'W'      |   10.00  |      75.00     30.00     0.00     55.00    100.00      0.00     50.00  
 
 Concerning annual costs, we notice that the CEO considers an indifference threshold of 1000€ and a preference discrimination threshold of 2500€. On the qualitative criteria, like *Working Comfort*, a significant preference is given with a performance difference of 20%. A better comparison of the performances is shown by the html heatmap:
     >>> t.showHTMLPerformanceHeatmap(colorLevels=5)
