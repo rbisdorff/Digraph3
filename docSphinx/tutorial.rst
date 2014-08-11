@@ -1224,9 +1224,9 @@ We may inspect the performance tableau data with the computing resources provide
     'Cf'     |    6.00   |      0.00    100.00    10.00     30.00     60.00     80.00     50.00  
     'P'      |    3.00   |     90.00     30.00   100.00     90.00     70.00      0.00     80.00  
     'Pr'     |   32.00   |    100.00     20.00    80.00     70.00     40.00      0.00     60.00  
-    'St'     |   23.00        100.00     10.00     0.00     30.00     90.00     70.00     20.00  
-    'V'      |   26.00  |      60.00     80.00    70.00     50.00     60.00      0.00    100.00  
-    'W'      |   10.00  |      75.00     30.00     0.00     55.00    100.00      0.00     50.00  
+    'St'     |   23.00   |    100.00     10.00     0.00     30.00     90.00     70.00     20.00  
+    'V'      |   26.00   |     60.00     80.00    70.00     50.00     60.00      0.00    100.00  
+    'W'      |   10.00   |     75.00     30.00     0.00     55.00    100.00      0.00     50.00  
 
 Concerning annual costs, we notice that the CEO considers an indifference threshold of 1000€ and a preference discrimination threshold of 2500€. On the qualitative criteria, like *Working Comfort*, a significant preference is given with a performance difference of 20%. A better comparison of the performances is shown by the html heatmap:
     >>> t.showHTMLPerformanceHeatmap(colorLevels=5)
