@@ -1289,7 +1289,7 @@ linearBallot = {
 <span id="rubis-tutorial-label"></span><h2>Computing a best choice recommendation<a class="headerlink" href="#computing-a-best-choice-recommendation" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="best-office-site-choice-for-an-sme">
 <h3>Best office site choice for an SME?<a class="headerlink" href="#best-office-site-choice-for-an-sme" title="Permalink to this headline">¶</a></h3>
-<p>A SME, specialized in printing an copy services, has to move into new offices, and the CEO has gathered seven potential sites:</p>
+<p>A SME, specialized in printing an copy services, has to move into new offices, and its CEO has gathered seven potential office sites:</p>
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
@@ -1336,7 +1336,7 @@ linearBallot = {
 </table>
 </div></blockquote>
 <dl class="docutils">
-<dt>Three objectives are guiding his eventual choice:</dt>
+<dt>Three objectives are guiding his choice:</dt>
 <dd><ol class="first last arabic simple">
 <li>minimize the yearly costs induced by the moving,</li>
 <li>maximize the future turnover of the SME,</li>
@@ -1427,7 +1427,7 @@ linearBallot = {
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>Cost</td>
-<td>3</td>
+<td>3.0</td>
 <td>35.0K€</td>
 <td>17.8K€</td>
 <td>6.7K€</td>
@@ -1437,7 +1437,7 @@ linearBallot = {
 <td>12.0K€</td>
 </tr>
 <tr class="row-odd"><td>Prox</td>
-<td>1</td>
+<td>1.0</td>
 <td>100</td>
 <td>20</td>
 <td>80</td>
@@ -1447,7 +1447,7 @@ linearBallot = {
 <td>60</td>
 </tr>
 <tr class="row-even"><td>Visi</td>
-<td>1</td>
+<td>1.0</td>
 <td>60</td>
 <td>80</td>
 <td>70</td>
@@ -1457,7 +1457,7 @@ linearBallot = {
 <td>100</td>
 </tr>
 <tr class="row-odd"><td>Stan</td>
-<td>1</td>
+<td>1.0</td>
 <td>100</td>
 <td>10</td>
 <td>0</td>
@@ -1467,7 +1467,7 @@ linearBallot = {
 <td>20</td>
 </tr>
 <tr class="row-even"><td>Wksp</td>
-<td>1</td>
+<td>1.0</td>
 <td>75</td>
 <td>30</td>
 <td>0</td>
@@ -1477,7 +1477,7 @@ linearBallot = {
 <td>50</td>
 </tr>
 <tr class="row-odd"><td>Wkcf</td>
-<td>1</td>
+<td>1.0</td>
 <td>0</td>
 <td>100</td>
 <td>10</td>
@@ -1487,7 +1487,7 @@ linearBallot = {
 <td>50</td>
 </tr>
 <tr class="row-even"><td>Park</td>
-<td>1</td>
+<td>1.0</td>
 <td>90</td>
 <td>30</td>
 <td>100</td>
@@ -1500,8 +1500,8 @@ linearBallot = {
 </table>
 </dd>
 </dl>
-<p>Except the costs, all other criteria are evaluated on a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice that site <em>A</em> is the most expensive, but also 100% satisfying the <em>Proximity</em> as well as the  <em>Standing</em> criterion. Whereas the site <em>C</em> is the cheapest one; providing however no satisfaction at all with respect to the <em>Standing</em> and the <em>Working Space</em> criteria.</p>
-<p>What is the best office site we may recommend to the CEO in view of this performance tableau?</p>
+<p>Except the costs, all other criteria are evaluated on a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice that site <em>A</em> is the most expensive, but also 100% satisfying the <em>Proximity</em> as well as the  <em>Standing</em> criterion. Whereas the site <em>C</em> is the cheapest one; providing however no satisfaction at all with respect to the <em>Standing</em> and the <em>Working Space</em> criteria. All criteria are considered to incommensurable. The three objectives are furthermore considered to be <em>equi-important</em> (total weight = 3.0) with each criterion supporting a given objective being <em>equi-significant</em> (weight = 1.0).</p>
+<p>In view of this performance tableau, what is now the office site we may recommend as <strong>best choice</strong> to the CEO?</p>
 </div>
 <div class="section" id="inspecting-the-performance-tableau">
 <h3>Inspecting the Performance Tableau<a class="headerlink" href="#inspecting-the-performance-tableau" title="Permalink to this headline">¶</a></h3>
@@ -1509,7 +1509,7 @@ linearBallot = {
 <blockquote>
 <div></div></blockquote>
 <dl class="docutils">
-<dt>We may inspect the performance tableau data as with the  help of the <a class="reference internal" href="techDoc.html#perftabs-label"><em>perfTabs module</em></a> module.</dt>
+<dt>We may inspect the performance tableau data with the computing resources provided by the <a class="reference internal" href="techDoc.html#perftabs-label"><em>perfTabs module</em></a> module.</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">XMCDA2PerformanceTableau</span><span class="p">(</span><span class="s">&#39;officeChoice&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="c"># for discovering all the methods available</span>
@@ -1528,7 +1528,17 @@ linearBallot = {
 <span class="go">Threshold ind : 10.00 + 0.00x ; percentile:  0.095</span>
 <span class="go">Threshold pref : 20.00 + 0.00x ; percentile:  0.286</span>
 <span class="gp">...</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
+<span class="go">*----  performance tableau -----*</span>
+<span class="go">criteria |   weights |     &#39;A&#39;      &#39;B&#39;      &#39;C&#39;       &#39;D&#39;       &#39;E&#39;       &#39;F&#39;       &#39;G&#39;</span>
+<span class="go">---------|---------------------------------------------------------------------------------</span>
+<span class="go">&#39;C&#39;      |   45.00   | -35000.00 -17800.00 -6700.00 -14100.00 -34800.00 -18600.00 -12000.00</span>
+<span class="go">&#39;Cf&#39;     |    6.00   |      0.00    100.00    10.00     30.00     60.00     80.00     50.00</span>
+<span class="go">&#39;P&#39;      |    3.00   |     90.00     30.00   100.00     90.00     70.00      0.00     80.00</span>
+<span class="go">&#39;Pr&#39;     |   32.00   |    100.00     20.00    80.00     70.00     40.00      0.00     60.00</span>
+<span class="go">&#39;St&#39;     |   23.00        100.00     10.00     0.00     30.00     90.00     70.00     20.00</span>
+<span class="go">&#39;V&#39;      |   26.00  |      60.00     80.00    70.00     50.00     60.00      0.00    100.00</span>
+<span class="go">&#39;W&#39;      |   10.00  |      75.00     30.00     0.00     55.00    100.00      0.00     50.00</span>
 </pre></div>
 </div>
 </dd>
