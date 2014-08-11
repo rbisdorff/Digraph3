@@ -1616,7 +1616,7 @@ linearBallot = {
 <p>and, in a system browser window, browse the <a class="reference external" href="_static/officeChoice.xml1BYyGVwV866hSNZoSolution.html">solution file</a>.</p>
 <blockquote>
 <div></div></blockquote>
-<p>Here, we find confirmed that alternative <em>D</em> appears to be the most convincing best choice candidate. Yet, what about alternative <em>G</em>? the other good compromise we have noticed from the performance heatmap above.</p>
+<p>Here, we find confirmed that alternative <em>D</em>, indeed, appears to be the most convincing best choice candidate. Yet, what about alternative <em>G</em>, the other good compromise best choice we have noticed from the performance heatmap shown above?</p>
 </div>
 <div class="section" id="ranking-the-potential-decision-alternatives">
 <h3>Ranking the potential decision alternatives<a class="headerlink" href="#ranking-the-potential-decision-alternatives" title="Permalink to this headline">¶</a></h3>
@@ -1639,7 +1639,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>However, we notice also that the cheapest alternative <em>C</em> is strictly outranking alternative <em>G</em>:</dt>
+<dt>However, we must as well notice that the cheapest alternative <em>C</em> is in fact strictly outranking alternative <em>G</em>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">,</span><span class="s">&#39;G&#39;</span><span class="p">)</span>
 <span class="go">*------------  pairwise comparison ----*</span>
 <span class="go">Comparing actions : (C, G)/(G, C)</span>
@@ -1657,7 +1657,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>From <a class="reference internal" href="techDoc.html#weakorders-label"><em>weakOrders module</em></a> module, we apply the RankingByChoosing constructor to the strict (co-dual) outranking digraph:</dt>
+<dt>To get an insight about the overall strict outranking situations, we may apply the RankingByChoosing constructor imported from the <a class="reference internal" href="techDoc.html#weakorders-label"><em>weakOrders module</em></a> module, to the strict (co-dual) outranking digraph:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">((</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)))</span>
 <span class="go">Threading ...</span>
@@ -1681,8 +1681,8 @@ linearBallot = {
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/officeChoiceRanking.png"><img alt="_images/officeChoiceRanking.png" class="align-center" src="_images/officeChoiceRanking.png" style="width: 200px;" /></a>
-<p>In this ranking-by-choosing method, where we operate an epistemic fusion of iterated best and worst choices, alternative <em>D</em> is again ranked before alternative <em>G</em>. But the overall ranking result stresses furthermore the important fact that the most expensive site <em>A</em>, and the cheapest site <em>C</em>, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation.</p>
-<p>The best choice depends hence from the very importance the CEO is attaching to the three objectives he is considering. In this setting here, where he considers all three objectives to be <strong>equi-significant</strong>, compromise <em>D</em> gives actually the best choice. However, if costs do not play much role, it would be perhaps better to move to site <em>A</em>, and if, on the contrary, costs do matter a lot, the cheapest alternative <em>C</em> could definitely become a better choice.</p>
+<p>In this <strong>ranking-by-choosing</strong> method, where we operate an epistemic fusion of iterated best and worst choices, alternative <em>D</em> is again ranked before alternative <em>G</em>. The overall ranking result stresses the important fact that the most expensive site <em>A</em>, and the cheapest site <em>C</em>, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation.</p>
+<p>The best choice depends hence from the very importance the CEO is attaching to each of the three objectives he is considering. In the actual setting here, where he considers all three objectives to be <strong>equi-significant</strong>, site <em>D</em> represents actually the best choice candidate. However, if costs do not play much role, it would be perhaps better to decide to move to site <em>A</em>, or if, on the contrary, costs do matter a lot, moving to the cheapest alternative <em>C</em> could definitely be a better decision.</p>
 <p>It might be worth, as an <em>exercise</em>, to modify in the XMCDA data file this balance one of the other way, by raising and/or lowering the importance of minimizing the overall costs. What will become the best choice recommendation under both circumstances?</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
