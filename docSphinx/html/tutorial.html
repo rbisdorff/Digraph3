@@ -299,7 +299,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <div class="section" id="graphviz-drawings">
 <h3>Graphviz drawings<a class="headerlink" href="#graphviz-drawings" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id13" id="id2">[1]</a> drawing:</dt>
+<dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id15" id="id2">[1]</a> drawing:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to tutRandValDigraph.dot</span>
@@ -671,7 +671,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 <dl class="docutils">
-<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id13" id="id3">[1]</a> method as follows:</dt>
+<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id15" id="id3">[1]</a> method as follows:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
@@ -963,7 +963,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method <a class="footnote-reference" href="#id13" id="id7">[1]</a>, for visualizing an election result:</dt>
+<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method <a class="footnote-reference" href="#id15" id="id7">[1]</a>, for visualizing an election result:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorialLinearBallots&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to tutorialLinearBallots.dot</span>
@@ -1236,7 +1236,7 @@ linearBallot = {
 <div class="section" id="strict-outranking-via-the-codual-digraph">
 <h3>Strict outranking via the codual digraph<a class="headerlink" href="#strict-outranking-via-the-codual-digraph" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>From the theory <a class="reference internal" href="#bis-2013" id="id11">[BIS-2013]</a> we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if r(x S y) &lt; 0.0 then r(y S x) &gt;= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id13" id="id12">[1]</a>:</dt>
+<dt>From the theory <a class="reference internal" href="#bis-2013" id="id11">[BIS-2013]</a> we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if r(x S y) &lt; 0.0 then r(y S x) &gt;= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id15" id="id12">[1]</a>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="o">~</span><span class="n">odg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;codualOdg&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
@@ -1544,7 +1544,7 @@ linearBallot = {
 <div class="section" id="inspecting-the-outranking-digraph">
 <h3>Inspecting the outranking digraph<a class="headerlink" href="#inspecting-the-outranking-digraph" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>We are going to compute the bipolar-valued outranking digraph from the given performance tableau <em>t</em>. The <cite>showHTMLRelationTable</cite> method shows the resulting bipolarly-valued adjacency matrix in a system browser window:</dt>
+<dt>We are going to compute the bipolar outranking digraph (see <a class="reference internal" href="#bis-2013" id="id13">[BIS-2013]</a>) from the given performance tableau <em>t</em>. The <cite>showHTMLRelationTable</cite> method shows the resulting bipolarly-valued adjacency matrix in a system browser window:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">()</span>
@@ -1576,7 +1576,7 @@ linearBallot = {
 <div class="section" id="computing-the-rubis-best-choice-recommendation">
 <h3>Computing the Rubis best choice recommendation<a class="headerlink" href="#computing-the-rubis-best-choice-recommendation" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>A best choice recommendation, following the Rubis outranking method is provided by the Rubis Rest server:</dt>
+<dt>A best choice recommendation, following the Rubis outranking method (see <a class="reference internal" href="#bis-2008" id="id14">[BIS-2008]</a>) is provided by the Rubis Rest server:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RubisRestServer</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="n">RubisRestServer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
@@ -1712,7 +1712,7 @@ linearBallot = {
 <table class="docutils citation" frame="void" id="bis-2013" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[BIS-2013]</td><td><em>(<a class="fn-backref" href="#id9">1</a>, <a class="fn-backref" href="#id10">2</a>, <a class="fn-backref" href="#id11">3</a>)</em> <ol class="last upperalpha simple" start="18">
+<tr><td class="label">[BIS-2013]</td><td><em>(<a class="fn-backref" href="#id9">1</a>, <a class="fn-backref" href="#id10">2</a>, <a class="fn-backref" href="#id11">3</a>, <a class="fn-backref" href="#id13">4</a>)</em> <ol class="last upperalpha simple" start="18">
 <li>Bisdorff (2013) &#8220;On Polarizing Outranking Relations with Large Performance Differences&#8221; <em>Journal of Multi-Criteria Decision Analysis</em> (Wiley) <strong>20</strong>:3-12 (downloadable preprint <a class="reference external" href="http://charles-sanders-peirce.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf">PDF file</a> 403.5 Kb).</li>
 </ol>
 </td></tr>
@@ -1721,7 +1721,7 @@ linearBallot = {
 <table class="docutils citation" frame="void" id="bis-2008" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id8">[BIS-2008]</a></td><td><ol class="first last upperalpha simple" start="18">
+<tr><td class="label">[BIS-2008]</td><td><em>(<a class="fn-backref" href="#id8">1</a>, <a class="fn-backref" href="#id14">2</a>)</em> <ol class="last upperalpha simple" start="18">
 <li>Bisdorff, P. Meyer and M. Roubens (2008) &#8220;RUBIS: a bipolar-valued outranking method for the choice problem&#8221;. 4OR, <em>A Quarterly Journal of Operations Research</em> Springer-Verlag Volume 6 Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version <a class="reference external" href="http://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf">PDF file 271.5Kb</a>)</li>
 </ol>
 </td></tr>
@@ -1730,7 +1730,7 @@ linearBallot = {
 </div>
 <div class="section" id="footnotes">
 <h3>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h3>
-<table class="docutils footnote" frame="void" id="id13" rules="none">
+<table class="docutils footnote" frame="void" id="id15" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>, <a class="fn-backref" href="#id7">3</a>, <a class="fn-backref" href="#id12">4</a>)</em> The <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method is depending on drawing tools from <a class="reference external" href="http://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></tt> to install them. There are ready <tt class="docutils literal"><span class="pre">dmg</span></tt> installers for Mac OS.</td></tr>
