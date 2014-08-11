@@ -1304,7 +1304,7 @@ Indeed, when pairwisely comparing the performances of alternatives *D* and *G*, 
     ---------------------------------------------------------------------
     Valuation in range: -9.00 to +9.00; global concordance: +9.00
 
-However, we may notice also that the cheapest alternative *C* is strictly outranking alternative *G*:
+However, we notice also that the cheapest alternative *C* is strictly outranking alternative *G*:
     >>> g.showPairwiseComparison('C','G')
     *------------  pairwise comparison ----*
     Comparing actions : (C, G)/(G, C)
@@ -1321,7 +1321,7 @@ However, we may notice also that the cheapest alternative *C* is strictly outran
     Valuation in range: -9.00 to +9.00; global concordance: +1.00/-1.00
 
 
-From :ref:`weakOrders-label` module, we may apply the RankingByChoosing constructor to the strict (co-dual) outranking digraph:
+From :ref:`weakOrders-label` module, we apply the RankingByChoosing constructor to the strict (co-dual) outranking digraph:
     >>> from weakOrders import RankingByChoosingDigraph
     >>> rbc = RankingByChoosingDigraph((~(-g)))
     Threading ...
