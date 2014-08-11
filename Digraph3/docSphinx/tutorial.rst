@@ -1347,9 +1347,9 @@ From :ref:`weakOrders-label` module, we apply the RankingByChoosing constructor 
 
 In this ranking-by-choosing method, where we operate an epistemic fusion of iterated best and worst choices, alternative *D* is again ranked before alternative *G*. But the overall ranking result stresses furthermore the important fact that the most expensive site *A*, and the cheapest site *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation. 
 
-The best choice depends hence from the very importance the CEO is attaching to the three objectives he is considering. In this setting here, where he considers all three objectives to be **equi-significant**, compromise *D* gives actually the best choice. However, if costs do not play much role, it would be better to move to site *A*, and if, on the contrary, costs do matter a lot, the cheapest alternative *C* would definitely become the best choice. 
+The best choice depends hence from the very importance the CEO is attaching to the three objectives he is considering. In this setting here, where he considers all three objectives to be **equi-significant**, compromise *D* gives actually the best choice. However, if costs do not play much role, it would be perhaps better to move to site *A*, and if, on the contrary, costs do matter a lot, the cheapest alternative *C* could definitely become a better choice. 
 
-It might be worth, as an exercise, to modify in the XMCDA data file this balance one of the other way, by raising and/or lowering the importance of minimizing the overall costs. What will become the best choice recommendation under both circumstances?
+It might be worth, as an *exercise*, to modify in the XMCDA data file this balance one of the other way, by raising and/or lowering the importance of minimizing the overall costs. What will become the best choice recommendation under both circumstances?
 
 Back to :ref:`Tutorial-label`
 
