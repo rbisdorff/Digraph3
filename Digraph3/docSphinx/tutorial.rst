@@ -1252,7 +1252,7 @@ We may get even more insight in the apparent outraking situations when looking a
     dot -Grankdir=BT -Tpng officeChoice.dot -o officeChoice.png
 
 .. image:: officeChoice.png
-   :width: 400 px
+   :width: 300 px
    :align: center
 
 
