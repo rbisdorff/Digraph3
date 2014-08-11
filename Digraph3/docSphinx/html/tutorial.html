@@ -1544,7 +1544,7 @@ linearBallot = {
 <div class="section" id="inspecting-the-outranking-digraph">
 <h3>Inspecting the outranking digraph<a class="headerlink" href="#inspecting-the-outranking-digraph" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>We are going to compute the bipolar outranking digraph (see <a class="reference internal" href="#bis-2013" id="id13">[BIS-2013]</a>) from the given performance tableau <em>t</em>. The <cite>showHTMLRelationTable</cite> method shows the resulting bipolarly-valued adjacency matrix in a system browser window:</dt>
+<dt>We are going to compute the bipolar outranking digraph (see <a class="reference internal" href="#bis-2013" id="id13">[BIS-2013]</a>) from the given performance tableau <em>t</em>. The <tt class="docutils literal"><span class="pre">Digraph.showHTMLRelationTable</span></tt> method shows the resulting bipolar-valued adjacency matrix in a system browser window:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">()</span>

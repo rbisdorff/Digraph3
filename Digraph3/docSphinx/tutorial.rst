@@ -1230,7 +1230,7 @@ Good compromise decision alternatives appear to be sites *D* and *G*.
 Inspecting the outranking digraph
 .................................
 
-We are going to compute the bipolar outranking digraph (see [BIS-2013]_) from the given performance tableau *t*. The `showHTMLRelationTable` method shows the resulting bipolarly-valued adjacency matrix in a system browser window:
+We are going to compute the bipolar outranking digraph (see [BIS-2013]_) from the given performance tableau *t*. The ``Digraph.showHTMLRelationTable`` method shows the resulting bipolar-valued adjacency matrix in a system browser window:
     >>> from outrankingDigraphs import BipolarOutrankingDigraph
     >>> g = BipolarOutrankingDigraph(t)
     >>> g.showHTMLRelationTable()
