@@ -1186,9 +1186,13 @@ The evaluation of the seven potential sites on each criterion are gathered in tr
     Park          1.0     90       30       100      90       70       0        80
    ============= ======== ======== ======== ======== ======== ======== ======== ========
 
-Except the costs, all other criteria are evaluated on a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice that site *A* is the most expensive, but also 100% satisfying the *Proximity* as well as the  *Standing* criterion. Whereas the site *C* is the cheapest one; providing however no satisfaction at all with respect to the *Standing* and the *Working Space* criteria. All criteria are considered to incommensurable. The three objectives are furthermore considered to be *equi-important* (total weight = 3.0) with each criterion supporting a given objective being *equi-significant* (weight = 1.0). 
+Except the costs, all other criteria are evaluated on a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice that site *A* is the most expensive, but also 100% satisfying the *Proximity* as well as the  *Standing* criterion. Whereas the site *C* is the cheapest one; providing however no satisfaction at all with respect to the *Standing* and the *Working Space* criteria.
 
-In view of this performance tableau, what is now the office site we may recommend as **best choice** to the CEO?
+All criteria supporting a respective objective are considered to be *equi-significant* (weight = 1.0) such that the three objectives are *equi-important* (total weight = 3.0 each).
+
+Concerning annual costs, we notice that the CEO is indifferent up to a performance difference of 1000€, and he actually prefers a site if there is at least a positive difference of 2500€. The grades observed  on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and hence rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10%, and he claims a significant preference when the satisfaction difference is at least of 20%.  Furthermore, a satisfaction difference of 80% represents for him a *considerably large* performance difference, triggering a kind of *veto* the case given (see [BIS-2013]_). 
+
+In view of this performance tableau, what is now the office site we may recommend to the CEO as **best choice** ?
 
 Inspecting the Performance Tableau
 ..................................
@@ -1201,7 +1205,19 @@ We may inspect the performance tableau data with the computing resources provide
     >>> from perfTabs import *
     >>> t = XMCDA2PerformanceTableau('officeChoice')
     >>> help(t) # for discovering all the methods available
-    >>> 
+    >>> t.showPerformanceTableau()
+    *----  performance tableau -----*
+    criteria |   weights |     'A'      'B'      'C'       'D'       'E'       'F'       'G'   
+    ---------|---------------------------------------------------------------------------------
+    'C'      |    3.00   | -35000.00 -17800.00 -6700.00 -14100.00 -34800.00 -18600.00 -12000.00  
+    'Cf'     |    1.00   |      0.00    100.00    10.00     30.00     60.00     80.00     50.00  
+    'P'      |    1.00   |     90.00     30.00   100.00     90.00     70.00      0.00     80.00  
+    'Pr'     |    1.00   |    100.00     20.00    80.00     70.00     40.00      0.00     60.00  
+    'St'     |    1.00   |    100.00     10.00     0.00     30.00     90.00     70.00     20.00  
+    'V'      |    1.00   |     60.00     80.00    70.00     50.00     60.00      0.00    100.00  
+    'W'      |    1.00   |     75.00     30.00     0.00     55.00    100.00      0.00     50.00  
+
+We thus recover all the input data. To measure the actual preference discrimination we observe on each criterion, we may use the ``showCriteria`` method:
     >>> t.showCriteria()
     *----  criteria -----*
     C 'Costs'
@@ -1216,31 +1232,28 @@ We may inspect the performance tableau data with the computing resources provide
     Threshold ind : 10.00 + 0.00x ; percentile:  0.095
     Threshold pref : 20.00 + 0.00x ; percentile:  0.286
     ...
-    >>> >>> t.showPerformanceTableau()
-    *----  performance tableau -----*
-    criteria |   weights |     'A'      'B'      'C'       'D'       'E'       'F'       'G'   
-    ---------|---------------------------------------------------------------------------------
-    'C'      |    3.00   | -35000.00 -17800.00 -6700.00 -14100.00 -34800.00 -18600.00 -12000.00  
-    'Cf'     |    1.00   |      0.00    100.00    10.00     30.00     60.00     80.00     50.00  
-    'P'      |    1.00   |     90.00     30.00   100.00     90.00     70.00      0.00     80.00  
-    'Pr'     |    1.00   |    100.00     20.00    80.00     70.00     40.00      0.00     60.00  
-    'St'     |    1.00   |    100.00     10.00     0.00     30.00     90.00     70.00     20.00  
-    'V'      |    1.00   |     60.00     80.00    70.00     50.00     60.00      0.00    100.00  
-    'W'      |    1.00   |     75.00     30.00     0.00     55.00    100.00      0.00     50.00  
 
-Concerning annual costs, we notice that the CEO considers an indifference threshold of 1000€ and a preference discrimination threshold of 2500€. On the qualitative criteria, like *Working Comfort*, a significant preference is given with a performance difference of 20%. A better comparison of the performances is shown by the html heatmap:
+On the *Costs* criterion, 10% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold. On the qualitative *Comfort* criterion, we observe again 10% of insignificant performance differences. Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold. Furthermore, 10% of the performance differences are judged *considerably large*, ie 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all other criteria. 
+ 
+A colorful comparison of all the performances is proposed by the **heatmap** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a quintile classification:
     >>> t.showHTMLPerformanceHeatmap(colorLevels=5)
 
 .. image:: officeChoiceHeatmap.png
    :width: 600 px
    :align: center
 
-Good compromise decision alternatives appear to be sites *D* and *G*.
+Site *A* shows extreme and contradictory performances: highest *Costs* and no *Working Comfort* on one hand, and total satisfaction with respect to *Standing*, *Proximity* and *Parking facilities* on the other hand. Similar, but opposite situation is given for site *C*: unsatisfactory *Working Space*, no *Standing* and no *Working Comfort* on the one hand, and lowest *Costs*, best *Proximity* and *Parking facilities* on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: sites *D* and *G*. And, site *F* is clearly the less satisfactory alternative of all.
 
 Inspecting the outranking digraph
 .................................
 
-We are going to compute the bipolar outranking digraph (see [BIS-2013]_) from the given performance tableau *t*. The ``Digraph.showHTMLRelationTable`` method shows the resulting bipolar-valued adjacency matrix in a system browser window:
+To help now the CEO choosing the best site, we are going to compute the pairwise outranking (see [BIS-2013]_) on the set of potential sites. For two sites *x* and *y*, the situation "*x* outranks *y*", denoted (*x* S *y*), is given if there is:
+     1. a **significant majority** of criteria concordantly supporting that site *x* is *at least as satisfactory as* site *y*, and
+     2. **no considerable** counter-performance observed on any discordant criterion.
+
+The credibility of each pairwise outranking situation, denoted r(*x* S *y*), is measured in a bipolar significance valuation [-100.00, 100.00], where **positive** terms r(*x* S *y*) > 0.0 indicate a **validated**, and **negative** terms r(*x* S *y*) < 0.0 indicate a **non-validated** outrankings; whereas the **median** value r(*x* S *y*) = 0.0 represents an **indeterminate** validation.   
+
+For computing the corresponding bipolar valued outranking digraph from the given performance tableau *t*, we use the ``BipolarOutrankingDigrap`` contructor from the :ref:`outrankingDigraphs-label` module. The ``Digraph.showHTMLRelationTable`` method shows the resulting bipolar-valued adjacency matrix in a system browser window:
     >>> from outrankingDigraphs import BipolarOutrankingDigraph
     >>> g = BipolarOutrankingDigraph(t)
     >>> g.showHTMLRelationTable()
@@ -1331,7 +1344,7 @@ However, we must as well notice that the cheapest alternative *C* is in fact str
     Valuation in range: -9.00 to +9.00; global concordance: +1.00/-1.00
 
 
-To get an insight about the overall strict outranking situations, we may apply the RankingByChoosing constructor imported from the :ref:`weakOrders-label` module, to the strict (co-dual) outranking digraph:
+To get an insight about the overall strict outranking situations, we use the ``RankingByChoosingDigraph`` constructor imported from the :ref:`weakOrders-label` module, to compute a ranking-by-choosing result from the strict (co-dual) outranking digraph:
     >>> from weakOrders import RankingByChoosingDigraph
     >>> rbc = RankingByChoosingDigraph((~(-g)))
     Threading ...
@@ -1357,7 +1370,7 @@ To get an insight about the overall strict outranking situations, we may apply t
 
 In this **ranking-by-choosing** method, where we operate an epistemic fusion of iterated best and worst choices, alternative *D* is again ranked before alternative *G*. The overall ranking result stresses the important fact that the most expensive site *A*, and the cheapest site *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation. 
 
-The best choice depends hence on the very importance the CEO is attaching to each of the three objectives he is considering. In the actual setting here, where he considers all three objectives to be **equi-significant** (minimize costs = 3.0, maximize turnover = 3.0, and maximize working conditions = 3.0), site *D* represents actually the best choice candidate. However, if costs do not play much role, it would be perhaps better to decide to move to site *A*, or if, on the contrary, costs do matter a lot, moving to the cheapest alternative *C* could definitely be a better decision. 
+The best choice depends hence on the very importance the CEO is attaching to each of the three objectives he is considering. In the actual setting here, where he considers all three objectives to be **equi-significant** (minimize costs = 3.0, maximize turnover = 3.0, and maximize working conditions = 3.0), site *D* represents actually the best choice candidate. However, if costs do not play much role, it would be perhaps better to decide to move to site *A*, or if, on the contrary, costs do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
 
 It might be worth, as an *exercise*, to modify in the XMCDA data file this balance one of the other way, by raising and/or lowering the importance of minimizing the overall costs. What will become the best choice recommendation under both circumstances?
 
