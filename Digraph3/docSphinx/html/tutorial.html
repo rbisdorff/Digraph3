@@ -299,7 +299,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <div class="section" id="graphviz-drawings">
 <h3>Graphviz drawings<a class="headerlink" href="#graphviz-drawings" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id15" id="id2">[1]</a> drawing:</dt>
+<dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id16" id="id2">[1]</a> drawing:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to tutRandValDigraph.dot</span>
@@ -671,7 +671,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 <dl class="docutils">
-<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id15" id="id3">[1]</a> method as follows:</dt>
+<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id16" id="id3">[1]</a> method as follows:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
@@ -963,7 +963,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method <a class="footnote-reference" href="#id15" id="id7">[1]</a>, for visualizing an election result:</dt>
+<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method <a class="footnote-reference" href="#id16" id="id7">[1]</a>, for visualizing an election result:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorialLinearBallots&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to tutorialLinearBallots.dot</span>
@@ -1236,7 +1236,7 @@ linearBallot = {
 <div class="section" id="strict-outranking-via-the-codual-digraph">
 <h3>Strict outranking via the codual digraph<a class="headerlink" href="#strict-outranking-via-the-codual-digraph" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>From the theory <a class="reference internal" href="#bis-2013" id="id11">[BIS-2013]</a> we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if r(x S y) &lt; 0.0 then r(y S x) &gt;= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id15" id="id12">[1]</a>:</dt>
+<dt>From the theory <a class="reference internal" href="#bis-2013" id="id11">[BIS-2013]</a> we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if r(x S y) &lt; 0.0 then r(y S x) &gt;= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id16" id="id12">[1]</a>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="o">~</span><span class="n">odg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;codualOdg&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
@@ -1500,8 +1500,10 @@ linearBallot = {
 </table>
 </dd>
 </dl>
-<p>Except the costs, all other criteria are evaluated on a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice that site <em>A</em> is the most expensive, but also 100% satisfying the <em>Proximity</em> as well as the  <em>Standing</em> criterion. Whereas the site <em>C</em> is the cheapest one; providing however no satisfaction at all with respect to the <em>Standing</em> and the <em>Working Space</em> criteria. All criteria are considered to incommensurable. The three objectives are furthermore considered to be <em>equi-important</em> (total weight = 3.0) with each criterion supporting a given objective being <em>equi-significant</em> (weight = 1.0).</p>
-<p>In view of this performance tableau, what is now the office site we may recommend as <strong>best choice</strong> to the CEO?</p>
+<p>Except the costs, all other criteria are evaluated on a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice that site <em>A</em> is the most expensive, but also 100% satisfying the <em>Proximity</em> as well as the  <em>Standing</em> criterion. Whereas the site <em>C</em> is the cheapest one; providing however no satisfaction at all with respect to the <em>Standing</em> and the <em>Working Space</em> criteria.</p>
+<p>All criteria supporting a respective objective are considered to be <em>equi-significant</em> (weight = 1.0) such that the three objectives are <em>equi-important</em> (total weight = 3.0 each).</p>
+<p>Concerning annual costs, we notice that the CEO is indifferent up to a performance difference of 1000€, and he actually prefers a site if there is at least a positive difference of 2500€. The grades observed  on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and hence rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10%, and he claims a significant preference when the satisfaction difference is at least of 20%.  Furthermore, a satisfaction difference of 80% represents for him a <em>considerably large</em> performance difference, triggering a kind of <em>veto</em> the case given (see <a class="reference internal" href="#bis-2013" id="id13">[BIS-2013]</a>).</p>
+<p>In view of this performance tableau, what is now the office site we may recommend to the CEO as <strong>best choice</strong> ?</p>
 </div>
 <div class="section" id="inspecting-the-performance-tableau">
 <h3>Inspecting the Performance Tableau<a class="headerlink" href="#inspecting-the-performance-tableau" title="Permalink to this headline">¶</a></h3>
@@ -1513,22 +1515,7 @@ linearBallot = {
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">XMCDA2PerformanceTableau</span><span class="p">(</span><span class="s">&#39;officeChoice&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="c"># for discovering all the methods available</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
-<span class="go">*----  criteria -----*</span>
-<span class="go">C &#39;Costs&#39;</span>
-<span class="go">Scale = (Decimal(&#39;0.00&#39;), Decimal(&#39;50000.00&#39;))</span>
-<span class="go">Weight = 0.333</span>
-<span class="go">Threshold ind : 1000.00 + 0.00x ; percentile:  0.095</span>
-<span class="go">Threshold pref : 2500.00 + 0.00x ; percentile:  0.143</span>
-<span class="go">Cf &#39;Comfort&#39;</span>
-<span class="go">Scale = (Decimal(&#39;0.00&#39;), Decimal(&#39;100.00&#39;))</span>
-<span class="go">Weight = 0.111</span>
-<span class="go">Threshold veto : 80.00 + 0.00x ; percentile:  0.905</span>
-<span class="go">Threshold ind : 10.00 + 0.00x ; percentile:  0.095</span>
-<span class="go">Threshold pref : 20.00 + 0.00x ; percentile:  0.286</span>
-<span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
 <span class="go">*----  performance tableau -----*</span>
 <span class="go">criteria |   weights |     &#39;A&#39;      &#39;B&#39;      &#39;C&#39;       &#39;D&#39;       &#39;E&#39;       &#39;F&#39;       &#39;G&#39;</span>
 <span class="go">---------|---------------------------------------------------------------------------------</span>
@@ -1542,19 +1529,49 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>Concerning annual costs, we notice that the CEO considers an indifference threshold of 1000€ and a preference discrimination threshold of 2500€. On the qualitative criteria, like <em>Working Comfort</em>, a significant preference is given with a performance difference of 20%. A better comparison of the performances is shown by the html heatmap:</dt>
+<dt>We thus recover all the input data. To measure the actual preference discrimination we observe on each criterion, we may use the <tt class="docutils literal"><span class="pre">showCriteria</span></tt> method:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
+<span class="go">*----  criteria -----*</span>
+<span class="go">C &#39;Costs&#39;</span>
+<span class="go">Scale = (Decimal(&#39;0.00&#39;), Decimal(&#39;50000.00&#39;))</span>
+<span class="go">Weight = 0.333</span>
+<span class="go">Threshold ind : 1000.00 + 0.00x ; percentile:  0.095</span>
+<span class="go">Threshold pref : 2500.00 + 0.00x ; percentile:  0.143</span>
+<span class="go">Cf &#39;Comfort&#39;</span>
+<span class="go">Scale = (Decimal(&#39;0.00&#39;), Decimal(&#39;100.00&#39;))</span>
+<span class="go">Weight = 0.111</span>
+<span class="go">Threshold veto : 80.00 + 0.00x ; percentile:  0.905</span>
+<span class="go">Threshold ind : 10.00 + 0.00x ; percentile:  0.095</span>
+<span class="go">Threshold pref : 20.00 + 0.00x ; percentile:  0.286</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>On the <em>Costs</em> criterion, 10% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold. On the qualitative <em>Comfort</em> criterion, we observe again 10% of insignificant performance differences. Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold. Furthermore, 10% of the performance differences are judged <em>considerably large</em>, ie 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all other criteria.</p>
+<dl class="docutils">
+<dt>A colorful comparison of all the performances is proposed by the <strong>heatmap</strong> statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a quintile classification:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/officeChoiceHeatmap.png"><img alt="_images/officeChoiceHeatmap.png" class="align-center" src="_images/officeChoiceHeatmap.png" style="width: 600px;" /></a>
-<p>Good compromise decision alternatives appear to be sites <em>D</em> and <em>G</em>.</p>
+<p>Site <em>A</em> shows extreme and contradictory performances: highest <em>Costs</em> and no <em>Working Comfort</em> on one hand, and total satisfaction with respect to <em>Standing</em>, <em>Proximity</em> and <em>Parking facilities</em> on the other hand. Similar, but opposite situation is given for site <em>C</em>: unsatisfactory <em>Working Space</em>, no <em>Standing</em> and no <em>Working Comfort</em> on the one hand, and lowest <em>Costs</em>, best <em>Proximity</em> and <em>Parking facilities</em> on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: sites <em>D</em> and <em>G</em>. And, site <em>F</em> is clearly the less satisfactory alternative of all.</p>
 </div>
 <div class="section" id="inspecting-the-outranking-digraph">
 <h3>Inspecting the outranking digraph<a class="headerlink" href="#inspecting-the-outranking-digraph" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>We are going to compute the bipolar outranking digraph (see <a class="reference internal" href="#bis-2013" id="id13">[BIS-2013]</a>) from the given performance tableau <em>t</em>. The <tt class="docutils literal"><span class="pre">Digraph.showHTMLRelationTable</span></tt> method shows the resulting bipolar-valued adjacency matrix in a system browser window:</dt>
+<dt>To help now the CEO choosing the best site, we are going to compute the pairwise outranking (see <a class="reference internal" href="#bis-2013" id="id14">[BIS-2013]</a>) on the set of potential sites. For two sites <em>x</em> and <em>y</em>, the situation &#8220;<em>x</em> outranks <em>y</em>&#8221;, denoted (<em>x</em> S <em>y</em>), is given if there is:</dt>
+<dd><ol class="first last arabic simple">
+<li>a <strong>significant majority</strong> of criteria concordantly supporting that site <em>x</em> is <em>at least as satisfactory as</em> site <em>y</em>, and</li>
+<li><strong>no considerable</strong> counter-performance observed on any discordant criterion.</li>
+</ol>
+</dd>
+</dl>
+<p>The credibility of each pairwise outranking situation, denoted r(<em>x</em> S <em>y</em>), is measured in a bipolar significance valuation [-100.00, 100.00], where <strong>positive</strong> terms r(<em>x</em> S <em>y</em>) &gt; 0.0 indicate a <strong>validated</strong>, and <strong>negative</strong> terms r(<em>x</em> S <em>y</em>) &lt; 0.0 indicate a <strong>non-validated</strong> outrankings; whereas the <strong>median</strong> value r(<em>x</em> S <em>y</em>) = 0.0 represents an <strong>indeterminate</strong> validation.</p>
+<dl class="docutils">
+<dt>For computing the corresponding bipolar valued outranking digraph from the given performance tableau <em>t</em>, we use the <tt class="docutils literal"><span class="pre">BipolarOutrankingDigrap</span></tt> contructor from the <a class="reference internal" href="techDoc.html#outrankingdigraphs-label"><em>outrankingDigraphs module</em></a> module. The <tt class="docutils literal"><span class="pre">Digraph.showHTMLRelationTable</span></tt> method shows the resulting bipolar-valued adjacency matrix in a system browser window:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">()</span>
@@ -1586,7 +1603,7 @@ linearBallot = {
 <div class="section" id="computing-the-rubis-best-choice-recommendation">
 <h3>Computing the Rubis best choice recommendation<a class="headerlink" href="#computing-the-rubis-best-choice-recommendation" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>A best choice recommendation, following the Rubis outranking method (see <a class="reference internal" href="#bis-2008" id="id14">[BIS-2008]</a>) is provided by the Rubis Rest server:</dt>
+<dt>A best choice recommendation, following the Rubis outranking method (see <a class="reference internal" href="#bis-2008" id="id15">[BIS-2008]</a>) is provided by the Rubis Rest server:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RubisRestServer</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="n">RubisRestServer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
@@ -1657,7 +1674,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>To get an insight about the overall strict outranking situations, we may apply the RankingByChoosing constructor imported from the <a class="reference internal" href="techDoc.html#weakorders-label"><em>weakOrders module</em></a> module, to the strict (co-dual) outranking digraph:</dt>
+<dt>To get an insight about the overall strict outranking situations, we use the <tt class="docutils literal"><span class="pre">RankingByChoosingDigraph</span></tt> constructor imported from the <a class="reference internal" href="techDoc.html#weakorders-label"><em>weakOrders module</em></a> module, to compute a ranking-by-choosing result from the strict (co-dual) outranking digraph:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">((</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)))</span>
 <span class="go">Threading ...</span>
@@ -1682,7 +1699,7 @@ linearBallot = {
 </dl>
 <a class="reference internal image-reference" href="_images/officeChoiceRanking.png"><img alt="_images/officeChoiceRanking.png" class="align-center" src="_images/officeChoiceRanking.png" style="width: 200px;" /></a>
 <p>In this <strong>ranking-by-choosing</strong> method, where we operate an epistemic fusion of iterated best and worst choices, alternative <em>D</em> is again ranked before alternative <em>G</em>. The overall ranking result stresses the important fact that the most expensive site <em>A</em>, and the cheapest site <em>C</em>, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation.</p>
-<p>The best choice depends hence on the very importance the CEO is attaching to each of the three objectives he is considering. In the actual setting here, where he considers all three objectives to be <strong>equi-significant</strong> (minimize costs = 3.0, maximize turnover = 3.0, and maximize working conditions = 3.0), site <em>D</em> represents actually the best choice candidate. However, if costs do not play much role, it would be perhaps better to decide to move to site <em>A</em>, or if, on the contrary, costs do matter a lot, moving to the cheapest alternative <em>C</em> could definitely be a better decision.</p>
+<p>The best choice depends hence on the very importance the CEO is attaching to each of the three objectives he is considering. In the actual setting here, where he considers all three objectives to be <strong>equi-significant</strong> (minimize costs = 3.0, maximize turnover = 3.0, and maximize working conditions = 3.0), site <em>D</em> represents actually the best choice candidate. However, if costs do not play much role, it would be perhaps better to decide to move to site <em>A</em>, or if, on the contrary, costs do matter a lot, moving to the cheapest alternative <em>C</em> could definitely represent a more convincing recommendation.</p>
 <p>It might be worth, as an <em>exercise</em>, to modify in the XMCDA data file this balance one of the other way, by raising and/or lowering the importance of minimizing the overall costs. What will become the best choice recommendation under both circumstances?</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
@@ -1728,7 +1745,7 @@ linearBallot = {
 <table class="docutils citation" frame="void" id="bis-2013" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[BIS-2013]</td><td><em>(<a class="fn-backref" href="#id9">1</a>, <a class="fn-backref" href="#id10">2</a>, <a class="fn-backref" href="#id11">3</a>, <a class="fn-backref" href="#id13">4</a>)</em> <ol class="last upperalpha simple" start="18">
+<tr><td class="label">[BIS-2013]</td><td><em>(<a class="fn-backref" href="#id9">1</a>, <a class="fn-backref" href="#id10">2</a>, <a class="fn-backref" href="#id11">3</a>, <a class="fn-backref" href="#id13">4</a>, <a class="fn-backref" href="#id14">5</a>)</em> <ol class="last upperalpha simple" start="18">
 <li>Bisdorff (2013) &#8220;On Polarizing Outranking Relations with Large Performance Differences&#8221; <em>Journal of Multi-Criteria Decision Analysis</em> (Wiley) <strong>20</strong>:3-12 (downloadable preprint <a class="reference external" href="http://charles-sanders-peirce.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf">PDF file</a> 403.5 Kb).</li>
 </ol>
 </td></tr>
@@ -1737,7 +1754,7 @@ linearBallot = {
 <table class="docutils citation" frame="void" id="bis-2008" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[BIS-2008]</td><td><em>(<a class="fn-backref" href="#id8">1</a>, <a class="fn-backref" href="#id14">2</a>)</em> <ol class="last upperalpha simple" start="18">
+<tr><td class="label">[BIS-2008]</td><td><em>(<a class="fn-backref" href="#id8">1</a>, <a class="fn-backref" href="#id15">2</a>)</em> <ol class="last upperalpha simple" start="18">
 <li>Bisdorff, P. Meyer and M. Roubens (2008) &#8220;RUBIS: a bipolar-valued outranking method for the choice problem&#8221;. 4OR, <em>A Quarterly Journal of Operations Research</em> Springer-Verlag Volume 6 Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version <a class="reference external" href="http://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf">PDF file 271.5Kb</a>)</li>
 </ol>
 </td></tr>
@@ -1746,7 +1763,7 @@ linearBallot = {
 </div>
 <div class="section" id="footnotes">
 <h3>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h3>
-<table class="docutils footnote" frame="void" id="id15" rules="none">
+<table class="docutils footnote" frame="void" id="id16" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>, <a class="fn-backref" href="#id7">3</a>, <a class="fn-backref" href="#id12">4</a>)</em> The <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method is depending on drawing tools from <a class="reference external" href="http://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></tt> to install them. There are ready <tt class="docutils literal"><span class="pre">dmg</span></tt> installers for Mac OS.</td></tr>
