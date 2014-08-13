@@ -1173,7 +1173,7 @@ The decision consequences to take into account for evaluating each potential off
     Working conditions   P    Parking      Available parking facilities
    ==================== ==== ============ =========================================
 
-The evaluation of the seven potential sites on each criterion are gathered in trhe following performance tableau:
+The evaluation of the seven potential sites on each criterion are gathered in the following **performance tableau**:
    ============= ======== ======== ======== ======== ======== ======== ======== ======== 
     Criterion     weight   A        B        C        D        E         F         G
    ============= ======== ======== ======== ======== ======== ======== ======== ========
