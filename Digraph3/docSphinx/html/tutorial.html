@@ -299,7 +299,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <div class="section" id="graphviz-drawings">
 <h3>Graphviz drawings<a class="headerlink" href="#graphviz-drawings" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id18" id="id2">[1]</a> drawing:</dt>
+<dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id19" id="id2">[1]</a> drawing:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to tutRandValDigraph.dot</span>
@@ -671,7 +671,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 <dl class="docutils">
-<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id18" id="id3">[1]</a> method as follows:</dt>
+<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id19" id="id3">[1]</a> method as follows:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
@@ -963,7 +963,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method <a class="footnote-reference" href="#id18" id="id7">[1]</a>, for visualizing an election result:</dt>
+<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method <a class="footnote-reference" href="#id19" id="id7">[1]</a>, for visualizing an election result:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorialLinearBallots&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to tutorialLinearBallots.dot</span>
@@ -1236,7 +1236,7 @@ linearBallot = {
 <div class="section" id="strict-outranking-via-the-codual-digraph">
 <h3>Strict outranking via the codual digraph<a class="headerlink" href="#strict-outranking-via-the-codual-digraph" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>From the theory <a class="reference internal" href="#bis-2013" id="id11">[BIS-2013]</a> we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if r(x S y) &lt; 0.0 then r(y S x) &gt;= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id18" id="id12">[1]</a>:</dt>
+<dt>From the theory <a class="reference internal" href="#bis-2013" id="id11">[BIS-2013]</a> we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if r(x S y) &lt; 0.0 then r(y S x) &gt;= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id19" id="id12">[1]</a>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="o">~</span><span class="n">odg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;codualOdg&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
@@ -1599,11 +1599,23 @@ linearBallot = {
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/officeChoice.png"><img alt="_images/officeChoice.png" class="align-center" src="_images/officeChoice.png" style="width: 300px;" /></a>
-</div>
-<div class="section" id="computing-the-rubis-best-choice-recommendation">
-<h3>Computing the Rubis best choice recommendation<a class="headerlink" href="#computing-the-rubis-best-choice-recommendation" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>A best choice recommendation, following the Rubis outranking method (see <a class="reference internal" href="#bis-2008" id="id16">[BIS-2008]</a>) is provided by the Rubis XMCDA 2.0 Web services provided the Leopold-Loewenheim Apache Server of the University of Luxembourg:</dt>
+<dt>One may check that the outranking digraph <em>g</em> does not admit in fact a cyclic strict preference situation:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChordlessCircuits</span><span class="p">()</span>
+<span class="go">No circuits observed in this digraph.</span>
+<span class="go">*---- Chordless circuits ----*</span>
+<span class="go">0 circuits.</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="using-the-rubis-best-choice-on-line-web-solver">
+<h3>Using the Rubis best choice on-line web solver<a class="headerlink" href="#using-the-rubis-best-choice-on-line-web-solver" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>A best choice recommendation, following the Rubis outranking method (see <a class="reference internal" href="#bis-2008" id="id16">[BIS-2008]</a>) is provided by the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RubisRestServer</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="n">RubisRestServer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
@@ -1674,9 +1686,8 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>To model these <em>strict outranking</em> situations, we may compute the <strong>codual</strong> - the converse (~) of the dual (-)- of the outranking digraph instance <em>g</em>. On this digraph, the Rubis best choice recommendation may be computed as follows:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>
+<dt>To model these <em>strict outranking</em> situations, we may compute the <strong>codual</strong> - the converse (~) of the dual (-)- of the outranking digraph instance <em>g</em> (see <a class="reference internal" href="#bis-2013" id="id17">[BIS-2013]</a>). On this digraph, the Rubis best choice recommendation may be computed as follows:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>          <span class="c">## g = BipolarOutrankingDigraph(t)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showRubisBestChoiceRecommendation</span><span class="p">()</span>
 <span class="go">* --- Rubis best choice recommendation(s) ---*</span>
 <span class="go">(in decreasing order of determinateness)</span>
@@ -1692,19 +1703,31 @@ linearBallot = {
 <span class="go">  characteristic vector :</span>
 <span class="go">     { &#39;D&#39;: 11.11, &#39;A&#39;: 0.00, &#39;C&#39;: 0.00, &#39;G&#39;: 0.00,</span>
 <span class="go">       &#39;B&#39;: -11.11, &#39;E&#39;: -11.11, &#39;F&#39;: -11.11 }</span>
+<span class="go">=== &gt;&gt; potential worst choice</span>
+<span class="go">* choice                : [&#39;A&#39;, &#39;F&#39;]</span>
+<span class="go">  +-irredundancy        : 0.00</span>
+<span class="go">  independence          : 0.00</span>
+<span class="go">  dominance             : -55.56</span>
+<span class="go">  absorbency            : 100.00</span>
+<span class="go">  covering (%)          : 0.00</span>
+<span class="go">  determinateness (%)   : 0.50</span>
+<span class="go">  characteristic vector :</span>
+<span class="go">     {&#39;A&#39;: 0.00, &#39;B&#39;: 0.00, &#39;C&#39;: 0.00, &#39;D&#39;: 0.00,</span>
+<span class="go">      &#39;E&#39;: 0.00, &#39;F&#39;: 0.00, &#39;G&#39;: 0.00, }</span>
 </pre></div>
 </div>
 </dd>
 </dl>
-<p>It is interesting to notice that the (strict) best choice recommendation consists in our set of weak Condorcet winners: &#8216;A&#8217;, &#8216;C&#8217; and &#8216;D&#8217;. In the corresponding characteristic vector (see <a class="reference internal" href="#bis-2006" id="id17">[BIS-2006]</a>), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice, we find confirmed that alternative <em>D</em> is the only positively validated one, whereas both extreme alternatives - <em>A</em> (the most expensive) and <em>C</em> (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides <em>D</em>. Notice furthermore that compromise alternative <em>G</em>, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate.</p>
+<p>It is interesting to notice that the (strict) <strong>best choice recommendation</strong> consists in the set of weak Condorcet winners: &#8216;A&#8217;, &#8216;C&#8217; and &#8216;D&#8217;. In the corresponding characteristic vector (see <a class="reference internal" href="#bis-2006" id="id18">[BIS-2006]</a>), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice, we find confirmed that alternative <em>D</em> is the only positively validated one, whereas both extreme alternatives - <em>A</em> (the most expensive) and <em>C</em> (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides <em>D</em>. Notice furthermore that compromise alternative <em>G</em>, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate.</p>
+<p>We may also notice that both alternatives <em>A</em> and <em>F</em> are reported as certainly outranked, hence a <strong>worst choice recommendation</strong>. This confirms the global incomparability status of alternative <em>A</em> and the potentially weak performance of the cheapest alternative <em>C</em>.</p>
 </div>
-<div class="section" id="ranking-the-potential-decision-alternatives">
-<h3>Ranking the potential decision alternatives<a class="headerlink" href="#ranking-the-potential-decision-alternatives" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="ranking-by-choosing-and-rejecting-the-potential-decision-alternatives">
+<h3>Ranking by choosing and rejecting the potential decision alternatives<a class="headerlink" href="#ranking-by-choosing-and-rejecting-the-potential-decision-alternatives" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>To get an insight in the overall strict outranking situations, we use the <tt class="docutils literal"><span class="pre">RankingByChoosingDigraph</span></tt> constructor imported from the <a class="reference internal" href="techDoc.html#weakorders-label"><em>weakOrders module</em></a> module, for computing a <strong>ranking-by-choosing</strong> result from the strict outranking digraph instance <em>gcd</em>:</dt>
+<dt>To get a more complete insight in the overall strict outranking situations, we may use the <tt class="docutils literal"><span class="pre">RankingByChoosingDigraph</span></tt> constructor imported from the <a class="reference internal" href="techDoc.html#weakorders-label"><em>weakOrders module</em></a> module, for computing a <strong>ranking-by-choosing</strong> result from the strict outranking digraph instance <em>gcd</em>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">gcd</span><span class="p">)</span>
-<span class="go">Threading ...</span>
+<span class="go">Threading ...  ## multiprocessing if 2 cores are available</span>
 <span class="go">Exiting computing threads</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showRankingByChoosing</span><span class="p">()</span>
 <span class="go">Ranking by Choosing and Rejecting</span>
@@ -1725,9 +1748,9 @@ linearBallot = {
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/officeChoiceRanking.png"><img alt="_images/officeChoiceRanking.png" class="align-center" src="_images/officeChoiceRanking.png" style="width: 200px;" /></a>
-<p>In this <strong>ranking-by-choosing</strong> method, where we operate an epistemic fusion of iterated (strict) best and worst choices, compromise alternative <em>D</em> is indeed ranked before compromise alternative <em>G</em>. The overall ranking result stresses furthermore the important fact that the most expensive site <em>A</em>, and the cheapest site <em>C</em>, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation.</p>
-<p>The actual best choice appears hence depending on the very importance the CEO is attaching to each of the three objectives he is considering. In the setting here, where he considers all three objectives to be <strong>equally impoortant</strong> (minimize costs = 3.0, maximize turnover = 3.0, and maximize working conditions = 3.0), site <em>D</em> represents actually the best compromise. However, if <em>Costs</em> do not play much role, it would be perhaps better to decide to move to the most advantageous site <em>A</em>; or if, on the contrary, <em>Costs</em> do matter a lot, moving to the cheapest alternative <em>C</em> could definitely represent a more convincing recommendation.</p>
-<p>It might be worth, as an <strong>exercise</strong>, to modify this balance in the XMCDA data file by lowering the importance of minimizing the overall costs; all criteria being  equi-significant (weight = 1.0) for instance. It may as well be opportune to rank the three objectives as follows:  minimize costs (weight = 9.0) &gt; maximize turnover (weight = 3 x 2.0) &gt; maximize working conditions (weight = 3 x 1.0). What will become the Rubis best choice recommendation under both working hypotheses?</p>
+<p>In this <strong>ranking-by-choosing</strong> method, where we operate the epistemic fusion of iterated (strict) best and worst choices, compromise alternative <em>D</em> is indeed ranked before compromise alternative <em>G</em>. If the computing node supports multiple processor cores, best and worst choosing iterations are run in parallel. The overall ranking result shows again the important fact that the most expensive site <em>A</em>, and the cheapest site <em>C</em>, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation.</p>
+<p>The best choice recommendation appears hence depending on the very importance the CEO is attaching to each of the three objectives he is considering. In the setting here, where he considers all three objectives to be <strong>equally important</strong> (minimize costs = 3.0, maximize turnover = 3.0, and maximize working conditions = 3.0), site <em>D</em> represents actually the best compromise. However, if <em>Costs</em> do not play much role, it would be perhaps better to decide to move to the most advantageous site <em>A</em>; or if, on the contrary, <em>Costs</em> do matter a lot, moving to the cheapest alternative <em>C</em> could definitely represent a more convincing recommendation.</p>
+<p>It might be worth, as an <strong>exercise</strong>, to modify on the one hand this importance balance in the XMCDA data file by lowering the significance of the <em>Costs</em> criterion; all criteria are considered <strong>equi-significant</strong> (weight = 1.0) for instance. It may as well be opportune, on the other hand, to <strong>rank</strong> the importance of the three objectives as follows:  <em>minimize costs</em> (weight = 9.0) <strong>&gt;</strong> <em>maximize turnover</em> (weight = 3 x 2.0) <strong>&gt;</strong> <em>maximize working conditions</em> (weight = 3 x 1.0). What will become the best choice recommendation under both working hypotheses?</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
 </div>
@@ -1772,7 +1795,7 @@ linearBallot = {
 <table class="docutils citation" frame="void" id="bis-2013" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[BIS-2013]</td><td><em>(<a class="fn-backref" href="#id9">1</a>, <a class="fn-backref" href="#id10">2</a>, <a class="fn-backref" href="#id11">3</a>, <a class="fn-backref" href="#id13">4</a>, <a class="fn-backref" href="#id14">5</a>, <a class="fn-backref" href="#id15">6</a>)</em> <ol class="last upperalpha simple" start="18">
+<tr><td class="label">[BIS-2013]</td><td><em>(<a class="fn-backref" href="#id9">1</a>, <a class="fn-backref" href="#id10">2</a>, <a class="fn-backref" href="#id11">3</a>, <a class="fn-backref" href="#id13">4</a>, <a class="fn-backref" href="#id14">5</a>, <a class="fn-backref" href="#id15">6</a>, <a class="fn-backref" href="#id17">7</a>)</em> <ol class="last upperalpha simple" start="18">
 <li>Bisdorff (2013) &#8220;On Polarizing Outranking Relations with Large Performance Differences&#8221; <em>Journal of Multi-Criteria Decision Analysis</em> (Wiley) <strong>20</strong>:3-12 (downloadable preprint <a class="reference external" href="http://charles-sanders-peirce.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf">PDF file</a> 403.5 Kb).</li>
 </ol>
 </td></tr>
@@ -1790,7 +1813,7 @@ linearBallot = {
 <table class="docutils citation" frame="void" id="bis-2006" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id17">[BIS-2006]</a></td><td><ol class="first last upperalpha simple" start="18">
+<tr><td class="label"><a class="fn-backref" href="#id18">[BIS-2006]</a></td><td><ol class="first last upperalpha simple" start="18">
 <li>Bisdorff, M. Pirlot and M. Roubens (2006). Choices and kernels from bipolar valued digraphs. <em>European Journal of Operational Research</em>, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version <a class="reference external" href="http://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf">PDF file 257.3Kb</a>)</li>
 </ol>
 </td></tr>
@@ -1799,7 +1822,7 @@ linearBallot = {
 </div>
 <div class="section" id="footnotes">
 <h3>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h3>
-<table class="docutils footnote" frame="void" id="id18" rules="none">
+<table class="docutils footnote" frame="void" id="id19" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>, <a class="fn-backref" href="#id7">3</a>, <a class="fn-backref" href="#id12">4</a>)</em> The <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method is depending on drawing tools from <a class="reference external" href="http://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></tt> to install them. There are ready <tt class="docutils literal"><span class="pre">dmg</span></tt> installers for Mac OS.</td></tr>
@@ -1870,9 +1893,9 @@ linearBallot = {
 <li><a class="reference internal" href="#best-office-site-choice-for-an-sme">Best office site choice for an SME?</a></li>
 <li><a class="reference internal" href="#inspecting-the-performance-tableau">Inspecting the Performance Tableau</a></li>
 <li><a class="reference internal" href="#inspecting-the-outranking-digraph">Inspecting the outranking digraph</a></li>
-<li><a class="reference internal" href="#computing-the-rubis-best-choice-recommendation">Computing the Rubis best choice recommendation</a></li>
+<li><a class="reference internal" href="#using-the-rubis-best-choice-on-line-web-solver">Using the Rubis best choice on-line web solver</a></li>
 <li><a class="reference internal" href="#computing-a-strict-best-choice-recommendation">Computing a strict best choice recommendation</a></li>
-<li><a class="reference internal" href="#ranking-the-potential-decision-alternatives">Ranking the potential decision alternatives</a></li>
+<li><a class="reference internal" href="#ranking-by-choosing-and-rejecting-the-potential-decision-alternatives">Ranking by choosing and rejecting the potential decision alternatives</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#links-and-appendices">Links and appendices</a><ul>
