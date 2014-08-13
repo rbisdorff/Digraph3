@@ -1289,7 +1289,7 @@ linearBallot = {
 <span id="rubis-tutorial-label"></span><h2>Computing a best choice recommendation<a class="headerlink" href="#computing-a-best-choice-recommendation" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="best-office-site-choice-for-an-sme">
 <h3>Best office site choice for an SME?<a class="headerlink" href="#best-office-site-choice-for-an-sme" title="Permalink to this headline">¶</a></h3>
-<p>A SME, specialized in printing an copy services, has to move into new offices, and its CEO has gathered seven potential office sites:</p>
+<p>A SME, specialized in printing an copy services, has to move into new offices, and its CEO has gathered seven <strong>potential office sites</strong>:</p>
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
@@ -1306,7 +1306,7 @@ linearBallot = {
 <tbody valign="top">
 <tr class="row-even"><td>Avenue de la liberté</td>
 <td>A</td>
-<td>High standing city centre</td>
+<td>High standing city center</td>
 </tr>
 <tr class="row-odd"><td>Bonnevoie</td>
 <td>B</td>
@@ -1336,15 +1336,15 @@ linearBallot = {
 </table>
 </div></blockquote>
 <dl class="docutils">
-<dt>Three objectives are guiding his choice:</dt>
+<dt>Three <strong>decision objectives</strong> are guiding the CEO&#8217;s choice:</dt>
 <dd><ol class="first last arabic simple">
-<li>minimize the yearly costs induced by the moving,</li>
-<li>maximize the future turnover of the SME,</li>
-<li>maximize the new working conditions.</li>
+<li><em>minimize</em> the yearly costs induced by the moving,</li>
+<li><em>maximize</em> the future turnover of the SME,</li>
+<li><em>maximize</em> the new working conditions.</li>
 </ol>
 </dd>
 </dl>
-<p>The decision consequences to take into account for evaluating each potential office site with respect to each of the three objectives are the following:</p>
+<p>The decision consequences to take into account for evaluating the potential new office sites with respect to each of the three objectives are modeled by the following <strong>family of criteria</strong>:</p>
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
@@ -1366,32 +1366,42 @@ linearBallot = {
 <td>Costs</td>
 <td>Annual rent, charges, and cleaning</td>
 </tr>
-<tr class="row-odd"><td>Future turnover</td>
+<tr class="row-odd"><td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td>Future turnover</td>
 <td>St</td>
 <td>Standing</td>
 <td>Image and presentation</td>
 </tr>
-<tr class="row-even"><td>Future turnover</td>
+<tr class="row-odd"><td>idem</td>
 <td>V</td>
 <td>Visibility</td>
 <td>Circulation of potential customers</td>
 </tr>
-<tr class="row-odd"><td>Future turnover</td>
+<tr class="row-even"><td>idem</td>
 <td>Pr</td>
 <td>Proximity</td>
 <td>Distance from town center</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr class="row-even"><td>Working conditions</td>
 <td>W</td>
 <td>Space</td>
 <td>Working space</td>
 </tr>
-<tr class="row-odd"><td>Working conditions</td>
+<tr class="row-odd"><td>idem</td>
 <td>Cf</td>
 <td>Comfort</td>
-<td>Quality of office equipments</td>
+<td>Quality of office equipment</td>
 </tr>
-<tr class="row-even"><td>Working conditions</td>
+<tr class="row-even"><td>idem</td>
 <td>P</td>
 <td>Parking</td>
 <td>Available parking facilities</td>
@@ -1426,7 +1436,7 @@ linearBallot = {
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>Cost</td>
+<tr class="row-even"><td>Costs</td>
 <td>3.0</td>
 <td>35.0K€</td>
 <td>17.8K€</td>
@@ -1436,17 +1446,27 @@ linearBallot = {
 <td>18.6K€</td>
 <td>12.0K€</td>
 </tr>
-<tr class="row-odd"><td>Prox</td>
+<tr class="row-odd"><td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td>Stan</td>
 <td>1.0</td>
 <td>100</td>
-<td>20</td>
-<td>80</td>
-<td>70</td>
-<td>40</td>
+<td>10</td>
 <td>0</td>
-<td>60</td>
+<td>30</td>
+<td>90</td>
+<td>70</td>
+<td>20</td>
 </tr>
-<tr class="row-even"><td>Visi</td>
+<tr class="row-odd"><td>Visi</td>
 <td>1.0</td>
 <td>60</td>
 <td>80</td>
@@ -1456,15 +1476,25 @@ linearBallot = {
 <td>0</td>
 <td>100</td>
 </tr>
-<tr class="row-odd"><td>Stan</td>
+<tr class="row-even"><td>Prox</td>
 <td>1.0</td>
 <td>100</td>
-<td>10</td>
-<td>0</td>
-<td>30</td>
-<td>90</td>
-<td>70</td>
 <td>20</td>
+<td>80</td>
+<td>70</td>
+<td>40</td>
+<td>0</td>
+<td>60</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr class="row-even"><td>Wksp</td>
 <td>1.0</td>
@@ -1501,7 +1531,7 @@ linearBallot = {
 </dd>
 </dl>
 <p>Except the costs, all other criteria admit for grading a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice that site <em>A</em> is the most expensive, but also 100% satisfying the <em>Proximity</em> as well as the  <em>Standing</em> criterion. Whereas the site <em>C</em> is the cheapest one; providing however no satisfaction at all on both the <em>Standing</em> and the <em>Working Space</em> criteria.</p>
-<p>All qualitative criteria, supporting their respective objective, are considered to be <em>equi-significant</em> (weights = 1.0). As a consequence, the three objectives are considered <em>equi-important</em> (total weight = 3.0 each).</p>
+<p>All qualitative criteria, supporting their respective objective, are considered to be <em>equi-significant</em> (weights = 1.0). As a consequence, the three objectives are considered <em>equally important</em> (total weight = 3.0 each).</p>
 <p>Concerning annual costs, we notice that the CEO is indifferent up to a performance difference of 1000€, and he actually prefers a site if there is at least a positive difference of 2500€. The grades observed on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10%, and he claims a significant preference when the satisfaction difference is at least of 20%.  Furthermore, a satisfaction difference of 80% represents for him a <em>considerably large</em> performance difference, triggering a <em>veto</em> situation the case given (see <a class="reference internal" href="#bis-2013" id="id13">[BIS-2013]</a>).</p>
 <p>In view of this performance tableau, what is now the office site we may recommend to the CEO as <strong>best choice</strong> ?</p>
 </div>
@@ -1550,7 +1580,7 @@ linearBallot = {
 </dl>
 <p>On the <em>Costs</em> criterion, 10% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold. On the qualitative <em>Comfort</em> criterion, we observe again 10% of insignificant performance differences. Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold. Furthermore, 10% of the performance differences are judged <em>considerably large</em>, ie 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all other criteria.</p>
 <dl class="docutils">
-<dt>A colorful comparison of all the performances is shown by the <strong>heatmap</strong> statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a quintile classification:</dt>
+<dt>A colorful comparison of all the performances is shown by the <strong>heatmap</strong> statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1569,9 +1599,9 @@ linearBallot = {
 </ol>
 </dd>
 </dl>
-<p>The credibility of each pairwise outranking situation (see <a class="reference internal" href="#bis-2013" id="id15">[BIS-2013]</a>), denoted r(<em>x</em> S <em>y</em>), is measured in a bipolar significance valuation [-100.00, 100.00], where <strong>positive</strong> terms r(<em>x</em> S <em>y</em>) &gt; 0.0 indicate a <strong>validated</strong>, and <strong>negative</strong> terms r(<em>x</em> S <em>y</em>) &lt; 0.0 indicate a <strong>non-validated</strong> outrankings; whereas the <strong>median</strong> value r(<em>x</em> S <em>y</em>) = 0.0 represents an <strong>indeterminate</strong> validation.</p>
+<p>The credibility of each pairwise outranking situation (see <a class="reference internal" href="#bis-2013" id="id15">[BIS-2013]</a>), denoted r(<em>x</em> S <em>y</em>), is measured in a bipolar significance valuation [-100.00, 100.00], where <strong>positive</strong> terms r(<em>x</em> S <em>y</em>) &gt; 0.0 indicate a <strong>validated</strong>, and <strong>negative</strong> terms r(<em>x</em> S <em>y</em>) &lt; 0.0 indicate a <strong>non-validated</strong> outrankings; whereas the <strong>median</strong> value r(<em>x</em> S <em>y</em>) = 0.0 represents an <strong>indeterminate</strong> situation.</p>
 <dl class="docutils">
-<dt>For computing the corresponding bipolar valued outranking digraph from the given performance tableau <em>t</em>, we use the <tt class="docutils literal"><span class="pre">BipolarOutrankingDigrap</span></tt> contructor from the <a class="reference internal" href="techDoc.html#outrankingdigraphs-label"><em>outrankingDigraphs module</em></a> module. The <tt class="docutils literal"><span class="pre">Digraph.showHTMLRelationTable</span></tt> method shows here the resulting bipolar-valued adjacency matrix in a system browser window:</dt>
+<dt>For computing such a bipolar valued outranking digraph from the given performance tableau <em>t</em>, we use the <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt> constructor from the <a class="reference internal" href="techDoc.html#outrankingdigraphs-label"><em>outrankingDigraphs module</em></a> module. The <tt class="docutils literal"><span class="pre">Digraph.showHTMLRelationTable</span></tt> method shows here the resulting bipolar-valued adjacency matrix in a system browser window:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">()</span>
@@ -1589,9 +1619,9 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>We may get even more insight in the apparent outraking situations when looking at the Condorcet digraph:</dt>
+<dt>We may get even more insight in the apparent outranking situations when looking at the Condorcet digraph:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;officeChoice&#39;</span><span class="p">)</span>
-<span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to officeChoice.dot</span>
 <span class="go">dot -Grankdir=BT -Tpng officeChoice.dot -o officeChoice.png</span>
 </pre></div>
