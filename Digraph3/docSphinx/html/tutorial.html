@@ -299,7 +299,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <div class="section" id="graphviz-drawings">
 <h3>Graphviz drawings<a class="headerlink" href="#graphviz-drawings" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id17" id="id2">[1]</a> drawing:</dt>
+<dt>We may have an even better insight into the <tt class="docutils literal"><span class="pre">Digraph</span></tt> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id18" id="id2">[1]</a> drawing:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to tutRandValDigraph.dot</span>
@@ -671,7 +671,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 <dl class="docutils">
-<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id17" id="id3">[1]</a> method as follows:</dt>
+<dt>The stored graph can be recalled and plotted with the generic <tt class="code docutils literal"><span class="pre">exportGraphViz</span></tt> <a class="footnote-reference" href="#id18" id="id3">[1]</a> method as follows:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
@@ -963,7 +963,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method <a class="footnote-reference" href="#id17" id="id7">[1]</a>, for visualizing an election result:</dt>
+<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <tt class="docutils literal"><span class="pre">Digraph</span></tt> class (see <a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a>), and especially its <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method <a class="footnote-reference" href="#id18" id="id7">[1]</a>, for visualizing an election result:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorialLinearBallots&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to tutorialLinearBallots.dot</span>
@@ -1236,7 +1236,7 @@ linearBallot = {
 <div class="section" id="strict-outranking-via-the-codual-digraph">
 <h3>Strict outranking via the codual digraph<a class="headerlink" href="#strict-outranking-via-the-codual-digraph" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>From the theory <a class="reference internal" href="#bis-2013" id="id11">[BIS-2013]</a> we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if r(x S y) &lt; 0.0 then r(y S x) &gt;= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id17" id="id12">[1]</a>:</dt>
+<dt>From the theory <a class="reference internal" href="#bis-2013" id="id11">[BIS-2013]</a> we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if r(x S y) &lt; 0.0 then r(y S x) &gt;= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id18" id="id12">[1]</a>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="o">~</span><span class="n">odg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;codualOdg&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
@@ -1635,8 +1635,8 @@ linearBallot = {
 <div></div></blockquote>
 <p>Here, we find confirmed that alternative <em>D</em>, indeed, appears to be the most convincing best choice candidate. Yet, what about alternative <em>G</em>, the other good compromise best choice we have noticed from the performance heatmap shown above?</p>
 </div>
-<div class="section" id="ranking-the-potential-decision-alternatives">
-<h3>Ranking the potential decision alternatives<a class="headerlink" href="#ranking-the-potential-decision-alternatives" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="computing-a-strict-best-choice-recommendation">
+<h3>Computing a strict best choice recommendation<a class="headerlink" href="#computing-a-strict-best-choice-recommendation" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>When comparing the performances of alternatives <em>D</em> and <em>G</em>, we notice that, with the given preference discrimination thresholds, alternative <em>G</em> is actually <strong>certainly</strong> <em>at least as good as</em> alternative <em>D</em> ( r(<em>G</em> outranks <em>D</em>) = 100%).</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s">&#39;G&#39;</span><span class="p">,</span><span class="s">&#39;D&#39;</span><span class="p">)</span>
@@ -1656,7 +1656,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>However, we must as well notice that the cheapest alternative <em>C</em> is in fact strictly outranking alternative <em>G</em>:</dt>
+<dt>However, we must as well notice that the cheapest alternative <em>C</em> is in fact <strong>strictly outranking</strong> alternative <em>G</em>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">,</span><span class="s">&#39;G&#39;</span><span class="p">)</span>
 <span class="go">*------------  pairwise comparison ----*</span>
 <span class="go">Comparing actions : (C, G)/(G, C)</span>
@@ -1674,9 +1674,36 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>To get an insight about the overall strict outranking situations, we use the <tt class="docutils literal"><span class="pre">RankingByChoosingDigraph</span></tt> constructor imported from the <a class="reference internal" href="techDoc.html#weakorders-label"><em>weakOrders module</em></a> module, to compute a ranking-by-choosing result from the strict (co-dual) outranking digraph:</dt>
+<dt>To model these <em>strict outranking</em> situations, we may compute the <strong>codual</strong> - the converse (~) of the dual (-)- of the outranking digraph instance <em>g</em>. On this digraph, the Rubis best choice recommendation may be computed as follows:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showRubisBestChoiceRecommendation</span><span class="p">()</span>
+<span class="go">* --- Rubis best choice recommendation(s) ---*</span>
+<span class="go">(in decreasing order of determinateness)</span>
+<span class="go">Credibility domain:  {&#39;min&#39;:-100.0, &#39;max&#39;: 100.0&#39;, &#39;med&#39;:0.0&#39;}</span>
+<span class="go">=== &gt;&gt; potential BCR</span>
+<span class="go">* choice                : [&#39;A&#39;, &#39;C&#39;, &#39;D&#39;]</span>
+<span class="go">  +-irredundancy        : 0.00</span>
+<span class="go">  independence          : 0.00</span>
+<span class="go">  dominance             : 11.11</span>
+<span class="go">  absorbency            : 0.00</span>
+<span class="go">  covering (%)          : 41.67</span>
+<span class="go">  determinateness (%)   : 0.53</span>
+<span class="go">  characteristic vector :</span>
+<span class="go">     { &#39;D&#39;: 11.11, &#39;A&#39;: 0.00, &#39;C&#39;: 0.00, &#39;G&#39;: 0.00,</span>
+<span class="go">       &#39;B&#39;: -11.11, &#39;E&#39;: -11.11, &#39;F&#39;: -11.11 }</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>It is interesting to notice that the (strict) best choice recommendation consists in our set of weak Condorcet winners: &#8216;A&#8217;, &#8216;C&#8217; and &#8216;D&#8217;. In the corresponding characteristic vector (see <a class="reference internal" href="#bis-2006" id="id17">[BIS-2006]</a>), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice, we find confirmed that alternative <em>D</em> is the only positively validated one, whereas both extreme alternatives - <em>A</em> (the most expensive) and <em>C</em> (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides <em>D</em>. Notice furthermore that compromise alternative <em>G</em>, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate.</p>
+</div>
+<div class="section" id="ranking-the-potential-decision-alternatives">
+<h3>Ranking the potential decision alternatives<a class="headerlink" href="#ranking-the-potential-decision-alternatives" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>To get an insight in the overall strict outranking situations, we use the <tt class="docutils literal"><span class="pre">RankingByChoosingDigraph</span></tt> constructor imported from the <a class="reference internal" href="techDoc.html#weakorders-label"><em>weakOrders module</em></a> module, for computing a <strong>ranking-by-choosing</strong> result from the strict outranking digraph instance <em>gcd</em>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">((</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">gcd</span><span class="p">)</span>
 <span class="go">Threading ...</span>
 <span class="go">Exiting computing threads</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showRankingByChoosing</span><span class="p">()</span>
@@ -1698,9 +1725,9 @@ linearBallot = {
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/officeChoiceRanking.png"><img alt="_images/officeChoiceRanking.png" class="align-center" src="_images/officeChoiceRanking.png" style="width: 200px;" /></a>
-<p>In this <strong>ranking-by-choosing</strong> method, where we operate an epistemic fusion of iterated best and worst choices, alternative <em>D</em> is again ranked before alternative <em>G</em>. The overall ranking result stresses the important fact that the most expensive site <em>A</em>, and the cheapest site <em>C</em>, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation.</p>
-<p>The best choice depends hence on the very importance the CEO is attaching to each of the three objectives he is considering. In the actual setting here, where he considers all three objectives to be <strong>equi-significant</strong> (minimize costs = 3.0, maximize turnover = 3.0, and maximize working conditions = 3.0), site <em>D</em> represents actually the best compromise. However, if costs do not play much role, it would be perhaps better to decide to move to the most advantageous site <em>A</em>; or if, on the contrary, costs do matter a lot, moving to the cheapest alternative <em>C</em> could definitely represent a more convincing recommendation.</p>
-<p>It might be worth, as an <em>exercise</em>, to modify this balance in the XMCDA data file one of the other way by raising or lowering the importance of minimizing the overall costs. What will become the best choice recommendation under both changes?</p>
+<p>In this <strong>ranking-by-choosing</strong> method, where we operate an epistemic fusion of iterated (strict) best and worst choices, compromise alternative <em>D</em> is indeed ranked before compromise alternative <em>G</em>. The overall ranking result stresses furthermore the important fact that the most expensive site <em>A</em>, and the cheapest site <em>C</em>, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation.</p>
+<p>The actual best choice appears hence depending on the very importance the CEO is attaching to each of the three objectives he is considering. In the setting here, where he considers all three objectives to be <strong>equally impoortant</strong> (minimize costs = 3.0, maximize turnover = 3.0, and maximize working conditions = 3.0), site <em>D</em> represents actually the best compromise. However, if <em>Costs</em> do not play much role, it would be perhaps better to decide to move to the most advantageous site <em>A</em>; or if, on the contrary, <em>Costs</em> do matter a lot, moving to the cheapest alternative <em>C</em> could definitely represent a more convincing recommendation.</p>
+<p>It might be worth, as an <em>exercise</em>, to modify this balance in the XMCDA data file by lowering the importance of minimizing the overall costs; all criteria being  equi-significant (weight = 1.0) for instance. It may as well be opportune to rank the three objectives as follows:  minimize costs (weight = 9.0) &gt; maximize turnover (weight = 3 x 2.0) &gt; maximize working conditions (weight = 3 x 1.0). What will become the Rubis best choice recommendation under both changes?</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
 </div>
 </div>
@@ -1760,10 +1787,19 @@ linearBallot = {
 </td></tr>
 </tbody>
 </table>
+<table class="docutils citation" frame="void" id="bis-2006" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id17">[BIS-2006]</a></td><td><ol class="first last upperalpha simple" start="18">
+<li>Bisdorff, M. Pirlot and M. Roubens (2006). Choices and kernels from bipolar valued digraphs. <em>European Journal of Operational Research</em>, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version <a class="reference external" href="http://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf">PDF file 257.3Kb</a>)</li>
+</ol>
+</td></tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="footnotes">
 <h3>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h3>
-<table class="docutils footnote" frame="void" id="id17" rules="none">
+<table class="docutils footnote" frame="void" id="id18" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>, <a class="fn-backref" href="#id7">3</a>, <a class="fn-backref" href="#id12">4</a>)</em> The <tt class="docutils literal"><span class="pre">exportGraphViz</span></tt> method is depending on drawing tools from <a class="reference external" href="http://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></tt> to install them. There are ready <tt class="docutils literal"><span class="pre">dmg</span></tt> installers for Mac OS.</td></tr>
@@ -1835,6 +1871,7 @@ linearBallot = {
 <li><a class="reference internal" href="#inspecting-the-performance-tableau">Inspecting the Performance Tableau</a></li>
 <li><a class="reference internal" href="#inspecting-the-outranking-digraph">Inspecting the outranking digraph</a></li>
 <li><a class="reference internal" href="#computing-the-rubis-best-choice-recommendation">Computing the Rubis best choice recommendation</a></li>
+<li><a class="reference internal" href="#computing-a-strict-best-choice-recommendation">Computing a strict best choice recommendation</a></li>
 <li><a class="reference internal" href="#ranking-the-potential-decision-alternatives">Ranking the potential decision alternatives</a></li>
 </ul>
 </li>
