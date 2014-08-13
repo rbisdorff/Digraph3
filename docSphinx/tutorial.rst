@@ -1308,8 +1308,8 @@ and, in a system browser window, browse the `solution file`_.
 
 Here, we find confirmed that alternative *D*, indeed, appears to be the most convincing best choice candidate. Yet, what about alternative *G*, the other good compromise best choice we have noticed from the performance heatmap shown above?
 
-Ranking the potential decision alternatives
-...........................................
+Computing a strict best choice recommendation
+...............................................
 
 When comparing the performances of alternatives *D* and *G*, we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D* ( r(*G* outranks *D*) = 100%). 
     >>> g.showPairwiseComparison('G','D')
@@ -1327,7 +1327,7 @@ When comparing the performances of alternatives *D* and *G*, we notice that, wit
     ---------------------------------------------------------------------
     Valuation in range: -9.00 to +9.00; global concordance: +9.00
 
-However, we must as well notice that the cheapest alternative *C* is in fact strictly outranking alternative *G*:
+However, we must as well notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*:
     >>> g.showPairwiseComparison('C','G')
     *------------  pairwise comparison ----*
     Comparing actions : (C, G)/(G, C)
@@ -1344,9 +1344,33 @@ However, we must as well notice that the cheapest alternative *C* is in fact str
     Valuation in range: -9.00 to +9.00; global concordance: +1.00/-1.00
 
 
-To get an insight about the overall strict outranking situations, we use the ``RankingByChoosingDigraph`` constructor imported from the :ref:`weakOrders-label` module, to compute a ranking-by-choosing result from the strict (co-dual) outranking digraph:
+To model these *strict outranking* situations, we may compute the **codual** - the converse (~) of the dual (-)- of the outranking digraph instance *g*. On this digraph, the Rubis best choice recommendation may be computed as follows: 
+    >>> g = BipolarOutrankingDigraph(t) 
+    >>> gcd = ~(-g)
+    >>> gcd.showRubisBestChoiceRecommendation()
+    * --- Rubis best choice recommendation(s) ---*
+    (in decreasing order of determinateness)   
+    Credibility domain:  {'min':-100.0, 'max': 100.0', 'med':0.0'}
+    === >> potential BCR 
+    * choice                : ['A', 'C', 'D']
+      +-irredundancy        : 0.00
+      independence          : 0.00
+      dominance             : 11.11
+      absorbency            : 0.00
+      covering (%)          : 41.67
+      determinateness (%)   : 0.53
+      characteristic vector :  
+         { 'D': 11.11, 'A': 0.00, 'C': 0.00, 'G': 0.00, 
+           'B': -11.11, 'E': -11.11, 'F': -11.11 }
+
+It is interesting to notice that the (strict) best choice recommendation consists in our set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see [BIS-2006]_), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice, we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate. 
+
+Ranking the potential decision alternatives
+...........................................
+
+To get an insight in the overall strict outranking situations, we use the ``RankingByChoosingDigraph`` constructor imported from the :ref:`weakOrders-label` module, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*:
     >>> from weakOrders import RankingByChoosingDigraph
-    >>> rbc = RankingByChoosingDigraph((~(-g)))
+    >>> rbc = RankingByChoosingDigraph(gcd)
     Threading ...
     Exiting computing threads
     >>> rbc.showRankingByChoosing()
@@ -1368,11 +1392,11 @@ To get an insight about the overall strict outranking situations, we use the ``R
    :width: 200 px
    :align: center
 
-In this **ranking-by-choosing** method, where we operate an epistemic fusion of iterated best and worst choices, alternative *D* is again ranked before alternative *G*. The overall ranking result stresses the important fact that the most expensive site *A*, and the cheapest site *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation. 
+In this **ranking-by-choosing** method, where we operate an epistemic fusion of iterated (strict) best and worst choices, compromise alternative *D* is indeed ranked before compromise alternative *G*. The overall ranking result stresses furthermore the important fact that the most expensive site *A*, and the cheapest site *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation. 
 
-The best choice depends hence on the very importance the CEO is attaching to each of the three objectives he is considering. In the actual setting here, where he considers all three objectives to be **equi-significant** (minimize costs = 3.0, maximize turnover = 3.0, and maximize working conditions = 3.0), site *D* represents actually the best compromise. However, if costs do not play much role, it would be perhaps better to decide to move to the most advantageous site *A*; or if, on the contrary, costs do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
+The actual best choice appears hence depending on the very importance the CEO is attaching to each of the three objectives he is considering. In the setting here, where he considers all three objectives to be **equally impoortant** (minimize costs = 3.0, maximize turnover = 3.0, and maximize working conditions = 3.0), site *D* represents actually the best compromise. However, if *Costs* do not play much role, it would be perhaps better to decide to move to the most advantageous site *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
 
-It might be worth, as an *exercise*, to modify this balance in the XMCDA data file one of the other way by raising or lowering the importance of minimizing the overall costs. What will become the best choice recommendation under both changes?
+It might be worth, as an *exercise*, to modify this balance in the XMCDA data file by lowering the importance of minimizing the overall costs; all criteria being  equi-significant (weight = 1.0) for instance. It may as well be opportune to rank the three objectives as follows:  minimize costs (weight = 9.0) > maximize turnover (weight = 3 x 2.0) > maximize working conditions (weight = 3 x 1.0). What will become the Rubis best choice recommendation under both changes?  
 
 Back to :ref:`Tutorial-label`
 
@@ -1404,7 +1428,11 @@ References
 
 .. [BIS-2013] R. Bisdorff (2013) "On Polarizing Outranking Relations with Large Performance Differences" *Journal of Multi-Criteria Decision Analysis* (Wiley) **20**:3-12 (downloadable preprint `PDF file <http://charles-sanders-peirce.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf>`_ 403.5 Kb).
 
-.. [BIS-2008] R. Bisdorff, P. Meyer and M. Roubens (2008) "RUBIS: a bipolar-valued outranking method for the choice problem". 4OR, *A Quarterly Journal of Operations Research* Springer-Verlag Volume 6 Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version `PDF file 271.5Kb <http://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf>`_) 
+.. [BIS-2008] R. Bisdorff, P. Meyer and M. Roubens (2008) "RUBIS: a bipolar-valued outranking method for the choice problem". 4OR, *A Quarterly Journal of Operations Research* Springer-Verlag Volume 6 Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version `PDF file 271.5Kb <http://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf>`_)
+
+.. [BIS-2006]  R. Bisdorff, M. Pirlot and M. Roubens (2006). Choices and kernels from bipolar valued digraphs. *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <http://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf>`_)
+
+
 
 Footnotes
 .........
