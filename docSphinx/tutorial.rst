@@ -1396,7 +1396,7 @@ In this **ranking-by-choosing** method, where we operate an epistemic fusion of 
 
 The actual best choice appears hence depending on the very importance the CEO is attaching to each of the three objectives he is considering. In the setting here, where he considers all three objectives to be **equally impoortant** (minimize costs = 3.0, maximize turnover = 3.0, and maximize working conditions = 3.0), site *D* represents actually the best compromise. However, if *Costs* do not play much role, it would be perhaps better to decide to move to the most advantageous site *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
 
-It might be worth, as an *exercise*, to modify this balance in the XMCDA data file by lowering the importance of minimizing the overall costs; all criteria being  equi-significant (weight = 1.0) for instance. It may as well be opportune to rank the three objectives as follows:  minimize costs (weight = 9.0) > maximize turnover (weight = 3 x 2.0) > maximize working conditions (weight = 3 x 1.0). What will become the Rubis best choice recommendation under both changes?  
+It might be worth, as an **exercise**, to modify this balance in the XMCDA data file by lowering the importance of minimizing the overall costs; all criteria being  equi-significant (weight = 1.0) for instance. It may as well be opportune to rank the three objectives as follows:  minimize costs (weight = 9.0) > maximize turnover (weight = 3 x 2.0) > maximize working conditions (weight = 3 x 1.0). What will become the Rubis best choice recommendation under both working hypotheses?  
 
 Back to :ref:`Tutorial-label`
 
