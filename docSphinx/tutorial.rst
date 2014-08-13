@@ -1140,12 +1140,12 @@ Computing a best choice recommendation
 Best office site choice for an SME?
 ...................................
 
-A SME, specialized in printing an copy services, has to move into new offices, and its CEO has gathered seven potential office sites:
+A SME, specialized in printing an copy services, has to move into new offices, and its CEO has gathered seven **potential office sites**:
 
   ====================== ==== ==================================================
    address                ID   Comment
   ====================== ==== ==================================================
-   Avenue de la liberté   A    High standing city centre
+   Avenue de la liberté   A    High standing city center
    Bonnevoie              B    Industrial environment
    Cessange               C    Residential suburb location
    Dommeldange            D    Industrial suburb environment
@@ -1154,33 +1154,37 @@ A SME, specialized in printing an copy services, has to move into new offices, a
    Avenue de la Gare      G    Main town shopping street
   ====================== ==== ==================================================
 
-Three objectives are guiding his choice:
-      1. minimize the yearly costs induced by the moving,
-      2. maximize the future turnover of the SME,
-      3. maximize the new working conditions.
+Three **decision objectives** are guiding the CEO's choice:
+      1. *minimize* the yearly costs induced by the moving,
+      2. *maximize* the future turnover of the SME,
+      3. *maximize* the new working conditions.
 
-The decision consequences to take into account for evaluating each potential office site with respect to each of the three objectives are the following:
+The decision consequences to take into account for evaluating the potential new office sites with respect to each of the three objectives are modeled by the following **family of criteria**:
 
    ==================== ==== ============ =========================================
     Objective            ID   Name         Comment
    ==================== ==== ============ =========================================
     Yearly costs         C    Costs        Annual rent, charges, and cleaning
+    \                    \    \            \
     Future turnover      St   Standing     Image and presentation
-    Future turnover      V    Visibility   Circulation of potential customers 
-    Future turnover      Pr   Proximity    Distance from town center
+    idem                 V    Visibility   Circulation of potential customers 
+    idem                 Pr   Proximity    Distance from town center
+    \                    \    \            \
     Working conditions   W    Space        Working space
-    Working conditions   Cf   Comfort      Quality of office equipments
-    Working conditions   P    Parking      Available parking facilities
+    idem                 Cf   Comfort      Quality of office equipment
+    idem                 P    Parking      Available parking facilities
    ==================== ==== ============ =========================================
 
 The evaluation of the seven potential sites on each criterion are gathered in the following **performance tableau**:
    ============= ======== ======== ======== ======== ======== ======== ======== ======== 
     Criterion     weight   A        B        C        D        E         F         G
    ============= ======== ======== ======== ======== ======== ======== ======== ========
-    Cost          3.0     35.0K€   17.8K€   6.7K€    14.1K€   34.8K€   18.6K€   12.0K€
-    Prox          1.0     100      20       80       70       40       0        60
-    Visi          1.0     60       80       70       50       60       0        100
+    Costs         3.0     35.0K€   17.8K€   6.7K€    14.1K€   34.8K€   18.6K€   12.0K€
+    \             \       \        \        \        \        \        \        \
     Stan          1.0     100      10       0        30       90       70       20
+    Visi          1.0     60       80       70       50       60       0        100 
+    Prox          1.0     100      20       80       70       40       0        60
+    \             \       \        \        \        \        \        \        \
     Wksp          1.0     75       30       0        55       100      0        50
     Wkcf          1.0     0        100      10       30       60       80       50
     Park          1.0     90       30       100      90       70       0        80
@@ -1188,7 +1192,7 @@ The evaluation of the seven potential sites on each criterion are gathered in th
 
 Except the costs, all other criteria admit for grading a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice that site *A* is the most expensive, but also 100% satisfying the *Proximity* as well as the  *Standing* criterion. Whereas the site *C* is the cheapest one; providing however no satisfaction at all on both the *Standing* and the *Working Space* criteria.
 
-All qualitative criteria, supporting their respective objective, are considered to be *equi-significant* (weights = 1.0). As a consequence, the three objectives are considered *equi-important* (total weight = 3.0 each).
+All qualitative criteria, supporting their respective objective, are considered to be *equi-significant* (weights = 1.0). As a consequence, the three objectives are considered *equally important* (total weight = 3.0 each).
 
 Concerning annual costs, we notice that the CEO is indifferent up to a performance difference of 1000€, and he actually prefers a site if there is at least a positive difference of 2500€. The grades observed on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10%, and he claims a significant preference when the satisfaction difference is at least of 20%.  Furthermore, a satisfaction difference of 80% represents for him a *considerably large* performance difference, triggering a *veto* situation the case given (see [BIS-2013]_). 
 
@@ -1235,7 +1239,7 @@ We thus recover all the input data. To measure the actual preference discriminat
 
 On the *Costs* criterion, 10% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold. On the qualitative *Comfort* criterion, we observe again 10% of insignificant performance differences. Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold. Furthermore, 10% of the performance differences are judged *considerably large*, ie 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all other criteria. 
  
-A colorful comparison of all the performances is shown by the **heatmap** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a quintile classification:
+A colorful comparison of all the performances is shown by the **heatmap** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles:
     >>> t.showHTMLPerformanceHeatmap(colorLevels=5)
 
 .. image:: officeChoiceHeatmap.png
@@ -1251,9 +1255,9 @@ To help now the CEO choosing the best site, we are going to compute pairwise out
      1. a **significant majority** of criteria concordantly supporting that site *x* is *at least as satisfactory as* site *y*, and
      2. **no considerable** counter-performance observed on any discordant criterion.
 
-The credibility of each pairwise outranking situation (see [BIS-2013]_), denoted r(*x* S *y*), is measured in a bipolar significance valuation [-100.00, 100.00], where **positive** terms r(*x* S *y*) > 0.0 indicate a **validated**, and **negative** terms r(*x* S *y*) < 0.0 indicate a **non-validated** outrankings; whereas the **median** value r(*x* S *y*) = 0.0 represents an **indeterminate** validation.   
+The credibility of each pairwise outranking situation (see [BIS-2013]_), denoted r(*x* S *y*), is measured in a bipolar significance valuation [-100.00, 100.00], where **positive** terms r(*x* S *y*) > 0.0 indicate a **validated**, and **negative** terms r(*x* S *y*) < 0.0 indicate a **non-validated** outrankings; whereas the **median** value r(*x* S *y*) = 0.0 represents an **indeterminate** situation.   
 
-For computing the corresponding bipolar valued outranking digraph from the given performance tableau *t*, we use the ``BipolarOutrankingDigrap`` contructor from the :ref:`outrankingDigraphs-label` module. The ``Digraph.showHTMLRelationTable`` method shows here the resulting bipolar-valued adjacency matrix in a system browser window:
+For computing such a bipolar valued outranking digraph from the given performance tableau *t*, we use the ``BipolarOutrankingDigraph`` constructor from the :ref:`outrankingDigraphs-label` module. The ``Digraph.showHTMLRelationTable`` method shows here the resulting bipolar-valued adjacency matrix in a system browser window:
     >>> from outrankingDigraphs import BipolarOutrankingDigraph
     >>> g = BipolarOutrankingDigraph(t)
     >>> g.showHTMLRelationTable()
@@ -1268,9 +1272,9 @@ We may notice that Alternative *D* is **positively outranking** all other potent
     >>> g.weakCondorcetWinners()
     ['A', 'C', 'D']
 
-We may get even more insight in the apparent outraking situations when looking at the Condorcet digraph:
+We may get even more insight in the apparent outranking situations when looking at the Condorcet digraph:
     >>> g.exportGraphViz('officeChoice')
-    *---- exporting a dot file dor GraphViz tools ---------*
+    *---- exporting a dot file for GraphViz tools ---------*
     Exporting to officeChoice.dot
     dot -Grankdir=BT -Tpng officeChoice.dot -o officeChoice.png
 
@@ -1287,7 +1291,7 @@ One may check that the outranking digraph *g* does not admit in fact a cyclic st
     0 circuits.
 
 Using the Rubis best choice on-line web solver
-......................................
+..............................................
 
 A best choice recommendation, following the Rubis outranking method (see [BIS-2008]_) is provided by the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg:
     >>> from outrankingDigraphs import RubisRestServer
