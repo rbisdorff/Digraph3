@@ -1159,7 +1159,7 @@ Three **decision objectives** are guiding the CEO's choice:
       2. *maximize* the future turnover of the SME,
       3. *maximize* the new working conditions.
 
-The decision consequences to take into account for evaluating the potential new office sites with respect to each of the three objectives are modeled by the following **family of criteria**:
+The decision consequences to take into account for evaluating the potential new office sites with respect to each of the three objectives are modelled by the following **family of criteria**:
 
    ==================== ==== ============ =========================================
     Objective            ID   Name         Comment
@@ -1167,12 +1167,12 @@ The decision consequences to take into account for evaluating the potential new 
     Yearly costs         C    Costs        Annual rent, charges, and cleaning
     \                    \    \            \
     Future turnover      St   Standing     Image and presentation
-    idem                 V    Visibility   Circulation of potential customers 
-    idem                 Pr   Proximity    Distance from town center
+    Future turnover      V    Visibility   Circulation of potential customers 
+    Future turnover      Pr   Proximity    Distance from town center
     \                    \    \            \
     Working conditions   W    Space        Working space
-    idem                 Cf   Comfort      Quality of office equipment
-    idem                 P    Parking      Available parking facilities
+    Working conditions   Cf   Comfort      Quality of office equipment
+    Working conditions   P    Parking      Available parking facilities
    ==================== ==== ============ =========================================
 
 The evaluation of the seven potential sites on each criterion are gathered in the following **performance tableau**:
