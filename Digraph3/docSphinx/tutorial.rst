@@ -1140,7 +1140,7 @@ Computing a best choice recommendation
 What new offices to choose ?
 ...................................
 
-A SME, specialized in printing an copy services, has to move into new offices, and its CEO has gathered seven **potential office sites**:
+A SME, specialized in printing and copy services, has to move into new offices, and its CEO has gathered seven **potential office sites**:
 
   ====================== ==== ==================================================
    address                ID   Comment
