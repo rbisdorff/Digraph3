@@ -1137,7 +1137,7 @@ Back to :ref:`Tutorial-label`
 Computing a best choice recommendation
 --------------------------------------
 
-Best office site choice for an SME?
+What new offices to choose ?
 ...................................
 
 A SME, specialized in printing an copy services, has to move into new offices, and its CEO has gathered seven **potential office sites**:
@@ -1290,10 +1290,98 @@ One may check that the outranking digraph *g* does not admit in fact a cyclic st
     *---- Chordless circuits ----*
     0 circuits.
 
-Using the Rubis best choice on-line web solver
+
+
+Computing the Rubis best choice recommendation
 ..............................................
 
-A best choice recommendation, following the Rubis outranking method (see [BIS-2008]_) is provided by the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg:
+Following the Rubis outranking method  potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking chices) of the chordless odd circuits augmented outranking digraph (see [BIS-2008]_). As we observe no circuits here, we may directly compute the pre-kernels of *g*:
+    >>> g.showPreKernels()
+    *--- Computing preKernels ---*
+    Dominant preKernels :
+    ['D']
+       independence :  100.0
+       dominance    :  11.111
+       absorbency   :  -100.0
+       covering     :  1.000
+    ['B', 'E', 'C']
+       independence :  0.00
+       dominance    :  11.111
+       absorbency   :  -100.0
+       covering     :  0.500
+    ['A', 'G']
+       independence :  0.00
+       dominance    :  55.556
+       absorbency   :  0.00
+       covering     :  0.700
+    Absorbent preKernels :
+    ['F', 'A']
+       independence :  0.00
+       dominance    :  0.00
+       absorbency   :  100.0
+       covering     :  0.700
+    *----- statistics -----
+    graph name:  rel_officeChoice.xml
+    number of solutions
+     dominant kernels :  3
+     absorbent kernels:  1
+    cardinality frequency distributions
+    cardinality     :  [0, 1, 2, 3, 4, 5, 6, 7]
+    dominant kernel :  [0, 1, 1, 1, 0, 0, 0, 0]
+    absorbent kernel:  [0, 0, 1, 0, 0, 0, 0, 0]
+    Execution time  : 0.00018 sec.
+    Results in sets: dompreKernels and abspreKernels.
+
+We notice three potential best choice recommendations: the Condorcet winner *D*, the triplet *B*, *C* and *E*, and finally the pair *A* and *G*. The Rubis best choice recommendation is given by the **most determined** pre-kernel; the one supported by the most significant criteria coalition. This result is shown with the following command:
+    >>> g.showRubisBestChoiceRecommendation()
+    ***********************
+    * --- Rubis best choice recommendation(s) (BCR) ---*
+      (in decreasing order of determinateness)   
+    Credibility domain:  {'min': -100.0, 'med': 0.0, 'max': 100.0}
+     === >> potential BCR 
+    * choice              : ['D']
+      +-irredundancy      : 100.00
+      independence        : 100.00
+      dominance           : 11.11
+      absorbency          : -100.00
+      covering (%)        : 100.00
+      determinateness (%) : 56,0
+      characteristic vector = { 'D': 11.11, 'A': -11.11, 'B': -11.11, 
+             'C': -11.11, 'E': -11.11, 'F': -11.11, 'G': -11.11 }
+     === >> potential BCR 
+    * choice              : ['B', 'E', 'C']
+      +-irredundancy      : 0.00
+      independence        : 0.00
+      dominance           : 11.11
+      absorbency          : -100.00
+      covering (%)        : 50.00
+      determinateness (%) : 50.0
+      - characteristic vector = { 'B': 0.00, 'E': 0.00, 'F': 0.00, 
+              'D': 0.00, 'A': 0.00, 'G': 0.00, 'C': 0.00 }
+     === >> potential BCR 
+    * choice              : ['A', 'G']
+      +-irredundancy      : 0.00
+      independence        : 0.00
+      dominance           : 55.56
+      absorbency          : 0.00
+      covering (%)        : 70.00
+      determinateness (%) : 50.0
+      - characteristic vector = { 'B': 0.00, 'E': 0.00, 'F': 0.00, 
+               'D': 0.00, 'A': 0.00, 'G': 0.00, 'C': 0.00 }
+     === >> potential worst choice 
+    * choice              : ['A', 'F']
+      +-irredundancy      : 0.00
+      independence        : 0.00
+      dominance           : 0.00
+      absorbency          : 100.00
+      covering (%)        : 30.00
+      determinateness (%) : 50.0
+      characteristic vector = { 'B': 0.00, 'E': 0.00, 'F': 0.00, 
+                 'D': 0.00, 'A': 0.00, 'G': 0.00, 'C': 0.00 }
+
+We notice that the most significantly supported best choice recommendation is indeed the Condorcet winner *D* with a majority of 56% of the criteria significance. Both other recommandation candidates, as well as the worst choice candidate are not positively validated as best choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a best and a worst choice recommendation and seams hence not actually comparable to its competitors.
+ 
+The same Rubis best choice recommendation, encoded in XMCDA 2.0, is as well provided by the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg:
     >>> from outrankingDigraphs import RubisRestServer
     >>> solver = RubisRestServer()
     >>> solver.ping()
@@ -1317,12 +1405,14 @@ and, in a system browser window, browse the `solution file`_.
 
    .. _solution file: _static/officeChoice.xml1BYyGVwV866hSNZoSolution.html
 
-Here, we find confirmed that alternative *D*, indeed, appears to be the most convincing best choice candidate. Yet, what about alternative *G*, the other good compromise best choice we have noticed from the performance heatmap shown above?
+Here, we find confirmed again that alternative *D*, indeed, appears to be the most significant best choice candidate. 
+
+Yet, what about alternative *G*, the other good compromise best choice we have noticed from the performance heatmap shown above?
 
 Computing a strict best choice recommendation
 .............................................
 
-When comparing the performances of alternatives *D* and *G*, we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D* ( r(*G* outranks *D*) = 100%). 
+When comparing the performances of alternatives *D* and *G* on a pairwise perspective, we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D* ( r(*G* outranks *D*) = 100%). 
     >>> g.showPairwiseComparison('G','D')
     *------------  pairwise comparison ----*
     Comparing actions : (G, D)
@@ -1384,9 +1474,9 @@ To model these *strict outranking* situations, we may compute the **codual** - t
          {'A': 0.00, 'B': 0.00, 'C': 0.00, 'D': 0.00, 
           'E': 0.00, 'F': 0.00, 'G': 0.00, }
 
-It is interesting to notice that the (strict) **best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see [BIS-2006]_), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice, we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate. 
+It is interesting to notice that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see [BIS-2006]_), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice, we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate. 
 
-We may also notice that both alternatives *A* and *F* are reported as certainly outranked, hence a **worst choice recommendation**. This confirms the global incomparability status of alternative *A* and the potentially weak performance of the cheapest alternative *C*.
+We may also notice that both alternatives *A* and *F* are reported as certainly outranked, hence a **worst choice recommendation**. This confirms the global incomparability status of alternative *A*.
 
 Ranking by choosing and rejecting the potential decision alternatives
 .....................................................................

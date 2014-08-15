@@ -1287,8 +1287,8 @@ linearBallot = {
 </div>
 <div class="section" id="computing-a-best-choice-recommendation">
 <span id="rubis-tutorial-label"></span><h2>Computing a best choice recommendation<a class="headerlink" href="#computing-a-best-choice-recommendation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="best-office-site-choice-for-an-sme">
-<h3>Best office site choice for an SME?<a class="headerlink" href="#best-office-site-choice-for-an-sme" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="what-new-offices-to-choose">
+<h3>What new offices to choose ?<a class="headerlink" href="#what-new-offices-to-choose" title="Permalink to this headline">¶</a></h3>
 <p>A SME, specialized in printing an copy services, has to move into new offices, and its CEO has gathered seven <strong>potential office sites</strong>:</p>
 <blockquote>
 <div><table border="1" class="docutils">
@@ -1642,10 +1642,101 @@ linearBallot = {
 </dd>
 </dl>
 </div>
-<div class="section" id="using-the-rubis-best-choice-on-line-web-solver">
-<h3>Using the Rubis best choice on-line web solver<a class="headerlink" href="#using-the-rubis-best-choice-on-line-web-solver" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="computing-the-rubis-best-choice-recommendation">
+<h3>Computing the Rubis best choice recommendation<a class="headerlink" href="#computing-the-rubis-best-choice-recommendation" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>A best choice recommendation, following the Rubis outranking method (see <a class="reference internal" href="#bis-2008" id="id16">[BIS-2008]</a>) is provided by the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg:</dt>
+<dt>Following the Rubis outranking method  potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking chices) of the chordless odd circuits augmented outranking digraph (see <a class="reference internal" href="#bis-2008" id="id16">[BIS-2008]</a>). As we observe no circuits here, we may directly compute the pre-kernels of <em>g</em>:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPreKernels</span><span class="p">()</span>
+<span class="go">*--- Computing preKernels ---*</span>
+<span class="go">Dominant preKernels :</span>
+<span class="go">[&#39;D&#39;]</span>
+<span class="go">   independence :  100.0</span>
+<span class="go">   dominance    :  11.111</span>
+<span class="go">   absorbency   :  -100.0</span>
+<span class="go">   covering     :  1.000</span>
+<span class="go">[&#39;B&#39;, &#39;E&#39;, &#39;C&#39;]</span>
+<span class="go">   independence :  0.00</span>
+<span class="go">   dominance    :  11.111</span>
+<span class="go">   absorbency   :  -100.0</span>
+<span class="go">   covering     :  0.500</span>
+<span class="go">[&#39;A&#39;, &#39;G&#39;]</span>
+<span class="go">   independence :  0.00</span>
+<span class="go">   dominance    :  55.556</span>
+<span class="go">   absorbency   :  0.00</span>
+<span class="go">   covering     :  0.700</span>
+<span class="go">Absorbent preKernels :</span>
+<span class="go">[&#39;F&#39;, &#39;A&#39;]</span>
+<span class="go">   independence :  0.00</span>
+<span class="go">   dominance    :  0.00</span>
+<span class="go">   absorbency   :  100.0</span>
+<span class="go">   covering     :  0.700</span>
+<span class="go">*----- statistics -----</span>
+<span class="go">graph name:  rel_officeChoice.xml</span>
+<span class="go">number of solutions</span>
+<span class="go"> dominant kernels :  3</span>
+<span class="go"> absorbent kernels:  1</span>
+<span class="go">cardinality frequency distributions</span>
+<span class="go">cardinality     :  [0, 1, 2, 3, 4, 5, 6, 7]</span>
+<span class="go">dominant kernel :  [0, 1, 1, 1, 0, 0, 0, 0]</span>
+<span class="go">absorbent kernel:  [0, 0, 1, 0, 0, 0, 0, 0]</span>
+<span class="go">Execution time  : 0.00018 sec.</span>
+<span class="go">Results in sets: dompreKernels and abspreKernels.</span>
+</pre></div>
+</div>
+</dd>
+<dt>We notice three potential best choice recommendations: the Condorcet winner <em>D</em>, the triplet <em>B</em>, <em>C</em> and <em>E</em>, and finally the pair <em>A</em> and <em>G</em>. The Rubis best choice recommendation is given by the <strong>most determined</strong> pre-kernel; the one supported by the most significant criteria coalition. This result is shown with the following command:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRubisBestChoiceRecommendation</span><span class="p">()</span>
+<span class="go">***********************</span>
+<span class="go">* --- Rubis best choice recommendation(s) (BCR) ---*</span>
+<span class="go">  (in decreasing order of determinateness)</span>
+<span class="go">Credibility domain:  {&#39;min&#39;: -100.0, &#39;med&#39;: 0.0, &#39;max&#39;: 100.0}</span>
+<span class="go"> === &gt;&gt; potential BCR</span>
+<span class="go">* choice              : [&#39;D&#39;]</span>
+<span class="go">  +-irredundancy      : 100.00</span>
+<span class="go">  independence        : 100.00</span>
+<span class="go">  dominance           : 11.11</span>
+<span class="go">  absorbency          : -100.00</span>
+<span class="go">  covering (%)        : 100.00</span>
+<span class="go">  determinateness (%) : 56,0</span>
+<span class="go">  characteristic vector = { &#39;D&#39;: 11.11, &#39;A&#39;: -11.11, &#39;B&#39;: -11.11,</span>
+<span class="go">         &#39;C&#39;: -11.11, &#39;E&#39;: -11.11, &#39;F&#39;: -11.11, &#39;G&#39;: -11.11 }</span>
+<span class="go"> === &gt;&gt; potential BCR</span>
+<span class="go">* choice              : [&#39;B&#39;, &#39;E&#39;, &#39;C&#39;]</span>
+<span class="go">  +-irredundancy      : 0.00</span>
+<span class="go">  independence        : 0.00</span>
+<span class="go">  dominance           : 11.11</span>
+<span class="go">  absorbency          : -100.00</span>
+<span class="go">  covering (%)        : 50.00</span>
+<span class="go">  determinateness (%) : 50.0</span>
+<span class="go">  - characteristic vector = { &#39;B&#39;: 0.00, &#39;E&#39;: 0.00, &#39;F&#39;: 0.00,</span>
+<span class="go">          &#39;D&#39;: 0.00, &#39;A&#39;: 0.00, &#39;G&#39;: 0.00, &#39;C&#39;: 0.00 }</span>
+<span class="go"> === &gt;&gt; potential BCR</span>
+<span class="go">* choice              : [&#39;A&#39;, &#39;G&#39;]</span>
+<span class="go">  +-irredundancy      : 0.00</span>
+<span class="go">  independence        : 0.00</span>
+<span class="go">  dominance           : 55.56</span>
+<span class="go">  absorbency          : 0.00</span>
+<span class="go">  covering (%)        : 70.00</span>
+<span class="go">  determinateness (%) : 50.0</span>
+<span class="go">  - characteristic vector = { &#39;B&#39;: 0.00, &#39;E&#39;: 0.00, &#39;F&#39;: 0.00,</span>
+<span class="go">           &#39;D&#39;: 0.00, &#39;A&#39;: 0.00, &#39;G&#39;: 0.00, &#39;C&#39;: 0.00 }</span>
+<span class="go"> === &gt;&gt; potential worst choice</span>
+<span class="go">* choice              : [&#39;A&#39;, &#39;F&#39;]</span>
+<span class="go">  +-irredundancy      : 0.00</span>
+<span class="go">  independence        : 0.00</span>
+<span class="go">  dominance           : 0.00</span>
+<span class="go">  absorbency          : 100.00</span>
+<span class="go">  covering (%)        : 30.00</span>
+<span class="go">  determinateness (%) : 50.0</span>
+<span class="go">  characteristic vector = { &#39;B&#39;: 0.00, &#39;E&#39;: 0.00, &#39;F&#39;: 0.00,</span>
+<span class="go">             &#39;D&#39;: 0.00, &#39;A&#39;: 0.00, &#39;G&#39;: 0.00, &#39;C&#39;: 0.00 }</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>We notice that the most significantly supported best choice recommendation is indeed the Condorcet winner <em>D</em> with a majority of 56% of the criteria significance. Both other recommandation candidates, as well as the worst choice candidate are not positively validated as best choices. They may or may not be considered so. Alternative <em>A</em>, with extreme contradictory performances, appears both, in a best and a worst choice recommendation and seams hence not actually comparable to its competitors.</p>
+<dl class="docutils">
+<dt>The same Rubis best choice recommendation, encoded in XMCDA 2.0, is as well provided by the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RubisRestServer</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="n">RubisRestServer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
@@ -1675,12 +1766,13 @@ linearBallot = {
 <p>and, in a system browser window, browse the <a class="reference external" href="_static/officeChoice.xml1BYyGVwV866hSNZoSolution.html">solution file</a>.</p>
 <blockquote>
 <div></div></blockquote>
-<p>Here, we find confirmed that alternative <em>D</em>, indeed, appears to be the most convincing best choice candidate. Yet, what about alternative <em>G</em>, the other good compromise best choice we have noticed from the performance heatmap shown above?</p>
+<p>Here, we find confirmed again that alternative <em>D</em>, indeed, appears to be the most significant best choice candidate.</p>
+<p>Yet, what about alternative <em>G</em>, the other good compromise best choice we have noticed from the performance heatmap shown above?</p>
 </div>
 <div class="section" id="computing-a-strict-best-choice-recommendation">
 <h3>Computing a strict best choice recommendation<a class="headerlink" href="#computing-a-strict-best-choice-recommendation" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>When comparing the performances of alternatives <em>D</em> and <em>G</em>, we notice that, with the given preference discrimination thresholds, alternative <em>G</em> is actually <strong>certainly</strong> <em>at least as good as</em> alternative <em>D</em> ( r(<em>G</em> outranks <em>D</em>) = 100%).</dt>
+<dt>When comparing the performances of alternatives <em>D</em> and <em>G</em> on a pairwise perspective, we notice that, with the given preference discrimination thresholds, alternative <em>G</em> is actually <strong>certainly</strong> <em>at least as good as</em> alternative <em>D</em> ( r(<em>G</em> outranks <em>D</em>) = 100%).</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s">&#39;G&#39;</span><span class="p">,</span><span class="s">&#39;D&#39;</span><span class="p">)</span>
 <span class="go">*------------  pairwise comparison ----*</span>
 <span class="go">Comparing actions : (G, D)</span>
@@ -1748,8 +1840,8 @@ linearBallot = {
 </div>
 </dd>
 </dl>
-<p>It is interesting to notice that the (strict) <strong>best choice recommendation</strong> consists in the set of weak Condorcet winners: &#8216;A&#8217;, &#8216;C&#8217; and &#8216;D&#8217;. In the corresponding characteristic vector (see <a class="reference internal" href="#bis-2006" id="id18">[BIS-2006]</a>), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice, we find confirmed that alternative <em>D</em> is the only positively validated one, whereas both extreme alternatives - <em>A</em> (the most expensive) and <em>C</em> (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides <em>D</em>. Notice furthermore that compromise alternative <em>G</em>, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate.</p>
-<p>We may also notice that both alternatives <em>A</em> and <em>F</em> are reported as certainly outranked, hence a <strong>worst choice recommendation</strong>. This confirms the global incomparability status of alternative <em>A</em> and the potentially weak performance of the cheapest alternative <em>C</em>.</p>
+<p>It is interesting to notice that the <strong>strict best choice recommendation</strong> consists in the set of weak Condorcet winners: &#8216;A&#8217;, &#8216;C&#8217; and &#8216;D&#8217;. In the corresponding characteristic vector (see <a class="reference internal" href="#bis-2006" id="id18">[BIS-2006]</a>), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice, we find confirmed that alternative <em>D</em> is the only positively validated one, whereas both extreme alternatives - <em>A</em> (the most expensive) and <em>C</em> (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides <em>D</em>. Notice furthermore that compromise alternative <em>G</em>, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate.</p>
+<p>We may also notice that both alternatives <em>A</em> and <em>F</em> are reported as certainly outranked, hence a <strong>worst choice recommendation</strong>. This confirms the global incomparability status of alternative <em>A</em>.</p>
 </div>
 <div class="section" id="ranking-by-choosing-and-rejecting-the-potential-decision-alternatives">
 <h3>Ranking by choosing and rejecting the potential decision alternatives<a class="headerlink" href="#ranking-by-choosing-and-rejecting-the-potential-decision-alternatives" title="Permalink to this headline">¶</a></h3>
@@ -1920,10 +2012,10 @@ linearBallot = {
 </ul>
 </li>
 <li><a class="reference internal" href="#computing-a-best-choice-recommendation">Computing a best choice recommendation</a><ul>
-<li><a class="reference internal" href="#best-office-site-choice-for-an-sme">Best office site choice for an SME?</a></li>
+<li><a class="reference internal" href="#what-new-offices-to-choose">What new offices to choose ?</a></li>
 <li><a class="reference internal" href="#inspecting-the-performance-tableau">Inspecting the Performance Tableau</a></li>
 <li><a class="reference internal" href="#inspecting-the-outranking-digraph">Inspecting the outranking digraph</a></li>
-<li><a class="reference internal" href="#using-the-rubis-best-choice-on-line-web-solver">Using the Rubis best choice on-line web solver</a></li>
+<li><a class="reference internal" href="#computing-the-rubis-best-choice-recommendation">Computing the Rubis best choice recommendation</a></li>
 <li><a class="reference internal" href="#computing-a-strict-best-choice-recommendation">Computing a strict best choice recommendation</a></li>
 <li><a class="reference internal" href="#ranking-by-choosing-and-rejecting-the-potential-decision-alternatives">Ranking by choosing and rejecting the potential decision alternatives</a></li>
 </ul>
