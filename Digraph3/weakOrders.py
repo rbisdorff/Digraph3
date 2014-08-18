@@ -347,6 +347,8 @@ class RankingByChoosingDigraph(WeakOrder):
                     from pickle import dumps, loads
                     from os import chdir
                     chdir(self.workingDirectory)
+                    from sys import setrecursionlimit
+                    setrecursionlimit(2**20)
                     if Debug:
                         print("Starting working in %s on %s" % (self.workingDirectory, self.name))
                     #threadLock.acquire()
@@ -402,9 +404,11 @@ class RankingByChoosingDigraph(WeakOrder):
             
             
         else:
+            from sys import setrecursionlimit
+            setrecursionlimit(2**20)
             digraph.computeRankingByBestChoosing(CppAgrum=CppAgrum,CoDual=CoDual,Debug=Debug)
             digraph.computeRankingByLastChoosing(CppAgrum=CppAgrum,CoDual=CoDual,Debug=Debug)
-            
+            setrecursionlimit(1000)
         relBest = digraph.computeRankingByBestChoosingRelation()
         if Debug:
             digraph.showRankingByBestChoosing()
@@ -1172,7 +1176,7 @@ def _jobTask(categID):
         if nc <= maxCatContent:
             currActions = list(catContent)
             try:
-                catCRbc = digraph.computeRankingByChoosing()
+                catCRbc = digraph.computeRankingByChoosing(CoDual=True)
             except:
                 print('==>>> Failed RBC: Principal ranking')
 ##              rp = RankedPairsOrder(digraph)
@@ -1395,7 +1399,7 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
                     for x in currActions:
                         for y in currActions:
                             qs.relation[x][y] = qs.relationOrig[x][y]
-                    catCRbc = qs.computeRankingByChoosing(currActions)
+                    catCRbc = qs.computeRankingByChoosing(currActions,CoDual=True)
                     if Debug:
                         print(c,catCRbc)
                     catRbc[c] = deepcopy(catCRbc['result'])
@@ -1420,16 +1424,16 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
         except:
             pass
         self.relation = deepcopy(qsRelation)
-        self._constructRelation()
+        self._constructRelation(Debug=Debug)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def _constructRelation(self):
+    def _constructRelation(self,Debug=False):
         """
         Instantiates the weak order by taking the codual of the
         preoder obtained from the actions categories intervals !
         """
-        preOrdering = self.computeWeakOrder(Debug=False)
+        preOrdering = self.computeWeakOrder(Debug=Debug)
         relation = self.computePreorderRelation(preOrdering)
         actionsList = [x for x in self.actions]
         Max = self.valuationdomain['max']
@@ -1552,20 +1556,20 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
             return None
         elif n == 1:
             if Comments:
-                print('%s in %s - %s with credibility: %.2f' % (action,\
+                print('%s in %s - %s with credibility: %.2f = min(%.2f,%.2f)' % (action,\
                                      self.categories[keys[0]]['lowLimit'],\
                                      self.categories[keys[0]]['highLimit'],\
-                                     credibility) )
+                                     credibility,lowLimit,notHighLimit) )
             return action,\
                     keys[0],\
                     keys[0],\
                     credibility
         else:
             if Comments:
-                print('%s in %s - %s with credibility: %.2f' % (action,\
+                print('%s in %s - %s with credibility: %.2f = min(%.2f,%.2f)' % (action,\
                                      self.categories[keys[0]]['lowLimit'],\
                                      self.categories[keys[-1]]['highLimit'],\
-                                     credibility) )
+                                     credibility,lowLimit,notHighLimit) )
             return action,\
                     keys[0],\
                     keys[-1],\

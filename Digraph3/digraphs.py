@@ -9866,11 +9866,11 @@ class CoceDigraph(Digraph):
         qualmaj0 = gcd.valuationdomain['med']
         if Comments:
             print('Chorless odd circuits elimination')
-            i = 0
+        i = 0
         qualmaj = gcd.minimalValuationLevelForCircuitsElimination(Debug=Debug,Comments=Comments)
         while qualmaj > qualmaj0:
+            i += 1
             if Comments:
-                i += 1
                 print('--> Iteration %d' % (i))
                 t0 = time()
             if qualmaj < gcd.valuationdomain['max']:
