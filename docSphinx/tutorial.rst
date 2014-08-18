@@ -1478,8 +1478,8 @@ It is interesting to notice that the **strict best choice recommendation** consi
 
 We may also notice that both alternatives *A* and *F* are reported as certainly outranked, hence a **worst choice recommendation**. This confirms the global incomparability status of alternative *A*.
 
-Ranking by choosing and rejecting the potential decision alternatives
-.....................................................................
+Weakly ordering by choosing and rejecting the potential decision alternatives
+.............................................................................
 
 To get a more complete insight in the overall strict outranking situations, we may use the ``RankingByChoosingDigraph`` constructor imported from the :ref:`weakOrders-label` module, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*:
     >>> from weakOrders import RankingByChoosingDigraph
@@ -1505,7 +1505,7 @@ To get a more complete insight in the overall strict outranking situations, we m
    :width: 200 px
    :align: center
 
-In this **ranking-by-choosing** method, where we operate the epistemic fusion of iterated (strict) best and worst choices, compromise alternative *D* is indeed ranked before compromise alternative *G*. If the computing node supports multiple processor cores, best and worst choosing iterations are run in parallel. The overall ranking result shows again the important fact that the most expensive site *A*, and the cheapest site *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation. 
+In this **ranking-by-choosing** method, where we operate the epistemic fusion of iterated (strict) best and worst choices, compromise alternative *D* is indeed ranked before compromise alternative *G*. If the computing node supports multiple processor cores, best and worst choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive site *A*, and the cheapest site *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation. 
 
 The best choice recommendation appears hence depending on the very importance the CEO is attaching to each of the three objectives he is considering. In the setting here, where he considers all three objectives to be **equally important** (minimize costs = 3.0, maximize turnover = 3.0, and maximize working conditions = 3.0), site *D* represents actually the best compromise. However, if *Costs* do not play much role, it would be perhaps better to decide to move to the most advantageous site *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
 
