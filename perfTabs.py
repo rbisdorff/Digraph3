@@ -1189,8 +1189,11 @@ class PerformanceTableau(object):
         html += '<i>Color legend: </i>\n'
         html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
         html += '<tr bgcolor=%s><th>quantile</th>' % (columnHeaderColor)
-        for col in range(nc):
-            html += '<td bgcolor=%s>%s</td>' % (colorPalette[col][1],str(colorPalette[col][0]))
+        #html += '<td bgcolor=%s>&nbsp;[%.2f - %.2f[&nbsp;</td>' % (colorPalette[0][1],0.0,colorPalette[0][0])
+        for col in range(0,nc):
+            html += '<td bgcolor=%s>&nbsp;%.2f&#037;</td>' % (colorPalette[col][1],
+                                                                   #colorPalette[col-1][0],
+                                                                   colorPalette[col][0])
         html += '</tr>\n'
         html += '</table>\n'
         
@@ -5254,7 +5257,7 @@ if __name__ == "__main__":
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
     t = RandomCBPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=200,
+                                   numberOfActions=100,
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
                                    Debug=False)
