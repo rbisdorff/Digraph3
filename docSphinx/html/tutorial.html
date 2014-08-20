@@ -1645,7 +1645,7 @@ linearBallot = {
 <div class="section" id="computing-the-rubis-best-choice-recommendation">
 <h3>Computing the Rubis best choice recommendation<a class="headerlink" href="#computing-the-rubis-best-choice-recommendation" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>Following the Rubis outranking method  potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking chices) of the chordless odd circuits augmented outranking digraph (see <a class="reference internal" href="#bis-2008" id="id16">[BIS-2008]</a>). As we observe no circuits here, we may directly compute the pre-kernels of <em>g</em>:</dt>
+<dt>Following the Rubis outranking method (see <a class="reference internal" href="#bis-2008" id="id16">[BIS-2008]</a>), potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the pre-kernels of <em>g</em>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPreKernels</span><span class="p">()</span>
 <span class="go">*--- Computing preKernels ---*</span>
 <span class="go">Dominant preKernels :</span>
@@ -1772,7 +1772,7 @@ linearBallot = {
 <div class="section" id="computing-a-strict-best-choice-recommendation">
 <h3>Computing a strict best choice recommendation<a class="headerlink" href="#computing-a-strict-best-choice-recommendation" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>When comparing the performances of alternatives <em>D</em> and <em>G</em> on a pairwise perspective, we notice that, with the given preference discrimination thresholds, alternative <em>G</em> is actually <strong>certainly</strong> <em>at least as good as</em> alternative <em>D</em> ( r(<em>G</em> outranks <em>D</em>) = 100%).</dt>
+<dt>When comparing the performances of alternatives <em>D</em> and <em>G</em> on a pairwise perspective, we notice that, with the given preference discrimination thresholds, alternative <em>G</em> is actually <strong>certainly</strong> <em>at least as good as</em> alternative <em>D</em> ( r(<em>G</em> outranks <em>D</em>) = 100.0).</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s">&#39;G&#39;</span><span class="p">,</span><span class="s">&#39;D&#39;</span><span class="p">)</span>
 <span class="go">*------------  pairwise comparison ----*</span>
 <span class="go">Comparing actions : (G, D)</span>
@@ -1808,7 +1808,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>To model these <em>strict outranking</em> situations, we may compute the <strong>codual</strong> - the converse (~) of the dual (-)- of the outranking digraph instance <em>g</em> (see <a class="reference internal" href="#bis-2013" id="id17">[BIS-2013]</a>). On this digraph, the Rubis best choice recommendation may be computed as follows:</dt>
+<dt>To model these <em>strict outranking</em> situations, we may compute the <strong>codual</strong>, the converse (~) of the dual (-), of the outranking digraph instance <em>g</em> (see <a class="reference internal" href="#bis-2013" id="id17">[BIS-2013]</a>). On this digraph, the Rubis best choice recommendation may be computed as follows:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>          <span class="c">## g = BipolarOutrankingDigraph(t)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showRubisBestChoiceRecommendation</span><span class="p">()</span>
 <span class="go">* --- Rubis best choice recommendation(s) ---*</span>

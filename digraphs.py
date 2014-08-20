@@ -6071,6 +6071,94 @@ class Digraph(object):
         ##     self.gamma = self.gammaSets()
         ##     self.notGamma = self.notGammaSets()
 
+    def computeGoodChoiceVector(self,ker,Comments=False):
+        """
+        | Characteristic values for potentially good choices.
+        | [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]
+        """
+        import copy
+        from operator import itemgetter
+        temp = copy.deepcopy(self)
+        Max = Decimal(str(temp.valuationdomain['max']))
+        Min = Decimal(str(temp.valuationdomain['min']))
+        Med = Decimal(str(temp.valuationdomain['med']))
+        actions = [x for x in temp.actions]
+        relation = temp.relation
+##        domChoicesSort = []
+##        if 'dompreKernels' not in dir(temp):
+##            if Comments:
+##                temp.showPreKernels()
+##            else:
+##                temp.computePreKernels()
+##        for ker in temp.dompreKernels:
+        if Comments:
+            print('--> kernel:', ker)
+        choice = [y for y in ker]
+        #choice.sort()
+        degi = temp.intstab(ker)
+        dega = temp.absorb(ker)
+        degd = temp.domin(ker)
+        degirred = temp.domirredval(ker,relation)
+        degmd = min(degi,degd)
+        cover = temp.averageCoveringIndex(ker)
+        relation_k = temp.domkernelrestrict(choice)
+        n = len(actions)
+        #vec1_a = array.array('f', [Max] * n)
+        vec1_a = [Max for i in range(n)]
+        #vec0_a = array.array('f', [Min] * n)
+        vec0_a = [Min for i in range(n)]
+        mat = [temp.readdomvector(x,relation_k) for x in actions]
+        veclowa = vec0_a
+        vechigha = vec1_a
+        if Comments:
+            print('initial veclowa',veclowa)
+            print('initial vechigha', vechigha)
+        it = 1
+        while veclowa != vechigha and it < 2*n*n:
+            veclowb = temp.matmult2(mat,veclowa)
+            vechighb = temp.matmult2(mat,vechigha)
+            veclow = temp.contra(vechighb)
+            vechigh = temp.contra(veclowb)
+            if veclow == veclowa and vechigh == vechigha : break
+            veclowa = veclow
+            vechigha = vechigh
+            if Comments:
+                print(it, 'th veclowa  :',veclowa)
+                print(it, 'th vechigha :',vechigha)
+            it += 1
+        if Comments:
+            print('final veclowa  :', veclowa)
+            print('final vechigha :', vechigha)
+            print('#iterations    :', it)
+        domvec = temp.sharpvec(veclowa,vechigha)
+        determ = temp.determinateness(domvec)
+        goodChoiceVector = []
+        for i in range(n):
+            goodChoiceVector.append((domvec[i],str(actions[i])))
+        goodChoiceVector.sort(reverse=True)
+        if Comments:
+            print(goodChoiceVector)
+        return goodChoiceVector        
+                                
+##        domChoicesSort.append([-determ,degirred,degi,degd,dega,str(choice),domvec,cover])
+##        domChoicesSort.sort()
+        ## domChoicesSort.sort(reverse=True, key=itemgetter(7))
+        ## for ch in domChoicesSort:
+        ##     ch[5] = eval(ch[5])
+        ## self.goodChoices = domChoicesSort
+        ## return domChoicesSort
+##        goodChoice = {}
+####        for ch in domChoicesSort:
+##        goodChoiceDic[frozenset(choice)] = {'determ':-ch[0],
+##                                    'degirred':ch[1],
+##                                    'degi':ch[2],
+##                                    'degd':ch[3],
+##                                    'dega':ch[4],
+##                                    'cover':ch[7],
+##                                    'bpv':ch[6]}
+##
+##        self.goodChoices = domChoicesSort
+##        return goodChoicesDic
 
 
     def computeGoodChoices(self,Comments=False):
@@ -10555,13 +10643,18 @@ if __name__ == "__main__":
         #g.showAll()
         from outrankingDigraphs import BipolarOutrankingDigraph
         from perfTabs import RandomCBPerformanceTableau
-        t = RandomCBPerformanceTableau(numberOfActions=15)
-        t.saveXMCDA2('test')
+##        t = RandomCBPerformanceTableau(numberOfActions=15)
+##        t.saveXMCDA2('test')
+        t = XMCDA2PerformanceTableau('testNoDomPreKernel')
         g = BipolarOutrankingDigraph(t)
-        g.showPreKernels()
-        g.computeRubisChoice()
-        print(g.dompreKernels)
-        print(g.abspreKernels)
+        gcd =  (-g)
+        gcd.computeChordlessCircuits(Odd=True,Comments=True)
+        gcd.showPreKernels()
+        gcd.computeRubisChoice()
+        print(gcd.dompreKernels)
+        print(gcd.abspreKernels)
+        for ker in gcd.dompreKernels:
+            print(gcd.computeGoodChoiceVector(ker,Comments=False))
         
         
         
