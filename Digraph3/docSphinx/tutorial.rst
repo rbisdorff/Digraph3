@@ -1295,7 +1295,7 @@ One may check that the outranking digraph *g* does not admit in fact a cyclic st
 Computing the Rubis best choice recommendation
 ..............................................
 
-Following the Rubis outranking method  potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking chices) of the chordless odd circuits augmented outranking digraph (see [BIS-2008]_). As we observe no circuits here, we may directly compute the pre-kernels of *g*:
+Following the Rubis outranking method (see [BIS-2008]_), potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the pre-kernels of *g*:
     >>> g.showPreKernels()
     *--- Computing preKernels ---*
     Dominant preKernels :
@@ -1412,7 +1412,7 @@ Yet, what about alternative *G*, the other good compromise best choice we have n
 Computing a strict best choice recommendation
 .............................................
 
-When comparing the performances of alternatives *D* and *G* on a pairwise perspective, we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D* ( r(*G* outranks *D*) = 100%). 
+When comparing the performances of alternatives *D* and *G* on a pairwise perspective, we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D* ( r(*G* outranks *D*) = 100.0). 
     >>> g.showPairwiseComparison('G','D')
     *------------  pairwise comparison ----*
     Comparing actions : (G, D)
@@ -1445,7 +1445,7 @@ However, we must as well notice that the cheapest alternative *C* is in fact **s
     Valuation in range: -9.00 to +9.00; global concordance: +1.00/-1.00
 
 
-To model these *strict outranking* situations, we may compute the **codual** - the converse (~) of the dual (-)- of the outranking digraph instance *g* (see [BIS-2013]_). On this digraph, the Rubis best choice recommendation may be computed as follows: 
+To model these *strict outranking* situations, we may compute the **codual**, the converse (~) of the dual (-), of the outranking digraph instance *g* (see [BIS-2013]_). On this digraph, the Rubis best choice recommendation may be computed as follows: 
     >>> gcd = ~(-g)          ## g = BipolarOutrankingDigraph(t)
     >>> gcd.showRubisBestChoiceRecommendation()
     * --- Rubis best choice recommendation(s) ---*
