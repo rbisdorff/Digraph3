@@ -411,9 +411,10 @@ class RandomGraph(Graph):
         from random import random
         self.name = 'randomGraph'
         self.order = order
+        nd = len(str(order))
         vertices = dict()
         for i in range(order):
-            vertexKey = 'v%s' % (str(i+1))
+            vertexKey = ('v%%0%dd' % nd) % (i+1)
             vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
         self.valuationDomain = {'min':-1,'med':0,'max':1}
