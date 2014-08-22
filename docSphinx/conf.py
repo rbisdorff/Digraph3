@@ -99,11 +99,13 @@ autodoc_default_flags = 'members', 'undoc-members', 'inherited-members','show-in
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 html_theme = 'default'
+#html_theme = 'sphinxdoc'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #html_theme_options = {}
+html_theme_options = {"stickysidebar": "true"}
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []
@@ -171,7 +173,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Digraphsdoc'
+htmlhelp_basename = 'Digraph3doc'
 
 
 # -- Options for LaTeX output --------------------------------------------------

@@ -6,6 +6,7 @@ Tutorial of the Digraph3 resources
 
 .. _Tutorial-label:
 
+
 Content
 -------
 
@@ -21,6 +22,8 @@ Content
 Working with the :code:`digraphs` module
 ----------------------------------------
 
+.. highlight:: python
+	:linenothreshold: 5
 
 Downloading of the Digraph3 resources
 .....................................
@@ -44,8 +47,8 @@ The basic idea of these Python3 modules is to make easy python interactive sessi
 
 The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
 
-Starting an interactive python3 session
-.......................................
+Starting a python3 session
+..........................
 
 You may start an interactive Python3 session in the :code:`Digraph3` directory for exploring the classes and methods provided by the :code:`digraphs` module. To do so, enter the ``python3`` commands following the session prompts marked with >>>. The lines without the prompt are output from the Python interpreter::
 
@@ -58,8 +61,8 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
 	>>> dg.save('tutorialdigraph')
 	>>> ...
 
-Structure of a ``Digraph`` object
-.................................
+``Digraph`` object structure
+............................
 
 All :code:`Digraph` object *dg* contains at least the following sub-objects: 
 
@@ -69,8 +72,8 @@ All :code:`Digraph` object *dg* contains at least the following sub-objects:
 4. its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
 5. its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor. See the reference manual of the :ref:`digraphs-label`.
 
-Permanent storage of digraphs
-.............................
+Permanent storage
+.................
 
 The :code:`dg.save('tutorialDigraph')` command stores the digraph *dg* in a file named :code:`tutorialDigraph.py` with the following content::
 
@@ -148,8 +151,8 @@ Some simple methods are easily applicable to this instantiated Digraph object *d
 	agglomeration coefficient : 33.33
 	>>> ...
 
-Special classes of digraphs
-...........................
+Special classes
+...............
 
 Some special classes of digraphs, like the :code:`CompleteDigraph`, the :code:`EmptyDigraph` or the oriented :code:`GridDigraph` class for instance, are readily available:
         >>> from digraphs import GridDigraph
@@ -164,18 +167,17 @@ Some special classes of digraphs, like the :code:`CompleteDigraph`, the :code:`E
    :align: center
 
 
-
 For more information about its resources, see the technical documentation of the :ref:`digraphs-label` . 
 
 Back to :ref:`Tutorial-label`
 
 .. _Digraph-Tools-label:
 
-Tools for manipulating ``Digraph`` objects
-------------------------------------------
+Manipulating ``Digraph`` objects
+--------------------------------
 
-Inspecting a random digraph
-...........................
+Random digraph
+..............
 
 We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7, denoted *dg* and modelling a binary relation (*x S y*) defined on the set of nodes of *dg*. For this purpose, the ``digraphs`` module provides conveniently a specific ``RandomValuationDigraph`` constructor:
     >>> from digraphs import RandomValuationDigraph
@@ -283,8 +285,8 @@ Here below, for illustration the source code of *relation* constructor of the ``
 			relationOut[a][b] = Med
 	    return relationOut
 
-Digraph fusion by epistemic disjunction
-.......................................
+Fusion by epistemic disjunction
+...............................
 
 We may recover object *dg* from both partial objects *asymDg* and *symDg* with a **bipolar fusion** constructor, also called **epistemic disjunction**, available via the ``FusionDigraph`` class:
     >>> from digraphs import FusionDigraph
@@ -301,8 +303,8 @@ We may recover object *dg* from both partial objects *asymDg* and *symDg* with a
     '6'    | -0.84  0.00 -0.40 -0.96 -0.18  0.00 -0.22	 
     '7'    |  0.88  0.72  0.82  0.52 -0.84  0.04  0.00	 
 
-Dual, converse and codual digraphs
-..................................
+Dual, converse and codual
+.........................
 
 We may as readily compute the **dual**, the **converse** and the **codual** (dual and converse) of *dg*:
     >>> from digraphs import DualDigraph, ConverseDigraph, CoDualDigraph
@@ -395,8 +397,8 @@ As the original digraph *dg* was connected (see above the result of the ``dg.sho
     'frozenset({'7', '1', '2', '6', '5', '3', '4'})': in => set(), out => set()
     >>> ...
 
-Saving and reloading in CSV format
-.................................. 
+CSV storage
+...........
 
 Sometimes it is required to exchange the graph valuation data in CSV format with a statistical package like `R <http://www.r-project.org/>`_. For this purpose it is possible to export the digraph data into a CSV file. The valuation domain is hereby normalized by default to the range [-1,1] and the diagonal put by defalut to the minimal value -1:
 	>>> dg = Digraph('tutRandValDigraph')
@@ -671,7 +673,7 @@ Grids and the Ising model
 .........................
 
 Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids** are available in the :code:`graphs` module. For instance, we may use a Gibbs sampler again for simulating an **Ising Model** on such a grid:
-        >>> from graphs import GridGraph. IsingModel
+	>>> from graphs import GridGraph, IsingModel
 	>>> g = GridGraph(n=15,m=15)
 	>>> g.showShort()
 	*----- show short --------------*
@@ -701,19 +703,19 @@ Finally, we provide a specialisation of the :code:`Graph` class for implementing
 	Name             : 'randomGraph'
 	Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5']
 	Valuation domain :  {'max': 1, 'med': 0, 'min': -1}
-	Gamma function   : 
+	Gamma function   :
 	v1 -> ['v2', 'v3', 'v4']
 	v2 -> ['v1', 'v4']
 	v3 -> ['v5', 'v1']
 	v4 -> ['v2', 'v5', 'v1']
-	v5 -> ['v3', 'v4']        
+	v5 -> ['v3', 'v4']
 	>>> probs = {}  # initialise a potential stationary probability vector 
 	>>> n = g.order # for instance: probs[v_i] = n-i/Sum(1:n) for i in 1:n
 	>>> i = 0
 	>>> verticesList = [x for x in g.vertices]
 	>>> verticesList.sort()
 	>>> for v in verticesList:
-	...     probs[v] = (n - i)/(n*(n+1)/2) 
+	...     probs[v] = (n - i)/(n*(n+1)/2)
 	...     i += 1
 	>>> met = MetropolisChain(g,probs)
 	>>> frequency = met.checkSampling(verticesList[0],nSim=30000)
@@ -721,21 +723,21 @@ Finally, we provide a specialisation of the :code:`Graph` class for implementing
 	...     print(v,probs[v],frequency[v])
 	v1 0.3333 0.3343
 	v2 0.2666 0.2680
-	v3 0.2    0.2030 
+	v3 0.2    0.2030
 	v4 0.1333 0.1311
 	v5 0.0666 0.0635
 	>>> met.showTransitionMatrix()
 	* ---- Transition Matrix -----
-	  Pij  | 'v1'    'v2'    'v3'    'v4'    'v5'     
+	  Pij  | 'v1'    'v2'    'v3'    'v4'    'v5'
 	  -----|-------------------------------------
-	  'v1' |  0.23   0.33    0.30    0.13    0.00    
-	  'v2' |  0.42   0.42    0.00    0.17    0.00    
-	  'v3' |  0.50   0.00    0.33    0.00    0.17    
-	  'v4' |  0.33   0.33    0.00    0.08    0.25    
-	  'v5' |  0.00   0.00    0.50    0.50    0.00    
+	  'v1' |  0.23   0.33    0.30    0.13    0.00
+	  'v2' |  0.42   0.42    0.00    0.17    0.00
+	  'v3' |  0.50   0.00    0.33    0.00    0.17
+	  'v4' |  0.33   0.33    0.00    0.08    0.25
+	  'v5' |  0.00   0.00    0.50    0.50    0.00
 
 The ``checkSampling()`` method generates a randomwalk of *nSim=30000* steps on the given graph and records by the way the observed relative frequency with which each vertice is passed by. In this exmaple, the stationary transition probability distribution, shown by the ``showTransitionMatrix()`` method above, is quite adequately simulated.
- 
+
 For more technical information and more code examples, look into the technical documentation of the :ref:`graphs-label`. For the readers interested in algorithmic applications of Markov Chains we may may recommend consulting O. Häggström's 2002 book: [FMCAA]_.
 
 Back to :ref:`Tutorial-label`
@@ -749,7 +751,7 @@ Linear voting profiles
 ......................
 
 The :ref:`votingDigraphs-label` provides resources for handling election results [ADT-L2]_, like the ``LinearVotingProfile`` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two Python dictionaries, one for the candidates and another one for the linear ballots::
-    
+
     candidates = {'a': ,'b':  ,'c', ..., ...}
     voters = {'1':{'weight':1.0},'2':{'weight':1.0}, ...}
     ## each voter specifies a linearly ranked list of candidates
@@ -904,8 +906,8 @@ Working with the ``outrankingDigraphs`` module
 
 See also the technical documentation of the :ref:`outrankingDigraphs-label`.
 
-Structure of an outranking digraph
-..................................
+Outranking digraph
+..................
 
 In this *Digraph3* module, the root :code:`OutrankingDiraph` class provides a generic **outranking digraph model**. A given object of this class consists in:
 
@@ -971,8 +973,8 @@ The performance evaluations of each decision alternative on each criterion are g
 	  'g07'  |  41.2    64.0    87.7    71.6    57.8    59.3    34.7
 	>>> ...
 
-Browsing the performance tableau
-................................
+Browsing the performances
+.........................
 
 We may visualize the same performance tableau in a two-colors setting in the default system browser with the command:
         >>> odg.showHTMLPerformanceTableau()
@@ -997,8 +999,8 @@ We may, furthermore, rank the alternatives on the basis of the weighted marginal
 
 There is no doubt that action *a03*, with a performance in the highest quintile in five out of seven criteria, appears definitely to be best performing. Action *a05* shows a more or less average performance on most criteria, wheras action *a02* appears to be the weakest alternative.
 
-Semantics of the bipolar valuation
-..................................
+Valuation semantics
+...................
 
 Considering the given performance tableau, the ``BipolarOutrankingDigraph`` class constructor computes the characteristic value r(x S y) of a pairwise outranking relation "x S y" (see [BIS-2013]_) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:
     1. If r(x S y) > 0.0 it is more *True* than *False* that *x outranks y*, i.e. alternative x is at least as well performing than alternative y **and** there is no considerable negative performance difference observed in disfavour of x,
@@ -1020,8 +1022,8 @@ The resulting bipolarly valued outranking relation may be inspected with the fol
 	>>> odg.valuationdomain
 	{'min': Decimal('-100.0'), 'max': Decimal('100.0'), 'med': Decimal('0.0')}
 
-Pairwise multiple criteria comparisons
-......................................
+Pairwise comparisons
+....................
 
 From above given semantics, we may consider that *a01* outranks *a02* (r(a01 S a02) > 0.0), but not *a03* (r(a01 S a03) < 0.0). In order to make understandable the characteristic values shown in the relation table above, we may furthermore have a look at the pairwise multiple criteria comparison between alternatives *a01* and *a02*:
 	>>> odg.showPairwiseComparison('a01','a02')
@@ -1084,8 +1086,8 @@ All outranking digraphs, being of root type ``Digraph``, inherit the methods ava
 
  Notice that the reflexive self comparison characteristic r(x S x) is set by default to the median indeterminate valuation value 0; the reflexive terms of binary relation being generally ignored in most of the ``Digraph3`` resources. 
 
-Strict outranking via the codual digraph
-........................................
+Codual digraph
+..............
 
 From the theory [BIS-2013]_ we know that the bipolarly outranking relation is **weakly complete**, i.e. if r(x S y) < 0.0 then r(y S x) >= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing [1]_: 
 	>>> cdodg = -(~odg)
@@ -1101,8 +1103,8 @@ From the theory [BIS-2013]_ we know that the bipolarly outranking relation is **
 
 It becomes readily clear now from the picture above that alternative *a03* strictly outranks in fact all the other alternatives. Hence, *a03* appears as **Condorcet winner** and may be recommended as *best decision action* in this illustrative preference modelling exercise. 
 
-XMCDA 2.0 storage 
-.................
+XMCDA 2.0
+.........
 
 As with all Digraph instances, it is possible to store permanently a copy of the outranking digraph *odg*. As its outranking relation is automatically generated by the ``BipolarOutrankingDigraph`` class constructor on the basis of a given performance tableau, it is sufficient to save only the latter. For this purpose we are using the `XMCDA 2.00 <http://www.decision-deck.org/xmcda/>`_ XML encoding scheme of MCDA data, as provided by the Decision Deck Project (see http://www.decision-deck.org/):
 	>>> PerformanceTableau.saveXMCDA2(odg,'tutorialPerfTab')
@@ -1137,7 +1139,7 @@ Back to :ref:`Tutorial-label`
 Computing a best choice recommendation
 --------------------------------------
 
-What new offices to choose ?
+What site to choose ?
 ...................................
 
 A SME, specialized in printing and copy services, has to move into new offices, and its CEO has gathered seven **potential office sites**:
@@ -1198,8 +1200,8 @@ Concerning annual costs, we notice that the CEO is indifferent up to a performan
 
 In view of this performance tableau, what is now the office site we may recommend to the CEO as **best choice** ?
 
-Inspecting the Performance Tableau
-..................................
+Performance tableau
+...................
 
 The XMCDA 2.0 encoded version of this performance tableau is available for downloading here `officeChoice.xml`_.
 
@@ -1248,8 +1250,8 @@ A colorful comparison of all the performances is shown by the **heatmap** statis
 
 Site *A* shows extreme and contradictory performances: highest *Costs* and no *Working Comfort* on one hand, and total satisfaction with respect to *Standing*, *Proximity* and *Parking facilities* on the other hand. Similar, but opposite, situation is given for site *C*: unsatisfactory *Working Space*, no *Standing* and no *Working Comfort* on the one hand, and lowest *Costs*, best *Proximity* and *Parking facilities* on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: sites *D* and *G*. Finally, site *F* is clearly the less satisfactory alternative of all.
 
-Inspecting the outranking digraph
-.................................
+Outranking digraph
+..................
 
 To help now the CEO choosing the best site, we are going to compute pairwise outrankings (see [BIS-2013]_) on the set of potential sites. For two sites *x* and *y*, the situation "*x* outranks *y*", denoted (*x* S *y*), is given if there is:
      1. a **significant majority** of criteria concordantly supporting that site *x* is *at least as satisfactory as* site *y*, and
@@ -1292,8 +1294,8 @@ One may check that the outranking digraph *g* does not admit in fact a cyclic st
 
 
 
-Computing the Rubis best choice recommendation
-..............................................
+Rubis best choice
+.................
 
 Following the Rubis outranking method (see [BIS-2008]_), potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the pre-kernels of *g*:
     >>> g.showPreKernels()
@@ -1409,8 +1411,8 @@ Here, we find confirmed again that alternative *D*, indeed, appears to be the mo
 
 Yet, what about alternative *G*, the other good compromise best choice we have noticed from the performance heatmap shown above?
 
-Computing a strict best choice recommendation
-.............................................
+Strictly best choice
+....................
 
 When comparing the performances of alternatives *D* and *G* on a pairwise perspective, we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D* ( r(*G* outranks *D*) = 100.0). 
     >>> g.showPairwiseComparison('G','D')
@@ -1478,8 +1480,8 @@ It is interesting to notice that the **strict best choice recommendation** consi
 
 We may also notice that both alternatives *A* and *F* are reported as certainly outranked, hence a **worst choice recommendation**. This confirms the global incomparability status of alternative *A*.
 
-Weakly ordering by choosing and rejecting the potential decision alternatives
-.............................................................................
+Weakly ordering
+...............
 
 To get a more complete insight in the overall strict outranking situations, we may use the ``RankingByChoosingDigraph`` constructor imported from the :ref:`weakOrders-label` module, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*:
     >>> from weakOrders import RankingByChoosingDigraph
