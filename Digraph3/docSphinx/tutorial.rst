@@ -1,23 +1,16 @@
+.. _Tutorial-label:
+
 Tutorial of the Digraph3 resources
 ==================================
 :Author: Raymond Bisdorff, University of Luxembourg FSTC/CSC
 :Version: Revision: Python 3.4
 :Copyright: R. Bisdorff 2014
 
-.. _Tutorial-label:
+.. contents:: Table of Contents
+	:depth: 1
+	:local:
 
-
-Content
--------
-
-* :ref:`Digraphs-Tutorial-label`
-* :ref:`Digraph-Tools-label`
-* :ref:`Graphs-Tutorial-label`
-* :ref:`LinearVoting-label`
-* :ref:`OutrankingDigraphs-Tutorial-label`
-* :ref:`Rubis-Tutorial-label`
-
-.. _Digraphs-Tutorial-label:
+.. _Digraphs-tutorial-label:
 
 Working with the :code:`digraphs` module
 ----------------------------------------

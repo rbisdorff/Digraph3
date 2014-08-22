@@ -53,7 +53,7 @@
           <div class="body">
             
   <div class="section" id="tutorial-of-the-digraph3-resources">
-<h1>Tutorial of the Digraph3 resources<a class="headerlink" href="#tutorial-of-the-digraph3-resources" title="Permalink to this headline">¶</a></h1>
+<span id="tutorial-label"></span><h1>Tutorial of the Digraph3 resources<a class="headerlink" href="#tutorial-of-the-digraph3-resources" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -71,19 +71,20 @@
 </tr>
 </tbody>
 </table>
-<div class="section" id="content">
-<span id="tutorial-label"></span><h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
 <ul class="simple">
-<li><a class="reference internal" href="#digraphs-tutorial-label"><em>Working with the digraphs module</em></a></li>
-<li><a class="reference internal" href="#digraph-tools-label"><em>Manipulating Digraph objects</em></a></li>
-<li><a class="reference internal" href="#graphs-tutorial-label"><em>Working with the graphs module</em></a></li>
-<li><a class="reference internal" href="#linearvoting-label"><em>Computing the winner of an election</em></a></li>
-<li><a class="reference internal" href="#outrankingdigraphs-tutorial-label"><em>Working with the outrankingDigraphs module</em></a></li>
-<li><a class="reference internal" href="#rubis-tutorial-label"><em>Computing a best choice recommendation</em></a></li>
+<li><a class="reference internal" href="#working-with-the-digraphs-module" id="id22">Working with the <tt class="code docutils literal"><span class="pre">digraphs</span></tt> module</a></li>
+<li><a class="reference internal" href="#manipulating-digraph-objects" id="id23">Manipulating <tt class="docutils literal"><span class="pre">Digraph</span></tt> objects</a></li>
+<li><a class="reference internal" href="#working-with-the-graphs-module" id="id24">Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module</a></li>
+<li><a class="reference internal" href="#computing-the-winner-of-an-election" id="id25">Computing the winner of an election</a></li>
+<li><a class="reference internal" href="#working-with-the-outrankingdigraphs-module" id="id26">Working with the <tt class="docutils literal"><span class="pre">outrankingDigraphs</span></tt> module</a></li>
+<li><a class="reference internal" href="#computing-a-best-choice-recommendation" id="id27">Computing a best choice recommendation</a></li>
+<li><a class="reference internal" href="#links-and-appendices" id="id28">Links and appendices</a></li>
 </ul>
 </div>
 <div class="section" id="working-with-the-digraphs-module">
-<span id="digraphs-tutorial-label"></span><h2>Working with the <tt class="code docutils literal"><span class="pre">digraphs</span></tt> module<a class="headerlink" href="#working-with-the-digraphs-module" title="Permalink to this headline">¶</a></h2>
+<span id="digraphs-tutorial-label"></span><h2><a class="toc-backref" href="#id22">Working with the <tt class="code docutils literal"><span class="pre">digraphs</span></tt> module</a><a class="headerlink" href="#working-with-the-digraphs-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="downloading-of-the-digraph3-resources">
 <h3>Downloading of the Digraph3 resources<a class="headerlink" href="#downloading-of-the-digraph3-resources" title="Permalink to this headline">¶</a></h3>
 <p>Using the Digraph3 modules is easy. You only need to have installed on your system the <a class="reference external" href="https://www.python.org/doc/">Python</a> programming language of version 3+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.</p>
@@ -296,11 +297,11 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 <a class="reference internal image-reference" href="_images/tutorialGrid.png"><img alt="_images/tutorialGrid.png" class="align-center" src="_images/tutorialGrid.png" style="width: 200px;" /></a>
 <p>For more information about its resources, see the technical documentation of the <a class="reference internal" href="techDoc.html#digraphs-label"><em>digraphs module</em></a> .</p>
-<p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
+<p>Back to <a class="reference internal" href="#tutorial-label"><em>Tutorial of the Digraph3 resources</em></a></p>
 </div>
 </div>
 <div class="section" id="manipulating-digraph-objects">
-<span id="digraph-tools-label"></span><h2>Manipulating <tt class="docutils literal"><span class="pre">Digraph</span></tt> objects<a class="headerlink" href="#manipulating-digraph-objects" title="Permalink to this headline">¶</a></h2>
+<span id="digraph-tools-label"></span><h2><a class="toc-backref" href="#id23">Manipulating <tt class="docutils literal"><span class="pre">Digraph</span></tt> objects</a><a class="headerlink" href="#manipulating-digraph-objects" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="random-digraph">
 <h3>Random digraph<a class="headerlink" href="#random-digraph" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
@@ -879,11 +880,11 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <p class="first admonition-title">Note</p>
 <p class="last">Notice the subtle difference between the neighborhoods of an <em>empty</em> and the neighborhoods of an <em>indeterminate</em> digraph instance. In the first kind, the neighborhoods are known to be completely <em>empty</em> whereas, in the latter, <em>nothing is known</em> about the actual neighborhoods of the nodes. These two cases illustrate why in the case of a bipolar valuation domain, we need both a <em>gamma</em> <strong>and</strong> a <em>notGamma</em> function.</p>
 </div>
-<p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
+<p>Back to <a class="reference internal" href="#tutorial-label"><em>Tutorial of the Digraph3 resources</em></a></p>
 </div>
 </div>
 <div class="section" id="working-with-the-graphs-module">
-<span id="graphs-tutorial-label"></span><h2>Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module<a class="headerlink" href="#working-with-the-graphs-module" title="Permalink to this headline">¶</a></h2>
+<span id="graphs-tutorial-label"></span><h2><a class="toc-backref" href="#id24">Working with the <tt class="code docutils literal"><span class="pre">graphs</span></tt> module</a><a class="headerlink" href="#working-with-the-graphs-module" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="structure-of-a-graph-object">
 <h3>Structure of a <tt class="docutils literal"><span class="pre">Graph</span></tt> object<a class="headerlink" href="#structure-of-a-graph-object" title="Permalink to this headline">¶</a></h3>
 <p>In the <tt class="docutils literal"><span class="pre">graphs</span></tt> module, the root <tt class="code docutils literal"><span class="pre">Graph</span></tt> class provides a generic <strong>simple graph model</strong>, without loops and multiple links. A given object of this class consists in:</p>
@@ -1279,11 +1280,11 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 <p>The <tt class="docutils literal"><span class="pre">checkSampling()</span></tt> method generates a randomwalk of <em>nSim=30000</em> steps on the given graph and records by the way the observed relative frequency with which each vertice is passed by. In this exmaple, the stationary transition probability distribution, shown by the <tt class="docutils literal"><span class="pre">showTransitionMatrix()</span></tt> method above, is quite adequately simulated.</p>
 <p>For more technical information and more code examples, look into the technical documentation of the <a class="reference internal" href="techDoc.html#graphs-label"><em>graphs module</em></a>. For the readers interested in algorithmic applications of Markov Chains we may may recommend consulting O. Häggström&#8217;s 2002 book: <a class="reference internal" href="#fmcaa" id="id4">[FMCAA]</a>.</p>
-<p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
+<p>Back to <a class="reference internal" href="#tutorial-label"><em>Tutorial of the Digraph3 resources</em></a></p>
 </div>
 </div>
 <div class="section" id="computing-the-winner-of-an-election">
-<span id="linearvoting-label"></span><h2>Computing the winner of an election<a class="headerlink" href="#computing-the-winner-of-an-election" title="Permalink to this headline">¶</a></h2>
+<span id="linearvoting-label"></span><h2><a class="toc-backref" href="#id25">Computing the winner of an election</a><a class="headerlink" href="#computing-the-winner-of-an-election" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="linear-voting-profiles">
 <h3>Linear voting profiles<a class="headerlink" href="#linear-voting-profiles" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="techDoc.html#votingdigraphs-label"><em>votingDigraphs module</em></a> provides resources for handling election results <a class="reference internal" href="#adt-l2" id="id5">[ADT-L2]</a>, like the <tt class="docutils literal"><span class="pre">LinearVotingProfile</span></tt> class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two Python dictionaries, one for the candidates and another one for the linear ballots:</p>
@@ -1531,11 +1532,11 @@ linearBallot = {
 </dl>
 <p>Condorcet&#8217;s approach for determining the winner of an election is hence not decisive in all circomstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see <a class="reference internal" href="#bis-2008" id="id8">[BIS-2008]</a>).</p>
 <p>Many more tools for exploiting voting results are available, see the thechnical documentation of the <a class="reference internal" href="techDoc.html#votingdigraphs-label"><em>votingDigraphs module</em></a>.</p>
-<p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
+<p>Back to <a class="reference internal" href="#tutorial-label"><em>Tutorial of the Digraph3 resources</em></a></p>
 </div>
 </div>
 <div class="section" id="working-with-the-outrankingdigraphs-module">
-<span id="outrankingdigraphs-tutorial-label"></span><h2>Working with the <tt class="docutils literal"><span class="pre">outrankingDigraphs</span></tt> module<a class="headerlink" href="#working-with-the-outrankingdigraphs-module" title="Permalink to this headline">¶</a></h2>
+<span id="outrankingdigraphs-tutorial-label"></span><h2><a class="toc-backref" href="#id26">Working with the <tt class="docutils literal"><span class="pre">outrankingDigraphs</span></tt> module</a><a class="headerlink" href="#working-with-the-outrankingdigraphs-module" title="Permalink to this headline">¶</a></h2>
 <p>See also the technical documentation of the <a class="reference internal" href="techDoc.html#outrankingdigraphs-label"><em>outrankingDigraphs module</em></a>.</p>
 <div class="section" id="outranking-digraph">
 <h3>Outranking digraph<a class="headerlink" href="#outranking-digraph" title="Permalink to this headline">¶</a></h3>
@@ -1913,11 +1914,11 @@ linearBallot = {
 </dl>
 <p>We recover the original bipolarly valued outranking characteristics, and we may restart again the preference modelling process.</p>
 <p>Many more tools for exploiting bipolarly valued outranking digraphs are available in the Digraph3 resources (see the thechnical documentation of the <a class="reference internal" href="techDoc.html#outrankingdigraphs-label"><em>outrankingDigraphs module</em></a> and the <a class="reference internal" href="techDoc.html#perftabs-label"><em>perfTabs module</em></a>).</p>
-<p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
+<p>Back to <a class="reference internal" href="#tutorial-label"><em>Tutorial of the Digraph3 resources</em></a></p>
 </div>
 </div>
 <div class="section" id="computing-a-best-choice-recommendation">
-<span id="rubis-tutorial-label"></span><h2>Computing a best choice recommendation<a class="headerlink" href="#computing-a-best-choice-recommendation" title="Permalink to this headline">¶</a></h2>
+<span id="rubis-tutorial-label"></span><h2><a class="toc-backref" href="#id27">Computing a best choice recommendation</a><a class="headerlink" href="#computing-a-best-choice-recommendation" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="what-site-to-choose">
 <h3>What site to choose ?<a class="headerlink" href="#what-site-to-choose" title="Permalink to this headline">¶</a></h3>
 <p>A SME, specialized in printing and copy services, has to move into new offices, and its CEO has gathered seven <strong>potential office sites</strong>:</p>
@@ -2691,11 +2692,11 @@ linearBallot = {
 <p>In this <strong>ranking-by-choosing</strong> method, where we operate the epistemic fusion of iterated (strict) best and worst choices, compromise alternative <em>D</em> is indeed ranked before compromise alternative <em>G</em>. If the computing node supports multiple processor cores, best and worst choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive site <em>A</em>, and the cheapest site <em>C</em>, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation.</p>
 <p>The best choice recommendation appears hence depending on the very importance the CEO is attaching to each of the three objectives he is considering. In the setting here, where he considers all three objectives to be <strong>equally important</strong> (minimize costs = 3.0, maximize turnover = 3.0, and maximize working conditions = 3.0), site <em>D</em> represents actually the best compromise. However, if <em>Costs</em> do not play much role, it would be perhaps better to decide to move to the most advantageous site <em>A</em>; or if, on the contrary, <em>Costs</em> do matter a lot, moving to the cheapest alternative <em>C</em> could definitely represent a more convincing recommendation.</p>
 <p>It might be worth, as an <strong>exercise</strong>, to modify on the one hand this importance balance in the XMCDA data file by lowering the significance of the <em>Costs</em> criterion; all criteria are considered <strong>equi-significant</strong> (weight = 1.0) for instance. It may as well be opportune, on the other hand, to <strong>rank</strong> the importance of the three objectives as follows:  <em>minimize costs</em> (weight = 9.0) <strong>&gt;</strong> <em>maximize turnover</em> (weight = 3 x 2.0) <strong>&gt;</strong> <em>maximize working conditions</em> (weight = 3 x 1.0). What will become the best choice recommendation under both working hypotheses?</p>
-<p>Back to <a class="reference internal" href="#tutorial-label"><em>Content</em></a></p>
+<p>Back to <a class="reference internal" href="#tutorial-label"><em>Tutorial of the Digraph3 resources</em></a></p>
 </div>
 </div>
 <div class="section" id="links-and-appendices">
-<h2>Links and appendices<a class="headerlink" href="#links-and-appendices" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id28">Links and appendices</a><a class="headerlink" href="#links-and-appendices" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="documents">
 <h3>Documents<a class="headerlink" href="#documents" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -2781,7 +2782,6 @@ linearBallot = {
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Tutorial of the Digraph3 resources</a><ul>
-<li><a class="reference internal" href="#content">Content</a></li>
 <li><a class="reference internal" href="#working-with-the-digraphs-module">Working with the <tt class="code docutils literal"><span class="pre">digraphs</span></tt> module</a><ul>
 <li><a class="reference internal" href="#downloading-of-the-digraph3-resources">Downloading of the Digraph3 resources</a></li>
 <li><a class="reference internal" href="#purpose">Purpose</a></li>
