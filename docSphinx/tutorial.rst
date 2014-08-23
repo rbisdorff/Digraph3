@@ -15,6 +15,10 @@ Tutorial of the Digraph3 resources
 Working with the :code:`digraphs` module
 ----------------------------------------
 
+.. contents:: 
+	:depth: 2
+	:local:
+
 .. highlight:: python
 	:linenothreshold: 5
 
@@ -168,6 +172,10 @@ Back to :ref:`Tutorial-label`
 
 Manipulating ``Digraph`` objects
 --------------------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
 
 Random digraph
 ..............
@@ -506,6 +514,10 @@ Back to :ref:`Tutorial-label`
 Working with the :code:`graphs` module
 --------------------------------------
 
+.. contents:: 
+	:depth: 2
+	:local:
+
 Structure of a ``Graph`` object
 ...............................
 
@@ -740,6 +752,10 @@ Back to :ref:`Tutorial-label`
 Computing the winner of an election
 -----------------------------------
 
+.. contents:: 
+	:depth: 2
+	:local:
+
 Linear voting profiles
 ......................
 
@@ -896,6 +912,10 @@ Back to :ref:`Tutorial-label`
 
 Working with the ``outrankingDigraphs`` module
 ----------------------------------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
 
 See also the technical documentation of the :ref:`outrankingDigraphs-label`.
 
@@ -1132,6 +1152,10 @@ Back to :ref:`Tutorial-label`
 Computing a best choice recommendation
 --------------------------------------
 
+.. contents:: 
+	:depth: 2
+	:local:
+
 What site to choose ?
 ...................................
 
@@ -1227,12 +1251,12 @@ We thus recover all the input data. To measure the actual preference discriminat
     Cf 'Comfort'
     Scale = (Decimal('0.00'), Decimal('100.00'))
     Weight = 0.111 
-    Threshold veto : 80.00 + 0.00x ; percentile:  0.905
     Threshold ind : 10.00 + 0.00x ; percentile:  0.095
     Threshold pref : 20.00 + 0.00x ; percentile:  0.286
+    Threshold veto : 80.00 + 0.00x ; percentile:  0.905
     ...
 
-On the *Costs* criterion, 10% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold. On the qualitative *Comfort* criterion, we observe again 10% of insignificant performance differences. Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold. Furthermore, 10% of the performance differences are judged *considerably large*, ie 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all other criteria. 
+On the *Costs* criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative *Comfort* criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged *considerably large* (line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria. 
  
 A colorful comparison of all the performances is shown by the **heatmap** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles:
     >>> t.showHTMLPerformanceHeatmap(colorLevels=5)
@@ -1327,7 +1351,7 @@ Following the Rubis outranking method (see [BIS-2008]_), potential best choice r
     Execution time  : 0.00018 sec.
     Results in sets: dompreKernels and abspreKernels.
 
-We notice three potential best choice recommendations: the Condorcet winner *D*, the triplet *B*, *C* and *E*, and finally the pair *A* and *G*. The Rubis best choice recommendation is given by the **most determined** pre-kernel; the one supported by the most significant criteria coalition. This result is shown with the following command:
+We notice three potential best choice recommendations: the Condorcet winner *D* (line 4), the triplet *B*, *C* and *E* (line 9), and finally the pair *A* and *G* (line 14). The Rubis best choice recommendation is given by the **most determined** pre-kernel; the one supported by the most significant criteria coalition. This result is shown with the following command:
     >>> g.showRubisBestChoiceRecommendation()
     ***********************
     * --- Rubis best choice recommendation(s) (BCR) ---*
@@ -1374,7 +1398,7 @@ We notice three potential best choice recommendations: the Condorcet winner *D*,
       characteristic vector = { 'B': 0.00, 'E': 0.00, 'F': 0.00, 
                  'D': 0.00, 'A': 0.00, 'G': 0.00, 'C': 0.00 }
 
-We notice that the most significantly supported best choice recommendation is indeed the Condorcet winner *D* with a majority of 56% of the criteria significance. Both other recommandation candidates, as well as the worst choice candidate are not positively validated as best choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a best and a worst choice recommendation and seams hence not actually comparable to its competitors.
+We notice in line 7 above that the most significantly supported best choice recommendation is indeed the Condorcet winner *D* with a majority of 56% of the criteria significance (see line 13). Both other recommandation candidates, as well as the worst choice candidate are not positively validated as best choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see lines 27 and 37) and seams hence not actually comparable to its competitors.
  
 The same Rubis best choice recommendation, encoded in XMCDA 2.0, is as well provided by the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg:
     >>> from outrankingDigraphs import RubisRestServer
@@ -1469,7 +1493,7 @@ To model these *strict outranking* situations, we may compute the **codual**, th
          {'A': 0.00, 'B': 0.00, 'C': 0.00, 'D': 0.00, 
           'E': 0.00, 'F': 0.00, 'G': 0.00, }
 
-It is interesting to notice that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see [BIS-2006]_), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice, we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate. 
+It is interesting to notice that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D' (see line 7). In the corresponding characteristic vector (see line 15-16), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate. 
 
 We may also notice that both alternatives *A* and *F* are reported as certainly outranked, hence a **worst choice recommendation**. This confirms the global incomparability status of alternative *A*.
 
