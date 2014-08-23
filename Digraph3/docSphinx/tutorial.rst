@@ -518,6 +518,8 @@ Working with the :code:`graphs` module
 	:depth: 2
 	:local:
 
+See also the technical documentation of the :ref:`graphs-label`.
+
 Structure of a ``Graph`` object
 ...............................
 
