@@ -61,7 +61,7 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
 ``Digraph`` object structure
 ............................
 
-All :code:`Digraph` object *dg* contains at least the following sub-objects: 
+All :py:class:`digraphs.Digraph` object *dg* contains at least the following sub-objects: 
 
 1. the digraph nodes called **actions** (decision actions): a list, set or dictionary of nodes with 'name' and 'shortname' attributes,
 2. the digraph **valuationdomain** , a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),
@@ -91,7 +91,7 @@ The :code:`dg.save('tutorialDigraph')` command stores the digraph *dg* in a file
 Inspecting a ``Digraph`` object
 ...............................
 
-We may reload a previously saved ``Digraph`` instance from the file named :code:`tutorialDigraph.py` with the ``Digraph`` class constructor and the :code:`Digraph.showAll()` method output reveals us that *dg* is a connected irreflexive digraph of order five evaluated in a valuation domain from -1 to 1.
+We may reload a previously saved ``Digraph`` instance from the file named :code:`tutorialDigraph.py` with the ``Digraph`` class constructor and the :py:func:`digraphs.Digraph.showAll()` method output reveals us that *dg* is a connected irreflexive digraph of order five evaluated in a valuation domain from -1 to 1.
         >>> dg = Digraph('tutorialDigraph')
        	>>> dg.showAll()
 	*----- show details --------------*
@@ -111,7 +111,7 @@ We may reload a previously saved ``Digraph`` instance from the file named :code:
 	*--- Connected Components ---*
 	1: ['1', '2', '3', '4', '5']
 
-The :code:`Digraph.exportGraphViz()` method generates in the current working directory a :code:`tutorial.dot` file and a :code:`tutorialdigraph.png` picture of the tutorial digraph *g*, if the `graphviz <http://graphviz.org/>`_ tools are installed on your system.:
+The :py:func:`digraphs.Digraph.exportGraphViz()` method generates in the current working directory a :code:`tutorial.dot` file and a :code:`tutorialdigraph.png` picture of the tutorial digraph *g*, if the `graphviz <http://graphviz.org/>`_ tools are installed on your system.:
 	>>> dg.exportGraphViz('tutorialDigraph')
         *---- exporting a dot file do GraphViz tools ---------*
         Exporting to tutorialDigraph.dot
@@ -121,7 +121,7 @@ The :code:`Digraph.exportGraphViz()` method generates in the current working dir
    :width: 300 px
    :align: center
 
-Some simple methods are easily applicable to this instantiated Digraph object *dg* , like the following :code:`Digraph.showStatistics()` method:
+Some simple methods are easily applicable to this instantiated Digraph object *dg* , like the following :py:func:`digraphs.Digraph.showStatistics()` method:
 	>>> dg.showStatistics()
 	*----- general statistics -------------*
 	for digraph             : <tutorialdigraph.py>
@@ -151,7 +151,7 @@ Some simple methods are easily applicable to this instantiated Digraph object *d
 Special classes
 ...............
 
-Some special classes of digraphs, like the :code:`CompleteDigraph`, the :code:`EmptyDigraph` or the oriented :code:`GridDigraph` class for instance, are readily available:
+Some special classes of digraphs, like the :py:class:`digraphs.CompleteDigraph`, the :py:class:`digraphs.EmptyDigraph` or the oriented :py:class:`digraphs.GridDigraph` class for instance, are readily available:
         >>> from digraphs import GridDigraph
 	>>> grid = GridDigraph(n=5,m=5,hasMedianSplitOrientation=True)
 	>>> grid.exportGraphViz('tutorialGrid')
@@ -180,7 +180,7 @@ Manipulating ``Digraph`` objects
 Random digraph
 ..............
 
-We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7, denoted *dg* and modelling a binary relation (*x S y*) defined on the set of nodes of *dg*. For this purpose, the ``digraphs`` module provides conveniently a specific ``RandomValuationDigraph`` constructor:
+We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7, denoted *dg* and modelling a binary relation (*x S y*) defined on the set of nodes of *dg*. For this purpose, the ``digraphs`` module provides conveniently a specific :py:class:`digraphs.RandomValuationDigraph` constructor:
     >>> from digraphs import RandomValuationDigraph
     >>> dg = RandomValuationDigraph(order=7,Normalized=True)
     >>> dg.save('tutRandValDigraph')
@@ -228,7 +228,7 @@ With the ``save()`` method we may keep a backup version for future use of *dg* w
     
 .. warning::
     
-    Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value *r(x S x)* for all action *x* is put to the median, i.e. indeterminate, value) in this case.
+    Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value :math:`r(x\,S\,x)` for all action *x* is put to the median, i.e. indeterminate, value) in this case.
 
 Graphviz drawings
 .................
@@ -243,7 +243,7 @@ We may have an even better insight into the ``Digraph`` object *dg* by looking a
    :width: 300 px
    :align: center
 
-Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (*r(6 S 2) = 0.00*) observed between nodes '6' and '2'. The corresponding link is marked in gray with an open arrowhead in the drawing. 
+Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (:math:`r(6\,S\,2) = 0.00`) observed between nodes '6' and '2'. The corresponding link is marked in gray with an open arrowhead in the drawing. 
 
 Asymmetric and symmetric parts
 ..............................
@@ -263,7 +263,7 @@ We may now extract both this symmetric as well as this asymmetric part of digrap
 
     Notice that the partial objects *asymDg* and *symDg* put to the indeterminate characteristic value all not-asymmetric, respectively not-symmetric links between nodes. 
 
-Here below, for illustration the source code of *relation* constructor of the ``AsymmetricPartialDigraph`` class::
+Here below, for illustration the source code of *relation* constructor of the :py:class:`digraphs.AsymmetricPartialDigraph` class::
 
 	def _constructRelation(self):
 	    actions = self.actions
@@ -289,7 +289,7 @@ Here below, for illustration the source code of *relation* constructor of the ``
 Fusion by epistemic disjunction
 ...............................
 
-We may recover object *dg* from both partial objects *asymDg* and *symDg* with a **bipolar fusion** constructor, also called **epistemic disjunction**, available via the ``FusionDigraph`` class:
+We may recover object *dg* from both partial objects *asymDg* and *symDg* with a **bipolar fusion** constructor, also called **epistemic disjunction**, available via the :py:class:`digraphs.FusionDigraph` class:
     >>> from digraphs import FusionDigraph
     >>> fusDg = FusionDigraph(asymDg,symDg)
     >>> fusDg.showRelationTable()
@@ -364,7 +364,7 @@ Computing the dual, respectively the converse, may also be done with prefixing t
 Symmetric and transitive closures
 .................................
 
-Symmetric and transtive closure in site constructors are also available, Note that it is a good idea,before going ahead with these in-site operations that irreversibly modify the original dg object, to previously make a backup version of *dg*. The simplest storage method, always provide by the generic ``Digraph.save()`` writes out in a named file the python content in string representation:
+Symmetric and transtive closure in site constructors are also available, Note that it is a good idea,before going ahead with these in-site operations that irreversibly modify the original dg object, to previously make a backup version of *dg*. The simplest storage method, always provide by the generic :py:func:`diggraphs.Digraph.save()` writes out in a named file the python content in string representation:
     >>> dg.save('tutRandValDigraph')
     >>> dg.closeSymmetric()
     >>> dg.closeTransitive()
@@ -377,7 +377,7 @@ Symmetric and transtive closure in site constructors are also available, Note th
 Strong components
 .................
 
-As the original digraph *dg* was connected (see above the result of the ``dg.showShort()`` command), both the symmetric and transitive closures operated together, will necessarily produce a single strong commponent, i.e. a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Using the ``StrongComponentsCollapsedDigraph`` constructor here will render a single hyper-node gathering all the original nodes :
+As the original digraph *dg* was connected (see above the result of the ``dg.showShort()`` command), both the symmetric and transitive closures operated together, will necessarily produce a single strong commponent, i.e. a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Using the :py:class:`digraphs.StrongComponentsCollapsedDigraph` constructor here will render a single hyper-node gathering all the original nodes :
     >>> from digraphs import StrongComponentsCollapsedDigraph
     >>> sc = StrongComponentsCollapsedDigraph(dg)
     >>> sc.showAll()
@@ -441,8 +441,8 @@ Positive arcs are shown in green and negative in red. Indetermiate -zero-valued-
 Complete, empty and indeterminate digraphs
 ..........................................
 
-Let us finally mention some special universal classes of digraphs that are readily available in the ``digraphs`` module, like the ``CompleteDigraph``, the ``EmptyDigraph`` and the ``IndeterminateDigraph`` classes, which put all characteristic values respectively to the *maximum*, the *minimum* or the median *indeterminate* characteristic value:
-	>>> from diggraphs import CompleteDigraph, EmptyDigraph, IndeterminateDigraph
+Let us finally mention some special universal classes of digraphs that are readily available in the :py:mod:`digraphs` module, like the :py:class:`digraphs.CompleteDigraph`, the :py:class:`digraphs.EmptyDigraph` and the :py:class:`digraphs.IndeterminateDigraph` classes, which put all characteristic values respectively to the *maximum*, the *minimum* or the median *indeterminate* characteristic value:
+	>>> from digraphs import CompleteDigraph, EmptyDigraph, IndeterminateDigraph
 	>>> help(CompleteDigraph)
 	Help on class CompleteDigraph in module digraphs:
 	class CompleteDigraph(Digraph)
@@ -523,7 +523,7 @@ See also the technical documentation of the :ref:`graphs-label`.
 Structure of a ``Graph`` object
 ...............................
 
-In the ``graphs`` module, the root :code:`Graph` class provides a generic **simple graph model**, without loops and multiple links. A given object of this class consists in:
+In the :py:mod:`graphs` module, the root :py:class:`graphs.Graph` class provides a generic **simple graph model**, without loops and multiple links. A given object of this class consists in:
 
 1. the graph **vertices** : a dictionary of vertices with 'name' and 'shortname' attributes,
 2. the graph **valuationDomain** , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),
@@ -587,7 +587,7 @@ The saved Graph instance named :code:`tutorialGraph.py` is encoded in python3 as
 	frozenset(['v6','v7']) : -1, 
 	}
 
-The stored graph can be recalled and plotted with the generic :code:`exportGraphViz` [1]_ method as follows:
+The stored graph can be recalled and plotted with the generic :py:func:`graphs.Graph.exportGraphViz()` [1]_ method as follows:
 	>>> g = Graph('tutorialGraph')
 	>>> g.exportGraphViz()
 	*---- exporting a dot file for GraphViz tools ---------*
@@ -607,8 +607,8 @@ Chordless cycles may be enumerated in the given graph like follows:
 q-coloring of a graph
 .....................
 
-And, a 3-coloring of the tutorial graph may be computed and plotted as follows:
-	>>> g = Graph('tutorialGrah')
+And, a 3-coloring of the tutorial graph *g* may be computed and plotted with the :py:class:`graphs.Q_Coloring` class as follows:
+	>>> from graphs import Q_Coloring
 	>>> qc = Q_Coloring(g)
 	Running a Gibbs Sampler for 42 step !
 	The q-coloring with 3 colors is feasible !!
@@ -653,8 +653,8 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
 MIS enumeration
 ...............
 
-2-colorings define independent sets of vertices that are maximal in cardinality; for short called a **MIS**. Computing such MISs in a given :code:`Graph` instance may be achieved by converting the :code:`Graph` instance into a :code:`Digraph` instance. Here a :code:`self.showMIS()` method is proposed:
-	>>> g = Graph('tutorialGrah')
+2-colorings define independent sets of vertices that are maximal in cardinality; for short called a **MIS**. Computing such MISs in a given :code:`Graph` instance may be achieved by converting the :py:class:`graphs.Graph` instance into a :py:class:`digraphs.Digraph` instance. Here a :py:func:`digraphs.Digraph.showMIS()` method is proposed:
+	>>> g = Graph('tutorialGraph')
 	>>> dg = g.graph2Digraph()
 	>>> dg.showMIS()
 	*---  Maximal independent choices ---*
@@ -679,7 +679,7 @@ MIS enumeration
 Grids and the Ising model
 .........................
 
-Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids** are available in the :code:`graphs` module. For instance, we may use a Gibbs sampler again for simulating an **Ising Model** on such a grid:
+Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids** (:py:class:`graphs.GridGraph` and :py:class:`graphs.IsingModel`) are available in the :py:mod:`graphs` module. For instance, we may use a Gibbs sampler again for simulating an **Ising Model** on such a grid:
 	>>> from graphs import GridGraph, IsingModel
 	>>> g = GridGraph(n=15,m=15)
 	>>> g.showShort()
@@ -702,7 +702,7 @@ Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids*
 Simulating Metropolis random walks
 ..................................
 
-Finally, we provide a specialisation of the :code:`Graph` class for implementing a generic **Metropolis MCMC** (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  :code:`probs = {‘v1’: x, ‘v2’: y, ...}` for visiting each vertice. 
+Finally, we provide a specialisation :py:class:`graphs.Metropolis` of the :py:class:`graphs.Graph` class for implementing a generic **Metropolis MCMC** (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  :code:`probs = {‘v1’: x, ‘v2’: y, ...}` for visiting each vertice. 
         >>> from graphs import MetropolisChain
 	>>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
 	>>> g.showShort()
@@ -761,7 +761,7 @@ Computing the winner of an election
 Linear voting profiles
 ......................
 
-The :ref:`votingDigraphs-label` provides resources for handling election results [ADT-L2]_, like the ``LinearVotingProfile`` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two Python dictionaries, one for the candidates and another one for the linear ballots::
+The :ref:`votingDigraphs-label` provides resources for handling election results [ADT-L2]_, like the :py:class:`votingDigraphs.LinearVotingProfile` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two Python dictionaries, one for the candidates and another one for the linear ballots::
 
     candidates = {'a': ,'b':  ,'c', ..., ...}
     voters = {'1':{'weight':1.0},'2':{'weight':1.0}, ...}
@@ -773,8 +773,8 @@ The :ref:`votingDigraphs-label` provides resources for handling election results
     ...
     }
 
-The module provides a class for generating random instances of the ``LinearVotingProfile`` class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result:
-    >>> from votingDigraphs import *
+The module provides a :py:class:`votingDigraphs.RandomLinearVotingProfile` class for generating random instances of the :py:class:`votingDigraphs.LinearVotingProfile` class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result:
+    >>> from votingDigraphs import RandomLinearVotingProfile
     >>> v = RandomLinearVotingProfile(numberOfVoters=5,numberOfCandidates=3)
     >>> v.candidates
     {'a2': {'name': 'a2'}, 'a3': {'name': 'a3'}, 'a1': {'name': 'a1'}}
@@ -829,7 +829,8 @@ We may also follow the Chevalier de Borda's advice and, after a **rank analysis*
 The Condorcet winner
 ....................
 
-In our randomly generated election results, we are lucky: The instant runoff winner and the Borda winner both are candidate *a1*. However, we could also follow the Marquis de Condorcet's advice, and compute the **majority margins** obtained by voting for each individual pair of candidates. For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the majority margin *M(a1,a2)* is 4 - 1 = +3. These majority margins define on the set of candidates what we call the **Condorcet digraph**, a specialization of the ``Digraph`` class for handling such pairwise majority margins:
+In our randomly generated election results, we are lucky: The instant runoff winner and the Borda winner both are candidate *a1*. However, we could also follow the Marquis de Condorcet's advice, and compute the **majority margins** obtained by voting for each individual pair of candidates. For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the majority margin *M(a1,a2)* is 4 - 1 = +3. These majority margins define on the set of candidates what we call the **Condorcet digraph**. The :py:class:`votongDigraphs.CondorcetDigraph` class (a specialization of the :py:class:`digraphs.Digraph` class) is available for handling such pairwise majority margins:
+    >>> from votingDigraphs import CondorcetDigraph
     >>> cdg = CondorcetDigraph(v,hasIntegerValuation=True)
     >>> cdg.showAll()
     *----- show detail -------------*
@@ -924,7 +925,7 @@ See also the technical documentation of the :ref:`outrankingDigraphs-label`.
 Outranking digraph
 ..................
 
-In this *Digraph3* module, the root :code:`OutrankingDiraph` class provides a generic **outranking digraph model**. A given object of this class consists in:
+In this *Digraph3* module, the root :py:class:`outrankingDigraphs.OutrankingDigraph` class provides a generic **outranking digraph model**. A given object of this class consists in:
 
 1. a potential set of decision **actions** : a dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
 2. a coherent family of **criteria**: a dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
@@ -932,8 +933,8 @@ In this *Digraph3* module, the root :code:`OutrankingDiraph` class provides a ge
 4. the digraph **valuationdomain**, a dictionary with three entries: the *minimum* (-100, means certainly no link), the *median* (0, means missing information) and the *maximum* characteristic value (+100, means certainly a link),
 5. the **outranking relation** : a double dictionary defined on the Cartesian product of the set of decision alternatives capturing the credibility of the pairwise *outranking situation* computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.   
 
-With the help of the ``RandomBipolarOutrankingDigraph`` class (of type ``BipolarOutrankingDigraph``) , let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted *a01*, *a02*, ..., *a07*:
-       >>> from outrankingDigraphs import *
+With the help of the :py:class:`outrankingDigraphs.RandomBipolarOutrankingDigraph` class (of type :py:class:`outrankingDigraphs.BipolarOutrankingDigraph`) , let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted *a01*, *a02*, ..., *a07*:
+       >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
        >>> odg = RandomBipolarOutrankingDigraph()
        >>> odg.showActions()
        *----- show digraphs actions --------------*
@@ -1017,7 +1018,7 @@ There is no doubt that action *a03*, with a performance in the highest quintile 
 Valuation semantics
 ...................
 
-Considering the given performance tableau, the ``BipolarOutrankingDigraph`` class constructor computes the characteristic value :math:`r(x\,S\,y)` of a pairwise outranking relation ":math:`x\,S\,y`" (see [BIS-2013]_, [ADT-L7]_) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:
+Considering the given performance tableau, the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class constructor computes the characteristic value :math:`r(x\,S\,y)` of a pairwise outranking relation ":math:`x\,S\,y`" (see [BIS-2013]_, [ADT-L7]_) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:
     1. If :math:`r(x\,S\,y) > 0.0` it is more *True* than *False* that *x outranks y*, i.e. alternative x is at least as well performing than alternative y **and** there is no considerable negative performance difference observed in disfavour of x,
     2. If :math:`r(x\,S\,y) < 0.0` it is more *False* than *True* that *x outranks y*, i.e. alternative x is **not** at least as well performing than alternative y **and** there is no considerable positive performance difference observed in favour of x,
     3. If :math:`r(x\,S\,y) = 0.0` it is *indeterminate* whether *x outranks y or not*.
@@ -1078,7 +1079,7 @@ This time, we observe a considerable out-performance of *a03* against *a02* on c
 Recoding the valuation
 ......................
 
-All outranking digraphs, being of root type ``Digraph``, inherit the methods available under this class. The characteristic valuation domain of an outranking digraph may be recoded with the ``Digraph.recodeValutaion()`` method below to the integer range [-37,+37], i.e. plus or minus the global significance of the family of criteria considered in this example instance:
+All outranking digraphs, being of root type :py:class:`digraphs.Digraph`, inherit the methods available under this class. The characteristic valuation domain of an outranking digraph may be recoded with the :py:func:`digraphs.Digraph.recodeValutaion()` method below to the integer range [-37,+37], i.e. plus or minus the global significance of the family of criteria considered in this example instance:
 	>>> odg.recodeValuation(-37,+37)
 	>>> odg.valuationdomain['hasIntegerValuation'] = True
 	>>> Digraph.showRelationTable(odg)
@@ -1121,7 +1122,7 @@ It becomes readily clear now from the picture above that alternative *a03* stric
 XMCDA 2.0
 .........
 
-As with all Digraph instances, it is possible to store permanently a copy of the outranking digraph *odg*. As its outranking relation is automatically generated by the ``BipolarOutrankingDigraph`` class constructor on the basis of a given performance tableau, it is sufficient to save only the latter. For this purpose we are using the `XMCDA 2.00 <http://www.decision-deck.org/xmcda/>`_ XML encoding scheme of MCDA data, as provided by the Decision Deck Project (see http://www.decision-deck.org/):
+As with all Digraph instances, it is possible to store permanently a copy of the outranking digraph *odg*. As its outranking relation is automatically generated by the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class constructor on the basis of a given performance tableau, it is sufficient to save only the latter. For this purpose we are using the `XMCDA 2.00 <http://www.decision-deck.org/xmcda/>`_ XML encoding scheme of MCDA data, as provided by the Decision Deck Project (see http://www.decision-deck.org/):
 	>>> PerformanceTableau.saveXMCDA2(odg,'tutorialPerfTab')
 	*----- saving performance tableau in XMCDA 2.0 format  -------------*
 	File: tutorialPerfTab.xml saved !
@@ -1504,7 +1505,7 @@ We may also notice that both alternatives *A* and *F* are reported as certainly 
 Weakly ordering
 ...............
 
-To get a more complete insight in the overall strict outranking situations, we may use the :py:class:`RankingByChoosingDigraph` constructor imported from the :ref:`weakOrders-label` module, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*:
+To get a more complete insight in the overall strict outranking situations, we may use the :py:class:`weakOrders.RankingByChoosingDigraph` constructor imported from the :ref:`weakOrders-label` module, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*:
     >>> from weakOrders import RankingByChoosingDigraph
     >>> rbc = RankingByChoosingDigraph(gcd)
     Threading ...  ## multiprocessing if 2 cores are available
