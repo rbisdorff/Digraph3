@@ -1746,11 +1746,11 @@ linearBallot = {
 <div class="section" id="valuation-semantics">
 <h3><a class="toc-backref" href="#id65">Valuation semantics</a><a class="headerlink" href="#valuation-semantics" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>Considering the given performance tableau, the <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt> class constructor computes the characteristic value r(x S y) of a pairwise outranking relation &#8220;x S y&#8221; (see <a class="reference internal" href="#bis-2013" id="id13">[BIS-2013]</a>, <a class="reference internal" href="#adt-l7" id="id14">[ADT-L7]</a>) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:</dt>
+<dt>Considering the given performance tableau, the <tt class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></tt> class constructor computes the characteristic value <img class="math" src="_images/math/1057d77b407580c943a18eff633c58ceaab4f97a.png" alt="r(x\,S\,y)"/> of a pairwise outranking relation &#8220;<img class="math" src="_images/math/9a79d10a9da5e5d5a6164a12b37feb9b83c528e9.png" alt="x\,S\,y"/>&#8221; (see <a class="reference internal" href="#bis-2013" id="id13">[BIS-2013]</a>, <a class="reference internal" href="#adt-l7" id="id14">[ADT-L7]</a>) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:</dt>
 <dd><ol class="first last arabic simple">
-<li>If r(x S y) &gt; 0.0 it is more <em>True</em> than <em>False</em> that <em>x outranks y</em>, i.e. alternative x is at least as well performing than alternative y <strong>and</strong> there is no considerable negative performance difference observed in disfavour of x,</li>
-<li>If r(x S y) &lt; 0.0 it is more <em>False</em> than <em>True</em> that <em>x outranks y</em>, i.e. alternative x is <strong>not</strong> at least as well performing than alternative y <strong>and</strong> there is no considerable positive performance difference observed in favour of x,</li>
-<li>If r(x S y) = 0.0 it is <em>indeterminate</em> whether <em>x outranks y or not</em>.</li>
+<li>If <img class="math" src="_images/math/b30e24527bbe8618553b013e7de8dc5f356d21f1.png" alt="r(x\,S\,y) &gt; 0.0"/> it is more <em>True</em> than <em>False</em> that <em>x outranks y</em>, i.e. alternative x is at least as well performing than alternative y <strong>and</strong> there is no considerable negative performance difference observed in disfavour of x,</li>
+<li>If <img class="math" src="_images/math/784d5ff7d90a9e778de5854dae9cfdb97b459193.png" alt="r(x\,S\,y) &lt; 0.0"/> it is more <em>False</em> than <em>True</em> that <em>x outranks y</em>, i.e. alternative x is <strong>not</strong> at least as well performing than alternative y <strong>and</strong> there is no considerable positive performance difference observed in favour of x,</li>
+<li>If <img class="math" src="_images/math/a65531594d32e10d8f3819f4a8378da9bbf6472b.png" alt="r(x\,S\,y) = 0.0"/> it is <em>indeterminate</em> whether <em>x outranks y or not</em>.</li>
 </ol>
 </dd>
 <dt>The resulting bipolarly valued outranking relation may be inspected with the following command:</dt>
@@ -1787,7 +1787,7 @@ linearBallot = {
 <div class="section" id="pairwise-comparisons">
 <h3><a class="toc-backref" href="#id66">Pairwise comparisons</a><a class="headerlink" href="#pairwise-comparisons" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>From above given semantics, we may consider that <em>a01</em> outranks <em>a02</em> (r(a01 S a02) &gt; 0.0), but not <em>a03</em> (r(a01 S a03) &lt; 0.0). In order to make understandable the characteristic values shown in the relation table above, we may furthermore have a look at the pairwise multiple criteria comparison between alternatives <em>a01</em> and <em>a02</em>:</dt>
+<dt>From above given semantics, we may consider that <em>a01</em> outranks <em>a02</em> (<img class="math" src="_images/math/a1da00b27dbbf5afeb11a856bb366a584c40b774.png" alt="r(a_{01}\,S\,a_{02}) &gt; 0.0"/>), but not <em>a03</em> (<img class="math" src="_images/math/ea9ea2c597e31e1ac2402b0508a895d394620b70.png" alt="r(a_{01}\,S\,a_{03}) &lt; 0.0"/>). In order to make understandable the characteristic values shown in the relation table above, we may furthermore have a look at the pairwise multiple criteria comparison between alternatives <em>a01</em> and <em>a02</em>:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1818,7 +1818,7 @@ linearBallot = {
 </pre></div>
 </td></tr></table></div>
 </dd>
-<dt>The outranking valuation characteristic appears as <strong>majority margin</strong> resulting from the difference of the weights of the criteria in favor of the statement that alternative <em>a01</em> is at least well performing as alternative <em>a02</em>. No considerable performance difference being observed, no veto or counter.veto situation is triggered in this pairwise comparison. Such a case is, however, observed for instance when we pairwise compare the performances of alternatives <em>a03</em> and <em>a02</em>:</dt>
+<dt>The outranking valuation characteristic appears as <strong>majority margin</strong> resulting from the difference of the weights of the criteria in favor of the statement that alternative <em>a01</em> is at least well performing as alternative <em>a02</em>. No considerable performance difference being observed, no veto or counter-veto situation is triggered in this pairwise comparison. Such a case is, however, observed for instance when we pairwise compare the performances of alternatives <em>a03</em> and <em>a02</em>:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1897,13 +1897,13 @@ linearBallot = {
 </dl>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Notice that the reflexive self comparison characteristic r(x S x) is set by default to the median indeterminate valuation value 0; the reflexive terms of binary relation being generally ignored in most of the <tt class="docutils literal"><span class="pre">Digraph3</span></tt> resources.</p>
+<p class="last">Notice that the reflexive self comparison characteristic <img class="math" src="_images/math/92e4fff5e06d44fc2658c4e10102ca6fac67d88a.png" alt="r(x S x)"/> is set by default to the median indeterminate valuation value 0; the reflexive terms of binary relation being generally ignored in most of the <tt class="docutils literal"><span class="pre">Digraph3</span></tt> resources.</p>
 </div>
 </div>
 <div class="section" id="codual-digraph">
 <h3><a class="toc-backref" href="#id68">Codual digraph</a><a class="headerlink" href="#codual-digraph" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>From the theory (see <a class="reference internal" href="#bis-2013" id="id16">[BIS-2013]</a>, <a class="reference internal" href="#adt-l7" id="id17">[ADT-L7]</a> )  we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if r(x S y) &lt; 0.0 then r(y S x) &gt;= 0.0 . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id29" id="id18">[1]</a>:</dt>
+<dt>From the theory (see <a class="reference internal" href="#bis-2013" id="id16">[BIS-2013]</a>, <a class="reference internal" href="#adt-l7" id="id17">[ADT-L7]</a> )  we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if <img class="math" src="_images/math/784d5ff7d90a9e778de5854dae9cfdb97b459193.png" alt="r(x\,S\,y) &lt; 0.0"/> then <img class="math" src="_images/math/c57e79de341b208f0246139a4e3b8dcd53e6333c.png" alt="r(y\,S\,x) &gt;= 0.0"/> . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id29" id="id18">[1]</a>:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
