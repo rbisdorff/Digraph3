@@ -1504,7 +1504,7 @@ We may also notice that both alternatives *A* and *F* are reported as certainly 
 Weakly ordering
 ...............
 
-To get a more complete insight in the overall strict outranking situations, we may use the ``RankingByChoosingDigraph`` constructor imported from the :ref:`weakOrders-label` module, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*:
+To get a more complete insight in the overall strict outranking situations, we may use the :py:class:`RankingByChoosingDigraph` constructor imported from the :ref:`weakOrders-label` module, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*:
     >>> from weakOrders import RankingByChoosingDigraph
     >>> rbc = RankingByChoosingDigraph(gcd)
     Threading ...  ## multiprocessing if 2 cores are available
