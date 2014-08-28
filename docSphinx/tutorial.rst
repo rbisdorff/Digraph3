@@ -747,12 +747,87 @@ The ``checkSampling()`` method generates a randomwalk of *nSim=30000* steps on t
 
 For more technical information and more code examples, look into the technical documentation of the :ref:`graphs-label`. For the readers interested in algorithmic applications of Markov Chains we may may recommend consulting O. Häggström's 2002 book: [FMCAA]_.
 
+Who is the lier?
+................
+Suppose that the file ``berge.py`` contains the following :py:class:`graphs.Graph` instance data::
+
+    vertices = {
+    'A': {'name': 'Abe', 'shortName': 'A'},
+    'B': {'name': 'Burt', 'shortName': 'B'},
+    'C': {'name': 'Charlotte', 'shortName': 'C'},
+    'D': {'name': 'Desmond', 'shortName': 'D'},
+    'E': {'name': 'Eddie', 'shortName': 'E'},
+    'I': {'name': 'Ida', 'shortName': 'I'},
+    }
+    valuationDomain = {'min':-1,'med':0,'max':1}
+    edges = {
+    frozenset(['A','B']) : 1, 
+    frozenset(['A','C']) : -1, 
+    frozenset(['A','D']) : 1, 
+    frozenset(['A','E']) : 1, 
+    frozenset(['A','I']) : -1, 
+    frozenset(['B','C']) : -1, 
+    frozenset(['B','D']) : -1, 
+    frozenset(['B','E']) : 1, 
+    frozenset(['B','I']) : 1, 
+    frozenset(['C','D']) : 1, 
+    frozenset(['C','E']) : 1, 
+    frozenset(['C','I']) : 1, 
+    frozenset(['D','E']) : -1, 
+    frozenset(['D','I']) : 1, 
+    frozenset(['E','I']) : 1, 
+    }
+
+This data concerns the famous *Berge mystery story* (see Golumbic, M. C. Algorithmic Graph Theory and Perfect Graphs, *Annals of Discrete Mathematics* 57 p. 20) Six professors (labelled *A*, *B*, *C*, *D*, *E* and *I*) had been to the library on the day that a rare tractate was stolen. Each entered once, stayed for some time, and then left. If two professors were in the lbrary at the same time, then at least one of them saw the other. Detectives questioned the professors and gathered the testimony that *A* saw *B* and *E*; *B* saw *A* and *I*; *C* saw *D* and *I*; *D* saw *A* and *I*; *E* saw *B* and *I*; and *I* saw *C* and *E*. This data is gathered in the previous file, where each positive edge :math:`\{x,y\}` models the testimony that, either *x* saw *y*, or, *y* saw *x*.
+
+Example Python3 session:
+    >>> from graphs import Graph
+    >>> g = Graph('berge')
+    >>> g.showShort()
+    *---- short description of the graph ----*
+    Name             : 'berge'
+    Vertices         :  ['A', 'B', 'C', 'D', 'E', 'I']
+    Valuation domain :  {'min': -1, 'med': 0, 'max': 1}
+    Gamma function   : 
+    A -> ['D', 'B', 'E']
+    B -> ['E', 'I', 'A']
+    C -> ['E', 'D', 'I']
+    D -> ['C', 'I', 'A']
+    E -> ['C', 'B', 'I', 'A']
+    I -> ['C', 'E', 'B', 'D']
+
+ The graph data can be plotted again with the generic :py:func:`graphs.Graph.exportGraphViz()` [1]_ method as follows:
+	>>> g.exportGraphViz()
+	*---- exporting a dot file for GraphViz tools ---------*
+	Exporting to berge.dot
+	fdp -Tpng berge.dot -o berge.png
+
+.. image:: berge.png
+   :width: 400 px
+   :align: center
+
+From graph theory we know that time interval intersection graphs must in fact be triangulated. The testimony should therefore not contain any chordless cycles of four and more vertices. Now, the presence of chordless cycles may be enumerated in the given testimony like follows:
+	>>> g.computeChordlessCycles()
+	Chordless cycle certificate -->>>  ['D', 'C', 'E', 'A', 'D']
+	Chordless cycle certificate -->>>  ['D', 'I', 'E', 'A', 'D']
+	Chordless cycle certificate -->>>  ['D', 'I', 'B', 'A', 'D']
+	[(['D', 'C', 'E', 'A', 'D'], frozenset({'C', 'D', 'E', 'A'})),
+        (['D', 'I', 'E', 'A', 'D'], frozenset({'D', 'E', 'I', 'A'})), 
+        (['D', 'I', 'B', 'A', 'D'], frozenset({'D', 'B', 'I', 'A'}))]
+
+We see three intersection cycles of length 4, which is impossible to occurr on the linear time line. Obviously one professor lied! And it is *D* ; if we drop the fact that he saw *A*, we obtain indeed the following triangulated graph:
+
+.. image:: berge1.png
+   :width: 400 px
+   :align: center
+
 Back to :ref:`Tutorial-label`
 
 .. _LinearVoting-label:
 
 Computing the winner of an election
 -----------------------------------
+
 
 .. contents:: 
 	:depth: 2

@@ -6809,7 +6809,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.order = len(self.actions)
         self.valuationdomain = deepcopy(bodg.valuationdomain)
         self.criteria = deepcopy(bodg.criteria)
-        self.evlauation = deepcopy(bodg.evaluation)
+        self.evaluation = deepcopy(bodg.evaluation)
         self.relation = deepcopy(bodg.relation)
         
         # normalize valuation to percentages
