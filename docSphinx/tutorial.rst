@@ -773,7 +773,7 @@ Suppose that the file ``berge.py`` contains the following :py:class:`graphs.Grap
     frozenset(['E','I']) : 1, 
     }
 
-This data concerns the famous *Berge mystery story* (see Golumbic, M. C. Algorithmic Graph Theory and Perfect Graphs, *Annals of Discrete Mathematics* 57 p. 20) Six professors (labelled *A*, *B*, *C*, *D*, *E* and *I*) had been to the library on the day that a rare tractate was stolen. Each entered once, stayed for some time, and then left. If two professors were in the lbrary at the same time, then at least one of them saw the other. Detectives questioned the professors and gathered the testimony that *A* saw *B* and *E*; *B* saw *A* and *I*; *C* saw *D* and *I*; *D* saw *A* and *I*; *E* saw *B* and *I*; and *I* saw *C* and *E*. This data is gathered in the previous file, where each positive edge :math:`\{x,y\}` models the testimony that, either *x* saw *y*, or, *y* saw *x*.
+This data concerns the famous *Berge mystery story* (see Golumbic, M. C. Algorithmic Graph Theory and Perfect Graphs, *Annals of Discrete Mathematics* 57 p. 20) Six professors (labelled *A*, *B*, *C*, *D*, *E* and *I*) had been to the library on the day that a rare tractate was stolen. Each entered once, stayed for some time, and then left. If two professors were in the lbrary at the same time, then at least one of them saw the other. Detectives questioned the professors and gathered the testimonies that *A* saw *B* and *E*; *B* saw *A* and *I*; *C* saw *D* and *I*; *D* saw *A* and *I*; *E* saw *B* and *I*; and *I* saw *C* and *E*. This data is gathered in the previous file, where each positive edge :math:`\{x,y\}` models the testimony that, either *x* saw *y*, or, *y* saw *x*.
 
 Example Python3 session:
     >>> from graphs import Graph
@@ -791,13 +791,13 @@ Example Python3 session:
     E -> ['C', 'B', 'I', 'A']
     I -> ['C', 'E', 'B', 'D']
 
- The graph data can be plotted again with the generic :py:func:`graphs.Graph.exportGraphViz()` [1]_ method as follows:
-	>>> g.exportGraphViz()
+ The graph data can be plotted as follows:
+	>>> g.exportGraphViz('berge1')
 	*---- exporting a dot file for GraphViz tools ---------*
-	Exporting to berge.dot
-	fdp -Tpng berge.dot -o berge.png
+	Exporting to berge1.dot
+	fdp -Tpng berge1.dot -o berge1.png
 
-.. image:: berge.png
+.. image:: berge1.png
    :width: 400 px
    :align: center
 
