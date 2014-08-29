@@ -810,7 +810,7 @@ From graph theory we know that time interval intersection graphs must in fact be
         (['D', 'I', 'E', 'A', 'D'], frozenset({'D', 'E', 'I', 'A'})), 
         (['D', 'I', 'B', 'A', 'D'], frozenset({'D', 'B', 'I', 'A'}))]
 
-We see three intersection cycles of length 4, which is impossible to occurr on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt the fact that he saw *A*, we obtain indeed a triangulated graph:
+We see three intersection cycles of length 4, which is impossible to occurr on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt the testimony that he saw *A*, we obtain indeed a triangulated graph:
 	>>> g.setEdgeValue( ('D','A'), 0)
 	>>> g.showShort()
 	*---- short description of the graph ----*
@@ -827,7 +827,7 @@ We see three intersection cycles of length 4, which is impossible to occurr on t
 	>>> g.computeChordlessCycles()
 	[]
 	>>> g.exportGraphViz('berge2')
-	*---- exporting a dot file dor GraphViz tools ---------*
+	*---- exporting a dot file for GraphViz tools ---------*
 	Exporting to berge2.dot
 	fdp -Tpng berge2.dot -o berge2.png
 
