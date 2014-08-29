@@ -801,7 +801,7 @@ Example Python3 session:
    :width: 400 px
    :align: center
 
-From graph theory we know that time interval intersection graphs must in fact be triangulated. The testimony should therefore not contain any chordless cycles of four and more vertices. Now, the presence of chordless cycles may be enumerated in the given testimony like follows:
+From graph theory we know that time interval intersection graphs must in fact be triangulated. The testimonies graph model should therefore not contain any chordless cycles of four and more vertices. Now, the presence of chordless cycles in the testimonies graph may be checked as follows:
 	>>> g.computeChordlessCycles()
 	Chordless cycle certificate -->>>  ['D', 'C', 'E', 'A', 'D']
 	Chordless cycle certificate -->>>  ['D', 'I', 'E', 'A', 'D']
@@ -810,7 +810,7 @@ From graph theory we know that time interval intersection graphs must in fact be
         (['D', 'I', 'E', 'A', 'D'], frozenset({'D', 'E', 'I', 'A'})), 
         (['D', 'I', 'B', 'A', 'D'], frozenset({'D', 'B', 'I', 'A'}))]
 
-We see three intersection cycles of length 4, which is impossible to occurr on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt the testimony that he saw *A*, we obtain indeed a triangulated graph:
+We see three intersection cycles of length 4, which is impossible to occurr on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt the testimony that he indeed saw *A*, we obtain a correctly triangulated graph:
 	>>> g.setEdgeValue( ('D','A'), 0)
 	>>> g.showShort()
 	*---- short description of the graph ----*
