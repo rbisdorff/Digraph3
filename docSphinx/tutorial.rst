@@ -598,11 +598,39 @@ The stored graph can be recalled and plotted with the generic :py:func:`graphs.G
    :width: 400 px
    :align: center
 
+A ``Graph`` instance corresponds bijectively to a symmetric ``Digraph`` instance and we may easily convert from one to the other with the :py:func:`graphs.Graph.graph2Digraph()`, and vice versa with the :py:func:`digraphs.Digraph.digraph2Graph()` method. Thus, all resources of the :py:class:`digraphs.Digraph` class, suitable for symmetric digraphs, become readily available, and vice versa:
+	>>> dg = g.graph2Digraph()
+	>>> dg.showRelationTable(ndigits=0,ReflexiveTerms=False)
+	* ---- Relation Table -----
+	  S  |  'v1'  'v2'  'v3'  'v4'  'v5'  'v6'  'v7'	  
+	-----|------------------------------------------
+	'v1' |    -    -1    -1    -1     1    -1    -1	 
+	'v2' |   -1     -     1     1    -1     1    -1	 
+	'v3' |   -1     1     -    -1    -1    -1    -1	 
+	'v4' |   -1     1    -1     -     1    -1     1	 
+	'v5' |    1    -1    -1     1     -     1    -1	 
+	'v6' |   -1     1    -1    -1     1     -    -1	 
+	'v7' |   -1    -1    -1     1    -1    -1     -
+	>>> g1 = dg.digraph2Graph()
+	>>> g1.showShort()
+	*---- short description of the graph ----*
+	Name             : 'tutorialGraph'
+	Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7']
+	Valuation domain :  {'med': 0, 'min': -1, 'max': 1}
+	Gamma function   : 
+	v1 -> ['v5']
+	v2 -> ['v3', 'v6', 'v4']
+	v3 -> ['v2']
+	v4 -> ['v5', 'v7', 'v2']
+	v5 -> ['v6', 'v1', 'v4']
+	v6 -> ['v5', 'v2']
+	v7 -> ['v4']
+	>>> 
 
 q-coloring of a graph
 .....................
 
-And, a 3-coloring of the tutorial graph *g* may be computed and plotted with the :py:class:`graphs.Q_Coloring` class as follows:
+A 3-coloring of the tutorial graph *g* may for instance be computed and plotted with the :py:class:`graphs.Q_Coloring` class as follows:
 	>>> from graphs import Q_Coloring
 	>>> qc = Q_Coloring(g)
 	Running a Gibbs Sampler for 42 step !
@@ -648,7 +676,7 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
 MIS enumeration
 ...............
 
-2-colorings define independent sets of vertices that are maximal in cardinality; for short called a **MIS**. Computing such MISs in a given :code:`Graph` instance may be achieved by converting the :py:class:`graphs.Graph` instance into a :py:class:`digraphs.Digraph` instance. Here a :py:func:`digraphs.Digraph.showMIS()` method is proposed:
+2-colorings define independent sets of vertices that are maximal in cardinality; for short called a **MIS**. Computing such MISs in a given :code:`Graph` instance may be achieved by converting the :py:class:`graphs.Graph` instance into a :py:class:`digraphs.Digraph` instance:
 	>>> g = Graph('tutorialGraph')
 	>>> dg = g.graph2Digraph()
 	>>> dg.showMIS()
@@ -801,7 +829,7 @@ Example Python3 session:
    :width: 400 px
    :align: center
 
-From graph theory we know that time interval intersection graphs must in fact be triangulated. The testimonies graph model should therefore not contain any chordless cycles of four and more vertices. Now, the presence of chordless cycles in the testimonies graph may be checked as follows:
+From graph theory we know that time interval intersection graphs must in fact be triangulated. The testimonies graph should therefore not contain any chordless cycles of four and more vertices. Now, the presence or not of chordless cycles may be checked as follows:
 	>>> g.computeChordlessCycles()
 	Chordless cycle certificate -->>>  ['D', 'C', 'E', 'A', 'D']
 	Chordless cycle certificate -->>>  ['D', 'I', 'E', 'A', 'D']
