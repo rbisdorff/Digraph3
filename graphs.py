@@ -67,22 +67,28 @@ class Graph(object):
         Wrapper for updating the charactreistic valuation of a Graph instance.
         The egde parameter consists in a pair of vertices;
         edge = ('v1','v2') for instance.
+        The new value must be in the limits of the valuation domain.
         """
         from decimal import Decimal
+        # check vertices' existance
+        verticesIds = [x for x in self.vertices]
+        if (edge[0] not in verticesIds) or (edge[1] not in verticesIds):
+            self.showShort()
+            print('!!! Error: edge %s not found !!!' % str(edge))
+            return         
+        # check new edge value
         Min = self.valuationDomain['min']
         Max = self.valuationDomain['max']
-        try:
-            if value <= Max and value >= Min:
-                self.edges[frozenset(edge)] = Decimal(str(value))
-            else:
-                print('!!! Error: edge value %s out of range !!!' % str(value))
-                print(self.valuationDomain)
-                return 
-            self.gamma = self.gammaSets()
-            if Comments:
-                print('edge %s put to value %s.' % (edge,str(value)))
-        except:
-            print('!!! Error: edge %s not found !!!' % edge)
+        newValue = Decimal(str(value))
+        if newValue > Max or value < Min:
+            print('!!! Error: edge value %s out of range !!!' % str(value))
+            print(self.valuationDomain)
+            return
+        # set new value
+        self.edges[frozenset(edge)] = Decimal(str(value))
+        self.gamma = self.gammaSets()
+        if Comments:
+            print('edge %s put to value %s.' % (edge,str(value)))
                   
     def graph2Digraph(self):
         """
