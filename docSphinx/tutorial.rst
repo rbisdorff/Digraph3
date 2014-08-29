@@ -597,12 +597,7 @@ The stored graph can be recalled and plotted with the generic :py:func:`graphs.G
 .. image:: tutorialGraph.png
    :width: 400 px
    :align: center
- 
-Chordless cycles may be enumerated in the given graph like follows:
-	>>> g = Graph('tutorialGraph')
-	>>> g.computeChordlessCycles()
-	Chordless cycle certificate -->>>  ['v5', 'v4', 'v2', 'v6', 'v5']
-	[(['v5', 'v4', 'v2', 'v6', 'v5'], frozenset({'v5', 'v4', 'v2', 'v6'}))]
+
 
 q-coloring of a graph
 .....................
@@ -815,9 +810,28 @@ From graph theory we know that time interval intersection graphs must in fact be
         (['D', 'I', 'E', 'A', 'D'], frozenset({'D', 'E', 'I', 'A'})), 
         (['D', 'I', 'B', 'A', 'D'], frozenset({'D', 'B', 'I', 'A'}))]
 
-We see three intersection cycles of length 4, which is impossible to occurr on the linear time line. Obviously one professor lied! And it is *D* ; if we drop the fact that he saw *A*, we obtain indeed the following triangulated graph:
+We see three intersection cycles of length 4, which is impossible to occurr on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt the fact that he saw *A*, we obtain indeed a triangulated graph:
+	>>> g.setEdgeValue( ('D','A'), 0)
+	>>> g.showShort()
+	*---- short description of the graph ----*
+	Name             : 'berge'
+	Vertices         :  ['A', 'B', 'C', 'D', 'E', 'I']
+	Valuation domain :  {'med': 0, 'min': -1, 'max': 1}
+	Gamma function   : 
+	A -> ['B', 'E']
+	B -> ['A', 'I', 'E']
+	C -> ['I', 'E', 'D']
+	D -> ['I', 'C']
+	E -> ['A', 'I', 'B', 'C']
+	I -> ['B', 'E', 'D', 'C']
+	>>> g.computeChordlessCycles()
+	[]
+	>>> g.exportGraphViz('berge2')
+	*---- exporting a dot file dor GraphViz tools ---------*
+	Exporting to berge2.dot
+	fdp -Tpng berge2.dot -o berge2.png
 
-.. image:: berge1.png
+.. image:: berge2.png
    :width: 400 px
    :align: center
 
@@ -827,7 +841,6 @@ Back to :ref:`Tutorial-label`
 
 Computing the winner of an election
 -----------------------------------
-
 
 .. contents:: 
 	:depth: 2
