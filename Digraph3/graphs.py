@@ -62,6 +62,28 @@ class Graph(object):
             self.size = len(self.edges)
             self.gamma = self.gammaSets()
 
+    def setEdgeValue(self,edge,value,Comments=False):
+        """
+        Wrapper for updating the charactreistic valuation of a Graph instance.
+        The egde parameter consists in a pair of vertices;
+        edge = ('v1','v2') for instance.
+        """
+        from decimal import Decimal
+        Min = self.valuationDomain['min']
+        Max = self.valuationDomain['max']
+        try:
+            if value <= Max and value >= Min:
+                self.edges[frozenset(edge)] = Decimal(str(value))
+            else:
+                print('!!! Error: edge value %s out of range !!!' % str(value))
+                print(self.valuationDomain)
+                return 
+            self.gamma = self.gammaSets()
+            if Comments:
+                print('edge %s put to value %s.' % (edge,str(value)))
+        except:
+            print('!!! Error: edge %s not found !!!' % edge)
+                  
     def graph2Digraph(self):
         """
         Converts a Graph object into a Digraph object.
@@ -282,7 +304,7 @@ class Graph(object):
         """
         import os
         if noSilent:
-            print('*---- exporting a dot file dor GraphViz tools ---------*')
+            print('*---- exporting a dot file for GraphViz tools ---------*')
         vertexkeys = [x for x in self.vertices]
         n = len(vertexkeys)
         edges = self.edges
