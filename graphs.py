@@ -200,7 +200,7 @@ class Graph(object):
                 gamma[e2].add(e1)
         return gamma
 
-    def chordlessPaths(self,Pk,v0, Comments = False, Debug = False):
+    def _chordlessPaths(self,Pk,v0, Comments = False, Debug = False):
         """
         recursice chordless precycle (len > 3) construction:
             Pk is the current pre chordless cycle
@@ -263,7 +263,7 @@ class Graph(object):
                         P.append(v)
                         if Debug:
                             print('P,v0',P,v0)
-                        if self.chordlessPaths(P,v0,Comments,Debug):
+                        if self._chordlessPaths(P,v0,Comments,Debug):
                             # we continue with the current chordless precycle
                             detectedChordlessCycle=True
             if Debug:
@@ -281,7 +281,7 @@ class Graph(object):
         for v in verticesKeys:
             P = [v]
             self.xCC = []
-            if self.chordlessPaths(P,v,Comments=Comments,Debug=Debug):
+            if self._chordlessPaths(P,v,Comments=Comments,Debug=Debug):
                 chordlessCycles += self.xCC
         self.chordlessCycles = chordlessCycles
         chordlessCyclesList = [ (x,frozenset(x)) for x in chordlessCycles]
