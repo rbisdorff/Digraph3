@@ -78,53 +78,53 @@
 <p>Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff &lt;<a class="reference external" href="http://charles-sanders-peirce.uni.lu/bisdorff/">http://charles-sanders-peirce.uni.lu/bisdorff/</a>&gt;, University of Luxembourg.</p>
 <p>To be fully functional, the Digraph3 resources mainly need the <a class="reference external" href="http://graphviz.org">graphviz</a> tools and the <a class="reference external" href="http://www.r-project.org">R statistics resources</a> to be installed. When exploring digraph isomorphisms, the <a class="reference external" href="http://www.cs.sunysb.edu/~algorith/implement/nauty/implement.shtml">nauty</a> isomorphism testing program is required. two specific criteria and actions clustering methods of the Digraph class furthermore require the <a class="reference external" href="http://leopold-loewenheim.uni.lu/svn/repos/Calmat/">calmat</a> matrix computing resource to be installed.</p>
 <p><strong>Organisation of the Digraph3 python3 source code</strong></p>
-<p>The Digraph3 source code is split into several interdependent modules, where the <tt class="docutils literal"><span class="pre">digraphs</span></tt> module is the master source.</p>
+<p>The Digraph3 source code is split into several interdependent modules of which the <tt class="docutils literal"><span class="pre">digraphs</span></tt> module is the master module.</p>
 <ul>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#digraphs-label"><em>digraphs module</em></a></dt>
-<dd><p class="first last">main part of the Digraph3 source code with the root <a class="reference external" href="techDoc.html#digraphs.Digraph">Digraph</a> class;</p>
+<dd><p class="first last">Main part of the Digraph3 source code with the root <a class="reference external" href="techDoc.html#digraphs.Digraph">Digraph</a> class;</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#graphs-label"><em>graphs module</em></a></dt>
-<dd><p class="first last">specialization for undirected graphs with the root <a class="reference external" href="techDoc.html#graphs.Graph">Graph</a> class and a brigde to the <tt class="docutils literal"><span class="pre">digraphs</span></tt> module resources;</p>
+<dd><p class="first last">Specialization for undirected graphs with the root <a class="reference external" href="techDoc.html#graphs.Graph">Graph</a> class and a brigde to the <tt class="docutils literal"><span class="pre">digraphs</span></tt> module resources;</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#outrankingdigraphs-label"><em>outrankingDigraphs module</em></a></dt>
-<dd><p class="first last">new Python3 versioned root <a class="reference external" href="techDoc.html#outrankingDigraphs.OutrankingDigraph">OutrankingDigraph</a> class and specializations;</p>
+<dd><p class="first last">New Python3 specific root <a class="reference external" href="techDoc.html#outrankingDigraphs.OutrankingDigraph">OutrankingDigraph</a> class and specializations;</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#perftabs-label"><em>perfTabs module</em></a></dt>
-<dd><p class="first last">everything needed for handling Multiple Criteria Decision Aid performance tableaux with root <a class="reference external" href="techDoc.html#perfTabs.PerformanceTableau">PerformaceTableau</a> class;</p>
+<dd><p class="first last">Everything needed for handling Multiple Criteria Decision Aid performance tableaux with root <a class="reference external" href="techDoc.html#perfTabs.PerformanceTableau">PerformaceTableau</a> class;</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#votingdigraphs-label"><em>votingDigraphs module</em></a></dt>
-<dd><p class="first last">additional classes and methods for computing election results with main <a class="reference external" href="techDoc.html#votingDigraphs.LinearVotingProfile">LinearVotingProfile</a> class;</p>
+<dd><p class="first last">Additional classes and methods for computing election results with main <a class="reference external" href="techDoc.html#votingDigraphs.LinearVotingProfile">LinearVotingProfile</a> class;</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#sortingdigraphs-label"><em>sortingDigraphs module</em></a></dt>
-<dd><p class="first last">additional tools for solving sorting problems with the root <a class="reference external" href="techDoc.html#sortingDigraphs.SortingDigraph">SortingDigraph</a> class;</p>
+<dd><p class="first last">Additional tools for solving sorting problems with the root <a class="reference external" href="techDoc.html#sortingDigraphs.SortingDigraph">SortingDigraph</a> class;</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#linearorders-label"><em>linearOrders module</em></a></dt>
-<dd><p class="first last">additional tools for solving linearly ranking problems with the root <a class="reference external" href="techDoc.html#linearOrders.LinearOrder">LinearOrder</a> class;</p>
+<dd><p class="first last">Additional tools for solving linearly ranking problems with the root <a class="reference external" href="techDoc.html#linearOrders.LinearOrder">LinearOrder</a> class;</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#weakorders-label"><em>weakOrders module</em></a></dt>
-<dd><p class="first last">additional tools for solving ranking by choosing problems with root <a class="reference external" href="techDoc.html#weakOrders.WeakOrder">WeakOrder</a> class.</p>
+<dd><p class="first last">Additional tools for solving ranking by choosing problems with root <a class="reference external" href="techDoc.html#weakOrders.WeakOrder">WeakOrder</a> class.</p>
 </dd>
 </dl>
 </li>
@@ -1053,7 +1053,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2909,7 +2909,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3624,7 +3624,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">

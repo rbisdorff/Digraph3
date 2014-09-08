@@ -25,24 +25,24 @@ To be fully functional, the Digraph3 resources mainly need the `graphviz <http:/
 
 **Organisation of the Digraph3 python3 source code**
 
-The Digraph3 source code is split into several interdependent modules, where the ``digraphs`` module is the master source.
+The Digraph3 source code is split into several interdependent modules of which the ``digraphs`` module is the master module.
 
 * :ref:`digraphs-label`  
-     main part of the Digraph3 source code with the root `Digraph <techDoc.html#digraphs.Digraph>`_ class;
+     Main part of the Digraph3 source code with the root `Digraph <techDoc.html#digraphs.Digraph>`_ class;
 * :ref:`graphs-label`
-     specialization for undirected graphs with the root `Graph <techDoc.html#graphs.Graph>`_ class and a brigde to the ``digraphs`` module resources;
+     Specialization for undirected graphs with the root `Graph <techDoc.html#graphs.Graph>`_ class and a brigde to the ``digraphs`` module resources;
 * :ref:`outrankingDigraphs-label`
-     new Python3 versioned root `OutrankingDigraph <techDoc.html#outrankingDigraphs.OutrankingDigraph>`_ class and specializations; 
+     New Python3 specific root `OutrankingDigraph <techDoc.html#outrankingDigraphs.OutrankingDigraph>`_ class and specializations; 
 * :ref:`perfTabs-label` 
-     everything needed for handling Multiple Criteria Decision Aid performance tableaux with root `PerformaceTableau <techDoc.html#perfTabs.PerformanceTableau>`_ class;
+     Everything needed for handling Multiple Criteria Decision Aid performance tableaux with root `PerformaceTableau <techDoc.html#perfTabs.PerformanceTableau>`_ class;
 * :ref:`votingDigraphs-label` 
-     additional classes and methods for computing election results with main `LinearVotingProfile <techDoc.html#votingDigraphs.LinearVotingProfile>`_ class;
+     Additional classes and methods for computing election results with main `LinearVotingProfile <techDoc.html#votingDigraphs.LinearVotingProfile>`_ class;
 * :ref:`sortingDigraphs-label`
-     additional tools for solving sorting problems with the root `SortingDigraph <techDoc.html#sortingDigraphs.SortingDigraph>`_ class;
+     Additional tools for solving sorting problems with the root `SortingDigraph <techDoc.html#sortingDigraphs.SortingDigraph>`_ class;
 * :ref:`linearOrders-label` 
-     additional tools for solving linearly ranking problems with the root `LinearOrder <techDoc.html#linearOrders.LinearOrder>`_ class;
+     Additional tools for solving linearly ranking problems with the root `LinearOrder <techDoc.html#linearOrders.LinearOrder>`_ class;
 * :ref:`weakOrders-label` 
-     additional tools for solving ranking by choosing problems with root `WeakOrder <techDoc.html#weakOrders.WeakOrder>`_ class.
+     Additional tools for solving ranking by choosing problems with root `WeakOrder <techDoc.html#weakOrders.WeakOrder>`_ class.
 
 .. toctree::
    :maxdepth: 2
