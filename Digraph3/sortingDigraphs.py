@@ -1261,7 +1261,8 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         criteriaCategoryLimits['lowerClosed'] = LowerClosed
         self.criteriaCategoryLimits = deepcopy(criteriaCategoryLimits)
         for g in self.criteria:
-            gQuantiles = self._computeLimitingQuantiles(g,PrefThresholds=PrefThresholds,Debug=Debug)                
+            gQuantiles = self._computeLimitingQuantiles(g,\
+                            PrefThresholds=PrefThresholds,Debug=Debug)                
             criteriaCategoryLimits[g] = {}
             for c in categories:
                 criteriaCategoryLimits[g][c]={
@@ -1536,7 +1537,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
 ##                                ReflexiveTerms=False)
         
 
-    def _computeQuantiles(self,x,Debug=True):
+    def _computeQuantiles(self,x,Debug=False):
         """
         renders the limiting quantiles
         """
@@ -1586,7 +1587,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         self.name = 'sorting_with_%d-tile_limits' % n
         return limitingQuantiles
                                          
-    def _computeLimitingQuantiles(self,g,Debug=True,PrefThresholds=True):
+    def _computeLimitingQuantiles(self,g,Debug=False,PrefThresholds=True):
         """
         Renders the list of limiting quantiles on criteria g
         """
@@ -1626,12 +1627,13 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         if LowerClosed:
             # we ignore the 1.00 quantile and replace it with +infty
             for q in self.limitingQuantiles:
-                r = (nf * q)
+                r = (Decimal(str(nf)) * q)
                 rq = int(floor(r))
                 if Debug:
                     print('r,rq',r,rq, end=' ')
                 if rq < (n-1):
-                    quantile = gValues[rq] + ((r-rq)*(gValues[rq+1]-gValues[rq]))
+                    quantile = gValues[rq]\
+                        + ((r-Decimal(str(rq)))*(gValues[rq+1]-gValues[rq]))
                     if rq > 0 and PrefThresholds:
                         quantile += gPrefThrCst + quantile*gPrefThrSlope
                 else :
@@ -1646,7 +1648,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         else:  # upper closed categories
             # we ignore the quantile 0.0 and replace it with -\infty            
             for q in self.limitingQuantiles:
-                r = (nf * q)
+                r = (Decimal(str(nf)) * q)
                 rq = int(floor(r))
                 if Debug:
                     print('r,rq',r,rq, end=' ')
@@ -1657,7 +1659,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
                         quantile = Decimal('-100.0')
                 elif rq < (n-1):
                     quantile = gValues[rq]\
-                               + ((r-rq)*(gValues[rq+1]-gValues[rq]))
+                        + ((r-Decimal(str(rq)))*(gValues[rq+1]-gValues[rq]))
                     if PrefThresholds:
                         quantile -= gPrefThrCst - quantile*gPrefThrSlope
                 else:
@@ -1783,24 +1785,24 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
             if Comments:
                 print('%s in %s - %s with credibility: %.2f' % (action,\
                                      self.categories[keys[0]]['lowLimit'],\
-                                     self.categories[keys[0]]['highLimit'],\
-                                     credibility) )
-            return action,\
-                    keys[0],\
-                    keys[0],\
-                    credibility
-        else:
-            if Comments:
-                print('%s in %s - %s with credibility: %.2f' % (action,\
-                                     self.categories[keys[0]]['lowLimit'],\
                                      self.categories[keys[-1]]['highLimit'],\
                                      credibility) )
             return action,\
                     keys[0],\
                     keys[-1],\
+                    credibility
+        else:
+            if Comments:
+                print('%s in %s - %s with credibility: %.2f' % (action,\
+                                     self.categories[keys[0]]['lowLimit'],\
+                                     self.categories[keys[0]]['highLimit'],\
+                                     credibility) )
+            return action,\
+                    keys[0],\
+                    keys[0],\
                     credibility            
 
-    def showActionsSortingResult(self,actionSubset=None):
+    def showActionsSortingResult(self,actionSubset=None,Debug=False):
         """
         shows the quantiles sorting result all (default) of a subset of the decision actions.
         """
@@ -1811,8 +1813,7 @@ class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
         actions.sort()
         print('Quantiles sorting result per decision action')
         for x in actions:
-            self.showActionCategories(x)
-            
+            self.showActionCategories(x,Debug=Debug)
 
 class _OptimalHarmonicQuantilesSortingDigraph(QuantilesSortingDigraph):
     """
@@ -2554,16 +2555,18 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
 
-    #t = XMCDA2PerformanceTableau('uniSorting')
+    t = XMCDA2PerformanceTableau('uniSorting')
     #t = XMCDA2PerformanceTableau('spiegel2004')
-    t = RandomCBPerformanceTableau(numberOfActions=50,
-                                   numberOfCriteria=7,
-                                   weightDistribution='equiobjectives')
-    t.saveXMCDA2('test',servingD3=False)
-##    qs0 = QuantilesSortingDigraph(t,100)
-##    qs0.showOrderedRelationTable()
-##    qs0.exportGraphViz('qs0')
-##    qs0.showSorting()
+    #t = XMCDA2PerformanceTableau('ex1')
+##    t = RandomCBPerformanceTableau(numberOfActions=50,
+##                                   numberOfCriteria=7,
+##                                   weightDistribution='equiobjectives')
+##    t.saveXMCDA2('test',servingD3=False)
+    qs0 = QuantilesSortingDigraph(t,6,LowerClosed=True)
+    #qs0.showOrderedRelationTable()
+    #qs0.exportGraphViz('qs0')
+    qs0.showSorting()
+    qs0.showActionsSortingResult(Debug=False)
 ##    
 ##    qsh = _OptimalHarmonicQuantilesSortingDigraph(t,
 ##                                  LowerClosed=True,
@@ -2584,22 +2587,22 @@ if __name__ == "__main__":
 ##    qsopt.showSorting()
 ##    qsopt.exportGraphViz(graphType="pdf")
 ##    #qsh.showCriteriaCategoryLimits()
-    t = XMCDA2PerformanceTableau('test')
+##    t = XMCDA2PerformanceTableau('test')
 ##    print('==>> Without Threading')
 ##    qso = QuantilesSortingDigraph(t,Threading=False,Debug=False)
 ##    qso.showSorting()
 ##    print('==>> With Threading')
 ##    qso = QuantilesSortingDigraph(t,CompleteOutranking=False,Threading=True,Debug=False)
 ##    qso.showSorting()
-    qsrbc = QuantilesRankingDigraph(t,Threading=True,Debug=False)
-    #qsrbc.showOrderedRelationTable()
-    qsrbc.exportGraphViz()
-##    qsrbc = QuantilesRankingDigraph(t,Threading=False,Debug=False)
+##    qsrbc = QuantilesRankingDigraph(t,Threading=True,Debug=False)
 ##    #qsrbc.showOrderedRelationTable()
-##    qsrbc.showQsRbcRanking()
-    g = BipolarOutrankingDigraph(t,Normalized=True)
-    print(g.computeOrdinalCorrelation(qsrbc))
-    #qsrbc.exportGraphViz()
+##    qsrbc.exportGraphViz()
+####    qsrbc = QuantilesRankingDigraph(t,Threading=False,Debug=False)
+####    #qsrbc.showOrderedRelationTable()
+####    qsrbc.showQsRbcRanking()
+##    g = BipolarOutrankingDigraph(t,Normalized=True)
+##    print(g.computeOrdinalCorrelation(qsrbc))
+##    #qsrbc.exportGraphViz()
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
