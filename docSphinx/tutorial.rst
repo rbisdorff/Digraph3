@@ -725,7 +725,7 @@ Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids*
 Simulating Metropolis random walks
 ..................................
 
-Finally, we provide the :py:class:`graphs.MetropolisChain` class, a specialization of the :py:class:`graphs.Graph` class, for implementing a generic **Metropolis MCMC** (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  :code:`probs = {‘v1’: x, ‘v2’: y, ...}` for visiting each vertice. 
+Finally, we provide the :py:class:`graphs.MetropolisChain` class, a specialization of the :py:class:`graphs.Graph` class, for implementing a generic **Metropolis MCMC** (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  :code:`probs = {‘v1’: x, ‘v2’: y, ...}` for visiting each vertice (see lines 14-22). 
         >>> from graphs import MetropolisChain
 	>>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
 	>>> g.showShort()
@@ -766,7 +766,7 @@ Finally, we provide the :py:class:`graphs.MetropolisChain` class, a specializati
 	  'v4' |  0.33   0.33    0.00    0.08    0.25
 	  'v5' |  0.00   0.00    0.50    0.50    0.00
 
-The ``checkSampling()`` method generates a randomwalk of *nSim=30000* steps on the given graph and records by the way the observed relative frequency with which each vertice is passed by. In this exmaple, the stationary transition probability distribution, shown by the ``showTransitionMatrix()`` method above, is quite adequately simulated.
+The ``checkSampling()`` method (see line 23) generates a randomwalk of *nSim=30000* steps on the given graph and records by the way the observed relative frequency with which each vertice is passed by. In this exmaple, the stationary transition probability distribution, shown by the ``showTransitionMatrix()`` method above (see lines 31-), is quite adequately simulated.
 
 For more technical information and more code examples, look into the technical documentation of the :ref:`graphs-label`. For the readers interested in algorithmic applications of Markov Chains we may recommend consulting O. Häggström's 2002 book: [FMCAA]_.
 

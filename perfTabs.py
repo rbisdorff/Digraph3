@@ -616,10 +616,17 @@ class PerformanceTableau(object):
             fo.write('"%s",' % g)
             for i in range(n):
                 x = actionsList[i]
+                qval = self.computeActionCriterionQuantile(x,g,Debug=False)
                 if i < n-1:
-                    fo.write('%.2f,' % self.computeActionCriterionQuantile(x,g,Debug=False) )
+                    if qval != 'NA':
+                        fo.write('%.2f,' % qval)
+                    else:
+                        fo.write('NA,')
                 else:
-                    fo.write('%.2f\n' % self.computeActionCriterionQuantile(x,g,Debug=False) )                    
+                    if qval != 'NA':
+                        fo.write('%.2f\n' % qval)
+                    else:
+                        fo.write('NA\n')
         fo.close()
 
         
@@ -650,8 +657,13 @@ class PerformanceTableau(object):
             print(str(x) + '   | ', end=' ')
             html += '<tr><th  bgcolor="#FFF79B">%s</th>' % (x)
             for g in criteriaList:
-                print('%.2f\t' % self.computeActionCriterionQuantile(x,g,Debug=False), end=' ')
-                html += '<td>%.2f</td>' % (self.computeActionCriterionQuantile(x,g,Debug=False))
+                qval = self.computeActionCriterionQuantile(x,g,Debug=False)
+                if qval != 'NA':
+                    print('%.2f\t' % qval, end=' ')
+                    html += '<td>%.2f</td>' % (qval)
+                else:
+                    print('NA\t', end=' ')
+                    html += '<td>NA</td>'
             print()
             html += '</tr>\n'
                                           
@@ -1023,7 +1035,7 @@ class PerformanceTableau(object):
                         html += formatString % (self.evaluation[g][x])
                         
                 else:
-                    html += '<td>&#32;</td>'
+                    html += '<td align="right"><span style="color: LightGrey;">NA</span></td>'
             html += '</tr>'
         html += '</table>'
         return html

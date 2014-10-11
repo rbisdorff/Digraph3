@@ -6766,7 +6766,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         * argPerfTab: PerformanceTableau instance or the name of a stored one.
           If None, a random instance is generated.
         * sampleSize: number of random weight vectors used for Monte Carlo simulation.
-        * distribution: {triangular|uniform|beta(2,2)|beta(12,12)}, probability distribution used for generating random weights
+        * distribution: {triangular|uniform|beta(2,2)|beta(4,4)}, probability distribution used for generating random weights
         * spread: weight range = weight mode +- (weight mode * spread)
         * likelihood: 1.0 - frequency of valuations of opposite sign compared to the median valuation.
         * other standard parameters from the BipolarOutrankingDigraph class (see documentation).
@@ -6855,8 +6855,8 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                     rw = Decimal( '%.2f' % uniform(lowerWeightLimit,upperWeightLimit) )
                 elif distribution == 'beta(2,2)':
                     rw = Decimal( '%.2f' % (lowerWeightLimit+(betavariate(2,2)*weightRange)) )
-                elif distribution == 'beta(12,12)':
-                    rw = Decimal( '%.2f' % (lowerWeightLimit+(betavariate(12,12)*weightRange)) )
+                elif distribution == 'beta(4,4)':
+                    rw = Decimal( '%.2f' % (lowerWeightLimit+(betavariate(4,4)*weightRange)) )
                 else:
                     print('Error: wrong distribution %s. Available laws: triangular (default), uniform, beta(2,2), beta(12,12)' % distribution)        
                 perfTab.criteria[g]['weight'] = rw
@@ -6880,9 +6880,9 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             for y in self.actions:
                 self.relationStatistics[x][y] = {}              
                 valuationObservations[x][y].sort()
-                if Debug and x == 'a04' and y == 'a05':
-                    print(x,y)
-                    print(valuationObservations[x][y])
+##                if Debug and x == 'a04' and y == 'a05':
+##                    print(x,y)
+##                    print(valuationObservations[x][y])
                 
 ##                q = sampleSize//2
 ##                if (sampleSize % 2) == 0:    

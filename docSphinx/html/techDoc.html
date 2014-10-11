@@ -1053,7 +1053,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2909,7 +2909,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3624,7 +3624,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -3929,7 +3929,7 @@ be a triangular random variables of mode w_i in the range 0 to 2*w_i.</p>
 <li>argPerfTab: PerformanceTableau instance or the name of a stored one.
 If None, a random instance is generated.</li>
 <li>sampleSize: number of random weight vectors used for Monte Carlo simulation.</li>
-<li>distribution: {triangular|uniform|beta(2,2)|beta(12,12)}, probability distribution used for generating random weights</li>
+<li>distribution: {triangular|uniform|beta(2,2)|beta(4,4)}, probability distribution used for generating random weights</li>
 <li>spread: weight range = weight mode +- (weight mode * spread)</li>
 <li>likelihood: 1.0 - frequency of valuations of opposite sign compared to the median valuation.</li>
 <li>other standard parameters from the BipolarOutrankingDigraph class (see documentation).</li>
