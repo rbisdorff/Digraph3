@@ -68,7 +68,7 @@ def testSaveProfilesXMCDA2():
 def testIConstructorLowerOpenCategories():
     print('*-------- Testing lowerOpen Categories -------')
     s = SortingDigraph(scaleSteps=5)
-    s.criteriaCategoryLimits['lowerClosed']= False
+    s.criteriaCategoryLimits['LowerClosed']= False
     s.relation = s._constructRelation(s.criteria,s.evaluation,terminal=s.actionsOrig,initial=s.profileLimits,hasNoVeto=False, hasBipolarVeto=True)
     s.sorting = s.computeSortingCharacteristics()
     s.showSorting(Reverse=True)
@@ -78,9 +78,9 @@ def testLowerOpenClosedCategories():
     print('*-------- Testing lowerClosedOpen Categories -------')
     t = RandomCBPerformanceTableau()
     t.save('test')
-    s = SortingDigraph(t,lowerClosed=True)
+    s = SortingDigraph(t,LowerClosed=True)
     s.showSorting(Reverse=True)
-    s1 = SortingDigraph(t,lowerClosed=False)
+    s1 = SortingDigraph(t,LowerClosed=False)
     s1.showSorting(Reverse=True)
 
 ##def testSortingByChoosingDigraph():

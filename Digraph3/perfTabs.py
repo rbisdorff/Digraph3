@@ -1076,25 +1076,6 @@ class PerformanceTableau(object):
         #import collections
         from decimal import Decimal
         from digraphs import flatten
-
-##        def flatten(iterable, ltypes=collections.Iterable):
-##            remainder = iter(iterable)
-##            while True:
-##                first = next(remainder)
-##                if isinstance(first, ltypes) and not isinstance(first, str):
-##                    remainder = IT.chain(first, remainder)
-##                else:
-##                    yield first
-
-##        brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#CF302F"'),
-##                               (Decimal('0.2222'),'"#ED6C49"'),
-##                               (Decimal('0.3333'),'"#F6AE66"'),
-##                               (Decimal('0.4444'),'"#F9E2BE"'),
-##                               (Decimal('0.5555'),'"#FCFFCD"'),
-##                               (Decimal('0.6666'),'"#D5F28F"'),
-##                               (Decimal('0.7777'),'"#A3DC70"'),
-##                               (Decimal('0.8888'),'"#68BF67"'),
-##                               (Decimal('1.0001'),'"#2A9954"')]
                     
         brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#D53E4F"'),
                                (Decimal('0.2222'),'"#F46D43"'),

@@ -1415,6 +1415,7 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
         self.criteria = deepcopy(qs.criteria)
         self.evaluation = deepcopy(qs.evaluation)
         self.categories = deepcopy(qs.categories)
+        self.limitingQuantiles = deepcopy(qs.limitingQuantiles)
         self.criteriaCategoryLimits = deepcopy(qs.criteriaCategoryLimits)
         self.profiles = deepcopy(qs.profiles)
         self.valuationdomain = deepcopy(qs.valuationdomain)
@@ -1459,12 +1460,21 @@ class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
                 actionsCategories[(int(highCateg),int(lowCateg))] = [a]
         actionsCategIntervals = []
         for interval in actionsCategories:
-            actionsCategIntervals.append([interval, actionsCategories[interval]])
+            actionsCategIntervals.append([interval,\
+                                          actionsCategories[interval]])
         actionsCategIntervals.sort(reverse=DescendingOrder)
         weakOrdering = []
         for item in actionsCategIntervals:
+            #print(item)
             if Debug:
-                print(item)
+                if self.criteriaCategoryLimits['LowerClosed']:
+                    print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
+                                            self.categories[str(item[0][9])]['highLimit'],\
+                                            str(item[1])) )
+                else:
+                    print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
+                                            self.categories[str(item[0][0])]['highLimit'],\
+                                            str(item[1])) )
             weakOrdering.append(item[1])
         return weakOrdering
 
@@ -1607,34 +1617,36 @@ if __name__ == "__main__":
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
                                 numberOfActions=93)
     t.saveXMCDA2('test')
-    t = XMCDA2PerformanceTableau('test')
-    g = BipolarOutrankingDigraph(t,Normalized=True)
+    t = XMCDA2PerformanceTableau('uniSorting')
+##    g = BipolarOutrankingDigraph(t,Normalized=True)
     limitingQuantiles = len(t.actions) // 2
     #limitingQuantiles = 100
     #qs = QuantilesSortingDigraph(t,g.order)
     t0 = time()
-    qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,Threading=False,Debug=False)
+    qsrbc = QsRbcWeakOrdering(t,7,LowerClosed=False,Threading=True,Debug=True)
     t1 = time()-t0
     qsrbc.showSorting()
-    qsrbc.computeQsRbcRanking(Debug=False)
-    qsrbc.exportGraphViz(graphType="pdf")
-    #qsrbc.showOrderedRelationTable()
-    t0=time()
-    qsrbcwt = QsRbcWeakOrdering(t,limitingQuantiles,
-                                             cores=8,
-#                                             Threading=True,
-                                             Debug=False)
-    t2 = time()-t0
-    qsrbcwt.showSorting()
-    qsrbc.showQsRbcRanking(DescendingOrder=True)
-    qsrbcwt.showQsRbcRanking(DescendingOrder=True)
-    print('qsrbc',t1,'qsrbcwt',t2)
-    corr = g.computeOrdinalCorrelation(qsrbc)
-    print('qsrbc',corr['correlation'],\
-          corr['correlation']*corr['determination'])
-    corr = g.computeOrdinalCorrelation(qsrbcwt)
-    print('qsrbcwt', corr['correlation'],\
-          corr['correlation']*corr['determination'])
+    qsrbc.showActionsSortingResult()
+    qsrbc.computeWeakOrder(Comments=True)
+##    qsrbc.computeQsRbcRanking(Debug=False)
+##    qsrbc.exportGraphViz(graphType="pdf")
+##    #qsrbc.showOrderedRelationTable()
+##    t0=time()
+##    qsrbcwt = QsRbcWeakOrdering(t,limitingQuantiles,
+##                                             cores=8,
+##                                             Threading=False,
+##                                             Debug=False)
+##    t2 = time()-t0
+##    qsrbcwt.showSorting()
+##    qsrbc.showQsRbcRanking(DescendingOrder=True)
+##    qsrbcwt.showQsRbcRanking(DescendingOrder=True)
+##    print('qsrbc',t1,'qsrbcwt',t2)
+##    corr = g.computeOrdinalCorrelation(qsrbc)
+##    print('qsrbc',corr['correlation'],\
+##          corr['correlation']*corr['determination'])
+##    corr = g.computeOrdinalCorrelation(qsrbcwt)
+##    print('qsrbcwt', corr['correlation'],\
+##          corr['correlation']*corr['determination'])
     
     
 ##    actionsCategories = {}

@@ -2953,7 +2953,8 @@ class Digraph(object):
 
     .. note::
     
-            If you want to use the automatic load in Chrome, try using the command: "python -m SimpleHTTPServer" and then access the index.html via "http://0.0.0.0:8000/index.html".
+            If you want to use the automatic load in Chrome, try using the command: "python -m SimpleHTTPServer"
+            and then access the index.html via "http://0.0.0.0:8000/index.html".
             In order to load the CSS an active internet connection is needed! 
 
         """
