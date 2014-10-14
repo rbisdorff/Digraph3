@@ -1617,7 +1617,7 @@ if __name__ == "__main__":
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
                                 numberOfActions=93)
     t.saveXMCDA2('test')
-    t = XMCDA2PerformanceTableau('uniSorting')
+    #t = XMCDA2PerformanceTableau('uniSorting')
 ##    g = BipolarOutrankingDigraph(t,Normalized=True)
     limitingQuantiles = len(t.actions) // 2
     #limitingQuantiles = 100
@@ -1649,118 +1649,11 @@ if __name__ == "__main__":
 ##          corr['correlation']*corr['determination'])
     
     
-##    actionsCategories = {}
-##    
-##    for x in qsrbcwt.actions:
-##        a,lowCateg,highCateg,credibility = qsrbcwt.showActionCategories(x)
-##        try:
-##            actionsCategories[(int(highCateg),int(lowCateg))].append(a)
-##        except:
-##            actionsCategories[(int(highCateg),int(lowCateg))] = [a]
-##
-##    actionsCategIntervals = []
-##    for interval in actionsCategories:
-##        #print(interval, actionsCategories[interval])
-##        actionsCategIntervals.append([interval, actionsCategories[interval]])
-##    actionsCategIntervals.sort(reverse=True)
-##    for item in actionsCategIntervals:
-##        print(item)
-##        
-##    qsrbcwt.showSorting()
-##    weakOrdering = qsrbcwt.computeWeakOrder(Comments=False,Debug=False)
-##    print(weakOrdering)
-##    qsrbcwt.exportGraphViz()
-##    weakOrdering = qsrbc.computeWeakOrder(Comments=False,Debug=False)
-##    print(weakOrdering)
-##    #qsrbc.showOrderedRelationTable()
-##    qsrbc.exportGraphViz()
-##    rbc = RankingByChoosingDigraph(g,Threading=False)
-##    rbc.exportGraphViz()
-##    qscorr = g.computeOrdinalCorrelation(qs)
-##    print('qs',qscorr['correlation'],\
-##          qscorr['correlation']*qscorr['determination'])
-##    qsrbccorr = g.computeOrdinalCorrelation(qsrbc)
-##    print('qsrbc', qsrbccorr['correlation'],\
-##          qsrbccorr['correlation']*qsrbccorr['determination'])
-##    rbccorr = g.computeOrdinalCorrelation(rbc)
-##    print('rbc',rbccorr['correlation'],\
-##          rbccorr['correlation']*rbccorr['determination'])
-##    crosscorr = qsrbc.computeOrdinalCorrelation(rbc)
-##    print('qsrbc<->rbc',crosscorr['correlation'],\
-##          crosscorr['correlation']*crosscorr['determination'])
-##    crosscorr = qsrbc.computeOrdinalCorrelation(qs)
-##    print('qsrbc<->qs',crosscorr['correlation'],\
-##          crosscorr['correlation']*crosscorr['determination'])
-##    
-    #g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=11)
-    #g = RandomValuationDigraph(order=11)
-##    print('=== >>> best and last fusion (default)')
-##    t0 = time()
-##    rcg0 = weakOrders.RankingByChoosingDigraph(g,\
-##                                                     fusionOperator="o-min",\
-##                                                     Debug=False,\
-##                                                     Threading=False)
-##    print('execution time %s: ' % (str ( time()-t0 ) ) )
-##    rcg0.showRankingByBestChoosing()
-##    rcg0.exportGraphViz()
-####    rcg0.showRelationTable()
-##    t0 = time()
-##    rcg1 = weakOrders.RankingByChoosingDigraph(g,\
-##                                               fusionOperator="o-min",\
-##                                                     Debug=False,\
-##                                                     Threading=True)
-##    print('execution time %s: ' % (str ( time()-t0 ) ) )
-##    rcg1.showWeakOrder()
-##    rcg1.showRelationTable()
-##    print(rcg0.computeOrdinalCorrelation(g))
-##    rcg0.showOrderedRelationTable(direction="decreasing")
-##    rcg0.showOrderedRelationTable(direction="increasing")
-##    print(g.computeChordlessCircuits())
-##    
-#    rcg0 = RankingByChoosingDigraph(g,fusionOperator="o-max",Debug=False)
-#    rcg0.showWeakOrder()
-#    print(rcg0.computeOrdinalCorrelation(g))
-#    rcg0.showOrderedRelationTable()
-##    rcg.showRankingByChoosing()
-##    rcg1 = RankingByChoosingDigraph(rcg,CoDual=True)
-##    rcg1.showRankingByChoosing()
-##    print(rcg1.computeOrdinalCorrelation(rcg))
-##    print('=== >>> best') 
-##    rcg1 = RankingByChoosingDigraph(g,Best=True,Last=False,Debug=False)
-##    rcg1.showWeakOrder()
-##    print(rcg1.computeOrdinalCorrelation(g))
-##    print('=== >>> last')
-##    rcg2 = RankingByChoosingDigraph(g,Best=False,Last=True,Debug=False)
-##    rcg2.showWeakOrder()
-##    print(rcg2.computeOrdinalCorrelation(g))
-##    print('=== >>> bipolar best and last')
-##    rcg3 = RankingByChoosingDigraph(g,Best=False,Last=False,Debug=False)
-##    rcg3.showWeakOrder()
-##    print(rcg3.computeOrdinalCorrelation(g))
-##    print('=== >>> principal weak order')
-##    t0 = time()
-##    rcf1 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
-##                                          imageType=None,Debug=False,
-##                                          Threading=False)
-##    rcf1.showWeakOrder(ColwiseOrder=True)
-##    print('execution time %s: ' % (str ( time()-t0 ) ) )
-##    t0 = time()
-##    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
-##                                           imageType=None,Debug=False,\
-##                                           Threading=True)
-##    rcf2.showWeakOrder()
-##    print('execution time %s: ' % (str ( time()-t0 ) ) )
-##    rcf2.exportGraphViz(fileName='testcw',direction="Colwise")
-##    rcf2.exportGraphViz(fileName='testrw',direction="Colwise",graphType='pdf')
-##    rcf2.showWeakOrder()
-#    print(rcf1.computeOrdinalCorrelation(g))
-#    rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-max",
-#                                        imageType=None,Debug=False)
-#    rcf2.showWeakOrder()
-#    print(rcf2.computeOrdinalCorrelation(g))
-#    #rcf.showPrincipalScores()
-#    rcf1.showPrincipalScores(ColwiseOrder=True)
-#    rcf1.showPrincipalScores(RowwiseOrder=True)
-#    rp = RankingByPrudentChoosingDigraph(g,CoDual=True,Comments=True,Limited=0.2)
-#    rp.showOrderedRelationTable(direction="increasing")
-#    rp.showOrderedRelationTable()
+    print('*------------------*')
+    print('If you see this line all tests were passed successfully :-)')
+    print('Enjoy !')
+
+    print('*************************************')
+    print('* R.B. october 2014                 *')
+    print('* $Revision:  $                  *')
+    print('*************************************')

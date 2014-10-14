@@ -613,7 +613,7 @@ def testRandomWeightsLaws():
 
     print('Beta(12,12)')
     gmc3 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
-                                              distribution='beta(12,12)',\
+                                              distribution='beta(4,4)',\
                                               spread = 0.5,\
                                              sampleSize=100,likelihood=0.1,\
                                              Debug=False,samplingSeed=1)
