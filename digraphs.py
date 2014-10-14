@@ -10644,9 +10644,9 @@ if __name__ == "__main__":
         #g.showAll()
         from outrankingDigraphs import BipolarOutrankingDigraph
         from perfTabs import RandomCBPerformanceTableau
-##        t = RandomCBPerformanceTableau(numberOfActions=15)
-##        t.saveXMCDA2('test')
-        t = XMCDA2PerformanceTableau('testNoDomPreKernel')
+        t = RandomCBPerformanceTableau(numberOfActions=15)
+        t.saveXMCDA2('test')
+        t = XMCDA2PerformanceTableau('test')
         g = BipolarOutrankingDigraph(t)
         gcd =  (-g)
         gcd.computeChordlessCircuits(Odd=True,Comments=True)
@@ -10657,109 +10657,6 @@ if __name__ == "__main__":
         for ker in gcd.dompreKernels:
             print(gcd.computeGoodChoiceVector(ker,Comments=False))
         
-        
-        
-##        print('Relation %s is complete ? %s' % (g.name,str(g.isComplete(Debug=True))))
-##        print('Relation %s is weakly complete ? %s' % (g.name,str(g.isWeaklyComplete(Debug=True))))
-##        g.showRelationTable()
-##        g.save('debug')
-##        f = Digraph('debug')
-##        print(f.relation)
-##        f.showStatistics()
-##        t = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=5,weightDistribution='equiobjectives')
-##        t .save('test')
-##        t = PerformanceTableau('test')
-##        g = BipolarOutrankingDigraph(t,Normalized=True)
-##        print('Relation %s is complete ? %s' % (g.name,str(g.isComplete(Debug=True))))
-##        print('Relation %s is weakly complete ? %s' % (g.name,str(g.isWeaklyComplete())))
-##        from weakOrders import *
-##        rbc = RankingByChoosingDigraph(g)
-##        rbc.showWeakOrder()
-##        #rbc.exportGraphViz()
-##        #print(rbc.gamma)
-##        print(rbc.topologicalSort(Debug=True))
-##        print('Relation %s is complete ? %s' % (gcd.name,str(gcd.isComplete(Debug=True))))
-##        print('Relation %s is weakly complete ? %s' % (rbc.name,str(g.isWeaklyComplete())))
-       
-##        g.showRelationTable()
-##        covg = CoverDigraph(g, Debug=False)
-##        covg.showRelationTable()
-##        g.showPreKernels()
-##        covg.showPreKernels()
-##        from weakOrders import *
-##        rbc = RankingByChoosingDigraph(g)
-##        #rbc.showRelationTable()
-##        pri = PrincipalInOutDegreesOrdering(g)
-##        #pri.showRelationTable()
-##        print(g.computeOrdinalCorrelation(rbc,Debug=False))
-##        print(g.computeOrdinalCorrelation(pri,Debug=False))
-##        print(g.computeOrdinalCorrelation(pri,filterRelation=rbc.relation,Debug=False))
-        
-        #t = RandomCBPerformanceTableau(numberOfActions=10)
-        #g = BipolarOutrankingDigraph(t)
-        #g = CirculantDigraph(order=5)
-        #g.save('test')
-        #g = Digraph('test')
-        #g.showRelationTable()
-        #g.showAll()
-        #g.saveCSV('test',Normalized=True,Dual=True,Converse=True)
-        #gd = CSVDigraph('testR')
-        #gd.showRelationTable()
-        #gd.showAll()
-        #g.computePrincipalOrder(Comments=True,Debug=True)
-##        g.exportPrincipalImage(Comments=True,Type="pdf")
-##        fi = open('rotation.csv','r')
-##        csvReader = reader(fi)
-##        R = [x for x in csvReader]
-##        listActions = [x for x in g.actions]
-##        listActions.sort()
-##        scores = [(Decimal(R[i+1][0]),listActions[i]) for i in range(len(listActions))]
-##        scores.sort(reverse=True)
-##        print(scores)
-        #g.computeRankingByChoosing(g,CoDual=False)
-        #g.showRankingByChoosing()
-        
-        
-###        ##from time import time
-###        ##from operator import itemgetter
-###        #t = RandomCBPerformanceTableau(numberOfActions=7)
-###        #t.save('test')
-###        #t = XMCDA2PerformanceTableau('uniSorting')
-###        #g = BipolarOutrankingDigraph(t)
-##        g.computeRankingByLastChoosing(CoDual=True,Debug=False)
-##        g.showRankingByLastChoosing()
-##        relLast = g.computeRankingByLastChoosingRelation()
-###        #g.showRelationTable(relation=relLast)
-###        print(g.computeOrdinalCorrelation(relLast))
-##        g.computeRankingByBestChoosing(CoDual=True)
-##        g.showRankingByBestChoosing()
-##        relBest = g.computeRankingByBestChoosingRelation()
-##        relFusion = {}
-##        for x in g.actions:
-##            relFusion[x] = {}
-##            for y in g.actions:
-##                relFusion[x][y] = g.omin((relBest[x][y],relLast[x][y]))
-###          
-###        #g.showRelationTable(relation=relBest)
-##        print(g.computeOrdinalCorrelation(relBest))
-##        print(g.computeOrdinalCorrelation(relFusion))
-###        
-###        #g.iterateRankingByChoosing(Odd=False,Debug=False,CoDual=True)
-###        #g.showRankingByChoosing()
-###        #print('-----------------')
-###        rankings = g.optimalRankingByChoosing(Odd=True,Debug=False,CoDual=True,Comments=False)
-###        #print(rankings)
-###        g.showRankingByChoosing()
-###        #print('-----------------')
-###        #print('Prudent first choice: ',g.computePrudentBestChoiceRecommendation(CoDual=False,Debug=False,Comments=True))
-###        
-###        #g.showRankingByChoosing()
-###        
-###        ## g = RandomValuationDigraph()
-###        ## print(g.computePrudentBestChoiceRecommendation(CoDual=False,Comments=True))
-
-
-
 
         print('*------------------*')
         print('If you see this line all tests were passed successfully :-)')
