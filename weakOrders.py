@@ -23,7 +23,6 @@ __version__ = "Branch: 3.3 $"
 # ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
 from digraphs import *
-from perfTabs import *
 from outrankingDigraphs import *
 from weakOrders import *
 
@@ -1221,8 +1220,8 @@ def _jobTask(categID):
     return writestr
 #####
 
-from sortingDigraphs import SortingDigraph                                               
-class QsRbcWeakOrdering(WeakOrder,SortingDigraph):
+from sortingDigraphs import QuantilesSortingDigraph                                              
+class QsRbcWeakOrdering(WeakOrder,QuantilesSortingDigraph):
     """
     Refinig a quantiles sorting result
     with a ranking-by-choosing of the local quantile equivalence classes
