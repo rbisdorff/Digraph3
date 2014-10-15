@@ -1185,8 +1185,6 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             fo.close()
             print('File: ' + nameExt + ' saved !')
 
-##from weakOrders import WeakOrder
-##class QuantilesSortingDigraph(SortingDigraph,WeakOrder):
 class QuantilesSortingDigraph(SortingDigraph):
     """
     Specialisation of the sortingDigraph Class
@@ -1223,8 +1221,8 @@ class QuantilesSortingDigraph(SortingDigraph):
 
     def __init__(self,argPerfTab=None,
                  limitingQuantiles=None,
-                 LowerClosed=True,
-                 PrefThresholds=True,
+                 LowerClosed=False,
+                 PrefThresholds=False,
                  hasNoVeto=False,
                  minValuation=-1.0,
                  maxValuation=1.0,
