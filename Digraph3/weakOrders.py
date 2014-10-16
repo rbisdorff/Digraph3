@@ -142,7 +142,7 @@ class WeakOrder(Digraph):
         """
         Digraph.exportGraphViz(self, fileName=fileName, bestChoice=bestChoice,worstChoice=worstChoice,noSilent=noSilent,graphType=graphType,graphSize=graphSize)
 
-    def exportGraphViz(self,fileName=None,direction='best',\
+    def exportGraphViz(self,fileName=None,relation=None,direction='best',\
                        noSilent=True,graphType='png',\
                        graphSize='7,7',\
                        fontSize=10):
@@ -152,6 +152,7 @@ class WeakOrder(Digraph):
         import os
         from copy import deepcopy
 
+            
         def _safeName(t0):
             t = t0.split(sep="-")
             t1 = t[0]
@@ -178,7 +179,8 @@ class WeakOrder(Digraph):
             print('*---- exporting a dot file for GraphViz tools ---------*')
         actionKeys = [x for x in self.actions]
         n = len(actionKeys)
-        relation = self.relation
+        if relation == None:
+            relation = deepcopy(self.relation)
         Med = self.valuationdomain['med']
         i = 0
         if fileName == None:
@@ -216,8 +218,9 @@ class WeakOrder(Digraph):
             sameRank += '}\n'
             print(i,sameRank)
             fo.write(sameRank)
+
         # save original relation
-        originalRelation = deepcopy(self.relation)
+        originalRelation = deepcopy(relation)
         
         self.closeTransitive(Reverse=True)
         for i in range(k-1):
@@ -239,7 +242,7 @@ class WeakOrder(Digraph):
         fo.write('}\n \n')
         fo.close()
         # restore original relation
-        self.relation = deepcopy(originalRelation)
+        relation = deepcopy(originalRelation)
         
         commandString = 'dot -Grankdir=TB -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
             #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
@@ -945,7 +948,7 @@ def _jobTask(categID):
 #####
 
 from sortingDigraphs import QuantilesSortingDigraph                                              
-class QsRbcWeakOrdering(WeakOrder,QuantilesSortingDigraph):
+class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
     """
     Refinig a quantiles sorting result
     with a ranking-by-choosing of the local quantile equivalence classes
@@ -977,6 +980,7 @@ class QsRbcWeakOrdering(WeakOrder,QuantilesSortingDigraph):
                  argPerfTab=None,
                  limitingQuantiles=None,
                  LowerClosed=True,
+                 strategy="optimistic",
                  PrefThresholds=False,
                  hasNoVeto=False,
                  minValuation=-1.0,
@@ -1006,6 +1010,14 @@ class QsRbcWeakOrdering(WeakOrder,QuantilesSortingDigraph):
                 limitingQuantiles = na // 2
             else:
                 limitingQuantiles = 100
+        self.sortingParameters = {}
+        self.sortingParameters['limitingQuantiles'] = limitingQuantiles
+        self.sortingParameters['strategy'] = strategy
+        self.sortingParameters['LowerClosed'] = LowerClosed
+        self.sortingParameters['PrefThresholds'] = PrefThresholds
+        self.sortingParameters['hasNoVeto'] = hasNoVeto
+        self.sortingParameters['Threading'] = Threading
+        
         if Comments:        
             print('Computing the %d-quantiles sorting digraph ...' % (limitingQuantiles))
         t0 = time()
@@ -1036,14 +1048,9 @@ class QsRbcWeakOrdering(WeakOrder,QuantilesSortingDigraph):
         
         Max = qs.valuationdomain['max']
         Med = qs.valuationdomain['med']
-        catContent = {}
-##        weakOrdering = qs.computeWeakOrder()
-##        nwo = len(weakOrdering)
-##        for i in range(nwo):
-##            catContent[i+1] = weakOrdering[i]
-##            if Debug:
-##                print(i+1,weakOrdering[i])        
-        weakOrdering = QsRbcWeakOrdering.computeWeakOrder(qs)
+        self.strategy = strategy
+        catContent = {}    
+        weakOrdering = QsRbcWeakOrdering.computeWeakOrder(qs,strategy=strategy)
         nwo = len(weakOrdering)
         for i in range(nwo):
             catContent[i+1] = weakOrdering[i]
@@ -1154,16 +1161,18 @@ class QsRbcWeakOrdering(WeakOrder,QuantilesSortingDigraph):
         except:
             pass
         self.relation = deepcopy(qsRelation)
-        self._constructRelation(Debug=Debug)
+        self._constructRelation(strategy=strategy,Debug=Debug)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def _constructRelation(self,Debug=False):
+    def _constructRelation(self,strategy=None,Debug=False):
         """
         Instantiates the weak order by taking the codual of the
         preoder obtained from the actions categories intervals !
         """
-        preOrdering = self.computeWeakOrder(Debug=Debug)
+        if strategy == None:
+            strategy = self.strategy
+        preOrdering = self.computeWeakOrder(strategy=strategy,Debug=Debug)
         relation = self.computePreorderRelation(preOrdering)
         actionsList = [x for x in self.actions]
         Max = self.valuationdomain['max']
@@ -1173,20 +1182,36 @@ class QsRbcWeakOrdering(WeakOrder,QuantilesSortingDigraph):
                 #self.relation[x][y] = relation[x][y]
                 self.relation[x][y] = Max - relation[y][x] + Min 
 
-    def computeWeakOrder(self,Descending=True,Comments=False,Debug=False):
+    def computeWeakOrder(self,Descending=True,strategy=None,Comments=False,Debug=False):
         """
         specialisation of the showWeakOrder method
         """
-        if Comments:
-            Debug=True
+        if strategy == None:
+            strategy = self.strategy
         actionsCategories = {}
         for x in self.actions:
             a,lowCateg,highCateg,credibility =\
                      self.showActionCategories(x,Comments=Debug)
-            try:
-                actionsCategories[(int(highCateg),int(lowCateg))].append(a)
-            except:
-                actionsCategories[(int(highCateg),int(lowCateg))] = [a]
+            if strategy == "optimistic":
+                try:
+                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]
+            elif strategy == "pessimistic":
+                try:
+                    actionsCategories[(int(lowCateg),int(highCateg))].append(a)
+                except:
+                    actionsCategories[(int(lowCateg),int(highCateg))] = [a]
+            elif strategy == "average":
+                lc = float(lowCateg)
+                hc = float(highCateg)
+                ac = (lc+hc)/2.0
+                try:
+                    actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
+                    
+                
         actionsCategIntervals = []
         for interval in actionsCategories:
             actionsCategIntervals.append([interval,\
@@ -1195,17 +1220,43 @@ class QsRbcWeakOrdering(WeakOrder,QuantilesSortingDigraph):
         weakOrdering = []
         for item in actionsCategIntervals:
             #print(item)
-            if Debug:
-                if self.criteriaCategoryLimits['LowerClosed']:
-                    print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
-                                            self.categories[str(item[0][9])]['highLimit'],\
-                                            str(item[1])) )
-                else:
-                    print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
-                                            self.categories[str(item[0][0])]['highLimit'],\
-                                            str(item[1])) )
+            if Comments:
+                if strategy == "optimistic":
+                    if self.criteriaCategoryLimits['LowerClosed']:
+                        print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
+                                                self.categories[str(item[0][0])]['highLimit'],\
+                                                str(item[1])) )
+                    else:
+                        print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
+                                                self.categories[str(item[0][0])]['highLimit'],\
+                                                str(item[1])) )
+                elif strategy == "pessimistic":
+                    if self.criteriaCategoryLimits['LowerClosed']:
+                        print('%s-%s : %s' % (self.categories[str(item[0][0])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'],\
+                                                str(item[1])) )
+                    else:
+                        print('%s-%s : %s' % (self.categories[str(item[0][0])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'],\
+                                                str(item[1])) )                   
+                elif strategy == "average":
+                    if self.criteriaCategoryLimits['LowerClosed']:
+                        print('%s-%s : %s' % (self.categories[str(item[0][2])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'],\
+                                                str(item[1])) )
+                    else:
+                        print('%s-%s : %s' % (self.categories[str(item[0][2])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'],\
+                                                str(item[1])) )
+
             weakOrdering.append(item[1])
         return weakOrdering
+
+    def showWeakOrder(self):
+        """
+        Dummy show method for the commenting computeWeakOrder method.
+        """
+        self.computeWeakOrder(Comments=True)
 
     def computeQsRbcRanking(self,Descending=True,
                             Comments=False,
@@ -1272,67 +1323,39 @@ class QsRbcWeakOrdering(WeakOrder,QuantilesSortingDigraph):
                                 Sorted=False,\
                                 ReflexiveTerms=False)
 
-    def showActionCategories(self,action,Debug=False,Comments=True):
-        """
-        Renders the union of categories in which the given action is sorted positively or null into.
-        Returns a tuple : action, lowest category key, highest category key, membership credibility !
-        """
-        Med = self.valuationdomain['med']
-        sorting = self.computeSortingCharacteristics(action=action,Comments=Debug)
-        keys = []
-        for c in self.orderedCategoryKeys():
-            if sorting[action][c]['categoryMembership'] >= Med:
-                if sorting[action][c]['lowLimit'] > Med:
-                    lowLimit = sorting[action][c]['lowLimit']
-                if sorting[action][c]['notHighLimit'] > Med:
-                    notHighLimit = sorting[action][c]['notHighLimit']
-                keys.append(c)
-                if Debug:
-                    print(action, c, sorting[action][c])
-        n = len(keys)
-        credibility = min(lowLimit,notHighLimit)
-        if n == 0:
-            return None
-        elif n == 1:
-            if Comments:
-                print('%s in %s - %s with credibility: %.2f = min(%.2f,%.2f)' % (action,\
-                                     self.categories[keys[0]]['lowLimit'],\
-                                     self.categories[keys[0]]['highLimit'],\
-                                     credibility,lowLimit,notHighLimit) )
-            return action,\
-                    keys[0],\
-                    keys[0],\
-                    credibility
-        else:
-            if Comments:
-                print('%s in %s - %s with credibility: %.2f = min(%.2f,%.2f)' % (action,\
-                                     self.categories[keys[0]]['lowLimit'],\
-                                     self.categories[keys[-1]]['highLimit'],\
-                                     credibility,lowLimit,notHighLimit) )
-            return action,\
-                    keys[0],\
-                    keys[-1],\
-                    credibility            
-
-    def showActionsSortingResult(self,actionSubset=None):
-        """
-        shows the quantiles sorting result all (default) of a subset of the decision actions.
-        """
-        if actionSubset == None:
-            actions = [x for x in self.actions]
-        else:
-            actions = [x for x in actionSubset]
-        actions.sort()
-        print('Quantiles sorting result per decision action')
-        for x in actions:
-            self.showActionCategories(x)
-
     def showQsRbcRanking(self,Descending=True):
         """
         show the ranking-by-sorting refinement of the quantiles sorting result
         """
         print(self.computeQsRbcRanking(Descending=Descending,
                                        Comments=False))
+
+    def exportSortingGraphViz(self,fileName=None,direction='decreasing',\
+                       noSilent=True,graphType='png',\
+                       graphSize='7,7',\
+                       fontSize=10,\
+                        Debug=False):
+        """
+        Exporting graphviz dot file for a Hasse diagram drawing
+        of the quantiles sorting result.
+        """
+
+        qs = QuantilesSortingDigraph(self,
+                                     limitingQuantiles=self.sortingParameters['limitingQuantiles'],
+                                     LowerClosed=self.sortingParameters['LowerClosed'],
+                                     PrefThresholds=self.sortingParameters['PrefThresholds'],
+                                     hasNoVeto=self.sortingParameters['hasNoVeto'],
+                                     Threading=self.sortingParameters['Threading'])
+        qs.exportGraphViz(fileName=fileName,
+                          direction=direction,\
+                       noSilent=noSilent,graphType=graphType,\
+                       graphSize=graphSize,\
+                       fontSize=fontSize,Debug=Debug)
+               
+class QsRbcWeakOrdering(QuantilesRankingDigraph):
+    """
+    Dummy for obsolete QsRbcWeakOrdering class
+    """
 
 #----------test outrankingDigraphs classes ----------------
 if __name__ == "__main__":
@@ -1343,22 +1366,32 @@ if __name__ == "__main__":
     from weakOrders import *
     from time import time
 
-    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                numberOfActions=93)
-    t.saveXMCDA2('test')
-    #t = XMCDA2PerformanceTableau('uniSorting')
+    #t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+    #                            numberOfActions=50)
+    #t.saveXMCDA2('test')
+    t = XMCDA2PerformanceTableau('uniSorting')
 ##    g = BipolarOutrankingDigraph(t,Normalized=True)
+##    rbc = RankingByChoosingDigraph(g,Threading=False)
+##    rbc.exportGraphViz()
     limitingQuantiles = len(t.actions) // 2
-    #limitingQuantiles = 100
+    #limitingQuantiles = 7
     #qs = QuantilesSortingDigraph(t,g.order)
     t0 = time()
-    qsrbc = QsRbcWeakOrdering(t,7,LowerClosed=False,Threading=True,Debug=True)
+    qsrbc = QuantilesRankingDigraph(t,limitingQuantiles,
+                              strategy="optimistic",
+                              LowerClosed=False,
+                              Threading=False,Debug=False)
     t1 = time()-t0
     qsrbc.showSorting()
-    qsrbc.showActionsSortingResult()
-    qsrbc.computeWeakOrder(Comments=True)
-##    qsrbc.computeQsRbcRanking(Debug=False)
-##    qsrbc.exportGraphViz(graphType="pdf")
+    qsrbc.exportSortingGraphViz('testq17',Debug=True)
+##    qsrbc.showActionsSortingResult()
+##    qsrbc.computeWeakOrder(Comments=True)
+##    qsrbc.computeWeakOrder(Comments=True,strategy="pessimistic")
+##    qsrbc.computeWeakOrder(Comments=True,strategy="average")
+##    qsrbc.showQsRbcRanking()
+##    qsrbc.showWeakOrder()
+##    qsrbc._exportSortingGraphViz("opt",graphType="pdf")
+##    qsrbc.exportGraphViz()
 ##    #qsrbc.showOrderedRelationTable()
 ##    t0=time()
 ##    qsrbcwt = QsRbcWeakOrdering(t,limitingQuantiles,
