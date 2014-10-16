@@ -2792,7 +2792,10 @@ class Digraph(object):
             print('See %s.%s ! ' % (plotFileName,Type))
         
         
-    def exportGraphViz(self,fileName=None, bestChoice=set(),worstChoice=set(),noSilent=True,graphType='png',graphSize='7,7'):
+    def exportGraphViz(self,fileName=None,\
+                       bestChoice=set(),worstChoice=set(),\
+                       noSilent=True,graphType='png',graphSize='7,7',
+                       relation=None):
         """
         export GraphViz dot file  for graph drawing filtering.
         """
@@ -2801,7 +2804,8 @@ class Digraph(object):
             print('*---- exporting a dot file dor GraphViz tools ---------*')
         actionkeys = [x for x in self.actions]
         n = len(actionkeys)
-        relation = self.relation
+        if relation == None:
+            relation = self.relation
         Med = self.valuationdomain['med']
         i = 0
         if fileName == None:

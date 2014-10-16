@@ -111,7 +111,7 @@ def testQsRbcOrderingWithThreading():
     t0 = time()
     #limitingQuantiles = len(t.actions) // 2
     limitingQuantiles = 10
-    qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,cores=4,Debug=False)
+    qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,strategy="pessimistic",cores=4,Debug=False)
     print(time()-t0)
     qsrbc.showSorting()
     weakOrdering = qsrbc.computeWeakOrder(Comments=False,Debug=False)
