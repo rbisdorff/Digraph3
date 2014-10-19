@@ -1458,11 +1458,11 @@ if __name__ == "__main__":
     from weakOrders import *
     from time import time
 
-    #t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-    #                            numberOfActions=50)
-    #t.saveXMCDA2('test')
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                numberOfActions=25)
+    t.saveXMCDA2('test')
     #t = XMCDA2PerformanceTableau('uniSorting')
-    t = XMCDA2PerformanceTableau('test-119')
+    #t = XMCDA2PerformanceTableau('test-119')
     g = BipolarOutrankingDigraph(t,Normalized=True)
 ##    rbc = RankingByChoosingDigraph(g,Threading=False)
 ##    rbc.exportGraphViz()
@@ -1486,7 +1486,7 @@ if __name__ == "__main__":
                               Threading=False,Debug=False)
     t1 = time()-t0
     qsrbc.showSorting()
-    qsrbc.exportSortingGraphViz('rbcq17',Debug=True)
+    #qsrbc.exportSortingGraphViz('rbcq17',Debug=True)
     print(g.computeOrdinalCorrelation(qsko))
     print(g.computeOrdinalCorrelation(qsrbc))
         
