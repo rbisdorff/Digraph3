@@ -1466,7 +1466,7 @@ if __name__ == "__main__":
     g = BipolarOutrankingDigraph(t,Normalized=True)
 ##    rbc = RankingByChoosingDigraph(g,Threading=False)
 ##    rbc.exportGraphViz()
-    limitingQuantiles = len(t.actions) // 5
+    limitingQuantiles = len(t.actions) // 3
     #limitingQuantiles = 7
     #qs = QuantilesSortingDigraph(t,g.order)
     t0 = time()
