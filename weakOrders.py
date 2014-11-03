@@ -1302,7 +1302,11 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                     actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
                 except:
                     actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
-                    
+            else:  # optimistic by default
+                try:
+                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
                 
         actionsCategIntervals = []
         for interval in actionsCategories:

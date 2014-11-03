@@ -6750,9 +6750,142 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph,PerformanceTableau):
             else:
                 return Decimal('-1.0')
 
+class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
+    """
+    Likely bipolar outranking digraph based on multiple criteria of
+    uncertain significance.
+    
+    The digraph's bipolar valuation represents the bipolar outranking relation
+    based on a sufficient likelihood of the at least as good as relation
+    that is outranking without veto and counterveto.
+
+    By default, each criterion i' significance weight is supposed to
+    be a triangular random variables of mode w_i in the range 0 to 2*w_i.
+
+    *Parameters*:
+
+        * argPerfTab: PerformanceTableau instance or the name of a stored one.
+          If None, a random instance is generated.
+        * sampleSize: number of random weight vectors used for Monte Carlo simulation.
+        * distribution: {triangular|uniform|beta(2,2)|beta(4,4)}, probability distribution used for generating random weights
+        * spread: weight range = weight mode +- (weight mode * spread)
+        * likelihood: 1.0 - frequency of valuations of opposite sign compared to the median valuation.
+        * other standard parameters from the BipolarOutrankingDigraph class (see documentation).
+
+    """
+    def __init__(self,argPerfTab=None,
+                 distribution = 'triangular',
+                 likelihood = 0.9,
+                 coalition=None,
+                 hasNoVeto=False,
+                 hasBipolarVeto=True,
+                 Normalized=False,
+                 Debug=False,
+                 SeeSampleCounter=False):
+        # getting module ressources and setting the random seed
+        from copy import deepcopy
+        # getting performance tableau
+        if argPerfTab == None:
+            perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
+        elif isinstance(argPerfTab,(str)):
+            perfTab = PerformanceTableau(argPerfTab)
+        else:
+            perfTab = deepcopy(argPerfTab)
+        # initializing the bipolar outranking digraph
+        bodg = BipolarOutrankingDigraph(argPerfTab=perfTab,coalition=coalition,\
+                                     hasNoVeto = hasNoVeto,\
+                                     hasBipolarVeto = hasBipolarVeto,\
+                                     Normalized=Normalized)
+        self.name = bodg.name + '_CLT'
+        self.likelihood = likelihood
+        self.distribution = distribution
+        self.actions = deepcopy(bodg.actions)
+        self.order = len(self.actions)
+        self.valuationdomain = deepcopy(bodg.valuationdomain)
+        self.criteria = deepcopy(bodg.criteria)
+        self.evaluation = deepcopy(bodg.evaluation)
+        likelihoods = self.computeCLTLikelihoods(distribution=distribution,
+                                                Debug=Debug)
+        likeliRelation = {}
+        actionsList = [x for x in self.actions]
+        for x in actionsList:
+            likeliRelation[x] = {}
+            for y in actionsList:
+                if likelihoods[x][y] >= likelihood:
+                    likeliRelation[x][y] = bodg.relation[x][y]
+                else:
+                    likeliRelation[x][y] = self.valuationdomain['med']
+                if Debug:
+                    print(x,y,bodg.relation[x][y],likelihoods[x][y])
+        self.relation = deepcopy(likeliRelation)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+    
+    def computeCLTLikelihoods(self,distribution="triangular",Debug=False):
+        """
+        Renders the pairwise CLT likelihood of the at least as good as relation
+        neglecting all considerable large performance differences polarisations.
+        """
+        from decimal import Decimal
+        from math import sqrt
+        from scipy import stats
+        from scipy.stats import norm
+        actionsList = [x for x in self.actions]
+        sumWeights = Decimal('0')
+        criteriaList = [x for x in self.criteria]
+        m = len(criteriaList)
+        weightSquares = {}
+        for g in criteriaList:
+            gWeight = self.criteria[g]['weight']
+##            if Debug:
+##                print(g,gWeight)
+            weightSquares[g] = gWeight*gWeight
+            sumWeights += gWeight
+##        if Debug:
+##            print(sumWeights)
+##            print(weightSquares)
+        g = BipolarOutrankingDigraph(self,hasNoVeto=True)
+        g.recodeValuation(-sumWeights,sumWeights)
+        if Debug:
+            g.showRelationTable()
+        ccf = {}
+        if distribution == 'uniform':
+            varFactor = Decimal('1')/Decimal('3')
+        elif distribution == 'triangular':
+            varFactor = Decimal('1')/Decimal('6')
+        elif distribution == 'beta(2,2)':
+            varFactor = Decimal('1')/Decimal('5')
+        elif distribution == 'beta(4,4)':
+            varFactor = Decimal('1')/Decimal('9')
+        for x in actionsList:
+            ccf[x] = {}
+            for y in actionsList:
+                ccf[x][y] = {'std': Decimal('0.0')}
+                for c in criteriaList:
+                    ccf[x][y][c] = g.criterionCharacteristicFunction(c,x,y)
+                    ccf[x][y]['std'] += abs(ccf[x][y][c])*weightSquares[c]
+##                    if Debug:
+##                        print(c,x,y,ccf[x][y][c])
+                ccf[x][y]['std'] = sqrt(varFactor*ccf[x][y]['std'])
+##                if Debug:
+##                    print(x,y,ccf[x][y]['std'])
+        lh = {}
+        for x in actionsList:
+            lh[x] = {}
+            for y in actionsList:
+                n = norm(float(g.relation[x][y]),float(ccf[x][y]['std']))
+                lh[x][y] = {}
+                if g.relation[x][y] > g.valuationdomain['med']:
+                    lh[x][y] = 1.0 - n.cdf(0.0)
+                else:
+                    lh[x][y] = n.cdf(0.0)
+                if Debug:
+                    print(x,y,lh[x][y])
+        return lh
+
 class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     """
-    Stochastic bipolar outranking digraph base on multiple criteria of uncertain significance.
+    Stochastic bipolar outranking digraph based on multiple criteria of uncertain significance.
     
     The digraph's bipolar valuation represents the median of sampled outranking relations with a
     sufficient likelihood (default = 90%) to remain positive, repectively negative,
@@ -7010,7 +7143,69 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                           hasLatexFormat=hasLatexFormat,
                           hasIntegerValuation=hasIntegerValuation,
                           relation=relation)
-        
+
+    def computeCLTLikelihoods(self,distribution="triangular",Debug=False):
+        """
+        Renders the pairwise CLT likelihood of the at least as good as relation
+        neglecting all considerable large performance differences polarisations.
+        """
+        from decimal import Decimal
+        from math import sqrt
+        from scipy import stats
+        from scipy.stats import norm
+        actionsList = [x for x in self.actions]
+        sumWeights = Decimal('0')
+        criteriaList = [x for x in self.criteria]
+        m = len(criteriaList)
+        weightSquares = {}
+        for g in criteriaList:
+            gWeight = self.criteria[g]['weight']
+##            if Debug:
+##                print(g,gWeight)
+            weightSquares[g] = gWeight*gWeight
+            sumWeights += gWeight
+##        if Debug:
+##            print(sumWeights)
+##            print(weightSquares)
+        g = BipolarOutrankingDigraph(self,hasNoVeto=True)
+        g.recodeValuation(-sumWeights,sumWeights)
+        if Debug:
+            g.showRelationTable()
+        ccf = {}
+        if distribution == 'uniform':
+            varFactor = Decimal('1')/Decimal('3')
+        elif distribution == 'triangular':
+            varFactor = Decimal('1')/Decimal('6')
+        elif distribution == 'beta(2,2)':
+            varFactor = Decimal('1')/Decimal('5')
+        elif distribution == 'beta(4,4)':
+            varFactor = Decimal('1')/Decimal('9')
+        for x in actionsList:
+            ccf[x] = {}
+            for y in actionsList:
+                ccf[x][y] = {'std': Decimal('0.0')}
+                for c in criteriaList:
+                    ccf[x][y][c] = g.criterionCharacteristicFunction(c,x,y)
+                    ccf[x][y]['std'] += abs(ccf[x][y][c])*weightSquares[c]
+##                    if Debug:
+##                        print(c,x,y,ccf[x][y][c])
+                ccf[x][y]['std'] = sqrt(varFactor*ccf[x][y]['std'])
+##                if Debug:
+##                    print(x,y,ccf[x][y]['std'])
+        lh = {}
+        for x in actionsList:
+            lh[x] = {}
+            for y in actionsList:
+                n = norm(float(g.relation[x][y]),float(ccf[x][y]['std']))
+                lh[x][y] = {}
+                if g.relation[x][y] > g.valuationdomain['med']:
+                    lh[x][y] = 1.0 - n.cdf(0.0)
+                else:
+                    lh[x][y] = n.cdf(0.0)
+                if Debug:
+                    print(x,y,lh[x][y])
+        return lh
+
 
     def showRelationStatistics(self,argument='likelihoods',
                           actionsSubset= None,
@@ -7305,12 +7500,20 @@ if __name__ == "__main__":
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=100,\
+    t = RandomCBPerformanceTableau(numberOfActions=20,\
                                    numberOfCriteria=7,\
                                    weightDistribution='equiobjectives',
                                    )
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
+##    sg = StochasticBipolarOutrankingDigraph(t)
+##    print(sg.computeCLTLikelihoods(Debug=False))
+##    sg.showRelationTable()
+    lg = LikeliBipolarOutrankingDigraph(t,Debug=True)
+    lg.showRelationTable()
+    g = BipolarOutrankingDigraph(t)
+    g.showRelationTable()
+    
 ##    solver = RubisRestServer(host="http://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=True)
 ##    #solver.ping()
 ##    solver.submitProblem(t,valuation='robust',Debug=True)
@@ -7318,10 +7521,10 @@ if __name__ == "__main__":
 ##    #solver.viewSolution()
     
     
-    t0=time();g = BipolarOutrankingDigraph(t,Threading=False);print(time()-t0)
-    #g.showRelationTable()
-    t0=time();g = BipolarOutrankingDigraph(t,Threading=True,Debug=False);print(time()-t0)
-    #g.showRelationTable()
+##    t0=time();g = BipolarOutrankingDigraph(t,Threading=False);print(time()-t0)
+##    #g.showRelationTable()
+##    t0=time();g = BipolarOutrankingDigraph(t,Threading=True,Debug=False);print(time()-t0)
+##    #g.showRelationTable()
 
 ##    print('Triangular')
 ##    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True,\

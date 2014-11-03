@@ -622,6 +622,26 @@ def testRandomWeightsLaws():
     gmc3.showRelationStatistics('medians')
     gmc3.showRelationStatistics('likelihoods')
 
+def testLikeliBipolarOutrankingDigraphs():
+    print('*------- test random laws for stochastic outranking ------*')
+    t = RandomCBPerformanceTableau(numberOfActions=7,\
+                                   numberOfCriteria=13,\
+                                   weightDistribution='equiobjectives',
+                                   )
+    t.saveXMCDA2('test')
+    t = XMCDA2PerformanceTableau('test')
+    g = BipolarOutrankingDigraph(t)
+    g.showRelationTable()
+    lg = LikeliBipolarOutrankingDigraph(t,Debug=True)
+    lg.showRelationTable()
+    lg = LikeliBipolarOutrankingDigraph(t,distribution="uniform",Debug=False)
+    lg.showRelationTable()
+    lg = LikeliBipolarOutrankingDigraph(t,distribution="beta(2,2)",Debug=False)
+    lg.showRelationTable()
+    lg = LikeliBipolarOutrankingDigraph(t,distribution="beta(4,4)",Debug=False)
+    lg.showRelationTable()
+      
+
 ##def testRubisRestServer():
 ##    print('*------ test RubisRestServer class ----*')
 ##    from time import sleep
