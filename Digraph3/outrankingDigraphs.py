@@ -6766,10 +6766,8 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
         * argPerfTab: PerformanceTableau instance or the name of a stored one.
           If None, a random instance is generated.
-        * sampleSize: number of random weight vectors used for Monte Carlo simulation.
         * distribution: {triangular|uniform|beta(2,2)|beta(4,4)}, probability distribution used for generating random weights
-        * spread: weight range = weight mode +- (weight mode * spread)
-        * likelihood: 1.0 - frequency of valuations of opposite sign compared to the median valuation.
+        * likelihood: 1.0 - frequency of valuations of opposite sign compared to the mean valuation.
         * other standard parameters from the BipolarOutrankingDigraph class (see documentation).
 
     """
@@ -6780,8 +6778,8 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                  hasNoVeto=False,
                  hasBipolarVeto=True,
                  Normalized=False,
-                 Debug=False,
-                 SeeSampleCounter=False):
+                 Threading=False,
+                 Debug=False,):
         # getting module ressources and setting the random seed
         from copy import deepcopy
         # getting performance tableau
@@ -6795,7 +6793,8 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         bodg = BipolarOutrankingDigraph(argPerfTab=perfTab,coalition=coalition,\
                                      hasNoVeto = hasNoVeto,\
                                      hasBipolarVeto = hasBipolarVeto,\
-                                     Normalized=Normalized)
+                                     Normalized=Normalized,\
+                                     Threading=Threading)
         self.name = bodg.name + '_CLT'
         self.likelihood = likelihood
         self.distribution = distribution
@@ -6821,7 +6820,7 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
     
-    def computeCLTLikelihoods(self,distribution="triangular",Debug=False):
+    def computeCLTLikelihoods(self,distribution="triangular",Threading=False,Debug=False):
         """
         Renders the pairwise CLT likelihood of the at least as good as relation
         neglecting all considerable large performance differences polarisations.
@@ -6844,7 +6843,7 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 ##        if Debug:
 ##            print(sumWeights)
 ##            print(weightSquares)
-        g = BipolarOutrankingDigraph(self,hasNoVeto=True)
+        g = BipolarOutrankingDigraph(self,hasNoVeto=True,Threading=Threading)
         g.recodeValuation(-sumWeights,sumWeights)
         if Debug:
             g.showRelationTable()
@@ -7500,8 +7499,8 @@ if __name__ == "__main__":
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=20,\
-                                   numberOfCriteria=7,\
+    t = RandomCBPerformanceTableau(numberOfActions=100,\
+                                   numberOfCriteria=21,\
                                    weightDistribution='equiobjectives',
                                    )
     t.saveXMCDA2('test')
@@ -7509,10 +7508,16 @@ if __name__ == "__main__":
 ##    sg = StochasticBipolarOutrankingDigraph(t)
 ##    print(sg.computeCLTLikelihoods(Debug=False))
 ##    sg.showRelationTable()
-    lg = LikeliBipolarOutrankingDigraph(t,Debug=True)
-    lg.showRelationTable()
-    g = BipolarOutrankingDigraph(t)
-    g.showRelationTable()
+    t0 = time()
+    lg = LikeliBipolarOutrankingDigraph(t,Debug=False,Threading=False)
+    print(time()-t0)
+    print(lg.computeDeterminateness())
+##    lg.showRelationTable()
+    t0 = time()
+    g = BipolarOutrankingDigraph(t,Threading=False)
+    print(time()-t0)
+    print(g.computeDeterminateness())
+##    g.showRelationTable()
     
 ##    solver = RubisRestServer(host="http://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=True)
 ##    #solver.ping()
@@ -7526,117 +7531,6 @@ if __name__ == "__main__":
 ##    t0=time();g = BipolarOutrankingDigraph(t,Threading=True,Debug=False);print(time()-t0)
 ##    #g.showRelationTable()
 
-##    print('Triangular')
-##    gmc = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
-##                                             distribution='triangular',\
-##                                             sampleSize=100,\
-##                                             Debug=False,samplingSeed=1)
-##    gmc.showRelationTable()
-##    gmc.recodeValuation(-100,100)
-##    gmc.showRelationStatistics('medians')
-##    gmc.showRelationStatistics('likelihoods')
-##
-##    print('Uniform')
-##    gmc1 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
-##                                              distribution='uniform',\
-##                                              spread=0.5,\
-##                                             sampleSize=100,likelihood=0.9,\
-##                                             Debug=False,samplingSeed=1)
-##    gmc1.showRelationTable()
-##    gmc1.recodeValuation(-100,100)
-##    gmc1.showRelationStatistics('medians')
-##    gmc1.showRelationStatistics('likelihoods')
-####    for x in gmc1.actions:
-####        for y in gmc1.actions:
-####            print('==>>',x,y)
-####            print('Q4',gmc1.relationStatistics[x][y]['Q4'])
-####            print('Q3',gmc1.relationStatistics[x][y]['Q3'])
-####            print('probQ3',gmc1._computeCDF(x,y,gmc1.relationStatistics[x][y]['Q3']))
-####            print('Q2',gmc1.relationStatistics[x][y]['median'])
-####            print('mean',gmc1.relationStatistics[x][y]['mean'])
-####            print('Q1',gmc1.relationStatistics[x][y]['Q1'])
-####            print('probQ1',gmc1._computeCDF(x,y,gmc1.relationStatistics[x][y]['Q1']))
-####            print('Q0',gmc1.relationStatistics[x][y]['Q0'])
-####            print('pv',gmc1.relationStatistics[x][y]['likelihood'])
-####            print('prob0',gmc1._computeCDF(x,y,0.0))            
-####            print('sd',gmc1.relationStatistics[x][y]['sd'])
-##
-##    print('Beta(2,2)')
-##    gmc2 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
-##                                              distribution='beta(2,2)',\
-##                                             sampleSize=100,likelihood=0.9,\
-##                                             Debug=False,samplingSeed=1)
-##    gmc2.showRelationTable()
-##    gmc2.recodeValuation(-100,100)
-##    gmc2.showRelationStatistics('medians')
-##    gmc2.showRelationStatistics('likelihoods')
-##
-##    print('Beta(12,12)')
-##    gmc3 = StochasticBipolarOutrankingDigraph(t,Normalized=True,\
-##                                              distribution='beta(12,12)',\
-##                                              spread=0.5,\
-##                                             sampleSize=100,likelihood=0.9,\
-##                                             Debug=False,samplingSeed=1)
-##    gmc3.showRelationTable()
-##    gmc3.recodeValuation(-100,100)
-##    gmc3.showRelationStatistics('medians')
-##    gmc3.showRelationStatistics('likelihoods')
-## 
-##    grbc = RankingByChoosingDigraph(g)
-##    grbc.showPreOrder()
-##    gmcrbc = RankingByChoosingDigraph(gmc)
-##    gmcrbc.showPreOrder()
-    
-##    #t = RandomPerformanceTableau(numberOfActions=10)
-##    t.saveXMCDA2('test',servingD3=False)
-##    t = XMCDA2PerformanceTableau('test')
-##    g = BipolarOutrankingDigraph(t)
-##    gr = RobustOutrankingDigraph(t)
-##    g.showCriteria()
-##    g.showVetos()
-##    g.recodeValuation(-1.0,1.0)
-##    g.showRelationTable()
-##    #print('Strict Condorcet winners: ', g.condorcetWinners())
-##    #print('(Weak) Condorcet winners: ', g.weakCondorcetWinners())
-##    gr.showRelationTable()
-##    #gnv = BipolarOutrankingDigraph(t,hasNoVeto=True)
-##    #gnv.recodeValuation(-1,1)
-##    #gnv.showRelationTable()
-##    gr.showPairwiseComparison('a02','a05')
-##    # print('*Ranking by Choosing from the outranking digraph*')
-##    # t0 = time()
-##    # g.computeRankingByChoosing(CoDual=False,Debug=False)
-##    # g.showRankingByChoosing()
-##    # gRankingByChoosingRelation = g.computeRankingByChoosingRelation()
-##    # ## gmedrbc = g.computeOrdinalCorrelation(gRankingByChoosingRelation,MedianCut=True)
-##    # ## print 'Correlation with median cut outranking: %.3f (%.3f)' % (gmedrbc['correlation'],gmedrbc['determination'])
-##    # print('Execution time:', time()-t0, 'sec.')
-
-    # print()
-    # print('*Ranking by choosing from the codual outranking digraph*')
-    # t0 = time()
-    # g.computeRankingByChoosing(CoDual=True,Debug=False)
-    # t1 = time()
-    # g.showRankingByChoosing()
-    # gcdRankingByChoosingRelation = g.computeRankingByChoosingRelation()
-    # ## gmedrbc = g.computeOrdinalCorrelation(gcdRankingByChoosingRelation,MedianCut=True)
-    # ## print 'Correlation with median cut outranking: %.3f (%.3f)' % (gmedrbc['correlation'],gmedrbc['determination'])
-    # print('Execution time:', t1-t0, 'sec.')
-
-    # print()
-    # print('*Ranking from Quantile Sorting*')
-    # t.computeQuantileSort()
-    # t.showQuantileSort()
-    # qsr = g.computeQuantileSortRelation()
-    # corr = g.computeBipolarCorrelation(qsr)
-    # print('Bipolar correlation of quantile sorting with outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination']))
-    # corr = g.computeBipolarCorrelation(qsr,MedianCut=True)
-    # print('Bipolar correlation of quantile sorting with median cut outranking relation: %.3f (%.3f)' % (corr['correlation'],corr['determination']))
-
-    # print()
-    # print('*Iterating ranking by choosing after chordless odd circuits elimination*')
-    # g.iterateRankingByChoosing(Comments=True,Debug=False,Limited=0.2)
-    # print(g.computePrudentBestChoiceRecommendation())
     
 #############################
 # Log record for changes:
