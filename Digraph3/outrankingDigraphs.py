@@ -3821,6 +3821,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         for c in criteria:
             totalweight = totalweight + criteria[c]['weight']
         relation = {}
+        concordanceRelation = {}
         vetos = []
 
         if hasBipolarVeto:
@@ -3834,17 +3835,11 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
         for a in initial:
             relation[a] = {}
+            concordanceRelation[a] = {}
             for b in terminal:
-##                # testing paralleization of relation construction method
-##                # for the sortingDigraph.QuantilesSortingDigraph constructor
-##                from time import sleep
-##                sleep(0.0007)
-##                # with nq = 5, #A = 200, #C = 13, and sleep(0,0007) we get
-##                # With and without threading: 51.05 sec., resp. 51.39 sec.
-##                # with sleep(0) we get
-##                # With and without threading: 7.25 sec., resp. 6.4 sec.
                 if a == b:
                     relation[a][b] = Decimal('0.0')
+                    concordanceRelation[a][b] = Decimal('0.0')
                 else:
                     nc = len(criteria)
                     concordance = Decimal('0.0')
@@ -3928,8 +3923,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             veto[c] = (Decimal('-1.0'),None,None,None)
                             if hasBipolarVeto:
                                 negativeVeto[c] = (Decimal('-1.0'),None,None,None)
+                                
                     concordindex = concordance / totalweight                 
-
+                    concordanceRelation[a][b] = concordindex
+                    
                     ## init vetoes lists and indexes
                     abVetoes=[]
                     abNegativeVetoes=[]
@@ -3966,10 +3963,17 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                         if abNegativeVetoes != []:
                             negativeVetos.append(([a,b,concordindex*Decimal('100.0')],abNegativeVetoes))
                     relation[a][b] = outrankindex*Decimal('100.0')
+
+        # storing concordance relation and vetoes
+
+        self.concordanceRelation = concordanceRelation
         self.vetos = vetos
         if hasBipolarVeto:
             self.negativeVetos = negativeVetos
             self.largePerformanceDifferencesCount = largePerformanceDifferencesCount
+
+        # return outranking relation    
+
         return relation
 
 
@@ -6803,8 +6807,15 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.valuationdomain = deepcopy(bodg.valuationdomain)
         self.criteria = deepcopy(bodg.criteria)
         self.evaluation = deepcopy(bodg.evaluation)
+        if not Threading:
+            self.concordanceRelation = deepcopy(bodg.concordanceRelation)
+            self.vetos = deepcopy(bodg.vetos)
+            self.negativeVetos = deepcopy(bodg.negativeVetos)
+            self.largePerformanceDifferencesCount =\
+                   deepcopy(bodg.largePerformanceDifferencesCount)
         likelihoods = self.computeCLTLikelihoods(distribution=distribution,
-                                                Debug=Debug)
+                                                 Threading=Threading,
+                                                    Debug=Debug)
         likeliRelation = {}
         actionsList = [x for x in self.actions]
         for x in actionsList:
@@ -6819,12 +6830,56 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.relation = deepcopy(likeliRelation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+
+    def _recodeConcordanceValuation(self,oldRelation,sumWeights,Debug=False):
+        """
+        Recodes the characteristic valuation according
+        to the parameters given.
+        """
+        if Debug:
+            print(oldRelation,sumWeights)
+        from copy import deepcopy
+        oldMax = Decimal('1')
+        oldMin = Decimal('-1')
+        oldMed = Decimal('0')
+
+        oldAmplitude = oldMax - oldMin
+        if Debug:
+            print(oldMin, oldMed, oldMax, oldAmplitude)
+
+        newMin = -sumWeights
+        newMax = sumWeights
+        newMed = (newMax + newMin)/Decimal('2.0')
+
+        newAmplitude = newMax - newMin
+        if Debug:
+            print(newMin, newMed, newMax, newAmplitude)
+
+        actions = [x for x in self.actions]
+        newRelation = {}
+        for x in actions:
+            newRelation[x] = {}
+            for y in actions:
+                if oldRelation[x][y] == oldMax:
+                    newRelation[x][y] = newMax
+                elif oldRelation[x][y] == oldMin:
+                    newRelation[x][y] = newMin
+                elif oldRelation[x][y] == oldMed:
+                    newRelation[x][y] = newMed
+                else:
+                    newRelation[x][y] = newMin +\
+                        ((oldRelation[x][y] - oldMin)/oldAmplitude)*newAmplitude
+                    if Debug:
+                        print(x,y,oldRelation[x][y],newRelation[x][y])
+
+        return newRelation    
     
     def computeCLTLikelihoods(self,distribution="triangular",Threading=False,Debug=False):
         """
         Renders the pairwise CLT likelihood of the at least as good as relation
         neglecting all considerable large performance differences polarisations.
         """
+        from copy import deepcopy
         from decimal import Decimal
         from math import sqrt
         from scipy import stats
@@ -6833,6 +6888,7 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         sumWeights = Decimal('0')
         criteriaList = [x for x in self.criteria]
         m = len(criteriaList)
+        
         weightSquares = {}
         for g in criteriaList:
             gWeight = self.criteria[g]['weight']
@@ -6843,10 +6899,13 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 ##        if Debug:
 ##            print(sumWeights)
 ##            print(weightSquares)
-        g = BipolarOutrankingDigraph(self,hasNoVeto=True,Threading=Threading)
-        g.recodeValuation(-sumWeights,sumWeights)
-        if Debug:
-            g.showRelationTable()
+        if Threading:
+            g = BipolarOutrankingDigraph(self,hasNoVeto=True,Threading=Threading)
+            concordanceRelation = g.relation
+        else:
+            concordanceRelation = self._recodeConcordanceValuation(\
+                                self.concordanceRelation,sumWeights,Debug=Debug)
+
         ccf = {}
         if distribution == 'uniform':
             varFactor = Decimal('1')/Decimal('3')
@@ -6861,7 +6920,7 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             for y in actionsList:
                 ccf[x][y] = {'std': Decimal('0.0')}
                 for c in criteriaList:
-                    ccf[x][y][c] = g.criterionCharacteristicFunction(c,x,y)
+                    ccf[x][y][c] = self.criterionCharacteristicFunction(c,x,y)
                     ccf[x][y]['std'] += abs(ccf[x][y][c])*weightSquares[c]
 ##                    if Debug:
 ##                        print(c,x,y,ccf[x][y][c])
@@ -6872,9 +6931,9 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         for x in actionsList:
             lh[x] = {}
             for y in actionsList:
-                n = norm(float(g.relation[x][y]),float(ccf[x][y]['std']))
+                n = norm(float(concordanceRelation[x][y]),float(ccf[x][y]['std']))
                 lh[x][y] = {}
-                if g.relation[x][y] > g.valuationdomain['med']:
+                if concordanceRelation[x][y] > Decimal('0'):
                     lh[x][y] = 1.0 - n.cdf(0.0)
                 else:
                     lh[x][y] = n.cdf(0.0)
@@ -7499,8 +7558,8 @@ if __name__ == "__main__":
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=100,\
-                                   numberOfCriteria=21,\
+    t = RandomCBPerformanceTableau(numberOfActions=20,\
+                                   numberOfCriteria=13,\
                                    weightDistribution='equiobjectives',
                                    )
     t.saveXMCDA2('test')
@@ -7509,15 +7568,15 @@ if __name__ == "__main__":
 ##    print(sg.computeCLTLikelihoods(Debug=False))
 ##    sg.showRelationTable()
     t0 = time()
-    lg = LikeliBipolarOutrankingDigraph(t,Debug=False,Threading=False)
+    lg = LikeliBipolarOutrankingDigraph(t,likelihood=0.75,Debug=False,Threading=False)
     print(time()-t0)
     print(lg.computeDeterminateness())
-##    lg.showRelationTable()
+    lg.showRelationTable()
     t0 = time()
     g = BipolarOutrankingDigraph(t,Threading=False)
     print(time()-t0)
     print(g.computeDeterminateness())
-##    g.showRelationTable()
+    g.showRelationTable()
     
 ##    solver = RubisRestServer(host="http://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=True)
 ##    #solver.ping()
