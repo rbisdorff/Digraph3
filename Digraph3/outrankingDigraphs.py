@@ -6813,7 +6813,7 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             self.negativeVetos = deepcopy(bodg.negativeVetos)
             self.largePerformanceDifferencesCount =\
                    deepcopy(bodg.largePerformanceDifferencesCount)
-        likelihoods = self.computeCLTLikelihoods(distribution=distribution,
+        self.likelihoods = self.computeCLTLikelihoods(distribution=distribution,
                                                  Threading=Threading,
                                                     Debug=Debug)
         likeliRelation = {}
@@ -6821,12 +6821,12 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         for x in actionsList:
             likeliRelation[x] = {}
             for y in actionsList:
-                if likelihoods[x][y] >= likelihood:
+                if self.likelihoods[x][y] >= likelihood:
                     likeliRelation[x][y] = bodg.relation[x][y]
                 else:
                     likeliRelation[x][y] = self.valuationdomain['med']
                 if Debug:
-                    print(x,y,bodg.relation[x][y],likelihoods[x][y])
+                    print(x,y,bodg.relation[x][y],self.likelihoods[x][y])
         self.relation = deepcopy(likeliRelation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -6940,6 +6940,85 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                 if Debug:
                     print(x,y,lh[x][y])
         return lh
+
+    def showRelationTable(self,IntegerValues=False,
+                          actionsSubset= None,
+                          Sorted=True,
+                          LikelihoodDenotation=False,
+                          hasLatexFormat=False,
+                          hasIntegerValuation=False,
+                          relation=None,
+                          Debug=False):
+        """
+        prints the relation valuation in actions X actions table format.
+        """
+        if LikelihoodDenotation:
+            try:
+                likelihoods = self.likelihoods
+            except:
+                LikelihoodDenotation = False
+        if Debug:
+            print(LikelihoodDenotation)
+        if actionsSubset == None:
+            actions = self.actions
+        else:
+            actions = actionsSubset
+
+        if relation == None:
+            relation = self.relation
+            
+        print('* ---- Relation Table -----\n', end=' ')
+        print(' S   | ', end=' ')
+        #actions = [x for x in actions]
+        actionsList = []
+        for x in actions:
+            if isinstance(x,frozenset):
+                try:
+                    actionsList += [(actions[x]['shortName'],x)]
+                except:
+                    actionsList += [(actions[x]['name'],x)]
+            else:
+                actionsList += [(x,x)]
+        if Sorted:
+            actionsList.sort()
+        #print actionsList
+        #actionsList.sort()
+
+        try:
+            hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
+        except KeyError:
+            hasIntegerValuation = IntegerValues
+        
+        for x in actionsList:
+            print("'"+x[0]+"'", end='\t')
+        print('\n------|------------------------------------------------------------')
+        for x in actionsList:
+            if hasLatexFormat:
+                print("$"+x[0]+"$ & ", end=' ')
+            else:
+                print("'"+x[0]+"' |", end='\t')
+            for y in actionsList:
+                if hasIntegerValuation:
+                    if hasLatexFormat:
+                        print('$%+d$ &' % (relation[x[1]][y[1]]), end=' ')
+                    else:
+                        print('%+d' % (relation[x[1]][y[1]]), end='\t')
+                else:
+                    if hasLatexFormat:
+                        print('$%+2.2f$ & ' % (relation[x[1]][y[1]]), end=' ')       
+                    else:
+                        print('%+2.2f' % (relation[x[1]][y[1]]), end='\t')
+                
+            if hasLatexFormat:
+                print(' \\cr')
+            else:
+                print()
+            if LikelihoodDenotation:
+                print("'"+x[0]+"' |", end='\t')
+                for y in actionsList:
+                    print('(%.3f)' % (likelihoods[x[1]][y[1]]), end='\t')
+                print()       
+        print('\n')
 
 class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     """
@@ -7558,8 +7637,8 @@ if __name__ == "__main__":
 
 
 ##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=20,\
-                                   numberOfCriteria=13,\
+    t = RandomCBPerformanceTableau(numberOfActions=7,\
+                                   numberOfCriteria=5,\
                                    weightDistribution='equiobjectives',
                                    )
     t.saveXMCDA2('test')
@@ -7571,12 +7650,12 @@ if __name__ == "__main__":
     lg = LikeliBipolarOutrankingDigraph(t,likelihood=0.75,Debug=False,Threading=False)
     print(time()-t0)
     print(lg.computeDeterminateness())
-    lg.showRelationTable()
-    t0 = time()
-    g = BipolarOutrankingDigraph(t,Threading=False)
-    print(time()-t0)
-    print(g.computeDeterminateness())
-    g.showRelationTable()
+    lg.showRelationTable(LikelihoodDenotation=True,Debug=True)
+##    t0 = time()
+##    g = BipolarOutrankingDigraph(t,Threading=False)
+##    print(time()-t0)
+##    print(g.computeDeterminateness())
+##    g.showRelationTable()
     
 ##    solver = RubisRestServer(host="http://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=True)
 ##    #solver.ping()
