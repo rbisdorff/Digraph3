@@ -633,13 +633,14 @@ def testLikeliBipolarOutrankingDigraphs():
     g = BipolarOutrankingDigraph(t)
     g.showRelationTable()
     lg = LikeliBipolarOutrankingDigraph(t,Debug=True)
-    lg.showRelationTable()
-    lg = LikeliBipolarOutrankingDigraph(t,distribution="uniform",Debug=False)
-    lg.showRelationTable()
-    lg = LikeliBipolarOutrankingDigraph(t,distribution="beta(2,2)",Debug=False)
-    lg.showRelationTable()
+    lg.showRelationTable(LikelihoodDenotation=False)
+    lg.showRelationTable(LikelihoodDenotation=True)
+    lg = LikeliBipolarOutrankingDigraph(t,likelihood=.85,distribution="uniform",Debug=False)
+    lg.showRelationTable(LikelihoodDenotation=True)
+    lg = LikeliBipolarOutrankingDigraph(t,likelihood=.75,distribution="beta(2,2)",Debug=False)
+    lg.showRelationTable(LikelihoodDenotation=True)
     lg = LikeliBipolarOutrankingDigraph(t,distribution="beta(4,4)",Debug=False)
-    lg.showRelationTable()
+    lg.showRelationTable(LikelihoodDenotation=True)
       
 
 ##def testRubisRestServer():
