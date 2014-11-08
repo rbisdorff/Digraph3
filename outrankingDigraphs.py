@@ -6781,7 +6781,7 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                  coalition=None,
                  hasNoVeto=False,
                  hasBipolarVeto=True,
-                 Normalized=False,
+                 Normalized=True,
                  Threading=False,
                  Debug=False,):
         # getting module ressources and setting the random seed
@@ -6805,6 +6805,7 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.actions = deepcopy(bodg.actions)
         self.order = len(self.actions)
         self.valuationdomain = deepcopy(bodg.valuationdomain)
+        print(self.valuationdomain)
         self.criteria = deepcopy(bodg.criteria)
         self.evaluation = deepcopy(bodg.evaluation)
         if not Threading:
@@ -6816,20 +6817,59 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.likelihoods = self.computeCLTLikelihoods(distribution=distribution,
                                                  Threading=Threading,
                                                     Debug=Debug)
-        likeliRelation = {}
-        actionsList = [x for x in self.actions]
-        for x in actionsList:
-            likeliRelation[x] = {}
-            for y in actionsList:
-                if self.likelihoods[x][y] >= likelihood:
-                    likeliRelation[x][y] = bodg.relation[x][y]
-                else:
-                    likeliRelation[x][y] = self.valuationdomain['med']
-                if Debug:
-                    print(x,y,bodg.relation[x][y],self.likelihoods[x][y])
-        self.relation = deepcopy(likeliRelation)
+##        likeliRelation = {}
+##        actionsList = [x for x in self.actions]
+##        for x in actionsList:
+##            likeliRelation[x] = {}
+##            for y in actionsList:
+##                if self.likelihoods[x][y] >= likelihood:
+##                    likeliRelation[x][y] = bodg.relation[x][y]
+##                else:
+##                    likeliRelation[x][y] = self.valuationdomain['med']
+##                if Debug:
+##                    print(x,y,bodg.relation[x][y],self.likelihoods[x][y])
+        likelyRelation = self._computeLikelyRelation(
+            concordanceRelation=None,
+            likelihood=likelihood,
+            Debug=Debug)
+        self.relation = deepcopy(likelyRelation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+
+    def _computeLikelyRelation(self,
+                               concordanceRelation=None,
+                               likelihood=None,
+                               Debug=False):
+        """
+        Renders the relation cut at likelihood level.
+        """
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        amplitude = Max - Med
+        if concordanceRelation == None:
+            try:
+                concordanceRelation = self.concordanceRelation
+            except:
+                print('Error: No concordanceRelation found !!')
+
+        if likelihood == None:
+            likelihood = self.likelihood
+
+        likelyRelation = {}
+        actionsList = [x for x in self.actions]
+
+        for x in actionsList:
+            likelyRelation[x] = {}
+            for y in actionsList:
+                if self.likelihoods[x][y] >= likelihood:
+                    likelyRelation[x][y] = concordanceRelation[x][y]*amplitude
+                else:
+                    likelyRelation[x][y] = self.valuationdomain['med']
+                if Debug:
+                    print(x,y,concordanceRelation[x][y],self.likelihoods[x][y])
+
+        return likelyRelation
+        
 
     def _recodeConcordanceValuation(self,oldRelation,sumWeights,Debug=False):
         """
@@ -6839,21 +6879,20 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         if Debug:
             print(oldRelation,sumWeights)
         from copy import deepcopy
+        
         oldMax = Decimal('1')
         oldMin = Decimal('-1')
         oldMed = Decimal('0')
-
         oldAmplitude = oldMax - oldMin
         if Debug:
-            print(oldMin, oldMed, oldMax, oldAmplitude)
+            print('old: ',oldMin, oldMed, oldMax, oldAmplitude)
 
         newMin = -sumWeights
         newMax = sumWeights
-        newMed = (newMax + newMin)/Decimal('2.0')
-
+        newMed = Decimal('%.3f' % ((newMax + newMin)/Decimal('2.0')))
         newAmplitude = newMax - newMin
         if Debug:
-            print(newMin, newMed, newMax, newAmplitude)
+            print('new: ', newMin, newMed, newMax, newAmplitude)
 
         actions = [x for x in self.actions]
         newRelation = {}
@@ -6967,8 +7006,8 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         if relation == None:
             relation = self.relation
             
-        print('* ---- Relation Table -----\n', end=' ')
-        print(' S   | ', end=' ')
+        print('* ---- Outranking Relation Table -----')
+        print('r(xSy) | ', end=' ')
         #actions = [x for x in actions]
         actionsList = []
         for x in actions:
@@ -6990,13 +7029,13 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             hasIntegerValuation = IntegerValues
         
         for x in actionsList:
-            print("'"+x[0]+"'", end='\t')
-        print('\n------|------------------------------------------------------------')
+            print("'"+x[0]+"'\t", end=' ')
+        print('\n-------|------------------------------------------------------------')
         for x in actionsList:
             if hasLatexFormat:
                 print("$"+x[0]+"$ & ", end=' ')
             else:
-                print("'"+x[0]+"' |", end='\t')
+                print(" '"+x[0]+"' |", end=' ')
             for y in actionsList:
                 if hasIntegerValuation:
                     if hasLatexFormat:
@@ -7007,22 +7046,29 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                     if hasLatexFormat:
                         print('$%+2.2f$ & ' % (relation[x[1]][y[1]]), end=' ')       
                     else:
-                        print('%+2.2f' % (relation[x[1]][y[1]]), end='\t')
+                        print('%+2.2f\t' % (relation[x[1]][y[1]]), end=' ')
                 
             if hasLatexFormat:
                 print(' \\cr')
             else:
                 print()
             if LikelihoodDenotation:
-                headString = "'"+x[0]+"' "
+                headString = "' "+x[0]+"' "
                 formatStr = ' ' * len(headString)
-                print(formatStr+'|', end='\t')
+                print(formatStr+'|', end=' ')
                 for y in actionsList:
                     if x != y:
-                        print('(%.3f)' % (likelihoods[x[1]][y[1]]), end='\t')
+                        print('(%.2f)\t' % (likelihoods[x[1]][y[1]]), end=' ')
                     else:
-                        print('(  -  )', end='\t')
-                print()       
+                        print('( - )\t', end=' ')
+                print()
+
+        print('Valuation domain : [%+.3f; %+.3f] ' % (self.valuationdomain['min'],
+                                                   self.valuationdomain['max']))
+        print('Uncertainty model: %s ' % self.distribution)
+        print('Likelihood domain: [0.5; 1.0] ')
+        print('Likelihood level : %.2f ' % self.likelihood)
+        print('Determinateness  : %.3f ' % self.computeDeterminateness() )
         print('\n')
 
 class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
@@ -7642,11 +7688,11 @@ if __name__ == "__main__":
 
 
     #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=7,\
-                                   numberOfCriteria=13,\
-                                   weightDistribution='equiobjectives',
-                                   )
-    t.saveXMCDA2('test')
+##    t = RandomCBPerformanceTableau(numberOfActions=7,\
+##                                   numberOfCriteria=13,\
+##                                   weightDistribution='equiobjectives',
+##                                   )
+##    t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
 ##    sg = StochasticBipolarOutrankingDigraph(t)
 ##    print(sg.computeCLTLikelihoods(Debug=False))
@@ -7655,16 +7701,17 @@ if __name__ == "__main__":
     lg = LikeliBipolarOutrankingDigraph(t,
                                         distribution="beta(2,2)",
                                         likelihood=0.75,
+                                        Normalized=True,
                                         Debug=False,Threading=False)
-    print(time()-t0)
+    print(time()-t0,' sec.')
     print(lg.computeDeterminateness())
-    lg.showRelationTable(LikelihoodDenotation=True,Debug=True)
+    lg.showRelationTable(LikelihoodDenotation=True,Debug=False)
     t0 = time()
     g = BipolarOutrankingDigraph(t,Threading=False)
     print(time()-t0)
     print(g.computeDeterminateness())
-    g.showRelationTable()
-    
+##    g.showRelationTable()
+##    
 ##    solver = RubisRestServer(host="http://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=True)
 ##    #solver.ping()
 ##    solver.submitProblem(t,valuation='robust',Debug=True)
