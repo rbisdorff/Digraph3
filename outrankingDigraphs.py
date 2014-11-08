@@ -7014,9 +7014,14 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             else:
                 print()
             if LikelihoodDenotation:
-                print("'"+x[0]+"' |", end='\t')
+                headString = "'"+x[0]+"' "
+                formatStr = ' ' * len(headString)
+                print(formatStr+'|', end='\t')
                 for y in actionsList:
-                    print('(%.3f)' % (likelihoods[x[1]][y[1]]), end='\t')
+                    if x != y:
+                        print('(%.3f)' % (likelihoods[x[1]][y[1]]), end='\t')
+                    else:
+                        print('(  -  )', end='\t')
                 print()       
         print('\n')
 
@@ -7636,9 +7641,9 @@ if __name__ == "__main__":
     print('*-------- Testing classes and methods -------')
 
 
-##    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
+    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
     t = RandomCBPerformanceTableau(numberOfActions=7,\
-                                   numberOfCriteria=5,\
+                                   numberOfCriteria=13,\
                                    weightDistribution='equiobjectives',
                                    )
     t.saveXMCDA2('test')
@@ -7647,15 +7652,18 @@ if __name__ == "__main__":
 ##    print(sg.computeCLTLikelihoods(Debug=False))
 ##    sg.showRelationTable()
     t0 = time()
-    lg = LikeliBipolarOutrankingDigraph(t,likelihood=0.75,Debug=False,Threading=False)
+    lg = LikeliBipolarOutrankingDigraph(t,
+                                        distribution="beta(2,2)",
+                                        likelihood=0.75,
+                                        Debug=False,Threading=False)
     print(time()-t0)
     print(lg.computeDeterminateness())
     lg.showRelationTable(LikelihoodDenotation=True,Debug=True)
-##    t0 = time()
-##    g = BipolarOutrankingDigraph(t,Threading=False)
-##    print(time()-t0)
-##    print(g.computeDeterminateness())
-##    g.showRelationTable()
+    t0 = time()
+    g = BipolarOutrankingDigraph(t,Threading=False)
+    print(time()-t0)
+    print(g.computeDeterminateness())
+    g.showRelationTable()
     
 ##    solver = RubisRestServer(host="http://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=True)
 ##    #solver.ping()
