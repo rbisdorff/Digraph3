@@ -6817,40 +6817,22 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.likelihoods = self.computeCLTLikelihoods(distribution=distribution,
                                                  Threading=Threading,
                                                     Debug=Debug)
-##        likeliRelation = {}
-##        actionsList = [x for x in self.actions]
-##        for x in actionsList:
-##            likeliRelation[x] = {}
-##            for y in actionsList:
-##                if self.likelihoods[x][y] >= likelihood:
-##                    likeliRelation[x][y] = bodg.relation[x][y]
-##                else:
-##                    likeliRelation[x][y] = self.valuationdomain['med']
-##                if Debug:
-##                    print(x,y,bodg.relation[x][y],self.likelihoods[x][y])
-        likelyRelation = self._computeLikelyRelation(
-            concordanceRelation=None,
+        self.relation = self._computeLikelyRelation(
+            bodg.relation,
             likelihood=likelihood,
             Debug=Debug)
-        self.relation = deepcopy(likelyRelation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
     def _computeLikelyRelation(self,
-                               concordanceRelation=None,
+                               outrankingRelation,
                                likelihood=None,
                                Debug=False):
         """
         Renders the relation cut at likelihood level.
         """
-        Max = self.valuationdomain['max']
+        
         Med = self.valuationdomain['med']
-        amplitude = Max - Med
-        if concordanceRelation == None:
-            try:
-                concordanceRelation = self.concordanceRelation
-            except:
-                print('Error: No concordanceRelation found !!')
 
         if likelihood == None:
             likelihood = self.likelihood
@@ -6862,15 +6844,14 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             likelyRelation[x] = {}
             for y in actionsList:
                 if self.likelihoods[x][y] >= likelihood:
-                    likelyRelation[x][y] = concordanceRelation[x][y]*amplitude
+                    likelyRelation[x][y] = outrankingRelation[x][y]
                 else:
-                    likelyRelation[x][y] = self.valuationdomain['med']
+                    likelyRelation[x][y] = Med
                 if Debug:
-                    print(x,y,concordanceRelation[x][y],self.likelihoods[x][y])
+                    print(x,y,outrankingRelation[x][y],self.likelihoods[x][y])
 
         return likelyRelation
         
-
     def _recodeConcordanceValuation(self,oldRelation,sumWeights,Debug=False):
         """
         Recodes the characteristic valuation according
@@ -6939,7 +6920,8 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 ##            print(sumWeights)
 ##            print(weightSquares)
         if Threading:
-            g = BipolarOutrankingDigraph(self,hasNoVeto=True,Threading=Threading)
+            g = BipolarOutrankingDigraph(self,hasNoVeto=True,
+                                         Threading=Threading)
             concordanceRelation = g.relation
         else:
             concordanceRelation = self._recodeConcordanceValuation(\
@@ -7007,7 +6989,7 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             relation = self.relation
             
         print('* ---- Outranking Relation Table -----')
-        print('r(xSy) | ', end=' ')
+        print('r/(lh) | ', end=' ')
         #actions = [x for x in actions]
         actionsList = []
         for x in actions:
