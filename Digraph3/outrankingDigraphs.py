@@ -6805,7 +6805,6 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.actions = deepcopy(bodg.actions)
         self.order = len(self.actions)
         self.valuationdomain = deepcopy(bodg.valuationdomain)
-        print(self.valuationdomain)
         self.criteria = deepcopy(bodg.criteria)
         self.evaluation = deepcopy(bodg.evaluation)
         if not Threading:
@@ -6965,7 +6964,7 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     def showRelationTable(self,IntegerValues=False,
                           actionsSubset= None,
                           Sorted=True,
-                          LikelihoodDenotation=False,
+                          LikelihoodDenotation=True,
                           hasLatexFormat=False,
                           hasIntegerValuation=False,
                           relation=None,
