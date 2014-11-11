@@ -6988,7 +6988,10 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             relation = self.relation
             
         print('* ---- Outranking Relation Table -----')
-        print('r/(lh) | ', end=' ')
+        if LikelihoodDenotation:
+            print('r/(lh) | ', end=' ')
+        else:
+            print(' r()   | ', end=' ')
         #actions = [x for x in actions]
         actionsList = []
         for x in actions:

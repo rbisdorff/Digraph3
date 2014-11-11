@@ -1044,7 +1044,9 @@ class PerformanceTableau(object):
                                    criteriaList=None,
                                    colorLevels=7,
                                    pageTitle=None,
-                                   ndigits=2):
+                                   ndigits=2,
+                                   Ranked=True,
+                                   Threading=False):
         """
         shows the html heatmap version of the performance tableau in a browser window.
         """
@@ -1053,6 +1055,12 @@ class PerformanceTableau(object):
         fo = open(fileName,'w')
         if pageTitle == None:
             pageTitle = 'Heatmap of performance tableau %s' % self.name
+        if Ranked and actionsList == None:
+            from weakOrders import QuantilesRankingDigraph
+            qsr = QuantilesRankingDigraph(self,LowerClosed=True,Threading=Threading)
+            actionsList = qsr.computeQsRbcRanking()
+            print(actionsList)
+            
         fo.write(self.htmlPerformanceHeatmap(criteriaList=criteriaList,
                                              actionsList=actionsList,
                                              ndigits=ndigits,
@@ -5250,7 +5258,7 @@ if __name__ == "__main__":
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
     t = RandomCBPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=100,
+                                   numberOfActions=20,
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
                                    Debug=False)
@@ -5265,12 +5273,14 @@ if __name__ == "__main__":
 ##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('uniSorting')
     from weakOrders import *
-    qsrbc = QsRbcWeakOrdering(t,25,Threading=True)
+    qsrbc = QuantilesRankingDigraph(t,LowerClosed=True,Threading=False)
     qsrbc.showSorting()
     actionsList = qsrbc.computeQsRbcRanking()
 ##    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
 ##    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=True))
-    t.showHTMLPerformanceHeatmap(actionsList=actionsList,colorLevels=9)
+##    t.showHTMLPerformanceHeatmap(actionsList=actionsList,colorLevels=7,Ranked=False)
+##    t.showHTMLPerformanceHeatmap(colorLevels=7,Ranked=True,Threading=False)
+    t.showHTMLPerformanceHeatmap(colorLevels=7,Threading=False)
 ##    t.showHTMLPerformanceHeatmap()
 ##    pt1 = PartialPerformanceTableau(t)
 ##    pt1.showAll()
