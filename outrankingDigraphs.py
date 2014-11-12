@@ -69,6 +69,40 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
+    def computeCriterionCorrelation(self,criterion,Threading=False,Debug=False):
+        """
+        Renders the ordinal correlation coefficient between
+        the global outranking and the marginal criterion relation.
+        """
+        gc = BipolarOutrankingDigraph(self,coalition=[criterion],
+                                      Threading=Threading)
+        corr = self.computeOrdinalCorrelation(gc)
+        if Debug:
+            print(corr)
+        return corr
+
+    def showMarginalVersusGlobalOutrankingCorrelation(self,Sorted=True,Threading=False):
+        """
+        Show method for computeCriterionCorrelation results.
+        """
+        criteriaList = [x for x in self.criteria]
+        criteriaCorrelation = []
+        totCorrelation = Decimal('0.0')
+        for c in criteriaList:
+            corr = self.computeCriterionCorrelation(c)
+            totCorrelation += corr['correlation']
+            criteriaCorrelation.append((corr['correlation'],c))
+        if Sorted:
+            criteriaCorrelation.sort(reverse=True)
+        print('Marginal versus global outranking correlation')
+        print('criterion | weight\t correlation')
+        print('----------|---------------------------')
+        for x in criteriaCorrelation:
+            c = x[1]
+            print('%9s |  %.2f \t %.3f' % (c,self.criteria[c]['weight'],x[0]))
+        print('Sum(Correlations) : %.3f' % (totCorrelation))
+        print('Determinateness   : %.3f' % (corr['determination']))
+
     def computeQuantileSortRelation(self,Debug=False):
         """
         Renders the bipolar-valued relation obtained from
@@ -7671,12 +7705,12 @@ if __name__ == "__main__":
     print('*-------- Testing classes and methods -------')
 
 
-    #t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-##    t = RandomCBPerformanceTableau(numberOfActions=7,\
-##                                   numberOfCriteria=13,\
-##                                   weightDistribution='equiobjectives',
-##                                   )
-##    t.saveXMCDA2('test')
+    t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
+    ## t = RandomCBPerformanceTableau(numberOfActions=7,\
+    ##                               numberOfCriteria=13,\
+    ##                               weightDistribution='equiobjectives',
+    ##                               )
+    t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
 ##    sg = StochasticBipolarOutrankingDigraph(t)
 ##    print(sg.computeCLTLikelihoods(Debug=False))
@@ -7686,7 +7720,7 @@ if __name__ == "__main__":
                                         distribution="beta(2,2)",
                                         likelihood=0.75,
                                         Normalized=True,
-                                        Debug=False,Threading=False)
+                                        Debug=False,Threading=True)
     print(time()-t0,' sec.')
     print(lg.computeDeterminateness())
     lg.showRelationTable(LikelihoodDenotation=True,Debug=False)
@@ -7694,6 +7728,18 @@ if __name__ == "__main__":
     g = BipolarOutrankingDigraph(t,Threading=False)
     print(time()-t0)
     print(g.computeDeterminateness())
+    g.showMarginalVersusGlobalOutrankingCorrelation()
+    ## criteriaList = [x for x in g.criteria]
+    ## criteriaCorrelation = []
+    ## for c in criteriaList:
+    ##     corr = g.computeCriterionCorrelation(c,Debug=True)
+    ##     criteriaCorrelation.append((corr['correlation'],c))
+    ## criteriaCorrelation.sort(reverse=True)
+    ## print('criterion\t weight\t correlation')
+    ## for x in criteriaCorrelation:
+    ##     c = x[1]
+    ##     print('%9s\t %.2f \t %.3f' % (c,g.criteria[c]['weight'],x[0]))
+    
 ##    g.showRelationTable()
 ##    
 ##    solver = RubisRestServer(host="http://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=True)

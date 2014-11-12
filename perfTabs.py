@@ -5280,7 +5280,7 @@ if __name__ == "__main__":
 ##    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=True))
 ##    t.showHTMLPerformanceHeatmap(actionsList=actionsList,colorLevels=7,Ranked=False)
 ##    t.showHTMLPerformanceHeatmap(colorLevels=7,Ranked=True,Threading=False)
-    t.showHTMLPerformanceHeatmap(colorLevels=7,Threading=False)
+##    t.showHTMLPerformanceHeatmap(colorLevels=7,Threading=False)
 ##    t.showHTMLPerformanceHeatmap()
 ##    pt1 = PartialPerformanceTableau(t)
 ##    pt1.showAll()
