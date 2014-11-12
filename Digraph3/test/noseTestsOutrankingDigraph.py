@@ -641,7 +641,15 @@ def testLikeliBipolarOutrankingDigraphs():
     lg.showRelationTable(LikelihoodDenotation=True)
     lg = LikeliBipolarOutrankingDigraph(t,distribution="beta(4,4)",Debug=False)
     lg.showRelationTable(LikelihoodDenotation=True)
-      
+
+def testMarginalVersusGlobalOutrankingCorrelation():
+    print('*-------- MarginalVersusGlobalOutranking -------')
+    t = RandomCBPerformanceTableau(numberOfActions=10,\
+                                  numberOfCriteria=13,\
+                                  weightDistribution='equiobjectives',
+                                  )
+    g = BipolarOutrankingDigraph(t,Threading=False)
+    g.showMarginalVersusGlobalOutrankingCorrelation()
 
 ##def testRubisRestServer():
 ##    print('*------ test RubisRestServer class ----*')
