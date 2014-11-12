@@ -7705,11 +7705,11 @@ if __name__ == "__main__":
     print('*-------- Testing classes and methods -------')
 
 
-    t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    ## t = RandomCBPerformanceTableau(numberOfActions=7,\
-    ##                               numberOfCriteria=13,\
-    ##                               weightDistribution='equiobjectives',
-    ##                               )
+    ## t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
+    t = RandomCBPerformanceTableau(numberOfActions=25,\
+                                  numberOfCriteria=13,\
+                                  weightDistribution='equiobjectives',
+                                  )
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
 ##    sg = StochasticBipolarOutrankingDigraph(t)
