@@ -7705,8 +7705,8 @@ if __name__ == "__main__":
     print('*-------- Testing classes and methods -------')
 
 
-    ## t = RandomCoalitionsPerformanceTableau(numberOfActions=20,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=25,\
+##    t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='equiobjectives')
+    t = RandomCBPerformanceTableau(numberOfActions=10,\
                                   numberOfCriteria=13,\
                                   weightDistribution='equiobjectives',
                                   )
@@ -7729,6 +7729,7 @@ if __name__ == "__main__":
     print(time()-t0)
     print(g.computeDeterminateness())
     g.showMarginalVersusGlobalOutrankingCorrelation()
+    g.showHTMLPerformanceHeatmap()
     ## criteriaList = [x for x in g.criteria]
     ## criteriaCorrelation = []
     ## for c in criteriaList:
