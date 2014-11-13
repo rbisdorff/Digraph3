@@ -1075,6 +1075,7 @@ class PerformanceTableau(object):
                                ndigits=2,
                                colorLevels=None,
                                pageTitle='Performance Heatmap',
+                               Threading=False,
                                Debug=False):
         """
         Renders the Brewer RdYlGn 9-colored heatmap of the performance table
@@ -1128,9 +1129,17 @@ class PerformanceTableau(object):
         html = '<h2>%s</h2>' % pageTitle
         
         if criteriaList == None:
-            criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
-            criteriaWeightsList.sort(reverse=True)
-            criteriaList = [g[1] for g in criteriaWeightsList]
+            ## criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
+            ## criteriaWeightsList.sort(reverse=True)
+            ## criteriaList = [g[1] for g in criteriaWeightsList]
+            from outrankingDigraphs import BipolarOutrankingDigraph
+            g = BipolarOutrankingDigraph(self,Threading=Threading)
+            criteriaCorrelation =\
+                g.showMarginalVersusGlobalOutrankingCorrelation(\
+                            Threading=Threading,\
+                            Comments=False)
+            criteriaList = [c[1] for c in criteriaCorrelation]
+    
         if actionsList == None:
             actionsList = list(self.actions.keys())
             actionsList.sort()
@@ -1172,6 +1181,10 @@ class PerformanceTableau(object):
         for g in criteriaList:
             html += '<td align="center">%s</td>' % (str(self.criteria[g]['weight']))
         html += '</tr>\n'
+        html += '<tr><th bgcolor=%s>tau<sup>(*)</sup></th>' % (columnHeaderColor)
+        for cg in criteriaCorrelation:
+            html += '<td align="center">%.2f</td>' % (cg[0])
+        html += '</tr>\n'
         if Debug:
             print(html)
         for x in actionsList:
@@ -1197,7 +1210,8 @@ class PerformanceTableau(object):
                                                                    colorPalette[col][0])
         html += '</tr>\n'
         html += '</table>\n'
-        
+        html += '<i>(*) tau: Ordinal (Kendall) correlation of marginal criterion and global outranking rleation.</i>\n'
+
         return html
 
     def computeWeightPreorder(self):
