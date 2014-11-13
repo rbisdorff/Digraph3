@@ -1139,6 +1139,8 @@ class PerformanceTableau(object):
                             Threading=Threading,\
                             Comments=False)
             criteriaList = [c[1] for c in criteriaCorrelation]
+        else:
+            criteriaCorrelation = None
     
         if actionsList == None:
             actionsList = list(self.actions.keys())
@@ -1181,10 +1183,11 @@ class PerformanceTableau(object):
         for g in criteriaList:
             html += '<td align="center">%s</td>' % (str(self.criteria[g]['weight']))
         html += '</tr>\n'
-        html += '<tr><th bgcolor=%s>tau<sup>(*)</sup></th>' % (columnHeaderColor)
-        for cg in criteriaCorrelation:
-            html += '<td align="center">%.2f</td>' % (cg[0])
-        html += '</tr>\n'
+        if criteriaCorrelation != None:
+            html += '<tr><th bgcolor=%s>tau<sup>(*)</sup></th>' % (columnHeaderColor)
+            for cg in criteriaCorrelation:
+                html += '<td align="center">%.2f</td>' % (cg[0])
+            html += '</tr>\n'
         if Debug:
             print(html)
         for x in actionsList:
