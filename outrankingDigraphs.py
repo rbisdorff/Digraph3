@@ -81,7 +81,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print(corr)
         return corr
 
-    def showMarginalVersusGlobalOutrankingCorrelation(self,Sorted=True,Threading=False):
+    def showMarginalVersusGlobalOutrankingCorrelation(self,Sorted=True,Threading=False,Comments=True):
         """
         Show method for computeCriterionCorrelation results.
         """
@@ -94,14 +94,17 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             criteriaCorrelation.append((corr['correlation'],c))
         if Sorted:
             criteriaCorrelation.sort(reverse=True)
-        print('Marginal versus global outranking correlation')
-        print('criterion | weight\t correlation')
-        print('----------|---------------------------')
-        for x in criteriaCorrelation:
-            c = x[1]
-            print('%9s |  %.2f \t %.3f' % (c,self.criteria[c]['weight'],x[0]))
-        print('Sum(Correlations) : %.3f' % (totCorrelation))
-        print('Determinateness   : %.3f' % (corr['determination']))
+        if Comments:
+            print('Marginal versus global outranking correlation')
+            print('criterion | weight\t correlation')
+            print('----------|---------------------------')
+            for x in criteriaCorrelation:
+                c = x[1]
+                print('%9s |  %.2f \t %.3f' % (c,self.criteria[c]['weight'],x[0]))
+            print('Sum(Correlations) : %.3f' % (totCorrelation))
+            print('Determinateness   : %.3f' % (corr['determination']))
+
+        return criteriaCorrelation
 
     def computeQuantileSortRelation(self,Debug=False):
         """
@@ -7705,8 +7708,8 @@ if __name__ == "__main__":
     print('*-------- Testing classes and methods -------')
 
 
-##    t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='equiobjectives')
-    t = RandomCBPerformanceTableau(numberOfActions=10,\
+    ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
+    t = RandomCBPerformanceTableau(numberOfActions=50,\
                                   numberOfCriteria=13,\
                                   weightDistribution='equiobjectives',
                                   )
@@ -7718,7 +7721,7 @@ if __name__ == "__main__":
     t0 = time()
     lg = LikeliBipolarOutrankingDigraph(t,
                                         distribution="beta(2,2)",
-                                        likelihood=0.75,
+                                        likelihood=0.9,
                                         Normalized=True,
                                         Debug=False,Threading=True)
     print(time()-t0,' sec.')
