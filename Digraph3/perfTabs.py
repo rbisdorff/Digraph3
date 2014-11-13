@@ -1213,7 +1213,7 @@ class PerformanceTableau(object):
                                                                    colorPalette[col][0])
         html += '</tr>\n'
         html += '</table>\n'
-        html += '<i>(*) tau: Ordinal (Kendall) correlation of marginal criterion and global outranking rleation.</i>\n'
+        html += '<i>(*) tau: Ordinal (Kendall) correlation of marginal criterion and global outranking relation.</i>\n'
 
         return html
 
