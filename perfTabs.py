@@ -1046,6 +1046,7 @@ class PerformanceTableau(object):
                                    pageTitle=None,
                                    ndigits=2,
                                    Ranked=True,
+                                   Correlations=False,
                                    Threading=False):
         """
         shows the html heatmap version of the performance tableau in a browser window.
@@ -1065,7 +1066,8 @@ class PerformanceTableau(object):
                                              actionsList=actionsList,
                                              ndigits=ndigits,
                                              colorLevels=colorLevels,
-                                             pageTitle=pageTitle))
+                                             pageTitle=pageTitle,
+                                             Correlations=Correlations))
         fo.close()
         url = 'file://'+fileName
         webbrowser.open_new(url)
@@ -1075,6 +1077,7 @@ class PerformanceTableau(object):
                                ndigits=2,
                                colorLevels=None,
                                pageTitle='Performance Heatmap',
+                               Correlations=False,
                                Threading=False,
                                Debug=False):
         """
@@ -1129,16 +1132,19 @@ class PerformanceTableau(object):
         html = '<h2>%s</h2>' % pageTitle
         
         if criteriaList == None:
-            ## criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
-            ## criteriaWeightsList.sort(reverse=True)
-            ## criteriaList = [g[1] for g in criteriaWeightsList]
             from outrankingDigraphs import BipolarOutrankingDigraph
             g = BipolarOutrankingDigraph(self,Threading=Threading)
-            criteriaCorrelation =\
-                g.showMarginalVersusGlobalOutrankingCorrelation(\
+            if Correlations:
+                criteriaCorrelation =\
+                    g.showMarginalVersusGlobalOutrankingCorrelation(\
                             Threading=Threading,\
                             Comments=False)
-            criteriaList = [c[1] for c in criteriaCorrelation]
+                criteriaList = [c[1] for c in criteriaCorrelation]
+            else:
+                criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
+                criteriaWeightsList.sort(reverse=True)
+                criteriaList = [g[1] for g in criteriaWeightsList]
+                criteriaCorrelation = None    
         else:
             criteriaCorrelation = None
     
@@ -1213,7 +1219,8 @@ class PerformanceTableau(object):
                                                                    colorPalette[col][0])
         html += '</tr>\n'
         html += '</table>\n'
-        html += '<i>(*) tau: Ordinal (Kendall) correlation of marginal criterion and global outranking relation.</i>\n'
+        if criteriaCorrelation != None:
+            html += '<i>(*) tau: Ordinal (Kendall) correlation of marginal criterion and global outranking relation.</i>\n'
 
         return html
 
@@ -5293,10 +5300,11 @@ if __name__ == "__main__":
     qsrbc = QuantilesRankingDigraph(t,LowerClosed=True,Threading=False)
     qsrbc.showSorting()
     actionsList = qsrbc.computeQsRbcRanking()
+    
 ##    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
 ##    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=True))
-##    t.showHTMLPerformanceHeatmap(actionsList=actionsList,colorLevels=7,Ranked=False)
-##    t.showHTMLPerformanceHeatmap(colorLevels=7,Ranked=True,Threading=False)
+##    t.showHTMLPerformanceHeatmap(actionsList=actionsList,colorLevels=7,Ranked=True)
+    t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,Threading=True)
 ##    t.showHTMLPerformanceHeatmap(colorLevels=7,Threading=False)
 ##    t.showHTMLPerformanceHeatmap()
 ##    pt1 = PartialPerformanceTableau(t)

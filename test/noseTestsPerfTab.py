@@ -263,6 +263,7 @@ def testHTMPerformanceHeatmap():
     print(t.htmlPerformanceHeatmap(actionsList=actionsList,
                                    criteriaList=criteriaList,
                                    colorLevels=9,
+                                   Correlations=True,
                                    ndigits=4,
                                    Debug=True))
     
