@@ -6928,7 +6928,13 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                     if Debug:
                         print(x,y,oldRelation[x][y],newRelation[x][y])
 
-        return newRelation    
+        return newRelation
+
+    def _myGaussCDF(self,mean,sigma,x):
+        
+        from math import sqrt,erf
+        z = ((x - mean) / sigma)/sqrt(2)
+        return 0.5 + 0.5*erf(z)
     
     def computeCLTLikelihoods(self,distribution="triangular",Threading=False,Debug=False):
         """
@@ -6937,9 +6943,10 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         """
         from copy import deepcopy
         from decimal import Decimal
-        from math import sqrt
-        from scipy import stats
-        from scipy.stats import norm
+        from math import sqrt,erfc
+        from random import gauss
+        #from scipy import stats
+        #from scipy.stats import norm
         actionsList = [x for x in self.actions]
         sumWeights = Decimal('0')
         criteriaList = [x for x in self.criteria]
@@ -6988,12 +6995,16 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         for x in actionsList:
             lh[x] = {}
             for y in actionsList:
-                n = norm(float(concordanceRelation[x][y]),float(ccf[x][y]['std']))
+                #n = norm(float(concordanceRelation[x][y]),float(ccf[x][y]['std']))
+                mean = float(concordanceRelation[x][y])
+                std = float(ccf[x][y]['std'])
                 lh[x][y] = {}
                 if concordanceRelation[x][y] > Decimal('0'):
-                    lh[x][y] = 1.0 - n.cdf(0.0)
+                    #lh[x][y] = 1.0 - n.cdf(0.0)
+                    lh[x][y] = 1.0 - self._myGaussCDF(mean,std,0.0)
                 else:
-                    lh[x][y] = n.cdf(0.0)
+                    #lh[x][y] = n.cdf(0.0)
+                    lh[x][y] = self._myGaussCDF(mean,std,0.0)
                 if Debug:
                     print(x,y,lh[x][y])
         return lh
