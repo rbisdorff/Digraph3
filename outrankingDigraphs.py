@@ -6931,7 +6931,10 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         return newRelation
 
     def _myGaussCDF(self,mean,sigma,x):
-        
+        """
+        Inverse tranform of bipolar error function of z = (x-mu)/sigma: 
+        Gauss cdf(z) = [erf( z / sqrt(2) ) + 1] / 2
+        """
         from math import sqrt,erf
         z = ((x - mean) / sigma)/sqrt(2)
         return 0.5 + 0.5*erf(z)
@@ -6943,7 +6946,7 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         """
         from copy import deepcopy
         from decimal import Decimal
-        from math import sqrt,erfc
+        from math import sqrt
         from random import gauss
         #from scipy import stats
         #from scipy.stats import norm
@@ -7743,7 +7746,7 @@ if __name__ == "__main__":
     print(time()-t0)
     print(g.computeDeterminateness())
     g.showMarginalVersusGlobalOutrankingCorrelation()
-    g.showHTMLPerformanceHeatmap()
+    g.showHTMLPerformanceHeatmap(Correlations=True)
     ## criteriaList = [x for x in g.criteria]
     ## criteriaCorrelation = []
     ## for c in criteriaList:
