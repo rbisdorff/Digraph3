@@ -6791,321 +6791,6 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph,PerformanceTableau):
             else:
                 return Decimal('-1.0')
 
-## class _LikeliBipolarOutrankingDigraphOld(BipolarOutrankingDigraph):
-##     """
-##     Likely bipolar outranking digraph based on multiple criteria of
-##     uncertain significance.
-    
-##     The digraph's bipolar valuation represents the bipolar outranking relation
-##     based on a sufficient likelihood of the at least as good as relation
-##     that is outranking without veto and counterveto.
-
-##     By default, each criterion i' significance weight is supposed to
-##     be a triangular random variables of mode w_i in the range 0 to 2*w_i.
-
-##     *Parameters*:
-
-##         * argPerfTab: PerformanceTableau instance or the name of a stored one.
-##           If None, a random instance is generated.
-##         * distribution: {triangular|uniform|beta(2,2)|beta(4,4)}, probability distribution used for generating random weights
-##         * likelihood: 1.0 - frequency of valuations of opposite sign compared to the mean valuation.
-##         * other standard parameters from the BipolarOutrankingDigraph class (see documentation).
-
-##     """
-##     def __init__(self,argPerfTab=None,
-##                  distribution = 'triangular',
-##                  likelihood = 0.9,
-##                  coalition=None,
-##                  hasNoVeto=False,
-##                  hasBipolarVeto=True,
-##                  Normalized=True,
-##                  Threading=False,
-##                  Debug=False,):
-##         # getting module ressources and setting the random seed
-##         from copy import deepcopy
-##         # getting performance tableau
-##         if argPerfTab == None:
-##             perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
-##         elif isinstance(argPerfTab,(str)):
-##             perfTab = PerformanceTableau(argPerfTab)
-##         else:
-##             perfTab = deepcopy(argPerfTab)
-##         # initializing the bipolar outranking digraph
-##         bodg = BipolarOutrankingDigraph(argPerfTab=perfTab,coalition=coalition,\
-##                                      hasNoVeto = hasNoVeto,\
-##                                      hasBipolarVeto = hasBipolarVeto,\
-##                                      Normalized=Normalized,\
-##                                      Threading=Threading)
-##         self.name = bodg.name + '_CLT'
-##         self.likelihood = likelihood
-##         self.distribution = distribution
-##         self.actions = deepcopy(bodg.actions)
-##         self.order = len(self.actions)
-##         self.valuationdomain = deepcopy(bodg.valuationdomain)
-##         self.criteria = deepcopy(bodg.criteria)
-##         self.evaluation = deepcopy(bodg.evaluation)
-##         if not Threading:
-##             self.concordanceRelation = deepcopy(bodg.concordanceRelation)
-##             self.vetos = deepcopy(bodg.vetos)
-##             self.negativeVetos = deepcopy(bodg.negativeVetos)
-##             self.largePerformanceDifferencesCount =\
-##                    deepcopy(bodg.largePerformanceDifferencesCount)
-##         self.likelihoods = self.computeCLTLikelihoods(distribution=distribution,
-##                                                  Threading=Threading,
-##                                                     Debug=Debug)
-##         self.relation = self._computeLikelyRelation(
-##             bodg.relation,
-##             likelihood=likelihood,
-##             Debug=Debug)
-##         self.gamma = self.gammaSets()
-##         self.notGamma = self.notGammaSets()
-
-##     def _computeLikelyRelation(self,
-##                                outrankingRelation,
-##                                likelihood=None,
-##                                Debug=False):
-##         """
-##         Renders the relation cut at likelihood level.
-##         """
-        
-##         Med = self.valuationdomain['med']
-
-##         if likelihood == None:
-##             likelihood = self.likelihood
-
-##         likelyRelation = {}
-##         actionsList = [x for x in self.actions]
-
-##         for x in actionsList:
-##             likelyRelation[x] = {}
-##             for y in actionsList:
-##                 if self.likelihoods[x][y] >= likelihood:
-##                     likelyRelation[x][y] = outrankingRelation[x][y]
-##                 else:
-##                     likelyRelation[x][y] = Med
-##                 if Debug:
-##                     print(x,y,outrankingRelation[x][y],self.likelihoods[x][y])
-
-##         return likelyRelation
-        
-##     def _recodeConcordanceValuation(self,oldRelation,sumWeights,Debug=False):
-##         """
-##         Recodes the characteristic valuation according
-##         to the parameters given.
-##         """
-##         if Debug:
-##             print(oldRelation,sumWeights)
-##         from copy import deepcopy
-        
-##         oldMax = Decimal('1')
-##         oldMin = Decimal('-1')
-##         oldMed = Decimal('0')
-##         oldAmplitude = oldMax - oldMin
-##         if Debug:
-##             print('old: ',oldMin, oldMed, oldMax, oldAmplitude)
-
-##         newMin = -sumWeights
-##         newMax = sumWeights
-##         newMed = Decimal('%.3f' % ((newMax + newMin)/Decimal('2.0')))
-##         newAmplitude = newMax - newMin
-##         if Debug:
-##             print('new: ', newMin, newMed, newMax, newAmplitude)
-
-##         actions = [x for x in self.actions]
-##         newRelation = {}
-##         for x in actions:
-##             newRelation[x] = {}
-##             for y in actions:
-##                 if oldRelation[x][y] == oldMax:
-##                     newRelation[x][y] = newMax
-##                 elif oldRelation[x][y] == oldMin:
-##                     newRelation[x][y] = newMin
-##                 elif oldRelation[x][y] == oldMed:
-##                     newRelation[x][y] = newMed
-##                 else:
-##                     newRelation[x][y] = newMin +\
-##                         ((oldRelation[x][y] - oldMin)/oldAmplitude)*newAmplitude
-##                     if Debug:
-##                         print(x,y,oldRelation[x][y],newRelation[x][y])
-
-##         return newRelation
-
-##     def _myGaussCDF(self,mean,sigma,x):
-##         """
-##         Inverse tranform of bipolar error function of z = (x-mu)/sigma: 
-##         Gauss cdf(z) = [erf( z / sqrt(2) ) + 1] / 2
-##         """
-##         from math import sqrt,erf
-##         z = ((x - mean) / sigma)/sqrt(2)
-##         return 0.5 + 0.5*erf(z)
-    
-##     def computeCLTLikelihoods(self,distribution="triangular",Threading=False,Debug=False):
-##         """
-##         Renders the pairwise CLT likelihood of the at least as good as relation
-##         neglecting all considerable large performance differences polarisations.
-##         """
-##         from copy import deepcopy
-##         from decimal import Decimal
-##         from math import sqrt
-##         from random import gauss
-##         #from scipy import stats
-##         #from scipy.stats import norm
-##         actionsList = [x for x in self.actions]
-##         sumWeights = Decimal('0')
-##         criteriaList = [x for x in self.criteria]
-##         m = len(criteriaList)
-        
-##         weightSquares = {}
-##         for g in criteriaList:
-##             gWeight = self.criteria[g]['weight']
-## ##            if Debug:
-## ##                print(g,gWeight)
-##             weightSquares[g] = gWeight*gWeight
-##             sumWeights += gWeight
-## ##        if Debug:
-## ##            print(sumWeights)
-## ##            print(weightSquares)
-##         if Threading:
-##             g = BipolarOutrankingDigraph(self,hasNoVeto=True,
-##                                          Threading=Threading)
-##             concordanceRelation = g.relation
-##         else:
-##             concordanceRelation = self._recodeConcordanceValuation(\
-##                                 self.concordanceRelation,sumWeights,Debug=Debug)
-
-##         ccf = {}
-##         if distribution == 'uniform':
-##             varFactor = Decimal('1')/Decimal('3')
-##         elif distribution == 'triangular':
-##             varFactor = Decimal('1')/Decimal('6')
-##         elif distribution == 'beta(2,2)':
-##             varFactor = Decimal('1')/Decimal('5')
-##         elif distribution == 'beta(4,4)':
-##             varFactor = Decimal('1')/Decimal('9')
-##         for x in actionsList:
-##             ccf[x] = {}
-##             for y in actionsList:
-##                 ccf[x][y] = {'std': Decimal('0.0')}
-##                 for c in criteriaList:
-##                     ccf[x][y][c] = self.criterionCharacteristicFunction(c,x,y)
-##                     ccf[x][y]['std'] += abs(ccf[x][y][c])*weightSquares[c]
-## ##                    if Debug:
-## ##                        print(c,x,y,ccf[x][y][c])
-##                 ccf[x][y]['std'] = sqrt(varFactor*ccf[x][y]['std'])
-## ##                if Debug:
-## ##                    print(x,y,ccf[x][y]['std'])
-##         lh = {}
-##         for x in actionsList:
-##             lh[x] = {}
-##             for y in actionsList:
-##                 #n = norm(float(concordanceRelation[x][y]),float(ccf[x][y]['std']))
-##                 mean = float(concordanceRelation[x][y])
-##                 std = float(ccf[x][y]['std'])
-##                 lh[x][y] = {}
-##                 if concordanceRelation[x][y] > Decimal('0'):
-##                     #lh[x][y] = 1.0 - n.cdf(0.0)
-##                     lh[x][y] = 1.0 - self._myGaussCDF(mean,std,0.0)
-##                 else:
-##                     #lh[x][y] = n.cdf(0.0)
-##                     lh[x][y] = self._myGaussCDF(mean,std,0.0)
-##                 if Debug:
-##                     print(x,y,lh[x][y])
-##         return lh
-
-##     def showRelationTable(self,IntegerValues=False,
-##                           actionsSubset= None,
-##                           Sorted=True,
-##                           LikelihoodDenotation=True,
-##                           hasLatexFormat=False,
-##                           hasIntegerValuation=False,
-##                           relation=None,
-##                           Debug=False):
-##         """
-##         prints the relation valuation in actions X actions table format.
-##         """
-##         if LikelihoodDenotation:
-##             try:
-##                 likelihoods = self.likelihoods
-##             except:
-##                 LikelihoodDenotation = False
-##         if Debug:
-##             print(LikelihoodDenotation)
-##         if actionsSubset == None:
-##             actions = self.actions
-##         else:
-##             actions = actionsSubset
-
-##         if relation == None:
-##             relation = self.relation
-            
-##         print('* ---- Outranking Relation Table -----')
-##         if LikelihoodDenotation:
-##             print('r/(lh) | ', end=' ')
-##         else:
-##             print(' r()   | ', end=' ')
-##         #actions = [x for x in actions]
-##         actionsList = []
-##         for x in actions:
-##             if isinstance(x,frozenset):
-##                 try:
-##                     actionsList += [(actions[x]['shortName'],x)]
-##                 except:
-##                     actionsList += [(actions[x]['name'],x)]
-##             else:
-##                 actionsList += [(x,x)]
-##         if Sorted:
-##             actionsList.sort()
-##         #print actionsList
-##         #actionsList.sort()
-
-##         try:
-##             hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
-##         except KeyError:
-##             hasIntegerValuation = IntegerValues
-        
-##         for x in actionsList:
-##             print("'"+x[0]+"'\t", end=' ')
-##         print('\n-------|------------------------------------------------------------')
-##         for x in actionsList:
-##             if hasLatexFormat:
-##                 print("$"+x[0]+"$ & ", end=' ')
-##             else:
-##                 print(" '"+x[0]+"' |", end=' ')
-##             for y in actionsList:
-##                 if hasIntegerValuation:
-##                     if hasLatexFormat:
-##                         print('$%+d$ &' % (relation[x[1]][y[1]]), end=' ')
-##                     else:
-##                         print('%+d' % (relation[x[1]][y[1]]), end='\t')
-##                 else:
-##                     if hasLatexFormat:
-##                         print('$%+2.2f$ & ' % (relation[x[1]][y[1]]), end=' ')       
-##                     else:
-##                         print('%+2.2f\t' % (relation[x[1]][y[1]]), end=' ')
-                
-##             if hasLatexFormat:
-##                 print(' \\cr')
-##             else:
-##                 print()
-##             if LikelihoodDenotation:
-##                 headString = "' "+x[0]+"' "
-##                 formatStr = ' ' * len(headString)
-##                 print(formatStr+'|', end=' ')
-##                 for y in actionsList:
-##                     if x != y:
-##                         print('(%.2f)\t' % (likelihoods[x[1]][y[1]]), end=' ')
-##                     else:
-##                         print('( - )\t', end=' ')
-##                 print()
-
-##         print('Valuation domain : [%+.3f; %+.3f] ' % (self.valuationdomain['min'],
-##                                                    self.valuationdomain['max']))
-##         print('Uncertainty model: %s ' % self.distribution)
-##         print('Likelihood domain: [0.5; 1.0] ')
-##         print('Likelihood level : %.2f ' % self.likelihood)
-##         print('Determinateness  : %.3f ' % self.computeDeterminateness() )
-##         print('\n')
-
 class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     """
     Likely bipolar outranking digraph based on multiple criteria of
@@ -7123,13 +6808,13 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         * argPerfTab: PerformanceTableau instance or the name of a stored one.
           If None, a random instance is generated.
         * distribution: {triangular|uniform|beta(2,2)|beta(4,4)}, probability distribution used for generating random weights
-        * likelihood: 1.0 - frequency of valuations of opposite sign compared to the mean valuation.
+        * likelihood: Bipolar confidence level in range [0; +1]
         * other standard parameters from the BipolarOutrankingDigraph class (see documentation).
 
     """
     def __init__(self,argPerfTab=None,
                  distribution = 'triangular',
-                 likelihood = 0.9,
+                 likelihood = 0.8,
                  coalition=None,
                  hasNoVeto=False,
                  hasBipolarVeto=True,
@@ -7194,16 +6879,10 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         for x in actionsList:
             likelyRelation[x] = {}
             for y in actionsList:
-                if outrankingRelation[x][y] >= Med:
-                    if self.likelihoods[x][y] >= likelihood:
-                        likelyRelation[x][y] = outrankingRelation[x][y]
-                    else:
-                        likelyRelation[x][y] = Med
+                if abs(self.likelihoods[x][y]) >= likelihood:
+                    likelyRelation[x][y] = outrankingRelation[x][y]
                 else:
-                    if self.likelihoods[x][y] <= -likelihood:
-                        likelyRelation[x][y] = outrankingRelation[x][y]
-                    else:
-                        likelyRelation[x][y] = Med         
+                    likelyRelation[x][y] = Med        
                 if Debug:
                     print(x,y,outrankingRelation[x][y],self.likelihoods[x][y])
 
@@ -7253,11 +6932,13 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
     def _myGaussCDF(self,mean,sigma,x,Bipolar=True):
         """
-        Inverse tranform of bipolar error function of z = (x-mu)/sigma: 
-        Gauss cdf(z) = [erf( z / sqrt(2) ) + 1] / 2
+        Bipolar error function of z = (x-mu)/sigma) divided by sqrt(2).
+        If Bipolar = False,
+        renders the Gauss cdf(z) = [erf( z / sqrt(2) ) + 1] / 2
         """
         from math import sqrt,erf
-        z = ((x - mean) / sigma)/sqrt(2)
+        #z = ((x - mean) / sigma)/sqrt(2)
+        z = (x - mean) / (sigma * sqrt(2))
         if Bipolar:
             return erf(z)
         else:
@@ -7272,8 +6953,6 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         from decimal import Decimal
         from math import sqrt
         from random import gauss
-        #from scipy import stats
-        #from scipy.stats import norm
         actionsList = [x for x in self.actions]
         sumWeights = Decimal('0')
         criteriaList = [x for x in self.criteria]
@@ -7322,16 +7001,10 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         for x in actionsList:
             lh[x] = {}
             for y in actionsList:
-                #n = norm(float(concordanceRelation[x][y]),float(ccf[x][y]['std']))
+
                 mean = float(concordanceRelation[x][y])
                 std = float(ccf[x][y]['std'])
-                lh[x][y] = {}
-                if concordanceRelation[x][y] > Decimal('0'):
-                    #lh[x][y] = 1.0 - n.cdf(0.0)
-                    lh[x][y] = -self._myGaussCDF(mean,std,0.0)
-                else:
-                    #lh[x][y] = n.cdf(0.0)
-                    lh[x][y] = -self._myGaussCDF(mean,std,0.0)
+                lh[x][y] = -self._myGaussCDF(mean,std,0.0)
                 if Debug:
                     print(x,y,lh[x][y])
         return lh
@@ -7358,7 +7031,7 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             actions = self.actions
         else:
             actions = actionsSubset
-
+            
         if relation == None:
             relation = self.relation
             
@@ -7379,8 +7052,6 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                 actionsList += [(x,x)]
         if Sorted:
             actionsList.sort()
-        #print actionsList
-        #actionsList.sort()
 
         try:
             hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
@@ -8048,12 +7719,12 @@ if __name__ == "__main__":
     print('*-------- Testing classes and methods -------')
 
 
-    t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
+    ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
     ## t = RandomCBPerformanceTableau(numberOfActions=50,\
     ##                               numberOfCriteria=13,\
     ##                               weightDistribution='equiobjectives',
     ##                               )
-    t.saveXMCDA2('test')
+    ## t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
 ##    sg = StochasticBipolarOutrankingDigraph(t)
 ##    print(sg.computeCLTLikelihoods(Debug=False))
