@@ -6869,10 +6869,12 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         """
         
         Med = self.valuationdomain['med']
+        Max = self.valuationdomain['max']
+        Min = self.valuationdomain['min']
 
         if likelihood == None:
             likelihood = self.likelihood
-    
+        confidenceCutLevel = Med
         likelyRelation = {}
         actionsList = [x for x in self.actions]
 
@@ -6882,10 +6884,13 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                 if abs(self.likelihoods[x][y]) >= likelihood:
                     likelyRelation[x][y] = outrankingRelation[x][y]
                 else:
-                    likelyRelation[x][y] = Med        
+                    likelyRelation[x][y] = Med
+                    level = abs(outrankingRelation[x][y])
+                    if level < Max and level > confidenceCutLevel:
+                        confidenceCutLevel = level
                 if Debug:
                     print(x,y,outrankingRelation[x][y],self.likelihoods[x][y])
-
+            self.confidenceCutLevel = confidenceCutLevel
         return likelyRelation
         
     def _recodeConcordanceValuation(self,oldRelation,sumWeights,Debug=False):
@@ -6934,11 +6939,11 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         """
         Bipolar error function of z = (x-mu)/sigma) divided by sqrt(2).
         If Bipolar = False,
-        renders the Gauss cdf(z) = [erf( z / sqrt(2) ) + 1] / 2
+        renders the Gauss cdf(z) = [erf( z ) + 1] / 2
+        sqrt(2) = 1.4142135623731
         """
         from math import sqrt,erf
-        #z = ((x - mean) / sigma)/sqrt(2)
-        z = (x - mean) / (sigma * sqrt(2))
+        z = (x - mean) / (sigma * 1.4142135623731)
         if Bipolar:
             return erf(z)
         else:
@@ -7429,16 +7434,19 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
     def showRelationStatistics(self,argument='likelihoods',
                           actionsSubset= None,
-                          hasLatexFormat=False):
+                          hasLatexFormat=False,
+                          Bipolar=False):
         """
         prints the relation statistics in actions X actions table format.
         """
+        from math import copysign
 ##        if hasLPDDenotation:
 ##            try:
 ##                largePerformanceDifferencesCount = self.largePerformanceDifferencesCount
 ##                gnv = BipolarOutrankingDigraph(self.performanceTableau,hasNoVeto=True)
 ##                gnv.recodeValuation(self.valuationdomain['min'],self.valuationdomain['max'])
 ##            except:
+
         hasLPDDenotation = False
             
         if actionsSubset == None:
@@ -7450,7 +7458,12 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             relation[x] = {}
             for y in actions:
                 if argument == 'likelihoods':
-                    relation[x][y] = self.relationStatistics[x][y]['likelihood']
+                    if Bipolar:
+                        relation[x][y] =\
+        copysign( ((2.0 * self.relationStatistics[x][y]['likelihood']) - 1.0),
+                   self.relation[x][y])
+                    else:
+                        relation[x][y] = self.relationStatistics[x][y]['likelihood']
                 elif argument == 'medians':
                     relation[x][y] = self.relationStatistics[x][y]['median']
                 elif argument == 'means':
