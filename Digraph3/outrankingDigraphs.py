@@ -6818,7 +6818,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     def __init__(self,argPerfTab=None,
                  distribution = 'triangular',
                  betaParameter = 2,
-                 confidence = 90,
+                 confidence = 90.0,
                  coalition=None,
                  hasNoVeto=False,
                  hasBipolarVeto=True,
