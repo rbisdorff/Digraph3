@@ -6811,7 +6811,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
           If None, a random instance is generated.
         * distribution: {triangular|uniform|beta}, probability distribution used for generating random weights
         * betaParameter: a = b (default = 2)
-        * confidenceLevel: % confidence level in range [0;100]
+        * confidence: required likelihood (in %) of the outranking relation
         * other standard parameters from the BipolarOutrankingDigraph class (see documentation).
 
     """
