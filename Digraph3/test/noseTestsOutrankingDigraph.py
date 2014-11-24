@@ -622,7 +622,7 @@ def testRandomWeightsLaws():
     gmc3.showRelationStatistics('medians')
     gmc3.showRelationStatistics('likelihoods')
 
-def testLikeliBipolarOutrankingDigraphs():
+def testConfidentBipolarOutrankingDigraphs():
     print('*------- test random laws for stochastic outranking ------*')
     t = RandomCBPerformanceTableau(numberOfActions=7,\
                                    numberOfCriteria=13,\
@@ -632,14 +632,17 @@ def testLikeliBipolarOutrankingDigraphs():
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t)
     g.showRelationTable()
-    lg = LikeliBipolarOutrankingDigraph(t,Debug=True)
+    lg = ConfidentBipolarOutrankingDigraph(t,Debug=True)
     lg.showRelationTable(LikelihoodDenotation=False)
     lg.showRelationTable(LikelihoodDenotation=True)
-    lg = LikeliBipolarOutrankingDigraph(t,likelihood=.85,distribution="uniform",Debug=False)
+    lg = ConfidentBipolarOutrankingDigraph(t,confidence=.95,
+                                           distribution="uniform",Debug=False)
     lg.showRelationTable(LikelihoodDenotation=True)
-    lg = LikeliBipolarOutrankingDigraph(t,likelihood=.75,distribution="beta(2,2)",Debug=False)
+    lg = ConfidentBipolarOutrankingDigraph(t,confidence=.75,
+                                        distribution="beta",Debug=False)
     lg.showRelationTable(LikelihoodDenotation=True)
-    lg = LikeliBipolarOutrankingDigraph(t,distribution="beta(4,4)",Debug=False)
+    lg = ConfidentBipolarOutrankingDigraph(t,distribution="beta",
+                                           betaParameter=7.5,Debug=False)
     lg.showRelationTable(LikelihoodDenotation=True)
 
 def testMarginalVersusGlobalOutrankingCorrelation():

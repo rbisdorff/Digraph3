@@ -1053,7 +1053,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2910,7 +2910,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3407,6 +3407,43 @@ new bipolar ordinal-valued outranking digraphs.</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="outrankingDigraphs.ConfidentBipolarOutrankingDigraph">
+<em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">ConfidentBipolarOutrankingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>distribution='triangular'</em>, <em>betaParameter=2</em>, <em>confidence=0.9</em>, <em>coalition=None</em>, <em>hasNoVeto=False</em>, <em>hasBipolarVeto=True</em>, <em>Normalized=True</em>, <em>Threading=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.ConfidentBipolarOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></tt></a></p>
+<p>Confident bipolar outranking digraph based on multiple criteria of
+uncertain significance.</p>
+<p>The digraph&#8217;s bipolar valuation represents the bipolar outranking relation
+based on a sufficient likelihood of the at least as good as relation
+that is outranking without veto and counterveto.</p>
+<p>By default, each criterion i&#8217; significance weight is supposed to
+be a triangular random variables of mode w_i in the range 0 to 2*w_i.</p>
+<p><em>Parameters</em>:</p>
+<blockquote>
+<div><ul class="simple">
+<li>argPerfTab: PerformanceTableau instance or the name of a stored one.
+If None, a random instance is generated.</li>
+<li>distribution: {triangular|uniform|beta}, probability distribution used for generating random weights</li>
+<li>betaParameter: a = b (default = 2)</li>
+<li>confidenceLevel: % confidence level in range [0; +100]</li>
+<li>other standard parameters from the BipolarOutrankingDigraph class (see documentation).</li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="outrankingDigraphs.ConfidentBipolarOutrankingDigraph.computeCLTLikelihoods">
+<tt class="descname">computeCLTLikelihoods</tt><big>(</big><em>distribution='triangular'</em>, <em>betaParameter=None</em>, <em>Threading=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.ConfidentBipolarOutrankingDigraph.computeCLTLikelihoods" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the pairwise CLT likelihood of the at least as good as relation
+neglecting all considerable large performance differences polarisations.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="outrankingDigraphs.ConfidentBipolarOutrankingDigraph.showRelationTable">
+<tt class="descname">showRelationTable</tt><big>(</big><em>IntegerValues=False</em>, <em>actionsSubset=None</em>, <em>Sorted=True</em>, <em>LikelihoodDenotation=True</em>, <em>hasLatexFormat=False</em>, <em>hasIntegerValuation=False</em>, <em>relation=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.ConfidentBipolarOutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints the relation valuation in actions X actions table format.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="outrankingDigraphs.DissimilarityOutrankingDigraph">
 <em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">DissimilarityOutrankingDigraph</tt><big>(</big><em>filePerfTab=None</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.DissimilarityOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></tt></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><tt class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></tt></a></p>
@@ -3474,37 +3511,8 @@ temporary outranking digraphs with equisignificant criteria.</p>
 <dl class="class">
 <dt id="outrankingDigraphs.LikeliBipolarOutrankingDigraph">
 <em class="property">class </em><tt class="descclassname">outrankingDigraphs.</tt><tt class="descname">LikeliBipolarOutrankingDigraph</tt><big>(</big><em>argPerfTab=None</em>, <em>distribution='triangular'</em>, <em>likelihood=0.8</em>, <em>coalition=None</em>, <em>hasNoVeto=False</em>, <em>hasBipolarVeto=True</em>, <em>Normalized=True</em>, <em>Threading=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.LikeliBipolarOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></tt></a></p>
-<p>Likely bipolar outranking digraph based on multiple criteria of
-uncertain significance.</p>
-<p>The digraph&#8217;s bipolar valuation represents the bipolar outranking relation
-based on a sufficient likelihood of the at least as good as relation
-that is outranking without veto and counterveto.</p>
-<p>By default, each criterion i&#8217; significance weight is supposed to
-be a triangular random variables of mode w_i in the range 0 to 2*w_i.</p>
-<p><em>Parameters</em>:</p>
-<blockquote>
-<div><ul class="simple">
-<li>argPerfTab: PerformanceTableau instance or the name of a stored one.
-If None, a random instance is generated.</li>
-<li>distribution: {triangular|uniform|beta(2,2)|beta(4,4)}, probability distribution used for generating random weights</li>
-<li>likelihood: Bipolar confidence level in range [0; +1]</li>
-<li>other standard parameters from the BipolarOutrankingDigraph class (see documentation).</li>
-</ul>
-</div></blockquote>
-<dl class="method">
-<dt id="outrankingDigraphs.LikeliBipolarOutrankingDigraph.computeCLTLikelihoods">
-<tt class="descname">computeCLTLikelihoods</tt><big>(</big><em>distribution='triangular'</em>, <em>Threading=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.LikeliBipolarOutrankingDigraph.computeCLTLikelihoods" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the pairwise CLT likelihood of the at least as good as relation
-neglecting all considerable large performance differences polarisations.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.LikeliBipolarOutrankingDigraph.showRelationTable">
-<tt class="descname">showRelationTable</tt><big>(</big><em>IntegerValues=False</em>, <em>actionsSubset=None</em>, <em>Sorted=True</em>, <em>LikelihoodDenotation=True</em>, <em>hasLatexFormat=False</em>, <em>hasIntegerValuation=False</em>, <em>relation=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.LikeliBipolarOutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
-<dd><p>prints the relation valuation in actions X actions table format.</p>
-</dd></dl>
-
+<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.ConfidentBipolarOutrankingDigraph" title="outrankingDigraphs.ConfidentBipolarOutrankingDigraph"><tt class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.ConfidentBipolarOutrankingDigraph</span></tt></a></p>
+<p>Obsolete class name.</p>
 </dd></dl>
 
 <dl class="class">
@@ -3668,7 +3676,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4008,7 +4016,7 @@ neglecting all considerable large performance differences polarisations.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.StochasticBipolarOutrankingDigraph.showRelationStatistics">
-<tt class="descname">showRelationStatistics</tt><big>(</big><em>argument='likelihoods'</em>, <em>actionsSubset=None</em>, <em>hasLatexFormat=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.StochasticBipolarOutrankingDigraph.showRelationStatistics" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">showRelationStatistics</tt><big>(</big><em>argument='likelihoods'</em>, <em>actionsSubset=None</em>, <em>hasLatexFormat=False</em>, <em>Bipolar=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.StochasticBipolarOutrankingDigraph.showRelationStatistics" title="Permalink to this definition">¶</a></dt>
 <dd><p>prints the relation statistics in actions X actions table format.</p>
 </dd></dl>
 
