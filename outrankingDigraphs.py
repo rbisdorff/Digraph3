@@ -6791,9 +6791,11 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph,PerformanceTableau):
             else:
                 return Decimal('-1.0')
 
-class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
+
+            
+class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     """
-    Likely bipolar outranking digraph based on multiple criteria of
+    Confident bipolar outranking digraph based on multiple criteria of
     uncertain significance.
     
     The digraph's bipolar valuation represents the bipolar outranking relation
@@ -6807,14 +6809,16 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
         * argPerfTab: PerformanceTableau instance or the name of a stored one.
           If None, a random instance is generated.
-        * distribution: {triangular|uniform|beta(2,2)|beta(4,4)}, probability distribution used for generating random weights
-        * likelihood: Bipolar confidence level in range [0; +1]
+        * distribution: {triangular|uniform|beta}, probability distribution used for generating random weights
+        * betaParameter: a = b (default = 2)
+        * confidenceLevel: % confidence level in range [0; +100]
         * other standard parameters from the BipolarOutrankingDigraph class (see documentation).
 
     """
     def __init__(self,argPerfTab=None,
                  distribution = 'triangular',
-                 likelihood = 0.8,
+                 betaParameter = 2,
+                 confidence = 0.9,
                  coalition=None,
                  hasNoVeto=False,
                  hasBipolarVeto=True,
@@ -6837,8 +6841,9 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                                      Normalized=Normalized,\
                                      Threading=Threading)
         self.name = bodg.name + '_CLT'
-        self.likelihood = likelihood
+        self.bipolarConfidenceLevel = confidence*2.0 -1.0 
         self.distribution = distribution
+        self.betaParameter = betaParameter
         self.actions = deepcopy(bodg.actions)
         self.order = len(self.actions)
         self.valuationdomain = deepcopy(bodg.valuationdomain)
@@ -6851,18 +6856,19 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             self.largePerformanceDifferencesCount =\
                    deepcopy(bodg.largePerformanceDifferencesCount)
         self.likelihoods = self.computeCLTLikelihoods(distribution=distribution,
+                                                      betaParameter=betaParameter,
                                                  Threading=Threading,
                                                     Debug=Debug)
-        self.relation = self._computeLikelyRelation(
+        self.relation = self._computeConfidentRelation(
             bodg.relation,
-            likelihood=likelihood,
+            likelihoodLevel=confidence,
             Debug=Debug)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def _computeLikelyRelation(self,
+    def _computeConfidentRelation(self,
                                outrankingRelation,
-                               likelihood=None,
+                               likelihoodLevel=None,
                                Debug=False):
         """
         Renders the relation cut at likelihood level.
@@ -6872,26 +6878,26 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
 
-        if likelihood == None:
-            likelihood = self.likelihood
+        if likelihoodLevel == None:
+            likelihoodLevel = self.bipolarConfidenceLevel
         confidenceCutLevel = Med
-        likelyRelation = {}
+        confidentRelation = {}
         actionsList = [x for x in self.actions]
 
         for x in actionsList:
-            likelyRelation[x] = {}
+            confidentRelation[x] = {}
             for y in actionsList:
-                if abs(self.likelihoods[x][y]) >= likelihood:
-                    likelyRelation[x][y] = outrankingRelation[x][y]
+                if abs(self.likelihoods[x][y]) >= likelihoodLevel:
+                    confidentRelation[x][y] = outrankingRelation[x][y]
                 else:
-                    likelyRelation[x][y] = Med
+                    confidentRelation[x][y] = Med
                     level = abs(outrankingRelation[x][y])
                     if level < Max and level > confidenceCutLevel:
                         confidenceCutLevel = level
                 if Debug:
                     print(x,y,outrankingRelation[x][y],self.likelihoods[x][y])
             self.confidenceCutLevel = confidenceCutLevel
-        return likelyRelation
+        return confidentRelation
         
     def _recodeConcordanceValuation(self,oldRelation,sumWeights,Debug=False):
         """
@@ -6949,7 +6955,7 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         else:
             return 0.5 + 0.5*erf(z)
     
-    def computeCLTLikelihoods(self,distribution="triangular",Threading=False,Debug=False):
+    def computeCLTLikelihoods(self,distribution="triangular",betaParameter=None,Threading=False,Debug=False):
         """
         Renders the pairwise CLT likelihood of the at least as good as relation
         neglecting all considerable large performance differences polarisations.
@@ -6986,10 +6992,14 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             varFactor = Decimal('1')/Decimal('3')
         elif distribution == 'triangular':
             varFactor = Decimal('1')/Decimal('6')
-        elif distribution == 'beta(2,2)':
-            varFactor = Decimal('1')/Decimal('5')
-        elif distribution == 'beta(4,4)':
-            varFactor = Decimal('1')/Decimal('9')
+        elif distribution == 'beta':
+            if betaParameter != None:
+                a = Decimal(str(betaParameter))
+            else:
+                a = self.betaParameter
+            varFactor = Decimal('1')/(Decimal('2')*a + Decimal('1'))
+        ## elif distribution == 'beta(4,4)':
+        ##     varFactor = Decimal('1')/Decimal('9')
         for x in actionsList:
             ccf[x] = {}
             for y in actionsList:
@@ -7100,14 +7110,53 @@ class LikeliBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
         print('Valuation domain : [%+.3f; %+.3f] ' % (self.valuationdomain['min'],
                                                    self.valuationdomain['max']))
-        print('Uncertainty model: %s ' % self.distribution)
+        print('Uncertainty model: %s(a=%.1f,b=%.1f) ' % (self.distribution,
+                                                         self.betaParameter,
+                                                         self.betaParameter)
+                                                         )
         print('Likelihood domain: [-1.0;+1.0] ')
-        print('Likelihood level : %.2f (%.2f%%) ' % (self.likelihood,
-                                                     (self.likelihood+1.0)/2.0))
+        print('Likelihood level : %.2f (%.2f%%) ' % (self.bipolarConfidenceLevel,
+                                                     (self.bipolarConfidenceLevel+1.0)/2.0))
         
         print('Determinateness  : %.3f ' % self.computeDeterminateness() )
         print('\n')
 
+
+class LikeliBipolarOutrankingDigraph(ConfidentBipolarOutrankingDigraph):
+    """
+    Obsolete class name.
+    """
+    def __init__(self,argPerfTab=None,
+                 distribution = 'triangular',
+                 likelihood = 0.8,
+                 coalition=None,
+                 hasNoVeto=False,
+                 hasBipolarVeto=True,
+                 Normalized=True,
+                 Threading=False,
+                 Debug=False,):
+
+        from copy import deepcopy
+
+        betaParameter = None
+        if distribution == "beta(2,2)":
+            distribution = "beta"
+            betaParameter = 2
+        elif  distribution == "beta(4,4)":
+            distribution = "beta"
+            betaParameter = 4
+
+        g = ConfidentBipolarOutrankingDigraph(argPerfTab=argPerfTab,
+                                              distribution=distribution,
+                                              betaParameter=betaParameter,
+                                              coalition=coalition,
+                                              hasNoVeto=hasNoVeto,
+                                              hasBipolarVeto=hasBipolarVeto,
+                                            Normalized=Normalized,
+                                            Threading=Threading,
+                                            Debug=Debug)
+        self = deepcopy(g)
+        
 class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     """
     Stochastic bipolar outranking digraph based on multiple criteria of uncertain significance.
@@ -7733,21 +7782,23 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-    ## t = RandomCBPerformanceTableau(numberOfActions=50,\
-    ##                               numberOfCriteria=13,\
-    ##                               weightDistribution='equiobjectives',
-    ##                               )
-    ## t.saveXMCDA2('test')
+##    t = RandomCBPerformanceTableau(numberOfActions=10,\
+##                                   numberOfCriteria=13,\
+##                                   weightDistribution='equiobjectives',
+##                                   )
+##    t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
 ##    sg = StochasticBipolarOutrankingDigraph(t)
 ##    print(sg.computeCLTLikelihoods(Debug=False))
 ##    sg.showRelationTable()
     t0 = time()
-    lg = LikeliBipolarOutrankingDigraph(t,
-                                        distribution="beta(2,2)",
-                                        likelihood=0.5,
+    lg = ConfidentBipolarOutrankingDigraph(t,
+                                        distribution="beta",
+                                        confidence=0.8,
+                                        betaParameter=7.5,
                                         Normalized=True,
-                                        Debug=False,Threading=True)
+                                        Debug=False,
+                                        Threading=False)
     print(time()-t0,' sec.')
     print(lg.computeDeterminateness())
     lg.showRelationTable(LikelihoodDenotation=True,Debug=False)
