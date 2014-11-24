@@ -7122,40 +7122,40 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         print('\n')
 
 
-class LikeliBipolarOutrankingDigraph(ConfidentBipolarOutrankingDigraph):
-    """
-    Obsolete class name.
-    """
-    def __init__(self,argPerfTab=None,
-                 distribution = 'triangular',
-                 likelihood = 0.8,
-                 coalition=None,
-                 hasNoVeto=False,
-                 hasBipolarVeto=True,
-                 Normalized=True,
-                 Threading=False,
-                 Debug=False,):
-
-        from copy import deepcopy
-
-        betaParameter = None
-        if distribution == "beta(2,2)":
-            distribution = "beta"
-            betaParameter = 2
-        elif  distribution == "beta(4,4)":
-            distribution = "beta"
-            betaParameter = 4
-
-        g = ConfidentBipolarOutrankingDigraph(argPerfTab=argPerfTab,
-                                              distribution=distribution,
-                                              betaParameter=betaParameter,
-                                              coalition=coalition,
-                                              hasNoVeto=hasNoVeto,
-                                              hasBipolarVeto=hasBipolarVeto,
-                                            Normalized=Normalized,
-                                            Threading=Threading,
-                                            Debug=Debug)
-        self = deepcopy(g)
+##class LikeliBipolarOutrankingDigraph(ConfidentBipolarOutrankingDigraph):
+##    """
+##    Obsolete class name.
+##    """
+##    def __init__(self,argPerfTab=None,
+##                 distribution = 'triangular',
+##                 likelihood = 0.8,
+##                 coalition=None,
+##                 hasNoVeto=False,
+##                 hasBipolarVeto=True,
+##                 Normalized=True,
+##                 Threading=False,
+##                 Debug=False,):
+##
+##        from copy import deepcopy
+##
+##        betaParameter = None
+##        if distribution == "beta(2,2)":
+##            distribution = "beta"
+##            betaParameter = 2
+##        elif  distribution == "beta(4,4)":
+##            distribution = "beta"
+##            betaParameter = 4
+##
+##        g = ConfidentBipolarOutrankingDigraph(argPerfTab=argPerfTab,
+##                                              distribution=distribution,
+##                                              betaParameter=betaParameter,
+##                                              coalition=coalition,
+##                                              hasNoVeto=hasNoVeto,
+##                                              hasBipolarVeto=hasBipolarVeto,
+##                                            Normalized=Normalized,
+##                                            Threading=Threading,
+##                                            Debug=Debug)
+##        self = deepcopy(g)
         
 class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     """
@@ -7782,11 +7782,11 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-##    t = RandomCBPerformanceTableau(numberOfActions=10,\
-##                                   numberOfCriteria=13,\
-##                                   weightDistribution='equiobjectives',
-##                                   )
-##    t.saveXMCDA2('test')
+    t = RandomCBPerformanceTableau(numberOfActions=10,\
+                                   numberOfCriteria=13,\
+                                   weightDistribution='equiobjectives',
+                                   )
+    t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
 ##    sg = StochasticBipolarOutrankingDigraph(t)
 ##    print(sg.computeCLTLikelihoods(Debug=False))
