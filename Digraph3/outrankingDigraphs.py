@@ -6811,14 +6811,14 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
           If None, a random instance is generated.
         * distribution: {triangular|uniform|beta}, probability distribution used for generating random weights
         * betaParameter: a = b (default = 2)
-        * confidenceLevel: % confidence level in range [0; +100]
+        * confidenceLevel: % confidence level in range [0;100]
         * other standard parameters from the BipolarOutrankingDigraph class (see documentation).
 
     """
     def __init__(self,argPerfTab=None,
                  distribution = 'triangular',
                  betaParameter = 2,
-                 confidence = 0.9,
+                 confidence = 90,
                  coalition=None,
                  hasNoVeto=False,
                  hasBipolarVeto=True,
@@ -6841,7 +6841,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                                      Normalized=Normalized,\
                                      Threading=Threading)
         self.name = bodg.name + '_CLT'
-        self.bipolarConfidenceLevel = confidence*2.0 -1.0 
+        self.bipolarConfidenceLevel = (confidence/100.0)*2.0 -1.0 
         self.distribution = distribution
         self.betaParameter = betaParameter
         self.actions = deepcopy(bodg.actions)
@@ -7794,7 +7794,7 @@ if __name__ == "__main__":
     t0 = time()
     lg = ConfidentBipolarOutrankingDigraph(t,
                                         distribution="beta",
-                                        confidence=0.8,
+                                        confidence=80,
                                         betaParameter=7.5,
                                         Normalized=True,
                                         Debug=False,

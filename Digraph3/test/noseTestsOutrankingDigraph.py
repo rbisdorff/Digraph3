@@ -635,10 +635,10 @@ def testConfidentBipolarOutrankingDigraphs():
     lg = ConfidentBipolarOutrankingDigraph(t,Debug=True)
     lg.showRelationTable(LikelihoodDenotation=False)
     lg.showRelationTable(LikelihoodDenotation=True)
-    lg = ConfidentBipolarOutrankingDigraph(t,confidence=.95,
+    lg = ConfidentBipolarOutrankingDigraph(t,confidence=95,
                                            distribution="uniform",Debug=False)
     lg.showRelationTable(LikelihoodDenotation=True)
-    lg = ConfidentBipolarOutrankingDigraph(t,confidence=.75,
+    lg = ConfidentBipolarOutrankingDigraph(t,confidence=75,
                                         distribution="beta",Debug=False)
     lg.showRelationTable(LikelihoodDenotation=True)
     lg = ConfidentBipolarOutrankingDigraph(t,distribution="beta",
