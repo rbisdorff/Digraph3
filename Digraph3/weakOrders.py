@@ -961,7 +961,7 @@ def _jobTaskKohler(categID):
     from outrankingDigraphs import BipolarOutrankingDigraph
     from linearOrders import KohlerOrder
     from weakOrders import PrincipalInOutDegreesOrdering
-    maxCatContent = 20
+    maxCatContent = 1000
     print("Starting working on category %d" % (categID), end=" ")
     fiName = 'partialPerfTab-'+str(categID)+'.py'
     fi = open(fiName,'rb')
@@ -980,9 +980,9 @@ def _jobTaskKohler(categID):
         if nc <= maxCatContent:
             currActions = list(catContent)
             try:
-                catCRbc = digraph.computeRankingByChoosing(CoDual=True)
-##                ko = KohlerOrder(digraph)
-##                catCRbc = ko.computeRankingByChoosing()
+##               catCRbc = digraph.computeRankingByChoosing(CoDual=True)
+                ko = KohlerOrder(digraph)
+                catCRbc = ko.computeRankingByChoosing()
             except:
                 print('==>>> Failed Kohler ranking => Principal ranking')
 ##              rp = RankedPairsOrder(digraph)
