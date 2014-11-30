@@ -961,7 +961,7 @@ def _jobTaskKohler(categID):
     from outrankingDigraphs import BipolarOutrankingDigraph
     from linearOrders import KohlerOrder
     from weakOrders import PrincipalInOutDegreesOrdering
-    maxCatContent = 1000
+    maxCatContent = 20
     print("Starting working on category %d" % (categID), end=" ")
     fiName = 'partialPerfTab-'+str(categID)+'.py'
     fi = open(fiName,'rb')
@@ -980,9 +980,9 @@ def _jobTaskKohler(categID):
         if nc <= maxCatContent:
             currActions = list(catContent)
             try:
-##                catCRbc = digraph.computeRankingByChoosing(CoDual=True)
-                ko = KohlerOrder(digraph)
-                catCRbc = ko.computeRankingByChoosing()
+                catCRbc = digraph.computeRankingByChoosing(CoDual=True)
+##                ko = KohlerOrder(digraph)
+##                catCRbc = ko.computeRankingByChoosing()
             except:
                 print('==>>> Failed Kohler ranking => Principal ranking')
 ##              rp = RankedPairsOrder(digraph)
@@ -997,17 +997,17 @@ def _jobTaskKohler(categID):
                                [((digraph.valuationdomain['max'],catContent),\
                                 (digraph.valuationdomain['max'],catContent))]}
         else:
-            print('==>>> Exceeds %d => Principal ranking' % maxCatContent)
+            print('==>>> Exceeds %d => Kohler ranking' % maxCatContent)
 ##            rp = RankedPairsOrder(digraph)
 ##            catCRbc = rp.computeRankingByChoosing()
-##            ko = KohlerOrder(digraph)
-##            catCRbc = ko.computeRankingByChoosing()
-            try:
-                pri = PrincipalInOutDegreesOrdering(digraph,Threading=False)
-                catCRbc = pri.computeWeakOrder()
-            except:
-                catCRbc = {'result': [((digraph.valuationdomain['max'],catContent),\
-                                       (digraph.valuationdomain['max'],catContent))]}
+            ko = KohlerOrder(digraph)
+            catCRbc = ko.computeRankingByChoosing()
+##            try:
+##                pri = PrincipalInOutDegreesOrdering(digraph,Threading=False)
+##                catCRbc = pri.computeWeakOrder()
+##            except:
+##                catCRbc = {'result': [((digraph.valuationdomain['max'],catContent),\
+##                                       (digraph.valuationdomain['max'],catContent))]}
 
         catRbc = deepcopy(catCRbc['result'])
         currActions = list(catContent)
@@ -1068,7 +1068,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                  maxValuation=1.0,
                  outrankingType = "bipolar",
                  Threading=True,
-                 cores=None,
+                 nbrCores=None,
                  Comments=True,
                  Debug=False):
         
@@ -1113,6 +1113,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                          maxValuation=maxValuation,
                          outrankingType = outrankingType,
                          Threading=True,
+                         nbrCores=nbrCores,
                          CompleteOutranking = False)                
         else:
             qs = QuantilesSortingDigraph(perfTab,
@@ -1145,11 +1146,11 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         catRbc = {}
         if Threading and cpu_count() > 2:
             from pickle import dumps, loads, load
-            if cores == None:
-                cores = 8
+            if nbrCores == None:
+                nbrCores = 8
             Nproc = cpu_count()
-            if Nproc > cores:
-                Nproc = cores
+            if Nproc > nbrCores:
+                Nproc = nbrCores
             from tempfile import TemporaryDirectory
             from os import getcwd, chdir
             with TemporaryDirectory() as tempDirName:

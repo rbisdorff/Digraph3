@@ -111,6 +111,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                  hasNoVeto=False,
                  LowerClosed=True,
                  Threading=False,
+                 nbrCores=None,
                  Debug=False):
         """
         Constructor for SortingDigraph instances.
@@ -303,7 +304,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                            hasBipolarVeto=True,\
                            Debug=False,\
                            hasSymmetricThresholds=True,\
-                           Threading = False):
+                           Threading = False,
+                           nbrCores=None):
         """
         Specialization of the corresponding BipolarOutrankingDigraph method
         """
@@ -388,7 +390,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 fo.write(pd)
                 fo.close()
                 
-                nbrCores = cpu_count()-1
+                if nbrCores == None:
+                    nbrCores = cpu_count()-1
+                
                 print('Nbr of cpus = ',nbrCores)
 
                 ni = len(initial)
@@ -1234,6 +1238,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                  outrankingType = "bipolar",
                  CompleteOutranking = True,
                  Threading=False,
+                 nbrCores=None,
                  Debug=False):
         """
         Constructor for QuantilesSortingDigraph instances.
@@ -1411,7 +1416,8 @@ class QuantilesSortingDigraph(SortingDigraph):
                                                        terminal=self.profileLimits,
                                                        hasNoVeto=hasNoVeto,
                                                        hasBipolarVeto=True,
-                                                        Threading=Threading)
+                                                        Threading=Threading,
+                                                        nbrCores=nbrCores)
             else:
                 self.relation = self._constructRelation(self.criteria,
                                                        self.evaluation,
@@ -1419,7 +1425,8 @@ class QuantilesSortingDigraph(SortingDigraph):
                                                        initial=self.profileLimits,
                                                        hasNoVeto=hasNoVeto,
                                                         hasBipolarVeto=True,
-                                                        Threading=Threading)
+                                                        Threading=Threading,
+                                                        nbrCores=nbrCores)
             if LowerClosed:
                 for x in self.actionsOrig:
                     for y in self.actionsOrig:
