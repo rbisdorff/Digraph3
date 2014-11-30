@@ -3521,6 +3521,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  hasBipolarVeto=True,
                  Normalized=False,
                  Threading=False,
+                 nbrCores=None,
                  Debug=False):
         import copy
         if argPerfTab == None:
@@ -3595,7 +3596,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                                 hasBipolarVeto=hasBipolarVeto,
                                                 hasSymmetricThresholds=True,
                                                 Threading=Threading,
-                                                             Debug=Debug)
+                                                nbrCores=nbrCores,
+                                                Debug=Debug)
 
         if Normalized:
             self.recodeValuation(-1.0,1.0)
@@ -3654,7 +3656,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                            hasBipolarVeto=True,\
                            Debug=False,\
                            hasSymmetricThresholds=True,\
-                           Threading = False):
+                           Threading = False,
+                           nbrCores=None):
         """
         Specialization of the corresponding BipolarOutrankingDigraph method
         """
@@ -3738,8 +3741,9 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 pd = dumps(selfDp,-1)
                 fo.write(pd)
                 fo.close()
-                
-                nbrCores = cpu_count()-1
+
+                if nbrCores == None:
+                    nbrCores = cpu_count()-1
                 print('Nbr of cpus = ',nbrCores)
 
                 ni = len(initial)
