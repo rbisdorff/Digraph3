@@ -1031,8 +1031,7 @@ from sortingDigraphs import QuantilesSortingDigraph
 class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
     """
     Refinig a quantiles sorting result
-    with a ranking-by-choosing of the local quantile equivalence classes
-    of less than 40 items.
+    with a local ranking by choosing strategy.
 
     For larger quantile equivalence classes,
     the principal ordering along the covariance
@@ -1042,6 +1041,8 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
           * limitingQuantiles are set by default to len(actions)//2
             for outranking digraph orders below 200.
             For higher orders, centiles are used by default.
+          * strategies are: "optimistic" (default), "pessimistic" or "average"
+          * rankingRule is eithet "KohlerRule" (default) or "ranking-by-choosing"
           * Threading is on (True) by default for CPUs with more than 2 cores.
 
     .. note::
@@ -1064,8 +1065,8 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                  rankingRule="rank-by-choosing",
                  PrefThresholds=False,
                  hasNoVeto=False,
-                 minValuation=-1.0,
-                 maxValuation=1.0,
+                 minValuation=-100.0,
+                 maxValuation=100.0,
                  outrankingType = "bipolar",
                  Threading=True,
                  nbrCores=None,
@@ -1481,9 +1482,9 @@ if __name__ == "__main__":
 
     Threading=False
 
-##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-##                                numberOfActions=25)
-##    t.saveXMCDA2('test')
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                numberOfActions=25)
+    t.saveXMCDA2('test')
     #t = XMCDA2PerformanceTableau('uniSorting')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=False)
