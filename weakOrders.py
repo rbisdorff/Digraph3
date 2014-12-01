@@ -1128,7 +1128,6 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         self.tqs = time() - t0
         if Comments:
             print('execution time: %.4f' % (self.tqs))
-        
         Max = qs.valuationdomain['max']
         Med = qs.valuationdomain['med']
         self.strategy = strategy
@@ -1140,8 +1139,8 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
             if Debug:
                 print(i+1,weakOrdering[i])        
 
+        #qs.recodeValuation(-1,1)
         qsRelation = deepcopy(qs.relation)
-
         catRelation = {}
         catRbc = {}
         if Threading and cpu_count() > 2:
@@ -1222,11 +1221,15 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                     for x in currActions:
                         for y in currActions:
                             qs.relation[x][y] = qs.relationOrig[x][y]
+                    pt = PartialPerformanceTableau(perfTab,currActions)
+                    gt = BipolarOutrankingDigraph(pt)
                     if rankingRule == "rank-by-choosing":
-                        catCRbc = qs.computeRankingByChoosing(currActions,CoDual=True)
+                         rbc = RankingByChoosingDigraph(gt,CoDual=True,Threading=False)
+                         catCRbc = rbc.computeRankingByChoosing()
+##                        catCRbc = qs.computeRankingByChoosing(currActions,CoDual=True)
                     elif rankingRule == "KohlerRule":
-                        pt = PartialPerformanceTableau(perfTab,currActions)
-                        gt = BipolarOutrankingDigraph(pt)
+                        #pt = PartialPerformanceTableau(perfTab,currActions)
+                        #gt = BipolarOutrankingDigraph(pt)
                         ko = KohlerOrder(gt)
                         catCRbc = ko.computeRankingByChoosing()
                     if Debug:
@@ -1265,7 +1268,11 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         """
         if strategy == None:
             strategy = self.strategy
-        preOrdering = self.computeWeakOrder(strategy=strategy,Debug=Debug)
+##        preOrdering = self.computeWeakOrder(strategy=strategy,Debug=Debug)
+        Descending = True
+        if strategy == "pessimistic":
+            Decending = False
+        preOrdering = self.computeQsRbcRanking(Descending=Descending,Debug=Debug)
         relation = self.computePreorderRelation(preOrdering)
         actionsList = [x for x in self.actions]
         Max = self.valuationdomain['max']
@@ -1448,6 +1455,15 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                        noSilent=noSilent,graphType=graphType,\
                        graphSize=graphSize,\
                        fontSize=fontSize,Debug=Debug)
+
+    def computeOutrankingCorrelation(self,Threading=False):
+        """
+        Renders the ordinal (Kendall) correlation of the quantiles ranking
+        with the underlying bipolar outranking relation.
+        """
+        selfOrder = self.computePreorderRelation(self.computeQsRbcRanking())
+        g = BipolarOutrankingDigraph(self,Threading=Threading)
+        return g.computeOrdinalCorrelation(selfOrder)
                
 class QsRbcWeakOrdering(QuantilesRankingDigraph):
     """
@@ -1463,12 +1479,14 @@ if __name__ == "__main__":
     from weakOrders import *
     from time import time
 
-    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                numberOfActions=25)
-    t.saveXMCDA2('test')
+    Threading=False
+
+##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+##                                numberOfActions=25)
+##    t.saveXMCDA2('test')
     #t = XMCDA2PerformanceTableau('uniSorting')
-    #t = XMCDA2PerformanceTableau('test-119')
-    g = BipolarOutrankingDigraph(t,Normalized=True)
+    t = XMCDA2PerformanceTableau('test')
+    g = BipolarOutrankingDigraph(t,Normalized=False)
 ##    rbc = RankingByChoosingDigraph(g,Threading=False)
 ##    rbc.exportGraphViz()
     limitingQuantiles = len(t.actions) // 3
@@ -1479,22 +1497,28 @@ if __name__ == "__main__":
                               strategy="optimistic",
                               rankingRule="KohlerRule",
                               LowerClosed=False,
-                              Threading=False,Debug=False)
+                              Threading=Threading,Debug=False)
     t1 = time()-t0
     qsko.showSorting()
-    qsko.exportSortingGraphViz('koq17',Debug=True)
+    #qsko.exportSortingGraphViz('koq17',Debug=True)
     t0 = time()
     qsrbc = QuantilesRankingDigraph(t,limitingQuantiles,
                               strategy="optimistic",
                               rankingRule="rank-by-choosing",
+                              #rankingRule="KohlerRule",
                               LowerClosed=False,
-                              Threading=False,Debug=False)
+                              Threading=Threading,Debug=False)
     t1 = time()-t0
     qsrbc.showSorting()
-    #qsrbc.exportSortingGraphViz('rbcq17',Debug=True)
-    print(g.computeOrdinalCorrelation(qsko))
-    print(g.computeOrdinalCorrelation(qsrbc))
-        
+    qsko.showQsRbcRanking()
+    qsrbc.showQsRbcRanking()
+    koOrder = qsko.computePreorderRelation(qsko.computeQsRbcRanking())
+    rbcOrder = qsrbc.computePreorderRelation(qsrbc.computeQsRbcRanking())
+    print(g.computeOrdinalCorrelation(koOrder))
+    print(g.computeOrdinalCorrelation(rbcOrder))
+    print(qsko.computeOutrankingCorrelation(Threading=Threading))
+    print(qsrbc.computeOutrankingCorrelation(Threading=Threading))
+    
 ##    qsrbc.showActionsSortingResult()
 ##    qsrbc.computeWeakOrder(Comments=True)
 ##    qsrbc.computeWeakOrder(Comments=True,strategy="pessimistic")

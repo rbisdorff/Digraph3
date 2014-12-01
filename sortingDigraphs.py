@@ -1233,8 +1233,8 @@ class QuantilesSortingDigraph(SortingDigraph):
                  LowerClosed=False,
                  PrefThresholds=False,
                  hasNoVeto=False,
-                 minValuation=-1.0,
-                 maxValuation=1.0,
+                 minValuation=-100.0,
+                 maxValuation=100.0,
                  outrankingType = "bipolar",
                  CompleteOutranking = True,
                  Threading=False,
@@ -2063,25 +2063,29 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
 
-    t = XMCDA2PerformanceTableau('uniSorting')
+    #t = XMCDA2PerformanceTableau('uniSorting')
     #t = XMCDA2PerformanceTableau('spiegel2004')
     #t = XMCDA2PerformanceTableau('ex1')
-##    t = RandomCBPerformanceTableau(numberOfActions=50,
-##                                   numberOfCriteria=7,
-##                                   weightDistribution='equiobjectives')
-##    t.saveXMCDA2('test',servingD3=False)
-    qs0 = QuantilesSortingDigraph(t,17,LowerClosed=False,Threading=False)
-    #qs0.showOrderedRelationTable()
+    t = RandomCBPerformanceTableau(numberOfActions=10,
+                                   numberOfCriteria=7,
+                                   weightDistribution='equiobjectives')
+    t.saveXMCDA2('test',servingD3=False)
+    qs0 = QuantilesSortingDigraph(t,3,LowerClosed=False,Threading=False,Debug=False)
+    qs0.showOrderedRelationTable()
     qs0.exportGraphViz()
 ##    qs0.showSorting()
 ##    qs0.showActionsSortingResult(Debug=False)
     qs0.computeWeakOrder(Debug=True)
-    from weakOrders import QsRbcWeakOrdering
-    qsrbc = QsRbcWeakOrdering(t,17,LowerClosed=False,Threading=False)
+    from weakOrders import QuantilesRankingDigraph
+    qsrbc = QuantilesRankingDigraph(t,3,LowerClosed=False,Threading=False)
     qsrbc.showSorting()
     qsrbc.showActionsSortingResult()
     qsrbc.computeWeakOrder(Comments=True)
     qsrbc.exportSortingGraphViz('testqs17')
+    g = BipolarOutrankingDigraph(t,Normalized=True)
+    print(g.computeOrdinalCorrelation(qs0))
+    print(g.computeOrdinalCorrelation(qsrbc))
+    
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
