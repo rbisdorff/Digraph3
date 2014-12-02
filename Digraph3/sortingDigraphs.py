@@ -2070,11 +2070,12 @@ if __name__ == "__main__":
                                    numberOfCriteria=7,
                                    weightDistribution='equiobjectives')
     t.saveXMCDA2('test',servingD3=False)
-    qs0 = QuantilesSortingDigraph(t,3,LowerClosed=False,Threading=False,Debug=False)
+    qs0 = QuantilesSortingDigraph(t,3,LowerClosed=False,Threading=False,
+                                  minValuation=-100,maxValuation=100,Debug=False)
     qs0.showOrderedRelationTable()
     qs0.exportGraphViz()
-##    qs0.showSorting()
-##    qs0.showActionsSortingResult(Debug=False)
+    qs0.showSorting()
+    qs0.showActionsSortingResult(Debug=False)
     qs0.computeWeakOrder(Debug=True)
     from weakOrders import QuantilesRankingDigraph
     qsrbc = QuantilesRankingDigraph(t,3,LowerClosed=False,Threading=False)

@@ -1466,10 +1466,11 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         #print('selfOrder',selfOrder)
         g = BipolarOutrankingDigraph(self,Threading=Threading)
         return g.computeOrdinalCorrelation(selfOrder)
-               
+
+#----------               
 class QsRbcWeakOrdering(QuantilesRankingDigraph):
     """
-    Dummy for obsolete QsRbcWeakOrdering class
+    Dummy obsolete class for the QuantilesRankingDigraph class.
     """
 
 #----------test outrankingDigraphs classes ----------------
