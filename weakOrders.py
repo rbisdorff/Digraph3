@@ -1274,7 +1274,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         if strategy == "pessimistic":
             Decending = False
         preOrdering = self.computeQsRbcRanking(Descending=Descending,Debug=Debug)
-        relation = self.computePreorderRelation(preOrdering)
+        relation = self.computePreorderRelation(preOrdering,Normalized=False)
         actionsList = [x for x in self.actions]
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
@@ -1463,6 +1463,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         with the underlying bipolar outranking relation.
         """
         selfOrder = self.computePreorderRelation(self.computeQsRbcRanking())
+        #print('selfOrder',selfOrder)
         g = BipolarOutrankingDigraph(self,Threading=Threading)
         return g.computeOrdinalCorrelation(selfOrder)
                
@@ -1483,10 +1484,10 @@ if __name__ == "__main__":
     Threading=False
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                numberOfActions=25)
+                                numberOfActions=50)
     t.saveXMCDA2('test')
     #t = XMCDA2PerformanceTableau('uniSorting')
-    t = XMCDA2PerformanceTableau('test')
+    #t = XMCDA2PerformanceTableau('test-178')
     g = BipolarOutrankingDigraph(t,Normalized=False)
 ##    rbc = RankingByChoosingDigraph(g,Threading=False)
 ##    rbc.exportGraphViz()
@@ -1499,17 +1500,17 @@ if __name__ == "__main__":
                               rankingRule="KohlerRule",
                               LowerClosed=False,
                               Threading=Threading,Debug=False)
-    t1 = time()-t0
+    print(time()-t0)
     qsko.showSorting()
     #qsko.exportSortingGraphViz('koq17',Debug=True)
     t0 = time()
     qsrbc = QuantilesRankingDigraph(t,limitingQuantiles,
-                              strategy="optimistic",
-                              rankingRule="rank-by-choosing",
-                              #rankingRule="KohlerRule",
+                              strategy="pessimistic",
+                              #rankingRule="rank-by-choosing",
+                              rankingRule="KohlerRule",
                               LowerClosed=False,
                               Threading=Threading,Debug=False)
-    t1 = time()-t0
+    print(time()-t0)
     qsrbc.showSorting()
     qsko.showQsRbcRanking()
     qsrbc.showQsRbcRanking()
