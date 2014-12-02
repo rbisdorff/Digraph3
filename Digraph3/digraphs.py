@@ -997,15 +997,20 @@ class Digraph(object):
             print("Error: no ranking by choosing result !!")
             return None
 
-    def computePreorderRelation(self,preorder,Debug=False):
+    def computePreorderRelation(self,preorder,Normalized=True,Debug=False):
         """
         Renders the bipolar-valued relation obtained from
         a given preordering (list of lists) result.
         """
-
-        Max = Decimal('1')
-        Med = Decimal('0')
-        Min = Decimal('-1')
+        if Normalized:
+            Max = Decimal('1')
+            Med = Decimal('0')
+            Min = Decimal('-1')
+        else:   
+            Max = self.valuationdomain['max']
+            Med = self.valuationdomain['med']
+            Min = self.valuationdomain['min']
+            
         actions = list(self.actions.keys())
         currentActions = set(actions)
         preorderRelation = {}
