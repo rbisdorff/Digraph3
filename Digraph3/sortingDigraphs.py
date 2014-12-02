@@ -1287,8 +1287,6 @@ class QuantilesSortingDigraph(SortingDigraph):
                  LowerClosed=False,
                  PrefThresholds=False,
                  hasNoVeto=False,
-                 minValuation=-100.0,
-                 maxValuation=100.0,
                  outrankingType = "bipolar",
                  CompleteOutranking = True,
                  Threading=False,
@@ -1452,6 +1450,8 @@ class QuantilesSortingDigraph(SortingDigraph):
             self.relation = deepcopy(g.relation)
             
         else:
+            minValuation = -100.0
+            maxValuation = 100.0
             if CompleteOutranking:
                 g = BipolarOutrankingDigraph(normPerfTab,hasNoVeto=hasNoVeto)
                 g.recodeValuation(minValuation,maxValuation)
@@ -1461,6 +1461,8 @@ class QuantilesSortingDigraph(SortingDigraph):
             else:
                 Min = Decimal(str(minValuation))
                 Max = Decimal(str(maxValuation))
+##                Min = Decimal('-100')
+##                Max = Decimal('100')
             Med = (Max + Min)/Decimal('2.0')
             self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
             if LowerClosed:
@@ -2019,82 +2021,6 @@ class _OptimalHarmonicQuantilesSortingDigraph(QuantilesSortingDigraph):
         self.limitingQuantiles = deepcopy(maxqs.limitingQuantiles)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-
-class OptimalQuantilesSortingDigraph(QuantilesSortingDigraph):
-    """
-    Specialisation of the QuantilesSortingDigraph Class
-    for optimal sorting of alternatives into
-    quantiles delimited ordered classes. 
-    """
-    def __init__(self,argPerfTab=None,
-                 minQuantiles=4,
-                 maxQuantiles=50,
-                 LowerClosed=True,
-                 PrefThresholds=True,
-                 hasNoVeto=False,
-                 minValuation=-100.0,
-                 maxValuation=100.0,
-                 outrankingType = "bipolar",
-                 Prudent=False,
-                 Threading=False,
-                 Debug=False):
-        
-        from copy import deepcopy
-        if argPerfTab != None:
-            t = argPerfTab
-        else:
-            t = RandomCBPerformanceTableau()
-        g = BipolarOutrankingDigraph(t)
-        maxCorr = {'correlation': Decimal('-1.0')}
-        maxCorr['determination'] = Decimal('0.0')
-        maxqs = None
-        maxnq = 20
-        if Debug:
-            fo = open('debug.csv','w')
-            fo.write('"nqs","qsopt","qscorr","qsdeter"\n')
-        for nq in range(minQuantiles,maxQuantiles):
-            #print( '%d-tiling' % (nq) )
-            qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,
-                                         LowerClosed=True,
-                                         PrefThresholds=True,
-                                         hasNoVeto=False,
-                                         minValuation=-1.0,
-                                         maxValuation=1.0,
-                                         outrankingType = "bipolar",
-                                        Threading=False)
-            qs0Corr = g.computeOrdinalCorrelation(qs0)
-            if Debug:
-                fo.write('%d,%.6f,%.6f,%.6f\n' % (nq,qs0Corr['correlation']*qs0Corr['determination'],
-                                              qs0Corr['correlation'],qs0Corr['determination']))
-                print( '%d,%.6f,%.6f,%.6f\n' % (nq,qs0Corr['correlation']*qs0Corr['determination'],
-                                              qs0Corr['correlation'],qs0Corr['determination']))
-            if Prudent:
-                if qs0Corr['correlation'] > maxCorr['correlation']:
-                    maxCorr = deepcopy(qs0Corr)
-                    maxqs = deepcopy(qs0)                
-            else:
-                if qs0Corr['correlation']*qs0Corr['determination'] >\
-                                    maxCorr['correlation']*maxCorr['determination']:
-                    maxCorr = deepcopy(qs0Corr)
-                    maxqs = deepcopy(qs0)
-        if Debug:
-            fo.close()
-            
-        self.name = deepcopy(maxqs.name)
-        self.actions = deepcopy(maxqs.actions)
-        self.actionsOrig = deepcopy(maxqs.actionsOrig)
-        self.order = len(self.actions)
-        self.criteria = deepcopy(maxqs.criteria)
-        self.evaluation = deepcopy(maxqs.evaluation)
-        self.profiles = deepcopy(maxqs.profiles)
-        self.valuationdomain = deepcopy(maxqs.valuationdomain)
-        self.relation = deepcopy(maxqs.relation)
-        self.categories = deepcopy(maxqs.categories)
-        self.criteriaCategoryLimits = deepcopy(maxqs.criteriaCategoryLimits)
-        self.limitingQuantiles = deepcopy(maxqs.limitingQuantiles)
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
-
            
 #----------test SortingDigraph class ----------------
 if __name__ == "__main__":
@@ -2125,9 +2051,13 @@ if __name__ == "__main__":
                                    weightDistribution='equiobjectives')
     t.saveXMCDA2('test',servingD3=False)
     qs0 = QuantilesSortingDigraph(t,3,LowerClosed=False,Threading=False,
-                                  minValuation=-100,maxValuation=100,Debug=False)
+                                  Debug=False)
     qs0.showOrderedRelationTable()
     qs0.exportGraphViz()
+    qs0.showSorting()
+    qs0.showActionsSortingResult(Debug=False)
+    qs0.computeWeakOrder(Debug=True)
+    qs0.recodeValuation()
     qs0.showSorting()
     qs0.showActionsSortingResult(Debug=False)
     qs0.computeWeakOrder(Debug=True)
