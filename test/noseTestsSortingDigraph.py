@@ -83,34 +83,6 @@ def testLowerOpenClosedCategories():
     s1 = SortingDigraph(t,LowerClosed=False)
     s1.showSorting(Reverse=True)
 
-##def testSortingByChoosingDigraph():
-##    print('*-------- Testing SortingByChoosingDigraph class -------')
-##    t = RandomCBPerformanceTableau(numberOfActions=10)
-##    t.save('test')
-##    g = BipolarOutrankingDigraph(t)
-##    s1 = SortingByChoosingDigraph(g,CoDual=True)
-##    s1.showSorting(Debug=False)
-##    print('Ordinal Correlation with given outranking')
-##    corr = g.computeOrdinalCorrelation(s1)
-##    print('Correlation  :', corr['correlation'])
-##    print('Determination:', corr['determination'])
-##    g.showPerformanceTableau()
-##    
-##def testSortingByPrudentChoosingDigraph():
-##    print('*-------- Testing SortingByPrudentChoosingDigraph class -------')
-##    t = RandomCBPerformanceTableau(numberOfActions=20)
-##    t.saveXMCDA2('test')
-##    g = BipolarOutrankingDigraph(t)
-##    t0 = time()
-##    s = SortingByPrudentChoosingDigraph(g,CoDual=True)
-##    t1 = time()
-##    s.showSorting()
-##    print('Ordinal Correlation with given outranking')
-##    corr = g.computeOrdinalCorrelation(s)
-##    print('Correlation   : %.3f' % corr['correlation'])
-##    print('Determination : %.3f' % corr['determination'])
-##    print('Execution time: %.4f sec.' % (t1-t0))
-
 def testQuantilesSortingDigraph():
     print('*-------- Testing QuantilesSortingDigraph class 1 -------')
     t = RandomCBPerformanceTableau(numberOfActions=20)
@@ -147,41 +119,4 @@ def testActionsSortingResult():
     s1.showSorting(Reverse=False)
     s1.showActionsSortingResult()
     s1.exportGraphViz('tests1',graphType="pdf")
-
-##def testOptimalHarmonicQuantilesSortingDigraph():
-##    print('*-------- Testing QuantilesSortingDigraph class 1 -------')
-##    t = RandomCBPerformanceTableau(numberOfActions=20)
-##    t.saveXMCDA2('test')
-##    s0 = _OptimalHarmonicQuantilesSortingDigraph(t,
-##                                minQuantiles=4,
-##                                maxQuantiles=200,
-##                                LowerClosed=True,
-##                                PrefThresholds=True,
-##                                outrankingType='bipolar',
-##                                Debug=False)
-##    print(s0.categories)
-##    s0.showSorting(Reverse=True)
-##    s0.showSorting(Reverse=False)
-##    sortingRelation = s0.computeSortingRelation()
-##    s0.showRelationTable(actionsSubset=s0.actionsOrig,relation=sortingRelation)
-##    s0.showOrderedRelationTable()
-##    s0.showWeakOrder(Descending=True)
-##    s0.exportGraphViz(graphType="pdf")
     
-def testOptimalQuantilesSortingDigraph():
-    print('*-------- Testing OptimalQuantilesSortingDigraph class and methods -------')
-    t = RandomCBPerformanceTableau(numberOfActions=10,
-                                   numberOfCriteria=7,
-                                   weightDistribution='equiobjectives')
-    t.saveXMCDA2('test',servingD3=False)
-    qsopt = OptimalQuantilesSortingDigraph(t,
-                                    minQuantiles=4,
-                                    maxQuantiles=50,
-                                    LowerClosed=True,
-                                    PrefThresholds=False,
-                                    Prudent=False,       
-                                    Threading=False,
-                                    Debug=False)
-    qsopt.showSorting()
-    qsopt.exportGraphViz(graphType="pdf")
-
