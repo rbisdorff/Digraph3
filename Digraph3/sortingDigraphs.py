@@ -573,7 +573,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 else:
                     print('\t%s ]%s; %s]' % (c, self.criteriaCategoryLimits[g][c]['minimum'],self.criteriaCategoryLimits[g][c]['maximum']))
 
-    def getActionsKeys(self,action=None):
+    def getActionsKeys(self,action=None,withoutProfiles=True):
         """
         extract normal actions keys()
         """
@@ -581,11 +581,12 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         profiles_M = set([x for x in list(self.profiles['max'].keys())])
         if action == None:
             actionsExt = set([x for x in list(self.actions.keys())])
-            return actionsExt - profiles_m - profiles_M
+            if withoutProfiles:
+                return actionsExt - profiles_m - profiles_M
+            else:
+                return actionsExt | profiles_m | profiles_M
         else:
-            return set([action])
-            
-            
+            return set([action])           
 
     def orderedCategoryKeys(self,Reverse=False):
         """
@@ -1194,6 +1195,59 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             fo.close()
             print('File: ' + nameExt + ' saved !')
 
+    def recodeValuation(self,newMin=-1.0,newMax=1.0,Debug=False):
+        """
+        Recodes the characteristic valuation domain according
+        to the parameters given.
+
+        .. note::
+
+            Default values gives a normalized valuation domain
+
+        """
+        from copy import deepcopy
+        oldMax = self.valuationdomain['max']
+        oldMin = self.valuationdomain['min']
+        oldMed = self.valuationdomain['med']
+
+        oldAmplitude = oldMax - oldMin
+        if Debug:
+            print(oldMin, oldMed, oldMax, oldAmplitude)
+
+        newMin = Decimal(str(newMin))
+        newMax = Decimal(str(newMax))
+        newMed = Decimal('%.3f' % ((newMax + newMin)/Decimal('2.0')))
+
+        newAmplitude = newMax - newMin
+        if Debug:
+            print(newMin, newMed, newMax, newAmplitude)
+
+        actions = self.getActionsKeys(withoutProfiles=False)
+        oldrelation = deepcopy(self.relation)
+        newrelation = {}
+        for x in actions:
+            newrelation[x] = {}
+            for y in actions:
+                if oldrelation[x][y] == oldMax:
+                    newrelation[x][y] = newMax
+                elif oldrelation[x][y] == oldMin:
+                    newrelation[x][y] = newMin
+                elif oldrelation[x][y] == oldMed:
+                    newrelation[x][y] = newMed
+                else:
+                    newrelation[x][y] = newMin + ((self.relation[x][y] - oldMin)/oldAmplitude)*newAmplitude
+                    if Debug:
+                        print(x,y,self.relation[x][y],newrelation[x][y])
+        # install new values in self
+        self.valuationdomain['max'] = newMax
+        self.valuationdomain['min'] = newMin
+        self.valuationdomain['med'] = newMed
+        self.valuationdomain['hasIntegerValuation'] = False
+
+        self.relation = deepcopy(newrelation)
+
+#-------------
+        
 class QuantilesSortingDigraph(SortingDigraph):
     """
     Specialisation of the sortingDigraph Class
