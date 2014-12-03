@@ -1185,11 +1185,16 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                 t0 = time()
                 with Pool(processes=Nproc) as pool:
                     if rankingRule == "RubisChoice":
-                        for res in pool.imap_unordered(_jobTaskRubis,filledCategKeys):
+                        for res in pool.imap_unordered(_jobTaskRubis,
+                                                       filledCategKeys,
+                                                       nbrCores):
                             if Comments:
                                 print(res)
                     elif rankingRule == "KohlerRule":
-                        for res in pool.imap_unordered(_jobTaskKohler,filledCategKeys):
+##                        for res in pool.imap_unordered(_jobTaskKohler,filledCategKeys):
+                        for res in pool.imap_unordered(_jobTaskKohler,
+                                                       filledCategKeys,
+                                                       nbrCores):
                             if Comments:
                                 print(res)                    
                 self.trbc = time() - t0
@@ -1490,17 +1495,17 @@ if __name__ == "__main__":
     from weakOrders import *
     from time import time
 
-    Threading=False
+    Threading=True
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                numberOfActions=50)
+                                   numberOfActions=250)
     t.saveXMCDA2('test')
     #t = XMCDA2PerformanceTableau('uniSorting')
-    #t = XMCDA2PerformanceTableau('test-178')
+    t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=False)
 ##    rbc = RankingByChoosingDigraph(g,Threading=False)
 ##    rbc.exportGraphViz()
-    limitingQuantiles = len(t.actions) // 3
+    limitingQuantiles = len(t.actions) // 1
     #limitingQuantiles = 7
     #qs = QuantilesSortingDigraph(t,g.order)
     t0 = time()
