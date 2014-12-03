@@ -1045,7 +1045,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
             for outranking digraph orders below 200.
             For higher orders, centiles are used by default.
           * strategies are: "optimistic" (default), "pessimistic" or "average"
-          * rankingRule is either "KohlerRule" (default) or "RubisChoice". In the latter case, large qusntile equivalence classes (>30) are ranked with help of the principal ranking obtained from the covariance of the indegrees.
+          * rankingRule is either "KohlerRule" (default) or "RubisChoice". In the latter case, large quantile equivalence classes (>30) are ranked with help of the principal ranking obtained from the covariance of the indegrees.
           * Threading is on (True) by default for CPUs with more than 2 cores.
 
     .. note::
