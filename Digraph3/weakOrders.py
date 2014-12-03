@@ -866,15 +866,14 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
 
 ##################
 
-def _jobTask(categID):
+def _jobTaskRubis(categID):
     """
-    Task definition for multiprocessing threaded jobs in QsRbcRanking.
+    Task definition for multiprocessing threaded local RubisChoice jobs in the QantilesRankingDigraph contructor.
     
     .. note::
-    
-          Parameter maxContent: maximum allowed local catContent for rbc
-          is set to 50. Above this cardinality,
-          Tideman's ranked pairs heuristics is used.
+          Parameter maxContent: maximum allowed local catContent for RankingByRubisChoice 
+          is set to 30. Above this cardinality, the PrincipalInOutDegreesOrdering is used.
+          
     """
     from tempfile import TemporaryDirectory
     from os import getcwd, chdir
@@ -883,8 +882,10 @@ def _jobTask(categID):
     from outrankingDigraphs import BipolarOutrankingDigraph
     #from linearOrders import RankedPairsOrder, KohlerOrder
     from weakOrders import PrincipalInOutDegreesOrdering
-    maxCatContent = 40
-    print("Starting working on category %d" % (categID), end=" ")
+    maxCatContent = 30
+    Comments = True
+    if Comments:
+        print("Starting working on category %d" % (categID), end=" ")
     fiName = 'partialPerfTab-'+str(categID)+'.py'
     fi = open(fiName,'rb')
     pt = loads(fi.read())
@@ -904,7 +905,8 @@ def _jobTask(categID):
             try:
                 catCRbc = digraph.computeRankingByChoosing(CoDual=True)
             except:
-                print('==>>> Failed RBC: Principal ranking')
+                if Comments:
+                    print('==>>> Failed RBC: Principal ranking')
 ##              rp = RankedPairsOrder(digraph)
 ##              catRbc = rp.computeRankingByChoosing()
 ##                ko = KohlerOrder(digraph)
@@ -917,7 +919,8 @@ def _jobTask(categID):
                                [((digraph.valuationdomain['max'],catContent),\
                                 (digraph.valuationdomain['max'],catContent))]}
         else:
-            print('==>>> Exceeds %d: Principal ranking' % maxCatContent)
+            if Comments:
+                print('==>>> Exceeds %d: Principal ranking' % maxCatContent)
 ##            rp = RankedPairsOrder(digraph)
 ##            catCRbc = rp.computeRankingByChoosing()
 ##            ko = KohlerOrder(digraph)
@@ -952,7 +955,7 @@ def _jobTaskKohler(categID):
     
     .. note::
     
-          The indiviual quantile classes sre linarly order with Kohler's ranking rule.
+          The indiviual quantile classes are linarly order with Kohler's ranking rule.
     """
     from tempfile import TemporaryDirectory
     from os import getcwd, chdir
@@ -962,7 +965,9 @@ def _jobTaskKohler(categID):
     from linearOrders import KohlerOrder
     from weakOrders import PrincipalInOutDegreesOrdering
     maxCatContent = 1000
-    print("Starting working on category %d" % (categID), end=" ")
+    Comments = True
+    if Comments:
+        print("Starting working on category %d" % (categID), end=" ")
     fiName = 'partialPerfTab-'+str(categID)+'.py'
     fi = open(fiName,'rb')
     pt = loads(fi.read())
@@ -984,7 +989,8 @@ def _jobTaskKohler(categID):
                 ko = KohlerOrder(digraph)
                 catCRbc = ko.computeRankingByChoosing()
             except:
-                print('==>>> Failed Kohler ranking => Principal ranking')
+                if Comments:
+                    print('==>>> Failed Kohler ranking => Principal ranking')
 ##              rp = RankedPairsOrder(digraph)
 ##              catRbc = rp.computeRankingByChoosing()
 ##                ko = KohlerOrder(digraph)
@@ -997,7 +1003,8 @@ def _jobTaskKohler(categID):
                                [((digraph.valuationdomain['max'],catContent),\
                                 (digraph.valuationdomain['max'],catContent))]}
         else:
-            print('==>>> Exceeds %d => Kohler ranking' % maxCatContent)
+            if Comments:
+                print('==>>> Exceeds %d => Kohler ranking' % maxCatContent)
 ##            rp = RankedPairsOrder(digraph)
 ##            catCRbc = rp.computeRankingByChoosing()
             ko = KohlerOrder(digraph)
@@ -1031,23 +1038,20 @@ from sortingDigraphs import QuantilesSortingDigraph
 class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
     """
     Refinig a quantiles sorting result
-    with a local ranking by choosing strategy.
-
-    For larger quantile equivalence classes,
-    the principal ordering along the covariance
-    of the in- and outdegrees credibilities is used.
+    with a local ranking by choosing strategy (Kohler's rule by default).
 
     *Main parameters*:
           * limitingQuantiles are set by default to len(actions)//2
             for outranking digraph orders below 200.
             For higher orders, centiles are used by default.
           * strategies are: "optimistic" (default), "pessimistic" or "average"
-          * rankingRule is eithet "KohlerRule" (default) or "ranking-by-choosing"
+          * rankingRule is either "KohlerRule" (default) or "RubisChoice". In the latter case, large qusntile equivalence classes (>30) are ranked with help
+          of the principal ranking obtained from the covariance of the indegrees.
           * Threading is on (True) by default for CPUs with more than 2 cores.
 
     .. note::
 
-          The weak ordering is instantiated as weak strict order,
+          The weak ordering is instantiated in a [-100;100] valuation domain as crisp weak strict order ,
           its dual being a weakly complete preorder!
           
     .. warning::
@@ -1062,11 +1066,10 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                  limitingQuantiles=None,
                  LowerClosed=True,
                  strategy="optimistic",
-                 rankingRule="rank-by-choosing",
+                 rankingRule="KohlerRule",
+                 # alternative "RubisChoice"
                  PrefThresholds=False,
                  hasNoVeto=False,
-                 #minValuation=-100.0,
-                 #maxValuation=100.0,
                  outrankingType = "bipolar",
                  Threading=True,
                  nbrCores=None,
@@ -1157,11 +1160,13 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                 cwd = getcwd()
                 chdir(tempDirName)
                 filledCategKeys = []
-                print('Preparing the thread data ...')
+                if Comments:
+                    print('Preparing the thread data ...')
                 t0 = time()
                 for c in range(1,nwo+1):
                     nc = len(catContent[c])
-                    print('%d/%d %d' %(c,nwo,nc))
+                    if Comments:
+                        print('%d/%d %d' %(c,nwo,nc))
                     if nc > 1:
                         filledCategKeys.append(int(c))
                         pt = PartialPerformanceTableau(perfTab,actionsSubset=catContent[c])                     
@@ -1176,17 +1181,21 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                     print('%d of %d' % (len(filledCategKeys),nwo))
                     print('Execution time: %.4f sec.' % (t1-t0))
                 
-                print('Threading ... !')
+                if Comments:
+                    print('Threading ... !')
                 t0 = time()
                 with Pool(processes=Nproc) as pool:
-                    if rankingRule == "rank-by-choosing":
-                        for res in pool.imap_unordered(_jobTask,filledCategKeys):
-                            print(res)
+                    if rankingRule == "RubisChoice":
+                        for res in pool.imap_unordered(_jobTaskRubis,filledCategKeys):
+                            if Comments:
+                                print(res)
                     elif rankingRule == "KohlerRule":
                         for res in pool.imap_unordered(_jobTaskKohler,filledCategKeys):
-                            print(res)                    
+                            if Comments:
+                                print(res)                    
                 self.trbc = time() - t0
-                print('Finished all threads in %.4f sec.' % (self.trbc) )
+                if Comments:
+                    print('Finished all threads in %.4f sec.' % (self.trbc) )
                 for c in range(1,nwo+1):                    
                     nc = len(catContent[c])
                     if nc > 1:
@@ -1224,7 +1233,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                             qs.relation[x][y] = qs.relationOrig[x][y]
                     pt = PartialPerformanceTableau(perfTab,currActions)
                     gt = BipolarOutrankingDigraph(pt)
-                    if rankingRule == "rank-by-choosing":
+                    if rankingRule == "RubisChoice":
                          rbc = RankingByChoosingDigraph(gt,CoDual=True,Threading=False)
                          catCRbc = rbc.computeRankingByChoosing()
 ##                        catCRbc = qs.computeRankingByChoosing(currActions,CoDual=True)
@@ -1501,7 +1510,7 @@ if __name__ == "__main__":
                               rankingRule="KohlerRule",
                               LowerClosed=False,
                               Threading=Threading,Debug=False)
-    print(time()-t0)
+    print('QR Exec. time:', time()-t0, 'sec.')
     qsko.showSorting()
     #qsko.exportSortingGraphViz('koq17',Debug=True)
     t0 = time()

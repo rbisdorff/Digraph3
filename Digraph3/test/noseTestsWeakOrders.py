@@ -86,7 +86,7 @@ def testPRIThreadingOptions():
     print('execution time %s: ' % (str ( time()-t0 ) ) )
     rcf2.showWeakOrder()
 
-def testQsRbcOrderingWithOutThreading():
+def testQuantilesRankingDigraphWithOutThreading():
     print('===>>> test QsRbcOrdering class methods---------')
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
                                  numberOfActions=30)
@@ -103,7 +103,7 @@ def testQsRbcOrderingWithOutThreading():
     qsrbc.exportGraphViz()
     print(g.computeOrdinalCorrelation(qsrbc))
     
-def testQsRbcOrderingWithThreading():
+def testQuantilesRankingDigraphWithThreading():
     print('===>>> test QsRbcOrderingWithThreading class methods---------')
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
                                  numberOfActions=30)
@@ -111,7 +111,10 @@ def testQsRbcOrderingWithThreading():
     t0 = time()
     #limitingQuantiles = len(t.actions) // 2
     limitingQuantiles = 10
-    qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,strategy="pessimistic",nbrCores=4,Debug=False)
+    qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,
+                              strategy="pessimistic",
+                              rankingRule="RubisChoice",
+                              nbrCores=4,Debug=False)
     print(time()-t0)
     qsrbc.showSorting()
     weakOrdering = qsrbc.computeWeakOrder(Comments=False,Debug=False)
