@@ -1197,6 +1197,13 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                                                        nbrCores):
                             if Comments:
                                 print(res)                    
+                    elif rankingRule == "Test":
+##                        for res in pool.imap_unordered(_jobTaskKohler,filledCategKeys):
+                        for res in pool.imap_unordered(_jobTaskRubis,
+                                                       filledCategKeys,
+                                                       1):
+                            if Comments:
+                                print(res)                    
                 self.trbc = time() - t0
                 if Comments:
                     print('Finished all threads in %.4f sec.' % (self.trbc) )
