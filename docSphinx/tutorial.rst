@@ -1,7 +1,7 @@
 .. _Tutorial-label:
 
-Tutorial of the Digraph3 resources
-==================================
+Tutorials of the Digraph3 resources
+===================================
 :Author: Raymond Bisdorff, University of Luxembourg FSTC/CSC
 :Version: Revision: Python 3.4
 :Copyright: R. Bisdorff 2014

@@ -155,8 +155,8 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
-Tutorial
---------
+Tutorials
+---------
 
 * `Tutorial <tutorial.html>`_
 
