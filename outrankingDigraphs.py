@@ -6865,7 +6865,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                                                     Debug=Debug)
         self.relation = self._computeConfidentRelation(
             bodg.relation,
-            likelihoodLevel=confidence,
+            #likelihoodLevel=confidence,
             Debug=Debug)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -6884,6 +6884,8 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
         if likelihoodLevel == None:
             likelihoodLevel = self.bipolarConfidenceLevel
+
+        print(likelihoodLevel)
         confidenceCutLevel = Med
         confidentRelation = {}
         actionsList = [x for x in self.actions]
@@ -7786,7 +7788,7 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-    t = RandomCBPerformanceTableau(numberOfActions=10,\
+    t = RandomCBPerformanceTableau(numberOfActions=20,\
                                    numberOfCriteria=13,\
                                    weightDistribution='equiobjectives',
                                    )
@@ -7799,9 +7801,9 @@ if __name__ == "__main__":
     lg = ConfidentBipolarOutrankingDigraph(t,
                                         distribution="beta",
                                         confidence=80,
-                                        betaParameter=7.5,
+                                        betaParameter=2,
                                         Normalized=True,
-                                        Debug=False,
+                                        Debug=True,
                                         Threading=False)
     print(time()-t0,' sec.')
     print(lg.computeDeterminateness())

@@ -1187,21 +1187,21 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                     if rankingRule == "RubisChoice":
                         for res in pool.imap_unordered(_jobTaskRubis,
                                                        filledCategKeys,
-                                                       nbrCores):
+                                                       1):
                             if Comments:
                                 print(res)
                     elif rankingRule == "KohlerRule":
 ##                        for res in pool.imap_unordered(_jobTaskKohler,filledCategKeys):
                         for res in pool.imap_unordered(_jobTaskKohler,
                                                        filledCategKeys,
-                                                       nbrCores):
+                                                       1):
                             if Comments:
-                                print(res)                    
+                                print(res)               
                     elif rankingRule == "Test":
 ##                        for res in pool.imap_unordered(_jobTaskKohler,filledCategKeys):
                         for res in pool.imap_unordered(_jobTaskRubis,
                                                        filledCategKeys,
-                                                       1):
+                                                       nbCores):
                             if Comments:
                                 print(res)                    
                 self.trbc = time() - t0
