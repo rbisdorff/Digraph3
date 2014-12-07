@@ -241,9 +241,9 @@ if __name__ == "__main__":
     import random
     random.seed(1)
     
-    iqAgent = IncrementalQuantileEstimator(nbuf=1000,Debug=True)
+    iqAgent = IncrementalQuantileEstimator(nbuf=100,Debug=True)
 
-    for i in range(2000):
+    for i in range(20):
         iqAgent.add(random.gauss(20,20))
 
     print(iqAgent.report(0.0))
