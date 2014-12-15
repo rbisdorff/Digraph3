@@ -4200,7 +4200,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             return Decimal('-1.0')
 
 
-class BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
+class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     """
     Parameters:
         | performanceTableau (fileName of valid py code)
