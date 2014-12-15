@@ -3510,9 +3510,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     new bipolar ordinal-valued outranking digraphs.
 
     Parameters:
-        | performanceTableau (fileName of valid py code)
-        | optional, coalition (sublist of criteria)
-
+        | argPerfTab: instance of PerformanceTableau class
+        | coalition: sublist of criteria
+        | hasNoVeto: veto desactivation flag (False by default)
+        | hasBipolarVeto: bipolar versus electre veto activation
+        | Normalized: valuation domain default is [-100,+100]. If True, the valuation doamin is put to [-1,+1].
+        | Threading: allows to profit from multiple processor cores via the multiprocessing module (False by default)
+        | nbrCores: controls the effective number of cores that are used in the muliprocessing
 
     """
     def __init__(self,argPerfTab=None,
