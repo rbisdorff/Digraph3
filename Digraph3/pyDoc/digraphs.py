@@ -59,6 +59,19 @@ def powerset(S):
             yield set([e]) | X
             yield X
 
+# flattens a list of lists into a flat list
+import itertools as IT
+import collections
+
+def flatten(iterable, ltypes=collections.Iterable):
+    remainder = iter(iterable)
+    while True:
+        first = next(remainder)
+        if isinstance(first, ltypes) and not isinstance(first, str):
+            remainder = IT.chain(first, remainder)
+        else:
+            yield first
+
 #----------XML handling class -----------------
 try:
     from xml.sax import *
@@ -984,15 +997,20 @@ class Digraph(object):
             print("Error: no ranking by choosing result !!")
             return None
 
-    def computePreorderRelation(self,preorder,Debug=False):
+    def computePreorderRelation(self,preorder,Normalized=True,Debug=False):
         """
         Renders the bipolar-valued relation obtained from
         a given preordering (list of lists) result.
         """
-
-        Max = Decimal('1')
-        Med = Decimal('0')
-        Min = Decimal('-1')
+        if Normalized:
+            Max = Decimal('1')
+            Med = Decimal('0')
+            Min = Decimal('-1')
+        else:   
+            Max = self.valuationdomain['max']
+            Med = self.valuationdomain['med']
+            Min = self.valuationdomain['min']
+            
         actions = list(self.actions.keys())
         currentActions = set(actions)
         preorderRelation = {}
@@ -1160,14 +1178,18 @@ class Digraph(object):
             for x in ibch:
                 for y in ibch:
                     if x != y:
-                        rankingRelation[x][y] = self.omin( [abs(relation[x][y]),abs(relation[y][x])] )
-                        rankingRelation[y][x] = self.omin( [abs(relation[y][x]),abs(relation[x][y])] )
+                        rankingRelation[x][y] = min( [abs(relation[x][y]),abs(relation[y][x])] )
+                        rankingRelation[y][x] = min( [abs(relation[y][x]),abs(relation[x][y])] )
+##                        rankingRelation[x][y] = self.omin( [rankingRelation[x][y],abs(relation[y][x])] )
+##                        rankingRelation[y][x] = self.omin( [rankingRelation[y][x],abs(relation[x][y])] )
 ##                    if Debug and (x == 'a10' or y == 'a07') :
 ##                        print(x,y,rankingRelation[x][y],relation[x][y])
 ##                        print(y,x,rankingRelation[y][x],relation[y][x])
                 for y in ribch:
-                    rankingRelation[x][y] = self.omin( [abs(relation[x][y]),abs(relation[y][x])] )
-                    rankingRelation[y][x] = -self.omin( [abs(relation[y][x]),abs(relation[x][y])] )
+##                    rankingRelation[x][y] = self.omin( [rankingRelation[x][y],abs(relation[y][x])] )
+##                    rankingRelation[y][x] = self.omin( [rankingRelation[y][x],-abs(relation[x][y])] )
+                    rankingRelation[x][y] = min( [abs(relation[x][y]),abs(relation[y][x])] )
+                    rankingRelation[y][x] = -min( [abs(relation[y][x]),abs(relation[x][y])] )
 ##                    if Debug and (x == 'a10' or y == 'a07'):
 ##                        print('+',x,y,rankingRelation[x][y],relation[x][y])
 ##                        print('-',y,x,rankingRelation[y][x],relation[y][x])
@@ -1208,14 +1230,18 @@ class Digraph(object):
 ##                        print(x,y,rankingRelation[x][y],relation[x][y])
 ##                        print(y,x,rankingRelation[x][y],relation[y][x])
                     if x != y:
-                        rankingRelation[x][y] = self.omin( [abs(relation[x][y]),abs(relation[y][x])] )
-                        rankingRelation[y][x] = self.omin( [abs(relation[y][x]),abs(relation[x][y])] )
+##                        rankingRelation[x][y] = self.omin( [rankingRelation[x][y],abs(relation[y][x])] )
+##                        rankingRelation[y][x] = self.omin( [rankingRelation[y][x],abs(relation[x][y])] )
+                        rankingRelation[x][y] = min( [abs(relation[x][y]),abs(relation[y][x])] )
+                        rankingRelation[y][x] = min( [abs(relation[y][x]),abs(relation[x][y])] )
                 for y in riwch:
 ##                    if Debug and (x == 'a10' and y == 'a08') :
 ##                        print(x,y,rankingRelation[x][y],relation[x][y])
 ##                        print(y,x,rankingRelation[x][y],relation[y][x])
-                    rankingRelation[x][y] = -self.omin( [abs(relation[x][y]),abs(relation[y][x])] )
-                    rankingRelation[y][x] = self.omin( [abs(relation[y][x]),abs(relation[x][y])] )
+##                    rankingRelation[x][y] = self.omin( [rankingRelation[x][y],-abs(relation[y][x])] )
+##                    rankingRelation[y][x] = self.omin( [rankingRelation[y][x],abs(relation[x][y])] )
+                    rankingRelation[x][y] = -min( [abs(relation[x][y]),abs(relation[y][x])] )
+                    rankingRelation[y][x] = min( [abs(relation[y][x]),abs(relation[x][y])] )
             currActions = currActions - iwch
         return rankingRelation
 
@@ -2546,20 +2572,32 @@ class Digraph(object):
         print('\n')
         print('Valuation domain: ', self.valuationdomain)
 
-    def showHTMLRelationTable(self):
+    def showHTMLRelationTable(self,actionsList=None,
+                              IntegerValues=False,
+                              Colored=True,
+                              tableTitle='Valued Adjacency Matrix',
+                              relationName='r(x S y)'):
         """
         Launches a browser window with the colored relation table of self.
         """
         import webbrowser
         fileName = '/tmp/relationTable.html'
         fo = open(fileName,'w')
-        fo.write(self.htmlRelationTable(isColored=True))
+        fo.write(self.htmlRelationTable(actionsSubset=actionsList,
+                                        isColored=Colored,
+                                        hasIntegerValues=IntegerValues,
+                                        tableTitle=tableTitle,
+                                        relationName=relationName))
         fo.close()
         url = 'file://'+fileName
         webbrowser.open_new(url)
         
         
-    def htmlRelationTable(self,tableTitle='Relation Table',relationName=' R ',hasIntegerValues=False,actionsSubset= None,isColored=False):
+    def htmlRelationTable(self,tableTitle='Valued Relation Table',
+                          relationName='r(x R y)',
+                          hasIntegerValues=False,
+                          actionsSubset= None,
+                          isColored=False):
         """
         renders the relation valuation in actions X actions html table format.
         """
@@ -2585,7 +2623,8 @@ class Digraph(object):
                     actionsList += [(actions[x]['name'],x)]
             else:
                 actionsList += [(str(x),str(x))]
-        actionsList.sort()
+        if actionsSubset == None:
+            actionsList.sort()
         #print actionsList
         #actionsList.sort()
 
@@ -2758,7 +2797,10 @@ class Digraph(object):
             print('See %s.%s ! ' % (plotFileName,Type))
         
         
-    def exportGraphViz(self,fileName=None, bestChoice=set(),worstChoice=set(),noSilent=True,graphType='png',graphSize='7,7'):
+    def exportGraphViz(self,fileName=None,\
+                       bestChoice=set(),worstChoice=set(),\
+                       noSilent=True,graphType='png',graphSize='7,7',
+                       relation=None):
         """
         export GraphViz dot file  for graph drawing filtering.
         """
@@ -2767,7 +2809,8 @@ class Digraph(object):
             print('*---- exporting a dot file dor GraphViz tools ---------*')
         actionkeys = [x for x in self.actions]
         n = len(actionkeys)
-        relation = self.relation
+        if relation == None:
+            relation = self.relation
         Med = self.valuationdomain['med']
         i = 0
         if fileName == None:
@@ -2919,7 +2962,8 @@ class Digraph(object):
 
     .. note::
     
-            If you want to use the automatic load in Chrome, try using the command: "python -m SimpleHTTPServer" and then access the index.html via "http://0.0.0.0:8000/index.html".
+            If you want to use the automatic load in Chrome, try using the command: "python -m SimpleHTTPServer"
+            and then access the index.html via "http://0.0.0.0:8000/index.html".
             In order to load the CSS an active internet connection is needed! 
 
         """
@@ -6037,6 +6081,94 @@ class Digraph(object):
         ##     self.gamma = self.gammaSets()
         ##     self.notGamma = self.notGammaSets()
 
+    def computeGoodChoiceVector(self,ker,Comments=False):
+        """
+        | Characteristic values for potentially good choices.
+        | [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]
+        """
+        import copy
+        from operator import itemgetter
+        temp = copy.deepcopy(self)
+        Max = Decimal(str(temp.valuationdomain['max']))
+        Min = Decimal(str(temp.valuationdomain['min']))
+        Med = Decimal(str(temp.valuationdomain['med']))
+        actions = [x for x in temp.actions]
+        relation = temp.relation
+##        domChoicesSort = []
+##        if 'dompreKernels' not in dir(temp):
+##            if Comments:
+##                temp.showPreKernels()
+##            else:
+##                temp.computePreKernels()
+##        for ker in temp.dompreKernels:
+        if Comments:
+            print('--> kernel:', ker)
+        choice = [y for y in ker]
+        #choice.sort()
+        degi = temp.intstab(ker)
+        dega = temp.absorb(ker)
+        degd = temp.domin(ker)
+        degirred = temp.domirredval(ker,relation)
+        degmd = min(degi,degd)
+        cover = temp.averageCoveringIndex(ker)
+        relation_k = temp.domkernelrestrict(choice)
+        n = len(actions)
+        #vec1_a = array.array('f', [Max] * n)
+        vec1_a = [Max for i in range(n)]
+        #vec0_a = array.array('f', [Min] * n)
+        vec0_a = [Min for i in range(n)]
+        mat = [temp.readdomvector(x,relation_k) for x in actions]
+        veclowa = vec0_a
+        vechigha = vec1_a
+        if Comments:
+            print('initial veclowa',veclowa)
+            print('initial vechigha', vechigha)
+        it = 1
+        while veclowa != vechigha and it < 2*n*n:
+            veclowb = temp.matmult2(mat,veclowa)
+            vechighb = temp.matmult2(mat,vechigha)
+            veclow = temp.contra(vechighb)
+            vechigh = temp.contra(veclowb)
+            if veclow == veclowa and vechigh == vechigha : break
+            veclowa = veclow
+            vechigha = vechigh
+            if Comments:
+                print(it, 'th veclowa  :',veclowa)
+                print(it, 'th vechigha :',vechigha)
+            it += 1
+        if Comments:
+            print('final veclowa  :', veclowa)
+            print('final vechigha :', vechigha)
+            print('#iterations    :', it)
+        domvec = temp.sharpvec(veclowa,vechigha)
+        determ = temp.determinateness(domvec)
+        goodChoiceVector = []
+        for i in range(n):
+            goodChoiceVector.append((domvec[i],str(actions[i])))
+        goodChoiceVector.sort(reverse=True)
+        if Comments:
+            print(goodChoiceVector)
+        return goodChoiceVector        
+                                
+##        domChoicesSort.append([-determ,degirred,degi,degd,dega,str(choice),domvec,cover])
+##        domChoicesSort.sort()
+        ## domChoicesSort.sort(reverse=True, key=itemgetter(7))
+        ## for ch in domChoicesSort:
+        ##     ch[5] = eval(ch[5])
+        ## self.goodChoices = domChoicesSort
+        ## return domChoicesSort
+##        goodChoice = {}
+####        for ch in domChoicesSort:
+##        goodChoiceDic[frozenset(choice)] = {'determ':-ch[0],
+##                                    'degirred':ch[1],
+##                                    'degi':ch[2],
+##                                    'degd':ch[3],
+##                                    'dega':ch[4],
+##                                    'cover':ch[7],
+##                                    'bpv':ch[6]}
+##
+##        self.goodChoices = domChoicesSort
+##        return goodChoicesDic
 
 
     def computeGoodChoices(self,Comments=False):
@@ -9832,11 +9964,11 @@ class CoceDigraph(Digraph):
         qualmaj0 = gcd.valuationdomain['med']
         if Comments:
             print('Chorless odd circuits elimination')
-            i = 0
+        i = 0
         qualmaj = gcd.minimalValuationLevelForCircuitsElimination(Debug=Debug,Comments=Comments)
         while qualmaj > qualmaj0:
+            i += 1
             if Comments:
-                i += 1
                 print('--> Iteration %d' % (i))
                 t0 = time()
             if qualmaj < gcd.valuationdomain['max']:
@@ -10523,115 +10655,17 @@ if __name__ == "__main__":
         from perfTabs import RandomCBPerformanceTableau
         t = RandomCBPerformanceTableau(numberOfActions=15)
         t.saveXMCDA2('test')
+        t = XMCDA2PerformanceTableau('test')
         g = BipolarOutrankingDigraph(t)
-        g.showPreKernels()
-        g.computeRubisChoice()
-        print(g.dompreKernels)
-        print(g.abspreKernels)
+        gcd =  (-g)
+        gcd.computeChordlessCircuits(Odd=True,Comments=True)
+        gcd.showPreKernels()
+        gcd.computeRubisChoice()
+        print(gcd.dompreKernels)
+        print(gcd.abspreKernels)
+        for ker in gcd.dompreKernels:
+            print(gcd.computeGoodChoiceVector(ker,Comments=False))
         
-        
-        
-##        print('Relation %s is complete ? %s' % (g.name,str(g.isComplete(Debug=True))))
-##        print('Relation %s is weakly complete ? %s' % (g.name,str(g.isWeaklyComplete(Debug=True))))
-##        g.showRelationTable()
-##        g.save('debug')
-##        f = Digraph('debug')
-##        print(f.relation)
-##        f.showStatistics()
-##        t = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=5,weightDistribution='equiobjectives')
-##        t .save('test')
-##        t = PerformanceTableau('test')
-##        g = BipolarOutrankingDigraph(t,Normalized=True)
-##        print('Relation %s is complete ? %s' % (g.name,str(g.isComplete(Debug=True))))
-##        print('Relation %s is weakly complete ? %s' % (g.name,str(g.isWeaklyComplete())))
-##        from weakOrders import *
-##        rbc = RankingByChoosingDigraph(g)
-##        rbc.showWeakOrder()
-##        #rbc.exportGraphViz()
-##        #print(rbc.gamma)
-##        print(rbc.topologicalSort(Debug=True))
-##        print('Relation %s is complete ? %s' % (gcd.name,str(gcd.isComplete(Debug=True))))
-##        print('Relation %s is weakly complete ? %s' % (rbc.name,str(g.isWeaklyComplete())))
-       
-##        g.showRelationTable()
-##        covg = CoverDigraph(g, Debug=False)
-##        covg.showRelationTable()
-##        g.showPreKernels()
-##        covg.showPreKernels()
-##        from weakOrders import *
-##        rbc = RankingByChoosingDigraph(g)
-##        #rbc.showRelationTable()
-##        pri = PrincipalInOutDegreesOrdering(g)
-##        #pri.showRelationTable()
-##        print(g.computeOrdinalCorrelation(rbc,Debug=False))
-##        print(g.computeOrdinalCorrelation(pri,Debug=False))
-##        print(g.computeOrdinalCorrelation(pri,filterRelation=rbc.relation,Debug=False))
-        
-        #t = RandomCBPerformanceTableau(numberOfActions=10)
-        #g = BipolarOutrankingDigraph(t)
-        #g = CirculantDigraph(order=5)
-        #g.save('test')
-        #g = Digraph('test')
-        #g.showRelationTable()
-        #g.showAll()
-        #g.saveCSV('test',Normalized=True,Dual=True,Converse=True)
-        #gd = CSVDigraph('testR')
-        #gd.showRelationTable()
-        #gd.showAll()
-        #g.computePrincipalOrder(Comments=True,Debug=True)
-##        g.exportPrincipalImage(Comments=True,Type="pdf")
-##        fi = open('rotation.csv','r')
-##        csvReader = reader(fi)
-##        R = [x for x in csvReader]
-##        listActions = [x for x in g.actions]
-##        listActions.sort()
-##        scores = [(Decimal(R[i+1][0]),listActions[i]) for i in range(len(listActions))]
-##        scores.sort(reverse=True)
-##        print(scores)
-        #g.computeRankingByChoosing(g,CoDual=False)
-        #g.showRankingByChoosing()
-        
-        
-###        ##from time import time
-###        ##from operator import itemgetter
-###        #t = RandomCBPerformanceTableau(numberOfActions=7)
-###        #t.save('test')
-###        #t = XMCDA2PerformanceTableau('uniSorting')
-###        #g = BipolarOutrankingDigraph(t)
-##        g.computeRankingByLastChoosing(CoDual=True,Debug=False)
-##        g.showRankingByLastChoosing()
-##        relLast = g.computeRankingByLastChoosingRelation()
-###        #g.showRelationTable(relation=relLast)
-###        print(g.computeOrdinalCorrelation(relLast))
-##        g.computeRankingByBestChoosing(CoDual=True)
-##        g.showRankingByBestChoosing()
-##        relBest = g.computeRankingByBestChoosingRelation()
-##        relFusion = {}
-##        for x in g.actions:
-##            relFusion[x] = {}
-##            for y in g.actions:
-##                relFusion[x][y] = g.omin((relBest[x][y],relLast[x][y]))
-###          
-###        #g.showRelationTable(relation=relBest)
-##        print(g.computeOrdinalCorrelation(relBest))
-##        print(g.computeOrdinalCorrelation(relFusion))
-###        
-###        #g.iterateRankingByChoosing(Odd=False,Debug=False,CoDual=True)
-###        #g.showRankingByChoosing()
-###        #print('-----------------')
-###        rankings = g.optimalRankingByChoosing(Odd=True,Debug=False,CoDual=True,Comments=False)
-###        #print(rankings)
-###        g.showRankingByChoosing()
-###        #print('-----------------')
-###        #print('Prudent first choice: ',g.computePrudentBestChoiceRecommendation(CoDual=False,Debug=False,Comments=True))
-###        
-###        #g.showRankingByChoosing()
-###        
-###        ## g = RandomValuationDigraph()
-###        ## print(g.computePrudentBestChoiceRecommendation(CoDual=False,Comments=True))
-
-
-
 
         print('*------------------*')
         print('If you see this line all tests were passed successfully :-)')

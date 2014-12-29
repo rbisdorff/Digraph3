@@ -6,16 +6,6 @@
 readme:
 		echo -n " Digraph3 python3 modules' installer \n (c) R Bisdorff 2013-2014 University of Luxembourg\n Usage: \n ..> make install # installs in Python3, Python3.3 and Python3.4 (Linux, Mac OS)\n ..> make tests # runs the nose tests\n ..> make verbosetests # runs the verbose nose tests\n ..> make pTests # runs all available nose tests with GNU parallel\n\n Technical documentation available here:\n http://leopold-loewenheim.uni.lu/Digraph3/docSphinx/html/index.html \n"
 
-pydoc:
-		cp digraphs.py pyDocs/
-		cp outrankingDigraphs.py pyDocs/
-		cp perfTabs.py pyDocs/
-		cp sortingDigraphs.py pyDocs/
-		cp votingDigraphs.py pyDocs/
-		cp linearOrders.py pyDocs/
-		cp weakOrders.py pyDocs/
-		cp graphs.py pyDocs/
-		(cd pyDocs; pydoc3 -w ./)
 sphinx:
 		(cd docSphinx; \
 		sphinx-build -E . html/ )
@@ -29,10 +19,11 @@ pydocs:
 		cp linearOrders.py pyDoc/
 		cp weakOrders.py pyDoc/
 		cp graphs.py pyDoc/
+		cp randomNumbers.py pyDoc/
 		(cd pyDoc; pydoc3 -w ./)
 
 pTests:
-		parallel --gnu cp {}.py test/ ::: digraphs outrankingDigraphs perfTabs sortingDigraphs votingDigraphs linearOrders weakOrders graphs
+		parallel --gnu cp {}.py test/ ::: digraphs outrankingDigraphs perfTabs sortingDigraphs votingDigraphs linearOrders weakOrders graphs randomNumbers
 		(cd test; parallel --gnu -k nosetests3 -v ::: noseTests*.py )
 
 tests:
@@ -44,6 +35,7 @@ tests:
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
+		cp randomNumbers.py test/
 		(cd test; nosetests3 -v noseTestsDigraph.py)
 		(cd test; nosetests3 -v noseTestsOutrankingDigraph.py)
 		(cd test; nosetests3 -v noseTestsPerfTab.py)
@@ -52,6 +44,8 @@ tests:
 		(cd test; nosetests3 -v noseTestsLinearOrder.py)
 		(cd test; nosetests3 -v noseTestsWeakOrders.py)
 		(cd test; nosetests3 -v noseTestsGraph.py)
+		(cd test; nosetests3 -v noseTestsRandomNumbers.py)
+
 
 verboseTests:
 		cp digraphs.py test/
@@ -62,6 +56,7 @@ verboseTests:
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
+		cp randomNumbers.py test/
 		(cd test; nosetests3 -vs noseTestsDigraph.py)
 		(cd test; nosetests3 -vs noseTestsOutrankingDigraph.py)
 		(cd test; nosetests3 -vs noseTestsPerfTab.py)
@@ -70,6 +65,7 @@ verboseTests:
 		(cd test; nosetests3 -vs noseTestsLinearOrder.py)
 		(cd test; nosetests3 -vs noseTestsWeakOrders.py)
 		(cd test; nosetests3 -vs noseTestsGraph.py)
+		(cd test; nosetests3 -vs noseTestsRandomNumbers.py)
 
 digraphsTests:
 		cp digraphs.py test/
@@ -246,6 +242,15 @@ verboseWeakOrdersTests:
 		cp weakOrders.py test/
 		cp graphs.py test/
 		(cd test; nosetests3 -vs noseTestsWeakOrders.py)
+
+randomNumbersTests:
+		cp randomNumbers.py test/
+		(cd test; nosetests3 -v noseTestsRandomNumbers.py)
+
+verboseRandomNumbersTests:
+		cp randomNumbers.py test/
+		(cd test; nosetests3 -vs noseTestsRandomNumbers.py)
+
 
 install:
 		sudo python3 setup.py install
