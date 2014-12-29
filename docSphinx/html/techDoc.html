@@ -128,6 +128,12 @@
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#randomnumbers-label"><em>randomNumbers module</em></a></dt>
+<dd><p class="first last">Various home brewed random number generators like discrete and extended triangular.</p>
+</dd>
+</dl>
+</li>
 </ul>
 <div class="toctree-wrapper compound">
 <ul class="simple">
@@ -2910,7 +2916,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3640,7 +3646,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5001,6 +5007,36 @@ ranking-by-Rubis-choosing orderings.</p>
 
 </dd></dl>
 
+<p>Back to the <a class="reference internal" href="index.html#introduction-label"><em>Introduction</em></a></p>
+</div>
+<div class="section" id="module-randomNumbers">
+<span id="randomnumbers-module"></span><span id="randomnumbers-label"></span><h2>randomNumbers module<a class="headerlink" href="#module-randomNumbers" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="randomNumbers.DiscreteRandomVariable">
+<em class="property">class </em><tt class="descclassname">randomNumbers.</tt><tt class="descname">DiscreteRandomVariable</tt><big>(</big><em>discreteLaw=None</em>, <em>seed=None</em><big>)</big><a class="headerlink" href="#randomNumbers.DiscreteRandomVariable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Discrete random variable generator</p>
+<dl class="method">
+<dt id="randomNumbers.DiscreteRandomVariable.random">
+<tt class="descname">random</tt><big>(</big><big>)</big><a class="headerlink" href="#randomNumbers.DiscreteRandomVariable.random" title="Permalink to this definition">¶</a></dt>
+<dd><p>generating discrete random values from a discrete random variable.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="randomNumbers.ExtendedTriangularRandomVariable">
+<em class="property">class </em><tt class="descclassname">randomNumbers.</tt><tt class="descname">ExtendedTriangularRandomVariable</tt><big>(</big><em>lowLimit=0.0</em>, <em>highLimit=1.0</em>, <em>mode=None</em>, <em>probRepart=0.5</em>, <em>seed=None</em><big>)</big><a class="headerlink" href="#randomNumbers.ExtendedTriangularRandomVariable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Extended triangular random variable generator</p>
+<dl class="method">
+<dt id="randomNumbers.ExtendedTriangularRandomVariable.random">
+<tt class="descname">random</tt><big>(</big><big>)</big><a class="headerlink" href="#randomNumbers.ExtendedTriangularRandomVariable.random" title="Permalink to this definition">¶</a></dt>
+<dd><p>generating an extended triangular random number.</p>
+</dd></dl>
+
+</dd></dl>
+
 <p>Back to the <a class="reference internal" href="#technical-label"><em>Introduction</em></a></p>
 </div>
 <div class="section" id="indices-and-tables">
@@ -5037,6 +5073,7 @@ ranking-by-Rubis-choosing orderings.</p>
 <li><a class="reference internal" href="#module-sortingDigraphs">sortingDigraphs module</a></li>
 <li><a class="reference internal" href="#module-linearOrders">linearOrders module</a></li>
 <li><a class="reference internal" href="#module-weakOrders">weakOrders module</a></li>
+<li><a class="reference internal" href="#module-randomNumbers">randomNumbers module</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 <li><a class="reference internal" href="#tutorials">Tutorials</a></li>
 </ul>
