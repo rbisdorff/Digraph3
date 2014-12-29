@@ -24,6 +24,41 @@ __version__ = "Branch: 3.4 $"
 class DiscreteRandomVariable():
     """
     Discrete random variable generator
+
+    Example usage:
+        >>> from randomNumbers import DiscreteRandomVariable
+        >>> discreteLaw = {0:0.0478,
+                           1:0.3349,
+                           2:0.2392,
+                           3:0.1435,
+                           4:0.0957,
+                           5:0.0670,
+                           6:0.0478,
+                           7:0.0096,
+                           8:0.0096,
+                           9:0.0048,}
+        ## initialze the random generator
+        >>> rdv = DiscreteRandomVariable(discreteLaw,seed=1)
+        ## sample discrete random variable and
+        ## count frequencies of obtained values
+        >>> sampleSize = 1000
+        >>> frequencies = {}
+        >>> for i in range(sampleSize):
+        ...     x = rdv.random() 
+        ...     try:
+        ...         frequencies[x] += 1
+        ...     except:
+        ...         frequencies[x] = 1
+        ## print results
+        >>> results = [x for x in frequencies]
+        >>> results.sort()
+        >>> counts= 0.0
+        >>> for x in results:
+        ...     counts += frequencies[x]
+        ...     print  ('%s, %d, %.3f, %.3f' % (x, frequencies[x],
+        ...               float(frequencies[x])/float(sampleSize),
+        ...               discreteLaw[x]))
+        >>> print ('# of valid samples = %d' % counts)
     """
     
     def __init__(self, discreteLaw = None, seed = None):
