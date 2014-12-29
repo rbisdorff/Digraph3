@@ -49,20 +49,20 @@ class DiscreteRandomVariable():
         >>> sampleSize = 1000
         >>> frequencies = {}
         >>> for i in range(sampleSize):
-        ...     x = rdv.random() 
-        ...     try:
-        ...         frequencies[x] += 1
-        ...     except:
-        ...         frequencies[x] = 1
+                x = rdv.random() 
+                try:
+                    frequencies[x] += 1
+                except:
+                    frequencies[x] = 1
         ## print results
         >>> results = [x for x in frequencies]
         >>> results.sort()
         >>> counts= 0.0
         >>> for x in results:
-        ...     counts += frequencies[x]
-        ...     print  ('%s, %d, %.3f, %.3f' % (x, frequencies[x],
-        ...               float(frequencies[x])/float(sampleSize),
-        ...               discreteLaw[x]))
+                counts += frequencies[x]
+                print  ('%s, %d, %.3f, %.3f' % (x, frequencies[x],
+                          float(frequencies[x])/float(sampleSize),
+                          discreteLaw[x]))
         >>> print ('# of valid samples = %d' % counts)
     """
     
@@ -182,22 +182,22 @@ class ExtendedTriangularRandomVariable():
                   
 class CauchyRandomVariable():
     """
-    Cauchy random variable generator
+    Cauchy random variable generator.
 
     Parameters:
-        - position: median (default=0.0) of the Cauchy distribution
-        - scale: typical spread (default=1.0) with respect to median 
-        - seed := integer for fixing the sequence generation.
+        - position := median (default=0.0) of the Cauchy distribution
+        - scale := typical spread (default=1.0) with respect to median 
+        - seed := integer (default=None) for fixing the sequence generation.
     
     Cauchy quantile (inverse cdf) function:
-        Q(x/position,scale) = position + scale*tan[pi(x-1/2)]
+        Q(x|position,scale) = position + scale*tan[pi(x-1/2)]
 
     """
     
     def __init__(self, position=0.0, scale = 1.0,
                  seed=None, Debug=False):
         """
-        constructor for Cauchy random variables with
+        constructor for Cauchy random variables.
         """
         import random
         self._random = random
@@ -214,7 +214,7 @@ class CauchyRandomVariable():
         
     def random(self):
         """
-        generating an extended triangular random number.
+        generating a Cauchy random number.
         """
         
         from math import pi,tan
