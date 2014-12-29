@@ -1059,7 +1059,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -5012,11 +5012,44 @@ ranking-by-Rubis-choosing orderings.</p>
 <div class="section" id="module-randomNumbers">
 <span id="randomnumbers-module"></span><span id="randomnumbers-label"></span><h2>randomNumbers module<a class="headerlink" href="#module-randomNumbers" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
+<dt id="randomNumbers.CauchyRandomVariable">
+<em class="property">class </em><tt class="descclassname">randomNumbers.</tt><tt class="descname">CauchyRandomVariable</tt><big>(</big><em>position=0.0</em>, <em>scale=1.0</em>, <em>seed=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#randomNumbers.CauchyRandomVariable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Cauchy random variable generator</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>position: median (default=0.0) of the Cauchy distribution</li>
+<li>scale: typical spread (default=1.0) with respect to median</li>
+<li>seed := integer for fixing the sequence generation.</li>
+</ul>
+</dd>
+<dt>Cauchy quantile (inverse cdf) function:</dt>
+<dd>Q(x/position,scale) = position + scale*tan[pi(x-1/2)]</dd>
+</dl>
+<dl class="method">
+<dt id="randomNumbers.CauchyRandomVariable.random">
+<tt class="descname">random</tt><big>(</big><big>)</big><a class="headerlink" href="#randomNumbers.CauchyRandomVariable.random" title="Permalink to this definition">¶</a></dt>
+<dd><p>generating an extended triangular random number.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="randomNumbers.DiscreteRandomVariable">
 <em class="property">class </em><tt class="descclassname">randomNumbers.</tt><tt class="descname">DiscreteRandomVariable</tt><big>(</big><em>discreteLaw=None</em>, <em>seed=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#randomNumbers.DiscreteRandomVariable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>Discrete random variable generator</p>
 <dl class="docutils">
+<dt>Parameters:</dt>
+<dd><div class="first last line-block">
+<div class="line">discreteLaw := dictionary with integer values</div>
+<div class="line-block">
+<div class="line">as keys and probabilities as float values,</div>
+</div>
+<div class="line">seed := integer for fixing the sequence generation.</div>
+</div>
+</dd>
 <dt>Example usage:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">DiscreteRandomVariable</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">discreteLaw</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mf">0.0478</span><span class="p">,</span>
@@ -5068,6 +5101,15 @@ ranking-by-Rubis-choosing orderings.</p>
 <em class="property">class </em><tt class="descclassname">randomNumbers.</tt><tt class="descname">ExtendedTriangularRandomVariable</tt><big>(</big><em>lowLimit=0.0</em>, <em>highLimit=1.0</em>, <em>mode=None</em>, <em>probRepart=0.5</em>, <em>seed=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#randomNumbers.ExtendedTriangularRandomVariable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
 <p>Extended triangular random variable generator</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>mode := most frequently observed value</li>
+<li>probRepart := probability mass distributed until the mode</li>
+<li>seed := integer for fixing the sequence generation.</li>
+</ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="randomNumbers.ExtendedTriangularRandomVariable.random">
 <tt class="descname">random</tt><big>(</big><big>)</big><a class="headerlink" href="#randomNumbers.ExtendedTriangularRandomVariable.random" title="Permalink to this definition">¶</a></dt>
