@@ -616,10 +616,17 @@ class PerformanceTableau(object):
             fo.write('"%s",' % g)
             for i in range(n):
                 x = actionsList[i]
+                qval = self.computeActionCriterionQuantile(x,g,Debug=False)
                 if i < n-1:
-                    fo.write('%.2f,' % self.computeActionCriterionQuantile(x,g,Debug=False) )
+                    if qval != 'NA':
+                        fo.write('%.2f,' % qval)
+                    else:
+                        fo.write('NA,')
                 else:
-                    fo.write('%.2f\n' % self.computeActionCriterionQuantile(x,g,Debug=False) )                    
+                    if qval != 'NA':
+                        fo.write('%.2f\n' % qval)
+                    else:
+                        fo.write('NA\n')
         fo.close()
 
         
@@ -650,8 +657,13 @@ class PerformanceTableau(object):
             print(str(x) + '   | ', end=' ')
             html += '<tr><th  bgcolor="#FFF79B">%s</th>' % (x)
             for g in criteriaList:
-                print('%.2f\t' % self.computeActionCriterionQuantile(x,g,Debug=False), end=' ')
-                html += '<td>%.2f</td>' % (self.computeActionCriterionQuantile(x,g,Debug=False))
+                qval = self.computeActionCriterionQuantile(x,g,Debug=False)
+                if qval != 'NA':
+                    print('%.2f\t' % qval, end=' ')
+                    html += '<td>%.2f</td>' % (qval)
+                else:
+                    print('NA\t', end=' ')
+                    html += '<td>NA</td>'
             print()
             html += '</tr>\n'
                                           
@@ -901,6 +913,62 @@ class PerformanceTableau(object):
                 print(formatString % (self.evaluation[g][x]), end=' ')
             print()      
 
+    def saveCSV(self,fileName='tempPerfTab',Sorted=True,actionsList=None,ndigits=2,Debug=False):
+        """1
+        Store the performance Tableau self Actions x Criteria in CSV format.
+        """
+        import itertools as IT
+        import collections
+
+        def flatten(iterable, ltypes=collections.Iterable):
+            remainder = iter(iterable)
+            while True:
+                first = next(remainder)
+                if isinstance(first, ltypes) and not isinstance(first, str):
+                    remainder = IT.chain(first, remainder)
+                else:
+                    yield first
+        
+        fileNameExt = fileName + '.csv'        
+        print('*Storing performance tableau in CSV format in file %s'\
+              % fileNameExt)
+        criteriaList = list(self.criteria.keys())
+        if sorted:
+            criteriaList.sort()
+        n = len(criteriaList)
+        if Debug:
+            print(criteriaList)
+        if actionsList == None:
+            actionsList = list(self.actions.keys())
+            if sorted:
+                actionsList.sort()
+        else:
+            actionsList = flatten(actionsList)
+        if Debug:
+            print(actionsList)
+        formatStr = '%%.%.df' % ndigits
+        if Debug:
+            print('formatString:',formatStr)
+        fo = open(fileNameExt,'w')
+        ## header row
+        writeStr = '"actions",'
+        for i in range(n-1):
+            writeStr += '"%s",' % criteriaList[i]
+        writeStr += '"%s"\n' % criteriaList[n-1]
+        if Debug:
+            print(writeStr)
+        fo.write(writeStr)
+        ## writing performance data
+        for x in actionsList:
+            writeStr = '"%s",' % x
+            for i in range(n-1):
+                writeStr += formatStr % self.evaluation[criteriaList[i]][x] + ','
+            writeStr += formatStr % self.evaluation[criteriaList[n-1]][x] + '\n'
+            if Debug:
+                print(writeStr)
+            fo.write(writeStr)
+        fo.close()
+        
 
     def computeMinMaxEvaluations(self,criteria=None,actions=None):
         """
@@ -967,9 +1035,193 @@ class PerformanceTableau(object):
                         html += formatString % (self.evaluation[g][x])
                         
                 else:
-                    html += '<td>&#32;</td>'
+                    html += '<td align="right"><span style="color: LightGrey;">NA</span></td>'
             html += '</tr>'
         html += '</table>'
+        return html
+
+    def showHTMLPerformanceHeatmap(self,actionsList=None,
+                                   criteriaList=None,
+                                   colorLevels=7,
+                                   pageTitle=None,
+                                   ndigits=2,
+                                   Ranked=True,
+                                   Correlations=False,
+                                   Threading=False):
+        """
+        shows the html heatmap version of the performance tableau in a browser window.
+        """
+        import webbrowser
+        fileName = '/tmp/performanceHeatmap.html'
+        fo = open(fileName,'w')
+        if pageTitle == None:
+            pageTitle = 'Heatmap of performance tableau %s' % self.name
+        if Ranked and actionsList == None:
+            from weakOrders import QuantilesRankingDigraph
+            qsr = QuantilesRankingDigraph(self,LowerClosed=True,Threading=Threading)
+            actionsList = qsr.computeQsRbcRanking()
+            print(actionsList)
+            
+        fo.write(self.htmlPerformanceHeatmap(criteriaList=criteriaList,
+                                             actionsList=actionsList,
+                                             ndigits=ndigits,
+                                             colorLevels=colorLevels,
+                                             pageTitle=pageTitle,
+                                             Correlations=Correlations))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+
+    def htmlPerformanceHeatmap(self,criteriaList=None,
+                               actionsList=None,
+                               ndigits=2,
+                               colorLevels=None,
+                               pageTitle='Performance Heatmap',
+                               Correlations=False,
+                               Threading=False,
+                               Debug=False):
+        """
+        Renders the Brewer RdYlGn 9-colored heatmap of the performance table
+        actions x criteria in html format.
+        """
+        #import itertools as IT
+        #import collections
+        from decimal import Decimal
+        from digraphs import flatten
+                    
+        brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#D53E4F"'),
+                               (Decimal('0.2222'),'"#F46D43"'),
+                               (Decimal('0.3333'),'"#FDAE61"'),
+                               (Decimal('0.4444'),'"#FEE08B"'),
+                               (Decimal('0.5555'),'"#FFFFBF"'),
+                               (Decimal('0.6666'),'"#D9EF8B"'),
+                               (Decimal('0.7777'),'"#A6D96A"'),
+                               (Decimal('0.8888'),'"#65BD63"'),
+                               (Decimal('1.000'),'"#1A9850"')]
+        brewerRdYlGn7Colors = [
+                               (Decimal('0.1429'),'"#F46D43"'),
+                               (Decimal('0.2857'),'"#FDAE61"'),
+                               (Decimal('0.4286'),'"#FEE08B"'),
+                               (Decimal('0.5714'),'"#FFFFBF"'),
+                               (Decimal('0.7143'),'"#D9EF8B"'),
+                               (Decimal('0.8571'),'"#A6D96A"'),
+                               (Decimal('1.0000'),'"#65BD63"')
+                               ]
+        brewerRdYlGn5Colors = [
+                               (Decimal('0.2'),'"#FDAE61"'),
+                               (Decimal('0.4'),'"#FEE08B"'),
+                               (Decimal('0.6'),'"#FFFFBF"'),
+                               (Decimal('0.8'),'"#D9EF8B"'),
+                               (Decimal('1.0'),'"#A6D96A"')
+                               ]
+        if colorLevels == None:
+            colorLevels = 7
+        if colorLevels == 7:
+            colorPalette = brewerRdYlGn7Colors
+        elif colorLevels == 9:
+            colorPalette = brewerRdYlGn9Colors
+        elif colorLevels == 5:
+            colorPalette = brewerRdYlGn5Colors
+        else:
+            colorPalette = brewerRdYlGn7Colors
+        nc = len(colorPalette)
+        backGroundColor   = '"#FFFFFF"'
+        naColor           = '"#FFFFFF"'
+        columnHeaderColor = '"#CCFFFF"'
+        rowHeaderColor    = '"#FFFFFF"'
+        html = '<h2>%s</h2>' % pageTitle
+        
+        if criteriaList == None:
+            from outrankingDigraphs import BipolarOutrankingDigraph
+            g = BipolarOutrankingDigraph(self,Threading=Threading)
+            if Correlations:
+                criteriaCorrelation =\
+                    g.showMarginalVersusGlobalOutrankingCorrelation(\
+                            Threading=Threading,\
+                            Comments=False)
+                criteriaList = [c[1] for c in criteriaCorrelation]
+            else:
+                criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
+                criteriaWeightsList.sort(reverse=True)
+                criteriaList = [g[1] for g in criteriaWeightsList]
+                criteriaCorrelation = None    
+        else:
+            criteriaCorrelation = None
+    
+        if actionsList == None:
+            actionsList = list(self.actions.keys())
+            actionsList.sort()
+        else:
+            actionsList = [x for x in flatten(actionsList)]
+        quantileColor={}
+        for x in actionsList:
+            quantileColor[x] = {}
+            for g in criteriaList:
+                quantilexg = self.computeActionCriterionQuantile(x,g)
+                if Debug:
+                    print(x,g,quantilexg)
+                if quantilexg != 'NA':
+                    for i in range(nc):
+                        #print(i, colorPalette[i][0])
+                        
+                        if quantilexg <= colorPalette[i][0]:
+                            quantileColor[x][g] = colorPalette[i][1]
+                            break
+                else:
+                    quantileColor[x][g] = naColor
+                if Debug:
+                    print(quantileColor[x][g])
+        # legend            
+##        html += '<i>Color legend: </i>\n'
+##        html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
+##        html += '<tr bgcolor=%s><th>quantile</th>' % (columnHeaderColor)
+##        for col in range(nc):
+##            html += '<td bgcolor=%s>%s</td>' % (colorPalette[col][1],str(colorPalette[col][0]))
+##        html += '</tr>\n'
+##        html += '</table>\n'
+        # heatmap
+        html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
+        html += '<tr bgcolor=%s><th>criteria</th>' % (columnHeaderColor)
+        for g in criteriaList:
+            html += '<th>%s</th>' % (str(g))
+        html += '</tr>\n'
+        html += '<tr><th bgcolor=%s>weights</th>' % (columnHeaderColor)
+        for g in criteriaList:
+            html += '<td align="center">%s</td>' % (str(self.criteria[g]['weight']))
+        html += '</tr>\n'
+        if criteriaCorrelation != None:
+            html += '<tr><th bgcolor=%s>tau<sup>(*)</sup></th>' % (columnHeaderColor)
+            for cg in criteriaCorrelation:
+                html += '<td align="center">%.2f</td>' % (cg[0])
+            html += '</tr>\n'
+        if Debug:
+            print(html)
+        for x in actionsList:
+            html += '<tr><th bgcolor=%s>%s</th>' % (rowHeaderColor,str(x))
+            for g in criteriaList:
+                if self.evaluation[g][x] != Decimal("-999"):
+                    formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
+                    html += formatString % (self.evaluation[g][x])
+                else:
+                    html += '<td bgcolor=%s>NA</td>' % naColor
+                if Debug:
+                    print(html)
+            html += '</tr>\n'
+        html += '</table>\n'
+        # legend
+        html += '<i>Color legend: </i>\n'
+        html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
+        html += '<tr bgcolor=%s><th>quantile</th>' % (columnHeaderColor)
+        #html += '<td bgcolor=%s>&nbsp;[%.2f - %.2f[&nbsp;</td>' % (colorPalette[0][1],0.0,colorPalette[0][0])
+        for col in range(0,nc):
+            html += '<td bgcolor=%s>&nbsp;%.2f&#037;</td>' % (colorPalette[col][1],
+                                                                   #colorPalette[col-1][0],
+                                                                   colorPalette[col][0])
+        html += '</tr>\n'
+        html += '</table>\n'
+        if criteriaCorrelation != None:
+            html += '<i>(*) tau: Ordinal (Kendall) correlation of marginal criterion and global outranking relation.</i>\n'
+
         return html
 
     def computeWeightPreorder(self):
@@ -2990,7 +3242,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
         | numberOf Actions := 20 (default)
         | number of Criteria := 13 (default)
         | weightDistribution := 'equisignificant' (default with all weights = 1.0), 'random', 'fixed' (default w_1 = numberOfCriteria-1, w_{i!=1} = 1
-        | weightScale := [1,numerOfCriteria[ (random default), [w_1, w_{i!=1] (fixed)
+        | weightScale := [1,numerOfCriteria] (random default), [w_1, w_{i!=1] (fixed)
         | integerWeights := True (default) / False
         | commonScale := (0.0, 100.0) (default)
         | commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].
@@ -3852,459 +4104,6 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             if Comments:
                 print('criteria',c,' default thresholds:')
                 print(self.criteria[c]['thresholds'])
-
-## class OldRandomCBPerformanceTableau(PerformanceTableau):
-##     """
-##     Full automatic generation of random
-##     Cost versus Benefit oriented performance tableaux.
-
-##     .. warning::
-
-##         Minimal number of decision actions required is 3 ! 
-
-##     """
-
-##     def __init__(self,numberOfActions = None, \
-##                  numberOfCriteria = None, \
-##                  weightDistribution = None, weightScale=None,\
-##                  integerWeights = True,
-##                  commonScale = None, commonThresholds = None,\
-##                  commonPercentiles= None,\
-##                  commonMode = None,\
-##                  valueDigits=2, Debug=False,Comments=False):
-##         """
-##         Constructor for RadomCBPerformanceTableau instances.
-##         Parametrs description:
-##         weightDistribution = {'fixed'|'random'|'equisignificant' (default = 1)}
-##         weightScale default is 1 - numberOfCriteria
-##         commonScale parameter is obsolete.
-##         All cardinal criteria are evaluated between 0.0 and 100.0
-##         and all ordinal criteria are integer evaluated between 0 and 10.
-##         commonThresholds is obsolete.
-##         CommonPercentiles = {'ind':5, 'pref':10, ['weakveto':90,] 'veto':95}
-##         are expressed in percents (reversed for vetoes) and only
-##         concern cardinal criteria.
-        
-##         """
-
-##         import sys,random,time,math,copy
-        
-##         self.name = 'randomCBperftab'
-##         # randomizer init
-##         t = time.time()
-##         random.seed(t)
-##         # generate random actions
-##         if numberOfActions == None:
-##             numberOfActions = random.randint(10,31)
-##         actionsIndex = range(numberOfActions+1)
-##         actionsIndex.remove(0)
-##         actionsList = []
-##         for a in actionsIndex:
-##             if a < 10:
-##                 actionName = 'a0'+str(a)
-##             else:
-##                 actionName = 'a'+str(a)
-##             actionsList.append(actionName)
-##         actions = {}
-##         actionsTypesList = ['cheap','neutral','advantageous']
-##         for x in actionsList:
-##             actions[x] = {}
-##             actions[x]['type'] = random.choice(actionsTypesList)
-##             actions[x]['name'] = 'random %s decision action' % (actions[x]['type'])
-##             actions[x]['comment'] = 'RandomCBPerformanceTableau() generated.'
-##         self.actions = actions
-
-##         # generate random criterialist
-##         if numberOfCriteria == None:
-##             numberOfCriteria = random.randint(5,21)
-##         criteriaList = []
-##         criteriaIndex = range(numberOfCriteria+1)
-##         criteriaIndex.remove(0)
-##         for g in criteriaIndex:
-##             if g < 10:
-##                 criterionName = 'g0'+str(g)
-##             else:
-##                 criterionName = 'g'+str(g)
-##             criteriaList.append(criterionName)
-##         if Debug:
-##             print criteriaList
-            
-##         # generate random weights
-##         if weightDistribution == None:
-##             weightDistribution = 'fixed'
-##             weightScale = (1,1)
-##             weightMode=[weightDistribution,weightScale]
-##             ## majorityWeight = numberOfCriteria + 1
-##             ## #weightModesList = [('fixed',[1,1],1),('random',[1,3],2), ('random',[1,numberOfCriteria],3),('fixed',[1,majorityWeight],4)]
-##             ## weightModesList = [('fixed',[1,1],1),('random',[1,3],2), ('random',[1,numberOfCriteria],3),('balanced',[1,1],4)]
-##             ## weightMode = random.choice(weightModesList)
-##             ## weightDistribution = weightMode[0]
-##             ## weightScale =  weightMode[1]
-##         else:
-##             if weightScale == None:
-##                 weightScale = (1,numberOfCriteria)
-##             weightMode=[weightDistribution,weightScale]
-            
-##         if weightDistribution == 'random':
-##             weightsList = []
-##             sumWeights = Decimal('0.0')
-##             i = 0
-##             for g in criteriaList:
-##                 weightsList.append(Decimal(str(random.randint(weightScale[0],weightScale[1]))))
-##                 sumWeights += weightsList[i]
-##                 i += 1
-##             weightsList.reverse()
-##         elif weightDistribution == 'fixed':
-##             weightsList = []
-##             sumWeights = Decimal('0.0')
-##             for g in criteriaList:
-##                 if g == 'g1':
-##                     weightsList.append(Decimal(str(weightScale[1])))
-##                     sumWeights += weightScale[1]
-##                 else:
-##                     weightsList.append(Decimal(str(weightScale[0])))
-##                     sumWeights += weightScale[0]
-##             weightsList.reverse()
-##         elif weightDistribution == 'equisignificant':
-##             weightScale = (1,1)
-##             weightMode=[weightDistribution,weightScale]
-##             weightsList = []
-##             sumWeights = Decimal('0.0')
-##             for g in criteriaList:
-##                 if g == 'g1':
-##                     weightsList.append(Decimal(str(weightScale[1])))
-##                     sumWeights += weightScale[1]
-##                 else:
-##                     weightsList.append(Decimal(str(weightScale[0])))
-##                     sumWeights += weightScale[0]
-##             weightsList.reverse()
-##         else:
-##             print '!!! Error: wrong criteria weight distribution mode: %s !!!!' % (weightDistribution)
-##         if Debug:
-##             print weightsList, sumWeights
-
-##         # generate criteria dictionary
-##         ## if commonScale == None:
-##         ##     commonScale = (0.0,100.0)
-##         criterionTypesList = ['max','max','min']
-##         minScaleTypesList = ['cardinal','cardinal','cardinal','ordinal']
-##         maxScaleTypesList = ['ordinal','ordinal','cardinal']
-##         criteria = {}
-##         i = 0
-##         for g in criteriaList:
-##             #criterionScale = commonScale
-##             criteria[g] = {}
-##             criterionType = random.choice(criterionTypesList)
-##             criteria[g]['preferenceDirection'] = criterionType
-##             if criterionType == 'min':
-##                 scaleType = random.choice(minScaleTypesList)
-##             else:
-##                 scaleType = random.choice(maxScaleTypesList)
-##             criteria[g]['scaleType'] = scaleType
-##             if criterionType == 'min':
-##                 if scaleType == 'ordinal':
-##                     criteria[g]['name'] = 'random ordinal cost criterion'
-##                 else:
-##                     criteria[g]['name'] = 'random cardinal cost criterion'
-##             else:
-##                 if scaleType == 'ordinal':
-##                     criteria[g]['name'] = 'random ordinal benefit criterion'
-##                 else:
-##                     criteria[g]['name'] = 'random cardinal benefit criterion'
-##             ## t = time.time()
-##             ## random.seed(t)
-##             if Debug:
-##                 print "g, criteria[g]['scaleType'], criteria[g]['scale']", g, criteria[g]['scaleType'],
-
-##             # commonScale parameter is obsolete
-##             commonScale = None
-##             if criteria[g]['scaleType'] == 'cardinal':
-##                 #if commonScale == None:
-##                 criterionScale = (0.0, 100.0)
-##                 ## criteria[g]['scale'] = criterionScale      
-##             elif criteria[g]['scaleType'] == 'ordinal':
-##                 ## if Debug:
-##                 ##     print commonScale
-##                 ## if commonScale == None:
-##                 ##     criterionScale = (0, 10)
-##                 ## else:
-##                 criterionScale = (0, 10)
-##             else:
-##                 criterionScale = (0.0, 100.0)
-##             criteria[g]['scale'] = criterionScale
-##             if Debug:
-##                 print criteria[g]['scale']
-                
-##             ## if Debug:
-##             ##     print 'criterionScale = ', criterionScale
-##             if integerWeights:
-##                 criteria[g]['weight'] = weightsList[i]
-##             else:
-##                 criteria[g]['weight'] = weightsList[i] / sumWeights
-##             i += 1
-
-##             if Debug:
-##                 print criteria[g]
-
-##         # generate random evaluations
-##         ## x30=criterionScale[1]*0.3
-##         ## x50=criterionScale[1]*0.5
-##         ## x70=criterionScale[1]*0.7
-##         ## if Debug:
-##         ##     print 'g, x30,x50,x70', g, x30,x50,x70
-##         ## randomLawsList = [['uniform',criterionScale[0],criterionScale[1]],
-##         ##                   ('triangular',x30,0.33),('triangular',x30,0.50),('triangular',x30,0.75),
-##         ##                   ('triangular',x50,0.33),('triangular',x50,0.50),('triangular',x50,0.75),
-##         ##                   ('triangular',x70,0.33),('triangular',x70,0.50),('triangular',x70,0.75),
-##         ##                   ('normal',x30,20.0),('normal',x30,25.0),('normal',x30,30.0),
-##         ##                   ('normal',x50,20.0),('normal',x50,25.0),('normal',x50,30.0),
-##         ##                   ('normal',x70,20.0),('normal',x70,25.0),('normal',x70,30.0)]
-        
-##         evaluation = {}
-##         for g in criteriaList:
-##             criterionScale = criteria[g]['scale']
-##             amplitude = criterionScale[1] - criterionScale[0]
-##             x30=criterionScale[0] + amplitude*0.3
-##             x50=criterionScale[0] + amplitude*0.5
-##             x70=criterionScale[0] + amplitude*0.7
-##             if Debug:
-##                 print 'g, criterionx30,x50,x70', g, criteria[g], x30,x50,x70
-##             evaluation[g] = {}
-##             if commonMode == None:
-##                 #randomMode = random.choice(randomLawsList)
-##                 randomMode = ['triangular',x50,0.50]               
-##             elif commonMode[0] == None:
-##                 #randomMode = random.choice(randomLawsList)
-##                 randomMode = ['triangular',x50,0.50]               
-##             else:
-##                 randomMode = commonMode
-##             if randomMode[0] == 'uniform':
-##                 randomMode[1] = criterionScale[0]
-##                 randomMode[2] = criterionScale[1]
-##             criteria[g]['randomMode'] = randomMode
-##             if randomMode[0] == 'triangular':
-##                 commentString = 'triangular law with variable mode (m) and probability repartition (p = 0.5). Cheap actions: m = 30%; neutral actions: m = 50%; advantageous actions: m = 70%.'
-##             elif randomMode[0] == 'normal':
-##                 commentString = 'truncated normal law with variable mean (mu) and standard deviation (stdev = 20%). Cheap actions: mu = 30%; neutral actions: mu = 50%; advantageous actions: mu = 70%.'
-##             elif randomMode[0] == 'beta':
-##                 commentString = 'beta law with variable mode xm and standard deviation (stdev = 15%). Cheap actions: xm = 30%; neutral actions: xm = 50%; advantageous actions: xm = 70%.'
-
-##             ## else:
-##             ##     if randomMode[1] != None and randomMode[2] != None:
-##             ##         commentString = randomMode[0]+', %.2f, %.2f' % (float(randomMode[1]),float(randomMode[2]))
-##             ##     elif randomMode[1] != None and randomMode[2] == None:
-##             ##         commentString = randomMode[0]+', %.2f, default' % (float(randomMode[1]))
-##             ##     elif randomMode[1] == None and randomMode[2] != None:
-##             ##         commentString = randomMode[0]+', default, %.2f' % (float(randomMode[2]))
-##             ##     else:
-##             ##         commentString = randomMode[0]+', default, default'
-                    
-##             if Debug:
-##                 print 'commonMode = ', commonMode
-##                 print 'randomMode = ', randomMode
-                   
-##             criteria[g]['comment'] = 'Evaluation generator: ' + commentString
-##             digits = valueDigits
-##             if str(randomMode[0]) == 'uniform':          
-##                 evaluation[g] = {}
-##                 for a in actionsList:
-##                     randeval = random.uniform(criterionScale[0],criterionScale[1])
-##                     if criteria[g]['preferenceDirection'] == 'max':
-##                         evaluation[g][a] = Decimal(str(round(randeval,digits)))
-##                     else:
-##                         evaluation[g][a] = Decimal(str(-round(randeval,digits)))
-##             elif str(randomMode[0]) == 'triangular':
-##                 for a in actionsList:
-##                     m = criterionScale[0]
-##                     M = criterionScale[1]
-##                     #r  = randomMode[2]
-##                     #xm = randomMode[1]
-##                     if actions[a]['type'] == 'advantageous':
-##                         xm = x70
-##                         r = 0.50
-##                     elif actions[a]['type'] == 'cheap':
-##                         xm = x30
-##                         r = 0.50
-##                     else:
-##                         xm = x50
-##                         r = 0.50
-                        
-##                     deltaMinus = 1.0 - (criterionScale[0]/xm)
-##                     deltaPlus  = (criterionScale[1]/xm) - 1.0
-
-##                     u = random.random()
-##                     #print 'm,xm,M,r,u', m,xm,M,r,u 
-##                     if u < r:
-##                         #randeval = m + (math.sqrt(r*u*(m-xm)**2))/r
-##                         randeval = m + math.sqrt(u/r)*(xm-m)
-##                     else:
-##                         #randeval = (M*r - M + math.sqrt((-1+r)*(-1+u)*(M-xm)**2))/(-1+r)
-##                         randeval = M - math.sqrt((1-u)/(1-r))*(M-xm)
-                    
-##                     if criteria[g]['preferenceDirection'] == 'max':
-##                         evaluation[g][a] = Decimal(str(round(randeval,digits)))
-##                     else:
-##                         evaluation[g][a] = Decimal(str(-round(randeval,digits)))
-##                     #print randeval, criteria[g]['preferenceDirection'], evaluation[g][a]
-                        
-##             elif str(randomMode[0]) == 'normal':
-##                 #mu = randomMode[1]
-##                 #sigma = randomMode[2]
-##                 for a in actionsList:
-##                     ## amplitude = criterionScale[1]-criterionScale[0]
-##                     ## x70 = criterionScale[0] + 0.7 * amplitude
-##                     ## x50 = criterionScale[0] + 0.5 * amplitude
-##                     ## x30 = criterionScale[0] + 0.3 * amplitude
-                    
-##                     if actions[a]['type'] == 'advantageous':
-##                         mu = x70
-##                         sigma = 0.20 * amplitude
-##                     elif actions[a]['type'] == 'cheap':
-##                         mu = x30
-##                         sigma = 0.20 * amplitude
-##                     else:
-##                         mu = x50
-##                         sigma = 0.25 * amplitude
-##                     notfound = True 
-##                     while notfound:
-##                         randeval = random.normalvariate(mu,sigma)
-##                         ## if Debug:
-##                         ##     print 'g,commonScale,randeval', g,commonScale,randeval
-##                         if randeval >= criterionScale[0] and  randeval <= criterionScale[1]:
-##                             notfound = False
-##                     if criteria[g]['preferenceDirection'] == 'max':
-##                         evaluation[g][a] = Decimal(str(round(randeval,digits)))
-##                     else:
-##                         evaluation[g][a] = Decimal(str(-round(randeval,digits)))
-##             elif str(randomMode[0]) == 'beta':
-##                 m = criterionScale[0]
-##                 M = criterionScale[1]
-##                 ## if commonMode[1] == None:
-##                 ##     xm = 0.5
-##                 ## else:
-##                 ##     xm = commonMode[1]
-                
-##                 ## if commonMode[2] == None:
-##                 ##     if xm > 0.5:
-##                 ##         beta = 2.0
-##                 ##         alpha = 1.0/(1.0 - xm)
-##                 ##     else:
-##                 ##         alpha = 2.0
-##                 ##         beta = 1.0/xm
-##                 ## else:
-##                 ##     alpha = commonMode[2][0]
-##                 ##     beta = commonMode[2][1]
-##                 ## if Debug:
-##                 ##     print 'alpha,beta', alpha,beta
-##                 for a in actionsList:
-##                     if actions[a]['type'] == 'advantageous':
-##                         # xm = 0.7 sdtdev = 0.15
-##                         alpha = 5.8661
-##                         beta = 2.62203
-##                     elif actions[a]['type'] == 'cheap':
-##                         # xm = 0.3, stdev = 0.15
-##                         alpha = 2.62203
-##                         beta = 5.8661
-##                     else:
-##                         # xm = 0.5, stdev = 0.15
-##                         alpha = 5.05556
-##                         beta = 5.05556
-                    
-##                     u = random.betavariate(alpha,beta)
-##                     randeval = (u * (M-m)) + m
-##                     if criteria[g]['preferenceDirection'] == 'max':
-##                         evaluation[g][a] = Decimal(str(round(randeval,digits)))
-##                     else:
-##                         evaluation[g][a] = Decimal(str(-round(randeval,digits)))
-##                     ## if Debug:
-##                     ##     print 'alpha,beta,u,m,M,randeval',alpha,beta,u,m,M,randeval
-                        
-
- 
-##         if Debug:
-##             print evaluation
-
-##         ## # restrict ordinal criteria to integer (0 - 10) scale
-##         ## for g in criteriaList:
-##         ##     if criteria[g]['scaleType'] == 'ordinal':
-##         ##         for a in actionsList:
-##         ##             ## if Debug:
-##         ##             ##     print 'commonThresholds = ', commonThresholds
-##         ##             ##     print '-- >>', evaluation[g][a],
-##         ##             if commonThresholds == None:
-##         ##                 ## evaluation[g][a] = Decimal(str(round(evaluation[g][a]/Decimal("10.0"),0)))
-##         ##                 evaluation[g][a] = Decimal(str(round(evaluation[g][a],0)))
-##         ##             else:
-##         ##                 evaluation[g][a] = Decimal(str(round(evaluation[g][a],-1)))
-##         ##             ## if Debug:
-##         ##             ##     print evaluation[g][a]
-##         # restrict ordinal criteria to integer values
-##         for g in criteriaList:
-##             if criteria[g]['scaleType'] == 'ordinal':
-##                 for a in actionsList:
-##                     if Debug:
-##                         print '-- >>', evaluation[g][a],
-##                     evaluation[g][a] = Decimal(str(round(evaluation[g][a],0)))
-##                     if Debug:
-##                         print evaluation[g][a]
-            
-        
-##             # generate discrimination thresholds
-##         self.criteriaWeightMode = weightMode
-##         self.criteria = copy.deepcopy(criteria)
-##         self.evaluation = copy.deepcopy(evaluation)
-##         self.weightPreorder = self.computeWeightPreorder()
-##         self.computePerformanceDifferences(Debug=False)
-##         if Debug:
-##             print 'commonPercentiles=', commonPercentiles
-##         if commonPercentiles == None:
-##             quantile = {'ind':5, 'pref':10 , 'veto':95}
-##         else:
-##             quantile = commonPercentiles
-##         for c in criteriaList:
-##             if self.criteria[c]['scaleType'] == 'cardinal':
-##                 self.criteria[c]['thresholds'] = {}
-##                 vx = self.criteria[c]['performanceDifferences']
-##                 nv = len(vx)
-##                 if Debug:
-##                     print '=====>',c
-##                     print vx
-##                     print nv
-##                 threshold = {}
-##                 for x in quantile:
-##                     if Debug:
-##                         print '-->', x, quantile[x],
-
-##                     if quantile[x] == -1:
-##                         pass
-##                     else:
-##                         if quantile[x] == 0:
-##                             threshold[x] = vx[0]
-##                         elif quantile[x] == 100:
-##                             threshold[x] = vx[nv-1]
-##                         else:
-##                             kq = int(math.floor(float(quantile[x]*(nv-1))/100.0))
-##                             r = ((nv-1)*quantile[x])% 100
-##                             if Debug:
-##                                 print kq,r,
-
-##                             ## if kq == nv-1:
-##                             ##     kqplus = nv-1
-##                             ## else:
-##                             ##     kq_1 = kq - 1
-##                             threshold[x] = vx[kq] + (Decimal(str(r))/Decimal('100.0')) * (vx[kq+1]-vx[kq])
-##                             if Debug:
-##                                 print threshold[x]
-
-
-
-##                 for x in threshold:
-##                     self.criteria[c]['thresholds'][x] = (threshold[x],Decimal('0.0'))
-
-##             if Comments:
-##                 print 'criteria',c,' default thresholds:'
-##                 print self.criteria[c]['thresholds']
-
                 
 #############################33
 # XML encoded stored PerformanceTableau Class instances
@@ -5027,24 +4826,38 @@ if __name__ == "__main__":
     
     print('*-------- Testing classes and methods -------')
 
-    ## t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
+##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
     t = RandomCBPerformanceTableau(numberOfCriteria=13,
                                    numberOfActions=20,
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
                                    Debug=False)
-##    t = RandomCoalitionsPerformanceTableau(numberOfActions=10,
-##                                           numberOfCriteria=5,
+##    t = RandomCoalitionsPerformanceTableau(numberOfActions=20,
+##                                           numberOfCriteria=13,
 ##                                           Coalitions=False,
 ##                                           RandomCoalitions=True,
-##                                           weightDistribution="equicoalitions")
-    t.showAll()
-    t.save('testSize1')
-    pt1 = PartialPerformanceTableau(t)
-    pt1.showAll()
-    pt2 = PartialPerformanceTableau(t,actionsSubset=['a01','a02'],criteriaSubset=['g01','g03'])
-    pt2.showAll()
+##                                           weightDistribution="equicoalitions",
+##                                           Debug=True)
+##    t.showAll()
+##    t.saveXMCDA2('test')
+##    t = XMCDA2PerformanceTableau('spiegel2004')
+##    t = XMCDA2PerformanceTableau('uniSorting')
+    from weakOrders import *
+    qsrbc = QuantilesRankingDigraph(t,LowerClosed=True,Threading=False)
+    qsrbc.showSorting()
+    actionsList = qsrbc.computeQsRbcRanking()
+    
+##    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
+##    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=True))
+##    t.showHTMLPerformanceHeatmap(actionsList=actionsList,colorLevels=7,Ranked=True)
+    t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,Threading=True)
+##    t.showHTMLPerformanceHeatmap(colorLevels=7,Threading=False)
+##    t.showHTMLPerformanceHeatmap()
+##    pt1 = PartialPerformanceTableau(t)
+##    pt1.showAll()
+##    pt2 = PartialPerformanceTableau(t,actionsSubset=['a01','a02'],criteriaSubset=['g01','g03'])
+##    pt2.showAll()
     
 ##    ## t = PerformanceTableau('test')
 ##    t.saveXMCDA2('test',servingD3=False)

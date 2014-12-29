@@ -62,6 +62,34 @@ class Graph(object):
             self.size = len(self.edges)
             self.gamma = self.gammaSets()
 
+    def setEdgeValue(self,edge,value,Comments=False):
+        """
+        Wrapper for updating the charactreistic valuation of a Graph instance.
+        The egde parameter consists in a pair of vertices;
+        edge = ('v1','v2') for instance.
+        The new value must be in the limits of the valuation domain.
+        """
+        from decimal import Decimal
+        # check vertices' existance
+        verticesIds = [x for x in self.vertices]
+        if (edge[0] not in verticesIds) or (edge[1] not in verticesIds):
+            self.showShort()
+            print('!!! Error: edge %s not found !!!' % str(edge))
+            return         
+        # check new edge value
+        Min = self.valuationDomain['min']
+        Max = self.valuationDomain['max']
+        newValue = Decimal(str(value))
+        if newValue > Max or value < Min:
+            print('!!! Error: edge value %s out of range !!!' % str(value))
+            print(self.valuationDomain)
+            return
+        # set new value
+        self.edges[frozenset(edge)] = Decimal(str(value))
+        self.gamma = self.gammaSets()
+        if Comments:
+            print('edge %s put to value %s.' % (edge,str(value)))
+                  
     def graph2Digraph(self):
         """
         Converts a Graph object into a Digraph object.
@@ -172,7 +200,7 @@ class Graph(object):
                 gamma[e2].add(e1)
         return gamma
 
-    def chordlessPaths(self,Pk,v0, Comments = False, Debug = False):
+    def _chordlessPaths(self,Pk,v0, Comments = False, Debug = False):
         """
         recursice chordless precycle (len > 3) construction:
             Pk is the current pre chordless cycle
@@ -235,7 +263,7 @@ class Graph(object):
                         P.append(v)
                         if Debug:
                             print('P,v0',P,v0)
-                        if self.chordlessPaths(P,v0,Comments,Debug):
+                        if self._chordlessPaths(P,v0,Comments,Debug):
                             # we continue with the current chordless precycle
                             detectedChordlessCycle=True
             if Debug:
@@ -253,7 +281,7 @@ class Graph(object):
         for v in verticesKeys:
             P = [v]
             self.xCC = []
-            if self.chordlessPaths(P,v,Comments=Comments,Debug=Debug):
+            if self._chordlessPaths(P,v,Comments=Comments,Debug=Debug):
                 chordlessCycles += self.xCC
         self.chordlessCycles = chordlessCycles
         chordlessCyclesList = [ (x,frozenset(x)) for x in chordlessCycles]
@@ -282,7 +310,7 @@ class Graph(object):
         """
         import os
         if noSilent:
-            print('*---- exporting a dot file dor GraphViz tools ---------*')
+            print('*---- exporting a dot file for GraphViz tools ---------*')
         vertexkeys = [x for x in self.vertices]
         n = len(vertexkeys)
         edges = self.edges
@@ -411,9 +439,10 @@ class RandomGraph(Graph):
         from random import random
         self.name = 'randomGraph'
         self.order = order
+        nd = len(str(order))
         vertices = dict()
         for i in range(order):
-            vertexKey = 'v%s' % (str(i+1))
+            vertexKey = ('v%%0%dd' % nd) % (i+1)
             vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
         self.valuationDomain = {'min':-1,'med':0,'max':1}

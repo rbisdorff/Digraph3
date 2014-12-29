@@ -9,6 +9,7 @@ linearOrders.py
 weakOrders.py
 iqagent.py
 graphs.py
+randomNumbers.py
 htmlmodel.py
 makefile
 MANIFEST
@@ -31,6 +32,7 @@ test/noseTestsPerfTab.py
 test/noseTestsVotingDigraph.py
 test/noseTestsLinearOrder.py
 test/noseTestsWeakOrders.py
+test/noseTestsRandomNumbers.py
 test/testAVprofile.py
 test/testapprovalvotingprofile.py
 test/testdecimal.py
