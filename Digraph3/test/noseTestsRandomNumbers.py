@@ -90,3 +90,23 @@ def testExtendedTriangularRandomVariable():
                                        float(frequencies[x][2])/float(Nsim))
               )
     print('# of simulations = %d' % Nsim)
+
+def testCauchyRandomVariable():
+    print('==>> Testing Cauchy number generator')
+    rdv3 = CauchyRandomVariable(seed=1)
+    rdv4 = CauchyRandomVariable(position=10.0,scale=5.0)
+                
+    ## sample Cauchy random variable and count frequencies of obtained values
+    Nsim = 10**4
+    modulus = 128
+    fo = open('testCauchy.csv','w')
+    fo.write('"x1","x2"\n')
+
+    for i in range(Nsim):
+        x1 = rdv3.random()
+        x2 = rdv4.random()
+        fo.write('%.4f,%4f\n'%(x1,x2))
+
+    fo.close()     
+    print('# of Cauchy simulations = %d' % Nsim)
+

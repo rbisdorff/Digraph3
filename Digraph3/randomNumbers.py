@@ -25,6 +25,11 @@ class DiscreteRandomVariable():
     """
     Discrete random variable generator
 
+    Parameters:
+        | discreteLaw := dictionary with integer values
+        |                as keys and probabilities as float values,
+        | seed := integer for fixing the sequence generation.
+
     Example usage:
         >>> from randomNumbers import DiscreteRandomVariable
         >>> discreteLaw = {0:0.0478,
@@ -64,10 +69,6 @@ class DiscreteRandomVariable():
     def __init__(self, discreteLaw = None, seed = None, Debug=False):
         """
         constructor for discrete random variables with
-        Parameters:
-        - discreteLaw := dictionary with integer values
-                         as keys and probabilities as float values,
-        - seed := integer for fixing the sequence generation.
         """
         import random
         self._random = random
@@ -121,28 +122,28 @@ class DiscreteRandomVariable():
 class ExtendedTriangularRandomVariable():
     """
     Extended triangular random variable generator
+
+    Parameters:
+        - mode := most frequently observed value
+        - probRepart := probability mass distributed until the mode
+        - seed := integer for fixing the sequence generation.
     """
     
     def __init__(self, lowLimit=0.0, highLimit = 1.0,
                  mode=None, probRepart=0.5, seed=None, Debug=False):
         """
         constructor for extended triangular random variables with
-        Parameters:
-        - mode := most frequently observed value
-        - probRepart := probability mass distributed until the mode
-        - seed := integer for fixing the sequence generation.
         """
         import random
         self._random = random
         self.seed = seed
         if self.seed != None:
-            self._random.seed = seed
+            self._random.seed(seed)
             if Debug:
                 print('seed %d is used' % (seed))
         else:
             if Debug:
                 print('Default seed is used')
-            
         self.m = lowLimit
         self.M = highLimit
             
@@ -176,10 +177,57 @@ class ExtendedTriangularRandomVariable():
             randeval = self.M - sqrt((1-u)/(1-self.r))*(self.M-self.xm)
 
         return randeval
+
+#-------------------
                   
+class CauchyRandomVariable():
+    """
+    Cauchy random variable generator
+
+    Parameters:
+        - position: median (default=0.0) of the Cauchy distribution
+        - scale: typical spread (default=1.0) with respect to median 
+        - seed := integer for fixing the sequence generation.
+    
+    Cauchy quantile (inverse cdf) function:
+        Q(x/position,scale) = position + scale*tan[pi(x-1/2)]
+
+    """
+    
+    def __init__(self, position=0.0, scale = 1.0,
+                 seed=None, Debug=False):
+        """
+        constructor for Cauchy random variables with
+        """
+        import random
+        self._random = random
+        self.seed = seed
+        if self.seed != None:
+            self._random.seed(seed)
+            if Debug:
+                print('seed %d is used' % (seed))
+        else:
+            if Debug:
+                print('Default seed is used')
+        self.position = position
+        self.scale = scale            
+        
+    def random(self):
+        """
+        generating an extended triangular random number.
+        """
+        
+        from math import pi,tan
+
+        prob = self._random.random()
+
+        randeval = self.position + self.scale*( tan( pi*(prob - 0.5) ) )                  
+
+        return randeval
+            
 
 #----------testing the code ----------------
-if __name__ == "__main__":
+if __name__ == "__main__":    
 #------------  Discrete number generator
     ## initialize the discrete random variable 
     discreteLaw = {0:0.0478,
@@ -226,7 +274,7 @@ if __name__ == "__main__":
                                             probRepart=0.5,
                                             seed=1)
 
-    ## sample discrete random variable and count frequencies of obtained values
+    ## sample extTriangular random variable and count frequencies of obtained values
     Nsim = 10**4
     modulus = 128
     frequencies = {}
@@ -260,4 +308,23 @@ if __name__ == "__main__":
                                        float(frequencies[x][2])/float(Nsim))
               )
     print('# of simulations = %d' % Nsim)
+
+#-------------- Cauchy number generator
+    rdv3 = CauchyRandomVariable(seed=1)
+    rdv4 = CauchyRandomVariable(position=10.0,scale=5.0)
+                
+    ## sample Cauchy random variable and count frequencies of obtained values
+    Nsim = 10**4
+    modulus = 128
+    fo = open('testCauchy.csv','w')
+    fo.write('"x1","x2"\n')
+
+    for i in range(Nsim):
+        x1 = rdv3.random()
+        x2 = rdv4.random()
+        fo.write('%.4f,%4f\n'%(x1,x2))
+
+    fo.close()     
+    print('# of Cauchy simulations = %d' % Nsim)
+
 
