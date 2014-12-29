@@ -61,7 +61,7 @@ class DiscreteRandomVariable():
         >>> print ('# of valid samples = %d' % counts)
     """
     
-    def __init__(self, discreteLaw = None, seed = None):
+    def __init__(self, discreteLaw = None, seed = None, Debug=False):
         """
         constructor for discrete random variables with
         Parameters:
@@ -74,15 +74,17 @@ class DiscreteRandomVariable():
         self.seed = seed
         if self.seed != None:
             self._random.seed(self.seed)
-            print('seed %d is used' % (seed))
+            if Debug:
+                print('seed %d is used' % (seed))
         else:
-            print ('No seed is used')
+            if Debug:
+                print ('No seed is used')
             
         if discreteLaw != None:
             self.discreteLaw = discreteLaw
             self.F = self._cumulative()
         else:
-            print('A discrete law is required here!')
+            print('!!! Error: A discrete law is required here!')
         
 
     def _cumulative(self):
@@ -122,7 +124,7 @@ class ExtendedTriangularRandomVariable():
     """
     
     def __init__(self, lowLimit=0.0, highLimit = 1.0,
-                 mode=None, probRepart=0.5, seed = None):
+                 mode=None, probRepart=0.5, seed=None, Debug=False):
         """
         constructor for extended triangular random variables with
         Parameters:
@@ -135,9 +137,11 @@ class ExtendedTriangularRandomVariable():
         self.seed = seed
         if self.seed != None:
             self._random.seed = seed
-            print('seed %d is used' % (seed))
+            if Debug:
+                print('seed %d is used' % (seed))
         else:
-            print('Default seed is used')
+            if Debug:
+                print('Default seed is used')
             
         self.m = lowLimit
         self.M = highLimit
@@ -148,14 +152,14 @@ class ExtendedTriangularRandomVariable():
             if mode >= lowLimit and mode <= highLimit: 
                 self.xm = mode
             else:
-                print('Error: mode out of value range !!')
+                print('!!! Error: mode out of value range !!')
         if probRepart == None:
             self.r = 0.5
         else:
             if probRepart >= 0.0 and probRepart <= 1.0:
                 self.r = probRepart
             else:
-                print('Error: mode out of value range !!')
+                print('!!! Error: mode out of value range !!')
             
         
     def random(self):
