@@ -194,7 +194,7 @@ class CauchyRandomVariable():
 
     .. image:: cauchyDistribution.png
         :alt: Cauchy Distribution
-        :width: 400 px
+        :width: 500 px
         :align: center
 
 
