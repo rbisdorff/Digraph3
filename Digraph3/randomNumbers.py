@@ -127,6 +127,13 @@ class ExtendedTriangularRandomVariable():
         - mode := most frequently observed value
         - probRepart := probability mass distributed until the mode
         - seed := integer for fixing the sequence generation.
+
+    .. image:: extTrDistribution.png
+        :alt: Extended triangular distribution
+        :width: 500 px
+        :align: center
+
+
     """
     
     def __init__(self, lowLimit=0.0, highLimit = 1.0,
