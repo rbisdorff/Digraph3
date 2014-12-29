@@ -192,6 +192,12 @@ class CauchyRandomVariable():
     Cauchy quantile (inverse cdf) function:
         Q(x|position,scale) = position + scale*tan[pi(x-1/2)]
 
+    .. image:: cauchyDistribution.png
+        :alt: Cauchy Distribution
+        :width: 300 px
+        :align: center
+
+
     """
     
     def __init__(self, position=0.0, scale = 1.0,
