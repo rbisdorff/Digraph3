@@ -1675,9 +1675,9 @@ Indices and tables
 References
 ..........
 
-.. [FMCAA] O. Häggström (2002) *Finite Markov Chians and Algorithmic Applications*. Cambridge University Press.
+.. [FMCAA] O. Häggström (2002) *Finite Markov Chains and Algorithmic Applications*. Cambridge University Press.
 
-.. [ADT-L2] R. Bisdorff (2014)  *Who wins the election*. MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( `downloadable here <_static/adtVoting-2x2.pdf>`_ )
+.. [ADT-L2] R. Bisdorff (2014)  *Who wins the election*? MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( `downloadable here <_static/adtVoting-2x2.pdf>`_ )
 
 .. [ADT-L7] R. Bisdorff (2014)  *Best multiple criteria choice: the Rubis outranking method*. MICS Algorithmic Decision Theory course, Lecture 7. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( `downloadable here <_static/adtOutranking-2x2.pdf>`_ )
 
