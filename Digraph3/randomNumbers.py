@@ -133,7 +133,6 @@ class ExtendedTriangularRandomVariable():
         :width: 500 px
         :align: center
 
-
     """
     
     def __init__(self, lowLimit=0.0, highLimit = 1.0,
