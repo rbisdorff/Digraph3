@@ -30,13 +30,13 @@ from decimal import Decimal
 class RandomDigraph(Digraph):
     """
     Specialization of the general Digraph class for generating
-    temporary crisp (irreflexive) random digraphs.
+    temporary crisp (irreflexive) random crisp digraphs.
     
     *Parameters*:
         * order (default = 10);
         * arc_probability (in [0.,1.], default=0.5)
-        * If Bipolar=True, valuation domain = {-1,0,1}
-        * The random generator is seeded is sedd != None
+        * If Bipolar=True, valuation domain = {-1,1} otherwise = {0,1}
+        * Is seed != None, the random generator is seeded 
 
      """
 
@@ -96,7 +96,7 @@ class RandomValuationDigraph(Digraph):
           Otherwise, decimal precision.
         * Normalized = True (r in [-1,1], r in [0,1] if False/default);
         * hasIntegerValuation = False (default)
-        * If seed != none, the random generator is seeded.
+        * If seed != none, the random generator is seeded
 
 
     Example python3 session:
