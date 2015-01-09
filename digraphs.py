@@ -9317,7 +9317,7 @@ class PolarisedDigraph(Digraph):
          * If KeepValues = False, the polarisation results in  a three valued crisp result.
          * If AlphaCut = True a genuine one-sided True-oriented cut is operated.
          * If StrictCut = True, the cut level value is excluded resulting in an open polarised valuation domain.
-           By default the polaried domain is closed and the indeterminate valuation domain is open.
+           By default the polarised valuation domain is closed and the complementary indeterminate domain is open.
 
     """
     def __init__(self,digraph=None,level=None,KeepValues=True,AlphaCut=False,StrictCut=False):
