@@ -9550,7 +9550,7 @@ class DualDigraph(Digraph):
                 relationOut[a][b] = Max - relationIn[a][b] + Min
         return relationOut
 
-class PreferenceDigraph(Digraph):
+class _PreferenceDigraph(Digraph):
     """
     Initiates the valued difference S(a,b) - S(b,a) of a Digraph instance.
     """
@@ -9621,50 +9621,6 @@ class AsymmetricPartialDigraph(Digraph):
                 else:
                     relationOut[a][b] = Med
         return relationOut
-
-##class AsymmetricDigraph(Digraph):
-##    """
-##    Renders the asymmetric of a Digraph instance
-##    """
-##    def __init__(self,digraph):
-##        self.valuationdomain = digraph.valuationdomain
-##        Max = self.valuationdomain['max']
-##        Med = self.valuationdomain['med']
-##        self.name = 'asymmetric_' + str(digraph.name)
-##        self.actions = digraph.actions
-##        self.relation = self.constructRelation(digraph.relation)
-##        self.order = len(self.actions)
-##        self.gamma = self.gammaSets()
-##        self.notGamma = self.notGammaSets()
-##
-##    def constructRelation(self,relationIn):
-##        """
-##        Parameters:
-##            relation and cut level.
-##
-##        Renders the polarised relation.
-##
-##        """
-##        actions = self.actions
-##        Min = self.valuationdomain['min']
-##        Max = self.valuationdomain['max']
-##        Med = self.valuationdomain['med']
-##        relationOut = {}
-##        for a in actions:
-##            relationOut[a] = {}
-##            for b in actions:
-##                relationOut[a][b] = min( relationIn[a][b], (Max-relationIn[b][a]+Min) )
-##                ## if a != b:
-##                ##     if relationIn[a][b] >= Med and relationIn[b][a] <= Med:
-##                ##         relationOut[a][b] = relationIn[a][b]
-##                ##     elif relationIn[a][b] <= Med and relationIn[b][a] >= Med:
-##                ##         relationOut[a][b] = relationIn[a][b]
-##                ##     else:
-##                ##         relationOut[a][b] = Med
-##                ##     ## relationOut[a][b] = min(relationIn[a][b],Max-relationIn[b][a]+Min)
-##                ## else:
-##                ##     relationOut[a][b] = Med
-##        return relationOut
 
 class SymmetricPartialDigraph(Digraph):
     """
@@ -9742,12 +9698,12 @@ class kChoicesDigraph(Digraph):
             actions[frozenset(kChoice)] = {'name': cn, 'comment': commentString}
         self.actions = actions
         self.order = len(self.actions)
-        self.relation = self.computeRelation(drelation)
+        self.relation = self._computeRelation(drelation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
 
-    def computeRelation(self,relation):
+    def _computeRelation(self,relation):
         """
         computing the relation on kChoices
         """
