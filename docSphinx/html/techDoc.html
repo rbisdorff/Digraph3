@@ -1059,7 +1059,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2016,7 +2016,7 @@ temporary Kneser digraphs</p>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <p>Renders the polarised valuation of a Digraph class instance:</p>
 <dl class="docutils">
-<dt>Parameters:</dt>
+<dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
 <li>If level = None, a default 75% cut level (0.5 in a normalized valuation domain) is used.</li>
 <li>If KeepValues = False, the polarisation results in  a three valued crisp result.</li>
@@ -2050,7 +2050,6 @@ temporary crisp (irreflexive) random digraphs.</p>
 <dd><ul class="first last simple">
 <li>order (default = 10);</li>
 <li>arc_probability (in [0.,1.], default=0.5)</li>
-<li></li>
 </ul>
 </dd>
 </dl>
@@ -2072,11 +2071,8 @@ with fixed degree sequence.</p>
 <dt id="digraphs.RandomFixedSizeDigraph">
 <em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">RandomFixedSizeDigraph</tt><big>(</big><em>order=7</em>, <em>size=14</em><big>)</big><a class="headerlink" href="#digraphs.RandomFixedSizeDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd>order and size</dd>
-</dl>
-<p>Specialization of Digraph class for random fixed size instances.</p>
+<p>Generates a random crisp digraph with a fixed size, by instantiating a fixed numbers arcs
+from random choices in the set of potential oriented pairs of nodes numbered from 1 to order.</p>
 </dd></dl>
 
 <dl class="class">
