@@ -8288,6 +8288,11 @@ class RandomDigraph(Digraph):
         * order (default = 10);
         * arc_probability (in [0.,1.], default=0.5)
 
+    .. warning::
+
+       Obsolete version. Will be removed in the future. Instead, use
+       the new :py:class:`randomDigraphs.RandomDigraph` constructor. 
+
      """
 
     def __init__(self,order=9,arcProbability=0.5,hasIntegerValuation=True, Bipolar=False):
