@@ -9313,11 +9313,11 @@ class PolarisedDigraph(Digraph):
     Renders the polarised valuation of a Digraph class instance:
 
     Parameters:
-         * If level = None, a default 75% cut level is used.
-         * If KeepValues = False, the polarisation gives a three valued crisp result
+         * If level = None, a default 75% cut level (0.5 in a normalized valuation domain) is used.
+         * If KeepValues = False, the polarisation results in  a three valued crisp result.
          * If AlphaCut = True a genuine one-sided True-oriented cut is operated.
-         * If StrictCut = True, the cut level value is excluded resulting in an open polarisation.
-           By default the polarisation is closed
+         * If StrictCut = True, the cut level value is excluded resulting in an open polarised valuation domain.
+           By default the polaried domain is closed and the indeterminate valuation domain is open.
 
     """
     def __init__(self,digraph=None,level=None,KeepValues=True,AlphaCut=False,StrictCut=False):
