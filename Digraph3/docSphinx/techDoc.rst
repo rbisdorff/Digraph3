@@ -154,7 +154,7 @@ Back to the :ref:`Introduction-label`
 .. _randomDigraphs-label:
 
 randomDigraphs module
------------------
+---------------------
 
 .. automodule:: randomDigraphs
    :member-order: alphabetical

@@ -1065,7 +1065,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2059,6 +2059,11 @@ temporary crisp (irreflexive) random digraphs.</p>
 </ul>
 </dd>
 </dl>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Obsolete version. Will be removed in the future. Instead, use
+the new <a class="reference internal" href="#randomDigraphs.RandomDigraph" title="randomDigraphs.RandomDigraph"><tt class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomDigraph</span></tt></a> constructor.</p>
+</div>
 </dd></dl>
 
 <dl class="class">
@@ -2895,7 +2900,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3625,7 +3630,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4988,9 +4993,9 @@ ranking-by-Rubis-choosing orderings.</p>
 
 <p>Back to the <a class="reference internal" href="index.html#introduction-label"><em>Introduction</em></a></p>
 </div>
-<div class="section" id="randomdigraphs-module">
-<span id="randomdigraphs-label"></span><h2>randomDigraphs module<a class="headerlink" href="#randomdigraphs-module" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-randomDigraphs"></span><dl class="class">
+<div class="section" id="module-randomDigraphs">
+<span id="randomdigraphs-module"></span><span id="randomdigraphs-label"></span><h2>randomDigraphs module<a class="headerlink" href="#module-randomDigraphs" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
 <dt id="randomDigraphs.RandomDigraph">
 <em class="property">class </em><tt class="descclassname">randomDigraphs.</tt><tt class="descname">RandomDigraph</tt><big>(</big><em>order=9</em>, <em>arcProbability=0.5</em>, <em>hasIntegerValuation=True</em>, <em>Bipolar=False</em><big>)</big><a class="headerlink" href="#randomDigraphs.RandomDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
@@ -5290,7 +5295,7 @@ temporary bipolar-valued weak tournaments</p>
 <li><a class="reference internal" href="#module-sortingDigraphs">sortingDigraphs module</a></li>
 <li><a class="reference internal" href="#module-linearOrders">linearOrders module</a></li>
 <li><a class="reference internal" href="#module-weakOrders">weakOrders module</a></li>
-<li><a class="reference internal" href="#randomdigraphs-module">randomDigraphs module</a></li>
+<li><a class="reference internal" href="#module-randomDigraphs">randomDigraphs module</a></li>
 <li><a class="reference internal" href="#module-randomNumbers">randomNumbers module</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 <li><a class="reference internal" href="#tutorials">Tutorials</a></li>
