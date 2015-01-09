@@ -9584,9 +9584,9 @@ class AsymmetricPartialDigraph(Digraph):
     """
     Renders the asymmetric part of a Digraph instance
 
-    .. warning::
+    .. note::
 
-         Note that the non asymmetric pairs are all put to the median indeterminate
+         The non asymmetric links are all put to the median indeterminate
          characteristic value!
 
     """
@@ -9629,9 +9629,9 @@ class SymmetricPartialDigraph(Digraph):
     """
     Renders the symmetric part of a Digraph instance.
     
-    ..caution::
+    .. note::
 
-           The not symmetric links of relationIn are all put to the meadian characteristics value!.
+           The not symmetric links are all put to the meadian characteristics value!.
            
     """
     def __init__(self,digraph):
