@@ -10,6 +10,7 @@ weakOrders.py
 iqagent.py
 graphs.py
 randomNumbers.py
+randomDigraphs.py
 htmlmodel.py
 makefile
 MANIFEST
@@ -33,6 +34,7 @@ test/noseTestsVotingDigraph.py
 test/noseTestsLinearOrder.py
 test/noseTestsWeakOrders.py
 test/noseTestsRandomNumbers.py
+test/noseTestsRandomDigraph.py
 test/testAVprofile.py
 test/testapprovalvotingprofile.py
 test/testdecimal.py
@@ -51,8 +53,5 @@ examples/samplePerformaceTableau.py
 examples/sampleDigraph.xml
 examples/rubis2xmcda.py
 examples/xmcda2Rubis.xsl
-docSphinx/Makefile
-docSphinx/conf.py
-docSphinx/index.rst
 js/d3.v3.js
 
