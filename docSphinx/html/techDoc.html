@@ -180,7 +180,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">CirculantDigraph</tt><big>(</big><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><big>)</big><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1065,7 +1065,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1962,7 +1962,7 @@ equivalence valuations.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">GridDigraph</tt><big>(</big><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><big>)</big><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1993,7 +1993,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">digraphs.</tt><tt class="descname">KneserDigraph</tt><big>(</big><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><big>)</big><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2894,7 +2894,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3624,7 +3624,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4991,7 +4991,7 @@ ranking-by-Rubis-choosing orderings.</p>
 <span id="randomdigraphs-module"></span><span id="randomdigraphs-label"></span><h2>randomDigraphs module<a class="headerlink" href="#module-randomDigraphs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="randomDigraphs.RandomDigraph">
-<em class="property">class </em><tt class="descclassname">randomDigraphs.</tt><tt class="descname">RandomDigraph</tt><big>(</big><em>order=9</em>, <em>arcProbability=0.5</em>, <em>hasIntegerValuation=True</em>, <em>Bipolar=False</em><big>)</big><a class="headerlink" href="#randomDigraphs.RandomDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">randomDigraphs.</tt><tt class="descname">RandomDigraph</tt><big>(</big><em>order=9</em>, <em>arcProbability=0.5</em>, <em>hasIntegerValuation=True</em>, <em>Bipolar=False</em>, <em>seed=None</em><big>)</big><a class="headerlink" href="#randomDigraphs.RandomDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary crisp (irreflexive) random digraphs.</p>
@@ -5000,6 +5000,8 @@ temporary crisp (irreflexive) random digraphs.</p>
 <dd><ul class="first last simple">
 <li>order (default = 10);</li>
 <li>arc_probability (in [0.,1.], default=0.5)</li>
+<li>If Bipolar=True, valuation domain = {-1,0,1}</li>
+<li>The random generator is seeded is sedd != None</li>
 </ul>
 </dd>
 </dl>
@@ -5007,7 +5009,7 @@ temporary crisp (irreflexive) random digraphs.</p>
 
 <dl class="class">
 <dt id="randomDigraphs.RandomFixedDegreeSequenceDigraph">
-<em class="property">class </em><tt class="descclassname">randomDigraphs.</tt><tt class="descname">RandomFixedDegreeSequenceDigraph</tt><big>(</big><em>order=7, degreeSequence=[3, 3, 2, 2, 1, 1, 0]</em><big>)</big><a class="headerlink" href="#randomDigraphs.RandomFixedDegreeSequenceDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">randomDigraphs.</tt><tt class="descname">RandomFixedDegreeSequenceDigraph</tt><big>(</big><em>order=7, degreeSequence=[3, 3, 2, 2, 1, 1, 0], seed=None</em><big>)</big><a class="headerlink" href="#randomDigraphs.RandomFixedDegreeSequenceDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary random crisp graphs (symmetric digraphs) with a fixed sequence of degrees.</p>
@@ -5023,7 +5025,7 @@ temporary random crisp graphs (symmetric digraphs) with a fixed sequence of degr
 
 <dl class="class">
 <dt id="randomDigraphs.RandomFixedSizeDigraph">
-<em class="property">class </em><tt class="descclassname">randomDigraphs.</tt><tt class="descname">RandomFixedSizeDigraph</tt><big>(</big><em>order=7</em>, <em>size=14</em><big>)</big><a class="headerlink" href="#randomDigraphs.RandomFixedSizeDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">randomDigraphs.</tt><tt class="descname">RandomFixedSizeDigraph</tt><big>(</big><em>order=7</em>, <em>size=14</em>, <em>seed=None</em><big>)</big><a class="headerlink" href="#randomDigraphs.RandomFixedSizeDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <p>Generates a random crisp digraph with a fixed size, by instantiating a fixed numbers of arcs
 from random choices in the set of potential oriented pairs of nodes numbered from 1 to order.</p>
@@ -5031,7 +5033,7 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 
 <dl class="class">
 <dt id="randomDigraphs.RandomRegularDigraph">
-<em class="property">class </em><tt class="descclassname">randomDigraphs.</tt><tt class="descname">RandomRegularDigraph</tt><big>(</big><em>order=7</em>, <em>degree=2</em><big>)</big><a class="headerlink" href="#randomDigraphs.RandomRegularDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">randomDigraphs.</tt><tt class="descname">RandomRegularDigraph</tt><big>(</big><em>order=7</em>, <em>degree=2</em>, <em>seed=None</em><big>)</big><a class="headerlink" href="#randomDigraphs.RandomRegularDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -5042,19 +5044,24 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 
 <dl class="class">
 <dt id="randomDigraphs.RandomTournament">
-<em class="property">class </em><tt class="descclassname">randomDigraphs.</tt><tt class="descname">RandomTournament</tt><big>(</big><em>order=10</em>, <em>ndigits=2</em>, <em>isCrisp=True</em>, <em>valuationDomain=None</em><big>)</big><a class="headerlink" href="#randomDigraphs.RandomTournament" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">randomDigraphs.</tt><tt class="descname">RandomTournament</tt><big>(</big><em>order=10</em>, <em>ndigits=2</em>, <em>isCrisp=True</em>, <em>valuationDomain=None</em>, <em>seed=None</em><big>)</big><a class="headerlink" href="#randomDigraphs.RandomTournament" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
-<dl class="docutils">
-<dt>Parameter:</dt>
-<dd>order = n &gt; 0</dd>
-</dl>
 <p>Specialization of the general Digraph class for generating
 temporary weak tournaments</p>
+<dl class="docutils">
+<dt><em>Parameter</em>:</dt>
+<dd><ul class="first last simple">
+<li>order = n &gt; 0</li>
+<li>If valuationDomain = None, valuation is normalized (in [-1.0,1.0])</li>
+<li>If is Crips = True, valuation is polarized to min and max values</li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="class">
 <dt id="randomDigraphs.RandomTree">
-<em class="property">class </em><tt class="descclassname">randomDigraphs.</tt><tt class="descname">RandomTree</tt><big>(</big><em>numberOfNodes=5</em>, <em>ndigits=2</em>, <em>hasIntegerValuation=True</em><big>)</big><a class="headerlink" href="#randomDigraphs.RandomTree" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">randomDigraphs.</tt><tt class="descname">RandomTree</tt><big>(</big><em>numberOfNodes=5</em>, <em>ndigits=2</em>, <em>hasIntegerValuation=True</em>, <em>seed=None</em><big>)</big><a class="headerlink" href="#randomDigraphs.RandomTree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <p>Random generator for trees, using random Pruefer codes</p>
 <dl class="docutils">
@@ -5070,7 +5077,7 @@ temporary weak tournaments</p>
 
 <dl class="class">
 <dt id="randomDigraphs.RandomValuationDigraph">
-<em class="property">class </em><tt class="descclassname">randomDigraphs.</tt><tt class="descname">RandomValuationDigraph</tt><big>(</big><em>order=9</em>, <em>ndigits=2</em>, <em>Normalized=False</em>, <em>hasIntegerValuation=False</em><big>)</big><a class="headerlink" href="#randomDigraphs.RandomValuationDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">randomDigraphs.</tt><tt class="descname">RandomValuationDigraph</tt><big>(</big><em>order=9</em>, <em>ndigits=2</em>, <em>Normalized=False</em>, <em>hasIntegerValuation=False</em>, <em>seed=None</em><big>)</big><a class="headerlink" href="#randomDigraphs.RandomValuationDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary uniformly valuated random digraphs.</p>
@@ -5081,7 +5088,8 @@ temporary uniformly valuated random digraphs.</p>
 <li>ndigits &gt; 0, number of digits if hasIntegerValuation = True;
 Otherwise, decimal precision.</li>
 <li>Normalized = True (r in [-1,1], r in [0,1] if False/default);</li>
-<li>hasIntegerValuation = False (default).</li>
+<li>hasIntegerValuation = False (default)</li>
+<li>If seed != none, the random generator is seeded.</li>
 </ul>
 </dd>
 <dt>Example python3 session:</dt>
@@ -5130,14 +5138,22 @@ Otherwise, decimal precision.</li>
 
 <dl class="class">
 <dt id="randomDigraphs.RandomWeakTournament">
-<em class="property">class </em><tt class="descclassname">randomDigraphs.</tt><tt class="descname">RandomWeakTournament</tt><big>(</big><em>order=10</em>, <em>ndigits=2</em>, <em>hasIntegerValuation=False</em>, <em>weaknessDegree=0.25</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#randomDigraphs.RandomWeakTournament" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">randomDigraphs.</tt><tt class="descname">RandomWeakTournament</tt><big>(</big><em>order=10</em>, <em>ndigits=2</em>, <em>hasIntegerValuation=False</em>, <em>weaknessDegree=0.25</em>, <em>seed=None</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#randomDigraphs.RandomWeakTournament" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><tt class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></tt></a></p>
-<dl class="docutils">
-<dt>Parameter:</dt>
-<dd>order = n &gt; 0</dd>
-</dl>
 <p>Specialization of the general Digraph class for generating
 temporary bipolar-valued weak tournaments</p>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>order = n &gt; 0</li>
+<li>weaknessDegree in [0.0,1.0]: proportion of indeterminate links (default = 0.25)</li>
+<li>If hasIntegerValuation = True,
+valuation domain = [-pow(10,ndigits); + pow(10,ndigits)]
+else valuation domain = [-1.0,1.0]</li>
+<li>If seed != None, the random number generator is seeded</li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="index.html#introduction-label"><em>Introduction</em></a></p>
