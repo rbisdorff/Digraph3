@@ -9310,9 +9310,14 @@ class CompleteDigraph(Digraph):
 
 class PolarisedDigraph(Digraph):
     """
-    Renders the polarised valuation of digraph:
+    Renders the polarised valuation of a Digraph class instance:
+
+    Parameters:
+         * If level = None, a default 75% cut level is used.
+         * If KeepValues = False, the polarisation gives a three valued crisp result
          * If AlphaCut = True a genuine one-sided True-oriented cut is operated.
-         * If StrictCut = True, the cut level value is not included.
+         * If StrictCut = True, the cut level value is excluded resulting in an open polarisation.
+           By default the polarisation is closed
 
     """
     def __init__(self,digraph=None,level=None,KeepValues=True,AlphaCut=False,StrictCut=False):
@@ -9441,12 +9446,15 @@ class PolarisedDigraph(Digraph):
         return relationout
 
 
-class MedianExtendedDigraph(Digraph):
+class _MedianExtendedDigraph(Digraph):
     """
     Parameters:
         digraph + beta cut level between Med and Max.
 
-    Specialisation of Outranking relation.
+    .. warning::
+
+         The class is obsolete and is replaced by the genuine
+         PolarisedDigraph class flagged with KeepValues=True.
 
     """
     def __init__(self,digraph=None,Level=None):
@@ -9459,12 +9467,12 @@ class MedianExtendedDigraph(Digraph):
             Level = Max - (Max - Med)*0.5
         self.name = 'cut_' + str(Level)+ '_' + str(digraph.name)
         self.actions = digraph.actions
-        self.relation = self.constructRelation(digraph.relation, Level)
+        self.relation = self._constructRelation(digraph.relation, Level)
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def constructRelation(self,relationin, Level):
+    def _constructRelation(self,relationin, Level):
         """
         Parameters: relation and cut level.
         Renders the polarised relation.
