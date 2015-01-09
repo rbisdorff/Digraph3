@@ -39,6 +39,7 @@ class RandomDigraph(Digraph):
      """
 
     def __init__(self,order=9,arcProbability=0.5,hasIntegerValuation=True, Bipolar=False):
+
         arcProbability = Decimal(str(arcProbability))
         if arcProbability > Decimal("1.0"):
             print('Error: arc probability too high !!')
@@ -47,6 +48,7 @@ class RandomDigraph(Digraph):
         else:
             import copy
             from random import random
+            from digraphs import EmptyDigraph
 ##            g = RandomValuationDigraph(order=order,ndigits=0,hasIntegerValuation=hasIntegerValuation)
 ##            cutLevel = 1 - arcProbability
 ##            print(g.relation)
