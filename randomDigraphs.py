@@ -35,10 +35,14 @@ class RandomDigraph(Digraph):
     *Parameters*:
         * order (default = 10);
         * arc_probability (in [0.,1.], default=0.5)
+        * If Bipolar=True, valuation domain = {-1,0,1}
+        * The random generator is seeded is sedd != None
 
      """
 
-    def __init__(self,order=9,arcProbability=0.5,hasIntegerValuation=True, Bipolar=False):
+    def __init__(self,order=9,arcProbability=0.5,
+                 hasIntegerValuation=True, Bipolar=False,
+                 seed=None):
 
         arcProbability = Decimal(str(arcProbability))
         if arcProbability > Decimal("1.0"):
@@ -47,14 +51,20 @@ class RandomDigraph(Digraph):
             print('Error: arc probability too low !!')
         else:
             import copy
-            from random import random
+            from random import random,seed
             from digraphs import EmptyDigraph
 ##            g = RandomValuationDigraph(order=order,ndigits=0,hasIntegerValuation=hasIntegerValuation)
 ##            cutLevel = 1 - arcProbability
 ##            print(g.relation)
 ##            gp = PolarisedDigraph(digraph=g,level=cutLevel,KeepValues=False,AlphaCut=True)
 ##            gp.showRelationTable()
-            g = EmptyDigraph(order=order, valuationdomain=(0.0,1.0))
+            if seed != None:
+                seed(seed)
+            if Bipolar:
+                domain = (-1.0,1.0)
+            else:
+                domain = (0.0,1.0)
+            g = EmptyDigraph(order=order, valuationdomain=domain)
             self.actions = copy.deepcopy(g.actions)
             self.valuationdomain = copy.deepcopy(g.valuationdomain)
             self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
@@ -85,7 +95,8 @@ class RandomValuationDigraph(Digraph):
         * ndigits > 0, number of digits if hasIntegerValuation = True;
           Otherwise, decimal precision.
         * Normalized = True (r in [-1,1], r in [0,1] if False/default);
-        * hasIntegerValuation = False (default).
+        * hasIntegerValuation = False (default)
+        * If seed != none, the random generator is seeded.
 
 
     Example python3 session:
@@ -129,7 +140,10 @@ class RandomValuationDigraph(Digraph):
 
     """
 
-    def __init__(self,order=9, ndigits=2, Normalized=False, hasIntegerValuation=False):
+    def __init__(self,order=9, ndigits=2,
+                 Normalized=False,
+                 hasIntegerValuation=False,
+                 seed = None):
         import random
         self.name = 'randomValuationDigraph'
         self.order = order
@@ -139,7 +153,10 @@ class RandomValuationDigraph(Digraph):
         for x in actionlist:
             actions.append(str(x))
         self.actions = actions
-        precision = pow(10,ndigits)
+        if hasIntegerValuation:
+            precision = pow(10,ndigits) - 1
+        else:
+            precision = pow(10,ndigits)
         if hasIntegerValuation:
             self.valuationdomain = {'min':-precision, 'med':0, 'max':precision}
         else:
@@ -148,7 +165,8 @@ class RandomValuationDigraph(Digraph):
             else:
                 self.valuationdomain = {'min':Decimal('0'), 'med':Decimal('0.5'), 'max':Decimal('1.0')}
         self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
-        random.seed()
+        if seed != None:
+            random.seed(seed)
         relation = {}
         for x in actions:
             relation[x] = {}
@@ -168,15 +186,24 @@ class RandomValuationDigraph(Digraph):
 
 class RandomWeakTournament(Digraph):
     """
-    Parameter:
-        order = n > 0
-
     Specialization of the general Digraph class for generating
     temporary bipolar-valued weak tournaments
 
+    *Parameters*:
+        * order = n > 0
+        * weaknessDegree in [0.0,1.0]: proportion of indeterminate links (default = 0.25)
+        * If hasIntegerValuation = True,
+          valuation domain = [-pow(10,ndigits); + pow(10,ndigits)]
+          else valuation domain = [-1.0,1.0]
+        * If seed != None, the random number generator is seeded
+
     """
 
-    def __init__(self,order=10,ndigits=2,hasIntegerValuation=False,weaknessDegree=0.25,Comments=False):
+    def __init__(self,order=10,ndigits=2,
+                 hasIntegerValuation=False,
+                 weaknessDegree=0.25,
+                 seed=None,
+                 Comments=False):
         import random
         from decimal import Decimal
 
@@ -188,7 +215,8 @@ class RandomWeakTournament(Digraph):
         for x in actionlist:
             actions.append(str(x))
         self.actions = actions
-        random.seed()
+        if seed != None:
+            random.seed(seed)
         Max = pow(10,ndigits)
         Min = - Max
         Med = 0
@@ -264,15 +292,20 @@ class RandomWeakTournament(Digraph):
 
 class RandomTournament(Digraph):
     """
-    Parameter:
-       order = n > 0
-
     Specialization of the general Digraph class for generating
     temporary weak tournaments
 
+    *Parameter*:
+       * order = n > 0
+       * If valuationDomain = None, valuation is normalized (in [-1.0,1.0])
+       * If is Crips = True, valuation is polarized to min and max values
+
     """
 
-    def __init__(self,order=10,ndigits=2,isCrisp=True,valuationDomain=None):
+    def __init__(self,order=10,ndigits=2,
+                 isCrisp=True,
+                 valuationDomain=None,
+                 seed=None):
         import random
         from decimal import Decimal
 
@@ -294,7 +327,8 @@ class RandomTournament(Digraph):
             relation[x] = {}
             for y in actions:
                 relation[x][y] = Decimal('0.0')
-        random.seed()
+        if seed != None:
+            random.seed(seed)
         precision = pow(10,ndigits)
         actionsList = [x for x in actions]
         #print actionsList
@@ -330,8 +364,10 @@ class RandomFixedSizeDigraph(Digraph):
     Generates a random crisp digraph with a fixed size, by instantiating a fixed numbers of arcs
     from random choices in the set of potential oriented pairs of nodes numbered from 1 to order. 
     """
-    def __init__(self,order=7,size=14):
+    def __init__(self,order=7,size=14,seed=None):
         import random,copy
+        if seed != None:
+            random.seed(seed)
         # check feasability
         r = (order * order) - order
         if size > r :
@@ -378,8 +414,10 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
         The implementation is not guaranteeing a uniform choice among all potential valid graph instances.
 
     """
-    def __init__(self,order=7,degreeSequence=[3,3,2,2,1,1,0]):
+    def __init__(self,order=7,degreeSequence=[3,3,2,2,1,1,0],seed=None):
         import random,copy
+        if seed != None:
+            random.seed(seed)
         # check feasability
         degree = max(degreeSequence)
         if degree >= order:
@@ -462,8 +500,10 @@ class RandomTree(Digraph):
         numerOfNodes
 
     """
-    def __init__(self,numberOfNodes=5, ndigits=2, hasIntegerValuation=True):
-        from random import choice
+    def __init__(self,numberOfNodes=5, ndigits=2, hasIntegerValuation=True, seed=None):
+        from random import choice,seed
+        if seed != None:
+            seed(seed)
         from decimal import Decimal
         self.name = 'randomTree'
         self.order = numberOfNodes
@@ -535,8 +575,10 @@ class RandomRegularDigraph(Digraph):
     Specialization of Digraph class for random regular symmetric instances.
 
     """
-    def __init__(self,order=7,degree=2):
+    def __init__(self,order=7,degree=2, seed=None):
         import random,copy
+        if seed != None:
+            random.seed(seed)
         # check feasability
         r = (order * degree) % 2
         if degree >= order or r == 1:
@@ -617,7 +659,15 @@ if __name__ == "__main__":
 
     print('*-------- Testing classes and methods -------')
 
-    dg = RandomValuationDigraph(Normalized=True)
+##    rg1 = RandomDigraph(order=5,seed=1)
+##    rg2 = RandomDigraph(Bipolar=True,order=5,seed=1)
+##    rg1.showRelationTable()
+##    rg2.showRelationTable()
+    
+    dg = RandomValuationDigraph(Normalized=True,
+                                #hasIntegerValuation=True,
+                                ndigits=2,
+                                seed=1)
     dg.showRelationTable()
 
     print('*------------------*')
