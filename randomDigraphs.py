@@ -23,13 +23,9 @@ __version__ = "Branch: 3.3 $"
 # ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
 from digraphs import *
-from perfTabs import *
-
-#--------- Decimal precision --------------
 from decimal import Decimal
 
 #---------- Random Digraph classes -----------------
-
 
 class RandomDigraph(Digraph):
     """
