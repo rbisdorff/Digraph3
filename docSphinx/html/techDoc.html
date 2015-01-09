@@ -1065,7 +1065,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2111,6 +2111,11 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 </dl>
 <p>Specialization of the general Digraph class for generating
 temporary weak tournaments</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Obsolete version. Will be removed in the future. Instead, use
+the new <a class="reference internal" href="#randomDigraphs.RandomTournament" title="randomDigraphs.RandomTournament"><tt class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomTournament</span></tt></a> constructor.</p>
+</div>
 </dd></dl>
 
 <dl class="class">
@@ -2145,48 +2150,12 @@ Otherwise, decimal precision.</li>
 <li>hasIntegerValuation = False (default).</li>
 </ul>
 </dd>
-<dt>Example python3 session:</dt>
-<dd><div class="first highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
-<span class="go">*----- show detail -------------*</span>
-<span class="go">Digraph          : randomValuationDigraph</span>
-<span class="go">*---- Actions ----*</span>
-<span class="go">[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;]</span>
-<span class="go">*---- Characteristic valuation domain ----*</span>
-<span class="go">{&#39;max&#39;: Decimal(&#39;1.0&#39;), &#39;min&#39;: Decimal(&#39;-1.0&#39;),</span>
-<span class="go"> &#39;med&#39;: Decimal(&#39;0.0&#39;), &#39;hasIntegerValuation&#39;: False}</span>
-<span class="go">* ---- Relation Table -----</span>
-<span class="go">  S   |  &#39;1&#39;    &#39;2&#39;    &#39;3&#39;    &#39;4&#39;     &#39;5&#39;     </span>
-<span class="go"> -----|-----------------------------------</span>
-<span class="go">  &#39;1&#39; |  0.00   0.28   0.46  -0.66   0.90    </span>
-<span class="go">  &#39;2&#39; | -0.08   0.00  -0.46  -0.42   0.52    </span>
-<span class="go">  &#39;3&#39; |  0.84  -0.10   0.00  -0.54   0.58    </span>
-<span class="go">  &#39;4&#39; |  0.90   0.88   0.90   0.00  -0.38    </span>
-<span class="go">  &#39;5&#39; | -0.50   0.64   0.42  -0.94   0.00    </span>
-<span class="go">*--- Connected Components ---*</span>
-<span class="go">1: [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;]</span>
-<span class="go">Neighborhoods:</span>
-<span class="go">  Gamma     :</span>
-<span class="go">&#39;4&#39;: in =&gt; set(), out =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;3&#39;}</span>
-<span class="go">&#39;5&#39;: in =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;3&#39;}, out =&gt; {&#39;2&#39;, &#39;3&#39;}</span>
-<span class="go">&#39;1&#39;: in =&gt; {&#39;4&#39;, &#39;3&#39;}, out =&gt; {&#39;5&#39;, &#39;2&#39;, &#39;3&#39;}</span>
-<span class="go">&#39;2&#39;: in =&gt; {&#39;4&#39;, &#39;5&#39;, &#39;1&#39;}, out =&gt; {&#39;5&#39;}</span>
-<span class="go">&#39;3&#39;: in =&gt; {&#39;4&#39;, &#39;5&#39;, &#39;1&#39;}, out =&gt; {&#39;5&#39;, &#39;1&#39;}</span>
-<span class="go">  Not Gamma :</span>
-<span class="go">&#39;4&#39;: in =&gt; {&#39;5&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;}, out =&gt; {&#39;5&#39;}</span>
-<span class="go">&#39;5&#39;: in =&gt; {&#39;4&#39;}, out =&gt; {&#39;4&#39;, &#39;1&#39;}</span>
-<span class="go">&#39;1&#39;: in =&gt; {&#39;5&#39;, &#39;2&#39;}, out =&gt; {&#39;4&#39;}</span>
-<span class="go">&#39;2&#39;: in =&gt; {&#39;3&#39;}, out =&gt; {&#39;4&#39;, &#39;1&#39;, &#39;3&#39;}</span>
-<span class="go">&#39;3&#39;: in =&gt; {&#39;2&#39;}, out =&gt; {&#39;4&#39;, &#39;2&#39;}</span>
-</pre></div>
-</div>
-<div class="last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
-</pre></div>
-</div>
-</dd>
 </dl>
-<img alt="_images/randomValuationDigraph.png" src="_images/randomValuationDigraph.png" />
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Obsolete version. Will be removed in the future. Instead, use
+the new <a class="reference internal" href="#randomDigraphs.RandomValuationDigraph" title="randomDigraphs.RandomValuationDigraph"><tt class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomValuationDigraph</span></tt></a> constructor.</p>
+</div>
 </dd></dl>
 
 <dl class="class">
@@ -2199,6 +2168,11 @@ Otherwise, decimal precision.</li>
 </dl>
 <p>Specialization of the general Digraph class for generating
 temporary bipolar-valued weak tournaments</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Obsolete version. Will be removed in the future. Instead, use
+the new <a class="reference internal" href="#randomDigraphs.RandomWeakTournament" title="randomDigraphs.RandomWeakTournament"><tt class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomWeakTournament</span></tt></a> constructor.</p>
+</div>
 </dd></dl>
 
 <dl class="class">
@@ -2900,7 +2874,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3630,7 +3604,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">

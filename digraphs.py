@@ -8341,46 +8341,10 @@ class RandomValuationDigraph(Digraph):
         * Normalized = True (r in [-1,1], r in [0,1] if False/default);
         * hasIntegerValuation = False (default).
 
+    .. warning::
 
-    Example python3 session:
-        >>> from digraphs import RandomValuationDigraph
-        >>> dg = RandomValuationDigraph(order=5,Normalized=True)
-        >>> dg.showAll()
-        *----- show detail -------------*
-        Digraph          : randomValuationDigraph
-        *---- Actions ----*
-        ['1', '2', '3', '4', '5']
-        *---- Characteristic valuation domain ----*
-        {'max': Decimal('1.0'), 'min': Decimal('-1.0'),
-         'med': Decimal('0.0'), 'hasIntegerValuation': False}
-        * ---- Relation Table -----
-          S   |  '1'    '2'    '3'    '4'     '5'     
-         -----|-----------------------------------
-          '1' |  0.00   0.28   0.46  -0.66   0.90    
-          '2' | -0.08   0.00  -0.46  -0.42   0.52    
-          '3' |  0.84  -0.10   0.00  -0.54   0.58    
-          '4' |  0.90   0.88   0.90   0.00  -0.38    
-          '5' | -0.50   0.64   0.42  -0.94   0.00    
-        *--- Connected Components ---*
-        1: ['1', '2', '3', '4', '5']
-        Neighborhoods:
-          Gamma     :
-        '4': in => set(), out => {'1', '2', '3'}
-        '5': in => {'1', '2', '3'}, out => {'2', '3'}
-        '1': in => {'4', '3'}, out => {'5', '2', '3'}
-        '2': in => {'4', '5', '1'}, out => {'5'}
-        '3': in => {'4', '5', '1'}, out => {'5', '1'}
-          Not Gamma :
-        '4': in => {'5', '1', '2', '3'}, out => {'5'}
-        '5': in => {'4'}, out => {'4', '1'}
-        '1': in => {'5', '2'}, out => {'4'}
-        '2': in => {'3'}, out => {'4', '1', '3'}
-        '3': in => {'2'}, out => {'4', '2'}
-
-        >>> dg.exportGraphViz()
-
-    .. image:: randomValuationDigraph.png
-
+       Obsolete version. Will be removed in the future. Instead, use
+       the new :py:class:`randomDigraphs.RandomValuationDigraph` constructor. 
     """
 
     def __init__(self,order=9, ndigits=2, Normalized=False, hasIntegerValuation=False):
@@ -8427,6 +8391,11 @@ class RandomWeakTournament(Digraph):
 
     Specialization of the general Digraph class for generating
     temporary bipolar-valued weak tournaments
+
+    .. warning::
+
+       Obsolete version. Will be removed in the future. Instead, use
+       the new :py:class:`randomDigraphs.RandomWeakTournament` constructor. 
 
     """
 
@@ -8596,6 +8565,12 @@ class RandomTournament(Digraph):
 
     Specialization of the general Digraph class for generating
     temporary weak tournaments
+
+    .. warning::
+
+       Obsolete version. Will be removed in the future. Instead, use
+       the new :py:class:`randomDigraphs.RandomTournament` constructor. 
+
 
     """
 
