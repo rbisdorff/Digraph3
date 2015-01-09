@@ -8571,7 +8571,6 @@ class RandomTournament(Digraph):
        Obsolete version. Will be removed in the future. Instead, use
        the new :py:class:`randomDigraphs.RandomTournament` constructor. 
 
-
     """
 
     def __init__(self,order=10,ndigits=2,isCrisp=True,valuationDomain=None):
@@ -8630,7 +8629,14 @@ class RandomTournament(Digraph):
 class RandomFixedSizeDigraph(Digraph):
     """
     Generates a random crisp digraph with a fixed size, by instantiating a fixed numbers of arcs
-    from random choices in the set of potential oriented pairs of nodes numbered from 1 to order. 
+    from random choices in the set of potential oriented pairs of nodes numbered from 1 to order.
+
+    .. warning::
+
+       Obsolete version. Will be removed in the future. Instead, use
+       the new :py:class:`randomDigraphs.RandomFixedSizeDigraph` constructor. 
+
+
     """
     def __init__(self,order=7,size=14):
         import random,copy
@@ -8675,9 +8681,15 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
     *Parameters*:
         order=n and degreeSequence=[degree_1, ... ,degree_n]>
 
-    .. warning::
+    .. note::
 
         The implementation is not guaranteeing a uniform choice among all potential valid graph instances.
+
+    .. warning::
+
+       Obsolete version. Will be removed in the future. Instead, use
+       the new :py:class:`randomDigraphs.RandomFixedDegreeSequenceDigraph` constructor. 
+
 
     """
     def __init__(self,order=7,degreeSequence=[3,3,2,2,1,1,0]):
@@ -8763,6 +8775,12 @@ class RandomTree(Digraph):
     Parameter:
         numerOfNodes
 
+    .. warning::
+
+       Obsolete version. Will be removed in the future. Instead, use
+       the new :py:class:`randomDigraphs.RandomTree` constructor. 
+
+
     """
     def __init__(self,numberOfNodes=5, ndigits=2, hasIntegerValuation=True):
         from random import choice
@@ -8835,6 +8853,12 @@ class RandomRegularDigraph(Digraph):
         order and degree.
 
     Specialization of Digraph class for random regular symmetric instances.
+
+    .. warning::
+
+       Obsolete version. Will be removed in the future. Instead, use
+       the new :py:class:`randomDigraphs.RandomRegularDigraph` constructor. 
+
 
     """
     def __init__(self,order=7,degree=2):
