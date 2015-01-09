@@ -8287,7 +8287,6 @@ class RandomDigraph(Digraph):
     *Parameters*:
         * order (default = 10);
         * arc_probability (in [0.,1.], default=0.5)
-        * 
 
      """
 
@@ -8651,11 +8650,8 @@ class RandomTournament(Digraph):
 
 class RandomFixedSizeDigraph(Digraph):
     """
-    Parameters:
-        order and size
-
-    Specialization of Digraph class for random fixed size instances.
-
+    Generates a random crisp digraph with a fixed size, by instantiating a fixed numbers arcs
+    from random choices in the set of potential oriented pairs of nodes numbered from 1 to order. 
     """
     def __init__(self,order=7,size=14):
         import random,copy
@@ -9312,7 +9308,7 @@ class PolarisedDigraph(Digraph):
     """
     Renders the polarised valuation of a Digraph class instance:
 
-    Parameters:
+    *Parameters*:
          * If level = None, a default 75% cut level (0.5 in a normalized valuation domain) is used.
          * If KeepValues = False, the polarisation results in  a three valued crisp result.
          * If AlphaCut = True a genuine one-sided True-oriented cut is operated.
