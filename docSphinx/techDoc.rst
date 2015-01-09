@@ -45,6 +45,8 @@ The Digraph3 source code is split into several interdependent modules of which t
      Additional tools for solving ranking by choosing problems with root `WeakOrder <techDoc.html#weakOrders.WeakOrder>`_ class.
 * :ref:`randomNumbers-label` 
      Various home brewed random number generators like discrete and extended triangular.
+* :ref:`randomDigraphs-label` 
+     Various implemented random digraph models.
 
 .. toctree::
    :maxdepth: 2
@@ -143,6 +145,18 @@ weakOrders module
 -----------------
 
 .. automodule:: weakOrders
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Introduction-label`
+
+.. _randomDigraphs-label:
+
+randomDigraphs module
+-----------------
+
+.. automodule:: randomDigraphs
    :member-order: alphabetical
    :no-inherited-members:
    :members:

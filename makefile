@@ -47,7 +47,7 @@ tests:
 		(cd test; nosetests3 -v noseTestsWeakOrders.py)
 		(cd test; nosetests3 -v noseTestsGraph.py)
 		(cd test; nosetests3 -v noseTestsRandomNumbers.py)
-		(cd test; nosetests3 -v noseTestsRandomDigraphs.py)
+		(cd test; nosetests3 -v noseTestsRandomDigraph.py)
 
 
 verboseTests:
@@ -70,7 +70,7 @@ verboseTests:
 		(cd test; nosetests3 -vs noseTestsWeakOrders.py)
 		(cd test; nosetests3 -vs noseTestsGraph.py)
 		(cd test; nosetests3 -vs noseTestsRandomNumbers.py)
-		(cd test; nosetests3 -vs noseTestsRandomDigraphs.py)
+		(cd test; nosetests3 -vs noseTestsRandomDigraph.py)
 
 digraphsTests:
 		cp digraphs.py test/
