@@ -8690,11 +8690,15 @@ class RandomFixedSizeDigraph(Digraph):
 
 class RandomFixedDegreeSequenceDigraph(Digraph):
     """
-    Parameters:
+    Specialization of the general Digraph class for generating
+    temporary random crisp graphs (symmetric digraphs) with a fixed sequence of degrees.
+
+    *Parameters*:
         order=n and degreeSequence=[degree_1, ... ,degree_n]>
 
-    Specialization of Digraph class for random symmetric instances
-    with fixed degree sequence.
+    .. warning::
+
+        The implementation is not guaranteeing a uniform choice among all potential valid graph instances.
 
     """
     def __init__(self,order=7,degreeSequence=[3,3,2,2,1,1,0]):
