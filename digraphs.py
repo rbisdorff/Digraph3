@@ -8279,143 +8279,141 @@ class EquivalenceDigraph(Digraph):
 
 # ------- Specialisations of the Digraph class -----------
 
-from randomDigraphs import RandomDigraph
-##class RandomDigraph(Digraph):
-##    """
-##    Specialization of the general Digraph class for generating
-##    temporary crisp (irreflexive) random digraphs.
-##    
-##    *Parameters*:
-##        * order (default = 10);
-##        * arc_probability (in [0.,1.], default=0.5)
-##
-##     """
-##
-##    def __init__(self,order=9,arcProbability=0.5,hasIntegerValuation=True, Bipolar=False):
-##        arcProbability = Decimal(str(arcProbability))
-##        if arcProbability > Decimal("1.0"):
-##            print('Error: arc probability too high !!')
-##        elif arcProbability < Decimal("0.0"):
-##            print('Error: arc probability too low !!')
-##        else:
-##            import copy
-##            from random import random
-####            g = RandomValuationDigraph(order=order,ndigits=0,hasIntegerValuation=hasIntegerValuation)
-####            cutLevel = 1 - arcProbability
-####            print(g.relation)
-####            gp = PolarisedDigraph(digraph=g,level=cutLevel,KeepValues=False,AlphaCut=True)
-####            gp.showRelationTable()
-##            g = EmptyDigraph(order=order, valuationdomain=(0.0,1.0))
-##            self.actions = copy.deepcopy(g.actions)
-##            self.valuationdomain = copy.deepcopy(g.valuationdomain)
-##            self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
-##            self.relation = {}
-##            for x in g.actions:
-##                self.relation[x] = {}
-##                for y in g.actions:
-##                    if x == y:
-##                        self.relation[x][y] = self.valuationdomain['min']
-##                    else:
-##                        if random() <= arcProbability:
-##                            self.relation[x][y] = self.valuationdomain['max']
-##                        else:
-##                            self.relation[x][y] = self.valuationdomain['min']
-##            self.order = order
-##            self.name = 'randomDigraph'
-##            self.gamma = self.gammaSets()
-##            self.notGamma = self.notGammaSets()
+class RandomDigraph(Digraph):
+    """
+    Specialization of the general Digraph class for generating
+    temporary crisp (irreflexive) random digraphs.
+    
+    *Parameters*:
+        * order (default = 10);
+        * arc_probability (in [0.,1.], default=0.5)
 
-from randomDigraphs import RandomValuationDigraph
-##class RandomValuationDigraph(Digraph):
-##    """
-##    Specialization of the general Digraph class for generating
-##    temporary uniformly valuated random digraphs.
-##
-##    *Parameters*:
-##        * order > 0, number of arcs;
-##        * ndigits > 0, number of digits if hasIntegerValuation = True;
-##          Otherwise, decimal precision.
-##        * Normalized = True (r in [-1,1], r in [0,1] if False/default);
-##        * hasIntegerValuation = False (default).
-##
-##
-##    Example python3 session:
-##        >>> from digraphs import RandomValuationDigraph
-##        >>> dg = RandomValuationDigraph(order=5,Normalized=True)
-##        >>> dg.showAll()
-##        *----- show detail -------------*
-##        Digraph          : randomValuationDigraph
-##        *---- Actions ----*
-##        ['1', '2', '3', '4', '5']
-##        *---- Characteristic valuation domain ----*
-##        {'max': Decimal('1.0'), 'min': Decimal('-1.0'),
-##         'med': Decimal('0.0'), 'hasIntegerValuation': False}
-##        * ---- Relation Table -----
-##          S   |  '1'    '2'    '3'    '4'     '5'     
-##         -----|-----------------------------------
-##          '1' |  0.00   0.28   0.46  -0.66   0.90    
-##          '2' | -0.08   0.00  -0.46  -0.42   0.52    
-##          '3' |  0.84  -0.10   0.00  -0.54   0.58    
-##          '4' |  0.90   0.88   0.90   0.00  -0.38    
-##          '5' | -0.50   0.64   0.42  -0.94   0.00    
-##        *--- Connected Components ---*
-##        1: ['1', '2', '3', '4', '5']
-##        Neighborhoods:
-##          Gamma     :
-##        '4': in => set(), out => {'1', '2', '3'}
-##        '5': in => {'1', '2', '3'}, out => {'2', '3'}
-##        '1': in => {'4', '3'}, out => {'5', '2', '3'}
-##        '2': in => {'4', '5', '1'}, out => {'5'}
-##        '3': in => {'4', '5', '1'}, out => {'5', '1'}
-##          Not Gamma :
-##        '4': in => {'5', '1', '2', '3'}, out => {'5'}
-##        '5': in => {'4'}, out => {'4', '1'}
-##        '1': in => {'5', '2'}, out => {'4'}
-##        '2': in => {'3'}, out => {'4', '1', '3'}
-##        '3': in => {'2'}, out => {'4', '2'}
-##
-##        >>> dg.exportGraphViz()
-##
-##    .. image:: randomValuationDigraph.png
-##
-##    """
-##
-##    def __init__(self,order=9, ndigits=2, Normalized=False, hasIntegerValuation=False):
-##        import random
-##        self.name = 'randomValuationDigraph'
-##        self.order = order
-##        actionlist = list(range(order+1))
-##        actionlist.remove(0)
-##        actions = []
-##        for x in actionlist:
-##            actions.append(str(x))
-##        self.actions = actions
-##        precision = pow(10,ndigits)
-##        if hasIntegerValuation:
-##            self.valuationdomain = {'min':-precision, 'med':0, 'max':precision}
-##        else:
-##            if Normalized:
-##                 self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
-##            else:
-##                self.valuationdomain = {'min':Decimal('0'), 'med':Decimal('0.5'), 'max':Decimal('1.0')}
-##        self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
-##        random.seed()
-##        relation = {}
-##        for x in actions:
-##            relation[x] = {}
-##            for y in actions:
-##                if x == y:
-##                    relation[x][y] = self.valuationdomain['med']
-##                else:
-##                    if hasIntegerValuation:
-##                        relation[x][y] = (2*random.randrange(start=0,stop=precision)) - precision
-##                    elif Normalized:
-##                        relation[x][y] = (Decimal(str(round(float(random.randrange(start=0,stop=precision))/precision,ndigits))) * Decimal('2.0')) - Decimal('1.0')
-##                    else:
-##                        relation[x][y] = Decimal(str(round(float(random.randrange(start=0,stop=precision))/precision,ndigits)))
-##        self.relation = relation
-##        self.gamma = self.gammaSets()
-##        self.notGamma = self.notGammaSets()
+     """
+
+    def __init__(self,order=9,arcProbability=0.5,hasIntegerValuation=True, Bipolar=False):
+        arcProbability = Decimal(str(arcProbability))
+        if arcProbability > Decimal("1.0"):
+            print('Error: arc probability too high !!')
+        elif arcProbability < Decimal("0.0"):
+            print('Error: arc probability too low !!')
+        else:
+            import copy
+            from random import random
+##            g = RandomValuationDigraph(order=order,ndigits=0,hasIntegerValuation=hasIntegerValuation)
+##            cutLevel = 1 - arcProbability
+##            print(g.relation)
+##            gp = PolarisedDigraph(digraph=g,level=cutLevel,KeepValues=False,AlphaCut=True)
+##            gp.showRelationTable()
+            g = EmptyDigraph(order=order, valuationdomain=(0.0,1.0))
+            self.actions = copy.deepcopy(g.actions)
+            self.valuationdomain = copy.deepcopy(g.valuationdomain)
+            self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
+            self.relation = {}
+            for x in g.actions:
+                self.relation[x] = {}
+                for y in g.actions:
+                    if x == y:
+                        self.relation[x][y] = self.valuationdomain['min']
+                    else:
+                        if random() <= arcProbability:
+                            self.relation[x][y] = self.valuationdomain['max']
+                        else:
+                            self.relation[x][y] = self.valuationdomain['min']
+            self.order = order
+            self.name = 'randomDigraph'
+            self.gamma = self.gammaSets()
+            self.notGamma = self.notGammaSets()
+
+class RandomValuationDigraph(Digraph):
+    """
+    Specialization of the general Digraph class for generating
+    temporary uniformly valuated random digraphs.
+
+    *Parameters*:
+        * order > 0, number of arcs;
+        * ndigits > 0, number of digits if hasIntegerValuation = True;
+          Otherwise, decimal precision.
+        * Normalized = True (r in [-1,1], r in [0,1] if False/default);
+        * hasIntegerValuation = False (default).
+
+
+    Example python3 session:
+        >>> from digraphs import RandomValuationDigraph
+        >>> dg = RandomValuationDigraph(order=5,Normalized=True)
+        >>> dg.showAll()
+        *----- show detail -------------*
+        Digraph          : randomValuationDigraph
+        *---- Actions ----*
+        ['1', '2', '3', '4', '5']
+        *---- Characteristic valuation domain ----*
+        {'max': Decimal('1.0'), 'min': Decimal('-1.0'),
+         'med': Decimal('0.0'), 'hasIntegerValuation': False}
+        * ---- Relation Table -----
+          S   |  '1'    '2'    '3'    '4'     '5'     
+         -----|-----------------------------------
+          '1' |  0.00   0.28   0.46  -0.66   0.90    
+          '2' | -0.08   0.00  -0.46  -0.42   0.52    
+          '3' |  0.84  -0.10   0.00  -0.54   0.58    
+          '4' |  0.90   0.88   0.90   0.00  -0.38    
+          '5' | -0.50   0.64   0.42  -0.94   0.00    
+        *--- Connected Components ---*
+        1: ['1', '2', '3', '4', '5']
+        Neighborhoods:
+          Gamma     :
+        '4': in => set(), out => {'1', '2', '3'}
+        '5': in => {'1', '2', '3'}, out => {'2', '3'}
+        '1': in => {'4', '3'}, out => {'5', '2', '3'}
+        '2': in => {'4', '5', '1'}, out => {'5'}
+        '3': in => {'4', '5', '1'}, out => {'5', '1'}
+          Not Gamma :
+        '4': in => {'5', '1', '2', '3'}, out => {'5'}
+        '5': in => {'4'}, out => {'4', '1'}
+        '1': in => {'5', '2'}, out => {'4'}
+        '2': in => {'3'}, out => {'4', '1', '3'}
+        '3': in => {'2'}, out => {'4', '2'}
+
+        >>> dg.exportGraphViz()
+
+    .. image:: randomValuationDigraph.png
+
+    """
+
+    def __init__(self,order=9, ndigits=2, Normalized=False, hasIntegerValuation=False):
+        import random
+        self.name = 'randomValuationDigraph'
+        self.order = order
+        actionlist = list(range(order+1))
+        actionlist.remove(0)
+        actions = []
+        for x in actionlist:
+            actions.append(str(x))
+        self.actions = actions
+        precision = pow(10,ndigits)
+        if hasIntegerValuation:
+            self.valuationdomain = {'min':-precision, 'med':0, 'max':precision}
+        else:
+            if Normalized:
+                 self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
+            else:
+                self.valuationdomain = {'min':Decimal('0'), 'med':Decimal('0.5'), 'max':Decimal('1.0')}
+        self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
+        random.seed()
+        relation = {}
+        for x in actions:
+            relation[x] = {}
+            for y in actions:
+                if x == y:
+                    relation[x][y] = self.valuationdomain['med']
+                else:
+                    if hasIntegerValuation:
+                        relation[x][y] = (2*random.randrange(start=0,stop=precision)) - precision
+                    elif Normalized:
+                        relation[x][y] = (Decimal(str(round(float(random.randrange(start=0,stop=precision))/precision,ndigits))) * Decimal('2.0')) - Decimal('1.0')
+                    else:
+                        relation[x][y] = Decimal(str(round(float(random.randrange(start=0,stop=precision))/precision,ndigits)))
+        self.relation = relation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
 
 class RandomWeakTournament(Digraph):
     """
