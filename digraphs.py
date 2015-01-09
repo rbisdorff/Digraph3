@@ -8650,7 +8650,7 @@ class RandomTournament(Digraph):
 
 class RandomFixedSizeDigraph(Digraph):
     """
-    Generates a random crisp digraph with a fixed size, by instantiating a fixed numbers arcs
+    Generates a random crisp digraph with a fixed size, by instantiating a fixed numbers of arcs
     from random choices in the set of potential oriented pairs of nodes numbered from 1 to order. 
     """
     def __init__(self,order=7,size=14):
