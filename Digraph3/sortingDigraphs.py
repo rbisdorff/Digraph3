@@ -22,7 +22,6 @@
 from digraphs import *
 from outrankingDigraphs import *
 from sortingDigraphs import *
-#from weakOrders import *
 
 class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     """
