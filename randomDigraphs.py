@@ -492,7 +492,7 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
                     self.relation = relation.copy()
                     self.gamma = self.gammaSets()
 
-class RandomTree(Digraph):
+class _RandomTree(Digraph):
     """
     Random generator for trees, using random Pruefer codes
 
@@ -532,15 +532,15 @@ class RandomTree(Digraph):
         for i in range(len(nodeKeys)-2):
             pruefer.append(choice(nodes))
         print(pruefer)
-        pairs = self.prufer_to_tree(pruefer)
+        pairs = self._prufer_to_tree(pruefer)
         for (i,j) in pairs:
-            relation[str(i+1)][str(j+1)] = Decimal('1.0')
-            relation[str(j+1)][str(i+1)] = Decimal('1.0')
+            relation[str(i+1)][str(j+1)] = self.valuationDomain['max']
+            relation[str(j+1)][str(i+1)] = self.valuationDomain['max']
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def prufer_to_tree(self,a):
+    def _prufer_to_tree(self,a):
         tree = []
         T = list(range(0, len(a)+2))
         print(T)
