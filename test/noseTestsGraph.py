@@ -21,7 +21,7 @@ def testGraph():
     g.showShort()
     gs.showShort()
     g.computeChordlessCycles(Comments=True,Debug=True)
-    g.saveEdges(Agrum=True)
+    g._saveEdges(Agrum=True)
     g.exportGraphViz('testGraphViz')
 
 def testGraph2Digraph():
