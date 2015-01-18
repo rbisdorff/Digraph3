@@ -8287,7 +8287,11 @@ class RandomDigraph(Digraph):
     *Parameters*:
         * order (default = 10);
         * arc_probability (in [0.,1.], default=0.5)
-        * 
+
+    .. warning::
+
+       Obsolete version. Will be removed in the future. Instead, use
+       the new :py:class:`randomDigraphs.RandomDigraph` constructor. 
 
      """
 
@@ -8325,7 +8329,6 @@ class RandomDigraph(Digraph):
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
 
-
 class RandomValuationDigraph(Digraph):
     """
     Specialization of the general Digraph class for generating
@@ -8338,46 +8341,10 @@ class RandomValuationDigraph(Digraph):
         * Normalized = True (r in [-1,1], r in [0,1] if False/default);
         * hasIntegerValuation = False (default).
 
+    .. warning::
 
-    Example python3 session:
-        >>> from digraphs import RandomValuationDigraph
-        >>> dg = RandomValuationDigraph(order=5,Normalized=True)
-        >>> dg.showAll()
-        *----- show detail -------------*
-        Digraph          : randomValuationDigraph
-        *---- Actions ----*
-        ['1', '2', '3', '4', '5']
-        *---- Characteristic valuation domain ----*
-        {'max': Decimal('1.0'), 'min': Decimal('-1.0'),
-         'med': Decimal('0.0'), 'hasIntegerValuation': False}
-        * ---- Relation Table -----
-          S   |  '1'    '2'    '3'    '4'     '5'     
-         -----|-----------------------------------
-          '1' |  0.00   0.28   0.46  -0.66   0.90    
-          '2' | -0.08   0.00  -0.46  -0.42   0.52    
-          '3' |  0.84  -0.10   0.00  -0.54   0.58    
-          '4' |  0.90   0.88   0.90   0.00  -0.38    
-          '5' | -0.50   0.64   0.42  -0.94   0.00    
-        *--- Connected Components ---*
-        1: ['1', '2', '3', '4', '5']
-        Neighborhoods:
-          Gamma     :
-        '4': in => set(), out => {'1', '2', '3'}
-        '5': in => {'1', '2', '3'}, out => {'2', '3'}
-        '1': in => {'4', '3'}, out => {'5', '2', '3'}
-        '2': in => {'4', '5', '1'}, out => {'5'}
-        '3': in => {'4', '5', '1'}, out => {'5', '1'}
-          Not Gamma :
-        '4': in => {'5', '1', '2', '3'}, out => {'5'}
-        '5': in => {'4'}, out => {'4', '1'}
-        '1': in => {'5', '2'}, out => {'4'}
-        '2': in => {'3'}, out => {'4', '1', '3'}
-        '3': in => {'2'}, out => {'4', '2'}
-
-        >>> dg.exportGraphViz()
-
-    .. image:: randomValuationDigraph.png
-
+       Obsolete version. Will be removed in the future. Instead, use
+       the new :py:class:`randomDigraphs.RandomValuationDigraph` constructor. 
     """
 
     def __init__(self,order=9, ndigits=2, Normalized=False, hasIntegerValuation=False):
@@ -8424,6 +8391,11 @@ class RandomWeakTournament(Digraph):
 
     Specialization of the general Digraph class for generating
     temporary bipolar-valued weak tournaments
+
+    .. warning::
+
+       Obsolete version. Will be removed in the future. Instead, use
+       the new :py:class:`randomDigraphs.RandomWeakTournament` constructor. 
 
     """
 
@@ -8594,6 +8566,11 @@ class RandomTournament(Digraph):
     Specialization of the general Digraph class for generating
     temporary weak tournaments
 
+    .. warning::
+
+       Obsolete version. Will be removed in the future. Instead, use
+       the new :py:class:`randomDigraphs.RandomTournament` constructor. 
+
     """
 
     def __init__(self,order=10,ndigits=2,isCrisp=True,valuationDomain=None):
@@ -8651,10 +8628,14 @@ class RandomTournament(Digraph):
 
 class RandomFixedSizeDigraph(Digraph):
     """
-    Parameters:
-        order and size
+    Generates a random crisp digraph with a fixed size, by instantiating a fixed numbers of arcs
+    from random choices in the set of potential oriented pairs of nodes numbered from 1 to order.
 
-    Specialization of Digraph class for random fixed size instances.
+    .. warning::
+
+       Obsolete version. Will be removed in the future. Instead, use
+       the new :py:class:`randomDigraphs.RandomFixedSizeDigraph` constructor. 
+
 
     """
     def __init__(self,order=7,size=14):
@@ -8694,11 +8675,21 @@ class RandomFixedSizeDigraph(Digraph):
 
 class RandomFixedDegreeSequenceDigraph(Digraph):
     """
-    Parameters:
+    Specialization of the general Digraph class for generating
+    temporary random crisp graphs (symmetric digraphs) with a fixed sequence of degrees.
+
+    *Parameters*:
         order=n and degreeSequence=[degree_1, ... ,degree_n]>
 
-    Specialization of Digraph class for random symmetric instances
-    with fixed degree sequence.
+    .. note::
+
+        The implementation is not guaranteeing a uniform choice among all potential valid graph instances.
+
+    .. warning::
+
+       Obsolete version. Will be removed in the future. Instead, use
+       the new :py:class:`randomDigraphs.RandomFixedDegreeSequenceDigraph` constructor. 
+
 
     """
     def __init__(self,order=7,degreeSequence=[3,3,2,2,1,1,0]):
@@ -8784,6 +8775,12 @@ class RandomTree(Digraph):
     Parameter:
         numerOfNodes
 
+    .. warning::
+
+       Obsolete version. Will be removed in the future. Instead, use
+       the new :py:class:`randomDigraphs.RandomTree` constructor. 
+
+
     """
     def __init__(self,numberOfNodes=5, ndigits=2, hasIntegerValuation=True):
         from random import choice
@@ -8856,6 +8853,12 @@ class RandomRegularDigraph(Digraph):
         order and degree.
 
     Specialization of Digraph class for random regular symmetric instances.
+
+    .. warning::
+
+       Obsolete version. Will be removed in the future. Instead, use
+       the new :py:class:`randomDigraphs.RandomRegularDigraph` constructor. 
+
 
     """
     def __init__(self,order=7,degree=2):
@@ -9310,9 +9313,14 @@ class CompleteDigraph(Digraph):
 
 class PolarisedDigraph(Digraph):
     """
-    Renders the polarised valuation of digraph:
+    Renders the polarised valuation of a Digraph class instance:
+
+    *Parameters*:
+         * If level = None, a default 75% cut level (0.5 in a normalized valuation domain) is used.
+         * If KeepValues = False, the polarisation results in  a three valued crisp result.
          * If AlphaCut = True a genuine one-sided True-oriented cut is operated.
-         * If StrictCut = True, the cut level value is not included.
+         * If StrictCut = True, the cut level value is excluded resulting in an open polarised valuation domain.
+           By default the polarised valuation domain is closed and the complementary indeterminate domain is open.
 
     """
     def __init__(self,digraph=None,level=None,KeepValues=True,AlphaCut=False,StrictCut=False):
@@ -9441,12 +9449,15 @@ class PolarisedDigraph(Digraph):
         return relationout
 
 
-class MedianExtendedDigraph(Digraph):
+class _MedianExtendedDigraph(Digraph):
     """
     Parameters:
         digraph + beta cut level between Med and Max.
 
-    Specialisation of Outranking relation.
+    .. warning::
+
+         The class is obsolete and is replaced by the genuine
+         PolarisedDigraph class flagged with KeepValues=True.
 
     """
     def __init__(self,digraph=None,Level=None):
@@ -9459,12 +9470,12 @@ class MedianExtendedDigraph(Digraph):
             Level = Max - (Max - Med)*0.5
         self.name = 'cut_' + str(Level)+ '_' + str(digraph.name)
         self.actions = digraph.actions
-        self.relation = self.constructRelation(digraph.relation, Level)
+        self.relation = self._constructRelation(digraph.relation, Level)
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def constructRelation(self,relationin, Level):
+    def _constructRelation(self,relationin, Level):
         """
         Parameters: relation and cut level.
         Renders the polarised relation.
@@ -9542,7 +9553,7 @@ class DualDigraph(Digraph):
                 relationOut[a][b] = Max - relationIn[a][b] + Min
         return relationOut
 
-class PreferenceDigraph(Digraph):
+class _PreferenceDigraph(Digraph):
     """
     Initiates the valued difference S(a,b) - S(b,a) of a Digraph instance.
     """
@@ -9573,9 +9584,9 @@ class AsymmetricPartialDigraph(Digraph):
     """
     Renders the asymmetric part of a Digraph instance
 
-    .. warning::
+    .. note::
 
-         Note that the non asymmetric pairs are all put to the median indeterminate
+         The non asymmetric links are all put to the median indeterminate
          characteristic value!
 
     """
@@ -9614,57 +9625,13 @@ class AsymmetricPartialDigraph(Digraph):
                     relationOut[a][b] = Med
         return relationOut
 
-##class AsymmetricDigraph(Digraph):
-##    """
-##    Renders the asymmetric of a Digraph instance
-##    """
-##    def __init__(self,digraph):
-##        self.valuationdomain = digraph.valuationdomain
-##        Max = self.valuationdomain['max']
-##        Med = self.valuationdomain['med']
-##        self.name = 'asymmetric_' + str(digraph.name)
-##        self.actions = digraph.actions
-##        self.relation = self.constructRelation(digraph.relation)
-##        self.order = len(self.actions)
-##        self.gamma = self.gammaSets()
-##        self.notGamma = self.notGammaSets()
-##
-##    def constructRelation(self,relationIn):
-##        """
-##        Parameters:
-##            relation and cut level.
-##
-##        Renders the polarised relation.
-##
-##        """
-##        actions = self.actions
-##        Min = self.valuationdomain['min']
-##        Max = self.valuationdomain['max']
-##        Med = self.valuationdomain['med']
-##        relationOut = {}
-##        for a in actions:
-##            relationOut[a] = {}
-##            for b in actions:
-##                relationOut[a][b] = min( relationIn[a][b], (Max-relationIn[b][a]+Min) )
-##                ## if a != b:
-##                ##     if relationIn[a][b] >= Med and relationIn[b][a] <= Med:
-##                ##         relationOut[a][b] = relationIn[a][b]
-##                ##     elif relationIn[a][b] <= Med and relationIn[b][a] >= Med:
-##                ##         relationOut[a][b] = relationIn[a][b]
-##                ##     else:
-##                ##         relationOut[a][b] = Med
-##                ##     ## relationOut[a][b] = min(relationIn[a][b],Max-relationIn[b][a]+Min)
-##                ## else:
-##                ##     relationOut[a][b] = Med
-##        return relationOut
-
 class SymmetricPartialDigraph(Digraph):
     """
     Renders the symmetric part of a Digraph instance.
     
-    ..caution::
+    .. note::
 
-           The not symmetric links of relationIn are all put to the meadian characteristics value!.
+           The not symmetric links are all put to the meadian characteristics value!.
            
     """
     def __init__(self,digraph):
@@ -9734,12 +9701,12 @@ class kChoicesDigraph(Digraph):
             actions[frozenset(kChoice)] = {'name': cn, 'comment': commentString}
         self.actions = actions
         self.order = len(self.actions)
-        self.relation = self.computeRelation(drelation)
+        self.relation = self._computeRelation(drelation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
 
-    def computeRelation(self,relation):
+    def _computeRelation(self,relation):
         """
         computing the relation on kChoices
         """

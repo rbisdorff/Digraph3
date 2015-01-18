@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # Python implementation of digraphs
-# Current revision $Revision: 1008 $
+# Current revision $Revision: 1047 $
 # Copyright (C) 2006-2008  Raymond Bisdorff
 #
 #    This program is free software; you can redistribute it and/or modify
@@ -22,7 +22,6 @@
 from digraphs import *
 from outrankingDigraphs import *
 from sortingDigraphs import *
-#from weakOrders import *
 
 class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     """
@@ -2032,7 +2031,7 @@ if __name__ == "__main__":
     ****************************************************
     * Python sortingDigraphs module                    *
     * depends on BipolarOutrankingDigraph and          *
-    * $Revision: 1008 $                                 *
+    * $Revision: 1047 $                                 *
     * Copyright (C) 2010 Raymond Bisdorff              *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
@@ -2078,7 +2077,7 @@ if __name__ == "__main__":
 
     print('*************************************')
     print('* R.B. december 2010                *')
-    print('* $Revision: 1008 $                  *')
+    print('* $Revision: 1047 $                  *')
     print('*************************************')
 
 #############################

@@ -7183,7 +7183,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         * argPerfTab: PerformanceTableau instance or the name of a stored one.
           If None, a random instance is generated.
         * sampleSize: number of random weight vectors used for Monte Carlo simulation.
-        * distribution: {triangular|uniform|beta(2,2)|beta(4,4)}, probability distribution used for generating random weights
+        * distribution: {triangular|extTriangular|uniform|beta(2,2)|beta(4,4)}, probability distribution used for generating random weights
         * spread: weight range = weight mode +- (weight mode * spread)
         * likelihood: 1.0 - frequency of valuations of opposite sign compared to the median valuation.
         * other standard parameters from the BipolarOutrankingDigraph class (see documentation).
@@ -7203,10 +7203,13 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                  SeeSampleCounter=False):
         # getting module ressources and setting the random seed
         from copy import deepcopy
-        from random import triangular, uniform, betavariate, seed
-        if samplingSeed != None:
-            from random import seed
-            seed = samplingSeed
+        if distribution == 'extTriangular':
+            from randomNumbers import ExtendedTriangularRandomVariable
+        else:
+            from random import triangular, uniform, betavariate
+            if samplingSeed != None:
+                from random import seed
+                seed = samplingSeed   
         # getting performance tableau
         if argPerfTab == None:
             perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
@@ -7274,6 +7277,12 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                     rw = Decimal( '%.2f' % (lowerWeightLimit+(betavariate(2,2)*weightRange)) )
                 elif distribution == 'beta(4,4)':
                     rw = Decimal( '%.2f' % (lowerWeightLimit+(betavariate(4,4)*weightRange)) )
+                elif distribution == 'extTriangular':
+                    extTrRdv = ExtendedTriangularRandomVariable(lowLimit=float(weights[g])/2.0,
+                                                                highLimit=float(weights[g])*2.0,
+                                                                mode=weightMode,
+                                                                seed=samplingSeed)
+                    rw = Decimal( '%.2f' % ( extTrRdv.random() ) )
                 else:
                     print('Error: wrong distribution %s. Available laws: triangular (default), uniform, beta(2,2), beta(12,12)' % distribution)        
                 perfTab.criteria[g]['weight'] = rw
@@ -7792,26 +7801,26 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-    t = RandomCBPerformanceTableau(numberOfActions=20,\
+    t = RandomCBPerformanceTableau(numberOfActions=5,\
                                    numberOfCriteria=13,\
                                    weightDistribution='equiobjectives',
                                    )
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
-##    sg = StochasticBipolarOutrankingDigraph(t)
-##    print(sg.computeCLTLikelihoods(Debug=False))
-##    sg.showRelationTable()
-    t0 = time()
-    lg = ConfidentBipolarOutrankingDigraph(t,
-                                        distribution="beta",
-                                        confidence=80,
-                                        betaParameter=2,
-                                        Normalized=True,
-                                        Debug=True,
-                                        Threading=False)
-    print(time()-t0,' sec.')
-    print(lg.computeDeterminateness())
-    lg.showRelationTable(LikelihoodDenotation=True,Debug=False)
+    sg = StochasticBipolarOutrankingDigraph(t,distribution="extTriangular")
+    print(sg.computeCLTLikelihoods(Debug=False))
+    sg.showRelationTable()
+##    t0 = time()
+##    lg = ConfidentBipolarOutrankingDigraph(t,
+##                                        distribution="beta",
+##                                        confidence=80,
+##                                        betaParameter=2,
+##                                        Normalized=True,
+##                                        Debug=True,
+##                                        Threading=False)
+##    print(time()-t0,' sec.')
+##    print(lg.computeDeterminateness())
+##    lg.showRelationTable(LikelihoodDenotation=True,Debug=False)
     ## t0 = time()
     ## g = BipolarOutrankingDigraph(t,Threading=False)
     ## print(time()-t0)
