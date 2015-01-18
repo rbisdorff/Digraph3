@@ -131,7 +131,7 @@ class Graph(object):
         for v in vKeys:
             print('%s -> %s' % (v, list(self.gamma[v])))
 
-    def saveEdges(self,fileName='graphEdges',Agrum=False,Decimal=True):
+    def _saveEdges(self,fileName='graphEdges',Agrum=False,Decimal=True):
         """
         Saving graph instances as list of edges, ie node node on each line
         for enumChordlessCycles C++/agrum progam.
