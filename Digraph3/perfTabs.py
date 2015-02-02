@@ -534,11 +534,12 @@ class PerformanceTableau(object):
         perfx = self.evaluation[criterion][action]
         if perfx != -999:
             try:
-                indx = self.criteria['thresholds']['ind'][0] + self.criteria[criterion]['thresholds']['ind'][1]*perfx
-                ## indx = self.criteria['thresholds']['ind'][0] + self.criteria[criterion]['thresholds']['pref'][1]*perfx
+                indx = self.criteria[criterion]['thresholds']['ind'][0] + self.criteria[criterion]['thresholds']['ind'][1]*perfx
+                ## indx = self.criteria[criterion]['thresholds']['ind'][0] + self.criteria[criterion]['thresholds']['pref'][1]*perfx
             except:
                 indx = Decimal('0')
-            quantile = float(len([y for y in self.evaluation[criterion] if self.evaluation[criterion][y] <= perfx+indx]))/float(len(self.actions))
+            quantile = float(len([y for y in self.evaluation[criterion]\
+                                  if (y in self.actions) and (self.evaluation[criterion][y] <= perfx+indx)]) )/float(len(self.actions))
             return quantile
         else:
             return 'NA'
@@ -990,20 +991,20 @@ class PerformanceTableau(object):
             result[g]['maximum'] = evaluations[-1]
         return result
         
-    def showHTMLPerformanceTableau(self,isSorted=True,ndigits=2):
+    def showHTMLPerformanceTableau(self,isSorted=True,Transposed=False,ndigits=2):
         """
         shows the html version of the performance tableau in a browser window.
         """
         import webbrowser
         fileName = '/tmp/performanceTable.html'
         fo = open(fileName,'w')
-        fo.write(self.htmlPerformanceTable(isSorted=isSorted,ndigits=ndigits))
+        fo.write(self.htmlPerformanceTable(isSorted=isSorted,Transposed=Transposed,ndigits=ndigits))
         fo.close()
         url = 'file://'+fileName
         webbrowser.open_new(url)
            
             
-    def htmlPerformanceTable(self,isSorted=True,ndigits=2):
+    def htmlPerformanceTable(self,isSorted=True,Transposed=False,ndigits=2):
         """
         Renders the performance table citerion x actions in html format.
         """
@@ -1015,29 +1016,55 @@ class PerformanceTableau(object):
         actionsList = list(self.actions)
         if isSorted:
             actionsList.sort()
-        html += '<table style="background-color:White;" border="1">'
-        html += '<tr bgcolor="#9acd32"><th>criterion</th>'
-        for x in actionsList:
-            html += '<th bgcolor="#FFF79B">%s</th>' % (str(x))
-        html += '</tr>'
-        for g in criteriaList:
-            html += '<tr><th bgcolor="#FFF79B">%s</th>' % (str(g))
+        if Transposed:
+            html += '<table style="background-color:White;" border="1">'
+            html += '<tr bgcolor="#9acd32"><th>criterion</th>'
             for x in actionsList:
-                if self.evaluation[g][x] != Decimal("-999"):
-                    if self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
-                        formatString = '<td bgcolor="#ffddff"  align="right">%% .%df</td>' % ndigits
-                        html += formatString % (self.evaluation[g][x])
-                    elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
-                        formatString = '<td bgcolor="#ddffdd" align="right">%% .%df</td>' % ndigits
-                        html += formatString % (self.evaluation[g][x])
-                    else:
-                        formatString = '<td align="right">%% .%df</td>' % ndigits
-                        html += formatString % (self.evaluation[g][x])
-                        
-                else:
-                    html += '<td align="right"><span style="color: LightGrey;">NA</span></td>'
+                html += '<th bgcolor="#FFF79B">%s</th>' % (str(x))
             html += '</tr>'
-        html += '</table>'
+            for g in criteriaList:
+                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (str(g))
+                for x in actionsList:
+                    if self.evaluation[g][x] != Decimal("-999"):
+                        if self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
+                            formatString = '<td bgcolor="#ffddff"  align="right">%% .%df</td>' % ndigits
+                            html += formatString % (self.evaluation[g][x])
+                        elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
+                            formatString = '<td bgcolor="#ddffdd" align="right">%% .%df</td>' % ndigits
+                            html += formatString % (self.evaluation[g][x])
+                        else:
+                            formatString = '<td align="right">%% .%df</td>' % ndigits
+                            html += formatString % (self.evaluation[g][x])
+                            
+                    else:
+                        html += '<td align="right"><span style="color: LightGrey;">NA</span></td>'
+                html += '</tr>'
+            html += '</table>'
+        else:
+            html += '<table style="background-color:White;" border="1">'
+            html += '<tr bgcolor="#9acd32"><th>criterion</th>'
+            for g in criteriaList:
+                html += '<th bgcolor="#FFF79B">%s</th>' % (str(g))
+            html += '</tr>'
+            for x in actionsList:
+                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (str(x))
+                for g in criteriaList:
+                    if self.evaluation[g][x] != Decimal("-999"):
+                        if self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
+                            formatString = '<td bgcolor="#ffddff"  align="right">%% .%df</td>' % ndigits
+                            html += formatString % (self.evaluation[g][x])
+                        elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
+                            formatString = '<td bgcolor="#ddffdd" align="right">%% .%df</td>' % ndigits
+                            html += formatString % (self.evaluation[g][x])
+                        else:
+                            formatString = '<td align="right">%% .%df</td>' % ndigits
+                            html += formatString % (self.evaluation[g][x])
+                            
+                    else:
+                        html += '<td align="right"><span style="color: LightGrey;">NA</span></td>'
+                html += '</tr>'
+            html += '</table>'
+            
         return html
 
     def showHTMLPerformanceHeatmap(self,actionsList=None,
@@ -1047,7 +1074,8 @@ class PerformanceTableau(object):
                                    ndigits=2,
                                    Ranked=True,
                                    Correlations=False,
-                                   Threading=False):
+                                   Threading=False,
+                                   Debug=False):
         """
         shows the html heatmap version of the performance tableau in a browser window.
         """
@@ -1067,7 +1095,8 @@ class PerformanceTableau(object):
                                              ndigits=ndigits,
                                              colorLevels=colorLevels,
                                              pageTitle=pageTitle,
-                                             Correlations=Correlations))
+                                             Correlations=Correlations,
+                                             Debug=Debug))
         fo.close()
         url = 'file://'+fileName
         webbrowser.open_new(url)
@@ -1162,7 +1191,8 @@ class PerformanceTableau(object):
                     print(x,g,quantilexg)
                 if quantilexg != 'NA':
                     for i in range(nc):
-                        #print(i, colorPalette[i][0])
+                        if Debug:
+                            print(i, colorPalette[i][0])
                         
                         if quantilexg <= colorPalette[i][0]:
                             quantileColor[x][g] = colorPalette[i][1]
@@ -1170,7 +1200,7 @@ class PerformanceTableau(object):
                 else:
                     quantileColor[x][g] = naColor
                 if Debug:
-                    print(quantileColor[x][g])
+                    print(x,g,quantileColor[x][g])
         # legend            
 ##        html += '<i>Color legend: </i>\n'
 ##        html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
@@ -4851,7 +4881,9 @@ if __name__ == "__main__":
 ##    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
 ##    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=True))
 ##    t.showHTMLPerformanceHeatmap(actionsList=actionsList,colorLevels=7,Ranked=True)
-    t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,Threading=True)
+    t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,Threading=False)
+    t.showPerformanceTableau()
+    t.showHTMLPerformanceTableau(Transposed=True)
 ##    t.showHTMLPerformanceHeatmap(colorLevels=7,Threading=False)
 ##    t.showHTMLPerformanceHeatmap()
 ##    pt1 = PartialPerformanceTableau(t)
