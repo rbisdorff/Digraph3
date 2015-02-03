@@ -1450,10 +1450,18 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
 
     def showQsRbcRanking(self,Descending=True):
         """
-        show the ranking-by-sorting refinement of the quantiles sorting result
+        obsolete, see showRanking.
         """
         print(self.computeQsRbcRanking(Descending=Descending,
                                        Comments=False))
+        
+    def showRanking(self,Descending=True):
+        """
+        show the ranking-by-choosing refinement of the quantiles sorting result
+        """
+        ordering = self.computeQsRbcRanking(Descending=Descending,
+                                       Comments=False)
+        print([x for x in flatten(ordering)])
 
     def exportSortingGraphViz(self,fileName=None,direction='decreasing',\
                        noSilent=True,graphType='png',\
@@ -1502,10 +1510,10 @@ if __name__ == "__main__":
     from weakOrders import *
     from time import time
 
-    Threading=True
+    Threading=False
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                   numberOfActions=250)
+                                   numberOfActions=50)
     t.saveXMCDA2('test')
     #t = XMCDA2PerformanceTableau('uniSorting')
     t = XMCDA2PerformanceTableau('test')
@@ -1534,7 +1542,7 @@ if __name__ == "__main__":
     print(time()-t0)
     qsrbc.showSorting()
     qsko.showQsRbcRanking()
-    qsrbc.showQsRbcRanking()
+    qsrbc.showRanking()
     koOrder = qsko.computePreorderRelation(qsko.computeQsRbcRanking())
     rbcOrder = qsrbc.computePreorderRelation(qsrbc.computeQsRbcRanking())
     print(g.computeOrdinalCorrelation(koOrder))

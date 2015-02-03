@@ -64,6 +64,17 @@ import itertools as IT
 import collections
 
 def flatten(iterable, ltypes=collections.Iterable):
+    """
+    Flattens a list of lists into a flat list.
+
+    Main usage:
+    
+    >>> listOfLists = [[1,2],[3],[4]]
+    >>> [x for x in flatten(listOfLists)]
+    [1,2,3,4]
+    
+    """
+    
     remainder = iter(iterable)
     while True:
         first = next(remainder)
