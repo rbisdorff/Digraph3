@@ -2326,7 +2326,14 @@ digraphs d1 and d2 of same order.</p>
 <dl class="function">
 <dt id="digraphs.flatten">
 <tt class="descclassname">digraphs.</tt><tt class="descname">flatten</tt><big>(</big><em>iterable</em>, <em>ltypes=&lt;class 'collections.abc.Iterable'&gt;</em><big>)</big><a class="headerlink" href="#digraphs.flatten" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Flattens a list of lists into a flat list.</p>
+<p>Main usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">listOfLists</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">flatten</span><span class="p">(</span><span class="n">listOfLists</span><span class="p">)]</span>
+<span class="go">[1,2,3,4]</span>
+</pre></div>
+</div>
+</dd></dl>
 
 <dl class="class">
 <dt id="digraphs.kChoicesDigraph">
@@ -2887,7 +2894,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -2986,7 +2993,7 @@ actions x criteria in html format.</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.htmlPerformanceTable">
-<tt class="descname">htmlPerformanceTable</tt><big>(</big><em>isSorted=True</em>, <em>ndigits=2</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.htmlPerformanceTable" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">htmlPerformanceTable</tt><big>(</big><em>isSorted=True</em>, <em>Transposed=False</em>, <em>ndigits=2</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.htmlPerformanceTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the performance table citerion x actions in html format.</p>
 </dd></dl>
 
@@ -3068,13 +3075,13 @@ the values observed in the performance Tableau.</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap">
-<tt class="descname">showHTMLPerformanceHeatmap</tt><big>(</big><em>actionsList=None</em>, <em>criteriaList=None</em>, <em>colorLevels=7</em>, <em>pageTitle=None</em>, <em>ndigits=2</em>, <em>Ranked=True</em>, <em>Correlations=False</em>, <em>Threading=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">showHTMLPerformanceHeatmap</tt><big>(</big><em>actionsList=None</em>, <em>criteriaList=None</em>, <em>colorLevels=7</em>, <em>pageTitle=None</em>, <em>ndigits=2</em>, <em>Ranked=True</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>shows the html heatmap version of the performance tableau in a browser window.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.showHTMLPerformanceTableau">
-<tt class="descname">showHTMLPerformanceTableau</tt><big>(</big><em>isSorted=True</em>, <em>ndigits=2</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">showHTMLPerformanceTableau</tt><big>(</big><em>isSorted=True</em>, <em>Transposed=False</em>, <em>ndigits=2</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>shows the html version of the performance tableau in a browser window.</p>
 </dd></dl>
 
@@ -3617,7 +3624,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4823,7 +4830,13 @@ of the quantiles sorting result.</p>
 <dl class="method">
 <dt id="weakOrders.QuantilesRankingDigraph.showQsRbcRanking">
 <tt class="descname">showQsRbcRanking</tt><big>(</big><em>Descending=True</em><big>)</big><a class="headerlink" href="#weakOrders.QuantilesRankingDigraph.showQsRbcRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>show the ranking-by-sorting refinement of the quantiles sorting result</p>
+<dd><p>obsolete, see showRanking.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="weakOrders.QuantilesRankingDigraph.showRanking">
+<tt class="descname">showRanking</tt><big>(</big><em>Descending=True</em><big>)</big><a class="headerlink" href="#weakOrders.QuantilesRankingDigraph.showRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>show the ranking-by-choosing refinement of the quantiles sorting result</p>
 </dd></dl>
 
 <dl class="method">
