@@ -1065,7 +1065,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2930,13 +2930,13 @@ xml.etree (for Python 2.5+).</p>
 <span class="go">*----  performance tableau -----*</span>
 <span class="go">criteria | weights | &#39;a01&#39;  &#39;a02&#39;  &#39;a03&#39;  &#39;a04&#39;  &#39;a05&#39;  &#39;a06&#39;  &#39;a07&#39;</span>
 <span class="go">---------|-----------------------------------------------------------</span>
-<span class="go">&#39;g01&#39;    |   1     | 94.92  89.11  98.94  37.82  66.02   8.91  71.08</span>
-<span class="go">&#39;g02&#39;    |   1     | 82.98   6.50  80.24  53.94   8.21  68.14  83.05</span>
-<span class="go">&#39;g03&#39;    |   1     | 89.41  41.42  53.84  61.69  67.29  78.18   3.08</span>
-<span class="go">&#39;g04&#39;    |   1     | 61.75   0.16  92.84  49.95  18.95  57.74  59.93</span>
-<span class="go">&#39;g05&#39;    |   1     |  8.65  58.28  91.99  51.35  70.00  89.79  23.59</span>
-<span class="go">&#39;g06&#39;    |   1     | 22.96  69.02  21.35  91.37  17.07  41.97   8.31</span>
-<span class="go">&#39;g07&#39;    |   1     | 19.25  56.16  49.67  24.09  50.38  18.83  33.08</span>
+<span class="go">  &#39;g01&#39;  |    1    | 94.92  89.11  98.94  37.82  66.02   8.91  71.08</span>
+<span class="go">  &#39;g02&#39;  |    1    | 82.98   6.50  80.24  53.94   8.21  68.14  83.05</span>
+<span class="go">  &#39;g03&#39;  |    1    | 89.41  41.42  53.84  61.69  67.29  78.18   3.08</span>
+<span class="go">  &#39;g04&#39;  |    1    | 61.75   0.16  92.84  49.95  18.95  57.74  59.93</span>
+<span class="go">  &#39;g05&#39;  |    1    |  8.65  58.28  91.99  51.35  70.00  89.79  23.59</span>
+<span class="go">  &#39;g06&#39;  |    1    | 22.96  69.02  21.35  91.37  17.07  41.97   8.31</span>
+<span class="go">  &#39;g07&#39;  |    1    | 19.25  56.16  49.67  24.09  50.38  18.83  33.08</span>
 <span class="go">    &gt;&gt;&gt; ...</span>
 </pre></div>
 </div>
@@ -2968,7 +2968,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3704,7 +3704,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
