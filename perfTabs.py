@@ -275,7 +275,9 @@ In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` clas
 
 With the help of the :py:class:`perfTabs.RandomPerformanceTableau` class let us generate for illustration a random performance tableau concerning 7 decision actions or alternatives denoted *a01*, *a02*, ..., *a07*:
        >>> from perfTabs import RandomPerformanceTableau
-       >>> rt = RandomPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
+       >>> rt = RandomPerformanceTableau(numberOfActions=7,
+                                         numberOfCriteria=7,
+                                         weightDistribution="equisignificant")
        >>> rt.showActions()
        *----- show decision actions --------------*
        key:  a01
@@ -296,13 +298,13 @@ In this example we consider furthermore a family of seven equisignificant cardin
 	*----  criteria -----*
 	g01 'digraphs.RandomPerformanceTableau() instance'
 	  Scale = [0.0, 100.0]
-	  Weight = 3.0
+	  Weight = 1.0
 	  Threshold pref : 20.00 + 0.00x ; percentile:  0.28
 	  Threshold ind : 10.00 + 0.00x ; percentile:  0.095
 	  Threshold veto : 80.00 + 0.00x ; percentile:  1.0
 	g02 'digraphs.RandomPerformanceTableau() instance'
 	  Scale = [0.0, 100.0]
-	  Weight = 3.0
+	  Weight = 1.0
 	  Threshold pref : 20.00 + 0.00x ; percentile:  0.33
 	  Threshold ind : 10.00 + 0.00x ; percentile:  0.19
 	  Threshold veto : 80.00 + 0.00x ; percentile:  0.95
@@ -310,7 +312,7 @@ In this example we consider furthermore a family of seven equisignificant cardin
 	...
 	g07 'digraphs.RandomPerformanceTableau() instance'
 	  Scale = [0.0, 100.0]
-	  Weight = 10.0
+	  Weight = 1.0
 	  Threshold pref : 20.00 + 0.00x ; percentile:  0.476
 	  Threshold ind : 10.00 + 0.00x ; percentile:  0.238
 	  Threshold veto : 80.00 + 0.00x ; percentile:  1.0
