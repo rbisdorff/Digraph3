@@ -277,7 +277,7 @@ With the help of the :py:class:`perfTabs.RandomPerformanceTableau` class let us 
        >>> from perfTabs import RandomPerformanceTableau
        >>> rt = RandomPerformanceTableau(numberOfActions=7,
                                          numberOfCriteria=7,
-                                         weightDistribution="equisignificant")
+                                         weightDistribution='equisignificant')
        >>> rt.showActions()
        *----- show decision actions --------------*
        key:  a01
@@ -294,17 +294,17 @@ With the help of the :py:class:`perfTabs.RandomPerformanceTableau` class let us 
        >>> ...
        
 In this example we consider furthermore a family of seven equisignificant cardinal criteria functions *g01*, *g02*, ..., *g07*, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation's uncertainty and imprecision, each criterion function *g1* to *g7* admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations: 
-    >>> rt.showCriteria()
+    >>> rt.showCriteria(IntegerWeights=True)
 	*----  criteria -----*
 	g01 'digraphs.RandomPerformanceTableau() instance'
 	  Scale = [0.0, 100.0]
-	  Weight = 1.0
+	  Weight = 1
 	  Threshold pref : 20.00 + 0.00x ; percentile:  0.28
 	  Threshold ind : 10.00 + 0.00x ; percentile:  0.095
 	  Threshold veto : 80.00 + 0.00x ; percentile:  1.0
 	g02 'digraphs.RandomPerformanceTableau() instance'
 	  Scale = [0.0, 100.0]
-	  Weight = 1.0
+	  Weight = 1
 	  Threshold pref : 20.00 + 0.00x ; percentile:  0.33
 	  Threshold ind : 10.00 + 0.00x ; percentile:  0.19
 	  Threshold veto : 80.00 + 0.00x ; percentile:  0.95
@@ -312,23 +312,24 @@ In this example we consider furthermore a family of seven equisignificant cardin
 	...
 	g07 'digraphs.RandomPerformanceTableau() instance'
 	  Scale = [0.0, 100.0]
-	  Weight = 1.0
+	  Weight = 1
 	  Threshold pref : 20.00 + 0.00x ; percentile:  0.476
 	  Threshold ind : 10.00 + 0.00x ; percentile:  0.238
 	  Threshold veto : 80.00 + 0.00x ; percentile:  1.0
+    >>> ...
 
 The performance evaluations of each decision alternative on each criterion are gathered in a *performance tableau*:
 	>>> rt.showPerformanceTableau()
-	*----  performance tableau -----*
-	criteria |  'a01'   'a02'   'a03'   'a04'   'a05'   'a06'   'a07'   
-	---------|------------------------------------------------------
-	  'g01'  |   9.6    48.8    21.7    37.3    81.9    48.7    87.7  
-	  'g02'  |  90.9    11.8    96.6    41.0    34.0    53.9    46.3  
-	  'g03'  |  97.8    46.4    83.3    30.9    61.5    85.4    82.5  
-	  'g04'  |  40.5    43.6    53.2    17.5    38.6    21.5    67.6  
-	  'g05'  |  33.0    40.7    96.4    55.1    46.2    58.1    52.6  
-	  'g06'  |  47.6    19.0    92.7    55.3    51.7    26.6    40.4  
-	  'g07'  |  41.2    64.0    87.7    71.6    57.8    59.3    34.7
+    *----  performance tableau -----*
+    criteria | weights | 'a01'  'a02'  'a03'  'a04'  'a05'  'a06'  'a07'
+    ---------|-----------------------------------------------------------
+    'g01'    |   1     | 94.92  89.11  98.94  37.82  66.02   8.91  71.08
+    'g02'    |   1     | 82.98   6.50  80.24  53.94   8.21  68.14  83.05
+    'g03'    |   1     | 89.41  41.42  53.84  61.69  67.29  78.18   3.08
+    'g04'    |   1     | 61.75   0.16  92.84  49.95  18.95  57.74  59.93
+    'g05'    |   1     |  8.65  58.28  91.99  51.35  70.00  89.79  23.59
+    'g06'    |   1     | 22.96  69.02  21.35  91.37  17.07  41.97   8.31
+    'g07'    |   1     | 19.25  56.16  49.67  24.09  50.38  18.83  33.08
 	>>> ...
 
     """
@@ -350,8 +351,6 @@ The performance evaluations of each decision alternative on each criterion are g
                 for g in argDict['criteria']:
                     self.criteria[g] = {'weight':Decimal(str(self.weightset[g])),
                                         'thresholds': self.thresholds[g]}
-                    
-                
             except:
                 self.criteria = argDict['criteria']
             try:
@@ -442,6 +441,22 @@ The performance evaluations of each decision alternative on each criterion are g
         else:
             return weightedAverage
         
+    def showActions(self):
+        """
+        presentation methods for decision actions or alternatives
+        """
+        print('*----- show decision action --------------*')
+        actionsList = [x for x in self.actions]
+        actionsList.sort()
+        for x in actionsList:
+            print('key: ',x)
+            try:
+                print('  short name:',self.actions[x]['shortName'])
+            except:
+                pass
+            print('  name:      ',self.actions[x]['name'])
+            print('  comment:   ',self.actions[x]['comment'])
+            print()
     
     def showCriteria(self,IntegerWeights=False,Debug=False):
         """
