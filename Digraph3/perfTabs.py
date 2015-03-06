@@ -330,7 +330,7 @@ The performance evaluations of each decision alternative on each criterion are g
       'g05'  |    1    |  8.65  58.28  91.99  51.35  70.00  89.79  23.59
       'g06'  |    1    | 22.96  69.02  21.35  91.37  17.07  41.97   8.31
       'g07'  |    1    | 19.25  56.16  49.67  24.09  50.38  18.83  33.08
-	>>> ...
+    >>> ...
 
     """
     def __init__(self,filePerfTab=None,isEmpty=False):
