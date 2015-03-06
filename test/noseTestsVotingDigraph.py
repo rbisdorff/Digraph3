@@ -125,6 +125,7 @@ def testLinearVotingBallots():
     lvp = LinearVotingProfile('templinearprofile')
     lvp.showLinearBallots()
     print(lvp.computeRankAnalysis())
+    lvp.showRankAnalysis(Debug=True)
     print(lvp.computeBordaScores())
     print(lvp.computeBordaWinners())
     c = CondorcetDigraph(lvp)

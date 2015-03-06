@@ -295,6 +295,50 @@ class LinearVotingProfile(VotingProfile):
         #print ranks
         return ranks
 
+    def showRankAnalysis(self,Sorted=True,ndigits=0,Debug=False):
+        """
+        Print the rank analysis tableau.
+        
+        If Sorted (True by default), the candidates
+        are ordered by increasing Borda Scores.
+
+        In case of decimal voters weights, ndigits allows
+        the format the decimal precision of the tableau.
+        
+        """
+        print('*----  Rank analysis tableau -----*')
+        bordaScores = self.computeBordaScores() 
+        candidatesList = [(bordaScores[x],x) for x in self.candidates]
+        if Sorted:
+            candidatesList.sort()
+        if Debug:
+            print(candidatesList)
+        nc = len(candidatesList)
+        rankIndex = [i+1 for i in range(nc)]
+        if Debug:
+            print(nc,rankIndex)
+        ranks = self.computeRankAnalysis()
+        if Debug:
+            print(ranks)
+        if Debug:
+            print(bordaScores)
+            
+        ## print table
+
+        print(' ranks | ', end=' ')
+        for x in rankIndex:
+            print( str(x) + '   ', end=' ')
+        print('| Borda score')
+        print('-------|-----------------------------------------')
+        for c in candidatesList:
+            print('  \''+str(c[1])+'\' |', end=' ')
+            for i in rankIndex:
+                formatString = '%% .%df ' % ndigits
+                print(formatString % (ranks[c[1]][(i-1)]), end='  ')
+            formatString = ' |  %% .%df' % ndigits
+            print(formatString % (bordaScores[c[1]]) )      
+
+
     def computeBordaScores(self):
         """
         compute Borda scores from the rank analysis
@@ -419,6 +463,7 @@ class LinearVotingProfile(VotingProfile):
         if Comments:
             print('simple majority winner(s) ', simpleMajorityWinner)
         return simpleMajorityWinner
+
 
 class ApprovalVotingProfile(VotingProfile):
     """
@@ -1041,19 +1086,20 @@ if __name__ == "__main__":
     ##    print x, lvp.linearBallot[x]
     lvp.showLinearBallots()
     print(lvp.computeRankAnalysis())
+    lvp.showRankAnalysis(Debug=True)
     print(lvp.computeBordaScores())
-    print(lvp.computeBordaWinners())
-    print(lvp.computeUninominalVotes(lvp.candidates,lvp.linearBallot))
-    print(lvp.computeInstantRunoffWinner(Comments=True))
-    print(lvp.computeSimpleMajorityWinner(Comments=True))
-
-    c = CondorcetDigraph(lvp)
-    c.exportGraphViz()
-    print('Chordless circuits = ', c.computeChordlessCircuits())
-    print('Condorcet Winner = ', c.computeCondorcetWinner())
-    m = len(lvp.voters)
-    c.recodeValuation(-m,m)
-    c.showRelationTable()
+##    print(lvp.computeBordaWinners())
+##    print(lvp.computeUninominalVotes(lvp.candidates,lvp.linearBallot))
+##    print(lvp.computeInstantRunoffWinner(Comments=True))
+##    print(lvp.computeSimpleMajorityWinner(Comments=True))
+##
+##    c = CondorcetDigraph(lvp)
+##    c.exportGraphViz()
+##    print('Chordless circuits = ', c.computeChordlessCircuits())
+##    print('Condorcet Winner = ', c.computeCondorcetWinner())
+##    m = len(lvp.voters)
+##    c.recodeValuation(-m,m)
+##    c.showRelationTable()
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
@@ -1066,72 +1112,5 @@ if __name__ == "__main__":
 
 #############################
 # Log record for changes:
-# $Log: votingDigraphs.py,v $
-# Revision 1.31  2012/05/21 04:54:52  bisi
-# minor
-#
-# Revision 1.30  2012/05/20 15:01:49  bisi
-# minor
-#
-# Revision 1.29  2012/05/09 10:51:43  bisi
-# GPL version 3 licensing installed
-#
-# Revision 1.28  2012/04/14 11:36:06  bisi
-# debug
-#
-# Revision 1.27  2012/04/14 10:17:41  bisi
-# debug
-#
-# Revision 1.26  2012/04/14 09:46:37  bisi
-# debug
-#
-# Revision 1.25  2012/03/12 12:25:26  bisi
-# debugging
-#
-# Revision 1.24  2012/03/12 12:20:39  bisi
-# debugging
-#
-# Revision 1.23  2012/03/11 07:59:59  bisi
-# added simpleMajorityWinner to linear ballots
-#
-# Revision 1.22  2012/03/09 10:28:10  bisi
-# debug
-#
-# Revision 1.21  2012/03/09 03:19:31  bisi
-# added instant runoff voting procedure for liner ballots
-#
-# Revision 1.20  2012/03/04 17:48:17  bisi
-# added Condorcet winner method to the CondorcetDigraph class
-#
-# Revision 1.19  2012/03/04 13:49:28  bisi
-# added linear voting profiles and Borda rank analysis
-#
-# Revision 1.16  2011/08/13 05:25:35  bisi
-# addedd piping C++ subprocess for chordless circuits enumeration
-#
-# Revision 1.15  2011/08/12 08:59:51  bisi
-# added agrum directory with C++ sources for chordless circuits enumeration adn detection
-#
-# Revision 1.14  2011/08/07 18:06:16  bisi
-# refactoring perfTabs.py module
-#
-# Revision 1.10  2011/03/28 08:22:13  bisi
-# added hasIntegerValuation flagg to CondorcetDigraph constructor
-#
-# Revision 1.9  2011/03/28 08:00:38  bisi
-# sync SVN
-#
-# Revision 1.4  2011/03/08 14:00:35  bisi
-# Added random ApprovalVotingProfile instantiation
-#
-# Revision 1.3  2011/03/08 13:32:17  bisi
-# Added RandomVotingProfile class
-#
-# Revision 1.2  2011/03/05 09:16:47  bisi
-# Adding votingDigraph nose test suite
-#
-# Revision 1.1  2011/03/05 09:06:16  bisi
-# Created submodule votingDigraphs
-#
-#
+# $Log: votingDigraphs.py,v $#
 #############################
