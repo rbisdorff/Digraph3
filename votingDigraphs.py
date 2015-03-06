@@ -303,7 +303,7 @@ class LinearVotingProfile(VotingProfile):
         are ordered by increasing Borda Scores.
 
         In case of decimal voters weights, ndigits allows
-        the format the decimal precision of the tableau.
+        to format the decimal precision of the numerical output.
         
         """
         print('*----  Rank analysis tableau -----*')
