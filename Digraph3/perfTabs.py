@@ -319,7 +319,7 @@ In this example we consider furthermore a family of seven equisignificant cardin
     >>> ...
 
 The performance evaluations of each decision alternative on each criterion are gathered in a *performance tableau*:
-	>>> rt.showPerformanceTableau()
+    >>> rt.showPerformanceTableau()
     *----  performance tableau -----*
     criteria | weights | 'a01'  'a02'  'a03'  'a04'  'a05'  'a06'  'a07'
     ---------|-----------------------------------------------------------
