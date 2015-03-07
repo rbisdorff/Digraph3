@@ -4674,8 +4674,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
     stored XMCDA 2.0 formatted instances with exact decimal numbers.
     Using the inbuilt module xml.etree (for Python 2.5+).
 
-    Parameters: 
-	    * fileName is given without the extension ``.xml`` or ``.xmcda``,
+    Parameters:
+        * fileName is given without the extension ``.xml`` or ``.xmcda``,
         * HasSeparatedWeights in XMCDA 2.0.0 encoding (default = False),
         * HasSeparatedThresholds in XMCDA 2.0.0 encoding (default = False),
         * stringInput: instantiates from an XMCDA 2.0 encoded string argument.
