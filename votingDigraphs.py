@@ -176,7 +176,7 @@ class LinearVotingProfile(VotingProfile):
     {'a1': [4.0, 1.0, 0],
      'a2': [1.0, 3.0, 1.0],
      'a3': [0, 1.0, 4.0]}
-    >>> v.showRankAanalysisTable()
+    >>> v.showRankAnalysisTable()
     *----  Rank analysis tableau -----*
       ranks |  1    2    3    | Borda score
      -------|------------------------------
