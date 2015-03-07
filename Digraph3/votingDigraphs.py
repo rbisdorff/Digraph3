@@ -175,7 +175,14 @@ class LinearVotingProfile(VotingProfile):
     >>> v.computeRankAnalysis()
     {'a1': [4.0, 1.0, 0],
      'a2': [1.0, 3.0, 1.0],
-     'a3': [0, 1.0, 4.0]]
+     'a3': [0, 1.0, 4.0]}
+    >>> v.showRankAanalysisTable()
+    *----  Rank analysis tableau -----*
+      ranks |  1    2    3    | Borda score
+     -------|------------------------------
+       'a1' |  4    1    0    |   6
+       'a2' |  1    3    1    |   10
+       'a3' |  0    1    4    |   14
     >>> v.computeUninominalVotes()
     {'a1': 4.0, 'a3': 0, 'a2': 1.0}
     >>> v.computeSimpleMajorityWinner()
@@ -295,7 +302,7 @@ class LinearVotingProfile(VotingProfile):
         #print ranks
         return ranks
 
-    def showRankAnalysis(self,Sorted=True,ndigits=0,Debug=False):
+    def showRankAnalysisTable(self,Sorted=True,ndigits=0,Debug=False):
         """
         Print the rank analysis tableau.
         
@@ -1086,7 +1093,7 @@ if __name__ == "__main__":
     ##    print x, lvp.linearBallot[x]
     lvp.showLinearBallots()
     print(lvp.computeRankAnalysis())
-    lvp.showRankAnalysis(Debug=True)
+    lvp.showRankAnalysisTable(Debug=True)
     print(lvp.computeBordaScores())
 ##    print(lvp.computeBordaWinners())
 ##    print(lvp.computeUninominalVotes(lvp.candidates,lvp.linearBallot))
