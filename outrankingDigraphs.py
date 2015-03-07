@@ -3213,12 +3213,12 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
 class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     """
+    Specialization of the standard OutrankingDigraph class for generating classical Electre III outranking digraphs (with vetoes and no counter-vetoes).
+
     Parameters:
         | performanceTableau (fileName of valid py code)
         | optional, coalition (sublist of criteria)
 
-    Specialization of the standard OutrankingDigraph class for generating
-    bipolar uniform-valued outranking digraphs.
 
     """
     def __init__(self,argPerfTab=None,coalition=None,hasNoVeto=False):
@@ -6815,7 +6815,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
     *Parameters*:
 
-        * argPerfTab: PerformanceTableau instance or the name (without extension)of a stored one. If None, a random instance is generated.
+        * argPerfTab: PerformanceTableau instance or the name (without extension) of a stored one. If None, a random instance is generated.
         * distribution: {triangular|uniform|beta}, probability distribution used for generating random weights
         * betaParameter: a = b (default = 2)
         * confidence: required likelihood (in %) of the outranking relation
@@ -6964,7 +6964,9 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         else:
             return 0.5 + 0.5*erf(z)
     
-    def computeCLTLikelihoods(self,distribution="triangular",betaParameter=None,Threading=False,Debug=False):
+    def computeCLTLikelihoods(self,distribution="triangular",
+                              betaParameter=None,
+                              Threading=False,Debug=False):
         """
         Renders the pairwise CLT likelihood of the at least as good as relation
         neglecting all considerable large performance differences polarisations.
