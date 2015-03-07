@@ -2968,7 +2968,7 @@ xml.etree (for Python 2.5+).</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3704,7 +3704,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4234,7 +4234,14 @@ linearBallot = {
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">computeRankAnalysis</span><span class="p">()</span>
 <span class="go">{&#39;a1&#39;: [4.0, 1.0, 0],</span>
 <span class="go"> &#39;a2&#39;: [1.0, 3.0, 1.0],</span>
-<span class="go"> &#39;a3&#39;: [0, 1.0, 4.0]]</span>
+<span class="go"> &#39;a3&#39;: [0, 1.0, 4.0]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">showRankAanalysisTable</span><span class="p">()</span>
+<span class="go">*----  Rank analysis tableau -----*</span>
+<span class="go">  ranks |  1    2    3    | Borda score</span>
+<span class="go"> -------|------------------------------</span>
+<span class="go">   &#39;a1&#39; |  4    1    0    |   6</span>
+<span class="go">   &#39;a2&#39; |  1    3    1    |   10</span>
+<span class="go">   &#39;a3&#39; |  0    1    4    |   14</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">computeUninominalVotes</span><span class="p">()</span>
 <span class="go">{&#39;a1&#39;: 4.0, &#39;a3&#39;: 0, &#39;a2&#39;: 1.0}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">computeSimpleMajorityWinner</span><span class="p">()</span>
@@ -4308,8 +4315,8 @@ and restricted linear ballots</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.LinearVotingProfile.showRankAnalysis">
-<tt class="descname">showRankAnalysis</tt><big>(</big><em>Sorted=True</em>, <em>ndigits=0</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#votingDigraphs.LinearVotingProfile.showRankAnalysis" title="Permalink to this definition">¶</a></dt>
+<dt id="votingDigraphs.LinearVotingProfile.showRankAnalysisTable">
+<tt class="descname">showRankAnalysisTable</tt><big>(</big><em>Sorted=True</em>, <em>ndigits=0</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#votingDigraphs.LinearVotingProfile.showRankAnalysisTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the rank analysis tableau.</p>
 <p>If Sorted (True by default), the candidates
 are ordered by increasing Borda Scores.</p>

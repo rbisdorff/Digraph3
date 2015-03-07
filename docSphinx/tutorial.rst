@@ -941,15 +941,15 @@ We may also follow the Chevalier de Borda's advice and, after a **rank analysis*
     >>> v.computeBordaWinners()
     ['a1']
 
-The Borda rank analysis table my be viewd with a corresponding show command:
-    >>> v.showRankAnalysis()
+The Borda **rank analysis table** my be printed out with a corresponding ``show`` command:
+    >>> v.showRankAnalysisTable()
     *----  Rank analysis tableau -----*
       ranks |  1    2    3    | Borda score
      -------|------------------------------
        'a1' |  2    3    0    |   8
        'a3' |  2    1    2    |   10
        'a2' |  1    1    3    |   12
-     >>> ...
+    >>> ...
 
 The Condorcet winner
 ....................
