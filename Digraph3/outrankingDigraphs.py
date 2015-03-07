@@ -6811,12 +6811,11 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     that is outranking without veto and counterveto.
 
     By default, each criterion i' significance weight is supposed to
-    be a triangular random variables of mode w_i in the range 0 to 2*w_i.
+    be a triangular random variable of mode w_i in the range 0 to 2*w_i.
 
     *Parameters*:
 
-        * argPerfTab: PerformanceTableau instance or the name of a stored one.
-          If None, a random instance is generated.
+        * argPerfTab: PerformanceTableau instance or the name (without extension)of a stored one. If None, a random instance is generated.
         * distribution: {triangular|uniform|beta}, probability distribution used for generating random weights
         * betaParameter: a = b (default = 2)
         * confidence: required likelihood (in %) of the outranking relation
