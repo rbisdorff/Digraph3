@@ -275,8 +275,8 @@ In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` clas
 
 Structure::
 
-       actions = {'a1': {'name': ...},
-                  'a2': {'name': ...},
+       actions = {'a1': {'name': ..., 'comment': ...},
+                  'a2': {'name': ..., 'comment': ...},
                   ...}
        criteria = {'g1': {'weight':Decimal("3.00"),
                           'scale': (Decimal("0.00"),Decimal("100.00")),
