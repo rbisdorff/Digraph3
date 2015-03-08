@@ -290,7 +290,7 @@ Structure::
                                           'veto': (Decimal('80.0'), Decimal('0.0'))} },
                      ...}
        evaluation = {'g1': {'a1':Decimal("57.28"),'a2':Decimal("99.85"), ...},
-                     'g2': {'a2':Decimal("88.12"),'a2':Decimal("33.25"), ...},
+                     'g2': {'a1':Decimal("88.12"),'a2':Decimal("33.25"), ...},
                      ...}
 
 With the help of the :py:class:`perfTabs.RandomPerformanceTableau` class let us generate for illustration a random performance tableau concerning 7 decision actions or alternatives denoted *a01*, *a02*, ..., *a07*:
