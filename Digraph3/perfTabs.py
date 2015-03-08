@@ -278,7 +278,7 @@ Structure::
        actions = {'a1': {'name': ...},
                   'a2': {'name': ...},
                   ...}
-       criteria = {'g1': {'weight':Decimal("5.00"),
+       criteria = {'g1': {'weight':Decimal("3.00"),
                           'scale': (Decimal("0.00"),Decimal("100.00")),
                           'thresholds' : {'pref': (Decimal('20.0'), Decimal('0.0')),
                                           'ind': (Decimal('10.0'), Decimal('0.0')),
@@ -286,8 +286,8 @@ Structure::
                    'g2': {'weight':Decimal("5.00"),
                           'scale': (Decimal("0.00"),Decimal("100.00")),
                           'thresholds' : {'pref': (Decimal('20.0'), Decimal('0.0')),
-                          'ind': (Decimal('10.0'), Decimal('0.0')),
-                          'veto': (Decimal('80.0'), Decimal('0.0'))} },
+                                          'ind': (Decimal('10.0'), Decimal('0.0')),
+                                          'veto': (Decimal('80.0'), Decimal('0.0'))} },
                      ...}
        evaluation = {'g1': {'a1':Decimal("57.28"),'a2':Decimal("99.85"), ...},
                      'g2': {'a2':Decimal("88.12"),'a2':Decimal("33.25"), ...},
