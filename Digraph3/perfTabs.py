@@ -273,6 +273,26 @@ In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` clas
      2. a coherent family of **criteria**: a dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
      3. the **evaluations**: a dictionary of performance evaluations for each decision action or alternative on each criterion function.
 
+Structure::
+
+       actions = {'a1': {'name': ...},
+                  'a2': {'name': ...},
+                  ...}
+       criteria = {'g1': {'weight':Decimal("5.00"),
+                          'scale': (Decimal("0.00"),Decimal("100.00")),
+                          'thresholds' : {'pref': (Decimal('20.0'), Decimal('0.0')),
+                                          'ind': (Decimal('10.0'), Decimal('0.0')),
+                                          'veto': (Decimal('80.0'), Decimal('0.0'))} },
+                   'g2': {'weight':Decimal("5.00"),
+                          'scale': (Decimal("0.00"),Decimal("100.00")),
+                          'thresholds' : {'pref': (Decimal('20.0'), Decimal('0.0')),
+                          'ind': (Decimal('10.0'), Decimal('0.0')),
+                          'veto': (Decimal('80.0'), Decimal('0.0'))} },
+                     ...}
+       evaluation = {'g1': {'a1':Decimal("57.28"),'a2':Decimal("99.85"), ...},
+                     'g2': {'a2':Decimal("88.12"),'a2':Decimal("33.25"), ...},
+                     ...}
+
 With the help of the :py:class:`perfTabs.RandomPerformanceTableau` class let us generate for illustration a random performance tableau concerning 7 decision actions or alternatives denoted *a01*, *a02*, ..., *a07*:
        >>> from perfTabs import RandomPerformanceTableau
        >>> rt = RandomPerformanceTableau(numberOfActions=7,

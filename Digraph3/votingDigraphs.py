@@ -478,12 +478,14 @@ class ApprovalVotingProfile(VotingProfile):
 
     Structure::
 
-        candidates = {'a':  ,'b':  ,'c', ..., ...}
-        voters = {'1':{'weight':1.0},'2':{'weight':1.0}, ...}
+        candidates = {'a': {'name': ...},
+                      'b': {'name': ...},
+                      ..., ...}
+        voters = {'v1':{'weight':1.0},'v2':{'weight':1.0}, ...}
         ## each specifies the subset of candidates he approves on
         approvalBallot = {
-            '1' : ['b'],
-            '2' : ['a','b'],
+            'v1' : ['b'],
+            'v2' : ['a','b'],
             ...
             }
 
