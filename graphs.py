@@ -15,12 +15,15 @@ class Graph(object):
                    'v2': {'name': ...,'shortName': ...},
                    'v3': {'name': ...,'shortName': ...},
                    ... }
+                   
        valuationDomain = {'min': -1, 'med': 0, 'max': 1}
 
        g.edges = {frozenset({'v1','v2'}): 1,
                   frozenset({'v1','v3'}): 1,
                   frozenset({'v2','v3'}): -1,
                   ...}
+
+       g.gamma = {'v1': {'v2',v3'}, 'v2': {'v1'}, 'v3': {'v1'}, ... }
        
     Example python3 session:
        >>> from graphs import Graph
