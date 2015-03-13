@@ -6,8 +6,8 @@
 
 class Graph(object):
     """
-    Graph class implementation with a vertices and an edges dictionary
-    and a gamma function (dictionary) from vertices to subsets of neighboring vertices.
+    Graph class implementation with a vertices dictionqary, an edges dictionary,
+    and a gamma function dictionary characterising the links from vertices to their subsets of neighboring vertices ina given valuation domain (by default [-1,1]).
 
     General structure::
 
