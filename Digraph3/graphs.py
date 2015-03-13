@@ -16,12 +16,12 @@ class Graph(object):
                    'v3': {'name': ...,'shortName': ...},
                    ... }
        valuationDomain = {'min': -1, 'med': 0, 'max': 1}
-       g.edges = {frozenset({'v1','v2'}): 1,
-                  frozenset({'v1','v3'}): 1,
-                  frozenset({'v2','v3'}): -1,
+       edges = {frozenset({'v1','v2'}): 1,
+                frozenset({'v1','v3'}): 1,
+                frozenset({'v2','v3'}): -1,
                   ...}
        ## links from each vertex to its neighbors
-       g.gamma = {'v1': {'v2',v3'}, 'v2': {'v1'}, 'v3': {'v1'}, ... }
+       gamma = {'v1': {'v2',v3'}, 'v2': {'v1'}, 'v3': {'v1'}, ... }
        
     Example python3 session:
        >>> from graphs import Graph
@@ -449,8 +449,9 @@ class RandomGraph(Graph):
         * order (positive integer)
         * edgeProbability (in [0,1])
     """
-    def __init__(self,order=5,edgeProbability=0.4):
-        from random import random
+    def __init__(self,order=5,edgeProbability=0.4,seed=None):
+        import random
+        random.seed(seed)
         self.name = 'randomGraph'
         self.order = order
         nd = len(str(order))
@@ -461,11 +462,13 @@ class RandomGraph(Graph):
         self.vertices = vertices
         self.valuationDomain = {'min':-1,'med':0,'max':1}
         edges = dict()
-        for x in vertices:
-            for y in vertices:
+        verticesList = [v for v in vertices]
+        verticesList.sort()
+        for x in verticesList:
+            for y in verticesList:
                 if x != y:
                     edgeKey = frozenset([x,y])
-                    if random() > 1.0 - edgeProbability:
+                    if random.random() > 1.0 - edgeProbability:
                         edges[edgeKey] = 1
                     else:
                         edges[edgeKey] = -1
@@ -1552,10 +1555,11 @@ class MISModel(Graph):
 # --------------testing the module ----
 if __name__ == '__main__':
 
-
-    g = RandomFixedDegreeSequenceGraph(degreeSequence=[6,6,6,6,0,6,6])
+    g = RandomGraph(seed=100)
     g.showShort()
-    rg = RandomRegularGraph()
+    g = RandomFixedDegreeSequenceGraph(seed=100)
+    g.showShort()
+    rg = RandomRegularGraph(seed=100)
     rg.showShort()
     
 ##    g = TriangularGraph(n=5,m=5)

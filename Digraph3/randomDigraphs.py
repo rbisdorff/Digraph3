@@ -366,8 +366,7 @@ class RandomFixedSizeDigraph(Digraph):
     """
     def __init__(self,order=7,size=14,seed=None):
         import random,copy
-        if seed != None:
-            random.seed(seed)
+        random.seed(seed)
         # check feasability
         r = (order * order) - order
         if size > r :
@@ -384,7 +383,6 @@ class RandomFixedSizeDigraph(Digraph):
             self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
             Min = self.valuationdomain['min']
             Max = self.valuationdomain['max']
-            random.seed()
             allarcs = []
             relation = {}
             for x in actions:
@@ -416,8 +414,7 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
     """
     def __init__(self,order=7,degreeSequence=[3,3,2,2,1,1,0],seed=None):
         import random,copy
-        if seed != None:
-            random.seed(seed)
+        random.seed(seed)
         # check feasability
         degree = max(degreeSequence)
         if degree >= order:
@@ -449,7 +446,6 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
                     relation[x] = {}
                     for y in actions:
                         relation[x][y] = Min
-                random.seed()
                 # create a random pairing
                 feasable = 0
                 s = 0
@@ -502,9 +498,8 @@ class _RandomTree(Digraph):
 
     """
     def __init__(self,numberOfNodes=5, ndigits=2, hasIntegerValuation=True, seed=None):
-        from random import choice,seed
-        if seed != None:
-            seed(seed)
+        import random
+        random.seed(seed)
         from decimal import Decimal
         self.name = 'randomTree'
         self.order = numberOfNodes
@@ -531,7 +526,7 @@ class _RandomTree(Digraph):
         nodes = [x for x in range(len(nodeKeys))]
         pruefer = []
         for i in range(len(nodeKeys)-2):
-            pruefer.append(choice(nodes))
+            pruefer.append(random.choice(nodes))
         print(pruefer)
         pairs = self._prufer_to_tree(pruefer)
         for (i,j) in pairs:
@@ -578,8 +573,7 @@ class RandomRegularDigraph(Digraph):
     """
     def __init__(self,order=7,degree=2, seed=None):
         import random,copy
-        if seed != None:
-            random.seed(seed)
+        random.seed(seed)
         # check feasability
         r = (order * degree) % 2
         if degree >= order or r == 1:
@@ -594,7 +588,6 @@ class RandomRegularDigraph(Digraph):
                 actions.append(str(x))
             self.actions = actions
             self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
-            random.seed()
             # create a random pairing
             feasable = 0
             s = 0
