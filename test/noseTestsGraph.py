@@ -24,6 +24,15 @@ def testGraph():
     g._saveEdges(Agrum=True)
     g.exportGraphViz('testGraphViz')
 
+def testRandomGraphs():
+    print('==>> Testing Random Graph instantiations')
+    g = RandomFixedDegreeSequenceGraph()
+    g.showShort()
+    g.exportGraphViz('testRandomFixedDegreeSequence')
+    rg = RandomRegularGraph()
+    rg.showShort()
+    rg.exportGraphViz('testRandomRegularGraph')
+
 def testGraph2Digraph():
     print('==>> Testing Graph2Digraph coversion')
     g = RandomGraph(order=7,edgeProbability=0.5)
