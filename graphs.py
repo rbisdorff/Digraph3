@@ -7,7 +7,7 @@
 class Graph(object):
     """
     Graph class implementation with a vertices and an edges dictionary
-    and a gamma function (dictionary) from vertices to subsets of vertices.
+    and a gamma function (dictionary) from vertices to subsets of neighboring vertices.
 
     General structure::
 
