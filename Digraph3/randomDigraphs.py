@@ -423,6 +423,7 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
         if degree >= order:
             print('!!! Graph not feasable (1) !!!')
             print('Maximum degree > order !!!')
+            self=None
         else:
             sumdegrees = 0
             for i in range(order):

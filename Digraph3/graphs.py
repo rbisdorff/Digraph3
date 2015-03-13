@@ -7,7 +7,7 @@
 class Graph(object):
     """
     Graph class implementation with a vertices dictionary, an edges dictionary,
-    and a gamma function dictionary, characterising the links from each vertice to its subset of neighboring vertices in a given valuation domain (by default [-1,1]).
+    and a gamma function dictionary, characterising the links from each vertex to its subset of neighboring vertices in a given valuation domain (by default [-1,1]).
 
     General structure::
 
@@ -15,14 +15,12 @@ class Graph(object):
                    'v2': {'name': ...,'shortName': ...},
                    'v3': {'name': ...,'shortName': ...},
                    ... }
-                   
        valuationDomain = {'min': -1, 'med': 0, 'max': 1}
-
        g.edges = {frozenset({'v1','v2'}): 1,
                   frozenset({'v1','v3'}): 1,
                   frozenset({'v2','v3'}): -1,
                   ...}
-
+       ## links from each vertex to its neighbors
        g.gamma = {'v1': {'v2',v3'}, 'v2': {'v1'}, 'v3': {'v1'}, ... }
        
     Example python3 session:
@@ -475,6 +473,47 @@ class RandomGraph(Graph):
         self.size = len(self.edges)
         self.gamma = self.gammaSets()
 
+class RandomRegularGraph(Graph):
+    """
+    Specialization of the general Graph class for generating
+    temporary random regular graphs of fixed degrees.
+    """
+    def __init__(self,order=7,degree=2,seed=None):
+        from copy import deepcopy
+        from randomDigraphs import RandomRegularDigraph
+        rdg = RandomRegularDigraph(order=order,
+                                   degree=degree,
+                                   seed=seed)
+        rg = rdg.digraph2Graph()
+        self.vertices = deepcopy(rg.vertices)
+        self.valuationDomain = deepcopy(rg.valuationDomain)
+        self.edges = deepcopy(rg.edges)
+        self.name = 'randomRegularGraph'
+        self.gamma = self.gammaSets()
+
+class RandomFixedDegreeSequenceGraph(Graph):
+    """
+    Specialization of the general Graph class for generating
+    temporary random graphs with a fixed sequence of degrees.
+
+    .. warning::
+
+        The implementation is not guaranteeing a uniform choice
+        among all potential valid graph instances.
+
+    """
+    def __init__(self,order=7,degreeSequence=[3,3,2,2,1,1,0],seed=None):
+        from copy import deepcopy
+        from randomDigraphs import RandomFixedDegreeSequenceDigraph
+        rdg = RandomFixedDegreeSequenceDigraph(order=order,
+                                               degreeSequence=degreeSequence,
+                                               seed=seed)
+        rg = rdg.digraph2Graph()
+        self.vertices = deepcopy(rg.vertices)
+        self.valuationDomain = deepcopy(rg.valuationDomain)
+        self.edges = deepcopy(rg.edges)
+        self.name = 'randomFixedDegreeSequenceGraph'
+        self.gamma = self.gammaSets()
 
 class GridGraph(Graph):
     """
@@ -1512,35 +1551,42 @@ class MISModel(Graph):
 
 # --------------testing the module ----
 if __name__ == '__main__':
+
+
+    g = RandomFixedDegreeSequenceGraph(degreeSequence=[6,6,6,6,0,6,6])
+    g.showShort()
+    rg = RandomRegularGraph()
+    rg.showShort()
+    
 ##    g = TriangularGraph(n=5,m=5)
 ##    #g.showShort()
 ##    g.exportGraphViz()
     
-    g = Graph(numberOfVertices=5,edgeProbability=0.5)
-    g.showShort()
-    g.save('test')
-    probs = {}
-    n = g.order
-    i = 0
-    verticesList = [x for x in g.vertices]
-    verticesList.sort()
-    for x in verticesList:
-        probs[x] = (n - i)/(n*(n+1)/2)
-        i += 1
-    sumProbs = 0.0
-    for x in verticesList:
-        sumProbs += probs[x]
-    met = MetropolisChain(g,probs)
-    #met = MetropolisChain(g)
-    #met.showShort()
-    frequency = met.checkSampling(verticesList[0],nSim=30000)
-    for x in verticesList:
-        try:
-            print(x,probs[x],frequency[x])
-        except:
-            print(x,0.0,0.0)
-    met.showTransitionMatrix()
-    met.saveCSVTransition()
+##    g = Graph(numberOfVertices=5,edgeProbability=0.5)
+##    g.showShort()
+##    g.save('test')
+##    probs = {}
+##    n = g.order
+##    i = 0
+##    verticesList = [x for x in g.vertices]
+##    verticesList.sort()
+##    for x in verticesList:
+##        probs[x] = (n - i)/(n*(n+1)/2)
+##        i += 1
+##    sumProbs = 0.0
+##    for x in verticesList:
+##        sumProbs += probs[x]
+##    met = MetropolisChain(g,probs)
+##    #met = MetropolisChain(g)
+##    #met.showShort()
+##    frequency = met.checkSampling(verticesList[0],nSim=30000)
+##    for x in verticesList:
+##        try:
+##            print(x,probs[x],frequency[x])
+##        except:
+##            print(x,0.0,0.0)
+##    met.showTransitionMatrix()
+##    met.saveCSVTransition()
 ##    # Q-Colorings
 ##    g = Graph(numberOfVertices=30,edgeProbability=0.1)
 ##    #g = GridGraph(n=6,m=6)
