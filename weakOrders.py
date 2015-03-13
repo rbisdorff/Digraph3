@@ -1083,8 +1083,9 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
 
         # import the performance tableau
         if argPerfTab == None:
-            perfTab = RandomPerformanceTableau(numberOfActions=10,
-                                               numberOfCriteria=13)
+            print('Error: you must provide a valid PerformanceTableau object !!')
+##            perfTab = RandomPerformanceTableau(numberOfActions=10,
+##                                               numberOfCriteria=13)
         else:
             perfTab = argPerfTab
 
@@ -1102,7 +1103,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         self.sortingParameters['PrefThresholds'] = PrefThresholds
         self.sortingParameters['hasNoVeto'] = hasNoVeto
         self.sortingParameters['Threading'] = Threading
-        
+        self.sortingParameters['nbrCores'] = nbrCores        
         if Comments:        
             print('Computing the %d-quantiles sorting digraph ...' % (limitingQuantiles))
         t0 = time()
