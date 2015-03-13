@@ -9,6 +9,19 @@ class Graph(object):
     Graph class implementation with a vertices and an edges dictionary
     and a gamma function (dictionary) from vertices to subsets of vertices.
 
+    General structure::
+
+       vertices = {'v1': {'name': ...,'shortName': ...},
+                   'v2': {'name': ...,'shortName': ...},
+                   'v3': {'name': ...,'shortName': ...},
+                   ... }
+       valuationDomain = {'min': -1, 'med': 0, 'max': 1}
+
+       g.edges = {frozenset({'v1','v2'}): 1,
+                  frozenset({'v1','v3'}): 1,
+                  frozenset({'v2','v3'}): -1,
+                  ...}
+       
     Example python3 session:
        >>> from graphs import Graph
        >>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
