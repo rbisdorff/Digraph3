@@ -497,25 +497,27 @@ class _RandomTree(Digraph):
         numerOfNodes
 
     """
-    def __init__(self,numberOfNodes=5, ndigits=2, hasIntegerValuation=True, seed=None):
+    def __init__(self,numberOfNodes=5, ndigits=0, hasIntegerValuation=True, seed=None):
         import random
         random.seed(seed)
         from decimal import Decimal
         self.name = 'randomTree'
         self.order = numberOfNodes
+        # generate actions dictionary
         actions = {}
         nodes = [str(x+1) for x in range(numberOfNodes)]
         for x in nodes:
             actions[x] = {'name': 'node %s' % x}
         self.actions = actions
         print(actions)
+        # set valuation domain
         precision = pow(10,ndigits)
         if hasIntegerValuation:
             self.valuationdomain = {'min':-precision, 'med':0, 'max':precision}
         else:
             self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
         self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
-        # init relation dictionary
+        # init empty relation dictionary
         relation = {}
         nodeKeys = [x for x in actions]
         print(nodeKeys)
@@ -523,16 +525,19 @@ class _RandomTree(Digraph):
             relation[x] = {}
             for y in nodeKeys:
                 relation[x][y] = self.valuationdomain['min']
+        # generate a random pruefer code
         nodes = [x for x in range(len(nodeKeys))]
         pruefer = []
         for i in range(len(nodeKeys)-2):
             pruefer.append(random.choice(nodes))
         print(pruefer)
+        # contruct the corresponding relation (a tree)
         pairs = self._prufer_to_tree(pruefer)
         for (i,j) in pairs:
-            relation[str(i+1)][str(j+1)] = self.valuationDomain['max']
-            relation[str(j+1)][str(i+1)] = self.valuationDomain['max']
+            relation[str(i+1)][str(j+1)] = self.valuationdomain['max']
+            relation[str(j+1)][str(i+1)] = self.valuationdomain['max']
         self.relation = relation
+        # generate neighboring sets
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
