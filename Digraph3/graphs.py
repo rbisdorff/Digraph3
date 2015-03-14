@@ -440,6 +440,66 @@ class Graph(object):
         visitAllVertices(self, Debug=Debug)
         return self.dfs
 
+class EmptyGraph(Graph):
+    """
+    Empty instances of the Graph class characterized in [-1,1].
+
+    *Parameter*:
+        * order (positive integer)
+
+    """
+    def __init__(self,order=5,seed=None):
+        self.name = 'emptyGraph'
+        self.order = order
+        nd = len(str(order))
+        vertices = dict()
+        for i in range(order):
+            vertexKey = ('v%%0%dd' % nd) % (i+1)
+            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+        self.vertices = vertices
+        self.valuationDomain = {'min':-1,'med':0,'max':1}
+        edges = dict()
+        verticesList = [v for v in vertices]
+        verticesList.sort()
+        for x in verticesList:
+            for y in verticesList:
+                if x != y:
+                    edgeKey = frozenset([x,y])
+                    edges[edgeKey] = -1
+        self.edges = edges
+        self.size = len(self.edges)
+        self.gamma = self.gammaSets()
+
+class CompleteGraph(Graph):
+    """
+    Instances of complete Grapha characterized in [-1,1].
+
+    *Parameter*:
+        * order (positive integer)
+
+    """
+    def __init__(self,order=5,seed=None):
+        self.name = 'completeGraph'
+        self.order = order
+        nd = len(str(order))
+        vertices = dict()
+        for i in range(order):
+            vertexKey = ('v%%0%dd' % nd) % (i+1)
+            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+        self.vertices = vertices
+        self.valuationDomain = {'min':-1,'med':0,'max':1}
+        edges = dict()
+        verticesList = [v for v in vertices]
+        verticesList.sort()
+        for x in verticesList:
+            for y in verticesList:
+                if x != y:
+                    edgeKey = frozenset([x,y])
+                    edges[edgeKey] = 1
+        self.edges = edges
+        self.size = len(self.edges)
+        self.gamma = self.gammaSets()
+
 
 class RandomGraph(Graph):
     """
@@ -492,6 +552,57 @@ class RandomRegularGraph(Graph):
         self.valuationDomain = deepcopy(rg.valuationDomain)
         self.edges = deepcopy(rg.edges)
         self.name = 'randomRegularGraph'
+        self.gamma = self.gammaSets()
+
+class RandomFixedSizeGraph(Graph):
+    """
+    Generates a random graph with a fixed size (number of edges), by instantiating a fixed numbers of arcs
+    from random choices in the set of potential pairs of vertices numbered from 1 to order. 
+    """
+    def __init__(self,order=7,size=14,seed=None,Debug=False):
+        import random
+        random.seed(seed)
+        # check feasability
+        r = ((order * order) - order)//2
+        if size > r :
+            print('Graph not feasable: size exceeds number of potential edges = %d !!' % r)
+            return
+        print(order,size,r)
+        self.name = 'randomFixedSize'
+        self.order = order
+        nd = len(str(order))
+        vertices = dict()
+        for i in range(order):
+            vertexKey = ('v%%0%dd' % nd) % (i+1)
+            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+        self.vertices = vertices
+        if Debug:
+            print(self.vertices)
+        self.valuationDomain = {'min':-1,'med':0,'max':1}
+        edges = dict()
+        Min = self.valuationDomain['min']
+        verticesList = [v for v in vertices]
+        verticesList.sort()
+        for x in verticesList:
+            for y in verticesList:
+                if x != y:
+                    edgeKey = frozenset([x,y])
+                    edges[edgeKey] = Min
+        if Debug:
+            print(edges)
+        edgesKeys = [key for key in edges]
+        edgesKeys.sort()
+        if Debug:
+            print(edgesKeys)
+        Max = self.valuationDomain['max']
+        self.size = size
+        for i in range(size):
+                edgeKey = random.choice(edgesKeys)
+                edges[edgeKey] = Max
+                edgesKeys.remove(edgeKey)
+                if Debug:
+                    print(i,edgeKey,edgesKeys)
+        self.edges = edges
         self.gamma = self.gammaSets()
 
 class RandomFixedDegreeSequenceGraph(Graph):
@@ -1555,12 +1666,16 @@ class MISModel(Graph):
 # --------------testing the module ----
 if __name__ == '__main__':
 
-    g = RandomGraph(seed=100)
-    g.showShort()
-    g = RandomFixedDegreeSequenceGraph(seed=100)
-    g.showShort()
-    rg = RandomRegularGraph(seed=100)
-    rg.showShort()
+##    g = RandomGraph(seed=100)
+##    g.showShort()
+##    g = RandomFixedDegreeSequenceGraph(seed=100)
+##    g.showShort()
+##    rg = RandomRegularGraph(seed=100)
+##    rg.showShort()
+    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
+    rfs.showShort()
+    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
+    rfs.showShort()
     
 ##    g = TriangularGraph(n=5,m=5)
 ##    #g.showShort()
