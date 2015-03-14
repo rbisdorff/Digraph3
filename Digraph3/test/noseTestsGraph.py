@@ -26,12 +26,15 @@ def testGraph():
 
 def testRandomGraphs():
     print('==>> Testing Random Graph instantiations')
-    g = RandomFixedDegreeSequenceGraph()
+    g = RandomFixedDegreeSequenceGraph(seed=100)
     g.showShort()
     g.exportGraphViz('testRandomFixedDegreeSequence')
-    rg = RandomRegularGraph()
+    rg = RandomRegularGraph(seed=100)
     rg.showShort()
     rg.exportGraphViz('testRandomRegularGraph')
+    rfs = RandomFixedSizeGraph(seed=100,Debug=True)
+    rfs.showShort()
+    rfs.exportGraphViz()
 
 def testGraph2Digraph():
     print('==>> Testing Graph2Digraph coversion')
