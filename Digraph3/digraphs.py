@@ -23,7 +23,6 @@ __version__ = "Branch: 3.3 $"
 # ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
 from digraphs import *
-from randomDigraphs import *
 from perfTabs import *
 
 #--------- Decimal precision --------------
@@ -224,7 +223,7 @@ class Digraph(object):
         from randomDigraphs import RandomValuationDigraph
         from decimal import Decimal
         if file == None:
-            g = digraphs.RandomValuationDigraph(order=order)
+            g = RandomValuationDigraph(order=order)
             self.name = g.name
             self.actions = copy.deepcopy(g.actions)
             self.order = len(self.actions)
