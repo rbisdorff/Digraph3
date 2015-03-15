@@ -717,12 +717,7 @@ class TriangularGraph(Graph):
 
     *Parameters*:
         * n,m > 0
-        * valuationDomain ={'min':m, 'max':M}
-
-    Default instantiation (5 times 5 Trinagular Digraph):
-       * n = 5,
-       * m=5,
-       * valuationDomain = {'min':-1.0,'max':1.0}.
+        * valuationDomain = {'min':m, 'max':M}
 
     Example of 5x5 GridGraph instance:
 
@@ -794,12 +789,11 @@ class TriangularGraph(Graph):
         self.gamma = self.gammaSets()
 
     def showShort(self):
-        print('*----- show short --------------*')
-        print('Grid graph    : ', self.name)
-        print('n             : ', self.n)
-        print('m             : ', self.m)
-        print('order         : ', self.order)
-        print('size          : ', self.size)
+        print('*----- show summary --------------*')
+        print('Triangular graph : ', self.name)
+        print('n x m            : ', self.n, 'x', self.m)
+        print('order            : ', self.order)
+        print('size             : ', self.size)
 
 class RandomTree(Graph):
     """
