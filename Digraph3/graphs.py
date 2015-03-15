@@ -713,16 +713,16 @@ class GridGraph(Graph):
 class TriangularGraph(Graph):
     """
     Specialization of the general Graph class for generating
-    temporary triangular graphs of dimension n times m.
+    temporary triangulated grids of dimension n times m.
 
     *Parameters*:
         * n,m > 0
         * valuationDomain = {'min':m, 'max':M}
 
-    Example of 5x5 GridGraph instance:
+    Example of 5x5 triangulated grid instance:
 
     .. image:: triangular-5-5.png
-       :alt: triangular 5x5 graph
+       :alt: triangulated 5x5 grid
        :width: 300 px
        :align: center
     """
