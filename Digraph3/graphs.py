@@ -378,6 +378,8 @@ class Graph(object):
         fo.close()
         if isinstance(self,(GridGraph,RandomTree)):
             commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        elif isinstance(self,(CycleGraph)):
+            commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         else:
             commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         if noSilent:
@@ -387,6 +389,7 @@ class Graph(object):
         except:
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
+                print('On Ubuntu: ..$ sudo apt-get install graphviz')
 
     def depthFirstSearch(self,Debug=False):
         """
@@ -500,6 +503,47 @@ class CompleteGraph(Graph):
         self.size = len(self.edges)
         self.gamma = self.gammaSets()
 
+class CycleGraph(Graph):
+    """
+    Instances of cycle graph characterized in [-1,1].
+
+    *Parameter*:
+        * order (positive integer)
+
+    """
+    def __init__(self,order=5,seed=None,Debug=True):
+        self.name = 'cycleGraph'
+        self.order = order
+        nd = len(str(order))
+        vertices = dict()
+        for i in range(order):
+            vertexKey = ('v%%0%dd' % nd) % (i+1)
+            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+        self.vertices = vertices
+        self.valuationDomain = {'min':-1,'med':0,'max':1}
+        Min = self.valuationDomain['min']
+        Max = self.valuationDomain['max']
+        edges = dict()
+        verticesList = [v for v in vertices]
+        verticesList.sort()
+        for x in verticesList:
+            for y in verticesList:
+                edgeKey = frozenset([x,y])
+                edges[edgeKey] = Min
+        for i in range(order-1):
+            edgeKey = frozenset(verticesList[i:i+2])
+            edges[edgeKey] = Max
+            if Debug:
+                print(edgeKey)
+        x = verticesList[-1]
+        y = verticesList[0]
+        edgeKey = frozenset([x,y])
+        edges[edgeKey] = Max
+        if Debug:
+            print(edgeKey)
+        self.edges = edges
+        self.size = len(self.edges)
+        self.gamma = self.gammaSets()
 
 class RandomGraph(Graph):
     """
@@ -1660,16 +1704,19 @@ class MISModel(Graph):
 # --------------testing the module ----
 if __name__ == '__main__':
 
+    c = CycleGraph()
+    c.showShort()
+
 ##    g = RandomGraph(seed=100)
 ##    g.showShort()
 ##    g = RandomFixedDegreeSequenceGraph(seed=100)
 ##    g.showShort()
 ##    rg = RandomRegularGraph(seed=100)
 ##    rg.showShort()
-    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
-    rfs.showShort()
-    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
-    rfs.showShort()
+##    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
+##    rfs.showShort()
+##    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
+##    rfs.showShort()
     
 ##    g = TriangularGraph(n=5,m=5)
 ##    #g.showShort()
