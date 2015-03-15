@@ -5586,14 +5586,14 @@ class Digraph(object):
         Dummy for showCircuits().
         """
         Digraph.showCircuits(self)
-        print('*---- Chordless circuits ----*')
-        try:
-            for (circList,circSet) in self.circuitsList:
-                deg = self.circuitMinCredibility(circList)
-                print(circList, ', credibility :', deg)
-            print('%d circuits.' % (len(self.circuitsList)))
-        except:
-            print('No circuits computed. Run computeChordlessCircuits()!')
+##        print('*---- Chordless circuits ----*')
+##        try:
+##            for (circList,circSet) in self.circuitsList:
+##                deg = self.circuitMinCredibility(circList)
+##                print(circList, ', credibility :', deg)
+##            print('%d circuits.' % (len(self.circuitsList)))
+##        except:
+##            print('No circuits computed. Run computeChordlessCircuits()!')
 
     def minimalValuationLevelForCircuitsElimination(self,Odd=True,Debug=False,Comments=False):
         """
@@ -9144,7 +9144,8 @@ class GridDigraph(Digraph):
 
     """
 
-    def __init__(self,n=5,m=5,valuationdomain = {'min':-1.0,'max':1.0},hasRandomOrientation=False,hasMedianSplitOrientation=False):
+    def __init__(self,n=5,m=5,valuationdomain = {'min':-1.0,'max':1.0},
+                 hasRandomOrientation=False,hasMedianSplitOrientation=False):
         import sys,array,copy
         self.name = 'grid-'+str(n)+'-'+str(m)
         self.n = n
