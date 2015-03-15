@@ -41,7 +41,7 @@ class RandomDigraph(Digraph):
      """
 
     def __init__(self,order=9,arcProbability=0.5,
-                 hasIntegerValuation=True, Bipolar=False,
+                 hasIntegerValuation=True, Bipolar=True,
                  seed=None):
 
         arcProbability = Decimal(str(arcProbability))
@@ -51,15 +51,10 @@ class RandomDigraph(Digraph):
             print('Error: arc probability too low !!')
         else:
             import copy
-            from random import random,seed
+            import random
             from digraphs import EmptyDigraph
-##            g = RandomValuationDigraph(order=order,ndigits=0,hasIntegerValuation=hasIntegerValuation)
-##            cutLevel = 1 - arcProbability
-##            print(g.relation)
-##            gp = PolarisedDigraph(digraph=g,level=cutLevel,KeepValues=False,AlphaCut=True)
-##            gp.showRelationTable()
             if seed != None:
-                seed(seed)
+                random.seed(seed)
             if Bipolar:
                 domain = (-1.0,1.0)
             else:
@@ -75,7 +70,7 @@ class RandomDigraph(Digraph):
                     if x == y:
                         self.relation[x][y] = self.valuationdomain['min']
                     else:
-                        if random() <= arcProbability:
+                        if random.random() <= arcProbability:
                             self.relation[x][y] = self.valuationdomain['max']
                         else:
                             self.relation[x][y] = self.valuationdomain['min']
@@ -641,6 +636,98 @@ class RandomRegularDigraph(Digraph):
                 self.notGamma = self.notGammaSets()
                 self.componentslist = self.components()
 
+class RandomGridDigraph(GridDigraph):
+    """
+    Specialization of the general Digraph class for generating
+    temporary randomly oriented Grid digraphs of dimension n time m
+    (default 5x5).
+
+    Parameters:
+        * n,m > 0;
+        * valuationdomain ={'min':-1 (default),'max': 1 (default)}.
+    """
+
+    def __init__(self,n=5,m=5,valuationdomain = {'min':-1.0,'max':1.0},
+                 seed=None,Debug=False):
+        import random
+        random.seed(seed)
+        self.name = 'randomGrid-'+str(n)+'-'+str(m)
+        self.n = n
+        self.m = m
+        # constructing the grid
+        na = list(range(n+1))
+        na.remove(0)
+        ma = list(range(m+1))
+        ma.remove(0)
+        actions = []
+        gridNodes={}
+        for x in na:
+            for y in ma:
+                action = str(x)+'-'+str(y)
+                gridNodes[action]=(x,y)
+                actions.append(action)
+        order = len(actions)
+        self.order = order
+        self.actions = actions
+        self.gridNodes = gridNodes
+        if Debug:
+            print(n,m,actions,gridNodes)
+        # defining the valuation domain
+        Min = Decimal(str(valuationdomain['min']))
+        Max = Decimal(str(valuationdomain['max']))
+        Med = (Max + Min)/Decimal('2')
+        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+        # instantiate empty relation dictionary 
+        relation = {}
+        for x in actions:
+            relation[x] = {}
+            for y in actions:
+                relation[x][y] = Med
+        # instantiate random orientation
+        for x in actions:
+            for y in actions:
+                if gridNodes[x][1] == gridNodes[y][1]:
+                    if gridNodes[x][0] == gridNodes[y][0]-1 :
+                        if random.random() > 0.5:
+                            relation[x][y] = Max
+                            relation[y][x] = Min
+                        else:
+                            relation[x][y] = Min
+                            relation[y][x] = Max
+                    elif gridNodes[x][0] == gridNodes[y][0]+1:
+                        if random.random() > 0.5:
+                            relation[x][y] = Max
+                            relation[y][x] = Min
+                        else:
+                            relation[x][y] = Min
+                            relation[y][x] = Max
+                    else:
+                        relation[x][y] = Min
+                elif gridNodes[x][0] == gridNodes[y][0]:
+                    if gridNodes[x][1] == gridNodes[y][1]-1:
+                        if random.random() > 0.5:
+                            relation[x][y] = Max
+                            relation[y][x] = Min
+                        else:
+                            relation[x][y] = Min
+                            relation[y][x] = Max
+                    elif gridNodes[x][1] == gridNodes[y][1]+1:
+                        if random.random() > 0.5:
+                            relation[x][y] = Max
+                            relation[y][x] = Min
+                        else:
+                            relation[x][y] = Min
+                            relation[y][x] = Max
+                    else:
+                        relation[x][y] = Min
+                else:
+                    relation[x][y] = Min
+
+        self.relation = relation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+    
+
 #############################################
 
 #----------test Random Digraph classes ----------------
@@ -663,11 +750,14 @@ if __name__ == "__main__":
 ##    rg1.showRelationTable()
 ##    rg2.showRelationTable()
     
-    dg = RandomValuationDigraph(Normalized=True,
-                                #hasIntegerValuation=True,
-                                ndigits=2,
-                                seed=1)
-    dg.showRelationTable()
+##    dg = RandomValuationDigraph(Normalized=True,
+##                                #hasIntegerValuation=True,
+##                                ndigits=2,
+##                                seed=1)
+##    dg.showRelationTable()
+
+    dg = RandomGridDigraph()
+    dg.exportGraphViz()
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

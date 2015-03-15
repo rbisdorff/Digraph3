@@ -807,8 +807,9 @@ class RandomTree(Graph):
 
     .. image:: randomTree.png
     """
-    def __init__(self,order=None, prueferCode = None, myseed = None, Debug=False):
-        from random import choice, seed
+    def __init__(self,order=None, prueferCode = None, seed = None, Debug=False):
+        import random
+        random.seed(seed)
         self.name='randomTree'
         if order == None:
             if prueferCode == None:
@@ -841,10 +842,8 @@ class RandomTree(Graph):
             print('edges = ',self.edges)
         if prueferCode == None:
             prueferCode = []
-            if myseed != None:
-                seed(myseed)
             for k in range(order-2):
-                prueferCode.append( choice( list(range(order)) ) )
+                prueferCode.append( random.choice( list(range(order)) ) )
         self.prueferCode = prueferCode
         if Debug:
             print('prueferCode = ', self.prueferCode)
@@ -904,7 +903,7 @@ class Q_Coloring(Graph):
     """ 
 
     def __init__(self,g,colors=['gold','lightcoral','lightblue'],
-                 nSim=None,maxIter=20,
+                 nSim=None,maxIter=20,seed=None,
                  Comments=True,Debug=False):
         from copy import deepcopy
         self.name = '%s-qcoloring' % g.name
@@ -930,16 +929,17 @@ class Q_Coloring(Graph):
         _iter = 0
         while infeasibleEdges != set() and _iter < maxIter:
             _iter += 1
-            print(_iter)
-            self.generateFeasibleConfiguration(Reset=True,Debug=Debug)
+            print('Iteration:', _iter)
+            self.generateFeasibleConfiguration(seed=seed,Reset=True,Debug=Debug)
             infeasibleEdges = self.checkFeasibility(Comments=Comments)
     
     def showConfiguration(self):
         for v in self.vertices:
             print(v,self.vertices[v]['color'])
             
-    def generateFeasibleConfiguration(self,Reset=True,nSim=None,Debug=False):
-        from random import choice
+    def generateFeasibleConfiguration(self,Reset=True,nSim=None,seed=None,Debug=False):
+        import random
+        random.seed(seed)
         if Reset:
             for v in self.vertices:
                 self.vertices[v]['color'] = self.colors[0]           
@@ -948,16 +948,16 @@ class Q_Coloring(Graph):
         print('Running a Gibbs Sampler for %d step !' % nSim)
         for s in range(nSim):
             verticesKeys = [v for v in self.vertices]
-            v = choice(verticesKeys)
+            v = random.choice(verticesKeys)
             neighborColors = [self.vertices[x]['color']\
                                   for x in self.gamma[v]]
             feasibleColors = list(set(self.colors) - set(neighborColors))
             try:
-                self.vertices[v]['color'] = choice(feasibleColors)
+                self.vertices[v]['color'] = random.choice(feasibleColors)
             except:
                 if Debug:
                     print(s,v,'Warning !! Not feasible coloring')
-                self.vertices[v]['color'] = choice(self.colors)
+                self.vertices[v]['color'] = random.choice(self.colors)
             if Debug:
                 print(s, v,  self.vertices[v]['color'])
 
