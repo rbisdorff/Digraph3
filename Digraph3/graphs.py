@@ -511,7 +511,7 @@ class CycleGraph(Graph):
         * order (positive integer)
 
     """
-    def __init__(self,order=5,seed=None,Debug=True):
+    def __init__(self,order=5,seed=None,Debug=False):
         self.name = 'cycleGraph'
         self.order = order
         nd = len(str(order))
