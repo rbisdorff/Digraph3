@@ -606,6 +606,14 @@ class CycleGraph(Graph):
     *Parameter*:
         * order (positive integer)
 
+    Example of 7-cycle graph instance:
+
+    .. image:: 7cycle.png
+       :alt: 7-cycle instance
+       :width: 300 px
+       :align: center
+
+
     """
     def __init__(self,order=5,seed=None,Debug=False):
         self.name = 'cycleGraph'
