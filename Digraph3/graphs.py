@@ -106,7 +106,8 @@ class Graph(object):
 
     def computeSize(self):
         """
-        Renders the number of edges of self.
+        Renders the number of edges of this graph instance
+        (result is stored in self.size).
         """
         size = 0
         Med = self.valuationDomain['med']
