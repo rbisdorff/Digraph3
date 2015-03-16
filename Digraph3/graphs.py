@@ -1591,6 +1591,7 @@ class MISModel(Graph):
                  maxIter=20,
                 Debug=False):
         from copy import deepcopy
+        self.gClass = deepcopy(g.__class__)
         self.name = '%s-mis' % g.name
         if isinstance(g.vertices,dict):
             self.vertices = deepcopy(g.vertices)
@@ -1729,8 +1730,10 @@ class MISModel(Graph):
 
         fo.write('}\n')
         fo.close()
-        if isinstance(self,(GridGraph,RandomTree)):
+        if self.gClass in (GridGraph,RandomTree):
             commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        elif self.gClass == CycleGraph:
+            commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         else:
             commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         if noSilent:
