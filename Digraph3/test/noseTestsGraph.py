@@ -103,9 +103,9 @@ def testMetropolisChain():
     met.showTransitionMatrix()
     met.saveCSVTransition()
 
-def testTriangularGraph():
-    print('==>> Testing TriangularGraph class instantiation')
-    g = TriangularGraph(n=15,m=15)
+def testTriangulatedGrid():
+    print('==>> Testing TriangulatedGrid class instantiation')
+    g = TriangulatedGrid(n=15,m=15)
     im = IsingModel(g,beta=0.441,nSim=30000,Debug=False)
     H = im.computeSpinEnergy()
     print( 'Spin energy = %d/%d = %.3f' % (H,im.size,H/im.size) )
