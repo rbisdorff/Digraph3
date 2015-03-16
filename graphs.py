@@ -413,7 +413,7 @@ class Graph(object):
 
         fo.write('}\n')
         fo.close()
-        if isinstance(self,(GridGraph,TriangularGraph,RandomTree)):
+        if isinstance(self,(GridGraph,TriangulatedGrid,RandomTree)):
             commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         elif isinstance(self,(CycleGraph)):
             commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
@@ -795,7 +795,7 @@ class GridGraph(Graph):
         print('order         : ', self.order)
         print('size          : ', self.size)
 
-class TriangularGraph(Graph):
+class TriangulatedGrid(Graph):
     """
     Specialization of the general Graph class for generating
     temporary triangulated grids of dimension n times m.
@@ -814,7 +814,7 @@ class TriangularGraph(Graph):
 
     def __init__(self,n=5,m=5,valuationMin=-1,valuationMax=1):
 
-        self.name = 'triangular-'+str(n)+'-'+str(m)
+        self.name = 'triangulated-'+str(n)+'-'+str(m)
         self.n = n
         self.m = m
         na = list(range(n+1))
@@ -1768,7 +1768,7 @@ if __name__ == '__main__':
     rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
     rfs.showShort()
     
-    g = TriangularGraph(n=5,m=5)
+    g = TriangulatedGrid(n=5,m=5)
     #g.showShort()
     g.exportGraphViz()
     
