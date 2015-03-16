@@ -1593,9 +1593,10 @@ class MISModel(Graph):
        
     """
     def __init__(self,g,
-                nSim=None,
+                 nSim=None,
                  maxIter=20,
-                Debug=False):
+                 seed=None,
+                 Debug=False):
         from copy import deepcopy
         self.gClass = deepcopy(g.__class__)
         self.name = '%s-mis' % g.name
@@ -1617,12 +1618,13 @@ class MISModel(Graph):
         _iter = 0
         while unCovered != set() and _iter < maxIter:
             _iter += 1
-            print(_iter)
-            self.generateMIS(Reset=True,nSim=nSim,Debug=Debug)
+            print('Iteration: ', _iter)
+            self.generateMIS(Reset=True,nSim=nSim,seed=seed,Debug=Debug)
             mis,misCover,unCovered = self.checkMIS()
 
-    def generateMIS(self,Reset=True,nSim=None,Comments=True,Debug=False):
-        from random import choice
+    def generateMIS(self,Reset=True,nSim=None,seed=None,Comments=True,Debug=False):
+        import random
+        random.seed(seed)
         from math import exp
         if nSim == None:
             nSim = self.nSim
@@ -1633,7 +1635,7 @@ class MISModel(Graph):
         if Comments:
             print('Running a Gibbs Sampler for %d step !' % nSim)
         for s in range(nSim):
-            v = choice(verticesKeys)
+            v = random.choice(verticesKeys)
             Potential = True
             for x in self.gamma[v]:
                 if self.vertices[x]['mis'] == 1:
