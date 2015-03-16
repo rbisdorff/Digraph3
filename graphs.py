@@ -3,13 +3,14 @@
 #  Python 3 graphs.py module
 #  Copyright (C)  2011-2013 Raymond Bisdorff
 #############################################
+from decimal import Decimal
 
 class Graph(object):
     """
     In the `graphs` module, the root :py:class:`graphs.Graph` class provides a generic graph model. A given object consists in:
     
        1. a vertices dictionary
-       2. a characteristic valuation domain, [-1,+1] by default
+       2. a characteristic valuation domain, {-1,0,+1} by default
        3. an edges dictionary, characterising each edge in the given valuation domain
        4. a gamma function dictionary, holding the neighborhood vertices of each vertex
 
@@ -56,7 +57,7 @@ class Graph(object):
             self.vertices = dict()
             self.order = len(self.vertices)
             self.edges = dict()
-            self.valuationDomain = {'min':-1, 'med': 0, 'max':1}
+            self.valuationDomain = {'min': Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
             self.gamma = dict()
             self.size = 0
         elif fileName==None:
@@ -173,6 +174,58 @@ class Graph(object):
         dg.notGamma = dg.notGammaSets()
         return dg
 
+    def recodeValuation(self,newMin=-1,newMax=1,Debug=False):
+        """
+        Recodes the characteristic valuation domain according
+        to the parameters given.
+
+        .. note::
+
+            Default values gives a normalized valuation domain
+
+        """
+        from copy import deepcopy
+        oldMax = self.valuationDomain['max']
+        oldMin = self.valuationDomain['min']
+        oldMed = self.valuationDomain['med']
+
+        oldAmplitude = oldMax - oldMin
+        if Debug:
+            print(oldMin, oldMed, oldMax, oldAmplitude)
+
+        newMin = Decimal(str(newMin))
+        newMax = Decimal(str(newMax))
+        newMed = Decimal('%.3f' % ((newMax + newMin)/Decimal('2.0')))
+
+        newAmplitude = newMax - newMin
+        if Debug:
+            print(newMin, newMed, newMax, newAmplitude)
+
+        verticesList = [x for x in self.vertices]
+        oldEdges = self.edges
+        newEdges = {}
+        for i in range(self.order):
+            x = verticesList[i]
+            for j in range(i+1,self.order):
+                y = verticesList[j]
+                edge = frozenset([x,y])
+                if oldEdges[edge] == oldMax:
+                    newEdges[edge] = newMax
+                elif oldEdges[edge] == oldMin:
+                    newEdges[edge] = newMin
+                elif oldEdges[edge] == oldMed:
+                    newEdges[edge] = newMed
+                else:
+                    newEdges[edge] = newMin + ((oldEdges[edge] - oldMin)/oldAmplitude)*newAmplitude
+                    if Debug:
+                        print(edge,oldEdges[edge],newEdges[edge])
+        # install new values in self
+        self.valuationDomain['max'] = newMax
+        self.valuationDomain['min'] = newMin
+        self.valuationDomain['med'] = newMed
+        self.valuationDomain['hasIntegerValuation'] = False
+        self.edges = deepcopy(newEdges)
+
     def showShort(self):
         """
         Generic show method for Graph instances.
@@ -256,7 +309,7 @@ class Graph(object):
                 gamma[e2].add(e1)
         return gamma
 
-    def _chordlessPaths(self,Pk,v0, Comments = False, Debug = False):
+    def _chordlessPaths(self,Pk,v0,Comments=False,Debug=False):
         """
         recursice chordless precycle (len > 3) construction:
             Pk is the current pre chordless cycle
@@ -326,7 +379,7 @@ class Graph(object):
                 print('No further chordless precycles from ',vn,' to ',v0)
         return detectedChordlessCycle
 
-    def computeChordlessCycles(self,Comments=True, Debug=False):
+    def computeChordlessCycles(self,Comments=True,Debug=False):
         """
         Renders the set of all chordless cycles observed in a Graph
         intance.
@@ -348,10 +401,7 @@ class Graph(object):
         return chordlessCyclesList
 
 
-    def exportGraphViz(self,fileName=None,
-                       noSilent=True,
-                       graphType='png',
-                       graphSize='7,7'):
+    def exportGraphViz(self,fileName=None,noSilent=True,graphType='png',graphSize='7,7'):
         """
         Exports GraphViz dot file  for graph drawing filtering.
 
@@ -487,7 +537,7 @@ class Graph(object):
 
 class EmptyGraph(Graph):
     """
-    Empty instances of the Graph class characterized in [-1,1].
+    Intantiates graph of given order without any positively valued edge.
 
     *Parameter*:
         * order (positive integer)
@@ -502,7 +552,8 @@ class EmptyGraph(Graph):
             vertexKey = ('v%%0%dd' % nd) % (i+1)
             vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
-        self.valuationDomain = {'min':-1,'med':0,'max':1}
+        self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
+        Min = self.valuationDomain['min']
         edges = dict()
         verticesList = [v for v in vertices]
         verticesList.sort()
@@ -510,7 +561,7 @@ class EmptyGraph(Graph):
             for y in verticesList:
                 if x != y:
                     edgeKey = frozenset([x,y])
-                    edges[edgeKey] = -1
+                    edges[edgeKey] = Min
         self.edges = edges
         self.size = self.computeSize()
         self.gamma = self.gammaSets()
@@ -534,7 +585,8 @@ class CompleteGraph(Graph):
             vertexKey = ('v%%0%dd' % nd) % (i+1)
             vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
-        self.valuationDomain = {'min':-1,'med':0,'max':1}
+        self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
+        Max = self.valuationDomain['max']
         edges = dict()
         verticesList = [v for v in vertices]
         verticesList.sort()
@@ -542,7 +594,7 @@ class CompleteGraph(Graph):
             for y in verticesList:
                 if x != y:
                     edgeKey = frozenset([x,y])
-                    edges[edgeKey] = 1
+                    edges[edgeKey] = Max
         self.edges = edges
         self.size = self.computeSize()
         self.gamma = self.gammaSets()
@@ -564,7 +616,7 @@ class CycleGraph(Graph):
             vertexKey = ('v%%0%dd' % nd) % (i+1)
             vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
-        self.valuationDomain = {'min':-1,'med':0,'max':1}
+        self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
         Min = self.valuationDomain['min']
         Max = self.valuationDomain['max']
         edges = dict()
@@ -608,7 +660,9 @@ class RandomGraph(Graph):
             vertexKey = ('v%%0%dd' % nd) % (i+1)
             vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
-        self.valuationDomain = {'min':-1,'med':0,'max':1}
+        self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
+        Min = self.valuationDomain['min']
+        Max = self.valuationDomain['max']
         edges = dict()
         verticesList = [v for v in vertices]
         verticesList.sort()
@@ -617,9 +671,9 @@ class RandomGraph(Graph):
                 if x != y:
                     edgeKey = frozenset([x,y])
                     if random.random() > 1.0 - edgeProbability:
-                        edges[edgeKey] = 1
+                        edges[edgeKey] = Max
                     else:
-                        edges[edgeKey] = -1
+                        edges[edgeKey] = Min
         self.edges = edges
         self.size = self.computeSize()
         self.gamma = self.gammaSets()
@@ -668,7 +722,7 @@ class RandomFixedSizeGraph(Graph):
         self.vertices = vertices
         if Debug:
             print(self.vertices)
-        self.valuationDomain = {'min':-1,'med':0,'max':1}
+        self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
         edges = dict()
         Min = self.valuationDomain['min']
         verticesList = [v for v in vertices]
@@ -728,7 +782,7 @@ class GridGraph(Graph):
 
     *Parameters*:
         * n,m > 0
-        * valuationDomain ={'min':m, 'max':M}
+        * valuationDomain ={'min':-1, 'med':0, 'max':+1}
 
     Default instantiation (5 times 5 Grid Digraph):
        * n = 5,
@@ -763,9 +817,9 @@ class GridGraph(Graph):
         self.order = order
         self.vertices = vertices
         self.gridNodes = gridNodes
-        Min = valuationMin
-        Max = valuationMax
-        Med = (Max + Min)//2
+        Min = Decimal(str(valuationMin))
+        Max = Decimal(str(valuationMax))
+        Med = Decimal(str((Max + Min)/Decimal('2')))
         self.valuationDomain = {'min':Min,'med':Med,'max':Max}
         edges = {} # instantiate edges
         verticesKeys = [x for x in vertices]
@@ -839,9 +893,9 @@ class TriangulatedGrid(Graph):
         self.order = order
         self.vertices = vertices
         self.gridNodes = gridNodes
-        Min = valuationMin
-        Max = valuationMax
-        Med = (Max + Min)//2
+        Min = Decimal(str(valuationMin))
+        Max = Decimal(str(valuationMax))
+        Med = Decimal((Max + Min)/Decimal('2'))
         self.valuationDomain = {'min':Min,'med':Med,'max':Max}
         edges = {} # instantiate edges
         verticesKeys = [x for x in vertices]
@@ -914,7 +968,12 @@ class RandomTree(Graph):
         if Debug:
             print('vertices = ', self.vertices)
 
-        self.valuationDomain = {'min':-1,'med':0,'max':1}
+        self.valuationDomain = {'min':Decimal('-1'),
+                                'med':Decimal('0'),
+                                'max':Decimal('1')}
+        Min = self.valuationDomain['min']
+        Med = self.valuationDomain['med']
+        Max = self.valuationDomain['max']
         if Debug:
             print('valuationDomain = ', self.valuationDomain)
 
@@ -922,7 +981,7 @@ class RandomTree(Graph):
         for i in range(order):
             for j in range(i+1,order):
                 edgeKey = frozenset([i,j])
-                edges[edgeKey] = -1
+                edges[edgeKey] = Min
         self.edges = edges
         if Debug:
             print('edges = ',self.edges)
@@ -946,12 +1005,12 @@ class RandomTree(Graph):
             for j in list(self.vertices.keys()):
                 if degree[j] == 1:
                     edgeKey = frozenset([prueferCode[i],j])
-                    self.edges[edgeKey] = self.valuationDomain['max']
+                    self.edges[edgeKey] = Max
                     degree[j] -= 1
                     degree[prueferCode[i]] -= 1
                     break
         lastEdgeKey = frozenset([i for i in range(order) if degree[i] > 0])
-        self.edges[lastEdgeKey] = self.valuationDomain['max']
+        self.edges[lastEdgeKey] = Max
         if Debug:
             print('updated edges = ', self.edges)
         self.size = self.computeSize()
