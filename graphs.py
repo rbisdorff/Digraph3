@@ -512,7 +512,9 @@ class EmptyGraph(Graph):
 
 class CompleteGraph(Graph):
     """
-    Instances of complete Grapha characterized in [-1,1].
+    Instances of complete graphs bipolarly valuated in {-1,0,+1}.
+    Each vertex x is positively linked to
+    all the other vertices (edges[{x,y}] = +1)
 
     *Parameter*:
         * order (positive integer)
