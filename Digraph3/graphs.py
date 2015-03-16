@@ -51,9 +51,9 @@ class Graph(object):
             self.vertices = dict()
             self.order = len(self.vertices)
             self.edges = dict()
-            self.size = len(self.edges)
             self.valuationDomain = {'min':-1, 'med': 0, 'max':1}
             self.gamma = dict()
+            self.size = 0
         elif fileName==None:
             g = RandomGraph(order=numberOfVertices,\
                                edgeProbability=edgeProbability)
@@ -61,8 +61,8 @@ class Graph(object):
             self.vertices = deepcopy(g.vertices)
             self.order = len(self.vertices)
             self.edges = deepcopy(g.edges)
-            self.size = len(self.edges)
             self.valuationDomain = deepcopy(g.valuationDomain)
+            self.size = self.computeSize()
             self.gamma = self.gammaSets()
         else:
             fileNameExt = fileName+'.py'
@@ -73,7 +73,7 @@ class Graph(object):
             self.order = len(self.vertices)
             self.valuationDomain = argDict['valuationDomain']
             self.edges = argDict['edges']
-            self.size = len(self.edges)
+            self.size = self.computeSize()
             self.gamma = self.gammaSets()
 
     def setEdgeValue(self,edge,value,Comments=False):
@@ -103,6 +103,42 @@ class Graph(object):
         self.gamma = self.gammaSets()
         if Comments:
             print('edge %s put to value %s.' % (edge,str(value)))
+
+    def computeSize(self):
+        """
+        Renders the number of edges of self.
+        """
+        size = 0
+        Med = self.valuationDomain['med']
+        for edge in self.edges:
+            if self.edges[edge] > Med:
+                size += 1
+        self.size = size
+        return size
+
+    def isTree(self):
+        """
+        Checks if self is a tree by verifing the number of edges
+        and the existance of leaves. The order of self must at least be 2.
+        """
+        n = self.order
+        m = self.size
+        if n == 1:
+            return True
+        elif m != n-1:
+            return False
+        else:
+            nbrOfLeaves = 0
+            for x in self.vertices:
+                degreex = len(self.gamma[x])
+                if degreex == 0: # isolated vertex
+                    return False 
+                elif degreex == 1:
+                    nbrOfLeaves += 1
+            if nbrOfLeaves < 2: # a cycle graph
+                return False
+            else:
+                return True
                   
     def graph2Digraph(self):
         """
@@ -470,7 +506,7 @@ class EmptyGraph(Graph):
                     edgeKey = frozenset([x,y])
                     edges[edgeKey] = -1
         self.edges = edges
-        self.size = len(self.edges)
+        self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
 class CompleteGraph(Graph):
@@ -500,7 +536,7 @@ class CompleteGraph(Graph):
                     edgeKey = frozenset([x,y])
                     edges[edgeKey] = 1
         self.edges = edges
-        self.size = len(self.edges)
+        self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
 class CycleGraph(Graph):
@@ -542,7 +578,7 @@ class CycleGraph(Graph):
         if Debug:
             print(edgeKey)
         self.edges = edges
-        self.size = len(self.edges)
+        self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
 class RandomGraph(Graph):
@@ -577,7 +613,7 @@ class RandomGraph(Graph):
                     else:
                         edges[edgeKey] = -1
         self.edges = edges
-        self.size = len(self.edges)
+        self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
 class RandomRegularGraph(Graph):
@@ -596,6 +632,8 @@ class RandomRegularGraph(Graph):
         self.valuationDomain = deepcopy(rg.valuationDomain)
         self.edges = deepcopy(rg.edges)
         self.name = 'randomRegularGraph'
+        self.order = len(self.vertices)
+        self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
 class RandomFixedSizeGraph(Graph):
@@ -639,7 +677,6 @@ class RandomFixedSizeGraph(Graph):
         if Debug:
             print(edgesKeys)
         Max = self.valuationDomain['max']
-        self.size = size
         for i in range(size):
                 edgeKey = random.choice(edgesKeys)
                 edges[edgeKey] = Max
@@ -647,6 +684,7 @@ class RandomFixedSizeGraph(Graph):
                 if Debug:
                     print(i,edgeKey,edgesKeys)
         self.edges = edges
+        self.size = size
         self.gamma = self.gammaSets()
 
 class RandomFixedDegreeSequenceGraph(Graph):
@@ -668,8 +706,10 @@ class RandomFixedDegreeSequenceGraph(Graph):
                                                seed=seed)
         rg = rdg.digraph2Graph()
         self.vertices = deepcopy(rg.vertices)
+        self.order = order
         self.valuationDomain = deepcopy(rg.valuationDomain)
         self.edges = deepcopy(rg.edges)
+        self.size = self.computeSize()
         self.name = 'randomFixedDegreeSequenceGraph'
         self.gamma = self.gammaSets()
 
@@ -743,7 +783,7 @@ class GridGraph(Graph):
 
 
         self.edges = edges
-        self.size = len(edges)
+        self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
     def showShort(self):
@@ -829,7 +869,7 @@ class TriangularGraph(Graph):
 
 
         self.edges = edges
-        self.size = len(edges)
+        self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
     def showShort(self):
@@ -906,7 +946,7 @@ class RandomTree(Graph):
         self.edges[lastEdgeKey] = self.valuationDomain['max']
         if Debug:
             print('updated edges = ', self.edges)
-        self.size = len(self.edges)
+        self.size = self.computeSize()
         self.gamma = self.gammaSets(Debug)
         if Debug:
             print('gamma = ', self.gamma)
@@ -1163,7 +1203,7 @@ class IsingModel(Graph):
         self.order = len(self.vertices)
         self.valuationDomain = deepcopy(g.valuationDomain)
         self.edges = deepcopy(g.edges)
-        self.size = len(self.edges)
+        self.size = g.size
         self.gamma = deepcopy(g.gamma)
         for v in self.vertices:
             self.vertices[v]['spin'] = 0
@@ -1358,7 +1398,7 @@ class MetropolisChain(Graph):
                 self.vertices[v]['prob'] = probs[v]       
         self.valuationDomain = deepcopy(g.valuationDomain)
         self.edges = deepcopy(g.edges)
-        self.size = len(self.edges)
+        self.size = g.size
         self.gamma = deepcopy(g.gamma)
         self.transition = self.computeTransitionMatrix()
 
@@ -1560,7 +1600,7 @@ class MISModel(Graph):
         self.order = len(self.vertices)
         self.valuationDomain = deepcopy(g.valuationDomain)
         self.edges = deepcopy(g.edges)
-        self.size = len(self.edges)
+        self.size = g.size
         self.gamma = deepcopy(g.gamma)
         if nSim == None:
             nSim = len(self.edges)*10
