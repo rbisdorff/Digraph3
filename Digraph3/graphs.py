@@ -111,7 +111,7 @@ class Graph(object):
 
     def computeSize(self):
         """
-        Renders the number of edges of this graph instance
+        Renders the number of positively characterised edges of this graph instance
         (result is stored in self.size).
         """
         size = 0
