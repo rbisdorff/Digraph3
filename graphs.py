@@ -9,7 +9,7 @@ class Graph(object):
     In the `graphs` module, the root :py:class:`graphs.Graph` class provides a generic graph model. A given object consists in:
     
        1. a vertices dictionary
-       2. a valuation domain ([-1,+1] by default)
+       2. a characteristic valuation domain, [-1,+1] by default
        3. an edges dictionary, characterising each edge in the given valuation domain
        4. a gamma function dictionary, holding the neighborhood vertices of each vertex
 
