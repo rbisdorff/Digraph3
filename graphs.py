@@ -413,7 +413,7 @@ class Graph(object):
 
         fo.write('}\n')
         fo.close()
-        if isinstance(self,(GridGraph,RandomTree)):
+        if isinstance(self,(GridGraph,TriangularGraph,RandomTree)):
             commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         elif isinstance(self,(CycleGraph)):
             commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
@@ -985,6 +985,7 @@ class Q_Coloring(Graph):
                  nSim=None,maxIter=20,seed=None,
                  Comments=True,Debug=False):
         from copy import deepcopy
+        self.gClass = g.__class__
         self.name = '%s-qcoloring' % g.name
         if isinstance(g.vertices,dict):
             self.vertices = deepcopy(g.vertices)
@@ -1153,8 +1154,10 @@ class Q_Coloring(Graph):
 
         fo.write('}\n')
         fo.close()
-        if isinstance(self,(GridGraph,RandomTree)):
+        if self.gClass in (GridGraph,RandomTree):
             commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        elif self.gClass == CycleGraph:
+            commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         else:
             commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         if noSilent:
@@ -1194,6 +1197,7 @@ class IsingModel(Graph):
                 nSim=None,
                 Debug=False):
         from copy import deepcopy
+        self.gClass = g.__class__
         self.name = '%s-ising' % g.name
         if isinstance(g.vertices,dict):
             self.vertices = deepcopy(g.vertices)
@@ -1321,8 +1325,10 @@ class IsingModel(Graph):
 
         fo.write('}\n')
         fo.close()
-        if isinstance(self,(GridGraph,RandomTree)):
+        if self.gClass in (GridGraph,RandomTree):
             commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        elif self.gClass == CycleGraph:
+            commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         else:
             commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         if noSilent:
