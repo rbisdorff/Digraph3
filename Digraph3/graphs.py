@@ -6,8 +6,13 @@
 
 class Graph(object):
     """
-    Graph class implementation with a vertices dictionary, an edges dictionary,
-    and a gamma function dictionary, characterising the links from each vertex to its subset of neighboring vertices in a given valuation domain (by default [-1,1]).
+    In the :py:module:`graphs` module, the root :py:class:`graphs.Graph` class
+    provides a generic graph model. A given object consists in:
+    
+       1. A vertices dictionary,
+       2. A valuation domain ([-1,+1] by default),
+       2. An edges dictionary characterising each edge in the given valaution domain,
+       3. A gamma function dictionary holding the neighborhood vertices of each vertex.
 
     General structure::
 
