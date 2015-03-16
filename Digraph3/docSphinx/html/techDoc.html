@@ -1065,7 +1065,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2397,7 +2397,7 @@ all the other vertices (edges[{x,y}] = +1)</p>
 <dt id="graphs.EmptyGraph">
 <em class="property">class </em><tt class="descclassname">graphs.</tt><tt class="descname">EmptyGraph</tt><big>(</big><em>order=5</em>, <em>seed=None</em><big>)</big><a class="headerlink" href="#graphs.EmptyGraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#graphs.Graph" title="graphs.Graph"><tt class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></tt></a></p>
-<p>Empty instances of the Graph class characterized in [-1,1].</p>
+<p>Intantiates graph of given order without any positively valued edge.</p>
 <dl class="docutils">
 <dt><em>Parameter</em>:</dt>
 <dd><ul class="first last simple">
@@ -2415,7 +2415,7 @@ all the other vertices (edges[{x,y}] = +1)</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li>a vertices dictionary</li>
-<li>a characteristic valuation domain, [-1,+1] by default</li>
+<li>a characteristic valuation domain, {-1,0,+1} by default</li>
 <li>an edges dictionary, characterising each edge in the given valuation domain</li>
 <li>a gamma function dictionary, holding the neighborhood vertices of each vertex</li>
 </ol>
@@ -2509,6 +2509,17 @@ edges: order-1; and the existence of leaves.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="graphs.Graph.recodeValuation">
+<tt class="descname">recodeValuation</tt><big>(</big><em>newMin=-1</em>, <em>newMax=1</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#graphs.Graph.recodeValuation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recodes the characteristic valuation domain according
+to the parameters given.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Default values gives a normalized valuation domain</p>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="graphs.Graph.save">
 <tt class="descname">save</tt><big>(</big><em>fileName='tempGraph'</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#graphs.Graph.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Persistent storage of a Graph class instance in the form of a python source code file.</p>
@@ -2541,7 +2552,7 @@ temporary Grid graphs of dimension n times m.</p>
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
 <li>n,m &gt; 0</li>
-<li>valuationDomain ={&#8216;min&#8217;:m, &#8216;max&#8217;:M}</li>
+<li>valuationDomain ={&#8216;min&#8217;:-1, &#8216;med&#8217;:0, &#8216;max&#8217;:+1}</li>
 </ul>
 </dd>
 <dt>Default instantiation (5 times 5 Grid Digraph):</dt>
@@ -3089,7 +3100,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3827,7 +3838,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
