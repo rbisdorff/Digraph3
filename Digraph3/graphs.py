@@ -119,8 +119,8 @@ class Graph(object):
 
     def isTree(self):
         """
-        Checks if self is a tree by verifing the number of edges
-        and the existance of leaves. The order of self must at least be 2.
+        Checks if self is a tree by verifing the required number of
+        edges: order-1; and the existence of leaves.
         """
         n = self.order
         m = self.size
@@ -1748,70 +1748,70 @@ if __name__ == '__main__':
     c = CycleGraph()
     c.showShort()
 
-##    g = RandomGraph(seed=100)
-##    g.showShort()
-##    g = RandomFixedDegreeSequenceGraph(seed=100)
-##    g.showShort()
-##    rg = RandomRegularGraph(seed=100)
-##    rg.showShort()
-##    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
-##    rfs.showShort()
-##    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
-##    rfs.showShort()
+    g = RandomGraph(seed=100)
+    g.showShort()
+    g = RandomFixedDegreeSequenceGraph(seed=100)
+    g.showShort()
+    rg = RandomRegularGraph(seed=100)
+    rg.showShort()
+    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
+    rfs.showShort()
+    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
+    rfs.showShort()
     
-##    g = TriangularGraph(n=5,m=5)
-##    #g.showShort()
-##    g.exportGraphViz()
+    g = TriangularGraph(n=5,m=5)
+    #g.showShort()
+    g.exportGraphViz()
     
-##    g = Graph(numberOfVertices=5,edgeProbability=0.5)
-##    g.showShort()
-##    g.save('test')
-##    probs = {}
-##    n = g.order
-##    i = 0
-##    verticesList = [x for x in g.vertices]
-##    verticesList.sort()
-##    for x in verticesList:
-##        probs[x] = (n - i)/(n*(n+1)/2)
-##        i += 1
-##    sumProbs = 0.0
-##    for x in verticesList:
-##        sumProbs += probs[x]
-##    met = MetropolisChain(g,probs)
-##    #met = MetropolisChain(g)
-##    #met.showShort()
-##    frequency = met.checkSampling(verticesList[0],nSim=30000)
-##    for x in verticesList:
-##        try:
-##            print(x,probs[x],frequency[x])
-##        except:
-##            print(x,0.0,0.0)
-##    met.showTransitionMatrix()
-##    met.saveCSVTransition()
-##    # Q-Colorings
-##    g = Graph(numberOfVertices=30,edgeProbability=0.1)
-##    #g = GridGraph(n=6,m=6)
-##    g.showShort()
-##    qc = Q_Coloring(g,nSim=100000,colors=['gold','lightcyan','lightcoral'],Debug=False)
-##    qc.checkFeasibility(Comments=True)
-##    qc.exportGraphViz()
-##    # Ising Models
-##    g = GridGraph(n=5,m=5)
-##    g.showShort()
-##    im = IsingModel(g,beta=0.441,nSim=30000,Debug=False)
-##    H = im.computeSpinEnergy()
-##    print( 'Spin energy = %d/%d = %.3f' % (H,im.size,H/im.size) )
-##    print(im.SpinEnergy)
-##    im.exportGraphViz(edgeColor='lightgrey',graphSize="(5,5)",graphType="pdf",colors=['gold','coral'])
-##    im.save()
-##    # MIS Models
-##    g = GridGraph(n=10,m=10)
-##    #g = Graph(numberOfVertices=30,edgeProbability=0.1)
-##    g.showShort()
-##    im = MISModel(g,nSim=100,beta=0.1,Debug=False)
-##    im.checkMIS(Comments=True)
-##    print('MIS       = ',im.mis)
-##    print('Covered   = ',im.misCover)
-##    print('Uncovered = ',im.unCovered)
-##    print('MIS size  = ',len(im.mis))
-##    im.exportGraphViz(misColor='coral')
+    g = Graph(numberOfVertices=5,edgeProbability=0.5)
+    g.showShort()
+    g.save('test')
+    probs = {}
+    n = g.order
+    i = 0
+    verticesList = [x for x in g.vertices]
+    verticesList.sort()
+    for x in verticesList:
+        probs[x] = (n - i)/(n*(n+1)/2)
+        i += 1
+    sumProbs = 0.0
+    for x in verticesList:
+        sumProbs += probs[x]
+    met = MetropolisChain(g,probs)
+    #met = MetropolisChain(g)
+    #met.showShort()
+    frequency = met.checkSampling(verticesList[0],nSim=30000)
+    for x in verticesList:
+        try:
+            print(x,probs[x],frequency[x])
+        except:
+            print(x,0.0,0.0)
+    met.showTransitionMatrix()
+    met.saveCSVTransition()
+    # Q-Colorings
+    g = Graph(numberOfVertices=30,edgeProbability=0.1)
+    #g = GridGraph(n=6,m=6)
+    g.showShort()
+    qc = Q_Coloring(g,nSim=100000,colors=['gold','lightcyan','lightcoral'],Debug=False)
+    qc.checkFeasibility(Comments=True)
+    qc.exportGraphViz()
+    # Ising Models
+    g = GridGraph(n=5,m=5)
+    g.showShort()
+    im = IsingModel(g,beta=0.441,nSim=30000,Debug=False)
+    H = im.computeSpinEnergy()
+    print( 'Spin energy = %d/%d = %.3f' % (H,im.size,H/im.size) )
+    print(im.SpinEnergy)
+    im.exportGraphViz(edgeColor='lightgrey',graphSize="(5,5)",graphType="pdf",colors=['gold','coral'])
+    im.save()
+    # MIS Models
+    g = GridGraph(n=10,m=10)
+    #g = Graph(numberOfVertices=30,edgeProbability=0.1)
+    g.showShort()
+    im = MISModel(g,nSim=100,Debug=False)
+    im.checkMIS(Comments=True)
+    print('MIS       = ',im.mis)
+    print('Covered   = ',im.misCover)
+    print('Uncovered = ',im.unCovered)
+    print('MIS size  = ',len(im.mis))
+    im.exportGraphViz(misColor='coral')
