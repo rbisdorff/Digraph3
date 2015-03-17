@@ -401,7 +401,9 @@ class Graph(object):
         return chordlessCyclesList
 
 
-    def exportGraphViz(self,fileName=None,noSilent=True,graphType='png',graphSize='7,7'):
+    def exportGraphViz(self,fileName=None,noSilent=True,
+                       graphType='png',graphSize='7,7',
+                       withSpanningTree=False):
         """
         Exports GraphViz dot file  for graph drawing filtering.
 
@@ -454,16 +456,35 @@ class Graph(object):
                 pass
             node += '];\n'                
             fo.write(node)
+        if withSpanningTree:
+            try:
+                dfs = self.dfs
+            except:
+                print('no spanning tree yet computed. Run self.randomDepthFirstSearch() !')
+            edgesColored = set()
+            print(dfs)
+            for tree in dfs:
+                for i in range((len(tree)-1)):
+                    #print(i,tree[i],tree[i+1])
+                    edgesColored.add(frozenset([tree[i],tree[i+1]]))
+            #print('Spanning tree: ', edgesColored)
         for i in range(n):
             for j in range(i+1, n):
                 if i != j:
                     edge = 'n'+str(i+1)
                     if edges[frozenset( [vertexkeys[i], vertexkeys[j]])] > Med:
-
-                        edge0 = edge+'-- n'+str(j+1)+' [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;\n'
+                        if withSpanningTree and \
+                        frozenset( [vertexkeys[i], vertexkeys[j]]) in edgesColored:
+                               arrowFormat = \
+        ' [dir=both,style="setlinewidth(3)",color=red, arrowhead=none, arrowtail=none] ;\n'                                          
+                        else:
+                            arrowFormat = \
+        ' [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;\n'
+                        edge0 = edge+'-- n'+str(j+1)+arrowFormat
                         fo.write(edge0)
                     elif edges[frozenset([vertexkeys[i],vertexkeys[j]])] == Med:
-                        edge0 = edge+'-- n'+str(j+1)+' [dir=both, color=grey, arrowhead=none, arrowtail=none] ;\n'
+                        edge0 = edge+'-- n'+str(j+1)+\
+            ' [dir=both, color=grey, arrowhead=none, arrowtail=none] ;\n'
                         fo.write(edge0)
 
         fo.write('}\n')
@@ -1892,9 +1913,12 @@ class MISModel(Graph):
 if __name__ == '__main__':
 
 
-    g = RandomGraph(order=10,seed=100)
+    g = GridGraph(n=20,m=20)
+    g.save()
     g.exportGraphViz()
-    print(g.randomDepthFirstSearch(seed=100,Debug=False))
+    print(g.randomDepthFirstSearch(seed=None,Debug=False))
+    g.exportGraphViz(withSpanningTree=True)
+    
     
 ##    c = CycleGraph()
 ##    c.showShort()
