@@ -535,6 +535,66 @@ class Graph(object):
         visitAllVertices(self, Debug=Debug)
         return self.dfs
 
+    def randomDepthFirstSearch(self,seed=None,Debug=False):
+        """
+        Depth first search through a graph
+        """
+        import random
+        random.seed(seed)
+        
+        def visitVertex(self,x,Debug=False):
+            """
+            Visits all followers of vertex x.
+            """
+            self.vertices[x]['color'] = 1
+            ## self.date += 1
+            self.vertices[x]['startDate'] = self.date
+            self.dfsx.append(x)
+            if Debug:
+                print(' dfs %s, date = %d' % (str(self.dfs),  self.vertices[x]['startDate']))
+            nextVertices = [y for y in self.gamma[x]]
+            nextVertices.sort()
+            if Debug:
+                print('   next ', nextVertices)
+            while nextVertices != []:
+                y = random.choice(nextVertices)
+                if self.vertices[y]['color'] == 0:
+                    self.date += 1
+                    visitVertex(self,y,Debug=Debug)
+                    if self.vertices[x]['color'] == 1:
+                        self.dfsx.append(x)
+                nextVertices.remove(y)
+            self.vertices[x]['color'] = 2
+            self.vertices[x]['endDate'] = self.date
+            self.date += 1
+
+        def visitAllVertices(self,Debug=False):
+            """
+            Mark the starting date for all vertices
+            and controls the progress of the search with vertices colors:
+            White (0), Grey (1), Black (2)
+            """
+            self.dfs = []
+            for x in self.vertices:
+                self.vertices[x]['color'] = 0
+            self.date = 0
+            verticesList = [x for x in self.vertices]
+            verticesList.sort()
+            while verticesList != []:
+                x = random.choice(verticesList)
+                self.dfsx = []
+                if self.vertices[x]['color'] == 0:
+                    if Debug:
+                        print('==>> Starting from %s ' % x)
+                    visitVertex(self,x,Debug=Debug)
+                    self.dfs.append(self.dfsx)
+                verticesList.remove(x)
+
+
+        # ---- main -----
+        visitAllVertices(self,Debug=Debug)
+        return self.dfs
+
 class EmptyGraph(Graph):
     """
     Intantiates graph of given order without any positively valued edge.
@@ -674,14 +734,15 @@ class RandomGraph(Graph):
         edges = dict()
         verticesList = [v for v in vertices]
         verticesList.sort()
-        for x in verticesList:
-            for y in verticesList:
-                if x != y:
-                    edgeKey = frozenset([x,y])
-                    if random.random() > 1.0 - edgeProbability:
-                        edges[edgeKey] = Max
-                    else:
-                        edges[edgeKey] = Min
+        for i in range(order):
+            x = verticesList[i]
+            for j in range(i+1,order):
+                y = verticesList[j]
+                edgeKey = frozenset([x,y])
+                if random.random() > 1.0 - edgeProbability:
+                    edges[edgeKey] = Max
+                else:
+                    edges[edgeKey] = Min
         self.edges = edges
         self.size = self.computeSize()
         self.gamma = self.gammaSets()
@@ -1399,7 +1460,7 @@ class IsingModel(Graph):
 
         fo.write('}\n')
         fo.close()
-        if self.gClass in (GridGraph,RandomTree):
+        if self.gClass in (GridGraph,TriangulatedGrid,RandomTree):
             commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         elif self.gClass == CycleGraph:
             commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
@@ -1830,73 +1891,78 @@ class MISModel(Graph):
 # --------------testing the module ----
 if __name__ == '__main__':
 
-    c = CycleGraph()
-    c.showShort()
 
-    g = RandomGraph(seed=100)
-    g.showShort()
-    g = RandomFixedDegreeSequenceGraph(seed=100)
-    g.showShort()
-    rg = RandomRegularGraph(seed=100)
-    rg.showShort()
-    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
-    rfs.showShort()
-    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
-    rfs.showShort()
-    
-    g = TriangulatedGrid(n=5,m=5)
-    #g.showShort()
+    g = RandomGraph(order=10,seed=100)
     g.exportGraphViz()
+    print(g.randomDepthFirstSearch(seed=100,Debug=False))
     
-    g = Graph(numberOfVertices=5,edgeProbability=0.5)
-    g.showShort()
-    g.save('test')
-    probs = {}
-    n = g.order
-    i = 0
-    verticesList = [x for x in g.vertices]
-    verticesList.sort()
-    for x in verticesList:
-        probs[x] = (n - i)/(n*(n+1)/2)
-        i += 1
-    sumProbs = 0.0
-    for x in verticesList:
-        sumProbs += probs[x]
-    met = MetropolisChain(g,probs)
-    #met = MetropolisChain(g)
-    #met.showShort()
-    frequency = met.checkSampling(verticesList[0],nSim=30000)
-    for x in verticesList:
-        try:
-            print(x,probs[x],frequency[x])
-        except:
-            print(x,0.0,0.0)
-    met.showTransitionMatrix()
-    met.saveCSVTransition()
-    # Q-Colorings
-    g = Graph(numberOfVertices=30,edgeProbability=0.1)
-    #g = GridGraph(n=6,m=6)
-    g.showShort()
-    qc = Q_Coloring(g,nSim=100000,colors=['gold','lightcyan','lightcoral'],Debug=False)
-    qc.checkFeasibility(Comments=True)
-    qc.exportGraphViz()
-    # Ising Models
-    g = GridGraph(n=5,m=5)
-    g.showShort()
-    im = IsingModel(g,beta=0.441,nSim=30000,Debug=False)
-    H = im.computeSpinEnergy()
-    print( 'Spin energy = %d/%d = %.3f' % (H,im.size,H/im.size) )
-    print(im.SpinEnergy)
-    im.exportGraphViz(edgeColor='lightgrey',graphSize="(5,5)",graphType="pdf",colors=['gold','coral'])
-    im.save()
-    # MIS Models
-    g = GridGraph(n=10,m=10)
-    #g = Graph(numberOfVertices=30,edgeProbability=0.1)
-    g.showShort()
-    im = MISModel(g,nSim=100,Debug=False)
-    im.checkMIS(Comments=True)
-    print('MIS       = ',im.mis)
-    print('Covered   = ',im.misCover)
-    print('Uncovered = ',im.unCovered)
-    print('MIS size  = ',len(im.mis))
-    im.exportGraphViz(misColor='coral')
+##    c = CycleGraph()
+##    c.showShort()
+##
+##    g = RandomGraph(seed=100)
+##    g.showShort()
+##    g = RandomFixedDegreeSequenceGraph(seed=100)
+##    g.showShort()
+##    rg = RandomRegularGraph(seed=100)
+##    rg.showShort()
+##    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
+##    rfs.showShort()
+##    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
+##    rfs.showShort()
+##    
+##    g = TriangulatedGrid(n=5,m=5)
+##    #g.showShort()
+##    g.exportGraphViz()
+##    
+##    g = Graph(numberOfVertices=5,edgeProbability=0.5)
+##    g.showShort()
+##    g.save('test')
+##    probs = {}
+##    n = g.order
+##    i = 0
+##    verticesList = [x for x in g.vertices]
+##    verticesList.sort()
+##    for x in verticesList:
+##        probs[x] = (n - i)/(n*(n+1)/2)
+##        i += 1
+##    sumProbs = 0.0
+##    for x in verticesList:
+##        sumProbs += probs[x]
+##    met = MetropolisChain(g,probs)
+##    #met = MetropolisChain(g)
+##    #met.showShort()
+##    frequency = met.checkSampling(verticesList[0],nSim=30000)
+##    for x in verticesList:
+##        try:
+##            print(x,probs[x],frequency[x])
+##        except:
+##            print(x,0.0,0.0)
+##    met.showTransitionMatrix()
+##    met.saveCSVTransition()
+##    # Q-Colorings
+##    g = Graph(numberOfVertices=30,edgeProbability=0.1)
+##    #g = GridGraph(n=6,m=6)
+##    g.showShort()
+##    qc = Q_Coloring(g,nSim=100000,colors=['gold','lightcyan','lightcoral'],Debug=False)
+##    qc.checkFeasibility(Comments=True)
+##    qc.exportGraphViz()
+##    # Ising Models
+##    g = GridGraph(n=5,m=5)
+##    g.showShort()
+##    im = IsingModel(g,beta=0.441,nSim=30000,Debug=False)
+##    H = im.computeSpinEnergy()
+##    print( 'Spin energy = %d/%d = %.3f' % (H,im.size,H/im.size) )
+##    print(im.SpinEnergy)
+##    im.exportGraphViz(edgeColor='lightgrey',graphSize="(5,5)",graphType="pdf",colors=['gold','coral'])
+##    im.save()
+##    # MIS Models
+##    g = GridGraph(n=10,m=10)
+##    #g = Graph(numberOfVertices=30,edgeProbability=0.1)
+##    g.showShort()
+##    im = MISModel(g,nSim=100,Debug=False)
+##    im.checkMIS(Comments=True)
+##    print('MIS       = ',im.mis)
+##    print('Covered   = ',im.misCover)
+##    print('Uncovered = ',im.unCovered)
+##    print('MIS size  = ',len(im.mis))
+##    im.exportGraphViz(misColor='coral')
