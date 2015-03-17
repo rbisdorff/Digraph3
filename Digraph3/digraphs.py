@@ -328,7 +328,13 @@ class Digraph(object):
         from copy import deepcopy
         g = Graph()
         g.name = deepcopy(self.name)
-        g.vertices = deepcopy(self.actions)
+        vertices = deepcopy(self.actions)
+        if type(self.actions) == list:
+            g.vertices = {}
+            for x in self.actions:
+                g.vertices[x] = {'name': x, 'shortName': x}
+        else:
+            vertices = deepcopy(self.actions)    
         g.order = len(g.vertices)
         g.valuationDomain = valuationDomain
         gMin = valuationDomain['min']

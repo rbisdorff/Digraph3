@@ -1913,12 +1913,16 @@ class MISModel(Graph):
 if __name__ == '__main__':
 
 
-    g = GridGraph(n=20,m=20)
-    g.save()
-    g.exportGraphViz()
-    print(g.randomDepthFirstSearch(seed=None,Debug=False))
-    g.exportGraphViz(withSpanningTree=True)
-    
+##    g = GridGraph(n=20,m=20)
+##    g.save()
+##    g.exportGraphViz()
+##    print(g.randomDepthFirstSearch(seed=None,Debug=False))
+##    g.exportGraphViz(withSpanningTree=True)
+    from digraphs import KneserDigraph
+    pdg = KneserDigraph()
+    p = pdg.digraph2Graph()
+    p.randomDepthFirstSearch(seed=1)
+    p.exportGraphViz(withSpanningTree=True)
     
 ##    c = CycleGraph()
 ##    c.showShort()
