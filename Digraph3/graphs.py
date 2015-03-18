@@ -1146,6 +1146,8 @@ class RandomTree(Graph):
 class RandomSpanningForest(RandomTree):
     """
     Random instance of a forest generated from a random depth first search.
+
+    .. image:: randomSpanningTree.png    
     """
     def __init__(self,g,seed = None,Debug=False):
         from copy import deepcopy
@@ -1996,22 +1998,24 @@ class MISModel(Graph):
 if __name__ == '__main__':
 
 
-##    g = GridGraph(n=20,m=20)
-##    g.save()
-##    g.exportGraphViz()
-##    print(g.randomDepthFirstSearch(seed=None,Debug=False))
-##    g.exportGraphViz(withSpanningTree=True)
+    g = RandomGraph(order=10,edgeProbability=0.4,seed=200)
+##    g = RandomRegularGraph(seed=100)
+##    g = GridGraph(n=10,m=10)
+    g.save()
+    g.exportGraphViz()
+    print(g.randomDepthFirstSearch(seed=None,Debug=False))
+    g.exportGraphViz(withSpanningTree=True)
 ##    from digraphs import KneserDigraph
 ##    pdg = KneserDigraph()
 ##    p = pdg.digraph2Graph()
-    p = RandomGraph(order=10,edgeProbability=0.1,seed=100)
-    p.randomDepthFirstSearch(seed=1)
-    p.exportGraphViz(withSpanningTree=True)
-    print(p.dfs)
-    spt = RandomSpanningForest(p,seed=1)
-    print(spt.dfs)
-    spt.exportGraphViz()
-    
+####    p = RandomGraph(order=10,edgeProbability=0.1,seed=100)
+##    p.randomDepthFirstSearch(seed=10)
+##    p.exportGraphViz(withSpanningTree=True)
+##    print(p.dfs)
+##    spt = RandomSpanningForest(p,seed=1)
+##    print(spt.dfs)
+##    spt.exportGraphViz()
+##    
 ##    c = CycleGraph()
 ##    c.showShort()
 ##
