@@ -616,6 +616,41 @@ class Graph(object):
         visitAllVertices(self,Debug=Debug)
         return self.dfs
 
+## # Under construction !!!
+##    def dfs2pruefer(self):
+##        """
+##        Renders the pruefer code of the spanning tree of self.
+##        """
+##        from operator import itemgetter, attrgetter
+##        try:
+##            dfs = self.dfs
+##        except:
+##            print('Error: You must first run self.randomDepthFirstSearch() !!')
+##            return
+##        if len(self.dfs) > 1:
+##            print('Self is not connected. A Pruefer code can only be computed for a connected graph !!!')
+##            return
+##        verticesList = [x for x in self.vertices]
+##        verticesList.sort()
+##        degree = {}
+##        for x in dfs[0]:
+##            try:
+##                degree[x] += 1
+##            except:
+##                degree[x] = 1
+##        print(degree)
+##        verticesDegree = [(degree[x],x) for x in degree]
+##        verticesDegree.sort()
+##        sorted(verticesDegree,key=itemgetter(1))
+##        #sorted(verticesDegree,key=lambda verticesDegree: verticesDegree[2])       
+##        print(verticesDegree)
+##        edges = set()
+##        tree = dfs[0]
+##        n = len(tree)-1
+##        for i in range(n):
+##            edges.add( frozenset( [ tree[i],tree[i+1] ] ) )
+##        print(edges)
+        
 class EmptyGraph(Graph):
     """
     Intantiates graph of given order without any positively valued edge.
@@ -1101,6 +1136,54 @@ class RandomTree(Graph):
                     break
         lastEdgeKey = frozenset([i for i in range(order) if degree[i] > 0])
         self.edges[lastEdgeKey] = Max
+        if Debug:
+            print('updated edges = ', self.edges)
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets(Debug)
+        if Debug:
+            print('gamma = ', self.gamma)
+
+class RandomSpanningForest(RandomTree):
+    """
+    Random instance of a forest generated from a random depth first search.
+    """
+    def __init__(self,g,seed = None,Debug=False):
+        from copy import deepcopy
+        import random
+        random.seed(seed)
+        self.name= g.name+'_randomSpanningTree'
+        if Debug:
+            print(self.name)
+        self.vertices = deepcopy(g.vertices)
+        order = len(self.vertices)
+        self.order = order
+        self.valuationDomain = deepcopy(g.valuationDomain)
+        Min = self.valuationDomain['min']
+        Med = self.valuationDomain['med']
+        Max = self.valuationDomain['max']
+        if Debug:
+            print('valuationDomain = ', self.valuationDomain)
+
+        verticesList = [x for x in self.vertices]
+        verticesList.sort()
+        edges = dict()
+        for i in range(order):
+            for j in range(i+1,order):
+                edgeKey = frozenset([verticesList[i],verticesList[j]])
+                edges[edgeKey] = Min
+        self.edges = deepcopy(edges)
+        if Debug:
+            print('edges = ',self.edges)
+
+        self.dfs = g.randomDepthFirstSearch(seed=seed,Debug=Debug)
+        if Debug:
+            print('dfs = ', self.dfs)
+
+        for tree in self.dfs:
+            n = len(tree)
+            for i in range(n-1):
+                edgeKey = frozenset([tree[i],tree[i+1]])
+                self.edges[edgeKey] = Max
         if Debug:
             print('updated edges = ', self.edges)
         self.size = self.computeSize()
@@ -1918,11 +2001,16 @@ if __name__ == '__main__':
 ##    g.exportGraphViz()
 ##    print(g.randomDepthFirstSearch(seed=None,Debug=False))
 ##    g.exportGraphViz(withSpanningTree=True)
-    from digraphs import KneserDigraph
-    pdg = KneserDigraph()
-    p = pdg.digraph2Graph()
+##    from digraphs import KneserDigraph
+##    pdg = KneserDigraph()
+##    p = pdg.digraph2Graph()
+    p = RandomGraph(order=10,edgeProbability=0.1,seed=100)
     p.randomDepthFirstSearch(seed=1)
     p.exportGraphViz(withSpanningTree=True)
+    print(p.dfs)
+    spt = RandomSpanningForest(p,seed=1)
+    print(spt.dfs)
+    spt.exportGraphViz()
     
 ##    c = CycleGraph()
 ##    c.showShort()
