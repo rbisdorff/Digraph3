@@ -112,3 +112,28 @@ def testTriangulatedGrid():
     print(im.SpinEnergy)
     im.exportGraphViz(edgeColor='lightgrey',graphSize="(5,5)",graphType="pdf",colors=['gold','coral'])
 
+def testRandomSpanningForest():
+    print('==>> Testing RandomSpanningForest class instantiation')
+    p = RandomGraph(order=10,edgeProbability=0.1,seed=100)
+    p.randomDepthFirstSearch(seed=1)
+    p.exportGraphViz(withSpanningTree=True)
+    print(p.dfs)
+    spt = RandomSpanningForest(p,seed=1)
+    print(spt.dfs)
+    spt.exportGraphViz()
+
+def testRandomGraphsModels():
+    print('==>> Testing random graph models')
+    c = CycleGraph()
+    c.showShort()
+    g = RandomGraph(seed=100)
+    g.showShort()
+    g = RandomFixedDegreeSequenceGraph(seed=100)
+    g.showShort()
+    rg = RandomRegularGraph(seed=100)
+    rg.showShort()
+    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
+    rfs.showShort()
+
+
+    
