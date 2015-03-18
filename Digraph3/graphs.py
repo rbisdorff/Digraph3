@@ -275,6 +275,7 @@ class Graph(object):
         fileNameExt = str(fileName)+str('.py')
         fo = open(fileNameExt, 'w')
         fo.write('# Graph instance saved in Python format\n')
+        fo.write('from decimal import Decimal\n')
         fo.write('vertices = {\n')
         for x in verticesKeys:
             fo.write('\'%s\': %s,\n' % (x,self.vertices[x]))
