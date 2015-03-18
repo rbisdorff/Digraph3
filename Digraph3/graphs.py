@@ -1149,14 +1149,15 @@ class RandomTree(Graph):
 
 class RandomSpanningForest(RandomTree):
     """
-    Random instance of a forest generated from a random depth first search.
+    Random instance of a spanning forest (one or more trees)
+    generated from a random depth first search graph g traversal.
 
     .. image:: randomSpanningTree.png
        :alt: randomSpanningForest instance
        :width: 300 px
        :align: center
     """
-    def __init__(self,g,seed = None,Debug=False):
+    def __init__(self,g,seed=None,Debug=False):
         from copy import deepcopy
         import random
         random.seed(seed)
