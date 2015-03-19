@@ -1193,7 +1193,10 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                                 print(res)
                     elif rankingRule == "KohlerRule":
 ##                        for res in pool.imap_unordered(_jobTaskKohler,filledCategKeys):
-                        for res in pool.imap_unordered(_jobTaskKohler,
+##                        for res in pool.imap_unordered(_jobTaskKohler,
+##                                                       filledCategKeys,
+##                                                       1):
+                        for res in pool.map(_jobTaskKohler,
                                                        filledCategKeys,
                                                        1):
                             if Comments:
