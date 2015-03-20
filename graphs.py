@@ -404,7 +404,8 @@ class Graph(object):
 
     def exportGraphViz(self,fileName=None,noSilent=True,
                        graphType='png',graphSize='7,7',
-                       withSpanningTree=False):
+                       withSpanningTree=False,
+                       layout=None):
         """
         Exports GraphViz dot file  for graph drawing filtering.
 
@@ -490,12 +491,18 @@ class Graph(object):
 
         fo.write('}\n')
         fo.close()
+        # choose layout model 
         if isinstance(self,(GridGraph,TriangulatedGrid,RandomTree)):
-            commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+            if layout == None:
+                layout = 'neato'
         elif isinstance(self,(CycleGraph)):
-            commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+            if layout == None:
+                layout = 'circo'
         else:
-            commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+            if layout == None:
+                layout = 'fdp'
+            
+        commandString = layout+' -T'+graphType+' '+dotName+' -o '+name+'.'+graphType
         if noSilent:
             print(commandString)
         try:
@@ -2016,7 +2023,7 @@ if __name__ == '__main__':
     g.save()
     g.exportGraphViz()
     print(g.randomDepthFirstSearch(seed=None,Debug=False))
-    g.exportGraphViz(withSpanningTree=True)
+    g.exportGraphViz(withSpanningTree=True,layout="circo")
 ##    from digraphs import KneserDigraph
 ##    pdg = KneserDigraph()
 ##    p = pdg.digraph2Graph()
