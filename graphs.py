@@ -1181,7 +1181,10 @@ class RandomSpanningForest(RandomTree):
         for i in range(order):
             for j in range(i+1,order):
                 edgeKey = frozenset([verticesList[i],verticesList[j]])
-                edges[edgeKey] = Min
+                if g.edges[edgeKey] > Med:
+                    edges[edgeKey] = Med
+                else:
+                    edges[edgeKey] = g.edges[edgeKey]
         self.edges = deepcopy(edges)
         if Debug:
             print('edges = ',self.edges)

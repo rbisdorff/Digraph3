@@ -1192,20 +1192,18 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                             if Comments:
                                 print(res)
                     elif rankingRule == "KohlerRule":
-##                        for res in pool.imap_unordered(_jobTaskKohler,filledCategKeys):
-##                        for res in pool.imap_unordered(_jobTaskKohler,
-##                                                       filledCategKeys,
-##                                                       1):
-                        for res in pool.map(_jobTaskKohler,
+                        for res in pool.imap(_jobTaskKohler,
                                                        filledCategKeys,
                                                        1):
                             if Comments:
                                 print(res)               
-                    elif rankingRule == "Test":
+                    elif rankingRule == "TestChunkSize":
+                        chksize = 1
+##                        chksize = len(filledCategKeys)//Nproc
 ##                        for res in pool.imap_unordered(_jobTaskKohler,filledCategKeys):
-                        for res in pool.imap_unordered(_jobTaskRubis,
+                        for res in pool.imap(_jobTaskKohler,
                                                        filledCategKeys,
-                                                       nbCores):
+                                                       chksize):
                             if Comments:
                                 print(res)                    
                 self.trbc = time() - t0
@@ -1514,10 +1512,10 @@ if __name__ == "__main__":
     from weakOrders import *
     from time import time
 
-    Threading=False
+    Threading=True
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                   numberOfActions=50)
+                                   numberOfActions=100)
     t.saveXMCDA2('test')
     #t = XMCDA2PerformanceTableau('uniSorting')
     t = XMCDA2PerformanceTableau('test')
@@ -1542,7 +1540,7 @@ if __name__ == "__main__":
                               #rankingRule="rank-by-choosing",
                               rankingRule="KohlerRule",
                               LowerClosed=False,
-                              Threading=Threading,Debug=False)
+                              Threading=Threading,Debug=True)
     print(time()-t0)
     qsrbc.showSorting()
     qsko.showQsRbcRanking()
