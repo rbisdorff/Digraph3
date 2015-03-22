@@ -1292,6 +1292,32 @@ class BestDeterminedSpanningForest(RandomTree):
     """
     Constructing the most determined spanning tree (or forest if not connected)
     using Kruskal's greedy algorithm on the dual valuation.
+
+    Example Python session:
+       >>> g = RandomValuationGraph(seed=2)
+       >>> g.showShort()
+       *---- short description of the graph ----*
+       Name             : 'randomGraph'
+       Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5']
+       Valuation domain :  {'med': Decimal('0'), 'min': Decimal('-1'), 'max': Decimal('1')}
+       Gamma function   : 
+       v1 -> ['v2', 'v3']
+       v2 -> ['v4', 'v1', 'v5', 'v3']
+       v3 -> ['v1', 'v5', 'v2']
+       v4 -> ['v5', 'v2']
+       v5 -> ['v4', 'v2', 'v3']
+       >>> mt = BestDeterminedSpanningForest(g)
+       >>> mt.exportGraphViz('spanningTree',withSpanningTree=True)
+       *---- exporting a dot file for GraphViz tools ---------*
+       Exporting to spanningTree.dot
+       [['v4', 'v2', 'v1', 'v3', 'v1', 'v2', 'v5', 'v2', 'v4']]
+       neato -Tpng spanningTree.dot -o spanningTree.png
+
+    .. image:: spanningTree.png
+       :alt: 7-cycle instance
+       :width: 300 px
+       :align: center
+
     """
     def __init__(self,g,seed=None,Debug=False):
         from copy import deepcopy
