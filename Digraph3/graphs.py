@@ -82,6 +82,16 @@ class Graph(object):
             self.size = self.computeSize()
             self.gamma = self.gammaSets()
 
+    def __neg__(self):
+        """
+        Make the negation operator -self available for Graph instances.
+        Returns a DualGraph instance of self.
+        """
+        new = DualGraph(self)
+        new.__class__ = self.__class__
+        return new
+
+
     def setEdgeValue(self,edge,value,Comments=False):
         """
         Wrapper for updating the charactreistic valuation of a Graph instance.
@@ -721,6 +731,34 @@ class CompleteGraph(Graph):
                     edges[edgeKey] = Max
         self.edges = edges
         self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+
+class DualGraph(Graph):
+    """
+    Instantiates the dual Graph object of a given other Graph instance.
+
+    The relation constructor returns the dual of self.relation with formula:
+        relationOut[a][b] = Max - self.relation[a][b] + Min
+        where Max (resp. Min) equals valuation maximum (resp. minimum).
+
+
+    """
+    def __init__(self,other):
+        from copy import deepcopy
+        self.name = 'dual_' + str(other.name)
+        try:
+            self.description = deepcopy(other.description)
+        except AttributeError:
+            pass
+        self.valuationDomain = deepcopy(other.valuationDomain)
+        Max = self.valuationDomain['max']
+        Min = self.valuationDomain['min']
+        self.vertices = deepcopy(other.vertices)
+        self.order = len(self.vertices)
+        self.edges = {}
+        for e in other.edges:
+            self.edges[e] = Max - other.edges[e] + Min
+        self.__class__ = other.__class__
         self.gamma = self.gammaSets()
 
 class CycleGraph(Graph):
