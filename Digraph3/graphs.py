@@ -301,8 +301,8 @@ class Graph(object):
             gamma[v] = set()
         for e in edges:
             if edges[e] > 0:
-                if Debug:
-                    print('e', e)
+##                if Debug:
+##                    print('e', e)
                 pair = set(e)
                 e1 = pair.pop()
                 e2 = pair.pop()
@@ -811,6 +811,44 @@ class RandomGraph(Graph):
         self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
+class RandomValuationGraph(Graph):
+    """
+    Specialization of the genuine Graph class for generating temporary
+    randomly valuated graphs in the range [-1.0;1.0].
+    
+    *Parameter*:
+        * order (positive integer)
+        * ndigits (decimal precision) 
+
+    """
+    def __init__(self,order=5,ndigits=2,seed=None):
+        import random
+        random.seed(seed)
+        self.name = 'randomGraph'
+        self.order = order
+        nd = len(str(order))
+        vertices = dict()
+        for i in range(order):
+            vertexKey = ('v%%0%dd' % nd) % (i+1)
+            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+        self.vertices = vertices
+        self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
+        Min = float(self.valuationDomain['min'])
+        Max = float(self.valuationDomain['max'])
+        edges = dict()
+        verticesList = [v for v in vertices]
+        verticesList.sort()
+        for i in range(order):
+            x = verticesList[i]
+            for j in range(i+1,order):
+                y = verticesList[j]
+                edgeKey = frozenset([x,y])
+                weightString = ('%%.%df' % ndigits) %  random.uniform(Min,Max)
+                edges[edgeKey] = Decimal(weightString)
+        self.edges = edges
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+
 class RandomRegularGraph(Graph):
     """
     Specialization of the general Graph class for generating
@@ -1211,6 +1249,96 @@ class RandomSpanningForest(RandomTree):
         self.gamma = self.gammaSets(Debug)
         if Debug:
             print('gamma = ', self.gamma)
+
+class BestDeterminedSpanningForest(RandomTree):
+    """
+    Constructing the most determined spanning tree (or forest if not connected)
+    using Kruskal's greedy algorithm on the dual valuation.
+    """
+    def __init__(self,g,seed=None,Debug=False):
+        from copy import deepcopy
+        import random
+        random.seed(seed)
+        self.name= g.name+'_randomSpanningTree'
+        if Debug:
+            print(self.name)
+        self.vertices = deepcopy(g.vertices)
+        verticesList = [x for x in self.vertices]
+        verticesList.sort()
+        order = len(self.vertices)
+        self.order = order
+        self.valuationDomain = deepcopy(g.valuationDomain)
+        Min = self.valuationDomain['min']
+        Med = self.valuationDomain['med']
+        Max = self.valuationDomain['max']
+        if Debug:
+            print('valuationDomain = ', self.valuationDomain)
+        edges = dict()
+        for i in range(order):
+            for j in range(i+1,order):
+                edgeKey = frozenset([verticesList[i],verticesList[j]])
+                if g.edges[edgeKey] > Med:
+                    edges[edgeKey] = Med
+                else:
+                    edges[edgeKey] = g.edges[edgeKey]
+        forest = []
+        weightedEdgesList = [(g.edges[e],e) \
+                for e in g.edges if g.edges[e] > Med ]
+        weightedEdgesList.sort(reverse=True)
+        if Debug:
+            print(weightedEdgesList)
+        for e in weightedEdgesList:
+            if Debug:
+                print('===>>> ', e)
+            edgeKeys = set([v for v in e[1]])
+            Included = False
+            connectedSubtrees = []
+            for tree in forest:
+                if Debug:
+                    print(tree)
+                test = tree[1] & edgeKeys
+                if len(test) == 2: # already connected
+                    Included = True
+                    if Debug:
+                        print('already included')
+                    break
+                elif len(test) == 1: # extending
+                    connectedSubtrees.append(tree)
+                    if Debug:
+                        print('extending',tree)
+            if not Included:
+                edges[e[1]] = e[0]
+                if Debug:
+                    print(e[1],edges[e[1]])             
+                    print('connecting subtrees',connectedSubtrees)
+                if connectedSubtrees == []:
+                    forest.append([set([e[1]]),edgeKeys])
+                    if Debug:
+                        print('Add new subtree')
+                elif len(connectedSubtrees) == 1:
+                    connectedSubtrees[0][0].add(e[1])
+                    connectedSubtrees[0][1] = connectedSubtrees[0][1] | edgeKeys
+                    if Debug:
+                        print('Extending an existing subtree')
+                else:
+                    connectedSubtrees[0][0].add(e[1])
+                    connectedSubtrees[0][0] =\
+                            connectedSubtrees[0][0] | connectedSubtrees[1][0]
+                    connectedSubtrees[0][1] =\
+                connectedSubtrees[0][1] | connectedSubtrees[1][1] | edgeKeys
+                    forest.remove(connectedSubtrees[1])
+                    if Debug:
+                        print('connected two subtrees')
+                        print(forest)
+                    
+        self.edges = deepcopy(edges)
+        if Debug:
+            print('edges = ',self.edges)
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets(Debug)
+        if Debug:
+            print('gamma = ', self.gamma)
+        self.dfs = self.depthFirstSearch()
 
 class Q_Coloring(Graph):
     """
@@ -2017,13 +2145,17 @@ class MISModel(Graph):
 if __name__ == '__main__':
 
 
-    g = RandomGraph(order=10,edgeProbability=0.4,seed=200)
+    g = RandomValuationGraph(order=5,seed=202)
 ##    g = RandomRegularGraph(seed=100)
 ##    g = GridGraph(n=10,m=10)
     g.save()
-    g.exportGraphViz()
-    print(g.randomDepthFirstSearch(seed=None,Debug=False))
-    g.exportGraphViz(withSpanningTree=True,layout="circo")
+    g.exportGraphViz('graph200')
+    #print(g.randomDepthFirstSearch(seed=None,Debug=False))
+    #g.exportGraphViz(withSpanningTree=True,layout="circo")
+    mt = BestDeterminedSpanningForest(g,Debug=True)
+    mt.exportGraphViz(layout="circo")
+    
+    
 ##    from digraphs import KneserDigraph
 ##    pdg = KneserDigraph()
 ##    p = pdg.digraph2Graph()
