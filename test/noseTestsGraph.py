@@ -135,5 +135,12 @@ def testRandomGraphsModels():
     rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
     rfs.showShort()
 
+def testBestDeterminedSpanningForest():
+    print('==>> Testing BestDeterminedSpanningForest class instantiation')
+    g = RandomValuationGraph(order=5,seed=202)
+    g.save()
+    g.exportGraphViz()
+    mt = BestDeterminedSpanningForest(g,Debug=True)
+    mt.exportGraphViz(layout="circo")
 
     
