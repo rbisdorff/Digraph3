@@ -1072,6 +1072,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                  outrankingType = "bipolar",
                  Threading=True,
                  nbrCores=None,
+                 chunkSize=1,
                  Comments=True,
                  Debug=False):
         
@@ -1192,9 +1193,10 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                             if Comments:
                                 print(res)
                     elif rankingRule == "KohlerRule":
+                        chksize=chunkSize
                         for res in pool.imap(_jobTaskKohler,
                                                        filledCategKeys,
-                                                       1):
+                                                       chksize):
                             if Comments:
                                 print(res)               
                     elif rankingRule == "TestChunkSize":
