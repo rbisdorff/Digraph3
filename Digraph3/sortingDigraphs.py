@@ -408,15 +408,19 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     print('InitialSplit, actions2Split', InitialSplit, actions2Split)
             
                 nit = n//nbrCores
-                if nit*nbrCores < n:
-                    nbrOfJobs = nbrCores + 1
-                else:
-                    nbrOfJobs = nbrCores
-                if Debug:
-                    print('nbr of actions to split',n)
-                    print('nbr of jobs = ',nbrOfJobs)    
-                    print('nbr of splitActions = ',nit)
-
+                nbrOfJobs = nbrCores
+                if nit*nbrOfJobs < n:
+                    nit += 1
+                while nit*(nbrOfJobs-1) >= n:
+                    nbrOfJobs -= 1
+##                while nit*nbrOfJobs > n:
+##                    nbrOfJobs -= 1
+                #if Debug:
+                print('number of cores =', nbrCores)
+                print('nbr of actions to split',n)
+                print('nbr of jobs = ',nbrOfJobs)    
+                print('nbr of splitActions = ',nit)
+                   
                 relation = {}
                 for x in initial:
                     relation[x] = {}
@@ -2045,30 +2049,30 @@ if __name__ == "__main__":
     #t = XMCDA2PerformanceTableau('uniSorting')
     #t = XMCDA2PerformanceTableau('spiegel2004')
     #t = XMCDA2PerformanceTableau('ex1')
-    t = RandomCBPerformanceTableau(numberOfActions=10,
+    t = RandomCBPerformanceTableau(numberOfActions=28,
                                    numberOfCriteria=7,
                                    weightDistribution='equiobjectives')
     t.saveXMCDA2('test',servingD3=False)
-    qs0 = QuantilesSortingDigraph(t,3,LowerClosed=False,Threading=False,
+    qs0 = QuantilesSortingDigraph(t,3,LowerClosed=False,Threading=True,
                                   Debug=False)
-    qs0.showOrderedRelationTable()
-    qs0.exportGraphViz()
-    qs0.showSorting()
-    qs0.showActionsSortingResult(Debug=False)
-    qs0.computeWeakOrder(Debug=True)
-    qs0.recodeValuation()
-    qs0.showSorting()
-    qs0.showActionsSortingResult(Debug=False)
-    qs0.computeWeakOrder(Debug=True)
-    from weakOrders import QuantilesRankingDigraph
-    qsrbc = QuantilesRankingDigraph(t,3,LowerClosed=False,Threading=False)
-    qsrbc.showSorting()
-    qsrbc.showActionsSortingResult()
-    qsrbc.computeWeakOrder(Comments=True)
-    qsrbc.exportSortingGraphViz('testqs17')
-    g = BipolarOutrankingDigraph(t,Normalized=True)
-    print(g.computeOrdinalCorrelation(qs0))
-    print(g.computeOrdinalCorrelation(qsrbc))
+##    qs0.showOrderedRelationTable()
+##    qs0.exportGraphViz()
+##    qs0.showSorting()
+##    qs0.showActionsSortingResult(Debug=False)
+##    qs0.computeWeakOrder(Debug=True)
+##    qs0.recodeValuation()
+##    qs0.showSorting()
+##    qs0.showActionsSortingResult(Debug=False)
+##    qs0.computeWeakOrder(Debug=True)
+##    from weakOrders import QuantilesRankingDigraph
+##    qsrbc = QuantilesRankingDigraph(t,3,LowerClosed=False,Threading=True)
+##    qsrbc.showSorting()
+##    qsrbc.showActionsSortingResult()
+##    qsrbc.computeWeakOrder(Comments=True)
+##    qsrbc.exportSortingGraphViz('testqs17')
+##    g = BipolarOutrankingDigraph(t,Normalized=True)
+##    print(g.computeOrdinalCorrelation(qs0))
+##    print(g.computeOrdinalCorrelation(qsrbc))
     
 
     print('*------------------*')
