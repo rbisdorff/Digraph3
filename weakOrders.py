@@ -1238,6 +1238,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                             print(c,'catRelation',catRelation[c])
                     elif nc == 2:
                         if Debug:
+
                             print('pair category %d : %d' % (c,nc))
                             print(catContent[c])
                         currActions = list(catContent[c])
@@ -1409,7 +1410,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
 
     def showWeakOrder(self):
         """
-        Dummy show method for the commenting computeWeakOrder method.
+        Dummy show method for the commenting computeWeakOrder() method.
         """
         self.computeWeakOrder(Comments=True)
 
