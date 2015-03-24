@@ -3764,9 +3764,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     print('InitialSplit, actions2Split', InitialSplit, actions2Split)
             
                 nit = n//nbrCores
+                nbrOfJobs = nbrCores
                 if nit*nbrCores < n:
                     nit += 1
-                while nit*(nbOfJobs-1) >= n:
+                while nit*(nbrOfJobs-1) >= n:
                     nbrOfJobs -= 1
                 if Debug:
                     print('nbr of actions to split',n)
