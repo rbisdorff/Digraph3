@@ -1160,7 +1160,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
             with TemporaryDirectory() as tempDirName:
                 cwd = getcwd()
                 chdir(tempDirName)
-                filledCategKeys = []
+                unorderedfilledCategKeys = []
                 if Comments:
                     print('Preparing the thread data ...')
                 t0 = time()
@@ -1168,8 +1168,8 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                     nc = len(catContent[c])
                     if Comments:
                         print('%d/%d %d' %(c,nwo,nc))
-                    if nc > 1:
-                        filledCategKeys.append(int(c))
+                    if nc > 2:
+                        unorderedfilledCategKeys.append((nc,int(c)))
                         pt = PartialPerformanceTableau(perfTab,actionsSubset=catContent[c])                     
                         foName = 'partialPerfTab-'+str(c)+'.py'
                         fo = open(foName,'wb')
@@ -1177,7 +1177,10 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                         fo.write(ptDp)
                         fo.close()
                 t1 = time()
+                unorderedfilledCategKeys.sort(reverse=True)
+                filledCategKeys = [ x[1] for x in unorderedfilledCategKeys]
                 if Comments:
+                    print(unorderedfilledCategKeys)
                     print(filledCategKeys)
                     print('%d of %d' % (len(filledCategKeys),nwo))
                     print('Execution time: %.4f sec.' % (t1-t0))
@@ -1213,7 +1216,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                     print('Finished all threads in %.4f sec.' % (self.trbc) )
                 for c in range(1,nwo+1):                    
                     nc = len(catContent[c])
-                    if nc > 1:
+                    if nc > 2:
                         fiName = 'splitCatRelation-'+str(c)+'.py'
                         fi = open(fiName,'rb')
                         splitCatRelation = loads(fi.read())
@@ -1232,7 +1235,31 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                             catRelation[c] = {str(x): {str(x): Med}}
                         if Debug:
                             print(c,'catRbc',catRbc[c])
-                            print(c,'catRelation',catRelation[c])               
+                            print(c,'catRelation',catRelation[c])
+                    elif nc == 2:
+                        if Debug:
+                            print('pair category %d : %d' % (c,nc))
+                            print(catContent[c])
+                        currActions = list(catContent[c])
+                        pt = PartialPerformanceTableau(perfTab,currActions)
+                        gt = BipolarOutrankingDigraph(pt)
+                        x = catContent[c][0]
+                        y = catContent[c][1]
+                        print(x,y)
+                        if gt.relation[x][y] > gt.relation[x][y]:
+                            catRbc[c] = [((Max,x),(Max,y))]
+                        elif gt.relation[x][y] < gt.relation[x][y]:
+                            catRbc[c] = [((Max,y),(Max,x))]
+                        else:
+                            catRbc[c] = [((Max,catContent[c]),(Max,catContent[c]))]
+                        catRelation[c] = qs.computeRankingByChoosingRelation(\
+                            actionsSubset=currActions,\
+                            rankingByChoosing=catRbc[c],\
+                            Debug=False)
+                        if Debug:
+                            print(c,'catRbc',catRbc[c])
+                            print(c,'catRelation',catRelation[c])
+                    
                 chdir(cwd)                
         else:
             ## without threading
