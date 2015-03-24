@@ -1245,7 +1245,6 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                         gt = BipolarOutrankingDigraph(pt)
                         x = catContent[c][0]
                         y = catContent[c][1]
-                        print(x,y)
                         if gt.relation[x][y] > gt.relation[x][y]:
                             catRbc[c] = [((Max,x),(Max,y))]
                         elif gt.relation[x][y] < gt.relation[x][y]:
@@ -1544,11 +1543,11 @@ if __name__ == "__main__":
     Threading=True
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                   numberOfActions=100)
+                                   numberOfActions=400)
     t.saveXMCDA2('test')
     #t = XMCDA2PerformanceTableau('uniSorting')
     t = XMCDA2PerformanceTableau('test')
-    g = BipolarOutrankingDigraph(t,Normalized=False)
+##    g = BipolarOutrankingDigraph(t,Normalized=False)
 ##    rbc = RankingByChoosingDigraph(g,Threading=False)
 ##    rbc.exportGraphViz()
     limitingQuantiles = len(t.actions) // 1
@@ -1561,25 +1560,25 @@ if __name__ == "__main__":
                               LowerClosed=False,
                               Threading=Threading,Debug=False)
     print('QR Exec. time:', time()-t0, 'sec.')
-    qsko.showSorting()
+    #qsko.showSorting()
     #qsko.exportSortingGraphViz('koq17',Debug=True)
     t0 = time()
-    qsrbc = QuantilesRankingDigraph(t,limitingQuantiles,
-                              strategy="pessimistic",
-                              #rankingRule="rank-by-choosing",
-                              rankingRule="KohlerRule",
-                              LowerClosed=False,
-                              Threading=Threading,Debug=True)
-    print(time()-t0)
-    qsrbc.showSorting()
-    qsko.showQsRbcRanking()
-    qsrbc.showRanking()
-    koOrder = qsko.computePreorderRelation(qsko.computeQsRbcRanking())
-    rbcOrder = qsrbc.computePreorderRelation(qsrbc.computeQsRbcRanking())
-    print(g.computeOrdinalCorrelation(koOrder))
-    print(g.computeOrdinalCorrelation(rbcOrder))
-    print(qsko.computeOutrankingCorrelation(Threading=Threading))
-    print(qsrbc.computeOutrankingCorrelation(Threading=Threading))
+##    qsrbc = QuantilesRankingDigraph(t,limitingQuantiles,
+##                              strategy="pessimistic",
+##                              #rankingRule="rank-by-choosing",
+##                              rankingRule="KohlerRule",
+##                              LowerClosed=False,
+##                              Threading=Threading,Debug=True)
+##    print(time()-t0)
+##    #qsrbc.showSorting()
+##    qsko.showQsRbcRanking()
+##    qsrbc.showRanking()
+##    koOrder = qsko.computePreorderRelation(qsko.computeQsRbcRanking())
+##    rbcOrder = qsrbc.computePreorderRelation(qsrbc.computeQsRbcRanking())
+##    print(g.computeOrdinalCorrelation(koOrder))
+##    print(g.computeOrdinalCorrelation(rbcOrder))
+##    print(qsko.computeOutrankingCorrelation(Threading=Threading))
+##    print(qsrbc.computeOutrankingCorrelation(Threading=Threading))
     
 ##    qsrbc.showActionsSortingResult()
 ##    qsrbc.computeWeakOrder(Comments=True)
