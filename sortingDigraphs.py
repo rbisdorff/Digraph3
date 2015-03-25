@@ -1373,8 +1373,8 @@ class QuantilesSortingDigraph(SortingDigraph):
                         'lowLimit': ']%.2f' % (limitingQuantiles[i]),
                         'highLimit': '%.2f]' % (limitingQuantiles[i+1])}
         self.categories = deepcopy(categories)
-        #if Debug:
-        print('categories',self.categories)
+        if Debug:
+            print('categories',self.categories)
 
         criteriaCategoryLimits = {}
         criteriaCategoryLimits['LowerClosed'] = LowerClosed
@@ -1391,8 +1391,8 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                    'maximum':gQuantiles[int(c)]
 ##                    }
         self.criteriaCategoryLimits = deepcopy(criteriaCategoryLimits)
-        #if Debug:
-        print('CriteriaCategoryLimits',self.criteriaCategoryLimits)
+        if Debug:
+            print('CriteriaCategoryLimits',self.criteriaCategoryLimits)
 
         # set the category limits type (LowerClosed = True is default)
         # self.criteriaCategoryLimits['LowerClosed'] = LowerClosed
@@ -1422,15 +1422,15 @@ class QuantilesSortingDigraph(SortingDigraph):
                             highValueg = Decimal(str(self.criteria[g]['scale'][1]))
                         else:
                             highValueg = Decimal(str(highValue))
-                        print('highValue = ', highValue)
+                        #print('highValue = ', highValue)
                         self.evaluation[g][cKey] = -(highValueg - Decimal(str(self.criteriaCategoryLimits[g][int(c)])))
                     else:
                         print('===>>>>> Error')
                 except:
                     self.evaluation[g][cKey] = Decimal(str(self.criteriaCategoryLimits[g][int(c)]))
-        #if Debug:
-        print('Profiles',self.profiles)
-        print('ProfileLimits',self.profileLimits)
+        if Debug:
+            print('Profiles',self.profiles)
+            print('ProfileLimits',self.profileLimits)
             
         self.convertEvaluationFloatToDecimal()
 
@@ -2795,14 +2795,14 @@ if __name__ == "__main__":
 ##    t.saveXMCDA2('test',servingD3=False)
     t = XMCDA2PerformanceTableau('test')  
     qsb = QuantilesSortingDigraph(t,7,LowerClosed=False,
-                                     Threading=True,
+                                     Threading=False,
                                      Debug=False)
     qsb.showSorting()
     qsb.showSortingCharacteristics('a01')
     qsb.showWeakOrder()
     
     qs = _QuantilesSortingDigraph(t,7,LowerClosed=False,
-                                     Threading=True,
+                                     Threading=False,
                                      Debug=False)
     qs.showSorting()
     qs.showSortingCharacteristics('a01')
