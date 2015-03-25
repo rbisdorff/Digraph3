@@ -23,6 +23,7 @@ from digraphs import *
 from outrankingDigraphs import *
 from sortingDigraphs import *
 
+
 class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     """
     Specialisation of the digraphs.BipolarOutrankingDigraph Class
@@ -1584,7 +1585,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 
     def computeWeakOrder(self,Descending=True,Debug=False):
         """
-        Specialisation for QauntilesSortingDigraphs.
+        Specialisation for QuantilesSortingDigraphs.
         """
         from decimal import Decimal
         cC = self.computeCategoryContents()
