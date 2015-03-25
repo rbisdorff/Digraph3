@@ -1444,47 +1444,48 @@ class QuantilesSortingDigraph(SortingDigraph):
             self.relationOrig = deepcopy(g.relation)
             Min = g.valuationdomain['min']
             Max = g.valuationdomain['max']
+            self.valuationdomain = deepcopy(g.valuationdomain)
         else:
             Min = Decimal(str(minValuation))
             Max = Decimal(str(maxValuation))
 ##                Min = Decimal('-100')
 ##                Max = Decimal('100')
-            Med = (Max + Min)/Decimal('2.0')
-            self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
-            if LowerClosed:
-                self.relation = self._constructRelation(self.criteria,
-                                                       self.evaluation,
-                                                       initial=self.actionsOrig,
-                                                       terminal=self.profileLimits,
-                                                       hasNoVeto=hasNoVeto,
-                                                       hasBipolarVeto=True,
-                                                        Threading=Threading,
-                                                        nbrCores=nbrCores)
-            else:
-                self.relation = self._constructRelation(self.criteria,
-                                                       self.evaluation,
-                                                       terminal=self.actionsOrig,
-                                                       initial=self.profileLimits,
-                                                       hasNoVeto=hasNoVeto,
-                                                        hasBipolarVeto=True,
-                                                        Threading=Threading,
-                                                        nbrCores=nbrCores)
-            if LowerClosed:
-                for x in self.actionsOrig:
-                    for y in self.actionsOrig:
-                        self.relation[x][y] = Med
-                for x in self.profileLimits:
-                    self.relation[x] = {}
-                    for y in self.actions:
-                        self.relation[x][y] = Med
-            else:
-                for x in self.actionsOrig:
-                    self.relation[x] = {}
-                    for y in self.actionsOrig:
-                        self.relation[x][y] = Med
-                for y in self.profileLimits:
-                    for x in self.actions:
-                        self.relation[x][y] = Med
+        Med = (Max + Min)/Decimal('2.0')
+        self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
+        if LowerClosed:
+            self.relation = self._constructRelation(self.criteria,
+                                                   self.evaluation,
+                                                   initial=self.actionsOrig,
+                                                   terminal=self.profileLimits,
+                                                   hasNoVeto=hasNoVeto,
+                                                   hasBipolarVeto=True,
+                                                    Threading=Threading,
+                                                    nbrCores=nbrCores)
+        else:
+            self.relation = self._constructRelation(self.criteria,
+                                                   self.evaluation,
+                                                   terminal=self.actionsOrig,
+                                                   initial=self.profileLimits,
+                                                   hasNoVeto=hasNoVeto,
+                                                    hasBipolarVeto=True,
+                                                    Threading=Threading,
+                                                    nbrCores=nbrCores)
+        if LowerClosed:
+            for x in self.actionsOrig:
+                for y in self.actionsOrig:
+                    self.relation[x][y] = Med
+            for x in self.profileLimits:
+                self.relation[x] = {}
+                for y in self.actions:
+                    self.relation[x][y] = Med
+        else:
+            for x in self.actionsOrig:
+                self.relation[x] = {}
+                for y in self.actionsOrig:
+                    self.relation[x][y] = Med
+            for y in self.profileLimits:
+                for x in self.actions:
+                    self.relation[x][y] = Med
 
         # compute weak ordering
         sortingRelation = self.computeSortingRelation(Debug=Debug)
