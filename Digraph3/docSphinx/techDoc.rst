@@ -43,8 +43,6 @@ The Digraph3 source code is split into several interdependent modules of which t
      Additional tools for solving linearly ranking problems with the root `LinearOrder <techDoc.html#linearOrders.LinearOrder>`_ class;
 * :ref:`weakOrders-label` 
      Additional tools for solving ranking by choosing problems with root `WeakOrder <techDoc.html#weakOrders.WeakOrder>`_ class.
-* :ref:`randomNumbers-label` 
-     Various home brewed random number generators like discrete and extended triangular.
 * :ref:`randomDigraphs-label` 
      Various implemented random digraph models.
 
@@ -101,7 +99,7 @@ outrankingDigraphs module
    :no-inherited-members:
    :members:
 
-Back to the :ref:`Introduction-label`
+Back to the :ref:`Technical-label`
 
 .. _votingDigraphs-label:
 
@@ -113,7 +111,7 @@ votingDigraphs module
    :no-inherited-members:
    :members:
 
-Back to the :ref:`Introduction-label`
+Back to the :ref:`Technical-label`
 
 .. _sortingDigraphs-label:
 
@@ -125,7 +123,7 @@ sortingDigraphs module
    :no-inherited-members:
    :members:
 
-Back to the :ref:`Introduction-label`
+Back to the :ref:`Technical-label`
 
 .. _linearOrders-label:
 
@@ -137,7 +135,7 @@ linearOrders module
    :no-inherited-members:
    :members:
 
-Back to the :ref:`Introduction-label`
+Back to the :ref:`Technical-label`
 
 .. _weakOrders-label:
 
@@ -149,7 +147,7 @@ weakOrders module
    :no-inherited-members:
    :members:
 
-Back to the :ref:`Introduction-label`
+Back to the :ref:`Technical-label`
 
 .. _randomDigraphs-label:
 
@@ -157,18 +155,6 @@ randomDigraphs module
 ---------------------
 
 .. automodule:: randomDigraphs
-   :member-order: alphabetical
-   :no-inherited-members:
-   :members:
-
-Back to the :ref:`Introduction-label`
-
-.. _randomNumbers-label:
-
-randomNumbers module
---------------------
-
-.. automodule:: randomNumbers
    :member-order: alphabetical
    :no-inherited-members:
    :members:

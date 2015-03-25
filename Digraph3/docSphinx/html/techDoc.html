@@ -129,12 +129,6 @@
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#randomnumbers-label"><em>randomNumbers module</em></a></dt>
-<dd><p class="first last">Various home brewed random number generators like discrete and extended triangular.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
 <dt><a class="reference internal" href="#randomdigraphs-label"><em>randomDigraphs module</em></a></dt>
 <dd><p class="first last">Various implemented random digraph models.</p>
 </dd>
@@ -1065,7 +1059,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3178,7 +3172,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3916,7 +3910,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4280,7 +4274,7 @@ neglecting all considerable large performance differences polarisations.</p>
 temporary unanimous outranking digraphs</p>
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="index.html#introduction-label"><em>Introduction</em></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><em>Introduction</em></a></p>
 </div>
 <div class="section" id="module-votingDigraphs">
 <span id="votingdigraphs-module"></span><span id="votingdigraphs-label"></span><h2>votingDigraphs module<a class="headerlink" href="#module-votingDigraphs" title="Permalink to this headline">¶</a></h2>
@@ -4628,7 +4622,7 @@ ballot = {     # voters x candidates x candidates
 
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="index.html#introduction-label"><em>Introduction</em></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><em>Introduction</em></a></p>
 </div>
 <div class="section" id="module-sortingDigraphs">
 <span id="sortingdigraphs-module"></span><span id="sortingdigraphs-label"></span><h2>sortingDigraphs module<a class="headerlink" href="#module-sortingDigraphs" title="Permalink to this headline">¶</a></h2>
@@ -4674,7 +4668,7 @@ By default lower closed limits of categories are supposed to be used in the sort
 <dl class="method">
 <dt id="sortingDigraphs.QuantilesSortingDigraph.computeWeakOrder">
 <tt class="descname">computeWeakOrder</tt><big>(</big><em>Descending=True</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.computeWeakOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Specialisation for QauntilesSortingDigraphs.</p>
+<dd><p>Specialisation for QuantilesSortingDigraphs.</p>
 </dd></dl>
 
 <dl class="method">
@@ -4902,7 +4896,7 @@ the high category limit.</p>
 
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="index.html#introduction-label"><em>Introduction</em></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><em>Introduction</em></a></p>
 </div>
 <div class="section" id="module-linearOrders">
 <span id="linearorders-module"></span><span id="linearorders-label"></span><h2>linearOrders module<a class="headerlink" href="#module-linearOrders" title="Permalink to this headline">¶</a></h2>
@@ -5005,7 +4999,7 @@ outdegrees of the valued digraph &#8216;other&#8217;.</p>
 a given bipolar-valued Digraph instance</p>
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="index.html#introduction-label"><em>Introduction</em></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><em>Introduction</em></a></p>
 </div>
 <div class="section" id="module-weakOrders">
 <span id="weakorders-module"></span><span id="weakorders-label"></span><h2>weakOrders module<a class="headerlink" href="#module-weakOrders" title="Permalink to this headline">¶</a></h2>
@@ -5153,7 +5147,7 @@ of the quantiles sorting result.</p>
 <dl class="method">
 <dt id="weakOrders.QuantilesRankingDigraph.showWeakOrder">
 <tt class="descname">showWeakOrder</tt><big>(</big><big>)</big><a class="headerlink" href="#weakOrders.QuantilesRankingDigraph.showWeakOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dummy show method for the commenting computeWeakOrder method.</p>
+<dd><p>Dummy show method for the commenting computeWeakOrder() method.</p>
 </dd></dl>
 
 </dd></dl>
@@ -5302,7 +5296,7 @@ ranking-by-Rubis-choosing orderings.</p>
 
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="index.html#introduction-label"><em>Introduction</em></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><em>Introduction</em></a></p>
 </div>
 <div class="section" id="module-randomDigraphs">
 <span id="randomdigraphs-module"></span><span id="randomdigraphs-label"></span><h2>randomDigraphs module<a class="headerlink" href="#module-randomDigraphs" title="Permalink to this headline">¶</a></h2>
@@ -5474,119 +5468,6 @@ else valuation domain = [-1.0,1.0]</li>
 </dl>
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="index.html#introduction-label"><em>Introduction</em></a></p>
-</div>
-<div class="section" id="module-randomNumbers">
-<span id="randomnumbers-module"></span><span id="randomnumbers-label"></span><h2>randomNumbers module<a class="headerlink" href="#module-randomNumbers" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="randomNumbers.CauchyRandomVariable">
-<em class="property">class </em><tt class="descclassname">randomNumbers.</tt><tt class="descname">CauchyRandomVariable</tt><big>(</big><em>position=0.0</em>, <em>scale=1.0</em>, <em>seed=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#randomNumbers.CauchyRandomVariable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
-<p>Cauchy random variable generator.</p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd><ul class="first last simple">
-<li>position := median (default=0.0) of the Cauchy distribution</li>
-<li>scale := typical spread (default=1.0) with respect to median</li>
-<li>seed := integer (default=None) for fixing the sequence generation.</li>
-</ul>
-</dd>
-<dt>Cauchy quantile (inverse cdf) function:</dt>
-<dd>Q(x|position,scale) = position + scale*tan[pi(x-1/2)]</dd>
-</dl>
-<a class="reference internal image-reference" href="_images/cauchyDistribution.png"><img alt="Cauchy Distribution" class="align-center" src="_images/cauchyDistribution.png" style="width: 500px;" /></a>
-<dl class="method">
-<dt id="randomNumbers.CauchyRandomVariable.random">
-<tt class="descname">random</tt><big>(</big><big>)</big><a class="headerlink" href="#randomNumbers.CauchyRandomVariable.random" title="Permalink to this definition">¶</a></dt>
-<dd><p>generating a Cauchy random number.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="randomNumbers.DiscreteRandomVariable">
-<em class="property">class </em><tt class="descclassname">randomNumbers.</tt><tt class="descname">DiscreteRandomVariable</tt><big>(</big><em>discreteLaw=None</em>, <em>seed=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#randomNumbers.DiscreteRandomVariable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
-<p>Discrete random variable generator</p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd><div class="first last line-block">
-<div class="line">discreteLaw := dictionary with integer values</div>
-<div class="line-block">
-<div class="line">as keys and probabilities as float values,</div>
-</div>
-<div class="line">seed := integer for fixing the sequence generation.</div>
-</div>
-</dd>
-<dt>Example usage:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">DiscreteRandomVariable</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">discreteLaw</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mf">0.0478</span><span class="p">,</span>
-<span class="go">                   1:0.3349,</span>
-<span class="go">                   2:0.2392,</span>
-<span class="go">                   3:0.1435,</span>
-<span class="go">                   4:0.0957,</span>
-<span class="go">                   5:0.0670,</span>
-<span class="go">                   6:0.0478,</span>
-<span class="go">                   7:0.0096,</span>
-<span class="go">                   8:0.0096,</span>
-<span class="go">                   9:0.0048,}</span>
-<span class="go">## initialze the random generator</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rdv</span> <span class="o">=</span> <span class="n">DiscreteRandomVariable</span><span class="p">(</span><span class="n">discreteLaw</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">## sample discrete random variable and</span>
-<span class="go">## count frequencies of obtained values</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sampleSize</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">frequencies</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sampleSize</span><span class="p">):</span>
-<span class="go">        x = rdv.random() </span>
-<span class="go">        try:</span>
-<span class="go">            frequencies[x] += 1</span>
-<span class="go">        except:</span>
-<span class="go">            frequencies[x] = 1</span>
-<span class="go">## print results</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">frequencies</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">counts</span><span class="o">=</span> <span class="mf">0.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
-<span class="go">        counts += frequencies[x]</span>
-<span class="go">        print  (&#39;%s, %d, %.3f, %.3f&#39; % (x, frequencies[x],</span>
-<span class="go">                  float(frequencies[x])/float(sampleSize),</span>
-<span class="go">                  discreteLaw[x]))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="p">(</span><span class="s">&#39;# of valid samples = </span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">counts</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-<dl class="method">
-<dt id="randomNumbers.DiscreteRandomVariable.random">
-<tt class="descname">random</tt><big>(</big><big>)</big><a class="headerlink" href="#randomNumbers.DiscreteRandomVariable.random" title="Permalink to this definition">¶</a></dt>
-<dd><p>generating discrete random values from a discrete random variable.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="randomNumbers.ExtendedTriangularRandomVariable">
-<em class="property">class </em><tt class="descclassname">randomNumbers.</tt><tt class="descname">ExtendedTriangularRandomVariable</tt><big>(</big><em>lowLimit=0.0</em>, <em>highLimit=1.0</em>, <em>mode=None</em>, <em>probRepart=0.5</em>, <em>seed=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#randomNumbers.ExtendedTriangularRandomVariable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
-<p>Extended triangular random variable generator</p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd><ul class="first last simple">
-<li>mode := most frequently observed value</li>
-<li>probRepart := probability mass distributed until the mode</li>
-<li>seed := integer for fixing the sequence generation.</li>
-</ul>
-</dd>
-</dl>
-<a class="reference internal image-reference" href="_images/extTrDistribution.png"><img alt="Extended triangular distribution" class="align-center" src="_images/extTrDistribution.png" style="width: 500px;" /></a>
-<dl class="method">
-<dt id="randomNumbers.ExtendedTriangularRandomVariable.random">
-<tt class="descname">random</tt><big>(</big><big>)</big><a class="headerlink" href="#randomNumbers.ExtendedTriangularRandomVariable.random" title="Permalink to this definition">¶</a></dt>
-<dd><p>generating an extended triangular random number.</p>
-</dd></dl>
-
-</dd></dl>
-
 <p>Back to the <a class="reference internal" href="#technical-label"><em>Introduction</em></a></p>
 </div>
 <div class="section" id="indices-and-tables">
@@ -5624,7 +5505,6 @@ else valuation domain = [-1.0,1.0]</li>
 <li><a class="reference internal" href="#module-linearOrders">linearOrders module</a></li>
 <li><a class="reference internal" href="#module-weakOrders">weakOrders module</a></li>
 <li><a class="reference internal" href="#module-randomDigraphs">randomDigraphs module</a></li>
-<li><a class="reference internal" href="#module-randomNumbers">randomNumbers module</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 <li><a class="reference internal" href="#tutorials">Tutorials</a></li>
 </ul>
