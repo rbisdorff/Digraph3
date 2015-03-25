@@ -23,7 +23,6 @@ from digraphs import *
 from outrankingDigraphs import *
 from sortingDigraphs import *
 
-
 class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     """
     Specialisation of the digraphs.BipolarOutrankingDigraph Class
