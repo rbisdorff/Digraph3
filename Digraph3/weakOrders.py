@@ -1140,7 +1140,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         tw = time()
         weakOrdering = QsRbcWeakOrdering.computeWeakOrder(qs,strategy=strategy)
         if Comments:
-            print('weakOredering execution time: %.4f' % (time() - tw) )
+            print('weak ordering execution time: %.4f' % (time() - tw) )
         nwo = len(weakOrdering)
         for i in range(nwo):
             catContent[i+1] = weakOrdering[i]
