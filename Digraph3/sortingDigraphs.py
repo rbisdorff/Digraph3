@@ -1566,6 +1566,91 @@ class QuantilesSortingDigraph(SortingDigraph):
 
 ##        return orderingList
 
+    def computeQuantileOrdering(self,Descending=True,strategy=None,Comments=False,Debug=False):
+        """
+        *Parameters*:
+            * Descending: listing in *decreasing* (default) or *increasing* quantile order.
+            * strategy: ordering in an {'optimistic' (default) | 'pessimistic' | 'average'}
+              in the uppest, the lowest or the average potential quantile.
+        
+        """
+        if strategy == None:
+            strategy = 'optimistic'
+        actionsCategories = {}
+        for x in self.actions:
+            a,lowCateg,highCateg,credibility =\
+                     self.showActionCategories(x,Comments=Debug)
+            if strategy == "optimistic":
+                try:
+                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]
+            elif strategy == "pessimistic":
+                try:
+                    actionsCategories[(int(lowCateg),int(highCateg))].append(a)
+                except:
+                    actionsCategories[(int(lowCateg),int(highCateg))] = [a]
+            elif strategy == "average":
+                lc = float(lowCateg)
+                hc = float(highCateg)
+                ac = (lc+hc)/2.0
+                try:
+                    actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
+            else:  # optimistic by default
+                try:
+                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
+                
+        actionsCategIntervals = []
+        for interval in actionsCategories:
+            actionsCategIntervals.append([interval,\
+                                          actionsCategories[interval]])
+        actionsCategIntervals.sort(reverse=Descending)
+        weakOrdering = []
+        for item in actionsCategIntervals:
+            #print(item)
+            if Comments:
+                if strategy == "optimistic":
+                    if self.criteriaCategoryLimits['LowerClosed']:
+                        print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
+                                                self.categories[str(item[0][0])]['highLimit'],\
+                                                str(item[1])) )
+                    else:
+                        print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
+                                                self.categories[str(item[0][0])]['highLimit'],\
+                                                str(item[1])) )
+                elif strategy == "pessimistic":
+                    if self.criteriaCategoryLimits['LowerClosed']:
+                        print('%s-%s : %s' % (self.categories[str(item[0][0])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'],\
+                                                str(item[1])) )
+                    else:
+                        print('%s-%s : %s' % (self.categories[str(item[0][0])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'],\
+                                                str(item[1])) )                   
+                elif strategy == "average":
+                    if self.criteriaCategoryLimits['LowerClosed']:
+                        print('%s-%s : %s' % (self.categories[str(item[0][2])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'],\
+                                                str(item[1])) )
+                    else:
+                        print('%s-%s : %s' % (self.categories[str(item[0][2])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'],\
+                                                str(item[1])) )
+
+            weakOrdering.append(item[1])
+        return weakOrdering
+
+    def showQuantileOrdering(self,strategy=None):
+        """
+        Dummy show method for the commenting computeQuantileOrdering() method.
+        """
+        self.computeQuantileOrdering(strategy=strategy,Comments=True)
+
+
     def computeWeakOrder(self,Descending=True,Debug=False):
         """
         Specialisation for QuantilesSortingDigraphs.
@@ -2794,20 +2879,15 @@ if __name__ == "__main__":
 ##                                   weightDistribution='equiobjectives')
 ##    t.saveXMCDA2('test',servingD3=False)
     t = XMCDA2PerformanceTableau('test')  
-    qsb = QuantilesSortingDigraph(t,7,LowerClosed=False,
-                                     Threading=False,
-                                     Debug=False)
-    qsb.showSorting()
-    qsb.showSortingCharacteristics('a01')
-    qsb.showWeakOrder()
-    
-    qs = _QuantilesSortingDigraph(t,7,LowerClosed=False,
+    qs = QuantilesSortingDigraph(t,15,LowerClosed=False,
                                      Threading=False,
                                      Debug=False)
     qs.showSorting()
     qs.showSortingCharacteristics('a01')
     qs.showWeakOrder()
-
+    qs.showQuantileOrdering(strategy=None)
+    qs.exportGraphViz('test')
+    
 ##    qs0.showOrderedRelationTable()
 ##    qs0.exportGraphViz()
 ##    qs0.showSorting()
