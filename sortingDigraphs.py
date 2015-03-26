@@ -2021,7 +2021,12 @@ class QuantilesSortingDigraph(SortingDigraph):
 
     def showHTMLQuantileOrdering(self,Descending=True,strategy='optimistic'):
         """
-        shows the html version of the performance tableau in a browser window.
+        Shows the html version of the quantile preordering in a browser window.
+
+        The ordring strategy is either:
+            * **optimistic**, following the upper quantile limits (default),
+            * **pessimistic**, following the lower quantile limits,
+            * **average**, following the averag of the upper and lower quantile limits.
         """
         import webbrowser
         fileName = '/tmp/preOrdering.html'
@@ -2037,7 +2042,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 
     def showHTMLSorting(self,Reverse=True):
         """
-        shows the html version of the performance tableau in a browser window.
+        shows the html version of the sorting result in a browser window.
         """
         import webbrowser
         fileName = '/tmp/sorting.html'
