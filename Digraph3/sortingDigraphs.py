@@ -2879,7 +2879,7 @@ if __name__ == "__main__":
 ##                                   weightDistribution='equiobjectives')
 ##    t.saveXMCDA2('test',servingD3=False)
     t = XMCDA2PerformanceTableau('test')  
-    qs = QuantilesSortingDigraph(t,15,LowerClosed=False,
+    qs = QuantilesSortingDigraph(t,15,LowerClosed=True,
                                      Threading=False,
                                      Debug=False)
     qs.showSorting()
@@ -2887,6 +2887,7 @@ if __name__ == "__main__":
     qs.showWeakOrder()
     qs.showQuantileOrdering(strategy=None)
     qs.exportGraphViz('test')
+    qs.showActionsSortingResult()
     
 ##    qs0.showOrderedRelationTable()
 ##    qs0.exportGraphViz()
