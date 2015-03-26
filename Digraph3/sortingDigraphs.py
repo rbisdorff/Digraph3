@@ -1382,8 +1382,8 @@ class QuantilesSortingDigraph(SortingDigraph):
         for g in self.criteria:
             gQuantiles = self._computeLimitingQuantiles(g,\
                             PrefThresholds=PrefThresholds,Debug=Debug)
-            #if Debug:
-                #print(g,gQuantiles)
+            if Debug:
+                print(g,gQuantiles)
             criteriaCategoryLimits[g] = gQuantiles
 ##            for c in categories:
 ##                criteriaCategoryLimits[g][c]={
@@ -1414,19 +1414,9 @@ class QuantilesSortingDigraph(SortingDigraph):
                 self.actions[cKey] = {'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
                 self.profiles[cKey] = {'category': c, 'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
             for g in list(self.criteria.keys()):
-                try:
-                    if self.criteria[g]['preferenceDirection'] == 'max':
-                        self.evaluation[g][cKey] = Decimal(str(self.criteriaCategoryLimits[g][int(c)]))
-                    elif self.criteria[g]['preferenceDirection'] == 'min':                  
-                        if not defaultProfiles:
-                            highValueg = Decimal(str(self.criteria[g]['scale'][1]))
-                        else:
-                            highValueg = Decimal(str(highValue))
-                        #print('highValue = ', highValue)
-                        self.evaluation[g][cKey] = -(highValueg - Decimal(str(self.criteriaCategoryLimits[g][int(c)])))
-                    else:
-                        print('===>>>>> Error')
-                except:
+                if LowerClosed:
+                    self.evaluation[g][cKey] = Decimal(str(self.criteriaCategoryLimits[g][int(c)-1]))
+                else:
                     self.evaluation[g][cKey] = Decimal(str(self.criteriaCategoryLimits[g][int(c)]))
         if Debug:
             print('Profiles',self.profiles)
@@ -1924,7 +1914,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         categories = self.orderedCategoryKeys()
 
         try:
-            LowerClosed = self.LowerClosed
+            LowerClosed = self.criteriaCategoryLimits['LowerClosed']
         except:
             LowerClosed = True
 
@@ -2135,7 +2125,11 @@ class _QuantilesSortingDigraph(SortingDigraph):
     """
     Specialisation of the sortingDigraph Class
     for sorting of alternatives into quantiles delimited ordered classes.
-    
+
+    .. warning::
+
+        Obsolete !
+        
     .. note::
 
         We generally require an PerformanceTableau instance or a valid filename.
@@ -2879,15 +2873,25 @@ if __name__ == "__main__":
 ##                                   weightDistribution='equiobjectives')
 ##    t.saveXMCDA2('test',servingD3=False)
     t = XMCDA2PerformanceTableau('test')  
-    qs = QuantilesSortingDigraph(t,15,LowerClosed=True,
+    qs = QuantilesSortingDigraph(t,15,LowerClosed=False,
                                      Threading=False,
                                      Debug=False)
     qs.showSorting()
     qs.showSortingCharacteristics('a01')
-    qs.showWeakOrder()
-    qs.showQuantileOrdering(strategy=None)
-    qs.exportGraphViz('test')
-    qs.showActionsSortingResult()
+    #qs.showWeakOrder()
+    #qs.showQuantileOrdering(strategy=None)
+    #qs.exportGraphViz('test')
+    #qs.showActionsSortingResult()
+
+    qs0 = _QuantilesSortingDigraph(t,15,LowerClosed=False,
+                                     Threading=False,
+                                     Debug=False)
+    qs0.showSorting()
+    qs0.showSortingCharacteristics('a01')
+    #qs0.showWeakOrder()
+    #qs.showQuantileOrdering(strategy=None)
+    #qs0.exportGraphViz('test')
+    #qs0.showActionsSortingResult()
     
 ##    qs0.showOrderedRelationTable()
 ##    qs0.exportGraphViz()
