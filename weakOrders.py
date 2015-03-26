@@ -1082,6 +1082,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         from multiprocessing import Pool, cpu_count
         from time import time
 
+        ttot = time()
         # import the performance tableau
         if argPerfTab == None:
             print('Error: you must provide a valid PerformanceTableau object !!')
@@ -1130,17 +1131,18 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                          #maxValuation=maxValuation,
                          outrankingType = outrankingType,
                          CompleteOutranking = True)
-        self.tqs = time() - t0
+        self.runTimes = {'sorting': time() - t0}
         if Comments:
-            print('execution time: %.4f' % (self.tqs))
+            print('execution time: %.4f' % (self.runTimes['sorting']))
         Max = qs.valuationdomain['max']
         Med = qs.valuationdomain['med']
         self.strategy = strategy
         catContent = {}
         tw = time()
         weakOrdering = QsRbcWeakOrdering.computeWeakOrder(qs,strategy=strategy)
+        self.runTimes['preordering'] = time() - tw
         if Comments:
-            print('weak ordering execution time: %.4f' % (time() - tw) )
+            print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )
         nwo = len(weakOrdering)
         for i in range(nwo):
             catContent[i+1] = weakOrdering[i]
@@ -1151,6 +1153,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         qsRelation = deepcopy(qs.relation)
         catRelation = {}
         catRbc = {}
+        ## Rbc Threading=False
         if Threading and cpu_count() > 2:
             from pickle import dumps, loads, load
             if nbrCores == None:
@@ -1182,6 +1185,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                 t1 = time()
                 unorderedfilledCategKeys.sort(reverse=True)
                 filledCategKeys = [ x[1] for x in unorderedfilledCategKeys]
+                self.runTimes['threadPreparing'] = t1 - t0
                 if Comments:
                     print(unorderedfilledCategKeys)
                     print(filledCategKeys)
@@ -1214,11 +1218,13 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                                                        chksize):
                             if Comments:
                                 print(res)                    
-                self.trbc = time() - t0
+                self.runTimes['ranking-by-choosing'] = time() - t0
                 if Comments:
-                    print('Finished all threads in %.4f sec.' % (self.trbc) )
+                    print('Finished all threads in %.4f sec.' % (self.runTimes['ranking-by-choosing']) )
+                t0 = time()
                 for c in range(1,nwo+1):                    
                     nc = len(catContent[c])
+                    #print('%d/%d' % (c,nwo), end = ',')
                     if nc > 2:
                         fiName = 'splitCatRelation-'+str(c)+'.py'
                         fi = open(fiName,'rb')
@@ -1263,19 +1269,21 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                             print(c,'catRbc',catRbc[c])
                             print(c,'catRelation',catRelation[c])
                     
-                chdir(cwd)                
+                chdir(cwd)
+                self.runTimes['postThreading'] = time() - t0 
         else:
             ## without threading
             if Comments:
                 print('Without threading ...')
+            t0 = time()
             for c in range(1,nwo+1):
                 if Debug:
                     print(c, len(catContent[c]))
                 if len(catContent[c]) > 0:
                     currActions = list(catContent[c])
-                    for x in currActions:
-                        for y in currActions:
-                            qs.relation[x][y] = qs.relationOrig[x][y]
+##                    for x in currActions:
+##                        for y in currActions:
+##                            qs.relation[x][y] = qs.relationOrig[x][y]
                     pt = PartialPerformanceTableau(perfTab,currActions)
                     gt = BipolarOutrankingDigraph(pt)
                     if rankingRule == "RubisChoice":
@@ -1295,6 +1303,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                         actionsSubset=currActions,\
                         rankingByChoosing=catCRbc['result'],\
                         Debug=False)
+            self.runTimes['withoutThreading'] = time() - t0
 
         self.name = 'qsrbc-'+qs.name
         self.actions = deepcopy(qs.actions)
@@ -1315,6 +1324,8 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         self._constructRelation(strategy=strategy,Debug=Debug)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+
+        self.runTimes['totalTime'] = time() - ttot
 
     def _constructRelation(self,strategy=None,Debug=False):
         """
@@ -1544,16 +1555,13 @@ if __name__ == "__main__":
     from weakOrders import *
     from time import time
 
-    Threading=True
+    Threading=False
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                   numberOfActions=400)
+                                   numberOfActions=100)
     t.saveXMCDA2('test')
     #t = XMCDA2PerformanceTableau('uniSorting')
     t = XMCDA2PerformanceTableau('test')
-##    g = BipolarOutrankingDigraph(t,Normalized=False)
-##    rbc = RankingByChoosingDigraph(g,Threading=False)
-##    rbc.exportGraphViz()
     limitingQuantiles = len(t.actions) // 1
     #limitingQuantiles = 7
     #qs = QuantilesSortingDigraph(t,g.order)
@@ -1562,11 +1570,14 @@ if __name__ == "__main__":
                               strategy="optimistic",
                               rankingRule="KohlerRule",
                               LowerClosed=False,
-                              Threading=Threading,Debug=False)
+                              Threading=Threading,
+                              Debug=False)
     print('QR Exec. time:', time()-t0, 'sec.')
     #qsko.showSorting()
-    #qsko.exportSortingGraphViz('koq17',Debug=True)
+    #qsko.exportSortingGraphViz(Debug=False)
     t0 = time()
+    print(qsko.runTimes)
+    
 ##    qsrbc = QuantilesRankingDigraph(t,limitingQuantiles,
 ##                              strategy="pessimistic",
 ##                              #rankingRule="rank-by-choosing",
