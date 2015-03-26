@@ -1556,7 +1556,11 @@ class QuantilesSortingDigraph(SortingDigraph):
 
 ##        return orderingList
 
-    def computeQuantileOrdering(self,Descending=True,strategy=None,Comments=False,Debug=False):
+    def computeQuantileOrdering(self,strategy=None,
+                                Descending=True,
+                                HTML=False,
+                                Comments=False,
+                                Debug=False):
         """
         *Parameters*:
             * Descending: listing in *decreasing* (default) or *increasing* quantile order.
@@ -1566,6 +1570,12 @@ class QuantilesSortingDigraph(SortingDigraph):
         """
         if strategy == None:
             strategy = 'optimistic'
+        if HTML:
+            html = '<h1>Quantiles preordering</h1>'
+            html += '<table style="background-color:White;" border="1">'
+            html += '<tr bgcolor="#9acd32"><th>quantile limits</th>'
+            html += '<th>%s sorting</th>' % strategy
+            html += '</tr>'
         actionsCategories = {}
         for x in self.actions:
             a,lowCateg,highCateg,credibility =\
@@ -1605,34 +1615,68 @@ class QuantilesSortingDigraph(SortingDigraph):
             if Comments:
                 if strategy == "optimistic":
                     if self.criteriaCategoryLimits['LowerClosed']:
-                        print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
+                        if HTML:
+                            html += '<tr><tdbgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][1])]['lowLimit'],\
+                                                self.categories[str(item[0][0])]['highLimit'])
+                            html += '<td>%s</td></tr>' % str(item[1])
+                        else:
+                            print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
                                                 self.categories[str(item[0][0])]['highLimit'],\
                                                 str(item[1])) )
                     else:
-                        print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
+                        if HTML:
+                            html += '<tr><td bgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][1])]['lowLimit'],\
+                                                self.categories[str(item[0][0])]['highLimit'])
+                            html += '<td>%s</td></tr>' % str(item[1])                            
+                        else:
+                            print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
                                                 self.categories[str(item[0][0])]['highLimit'],\
                                                 str(item[1])) )
                 elif strategy == "pessimistic":
                     if self.criteriaCategoryLimits['LowerClosed']:
-                        print('%s-%s : %s' % (self.categories[str(item[0][0])]['lowLimit'],\
+                        if HTML:
+                            html += '<tr><td bgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][0])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'])
+                            html += '<td>%s</td></tr>' % str(item[1])
+                        else:
+                            print('%s-%s : %s' % (self.categories[str(item[0][0])]['lowLimit'],\
                                                 self.categories[str(item[0][1])]['highLimit'],\
                                                 str(item[1])) )
                     else:
-                        print('%s-%s : %s' % (self.categories[str(item[0][0])]['lowLimit'],\
+                        if HTML:
+                            html += '<tr><td bgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][0])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'])
+                            html += '<td>%s</td></tr>' % str(item[1])
+
+                        else:
+                            print('%s-%s : %s' % (self.categories[str(item[0][0])]['lowLimit'],\
                                                 self.categories[str(item[0][1])]['highLimit'],\
                                                 str(item[1])) )                   
                 elif strategy == "average":
                     if self.criteriaCategoryLimits['LowerClosed']:
-                        print('%s-%s : %s' % (self.categories[str(item[0][2])]['lowLimit'],\
+                        if HTML:
+                            html += '<tr><td bgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][2])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'])
+                            html += '<td>%s</td></tr>' % str(item[1])
+                        else:
+                            print('%s-%s : %s' % (self.categories[str(item[0][2])]['lowLimit'],\
                                                 self.categories[str(item[0][1])]['highLimit'],\
                                                 str(item[1])) )
                     else:
-                        print('%s-%s : %s' % (self.categories[str(item[0][2])]['lowLimit'],\
+                        if HTML:
+                            html += '<tr><td bgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][2])]['lowLimit'],\
+                                                self.categories[str(item[0][2])]['highLimit'])
+                            html += '<td>%s</td></tr>' % str(item[1])
+                        else:
+                            print('%s-%s : %s' % (self.categories[str(item[0][2])]['lowLimit'],\
                                                 self.categories[str(item[0][1])]['highLimit'],\
                                                 str(item[1])) )
-
             weakOrdering.append(item[1])
-        return weakOrdering
+        if HTML:
+            html += '</table>'
+            return html
+        else:
+            return weakOrdering
 
     def showQuantileOrdering(self,strategy=None):
         """
@@ -1974,7 +2018,36 @@ class QuantilesSortingDigraph(SortingDigraph):
         """
         self.computeSortingCharacteristics(action=action,Comments=True)
 
-        
+
+    def showHTMLQuantileOrdering(self,Descending=True,strategy='optimistic'):
+        """
+        shows the html version of the performance tableau in a browser window.
+        """
+        import webbrowser
+        fileName = '/tmp/preOrdering.html'
+        fo = open(fileName,'w')
+        fo.write(self.computeQuantileOrdering(Descending=Descending,
+                                              strategy=strategy,
+                                              HTML=True,
+                                              Comments=True))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+
+
+    def showHTMLSorting(self,Reverse=True):
+        """
+        shows the html version of the performance tableau in a browser window.
+        """
+        import webbrowser
+        fileName = '/tmp/sorting.html'
+        fo = open(fileName,'w')
+        fo.write(self.showSorting(Reverse=Reverse,isReturningHTML=True))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+
+
     def showSorting(self,Reverse=True,isReturningHTML=False,Debug=False):
         """
         Shows sorting results in decreasing or increasing (Reverse=False)
@@ -2009,7 +2082,7 @@ class QuantilesSortingDigraph(SortingDigraph):
             print('\t',categoryContent[c])
             if isReturningHTML:
                 #html += '<tr><td bgcolor="#FFF79B">[%s - %s[</td>' % (limprevc,limc)
-                html += '<tr><td bgcolor="#FFF79B">%</td>' % (self.categories[c]['name'])
+                html += '<tr><td bgcolor="#FFF79B">%s</td>' % (self.categories[c]['name'])
                 catString = str(categoryContent[c])
                 html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
 ##            if LowerClosed:
@@ -2865,29 +2938,29 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
 
-    #t = XMCDA2PerformanceTableau('uniSorting')
+    t = XMCDA2PerformanceTableau('uniSorting')
     #t = XMCDA2PerformanceTableau('spiegel2004')
     #t = XMCDA2PerformanceTableau('ex1')
 ##    t = RandomCBPerformanceTableau(numberOfActions=15,
 ##                                   numberOfCriteria=5,
 ##                                   weightDistribution='equiobjectives')
 ##    t.saveXMCDA2('test',servingD3=False)
-    t = XMCDA2PerformanceTableau('test')  
+    #t = XMCDA2PerformanceTableau('test')  
     qs = QuantilesSortingDigraph(t,15,LowerClosed=False,
                                      Threading=False,
                                      Debug=False)
-    qs.showSorting()
-    qs.showSortingCharacteristics('a01')
+    qs.showHTMLQuantileOrdering(strategy='average')
+    #qs.showSortingCharacteristics('a01')
     #qs.showWeakOrder()
     #qs.showQuantileOrdering(strategy=None)
     #qs.exportGraphViz('test')
     #qs.showActionsSortingResult()
 
-    qs0 = _QuantilesSortingDigraph(t,15,LowerClosed=False,
-                                     Threading=False,
-                                     Debug=False)
-    qs0.showSorting()
-    qs0.showSortingCharacteristics('a01')
+##    qs0 = _QuantilesSortingDigraph(t,15,LowerClosed=False,
+##                                     Threading=False,
+##                                     Debug=False)
+##    qs0.showSorting()
+##    qs0.showSortingCharacteristics('a01')
     #qs0.showWeakOrder()
     #qs.showQuantileOrdering(strategy=None)
     #qs0.exportGraphViz('test')
