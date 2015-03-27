@@ -1239,7 +1239,7 @@ class RandomTree(Graph):
 
     def tree2Pruefer(self,vertices=None,Debug=False):
         """
-        Renders the Pruefer codes of a given tree
+        Renders the Pruefer code of a given tree.
         """
         if vertices == None:
             vertices = self.vertices
