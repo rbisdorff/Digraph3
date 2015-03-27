@@ -1059,7 +1059,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">digraph2Graph</tt><big>(</big><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><big>)</big><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2959,10 +2959,16 @@ generated from a random depth first search graph g traversal.</p>
 
 <dl class="class">
 <dt id="graphs.RandomTree">
-<em class="property">class </em><tt class="descclassname">graphs.</tt><tt class="descname">RandomTree</tt><big>(</big><em>order=None</em>, <em>prueferCode=None</em>, <em>seed=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#graphs.RandomTree" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">graphs.</tt><tt class="descname">RandomTree</tt><big>(</big><em>order=None</em>, <em>vertices=None</em>, <em>prueferCode=None</em>, <em>seed=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#graphs.RandomTree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#graphs.Graph" title="graphs.Graph"><tt class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></tt></a></p>
 <p>Random instance of a tree generated from a random Prüfer code.</p>
 <a class="reference internal image-reference" href="_images/randomTree.png"><img alt="radomTree instance" class="align-center" src="_images/randomTree.png" style="width: 300px;" /></a>
+<dl class="method">
+<dt id="graphs.RandomTree.tree2Pruefer">
+<tt class="descname">tree2Pruefer</tt><big>(</big><em>vertices=None</em>, <em>Debug=False</em><big>)</big><a class="headerlink" href="#graphs.RandomTree.tree2Pruefer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the Pruefer codes of a given tree</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -3172,7 +3178,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">computeDefaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><big>)</big><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3910,7 +3916,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">defaultDiscriminationThresholds</tt><big>(</big><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><big>)</big><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">

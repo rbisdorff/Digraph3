@@ -1160,7 +1160,8 @@ class RandomTree(Graph):
        :align: center
    
     """
-    def __init__(self,order=None, prueferCode = None, seed = None, Debug=False):
+    def __init__(self,order=None, vertices= None,
+                 prueferCode = None, seed = None, Debug=False):
         import random
         random.seed(seed)
         self.name='randomTree'
@@ -1172,11 +1173,11 @@ class RandomTree(Graph):
         self.order = order
         if Debug:
             print(self.name, self.order)
-
-        vertices = dict()
-        for i in range(order):
-            vertexKey = i
-            vertices[vertexKey] = {'shortName':str(vertexKey), 'name': 'random vertex'}
+        if vertices == None:
+            vertices = dict()
+            for i in range(order):
+                vertexKey = 'v%d' % (i+1)
+                vertices[vertexKey] = {'shortName':str(vertexKey), 'name': 'random vertex'}
         self.vertices = vertices
         if Debug:
             print('vertices = ', self.vertices)
@@ -1190,10 +1191,15 @@ class RandomTree(Graph):
         if Debug:
             print('valuationDomain = ', self.valuationDomain)
 
+
+        verticesList = [x for x in self.vertices.keys()]
+        verticesList.sort()
+        if Debug:
+            print(verticesList)
         edges = dict()
         for i in range(order):
             for j in range(i+1,order):
-                edgeKey = frozenset([i,j])
+                edgeKey = frozenset([verticesList[i],verticesList[j]])
                 edges[edgeKey] = Min
         self.edges = edges
         if Debug:
@@ -1201,28 +1207,28 @@ class RandomTree(Graph):
         if prueferCode == None:
             prueferCode = []
             for k in range(order-2):
-                prueferCode.append( random.choice( list(range(order)) ) )
+                prueferCode.append( verticesList[random.choice( list(range(order)) )] )
         self.prueferCode = prueferCode
         if Debug:
             print('prueferCode = ', self.prueferCode)
 
-        degree = []
-        for x in list(self.vertices.keys()):
-            degree.append(1)
+        degree = {}
+        for x in verticesList:
+            degree[x] = 1
         for i in range(order-2):
             degree[prueferCode[i]] += 1
         if Debug:
             print('degrees = ', degree)
 
         for i in range(order-2):
-            for j in list(self.vertices.keys()):
-                if degree[j] == 1:
-                    edgeKey = frozenset([prueferCode[i],j])
+            for j in range(order):
+                if degree[verticesList[j]] == 1:
+                    edgeKey = frozenset([prueferCode[i],verticesList[j]])
                     self.edges[edgeKey] = Max
-                    degree[j] -= 1
+                    degree[verticesList[j]] -= 1
                     degree[prueferCode[i]] -= 1
                     break
-        lastEdgeKey = frozenset([i for i in range(order) if degree[i] > 0])
+        lastEdgeKey = frozenset([verticesList[i] for i in range(order) if degree[verticesList[i]] > 0])
         self.edges[lastEdgeKey] = Max
         if Debug:
             print('updated edges = ', self.edges)
@@ -1230,6 +1236,36 @@ class RandomTree(Graph):
         self.gamma = self.gammaSets(Debug)
         if Debug:
             print('gamma = ', self.gamma)
+
+    def tree2Pruefer(self,vertices=None,Debug=False):
+        """
+        Renders the Pruefer codes of a given tree
+        """
+        if vertices == None:
+            vertices = self.vertices
+        verticesList = [x for x in vertices]
+        verticesList.sort()
+        if Debug:
+            print('verticesList = ',verticesList)
+        np = len(verticesList)-2
+        Med = self.valuationDomain['med']
+        edges = [e for e in self.edges if self.edges[e] > Med]
+        degree = dict()
+        for v in verticesList:
+            degree[v] = len(self.gamma[v])
+        if Debug:
+            print('degrees = ', degree)
+        prueferCode = []
+        for i in range(np):
+            leaves = [v for v in verticesList if degree[v] == 1]
+            leaves.sort()
+            leavesEdges = [e for e in edges if leaves[0] in e]
+            for v in leavesEdges[0]:
+                if degree[v] > 1:
+                    prueferCode.append(v)
+                degree[v] -= 1
+            edges.remove(leavesEdges[0])
+        return prueferCode
 
 class RandomSpanningForest(RandomTree):
     """
@@ -1275,18 +1311,30 @@ class RandomSpanningForest(RandomTree):
         self.dfs = g.randomDepthFirstSearch(seed=seed,Debug=Debug)
         if Debug:
             print('dfs = ', self.dfs)
-
+        components = []
         for tree in self.dfs:
+            component = set()
             n = len(tree)
             for i in range(n-1):
+                component.add(tree[i])
+                component.add(tree[i+1])
                 edgeKey = frozenset([tree[i],tree[i+1]])
                 self.edges[edgeKey] = Max
+            print('tree = ',tree)
+            print('component = ',component)
+            components.append(component)
         if Debug:
             print('updated edges = ', self.edges)
+   
         self.size = self.computeSize()
         self.gamma = self.gammaSets(Debug)
         if Debug:
             print('gamma = ', self.gamma)
+
+        prueferCodes = []
+        for component in components:
+            prueferCodes.append(self.tree2Pruefer(vertices=component))
+        self.prueferCodes = prueferCodes
 
 class BestDeterminedSpanningForest(RandomTree):
     """
@@ -2210,15 +2258,19 @@ if __name__ == '__main__':
 
 
     g = RandomValuationGraph(order=5,seed=202)
-##    g = RandomRegularGraph(seed=100)
-##    g = GridGraph(n=10,m=10)
-    g.save()
-    g.exportGraphViz('graph200')
-    #print(g.randomDepthFirstSearch(seed=None,Debug=False))
-    #g.exportGraphViz(withSpanningTree=True,layout="circo")
-    mt = BestDeterminedSpanningForest(g,Debug=True)
-    mt.exportGraphViz(layout="circo")
-    
+####    g = RandomRegularGraph(seed=100)
+####    g = GridGraph(n=10,m=10)
+##    g.save()
+##    g.exportGraphViz('graph200')
+##    #print(g.randomDepthFirstSearch(seed=None,Debug=False))
+##    #g.exportGraphViz(withSpanningTree=True,layout="circo")
+##    mt = BestDeterminedSpanningForest(g,Debug=True)
+##    mt.exportGraphViz(layout="circo")
+    t = RandomTree(Debug=True,seed=100)
+    print(t.prueferCode)
+    print(t.tree2Pruefer())
+    rsp = RandomSpanningForest(g,seed=100)
+    print(rsp.prueferCodes)
     
 ##    from digraphs import KneserDigraph
 ##    pdg = KneserDigraph()
