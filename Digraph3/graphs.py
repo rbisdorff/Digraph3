@@ -1320,8 +1320,9 @@ class RandomSpanningForest(RandomTree):
                 component.add(tree[i+1])
                 edgeKey = frozenset([tree[i],tree[i+1]])
                 self.edges[edgeKey] = Max
-            print('tree = ',tree)
-            print('component = ',component)
+            if Debug:
+                print('tree = ',tree)
+                print('component = ',component)
             components.append(component)
         if Debug:
             print('updated edges = ', self.edges)
@@ -1332,8 +1333,15 @@ class RandomSpanningForest(RandomTree):
             print('gamma = ', self.gamma)
 
         prueferCodes = []
-        for component in components:
-            prueferCodes.append(self.tree2Pruefer(vertices=component))
+        for tree in self.dfs:
+            component = set(tree)
+            if len(component) > 2:
+                prueferCodes.append({'component': component,
+                                 'code': self.tree2Pruefer(vertices=component)
+                                 })
+            else:
+                prueferCodes.append({'component': component, 'code': []})
+                
         self.prueferCodes = prueferCodes
 
 class BestDeterminedSpanningForest(RandomTree):
