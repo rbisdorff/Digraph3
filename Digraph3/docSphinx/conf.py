@@ -98,7 +98,7 @@ autodoc_default_flags = 'members', 'undoc-members', 'inherited-members','show-in
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'classic'
+html_theme = 'default'
 #html_theme = 'sphinxdoc'
 
 # Theme options are theme-specific and customize the look and feel of a theme
