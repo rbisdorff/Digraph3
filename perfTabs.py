@@ -354,7 +354,7 @@ The performance evaluations of each decision alternative on each criterion are g
 
     """
     def __init__(self,filePerfTab=None,isEmpty=False):
-        
+        from decimal import Decimal
         if filePerfTab != None:
             fileName = filePerfTab + '.py'
             argDict = {}
