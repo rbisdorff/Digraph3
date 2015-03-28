@@ -207,6 +207,30 @@ class Graph(object):
                 vecNeighbourhoodDepth[nbx] += 1
         return vecNeighbourhoodDepth
 
+    def computeDiameter(self, Oriented = False):
+        """
+        Renders the diameter (maximal neighbourhood depth) of the digraph instance.
+
+        .. Note::
+
+            The diameter of a disconnected graph is considered to be *infinite*
+            (results in a value -1) !
+            
+        """
+        order = self.order
+        nbDepths = self.computeNeighbourhoodDepthDistribution()
+        nbDepths.reverse()
+        if nbDepths[0] != 0:
+            diameter = -1
+        else:
+            diameter = 0
+            for i in range(len(nbDepths)):
+                if nbDepths[i+1] != 0:
+                    diameter = order - (i+1)
+                    break
+        return diameter
+
+
     def isConnected(self):
         """
         Cheks if self is a connected graph instance.
@@ -2364,8 +2388,14 @@ if __name__ == '__main__':
     g = RandomGraph(order=10,edgeProbability=1/3,seed=200)
     g.showShort()
     print(g.computeNeighbourhoodDepthDistribution(Debug=False))
+    for v in g.vertices:
+        print(v,g.computeNeighbourhoodDepth(v))
     print(g.isConnected(), g.computeComponents())
-    g.exportGraphViz(withSpanningTree=True)
+    g.exportGraphViz()
+    print('diameter: ',g.computeDiameter())
+    
+
+    
     #g.computeDegreeDistribution()
 ####    g = RandomRegularGraph(seed=100)
     #g = GridGraph(n=10,m=10)
