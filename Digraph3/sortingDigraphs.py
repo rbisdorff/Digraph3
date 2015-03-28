@@ -1261,26 +1261,29 @@ class QuantilesSortingDigraph(SortingDigraph):
 
         We generally require an PerformanceTableau instance or a valid filename.
         If none is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.
-        By default lower closed limits of categories are supposed to be used in the sorting.
+        By default upper closed limits of categories are supposed to be used in the sorting.
 
     Example Python3 session:
 
     >>> from sortingDigraphs import *
     >>> t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,
     ...                                weightDistribution='equiobjectives')
-    >>> qs = QuantilesSortingBigDigraph(t,limitingQuantiles=10)
+    >>> qs = QuantilesSortingBigDigraph(t,limitingQuantiles=7)
     >>> qs.showSorting()
     *--- Sorting results in descending order ---*
-    [0.90 - <[: 	 []
-    [0.80 - 0.90[: 	 []
-    [0.70 - 0.80[: 	 []
-    [0.60 - 0.70[: 	 ['a02', 'a07']
-    [0.50 - 0.60[: 	 ['a02', 'a04', 'a05', 'a06']
-    [0.40 - 0.50[: 	 []
-    [0.30 - 0.40[: 	 []
-    [0.20 - 0.30[: 	 ['a03']
-    [0.10 - 0.20[: 	 ['a01']
-    [0.00 - 0.10[: 	 []
+    ]0.86 - 1.00]: 	 []
+    ]0.71 - 0.86]: 	 ['a03']
+    ]0.57 - 0.71]: 	 ['a04']
+    ]0.43 - 0.57]: 	 ['a04', 'a05', 'a06']
+    ]0.29 - 0.43]: 	 ['a01', 'a02', 'a06', 'a07']
+    ]0.14 - 0.29]: 	 []
+    ]< - 0.14]: 	 []
+    >>> qs.showQuantileOrdering()
+    ]0.71-0.86] : ['a03']
+    ]0.43-0.71] : ['a04']
+    ]0.43-0.57] : ['a05']
+    ]0.29-0.57] : ['a06']
+    ]0.29-0.43] : ['a07', 'a02', 'a01']
     >>> qs.exportGraphViz('quantilesSorting')
     
     .. image:: quantilesSorting.png
