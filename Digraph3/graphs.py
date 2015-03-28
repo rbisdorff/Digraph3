@@ -146,6 +146,35 @@ class Graph(object):
             print('distribution : ', degreeDistribution)
         return degreeDistribution
 
+    def computeNeighbourhoodDepth(self,vertex,Debug=False):
+        """
+        Renders the distribtion of neighbourhood depths.
+        """
+        import copy
+        order = self.order
+        vertices = set([x for x in self.vertices])
+        if Debug:
+            print('-->',vertex)
+        nbx = 0
+        neighbx = set([vertex])
+        restVertices = vertices - neighbx
+        while restVertices != set() and nbx < order:
+            if Debug:
+                print('nbx,restVertices', nbx,restVertices)
+            nbx += 1
+            iterneighbx = copy.copy(neighbx)
+            for y in iterneighbx:
+                neighbx = neighbx | self.gamma[y]
+                if Debug:
+                    print('y,self.gamma[y],neighbx', y,self.gamma[y],neighbx)
+            restVertices = vertices - neighbx
+        if Debug:
+            print('nbx,restVertices',nbx,restVertices)
+        if restVertices != set():
+            return order
+        else:
+            return nbx
+
     def computeNeighbourhoodDepthDistribution(self,Debug=False):
         """
         Renders the distribtion of neighbourhood depths.
