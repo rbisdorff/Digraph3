@@ -1,0 +1,517 @@
+\indexentry{digraphs (module)|hyperpage}{36}
+\indexentry{AsymmetricPartialDigraph (class in digraphs)|hyperpage}{36}
+\indexentry{CSVDigraph (class in digraphs)|hyperpage}{36}
+\indexentry{showAll() (digraphs.CSVDigraph method)|hyperpage}{36}
+\indexentry{CirculantDigraph (class in digraphs)|hyperpage}{36}
+\indexentry{showShort() (digraphs.CirculantDigraph method)|hyperpage}{37}
+\indexentry{CoDualDigraph (class in digraphs)|hyperpage}{37}
+\indexentry{CocaDigraph (class in digraphs)|hyperpage}{37}
+\indexentry{addCircuits() (digraphs.CocaDigraph method)|hyperpage}{37}
+\indexentry{closureChordlessOddCircuits() (digraphs.CocaDigraph method)|hyperpage}{37}
+\indexentry{showCircuits() (digraphs.CocaDigraph method)|hyperpage}{37}
+\indexentry{showComponents() (digraphs.CocaDigraph method)|hyperpage}{37}
+\indexentry{CoceDigraph (class in digraphs)|hyperpage}{37}
+\indexentry{iterateCocElimination() (digraphs.CoceDigraph method)|hyperpage}{37}
+\indexentry{CompleteDigraph (class in digraphs)|hyperpage}{37}
+\indexentry{ConverseDigraph (class in digraphs)|hyperpage}{37}
+\indexentry{CoverDigraph (class in digraphs)|hyperpage}{38}
+\indexentry{Digraph (class in digraphs)|hyperpage}{38}
+\indexentry{MISgen() (digraphs.Digraph method)|hyperpage}{38}
+\indexentry{absirred() (digraphs.Digraph method)|hyperpage}{38}
+\indexentry{absirredundant() (digraphs.Digraph method)|hyperpage}{38}
+\indexentry{absirredval() (digraphs.Digraph method)|hyperpage}{38}
+\indexentry{absirredx() (digraphs.Digraph method)|hyperpage}{38}
+\indexentry{abskernelrestrict() (digraphs.Digraph method)|hyperpage}{38}
+\indexentry{absorb() (digraphs.Digraph method)|hyperpage}{38}
+\indexentry{absorbentChoices() (digraphs.Digraph method)|hyperpage}{38}
+\indexentry{agglomerationDistribution() (digraphs.Digraph method)|hyperpage}{39}
+\indexentry{aneighbors() (digraphs.Digraph method)|hyperpage}{39}
+\indexentry{automorphismGenerators() (digraphs.Digraph method)|hyperpage}{39}
+\indexentry{averageCoveringIndex() (digraphs.Digraph method)|hyperpage}{39}
+\indexentry{bestRanks() (digraphs.Digraph method)|hyperpage}{39}
+\indexentry{bipolarKCorrelation() (digraphs.Digraph method)|hyperpage}{39}
+\indexentry{bipolarKDistance() (digraphs.Digraph method)|hyperpage}{39}
+\indexentry{chordlessPaths() (digraphs.Digraph method)|hyperpage}{39}
+\indexentry{circuitAverageCredibility() (digraphs.Digraph method)|hyperpage}{39}
+\indexentry{circuitMinCredibility() (digraphs.Digraph method)|hyperpage}{39}
+\indexentry{closeSymmetric() (digraphs.Digraph method)|hyperpage}{39}
+\indexentry{closeTransitive() (digraphs.Digraph method)|hyperpage}{39}
+\indexentry{coSize() (digraphs.Digraph method)|hyperpage}{39}
+\indexentry{collectcomps() (digraphs.Digraph method)|hyperpage}{39}
+\indexentry{components() (digraphs.Digraph method)|hyperpage}{39}
+\indexentry{computeAllDensities() (digraphs.Digraph method)|hyperpage}{39}
+\indexentry{computeArrowRaynaudRanking() (digraphs.Digraph method)|hyperpage}{39}
+\indexentry{computeAverageValuation() (digraphs.Digraph method)|hyperpage}{40}
+\indexentry{computeBadChoices() (digraphs.Digraph method)|hyperpage}{40}
+\indexentry{computeBadPirlotChoices() (digraphs.Digraph method)|hyperpage}{40}
+\indexentry{computeBipolarCorrelation() (digraphs.Digraph method)|hyperpage}{40}
+\indexentry{computeChordlessCircuits() (digraphs.Digraph method)|hyperpage}{40}
+\indexentry{computeConcentrationIndex() (digraphs.Digraph method)|hyperpage}{40}
+\indexentry{computeConcentrationIndexTrapez() (digraphs.Digraph method)|hyperpage}{40}
+\indexentry{computeCppChordlessCircuits() (digraphs.Digraph method)|hyperpage}{40}
+\indexentry{computeCppInOutPipingChordlessCircuits() (digraphs.Digraph method)|hyperpage}{40}
+\indexentry{computeCutLevelDensities() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computeDensities() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computeDeterminateness() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computeGoodChoices() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computeGoodPirlotChoices() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computeKemenyIndex() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computeKemenyOrder() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computeKohlerRanking() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computeMeanInDegree() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computeMeanOutDegree() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computeMeanSymDegree() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computeMedianOutDegree() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computeMedianSymDegree() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computeMoreOrLessUnrelatedPairs() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computeODistance() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computeOrbit() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computeOrdinalCorrelation() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computePairwiseClusterComparison() (digraphs.Digraph method)|hyperpage}{41}
+\indexentry{computePreKernels() (digraphs.Digraph method)|hyperpage}{42}
+\indexentry{computePreorderRelation() (digraphs.Digraph method)|hyperpage}{42}
+\indexentry{computePrincipalOrder() (digraphs.Digraph method)|hyperpage}{42}
+\indexentry{computePrudentBestChoiceRecommendation() (digraphs.Digraph method)|hyperpage}{42}
+\indexentry{computePrudentBetaLevel() (digraphs.Digraph method)|hyperpage}{42}
+\indexentry{computeRankedPairsOrder() (digraphs.Digraph method)|hyperpage}{42}
+\indexentry{computeRankingByBestChoosing() (digraphs.Digraph method)|hyperpage}{42}
+\indexentry{computeRankingByBestChoosingRelation() (digraphs.Digraph method)|hyperpage}{42}
+\indexentry{computeRankingByChoosing() (digraphs.Digraph method)|hyperpage}{42}
+\indexentry{computeRankingByChoosingRelation() (digraphs.Digraph method)|hyperpage}{42}
+\indexentry{computeRankingByLastChoosing() (digraphs.Digraph method)|hyperpage}{42}
+\indexentry{computeRankingByLastChoosingRelation() (digraphs.Digraph method)|hyperpage}{43}
+\indexentry{computeRelationalStructure() (digraphs.Digraph method)|hyperpage}{43}
+\indexentry{computeRubisChoice() (digraphs.Digraph method)|hyperpage}{43}
+\indexentry{computeRubyChoice() (digraphs.Digraph method)|hyperpage}{43}
+\indexentry{computeSingletonRanking() (digraphs.Digraph method)|hyperpage}{43}
+\indexentry{computeSizeTransitiveClosure() (digraphs.Digraph method)|hyperpage}{43}
+\indexentry{computeSlaterOrder() (digraphs.Digraph method)|hyperpage}{43}
+\indexentry{computeTransitivityDegree() (digraphs.Digraph method)|hyperpage}{43}
+\indexentry{computeUnrelatedPairs() (digraphs.Digraph method)|hyperpage}{43}
+\indexentry{computeValuationLevels() (digraphs.Digraph method)|hyperpage}{43}
+\indexentry{computeValuationPercentages() (digraphs.Digraph method)|hyperpage}{43}
+\indexentry{computeValuationPercentiles() (digraphs.Digraph method)|hyperpage}{43}
+\indexentry{computeValuationStatistics() (digraphs.Digraph method)|hyperpage}{43}
+\indexentry{computeupdown1() (digraphs.Digraph method)|hyperpage}{43}
+\indexentry{computeupdown2() (digraphs.Digraph method)|hyperpage}{43}
+\indexentry{computeupdown2irred() (digraphs.Digraph method)|hyperpage}{43}
+\indexentry{condorcetWinners() (digraphs.Digraph method)|hyperpage}{43}
+\indexentry{contra() (digraphs.Digraph method)|hyperpage}{44}
+\indexentry{convertRelationToDecimal() (digraphs.Digraph method)|hyperpage}{44}
+\indexentry{convertValuationToDecimal() (digraphs.Digraph method)|hyperpage}{44}
+\indexentry{coveringIndex() (digraphs.Digraph method)|hyperpage}{44}
+\indexentry{crispKDistance() (digraphs.Digraph method)|hyperpage}{44}
+\indexentry{detectChordlessCircuits() (digraphs.Digraph method)|hyperpage}{44}
+\indexentry{detectChordlessPath() (digraphs.Digraph method)|hyperpage}{44}
+\indexentry{detectCppChordlessCircuits() (digraphs.Digraph method)|hyperpage}{44}
+\indexentry{determinateness() (digraphs.Digraph method)|hyperpage}{44}
+\indexentry{diameter() (digraphs.Digraph method)|hyperpage}{44}
+\indexentry{digraph2Graph() (digraphs.Digraph method)|hyperpage}{44}
+\indexentry{dneighbors() (digraphs.Digraph method)|hyperpage}{44}
+\indexentry{domin() (digraphs.Digraph method)|hyperpage}{44}
+\indexentry{dominantChoices() (digraphs.Digraph method)|hyperpage}{44}
+\indexentry{domirred() (digraphs.Digraph method)|hyperpage}{44}
+\indexentry{domirredval() (digraphs.Digraph method)|hyperpage}{44}
+\indexentry{domirredx() (digraphs.Digraph method)|hyperpage}{44}
+\indexentry{domkernelrestrict() (digraphs.Digraph method)|hyperpage}{45}
+\indexentry{exportD3() (digraphs.Digraph method)|hyperpage}{45}
+\indexentry{exportGraphViz() (digraphs.Digraph method)|hyperpage}{47}
+\indexentry{exportPrincipalImage() (digraphs.Digraph method)|hyperpage}{47}
+\indexentry{flatChoice() (digraphs.Digraph method)|hyperpage}{47}
+\indexentry{forcedBestSingleChoice() (digraphs.Digraph method)|hyperpage}{47}
+\indexentry{gammaSets() (digraphs.Digraph method)|hyperpage}{47}
+\indexentry{generateAbsPreKernels() (digraphs.Digraph method)|hyperpage}{47}
+\indexentry{generateDomPreKernels() (digraphs.Digraph method)|hyperpage}{47}
+\indexentry{graphDetermination() (digraphs.Digraph method)|hyperpage}{47}
+\indexentry{htmlRelationTable() (digraphs.Digraph method)|hyperpage}{47}
+\indexentry{inDegrees() (digraphs.Digraph method)|hyperpage}{47}
+\indexentry{inDegreesDistribution() (digraphs.Digraph method)|hyperpage}{47}
+\indexentry{independentChoices() (digraphs.Digraph method)|hyperpage}{47}
+\indexentry{inner\_prod() (digraphs.Digraph method)|hyperpage}{47}
+\indexentry{intstab() (digraphs.Digraph method)|hyperpage}{47}
+\indexentry{irreflex() (digraphs.Digraph method)|hyperpage}{47}
+\indexentry{isComplete() (digraphs.Digraph method)|hyperpage}{47}
+\indexentry{isCyclic() (digraphs.Digraph method)|hyperpage}{48}
+\indexentry{isWeaklyComplete() (digraphs.Digraph method)|hyperpage}{48}
+\indexentry{iterateRankingByChoosing() (digraphs.Digraph method)|hyperpage}{48}
+\indexentry{kChoices() (digraphs.Digraph method)|hyperpage}{48}
+\indexentry{matmult2() (digraphs.Digraph method)|hyperpage}{48}
+\indexentry{meanDegree() (digraphs.Digraph method)|hyperpage}{48}
+\indexentry{meanLength() (digraphs.Digraph method)|hyperpage}{48}
+\indexentry{minimalChoices() (digraphs.Digraph method)|hyperpage}{48}
+\indexentry{minimalValuationLevelForCircuitsElimination() (digraphs.Digraph method)|hyperpage}{48}
+\indexentry{neighbourhoodCollection() (digraphs.Digraph method)|hyperpage}{48}
+\indexentry{neighbourhoodDepthDistribution() (digraphs.Digraph method)|hyperpage}{48}
+\indexentry{notGammaSets() (digraphs.Digraph method)|hyperpage}{48}
+\indexentry{notaneighbors() (digraphs.Digraph method)|hyperpage}{48}
+\indexentry{notdneighbors() (digraphs.Digraph method)|hyperpage}{48}
+\indexentry{omax() (digraphs.Digraph method)|hyperpage}{49}
+\indexentry{omin() (digraphs.Digraph method)|hyperpage}{49}
+\indexentry{optimalRankingByChoosing() (digraphs.Digraph method)|hyperpage}{49}
+\indexentry{outDegrees() (digraphs.Digraph method)|hyperpage}{49}
+\indexentry{outDegreesDistribution() (digraphs.Digraph method)|hyperpage}{49}
+\indexentry{plusirredundant() (digraphs.Digraph method)|hyperpage}{49}
+\indexentry{powerset() (digraphs.Digraph method)|hyperpage}{49}
+\indexentry{readPerrinMisset() (digraphs.Digraph method)|hyperpage}{49}
+\indexentry{readPerrinMissetOpt() (digraphs.Digraph method)|hyperpage}{49}
+\indexentry{readabsvector() (digraphs.Digraph method)|hyperpage}{49}
+\indexentry{readdomvector() (digraphs.Digraph method)|hyperpage}{49}
+\indexentry{recodeValuation() (digraphs.Digraph method)|hyperpage}{49}
+\indexentry{save() (digraphs.Digraph method)|hyperpage}{49}
+\indexentry{saveCSV() (digraphs.Digraph method)|hyperpage}{49}
+\indexentry{saveXMCDA() (digraphs.Digraph method)|hyperpage}{49}
+\indexentry{saveXMCDA2() (digraphs.Digraph method)|hyperpage}{49}
+\indexentry{saveXML() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{savedre() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{sharp() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{sharpvec() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{showActions() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{showAll() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{showAutomorphismGenerators() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{showBadChoices() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{showChoiceVector() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{showChordlessCircuits() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{showCircuits() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{showComponents() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{showGoodChoices() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{showHTMLRelationTable() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{showInteractiveGraph() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{showMIS() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{showMIS\_AH() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{showMIS\_HB2() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{showMIS\_RB() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{showMIS\_UD() (digraphs.Digraph method)|hyperpage}{50}
+\indexentry{showMaxAbsIrred() (digraphs.Digraph method)|hyperpage}{51}
+\indexentry{showMaxDomIrred() (digraphs.Digraph method)|hyperpage}{51}
+\indexentry{showMinAbs() (digraphs.Digraph method)|hyperpage}{51}
+\indexentry{showMinDom() (digraphs.Digraph method)|hyperpage}{51}
+\indexentry{showNeighborhoods() (digraphs.Digraph method)|hyperpage}{51}
+\indexentry{showOrbits() (digraphs.Digraph method)|hyperpage}{51}
+\indexentry{showOrbitsFromFile() (digraphs.Digraph method)|hyperpage}{51}
+\indexentry{showPreKernels() (digraphs.Digraph method)|hyperpage}{51}
+\indexentry{showRankingByBestChoosing() (digraphs.Digraph method)|hyperpage}{51}
+\indexentry{showRankingByChoosing() (digraphs.Digraph method)|hyperpage}{51}
+\indexentry{showRankingByLastChoosing() (digraphs.Digraph method)|hyperpage}{51}
+\indexentry{showRelation() (digraphs.Digraph method)|hyperpage}{51}
+\indexentry{showRelationTable() (digraphs.Digraph method)|hyperpage}{51}
+\indexentry{showRubisBestChoiceRecommendation() (digraphs.Digraph method)|hyperpage}{51}
+\indexentry{showRubyChoice() (digraphs.Digraph method)|hyperpage}{51}
+\indexentry{showShort() (digraphs.Digraph method)|hyperpage}{52}
+\indexentry{showSingletonRanking() (digraphs.Digraph method)|hyperpage}{52}
+\indexentry{showStatistics() (digraphs.Digraph method)|hyperpage}{52}
+\indexentry{showdre() (digraphs.Digraph method)|hyperpage}{52}
+\indexentry{singletons() (digraphs.Digraph method)|hyperpage}{52}
+\indexentry{size() (digraphs.Digraph method)|hyperpage}{52}
+\indexentry{sizeSubGraph() (digraphs.Digraph method)|hyperpage}{52}
+\indexentry{strongComponents() (digraphs.Digraph method)|hyperpage}{52}
+\indexentry{symDegreesDistribution() (digraphs.Digraph method)|hyperpage}{52}
+\indexentry{topologicalSort() (digraphs.Digraph method)|hyperpage}{52}
+\indexentry{weakAneighbors() (digraphs.Digraph method)|hyperpage}{52}
+\indexentry{weakCondorcetWinners() (digraphs.Digraph method)|hyperpage}{52}
+\indexentry{weakDneighbors() (digraphs.Digraph method)|hyperpage}{52}
+\indexentry{weakGammaSets() (digraphs.Digraph method)|hyperpage}{52}
+\indexentry{worstRanks() (digraphs.Digraph method)|hyperpage}{52}
+\indexentry{zoomValuation() (digraphs.Digraph method)|hyperpage}{52}
+\indexentry{DualDigraph (class in digraphs)|hyperpage}{52}
+\indexentry{EmptyDigraph (class in digraphs)|hyperpage}{52}
+\indexentry{EquivalenceDigraph (class in digraphs)|hyperpage}{53}
+\indexentry{computeCorrelation() (digraphs.EquivalenceDigraph method)|hyperpage}{53}
+\indexentry{FusionDigraph (class in digraphs)|hyperpage}{53}
+\indexentry{GridDigraph (class in digraphs)|hyperpage}{53}
+\indexentry{showShort() (digraphs.GridDigraph method)|hyperpage}{53}
+\indexentry{IndeterminateDigraph (class in digraphs)|hyperpage}{53}
+\indexentry{KneserDigraph (class in digraphs)|hyperpage}{53}
+\indexentry{showShort() (digraphs.KneserDigraph method)|hyperpage}{53}
+\indexentry{MedianExtendedDigraph (class in digraphs)|hyperpage}{53}
+\indexentry{constructRelation() (digraphs.MedianExtendedDigraph method)|hyperpage}{53}
+\indexentry{PolarisedDigraph (class in digraphs)|hyperpage}{54}
+\indexentry{PreferenceDigraph (class in digraphs)|hyperpage}{54}
+\indexentry{Preorder (class in digraphs)|hyperpage}{54}
+\indexentry{RandomDigraph (class in digraphs)|hyperpage}{54}
+\indexentry{RandomFixedDegreeSequenceDigraph (class in digraphs)|hyperpage}{54}
+\indexentry{RandomFixedSizeDigraph (class in digraphs)|hyperpage}{54}
+\indexentry{RandomRegularDigraph (class in digraphs)|hyperpage}{54}
+\indexentry{RandomTournament (class in digraphs)|hyperpage}{54}
+\indexentry{RandomTree (class in digraphs)|hyperpage}{55}
+\indexentry{prufer\_to\_tree() (digraphs.RandomTree method)|hyperpage}{55}
+\indexentry{RandomValuationDigraph (class in digraphs)|hyperpage}{55}
+\indexentry{RandomWeakTournament (class in digraphs)|hyperpage}{56}
+\indexentry{StrongComponentsCollapsedDigraph (class in digraphs)|hyperpage}{56}
+\indexentry{showComponents() (digraphs.StrongComponentsCollapsedDigraph method)|hyperpage}{56}
+\indexentry{SymmetricPartialDigraph (class in digraphs)|hyperpage}{56}
+\indexentry{WeakCocaDigraph (class in digraphs)|hyperpage}{56}
+\indexentry{addWeakCircuits() (digraphs.WeakCocaDigraph method)|hyperpage}{56}
+\indexentry{closureWeakChordlessOddCircuits() (digraphs.WeakCocaDigraph method)|hyperpage}{56}
+\indexentry{showCircuits() (digraphs.WeakCocaDigraph method)|hyperpage}{57}
+\indexentry{XMCDA2Digraph (class in digraphs)|hyperpage}{57}
+\indexentry{showAll() (digraphs.XMCDA2Digraph method)|hyperpage}{57}
+\indexentry{XMCDADigraph (class in digraphs)|hyperpage}{57}
+\indexentry{showAll() (digraphs.XMCDADigraph method)|hyperpage}{57}
+\indexentry{XMLDigraph (class in digraphs)|hyperpage}{57}
+\indexentry{XMLDigraph24 (class in digraphs)|hyperpage}{57}
+\indexentry{showAll() (digraphs.XMLDigraph24 method)|hyperpage}{57}
+\indexentry{XORDigraph (class in digraphs)|hyperpage}{57}
+\indexentry{all\_perms() (in module digraphs)|hyperpage}{57}
+\indexentry{kChoicesDigraph (class in digraphs)|hyperpage}{57}
+\indexentry{computeRelation() (digraphs.kChoicesDigraph method)|hyperpage}{57}
+\indexentry{powerset() (in module digraphs)|hyperpage}{57}
+\indexentry{graphs (module)|hyperpage}{58}
+\indexentry{Graph (class in graphs)|hyperpage}{58}
+\indexentry{chordlessPaths() (graphs.Graph method)|hyperpage}{58}
+\indexentry{computeChordlessCycles() (graphs.Graph method)|hyperpage}{58}
+\indexentry{depthFirstSearch() (graphs.Graph method)|hyperpage}{58}
+\indexentry{exportGraphViz() (graphs.Graph method)|hyperpage}{58}
+\indexentry{gammaSets() (graphs.Graph method)|hyperpage}{59}
+\indexentry{graph2Digraph() (graphs.Graph method)|hyperpage}{59}
+\indexentry{save() (graphs.Graph method)|hyperpage}{59}
+\indexentry{saveEdges() (graphs.Graph method)|hyperpage}{59}
+\indexentry{showShort() (graphs.Graph method)|hyperpage}{59}
+\indexentry{GridGraph (class in graphs)|hyperpage}{59}
+\indexentry{showShort() (graphs.GridGraph method)|hyperpage}{60}
+\indexentry{IsingModel (class in graphs)|hyperpage}{60}
+\indexentry{computeSpinEnergy() (graphs.IsingModel method)|hyperpage}{61}
+\indexentry{exportGraphViz() (graphs.IsingModel method)|hyperpage}{61}
+\indexentry{generateSpinConfiguration() (graphs.IsingModel method)|hyperpage}{61}
+\indexentry{MISModel (class in graphs)|hyperpage}{61}
+\indexentry{checkMIS() (graphs.MISModel method)|hyperpage}{63}
+\indexentry{exportGraphViz() (graphs.MISModel method)|hyperpage}{63}
+\indexentry{generateMIS() (graphs.MISModel method)|hyperpage}{63}
+\indexentry{MetropolisChain (class in graphs)|hyperpage}{63}
+\indexentry{MCMCtransition() (graphs.MetropolisChain method)|hyperpage}{64}
+\indexentry{checkSampling() (graphs.MetropolisChain method)|hyperpage}{64}
+\indexentry{computeTransitionMatrix() (graphs.MetropolisChain method)|hyperpage}{64}
+\indexentry{saveCSVTransition() (graphs.MetropolisChain method)|hyperpage}{64}
+\indexentry{showTransitionMatrix() (graphs.MetropolisChain method)|hyperpage}{64}
+\indexentry{Q\_Coloring (class in graphs)|hyperpage}{64}
+\indexentry{checkFeasibility() (graphs.Q\_Coloring method)|hyperpage}{65}
+\indexentry{exportGraphViz() (graphs.Q\_Coloring method)|hyperpage}{66}
+\indexentry{generateFeasibleConfiguration() (graphs.Q\_Coloring method)|hyperpage}{67}
+\indexentry{showConfiguration() (graphs.Q\_Coloring method)|hyperpage}{67}
+\indexentry{RandomGraph (class in graphs)|hyperpage}{67}
+\indexentry{RandomTree (class in graphs)|hyperpage}{67}
+\indexentry{TriangularGraph (class in graphs)|hyperpage}{68}
+\indexentry{showShort() (graphs.TriangularGraph method)|hyperpage}{69}
+\indexentry{perfTabs (module)|hyperpage}{70}
+\indexentry{FullRandomPerformanceTableau (class in perfTabs)|hyperpage}{70}
+\indexentry{showAll() (perfTabs.FullRandomPerformanceTableau method)|hyperpage}{70}
+\indexentry{NormalizedPerformanceTableau (class in perfTabs)|hyperpage}{70}
+\indexentry{OldXMCDAPerformanceTableau (class in perfTabs)|hyperpage}{70}
+\indexentry{PartialPerformanceTableau (class in perfTabs)|hyperpage}{70}
+\indexentry{PerformanceTableau (class in perfTabs)|hyperpage}{70}
+\indexentry{computeActionCriterionPerformanceDifferences() (perfTabs.PerformanceTableau method)|hyperpage}{70}
+\indexentry{computeActionCriterionQuantile() (perfTabs.PerformanceTableau method)|hyperpage}{70}
+\indexentry{computeActionQuantile() (perfTabs.PerformanceTableau method)|hyperpage}{70}
+\indexentry{computeCriterionPerformanceDifferences() (perfTabs.PerformanceTableau method)|hyperpage}{70}
+\indexentry{computeDefaultDiscriminationThresholds() (perfTabs.PerformanceTableau method)|hyperpage}{70}
+\indexentry{computeMinMaxEvaluations() (perfTabs.PerformanceTableau method)|hyperpage}{70}
+\indexentry{computeNormalizedDiffEvaluations() (perfTabs.PerformanceTableau method)|hyperpage}{71}
+\indexentry{computePerformanceDifferences() (perfTabs.PerformanceTableau method)|hyperpage}{71}
+\indexentry{computeQuantilePreorder() (perfTabs.PerformanceTableau method)|hyperpage}{71}
+\indexentry{computeQuantileSort() (perfTabs.PerformanceTableau method)|hyperpage}{71}
+\indexentry{computeQuantiles() (perfTabs.PerformanceTableau method)|hyperpage}{71}
+\indexentry{computeThresholdPercentile() (perfTabs.PerformanceTableau method)|hyperpage}{71}
+\indexentry{computeVariableThresholdPercentile() (perfTabs.PerformanceTableau method)|hyperpage}{71}
+\indexentry{computeWeightPreorder() (perfTabs.PerformanceTableau method)|hyperpage}{71}
+\indexentry{computeWeightedAveragePerformances() (perfTabs.PerformanceTableau method)|hyperpage}{71}
+\indexentry{csvAllQuantiles() (perfTabs.PerformanceTableau method)|hyperpage}{71}
+\indexentry{hasOddWeightAlgebra() (perfTabs.PerformanceTableau method)|hyperpage}{71}
+\indexentry{htmlPerformanceTable() (perfTabs.PerformanceTableau method)|hyperpage}{71}
+\indexentry{normalizeEvaluations() (perfTabs.PerformanceTableau method)|hyperpage}{71}
+\indexentry{save() (perfTabs.PerformanceTableau method)|hyperpage}{71}
+\indexentry{saveXMCDA() (perfTabs.PerformanceTableau method)|hyperpage}{71}
+\indexentry{saveXMCDA2() (perfTabs.PerformanceTableau method)|hyperpage}{71}
+\indexentry{saveXMCDA2String() (perfTabs.PerformanceTableau method)|hyperpage}{72}
+\indexentry{saveXML() (perfTabs.PerformanceTableau method)|hyperpage}{72}
+\indexentry{saveXMLRubis() (perfTabs.PerformanceTableau method)|hyperpage}{72}
+\indexentry{showAll() (perfTabs.PerformanceTableau method)|hyperpage}{72}
+\indexentry{showAllQuantiles() (perfTabs.PerformanceTableau method)|hyperpage}{72}
+\indexentry{showCriteria() (perfTabs.PerformanceTableau method)|hyperpage}{72}
+\indexentry{showEvaluationStatistics() (perfTabs.PerformanceTableau method)|hyperpage}{72}
+\indexentry{showHTMLPerformanceTableau() (perfTabs.PerformanceTableau method)|hyperpage}{72}
+\indexentry{showPerformanceTableau() (perfTabs.PerformanceTableau method)|hyperpage}{72}
+\indexentry{showQuantileSort() (perfTabs.PerformanceTableau method)|hyperpage}{72}
+\indexentry{showStatistics() (perfTabs.PerformanceTableau method)|hyperpage}{72}
+\indexentry{RandomCBPerformanceTableau (class in perfTabs)|hyperpage}{72}
+\indexentry{RandomCoalitionsPerformanceTableau (class in perfTabs)|hyperpage}{73}
+\indexentry{RandomPerformanceTableau (class in perfTabs)|hyperpage}{73}
+\indexentry{RandomRankPerformanceTableau (class in perfTabs)|hyperpage}{74}
+\indexentry{RandomS3PerformanceTableau (class in perfTabs)|hyperpage}{74}
+\indexentry{XMCDA2PerformanceTableau (class in perfTabs)|hyperpage}{75}
+\indexentry{XMCDAPerformanceTableau (class in perfTabs)|hyperpage}{75}
+\indexentry{XMLPerformanceTableau (class in perfTabs)|hyperpage}{75}
+\indexentry{XMLRubisPerformanceTableau (class in perfTabs)|hyperpage}{75}
+\indexentry{stripsplit() (perfTabs.XMLRubisPerformanceTableau method)|hyperpage}{75}
+\indexentry{outrankingDigraphs (module)|hyperpage}{75}
+\indexentry{BipolarIntegerOutrankingDigraph (class in outrankingDigraphs)|hyperpage}{75}
+\indexentry{savePy2Gprolog() (outrankingDigraphs.BipolarIntegerOutrankingDigraph method)|hyperpage}{76}
+\indexentry{showRelation() (outrankingDigraphs.BipolarIntegerOutrankingDigraph method)|hyperpage}{76}
+\indexentry{BipolarOutrankingDigraph (class in outrankingDigraphs)|hyperpage}{76}
+\indexentry{computeCriterionRelation() (outrankingDigraphs.BipolarOutrankingDigraph method)|hyperpage}{76}
+\indexentry{computeSingleCriteriaNetflows() (outrankingDigraphs.BipolarOutrankingDigraph method)|hyperpage}{76}
+\indexentry{criterionCharacteristicFunction() (outrankingDigraphs.BipolarOutrankingDigraph method)|hyperpage}{76}
+\indexentry{saveSingleCriterionNetflows() (outrankingDigraphs.BipolarOutrankingDigraph method)|hyperpage}{76}
+\indexentry{BipolarPreferenceDigraph (class in outrankingDigraphs)|hyperpage}{76}
+\indexentry{computeSingleCriteriaNetflows() (outrankingDigraphs.BipolarPreferenceDigraph method)|hyperpage}{76}
+\indexentry{criterionCharacteristicFunction() (outrankingDigraphs.BipolarPreferenceDigraph method)|hyperpage}{76}
+\indexentry{saveSingleCriterionNetflows() (outrankingDigraphs.BipolarPreferenceDigraph method)|hyperpage}{76}
+\indexentry{DissimilarityOutrankingDigraph (class in outrankingDigraphs)|hyperpage}{76}
+\indexentry{showAll() (outrankingDigraphs.DissimilarityOutrankingDigraph method)|hyperpage}{76}
+\indexentry{Electre3OutrankingDigraph (class in outrankingDigraphs)|hyperpage}{76}
+\indexentry{computeCriterionRelation() (outrankingDigraphs.Electre3OutrankingDigraph method)|hyperpage}{77}
+\indexentry{computeVetos() (outrankingDigraphs.Electre3OutrankingDigraph method)|hyperpage}{77}
+\indexentry{showVetos() (outrankingDigraphs.Electre3OutrankingDigraph method)|hyperpage}{77}
+\indexentry{EquiSignificanceMajorityOutrankingDigraph (class in outrankingDigraphs)|hyperpage}{77}
+\indexentry{MedianBipolarOutrankingDigraph (class in outrankingDigraphs)|hyperpage}{77}
+\indexentry{MultiCriteriaDissimilarityDigraph (class in outrankingDigraphs)|hyperpage}{77}
+\indexentry{NewRobustOutrankingDigraph (class in outrankingDigraphs)|hyperpage}{77}
+\indexentry{OrdinalOutrankingDigraph (class in outrankingDigraphs)|hyperpage}{77}
+\indexentry{OutrankingDigraph (class in outrankingDigraphs)|hyperpage}{78}
+\indexentry{computeAMPLData() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{78}
+\indexentry{computeActionsCorrelations() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{78}
+\indexentry{computeCriteriaCorrelationDigraph() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{78}
+\indexentry{computeCriteriaCorrelations() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{78}
+\indexentry{computeCriterionRelation() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{78}
+\indexentry{computePairwiseComparisons() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{78}
+\indexentry{computePairwiseCompleteComparison() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{78}
+\indexentry{computeQuantileSortRelation() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{78}
+\indexentry{computeSingletonRanking() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{78}
+\indexentry{computeVetoesStatistics() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{78}
+\indexentry{computeVetosShort() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{78}
+\indexentry{computeWeightsConcentrationIndex() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{78}
+\indexentry{convertEvaluationFloatToDecimal() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{78}
+\indexentry{convertWeightFloatToDecimal() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{78}
+\indexentry{defaultDiscriminationThresholds() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{78}
+\indexentry{export3DplotOfActionsCorrelation() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{78}
+\indexentry{export3DplotOfCriteriaCorrelation() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{79}
+\indexentry{saveActionsCorrelationTable() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{79}
+\indexentry{saveCriteriaCorrelationTable() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{79}
+\indexentry{saveXMCDA2RubisChoiceRecommendation() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{79}
+\indexentry{saveXMCDAOutrankingDigraph() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{79}
+\indexentry{saveXMLRubisOutrankingDigraph() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{79}
+\indexentry{showAll() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{79}
+\indexentry{showCriteriaCorrelationTable() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{79}
+\indexentry{showCriteriaHierarchy() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{79}
+\indexentry{showCriterionRelationTable() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{79}
+\indexentry{showPairwiseComparison() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{79}
+\indexentry{showPairwiseComparisonsDistributions() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{79}
+\indexentry{showPerformanceTableau() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{79}
+\indexentry{showRelationTable() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{79}
+\indexentry{showShort() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{80}
+\indexentry{showSingletonRanking() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{80}
+\indexentry{showVetos() (outrankingDigraphs.OutrankingDigraph method)|hyperpage}{80}
+\indexentry{PolarisedOutrankingDigraph (class in outrankingDigraphs)|hyperpage}{80}
+\indexentry{RandomBipolarOutrankingDigraph (class in outrankingDigraphs)|hyperpage}{80}
+\indexentry{RandomElectre3OutrankingDigraph (class in outrankingDigraphs)|hyperpage}{80}
+\indexentry{RandomOutrankingDigraph (class in outrankingDigraphs)|hyperpage}{81}
+\indexentry{RobustOutrankingDigraph (class in outrankingDigraphs)|hyperpage}{81}
+\indexentry{saveAMPLDataFile() (outrankingDigraphs.RobustOutrankingDigraph method)|hyperpage}{81}
+\indexentry{saveXMLRubisOutrankingDigraph() (outrankingDigraphs.RobustOutrankingDigraph method)|hyperpage}{81}
+\indexentry{showRelationTable() (outrankingDigraphs.RobustOutrankingDigraph method)|hyperpage}{81}
+\indexentry{RubisRestServer (class in outrankingDigraphs)|hyperpage}{81}
+\indexentry{ping() (outrankingDigraphs.RubisRestServer method)|hyperpage}{82}
+\indexentry{saveXMCDA2Solution() (outrankingDigraphs.RubisRestServer method)|hyperpage}{82}
+\indexentry{showSolution() (outrankingDigraphs.RubisRestServer method)|hyperpage}{82}
+\indexentry{submitProblem() (outrankingDigraphs.RubisRestServer method)|hyperpage}{82}
+\indexentry{submitXMCDA2Problem() (outrankingDigraphs.RubisRestServer method)|hyperpage}{82}
+\indexentry{StochasticBipolarOutrankingDigraph (class in outrankingDigraphs)|hyperpage}{82}
+\indexentry{computeCDF() (outrankingDigraphs.StochasticBipolarOutrankingDigraph method)|hyperpage}{83}
+\indexentry{showRelationStatistics() (outrankingDigraphs.StochasticBipolarOutrankingDigraph method)|hyperpage}{83}
+\indexentry{showRelationTable() (outrankingDigraphs.StochasticBipolarOutrankingDigraph method)|hyperpage}{83}
+\indexentry{UnanimousOutrankingDigraph (class in outrankingDigraphs)|hyperpage}{83}
+\indexentry{votingDigraphs (module)|hyperpage}{83}
+\indexentry{ApprovalVotingProfile (class in votingDigraphs)|hyperpage}{83}
+\indexentry{computeBallot() (votingDigraphs.ApprovalVotingProfile method)|hyperpage}{83}
+\indexentry{save() (votingDigraphs.ApprovalVotingProfile method)|hyperpage}{83}
+\indexentry{showResults() (votingDigraphs.ApprovalVotingProfile method)|hyperpage}{84}
+\indexentry{CondorcetDigraph (class in votingDigraphs)|hyperpage}{84}
+\indexentry{computeArrowRaynaudRanking() (votingDigraphs.CondorcetDigraph method)|hyperpage}{85}
+\indexentry{computeCondorcetWinner() (votingDigraphs.CondorcetDigraph method)|hyperpage}{85}
+\indexentry{computeKohlerRanking() (votingDigraphs.CondorcetDigraph method)|hyperpage}{85}
+\indexentry{constructApprovalBallotRelation() (votingDigraphs.CondorcetDigraph method)|hyperpage}{86}
+\indexentry{constructBallotRelation() (votingDigraphs.CondorcetDigraph method)|hyperpage}{86}
+\indexentry{constructMajorityMarginsRelation() (votingDigraphs.CondorcetDigraph method)|hyperpage}{86}
+\indexentry{LinearVotingProfile (class in votingDigraphs)|hyperpage}{86}
+\indexentry{computeBallot() (votingDigraphs.LinearVotingProfile method)|hyperpage}{86}
+\indexentry{computeBordaScores() (votingDigraphs.LinearVotingProfile method)|hyperpage}{86}
+\indexentry{computeBordaWinners() (votingDigraphs.LinearVotingProfile method)|hyperpage}{86}
+\indexentry{computeInstantRunoffWinner() (votingDigraphs.LinearVotingProfile method)|hyperpage}{87}
+\indexentry{computeRankAnalysis() (votingDigraphs.LinearVotingProfile method)|hyperpage}{87}
+\indexentry{computeSimpleMajorityWinner() (votingDigraphs.LinearVotingProfile method)|hyperpage}{87}
+\indexentry{computeUninominalVotes() (votingDigraphs.LinearVotingProfile method)|hyperpage}{87}
+\indexentry{save() (votingDigraphs.LinearVotingProfile method)|hyperpage}{87}
+\indexentry{showLinearBallots() (votingDigraphs.LinearVotingProfile method)|hyperpage}{87}
+\indexentry{RandomApprovalVotingProfile (class in votingDigraphs)|hyperpage}{87}
+\indexentry{generateRandomApprovalBallot() (votingDigraphs.RandomApprovalVotingProfile method)|hyperpage}{87}
+\indexentry{RandomLinearVotingProfile (class in votingDigraphs)|hyperpage}{87}
+\indexentry{generateRandomLinearBallot() (votingDigraphs.RandomLinearVotingProfile method)|hyperpage}{87}
+\indexentry{RandomVotingProfile (class in votingDigraphs)|hyperpage}{87}
+\indexentry{generateRandomBallot() (votingDigraphs.RandomVotingProfile method)|hyperpage}{87}
+\indexentry{VotingProfile (class in votingDigraphs)|hyperpage}{87}
+\indexentry{save() (votingDigraphs.VotingProfile method)|hyperpage}{88}
+\indexentry{showAll() (votingDigraphs.VotingProfile method)|hyperpage}{88}
+\indexentry{showVoterBallot() (votingDigraphs.VotingProfile method)|hyperpage}{88}
+\indexentry{sortingDigraphs (module)|hyperpage}{88}
+\indexentry{OptimalQuantilesSortingDigraph (class in sortingDigraphs)|hyperpage}{88}
+\indexentry{QuantilesSortingDigraph (class in sortingDigraphs)|hyperpage}{88}
+\indexentry{computeSortingRelation() (sortingDigraphs.QuantilesSortingDigraph method)|hyperpage}{90}
+\indexentry{showActionCategories() (sortingDigraphs.QuantilesSortingDigraph method)|hyperpage}{90}
+\indexentry{showActionsSortingResult() (sortingDigraphs.QuantilesSortingDigraph method)|hyperpage}{90}
+\indexentry{showSorting() (sortingDigraphs.QuantilesSortingDigraph method)|hyperpage}{90}
+\indexentry{showWeakOrder() (sortingDigraphs.QuantilesSortingDigraph method)|hyperpage}{90}
+\indexentry{SortingDigraph (class in sortingDigraphs)|hyperpage}{90}
+\indexentry{computeCategoryContents() (sortingDigraphs.SortingDigraph method)|hyperpage}{92}
+\indexentry{computeSortingCharacteristics() (sortingDigraphs.SortingDigraph method)|hyperpage}{92}
+\indexentry{computeSortingRelation() (sortingDigraphs.SortingDigraph method)|hyperpage}{92}
+\indexentry{computeWeakOrder() (sortingDigraphs.SortingDigraph method)|hyperpage}{92}
+\indexentry{exportDigraphGraphViz() (sortingDigraphs.SortingDigraph method)|hyperpage}{92}
+\indexentry{exportGraphViz() (sortingDigraphs.SortingDigraph method)|hyperpage}{92}
+\indexentry{getActionsKeys() (sortingDigraphs.SortingDigraph method)|hyperpage}{92}
+\indexentry{htmlCriteriaCategoryLimits() (sortingDigraphs.SortingDigraph method)|hyperpage}{92}
+\indexentry{orderedCategoryKeys() (sortingDigraphs.SortingDigraph method)|hyperpage}{92}
+\indexentry{saveProfilesXMCDA2() (sortingDigraphs.SortingDigraph method)|hyperpage}{92}
+\indexentry{showCriteriaCategoryLimits() (sortingDigraphs.SortingDigraph method)|hyperpage}{92}
+\indexentry{showOrderedRelationTable() (sortingDigraphs.SortingDigraph method)|hyperpage}{92}
+\indexentry{showSorting() (sortingDigraphs.SortingDigraph method)|hyperpage}{92}
+\indexentry{showSortingCharacteristics() (sortingDigraphs.SortingDigraph method)|hyperpage}{92}
+\indexentry{linearOrders (module)|hyperpage}{93}
+\indexentry{ExtendedPrudentDigraph (class in linearOrders)|hyperpage}{93}
+\indexentry{KemenyOrder (class in linearOrders)|hyperpage}{93}
+\indexentry{KohlerOrder (class in linearOrders)|hyperpage}{93}
+\indexentry{LinearOrder (class in linearOrders)|hyperpage}{93}
+\indexentry{computeKemenyIndex() (linearOrders.LinearOrder method)|hyperpage}{93}
+\indexentry{computeOrder() (linearOrders.LinearOrder method)|hyperpage}{93}
+\indexentry{exportDigraphGraphViz() (linearOrders.LinearOrder method)|hyperpage}{93}
+\indexentry{exportGraphViz() (linearOrders.LinearOrder method)|hyperpage}{93}
+\indexentry{htmlOrder() (linearOrders.LinearOrder method)|hyperpage}{93}
+\indexentry{NetFlowsOrder (class in linearOrders)|hyperpage}{93}
+\indexentry{PrincipalOrder (class in linearOrders)|hyperpage}{93}
+\indexentry{RandomLinearOrder (class in linearOrders)|hyperpage}{93}
+\indexentry{RankedPairsOrder (class in linearOrders)|hyperpage}{94}
+\indexentry{weakOrders (module)|hyperpage}{94}
+\indexentry{PrincipalInOutDegreesOrdering (class in weakOrders)|hyperpage}{94}
+\indexentry{computeWeakOrder() (weakOrders.PrincipalInOutDegreesOrdering method)|hyperpage}{95}
+\indexentry{exportGraphViz() (weakOrders.PrincipalInOutDegreesOrdering method)|hyperpage}{95}
+\indexentry{showPrincipalScores() (weakOrders.PrincipalInOutDegreesOrdering method)|hyperpage}{95}
+\indexentry{showWeakOrder() (weakOrders.PrincipalInOutDegreesOrdering method)|hyperpage}{95}
+\indexentry{QsRbcWeakOrdering (class in weakOrders)|hyperpage}{95}
+\indexentry{computeQsRbcRanking() (weakOrders.QsRbcWeakOrdering method)|hyperpage}{96}
+\indexentry{computeWeakOrder() (weakOrders.QsRbcWeakOrdering method)|hyperpage}{96}
+\indexentry{showActionCategories() (weakOrders.QsRbcWeakOrdering method)|hyperpage}{96}
+\indexentry{showActionsSortingResult() (weakOrders.QsRbcWeakOrdering method)|hyperpage}{96}
+\indexentry{showOrderedRelationTable() (weakOrders.QsRbcWeakOrdering method)|hyperpage}{96}
+\indexentry{showQsRbcRanking() (weakOrders.QsRbcWeakOrdering method)|hyperpage}{96}
+\indexentry{RankingByBestChoosingDigraph (class in weakOrders)|hyperpage}{96}
+\indexentry{showWeakOrder() (weakOrders.RankingByBestChoosingDigraph method)|hyperpage}{96}
+\indexentry{RankingByChoosingDigraph (class in weakOrders)|hyperpage}{96}
+\indexentry{computeRankingByBestChoosing() (weakOrders.RankingByChoosingDigraph method)|hyperpage}{98}
+\indexentry{computeRankingByLastChoosing() (weakOrders.RankingByChoosingDigraph method)|hyperpage}{99}
+\indexentry{showRankingByChoosing() (weakOrders.RankingByChoosingDigraph method)|hyperpage}{99}
+\indexentry{RankingByLastChoosingDigraph (class in weakOrders)|hyperpage}{99}
+\indexentry{showWeakOrder() (weakOrders.RankingByLastChoosingDigraph method)|hyperpage}{99}
+\indexentry{RankingByPrudentChoosingDigraph (class in weakOrders)|hyperpage}{99}
+\indexentry{WeakOrder (class in weakOrders)|hyperpage}{99}
+\indexentry{exportDigraphGraphViz() (weakOrders.WeakOrder method)|hyperpage}{99}
+\indexentry{exportGraphViz() (weakOrders.WeakOrder method)|hyperpage}{99}
+\indexentry{showOrderedRelationTable() (weakOrders.WeakOrder method)|hyperpage}{99}
+\indexentry{showRankingByChoosing() (weakOrders.WeakOrder method)|hyperpage}{99}
+\indexentry{showWeakOrder() (weakOrders.WeakOrder method)|hyperpage}{99}
