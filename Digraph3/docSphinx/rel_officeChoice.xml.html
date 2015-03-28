@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+<!--
+
+    Html/JavaScript implementation of digraphs graph export
+ 
+    Copyright (C) 2014  Gary Cornelius - University of Luxembourg
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+-->
+<!--
+
+    Icons from: http://ionicons.com/ MIT Licensed
+ 
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <title>
+graph
+  </title>
+  <script src="http://leopold-loewenheim.uni.lu/WWWgary/js/jquery-1.7.2.js"></script>
+  <script src="http://leopold-loewenheim.uni.lu/WWWgary/js/jquery.contextmenu.r2.js"></script>
+  <script src="d3.v3.js"></script>
+  <script src="digraph3lib.js"></script>
+  <script src="http://leopold-loewenheim.uni.lu/WWWgary/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="http://leopold-loewenheim.uni.lu/WWWgary/js/bootstrap.min.css">
+  
+  <style>
+  path.link {
+    cursor: pointer;
+    stroke-width: 4.0px;
+    }
+  path.link:hover{
+    stroke: orange;
+  }
+
+  .node circle {
+    cursor: move;
+    stroke: #000;
+    stroke-width: 3.5px;
+    
+    } 
+  .node text {
+    fill: #000;
+    font: 12px sans-serif;
+    pointer-events: none;
+    text-anchor: middle;
+    user-select: none;
+  }
+  circle:hover{
+   fill: aquamarine;
+  }
+  svg {
+  background-color: #FFF;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  }
+  text {
+    user-select: none;
+    pointer-events:none;
+  }
+  image {
+    cursor: help;
+  }
+
+
+  </style>
+</head>
+
+<body>
+  <!-- Context Menu for Nodes -->
+  <div class="contextMenu" id="cntxtNode">
+        <ul>
+            <li id="inspect"><img alt="Insepct" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/inspect.png" height="15" width="15" /> Inspect</li>
+            <li id="editNode"><img alt="Edit" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/edit.png" height="15" width="15" /> Edit</li>
+            <li id="connectNode"><img  alt="Connect" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/connect.png" height="15" width="15" /> Connect</li>
+            <li id="deleteNode"><img alt="Delete" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/delete.png" height="15" width="15" /> Delete</li>
+        </ul>
+  </div>
+  <!-- Context Menu for the background -->
+  <div class="contextMenu" id="cntxtMenu">
+        <ul>
+            <li id="new"><img alt="New" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/new.png" height="15" width="15" /> New</li>
+            <li id="add"><img alt="Add" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/add.png" height="15" width="15" /> Add Node</li>
+            <li id="hide"><img alt="Hide" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/hide.png" height="15" width="15" /> Hide Undefined</li>
+            <li id="reset"><img alt="Reset" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/reset.png" height="15" width="15" /> Reset</li>
+            <li id="import"><img alt="Import" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/folder-open.png" height="15" width="15" /> Import</li>
+            <li id="export"><img alt="Export" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/save.png" height="15" width="15" /> Export</li>
+        </ul>
+  </div>
+
+  <!-- Context Menu for edges -->
+  <div class="contextMenu" id="cntxtEdge">
+        <ul>
+          <li id="inspectEdge"><img alt="Inspect" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/inspect.png" height="15" width="15" /> Inspect</li>
+          <li id="invertEdge"><img alt="Invert" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/invert.png" height="15" width="15" /> Invert</li>
+          <li id="editEdge"><img alt="Edit" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/edit.png" height="15" width="15" /> Edit</li>
+          <li id="deleteEdge"><img alt="Delete" src="http://leopold-loewenheim.uni.lu/WWWgary/icons/delete.png" height="15" width="15" /> Delete</li>
+        </ul>
+  </div>
+
+<!-- Import Modal -->
+  <div class="modal fade" id="upModalLabel" role="dialog" aria-labelledby="upModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Choose your d3export JSON file</h4>
+        </div>
+        <div class="modal-body">
+          <!-- INPUT -->
+          <h4></h4> <input name="xml" type="file" id="xml" accept="application/json"/> 
+      
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel</button>
+          <button id="open" type="button" class="btn btn-primary"> Open</button>
+        </div>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+ 
+
+  <!-- Node Modal -->
+  <div class="modal fade" id="modNodeModal" role="dialog" aria-labelledby="modNodeModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Modify Node</h4>
+        </div>
+        <div class="modal-body">
+          <!-- INPUT -->
+  
+  <div class="form-group"> 
+  <input type="text" value="Node ID" class="form-control" maxlength="10" required readonly="readonly" name="nodeId" id="nodeId"> 
+  </div> 
+   <div class="form-group"> 
+  <input type="text" value="Node Name" class="form-control" maxlength="10" required name="nodename" id="nodename"> 
+  </div> 
+  <div class="form-group">
+   <input type="text" placeholder="Comment" class="form-control" maxlength="20" name="nodeComment" id="nodeComment"> 
+   </div>
+  
+  </div>
+  <div class="modal-footer">
+   <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+   <button class="btn btn-primary" type='submit' name='save' onClick="saveNode()"> Save</button>
+  </div>
+  </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+ <!-- Add Node Modal -->
+  <div class="modal fade" id="addNodeModal" role="dialog" aria-labelledby="addNodeModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Add Node</h4>
+        </div>
+        <div class="modal-body">
+          <!-- INPUT -->
+  
+  <div class="form-group"> 
+  ID :<input type="text" value="" placeholder="ID" class="form-control" maxlength="10" autofocus required name="nodeAddId" id="nodeAddId"> 
+  </div> 
+  <div class="form-group"> 
+  Name :<input type="text" placeholder="nameless" class="form-control" maxlength="10" name="nodename" id="nodename_add"> 
+  </div> 
+  <div class="form-group">
+  Comment :<input type="text" placeholder="none" class="form-control" maxlength="20" name="nodeComment" id="nodeComment_add"> 
+   </div>
+
+  </div>
+  
+  <div class="modal-footer">
+   <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel</button>
+   <button class="btn btn-primary" type='submit' name='save' onClick="addNode()"> Save</button>
+  </div>
+  </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+
+  <!-- New Modal -->
+  <div class="modal fade" id="newModal" role="dialog" aria-labelledby="newModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">New Graph</h4>
+        </div>
+        <div class="modal-body">
+          <!-- INPUT -->
+  <h4>Valuation domain</h4>
+  <div class="form-group"> 
+  Min:<input type="text" placeholder="0" class="form-control" required autofocus maxlength="5" required name="min" id="min"> 
+  </div> 
+   <div class="form-group"> 
+  Max:<input type="text" placeholder="0" class="form-control" required maxlength="5" required name="max" id="max"> 
+  </div> 
+ 
+  
+  </div>
+  <div class="modal-footer">
+   <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel</button>
+   <button class="btn btn-primary" type='submit' name='new' onclick="newGraph()"> New</button>
+  </div>
+  </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+  <!-- Connect Node Modal -->
+  <div class="modal fade" id="connNodeModal" role="dialog" aria-labelledby="connNodeModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Connect Node</h4>
+        </div>
+        <div class="modal-body">
+          <!-- INPUT -->
+  
+  <div class="form-group"> 
+  Select a Node to connect to node <select id="selectNode"> </select>
+  </div> 
+     
+  </div>
+  <div class="modal-footer">
+   <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel</button>
+   <button class="btn btn-primary" type='submit' name='save' onClick="saveConnectNode()"> Save</button>
+  </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+
+  <!-- Edge Modal -->
+  <div class="modal fade" id="modEdgeModal" role="dialog" aria-labelledby="modEdgeModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <!-- INPUT -->
+    <div class="form-group" > 
+    <div id="source"> </div>
+    <div id="target"> </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+   <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel</button>
+  </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  
+<!-- Info Modal -->
+  <div class="modal fade" id="infoModalLabel" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Info</h4>
+        </div>
+        <div class="modal-body">
+          <!-- INPUT -->
+          <div class="form-group"> 
+             <p>
+        • Use a left mouse-click to drag and drop nodes. Once dragged a node is frozen and can be released by a simple double click.<br/><br/>
+        • Right-click on the background lets you import Digraph3 JSON encoded and export XMCDA2 encoded files, hide undefined nodes or create a new graph from scratch.<br/><br/>     
+        • Right-click Nodes to get further information, edit their values or add connections between nodes.<br/><br/>
+        • Right-click edges to invert them,edit their value, delete them or to display the pairwise comparision table between two nodes.<br/><br/>
+        • One click on the background sets your graph back out of the inspect mode.<br/><br/>
+        • Double click on the background restarts the force of the graph.<br/><br/>
+        • The graph is automatically frozen after 100 ticks.
+            </p>
+  
+          </div> 
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel</button>
+
+        </div>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+ <!-- Edit Edge-->
+  <div class="modal fade" id="editEdgeModal" role="dialog" aria-labelledby="editEdgeModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Modify Edge</h4>
+        </div>
+        <div class="modal-body">
+          <!-- INPUT -->
+  
+  <div class="form-group"> 
+  <p id="pnodetarget"></p>
+  <input type="text" placeholder="Node Target" class="form-control" maxlength="10" required name="nodeTarget" id="nodeTarget"/> 
+  </div> 
+  <div class="form-group">
+   <p id="pnodesource"></p>
+   <input type="text" placeholder="Node Source" class="form-control" maxlength="20" required name="nodeSource" id="nodeSource"/> 
+   </div>
+  
+  </div>
+  <div class="modal-footer">
+   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+   <button class="btn btn-primary" type='submit' name='save' onClick="saveEdge()"> Save</button>
+  </div>
+        
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+ <div id="graph"> </div>
+
+  <script>
+   $(document).ready(function () {
+     first_load("outranking_rel_officeChoice.xml.json");
+    });
+   
+  </script>
+</body>
+</html>
+
+

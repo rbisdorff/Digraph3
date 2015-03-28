@@ -1,0 +1,6 @@
+digraph G {
+graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nRubis Python Server (graphviz), R. Bisdorff, 2008", size="7,7"];
+n1 [shape = "circle", label = "Scc_1"];
+}
