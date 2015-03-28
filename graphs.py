@@ -145,7 +145,60 @@ class Graph(object):
             print('degrees      : ', list(range(self.order)))
             print('distribution : ', degreeDistribution)
         return degreeDistribution
-        
+
+    def computeNeighbourhoodDepthDistribution(self,Debug=False):
+        """
+        Renders the distribtion of neighbourhood depths.
+        """
+        import copy
+        vertices = set([x for x in self.vertices])
+        order = self.order
+        vecNeighbourhoodDepth = [0 for i in range(order+1)] 
+        for x in vertices:
+            if Debug:
+                print('-->',x)
+            nbx = 0
+            neighbx = set([x])
+            restVertices = vertices - neighbx
+            while restVertices != set() and nbx < order:
+                if Debug:
+                    print('nbx,restVertices', nbx,restVertices)
+                nbx += 1
+                iterneighbx = copy.copy(neighbx)
+                for y in iterneighbx:
+                    neighbx = neighbx | self.gamma[y]
+                    if Debug:
+                        print('y,self.gamma[y],neighbx', y,self.gamma[y],neighbx)
+                restVertices = vertices - neighbx
+            if Debug:
+                print('nbx,restVertices',nbx,restVertices)
+            if restVertices != set():
+                vecNeighbourhoodDepth[order] += 1
+            else:
+                vecNeighbourhoodDepth[nbx] += 1
+        return vecNeighbourhoodDepth
+
+    def isConnected(self):
+        """
+        Cheks if self is a connected graph instance.
+        """
+        dfs = self.depthFirstSearch()
+        if len(dfs) == 1:
+            return True
+        else:
+            return False
+
+    def computeComponents(self):
+        """
+        Computes the connected components of a graph instance.
+        Returns a partition of the vertices as a list
+        """
+        components = []
+        dfs = self.depthFirstSearch()
+        for tree in dfs:
+            components.append(set(tree))
+        return components
+    
     def isTree(self):
         """
         Checks if self is a tree by verifing the required number of
@@ -2279,24 +2332,27 @@ class MISModel(Graph):
 if __name__ == '__main__':
 
 
-    g = RandomRegularGraph(order=10,degree=4,seed=200)
+    g = RandomGraph(order=10,edgeProbability=1/3,seed=200)
     g.showShort()
+    print(g.computeNeighbourhoodDepthDistribution(Debug=False))
+    print(g.isConnected(), g.computeComponents())
+    g.exportGraphViz(withSpanningTree=True)
     #g.computeDegreeDistribution()
 ####    g = RandomRegularGraph(seed=100)
-    g = GridGraph(n=10,m=10)
-    g = TriangulatedGrid(n=10,m=10)
+    #g = GridGraph(n=10,m=10)
+    #g = TriangulatedGrid(n=10,m=10)
 ##    g.save()
 ##    g.exportGraphViz('graph200')
 ##    #print(g.randomDepthFirstSearch(seed=None,Debug=False))
 ##    #g.exportGraphViz(withSpanningTree=True,layout="circo")
 ##    mt = BestDeterminedSpanningForest(g,Debug=True)
 ##    mt.exportGraphViz(layout="circo")
-    t = RandomTree(Debug=True,seed=100)
-    print(t.prueferCode)
-    print(t.tree2Pruefer())
-    rsp = RandomSpanningForest(g,seed=100)
-    print(rsp.prueferCodes)
-    rsp.exportGraphViz(withSpanningTree=True)
+##    t = RandomTree(Debug=True,seed=100)
+##    print(t.prueferCode)
+##    print(t.tree2Pruefer())
+##    rsp = RandomSpanningForest(g,seed=100)
+##    print(rsp.prueferCodes)
+##    rsp.exportGraphViz(withSpanningTree=True)
     
 ##    from digraphs import KneserDigraph
 ##    pdg = KneserDigraph()
