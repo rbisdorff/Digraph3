@@ -355,6 +355,69 @@ class Graph(object):
         self.valuationDomain['hasIntegerValuation'] = False
         self.edges = deepcopy(newEdges)
 
+    def showMIS(self,withListing=True):
+        """
+        Prints all maximal independent choices:
+
+        .. Note::
+        
+            Result is stores in self.misset.
+
+        """
+        import time
+        print('*---  Maximal Independent Sets ---*')
+        t0 = time.time()
+        self.misset = set()
+        vertices = set([x for x in self.vertices])
+        n = len(vertices)
+        v = [0 for i in range(n+1)]
+        for choice in self.MISgen(vertices,frozenset()):
+            v[len(choice)] += 1
+            if withListing:
+                print(list(choice))
+        t1 = time.time()
+        print('number of solutions: ', len(self.misset))
+        print('cardinality distribution')
+        print('card.: ', list(range(n+1)))
+        print('freq.: ', v)
+        print('execution time: %.5f sec.' % (t1-t0))
+        print('Results in self.misset')
+
+    def MISgen(self,S,I):
+        """
+        generator of maximal independent choices (voir Byskov 2004):
+            * S ::= remaining nodes;
+            * I ::= current independent choice
+
+        .. note::
+
+            - Initialize self.misset = set() before using !    
+            - Inititalize S with a set of vertex keys, and I with an empty set.
+            - See self.showMIS() for usage instructions.
+            
+        """
+        if S == set():
+            add = 1
+            self.missetit = self.misset.copy()
+            for mis in self.missetit:
+                if mis < I:
+                    self.misset.remove(mis)
+                else:
+                    if I <= mis:
+                        add = 0
+                        break
+            if add == 1:
+                self.misset = self.misset | frozenset([I])
+                yield I
+        else:
+            v = S.pop()
+            Sv = S - (self.gamma[v])
+            Iv = I | set([v])
+            for choice in self.MISgen(Sv,Iv):
+                yield choice
+            for choice in self.MISgen(S,I):
+                yield choice
+
     def showShort(self):
         """
         Generic show method for Graph instances.
@@ -2393,7 +2456,9 @@ if __name__ == '__main__':
     print(g.isConnected(), g.computeComponents())
     g.exportGraphViz()
     print('diameter: ',g.computeDiameter())
-    
+    g.showMIS()
+    mis = MISModel(g,seed=1)
+    mis.exportGraphViz()
 
     
     #g.computeDegreeDistribution()
