@@ -133,6 +133,19 @@ class Graph(object):
         self.size = size
         return size
 
+    def computeDegreeDistribution(self,Comments=True):
+        """
+        Renders the distribution of vertex degrees.
+        """
+        degreeDistribution = [0 for i in range(self.order)]
+        for v in self.vertices:
+            dv = len(self.gamma[v])
+            degreeDistribution[dv] += 1
+        if Comments:
+            print('degrees      : ', list(range(self.order)))
+            print('distribution : ', degreeDistribution)
+        return degreeDistribution
+        
     def isTree(self):
         """
         Checks if self is a tree by verifing the required number of
@@ -249,6 +262,7 @@ class Graph(object):
         print('Gamma function   : ')
         for v in vKeys:
             print('%s -> %s' % (v, list(self.gamma[v])))
+        self.computeDegreeDistribution()
 
     def _saveEdges(self,fileName='graphEdges',Agrum=False,Decimal=True):
         """
@@ -2265,9 +2279,12 @@ class MISModel(Graph):
 if __name__ == '__main__':
 
 
-    g = RandomValuationGraph(order=5,seed=202)
+    g = RandomRegularGraph(order=10,degree=4,seed=200)
+    g.showShort()
+    #g.computeDegreeDistribution()
 ####    g = RandomRegularGraph(seed=100)
-####    g = GridGraph(n=10,m=10)
+    g = GridGraph(n=10,m=10)
+    g = TriangulatedGrid(n=10,m=10)
 ##    g.save()
 ##    g.exportGraphViz('graph200')
 ##    #print(g.randomDepthFirstSearch(seed=None,Debug=False))
@@ -2279,6 +2296,7 @@ if __name__ == '__main__':
     print(t.tree2Pruefer())
     rsp = RandomSpanningForest(g,seed=100)
     print(rsp.prueferCodes)
+    rsp.exportGraphViz(withSpanningTree=True)
     
 ##    from digraphs import KneserDigraph
 ##    pdg = KneserDigraph()
