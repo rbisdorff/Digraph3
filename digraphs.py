@@ -4636,7 +4636,7 @@ class Digraph(object):
             * S ::= remaining nodes;
             * I ::= current independent choice
 
-        .. note::    
+        .. note::
 
                 Inititalize: self.MISgen(self.actionscopy(),set())
              
