@@ -23,6 +23,12 @@ def testGraph():
     g.computeChordlessCycles(Comments=True,Debug=True)
     g._saveEdges(Agrum=True)
     g.exportGraphViz('testGraphViz')
+    print(g.computeNeighbourhoodDepthDistribution(Debug=False))
+    for v in g.vertices:
+        print(v,g.computeNeighbourhoodDepth(v))
+    print(g.isConnected(), g.computeComponents())
+    g.exportGraphViz()
+    print('diameter: ',g.computeDiameter())
 
 def testRandomGraphs():
     print('==>> Testing Random Graph instantiations')
