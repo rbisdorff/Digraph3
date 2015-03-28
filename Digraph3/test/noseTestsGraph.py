@@ -29,6 +29,8 @@ def testGraph():
     print(g.isConnected(), g.computeComponents())
     g.exportGraphViz()
     print('diameter: ',g.computeDiameter())
+    g.showMIS()
+    g.showCliques()
 
 def testRandomGraphs():
     print('==>> Testing Random Graph instantiations')
@@ -78,7 +80,6 @@ def testMISModel():
     print('==>> Testing MIS Model class instantiation')
     g = Graph(numberOfVertices=30,edgeProbability=0.075)
     g.showShort()
-    g.showMIS()
     im = MISModel(g,nSim=10000,Debug=False)
     im.checkMIS(Comments=True)
     print('MIS       = ',im.mis)

@@ -383,6 +383,38 @@ class Graph(object):
         print('execution time: %.5f sec.' % (t1-t0))
         print('Results in self.misset')
 
+    def showCliques(self,withListing=True):
+        """
+        Prints all maximal cliques:
+
+        .. Note::
+
+            Computes the maximal independt sets in the dual of self;
+            Result is stored in self.cliques.
+
+        """
+        import time,copy
+        print('*---  Maximal Cliques ---*')
+        t0 = time.time()
+        ng = -self
+        ng.misset = set()
+        vertices = set([x for x in ng.vertices])
+        n = len(vertices)
+        v = [0 for i in range(n+1)]
+        for choice in ng.MISgen(vertices,frozenset()):
+            v[len(choice)] += 1
+            if withListing:
+                print(list(choice))
+        self.cliques = copy.deepcopy(ng.misset)
+        t1 = time.time()
+        
+        print('number of solutions: ', len(self.cliques))
+        print('cardinality distribution')
+        print('card.: ', list(range(n+1)))
+        print('freq.: ', v)
+        print('execution time: %.5f sec.' % (t1-t0))
+        print('Results in self.cliques')
+
     def MISgen(self,S,I):
         """
         generator of maximal independent choices (voir Byskov 2004):
@@ -2449,6 +2481,7 @@ if __name__ == '__main__':
 
 
     g = RandomGraph(order=10,edgeProbability=1/3,seed=200)
+    g = CompleteGraph(order=10)
     g.showShort()
     print(g.computeNeighbourhoodDepthDistribution(Debug=False))
     for v in g.vertices:
@@ -2459,6 +2492,7 @@ if __name__ == '__main__':
     g.showMIS()
     mis = MISModel(g,seed=1)
     mis.exportGraphViz()
+    g.showCliques()
 
     
     #g.computeDegreeDistribution()
