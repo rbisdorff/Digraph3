@@ -685,8 +685,8 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
    :width: 400 px
    :align: center
 
-MIS enumeration
-...............
+MIS and Clique enumeration
+..........................
 
 2-colorings define independent sets of vertices that are maximal in cardinality; for short called a **MIS**. Computing such MISs in a given :code:`Graph` instance may be achieved by the `graphs.Graph.showMIS()` method;
 	>>> g = Graph('tutorialGraph')
@@ -709,6 +709,29 @@ MIS enumeration
          frozenset({'v1', 'v2', 'v7'}), 
          frozenset({'v1', 'v6', 'v7', 'v3'}), 
          frozenset({'v1', 'v6', 'v4', 'v3'})]
+
+A MIS in the dual of a graph instance $g$ (its negation $-g$ ), corresponds to a maximal **clique**, ie a maximal complete subgraph in $g$. Maximal cliques may be directly enumerated with the `graphs.Graph.showCliques()` method:
+      >>> g.showCliques()
+      *---  Maximal Cliques ---*
+      ['v2', 'v3']
+      ['v4', 'v7']
+      ['v2', 'v4']
+      ['v4', 'v5']
+      ['v1', 'v5']
+      ['v2', 'v6']
+      ['v5', 'v6']
+      number of solutions:  7
+      cardinality distribution
+      card.:  [0, 1, 2, 3, 4, 5, 6, 7]
+      freq.:  [0, 0, 7, 0, 0, 0, 0, 0]
+      execution time: 0.00049 sec.
+      Results in self.cliques
+      >>> g.cliques
+      [frozenset({'v2', 'v3'}), frozenset({'v4', 'v7'}), 
+       frozenset({'v2', 'v4'}), frozenset({'v4', 'v5'}), 
+       frozenset({'v1', 'v5'}), frozenset({'v6', 'v2'}), 
+       frozenset({'v6', 'v5'})]
+      >>> ...
 
 Grids and the Ising model
 .........................
