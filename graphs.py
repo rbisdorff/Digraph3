@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 #  Python 3 graphs.py module
-#  Copyright (C)  2011-2013 Raymond Bisdorff
+#  Copyright (C)  2011-2015 Raymond Bisdorff
 #############################################
 from decimal import Decimal
 
@@ -541,7 +541,7 @@ class Graph(object):
         fo = open(dotName,'w')
         fo.write('strict graph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2011", size="')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2015", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
@@ -1898,7 +1898,7 @@ class Q_Coloring(Graph):
         fo = open(dotName,'w')
         fo.write('strict graph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2014", size="')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2015", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
@@ -2061,7 +2061,7 @@ class IsingModel(Graph):
         fo = open(dotName,'w')
         fo.write('strict graph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2014", size="')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2015", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
@@ -2478,7 +2478,7 @@ class MISModel(Graph):
         fo = open(dotName,'w')
         fo.write('strict graph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2014", size="')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2015", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
