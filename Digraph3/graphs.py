@@ -449,7 +449,8 @@ class Graph(object):
 
     def depthFirstSearch(self,Debug=False):
         """
-        Depth first search through a graph
+        Depth first search through a graph in lexicographical order
+        of the vertex keys.
         """
         def visitVertex(self, x, Debug = False):
             """
@@ -462,6 +463,7 @@ class Graph(object):
             if Debug:
                 print(' dfs %s, date = %d' % (str(self.dfs),  self.vertices[x]['startDate']))
             nextVertices = [y for y in self.gamma[x]]
+            nextVertices.sort()
             if Debug:
                 print('   next ', nextVertices)
             for y in nextVertices:
@@ -484,7 +486,9 @@ class Graph(object):
             for x in self.vertices:
                 self.vertices[x]['color'] = 0
             self.date = 0
-            for x in self.vertices:
+            verticesList = [x for x in self.vertices]
+            verticesList.sort()
+            for x in verticesList:
                 self.dfsx = []
                 if self.vertices[x]['color'] == 0:
                     if Debug:
