@@ -91,525 +91,6 @@ class Graph(object):
         new.__class__ = self.__class__
         return new
 
-
-    def setEdgeValue(self,edge,value,Comments=False):
-        """
-        Wrapper for updating the charactreistic valuation of a Graph instance.
-        The egde parameter consists in a pair of vertices;
-        edge = ('v1','v2') for instance.
-        The new value must be in the limits of the valuation domain.
-        """
-        from decimal import Decimal
-        # check vertices' existance
-        verticesIds = [x for x in self.vertices]
-        if (edge[0] not in verticesIds) or (edge[1] not in verticesIds):
-            self.showShort()
-            print('!!! Error: edge %s not found !!!' % str(edge))
-            return         
-        # check new edge value
-        Min = self.valuationDomain['min']
-        Max = self.valuationDomain['max']
-        newValue = Decimal(str(value))
-        if newValue > Max or value < Min:
-            print('!!! Error: edge value %s out of range !!!' % str(value))
-            print(self.valuationDomain)
-            return
-        # set new value
-        self.edges[frozenset(edge)] = Decimal(str(value))
-        self.gamma = self.gammaSets()
-        if Comments:
-            print('edge %s put to value %s.' % (edge,str(value)))
-
-    def computeSize(self):
-        """
-        Renders the number of positively characterised edges of this graph instance
-        (result is stored in self.size).
-        """
-        size = 0
-        Med = self.valuationDomain['med']
-        for edge in self.edges:
-            if self.edges[edge] > Med:
-                size += 1
-        self.size = size
-        return size
-
-    def computeDegreeDistribution(self,Comments=False):
-        """
-        Renders the distribution of vertex degrees.
-        """
-        degreeDistribution = [0 for i in range(self.order)]
-        for v in self.vertices:
-            dv = len(self.gamma[v])
-            degreeDistribution[dv] += 1
-        if Comments:
-            print('degrees      : ', list(range(self.order)))
-            print('distribution : ', degreeDistribution)
-        return degreeDistribution
-
-    def computeNeighbourhoodDepth(self,vertex,Debug=False):
-        """
-        Renders the distribtion of neighbourhood depths.
-        """
-        import copy
-        order = self.order
-        vertices = set([x for x in self.vertices])
-        if Debug:
-            print('-->',vertex)
-        nbx = 0
-        neighbx = set([vertex])
-        restVertices = vertices - neighbx
-        while restVertices != set() and nbx < order:
-            if Debug:
-                print('nbx,restVertices', nbx,restVertices)
-            nbx += 1
-            iterneighbx = copy.copy(neighbx)
-            for y in iterneighbx:
-                neighbx = neighbx | self.gamma[y]
-                if Debug:
-                    print('y,self.gamma[y],neighbx', y,self.gamma[y],neighbx)
-            restVertices = vertices - neighbx
-        if Debug:
-            print('nbx,restVertices',nbx,restVertices)
-        if restVertices != set():
-            return order
-        else:
-            return nbx
-
-    def computeNeighbourhoodDepthDistribution(self,Comments=False,Debug=False):
-        """
-        Renders the distribtion of neighbourhood depths.
-        """
-        import copy
-        vertices = set([x for x in self.vertices])
-        order = self.order
-        vecNeighbourhoodDepth = [0 for i in range(order+1)] 
-        for x in vertices:
-            if Debug:
-                print('-->',x)
-            nbx = 0
-            neighbx = set([x])
-            restVertices = vertices - neighbx
-            while restVertices != set() and nbx < order:
-                if Debug:
-                    print('nbx,restVertices', nbx,restVertices)
-                nbx += 1
-                iterneighbx = copy.copy(neighbx)
-                for y in iterneighbx:
-                    neighbx = neighbx | self.gamma[y]
-                    if Debug:
-                        print('y,self.gamma[y],neighbx', y,self.gamma[y],neighbx)
-                restVertices = vertices - neighbx
-            if Debug:
-                print('nbx,restVertices',nbx,restVertices)
-            if restVertices != set():
-                vecNeighbourhoodDepth[order] += 1
-            else:
-                vecNeighbourhoodDepth[nbx] += 1
-        if Comments:
-            depths = list(range(self.order))
-            depths.append('inf.')
-            print('nbh depths   : ', depths)
-            print('distribution : ', vecNeighbourhoodDepth)
-
-        return vecNeighbourhoodDepth
-
-    def computeDiameter(self, Oriented = False):
-        """
-        Renders the diameter (maximal neighbourhood depth) of the digraph instance.
-
-        .. Note::
-
-            The diameter of a disconnected graph is considered to be *infinite*
-            (results in a value -1) !
-            
-        """
-        order = self.order
-        nbDepths = self.computeNeighbourhoodDepthDistribution()
-        nbDepths.reverse()
-        if nbDepths[0] != 0:
-            diameter = -1
-        else:
-            diameter = 0
-            for i in range(len(nbDepths)):
-                if nbDepths[i+1] != 0:
-                    diameter = order - (i+1)
-                    break
-        return diameter
-
-
-    def isConnected(self):
-        """
-        Cheks if self is a connected graph instance.
-        """
-        dfs = self.depthFirstSearch()
-        if len(dfs) == 1:
-            return True
-        else:
-            return False
-
-    def computeComponents(self):
-        """
-        Computes the connected components of a graph instance.
-        Returns a partition of the vertices as a list
-        """
-        components = []
-        dfs = self.depthFirstSearch()
-        for tree in dfs:
-            components.append(set(tree))
-        return components
-    
-    def isTree(self):
-        """
-        Checks if self is a tree by verifing the required number of
-        edges: order-1; and the existence of leaves.
-        """
-        n = self.order
-        m = self.size
-        if n == 1:
-            return True
-        elif m != n-1:
-            return False
-        else:
-            nbrOfLeaves = 0
-            for x in self.vertices:
-                degreex = len(self.gamma[x])
-                if degreex == 0: # isolated vertex
-                    return False 
-                elif degreex == 1:
-                    nbrOfLeaves += 1
-            if nbrOfLeaves < 2: # a cycle graph
-                return False
-            else:
-                return True
-                  
-    def graph2Digraph(self):
-        """
-        Converts a Graph object into a Digraph object.
-        """
-        from copy import deepcopy
-        from digraphs import EmptyDigraph
-        dg = EmptyDigraph(order=self.order)
-        dg.name = deepcopy(self.name)
-        dg.actions = deepcopy(self.vertices)
-        dg.order = len(dg.actions)
-        dg.valuationdomain = deepcopy(self.valuationDomain)
-        dg.convertValuationToDecimal()
-        dg.relations = {}
-        actionsKeys = [x for x in dg.actions]
-        for x in actionsKeys:
-            dg.relation[x] = {}
-            for y in actionsKeys:
-                if x == y:
-                    dg.relation[x][y] = dg.valuationdomain['med']
-                else:
-                    edgeKey = frozenset([x,y])
-                    dg.relation[x][y] = self.edges[edgeKey]
-        dg.convertRelationToDecimal()
-        dg.gamma = dg.gammaSets()
-        dg.notGamma = dg.notGammaSets()
-        return dg
-
-    def recodeValuation(self,newMin=-1,newMax=1,Debug=False):
-        """
-        Recodes the characteristic valuation domain according
-        to the parameters given.
-
-        .. note::
-
-            Default values gives a normalized valuation domain
-
-        """
-        from copy import deepcopy
-        oldMax = self.valuationDomain['max']
-        oldMin = self.valuationDomain['min']
-        oldMed = self.valuationDomain['med']
-
-        oldAmplitude = oldMax - oldMin
-        if Debug:
-            print(oldMin, oldMed, oldMax, oldAmplitude)
-
-        newMin = Decimal(str(newMin))
-        newMax = Decimal(str(newMax))
-        newMed = Decimal('%.3f' % ((newMax + newMin)/Decimal('2.0')))
-
-        newAmplitude = newMax - newMin
-        if Debug:
-            print(newMin, newMed, newMax, newAmplitude)
-
-        verticesList = [x for x in self.vertices]
-        oldEdges = self.edges
-        newEdges = {}
-        for i in range(self.order):
-            x = verticesList[i]
-            for j in range(i+1,self.order):
-                y = verticesList[j]
-                edge = frozenset([x,y])
-                if oldEdges[edge] == oldMax:
-                    newEdges[edge] = newMax
-                elif oldEdges[edge] == oldMin:
-                    newEdges[edge] = newMin
-                elif oldEdges[edge] == oldMed:
-                    newEdges[edge] = newMed
-                else:
-                    newEdges[edge] = newMin + ((oldEdges[edge] - oldMin)/oldAmplitude)*newAmplitude
-                    if Debug:
-                        print(edge,oldEdges[edge],newEdges[edge])
-        # install new values in self
-        self.valuationDomain['max'] = newMax
-        self.valuationDomain['min'] = newMin
-        self.valuationDomain['med'] = newMed
-        self.valuationDomain['hasIntegerValuation'] = False
-        self.edges = deepcopy(newEdges)
-
-    def computeMIS(self,Comments=False):
-        """
-        Prints all maximal independent vertex sets:
-
-        .. Note::
-        
-            - Result is stored in self.misset !
-
-        """
-        import time
-        if Comments:
-            print('*---  Maximal Independent Sets ---*')
-        t0 = time.time()
-        self.misset = set()
-        vertices = set([x for x in self.vertices])
-        self.misset = [m[0] for m in self.generateIndependent(self._singletons()) if m[0] == m[2]]
-        t1 = time.time()
-        if Comments:
-            n = len(vertices)
-            v = [0 for i in range(n+1)] 
-            misList = [(len(mis),mis) for mis in self.misset]
-            misList.sort()
-            for m in misList: # m = (len(mis),mis))
-                mis = list(m[1])
-                mis.sort()
-                print(mis)
-                v[m[0]] += 1
-            print('number of solutions: ', len(misList))
-            print('cardinality distribution')
-            print('card.: ', list(range(n+1)))
-            print('freq.: ', v)
-            print('execution time: %.5f sec.' % (t1-t0))
-            print('Results in self.misset')
-
-    def showMIS(self):
-        self.computeMIS(Comments=True)
-
-    def computeCliques(self,Comments=False):
-        """
-        Computes all cliques, ie maximal complete subgraphs in self:
-
-        .. Note::
-
-            - Computes the maximal independent vertex sets in the dual of self.
-            - Result is stored in self.cliques.
-
-        """
-        import time,copy
-        if Comments:
-            print('*---  Maximal Cliques ---*')
-        t0 = time.time()
-        dualSelf = -self
-        dualSelf.misset = set()
-        vertices = set([x for x in self.vertices])
-        self.cliques = [m[0] for m in dualSelf.generateIndependent(dualSelf._singletons()) if m[0] == m[2]]
-        t1 = time.time()
-        if Comments:
-            n = len(vertices)
-            v = [0 for i in range(n+1)] 
-            cliqueList = [(len(clique),clique) for clique in self.cliques]
-            cliqueList.sort()
-            for clq in cliqueList:  # clq = (len(clique),clique)
-                clique = list(clq[1])
-                clique.sort()
-                print(clique)
-                v[clq[0]] += 1
-        
-            print('number of solutions: ', len(self.cliques))
-            print('cardinality distribution')
-            print('card.: ', list(range(n+1)))
-            print('freq.: ', v)
-            print('execution time: %.5f sec.' % (t1-t0))
-            print('Results in self.cliques')
-
-    def showCliques(self):
-        self.computeCliques(Comments=True)
-
-    def _MISgen(self,S,I):
-        """
-        generator of maximal independent choices (voir Byskov 2004):
-            * S ::= remaining nodes;
-            * I ::= current independent choice
-
-        .. note::
-
-            - Initialize self.misset = set() before using !    
-            - Inititalize S with a set of vertex keys, and I with an empty set.
-            - See self.showMIS() for usage instructions.
-            
-        """
-        if S == set():
-            add = 1
-            self.missetit = self.misset.copy()
-            for mis in self.missetit:
-                if mis < I:
-                    self.misset.remove(mis)
-                else:
-                    if I <= mis:
-                        add = 0
-                        break
-            if add == 1:
-                self.misset = self.misset | frozenset([I])
-                yield I
-        else:
-            v = S.pop()
-            Sv = S - (self.gamma[v])
-            Iv = I | set([v])
-            for choice in self._MISgen(Sv,Iv):
-                yield choice
-            for choice in self._MISgen(S,I):
-                yield choice
-
-    def generateIndependent(self,U):
-        """
-        Generator for all independent vertices sets
-        with neighborhoods of a graph instance:
-
-        .. note::
-        
-               * Initiate with U = self._singletons().
-               * Yields [(independent choice, domnb, absnb, indnb)].
-
-        """
-        if U == []:
-            vertices = set([x for x in self.vertices])
-            yield [frozenset(),set(),vertices]
-        else:
-            x = list(U.pop())
-            for S in self.generateIndependent(U):
-                yield S
-                if x[0] <=  S[2]:
-                    Sxgam = S[1] | x[1]
-                    Sxindep = S[2] &  x[2]
-                    Sxchoice = S[0] | x[0]
-                    Sx = [Sxchoice,Sxgam,Sxindep]
-                    yield Sx
-                    
-    def _singletons(self):
-        """
-        List of singletons in frozenset format with neighborhood
-        and not neighbourhood sets.
-        """
-        s = []
-        vertices = set([x for x in self.vertices])
-        for x in vertices:
-            indep = vertices - (self.gamma[x])
-            s = s + [(frozenset([x]),self.gamma[x],indep)]
-        return s
-
-
-    def showShort(self):
-        """
-        Generic show method for Graph instances.
-        """
-        print('*---- short description of the graph ----*')
-        print('Name             : \'%s\'' % (self.name) )
-        vKeys = [x for x in self.vertices]
-        vKeys.sort()
-        print('Vertices         : ', vKeys)
-        print('Valuation domain : ', self.valuationDomain)
-        print('Gamma function   : ')
-        for v in vKeys:
-            print('%s -> %s' % (v, list(self.gamma[v])))
-        self.computeDegreeDistribution(Comments=True)
-        self.computeNeighbourhoodDepthDistribution(Comments=True)
-
-    def showMore(self):
-        """
-        Generic show method for Graph instances.
-        """
-        print('*---- Properties of the graph ----*')
-        print('Name             : \'%s\'' % (self.name) )
-        vKeys = [x for x in self.vertices]
-        vKeys.sort()
-        print('Vertices         : ', vKeys)
-        print('Order            : ', self.order)
-        self.showMIS()
-        self.showCliques()
-
-    def _saveEdges(self,fileName='graphEdges',Agrum=False,Decimal=True):
-        """
-        Saving graph instances as list of edges, ie node node on each line
-        for enumChordlessCycles C++/agrum progam.
-        """
-        print('*--- Saving graph edges in file: <' + fileName + '.text> ---*')
-        verticesKeys = [x for x in self.vertices]
-        verticesKeys.sort()
-        Med = self.valuationDomain['med']
-        fileNameExt = str(fileName)+str('.text')
-        fo = open(fileNameExt, 'w')
-        for i in range( len(verticesKeys) ):
-            for j in range(i+1, len(verticesKeys)):
-                if self.edges[frozenset([verticesKeys[i],verticesKeys[j]])] > Med:
-                    if Agrum:
-                        fo.write('%d %d\n' % ( i+1, j+1 )  )
-                    else:
-                        fo.write('%s %s\n' % ( str(verticesKeys[i]),str(verticesKeys[j]) )  )
-        fo.close()
-
-    def save(self,fileName='tempGraph',Debug=False):
-        """
-        Persistent storage of a Graph class instance in the form of a python source code file.
-        """
-        print('*--- Saving graph in file: <' + fileName + '.py> ---*')
-        verticesKeys = [x for x in self.vertices]
-        verticesKeys.sort()
-        #order = len(self.vertices)
-        edges = self.edges
-        Min = self.valuationDomain['min']
-        Med = self.valuationDomain['med']
-        Max = self.valuationDomain['max']
-        fileNameExt = str(fileName)+str('.py')
-        fo = open(fileNameExt, 'w')
-        fo.write('# Graph instance saved in Python format\n')
-        fo.write('from decimal import Decimal\n')
-        fo.write('vertices = {\n')
-        for x in verticesKeys:
-            fo.write('\'%s\': %s,\n' % (x,self.vertices[x]))
-        fo.write('}\n')
-        fo.write('valuationDomain = {\'min\':'+ str(Min)+',\'med\':'+str(Med)+',\'max\':'+str(Max)+'}\n')
-        fo.write('edges = {\n')
-        for i in range(self.order):
-            for j in range(i+1,self.order):
-                fo.write('frozenset([\'%s\',\'%s\']) : %d, \n' % (verticesKeys[i],verticesKeys[j],edges[frozenset([verticesKeys[i],verticesKeys[j]])]))
-        fo.write( '}\n')
-        fo.close()
-
-    def gammaSets(self,Debug=False):
-        """
-        renders the gamma function as dictionary
-        """
-        vkeys = [x for x in self.vertices]
-        if Debug:
-            print('vkeys', vkeys)
-        edges = self.edges
-        gamma = dict()
-        for v in vkeys:
-            gamma[v] = set()
-        for e in edges:
-            if edges[e] > 0:
-##                if Debug:
-##                    print('e', e)
-                pair = set(e)
-                e1 = pair.pop()
-                e2 = pair.pop()
-                gamma[e1].add(e2)
-                gamma[e2].add(e1)
-        return gamma
-
     def _chordlessPaths(self,Pk,v0,Comments=False,Debug=False):
         """
         recursice chordless precycle (len > 3) construction:
@@ -680,6 +161,73 @@ class Graph(object):
                 print('No further chordless precycles from ',vn,' to ',v0)
         return detectedChordlessCycle
 
+    def _MISgen(self,S,I):
+        """
+        generator of maximal independent choices (voir Byskov 2004):
+            * S ::= remaining nodes;
+            * I ::= current independent choice
+
+        .. note::
+
+            - Initialize self.misset = set() before using !    
+            - Inititalize S with a set of vertex keys, and I with an empty set.
+            - See self.showMIS() for usage instructions.
+            
+        """
+        if S == set():
+            add = 1
+            self.missetit = self.misset.copy()
+            for mis in self.missetit:
+                if mis < I:
+                    self.misset.remove(mis)
+                else:
+                    if I <= mis:
+                        add = 0
+                        break
+            if add == 1:
+                self.misset = self.misset | frozenset([I])
+                yield I
+        else:
+            v = S.pop()
+            Sv = S - (self.gamma[v])
+            Iv = I | set([v])
+            for choice in self._MISgen(Sv,Iv):
+                yield choice
+            for choice in self._MISgen(S,I):
+                yield choice
+
+    def _saveEdges(self,fileName='graphEdges',Agrum=False,Decimal=True):
+        """
+        Saving graph instances as list of edges, ie node node on each line
+        for enumChordlessCycles C++/agrum progam.
+        """
+        print('*--- Saving graph edges in file: <' + fileName + '.text> ---*')
+        verticesKeys = [x for x in self.vertices]
+        verticesKeys.sort()
+        Med = self.valuationDomain['med']
+        fileNameExt = str(fileName)+str('.text')
+        fo = open(fileNameExt, 'w')
+        for i in range( len(verticesKeys) ):
+            for j in range(i+1, len(verticesKeys)):
+                if self.edges[frozenset([verticesKeys[i],verticesKeys[j]])] > Med:
+                    if Agrum:
+                        fo.write('%d %d\n' % ( i+1, j+1 )  )
+                    else:
+                        fo.write('%s %s\n' % ( str(verticesKeys[i]),str(verticesKeys[j]) )  )
+        fo.close()
+
+    def _singletons(self):
+        """
+        List of singletons in frozenset format with neighborhood
+        and not neighbourhood sets.
+        """
+        s = []
+        vertices = set([x for x in self.vertices])
+        for x in vertices:
+            indep = vertices - (self.gamma[x])
+            s = s + [(frozenset([x]),self.gamma[x],indep)]
+        return s
+
     def computeChordlessCycles(self,Comments=True,Debug=False):
         """
         Renders the set of all chordless cycles observed in a Graph
@@ -701,6 +249,255 @@ class Graph(object):
                 print(cc)
         return chordlessCyclesList
 
+    def computeCliques(self,Comments=False):
+        """
+        Computes all cliques, ie maximal complete subgraphs in self:
+
+        .. Note::
+
+            - Computes the maximal independent vertex sets in the dual of self.
+            - Result is stored in self.cliques.
+
+        """
+        import time,copy
+        if Comments:
+            print('*---  Maximal Cliques ---*')
+        t0 = time.time()
+        dualSelf = -self
+        dualSelf.misset = set()
+        vertices = set([x for x in self.vertices])
+        self.cliques = [m[0] for m in dualSelf.generateIndependent(dualSelf._singletons()) if m[0] == m[2]]
+        t1 = time.time()
+        if Comments:
+            n = len(vertices)
+            v = [0 for i in range(n+1)] 
+            cliqueList = [(len(clique),clique) for clique in self.cliques]
+            cliqueList.sort()
+            for clq in cliqueList:  # clq = (len(clique),clique)
+                clique = list(clq[1])
+                clique.sort()
+                print(clique)
+                v[clq[0]] += 1
+        
+            print('number of solutions: ', len(self.cliques))
+            print('cardinality distribution')
+            print('card.: ', list(range(n+1)))
+            print('freq.: ', v)
+            print('execution time: %.5f sec.' % (t1-t0))
+            print('Results in self.cliques')
+
+    def computeComponents(self):
+        """
+        Computes the connected components of a graph instance.
+        Returns a partition of the vertices as a list
+        """
+        components = []
+        dfs = self.depthFirstSearch()
+        for tree in dfs:
+            components.append(set(tree))
+        return components
+    
+    def computeDegreeDistribution(self,Comments=False):
+        """
+        Renders the distribution of vertex degrees.
+        """
+        degreeDistribution = [0 for i in range(self.order)]
+        for v in self.vertices:
+            dv = len(self.gamma[v])
+            degreeDistribution[dv] += 1
+        if Comments:
+            print('degrees      : ', list(range(self.order)))
+            print('distribution : ', degreeDistribution)
+        return degreeDistribution
+
+    def computeDiameter(self, Oriented = False):
+        """
+        Renders the diameter (maximal neighbourhood depth) of the digraph instance.
+
+        .. Note::
+
+            The diameter of a disconnected graph is considered to be *infinite*
+            (results in a value -1) !
+            
+        """
+        order = self.order
+        nbDepths = self.computeNeighbourhoodDepthDistribution()
+        nbDepths.reverse()
+        if nbDepths[0] != 0:
+            diameter = -1
+        else:
+            diameter = 0
+            for i in range(len(nbDepths)):
+                if nbDepths[i+1] != 0:
+                    diameter = order - (i+1)
+                    break
+        return diameter
+
+    def computeMIS(self,Comments=False):
+        """
+        Prints all maximal independent vertex sets:
+
+        .. Note::
+        
+            - Result is stored in self.misset !
+
+        """
+        import time
+        if Comments:
+            print('*---  Maximal Independent Sets ---*')
+        t0 = time.time()
+        self.misset = set()
+        vertices = set([x for x in self.vertices])
+        self.misset = [m[0] for m in self.generateIndependent(self._singletons()) if m[0] == m[2]]
+        t1 = time.time()
+        if Comments:
+            n = len(vertices)
+            v = [0 for i in range(n+1)] 
+            misList = [(len(mis),mis) for mis in self.misset]
+            misList.sort()
+            for m in misList: # m = (len(mis),mis))
+                mis = list(m[1])
+                mis.sort()
+                print(mis)
+                v[m[0]] += 1
+            print('number of solutions: ', len(misList))
+            print('cardinality distribution')
+            print('card.: ', list(range(n+1)))
+            print('freq.: ', v)
+            print('execution time: %.5f sec.' % (t1-t0))
+            print('Results in self.misset')
+
+    def computeNeighbourhoodDepth(self,vertex,Debug=False):
+        """
+        Renders the distribtion of neighbourhood depths.
+        """
+        import copy
+        order = self.order
+        vertices = set([x for x in self.vertices])
+        if Debug:
+            print('-->',vertex)
+        nbx = 0
+        neighbx = set([vertex])
+        restVertices = vertices - neighbx
+        while restVertices != set() and nbx < order:
+            if Debug:
+                print('nbx,restVertices', nbx,restVertices)
+            nbx += 1
+            iterneighbx = copy.copy(neighbx)
+            for y in iterneighbx:
+                neighbx = neighbx | self.gamma[y]
+                if Debug:
+                    print('y,self.gamma[y],neighbx', y,self.gamma[y],neighbx)
+            restVertices = vertices - neighbx
+        if Debug:
+            print('nbx,restVertices',nbx,restVertices)
+        if restVertices != set():
+            return order
+        else:
+            return nbx
+
+    def computeNeighbourhoodDepthDistribution(self,Comments=False,Debug=False):
+        """
+        Renders the distribtion of neighbourhood depths.
+        """
+        import copy
+        vertices = set([x for x in self.vertices])
+        order = self.order
+        vecNeighbourhoodDepth = [0 for i in range(order+1)] 
+        for x in vertices:
+            if Debug:
+                print('-->',x)
+            nbx = 0
+            neighbx = set([x])
+            restVertices = vertices - neighbx
+            while restVertices != set() and nbx < order:
+                if Debug:
+                    print('nbx,restVertices', nbx,restVertices)
+                nbx += 1
+                iterneighbx = copy.copy(neighbx)
+                for y in iterneighbx:
+                    neighbx = neighbx | self.gamma[y]
+                    if Debug:
+                        print('y,self.gamma[y],neighbx', y,self.gamma[y],neighbx)
+                restVertices = vertices - neighbx
+            if Debug:
+                print('nbx,restVertices',nbx,restVertices)
+            if restVertices != set():
+                vecNeighbourhoodDepth[order] += 1
+            else:
+                vecNeighbourhoodDepth[nbx] += 1
+        if Comments:
+            depths = list(range(self.order))
+            depths.append('inf.')
+            print('nbh depths   : ', depths)
+            print('distribution : ', vecNeighbourhoodDepth)
+
+        return vecNeighbourhoodDepth
+
+    def computeSize(self):
+        """
+        Renders the number of positively characterised edges of this graph instance
+        (result is stored in self.size).
+        """
+        size = 0
+        Med = self.valuationDomain['med']
+        for edge in self.edges:
+            if self.edges[edge] > Med:
+                size += 1
+        self.size = size
+        return size
+
+    def depthFirstSearch(self,Debug=False):
+        """
+        Depth first search through a graph
+        """
+        def visitVertex(self, x, Debug = False):
+            """
+            Visits all followers of vertex x.
+            """
+            self.vertices[x]['color'] = 1
+            ## self.date += 1
+            self.vertices[x]['startDate'] = self.date
+            self.dfsx.append(x)
+            if Debug:
+                print(' dfs %s, date = %d' % (str(self.dfs),  self.vertices[x]['startDate']))
+            nextVertices = [y for y in self.gamma[x]]
+            if Debug:
+                print('   next ', nextVertices)
+            for y in nextVertices:
+                if self.vertices[y]['color'] == 0:
+                    self.date += 1
+                    visitVertex(self,y, Debug = Debug)
+                    if self.vertices[x]['color'] == 1:
+                        self.dfsx.append(x)
+            self.vertices[x]['color'] = 2
+            self.vertices[x]['endDate'] = self.date
+            self.date += 1
+
+        def visitAllVertices(self, Debug=False):
+            """
+            Mark the starting date for all vertices
+            and controls the progress of the search with vertices colors:
+            White (0), Grey (1), Black (2)
+            """
+            self.dfs = []
+            for x in self.vertices:
+                self.vertices[x]['color'] = 0
+            self.date = 0
+            for x in self.vertices:
+                self.dfsx = []
+                if self.vertices[x]['color'] == 0:
+                    if Debug:
+                        print('==>> Starting from %s ' % x)
+                    visitVertex(self, x, Debug = Debug)
+                    self.dfs.append(self.dfsx)
+                #self.vertices[x]['color'] = 2
+                #self.vertices[x]['endDate'] = self.date
+
+
+        # ---- main -----
+        visitAllVertices(self, Debug=Debug)
+        return self.dfs
 
     def exportGraphViz(self,fileName=None,noSilent=True,
                        graphType='png',graphSize='7,7',
@@ -812,58 +609,114 @@ class Graph(object):
                 print('graphViz tools not avalaible! Please check installation.')
                 print('On Ubuntu: ..$ sudo apt-get install graphviz')
 
-    def depthFirstSearch(self,Debug=False):
+    def gammaSets(self,Debug=False):
         """
-        Depth first search through a graph
+        renders the gamma function as dictionary
         """
-        def visitVertex(self, x, Debug = False):
-            """
-            Visits all followers of vertex x.
-            """
-            self.vertices[x]['color'] = 1
-            ## self.date += 1
-            self.vertices[x]['startDate'] = self.date
-            self.dfsx.append(x)
-            if Debug:
-                print(' dfs %s, date = %d' % (str(self.dfs),  self.vertices[x]['startDate']))
-            nextVertices = [y for y in self.gamma[x]]
-            if Debug:
-                print('   next ', nextVertices)
-            for y in nextVertices:
-                if self.vertices[y]['color'] == 0:
-                    self.date += 1
-                    visitVertex(self,y, Debug = Debug)
-                    if self.vertices[x]['color'] == 1:
-                        self.dfsx.append(x)
-            self.vertices[x]['color'] = 2
-            self.vertices[x]['endDate'] = self.date
-            self.date += 1
+        vkeys = [x for x in self.vertices]
+        if Debug:
+            print('vkeys', vkeys)
+        edges = self.edges
+        gamma = dict()
+        for v in vkeys:
+            gamma[v] = set()
+        for e in edges:
+            if edges[e] > 0:
+##                if Debug:
+##                    print('e', e)
+                pair = set(e)
+                e1 = pair.pop()
+                e2 = pair.pop()
+                gamma[e1].add(e2)
+                gamma[e2].add(e1)
+        return gamma
 
-        def visitAllVertices(self, Debug=False):
-            """
-            Mark the starting date for all vertices
-            and controls the progress of the search with vertices colors:
-            White (0), Grey (1), Black (2)
-            """
-            self.dfs = []
+    def generateIndependent(self,U):
+        """
+        Generator for all independent vertices sets
+        with neighborhoods of a graph instance:
+
+        .. note::
+        
+               * Initiate with U = self._singletons().
+               * Yields [(independent choice, domnb, absnb, indnb)].
+
+        """
+        if U == []:
+            vertices = set([x for x in self.vertices])
+            yield [frozenset(),set(),vertices]
+        else:
+            x = list(U.pop())
+            for S in self.generateIndependent(U):
+                yield S
+                if x[0] <=  S[2]:
+                    Sxgam = S[1] | x[1]
+                    Sxindep = S[2] &  x[2]
+                    Sxchoice = S[0] | x[0]
+                    Sx = [Sxchoice,Sxgam,Sxindep]
+                    yield Sx
+                    
+    def graph2Digraph(self):
+        """
+        Converts a Graph object into a Digraph object.
+        """
+        from copy import deepcopy
+        from digraphs import EmptyDigraph
+        dg = EmptyDigraph(order=self.order)
+        dg.name = deepcopy(self.name)
+        dg.actions = deepcopy(self.vertices)
+        dg.order = len(dg.actions)
+        dg.valuationdomain = deepcopy(self.valuationDomain)
+        dg.convertValuationToDecimal()
+        dg.relations = {}
+        actionsKeys = [x for x in dg.actions]
+        for x in actionsKeys:
+            dg.relation[x] = {}
+            for y in actionsKeys:
+                if x == y:
+                    dg.relation[x][y] = dg.valuationdomain['med']
+                else:
+                    edgeKey = frozenset([x,y])
+                    dg.relation[x][y] = self.edges[edgeKey]
+        dg.convertRelationToDecimal()
+        dg.gamma = dg.gammaSets()
+        dg.notGamma = dg.notGammaSets()
+        return dg
+
+    def isConnected(self):
+        """
+        Cheks if self is a connected graph instance.
+        """
+        dfs = self.depthFirstSearch()
+        if len(dfs) == 1:
+            return True
+        else:
+            return False
+
+    def isTree(self):
+        """
+        Checks if self is a tree by verifing the required number of
+        edges: order-1; and the existence of leaves.
+        """
+        n = self.order
+        m = self.size
+        if n == 1:
+            return True
+        elif m != n-1:
+            return False
+        else:
+            nbrOfLeaves = 0
             for x in self.vertices:
-                self.vertices[x]['color'] = 0
-            self.date = 0
-            for x in self.vertices:
-                self.dfsx = []
-                if self.vertices[x]['color'] == 0:
-                    if Debug:
-                        print('==>> Starting from %s ' % x)
-                    visitVertex(self, x, Debug = Debug)
-                    self.dfs.append(self.dfsx)
-                #self.vertices[x]['color'] = 2
-                #self.vertices[x]['endDate'] = self.date
-
-
-        # ---- main -----
-        visitAllVertices(self, Debug=Debug)
-        return self.dfs
-
+                degreex = len(self.gamma[x])
+                if degreex == 0: # isolated vertex
+                    return False 
+                elif degreex == 1:
+                    nbrOfLeaves += 1
+            if nbrOfLeaves < 2: # a cycle graph
+                return False
+            else:
+                return True
+                  
     def randomDepthFirstSearch(self,seed=None,Debug=False):
         """
         Depth first search through a graph
@@ -924,41 +777,151 @@ class Graph(object):
         visitAllVertices(self,Debug=Debug)
         return self.dfs
 
-## # Under construction !!!
-##    def dfs2pruefer(self):
-##        """
-##        Renders the pruefer code of the spanning tree of self.
-##        """
-##        from operator import itemgetter, attrgetter
-##        try:
-##            dfs = self.dfs
-##        except:
-##            print('Error: You must first run self.randomDepthFirstSearch() !!')
-##            return
-##        if len(self.dfs) > 1:
-##            print('Self is not connected. A Pruefer code can only be computed for a connected graph !!!')
-##            return
-##        verticesList = [x for x in self.vertices]
-##        verticesList.sort()
-##        degree = {}
-##        for x in dfs[0]:
-##            try:
-##                degree[x] += 1
-##            except:
-##                degree[x] = 1
-##        print(degree)
-##        verticesDegree = [(degree[x],x) for x in degree]
-##        verticesDegree.sort()
-##        sorted(verticesDegree,key=itemgetter(1))
-##        #sorted(verticesDegree,key=lambda verticesDegree: verticesDegree[2])       
-##        print(verticesDegree)
-##        edges = set()
-##        tree = dfs[0]
-##        n = len(tree)-1
-##        for i in range(n):
-##            edges.add( frozenset( [ tree[i],tree[i+1] ] ) )
-##        print(edges)
-        
+    def recodeValuation(self,newMin=-1,newMax=1,Debug=False):
+        """
+        Recodes the characteristic valuation domain according
+        to the parameters given.
+
+        .. note::
+
+            Default values gives a normalized valuation domain
+
+        """
+        from copy import deepcopy
+        oldMax = self.valuationDomain['max']
+        oldMin = self.valuationDomain['min']
+        oldMed = self.valuationDomain['med']
+
+        oldAmplitude = oldMax - oldMin
+        if Debug:
+            print(oldMin, oldMed, oldMax, oldAmplitude)
+
+        newMin = Decimal(str(newMin))
+        newMax = Decimal(str(newMax))
+        newMed = Decimal('%.3f' % ((newMax + newMin)/Decimal('2.0')))
+
+        newAmplitude = newMax - newMin
+        if Debug:
+            print(newMin, newMed, newMax, newAmplitude)
+
+        verticesList = [x for x in self.vertices]
+        oldEdges = self.edges
+        newEdges = {}
+        for i in range(self.order):
+            x = verticesList[i]
+            for j in range(i+1,self.order):
+                y = verticesList[j]
+                edge = frozenset([x,y])
+                if oldEdges[edge] == oldMax:
+                    newEdges[edge] = newMax
+                elif oldEdges[edge] == oldMin:
+                    newEdges[edge] = newMin
+                elif oldEdges[edge] == oldMed:
+                    newEdges[edge] = newMed
+                else:
+                    newEdges[edge] = newMin + ((oldEdges[edge] - oldMin)/oldAmplitude)*newAmplitude
+                    if Debug:
+                        print(edge,oldEdges[edge],newEdges[edge])
+        # install new values in self
+        self.valuationDomain['max'] = newMax
+        self.valuationDomain['min'] = newMin
+        self.valuationDomain['med'] = newMed
+        self.valuationDomain['hasIntegerValuation'] = False
+        self.edges = deepcopy(newEdges)
+
+    def save(self,fileName='tempGraph',Debug=False):
+        """
+        Persistent storage of a Graph class instance in the form of a python source code file.
+        """
+        print('*--- Saving graph in file: <' + fileName + '.py> ---*')
+        verticesKeys = [x for x in self.vertices]
+        verticesKeys.sort()
+        #order = len(self.vertices)
+        edges = self.edges
+        Min = self.valuationDomain['min']
+        Med = self.valuationDomain['med']
+        Max = self.valuationDomain['max']
+        fileNameExt = str(fileName)+str('.py')
+        fo = open(fileNameExt, 'w')
+        fo.write('# Graph instance saved in Python format\n')
+        fo.write('from decimal import Decimal\n')
+        fo.write('vertices = {\n')
+        for x in verticesKeys:
+            fo.write('\'%s\': %s,\n' % (x,self.vertices[x]))
+        fo.write('}\n')
+        fo.write('valuationDomain = {\'min\':'+ str(Min)+',\'med\':'+str(Med)+',\'max\':'+str(Max)+'}\n')
+        fo.write('edges = {\n')
+        for i in range(self.order):
+            for j in range(i+1,self.order):
+                fo.write('frozenset([\'%s\',\'%s\']) : %d, \n' % (verticesKeys[i],verticesKeys[j],edges[frozenset([verticesKeys[i],verticesKeys[j]])]))
+        fo.write( '}\n')
+        fo.close()
+
+    def setEdgeValue(self,edge,value,Comments=False):
+        """
+        Wrapper for updating the charactreistic valuation of a Graph instance.
+        The egde parameter consists in a pair of vertices;
+        edge = ('v1','v2') for instance.
+        The new value must be in the limits of the valuation domain.
+        """
+        from decimal import Decimal
+        # check vertices' existance
+        verticesIds = [x for x in self.vertices]
+        if (edge[0] not in verticesIds) or (edge[1] not in verticesIds):
+            self.showShort()
+            print('!!! Error: edge %s not found !!!' % str(edge))
+            return         
+        # check new edge value
+        Min = self.valuationDomain['min']
+        Max = self.valuationDomain['max']
+        newValue = Decimal(str(value))
+        if newValue > Max or value < Min:
+            print('!!! Error: edge value %s out of range !!!' % str(value))
+            print(self.valuationDomain)
+            return
+        # set new value
+        self.edges[frozenset(edge)] = Decimal(str(value))
+        self.gamma = self.gammaSets()
+        if Comments:
+            print('edge %s put to value %s.' % (edge,str(value)))
+
+    def showCliques(self):
+        self.computeCliques(Comments=True)
+
+    def showMIS(self):
+        self.computeMIS(Comments=True)
+
+    def showMore(self):
+        """
+        Generic show method for Graph instances.
+        """
+        print('*---- Properties of the graph ----*')
+        print('Name             : \'%s\'' % (self.name) )
+        vKeys = [x for x in self.vertices]
+        vKeys.sort()
+        print('Vertices         : ', vKeys)
+        print('Order            : ', self.order)
+        self.showMIS()
+        self.showCliques()
+
+    def showShort(self):
+        """
+        Generic show method for Graph instances.
+        """
+        print('*---- short description of the graph ----*')
+        print('Name             : \'%s\'' % (self.name) )
+        vKeys = [x for x in self.vertices]
+        vKeys.sort()
+        print('Vertices         : ', vKeys)
+        print('Valuation domain : ', self.valuationDomain)
+        print('Gamma function   : ')
+        for v in vKeys:
+            print('%s -> %s' % (v, list(self.gamma[v])))
+        self.computeDegreeDistribution(Comments=True)
+        self.computeNeighbourhoodDepthDistribution(Comments=True)
+
+#----------------
+
 class EmptyGraph(Graph):
     """
     Intantiates graph of given order without any positively valued edge.
