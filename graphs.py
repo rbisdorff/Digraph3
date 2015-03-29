@@ -643,7 +643,7 @@ class Graph(object):
         .. note::
         
                * Initiate with U = self._singletons().
-               * Yields [(independent choice, domnb, absnb, indnb)].
+               * Yields [independent set, covered set, all vertices - covered set)].
 
         """
         if U == []:
