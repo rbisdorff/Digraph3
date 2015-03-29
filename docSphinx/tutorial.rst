@@ -676,7 +676,7 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
 MIS enumeration
 ...............
 
-2-colorings define independent sets of vertices that are maximal in cardinality; for short called a **MIS**. Computing such MISs in a given :code:`Graph` instance may be achieved by the :py:function:`graphs.Graph.showMIS`: or by converting the :py:class:`graphs.Graph` instance into a :py:class:`digraphs.Digraph` instance:
+2-colorings define independent sets of vertices that are maximal in cardinality; for short called a **MIS**. Computing such MISs in a given :code:`Graph` instance may be achieved by the `graphs.Graph.showMIS` method or by converting the :py:class:`graphs.Graph` instance into a :py:class:`digraphs.Digraph` instance:
 	>>> g = Graph('tutorialGraph')
 	>>> g.showMIS()
         *---  Maximal Independent Sets ---*
