@@ -663,7 +663,7 @@ class Graph(object):
                     
     def graph2Digraph(self):
         """
-        Converts a Graph object into a Digraph object.
+        Converts a Graph object into a symmetric Digraph object.
         """
         from copy import deepcopy
         from digraphs import EmptyDigraph
@@ -728,8 +728,8 @@ class Graph(object):
 
         .. Note::
 
-            The resulting spanning tree or forest is by far not uniformly selected
-            among all possible results. Spanning stars will indeed be much less
+            The resulting spanning tree (or forest) is by far not uniformly selected
+            among all possible trees. Spanning stars will indeed be much less
             probably selected then streight walks !
             
         """
