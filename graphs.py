@@ -727,9 +727,8 @@ class Graph(object):
 
         .. Warning::
 
-            - Note that the resulting spanning tree or forest is by far
-            not uniformly selected form all possible results.
-            - Potential spanning stars will be much less probable then spanning walks !
+            - Note that the resulting spanning tree or forest is by far not uniformly selected form all possible results.
+            - Potential spanning stars will be much less probable then streight walks !
             
         """
         import random
