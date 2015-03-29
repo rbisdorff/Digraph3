@@ -181,7 +181,7 @@ Random digraph
 ..............
 
 We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7, denoted *dg* and modelling a binary relation (*x S y*) defined on the set of nodes of *dg*. For this purpose, the ``digraphs`` module provides conveniently a specific :py:class:`digraphs.RandomValuationDigraph` constructor:
-    >>> from digraphs import RandomValuationDigraph
+    >>> from randomDigraphs import RandomValuationDigraph
     >>> dg = RandomValuationDigraph(order=7,Normalized=True)
     >>> dg.save('tutRandValDigraph')
 
@@ -535,19 +535,6 @@ See the technical documentation of the :ref:`graphs-label`.
 Example Python3 session:
     >>> from graphs import Graph
     >>> g = Graph(numberOfVertices=7,edgeProbability=0.5)
-    >>> g.showShort()
-    *----- show short --------------*
-    Name             : 'randomGraph'
-    Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7']
-    Valuation domain :  {'med': 0, 'max': 1, 'min': -1}
-    Gamma function   : 
-    v1 -> ['v5']
-    v2 -> ['v4', 'v6', 'v3']
-    v3 -> ['v2']
-    v4 -> ['v5', 'v2', 'v7']
-    v5 -> ['v4', 'v6', 'v1']
-    v6 -> ['v5', 'v2']
-    v7 -> ['v4']
     >>> g.save(fileName='tutorialGraph')
 
 The saved Graph instance named :code:`tutorialGraph.py` is encoded in python3 as follows::
@@ -593,10 +580,31 @@ The stored graph can be recalled and plotted with the generic :py:func:`graphs.G
 	*---- exporting a dot file for GraphViz tools ---------*
 	Exporting to tutorialGraph.dot
 	fdp -Tpng tutorialGraph.dot -o tutorialGraph.png
+        >>> ...
 
 .. image:: tutorialGraph.png
    :width: 400 px
    :align: center
+
+Properties, like the gamma function and vertex degrees and neighbourhooddepths may be shown with a `graphs.Graph.showShort()` method:
+        >>> g.showShort()
+        *---- short description of the graph ----*
+        Name             : 'tutorialGraph'
+        Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7']
+        Valuation domain :  {'min': -1, 'med': 0, 'max': 1}
+        Gamma function   : 
+        v1 -> ['v5']
+        v2 -> ['v6', 'v4', 'v3']
+        v3 -> ['v2']
+        v4 -> ['v5', 'v2', 'v7']
+        v5 -> ['v1', 'v6', 'v4']
+        v6 -> ['v2', 'v5']
+        v7 -> ['v4']
+        degrees      :  [0, 1, 2, 3, 4, 5, 6]
+        distribution :  [0, 3, 1, 3, 0, 0, 0]
+        nbh depths   :  [0, 1, 2, 3, 4, 5, 6, 'inf.']
+        distribution :  [0, 0, 1, 4, 2, 0, 0, 0]
+        >>> ...
 
 A ``Graph`` instance corresponds bijectively to a symmetric ``Digraph`` instance and we may easily convert from one to the other with the :py:func:`graphs.Graph.graph2Digraph()`, and vice versa with the :py:func:`digraphs.Digraph.digraph2Graph()` method. Thus, all resources of the :py:class:`digraphs.Digraph` class, suitable for symmetric digraphs, become readily available, and vice versa:
 	>>> dg = g.graph2Digraph()
@@ -625,7 +633,11 @@ A ``Graph`` instance corresponds bijectively to a symmetric ``Digraph`` instance
 	v5 -> ['v6', 'v1', 'v4']
 	v6 -> ['v5', 'v2']
 	v7 -> ['v4']
-	>>> 
+        degrees      :  [0, 1, 2, 3, 4, 5, 6]
+        distribution :  [0, 3, 1, 3, 0, 0, 0]
+        nbh depths   :  [0, 1, 2, 3, 4, 5, 6, 'inf.']
+        distribution :  [0, 0, 1, 4, 2, 0, 0, 0]
+	>>> ...
 
 q-coloring of a graph
 .....................
@@ -676,7 +688,7 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
 MIS enumeration
 ...............
 
-2-colorings define independent sets of vertices that are maximal in cardinality; for short called a **MIS**. Computing such MISs in a given :code:`Graph` instance may be achieved by the `graphs.Graph.showMIS` method or by converting the :py:class:`graphs.Graph` instance into a :py:class:`digraphs.Digraph` instance:
+2-colorings define independent sets of vertices that are maximal in cardinality; for short called a **MIS**. Computing such MISs in a given :code:`Graph` instance may be achieved by the `graphs.Graph.showMIS()` method;
 	>>> g = Graph('tutorialGraph')
 	>>> g.showMIS()
         *---  Maximal Independent Sets ---*
