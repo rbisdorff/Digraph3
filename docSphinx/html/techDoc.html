@@ -2496,31 +2496,23 @@ gamma = {&#39;v1&#39;: {&#39;v2&#39;,v3&#39;}, &#39;v2&#39;: {&#39;v1&#39;}, &#3
 </dd>
 </dl>
 <dl class="method">
-<dt id="graphs.Graph.MISgen">
-<code class="descname">MISgen</code><span class="sig-paren">(</span><em>S</em>, <em>I</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph.MISgen" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>generator of maximal independent choices (voir Byskov 2004):</dt>
-<dd><ul class="first last simple">
-<li>S ::= remaining nodes;</li>
-<li>I ::= current independent choice</li>
-</ul>
-</dd>
-</dl>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<ul class="last simple">
-<li>Initialize self.misset = set() before using !</li>
-<li>Inititalize S with a set of vertex keys, and I with an empty set.</li>
-<li>See self.showMIS() for usage instructions.</li>
-</ul>
-</div>
-</dd></dl>
-
-<dl class="method">
 <dt id="graphs.Graph.computeChordlessCycles">
 <code class="descname">computeChordlessCycles</code><span class="sig-paren">(</span><em>Comments=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph.computeChordlessCycles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the set of all chordless cycles observed in a Graph
 intance.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphs.Graph.computeCliques">
+<code class="descname">computeCliques</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph.computeCliques" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes all cliques, ie maximal complete subgraphs in self:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>Computes the maximal independent vertex sets in the dual of self.</li>
+<li>Result is stored in self.cliques.</li>
+</ul>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -2532,7 +2524,7 @@ Returns a partition of the vertices as a list</p>
 
 <dl class="method">
 <dt id="graphs.Graph.computeDegreeDistribution">
-<code class="descname">computeDegreeDistribution</code><span class="sig-paren">(</span><em>Comments=True</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph.computeDegreeDistribution" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDegreeDistribution</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph.computeDegreeDistribution" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the distribution of vertex degrees.</p>
 </dd></dl>
 
@@ -2548,6 +2540,18 @@ Returns a partition of the vertices as a list</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="graphs.Graph.computeMIS">
+<code class="descname">computeMIS</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph.computeMIS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints all maximal independent vertex sets:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>Result is stored in self.misset !</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="graphs.Graph.computeNeighbourhoodDepth">
 <code class="descname">computeNeighbourhoodDepth</code><span class="sig-paren">(</span><em>vertex</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph.computeNeighbourhoodDepth" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the distribtion of neighbourhood depths.</p>
@@ -2555,7 +2559,7 @@ Returns a partition of the vertices as a list</p>
 
 <dl class="method">
 <dt id="graphs.Graph.computeNeighbourhoodDepthDistribution">
-<code class="descname">computeNeighbourhoodDepthDistribution</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph.computeNeighbourhoodDepthDistribution" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeNeighbourhoodDepthDistribution</code><span class="sig-paren">(</span><em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph.computeNeighbourhoodDepthDistribution" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the distribtion of neighbourhood depths.</p>
 </dd></dl>
 
@@ -2591,6 +2595,20 @@ Returns a partition of the vertices as a list</p>
 <dt id="graphs.Graph.gammaSets">
 <code class="descname">gammaSets</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph.gammaSets" title="Permalink to this definition">¶</a></dt>
 <dd><p>renders the gamma function as dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphs.Graph.generateIndependent">
+<code class="descname">generateIndependent</code><span class="sig-paren">(</span><em>U</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph.generateIndependent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator for all independent vertices sets
+with neighborhoods of a graph instance:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>Initiate with U = self._singletons().</li>
+<li>Yields [(independent choice, domnb, absnb, indnb)].</li>
+</ul>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -2646,23 +2664,18 @@ The new value must be in the limits of the valuation domain.</p>
 
 <dl class="method">
 <dt id="graphs.Graph.showCliques">
-<code class="descname">showCliques</code><span class="sig-paren">(</span><em>withListing=True</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph.showCliques" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints all maximal cliques:</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Computes the maximal independt sets in the dual of self;
-Result is stored in self.cliques.</p>
-</div>
-</dd></dl>
+<code class="descname">showCliques</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph.showCliques" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="graphs.Graph.showMIS">
-<code class="descname">showMIS</code><span class="sig-paren">(</span><em>withListing=True</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph.showMIS" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints all maximal independent choices:</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Result is stores in self.misset.</p>
-</div>
+<code class="descname">showMIS</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph.showMIS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="graphs.Graph.showMore">
+<code class="descname">showMore</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph.showMore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic show method for Graph instances.</p>
 </dd></dl>
 
 <dl class="method">
@@ -3262,7 +3275,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4000,7 +4013,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">

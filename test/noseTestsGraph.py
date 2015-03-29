@@ -78,8 +78,9 @@ def testIsingModel():
 
 def testMISModel():
     print('==>> Testing MIS Model class instantiation')
-    g = Graph(numberOfVertices=30,edgeProbability=0.075)
+    g = Graph(numberOfVertices=20,edgeProbability=0.075)
     g.showShort()
+    g.showMIS()
     im = MISModel(g,nSim=10000,Debug=False)
     im.checkMIS(Comments=True)
     print('MIS       = ',im.mis)
