@@ -133,7 +133,7 @@ class Graph(object):
         self.size = size
         return size
 
-    def computeDegreeDistribution(self,Comments=True):
+    def computeDegreeDistribution(self,Comments=False):
         """
         Renders the distribution of vertex degrees.
         """
@@ -175,7 +175,7 @@ class Graph(object):
         else:
             return nbx
 
-    def computeNeighbourhoodDepthDistribution(self,Debug=False):
+    def computeNeighbourhoodDepthDistribution(self,Comments=False,Debug=False):
         """
         Renders the distribtion of neighbourhood depths.
         """
@@ -205,6 +205,12 @@ class Graph(object):
                 vecNeighbourhoodDepth[order] += 1
             else:
                 vecNeighbourhoodDepth[nbx] += 1
+        if Comments:
+            depths = list(range(self.order))
+            depths.append('inf.')
+            print('nbh depths   : ', depths)
+            print('distribution : ', vecNeighbourhoodDepth)
+
         return vecNeighbourhoodDepth
 
     def computeDiameter(self, Oriented = False):
@@ -355,67 +361,84 @@ class Graph(object):
         self.valuationDomain['hasIntegerValuation'] = False
         self.edges = deepcopy(newEdges)
 
-    def showMIS(self,withListing=True):
+    def computeMIS(self,Comments=False):
         """
-        Prints all maximal independent choices:
+        Prints all maximal independent vertex sets:
 
         .. Note::
         
-            Result is stores in self.misset.
+            - Result is stored in self.misset !
 
         """
         import time
-        print('*---  Maximal Independent Sets ---*')
+        if Comments:
+            print('*---  Maximal Independent Sets ---*')
         t0 = time.time()
         self.misset = set()
         vertices = set([x for x in self.vertices])
-        n = len(vertices)
-        v = [0 for i in range(n+1)]
-        for choice in self.MISgen(vertices,frozenset()):
-            v[len(choice)] += 1
-            if withListing:
-                print(list(choice))
+        self.misset = [m[0] for m in self.generateIndependent(self._singletons()) if m[0] == m[2]]
         t1 = time.time()
-        print('number of solutions: ', len(self.misset))
-        print('cardinality distribution')
-        print('card.: ', list(range(n+1)))
-        print('freq.: ', v)
-        print('execution time: %.5f sec.' % (t1-t0))
-        print('Results in self.misset')
+        if Comments:
+            n = len(vertices)
+            v = [0 for i in range(n+1)] 
+            misList = [(len(mis),mis) for mis in self.misset]
+            misList.sort()
+            for m in misList: # m = (len(mis),mis))
+                mis = list(m[1])
+                mis.sort()
+                print(mis)
+                v[m[0]] += 1
+            print('number of solutions: ', len(misList))
+            print('cardinality distribution')
+            print('card.: ', list(range(n+1)))
+            print('freq.: ', v)
+            print('execution time: %.5f sec.' % (t1-t0))
+            print('Results in self.misset')
 
-    def showCliques(self,withListing=True):
+    def showMIS(self):
+        self.computeMIS(Comments=True)
+
+    def computeCliques(self,Comments=False):
         """
-        Prints all maximal cliques:
+        Computes all cliques, ie maximal complete subgraphs in self:
 
         .. Note::
 
-            Computes the maximal independt sets in the dual of self;
-            Result is stored in self.cliques.
+            - Computes the maximal independent vertex sets in the dual of self.
+            - Result is stored in self.cliques.
 
         """
         import time,copy
-        print('*---  Maximal Cliques ---*')
+        if Comments:
+            print('*---  Maximal Cliques ---*')
         t0 = time.time()
-        ng = -self
-        ng.misset = set()
-        vertices = set([x for x in ng.vertices])
-        n = len(vertices)
-        v = [0 for i in range(n+1)]
-        for choice in ng.MISgen(vertices,frozenset()):
-            v[len(choice)] += 1
-            if withListing:
-                print(list(choice))
-        self.cliques = copy.deepcopy(ng.misset)
+        dualSelf = -self
+        dualSelf.misset = set()
+        vertices = set([x for x in self.vertices])
+        self.cliques = [m[0] for m in dualSelf.generateIndependent(dualSelf._singletons()) if m[0] == m[2]]
         t1 = time.time()
+        if Comments:
+            n = len(vertices)
+            v = [0 for i in range(n+1)] 
+            cliqueList = [(len(clique),clique) for clique in self.cliques]
+            cliqueList.sort()
+            for clq in cliqueList:  # clq = (len(clique),clique)
+                clique = list(clq[1])
+                clique.sort()
+                print(clique)
+                v[clq[0]] += 1
         
-        print('number of solutions: ', len(self.cliques))
-        print('cardinality distribution')
-        print('card.: ', list(range(n+1)))
-        print('freq.: ', v)
-        print('execution time: %.5f sec.' % (t1-t0))
-        print('Results in self.cliques')
+            print('number of solutions: ', len(self.cliques))
+            print('cardinality distribution')
+            print('card.: ', list(range(n+1)))
+            print('freq.: ', v)
+            print('execution time: %.5f sec.' % (t1-t0))
+            print('Results in self.cliques')
 
-    def MISgen(self,S,I):
+    def showCliques(self):
+        self.computeCliques(Comments=True)
+
+    def _MISgen(self,S,I):
         """
         generator of maximal independent choices (voir Byskov 2004):
             * S ::= remaining nodes;
@@ -445,10 +468,48 @@ class Graph(object):
             v = S.pop()
             Sv = S - (self.gamma[v])
             Iv = I | set([v])
-            for choice in self.MISgen(Sv,Iv):
+            for choice in self._MISgen(Sv,Iv):
                 yield choice
-            for choice in self.MISgen(S,I):
+            for choice in self._MISgen(S,I):
                 yield choice
+
+    def generateIndependent(self,U):
+        """
+        Generator for all independent vertices sets
+        with neighborhoods of a graph instance:
+
+        .. note::
+        
+               * Initiate with U = self._singletons().
+               * Yields [(independent choice, domnb, absnb, indnb)].
+
+        """
+        if U == []:
+            vertices = set([x for x in self.vertices])
+            yield [frozenset(),set(),vertices]
+        else:
+            x = list(U.pop())
+            for S in self.generateIndependent(U):
+                yield S
+                if x[0] <=  S[2]:
+                    Sxgam = S[1] | x[1]
+                    Sxindep = S[2] &  x[2]
+                    Sxchoice = S[0] | x[0]
+                    Sx = [Sxchoice,Sxgam,Sxindep]
+                    yield Sx
+                    
+    def _singletons(self):
+        """
+        List of singletons in frozenset format with neighborhood
+        and not neighbourhood sets.
+        """
+        s = []
+        vertices = set([x for x in self.vertices])
+        for x in vertices:
+            indep = vertices - (self.gamma[x])
+            s = s + [(frozenset([x]),self.gamma[x],indep)]
+        return s
+
 
     def showShort(self):
         """
@@ -463,7 +524,21 @@ class Graph(object):
         print('Gamma function   : ')
         for v in vKeys:
             print('%s -> %s' % (v, list(self.gamma[v])))
-        self.computeDegreeDistribution()
+        self.computeDegreeDistribution(Comments=True)
+        self.computeNeighbourhoodDepthDistribution(Comments=True)
+
+    def showMore(self):
+        """
+        Generic show method for Graph instances.
+        """
+        print('*---- Properties of the graph ----*')
+        print('Name             : \'%s\'' % (self.name) )
+        vKeys = [x for x in self.vertices]
+        vKeys.sort()
+        print('Vertices         : ', vKeys)
+        print('Order            : ', self.order)
+        self.showMIS()
+        self.showCliques()
 
     def _saveEdges(self,fileName='graphEdges',Agrum=False,Decimal=True):
         """
@@ -2480,9 +2555,10 @@ class MISModel(Graph):
 if __name__ == '__main__':
 
 
-    g = RandomGraph(order=10,edgeProbability=1/3,seed=200)
-    g = CompleteGraph(order=10)
+    g = RandomGraph(order=20,edgeProbability=1/3,seed=200)
+    #g = CompleteGraph(order=10)
     g.showShort()
+    g.showMore()
     print(g.computeNeighbourhoodDepthDistribution(Debug=False))
     for v in g.vertices:
         print(v,g.computeNeighbourhoodDepth(v))
