@@ -676,28 +676,27 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
 MIS enumeration
 ...............
 
-2-colorings define independent sets of vertices that are maximal in cardinality; for short called a **MIS**. Computing such MISs in a given :code:`Graph` instance may be achieved by converting the :py:class:`graphs.Graph` instance into a :py:class:`digraphs.Digraph` instance:
+2-colorings define independent sets of vertices that are maximal in cardinality; for short called a **MIS**. Computing such MISs in a given :code:`Graph` instance may be achieved by the :py:func:`showMIS()`: or by converting the :py:class:`graphs.Graph` instance into a :py:class:`digraphs.Digraph` instance:
 	>>> g = Graph('tutorialGraph')
-	>>> dg = g.graph2Digraph()
-	>>> dg.showMIS()
-	*---  Maximal independent choices ---*
-	['v5', 'v3', 'v7']
-	['v5', 'v7', 'v2']
-	['v6', 'v3', 'v4', 'v1']
-	['v6', 'v3', 'v7', 'v1']
-	['v7', 'v2', 'v1']
-	number of solutions:  5
-	cardinality distribution
-	card.:  [0, 1, 2, 3, 4, 5, 6, 7]
-	freq.:  [0, 0, 0, 3, 2, 0, 0, 0]
-	execution time: 0.00050 sec.
-	Results in self.misset
-	>>> dg.misset
-	{frozenset({'v6', 'v3', 'v7', 'v1'}), 
-	 frozenset({'v5', 'v7', 'v2'}), 
-	 frozenset({'v6', 'v3', 'v4', 'v1'}), 
-	 frozenset({'v7', 'v2', 'v1'}), 
-	 frozenset({'v5', 'v3', 'v7'})}
+	>>> g.showMIS()
+        *---  Maximal Independent Sets ---*
+        ['v2', 'v5', 'v7']
+        ['v3', 'v5', 'v7']
+        ['v1', 'v2', 'v7']
+        ['v1', 'v3', 'v6', 'v7']
+        ['v1', 'v3', 'v4', 'v6']
+        number of solutions:  5
+        cardinality distribution
+        card.:  [0, 1, 2, 3, 4, 5, 6, 7]
+        freq.:  [0, 0, 0, 3, 2, 0, 0, 0]
+        execution time: 0.00032 sec.
+        Results in self.misset
+        >>> g.misset
+        [frozenset({'v7', 'v2', 'v5'}), 
+         frozenset({'v3', 'v7', 'v5'}), 
+         frozenset({'v1', 'v2', 'v7'}), 
+         frozenset({'v1', 'v6', 'v7', 'v3'}), 
+         frozenset({'v1', 'v6', 'v4', 'v3'})]
 
 Grids and the Ising model
 .........................

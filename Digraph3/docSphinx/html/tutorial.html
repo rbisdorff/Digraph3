@@ -1193,7 +1193,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <div class="section" id="mis-enumeration">
 <h3><a class="toc-backref" href="#id56">MIS enumeration</a><a class="headerlink" href="#mis-enumeration" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>2-colorings define independent sets of vertices that are maximal in cardinality; for short called a <strong>MIS</strong>. Computing such MISs in a given <code class="code docutils literal"><span class="pre">Graph</span></code> instance may be achieved by converting the <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></code></a> instance into a <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> instance:</dt>
+<dt>2-colorings define independent sets of vertices that are maximal in cardinality; for short called a <strong>MIS</strong>. Computing such MISs in a given <code class="code docutils literal"><span class="pre">Graph</span></code> instance may be achieved by the <code class="xref py py-func docutils literal"><span class="pre">showMIS()</span></code>: or by converting the <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></code></a> instance into a <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> instance:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1213,28 +1213,26 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 17
 18
 19
-20
-21</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">graph2Digraph</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showMIS</span><span class="p">()</span>
-<span class="go">*---  Maximal independent choices ---*</span>
-<span class="go">[&#39;v5&#39;, &#39;v3&#39;, &#39;v7&#39;]</span>
-<span class="go">[&#39;v5&#39;, &#39;v7&#39;, &#39;v2&#39;]</span>
-<span class="go">[&#39;v6&#39;, &#39;v3&#39;, &#39;v4&#39;, &#39;v1&#39;]</span>
-<span class="go">[&#39;v6&#39;, &#39;v3&#39;, &#39;v7&#39;, &#39;v1&#39;]</span>
-<span class="go">[&#39;v7&#39;, &#39;v2&#39;, &#39;v1&#39;]</span>
+20</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s">&#39;tutorialGraph&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showMIS</span><span class="p">()</span>
+<span class="go">*---  Maximal Independent Sets ---*</span>
+<span class="go">[&#39;v2&#39;, &#39;v5&#39;, &#39;v7&#39;]</span>
+<span class="go">[&#39;v3&#39;, &#39;v5&#39;, &#39;v7&#39;]</span>
+<span class="go">[&#39;v1&#39;, &#39;v2&#39;, &#39;v7&#39;]</span>
+<span class="go">[&#39;v1&#39;, &#39;v3&#39;, &#39;v6&#39;, &#39;v7&#39;]</span>
+<span class="go">[&#39;v1&#39;, &#39;v3&#39;, &#39;v4&#39;, &#39;v6&#39;]</span>
 <span class="go">number of solutions:  5</span>
 <span class="go">cardinality distribution</span>
 <span class="go">card.:  [0, 1, 2, 3, 4, 5, 6, 7]</span>
 <span class="go">freq.:  [0, 0, 0, 3, 2, 0, 0, 0]</span>
-<span class="go">execution time: 0.00050 sec.</span>
+<span class="go">execution time: 0.00032 sec.</span>
 <span class="go">Results in self.misset</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">misset</span>
-<span class="go">{frozenset({&#39;v6&#39;, &#39;v3&#39;, &#39;v7&#39;, &#39;v1&#39;}),</span>
-<span class="go"> frozenset({&#39;v5&#39;, &#39;v7&#39;, &#39;v2&#39;}),</span>
-<span class="go"> frozenset({&#39;v6&#39;, &#39;v3&#39;, &#39;v4&#39;, &#39;v1&#39;}),</span>
-<span class="go"> frozenset({&#39;v7&#39;, &#39;v2&#39;, &#39;v1&#39;}),</span>
-<span class="go"> frozenset({&#39;v5&#39;, &#39;v3&#39;, &#39;v7&#39;})}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">misset</span>
+<span class="go">[frozenset({&#39;v7&#39;, &#39;v2&#39;, &#39;v5&#39;}),</span>
+<span class="go"> frozenset({&#39;v3&#39;, &#39;v7&#39;, &#39;v5&#39;}),</span>
+<span class="go"> frozenset({&#39;v1&#39;, &#39;v2&#39;, &#39;v7&#39;}),</span>
+<span class="go"> frozenset({&#39;v1&#39;, &#39;v6&#39;, &#39;v7&#39;, &#39;v3&#39;}),</span>
+<span class="go"> frozenset({&#39;v1&#39;, &#39;v6&#39;, &#39;v4&#39;, &#39;v3&#39;})]</span>
 </pre></div>
 </td></tr></table></div>
 </dd>
