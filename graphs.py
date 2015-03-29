@@ -644,6 +644,7 @@ class Graph(object):
         
                * Initiate with U = self._singletons().
                * Yields [independent set, covered set, all vertices - covered set)].
+               * If independent set == (all vertices - covered set), the given independent set is maximal !
 
         """
         if U == []:
@@ -727,8 +728,9 @@ class Graph(object):
 
         .. Note::
 
-            - The resulting spanning tree or forest is by far not uniformly selected form all possible results.
-            - Potential spanning stars will be much less probable then streight walks !
+            The resulting spanning tree or forest is by far not uniformly selected
+            among all possible results. Spanning stars will indeed be much less
+            probably selected then streight walks !
             
         """
         import random
