@@ -1091,9 +1091,9 @@ def _jobTaskKohler(categID):
     nc = digraph.order
     if Comments:
         print(nc)
-    ko = KohlerOrder(digraph)
+    # the Kohler rule is usually more efficient on the codual digraph
+    ko = KohlerOrder((~(-digraph)))
     catCRbc = ko.computeRankingByChoosing()
-    #catRbc = deepcopy(catCRbc['result'])
     catRelation = digraph.computeRankingByChoosingRelation(\
                         rankingByChoosing=catCRbc['result'],\
                         Debug=False)
@@ -1678,30 +1678,30 @@ if __name__ == "__main__":
     from linearOrders import *
     from time import time
     
-    Threading=True
+    Threading=False
 
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
                                    numberOfActions=50)
     t.saveXMCDA2('test')
     #t = XMCDA2PerformanceTableau('uniSorting')
     #t = XMCDA2PerformanceTableau('test')
-    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
-    t0 = time()
-    ko = KohlerOrder(g)
-    print(time()-t0)
-    #ko.showRelationTable()
-    t0 = time()
-    ar = KohlerOrder(CoDualDigraph(g))
-    print(time()-t0)
-    #ar.showRelationTable()
-    t0 = time()
-    koar = KohlerArrowRaynaudFusionDigraph(g,Threading=Threading)
-    print(time()-t0)
-    #koar.showRelationTable()
-    print(g.computeOrdinalCorrelation(ko))
-    print(g.computeOrdinalCorrelation(ar))
-    print(g.computeOrdinalCorrelation(koar))
-    koar.exportGraphViz('test')
+##    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
+##    t0 = time()
+##    ko = KohlerOrder(g)
+##    print(time()-t0)
+##    #ko.showRelationTable()
+##    t0 = time()
+##    ar = KohlerOrder(CoDualDigraph(g))
+##    print(time()-t0)
+##    #ar.showRelationTable()
+##    t0 = time()
+##    koar = KohlerArrowRaynaudFusionDigraph(g,Threading=Threading)
+##    print(time()-t0)
+##    #koar.showRelationTable()
+##    print(g.computeOrdinalCorrelation(ko))
+##    print(g.computeOrdinalCorrelation(ar))
+##    print(g.computeOrdinalCorrelation(koar))
+##    koar.exportGraphViz('test')
     
 ##    Threading=True
 ##
@@ -1710,36 +1710,36 @@ if __name__ == "__main__":
 ##    t.saveXMCDA2('test')
 ##    #t = XMCDA2PerformanceTableau('uniSorting')
 ##    #t = XMCDA2PerformanceTableau('test')
-##    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
-##    limitingQuantiles = len(t.actions) // 3
-##    #limitingQuantiles = 7
-##    #qs = QuantilesSortingDigraph(t,g.order)
-##    t0 = time()
-##    qsfko = QuantilesRankingDigraph(t,limitingQuantiles,
-##                              strategy="optimistic",
-##                              rankingRule="Test",
-##                              LowerClosed=False,
-##                              Threading=Threading,
-##                              Debug=False)
-##    print('QR Exec. time:', time()-t0, 'sec.')
-##    #qsfko.showSorting()
-##    #qsko.exportSortingGraphViz(Debug=False)
-##    t0 = time()
-##    print(qsfko.runTimes)
-##    print(g.computeOrdinalCorrelation(qsfko))
-##    t0 = time()
-##    qsko = QuantilesRankingDigraph(t,limitingQuantiles,
-##                              strategy="optimistic",
-##                              #rankingRule="Test",
-##                              LowerClosed=False,
-##                              Threading=Threading,
-##                              Debug=False)
-##    print('QR Exec. time:', time()-t0, 'sec.')
-##    #qsko.showSorting()
-##    #qsko.exportSortingGraphViz(Debug=False)
-##    t0 = time()
-##    print(qsko.runTimes)
-##    print(g.computeOrdinalCorrelation(qsko))
+    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
+    limitingQuantiles = len(t.actions) // 3
+    #limitingQuantiles = 7
+    #qs = QuantilesSortingDigraph(t,g.order)
+    t0 = time()
+    qsfko = QuantilesRankingDigraph(t,limitingQuantiles,
+                              strategy="optimistic",
+                              rankingRule="Test",
+                              LowerClosed=False,
+                              Threading=Threading,
+                              Debug=False)
+    print('QR Exec. time:', time()-t0, 'sec.')
+    #qsfko.showSorting()
+    #qsko.exportSortingGraphViz(Debug=False)
+    t0 = time()
+    print(qsfko.runTimes)
+    print(g.computeOrdinalCorrelation(qsfko))
+    t0 = time()
+    qsko = QuantilesRankingDigraph(t,limitingQuantiles,
+                              strategy="optimistic",
+                              #rankingRule="Test",
+                              LowerClosed=False,
+                              Threading=Threading,
+                              Debug=False)
+    print('QR Exec. time:', time()-t0, 'sec.')
+    #qsko.showSorting()
+    #qsko.exportSortingGraphViz(Debug=False)
+    t0 = time()
+    print(qsko.runTimes)
+    print(g.computeOrdinalCorrelation(qsko))
     
 ##    qsrbc = QuantilesRankingDigraph(t,limitingQuantiles,
 ##                              strategy="pessimistic",
