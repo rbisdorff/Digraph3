@@ -1049,15 +1049,15 @@ def _jobTaskRubis(categID):
                 catCRbc = {'result': [((digraph.valuationdomain['max'],catContent),\
                                        (digraph.valuationdomain['max'],catContent))]}
 
-        catRbc = deepcopy(catCRbc['result'])
-        currActions = list(catContent)
-        catRelation = digraph.computeRankingByChoosingRelation(\
-                            actionsSubset=currActions,\
-                            rankingByChoosing=catRbc,\
-                            Debug=False)
+##        catRbc = deepcopy(catCRbc['result'])
+##        currActions = list(catContent)
+##        catRelation = digraph.computeRankingByChoosingRelation(\
+##                            actionsSubset=currActions,\
+##                            rankingByChoosing=catRbc,\
+##                            Debug=False)
         
         #print(catRbc,catRelation)
-        splitCatRelation = [catRbc,catRelation]
+        splitCatRelation = [catCRbc['result']]
         chdir(cwd)
     foName = 'splitCatRelation-'+str(categID)+'.py'
     fo = open(foName,'wb')                                            
@@ -1093,10 +1093,10 @@ def _jobTaskKohler(categID):
         print(nc)
     ko = KohlerOrder(digraph)
     catCRbc = ko.computeRankingByChoosing()
-    catRelation = digraph.computeRankingByChoosingRelation(\
-                        rankingByChoosing=catCRbc['result'],\
-                        Debug=False)
-    splitCatRelation = [catCRbc['result'],catRelation]
+##    catRelation = digraph.computeRankingByChoosingRelation(\
+##                        rankingByChoosing=catCRbc['result'],\
+##                        Debug=False)
+    splitCatRelation = [catCRbc['result']]
     foName = 'splitCatRelation-'+str(categID)+'.py'
     fo = open(foName,'wb')                                            
     fo.write(dumps(splitCatRelation,-1))
@@ -1138,10 +1138,10 @@ def _jobTaskKohlerFusion(categID):
     fk = FusionDigraph(ko,kos)
     catCRbc = KohlerOrder.computeRankingByChoosing(fk)
     #catRbc = deepcopy(catCRbc['result'])
-    catRelation = digraph.computeRankingByChoosingRelation(\
-                        rankingByChoosing=catCRbc['result'],\
-                        Debug=False)
-    splitCatRelation = [catCRbc['result'],catRelation]
+##    catRelation = digraph.computeRankingByChoosingRelation(\
+##                        rankingByChoosing=catCRbc['result'],\
+##                        Debug=False)
+    splitCatRelation = [catCRbc['result']]
     foName = 'splitCatRelation-'+str(categID)+'.py'
     fo = open(foName,'wb')                                            
     fo.write(dumps(splitCatRelation,-1))
@@ -1348,19 +1348,19 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                         fi.close()
                         if Debug:
                             print(c,'catRbc',splitCatRelation[0])
-                            print(c,'catRelation',splitCatRelation[1])
+                            #print(c,'catRelation',splitCatRelation[1])
                         catRbc[c] = splitCatRelation[0]
-                        catRelation[c] = splitCatRelation[1]
+                        #catRelation[c] = splitCatRelation[1]
                     elif nc == 1:
                         if Debug:
                             print('singleton category %d : %d' % (c,nc))
                             print(catContent[c])
                         catRbc[c] = [((Max,catContent[c]),(Max,catContent[c]))]
-                        for x in catContent[c]:
-                            catRelation[c] = {str(x): {str(x): Med}}
+##                        for x in catContent[c]:
+##                            catRelation[c] = {str(x): {str(x): Med}}
                         if Debug:
                             print(c,'catRbc',catRbc[c])
-                            print(c,'catRelation',catRelation[c])
+                            #print(c,'catRelation',catRelation[c])
                     elif nc == 2:
                         if Debug:
 
@@ -1377,13 +1377,13 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                             catRbc[c] = [((Max,y),(Max,x))]
                         else:
                             catRbc[c] = [((Max,catContent[c]),(Max,catContent[c]))]
-                        catRelation[c] = qs.computeRankingByChoosingRelation(\
-                            actionsSubset=currActions,\
-                            rankingByChoosing=catRbc[c],\
-                            Debug=False)
+##                        catRelation[c] = qs.computeRankingByChoosingRelation(\
+##                            actionsSubset=currActions,\
+##                            rankingByChoosing=catRbc[c],\
+##                            Debug=False)
                         if Debug:
                             print(c,'catRbc',catRbc[c])
-                            print(c,'catRelation',catRelation[c])
+                            #print(c,'catRelation',catRelation[c])
                     
                 chdir(cwd)
                 self.runTimes['postThreading'] = time() - t0 
@@ -1410,13 +1410,15 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                         kos = KohlerOrder((~(-gt)))
                         fk = FusionDigraph(ko,kos)
                         catCRbc = KohlerOrder.computeRankingByChoosing(fk)
+                    else:
+                        print('Error: no valid Ranking-by-choosing rule !')
                     if Debug:
                         print(c,catCRbc)
                     catRbc[c] = deepcopy(catCRbc['result'])
-                    catRelation[c] = qs.computeRankingByChoosingRelation(\
-                        actionsSubset=currActions,\
-                        rankingByChoosing=catCRbc['result'],\
-                        Debug=False)
+##                    catRelation[c] = qs.computeRankingByChoosingRelation(\
+##                        actionsSubset=currActions,\
+##                        rankingByChoosing=catCRbc['result'],\
+##                        Debug=False)
             self.runTimes['withoutThreading'] = time() - t0
 
         self.name = 'qsrbc-'+qs.name
@@ -1670,30 +1672,30 @@ if __name__ == "__main__":
     from linearOrders import *
     from time import time
     
-    Threading=False
+    Threading=True
 
-    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                   numberOfActions=50)
-    t.saveXMCDA2('test')
+##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+##                                   numberOfActions=100)
+##    t.saveXMCDA2('test')
     #t = XMCDA2PerformanceTableau('uniSorting')
-    #t = XMCDA2PerformanceTableau('test')
-    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
-    t0 = time()
-    ko = KohlerOrder(g)
-    print(time()-t0)
-    #ko.showRelationTable()
-    t0 = time()
-    ar = KohlerOrder(CoDualDigraph(g))
-    print(time()-t0)
-    #ar.showRelationTable()
-    t0 = time()
-    koar = KohlerArrowRaynaudFusionDigraph(g,Threading=Threading)
-    print(time()-t0)
-    #koar.showRelationTable()
-    print(g.computeOrdinalCorrelation(ko))
-    print(g.computeOrdinalCorrelation(ar))
-    print(g.computeOrdinalCorrelation(koar))
-    koar.exportGraphViz('test')
+    t = XMCDA2PerformanceTableau('test')
+##    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
+##    t0 = time()
+##    ko = KohlerOrder(g)
+##    print(time()-t0)
+##    #ko.showRelationTable()
+##    t0 = time()
+##    ar = KohlerOrder(CoDualDigraph(g))
+##    print(time()-t0)
+##    #ar.showRelationTable()
+##    t0 = time()
+##    koar = KohlerArrowRaynaudFusionDigraph(g,Threading=Threading)
+##    print(time()-t0)
+##    #koar.showRelationTable()
+##    print(g.computeOrdinalCorrelation(ko))
+##    print(g.computeOrdinalCorrelation(ar))
+##    print(g.computeOrdinalCorrelation(koar))
+##    koar.exportGraphViz('test')
     
 ##    Threading=True
 ##
@@ -1709,16 +1711,17 @@ if __name__ == "__main__":
     t0 = time()
     qsfko = QuantilesRankingDigraph(t,limitingQuantiles,
                               strategy="optimistic",
-                              rankingRule="Test",
+                              rankingRule="RubisChoice",
                               LowerClosed=False,
                               Threading=Threading,
                               Debug=False)
     print('QR Exec. time:', time()-t0, 'sec.')
+    print(qsfko.__class__)
     #qsfko.showSorting()
     #qsko.exportSortingGraphViz(Debug=False)
     t0 = time()
     print(qsfko.runTimes)
-    print(g.computeOrdinalCorrelation(qsfko))
+    print(qsfko.computeOutrankingCorrelation())
     t0 = time()
     qsko = QuantilesRankingDigraph(t,limitingQuantiles,
                               strategy="optimistic",
@@ -1731,7 +1734,7 @@ if __name__ == "__main__":
     #qsko.exportSortingGraphViz(Debug=False)
     t0 = time()
     print(qsko.runTimes)
-    print(g.computeOrdinalCorrelation(qsko))
+    print(qsko.computeOutrankingCorrelation())
     
 ##    qsrbc = QuantilesRankingDigraph(t,limitingQuantiles,
 ##                              strategy="pessimistic",
