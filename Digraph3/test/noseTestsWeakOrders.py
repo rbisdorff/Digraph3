@@ -122,3 +122,28 @@ def testQuantilesRankingDigraphWithThreading():
     qsrbc.showOrderedRelationTable()
     QsRbcWeakOrdering.exportGraphViz(qsrbc,'test')
     print(g.computeOrdinalCorrelation(qsrbc))
+
+def testKohlerArrowRaynaudFusionDigraph():
+    print('===>>> test KohlerArrowRaynaudFusionDigraph class ---------')
+    from linearOrders import KohlerOrder
+    Threading=True
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                   numberOfActions=10)
+    t.saveXMCDA2('test')
+    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
+    t0 = time()
+    ko = KohlerOrder(g)
+    print(time()-t0)
+    ko.showRelationTable()
+    t0 = time()
+    ar = KohlerOrder(CoDualDigraph(g))
+    print(time()-t0)
+    ar.showRelationTable()
+    t0 = time()
+    koar = KohlerArrowRaynaudFusionDigraph(g,Threading=Threading)
+    print(time()-t0)
+    koar.showRelationTable()
+    print(g.computeOrdinalCorrelation(ko))
+    print(g.computeOrdinalCorrelation(ar))
+    print(g.computeOrdinalCorrelation(koar))
+    koar.exportGraphViz('test')
