@@ -448,7 +448,7 @@ class KohlerOrder(LinearOrder):
     instantiates the Kohler Order from
     a given bipolar-valued Digraph instance
     """
-    def __init__(self,other,coDual=True,Debug=False):
+    def __init__(self,other,coDual=False,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph following
