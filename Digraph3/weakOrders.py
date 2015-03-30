@@ -1091,8 +1091,7 @@ def _jobTaskKohler(categID):
     nc = digraph.order
     if Comments:
         print(nc)
-    # the Kohler rule is usually more efficient on the codual digraph
-    ko = KohlerOrder((~(-digraph)))
+    ko = KohlerOrder(digraph)
     catCRbc = ko.computeRankingByChoosing()
     catRelation = digraph.computeRankingByChoosingRelation(\
                         rankingByChoosing=catCRbc['result'],\
@@ -1398,18 +1397,12 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                     print(c, len(catContent[c]))
                 if len(catContent[c]) > 0:
                     currActions = list(catContent[c])
-##                    for x in currActions:
-##                        for y in currActions:
-##                            qs.relation[x][y] = qs.relationOrig[x][y]
                     pt = PartialPerformanceTableau(perfTab,currActions)
                     gt = BipolarOutrankingDigraph(pt)
                     if rankingRule == "RubisChoice":
                          rbc = RankingByChoosingDigraph(gt,CoDual=True,Threading=False)
-                         catCRbc = rbc.computeRankingByChoosing()
-##                        catCRbc = qs.computeRankingByChoosing(currActions,CoDual=True)
+                         catCRbc = rbc.computeRankingByChoosing()                      
                     elif rankingRule == "KohlerRule":
-                        #pt = PartialPerformanceTableau(perfTab,currActions)
-                        #gt = BipolarOutrankingDigraph(pt)
                         ko = KohlerOrder(gt)
                         catCRbc = ko.computeRankingByChoosing()
                     elif rankingRule == "Test":
@@ -1420,7 +1413,6 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                     if Debug:
                         print(c,catCRbc)
                     catRbc[c] = deepcopy(catCRbc['result'])
-                    currActions = list(catContent[c])
                     catRelation[c] = qs.computeRankingByChoosingRelation(\
                         actionsSubset=currActions,\
                         rankingByChoosing=catCRbc['result'],\
@@ -1685,23 +1677,23 @@ if __name__ == "__main__":
     t.saveXMCDA2('test')
     #t = XMCDA2PerformanceTableau('uniSorting')
     #t = XMCDA2PerformanceTableau('test')
-##    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
-##    t0 = time()
-##    ko = KohlerOrder(g)
-##    print(time()-t0)
-##    #ko.showRelationTable()
-##    t0 = time()
-##    ar = KohlerOrder(CoDualDigraph(g))
-##    print(time()-t0)
-##    #ar.showRelationTable()
-##    t0 = time()
-##    koar = KohlerArrowRaynaudFusionDigraph(g,Threading=Threading)
-##    print(time()-t0)
-##    #koar.showRelationTable()
-##    print(g.computeOrdinalCorrelation(ko))
-##    print(g.computeOrdinalCorrelation(ar))
-##    print(g.computeOrdinalCorrelation(koar))
-##    koar.exportGraphViz('test')
+    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
+    t0 = time()
+    ko = KohlerOrder(g)
+    print(time()-t0)
+    #ko.showRelationTable()
+    t0 = time()
+    ar = KohlerOrder(CoDualDigraph(g))
+    print(time()-t0)
+    #ar.showRelationTable()
+    t0 = time()
+    koar = KohlerArrowRaynaudFusionDigraph(g,Threading=Threading)
+    print(time()-t0)
+    #koar.showRelationTable()
+    print(g.computeOrdinalCorrelation(ko))
+    print(g.computeOrdinalCorrelation(ar))
+    print(g.computeOrdinalCorrelation(koar))
+    koar.exportGraphViz('test')
     
 ##    Threading=True
 ##
@@ -1710,7 +1702,7 @@ if __name__ == "__main__":
 ##    t.saveXMCDA2('test')
 ##    #t = XMCDA2PerformanceTableau('uniSorting')
 ##    #t = XMCDA2PerformanceTableau('test')
-    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
+##    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
     limitingQuantiles = len(t.actions) // 3
     #limitingQuantiles = 7
     #qs = QuantilesSortingDigraph(t,g.order)
