@@ -3679,7 +3679,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                     hasSymmetricThresholds=hasSymmetricThresholds)
         ##
         else:  # parallel computation
-            from copy import deepcopy
+            from copy import copy as deepcopy
             from pickle import dumps, loads, load
             from multiprocessing import Process, Lock,\
                                         active_children, cpu_count
@@ -3736,7 +3736,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             print('Threading ...')
             from tempfile import TemporaryDirectory
             with TemporaryDirectory() as tempDirName:
-                from copy import deepcopy
+                from copy import copy as deepcopy
                 selfDp = deepcopy(self)
                 selfFileName = tempDirName +'/dumpSelf.py'
                 if Debug:
@@ -6834,7 +6834,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                  Threading=False,
                  Debug=False,):
         # getting module ressources and setting the random seed
-        from copy import deepcopy
+        from copy import copy as deepcopy
         # getting performance tableau
         if argPerfTab == None:
             perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
@@ -6916,7 +6916,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         """
         if Debug:
             print(oldRelation,sumWeights)
-        from copy import deepcopy
+        from copy import copy as deepcopy
         
         oldMax = Decimal('1')
         oldMin = Decimal('-1')
@@ -6972,7 +6972,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         Renders the pairwise CLT likelihood of the at least as good as relation
         neglecting all considerable large performance differences polarisations.
         """
-        from copy import deepcopy
+        from copy import copy as deepcopy
         from decimal import Decimal
         from math import sqrt
         from random import gauss
@@ -7148,7 +7148,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 ##                 Threading=False,
 ##                 Debug=False,):
 ##
-##        from copy import deepcopy
+##        from copy import copy as deepcopy
 ##
 ##        betaParameter = None
 ##        if distribution == "beta(2,2)":
@@ -7204,7 +7204,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                  Debug=False,
                  SeeSampleCounter=False):
         # getting module ressources and setting the random seed
-        from copy import deepcopy
+        from copy import copy as deepcopy
         if distribution == 'extTriangular':
             from randomNumbers import ExtendedTriangularRandomVariable
         else:

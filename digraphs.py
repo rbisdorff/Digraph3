@@ -325,7 +325,7 @@ class Digraph(object):
         Convert a Digraph instance to a Graph instance.
         """
         from graphs import Graph
-        from copy import deepcopy
+        from copy import copy as deepcopy
         g = Graph()
         g.name = deepcopy(self.name)
         vertices = deepcopy(self.actions)
@@ -427,7 +427,7 @@ class Digraph(object):
         If self.rankingByChoosing['CoDual'] is True, the ranking-by-last-chossing 
         was computed on the codual of self.
         """
-        from copy import deepcopy
+        from copy import copy as deepcopy
         currG = deepcopy(self)
         remainingActions = [x for x in self.actions]
         rankingByLastChoosing = []
@@ -514,7 +514,7 @@ class Digraph(object):
 
         If self.rankingByChoosing['CoDual'] is True, the ranking-by-choosing was computed on the codual of self.
         """
-        from copy import deepcopy
+        from copy import copy as deepcopy
         currG = deepcopy(self)
         if actionsSubset == None:
             remainingActions = [x for x in self.actions]
@@ -685,7 +685,7 @@ class Digraph(object):
         """
         if Debug:
             print("===>>>> debugging computeByBestChoosing() digraphs methods")
-        from copy import deepcopy
+        from copy import copy as deepcopy
         currG = deepcopy(self)
         remainingActions = [x for x in self.actions]
         rankingByBestChoosing = []
@@ -816,7 +816,7 @@ class Digraph(object):
             CoDual = False (default)/True
             Limited = proportion (in [0,1]) * (max - med) valuationdomain
         """
-        from copy import deepcopy
+        from copy import copy as deepcopy
         from time import time
         if Debug:
             Comments=True
@@ -901,7 +901,7 @@ class Digraph(object):
         Returns the highest correlated rankingByChoosing with self or 
         codual of self, depending on the CoDual flagg.
         """
-        from copy import deepcopy
+        from copy import copy as deepcopy
         
         if Debug:
             Comments=True
@@ -1004,7 +1004,7 @@ class Digraph(object):
         Renders the best choice recommendation after eliminating
         all odd chordless circuits with a minimal cut of the valuation.
         """
-        from copy import deepcopy
+        from copy import copy as deepcopy
         self.optimalRankingByChoosing(CoDual=CoDual,Comments=Comments,Debug=Debug,Limited=Limited)
         #if Comments:
         #    self.showRankingByChoosing()
@@ -1059,7 +1059,7 @@ class Digraph(object):
         Renders the bipolar-valued relation obtained from
         the self.rankingByChoosing result.
         """
-        from copy import deepcopy
+        from copy import copy as deepcopy
         if rankingByChoosing==None:
             try:
                 rankingByChoosing = self.rankingByChoosing['result']
@@ -1510,7 +1510,7 @@ class Digraph(object):
              is by convention 0.0 at determination level 0.0 .
 
         """
-        from copy import deepcopy
+        from copy import copy as deepcopy
         g = deepcopy(self)
         g.recodeValuation(-1,1)
         actions = [x for x in g.actions]
@@ -1616,7 +1616,7 @@ class Digraph(object):
     ##          is by convention 0.0 at determination level 0.0 .
 
     ##     """
-    ##     from copy import deepcopy
+    ##     from copy import copy as deepcopy
     ##     g = deepcopy(self)
     ##     g.recodeValuation(-1,1)
     ##     if MedianCut:
@@ -4775,7 +4775,7 @@ class Digraph(object):
             Default values gives a normalized valuation domain
 
         """
-        from copy import deepcopy
+        from copy import copy as deepcopy
         oldMax = self.valuationdomain['max']
         oldMin = self.valuationdomain['min']
         oldMed = self.valuationdomain['med']
@@ -5187,7 +5187,7 @@ class Digraph(object):
                 Dual=True,Converse=False,Diagonal=False,Debug=False):
         """Persistent storage of a Digraph class instance in the form of
             a csv file. """
-        from copy import deepcopy
+        from copy import copy as deepcopy
         import csv
         com = ''
         if Normalized:
@@ -7857,7 +7857,7 @@ class CoDualDigraph(Digraph):
     """
 
     def __init__(self,other,Debug=False):
-        from copy import deepcopy
+        from copy import copy as deepcopy
         self.__class__ = other.__class__
         self.name = 'codual-'+other.name
         try:
@@ -7902,7 +7902,7 @@ class CoverDigraph(Digraph):
     """
 
     def __init__(self,other, Debug=False):
-        from copy import deepcopy
+        from copy import copy as deepcopy
         self.__class__ = other.__class__
         self.name = 'cover-'+other.name
         try:
@@ -7961,7 +7961,7 @@ class ConverseDigraph(Digraph):
     """
 
     def __init__(self,other):
-        from copy import deepcopy
+        from copy import copy as deepcopy
         self.__class__ = other.__class__
         self.name = 'converse-'+other.name
         try:
@@ -8001,7 +8001,7 @@ class FusionDigraph(Digraph):
     """
 
     def __init__(self,dg1,dg2,operator="o-min"):
-        from copy import deepcopy
+        from copy import copy as deepcopy
         self.name = 'fusion-'+dg1.name+'-'+dg2.name
 #        try:
 #            self.description = deepcopy(dg1.description)
@@ -8043,7 +8043,7 @@ class FusionDigraph(Digraph):
 ##    """
 ##    def __init__(self,otherIn,CoDual=False,
 ##                 MedianCut=False,Debug=False,Iterate=False):
-##        from copy import deepcopy
+##        from copy import copy as deepcopy
 ##        other = deepcopy(otherIn)
 ##        self.name = 'rbc-'+other.name
 ##        self.actions = other.actions
@@ -8144,7 +8144,7 @@ class Preorder(Digraph):
     """
 
     def __init__(self,other,direction="best"):
-        from copy import deepcopy
+        from copy import copy as deepcopy
         self.__class__ = other.__class__
         self.name = 'preorder-'+other.name
         try:
@@ -8242,7 +8242,7 @@ class EquivalenceDigraph(Digraph):
     """
 
     def __init__(self,d1,d2,Debug = False):
-        from copy import deepcopy
+        from copy import copy as deepcopy
         self.name = 'EquivDigraph'
         if d1.order != d2.order:
             print("EquivDigraph init ERROR:\n the input digraphs are not of the same order !")
@@ -9531,7 +9531,7 @@ class DualDigraph(Digraph):
 
     """
     def __init__(self,other):
-        from copy import deepcopy
+        from copy import copy as deepcopy
         self.name = 'dual_' + str(other.name)
         try:
             self.description = deepcopy(other.description)
@@ -9892,7 +9892,7 @@ class CoceDigraph(Digraph):
     """
     def __init__(self,digraph=None,Cpp=False,Piping=False,Comments=False,Debug=False):
         import random,sys,array
-        from copy import deepcopy
+        from copy import copy as deepcopy
         from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
 
         ## if comment == None:
@@ -9941,7 +9941,7 @@ class CoceDigraph(Digraph):
         and polarisedDigraph is the resulting digraph instance.
         Renders (None,None) if no chordless odd circuit is detected.
         """
-        from copy import deepcopy
+        from copy import copy as deepcopy
         from time import time
         if Debug:
             Comments=True

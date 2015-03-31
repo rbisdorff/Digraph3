@@ -50,7 +50,7 @@ class RandomDigraph(Digraph):
         elif arcProbability < Decimal("0.0"):
             print('Error: arc probability too low !!')
         else:
-            import copy
+            from copy import copy as deepcopy
             import random
             from digraphs import EmptyDigraph
             if seed != None:
@@ -60,8 +60,8 @@ class RandomDigraph(Digraph):
             else:
                 domain = (0.0,1.0)
             g = EmptyDigraph(order=order, valuationdomain=domain)
-            self.actions = copy.deepcopy(g.actions)
-            self.valuationdomain = copy.deepcopy(g.valuationdomain)
+            self.actions = deepcopy(g.actions)
+            self.valuationdomain = deepcopy(g.valuationdomain)
             self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
             self.relation = {}
             for x in g.actions:

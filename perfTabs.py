@@ -2619,7 +2619,7 @@ class PartialPerformanceTableau(PerformanceTableau):
     Constructor for partial performance tableaux.
     """
     def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None):
-        from copy import deepcopy
+        from copy import copy as deepcopy
         
         self.name = 'partial-'+inPerfTab.name
 

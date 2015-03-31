@@ -117,7 +117,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
         """
 
-        from copy import deepcopy
+        from copy import copy as deepcopy
         from decimal import Decimal
 
         # import the performance tableau
@@ -322,7 +322,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                     hasSymmetricThresholds=hasSymmetricThresholds)
         ##
         else:  # parallel computation
-            from copy import deepcopy
+            from copy import copy as deepcopy
             from pickle import dumps, loads, load
             from multiprocessing import Process, Lock,\
                                         active_children, cpu_count
@@ -379,7 +379,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             print('Threading ...')
             from tempfile import TemporaryDirectory
             with TemporaryDirectory() as tempDirName:
-                from copy import deepcopy
+                from copy import copy as deepcopy
                 selfDp = deepcopy(self)
                 selfFileName = tempDirName +'/dumpSelf.py'
                 if Debug:
@@ -706,7 +706,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         filtering from SortingDigraph instances.
         """
         import os
-        from copy import deepcopy
+        from copy import copy as deepcopy
 
         def _safeName(t0):
             try:
@@ -1208,7 +1208,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             Default values gives a normalized valuation domain
 
         """
-        from copy import deepcopy
+        from copy import copy as deepcopy
         oldMax = self.valuationdomain['max']
         oldMin = self.valuationdomain['min']
         oldMed = self.valuationdomain['med']
@@ -1303,7 +1303,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 
         """
 
-        from copy import deepcopy
+        from copy import copy as deepcopy
         from decimal import Decimal
 
         # import the performance tableau
@@ -1835,7 +1835,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         Renders the list of limiting quantiles on criteria g
         """
         from math import floor
-        from copy import deepcopy
+        from copy import copy as deepcopy
         gValues = []
         for x in self.actionsOrig:
             if Debug:
@@ -2064,7 +2064,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         
         """
         #from string import replace
-        from copy import deepcopy
+        from copy import copy as deepcopy
         categoryContent = self.computeCategoryContents()
         categoryKeys = self.orderedCategoryKeys(Reverse=Reverse)
         try:
@@ -2255,7 +2255,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
 
         """
 
-        from copy import deepcopy
+        from copy import copy as deepcopy
         from decimal import Decimal
 
         # import the performance tableau
@@ -2684,7 +2684,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
         Renders the list of limiting quantiles on criteria g
         """
         from math import floor
-        from copy import deepcopy
+        from copy import copy as deepcopy
         gValues = []
         for x in self.actionsOrig:
             if Debug:
@@ -2771,7 +2771,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
         
         """
         #from string import replace
-        from copy import deepcopy
+        from copy import copy as deepcopy
         categoryContent = self.computeCategoryContents()
         categoryKeys = self.orderedCategoryKeys(Reverse=Reverse)
         try:
@@ -2871,7 +2871,7 @@ class _OptimalHarmonicQuantilesSortingDigraph(QuantilesSortingDigraph):
                  Threading=False,
                  Debug=False):
         
-        from copy import deepcopy
+        from copy import copy as deepcopy
         if argPerfTab != None:
             t = argPerfTab
         else:
