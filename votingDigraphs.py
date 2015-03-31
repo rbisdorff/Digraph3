@@ -382,7 +382,7 @@ class LinearVotingProfile(VotingProfile):
         """
         compute the instant runoff winner from a linear voting ballot
         """
-        import copy
+        from copy import copy
         from decimal import Decimal
         voters = [x for x in self.voters]
         totalWeight = Decimal("0.0")
@@ -393,8 +393,8 @@ class LinearVotingProfile(VotingProfile):
             print('Total number of votes = ', totalWeight)
             print('Half of the Votes = ', halfWeight)
         candidatesList = [x for x in self.candidates]
-        remainingCandidates = copy.copy(candidatesList)
-        remainingLinearBallot = copy.deepcopy(self.linearBallot)
+        remainingCandidates = copy(candidatesList)
+        remainingLinearBallot = copy(self.linearBallot)
         stage = 1
         while len(remainingCandidates) > 1:
             uninominalVotes = self.computeUninominalVotes(remainingCandidates,remainingLinearBallot)
@@ -808,7 +808,7 @@ class CondorcetDigraph(Digraph):
     
     """
     def __init__(self,argVotingProfile=None,approvalVoting=False,coalition=None,majorityMargins=False,hasIntegerValuation=False):
-        import copy
+        from copy import copy
         if isinstance(argVotingProfile, (VotingProfile,ApprovalVotingProfile)):
             votingProfile = argVotingProfile
         else:
@@ -819,19 +819,19 @@ class CondorcetDigraph(Digraph):
             else:
                 votingProfile = VotingProfile(argVotingProfile)
         self.name = 'rel_' + votingProfile.name
-        self.actions = copy.deepcopy(votingProfile.candidates)
+        self.actions = copy(votingProfile.candidates)
         if coalition == None:
-            voters = copy.deepcopy(votingProfile.voters)
+            voters = copy(votingProfile.voters)
         else:
             voters = {}
             for g in coalition:
                 voters[g] = votingProfile.voters[g]
         self.voters = voters
         if isinstance(votingProfile, (VotingProfile)):
-            self.ballot = copy.deepcopy(votingProfile.ballot)
+            self.ballot = copy(votingProfile.ballot)
             self.relation = self.constructBallotRelation(hasIntegerValuation)
         elif isinstance(votingProfile, (ApprovalVotingProfile)):
-            self.approvalBallot = copy.deepcopy(votingProfile.approvalBallot)
+            self.approvalBallot = copy(votingProfile.approvalBallot)
             if majorityMargins:
                 self.relation = self.constructMajorityMarginsRelation(hasIntegerValuation)
             else:
