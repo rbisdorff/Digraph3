@@ -571,7 +571,7 @@ class BoostedKohlerOrder(KohlerOrder,QuantilesSortingDigraph):
                  nbrCores=None,
                  chunkSize=1,
                  Comments=True,
-                 Debug=True):
+                 Debug=False):
         
         from copy import copy as deepcopy
         from multiprocessing import cpu_count
