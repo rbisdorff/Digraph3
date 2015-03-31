@@ -150,7 +150,7 @@ class WeakOrder(Digraph):
         export GraphViz dot file for weak order (Hasse diagram) drawing filtering.
         """
         import os
-        from copy import deepcopy
+        from copy import copy as deepcopy
 
             
         def _safeName(t0):
@@ -278,7 +278,7 @@ class KohlerArrowRaynaudFusionDigraph(WeakOrder):
                  Threading=True,
                  Debug=False):
         
-        from copy import deepcopy
+        from copy import copy as deepcopy
         from pickle import dumps, loads, load
         from linearOrders import KohlerOrder
         self.Debug=Debug
@@ -443,7 +443,7 @@ class RankingByChoosingDigraph(WeakOrder):
                  CppAgrum=False,
                  Threading=True):
         
-        from copy import deepcopy
+        from copy import copy as deepcopy
         from pickle import dumps, loads, load
 
         self.CoDual=CoDual
@@ -585,7 +585,7 @@ class RankingByBestChoosingDigraph(RankingByChoosingDigraph):
     Specialization of abstract WeakOrder class for computing a ranking by best-choosing.
     """
     def __init__(self,digraph,Normalized=True,CoDual=False,Debug=False):
-        from copy import deepcopy
+        from copy import copy as deepcopy
         digraphName = 'ranking-by-best'+digraph.name
         self.name = deepcopy(digraphName)
         self.actions = deepcopy(digraph.actions)
@@ -612,7 +612,7 @@ class RankingByLastChoosingDigraph(RankingByChoosingDigraph):
     Specialization of abstract WeakOrder class for computing a ranking by rejecting.
     """
     def __init__(self,digraph,Normalized=True,CoDual=False,Debug=False):
-        from copy import deepcopy
+        from copy import copy as deepcopy
         digraphName = 'ranking-by-last'+digraph.name
         self.name = deepcopy(digraphName)
         self.actions = deepcopy(digraph.actions)
@@ -639,7 +639,7 @@ class RankingByPrudentChoosingDigraph(RankingByChoosingDigraph):
     Specialization for ranking-by-rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to 20% of the valuation domain maximum (1.0).
     """
     def __init__(self,digraph,CoDual=False,Normalized=True,Odd=True,Limited=0.2,Comments=False,Debug=False,SplitCorrelation=True):
-        from copy import deepcopy
+        from copy import copy as deepcopy
         from time import time
         if Comments:          
             t0 = time()
@@ -751,7 +751,7 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
                  plotFileName=None,\
                  Threading=True,\
                  Debug=False):
-        from copy import deepcopy
+        from copy import copy as deepcopy
         from linearOrders import PrincipalOrder
         from pickle import dumps, loads, load
 
@@ -995,7 +995,7 @@ def _jobTaskRubis(categID):
     from tempfile import TemporaryDirectory
     from os import getcwd, chdir
     from pickle import dumps, loads, load
-    from copy import deepcopy
+    from copy import copy as deepcopy
     from outrankingDigraphs import BipolarOutrankingDigraph
     #from linearOrders import RankedPairsOrder, KohlerOrder
     from weakOrders import PrincipalInOutDegreesOrdering
@@ -1076,7 +1076,7 @@ def _jobTaskKohler(categID):
           Kohler's ranking rule.
     """
     from pickle import dumps, loads, load
-    from copy import deepcopy
+    from copy import copy as deepcopy
     from outrankingDigraphs import BipolarOutrankingDigraph
     from linearOrders import KohlerOrder
     from weakOrders import PrincipalInOutDegreesOrdering
@@ -1118,7 +1118,7 @@ def _jobTaskKohlerFusion(categID):
           
     """
     from pickle import dumps, loads, load
-    from copy import deepcopy
+    from copy import copy as deepcopy
     from outrankingDigraphs import BipolarOutrankingDigraph
     from linearOrders import KohlerOrder
     from weakOrders import PrincipalInOutDegreesOrdering
@@ -1192,7 +1192,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                  Comments=True,
                  Debug=False):
         
-        from copy import deepcopy
+        from copy import copy as deepcopy
         from sortingDigraphs import QuantilesSortingDigraph
         from linearOrders import KohlerOrder
         from multiprocessing import Pool, cpu_count
