@@ -1043,23 +1043,26 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
 
-    Threading = True
+    Threading = False
     
 ##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
 ##                                   numberOfActions=200)
 ##    t.saveXMCDA2('test')
-    #t = XMCDA2PerformanceTableau('uniSorting')
-    t = XMCDA2PerformanceTableau('test')
+    t = XMCDA2PerformanceTableau('uniSorting')
+    #t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
-    bko = BoostedKohlerOrder(t,Threading=Threading,Debug=False)
-    qr = QuantilesRankingDigraph(t,100,Threading=Threading)
-    #bko.showSorting()
+    ko = KohlerOrder(g)
+    bko = BoostedKohlerOrder(t,strategy="pessimistic",Threading=Threading,Debug=False)
+    #qr = QuantilesRankingDigraph(t,100,Threading=Threading)
+    bko.showSorting()
     #bko.showQuantileOrdering()
     #bko.showHTMLRelationTable(actionsList=bko.computeOrder())
     print(bko.runTimes)
     print(g.computeOrdinalCorrelation(bko))
-    print(qr.runTimes)
-    print(g.computeOrdinalCorrelation(qr))
+    #print(qr.runTimes)
+    #print(g.computeOrdinalCorrelation(qr))
+    print(ko.computeOrdinalCorrelation(bko))
+    QuantilesRankingDigraph.exportSortingGraphViz(bko)
     
     ## t = RandomRankPerformanceTableau(numberOfActions=20)
     ## t.saveXMCDA2('testRP')
