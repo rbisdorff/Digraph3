@@ -131,6 +131,13 @@ def testRandomSpanningForest():
     print(spt.dfs)
     spt.exportGraphViz()
 
+def testRandomSpanningTree():
+    print('==>> Testing RandomSpanningTree class instantiation')
+    p = RandomGraph(order=10,edgeProbability=0.5,seed=100)
+    ust = RandomSpanningTree(p,seed=1)
+    print(ust.dfs)
+    ust.exportGraphViz(withSpanningTree=True)
+
 def testRandomGraphsModels():
     print('==>> Testing random graph models')
     c = CycleGraph()

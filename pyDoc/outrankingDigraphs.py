@@ -3213,12 +3213,12 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
 class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     """
+    Specialization of the standard OutrankingDigraph class for generating classical Electre III outranking digraphs (with vetoes and no counter-vetoes).
+
     Parameters:
         | performanceTableau (fileName of valid py code)
         | optional, coalition (sublist of criteria)
 
-    Specialization of the standard OutrankingDigraph class for generating
-    bipolar uniform-valued outranking digraphs.
 
     """
     def __init__(self,argPerfTab=None,coalition=None,hasNoVeto=False):
@@ -3764,10 +3764,11 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     print('InitialSplit, actions2Split', InitialSplit, actions2Split)
             
                 nit = n//nbrCores
+                nbrOfJobs = nbrCores
                 if nit*nbrCores < n:
-                    nbrOfJobs = nbrCores + 1
-                else:
-                    nbrOfJobs = nbrCores
+                    nit += 1
+                while nit*(nbrOfJobs-1) >= n:
+                    nbrOfJobs -= 1
                 if Debug:
                     print('nbr of actions to split',n)
                     print('nbr of jobs = ',nbrOfJobs)    
@@ -6811,12 +6812,11 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     that is outranking without veto and counterveto.
 
     By default, each criterion i' significance weight is supposed to
-    be a triangular random variables of mode w_i in the range 0 to 2*w_i.
+    be a triangular random variable of mode w_i in the range 0 to 2*w_i.
 
     *Parameters*:
 
-        * argPerfTab: PerformanceTableau instance or the name of a stored one.
-          If None, a random instance is generated.
+        * argPerfTab: PerformanceTableau instance or the name (without extension) of a stored one. If None, a random instance is generated.
         * distribution: {triangular|uniform|beta}, probability distribution used for generating random weights
         * betaParameter: a = b (default = 2)
         * confidence: required likelihood (in %) of the outranking relation
@@ -6965,7 +6965,9 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         else:
             return 0.5 + 0.5*erf(z)
     
-    def computeCLTLikelihoods(self,distribution="triangular",betaParameter=None,Threading=False,Debug=False):
+    def computeCLTLikelihoods(self,distribution="triangular",
+                              betaParameter=None,
+                              Threading=False,Debug=False):
         """
         Renders the pairwise CLT likelihood of the at least as good as relation
         neglecting all considerable large performance differences polarisations.
