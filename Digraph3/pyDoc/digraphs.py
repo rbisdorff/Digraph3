@@ -64,6 +64,17 @@ import itertools as IT
 import collections
 
 def flatten(iterable, ltypes=collections.Iterable):
+    """
+    Flattens a list of lists into a flat list.
+
+    Main usage:
+    
+    >>> listOfLists = [[1,2],[3],[4]]
+    >>> [x for x in flatten(listOfLists)]
+    [1,2,3,4]
+    
+    """
+    
     remainder = iter(iterable)
     while True:
         first = next(remainder)
@@ -209,9 +220,10 @@ class Digraph(object):
     """
     def __init__(self,file=None,order=7):
         import digraphs,sys,copy
+        from randomDigraphs import RandomValuationDigraph
         from decimal import Decimal
         if file == None:
-            g = digraphs.RandomValuationDigraph(order=order)
+            g = RandomValuationDigraph(order=order)
             self.name = g.name
             self.actions = copy.deepcopy(g.actions)
             self.order = len(self.actions)
@@ -316,7 +328,13 @@ class Digraph(object):
         from copy import deepcopy
         g = Graph()
         g.name = deepcopy(self.name)
-        g.vertices = deepcopy(self.actions)
+        vertices = deepcopy(self.actions)
+        if type(self.actions) == list:
+            g.vertices = {}
+            for x in self.actions:
+                g.vertices[x] = {'name': x, 'shortName': x}
+        else:
+            vertices = deepcopy(self.actions)    
         g.order = len(g.vertices)
         g.valuationDomain = valuationDomain
         gMin = valuationDomain['min']
@@ -5575,14 +5593,14 @@ class Digraph(object):
         Dummy for showCircuits().
         """
         Digraph.showCircuits(self)
-        print('*---- Chordless circuits ----*')
-        try:
-            for (circList,circSet) in self.circuitsList:
-                deg = self.circuitMinCredibility(circList)
-                print(circList, ', credibility :', deg)
-            print('%d circuits.' % (len(self.circuitsList)))
-        except:
-            print('No circuits computed. Run computeChordlessCircuits()!')
+##        print('*---- Chordless circuits ----*')
+##        try:
+##            for (circList,circSet) in self.circuitsList:
+##                deg = self.circuitMinCredibility(circList)
+##                print(circList, ', credibility :', deg)
+##            print('%d circuits.' % (len(self.circuitsList)))
+##        except:
+##            print('No circuits computed. Run computeChordlessCircuits()!')
 
     def minimalValuationLevelForCircuitsElimination(self,Odd=True,Debug=False,Comments=False):
         """
@@ -9133,7 +9151,8 @@ class GridDigraph(Digraph):
 
     """
 
-    def __init__(self,n=5,m=5,valuationdomain = {'min':-1.0,'max':1.0},hasRandomOrientation=False,hasMedianSplitOrientation=False):
+    def __init__(self,n=5,m=5,valuationdomain = {'min':-1.0,'max':1.0},
+                 hasRandomOrientation=False,hasMedianSplitOrientation=False):
         import sys,array,copy
         self.name = 'grid-'+str(n)+'-'+str(m)
         self.n = n

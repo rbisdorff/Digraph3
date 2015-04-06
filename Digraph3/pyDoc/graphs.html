@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>graphs</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/graphs.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/graphs.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/graphs.py">/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/graphs.py</a></font></td></tr></table>
     <p><tt>#&nbsp;-*-&nbsp;coding:utf-8&nbsp;-*-<br>
 #&nbsp;&nbsp;Python&nbsp;3&nbsp;graphs.py&nbsp;module<br>
 #&nbsp;&nbsp;Copyright&nbsp;(C)&nbsp;&nbsp;2011-2013&nbsp;Raymond&nbsp;Bisdorff<br>
@@ -27,14 +27,28 @@
 <dt><font face="helvetica, arial"><a href="graphs.html#Graph">Graph</a>
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="graphs.html#GridGraph">GridGraph</a>
+<dt><font face="helvetica, arial"><a href="graphs.html#CompleteGraph">CompleteGraph</a>
+</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#CycleGraph">CycleGraph</a>
+</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#DualGraph">DualGraph</a>
+</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#EmptyGraph">EmptyGraph</a>
+</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#GridGraph">GridGraph</a>
 </font></dt><dt><font face="helvetica, arial"><a href="graphs.html#IsingModel">IsingModel</a>
 </font></dt><dt><font face="helvetica, arial"><a href="graphs.html#MISModel">MISModel</a>
 </font></dt><dt><font face="helvetica, arial"><a href="graphs.html#MetropolisChain">MetropolisChain</a>
 </font></dt><dt><font face="helvetica, arial"><a href="graphs.html#Q_Coloring">Q_Coloring</a>
+</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#RandomFixedDegreeSequenceGraph">RandomFixedDegreeSequenceGraph</a>
+</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#RandomFixedSizeGraph">RandomFixedSizeGraph</a>
 </font></dt><dt><font face="helvetica, arial"><a href="graphs.html#RandomGraph">RandomGraph</a>
+</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#RandomRegularGraph">RandomRegularGraph</a>
 </font></dt><dt><font face="helvetica, arial"><a href="graphs.html#RandomTree">RandomTree</a>
-</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#TriangularGraph">TriangularGraph</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="graphs.html#BestDeterminedSpanningForest">BestDeterminedSpanningForest</a>
+</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#RandomSpanningForest">RandomSpanningForest</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="graphs.html#RandomValuationGraph">RandomValuationGraph</a>
+</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#TriangulatedGrid">TriangulatedGrid</a>
 </font></dt></dl>
 </dd>
 </dl>
@@ -44,12 +58,513 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BestDeterminedSpanningForest">class <strong>BestDeterminedSpanningForest</strong></a>(<a href="graphs.html#RandomTree">RandomTree</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Constructing&nbsp;the&nbsp;most&nbsp;determined&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest&nbsp;if&nbsp;not&nbsp;connected)<br>
+using&nbsp;Kruskal's&nbsp;greedy&nbsp;algorithm&nbsp;on&nbsp;the&nbsp;dual&nbsp;valuation.<br>
+&nbsp;<br>
+Example&nbsp;Python&nbsp;session:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#RandomValuationGraph">RandomValuationGraph</a>(seed=2)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#BestDeterminedSpanningForest-showShort">showShort</a>()<br>
+&nbsp;&nbsp;&nbsp;*----&nbsp;short&nbsp;description&nbsp;of&nbsp;the&nbsp;graph&nbsp;----*<br>
+&nbsp;&nbsp;&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;'randomGraph'<br>
+&nbsp;&nbsp;&nbsp;Vertices&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;['v1',&nbsp;'v2',&nbsp;'v3',&nbsp;'v4',&nbsp;'v5']<br>
+&nbsp;&nbsp;&nbsp;Valuation&nbsp;domain&nbsp;:&nbsp;&nbsp;{'med':&nbsp;Decimal('0'),&nbsp;'min':&nbsp;Decimal('-1'),&nbsp;'max':&nbsp;Decimal('1')}<br>
+&nbsp;&nbsp;&nbsp;Gamma&nbsp;function&nbsp;&nbsp;&nbsp;:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;v1&nbsp;-&gt;&nbsp;['v2',&nbsp;'v3']<br>
+&nbsp;&nbsp;&nbsp;v2&nbsp;-&gt;&nbsp;['v4',&nbsp;'v1',&nbsp;'v5',&nbsp;'v3']<br>
+&nbsp;&nbsp;&nbsp;v3&nbsp;-&gt;&nbsp;['v1',&nbsp;'v5',&nbsp;'v2']<br>
+&nbsp;&nbsp;&nbsp;v4&nbsp;-&gt;&nbsp;['v5',&nbsp;'v2']<br>
+&nbsp;&nbsp;&nbsp;v5&nbsp;-&gt;&nbsp;['v4',&nbsp;'v2',&nbsp;'v3']<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;mt&nbsp;=&nbsp;<a href="#BestDeterminedSpanningForest">BestDeterminedSpanningForest</a>(g)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;mt.<a href="#BestDeterminedSpanningForest-exportGraphViz">exportGraphViz</a>('spanningTree',withSpanningTree=True)<br>
+&nbsp;&nbsp;&nbsp;*----&nbsp;exporting&nbsp;a&nbsp;dot&nbsp;file&nbsp;for&nbsp;GraphViz&nbsp;tools&nbsp;---------*<br>
+&nbsp;&nbsp;&nbsp;Exporting&nbsp;to&nbsp;spanningTree.dot<br>
+&nbsp;&nbsp;&nbsp;[['v4',&nbsp;'v2',&nbsp;'v1',&nbsp;'v3',&nbsp;'v1',&nbsp;'v2',&nbsp;'v5',&nbsp;'v2',&nbsp;'v4']]<br>
+&nbsp;&nbsp;&nbsp;neato&nbsp;-Tpng&nbsp;spanningTree.dot&nbsp;-o&nbsp;spanningTree.png<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;spanningTree.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;7-cycle&nbsp;instance<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#BestDeterminedSpanningForest">BestDeterminedSpanningForest</a></dd>
+<dd><a href="graphs.html#RandomTree">RandomTree</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="BestDeterminedSpanningForest-__init__"><strong>__init__</strong></a>(self, g, seed=None, Debug=False)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#RandomTree">RandomTree</a>:<br>
+<dl><dt><a name="BestDeterminedSpanningForest-tree2Pruefer"><strong>tree2Pruefer</strong></a>(self, vertices=None, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Pruefer&nbsp;code&nbsp;of&nbsp;a&nbsp;given&nbsp;tree.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="BestDeterminedSpanningForest-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#BestDeterminedSpanningForest-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-setEdgeValue"><strong>setEdgeValue</strong></a>(self, edge, value, Comments=False)</dt><dd><tt>Wrapper&nbsp;for&nbsp;updating&nbsp;the&nbsp;charactreistic&nbsp;valuation&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;instance.<br>
+The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
+edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
+The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="CompleteGraph">class <strong>CompleteGraph</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Instances&nbsp;of&nbsp;complete&nbsp;graphs&nbsp;bipolarly&nbsp;valuated&nbsp;in&nbsp;{-1,0,+1}.<br>
+Each&nbsp;vertex&nbsp;x&nbsp;is&nbsp;positively&nbsp;linked&nbsp;to<br>
+all&nbsp;the&nbsp;other&nbsp;vertices&nbsp;(edges[{x,y}]&nbsp;=&nbsp;+1)<br>
+&nbsp;<br>
+*Parameter*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;order&nbsp;(positive&nbsp;integer)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#CompleteGraph">CompleteGraph</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="CompleteGraph-__init__"><strong>__init__</strong></a>(self, order=5, seed=None)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="CompleteGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#CompleteGraph-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-setEdgeValue"><strong>setEdgeValue</strong></a>(self, edge, value, Comments=False)</dt><dd><tt>Wrapper&nbsp;for&nbsp;updating&nbsp;the&nbsp;charactreistic&nbsp;valuation&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;instance.<br>
+The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
+edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
+The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="CycleGraph">class <strong>CycleGraph</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Instances&nbsp;of&nbsp;cycle&nbsp;graph&nbsp;characterized&nbsp;in&nbsp;[-1,1].<br>
+&nbsp;<br>
+*Parameter*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;order&nbsp;(positive&nbsp;integer)<br>
+&nbsp;<br>
+Example&nbsp;of&nbsp;7-cycle&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;7cycle.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;7-cycle&nbsp;instance<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#CycleGraph">CycleGraph</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="CycleGraph-__init__"><strong>__init__</strong></a>(self, order=5, seed=None, Debug=False)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="CycleGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#CycleGraph-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-setEdgeValue"><strong>setEdgeValue</strong></a>(self, edge, value, Comments=False)</dt><dd><tt>Wrapper&nbsp;for&nbsp;updating&nbsp;the&nbsp;charactreistic&nbsp;valuation&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;instance.<br>
+The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
+edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
+The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DualGraph">class <strong>DualGraph</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Instantiates&nbsp;the&nbsp;dual&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;of&nbsp;a&nbsp;given&nbsp;other&nbsp;<a href="#Graph">Graph</a>&nbsp;instance.<br>
+&nbsp;<br>
+The&nbsp;relation&nbsp;constructor&nbsp;returns&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;with&nbsp;formula:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;relationOut[a][b]&nbsp;=&nbsp;Max&nbsp;-&nbsp;self.<strong>relation</strong>[a][b]&nbsp;+&nbsp;Min<br>
+&nbsp;&nbsp;&nbsp;&nbsp;where&nbsp;Max&nbsp;(resp.&nbsp;Min)&nbsp;equals&nbsp;valuation&nbsp;maximum&nbsp;(resp.&nbsp;minimum).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#DualGraph">DualGraph</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="DualGraph-__init__"><strong>__init__</strong></a>(self, other)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="DualGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#DualGraph-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-setEdgeValue"><strong>setEdgeValue</strong></a>(self, edge, value, Comments=False)</dt><dd><tt>Wrapper&nbsp;for&nbsp;updating&nbsp;the&nbsp;charactreistic&nbsp;valuation&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;instance.<br>
+The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
+edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
+The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="EmptyGraph">class <strong>EmptyGraph</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Intantiates&nbsp;graph&nbsp;of&nbsp;given&nbsp;order&nbsp;without&nbsp;any&nbsp;positively&nbsp;valued&nbsp;edge.<br>
+&nbsp;<br>
+*Parameter*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;order&nbsp;(positive&nbsp;integer)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#EmptyGraph">EmptyGraph</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="EmptyGraph-__init__"><strong>__init__</strong></a>(self, order=5, seed=None)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="EmptyGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#EmptyGraph-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-setEdgeValue"><strong>setEdgeValue</strong></a>(self, edge, value, Comments=False)</dt><dd><tt>Wrapper&nbsp;for&nbsp;updating&nbsp;the&nbsp;charactreistic&nbsp;valuation&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;instance.<br>
+The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
+edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
+The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="Graph">class <strong>Graph</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt><a href="#Graph">Graph</a>&nbsp;class&nbsp;implementation&nbsp;with&nbsp;a&nbsp;vertices&nbsp;and&nbsp;an&nbsp;edges&nbsp;dictionary<br>
-and&nbsp;a&nbsp;gamma&nbsp;function&nbsp;(dictionary)&nbsp;from&nbsp;vertices&nbsp;to&nbsp;subsets&nbsp;of&nbsp;vertices.<br>
+<td colspan=2><tt>In&nbsp;the&nbsp;`graphs`&nbsp;module,&nbsp;the&nbsp;root&nbsp;:py:class:`graphs.<a href="#Graph">Graph</a>`&nbsp;class&nbsp;provides&nbsp;a&nbsp;generic&nbsp;graph&nbsp;model.&nbsp;A&nbsp;given&nbsp;<a href="builtins.html#object">object</a>&nbsp;consists&nbsp;in:<br>
 &nbsp;<br>
+&nbsp;&nbsp;&nbsp;1.&nbsp;a&nbsp;vertices&nbsp;dictionary<br>
+&nbsp;&nbsp;&nbsp;2.&nbsp;a&nbsp;characteristic&nbsp;valuation&nbsp;domain,&nbsp;{-1,0,+1}&nbsp;by&nbsp;default<br>
+&nbsp;&nbsp;&nbsp;3.&nbsp;an&nbsp;edges&nbsp;dictionary,&nbsp;characterising&nbsp;each&nbsp;edge&nbsp;in&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain<br>
+&nbsp;&nbsp;&nbsp;4.&nbsp;a&nbsp;gamma&nbsp;function&nbsp;dictionary,&nbsp;holding&nbsp;the&nbsp;neighborhood&nbsp;vertices&nbsp;of&nbsp;each&nbsp;vertex<br>
+&nbsp;<br>
+General&nbsp;structure::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;vertices&nbsp;=&nbsp;{'v1':&nbsp;{'name':&nbsp;...,'shortName':&nbsp;...},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'v2':&nbsp;{'name':&nbsp;...,'shortName':&nbsp;...},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'v3':&nbsp;{'name':&nbsp;...,'shortName':&nbsp;...},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;valuationDomain&nbsp;=&nbsp;{'min':&nbsp;-1,&nbsp;'med':&nbsp;0,&nbsp;'max':&nbsp;1}<br>
+&nbsp;&nbsp;&nbsp;edges&nbsp;=&nbsp;{frozenset({'v1','v2'}):&nbsp;1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;frozenset({'v1','v3'}):&nbsp;1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;frozenset({'v2','v3'}):&nbsp;-1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...}<br>
+&nbsp;&nbsp;&nbsp;##&nbsp;links&nbsp;from&nbsp;each&nbsp;vertex&nbsp;to&nbsp;its&nbsp;neighbors<br>
+&nbsp;&nbsp;&nbsp;gamma&nbsp;=&nbsp;{'v1':&nbsp;{'v2',v3'},&nbsp;'v2':&nbsp;{'v1'},&nbsp;'v3':&nbsp;{'v1'},&nbsp;...&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;<br>
 Example&nbsp;python3&nbsp;session:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;<a href="#Graph">Graph</a><br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.5)<br>
@@ -69,12 +584,27 @@ Example&nbsp;python3&nbsp;session:<br>
 <td width="100%">Methods defined here:<br>
 <dl><dt><a name="Graph-__init__"><strong>__init__</strong></a>(self, fileName=None, Empty=False, numberOfVertices=7, edgeProbability=0.5)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;objects.</tt></dd></dl>
 
+<dl><dt><a name="Graph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
 <dl><dt><a name="Graph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="Graph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="Graph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="Graph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="Graph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="Graph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
 <dl><dt><a name="Graph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
 
-<dl><dt><a name="Graph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="Graph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -88,6 +618,20 @@ Example:<br>
 <dl><dt><a name="Graph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
 <dl><dt><a name="Graph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Graph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="Graph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="Graph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="Graph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
 
 <dl><dt><a name="Graph-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
 
@@ -118,7 +662,7 @@ temporary&nbsp;Grid&nbsp;graphs&nbsp;of&nbsp;dimension&nbsp;n&nbsp;times&nbsp;m.
 &nbsp;<br>
 *Parameters*:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;n,m&nbsp;&gt;&nbsp;0<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;valuationDomain&nbsp;={'min':m,&nbsp;'max':M}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;valuationDomain&nbsp;={'min':-1,&nbsp;'med':0,&nbsp;'max':+1}<br>
 &nbsp;<br>
 Default&nbsp;instantiation&nbsp;(5&nbsp;times&nbsp;5&nbsp;Grid&nbsp;Digraph):<br>
 &nbsp;&nbsp;&nbsp;*&nbsp;n&nbsp;=&nbsp;5,<br>
@@ -145,12 +689,27 @@ Methods defined here:<br>
 
 <hr>
 Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="GridGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
 <dl><dt><a name="GridGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="GridGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
 <dl><dt><a name="GridGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
 
-<dl><dt><a name="GridGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="GridGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -164,6 +723,20 @@ Example:<br>
 <dl><dt><a name="GridGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
 <dl><dt><a name="GridGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
 
 <dl><dt><a name="GridGraph-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
 
@@ -227,14 +800,43 @@ H(c)&nbsp;=&nbsp;-sum_{{x,y}&nbsp;in&nbsp;self.<strong>edges</strong>}[spin_c(x)
 
 <hr>
 Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="IsingModel-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
 <dl><dt><a name="IsingModel-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
 <dl><dt><a name="IsingModel-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
 
 <dl><dt><a name="IsingModel-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
 <dl><dt><a name="IsingModel-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
 
 <dl><dt><a name="IsingModel-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
 
@@ -311,7 +913,7 @@ Example:<br>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="MISModel-__init__"><strong>__init__</strong></a>(self, g, nSim=None, maxIter=20, Debug=False)</dt></dl>
+<dl><dt><a name="MISModel-__init__"><strong>__init__</strong></a>(self, g, nSim=None, maxIter=20, seed=None, Debug=False)</dt></dl>
 
 <dl><dt><a name="MISModel-checkMIS"><strong>checkMIS</strong></a>(self, Comments=True)</dt><dd><tt>Verify&nbsp;maximality&nbsp;of&nbsp;independent&nbsp;set.<br>
 &nbsp;<br>
@@ -322,18 +924,47 @@ Methods defined here:<br>
 
 <dl><dt><a name="MISModel-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', misColor='lightblue')</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;MIS&nbsp;models&nbsp;drawing&nbsp;filtering.</tt></dd></dl>
 
-<dl><dt><a name="MISModel-generateMIS"><strong>generateMIS</strong></a>(self, Reset=True, nSim=None, Comments=True, Debug=False)</dt></dl>
+<dl><dt><a name="MISModel-generateMIS"><strong>generateMIS</strong></a>(self, Reset=True, nSim=None, seed=None, Comments=True, Debug=False)</dt></dl>
 
 <hr>
 Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="MISModel-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
 <dl><dt><a name="MISModel-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
+
+<dl><dt><a name="MISModel-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="MISModel-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="MISModel-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="MISModel-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="MISModel-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
 <dl><dt><a name="MISModel-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
 
 <dl><dt><a name="MISModel-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
 <dl><dt><a name="MISModel-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="MISModel-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="MISModel-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="MISModel-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="MISModel-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
 
 <dl><dt><a name="MISModel-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
 
@@ -426,12 +1057,27 @@ vertices&nbsp;X&nbsp;vertices&nbsp;table&nbsp;format.</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="MetropolisChain-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
 <dl><dt><a name="MetropolisChain-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="MetropolisChain-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
 <dl><dt><a name="MetropolisChain-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
 
-<dl><dt><a name="MetropolisChain-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="MetropolisChain-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -445,6 +1091,20 @@ Example:<br>
 <dl><dt><a name="MetropolisChain-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
 <dl><dt><a name="MetropolisChain-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
 
 <dl><dt><a name="MetropolisChain-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
 
@@ -503,7 +1163,7 @@ nSim&nbsp;simulation&nbsp;steps&nbsp;(default&nbsp;=&nbsp;len(graph.edges)).<br>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="Q_Coloring-__init__"><strong>__init__</strong></a>(self, g, colors=['gold', 'lightcoral', 'lightblue'], nSim=None, maxIter=20, Comments=True, Debug=False)</dt></dl>
+<dl><dt><a name="Q_Coloring-__init__"><strong>__init__</strong></a>(self, g, colors=['gold', 'lightcoral', 'lightblue'], nSim=None, maxIter=20, seed=None, Comments=True, Debug=False)</dt></dl>
 
 <dl><dt><a name="Q_Coloring-checkFeasibility"><strong>checkFeasibility</strong></a>(self, Comments=True, Debug=False)</dt></dl>
 
@@ -541,20 +1201,49 @@ Example:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="Q_Coloring-generateFeasibleConfiguration"><strong>generateFeasibleConfiguration</strong></a>(self, Reset=True, nSim=None, Debug=False)</dt></dl>
+<dl><dt><a name="Q_Coloring-generateFeasibleConfiguration"><strong>generateFeasibleConfiguration</strong></a>(self, Reset=True, nSim=None, seed=None, Debug=False)</dt></dl>
 
 <dl><dt><a name="Q_Coloring-showConfiguration"><strong>showConfiguration</strong></a>(self)</dt></dl>
 
 <hr>
 Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="Q_Coloring-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
 <dl><dt><a name="Q_Coloring-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
 <dl><dt><a name="Q_Coloring-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
 
 <dl><dt><a name="Q_Coloring-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
 <dl><dt><a name="Q_Coloring-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
 
 <dl><dt><a name="Q_Coloring-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
 
@@ -564,6 +1253,185 @@ edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
 
 <dl><dt><a name="Q_Coloring-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RandomFixedDegreeSequenceGraph">class <strong>RandomFixedDegreeSequenceGraph</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Specialization&nbsp;of&nbsp;the&nbsp;general&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;for&nbsp;generating<br>
+temporary&nbsp;random&nbsp;graphs&nbsp;with&nbsp;a&nbsp;fixed&nbsp;sequence&nbsp;of&nbsp;degrees.<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;implementation&nbsp;is&nbsp;not&nbsp;guaranteeing&nbsp;a&nbsp;uniform&nbsp;choice<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;potential&nbsp;valid&nbsp;graph&nbsp;instances.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#RandomFixedDegreeSequenceGraph">RandomFixedDegreeSequenceGraph</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-__init__"><strong>__init__</strong></a>(self, order=7, degreeSequence=[3, 3, 2, 2, 1, 1, 0], seed=None)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#RandomFixedDegreeSequenceGraph-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-setEdgeValue"><strong>setEdgeValue</strong></a>(self, edge, value, Comments=False)</dt><dd><tt>Wrapper&nbsp;for&nbsp;updating&nbsp;the&nbsp;charactreistic&nbsp;valuation&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;instance.<br>
+The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
+edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
+The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RandomFixedSizeGraph">class <strong>RandomFixedSizeGraph</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Generates&nbsp;a&nbsp;random&nbsp;graph&nbsp;with&nbsp;a&nbsp;fixed&nbsp;size&nbsp;(number&nbsp;of&nbsp;edges),&nbsp;by&nbsp;instantiating&nbsp;a&nbsp;fixed&nbsp;numbers&nbsp;of&nbsp;arcs<br>
+from&nbsp;random&nbsp;choices&nbsp;in&nbsp;the&nbsp;set&nbsp;of&nbsp;potential&nbsp;pairs&nbsp;of&nbsp;vertices&nbsp;numbered&nbsp;from&nbsp;1&nbsp;to&nbsp;order.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#RandomFixedSizeGraph">RandomFixedSizeGraph</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="RandomFixedSizeGraph-__init__"><strong>__init__</strong></a>(self, order=7, size=14, seed=None, Debug=False)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="RandomFixedSizeGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#RandomFixedSizeGraph-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-setEdgeValue"><strong>setEdgeValue</strong></a>(self, edge, value, Comments=False)</dt><dd><tt>Wrapper&nbsp;for&nbsp;updating&nbsp;the&nbsp;charactreistic&nbsp;valuation&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;instance.<br>
+The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
+edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
+The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
@@ -593,16 +1461,31 @@ Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="RandomGraph-__init__"><strong>__init__</strong></a>(self, order=5, edgeProbability=0.4)</dt></dl>
+<dl><dt><a name="RandomGraph-__init__"><strong>__init__</strong></a>(self, order=5, edgeProbability=0.4, seed=None)</dt></dl>
 
 <hr>
 Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="RandomGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
 <dl><dt><a name="RandomGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="RandomGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
 <dl><dt><a name="RandomGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
 
-<dl><dt><a name="RandomGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -616,6 +1499,20 @@ Example:<br>
 <dl><dt><a name="RandomGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
 <dl><dt><a name="RandomGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
 
 <dl><dt><a name="RandomGraph-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
 
@@ -638,12 +1535,199 @@ Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RandomRegularGraph">class <strong>RandomRegularGraph</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Specialization&nbsp;of&nbsp;the&nbsp;general&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;for&nbsp;generating<br>
+temporary&nbsp;random&nbsp;regular&nbsp;graphs&nbsp;of&nbsp;fixed&nbsp;degrees.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#RandomRegularGraph">RandomRegularGraph</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="RandomRegularGraph-__init__"><strong>__init__</strong></a>(self, order=7, degree=2, seed=None)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="RandomRegularGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#RandomRegularGraph-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-setEdgeValue"><strong>setEdgeValue</strong></a>(self, edge, value, Comments=False)</dt><dd><tt>Wrapper&nbsp;for&nbsp;updating&nbsp;the&nbsp;charactreistic&nbsp;valuation&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;instance.<br>
+The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
+edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
+The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RandomSpanningForest">class <strong>RandomSpanningForest</strong></a>(<a href="graphs.html#RandomTree">RandomTree</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Random&nbsp;instance&nbsp;of&nbsp;a&nbsp;spanning&nbsp;forest&nbsp;(one&nbsp;or&nbsp;more&nbsp;trees)<br>
+generated&nbsp;from&nbsp;a&nbsp;random&nbsp;depth&nbsp;first&nbsp;search&nbsp;graph&nbsp;g&nbsp;traversal.<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomSpanningTree.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;randomSpanningForest&nbsp;instance<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#RandomSpanningForest">RandomSpanningForest</a></dd>
+<dd><a href="graphs.html#RandomTree">RandomTree</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="RandomSpanningForest-__init__"><strong>__init__</strong></a>(self, g, seed=None, Debug=False)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#RandomTree">RandomTree</a>:<br>
+<dl><dt><a name="RandomSpanningForest-tree2Pruefer"><strong>tree2Pruefer</strong></a>(self, vertices=None, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Pruefer&nbsp;code&nbsp;of&nbsp;a&nbsp;given&nbsp;tree.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="RandomSpanningForest-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#RandomSpanningForest-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-setEdgeValue"><strong>setEdgeValue</strong></a>(self, edge, value, Comments=False)</dt><dd><tt>Wrapper&nbsp;for&nbsp;updating&nbsp;the&nbsp;charactreistic&nbsp;valuation&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;instance.<br>
+The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
+edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
+The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="RandomTree">class <strong>RandomTree</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>Random&nbsp;instance&nbsp;of&nbsp;a&nbsp;tree&nbsp;generated&nbsp;from&nbsp;a&nbsp;random&nbsp;Prüfer&nbsp;code.<br>
 &nbsp;<br>
-..&nbsp;image::&nbsp;randomTree.png<br>&nbsp;</tt></td></tr>
+..&nbsp;image::&nbsp;randomTree.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;radomTree&nbsp;instance<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="graphs.html#RandomTree">RandomTree</a></dd>
@@ -652,16 +1736,33 @@ Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="RandomTree-__init__"><strong>__init__</strong></a>(self, order=None, prueferCode=None, myseed=None, Debug=False)</dt></dl>
+<dl><dt><a name="RandomTree-__init__"><strong>__init__</strong></a>(self, order=None, vertices=None, prueferCode=None, seed=None, Debug=False)</dt></dl>
+
+<dl><dt><a name="RandomTree-tree2Pruefer"><strong>tree2Pruefer</strong></a>(self, vertices=None, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Pruefer&nbsp;code&nbsp;of&nbsp;a&nbsp;given&nbsp;tree.</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="RandomTree-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
 <dl><dt><a name="RandomTree-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="RandomTree-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
 <dl><dt><a name="RandomTree-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
 
-<dl><dt><a name="RandomTree-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomTree-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -675,6 +1776,20 @@ Example:<br>
 <dl><dt><a name="RandomTree-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
 <dl><dt><a name="RandomTree-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
 
 <dl><dt><a name="RandomTree-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
 
@@ -697,64 +1812,179 @@ Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="TriangularGraph">class <strong>TriangularGraph</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="RandomValuationGraph">class <strong>RandomValuationGraph</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Specialization&nbsp;of&nbsp;the&nbsp;general&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;for&nbsp;generating<br>
-temporary&nbsp;triangular&nbsp;graphs&nbsp;of&nbsp;dimension&nbsp;n&nbsp;times&nbsp;m.<br>
+<td colspan=2><tt>Specialization&nbsp;of&nbsp;the&nbsp;genuine&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;for&nbsp;generating&nbsp;temporary<br>
+randomly&nbsp;valuated&nbsp;graphs&nbsp;in&nbsp;the&nbsp;range&nbsp;[-1.0;1.0].<br>
 &nbsp;<br>
-*Parameters*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;n,m&nbsp;&gt;&nbsp;0<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;valuationDomain&nbsp;={'min':m,&nbsp;'max':M}<br>
-&nbsp;<br>
-Default&nbsp;instantiation&nbsp;(5&nbsp;times&nbsp;5&nbsp;Trinagular&nbsp;Digraph):<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;n&nbsp;=&nbsp;5,<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;m=5,<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;valuationDomain&nbsp;=&nbsp;{'min':-1.0,'max':1.0}.<br>
-&nbsp;<br>
-Example&nbsp;of&nbsp;5x5&nbsp;<a href="#GridGraph">GridGraph</a>&nbsp;instance:<br>
-&nbsp;<br>
-..&nbsp;image::&nbsp;triangular-5-5.png<br>
-&nbsp;&nbsp;&nbsp;:alt:&nbsp;triangular&nbsp;5x5&nbsp;graph<br>
-&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
-&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
+*Parameter*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;order&nbsp;(positive&nbsp;integer)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;ndigits&nbsp;(decimal&nbsp;precision)<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="graphs.html#TriangularGraph">TriangularGraph</a></dd>
+<dd><a href="graphs.html#RandomValuationGraph">RandomValuationGraph</a></dd>
 <dd><a href="graphs.html#Graph">Graph</a></dd>
 <dd><a href="builtins.html#object">builtins.object</a></dd>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="TriangularGraph-__init__"><strong>__init__</strong></a>(self, n=5, m=5, valuationMin=-1, valuationMax=1)</dt></dl>
-
-<dl><dt><a name="TriangularGraph-showShort"><strong>showShort</strong></a>(self)</dt></dl>
+<dl><dt><a name="RandomValuationGraph-__init__"><strong>__init__</strong></a>(self, order=5, ndigits=2, seed=None)</dt></dl>
 
 <hr>
 Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
-<dl><dt><a name="TriangularGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+<dl><dt><a name="RandomValuationGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="RandomValuationGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
-<dl><dt><a name="TriangularGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="RandomValuationGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="TriangularGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomValuationGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="RandomValuationGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="RandomValuationGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="RandomValuationGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
+<dl><dt><a name="RandomValuationGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="RandomValuationGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
-&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#TriangularGraph-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#RandomValuationGraph-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
 &nbsp;<br>
 ..&nbsp;image::&nbsp;randomGraph.png<br>
 &nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="TriangularGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+<dl><dt><a name="RandomValuationGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="TriangularGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="RandomValuationGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
-<dl><dt><a name="TriangularGraph-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+<dl><dt><a name="RandomValuationGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
-<dl><dt><a name="TriangularGraph-setEdgeValue"><strong>setEdgeValue</strong></a>(self, edge, value, Comments=False)</dt><dd><tt>Wrapper&nbsp;for&nbsp;updating&nbsp;the&nbsp;charactreistic&nbsp;valuation&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;instance.<br>
+<dl><dt><a name="RandomValuationGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="RandomValuationGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="RandomValuationGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
+
+<dl><dt><a name="RandomValuationGraph-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="RandomValuationGraph-setEdgeValue"><strong>setEdgeValue</strong></a>(self, edge, value, Comments=False)</dt><dd><tt>Wrapper&nbsp;for&nbsp;updating&nbsp;the&nbsp;charactreistic&nbsp;valuation&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;instance.<br>
+The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
+edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
+The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="RandomValuationGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TriangulatedGrid">class <strong>TriangulatedGrid</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Specialization&nbsp;of&nbsp;the&nbsp;general&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;for&nbsp;generating<br>
+temporary&nbsp;triangulated&nbsp;grids&nbsp;of&nbsp;dimension&nbsp;n&nbsp;times&nbsp;m.<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;n,m&nbsp;&gt;&nbsp;0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;valuationDomain&nbsp;=&nbsp;{'min':m,&nbsp;'max':M}<br>
+&nbsp;<br>
+Example&nbsp;of&nbsp;5x5&nbsp;triangulated&nbsp;grid&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;triangular-5-5.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;triangulated&nbsp;5x5&nbsp;grid<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#TriangulatedGrid">TriangulatedGrid</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TriangulatedGrid-__init__"><strong>__init__</strong></a>(self, n=5, m=5, valuationMin=-1, valuationMax=1)</dt></dl>
+
+<dl><dt><a name="TriangulatedGrid-showShort"><strong>showShort</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="TriangulatedGrid-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#TriangulatedGrid-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-setEdgeValue"><strong>setEdgeValue</strong></a>(self, edge, value, Comments=False)</dt><dd><tt>Wrapper&nbsp;for&nbsp;updating&nbsp;the&nbsp;charactreistic&nbsp;valuation&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;instance.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>

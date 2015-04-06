@@ -3,12 +3,31 @@
 #  Python 3 graphs.py module
 #  Copyright (C)  2011-2013 Raymond Bisdorff
 #############################################
+from decimal import Decimal
 
 class Graph(object):
     """
-    Graph class implementation with a vertices and an edges dictionary
-    and a gamma function (dictionary) from vertices to subsets of vertices.
+    In the `graphs` module, the root :py:class:`graphs.Graph` class provides a generic graph model. A given object consists in:
+    
+       1. a vertices dictionary
+       2. a characteristic valuation domain, {-1,0,+1} by default
+       3. an edges dictionary, characterising each edge in the given valuation domain
+       4. a gamma function dictionary, holding the neighborhood vertices of each vertex
 
+    General structure::
+
+       vertices = {'v1': {'name': ...,'shortName': ...},
+                   'v2': {'name': ...,'shortName': ...},
+                   'v3': {'name': ...,'shortName': ...},
+                   ... }
+       valuationDomain = {'min': -1, 'med': 0, 'max': 1}
+       edges = {frozenset({'v1','v2'}): 1,
+                frozenset({'v1','v3'}): 1,
+                frozenset({'v2','v3'}): -1,
+                  ...}
+       ## links from each vertex to its neighbors
+       gamma = {'v1': {'v2',v3'}, 'v2': {'v1'}, 'v3': {'v1'}, ... }
+       
     Example python3 session:
        >>> from graphs import Graph
        >>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
@@ -24,6 +43,7 @@ class Graph(object):
        v3 -> ['v4']
        v4 -> ['v1', 'v3']
        v5 -> []
+       
     """
     def __init__(self, fileName=None, Empty=False, numberOfVertices=7, edgeProbability=0.5):
         """
@@ -37,9 +57,9 @@ class Graph(object):
             self.vertices = dict()
             self.order = len(self.vertices)
             self.edges = dict()
-            self.size = len(self.edges)
-            self.valuationDomain = {'min':-1, 'med': 0, 'max':1}
+            self.valuationDomain = {'min': Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
             self.gamma = dict()
+            self.size = 0
         elif fileName==None:
             g = RandomGraph(order=numberOfVertices,\
                                edgeProbability=edgeProbability)
@@ -47,8 +67,8 @@ class Graph(object):
             self.vertices = deepcopy(g.vertices)
             self.order = len(self.vertices)
             self.edges = deepcopy(g.edges)
-            self.size = len(self.edges)
             self.valuationDomain = deepcopy(g.valuationDomain)
+            self.size = self.computeSize()
             self.gamma = self.gammaSets()
         else:
             fileNameExt = fileName+'.py'
@@ -59,8 +79,18 @@ class Graph(object):
             self.order = len(self.vertices)
             self.valuationDomain = argDict['valuationDomain']
             self.edges = argDict['edges']
-            self.size = len(self.edges)
+            self.size = self.computeSize()
             self.gamma = self.gammaSets()
+
+    def __neg__(self):
+        """
+        Make the negation operator -self available for Graph instances.
+        Returns a DualGraph instance of self.
+        """
+        new = DualGraph(self)
+        new.__class__ = self.__class__
+        return new
+
 
     def setEdgeValue(self,edge,value,Comments=False):
         """
@@ -89,6 +119,138 @@ class Graph(object):
         self.gamma = self.gammaSets()
         if Comments:
             print('edge %s put to value %s.' % (edge,str(value)))
+
+    def computeSize(self):
+        """
+        Renders the number of positively characterised edges of this graph instance
+        (result is stored in self.size).
+        """
+        size = 0
+        Med = self.valuationDomain['med']
+        for edge in self.edges:
+            if self.edges[edge] > Med:
+                size += 1
+        self.size = size
+        return size
+
+    def computeDegreeDistribution(self,Comments=True):
+        """
+        Renders the distribution of vertex degrees.
+        """
+        degreeDistribution = [0 for i in range(self.order)]
+        for v in self.vertices:
+            dv = len(self.gamma[v])
+            degreeDistribution[dv] += 1
+        if Comments:
+            print('degrees      : ', list(range(self.order)))
+            print('distribution : ', degreeDistribution)
+        return degreeDistribution
+
+    def computeNeighbourhoodDepth(self,vertex,Debug=False):
+        """
+        Renders the distribtion of neighbourhood depths.
+        """
+        import copy
+        order = self.order
+        vertices = set([x for x in self.vertices])
+        if Debug:
+            print('-->',vertex)
+        nbx = 0
+        neighbx = set([vertex])
+        restVertices = vertices - neighbx
+        while restVertices != set() and nbx < order:
+            if Debug:
+                print('nbx,restVertices', nbx,restVertices)
+            nbx += 1
+            iterneighbx = copy.copy(neighbx)
+            for y in iterneighbx:
+                neighbx = neighbx | self.gamma[y]
+                if Debug:
+                    print('y,self.gamma[y],neighbx', y,self.gamma[y],neighbx)
+            restVertices = vertices - neighbx
+        if Debug:
+            print('nbx,restVertices',nbx,restVertices)
+        if restVertices != set():
+            return order
+        else:
+            return nbx
+
+    def computeNeighbourhoodDepthDistribution(self,Debug=False):
+        """
+        Renders the distribtion of neighbourhood depths.
+        """
+        import copy
+        vertices = set([x for x in self.vertices])
+        order = self.order
+        vecNeighbourhoodDepth = [0 for i in range(order+1)] 
+        for x in vertices:
+            if Debug:
+                print('-->',x)
+            nbx = 0
+            neighbx = set([x])
+            restVertices = vertices - neighbx
+            while restVertices != set() and nbx < order:
+                if Debug:
+                    print('nbx,restVertices', nbx,restVertices)
+                nbx += 1
+                iterneighbx = copy.copy(neighbx)
+                for y in iterneighbx:
+                    neighbx = neighbx | self.gamma[y]
+                    if Debug:
+                        print('y,self.gamma[y],neighbx', y,self.gamma[y],neighbx)
+                restVertices = vertices - neighbx
+            if Debug:
+                print('nbx,restVertices',nbx,restVertices)
+            if restVertices != set():
+                vecNeighbourhoodDepth[order] += 1
+            else:
+                vecNeighbourhoodDepth[nbx] += 1
+        return vecNeighbourhoodDepth
+
+    def isConnected(self):
+        """
+        Cheks if self is a connected graph instance.
+        """
+        dfs = self.depthFirstSearch()
+        if len(dfs) == 1:
+            return True
+        else:
+            return False
+
+    def computeComponents(self):
+        """
+        Computes the connected components of a graph instance.
+        Returns a partition of the vertices as a list
+        """
+        components = []
+        dfs = self.depthFirstSearch()
+        for tree in dfs:
+            components.append(set(tree))
+        return components
+    
+    def isTree(self):
+        """
+        Checks if self is a tree by verifing the required number of
+        edges: order-1; and the existence of leaves.
+        """
+        n = self.order
+        m = self.size
+        if n == 1:
+            return True
+        elif m != n-1:
+            return False
+        else:
+            nbrOfLeaves = 0
+            for x in self.vertices:
+                degreex = len(self.gamma[x])
+                if degreex == 0: # isolated vertex
+                    return False 
+                elif degreex == 1:
+                    nbrOfLeaves += 1
+            if nbrOfLeaves < 2: # a cycle graph
+                return False
+            else:
+                return True
                   
     def graph2Digraph(self):
         """
@@ -117,6 +279,58 @@ class Graph(object):
         dg.notGamma = dg.notGammaSets()
         return dg
 
+    def recodeValuation(self,newMin=-1,newMax=1,Debug=False):
+        """
+        Recodes the characteristic valuation domain according
+        to the parameters given.
+
+        .. note::
+
+            Default values gives a normalized valuation domain
+
+        """
+        from copy import deepcopy
+        oldMax = self.valuationDomain['max']
+        oldMin = self.valuationDomain['min']
+        oldMed = self.valuationDomain['med']
+
+        oldAmplitude = oldMax - oldMin
+        if Debug:
+            print(oldMin, oldMed, oldMax, oldAmplitude)
+
+        newMin = Decimal(str(newMin))
+        newMax = Decimal(str(newMax))
+        newMed = Decimal('%.3f' % ((newMax + newMin)/Decimal('2.0')))
+
+        newAmplitude = newMax - newMin
+        if Debug:
+            print(newMin, newMed, newMax, newAmplitude)
+
+        verticesList = [x for x in self.vertices]
+        oldEdges = self.edges
+        newEdges = {}
+        for i in range(self.order):
+            x = verticesList[i]
+            for j in range(i+1,self.order):
+                y = verticesList[j]
+                edge = frozenset([x,y])
+                if oldEdges[edge] == oldMax:
+                    newEdges[edge] = newMax
+                elif oldEdges[edge] == oldMin:
+                    newEdges[edge] = newMin
+                elif oldEdges[edge] == oldMed:
+                    newEdges[edge] = newMed
+                else:
+                    newEdges[edge] = newMin + ((oldEdges[edge] - oldMin)/oldAmplitude)*newAmplitude
+                    if Debug:
+                        print(edge,oldEdges[edge],newEdges[edge])
+        # install new values in self
+        self.valuationDomain['max'] = newMax
+        self.valuationDomain['min'] = newMin
+        self.valuationDomain['med'] = newMed
+        self.valuationDomain['hasIntegerValuation'] = False
+        self.edges = deepcopy(newEdges)
+
     def showShort(self):
         """
         Generic show method for Graph instances.
@@ -130,6 +344,7 @@ class Graph(object):
         print('Gamma function   : ')
         for v in vKeys:
             print('%s -> %s' % (v, list(self.gamma[v])))
+        self.computeDegreeDistribution()
 
     def _saveEdges(self,fileName='graphEdges',Agrum=False,Decimal=True):
         """
@@ -166,6 +381,7 @@ class Graph(object):
         fileNameExt = str(fileName)+str('.py')
         fo = open(fileNameExt, 'w')
         fo.write('# Graph instance saved in Python format\n')
+        fo.write('from decimal import Decimal\n')
         fo.write('vertices = {\n')
         for x in verticesKeys:
             fo.write('\'%s\': %s,\n' % (x,self.vertices[x]))
@@ -191,8 +407,8 @@ class Graph(object):
             gamma[v] = set()
         for e in edges:
             if edges[e] > 0:
-                if Debug:
-                    print('e', e)
+##                if Debug:
+##                    print('e', e)
                 pair = set(e)
                 e1 = pair.pop()
                 e2 = pair.pop()
@@ -200,7 +416,7 @@ class Graph(object):
                 gamma[e2].add(e1)
         return gamma
 
-    def _chordlessPaths(self,Pk,v0, Comments = False, Debug = False):
+    def _chordlessPaths(self,Pk,v0,Comments=False,Debug=False):
         """
         recursice chordless precycle (len > 3) construction:
             Pk is the current pre chordless cycle
@@ -270,7 +486,7 @@ class Graph(object):
                 print('No further chordless precycles from ',vn,' to ',v0)
         return detectedChordlessCycle
 
-    def computeChordlessCycles(self,Comments=True, Debug=False):
+    def computeChordlessCycles(self,Comments=True,Debug=False):
         """
         Renders the set of all chordless cycles observed in a Graph
         intance.
@@ -292,10 +508,10 @@ class Graph(object):
         return chordlessCyclesList
 
 
-    def exportGraphViz(self,fileName=None,
-                       noSilent=True,
-                       graphType='png',
-                       graphSize='7,7'):
+    def exportGraphViz(self,fileName=None,noSilent=True,
+                       graphType='png',graphSize='7,7',
+                       withSpanningTree=False,
+                       layout=None):
         """
         Exports GraphViz dot file  for graph drawing filtering.
 
@@ -348,24 +564,51 @@ class Graph(object):
                 pass
             node += '];\n'                
             fo.write(node)
+        if withSpanningTree:
+            try:
+                dfs = self.dfs
+            except:
+                print('no spanning tree yet computed. Run self.randomDepthFirstSearch() !')
+            edgesColored = set()
+            print(dfs)
+            for tree in dfs:
+                for i in range((len(tree)-1)):
+                    #print(i,tree[i],tree[i+1])
+                    edgesColored.add(frozenset([tree[i],tree[i+1]]))
+            #print('Spanning tree: ', edgesColored)
         for i in range(n):
             for j in range(i+1, n):
                 if i != j:
                     edge = 'n'+str(i+1)
                     if edges[frozenset( [vertexkeys[i], vertexkeys[j]])] > Med:
-
-                        edge0 = edge+'-- n'+str(j+1)+' [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;\n'
+                        if withSpanningTree and \
+                        frozenset( [vertexkeys[i], vertexkeys[j]]) in edgesColored:
+                               arrowFormat = \
+        ' [dir=both,style="setlinewidth(3)",color=red, arrowhead=none, arrowtail=none] ;\n'                                          
+                        else:
+                            arrowFormat = \
+        ' [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;\n'
+                        edge0 = edge+'-- n'+str(j+1)+arrowFormat
                         fo.write(edge0)
                     elif edges[frozenset([vertexkeys[i],vertexkeys[j]])] == Med:
-                        edge0 = edge+'-- n'+str(j+1)+' [dir=both, color=grey, arrowhead=none, arrowtail=none] ;\n'
+                        edge0 = edge+'-- n'+str(j+1)+\
+            ' [dir=both, color=grey, arrowhead=none, arrowtail=none] ;\n'
                         fo.write(edge0)
 
         fo.write('}\n')
         fo.close()
-        if isinstance(self,(GridGraph,RandomTree)):
-            commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        # choose layout model 
+        if isinstance(self,(GridGraph,TriangulatedGrid,RandomTree)):
+            if layout == None:
+                layout = 'neato'
+        elif isinstance(self,(CycleGraph)):
+            if layout == None:
+                layout = 'circo'
         else:
-            commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+            if layout == None:
+                layout = 'fdp'
+            
+        commandString = layout+' -T'+graphType+' '+dotName+' -o '+name+'.'+graphType
         if noSilent:
             print(commandString)
         try:
@@ -373,6 +616,7 @@ class Graph(object):
         except:
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
+                print('On Ubuntu: ..$ sudo apt-get install graphviz')
 
     def depthFirstSearch(self,Debug=False):
         """
@@ -426,6 +670,242 @@ class Graph(object):
         visitAllVertices(self, Debug=Debug)
         return self.dfs
 
+    def randomDepthFirstSearch(self,seed=None,Debug=False):
+        """
+        Depth first search through a graph
+        """
+        import random
+        random.seed(seed)
+        
+        def visitVertex(self,x,Debug=False):
+            """
+            Visits all followers of vertex x.
+            """
+            self.vertices[x]['color'] = 1
+            ## self.date += 1
+            self.vertices[x]['startDate'] = self.date
+            self.dfsx.append(x)
+            if Debug:
+                print(' dfs %s, date = %d' % (str(self.dfs),  self.vertices[x]['startDate']))
+            nextVertices = [y for y in self.gamma[x]]
+            nextVertices.sort()
+            if Debug:
+                print('   next ', nextVertices)
+            while nextVertices != []:
+                y = random.choice(nextVertices)
+                if self.vertices[y]['color'] == 0:
+                    self.date += 1
+                    visitVertex(self,y,Debug=Debug)
+                    if self.vertices[x]['color'] == 1:
+                        self.dfsx.append(x)
+                nextVertices.remove(y)
+            self.vertices[x]['color'] = 2
+            self.vertices[x]['endDate'] = self.date
+            self.date += 1
+
+        def visitAllVertices(self,Debug=False):
+            """
+            Mark the starting date for all vertices
+            and controls the progress of the search with vertices colors:
+            White (0), Grey (1), Black (2)
+            """
+            self.dfs = []
+            for x in self.vertices:
+                self.vertices[x]['color'] = 0
+            self.date = 0
+            verticesList = [x for x in self.vertices]
+            verticesList.sort()
+            while verticesList != []:
+                x = random.choice(verticesList)
+                self.dfsx = []
+                if self.vertices[x]['color'] == 0:
+                    if Debug:
+                        print('==>> Starting from %s ' % x)
+                    visitVertex(self,x,Debug=Debug)
+                    self.dfs.append(self.dfsx)
+                verticesList.remove(x)
+
+
+        # ---- main -----
+        visitAllVertices(self,Debug=Debug)
+        return self.dfs
+
+## # Under construction !!!
+##    def dfs2pruefer(self):
+##        """
+##        Renders the pruefer code of the spanning tree of self.
+##        """
+##        from operator import itemgetter, attrgetter
+##        try:
+##            dfs = self.dfs
+##        except:
+##            print('Error: You must first run self.randomDepthFirstSearch() !!')
+##            return
+##        if len(self.dfs) > 1:
+##            print('Self is not connected. A Pruefer code can only be computed for a connected graph !!!')
+##            return
+##        verticesList = [x for x in self.vertices]
+##        verticesList.sort()
+##        degree = {}
+##        for x in dfs[0]:
+##            try:
+##                degree[x] += 1
+##            except:
+##                degree[x] = 1
+##        print(degree)
+##        verticesDegree = [(degree[x],x) for x in degree]
+##        verticesDegree.sort()
+##        sorted(verticesDegree,key=itemgetter(1))
+##        #sorted(verticesDegree,key=lambda verticesDegree: verticesDegree[2])       
+##        print(verticesDegree)
+##        edges = set()
+##        tree = dfs[0]
+##        n = len(tree)-1
+##        for i in range(n):
+##            edges.add( frozenset( [ tree[i],tree[i+1] ] ) )
+##        print(edges)
+        
+class EmptyGraph(Graph):
+    """
+    Intantiates graph of given order without any positively valued edge.
+
+    *Parameter*:
+        * order (positive integer)
+
+    """
+    def __init__(self,order=5,seed=None):
+        self.name = 'emptyGraph'
+        self.order = order
+        nd = len(str(order))
+        vertices = dict()
+        for i in range(order):
+            vertexKey = ('v%%0%dd' % nd) % (i+1)
+            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+        self.vertices = vertices
+        self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
+        Min = self.valuationDomain['min']
+        edges = dict()
+        verticesList = [v for v in vertices]
+        verticesList.sort()
+        for x in verticesList:
+            for y in verticesList:
+                if x != y:
+                    edgeKey = frozenset([x,y])
+                    edges[edgeKey] = Min
+        self.edges = edges
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+
+class CompleteGraph(Graph):
+    """
+    Instances of complete graphs bipolarly valuated in {-1,0,+1}.
+    Each vertex x is positively linked to
+    all the other vertices (edges[{x,y}] = +1)
+
+    *Parameter*:
+        * order (positive integer)
+
+    """
+    def __init__(self,order=5,seed=None):
+        self.name = 'completeGraph'
+        self.order = order
+        nd = len(str(order))
+        vertices = dict()
+        for i in range(order):
+            vertexKey = ('v%%0%dd' % nd) % (i+1)
+            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+        self.vertices = vertices
+        self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
+        Max = self.valuationDomain['max']
+        edges = dict()
+        verticesList = [v for v in vertices]
+        verticesList.sort()
+        for x in verticesList:
+            for y in verticesList:
+                if x != y:
+                    edgeKey = frozenset([x,y])
+                    edges[edgeKey] = Max
+        self.edges = edges
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+
+class DualGraph(Graph):
+    """
+    Instantiates the dual Graph object of a given other Graph instance.
+
+    The relation constructor returns the dual of self.relation with formula:
+        relationOut[a][b] = Max - self.relation[a][b] + Min
+        where Max (resp. Min) equals valuation maximum (resp. minimum).
+
+
+    """
+    def __init__(self,other):
+        from copy import deepcopy
+        self.name = 'dual_' + str(other.name)
+        try:
+            self.description = deepcopy(other.description)
+        except AttributeError:
+            pass
+        self.valuationDomain = deepcopy(other.valuationDomain)
+        Max = self.valuationDomain['max']
+        Min = self.valuationDomain['min']
+        self.vertices = deepcopy(other.vertices)
+        self.order = len(self.vertices)
+        self.edges = {}
+        for e in other.edges:
+            self.edges[e] = Max - other.edges[e] + Min
+        self.__class__ = other.__class__
+        self.gamma = self.gammaSets()
+
+class CycleGraph(Graph):
+    """
+    Instances of cycle graph characterized in [-1,1].
+
+    *Parameter*:
+        * order (positive integer)
+
+    Example of 7-cycle graph instance:
+
+    .. image:: 7cycle.png
+       :alt: 7-cycle instance
+       :width: 300 px
+       :align: center
+
+
+    """
+    def __init__(self,order=5,seed=None,Debug=False):
+        self.name = 'cycleGraph'
+        self.order = order
+        nd = len(str(order))
+        vertices = dict()
+        for i in range(order):
+            vertexKey = ('v%%0%dd' % nd) % (i+1)
+            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+        self.vertices = vertices
+        self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
+        Min = self.valuationDomain['min']
+        Max = self.valuationDomain['max']
+        edges = dict()
+        verticesList = [v for v in vertices]
+        verticesList.sort()
+        for x in verticesList:
+            for y in verticesList:
+                edgeKey = frozenset([x,y])
+                edges[edgeKey] = Min
+        for i in range(order-1):
+            edgeKey = frozenset(verticesList[i:i+2])
+            edges[edgeKey] = Max
+            if Debug:
+                print(edgeKey)
+        x = verticesList[-1]
+        y = verticesList[0]
+        edgeKey = frozenset([x,y])
+        edges[edgeKey] = Max
+        if Debug:
+            print(edgeKey)
+        self.edges = edges
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
 
 class RandomGraph(Graph):
     """
@@ -435,8 +915,9 @@ class RandomGraph(Graph):
         * order (positive integer)
         * edgeProbability (in [0,1])
     """
-    def __init__(self,order=5,edgeProbability=0.4):
-        from random import random
+    def __init__(self,order=5,edgeProbability=0.4,seed=None):
+        import random
+        random.seed(seed)
         self.name = 'randomGraph'
         self.order = order
         nd = len(str(order))
@@ -445,20 +926,159 @@ class RandomGraph(Graph):
             vertexKey = ('v%%0%dd' % nd) % (i+1)
             vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
-        self.valuationDomain = {'min':-1,'med':0,'max':1}
+        self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
+        Min = self.valuationDomain['min']
+        Max = self.valuationDomain['max']
         edges = dict()
-        for x in vertices:
-            for y in vertices:
-                if x != y:
-                    edgeKey = frozenset([x,y])
-                    if random() > 1.0 - edgeProbability:
-                        edges[edgeKey] = 1
-                    else:
-                        edges[edgeKey] = -1
+        verticesList = [v for v in vertices]
+        verticesList.sort()
+        for i in range(order):
+            x = verticesList[i]
+            for j in range(i+1,order):
+                y = verticesList[j]
+                edgeKey = frozenset([x,y])
+                if random.random() > 1.0 - edgeProbability:
+                    edges[edgeKey] = Max
+                else:
+                    edges[edgeKey] = Min
         self.edges = edges
-        self.size = len(self.edges)
+        self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
+class RandomValuationGraph(Graph):
+    """
+    Specialization of the genuine Graph class for generating temporary
+    randomly valuated graphs in the range [-1.0;1.0].
+    
+    *Parameter*:
+        * order (positive integer)
+        * ndigits (decimal precision) 
+
+    """
+    def __init__(self,order=5,ndigits=2,seed=None):
+        import random
+        random.seed(seed)
+        self.name = 'randomGraph'
+        self.order = order
+        nd = len(str(order))
+        vertices = dict()
+        for i in range(order):
+            vertexKey = ('v%%0%dd' % nd) % (i+1)
+            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+        self.vertices = vertices
+        self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
+        Min = float(self.valuationDomain['min'])
+        Max = float(self.valuationDomain['max'])
+        edges = dict()
+        verticesList = [v for v in vertices]
+        verticesList.sort()
+        for i in range(order):
+            x = verticesList[i]
+            for j in range(i+1,order):
+                y = verticesList[j]
+                edgeKey = frozenset([x,y])
+                weightString = ('%%.%df' % ndigits) %  random.uniform(Min,Max)
+                edges[edgeKey] = Decimal(weightString)
+        self.edges = edges
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+
+class RandomRegularGraph(Graph):
+    """
+    Specialization of the general Graph class for generating
+    temporary random regular graphs of fixed degrees.
+    """
+    def __init__(self,order=7,degree=2,seed=None):
+        from copy import deepcopy
+        from randomDigraphs import RandomRegularDigraph
+        rdg = RandomRegularDigraph(order=order,
+                                   degree=degree,
+                                   seed=seed)
+        rg = rdg.digraph2Graph()
+        self.vertices = deepcopy(rg.vertices)
+        self.valuationDomain = deepcopy(rg.valuationDomain)
+        self.edges = deepcopy(rg.edges)
+        self.name = 'randomRegularGraph'
+        self.order = len(self.vertices)
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+
+class RandomFixedSizeGraph(Graph):
+    """
+    Generates a random graph with a fixed size (number of edges), by instantiating a fixed numbers of arcs
+    from random choices in the set of potential pairs of vertices numbered from 1 to order. 
+    """
+    def __init__(self,order=7,size=14,seed=None,Debug=False):
+        import random
+        random.seed(seed)
+        # check feasability
+        r = ((order * order) - order)//2
+        if size > r :
+            print('Graph not feasable: size exceeds number of potential edges = %d !!' % r)
+            return
+        print(order,size,r)
+        self.name = 'randomFixedSize'
+        self.order = order
+        nd = len(str(order))
+        vertices = dict()
+        for i in range(order):
+            vertexKey = ('v%%0%dd' % nd) % (i+1)
+            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+        self.vertices = vertices
+        if Debug:
+            print(self.vertices)
+        self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
+        edges = dict()
+        Min = self.valuationDomain['min']
+        verticesList = [v for v in vertices]
+        verticesList.sort()
+        for x in verticesList:
+            for y in verticesList:
+                if x != y:
+                    edgeKey = frozenset([x,y])
+                    edges[edgeKey] = Min
+        if Debug:
+            print(edges)
+        edgesKeys = [key for key in edges]
+        edgesKeys.sort()
+        if Debug:
+            print(edgesKeys)
+        Max = self.valuationDomain['max']
+        for i in range(size):
+                edgeKey = random.choice(edgesKeys)
+                edges[edgeKey] = Max
+                edgesKeys.remove(edgeKey)
+                if Debug:
+                    print(i,edgeKey,edgesKeys)
+        self.edges = edges
+        self.size = size
+        self.gamma = self.gammaSets()
+
+class RandomFixedDegreeSequenceGraph(Graph):
+    """
+    Specialization of the general Graph class for generating
+    temporary random graphs with a fixed sequence of degrees.
+
+    .. warning::
+
+        The implementation is not guaranteeing a uniform choice
+        among all potential valid graph instances.
+
+    """
+    def __init__(self,order=7,degreeSequence=[3,3,2,2,1,1,0],seed=None):
+        from copy import deepcopy
+        from randomDigraphs import RandomFixedDegreeSequenceDigraph
+        rdg = RandomFixedDegreeSequenceDigraph(order=order,
+                                               degreeSequence=degreeSequence,
+                                               seed=seed)
+        rg = rdg.digraph2Graph()
+        self.vertices = deepcopy(rg.vertices)
+        self.order = order
+        self.valuationDomain = deepcopy(rg.valuationDomain)
+        self.edges = deepcopy(rg.edges)
+        self.size = self.computeSize()
+        self.name = 'randomFixedDegreeSequenceGraph'
+        self.gamma = self.gammaSets()
 
 class GridGraph(Graph):
     """
@@ -467,7 +1087,7 @@ class GridGraph(Graph):
 
     *Parameters*:
         * n,m > 0
-        * valuationDomain ={'min':m, 'max':M}
+        * valuationDomain ={'min':-1, 'med':0, 'max':+1}
 
     Default instantiation (5 times 5 Grid Digraph):
        * n = 5,
@@ -502,9 +1122,9 @@ class GridGraph(Graph):
         self.order = order
         self.vertices = vertices
         self.gridNodes = gridNodes
-        Min = valuationMin
-        Max = valuationMax
-        Med = (Max + Min)//2
+        Min = Decimal(str(valuationMin))
+        Max = Decimal(str(valuationMax))
+        Med = Decimal(str((Max + Min)/Decimal('2')))
         self.valuationDomain = {'min':Min,'med':Med,'max':Max}
         edges = {} # instantiate edges
         verticesKeys = [x for x in vertices]
@@ -530,7 +1150,7 @@ class GridGraph(Graph):
 
 
         self.edges = edges
-        self.size = len(edges)
+        self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
     def showShort(self):
@@ -541,31 +1161,26 @@ class GridGraph(Graph):
         print('order         : ', self.order)
         print('size          : ', self.size)
 
-class TriangularGraph(Graph):
+class TriangulatedGrid(Graph):
     """
     Specialization of the general Graph class for generating
-    temporary triangular graphs of dimension n times m.
+    temporary triangulated grids of dimension n times m.
 
     *Parameters*:
         * n,m > 0
-        * valuationDomain ={'min':m, 'max':M}
+        * valuationDomain = {'min':m, 'max':M}
 
-    Default instantiation (5 times 5 Trinagular Digraph):
-       * n = 5,
-       * m=5,
-       * valuationDomain = {'min':-1.0,'max':1.0}.
-
-    Example of 5x5 GridGraph instance:
+    Example of 5x5 triangulated grid instance:
 
     .. image:: triangular-5-5.png
-       :alt: triangular 5x5 graph
+       :alt: triangulated 5x5 grid
        :width: 300 px
        :align: center
     """
 
     def __init__(self,n=5,m=5,valuationMin=-1,valuationMax=1):
 
-        self.name = 'triangular-'+str(n)+'-'+str(m)
+        self.name = 'triangulated-'+str(n)+'-'+str(m)
         self.n = n
         self.m = m
         na = list(range(n+1))
@@ -583,9 +1198,9 @@ class TriangularGraph(Graph):
         self.order = order
         self.vertices = vertices
         self.gridNodes = gridNodes
-        Min = valuationMin
-        Max = valuationMax
-        Med = (Max + Min)//2
+        Min = Decimal(str(valuationMin))
+        Max = Decimal(str(valuationMax))
+        Med = Decimal((Max + Min)/Decimal('2'))
         self.valuationDomain = {'min':Min,'med':Med,'max':Max}
         edges = {} # instantiate edges
         verticesKeys = [x for x in vertices]
@@ -621,25 +1236,30 @@ class TriangularGraph(Graph):
 
 
         self.edges = edges
-        self.size = len(edges)
+        self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
     def showShort(self):
-        print('*----- show short --------------*')
-        print('Grid graph    : ', self.name)
-        print('n             : ', self.n)
-        print('m             : ', self.m)
-        print('order         : ', self.order)
-        print('size          : ', self.size)
+        print('*----- show summary --------------*')
+        print('Triangular graph : ', self.name)
+        print('n x m            : ', self.n, 'x', self.m)
+        print('order            : ', self.order)
+        print('size             : ', self.size)
 
 class RandomTree(Graph):
     """
     Random instance of a tree generated from a random Prüfer code.
 
     .. image:: randomTree.png
+       :alt: radomTree instance
+       :width: 300 px
+       :align: center
+   
     """
-    def __init__(self,order=None, prueferCode = None, myseed = None, Debug=False):
-        from random import choice, seed
+    def __init__(self,order=None, vertices= None,
+                 prueferCode = None, seed = None, Debug=False):
+        import random
+        random.seed(seed)
         self.name='randomTree'
         if order == None:
             if prueferCode == None:
@@ -649,61 +1269,292 @@ class RandomTree(Graph):
         self.order = order
         if Debug:
             print(self.name, self.order)
-
-        vertices = dict()
-        for i in range(order):
-            vertexKey = i
-            vertices[vertexKey] = {'shortName':str(vertexKey), 'name': 'random vertex'}
+        if vertices == None:
+            vertices = dict()
+            for i in range(order):
+                vertexKey = 'v%d' % (i+1)
+                vertices[vertexKey] = {'shortName':str(vertexKey), 'name': 'random vertex'}
         self.vertices = vertices
         if Debug:
             print('vertices = ', self.vertices)
 
-        self.valuationDomain = {'min':-1,'med':0,'max':1}
+        self.valuationDomain = {'min':Decimal('-1'),
+                                'med':Decimal('0'),
+                                'max':Decimal('1')}
+        Min = self.valuationDomain['min']
+        Med = self.valuationDomain['med']
+        Max = self.valuationDomain['max']
         if Debug:
             print('valuationDomain = ', self.valuationDomain)
 
+
+        verticesList = [x for x in self.vertices.keys()]
+        verticesList.sort()
+        if Debug:
+            print(verticesList)
         edges = dict()
         for i in range(order):
             for j in range(i+1,order):
-                edgeKey = frozenset([i,j])
-                edges[edgeKey] = -1
+                edgeKey = frozenset([verticesList[i],verticesList[j]])
+                edges[edgeKey] = Min
         self.edges = edges
         if Debug:
             print('edges = ',self.edges)
         if prueferCode == None:
             prueferCode = []
-            if myseed != None:
-                seed(myseed)
             for k in range(order-2):
-                prueferCode.append( choice( list(range(order)) ) )
+                prueferCode.append( verticesList[random.choice( list(range(order)) )] )
         self.prueferCode = prueferCode
         if Debug:
             print('prueferCode = ', self.prueferCode)
 
-        degree = []
-        for x in list(self.vertices.keys()):
-            degree.append(1)
+        degree = {}
+        for x in verticesList:
+            degree[x] = 1
         for i in range(order-2):
             degree[prueferCode[i]] += 1
         if Debug:
             print('degrees = ', degree)
 
         for i in range(order-2):
-            for j in list(self.vertices.keys()):
-                if degree[j] == 1:
-                    edgeKey = frozenset([prueferCode[i],j])
-                    self.edges[edgeKey] = self.valuationDomain['max']
-                    degree[j] -= 1
+            for j in range(order):
+                if degree[verticesList[j]] == 1:
+                    edgeKey = frozenset([prueferCode[i],verticesList[j]])
+                    self.edges[edgeKey] = Max
+                    degree[verticesList[j]] -= 1
                     degree[prueferCode[i]] -= 1
                     break
-        lastEdgeKey = frozenset([i for i in range(order) if degree[i] > 0])
-        self.edges[lastEdgeKey] = self.valuationDomain['max']
+        lastEdgeKey = frozenset([verticesList[i] for i in range(order) if degree[verticesList[i]] > 0])
+        self.edges[lastEdgeKey] = Max
         if Debug:
             print('updated edges = ', self.edges)
-        self.size = len(self.edges)
+        self.size = self.computeSize()
         self.gamma = self.gammaSets(Debug)
         if Debug:
             print('gamma = ', self.gamma)
+
+    def tree2Pruefer(self,vertices=None,Debug=False):
+        """
+        Renders the Pruefer code of a given tree.
+        """
+        if vertices == None:
+            vertices = self.vertices
+        verticesList = [x for x in vertices]
+        verticesList.sort()
+        if Debug:
+            print('verticesList = ',verticesList)
+        np = len(verticesList)-2
+        Med = self.valuationDomain['med']
+        edges = [e for e in self.edges if self.edges[e] > Med]
+        degree = dict()
+        for v in verticesList:
+            degree[v] = len(self.gamma[v])
+        if Debug:
+            print('degrees = ', degree)
+        prueferCode = []
+        for i in range(np):
+            leaves = [v for v in verticesList if degree[v] == 1]
+            leaves.sort()
+            leavesEdges = [e for e in edges if leaves[0] in e]
+            for v in leavesEdges[0]:
+                if degree[v] > 1:
+                    prueferCode.append(v)
+                degree[v] -= 1
+            edges.remove(leavesEdges[0])
+        return prueferCode
+
+class RandomSpanningForest(RandomTree):
+    """
+    Random instance of a spanning forest (one or more trees)
+    generated from a random depth first search graph g traversal.
+
+    .. image:: randomSpanningTree.png
+       :alt: randomSpanningForest instance
+       :width: 300 px
+       :align: center
+    """
+    def __init__(self,g,seed=None,Debug=False):
+        from copy import deepcopy
+        import random
+        random.seed(seed)
+        self.name= g.name+'_randomSpanningTree'
+        if Debug:
+            print(self.name)
+        self.vertices = deepcopy(g.vertices)
+        order = len(self.vertices)
+        self.order = order
+        self.valuationDomain = deepcopy(g.valuationDomain)
+        Min = self.valuationDomain['min']
+        Med = self.valuationDomain['med']
+        Max = self.valuationDomain['max']
+        if Debug:
+            print('valuationDomain = ', self.valuationDomain)
+
+        verticesList = [x for x in self.vertices]
+        verticesList.sort()
+        edges = dict()
+        for i in range(order):
+            for j in range(i+1,order):
+                edgeKey = frozenset([verticesList[i],verticesList[j]])
+                if g.edges[edgeKey] > Med:
+                    edges[edgeKey] = Med
+                else:
+                    edges[edgeKey] = g.edges[edgeKey]
+        self.edges = deepcopy(edges)
+        if Debug:
+            print('edges = ',self.edges)
+
+        self.dfs = g.randomDepthFirstSearch(seed=seed,Debug=Debug)
+        if Debug:
+            print('dfs = ', self.dfs)
+        components = []
+        for tree in self.dfs:
+            component = set()
+            n = len(tree)
+            for i in range(n-1):
+                component.add(tree[i])
+                component.add(tree[i+1])
+                edgeKey = frozenset([tree[i],tree[i+1]])
+                self.edges[edgeKey] = Max
+            if Debug:
+                print('tree = ',tree)
+                print('component = ',component)
+            components.append(component)
+        if Debug:
+            print('updated edges = ', self.edges)
+   
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets(Debug)
+        if Debug:
+            print('gamma = ', self.gamma)
+
+        prueferCodes = []
+        for tree in self.dfs:
+            component = set(tree)
+            if len(component) > 2:
+                prueferCodes.append({'component': component,
+                                 'code': self.tree2Pruefer(vertices=component)
+                                 })
+            else:
+                prueferCodes.append({'component': component, 'code': []})
+                
+        self.prueferCodes = prueferCodes
+
+class BestDeterminedSpanningForest(RandomTree):
+    """
+    Constructing the most determined spanning tree (or forest if not connected)
+    using Kruskal's greedy algorithm on the dual valuation.
+
+    Example Python session:
+       >>> g = RandomValuationGraph(seed=2)
+       >>> g.showShort()
+       *---- short description of the graph ----*
+       Name             : 'randomGraph'
+       Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5']
+       Valuation domain :  {'med': Decimal('0'), 'min': Decimal('-1'), 'max': Decimal('1')}
+       Gamma function   : 
+       v1 -> ['v2', 'v3']
+       v2 -> ['v4', 'v1', 'v5', 'v3']
+       v3 -> ['v1', 'v5', 'v2']
+       v4 -> ['v5', 'v2']
+       v5 -> ['v4', 'v2', 'v3']
+       >>> mt = BestDeterminedSpanningForest(g)
+       >>> mt.exportGraphViz('spanningTree',withSpanningTree=True)
+       *---- exporting a dot file for GraphViz tools ---------*
+       Exporting to spanningTree.dot
+       [['v4', 'v2', 'v1', 'v3', 'v1', 'v2', 'v5', 'v2', 'v4']]
+       neato -Tpng spanningTree.dot -o spanningTree.png
+
+    .. image:: spanningTree.png
+       :alt: 7-cycle instance
+       :width: 300 px
+       :align: center
+
+    """
+    def __init__(self,g,seed=None,Debug=False):
+        from copy import deepcopy
+        import random
+        random.seed(seed)
+        self.name= g.name+'_randomSpanningTree'
+        if Debug:
+            print(self.name)
+        self.vertices = deepcopy(g.vertices)
+        verticesList = [x for x in self.vertices]
+        verticesList.sort()
+        order = len(self.vertices)
+        self.order = order
+        self.valuationDomain = deepcopy(g.valuationDomain)
+        Min = self.valuationDomain['min']
+        Med = self.valuationDomain['med']
+        Max = self.valuationDomain['max']
+        if Debug:
+            print('valuationDomain = ', self.valuationDomain)
+        edges = dict()
+        for i in range(order):
+            for j in range(i+1,order):
+                edgeKey = frozenset([verticesList[i],verticesList[j]])
+                if g.edges[edgeKey] > Med:
+                    edges[edgeKey] = Med
+                else:
+                    edges[edgeKey] = g.edges[edgeKey]
+        forest = []
+        weightedEdgesList = [(g.edges[e],e) \
+                for e in g.edges if g.edges[e] > Med ]
+        weightedEdgesList.sort(reverse=True)
+        if Debug:
+            print(weightedEdgesList)
+        for e in weightedEdgesList:
+            if Debug:
+                print('===>>> ', e)
+            edgeKeys = set([v for v in e[1]])
+            Included = False
+            connectedSubtrees = []
+            for tree in forest:
+                if Debug:
+                    print(tree)
+                test = tree[1] & edgeKeys
+                if len(test) == 2: # already connected
+                    Included = True
+                    if Debug:
+                        print('already included')
+                    break
+                elif len(test) == 1: # extending
+                    connectedSubtrees.append(tree)
+                    if Debug:
+                        print('extending',tree)
+            if not Included:
+                edges[e[1]] = e[0]
+                if Debug:
+                    print(e[1],edges[e[1]])             
+                    print('connecting subtrees',connectedSubtrees)
+                if connectedSubtrees == []:
+                    forest.append([set([e[1]]),edgeKeys])
+                    if Debug:
+                        print('Add new subtree')
+                elif len(connectedSubtrees) == 1:
+                    connectedSubtrees[0][0].add(e[1])
+                    connectedSubtrees[0][1] = connectedSubtrees[0][1] | edgeKeys
+                    if Debug:
+                        print('Extending an existing subtree')
+                else:
+                    connectedSubtrees[0][0].add(e[1])
+                    connectedSubtrees[0][0] =\
+                            connectedSubtrees[0][0] | connectedSubtrees[1][0]
+                    connectedSubtrees[0][1] =\
+                connectedSubtrees[0][1] | connectedSubtrees[1][1] | edgeKeys
+                    forest.remove(connectedSubtrees[1])
+                    if Debug:
+                        print('connected two subtrees')
+                        print(forest)
+                    
+        self.edges = deepcopy(edges)
+        if Debug:
+            print('edges = ',self.edges)
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets(Debug)
+        if Debug:
+            print('gamma = ', self.gamma)
+        self.dfs = self.depthFirstSearch()
 
 class Q_Coloring(Graph):
     """
@@ -735,9 +1586,10 @@ class Q_Coloring(Graph):
     """ 
 
     def __init__(self,g,colors=['gold','lightcoral','lightblue'],
-                 nSim=None,maxIter=20,
+                 nSim=None,maxIter=20,seed=None,
                  Comments=True,Debug=False):
         from copy import deepcopy
+        self.gClass = g.__class__
         self.name = '%s-qcoloring' % g.name
         if isinstance(g.vertices,dict):
             self.vertices = deepcopy(g.vertices)
@@ -761,16 +1613,17 @@ class Q_Coloring(Graph):
         _iter = 0
         while infeasibleEdges != set() and _iter < maxIter:
             _iter += 1
-            print(_iter)
-            self.generateFeasibleConfiguration(Reset=True,Debug=Debug)
+            print('Iteration:', _iter)
+            self.generateFeasibleConfiguration(seed=seed,Reset=True,Debug=Debug)
             infeasibleEdges = self.checkFeasibility(Comments=Comments)
     
     def showConfiguration(self):
         for v in self.vertices:
             print(v,self.vertices[v]['color'])
             
-    def generateFeasibleConfiguration(self,Reset=True,nSim=None,Debug=False):
-        from random import choice
+    def generateFeasibleConfiguration(self,Reset=True,nSim=None,seed=None,Debug=False):
+        import random
+        random.seed(seed)
         if Reset:
             for v in self.vertices:
                 self.vertices[v]['color'] = self.colors[0]           
@@ -779,16 +1632,16 @@ class Q_Coloring(Graph):
         print('Running a Gibbs Sampler for %d step !' % nSim)
         for s in range(nSim):
             verticesKeys = [v for v in self.vertices]
-            v = choice(verticesKeys)
+            v = random.choice(verticesKeys)
             neighborColors = [self.vertices[x]['color']\
                                   for x in self.gamma[v]]
             feasibleColors = list(set(self.colors) - set(neighborColors))
             try:
-                self.vertices[v]['color'] = choice(feasibleColors)
+                self.vertices[v]['color'] = random.choice(feasibleColors)
             except:
                 if Debug:
                     print(s,v,'Warning !! Not feasible coloring')
-                self.vertices[v]['color'] = choice(self.colors)
+                self.vertices[v]['color'] = random.choice(self.colors)
             if Debug:
                 print(s, v,  self.vertices[v]['color'])
 
@@ -905,8 +1758,10 @@ class Q_Coloring(Graph):
 
         fo.write('}\n')
         fo.close()
-        if isinstance(self,(GridGraph,RandomTree)):
+        if self.gClass in (GridGraph,RandomTree):
             commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        elif self.gClass == CycleGraph:
+            commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         else:
             commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         if noSilent:
@@ -946,6 +1801,7 @@ class IsingModel(Graph):
                 nSim=None,
                 Debug=False):
         from copy import deepcopy
+        self.gClass = g.__class__
         self.name = '%s-ising' % g.name
         if isinstance(g.vertices,dict):
             self.vertices = deepcopy(g.vertices)
@@ -956,7 +1812,7 @@ class IsingModel(Graph):
         self.order = len(self.vertices)
         self.valuationDomain = deepcopy(g.valuationDomain)
         self.edges = deepcopy(g.edges)
-        self.size = len(self.edges)
+        self.size = g.size
         self.gamma = deepcopy(g.gamma)
         for v in self.vertices:
             self.vertices[v]['spin'] = 0
@@ -1073,8 +1929,10 @@ class IsingModel(Graph):
 
         fo.write('}\n')
         fo.close()
-        if isinstance(self,(GridGraph,RandomTree)):
+        if self.gClass in (GridGraph,TriangulatedGrid,RandomTree):
             commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        elif self.gClass == CycleGraph:
+            commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         else:
             commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         if noSilent:
@@ -1151,7 +2009,7 @@ class MetropolisChain(Graph):
                 self.vertices[v]['prob'] = probs[v]       
         self.valuationDomain = deepcopy(g.valuationDomain)
         self.edges = deepcopy(g.edges)
-        self.size = len(self.edges)
+        self.size = g.size
         self.gamma = deepcopy(g.gamma)
         self.transition = self.computeTransitionMatrix()
 
@@ -1339,10 +2197,12 @@ class MISModel(Graph):
        
     """
     def __init__(self,g,
-                nSim=None,
+                 nSim=None,
                  maxIter=20,
-                Debug=False):
+                 seed=None,
+                 Debug=False):
         from copy import deepcopy
+        self.gClass = deepcopy(g.__class__)
         self.name = '%s-mis' % g.name
         if isinstance(g.vertices,dict):
             self.vertices = deepcopy(g.vertices)
@@ -1353,7 +2213,7 @@ class MISModel(Graph):
         self.order = len(self.vertices)
         self.valuationDomain = deepcopy(g.valuationDomain)
         self.edges = deepcopy(g.edges)
-        self.size = len(self.edges)
+        self.size = g.size
         self.gamma = deepcopy(g.gamma)
         if nSim == None:
             nSim = len(self.edges)*10
@@ -1362,12 +2222,13 @@ class MISModel(Graph):
         _iter = 0
         while unCovered != set() and _iter < maxIter:
             _iter += 1
-            print(_iter)
-            self.generateMIS(Reset=True,nSim=nSim,Debug=Debug)
+            print('Iteration: ', _iter)
+            self.generateMIS(Reset=True,nSim=nSim,seed=seed,Debug=Debug)
             mis,misCover,unCovered = self.checkMIS()
 
-    def generateMIS(self,Reset=True,nSim=None,Comments=True,Debug=False):
-        from random import choice
+    def generateMIS(self,Reset=True,nSim=None,seed=None,Comments=True,Debug=False):
+        import random
+        random.seed(seed)
         from math import exp
         if nSim == None:
             nSim = self.nSim
@@ -1378,7 +2239,7 @@ class MISModel(Graph):
         if Comments:
             print('Running a Gibbs Sampler for %d step !' % nSim)
         for s in range(nSim):
-            v = choice(verticesKeys)
+            v = random.choice(verticesKeys)
             Potential = True
             for x in self.gamma[v]:
                 if self.vertices[x]['mis'] == 1:
@@ -1481,8 +2342,10 @@ class MISModel(Graph):
 
         fo.write('}\n')
         fo.close()
-        if isinstance(self,(GridGraph,RandomTree)):
+        if self.gClass in (GridGraph,RandomTree):
             commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        elif self.gClass == CycleGraph:
+            commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         else:
             commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         if noSilent:
@@ -1496,35 +2359,84 @@ class MISModel(Graph):
 
 # --------------testing the module ----
 if __name__ == '__main__':
-##    g = TriangularGraph(n=5,m=5)
+
+
+    g = RandomGraph(order=10,edgeProbability=1/3,seed=200)
+    g.showShort()
+    print(g.computeNeighbourhoodDepthDistribution(Debug=False))
+    print(g.isConnected(), g.computeComponents())
+    g.exportGraphViz(withSpanningTree=True)
+    #g.computeDegreeDistribution()
+####    g = RandomRegularGraph(seed=100)
+    #g = GridGraph(n=10,m=10)
+    #g = TriangulatedGrid(n=10,m=10)
+##    g.save()
+##    g.exportGraphViz('graph200')
+##    #print(g.randomDepthFirstSearch(seed=None,Debug=False))
+##    #g.exportGraphViz(withSpanningTree=True,layout="circo")
+##    mt = BestDeterminedSpanningForest(g,Debug=True)
+##    mt.exportGraphViz(layout="circo")
+##    t = RandomTree(Debug=True,seed=100)
+##    print(t.prueferCode)
+##    print(t.tree2Pruefer())
+##    rsp = RandomSpanningForest(g,seed=100)
+##    print(rsp.prueferCodes)
+##    rsp.exportGraphViz(withSpanningTree=True)
+    
+##    from digraphs import KneserDigraph
+##    pdg = KneserDigraph()
+##    p = pdg.digraph2Graph()
+####    p = RandomGraph(order=10,edgeProbability=0.1,seed=100)
+##    p.randomDepthFirstSearch(seed=10)
+##    p.exportGraphViz(withSpanningTree=True)
+##    print(p.dfs)
+##    spt = RandomSpanningForest(p,seed=1)
+##    print(spt.dfs)
+##    spt.exportGraphViz()
+##    
+##    c = CycleGraph()
+##    c.showShort()
+##
+##    g = RandomGraph(seed=100)
+##    g.showShort()
+##    g = RandomFixedDegreeSequenceGraph(seed=100)
+##    g.showShort()
+##    rg = RandomRegularGraph(seed=100)
+##    rg.showShort()
+##    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
+##    rfs.showShort()
+##    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
+##    rfs.showShort()
+##    
+##    g = TriangulatedGrid(n=5,m=5)
 ##    #g.showShort()
 ##    g.exportGraphViz()
-    
-    g = Graph(numberOfVertices=5,edgeProbability=0.5)
-    g.showShort()
-    g.save('test')
-    probs = {}
-    n = g.order
-    i = 0
-    verticesList = [x for x in g.vertices]
-    verticesList.sort()
-    for x in verticesList:
-        probs[x] = (n - i)/(n*(n+1)/2)
-        i += 1
-    sumProbs = 0.0
-    for x in verticesList:
-        sumProbs += probs[x]
-    met = MetropolisChain(g,probs)
-    #met = MetropolisChain(g)
-    #met.showShort()
-    frequency = met.checkSampling(verticesList[0],nSim=30000)
-    for x in verticesList:
-        try:
-            print(x,probs[x],frequency[x])
-        except:
-            print(x,0.0,0.0)
-    met.showTransitionMatrix()
-    met.saveCSVTransition()
+##    
+##    g = Graph(numberOfVertices=5,edgeProbability=0.5)
+##    g.showShort()
+##    g.save('test')
+##    probs = {}
+##    n = g.order
+##    i = 0
+##    verticesList = [x for x in g.vertices]
+##    verticesList.sort()
+##    for x in verticesList:
+##        probs[x] = (n - i)/(n*(n+1)/2)
+##        i += 1
+##    sumProbs = 0.0
+##    for x in verticesList:
+##        sumProbs += probs[x]
+##    met = MetropolisChain(g,probs)
+##    #met = MetropolisChain(g)
+##    #met.showShort()
+##    frequency = met.checkSampling(verticesList[0],nSim=30000)
+##    for x in verticesList:
+##        try:
+##            print(x,probs[x],frequency[x])
+##        except:
+##            print(x,0.0,0.0)
+##    met.showTransitionMatrix()
+##    met.saveCSVTransition()
 ##    # Q-Colorings
 ##    g = Graph(numberOfVertices=30,edgeProbability=0.1)
 ##    #g = GridGraph(n=6,m=6)
@@ -1545,7 +2457,7 @@ if __name__ == '__main__':
 ##    g = GridGraph(n=10,m=10)
 ##    #g = Graph(numberOfVertices=30,edgeProbability=0.1)
 ##    g.showShort()
-##    im = MISModel(g,nSim=100,beta=0.1,Debug=False)
+##    im = MISModel(g,nSim=100,Debug=False)
 ##    im.checkMIS(Comments=True)
 ##    print('MIS       = ',im.mis)
 ##    print('Covered   = ',im.misCover)

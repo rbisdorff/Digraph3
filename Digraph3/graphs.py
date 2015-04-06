@@ -1609,6 +1609,117 @@ class RandomSpanningForest(RandomTree):
                 
         self.prueferCodes = prueferCodes
 
+class RandomSpanningTree(RandomTree):
+    """
+    Uniform random instance of a spanning forest (one or more trees)
+    generated with Wilson's algorithm from a connected Graph g instance
+
+    .. Note::
+
+         Wilson's algorithm only works for connecte graphs.
+
+    .. image:: randomSpanningTree.png
+       :alt: randomSpanningForest instance
+       :width: 300 px
+       :align: center
+    """
+    def __init__(self,g,seed=None,Debug=False):
+        from copy import copy as copy
+        if not g.isConnected():
+            print('Error !: Wilson\'s algorithm requires a connected graph!')
+            return
+        import random
+        random.seed(seed)
+        self.name= g.name+'_randomSpanningTree'
+        if Debug:
+            print(self.name)
+        self.vertices = copy(g.vertices)
+        order = len(self.vertices)
+        self.order = order
+        self.valuationDomain = copy(g.valuationDomain)
+        Min = self.valuationDomain['min']
+        Med = self.valuationDomain['med']
+        Max = self.valuationDomain['max']
+        if Debug:
+            print('valuationDomain = ', self.valuationDomain)
+        
+        verticesList = [x for x in self.vertices]
+        random.shuffle(verticesList)
+        if Debug:
+            print(verticesList)
+        spannedVertices = set()
+        spanningTree = []
+        randomWalk = [verticesList[0]]
+        i = 0
+        while randomWalk[i] != verticesList[-1]:
+            nextVertex = random.choice(list(g.gamma[randomWalk[i]]))
+            randomWalk.append(nextVertex)
+            i += 1
+        if Debug:
+            print('random walk: ',randomWalk)
+        spanningBranch = self._reduceCycles(randomWalk,Debug=Debug)
+        spanningTree.append(spanningBranch)
+        spannedVertices = spannedVertices | set(spanningBranch)
+        remainingVertices = set(verticesList) - set(spanningBranch)
+        if Debug:
+            print('spanningBranch = ', spanningBranch)
+            print('spannedVertices = ', spannedVertices)
+            print('remainingVertices = ',remainingVertices)
+            print('spanningTree = ', spanningTree)
+        while remainingVertices != set():
+            remainingVerticesList = list(remainingVertices)
+            random.shuffle(remainingVerticesList)
+            randomWalk = [random.choice(remainingVerticesList)]
+            i = 0
+            while randomWalk[i] not in spannedVertices:
+                nextVertex = random.choice(list(g.gamma[randomWalk[i]]))
+                randomWalk.append(nextVertex)
+                i += 1
+            if Debug:
+                print('randomWalk = ',randomWalk)
+            spanningBranch = self._reduceCycles(randomWalk,Debug=Debug)
+            spannedVertices = spannedVertices | set(spanningBranch)
+            remainingVertices = set(remainingVerticesList) - set(spanningBranch)
+            spanningTree.append(spanningBranch)            
+            if Debug:
+                print('spanningBranch = ', spanningBranch)
+                print('spannedVertices = ', spannedVertices)
+                print('remainingVertices = ',remainingVertices)
+                print('spanningTree = ', spanningTree)
+                
+        self.edges = copy(g.edges)
+        for edgeKey in self.edges:
+            if self.edges[edgeKey] > Med:
+                self.edges[edgeKey] = Med
+        for branch in spanningTree:
+            for i in range(len(branch)-1):
+                edgeKey = frozenset([branch[i],branch[i+1]])
+                self.edges[edgeKey] = g.edges[edgeKey]
+        if Debug:
+            print('edges = ', self.edges)
+
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+        self.dfs = self.depthFirstSearch()
+        self.prueferCode = self.tree2Pruefer()
+        
+    def _reduceCycles(self,randomWalk,Debug=False):
+        reducedWalk = []
+        n = len(randomWalk)
+        i = 0
+        while i < n:
+            for j in range(i+1,n):
+                if randomWalk[i] == randomWalk[j]:
+                    if Debug:
+                        print('cycle: ',i, j, n, randomWalk[i:j])
+                    i = j
+                    break
+            reducedWalk.append(randomWalk[i])
+            i += 1
+        return reducedWalk
+
+    
+#----------
 class BestDeterminedSpanningForest(RandomTree):
     """
     Constructing the most determined spanning tree (or forest if not connected)
@@ -2513,7 +2624,7 @@ class MISModel(Graph):
         fo.close()
         if self.gClass in (GridGraph,RandomTree):
             commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
-        elif self.gClass == CycleGraph:
+        elif self.gClass == CycleGraph:           
             commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         else:
             commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
@@ -2529,21 +2640,30 @@ class MISModel(Graph):
 # --------------testing the module ----
 if __name__ == '__main__':
 
-
-    g = RandomGraph(order=20,edgeProbability=1/3,seed=200)
-    #g = CompleteGraph(order=10)
-    g.showShort()
-    g.showMore()
-    print(g.computeNeighbourhoodDepthDistribution(Debug=False))
-    for v in g.vertices:
-        print(v,g.computeNeighbourhoodDepth(v))
-    print(g.isConnected(), g.computeComponents())
-    g.exportGraphViz()
-    print('diameter: ',g.computeDiameter())
-    g.showMIS()
-    mis = MISModel(g,seed=1)
-    mis.exportGraphViz()
-    g.showCliques()
+    g = RandomGraph(order=10,edgeProbability=1/3,seed=200)
+    #g.save('test')
+    #g = Graph('test')
+    ust = RandomSpanningTree(g,seed=200,Debug=False)
+    ust.showShort()
+    ust.showMore()
+    ust.dfs = ust.randomDepthFirstSearch()
+    ust.exportGraphViz(withSpanningTree=True)
+    print(ust.prueferCode)
+    
+##    g = RandomGraph(order=20,edgeProbability=1/3,seed=200)
+##    #g = CompleteGraph(order=10)
+##    g.showShort()
+##    g.showMore()
+##    print(g.computeNeighbourhoodDepthDistribution(Debug=False))
+##    for v in g.vertices:
+##        print(v,g.computeNeighbourhoodDepth(v))
+##    print(g.isConnected(), g.computeComponents())
+##    g.exportGraphViz()
+##    print('diameter: ',g.computeDiameter())
+##    g.showMIS()
+##    mis = MISModel(g,seed=1)
+##    mis.exportGraphViz()
+##    g.showCliques()
 
     
     #g.computeDegreeDistribution()

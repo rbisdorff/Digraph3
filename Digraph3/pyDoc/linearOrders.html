@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>linearOrders</strong></big></big> (version 1.18)</font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/linearOrders.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/linearOrders.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/linearOrders.py">/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/linearOrders.py</a></font></td></tr></table>
     <p><tt>#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
 #&nbsp;Python&nbsp;implementation&nbsp;of&nbsp;linear&nbsp;orders<br>
 #&nbsp;Dependancy:&nbsp;digraphs&nbsp;1.589+<br>
@@ -97,7 +97,7 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 &nbsp;<br>
 ..&nbsp;note::&nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;<a href="#ExtendedPrudentDigraph-MISgen">MISgen</a>(actionscopy(),set())</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#ExtendedPrudentDigraph-MISgen">MISgen</a>(self.actionscopy(),set())</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-__invert__"><strong>__invert__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;inverting&nbsp;operator&nbsp;~self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;ConverseDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
@@ -137,14 +137,14 @@ XORDigraph(self,digraph)&nbsp;instance.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#ExtendedPrudentDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#ExtendedPrudentDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-bipolarKDistance"><strong>bipolarKDistance</strong></a>(self, digraph, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;crisp&nbsp;Kendall&nbsp;distance&nbsp;between&nbsp;two&nbsp;bipolar&nbsp;valued<br>
 digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#ExtendedPrudentDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#ExtendedPrudentDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, n2, Odd=False, Comments=False, Debug=False)</dt><dd><tt>New&nbsp;procedure&nbsp;from&nbsp;Agrum&nbsp;study&nbsp;April&nbsp;2009<br>
 recursive&nbsp;chordless&nbsp;path&nbsp;extraction&nbsp;strating&nbsp;from&nbsp;path<br>
@@ -439,7 +439,7 @@ digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#ExtendedPrudentDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#ExtendedPrudentDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-detectChordlessCircuits"><strong>detectChordlessCircuits</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Detects&nbsp;a&nbsp;chordless&nbsp;circuit&nbsp;in&nbsp;a&nbsp;digraph.<br>
 Returns&nbsp;a&nbsp;Boolean</tt></dd></dl>
@@ -457,7 +457,7 @@ Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="ExtendedPrudentDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'max': 1, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="ExtendedPrudentDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -566,7 +566,7 @@ the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;<a href="#ExtendedPrudentDigraph-singletons">singletons</a>().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self.<a href="#ExtendedPrudentDigraph-singletons">singletons</a>().<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[(independent&nbsp;choice,&nbsp;domnb,&nbsp;absnb,&nbsp;indnb)].</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-inner_prod"><strong>inner_prod</strong></a>(self, v1, v2)</dt><dd><tt>Parameters:&nbsp;two&nbsp;choice&nbsp;characteristic&nbsp;vectors<br>
@@ -765,19 +765,19 @@ the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;m
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#ExtendedPrudentDigraph-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#ExtendedPrudentDigraph-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-showRankingByChoosing"><strong>showRankingByChoosing</strong></a>(self, rankingByChoosing=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#ExtendedPrudentDigraph-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#ExtendedPrudentDigraph-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-showRankingByLastChoosing"><strong>showRankingByLastChoosing</strong></a>(self, rankingByLastChoosing=None, Debug=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#ExtendedPrudentDigraph-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#ExtendedPrudentDigraph-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-showRelation"><strong>showRelation</strong></a>(self)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;##.##&nbsp;format.</tt></dd></dl>
 
@@ -790,7 +790,7 @@ older&nbsp;versions&nbsp;compatibility</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>concise&nbsp;presentation&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
-<dl><dt><a name="ExtendedPrudentDigraph-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;<a href="#ExtendedPrudentDigraph-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
+<dl><dt><a name="ExtendedPrudentDigraph-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;self.<a href="#ExtendedPrudentDigraph-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
 Renders&nbsp;and&nbsp;prints&nbsp;the&nbsp;sorted&nbsp;bipolar&nbsp;net&nbsp;determinatation&nbsp;of&nbsp;outrankingness<br>
 minus&nbsp;outrankedness&nbsp;credibilities&nbsp;of&nbsp;all&nbsp;singleton&nbsp;choices.<br>
 res&nbsp;=&nbsp;((netdet,sigleton,dom,absorb)+)</tt></dd></dl>
@@ -883,7 +883,7 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 &nbsp;<br>
 ..&nbsp;note::&nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;<a href="#KemenyOrder-MISgen">MISgen</a>(actionscopy(),set())</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#KemenyOrder-MISgen">MISgen</a>(self.actionscopy(),set())</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-__invert__"><strong>__invert__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;inverting&nbsp;operator&nbsp;~self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;ConverseDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
@@ -923,14 +923,14 @@ XORDigraph(self,digraph)&nbsp;instance.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#KemenyOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#KemenyOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-bipolarKDistance"><strong>bipolarKDistance</strong></a>(self, digraph, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;crisp&nbsp;Kendall&nbsp;distance&nbsp;between&nbsp;two&nbsp;bipolar&nbsp;valued<br>
 digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#KemenyOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#KemenyOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, n2, Odd=False, Comments=False, Debug=False)</dt><dd><tt>New&nbsp;procedure&nbsp;from&nbsp;Agrum&nbsp;study&nbsp;April&nbsp;2009<br>
 recursive&nbsp;chordless&nbsp;path&nbsp;extraction&nbsp;strating&nbsp;from&nbsp;path<br>
@@ -1221,7 +1221,7 @@ digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#KemenyOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#KemenyOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-detectChordlessCircuits"><strong>detectChordlessCircuits</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Detects&nbsp;a&nbsp;chordless&nbsp;circuit&nbsp;in&nbsp;a&nbsp;digraph.<br>
 Returns&nbsp;a&nbsp;Boolean</tt></dd></dl>
@@ -1239,7 +1239,7 @@ Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="KemenyOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'max': 1, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="KemenyOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -1346,7 +1346,7 @@ the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;<a href="#KemenyOrder-singletons">singletons</a>().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self.<a href="#KemenyOrder-singletons">singletons</a>().<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[(independent&nbsp;choice,&nbsp;domnb,&nbsp;absnb,&nbsp;indnb)].</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-inner_prod"><strong>inner_prod</strong></a>(self, v1, v2)</dt><dd><tt>Parameters:&nbsp;two&nbsp;choice&nbsp;characteristic&nbsp;vectors<br>
@@ -1545,19 +1545,19 @@ the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;m
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#KemenyOrder-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#KemenyOrder-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-showRankingByChoosing"><strong>showRankingByChoosing</strong></a>(self, rankingByChoosing=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#KemenyOrder-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#KemenyOrder-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-showRankingByLastChoosing"><strong>showRankingByLastChoosing</strong></a>(self, rankingByLastChoosing=None, Debug=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#KemenyOrder-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#KemenyOrder-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-showRelation"><strong>showRelation</strong></a>(self)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;##.##&nbsp;format.</tt></dd></dl>
 
@@ -1570,7 +1570,7 @@ older&nbsp;versions&nbsp;compatibility</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>concise&nbsp;presentation&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
-<dl><dt><a name="KemenyOrder-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;<a href="#KemenyOrder-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
+<dl><dt><a name="KemenyOrder-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;self.<a href="#KemenyOrder-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
 Renders&nbsp;and&nbsp;prints&nbsp;the&nbsp;sorted&nbsp;bipolar&nbsp;net&nbsp;determinatation&nbsp;of&nbsp;outrankingness<br>
 minus&nbsp;outrankedness&nbsp;credibilities&nbsp;of&nbsp;all&nbsp;singleton&nbsp;choices.<br>
 res&nbsp;=&nbsp;((netdet,sigleton,dom,absorb)+)</tt></dd></dl>
@@ -1663,7 +1663,7 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 &nbsp;<br>
 ..&nbsp;note::&nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;<a href="#KohlerOrder-MISgen">MISgen</a>(actionscopy(),set())</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#KohlerOrder-MISgen">MISgen</a>(self.actionscopy(),set())</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-__invert__"><strong>__invert__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;inverting&nbsp;operator&nbsp;~self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;ConverseDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
@@ -1703,14 +1703,14 @@ XORDigraph(self,digraph)&nbsp;instance.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#KohlerOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#KohlerOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-bipolarKDistance"><strong>bipolarKDistance</strong></a>(self, digraph, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;crisp&nbsp;Kendall&nbsp;distance&nbsp;between&nbsp;two&nbsp;bipolar&nbsp;valued<br>
 digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#KohlerOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#KohlerOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, n2, Odd=False, Comments=False, Debug=False)</dt><dd><tt>New&nbsp;procedure&nbsp;from&nbsp;Agrum&nbsp;study&nbsp;April&nbsp;2009<br>
 recursive&nbsp;chordless&nbsp;path&nbsp;extraction&nbsp;strating&nbsp;from&nbsp;path<br>
@@ -2001,7 +2001,7 @@ digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#KohlerOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#KohlerOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-detectChordlessCircuits"><strong>detectChordlessCircuits</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Detects&nbsp;a&nbsp;chordless&nbsp;circuit&nbsp;in&nbsp;a&nbsp;digraph.<br>
 Returns&nbsp;a&nbsp;Boolean</tt></dd></dl>
@@ -2019,7 +2019,7 @@ Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="KohlerOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'max': 1, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="KohlerOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -2126,7 +2126,7 @@ the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;<a href="#KohlerOrder-singletons">singletons</a>().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self.<a href="#KohlerOrder-singletons">singletons</a>().<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[(independent&nbsp;choice,&nbsp;domnb,&nbsp;absnb,&nbsp;indnb)].</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-inner_prod"><strong>inner_prod</strong></a>(self, v1, v2)</dt><dd><tt>Parameters:&nbsp;two&nbsp;choice&nbsp;characteristic&nbsp;vectors<br>
@@ -2325,19 +2325,19 @@ the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;m
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#KohlerOrder-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#KohlerOrder-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-showRankingByChoosing"><strong>showRankingByChoosing</strong></a>(self, rankingByChoosing=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#KohlerOrder-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#KohlerOrder-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-showRankingByLastChoosing"><strong>showRankingByLastChoosing</strong></a>(self, rankingByLastChoosing=None, Debug=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#KohlerOrder-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#KohlerOrder-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-showRelation"><strong>showRelation</strong></a>(self)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;##.##&nbsp;format.</tt></dd></dl>
 
@@ -2350,7 +2350,7 @@ older&nbsp;versions&nbsp;compatibility</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>concise&nbsp;presentation&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
-<dl><dt><a name="KohlerOrder-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;<a href="#KohlerOrder-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
+<dl><dt><a name="KohlerOrder-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;self.<a href="#KohlerOrder-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
 Renders&nbsp;and&nbsp;prints&nbsp;the&nbsp;sorted&nbsp;bipolar&nbsp;net&nbsp;determinatation&nbsp;of&nbsp;outrankingness<br>
 minus&nbsp;outrankedness&nbsp;credibilities&nbsp;of&nbsp;all&nbsp;singleton&nbsp;choices.<br>
 res&nbsp;=&nbsp;((netdet,sigleton,dom,absorb)+)</tt></dd></dl>
@@ -2436,7 +2436,7 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 &nbsp;<br>
 ..&nbsp;note::&nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;<a href="#LinearOrder-MISgen">MISgen</a>(actionscopy(),set())</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#LinearOrder-MISgen">MISgen</a>(self.actionscopy(),set())</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-__init__"><strong>__init__</strong></a>(self, file=None, order=7)</dt></dl>
 
@@ -2478,14 +2478,14 @@ XORDigraph(self,digraph)&nbsp;instance.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#LinearOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#LinearOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-bipolarKDistance"><strong>bipolarKDistance</strong></a>(self, digraph, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;crisp&nbsp;Kendall&nbsp;distance&nbsp;between&nbsp;two&nbsp;bipolar&nbsp;valued<br>
 digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#LinearOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#LinearOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, n2, Odd=False, Comments=False, Debug=False)</dt><dd><tt>New&nbsp;procedure&nbsp;from&nbsp;Agrum&nbsp;study&nbsp;April&nbsp;2009<br>
 recursive&nbsp;chordless&nbsp;path&nbsp;extraction&nbsp;strating&nbsp;from&nbsp;path<br>
@@ -2776,7 +2776,7 @@ digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#LinearOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#LinearOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-detectChordlessCircuits"><strong>detectChordlessCircuits</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Detects&nbsp;a&nbsp;chordless&nbsp;circuit&nbsp;in&nbsp;a&nbsp;digraph.<br>
 Returns&nbsp;a&nbsp;Boolean</tt></dd></dl>
@@ -2794,7 +2794,7 @@ Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="LinearOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'max': 1, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="LinearOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -2901,7 +2901,7 @@ the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;<a href="#LinearOrder-singletons">singletons</a>().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self.<a href="#LinearOrder-singletons">singletons</a>().<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[(independent&nbsp;choice,&nbsp;domnb,&nbsp;absnb,&nbsp;indnb)].</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-inner_prod"><strong>inner_prod</strong></a>(self, v1, v2)</dt><dd><tt>Parameters:&nbsp;two&nbsp;choice&nbsp;characteristic&nbsp;vectors<br>
@@ -3100,19 +3100,19 @@ the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;m
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#LinearOrder-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#LinearOrder-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-showRankingByChoosing"><strong>showRankingByChoosing</strong></a>(self, rankingByChoosing=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#LinearOrder-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#LinearOrder-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-showRankingByLastChoosing"><strong>showRankingByLastChoosing</strong></a>(self, rankingByLastChoosing=None, Debug=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#LinearOrder-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#LinearOrder-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-showRelation"><strong>showRelation</strong></a>(self)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;##.##&nbsp;format.</tt></dd></dl>
 
@@ -3125,7 +3125,7 @@ older&nbsp;versions&nbsp;compatibility</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>concise&nbsp;presentation&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
-<dl><dt><a name="LinearOrder-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;<a href="#LinearOrder-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
+<dl><dt><a name="LinearOrder-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;self.<a href="#LinearOrder-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
 Renders&nbsp;and&nbsp;prints&nbsp;the&nbsp;sorted&nbsp;bipolar&nbsp;net&nbsp;determinatation&nbsp;of&nbsp;outrankingness<br>
 minus&nbsp;outrankedness&nbsp;credibilities&nbsp;of&nbsp;all&nbsp;singleton&nbsp;choices.<br>
 res&nbsp;=&nbsp;((netdet,sigleton,dom,absorb)+)</tt></dd></dl>
@@ -3218,7 +3218,7 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 &nbsp;<br>
 ..&nbsp;note::&nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;<a href="#NetFlowsOrder-MISgen">MISgen</a>(actionscopy(),set())</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#NetFlowsOrder-MISgen">MISgen</a>(self.actionscopy(),set())</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-__invert__"><strong>__invert__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;inverting&nbsp;operator&nbsp;~self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;ConverseDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
@@ -3258,14 +3258,14 @@ XORDigraph(self,digraph)&nbsp;instance.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#NetFlowsOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#NetFlowsOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-bipolarKDistance"><strong>bipolarKDistance</strong></a>(self, digraph, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;crisp&nbsp;Kendall&nbsp;distance&nbsp;between&nbsp;two&nbsp;bipolar&nbsp;valued<br>
 digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#NetFlowsOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#NetFlowsOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, n2, Odd=False, Comments=False, Debug=False)</dt><dd><tt>New&nbsp;procedure&nbsp;from&nbsp;Agrum&nbsp;study&nbsp;April&nbsp;2009<br>
 recursive&nbsp;chordless&nbsp;path&nbsp;extraction&nbsp;strating&nbsp;from&nbsp;path<br>
@@ -3556,7 +3556,7 @@ digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#NetFlowsOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#NetFlowsOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-detectChordlessCircuits"><strong>detectChordlessCircuits</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Detects&nbsp;a&nbsp;chordless&nbsp;circuit&nbsp;in&nbsp;a&nbsp;digraph.<br>
 Returns&nbsp;a&nbsp;Boolean</tt></dd></dl>
@@ -3574,7 +3574,7 @@ Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'max': 1, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="NetFlowsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -3681,7 +3681,7 @@ the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;<a href="#NetFlowsOrder-singletons">singletons</a>().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self.<a href="#NetFlowsOrder-singletons">singletons</a>().<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[(independent&nbsp;choice,&nbsp;domnb,&nbsp;absnb,&nbsp;indnb)].</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-inner_prod"><strong>inner_prod</strong></a>(self, v1, v2)</dt><dd><tt>Parameters:&nbsp;two&nbsp;choice&nbsp;characteristic&nbsp;vectors<br>
@@ -3880,19 +3880,19 @@ the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;m
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#NetFlowsOrder-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#NetFlowsOrder-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-showRankingByChoosing"><strong>showRankingByChoosing</strong></a>(self, rankingByChoosing=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#NetFlowsOrder-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#NetFlowsOrder-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-showRankingByLastChoosing"><strong>showRankingByLastChoosing</strong></a>(self, rankingByLastChoosing=None, Debug=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#NetFlowsOrder-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#NetFlowsOrder-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-showRelation"><strong>showRelation</strong></a>(self)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;##.##&nbsp;format.</tt></dd></dl>
 
@@ -3905,7 +3905,7 @@ older&nbsp;versions&nbsp;compatibility</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>concise&nbsp;presentation&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsOrder-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;<a href="#NetFlowsOrder-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
+<dl><dt><a name="NetFlowsOrder-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;self.<a href="#NetFlowsOrder-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
 Renders&nbsp;and&nbsp;prints&nbsp;the&nbsp;sorted&nbsp;bipolar&nbsp;net&nbsp;determinatation&nbsp;of&nbsp;outrankingness<br>
 minus&nbsp;outrankedness&nbsp;credibilities&nbsp;of&nbsp;all&nbsp;singleton&nbsp;choices.<br>
 res&nbsp;=&nbsp;((netdet,sigleton,dom,absorb)+)</tt></dd></dl>
@@ -4006,7 +4006,7 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 &nbsp;<br>
 ..&nbsp;note::&nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;<a href="#PrincipalOrder-MISgen">MISgen</a>(actionscopy(),set())</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#PrincipalOrder-MISgen">MISgen</a>(self.actionscopy(),set())</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-__invert__"><strong>__invert__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;inverting&nbsp;operator&nbsp;~self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;ConverseDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
@@ -4046,14 +4046,14 @@ XORDigraph(self,digraph)&nbsp;instance.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#PrincipalOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#PrincipalOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-bipolarKDistance"><strong>bipolarKDistance</strong></a>(self, digraph, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;crisp&nbsp;Kendall&nbsp;distance&nbsp;between&nbsp;two&nbsp;bipolar&nbsp;valued<br>
 digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#PrincipalOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#PrincipalOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, n2, Odd=False, Comments=False, Debug=False)</dt><dd><tt>New&nbsp;procedure&nbsp;from&nbsp;Agrum&nbsp;study&nbsp;April&nbsp;2009<br>
 recursive&nbsp;chordless&nbsp;path&nbsp;extraction&nbsp;strating&nbsp;from&nbsp;path<br>
@@ -4344,7 +4344,7 @@ digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#PrincipalOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#PrincipalOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-detectChordlessCircuits"><strong>detectChordlessCircuits</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Detects&nbsp;a&nbsp;chordless&nbsp;circuit&nbsp;in&nbsp;a&nbsp;digraph.<br>
 Returns&nbsp;a&nbsp;Boolean</tt></dd></dl>
@@ -4362,7 +4362,7 @@ Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="PrincipalOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'max': 1, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="PrincipalOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -4469,7 +4469,7 @@ the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;<a href="#PrincipalOrder-singletons">singletons</a>().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self.<a href="#PrincipalOrder-singletons">singletons</a>().<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[(independent&nbsp;choice,&nbsp;domnb,&nbsp;absnb,&nbsp;indnb)].</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-inner_prod"><strong>inner_prod</strong></a>(self, v1, v2)</dt><dd><tt>Parameters:&nbsp;two&nbsp;choice&nbsp;characteristic&nbsp;vectors<br>
@@ -4668,19 +4668,19 @@ the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;m
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#PrincipalOrder-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#PrincipalOrder-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-showRankingByChoosing"><strong>showRankingByChoosing</strong></a>(self, rankingByChoosing=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#PrincipalOrder-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#PrincipalOrder-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-showRankingByLastChoosing"><strong>showRankingByLastChoosing</strong></a>(self, rankingByLastChoosing=None, Debug=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#PrincipalOrder-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#PrincipalOrder-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-showRelation"><strong>showRelation</strong></a>(self)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;##.##&nbsp;format.</tt></dd></dl>
 
@@ -4693,7 +4693,7 @@ older&nbsp;versions&nbsp;compatibility</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>concise&nbsp;presentation&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
-<dl><dt><a name="PrincipalOrder-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;<a href="#PrincipalOrder-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
+<dl><dt><a name="PrincipalOrder-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;self.<a href="#PrincipalOrder-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
 Renders&nbsp;and&nbsp;prints&nbsp;the&nbsp;sorted&nbsp;bipolar&nbsp;net&nbsp;determinatation&nbsp;of&nbsp;outrankingness<br>
 minus&nbsp;outrankedness&nbsp;credibilities&nbsp;of&nbsp;all&nbsp;singleton&nbsp;choices.<br>
 res&nbsp;=&nbsp;((netdet,sigleton,dom,absorb)+)</tt></dd></dl>
@@ -4783,7 +4783,7 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 &nbsp;<br>
 ..&nbsp;note::&nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;<a href="#RandomLinearOrder-MISgen">MISgen</a>(actionscopy(),set())</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#RandomLinearOrder-MISgen">MISgen</a>(self.actionscopy(),set())</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-__invert__"><strong>__invert__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;inverting&nbsp;operator&nbsp;~self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;ConverseDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
@@ -4823,14 +4823,14 @@ XORDigraph(self,digraph)&nbsp;instance.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#RandomLinearOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#RandomLinearOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-bipolarKDistance"><strong>bipolarKDistance</strong></a>(self, digraph, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;crisp&nbsp;Kendall&nbsp;distance&nbsp;between&nbsp;two&nbsp;bipolar&nbsp;valued<br>
 digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#RandomLinearOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#RandomLinearOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, n2, Odd=False, Comments=False, Debug=False)</dt><dd><tt>New&nbsp;procedure&nbsp;from&nbsp;Agrum&nbsp;study&nbsp;April&nbsp;2009<br>
 recursive&nbsp;chordless&nbsp;path&nbsp;extraction&nbsp;strating&nbsp;from&nbsp;path<br>
@@ -5121,7 +5121,7 @@ digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#RandomLinearOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#RandomLinearOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-detectChordlessCircuits"><strong>detectChordlessCircuits</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Detects&nbsp;a&nbsp;chordless&nbsp;circuit&nbsp;in&nbsp;a&nbsp;digraph.<br>
 Returns&nbsp;a&nbsp;Boolean</tt></dd></dl>
@@ -5139,7 +5139,7 @@ Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'max': 1, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RandomLinearOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -5246,7 +5246,7 @@ the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;<a href="#RandomLinearOrder-singletons">singletons</a>().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self.<a href="#RandomLinearOrder-singletons">singletons</a>().<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[(independent&nbsp;choice,&nbsp;domnb,&nbsp;absnb,&nbsp;indnb)].</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-inner_prod"><strong>inner_prod</strong></a>(self, v1, v2)</dt><dd><tt>Parameters:&nbsp;two&nbsp;choice&nbsp;characteristic&nbsp;vectors<br>
@@ -5445,19 +5445,19 @@ the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;m
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#RandomLinearOrder-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#RandomLinearOrder-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-showRankingByChoosing"><strong>showRankingByChoosing</strong></a>(self, rankingByChoosing=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#RandomLinearOrder-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#RandomLinearOrder-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-showRankingByLastChoosing"><strong>showRankingByLastChoosing</strong></a>(self, rankingByLastChoosing=None, Debug=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#RandomLinearOrder-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#RandomLinearOrder-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-showRelation"><strong>showRelation</strong></a>(self)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;##.##&nbsp;format.</tt></dd></dl>
 
@@ -5470,7 +5470,7 @@ older&nbsp;versions&nbsp;compatibility</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>concise&nbsp;presentation&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearOrder-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;<a href="#RandomLinearOrder-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
+<dl><dt><a name="RandomLinearOrder-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;self.<a href="#RandomLinearOrder-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
 Renders&nbsp;and&nbsp;prints&nbsp;the&nbsp;sorted&nbsp;bipolar&nbsp;net&nbsp;determinatation&nbsp;of&nbsp;outrankingness<br>
 minus&nbsp;outrankedness&nbsp;credibilities&nbsp;of&nbsp;all&nbsp;singleton&nbsp;choices.<br>
 res&nbsp;=&nbsp;((netdet,sigleton,dom,absorb)+)</tt></dd></dl>
@@ -5564,7 +5564,7 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 &nbsp;<br>
 ..&nbsp;note::&nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;<a href="#RankedPairsOrder-MISgen">MISgen</a>(actionscopy(),set())</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#RankedPairsOrder-MISgen">MISgen</a>(self.actionscopy(),set())</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-__invert__"><strong>__invert__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;inverting&nbsp;operator&nbsp;~self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;ConverseDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
@@ -5604,14 +5604,14 @@ XORDigraph(self,digraph)&nbsp;instance.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#RankedPairsOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#RankedPairsOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-bipolarKDistance"><strong>bipolarKDistance</strong></a>(self, digraph, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;crisp&nbsp;Kendall&nbsp;distance&nbsp;between&nbsp;two&nbsp;bipolar&nbsp;valued<br>
 digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#RankedPairsOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#RankedPairsOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, n2, Odd=False, Comments=False, Debug=False)</dt><dd><tt>New&nbsp;procedure&nbsp;from&nbsp;Agrum&nbsp;study&nbsp;April&nbsp;2009<br>
 recursive&nbsp;chordless&nbsp;path&nbsp;extraction&nbsp;strating&nbsp;from&nbsp;path<br>
@@ -5902,7 +5902,7 @@ digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#RankedPairsOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#RankedPairsOrder-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-detectChordlessCircuits"><strong>detectChordlessCircuits</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Detects&nbsp;a&nbsp;chordless&nbsp;circuit&nbsp;in&nbsp;a&nbsp;digraph.<br>
 Returns&nbsp;a&nbsp;Boolean</tt></dd></dl>
@@ -5920,7 +5920,7 @@ Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'max': 1, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RankedPairsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -6027,7 +6027,7 @@ the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;<a href="#RankedPairsOrder-singletons">singletons</a>().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self.<a href="#RankedPairsOrder-singletons">singletons</a>().<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[(independent&nbsp;choice,&nbsp;domnb,&nbsp;absnb,&nbsp;indnb)].</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-inner_prod"><strong>inner_prod</strong></a>(self, v1, v2)</dt><dd><tt>Parameters:&nbsp;two&nbsp;choice&nbsp;characteristic&nbsp;vectors<br>
@@ -6226,19 +6226,19 @@ the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;m
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#RankedPairsOrder-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#RankedPairsOrder-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-showRankingByChoosing"><strong>showRankingByChoosing</strong></a>(self, rankingByChoosing=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#RankedPairsOrder-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#RankedPairsOrder-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-showRankingByLastChoosing"><strong>showRankingByLastChoosing</strong></a>(self, rankingByLastChoosing=None, Debug=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#RankedPairsOrder-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#RankedPairsOrder-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-showRelation"><strong>showRelation</strong></a>(self)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;##.##&nbsp;format.</tt></dd></dl>
 
@@ -6251,7 +6251,7 @@ older&nbsp;versions&nbsp;compatibility</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>concise&nbsp;presentation&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsOrder-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;<a href="#RankedPairsOrder-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
+<dl><dt><a name="RankedPairsOrder-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;self.<a href="#RankedPairsOrder-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
 Renders&nbsp;and&nbsp;prints&nbsp;the&nbsp;sorted&nbsp;bipolar&nbsp;net&nbsp;determinatation&nbsp;of&nbsp;outrankingness<br>
 minus&nbsp;outrankedness&nbsp;credibilities&nbsp;of&nbsp;all&nbsp;singleton&nbsp;choices.<br>
 res&nbsp;=&nbsp;((netdet,sigleton,dom,absorb)+)</tt></dd></dl>

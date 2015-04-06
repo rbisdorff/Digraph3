@@ -8,10 +8,10 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>sortingDigraphs</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/sortingDigraphs.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/sortingDigraphs.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/sortingDigraphs.py">/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/sortingDigraphs.py</a></font></td></tr></table>
     <p><tt>#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
 #&nbsp;Python&nbsp;implementation&nbsp;of&nbsp;digraphs<br>
-#&nbsp;Current&nbsp;revision&nbsp;$Revision:&nbsp;1047&nbsp;$<br>
+#&nbsp;Current&nbsp;revision&nbsp;$Revision:&nbsp;1153&nbsp;$<br>
 #&nbsp;Copyright&nbsp;(C)&nbsp;2006-2008&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
 #<br>
 #&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
@@ -79,7 +79,8 @@
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>Specialisation&nbsp;of&nbsp;the&nbsp;sortingDigraph&nbsp;Class<br>
-for&nbsp;sorting&nbsp;of&nbsp;alternatives&nbsp;into&nbsp;quantiles&nbsp;delimited&nbsp;ordered&nbsp;classes.<br>
+for&nbsp;sorting&nbsp;of&nbsp;a&nbsp;large&nbsp;set&nbsp;of&nbsp;alternatives&nbsp;into<br>
+quantiles&nbsp;delimited&nbsp;ordered&nbsp;classes.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
@@ -92,7 +93,7 @@ Example&nbsp;Python3&nbsp;session:<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;sortingDigraphs&nbsp;import&nbsp;*<br>
 &gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,<br>
 ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weightDistribution='equiobjectives')<br>
-&gt;&gt;&gt;&nbsp;qs&nbsp;=&nbsp;<a href="#QuantilesSortingDigraph">QuantilesSortingDigraph</a>(t,limitingQuantiles=10)<br>
+&gt;&gt;&gt;&nbsp;qs&nbsp;=&nbsp;QuantilesSortingBigDigraph(t,limitingQuantiles=10)<br>
 &gt;&gt;&gt;&nbsp;qs.<a href="#QuantilesSortingDigraph-showSorting">showSorting</a>()<br>
 *---&nbsp;Sorting&nbsp;results&nbsp;in&nbsp;descending&nbsp;order&nbsp;---*<br>
 [0.90&nbsp;-&nbsp;&lt;[:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]<br>
@@ -120,23 +121,14 @@ Example&nbsp;Python3&nbsp;session:<br>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="QuantilesSortingDigraph-__init__"><strong>__init__</strong></a>(self, argPerfTab=None, limitingQuantiles=None, LowerClosed=False, PrefThresholds=False, hasNoVeto=False, outrankingType='bipolar', CompleteOutranking=True, Threading=False, nbrCores=None, Debug=False)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#QuantilesSortingDigraph">QuantilesSortingDigraph</a>&nbsp;instances.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-__init__"><strong>__init__</strong></a>(self, argPerfTab=None, limitingQuantiles=None, LowerClosed=False, PrefThresholds=True, hasNoVeto=False, outrankingType='bipolar', CompleteOutranking=False, Threading=False, nbrCores=None, Debug=False)</dt><dd><tt>Constructor&nbsp;for&nbsp;QuantilesSortingBigDigraph&nbsp;instances.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeSortingRelation"><strong>computeSortingRelation</strong></a>(self, categoryContents=None, Debug=False)</dt><dd><tt>constructs&nbsp;a&nbsp;bipolar&nbsp;sorting&nbsp;relation&nbsp;using&nbsp;the&nbsp;category&nbsp;contents.</tt></dd></dl>
-
-<dl><dt><a name="QuantilesSortingDigraph-computeWeakOrder"><strong>computeWeakOrder</strong></a>(self, Descending=True, Debug=False)</dt><dd><tt>Specialisation&nbsp;for&nbsp;QauntilesSortingDigraphs.</tt></dd></dl>
-
-<dl><dt><a name="QuantilesSortingDigraph-showOrderedRelationTable"><strong>showOrderedRelationTable</strong></a>(self, direction='decreasing')</dt><dd><tt>Showing&nbsp;the&nbsp;relation&nbsp;table&nbsp;in&nbsp;decreasing&nbsp;(default)&nbsp;or&nbsp;increasing&nbsp;order.</tt></dd></dl>
-
-<dl><dt><a name="QuantilesSortingDigraph-showSorting"><strong>showSorting</strong></a>(self, Reverse=True, isReturningHTML=False, Debug=False)</dt><dd><tt>Shows&nbsp;sorting&nbsp;results&nbsp;in&nbsp;decreasing&nbsp;or&nbsp;increasing&nbsp;(Reverse=False)<br>
-order&nbsp;of&nbsp;the&nbsp;categories.&nbsp;If&nbsp;isReturningHTML&nbsp;is&nbsp;True&nbsp;(default&nbsp;=&nbsp;False)<br>
-the&nbsp;method&nbsp;returns&nbsp;a&nbsp;htlm&nbsp;table&nbsp;with&nbsp;the&nbsp;sorting&nbsp;result.</tt></dd></dl>
-
-<dl><dt><a name="QuantilesSortingDigraph-showWeakOrder"><strong>showWeakOrder</strong></a>(self, Descending=True)</dt><dd><tt>Specialisation&nbsp;for&nbsp;QuantilesSortingDigraphs.</tt></dd></dl>
-
-<hr>
-Methods inherited from <a href="sortingDigraphs.html#SortingDigraph">SortingDigraph</a>:<br>
 <dl><dt><a name="QuantilesSortingDigraph-computeCategoryContents"><strong>computeCategoryContents</strong></a>(self, Reverse=False, Comments=False)</dt><dd><tt>Computes&nbsp;the&nbsp;sorting&nbsp;results&nbsp;per&nbsp;category.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-computeQuantileOrdering"><strong>computeQuantileOrdering</strong></a>(self, strategy=None, Descending=True, HTML=False, Comments=False, Debug=False)</dt><dd><tt>*Parameters*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Descending:&nbsp;listing&nbsp;in&nbsp;*decreasing*&nbsp;(default)&nbsp;or&nbsp;*increasing*&nbsp;quantile&nbsp;order.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;strategy:&nbsp;ordering&nbsp;in&nbsp;an&nbsp;{'optimistic'&nbsp;(default)&nbsp;|&nbsp;'pessimistic'&nbsp;|&nbsp;'average'}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;uppest,&nbsp;the&nbsp;lowest&nbsp;or&nbsp;the&nbsp;average&nbsp;potential&nbsp;quantile.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-computeSortingCharacteristics"><strong>computeSortingCharacteristics</strong></a>(self, action=None, Comments=False)</dt><dd><tt>Renders&nbsp;a&nbsp;bipolar-valued&nbsp;bi-dictionary&nbsp;relation<br>
 representing&nbsp;the&nbsp;degree&nbsp;of&nbsp;credibility&nbsp;of&nbsp;the<br>
@@ -144,12 +136,43 @@ assertion&nbsp;that&nbsp;"action&nbsp;x&nbsp;in&nbsp;A&nbsp;belongs&nbsp;to&nbsp
 ie&nbsp;x&nbsp;outranks&nbsp;low&nbsp;category&nbsp;limit&nbsp;and&nbsp;does&nbsp;not&nbsp;outrank<br>
 the&nbsp;high&nbsp;category&nbsp;limit.</tt></dd></dl>
 
+<dl><dt><a name="QuantilesSortingDigraph-computeSortingRelation"><strong>computeSortingRelation</strong></a>(self, categoryContents=None, Debug=False)</dt><dd><tt>constructs&nbsp;a&nbsp;bipolar&nbsp;sorting&nbsp;relation&nbsp;using&nbsp;the&nbsp;category&nbsp;contents.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-computeWeakOrder"><strong>computeWeakOrder</strong></a>(self, Descending=True, Debug=False)</dt><dd><tt>Specialisation&nbsp;for&nbsp;QuantilesSortingDigraphs.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-getActionsKeys"><strong>getActionsKeys</strong></a>(self, action=None, withoutProfiles=True)</dt><dd><tt>extract&nbsp;normal&nbsp;actions&nbsp;keys()</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-showHTMLQuantileOrdering"><strong>showHTMLQuantileOrdering</strong></a>(self, Descending=True, strategy='optimistic')</dt><dd><tt>Shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;quantile&nbsp;preordering&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
+&nbsp;<br>
+The&nbsp;ordring&nbsp;strategy&nbsp;is&nbsp;either:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;**optimistic**,&nbsp;following&nbsp;the&nbsp;upper&nbsp;quantile&nbsp;limits&nbsp;(default),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;**pessimistic**,&nbsp;following&nbsp;the&nbsp;lower&nbsp;quantile&nbsp;limits,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;**average**,&nbsp;following&nbsp;the&nbsp;averag&nbsp;of&nbsp;the&nbsp;upper&nbsp;and&nbsp;lower&nbsp;quantile&nbsp;limits.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-showHTMLSorting"><strong>showHTMLSorting</strong></a>(self, Reverse=True)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;sorting&nbsp;result&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-showOrderedRelationTable"><strong>showOrderedRelationTable</strong></a>(self, direction='decreasing')</dt><dd><tt>Showing&nbsp;the&nbsp;relation&nbsp;table&nbsp;in&nbsp;decreasing&nbsp;(default)&nbsp;or&nbsp;increasing&nbsp;order.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-showQuantileOrdering"><strong>showQuantileOrdering</strong></a>(self, strategy=None)</dt><dd><tt>Dummy&nbsp;show&nbsp;method&nbsp;for&nbsp;the&nbsp;commenting&nbsp;<a href="#QuantilesSortingDigraph-computeQuantileOrdering">computeQuantileOrdering</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-showSorting"><strong>showSorting</strong></a>(self, Reverse=True, isReturningHTML=False, Debug=False)</dt><dd><tt>Shows&nbsp;sorting&nbsp;results&nbsp;in&nbsp;decreasing&nbsp;or&nbsp;increasing&nbsp;(Reverse=False)<br>
+order&nbsp;of&nbsp;the&nbsp;categories.&nbsp;If&nbsp;isReturningHTML&nbsp;is&nbsp;True&nbsp;(default&nbsp;=&nbsp;False)<br>
+the&nbsp;method&nbsp;returns&nbsp;a&nbsp;htlm&nbsp;table&nbsp;with&nbsp;the&nbsp;sorting&nbsp;result.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-showSortingCharacteristics"><strong>showSortingCharacteristics</strong></a>(self, action=None)</dt><dd><tt>Renders&nbsp;a&nbsp;bipolar-valued&nbsp;bi-dictionary&nbsp;relation<br>
+representing&nbsp;the&nbsp;degree&nbsp;of&nbsp;credibility&nbsp;of&nbsp;the<br>
+assertion&nbsp;that&nbsp;"action&nbsp;x&nbsp;in&nbsp;A&nbsp;belongs&nbsp;to&nbsp;category&nbsp;c&nbsp;in&nbsp;C",<br>
+ie&nbsp;x&nbsp;outranks&nbsp;low&nbsp;category&nbsp;limit&nbsp;and&nbsp;does&nbsp;not&nbsp;outrank<br>
+the&nbsp;high&nbsp;category&nbsp;limit.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-showWeakOrder"><strong>showWeakOrder</strong></a>(self, Descending=True)</dt><dd><tt>Specialisation&nbsp;for&nbsp;QuantilesSortingDigraphs.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="sortingDigraphs.html#SortingDigraph">SortingDigraph</a>:<br>
 <dl><dt><a name="QuantilesSortingDigraph-exportDigraphGraphViz"><strong>exportDigraphGraphViz</strong></a>(self, fileName=None, bestChoice=set(), worstChoice=set(), noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;digraph&nbsp;drawing&nbsp;filtering.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, direction='decreasing', noSilent=True, graphType='png', graphSize='7,7', fontSize=10, relation=None, Debug=False)</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;weak&nbsp;order&nbsp;(Hasse&nbsp;diagram)&nbsp;drawing<br>
 filtering&nbsp;from&nbsp;<a href="#SortingDigraph">SortingDigraph</a>&nbsp;instances.</tt></dd></dl>
-
-<dl><dt><a name="QuantilesSortingDigraph-getActionsKeys"><strong>getActionsKeys</strong></a>(self, action=None, withoutProfiles=True)</dt><dd><tt>extract&nbsp;normal&nbsp;actions&nbsp;keys()</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-htmlCriteriaCategoryLimits"><strong>htmlCriteriaCategoryLimits</strong></a>(self, tableTitle='Category limits')</dt><dd><tt>Renders&nbsp;category&nbsp;minimum&nbsp;and&nbsp;maximum&nbsp;limits&nbsp;for&nbsp;each&nbsp;criterion<br>
 as&nbsp;a&nbsp;html&nbsp;table.</tt></dd></dl>
@@ -172,12 +195,6 @@ Returns&nbsp;a&nbsp;tuple&nbsp;:&nbsp;action,&nbsp;lowest&nbsp;category&nbsp;key
 <dl><dt><a name="QuantilesSortingDigraph-showActionsSortingResult"><strong>showActionsSortingResult</strong></a>(self, actionSubset=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;quantiles&nbsp;sorting&nbsp;result&nbsp;all&nbsp;(default)&nbsp;of&nbsp;a&nbsp;subset&nbsp;of&nbsp;the&nbsp;decision&nbsp;actions.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showCriteriaCategoryLimits"><strong>showCriteriaCategoryLimits</strong></a>(self)</dt><dd><tt>Shows&nbsp;category&nbsp;minimum&nbsp;and&nbsp;maximum&nbsp;limits&nbsp;for&nbsp;each&nbsp;criterion.</tt></dd></dl>
-
-<dl><dt><a name="QuantilesSortingDigraph-showSortingCharacteristics"><strong>showSortingCharacteristics</strong></a>(self, action=None)</dt><dd><tt>Renders&nbsp;a&nbsp;bipolar-valued&nbsp;bi-dictionary&nbsp;relation<br>
-representing&nbsp;the&nbsp;degree&nbsp;of&nbsp;credibility&nbsp;of&nbsp;the<br>
-assertion&nbsp;that&nbsp;"action&nbsp;x&nbsp;in&nbsp;A&nbsp;belongs&nbsp;to&nbsp;category&nbsp;c&nbsp;in&nbsp;C",<br>
-ie&nbsp;x&nbsp;outranks&nbsp;low&nbsp;category&nbsp;limit&nbsp;and&nbsp;does&nbsp;not&nbsp;outrank<br>
-the&nbsp;high&nbsp;category&nbsp;limit.</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="outrankingDigraphs.html#BipolarOutrankingDigraph">outrankingDigraphs.BipolarOutrankingDigraph</a>:<br>
@@ -230,7 +247,7 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="QuantilesSortingDigraph-convertWeightFloatToDecimal"><strong>convertWeightFloatToDecimal</strong></a>(self)</dt><dd><tt>Convert&nbsp;significance&nbsp;weights&nbsp;from&nbsp;obsolete&nbsp;float&nbsp;format<br>
 to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-defaultDiscriminationThresholds"><strong>defaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="QuantilesSortingDigraph-defaultDiscriminationThresholds"><strong>defaultDiscriminationThresholds</strong></a>(self, quantile={'ind': 10, 'pref': 20, 'veto': 80, 'weakVeto': 60}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 &nbsp;<br>
 Parameters:<br>
@@ -274,7 +291,7 @@ in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>specialize&nbsp;the&nbsp;general&nbsp;showShort&nbsp;method&nbsp;with&nbsp;the&nbsp;criteria.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;<a href="#QuantilesSortingDigraph-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
+<dl><dt><a name="QuantilesSortingDigraph-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;self.<a href="#QuantilesSortingDigraph-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
 Renders&nbsp;and&nbsp;prints&nbsp;the&nbsp;sorted&nbsp;bipolar&nbsp;net&nbsp;determinatation&nbsp;of&nbsp;outrankingness<br>
 minus&nbsp;outrankedness&nbsp;credibilities&nbsp;of&nbsp;all&nbsp;singleton&nbsp;choices.<br>
 res&nbsp;=&nbsp;((netdet,sigleton,dom,absorb)+)</tt></dd></dl>
@@ -289,7 +306,7 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 &nbsp;<br>
 ..&nbsp;note::&nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;<a href="#QuantilesSortingDigraph-MISgen">MISgen</a>(actionscopy(),set())</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#QuantilesSortingDigraph-MISgen">MISgen</a>(self.actionscopy(),set())</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-__invert__"><strong>__invert__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;inverting&nbsp;operator&nbsp;~self&nbsp;available&nbsp;for&nbsp;Digraph&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;ConverseDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
@@ -329,14 +346,14 @@ XORDigraph(self,digraph)&nbsp;instance.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#QuantilesSortingDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;Digraph&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#QuantilesSortingDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;Digraph&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-bipolarKDistance"><strong>bipolarKDistance</strong></a>(self, digraph, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;crisp&nbsp;Kendall&nbsp;distance&nbsp;between&nbsp;two&nbsp;bipolar&nbsp;valued<br>
 digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#QuantilesSortingDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;Digraph&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#QuantilesSortingDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;Digraph&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, n2, Odd=False, Comments=False, Debug=False)</dt><dd><tt>New&nbsp;procedure&nbsp;from&nbsp;Agrum&nbsp;study&nbsp;April&nbsp;2009<br>
 recursive&nbsp;chordless&nbsp;path&nbsp;extraction&nbsp;strating&nbsp;from&nbsp;path<br>
@@ -627,7 +644,7 @@ digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#QuantilesSortingDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;Digraph&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#QuantilesSortingDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;Digraph&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-detectChordlessCircuits"><strong>detectChordlessCircuits</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Detects&nbsp;a&nbsp;chordless&nbsp;circuit&nbsp;in&nbsp;a&nbsp;digraph.<br>
 Returns&nbsp;a&nbsp;Boolean</tt></dd></dl>
@@ -645,7 +662,7 @@ Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'max': 1, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;Digraph&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;Digraph&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -752,7 +769,7 @@ the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;<a href="#QuantilesSortingDigraph-singletons">singletons</a>().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self.<a href="#QuantilesSortingDigraph-singletons">singletons</a>().<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[(independent&nbsp;choice,&nbsp;domnb,&nbsp;absnb,&nbsp;indnb)].</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-inner_prod"><strong>inner_prod</strong></a>(self, v1, v2)</dt><dd><tt>Parameters:&nbsp;two&nbsp;choice&nbsp;characteristic&nbsp;vectors<br>
@@ -942,19 +959,19 @@ the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;m
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#QuantilesSortingDigraph-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#QuantilesSortingDigraph-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showRankingByChoosing"><strong>showRankingByChoosing</strong></a>(self, rankingByChoosing=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#QuantilesSortingDigraph-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#QuantilesSortingDigraph-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showRankingByLastChoosing"><strong>showRankingByLastChoosing</strong></a>(self, rankingByLastChoosing=None, Debug=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#QuantilesSortingDigraph-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#QuantilesSortingDigraph-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showRelation"><strong>showRelation</strong></a>(self)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;##.##&nbsp;format.</tt></dd></dl>
 
@@ -1017,7 +1034,7 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.Perfo
 
 <dl><dt><a name="QuantilesSortingDigraph-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="QuantilesSortingDigraph-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'ind': 10, 'pref': 20, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1031,7 +1048,7 @@ evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbs
 
 <dl><dt><a name="QuantilesSortingDigraph-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;<a href="#QuantilesSortingDigraph-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;self.<a href="#QuantilesSortingDigraph-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-computeQuantileSort"><strong>computeQuantileSort</strong></a>(self)</dt><dd><tt>shows&nbsp;a&nbsp;sorting&nbsp;of&nbsp;the&nbsp;actions&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles</tt></dd></dl>
 
@@ -1060,7 +1077,7 @@ Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
 <dl><dt><a name="QuantilesSortingDigraph-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, ndigits=2, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;9-colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
 actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=True, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=True, Transposed=False, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-normalizeEvaluations"><strong>normalizeEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, Debug=False)</dt><dd><tt>recode&nbsp;the&nbsp;evaluations&nbsp;between&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;on&nbsp;all&nbsp;criteria</tt></dd></dl>
 
@@ -1077,9 +1094,9 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 <dl><dt><a name="QuantilesSortingDigraph-showEvaluationStatistics"><strong>showEvaluationStatistics</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;variance&nbsp;and&nbsp;standard&nbsp;deviation&nbsp;of<br>
 the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, Ranked=True, Correlations=False, Threading=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, Ranked=True, Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, ndigits=2)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#QuantilesSortingDigraph-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#QuantilesSortingDigraph-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -1279,7 +1296,7 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="SortingDigraph-convertWeightFloatToDecimal"><strong>convertWeightFloatToDecimal</strong></a>(self)</dt><dd><tt>Convert&nbsp;significance&nbsp;weights&nbsp;from&nbsp;obsolete&nbsp;float&nbsp;format<br>
 to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-defaultDiscriminationThresholds"><strong>defaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="SortingDigraph-defaultDiscriminationThresholds"><strong>defaultDiscriminationThresholds</strong></a>(self, quantile={'ind': 10, 'pref': 20, 'veto': 80, 'weakVeto': 60}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 &nbsp;<br>
 Parameters:<br>
@@ -1323,7 +1340,7 @@ in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>specialize&nbsp;the&nbsp;general&nbsp;showShort&nbsp;method&nbsp;with&nbsp;the&nbsp;criteria.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;<a href="#SortingDigraph-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
+<dl><dt><a name="SortingDigraph-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;self.<a href="#SortingDigraph-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
 Renders&nbsp;and&nbsp;prints&nbsp;the&nbsp;sorted&nbsp;bipolar&nbsp;net&nbsp;determinatation&nbsp;of&nbsp;outrankingness<br>
 minus&nbsp;outrankedness&nbsp;credibilities&nbsp;of&nbsp;all&nbsp;singleton&nbsp;choices.<br>
 res&nbsp;=&nbsp;((netdet,sigleton,dom,absorb)+)</tt></dd></dl>
@@ -1338,7 +1355,7 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 &nbsp;<br>
 ..&nbsp;note::&nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;<a href="#SortingDigraph-MISgen">MISgen</a>(actionscopy(),set())</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#SortingDigraph-MISgen">MISgen</a>(self.actionscopy(),set())</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-__invert__"><strong>__invert__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;inverting&nbsp;operator&nbsp;~self&nbsp;available&nbsp;for&nbsp;Digraph&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;ConverseDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
@@ -1378,14 +1395,14 @@ XORDigraph(self,digraph)&nbsp;instance.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#SortingDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;Digraph&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#SortingDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;Digraph&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-bipolarKDistance"><strong>bipolarKDistance</strong></a>(self, digraph, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;crisp&nbsp;Kendall&nbsp;distance&nbsp;between&nbsp;two&nbsp;bipolar&nbsp;valued<br>
 digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#SortingDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;Digraph&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#SortingDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;Digraph&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, n2, Odd=False, Comments=False, Debug=False)</dt><dd><tt>New&nbsp;procedure&nbsp;from&nbsp;Agrum&nbsp;study&nbsp;April&nbsp;2009<br>
 recursive&nbsp;chordless&nbsp;path&nbsp;extraction&nbsp;strating&nbsp;from&nbsp;path<br>
@@ -1676,7 +1693,7 @@ digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#SortingDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;Digraph&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#SortingDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;Digraph&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-detectChordlessCircuits"><strong>detectChordlessCircuits</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Detects&nbsp;a&nbsp;chordless&nbsp;circuit&nbsp;in&nbsp;a&nbsp;digraph.<br>
 Returns&nbsp;a&nbsp;Boolean</tt></dd></dl>
@@ -1694,7 +1711,7 @@ Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'max': 1, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;Digraph&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;Digraph&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -1801,7 +1818,7 @@ the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;<a href="#SortingDigraph-singletons">singletons</a>().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self.<a href="#SortingDigraph-singletons">singletons</a>().<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[(independent&nbsp;choice,&nbsp;domnb,&nbsp;absnb,&nbsp;indnb)].</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-inner_prod"><strong>inner_prod</strong></a>(self, v1, v2)</dt><dd><tt>Parameters:&nbsp;two&nbsp;choice&nbsp;characteristic&nbsp;vectors<br>
@@ -1991,19 +2008,19 @@ the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;m
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#SortingDigraph-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#SortingDigraph-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showRankingByChoosing"><strong>showRankingByChoosing</strong></a>(self, rankingByChoosing=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#SortingDigraph-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#SortingDigraph-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showRankingByLastChoosing"><strong>showRankingByLastChoosing</strong></a>(self, rankingByLastChoosing=None, Debug=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#SortingDigraph-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#SortingDigraph-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showRelation"><strong>showRelation</strong></a>(self)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;##.##&nbsp;format.</tt></dd></dl>
 
@@ -2066,7 +2083,7 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.Perfo
 
 <dl><dt><a name="SortingDigraph-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="SortingDigraph-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, quantile={'ind': 10, 'pref': 20, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -2080,7 +2097,7 @@ evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbs
 
 <dl><dt><a name="SortingDigraph-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;<a href="#SortingDigraph-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;self.<a href="#SortingDigraph-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-computeQuantileSort"><strong>computeQuantileSort</strong></a>(self)</dt><dd><tt>shows&nbsp;a&nbsp;sorting&nbsp;of&nbsp;the&nbsp;actions&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles</tt></dd></dl>
 
@@ -2109,7 +2126,7 @@ Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
 <dl><dt><a name="SortingDigraph-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, ndigits=2, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;9-colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
 actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=True, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=True, Transposed=False, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-normalizeEvaluations"><strong>normalizeEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, Debug=False)</dt><dd><tt>recode&nbsp;the&nbsp;evaluations&nbsp;between&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;on&nbsp;all&nbsp;criteria</tt></dd></dl>
 
@@ -2126,9 +2143,9 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 <dl><dt><a name="SortingDigraph-showEvaluationStatistics"><strong>showEvaluationStatistics</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;variance&nbsp;and&nbsp;standard&nbsp;deviation&nbsp;of<br>
 the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, Ranked=True, Correlations=False, Threading=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, Ranked=True, Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, ndigits=2)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#SortingDigraph-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#SortingDigraph-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 

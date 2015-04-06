@@ -8,10 +8,10 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>votingDigraphs</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/votingDigraphs.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/votingDigraphs.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/votingDigraphs.py">/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/votingDigraphs.py</a></font></td></tr></table>
     <p><tt>#&nbsp;Python&nbsp;3&nbsp;implementation&nbsp;of&nbsp;voting&nbsp;digraphs<br>
 #&nbsp;Refactored&nbsp;from&nbsp;revision&nbsp;1.549&nbsp;of&nbsp;the&nbsp;digraphs&nbsp;module<br>
-#&nbsp;Current&nbsp;revision&nbsp;$Revision:&nbsp;516&nbsp;$<br>
+#&nbsp;Current&nbsp;revision&nbsp;$Revision:&nbsp;1082&nbsp;$<br>
 #&nbsp;Copyright&nbsp;(C)&nbsp;2011&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
 #<br>
 #&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
@@ -89,12 +89,14 @@
 &nbsp;<br>
 Structure::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;candidates&nbsp;=&nbsp;{'a':&nbsp;&nbsp;,'b':&nbsp;&nbsp;,'c',&nbsp;...,&nbsp;...}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;voters&nbsp;=&nbsp;{'1':{'weight':1.0},'2':{'weight':1.0},&nbsp;...}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;candidates&nbsp;=&nbsp;{'a':&nbsp;{'name':&nbsp;...},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'b':&nbsp;{'name':&nbsp;...},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...,&nbsp;...}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;voters&nbsp;=&nbsp;{'v1':{'weight':1.0},'v2':{'weight':1.0},&nbsp;...}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;##&nbsp;each&nbsp;specifies&nbsp;the&nbsp;subset&nbsp;of&nbsp;candidates&nbsp;he&nbsp;approves&nbsp;on<br>
 &nbsp;&nbsp;&nbsp;&nbsp;approvalBallot&nbsp;=&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'1'&nbsp;:&nbsp;['b'],<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'2'&nbsp;:&nbsp;['a','b'],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'v1'&nbsp;:&nbsp;['b'],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'v2'&nbsp;:&nbsp;['a','b'],<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
@@ -215,7 +217,7 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 &nbsp;<br>
 ..&nbsp;note::&nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;<a href="#CondorcetDigraph-MISgen">MISgen</a>(actionscopy(),set())</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#CondorcetDigraph-MISgen">MISgen</a>(self.actionscopy(),set())</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-__invert__"><strong>__invert__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;inverting&nbsp;operator&nbsp;~self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;ConverseDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
@@ -255,14 +257,14 @@ XORDigraph(self,digraph)&nbsp;instance.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#CondorcetDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#CondorcetDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-bipolarKDistance"><strong>bipolarKDistance</strong></a>(self, digraph, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;crisp&nbsp;Kendall&nbsp;distance&nbsp;between&nbsp;two&nbsp;bipolar&nbsp;valued<br>
 digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#CondorcetDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#CondorcetDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, n2, Odd=False, Comments=False, Debug=False)</dt><dd><tt>New&nbsp;procedure&nbsp;from&nbsp;Agrum&nbsp;study&nbsp;April&nbsp;2009<br>
 recursive&nbsp;chordless&nbsp;path&nbsp;extraction&nbsp;strating&nbsp;from&nbsp;path<br>
@@ -553,7 +555,7 @@ digraphs.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;<a href="#CondorcetDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#CondorcetDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-detectChordlessCircuits"><strong>detectChordlessCircuits</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Detects&nbsp;a&nbsp;chordless&nbsp;circuit&nbsp;in&nbsp;a&nbsp;digraph.<br>
 Returns&nbsp;a&nbsp;Boolean</tt></dd></dl>
@@ -571,7 +573,7 @@ Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'max': 1, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="CondorcetDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -680,7 +682,7 @@ the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;<a href="#CondorcetDigraph-singletons">singletons</a>().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self.<a href="#CondorcetDigraph-singletons">singletons</a>().<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[(independent&nbsp;choice,&nbsp;domnb,&nbsp;absnb,&nbsp;indnb)].</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-inner_prod"><strong>inner_prod</strong></a>(self, v1, v2)</dt><dd><tt>Parameters:&nbsp;two&nbsp;choice&nbsp;characteristic&nbsp;vectors<br>
@@ -879,19 +881,19 @@ the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;m
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#CondorcetDigraph-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#CondorcetDigraph-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-showRankingByChoosing"><strong>showRankingByChoosing</strong></a>(self, rankingByChoosing=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#CondorcetDigraph-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#CondorcetDigraph-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-showRankingByLastChoosing"><strong>showRankingByLastChoosing</strong></a>(self, rankingByLastChoosing=None, Debug=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;<a href="#CondorcetDigraph-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#CondorcetDigraph-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-showRelation"><strong>showRelation</strong></a>(self)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;##.##&nbsp;format.</tt></dd></dl>
 
@@ -904,7 +906,7 @@ older&nbsp;versions&nbsp;compatibility</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>concise&nbsp;presentation&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;<a href="#CondorcetDigraph-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
+<dl><dt><a name="CondorcetDigraph-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;self.<a href="#CondorcetDigraph-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
 Renders&nbsp;and&nbsp;prints&nbsp;the&nbsp;sorted&nbsp;bipolar&nbsp;net&nbsp;determinatation&nbsp;of&nbsp;outrankingness<br>
 minus&nbsp;outrankedness&nbsp;credibilities&nbsp;of&nbsp;all&nbsp;singleton&nbsp;choices.<br>
 res&nbsp;=&nbsp;((netdet,sigleton,dom,absorb)+)</tt></dd></dl>
@@ -988,7 +990,14 @@ v3(1.0):&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['a1',&nbsp;'a3',&nbsp;'a2']<br>
 &gt;&gt;&gt;&nbsp;v.<a href="#LinearVotingProfile-computeRankAnalysis">computeRankAnalysis</a>()<br>
 {'a1':&nbsp;[4.0,&nbsp;1.0,&nbsp;0],<br>
 &nbsp;'a2':&nbsp;[1.0,&nbsp;3.0,&nbsp;1.0],<br>
-&nbsp;'a3':&nbsp;[0,&nbsp;1.0,&nbsp;4.0]]<br>
+&nbsp;'a3':&nbsp;[0,&nbsp;1.0,&nbsp;4.0]}<br>
+&gt;&gt;&gt;&nbsp;v.<a href="#LinearVotingProfile-showRankAnalysisTable">showRankAnalysisTable</a>()<br>
+*----&nbsp;&nbsp;Rank&nbsp;analysis&nbsp;tableau&nbsp;-----*<br>
+&nbsp;&nbsp;ranks&nbsp;|&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;Borda&nbsp;score<br>
+&nbsp;-------|------------------------------<br>
+&nbsp;&nbsp;&nbsp;'a1'&nbsp;|&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;6<br>
+&nbsp;&nbsp;&nbsp;'a2'&nbsp;|&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;10<br>
+&nbsp;&nbsp;&nbsp;'a3'&nbsp;|&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;14<br>
 &gt;&gt;&gt;&nbsp;v.<a href="#LinearVotingProfile-computeUninominalVotes">computeUninominalVotes</a>()<br>
 {'a1':&nbsp;4.0,&nbsp;'a3':&nbsp;0,&nbsp;'a2':&nbsp;1.0}<br>
 &gt;&gt;&gt;&nbsp;v.<a href="#LinearVotingProfile-computeSimpleMajorityWinner">computeSimpleMajorityWinner</a>()<br>
@@ -1031,6 +1040,14 @@ Parameter:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;of&nbsp;file&nbsp;(without&nbsp;&lt;.py&gt;&nbsp;extension!).</tt></dd></dl>
 
 <dl><dt><a name="LinearVotingProfile-showLinearBallots"><strong>showLinearBallots</strong></a>(self)</dt><dd><tt>show&nbsp;the&nbsp;linear&nbsp;ballots</tt></dd></dl>
+
+<dl><dt><a name="LinearVotingProfile-showRankAnalysisTable"><strong>showRankAnalysisTable</strong></a>(self, Sorted=True, ndigits=0, Debug=False)</dt><dd><tt>Print&nbsp;the&nbsp;rank&nbsp;analysis&nbsp;tableau.<br>
+&nbsp;<br>
+If&nbsp;Sorted&nbsp;(True&nbsp;by&nbsp;default),&nbsp;the&nbsp;candidates<br>
+are&nbsp;ordered&nbsp;by&nbsp;increasing&nbsp;Borda&nbsp;Scores.<br>
+&nbsp;<br>
+In&nbsp;case&nbsp;of&nbsp;decimal&nbsp;voters&nbsp;weights,&nbsp;ndigits&nbsp;allows<br>
+to&nbsp;format&nbsp;the&nbsp;decimal&nbsp;precision&nbsp;of&nbsp;the&nbsp;numerical&nbsp;output.</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="votingDigraphs.html#VotingProfile">VotingProfile</a>:<br>
@@ -1143,6 +1160,14 @@ Parameter:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;of&nbsp;file&nbsp;(without&nbsp;&lt;.py&gt;&nbsp;extension!).</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearVotingProfile-showLinearBallots"><strong>showLinearBallots</strong></a>(self)</dt><dd><tt>show&nbsp;the&nbsp;linear&nbsp;ballots</tt></dd></dl>
+
+<dl><dt><a name="RandomLinearVotingProfile-showRankAnalysisTable"><strong>showRankAnalysisTable</strong></a>(self, Sorted=True, ndigits=0, Debug=False)</dt><dd><tt>Print&nbsp;the&nbsp;rank&nbsp;analysis&nbsp;tableau.<br>
+&nbsp;<br>
+If&nbsp;Sorted&nbsp;(True&nbsp;by&nbsp;default),&nbsp;the&nbsp;candidates<br>
+are&nbsp;ordered&nbsp;by&nbsp;increasing&nbsp;Borda&nbsp;Scores.<br>
+&nbsp;<br>
+In&nbsp;case&nbsp;of&nbsp;decimal&nbsp;voters&nbsp;weights,&nbsp;ndigits&nbsp;allows<br>
+to&nbsp;format&nbsp;the&nbsp;decimal&nbsp;precision&nbsp;of&nbsp;the&nbsp;numerical&nbsp;output.</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="votingDigraphs.html#VotingProfile">VotingProfile</a>:<br>
