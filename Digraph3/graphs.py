@@ -1704,18 +1704,22 @@ class RandomSpanningTree(RandomTree):
         self.prueferCode = self.tree2Pruefer()
         
     def _reduceCycles(self,randomWalk,Debug=False):
-        reducedWalk = []
+        #if Debug:
+        print('randomWalk', randomWalk)
+        reducedWalk = [randomWalk[0]]
         n = len(randomWalk)
-        i = 0
-        while i < n:
-            for j in range(i+1,n):
-                if randomWalk[i] == randomWalk[j]:
-                    if Debug:
-                        print('cycle: ',i, j, n, randomWalk[i:j])
-                    i = j
-                    break
-            reducedWalk.append(randomWalk[i])
-            i += 1
+        t = 0
+        while t < n-1 and t < 100:
+            k = t+1
+            for j in range(t+1,n):
+                if randomWalk[t] == randomWalk[j]:
+                    k = j+1
+                    #if Debug:
+                    print(t, k, j, n, randomWalk[t:k])
+            reducedWalk.append(randomWalk[k])
+            #if Debug:
+            print('reducedWalk', reducedWalk)
+            t = k
         return reducedWalk
 
     
