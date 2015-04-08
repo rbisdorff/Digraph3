@@ -1537,7 +1537,7 @@ class RandomSpanningForest(RandomTree):
     Random instance of a spanning forest (one or more trees)
     generated from a random depth first search graph g traversal.
 
-    .. image:: randomSpanningTree.png
+    .. image:: spanningForest.png
        :alt: randomSpanningForest instance
        :width: 300 px
        :align: center
@@ -1619,7 +1619,7 @@ class RandomSpanningTree(RandomTree):
          Wilson's algorithm only works for connecte graphs.
 
     .. image:: randomSpanningTree.png
-       :alt: randomSpanningForest instance
+       :alt: randomSpanningTree instance
        :width: 300 px
        :align: center
     """
