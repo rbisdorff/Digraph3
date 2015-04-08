@@ -1611,8 +1611,8 @@ class RandomSpanningForest(RandomTree):
 
 class RandomSpanningTree(RandomTree):
     """
-    Uniform random instance of a spanning forest (one or more trees)
-    generated with Wilson's algorithm from a connected Graph g instance
+    Uniform random instance of a spanning tree
+    generated with Wilson's algorithm from a connected Graph g instance.
 
     .. Note::
 

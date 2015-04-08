@@ -1059,7 +1059,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3066,8 +3066,8 @@ generated from a random depth first search graph g traversal.</p>
 <dt id="graphs.RandomSpanningTree">
 <em class="property">class </em><code class="descclassname">graphs.</code><code class="descname">RandomSpanningTree</code><span class="sig-paren">(</span><em>g</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.RandomSpanningTree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#graphs.RandomTree" title="graphs.RandomTree"><code class="xref py py-class docutils literal"><span class="pre">graphs.RandomTree</span></code></a></p>
-<p>Uniform random instance of a spanning forest (one or more trees)
-generated with Wilson&#8217;s algorithm from a connected Graph g instance</p>
+<p>Uniform random instance of a spanning tree
+generated with Wilson&#8217;s algorithm from a connected Graph g instance.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Wilson&#8217;s algorithm only works for connecte graphs.</p>
@@ -3296,7 +3296,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4034,7 +4034,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
