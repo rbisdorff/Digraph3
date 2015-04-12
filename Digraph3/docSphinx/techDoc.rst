@@ -45,6 +45,8 @@ The Digraph3 source code is split into several interdependent modules of which t
      Additional tools for solving ranking by choosing problems with root `WeakOrder <techDoc.html#weakOrders.WeakOrder>`_ class.
 * :ref:`randomDigraphs-label` 
      Various implemented random digraph models.
+* :ref:`randomPerfTabs-label` 
+     Various implemented random performance tableau models.
 
 .. toctree::
    :maxdepth: 2
@@ -140,7 +142,7 @@ Back to the :ref:`Technical-label`
 .. _weakOrders-label:
 
 weakOrders module
------------------
+------------------
 
 .. automodule:: weakOrders
    :member-order: alphabetical
@@ -152,9 +154,21 @@ Back to the :ref:`Technical-label`
 .. _randomDigraphs-label:
 
 randomDigraphs module
----------------------
+----------------------
 
 .. automodule:: randomDigraphs
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Technical-label`
+
+.. _randomPerfTabs-label:
+      
+randomPerfTabs module
+----------------------
+
+.. automodule:: randomPerfTabs
    :member-order: alphabetical
    :no-inherited-members:
    :members:
