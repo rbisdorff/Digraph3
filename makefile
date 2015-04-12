@@ -137,6 +137,20 @@ perfTabsTests:
 		cp randomDigraphs.py test/
 		(cd test; nosetests3 -v noseTestsPerfTab.py)
 
+randomPerfTabsTests:
+		cp digraphs.py test/
+		cp perfTabs.py test/
+		cp randomPerfTabs.py test/
+		cp outrankingDigraphs.py test/
+		cp sortingDigraphs.py test/
+		cp votingDigraphs.py test/
+		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
+		cp randomNumbers.py test/
+		cp randomDigraphs.py test/
+		(cd test; nosetests3 -v noseTestsrandomPerfTab.py)
+
 verbosePerfTabsTests:
 		cp digraphs.py test/
 		cp perfTabs.py test/
@@ -149,6 +163,20 @@ verbosePerfTabsTests:
 		cp randomNumbers.py test/
 		cp randomDigraphs.py test/
 		(cd test; nosetests3 -vs noseTestsPerfTab.py)
+
+verboseRandomPerfTabsTests:
+		cp digraphs.py test/
+		cp perfTabs.py test/
+		cp randomPerfTabs.py test/
+		cp outrankingDigraphs.py test/
+		cp sortingDigraphs.py test/
+		cp votingDigraphs.py test/
+		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
+		cp randomNumbers.py test/
+		cp randomDigraphs.py test/
+		(cd test; nosetests3 -vs noseTestsRandomPerfTab.py)
 
 outrankingDigraphsTests:
 		cp digraphs.py test/
