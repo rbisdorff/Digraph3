@@ -284,6 +284,24 @@ class RandomRankPerformanceTableau(PerformanceTableau):
     """
     Specialization of the PerformanceTableau class for generating a temporary
     random performance tableau.
+
+    Random generator for multiple criteria ranked (without ties) performances of a
+    given number of decision actions. On each criterion,
+    all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is
+    matching the RandomLinearVotingProfiles class (see the votingDigraphs module)  
+        
+    *Parameters*:
+        * number of actions,
+        * number of performance criteria,
+        * weightDistribution := equisignificant | random (default, see RandomPerformanceTableau)
+        * weightScale := (1, 1 | numberOfCriteria (default when random))
+        * integerWeights := Boolean (True = default) 
+        * commonThresholds (deafult) := {
+            | 'ind':(0,0),
+            | 'pref':(1,0),
+            | 'veto':(numberOfActions,0)
+            | } (default)
+
     """
     def __init__(self,numberOfActions = None, numberOfCriteria = None,\
                  weightDistribution = None, weightScale=None,\
@@ -291,22 +309,6 @@ class RandomRankPerformanceTableau(PerformanceTableau):
                  seed = None,
                  Debug = False):
         """
-        Ranom generator for multiple criteria ranked (without ties) performances of a
-        given number of decision actions. On each criterion,
-        all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is
-        matching the RandomLinearVotingProfiles class (see the votingDigraphs module)  
-        
-        *Parameters*:
-            * number of actions,
-            * number of performance criteria,
-            * weightDistribution := equisignificant | random (default, see RandomPerformanceTableau)
-            * weightScale := (1, 1 | numberOfCriteria (default when random))
-            * integerWeights := Boolean (True = default) 
-            * commonThresholds (deafult) := {
-                 | 'ind':(0,0),
-                 | 'pref':(1,0),
-                 | 'veto':(numberOfActions,0)
-                 | } (default)
         """
         #imports
         from copy import copy
