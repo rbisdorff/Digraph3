@@ -24,7 +24,7 @@ pydocs:
 		(cd pyDoc; pydoc3 -w ./)
 
 pTests:
-		parallel --gnu cp {}.py test/ ::: digraphs outrankingDigraphs perfTabs sortingDigraphs votingDigraphs linearOrders weakOrders graphs randomNumbers randomDigraphs
+		parallel --gnu cp {}.py test/ ::: digraphs outrankingDigraphs perfTabs sortingDigraphs votingDigraphs linearOrders weakOrders graphs randomNumbers randomDigraphs randomPerfTabs
 		(cd test; parallel --gnu -k nosetests3 -v ::: noseTests*.py )
 
 tests:
@@ -38,9 +38,11 @@ tests:
 		cp graphs.py test/
 		cp randomNumbers.py test/
 		cp randomDigraphs.py test/
+		cp randomPerfTabs.py test/
 		(cd test; nosetests3 -v noseTestsDigraph.py)
 		(cd test; nosetests3 -v noseTestsOutrankingDigraph.py)
 		(cd test; nosetests3 -v noseTestsPerfTab.py)
+		(cd test; nosetests3 -v noseTestsRandomPerfTab.py)
 		(cd test; nosetests3 -v noseTestsSortingDigraph.py)
 		(cd test; nosetests3 -v noseTestsVotingDigraph.py)
 		(cd test; nosetests3 -v noseTestsLinearOrder.py)
@@ -61,9 +63,11 @@ verboseTests:
 		cp graphs.py test/
 		cp randomNumbers.py test/
 		cp randomDigraphs.py test/
+		cp randomPerfTabs.py test/
 		(cd test; nosetests3 -vs noseTestsDigraph.py)
 		(cd test; nosetests3 -vs noseTestsOutrankingDigraph.py)
 		(cd test; nosetests3 -vs noseTestsPerfTab.py)
+		(cd test; nosetests3 -vs noseTestsRandomPerfTab.py)
 		(cd test; nosetests3 -vs noseTestsSortingDigraph.py)
 		(cd test; nosetests3 -vs noseTestsVotingDigraph.py)
 		(cd test; nosetests3 -vs noseTestsLinearOrder.py)
