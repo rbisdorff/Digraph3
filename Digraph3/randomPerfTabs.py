@@ -58,7 +58,7 @@ class RandomPerformanceTableau(PerformanceTableau):
         
     Code example::
         >>> from randomPerfTabs import RandomPerformanceTableau
-        >>> t = RandomPerformanceTableau(numberOfActions=3,numberOfCriteria=1)
+        >>> t = RandomPerformanceTableau(numberOfActions=3,numberOfCriteria=1,seed=100)
         >>> t.actions
             {'a1': {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'},
              'a2': {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'},
@@ -74,9 +74,9 @@ class RandomPerformanceTableau(PerformanceTableau):
                         weightScale=(1, 1); commonMode=None'}}
 
         >>> t.evaluation
-            {'g01': {'a02': Decimal('94.22'),
-                     'a03': Decimal('72.38'),
-                     'a01': Decimal('46.89')
+            {'g01': {'a01': Decimal('45.95'),
+                     'a02': Decimal('95.17'),
+                     'a03': Decimal('17.47')
                     }
             }
 
@@ -291,13 +291,22 @@ class RandomRankPerformanceTableau(PerformanceTableau):
                  seed = None,
                  Debug = False):
         """
+        Ranom generator for multiple criteria ranked (without ties) performances of a
+        given number of decision actions. On each criterion,
+        all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is
+        matching the RandomLinearVotingProfiles class (see the votingDigraphs module)  
+        
         *Parameters*:
-            - number of actions,
-            - number criteria,
-            - weightDistribution := equisignificant|random
-            - weightScale=(1,numberOfCriteria (default when random))
-            - integerWeights = Boolean (True = default) 
-            - commonThresholds = {'ind':(0,0),'pref':(1,0),'veto':(numberOfActions,0)} (default)
+            * number of actions,
+            * number of performance criteria,
+            * weightDistribution := equisignificant | random (default, see RandomPerformanceTableau)
+            * weightScale := (1, 1 | numberOfCriteria (default when random))
+            * integerWeights := Boolean (True = default) 
+            * commonThresholds (deafult) := {
+                 | 'ind':(0,0),
+                 | 'pref':(1,0),
+                 | 'veto':(numberOfActions,0)
+                 | } (default)
         """
         #imports
         from copy import copy
