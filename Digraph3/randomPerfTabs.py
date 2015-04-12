@@ -111,12 +111,13 @@ class RandomPerformanceTableau(PerformanceTableau):
             actions[actionKey] = {'shortName':actionKey,
                     'name': 'random decision action',
                     'comment': 'RandomPerformanceTableau() generated.' }
-        self.actions = copy(actions)
+        self.actions = actions
         actionsList = [x for x in self.actions]
         actionsList.sort()
         
         # generate criterialist
-        criteriaList = [('g%%0%dd' % nd) % (i+1)\
+        ng = len(str(numberOfCriteria))
+        criteriaList = [('g%%0%dd' % ng) % (i+1)\
                         for i in range(numberOfCriteria)]
         
 #        # generate weights
@@ -136,8 +137,8 @@ class RandomPerformanceTableau(PerformanceTableau):
         elif weightDistribution == 'fixed':
             weightsList = []
             sumWeights = Decimal('0.0')
-            for g in criteriaList:
-                if g == 'g1':
+            for i in range(ng):
+                if i == 0:
                     weightsList.append(Decimal(str(weightScale[1])))
                     sumWeights += weightScale[1]
                 else:
@@ -148,8 +149,8 @@ class RandomPerformanceTableau(PerformanceTableau):
             weightScale = (1,1)
             weightsList = []
             sumWeights = Decimal('0.0')
-            for g in criteriaList:
-                if g == 'g1':
+            for i in range(ng):
+                if i == 0:
                     weightsList.append(Decimal(str(weightScale[1])))
                     sumWeights += weightScale[1]
                 else:
@@ -168,7 +169,7 @@ class RandomPerformanceTableau(PerformanceTableau):
         i = 0
         for g in criteriaList:
             criteria[g] = {}
-            criteria[g]['name']='digraphs.RandomPerformanceTableau() instance'
+            criteria[g]['name']='RandomPerformanceTableau() instance'
             criteria[g]['comment']=commentString
             try:
                 commonThresholds[0]=(Decimal(str(commonThresholds[0][0])),Decimal(str(commonThresholds[0][1])))
@@ -176,12 +177,17 @@ class RandomPerformanceTableau(PerformanceTableau):
                 commonThresholds[2]=(Decimal(str(commonThresholds[2][0])),Decimal(str(commonThresholds[2][1])))
                 commonThresholds[3]=(Decimal(str(commonThresholds[3][0])),Decimal(str(commonThresholds[3][1])))
              
-                criteria[g]['thresholds'] = {'ind':commonThresholds[0],'pref':commonThresholds[1],'weakVeto':commonThresholds[2],'veto':commonThresholds[3]}
+                criteria[g]['thresholds'] = {'ind':commonThresholds[0],
+                                             'pref':commonThresholds[1],
+                                             'weakVeto':commonThresholds[2],
+                                             'veto':commonThresholds[3]}
             except:
                 commonThresholds[0]=(Decimal(str(commonThresholds[0][0])),Decimal(str(commonThresholds[0][1])))
                 commonThresholds[1]=(Decimal(str(commonThresholds[1][0])),Decimal(str(commonThresholds[1][1])))
                 commonThresholds[2]=(Decimal(str(commonThresholds[2][0])),Decimal(str(commonThresholds[2][1])))                
-                criteria[g]['thresholds'] = {'ind':commonThresholds[0],'pref':commonThresholds[1],'veto':commonThresholds[2]}
+                criteria[g]['thresholds'] = {'ind':commonThresholds[0],
+                                             'pref':commonThresholds[1],
+                                             'veto':commonThresholds[2]}
             #commonScale = (Decimal(str(commonScale[0])),Decimal(str(commonScale[1])))
             criteria[g]['scale'] = commonScale
             if integerWeights:
@@ -271,7 +277,6 @@ class RandomPerformanceTableau(PerformanceTableau):
                             notfound = False
                     evaluation[g][a] = Decimal(str(round(randeval,digits)))
 
-        
         else:
             print('mode error in random evaluation generator !!')
             print(str(commonMode[0]))
@@ -1092,10 +1097,406 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
         self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
 
-class RandomS3PerformanceTableau(RandomCoalitionsPerformanceTableau):
+class _Random3ObjectivesPerformanceTableau(PerformanceTableau):
     """
-    Obsolete dummy class for backports.
+    Generator of performance tableaux with three objectives:
+    economic, environmental and social. 
+    
+
+    Parameters:
+        | numberOf Actions := 20 (default)
+        | number of economic Criteria := 2 (default Cost and Benefit cardinal)
+        | number of environmental Criteria := 3 (default ordinal)
+        | number of social Criteria := 3 (default ordinal)
+        | weightDistribution := 'equisignificant' (default ),
+        |  'random' (normalized to the weight of the objective) 
+        | integerWeights := True (default) / False
+        | commonScale := (0.0, 100.0) (default)
+        | commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].
+        | commonMode := ['triangular',50.0,0.50] (default), ['uniform',None,None], ['beta', None,None] (three alpha, beta combinations (5.8661,2.62203) chosen by default for high('+'), medium ('~') and low ('-') evaluations.
+        | valueDigits := 2 (default, for cardinal scales only)
+        | VariableGenerators := True (default) / False, variable high('+'), medium ('~') or low ('-') law generated evaluations.
+        | Debug := True / False (default)
+        | RandomCoalitions = True / False
+        | vetoProbability := x in ]0.0-1.0[ / None (default),
+        |   probability that a cardinal criterion shows
+        |   a veto preference discrimination threshold.
+        
     """
+
+    def __init__(self,numberOfActions = None,
+                 numberOfEcoCriteria = None,
+                 numberOfEnvCriteria = None,
+                 numberOfSocCriteria = None,
+                 weightDistribution = None,
+                 integerWeights = True, commonScale = None,
+                 commonThresholds = None, commonMode = None,
+                 valueDigits=2,
+                 VariableGenerators=True,
+                 Debug=False,
+                 vetoProbability=None,
+                 seed = None):
+
+        # imports
+        from copy import copy
+        # naming
+        self.name = 'randomCoalitionsPerfTab'
+
+        # randomizer init
+        import random
+        random.seed(seed
+                    )
+        # generate random actions
+        if numberOfActions == None:
+            numberOfActions = 13
+        nd = len(str(numberOfActions))
+        actions = dict()
+        for i in range(numberOfActions):
+            actionKey = ('a%%0%dd' % (nd)) % (i+1)
+            actions[actionKey] = {'shortName':actionKey,
+                    'name': 'random decision action',
+                    'comment': 'Random3ObjectivesPerformanceTableau() generated.' }
+        self.actions = copy(actions)
+        actionsList = [x for x in self.actions]
+        actionsList.sort()
+
+        # generate random eco criterialist
+        if numberOfCriteria == None:
+            ## numberOfCriteria = random.randint(5,21)
+            numberOfCriteria = 13
+        criteriaList = []
+        criteriaIndex = list(range(numberOfCriteria+1))
+        criteriaIndex.remove(0)
+        for g in criteriaIndex:
+            if g < 10:
+                criterionName = 'g0'+str(g)
+            else:
+                criterionName = 'g'+str(g)
+            criteriaList.append(criterionName)
+        # generate random weights
+        if weightDistribution == None:
+            ## majorityWeight = numberOfCriteria + 1
+            ## #weightModesList = [('fixed',[1,1],1),('random',[1,3],2), ('random',[1,numberOfCriteria],3),('fixed',[1,majorityWeight],4)]
+            ## weightModesList = [('fixed',[1,1],1),('random',[1,3],2), ('random',[1,numberOfCriteria],3)]
+            ## weightMode = random.choice(weightModesList)
+            weightMode = ('equisignificant',(1,1))
+            weightDistribution = weightMode[0]
+            weightScale =  weightMode[1]
+        else:
+            weightMode=[weightDistribution,weightScale]
+        if weightDistribution == 'random':
+            if weightScale == None:
+                weightScale = (1,numberOfCriteria)
+            weightsList = []
+            sumWeights = Decimal('0.0')
+            i = 0
+            for g in criteriaList:
+                weightsList.append(Decimal(str(random.randint(weightScale[0],weightScale[1]))))
+                sumWeights += weightsList[i]
+                i += 1
+            weightsList.reverse()
+        elif weightDistribution == 'fixed':
+            if weightScale == None:
+                weightScale = (1,numberOfCriteria)            
+            weightsList = []
+            sumWeights = Decimal('0.0')
+            for g in criteriaList:
+                if g == 'g1':
+                    weightsList.append(Decimal(str(weightScale[1])))
+                    sumWeights += weightScale[1]
+                else:
+                    weightsList.append(Decimal(str(weightScale[0])))
+                    sumWeights += weightScale[0]
+            weightsList.reverse()
+        elif weightDistribution == 'equisignificant'\
+          or weightDistribution == 'equiobjectives'\
+          or weightDistribution == 'equicoalitions':
+            weightScale = (1,1)            
+            weightsList = []
+            sumWeights = Decimal('0.0')
+            for g in criteriaList:
+                if g == 'g1':
+                    weightsList.append(Decimal(str(weightScale[1])))
+                    sumWeights += weightScale[1]
+                else:
+                    weightsList.append(Decimal(str(weightScale[0])))
+                    sumWeights += weightScale[0]
+            weightsList.reverse()
+        else:
+            print('!!! Error: wrong criteria weight distribution mode: %s !!!!' % (weightDistribution))
+
+        # generate criteria dictionary with random thresholds
+        if commonScale == None:
+            commonScale = (0.0,100.0)
+        if Coalitions:
+            criterionCoalitionsList=[('A',None),('B',None),('C',None)]
+        elif RandomCoalitions:
+            bin = {}
+            nbrcrit = len(criteriaList)
+            for i in range(nbrcrit):
+                bin[i] = set()
+            for i in range(nbrcrit):
+                p = random.randint(0,nbrcrit-1)
+                bin[p].add(criteriaList[i])
+            partition = []
+            for i in range(nbrcrit):
+                ni = len(bin[i])
+                if ni > 0:
+                    partition.append((ni,bin[i]))
+            partition.sort(reverse=True)
+            criterionCoalitionsList = []
+            for i in range(len(partition)):
+                criterionCoalitionsList.append((chr(ord("A")+i),partition[i][1]))
+            Coalitions = True
+            if Debug:
+                print(criterionCoalitionsList)
+        criteria = {}
+
+        for gi in range(len(criteriaList)):
+            g = criteriaList[gi]
+            criteria[g] = {}
+            if RandomCoalitions:
+                for criterionCoalition in criterionCoalitionsList:
+                    if g in criterionCoalition[1]:
+                        criteria[g]['coalition'] = criterionCoalition[0]
+                        if Debug:
+                            print('==>>>', criteria[g]['coalition'])
+            elif Coalitions:
+                criterionCoalition = random.choice(criterionCoalitionsList)
+                criteria[g]['coalition'] = criterionCoalition[0]
+            criteria[g]['preferenceDirection'] = 'max'           
+            if Coalitions:
+                criteria[g]['name'] = 'random criterion of coalition %s' % (criteria[g]['coalition'])
+            else:
+                criteria[g]['name'] = 'random criterion'            
+            t = time.time()
+            if commonThresholds == None:        
+                ## thresholds = []
+                ## thresholds.append((round(random.uniform(0.0,commonScale[1]/5.0),valueDigits),0.0))
+                ## thresholds.append((round(random.uniform(thresholds[0][0],commonScale[1]/3.0),valueDigits),0.0))
+                ## thresholds.append((round(random.uniform(commonScale[1]*2.0/3.0,commonScale[1]),valueDigits),0.0))
+                ## thresholds.append((round(random.uniform(thresholds[2][0],commonScale[1]),valueDigits),0.0))
+                
+                if OrdinalScales:
+                    thresholds = [(1.0,0.0),(2.001,0.0),(8.001,0.0)]
+                else:
+                    span = commonScale[1] - commonScale[0]
+                    thresholds = [(0.05001*span,0),(0.10001*span,0.0),(0.60001*span,0.0)]
+            else:
+                thresholds = commonThresholds
+            ## print thresholds
+            if Electre3:
+                thitems = ['ind','pref','veto']
+            else:
+                thitems = ['ind','pref','weakVeto','veto']
+            if vetoProbability != None:
+                randVeto = random.uniform(0.0,1.0)
+                if randVeto > vetoProbability:
+                    thitems = ['ind','pref']
+            criteria[g]['thresholds'] = {}
+            for t in range(len(thitems)):
+                criteria[g]['thresholds'][thitems[t]] =\
+                   (Decimal(str(thresholds[t][0])),Decimal(str(thresholds[t][1])))
+                
+            criteria[g]['scale'] = commonScale
+            if integerWeights:
+                criteria[g]['weight'] = weightsList[gi]
+            else:
+                criteria[g]['weight'] = weightsList[gi] / sumWeights
+
+        # determine equisignificant coalitions
+        coalitionsCardinality = {}
+        for gi in range(len(criteriaList)):
+            g = criteriaList[gi]
+            try:
+                coalitionsCardinality[criteria[g]['coalition']] += 1
+            except:
+                coalitionsCardinality[criteria[g]['coalition']] = 1
+        if Debug:
+            print(coalitionsCardinality)
+        weightsProduct = 1
+        for coalition in coalitionsCardinality:
+            weightsProduct *= coalitionsCardinality[coalition]
+        if Debug:
+            print(weightsProduct)
+        if weightDistribution == 'equicoalitions':
+            for gi in range(len(criteriaList)):
+                g = criteriaList[gi]
+                criteria[g]['weight'] =\
+                    weightsProduct // coalitionsCardinality[criteria[g]['coalition']]
+                if Debug:
+                    print(criteria[g]['weight'])
+                
+        # allocate (criterion,action) to coalition supporting type
+        if Coalitions:
+            coalitionSupportingType = ['+','~','-']
+            for x in actionsList:
+                for c in criterionCoalitionsList:
+                    if Debug:
+                        print(criterionCoalitionsList,c)
+                    self.actions[x][str(c[0])]=random.choice(coalitionSupportingType)
+                    self.actions[x]['name'] =\
+                        self.actions[x]['name'] + ' '+ str(c[0]) + str(self.actions[x][str(c[0])])                
+                    
+        # generate evaluations
+        evaluation = {}
+        for g in criteriaList:
+            evaluation[g] = {}
+            if commonMode == None:
+                #randomMode = random.choice(randomLawsList)
+                randomMode = ['triangular',50.0,0.50]               
+            else:
+                randomMode = commonMode
+            if randomMode[0] == 'uniform':
+                randomMode[1] = commonScale[0]
+                randomMode[2] = commonScale[1]
+                
+            criteria[g]['randomMode'] = randomMode
+            if Coalitions:
+                commentString = 'Variable '+randomMode[0]+(' performance generator with random low (-), medium (~) or high (+) parameters.')
+            else:
+                if randomMode[0] == 'triangular':
+                    if VariableGenerators:
+                        commentString = 'triangular law with variable mode (m) and probability repartition (p).'
+                    else:
+                        commentString = 'triangular law with constant mode (m) and probability repartition (p).'
+
+                else:
+                    if VariableGenerators:
+                        commentString = 'Variable '+randomMode[0]+(' law with randomly chosen low, medium or high parameters.')
+                    ## elif Coalitions:
+                    ##     commentString = 'Coalition : %s ' % (criteria[g]['coalition'])
+                    else:
+                        commentString = 'Constant '+randomMode[0]+(' law with parameters = %s, %s' % (str(randomMode[1]),str(randomMode[2])))
+                    
+            criteria[g]['comment'] = commentString
+            digits = valueDigits
+            
+            if str(randomMode[0]) == 'uniform':          
+                for a in actionsList:
+                    
+                    if VariableGenerators:
+                        randomRangesList = [(commonScale[0],commonScale[1]), (commonScale[0],commonScale[0]+0.3*(commonScale[1]-commonScale[0])), (commonScale[0],commonScale[0]+0.7*(commonScale[1]-commonScale[0]))]
+                        randomRange = random.choice(randomRangesList)         
+                        randeval = random.uniform(randomRange[0],randomRange[1])
+                    else:
+                        randomRange = (randomMode[1],randomMode[2]) 
+                        randeval = random.uniform(randomMode[1],randomMode[2])
+                    self.actions[a]['generators'][g] = (randomMode[0],randomRange)
+                    if OrdinalScales:
+                        randeval /= 10.0
+                        if criteria[g]['preferenceDirection'] == 'max':
+                            evaluation[g][a] = Decimal(str(round(randeval,0)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,0)))
+                    else:
+                        if criteria[g]['preferenceDirection'] == 'max':
+                            evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+
+            elif str(randomMode[0]) == 'beta':
+                for a in actionsList:
+                    m = commonScale[0]
+                    M = commonScale[1]
+                    if Coalitions:
+                        if self.actions[a][criteria[g]['coalition']] == '+':
+                            # mode = 75, stdev = 15
+                            #xm = 75
+                            alpha = 5.8661
+                            beta = 2.62203
+                        elif self.actions[a][criteria[g]['coalition']] == '~':
+                            # nmode = 50, stdev = 15
+                            #xm = 50
+                            alpha = 5.05556
+                            beta = 5.05556
+                        elif self.actions[a][criteria[g]['coalition']] == '-':
+                            # mode = 25, stdev = 15
+                            # xm = 25
+                            alpha = 2.62203
+                            beta = 5.8661                         
+                    else:
+                        if VariableGenerators:
+                            randomModesList = [0.3,0.5,0.7]
+                            xm = random.choice(randomModesList)
+                        else:
+                            xm = randomMode[1]
+                        if xm > 0.5:
+                            beta = 2.0
+                            alpha = 1.0/(1-xm)
+                        else:
+                            alpha = 2.0
+                            beta = 1.0 / xm
+                    if Debug:
+                        print('alpha,beta', alpha,beta)
+                    u = random.betavariate(alpha,beta)
+                    randeval = (u * (M-m)) + m
+                    if Debug:
+                        print('xm,alpha,beta,u,m,M,randeval',xm,alpha,beta,u,m,M,randeval)
+                    self.actions[a]['generators'][g] = ('beta',alpha,beta)
+                    if OrdinalScales:
+                        randeval /= 10.0
+                        if criteria[g]['preferenceDirection'] == 'max':
+                            evaluation[g][a] = Decimal(str(round(randeval,0)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,0)))
+                    else:
+                        if criteria[g]['preferenceDirection'] == 'max':
+                            evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+    
+            elif str(randomMode[0]) == 'triangular':
+                for a in actionsList:
+                    m = commonScale[0]
+                    M = commonScale[1]
+                    if VariableGenerators:
+                        randomModesList = [30.0,50.0,70.0]
+                        xm = random.choice(randomModesList)
+                    else:
+                        xm = randomMode[1]
+                    r  = randomMode[2]
+                    self.actions[a]['generators'][g] = (randomMode[0],xm,r)
+                    u = random.random()
+                    #print 'm,xm,M,r,u', m,xm,M,r,u 
+                    if u < r:
+                        #randeval = m + (math.sqrt(r*u*(m-xm)**2))/r
+                        randeval = m + math.sqrt(u/r)*(xm-m)
+                    else:
+                        #randeval = (M*r - M + math.sqrt((-1+r)*(-1+u)*(M-xm)**2))/(-1+r)
+                        randeval = M - math.sqrt((1-u)/(1-r))*(M-xm)
+                    if OrdinalScales:
+                        randeval /= 10.0
+                        if criteria[g]['preferenceDirection'] == 'max':
+                            evaluation[g][a] = Decimal(str(round(randeval,0)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,0)))
+                    else:
+                        if criteria[g]['preferenceDirection'] == 'max':
+                            evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                   
+                    #print randeval, criteria[g]['preferenceDirection'], evaluation[g][a]
+
+     
+            ## elif str(randomMode[0]) == 'normal':
+            ##     mu = randomMode[1]
+            ##     sigma = randomMode[2]
+            ##     for a in actionsList:
+            ##         notfound = True 
+            ##         while notfound:
+            ##             randeval = random.normalvariate(mu,sigma)
+            ##             if randeval >= commonScale[0] and  randeval <= commonScale[1]:
+            ##                 notfound = False
+            ##         evaluation[g][a] = Decimal(str(round(randeval,digits)))
+        # install self object attributes
+
+        self.criteriaWeightMode = weightMode
+        self.criteria = criteria
+        self.evaluation = evaluation
+        self.weightPreorder = self.computeWeightPreorder()
+
 
 class RandomCBPerformanceTableau(PerformanceTableau):
     """
@@ -1570,13 +1971,15 @@ class RandomCBPerformanceTableau(PerformanceTableau):
 #----------test Digraph class ----------------
 if __name__ == "__main__":
 
-    from randomPerfTabs import *
     from outrankingDigraphs import BipolarOutrankingDigraph
+    from randomPerfTabs import RandomPerformanceTableau
 
-    t = RandomRankPerformanceTableau(numberOfActions=10,numberOfCriteria=7,seed=100)
+    t = RandomPerformanceTableau(numberOfActions=10,numberOfCriteria=7,
+                                 commonMode=('beta',0.5,(2,2)),seed=100)
     t.showAll()
-    t.showHTMLPerformanceHeatmap(Correlations=True)
+    #t.showHTMLPerformanceHeatmap(Correlations=True)
     g = BipolarOutrankingDigraph(t,Normalized=True)
+    g.showAll()
     
     print('*-------- Testing classes and methods -------')
 
