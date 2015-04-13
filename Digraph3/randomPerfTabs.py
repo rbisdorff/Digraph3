@@ -46,7 +46,7 @@ class RandomPerformanceTableau(PerformanceTableau):
         * weightScale := [Min,Max] (default =[1,numberOfCriteria].
         * IntegerWeights := True (default) | False (normalized to proportions of 1.0).
         * commonScale := [Min;Max]; common performance measuring scales (default = [0;100])
-        * commonThresholds := [q,p,v]; common indifference(q), preference (p)
+        * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p)
           and considerable performance difference discrimination thresholds.
         * commonMode := common random distribution of random performance measuremenats:
              | ('uniform',Min,Max), uniformly distributed between min and max values. 
@@ -86,8 +86,8 @@ class RandomPerformanceTableau(PerformanceTableau):
                  weightDistribution = None,\
                  weightScale=None,\
                  integerWeights=True,\
-                 commonScale = [0.0,100.0],\
-                 commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0)],\
+                 commonScale = (0.0,100.0),\
+                 commonThresholds = ((10.0,0.0),(20.0,0.0),(80.0,0.0)),\
                  commonMode = None,\
                  valueDigits = 2,\
                  seed = None,
@@ -99,6 +99,7 @@ class RandomPerformanceTableau(PerformanceTableau):
         # fixing the seed (None by default)
         import random
         random.seed(seed)
+        from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
 
         # seeting tableau name
         self.name = 'randomperftab'
@@ -123,6 +124,7 @@ class RandomPerformanceTableau(PerformanceTableau):
         ng = len(str(numberOfCriteria))
         criteriaList = [('g%%0%dd' % ng) % (i+1)\
                         for i in range(numberOfCriteria)]
+        criteriaList.sort()
         
 #        # generate weights
         if weightDistribution == None:
@@ -170,49 +172,61 @@ class RandomPerformanceTableau(PerformanceTableau):
         commentString += '; weightDistribution='+str(weightDistribution)
         commentString += '; weightScale='+str(weightScale)
         commentString += '; commonMode='+str(commonMode)
-        i = 0
-        for g in criteriaList:
+        digits = valueDigits
+        commonAmplitude = commonScale[1] - commonScale[0]
+        
+        for i in range(len(criteriaList)):
+            g = criteriaList[i]
             criteria[g] = {}
             criteria[g]['name']='RandomPerformanceTableau() instance'
             criteria[g]['comment']=commentString
             try:
-                commonThresholds[0]=(Decimal(str(commonThresholds[0][0])),Decimal(str(commonThresholds[0][1])))
-                commonThresholds[1]=(Decimal(str(commonThresholds[1][0])),Decimal(str(commonThresholds[1][1])))
-                commonThresholds[2]=(Decimal(str(commonThresholds[2][0])),Decimal(str(commonThresholds[2][1])))
-                commonThresholds[3]=(Decimal(str(commonThresholds[3][0])),Decimal(str(commonThresholds[3][1])))
-             
-                criteria[g]['thresholds'] = {'ind':commonThresholds[0],
-                                             'pref':commonThresholds[1],
-                                             'weakVeto':commonThresholds[2],
-                                             'veto':commonThresholds[3]}
+                veto = round(commonThresholds[3][0]*commonAmplitude/100.0,digits)
+                ind = round(commonThresholds[0][0]*commonAmplitude/100.0,digits)
+                pref = round(commonThresholds[1][0]*commonAmplitude/100.0,digits)
+                weakVeto = round(commonThresholds[2][0]*commonAmplitude/100.0,digits)
+                indThresholds=(Decimal(str(ind)),Decimal(str(commonThresholds[0][1])))
+                prefThresholds=(Decimal(str(pref)),Decimal(str(commonThresholds[1][1])))
+                weakVetoThresholds=(Decimal(str(weakVeto)),Decimal(str(commonThresholds[2][1])))
+                vetoThresholds=(Decimal(str(veto)),Decimal(str(commonThresholds[3][1])))
+                criteria[g]['thresholds'] = {'ind':indThresholds,
+                                             'pref':prefThresholds,
+                                             'weakVeto':weakVetoThresholds,
+                                             'veto':vetoThresholds}
             except:
-                commonThresholds[0]=(Decimal(str(commonThresholds[0][0])),Decimal(str(commonThresholds[0][1])))
-                commonThresholds[1]=(Decimal(str(commonThresholds[1][0])),Decimal(str(commonThresholds[1][1])))
-                commonThresholds[2]=(Decimal(str(commonThresholds[2][0])),Decimal(str(commonThresholds[2][1])))                
-                criteria[g]['thresholds'] = {'ind':commonThresholds[0],
-                                             'pref':commonThresholds[1],
-                                             'veto':commonThresholds[2]}
-            #commonScale = (Decimal(str(commonScale[0])),Decimal(str(commonScale[1])))
+                ind = round(commonThresholds[0][0]*commonAmplitude/100.0,digits)
+                pref = round(commonThresholds[1][0]*commonAmplitude/100.0,digits)
+                veto = round(commonThresholds[2][0]*commonAmplitude/100.0,digits)
+                indThresholds=(Decimal(str(ind)),Decimal(str(commonThresholds[0][1])))
+                prefThresholds=(Decimal(str(pref)),Decimal(str(commonThresholds[1][1])))
+                vetoThresholds=(Decimal(str(veto)),Decimal(str(commonThresholds[2][1])))                
+                criteria[g]['thresholds'] = {'ind':indThresholds,
+                                             'pref':prefThresholds,
+                                             'veto':vetoThresholds}
             criteria[g]['scale'] = commonScale
             if integerWeights:
                 criteria[g]['weight'] = weightsList[i]
             else:
                 criteria[g]['weight'] = weightsList[i]/sumWeights
-            i += 1
         self.criteria = criteria
+        
         # generate evaluations
         if commonMode == None:
             commonMode = ['uniform',None,None]
         digits=valueDigits
         evaluation = {}
+        
         if str(commonMode[0]) == 'uniform':          
-            for g in criteria:
+            for i in range(len(criteriaList)):
+                g = criteriaList[i]
                 evaluation[g] = {}
                 for a in actionsList:
                     ## randeval = random.randint(commonScale[0],commonScale[1])
                     randeval = random.uniform(commonScale[0],commonScale[1])
                     evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                    
         elif str(commonMode[0]) == 'triangular':
+            
             m = commonScale[0]
             M = commonScale[1]
             if commonMode[1] == None:
@@ -223,15 +237,19 @@ class RandomPerformanceTableau(PerformanceTableau):
                 r  = 0.5
             else:
                 r  = commonMode[2]
-            for g in criteria:
+            rng = RNGTr(m,M,xm,r)
+            for i in range(len(criteriaList)):
+                g = criteriaList[i]
                 evaluation[g] = {}
                 for a in actionsList:
-                    u = random.random()
-                    if u < r:
-                        randeval = m + math.sqrt(u/r)*(xm-m)                   
-                    else:
-                        randeval = M - math.sqrt((1-u)/(1-r))*(M-xm)
-                    evaluation[g][a] = Decimal(str(round(randeval,digits)))
+##                    u = random.random()
+##                    if u < r:
+##                        randeval = m + math.sqrt(u/r)*(xm-m)                   
+##                    else:
+##                        randeval = M - math.sqrt((1-u)/(1-r))*(M-xm)
+##                    evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                    evaluation[g][a] = Decimal(str(round(rng.random(),digits)))
+                    
 
         elif str(commonMode[0]) == 'beta':
             m = commonScale[0]
@@ -253,7 +271,8 @@ class RandomPerformanceTableau(PerformanceTableau):
                 beta = commonMode[2][1]
             if Debug:
                 print('alpha,beta', alpha,beta)
-            for g in criteria:
+            for i in range(len(criteriaList)):
+                g = criterialList[i]
                 evaluation[g] = {}
                 for a in actionsList:
                     u = random.betavariate(alpha,beta)
@@ -271,7 +290,8 @@ class RandomPerformanceTableau(PerformanceTableau):
                 sigma = (commonScale[1]-commonScale[0])/4.0
             else:
                 sigma = commonMode[2]
-            for g in criteria:
+            for i in range(len(criteriaList)):
+                g = criteriaList[i]
                 evaluation[g] = {}
                 for a in actionsList:
                     notfound = True 
@@ -339,7 +359,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
             actions[actionKey] = {'shortName':actionKey,
                     'name': 'random decision action',
                     'comment': 'RandomRankPerformanceTableau() generated.' }
-        self.actions = copy(actions)
+        self.actions = actions
         actionsList = [x for x in self.actions]
         actionsList.sort()
         
@@ -349,6 +369,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
         ng = len(str(numberOfCriteria))
         criteriaList = [('g%%0%dd' % ng) % (i+1)\
                         for i in range(numberOfCriteria)]
+        criteriaList.sort()
         
         # generate weights
         if weightDistribution == None:
@@ -386,17 +407,23 @@ class RandomRankPerformanceTableau(PerformanceTableau):
         commentString += '; weightScale='+str(weightScale)
         commentString += '; integerWeights='+str(integerWeights)
         commentString += '; commonThresholds='+str(commonThresholds)
-        i = 0
-        for g in criteriaList:
+    
+        for i in range(len(criteriaList)):
+            g = criteriaList[i]
             criteria[g] = {}
             criteria[g]['name']='randomPerfTabs.RandomRankPerformanceTableau() instance'
             criteria[g]['comment']=commentString
             try:
-                indThreshold  =(Decimal(str(commonThresholds['ind'][0])),Decimal(str(commonThresholds['ind'][1])))
-                prefThreshold =(Decimal(str(commonThresholds['pref'][0])),Decimal(str(commonThresholds['pref'][1])))
-                vetoThreshold =(Decimal(str(commonThresholds['veto'][0])),Decimal(str(commonThresholds['veto'][1])))
+                indThreshold  =(Decimal(str(commonThresholds['ind'][0])),
+                                Decimal(str(commonThresholds['ind'][1])))
+                prefThreshold =(Decimal(str(commonThresholds['pref'][0])),
+                                Decimal(str(commonThresholds['pref'][1])))
+                vetoThreshold =(Decimal(str(commonThresholds['veto'][0])),
+                                Decimal(str(commonThresholds['veto'][1])))
              
-                criteria[g]['thresholds'] = {'ind':indThreshold,'pref':prefThreshold,'veto':vetoThreshold}
+                criteria[g]['thresholds'] = {'ind':indThreshold,
+                                             'pref':prefThreshold,
+                                             'veto':vetoThreshold}
             except:
                 indThreshold  = ( Decimal("0"), Decimal("0") )
                 prefThreshold = ( Decimal("1"), Decimal("0") )
@@ -411,11 +438,11 @@ class RandomRankPerformanceTableau(PerformanceTableau):
                 criteria[g]['weight'] = weightsList[i]
             else:
                 criteria[g]['weight'] = weightsList[i]/sumWeights
-            i += 1
-        self.criteria = copy(criteria)
+        self.criteria = criteria
         # generate evaluations
         evaluation = {}       
-        for g in criteria:
+        for i in range(len(criteriaList)):
+            g = criteriaList[i]
             evaluation[g] = {}
             choiceRange = list(range(1,numberOfActions+1))
             for a in actionsList:
@@ -423,7 +450,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
                 evaluation[g][a] = Decimal( str(randeval) )
                 choiceRange.remove(randeval)
         
-        self.evaluation = copy(evaluation)
+        self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
 
 # ------------------------------
@@ -1574,15 +1601,26 @@ if __name__ == "__main__":
     from outrankingDigraphs import BipolarOutrankingDigraph
     from randomPerfTabs import RandomPerformanceTableau
 
-    t = RandomCoalitionsPerformanceTableau(numberOfActions=10,
-                                           numberOfCriteria=7,
-                                           commonMode=('beta',None,None),
-                                           weightDistribution='equicoalitions',
-                                           seed=100)
+    t = RandomPerformanceTableau(weightScale=(1,10),
+                                 commonScale=(0.0,50),
+                                 commonMode=('triangular',30,0.5),
+                                 seed=100)
+##    t = RandomCoalitionsPerformanceTableau(numberOfActions=10,
+##                                           numberOfCriteria=7,
+##                                           commonMode=('beta',None,None),
+##                                           weightDistribution='equicoalitions',
+##                                           seed=100)
     t.showAll()
-    #t.showHTMLPerformanceHeatmap(Correlations=True)
-    g = BipolarOutrankingDigraph(t,Normalized=True)
-    g.showAll()
+    t.showStatistics()
+    t.showCriteria()
+    
+    t = RandomRankPerformanceTableau(seed=100)
+    t.showAll()
+    t.showStatistics()
+    t.showCriteria()
+     #t.showHTMLPerformanceHeatmap(Correlations=True)
+##    g = BipolarOutrankingDigraph(t,Normalized=True)
+##    g.showAll()
     
     print('*-------- Testing classes and methods -------')
 

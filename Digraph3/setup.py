@@ -9,7 +9,7 @@ setup(name='Digraph3',
       py_modules=['digraphs','perfTabs','outrankingDigraphs',\
         'sortingDigraphs','votingDigraphs',\
         'linearOrders','weakOrders',\
-        'iqagent','graphs','htmlmodel','randomNumbers','randomDigraphs'],
+        'iqagent','graphs','htmlmodel','randomNumbers','randomDigraphs','randomPerfTabs'],
       license='http://leopold-loewenheim.uni.lu/Digraph3/digraph3_copyright.html',
       url='http://leoopold-loewenheim.uni.lu/Digraph3/',
       description='Lets you add bipolar graph and digraphs methods to your applications',

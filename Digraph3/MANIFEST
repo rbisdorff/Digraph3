@@ -11,6 +11,7 @@ iqagent.py
 graphs.py
 randomNumbers.py
 randomDigraphs.py
+randomPerfTabs.py
 htmlmodel.py
 makefile
 MANIFEST
@@ -35,6 +36,7 @@ test/noseTestsLinearOrder.py
 test/noseTestsWeakOrders.py
 test/noseTestsRandomNumbers.py
 test/noseTestsRandomDigraph.py
+test/noseTestsRandomPerfTabs.py
 test/testAVprofile.py
 test/testapprovalvotingprofile.py
 test/testdecimal.py
