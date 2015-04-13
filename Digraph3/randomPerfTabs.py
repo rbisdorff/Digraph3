@@ -481,6 +481,8 @@ class FullRandomPerformanceTableau(PerformanceTableau):
         random.seed(seed)
 
         # generate random actions
+        if numberOfActions == None:
+            numberOfActions = random.randint(7,30)
         nd = len(str(numberOfActions))
         actions = dict()
         for i in range(numberOfActions):
@@ -488,19 +490,26 @@ class FullRandomPerformanceTableau(PerformanceTableau):
             actions[actionKey] = {'shortName':actionKey,
                     'name': 'random decision action',
                     'comment': 'RandomRankPerformanceTableau() generated.' }
-        self.actions = copy(actions)
-        actionsList = [x for x in self.actions]
+        self.actions = actions
+        actionsList = [x for x in actions]
         actionsList.sort()
+        
 
         # generate criterialist
-        criteriaList = [('g%%0%dd' % nd) % (i+1)\
-                        for i in range(numberOfCriteria)]
+        if numberOfCriteria == None:
+            numberOfCriteria = random.randint(5,21)
+            
+        ng = len(str(numberOfCriteria))
+        criteriaList = [('g%%0%dd' % ng) % (i+1)\
+                        for i in range(numberOfCriteria)]               
+        criteriaList.sort()
 
         # generate random weights
         if weightDistribution == None:
             majorityWeight = numberOfCriteria + 1
-            #weightModesList = [('fixed',[1,1],1),('random',[1,3],2), ('random',[1,numberOfCriteria],3),('fixed',[1,majorityWeight],4)]
-            weightModesList = [('fixed',[1,1],1),('random',[1,3],2), ('random',[1,numberOfCriteria],3)]
+            weightModesList = [('fixed',[1,1],1),
+                               ('random',[1,3],2),
+                               ('random',[1,numberOfCriteria],3)]
             weightMode = random.choice(weightModesList)
             weightDistribution = weightMode[0]
             weightScale =  weightMode[1]
@@ -511,17 +520,16 @@ class FullRandomPerformanceTableau(PerformanceTableau):
         if weightDistribution == 'random':
             weightsList = []
             sumWeights = 0.0
-            i = 0
-            for g in criteriaList:
+            for i in range(len(criteriaList)):
+                g = criteriaList[i]
                 weightsList.append(random.randint(weightScale[0],weightScale[1]))
                 sumWeights += weightsList[i]
-                i += 1
             weightsList.reverse()
         elif weightDistribution == 'fixed':
             weightsList = []
             sumWeights = 0.0
-            for g in criteriaList:
-                if g == 'g1':
+            for i in range(len(criteriaList)):
+                if i == 0:
                     weightsList.append(weightScale[1])
                     sumWeights += weightScale[1]
                 else:
@@ -532,8 +540,8 @@ class FullRandomPerformanceTableau(PerformanceTableau):
             weightScale = (1,1)
             weightsList = []
             sumWeights = 0.0
-            for g in criteriaList:
-                if g == 'g1':
+            for i in range(len(criteriaList)):
+                if i == 0:
                     weightsList.append(weightScale[1])
                     sumWeights += weightScale[1]
                 else:
@@ -547,11 +555,11 @@ class FullRandomPerformanceTableau(PerformanceTableau):
         if commonScale == None:
             commonScale = [0.0,100.0]
         criteria = {}
-        i = 0
-        for g in criteriaList:
+        for i in range(len(criteriaList)):
+            g = criteriaList[i]
             criteria[g] = {}
             criteria[g]['name'] = 'random criterion'
-            t = time.time()
+            #t = time.time()
             if commonThresholds == None:        
                 thresholds = []
                 thresholds.append((round(random.uniform(0.0,commonScale[1]/5.0),valueDigits),0.0))
@@ -580,7 +588,6 @@ class FullRandomPerformanceTableau(PerformanceTableau):
                 criteria[g]['weight'] = Decimal(str(weightsList[i]))
             else:
                 criteria[g]['weight'] = Decimal(str(weightsList[i]))/Decimal(str(sumWeights))
-            i += 1
 
         # generate random evaluations
         x30=commonScale[1]*0.3
@@ -594,7 +601,8 @@ class FullRandomPerformanceTableau(PerformanceTableau):
                           ('normal',x50,20.0),('normal',x50,25.0),('normal',x50,30.0),
                           ('normal',x70,20.0),('normal',x70,25.0),('normal',x70,30.0)]
         evaluation = {}
-        for g in criteriaList:
+        for i in range(len(criteriaList)):
+            g = criteriaList[i]
             evaluation[g] = {}
             if commonMode == None:
                 randomMode = random.choice(randomLawsList)
@@ -632,6 +640,7 @@ class FullRandomPerformanceTableau(PerformanceTableau):
                     randeval = random.uniform(commonScale[0],commonScale[1])
                     evaluation[g][a] = Decimal(str(round(randeval,digits)))
             elif str(randomMode[0]) == 'triangular':
+                from randomNumbers import ExtendedTriangularRandomVariable as RNG
                 m = commonScale[0]
                 M = commonScale[1]
                 try:
@@ -648,13 +657,15 @@ class FullRandomPerformanceTableau(PerformanceTableau):
                         r  = commonMode[2]
                 except:
                     r  = 0.5
+                rng = RNG(m,M,xm,r)
                 for a in actionsList:
-                    u = random.random()
-                    if u < r:
-                        randeval = m + math.sqrt(u/r)*(xm-m)                
-                    else:
-                        randeval = M - math.sqrt((1-u)/(1-r))*(M-xm)
-                    evaluation[g][a] = Decimal(str(round(randeval,digits)))
+##                    u = random.random()
+##                    if u < r:
+##                        randeval = m + math.sqrt(u/r)*(xm-m)                
+##                    else:
+##                        randeval = M - math.sqrt((1-u)/(1-r))*(M-xm)
+##                    evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                    evaluation[g][a] = Decimal(str(round(rng.random(),digits)))
 
             elif str(randomMode[0]) == 'normal':
                 try:
@@ -709,8 +720,8 @@ class FullRandomPerformanceTableau(PerformanceTableau):
         # install self object attributes
 
         self.criteriaWeightMode = weightMode
-        self.criteria = copy(criteria)
-        self.evaluation = copy(evaluation)
+        self.criteria = criteria
+        self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
 
 
@@ -771,13 +782,14 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                  seed= None,
                  Electre3=True):
         
-        import sys,math,time
+        # naming
         self.name = 'randomCoalitionsPerfTab'
         # randomizer init
         import random
         random.seed(seed)
         if RandomCoalitions:
             Coalitions=False
+            
         # generate actions
         if numberOfActions == None:
             numberOfActions = 13
@@ -799,6 +811,8 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
         ng = len(str(numberOfCriteria))
         criteriaList = [('g%%0%dd' % ng) % (i+1)\
                         for i in range(numberOfCriteria)]
+        criteriaList.sort()
+        
         # generate random weights
         if weightDistribution == None:
             ## majorityWeight = numberOfCriteria + 1
@@ -815,19 +829,18 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                 weightScale = (1,numberOfCriteria)
             weightsList = []
             sumWeights = Decimal('0.0')
-            i = 0
-            for g in criteriaList:
-                weightsList.append(Decimal(str(random.randint(weightScale[0],weightScale[1]))))
+            for i in range(len(criteriaList)):               
+                weightsList.append(Decimal(str(random.randint(weightScale[0],
+                                                              weightScale[1]))))
                 sumWeights += weightsList[i]
-                i += 1
             weightsList.reverse()
         elif weightDistribution == 'fixed':
             if weightScale == None:
                 weightScale = (1,numberOfCriteria)            
             weightsList = []
             sumWeights = Decimal('0.0')
-            for g in criteriaList:
-                if g == 'g1':
+            for i in range(len(criteriaList)):
+                if i == 0:
                     weightsList.append(Decimal(str(weightScale[1])))
                     sumWeights += weightScale[1]
                 else:
@@ -840,8 +853,8 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
             weightScale = (1,1)            
             weightsList = []
             sumWeights = Decimal('0.0')
-            for g in criteriaList:
-                if g == 'g1':
+            for i in range(len(criteriaList)):
+                if i == 0:
                     weightsList.append(Decimal(str(weightScale[1])))
                     sumWeights += weightScale[1]
                 else:
@@ -965,8 +978,10 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                         self.actions[x]['name'] + ' '+ str(c[0]) + str(self.actions[x][str(c[0])])                
                     
         # generate evaluations
+        from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
         evaluation = {}
-        for g in criteriaList:
+        for gi in range(len(criteriaList)):
+            g = criteriaList[gi]
             evaluation[g] = {}
             if commonMode == None:
                 #randomMode = random.choice(randomLawsList)
@@ -1082,15 +1097,17 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                     else:
                         xm = randomMode[1]
                     r  = randomMode[2]
+                    rng = RNGTR(m,M,xm,r,seed=seed)
                     self.actions[a]['generators'][g] = (randomMode[0],xm,r)
-                    u = random.random()
-                    #print 'm,xm,M,r,u', m,xm,M,r,u 
-                    if u < r:
-                        #randeval = m + (math.sqrt(r*u*(m-xm)**2))/r
-                        randeval = m + math.sqrt(u/r)*(xm-m)
-                    else:
-                        #randeval = (M*r - M + math.sqrt((-1+r)*(-1+u)*(M-xm)**2))/(-1+r)
-                        randeval = M - math.sqrt((1-u)/(1-r))*(M-xm)
+##                    u = random.random()
+##                    #print 'm,xm,M,r,u', m,xm,M,r,u 
+##                    if u < r:
+##                        #randeval = m + (math.sqrt(r*u*(m-xm)**2))/r
+##                        randeval = m + math.sqrt(u/r)*(xm-m)
+##                    else:
+##                        #randeval = (M*r - M + math.sqrt((-1+r)*(-1+u)*(M-xm)**2))/(-1+r)
+##                        randeval = M - math.sqrt((1-u)/(1-r))*(M-xm)
+                    randeval = rng.random()
                     if OrdinalScales:
                         randeval /= 10.0
                         if criteria[g]['preferenceDirection'] == 'max':
@@ -1599,28 +1616,31 @@ class RandomCBPerformanceTableau(PerformanceTableau):
 if __name__ == "__main__":
 
     from outrankingDigraphs import BipolarOutrankingDigraph
-    from randomPerfTabs import RandomPerformanceTableau
+    from randomPerfTabs import FullRandomPerformanceTableau
 
-    t = RandomPerformanceTableau(weightScale=(1,10),
-                                 commonScale=(0.0,50),
-                                 commonMode=('triangular',30,0.5),
-                                 seed=100)
-##    t = RandomCoalitionsPerformanceTableau(numberOfActions=10,
-##                                           numberOfCriteria=7,
-##                                           commonMode=('beta',None,None),
-##                                           weightDistribution='equicoalitions',
-##                                           seed=100)
+##    t = RandomPerformanceTableau(weightScale=(1,10),
+##                                 commonScale=(0.0,50),
+##                                 commonMode=('triangular',30,0.5),
+##                                 seed=100)
+####    t = RandomCoalitionsPerformanceTableau(numberOfActions=10,
+####                                           numberOfCriteria=7,
+####                                           commonMode=('beta',None,None),
+####                                           weightDistribution='equicoalitions',
+####                                           seed=100)
+##    t.showAll()
+##    t.showStatistics()
+##    t.showCriteria()
+##    
+##    t = RandomRankPerformanceTableau(seed=100)
+##    t.showAll()
+##    t.showStatistics()
+##    t.showCriteria()
+    t = FullRandomPerformanceTableau(seed=100)
     t.showAll()
     t.showStatistics()
-    t.showCriteria()
-    
-    t = RandomRankPerformanceTableau(seed=100)
-    t.showAll()
-    t.showStatistics()
-    t.showCriteria()
      #t.showHTMLPerformanceHeatmap(Correlations=True)
-##    g = BipolarOutrankingDigraph(t,Normalized=True)
-##    g.showAll()
+    g = BipolarOutrankingDigraph(t,Normalized=True)
+    g.showAll()
     
     print('*-------- Testing classes and methods -------')
 
