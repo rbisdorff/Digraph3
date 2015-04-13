@@ -1183,41 +1183,67 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         # randomizer init
         import random
         random.seed(seed)
-        # generate random actions
+
+        # generate actions
         if numberOfActions == None:
             numberOfActions = random.randint(10,31)
-        actionsIndex = list(range(numberOfActions+1))
-        actionsIndex.remove(0)
-        actionsList = []
-        for a in actionsIndex:
-            if a < 10:
-                actionName = 'a0'+str(a)
-            else:
-                actionName = 'a'+str(a)
-            actionsList.append(actionName)
-        actions = {}
-        actionsTypesList = ['cheap','neutral','advantageous']
-        for x in actionsList:
-            actions[x] = {}
-            actions[x]['type'] = random.choice(actionsTypesList)
-            actions[x]['name'] = 'random %s decision action' % (actions[x]['type'])
-            actions[x]['comment'] = 'RandomCBPerformanceTableau() generated.'
+        nd = len(str(numberOfActions))
+        actionsTypesList = ['cheap','neutral','advantageous']        
+        actions = dict()
+        for i in range(numberOfActions):
+            actionType = random.choice(actionsTypesList)
+            actionKey = ('a%%0%dd' % (nd)) % (i+1)
+            actions[actionKey] = {'shortName':actionKey,
+                    'name': 'random %s decision action' % (actionType),
+                    'comment': 'RandomCBPerformanceTableau() generated.',
+                    'type': actionType}
         self.actions = actions
-
-        # generate random criterialist
+        actionsList = [x for x in self.actions]
+        actionsList.sort()
+        
+        # generate criterialist
         if numberOfCriteria == None:
             numberOfCriteria = random.randint(5,21)
-        criteriaList = []
-        criteriaIndex = list(range(numberOfCriteria+1))
-        criteriaIndex.remove(0)
-        for g in criteriaIndex:
-            if g < 10:
-                criterionName = 'g0'+str(g)
-            else:
-                criterionName = 'g'+str(g)
-            criteriaList.append(criterionName)
-        if Debug:
-            print(criteriaList)
+        ng = len(str(numberOfCriteria))
+        criteriaList = [('g%%0%dd' % ng) % (i+1)\
+                        for i in range(numberOfCriteria)]
+        criteriaList.sort()
+        
+##        # generate random actions
+##        if numberOfActions == None:
+##            numberOfActions = random.randint(10,31)
+##        actionsIndex = list(range(numberOfActions+1))
+##        actionsIndex.remove(0)
+##        actionsList = []
+##        for a in actionsIndex:
+##            if a < 10:
+##                actionName = 'a0'+str(a)
+##            else:
+##                actionName = 'a'+str(a)
+##            actionsList.append(actionName)
+##        actions = {}
+##        actionsTypesList = ['cheap','neutral','advantageous']
+##        for x in actionsList:
+##            actions[x] = {}
+##            actions[x]['type'] = random.choice(actionsTypesList)
+##            actions[x]['name'] = 'random %s decision action' % (actions[x]['type'])
+##            actions[x]['comment'] = 'RandomCBPerformanceTableau() generated.'
+##        self.actions = actions
+
+##        # generate random criterialist
+##        if numberOfCriteria == None:
+##            numberOfCriteria = random.randint(5,21)
+##        criteriaList = []
+##        criteriaIndex = list(range(numberOfCriteria+1))
+##        criteriaIndex.remove(0)
+##        for g in criteriaIndex:
+##            if g < 10:
+##                criterionName = 'g0'+str(g)
+##            else:
+##                criterionName = 'g'+str(g)
+##            criteriaList.append(criterionName)
+##        if Debug:
+##            print(criteriaList)
             
         # generate criteria dictionary
         ## if commonScale == None:
@@ -1228,8 +1254,9 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         criteria = {}
         i = 0
         criterionTypeCounter = {'min':0,'max':0}
-        for g in criteriaList:
+        for gi in range(len(criteriaList)):
             #criterionScale = commonScale
+            g = criteriaList[gi]
             criteria[g] = {}
             criterionType = random.choice(criterionTypesList)
             criterionTypeCounter[criterionType] += 1
@@ -1293,17 +1320,15 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         if weightDistribution == 'random':
             weightsList = []
             sumWeights = Decimal('0.0')
-            i = 0
-            for g in criteriaList:
+            for i in range(len(criteriaList)):
                 weightsList.append(Decimal(str(random.randint(weightScale[0],weightScale[1]))))
                 sumWeights += weightsList[i]
-                i += 1
             weightsList.reverse()
         elif weightDistribution == 'fixed':
             weightsList = []
             sumWeights = Decimal('0.0')
-            for g in criteriaList:
-                if g == 'g1':
+            for i in range(len(criteriaList)):
+                if i == 0:
                     weightsList.append(Decimal(str(weightScale[1])))
                     sumWeights += weightScale[1]
                 else:
@@ -1315,8 +1340,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             weightMode=[weightDistribution,weightScale]
             weightsList = []
             sumWeights = Decimal('0.0')
-            for g in criteriaList:
-                if g == 'g1':
+            for i in range(len(criteriaList)):
+                if i == 0:
                     weightsList.append(Decimal(str(weightScale[1])))
                     sumWeights += weightScale[1]
                 else:
@@ -1328,7 +1353,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             weightMode=[weightDistribution,weightScale]
             weightsList = []
             sumWeights = Decimal('0.0')
-            for g in criteriaList:
+            for gi in range(len(criteriaList)):
+                g = criteriaList[gi]
                 if criteria[g]['preferenceDirection'] == 'min':
                     weightsList.append(Decimal(str(weightScale[1])))
                     sumWeights += weightScale[1]
@@ -1367,7 +1393,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         ##                   ('normal',x70,20.0),('normal',x70,25.0),('normal',x70,30.0)]
         
         evaluation = {}
-        for g in criteriaList:
+        for i in range(len(criteriaList)):
+            g = criteriaList[i]
             criterionScale = criteria[g]['scale']
             amplitude = criterionScale[1] - criterionScale[0]
             x30=criterionScale[0] + amplitude*0.3
@@ -1545,7 +1572,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         ##             ## if Debug:
         ##             ##     print evaluation[g][a]
         # restrict ordinal criteria to integer values
-        for g in criteriaList:
+        for gi in range(len(criteriaList)):
+            g = criteriaList[gi]
             if criteria[g]['scaleType'] == 'ordinal':
                 for a in actionsList:
                     if Debug:
@@ -1557,8 +1585,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         
             # generate discrimination thresholds
         self.criteriaWeightMode = weightMode
-        self.criteria = copy.deepcopy(criteria)
-        self.evaluation = copy.deepcopy(evaluation)
+        self.criteria = criteria
+        self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
         performanceDifferences = self.computePerformanceDifferences(NotPermanentDiffs=True,Debug=False)
         if Debug:
@@ -1616,7 +1644,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
 if __name__ == "__main__":
 
     from outrankingDigraphs import BipolarOutrankingDigraph
-    from randomPerfTabs import FullRandomPerformanceTableau
+    from randomPerfTabs import RandomCBPerformanceTableau
 
 ##    t = RandomPerformanceTableau(weightScale=(1,10),
 ##                                 commonScale=(0.0,50),
@@ -1635,7 +1663,7 @@ if __name__ == "__main__":
 ##    t.showAll()
 ##    t.showStatistics()
 ##    t.showCriteria()
-    t = FullRandomPerformanceTableau(seed=100)
+    t = RandomCBPerformanceTableau(seed=100)
     t.showAll()
     t.showStatistics()
      #t.showHTMLPerformanceHeatmap(Correlations=True)
