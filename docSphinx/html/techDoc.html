@@ -3302,7 +3302,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4040,7 +4040,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5734,7 +5734,7 @@ else valuation domain = [-1.0,1.0]</li>
 
 <dl class="class">
 <dt id="randomPerfTabs.RandomCBPerformanceTableau">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCBPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonPercentiles=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCBPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonPercentiles=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>seed=None</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Full automatic generation of random
 Cost versus Benefit oriented performance tableaux.</p>
@@ -5760,7 +5760,7 @@ Cost versus Benefit oriented performance tableaux.</p>
 
 <dl class="class">
 <dt id="randomPerfTabs.RandomCoalitionsPerformanceTableau">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCoalitionsPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>Coalitions=True</em>, <em>VariableGenerators=True</em>, <em>OrdinalScales=False</em>, <em>Debug=False</em>, <em>RandomCoalitions=False</em>, <em>vetoProbability=None</em>, <em>Electre3=True</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomCoalitionsPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCoalitionsPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>Coalitions=True</em>, <em>VariableGenerators=True</em>, <em>OrdinalScales=False</em>, <em>Debug=False</em>, <em>RandomCoalitions=False</em>, <em>vetoProbability=None</em>, <em>seed=None</em>, <em>Electre3=True</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomCoalitionsPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Full automatic generation of performance tableaux with random coalitions of criteria</p>
 <dl class="docutils">
@@ -5789,7 +5789,7 @@ Cost versus Benefit oriented performance tableaux.</p>
 
 <dl class="class">
 <dt id="randomPerfTabs.RandomPerformanceTableau">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=13, numberOfCriteria=7, weightDistribution=None, weightScale=None, integerWeights=True, commonScale=[0.0, 100.0], commonThresholds=[(10.0, 0.0), (20.0, 0.0), (80.0, 0.0)], commonMode=None, valueDigits=2, seed=None, Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=(0.0</em>, <em>100.0)</em>, <em>commonThresholds=((10.0</em>, <em>0.0)</em>, <em>(20.0</em>, <em>0.0)</em>, <em>(80.0</em>, <em>0.0))</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Specialization of the PerformanceTableau class for generating a temporary
 random performance tableau.</p>
@@ -5818,7 +5818,7 @@ random performance tableau.</p>
 </li>
 <li><p class="first">commonScale := [Min;Max]; common performance measuring scales (default = [0;100])</p>
 </li>
-<li><p class="first">commonThresholds := [q,p,v]; common indifference(q), preference (p)
+<li><p class="first">commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p)
 and considerable performance difference discrimination thresholds.</p>
 </li>
 <li><dl class="first docutils">
@@ -5904,13 +5904,6 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 </ul>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="class">
-<dt id="randomPerfTabs.RandomS3PerformanceTableau">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomS3PerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>Coalitions=True</em>, <em>VariableGenerators=True</em>, <em>OrdinalScales=False</em>, <em>Debug=False</em>, <em>RandomCoalitions=False</em>, <em>vetoProbability=None</em>, <em>Electre3=True</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomS3PerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#randomPerfTabs.RandomCoalitionsPerformanceTableau" title="randomPerfTabs.RandomCoalitionsPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomCoalitionsPerformanceTableau</span></code></a></p>
-<p>Obsolete dummy class for backports.</p>
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
