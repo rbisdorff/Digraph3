@@ -272,7 +272,7 @@ class RandomPerformanceTableau(PerformanceTableau):
             if Debug:
                 print('alpha,beta', alpha,beta)
             for i in range(len(criteriaList)):
-                g = criterialList[i]
+                g = criteriaList[i]
                 evaluation[g] = {}
                 for a in actionsList:
                     u = random.betavariate(alpha,beta)
@@ -908,7 +908,6 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                 criteria[g]['name'] = 'random criterion of coalition %s' % (criteria[g]['coalition'])
             else:
                 criteria[g]['name'] = 'random criterion'            
-            t = time.time()
             if commonThresholds == None:        
                 ## thresholds = []
                 ## thresholds.append((round(random.uniform(0.0,commonScale[1]/5.0),valueDigits),0.0))
@@ -1097,7 +1096,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                     else:
                         xm = randomMode[1]
                     r  = randomMode[2]
-                    rng = RNGTR(m,M,xm,r,seed=seed)
+                    rng = RNGTr(m,M,xm,r,seed=seed)
                     self.actions[a]['generators'][g] = (randomMode[0],xm,r)
 ##                    u = random.random()
 ##                    #print 'm,xm,M,r,u', m,xm,M,r,u 
