@@ -1182,9 +1182,12 @@ The performance evaluations of each decision alternative on each criterion are g
             pageTitle = 'Heatmap of performance tableau %s' % self.name
         if Ranked and actionsList == None:
             from weakOrders import QuantilesRankingDigraph
-            qsr = QuantilesRankingDigraph(self,LowerClosed=True,Threading=Threading)
+            qsr = QuantilesRankingDigraph(self,LowerClosed=True,
+                                          Threading=Threading,
+                                          Debug=Debug)
             actionsList = qsr.computeQsRbcRanking()
-            print(actionsList)
+            if Debug:
+                print(actionsList)
             
         fo.write(self.htmlPerformanceHeatmap(criteriaList=criteriaList,
                                              actionsList=actionsList,
