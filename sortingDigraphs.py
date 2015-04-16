@@ -1057,7 +1057,10 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 if Debug:
                     print(action, c, sorting[action][c])
         n = len(keys)
-        credibility = min(lowLimit,notHighLimit)
+        try:
+            credibility = min(lowLimit,notHighLimit)
+        except:
+            credibility = Med
         if n == 0:
             return None
         elif n == 1:
