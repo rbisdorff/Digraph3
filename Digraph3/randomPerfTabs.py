@@ -789,6 +789,9 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
         random.seed(seed)
         if RandomCoalitions:
             Coalitions=False
+
+        from randomNumbers import ExtendedTriangularRandomVariable as RNGTr            
+
             
         # generate actions
         if numberOfActions == None:
@@ -977,7 +980,6 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                         self.actions[x]['name'] + ' '+ str(c[0]) + str(self.actions[x][str(c[0])])                
                     
         # generate evaluations
-        from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
         evaluation = {}
         for gi in range(len(criteriaList)):
             g = criteriaList[gi]
@@ -1016,7 +1018,8 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                 for a in actionsList:
                     
                     if VariableGenerators:
-                        randomRangesList = [(commonScale[0],commonScale[1]), (commonScale[0],commonScale[0]+0.3*(commonScale[1]-commonScale[0])), (commonScale[0],commonScale[0]+0.7*(commonScale[1]-commonScale[0]))]
+                        randomRangesList = [(commonScale[0],commonScale[1]),
+                                            (commonScale[0],commonScale[0]+0.3*(commonScale[1]-commonScale[0])), (commonScale[0],commonScale[0]+0.7*(commonScale[1]-commonScale[0]))]
                         randomRange = random.choice(randomRangesList)         
                         randeval = random.uniform(randomRange[0],randomRange[1])
                     else:
@@ -1096,7 +1099,6 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                     else:
                         xm = randomMode[1]
                     r  = randomMode[2]
-                    rng = RNGTr(m,M,xm,r,seed=seed)
                     self.actions[a]['generators'][g] = (randomMode[0],xm,r)
 ##                    u = random.random()
 ##                    #print 'm,xm,M,r,u', m,xm,M,r,u 
@@ -1106,7 +1108,11 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
 ##                    else:
 ##                        #randeval = (M*r - M + math.sqrt((-1+r)*(-1+u)*(M-xm)**2))/(-1+r)
 ##                        randeval = M - math.sqrt((1-u)/(1-r))*(M-xm)
-                    randeval = rng.random()
+                    # setting a speudo random seed
+                    rdseed = random.random()
+                    rngtr = RNGTr(m,M,xm,r,seed=rdseed)
+
+                    randeval = rngtr.random()
                     if OrdinalScales:
                         randeval /= 10.0
                         if criteria[g]['preferenceDirection'] == 'max':
@@ -1641,9 +1647,34 @@ class RandomCBPerformanceTableau(PerformanceTableau):
 
 #----------test Digraph class ----------------
 if __name__ == "__main__":
+    
+    print('*-------- Testing classes and methods -------')
+
 
     from outrankingDigraphs import BipolarOutrankingDigraph
     from randomPerfTabs import RandomCBPerformanceTableau
+    from weakOrders import QuantilesRankingDigraph
+
+    print('*---------- test percentiles of variable thresholds --------*') 
+    t = RandomCoalitionsPerformanceTableau(weightDistribution='equicoalitions',
+                                           seed=100)
+    t.showAll()
+
+    t.computeDefaultDiscriminationThresholds(quantile={'ind':10.0,'pref':20.0,'weakVeto':90.0,'veto':95.0})
+    for g in [y for y in t.criteria]:
+        print(g, t.criteria[g]['thresholds'])
+        for th in t.criteria[g]['thresholds']:
+            print(th)
+            print(' variable:', end=' ')
+            print(t.computeVariableThresholdPercentile(g,th,Debug=False))
+            print(' constant:', end=' ') 
+            print(t.computeThresholdPercentile(g,th))
+    t.showPerformanceTableau()
+    t.showCriteria(Debug=False)
+    t.saveXMCDA2('testPerc',servingD3=False)
+    t.showHTMLPerformanceHeatmap(Correlations=True)
+
+    
 
 ##    t = RandomPerformanceTableau(weightScale=(1,10),
 ##                                 commonScale=(0.0,50),
@@ -1662,15 +1693,12 @@ if __name__ == "__main__":
 ##    t.showAll()
 ##    t.showStatistics()
 ##    t.showCriteria()
-    t = RandomCBPerformanceTableau(seed=100)
-    t.showAll()
-    t.showStatistics()
-     #t.showHTMLPerformanceHeatmap(Correlations=True)
-    g = BipolarOutrankingDigraph(t,Normalized=True)
-    g.showAll()
-    
-    print('*-------- Testing classes and methods -------')
-
+    # t = RandomCBPerformanceTableau(seed=100)
+    # t.showAll()
+    # t.showStatistics()
+    #  #t.showHTMLPerformanceHeatmap(Correlations=True)
+    # g = BipolarOutrankingDigraph(t,Normalized=True)
+    # g.showAll()
      
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
