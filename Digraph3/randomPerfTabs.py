@@ -1652,11 +1652,13 @@ if __name__ == "__main__":
 
 
     from outrankingDigraphs import BipolarOutrankingDigraph
-    from randomPerfTabs import RandomCBPerformanceTableau
     from weakOrders import QuantilesRankingDigraph
+    from randomPerfTabs import *
 
     print('*---------- test percentiles of variable thresholds --------*') 
-    t = RandomCoalitionsPerformanceTableau(weightDistribution='equicoalitions',
+##    t = RandomCoalitionsPerformanceTableau(weightDistribution='equicoalitions',
+##                                           seed=100)
+    t = RandomPerformanceTableau(commonThresholds=[(90,0),(100,0),(110,0)],
                                            seed=100)
     t.showAll()
 
