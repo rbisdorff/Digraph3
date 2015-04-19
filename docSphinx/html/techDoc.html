@@ -180,7 +180,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1065,7 +1065,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1962,7 +1962,7 @@ equivalence valuations.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1993,7 +1993,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -3157,7 +3157,7 @@ temporary triangulated grids of dimension n times m.</p>
 <dt id="perfTabs.FullRandomPerformanceTableau">
 <em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">FullRandomPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.FullRandomPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<p>Full automatic generation of random performance tableaux</p>
+<p>Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.</p>
 <dl class="method">
 <dt id="perfTabs.FullRandomPerformanceTableau.showAll">
 <code class="descname">showAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.FullRandomPerformanceTableau.showAll" title="Permalink to this definition">¶</a></dt>
@@ -3317,7 +3317,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3539,120 +3539,28 @@ on each criteria.</p>
 <dt id="perfTabs.RandomCBPerformanceTableau">
 <em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">RandomCBPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonPercentiles=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.RandomCBPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<p>Full automatic generation of random
-Cost versus Benefit oriented performance tableaux.</p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd><div class="first last line-block">
-<div class="line">If numberOfActions == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated</div>
-<div class="line">If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated</div>
-<div class="line">weightDistribution := {&#8216;equiobjectives&#8217;|&#8217;fixed&#8217;|&#8217;random&#8217;|&#8217;equisignificant&#8217; (default = &#8216;equisignificant&#8217;)}</div>
-<div class="line">default weightScale for &#8216;random&#8217; weightDistribution is 1 - numberOfCriteria</div>
-<div class="line">commonScale parameter is obsolete. The scale of cost criteria is cardinal or ordinal (0-10) with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.</div>
-<div class="line">All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.</div>
-<div class="line">commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).</div>
-<div class="line">CommonPercentiles = {&#8216;ind&#8217;:5, &#8216;pref&#8217;:10, [&#8216;weakveto&#8217;:90,] &#8216;veto&#8217;:95} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.</div>
-</div>
-</dd>
-</dl>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Minimal number of decision actions required is 3 !</p>
-</div>
+<p>Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="perfTabs.RandomCoalitionsPerformanceTableau">
 <em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">RandomCoalitionsPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>Coalitions=True</em>, <em>VariableGenerators=True</em>, <em>OrdinalScales=False</em>, <em>Debug=False</em>, <em>RandomCoalitions=False</em>, <em>vetoProbability=None</em>, <em>Electre3=True</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.RandomCoalitionsPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<p>Full automatic generation of performance tableaux with random coalitions of criteria</p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd><div class="first last line-block">
-<div class="line">numberOf Actions := 20 (default)</div>
-<div class="line">number of Criteria := 13 (default)</div>
-<div class="line">weightDistribution := &#8216;equisignificant&#8217; (default with all weights = 1.0), &#8216;random&#8217;, &#8216;fixed&#8217; (default w_1 = numberOfCriteria-1, w_{i!=1} = 1</div>
-<div class="line">weightScale := [1,numerOfCriteria] (random default), [w_1, w_{i!=1] (fixed)</div>
-<div class="line">integerWeights := True (default) / False</div>
-<div class="line">commonScale := (0.0, 100.0) (default)</div>
-<div class="line">commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].</div>
-<div class="line">commonMode := [&#8216;triangular&#8217;,50.0,0.50] (default), [&#8216;uniform&#8217;,None,None], [&#8216;beta&#8217;, None,None] (three alpha, beta combinations (5.8661,2.62203) chosen by default for high(&#8216;+&#8217;), medium (&#8216;~&#8217;) and low (&#8216;-&#8216;) evaluations.</div>
-<div class="line">valueDigits := 2 (default, for cardinal scales only)</div>
-<div class="line">Coalitions := True (default)/False, three coalitions if True</div>
-<div class="line">VariableGenerators := True (default) / False, variable high(&#8216;+&#8217;), medium (&#8216;~&#8217;) or low (&#8216;-&#8216;) law generated evaluations.</div>
-<div class="line">OrdinalScales := True / False (default)</div>
-<div class="line">Debug := True / False (default)</div>
-<div class="line">RandomCoalitions = True / False (default) zero or more than three coalitions if Coalitions == False.</div>
-<div class="line">vetoProbability := x in ]0.0-1.0[ / None (default), probability that a cardinal criterion shows a veto preference discrimination threshold.</div>
-<div class="line">Electre3 := True (default) / False, no weakveto if True (obsolete)</div>
-</div>
-</dd>
-</dl>
+<p>Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="perfTabs.RandomPerformanceTableau">
 <em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">RandomPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None, numberOfCriteria=None, weightDistribution=None, weightScale=None, integerWeights=True, commonScale=[0.0, 100.0], commonThresholds=[(10.0, 0.0), (20.0, 0.0), (80.0, 0.0)], commonMode=None, valueDigits=2, Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.RandomPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<p>Specialization of the PerformanceTableau class for generating a temporary
-random performance tableau.</p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd><div class="first last line-block">
-<div class="line">actions := nbr of actions,</div>
-<div class="line">criteria := number criteria,</div>
-<div class="line">scale := [Min,Max],</div>
-<div class="line">thresholds := [q,p,v],</div>
-<div class="line">mode = [
-| (&#8216;uniform&#8217;,None,None)
-| (&#8216;normal&#8217;,mu,sigma)
-| (&#8216;triangular&#8217;,mode,None)
-| (&#8216;beta&#8217;,mode,(alpha,beta)],</div>
-<div class="line">weightDistribution := equivalent|random|fixed</div>
-</div>
-</dd>
-<dt>Code example::</dt>
-<dd><div class="first highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">actions</span>
-<span class="go">    {&#39;a02&#39;: {&#39;comment&#39;: &#39;RandomCBPerformanceTableau() generated.&#39;, &#39;type&#39;: &#39;advantageous&#39;, &#39;name&#39;: &#39;random advantageous decision action&#39;},</span>
-<span class="go">    &#39;a03&#39;: {&#39;comment&#39;: &#39;RandomCBPerformanceTableau() generated.&#39;, &#39;type&#39;: &#39;advantageous&#39;, &#39;name&#39;: &#39;random advantageous decision action&#39;},</span>
-<span class="go">    &#39;a01&#39;: {&#39;comment&#39;: &#39;RandomCBPerformanceTableau() generated.&#39;, &#39;type&#39;: &#39;neutral&#39;, &#39;name&#39;: &#39;random neutral decision action&#39;}}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">criteria</span>
-<span class="go">    {&#39;g01&#39;: {&#39;comment&#39;: &#39;Evaluation generator: triangular law with variable mode (m) and probability repartition (p = 0.5). Cheap actions: m = 30%; neutral actions: m = 50%; advantageous actions: m = 70%.&#39;,</span>
-<span class="go">    &#39;performanceDifferences&#39;: [Decimal(&#39;21.84&#39;), Decimal(&#39;25.49&#39;), Decimal(&#39;47.33&#39;)],</span>
-<span class="go">    &#39;scale&#39;: (0.0, 100.0),</span>
-<span class="go">    &#39;minimalPerformanceDifference&#39;: Decimal(&#39;21.84&#39;),</span>
-<span class="go">    &#39;preferenceDirection&#39;: &#39;max&#39;,</span>
-<span class="go">    &#39;weight&#39;: Decimal(&#39;1&#39;),</span>
-<span class="go">    &#39;randomMode&#39;: [&#39;triangular&#39;, 50.0, 0.5],</span>
-<span class="go">                   &#39;name&#39;: &#39;random cardinal benefit criterion&#39;,</span>
-<span class="go">                   &#39;maximalPerformanceDifference&#39;: Decimal(&#39;47.33&#39;),</span>
-<span class="go">                   &#39;thresholds&#39;: {&#39;ind&#39;: (Decimal(&#39;22.205&#39;), Decimal(&#39;0.0&#39;)),</span>
-<span class="go">                                  &#39;veto&#39;: (Decimal(&#39;45.146&#39;), Decimal(&#39;0.0&#39;)),</span>
-<span class="go">                                  &#39;pref&#39;: (Decimal(&#39;22.570&#39;), Decimal(&#39;0.0&#39;))},</span>
-<span class="go">    &#39;scaleType&#39;: &#39;cardinal&#39;}</span>
-<span class="go">    }</span>
-</pre></div>
-</div>
-<div class="last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">evaluation</span>
-<span class="go">    {&#39;g01&#39;: {&#39;a02&#39;: Decimal(&#39;94.22&#39;),</span>
-<span class="go">             &#39;a03&#39;: Decimal(&#39;72.38&#39;),</span>
-<span class="go">             &#39;a01&#39;: Decimal(&#39;46.89&#39;)</span>
-<span class="go">            }</span>
-<span class="go">    }</span>
-</pre></div>
-</div>
-</dd>
-</dl>
+<p>Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="perfTabs.RandomRankPerformanceTableau">
 <em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">RandomRankPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>commonThresholds=None</em>, <em>integerWeights=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.RandomRankPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<p>Specialization of the PerformanceTableau class for generating a temporary
-random performance tableau.</p>
+<p>Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.</p>
 </dd></dl>
 
 <dl class="class">
@@ -4055,7 +3963,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5606,7 +5514,7 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 
 <dl class="class">
 <dt id="randomDigraphs.RandomGridDigraph">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.GridDigraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary randomly oriented Grid digraphs of dimension n time m
