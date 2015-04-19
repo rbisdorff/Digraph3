@@ -2739,51 +2739,7 @@ class NormalizedPerformanceTableau(PerformanceTableau):
 
 class RandomPerformanceTableau(PerformanceTableau):
     """
-    Specialization of the PerformanceTableau class for generating a temporary
-    random performance tableau.
-
-    Parameters:
-        | actions := nbr of actions,
-        | criteria := number criteria,
-        | scale := [Min,Max],
-        | thresholds := [q,p,v],
-        | mode = [
-             | ('uniform',None,None)
-             | ('normal',mu,sigma)
-             | ('triangular',mode,None)
-             | ('beta',mode,(alpha,beta)],
-        | weightDistribution := equivalent|random|fixed
-
-    Code example::
-        >>> from perfTabs import RandomCBPerformanceTableau
-        >>> t = RandomCBPerformanceTableau(numberOfActions=3,numberOfCriteria=1)
-        >>> t.actions
-            {'a02': {'comment': 'RandomCBPerformanceTableau() generated.', 'type': 'advantageous', 'name': 'random advantageous decision action'},
-            'a03': {'comment': 'RandomCBPerformanceTableau() generated.', 'type': 'advantageous', 'name': 'random advantageous decision action'},
-            'a01': {'comment': 'RandomCBPerformanceTableau() generated.', 'type': 'neutral', 'name': 'random neutral decision action'}}
-        >>> t.criteria
-            {'g01': {'comment': 'Evaluation generator: triangular law with variable mode (m) and probability repartition (p = 0.5). Cheap actions: m = 30%; neutral actions: m = 50%; advantageous actions: m = 70%.',
-            'performanceDifferences': [Decimal('21.84'), Decimal('25.49'), Decimal('47.33')],
-            'scale': (0.0, 100.0),
-            'minimalPerformanceDifference': Decimal('21.84'),
-            'preferenceDirection': 'max',
-            'weight': Decimal('1'),
-            'randomMode': ['triangular', 50.0, 0.5],
-                           'name': 'random cardinal benefit criterion',
-                           'maximalPerformanceDifference': Decimal('47.33'),
-                           'thresholds': {'ind': (Decimal('22.205'), Decimal('0.0')),
-                                          'veto': (Decimal('45.146'), Decimal('0.0')),
-                                          'pref': (Decimal('22.570'), Decimal('0.0'))},
-            'scaleType': 'cardinal'}
-            }
-
-        >>> t.evaluation
-            {'g01': {'a02': Decimal('94.22'),
-                     'a03': Decimal('72.38'),
-                     'a01': Decimal('46.89')
-                    }
-            }
-
+    Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.
     """
     def __init__(self,numberOfActions = None,\
                  numberOfCriteria = None,\
@@ -2993,8 +2949,7 @@ class RandomPerformanceTableau(PerformanceTableau):
 # -----------------
 class RandomRankPerformanceTableau(PerformanceTableau):
     """
-    Specialization of the PerformanceTableau class for generating a temporary
-    random performance tableau.
+    Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.
     """
     def __init__(self,numberOfActions = None, numberOfCriteria = None,\
                  weightDistribution = None, weightScale=None,\
@@ -3125,7 +3080,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
 
 class FullRandomPerformanceTableau(PerformanceTableau):
     """
-    Full automatic generation of random performance tableaux
+    Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.
     """
 
     def __init__(self,numberOfActions = None, numberOfCriteria = None, weightDistribution = None, weightScale=None, integerWeights = True, commonScale = None, commonThresholds = None, commonMode = None, valueDigits=2,Debug = False):
@@ -3406,26 +3361,7 @@ class FullRandomPerformanceTableau(PerformanceTableau):
 
 class RandomCoalitionsPerformanceTableau(PerformanceTableau):
     """
-    Full automatic generation of performance tableaux with random coalitions of criteria
-
-    Parameters:
-        | numberOf Actions := 20 (default)
-        | number of Criteria := 13 (default)
-        | weightDistribution := 'equisignificant' (default with all weights = 1.0), 'random', 'fixed' (default w_1 = numberOfCriteria-1, w_{i!=1} = 1
-        | weightScale := [1,numerOfCriteria] (random default), [w_1, w_{i!=1] (fixed)
-        | integerWeights := True (default) / False
-        | commonScale := (0.0, 100.0) (default)
-        | commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].
-        | commonMode := ['triangular',50.0,0.50] (default), ['uniform',None,None], ['beta', None,None] (three alpha, beta combinations (5.8661,2.62203) chosen by default for high('+'), medium ('~') and low ('-') evaluations.
-        | valueDigits := 2 (default, for cardinal scales only)
-        | Coalitions := True (default)/False, three coalitions if True
-        | VariableGenerators := True (default) / False, variable high('+'), medium ('~') or low ('-') law generated evaluations.
-        | OrdinalScales := True / False (default)
-        | Debug := True / False (default)
-        | RandomCoalitions = True / False (default) zero or more than three coalitions if Coalitions == False.
-        | vetoProbability := x in ]0.0-1.0[ / None (default), probability that a cardinal criterion shows a veto preference discrimination threshold.
-        | Electre3 := True (default) / False, no weakveto if True (obsolete)
-        
+    Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.
     """
 
     def __init__(self,numberOfActions = None, numberOfCriteria = None,
@@ -3807,23 +3743,7 @@ class RandomS3PerformanceTableau(RandomCoalitionsPerformanceTableau):
 
 class RandomCBPerformanceTableau(PerformanceTableau):
     """
-    Full automatic generation of random
-    Cost versus Benefit oriented performance tableaux.
-
-    Parameters:
-        | If numberOfActions == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated
-        | If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated
-        | weightDistribution := {'equiobjectives'|'fixed'|'random'|'equisignificant' (default = 'equisignificant')}
-        | default weightScale for 'random' weightDistribution is 1 - numberOfCriteria
-        | commonScale parameter is obsolete. The scale of cost criteria is cardinal or ordinal (0-10) with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.
-        | All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.
-        | commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).
-        | CommonPercentiles = {'ind':5, 'pref':10, ['weakveto':90,] 'veto':95} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.
-
-    .. warning::
-
-        Minimal number of decision actions required is 3 ! 
-
+    Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.
     """
 
     def __init__(self,numberOfActions = None, \
