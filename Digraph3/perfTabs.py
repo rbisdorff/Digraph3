@@ -2652,36 +2652,30 @@ class PartialPerformanceTableau(PerformanceTableau):
 #-----------------------
 class ConstantPerformanceTableau(PerformanceTableau):
     """
-    test constructor for constant performance tableaux.
+    Constructor for (partially) constant performance tableaux.
     """
-    def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None):
+    def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None,
+                 position=0.5):
         from copy import copy as deepcopy
         
         self.name = 'constant-'+inPerfTab.name
 
-        if actionsSubset != None:
-            self.actions = {}
-            for x in actionsSubset:
-                self.actions[x] = deepcopy(inPerfTab.actions[x])
-        else:
-            self.actions = deepcopy(inPerfTab.actions)
+        self.actions = deepcopy(inPerfTab.actions)
+        if actionsSubset == None:
+            actionsSubset = self.actions
 
-        if criteriaSubset != None:
-            self.criteria = {}
-            for g in criteriaSubset:
-                self.criteria[g] = deepcopy(inPerfTab.criteria[g])
-        else:
-            self.criteria = deepcopy(inPerfTab.criteria)
+        self.criteria = deepcopy(inPerfTab.criteria)
+        if criteriaSubset == None:
+            criteriaSubset = self.criteria
 
         self.weightPreorder = self.computeWeightPreorder()
-        
-        self.evaluation = {}
-        actionsKeys = [x for x in self.actions]
-        criteriaKeys = [g for g in self.criteria]
+
+        self.evaluation = deepcopy(inPerfTab.evaluation)
+        actionsKeys = [x for x in actionsSubset]
+        criteriaKeys = [g for g in criteriaSubset]
         for g in criteriaKeys:
             constantPerformance = (self.criteria[g]['scale'][1] - \
-                                 self.criteria[g]['scale'][0])/2.0
-            self.evaluation[g] = {}
+                                 self.criteria[g]['scale'][0])*position
             for x in actionsKeys:
                 self.evaluation[g][x] = Decimal(str(constantPerformance))
                                     
@@ -5451,6 +5445,7 @@ if __name__ == "__main__":
     import sortingDigraphs
     import linearOrders
     from weakOrders import *
+    from randomPerfTabs import *
     
     print('*-------- Testing classes and methods -------')
 
@@ -5460,8 +5455,12 @@ if __name__ == "__main__":
                                    numberOfActions=20,
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
-                                   Debug=False)
-    t = ConstantPerformanceTableau(t)
+                                   Debug=False,
+                                   seed=100)
+    t = ConstantPerformanceTableau(t,
+                                   actionsSubset=['a01','a02','a03'],
+                                   criteriaSubset=['g01','g02','g03'],
+                                   position=0.75)
     t.showPerformanceTableau()
 ##    t = RandomCoalitionsPerformanceTableau(numberOfActions=20,
 ##                                           numberOfCriteria=13,
