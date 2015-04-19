@@ -2653,6 +2653,13 @@ class PartialPerformanceTableau(PerformanceTableau):
 class ConstantPerformanceTableau(PerformanceTableau):
     """
     Constructor for (partially) constant performance tableaux.
+
+    *Parameter*:
+    
+        * *actionsSubset* selects the actions to be set at equal constant performances,
+        * *criteriaSubset* select the concerned subset of criteria,
+        * The *position* parameter (default = median performance) selects the constant performance in the respective scale of each performance criterion.
+    
     """
     def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None,
                  position=0.5):
