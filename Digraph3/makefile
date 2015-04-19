@@ -160,7 +160,7 @@ randomPerfTabsTests:
 		cp randomNumbers.py test/
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
-		(cd test; nosetests3 -v noseTestsrandomPerfTab.py)
+		(cd test; nosetests3 -v noseTestsRandomPerfTab.py)
 
 verbosePerfTabsTests:
 		cp digraphs.py test/
