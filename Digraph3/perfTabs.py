@@ -2649,6 +2649,42 @@ class PartialPerformanceTableau(PerformanceTableau):
             self.evaluation[g] = {}
             for x in actionsKeys:
                 self.evaluation[g][x] = deepcopy(inPerfTab.evaluation[g][x])
+#-----------------------
+class ConstantPerformanceTableau(PerformanceTableau):
+    """
+    test constructor for constant performance tableaux.
+    """
+    def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None):
+        from copy import copy as deepcopy
+        
+        self.name = 'constant-'+inPerfTab.name
+
+        if actionsSubset != None:
+            self.actions = {}
+            for x in actionsSubset:
+                self.actions[x] = deepcopy(inPerfTab.actions[x])
+        else:
+            self.actions = deepcopy(inPerfTab.actions)
+
+        if criteriaSubset != None:
+            self.criteria = {}
+            for g in criteriaSubset:
+                self.criteria[g] = deepcopy(inPerfTab.criteria[g])
+        else:
+            self.criteria = deepcopy(inPerfTab.criteria)
+
+        self.weightPreorder = self.computeWeightPreorder()
+        
+        self.evaluation = {}
+        actionsKeys = [x for x in self.actions]
+        criteriaKeys = [g for g in self.criteria]
+        for g in criteriaKeys:
+            constantPerformance = (self.criteria[g]['scale'][1] - \
+                                 self.criteria[g]['scale'][0])/2.0
+            self.evaluation[g] = {}
+            for x in actionsKeys:
+                self.evaluation[g][x] = Decimal(str(constantPerformance))
+                                    
                                     
 # ----------------------
 class NormalizedPerformanceTableau(PerformanceTableau):
@@ -2660,15 +2696,13 @@ class NormalizedPerformanceTableau(PerformanceTableau):
     def __init__(self,argPerfTab=None,lowValue=0,highValue=100,coalition=None,Debug=False):
         import copy
         from decimal import Decimal
-        if isinstance(argPerfTab, (PerformanceTableau,RandomPerformanceTableau)):
-            perfTab = argPerfTab
+        if isinstance(argPerfTab,(str)):
+            perfTab = PerformanceTableau(argPerfTab)
+        elif argPerfTab == None:
+            print('Error: a valid PerformanceTableau instance is required !')
+            perfTab = None
         else:
-            if argPerfTab == None:
-                #perfTab = RandomPerformanceTableau()
-                print('Error: a stored performance tableau is required !')
-                perfTab = None
-            else:
-                perfTab = PerformanceTableau(argPerfTab)
+            perfTab = argPerfTab      
         self.name = 'norm_'+ perfTab.name
         try:
             self.description = copy.deepcopy(perfTab.description)
@@ -5427,6 +5461,8 @@ if __name__ == "__main__":
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
                                    Debug=False)
+    t = ConstantPerformanceTableau(t)
+    t.showPerformanceTableau()
 ##    t = RandomCoalitionsPerformanceTableau(numberOfActions=20,
 ##                                           numberOfCriteria=13,
 ##                                           Coalitions=False,
@@ -5445,9 +5481,8 @@ if __name__ == "__main__":
 ##    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
 ##    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=True))
 ##    t.showHTMLPerformanceHeatmap(actionsList=actionsList,colorLevels=7,Ranked=True)
-    t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,Threading=False)
-    t.showPerformanceTableau()
-    t.showHTMLPerformanceTableau(Transposed=True)
+##    t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,Threading=False)
+##    t.showHTMLPerformanceTableau(Transposed=True)
 ##    t.showHTMLPerformanceHeatmap(colorLevels=7,Threading=False)
 ##    t.showHTMLPerformanceHeatmap()
 ##    pt1 = PartialPerformanceTableau(t)
@@ -5474,53 +5509,13 @@ if __name__ == "__main__":
     print('Enjoy !')
 
     print('*************************************')
-    print('* R.B. August 2011                    *')
-    print('* $Revision: 1.37 $                *')                   
+    print('* R.B. August 2015                  *')
+    print('* $Revision: 1.37 $                 *')                   
     print('*************************************')
 
 #############################
 # Log record for changes:
 # $Log: perfTabs.py,v $
-# Revision 1.37  2012/12/24 15:18:21  bisi
+# Revision 1.37  2012/12/24 15:18:21
 # compatibility patch for old (-2008) python performance tableaux
-#
-# Revision 1.34  2012/06/19 14:13:13  bisi
-# added quantile preording result
-#
-# Revision 1.25  2012/05/22 05:49:11  bisi
-# activated new version of RandomCBPerformanceTableau class
-# renamed RandomS3PerformanceTableau into RandomCoalitionsPerformanceTableau
-#
-# Revision 1.24  2012/05/22 04:34:49  bisi
-# added equiobjectives weights generator to RandomCBPerformanceTableau()
-#
-# Revision 1.22  2012/05/09 10:51:43  bisi
-# GPL version 3 licensing installed
-#
-# Revision 1.21  2012/04/26 10:50:41  bisi
-# Added pairwise cluster comparison computation on Digraph class
-#
-# Revision 1.19  2012/01/10 19:25:16  bisi
-# Added Spinx autodoc generation
-#
-# Revision 1.17  2011/12/26 14:50:00  bisi
-# added html and csv save for allQuantiles matrix
-#
-# Revision 1.16  2011/12/26 08:39:15  bisi
-# added median quantiles
-#
-# Revision 1.8  2011/08/22 18:34:55  bisi
-# completed summary statistics
-#
-# Revision 1.7  2011/08/22 07:51:26  bisi
-# refining showStatistics() method
-#
-# Revision 1.4  2011/08/19 13:19:14  bisi
-# refactoring proportional threshold computation
-#
-# Revision 1.2  2011/08/07 18:06:16  bisi
-# refactoring perfTabs.py module
-#
-# Revision 1.1  2011/08/07 13:55:08  bisi
-# initial separation of digraphs and perfTabs modules
 #############################
