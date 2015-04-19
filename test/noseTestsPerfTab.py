@@ -35,6 +35,17 @@ def testPartialPerformanceTableau():
     pt2 = PartialPerformanceTableau(t,actionsSubset=['a01','a02'],criteriaSubset=['g01','g03'])
     pt2.showAll()
 
+def testConstantPerformanceTableau():
+    print('==>> Testing ConstantPerformance Tableau instantiation')
+    t = RandomCoalitionsPerformanceTableau(numberOfActions=10,
+                                           numberOfCriteria=5,
+                                           Coalitions=False,
+                                           RandomCoalitions=True,
+                                           weightDistribution="equicoalitions")
+    tc = ConstantPerformanceTableau(t)
+    tc.showAll()
+    tc.showStatistics()
+
 def testRandomPerformanceTableau():
     print('==>> Testing Random Performance Tableau instantiation')
     t = RandomPerformanceTableau(numberOfActions=10,numberOfCriteria=7,commonMode=('normal',50,20))
