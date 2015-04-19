@@ -42,7 +42,8 @@ def testConstantPerformanceTableau():
                                            Coalitions=False,
                                            RandomCoalitions=True,
                                            weightDistribution="equicoalitions")
-    tc = ConstantPerformanceTableau(t)
+    tc = ConstantPerformanceTableau(t,actionsSubset=['a01','a02','a03'],
+                                    position=0.75)
     tc.showAll()
     tc.showStatistics()
 
