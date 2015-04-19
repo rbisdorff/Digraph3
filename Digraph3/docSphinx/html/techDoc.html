@@ -1065,7 +1065,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3143,6 +3143,14 @@ temporary triangulated grids of dimension n times m.</p>
 <em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">ConstantPerformanceTableau</code><span class="sig-paren">(</span><em>inPerfTab</em>, <em>actionsSubset=None</em>, <em>criteriaSubset=None</em>, <em>position=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.ConstantPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Constructor for (partially) constant performance tableaux.</p>
+<p><em>Parameter</em>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>actionsSubset</em> selects the actions to be set at equal constant performances,</li>
+<li><em>criteriaSubset</em> select the concerned subset of criteria,</li>
+<li>The <em>position</em> parameter (default = median performance) selects the constant performance in the respective scale of each performance criterion.</li>
+</ul>
+</div></blockquote>
 </dd></dl>
 
 <dl class="class">
