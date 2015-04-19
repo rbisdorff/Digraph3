@@ -2660,6 +2660,11 @@ class ConstantPerformanceTableau(PerformanceTableau):
         
         self.name = 'constant-'+inPerfTab.name
 
+        try:
+            self.description = deepcopy(inPerfTab.description)
+        except:
+            pass
+
         self.actions = deepcopy(inPerfTab.actions)
         if actionsSubset == None:
             actionsSubset = self.actions
@@ -2671,6 +2676,7 @@ class ConstantPerformanceTableau(PerformanceTableau):
         self.weightPreorder = self.computeWeightPreorder()
 
         self.evaluation = deepcopy(inPerfTab.evaluation)
+
         actionsKeys = [x for x in actionsSubset]
         criteriaKeys = [g for g in criteriaSubset]
         for g in criteriaKeys:
