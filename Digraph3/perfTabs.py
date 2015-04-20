@@ -5132,7 +5132,9 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
            
     """
 
-    def __init__(self,fileName='temp',HasSeparatedWeights=False,HasSeparatedThresholds=False,stringInput=None):
+    def __init__(self,fileName='temp',HasSeparatedWeights=False,
+                 HasSeparatedThresholds=False,stringInput=None,
+                 Debug=False):
         
         from xml.etree import ElementTree
         if stringInput == None:
@@ -5230,6 +5232,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
             self.criteriaDescription = description
         ## get criteria
         for g in XMCDA.find('criteria').findall('criterion'):
+            if Debug:
+                print('converting criterion %s data' % g.attrib['id'])
             try:             
                 if g.find('active').text == 'true':
                     Active = True
