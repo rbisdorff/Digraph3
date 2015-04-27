@@ -320,21 +320,21 @@ class Digraph(object):
                 print(self.dfsNbr,self.tsNbr)             
             return None
             
-    def digraph2Graph(self,valuationDomain={'min':-1,'med':0,'max':1},Debug=False,conjunctiveConversion=True):
+    def digraph2Graph(self,valuationDomain={'min':-1,'med':0,'max':1},
+                      Debug=False,conjunctiveConversion=True):
         """
         Convert a Digraph instance to a Graph instance.
         """
         from graphs import Graph
-        from copy import copy as deepcopy
+        from copy import deepcopy as deepcopy
         g = Graph()
         g.name = deepcopy(self.name)
-        vertices = deepcopy(self.actions)
         if type(self.actions) == list:
             g.vertices = {}
             for x in self.actions:
                 g.vertices[x] = {'name': x, 'shortName': x}
         else:
-            vertices = deepcopy(self.actions)    
+            g.vertices = deepcopy(self.actions)    
         g.order = len(g.vertices)
         g.valuationDomain = valuationDomain
         gMin = valuationDomain['min']
@@ -2815,7 +2815,7 @@ class Digraph(object):
             print('See %s.%s ! ' % (plotFileName,Type))
         
         
-    def exportGraphViz(self,fileName=None,\
+    def exportGraphViz(self,fileName=None,actionsSubset=None,\
                        bestChoice=set(),worstChoice=set(),\
                        noSilent=True,graphType='png',graphSize='7,7',
                        relation=None):
@@ -2825,7 +2825,10 @@ class Digraph(object):
         import os
         if noSilent:
             print('*---- exporting a dot file dor GraphViz tools ---------*')
-        actionkeys = [x for x in self.actions]
+        if actionsSubset == None:
+            actionkeys = [x for x in self.actions]
+        else:
+            actionkeys = [x for x in actionsSubset]
         n = len(actionkeys)
         if relation == None:
             relation = self.relation
@@ -5146,10 +5149,14 @@ class Digraph(object):
         fo.write('# automatically generated random irreflexive digraph\n')
         if DecimalValuation:
             fo.write('from decimal import Decimal\n')
-        fo.write('actionset = [\n')
+        fo.write('actionset = {\n')
         for x in actions:
-            fo.write('\'' + str(x) + '\',\n')
-        fo.write(']\n')
+            fo.write('\'' + str(x) + '\':\n')
+            try:
+                fo.write(str(actions[x])+',\n')
+            except:
+                fo.write('{\'name\': \'%s\'},\n' % str(x))
+        fo.write('}\n')
         try:
             hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
         except KeyError:
