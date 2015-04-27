@@ -503,7 +503,8 @@ class Graph(object):
         visitAllVertices(self, Debug=Debug)
         return self.dfs
 
-    def exportGraphViz(self,fileName=None,noSilent=True,
+    def exportGraphViz(self,fileName=None,verticesSubset=None,
+                       noSilent=True,
                        graphType='png',graphSize='7,7',
                        withSpanningTree=False,
                        layout=None):
@@ -522,7 +523,10 @@ class Graph(object):
         import os
         if noSilent:
             print('*---- exporting a dot file for GraphViz tools ---------*')
-        vertexkeys = [x for x in self.vertices]
+        if verticesSubset == None:
+            vertexkeys = [x for x in self.vertices]
+        else:
+            vertexkeys = [x for x in verticesSubset]
         n = len(vertexkeys)
         edges = self.edges
         Med = self.valuationDomain['med']
