@@ -6118,6 +6118,7 @@ class Digraph(object):
         Min = Decimal(str(temp.valuationdomain['min']))
         Med = Decimal(str(temp.valuationdomain['med']))
         actions = [x for x in temp.actions]
+        #actions.sort()
         relation = temp.relation
 ##        domChoicesSort = []
 ##        if 'dompreKernels' not in dir(temp):
@@ -6255,7 +6256,10 @@ class Digraph(object):
                 print('final veclowa  :', veclowa)
                 print('final vechigha :', vechigha)
                 print('#iterations    :', it)
-            domvec = temp.sharpvec(veclowa,vechigha)
+            #domvec = temp.sharpvec(veclowa,vechigha)
+            domvecsharp = temp.sharpvec(veclowa,vechigha)
+            domvec = [(domvecsharp[i],str(actions[i])) for i in range(n)]
+            domvec.sort(reverse=True)
             determ = temp.determinateness(domvec)
             domChoicesSort.append([-determ,degirred,degi,degd,dega,str(choice),domvec,cover])
         domChoicesSort.sort()
@@ -6393,6 +6397,11 @@ class Digraph(object):
     def determinateness(self,vec,inPercent = True):
         """
         Renders the determinateness of a bipolar characteristic vector
+        [(r(x),x),(r(y),y), ...] of length n in valuationdomain [Min,Max]:
+        
+        result = sum_x abs(r(x))/(n*(Max-Min)
+
+        If inPercent, result shifted (+1) and reduced (/2) to [0,1]. 
         """
         Min = Decimal(str(self.valuationdomain['min']))
         Max = Decimal(str(self.valuationdomain['max']))
@@ -6400,7 +6409,10 @@ class Digraph(object):
         result = Decimal('0.0')
         n = len(vec)
         for i in range(n):
-            result += abs(vec[i]-Med)
+            try:
+                result += abs(vec[i][0]-Med)
+            except:
+                result += abs(vec[i]-Med)
             #print result
         result /= n*(Max-Med)
         #print result
@@ -6466,7 +6478,9 @@ class Digraph(object):
             if Comments:
                 print('final veclowa',veclowa)
                 print('final vechigha', vechigha)
-            absvec = temp.sharpvec(veclowa,vechigha)
+            absvecsharp = temp.sharpvec(veclowa,vechigha)
+            absvec = [(absvecsharp[i],str(actions[i])) for i in range(n)]
+            absvec.sort(reverse=True)
             determ = temp.determinateness(absvec)
             absChoicesSort.append([-determ,degirred,degi,degd,dega,str(choice),absvec,cover])
         absChoicesSort.sort()
@@ -6509,7 +6523,8 @@ class Digraph(object):
         print(': %.2f' % (determ))
         print('  - characteristic vector = [', end=' ')
         for i in range(len(actions)):
-            print('\'%s\': %.2f,' %  (str(actions[i]),vec[i]), end=' ')
+            #print('\'%s\': %.2f,' %  (str(actions[i]),vec[i]), end=' ')
+            print('\'%s\': %.2f,' %  (vec[i][1],vec[i][0]), end=' ')
         print(']')
         print()
 
