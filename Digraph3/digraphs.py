@@ -6513,6 +6513,7 @@ class Digraph(object):
         dega = ch[4]
         choice = ch[5]
         vec = ch[6]
+        vec.sort(reverse=True)
         print('* choice              : ' + str(choice))
         print('  +-irredundancy      : %.2f' % (degirred))
         print('  independence        : %.2f' % (degi))
