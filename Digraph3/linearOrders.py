@@ -816,7 +816,7 @@ class NetFlowsOrder(LinearOrder):
         # instatiates a Digraph template
         g = IndeterminateDigraph(order=n)
         g.actions = actions
-        g.valuationdomain = {'min':Decimal('-3'), 'med': Decimal('0'), 'max': Decimal('3')}
+        g.valuationdomain = {'min':Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
         g.relation = {}
         for x in g.actions:
             g.relation[x] = {}
@@ -1052,7 +1052,7 @@ if __name__ == "__main__":
     #t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
     ko = KohlerOrder(g)
-    bko = BoostedKohlerOrder(t,strategy="pessimistic",Threading=Threading,Debug=False)
+    bko = BoostedKohlerOrder(t,strategy="average",Threading=Threading,Debug=False)
     #qr = QuantilesRankingDigraph(t,100,Threading=Threading)
     bko.showSorting()
     #bko.showQuantileOrdering()
@@ -1063,6 +1063,9 @@ if __name__ == "__main__":
     #print(g.computeOrdinalCorrelation(qr))
     print(ko.computeOrdinalCorrelation(bko))
     QuantilesRankingDigraph.exportSortingGraphViz(bko)
+    nf = NetFlowsOrder(g)
+    nf.showRelationTable()
+    print(g.computeOrdinalCorrelation(nf))
     
     ## t = RandomRankPerformanceTableau(numberOfActions=20)
     ## t.saveXMCDA2('testRP')
