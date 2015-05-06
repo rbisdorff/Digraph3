@@ -1060,7 +1060,10 @@ Returns a boolean value</p>
 <dl class="method">
 <dt id="digraphs.Digraph.determinateness">
 <code class="descname">determinateness</code><span class="sig-paren">(</span><em>vec</em>, <em>inPercent=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.determinateness" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the determinateness of a bipolar characteristic vector</p>
+<dd><p>Renders the determinateness of a bipolar characteristic vector
+[(r(x),x),(r(y),y), ...] of length n in valuationdomain [Min,Max]:</p>
+<p>result = sum_x abs(r(x))/(n*(Max-Min)</p>
+<p>If inPercent, result shifted (+1) and reduced (/2) to [0,1].</p>
 </dd></dl>
 
 <dl class="method">
@@ -1071,7 +1074,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2973,8 +2976,10 @@ nSim simulation steps (default = len(graph.edges)).</p>
 
 <dl class="method">
 <dt id="graphs.Q_Coloring.exportGraphViz">
-<code class="descname">exportGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>noSilent=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Q_Coloring.exportGraphViz" title="Permalink to this definition">¶</a></dt>
+<code class="descname">exportGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>noSilent=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>layout=None</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Q_Coloring.exportGraphViz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exports GraphViz dot file  for q-coloring drawing filtering.</p>
+<p>The graph drawing layout is depending on the graph type, but can be forced to either
+&#8216;fdp&#8217;, &#8216;circo&#8217; or &#8216;neato&#8217; with the layout parameter.</p>
 <dl class="docutils">
 <dt>Example:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>

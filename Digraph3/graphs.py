@@ -1959,9 +1959,13 @@ class Q_Coloring(Graph):
     def exportGraphViz(self,fileName=None,
                        noSilent=True,
                        graphType='png',
-                       graphSize='7,7'):
+                       graphSize='7,7',
+                       layout=None):
         """
         Exports GraphViz dot file  for q-coloring drawing filtering.
+
+        The graph drawing layout is depending on the graph type, but can be forced to either
+        'fdp', 'circo' or 'neato' with the layout parameter.
 
         Example:
             >>> g = Graph(numberOfVertices=10,edgeProbability=0.4)
@@ -2046,12 +2050,15 @@ class Q_Coloring(Graph):
 
         fo.write('}\n')
         fo.close()
-        if self.gClass in (GridGraph,RandomTree):
-            commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
-        elif self.gClass == CycleGraph:
-            commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        if layout == None:
+            if self.gClass in (GridGraph,RandomTree):
+                commandString = 'neato -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+            elif self.gClass == CycleGraph:
+                commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+            else:
+                commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         else:
-            commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+            commandString = layout+' -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         if noSilent:
             print(commandString)
         try:
