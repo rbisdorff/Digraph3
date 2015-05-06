@@ -5893,7 +5893,9 @@ class Digraph(object):
         """
         self.showRubisBestChoiceRecommendation(Comments=Comments)
 
-    def showRubisBestChoiceRecommendation(self,Comments=False,Debug=False):
+    def showRubisBestChoiceRecommendation(self,
+                                          Comments=False,
+                                          Debug=False):
         """
         Renders the RuBis best choice recommendation.
         """
@@ -6018,10 +6020,6 @@ class Digraph(object):
             self.order = len(self.actions)
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
-        ## try:
-        ##     self.worstChoice = self.badChoices[0][5]
-        ## except:
-        ##     self.worstChoice = set()
 
     def computeRubyChoice(self,CppAgrum=False,Comments=False):
         """
@@ -6099,12 +6097,6 @@ class Digraph(object):
         if Comments:
             self.showGoodChoices()
             self.showBadChoices()
-        ## if nc > 0:
-        ##     self.actions = copy.deepcopy(self.actions_orig)
-        ##     self.relation = copy.deepcopy(self.relation_orig)
-        ##     self.order = len(self.actions)
-        ##     self.gamma = self.gammaSets()
-        ##     self.notGamma = self.notGammaSets()
 
     def computeGoodChoiceVector(self,ker,Comments=False):
         """
@@ -6120,13 +6112,6 @@ class Digraph(object):
         actions = [x for x in temp.actions]
         #actions.sort()
         relation = temp.relation
-##        domChoicesSort = []
-##        if 'dompreKernels' not in dir(temp):
-##            if Comments:
-##                temp.showPreKernels()
-##            else:
-##                temp.computePreKernels()
-##        for ker in temp.dompreKernels:
         if Comments:
             print('--> kernel:', ker)
         choice = [y for y in ker]
@@ -6176,27 +6161,6 @@ class Digraph(object):
             print(goodChoiceVector)
         return goodChoiceVector        
                                 
-##        domChoicesSort.append([-determ,degirred,degi,degd,dega,str(choice),domvec,cover])
-##        domChoicesSort.sort()
-        ## domChoicesSort.sort(reverse=True, key=itemgetter(7))
-        ## for ch in domChoicesSort:
-        ##     ch[5] = eval(ch[5])
-        ## self.goodChoices = domChoicesSort
-        ## return domChoicesSort
-##        goodChoice = {}
-####        for ch in domChoicesSort:
-##        goodChoiceDic[frozenset(choice)] = {'determ':-ch[0],
-##                                    'degirred':ch[1],
-##                                    'degi':ch[2],
-##                                    'degd':ch[3],
-##                                    'dega':ch[4],
-##                                    'cover':ch[7],
-##                                    'bpv':ch[6]}
-##
-##        self.goodChoices = domChoicesSort
-##        return goodChoicesDic
-
-
     def computeGoodChoices(self,Comments=False):
         """
         | Characteristic values for potentially good choices.
@@ -6263,11 +6227,6 @@ class Digraph(object):
             determ = temp.determinateness(domvec)
             domChoicesSort.append([-determ,degirred,degi,degd,dega,str(choice),domvec,cover])
         domChoicesSort.sort()
-        ## domChoicesSort.sort(reverse=True, key=itemgetter(7))
-        ## for ch in domChoicesSort:
-        ##     ch[5] = eval(ch[5])
-        ## self.goodChoices = domChoicesSort
-        ## return domChoicesSort
         goodChoicesDic = {}
         for ch in domChoicesSort:
             ch[5] = eval(ch[5])
