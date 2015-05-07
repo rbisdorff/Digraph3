@@ -5708,7 +5708,7 @@ class Digraph(object):
     ##         print qualmaj
     ##     return qualmaj
 
-    def circuitMinCredibility(self,circuit):
+    def circuitMinCredibility(self,circ):
         """
         Renders the minimal linking credibility of a COC.
         """
@@ -5717,16 +5717,39 @@ class Digraph(object):
         Med = self.valuationdomain['med']
         relation = self.relation
         deg = Max
+        circuit = list(circ)
         n = len(circuit)
         for i in range(n):
             x = circuit[i]
             for j in range(i+1,n):
                 y =  circuit[j]
                 if j == i+1:
-                    deg = min(deg,max(relation[x][y],-relation[y][x]))
+                    deg = min(deg,max(relation[x][y],relation[y][x]))
         x = circuit[-1]
         y = circuit[0]
-        deg = min(deg,max(relation[x][y],-relation[y][x]))
+        deg = min(deg,max(relation[x][y],relation[y][x]))
+        return deg
+
+    def circuitMaxCredibility(self,circ):
+        """
+        Renders the minimal linking credibility of a COC.
+        """
+        actions = self.actions
+        Min = self.valuationdomain['min']
+        Med = self.valuationdomain['med']
+        relation = self.relation
+        deg = Min
+        circuit = list(circ)
+        n = len(circuit)
+        for i in range(n):
+            x = circuit[i]
+            for j in range(i+1,n):
+                y =  circuit[j]
+                if j == i+1:
+                    deg = max(deg,max(relation[x][y],relation[y][x]))
+        x = circuit[-1]
+        y = circuit[0]
+        deg = max(deg,max(relation[x][y],relation[y][x]))
         return deg
 
     ## def circuitMinCredibilityOld(self,circuit):
@@ -5744,23 +5767,50 @@ class Digraph(object):
     ##                 deg = min(deg,relation[x][y])
     ##     return deg
 
-    def circuitAverageCredibility(self,circuit):
+    def circuitAverageCredibility(self,circ):
         """
         Renders the average linking credibility of a COC.
         """
         actions = self.actions
         n = len(actions)
         narcs = n * (n-1)
-        Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']
         relation = self.relation
-        deg = Decimal('0.0')
+        Min = self.valuationdomain['min']
+        deg = Min
+        circuit = list(circ)
         for x in circuit:
             for y in circuit:
                 if x != y:
-                    deg += relation[x][y]
+                    deg += abs(relation[x][y])
         deg = deg / Decimal(str(narcs))
         return deg
+
+    def circuitCredibilities(self,circuit):
+        """
+        Renders the o-max linking + and - credibility of a COC.
+        """
+        actions = self.actions
+        relation = self.relation
+        Med = self.valuationdomain['med']
+        degP = Med
+        degN = Med
+        nParcs = 0
+        nNarcs = 0
+        for x in circuit:
+            for y in circuit:
+                if x != y:
+                    if relation[x][y] > Med:
+                        degP += relation[x][y]
+                        nParcs += 1
+                    elif relation[x][y] < Med:
+                        degN += relation[x][y]
+                        nNarcs += 1
+        if nParcs != 0:
+            degP /= Decimal(str(nParcs))
+        if nNarcs != 0:
+            degN /= Decimal(str(nNarcs))
+            
+        return degP,degN
 
     def contra(self, v):
         """
@@ -5917,8 +5967,9 @@ class Digraph(object):
             self.actions = copy.deepcopy(_selfwcoc.actions)
             self.order = len(self.actions)
             self.relation = copy.deepcopy(_selfwcoc.relation)
-        print('List of pseudo-independent choices')
-        print(self.actions)
+        if Comments:
+            print('List of pseudo-independent choices')
+            print(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         if Debug:
@@ -6164,7 +6215,7 @@ class Digraph(object):
     def computeGoodChoices(self,Comments=False):
         """
         | Characteristic values for potentially good choices.
-        | [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]
+        | [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec,(7)cover]
         """
         import copy
         from operator import itemgetter
@@ -6480,7 +6531,7 @@ class Digraph(object):
         print('  absorbency          : %.2f' % (dega))
         print('  covering (%)' + '        : %.2f' % ( self.averageCoveringIndex(choice) * Decimal('100') ))
         print("  determinateness (%)", end=' ')
-        print(': %.2f' % (determ))
+        print(': %.2f' % (determ*Decimal('100.0')))
         print('  - characteristic vector = [', end=' ')
         for i in range(len(actions)):
             #print('\'%s\': %.2f,' %  (str(actions[i]),vec[i]), end=' ')
@@ -10054,13 +10105,15 @@ class CocaDigraph(Digraph):
                 acycle = acycle | gamma[x][1]
                 acycle = acycle | set([x])
             gamma[cycle]=(dcycle,acycle)
+            degP,degN = self.circuitCredibilities(cycleList)
             for x in actions:
                 if x in cycle:
                     dx0 = gamma[x][0] | set([cycle])
                     dx1 = gamma[x][1] | set([cycle])
                     gamma[x] = (dx0,dx1)
                     relxcn = relation[x]
-                    relxcn[cycle] = valuationdomain['max']
+                    #relxcn[cycle] = valuationdomain['max']
+                    relxcn[cycle] = degP
                     relation[x] = relxcn
                 else:
                     relxy = valuationdomain['min']
@@ -10072,7 +10125,8 @@ class CocaDigraph(Digraph):
             relcycle = {}
             for x in actions:
                 if x in cycle:
-                    relcycle[x] = valuationdomain['max']
+                    #relcycle[x] = valuationdomain['max']
+                    relcycle[x] = degP
                 else:
                     relxy = valuationdomain['min']
                     for y in cycle:
@@ -10097,14 +10151,25 @@ class CocaDigraph(Digraph):
             else:
                 print('  ',new,' circuit(s) added!')
 
-    def showCircuits(self):
+    def showCircuits(self,credibility=None):
         """
         show methods for chordless odd circuits in CocaGraph
         """
         print('*---- Chordless circuits ----*')
         for (circList,circSet) in self.circuitsList:
-            deg = self.circuitMinCredibility(circSet)
-            print(circList, ', credibility :', deg)
+            if credibility == 'maximal':
+                degM = self.circuitMaxCredibility(circSet)
+                print(circList, ', maximal credibility :', degM)
+            elif credibility == 'minimal':
+                degm = self.circuitMinCredibility(circSet)
+                print(circList, ', minimal credibility :', degm)
+            elif credibility == 'average':
+                degm = self.circuitMinCredibility(circSet)
+                print(circList, ', average credibility :', degm)
+            else:
+                degP,degN = self.circuitCredibilities(circSet)
+                print(circList, ', marginal credibility :', degP-degN)
+            
         print('Coca graph of order %d with %d odd chordles circuits.' % (len(self.actions), len(self.circuitsList)))
         #print len(aself.circuitsList),' cirduits
 
