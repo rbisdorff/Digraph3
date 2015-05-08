@@ -10158,7 +10158,7 @@ class NewCocaDigraph(Digraph):
                     print(actions[cycle])
             else:
                 print('Braking:',cycle,degP,degN)
-                self.showRelationTable(actionsSubset=cycle)
+                self.showRelationTable(actionsSubset=cycleList)
                 x = minLink[0]
                 y = minLink[1]
                 print('Minimal link put to doubt: ', x,y)
