@@ -1086,7 +1086,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1622,7 +1622,7 @@ Renders the sharpest of two characteristic vectors v and w.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showChoiceVector">
-<code class="descname">showChoiceVector</code><span class="sig-paren">(</span><em>ch</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.showChoiceVector" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showChoiceVector</code><span class="sig-paren">(</span><em>ch</em>, <em>ChoiceVector=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.showChoiceVector" title="Permalink to this definition">¶</a></dt>
 <dd><p>show procedure for annotated bipolar choices</p>
 </dd></dl>
 
@@ -1809,7 +1809,7 @@ the digraph self by reading in the 0-1 misset file format.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showRubisBestChoiceRecommendation">
-<code class="descname">showRubisBestChoiceRecommendation</code><span class="sig-paren">(</span><em>Comments=False</em>, <em>Debug=False</em>, <em>_NewCoca=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.showRubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showRubisBestChoiceRecommendation</code><span class="sig-paren">(</span><em>Comments=False</em>, <em>ChoiceVector=True</em>, <em>Debug=False</em>, <em>_NewCoca=False</em>, <em>Cpp=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.showRubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the RuBis best choice recommendation.</p>
 </dd></dl>
 
@@ -2055,7 +2055,7 @@ of chordless odd circuits augmented digraphs.</p>
 
 <dl class="method">
 <dt id="digraphs.NewCocaDigraph.closureChordlessOddCircuits">
-<code class="descname">closureChordlessOddCircuits</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.NewCocaDigraph.closureChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
+<code class="descname">closureChordlessOddCircuits</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.NewCocaDigraph.closureChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Closure of chordless odd circuits extraction.</p>
 </dd></dl>
 
@@ -3375,7 +3375,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4021,7 +4021,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
