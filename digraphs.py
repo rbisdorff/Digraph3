@@ -5785,23 +5785,32 @@ class Digraph(object):
         deg = deg / Decimal(str(narcs))
         return deg
 
-    def circuitCredibilities(self,circuit):
+    def circuitCredibilities(self,circuit,Debug=False):
         """
-        Renders the o-max linking + and - credibility of a COC.
+        Renders the average linking credibilities and the minimal link of a COC.
         """
         actions = self.actions
         relation = self.relation
         Med = self.valuationdomain['med']
+        Max = self.valuationdomain['max']
+        Min = self.valuationdomain['min']
+        amplitude = Max - Min
         degP = Med
         degN = Med
         nParcs = 0
         nNarcs = 0
+        minAmplitude = amplitude
+        minLink = None
         for x in circuit:
             for y in circuit:
                 if x != y:
                     if relation[x][y] > Med:
                         degP += relation[x][y]
                         nParcs += 1
+                        diffxy = relation[x][y]-relation[y][x]
+                        if minAmplitude > diffxy:
+                            minAmplitude = diffxy
+                            minLink = (x,y)
                     elif relation[x][y] < Med:
                         degN += relation[x][y]
                         nNarcs += 1
@@ -5809,8 +5818,9 @@ class Digraph(object):
             degP /= Decimal(str(nParcs))
         if nNarcs != 0:
             degN /= Decimal(str(nNarcs))
-            
-        return degP,degN
+        if Debug:
+            print('degP,degN,minLink',degP,degN,minLink)
+        return degP,degN,minLink
 
     def contra(self, v):
         """
@@ -5945,7 +5955,8 @@ class Digraph(object):
 
     def showRubisBestChoiceRecommendation(self,
                                           Comments=False,
-                                          Debug=False):
+                                          Debug=False,
+                                          _NewCoca=False):
         """
         Renders the RuBis best choice recommendation.
         """
@@ -5958,7 +5969,10 @@ class Digraph(object):
             print('All comments !!!')
         t0 = time.time()
         n0 = self.order
-        _selfwcoc = CocaDigraph(self,Comments=Comments)
+        if _NewCoca:
+            _selfwcoc = NewCocaDigraph(self,Comments=Comments)
+        else:
+            _selfwcoc = CocaDigraph(self,Comments=Comments)
         n1 = _selfwcoc.order
         nc = n1 - n0
         if nc > 0:
@@ -10005,6 +10019,202 @@ class CoceDigraph(Digraph):
         else:
             return (qualmaj0,pg)
 
+#--------------------
+class NewCocaDigraph(Digraph):
+    """
+    Parameters:
+        Stored or memory resident digraph instance.
+
+    Specialization of general Digraph class for instantiation
+    of chordless odd circuits augmented digraphs.
+
+    """
+    def __init__(self,digraph=None,Cpp=False,Piping=False,Comments=False):
+        import random,sys,array,copy
+        from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
+        ## if comment == None:
+        ##     silent = True
+        ## else:
+        ##     silent = not(comment)
+        if digraph == None:
+            g = RandomValuationDigraph()
+            self.name = str(g.name)
+            self.actions = copy.copy(g.actions)
+            self.valuationdomain = copy.copy(g.valuationdomain)
+            self.relation = copy.deepcopy(g.relation)
+
+        elif isinstance(digraph,(Digraph,OutrankingDigraph,RandomOutrankingDigraph,BipolarOutrankingDigraph)):
+            self.name = str(digraph.name)
+            self.actions = copy.copy(digraph.actions)
+            self.valuationdomain = copy.copy(digraph.valuationdomain)
+            self.relation = copy.deepcopy(digraph.relation)
+        else:
+            fileName = digraph + 'py'
+            argDict = {}
+            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
+            self.name = digraph
+            self.actions = argDict['actionset']
+            self.valuationdomain = argDict['valuationdomain']
+            self.relation = argDict['relation']
+
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        self.weakGamma = self.weakGammaSets()
+        self.closureChordlessOddCircuits(Cpp=Cpp,Piping=Piping,Comments=Comments)
+
+    def closureChordlessOddCircuits(self,Cpp=False,Piping=False,Comments=False):
+        """
+        Closure of chordless odd circuits extraction.
+        """
+        newCircuits = None
+        self.circuitsList = []
+        while newCircuits != set():
+            initialCircuits = set([x for cl,x in self.circuitsList])
+            if Cpp:
+                if Piping:
+                    self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Comments)
+                else:
+                    self.computeCppChordlessCircuits(Odd=True,Debug=Comments)
+            else:
+                self.computeChordlessCircuits(Odd=True,Comments=Comments)
+            self.addCircuits(Comments=Comments)
+            currentCircuits = set([x for cl,x in self.circuitsList])
+            if Comments:
+                print('initialCircuits, currentCircuits', initialCircuits, currentCircuits)
+            newCircuits = currentCircuits - initialCircuits
+
+    def addCircuits(self,Comments=False):
+        """
+        Augmenting self with self.circuits.
+        """
+        import copy,time
+        order0 = self.order
+        if not(isinstance(self.actions,dict)):
+            actions = {}
+            for x in self.actions:
+                actions[x] = {'name':x}
+        else:
+            actions = self.actions
+
+        #ListActions = [frozenset([x]) for x in actions]
+        circuitsList = self.circuitsList
+        if Comments:
+            print('list of circuits: ', circuitsList)
+        valuationdomain = self.valuationdomain
+        gamma = self.gamma
+        relation = self.relation
+        Med = valuationdomain['med']
+        for (cycleList,cycle) in circuitsList:
+            degP,degN,minLink = self.circuitCredibilities(cycleList,Debug=Comments)
+            if Comments:
+                print(cycleList,cycle,degP,degN,minLink)
+            if degP+degN > Med:
+                print('Adding cycle:', cycle, 'with degree=',degP)
+                cn = '_'
+                dcycle = set()
+                acycle = set()
+                for x in cycleList:
+                    if isinstance(x,frozenset):
+                        cn += actions[x]['name'] + '_'
+                    else:
+                        cn += str(x) + '_'
+                    dcycle = dcycle | gamma[x][0]
+                    dcycle = dcycle | set([x])
+                    acycle = acycle | gamma[x][1]
+                    acycle = acycle | set([x])
+                gamma[cycle]=(dcycle,acycle)
+                for x in actions:
+                    if x in cycle:
+                        dx0 = gamma[x][0] | set([cycle])
+                        dx1 = gamma[x][1] | set([cycle])
+                        gamma[x] = (dx0,dx1)
+                        relxcn = relation[x]
+                        #relxcn[cycle] = valuationdomain['max']
+                        relxcn[cycle] = degP
+                        relation[x] = relxcn
+                    else:
+                        relxy = valuationdomain['min']
+                        for y in cycle:
+                            relxy = max(relxy,relation[x][y])
+                            relxcn = relation[x]
+                            relxcn[cycle] = relxy
+                            relation[x] = relxcn
+                relcycle = {}
+                for x in actions:
+                    if x in cycle:
+                        #relcycle[x] = valuationdomain['max']
+                        relcycle[x] = degP
+                    else:
+                        relxy = valuationdomain['min']
+                        for y in cycle:
+                            relxy = max(relxy,relation[y][x])
+                        relcycle[x] = relxy
+                relcycle[cycle] = valuationdomain['min']
+                relation[cycle] = relcycle
+                name = 'chordless odd %d-circuit' % (len(cycle))
+                actions[cycle] = {'name': cn, 'comment': name}
+                if Comments:
+                    print(actions[cycle])
+            else:
+                print('Braking:',cycle,degP,degN)
+                self.showRelationTable(actionsSubset=cycle)
+                x = minLink[0]
+                y = minLink[1]
+                print('Minimal link put to doubt: ', x,y)
+                relation[x][y] = Med
+                relation[y][x] = Med
+##                if Comments:
+##                print(cycle,degP,degN)
+##                self.showRelationTable(actionsSubset=cycle)
+##                print('Minimal link put to doubt: ', x,y)
+##                
+        #self.actions = list(actions)
+        self.actions = actions
+        self.order = len(actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        self.weakGamma = self.weakGammaSets()
+        new = self.order - order0
+        if Comments:
+            if self.order == order0:
+                print('  No circuits added !')
+            else:
+                print('  ',new,' circuit(s) added!')
+
+    def showCircuits(self,credibility=None):
+        """
+        show methods for chordless odd circuits in CocaGraph
+        """
+        print('*---- Chordless circuits ----*')
+        for (circList,circSet) in self.circuitsList:
+            if credibility == 'maximal':
+                degM = self.circuitMaxCredibility(circSet)
+                print(circList, ', maximal credibility :', degM)
+            elif credibility == 'minimal':
+                degm = self.circuitMinCredibility(circSet)
+                print(circList, ', minimal credibility :', degm)
+            elif credibility == 'average':
+                degm = self.circuitMinCredibility(circSet)
+                print(circList, ', average credibility :', degm)
+            else:
+                degP,degN,minLink = self.circuitCredibilities(circSet)
+                print(circList, ', marginal credibility :', degP-degN)
+                x = minLink[0]
+                y = minLink[1]
+                print('minimal link: ', minLink, self.relation[x][y],self.relation[y][x]) 
+            
+        print('Coca graph of order %d with %d odd chordles circuits.' % (len(self.actions), len(self.circuitsList)))
+        #print len(aself.circuitsList),' cirduits
+
+    def showComponents(self):
+        print('*--- Connected Components ---*')
+        k=1
+        for Comp in self.components():
+            component = list(Comp)
+            #component.sort()
+            print(str(k) + ': ' + str(component))
+            xk = k + 1
 
 #--------------------
 class CocaDigraph(Digraph):
@@ -10105,15 +10315,14 @@ class CocaDigraph(Digraph):
                 acycle = acycle | gamma[x][1]
                 acycle = acycle | set([x])
             gamma[cycle]=(dcycle,acycle)
-            degP,degN = self.circuitCredibilities(cycleList)
             for x in actions:
                 if x in cycle:
                     dx0 = gamma[x][0] | set([cycle])
                     dx1 = gamma[x][1] | set([cycle])
                     gamma[x] = (dx0,dx1)
                     relxcn = relation[x]
-                    #relxcn[cycle] = valuationdomain['max']
-                    relxcn[cycle] = degP
+                    relxcn[cycle] = valuationdomain['max']
+                    #relxcn[cycle] = degP
                     relation[x] = relxcn
                 else:
                     relxy = valuationdomain['min']
@@ -10125,8 +10334,8 @@ class CocaDigraph(Digraph):
             relcycle = {}
             for x in actions:
                 if x in cycle:
-                    #relcycle[x] = valuationdomain['max']
-                    relcycle[x] = degP
+                    relcycle[x] = valuationdomain['max']
+                    #relcycle[x] = degP
                 else:
                     relxy = valuationdomain['min']
                     for y in cycle:
@@ -10167,7 +10376,7 @@ class CocaDigraph(Digraph):
                 degm = self.circuitMinCredibility(circSet)
                 print(circList, ', average credibility :', degm)
             else:
-                degP,degN = self.circuitCredibilities(circSet)
+                degP,degN,minLink = self.circuitCredibilities(circSet)
                 print(circList, ', marginal credibility :', degP-degN)
             
         print('Coca graph of order %d with %d odd chordles circuits.' % (len(self.actions), len(self.circuitsList)))
