@@ -5436,6 +5436,7 @@ class Digraph(object):
         if Debug:
             print(circuits)
         result = []
+        history = set()
         for x in circuits:
             # !! a circuit has a length n + 1 !!
             if Odd:
@@ -5446,12 +5447,22 @@ class Digraph(object):
                     oddCircuit = []
                     for ino in x[:-1]:
                         oddCircuit.append(actions[ino-1])
-                    result.append( ( oddCircuit, frozenset(oddCircuit) ) )
+                    circuitActions = [y for y in flatten(oddCircuit)]
+                    circuitSet = frozenset(circuitActions)
+                    if circuitSet not in history:
+                        result.append( ( circuitActions, circuitSet ) )
+                        history.add(circuitSet)
+                    #result.append( ( oddCircuit, frozenset(oddCircuit) ) )
             else:
                 allCircuit = []
                 for ino in x[:-1]:
                     allCircuit.append(actions[ino-1])
-                result.append( ( allCircuit, frozenset(allCircuit) ) )
+                circuitActions = [y for y in flatten(allCircuit)]
+                circuitSet = frozenset(circuitActions)
+                if circuitSet not in history:
+                    result.append( ( circuitActions, circuitSet ) )
+                    history.add(circuitSet)
+                #result.append( ( allCircuit, frozenset(allCircuit) ) )
         self.circuitsList = result
         return result
 
@@ -5493,6 +5504,7 @@ class Digraph(object):
             print(resultFile)
             print(argDict['circuitsList'])
         result = []
+        history = set()
         for x in circuits:
             # !! a circuit has a length n + 1 !!
             if Odd:
@@ -5503,12 +5515,20 @@ class Digraph(object):
                     oddCircuit = []
                     for ino in x[:-1]:
                         oddCircuit.append(actions[ino-1])
-                    result.append( ( oddCircuit, frozenset(oddCircuit) ) )
+                    circuitActions = [y for y in flatten(oddCircuit)]
+                    circuitSet = frozenset(circuitActions)
+                    if circuitSet not in history:
+                        result.append( ( circuitActions, circuitSet ) )
+                        history.add(circuitSet)
             else:
                 allCircuit = []
                 for ino in x[:-1]:
                     allCircuit.append(actions[ino-1])
-                result.append( ( allCircuit, frozenset(allCircuit) ) )
+                circuitActions = [y for y in flatten(allCircuit)]
+                circuitSet = frozenset(circuitActions)
+                if circuitSet not in history:
+                    result.append( ( circuitActions, circuitSet ) )
+                    history.add(circuitSet)
         self.circuitsList = result
         return result
 
@@ -5544,8 +5564,16 @@ class Digraph(object):
             print(self.chordlessCircuits)
 
         circuitsList = []
+        history = set()
         for x in self.chordlessCircuits:
-            circuitsList.append( (x,frozenset(x)) )
+            #circuitsList.append( (x,frozenset(x)) )
+            circuitActions = [y for y in flatten(x)]
+            circuitSet = frozenset(circuitActions)
+            if Comments:
+                print('flattening', x, circuitActions)
+            if circuitSet not in history:
+                history.add(circuitSet)
+                circuitsList.append( (circuitActions,circuitSet) )
         self.circuitsList = circuitsList
         return circuitsList
 
@@ -5955,8 +5983,10 @@ class Digraph(object):
 
     def showRubisBestChoiceRecommendation(self,
                                           Comments=False,
+                                          ChoiceVector=True,
                                           Debug=False,
-                                          _NewCoca=False):
+                                          _NewCoca=False,
+                                          Cpp=False):
         """
         Renders the RuBis best choice recommendation.
         """
@@ -5970,7 +6000,7 @@ class Digraph(object):
         t0 = time.time()
         n0 = self.order
         if _NewCoca:
-            _selfwcoc = NewCocaDigraph(self,Comments=Comments)
+            _selfwcoc = NewCocaDigraph(self,Cpp=Cpp,Comments=Comments)
         else:
             _selfwcoc = CocaDigraph(self,Comments=Comments)
         n1 = _selfwcoc.order
@@ -6017,26 +6047,30 @@ class Digraph(object):
                         if gch[3] == gch[4]:
                             if Comments:
                                 print('null choice ')
-                                self.showChoiceVector(gch)
-                                self.showChoiceVector(bch)
+                                self.showChoiceVector(gch,
+                                                      ChoiceVector=ChoiceVector)
+                                self.showChoiceVector(bch,
+                                                      ChoiceVector=ChoiceVector)
                             goodChoice = False
                         elif gch[4] > gch[3]:
                             if Comments:
                                 print('outranked choice ')
-                                self.showChoiceVector(gch)
-                                self.showChoiceVector(bch)
+                                self.showChoiceVector(gch,
+                                                      ChoiceVector=ChoiceVector)
+                                self.showChoiceVector(bch,
+                                                      ChoiceVector=ChoiceVector)
                             goodChoice = False
                         else:
                             goodChoice = True
                 if goodChoice:
                     print(' === >> potential BCR ')
-                    self.showChoiceVector(gch)
+                    self.showChoiceVector(gch,ChoiceVector=ChoiceVector)
                     if bestChoice == set():
                         bestChoice = gch[5]
             else:
                 if Comments:
                     print('non robust best choice ')
-                    self.showChoiceVector(gch)
+                    self.showChoiceVector(gch,ChoiceVector=ChoiceVector)
         for bch in self.badChoices:
             if bch[0] <= Med:
                 badChoice = True
@@ -6047,33 +6081,33 @@ class Digraph(object):
                         if bch[3] == bch[4]:
                             if Comments:
                                 print('null choice ')
-                                self.showChoiceVector(gch)
-                                self.showChoiceVector(bch)
+                                self.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                                self.showChoiceVector(bch,ChoiceVector=ChoiceVector)
                             badChoice = False
                             nullChoice = True
                         elif bch[3] > bch[4]:
                             if Comments:
                                 print('outranking choice ')
-                                self.showChoiceVector(gch)
-                                self.showChoiceVector(bch)
+                                self.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                                self.showChoiceVector(bch,ChoiceVector=ChoiceVector)
                             badChoice = False
                         else:
                             badChoice = True
                 if badChoice:
                     print(' === >> potential worst choice ')
-                    self.showChoiceVector(bch)
+                    self.showChoiceVector(bch,ChoiceVector=ChoiceVector)
                     if worstChoice == set():
                         worstChoice = bch[5]
                 elif nullChoice:
                     print(' === >> ambiguous choice ')
-                    self.showChoiceVector(bch)
+                    self.showChoiceVector(bch,ChoiceVector=ChoiceVector)
                     if worstChoice == set():
                         worstChoice = bch[5]
 
             else:
                 if Comments:
                     print('non robust worst choice ')
-                    self.showChoiceVector(bch)
+                    self.showChoiceVector(bch,ChoiceVector=ChoiceVector)
         print()
         print('Execution time: %.3f seconds' % (t1-t0))
         print('*****************************')
@@ -6525,17 +6559,19 @@ class Digraph(object):
         self.badChoices = absChoicesSort
         return badChoicesDic
 
-    def showChoiceVector(self,ch):
+    def showChoiceVector(self,ch,ChoiceVector=True):
         """
         show procedure for annotated bipolar choices
         """
         actions = [x for x in self.actions]
+        Med = self.valuationdomain['med']
         determ = -ch[0]
         degirred = ch[1]
         degi = ch[2]
         degd = ch[3]
         dega = ch[4]
-        choice = ch[5]
+        choice = [x for x in flatten(ch[5])]
+        choice.sort()
         vec = ch[6]
         vec.sort(reverse=True)
         print('* choice              : ' + str(choice))
@@ -6546,11 +6582,32 @@ class Digraph(object):
         print('  covering (%)' + '        : %.2f' % ( self.averageCoveringIndex(choice) * Decimal('100') ))
         print("  determinateness (%)", end=' ')
         print(': %.2f' % (determ*Decimal('100.0')))
-        print('  - characteristic vector = [', end=' ')
-        for i in range(len(actions)):
-            #print('\'%s\': %.2f,' %  (str(actions[i]),vec[i]), end=' ')
-            print('\'%s\': %.2f,' %  (vec[i][1],vec[i][0]), end=' ')
-        print(']')
+        if ChoiceVector:
+            print('  - characteristic vector = {', end=' ')
+            for i in range(len(actions)):
+                #print('\'%s\': %.2f,' %  (str(actions[i]),vec[i]), end=' ')
+                try:
+                    choice = [x for x in eval(vec[i][1])]
+                    choice.sort()
+                    print('\'%s\': %.2f' %  (str(choice),vec[i][0]), end=', ')
+                except:
+                    print('\'%s\': %.2f' %  (vec[i][1],vec[i][0]), end=', ')
+                
+                #print('\'%s\': %.2f,' %  (vec[i][1],vec[i][0]), end=' ')
+            print('}')
+##        elif determ > Decimal('0'):
+        else:
+            print('  - most credible action(s) = {', end=' ')
+            for i in range(len(actions)):
+                if vec[i][0] > Med:
+                    try:
+                        choice = [x for x in eval(vec[i][1])]
+                        choice.sort()
+                        print('\'%s\': %.2f' %  (str(choice),vec[i][0]), end=', ')
+                    except:
+                        print('\'%s\': %.2f' %  (vec[i][1],vec[i][0]), end=', ')
+            print('}')
+                
         print()
 
     def showGoodChoices(self,Recompute=True):
@@ -10063,7 +10120,7 @@ class NewCocaDigraph(Digraph):
         self.weakGamma = self.weakGammaSets()
         self.closureChordlessOddCircuits(Cpp=Cpp,Piping=Piping,Comments=Comments)
 
-    def closureChordlessOddCircuits(self,Cpp=False,Piping=False,Comments=False):
+    def closureChordlessOddCircuits(self,Cpp=False,Piping=False,Comments=True):
         """
         Closure of chordless odd circuits extraction.
         """
@@ -10078,6 +10135,7 @@ class NewCocaDigraph(Digraph):
                     self.computeCppChordlessCircuits(Odd=True,Debug=Comments)
             else:
                 self.computeChordlessCircuits(Odd=True,Comments=Comments)
+            #print(self.circuitsList)
             self.addCircuits(Comments=Comments)
             currentCircuits = set([x for cl,x in self.circuitsList])
             if Comments:
@@ -10109,8 +10167,8 @@ class NewCocaDigraph(Digraph):
             degP,degN,minLink = self.circuitCredibilities(cycleList,Debug=Comments)
             if Comments:
                 print(cycleList,cycle,degP,degN,minLink)
-            if degP+degN > Med:
-                print('Adding cycle:', cycle, 'with degree=',degP)
+            if degP+degN >= Med:
+                #print('Adding cycle:', cycle, 'with degree=',degP)
                 cn = '_'
                 dcycle = set()
                 acycle = set()
@@ -10157,19 +10215,18 @@ class NewCocaDigraph(Digraph):
                 if Comments:
                     print(actions[cycle])
             else:
-                print('Braking:',cycle,degP,degN)
-                self.showRelationTable(actionsSubset=cycleList)
+                if Comments:
+                    print('Braking:',cycleList,degP,degN)
+                actionsSubset = [x for x in flatten(cycle)]
+                if Comments:
+                    self.showRelationTable(actionsSubset=actionsSubset)
                 x = minLink[0]
                 y = minLink[1]
-                print('Minimal link put to doubt: ', x,y)
+                if Comments:
+                    print('Minimal link put to doubt: ', x,y)
                 relation[x][y] = Med
                 relation[y][x] = Med
-##                if Comments:
-##                print(cycle,degP,degN)
-##                self.showRelationTable(actionsSubset=cycle)
-##                print('Minimal link put to doubt: ', x,y)
-##                
-        #self.actions = list(actions)
+
         self.actions = actions
         self.order = len(actions)
         self.gamma = self.gammaSets()
