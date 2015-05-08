@@ -10077,7 +10077,7 @@ class CoceDigraph(Digraph):
             return (qualmaj0,pg)
 
 #--------------------
-class NewCocaDigraph(Digraph):
+class CocaDigraph(Digraph):
     """
     Parameters:
         Stored or memory resident digraph instance.
@@ -10274,7 +10274,7 @@ class NewCocaDigraph(Digraph):
             xk = k + 1
 
 #--------------------
-class CocaDigraph(Digraph):
+class OldCocaDigraph(Digraph):
     """
     Parameters:
         Stored or memory resident digraph instance.
