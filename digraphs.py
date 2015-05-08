@@ -5985,7 +5985,7 @@ class Digraph(object):
                                           Comments=False,
                                           ChoiceVector=True,
                                           Debug=False,
-                                          _NewCoca=False,
+                                          _OldCoca=False,
                                           Cpp=False):
         """
         Renders the RuBis best choice recommendation.
@@ -5999,10 +5999,10 @@ class Digraph(object):
             print('All comments !!!')
         t0 = time.time()
         n0 = self.order
-        if _NewCoca:
-            _selfwcoc = NewCocaDigraph(self,Cpp=Cpp,Comments=Comments)
+        if _OldCoca:
+            _selfwcoc = OldCocaDigraph(self,Cpp=Cpp,Comments=Comments)
         else:
-            _selfwcoc = CocaDigraph(self,Comments=Comments)
+            _selfwcoc = CocaDigraph(self,Cpp=Cpp,Comments=Comments)
         n1 = _selfwcoc.order
         nc = n1 - n0
         if nc > 0:
