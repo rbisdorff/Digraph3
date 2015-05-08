@@ -478,8 +478,8 @@ Optimized with marking of visited chordless P1s.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.circuitCredibilities">
-<code class="descname">circuitCredibilities</code><span class="sig-paren">(</span><em>circuit</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.circuitCredibilities" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the o-max linking + and - credibility of a COC.</p>
+<code class="descname">circuitCredibilities</code><span class="sig-paren">(</span><em>circuit</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.circuitCredibilities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the average linking credibilities and the minimal link of a COC.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1086,7 +1086,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1809,7 +1809,7 @@ the digraph self by reading in the 0-1 misset file format.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showRubisBestChoiceRecommendation">
-<code class="descname">showRubisBestChoiceRecommendation</code><span class="sig-paren">(</span><em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.showRubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showRubisBestChoiceRecommendation</code><span class="sig-paren">(</span><em>Comments=False</em>, <em>Debug=False</em>, <em>_NewCoca=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.showRubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the RuBis best choice recommendation.</p>
 </dd></dl>
 
@@ -2033,6 +2033,41 @@ temporary Kneser digraphs</p>
 <dl class="method">
 <dt id="digraphs.KneserDigraph.showShort">
 <code class="descname">showShort</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph.showShort" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="digraphs.NewCocaDigraph">
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">NewCocaDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.NewCocaDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>Stored or memory resident digraph instance.</dd>
+</dl>
+<p>Specialization of general Digraph class for instantiation
+of chordless odd circuits augmented digraphs.</p>
+<dl class="method">
+<dt id="digraphs.NewCocaDigraph.addCircuits">
+<code class="descname">addCircuits</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.NewCocaDigraph.addCircuits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Augmenting self with self.circuits.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.NewCocaDigraph.closureChordlessOddCircuits">
+<code class="descname">closureChordlessOddCircuits</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.NewCocaDigraph.closureChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closure of chordless odd circuits extraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.NewCocaDigraph.showCircuits">
+<code class="descname">showCircuits</code><span class="sig-paren">(</span><em>credibility=None</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.NewCocaDigraph.showCircuits" title="Permalink to this definition">¶</a></dt>
+<dd><p>show methods for chordless odd circuits in CocaGraph</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.NewCocaDigraph.showComponents">
+<code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.NewCocaDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -3340,7 +3375,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3986,7 +4021,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
