@@ -12,6 +12,7 @@ from outrankingDigraphs import *
 from decimal import Decimal
 from weakOrders import *
 
+
 def testPerformanceTableau():
     print('==>> Testing Performance Tableau instantiation')
     t = RandomPerformanceTableau()
@@ -32,7 +33,7 @@ def testPartialPerformanceTableau():
     t.showAll()
     pt1 = PartialPerformanceTableau(t)
     pt1.showAll()
-    pt2 = PartialPerformanceTableau(t,actionsSubset=['a01','a02'],criteriaSubset=['g01','g03'])
+    pt2 = PartialPerformanceTableau(t,actionsSubset=['a01','a02'],criteriaSubset=['g1','g3'])
     pt2.showAll()
 
 def testConstantPerformanceTableau():
@@ -216,7 +217,7 @@ def testXMCDA2SaveReadPerformanceTableau():
     
 def testStringIOXMCDA2Encoding():
     print('*---- test mapped memory XMCDA2 encoding for performanceTableau ---*')
-    T = PerformanceTableau()
+    T = RandomPerformanceTableau()
     problemTextmmap = T.saveXMCDA2(isStringIO=True)
     problemText = T.saveXMCDA2String()
     if problemTextmmap != problemText:

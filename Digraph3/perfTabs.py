@@ -380,6 +380,7 @@ The performance evaluations of each decision alternative on each criterion are g
             self.evaluation = argDict['evaluation']
         elif not isEmpty:
             import copy
+            from randomPerfTabs import RandomPerformanceTableau
             temp = RandomPerformanceTableau()
             self.name = copy.deepcopy(temp.name)
             self.actions = copy.deepcopy(temp.actions)
@@ -2737,7 +2738,7 @@ class NormalizedPerformanceTableau(PerformanceTableau):
 #########################################
 # specializations of the generic PerformanceTableau Class
 
-class RandomPerformanceTableau(PerformanceTableau):
+class _RandomPerformanceTableau(PerformanceTableau):
     """
     Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.
     """
@@ -2947,7 +2948,7 @@ class RandomPerformanceTableau(PerformanceTableau):
         self.weightPreorder = self.computeWeightPreorder()
 
 # -----------------
-class RandomRankPerformanceTableau(PerformanceTableau):
+class _RandomRankPerformanceTableau(PerformanceTableau):
     """
     Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.
     """
@@ -3078,7 +3079,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
 # ------------------------------
 
 
-class FullRandomPerformanceTableau(PerformanceTableau):
+class _FullRandomPerformanceTableau(PerformanceTableau):
     """
     Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.
     """
@@ -3359,7 +3360,7 @@ class FullRandomPerformanceTableau(PerformanceTableau):
         for g in evaluation:
             print(g, evaluation[g])
 
-class RandomCoalitionsPerformanceTableau(PerformanceTableau):
+class _RandomCoalitionsPerformanceTableau(PerformanceTableau):
     """
     Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.
     """
@@ -3736,12 +3737,12 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
         self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
 
-class RandomS3PerformanceTableau(RandomCoalitionsPerformanceTableau):
+class _RandomS3PerformanceTableau(_RandomCoalitionsPerformanceTableau):
     """
     Obsolete dummy class for backports.
     """
 
-class RandomCBPerformanceTableau(PerformanceTableau):
+class _RandomCBPerformanceTableau(PerformanceTableau):
     """
     Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.
     """
