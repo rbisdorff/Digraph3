@@ -245,7 +245,7 @@ of chordless odd circuits augmented digraphs.</p>
 
 <dl class="method">
 <dt id="digraphs.CocaDigraph.closureChordlessOddCircuits">
-<code class="descname">closureChordlessOddCircuits</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CocaDigraph.closureChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
+<code class="descname">closureChordlessOddCircuits</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CocaDigraph.closureChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Closure of chordless odd circuits extraction.</p>
 </dd></dl>
 
@@ -804,13 +804,6 @@ first rincipal eigenvector of the covariance of the valued outdegrees of self.</
 working directory, is hence not threading and multiprocessing safe !
 (see Digraph.exportPrincipalImage method)</p>
 </div>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphs.Digraph.computePrudentBestChoiceRecommendation">
-<code class="descname">computePrudentBestChoiceRecommendation</code><span class="sig-paren">(</span><em>CoDual=False</em>, <em>Comments=False</em>, <em>Debug=False</em>, <em>Limited=None</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computePrudentBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the best choice recommendation after eliminating
-all odd chordless circuits with a minimal cut of the valuation.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1469,22 +1462,6 @@ computation</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="digraphs.Digraph.optimalRankingByChoosing">
-<code class="descname">optimalRankingByChoosing</code><span class="sig-paren">(</span><em>Odd=True</em>, <em>CoDual=False</em>, <em>Comments=False</em>, <em>Debug=False</em>, <em>Limited=None</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.optimalRankingByChoosing" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a ranking by choosing result when progressively eliminating
-all chordless (odd only by default) circuits with rising valuation cut levels.</p>
-<p>Parameters:</p>
-<blockquote>
-<div><ul class="simple">
-<li>CoDual = False (default)/True</li>
-<li>Limited = proportion (in [0,1]) * (max - med) of valuationdomain (default = None)</li>
-</ul>
-</div></blockquote>
-<p>Returns the highest correlated rankingByChoosing with self or 
-codual of self, depending on the CoDual flagg.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="digraphs.Digraph.outDegrees">
 <code class="descname">outDegrees</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.outDegrees" title="Permalink to this definition">¶</a></dt>
 <dd><p>renders the median cut outdegrees</p>
@@ -1809,7 +1786,7 @@ the digraph self by reading in the 0-1 misset file format.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showRubisBestChoiceRecommendation">
-<code class="descname">showRubisBestChoiceRecommendation</code><span class="sig-paren">(</span><em>Comments=False</em>, <em>ChoiceVector=True</em>, <em>Debug=False</em>, <em>_NewCoca=False</em>, <em>Cpp=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.showRubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showRubisBestChoiceRecommendation</code><span class="sig-paren">(</span><em>Comments=False</em>, <em>ChoiceVector=True</em>, <em>Debug=False</em>, <em>_OldCoca=False</em>, <em>Cpp=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.showRubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the RuBis best choice recommendation.</p>
 </dd></dl>
 
@@ -2038,8 +2015,8 @@ temporary Kneser digraphs</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="digraphs.NewCocaDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">NewCocaDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.NewCocaDigraph" title="Permalink to this definition">¶</a></dt>
+<dt id="digraphs.OldCocaDigraph">
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">OldCocaDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.OldCocaDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2048,26 +2025,26 @@ temporary Kneser digraphs</p>
 <p>Specialization of general Digraph class for instantiation
 of chordless odd circuits augmented digraphs.</p>
 <dl class="method">
-<dt id="digraphs.NewCocaDigraph.addCircuits">
-<code class="descname">addCircuits</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.NewCocaDigraph.addCircuits" title="Permalink to this definition">¶</a></dt>
+<dt id="digraphs.OldCocaDigraph.addCircuits">
+<code class="descname">addCircuits</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.OldCocaDigraph.addCircuits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Augmenting self with self.circuits.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="digraphs.NewCocaDigraph.closureChordlessOddCircuits">
-<code class="descname">closureChordlessOddCircuits</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.NewCocaDigraph.closureChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
+<dt id="digraphs.OldCocaDigraph.closureChordlessOddCircuits">
+<code class="descname">closureChordlessOddCircuits</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.OldCocaDigraph.closureChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Closure of chordless odd circuits extraction.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="digraphs.NewCocaDigraph.showCircuits">
-<code class="descname">showCircuits</code><span class="sig-paren">(</span><em>credibility=None</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.NewCocaDigraph.showCircuits" title="Permalink to this definition">¶</a></dt>
+<dt id="digraphs.OldCocaDigraph.showCircuits">
+<code class="descname">showCircuits</code><span class="sig-paren">(</span><em>credibility=None</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.OldCocaDigraph.showCircuits" title="Permalink to this definition">¶</a></dt>
 <dd><p>show methods for chordless odd circuits in CocaGraph</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="digraphs.NewCocaDigraph.showComponents">
-<code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.NewCocaDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
+<dt id="digraphs.OldCocaDigraph.showComponents">
+<code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.OldCocaDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -3212,19 +3189,6 @@ temporary triangulated grids of dimension n times m.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="perfTabs.FullRandomPerformanceTableau">
-<em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">FullRandomPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.FullRandomPerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<p>Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.</p>
-<dl class="method">
-<dt id="perfTabs.FullRandomPerformanceTableau.showAll">
-<code class="descname">showAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.FullRandomPerformanceTableau.showAll" title="Permalink to this definition">¶</a></dt>
-<dd><p>Show fonction for performance tableau of full random outranking digraph.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
 <dt id="perfTabs.NormalizedPerformanceTableau">
 <em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">NormalizedPerformanceTableau</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>lowValue=0</em>, <em>highValue=100</em>, <em>coalition=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.NormalizedPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
@@ -3283,7 +3247,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 </pre></div>
 </div>
 <dl class="docutils">
-<dt>With the help of the <a class="reference internal" href="#perfTabs.RandomPerformanceTableau" title="perfTabs.RandomPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.RandomPerformanceTableau</span></code></a> class let us generate for illustration a random performance tableau concerning 7 decision actions or alternatives denoted <em>a01</em>, <em>a02</em>, ..., <em>a07</em>:</dt>
+<dt>With the help of the <code class="xref py py-class docutils literal"><span class="pre">perfTabs.RandomPerformanceTableau</span></code> class let us generate for illustration a random performance tableau concerning 7 decision actions or alternatives denoted <em>a01</em>, <em>a02</em>, ..., <em>a07</em>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
 <span class="go">                                  numberOfCriteria=7,</span>
@@ -3375,7 +3339,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3591,41 +3555,6 @@ the values observed in the performance Tableau.</p>
 on each criteria.</p>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="class">
-<dt id="perfTabs.RandomCBPerformanceTableau">
-<em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">RandomCBPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonPercentiles=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.RandomCBPerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<p>Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="perfTabs.RandomCoalitionsPerformanceTableau">
-<em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">RandomCoalitionsPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>Coalitions=True</em>, <em>VariableGenerators=True</em>, <em>OrdinalScales=False</em>, <em>Debug=False</em>, <em>RandomCoalitions=False</em>, <em>vetoProbability=None</em>, <em>Electre3=True</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.RandomCoalitionsPerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<p>Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="perfTabs.RandomPerformanceTableau">
-<em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">RandomPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None, numberOfCriteria=None, weightDistribution=None, weightScale=None, integerWeights=True, commonScale=[0.0, 100.0], commonThresholds=[(10.0, 0.0), (20.0, 0.0), (80.0, 0.0)], commonMode=None, valueDigits=2, Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.RandomPerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<p>Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="perfTabs.RandomRankPerformanceTableau">
-<em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">RandomRankPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>commonThresholds=None</em>, <em>integerWeights=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.RandomRankPerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<p>Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="perfTabs.RandomS3PerformanceTableau">
-<em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">RandomS3PerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>Coalitions=True</em>, <em>VariableGenerators=True</em>, <em>OrdinalScales=False</em>, <em>Debug=False</em>, <em>RandomCoalitions=False</em>, <em>vetoProbability=None</em>, <em>Electre3=True</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.RandomS3PerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#perfTabs.RandomCoalitionsPerformanceTableau" title="perfTabs.RandomCoalitionsPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.RandomCoalitionsPerformanceTableau</span></code></a></p>
-<p>Obsolete dummy class for backports.</p>
 </dd></dl>
 
 <dl class="class">
@@ -4021,7 +3950,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5998,6 +5927,13 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 </ul>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="randomPerfTabs.RandomS3PerformanceTableau">
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomS3PerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>Coalitions=True</em>, <em>VariableGenerators=True</em>, <em>OrdinalScales=False</em>, <em>Debug=False</em>, <em>RandomCoalitions=False</em>, <em>vetoProbability=None</em>, <em>seed=None</em>, <em>Electre3=True</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomS3PerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#randomPerfTabs.RandomCoalitionsPerformanceTableau" title="randomPerfTabs.RandomCoalitionsPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomCoalitionsPerformanceTableau</span></code></a></p>
+<p>Obsolete dummy class for backports.</p>
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
