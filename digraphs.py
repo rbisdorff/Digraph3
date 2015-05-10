@@ -24,6 +24,7 @@ __version__ = "Branch: 3.3 $"
 
 from digraphs import *
 from perfTabs import *
+from randomPerfTabs import *
 
 #--------- Decimal precision --------------
 from decimal import Decimal
@@ -888,7 +889,7 @@ class Digraph(object):
             self.rankingByChoosing['PolarizationLevel'] = qualmaj
         return self.rankingByChoosing
 
-    def optimalRankingByChoosing(self,Odd=True,CoDual=False,Comments=False,Debug=False,Limited=None):
+    def _optimalRankingByChoosing(self,Odd=True,CoDual=False,Comments=False,Debug=False,Limited=None):
         """
         Renders a ranking by choosing result when progressively eliminating
         all chordless (odd only by default) circuits with rising valuation cut levels.
@@ -999,7 +1000,7 @@ class Digraph(object):
         return self.rankingByChoosing
 
         
-    def computePrudentBestChoiceRecommendation(self,CoDual=False,Comments=False,Debug=False,Limited=None):
+    def _computePrudentBestChoiceRecommendation(self,CoDual=False,Comments=False,Debug=False,Limited=None):
         """
         Renders the best choice recommendation after eliminating
         all odd chordless circuits with a minimal cut of the valuation.

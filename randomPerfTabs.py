@@ -1645,6 +1645,11 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                 print('criteria',c,' default thresholds:')
                 print(self.criteria[c]['thresholds'])
 
+class RandomS3PerformanceTableau(RandomCoalitionsPerformanceTableau):
+    """
+    Obsolete dummy class for backports.
+    """
+
 #----------test Digraph class ----------------
 if __name__ == "__main__":
     
