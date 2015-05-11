@@ -9680,6 +9680,10 @@ class CocaDigraph(Digraph):
     Specialization of general Digraph class for instantiation
     of chordless odd circuits augmented digraphs.
 
+    A chordless odd circuit is added if the cumulated credibility of the circuit supporting is larger or
+    equal to the cumulated credibility of the converse arcs. In this latter case, the circuit is broken at the weakest asymmetric link,
+    i.e. a link (x,y) with minimal difference between r(x S y) - r(y S x).
+
     """
     def __init__(self,digraph=None,Cpp=False,Piping=False,Comments=False):
         import random,sys,array,copy
@@ -9693,13 +9697,13 @@ class CocaDigraph(Digraph):
             self.name = str(g.name)
             self.actions = copy.copy(g.actions)
             self.valuationdomain = copy.copy(g.valuationdomain)
-            self.relation = copy.copy(g.relation)
+            self.relation = copy.deepcopy(g.relation)
 
         elif isinstance(digraph,(Digraph,OutrankingDigraph,RandomOutrankingDigraph,BipolarOutrankingDigraph)):
             self.name = str(digraph.name)
             self.actions = copy.copy(digraph.actions)
             self.valuationdomain = copy.copy(digraph.valuationdomain)
-            self.relation = copy.copy(digraph.relation)
+            self.relation = copy.deepcopy(digraph.relation)
         else:
             fileName = digraph + 'py'
             argDict = {}
@@ -10546,8 +10550,8 @@ if __name__ == "__main__":
         #g = RandomValuationDigraph()
         #g.showAll()
         from outrankingDigraphs import BipolarOutrankingDigraph
-        from perfTabs import RandomCBPerformanceTableau
-        t = RandomCBPerformanceTableau(numberOfActions=15)
+        from randomPerfTabs import RandomCBPerformanceTableau
+        t = RandomCBPerformanceTableau(numberOfActions=15,seed=1)
         t.saveXMCDA2('test')
         t = XMCDA2PerformanceTableau('test')
         g = BipolarOutrankingDigraph(t)
@@ -10558,8 +10562,10 @@ if __name__ == "__main__":
         print(gcd.dompreKernels)
         print(gcd.abspreKernels)
         for ker in gcd.dompreKernels:
-            print(gcd.computeGoodChoiceVector(ker,Comments=False))
-        
+            print(ker, gcd.computeGoodChoiceVector(ker,Comments=False))
+        for ker in gcd.abspreKernels:
+            print(ker, gcd.computeGoodChoiceVector(ker,Comments=False))
+       
 
         print('*------------------*')
         print('If you see this line all tests were passed successfully :-)')
