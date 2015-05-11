@@ -117,7 +117,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
         """
 
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         from decimal import Decimal
 
         # import the performance tableau
@@ -322,7 +322,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                     hasSymmetricThresholds=hasSymmetricThresholds)
         ##
         else:  # parallel computation
-            from copy import copy as deepcopy
+            from copy import copy, deepcopy
             from pickle import dumps, loads, load
             from multiprocessing import Process, Lock,\
                                         active_children, cpu_count
@@ -379,7 +379,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             print('Threading ...')
             from tempfile import TemporaryDirectory
             with TemporaryDirectory() as tempDirName:
-                from copy import copy as deepcopy
+                from copy import copy, deepcopy
                 selfDp = deepcopy(self)
                 selfFileName = tempDirName +'/dumpSelf.py'
                 if Debug:
@@ -706,7 +706,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         filtering from SortingDigraph instances.
         """
         import os
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
 
         def _safeName(t0):
             try:
@@ -785,7 +785,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             print(i,sameRank)
             fo.write(sameRank)
         # save original relation
-        originalRelation = deepcopy(self.relation)
+        originalRelation = copy(self.relation)
         self.relation = relation
         self.closeTransitive(Reverse=True)
         for i in range(k-1):
@@ -807,7 +807,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         fo.write('}\n \n')
         fo.close()
         # restore original relation
-        self.relation = deepcopy(originalRelation)
+        self.relation = copy(originalRelation)
 
         commandString = 'dot -Grankdir=TB -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
             #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
@@ -1211,7 +1211,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             Default values gives a normalized valuation domain
 
         """
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         oldMax = self.valuationdomain['max']
         oldMin = self.valuationdomain['min']
         oldMed = self.valuationdomain['med']
@@ -1229,7 +1229,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             print(newMin, newMed, newMax, newAmplitude)
 
         actions = self.getActionsKeys(withoutProfiles=False)
-        oldrelation = deepcopy(self.relation)
+        oldrelation = copy(self.relation)
         newrelation = {}
         for x in actions:
             newrelation[x] = {}
@@ -1250,7 +1250,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.valuationdomain['med'] = newMed
         self.valuationdomain['hasIntegerValuation'] = False
 
-        self.relation = deepcopy(newrelation)
+        self.relation = copy(newrelation)
 
 #-------------
         
@@ -1306,7 +1306,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 
         """
 
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         from decimal import Decimal
 
         # import the performance tableau
@@ -1322,16 +1322,16 @@ class QuantilesSortingDigraph(SortingDigraph):
                 actions[x] = {'name': str(x)}
             self.actions = actions
         else:
-            self.actions = deepcopy(perfTab.actions)
+            self.actions = copy(perfTab.actions)
 
         # keep a copy of the original actions set before adding the profiles
-        self.actionsOrig = deepcopy(self.actions)
+        self.actionsOrig = copy(self.actions)
 
         #  normalizing the performance tableau
         normPerfTab = NormalizedPerformanceTableau(perfTab)
-        self.criteria = deepcopy(normPerfTab.criteria)
+        self.criteria = copy(normPerfTab.criteria)
         self.convertWeightFloatToDecimal()
-        self.evaluation = deepcopy(normPerfTab.evaluation)
+        self.evaluation = copy(normPerfTab.evaluation)
         self.convertEvaluationFloatToDecimal()
         
         #  compute the limiting quantiles
@@ -1345,7 +1345,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                 print('convert to decimal!',limitingQuantiles)
         else:
             limitingQuantiles = self._computeQuantiles(limitingQuantiles,Debug=Debug)
-        self.limitingQuantiles = deepcopy(limitingQuantiles)
+        self.limitingQuantiles = copy(limitingQuantiles)
 
         if Debug:
             print('limitingQuantiles',self.limitingQuantiles)
@@ -1378,13 +1378,13 @@ class QuantilesSortingDigraph(SortingDigraph):
                 %(limitingQuantiles[i],limitingQuantiles[i+1]), 'order':i+1,
                         'lowLimit': ']%.2f' % (limitingQuantiles[i]),
                         'highLimit': '%.2f]' % (limitingQuantiles[i+1])}
-        self.categories = deepcopy(categories)
+        self.categories = categories
         if Debug:
             print('categories',self.categories)
 
         criteriaCategoryLimits = {}
         criteriaCategoryLimits['LowerClosed'] = LowerClosed
-        self.criteriaCategoryLimits = deepcopy(criteriaCategoryLimits)
+        self.criteriaCategoryLimits = copy(criteriaCategoryLimits)
         for g in self.criteria:
             gQuantiles = self._computeLimitingQuantiles(g,\
                             PrefThresholds=PrefThresholds,Debug=Debug)
@@ -1396,7 +1396,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                    'minimum':gQuantiles[(int(c)-1)],
 ##                    'maximum':gQuantiles[int(c)]
 ##                    }
-        self.criteriaCategoryLimits = deepcopy(criteriaCategoryLimits)
+        self.criteriaCategoryLimits = criteriaCategoryLimits
         if Debug:
             print('CriteriaCategoryLimits',self.criteriaCategoryLimits)
 
@@ -1838,7 +1838,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         Renders the list of limiting quantiles on criteria g
         """
         from math import floor
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         gValues = []
         for x in self.actionsOrig:
             if Debug:
@@ -1857,7 +1857,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         if Debug:
             print('g,n,gValues',g,n,gValues)
         nf = Decimal(str(n+1))
-        limitingQuantiles = deepcopy(self.limitingQuantiles)
+        limitingQuantiles = copy(self.limitingQuantiles)
         limitingQuantiles.sort()
         if Debug:
             print(limitingQuantiles)
@@ -2067,13 +2067,14 @@ class QuantilesSortingDigraph(SortingDigraph):
         
         """
         #from string import replace
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         categoryContent = self.computeCategoryContents()
         categoryKeys = self.orderedCategoryKeys(Reverse=Reverse)
         try:
             LowerClosed = self.criteriaCategoryLimits['LowerClosed']
         except:
             LowerClosed = True
+
         if Reverse:
             print('\n*--- Sorting results in descending order ---*\n')
             if isReturningHTML:
@@ -2084,10 +2085,7 @@ class QuantilesSortingDigraph(SortingDigraph):
             if isReturningHTML:
                 html = '<h2>Sorting results in ascending order</h2>'
                 html += '<table style="background-color:White;" border="1"><tr bgcolor="#9acd32"><th>Categories</th><th>Assorting</th></tr>'
-##        if LowerClosed:
-##            #print('Lower closed categories')
-##        else:
-##            #print('Upper closed categories')
+
         for c in categoryKeys:
             print('%s:' % (self.categories[c]['name']), end=' ')
             print('\t',categoryContent[c])
@@ -2096,18 +2094,6 @@ class QuantilesSortingDigraph(SortingDigraph):
                 html += '<tr><td bgcolor="#FFF79B">%s</td>' % (self.categories[c]['name'])
                 catString = str(categoryContent[c])
                 html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
-##            if LowerClosed:
-##                print('Lower closed categories')
-##            else:
-##                print('Upper closed categories')
-##            for c in categoryKeys:
-##                print('%s:' % (self.categories[c]['name']), end=' ')
-##                print('\t',categoryContent[c])
-##                if isReturningHTML:
-##                    #html += '<tr><td bgcolor="#FFF79B">[%s - %s[</td>' % (limprevc,limc)
-##                    html += '<tr><td bgcolor="#FFF79B">%</td>' % (self.categories[c]['name'])
-##                    catString = str(categoryContent[c])
-##                    html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
 
         if isReturningHTML:
             html += '</table>'
@@ -2148,60 +2134,6 @@ class QuantilesSortingDigraph(SortingDigraph):
             currActions = currActions - ibch
         return sortingRelation
 
-##    def showActionCategories(self,action,Debug=False,Comments=True):
-##        """
-##        Renders the union of categories in which the given action is sorted positively or null into.
-##        Returns a tuple : action, lowest category key, highest category key, membership credibility !
-##        """
-##        Med = self.valuationdomain['med']
-##        sorting = self.computeSortingCharacteristics(action=action,Comments=Debug)
-##        keys = []
-##        for c in self.orderedCategoryKeys():
-##            if sorting[action][c]['categoryMembership'] >= Med:
-##                if sorting[action][c]['lowLimit'] > Med:
-##                    lowLimit = sorting[action][c]['lowLimit']
-##                if sorting[action][c]['notHighLimit'] > Med:
-##                    notHighLimit = sorting[action][c]['notHighLimit']
-##                keys.append(c)
-##                if Debug:
-##                    print(action, c, sorting[action][c])
-##        n = len(keys)
-##        credibility = min(lowLimit,notHighLimit)
-##        if n == 0:
-##            return None
-##        elif n == 1:
-##            if Comments:
-##                print('%s in %s - %s with credibility: %.2f' % (action,\
-##                                     self.categories[keys[0]]['lowLimit'],\
-##                                     self.categories[keys[-1]]['highLimit'],\
-##                                     credibility) )
-##            return action,\
-##                    keys[0],\
-##                    keys[-1],\
-##                    credibility
-##        else:
-##            if Comments:
-##                print('%s in %s - %s with credibility: %.2f' % (action,\
-##                                     self.categories[keys[0]]['lowLimit'],\
-##                                     self.categories[keys[0]]['highLimit'],\
-##                                     credibility) )
-##            return action,\
-##                    keys[0],\
-##                    keys[0],\
-##                    credibility            
-##
-##    def showActionsSortingResult(self,actionSubset=None,Debug=False):
-##        """
-##        shows the quantiles sorting result all (default) of a subset of the decision actions.
-##        """
-##        if actionSubset == None:
-##            actions = [x for x in self.actions]
-##        else:
-##            actions = [x for x in actionSubset]
-##        actions.sort()
-##        print('Quantiles sorting result per decision action')
-##        for x in actions:
-##            self.showActionCategories(x,Debug=Debug)
 
 #-------------
         
@@ -2258,7 +2190,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
 
         """
 
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         from decimal import Decimal
 
         # import the performance tableau
@@ -2274,16 +2206,16 @@ class _QuantilesSortingDigraph(SortingDigraph):
                 actions[x] = {'name': str(x)}
             self.actions = actions
         else:
-            self.actions = deepcopy(perfTab.actions)
+            self.actions = copy(perfTab.actions)
 
         # keep a copy of the original actions set before adding the profiles
-        self.actionsOrig = deepcopy(self.actions)
+        self.actionsOrig = copy(self.actions)
 
         #  normalizing the performance tableau
         normPerfTab = NormalizedPerformanceTableau(perfTab)
-        self.criteria = deepcopy(normPerfTab.criteria)
+        self.criteria = copy(normPerfTab.criteria)
         self.convertWeightFloatToDecimal()
-        self.evaluation = deepcopy(normPerfTab.evaluation)
+        self.evaluation = copy(normPerfTab.evaluation)
         self.convertEvaluationFloatToDecimal()
         
         #  compute the limiting quantiles
@@ -2297,7 +2229,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
                 print('convert to decimal!',limitingQuantiles)
         else:
             limitingQuantiles = self._computeQuantiles(limitingQuantiles,Debug=Debug)
-        self.limitingQuantiles = deepcopy(limitingQuantiles)
+        self.limitingQuantiles = limitingQuantiles
 
         if Debug:
             print('limitingQuantiles',self.limitingQuantiles)
@@ -2330,13 +2262,13 @@ class _QuantilesSortingDigraph(SortingDigraph):
                 %(limitingQuantiles[i],limitingQuantiles[i+1]), 'order':i+1,
                         'lowLimit': ']%.2f' % (limitingQuantiles[i]),
                         'highLimit': '%.2f]' % (limitingQuantiles[i+1])}
-        self.categories = deepcopy(categories)
+        self.categories = categories
         if Debug:
             print('categories',self.categories)
 
         criteriaCategoryLimits = {}
         criteriaCategoryLimits['LowerClosed'] = LowerClosed
-        self.criteriaCategoryLimits = deepcopy(criteriaCategoryLimits)
+        self.criteriaCategoryLimits = copy(criteriaCategoryLimits)
         for g in self.criteria:
             gQuantiles = self._computeLimitingQuantiles(g,\
                             PrefThresholds=PrefThresholds,Debug=Debug)                
@@ -2346,7 +2278,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
                     'minimum':gQuantiles[(int(c)-1)],
                     'maximum':gQuantiles[int(c)]
                     }
-        self.criteriaCategoryLimits = deepcopy(criteriaCategoryLimits)
+        self.criteriaCategoryLimits = criteriaCategoryLimits
         if Debug:
             print('CriteriaCategoryLimits',self.criteriaCategoryLimits)
 
@@ -2396,8 +2328,8 @@ class _QuantilesSortingDigraph(SortingDigraph):
         self.hasNoVeto = hasNoVeto
         if outrankingType == "robust":
             g = RobustOutrankingDigraph(self)
-            self.valuationdomain = deepcopy(g.valuationdomain)
-            self.relation = deepcopy(g.relation)
+            self.valuationdomain = copy(g.valuationdomain)
+            self.relation = copy(g.relation)
         elif outrankingType == "likely":
             g = StochasticBipolarOutrankingDigraph(self,
                                                    sampleSize = 50,
@@ -2407,8 +2339,8 @@ class _QuantilesSortingDigraph(SortingDigraph):
                                                    spread = 1.0,
                                                    likelihood = 0.9,
                                                    distribution = 'triangular')
-            self.valuationdomain = deepcopy(g.valuationdomain)
-            self.relation = deepcopy(g.relation)
+            self.valuationdomain = copy(g.valuationdomain)
+            self.relation = copy(g.relation)
             
         else:
             minValuation = -100.0
@@ -2687,7 +2619,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
         Renders the list of limiting quantiles on criteria g
         """
         from math import floor
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         gValues = []
         for x in self.actionsOrig:
             if Debug:
@@ -2706,7 +2638,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
         if Debug:
             print('g,n,gValues',g,n,gValues)
         nf = Decimal(str(n+1))
-        limitingQuantiles = deepcopy(self.limitingQuantiles)
+        limitingQuantiles = copy(self.limitingQuantiles)
         limitingQuantiles.sort()
         if Debug:
             print(limitingQuantiles)
@@ -2774,7 +2706,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
         
         """
         #from string import replace
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         categoryContent = self.computeCategoryContents()
         categoryKeys = self.orderedCategoryKeys(Reverse=Reverse)
         try:
@@ -2791,10 +2723,6 @@ class _QuantilesSortingDigraph(SortingDigraph):
             if isReturningHTML:
                 html = '<h2>Sorting results in ascending order</h2>'
                 html += '<table style="background-color:White;" border="1"><tr bgcolor="#9acd32"><th>Categories</th><th>Assorting</th></tr>'
-##        if LowerClosed:
-##            #print('Lower closed categories')
-##        else:
-##            #print('Upper closed categories')
         for c in categoryKeys:
             print('%s:' % (self.categories[c]['name']), end=' ')
             print('\t',categoryContent[c])
@@ -2803,19 +2731,6 @@ class _QuantilesSortingDigraph(SortingDigraph):
                 html += '<tr><td bgcolor="#FFF79B">%</td>' % (self.categories[c]['name'])
                 catString = str(categoryContent[c])
                 html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
-##            if LowerClosed:
-##                print('Lower closed categories')
-##            else:
-##                print('Upper closed categories')
-##            for c in categoryKeys:
-##                print('%s:' % (self.categories[c]['name']), end=' ')
-##                print('\t',categoryContent[c])
-##                if isReturningHTML:
-##                    #html += '<tr><td bgcolor="#FFF79B">[%s - %s[</td>' % (limprevc,limc)
-##                    html += '<tr><td bgcolor="#FFF79B">%</td>' % (self.categories[c]['name'])
-##                    catString = str(categoryContent[c])
-##                    html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
-
         if isReturningHTML:
             html += '</table>'
             return html
@@ -2855,78 +2770,78 @@ class _QuantilesSortingDigraph(SortingDigraph):
             currActions = currActions - ibch
         return sortingRelation
 
-class _OptimalHarmonicQuantilesSortingDigraph(QuantilesSortingDigraph):
-    """
-    Specialisation of the QuantilesSortingDigraph Class
-    for optimal sorting of alternatives into
-    quantiles delimited ordered classes. 
-    """
-    def __init__(self,argPerfTab=None,
-                 minQuantiles=4,
-                 maxQuantiles=200,
-                 LowerClosed=True,
-                 PrefThresholds=True,
-                 hasNoVeto=False,
-                 minValuation=-100.0,
-                 maxValuation=100.0,
-                 outrankingType = "bipolar",
-                 Prudent=False,
-                 Threading=False,
-                 Debug=False):
-        
-        from copy import copy as deepcopy
-        if argPerfTab != None:
-            t = argPerfTab
-        else:
-            t = RandomCBPerformanceTableau()
-        g = BipolarOutrankingDigraph(t)
-        maxCorr = {'correlation': Decimal('-1.0')}
-        maxCorr['determination'] = Decimal('0.0')
-        qs = None
-        nbrActions = len(t.actions)
-        nq = nbrActions+1
-        divNbrActions = []
-        for i in range(minQuantiles,nq):
-            if (nbrActions%i) == 0:
-                divNbrActions.append(i)
-        if Debug:
-            print(divNbrActions)
-        testNQ = [(i+1) for i in divNbrActions]
-        for m in range(2,10):
-            if m*(nbrActions+1) < maxQuantiles:
-                testNQ.append(m*(nbrActions+1))
-        if Debug:
-            print(testNQ)
-        for nq in testNQ:
-            if Debug:
-                print( '%d-tiling' % (nq) )
-            qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,Threading=False)
-            qs0Corr = g.computeOrdinalCorrelation(qs0)
-            if Debug:
-                print( 'correlation0 = %.3f' % qs0Corr['correlation'] )
-            if Prudent:
-                if qs0Corr['correlation'] > maxCorr['correlation']:
-                    maxCorr = deepcopy(qs0Corr)
-                    maxqs = deepcopy(qs0)                
-            else:
-                if qs0Corr['correlation']*qs0Corr['determination'] > maxCorr['correlation']*maxCorr['determination']:
-                    maxCorr = deepcopy(qs0Corr)
-                    maxqs = deepcopy(qs0)
-            
-        self.name = deepcopy(maxqs.name)
-        self.actions = deepcopy(maxqs.actions)
-        self.actionsOrig = deepcopy(maxqs.actionsOrig)
-        self.order = len(self.actions)
-        self.criteria = deepcopy(maxqs.criteria)
-        self.evaluation = deepcopy(maxqs.evaluation)
-        self.profiles = deepcopy(maxqs.profiles)
-        self.valuationdomain = deepcopy(maxqs.valuationdomain)
-        self.relation = deepcopy(maxqs.relation)
-        self.categories = deepcopy(maxqs.categories)
-        self.criteriaCategoryLimits = deepcopy(maxqs.criteriaCategoryLimits)
-        self.limitingQuantiles = deepcopy(maxqs.limitingQuantiles)
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
+##class _OptimalHarmonicQuantilesSortingDigraph(QuantilesSortingDigraph):
+##    """
+##    Specialisation of the QuantilesSortingDigraph Class
+##    for optimal sorting of alternatives into
+##    quantiles delimited ordered classes. 
+##    """
+##    def __init__(self,argPerfTab=None,
+##                 minQuantiles=4,
+##                 maxQuantiles=200,
+##                 LowerClosed=True,
+##                 PrefThresholds=True,
+##                 hasNoVeto=False,
+##                 minValuation=-100.0,
+##                 maxValuation=100.0,
+##                 outrankingType = "bipolar",
+##                 Prudent=False,
+##                 Threading=False,
+##                 Debug=False):
+##        
+##        from copy import copy as deepcopy
+##        if argPerfTab != None:
+##            t = argPerfTab
+##        else:
+##            t = RandomCBPerformanceTableau()
+##        g = BipolarOutrankingDigraph(t)
+##        maxCorr = {'correlation': Decimal('-1.0')}
+##        maxCorr['determination'] = Decimal('0.0')
+##        qs = None
+##        nbrActions = len(t.actions)
+##        nq = nbrActions+1
+##        divNbrActions = []
+##        for i in range(minQuantiles,nq):
+##            if (nbrActions%i) == 0:
+##                divNbrActions.append(i)
+##        if Debug:
+##            print(divNbrActions)
+##        testNQ = [(i+1) for i in divNbrActions]
+##        for m in range(2,10):
+##            if m*(nbrActions+1) < maxQuantiles:
+##                testNQ.append(m*(nbrActions+1))
+##        if Debug:
+##            print(testNQ)
+##        for nq in testNQ:
+##            if Debug:
+##                print( '%d-tiling' % (nq) )
+##            qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,Threading=False)
+##            qs0Corr = g.computeOrdinalCorrelation(qs0)
+##            if Debug:
+##                print( 'correlation0 = %.3f' % qs0Corr['correlation'] )
+##            if Prudent:
+##                if qs0Corr['correlation'] > maxCorr['correlation']:
+##                    maxCorr = deepcopy(qs0Corr)
+##                    maxqs = deepcopy(qs0)                
+##            else:
+##                if qs0Corr['correlation']*qs0Corr['determination'] > maxCorr['correlation']*maxCorr['determination']:
+##                    maxCorr = deepcopy(qs0Corr)
+##                    maxqs = deepcopy(qs0)
+##            
+##        self.name = deepcopy(maxqs.name)
+##        self.actions = deepcopy(maxqs.actions)
+##        self.actionsOrig = deepcopy(maxqs.actionsOrig)
+##        self.order = len(self.actions)
+##        self.criteria = deepcopy(maxqs.criteria)
+##        self.evaluation = deepcopy(maxqs.evaluation)
+##        self.profiles = deepcopy(maxqs.profiles)
+##        self.valuationdomain = deepcopy(maxqs.valuationdomain)
+##        self.relation = deepcopy(maxqs.relation)
+##        self.categories = deepcopy(maxqs.categories)
+##        self.criteriaCategoryLimits = deepcopy(maxqs.criteriaCategoryLimits)
+##        self.limitingQuantiles = deepcopy(maxqs.limitingQuantiles)
+##        self.gamma = self.gammaSets()
+##        self.notGamma = self.notGammaSets()
            
 #----------test SortingDigraph class ----------------
 if __name__ == "__main__":
