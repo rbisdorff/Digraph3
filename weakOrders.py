@@ -382,7 +382,7 @@ class KohlerArrowRaynaudFusionDigraph(WeakOrder):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-
+#---------------------
 class RankingByChoosingDigraph(WeakOrder):
     """
     Specialization of the abstract WeakOrder class for 
@@ -443,7 +443,7 @@ class RankingByChoosingDigraph(WeakOrder):
                  CppAgrum=False,
                  Threading=True):
         
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         from pickle import dumps, loads, load
 
         self.CoDual=CoDual
@@ -489,7 +489,7 @@ class RankingByChoosingDigraph(WeakOrder):
         digraph.recodeValuation(-1.0,1.0)
         self.name = digraph.name
         #self.__class__ = digraph.__class__
-        self.actions = deepcopy(digraph.actions)
+        self.actions = copy(digraph.actions)
         self.order = len(self.actions)
         self.valuationdomain = digraph.valuationdomain
         self.originalRelation = digraph.relation
@@ -547,8 +547,8 @@ class RankingByChoosingDigraph(WeakOrder):
                 if Debug:
                     print('!',x,y,relBest[x][y],relLast[x][y],relFusion[x][y])  
         self.relation=relFusion
-        self.rankingByLastChoosing = deepcopy(digraph.rankingByLastChoosing)
-        self.rankingByBestChoosing = deepcopy(digraph.rankingByBestChoosing)
+        self.rankingByLastChoosing = copy(digraph.rankingByLastChoosing)
+        self.rankingByBestChoosing = copy(digraph.rankingByBestChoosing)
         if Debug:
             self.computeRankingByChoosing()
             self.showRankingByChoosing()
@@ -557,14 +557,27 @@ class RankingByChoosingDigraph(WeakOrder):
         self.notGamma = self.notGammaSets()
 
 
+    def showWeakOrder(self,rankingByChoosing=None):
+        """
+        Specialization of generic method.
+        Without argument, a weak ordering is recomputed from the
+        valued self relation.
+        """
+        if rankingByChoosing == None:
+            WeakOrder.showWeakOrder(self,rankingByChoosing=self.computeRankingByChoosing())
+        else:
+            WeakOrder.showWeakOrder(self,rankingByChoosing=rankingByChoosing)
+
+
+
     def showRankingByChoosing(self,rankingByChoosing=None):
         """
         Dummy for showWeakOrder method
         """
         if rankingByChoosing == None:
-            self.showWeakOrder(rankingByChoosing=self.computeRankingByChoosing())
+            WeakOrder.showWeakOrder(self,rankingByChoosing=self.computeRankingByChoosing())
         else:
-            self.showWeakOrder(rankingByChoosing=rankingByChoosing)
+            WeakOrder.showWeakOrder(self,rankingByChoosing=rankingByChoosing)
 
     def computeRankingByBestChoosing(self,Forced=False):
         """
@@ -579,7 +592,8 @@ class RankingByChoosingDigraph(WeakOrder):
         """
         if Forced:
             WeakOrder.computeRankingByLastChoosing(self,CoDual=self.CoDual,CppAgrum=self.CppAgrum)
- 
+
+#--------------------
 class RankingByBestChoosingDigraph(RankingByChoosingDigraph):
     """
     Specialization of abstract WeakOrder class for computing a ranking by best-choosing.
@@ -639,7 +653,7 @@ class RankingByPrudentChoosingDigraph(RankingByChoosingDigraph):
     Specialization for ranking-by-rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to 20% of the valuation domain maximum (1.0).
     """
     def __init__(self,digraph,CoDual=False,Normalized=True,Odd=True,Limited=0.2,Comments=False,Debug=False,SplitCorrelation=True):
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         from time import time
         if Comments:          
             t0 = time()
@@ -649,9 +663,9 @@ class RankingByPrudentChoosingDigraph(RankingByChoosingDigraph):
             digraph_.recodeValuation(-1,1)
         digraphName = 'sorting-by-prudent-choosing'+digraph_.name
         self.name = digraphName
-        self.actions = deepcopy(digraph_.actions)
+        self.actions = copy(digraph_.actions)
         self.order = len(self.actions)
-        self.valuationdomain = deepcopy(digraph_.valuationdomain)
+        self.valuationdomain = copy(digraph_.valuationdomain)
         s1 = RankingByLastChoosingDigraph(digraph_,CoDual=CoDual,Debug=False)
         s2 = RankingByBestChoosingDigraph(digraph_,CoDual=CoDual,Debug=False)
         fus = FusionDigraph(s1,s2)
@@ -689,7 +703,7 @@ class RankingByPrudentChoosingDigraph(RankingByChoosingDigraph):
                     self.rankingByBestChoosing = s2.rankingByBestChoosing
                     self.rankingByLastChoosing = s1.rankingByLastChoosing
         else:
-            self.relation = deepcopy(fus.relation)
+            self.relation = copy(fus.relation)
             self.rankingByBestChoosing = s2.rankingByBestChoosing
             self.rankingByLastChoosing = s1.rankingByLastChoosing
 
@@ -751,7 +765,7 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
                  plotFileName=None,\
                  Threading=True,\
                  Debug=False):
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         from linearOrders import PrincipalOrder
         from pickle import dumps, loads, load
 
@@ -805,7 +819,7 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
                 self.actions[x] = {}
                 self.actions[x]['name'] = x
         else:
-            self.actions = deepcopy(digraph.actions)
+            self.actions = digraph.actions
         self.order = len(self.actions)
         self.valuationdomain = digraph.valuationdomain
 
@@ -860,18 +874,18 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
             print(self.actions)
             for x in pl.principalRowwiseScores:
                 print(x)
-        self.principalRowwiseScores = deepcopy(pl.principalRowwiseScores)
+        self.principalRowwiseScores = copy(pl.principalRowwiseScores)
         for x in pl.principalRowwiseScores:
             self.actions[x[1]]['principalRowwiseScore'] = x[0]
         if Debug:
             print('Column wise: ')
             print(pc.principalColwiseScores)
             pc.computeOrder()
-        self.principalColwiseScores = deepcopy(pc.principalColwiseScores)
+        self.principalColwiseScores = copy(pc.principalColwiseScores)
         for x in pc.principalColwiseScores:
             self.actions[x[1]]['principalColwiseScore'] = x[0]
         pf = FusionDigraph(pl,pc,operator=fusionOperator)
-        self.relation = deepcopy(pf.relation)
+        self.relation = copy(pf.relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         #self.computeRankingByChoosing()
@@ -1192,7 +1206,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                  Comments=True,
                  Debug=False):
         
-        from copy import copy as deepcopy
+        from copy import copy,deepcopy
         from sortingDigraphs import QuantilesSortingDigraph
         from linearOrders import KohlerOrder
         from multiprocessing import Pool, cpu_count
@@ -1266,7 +1280,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                 print(i+1,weakOrdering[i])        
 
         #qs.recodeValuation(-1,1)
-        qsRelation = deepcopy(qs.relation)
+        qsRelation = copy(qs.relation)
         catRelation = {}
         catRbc = {}
         ## Rbc Threading=False
@@ -1422,21 +1436,21 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
             self.runTimes['withoutThreading'] = time() - t0
 
         self.name = 'qsrbc-'+qs.name
-        self.actions = deepcopy(qs.actions)
+        self.actions = copy(qs.actions)
         self.order = len(self.actions)
-        self.criteria = deepcopy(qs.criteria)
-        self.evaluation = deepcopy(qs.evaluation)
-        self.categories = deepcopy(qs.categories)
-        self.limitingQuantiles = deepcopy(qs.limitingQuantiles)
-        self.criteriaCategoryLimits = deepcopy(qs.criteriaCategoryLimits)
-        self.profiles = deepcopy(qs.profiles)
-        self.valuationdomain = deepcopy(qs.valuationdomain)
-        self.catRbc = deepcopy(catRbc)
+        self.criteria = copy(qs.criteria)
+        self.evaluation = copy(qs.evaluation)
+        self.categories = copy(qs.categories)
+        self.limitingQuantiles = copy(qs.limitingQuantiles)
+        self.criteriaCategoryLimits = copy(qs.criteriaCategoryLimits)
+        self.profiles = copy(qs.profiles)
+        self.valuationdomain = copy(qs.valuationdomain)
+        self.catRbc = copy(catRbc)
         try:
-            self.relationOrig = deepcopy(qs.relationOrig)
+            self.relationOrig = copy(qs.relationOrig)
         except:
             pass
-        self.relation = deepcopy(qsRelation)
+        self.relation = copy(qsRelation)
         self._constructRelation(strategy=strategy,Debug=Debug)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()

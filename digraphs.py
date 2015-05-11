@@ -1511,7 +1511,7 @@ class Digraph(object):
              is by convention 0.0 at determination level 0.0 .
 
         """
-        from copy import copy as deepcopy
+        from copy import copy,deepcopy
         g = deepcopy(self)
         g.recodeValuation(-1,1)
         actions = [x for x in g.actions]
