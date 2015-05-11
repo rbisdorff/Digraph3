@@ -2082,19 +2082,9 @@ and the evaluation dictionary into self.</p>
 <dt id="digraphs.RandomDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RandomDigraph</code><span class="sig-paren">(</span><em>order=9</em>, <em>arcProbability=0.5</em>, <em>hasIntegerValuation=True</em>, <em>Bipolar=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RandomDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<p>Specialization of the general Digraph class for generating
-temporary crisp (irreflexive) random digraphs.</p>
-<dl class="docutils">
-<dt><em>Parameters</em>:</dt>
-<dd><ul class="first last simple">
-<li>order (default = 10);</li>
-<li>arc_probability (in [0.,1.], default=0.5)</li>
-</ul>
-</dd>
-</dl>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Obsolete version. Will be removed in the future. Instead, use
+<p class="last"><em>Obsolete version!</em> Will be removed in the future. Instead, use
 the new <a class="reference internal" href="#randomDigraphs.RandomDigraph" title="randomDigraphs.RandomDigraph"><code class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomDigraph</span></code></a> constructor.</p>
 </div>
 </dd></dl>
@@ -2103,19 +2093,9 @@ the new <a class="reference internal" href="#randomDigraphs.RandomDigraph" title
 <dt id="digraphs.RandomFixedDegreeSequenceDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RandomFixedDegreeSequenceDigraph</code><span class="sig-paren">(</span><em>order=7, degreeSequence=[3, 3, 2, 2, 1, 1, 0]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RandomFixedDegreeSequenceDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<p>Specialization of the general Digraph class for generating
-temporary random crisp graphs (symmetric digraphs) with a fixed sequence of degrees.</p>
-<dl class="docutils">
-<dt><em>Parameters</em>:</dt>
-<dd>order=n and degreeSequence=[degree_1, ... ,degree_n]&gt;</dd>
-</dl>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The implementation is not guaranteeing a uniform choice among all potential valid graph instances.</p>
-</div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Obsolete version. Will be removed in the future. Instead, use
+<p class="last"><em>Obsolete version!</em> Will be removed in the future. Instead, use
 the new <a class="reference internal" href="#randomDigraphs.RandomFixedDegreeSequenceDigraph" title="randomDigraphs.RandomFixedDegreeSequenceDigraph"><code class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomFixedDegreeSequenceDigraph</span></code></a> constructor.</p>
 </div>
 </dd></dl>
@@ -2124,11 +2104,9 @@ the new <a class="reference internal" href="#randomDigraphs.RandomFixedDegreeSeq
 <dt id="digraphs.RandomFixedSizeDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RandomFixedSizeDigraph</code><span class="sig-paren">(</span><em>order=7</em>, <em>size=14</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RandomFixedSizeDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<p>Generates a random crisp digraph with a fixed size, by instantiating a fixed numbers of arcs
-from random choices in the set of potential oriented pairs of nodes numbered from 1 to order.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Obsolete version. Will be removed in the future. Instead, use
+<p class="last"><em>Obsolete version!</em> Will be removed in the future. Instead, use
 the new <a class="reference internal" href="#randomDigraphs.RandomFixedSizeDigraph" title="randomDigraphs.RandomFixedSizeDigraph"><code class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomFixedSizeDigraph</span></code></a> constructor.</p>
 </div>
 </dd></dl>
@@ -2137,14 +2115,9 @@ the new <a class="reference internal" href="#randomDigraphs.RandomFixedSizeDigra
 <dt id="digraphs.RandomRegularDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RandomRegularDigraph</code><span class="sig-paren">(</span><em>order=7</em>, <em>degree=2</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RandomRegularDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd>order and degree.</dd>
-</dl>
-<p>Specialization of Digraph class for random regular symmetric instances.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Obsolete version. Will be removed in the future. Instead, use
+<p class="last"><em>Obsolete version!</em> Will be removed in the future. Instead, use
 the new <a class="reference internal" href="#randomDigraphs.RandomRegularDigraph" title="randomDigraphs.RandomRegularDigraph"><code class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomRegularDigraph</span></code></a> constructor.</p>
 </div>
 </dd></dl>
@@ -2153,15 +2126,9 @@ the new <a class="reference internal" href="#randomDigraphs.RandomRegularDigraph
 <dt id="digraphs.RandomTournament">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RandomTournament</code><span class="sig-paren">(</span><em>order=10</em>, <em>ndigits=2</em>, <em>isCrisp=True</em>, <em>valuationDomain=None</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RandomTournament" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<dl class="docutils">
-<dt>Parameter:</dt>
-<dd>order = n &gt; 0</dd>
-</dl>
-<p>Specialization of the general Digraph class for generating
-temporary weak tournaments</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Obsolete version. Will be removed in the future. Instead, use
+<p class="last"><em>Obsolete version!</em> Will be removed in the future. Instead, use
 the new <a class="reference internal" href="#randomDigraphs.RandomTournament" title="randomDigraphs.RandomTournament"><code class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomTournament</span></code></a> constructor.</p>
 </div>
 </dd></dl>
@@ -2170,14 +2137,9 @@ the new <a class="reference internal" href="#randomDigraphs.RandomTournament" ti
 <dt id="digraphs.RandomTree">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RandomTree</code><span class="sig-paren">(</span><em>numberOfNodes=5</em>, <em>ndigits=2</em>, <em>hasIntegerValuation=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RandomTree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<p>Random generator for trees, using random Pruefer codes</p>
-<dl class="docutils">
-<dt>Parameter:</dt>
-<dd>numerOfNodes</dd>
-</dl>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Obsolete version. Will be removed in the future. Instead, use
+<p class="last"><em>Obsolete version!</em> Will be removed in the future. Instead, use
 the new <code class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomTree</span></code> constructor.</p>
 </div>
 <dl class="method">
@@ -2191,22 +2153,9 @@ the new <code class="xref py py-class docutils literal"><span class="pre">random
 <dt id="digraphs.RandomValuationDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RandomValuationDigraph</code><span class="sig-paren">(</span><em>order=9</em>, <em>ndigits=2</em>, <em>Normalized=False</em>, <em>hasIntegerValuation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RandomValuationDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<p>Specialization of the general Digraph class for generating
-temporary uniformly valuated random digraphs.</p>
-<dl class="docutils">
-<dt><em>Parameters</em>:</dt>
-<dd><ul class="first last simple">
-<li>order &gt; 0, number of arcs;</li>
-<li>ndigits &gt; 0, number of digits if hasIntegerValuation = True;
-Otherwise, decimal precision.</li>
-<li>Normalized = True (r in [-1,1], r in [0,1] if False/default);</li>
-<li>hasIntegerValuation = False (default).</li>
-</ul>
-</dd>
-</dl>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Obsolete version. Will be removed in the future. Instead, use
+<p class="last"><em>Obsolete version!</em> Will be removed in the future. Instead, use
 the new <a class="reference internal" href="#randomDigraphs.RandomValuationDigraph" title="randomDigraphs.RandomValuationDigraph"><code class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomValuationDigraph</span></code></a> constructor.</p>
 </div>
 </dd></dl>
@@ -2215,15 +2164,9 @@ the new <a class="reference internal" href="#randomDigraphs.RandomValuationDigra
 <dt id="digraphs.RandomWeakTournament">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RandomWeakTournament</code><span class="sig-paren">(</span><em>order=10</em>, <em>ndigits=2</em>, <em>hasIntegerValuation=False</em>, <em>weaknessDegree=0.25</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RandomWeakTournament" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<dl class="docutils">
-<dt>Parameter:</dt>
-<dd>order = n &gt; 0</dd>
-</dl>
-<p>Specialization of the general Digraph class for generating
-temporary bipolar-valued weak tournaments</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Obsolete version. Will be removed in the future. Instead, use
+<p class="last"><em>Obsolete version!</em> Will be removed in the future. Instead, use
 the new <a class="reference internal" href="#randomDigraphs.RandomWeakTournament" title="randomDigraphs.RandomWeakTournament"><code class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomWeakTournament</span></code></a> constructor.</p>
 </div>
 </dd></dl>
@@ -2249,36 +2192,6 @@ the new <a class="reference internal" href="#randomDigraphs.RandomWeakTournament
 <p class="first admonition-title">Note</p>
 <p class="last">The not symmetric links are all put to the meadian characteristics value!.</p>
 </div>
-</dd></dl>
-
-<dl class="class">
-<dt id="digraphs.WeakCocaDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">WeakCocaDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>comment=None</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.WeakCocaDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd>Stored or memory resident digraph instance.</dd>
-</dl>
-<p>Specialization of general Digraph class for instantiation
-of weak chordless odd circuits augmented digraphs.</p>
-<dl class="method">
-<dt id="digraphs.WeakCocaDigraph.addWeakCircuits">
-<code class="descname">addWeakCircuits</code><span class="sig-paren">(</span><em>comment=None</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.WeakCocaDigraph.addWeakCircuits" title="Permalink to this definition">¶</a></dt>
-<dd><p>Augmenting self with self.weakCircuits.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphs.WeakCocaDigraph.closureWeakChordlessOddCircuits">
-<code class="descname">closureWeakChordlessOddCircuits</code><span class="sig-paren">(</span><em>comment=None</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.WeakCocaDigraph.closureWeakChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
-<dd><p>Closure of cdordless odd circuits extraction.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphs.WeakCocaDigraph.showCircuits">
-<code class="descname">showCircuits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.WeakCocaDigraph.showCircuits" title="Permalink to this definition">¶</a></dt>
-<dd><p>show methods for chordless odd circuits in CocaGraph</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
