@@ -22,6 +22,12 @@ def testExtendedPrudentDigraph():
     gep = ExtendedPrudentDigraph(g,prudentBetaLevel=level,Debug=True)
     gep.showRelationTable()
 
+def testKemenyOrdering():
+    print('*-------- Testing KemenyOrder class -------')
+    t = RandomCBPerformanceTableau(numberOfActions=5)
+    t.save('testKemeny')
+    g = BipolarOutrankingDigraph(t)
+    ke = KemenyOrder(g,Debug=True)
 
 def testRankedPairsOrdering():
     print('*-------- Testing RankedPairsOrder class -------')
