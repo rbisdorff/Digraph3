@@ -3679,7 +3679,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                     hasSymmetricThresholds=hasSymmetricThresholds)
         ##
         else:  # parallel computation
-            from copy import copy as deepcopy
+            from copy import copy, deepcopy
             from pickle import dumps, loads, load
             from multiprocessing import Process, Lock,\
                                         active_children, cpu_count
@@ -3736,8 +3736,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             print('Threading ...')
             from tempfile import TemporaryDirectory
             with TemporaryDirectory() as tempDirName:
-                from copy import copy as deepcopy
-                selfDp = deepcopy(self)
+                from copy import copy, deepcopy
+                selfDp = copy(self)
                 selfFileName = tempDirName +'/dumpSelf.py'
                 if Debug:
                     print('temDirName, selfFileName', tempDirName,selfFileName)
@@ -4221,17 +4221,17 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             perfTab = argPerfTab
         self.performanceTableau = perfTab
         self.name = 'rel_' + perfTab.name
-        self.actions = copy.deepcopy(perfTab.actions)
+        self.actions = copy.copy(perfTab.actions)
         Min =   Decimal('-2.0')
         Med =   Decimal('0.0')
         Max =   Decimal('2.0')
         self.valuationdomain = {'min':Min,'med':Med,'max':Max}
         if coalition == None:
-            criteria = copy.deepcopy(perfTab.criteria)
+            criteria = copy.copy(perfTab.criteria)
         else:
             criteria = {}
             for g in coalition:
-                criteria[g] = copy.deepcopy(perfTab.criteria[g])
+                criteria[g] = copy.copy(perfTab.criteria[g])
         self.criteria = criteria
         self.convertWeightFloatToDecimal()
         #  install method Data and parameters
@@ -4256,10 +4256,10 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.relation = self._constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto,hasBipolarVeto=hasBipolarVeto)
 
         # insert performance Data
-        self.evaluation = copy.deepcopy(perfTab.evaluation)
+        self.evaluation = copy.copy(perfTab.evaluation)
         self.convertEvaluationFloatToDecimal()
         try:
-            self.description = copy.deepcopy(perfTab.description)
+            self.description = copy.copy(perfTab.description)
         except:
             pass
         # init general digraph Data
@@ -4615,22 +4615,22 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
                 actions[x] = {'name': str(x)}
             self.actions = actions
         else:
-            self.actions = copy.deepcopy(argPerfTab.actions)
+            self.actions = copy.copy(argPerfTab.actions)
         Min =   Decimal('-100.0')
         Med =   Decimal('0.0')
         Max =   Decimal('100.0')
         self.valuationdomain = {'min':Min,'med':Med,'max':Max}
         if coalition == None:
-            criteria = copy.deepcopy(perfTab.criteria)
+            criteria = copy.copy(perfTab.criteria)
         else:
             criteria = {}
             for g in coalition:
                 criteria[g] = perfTab.criteria[g]
         self.relation = self._constructRelation(perfTab,percentile,Debug)
         self.criteria = criteria
-        self.evaluation = copy.deepcopy(perfTab.evaluation)
+        self.evaluation = copy.copy(perfTab.evaluation)
         try:
-            self.description = copy.deepcopy(perfTab.description)
+            self.description = copy.copy(perfTab.description)
         except:
             pass
         methodData = {}
@@ -4769,10 +4769,10 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
             else:
                 perfTab = PerformanceTableau(argPerfTab)
         self.name = 'rel_' + perfTab.name
-        self.performanceTableau = copy.deepcopy(perfTab)
-        self.actions = copy.deepcopy(perfTab.actions)
+        #self.performanceTableau = copy.deepcopy(perfTab)
+        self.actions = copy.copy(perfTab.actions)
         if coalition == None:
-            criteria = copy.deepcopy(perfTab.criteria)
+            criteria = copy.copy(perfTab.criteria)
         else:
             criteria = {}
             for g in coalition:
@@ -4782,7 +4782,7 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
             totalWeight += Decimal(str(criteria[c]['weight']))
         self.criteria = criteria
         try:
-            self.description = copy.deepcopy(perfTab.description)
+            self.description = copy.copy(perfTab.description)
         except:
             pass
         methodData = {}
@@ -4808,7 +4808,7 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         Max = totalWeight
         self.valuationdomain = {'min':Min,'med':Med,'max':Max}
         
-        evaluation = copy.deepcopy(perfTab.evaluation)
+        evaluation = copy.copy(perfTab.evaluation)
         
         if vetoType == "bipolar":
             hasBipolarVeto = True    
@@ -5249,12 +5249,12 @@ class RandomBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
                                       commonMode=commonMode)
         g = BipolarOutrankingDigraph(tb,
                                      hasBipolarVeto=hasBipolarVeto)
-        self.name = copy.deepcopy(g.name)
-        self.actions = copy.deepcopy(g.actions)
-        self.criteria = copy.deepcopy(g.criteria)
-        self.evaluation = copy.deepcopy(g.evaluation)
-        self.relation = copy.deepcopy(g.relation)
-        self.valuationdomain = copy.deepcopy(g.valuationdomain)
+        self.name = copy.copy(g.name)
+        self.actions = copy.copy(g.actions)
+        self.criteria = copy.copy(g.criteria)
+        self.evaluation = copy.copy(g.evaluation)
+        self.relation = copy.copy(g.relation)
+        self.valuationdomain = copy.copy(g.valuationdomain)
         self.order = len(self.actions)
         if Normalized:
             self.recodeValuation(-1,1)
@@ -5277,11 +5277,11 @@ class PolarisedOutrankingDigraph(PolarisedDigraph,OutrankingDigraph,PerformanceT
         PolarisedDigraph.__init__(self,digraph=digraph,
                                   level=level,KeepValues=KeepValues,
                                   AlphaCut=AlphaCut,StrictCut=StrictCut)
-        self.criteria = copy.deepcopy(digraph.criteria)
-        self.evaluation = copy.deepcopy(digraph.evaluation)
+        self.criteria = copy.copy(digraph.criteria)
+        self.evaluation = copy.copy(digraph.evaluation)
         #self.vetos = self.computeVetos(digraph,level)
         try:
-            self.vetos = copy.deepcopy(digraph.vetos)
+            self.vetos = copy.copy(digraph.vetos)
         except:
             pass
 
@@ -5303,24 +5303,24 @@ class EquiSignificanceMajorityOutrankingDigraph(BipolarOutrankingDigraph,Perform
                 perfTab = RandomPerformanceTableau()
             else:
                 perfTab = PerformanceTableau(argPerfTab)
-        self.performanceTableau = perfTab
+        #self.performanceTableau = perfTab
         self.name = 'eqsignmajrel_' + perfTab.name
-        self.actions = copy.deepcopy(perfTab.actions)
+        self.actions = copy.copy(perfTab.actions)
         Min = Decimal('-1')
         Med = Decimal('0')
         Max = Decimal('+1')
         self.valuationdomain = {'hasIntegerValuation':True, 'min':Min,'med':Med,'max':Max}
         #self.weightPreorder = perfTab.computeWeightPreorder()
         if coalition == None:
-            criteria = copy.deepcopy(perfTab.criteria)
+            criteria = copy.copy(perfTab.criteria)
         else:
             criteria = {}
             for g in coalition:
-                criteria[g] = perfTab.criteria[g]
+                criteria[g] = copy.copy(perfTab.criteria[g])
         #self.relation = self._constructRelation(criteria,perfTab.evaluation, self.weightPreorder)
         self.criteria = criteria
         self.convertWeightFloatToDecimal()
-        self.evaluation = copy.deepcopy(perfTab.evaluation)
+        self.evaluation = copy.copy(perfTab.evaluation)
         self.convertEvaluationFloatToDecimal()
         self.relation = self._constructRelation(perfTab,hasNoVeto=hasNoVeto)
         methodData = {}
@@ -5907,23 +5907,23 @@ class NewRobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             cardinal.showRelationTable()
             
         try:
-            self.description = copy.deepcopy(cardinal.description)
+            self.description = copy.copy(cardinal.description)
         except:
             pass
         try:
-            self.methodData = copy.deepcopy(cardinal.methodData)
+            self.methodData = copy.copy(cardinal.methodData)
         except:
             pass
-        self.actions = copy.deepcopy(cardinal.actions)
+        self.actions = copy.copy(cardinal.actions)
         self.order = len(self.actions)
-        self.criteria = copy.deepcopy(cardinal.criteria)
-        self.evaluation = copy.deepcopy(cardinal.evaluation)
-        self.vetos = copy.deepcopy(cardinal.vetos)
+        self.criteria = copy.copy(cardinal.criteria)
+        self.evaluation = copy.copy(cardinal.evaluation)
+        self.vetos = copy.copy(cardinal.vetos)
         self.valuationdomain = {'hasIntegerValuation':True, 'min':Decimal("-4"), 'med':Decimal("0"), 'max':Decimal("4")}
-        self.cardinalRelation = copy.deepcopy(cardinal.relation)
-        self.ordinalRelation = copy.deepcopy(ordinal.relation)
-        self.equisignificantRelation = copy.deepcopy(equisignificant.relation)
-        self.unanimousRelation = copy.deepcopy(unanimous.relation)
+        self.cardinalRelation = copy.copy(cardinal.relation)
+        self.ordinalRelation = copy.copy(ordinal.relation)
+        self.equisignificantRelation = copy.copy(equisignificant.relation)
+        self.unanimousRelation = copy.copy(unanimous.relation)
         self.relation = self._constructRelation()
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -6018,14 +6018,14 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             self.methodData = copy.deepcopy(cardinal.methodData)
         except:
             pass
-        self.actions = copy.deepcopy(cardinal.actions)
+        self.actions = copy.copy(cardinal.actions)
         self.order = len(self.actions)
-        self.criteria = copy.deepcopy(cardinal.criteria)
-        self.evaluation = copy.deepcopy(cardinal.evaluation)
-        self.vetos = copy.deepcopy(cardinal.vetos)
+        self.criteria = copy.copy(cardinal.criteria)
+        self.evaluation = copy.copy(cardinal.evaluation)
+        self.vetos = copy.copy(cardinal.vetos)
         self.valuationdomain = {'min':Decimal("-3"), 'med':Decimal("0"), 'max':Decimal("3")}
-        self.cardinalRelation = copy.deepcopy(cardinal.relation)
-        self.cardinalValuationdomain =  copy.deepcopy(cardinal.valuationdomain)
+        self.cardinalRelation = copy.copy(cardinal.relation)
+        self.cardinalValuationdomain =  copy.copy(cardinal.valuationdomain)
         self.relation = self._constructRelation(unanimous, ordinal, cardinal,hasNoVeto=hasNoVeto)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -6579,22 +6579,22 @@ class DissimilarityOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     temporary dissimilarity random graphs
     """
     def __init__(self,filePerfTab=None):
-        import sys
+        import sys,copy
         if filePerfTab == None:
             t = RandomPerformanceTableau()
             filePerfTab = 'randomPerf'
             t.save(filePerfTab)
         perfTab = PerformanceTableau(filePerfTab)
         self.name = 'rel_'+str(filePerfTab)
-        self.actions = perfTab.actions
+        self.actions = copy.copy(perfTab.actions)
         Min = Decimal('0.0')
         Med = Decimal('50.0')
         Max = Decimal('100.0')
         self.valuationdomain = {'min':Min,'med':Med,'max':Max}
         weightPreorder = perfTab.computeWeightPreorder()
         self.relation = self._constructRelation(perfTab.criteria, perfTab.evaluation)
-        self.criteria = perfTab.actions
-        self.evaluation = perfTab.evaluation 
+        self.criteria = copy.copy(perfTab.actions)
+        self.evaluation = copy.copy(perfTab.evaluation) 
         actions = []
         for g in perfTab.criteria:
             actions.append(g)
@@ -6696,14 +6696,14 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph,PerformanceTableau):
             else:
                 perfTab = PerformanceTableau(filePerfTab)
         self.name = 'rel_'+perfTab.name
-        self.actions = copy.deepcopy(perfTab.actions)
+        self.actions = copy.copy(perfTab.actions)
         Min = Decimal('-1.0')
         Med = Decimal('0.0')
         Max = Decimal('1.0')
         self.valuationdomain = {'min':Min,'med':Med,'max':Max}
         weightPreorder = perfTab.computeWeightPreorder()
-        self.criteria = copy.deepcopy(perfTab.criteria)
-        self.evaluation = copy.deepcopy(perfTab.evaluation)
+        self.criteria = copy.copy(perfTab.criteria)
+        self.evaluation = copy.copy(perfTab.evaluation)
         self.relation = self._constructRelation()
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
@@ -6834,14 +6834,14 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                  Threading=False,
                  Debug=False,):
         # getting module ressources and setting the random seed
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         # getting performance tableau
         if argPerfTab == None:
             perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
         elif isinstance(argPerfTab,(str)):
             perfTab = PerformanceTableau(argPerfTab)
         else:
-            perfTab = deepcopy(argPerfTab)
+            perfTab = copy(argPerfTab)
         # initializing the bipolar outranking digraph
         bodg = BipolarOutrankingDigraph(argPerfTab=perfTab,coalition=coalition,\
                                      hasNoVeto = hasNoVeto,\
@@ -6852,21 +6852,21 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.bipolarConfidenceLevel = (confidence/100.0)*2.0 -1.0 
         self.distribution = distribution
         self.betaParameter = betaParameter
-        self.actions = deepcopy(bodg.actions)
+        self.actions = copy(bodg.actions)
         self.order = len(self.actions)
-        self.valuationdomain = deepcopy(bodg.valuationdomain)
-        self.criteria = deepcopy(bodg.criteria)
-        self.evaluation = deepcopy(bodg.evaluation)
+        self.valuationdomain = copy(bodg.valuationdomain)
+        self.criteria = copy(bodg.criteria)
+        self.evaluation = copy(bodg.evaluation)
         if not Threading:
-            self.concordanceRelation = deepcopy(bodg.concordanceRelation)
-            self.vetos = deepcopy(bodg.vetos)
-            self.negativeVetos = deepcopy(bodg.negativeVetos)
+            self.concordanceRelation = copy(bodg.concordanceRelation)
+            self.vetos = copy(bodg.vetos)
+            self.negativeVetos = copy(bodg.negativeVetos)
             self.largePerformanceDifferencesCount =\
-                   deepcopy(bodg.largePerformanceDifferencesCount)
+                   copy(bodg.largePerformanceDifferencesCount)
         self.likelihoods = self.computeCLTLikelihoods(distribution=distribution,
                                                       betaParameter=betaParameter,
-                                                 Threading=Threading,
-                                                    Debug=Debug)
+                                                      Threading=Threading,
+                                                      Debug=Debug)
         self.relation = self._computeConfidentRelation(
             bodg.relation,
             #likelihoodLevel=confidence,
@@ -7134,41 +7134,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         print('\n')
 
 
-##class LikeliBipolarOutrankingDigraph(ConfidentBipolarOutrankingDigraph):
-##    """
-##    Obsolete class name.
-##    """
-##    def __init__(self,argPerfTab=None,
-##                 distribution = 'triangular',
-##                 likelihood = 0.8,
-##                 coalition=None,
-##                 hasNoVeto=False,
-##                 hasBipolarVeto=True,
-##                 Normalized=True,
-##                 Threading=False,
-##                 Debug=False,):
-##
-##        from copy import copy as deepcopy
-##
-##        betaParameter = None
-##        if distribution == "beta(2,2)":
-##            distribution = "beta"
-##            betaParameter = 2
-##        elif  distribution == "beta(4,4)":
-##            distribution = "beta"
-##            betaParameter = 4
-##
-##        g = ConfidentBipolarOutrankingDigraph(argPerfTab=argPerfTab,
-##                                              distribution=distribution,
-##                                              betaParameter=betaParameter,
-##                                              coalition=coalition,
-##                                              hasNoVeto=hasNoVeto,
-##                                              hasBipolarVeto=hasBipolarVeto,
-##                                            Normalized=Normalized,
-##                                            Threading=Threading,
-##                                            Debug=Debug)
-##        self = deepcopy(g)
-        
+#--------------------        
 class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     """
     Stochastic bipolar outranking digraph based on multiple criteria of uncertain significance.
@@ -7204,7 +7170,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                  Debug=False,
                  SeeSampleCounter=False):
         # getting module ressources and setting the random seed
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         if distribution == 'extTriangular':
             from randomNumbers import ExtendedTriangularRandomVariable
         else:
@@ -7227,12 +7193,12 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.name = bodg.name + '_MC'
         self.sampleSize = sampleSize
         self.likelihood = likelihood
-        self.actions = deepcopy(bodg.actions)
+        self.actions = copy(bodg.actions)
         self.order = len(self.actions)
-        self.valuationdomain = deepcopy(bodg.valuationdomain)
-        self.criteria = deepcopy(bodg.criteria)
-        self.evaluation = deepcopy(bodg.evaluation)
-        self.relation = deepcopy(bodg.relation)
+        self.valuationdomain = copy(bodg.valuationdomain)
+        self.criteria = copy(bodg.criteria)
+        self.evaluation = copy(bodg.evaluation)
+        self.relation = copy(bodg.relation)
         
         # normalize valuation to percentages
         self.recodeValuation(-100.0,100.0)
@@ -7345,8 +7311,8 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         # sampled valuations r(x,y) are observed in standard bipolar percentages, i.e. [-100,100]
         # the breaks are left closed integers and go from -100 to 100
         # the quantileId disctionary gives the
-        self.frequency = deepcopy(frequency)
-        self.quantilesId = deepcopy(quantilesId)
+        self.frequency = frequency
+        self.quantilesId = quantilesId
 ##        if Debug:
 ##            print(self.valuationObservations)
         self.gamma = self.gammaSets()
