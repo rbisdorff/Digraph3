@@ -54,11 +54,11 @@ class ExtendedPrudentDigraph(Digraph):
     """
 
     def __init__(self,other,prudentBetaLevel=None,CoDual=False,Debug=False):
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         self.__class__ = other.__class__
         self.name = 'extprud-'+other.name
         try:
-            self.description = deepcopy(other.description)
+            self.description = copy(other.description)
         except AttributeError:
             pass
         try:
@@ -66,7 +66,7 @@ class ExtendedPrudentDigraph(Digraph):
         except AttributeError:
             pass
         try:
-            self.evaluation = deepcopy(other.evaluation)
+            self.evaluation = copy(other.evaluation)
         except AttributeError:
             pass
 
@@ -97,10 +97,10 @@ class ExtendedPrudentDigraph(Digraph):
                         if Debug:
                             print('cx, x,cy, y', cx,x,cy, y, gcdst.relation[cx][cy])
                         stRelation[x][y] = gcdst.relation[cx][cy]
-        self.actions = deepcopy(other.actions)
+        self.actions = copy(other.actions)
         self.order = len(self.actions)
-        self.valuationdomain = deepcopy(gp.valuationdomain)
-        actionsList = list(self.actions)
+        self.valuationdomain = copy(gp.valuationdomain)
+        actionsList = [x for x in self.actions]
         #Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         #Min = self.valuationdomain['min']
@@ -111,14 +111,6 @@ class ExtendedPrudentDigraph(Digraph):
                 if Debug:
                     print('omax([gp.relation[x][y],stRelation[x][y]])',x,y,[gp.relation[x][y],stRelation[x][y]])
                 relation[x][y] = self.omax([gp.relation[x][y],stRelation[x][y]])    
-                ## if gp.relation[y][x] >= Med and stRelation[x][y] >= Med:
-                ##     relation[x][y] = max(gp.relation[y][x],stRelation[x][y])
-                ## elif gp.relation[y][x] <= Med and stRelation[x][y] <= Med:
-                ##     relation[x][y] = min(gp.relation[y][x],stRelation[x][y])
-                ## else:
-                ##     relation[x][y] = Med
-                ## if self.omax([gp.relation[y][x],stRelation[x][y]]) != relation[x][y]:
-                ##     print 'Error!!!'
         self.relation = relation
         if Debug:
             self.showRelationTable()
@@ -135,7 +127,7 @@ class LinearOrder(Digraph):
     """
     def computeOrder(self):
         """
-        shows the linear order of an instance of the LinearOrcer class
+        computes the linear ordering of an instance of the LinearOrcer class
         """
         degrees = []
         for x in [z for z in self.actions]:
@@ -146,6 +138,12 @@ class LinearOrder(Digraph):
             rankedPairsOrder.append(x[1])
         return rankedPairsOrder
 
+    def showOrdering(self):
+        """
+        shows the linearly ordered actions in list format.
+        """
+        print(self.computeOrder())
+        
     def htmlOrder(self):
         """
         returns the html encoded presentation of a linear order
@@ -263,13 +261,14 @@ class RandomLinearOrder(LinearOrder):
     """
     Instantiates random linear orders
     """
-    def __init__(self,numberOfActions=10,Debug=False,OutrankingModel=False):
+    def __init__(self,numberOfActions=10,Debug=False,OutrankingModel=False,seed=None):
         """
         constructor for generating random instances of linear orders with a given number of actions (default=10).
         """
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         from outrankingDigraphs import RandomOutrankingDigraph
         import random
+        random.seed(seed)
         if OutrankingModel:
             g = RandomOutrankingDigraph(numberOfActions=numberOfActions)
         else:
@@ -280,10 +279,10 @@ class RandomLinearOrder(LinearOrder):
         if Debug:
             print(g.actions, actionsList)
         self.name = 'randomLinearOrder'
-        self.actions = deepcopy(g.actions)
+        self.actions = copy(g.actions)
         self.order = len(self.actions)
         self.valuationdomain = deepcopy(g.valuationdomain)
-        self.relation = deepcopy(g.relation)
+        self.relation = copy(g.relation)
         for i in range(self.order):
             x = actionsList[i]
             self.relation[x][x] = self.valuationdomain['med']
@@ -310,7 +309,7 @@ class RankedPairsOrder(LinearOrder):
         the ranked pairs (Lexmin Dias-Lamboray) rule
         Parameter: isExtendedPrudent 
         """
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         # construct ranked pairs
 
         if coDual:
@@ -433,10 +432,10 @@ class RankedPairsOrder(LinearOrder):
                         print('added: (%s,%s) characteristic: %.2f (%.1f)' % (y,x, other.relation[y][x],g.relation[y][x]))
                 
         self.name = other.name + '_ranked'        
-        self.actions = deepcopy(other.actions)
+        self.actions = copy(other.actions)
         self.order = len(self.actions)
-        self.valuationdomain = deepcopy(g.valuationdomain)
-        self.relation = deepcopy(g.relation)
+        self.valuationdomain = copy(g.valuationdomain)
+        self.relation = copy(g.relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         if Debug:
@@ -454,7 +453,7 @@ class KohlerOrder(LinearOrder):
         from a given other digraph following
         the Kohler rule 
         """
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         # construct ranked pairs
         if coDual:
             otherCoDual = CoDualDigraph(other)
@@ -529,10 +528,10 @@ class KohlerOrder(LinearOrder):
 
             
         self.name = other.name + '_ranked'        
-        self.actions = deepcopy(other.actions)
+        self.actions = copy(other.actions)
         self.order = len(self.actions)
-        self.valuationdomain = deepcopy(g.valuationdomain)
-        self.relation = deepcopy(g.relation)
+        self.valuationdomain = copy(g.valuationdomain)
+        self.relation = copy(g.relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         if Debug:
@@ -573,7 +572,7 @@ class BoostedKohlerOrder(KohlerOrder,QuantilesSortingDigraph):
                  Comments=True,
                  Debug=False):
         
-        from copy import copy as deepcopy
+        from copy import copy, deepcopy
         from multiprocessing import cpu_count
         from outrankingDigraphs import BipolarOutrankingDigraph
         from sortingDigraphs import QuantilesSortingDigraph
@@ -628,17 +627,17 @@ class BoostedKohlerOrder(KohlerOrder,QuantilesSortingDigraph):
         # copying the quantiles sorting results
         t0 = time()
         self.name = 'boostedKohler-'+qs.name
-        self.actions = deepcopy(qs.actions)
+        self.actions = copy(qs.actions)
         self.order = len(self.actions)
-        self.criteria = deepcopy(qs.criteria)
-        self.evaluation = deepcopy(qs.evaluation)
-        self.valuationdomain = deepcopy(qs.valuationdomain)
-        self.sortingRelation = deepcopy(qs.relation)
-        self.relation = deepcopy(qs.relation)
-        self.categories = deepcopy(qs.categories)
-        self.limitingQuantiles = deepcopy(qs.limitingQuantiles)
-        self.criteriaCategoryLimits = deepcopy(qs.criteriaCategoryLimits)
-        self.profiles = deepcopy(qs.profiles)
+        self.criteria = copy(qs.criteria)
+        self.evaluation = copy(qs.evaluation)
+        self.valuationdomain = copy(qs.valuationdomain)
+        self.sortingRelation = copy(qs.relation)
+        self.relation = copy(qs.relation)
+        self.categories = copy(qs.categories)
+        self.limitingQuantiles = copy(qs.limitingQuantiles)
+        self.criteriaCategoryLimits = copy(qs.criteriaCategoryLimits)
+        self.profiles = copy(qs.profiles)
         self.runTimes = {'copying': time() - t0}
         if Comments:
             print('execution time: %.4f' % (self.runTimes['copying']))
@@ -788,7 +787,7 @@ class NetFlowsOrder(LinearOrder):
         from a given other digraph following
         the net flows ordering rule
         """
-
+        from copy import copy,deepcopy
         # construct ranked pairs
         if coDual:
             otherCoDual = CoDualDigraph(other)
@@ -800,7 +799,7 @@ class NetFlowsOrder(LinearOrder):
                 print(otherCoDual.valuationdomain)
                 #print netFlows
         else:
-            relation = other.relation
+            relation = copy(other.relation)
             #netFlows = other.computeSingleCriteriaNetflows()
             Max = other.valuationdomain['max']
             if Debug:
@@ -846,7 +845,7 @@ class NetFlowsOrder(LinearOrder):
                 g.relation[y][x] = g.valuationdomain['min']
          
         self.name = other.name + '_ranked'        
-        self.actions = other.actions
+        self.actions = copy(other.actions)
         self.order = len(self.actions)
         self.valuationdomain = g.valuationdomain
         self.relation = g.relation
@@ -854,7 +853,7 @@ class NetFlowsOrder(LinearOrder):
         self.notGamma = self.notGammaSets()
         if Debug:
             self.showRelationTable()
-            print(self.computeOrder())
+            self.showOrdering()
 
 
 ########  instantiates optimal linear orderings
@@ -1052,9 +1051,11 @@ if __name__ == "__main__":
     #t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
     ko = KohlerOrder(g)
+    ko.showOrdering()
     bko = BoostedKohlerOrder(t,strategy="average",Threading=Threading,Debug=False)
     #qr = QuantilesRankingDigraph(t,100,Threading=Threading)
     bko.showSorting()
+    bko.showOrdering()
     #bko.showQuantileOrdering()
     #bko.showHTMLRelationTable(actionsList=bko.computeOrder())
     print(bko.runTimes)
@@ -1064,7 +1065,8 @@ if __name__ == "__main__":
     print(ko.computeOrdinalCorrelation(bko))
     QuantilesRankingDigraph.exportSortingGraphViz(bko)
     nf = NetFlowsOrder(g)
-    nf.showRelationTable()
+    #nf.showRelationTable()
+    nf.showOrdering()
     print(g.computeOrdinalCorrelation(nf))
     
     ## t = RandomRankPerformanceTableau(numberOfActions=20)
