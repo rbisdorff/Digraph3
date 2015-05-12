@@ -3529,7 +3529,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  Debug=False):
         import copy
         if argPerfTab == None:
-            perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
+            print('Performance tableau required !')
+            #perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
         elif isinstance(argPerfTab,(str)):
             perfTab = PerformanceTableau(argPerfTab)
         else:

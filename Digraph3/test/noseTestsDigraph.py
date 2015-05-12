@@ -600,7 +600,8 @@ def testStrongComponentsCollapsedDigraph():
 
 def testCoDualDigraph():
     print('*---- test codual digraph -----*')
-    g = BipolarOutrankingDigraph()
+    t = RandomCBPerformanceTableau(numberOfActions=13,numberOfCriteria=7)
+    g = BipolarOutrankingDigraph(t)
     g.save('testcodual')
     gasym = AsymmetricPartialDigraph(g)
     gasym.exportGraphViz('gtest')
