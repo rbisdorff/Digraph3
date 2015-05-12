@@ -47,7 +47,8 @@ def testDissimilarityDigraph():
 
 def testPolarisedOutrankingDigraph():
     print('==>> Testing PolarisedOutrankingDigraph instantiation')
-    g = BipolarOutrankingDigraph()
+    t = FullRandomPerformanceTableau()
+    g = BipolarOutrankingDigraph(t)
     print(g.valuationdomain)
     ch = PolarisedOutrankingDigraph(g,level=50,AlphaCut=False,KeepValues=True)
     ch.showAll()
@@ -155,7 +156,8 @@ def testRobustoutranking():
 
 def testPairwiseComparisons():
     print('*==>> test show pairwise comparison-------*')
-    g = BipolarOutrankingDigraph()
+    t = RandomPerformanceTableau(numberOfActions=7,numberOfCriteria=5)
+    g = BipolarOutrankingDigraph(t)
     for x in g.actions:
         for y in g.actions:
             g.showPairwiseComparison(x,y)

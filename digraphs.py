@@ -9855,7 +9855,7 @@ class CocaDigraph(Digraph):
                 print(circList, ', average credibility :', degm)
             else:
                 degP,degN,minLink = self.circuitCredibilities(circSet)
-                print(circList, ', marginal credibility :', degP-degN)
+                print(circList, ', marginal credibility :', degP+degN)
                 x = minLink[0]
                 y = minLink[1]
                 print('minimal link: ', minLink, self.relation[x][y],self.relation[y][x]) 
@@ -10033,7 +10033,7 @@ class OldCocaDigraph(Digraph):
                 print(circList, ', average credibility :', degm)
             else:
                 degP,degN,minLink = self.circuitCredibilities(circSet)
-                print(circList, ', marginal credibility :', degP-degN)
+                print(circList, ', marginal credibility :', degP+degN)
             
         print('Coca graph of order %d with %d odd chordles circuits.' % (len(self.actions), len(self.circuitsList)))
         #print len(aself.circuitsList),' cirduits
