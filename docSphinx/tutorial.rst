@@ -1770,7 +1770,7 @@ The RandomRankPerformanceTableau generator
 Random generator for multiple criteria ranked (without ties) performances of a
 given number of decision actions. On each criterion,
 all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is
-matching the RandomLinearVotingProfiles class (see the votingDigraphs module)  
+matching the `RandomLinearVotingProfile <techDoc.html#votingDigraphs>` class provided by  the votingDigraphs module.  
         
 *Parameters*:
     * number of actions,
