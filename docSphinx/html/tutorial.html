@@ -3061,17 +3061,24 @@ linearBallot = {
 <div class="contents local topic" id="id28">
 <ul class="simple">
 <li><a class="reference internal" href="#the-randomperftabs-module" id="id79">The randomPerfTabs module</a></li>
-<li><a class="reference internal" href="#the-randomperformancetableau-model" id="id80">The RandomPerformanceTableau model</a></li>
-<li><a class="reference internal" href="#the-randomrankperformancetableau-generator" id="id81">The RandomRankPerformanceTableau generator</a></li>
+<li><a class="reference internal" href="#the-randomperformancetableau-generator" id="id80">The <cite>RandomPerformanceTableau</cite> generator</a></li>
+<li><a class="reference internal" href="#the-randomrankperformancetableau-generator" id="id81">The <cite>RandomRankPerformanceTableau</cite> generator</a></li>
 </ul>
 </div>
 <div class="section" id="the-randomperftabs-module">
-<h3><a class="toc-backref" href="#id79">The randomPerfTabs module</a><a class="headerlink" href="#the-randomperftabs-module" title="Permalink to this headline">¶</a></h3>
-<p>This module (see technical reference) provides for generators of random performance tableaux for testing methods and tools presented and discussed in the Algorithmic Decision Theory cours at the University of Luxembourg.</p>
-<p>The simplest model called RandomPerformaceTableau generates a set of <em>n</em> decision actions, a set of <em>m</em> real-valued performance criteria, ranging from 0.0 to 100.0, with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale.</p>
+<h3>The <a class="reference external" href="techDoc.html#randomPerfTabs">randomPerfTabs</a> module<a class="headerlink" href="#the-randomperftabs-module" title="Permalink to this headline">¶</a></h3>
+<p>This module provides several  random performance tableaux generators, mainly for the purpose of testing implemented versions of methods and tools presented and discussed in the Algorithmic Decision Theory cours at the University of Luxembourg.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>The simplest model called <cite>RandomPerformaceTableau</cite> generates a set of <em>n</em> decision actions, a set of <em>m</em> real-valued performance criteria, ranging from 0.0 to 100.0, with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale.</li>
+<li>In order to study aggregation of linear orders, we provide a model called <cite>RandomRankPerformanceTableau</cite> which provides lineraly ordered performances without ties on multple criteria for a given number of decision actions.</li>
+<li>The most useful random generator, called <cite>RandomCBPerformanceTableau</cite>, proposes a two decision objectives, named <em>Costs</em> (to be mimized) and Benefits (to be maximized), performance tableau model, in order to generate more or less contradictory performances on these objectives. Low costs will be randomly coupled with low benefits, whereas high costs will be randomly coupled with high benefits.</li>
+<li>Multiple objectives models are also available via a generator, called <cite>RandomCoalitionsPerformanceTableau</cite>, for multiple criteria coalitions based performances.</li>
+</ol>
+</div></blockquote>
 </div>
-<div class="section" id="the-randomperformancetableau-model">
-<h3><a class="toc-backref" href="#id80">The RandomPerformanceTableau model</a><a class="headerlink" href="#the-randomperformancetableau-model" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="the-randomperformancetableau-generator">
+<h3><a class="toc-backref" href="#id80">The <cite>RandomPerformanceTableau</cite> generator</a><a class="headerlink" href="#the-randomperformancetableau-generator" title="Permalink to this headline">¶</a></h3>
 <p>The RandomPerformanceTableau generator, the simplest of the kind, specializes the PerformanceTableau class and takes the following parameters:</p>
 <blockquote>
 <div><ul>
@@ -3163,11 +3170,11 @@ linearBallot = {
 </dl>
 </div>
 <div class="section" id="the-randomrankperformancetableau-generator">
-<h3><a class="toc-backref" href="#id81">The RandomRankPerformanceTableau generator</a><a class="headerlink" href="#the-randomrankperformancetableau-generator" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id81">The <cite>RandomRankPerformanceTableau</cite> generator</a><a class="headerlink" href="#the-randomrankperformancetableau-generator" title="Permalink to this headline">¶</a></h3>
 <p>Random generator for multiple criteria ranked (without ties) performances of a
 given number of decision actions. On each criterion,
 all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is
-matching the <cite>RandomLinearVotingProfile &lt;techDoc.html#votingDigraphs&gt;</cite> class provided by  the votingDigraphs module.</p>
+matching the <cite>RandomLinearVotingProfile</cite> class provided by  the <a class="reference external" href="techDoc.html#votingDigraphs">votingDigraphs</a> module.</p>
 <dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last">
@@ -3353,8 +3360,8 @@ matching the <cite>RandomLinearVotingProfile &lt;techDoc.html#votingDigraphs&gt;
 </li>
 <li><a class="reference internal" href="#generating-random-performance-tableaux">Generating random performance tableaux</a><ul>
 <li><a class="reference internal" href="#the-randomperftabs-module">The randomPerfTabs module</a></li>
-<li><a class="reference internal" href="#the-randomperformancetableau-model">The RandomPerformanceTableau model</a></li>
-<li><a class="reference internal" href="#the-randomrankperformancetableau-generator">The RandomRankPerformanceTableau generator</a></li>
+<li><a class="reference internal" href="#the-randomperformancetableau-generator">The <cite>RandomPerformanceTableau</cite> generator</a></li>
+<li><a class="reference internal" href="#the-randomrankperformancetableau-generator">The <cite>RandomRankPerformanceTableau</cite> generator</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#links-and-appendices">Links and appendices</a><ul>

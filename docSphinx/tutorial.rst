@@ -1708,17 +1708,19 @@ Generating random performance tableaux
 ..
    See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
 
-The randomPerfTabs module
-.........................
+The `randomPerfTabs <techDoc.html#randomPerfTabs>`_ module
+..........................................................
 
-This module (see technical reference) provides for generators of random performance tableaux for testing methods and tools presented and discussed in the Algorithmic Decision Theory cours at the University of Luxembourg.
+This module provides several  random performance tableaux generators, mainly for the purpose of testing implemented versions of methods and tools presented and discussed in the Algorithmic Decision Theory cours at the University of Luxembourg.
 
-The simplest model called RandomPerformaceTableau generates a set of *n* decision actions, a set of *m* real-valued performance criteria, ranging from 0.0 to 100.0, with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale. 
-
+    1. The simplest model called `RandomPerformaceTableau` generates a set of *n* decision actions, a set of *m* real-valued performance criteria, ranging from 0.0 to 100.0, with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale. 
+    2. In order to study aggregation of linear orders, we provide a model called `RandomRankPerformanceTableau` which provides lineraly ordered performances without ties on multple criteria for a given number of decision actions.
+    3. The most useful random generator, called `RandomCBPerformanceTableau`, proposes a two decision objectives, named *Costs* (to be mimized) and Benefits (to be maximized), performance tableau model, in order to generate more or less contradictory performances on these objectives. Low costs will be randomly coupled with low benefits, whereas high costs will be randomly coupled with high benefits. 
+    4. Multiple objectives models are also available via a generator, called `RandomCoalitionsPerformanceTableau`, for multiple criteria coalitions based performances.
  
 
-The RandomPerformanceTableau model
-..................................
+The `RandomPerformanceTableau` generator
+........................................
     
 The RandomPerformanceTableau generator, the simplest of the kind, specializes the PerformanceTableau class and takes the following parameters:
 
@@ -1764,13 +1766,13 @@ Code example:
                     }
             }
 
-The RandomRankPerformanceTableau generator
-..........................................
+The `RandomRankPerformanceTableau` generator
+............................................
 
 Random generator for multiple criteria ranked (without ties) performances of a
 given number of decision actions. On each criterion,
 all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is
-matching the `RandomLinearVotingProfile <techDoc.html#votingDigraphs>` class provided by  the votingDigraphs module.  
+matching the `RandomLinearVotingProfile` class provided by  the `votingDigraphs <techDoc.html#votingDigraphs>`_ module.  
         
 *Parameters*:
     * number of actions,
