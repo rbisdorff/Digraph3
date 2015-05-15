@@ -1363,34 +1363,34 @@ The performance evaluations of each decision alternative on each criterion are g
                                Threading=False,
                                Debug=False):
         """
-        Renders the Brewer RdYlGn 9-colored heatmap of the performance table
+        Renders the Brewer RdYlGn colored heatmap of the performance table
         actions x criteria in dictionary format. For a performance tableau
         with 5 criteria, colorLevels=5 and Correlations = True, one obtains for instance
         the following ordered dictionary in return::
 
             OrderedDict([
             ('title', 'Performance Heatmap'),
-            ('colorPalette', [(Decimal('0.2'), '"#FDAE61"', 'q1'),
-                              (Decimal('0.4'), '"#FEE08B"', 'q2'),
-                              (Decimal('0.6'), '"#FFFFBF"', 'q3'),
-                              (Decimal('0.8'), '"#D9EF8B"', 'q4'),
-                              (Decimal('1.0'), '"#A6D96A"', 'q5')]),
+            ('colorPalette', [(Decimal('0.2'), '"#FDAE61"', 'q5-1'),
+                              (Decimal('0.4'), '"#FEE08B"', 'q5-2'),
+                              (Decimal('0.6'), '"#FFFFBF"', 'q5-3'),
+                              (Decimal('0.8'), '"#D9EF8B"', 'q5-4'),
+                              (Decimal('1.0'), '"#A6D96A"', 'q5-5')]),
             ('criteriaList', ['g5', 'g2', 'g4', 'g1', 'g3']),
             ('criteriaCorrelations', [Decimal('0.71428'),
                                       Decimal('0.48571'),
                                       Decimal('0.40952'),
                                       Decimal('0.35238'),
                                       Decimal('0.16190')]),
-            ('quantiles', OrderedDict([('a1', [(Decimal('3'), 'q2'),
-                                               (Decimal('-17.92'), 'q5'),
-                                               (Decimal('26.68'), 'q2'),
-                                               (Decimal('1'), 'q1'),
-                                               (Decimal('-33.99'), 'q3')]),
-                                       ('a2', [(Decimal('6'), 'q3'),
-                                               (Decimal('-30.71'), 'q5'),
-                                               (Decimal('66.35'), 'q4'),
-                                               (Decimal('8'), 'q5'),
-                                               (Decimal('-77.77'), 'q2')]),
+            ('quantiles', OrderedDict([('a1', [(Decimal('3'), 'q5-2'),
+                                               (Decimal('-17.92'), 'q5-5'),
+                                               (Decimal('26.68'), 'q5-2'),
+                                               (Decimal('1'), 'q5-1'),
+                                               (Decimal('-33.99'), 'q5-3')]),
+                                       ('a2', [(Decimal('6'), 'q5-3'),
+                                               (Decimal('-30.71'), 'q5-5'),
+                                               (Decimal('66.35'), 'q5-4'),
+                                               (Decimal('8'), 'q5-5'),
+                                               (Decimal('-77.77'), 'q5-2')]),
                                        ('a3', ...
             ...
             ])
@@ -1402,30 +1402,30 @@ The performance evaluations of each decision alternative on each criterion are g
         heatmap = OrderedDict()
         heatmap['title'] = title
                   
-        brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#D53E4F"','q1'),
-                               (Decimal('0.2222'),'"#F46D43"','q2'),
-                               (Decimal('0.3333'),'"#FDAE61"','q3'),
-                               (Decimal('0.4444'),'"#FEE08B"','q4'),
-                               (Decimal('0.5555'),'"#FFFFBF"','q5'),
-                               (Decimal('0.6666'),'"#D9EF8B"','q6'),
-                               (Decimal('0.7777'),'"#A6D96A"','q7'),
-                               (Decimal('0.8888'),'"#65BD63"','q8'),
-                               (Decimal('1.0000'),'"#1A9850"','q9')]
+        brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#D53E4F"','q9-1'),
+                               (Decimal('0.2222'),'"#F46D43"','q9-2'),
+                               (Decimal('0.3333'),'"#FDAE61"','q9-3'),
+                               (Decimal('0.4444'),'"#FEE08B"','q9-4'),
+                               (Decimal('0.5555'),'"#FFFFBF"','q9-5'),
+                               (Decimal('0.6666'),'"#D9EF8B"','q9-6'),
+                               (Decimal('0.7777'),'"#A6D96A"','q9-7'),
+                               (Decimal('0.8888'),'"#65BD63"','q9-8'),
+                               (Decimal('1.0000'),'"#1A9850"','q9-9')]
         brewerRdYlGn7Colors = [
-                               (Decimal('0.1429'),'"#F46D43"','q1'),
-                               (Decimal('0.2857'),'"#FDAE61"','q2'),
-                               (Decimal('0.4286'),'"#FEE08B"','q3'),
-                               (Decimal('0.5714'),'"#FFFFBF"','q4'),
-                               (Decimal('0.7143'),'"#D9EF8B"','q5'),
-                               (Decimal('0.8571'),'"#A6D96A"','q6'),
-                               (Decimal('1.0000'),'"#65BD63"','q7')
+                               (Decimal('0.1429'),'"#F46D43"','q7-1'),
+                               (Decimal('0.2857'),'"#FDAE61"','q7-2'),
+                               (Decimal('0.4286'),'"#FEE08B"','q7-3'),
+                               (Decimal('0.5714'),'"#FFFFBF"','q7-4'),
+                               (Decimal('0.7143'),'"#D9EF8B"','q7-5'),
+                               (Decimal('0.8571'),'"#A6D96A"','q7-6'),
+                               (Decimal('1.0000'),'"#65BD63"','q7-7')
                                ]
         brewerRdYlGn5Colors = [
-                               (Decimal('0.2'),'"#FDAE61"','q1'),
-                               (Decimal('0.4'),'"#FEE08B"','q2'),
-                               (Decimal('0.6'),'"#FFFFBF"','q3'),
-                               (Decimal('0.8'),'"#D9EF8B"','q4'),
-                               (Decimal('1.0'),'"#A6D96A"','q5')
+                               (Decimal('0.2'),'"#FDAE61"','q5-1'),
+                               (Decimal('0.4'),'"#FEE08B"','q5-2'),
+                               (Decimal('0.6'),'"#FFFFBF"','q5-3'),
+                               (Decimal('0.8'),'"#D9EF8B"','q5-4'),
+                               (Decimal('1.0'),'"#A6D96A"','q5-5')
                                ]
         if colorLevels == 7:
             colorPalette = brewerRdYlGn7Colors

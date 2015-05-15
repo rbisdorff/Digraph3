@@ -1082,7 +1082,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3255,7 +3255,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3286,33 +3286,33 @@ evaluation scale. Therefore the performance tableau is normalized to 0.0-100.0 s
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computePerformanceHeatmap">
 <code class="descname">computePerformanceHeatmap</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>actionsList=None</em>, <em>ndigits=2</em>, <em>colorLevels=7</em>, <em>title='Performance Heatmap'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computePerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the Brewer RdYlGn 9-colored heatmap of the performance table
+<dd><p>Renders the Brewer RdYlGn colored heatmap of the performance table
 actions x criteria in dictionary format. For a performance tableau
 with 5 criteria, colorLevels=5 and Correlations = True, one obtains for instance
 the following ordered dictionary in return:</p>
 <div class="highlight-python"><div class="highlight"><pre>OrderedDict([
 (&#39;title&#39;, &#39;Performance Heatmap&#39;),
-(&#39;colorPalette&#39;, [(Decimal(&#39;0.2&#39;), &#39;&quot;#FDAE61&quot;&#39;, &#39;q1&#39;),
-                  (Decimal(&#39;0.4&#39;), &#39;&quot;#FEE08B&quot;&#39;, &#39;q2&#39;),
-                  (Decimal(&#39;0.6&#39;), &#39;&quot;#FFFFBF&quot;&#39;, &#39;q3&#39;),
-                  (Decimal(&#39;0.8&#39;), &#39;&quot;#D9EF8B&quot;&#39;, &#39;q4&#39;),
-                  (Decimal(&#39;1.0&#39;), &#39;&quot;#A6D96A&quot;&#39;, &#39;q5&#39;)]),
+(&#39;colorPalette&#39;, [(Decimal(&#39;0.2&#39;), &#39;&quot;#FDAE61&quot;&#39;, &#39;q5-1&#39;),
+                  (Decimal(&#39;0.4&#39;), &#39;&quot;#FEE08B&quot;&#39;, &#39;q5-2&#39;),
+                  (Decimal(&#39;0.6&#39;), &#39;&quot;#FFFFBF&quot;&#39;, &#39;q5-3&#39;),
+                  (Decimal(&#39;0.8&#39;), &#39;&quot;#D9EF8B&quot;&#39;, &#39;q5-4&#39;),
+                  (Decimal(&#39;1.0&#39;), &#39;&quot;#A6D96A&quot;&#39;, &#39;q5-5&#39;)]),
 (&#39;criteriaList&#39;, [&#39;g5&#39;, &#39;g2&#39;, &#39;g4&#39;, &#39;g1&#39;, &#39;g3&#39;]),
 (&#39;criteriaCorrelations&#39;, [Decimal(&#39;0.71428&#39;),
                           Decimal(&#39;0.48571&#39;),
                           Decimal(&#39;0.40952&#39;),
                           Decimal(&#39;0.35238&#39;),
                           Decimal(&#39;0.16190&#39;)]),
-(&#39;quantiles&#39;, OrderedDict([(&#39;a1&#39;, [(Decimal(&#39;3&#39;), &#39;q2&#39;),
-                                   (Decimal(&#39;-17.92&#39;), &#39;q5&#39;),
-                                   (Decimal(&#39;26.68&#39;), &#39;q2&#39;),
-                                   (Decimal(&#39;1&#39;), &#39;q1&#39;),
-                                   (Decimal(&#39;-33.99&#39;), &#39;q3&#39;)]),
-                           (&#39;a2&#39;, [(Decimal(&#39;6&#39;), &#39;q3&#39;),
-                                   (Decimal(&#39;-30.71&#39;), &#39;q5&#39;),
-                                   (Decimal(&#39;66.35&#39;), &#39;q4&#39;),
-                                   (Decimal(&#39;8&#39;), &#39;q5&#39;),
-                                   (Decimal(&#39;-77.77&#39;), &#39;q2&#39;)]),
+(&#39;quantiles&#39;, OrderedDict([(&#39;a1&#39;, [(Decimal(&#39;3&#39;), &#39;q5-2&#39;),
+                                   (Decimal(&#39;-17.92&#39;), &#39;q5-5&#39;),
+                                   (Decimal(&#39;26.68&#39;), &#39;q5-2&#39;),
+                                   (Decimal(&#39;1&#39;), &#39;q5-1&#39;),
+                                   (Decimal(&#39;-33.99&#39;), &#39;q5-3&#39;)]),
+                           (&#39;a2&#39;, [(Decimal(&#39;6&#39;), &#39;q5-3&#39;),
+                                   (Decimal(&#39;-30.71&#39;), &#39;q5-5&#39;),
+                                   (Decimal(&#39;66.35&#39;), &#39;q5-4&#39;),
+                                   (Decimal(&#39;8&#39;), &#39;q5-5&#39;),
+                                   (Decimal(&#39;-77.77&#39;), &#39;q5-2&#39;)]),
                            (&#39;a3&#39;, ...
 ...
 ])
@@ -3903,7 +3903,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
