@@ -1723,7 +1723,6 @@ The `RandomPerformanceTableau <techDoc.html#randomPerfTabs.RandomPerformanceTabl
 ................................................................................................
     
 The ``RandomPerformanceTableau generator``, the simplest of the kind, specializes the ``PerformanceTableau`` class and takes the following parameters:
-
     * numberOfActions := nbr of decision actions.
     * numberOfCriteria := number performance criteria.
     * weightDistribution := 'random' (default) | 'fixed' | 'equisignificant'.
@@ -1798,6 +1797,77 @@ The generation of random *Cost* versus *Benefit* oriented performance tableaux f
     * The sum of weights of the cost criteria by default equals the sum weights of the benefit criteria: weighDistribution = 'equiobjectives'. 
     * On cardinal criteria, both of cost or of benefit type, we observe following constant preference discrimination quantiles: 5\% indifferent situations, 90\% strict preference situations, and 5\% veto situation. 
  
+Example Python session:
+    >>> from randomPerfTabs import RandomCBPerformanceTableau
+    >>> t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,weightDistribution='equiobjectives',seed=100)
+    >>> t.showActions()
+    *----- show decision action --------------*
+    key:  a1
+      short name: a1
+      name:       random cheap decision action
+    key:  a2
+      short name: a2
+      name:       random neutral decision action
+    ...
+    key:  a7
+      short name: a7
+      name:       random advantageous decision action
+    >>> t.showCriteria()
+    *----  criteria -----*
+    g1 'random ordinal benefit criterion'
+      Scale = (0, 10)
+      Weight = 0.167 
+    g2 'random cardinal cost criterion'
+      Scale = (0.0, 100.0)
+      Weight = 0.250 
+      Threshold ind  :  1.76 + 0.00x ; percentile:  0.095
+      Threshold pref :  2.16 + 0.00x ; percentile:  0.143
+      Threshold veto : 73.19 + 0.00x ; percentile:  0.952
+    ...
+
+In this example we notice the three types of decision actions, as well as two types of criteria with either an ordinal or a cardinal performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the *indifference* and 10% below the *preference* discrimanting threshold. About 5% will be considered as *considerably large*. More statistics about the generated performances is available as follows:
+
+    >>> t.showStatistics()
+    *-------- Performance tableau summary statistics -------*
+    Instance name      : randomCBperftab
+    #Actions           : 7
+    #Criteria          : 5
+    *Statistics per Criterion*
+    Criterion name       : g1
+      Criterion weight     : 2
+      criterion scale    : 0.00 - 10.00
+      mean evaluation    : 5.14
+      standard deviation : 2.64
+      maximal evaluation : 8.00
+      quantile Q3 (x_75) : 8.00
+      median evaluation  : 6.50
+      quantile Q1 (x_25) : 3.50
+      minimal evaluation : 1.00
+      mean absolute difference      : 2.94
+      standard difference deviation : 3.74
+    Criterion name       : g2
+      Criterion weight     : 3
+      criterion scale    : -100.00 - 0.00
+      mean evaluation    : -49.32
+      standard deviation : 27.59
+      maximal evaluation : 0.00
+      quantile Q3 (x_75) : -27.51
+      median evaluation  : -35.98
+      quantile Q1 (x_25) : -54.02
+      minimal evaluation : -91.87
+      mean absolute difference      : 28.72
+      standard difference deviation : 39.02
+    ...
+
+A colored heatmap version is also provided:
+    
+    >>> t.showHTMLPerformanceHeatmap(Ranked=False)
+
+.. image:: randomCBHeatmap.png
+   :width: 300 px
+   :align: center
+
+
 *Parameters*:
     * If *numberOfActions* == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated
     * If *numberOfCriteria* == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated
@@ -1810,6 +1880,11 @@ The generation of random *Cost* versus *Benefit* oriented performance tableaux f
 .. warning::
 
     Minimal number of decision actions required is 3 ! 
+
+
+
+ 
+
 
 Back to :ref:`Tutorial-label`
 

@@ -3080,9 +3080,9 @@ linearBallot = {
 </div>
 <div class="section" id="the-randomperformancetableau-generator">
 <h3>The <a class="reference external" href="techDoc.html#randomPerfTabs.RandomPerformanceTableau">RandomPerformanceTableau</a> generator<a class="headerlink" href="#the-randomperformancetableau-generator" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal"><span class="pre">RandomPerformanceTableau</span> <span class="pre">generator</span></code>, the simplest of the kind, specializes the <code class="docutils literal"><span class="pre">PerformanceTableau</span></code> class and takes the following parameters:</p>
-<blockquote>
-<div><ul>
+<dl class="docutils">
+<dt>The <code class="docutils literal"><span class="pre">RandomPerformanceTableau</span> <span class="pre">generator</span></code>, the simplest of the kind, specializes the <code class="docutils literal"><span class="pre">PerformanceTableau</span></code> class and takes the following parameters:</dt>
+<dd><ul class="first last">
 <li><p class="first">numberOfActions := nbr of decision actions.</p>
 </li>
 <li><p class="first">numberOfCriteria := number performance criteria.</p>
@@ -3121,8 +3121,7 @@ linearBallot = {
 <li><p class="first">valueDigits := &lt;integer&gt;, precision of performance measurements (2 decimal digits by default).</p>
 </li>
 </ul>
-</div></blockquote>
-<dl class="docutils">
+</dd>
 <dt>Code example:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -3216,6 +3215,132 @@ matching the <code class="docutils literal"><span class="pre">RandomLinearVoting
 <li>On cardinal criteria, both of cost or of benefit type, we observe following constant preference discrimination quantiles: 5% indifferent situations, 90% strict preference situations, and 5% veto situation.</li>
 </ul>
 </div></blockquote>
+<dl class="docutils">
+<dt>Example Python session:</dt>
+<dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s">&#39;equiobjectives&#39;</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
+<span class="go">*----- show decision action --------------*</span>
+<span class="go">key:  a1</span>
+<span class="go">  short name: a1</span>
+<span class="go">  name:       random cheap decision action</span>
+<span class="go">key:  a2</span>
+<span class="go">  short name: a2</span>
+<span class="go">  name:       random neutral decision action</span>
+<span class="gp">...</span>
+<span class="go">key:  a7</span>
+<span class="go">  short name: a7</span>
+<span class="go">  name:       random advantageous decision action</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
+<span class="go">*----  criteria -----*</span>
+<span class="go">g1 &#39;random ordinal benefit criterion&#39;</span>
+<span class="go">  Scale = (0, 10)</span>
+<span class="go">  Weight = 0.167</span>
+<span class="go">g2 &#39;random cardinal cost criterion&#39;</span>
+<span class="go">  Scale = (0.0, 100.0)</span>
+<span class="go">  Weight = 0.250</span>
+<span class="go">  Threshold ind  :  1.76 + 0.00x ; percentile:  0.095</span>
+<span class="go">  Threshold pref :  2.16 + 0.00x ; percentile:  0.143</span>
+<span class="go">  Threshold veto : 73.19 + 0.00x ; percentile:  0.952</span>
+<span class="gp">...</span>
+</pre></div>
+</td></tr></table></div>
+</dd>
+</dl>
+<p>In this example we notice the three types of decision actions, as well as two types of criteria with either an ordinal or a cardinal performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the <em>indifference</em> and 10% below the <em>preference</em> discrimanting threshold. About 5% will be considered as <em>considerably large</em>. More statistics about the generated performances is available as follows:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showStatistics</span><span class="p">()</span>
+<span class="go">*-------- Performance tableau summary statistics -------*</span>
+<span class="go">Instance name      : randomCBperftab</span>
+<span class="go">#Actions           : 7</span>
+<span class="go">#Criteria          : 5</span>
+<span class="go">*Statistics per Criterion*</span>
+<span class="go">Criterion name       : g1</span>
+<span class="go">  Criterion weight     : 2</span>
+<span class="go">  criterion scale    : 0.00 - 10.00</span>
+<span class="go">  mean evaluation    : 5.14</span>
+<span class="go">  standard deviation : 2.64</span>
+<span class="go">  maximal evaluation : 8.00</span>
+<span class="go">  quantile Q3 (x_75) : 8.00</span>
+<span class="go">  median evaluation  : 6.50</span>
+<span class="go">  quantile Q1 (x_25) : 3.50</span>
+<span class="go">  minimal evaluation : 1.00</span>
+<span class="go">  mean absolute difference      : 2.94</span>
+<span class="go">  standard difference deviation : 3.74</span>
+<span class="go">Criterion name       : g2</span>
+<span class="go">  Criterion weight     : 3</span>
+<span class="go">  criterion scale    : -100.00 - 0.00</span>
+<span class="go">  mean evaluation    : -49.32</span>
+<span class="go">  standard deviation : 27.59</span>
+<span class="go">  maximal evaluation : 0.00</span>
+<span class="go">  quantile Q3 (x_75) : -27.51</span>
+<span class="go">  median evaluation  : -35.98</span>
+<span class="go">  quantile Q1 (x_25) : -54.02</span>
+<span class="go">  minimal evaluation : -91.87</span>
+<span class="go">  mean absolute difference      : 28.72</span>
+<span class="go">  standard difference deviation : 39.02</span>
+<span class="gp">...</span>
+</pre></div>
+</td></tr></table></div>
+<p>A colored heatmap version is also provided:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Ranked</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/randomCBHeatmap.png"><img alt="_images/randomCBHeatmap.png" class="align-center" src="_images/randomCBHeatmap.png" style="width: 300px;" /></a>
 <dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
