@@ -1713,12 +1713,14 @@ The randomPerfTabs module
 
 This module (see technical reference) provides for generators of random performance tableaux for testing methods and tools presented and discussed in the Algorithmic Decision Theory cours at the University of Luxembourg.
 
-The simplest model called RandomPerformaceTableau generates a set of *n* decision actions, a set of *m* real-valued performance criteria, ranging from 0.0 to 100.0, with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale.  
+The simplest model called RandomPerformaceTableau generates a set of *n* decision actions, a set of *m* real-valued performance criteria, ranging from 0.0 to 100.0, with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale. 
+
+ 
 
 The RandomPerformanceTableau model
 ..................................
     
-The RandomPerformanceTableau generator specializes the PerformanceTableau class and takes the following parameters:
+The RandomPerformanceTableau generator, the simplest of the kind, specializes the PerformanceTableau class and takes the following parameters:
 
     * numberOfActions := nbr of decision actions.
     * numberOfCriteria := number performance criteria.
@@ -1739,7 +1741,7 @@ The RandomPerformanceTableau generator specializes the PerformanceTableau class 
          | ('beta',alpha,beta), a beta genarator with standard alpha and beta parameters.
     * valueDigits := <integer>, precision of performance measurements (2 decimal digits by default).
         
-Code example::
+Code example:
         >>> from randomPerfTabs import RandomPerformanceTableau
         >>> t = RandomPerformanceTableau(numberOfActions=3,numberOfCriteria=1,seed=100)
         >>> t.actions
@@ -1762,7 +1764,27 @@ Code example::
                     }
             }
 
+The RandomRankPerformanceTableau generator
+..........................................
 
+Random generator for multiple criteria ranked (without ties) performances of a
+given number of decision actions. On each criterion,
+all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is
+matching the RandomLinearVotingProfiles class (see the votingDigraphs module)  
+        
+*Parameters*:
+    * number of actions,
+    * number of performance criteria,
+    * weightDistribution := equisignificant | random (default, see RandomPerformanceTableau above)
+    * weightScale := (1, 1 | numberOfCriteria (default when random))
+    * integerWeights := Boolean (True = default) 
+    * commonThresholds (default) := {
+        | 'ind':(0,0),
+        | 'pref':(1,0),
+        | 'veto':(numberOfActions,0)
+        | } (default)
+
+Back to :ref:`Tutorial-label`
 
 Links and appendices
 --------------------

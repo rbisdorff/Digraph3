@@ -3062,6 +3062,7 @@ linearBallot = {
 <ul class="simple">
 <li><a class="reference internal" href="#the-randomperftabs-module" id="id79">The randomPerfTabs module</a></li>
 <li><a class="reference internal" href="#the-randomperformancetableau-model" id="id80">The RandomPerformanceTableau model</a></li>
+<li><a class="reference internal" href="#the-randomrankperformancetableau-generator" id="id81">The RandomRankPerformanceTableau generator</a></li>
 </ul>
 </div>
 <div class="section" id="the-randomperftabs-module">
@@ -3071,7 +3072,7 @@ linearBallot = {
 </div>
 <div class="section" id="the-randomperformancetableau-model">
 <h3><a class="toc-backref" href="#id80">The RandomPerformanceTableau model</a><a class="headerlink" href="#the-randomperformancetableau-model" title="Permalink to this headline">¶</a></h3>
-<p>The RandomPerformanceTableau generator specializes the PerformanceTableau class and takes the following parameters:</p>
+<p>The RandomPerformanceTableau generator, the simplest of the kind, specializes the PerformanceTableau class and takes the following parameters:</p>
 <blockquote>
 <div><ul>
 <li><p class="first">numberOfActions := nbr of decision actions.</p>
@@ -3114,7 +3115,7 @@ linearBallot = {
 </ul>
 </div></blockquote>
 <dl class="docutils">
-<dt>Code example::</dt>
+<dt>Code example:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3160,6 +3161,41 @@ linearBallot = {
 </td></tr></table></div>
 </dd>
 </dl>
+</div>
+<div class="section" id="the-randomrankperformancetableau-generator">
+<h3><a class="toc-backref" href="#id81">The RandomRankPerformanceTableau generator</a><a class="headerlink" href="#the-randomrankperformancetableau-generator" title="Permalink to this headline">¶</a></h3>
+<p>Random generator for multiple criteria ranked (without ties) performances of a
+given number of decision actions. On each criterion,
+all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is
+matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last">
+<li><p class="first">number of actions,</p>
+</li>
+<li><p class="first">number of performance criteria,</p>
+</li>
+<li><p class="first">weightDistribution := equisignificant | random (default, see RandomPerformanceTableau above)</p>
+</li>
+<li><p class="first">weightScale := (1, 1 | numberOfCriteria (default when random))</p>
+</li>
+<li><p class="first">integerWeights := Boolean (True = default)</p>
+</li>
+<li><dl class="first docutils">
+<dt>commonThresholds (default) := {</dt>
+<dd><div class="first last line-block">
+<div class="line">&#8216;ind&#8217;:(0,0),</div>
+<div class="line">&#8216;pref&#8217;:(1,0),</div>
+<div class="line">&#8216;veto&#8217;:(numberOfActions,0)</div>
+<div class="line">} (default)</div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p>Back to <a class="reference internal" href="#tutorial-label"><span>Tutorials of the Digraph3 resources</span></a></p>
 </div>
 </div>
 <div class="section" id="links-and-appendices">
@@ -3318,6 +3354,7 @@ linearBallot = {
 <li><a class="reference internal" href="#generating-random-performance-tableaux">Generating random performance tableaux</a><ul>
 <li><a class="reference internal" href="#the-randomperftabs-module">The randomPerfTabs module</a></li>
 <li><a class="reference internal" href="#the-randomperformancetableau-model">The RandomPerformanceTableau model</a></li>
+<li><a class="reference internal" href="#the-randomrankperformancetableau-generator">The RandomRankPerformanceTableau generator</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#links-and-appendices">Links and appendices</a><ul>

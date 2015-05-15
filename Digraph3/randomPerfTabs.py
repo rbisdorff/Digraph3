@@ -325,7 +325,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
         * weightDistribution := equisignificant | random (default, see RandomPerformanceTableau)
         * weightScale := (1, 1 | numberOfCriteria (default when random))
         * integerWeights := Boolean (True = default) 
-        * commonThresholds (deafult) := {
+        * commonThresholds (default) := {
             | 'ind':(0,0),
             | 'pref':(1,0),
             | 'veto':(numberOfActions,0)
