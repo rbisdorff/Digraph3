@@ -1711,7 +1711,7 @@ Generating random performance tableaux
 The `randomPerfTabs <techDoc.html#randomPerfTabs>`_ module
 ..........................................................
 
-This module provides several random performance tableaux generators, i.e. PerformanceTableau class instances (see the `perfTabs <techDoc.html#perfTabs-label>`_ module), mainly for the purpose of testing implemented versions of methods and tools presented and discussed in the Algorithmic Decision Theory cours at the University of Luxembourg.
+This module provides several random performance tableaux generators, i.e. PerformanceTableau class instances (see the `perfTabs <techDoc.html#perftabs-label>`_ module), mainly for the purpose of testing implemented versions of methods and tools presented and discussed in the Algorithmic Decision Theory cours at the University of Luxembourg.
 
     1. The simplest model called `RandomPerformaceTableau` generates a set of *n* decision actions, a set of *m* real-valued performance criteria, ranging from 0.0 to 100.0, with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale. 
     2. In order to study aggregation of linear orders, we provide a model called `RandomRankPerformanceTableau` which provides lineraly ordered performances without ties on multple criteria for a given number of decision actions.
@@ -1719,7 +1719,7 @@ This module provides several random performance tableaux generators, i.e. Perfor
     4. Multiple objectives models are also available via a generator, called `RandomCoalitionsPerformanceTableau`, for multiple criteria coalitions based performances.
  
 
-The `RandomPerformanceTableau` generator
+The `RandomPerformanceTableau <techDoc.html#randomPerftabs.RandomPerformaceTableau>`_ generator
 ........................................
     
 The RandomPerformanceTableau generator, the simplest of the kind, specializes the PerformanceTableau class and takes the following parameters:
