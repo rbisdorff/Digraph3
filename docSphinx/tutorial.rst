@@ -1805,8 +1805,12 @@ The generation of random *Cost* versus *Benefit* oriented performance tableaux f
     * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.
     * commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).
     * commonPercentiles = {'ind':5, 'pref':10, ['weakveto':90,] 'veto':95} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.
- 
-Example Python session:
+
+.. warning::
+
+    Minimal number of decision actions required is 3 ! 
+
+**Example Python session**:
     >>> from randomPerfTabs import RandomCBPerformanceTableau
     >>> t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,weightDistribution='equiobjectives',seed=100)
     >>> t.showActions()
@@ -1909,9 +1913,6 @@ For testing purposes a special constructor is provided for extracting partial pe
        'g1'  |   2.00   |   8.00   8.00   7.00  
        'g2'  |   3.00   |  -30.71  -41.65  -32.47  
 
-.. warning::
-
-    Minimal number of decision actions required is 3 ! 
 
 Back to :ref:`Tutorial-label`
 
