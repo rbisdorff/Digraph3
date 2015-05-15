@@ -1796,6 +1796,15 @@ The generation of random *Cost* versus *Benefit* oriented performance tableaux f
     * Cost criteria use mostly cardinal scales (3/4), whereas benefit criteria use mostly ordinal scales (2/3). 
     * The sum of weights of the cost criteria by default equals the sum weights of the benefit criteria: weighDistribution = 'equiobjectives'. 
     * On cardinal criteria, both of cost or of benefit type, we observe following constant preference discrimination quantiles: 5\% indifferent situations, 90\% strict preference situations, and 5\% veto situation. 
+
+*Parameters*:
+    * If *numberOfActions* == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated
+    * If *numberOfCriteria* == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated
+    * *weightDistribution* = {'equiobjectives'|'fixed'|'random'|'equisignificant' (default = 'equisignificant')}
+    * default *weightScale* for 'random' weightDistribution is 1 - numberOfCriteria
+    * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.
+    * commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).
+    * commonPercentiles = {'ind':5, 'pref':10, ['weakveto':90,] 'veto':95} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.
  
 Example Python session:
     >>> from randomPerfTabs import RandomCBPerformanceTableau
@@ -1867,24 +1876,42 @@ A (potentially ranked) colored heatmap with 5 color levels is also provided:
    :width: 500 px
    :align: center
 
+Such a performance tableau may be stored and reaccessed in the XMCDA2 encoded format:
+    >>> t.saveXMCDA2('temp')
+    *----- saving performance tableau in XMCDA 2.0 format  -------------*
+    File: temp.xml saved !
+    >>> from perfTabs import XMCDA2PerformanceTableau
+    >>> t = XMCDA2PerformanceTableau('temp')
+    >>> ...
 
-*Parameters*:
-    * If *numberOfActions* == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated
-    * If *numberOfCriteria* == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated
-    * *weightDistribution* = {'equiobjectives'|'fixed'|'random'|'equisignificant' (default = 'equisignificant')}
-    * default *weightScale* for 'random' weightDistribution is 1 - numberOfCriteria
-    * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.
-    * commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).
-    * commonPercentiles = {'ind':5, 'pref':10, ['weakveto':90,] 'veto':95} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.
+If needed for instance in an R session, a CSV version of the performance tableau may be created as follows:
+    >>> t.saveCSV('temp')
+    * --- Storing performance tableau in CSV format in file temp.csv
+    ...$ less temp.csv
+    "actions","g1","g2","g3","g4","g5"
+    "a1",1.00,-17.92,-33.99,26.68,3.00
+    "a2",8.00,-30.71,-77.77,66.35,6.00
+    "a3",8.00,-41.65,-69.84,53.43,8.00
+    "a4",2.00,-39.49,-16.99,18.62,2.00
+    "a5",6.00,-91.87,-74.85,83.09,7.00
+    "a6",7.00,-32.47,-24.91,79.24,9.00
+    "a7",4.00,-91.11,-7.44,48.22,7.00
+
+For testing purposes a special constructor is provided for extracting partial performance tableaux from a given tableau instance:
+
+    >>> from perfTabs import PartialPerformanceTableau
+    >>> pt = PartialPerformanceTableau(t,actionsSubset=['a2','a3','a6'],
+                                         criteriaSubset=['g1','g2'])
+    >>> pt.showPerformanceTableau()
+    *----  performance tableau -----*
+    criteria | weights | 'a2'   'a3'   'a6'   
+    ---------|-----------------------------------------
+       'g1'  |   2.00   |   8.00   8.00   7.00  
+       'g2'  |   3.00   |  -30.71  -41.65  -32.47  
 
 .. warning::
 
     Minimal number of decision actions required is 3 ! 
-
-
-
- 
-
 
 Back to :ref:`Tutorial-label`
 
