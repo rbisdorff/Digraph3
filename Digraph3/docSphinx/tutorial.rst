@@ -1719,7 +1719,7 @@ This module provides several random performance tableaux generators, i.e. Perfor
     4. Multiple objectives models are also available via a generator, called `RandomCoalitionsPerformanceTableau`, for multiple criteria coalitions based performances.
  
 
-The `RandomPerformanceTableau <techDoc.html#randomPerftabs.RandomPerformaceTableau>`_ generator
+The `RandomPerformanceTableau <techDoc.html#randomPerfTabs.RandomPerformaceTableau>`_ generator
 ...............................................................................................
     
 The RandomPerformanceTableau generator, the simplest of the kind, specializes the PerformanceTableau class and takes the following parameters:
