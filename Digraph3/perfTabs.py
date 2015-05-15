@@ -1364,8 +1364,11 @@ The performance evaluations of each decision alternative on each criterion are g
                                Debug=False):
         """
         Renders the Brewer RdYlGn colored heatmap of the performance table
-        actions x criteria in dictionary format. For a performance tableau
-        with 5 criteria, colorLevels=5 and Correlations = True, one obtains for instance
+        actions x criteria in dictionary format. Three color levels (5,7 or 9)
+        are provided.
+
+        For a performance tableau with 5 criteria, colorLevels=5 and
+        Correlations = True, one obtains for instance
         the following ordered dictionary in return::
 
             OrderedDict([
