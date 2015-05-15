@@ -180,7 +180,7 @@ Manipulating ``Digraph`` objects
 Random digraph
 ..............
 
-We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7, denoted *dg* and modelling a binary relation (*x S y*) defined on the set of nodes of *dg*. For this purpose, the ``digraphs`` module provides conveniently a specific :py:class:`digraphs.RandomValuationDigraph` constructor:
+We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7, denoted *dg* and modelling a binary relation (*x S y*) defined on the set of nodes of *dg*. For this purpose, the ``Digraph3`` collection contains a ``randomDigraphs`` module providing a specific :py:class:`digraphs.RandomValuationDigraph` constructor:
     >>> from randomDigraphs import RandomValuationDigraph
     >>> dg = RandomValuationDigraph(order=7,Normalized=True)
     >>> dg.save('tutRandValDigraph')
