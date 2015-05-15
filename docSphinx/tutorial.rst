@@ -1720,7 +1720,7 @@ This module provides several random performance tableaux generators, i.e. Perfor
  
 
 The `RandomPerformanceTableau <techDoc.html#randomPerfTabs.RandomPerformanceTableau>`_ generator
-...............................................................................................
+................................................................................................
     
 The ``RandomPerformanceTableau generator``, the simplest of the kind, specializes the ``PerformanceTableau`` class and takes the following parameters:
 
@@ -1766,8 +1766,8 @@ Code example:
                     }
             }
 
-The ``RandomRankPerformanceTableau <techDoc.html#randomPerfTabs.RandomRankPerformanceTableau>`_ generator
-.........................................................................................................
+The `RandomRankPerformanceTableau <techDoc.html#randomPerfTabs.RandomRankPerformanceTableau>`_ generator
+........................................................................................................
 
 Random generator for multiple criteria ranked (without ties) performances of a
 given number of decision actions. On each criterion,
