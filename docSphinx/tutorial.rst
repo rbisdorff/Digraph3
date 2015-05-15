@@ -1864,7 +1864,7 @@ A colored heatmap version is also provided:
     >>> t.showHTMLPerformanceHeatmap(Ranked=False)
 
 .. image:: randomCBHeatmap.png
-   :width: 300 px
+   :width: 500 px
    :align: center
 
 
