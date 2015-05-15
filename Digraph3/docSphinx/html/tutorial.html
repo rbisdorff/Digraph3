@@ -74,31 +74,31 @@
 <div class="contents local topic" id="table-of-contents">
 <p class="topic-title first">Table of Contents</p>
 <ul class="simple">
-<li><a class="reference internal" href="#working-with-the-digraphs-module" id="id32">Working with the <code class="code docutils literal"><span class="pre">digraphs</span></code> module</a></li>
-<li><a class="reference internal" href="#manipulating-digraph-objects" id="id33">Manipulating <code class="docutils literal"><span class="pre">Digraph</span></code> objects</a></li>
-<li><a class="reference internal" href="#working-with-the-graphs-module" id="id34">Working with the <code class="code docutils literal"><span class="pre">graphs</span></code> module</a></li>
-<li><a class="reference internal" href="#computing-the-winner-of-an-election" id="id35">Computing the winner of an election</a></li>
-<li><a class="reference internal" href="#working-with-the-outrankingdigraphs-module" id="id36">Working with the <code class="docutils literal"><span class="pre">outrankingDigraphs</span></code> module</a></li>
-<li><a class="reference internal" href="#computing-a-best-choice-recommendation" id="id37">Computing a best choice recommendation</a></li>
-<li><a class="reference internal" href="#generating-random-performance-tableaux" id="id38">Generating random performance tableaux</a></li>
-<li><a class="reference internal" href="#links-and-appendices" id="id39">Links and appendices</a></li>
+<li><a class="reference internal" href="#working-with-the-digraphs-module" id="id34">Working with the <code class="code docutils literal"><span class="pre">digraphs</span></code> module</a></li>
+<li><a class="reference internal" href="#manipulating-digraph-objects" id="id35">Manipulating <code class="docutils literal"><span class="pre">Digraph</span></code> objects</a></li>
+<li><a class="reference internal" href="#working-with-the-graphs-module" id="id36">Working with the <code class="code docutils literal"><span class="pre">graphs</span></code> module</a></li>
+<li><a class="reference internal" href="#computing-the-winner-of-an-election" id="id37">Computing the winner of an election</a></li>
+<li><a class="reference internal" href="#working-with-the-outrankingdigraphs-module" id="id38">Working with the <code class="docutils literal"><span class="pre">outrankingDigraphs</span></code> module</a></li>
+<li><a class="reference internal" href="#computing-a-best-choice-recommendation" id="id39">Computing a best choice recommendation</a></li>
+<li><a class="reference internal" href="#generating-random-performance-tableaux" id="id40">Generating random performance tableaux</a></li>
+<li><a class="reference internal" href="#links-and-appendices" id="id41">Links and appendices</a></li>
 </ul>
 </div>
 <div class="section" id="working-with-the-digraphs-module">
-<span id="digraphs-tutorial-label"></span><h2><a class="toc-backref" href="#id32">Working with the <code class="code docutils literal"><span class="pre">digraphs</span></code> module</a><a class="headerlink" href="#working-with-the-digraphs-module" title="Permalink to this headline">¶</a></h2>
+<span id="digraphs-tutorial-label"></span><h2><a class="toc-backref" href="#id34">Working with the <code class="code docutils literal"><span class="pre">digraphs</span></code> module</a><a class="headerlink" href="#working-with-the-digraphs-module" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#downloading-of-the-digraph3-resources" id="id40">Downloading of the Digraph3 resources</a></li>
-<li><a class="reference internal" href="#purpose" id="id41">Purpose</a></li>
-<li><a class="reference internal" href="#starting-a-python3-session" id="id42">Starting a python3 session</a></li>
-<li><a class="reference internal" href="#digraph-object-structure" id="id43"><code class="docutils literal"><span class="pre">Digraph</span></code> object structure</a></li>
-<li><a class="reference internal" href="#permanent-storage" id="id44">Permanent storage</a></li>
-<li><a class="reference internal" href="#inspecting-a-digraph-object" id="id45">Inspecting a <code class="docutils literal"><span class="pre">Digraph</span></code> object</a></li>
-<li><a class="reference internal" href="#special-classes" id="id46">Special classes</a></li>
+<li><a class="reference internal" href="#downloading-of-the-digraph3-resources" id="id42">Downloading of the Digraph3 resources</a></li>
+<li><a class="reference internal" href="#purpose" id="id43">Purpose</a></li>
+<li><a class="reference internal" href="#starting-a-python3-session" id="id44">Starting a python3 session</a></li>
+<li><a class="reference internal" href="#digraph-object-structure" id="id45"><code class="docutils literal"><span class="pre">Digraph</span></code> object structure</a></li>
+<li><a class="reference internal" href="#permanent-storage" id="id46">Permanent storage</a></li>
+<li><a class="reference internal" href="#inspecting-a-digraph-object" id="id47">Inspecting a <code class="docutils literal"><span class="pre">Digraph</span></code> object</a></li>
+<li><a class="reference internal" href="#special-classes" id="id48">Special classes</a></li>
 </ul>
 </div>
 <div class="section" id="downloading-of-the-digraph3-resources">
-<h3><a class="toc-backref" href="#id40">Downloading of the Digraph3 resources</a><a class="headerlink" href="#downloading-of-the-digraph3-resources" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id42">Downloading of the Digraph3 resources</a><a class="headerlink" href="#downloading-of-the-digraph3-resources" title="Permalink to this headline">¶</a></h3>
 <p>Using the Digraph3 modules is easy. You only need to have installed on your system the <a class="reference external" href="https://www.python.org/doc/">Python</a> programming language of version 3+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.</p>
 <p>Two download options are given:</p>
 <ol class="arabic">
@@ -115,12 +115,12 @@
 </ol>
 </div>
 <div class="section" id="purpose">
-<h3><a class="toc-backref" href="#id41">Purpose</a><a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id43">Purpose</a><a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h3>
 <p>The basic idea of these Python3 modules is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankins, linear ordering, etc. Most of the available computing resources are meant to illustrate the <em>Algorithmic Decision Theory</em> course given in the University of Luxembourg Master in Information and Computer Science (MICS).</p>
 <p>The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.</p>
 </div>
 <div class="section" id="starting-a-python3-session">
-<h3><a class="toc-backref" href="#id42">Starting a python3 session</a><a class="headerlink" href="#starting-a-python3-session" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id44">Starting a python3 session</a><a class="headerlink" href="#starting-a-python3-session" title="Permalink to this headline">¶</a></h3>
 <p>You may start an interactive Python3 session in the <code class="code docutils literal"><span class="pre">Digraph3</span></code> directory for exploring the classes and methods provided by the <code class="code docutils literal"><span class="pre">digraphs</span></code> module. To do so, enter the <code class="docutils literal"><span class="pre">python3</span></code> commands following the session prompts marked with &gt;&gt;&gt;. The lines without the prompt are output from the Python interpreter:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -141,7 +141,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </td></tr></table></div>
 </div>
 <div class="section" id="digraph-object-structure">
-<h3><a class="toc-backref" href="#id43"><code class="docutils literal"><span class="pre">Digraph</span></code> object structure</a><a class="headerlink" href="#digraph-object-structure" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id45"><code class="docutils literal"><span class="pre">Digraph</span></code> object structure</a><a class="headerlink" href="#digraph-object-structure" title="Permalink to this headline">¶</a></h3>
 <p>All <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> object <em>dg</em> contains at least the following sub-objects:</p>
 <ol class="arabic simple">
 <li>the digraph nodes called <strong>actions</strong> (decision actions): a list, set or dictionary of nodes with &#8216;name&#8217; and &#8216;shortname&#8217; attributes,</li>
@@ -152,7 +152,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </ol>
 </div>
 <div class="section" id="permanent-storage">
-<h3><a class="toc-backref" href="#id44">Permanent storage</a><a class="headerlink" href="#permanent-storage" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id46">Permanent storage</a><a class="headerlink" href="#permanent-storage" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="code docutils literal"><span class="pre">dg.save('tutorialDigraph')</span></code> command stores the digraph <em>dg</em> in a file named <code class="code docutils literal"><span class="pre">tutorialDigraph.py</span></code> with the following content:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -181,7 +181,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </td></tr></table></div>
 </div>
 <div class="section" id="inspecting-a-digraph-object">
-<h3><a class="toc-backref" href="#id45">Inspecting a <code class="docutils literal"><span class="pre">Digraph</span></code> object</a><a class="headerlink" href="#inspecting-a-digraph-object" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id47">Inspecting a <code class="docutils literal"><span class="pre">Digraph</span></code> object</a><a class="headerlink" href="#inspecting-a-digraph-object" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>We may reload a previously saved <code class="docutils literal"><span class="pre">Digraph</span></code> instance from the file named <code class="code docutils literal"><span class="pre">tutorialDigraph.py</span></code> with the <code class="docutils literal"><span class="pre">Digraph</span></code> class constructor and the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showAll" title="digraphs.Digraph.showAll"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.showAll()</span></code></a> method output reveals us that <em>dg</em> is a connected irreflexive digraph of order five evaluated in a valuation domain from -1 to 1.</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -289,7 +289,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 </div>
 <div class="section" id="special-classes">
-<h3><a class="toc-backref" href="#id46">Special classes</a><a class="headerlink" href="#special-classes" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id48">Special classes</a><a class="headerlink" href="#special-classes" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>Some special classes of digraphs, like the <a class="reference internal" href="techDoc.html#digraphs.CompleteDigraph" title="digraphs.CompleteDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.CompleteDigraph</span></code></a>, the <a class="reference internal" href="techDoc.html#digraphs.EmptyDigraph" title="digraphs.EmptyDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.EmptyDigraph</span></code></a> or the oriented <a class="reference internal" href="techDoc.html#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.GridDigraph</span></code></a> class for instance, are readily available:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -313,22 +313,22 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 </div>
 <div class="section" id="manipulating-digraph-objects">
-<span id="digraph-tools-label"></span><h2><a class="toc-backref" href="#id33">Manipulating <code class="docutils literal"><span class="pre">Digraph</span></code> objects</a><a class="headerlink" href="#manipulating-digraph-objects" title="Permalink to this headline">¶</a></h2>
+<span id="digraph-tools-label"></span><h2><a class="toc-backref" href="#id35">Manipulating <code class="docutils literal"><span class="pre">Digraph</span></code> objects</a><a class="headerlink" href="#manipulating-digraph-objects" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id1">
 <ul class="simple">
-<li><a class="reference internal" href="#random-digraph" id="id47">Random digraph</a></li>
-<li><a class="reference internal" href="#graphviz-drawings" id="id48">Graphviz drawings</a></li>
-<li><a class="reference internal" href="#asymmetric-and-symmetric-parts" id="id49">Asymmetric and symmetric parts</a></li>
-<li><a class="reference internal" href="#fusion-by-epistemic-disjunction" id="id50">Fusion by epistemic disjunction</a></li>
-<li><a class="reference internal" href="#dual-converse-and-codual" id="id51">Dual, converse and codual</a></li>
-<li><a class="reference internal" href="#symmetric-and-transitive-closures" id="id52">Symmetric and transitive closures</a></li>
-<li><a class="reference internal" href="#strong-components" id="id53">Strong components</a></li>
-<li><a class="reference internal" href="#csv-storage" id="id54">CSV storage</a></li>
-<li><a class="reference internal" href="#complete-empty-and-indeterminate-digraphs" id="id55">Complete, empty and indeterminate digraphs</a></li>
+<li><a class="reference internal" href="#random-digraph" id="id49">Random digraph</a></li>
+<li><a class="reference internal" href="#graphviz-drawings" id="id50">Graphviz drawings</a></li>
+<li><a class="reference internal" href="#asymmetric-and-symmetric-parts" id="id51">Asymmetric and symmetric parts</a></li>
+<li><a class="reference internal" href="#fusion-by-epistemic-disjunction" id="id52">Fusion by epistemic disjunction</a></li>
+<li><a class="reference internal" href="#dual-converse-and-codual" id="id53">Dual, converse and codual</a></li>
+<li><a class="reference internal" href="#symmetric-and-transitive-closures" id="id54">Symmetric and transitive closures</a></li>
+<li><a class="reference internal" href="#strong-components" id="id55">Strong components</a></li>
+<li><a class="reference internal" href="#csv-storage" id="id56">CSV storage</a></li>
+<li><a class="reference internal" href="#complete-empty-and-indeterminate-digraphs" id="id57">Complete, empty and indeterminate digraphs</a></li>
 </ul>
 </div>
 <div class="section" id="random-digraph">
-<h3><a class="toc-backref" href="#id47">Random digraph</a><a class="headerlink" href="#random-digraph" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id49">Random digraph</a><a class="headerlink" href="#random-digraph" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>We are starting this tutorial with generating a randomly [-1;1]-valued (<em>Normalized=True</em>) digraph of order 7, denoted <em>dg</em> and modelling a binary relation (<em>x S y</em>) defined on the set of nodes of <em>dg</em>. For this purpose, the <code class="docutils literal"><span class="pre">Digraph3</span></code> collection contains a <code class="docutils literal"><span class="pre">randomDigraphs</span></code> module providing a specific <a class="reference internal" href="techDoc.html#digraphs.RandomValuationDigraph" title="digraphs.RandomValuationDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.RandomValuationDigraph</span></code></a> constructor:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
@@ -425,9 +425,9 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 </div>
 <div class="section" id="graphviz-drawings">
-<h3><a class="toc-backref" href="#id48">Graphviz drawings</a><a class="headerlink" href="#graphviz-drawings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id50">Graphviz drawings</a><a class="headerlink" href="#graphviz-drawings" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>We may have an even better insight into the <code class="docutils literal"><span class="pre">Digraph</span></code> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id30" id="id3">[1]</a> drawing:</dt>
+<dt>We may have an even better insight into the <code class="docutils literal"><span class="pre">Digraph</span></code> object <em>dg</em> by looking at a <a class="reference external" href="http://graphviz.org/">graphviz</a> <a class="footnote-reference" href="#id32" id="id3">[1]</a> drawing:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to tutRandValDigraph.dot</span>
@@ -440,7 +440,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <p>Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (<img class="math" src="_images/math/dd3587b15e7e784f198251d4e777c6d190ab7763.png" alt="r(6\,S\,2) = 0.00"/>) observed between nodes &#8216;6&#8217; and &#8216;2&#8217;. The corresponding link is marked in gray with an open arrowhead in the drawing.</p>
 </div>
 <div class="section" id="asymmetric-and-symmetric-parts">
-<h3><a class="toc-backref" href="#id49">Asymmetric and symmetric parts</a><a class="headerlink" href="#asymmetric-and-symmetric-parts" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id51">Asymmetric and symmetric parts</a><a class="headerlink" href="#asymmetric-and-symmetric-parts" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>We may now extract both this symmetric as well as this asymmetric part of digraph <em>dg</em> with the help of two corresponding constructors:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -505,7 +505,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </td></tr></table></div>
 </div>
 <div class="section" id="fusion-by-epistemic-disjunction">
-<h3><a class="toc-backref" href="#id50">Fusion by epistemic disjunction</a><a class="headerlink" href="#fusion-by-epistemic-disjunction" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id52">Fusion by epistemic disjunction</a><a class="headerlink" href="#fusion-by-epistemic-disjunction" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>We may recover object <em>dg</em> from both partial objects <em>asymDg</em> and <em>symDg</em> with a <strong>bipolar fusion</strong> constructor, also called <strong>epistemic disjunction</strong>, available via the <a class="reference internal" href="techDoc.html#digraphs.FusionDigraph" title="digraphs.FusionDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.FusionDigraph</span></code></a> class:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -539,7 +539,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 </div>
 <div class="section" id="dual-converse-and-codual">
-<h3><a class="toc-backref" href="#id51">Dual, converse and codual</a><a class="headerlink" href="#dual-converse-and-codual" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id53">Dual, converse and codual</a><a class="headerlink" href="#dual-converse-and-codual" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>We may as readily compute the <strong>dual</strong>, the <strong>converse</strong> and the <strong>codual</strong> (dual and converse) of <em>dg</em>:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -650,7 +650,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 </div>
 <div class="section" id="symmetric-and-transitive-closures">
-<h3><a class="toc-backref" href="#id52">Symmetric and transitive closures</a><a class="headerlink" href="#symmetric-and-transitive-closures" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id54">Symmetric and transitive closures</a><a class="headerlink" href="#symmetric-and-transitive-closures" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>Symmetric and transtive closure in site constructors are also available, Note that it is a good idea,before going ahead with these in-site operations that irreversibly modify the original dg object, to previously make a backup version of <em>dg</em>. The simplest storage method, always provide by the generic <code class="xref py py-func docutils literal"><span class="pre">diggraphs.Digraph.save()</span></code> writes out in a named file the python content in string representation:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
@@ -664,7 +664,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <a class="reference internal image-reference" href="_images/strongComponents.png"><img alt="_images/strongComponents.png" class="align-center" src="_images/strongComponents.png" style="width: 200px;" /></a>
 </div>
 <div class="section" id="strong-components">
-<h3><a class="toc-backref" href="#id53">Strong components</a><a class="headerlink" href="#strong-components" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id55">Strong components</a><a class="headerlink" href="#strong-components" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>As the original digraph <em>dg</em> was connected (see above the result of the <code class="docutils literal"><span class="pre">dg.showShort()</span></code> command), both the symmetric and transitive closures operated together, will necessarily produce a single strong commponent, i.e. a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Using the <a class="reference internal" href="techDoc.html#digraphs.StrongComponentsCollapsedDigraph" title="digraphs.StrongComponentsCollapsedDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.StrongComponentsCollapsedDigraph</span></code></a> constructor here will render a single hyper-node gathering all the original nodes :</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -710,7 +710,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 </div>
 <div class="section" id="csv-storage">
-<h3><a class="toc-backref" href="#id54">CSV storage</a><a class="headerlink" href="#csv-storage" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id56">CSV storage</a><a class="headerlink" href="#csv-storage" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>Sometimes it is required to exchange the graph valuation data in CSV format with a statistical package like <a class="reference external" href="http://www.r-project.org/">R</a>. For this purpose it is possible to export the digraph data into a CSV file. The valuation domain is hereby normalized by default to the range [-1,1] and the diagonal put by defalut to the minimal value -1:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -775,7 +775,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <p>Positive arcs are shown in green and negative in red. Indetermiate -zero-valued- links, like the reflexive diagonal ones or the link between node <em>6</em> and node <em>2</em>, are shown in gray.</p>
 </div>
 <div class="section" id="complete-empty-and-indeterminate-digraphs">
-<h3><a class="toc-backref" href="#id55">Complete, empty and indeterminate digraphs</a><a class="headerlink" href="#complete-empty-and-indeterminate-digraphs" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id57">Complete, empty and indeterminate digraphs</a><a class="headerlink" href="#complete-empty-and-indeterminate-digraphs" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>Let us finally mention some special universal classes of digraphs that are readily available in the <a class="reference internal" href="techDoc.html#module-digraphs" title="digraphs"><code class="xref py py-mod docutils literal"><span class="pre">digraphs</span></code></a> module, like the <a class="reference internal" href="techDoc.html#digraphs.CompleteDigraph" title="digraphs.CompleteDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.CompleteDigraph</span></code></a>, the <a class="reference internal" href="techDoc.html#digraphs.EmptyDigraph" title="digraphs.EmptyDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.EmptyDigraph</span></code></a> and the <a class="reference internal" href="techDoc.html#digraphs.IndeterminateDigraph" title="digraphs.IndeterminateDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.IndeterminateDigraph</span></code></a> classes, which put all characteristic values respectively to the <em>maximum</em>, the <em>minimum</em> or the median <em>indeterminate</em> characteristic value:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -909,20 +909,20 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 </div>
 <div class="section" id="working-with-the-graphs-module">
-<span id="graphs-tutorial-label"></span><h2><a class="toc-backref" href="#id34">Working with the <code class="code docutils literal"><span class="pre">graphs</span></code> module</a><a class="headerlink" href="#working-with-the-graphs-module" title="Permalink to this headline">¶</a></h2>
+<span id="graphs-tutorial-label"></span><h2><a class="toc-backref" href="#id36">Working with the <code class="code docutils literal"><span class="pre">graphs</span></code> module</a><a class="headerlink" href="#working-with-the-graphs-module" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id4">
 <ul class="simple">
-<li><a class="reference internal" href="#structure-of-a-graph-object" id="id56">Structure of a <code class="docutils literal"><span class="pre">Graph</span></code> object</a></li>
-<li><a class="reference internal" href="#q-coloring-of-a-graph" id="id57">q-coloring of a graph</a></li>
-<li><a class="reference internal" href="#mis-and-clique-enumeration" id="id58">MIS and Clique enumeration</a></li>
-<li><a class="reference internal" href="#grids-and-the-ising-model" id="id59">Grids and the Ising model</a></li>
-<li><a class="reference internal" href="#simulating-metropolis-random-walks" id="id60">Simulating Metropolis random walks</a></li>
-<li><a class="reference internal" href="#who-is-the-lier" id="id61">Who is the lier?</a></li>
+<li><a class="reference internal" href="#structure-of-a-graph-object" id="id58">Structure of a <code class="docutils literal"><span class="pre">Graph</span></code> object</a></li>
+<li><a class="reference internal" href="#q-coloring-of-a-graph" id="id59">q-coloring of a graph</a></li>
+<li><a class="reference internal" href="#mis-and-clique-enumeration" id="id60">MIS and Clique enumeration</a></li>
+<li><a class="reference internal" href="#grids-and-the-ising-model" id="id61">Grids and the Ising model</a></li>
+<li><a class="reference internal" href="#simulating-metropolis-random-walks" id="id62">Simulating Metropolis random walks</a></li>
+<li><a class="reference internal" href="#who-is-the-lier" id="id63">Who is the lier?</a></li>
 </ul>
 </div>
 <p>See also the technical documentation of the <a class="reference internal" href="techDoc.html#graphs-label"><span>graphs module</span></a>.</p>
 <div class="section" id="structure-of-a-graph-object">
-<h3><a class="toc-backref" href="#id56">Structure of a <code class="docutils literal"><span class="pre">Graph</span></code> object</a><a class="headerlink" href="#structure-of-a-graph-object" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id58">Structure of a <code class="docutils literal"><span class="pre">Graph</span></code> object</a><a class="headerlink" href="#structure-of-a-graph-object" title="Permalink to this headline">¶</a></h3>
 <p>In the <a class="reference internal" href="techDoc.html#module-graphs" title="graphs"><code class="xref py py-mod docutils literal"><span class="pre">graphs</span></code></a> module, the root <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></code></a> class provides a generic <strong>simple graph model</strong>, without loops and multiple links. A given object of this class consists in:</p>
 <ol class="arabic simple">
 <li>the graph <strong>vertices</strong> : a dictionary of vertices with &#8216;name&#8217; and &#8216;shortname&#8217; attributes,</li>
@@ -1011,7 +1011,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </td></tr></table></div>
 <dl class="docutils">
-<dt>The stored graph can be recalled and plotted with the generic <a class="reference internal" href="techDoc.html#graphs.Graph.exportGraphViz" title="graphs.Graph.exportGraphViz"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.exportGraphViz()</span></code></a> <a class="footnote-reference" href="#id30" id="id5">[1]</a> method as follows:</dt>
+<dt>The stored graph can be recalled and plotted with the generic <a class="reference internal" href="techDoc.html#graphs.Graph.exportGraphViz" title="graphs.Graph.exportGraphViz"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.exportGraphViz()</span></code></a> <a class="footnote-reference" href="#id32" id="id5">[1]</a> method as follows:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1136,7 +1136,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 </div>
 <div class="section" id="q-coloring-of-a-graph">
-<h3><a class="toc-backref" href="#id57">q-coloring of a graph</a><a class="headerlink" href="#q-coloring-of-a-graph" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id59">q-coloring of a graph</a><a class="headerlink" href="#q-coloring-of-a-graph" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>A 3-coloring of the tutorial graph <em>g</em> may for instance be computed and plotted with the <a class="reference internal" href="techDoc.html#graphs.Q_Coloring" title="graphs.Q_Coloring"><code class="xref py py-class docutils literal"><span class="pre">graphs.Q_Coloring</span></code></a> class as follows:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -1213,7 +1213,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <a class="reference internal image-reference" href="_images/tutorial-2-coloring.png"><img alt="_images/tutorial-2-coloring.png" class="align-center" src="_images/tutorial-2-coloring.png" style="width: 400px;" /></a>
 </div>
 <div class="section" id="mis-and-clique-enumeration">
-<h3><a class="toc-backref" href="#id58">MIS and Clique enumeration</a><a class="headerlink" href="#mis-and-clique-enumeration" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id60">MIS and Clique enumeration</a><a class="headerlink" href="#mis-and-clique-enumeration" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>2-colorings define independent sets of vertices that are maximal in cardinality; for short called a <strong>MIS</strong>. Computing such MISs in a given <code class="code docutils literal"><span class="pre">Graph</span></code> instance may be achieved by the <cite>graphs.Graph.showMIS()</cite> method;</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -1306,7 +1306,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dl>
 </div>
 <div class="section" id="grids-and-the-ising-model">
-<h3><a class="toc-backref" href="#id59">Grids and the Ising model</a><a class="headerlink" href="#grids-and-the-ising-model" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id61">Grids and the Ising model</a><a class="headerlink" href="#grids-and-the-ising-model" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>Special classes of graphs, like <em>n</em> x <em>m</em> <strong>rectangular</strong> or <strong>triangular grids</strong> (<a class="reference internal" href="techDoc.html#graphs.GridGraph" title="graphs.GridGraph"><code class="xref py py-class docutils literal"><span class="pre">graphs.GridGraph</span></code></a> and <a class="reference internal" href="techDoc.html#graphs.IsingModel" title="graphs.IsingModel"><code class="xref py py-class docutils literal"><span class="pre">graphs.IsingModel</span></code></a>) are available in the <a class="reference internal" href="techDoc.html#module-graphs" title="graphs"><code class="xref py py-mod docutils literal"><span class="pre">graphs</span></code></a> module. For instance, we may use a Gibbs sampler again for simulating an <strong>Ising Model</strong> on such a grid:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -1343,7 +1343,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <a class="reference internal image-reference" href="_images/grid-15-15-ising.png"><img alt="_images/grid-15-15-ising.png" class="align-center" src="_images/grid-15-15-ising.png" style="width: 600px;" /></a>
 </div>
 <div class="section" id="simulating-metropolis-random-walks">
-<h3><a class="toc-backref" href="#id60">Simulating Metropolis random walks</a><a class="headerlink" href="#simulating-metropolis-random-walks" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id62">Simulating Metropolis random walks</a><a class="headerlink" href="#simulating-metropolis-random-walks" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>Finally, we provide the <a class="reference internal" href="techDoc.html#graphs.MetropolisChain" title="graphs.MetropolisChain"><code class="xref py py-class docutils literal"><span class="pre">graphs.MetropolisChain</span></code></a> class, a specialization of the <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></code></a> class, for implementing a generic <strong>Metropolis MCMC</strong> (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  <code class="code docutils literal"><span class="pre">probs</span> <span class="pre">=</span> <span class="pre">{‘v1’:</span> <span class="pre">x,</span> <span class="pre">‘v2’:</span> <span class="pre">y,</span> <span class="pre">...}</span></code> for visiting each vertice (see lines 14-22).</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -1431,7 +1431,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <p>For more technical information and more code examples, look into the technical documentation of the <a class="reference internal" href="techDoc.html#graphs-label"><span>graphs module</span></a>. For the readers interested in algorithmic applications of Markov Chains we may recommend consulting O. Häggström&#8217;s 2002 book: <a class="reference internal" href="#fmcaa" id="id6">[FMCAA]</a>.</p>
 </div>
 <div class="section" id="who-is-the-lier">
-<h3><a class="toc-backref" href="#id61">Who is the lier?</a><a class="headerlink" href="#who-is-the-lier" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id63">Who is the lier?</a><a class="headerlink" href="#who-is-the-lier" title="Permalink to this headline">¶</a></h3>
 <p>Suppose that the file <code class="docutils literal"><span class="pre">berge.py</span></code> contains the following <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></code></a> instance data:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -1596,17 +1596,17 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 </div>
 <div class="section" id="computing-the-winner-of-an-election">
-<span id="linearvoting-label"></span><h2><a class="toc-backref" href="#id35">Computing the winner of an election</a><a class="headerlink" href="#computing-the-winner-of-an-election" title="Permalink to this headline">¶</a></h2>
+<span id="linearvoting-label"></span><h2><a class="toc-backref" href="#id37">Computing the winner of an election</a><a class="headerlink" href="#computing-the-winner-of-an-election" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id7">
 <ul class="simple">
-<li><a class="reference internal" href="#linear-voting-profiles" id="id62">Linear voting profiles</a></li>
-<li><a class="reference internal" href="#computing-the-winner" id="id63">Computing the winner</a></li>
-<li><a class="reference internal" href="#the-condorcet-winner" id="id64">The Condorcet winner</a></li>
-<li><a class="reference internal" href="#cyclic-social-preferences" id="id65">Cyclic social preferences</a></li>
+<li><a class="reference internal" href="#linear-voting-profiles" id="id64">Linear voting profiles</a></li>
+<li><a class="reference internal" href="#computing-the-winner" id="id65">Computing the winner</a></li>
+<li><a class="reference internal" href="#the-condorcet-winner" id="id66">The Condorcet winner</a></li>
+<li><a class="reference internal" href="#cyclic-social-preferences" id="id67">Cyclic social preferences</a></li>
 </ul>
 </div>
 <div class="section" id="linear-voting-profiles">
-<h3><a class="toc-backref" href="#id62">Linear voting profiles</a><a class="headerlink" href="#linear-voting-profiles" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id64">Linear voting profiles</a><a class="headerlink" href="#linear-voting-profiles" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="techDoc.html#votingdigraphs-label"><span>votingDigraphs module</span></a> provides resources for handling election results <a class="reference internal" href="#adt-l2" id="id8">[ADT-L2]</a>, like the <a class="reference internal" href="techDoc.html#votingDigraphs.LinearVotingProfile" title="votingDigraphs.LinearVotingProfile"><code class="xref py py-class docutils literal"><span class="pre">votingDigraphs.LinearVotingProfile</span></code></a> class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two Python dictionaries, one for the candidates and another one for the linear ballots:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -1684,7 +1684,7 @@ linearBallot = {
 </dl>
 </div>
 <div class="section" id="computing-the-winner">
-<h3><a class="toc-backref" href="#id63">Computing the winner</a><a class="headerlink" href="#computing-the-winner" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id65">Computing the winner</a><a class="headerlink" href="#computing-the-winner" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>We may easily compute <strong>uninominal votes</strong>, i.e. how many times a candidate was ranked first, and see who is consequently the <strong>simple majority</strong> winner(s) in this election.</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -1743,7 +1743,7 @@ linearBallot = {
 </dl>
 </div>
 <div class="section" id="the-condorcet-winner">
-<h3><a class="toc-backref" href="#id64">The Condorcet winner</a><a class="headerlink" href="#the-condorcet-winner" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id66">The Condorcet winner</a><a class="headerlink" href="#the-condorcet-winner" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>In our randomly generated election results, we are lucky: The instant runoff winner and the Borda winner both are candidate <em>a1</em>. However, we could also follow the Marquis de Condorcet&#8217;s advice, and compute the <strong>majority margins</strong> obtained by voting for each individual pair of candidates. For instance, candidate <em>a1</em> is ranked four times before and once behind candidate <em>a2</em>. Hence the majority margin <em>M(a1,a2)</em> is 4 - 1 = +3. These majority margins define on the set of candidates what we call the <strong>Condorcet digraph</strong>. The <code class="xref py py-class docutils literal"><span class="pre">votongDigraphs.CondorcetDigraph</span></code> class (a specialization of the <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> class) is available for handling such pairwise majority margins:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -1790,7 +1790,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <code class="docutils literal"><span class="pre">Digraph</span></code> class (see <a class="reference internal" href="#digraphs-tutorial-label"><span>Working with the digraphs module</span></a>), and especially its <code class="docutils literal"><span class="pre">exportGraphViz</span></code> method <a class="footnote-reference" href="#id30" id="id10">[1]</a>, for visualizing an election result:</dt>
+<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <code class="docutils literal"><span class="pre">Digraph</span></code> class (see <a class="reference internal" href="#digraphs-tutorial-label"><span>Working with the digraphs module</span></a>), and especially its <code class="docutils literal"><span class="pre">exportGraphViz</span></code> method <a class="footnote-reference" href="#id32" id="id10">[1]</a>, for visualizing an election result:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorialLinearBallots&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to tutorialLinearBallots.dot</span>
@@ -1802,7 +1802,7 @@ linearBallot = {
 <a class="reference internal image-reference" href="_images/tutorialLinearBallots.png"><img alt="_images/tutorialLinearBallots.png" class="align-center" src="_images/tutorialLinearBallots.png" style="width: 300px;" /></a>
 </div>
 <div class="section" id="cyclic-social-preferences">
-<h3><a class="toc-backref" href="#id65">Cyclic social preferences</a><a class="headerlink" href="#cyclic-social-preferences" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id67">Cyclic social preferences</a><a class="headerlink" href="#cyclic-social-preferences" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>Usually, when aggregating linear ballots, there appear cyclic social preferences. Let us consider for instance the following linear voting profile and construct the corresponding Condorcet digraph:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -1875,21 +1875,21 @@ linearBallot = {
 </div>
 </div>
 <div class="section" id="working-with-the-outrankingdigraphs-module">
-<span id="outrankingdigraphs-tutorial-label"></span><h2><a class="toc-backref" href="#id36">Working with the <code class="docutils literal"><span class="pre">outrankingDigraphs</span></code> module</a><a class="headerlink" href="#working-with-the-outrankingdigraphs-module" title="Permalink to this headline">¶</a></h2>
+<span id="outrankingdigraphs-tutorial-label"></span><h2><a class="toc-backref" href="#id38">Working with the <code class="docutils literal"><span class="pre">outrankingDigraphs</span></code> module</a><a class="headerlink" href="#working-with-the-outrankingdigraphs-module" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id12">
 <ul class="simple">
-<li><a class="reference internal" href="#outranking-digraph" id="id66">Outranking digraph</a></li>
-<li><a class="reference internal" href="#browsing-the-performances" id="id67">Browsing the performances</a></li>
-<li><a class="reference internal" href="#valuation-semantics" id="id68">Valuation semantics</a></li>
-<li><a class="reference internal" href="#pairwise-comparisons" id="id69">Pairwise comparisons</a></li>
-<li><a class="reference internal" href="#recoding-the-valuation" id="id70">Recoding the valuation</a></li>
-<li><a class="reference internal" href="#codual-digraph" id="id71">Codual digraph</a></li>
-<li><a class="reference internal" href="#xmcda-2-0" id="id72">XMCDA 2.0</a></li>
+<li><a class="reference internal" href="#outranking-digraph" id="id68">Outranking digraph</a></li>
+<li><a class="reference internal" href="#browsing-the-performances" id="id69">Browsing the performances</a></li>
+<li><a class="reference internal" href="#valuation-semantics" id="id70">Valuation semantics</a></li>
+<li><a class="reference internal" href="#pairwise-comparisons" id="id71">Pairwise comparisons</a></li>
+<li><a class="reference internal" href="#recoding-the-valuation" id="id72">Recoding the valuation</a></li>
+<li><a class="reference internal" href="#codual-digraph" id="id73">Codual digraph</a></li>
+<li><a class="reference internal" href="#xmcda-2-0" id="id74">XMCDA 2.0</a></li>
 </ul>
 </div>
 <p>See also the technical documentation of the <a class="reference internal" href="techDoc.html#outrankingdigraphs-label"><span>outrankingDigraphs module</span></a>.</p>
 <div class="section" id="outranking-digraph">
-<h3><a class="toc-backref" href="#id66">Outranking digraph</a><a class="headerlink" href="#outranking-digraph" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id68">Outranking digraph</a><a class="headerlink" href="#outranking-digraph" title="Permalink to this headline">¶</a></h3>
 <p>In this <em>Digraph3</em> module, the root <a class="reference internal" href="techDoc.html#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a> class provides a generic <strong>outranking digraph model</strong>. A given object of this class consists in:</p>
 <ol class="arabic simple">
 <li>a potential set of decision <strong>actions</strong> : a dictionary describing the potential decision actions or alternatives with &#8216;name&#8217; and &#8216;comment&#8217; attributes,</li>
@@ -2011,7 +2011,7 @@ linearBallot = {
 </dl>
 </div>
 <div class="section" id="browsing-the-performances">
-<h3><a class="toc-backref" href="#id67">Browsing the performances</a><a class="headerlink" href="#browsing-the-performances" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id69">Browsing the performances</a><a class="headerlink" href="#browsing-the-performances" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>We may visualize the same performance tableau in a two-colors setting in the default system browser with the command:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showHTMLPerformanceTableau</span><span class="p">()</span>
@@ -2041,7 +2041,7 @@ linearBallot = {
 <p>There is no doubt that action <em>a03</em>, with a performance in the highest quintile in five out of seven criteria, appears definitely to be best performing. Action <em>a05</em> shows a more or less average performance on most criteria, wheras action <em>a02</em> appears to be the weakest alternative.</p>
 </div>
 <div class="section" id="valuation-semantics">
-<h3><a class="toc-backref" href="#id68">Valuation semantics</a><a class="headerlink" href="#valuation-semantics" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id70">Valuation semantics</a><a class="headerlink" href="#valuation-semantics" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>Considering the given performance tableau, the <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a> class constructor computes the characteristic value <img class="math" src="_images/math/1057d77b407580c943a18eff633c58ceaab4f97a.png" alt="r(x\,S\,y)"/> of a pairwise outranking relation &#8220;<img class="math" src="_images/math/9a79d10a9da5e5d5a6164a12b37feb9b83c528e9.png" alt="x\,S\,y"/>&#8221; (see <a class="reference internal" href="#bis-2013" id="id13">[BIS-2013]</a>, <a class="reference internal" href="#adt-l7" id="id14">[ADT-L7]</a>) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:</dt>
 <dd><ol class="first last arabic simple">
@@ -2082,7 +2082,7 @@ linearBallot = {
 </dl>
 </div>
 <div class="section" id="pairwise-comparisons">
-<h3><a class="toc-backref" href="#id69">Pairwise comparisons</a><a class="headerlink" href="#pairwise-comparisons" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id71">Pairwise comparisons</a><a class="headerlink" href="#pairwise-comparisons" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>From above given semantics, we may consider that <em>a01</em> outranks <em>a02</em> (<img class="math" src="_images/math/a1da00b27dbbf5afeb11a856bb366a584c40b774.png" alt="r(a_{01}\,S\,a_{02}) &gt; 0.0"/>), but not <em>a03</em> (<img class="math" src="_images/math/ea9ea2c597e31e1ac2402b0508a895d394620b70.png" alt="r(a_{01}\,S\,a_{03}) &lt; 0.0"/>). In order to comprehend the characteristic values shown in the relation table above, we may furthermore have a look at the pairwise multiple criteria comparison between alternatives <em>a01</em> and <em>a02</em>:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -2152,7 +2152,7 @@ linearBallot = {
 <p>This time, we observe a considerable out-performance of <em>a03</em> against <em>a02</em> on criterion g02 (see second row in the relation table above). We therefore notice a positively polarised <em>certainly confirmed</em> outranking situation in this case <a class="reference internal" href="#bis-2013" id="id15">[BIS-2013]</a>.</p>
 </div>
 <div class="section" id="recoding-the-valuation">
-<h3><a class="toc-backref" href="#id70">Recoding the valuation</a><a class="headerlink" href="#recoding-the-valuation" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id72">Recoding the valuation</a><a class="headerlink" href="#recoding-the-valuation" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>All outranking digraphs, being of root type <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a>, inherit the methods available under this class. The characteristic valuation domain of an outranking digraph may be recoded with the <code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.recodeValutaion()</span></code> method below to the integer range [-37,+37], i.e. plus or minus the global significance of the family of criteria considered in this example instance:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -2198,9 +2198,9 @@ linearBallot = {
 </div>
 </div>
 <div class="section" id="codual-digraph">
-<h3><a class="toc-backref" href="#id71">Codual digraph</a><a class="headerlink" href="#codual-digraph" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id73">Codual digraph</a><a class="headerlink" href="#codual-digraph" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>From the theory (see <a class="reference internal" href="#bis-2013" id="id16">[BIS-2013]</a>, <a class="reference internal" href="#adt-l7" id="id17">[ADT-L7]</a> )  we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if <img class="math" src="_images/math/784d5ff7d90a9e778de5854dae9cfdb97b459193.png" alt="r(x\,S\,y) &lt; 0.0"/> then <img class="math" src="_images/math/c57e79de341b208f0246139a4e3b8dcd53e6333c.png" alt="r(y\,S\,x) &gt;= 0.0"/> . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id30" id="id18">[1]</a>:</dt>
+<dt>From the theory (see <a class="reference internal" href="#bis-2013" id="id16">[BIS-2013]</a>, <a class="reference internal" href="#adt-l7" id="id17">[ADT-L7]</a> )  we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if <img class="math" src="_images/math/784d5ff7d90a9e778de5854dae9cfdb97b459193.png" alt="r(x\,S\,y) &lt; 0.0"/> then <img class="math" src="_images/math/c57e79de341b208f0246139a4e3b8dcd53e6333c.png" alt="r(y\,S\,x) &gt;= 0.0"/> . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id32" id="id18">[1]</a>:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -2220,7 +2220,7 @@ linearBallot = {
 <p>It becomes readily clear now from the picture above that alternative <em>a03</em> strictly outranks in fact all the other alternatives. Hence, <em>a03</em> appears as <strong>Condorcet winner</strong> and may be recommended as <em>best decision action</em> in this illustrative preference modelling exercise.</p>
 </div>
 <div class="section" id="xmcda-2-0">
-<h3><a class="toc-backref" href="#id72">XMCDA 2.0</a><a class="headerlink" href="#xmcda-2-0" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id74">XMCDA 2.0</a><a class="headerlink" href="#xmcda-2-0" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>As with all Digraph instances, it is possible to store permanently a copy of the outranking digraph <em>odg</em>. As its outranking relation is automatically generated by the <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a> class constructor on the basis of a given performance tableau, it is sufficient to save only the latter. For this purpose we are using the <a class="reference external" href="http://www.decision-deck.org/xmcda/">XMCDA 2.00</a> XML encoding scheme of MCDA data, as provided by the Decision Deck Project (see <a class="reference external" href="http://www.decision-deck.org/">http://www.decision-deck.org/</a>):</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">PerformanceTableau</span><span class="o">.</span><span class="n">saveXMCDA2</span><span class="p">(</span><span class="n">odg</span><span class="p">,</span><span class="s">&#39;tutorialPerfTab&#39;</span><span class="p">)</span>
@@ -2268,20 +2268,20 @@ linearBallot = {
 </div>
 </div>
 <div class="section" id="computing-a-best-choice-recommendation">
-<span id="rubis-tutorial-label"></span><h2><a class="toc-backref" href="#id37">Computing a best choice recommendation</a><a class="headerlink" href="#computing-a-best-choice-recommendation" title="Permalink to this headline">¶</a></h2>
+<span id="rubis-tutorial-label"></span><h2><a class="toc-backref" href="#id39">Computing a best choice recommendation</a><a class="headerlink" href="#computing-a-best-choice-recommendation" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id19">
 <ul class="simple">
-<li><a class="reference internal" href="#what-site-to-choose" id="id73">What site to choose ?</a></li>
-<li><a class="reference internal" href="#performance-tableau" id="id74">Performance tableau</a></li>
-<li><a class="reference internal" href="#id22" id="id75">Outranking digraph</a></li>
-<li><a class="reference internal" href="#rubis-best-choice" id="id76">Rubis best choice</a></li>
-<li><a class="reference internal" href="#strictly-best-choice" id="id77">Strictly best choice</a></li>
-<li><a class="reference internal" href="#weakly-ordering" id="id78">Weakly ordering</a></li>
+<li><a class="reference internal" href="#what-site-to-choose" id="id75">What site to choose ?</a></li>
+<li><a class="reference internal" href="#performance-tableau" id="id76">Performance tableau</a></li>
+<li><a class="reference internal" href="#id22" id="id77">Outranking digraph</a></li>
+<li><a class="reference internal" href="#rubis-best-choice" id="id78">Rubis best choice</a></li>
+<li><a class="reference internal" href="#strictly-best-choice" id="id79">Strictly best choice</a></li>
+<li><a class="reference internal" href="#weakly-ordering" id="id80">Weakly ordering</a></li>
 </ul>
 </div>
 <p>See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: <a class="reference internal" href="#adt-l7" id="id20">[ADT-L7]</a>.</p>
 <div class="section" id="what-site-to-choose">
-<h3><a class="toc-backref" href="#id73">What site to choose ?</a><a class="headerlink" href="#what-site-to-choose" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id75">What site to choose ?</a><a class="headerlink" href="#what-site-to-choose" title="Permalink to this headline">¶</a></h3>
 <p>A SME, specialized in printing and copy services, has to move into new offices, and its CEO has gathered seven <strong>potential office sites</strong>:</p>
 <blockquote>
 <div><table border="1" class="docutils">
@@ -2529,7 +2529,7 @@ linearBallot = {
 <p>In view of this performance tableau, what is now the office site we may recommend to the CEO as <strong>best choice</strong> ?</p>
 </div>
 <div class="section" id="performance-tableau">
-<h3><a class="toc-backref" href="#id74">Performance tableau</a><a class="headerlink" href="#performance-tableau" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id76">Performance tableau</a><a class="headerlink" href="#performance-tableau" title="Permalink to this headline">¶</a></h3>
 <p>The XMCDA 2.0 encoded version of this performance tableau is available for downloading here <a class="reference external" href="_static/officeChoice.xml">officeChoice.xml</a>.</p>
 <blockquote>
 <div></div></blockquote>
@@ -2609,7 +2609,7 @@ linearBallot = {
 <p>Site <em>A</em> shows extreme and contradictory performances: highest <em>Costs</em> and no <em>Working Comfort</em> on one hand, and total satisfaction with respect to <em>Standing</em>, <em>Proximity</em> and <em>Parking facilities</em> on the other hand. Similar, but opposite, situation is given for site <em>C</em>: unsatisfactory <em>Working Space</em>, no <em>Standing</em> and no <em>Working Comfort</em> on the one hand, and lowest <em>Costs</em>, best <em>Proximity</em> and <em>Parking facilities</em> on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: sites <em>D</em> and <em>G</em>. Finally, site <em>F</em> is clearly the less satisfactory alternative of all.</p>
 </div>
 <div class="section" id="id22">
-<h3><a class="toc-backref" href="#id75">Outranking digraph</a><a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id77">Outranking digraph</a><a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>To help now the CEO choosing the best site, we are going to compute pairwise outrankings (see <a class="reference internal" href="#bis-2013" id="id23">[BIS-2013]</a>) on the set of potential sites. For two sites <em>x</em> and <em>y</em>, the situation &#8220;<em>x</em> outranks <em>y</em>&#8221;, denoted (<em>x</em> S <em>y</em>), is given if there is:</dt>
 <dd><ol class="first last arabic simple">
@@ -2667,7 +2667,7 @@ linearBallot = {
 </dl>
 </div>
 <div class="section" id="rubis-best-choice">
-<h3><a class="toc-backref" href="#id76">Rubis best choice</a><a class="headerlink" href="#rubis-best-choice" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id78">Rubis best choice</a><a class="headerlink" href="#rubis-best-choice" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>Following the Rubis outranking method (see <a class="reference internal" href="#bis-2008" id="id25">[BIS-2008]</a>), potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the pre-kernels of <em>g</em>:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -2881,7 +2881,7 @@ linearBallot = {
 <p>Yet, what about alternative <em>G</em>, the other good compromise best choice we have noticed from the performance heatmap shown above?</p>
 </div>
 <div class="section" id="strictly-best-choice">
-<h3><a class="toc-backref" href="#id77">Strictly best choice</a><a class="headerlink" href="#strictly-best-choice" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id79">Strictly best choice</a><a class="headerlink" href="#strictly-best-choice" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>When comparing the performances of alternatives <em>D</em> and <em>G</em> on a pairwise perspective, we notice that, with the given preference discrimination thresholds, alternative <em>G</em> is actually <strong>certainly</strong> <em>at least as good as</em> alternative <em>D</em> ( r(<em>G</em> outranks <em>D</em>) = 100.0).</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -3007,7 +3007,7 @@ linearBallot = {
 <p>We may also notice that both alternatives <em>A</em> and <em>F</em> are reported as certainly outranked, hence a <strong>worst choice recommendation</strong>. This confirms the global incomparability status of alternative <em>A</em>.</p>
 </div>
 <div class="section" id="weakly-ordering">
-<h3><a class="toc-backref" href="#id78">Weakly ordering</a><a class="headerlink" href="#weakly-ordering" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id80">Weakly ordering</a><a class="headerlink" href="#weakly-ordering" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>To get a more complete insight in the overall strict outranking situations, we may use the <a class="reference internal" href="techDoc.html#weakOrders.RankingByChoosingDigraph" title="weakOrders.RankingByChoosingDigraph"><code class="xref py py-class docutils literal"><span class="pre">weakOrders.RankingByChoosingDigraph</span></code></a> constructor imported from the <a class="reference internal" href="techDoc.html#weakorders-label"><span>weakOrders module</span></a> module, for computing a <strong>ranking-by-choosing</strong> result from the strict outranking digraph instance <em>gcd</em>:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -3057,12 +3057,13 @@ linearBallot = {
 </div>
 </div>
 <div class="section" id="generating-random-performance-tableaux">
-<span id="randomperformacetableau-tutorial-label"></span><h2><a class="toc-backref" href="#id38">Generating random performance tableaux</a><a class="headerlink" href="#generating-random-performance-tableaux" title="Permalink to this headline">¶</a></h2>
+<span id="randomperformacetableau-tutorial-label"></span><h2><a class="toc-backref" href="#id40">Generating random performance tableaux</a><a class="headerlink" href="#generating-random-performance-tableaux" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id28">
 <ul class="simple">
-<li><a class="reference internal" href="#the-randomperftabs-module" id="id79">The randomPerfTabs module</a></li>
-<li><a class="reference internal" href="#the-randomperformancetableau-generator" id="id80">The RandomPerformanceTableau generator</a></li>
-<li><a class="reference internal" href="#the-randomrankperformancetableau-generator" id="id81">The <cite>RandomRankPerformanceTableau</cite> generator</a></li>
+<li><a class="reference internal" href="#the-randomperftabs-module" id="id81">The randomPerfTabs module</a></li>
+<li><a class="reference internal" href="#the-randomperformancetableau-generator" id="id82">The RandomPerformanceTableau generator</a></li>
+<li><a class="reference internal" href="#the-randomrankperformancetableau-techdoc-html-randomperftabs-randomrankperformancetableau-generator" id="id83">The ``RandomRankPerformanceTableau &lt;techDoc.html#randomPerfTabs.RandomRankPerformanceTableau&gt;`_ generator</a></li>
+<li><a class="reference internal" href="#the-randomcbperformancetableau-generator" id="id84">The RandomCBPerformanceTableau generator</a></li>
 </ul>
 </div>
 <div class="section" id="the-randomperftabs-module">
@@ -3079,7 +3080,7 @@ linearBallot = {
 </div>
 <div class="section" id="the-randomperformancetableau-generator">
 <h3>The <a class="reference external" href="techDoc.html#randomPerfTabs.RandomPerformanceTableau">RandomPerformanceTableau</a> generator<a class="headerlink" href="#the-randomperformancetableau-generator" title="Permalink to this headline">¶</a></h3>
-<p>The RandomPerformanceTableau generator, the simplest of the kind, specializes the PerformanceTableau class and takes the following parameters:</p>
+<p>The <code class="docutils literal"><span class="pre">RandomPerformanceTableau</span> <span class="pre">generator</span></code>, the simplest of the kind, specializes the <code class="docutils literal"><span class="pre">PerformanceTableau</span></code> class and takes the following parameters:</p>
 <blockquote>
 <div><ul>
 <li><p class="first">numberOfActions := nbr of decision actions.</p>
@@ -3169,12 +3170,12 @@ linearBallot = {
 </dd>
 </dl>
 </div>
-<div class="section" id="the-randomrankperformancetableau-generator">
-<h3><a class="toc-backref" href="#id81">The <cite>RandomRankPerformanceTableau</cite> generator</a><a class="headerlink" href="#the-randomrankperformancetableau-generator" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="the-randomrankperformancetableau-techdoc-html-randomperftabs-randomrankperformancetableau-generator">
+<h3><a class="toc-backref" href="#id83">The <a href="#id29"><span class="problematic" id="id30">``</span></a>RandomRankPerformanceTableau &lt;techDoc.html#randomPerfTabs.RandomRankPerformanceTableau&gt;`_ generator</a><a class="headerlink" href="#the-randomrankperformancetableau-techdoc-html-randomperftabs-randomrankperformancetableau-generator" title="Permalink to this headline">¶</a></h3>
 <p>Random generator for multiple criteria ranked (without ties) performances of a
 given number of decision actions. On each criterion,
-all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is
-matching the <cite>RandomLinearVotingProfile</cite> class provided by  the <a class="reference external" href="techDoc.html#votingDigraphs-label">votingDigraphs</a> module.</p>
+all decision actions are hence lineraly ordered. The <code class="docutils literal"><span class="pre">RandomRankPerformanceTableau</span></code> class is
+matching the <code class="docutils literal"><span class="pre">RandomLinearVotingProfile</span></code> class provided by  the <a class="reference external" href="techDoc.html#votingDigraphs-label">votingDigraphs</a> module.</p>
 <dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last">
@@ -3202,11 +3203,41 @@ matching the <cite>RandomLinearVotingProfile</cite> class provided by  the <a cl
 </ul>
 </dd>
 </dl>
+</div>
+<div class="section" id="the-randomcbperformancetableau-generator">
+<h3>The <a class="reference external" href="techDoc.html#randomPerfTabs.RandomCBPerformanceTableau">RandomCBPerformanceTableau</a> generator<a class="headerlink" href="#the-randomcbperformancetableau-generator" title="Permalink to this headline">¶</a></h3>
+<p>The generation of random <em>Cost</em> versus <em>Benefit</em> oriented performance tableaux follows the directives below:</p>
+<blockquote>
+<div><ul class="simple">
+<li>We distinguish three types of decision actions: <em>cheap</em>, <em>neutral</em> and <em>expensive</em> ones with an equal proportion of 1/3. We also distinguish two types of weighted criteria: <em>cost</em> criteria to be <em>minimized</em>, and <em>benefit</em> criteria to be <em>maximized</em>; in the proportions 1/3 respectively 2/3.</li>
+<li>Random performances on each type of criteria  are drawn, either from an ordinal scale [0;10], or from a cardinal scale [0.0;100.0], following a parametric triangular law of mode: 30% performance for cheap, 50% for neutral, and$70% performance for expensive decision actions, with constant probability repartition 0.5 on each side of the respective mode.</li>
+<li>Cost criteria use mostly cardinal scales (3/4), whereas benefit criteria use mostly ordinal scales (2/3).</li>
+<li>The sum of weights of the cost criteria by default equals the sum weights of the benefit criteria: weighDistribution = &#8216;equiobjectives&#8217;.</li>
+<li>On cardinal criteria, both of cost or of benefit type, we observe following constant preference discrimination quantiles: 5% indifferent situations, 90% strict preference situations, and 5% veto situation.</li>
+</ul>
+</div></blockquote>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>If <em>numberOfActions</em> == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated</li>
+<li>If <em>numberOfCriteria</em> == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated</li>
+<li><em>weightDistribution</em> = {&#8216;equiobjectives&#8217;|&#8217;fixed&#8217;|&#8217;random&#8217;|&#8217;equisignificant&#8217; (default = &#8216;equisignificant&#8217;)}</li>
+<li>default <em>weightScale</em> for &#8216;random&#8217; weightDistribution is 1 - numberOfCriteria</li>
+<li>All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.</li>
+<li>commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).</li>
+<li>commonPercentiles = {&#8216;ind&#8217;:5, &#8216;pref&#8217;:10, [&#8216;weakveto&#8217;:90,] &#8216;veto&#8217;:95} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.</li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Minimal number of decision actions required is 3 !</p>
+</div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span>Tutorials of the Digraph3 resources</span></a></p>
 </div>
 </div>
 <div class="section" id="links-and-appendices">
-<h2><a class="toc-backref" href="#id39">Links and appendices</a><a class="headerlink" href="#links-and-appendices" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id41">Links and appendices</a><a class="headerlink" href="#links-and-appendices" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="documents">
 <h3>Documents<a class="headerlink" href="#documents" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -3282,7 +3313,7 @@ matching the <cite>RandomLinearVotingProfile</cite> class provided by  the <a cl
 </div>
 <div class="section" id="footnotes">
 <h3>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h3>
-<table class="docutils footnote" frame="void" id="id30" rules="none">
+<table class="docutils footnote" frame="void" id="id32" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id5">2</a>, <a class="fn-backref" href="#id10">3</a>, <a class="fn-backref" href="#id18">4</a>)</em> The <code class="docutils literal"><span class="pre">exportGraphViz</span></code> method is depending on drawing tools from <a class="reference external" href="http://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></code> to install them. There are ready <code class="docutils literal"><span class="pre">dmg</span></code> installers for Mac OS.</td></tr>
@@ -3361,7 +3392,8 @@ matching the <cite>RandomLinearVotingProfile</cite> class provided by  the <a cl
 <li><a class="reference internal" href="#generating-random-performance-tableaux">Generating random performance tableaux</a><ul>
 <li><a class="reference internal" href="#the-randomperftabs-module">The randomPerfTabs module</a></li>
 <li><a class="reference internal" href="#the-randomperformancetableau-generator">The RandomPerformanceTableau generator</a></li>
-<li><a class="reference internal" href="#the-randomrankperformancetableau-generator">The <cite>RandomRankPerformanceTableau</cite> generator</a></li>
+<li><a class="reference internal" href="#the-randomrankperformancetableau-techdoc-html-randomperftabs-randomrankperformancetableau-generator">The ``RandomRankPerformanceTableau &lt;techDoc.html#randomPerfTabs.RandomRankPerformanceTableau&gt;`_ generator</a></li>
+<li><a class="reference internal" href="#the-randomcbperformancetableau-generator">The RandomCBPerformanceTableau generator</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#links-and-appendices">Links and appendices</a><ul>
