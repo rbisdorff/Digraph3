@@ -1913,6 +1913,17 @@ For testing purposes a special constructor is provided for extracting partial pe
        'g1'  |   2.00   |   8.00   8.00   7.00  
        'g2'  |   3.00   |  -30.71  -41.65  -32.47  
 
+Similarly, one may set to constant performance values a subset of actions and/or criteria:
+
+    >>> from perfTabs import ConstantPerformanceTableau
+    >>> ct = ConstantPerformanceTableau(t,actionsSubset=['a2','a3','a6'],criteriaSubset=['g1','g2'])
+    >>> ct.showPerformanceTableau()
+    *----  performance tableau -----*
+    criteria | weights |   'a2'   'a3'   'a6'  ...  
+    ---------|----------------------------------
+       'g1'  |   2     |   5.00   5.00   5.00  ...
+       'g2'  |   3     |  50.00  50.00  50.00  ...
+    ...
 
 Back to :ref:`Tutorial-label`
 

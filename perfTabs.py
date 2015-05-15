@@ -2832,7 +2832,7 @@ class ConstantPerformanceTableau(PerformanceTableau):
         criteriaKeys = [g for g in criteriaSubset]
         for g in criteriaKeys:
             constantPerformance = (self.criteria[g]['scale'][1] - \
-                                 self.criteria[g]['scale'][0])*position
+                    self.criteria[g]['scale'][0]) * position
             for x in actionsKeys:
                 self.evaluation[g][x] = Decimal(str(constantPerformance))
                                     
