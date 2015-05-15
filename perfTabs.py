@@ -1368,33 +1368,33 @@ The performance evaluations of each decision alternative on each criterion are g
         with 5 criteria, colorLevels=5 and Correlations = True, one obtains for instance
         the following ordered dictionary in return::
 
-        OrderedDict([
-        ('title', 'Performance Heatmap'),
-        ('colorPalette', [(Decimal('0.2'), '"#FDAE61"', 'q1'),
-                          (Decimal('0.4'), '"#FEE08B"', 'q2'),
-                          (Decimal('0.6'), '"#FFFFBF"', 'q3'),
-                          (Decimal('0.8'), '"#D9EF8B"', 'q4'),
-                          (Decimal('1.0'), '"#A6D96A"', 'q5')]),
-        ('criteriaList', ['g5', 'g2', 'g4', 'g1', 'g3']),
-        ('criteriaCorrelations', [Decimal('0.71428'),
-                                  Decimal('0.48571'),
-                                  Decimal('0.40952'),
-                                  Decimal('0.35238'),
-                                  Decimal('0.16190')]),
-        ('quantiles', OrderedDict([('a1', [(Decimal('3'), 'q2'),
-                                           (Decimal('-17.92'), 'q5'),
-                                           (Decimal('26.68'), 'q2'),
-                                           (Decimal('1'), 'q1'),
-                                           (Decimal('-33.99'), 'q3')]),
-                                   ('a2', [(Decimal('6'), 'q3'),
-                                           (Decimal('-30.71'), 'q5'),
-                                           (Decimal('66.35'), 'q4'),
-                                           (Decimal('8'), 'q5'),
-                                           (Decimal('-77.77'), 'q2')]),
-                                   ('a3', ...
-        ...
-        ])
-        
+            OrderedDict([
+            ('title', 'Performance Heatmap'),
+            ('colorPalette', [(Decimal('0.2'), '"#FDAE61"', 'q1'),
+                              (Decimal('0.4'), '"#FEE08B"', 'q2'),
+                              (Decimal('0.6'), '"#FFFFBF"', 'q3'),
+                              (Decimal('0.8'), '"#D9EF8B"', 'q4'),
+                              (Decimal('1.0'), '"#A6D96A"', 'q5')]),
+            ('criteriaList', ['g5', 'g2', 'g4', 'g1', 'g3']),
+            ('criteriaCorrelations', [Decimal('0.71428'),
+                                      Decimal('0.48571'),
+                                      Decimal('0.40952'),
+                                      Decimal('0.35238'),
+                                      Decimal('0.16190')]),
+            ('quantiles', OrderedDict([('a1', [(Decimal('3'), 'q2'),
+                                               (Decimal('-17.92'), 'q5'),
+                                               (Decimal('26.68'), 'q2'),
+                                               (Decimal('1'), 'q1'),
+                                               (Decimal('-33.99'), 'q3')]),
+                                       ('a2', [(Decimal('6'), 'q3'),
+                                               (Decimal('-30.71'), 'q5'),
+                                               (Decimal('66.35'), 'q4'),
+                                               (Decimal('8'), 'q5'),
+                                               (Decimal('-77.77'), 'q2')]),
+                                       ('a3', ...
+            ...
+            ])
+
         """
         from collections import OrderedDict
         from decimal import Decimal
