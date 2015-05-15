@@ -1728,15 +1728,15 @@ The RandomPerformanceTableau generator specializes the PerformanceTableau class 
          | If 'fixed', the weightScale must provided a corresponding weights
          | distribution;
          | If 'equisignificant', all criterion weights are put to unity.
-    * weightScale := [Min,Max] (default =[1,numberOfCriteria].
+    * weightScale := [Min,Max] (default =(1,numberOfCriteria).
     * IntegerWeights := True (default) | False (normalized to proportions of 1.0).
     * commonScale := [Min;Max]; common performance measuring scales (default = [0;100])
-    * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds.
-    * commonMode := common random distribution of random performance measuremenats:
-         | ('uniform',Min,Max), uniformly distributed between min and max values. 
+    * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. For each threshold type *x* in *{q,p,v}*, the float x0 value represents a constant and the float x1 value a proportional value. Default values are [(10.0,0.0),(20.0,0.0),(80.0,0,0)]. 
+    * commonMode := common random distribution of random performance measurements:
+         | ('uniform',Min,Max), uniformly distributed float values on the given common scales' range. 
          | ('normal',mu,sigma), truncated Gaussion distribution. 
-         | ('triangular',mode,repartition), generalized triangular distribution 
-         | ('beta',alpha,beta).
+         | ('triangular',mode,repartition), generalized triangular distribution with a probility repartition parameter specifying the probability mass accumulated until the mode value.
+         | ('beta',alpha,beta), a beta genarator with standard alpha and beta parameters.
     * valueDigits := <integer>, precision of performance measurements (2 decimal digits by default).
         
 Code example::

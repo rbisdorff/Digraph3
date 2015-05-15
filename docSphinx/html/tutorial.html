@@ -3090,21 +3090,21 @@ linearBallot = {
 </dd>
 </dl>
 </li>
-<li><p class="first">weightScale := [Min,Max] (default =[1,numberOfCriteria].</p>
+<li><p class="first">weightScale := [Min,Max] (default =(1,numberOfCriteria).</p>
 </li>
 <li><p class="first">IntegerWeights := True (default) | False (normalized to proportions of 1.0).</p>
 </li>
 <li><p class="first">commonScale := [Min;Max]; common performance measuring scales (default = [0;100])</p>
 </li>
-<li><p class="first">commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds.</p>
+<li><p class="first">commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. For each threshold type <em>x</em> in <em>{q,p,v}</em>, the float x0 value represents a constant and the float x1 value a proportional value. Default values are [(10.0,0.0),(20.0,0.0),(80.0,0,0)].</p>
 </li>
 <li><dl class="first docutils">
-<dt>commonMode := common random distribution of random performance measuremenats:</dt>
+<dt>commonMode := common random distribution of random performance measurements:</dt>
 <dd><div class="first last line-block">
-<div class="line">(&#8216;uniform&#8217;,Min,Max), uniformly distributed between min and max values.</div>
+<div class="line">(&#8216;uniform&#8217;,Min,Max), uniformly distributed float values on the given common scales&#8217; range.</div>
 <div class="line">(&#8216;normal&#8217;,mu,sigma), truncated Gaussion distribution.</div>
-<div class="line">(&#8216;triangular&#8217;,mode,repartition), generalized triangular distribution</div>
-<div class="line">(&#8216;beta&#8217;,alpha,beta).</div>
+<div class="line">(&#8216;triangular&#8217;,mode,repartition), generalized triangular distribution with a probility repartition parameter specifying the probability mass accumulated until the mode value.</div>
+<div class="line">(&#8216;beta&#8217;,alpha,beta), a beta genarator with standard alpha and beta parameters.</div>
 </div>
 </dd>
 </dl>

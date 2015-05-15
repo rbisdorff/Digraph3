@@ -48,7 +48,7 @@ class RandomPerformanceTableau(PerformanceTableau):
         * commonScale := [Min;Max]; common performance measuring scales (default = [0;100])
         * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p)
           and considerable performance difference discrimination thresholds.
-        * commonMode := common random distribution of random performance measuremenats:
+        * commonMode := common random distribution of random performance measurements:
              | ('uniform',Min,Max), uniformly distributed between min and max values. 
              | ('normal',mu,sigma), truncated Gaussion distribution. 
              | ('triangular',mode,repartition), generalized triangular distribution 
