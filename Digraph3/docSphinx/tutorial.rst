@@ -1776,7 +1776,7 @@ matching the ``RandomLinearVotingProfile`` class provided by  the `votingDigraph
 *Parameters*:
     * number of actions,
     * number of performance criteria,
-    * weightDistribution := equisignificant | random (default, see `above <tutorial.html#the-randomperformancetableau-generatorRandom>`_ above)
+    * weightDistribution := equisignificant | random (default, see `above <tutorial.html#the-randomperformancetableau-generator>`_ above)
     * weightScale := (1, 1 | numberOfCriteria (default when random))
     * integerWeights := Boolean (True = default) 
     * commonThresholds (default) := {
