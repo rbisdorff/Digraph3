@@ -1859,9 +1859,9 @@ In this example we notice the three types of decision actions, as well as two ty
       standard difference deviation : 39.02
     ...
 
-A colored heatmap version is also provided:
+A (potentially ranked) colored heatmap with 5 color levels is also provided:
     
-    >>> t.showHTMLPerformanceHeatmap(Ranked=False)
+    >>> t.showHTMLPerformanceHeatmap(colorLevels=5,Ranked=False)
 
 .. image:: randomCBHeatmap.png
    :width: 500 px
