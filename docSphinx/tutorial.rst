@@ -1722,7 +1722,7 @@ This module provides several random performance tableaux generators, i.e. Perfor
 The `RandomPerformanceTableau <techDoc.html#randomPerfTabs.RandomPerformanceTableau>`_ generator
 ...............................................................................................
     
-The RandomPerformanceTableau generator, the simplest of the kind, specializes the PerformanceTableau class and takes the following parameters:
+The ``RandomPerformanceTableau generator``, the simplest of the kind, specializes the ``PerformanceTableau`` class and takes the following parameters:
 
     * numberOfActions := nbr of decision actions.
     * numberOfCriteria := number performance criteria.
@@ -1766,13 +1766,13 @@ Code example:
                     }
             }
 
-The `RandomRankPerformanceTableau` generator
-............................................
+The ``RandomRankPerformanceTableau <techDoc.html#randomPerfTabs.RandomRankPerformanceTableau>`_ generator
+.........................................................................................................
 
 Random generator for multiple criteria ranked (without ties) performances of a
 given number of decision actions. On each criterion,
-all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is
-matching the `RandomLinearVotingProfile` class provided by  the `votingDigraphs <techDoc.html#votingDigraphs-label>`_ module.  
+all decision actions are hence lineraly ordered. The ``RandomRankPerformanceTableau`` class is
+matching the ``RandomLinearVotingProfile`` class provided by  the `votingDigraphs <techDoc.html#votingDigraphs-label>`_ module.  
         
 *Parameters*:
     * number of actions,
@@ -1785,6 +1785,31 @@ matching the `RandomLinearVotingProfile` class provided by  the `votingDigraphs 
         | 'pref':(1,0),
         | 'veto':(numberOfActions,0)
         | } (default)
+
+
+The `RandomCBPerformanceTableau <techDoc.html#randomPerfTabs.RandomCBPerformanceTableau>`_ generator
+....................................................................................................
+
+The generation of random *Cost* versus *Benefit* oriented performance tableaux follows the directives below:
+
+    * We distinguish three types of decision actions: *cheap*, *neutral* and *expensive* ones with an equal proportion of 1/3. We also distinguish two types of weighted criteria: *cost* criteria to be *minimized*, and *benefit* criteria to be *maximized*; in the proportions 1/3 respectively 2/3. 
+    * Random performances on each type of criteria  are drawn, either from an ordinal scale [0;10], or from a cardinal scale [0.0;100.0], following a parametric triangular law of mode: 30\% performance for cheap, 50\% for neutral, and$70\% performance for expensive decision actions, with constant probability repartition 0.5 on each side of the respective mode. 
+    * Cost criteria use mostly cardinal scales (3/4), whereas benefit criteria use mostly ordinal scales (2/3). 
+    * The sum of weights of the cost criteria by default equals the sum weights of the benefit criteria: weighDistribution = 'equiobjectives'. 
+    * On cardinal criteria, both of cost or of benefit type, we observe following constant preference discrimination quantiles: 5\% indifferent situations, 90\% strict preference situations, and 5\% veto situation. 
+ 
+*Parameters*:
+    * If *numberOfActions* == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated
+    * If *numberOfCriteria* == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated
+    * *weightDistribution* = {'equiobjectives'|'fixed'|'random'|'equisignificant' (default = 'equisignificant')}
+    * default *weightScale* for 'random' weightDistribution is 1 - numberOfCriteria
+    * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.
+    * commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).
+    * commonPercentiles = {'ind':5, 'pref':10, ['weakveto':90,] 'veto':95} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.
+
+.. warning::
+
+    Minimal number of decision actions required is 3 ! 
 
 Back to :ref:`Tutorial-label`
 
