@@ -1696,6 +1696,73 @@ It might be worth, as an **exercise**, to modify on the one hand this importance
 
 Back to :ref:`Tutorial-label`
 
+.. _RandomPerformaceTableau-Tutorial-label:
+
+Generating random performance tableaux
+--------------------------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+..
+   See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
+
+The randomPerfTabs module
+.........................
+
+This module (see technical reference) provides for generators of random performance tableaux for testing methods and tools presented and discussed in the Algorithmic Decision Theory cours at the University of Luxembourg.
+
+The simplest model called RandomPerformaceTableau generates a set of *n* decision actions, a set of *m* real-valued performance criteria, ranging from 0.0 to 100.0, with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale.  
+
+The RandomPerformanceTableau model
+..................................
+    
+The RandomPerformanceTableau generator specializes the PerformanceTableau class and takes the following parameters:
+
+    * numberOfActions := nbr of decision actions.
+    * numberOfCriteria := number performance criteria.
+    * weightDistribution := 'random' (default) | 'fixed' | 'equisignificant'.
+         | If 'random', weights are uniformly selected randomly
+         | form the given weight scale;
+         | If 'fixed', the weightScale must provided a corresponding weights
+         | distribution;
+         | If 'equisignificant', all criterion weights are put to unity.
+    * weightScale := [Min,Max] (default =[1,numberOfCriteria].
+    * IntegerWeights := True (default) | False (normalized to proportions of 1.0).
+    * commonScale := [Min;Max]; common performance measuring scales (default = [0;100])
+    * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds.
+    * commonMode := common random distribution of random performance measuremenats:
+         | ('uniform',Min,Max), uniformly distributed between min and max values. 
+         | ('normal',mu,sigma), truncated Gaussion distribution. 
+         | ('triangular',mode,repartition), generalized triangular distribution 
+         | ('beta',alpha,beta).
+    * valueDigits := <integer>, precision of performance measurements (2 decimal digits by default).
+        
+Code example::
+        >>> from randomPerfTabs import RandomPerformanceTableau
+        >>> t = RandomPerformanceTableau(numberOfActions=3,numberOfCriteria=1,seed=100)
+        >>> t.actions
+            {'a1': {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'},
+             'a2': {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'},
+             'a3': {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'}}
+        >>> t.criteria
+            {'g1': {'thresholds': {'ind' : (Decimal('10.0'), Decimal('0.0')),
+                                   'veto': (Decimal('80.0'), Decimal('0.0')),
+                                   'pref': (Decimal('20.0'), Decimal('0.0'))},
+                    'scale': [0.0, 100.0],
+                    'weight': Decimal('1'),
+                    'name': 'digraphs.RandomPerformanceTableau() instance',
+                    'comment': 'Arguments: ; weightDistribution=random;
+                        weightScale=(1, 1); commonMode=None'}}
+        >>> t.evaluation
+            {'g01': {'a01': Decimal('45.95'),
+                     'a02': Decimal('95.17'),
+                     'a03': Decimal('17.47')
+                    }
+            }
+
+
 
 Links and appendices
 --------------------
