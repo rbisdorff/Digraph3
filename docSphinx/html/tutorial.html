@@ -3074,7 +3074,6 @@ linearBallot = {
 <li>The simplest model called <cite>RandomPerformaceTableau</cite> generates a set of <em>n</em> decision actions, a set of <em>m</em> real-valued performance criteria, ranging from 0.0 to 100.0, with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale.</li>
 <li>In order to study aggregation of linear orders, we provide a model called <cite>RandomRankPerformanceTableau</cite> which provides lineraly ordered performances without ties on multple criteria for a given number of decision actions.</li>
 <li>The most useful random generator, called <cite>RandomCBPerformanceTableau</cite>, proposes a two decision objectives, named <em>Costs</em> (to be mimized) and Benefits (to be maximized), performance tableau model, in order to generate more or less contradictory performances on these objectives. Low costs will be randomly coupled with low benefits, whereas high costs will be randomly coupled with high benefits.</li>
-<li>Multiple objectives models are also available via a generator, called <cite>RandomCoalitionsPerformanceTableau</cite>, for multiple criteria coalitions based performances.</li>
 </ol>
 </div></blockquote>
 </div>
@@ -3259,8 +3258,18 @@ matching the <code class="docutils literal"><span class="pre">RandomLinearVoting
 23
 24
 25
-26</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s">&#39;equiobjectives&#39;</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span>
+<span class="gp">... </span>         <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+<span class="gp">... </span>         <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="gp">... </span>         <span class="n">weightDistribution</span><span class="o">=</span><span class="s">&#39;equiobjectives&#39;</span><span class="p">,</span>
+<span class="gp">... </span>         <span class="n">commonPercentiles</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;ind&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s">&#39;pref&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s">&#39;veto&#39;</span><span class="p">:</span><span class="mi">95</span><span class="p">},</span>
+<span class="gp">... </span>         <span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
 <span class="go">*----- show decision action --------------*</span>
 <span class="go">key:  a1</span>

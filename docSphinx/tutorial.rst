@@ -1716,7 +1716,9 @@ This module provides several random performance tableaux generators, i.e. Perfor
     1. The simplest model called `RandomPerformaceTableau` generates a set of *n* decision actions, a set of *m* real-valued performance criteria, ranging from 0.0 to 100.0, with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale. 
     2. In order to study aggregation of linear orders, we provide a model called `RandomRankPerformanceTableau` which provides lineraly ordered performances without ties on multple criteria for a given number of decision actions.
     3. The most useful random generator, called `RandomCBPerformanceTableau`, proposes a two decision objectives, named *Costs* (to be mimized) and Benefits (to be maximized), performance tableau model, in order to generate more or less contradictory performances on these objectives. Low costs will be randomly coupled with low benefits, whereas high costs will be randomly coupled with high benefits. 
-    4. Multiple objectives models are also available via a generator, called `RandomCoalitionsPerformanceTableau`, for multiple criteria coalitions based performances.
+
+.. ..
+       4. Multiple objectives models are also available via a generator, called `RandomCoalitionsPerformanceTableau`, for multiple criteria coalitions based performances.
  
 
 The `RandomPerformanceTableau <techDoc.html#randomPerfTabs.RandomPerformanceTableau>`_ generator
@@ -1812,7 +1814,12 @@ The generation of random *Cost* versus *Benefit* oriented performance tableaux f
 
 **Example Python session**:
     >>> from randomPerfTabs import RandomCBPerformanceTableau
-    >>> t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,weightDistribution='equiobjectives',seed=100)
+    >>> t = RandomCBPerformanceTableau(
+    ...          numberOfActions=7,
+    ...          numberOfCriteria=5,
+    ...          weightDistribution='equiobjectives',
+    ...          commonPercentiles={'ind':5,'pref':10,'veto':95},
+    ...          seed=100)
     >>> t.showActions()
     *----- show decision action --------------*
     key:  a1
