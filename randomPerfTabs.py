@@ -1094,20 +1094,13 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                     m = commonScale[0]
                     M = commonScale[1]
                     if VariableGenerators:
-                        randomModesList = [30.0,50.0,70.0]
+                        span = commonScale[1]-commonScale[0]
+                        randomModesList = [0.3*span,0.5*span,0.7*span]
                         xm = random.choice(randomModesList)
                     else:
                         xm = randomMode[1]
                     r  = randomMode[2]
                     self.actions[a]['generators'][g] = (randomMode[0],xm,r)
-##                    u = random.random()
-##                    #print 'm,xm,M,r,u', m,xm,M,r,u 
-##                    if u < r:
-##                        #randeval = m + (math.sqrt(r*u*(m-xm)**2))/r
-##                        randeval = m + math.sqrt(u/r)*(xm-m)
-##                    else:
-##                        #randeval = (M*r - M + math.sqrt((-1+r)*(-1+u)*(M-xm)**2))/(-1+r)
-##                        randeval = M - math.sqrt((1-u)/(1-r))*(M-xm)
                     # setting a speudo random seed
                     rdseed = random.random()
                     rngtr = RNGTr(m,M,xm,r,seed=rdseed)
@@ -1145,6 +1138,46 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
         self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
 
+#---------------
+
+class Random3CoalitionsPerformanceTableau(RandomCoalitionsPerformanceTableau):
+    """
+    Specialization of the RandomCoalitionsPerformanceTableau
+    for 3 coalitions of criteria.
+    """
+    def __init__(self,numberOfActions = 20, numberOfCriteria = 13,
+                 weightDistribution = 'equicoalitions', weightScale=None,
+                 integerWeights = True, commonScale = (0.0,100.0),
+                 commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)],
+                 commonDistribution = ['triangular','variable',0.5],
+                 valueDigits=2,
+                 Debug=False, 
+                 seed= None):
+        from copy import deepcopy
+        if commonDistribution[1] == 'variable':
+            VariableGenerators = True
+            commonMode = [commonDistribution[0],
+                          (commonScale[0]+commonScale[1])/2.0,
+                          commonDistribution[2]]
+        else:
+            VariableGenerators = False
+        t = RandomCoalitionsPerformanceTableau(numberOfActions=numberOfActions,
+                                               numberOfCriteria=numberOfCriteria,
+                                               weightDistribution=weightDistribution,
+                                               weightScale=weightScale,
+                                               integerWeights=integerWeights,
+                                               commonScale =commonScale,
+                                               commonThresholds=commonThresholds,
+                                               commonMode=commonDistribution,
+                                               VariableGenerators=VariableGenerators,
+                                               valueDigits=valueDigits,
+                                               Debug=Debug, seed=seed)
+        print(t.__dict__)
+        self.__dict__ = t.__dict__
+        
+            
+        
+#---------------
 class RandomCBPerformanceTableau(PerformanceTableau):
     """
     Full automatic generation of random
@@ -1660,27 +1693,35 @@ if __name__ == "__main__":
     from weakOrders import QuantilesRankingDigraph
     from randomPerfTabs import *
 
-    print('*---------- test percentiles of variable thresholds --------*') 
-##    t = RandomCoalitionsPerformanceTableau(weightDistribution='equicoalitions',
-##                                           seed=100)
-    t = RandomPerformanceTableau(commonThresholds=[(90,0),(100,0),(110,0)],
-                                           seed=100)
-    t.showAll()
-
-    t.computeDefaultDiscriminationThresholds(quantile={'ind':10.0,'pref':20.0,'weakVeto':90.0,'veto':95.0})
-    for g in [y for y in t.criteria]:
-        print(g, t.criteria[g]['thresholds'])
-        for th in t.criteria[g]['thresholds']:
-            print(th)
-            print(' variable:', end=' ')
-            print(t.computeVariableThresholdPercentile(g,th,Debug=False))
-            print(' constant:', end=' ') 
-            print(t.computeThresholdPercentile(g,th))
-    t.showPerformanceTableau()
-    t.showCriteria(Debug=False)
-    t.saveXMCDA2('testPerc',servingD3=False)
+    t = Random3CoalitionsPerformanceTableau(numberOfActions=31,
+                                            numberOfCriteria=13,
+                                            commonScale=[0.0,50.0],
+                                            commonDistribution=['triangular','variable',0.5])
+    t.showCriteria()
+    t.showStatistics()
     t.showHTMLPerformanceHeatmap(Correlations=True)
-
+    
+##    print('*---------- test percentiles of variable thresholds --------*') 
+####    t = RandomCoalitionsPerformanceTableau(weightDistribution='equicoalitions',
+####                                           seed=100)
+##    t = RandomPerformanceTableau(commonThresholds=[(90,0),(100,0),(110,0)],
+##                                           seed=100)
+##    t.showAll()
+##
+##    t.computeDefaultDiscriminationThresholds(quantile={'ind':10.0,'pref':20.0,'weakVeto':90.0,'veto':95.0})
+##    for g in [y for y in t.criteria]:
+##        print(g, t.criteria[g]['thresholds'])
+##        for th in t.criteria[g]['thresholds']:
+##            print(th)
+##            print(' variable:', end=' ')
+##            print(t.computeVariableThresholdPercentile(g,th,Debug=False))
+##            print(' constant:', end=' ') 
+##            print(t.computeThresholdPercentile(g,th))
+##    t.showPerformanceTableau()
+##    t.showCriteria(Debug=False)
+##    t.saveXMCDA2('testPerc',servingD3=False)
+##    t.showHTMLPerformanceHeatmap(Correlations=True)
+##
     
 
 ##    t = RandomPerformanceTableau(weightScale=(1,10),

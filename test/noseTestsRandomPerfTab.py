@@ -92,6 +92,20 @@ def testCBPerformanceTableau():
     g = BipolarOutrankingDigraph(t)
     g.exportGraphViz()
 
+def test3CoalitionsPerformanceTableau():
+    print('*==>> random 3 Coalitions Performance Tableaux ------------*')
+    t = Random3CoalitionsPerformanceTableau(numberOfActions=31,
+                                            numberOfCriteria=13,
+                                            commonScale=[0.0,50.0],
+                                            commonDistribution=['triangular',
+                                                                'variable',
+                                                                0.5])
+    t.saveXMCDA2('test',servingD3=False)
+    t.showCriteria(IntegerWeights=True)
+    g = BipolarOutrankingDigraph(t)
+    rbc = RandkingByChoosingDigraph(g)
+    rbc.showRankingByChoosing()
+
 def testCoalitionsPerformanceTableau():
     print('*==>> random Coalitions Performance Tableaux ------------*')
     t = RandomCoalitionsPerformanceTableau(numberOfActions=13,\
@@ -102,11 +116,9 @@ def testCoalitionsPerformanceTableau():
     t.saveXMCDA2('test',servingD3=False)
     t.showCriteria(IntegerWeights=True)
     g = BipolarOutrankingDigraph(t)
-    g.computeRankingByChoosing(CoDual=False)
-    g.showRankingByChoosing()
-    prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
-    prg.showWeakOrder()
-    print(g.computeOrdinalCorrelation(prg))
+    rbc = RankingByChoosingDigraph(g)
+    rbc.showRankingByChoosing()
+    print(g.computeOrdinalCorrelation(rbc))
 
 def testRandomCoalitionsPerformanceTableau():
     print('*==>> random S3 Performance Tableaux ------------*')
@@ -146,5 +158,4 @@ def testPercentilesOfThresholds():
     t.showPerformanceTableau()
     t.showCriteria(Debug=False)
     t.saveXMCDA2('testPerc',servingD3=False)
-    t.showHTMLPerformanceHeatmap(Correlations=True)
 
