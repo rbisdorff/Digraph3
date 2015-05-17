@@ -3455,7 +3455,7 @@ matching the <code class="docutils literal"><span class="pre">RandomLinearVoting
 </div>
 <div class="section" id="the-random3objectivesperformancetableau-generator">
 <h3>The <a class="reference external" href="techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau">Random3ObjectivesPerformanceTableau</a> generator<a class="headerlink" href="#the-random3objectivesperformancetableau-generator" title="Permalink to this headline">¶</a></h3>
-<p>The class provides a Random generator of performace tableaux concerning three preferential decision objectives which take into account <em>economical</em>, <em>societal</em> as well as <em>environmental</em> aspects.</p>
+<p>The class provides a Random generator of performace tableaux concerning three preferential decision objectives which take randomly into account <em>economical</em>, <em>societal</em> as well as <em>environmental</em> aspects.</p>
 <p>Each decision action is qualified randomly as <em>weak</em> (-), <em>fair</em> (~) or <em>good</em> (+) on each of the three objectives.</p>
 <dl class="docutils">
 <dt>Generator directives are the following:</dt>
@@ -3469,13 +3469,14 @@ matching the <code class="docutils literal"><span class="pre">RandomLinearVoting
 <li>commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)]: Performance discrimination thresholds may be set for &#8216;ind&#8217;, &#8216;pref&#8217; and &#8216;veto&#8217;,</li>
 <li>commonDistribution = [&#8216;triangular&#8217;,&#8217;variable&#8217;,0.5]: random number generators of various other types (&#8216;uniform&#8217;,&#8217;beta&#8217;) are available,</li>
 <li>valueDigits = 2 (default): evaluations are encoded as Decimals,</li>
+<li>missingProbability = 0.05 (default): random insertion of missing values with given probability,</li>
 <li>seed= None.</li>
 </ul>
 </dd>
 </dl>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If the mode of the triangular districbution is set to &#8216;variable&#8217;,
+<p class="last">If the mode of the <em>triangular</em> distribution is set to &#8216;<em>variable</em>&#8216;,
 three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span
 are set at random for each coalition and action.</p>
 </div>
@@ -3511,44 +3512,38 @@ are set at random for each coalition and action.</p>
 24
 25
 26
-27
-28
-29
-30</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
+27</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span>
 <span class="gp">... </span>         <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span>
 <span class="gp">... </span>         <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
 <span class="gp">... </span>         <span class="n">weightDistribution</span><span class="o">=</span><span class="s">&#39;equiobjectives&#39;</span><span class="p">,</span>
 <span class="gp">... </span>         <span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
-<span class="go">*----- show decision action --------------*</span>
-<span class="go">key:  a1</span>
-<span class="go">  short name: a1</span>
-<span class="go">  name:       random cheap decision action</span>
-<span class="go">key:  a2</span>
-<span class="go">  short name: a2</span>
-<span class="go">  name:       random neutral decision action</span>
-<span class="gp">...</span>
-<span class="go">key:  a7</span>
-<span class="go">  short name: a7</span>
-<span class="go">  name:       random advantageous decision action</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
-<span class="go">*----  criteria -----*</span>
-<span class="go">g1 &#39;random ordinal benefit criterion&#39;</span>
-<span class="go">  Scale = (0, 10)</span>
-<span class="go">  Weight = 0.167</span>
-<span class="go">g2 &#39;random cardinal cost criterion&#39;</span>
-<span class="go">  Scale = (0.0, 100.0)</span>
-<span class="go">  Weight = 0.250</span>
-<span class="go">  Threshold ind  :  1.76 + 0.00x ; percentile:  0.095</span>
-<span class="go">  Threshold pref :  2.16 + 0.00x ; percentile:  0.143</span>
-<span class="go">  Threshold veto : 73.19 + 0.00x ; percentile:  0.952</span>
-<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showObjectives</span><span class="p">()</span>
+<span class="go">*------ show objectives -------&quot;</span>
+<span class="go">Soc: Societal aspect</span>
+<span class="go">   g02 random societal criterion 16</span>
+<span class="go">   g03 random societal criterion 16</span>
+<span class="go">   g06 random societal criterion 16</span>
+<span class="go">   g08 random societal criterion 16</span>
+<span class="go">   g09 random societal criterion 16</span>
+<span class="go">  Total weight: 80.00 (5 criteria)</span>
+<span class="go">Eco: Economical aspect</span>
+<span class="go">   g01 random economic criterion 20</span>
+<span class="go">   g04 random economic criterion 20</span>
+<span class="go">   g11 random economic criterion 20</span>
+<span class="go">   g13 random economic criterion 20</span>
+<span class="go">  Total weight: 80.00 (4 criteria)</span>
+<span class="go">Env: Environmental aspect</span>
+<span class="go">   g05 random environmental criterion 20</span>
+<span class="go">   g07 random environmental criterion 20</span>
+<span class="go">   g10 random environmental criterion 20</span>
+<span class="go">   g12 random environmental criterion 20</span>
+<span class="go">  Total weight: 80.00 (4 criteria)</span>
 </pre></div>
 </td></tr></table></div>
 </dd>
 </dl>
-<p>In this example we notice the three types of decision actions, as well as two types of criteria with either an ordinal or a cardinal performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the <em>indifference</em> and 10% below the <em>preference</em> discrimanting threshold. About 5% will be considered as <em>considerably large</em>. More statistics about the generated performances is available as follows:</p>
+<p>In this example we notice that 5 equisignificant criteria (g02, g03, g06, g08, g09) evaluate for instance the performance of the decision actions from the societal aspect. 4 equisignificant criteria do the same each time from the economical, respectively the environmental aspect. The &#8216;equiobjectives&#8217; directive results hence in a balanced total weight for each aspect.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3563,142 +3558,24 @@ are set at random for each coalition and action.</p>
 12
 13
 14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showStatistics</span><span class="p">()</span>
-<span class="go">*-------- Performance tableau summary statistics -------*</span>
-<span class="go">Instance name      : randomCBperftab</span>
-<span class="go">#Actions           : 7</span>
-<span class="go">#Criteria          : 5</span>
-<span class="go">*Statistics per Criterion*</span>
-<span class="go">Criterion name       : g1</span>
-<span class="go">  Criterion weight     : 2</span>
-<span class="go">  criterion scale    : 0.00 - 10.00</span>
-<span class="go">  mean evaluation    : 5.14</span>
-<span class="go">  standard deviation : 2.64</span>
-<span class="go">  maximal evaluation : 8.00</span>
-<span class="go">  quantile Q3 (x_75) : 8.00</span>
-<span class="go">  median evaluation  : 6.50</span>
-<span class="go">  quantile Q1 (x_25) : 3.50</span>
-<span class="go">  minimal evaluation : 1.00</span>
-<span class="go">  mean absolute difference      : 2.94</span>
-<span class="go">  standard difference deviation : 3.74</span>
-<span class="go">Criterion name       : g2</span>
-<span class="go">  Criterion weight     : 3</span>
-<span class="go">  criterion scale    : -100.00 - 0.00</span>
-<span class="go">  mean evaluation    : -49.32</span>
-<span class="go">  standard deviation : 27.59</span>
-<span class="go">  maximal evaluation : 0.00</span>
-<span class="go">  quantile Q3 (x_75) : -27.51</span>
-<span class="go">  median evaluation  : -35.98</span>
-<span class="go">  quantile Q1 (x_25) : -54.02</span>
-<span class="go">  minimal evaluation : -91.87</span>
-<span class="go">  mean absolute difference      : 28.72</span>
-<span class="go">  standard difference deviation : 39.02</span>
+15</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
+<span class="go">*----- show decision action --------------*</span>
+<span class="go">key:  a01</span>
+<span class="go">  name:       random decision action (Eco+ Soc- Env~)</span>
+<span class="go">  profile:    {&#39;Eco&#39;: &#39;good&#39;, &#39;Soc&#39;: &#39;weak&#39;, &#39;Env&#39;: &#39;fair&#39;}</span>
+<span class="go">key:  a02</span>
+<span class="go">  name:       random decision action (Eco~ Soc+ Env-)</span>
+<span class="go">  profile:    {&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;good&#39;, &#39;Env&#39;: &#39;weak&#39;}</span>
+<span class="go">key:  a03</span>
+<span class="go">  name:       random decision action (Eco- Soc+ Env~)</span>
+<span class="go">  profile:    {&#39;Eco&#39;: &#39;weak&#39;, &#39;Soc&#39;: &#39;good&#39;, &#39;Env&#39;: &#39;fair&#39;}</span>
+<span class="go">key:  a04</span>
+<span class="go">  name:       random decision action (Eco+ Soc~ Env+)</span>
+<span class="go">  profile:    {&#39;Eco&#39;: &#39;good&#39;, &#39;Soc&#39;: &#39;fair&#39;, &#39;Env&#39;: &#39;good&#39;}</span>
 <span class="gp">...</span>
 </pre></div>
 </td></tr></table></div>
-<p>A (potentially ranked) colored heatmap with 5 color levels is also provided:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Ranked</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/randomCBHeatmap.png"><img alt="_images/randomCBHeatmap.png" class="align-center" src="_images/randomCBHeatmap.png" style="width: 500px;" /></a>
-<dl class="docutils">
-<dt>Such a performance tableau may be stored and reaccessed in the XMCDA2 encoded format:</dt>
-<dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">saveXMCDA2</span><span class="p">(</span><span class="s">&#39;temp&#39;</span><span class="p">)</span>
-<span class="go">*----- saving performance tableau in XMCDA 2.0 format  -------------*</span>
-<span class="go">File: temp.xml saved !</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">XMCDA2PerformanceTableau</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">XMCDA2PerformanceTableau</span><span class="p">(</span><span class="s">&#39;temp&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
-</pre></div>
-</td></tr></table></div>
-</dd>
-<dt>If needed for instance in an R session, a CSV version of the performance tableau may be created as follows:</dt>
-<dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">saveCSV</span><span class="p">(</span><span class="s">&#39;temp&#39;</span><span class="p">)</span>
-<span class="go">* --- Storing performance tableau in CSV format in file temp.csv</span>
-<span class="go">...$ less temp.csv</span>
-<span class="go">&quot;actions&quot;,&quot;g1&quot;,&quot;g2&quot;,&quot;g3&quot;,&quot;g4&quot;,&quot;g5&quot;</span>
-<span class="go">&quot;a1&quot;,1.00,-17.92,-33.99,26.68,3.00</span>
-<span class="go">&quot;a2&quot;,8.00,-30.71,-77.77,66.35,6.00</span>
-<span class="go">&quot;a3&quot;,8.00,-41.65,-69.84,53.43,8.00</span>
-<span class="go">&quot;a4&quot;,2.00,-39.49,-16.99,18.62,2.00</span>
-<span class="go">&quot;a5&quot;,6.00,-91.87,-74.85,83.09,7.00</span>
-<span class="go">&quot;a6&quot;,7.00,-32.47,-24.91,79.24,9.00</span>
-<span class="go">&quot;a7&quot;,4.00,-91.11,-7.44,48.22,7.00</span>
-</pre></div>
-</td></tr></table></div>
-</dd>
-</dl>
-<p>For testing purposes a special constructor is provided for extracting partial performance tableaux from a given tableau instance:</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">PartialPerformanceTableau</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span> <span class="o">=</span> <span class="n">PartialPerformanceTableau</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;a2&#39;</span><span class="p">,</span><span class="s">&#39;a3&#39;</span><span class="p">,</span><span class="s">&#39;a6&#39;</span><span class="p">],</span>
-<span class="go">                                     criteriaSubset=[&#39;g1&#39;,&#39;g2&#39;])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
-<span class="go">*----  performance tableau -----*</span>
-<span class="go">criteria | weights | &#39;a2&#39;   &#39;a3&#39;   &#39;a6&#39;</span>
-<span class="go">---------|-----------------------------------------</span>
-<span class="go">   &#39;g1&#39;  |   2.00   |   8.00   8.00   7.00</span>
-<span class="go">   &#39;g2&#39;  |   3.00   |  -30.71  -41.65  -32.47</span>
-</pre></div>
-</td></tr></table></div>
-<p>Similarly, one may set to constant performance values (median value of the measurement scale by default) a subset of actions and/or criteria:</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">ConstantPerformanceTableau</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ct</span> <span class="o">=</span> <span class="n">ConstantPerformanceTableau</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;a2&#39;</span><span class="p">,</span><span class="s">&#39;a3&#39;</span><span class="p">,</span><span class="s">&#39;a6&#39;</span><span class="p">],</span><span class="n">criteriaSubset</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;g1&#39;</span><span class="p">,</span><span class="s">&#39;g2&#39;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ct</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
-<span class="go">*----  performance tableau -----*</span>
-<span class="go">criteria | weights |   &#39;a2&#39;   &#39;a3&#39;   &#39;a6&#39;  ...</span>
-<span class="go">---------|----------------------------------</span>
-<span class="go">   &#39;g1&#39;  |   2     |   5.00   5.00   5.00  ...</span>
-<span class="go">   &#39;g2&#39;  |   3     |  50.00  50.00  50.00  ...</span>
-<span class="gp">...</span>
-</pre></div>
-</td></tr></table></div>
+<p>Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each decision action with respect to the three objectives. For instance, action <em>a01</em> will probably show <em>good</em> performances wrt the <em>economical</em> aspect, <em>fair</em> performances wrt the <em>environmental</em> aspect, and <em>weak</em> performances wrt to the <em>societal</em> aspect.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span>Tutorials of the Digraph3 resources</span></a></p>
 </div>
 </div>
