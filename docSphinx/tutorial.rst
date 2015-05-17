@@ -1933,9 +1933,9 @@ Similarly, one may set to constant performance values (median value of the measu
 Back to :ref:`Tutorial-label`
 
 The `Random3ObjectivesPerformanceTableau <techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau>`_ generator
-....................................................................................................
+......................................................................................................................
 
-The class provides a Random generator of performace tableaux concerning three preferential decision objectives which take into account *economical*, *societal* as well as *environmental* aspects.
+The class provides a Random generator of performace tableaux concerning three preferential decision objectives which take randomly into account *economical*, *societal* as well as *environmental* aspects.
 
 Each decision action is qualified randomly as *weak* (-), *fair* (~) or *good* (+) on each of the three objectives. 
 
@@ -1949,11 +1949,12 @@ Generator directives are the following:
     * commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)]: Performance discrimination thresholds may be set for 'ind', 'pref' and 'veto',  
     * commonDistribution = ['triangular','variable',0.5]: random number generators of various other types ('uniform','beta') are available,
     * valueDigits = 2 (default): evaluations are encoded as Decimals,
+    * missingProbability = 0.05 (default): random insertion of missing values with given probability,  
     * seed= None. 
 
 .. note::
 
-    If the mode of the triangular districbution is set to 'variable',
+    If the mode of the *triangular* distribution is set to '*variable*',
     three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span
     are set at random for each coalition and action.
     
@@ -1968,117 +1969,47 @@ Generator directives are the following:
     ...          numberOfCriteria=13,
     ...          weightDistribution='equiobjectives',
     ...          seed=100)
+    >>> t.showObjectives()
+    *------ show objectives -------"
+    Soc: Societal aspect
+       g02 random societal criterion 16
+       g03 random societal criterion 16
+       g06 random societal criterion 16
+       g08 random societal criterion 16
+       g09 random societal criterion 16
+      Total weight: 80.00 (5 criteria)
+    Eco: Economical aspect
+       g01 random economic criterion 20
+       g04 random economic criterion 20
+       g11 random economic criterion 20
+       g13 random economic criterion 20
+      Total weight: 80.00 (4 criteria)
+    Env: Environmental aspect
+       g05 random environmental criterion 20
+       g07 random environmental criterion 20
+       g10 random environmental criterion 20
+       g12 random environmental criterion 20
+      Total weight: 80.00 (4 criteria)
+
+In this example we notice that 5 equisignificant criteria (g02, g03, g06, g08, g09) evaluate for instance the performance of the decision actions from the societal aspect. 4 equisignificant criteria do the same each time from the economical, respectively the environmental aspect. The 'equiobjectives' directive results hence in a balanced total weight for each aspect. 
+
     >>> t.showActions()
     *----- show decision action --------------*
-    key:  a1
-      short name: a1
-      name:       random cheap decision action
-    key:  a2
-      short name: a2
-      name:       random neutral decision action
-    ...
-    key:  a7
-      short name: a7
-      name:       random advantageous decision action
-    >>> t.showCriteria()
-    *----  criteria -----*
-    g1 'random ordinal benefit criterion'
-      Scale = (0, 10)
-      Weight = 0.167 
-    g2 'random cardinal cost criterion'
-      Scale = (0.0, 100.0)
-      Weight = 0.250 
-      Threshold ind  :  1.76 + 0.00x ; percentile:  0.095
-      Threshold pref :  2.16 + 0.00x ; percentile:  0.143
-      Threshold veto : 73.19 + 0.00x ; percentile:  0.952
+    key:  a01
+      name:       random decision action (Eco+ Soc- Env~)
+      profile:    {'Eco': 'good', 'Soc': 'weak', 'Env': 'fair'}
+    key:  a02
+      name:       random decision action (Eco~ Soc+ Env-)
+      profile:    {'Eco': 'fair', 'Soc': 'good', 'Env': 'weak'}
+    key:  a03
+      name:       random decision action (Eco- Soc+ Env~)
+      profile:    {'Eco': 'weak', 'Soc': 'good', 'Env': 'fair'}
+    key:  a04
+      name:       random decision action (Eco+ Soc~ Env+)
+      profile:    {'Eco': 'good', 'Soc': 'fair', 'Env': 'good'}
     ...
 
-In this example we notice the three types of decision actions, as well as two types of criteria with either an ordinal or a cardinal performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the *indifference* and 10% below the *preference* discrimanting threshold. About 5% will be considered as *considerably large*. More statistics about the generated performances is available as follows:
-
-    >>> t.showStatistics()
-    *-------- Performance tableau summary statistics -------*
-    Instance name      : randomCBperftab
-    #Actions           : 7
-    #Criteria          : 5
-    *Statistics per Criterion*
-    Criterion name       : g1
-      Criterion weight     : 2
-      criterion scale    : 0.00 - 10.00
-      mean evaluation    : 5.14
-      standard deviation : 2.64
-      maximal evaluation : 8.00
-      quantile Q3 (x_75) : 8.00
-      median evaluation  : 6.50
-      quantile Q1 (x_25) : 3.50
-      minimal evaluation : 1.00
-      mean absolute difference      : 2.94
-      standard difference deviation : 3.74
-    Criterion name       : g2
-      Criterion weight     : 3
-      criterion scale    : -100.00 - 0.00
-      mean evaluation    : -49.32
-      standard deviation : 27.59
-      maximal evaluation : 0.00
-      quantile Q3 (x_75) : -27.51
-      median evaluation  : -35.98
-      quantile Q1 (x_25) : -54.02
-      minimal evaluation : -91.87
-      mean absolute difference      : 28.72
-      standard difference deviation : 39.02
-    ...
-
-A (potentially ranked) colored heatmap with 5 color levels is also provided:
-    
-    >>> t.showHTMLPerformanceHeatmap(colorLevels=5,Ranked=False)
-
-.. image:: randomCBHeatmap.png
-   :width: 500 px
-   :align: center
-
-Such a performance tableau may be stored and reaccessed in the XMCDA2 encoded format:
-    >>> t.saveXMCDA2('temp')
-    *----- saving performance tableau in XMCDA 2.0 format  -------------*
-    File: temp.xml saved !
-    >>> from perfTabs import XMCDA2PerformanceTableau
-    >>> t = XMCDA2PerformanceTableau('temp')
-    >>> ...
-
-If needed for instance in an R session, a CSV version of the performance tableau may be created as follows:
-    >>> t.saveCSV('temp')
-    * --- Storing performance tableau in CSV format in file temp.csv
-    ...$ less temp.csv
-    "actions","g1","g2","g3","g4","g5"
-    "a1",1.00,-17.92,-33.99,26.68,3.00
-    "a2",8.00,-30.71,-77.77,66.35,6.00
-    "a3",8.00,-41.65,-69.84,53.43,8.00
-    "a4",2.00,-39.49,-16.99,18.62,2.00
-    "a5",6.00,-91.87,-74.85,83.09,7.00
-    "a6",7.00,-32.47,-24.91,79.24,9.00
-    "a7",4.00,-91.11,-7.44,48.22,7.00
-
-For testing purposes a special constructor is provided for extracting partial performance tableaux from a given tableau instance:
-
-    >>> from perfTabs import PartialPerformanceTableau
-    >>> pt = PartialPerformanceTableau(t,actionsSubset=['a2','a3','a6'],
-                                         criteriaSubset=['g1','g2'])
-    >>> pt.showPerformanceTableau()
-    *----  performance tableau -----*
-    criteria | weights | 'a2'   'a3'   'a6'   
-    ---------|-----------------------------------------
-       'g1'  |   2.00   |   8.00   8.00   7.00  
-       'g2'  |   3.00   |  -30.71  -41.65  -32.47  
-
-Similarly, one may set to constant performance values (median value of the measurement scale by default) a subset of actions and/or criteria:
-
-    >>> from perfTabs import ConstantPerformanceTableau
-    >>> ct = ConstantPerformanceTableau(t,actionsSubset=['a2','a3','a6'],criteriaSubset=['g1','g2'])
-    >>> ct.showPerformanceTableau()
-    *----  performance tableau -----*
-    criteria | weights |   'a2'   'a3'   'a6'  ...  
-    ---------|----------------------------------
-       'g1'  |   2     |   5.00   5.00   5.00  ...
-       'g2'  |   3     |  50.00  50.00  50.00  ...
-    ...
+Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each decision action with respect to the three objectives. For instance, action *a01* will probably show *good* performances wrt the *economical* aspect, *fair* performances wrt the *environmental* aspect, and *weak* performances wrt to the *societal* aspect.
 
 Back to :ref:`Tutorial-label`
 
