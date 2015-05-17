@@ -1715,10 +1715,8 @@ This module provides several random performance tableaux generators, i.e. Perfor
 
     1. The simplest model called `RandomPerformaceTableau` generates a set of *n* decision actions, a set of *m* real-valued performance criteria, ranging from 0.0 to 100.0, with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale. 
     2. In order to study aggregation of linear orders, we provide a model called `RandomRankPerformanceTableau` which provides lineraly ordered performances without ties on multple criteria for a given number of decision actions.
-    3. The most useful random generator, called `RandomCBPerformanceTableau`, proposes a two decision objectives, named *Costs* (to be mimized) and Benefits (to be maximized), performance tableau model, in order to generate more or less contradictory performances on these objectives. Low costs will be randomly coupled with low benefits, whereas high costs will be randomly coupled with high benefits. 
-
-.. ..
-       4. Multiple objectives models are also available via a generator, called `RandomCoalitionsPerformanceTableau`, for multiple criteria coalitions based performances.
+    3. One of the most useful random generator, called `RandomCBPerformanceTableau`, proposes a two decision objectives, named *Costs* (to be mimized) and Benefits (to be maximized), performance tableau model, in order to generate more or less contradictory performances on these objectives. Low costs will be randomly coupled with low benefits, whereas high costs will be randomly coupled with high benefits. 
+    4. Three objectives random models, taking into account economical, societal as well as environmental aspects, are also available via a generator, called `Random3ObjectivesPerformanceTableau`.
  
 
 The `RandomPerformanceTableau <techDoc.html#randomPerfTabs.RandomPerformanceTableau>`_ generator
@@ -1791,7 +1789,7 @@ matching the ``RandomLinearVotingProfile`` class provided by  the `votingDigraph
 The `RandomCBPerformanceTableau <techDoc.html#randomPerfTabs.RandomCBPerformanceTableau>`_ generator
 ....................................................................................................
 
-The generation of random *Cost* versus *Benefit* oriented performance tableaux follows the directives below:
+Random generation of *Cost* versus *Benefit* oriented performance tableaux follows the directives below:
 
     * We distinguish three types of decision actions: *cheap*, *neutral* and *expensive* ones with an equal proportion of 1/3. We also distinguish two types of weighted criteria: *cost* criteria to be *minimized*, and *benefit* criteria to be *maximized*; in the proportions 1/3 respectively 2/3. 
     * Random performances on each type of criteria  are drawn, either from an ordinal scale [0;10], or from a cardinal scale [0.0;100.0], following a parametric triangular law of mode: 30\% performance for cheap, 50\% for neutral, and$70\% performance for expensive decision actions, with constant probability repartition 0.5 on each side of the respective mode. 
@@ -1933,6 +1931,157 @@ Similarly, one may set to constant performance values (median value of the measu
     ...
 
 Back to :ref:`Tutorial-label`
+
+The `Random3ObjectivesPerformanceTableau <techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau>`_ generator
+....................................................................................................
+
+The class provides a Random generator of performace tableaux concerning three preferential decision objectives which take into account *economical*, *societal* as well as *environmental* aspects.
+
+Each decision action is qualified randomly as *weak* (-), *fair* (~) or *good* (+) on each of the three objectives. 
+
+Generator directives are the following:
+    * numberOfActions = 20 (default),
+    * numberOfCriteria = 13 (default),
+    * weightDistribution = 'equicoalitions' (default) | 'random' | 'equisignificant', 
+    * weightScale = (1,numberOfCriteria): only used when random criterion weights are requested,
+    * integerWeights = True (default): False gives normlized rational weights, 
+    * commonScale = (0.0,100.0),
+    * commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)]: Performance discrimination thresholds may be set for 'ind', 'pref' and 'veto',  
+    * commonDistribution = ['triangular','variable',0.5]: random number generators of various other types ('uniform','beta') are available,
+    * valueDigits = 2 (default): evaluations are encoded as Decimals,
+    * seed= None. 
+
+.. note::
+
+    If the mode of the triangular districbution is set to 'variable',
+    three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span
+    are set at random for each coalition and action.
+    
+.. warning::
+
+    Minimal number of decision actions required is 3 ! 
+
+**Example Python session**:
+    >>> from randomPerfTabs import Random3ObjectivesPerformanceTableau
+    >>> t = Random3ObjectivesPerformanceTableau(
+    ...          numberOfActions=31,
+    ...          numberOfCriteria=13,
+    ...          weightDistribution='equiobjectives',
+    ...          seed=100)
+    >>> t.showActions()
+    *----- show decision action --------------*
+    key:  a1
+      short name: a1
+      name:       random cheap decision action
+    key:  a2
+      short name: a2
+      name:       random neutral decision action
+    ...
+    key:  a7
+      short name: a7
+      name:       random advantageous decision action
+    >>> t.showCriteria()
+    *----  criteria -----*
+    g1 'random ordinal benefit criterion'
+      Scale = (0, 10)
+      Weight = 0.167 
+    g2 'random cardinal cost criterion'
+      Scale = (0.0, 100.0)
+      Weight = 0.250 
+      Threshold ind  :  1.76 + 0.00x ; percentile:  0.095
+      Threshold pref :  2.16 + 0.00x ; percentile:  0.143
+      Threshold veto : 73.19 + 0.00x ; percentile:  0.952
+    ...
+
+In this example we notice the three types of decision actions, as well as two types of criteria with either an ordinal or a cardinal performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the *indifference* and 10% below the *preference* discrimanting threshold. About 5% will be considered as *considerably large*. More statistics about the generated performances is available as follows:
+
+    >>> t.showStatistics()
+    *-------- Performance tableau summary statistics -------*
+    Instance name      : randomCBperftab
+    #Actions           : 7
+    #Criteria          : 5
+    *Statistics per Criterion*
+    Criterion name       : g1
+      Criterion weight     : 2
+      criterion scale    : 0.00 - 10.00
+      mean evaluation    : 5.14
+      standard deviation : 2.64
+      maximal evaluation : 8.00
+      quantile Q3 (x_75) : 8.00
+      median evaluation  : 6.50
+      quantile Q1 (x_25) : 3.50
+      minimal evaluation : 1.00
+      mean absolute difference      : 2.94
+      standard difference deviation : 3.74
+    Criterion name       : g2
+      Criterion weight     : 3
+      criterion scale    : -100.00 - 0.00
+      mean evaluation    : -49.32
+      standard deviation : 27.59
+      maximal evaluation : 0.00
+      quantile Q3 (x_75) : -27.51
+      median evaluation  : -35.98
+      quantile Q1 (x_25) : -54.02
+      minimal evaluation : -91.87
+      mean absolute difference      : 28.72
+      standard difference deviation : 39.02
+    ...
+
+A (potentially ranked) colored heatmap with 5 color levels is also provided:
+    
+    >>> t.showHTMLPerformanceHeatmap(colorLevels=5,Ranked=False)
+
+.. image:: randomCBHeatmap.png
+   :width: 500 px
+   :align: center
+
+Such a performance tableau may be stored and reaccessed in the XMCDA2 encoded format:
+    >>> t.saveXMCDA2('temp')
+    *----- saving performance tableau in XMCDA 2.0 format  -------------*
+    File: temp.xml saved !
+    >>> from perfTabs import XMCDA2PerformanceTableau
+    >>> t = XMCDA2PerformanceTableau('temp')
+    >>> ...
+
+If needed for instance in an R session, a CSV version of the performance tableau may be created as follows:
+    >>> t.saveCSV('temp')
+    * --- Storing performance tableau in CSV format in file temp.csv
+    ...$ less temp.csv
+    "actions","g1","g2","g3","g4","g5"
+    "a1",1.00,-17.92,-33.99,26.68,3.00
+    "a2",8.00,-30.71,-77.77,66.35,6.00
+    "a3",8.00,-41.65,-69.84,53.43,8.00
+    "a4",2.00,-39.49,-16.99,18.62,2.00
+    "a5",6.00,-91.87,-74.85,83.09,7.00
+    "a6",7.00,-32.47,-24.91,79.24,9.00
+    "a7",4.00,-91.11,-7.44,48.22,7.00
+
+For testing purposes a special constructor is provided for extracting partial performance tableaux from a given tableau instance:
+
+    >>> from perfTabs import PartialPerformanceTableau
+    >>> pt = PartialPerformanceTableau(t,actionsSubset=['a2','a3','a6'],
+                                         criteriaSubset=['g1','g2'])
+    >>> pt.showPerformanceTableau()
+    *----  performance tableau -----*
+    criteria | weights | 'a2'   'a3'   'a6'   
+    ---------|-----------------------------------------
+       'g1'  |   2.00   |   8.00   8.00   7.00  
+       'g2'  |   3.00   |  -30.71  -41.65  -32.47  
+
+Similarly, one may set to constant performance values (median value of the measurement scale by default) a subset of actions and/or criteria:
+
+    >>> from perfTabs import ConstantPerformanceTableau
+    >>> ct = ConstantPerformanceTableau(t,actionsSubset=['a2','a3','a6'],criteriaSubset=['g1','g2'])
+    >>> ct.showPerformanceTableau()
+    *----  performance tableau -----*
+    criteria | weights |   'a2'   'a3'   'a6'  ...  
+    ---------|----------------------------------
+       'g1'  |   2     |   5.00   5.00   5.00  ...
+       'g2'  |   3     |  50.00  50.00  50.00  ...
+    ...
+
+Back to :ref:`Tutorial-label`
+
 
 Links and appendices
 --------------------
