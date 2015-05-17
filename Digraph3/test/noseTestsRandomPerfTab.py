@@ -92,9 +92,9 @@ def testCBPerformanceTableau():
     g = BipolarOutrankingDigraph(t)
     g.exportGraphViz()
 
-def test3CoalitionsPerformanceTableau():
-    print('*==>> random 3 Coalitions Performance Tableaux ------------*')
-    t = Random3CoalitionsPerformanceTableau(numberOfActions=31,
+def test3ObjectivesPerformanceTableau():
+    print('*==>> random 3 Objectives (Eco, Soc, Env) Performance Tableaux ------------*')
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=21,
                                             numberOfCriteria=13,
                                             commonScale=[0.0,50.0],
                                             commonDistribution=['triangular',

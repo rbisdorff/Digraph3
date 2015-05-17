@@ -1140,13 +1140,13 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
 
 #---------------
 
-class Random3CoalitionsPerformanceTableau(RandomCoalitionsPerformanceTableau):
+class Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
     """
     Specialization of the RandomCoalitionsPerformanceTableau
-    for 3 coalitions of criteria: *A*, *B* and *C*.
+    for 3 objectives: *A*, *B* and *C*.
 
     Each decision action is qualified at random as weak (-), fair (~) or good (+)
-    on each of the three coalitions. The action comment shows for each coalition the respective position (- ,~, +)
+    on each of the three objectives. The action comment shows for each objective the respective position (- ,~, +)
     of the evaluation mode, for instance (*A* - *B* + *C* ~).
     
     Generator parameters are described in the parent class.
@@ -1187,6 +1187,100 @@ class Random3CoalitionsPerformanceTableau(RandomCoalitionsPerformanceTableau):
                                                Debug=Debug, seed=seed)
 
         self.__dict__ = t.__dict__
+        for g in self.criteria:
+            if self.criteria[g]['name'] == 'random criterion of coalition A':
+                self.criteria[g]['name'] = 'random economic criterion'
+                self.criteria[g]['objective'] = 'Eco'
+            elif self.criteria[g]['name'] == 'random criterion of coalition B':
+                self.criteria[g]['name'] = 'random societal criterion'
+                self.criteria[g]['objective'] = 'Soc'
+            elif self.criteria[g]['name'] == 'random criterion of coalition C':
+                self.criteria[g]['name'] = 'random environmental criterion'
+                self.criteria[g]['objective'] = 'Env'
+                
+        self.objectives = {
+            'Eco': {'name':'Economy',
+                  'comment': 'Random3ObjectivesPerformanceTableau generated'},
+            'Soc': {'name': 'Society',
+                  'comment': 'Random3ObjectivesPerformanceTableau generated'},
+            'Env': {'name':'Ecology',
+                  'comment': 'Random3ObjectivesPerformanceTableau generated'}
+            }
+        
+        for obj in self.objectives:
+            objCriteria = [g for g in self.criteria if self.criteria[g]['objective'] == obj]
+            objCriteria.sort()
+            self.objectives[obj]['criteria'] = objCriteria
+            objWeight = Decimal('0')
+            for g in objCriteria:
+                objWeight += self.criteria[g]['weight']
+            self.objectives[obj]['weight'] = objWeight
+        for x in self.actions:
+            if 'A- B- C-' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco- Soc- Env-)'
+            elif 'A~ B- C-' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco~ Soc- Env-)'
+            elif 'A+ B- C-' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco+ Soc- Env-)'
+            elif 'A- B~ C-' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco- Soc~ Env-)'
+            elif 'A~ B~ C-' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco~ Soc~ Env-)'
+            elif 'A+ B ~C-' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco+ Soc~ Env-)'
+            elif 'A- B+ C-' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco- Soc+ Env-)'
+            elif 'A~ B+ C-' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco~ Soc+ Env-)'
+            elif 'A+ B+ C-' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco+ Soc+ Env-)'
+            elif 'A- B- C~' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco- Soc- Env~)'
+            elif 'A~ B- C~' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco~ Soc- Env~)'
+            elif 'A+ B- C~' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco+ Soc- Env~)'
+            elif 'A- B~ C~' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco- Soc~ Env~)'
+            elif 'A~ B~ C~' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco~ Soc~ Env~)'
+            elif 'A+ B~ C~' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco+ Soc~ Env~)'
+            elif 'A- B+ C~' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco- Soc+ Env~)'
+            elif 'A~ B+ C~' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco~ Soc+ Env~)'
+            elif 'A+ B+ C~' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco+ Soc+ Env~)'
+            elif 'A- B- C+' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco- Soc- Env+)'
+            elif 'A~ B- C+' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco~ Soc- Env+)'
+            elif 'A+ B- C+' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco+ Soc- Env+)'
+            elif 'A- B~ C+' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco- Soc~ Env+)'
+            elif 'A~ B~ C+' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco~ Soc~ Env+)'
+            elif 'A+ B~ C+' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco+ Soc~ Env+)'
+            elif 'A- B+ C+' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco- Soc+ Env+)'
+            elif 'A~ B+ C+' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco~ Soc+ Env+)'
+            elif 'A+ B+ C+' in self.actions[x]['name']:
+                self.actions[x]['name'] = 'random decision action (Eco+ Soc+ Env+)'
+            self.actions[x]['comment'] = 'Random3ObjectivesPerformaceTableau() generated'
+
+    def showObjectives(self):
+        print('*------ show objectives -------"')
+        for obj in self.objectives:
+            print('%s: %s' % (self.objectives[obj]['name'],
+                              self.objectives[obj]['comment']))
+            for g in self.objectives[obj]['criteria']:
+                print('  ', g, self.criteria[g]['name'], self.criteria[g]['weight'])
+            print('  Total weight: %.2f (%d criteria)'\
+                  % (self.objectives[obj]['weight'],len(self.objectives[obj]['criteria'])))
         
             
         
@@ -1706,13 +1800,12 @@ if __name__ == "__main__":
     from weakOrders import QuantilesRankingDigraph
     from randomPerfTabs import *
 
-    t = Random3CoalitionsPerformanceTableau(numberOfActions=31,
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=31,
                                             numberOfCriteria=13,
                                             commonScale=[0.0,50.0],
+                                            weightDistribution='equicoalitions',
                                             commonDistribution=['triangular','variable',0.5])
-    t.showCriteria()
-    t.showStatistics()
-    t.showHTMLPerformanceHeatmap(Correlations=True)
+    t.showObjectives()
     
 ##    print('*---------- test percentiles of variable thresholds --------*') 
 ####    t = RandomCoalitionsPerformanceTableau(weightDistribution='equicoalitions',
