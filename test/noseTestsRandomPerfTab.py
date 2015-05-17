@@ -103,7 +103,7 @@ def test3CoalitionsPerformanceTableau():
     t.saveXMCDA2('test',servingD3=False)
     t.showCriteria(IntegerWeights=True)
     g = BipolarOutrankingDigraph(t)
-    rbc = RandkingByChoosingDigraph(g)
+    rbc = RankingByChoosingDigraph(g)
     rbc.showRankingByChoosing()
 
 def testCoalitionsPerformanceTableau():
