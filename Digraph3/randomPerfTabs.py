@@ -1143,15 +1143,15 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
 class Random3CoalitionsPerformanceTableau(RandomCoalitionsPerformanceTableau):
     """
     Specialization of the RandomCoalitionsPerformanceTableau
-    for 3 coalitions of criteria: A, B and C.
+    for 3 coalitions of criteria: *A*, *B* and *C*.
 
-    Each decision action is qualified at random as weak (-), fair ()~ or good (+)
-    on each of the three colaitions. The action's comment shows for each coalition the respective position (- ,~, +)
-    of the evaluation mode, for instance (A-B+C~).
+    Each decision action is qualified at random as weak (-), fair (~) or good (+)
+    on each of the three coalitions. The action's comment shows for each coalition the respective position (- ,~, +)
+    of the evaluation mode, for instance (*A*-*B*+*C*~).
     
     Generator parameters are described in the parent class.
     
-    -- note:: If the mode of the triangular districbution is
+    .. note:: If the mode of the triangular districbution is
     set to 'variable', three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+)
     of the common scale span are
     set at random for each coalition and action.
