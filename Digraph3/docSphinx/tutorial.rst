@@ -1906,38 +1906,14 @@ If needed for instance in an R session, a CSV version of the performance tableau
     "a6",7.00,-32.47,-24.91,79.24,9.00
     "a7",4.00,-91.11,-7.44,48.22,7.00
 
-For testing purposes a special constructor is provided for extracting partial performance tableaux from a given tableau instance:
-
-    >>> from perfTabs import PartialPerformanceTableau
-    >>> pt = PartialPerformanceTableau(t,actionsSubset=['a2','a3','a6'],
-                                         criteriaSubset=['g1','g2'])
-    >>> pt.showPerformanceTableau()
-    *----  performance tableau -----*
-    criteria | weights | 'a2'   'a3'   'a6'   
-    ---------|-----------------------------------------
-       'g1'  |   2.00   |   8.00   8.00   7.00  
-       'g2'  |   3.00   |  -30.71  -41.65  -32.47  
-
-Similarly, one may set to constant performance values (median value of the measurement scale by default) a subset of actions and/or criteria:
-
-    >>> from perfTabs import ConstantPerformanceTableau
-    >>> ct = ConstantPerformanceTableau(t,actionsSubset=['a2','a3','a6'],criteriaSubset=['g1','g2'])
-    >>> ct.showPerformanceTableau()
-    *----  performance tableau -----*
-    criteria | weights |   'a2'   'a3'   'a6'  ...  
-    ---------|----------------------------------
-       'g1'  |   2     |   5.00   5.00   5.00  ...
-       'g2'  |   3     |  50.00  50.00  50.00  ...
-    ...
-
 Back to :ref:`Tutorial-label`
 
 The `Random3ObjectivesPerformanceTableau <techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau>`_ generator
 ......................................................................................................................
 
-The class provides a Random generator of performace tableaux concerning three preferential decision objectives which take randomly into account *economical*, *societal* as well as *environmental* aspects.
+The class provides a generator of random performace tableaux concerning three preferential decision objectives which take into account *economical*, *societal* as well as *environmental* aspects.
 
-Each decision action is qualified randomly as *weak* (-), *fair* (~) or *good* (+) on each of the three objectives. 
+Each decision action is qualified randomly as performing *weak* (-), *fair* (~) or *good* (+) on each of the three objectives. 
 
 Generator directives are the following:
     * numberOfActions = 20 (default),
@@ -1947,7 +1923,7 @@ Generator directives are the following:
     * integerWeights = True (default): False gives normlized rational weights, 
     * commonScale = (0.0,100.0),
     * commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)]: Performance discrimination thresholds may be set for 'ind', 'pref' and 'veto',  
-    * commonDistribution = ['triangular','variable',0.5]: random number generators of various other types ('uniform','beta') are available,
+    * commonMode = ['triangular','variable',0.5]: random number generators of various other types ('uniform','beta') are available,
     * valueDigits = 2 (default): evaluations are encoded as Decimals,
     * missingProbability = 0.05 (default): random insertion of missing values with given probability,  
     * seed= None. 
@@ -1955,8 +1931,7 @@ Generator directives are the following:
 .. note::
 
     If the mode of the *triangular* distribution is set to '*variable*',
-    three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span
-    are set at random for each coalition and action.
+    three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span are set at random for each coalition and action.
     
 .. warning::
 
@@ -1968,48 +1943,106 @@ Generator directives are the following:
               numberOfActions=31,
               numberOfCriteria=13,
               weightDistribution='equiobjectives',
-              seed=100)
+              seed=120)
     >>> t.showObjectives()
     *------ show objectives -------"
-    Soc: Societal aspect
-       g02 random societal criterion 16
-       g03 random societal criterion 16
-       g06 random societal criterion 16
-       g08 random societal criterion 16
-       g09 random societal criterion 16
-      Total weight: 80.00 (5 criteria)
     Eco: Economical aspect
-       g01 random economic criterion 20
-       g04 random economic criterion 20
-       g11 random economic criterion 20
-       g13 random economic criterion 20
+       g04 criterion of objective Eco 20
+       g05 criterion of objective Eco 20
+       g08 criterion of objective Eco 20
+       g11 criterion of objective Eco 20
       Total weight: 80.00 (4 criteria)
+    Soc: Societal aspect
+       g06 criterion of objective Soc 16
+       g07 criterion of objective Soc 16
+       g09 criterion of objective Soc 16
+       g10 criterion of objective Soc 16
+       g13 criterion of objective Soc 16
+      Total weight: 80.00 (5 criteria)
     Env: Environmental aspect
-       g05 random environmental criterion 20
-       g07 random environmental criterion 20
-       g10 random environmental criterion 20
-       g12 random environmental criterion 20
+       g01 criterion of objective Env 20
+       g02 criterion of objective Env 20
+       g03 criterion of objective Env 20
+       g12 criterion of objective Env 20
       Total weight: 80.00 (4 criteria)
 
-In this example we notice that 5 equisignificant criteria (g02, g03, g06, g08, g09) evaluate for instance the performance of the decision actions from the societal aspect. 4 equisignificant criteria do the same each time from the economical, respectively the environmental aspect. The 'equiobjectives' directive results hence in a balanced total weight for each aspect. 
+In this example we notice that 5 equisignificant criteria (g06, g07, g09, g10, g13) evaluate for instance the performance of the decision actions from the societal point of view. 4 equisignificant criteria do the same from the economical, respectively the environmental point of view. The 'equiobjectives' directive results hence in a balanced total weight (80.00) for each decision objective. 
 
     >>> t.showActions()
-    *----- show decision action --------------*
     key:  a01
-      name:       random decision action (Eco+ Soc- Env~)
-      profile:    {'Eco': 'good', 'Soc': 'weak', 'Env': 'fair'}
+      name:       random decision action Eco+ Soc- Env+
+      profile:    {'Eco': 'good', 'Soc': 'weak', 'Env': 'good'}
     key:  a02
-      name:       random decision action (Eco~ Soc+ Env-)
-      profile:    {'Eco': 'fair', 'Soc': 'good', 'Env': 'weak'}
-    key:  a03
-      name:       random decision action (Eco- Soc+ Env~)
-      profile:    {'Eco': 'weak', 'Soc': 'good', 'Env': 'fair'}
-    key:  a04
-      name:       random decision action (Eco+ Soc~ Env+)
-      profile:    {'Eco': 'good', 'Soc': 'fair', 'Env': 'good'}
+    ...
+    key:  a26
+      name:       random decision action Eco+ Soc+ Env-
+      profile:    {'Eco': 'good', 'Soc': 'good', 'Env': 'weak'}
+    ...
+    key:  a30
+      name:       random decision action Eco- Soc- Env-
+      profile:    {'Eco': 'weak', 'Soc': 'weak', 'Env': 'weak'}
     ...
 
-Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each decision action with respect to the three objectives. For instance, action *a01* will probably show *good* performances wrt the *economical* aspect, *fair* performances wrt the *environmental* aspect, and *weak* performances wrt to the *societal* aspect.
+Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each decision action with respect to the three objectives. For instance, action *a01* will probably show *good* performances wrt the *economical*  and environmental aspects, and *weak* performances wrt the *societal* aspect.
+
+For testing purposes a special constructor is provided for extracting partial performance tableaux from a given tableau instance. In this example we may construct the partial performance tableaux corresponding to each objective:
+
+    >>> from perfTabs import PartialPerformanceTableau
+    >>> teco = PartialPerformanceTableau(t,criteriaSubset=\
+                              t.objectives['Eco']['criteria'])
+    >>> tsoc = PartialPerformanceTableau(t,criteriaSubset=\
+                              t.objectives['Soc']['criteria'])
+    >>> tenv = PartialPerformanceTableau(t,criteriaSubset=\
+                              t.objectives['Env']['criteria'])
+
+For each objective, one way this compute a partial bipolar outranking digraph:
+
+    >>> from outrankingDigraphs import BipolarOutrankingDigraph
+    >>> geco = BipolarOutrankingDigraph(teco)
+    >>> gsoc = BipolarOutrankingDigraph(tsoc)
+    >>> genv = BipolarOutrankingDigraph(tenv)
+
+Thes three partial digraphs model the preferences represented in each of the partial performance tableaux. One may aggregate these three preferential with an epitemic fusion operator:
+    >>> from digraphs import FusionLDigraph
+    >>> gfus = FusionLDigraph([geco,gsoc,genv])
+    >>> gfus.strongComponents()
+    {frozenset({'a30'}), 
+     frozenset({'a10', 'a03', 'a19', 'a08', 'a07', 'a04', 'a21', 'a20', 
+                'a13', 'a23', 'a16', 'a12', 'a24', 'a02', 'a31', 'a29', 
+                'a05', 'a09', 'a28', 'a25', 'a17', 'a14', 'a15', 'a06', 
+                'a01', 'a27', 'a11', 'a18', 'a22'}), 
+     frozenset({'a26'})}
+    >>> from digraphs import StrongComponentsCollapsedDigraph
+    >>> scc = StrongComponentsCollapsedDigraph(gfus)
+    >>> scc.showActions()
+    *----- show digraphs actions --------------*
+    key:  frozenset({'a30'})
+      short name: Scc_1
+      name:       _a30_
+      comment:    collapsed strong component
+    key:  frozenset({'a10', 'a03', 'a19', 'a08', 'a07', 'a04', 'a21', 'a20', 'a13', 
+                     'a23', 'a16', 'a12', 'a24', 'a02', 'a31', 'a29', 'a05', 'a09', 'a28', 'a25', 
+                     'a17', 'a14', 'a15', 'a06', 'a01', 'a27', 'a11', 'a18', 'a22'})
+      short name: Scc_2
+      name:       _a10_a03_a19_a08_a07_a04_a21_a20_a13_a23_a16_a12_a24_a02_a31_\
+                   a29_a05_a09_a28_a25_a17_a14_a15_a06_a01_a27_a11_a18_a22_
+      comment:    collapsed strong component
+    key:  frozenset({'a26'})
+      short name: Scc_3
+      name:       _a26_
+      comment:    collapsed strong component
+
+A graphviz drawing illustrates the apprent preferential links between the strong components:
+    >>> scc.exportGraphViz('scFusionObjectives')
+    *---- exporting a dot file dor GraphViz tools ---------*
+    Exporting to scFusionObjectives.dot
+    dot -Grankdir=BT -Tpng scFusionObjectives.dot -o scFusionObjectives.png
+
+.. image:: sccFusionObjectives.png
+   :width: 200 px
+   :align: center
+
+Decision action *a26* (Eco+ Soc+ Env-) appears dominating the other decision alternatives, whereas decision action *a30* (Eco- Soc- Env-) appears to be dominated by all the others.
 
 Back to :ref:`Tutorial-label`
 

@@ -969,7 +969,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                     print(criteria[g]['weight'])
                 
         # allocate (criterion,action) to coalition supporting type
-        if Coalitions:
+        if Coalitions and VariableGenerators:
             coalitionSupportingType = ['+','~','-']
             for x in actionsList:
                 for c in criterionCoalitionsList:
@@ -1019,7 +1019,8 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                     
                     if VariableGenerators:
                         randomRangesList = [(commonScale[0],commonScale[1]),
-                                            (commonScale[0],commonScale[0]+0.3*(commonScale[1]-commonScale[0])), (commonScale[0],commonScale[0]+0.7*(commonScale[1]-commonScale[0]))]
+                                            (commonScale[0],commonScale[0]+0.3*(commonScale[1]-commonScale[0])),
+                                            (commonScale[0],commonScale[0]+0.7*(commonScale[1]-commonScale[0]))]
                         randomRange = random.choice(randomRangesList)         
                         randeval = random.uniform(randomRange[0],randomRange[1])
                     else:
@@ -1138,9 +1139,384 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
         self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
 
-#---------------
+class Random3ObjectivesPerformanceTableau(PerformanceTableau):
+    """
+    Specialization of the PerformanceTableau
+    for 3 objectives: *Eco*, *Soc* and *Env*.
 
-class Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
+    Each decision action is qualified at random as weak (-), fair (~) or good (+)
+    on each of the three objectives.
+    
+    Generator arguments:
+        * numberOf Actions := 20 (default)
+        * number of Criteria := 13 (default)
+        * weightDistribution := 'equiobjectives' (default)
+                              | 'equisignificant' (weights set all to 1)
+                              | 'random' (in the range 1 to numberOfCriteria)
+        * weightScale := [1,numerOfCriteria] (random default)
+        * integerWeights := True (default) / False
+        * OrdinalScales := True / False (default), if True commonScale is set to (0,10)
+        * commonScale := (0.0, 100.0) (default if OrdinalScales == False)
+        * commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalScales == True, otherwise
+                            | [(0.10001*span,0.0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].
+        * commonMode := ['triangular','variable',0.50] (default), A constant mode may be provided.
+                      | ['uniform','variable',None], a constant range may be provided.
+                      | ['beta','variable',None] (three alpha, beta combinations (5.8661,2.62203)
+                      |   chosen by default for 'good', 'fair' and 'weak' evaluations. Constant parameters may be provided.
+        * valueDigits := 2 (default, for cardinal scales only)
+        * vetoProbability := x in ]0.0-1.0[ (0.05 default), probability that a cardinal criterion shows a veto preference discrimination threshold.
+        * Debug := True / False (default)
+        
+    """
+
+    def __init__(self,numberOfActions = 20, numberOfCriteria = 13,
+                 weightDistribution = 'equiobjectives', weightScale=None,
+                 integerWeights = True, OrdinalScales=False, commonScale = None,
+                 commonThresholds = None, commonMode = None,
+                 valueDigits=2,
+                 vetoProbability=0.05,
+                 missingProbability = 0.05,
+                 seed= None,
+                 Debug=False):
+        
+        # naming
+        self.name = 'random3ObjectivesPerfTab'
+        # randomizer init
+        import random
+        random.seed(seed)
+
+        from randomNumbers import ExtendedTriangularRandomVariable as RNGTr            
+
+            
+        # generate actions
+        nd = len(str(numberOfActions))
+        actions = dict()
+        for i in range(numberOfActions):
+            actionKey = ('a%%0%dd' % (nd)) % (i+1)
+            actions[actionKey] = {'shortName':actionKey,
+                    'name': 'random decision action',
+                    'comment': 'Random3ObjectivesPerformanceTableau() generated.',
+                    'generators': {}}
+        self.actions = actions
+        actionsList = [x for x in self.actions]
+        actionsList.sort()
+        
+        # generate criterialist
+        ng = len(str(numberOfCriteria))
+        criteriaList = [('g%%0%dd' % ng) % (i+1)\
+                        for i in range(numberOfCriteria)]
+        criteriaList.sort()
+        
+        # generate random weights
+        if weightDistribution == 'equisignificant':
+            weightMode = ('equisignificant',(1,1))
+            weightScale =  weightMode[1]
+            weightsList = [weightScale[0] for i in range(len(criteriaList))]
+        elif weightDistribution == 'random':
+            weightMode = ('random',(1,numberOfCriteria))
+            if weightScale == None:
+                weightScale = (1,numberOfCriteria)
+            weightsList = []
+            sumWeights = Decimal('0.0')
+            for i in range(len(criteriaList)):               
+                weightsList.append(Decimal(str(random.randint(weightScale[0],
+                                                              weightScale[1]))))
+                sumWeights += weightsList[i]
+            weightsList.reverse()
+        else:
+            weightMode = (weightDistribution,None)
+            weightScale = (1,1)            
+            weightsList = []
+            sumWeights = Decimal('0.0')
+            for i in range(len(criteriaList)):
+                if i == 0:
+                    weightsList.append(Decimal(str(weightScale[1])))
+                    sumWeights += weightScale[1]
+                else:
+                    weightsList.append(Decimal(str(weightScale[0])))
+                    sumWeights += weightScale[0]
+
+        # generate objectives dictionary
+        self.objectives = {
+            'Eco': {'name':'Economical aspect',
+                  'comment': 'Random3ObjectivesPerformanceTableau generated'},
+            'Soc': {'name': 'Societal aspect',
+                  'comment': 'Random3ObjectivesPerformanceTableau generated'},
+            'Env': {'name':'Environmental aspect',
+                  'comment': 'Random3ObjectivesPerformanceTableau generated'}
+            }
+
+
+        # generate criteria dictionary with random thresholds
+        if commonScale == None:
+            if OrdinalScales:
+                commonScale = (0,10)
+            else:
+                commonScale = (0.0,100.0)
+        objectivesList=[obj for obj in self.objectives]
+        criteria = {}
+
+        for gi in range(len(criteriaList)):
+            g = criteriaList[gi]
+            criteria[g] = {}
+            criterionObjective = random.choice(objectivesList)
+            criteria[g]['objective'] = criterionObjective
+            criteria[g]['preferenceDirection'] = 'max'           
+            criteria[g]['name'] = 'criterion of objective %s' % (criterionObjective)
+            if commonThresholds == None:                    
+                if OrdinalScales:
+                    thresholds = [(1.0,0.0),(2.001,0.0),(8.001,0.0)]
+                else:
+                    span = commonScale[1] - commonScale[0]
+                    thresholds = [(0.05001*span,0),(0.10001*span,0.0),(0.60001*span,0.0)]
+            else:
+                thresholds = commonThresholds
+            if Debug:
+                print(g,thresholds)
+            thitems = ['ind','pref','veto']
+            randVeto = random.uniform(0.0,1.0)
+            if randVeto > vetoProbability or vetoProbability == None:
+                    thitems = ['ind','pref']
+            criteria[g]['thresholds'] = {}
+            for t in range(len(thitems)):
+                criteria[g]['thresholds'][thitems[t]] =\
+                   (Decimal(str(thresholds[t][0])),Decimal(str(thresholds[t][1])))
+                
+            criteria[g]['scale'] = commonScale
+            if integerWeights:
+                criteria[g]['weight'] = weightsList[gi]
+            else:
+                criteria[g]['weight'] = weightsList[gi] / sumWeights
+
+        # determine equisignificant objectives
+        if weightMode[0] == 'equiobjectives':
+            objectivesCardinality = {}
+            for gi in range(len(criteriaList)):
+                g = criteriaList[gi]
+                try:
+                    objectivesCardinality[criteria[g]['objective']] += 1
+                except:
+                    objectivesCardinality[criteria[g]['objective']] = 1
+            if Debug:
+                print(objectivesCardinality)
+            weightsProduct = 1
+            for oi in objectivesCardinality:
+                weightsProduct *= objectivesCardinality[oi]
+            if Debug:
+                print(weightsProduct)
+            for gi in range(len(criteriaList)):
+                g = criteriaList[gi]
+                criteria[g]['weight'] =\
+                    weightsProduct // objectivesCardinality[criteria[g]['objective']]
+                if Debug:
+                    print(criteria[g]['weight'])
+                
+        # allocate (criterion,action) to coalition supporting type
+        objectiveSupportingType = [('good','+'),('fair','~'),('weak','-')]
+        for x in actionsList:
+            profile = {}
+            for obj in objectivesList:
+                if Debug:
+                    print(objectivesList,obj)
+                ost = random.choice(objectiveSupportingType)
+                self.actions[x][obj]=ost[0]
+                self.actions[x]['name'] =\
+                    self.actions[x]['name'] + ' '+ str(obj) + ost[1]
+                profile[obj] = self.actions[x][obj]
+            self.actions[x]['profile'] = profile
+            if Debug:
+                print(x,self.actions[x])
+        # generate evaluations
+        evaluation = {}
+        for gi in range(len(criteriaList)):
+            g = criteriaList[gi]
+            evaluation[g] = {}
+            if commonMode == None:
+                randomMode = ['triangular','variable',0.50]               
+            else:
+                randomMode = commonMode
+            if randomMode[0] == 'uniform' and randomMode[1] == None:
+                randomMode[1] = commonScale[0]
+                randomMode[2] = commonScale[1]
+                
+            criteria[g]['randomMode'] = randomMode
+            if randomMode[1] == 'variable':
+                commentString = 'Variable '+randomMode[0]+(' performance generator with low (-), medium (~) or high (+) parameters.')
+            else:
+                commentString = 'Constant '+randomMode[0]+(' law with parameters = %s, %s' % (str(randomMode[1]),str(randomMode[2])))
+                    
+            criteria[g]['comment'] = commentString
+            digits = valueDigits
+            
+            if str(randomMode[0]) == 'uniform':          
+                for a in actionsList:
+                    if randomMode[1] == 'variable':
+                        aobj = criteria[g]['objective']
+                        if self.actions[a]['profile'][aobj] == 'weak':
+                            randomRange = (commonScale[0],
+                                           commonScale[0]+0.7*(commonScale[1]-commonScale[0]))
+                        elif self.actions[a]['profile'][aobj] == 'fair':
+                            randomRange = (commonScale[0]+0.3*(commonScale[1]-commonScale[0]),
+                                           commonScale[0]+0.7*(commonScale[1]-commonScale[0]))
+                        elif self.actions[a]['profile'][aobj] == 'good':
+                            randomRange = (commonScale[0]+0.3*(commonScale[1]-commonScale[0]),
+                                          commonScale[1])       
+                            self.actions[a]['comment'] += ': %s %s' % (randomMode[0],randomRange)
+                    else:
+                        randomRange = (randomMode[1],randomMode[2]) 
+                        randeval = random.uniform(randomMode[1],randomMode[2])
+                    self.actions[a]['generators'][g] = (randomMode[0],randomRange)
+                    if OrdinalScales:
+                        if criteria[g]['preferenceDirection'] == 'max':
+                            evaluation[g][a] = Decimal(str(round(randeval,0)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,0)))
+                    else:
+                        if criteria[g]['preferenceDirection'] == 'max':
+                            evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+
+            elif str(randomMode[0]) == 'beta':
+                for a in actionsList:
+                    m = commonScale[0]
+                    M = commonScale[1]
+                    if randomMode[1] == 'variable':
+                        if self.actions[a][criteria[g]['objective']] == 'good':
+                            # mode = 75, stdev = 15
+                            #xm = 75
+                            alpha = 5.8661
+                            beta = 2.62203
+                        elif self.actions[a][criteria[g]['objective']] == 'fair':
+                            # nmode = 50, stdev = 15
+                            #xm = 50
+                            alpha = 5.05556
+                            beta = 5.05556
+                        elif self.actions[a][criteria[g]['objective']] == 'weak':
+                            # mode = 25, stdev = 15
+                            # xm = 25
+                            alpha = 2.62203
+                            beta = 5.8661                         
+                    else:
+                        xm = randomMode[1]
+                        if xm > 0.5:
+                            beta = 2.0
+                            alpha = 1.0/(1-xm)
+                        else:
+                            alpha = 2.0
+                            beta = 1.0 / xm
+                    if Debug:
+                        print('alpha,beta', alpha,beta)
+                    u = random.betavariate(alpha,beta)
+                    randeval = (u * (M-m)) + m
+                    if Debug:
+                        print('xm,alpha,beta,u,m,M,randeval',xm,alpha,beta,u,m,M,randeval)
+                    self.actions[a]['generators'][g] = ('beta',alpha,beta)
+                    if OrdinalScales:
+                        if criteria[g]['preferenceDirection'] == 'max':
+                            evaluation[g][a] = Decimal(str(round(randeval,0)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,0)))
+                    else:
+                        if criteria[g]['preferenceDirection'] == 'max':
+                            evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+    
+            elif str(randomMode[0]) == 'triangular':
+                for a in actionsList:
+                    m = commonScale[0]
+                    M = commonScale[1]
+                    span = commonScale[1]-commonScale[0]
+                    if randomMode[1] == 'variable':
+                        if self.actions[a][criteria[g]['objective']] == 'good':
+                            xm = 0.7*span
+                        elif self.actions[a][criteria[g]['objective']] == 'fair':
+                            xm = 0.5*span
+                        elif self.actions[a][criteria[g]['objective']] == 'weak':
+                            xm = 0.3*span
+                    else:
+                        xm = randomMode[1]
+                    r  = randomMode[2]
+                    self.actions[a]['generators'][g] = (randomMode[0],xm,r)
+                    # setting a speudo random seed
+                    if seed == None:
+                        rdseed = random.random()
+                    else:
+                        try:
+                            rdseed += 1
+                        except:
+                            rdseed = seed
+                    rngtr = RNGTr(m,M,xm,r,seed=rdseed)
+                    randeval = rngtr.random()
+                    if OrdinalScales:
+                        if criteria[g]['preferenceDirection'] == 'max':
+                            evaluation[g][a] = Decimal(str(round(randeval,0)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,0)))
+                    else:
+                        if criteria[g]['preferenceDirection'] == 'max':
+                            evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                   
+                    if Debug:
+                        print(randeval, criteria[g]['preferenceDirection'], evaluation[g][a])
+
+        # install self object attributes
+
+        for obj in self.objectives:
+            objCriteria = [g for g in criteria if criteria[g]['objective'] == obj]
+            objCriteria.sort()
+            self.objectives[obj]['criteria'] = objCriteria
+            objWeight = Decimal('0')
+            for g in objCriteria:
+                objWeight += criteria[g]['weight']
+            self.objectives[obj]['weight'] = objWeight
+
+        self.criteriaWeightMode = weightMode
+        self.criteria = criteria
+        self.evaluation = evaluation
+        self.weightPreorder = self.computeWeightPreorder()
+
+        # insert missing data
+        criteriaList = [g for g in self.criteria]
+        criteriaList.sort()
+        actionsList = [x for x in self.actions]
+        actionsList.sort()
+        for g in criteriaList:
+            for x in actionsList:
+                if random.random() < missingProbability:
+                    self.evaluation[g][x] = -999
+
+    def showObjectives(self):
+        print('*------ show objectives -------"')
+        for obj in self.objectives:
+                                               
+            print('%s: %s' % (obj, self.objectives[obj]['name']))
+                                               
+            for g in self.objectives[obj]['criteria']:
+                print('  ', g, self.criteria[g]['name'], self.criteria[g]['weight'])
+                                               
+            print('  Total weight: %.2f (%d criteria)\n'\
+                  % (self.objectives[obj]['weight'],len(self.objectives[obj]['criteria'])))
+
+    def showActions(self,Debug=False):
+        print('*----- show decision action --------------*')
+        actionsList = [x for x in self.actions]
+        actionsList.sort()
+        for x in actionsList:
+            print('key: ',x)
+            print('  name:      ',self.actions[x]['name'])
+            print('  profile:   ',self.actions[x]['profile'])
+            if Debug:
+                criteriaList = [g for g in self.criteria]
+                criteriaList.sort()
+                for g in criteriaList:
+                    print(g, self.actions[x]['generators'][g])
+
+#---------------
+class _Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
     """
     Specialization of the RandomCoalitionsPerformanceTableau
     for 3 objectives: *A*, *B* and *C*.
@@ -1848,18 +2224,34 @@ if __name__ == "__main__":
     
     print('*-------- Testing classes and methods -------')
 
-
+    from digraphs import *
     from outrankingDigraphs import BipolarOutrankingDigraph
     from weakOrders import QuantilesRankingDigraph
     from randomPerfTabs import *
 
     t = Random3ObjectivesPerformanceTableau(numberOfActions=31,
                                             numberOfCriteria=13,
-                                            commonScale=[0.0,50.0],
-                                            weightDistribution='equicoalitions',
-                                            commonDistribution=['triangular','variable',0.5],
-                                            seed=100)
+                                            OrdinalScales=False,
+                                            commonScale=None,
+                                            weightDistribution='equiobjectives',
+                                            commonMode=None,
+                                            seed=120)
     t.showObjectives()
+    #t.showActions(Debug=True)
+    teco = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Eco']['criteria'])
+    tenv = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Env']['criteria'])
+    tsoc = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Soc']['criteria'])
+    geco = BipolarOutrankingDigraph(teco)
+    genv = BipolarOutrankingDigraph(tenv)
+    gsoc = BipolarOutrankingDigraph(tsoc)
+    gfus = FusionLDigraph([geco,genv,gsoc])
+    scc = StrongComponentsCollapsedDigraph(gfus)
+    scc.showActions()
+    scc.exportGraphViz('sccFusion')
+    
+    
+##    t.showStatistics()
+##    t.showHTMLPerformanceTableau()
     
 ##    print('*---------- test percentiles of variable thresholds --------*') 
 ####    t = RandomCoalitionsPerformanceTableau(weightDistribution='equicoalitions',

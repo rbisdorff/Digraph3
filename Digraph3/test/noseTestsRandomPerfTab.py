@@ -52,32 +52,6 @@ def testFullRandomPerformanceTableau():
     t.showStatistics()
 
 
-# def testRandomS3PerformanceTableau():
-#     print('*==>> various tests for random performance tableaux -----*')
-#     t = RandomS3PerformanceTableau(numberOfActions=20,numberOfCriteria=13,commonThresholds=[(2.5,0.0),(5.0,0.0),(30.0,0.0)])
-#     t.saveXMCDA()
-#     #t = XMCDAPerformanceTableau('temp')
-#     g = Electre3OutrankingDigraph(t)
-#     #g = BipolarOutrankingDigraph(t)
-#     g.showVetos()
-#     print(g.showVetos(cutLevel=60.0,realVetosOnly=True))
-#     #g.showEvaluationStatistics()
-#     print(g.computeVetoesStatistics())
-#     g.showCriteria()
-#     gini = g.computeConcentrationIndex(list(range(len(g.actions))),g.outDegreesDistribution())
-#     print('gini: %2.4f' % (gini))
-#     ## g.showStatistics()
-#     percentages = [0,20,33,40,50,60,66,75,80,100]
-#     percentiles = g.computeValuationPercentiles(g.actions,percentages)
-#     print('Percentiles:')
-#     for p in percentages:
-#         print('%d : %.2f ' % (p,percentiles[p]))
-#     percentiles = [20,33,40,50,60,66,75,80]
-#     percentages = g.computeValuationPercentages(g.actions,percentiles)
-#     print('Percentages: ')
-#     for p in percentiles:
-#         print('%d : %.3f ' % (p,percentages[p]))
-
     
 def testCBPerformanceTableau(): 
     print('*==>> random CB Performance Tableaux ------------*')
@@ -97,7 +71,7 @@ def test3ObjectivesPerformanceTableau():
     t = Random3ObjectivesPerformanceTableau(numberOfActions=21,
                                             numberOfCriteria=13,
                                             commonScale=[0.0,50.0],
-                                            commonDistribution=['triangular',
+                                            commonMode=['triangular',
                                                                 'variable',
                                                                 0.5])
     t.saveXMCDA2('test',servingD3=False)

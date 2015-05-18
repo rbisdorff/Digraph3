@@ -3269,7 +3269,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3919,7 +3919,7 @@ to decimal format.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5740,23 +5740,68 @@ else valuation domain = [-1.0,1.0]</li>
 
 <dl class="class">
 <dt id="randomPerfTabs.Random3ObjectivesPerformanceTableau">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">Random3ObjectivesPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=20, numberOfCriteria=13, weightDistribution='equiobjectives', weightScale=None, integerWeights=True, commonScale=(0.0, 100.0), commonThresholds=[(5.0, 0.0), (10.0, 0.0), (60.0, 0.0)], commonDistribution=['triangular', 'variable', 0.5], missingProbability=0.05, valueDigits=2, Debug=False, seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#randomPerfTabs.RandomCoalitionsPerformanceTableau" title="randomPerfTabs.RandomCoalitionsPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomCoalitionsPerformanceTableau</span></code></a></p>
-<p>Specialization of the RandomCoalitionsPerformanceTableau
-for 3 objectives: <em>A</em>, <em>B</em> and <em>C</em>.</p>
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">Random3ObjectivesPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=20</em>, <em>numberOfCriteria=13</em>, <em>weightDistribution='equiobjectives'</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>OrdinalScales=False</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>vetoProbability=0.05</em>, <em>missingProbability=0.05</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<p>Specialization of the PerformanceTableau
+for 3 objectives: <em>Eco</em>, <em>Soc</em> and <em>Env</em>.</p>
 <p>Each decision action is qualified at random as weak (-), fair (~) or good (+)
-on each of the three objectives. The action comment shows for each objective the respective position (- ,~, +)
-of the evaluation mode, for instance (<em>A</em> - <em>B</em> + <em>C</em> ~).</p>
-<p>Generator parameters are described in the parent class.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If the mode of the triangular districbution is set to &#8216;variable&#8217;,
-three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span
-are set at random for each coalition and action.</p>
+on each of the three objectives.</p>
+<dl class="docutils">
+<dt>Generator arguments:</dt>
+<dd><ul class="first last">
+<li><p class="first">numberOf Actions := 20 (default)</p>
+</li>
+<li><p class="first">number of Criteria := 13 (default)</p>
+</li>
+<li><dl class="first docutils">
+<dt>weightDistribution := &#8216;equiobjectives&#8217; (default)</dt>
+<dd><div class="first last line-block">
+<div class="line">&#8216;equisignificant&#8217; (weights set all to 1)</div>
+<div class="line">&#8216;random&#8217; (in the range 1 to numberOfCriteria)</div>
 </div>
+</dd>
+</dl>
+</li>
+<li><p class="first">weightScale := [1,numerOfCriteria] (random default)</p>
+</li>
+<li><p class="first">integerWeights := True (default) / False</p>
+</li>
+<li><p class="first">OrdinalScales := True / False (default), if True commonScale is set to (0,10)</p>
+</li>
+<li><p class="first">commonScale := (0.0, 100.0) (default if OrdinalScales == False)</p>
+</li>
+<li><dl class="first docutils">
+<dt>commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalScales == True, otherwise</dt>
+<dd><div class="first last line-block">
+<div class="line">[(0.10001*span,0.0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].</div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>commonMode := [&#8216;triangular&#8217;,&#8217;variable&#8217;,0.50] (default), A constant mode may be provided.</dt>
+<dd><div class="first last line-block">
+<div class="line">[&#8216;uniform&#8217;,&#8217;variable&#8217;,None], a constant range may be provided.</div>
+<div class="line">[&#8216;beta&#8217;,&#8217;variable&#8217;,None] (three alpha, beta combinations (5.8661,2.62203)</div>
+<div class="line-block">
+<div class="line">chosen by default for &#8216;good&#8217;, &#8216;fair&#8217; and &#8216;weak&#8217; evaluations. Constant parameters may be provided.</div>
+</div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">valueDigits := 2 (default, for cardinal scales only)</p>
+</li>
+<li><p class="first">vetoProbability := x in ]0.0-1.0[ (0.05 default), probability that a cardinal criterion shows a veto preference discrimination threshold.</p>
+</li>
+<li><p class="first">Debug := True / False (default)</p>
+</li>
+</ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="randomPerfTabs.Random3ObjectivesPerformanceTableau.showActions">
-<code class="descname">showActions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau.showActions" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showActions</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau.showActions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
