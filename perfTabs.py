@@ -2627,10 +2627,10 @@ The performance evaluations of each decision alternative on each criterion are g
         nc = len(self.criteria)
         evaluation = self.evaluation
         actions = self.actions
-        na = len(actions)
+        n = len(actions)
         print('*-------- Performance tableau summary statistics -------*')
         print('Instance name      :', self.name)
-        print('#Actions           :', na)
+        print('#Actions           :', n)
         print('#Criteria          :', nc)
         print('*Statistics per Criterion*')
         averageSigma = Decimal('0.0')
@@ -2645,14 +2645,16 @@ The performance evaluations of each decision alternative on each criterion are g
             maxEvaluation = Min
             evaluationList = []
             for x in actions:
-                evaluationList.append(evaluation[g][x])
-                averageEvaluation += evaluation[g][x]
-                varianceEvaluation += evaluation[g][x]**Decimal('2')
-                if evaluation[g][x] < minEvaluation:
-                    minEvaluation = evaluation[g][x]
-                if evaluation[g][x] > maxEvaluation:
-                    maxEvaluation = evaluation[g][x]
+                if evaluation[g][x] != Decimal('-999'):
+                    evaluationList.append(evaluation[g][x])
+                    averageEvaluation += evaluation[g][x]
+                    varianceEvaluation += evaluation[g][x]**Decimal('2')
+                    if evaluation[g][x] < minEvaluation:
+                        minEvaluation = evaluation[g][x]
+                    if evaluation[g][x] > maxEvaluation:
+                        maxEvaluation = evaluation[g][x]
             evaluationList.sort()
+            na = len(evaluationList)
             #print evaluationList
             # !! index on evaluation List goes from 0 to na -1 !!
             rankQ1 = na / 4.0
@@ -2695,10 +2697,11 @@ The performance evaluations of each decision alternative on each criterion are g
             nd = 0
             for x in actions:
                 for y in actions:
-                    diffxy = (evaluation[g][x] - evaluation[g][y])
-                    averageAbsDiffEvaluation += abs(diffxy)
-                    varianceDiffEvaluation += diffxy**Decimal('2')
-                    nd += 1
+                    if evaluation[g][x] != Decimal('-999') and evaluation[g][y] != Decimal('-999'):
+                        diffxy = (evaluation[g][x] - evaluation[g][y])
+                        averageAbsDiffEvaluation += abs(diffxy)
+                        varianceDiffEvaluation += diffxy**Decimal('2')
+                        nd += 1
 #            print '  Sum of evaluation differences = ', averageAbsDiffEvaluation
             averageAbsDiffEvaluation /= Decimal(str(nd))
             ## averageDiffEvaluation == 0 per construction  

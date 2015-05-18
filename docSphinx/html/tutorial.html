@@ -3411,52 +3411,12 @@ matching the <code class="docutils literal"><span class="pre">RandomLinearVoting
 </td></tr></table></div>
 </dd>
 </dl>
-<p>For testing purposes a special constructor is provided for extracting partial performance tableaux from a given tableau instance:</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">PartialPerformanceTableau</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span> <span class="o">=</span> <span class="n">PartialPerformanceTableau</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;a2&#39;</span><span class="p">,</span><span class="s">&#39;a3&#39;</span><span class="p">,</span><span class="s">&#39;a6&#39;</span><span class="p">],</span>
-<span class="go">                                     criteriaSubset=[&#39;g1&#39;,&#39;g2&#39;])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
-<span class="go">*----  performance tableau -----*</span>
-<span class="go">criteria | weights | &#39;a2&#39;   &#39;a3&#39;   &#39;a6&#39;</span>
-<span class="go">---------|-----------------------------------------</span>
-<span class="go">   &#39;g1&#39;  |   2.00   |   8.00   8.00   7.00</span>
-<span class="go">   &#39;g2&#39;  |   3.00   |  -30.71  -41.65  -32.47</span>
-</pre></div>
-</td></tr></table></div>
-<p>Similarly, one may set to constant performance values (median value of the measurement scale by default) a subset of actions and/or criteria:</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">ConstantPerformanceTableau</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ct</span> <span class="o">=</span> <span class="n">ConstantPerformanceTableau</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;a2&#39;</span><span class="p">,</span><span class="s">&#39;a3&#39;</span><span class="p">,</span><span class="s">&#39;a6&#39;</span><span class="p">],</span><span class="n">criteriaSubset</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;g1&#39;</span><span class="p">,</span><span class="s">&#39;g2&#39;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ct</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
-<span class="go">*----  performance tableau -----*</span>
-<span class="go">criteria | weights |   &#39;a2&#39;   &#39;a3&#39;   &#39;a6&#39;  ...</span>
-<span class="go">---------|----------------------------------</span>
-<span class="go">   &#39;g1&#39;  |   2     |   5.00   5.00   5.00  ...</span>
-<span class="go">   &#39;g2&#39;  |   3     |  50.00  50.00  50.00  ...</span>
-<span class="gp">...</span>
-</pre></div>
-</td></tr></table></div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span>Tutorials of the Digraph3 resources</span></a></p>
 </div>
 <div class="section" id="the-random3objectivesperformancetableau-generator">
 <h3>The <a class="reference external" href="techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau">Random3ObjectivesPerformanceTableau</a> generator<a class="headerlink" href="#the-random3objectivesperformancetableau-generator" title="Permalink to this headline">¶</a></h3>
-<p>The class provides a Random generator of performace tableaux concerning three preferential decision objectives which take randomly into account <em>economical</em>, <em>societal</em> as well as <em>environmental</em> aspects.</p>
-<p>Each decision action is qualified randomly as <em>weak</em> (-), <em>fair</em> (~) or <em>good</em> (+) on each of the three objectives.</p>
+<p>The class provides a generator of random performace tableaux concerning three preferential decision objectives which take into account <em>economical</em>, <em>societal</em> as well as <em>environmental</em> aspects.</p>
+<p>Each decision action is qualified randomly as performing <em>weak</em> (-), <em>fair</em> (~) or <em>good</em> (+) on each of the three objectives.</p>
 <dl class="docutils">
 <dt>Generator directives are the following:</dt>
 <dd><ul class="first last simple">
@@ -3467,7 +3427,7 @@ matching the <code class="docutils literal"><span class="pre">RandomLinearVoting
 <li>integerWeights = True (default): False gives normlized rational weights,</li>
 <li>commonScale = (0.0,100.0),</li>
 <li>commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)]: Performance discrimination thresholds may be set for &#8216;ind&#8217;, &#8216;pref&#8217; and &#8216;veto&#8217;,</li>
-<li>commonDistribution = [&#8216;triangular&#8217;,&#8217;variable&#8217;,0.5]: random number generators of various other types (&#8216;uniform&#8217;,&#8217;beta&#8217;) are available,</li>
+<li>commonMode = [&#8216;triangular&#8217;,&#8217;variable&#8217;,0.5]: random number generators of various other types (&#8216;uniform&#8217;,&#8217;beta&#8217;) are available,</li>
 <li>valueDigits = 2 (default): evaluations are encoded as Decimals,</li>
 <li>missingProbability = 0.05 (default): random insertion of missing values with given probability,</li>
 <li>seed= None.</li>
@@ -3477,8 +3437,7 @@ matching the <code class="docutils literal"><span class="pre">RandomLinearVoting
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If the mode of the <em>triangular</em> distribution is set to &#8216;<em>variable</em>&#8216;,
-three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span
-are set at random for each coalition and action.</p>
+three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span are set at random for each coalition and action.</p>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -3517,33 +3476,33 @@ are set at random for each coalition and action.</p>
 <span class="go">          numberOfActions=31,</span>
 <span class="go">          numberOfCriteria=13,</span>
 <span class="go">          weightDistribution=&#39;equiobjectives&#39;,</span>
-<span class="go">          seed=100)</span>
+<span class="go">          seed=120)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showObjectives</span><span class="p">()</span>
 <span class="go">*------ show objectives -------&quot;</span>
-<span class="go">Soc: Societal aspect</span>
-<span class="go">   g02 random societal criterion 16</span>
-<span class="go">   g03 random societal criterion 16</span>
-<span class="go">   g06 random societal criterion 16</span>
-<span class="go">   g08 random societal criterion 16</span>
-<span class="go">   g09 random societal criterion 16</span>
-<span class="go">  Total weight: 80.00 (5 criteria)</span>
 <span class="go">Eco: Economical aspect</span>
-<span class="go">   g01 random economic criterion 20</span>
-<span class="go">   g04 random economic criterion 20</span>
-<span class="go">   g11 random economic criterion 20</span>
-<span class="go">   g13 random economic criterion 20</span>
+<span class="go">   g04 criterion of objective Eco 20</span>
+<span class="go">   g05 criterion of objective Eco 20</span>
+<span class="go">   g08 criterion of objective Eco 20</span>
+<span class="go">   g11 criterion of objective Eco 20</span>
 <span class="go">  Total weight: 80.00 (4 criteria)</span>
+<span class="go">Soc: Societal aspect</span>
+<span class="go">   g06 criterion of objective Soc 16</span>
+<span class="go">   g07 criterion of objective Soc 16</span>
+<span class="go">   g09 criterion of objective Soc 16</span>
+<span class="go">   g10 criterion of objective Soc 16</span>
+<span class="go">   g13 criterion of objective Soc 16</span>
+<span class="go">  Total weight: 80.00 (5 criteria)</span>
 <span class="go">Env: Environmental aspect</span>
-<span class="go">   g05 random environmental criterion 20</span>
-<span class="go">   g07 random environmental criterion 20</span>
-<span class="go">   g10 random environmental criterion 20</span>
-<span class="go">   g12 random environmental criterion 20</span>
+<span class="go">   g01 criterion of objective Env 20</span>
+<span class="go">   g02 criterion of objective Env 20</span>
+<span class="go">   g03 criterion of objective Env 20</span>
+<span class="go">   g12 criterion of objective Env 20</span>
 <span class="go">  Total weight: 80.00 (4 criteria)</span>
 </pre></div>
 </td></tr></table></div>
 </dd>
 </dl>
-<p>In this example we notice that 5 equisignificant criteria (g02, g03, g06, g08, g09) evaluate for instance the performance of the decision actions from the societal aspect. 4 equisignificant criteria do the same each time from the economical, respectively the environmental aspect. The &#8216;equiobjectives&#8217; directive results hence in a balanced total weight for each aspect.</p>
+<p>In this example we notice that 5 equisignificant criteria (g06, g07, g09, g10, g13) evaluate for instance the performance of the decision actions from the societal point of view. 4 equisignificant criteria do the same from the economical, respectively the environmental point of view. The &#8216;equiobjectives&#8217; directive results hence in a balanced total weight (80.00) for each decision objective.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3557,25 +3516,117 @@ are set at random for each coalition and action.</p>
 11
 12
 13
-14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
-<span class="go">*----- show decision action --------------*</span>
+14</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
 <span class="go">key:  a01</span>
-<span class="go">  name:       random decision action (Eco+ Soc- Env~)</span>
-<span class="go">  profile:    {&#39;Eco&#39;: &#39;good&#39;, &#39;Soc&#39;: &#39;weak&#39;, &#39;Env&#39;: &#39;fair&#39;}</span>
+<span class="go">  name:       random decision action Eco+ Soc- Env+</span>
+<span class="go">  profile:    {&#39;Eco&#39;: &#39;good&#39;, &#39;Soc&#39;: &#39;weak&#39;, &#39;Env&#39;: &#39;good&#39;}</span>
 <span class="go">key:  a02</span>
-<span class="go">  name:       random decision action (Eco~ Soc+ Env-)</span>
-<span class="go">  profile:    {&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;good&#39;, &#39;Env&#39;: &#39;weak&#39;}</span>
-<span class="go">key:  a03</span>
-<span class="go">  name:       random decision action (Eco- Soc+ Env~)</span>
-<span class="go">  profile:    {&#39;Eco&#39;: &#39;weak&#39;, &#39;Soc&#39;: &#39;good&#39;, &#39;Env&#39;: &#39;fair&#39;}</span>
-<span class="go">key:  a04</span>
-<span class="go">  name:       random decision action (Eco+ Soc~ Env+)</span>
-<span class="go">  profile:    {&#39;Eco&#39;: &#39;good&#39;, &#39;Soc&#39;: &#39;fair&#39;, &#39;Env&#39;: &#39;good&#39;}</span>
+<span class="gp">...</span>
+<span class="go">key:  a26</span>
+<span class="go">  name:       random decision action Eco+ Soc+ Env-</span>
+<span class="go">  profile:    {&#39;Eco&#39;: &#39;good&#39;, &#39;Soc&#39;: &#39;good&#39;, &#39;Env&#39;: &#39;weak&#39;}</span>
+<span class="gp">...</span>
+<span class="go">key:  a30</span>
+<span class="go">  name:       random decision action Eco- Soc- Env-</span>
+<span class="go">  profile:    {&#39;Eco&#39;: &#39;weak&#39;, &#39;Soc&#39;: &#39;weak&#39;, &#39;Env&#39;: &#39;weak&#39;}</span>
 <span class="gp">...</span>
 </pre></div>
 </td></tr></table></div>
-<p>Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each decision action with respect to the three objectives. For instance, action <em>a01</em> will probably show <em>good</em> performances wrt the <em>economical</em> aspect, <em>fair</em> performances wrt the <em>environmental</em> aspect, and <em>weak</em> performances wrt to the <em>societal</em> aspect.</p>
+<p>Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each decision action with respect to the three objectives. For instance, action <em>a01</em> will probably show <em>good</em> performances wrt the <em>economical</em>  and environmental aspects, and <em>weak</em> performances wrt the <em>societal</em> aspect.</p>
+<p>For testing purposes a special constructor is provided for extracting partial performance tableaux from a given tableau instance. In this example we may construct the partial performance tableaux corresponding to each objective:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">PartialPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">teco</span> <span class="o">=</span> <span class="n">PartialPerformanceTableau</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">criteriaSubset</span><span class="o">=</span>\
+<span class="go">                          t.objectives[&#39;Eco&#39;][&#39;criteria&#39;])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tsoc</span> <span class="o">=</span> <span class="n">PartialPerformanceTableau</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">criteriaSubset</span><span class="o">=</span>\
+<span class="go">                          t.objectives[&#39;Soc&#39;][&#39;criteria&#39;])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tenv</span> <span class="o">=</span> <span class="n">PartialPerformanceTableau</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">criteriaSubset</span><span class="o">=</span>\
+<span class="go">                          t.objectives[&#39;Env&#39;][&#39;criteria&#39;])</span>
+</pre></div>
+</td></tr></table></div>
+<p>For each objective, one way this compute a partial bipolar outranking digraph:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">geco</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">teco</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gsoc</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">tsoc</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">genv</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">tenv</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Thes three partial digraphs model the preferences represented in each of the partial performance tableaux. One may aggregate these three preferential with an epitemic fusion operator:</dt>
+<dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">FusionLDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gfus</span> <span class="o">=</span> <span class="n">FusionLDigraph</span><span class="p">([</span><span class="n">geco</span><span class="p">,</span><span class="n">gsoc</span><span class="p">,</span><span class="n">genv</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gfus</span><span class="o">.</span><span class="n">strongComponents</span><span class="p">()</span>
+<span class="go">{frozenset({&#39;a30&#39;}),</span>
+<span class="go"> frozenset({&#39;a10&#39;, &#39;a03&#39;, &#39;a19&#39;, &#39;a08&#39;, &#39;a07&#39;, &#39;a04&#39;, &#39;a21&#39;, &#39;a20&#39;,</span>
+<span class="go">            &#39;a13&#39;, &#39;a23&#39;, &#39;a16&#39;, &#39;a12&#39;, &#39;a24&#39;, &#39;a02&#39;, &#39;a31&#39;, &#39;a29&#39;,</span>
+<span class="go">            &#39;a05&#39;, &#39;a09&#39;, &#39;a28&#39;, &#39;a25&#39;, &#39;a17&#39;, &#39;a14&#39;, &#39;a15&#39;, &#39;a06&#39;,</span>
+<span class="go">            &#39;a01&#39;, &#39;a27&#39;, &#39;a11&#39;, &#39;a18&#39;, &#39;a22&#39;}),</span>
+<span class="go"> frozenset({&#39;a26&#39;})}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">StrongComponentsCollapsedDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scc</span> <span class="o">=</span> <span class="n">StrongComponentsCollapsedDigraph</span><span class="p">(</span><span class="n">gfus</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scc</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
+<span class="go">*----- show digraphs actions --------------*</span>
+<span class="go">key:  frozenset({&#39;a30&#39;})</span>
+<span class="go">  short name: Scc_1</span>
+<span class="go">  name:       _a30_</span>
+<span class="go">  comment:    collapsed strong component</span>
+<span class="go">key:  frozenset({&#39;a10&#39;, &#39;a03&#39;, &#39;a19&#39;, &#39;a08&#39;, &#39;a07&#39;, &#39;a04&#39;, &#39;a21&#39;, &#39;a20&#39;, &#39;a13&#39;,</span>
+<span class="go">                 &#39;a23&#39;, &#39;a16&#39;, &#39;a12&#39;, &#39;a24&#39;, &#39;a02&#39;, &#39;a31&#39;, &#39;a29&#39;, &#39;a05&#39;, &#39;a09&#39;, &#39;a28&#39;, &#39;a25&#39;,</span>
+<span class="go">                 &#39;a17&#39;, &#39;a14&#39;, &#39;a15&#39;, &#39;a06&#39;, &#39;a01&#39;, &#39;a27&#39;, &#39;a11&#39;, &#39;a18&#39;, &#39;a22&#39;})</span>
+<span class="go">  short name: Scc_2</span>
+<span class="go">  name:       _a10_a03_a19_a08_a07_a04_a21_a20_a13_a23_a16_a12_a24_a02_a31_\</span>
+<span class="go">               a29_a05_a09_a28_a25_a17_a14_a15_a06_a01_a27_a11_a18_a22_</span>
+<span class="go">  comment:    collapsed strong component</span>
+<span class="go">key:  frozenset({&#39;a26&#39;})</span>
+<span class="go">  short name: Scc_3</span>
+<span class="go">  name:       _a26_</span>
+<span class="go">  comment:    collapsed strong component</span>
+</pre></div>
+</td></tr></table></div>
+</dd>
+<dt>A graphviz drawing illustrates the apprent preferential links between the strong components:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">scc</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;scFusionObjectives&#39;</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go">Exporting to scFusionObjectives.dot</span>
+<span class="go">dot -Grankdir=BT -Tpng scFusionObjectives.dot -o scFusionObjectives.png</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="_images/sccFusionObjectives.png"><img alt="_images/sccFusionObjectives.png" class="align-center" src="_images/sccFusionObjectives.png" style="width: 200px;" /></a>
+<p>Decision action <em>a26</em> (Eco+ Soc+ Env-) appears dominating the other decision alternatives, whereas decision action <em>a30</em> (Eco- Soc- Env-) appears to be dominated by all the others.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span>Tutorials of the Digraph3 resources</span></a></p>
 </div>
 </div>
