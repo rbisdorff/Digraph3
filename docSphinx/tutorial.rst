@@ -2039,7 +2039,7 @@ A graphviz drawing illustrates the apprent preferential links between the strong
     dot -Grankdir=BT -Tpng scFusionObjectives.dot -o scFusionObjectives.png
 
 .. image:: sccFusionObjectives.png
-   :width: 200 px
+   :width: 300 px
    :align: center
 
 Decision action *a26* (Eco+ Soc+ Env-) appears dominating the other decision alternatives, whereas decision action *a30* (Eco- Soc- Env-) appears to be dominated by all the others.
