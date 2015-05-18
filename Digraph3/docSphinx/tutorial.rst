@@ -1918,7 +1918,7 @@ Each decision action is qualified randomly as performing *weak* (-), *fair* (~) 
 Generator directives are the following:
     * numberOfActions = 20 (default),
     * numberOfCriteria = 13 (default),
-    * weightDistribution = 'equicoalitions' (default) | 'random' | 'equisignificant', 
+    * weightDistribution = 'equiobjectives' (default) | 'random' | 'equisignificant', 
     * weightScale = (1,numberOfCriteria): only used when random criterion weights are requested,
     * integerWeights = True (default): False gives normlized rational weights, 
     * commonScale = (0.0,100.0),

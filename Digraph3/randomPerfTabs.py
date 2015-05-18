@@ -1224,17 +1224,14 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 sumWeights += weightsList[i]
             weightsList.reverse()
         else:
+            weightDistribution = 'equiobjectives'
             weightMode = (weightDistribution,None)
-            weightScale = (1,1)            
+            weightScale = (1,1)
             weightsList = []
             sumWeights = Decimal('0.0')
             for i in range(len(criteriaList)):
-                if i == 0:
-                    weightsList.append(Decimal(str(weightScale[1])))
-                    sumWeights += weightScale[1]
-                else:
-                    weightsList.append(Decimal(str(weightScale[0])))
-                    sumWeights += weightScale[0]
+                weightsList.append(Decimal(str(weightScale[0])))
+                sumWeights += weightScale[0]
 
         # generate objectives dictionary
         self.objectives = {
@@ -2233,8 +2230,10 @@ if __name__ == "__main__":
                                             numberOfCriteria=13,
                                             OrdinalScales=False,
                                             commonScale=None,
-                                            weightDistribution='equiobjectives',
-                                            commonMode=None,
+                                            weightDistribution='equisignificant',
+                                            #weightScale=(1,5),
+                                            commonMode=('beta','variable',2),
+                                            vetoProbability=0.5,
                                             seed=120)
     t.showObjectives()
     #t.showActions(Debug=True)
@@ -2247,7 +2246,7 @@ if __name__ == "__main__":
     gfus = FusionLDigraph([geco,genv,gsoc])
     scc = StrongComponentsCollapsedDigraph(gfus)
     scc.showActions()
-    scc.exportGraphViz('sccFusion')
+    scc.exportGraphViz('sccFusionObjectives')
     
     
 ##    t.showStatistics()
