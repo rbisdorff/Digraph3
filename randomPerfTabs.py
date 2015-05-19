@@ -1358,10 +1358,10 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                         elif self.actions[a]['profile'][aobj] == 'good':
                             randomRange = (commonScale[0]+0.3*(commonScale[1]-commonScale[0]),
                                           commonScale[1])       
-                            self.actions[a]['comment'] += ': %s %s' % (randomMode[0],randomRange)
+                        self.actions[a]['comment'] += ': %s %s' % (randomMode[0],randomRange)
                     else:
-                        randomRange = (randomMode[1],randomMode[2]) 
-                        randeval = random.uniform(randomMode[1],randomMode[2])
+                        randomRange = (commonScale[1],commonScale[2]) 
+                    randeval = random.uniform(randomRange[0],randomRange[1])
                     self.actions[a]['generators'][g] = (randomMode[0],randomRange)
                     if OrdinalScales:
                         if criteria[g]['preferenceDirection'] == 'max':
@@ -2230,9 +2230,9 @@ if __name__ == "__main__":
                                             numberOfCriteria=13,
                                             OrdinalScales=False,
                                             commonScale=None,
-                                            weightDistribution='equisignificant',
+                                            weightDistribution='equiobjectives',
                                             #weightScale=(1,5),
-                                            commonMode=('beta','variable',2),
+                                            commonMode=('uniform','variable',2),
                                             vetoProbability=0.5,
                                             seed=120)
     t.showObjectives()
