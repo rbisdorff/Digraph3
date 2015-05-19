@@ -2232,8 +2232,8 @@ if __name__ == "__main__":
                                             commonScale=None,
                                             weightDistribution='equiobjectives',
                                             #weightScale=(1,5),
-                                            commonMode=('uniform','variable',2),
-                                            vetoProbability=0.5,
+                                            #commonMode=('uniform','variable',2),
+                                            vetoProbability=0.3,
                                             seed=120)
     t.showObjectives()
     #t.showActions(Debug=True)
