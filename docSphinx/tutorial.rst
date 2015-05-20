@@ -1309,6 +1309,367 @@ Many more tools for exploiting bipolarly valued outranking digraphs are availabl
 
 Back to :ref:`Tutorial-label`
 
+.. _RandomPerformaceTableau-Tutorial-label:
+
+Generating random performance tableaux
+--------------------------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+
+The `randomPerfTabs <techDoc.html#randomPerfTabs>`_ module
+..........................................................
+
+This module provides several random performance tableaux generators, i.e. PerformanceTableau class instances (see the `perfTabs <techDoc.html#perftabs-label>`_ module), mainly for the purpose of testing implemented versions of methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tuorial concerns the four most useful generators:
+
+    1. The simplest model, called **RandomPerformaceTableau**, generates
+       a set of *n* decision actions, a set of *m* real-valued
+       performance criteria, ranging by default from 0.0 to 100.0,
+       associated with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale. 
+    2. In order to study aggregation of linear orders, we provide a model called **RandomRankPerformanceTableau** which provides lineraly ordered performances without ties on multple criteria for a given number of decision actions.
+    3. One of the most useful random generator, called
+       **RandomCBPerformanceTableau**, proposes two decision objectives,
+       named *Costs* (to be mimized) respectively *Benefits* (to be
+       maximized) model; its purpose being to generate more or less
+       contradictory performances on these two, usually opposed,
+       objectives. *Low costs* will randomly be coupled with *low
+       benefits*, whereas *high costs* will randomly be coupled with high benefits. 
+    4. Many multiple criteria decision problems concern three decision
+       objectives which take into account *economical*, *societal* as
+       well as *environmental* aspects. For this type of performance
+       tableau model, we provide a specific generator, called **Random3ObjectivesPerformanceTableau**.
+ 
+
+The `RandomPerformanceTableau <techDoc.html#randomPerfTabs.RandomPerformanceTableau>`_ generator
+................................................................................................
+    
+The ``RandomPerformanceTableau generator``, the simplest of the kind, specializes the ``PerformanceTableau`` class and takes the following parameters:
+    * numberOfActions := nbr of decision actions.
+    * numberOfCriteria := number performance criteria.
+    * weightDistribution := 'random' (default) | 'fixed' | 'equisignificant'.
+         | If 'random', weights are uniformly selected randomly
+         | form the given weight scale;
+         | If 'fixed', the weightScale must provided a corresponding weights
+         | distribution;
+         | If 'equisignificant', all criterion weights are put to unity.
+    * weightScale := [Min,Max] (default =(1,numberOfCriteria).
+    * IntegerWeights := True (default) | False (normalized to proportions of 1.0).
+    * commonScale := [Min;Max]; common performance measuring scales (default = [0;100])
+    * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. For each threshold type *x* in *{q,p,v}*, the float x0 value represents a constant and the float x1 value a proportional value. Default values are [(10.0,0.0),(20.0,0.0),(80.0,0,0)]. 
+    * commonMode := common random distribution of random performance measurements:
+         | ('uniform',Min,Max), uniformly distributed float values on the given common scales' range. 
+         | ('normal',mu,sigma), truncated Gaussion distribution. 
+         | ('triangular',mode,repartition), generalized triangular distribution with a probility repartition parameter specifying the probability mass accumulated until the mode value.
+         | ('beta',alpha,beta), a beta genarator with standard alpha and beta parameters.
+    * valueDigits := <integer>, precision of performance measurements (2 decimal digits by default).
+        
+Code example:
+        >>> from randomPerfTabs import RandomPerformanceTableau
+        >>> t = RandomPerformanceTableau(numberOfActions=3,numberOfCriteria=1,seed=100)
+        >>> t.actions
+            {'a1': {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'},
+             'a2': {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'},
+             'a3': {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'}}
+        >>> t.criteria
+            {'g1': {'thresholds': {'ind' : (Decimal('10.0'), Decimal('0.0')),
+                                   'veto': (Decimal('80.0'), Decimal('0.0')),
+                                   'pref': (Decimal('20.0'), Decimal('0.0'))},
+                    'scale': [0.0, 100.0],
+                    'weight': Decimal('1'),
+                    'name': 'digraphs.RandomPerformanceTableau() instance',
+                    'comment': 'Arguments: ; weightDistribution=random;
+                        weightScale=(1, 1); commonMode=None'}}
+        >>> t.evaluation
+            {'g01': {'a01': Decimal('45.95'),
+                     'a02': Decimal('95.17'),
+                     'a03': Decimal('17.47')
+                    }
+            }
+
+The `RandomRankPerformanceTableau <techDoc.html#randomPerfTabs.RandomRankPerformanceTableau>`_ generator
+........................................................................................................
+
+Random generator for multiple criteria ranked (without ties) performances of a
+given number of decision actions. On each criterion,
+all decision actions are hence lineraly ordered. The ``RandomRankPerformanceTableau`` class is
+matching the ``RandomLinearVotingProfile`` class provided by  the `votingDigraphs <techDoc.html#votingDigraphs-label>`_ module.  
+        
+*Parameters*:
+    * number of actions,
+    * number of performance criteria,
+    * weightDistribution := equisignificant | random (default, see `above <tutorial.html#the-randomperformancetableau-generator>`_ above)
+    * weightScale := (1, 1 | numberOfCriteria (default when random))
+    * integerWeights := Boolean (True = default) 
+    * commonThresholds (default) := {
+        | 'ind':(0,0),
+        | 'pref':(1,0),
+        | 'veto':(numberOfActions,0)
+        | } (default)
+
+
+The `RandomCBPerformanceTableau <techDoc.html#randomPerfTabs.RandomCBPerformanceTableau>`_ generator
+....................................................................................................
+
+Random generation of *Cost* versus *Benefit* oriented performance tableaux follows the directives below:
+
+    * We distinguish three types of decision actions: *cheap*, *neutral* and *expensive* ones with an equal proportion of 1/3. We also distinguish two types of weighted criteria: *cost* criteria to be *minimized*, and *benefit* criteria to be *maximized*; in the proportions 1/3 respectively 2/3. 
+    * Random performances on each type of criteria  are drawn, either from an ordinal scale [0;10], or from a cardinal scale [0.0;100.0], following a parametric triangular law of mode: 30\% performance for cheap, 50\% for neutral, and$70\% performance for expensive decision actions, with constant probability repartition 0.5 on each side of the respective mode. 
+    * Cost criteria use mostly cardinal scales (3/4), whereas benefit criteria use mostly ordinal scales (2/3). 
+    * The sum of weights of the cost criteria by default equals the sum weights of the benefit criteria: weighDistribution = 'equiobjectives'. 
+    * On cardinal criteria, both of cost or of benefit type, we observe following constant preference discrimination quantiles: 5\% indifferent situations, 90\% strict preference situations, and 5\% veto situation. 
+
+*Parameters*:
+    * If *numberOfActions* == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated
+    * If *numberOfCriteria* == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated
+    * *weightDistribution* = {'equiobjectives'|'fixed'|'random'|'equisignificant' (default = 'equisignificant')}
+    * default *weightScale* for 'random' weightDistribution is 1 - numberOfCriteria
+    * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.
+    * commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).
+    * commonPercentiles = {'ind':5, 'pref':10, ['weakveto':90,] 'veto':95} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.
+
+.. warning::
+
+    Minimal number of decision actions required is 3 ! 
+
+**Example Python session**:
+    >>> from randomPerfTabs import RandomCBPerformanceTableau
+    >>> t = RandomCBPerformanceTableau(
+    ...          numberOfActions=7,
+    ...          numberOfCriteria=5,
+    ...          weightDistribution='equiobjectives',
+    ...          commonPercentiles={'ind':5,'pref':10,'veto':95},
+    ...          seed=100)
+    >>> t.showActions()
+    *----- show decision action --------------*
+    key:  a1
+      short name: a1
+      name:       random cheap decision action
+    key:  a2
+      short name: a2
+      name:       random neutral decision action
+    ...
+    key:  a7
+      short name: a7
+      name:       random advantageous decision action
+    >>> t.showCriteria()
+    *----  criteria -----*
+    g1 'random ordinal benefit criterion'
+      Scale = (0, 10)
+      Weight = 0.167 
+    g2 'random cardinal cost criterion'
+      Scale = (0.0, 100.0)
+      Weight = 0.250 
+      Threshold ind  :  1.76 + 0.00x ; percentile:  0.095
+      Threshold pref :  2.16 + 0.00x ; percentile:  0.143
+      Threshold veto : 73.19 + 0.00x ; percentile:  0.952
+    ...
+
+In this example we notice the three types of decision actions, as well as two types of criteria with either an ordinal or a cardinal performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the *indifference* and 10% below the *preference* discrimanting threshold. About 5% will be considered as *considerably large*. More statistics about the generated performances is available as follows:
+
+    >>> t.showStatistics()
+    *-------- Performance tableau summary statistics -------*
+    Instance name      : randomCBperftab
+    #Actions           : 7
+    #Criteria          : 5
+    *Statistics per Criterion*
+    Criterion name       : g1
+      Criterion weight     : 2
+      criterion scale    : 0.00 - 10.00
+      mean evaluation    : 5.14
+      standard deviation : 2.64
+      maximal evaluation : 8.00
+      quantile Q3 (x_75) : 8.00
+      median evaluation  : 6.50
+      quantile Q1 (x_25) : 3.50
+      minimal evaluation : 1.00
+      mean absolute difference      : 2.94
+      standard difference deviation : 3.74
+    Criterion name       : g2
+      Criterion weight     : 3
+      criterion scale    : -100.00 - 0.00
+      mean evaluation    : -49.32
+      standard deviation : 27.59
+      maximal evaluation : 0.00
+      quantile Q3 (x_75) : -27.51
+      median evaluation  : -35.98
+      quantile Q1 (x_25) : -54.02
+      minimal evaluation : -91.87
+      mean absolute difference      : 28.72
+      standard difference deviation : 39.02
+    ...
+
+A (potentially ranked) colored heatmap with 5 color levels is also provided:
+    
+    >>> t.showHTMLPerformanceHeatmap(colorLevels=5,Ranked=False)
+
+.. image:: randomCBHeatmap.png
+   :width: 500 px
+   :align: center
+
+Such a performance tableau may be stored and reaccessed in the XMCDA2 encoded format:
+    >>> t.saveXMCDA2('temp')
+    *----- saving performance tableau in XMCDA 2.0 format  -------------*
+    File: temp.xml saved !
+    >>> from perfTabs import XMCDA2PerformanceTableau
+    >>> t = XMCDA2PerformanceTableau('temp')
+    >>> ...
+
+If needed for instance in an R session, a CSV version of the performance tableau may be created as follows:
+    >>> t.saveCSV('temp')
+    * --- Storing performance tableau in CSV format in file temp.csv
+    ...$ less temp.csv
+    "actions","g1","g2","g3","g4","g5"
+    "a1",1.00,-17.92,-33.99,26.68,3.00
+    "a2",8.00,-30.71,-77.77,66.35,6.00
+    "a3",8.00,-41.65,-69.84,53.43,8.00
+    "a4",2.00,-39.49,-16.99,18.62,2.00
+    "a5",6.00,-91.87,-74.85,83.09,7.00
+    "a6",7.00,-32.47,-24.91,79.24,9.00
+    "a7",4.00,-91.11,-7.44,48.22,7.00
+
+Back to :ref:`Tutorial-label`
+
+The `Random3ObjectivesPerformanceTableau <techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau>`_ generator
+......................................................................................................................
+
+The class provides a generator of random performace tableaux concerning three preferential decision objectives which take into account *economical*, *societal* as well as *environmental* aspects.
+
+Each decision action is qualified randomly as performing *weak* (-), *fair* (~) or *good* (+) on each of the three objectives. 
+
+Generator directives are the following:
+    * numberOfActions = 20 (default),
+    * numberOfCriteria = 13 (default),
+    * weightDistribution = 'equiobjectives' (default) | 'random' | 'equisignificant', 
+    * weightScale = (1,numberOfCriteria): only used when random criterion weights are requested,
+    * integerWeights = True (default): False gives normlized rational weights, 
+    * commonScale = (0.0,100.0),
+    * commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)]: Performance discrimination thresholds may be set for 'ind', 'pref' and 'veto',  
+    * commonMode = ['triangular','variable',0.5]: random number generators of various other types ('uniform','beta') are available,
+    * valueDigits = 2 (default): evaluations are encoded as Decimals,
+    * missingProbability = 0.05 (default): random insertion of missing values with given probability,  
+    * seed= None. 
+
+.. note::
+
+    If the mode of the *triangular* distribution is set to '*variable*',
+    three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span are set at random for each coalition and action.
+    
+.. warning::
+
+    Minimal number of decision actions required is 3 ! 
+
+**Example Python session**:
+    >>> from randomPerfTabs import Random3ObjectivesPerformanceTableau
+    >>> t = Random3ObjectivesPerformanceTableau(
+              numberOfActions=31,
+              numberOfCriteria=13,
+              weightDistribution='equiobjectives',
+              seed=120)
+    >>> t.showObjectives()
+    *------ show objectives -------"
+    Eco: Economical aspect
+       g04 criterion of objective Eco 20
+       g05 criterion of objective Eco 20
+       g08 criterion of objective Eco 20
+       g11 criterion of objective Eco 20
+      Total weight: 80.00 (4 criteria)
+    Soc: Societal aspect
+       g06 criterion of objective Soc 16
+       g07 criterion of objective Soc 16
+       g09 criterion of objective Soc 16
+       g10 criterion of objective Soc 16
+       g13 criterion of objective Soc 16
+      Total weight: 80.00 (5 criteria)
+    Env: Environmental aspect
+       g01 criterion of objective Env 20
+       g02 criterion of objective Env 20
+       g03 criterion of objective Env 20
+       g12 criterion of objective Env 20
+      Total weight: 80.00 (4 criteria)
+
+In this example we notice that 5 equisignificant criteria (g06, g07, g09, g10, g13) evaluate for instance the performance of the decision actions from the societal point of view. 4 equisignificant criteria do the same from the economical, respectively the environmental point of view. The 'equiobjectives' directive results hence in a balanced total weight (80.00) for each decision objective. 
+
+    >>> t.showActions()
+    key:  a01
+      name:       random decision action Eco+ Soc- Env+
+      profile:    {'Eco': 'good', 'Soc': 'weak', 'Env': 'good'}
+    key:  a02
+    ...
+    key:  a26
+      name:       random decision action Eco+ Soc+ Env-
+      profile:    {'Eco': 'good', 'Soc': 'good', 'Env': 'weak'}
+    ...
+    key:  a30
+      name:       random decision action Eco- Soc- Env-
+      profile:    {'Eco': 'weak', 'Soc': 'weak', 'Env': 'weak'}
+    ...
+
+Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each decision action with respect to the three objectives. For instance, action *a01* will probably show *good* performances wrt the *economical*  and environmental aspects, and *weak* performances wrt the *societal* aspect.
+
+For testing purposes a special constructor is provided for extracting partial performance tableaux from a given tableau instance. In this example we may construct the partial performance tableaux corresponding to each objective:
+
+    >>> from perfTabs import PartialPerformanceTableau
+    >>> teco = PartialPerformanceTableau(t,criteriaSubset=\
+                              t.objectives['Eco']['criteria'])
+    >>> tsoc = PartialPerformanceTableau(t,criteriaSubset=\
+                              t.objectives['Soc']['criteria'])
+    >>> tenv = PartialPerformanceTableau(t,criteriaSubset=\
+                              t.objectives['Env']['criteria'])
+
+For each objective, one way this compute a partial bipolar outranking digraph:
+
+    >>> from outrankingDigraphs import BipolarOutrankingDigraph
+    >>> geco = BipolarOutrankingDigraph(teco)
+    >>> gsoc = BipolarOutrankingDigraph(tsoc)
+    >>> genv = BipolarOutrankingDigraph(tenv)
+
+Thes three partial digraphs model the preferences represented in each of the partial performance tableaux. One may aggregate these three preferential with an epitemic fusion operator:
+    >>> from digraphs import FusionLDigraph
+    >>> gfus = FusionLDigraph([geco,gsoc,genv])
+    >>> gfus.strongComponents()
+    {frozenset({'a30'}), 
+     frozenset({'a10', 'a03', 'a19', 'a08', 'a07', 'a04', 'a21', 'a20', 
+                'a13', 'a23', 'a16', 'a12', 'a24', 'a02', 'a31', 'a29', 
+                'a05', 'a09', 'a28', 'a25', 'a17', 'a14', 'a15', 'a06', 
+                'a01', 'a27', 'a11', 'a18', 'a22'}), 
+     frozenset({'a26'})}
+    >>> from digraphs import StrongComponentsCollapsedDigraph
+    >>> scc = StrongComponentsCollapsedDigraph(gfus)
+    >>> scc.showActions()
+    *----- show digraphs actions --------------*
+    key:  frozenset({'a30'})
+      short name: Scc_1
+      name:       _a30_
+      comment:    collapsed strong component
+    key:  frozenset({'a10', 'a03', 'a19', 'a08', 'a07', 'a04', 'a21', 'a20', 'a13', 
+                     'a23', 'a16', 'a12', 'a24', 'a02', 'a31', 'a29', 'a05', 'a09', 'a28', 'a25', 
+                     'a17', 'a14', 'a15', 'a06', 'a01', 'a27', 'a11', 'a18', 'a22'})
+      short name: Scc_2
+      name:       _a10_a03_a19_a08_a07_a04_a21_a20_a13_a23_a16_a12_a24_a02_a31_\
+                   a29_a05_a09_a28_a25_a17_a14_a15_a06_a01_a27_a11_a18_a22_
+      comment:    collapsed strong component
+    key:  frozenset({'a26'})
+      short name: Scc_3
+      name:       _a26_
+      comment:    collapsed strong component
+
+A graphviz drawing illustrates the apprent preferential links between the strong components:
+    >>> scc.exportGraphViz('scFusionObjectives')
+    *---- exporting a dot file dor GraphViz tools ---------*
+    Exporting to scFusionObjectives.dot
+    dot -Grankdir=BT -Tpng scFusionObjectives.dot -o scFusionObjectives.png
+
+.. image:: sccFusionObjectives.png
+   :width: 300 px
+   :align: center
+
+Decision action *a26* (Eco+ Soc+ Env-) appears dominating the other decision alternatives, whereas decision action *a30* (Eco- Soc- Env-) appears to be dominated by all the others.
+
+Back to :ref:`Tutorial-label`
+
+
 .. _Rubis-Tutorial-label:
 
 Computing a best choice recommendation
@@ -1696,367 +2057,10 @@ It might be worth, as an **exercise**, to modify on the one hand this importance
 
 Back to :ref:`Tutorial-label`
 
-.. _RandomPerformaceTableau-Tutorial-label:
-
-Generating random performance tableaux
---------------------------------------
-
-.. contents:: 
-	:depth: 2
-	:local:
 
 ..
    See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
 
-The `randomPerfTabs <techDoc.html#randomPerfTabs>`_ module
-..........................................................
-
-This module provides several random performance tableaux generators, i.e. PerformanceTableau class instances (see the `perfTabs <techDoc.html#perftabs-label>`_ module), mainly for the purpose of testing implemented versions of methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tuorial concerns the four most useful generators:
-
-    1. The simplest model, called **RandomPerformaceTableau**, generates
-       a set of *n* decision actions, a set of *m* real-valued
-       performance criteria, ranging by default from 0.0 to 100.0,
-       associated with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale. 
-    2. In order to study aggregation of linear orders, we provide a model called **RandomRankPerformanceTableau** which provides lineraly ordered performances without ties on multple criteria for a given number of decision actions.
-    3. One of the most useful random generator, called
-       **RandomCBPerformanceTableau**, proposes two decision objectives,
-       named *Costs* (to be mimized) respectively *Benefits* (to be
-       maximized) model; its purpose being to generate more or less
-       contradictory performances on these two, usually opposed,
-       objectives. *Low costs* will randomly be coupled with *low
-       benefits*, whereas *high costs* will randomly be coupled with high benefits. 
-    4. Many multiple criteria decision problems concern three decision
-       objectives which take into account *economical*, *societal* as
-       well as *environmental* aspects. For this type of performance
-       tableau mdel, we provide a specific generator, called **Random3ObjectivesPerformanceTableau**.
- 
-
-The `RandomPerformanceTableau <techDoc.html#randomPerfTabs.RandomPerformanceTableau>`_ generator
-................................................................................................
-    
-The ``RandomPerformanceTableau generator``, the simplest of the kind, specializes the ``PerformanceTableau`` class and takes the following parameters:
-    * numberOfActions := nbr of decision actions.
-    * numberOfCriteria := number performance criteria.
-    * weightDistribution := 'random' (default) | 'fixed' | 'equisignificant'.
-         | If 'random', weights are uniformly selected randomly
-         | form the given weight scale;
-         | If 'fixed', the weightScale must provided a corresponding weights
-         | distribution;
-         | If 'equisignificant', all criterion weights are put to unity.
-    * weightScale := [Min,Max] (default =(1,numberOfCriteria).
-    * IntegerWeights := True (default) | False (normalized to proportions of 1.0).
-    * commonScale := [Min;Max]; common performance measuring scales (default = [0;100])
-    * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. For each threshold type *x* in *{q,p,v}*, the float x0 value represents a constant and the float x1 value a proportional value. Default values are [(10.0,0.0),(20.0,0.0),(80.0,0,0)]. 
-    * commonMode := common random distribution of random performance measurements:
-         | ('uniform',Min,Max), uniformly distributed float values on the given common scales' range. 
-         | ('normal',mu,sigma), truncated Gaussion distribution. 
-         | ('triangular',mode,repartition), generalized triangular distribution with a probility repartition parameter specifying the probability mass accumulated until the mode value.
-         | ('beta',alpha,beta), a beta genarator with standard alpha and beta parameters.
-    * valueDigits := <integer>, precision of performance measurements (2 decimal digits by default).
-        
-Code example:
-        >>> from randomPerfTabs import RandomPerformanceTableau
-        >>> t = RandomPerformanceTableau(numberOfActions=3,numberOfCriteria=1,seed=100)
-        >>> t.actions
-            {'a1': {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'},
-             'a2': {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'},
-             'a3': {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'}}
-        >>> t.criteria
-            {'g1': {'thresholds': {'ind' : (Decimal('10.0'), Decimal('0.0')),
-                                   'veto': (Decimal('80.0'), Decimal('0.0')),
-                                   'pref': (Decimal('20.0'), Decimal('0.0'))},
-                    'scale': [0.0, 100.0],
-                    'weight': Decimal('1'),
-                    'name': 'digraphs.RandomPerformanceTableau() instance',
-                    'comment': 'Arguments: ; weightDistribution=random;
-                        weightScale=(1, 1); commonMode=None'}}
-        >>> t.evaluation
-            {'g01': {'a01': Decimal('45.95'),
-                     'a02': Decimal('95.17'),
-                     'a03': Decimal('17.47')
-                    }
-            }
-
-The `RandomRankPerformanceTableau <techDoc.html#randomPerfTabs.RandomRankPerformanceTableau>`_ generator
-........................................................................................................
-
-Random generator for multiple criteria ranked (without ties) performances of a
-given number of decision actions. On each criterion,
-all decision actions are hence lineraly ordered. The ``RandomRankPerformanceTableau`` class is
-matching the ``RandomLinearVotingProfile`` class provided by  the `votingDigraphs <techDoc.html#votingDigraphs-label>`_ module.  
-        
-*Parameters*:
-    * number of actions,
-    * number of performance criteria,
-    * weightDistribution := equisignificant | random (default, see `above <tutorial.html#the-randomperformancetableau-generator>`_ above)
-    * weightScale := (1, 1 | numberOfCriteria (default when random))
-    * integerWeights := Boolean (True = default) 
-    * commonThresholds (default) := {
-        | 'ind':(0,0),
-        | 'pref':(1,0),
-        | 'veto':(numberOfActions,0)
-        | } (default)
-
-
-The `RandomCBPerformanceTableau <techDoc.html#randomPerfTabs.RandomCBPerformanceTableau>`_ generator
-....................................................................................................
-
-Random generation of *Cost* versus *Benefit* oriented performance tableaux follows the directives below:
-
-    * We distinguish three types of decision actions: *cheap*, *neutral* and *expensive* ones with an equal proportion of 1/3. We also distinguish two types of weighted criteria: *cost* criteria to be *minimized*, and *benefit* criteria to be *maximized*; in the proportions 1/3 respectively 2/3. 
-    * Random performances on each type of criteria  are drawn, either from an ordinal scale [0;10], or from a cardinal scale [0.0;100.0], following a parametric triangular law of mode: 30\% performance for cheap, 50\% for neutral, and$70\% performance for expensive decision actions, with constant probability repartition 0.5 on each side of the respective mode. 
-    * Cost criteria use mostly cardinal scales (3/4), whereas benefit criteria use mostly ordinal scales (2/3). 
-    * The sum of weights of the cost criteria by default equals the sum weights of the benefit criteria: weighDistribution = 'equiobjectives'. 
-    * On cardinal criteria, both of cost or of benefit type, we observe following constant preference discrimination quantiles: 5\% indifferent situations, 90\% strict preference situations, and 5\% veto situation. 
-
-*Parameters*:
-    * If *numberOfActions* == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated
-    * If *numberOfCriteria* == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated
-    * *weightDistribution* = {'equiobjectives'|'fixed'|'random'|'equisignificant' (default = 'equisignificant')}
-    * default *weightScale* for 'random' weightDistribution is 1 - numberOfCriteria
-    * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.
-    * commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).
-    * commonPercentiles = {'ind':5, 'pref':10, ['weakveto':90,] 'veto':95} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.
-
-.. warning::
-
-    Minimal number of decision actions required is 3 ! 
-
-**Example Python session**:
-    >>> from randomPerfTabs import RandomCBPerformanceTableau
-    >>> t = RandomCBPerformanceTableau(
-    ...          numberOfActions=7,
-    ...          numberOfCriteria=5,
-    ...          weightDistribution='equiobjectives',
-    ...          commonPercentiles={'ind':5,'pref':10,'veto':95},
-    ...          seed=100)
-    >>> t.showActions()
-    *----- show decision action --------------*
-    key:  a1
-      short name: a1
-      name:       random cheap decision action
-    key:  a2
-      short name: a2
-      name:       random neutral decision action
-    ...
-    key:  a7
-      short name: a7
-      name:       random advantageous decision action
-    >>> t.showCriteria()
-    *----  criteria -----*
-    g1 'random ordinal benefit criterion'
-      Scale = (0, 10)
-      Weight = 0.167 
-    g2 'random cardinal cost criterion'
-      Scale = (0.0, 100.0)
-      Weight = 0.250 
-      Threshold ind  :  1.76 + 0.00x ; percentile:  0.095
-      Threshold pref :  2.16 + 0.00x ; percentile:  0.143
-      Threshold veto : 73.19 + 0.00x ; percentile:  0.952
-    ...
-
-In this example we notice the three types of decision actions, as well as two types of criteria with either an ordinal or a cardinal performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the *indifference* and 10% below the *preference* discrimanting threshold. About 5% will be considered as *considerably large*. More statistics about the generated performances is available as follows:
-
-    >>> t.showStatistics()
-    *-------- Performance tableau summary statistics -------*
-    Instance name      : randomCBperftab
-    #Actions           : 7
-    #Criteria          : 5
-    *Statistics per Criterion*
-    Criterion name       : g1
-      Criterion weight     : 2
-      criterion scale    : 0.00 - 10.00
-      mean evaluation    : 5.14
-      standard deviation : 2.64
-      maximal evaluation : 8.00
-      quantile Q3 (x_75) : 8.00
-      median evaluation  : 6.50
-      quantile Q1 (x_25) : 3.50
-      minimal evaluation : 1.00
-      mean absolute difference      : 2.94
-      standard difference deviation : 3.74
-    Criterion name       : g2
-      Criterion weight     : 3
-      criterion scale    : -100.00 - 0.00
-      mean evaluation    : -49.32
-      standard deviation : 27.59
-      maximal evaluation : 0.00
-      quantile Q3 (x_75) : -27.51
-      median evaluation  : -35.98
-      quantile Q1 (x_25) : -54.02
-      minimal evaluation : -91.87
-      mean absolute difference      : 28.72
-      standard difference deviation : 39.02
-    ...
-
-A (potentially ranked) colored heatmap with 5 color levels is also provided:
-    
-    >>> t.showHTMLPerformanceHeatmap(colorLevels=5,Ranked=False)
-
-.. image:: randomCBHeatmap.png
-   :width: 500 px
-   :align: center
-
-Such a performance tableau may be stored and reaccessed in the XMCDA2 encoded format:
-    >>> t.saveXMCDA2('temp')
-    *----- saving performance tableau in XMCDA 2.0 format  -------------*
-    File: temp.xml saved !
-    >>> from perfTabs import XMCDA2PerformanceTableau
-    >>> t = XMCDA2PerformanceTableau('temp')
-    >>> ...
-
-If needed for instance in an R session, a CSV version of the performance tableau may be created as follows:
-    >>> t.saveCSV('temp')
-    * --- Storing performance tableau in CSV format in file temp.csv
-    ...$ less temp.csv
-    "actions","g1","g2","g3","g4","g5"
-    "a1",1.00,-17.92,-33.99,26.68,3.00
-    "a2",8.00,-30.71,-77.77,66.35,6.00
-    "a3",8.00,-41.65,-69.84,53.43,8.00
-    "a4",2.00,-39.49,-16.99,18.62,2.00
-    "a5",6.00,-91.87,-74.85,83.09,7.00
-    "a6",7.00,-32.47,-24.91,79.24,9.00
-    "a7",4.00,-91.11,-7.44,48.22,7.00
-
-Back to :ref:`Tutorial-label`
-
-The `Random3ObjectivesPerformanceTableau <techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau>`_ generator
-......................................................................................................................
-
-The class provides a generator of random performace tableaux concerning three preferential decision objectives which take into account *economical*, *societal* as well as *environmental* aspects.
-
-Each decision action is qualified randomly as performing *weak* (-), *fair* (~) or *good* (+) on each of the three objectives. 
-
-Generator directives are the following:
-    * numberOfActions = 20 (default),
-    * numberOfCriteria = 13 (default),
-    * weightDistribution = 'equiobjectives' (default) | 'random' | 'equisignificant', 
-    * weightScale = (1,numberOfCriteria): only used when random criterion weights are requested,
-    * integerWeights = True (default): False gives normlized rational weights, 
-    * commonScale = (0.0,100.0),
-    * commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)]: Performance discrimination thresholds may be set for 'ind', 'pref' and 'veto',  
-    * commonMode = ['triangular','variable',0.5]: random number generators of various other types ('uniform','beta') are available,
-    * valueDigits = 2 (default): evaluations are encoded as Decimals,
-    * missingProbability = 0.05 (default): random insertion of missing values with given probability,  
-    * seed= None. 
-
-.. note::
-
-    If the mode of the *triangular* distribution is set to '*variable*',
-    three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span are set at random for each coalition and action.
-    
-.. warning::
-
-    Minimal number of decision actions required is 3 ! 
-
-**Example Python session**:
-    >>> from randomPerfTabs import Random3ObjectivesPerformanceTableau
-    >>> t = Random3ObjectivesPerformanceTableau(
-              numberOfActions=31,
-              numberOfCriteria=13,
-              weightDistribution='equiobjectives',
-              seed=120)
-    >>> t.showObjectives()
-    *------ show objectives -------"
-    Eco: Economical aspect
-       g04 criterion of objective Eco 20
-       g05 criterion of objective Eco 20
-       g08 criterion of objective Eco 20
-       g11 criterion of objective Eco 20
-      Total weight: 80.00 (4 criteria)
-    Soc: Societal aspect
-       g06 criterion of objective Soc 16
-       g07 criterion of objective Soc 16
-       g09 criterion of objective Soc 16
-       g10 criterion of objective Soc 16
-       g13 criterion of objective Soc 16
-      Total weight: 80.00 (5 criteria)
-    Env: Environmental aspect
-       g01 criterion of objective Env 20
-       g02 criterion of objective Env 20
-       g03 criterion of objective Env 20
-       g12 criterion of objective Env 20
-      Total weight: 80.00 (4 criteria)
-
-In this example we notice that 5 equisignificant criteria (g06, g07, g09, g10, g13) evaluate for instance the performance of the decision actions from the societal point of view. 4 equisignificant criteria do the same from the economical, respectively the environmental point of view. The 'equiobjectives' directive results hence in a balanced total weight (80.00) for each decision objective. 
-
-    >>> t.showActions()
-    key:  a01
-      name:       random decision action Eco+ Soc- Env+
-      profile:    {'Eco': 'good', 'Soc': 'weak', 'Env': 'good'}
-    key:  a02
-    ...
-    key:  a26
-      name:       random decision action Eco+ Soc+ Env-
-      profile:    {'Eco': 'good', 'Soc': 'good', 'Env': 'weak'}
-    ...
-    key:  a30
-      name:       random decision action Eco- Soc- Env-
-      profile:    {'Eco': 'weak', 'Soc': 'weak', 'Env': 'weak'}
-    ...
-
-Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each decision action with respect to the three objectives. For instance, action *a01* will probably show *good* performances wrt the *economical*  and environmental aspects, and *weak* performances wrt the *societal* aspect.
-
-For testing purposes a special constructor is provided for extracting partial performance tableaux from a given tableau instance. In this example we may construct the partial performance tableaux corresponding to each objective:
-
-    >>> from perfTabs import PartialPerformanceTableau
-    >>> teco = PartialPerformanceTableau(t,criteriaSubset=\
-                              t.objectives['Eco']['criteria'])
-    >>> tsoc = PartialPerformanceTableau(t,criteriaSubset=\
-                              t.objectives['Soc']['criteria'])
-    >>> tenv = PartialPerformanceTableau(t,criteriaSubset=\
-                              t.objectives['Env']['criteria'])
-
-For each objective, one way this compute a partial bipolar outranking digraph:
-
-    >>> from outrankingDigraphs import BipolarOutrankingDigraph
-    >>> geco = BipolarOutrankingDigraph(teco)
-    >>> gsoc = BipolarOutrankingDigraph(tsoc)
-    >>> genv = BipolarOutrankingDigraph(tenv)
-
-Thes three partial digraphs model the preferences represented in each of the partial performance tableaux. One may aggregate these three preferential with an epitemic fusion operator:
-    >>> from digraphs import FusionLDigraph
-    >>> gfus = FusionLDigraph([geco,gsoc,genv])
-    >>> gfus.strongComponents()
-    {frozenset({'a30'}), 
-     frozenset({'a10', 'a03', 'a19', 'a08', 'a07', 'a04', 'a21', 'a20', 
-                'a13', 'a23', 'a16', 'a12', 'a24', 'a02', 'a31', 'a29', 
-                'a05', 'a09', 'a28', 'a25', 'a17', 'a14', 'a15', 'a06', 
-                'a01', 'a27', 'a11', 'a18', 'a22'}), 
-     frozenset({'a26'})}
-    >>> from digraphs import StrongComponentsCollapsedDigraph
-    >>> scc = StrongComponentsCollapsedDigraph(gfus)
-    >>> scc.showActions()
-    *----- show digraphs actions --------------*
-    key:  frozenset({'a30'})
-      short name: Scc_1
-      name:       _a30_
-      comment:    collapsed strong component
-    key:  frozenset({'a10', 'a03', 'a19', 'a08', 'a07', 'a04', 'a21', 'a20', 'a13', 
-                     'a23', 'a16', 'a12', 'a24', 'a02', 'a31', 'a29', 'a05', 'a09', 'a28', 'a25', 
-                     'a17', 'a14', 'a15', 'a06', 'a01', 'a27', 'a11', 'a18', 'a22'})
-      short name: Scc_2
-      name:       _a10_a03_a19_a08_a07_a04_a21_a20_a13_a23_a16_a12_a24_a02_a31_\
-                   a29_a05_a09_a28_a25_a17_a14_a15_a06_a01_a27_a11_a18_a22_
-      comment:    collapsed strong component
-    key:  frozenset({'a26'})
-      short name: Scc_3
-      name:       _a26_
-      comment:    collapsed strong component
-
-A graphviz drawing illustrates the apprent preferential links between the strong components:
-    >>> scc.exportGraphViz('scFusionObjectives')
-    *---- exporting a dot file dor GraphViz tools ---------*
-    Exporting to scFusionObjectives.dot
-    dot -Grankdir=BT -Tpng scFusionObjectives.dot -o scFusionObjectives.png
-
-.. image:: sccFusionObjectives.png
-   :width: 300 px
-   :align: center
-
-Decision action *a26* (Eco+ Soc+ Env-) appears dominating the other decision alternatives, whereas decision action *a30* (Eco- Soc- Env-) appears to be dominated by all the others.
-
-Back to :ref:`Tutorial-label`
 
 
 Links and appendices
