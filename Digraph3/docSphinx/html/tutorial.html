@@ -3069,13 +3069,25 @@ linearBallot = {
 </div>
 <div class="section" id="the-randomperftabs-module">
 <h3>The <a class="reference external" href="techDoc.html#randomPerfTabs">randomPerfTabs</a> module<a class="headerlink" href="#the-randomperftabs-module" title="Permalink to this headline">¶</a></h3>
-<p>This module provides several random performance tableaux generators, i.e. PerformanceTableau class instances (see the <a class="reference external" href="techDoc.html#perftabs-label">perfTabs</a> module), mainly for the purpose of testing implemented versions of methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tuorial concrns the four most useful generators:</p>
+<p>This module provides several random performance tableaux generators, i.e. PerformanceTableau class instances (see the <a class="reference external" href="techDoc.html#perftabs-label">perfTabs</a> module), mainly for the purpose of testing implemented versions of methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tuorial concerns the four most useful generators:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>The simplest model, called <cite>RandomPerformaceTableau</cite>, generates a set of <em>n</em> decision actions, a set of <em>m</em> real-valued performance criteria, ranging by default from 0.0 to 100.0, with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale.</li>
+<li>The simplest model, called <cite>RandomPerformaceTableau</cite>, generates
+a set of <em>n</em> decision actions, a set of <em>m</em> real-valued
+performance criteria, ranging by default from 0.0 to 100.0,
+associated with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale.</li>
 <li>In order to study aggregation of linear orders, we provide a model called <cite>RandomRankPerformanceTableau</cite> which provides lineraly ordered performances without ties on multple criteria for a given number of decision actions.</li>
-<li>One of the most useful random generator, called <cite>RandomCBPerformanceTableau</cite>, proposes a two decision objectives, named <em>Costs</em> (to be mimized) and Benefits (to be maximized), performance tableau model, in order to generate more or less contradictory performances on these objectives. Low costs will be randomly coupled with low benefits, whereas high costs will be randomly coupled with high benefits.</li>
-<li>Many multiple criteria decision problems concern three decision objectives which taking into account <em>economical</em>, <em>societal</em> as well as <em>environmental</em> aspects. For this type of performance tableau we provide a specific generator, called <cite>Random3ObjectivesPerformanceTableau</cite>.</li>
+<li>One of the most useful random generator, called
+<cite>RandomCBPerformanceTableau</cite>, proposes two decision objectives,
+named <em>Costs</em> (to be mimized) respectively <em>Benefits</em> (to be
+maximized) model; its purpose being to generate more or less
+contradictory performances on these two, usually opposed,
+objectives. <em>Low costs</em> will randomly be coupled with <em>low
+benefits</em>, whereas <em>high costs</em> will randomly be coupled with high benefits.</li>
+<li>Many multiple criteria decision problems concern three decision
+objectives which take into account <em>economical</em>, <em>societal</em> as
+well as <em>environmental</em> aspects. For this type of performance
+tableau mdel, we provide a specific generator, called <cite>Random3ObjectivesPerformanceTableau</cite>.</li>
 </ol>
 </div></blockquote>
 </div>
