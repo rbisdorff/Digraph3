@@ -1713,13 +1713,13 @@ The `randomPerfTabs <techDoc.html#randomPerfTabs>`_ module
 
 This module provides several random performance tableaux generators, i.e. PerformanceTableau class instances (see the `perfTabs <techDoc.html#perftabs-label>`_ module), mainly for the purpose of testing implemented versions of methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tuorial concerns the four most useful generators:
 
-    1. The simplest model, called **`RandomPerformaceTableau`**, generates
+    1. The simplest model, called **RandomPerformaceTableau**, generates
        a set of *n* decision actions, a set of *m* real-valued
        performance criteria, ranging by default from 0.0 to 100.0,
        associated with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale. 
-    2. In order to study aggregation of linear orders, we provide a model called **`RandomRankPerformanceTableau`** which provides lineraly ordered performances without ties on multple criteria for a given number of decision actions.
+    2. In order to study aggregation of linear orders, we provide a model called **RandomRankPerformanceTableau** which provides lineraly ordered performances without ties on multple criteria for a given number of decision actions.
     3. One of the most useful random generator, called
-       **`RandomCBPerformanceTableau`**, proposes two decision objectives,
+       **RandomCBPerformanceTableau**, proposes two decision objectives,
        named *Costs* (to be mimized) respectively *Benefits* (to be
        maximized) model; its purpose being to generate more or less
        contradictory performances on these two, usually opposed,
@@ -1728,7 +1728,7 @@ This module provides several random performance tableaux generators, i.e. Perfor
     4. Many multiple criteria decision problems concern three decision
        objectives which take into account *economical*, *societal* as
        well as *environmental* aspects. For this type of performance
-       tableau mdel, we provide a specific generator, called **`Random3ObjectivesPerformanceTableau`**.
+       tableau mdel, we provide a specific generator, called **Random3ObjectivesPerformanceTableau**.
  
 
 The `RandomPerformanceTableau <techDoc.html#randomPerfTabs.RandomPerformanceTableau>`_ generator
