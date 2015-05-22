@@ -1484,7 +1484,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         for g in criteriaList:
             for x in actionsList:
                 if random.random() < missingProbability:
-                    self.evaluation[g][x] = -999
+                    self.evaluation[g][x] = Decimal('-999')
 
     def showObjectives(self):
         print('*------ show objectives -------"')
