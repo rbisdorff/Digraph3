@@ -536,16 +536,20 @@ The performance evaluations of each decision alternative on each criterion are g
             #diff = set()
             diffList = []
             for i in range(n):
-                for j in range(i+1,n):
-                    delta = abs(self.evaluation[c][actionsList[i]] - self.evaluation[c][actionsList[j]])
-                    if delta < ed:
-                        ed = delta
-                    if delta > md:
-                        md = delta
-                    #diff.add(delta)
-                    diffList.append(delta)
-                    if Debug:
-                        print('-->> i,j, self.evaluation[actionsList[i]],self.evaluation[actionsList[j]], delta, ed,md', i,j, self.evaluation[c][actionsList[i]],self.evaluation[c][actionsList[j]], delta, ed,md,diffList)
+                xi = self.evaluation[c][actionsList[i]]
+                if xi != Decimal('-999'):
+                    for j in range(i+1,n):
+                        xj = self.evaluation[c][actionsList[j]]
+                        if xj != Decimal('-999'):
+                            delta = abs(xi - xj)
+                            if delta < ed:
+                                ed = delta
+                            if delta > md:
+                                md = delta
+                            #diff.add(delta)
+                            diffList.append(delta)
+                            if Debug:
+                                print('-->> i,j, self.evaluation[actionsList[i]],self.evaluation[actionsList[j]], delta, ed,md', i,j, self.evaluation[c][actionsList[i]],self.evaluation[c][actionsList[j]], delta, ed,md,diffList)
             self.criteria[c]['minimalPerformanceDifference'] = ed
             self.criteria[c]['maximalPerformanceDifference'] = md
             #diffList = list(diff)
@@ -579,16 +583,31 @@ The performance evaluations of each decision alternative on each criterion are g
         #diff = set()
         diffList = []
         for i in range(n):
-            for j in range(i+1,n):
-                delta = abs(self.evaluation[c][actionsList[i]] - self.evaluation[c][actionsList[j]])
-                if delta < ed:
-                    ed = delta
-                if delta > md:
-                    md = delta
-                #diff.add(delta)
-                diffList.append(delta)
-                if Debug:
-                    print('-->> i,j, self.evaluation[actionsList[i]],self.evaluation[actionsList[j]], delta, ed,md', i,j, self.evaluation[c][actionsList[i]],self.evaluation[c][actionsList[j]], delta, ed,md,diffList)
+            xi = self.evaluation[c][actionsList[i]]
+            if xi != Decimal('-999'):
+                for j in range(i+1,n):
+                    xj = self.evaluation[c][actionsList[j]]
+                    if xj != Decimal('-999'):
+                        delta = abs(xi - xj)
+                        if delta < ed:
+                            ed = delta
+                        if delta > md:
+                            md = delta
+                        #diff.add(delta)
+                        diffList.append(delta)
+                        if Debug:
+                            print('-->> i,j, self.evaluation[actionsList[i]],self.evaluation[actionsList[j]], delta, ed,md', i,j, self.evaluation[c][actionsList[i]],self.evaluation[c][actionsList[j]], delta, ed,md,diffList)
+##        for i in range(n):
+##            for j in range(i+1,n):
+##                delta = abs(self.evaluation[c][actionsList[i]] - self.evaluation[c][actionsList[j]])
+##                if delta < ed:
+##                    ed = delta
+##                if delta > md:
+##                    md = delta
+##                #diff.add(delta)
+##                diffList.append(delta)
+##                if Debug:
+##                    print('-->> i,j, self.evaluation[actionsList[i]],self.evaluation[actionsList[j]], delta, ed,md', i,j, self.evaluation[c][actionsList[i]],self.evaluation[c][actionsList[j]], delta, ed,md,diffList)
         self.criteria[c]['minimalPerformanceDifference'] = ed
         self.criteria[c]['maximalPerformanceDifference'] = md
         #diffList = list(diff)
@@ -614,10 +633,13 @@ The performance evaluations of each decision alternative on each criterion are g
         otherActionsList.remove(refAction)
         diff = []
         for x in otherActionsList:
-            delta = abs(self.evaluation[refCriterion][refAction] - self.evaluation[refCriterion][x])
-            diff.append(delta)
-            if Debug:
-                print('-->> refAction, x, evaluation[refAction], evaluation[x], delta,diff', refAction,x, self.evaluation[refCriterion][refAction],self.evaluation[refCriterion][x], delta,diff)
+            xr = self.evaluation[refCriterion][refAction]
+            xo = self.evaluation[refCriterion][x]
+            if xr != Decimal('-999') and xo != Decimal('-999'):
+                delta = abs(self.evaluation[refCriterion][refAction] - self.evaluation[refCriterion][x])
+                diff.append(delta)
+                if Debug:
+                    print('-->> refAction, x, evaluation[refAction], evaluation[x], delta,diff', refAction,x, self.evaluation[refCriterion][refAction],self.evaluation[refCriterion][x], delta,diff)
 
         diff.sort()
         return diff
@@ -629,7 +651,7 @@ The performance evaluations of each decision alternative on each criterion are g
         if Debug:
             print(action,criterion)
         perfx = self.evaluation[criterion][action]
-        if perfx != -999:
+        if perfx != Decimal('-999'):
             try:
                 indx = self.criteria[criterion]['thresholds']['ind'][0] + self.criteria[criterion]['thresholds']['ind'][1]*perfx
                 ## indx = self.criteria[criterion]['thresholds']['ind'][0] + self.criteria[criterion]['thresholds']['pref'][1]*perfx
@@ -853,7 +875,7 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         self.computeQuantilePreorder(Debug=Debug,Comments=True)
  
-    def computeDefaultDiscriminationThresholds(self,
+    def computeDefaultDiscriminationThresholds(self,criteriaList=None,
                                                quantile = {'ind':10,'pref':20,'weakVeto':60,'veto':80},
                                                Debug = False,
                                                Comments = False):
@@ -871,13 +893,15 @@ The performance evaluations of each decision alternative on each criterion are g
         if Comments:
             print('Installs default discrimination thresholds on each criterion')
 
-        performanceDifferences = self.computePerformanceDifferences(Debug=Debug,Comments=Comments)
-        criteriaList = [x for x in self.criteria]
-        criteriaList.sort()
-        
+#        performanceDifferences = self.computePerformanceDifferences(Debug=Debug,Comments=Comments)
+        if criteriaList == None:
+            criteriaList = [x for x in self.criteria]
+            criteriaList.sort()
         for c in criteriaList:
+            performanceDifferences = self.computeCriterionPerformanceDifferences(c,
+                                                            Comments=Comments,Debug=Debug)
             #vx = self.criteria[c]['performanceDifferences']
-            vx = performanceDifferences[c]
+            vx = performanceDifferences
             nv = len(vx)
             if Debug:
                 print('=====>',c)

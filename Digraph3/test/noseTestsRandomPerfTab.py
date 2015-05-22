@@ -120,7 +120,8 @@ def testRandomCoalitionsPerformanceTableau():
 def testPercentilesOfThresholds():
     print('*---------- test percentiles of variable thresholds --------*') 
     t = RandomCoalitionsPerformanceTableau(weightDistribution='equicoalitions',seed=100)
-    t.computeDefaultDiscriminationThresholds(quantile={'ind':10.0,'pref':20.0,'weakVeto':90.0,'veto':95.0})
+    t.computeDefaultDiscriminationThresholds(quantile={'ind':10.0,'pref':20.0,
+                                                       'weakVeto':90.0,'veto':95.0})
     for g in [y for y in t.criteria]:
         print(g, t.criteria[g]['thresholds'])
         for th in t.criteria[g]['thresholds']:
