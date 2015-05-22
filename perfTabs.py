@@ -512,7 +512,29 @@ The performance evaluations of each decision alternative on each criterion are g
                 pass
             print() 
  
-        
+    def convertWeightFloatToDecimal(self):
+        """
+        Convert significance weights from obsolete float format
+        to decimal format.
+        """
+        criteria = self.criteria
+        criteriaList = [x for x in self.criteria]
+        for g in criteriaList:
+            criteria[g]['weight'] = Decimal(str(criteria[g]['weight']))
+        self.criteria = criteria
+
+    def convertEvaluationFloatToDecimal(self):
+        """
+        Convert evaluations from obsolete float format to decimal format
+        """
+        evaluation = self.evaluation
+        actionsList = [x for x in self.actions]
+        criteriaList = [x for x in self.criteria]
+        for g in criteriaList:
+            for x in actionsList:
+                evaluation[g][x] = Decimal(str(evaluation[g][x]))
+        self.evaluation = evaluation
+
     def computePerformanceDifferences(self,Comments = False,
                                       Debug = False,
                                       NotPermanentDiffs=True):
