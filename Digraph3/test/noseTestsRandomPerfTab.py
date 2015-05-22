@@ -60,9 +60,13 @@ def testCBPerformanceTableau():
                                    weightDistribution="random",\
                                    weightScale=[1,2],\
                                    integerWeights=True,\
-                                   commonMode=["normal",50.0,25.0])
+                                   commonMode=["normal",50.0,25.0],
+                                   missingDataProbability=0.5,
+                                   seed=100,Debug=True)
     t.saveXMCDA(fileName='randomPerformanceTableau',servingD3=False)
     t.showCriteria(Debug=False)
+    t.showStatistics(Debug=True)
+    t.showPerformanceTableau()
     g = BipolarOutrankingDigraph(t)
     g.exportGraphViz()
 
