@@ -81,15 +81,16 @@ class RandomPerformanceTableau(PerformanceTableau):
             }
 
     """
-    def __init__(self,numberOfActions = None,\
-                 numberOfCriteria = None,\
-                 weightDistribution = None,\
-                 weightScale=None,\
-                 integerWeights=True,\
-                 commonScale = (0.0,100.0),\
-                 commonThresholds = ((10.0,0.0),(20.0,0.0),(80.0,0.0)),\
-                 commonMode = None,\
-                 valueDigits = 2,\
+    def __init__(self,numberOfActions = None,
+                 numberOfCriteria = None,
+                 weightDistribution = None,
+                 weightScale=None,
+                 integerWeights=True,
+                 commonScale = (0.0,100.0),
+                 commonThresholds = ((10.0,0.0),(20.0,0.0),(80.0,0.0)),
+                 commonMode = None,
+                 valueDigits = 2,
+                 missingDataProbability = 0.0,
                  seed = None,
                  Debug = False):
         
@@ -305,7 +306,19 @@ class RandomPerformanceTableau(PerformanceTableau):
             print('mode error in random evaluation generator !!')
             print(str(commonMode[0]))
             #sys.exit(1)
+
+        # store evaluations
         self.evaluation = evaluation
+        # randomly insert missing data 
+        criteriaList = [g for g in self.criteria]
+        criteriaList.sort()
+        actionsList = [x for x in self.actions]
+        actionsList.sort()
+        for c in criteriaList:
+            for x in actionsList:
+                if random.random() < missingDataProbability:
+                    self.evaluation[c][x] = Decimal('-999')
+        # store weights preorder
         self.weightPreorder = self.computeWeightPreorder()
 
 # -----------------
@@ -1536,7 +1549,7 @@ class _Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
                  integerWeights = True, commonScale = (0.0,100.0),
                  commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)],
                  commonDistribution = ['triangular','variable',0.5],
-                 missingProbability = 0.05,
+                 missingDataProbability = 0.05,
                  valueDigits=2,
                  Debug=False, 
                  seed= None):
@@ -1686,8 +1699,8 @@ class _Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
         actionsList.sort()
         for g in criteriaList:
             for x in actionsList:
-                if random.random() < missingProbability:
-                    self.evaluation[g][x] = -999
+                if random.random() < missingDataProbability:
+                    self.evaluation[g][x] = Decimal('-999')
                 
     def showObjectives(self):
         print('*------ show objectives -------"')
@@ -1732,15 +1745,16 @@ class RandomCBPerformanceTableau(PerformanceTableau):
 
     """
 
-    def __init__(self,numberOfActions = None, \
-                 numberOfCriteria = None, \
+    def __init__(self,numberOfActions = None,
+                 numberOfCriteria = None,
                  weightDistribution = None,
-                 weightScale=None,\
+                 weightScale=None,
                  integerWeights = True,
-                 commonScale = None, commonThresholds = None,\
-                 commonPercentiles= None,\
-                 commonMode = None,\
-                 valueDigits=2,
+                 commonScale = None, commonThresholds = None,
+                 commonPercentiles= None,
+                 commonMode = None,
+                 valueDigits = 2,
+                 missingDataProbability = 0.0,
                  seed = None,
                  Debug=False,Comments=False):
         """
@@ -2153,12 +2167,21 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                     if Debug:
                         print(evaluation[g][a])
             
-        
-            # generate discrimination thresholds
+        # final storage
         self.criteriaWeightMode = weightMode
         self.criteria = criteria
         self.evaluation = evaluation
+        # randomly insert missing data 
+        criteriaList = [g for g in self.criteria]
+        criteriaList.sort()
+        actionsList = [x for x in self.actions]
+        actionsList.sort()
+        for c in criteriaList:
+            for x in actionsList:
+                if random.random() < missingDataProbability:
+                    self.evaluation[c][x] = Decimal('-999')
         self.weightPreorder = self.computeWeightPreorder()
+        # compute discrimination thresholds from commonPercentiles
         performanceDifferences = self.computePerformanceDifferences(NotPermanentDiffs=True,Debug=False)
         if Debug:
             print('commonPercentiles=', commonPercentiles)
@@ -2177,30 +2200,31 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                     print(vx)
                     print(nv)
                 threshold = {}
-                for x in quantile:
-                    if Debug:
-                        print('-->', x, quantile[x], end=' ')
+                if nv > 2:
+                    for x in quantile:
+                        if Debug:
+                            print('-->', x, quantile[x], end=' ')
 
-                    if quantile[x] == -1:
-                        pass
-                    else:
-                        if quantile[x] == 0:
-                            threshold[x] = vx[0]
-                        elif quantile[x] == 100:
-                            threshold[x] = vx[nv-1]
+                        if quantile[x] == -1:
+                            pass
                         else:
-                            kq = int(math.floor(float(quantile[x]*(nv-1))/100.0))
-                            r = ((nv-1)*quantile[x])% 100
-                            if Debug:
-                                print(kq,r, end=' ')
+                            if quantile[x] == 0:
+                                threshold[x] = vx[0]
+                            elif quantile[x] == 100:
+                                threshold[x] = vx[nv-1]
+                            else:
+                                kq = int(math.floor(float(quantile[x]*(nv-1))/100.0))
+                                r = ((nv-1)*quantile[x])% 100
+                                if Debug:
+                                    print(kq,r, end=' ')
 
-                            ## if kq == nv-1:
-                            ##     kqplus = nv-1
-                            ## else:
-                            ##     kq_1 = kq - 1
-                            threshold[x] = vx[kq] + (Decimal(str(r))/Decimal('100.0')) * (vx[kq+1]-vx[kq])
-                            if Debug:
-                                print(threshold[x])
+                                ## if kq == nv-1:
+                                ##     kqplus = nv-1
+                                ## else:
+                                ##     kq_1 = kq - 1
+                                threshold[x] = vx[kq] + (Decimal(str(r))/Decimal('100.0')) * (vx[kq+1]-vx[kq])
+                                if Debug:
+                                    print(threshold[x])
 
 
 
