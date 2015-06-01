@@ -57,12 +57,21 @@ class RandomDigraph(Digraph):
                 domain = (-1.0,1.0)
             else:
                 domain = (0.0,1.0)
-            g = EmptyDigraph(order=order, valuationdomain=domain)
-            self.actions = g.actions
+            nd = len(str(order))
+            actions = dict()
+            for i in range(order):
+                actionKey = ('a%%0%dd' % nd) % (i+1)
+                actions[actionKey] = {'shortName':actionKey, 'name': 'random decision action'}
+            self.actions = actions
             actionsList = [x for x in self.actions]
             actionsList.sort()
-            self.valuationdomain = g.valuationdomain
-            self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
+            valuationdomain = dict()
+            valuationdomain['min'] = Decimal(str(domain[0]))
+            valuationdomain['max'] = Decimal(str(domain[1]))
+            valuationdomain['med'] = valuationdomain['min'] + \
+                (valuationdomain['max']-valuationdomain['min'])/Decimal('2.0')
+            valuationdomain['hasIntegerValuation'] = hasIntegerValuation
+            self.valuationdomain = valuationdomain
             relation = {}
             for x in actionsList:
                 relation[x] = {}
@@ -141,14 +150,17 @@ class RandomValuationDigraph(Digraph):
                  hasIntegerValuation=False,
                  seed = None):
         import random
+        random.seed(seed)
         self.name = 'randomValuationDigraph'
         self.order = order
-        actionlist = list(range(order+1))
-        actionlist.remove(0)
-        actions = []
-        for x in actionlist:
-            actions.append(str(x))
+        nd = len(str(order))
+        actions = dict()
+        for i in range(order):
+            actionKey = ('a%%0%dd' % nd) % (i+1)
+            actions[actionKey] = {'shortName':actionKey, 'name': 'random decision action'}
         self.actions = actions
+        actionsList = [x for x in self.actions]
+        actionsList.sort()
         if hasIntegerValuation:
             precision = pow(10,ndigits) - 1
         else:
@@ -161,12 +173,10 @@ class RandomValuationDigraph(Digraph):
             else:
                 self.valuationdomain = {'min':Decimal('0'), 'med':Decimal('0.5'), 'max':Decimal('1.0')}
         self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
-        if seed != None:
-            random.seed(seed)
         relation = {}
-        for x in actions:
+        for x in actionsList:
             relation[x] = {}
-            for y in actions:
+            for y in actionsList:
                 if x == y:
                     relation[x][y] = self.valuationdomain['med']
                 else:
