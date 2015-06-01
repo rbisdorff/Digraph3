@@ -50,30 +50,31 @@ class RandomDigraph(Digraph):
         elif arcProbability < Decimal("0.0"):
             print('Error: arc probability too low !!')
         else:
-            from copy import copy as deepcopy
             import random
+            random.seed(seed)
             from digraphs import EmptyDigraph
-            if seed != None:
-                random.seed(seed)
             if Bipolar:
                 domain = (-1.0,1.0)
             else:
                 domain = (0.0,1.0)
             g = EmptyDigraph(order=order, valuationdomain=domain)
-            self.actions = deepcopy(g.actions)
-            self.valuationdomain = deepcopy(g.valuationdomain)
+            self.actions = g.actions
+            actionsList = [x for x in self.actions]
+            actionsList.sort()
+            self.valuationdomain = g.valuationdomain
             self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
-            self.relation = {}
-            for x in g.actions:
-                self.relation[x] = {}
-                for y in g.actions:
+            relation = {}
+            for x in actionsList:
+                relation[x] = {}
+                for y in actionsList:
                     if x == y:
-                        self.relation[x][y] = self.valuationdomain['min']
+                        relation[x][y] = self.valuationdomain['min']
                     else:
                         if random.random() <= arcProbability:
-                            self.relation[x][y] = self.valuationdomain['max']
+                            relation[x][y] = self.valuationdomain['max']
                         else:
-                            self.relation[x][y] = self.valuationdomain['min']
+                            relation[x][y] = self.valuationdomain['min']
+            self.relation = relation
             self.order = order
             self.name = 'randomDigraph'
             self.gamma = self.gammaSets()
