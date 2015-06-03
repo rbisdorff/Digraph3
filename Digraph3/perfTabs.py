@@ -1628,148 +1628,148 @@ The performance evaluations of each decision alternative on each criterion are g
 
         return html
 
-    def computePerformanceHeatmap(self,criteriaList=None,
-                               actionsList=None,
-                               ndigits=2,
-                               colorLevels=7,
-                               title='Performance Heatmap',
-                               Correlations=False,
-                               Threading=False,
-                               Debug=False):
-        """
-        Renders the Brewer RdYlGn colored heatmap of the performance table
-        actions x criteria in dictionary format. Three color levels (5,7 or 9)
-        are provided.
+    # def _computePerformanceHeatmap(self,criteriaList=None,
+    #                            actionsList=None,
+    #                            ndigits=2,
+    #                            colorLevels=7,
+    #                            title='Performance Heatmap',
+    #                            Correlations=False,
+    #                            Threading=False,
+    #                            Debug=False):
+    #     """
+    #     Renders the Brewer RdYlGn colored heatmap of the performance table
+    #     actions x criteria in dictionary format. Three color levels (5,7 or 9)
+    #     are provided.
 
-        For a performance tableau with 5 criteria, colorLevels=5 and
-        Correlations = True, one obtains for instance
-        the following ordered dictionary in return::
+    #     For a performance tableau with 5 criteria, colorLevels=5 and
+    #     Correlations = True, one obtains for instance
+    #     the following ordered dictionary in return::
 
-            OrderedDict([
-            ('title', 'Performance Heatmap'),
-            ('colorPalette', [(Decimal('0.2'), '"#FDAE61"', 'q5-1'),
-                              (Decimal('0.4'), '"#FEE08B"', 'q5-2'),
-                              (Decimal('0.6'), '"#FFFFBF"', 'q5-3'),
-                              (Decimal('0.8'), '"#D9EF8B"', 'q5-4'),
-                              (Decimal('1.0'), '"#A6D96A"', 'q5-5')]),
-            ('criteriaList', ['g5', 'g2', 'g4', 'g1', 'g3']),
-            ('criteriaCorrelations', [Decimal('0.71428'),
-                                      Decimal('0.48571'),
-                                      Decimal('0.40952'),
-                                      Decimal('0.35238'),
-                                      Decimal('0.16190')]),
-            ('quantiles', OrderedDict([('a1', [(Decimal('3'), 'q5-2'),
-                                               (Decimal('-17.92'), 'q5-5'),
-                                               (Decimal('26.68'), 'q5-2'),
-                                               (Decimal('1'), 'q5-1'),
-                                               (Decimal('-33.99'), 'q5-3')]),
-                                       ('a2', [(Decimal('6'), 'q5-3'),
-                                               (Decimal('-30.71'), 'q5-5'),
-                                               (Decimal('66.35'), 'q5-4'),
-                                               (Decimal('8'), 'q5-5'),
-                                               (Decimal('-77.77'), 'q5-2')]),
-                                       ('a3', ...
-            ...
-            ])
+    #         OrderedDict([
+    #         ('title', 'Performance Heatmap'),
+    #         ('colorPalette', [(Decimal('0.2'), '"#FDAE61"', 'q5-1'),
+    #                           (Decimal('0.4'), '"#FEE08B"', 'q5-2'),
+    #                           (Decimal('0.6'), '"#FFFFBF"', 'q5-3'),
+    #                           (Decimal('0.8'), '"#D9EF8B"', 'q5-4'),
+    #                           (Decimal('1.0'), '"#A6D96A"', 'q5-5')]),
+    #         ('criteriaList', ['g5', 'g2', 'g4', 'g1', 'g3']),
+    #         ('criteriaCorrelations', [Decimal('0.71428'),
+    #                                   Decimal('0.48571'),
+    #                                   Decimal('0.40952'),
+    #                                   Decimal('0.35238'),
+    #                                   Decimal('0.16190')]),
+    #         ('quantiles', OrderedDict([('a1', [(Decimal('3'), 'q5-2'),
+    #                                            (Decimal('-17.92'), 'q5-5'),
+    #                                            (Decimal('26.68'), 'q5-2'),
+    #                                            (Decimal('1'), 'q5-1'),
+    #                                            (Decimal('-33.99'), 'q5-3')]),
+    #                                    ('a2', [(Decimal('6'), 'q5-3'),
+    #                                            (Decimal('-30.71'), 'q5-5'),
+    #                                            (Decimal('66.35'), 'q5-4'),
+    #                                            (Decimal('8'), 'q5-5'),
+    #                                            (Decimal('-77.77'), 'q5-2')]),
+    #                                    ('a3', ...
+    #         ...
+    #         ])
 
-        """
-        from collections import OrderedDict
-        from decimal import Decimal
-        from digraphs import flatten
-        heatmap = OrderedDict()
-        heatmap['title'] = title
-                  
-        brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#D53E4F"','q9-1'),
-                               (Decimal('0.2222'),'"#F46D43"','q9-2'),
-                               (Decimal('0.3333'),'"#FDAE61"','q9-3'),
-                               (Decimal('0.4444'),'"#FEE08B"','q9-4'),
-                               (Decimal('0.5555'),'"#FFFFBF"','q9-5'),
-                               (Decimal('0.6666'),'"#D9EF8B"','q9-6'),
-                               (Decimal('0.7777'),'"#A6D96A"','q9-7'),
-                               (Decimal('0.8888'),'"#65BD63"','q9-8'),
-                               (Decimal('1.0000'),'"#1A9850"','q9-9')]
-        brewerRdYlGn7Colors = [
-                               (Decimal('0.1429'),'"#F46D43"','q7-1'),
-                               (Decimal('0.2857'),'"#FDAE61"','q7-2'),
-                               (Decimal('0.4286'),'"#FEE08B"','q7-3'),
-                               (Decimal('0.5714'),'"#FFFFBF"','q7-4'),
-                               (Decimal('0.7143'),'"#D9EF8B"','q7-5'),
-                               (Decimal('0.8571'),'"#A6D96A"','q7-6'),
-                               (Decimal('1.0000'),'"#65BD63"','q7-7')
-                               ]
-        brewerRdYlGn5Colors = [
-                               (Decimal('0.2'),'"#FDAE61"','q5-1'),
-                               (Decimal('0.4'),'"#FEE08B"','q5-2'),
-                               (Decimal('0.6'),'"#FFFFBF"','q5-3'),
-                               (Decimal('0.8'),'"#D9EF8B"','q5-4'),
-                               (Decimal('1.0'),'"#A6D96A"','q5-5')
-                               ]
-        if colorLevels == 7:
-            colorPalette = brewerRdYlGn7Colors
-        elif colorLevels == 9:
-            colorPalette = brewerRdYlGn9Colors
-        elif colorLevels == 5:
-            colorPalette = brewerRdYlGn5Colors
-        else:
-            colorPalette = brewerRdYlGn7Colors
+    #     """
+    #     from collections import OrderedDict
+    #     from decimal import Decimal
+    #     from digraphs import flatten
+    #     heatmap = OrderedDict()
+    #     heatmap['title'] = title
+    #     naColor = '"#777777"'          
+    #     brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#D53E4F"','q9-1'),
+    #                            (Decimal('0.2222'),'"#F46D43"','q9-2'),
+    #                            (Decimal('0.3333'),'"#FDAE61"','q9-3'),
+    #                            (Decimal('0.4444'),'"#FEE08B"','q9-4'),
+    #                            (Decimal('0.5555'),'"#FFFFBF"','q9-5'),
+    #                            (Decimal('0.6666'),'"#D9EF8B"','q9-6'),
+    #                            (Decimal('0.7777'),'"#A6D96A"','q9-7'),
+    #                            (Decimal('0.8888'),'"#65BD63"','q9-8'),
+    #                            (Decimal('1.0000'),'"#1A9850"','q9-9')]
+    #     brewerRdYlGn7Colors = [
+    #                            (Decimal('0.1429'),'"#F46D43"','q7-1'),
+    #                            (Decimal('0.2857'),'"#FDAE61"','q7-2'),
+    #                            (Decimal('0.4286'),'"#FEE08B"','q7-3'),
+    #                            (Decimal('0.5714'),'"#FFFFBF"','q7-4'),
+    #                            (Decimal('0.7143'),'"#D9EF8B"','q7-5'),
+    #                            (Decimal('0.8571'),'"#A6D96A"','q7-6'),
+    #                            (Decimal('1.0000'),'"#65BD63"','q7-7')
+    #                            ]
+    #     brewerRdYlGn5Colors = [
+    #                            (Decimal('0.2'),'"#FDAE61"','q5-1'),
+    #                            (Decimal('0.4'),'"#FEE08B"','q5-2'),
+    #                            (Decimal('0.6'),'"#FFFFBF"','q5-3'),
+    #                            (Decimal('0.8'),'"#D9EF8B"','q5-4'),
+    #                            (Decimal('1.0'),'"#A6D96A"','q5-5')
+    #                            ]
+    #     if colorLevels == 7:
+    #         colorPalette = brewerRdYlGn7Colors
+    #     elif colorLevels == 9:
+    #         colorPalette = brewerRdYlGn9Colors
+    #     elif colorLevels == 5:
+    #         colorPalette = brewerRdYlGn5Colors
+    #     else:
+    #         colorPalette = brewerRdYlGn7Colors
 
-        heatmap['colorPalette'] = colorPalette
+    #     heatmap['colorPalette'] = colorPalette
             
-        nc = len(colorPalette)
+    #     nc = len(colorPalette)
 
-        if criteriaList == None:
-            from outrankingDigraphs import BipolarOutrankingDigraph
-            g = BipolarOutrankingDigraph(self,Threading=Threading)
-            if Correlations:
-                criteriaCorrelations = \
-                    g.showMarginalVersusGlobalOutrankingCorrelation(\
-                            Threading=Threading,\
-                            Comments=False)
-                criteriaList = [c[1] for c in criteriaCorrelations]
-                correlations = [c[0] for c in criteriaCorrelations]
-            else:
-                criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
-                criteriaWeightsList.sort(reverse=True)
-                criteriaList = [g[1] for g in criteriaWeightsList]
-                criteriaList.sort()
-                criteriaCorrelations = None
-        else:
-            criteriaCorrelations = None
+    #     if criteriaList == None:
+    #         from outrankingDigraphs import BipolarOutrankingDigraph
+    #         g = BipolarOutrankingDigraph(self,Threading=Threading)
+    #         if Correlations:
+    #             criteriaCorrelations = \
+    #                 g.showMarginalVersusGlobalOutrankingCorrelation(\
+    #                         Threading=Threading,\
+    #                         Comments=False)
+    #             criteriaList = [c[1] for c in criteriaCorrelations]
+    #             correlations = [c[0] for c in criteriaCorrelations]
+    #         else:
+    #             criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
+    #             criteriaWeightsList.sort(reverse=True)
+    #             criteriaList = [g[1] for g in criteriaWeightsList]
+    #             criteriaList.sort()
+    #             criteriaCorrelations = None
+    #     else:
+    #         criteriaCorrelations = None
 
-        heatmap['criteriaList'] = criteriaList
-        if criteriaCorrelations != None:
-            heatmap['criteriaCorrelations'] = correlations
+    #     heatmap['criteriaList'] = criteriaList
+    #     if criteriaCorrelations != None:
+    #         heatmap['criteriaCorrelations'] = correlations
         
-        if actionsList == None:
-            actionsList = list(self.actions.keys())
-            actionsList.sort()
-        else:
-            actionsList = [x for x in flatten(actionsList)]
+    #     if actionsList == None:
+    #         actionsList = list(self.actions.keys())
+    #         actionsList.sort()
+    #     else:
+    #         actionsList = [x for x in flatten(actionsList)]
 
-        #heatmap['actionsList'] = actionsList
+    #     #heatmap['actionsList'] = actionsList
         
-        quantiles=OrderedDict()
-        for x in actionsList:
-            quantiles[x] = []
-            for g in criteriaList:
-                quantilexg = self.computeActionCriterionQuantile(x,g)
-                if Debug:
-                    print(x,g,quantilexg)
-                if quantilexg != 'NA':
-                    for i in range(nc):
-                        if Debug:
-                            print(i, colorPalette[i][0])
+    #     quantiles=OrderedDict()
+    #     for x in actionsList:
+    #         quantiles[x] = []
+    #         for g in criteriaList:
+    #             quantilexg = self.computeActionCriterionQuantile(x,g)
+    #             if Debug:
+    #                 print(x,g,quantilexg)
+    #             if quantilexg != 'NA':
+    #                 for i in range(nc):
+    #                     if Debug:
+    #                         print(i, colorPalette[i][0])
                         
-                        if quantilexg <= colorPalette[i][0]:
-                            quantiles[x].append((self.evaluation[g][x],
-                                                 colorPalette[i][2]))
-                            break
-                else:
-                    quantiles[x][g] = naColor
-                if Debug:
-                    print(x,g,quantiles[x][g])
-        heatmap['quantiles'] = quantiles
-        return heatmap
+    #                     if quantilexg <= colorPalette[i][0]:
+    #                         quantiles[x].append((self.evaluation[g][x],
+    #                                              colorPalette[i][2]))
+    #                         break
+    #             else:
+    #                 quantiles[x].append((self.evaluation[g][x],naColor))
+    #             if Debug:
+    #                 print(x,g,quantiles[x])
+    #     heatmap['quantiles'] = quantiles
+    #     return heatmap
 
     def computeWeightPreorder(self):
         """
@@ -5807,20 +5807,13 @@ if __name__ == "__main__":
 
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
-    t = RandomCBPerformanceTableau(numberOfCriteria=2,
+    t = RandomCBPerformanceTableau(numberOfCriteria=13,
                                    numberOfActions=20,
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
                                    Debug=False,
-                                   seed=100,Threading=True)
-    t0 = time()
-    t.mpComputePerformanceDifferences(nbrCores=8,Debug=False)
-    print(time()-t0)
-    print(t.criteria)
-    t0 = time()
-    t.computePerformanceDifferences(Debug=False)
-    print(time()-t0)
-    print(t.criteria)
+                                   missingDataProbability=0.1,
+                                   seed=100,Threading=False)
     
 ##    t = ConstantPerformanceTableau(t,
 ##                                   actionsSubset=['a01','a02','a03'],
@@ -5843,9 +5836,9 @@ if __name__ == "__main__":
 ##    actionsList = qsrbc.computeQsRbcRanking()
 ##
 
-    #g = BipolarOutrankingDigraph(t)
-    #print(g.showMarginalVersusGlobalOutrankingCorrelation(Comments=False))
-    #print(t.computePerformanceHeatmap(Correlations=True,colorLevels=5))
+    g = BipolarOutrankingDigraph(t)
+    print(g.computeMarginalVersusGlobalOutrankingCorrelations())
+    print(t.computePerformanceHeatmap(Correlations=True,colorLevels=5,Debug=True))
     
     
 ##    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)

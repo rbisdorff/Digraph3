@@ -1311,8 +1311,9 @@ class QuantilesSortingDigraph(SortingDigraph):
 
         # import the performance tableau
         if argPerfTab == None:
-            perfTab = RandomPerformanceTableau(numberOfActions=10,
-                                               numberOfCriteria=13)
+            print('Error: a valid performance tableau is required!')
+##            perfTab = RandomPerformanceTableau(numberOfActions=10,
+##                                               numberOfCriteria=13)
         else:
             perfTab = argPerfTab
         # normalize the actions as a dictionary construct
@@ -1325,7 +1326,7 @@ class QuantilesSortingDigraph(SortingDigraph):
             self.actions = copy(perfTab.actions)
 
         # keep a copy of the original actions set before adding the profiles
-        self.actionsOrig = copy(self.actions)
+        self.actionsOrig = deepcopy(self.actions)
 
         #  normalizing the performance tableau
         normPerfTab = NormalizedPerformanceTableau(perfTab)
@@ -1435,7 +1436,8 @@ class QuantilesSortingDigraph(SortingDigraph):
         minValuation = -100.0
         maxValuation = 100.0
         if CompleteOutranking:
-            g = BipolarOutrankingDigraph(normPerfTab,hasNoVeto=hasNoVeto)
+            g = BipolarOutrankingDigraph(normPerfTab,hasNoVeto=hasNoVeto,
+                                         Threading=Threading)
             g.recodeValuation(minValuation,maxValuation)
             self.relationOrig = deepcopy(g.relation)
             Min = g.valuationdomain['min']
