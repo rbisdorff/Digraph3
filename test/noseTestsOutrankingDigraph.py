@@ -9,6 +9,7 @@
 
 from digraphs import *
 from outrankingDigraphs import *
+from time import time
 
 def testElectre3OutrankingDigraph():
     print('==>> Testing Electre 3 Outranking Digraph instantiation')
@@ -17,13 +18,11 @@ def testElectre3OutrankingDigraph():
     g.showStatistics()
     g.showPerformanceTableau()
 
-
 def testOrdinalOutrankingDigraph():
 
     print('==>> Testing Ordinal Outranking Digraph instantiation')
     g = OrdinalOutrankingDigraph()
     g.showAll()
-
 
 def testUnanimousOutrankingDigraph():
 
@@ -647,7 +646,7 @@ def testConfidentBipolarOutrankingDigraphs():
                                            betaParameter=7.5,Debug=False)
     lg.showRelationTable(LikelihoodDenotation=True)
 
-def testMarginalVersusGlobalOutrankingCorrelation():
+def testShowMarginalVersusGlobalOutrankingCorrelation():
     print('*-------- MarginalVersusGlobalOutranking -------')
     t = RandomCBPerformanceTableau(numberOfActions=10,\
                                   numberOfCriteria=13,\
@@ -655,6 +654,25 @@ def testMarginalVersusGlobalOutrankingCorrelation():
                                   )
     g = BipolarOutrankingDigraph(t,Threading=False)
     g.showMarginalVersusGlobalOutrankingCorrelation()
+
+def testComputeMarginalVersusGlobalOutrankingCorrelations():
+    print('*-------- Threaded MarginalVersusGlobalOutranking -------')
+    t = RandomCBPerformanceTableau(numberOfActions=50,\
+                                   numberOfCriteria=21,\
+                                   weightDistribution='equiobjectives',
+                                   seed=100) 
+    g = BipolarOutrankingDigraph(t,Threading=True)    
+    Threading = True
+    t0 = time()
+    criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
+    print(time()-t0)
+    print(criteriaCorrelations)
+    Threading = False
+    t0 = time()
+    criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
+    print(time()-t0)
+    print(criteriaCorrelations)
+
 
 ##def testRubisRestServer():
 ##    print('*------ test RubisRestServer class ----*')

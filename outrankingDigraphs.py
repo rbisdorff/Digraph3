@@ -73,6 +73,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         """
         Renders the ordinal correlation coefficient between
         the global outranking and the marginal criterion relation.
+
+        If Threading, the 
         """
         gc = BipolarOutrankingDigraph(self,coalition=[criterion],
                                       Threading=Threading)
@@ -80,6 +82,37 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         if Debug:
             print(corr)
         return corr
+
+    def computeMarginalVersusGlobalOutrankingCorrelations(self,Sorted=True,Threading=False,nbrCores=None):
+        """
+        Method for computing correlations between each individual criterion relation with the corresponding
+        global outranking relation.
+        
+        Returns a list of tuples (correlation,criterionKey) sorted by default in decreasing order of the correlation.
+
+        If Threading is True, a multiprocessing Pool class is used with a parallel equivalent of the built-in map function.
+
+        If nbrCores is not set, the os.cpu_count() function is used to determine the number of
+        available cores.
+        """
+        if Threading:
+            from multiprocessing import Pool
+            from os import cpu_count
+            if nbrCores == None:
+                nbrCores= cpu_count()
+            criteriaList = [x for x in self.criteria]
+            with Pool(nbrCores) as proc:   
+                correlations = proc.map(self.computeCriterionCorrelation,criteriaList)
+            criteriaCorrelation = [(correlations[i]['correlation'],criteriaList[i]) for i in range(len(criteriaList))]
+        else:
+            criteriaList = [x for x in self.criteria]
+            criteriaCorrelation = []
+            for c in criteriaList:
+                corr = self.computeCriterionCorrelation(c,Threading=False)
+                criteriaCorrelation.append((corr['correlation'],c))            
+        if Sorted:
+            criteriaCorrelation.sort(reverse=True)
+        return criteriaCorrelation   
 
     def showMarginalVersusGlobalOutrankingCorrelation(self,Sorted=True,Threading=False,Comments=True):
         """
@@ -89,7 +122,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         criteriaCorrelation = []
         totCorrelation = Decimal('0.0')
         for c in criteriaList:
-            corr = self.computeCriterionCorrelation(c)
+            corr = self.computeCriterionCorrelation(c,Threading=Threading)
             totCorrelation += corr['correlation']
             criteriaCorrelation.append((corr['correlation'],c))
         if Sorted:
@@ -7762,7 +7795,7 @@ if __name__ == "__main__":
 
     import copy
     from time import time, sleep
-    from outrankingDigraphs import StochasticBipolarOutrankingDigraph
+    from outrankingDigraphs import BipolarOutrankingDigraph
     from weakOrders import RankingByChoosingDigraph
     from outrankingDigraphs import RubisRestServer
     
@@ -7770,15 +7803,28 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-    t = RandomCBPerformanceTableau(numberOfActions=5,\
-                                   numberOfCriteria=13,\
+    t = RandomCBPerformanceTableau(numberOfActions=100,\
+                                   numberOfCriteria=21,\
                                    weightDistribution='equiobjectives',
-                                   )
-    t.saveXMCDA2('test')
-    t = XMCDA2PerformanceTableau('test')
-    sg = StochasticBipolarOutrankingDigraph(t,distribution="extTriangular")
-    print(sg.computeCLTLikelihoods(Debug=False))
-    sg.showRelationTable()
+                                   seed=100)
+    
+    g = BipolarOutrankingDigraph(t,Threading=True)
+    Threading = True
+    t0 = time()
+    criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
+    print(time()-t0)
+    print(criteriaCorrelations)
+    Threading = False
+    t0 = time()
+    criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
+    print(time()-t0)
+    print(criteriaCorrelations)
+    
+##    t.saveXMCDA2('test')
+##    t = XMCDA2PerformanceTableau('test')
+##    sg = StochasticBipolarOutrankingDigraph(t,distribution="extTriangular")
+##    print(sg.computeCLTLikelihoods(Debug=False))
+##    sg.showRelationTable()
 ##    t0 = time()
 ##    lg = ConfidentBipolarOutrankingDigraph(t,
 ##                                        distribution="beta",

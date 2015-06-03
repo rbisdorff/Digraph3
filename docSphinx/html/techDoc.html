@@ -1082,7 +1082,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3269,7 +3269,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3860,6 +3860,7 @@ outranking digraphs</p>
 <code class="descname">computeCriterionCorrelation</code><span class="sig-paren">(</span><em>criterion</em>, <em>Threading=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.computeCriterionCorrelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the ordinal correlation coefficient between
 the global outranking and the marginal criterion relation.</p>
+<p>If Threading, the</p>
 </dd></dl>
 
 <dl class="method">
@@ -3867,6 +3868,17 @@ the global outranking and the marginal criterion relation.</p>
 <code class="descname">computeCriterionRelation</code><span class="sig-paren">(</span><em>c</em>, <em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.computeCriterionRelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>compute the outranking characteristic for actions x and y
 on criterion c.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="outrankingDigraphs.OutrankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations">
+<code class="descname">computeMarginalVersusGlobalOutrankingCorrelations</code><span class="sig-paren">(</span><em>Sorted=True</em>, <em>Threading=False</em>, <em>nbrCores=None</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method for computing correlations between each individual criterion relation with the corresponding
+global outranking relation.</p>
+<p>Returns a list of tuples (correlation,criterionKey) sorted by default in decreasing order of the correlation.</p>
+<p>If Threading is True, a multiprocessing Pool class is used with a parallel equivalent of the built-in map function.</p>
+<p>If nbrCores is not set, the os.cpu_count() function is used to determine the number of
+available cores.</p>
 </dd></dl>
 
 <dl class="method">
@@ -3919,7 +3931,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
