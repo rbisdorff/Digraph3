@@ -70,6 +70,21 @@ def testCBPerformanceTableau():
     g = BipolarOutrankingDigraph(t)
     g.exportGraphViz()
 
+def testmpCBPerformanceTableau(): 
+    print('*==>> random paraell CB Performance Tableaux ------------*')
+    
+    t = RandomCBPerformanceTableau(numberOfActions=10,\
+                                   commonPercentiles={'ind':5,'pref':10,'veto':95},\
+                                   weightDistribution="random",\
+                                   weightScale=[1,2],\
+                                   integerWeights=True,\
+                                   commonMode=["normal",50.0,25.0],
+                                   missingDataProbability=0.5,
+                                   seed=100,Debug=True,
+                                   Threading=True)
+    t.showCriteria(Debug=False)
+    t.showStatistics(Debug=True)
+
 def test3ObjectivesPerformanceTableau():
     print('*==>> random 3 Objectives (Eco, Soc, Env) Performance Tableaux ------------*')
     t = Random3ObjectivesPerformanceTableau(numberOfActions=21,

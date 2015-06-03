@@ -1756,6 +1756,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                  valueDigits = 2,
                  missingDataProbability = 0.0,
                  seed = None,
+                 Threading = False,
+                 nbrCores = None,
                  Debug=False,Comments=False):
         """
         Constructor for RadomCBPerformanceTableau instances.
@@ -2182,7 +2184,16 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                     self.evaluation[c][x] = Decimal('-999')
         self.weightPreorder = self.computeWeightPreorder()
         # compute discrimination thresholds from commonPercentiles
-        performanceDifferences = self.computePerformanceDifferences(NotPermanentDiffs=True,Debug=False)
+        if Threading:
+            performanceDifferencesList = self.mpComputePerformanceDifferences(NotPermanentDiffs=True,
+                                                                          nbrCores=nbrCores,
+                                                                          Debug=False)
+            performanceDifferences = {}
+            for i in range(len(criteriaList)):
+                c = criteriaList[i]
+                performanceDifferences[c] = performanceDifferencesList[i][0]
+        else:
+            performanceDifferences = self.computePerformanceDifferences(NotPermanentDiffs=True,Debug=False)
         if Debug:
             print('commonPercentiles=', commonPercentiles)
         if commonPercentiles == None:
