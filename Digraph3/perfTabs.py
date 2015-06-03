@@ -1509,9 +1509,8 @@ The performance evaluations of each decision alternative on each criterion are g
             g = BipolarOutrankingDigraph(self,Threading=Threading)
             if Correlations:
                 criteriaCorrelation =\
-                    g.showMarginalVersusGlobalOutrankingCorrelation(\
-                            Threading=Threading,\
-                            Comments=False)
+                    g.computeMarginalVersusGlobalOutrankingCorrelations(\
+                            Threading=Threading)
                 criteriaList = [c[1] for c in criteriaCorrelation]
             else:
                 criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
