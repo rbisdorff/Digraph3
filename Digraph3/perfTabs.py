@@ -538,7 +538,8 @@ The performance evaluations of each decision alternative on each criterion are g
 
     def computePerformanceDifferences(self,Comments = False,
                                       Debug = False,
-                                      NotPermanentDiffs=True):
+                                      NotPermanentDiffs=True,
+                                      WithMaxMin=False):
         """
         Adds to the criteria dictionary the ordered list of all observed performance differences.
         """
@@ -578,7 +579,10 @@ The performance evaluations of each decision alternative on each criterion are g
             #diffList = list(diff)
             diffList.sort()
             if NotPermanentDiffs:
-                performanceDifferences[c] = diffList
+                if WithMaxMin:
+                    performanceDifferences[c] = (diffList,ed,md)
+                else:
+                    performanceDifferences[c] = diffList
             else:
                 self.criteria[c]['performanceDifferences'] = diffList
                 if Comments:
@@ -588,6 +592,33 @@ The performance evaluations of each decision alternative on each criterion are g
 
         if NotPermanentDiffs:
             return performanceDifferences
+        
+    def mpComputePerformanceDifferences(self,NotPermanentDiffs=True,nbrCores=None,Debug=False):
+        """
+        Adds to the criteria dictionary the ordered list of all observed performance differences.
+        """
+        from multiprocessing import Pool
+        from os import cpu_count
+        if Debug:
+            print('Compute performance differences on each criterion in paralell')
+        if nbrCores == None:
+            nbrCores = cpu_count()
+        
+        criteriaList = [x for x in self.criteria]
+        criteriaList.sort()
+
+        with Pool(nbrCores) as proc:
+            performanceDifferences = proc.map(self.computeCriterionPerformanceDifferences,criteriaList)
+        
+        for i in range(len(criteriaList)):
+            c = criteriaList[i]
+            if not NotPermanentDiffs:
+                self.criteria[c]['performanceDifferences'] = performanceDifferences[i][0]
+            self.criteria[c]['minimalPerformanceDifference'] = performanceDifferences[i][1]
+            self.criteria[c]['maximalPerformanceDifference'] = performanceDifferences[i][2]
+
+        return performanceDifferences
+
 
     def computeCriterionPerformanceDifferences(self,c, Comments = False,
                                       Debug = False):
@@ -640,7 +671,7 @@ The performance evaluations of each decision alternative on each criterion are g
             print(len(diffList),diffList)
             print(diffList[0], diffList[-1])
         
-        return diffList
+        return (diffList,ed,md)
             
     def computeActionCriterionPerformanceDifferences(self,refAction,refCriterion,comments = False, Debug = False):
         """
@@ -921,7 +952,7 @@ The performance evaluations of each decision alternative on each criterion are g
             criteriaList = [x for x in self.criteria]
             criteriaList.sort()
         for c in criteriaList:
-            performanceDifferences = self.computeCriterionPerformanceDifferences(c,
+            performanceDifferences,minDiff,maxDiff = self.computeCriterionPerformanceDifferences(c,
                                                             Comments=Comments,Debug=Debug)
             #vx = self.criteria[c]['performanceDifferences']
             vx = performanceDifferences
@@ -976,7 +1007,7 @@ The performance evaluations of each decision alternative on each criterion are g
         except:
             #self.computePerformanceDifferences(Debug=Debug)
             #performanceDifferences = self.criteria[criterion]['performanceDifferences']
-            performanceDifferences = self.computeCriterionPerformanceDifferences(criterion)
+            performanceDifferences,minDiff,maxDiff = self.computeCriterionPerformanceDifferences(criterion)
         if Debug:
             print("performanceDifferences = ",performanceDifferences)
         try:
@@ -5770,17 +5801,27 @@ if __name__ == "__main__":
     import linearOrders
     from weakOrders import *
     from randomPerfTabs import *
+    from time import time
     
     print('*-------- Testing classes and methods -------')
 
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
-    t = RandomCBPerformanceTableau(numberOfCriteria=5,
-                                   numberOfActions=7,
+    t = RandomCBPerformanceTableau(numberOfCriteria=2,
+                                   numberOfActions=20,
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
                                    Debug=False,
-                                   seed=100)
+                                   seed=100,Threading=True)
+    t0 = time()
+    t.mpComputePerformanceDifferences(nbrCores=8,Debug=False)
+    print(time()-t0)
+    print(t.criteria)
+    t0 = time()
+    t.computePerformanceDifferences(Debug=False)
+    print(time()-t0)
+    print(t.criteria)
+    
 ##    t = ConstantPerformanceTableau(t,
 ##                                   actionsSubset=['a01','a02','a03'],
 ##                                   criteriaSubset=['g01','g02','g03'],
@@ -5802,9 +5843,10 @@ if __name__ == "__main__":
 ##    actionsList = qsrbc.computeQsRbcRanking()
 ##
 
-    g = BipolarOutrankingDigraph(t)
+    #g = BipolarOutrankingDigraph(t)
     #print(g.showMarginalVersusGlobalOutrankingCorrelation(Comments=False))
-    print(t.computePerformanceHeatmap(Correlations=True,colorLevels=5))
+    #print(t.computePerformanceHeatmap(Correlations=True,colorLevels=5))
+    
     
 ##    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
 ##    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=True))
