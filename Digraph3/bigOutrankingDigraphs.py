@@ -83,11 +83,13 @@ class BigBipolarOutrankingDigraph(QuantilesSortingDigraph,
             else:
                 quantiles = 100
         self.sortingParameters = {}
-        self.sortingParameters['quantiles'] = quantiles
+        self.sortingParameters['limitingQuantiles'] = quantiles
         self.sortingParameters['strategy'] = quantilesOrderingStrategy
         self.sortingParameters['LowerClosed'] = LowerClosed
         self.sortingParameters['Threading'] = Threading
-        self.sortingParameters['nbrOfCPUs'] = nbrOfCPUs        
+        self.sortingParameters['nbrOfCPUs'] = nbrOfCPUs
+        self.sortingParameters['PrefThresholds'] = False
+        self.sortingParameters['hasNoVeto'] = False
         
 
         t0 = time()
@@ -220,6 +222,42 @@ class BigBipolarOutrankingDigraph(QuantilesSortingDigraph,
         if Comments:
             print(self.runTimes)
 
+    def computeSortingRelation(self,categoryContents=None,Debug=False):
+        """
+        constructs a bipolar sorting relation using the category contents.
+        """
+##        if categoryContents == None:
+        componentsList = self._computeQuantileOrdering()
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        actions = [x for x in self.actions]
+        currActions = set(actions)
+        sortingRelation = {}
+        for x in actions:
+            sortingRelation[x] = {}
+            for y in actions:
+                sortingRelation[x][y] = Med
+                
+        if Debug:
+            print('componentsList',componentsList)
+        nc = len(componentsList)
+        for i in range(nc):
+            comp = componentsList[i][1]
+            ibch = set(comp)
+            ribch = set(currActions) - ibch
+            if Debug:
+                print('ibch,ribch',ibch,ribch)
+            for x in ibch:
+                for y in ibch:
+                    sortingRelation[x][y] = Med
+                    sortingRelation[y][x] = Med
+                for y in ribch:
+                    sortingRelation[x][y] = Min
+                    sortingRelation[y][x] = Max
+            currActions = currActions - ibch
+        return sortingRelation
+
 
     def _constructComponentRelation(self,comp):
         for x in comp:
@@ -232,6 +270,7 @@ class BigBipolarOutrankingDigraph(QuantilesSortingDigraph,
                                 Descending=True,
                                 Debug=False):
         """
+        Renders the 
         *Parameters*:
             * Descending: listing in *decreasing* (default) or *increasing* quantile order.
             * strategy: ordering in an {'optimistic' | 'pessimistic' | 'average' (default)}
@@ -239,7 +278,7 @@ class BigBipolarOutrankingDigraph(QuantilesSortingDigraph,
         
         """
         if strategy == None:
-            strategy = self.quantilesOrderingStrategy
+            strategy = self.sortingParameters['strategy']
         actionsCategories = {}
         for x in self.actions:
             a,lowCateg,highCateg,credibility =\
@@ -422,17 +461,19 @@ class BigBipolarOutrankingDigraph(QuantilesSortingDigraph,
 #----------test classes and methods ----------------
 if __name__ == "__main__":
 ##    g = BigDigraph('bigDigraph')
-    Threading=True
-    t = RandomCBPerformanceTableau(numberOfActions=100,Threading=Threading,seed=100)
-    g = BigBipolarOutrankingDigraph(t,quantiles=10,quantilesOrderingStrategy='average',
+    Threading=False
+    t = RandomCBPerformanceTableau(numberOfActions=20,Threading=Threading,seed=100)
+    g = BigBipolarOutrankingDigraph(t,quantiles=5,quantilesOrderingStrategy='average',
                                     LowerClosed=False,
                                     Threading=Threading,Debug=False)
     g.showShort()
+    actionsSubset = g.decomposition[0][1] + g.decomposition[1][1]
+    from weakOrders import WeakOrder
+    Digraph.showRelationTable(g,Sorted=False,actionsSubset=actionsSubset)
     #g.computeQuantileOrdering(Comments=True)
     #g.showDecomposition()
     #print(g.decomposition)
-    #g.showRelationTable()
+    actionsSet = flatten([comp[1] for comp in g.decomposition])
+    Digraph.showRelationTable(g,Sorted=False,actionsSubset=actionsSet)
+    g.exportGraphViz()
 
-    
-
-    
