@@ -401,12 +401,6 @@ class BigBipolarOutrankingDigraph(QuantilesSortingDigraph,
             html += '</table>'
             return html
 
-##    def showQuantileOrdering(self,strategy=None):
-##        """
-##        Dummy show method for the commenting computeQuantileOrdering() method.
-##        """
-##        self.computeQuantileOrdering(strategy=strategy,Comments=True)
-
     def showDecomposition(self):
         print('*--- quantiles decomposition in increasing order---*')
         k=1
@@ -460,20 +454,10 @@ class BigBipolarOutrankingDigraph(QuantilesSortingDigraph,
 
 #----------test classes and methods ----------------
 if __name__ == "__main__":
-##    g = BigDigraph('bigDigraph')
-    Threading=False
-    t = RandomCBPerformanceTableau(numberOfActions=20,Threading=Threading,seed=100)
-    g = BigBipolarOutrankingDigraph(t,quantiles=5,quantilesOrderingStrategy='average',
+    Threading=True
+    t = RandomCBPerformanceTableau(numberOfActions=1000,Threading=Threading,seed=100)
+    g = BigBipolarOutrankingDigraph(t,quantiles=None,quantilesOrderingStrategy='average',
                                     LowerClosed=False,
                                     Threading=Threading,Debug=False)
     g.showShort()
-    actionsSubset = g.decomposition[0][1] + g.decomposition[1][1]
-    from weakOrders import WeakOrder
-    Digraph.showRelationTable(g,Sorted=False,actionsSubset=actionsSubset)
-    #g.computeQuantileOrdering(Comments=True)
-    #g.showDecomposition()
-    #print(g.decomposition)
-    actionsSet = flatten([comp[1] for comp in g.decomposition])
-    Digraph.showRelationTable(g,Sorted=False,actionsSubset=actionsSet)
-    g.exportGraphViz()
 
