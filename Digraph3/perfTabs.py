@@ -598,11 +598,11 @@ The performance evaluations of each decision alternative on each criterion are g
         Adds to the criteria dictionary the ordered list of all observed performance differences.
         """
         from multiprocessing import Pool
-        from os import cpu_count
+        #from os import cpu_count
         if Debug:
             print('Compute performance differences on each criterion in paralell')
-        if nbrCores == None:
-            nbrCores = cpu_count()
+        #if nbrCores == None:
+        #    nbrCores = cpu_count()
         
         criteriaList = [x for x in self.criteria]
         criteriaList.sort()

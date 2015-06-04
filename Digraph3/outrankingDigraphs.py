@@ -1403,7 +1403,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                           hasLPDDenotation=False,
                           hasLatexFormat=False,
                           hasIntegerValuation=False,
-                          relation=None):
+                          relation=None,
+                          ReflexiveTerms=True):
         """
         prints the relation valuation in actions X actions table format.
         """
@@ -1454,20 +1455,28 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             else:
                 print("'"+x[0]+"' |  ", end=' ')
             for y in actionsList:
-                if hasIntegerValuation:
+                if x == y and not ReflexiveTerms:
                     if hasLPDDenotation:
-                        print('%+d ' % (gnv.relation[x[1]][y[1]]), end=' ')
+                        print(' - ', end=' ')
                     elif hasLatexFormat:
-                        print('$%+d$ &' % (relation[x[1]][y[1]]), end=' ')
+                        print('$-$ &', end=' ')
                     else:
-                        print('%+d ' % (relation[x[1]][y[1]]), end=' ')
-                else:
-                    if hasLPDDenotation:
-                        print('%+2.2f ' % (gnv.relation[x[1]][y[1]]), end=' ')
-                    elif hasLatexFormat:
-                        print('$%+2.2f$ & ' % (relation[x[1]][y[1]]), end=' ')       
+                        print(' - ', end=' ')
+                else:    
+                    if hasIntegerValuation:
+                        if hasLPDDenotation:
+                            print('%+d ' % (gnv.relation[x[1]][y[1]]), end=' ')
+                        elif hasLatexFormat:
+                            print('$%+d$ &' % (relation[x[1]][y[1]]), end=' ')
+                        else:
+                            print('%+d ' % (relation[x[1]][y[1]]), end=' ')
                     else:
-                        print('%+2.2f ' % (relation[x[1]][y[1]]), end=' ')
+                        if hasLPDDenotation:
+                            print('%+2.2f ' % (gnv.relation[x[1]][y[1]]), end=' ')
+                        elif hasLatexFormat:
+                            print('$%+2.2f$ & ' % (relation[x[1]][y[1]]), end=' ')       
+                        else:
+                            print('%+2.2f ' % (relation[x[1]][y[1]]), end=' ')
                 
             if hasLatexFormat:
                 print(' \\cr')
