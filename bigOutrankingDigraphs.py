@@ -25,7 +25,20 @@ from time import time
 
 class BigOutrankingDigraph(QuantilesSortingDigraph):
     """
-    Multiprocessing implementation of the BipolarOutrankingDigraph class for large instances (order > 100)
+    Multiprocessing implementation of the BipolarOutrankingDigraph class
+    for large instances (order > 1000)
+
+    The outranking digraph is with q-tiles sorting decomposed in a partition of more or
+    quantile equivalence classes, which are lineraly ordred by average quantile limits. (default).
+
+    To each quantile equivalence class is associated a BipolarOutrankingDigraph object
+    which is restricted to the decision actions in this quantile class.
+
+    By default, q is set to a tenth of the number of decision actions,
+    ie q = order//10.
+
+    For other parameters settings, see the corresponding QuantilesSortingDigraph class.
+
     """
     def __init__(self,argPerfTab=None,quantiles=None,
                  quantilesOrderingStrategy='average',
@@ -46,7 +59,7 @@ class BigOutrankingDigraph(QuantilesSortingDigraph):
         self.order = na
         self.dimension = len(perfTab.criteria)
         if quantiles == None:
-            quantiles = 10
+            quantiles = na//10
         self.sortingParameters = {}
         self.sortingParameters['limitingQuantiles'] = quantiles
         self.sortingParameters['strategy'] = quantilesOrderingStrategy
@@ -152,7 +165,41 @@ class BigOutrankingDigraph(QuantilesSortingDigraph):
 
     def showShort(self):
         """
-        Default (__repr__) presentation method for big digraphs components.
+        Default (__repr__) presentation method for big outranking digraphs instances:
+        
+        >>> from bigOutrankingDigraphs import *
+        >>> t = RandomCBPerformanceTableau(numberOfActions=100)
+        >>> g = BigOutrankingDigraph(t,quantiles=10)
+        Threading ...
+        Nbr of cpus =  7
+        number of cores = 7
+        nbr of actions to split 100
+        nbr of jobs =  7
+        nbr of splitActions =  15
+        iteration =  1 15
+        iteration =  2 15
+        iteration =  3 15
+        iteration =  4 15
+        iteration =  5 15
+        iteration =  6 15
+        iteration =  7 10
+        Exiting computing threads
+        >>> print(g)
+        *----- show short --------------*
+        Instance name     : randomCBperftab_mp
+        # Actions         : 100
+        # Criteria        : 13
+        Sorting by        : 10-Tiling 
+        Ordering strategy : average quantile
+        # Components      : 11
+        ----  Constructor run times (in sec.) ----
+        Total time        : 0.72743
+        QuantilesSorting  : 0.51481
+        Preordering       : 0.00292
+        Decomposing       : 0.20469
+        Ordering          : 0.00500
+        Default presentation of BigOutrankingDigraphs
+        
         """
         print(g)
 
