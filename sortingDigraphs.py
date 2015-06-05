@@ -1564,6 +1564,56 @@ class QuantilesSortingDigraph(SortingDigraph):
 
 ##        return orderingList
 
+    def _computeQuantileOrdering(self,strategy=None,
+                                Descending=True,
+                                Debug=False):
+        """
+        Renders the 
+        *Parameters*:
+            * Descending: listing in *decreasing* (default) or *increasing* quantile order.
+            * strategy: ordering in an {'optimistic' | 'pessimistic' | 'average' (default)}
+              in the uppest, the lowest or the average potential quantile.
+        
+        """
+        if strategy == None:
+            strategy = self.sortingParameters['strategy']
+        actionsCategories = {}
+        for x in self.actions:
+            a,lowCateg,highCateg,credibility =\
+                     self.showActionCategories(x,Comments=Debug)
+            if strategy == "optimistic":
+                try:
+                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]
+            elif strategy == "pessimistic":
+                try:
+                    actionsCategories[(int(lowCateg),int(highCateg))].append(a)
+                except:
+                    actionsCategories[(int(lowCateg),int(highCateg))] = [a]
+            elif strategy == "average":
+                lc = float(lowCateg)
+                hc = float(highCateg)
+                ac = (lc+hc)/2.0
+                try:
+                    actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
+            else:  # optimistic by default
+                try:
+                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
+                
+        actionsCategIntervals = []
+        for interval in actionsCategories:
+            actionsCategIntervals.append([interval,\
+                                          actionsCategories[interval]])
+        actionsCategIntervals.sort(reverse=Descending)
+
+        return actionsCategIntervals
+
+
     def computeQuantileOrdering(self,strategy=None,
                                 Descending=True,
                                 HTML=False,
