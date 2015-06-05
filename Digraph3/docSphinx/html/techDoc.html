@@ -146,6 +146,12 @@
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#bigoutrankingdigraphs-label"><span>bigOutrankingDigraphs module</span></a></dt>
+<dd><p class="first last">Sparse implementation for large outranking digraphs (order &gt; 1000).</p>
+</dd>
+</dl>
+</li>
 </ul>
 <div class="toctree-wrapper compound">
 <ul class="simple">
@@ -3269,7 +3275,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3301,7 +3307,7 @@ evaluation scale. Therefore the performance tableau is normalized to 0.0-100.0 s
 <dt id="perfTabs.PerformanceTableau.computePerformanceHeatmap">
 <code class="descname">computePerformanceHeatmap</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>actionsList=None</em>, <em>ndigits=2</em>, <em>colorLevels=7</em>, <em>title='Performance Heatmap'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computePerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the Brewer RdYlGn colored heatmap of the performance table
-actions x criteria in dictionary format. Three color levels (5,7 or 9)
+actions x criteria in ordered dictionary format. Three color levels (5,7 or 9)
 are provided.</p>
 <p>For a performance tableau with 5 criteria, colorLevels=5 and
 Correlations = True, one obtains for instance
@@ -3937,7 +3943,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4042,7 +4048,7 @@ in html format</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.showRelationTable">
-<code class="descname">showRelationTable</code><span class="sig-paren">(</span><em>IntegerValues=False</em>, <em>actionsSubset=None</em>, <em>Sorted=True</em>, <em>hasLPDDenotation=False</em>, <em>hasLatexFormat=False</em>, <em>hasIntegerValuation=False</em>, <em>relation=None</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showRelationTable</code><span class="sig-paren">(</span><em>IntegerValues=False</em>, <em>actionsSubset=None</em>, <em>Sorted=True</em>, <em>hasLPDDenotation=False</em>, <em>hasLatexFormat=False</em>, <em>hasIntegerValuation=False</em>, <em>relation=None</em>, <em>ReflexiveTerms=True</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>prints the relation valuation in actions X actions table format.</p>
 </dd></dl>
 
@@ -6012,6 +6018,77 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
 </div>
+<div class="section" id="module-bigOutrankingDigraphs">
+<span id="bigoutrankingdigraphs-module"></span><span id="bigoutrankingdigraphs-label"></span><h2>bigOutrankingDigraphs module<a class="headerlink" href="#module-bigOutrankingDigraphs" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraph">
+<em class="property">class </em><code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">BigOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>Threading=True</em>, <em>nbrOfCPUs=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a></p>
+<p>Multiprocessing implementation of the BipolarOutrankingDigraph class for large instances (order &gt; 100)</p>
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraph.computeBoostedKohlerOrdering">
+<code class="descname">computeBoostedKohlerOrdering</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.computeBoostedKohlerOrdering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders an ordred list of decision actions in decreasing preference direction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraph.computeDecompositionSummaryStatistics">
+<code class="descname">computeDecompositionSummaryStatistics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.computeDecompositionSummaryStatistics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the summary of the distribution of the length of
+the components as dictionary:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;max&#39;</span><span class="p">:</span> <span class="n">maxLength</span><span class="p">,</span>
+           <span class="s">&#39;median&#39;</span><span class="p">:</span><span class="n">medianLength</span><span class="p">,</span>
+           <span class="s">&#39;mean&#39;</span><span class="p">:</span><span class="n">meanLength</span><span class="p">,</span>
+           <span class="s">&#39;stdev&#39;</span><span class="p">:</span> <span class="n">stdLength</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraph.recodeValuation">
+<code class="descname">recodeValuation</code><span class="sig-paren">(</span><em>newMin=-1</em>, <em>newMax=1</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.recodeValuation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specialized for recoding the valuation of all the partial digraphs.
+By default the valuation domain is normalized ([-1.0;1.0])</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraph.showActions">
+<code class="descname">showActions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.showActions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints out the actions disctionary.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraph.showComponents">
+<code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraph.showCriteria">
+<code class="descname">showCriteria</code><span class="sig-paren">(</span><em>IntegerWeights=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.showCriteria" title="Permalink to this definition">¶</a></dt>
+<dd><p>print Criteria with thresholds and weights.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraph.showDecomposition">
+<code class="descname">showDecomposition</code><span class="sig-paren">(</span><em>direction='decreasing'</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.showDecomposition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraph.showRelationTable">
+<code class="descname">showRelationTable</code><span class="sig-paren">(</span><em>compKeys=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specialized for showing the quantiles decomposed relation table.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraph.showShort">
+<code class="descname">showShort</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.showShort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default (__repr__) presentation method for big digraphs components.</p>
+</dd></dl>
+
+</dd></dl>
+
+<p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
+</div>
 <div class="section" id="indices-and-tables">
 <h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -6049,6 +6126,7 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 <li><a class="reference internal" href="#module-randomNumbers">randomNumbers module</a></li>
 <li><a class="reference internal" href="#module-randomDigraphs">randomDigraphs module</a></li>
 <li><a class="reference internal" href="#module-randomPerfTabs">randomPerfTabs module</a></li>
+<li><a class="reference internal" href="#module-bigOutrankingDigraphs">bigOutrankingDigraphs module</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 <li><a class="reference internal" href="#tutorials">Tutorials</a></li>
 </ul>
