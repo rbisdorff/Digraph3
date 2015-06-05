@@ -44,6 +44,7 @@ class BigOutrankingDigraph(QuantilesSortingDigraph):
         # setting quantiles sorting parameters
         na = len(perfTab.actions)
         self.order = na
+        self.dimension = len(perfTab.criteria)
         if quantiles == None:
             quantiles = 10
         self.sortingParameters = {}
@@ -131,6 +132,9 @@ class BigOutrankingDigraph(QuantilesSortingDigraph):
 
     # ----- class methods ------------
 
+    def showComponents(self):
+        BigOutrankingDigraph.showDecomposition(self)
+
     def showDecomposition(self,direction='decreasing'):
         
         print('*--- quantiles decomposition in %s order---*' % (direction) )
@@ -148,27 +152,57 @@ class BigOutrankingDigraph(QuantilesSortingDigraph):
 
     def showShort(self):
         """
-        concise presentation method for big digraphs components.
+        Default (__repr__) presentation method for big digraphs components.
         """
         print(g)
 
-    def __repr__(self):
+    def __repr__(self,WithComponents=False):
         """
-        Default presentation method for big digraphs components.
+        Default presentation method for big outrankingDigraphs instances.
         """
         print('*----- show short --------------*')
-        print('Digraph           :', self.name)
-        print('Order             :', self.order)
-        print('Ordering strategy :', self.sortingParameters['strategy'])
-        print('# components      :', self.nbrComponents)
-        g.showDecomposition()
-        print('----  Constructor run times ----')
-        print('Total time        :', self.runTimes['totalTime'])
-        print('QuantilesSorting  :', self.runTimes['sorting'])
-        print('Preordering       :', self.runTimes['preordering'])
-        print('Decomposing       :', self.runTimes['decomposing'])
-        print('Ordering          :', self.runTimes['ordering'])
+        print('Instance name     :', self.name)
+        print('# Actions         :', self.order)
+        print('# Criteria        :', self.dimension)
+        print('Sorting by        : %d-Tiling ' % self.sortingParameters['limitingQuantiles'])
+        print('Ordering strategy :', self.sortingParameters['strategy'],'quantile')
+        print('# Components      :', self.nbrComponents)
+        if WithComponents:
+            g.showDecomposition()
+        print('----  Constructor run times (in sec.) ----')
+        print('Total time        : %.5f' % self.runTimes['totalTime'])
+        print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
+        print('Preordering       : %.5f' % self.runTimes['preordering'])
+        print('Decomposing       : %.5f' % self.runTimes['decomposing'])
+        print('Ordering          : %.5f' % self.runTimes['ordering'])
         return 'Default presentation of BigOutrankingDigraphs'
+
+    def computeDecompositionSummaryStatistics(self):
+        """
+        Returns the summary of the distribution of the length of
+        the components as dictionary::
+        
+            summary = {'max': maxLength,
+                       'median':medianLength,
+                       'mean':meanLength,
+                       'stdev': stdLength}
+        """
+        import statistics
+        self.componentStatistics = {}
+        nc = self.nbrComponents
+        compKeys = list(self.components.keys())
+        compLengths = [self.components[ck]['subGraph'].order \
+                       for ck in compKeys]
+        medianLength = statistics.median(compLengths)
+        meanLength = statistics.mean(compLengths)
+        stdLength = statistics.pstdev(compLengths)
+        summary = {
+                   'median':medianLength,
+                   'mean':meanLength,
+                   'stdev': stdLength,
+                   'max': max(compLengths)}
+        return summary
+        
 
     def showActions(self):
         """
@@ -257,6 +291,7 @@ class BigOutrankingDigraph(QuantilesSortingDigraph):
 
     def computeBoostedKohlerOrdering(self):
         """
+        Renders an ordred list of decision actions in decreasing preference direction.
         """
         from linearOrders import KohlerOrder
         compKeys = list(self.components.keys())
@@ -275,11 +310,12 @@ class BigOutrankingDigraph(QuantilesSortingDigraph):
 if __name__ == "__main__":
     from time import time
     Threading=False
-    t = RandomCBPerformanceTableau(numberOfActions=1000,Threading=Threading,seed=100)
-    g = BigOutrankingDigraph(t,quantiles=500,quantilesOrderingStrategy='average',
+    t = RandomCBPerformanceTableau(numberOfActions=200,Threading=Threading,seed=100)
+    g = BigOutrankingDigraph(t,quantiles=20,quantilesOrderingStrategy='average',
                                     LowerClosed=True,
                                     Threading=Threading,Debug=False)
     print(g)
+    print(g.computeDecompositionSummaryStatistics())
 ##    g.showActions()
 ##    g.showCriteria()
 ##    g.showRelationTable(['c14','c01'])

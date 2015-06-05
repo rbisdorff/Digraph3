@@ -22,6 +22,7 @@ pydocs:
 		cp randomNumbers.py pyDoc/
 		cp randomDigraphs.py pyDoc/
 		cp randomPerfTabs.py pyDoc/
+		cp bigOutrankingDigraphs.py pyDoc/
 		(cd pyDoc; pydoc3 -w ./)
 
 pTests:
