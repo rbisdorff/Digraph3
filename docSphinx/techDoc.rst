@@ -49,6 +49,8 @@ The Digraph3 source code is split into several interdependent modules of which t
      Various implemented random digraph models.
 * :ref:`randomPerfTabs-label` 
      Various implemented random performance tableau models.
+* :ref:`bigOutrankingDigraphs-label` 
+     Sparse implementation for large outranking digraphs (order > 1000).
 
 .. toctree::
    :maxdepth: 2
@@ -183,6 +185,18 @@ randomPerfTabs module
 ----------------------
 
 .. automodule:: randomPerfTabs
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Technical-label`
+
+.. _bigOutrankingDigraphs-label:
+      
+bigOutrankingDigraphs module
+-----------------------------
+
+.. automodule:: bigOutrankingDigraphs
    :member-order: alphabetical
    :no-inherited-members:
    :members:
