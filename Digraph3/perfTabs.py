@@ -600,10 +600,8 @@ The performance evaluations of each decision alternative on each criterion are g
         from multiprocessing import Pool
         #from os import cpu_count
         if Debug:
-            print('Compute performance differences on each criterion in paralell')
-        #if nbrCores == None:
-        #    nbrCores = cpu_count()
-        
+            print('Compute performance differences on each criterion in parallel')
+       
         criteriaList = [x for x in self.criteria]
         criteriaList.sort()
 
