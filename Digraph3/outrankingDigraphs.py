@@ -3569,7 +3569,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  Threading=False,
                  nbrCores=None,
                  Debug=False):
-        import copy
+        from copy import copy
         if argPerfTab == None:
             print('Performance tableau required !')
             #perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
@@ -3577,8 +3577,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             perfTab = PerformanceTableau(argPerfTab)
         else:
             perfTab = argPerfTab
-
-        self.performanceTableau = perfTab
+            
+        #self.performanceTableau = perfTab
 
         self.name = 'rel_' + perfTab.name
 
@@ -3588,18 +3588,18 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 actions[x] = {'name': str(x)}
             self.actions = actions
         else:
-            self.actions = copy.deepcopy(perfTab.actions)
+            self.actions = perfTab.actions.copy()
         Min =   Decimal('-100.0')
         Med =   Decimal('0.0')
         Max =   Decimal('100.0')
         self.valuationdomain = {'min':Min,'med':Med,'max':Max}
 
         if coalition == None:
-            criteria = copy.deepcopy(perfTab.criteria)
+            criteria = perfTab.criteria.copy()
         else:
             criteria = {}
             for g in coalition:
-                criteria[g] = copy.deepcopy(perfTab.criteria[g])
+                criteria[g] = perfTab.criteria[g].copy()
         self.criteria = criteria
         self.convertWeightFloatToDecimal()
         #  install method Data and parameters
@@ -3624,10 +3624,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         self.methodData = methodData
 
         # insert performance Data
-        self.evaluation = copy.deepcopy(perfTab.evaluation)
+        self.evaluation = perfTab.evaluation.copy()
         self.convertEvaluationFloatToDecimal()
         try:
-            self.description = copy.deepcopy(perfTab.description)
+            self.description = perfTab.description
         except:
             pass
         # init general digraph Data
@@ -3780,12 +3780,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             from tempfile import TemporaryDirectory
             with TemporaryDirectory() as tempDirName:
                 from copy import copy, deepcopy
-                selfDp = copy(self)
+                #selfDp = copy(self)
                 selfFileName = tempDirName +'/dumpSelf.py'
                 if Debug:
                     print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
-                pd = dumps(selfDp,-1)
+                #pd = dumps(selfDp,-1)
+                pd = dumps(self,-1)
                 fo.write(pd)
                 fo.close()
 
@@ -3795,7 +3796,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
                 ni = len(initial)
                 nt = len(terminal)
-                if ni > nt:
+                if ni < nt:
                     n = ni
                     actions2Split = list(initial)
                     InitialSplit = True

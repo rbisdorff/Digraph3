@@ -133,19 +133,17 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 actions[x] = {'name': str(x)}
             self.actions = actions
         else:
-            self.actions = deepcopy(perfTab.actions)
+            self.actions = perfTab.actions.copy()
 
         # keep a copy of the original actions set before adding the profiles
-        self.actionsOrig = deepcopy(self.actions)
-
-        # actionsOrig = self.actionsOrig
+        self.actionsOrig = self.actions.copy()
 
         #  input the profiles
         if argProfile != None:
             defaultProfiles = False
-            self.criteria = deepcopy(perfTab.criteria)
+            self.criteria = perfTab.criteria.copy()
             self.convertWeightFloatToDecimal()
-            self.evaluation = deepcopy(perfTab.evaluation)
+            self.evaluation = perfTab.evaluation.copy()
             self.convertEvaluationFloatToDecimal()
             if isinstance(argProfile,str): # input from stored instantiation
                 fileName = argProfile
@@ -158,15 +156,15 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 self.criteriaCategoryLimits = profile['criteriaCategoryLimits']
             else: # input from a profiles dictionary
                 self.name = 'sorting_with_given_profile'
-                self.categories = deepcopy(argProfile['categories'])
-                self.criteriaCategoryLimits = deepcopy(argProfile['criteriaCategoryLimits'])
+                self.categories = argProfile['categories'].copy()
+                self.criteriaCategoryLimits = argProfile['criteriaCategoryLimits'].copy()
         else:
             defaultProfiles = True
             self.name = 'sorting_with_default_profiles'
             normPerfTab = NormalizedPerformanceTableau(perfTab)
-            self.criteria = deepcopy(normPerfTab.criteria)
+            self.criteria = normPerfTab.criteria
             self.convertWeightFloatToDecimal()
-            self.evaluation = deepcopy(normPerfTab.evaluation)
+            self.evaluation = normPerfTab.evaluation
             self.convertEvaluationFloatToDecimal()
 
             # supposing all criteria scales between 0.0 and 100.0
@@ -189,8 +187,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                         'minimum':int(c),
                         'maximum':int(c)+k
                         }
-            self.criteriaCategoryLimits = deepcopy(criteriaCategoryLimits)
-
+            self.criteriaCategoryLimits = criteriaCategoryLimits
+            
         # set the category limits type (LowerClosed = True is default)
         self.criteriaCategoryLimits['LowerClosed'] = LowerClosed
         #print 'LowerClosed', LowerClosed
@@ -198,7 +196,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         # add the catogory limits to the actions set
         self.profiles = {'min':{},'max':{}}
         self.profileLimits = set()
-        for c in list(self.categories.keys()):
+        categoryKeys = list(self.categories.keys())
+        criterionKeys = list(self.criteria.keys())
+        for c in categoryKeys:
             cMinKey = c+'-m'
             cMaxKey = c+'-M'
             self.profileLimits.add(cMinKey)
@@ -207,7 +207,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             self.actions[cMaxKey] = {'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
             self.profiles['min'][cMinKey] = {'category': c, 'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
             self.profiles['max'][cMaxKey] = {'category': c, 'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
-            for g in list(self.criteria.keys()):
+            for g in criterionKeys:
                 try:
                     if self.criteria[g]['preferenceDirection'] == 'max':
                         self.evaluation[g][cMinKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['minimum']))
@@ -227,22 +227,38 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     self.evaluation[g][cMinKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['minimum']))
                     self.evaluation[g][cMaxKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['maximum']))
 
-
-
         self.convertEvaluationFloatToDecimal()
 
         # construct outranking relation
         if isRobust:
             g = RobustOutrankingDigraph(self)
-            self.valuationdomain = deepcopy(g.valuationdomain)
-            self.relation = deepcopy(g.relation)
+            self.valuationdomain = g.valuationdomain.copy()
+            self.relation = g.relation.copy()
         else:
             Min = Decimal('%.4f' % minValuation)
             Max = Decimal('%.4f' % maxValuation)
             Med = (Max + Min)/Decimal('2.0')
             self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
+##            if LowerClosed:
+##                self.relation = self._constructRelation(self.criteria,
+##                                                       self.evaluation,
+##                                                       initial=self.actionsOrig,
+##                                                       terminal=self.profileLimits,
+##                                                       hasNoVeto=hasNoVeto,
+##                                                       hasBipolarVeto=True,
+##                                                        Threading=Threading,
+##                                                        Debug=Debug)
+##            else:
+##                self.relation = self._constructRelation(self.criteria,
+##                                                       self.evaluation,
+##                                                       terminal=self.actionsOrig,
+##                                                       initial=self.profileLimits,
+##                                                       hasNoVeto=hasNoVeto,
+##                                                        hasBipolarVeto=True,
+##                                                        Threading=Threading,
+##                                                        Debug=Debug)
             if LowerClosed:
-                self.relation = self._constructRelation(self.criteria,
+                self.relation = BipolarOutrankingDigraph._constructRelationWithThreading(self,self.criteria,
                                                        self.evaluation,
                                                        initial=self.actionsOrig,
                                                        terminal=self.profileLimits,
@@ -251,7 +267,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                         Threading=Threading,
                                                         Debug=Debug)
             else:
-                self.relation = self._constructRelation(self.criteria,
+                self.relation = BipolarOutrankingDigraph._constructRelationWithThreading(self,self.criteria,
                                                        self.evaluation,
                                                        terminal=self.actionsOrig,
                                                        initial=self.profileLimits,
@@ -283,8 +299,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 self.relation[x][y] = sortingRelation[x][y]
 
         # reset original action set
-        self.actions = deepcopy(self.actionsOrig)
-        self.order = len(self.actions)
+        self.actions = self.actionsOrig.copy()
 
         # compute weak ordering by choosing
         # self.computeRankingByChoosing() !!! not scalable !!!
@@ -380,23 +395,24 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             from tempfile import TemporaryDirectory
             with TemporaryDirectory() as tempDirName:
                 from copy import copy, deepcopy
-                selfDp = deepcopy(self)
+                #selfDp = deepcopy(self)
                 selfFileName = tempDirName +'/dumpSelf.py'
                 if Debug:
                     print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
-                pd = dumps(selfDp,-1)
+                #pd = dumps(selfDp,-1)
+                pd = dumps(self,-1)
                 fo.write(pd)
                 fo.close()
                 
                 if nbrCores == None:
-                    nbrCores = cpu_count()-1
+                    nbrCores = cpu_count()-2
                 
                 print('Nbr of cpus = ',nbrCores)
 
                 ni = len(initial)
                 nt = len(terminal)
-                if ni > nt:
+                if ni < nt:
                     n = ni
                     actions2Split = list(initial)
                     InitialSplit = True
@@ -2925,7 +2941,7 @@ if __name__ == "__main__":
 ##    t.saveXMCDA2('test',servingD3=False)
     #t = XMCDA2PerformanceTableau('test')  
     qs = QuantilesSortingDigraph(t,15,LowerClosed=False,
-                                     Threading=False,
+                                     Threading=True,
                                      Debug=False)
     qs.showHTMLQuantileOrdering(strategy='average')
     #qs.showSortingCharacteristics('a01')
