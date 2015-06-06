@@ -356,11 +356,10 @@ class BigOutrankingDigraph(QuantilesSortingDigraph):
 #----------test classes and methods ----------------
 if __name__ == "__main__":
     from time import time
-    Threading=False
-    t = RandomCBPerformanceTableau(numberOfActions=200,Threading=Threading,seed=100)
-    g = BigOutrankingDigraph(t,quantiles=20,quantilesOrderingStrategy='average',
+    t = RandomCBPerformanceTableau(numberOfActions=1000,Threading=True,seed=100)
+    g = BigOutrankingDigraph(t,quantiles=100,quantilesOrderingStrategy='average',
                                     LowerClosed=True,
-                                    Threading=Threading,Debug=False)
+                                    Threading=True,Debug=False)
     print(g)
     print(g.computeDecompositionSummaryStatistics())
 ##    g.showActions()
