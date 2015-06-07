@@ -22,13 +22,6 @@
 from outrankingDigraphs import *
 from sortingDigraphs import *
 from time import time
-from sys import getsizeof, stderr
-from itertools import chain
-from collections import deque
-try:
-    from reprlib import repr
-except ImportError:
-    pass
 
 def total_size(o, handlers={}, verbose=False):
     """ Returns the approximate memory footprint an object and all of its contents.
@@ -41,13 +34,26 @@ def total_size(o, handlers={}, verbose=False):
                     OtherContainerClass: OtherContainerClass.get_elements}
 
     """
+    from sys import getsizeof, stderr
+    from itertools import chain
+    from collections import deque
+    try:
+        from reprlib import repr
+    except ImportError:
+        pass
+
+    
     dict_handler = lambda d: chain.from_iterable(d.items())
+    object_handler = lambda d: chain.from_iterable(d.__dict__.items())
     all_handlers = {tuple: iter,
                     list: iter,
                     deque: iter,
                     dict: dict_handler,
                     set: iter,
                     frozenset: iter,
+                    BigDigraph: object_handler,
+                    Digraph: object_handler,
+                    PerformanceTableau : object_handler,
                    }
     all_handlers.update(handlers)     # user handlers take precedence
     seen = set()                      # track which object id's have already been seen
@@ -317,6 +323,7 @@ class BigOutrankingDigraph(BigDigraph):
         # setting quantiles sorting parameters
         na = len(perfTab.actions)
         self.order = na
+        self.criteria = perfTab.criteria.copy()
         self.dimension = len(perfTab.criteria)
         if quantiles == None:
             quantiles = na//10
@@ -386,7 +393,9 @@ class BigOutrankingDigraph(BigDigraph):
             pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
             self.components[compKey]['lowQtileLimit'] = comp[0][1]
             self.components[compKey]['highQtileLimit'] = comp[0][0]
-            self.components[compKey]['subGraph'] = BipolarOutrankingDigraph(pt,Normalized=True)
+            pg = BipolarOutrankingDigraph(pt,Normalized=True)
+            pg.__dict__.pop('criteria')
+            self.components[compKey]['subGraph'] = pg
 
         self.valuationdomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
 
@@ -413,7 +422,7 @@ class BigOutrankingDigraph(BigDigraph):
         from sys import getsizeof
         print('*----- show short --------------*')
         print('Instance name     :', self.name)
-        print('Size (in Bytes)   :', getsizeof(self))
+        print('Size (in bytes)   :', total_size(self))
         print('# Actions         :', self.order)
         print('# Criteria        :', self.dimension)
         print('Sorting by        : %d-Tiling ' % self.sortingParameters['limitingQuantiles'])
@@ -580,9 +589,9 @@ if __name__ == "__main__":
 ##    print(total_size(d, verbose=True))
 
     from time import time
-    MP = True
+    MP = False
     t0 = time()
-    t1000 = RandomCBPerformanceTableau(numberOfActions=750,Threading=MP,
+    t1000 = RandomCBPerformanceTableau(numberOfActions=100,Threading=MP,
                                       seed=100)
     print(time()-t0)
     print(total_size(t1000.evaluation))
@@ -594,13 +603,13 @@ if __name__ == "__main__":
                                     LowerClosed=False,
                                     Threading=MP,Debug=False)
     print(bg1000)
-    print(total_size(bg1000.components))
+    print(total_size(bg1000))
     print(bg1000.computeDecompositionSummaryStatistics())
     #bg100.recodeValuation(-1,1)
     t0 = time()
     g1000 = BipolarOutrankingDigraph(t1000,Normalized=True,Threading=MP)
     print(time()-t0)
-    print(total_size(g1000.relation))
+    print(total_size(g1000))
     t0 = time()
     print(bg1000.computeOrdinalCorrelation(g1000))
     print(time()-t0)
