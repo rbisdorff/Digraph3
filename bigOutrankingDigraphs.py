@@ -22,6 +22,14 @@
 from outrankingDigraphs import *
 from sortingDigraphs import *
 from time import time
+from decimal import Decimal
+from sys import getsizeof, stderr
+from itertools import chain
+from collections import deque
+try:
+    from reprlib import repr
+except ImportError:
+    pass
 
 def total_size(o, handlers={}, verbose=False):
     """ Returns the approximate memory footprint an object and all of its contents.
@@ -87,8 +95,6 @@ class BigDigraph(object):
     """
     abstract root class for lineraly decomposed big digraphs (order > 1000) using multiprocessing ressources.
     """
-
-    from decimal import Decimal
     
     def relation(self,x,y,Debug=False):
         """
