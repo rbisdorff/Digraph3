@@ -1386,7 +1386,7 @@ class Digraph(object):
         return mean,stdDev
 
 
-    def computeBipolarCorrelation(self, other, MedianCut=False, filterRelation=None, Debug=False):
+    def computeOrdinalCorrelation(self, other, MedianCut=False, filterRelation=None, Debug=False):
         """
         Renders the bipolar correlation K of a
         self.relation when compared
@@ -1490,11 +1490,11 @@ class Digraph(object):
                     'determination': determination}
 
 
-    def computeOrdinalCorrelation(self, other, MedianCut=False, filterRelation=None, Debug=False):
+    def computeBipolarCorrelation(self, other, MedianCut=False, filterRelation=None, Debug=False):
         """
-        obsolete: dummy replacement for Digraph.computeBipolarCorrelation method
+        obsolete: dummy replacement for Digraph.computeOrdinalCorrelation method
         """
-        return self.computeBipolarCorrelation(other= other,MedianCut=MedianCut,\
+        return self.computeOrdinalCorrelation(other= other,MedianCut=MedianCut,\
                                               filterRelation=filterRelation,Debug=Debug)
 
     def computeKemenyIndex(self, otherRelation):

@@ -23,7 +23,214 @@ from outrankingDigraphs import *
 from sortingDigraphs import *
 from time import time
 
-class BigOutrankingDigraph(QuantilesSortingDigraph):
+class BigDigraph(object):
+    """
+    abstract root class for lineraly decomposed big digraphs (order > 1000) using multiprocessing ressources.
+    """
+    from decimal import Decimal
+    
+    def relation(self,x,y,Debug=False):
+        """
+        Dynamic construction of the global digraph relation.
+        """
+        if x == y:
+            return self.valuationdomain['med']
+        
+        selfActionsList = [(ck,
+                            list(self.components[ck]['subGraph'].actions.keys()))\
+                           for ck in self.components]
+        if Debug:
+            print(selfActionsList)
+
+        precx = []
+        Found = False
+        for ckx in selfActionsList:
+            
+            if x in ckx[1]:    
+                if Debug:
+                    print(precx,ckx[1])
+                if y in precx:
+                    #print('self: %s < %s' % (x,y))
+                    selfRelation = self.valuationdomain['min']
+                elif y in ckx[1]:
+                    #print('self: %s S %s' % (x,y))
+                    selfRelation = self.components[ckx[0]]['subGraph'].relation[x][y] 
+                else:
+                    #print('self: %s > %s' % (x,y))
+                    selfRelation = self.valuationdomain['max']
+                if Debug:
+                    print(selfRelation)
+                Found = True
+                break
+            precx += ckx[1]
+        if Found:
+            return selfRelation
+        else:
+            return None
+        
+    
+    def computeOrdinalCorrelation(self, other, Debug=False):
+        """
+        Renders the ordinal correlation K of a BigDigraph instance
+        when compared with a given compatible (same actions set) other Digraph or
+        BigDigraph instance.
+        
+        K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]
+
+        K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]
+
+        .. note::
+
+             The global outranking relation of BigDigraph instances is contructed on the fly
+             from the ordered dictionary of the components.
+
+             Renders a tuple with at position 0 the actual bipolar correlation index
+             and in position 1 the minimal determination level D of self and
+             the other relation.
+
+             D = sum_{x != y} min(abs(self.relation(x,y)),abs(other.relation(x,y)) / n(n-1)
+
+             where n is the number of actions considered.
+
+             The correlation index with a completely indeterminate relation
+             is by convention 0.0 at determination level 0.0 .
+
+        """
+        
+        if issubclass(other.__class__,(Digraph)):
+            if Debug:
+                print('inputting a Digraph instance')
+            if other.valuationdomain['min'] != Decimal('-1.0'):
+                print('Error: the arguments must be normalized digraph !!')
+            else:
+                otherComponents = {'c1':{'rank':1,'subGraph':other}}
+        elif isinstance(other,(BigOutrankingDigraph)):
+            if Debug:
+                print('inputting a BigDigraph instance')
+            otherComponents = other.components
+
+        selfActionsList = [(ck,
+                            list(self.components[ck]['subGraph'].actions.keys()))\
+                           for ck in self.components]
+        otherActionsList = [(ck,
+                            list(otherComponents[ck]['subGraph'].actions.keys()))\
+                           for ck in otherComponents]
+        if Debug:
+            print(selfActionsList)
+            print(otherActionsList)
+        
+        correlation = Decimal('0.0')
+        determination = Decimal('0.0')
+        precx = []
+        for ckx in selfActionsList:
+            precy = []
+            for cky in otherActionsList:
+                for x in ckx[1]:
+                    for y in cky[1]:
+                        if x != y:
+                            if x in precy:
+                                #print('other: %s > %s' % (x,y))
+                                otherRelation = self.valuationdomain['max']
+                            elif x in cky[1]:
+                                #print('other: %s S %s' % (x,y))
+                                otherRelation = otherComponents[cky[0]]['subGraph'].relation[x][y]     
+                            else:
+                                #print('other: %s < %s' % (x,y))
+                                otherRelation = self.valuationdomain['min']
+                            if Debug:
+                                print(otherRelation)
+                            corr = min( max(-self.relation(x,y),otherRelation), max(self.relation(x,y),-otherRelation) )
+                            correlation += corr
+                            determination += min( abs(self.relation(x,y)),abs(otherRelation) )
+                            if Debug:
+                                print(x,y,selfRelation,otherRelation,correlation,determination)
+                precy += cky[1]       
+            precx += ckx[1]
+
+        if determination > Decimal('0.0'):
+            correlation /= determination
+            n2 = (self.order*self.order) - self.order
+            return { 'correlation': correlation,\
+                     'determination': determination / Decimal(str(n2)) }
+        else:
+            return {'correlation': Decimal('0.0'),\
+                    'determination': determination}
+
+    def showDecomposition(self,direction='decreasing'):
+        
+        print('*--- Relation decomposition in %s order---*' % (direction) )
+        compKeys = [compKey for compKey in self.components]
+        if direction != 'increasing':
+            compKeys.sort()
+        else:
+            compKeys.sort(reverse=True)
+        for compKey in compKeys:
+            comp = self.components[compKey]
+            sg = comp['subGraph']
+            actions = [x for x in sg.actions]
+            actions.sort()
+            print('%s: %s' % (compKey,actions))
+
+
+##    def __repr__(self,WithComponents=False):
+##        """
+##        Default presentation method for BigDigraph instances.
+##        """
+##        print('*----- show short --------------*')
+##        print('Instance name     :', self.name)
+##        print('Instance class    :', self.__class__)
+##        print('# Nodes           :', self.order)
+##        print('# Components      :', self.nbrComponents)
+##        if WithComponents:
+##            g.showDecomposition()
+##        return 'Default presentation of BigDigraph instances'
+
+    def computeDecompositionSummaryStatistics(self):
+        """
+        Returns the summary of the distribution of the length of
+        the components as dictionary::
+        
+            summary = {'max': maxLength,
+                       'median':medianLength,
+                       'mean':meanLength,
+                       'stdev': stdLength}
+        """
+        import statistics
+        self.componentStatistics = {}
+        nc = self.nbrComponents
+        compKeys = list(self.components.keys())
+        compLengths = [self.components[ck]['subGraph'].order \
+                       for ck in compKeys]
+        medianLength = statistics.median(compLengths)
+        meanLength = statistics.mean(compLengths)
+        stdLength = statistics.pstdev(compLengths)
+        summary = {
+                   'median':medianLength,
+                   'mean':meanLength,
+                   'stdev': stdLength,
+                   'max': max(compLengths)}
+        return summary
+
+    def recodeValuation(self,newMin=-1,newMax=1):
+        """
+        Specialized for recoding the valuation of all the partial digraphs.
+        By default the valuation domain is normalized ([-1.0;1.0])
+        """
+        nc = self.nbrComponents
+        print('Recoding the valuation of %d subgraphs' % nc)
+        compKeys = list(self.components.keys())
+        compKeys.sort()
+        for i in range(nc) :
+            cki = compKeys[i]
+            comp = self.components[cki]
+            pg = comp['subGraph']
+            pg.recodeValuation(newMin=newMin,newMax=newMax)
+        Min = Decimal(str(newMin))
+        Max = Decimal(str(newMax))
+        Med = (Min+Max)/Decimal('2')
+        self.valuationdomain = { 'min':Min, 'max':Max, 'med':Med }
+
+class BigOutrankingDigraph(BigDigraph):
     """
     Multiprocessing implementation of the BipolarOutrankingDigraph class
     for large instances (order > 1000)
@@ -47,6 +254,8 @@ class BigOutrankingDigraph(QuantilesSortingDigraph):
                  Comments=False,
                  Debug=False):
         
+        from sortingDigraphs import QuantilesSortingDigraph
+        from collections import OrderedDict
         from time import time
         from os import cpu_count
         
@@ -115,7 +324,7 @@ class BigOutrankingDigraph(QuantilesSortingDigraph):
             print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )
         # setting components
         t0 = time()
-        self.components = {}
+        self.components = OrderedDict()
         nc = len(decomposition)
         self.nbrComponents = nc
         nd = len(str(nc))
@@ -126,7 +335,9 @@ class BigOutrankingDigraph(QuantilesSortingDigraph):
             pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
             self.components[compKey]['lowQtileLimit'] = comp[0][1]
             self.components[compKey]['highQtileLimit'] = comp[0][0]
-            self.components[compKey]['subGraph'] = BipolarOutrankingDigraph(pt)
+            self.components[compKey]['subGraph'] = BipolarOutrankingDigraph(pt,Normalized=True)
+
+        self.valuationdomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
 
         self.runTimes['decomposing'] = time() - t0
         if Comments:
@@ -138,30 +349,32 @@ class BigOutrankingDigraph(QuantilesSortingDigraph):
         if Comments:
             print('ordering time: %.4f' % self.runTimes['ordering']  )
         
-        
         self.runTimes['totalTime'] = time() - ttot
         if Comments:
             print(self.runTimes)
 
     # ----- class methods ------------
 
-    def showComponents(self):
-        BigOutrankingDigraph.showDecomposition(self)
-
-    def showDecomposition(self,direction='decreasing'):
-        
-        print('*--- quantiles decomposition in %s order---*' % (direction) )
-        compKeys = [compKey for compKey in self.components]
-        if direction != 'increasing':
-            compKeys.sort()
-        else:
-            compKeys.sort(reverse=True)
-        for compKey in compKeys:
-            comp = self.components[compKey]
-            sg = comp['subGraph']
-            actions = [x for x in sg.actions]
-            actions.sort()
-            print('%s. %s-%s : %s' % (compKey,comp['highQtileLimit'],comp['lowQtileLimit'],actions))
+    def __repr__(self,WithComponents=False):
+        """
+        Default presentation method for big outrankingDigraphs instances.
+        """
+        print('*----- show short --------------*')
+        print('Instance name     :', self.name)
+        print('# Actions         :', self.order)
+        print('# Criteria        :', self.dimension)
+        print('Sorting by        : %d-Tiling ' % self.sortingParameters['limitingQuantiles'])
+        print('Ordering strategy :', self.sortingParameters['strategy'],'quantile')
+        print('# Components      :', self.nbrComponents)
+        if WithComponents:
+            g.showDecomposition()
+        print('----  Constructor run times (in sec.) ----')
+        print('Total time        : %.5f' % self.runTimes['totalTime'])
+        print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
+        print('Preordering       : %.5f' % self.runTimes['preordering'])
+        print('Decomposing       : %.5f' % self.runTimes['decomposing'])
+        print('Ordering          : %.5f' % self.runTimes['ordering'])
+        return 'Default presentation of BigOutrankingDigraphs'
 
     def showShort(self):
         """
@@ -202,54 +415,6 @@ class BigOutrankingDigraph(QuantilesSortingDigraph):
         
         """
         print(g)
-
-    def __repr__(self,WithComponents=False):
-        """
-        Default presentation method for big outrankingDigraphs instances.
-        """
-        print('*----- show short --------------*')
-        print('Instance name     :', self.name)
-        print('# Actions         :', self.order)
-        print('# Criteria        :', self.dimension)
-        print('Sorting by        : %d-Tiling ' % self.sortingParameters['limitingQuantiles'])
-        print('Ordering strategy :', self.sortingParameters['strategy'],'quantile')
-        print('# Components      :', self.nbrComponents)
-        if WithComponents:
-            g.showDecomposition()
-        print('----  Constructor run times (in sec.) ----')
-        print('Total time        : %.5f' % self.runTimes['totalTime'])
-        print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
-        print('Preordering       : %.5f' % self.runTimes['preordering'])
-        print('Decomposing       : %.5f' % self.runTimes['decomposing'])
-        print('Ordering          : %.5f' % self.runTimes['ordering'])
-        return 'Default presentation of BigOutrankingDigraphs'
-
-    def computeDecompositionSummaryStatistics(self):
-        """
-        Returns the summary of the distribution of the length of
-        the components as dictionary::
-        
-            summary = {'max': maxLength,
-                       'median':medianLength,
-                       'mean':meanLength,
-                       'stdev': stdLength}
-        """
-        import statistics
-        self.componentStatistics = {}
-        nc = self.nbrComponents
-        compKeys = list(self.components.keys())
-        compLengths = [self.components[ck]['subGraph'].order \
-                       for ck in compKeys]
-        medianLength = statistics.median(compLengths)
-        meanLength = statistics.mean(compLengths)
-        stdLength = statistics.pstdev(compLengths)
-        summary = {
-                   'median':medianLength,
-                   'mean':meanLength,
-                   'stdev': stdLength,
-                   'max': max(compLengths)}
-        return summary
-        
 
     def showActions(self):
         """
@@ -300,6 +465,24 @@ class BigOutrankingDigraph(QuantilesSortingDigraph):
                 pass
             print()
 
+    def showComponents(self):
+        BigOutrankingDigraph.showDecomposition(self)
+
+    def showDecomposition(self,direction='decreasing'):
+        
+        print('*--- quantiles decomposition in %s order---*' % (direction) )
+        compKeys = [compKey for compKey in self.components]
+        if direction != 'increasing':
+            compKeys.sort()
+        else:
+            compKeys.sort(reverse=True)
+        for compKey in compKeys:
+            comp = self.components[compKey]
+            sg = comp['subGraph']
+            actions = [x for x in sg.actions]
+            actions.sort()
+            print('%s. %s-%s : %s' % (compKey,comp['highQtileLimit'],comp['lowQtileLimit'],actions))
+
     def showRelationTable(self,compKeys=None):
         """
         Specialized for showing the quantiles decomposed relation table.
@@ -321,21 +504,6 @@ class BigOutrankingDigraph(QuantilesSortingDigraph):
                 print('Relation table of component %s' % compKey)
                 self.components[compKey]['subGraph'].showRelationTable()
 
-    def recodeValuation(self,newMin=-1,newMax=1):
-        """
-        Specialized for recoding the valuation of all the partial digraphs.
-        By default the valuation domain is normalized ([-1.0;1.0])
-        """
-        nc = self.nbrComponents
-        print('Recoding the valuation of %d subgraphs' % nc)
-        compKeys = list(self.components.keys())
-        compKeys.sort()
-        for i in range(nc) :
-            cki = compKeys[i]
-            comp = self.components[cki]
-            pg = comp['subGraph']
-            pg.recodeValuation(newMin=newMin,newMax=newMax)
-
     def computeBoostedKohlerOrdering(self):
         """
         Renders an ordred list of decision actions in decreasing preference direction.
@@ -356,12 +524,22 @@ class BigOutrankingDigraph(QuantilesSortingDigraph):
 #----------test classes and methods ----------------
 if __name__ == "__main__":
     from time import time
-    t = RandomCBPerformanceTableau(numberOfActions=1000,Threading=True,seed=100)
-    g = BigOutrankingDigraph(t,quantiles=100,quantilesOrderingStrategy='average',
+    nbrCores = 7
+    t1000 = RandomCBPerformanceTableau(numberOfActions=1000,Threading=True,
+                                      seed=100)
+##    bg100 = BigOutrankingDigraph(t100,quantiles=5,quantilesOrderingStrategy='average',
+##                                    LowerClosed=True,
+##                                    Threading=False,Debug=False)
+##    print(bg100)
+    bg1000 = BigOutrankingDigraph(t100,quantiles=100,quantilesOrderingStrategy='average',
                                     LowerClosed=True,
                                     Threading=True,Debug=False)
-    print(g)
-    print(g.computeDecompositionSummaryStatistics())
+    print(bg1000)
+    #bg100.recodeValuation(-1,1)
+    g1000 = BipolarOutrankingDigraph(t1000,Normalized=True,Threading=True)
+    print(bg1000.computeOrdinalCorrelation(g1000))
+
+##    print(g.computeDecompositionSummaryStatistics())
 ##    g.showActions()
 ##    g.showCriteria()
 ##    g.showRelationTable(['c14','c01'])
