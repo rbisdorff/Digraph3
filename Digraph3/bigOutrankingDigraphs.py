@@ -23,16 +23,9 @@ from outrankingDigraphs import *
 from sortingDigraphs import *
 from time import time
 from decimal import Decimal
-from sys import getsizeof, stderr
-from itertools import chain
-from collections import deque
-try:
-    from reprlib import repr
-except ImportError:
-    pass
 
 def total_size(o, handlers={}, verbose=False):
-    """ Returns the approximate memory footprint an object and all of its contents.
+    """ Returns the approximate memory footprint of an object and all of its contents.
 
     Automatically finds the contents of the following containers and
     their subclasses:  tuple, list, deque, dict, set, frozenset, Digraph and BigDigraph.
