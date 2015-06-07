@@ -26,35 +26,42 @@ from time import time
 def total_size(o, handlers={}, verbose=False):
     """ Returns the approximate memory footprint an object and all of its contents.
 
-    Automatically finds the contents of the following builtin containers and
-    their subclasses:  tuple, list, deque, dict, set and frozenset.
+    Automatically finds the contents of the following containers and
+    their subclasses:  tuple, list, deque, dict, set, frozenset, Digraph and BigDigraph.
     To search other containers, add handlers to iterate over their contents:
 
         handlers = {SomeContainerClass: iter,
                     OtherContainerClass: OtherContainerClass.get_elements}
 
+    See http://code.activestate.com/recipes/577504/  
+
     """
     from sys import getsizeof, stderr
     from itertools import chain
     from collections import deque
+    
     try:
         from reprlib import repr
     except ImportError:
         pass
 
-    
+    # built-in containers and their subclasses
     dict_handler = lambda d: chain.from_iterable(d.items())
-    object_handler = lambda d: chain.from_iterable(d.__dict__.items())
     all_handlers = {tuple: iter,
                     list: iter,
                     deque: iter,
                     dict: dict_handler,
                     set: iter,
                     frozenset: iter,
-                    BigDigraph: object_handler,
-                    Digraph: object_handler,
-                    PerformanceTableau : object_handler,
-                   }
+                    }
+
+    # Digraph3 objects 
+    object_handler = lambda d: chain.from_iterable(d.__dict__.items())    
+    handlers = {BigDigraph: object_handler,
+                Digraph: object_handler,
+                PerformanceTableau : object_handler,
+                }
+    
     all_handlers.update(handlers)     # user handlers take precedence
     seen = set()                      # track which object id's have already been seen
     default_size = getsizeof(0)       # estimate sizeof object without __sizeof__
@@ -80,8 +87,6 @@ class BigDigraph(object):
     """
     abstract root class for lineraly decomposed big digraphs (order > 1000) using multiprocessing ressources.
     """
-    # http://code.activestate.com/recipes/577504/
-
 
     from decimal import Decimal
     
