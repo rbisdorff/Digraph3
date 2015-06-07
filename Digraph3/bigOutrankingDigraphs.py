@@ -22,11 +22,61 @@
 from outrankingDigraphs import *
 from sortingDigraphs import *
 from time import time
+from sys import getsizeof, stderr
+from itertools import chain
+from collections import deque
+try:
+    from reprlib import repr
+except ImportError:
+    pass
+
+def total_size(o, handlers={}, verbose=False):
+    """ Returns the approximate memory footprint an object and all of its contents.
+
+    Automatically finds the contents of the following builtin containers and
+    their subclasses:  tuple, list, deque, dict, set and frozenset.
+    To search other containers, add handlers to iterate over their contents:
+
+        handlers = {SomeContainerClass: iter,
+                    OtherContainerClass: OtherContainerClass.get_elements}
+
+    """
+    dict_handler = lambda d: chain.from_iterable(d.items())
+    all_handlers = {tuple: iter,
+                    list: iter,
+                    deque: iter,
+                    dict: dict_handler,
+                    set: iter,
+                    frozenset: iter,
+                   }
+    all_handlers.update(handlers)     # user handlers take precedence
+    seen = set()                      # track which object id's have already been seen
+    default_size = getsizeof(0)       # estimate sizeof object without __sizeof__
+
+    def sizeof(o):
+        if id(o) in seen:       # do not double count the same object
+            return 0
+        seen.add(id(o))
+        s = getsizeof(o, default_size)
+
+        if verbose:
+            print(s, type(o), repr(o), file=stderr)
+
+        for typ, handler in all_handlers.items():
+            if isinstance(o, typ):
+                s += sum(map(sizeof, handler(o)))
+                break
+        return s
+
+    return sizeof(o)
 
 class BigDigraph(object):
     """
     abstract root class for lineraly decomposed big digraphs (order > 1000) using multiprocessing ressources.
     """
+    # http://code.activestate.com/recipes/577504/
+
+
     from decimal import Decimal
     
     def relation(self,x,y,Debug=False):
@@ -128,6 +178,9 @@ class BigDigraph(object):
                 for x in ckx[1]:
                     for y in cky[1]:
                         if x != y:
+                            selfRelation = self.relation(x,y)
+                            if Debug:
+                                print(x,y,'self', selfRelation)
                             if x in precy:
                                 #print('other: %s > %s' % (x,y))
                                 otherRelation = self.valuationdomain['max']
@@ -138,12 +191,10 @@ class BigDigraph(object):
                                 #print('other: %s < %s' % (x,y))
                                 otherRelation = self.valuationdomain['min']
                             if Debug:
-                                print(otherRelation)
-                            corr = min( max(-self.relation(x,y),otherRelation), max(self.relation(x,y),-otherRelation) )
+                                print(x,y,'other', otherRelation)
+                            corr = min( max(-selfRelation,otherRelation), max(selfRelation,-otherRelation) )
                             correlation += corr
-                            determination += min( abs(self.relation(x,y)),abs(otherRelation) )
-                            if Debug:
-                                print(x,y,selfRelation,otherRelation,correlation,determination)
+                            determination += min( abs(selfRelation),abs(otherRelation) )
                 precy += cky[1]       
             precx += ckx[1]
 
@@ -155,7 +206,7 @@ class BigDigraph(object):
         else:
             return {'correlation': Decimal('0.0'),\
                     'determination': determination}
-
+        
     def showDecomposition(self,direction='decreasing'):
         
         print('*--- Relation decomposition in %s order---*' % (direction) )
@@ -359,8 +410,10 @@ class BigOutrankingDigraph(BigDigraph):
         """
         Default presentation method for big outrankingDigraphs instances.
         """
+        from sys import getsizeof
         print('*----- show short --------------*')
         print('Instance name     :', self.name)
+        print('Size (in Bytes)   :', getsizeof(self))
         print('# Actions         :', self.order)
         print('# Criteria        :', self.dimension)
         print('Sorting by        : %d-Tiling ' % self.sortingParameters['limitingQuantiles'])
@@ -523,22 +576,34 @@ class BigOutrankingDigraph(BigDigraph):
 
 #----------test classes and methods ----------------
 if __name__ == "__main__":
+##    d = dict(a=1, b=2, c=3, d=[4,5,6,7], e='a string of chars')
+##    print(total_size(d, verbose=True))
+
     from time import time
-    nbrCores = 7
-    t1000 = RandomCBPerformanceTableau(numberOfActions=1000,Threading=True,
+    MP = True
+    t0 = time()
+    t1000 = RandomCBPerformanceTableau(numberOfActions=750,Threading=MP,
                                       seed=100)
+    print(time()-t0)
+    print(total_size(t1000.evaluation))
 ##    bg100 = BigOutrankingDigraph(t100,quantiles=5,quantilesOrderingStrategy='average',
 ##                                    LowerClosed=True,
 ##                                    Threading=False,Debug=False)
 ##    print(bg100)
-    bg1000 = BigOutrankingDigraph(t100,quantiles=100,quantilesOrderingStrategy='average',
-                                    LowerClosed=True,
-                                    Threading=True,Debug=False)
+    bg1000 = BigOutrankingDigraph(t1000,quantiles=10,quantilesOrderingStrategy='average',
+                                    LowerClosed=False,
+                                    Threading=MP,Debug=False)
     print(bg1000)
+    print(total_size(bg1000.components))
+    print(bg1000.computeDecompositionSummaryStatistics())
     #bg100.recodeValuation(-1,1)
-    g1000 = BipolarOutrankingDigraph(t1000,Normalized=True,Threading=True)
+    t0 = time()
+    g1000 = BipolarOutrankingDigraph(t1000,Normalized=True,Threading=MP)
+    print(time()-t0)
+    print(total_size(g1000.relation))
+    t0 = time()
     print(bg1000.computeOrdinalCorrelation(g1000))
-
+    print(time()-t0)
 ##    print(g.computeDecompositionSummaryStatistics())
 ##    g.showActions()
 ##    g.showCriteria()
