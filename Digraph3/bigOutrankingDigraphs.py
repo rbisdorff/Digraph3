@@ -647,34 +647,50 @@ if __name__ == "__main__":
     from time import time
     MP = True
     t0 = time()
-    tp = RandomCBPerformanceTableau(numberOfActions=1000,Threading=MP,
+    tp = RandomCBPerformanceTableau(numberOfActions=500,Threading=MP,
                                       seed=100)
     print(time()-t0)
     print(total_size(tp.evaluation))
-    bg1 = BigOutrankingDigraph(tp,quantiles=100,quantilesOrderingStrategy='average',
+    bg1 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
                                     LowerClosed=True,
                                     Threading=False,Debug=False)
     print(bg1)
     print(total_size(bg1))
     print(bg1.computeDecompositionSummaryStatistics())
-    bg1.showDecomposition()
-    bg2 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
-                                    LowerClosed=False,
-                                    Threading=MP,Debug=False)
-    print(bg2)
-    print(total_size(bg2))
-    print(bg2.computeDecompositionSummaryStatistics())
-    bg2.showDecomposition()
+    #bg1.showDecomposition()
+##    bg2 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
+##                                    LowerClosed=False,
+##                                    Threading=MP,Debug=False)
+##    print(bg2)
+##    print(total_size(bg2))
+##    print(bg2.computeDecompositionSummaryStatistics())
+##    bg2.showDecomposition()
     t0 = time()
     g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=MP)
     print(time()-t0)
     print(total_size(g))
+##    t0 = time()
+##    print(bg1.computeOrdinalCorrelation(g,Debug=False))
+##    print(time()-t0)
+##    preordering1 = bg1.computeRankingPreordering()
+##    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering1)))
+##    preordering2 = bg2.computeRankingPreordering()
+##    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering2)))
     t0 = time()
-    print(bg1.computeOrdinalCorrelation(g,Debug=False))
-    print(time()-t0)
-    preordering1 = bg1.computeRankingPreordering()
-    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering1)))
-    preordering2 = bg2.computeRankingPreordering()
-    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering2)))
+    test = Decimal('0')
+    for x in bg1.actions:
+        for y in bg1.actions:
+            test+=bg1.relation(x,y)
+    print('bg time:',time()-t0)
+    
+    t0 = time()
+    test = Decimal('0')
+    for x in g.actions:
+        for y in g.actions:
+            test+=g.relation[x][y]
+    print('g time:',time()-t0)
+    
+
+
     
 
