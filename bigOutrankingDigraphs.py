@@ -328,6 +328,7 @@ class BigOutrankingDigraph(BigDigraph):
     def __init__(self,argPerfTab=None,quantiles=None,
                  quantilesOrderingStrategy='average',
                  LowerClosed=True,
+                 WithKohlerRanking=True,
                  Threading=True,nbrOfCPUs=None,
                  Comments=False,
                  Debug=False):
@@ -450,9 +451,10 @@ class BigOutrankingDigraph(BigDigraph):
         if Comments:
             print('decomposing time: %.4f' % self.runTimes['decomposing']  )
         # Kohler ranking-by-choosing all components
-        t0 = time()
-        self.boostedKohlerOrdering = self.computeBoostedKohlerOrdering()
-        self.runTimes['ordering'] = time() - t0
+        if WithKohlerRanking:
+            t0 = time()
+            self.boostedKohlerRanking = self.computeBoostedKohlerRanking()
+            self.runTimes['ordering'] = time() - t0
         if Comments:
             print('ordering time: %.4f' % self.runTimes['ordering']  )
         
@@ -482,7 +484,10 @@ class BigOutrankingDigraph(BigDigraph):
         print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
         print('Preordering       : %.5f' % self.runTimes['preordering'])
         print('Decomposing       : %.5f' % self.runTimes['decomposing'])
-        print('Ordering          : %.5f' % self.runTimes['ordering'])
+        try:
+            print('Ordering          : %.5f' % self.runTimes['ordering'])
+        except:
+            pass
         return 'Default presentation of BigOutrankingDigraphs'
 
     def showShort(self):
@@ -609,7 +614,7 @@ class BigOutrankingDigraph(BigDigraph):
                 print('Relation table of component %s' % compKey)
                 self.components[compKey]['subGraph'].showRelationTable()
 
-    def computeBoostedKohlerOrdering(self):
+    def computeBoostedKohlerRanking(self):
         """
         Renders an ordred list of decision actions in decreasing preference direction.
         """
@@ -617,47 +622,59 @@ class BigOutrankingDigraph(BigDigraph):
         compKeys = list(self.components.keys())
         compKeys.sort()
         nc = self.nbrComponents
-        ordering = []
+        ranking = []
         for i in range(nc) :
             cki = compKeys[i]
             comp = self.components[cki]
             pg = comp['subGraph']
             pko = KohlerOrder(pg)
-            ordering += pko.computeOrder()
-        return ordering    
+            ranking += pko.computeOrder()
+        return ranking    
+
+    def computeRankingPreordering(self):
+        """
+        Renders a preording (a list of list) of decision actions in decreasing preference direction.
+        """
+        ranking = self.computeBoostedKohlerRanking()
+        preordering = []
+        for x in ranking:
+            preordering.append([x])
+        return preordering
 
 #----------test classes and methods ----------------
 if __name__ == "__main__":
     
     from time import time
-    MP = False
+    MP = True
     t0 = time()
-    tp = RandomCBPerformanceTableau(numberOfActions=100,Threading=MP,
+    tp = RandomCBPerformanceTableau(numberOfActions=1000,Threading=MP,
                                       seed=100)
     print(time()-t0)
     print(total_size(tp.evaluation))
-    bg1 = BigOutrankingDigraph(tp,quantiles=10,quantilesOrderingStrategy='average',
+    bg1 = BigOutrankingDigraph(tp,quantiles=100,quantilesOrderingStrategy='average',
                                     LowerClosed=True,
                                     Threading=False,Debug=False)
     print(bg1)
     print(total_size(bg1))
     print(bg1.computeDecompositionSummaryStatistics())
     bg1.showDecomposition()
-    bg2 = BigOutrankingDigraph(tp,quantiles=5,quantilesOrderingStrategy='average',
+    bg2 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
                                     LowerClosed=False,
                                     Threading=MP,Debug=False)
     print(bg2)
     print(total_size(bg2))
     print(bg2.computeDecompositionSummaryStatistics())
     bg2.showDecomposition()
-    bg1.recodeValuation(-1,1)
     t0 = time()
-    g = BipolarOutrankingDigraph(tp,Normalized=False,Threading=MP)
+    g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=MP)
     print(time()-t0)
     print(total_size(g))
     t0 = time()
-    g.recodeValuation(-1,1)
     print(bg1.computeOrdinalCorrelation(g,Debug=False))
     print(time()-t0)
+    preordering1 = bg1.computeRankingPreordering()
+    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering1)))
+    preordering2 = bg2.computeRankingPreordering()
+    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering2)))
     
 
