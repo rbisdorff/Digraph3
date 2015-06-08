@@ -93,6 +93,26 @@ class BigDigraph(object):
         """
         Dynamic construction of the global digraph relation.
         """
+        Min = self.valuationdomain['min']
+        Med = self.valuationdomain['med']
+        Max = self.valuationdomain['max']
+        
+        if x == y:
+            return Med
+        cx = self.actions[x]['component']
+        cy = self.actions[y]['component']
+        #print(x,cx,y,cy)
+        if cx == cy:
+            return self.components[cx]['subGraph'].relation[x][y]        
+        elif self.componentRelation[cx][cy] < Med:
+            return Min
+        elif self.componentRelation[cx][cy] > Med:
+            return Max 
+
+    def relationOld(self,x,y,Debug=False):
+        """
+        Dynamic construction of the global digraph relation.
+        """
         if x == y:
             return self.valuationdomain['med']
         
@@ -156,57 +176,54 @@ class BigDigraph(object):
              is by convention 0.0 at determination level 0.0 .
 
         """
+
+        if self.valuationdomain['min'] != Decimal('-1.0'):
+                print('Error: the BigDigraph instance must be normalized digraph !!')
+        
         
         if issubclass(other.__class__,(Digraph)):
             if Debug:
-                print('inputting a Digraph instance')
+                print('other is a Digraph instance')
             if other.valuationdomain['min'] != Decimal('-1.0'):
-                print('Error: the arguments must be normalized digraph !!')
-            else:
-                otherComponents = {'c1':{'rank':1,'subGraph':other}}
-        elif isinstance(other,(BigOutrankingDigraph)):
+                print('Error: the other digraph must be normalized !!')
+                return
+        elif isinstance(other,(BigDigraph)):
             if Debug:
-                print('inputting a BigDigraph instance')
-            otherComponents = other.components
-
+                print('other is a BigDigraph instance')
+        
         selfActionsList = [(ck,
                             list(self.components[ck]['subGraph'].actions.keys()))\
                            for ck in self.components]
-        otherActionsList = [(ck,
-                            list(otherComponents[ck]['subGraph'].actions.keys()))\
-                           for ck in otherComponents]
+        if issubclass(other.__class__,(Digraph)):
+            otherActionsList = [( 'c01', list(other.actions.keys()) )]
+        else:
+            otherActionsList = [(ck,
+                            list(other.components[ck]['subGraph'].actions.keys()))\
+                           for ck in other.components]
         if Debug:
             print(selfActionsList)
             print(otherActionsList)
         
         correlation = Decimal('0.0')
         determination = Decimal('0.0')
-        precx = []
+
         for ckx in selfActionsList:
-            precy = []
-            for cky in otherActionsList:
-                for x in ckx[1]:
+            for x in ckx[1]:
+                for cky in otherActionsList:
                     for y in cky[1]:
                         if x != y:
                             selfRelation = self.relation(x,y)
+                            try:
+                                otherRelation = other.relation[x][y]
+                            except:
+                                otherRelation = other.relation(x,y)
                             if Debug:
                                 print(x,y,'self', selfRelation)
-                            if x in precy:
-                                #print('other: %s > %s' % (x,y))
-                                otherRelation = self.valuationdomain['max']
-                            elif x in cky[1]:
-                                #print('other: %s S %s' % (x,y))
-                                otherRelation = otherComponents[cky[0]]['subGraph'].relation[x][y]     
-                            else:
-                                #print('other: %s < %s' % (x,y))
-                                otherRelation = self.valuationdomain['min']
                             if Debug:
                                 print(x,y,'other', otherRelation)
                             corr = min( max(-selfRelation,otherRelation), max(selfRelation,-otherRelation) )
                             correlation += corr
                             determination += min( abs(selfRelation),abs(otherRelation) )
-                precy += cky[1]       
-            precx += ckx[1]
 
         if determination > Decimal('0.0'):
             correlation /= determination
@@ -319,16 +336,19 @@ class BigOutrankingDigraph(BigDigraph):
         from collections import OrderedDict
         from time import time
         from os import cpu_count
+        from copy import deepcopy
         
         ttot = time()
         # setting name
         perfTab = argPerfTab
         self.name = perfTab.name + '_mp'
         # setting quantiles sorting parameters
-        na = len(perfTab.actions)
+        self.actions = deepcopy(perfTab.actions)
+        na = len(self.actions)
         self.order = na
-        self.criteria = perfTab.criteria.copy()
+        self.criteria = deepcopy(perfTab.criteria)
         self.dimension = len(perfTab.criteria)
+        self.evaluation = deepcopy(perfTab.evaluation)
         if quantiles == None:
             quantiles = na//10
         self.sortingParameters = {}
@@ -386,23 +406,46 @@ class BigOutrankingDigraph(BigDigraph):
             print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )
         # setting components
         t0 = time()
-        self.components = OrderedDict()
+        components = OrderedDict()
         nc = len(decomposition)
         self.nbrComponents = nc
         nd = len(str(nc))
         for i in range(1,nc+1):
             comp = decomposition[i-1]
             compKey = ('c%%0%dd' % (nd)) % (i)
-            self.components[compKey] = {'rank':i}
+            components[compKey] = {'rank':i}
             pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
-            self.components[compKey]['lowQtileLimit'] = comp[0][1]
-            self.components[compKey]['highQtileLimit'] = comp[0][0]
+            components[compKey]['lowQtileLimit'] = comp[0][1]
+            components[compKey]['highQtileLimit'] = comp[0][0]
             pg = BipolarOutrankingDigraph(pt,Normalized=True)
             pg.__dict__.pop('criteria')
-            self.components[compKey]['subGraph'] = pg
+            pg.__dict__.pop('evaluation')
+            components[compKey]['subGraph'] = pg
+            for x in comp[1]:
+                self.actions[x]['component'] = compKey
+        self.components = components
 
+##        for ck in self.components:
+##            for x in self.components[ck]['subGraph'].actions:
+##                self.actions[x]['component'] = ck
+                
         self.valuationdomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
 
+        compList = list(self.components.keys())
+        compRel = {}
+        for i in range(nc):
+            cx = compList[i]
+            compRel[cx] = {} 
+            for j in range(nc):
+                cy = compList[j]
+                if self.components[cx]['rank'] < self.components[cy]['rank']:
+                    compRel[cx][cy] = self.valuationdomain['max']
+                elif self.components[cx]['rank'] > self.components[cy]['rank']:
+                    compRel[cx][cy] = self.valuationdomain['min']
+                else:
+                    compRel[cx][cy] = self.valuationdomain['med']
+        self.componentRelation = compRel
+        
         self.runTimes['decomposing'] = time() - t0
         if Comments:
             print('decomposing time: %.4f' % self.runTimes['decomposing']  )
@@ -499,34 +542,30 @@ class BigOutrankingDigraph(BigDigraph):
         """
         print Criteria with thresholds and weights.
         """
-        for ck in self.components:
-            comp = self.components[ck]
-            pg = comp['subGraph']
-            break
         print('*----  criteria -----*')
         sumWeights = Decimal('0.0')
-        for g in pg.criteria:
-            sumWeights += pg.criteria[g]['weight']
-        criteriaList = [c for c in pg.criteria]
+        for g in self.criteria:
+            sumWeights += self.criteria[g]['weight']
+        criteriaList = [c for c in self.criteria]
         criteriaList.sort()
         for c in criteriaList:
             try:
-                criterionName = pg.criteria[c]['name']
+                criterionName = self.criteria[c]['name']
             except:
                 criterionName = ''
             print(c, repr(criterionName))
-            print('  Scale =', pg.criteria[c]['scale'])
+            print('  Scale =', self.criteria[c]['scale'])
             if IntegerWeights:
-                print('  Weight = %d ' % (pg.criteria[c]['weight']))
+                print('  Weight = %d ' % (self.criteria[c]['weight']))
             else:
-                weightg = pg.criteria[c]['weight']/sumWeights
+                weightg = self.criteria[c]['weight']/sumWeights
                 print('  Weight = %.3f ' % (weightg))
             try:
                 for th in pg.criteria[c]['thresholds']:
                     if Debug:
-                        print('-->>>', th,pg.criteria[c]['thresholds'][th][0],pg.criteria[c]['thresholds'][th][1])
-                    print('  Threshold %s : %.2f + %.2fx' % (th,pg.criteria[c]['thresholds'][th][0],
-                                                             pg.criteria[c]['thresholds'][th][1]), end=' ')
+                        print('-->>>', th,self.criteria[c]['thresholds'][th][0],self.criteria[c]['thresholds'][th][1])
+                    print('  Threshold %s : %.2f + %.2fx' % (th,self.criteria[c]['thresholds'][th][0],
+                                                             self.criteria[c]['thresholds'][th][1]), end=' ')
             except:
                 pass
             print()
@@ -589,40 +628,36 @@ class BigOutrankingDigraph(BigDigraph):
 
 #----------test classes and methods ----------------
 if __name__ == "__main__":
-##    d = dict(a=1, b=2, c=3, d=[4,5,6,7], e='a string of chars')
-##    print(total_size(d, verbose=True))
-
+    
     from time import time
     MP = False
     t0 = time()
-    t1000 = RandomCBPerformanceTableau(numberOfActions=100,Threading=MP,
+    tp = RandomCBPerformanceTableau(numberOfActions=100,Threading=MP,
                                       seed=100)
     print(time()-t0)
-    print(total_size(t1000.evaluation))
-##    bg100 = BigOutrankingDigraph(t100,quantiles=5,quantilesOrderingStrategy='average',
-##                                    LowerClosed=True,
-##                                    Threading=False,Debug=False)
-##    print(bg100)
-    bg1000 = BigOutrankingDigraph(t1000,quantiles=10,quantilesOrderingStrategy='average',
+    print(total_size(tp.evaluation))
+    bg1 = BigOutrankingDigraph(tp,quantiles=10,quantilesOrderingStrategy='average',
+                                    LowerClosed=True,
+                                    Threading=False,Debug=False)
+    print(bg1)
+    print(total_size(bg1))
+    print(bg1.computeDecompositionSummaryStatistics())
+    bg1.showDecomposition()
+    bg2 = BigOutrankingDigraph(tp,quantiles=5,quantilesOrderingStrategy='average',
                                     LowerClosed=False,
                                     Threading=MP,Debug=False)
-    print(bg1000)
-    print(total_size(bg1000))
-    print(bg1000.computeDecompositionSummaryStatistics())
-    #bg100.recodeValuation(-1,1)
+    print(bg2)
+    print(total_size(bg2))
+    print(bg2.computeDecompositionSummaryStatistics())
+    bg2.showDecomposition()
+    bg1.recodeValuation(-1,1)
     t0 = time()
-    g1000 = BipolarOutrankingDigraph(t1000,Normalized=True,Threading=MP)
+    g = BipolarOutrankingDigraph(tp,Normalized=False,Threading=MP)
     print(time()-t0)
-    print(total_size(g1000))
+    print(total_size(g))
     t0 = time()
-    print(bg1000.computeOrdinalCorrelation(g1000))
+    g.recodeValuation(-1,1)
+    print(bg1.computeOrdinalCorrelation(g,Debug=False))
     print(time()-t0)
-##    print(g.computeDecompositionSummaryStatistics())
-##    g.showActions()
-##    g.showCriteria()
-##    g.showRelationTable(['c14','c01'])
-##    g.recodeValuation()
-##    g.showRelationTable(['c14'])
-##    print(g.computeBoostedKohlerOrdering())
     
 
