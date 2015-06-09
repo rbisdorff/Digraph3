@@ -2204,11 +2204,11 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             if self.criteria[c]['scaleType'] == 'cardinal':
                 self.criteria[c]['thresholds'] = {}
                 #vx = self.criteria[c]['performanceDifferences']
-                vx = performanceDifferences[c]
-                nv = len(vx)
+                #vx = performanceDifferences[c]
+                nv = len(performanceDifferences[c])
                 if Debug:
                     print('=====>',c)
-                    print(vx)
+                    print(performanceDifferences[c])
                     print(nv)
                 threshold = {}
                 if nv > 2:
@@ -2220,9 +2220,9 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                             pass
                         else:
                             if quantile[x] == 0:
-                                threshold[x] = vx[0]
+                                threshold[x] = performanceDifferences[c][0]
                             elif quantile[x] == 100:
-                                threshold[x] = vx[nv-1]
+                                threshold[x] = performanceDifferences[c][nv-1]
                             else:
                                 kq = int(math.floor(float(quantile[x]*(nv-1))/100.0))
                                 r = ((nv-1)*quantile[x])% 100
@@ -2233,7 +2233,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                                 ##     kqplus = nv-1
                                 ## else:
                                 ##     kq_1 = kq - 1
-                                threshold[x] = vx[kq] + (Decimal(str(r))/Decimal('100.0')) * (vx[kq+1]-vx[kq])
+                                threshold[x] = performanceDifferences[c][kq] + (Decimal(str(r))/Decimal('100.0')) * (performanceDifferences[c][kq+1]-performanceDifferences[c][kq])
                                 if Debug:
                                     print(threshold[x])
 
