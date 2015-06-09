@@ -329,6 +329,7 @@ class BigOutrankingDigraph(BigDigraph):
                  quantilesOrderingStrategy='average',
                  LowerClosed=True,
                  WithKohlerRanking=True,
+                 minimalComponentSize=None,
                  Threading=True,nbrOfCPUs=None,
                  Comments=False,
                  Debug=False):
@@ -407,25 +408,56 @@ class BigOutrankingDigraph(BigDigraph):
             print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )
         # setting components
         t0 = time()
-        components = OrderedDict()
-        nc = len(decomposition)
-        self.nbrComponents = nc
-        nd = len(str(nc))
-        for i in range(1,nc+1):
-            comp = decomposition[i-1]
-            compKey = ('c%%0%dd' % (nd)) % (i)
-            components[compKey] = {'rank':i}
-            pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
-            components[compKey]['lowQtileLimit'] = comp[0][1]
-            components[compKey]['highQtileLimit'] = comp[0][0]
-            pg = BipolarOutrankingDigraph(pt,Normalized=True)
-            pg.__dict__.pop('criteria')
-            pg.__dict__.pop('evaluation')
-            components[compKey]['subGraph'] = pg
-            for x in comp[1]:
-                self.actions[x]['component'] = compKey
-        self.components = components
+        if minimalComponentSize == None:
+            components = OrderedDict()
+            nc = len(decomposition)
+            self.nbrComponents = nc
+            nd = len(str(nc))
+            for i in range(1,nc+1):
+                comp = decomposition[i-1]
+                compKey = ('c%%0%dd' % (nd)) % (i)
+                components[compKey] = {'rank':i}
+                pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
+                components[compKey]['lowQtileLimit'] = comp[0][1]
+                components[compKey]['highQtileLimit'] = comp[0][0]
+                pg = BipolarOutrankingDigraph(pt,Normalized=True)
+                pg.__dict__.pop('criteria')
+                pg.__dict__.pop('evaluation')
+                components[compKey]['subGraph'] = pg
+                for x in comp[1]:
+                    self.actions[x]['component'] = compKey
+            self.components = components
+        else:
+            components = OrderedDict()
+            ndc = len(decomposition)
+            nd = len(str(ndc))
+            compNbr = 1
+            compContent = []
+            for i in range(1,ndc+1):
+                currContLength = len(compContent)
+                comp = decomposition[i-1]
+                if currContLength == 0:
+                    lowQtileLimit = comp[0][1]
+                compContent += comp[1]
 
+                if len(compContent) >= minimalComponentSize or i == ndc:
+                    compKey = ('c%%0%dd' % (nd)) % (compNbr)
+                    components[compKey] = {'rank':compNbr}
+                    pt = PartialPerformanceTableau(perfTab,actionsSubset=compContent)
+                    components[compKey]['lowQtileLimit'] = lowQtileLimit
+                    components[compKey]['highQtileLimit'] = comp[0][0]
+                    pg = BipolarOutrankingDigraph(pt,Normalized=True)
+                    pg.__dict__.pop('criteria')
+                    pg.__dict__.pop('evaluation')
+                    components[compKey]['subGraph'] = pg
+                    for x in compContent:
+                        self.actions[x]['component'] = compKey
+                    compContent = []
+                    compNbr += 1
+            self.components = components
+            nc = len(components)
+            self.nbrComponents = nc
+            
 ##        for ck in self.components:
 ##            for x in self.components[ck]['subGraph'].actions:
 ##                self.actions[x]['component'] = ck
@@ -645,19 +677,21 @@ class BigOutrankingDigraph(BigDigraph):
 if __name__ == "__main__":
     
     from time import time
-    MP = True
+    MP = False
     t0 = time()
     tp = RandomCBPerformanceTableau(numberOfActions=500,Threading=MP,
                                       seed=100)
     print(time()-t0)
     print(total_size(tp.evaluation))
     bg1 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
-                                    LowerClosed=True,
+                                LowerClosed=True,
+                               minimalComponentSize=1,
                                     Threading=False,Debug=False)
-    print(bg1)
-    print(total_size(bg1))
     print(bg1.computeDecompositionSummaryStatistics())
-    #bg1.showDecomposition()
+    bg1.showDecomposition()
+    print(bg1)
+    #print(total_size(bg1))
+    
 ##    bg2 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
 ##                                    LowerClosed=False,
 ##                                    Threading=MP,Debug=False)
@@ -669,27 +703,27 @@ if __name__ == "__main__":
     g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=MP)
     print(time()-t0)
     print(total_size(g))
-##    t0 = time()
-##    print(bg1.computeOrdinalCorrelation(g,Debug=False))
-##    print(time()-t0)
+    t0 = time()
+    print(bg1.computeOrdinalCorrelation(g,Debug=False))
+    print(time()-t0)
 ##    preordering1 = bg1.computeRankingPreordering()
 ##    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering1)))
 ##    preordering2 = bg2.computeRankingPreordering()
 ##    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering2)))
-    t0 = time()
-    test = Decimal('0')
-    for x in bg1.actions:
-        for y in bg1.actions:
-            test+=bg1.relation(x,y)
-    print('bg time:',time()-t0)
-    
-    t0 = time()
-    test = Decimal('0')
-    for x in g.actions:
-        for y in g.actions:
-            test+=g.relation[x][y]
-    print('g time:',time()-t0)
-    
+##    t0 = time()
+##    test = Decimal('0')
+##    for x in bg1.actions:
+##        for y in bg1.actions:
+##            test+=bg1.relation(x,y)
+##    print('bg time:',time()-t0)
+##    
+##    t0 = time()
+##    test = Decimal('0')
+##    for x in g.actions:
+##        for y in g.actions:
+##            test+=g.relation[x][y]
+##    print('g time:',time()-t0)
+##    
 
 
     
