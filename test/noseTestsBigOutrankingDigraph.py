@@ -36,7 +36,7 @@ def testbigOutrankingDigraph():
     preordering1 = bg1.computeRankingPreordering()
     print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering1)))
 
-def testminimalCompnentSize():
+def testMinimalComponentSize():
     print('==>> Testing bigOutrankingDigraph with minimal Component Size instantiation')
     MP = True
     t0 = time()
@@ -51,4 +51,15 @@ def testminimalCompnentSize():
     print(bg1.computeDecompositionSummaryStatistics())
     bg1.showDecomposition()
     print(bg1)
+    bg2 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
+                                LowerClosed=True,
+                               minimalComponentSize=1,
+                                    Threading=MP,Debug=False)
+    print(bg2.computeDecompositionSummaryStatistics())
+    bg2.showDecomposition()
+    print(bg2)
+    print(bg1.computeOrdinalCorrelation(bg2,Debug=False))
+    bg1.recodeValuation(-10,10,Debug=True)
+    print(bg2.computeOrdinalCorrelation(bg1,Debug=False))
+    
 
