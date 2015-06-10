@@ -33,8 +33,14 @@ def testbigOutrankingDigraph():
     t0 = time()
     print(bg1.computeOrdinalCorrelation(g,Debug=False))
     print(time()-t0)
-    preordering1 = bg1.computeRankingPreordering()
+    ko = bg1.computeBoostedKohlerRanking()
+    preordering1 = bg1.ranking2Preorder(ko)
+    print('Boosted Kohler ranking correlation with complete outranking relation')
     print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering1)))
+    rp = bg1.computeBoostedRankedPairsRanking()
+    preordering2 = bg1.ranking2Preorder(rp)
+    print('Boosted Ranked Pairs ranking correlation with complete outranking relation')
+    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering2)))
 
 def testMinimalComponentSize():
     print('==>> Testing bigOutrankingDigraph with minimal Component Size instantiation')
