@@ -22,7 +22,7 @@ def testbigOutrankingDigraph():
     bg1 = BigOutrankingDigraph(tp,quantiles=10,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
                                minimalComponentSize=None,
-                                    Threading=False,Debug=False)
+                                    Threading=MP,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
     bg1.showDecomposition()
     print(bg1)
@@ -45,9 +45,9 @@ def testminimalCompnentSize():
     print(time()-t0)
     print(total_size(tp.evaluation))
     bg1 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
-                                LowerClosed=True,
+                                LowerClosed=False,
                                minimalComponentSize=5,
-                                    Threading=False,Debug=False)
+                                    Threading=MP,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
     bg1.showDecomposition()
     print(bg1)
