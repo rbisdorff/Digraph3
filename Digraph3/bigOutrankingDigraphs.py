@@ -178,18 +178,24 @@ class BigDigraph(object):
         """
 
         if self.valuationdomain['min'] != Decimal('-1.0'):
-                print('Error: the BigDigraph instance must be normalized digraph !!')
-        
+                print('Error: the BigDigraph instance must be normalized !!')
+                print(self.valuationdomain)
+                return
         
         if issubclass(other.__class__,(Digraph)):
             if Debug:
                 print('other is a Digraph instance')
             if other.valuationdomain['min'] != Decimal('-1.0'):
                 print('Error: the other digraph must be normalized !!')
+                print(other.valuationdomain)
                 return
         elif isinstance(other,(BigDigraph)):
             if Debug:
                 print('other is a BigDigraph instance')
+            if other.valuationdomain['min'] != Decimal('-1.0'):
+                print('Error: the other bigDigraph instance must be normalized !!')
+                print(other.valuationdomain)
+                return
         
         selfActionsList = [(ck,
                             list(self.components[ck]['subGraph'].actions.keys()))\
@@ -289,24 +295,55 @@ class BigDigraph(object):
                    'max': max(compLengths)}
         return summary
 
-    def recodeValuation(self,newMin=-1,newMax=1):
+    def recodeValuation(self,newMin=-1,newMax=1,Debug=False):
         """
-        Specialized for recoding the valuation of all the partial digraphs.
+        Specialized for recoding the valuation of all the partial digraphs and the component relation.
         By default the valuation domain is normalized ([-1.0;1.0])
         """
+        # saving old and new valuation domain
+        oldMax = self.valuationdomain['max']
+        oldMin = self.valuationdomain['min']
+        oldMed = self.valuationdomain['med']
+        oldAmplitude = oldMax - oldMin
+        if Debug:
+            print(oldMin, oldMed, oldMax, oldAmplitude)
+        newMin = Decimal(str(newMin))
+        newMax = Decimal(str(newMax))
+        newMed = Decimal('%.3f' % ((newMax + newMin)/Decimal('2.0')))
+        newAmplitude = newMax - newMin
+        if Debug:
+            print(newMin, newMed, newMax, newAmplitude)
+        # loop over all components
         nc = self.nbrComponents
-        print('Recoding the valuation of %d subgraphs' % nc)
+        print('Recoding the valuation of a BigDigraph instance')
         compKeys = list(self.components.keys())
-        compKeys.sort()
-        for i in range(nc) :
+        oldRelation = self.componentRelation
+        newRelation = {}
+        for i in range(nc): 
             cki = compKeys[i]
-            comp = self.components[cki]
-            pg = comp['subGraph']
-            pg.recodeValuation(newMin=newMin,newMax=newMax)
+            self.components[cki]['subGraph'].recodeValuation(newMin=newMin,newMax=newMax)
+            newRelation[cki] = {}
+            for j in range(nc):
+                ckj = compKeys[j]
+                if oldRelation[cki][ckj] == oldMax:
+                    newRelation[cki][ckj] = newMax
+                elif oldRelation[cki][ckj] == oldMin:
+                    newRelation[cki][ckj] = newMin
+                elif oldRelation[cki][ckj] == oldMed:
+                    newRelation[cki][ckj] = newMed
+                else:
+                    newRelation[cki][cki] = newMin + \
+                            ((oldRelation[cki][ckj] - oldMin)/oldAmplitude)*newAmplitude
+                    if Debug:
+                        print(cki,ckj,oldRelation[cki][ckj],newRelation[cki][ckj])
+        # update valuation domain                       
         Min = Decimal(str(newMin))
         Max = Decimal(str(newMax))
         Med = (Min+Max)/Decimal('2')
         self.valuationdomain = { 'min':Min, 'max':Max, 'med':Med }
+        # update componentRelation
+        self.componentRelation = newRelation
+
 
 class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
     """
@@ -682,32 +719,35 @@ if __name__ == "__main__":
     from time import time
     MP = False
     t0 = time()
-    tp = RandomCBPerformanceTableau(numberOfActions=500,Threading=MP,
+    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,
                                       seed=100)
     print(time()-t0)
     print(total_size(tp.evaluation))
     bg1 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
-                               minimalComponentSize=1,
+                               minimalComponentSize=5,
                                     Threading=False,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
     bg1.showDecomposition()
     print(bg1)
+    bg1.recodeValuation(-10,10,Debug=True)
     #print(total_size(bg1))
     
-##    bg2 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
-##                                    LowerClosed=False,
-##                                    Threading=MP,Debug=False)
-##    print(bg2)
-##    print(total_size(bg2))
-##    print(bg2.computeDecompositionSummaryStatistics())
-##    bg2.showDecomposition()
+    bg2 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
+                                    LowerClosed=False,
+                                    Threading=MP,Debug=False)
+    print(bg2)
+    print(total_size(bg2))
+    print(bg2.computeDecompositionSummaryStatistics())
+    bg2.showDecomposition()
     t0 = time()
     g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=MP)
     print(time()-t0)
     print(total_size(g))
     t0 = time()
     print(bg1.computeOrdinalCorrelation(g,Debug=False))
+    print(bg1.computeOrdinalCorrelation(bg2,Debug=False))
+    print(bg2.computeOrdinalCorrelation(bg1,Debug=False))
     print(time()-t0)
 ##    preordering1 = bg1.computeRankingPreordering()
 ##    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering1)))
