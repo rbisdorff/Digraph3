@@ -38,6 +38,7 @@ test/noseTestsWeakOrders.py
 test/noseTestsRandomNumbers.py
 test/noseTestsRandomDigraph.py
 test/noseTestsRandomPerfTabs.py
+test/noseTestsBigOutrankingDigraph.py
 test/testAVprofile.py
 test/testapprovalvotingprofile.py
 test/testdecimal.py
