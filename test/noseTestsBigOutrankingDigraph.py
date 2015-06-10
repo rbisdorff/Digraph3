@@ -13,7 +13,7 @@ from time import time
 
 def testbigOutrankingDigraph():
     print('==>> Testing bigOutrankingDigraph instantiation')
-    MP = False
+    MP = True
     t0 = time()
     tp = RandomCBPerformanceTableau(numberOfActions=100,Threading=MP,
                                       seed=100)
@@ -21,7 +21,7 @@ def testbigOutrankingDigraph():
     print(total_size(tp.evaluation))
     bg1 = BigOutrankingDigraph(tp,quantiles=10,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
-                               minimalComponentSize=1,
+                               minimalComponentSize=None,
                                     Threading=False,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
     bg1.showDecomposition()
@@ -35,4 +35,20 @@ def testbigOutrankingDigraph():
     print(time()-t0)
     preordering1 = bg1.computeRankingPreordering()
     print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering1)))
+
+def testminimalCompnentSize():
+    print('==>> Testing bigOutrankingDigraph with minimal Component Size instantiation')
+    MP = True
+    t0 = time()
+    tp = RandomCBPerformanceTableau(numberOfActions=100,Threading=MP,
+                                      seed=100)
+    print(time()-t0)
+    print(total_size(tp.evaluation))
+    bg1 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
+                                LowerClosed=True,
+                               minimalComponentSize=5,
+                                    Threading=False,Debug=False)
+    print(bg1.computeDecompositionSummaryStatistics())
+    bg1.showDecomposition()
+    print(bg1)
 

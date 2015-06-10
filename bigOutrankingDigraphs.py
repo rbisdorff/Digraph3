@@ -308,7 +308,7 @@ class BigDigraph(object):
         Med = (Min+Max)/Decimal('2')
         self.valuationdomain = { 'min':Min, 'max':Max, 'med':Med }
 
-class BigOutrankingDigraph(BigDigraph):
+class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
     """
     Multiprocessing implementation of the BipolarOutrankingDigraph class
     for large instances (order > 1000)
@@ -334,6 +334,7 @@ class BigOutrankingDigraph(BigDigraph):
                  Comments=False,
                  Debug=False):
         
+        from digraphs import Digraph
         from sortingDigraphs import QuantilesSortingDigraph
         from collections import OrderedDict
         from time import time
@@ -423,6 +424,7 @@ class BigOutrankingDigraph(BigDigraph):
                 pg = BipolarOutrankingDigraph(pt,Normalized=True)
                 pg.__dict__.pop('criteria')
                 pg.__dict__.pop('evaluation')
+                pg.__class__ = Digraph
                 components[compKey]['subGraph'] = pg
                 for x in comp[1]:
                     self.actions[x]['component'] = compKey
@@ -449,6 +451,7 @@ class BigOutrankingDigraph(BigDigraph):
                     pg = BipolarOutrankingDigraph(pt,Normalized=True)
                     pg.__dict__.pop('criteria')
                     pg.__dict__.pop('evaluation')
+                    pg.__class__ = Digraph
                     components[compKey]['subGraph'] = pg
                     for x in compContent:
                         self.actions[x]['component'] = compKey
