@@ -25,6 +25,7 @@ __version__ = "$Revision: 1.01 $"
 
 from perfTabs import *
 from decimal import Decimal
+from collections import OrderedDict
 
 #########################################
 # generators for random PerformanceTableaux
@@ -1203,35 +1204,29 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             
         # generate actions
         nd = len(str(numberOfActions))
-        actions = dict()
+        actions = OrderedDict()
         for i in range(numberOfActions):
             actionKey = ('a%%0%dd' % (nd)) % (i+1)
             actions[actionKey] = {'shortName':actionKey,
                     'name': 'random decision action',
                     'comment': 'Random3ObjectivesPerformanceTableau() generated.',
                     'generators': {}}
-        self.actions = actions
-        actionsList = [x for x in self.actions]
-        actionsList.sort()
-        
-        # generate criterialist
-        ng = len(str(numberOfCriteria))
-        criteriaList = [('g%%0%dd' % ng) % (i+1)\
-                        for i in range(numberOfCriteria)]
-        criteriaList.sort()
-        
+##        self.actions = actions
+##        actionsList = [x for x in self.actions]
+##        actionsList.sort()
+               
         # generate random weights
         if weightDistribution == 'equisignificant':
             weightMode = ('equisignificant',(1,1))
             weightScale =  weightMode[1]
-            weightsList = [weightScale[0] for i in range(len(criteriaList))]
+            weightsList = [weightScale[0] for i in range(numberOfCriteria)]
         elif weightDistribution == 'random':
             weightMode = ('random',(1,numberOfCriteria))
             if weightScale == None:
                 weightScale = (1,numberOfCriteria)
             weightsList = []
             sumWeights = Decimal('0.0')
-            for i in range(len(criteriaList)):               
+            for i in range(numberOfCriteria):               
                 weightsList.append(Decimal(str(random.randint(weightScale[0],
                                                               weightScale[1]))))
                 sumWeights += weightsList[i]
@@ -1242,34 +1237,36 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             weightScale = (1,1)
             weightsList = []
             sumWeights = Decimal('0.0')
-            for i in range(len(criteriaList)):
+            for i in range(numberOfCriteria):
                 weightsList.append(Decimal(str(weightScale[0])))
                 sumWeights += weightScale[0]
 
         # generate objectives dictionary
-        self.objectives = {
+        objectives = OrderedDict({
             'Eco': {'name':'Economical aspect',
                   'comment': 'Random3ObjectivesPerformanceTableau generated'},
             'Soc': {'name': 'Societal aspect',
                   'comment': 'Random3ObjectivesPerformanceTableau generated'},
             'Env': {'name':'Environmental aspect',
                   'comment': 'Random3ObjectivesPerformanceTableau generated'}
-            }
+            })
 
 
         # generate criteria dictionary with random thresholds
+        
+        ng = len(str(numberOfCriteria)) 
         if commonScale == None:
             if OrdinalScales:
                 commonScale = (0,10)
             else:
                 commonScale = (0.0,100.0)
-        objectivesList=[obj for obj in self.objectives]
-        criteria = {}
 
-        for gi in range(len(criteriaList)):
-            g = criteriaList[gi]
+        criteria = OrderedDict()
+        ng = len(str(numberOfCriteria))
+        for i in range(numberOfCriteria):
+            g = ('g%%0%dd' % ng) % (i+1)
             criteria[g] = {}
-            criterionObjective = random.choice(objectivesList)
+            criterionObjective = random.choice(list(objectives.keys()))
             criteria[g]['objective'] = criterionObjective
             criteria[g]['preferenceDirection'] = 'max'           
             criteria[g]['name'] = 'criterion of objective %s' % (criterionObjective)
@@ -1294,15 +1291,14 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 
             criteria[g]['scale'] = commonScale
             if integerWeights:
-                criteria[g]['weight'] = weightsList[gi]
+                criteria[g]['weight'] = weightsList[i]
             else:
-                criteria[g]['weight'] = weightsList[gi] / sumWeights
+                criteria[g]['weight'] = weightsList[i] / sumWeights
 
         # determine equisignificant objectives
         if weightMode[0] == 'equiobjectives':
             objectivesCardinality = {}
-            for gi in range(len(criteriaList)):
-                g = criteriaList[gi]
+            for g in criteria:
                 try:
                     objectivesCardinality[criteria[g]['objective']] += 1
                 except:
@@ -1314,8 +1310,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 weightsProduct *= objectivesCardinality[oi]
             if Debug:
                 print(weightsProduct)
-            for gi in range(len(criteriaList)):
-                g = criteriaList[gi]
+            for g in criteria:
                 criteria[g]['weight'] =\
                     weightsProduct // objectivesCardinality[criteria[g]['objective']]
                 if Debug:
@@ -1323,23 +1318,23 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 
         # allocate (criterion,action) to coalition supporting type
         objectiveSupportingType = [('good','+'),('fair','~'),('weak','-')]
-        for x in actionsList:
+        for x in actions:
             profile = {}
-            for obj in objectivesList:
+            for obj in objectives:
                 if Debug:
-                    print(objectivesList,obj)
+                    print(objectives,obj)
                 ost = random.choice(objectiveSupportingType)
-                self.actions[x][obj]=ost[0]
-                self.actions[x]['name'] =\
-                    self.actions[x]['name'] + ' '+ str(obj) + ost[1]
-                profile[obj] = self.actions[x][obj]
-            self.actions[x]['profile'] = profile
+                actions[x][obj]=ost[0]
+                actions[x]['name'] =\
+                    actions[x]['name'] + ' '+ str(obj) + ost[1]
+                profile[obj] = actions[x][obj]
+            actions[x]['profile'] = profile
             if Debug:
-                print(x,self.actions[x])
+                print(x,actions[x])
         # generate evaluations
+        
         evaluation = {}
-        for gi in range(len(criteriaList)):
-            g = criteriaList[gi]
+        for g in criteria:
             evaluation[g] = {}
             if commonMode == None:
                 randomMode = ['triangular','variable',0.50]               
@@ -1359,23 +1354,23 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             digits = valueDigits
             
             if str(randomMode[0]) == 'uniform':          
-                for a in actionsList:
+                for a in actions:
                     if randomMode[1] == 'variable':
                         aobj = criteria[g]['objective']
-                        if self.actions[a]['profile'][aobj] == 'weak':
+                        if actions[a]['profile'][aobj] == 'weak':
                             randomRange = (commonScale[0],
                                            commonScale[0]+0.7*(commonScale[1]-commonScale[0]))
-                        elif self.actions[a]['profile'][aobj] == 'fair':
+                        elif actions[a]['profile'][aobj] == 'fair':
                             randomRange = (commonScale[0]+0.3*(commonScale[1]-commonScale[0]),
                                            commonScale[0]+0.7*(commonScale[1]-commonScale[0]))
-                        elif self.actions[a]['profile'][aobj] == 'good':
+                        elif actions[a]['profile'][aobj] == 'good':
                             randomRange = (commonScale[0]+0.3*(commonScale[1]-commonScale[0]),
                                           commonScale[1])       
-                        self.actions[a]['comment'] += ': %s %s' % (randomMode[0],randomRange)
+                        actions[a]['comment'] += ': %s %s' % (randomMode[0],randomRange)
                     else:
                         randomRange = (commonScale[1],commonScale[2]) 
                     randeval = random.uniform(randomRange[0],randomRange[1])
-                    self.actions[a]['generators'][g] = (randomMode[0],randomRange)
+                    actions[a]['generators'][g] = (randomMode[0],randomRange)
                     if OrdinalScales:
                         if criteria[g]['preferenceDirection'] == 'max':
                             evaluation[g][a] = Decimal(str(round(randeval,0)))
@@ -1392,17 +1387,17 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                     m = commonScale[0]
                     M = commonScale[1]
                     if randomMode[1] == 'variable':
-                        if self.actions[a][criteria[g]['objective']] == 'good':
+                        if actions[a][criteria[g]['objective']] == 'good':
                             # mode = 75, stdev = 15
                             #xm = 75
                             alpha = 5.8661
                             beta = 2.62203
-                        elif self.actions[a][criteria[g]['objective']] == 'fair':
+                        elif actions[a][criteria[g]['objective']] == 'fair':
                             # nmode = 50, stdev = 15
                             #xm = 50
                             alpha = 5.05556
                             beta = 5.05556
-                        elif self.actions[a][criteria[g]['objective']] == 'weak':
+                        elif actions[a][criteria[g]['objective']] == 'weak':
                             # mode = 25, stdev = 15
                             # xm = 25
                             alpha = 2.62203
@@ -1434,21 +1429,21 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                             evaluation[g][a] = Decimal(str(-round(randeval,digits)))
     
             elif str(randomMode[0]) == 'triangular':
-                for a in actionsList:
+                for a in actions:
                     m = commonScale[0]
                     M = commonScale[1]
                     span = commonScale[1]-commonScale[0]
                     if randomMode[1] == 'variable':
-                        if self.actions[a][criteria[g]['objective']] == 'good':
+                        if actions[a][criteria[g]['objective']] == 'good':
                             xm = 0.7*span
-                        elif self.actions[a][criteria[g]['objective']] == 'fair':
+                        elif actions[a][criteria[g]['objective']] == 'fair':
                             xm = 0.5*span
-                        elif self.actions[a][criteria[g]['objective']] == 'weak':
+                        elif actions[a][criteria[g]['objective']] == 'weak':
                             xm = 0.3*span
                     else:
                         xm = randomMode[1]
                     r  = randomMode[2]
-                    self.actions[a]['generators'][g] = (randomMode[0],xm,r)
+                    actions[a]['generators'][g] = (randomMode[0],xm,r)
                     # setting a speudo random seed
                     if seed == None:
                         rdseed = random.random()
@@ -1475,27 +1470,25 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
 
         # install self object attributes
 
-        for obj in self.objectives:
+        for obj in objectives:
             objCriteria = [g for g in criteria if criteria[g]['objective'] == obj]
-            objCriteria.sort()
-            self.objectives[obj]['criteria'] = objCriteria
+            objectives[obj]['criteria'] = objCriteria
             objWeight = Decimal('0')
             for g in objCriteria:
                 objWeight += criteria[g]['weight']
-            self.objectives[obj]['weight'] = objWeight
+            objectives[obj]['weight'] = objWeight
 
+        # instantiate the peformance tableau slots
+        self.actions = actions
+        self.objectives = objectives
         self.criteriaWeightMode = weightMode
         self.criteria = criteria
         self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
 
         # insert missing data
-        criteriaList = [g for g in self.criteria]
-        criteriaList.sort()
-        actionsList = [x for x in self.actions]
-        actionsList.sort()
-        for g in criteriaList:
-            for x in actionsList:
+        for g in criteria:
+            for x in actions:
                 if random.random() < missingProbability:
                     self.evaluation[g][x] = Decimal('-999')
 
@@ -1513,16 +1506,12 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
 
     def showActions(self,Debug=False):
         print('*----- show decision action --------------*')
-        actionsList = [x for x in self.actions]
-        actionsList.sort()
-        for x in actionsList:
+        for x in actions:
             print('key: ',x)
             print('  name:      ',self.actions[x]['name'])
             print('  profile:   ',self.actions[x]['profile'])
             if Debug:
-                criteriaList = [g for g in self.criteria]
-                criteriaList.sort()
-                for g in criteriaList:
+                for g in criteria:
                     print(g, self.actions[x]['generators'][g])
 
 #---------------
