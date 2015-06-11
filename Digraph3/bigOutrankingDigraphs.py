@@ -727,12 +727,12 @@ if __name__ == "__main__":
     print(total_size(tp.evaluation))
     bg1 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
-                               minimalComponentSize=5,
-                                    Threading=False,Debug=False)
+                               minimalComponentSize=50,
+                                    Threading=MP,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
     bg1.showDecomposition()
     print(bg1)
-    bg1.recodeValuation(-10,10,Debug=True)
+    #bg1.recodeValuation(-10,10,Debug=True)
     #print(total_size(bg1))
     
     bg2 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
@@ -748,7 +748,7 @@ if __name__ == "__main__":
     print(total_size(g))
     t0 = time()
     print(bg1.computeOrdinalCorrelation(g,Debug=False))
-    print(bg1.computeOrdinalCorrelation(bg2,Debug=False))
+    print(bg2.computeOrdinalCorrelation(g,Debug=False))
     print(bg2.computeOrdinalCorrelation(bg1,Debug=False))
     print(time()-t0)
 ##    preordering1 = bg1.computeRankingPreordering()

@@ -42,6 +42,15 @@ class IncrementalQuantileEstimator(object):
         if Debug:
             self.saveState('initState.csv')
 
+    def reset(self):
+        """
+        reset the content of the estimator to the initial state.
+        """
+        self.nbrupd = 0
+        self.qile = [0.0 for x in range(self.nq)]
+        self.nt = 0
+        self.dbuf = []
+
     def add(self,datum):
         """
         Assimilate a new value from the stream

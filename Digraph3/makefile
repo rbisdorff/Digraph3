@@ -23,10 +23,11 @@ pydocs:
 		cp randomDigraphs.py pyDoc/
 		cp randomPerfTabs.py pyDoc/
 		cp bigOutrankingDigraphs.py pyDoc/
+		cp iqagent.py test/
 		(cd pyDoc; pydoc3 -w ./)
 
 pTests:
-		parallel --gnu cp {}.py test/ ::: digraphs outrankingDigraphs perfTabs sortingDigraphs votingDigraphs linearOrders weakOrders graphs randomNumbers randomDigraphs randomPerfTabs bigOutrankingDigraphs
+		parallel --gnu cp {}.py test/ ::: digraphs outrankingDigraphs perfTabs sortingDigraphs votingDigraphs linearOrders weakOrders graphs randomNumbers randomDigraphs randomPerfTabs bigOutrankingDigraphs iqagent
 		(cd test; parallel --gnu -k nosetests3 -v ::: noseTests*.py )
 
 tests:
@@ -42,6 +43,7 @@ tests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -v noseTestsDigraph.py)
 		(cd test; nosetests3 -v noseTestsOutrankingDigraph.py)
 		(cd test; nosetests3 -v noseTestsPerfTab.py)
@@ -69,6 +71,7 @@ verboseTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -vs noseTestsDigraph.py)
 		(cd test; nosetests3 -vs noseTestsOutrankingDigraph.py)
 		(cd test; nosetests3 -vs noseTestsPerfTab.py)
@@ -95,6 +98,7 @@ digraphsTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -v noseTestsDigraph.py)
 
 verboseDigraphsTests:
@@ -109,6 +113,7 @@ verboseDigraphsTests:
 		cp randomNumbers.py test/
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -vs noseTestsDigraph.py)
 
 bigOutrankingDigraphsTests:
@@ -124,6 +129,7 @@ bigOutrankingDigraphsTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -v noseTestsBigOutrankingDigraph.py)
 
 verboseBigOutrankingDigraphsTests:
@@ -139,6 +145,7 @@ verboseBigOutrankingDigraphsTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -vs noseTestsBigOutrankingDigraph.py)
 
 graphsTests:
@@ -154,6 +161,7 @@ graphsTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -v noseTestsGraph.py)
 
 verboseGraphsTests:
@@ -169,6 +177,7 @@ verboseGraphsTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -vs noseTestsGraph.py)
 
 perfTabsTests:
@@ -184,6 +193,7 @@ perfTabsTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -v noseTestsPerfTab.py)
 
 randomPerfTabsTests:
@@ -200,6 +210,7 @@ randomPerfTabsTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -v noseTestsRandomPerfTab.py)
 
 verbosePerfTabsTests:
@@ -215,6 +226,7 @@ verbosePerfTabsTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -vs noseTestsPerfTab.py)
 
 verboseRandomPerfTabsTests:
@@ -231,6 +243,7 @@ verboseRandomPerfTabsTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -vs noseTestsRandomPerfTab.py)
 
 outrankingDigraphsTests:
@@ -246,6 +259,7 @@ outrankingDigraphsTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -v noseTestsOutrankingDigraph.py)
 
 verboseOutrankingDigraphsTests:
@@ -261,6 +275,7 @@ verboseOutrankingDigraphsTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -vs noseTestsOutrankingDigraph.py)
 
 sortingDigraphsTests:
@@ -276,6 +291,7 @@ sortingDigraphsTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -v noseTestsSortingDigraph.py)
 
 verboseSortingDigraphsTests:
@@ -291,6 +307,7 @@ verboseSortingDigraphsTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -vs noseTestsSortingDigraph.py)
 
 votingDigraphsTests:
@@ -305,6 +322,7 @@ votingDigraphsTests:
 		cp randomNumbers.py test/
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -v noseTestsVotingDigraph.py)
 
 verboseVotingDigraphsTests:
@@ -320,6 +338,7 @@ verboseVotingDigraphsTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -vs noseTestsVotingDigraph.py)
 
 linearOrdersTests:
@@ -335,6 +354,7 @@ linearOrdersTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -v noseTestsLinearOrder.py)
 
 verboseLinearOrdersTests:
@@ -349,6 +369,7 @@ verboseLinearOrdersTests:
 		cp randomNumbers.py test/
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -vs noseTestsLinearOrder.py)
 
 weakOrdersTests:
@@ -364,6 +385,7 @@ weakOrdersTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -v noseTestsWeakOrders.py)
 
 verboseWeakOrdersTests:
@@ -379,6 +401,7 @@ verboseWeakOrdersTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -vs noseTestsWeakOrders.py)
 
 randomDigraphsTests:
@@ -393,6 +416,7 @@ randomDigraphsTests:
 		cp randomNumbers.py test/
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -v noseTestsRandomDigraph.py)
 
 verboseRandomDigraphsTests:
@@ -408,14 +432,17 @@ verboseRandomDigraphsTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp bigOutrankingDigraphs.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -vs noseTestsRandomDigraph.py)
 
 randomNumbersTests:
 		cp randomNumbers.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -v noseTestsRandomNumbers.py)
 
 verboseRandomNumbersTests:
 		cp randomNumbers.py test/
+		cp iqagent.py test/
 		(cd test; nosetests3 -vs noseTestsRandomNumbers.py)
 
 

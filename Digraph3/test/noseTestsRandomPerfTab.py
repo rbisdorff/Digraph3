@@ -33,6 +33,19 @@ def testRandomPerformanceTableau():
                                  seed=None)
     t.showStatistics()
 
+def testRandomRankPerformanceTableau():
+    print('==>> Testing Random Rank Performance Tableau instantiation')
+    t = RandomRankPerformanceTableau(numberOfActions=10,
+                                 numberOfCriteria=7,
+                                 seed=100)
+    t.showAll()
+    print(t.computeWeightedAveragePerformances(isNormalized=True,
+                                               lowValue=0.0,highValue=20.0))
+    t = RandomRankPerformanceTableau(weightScale=(1,10),
+                                     weightDistribution='random',
+                                 seed=None)
+    t.showStatistics()
+
 def testFullRandomPerformanceTableau():
     print('==>> Testing Full Random Performance Tableau instantiation')
     t = FullRandomPerformanceTableau(numberOfActions=10,
@@ -56,7 +69,7 @@ def testFullRandomPerformanceTableau():
 def testCBPerformanceTableau(): 
     print('*==>> random CB Performance Tableaux ------------*')
     t = RandomCBPerformanceTableau(numberOfActions=10,\
-                                   commonPercentiles={'ind':5,'pref':10,'veto':95},\
+                                   commonPercentiles={'ind':0.05,'pref':0.10,'veto':0.95},\
                                    weightDistribution="random",\
                                    weightScale=[1,2],\
                                    integerWeights=True,\
@@ -74,7 +87,7 @@ def testmpCBPerformanceTableau():
     print('*==>> random paraell CB Performance Tableaux ------------*')
     
     t = RandomCBPerformanceTableau(numberOfActions=10,\
-                                   commonPercentiles={'ind':5,'pref':10,'veto':95},\
+                                   commonPercentiles={'ind':0.05,'pref':0.10,'veto':0.95},\
                                    weightDistribution="random",\
                                    weightScale=[1,2],\
                                    integerWeights=True,\
