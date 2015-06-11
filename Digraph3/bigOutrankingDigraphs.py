@@ -458,6 +458,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                 for x in comp[1]:
                     self.actions[x]['component'] = compKey
             self.components = components
+            self.minimalComponentSize = 1
         else:  # with minimal component size
             components = OrderedDict()
             ndc = len(decomposition)
@@ -487,6 +488,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                     compContent = []
                     compNbr += 1
             self.components = components
+            self.minimalComponentSize = minimalComponentSize
             nc = len(components)
             self.nbrComponents = nc
         # setting the component relation
@@ -528,15 +530,17 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         """
         Default presentation method for big outrankingDigraphs instances.
         """
-        from sys import getsizeof
         print('*----- show short --------------*')
-        print('Instance name     :', self.name)
-        print('Size (in bytes)   :', total_size(self))
-        print('# Actions         :', self.order)
-        print('# Criteria        :', self.dimension)
-        print('Sorting by        : %d-Tiling ' % self.sortingParameters['limitingQuantiles'])
-        print('Ordering strategy :', self.sortingParameters['strategy'],'quantile')
-        print('# Components      :', self.nbrComponents)
+        print('Instance name     : %s' % self.name)
+        print('Size (in bytes)   : %d' % total_size(self))
+        print('# Actions         : %d' % self.order)
+        print('# Criteria        : %d' % self.dimension)
+        print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
+        print('Ordering strategy : %s' % self.sortingParameters['strategy'])
+        print('# Components      : %d' % self.nbrComponents)
+        print('Minimal size      : %d' % self.minimalComponentSize)
+        print('Maximal size      : %d' % (self.computeDecompositionSummaryStatistics())['max'])
+        print('Median size      : %d' % (self.computeDecompositionSummaryStatistics())['median'])
         if WithComponents:
             g.showDecomposition()
         print('----  Constructor run times (in sec.) ----')
@@ -550,7 +554,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             pass
         return 'Default presentation of BigOutrankingDigraphs'
 
-    def showShort(self):
+    def showShort(self,fileName=None):
         """
         Default (__repr__) presentation method for big outranking digraphs instances:
         
@@ -588,7 +592,27 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         Default presentation of BigOutrankingDigraphs
         
         """
-        print(g)
+        if fileName == None:
+            print(self)
+        else:
+            fo = open(fileName,'a')
+            fo.write('*----- show short --------------*')
+            fo.write('Instance name      : %s\n' % self.name)
+            fo.write('Size (in bytes)    : %d\n' % total_size(self))
+            fo.write('# Actions          : %d\n' % self.order)
+            fo.write('# Criteria         : %d\n' % self.dimension)
+            fo.write('Sorting by         : %d-Tiling\n' % self.sortingParameters['limitingQuantiles'])
+            fo.write('Ordering strategy  : %s\n' % self.sortingParameters['strategy'])
+            fo.write('# Components       : %d\n' % self.nbrComponents)
+            fo.write('Minimal size       : %d\n' % self.minimalComponentSize)
+            fo.write('Maximal size       : %d\n' % (self.computeDecompositionSummaryStatistics())['max'])
+            fo.write('Median size        : %d\n' % (self.computeDecompositionSummaryStatistics())['median'])
+            fo.write('*-- Constructor run times (in sec.) --*\n')
+            fo.write('Total time         : %.5f\n' % self.runTimes['totalTime'])
+            fo.write('QuantilesSorting   : %.5f\n' % self.runTimes['sorting'])
+            fo.write('Preordering        : %.5f\n' % self.runTimes['preordering'])
+            fo.write('Decomposing        : %.5f\n' % self.runTimes['decomposing'])
+            fo.close()
 
     def showActions(self):
         """
@@ -751,6 +775,10 @@ if __name__ == "__main__":
     print(bg2.computeOrdinalCorrelation(g,Debug=False))
     print(bg2.computeOrdinalCorrelation(bg1,Debug=False))
     print(time()-t0)
+    bg1.showShort('rest1.text')
+    bg2.showShort('rest2.text')
+    bg1.showShort()
+    
 ##    preordering1 = bg1.computeRankingPreordering()
 ##    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering1)))
 ##    preordering2 = bg2.computeRankingPreordering()
