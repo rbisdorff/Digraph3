@@ -1674,14 +1674,15 @@ class RandomCBPerformanceTableau(PerformanceTableau):
     Cost versus Benefit oriented performance tableaux.
 
     Parameters:
-        | If numberOfActions == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated
-        | If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated
-        | weightDistribution := {'equiobjectives'|'fixed'|'random'|'equisignificant' (default = 'equisignificant')}
-        | default weightScale for 'random' weightDistribution is 1 - numberOfCriteria
-        | commonScale parameter is obsolete. The scale of cost criteria is cardinal or ordinal (0-10) with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.
-        | All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.
-        | commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).
-        | CommonPercentiles = {'ind':5, 'pref':10, ['weakveto':90,] 'veto':95} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.
+    
+        * If numberOfActions == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated
+        * If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated
+        * weightDistribution := {'equiobjectives'|'fixed'|'random'|'equisignificant' (default = 'equisignificant')}
+        * default weightScale for 'random' weightDistribution is 1 - numberOfCriteria
+        * commonScale parameter is obsolete. The scale of cost criteria is cardinal or ordinal (0-10) with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.
+        * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.
+        * commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).
+        * CommonPercentiles = {'ind':0.05, 'pref':0.10, ['weakveto':0.90,] 'veto':'95} are expressed in centiless (reversed for vetoes) and only concern cardinal criteria.
 
     .. warning::
 
