@@ -28,6 +28,7 @@ __version__ = "$Revision: 1.37 $"
 from perfTabs import *
 
 from decimal import Decimal
+from collections import OrderedDict
 
 # ----------  old XML handling ------------------
 try:
@@ -356,6 +357,7 @@ The performance evaluations of each decision alternative on each criterion are g
     """
     def __init__(self,filePerfTab=None,isEmpty=False):
         from decimal import Decimal
+        from collections import OrderedDict
         if filePerfTab != None:
             fileName = filePerfTab + '.py'
             argDict = {}
@@ -1863,6 +1865,7 @@ The performance evaluations of each decision alternative on each criterion are g
         fo = open(fileNameExt, 'w')
         fo.write('# Saved performance Tableau: \n')
         fo.write('from decimal import Decimal\n')
+        fo.write('from collections import OrderedDict\n')
         fo.write('actions = {\n')
         for x in actions:
             fo.write('\'%s\': {\'name\': \'%s\'},\n' %(x,x))

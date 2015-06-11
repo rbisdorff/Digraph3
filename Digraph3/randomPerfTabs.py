@@ -121,11 +121,9 @@ class RandomPerformanceTableau(PerformanceTableau):
         if weightDistribution == 'random':
             weightsList = []
             sumWeights = Decimal('0.0')
-            i = 0
-            for g in criteriaList:
+            for i in range(numberOfCriteria):
                 weightsList.append(Decimal(str(random.randint(weightScale[0],weightScale[1]))))
                 sumWeights += weightsList[i]
-                i += 1
             weightsList.reverse()
         elif weightDistribution == 'fixed':
             weightsList = []
