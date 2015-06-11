@@ -1958,23 +1958,6 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             elif str(randomMode[0]) == 'beta':
                 m = criterionScale[0]
                 M = criterionScale[1]
-                ## if commonMode[1] == None:
-                ##     xm = 0.5
-                ## else:
-                ##     xm = commonMode[1]
-                
-                ## if commonMode[2] == None:
-                ##     if xm > 0.5:
-                ##         beta = 2.0
-                ##         alpha = 1.0/(1.0 - xm)
-                ##     else:
-                ##         alpha = 2.0
-                ##         beta = 1.0/xm
-                ## else:
-                ##     alpha = commonMode[2][0]
-                ##     beta = commonMode[2][1]
-                ## if Debug:
-                ##     print 'alpha,beta', alpha,beta
                 for a in actions:
                     if actions[a]['type'] == 'advantageous':
                         # xm = 0.7 sdtdev = 0.15
@@ -2026,17 +2009,6 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         self.weightPreorder = self.computeWeightPreorder()
 
         # compute discrimination thresholds from commonPercentiles
-##        if Threading:
-##            performanceDifferencesList = self.mpComputePerformanceDifferences(NotPermanentDiffs=True,
-##                                                                          nbrCores=nbrCores,
-##                                                                          Debug=False)
-##            performanceDifferences = {}
-##            i = 0
-##            for c in criteria:
-##                performanceDifferences[c] = performanceDifferencesList[i][0]
-##                i += 1
-##        else:            
-##            performanceDifferences = self.computePerformanceDifferences(NotPermanentDiffs=True,Debug=False)
         from iqagent import IncrementalQuantileEstimator
         est = IncrementalQuantileEstimator()
         if Debug:
@@ -2050,9 +2022,12 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             if criteria[g]['scaleType'] == 'cardinal' and len(actions) > 1:
                 est.reset()
                 for x in actions.keys():
-                    for y in actions.keys():
-                        if x != y:
-                            est.add(float(abs(self.evaluation[g][x]-self.evaluation[g][y])))
+                    evx = self.evaluation[g][x]
+                    if evx != Decimal('-999'):
+                        for y in actions.keys():
+                            evy = self.evaluation[g][y]
+                            if x != y and evy != Decimal('-999'):
+                                est.add( float( abs(evx-evy) ) )
                 for q in quantile:
                     if Debug:
                         print('-->', q, quantile[q], end=' ')
