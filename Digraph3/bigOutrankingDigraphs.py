@@ -494,16 +494,13 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         # setting the component relation
         self.valuationdomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
 
-        compList = list(self.components.keys())
         compRel = {}
-        for i in range(nc):
-            cx = compList[i]
+        for cx in components.keys():
             compRel[cx] = {} 
-            for j in range(nc):
-                cy = compList[j]
-                if self.components[cx]['rank'] < self.components[cy]['rank']:
+            for cy in components.keys():
+                if components[cx]['rank'] < components[cy]['rank']:
                     compRel[cx][cy] = self.valuationdomain['max']
-                elif self.components[cx]['rank'] > self.components[cy]['rank']:
+                elif components[cx]['rank'] > components[cy]['rank']:
                     compRel[cx][cy] = self.valuationdomain['min']
                 else:
                     compRel[cx][cy] = self.valuationdomain['med']
@@ -612,6 +609,10 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             fo.write('QuantilesSorting   : %.5f\n' % self.runTimes['sorting'])
             fo.write('Preordering        : %.5f\n' % self.runTimes['preordering'])
             fo.write('Decomposing        : %.5f\n' % self.runTimes['decomposing'])
+            try:
+                fo.write('Ordering           : %.5f\n' % self.runTimes['ordering'])
+            except:
+                pass
             fo.close()
 
     def showActions(self):
@@ -700,23 +701,25 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
 
     def computeBoostedKohlerRanking(self):
         """
-        Renders an ordred list of decision actions ranked in decreasing preference direction following Kohler's rule on each component.
+        Renders an ordred list of decision actions ranked in
+        decreasing preference direction following Kohler's rule
+        on each component.
         """
         from linearOrders import KohlerOrder
-        from itertools import chain
-        
-        compKeys = list(self.components.keys())
-        compKeys.sort()
-        ranking = list(chain.from_iterable([self.components[ck]['subGraph'].computeKohlerRanking()\
-                                            for ck in compKeys]))
+##        from itertools import chain      
+##        compKeys = list(self.components.keys())
+##        compKeys.sort()
+##        ranking = list(chain.from_iterable([self.components[ck]['subGraph'].computeKohlerRanking()\
+##                                            for ck in compKeys]))
 ##        nc = self.nbrComponents
-##        ranking = []
-##        for i in range(nc) :
-##            cki = compKeys[i]
-##            comp = self.components[cki]
-##            pg = comp['subGraph']
-##            pko = KohlerOrder(pg)
-##            ranking += pko.computeOrder()
+##
+        ranking = []
+        # self.components is an ordered dictionary in decreasing preference
+        for cki in self.components:
+            comp = self.components[cki]
+            pg = comp['subGraph']
+            pko = KohlerOrder(pg)
+            ranking += pko.computeOrder()
         return ranking    
 
     def computeBoostedRankedPairsRanking(self):
@@ -726,10 +729,11 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         from linearOrders import KohlerOrder
         from itertools import chain
         
-        compKeys = list(self.components.keys())
-        compKeys.sort()
-        ranking = list(chain.from_iterable([self.components[ck]['subGraph'].computeRankedPairsOrder()\
-                                          for ck in compKeys]))
+##        compKeys = list(self.components.keys())
+##        compKeys.sort()
+        ranking = list(chain.from_iterable(\
+            [self.components[ck]['subGraph'].computeRankedPairsOrder()\
+                                          for ck in self.components]))
         return ranking    
 
     def ranking2Preorder(self,ranking):
@@ -743,29 +747,31 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
 if __name__ == "__main__":
     
     from time import time
-    MP = False
+    MP = True
     t0 = time()
-    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,
+##    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,
+##                                      seed=100)
+    tp = RandomPerformanceTableau(numberOfActions=1000,numberOfCriteria=21,
                                       seed=100)
     print(time()-t0)
     print(total_size(tp.evaluation))
-    bg1 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
+    bg1 = BigOutrankingDigraph(tp,quantiles=100,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
-                               minimalComponentSize=50,
+                               minimalComponentSize=100,
                                     Threading=MP,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
-    bg1.showDecomposition()
+    #bg1.showDecomposition()
     print(bg1)
     #bg1.recodeValuation(-10,10,Debug=True)
     #print(total_size(bg1))
     
-    bg2 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
+    bg2 = BigOutrankingDigraph(tp,quantiles=100,quantilesOrderingStrategy='average',
                                     LowerClosed=False,
                                     Threading=MP,Debug=False)
     print(bg2)
     print(total_size(bg2))
     print(bg2.computeDecompositionSummaryStatistics())
-    bg2.showDecomposition()
+    #bg2.showDecomposition()
     t0 = time()
     g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=MP)
     print(time()-t0)
