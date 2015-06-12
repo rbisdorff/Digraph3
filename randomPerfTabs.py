@@ -1697,6 +1697,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                  integerWeights = True,
                  commonScale = None, commonThresholds = None,
                  commonPercentiles= None,
+                 samplingSize = 100000,
                  commonMode = None,
                  valueDigits = 2,
                  missingDataProbability = 0.0,
@@ -2008,8 +2009,16 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         self.weightPreorder = self.computeWeightPreorder()
 
         # compute discrimination thresholds from commonPercentiles
+        n = len(self.actions)
+        n2 = (n*n) - n
+        if n < 1000:
+            nbuf = 1000
+        else:
+            nbuf = n
+        if n2 < samplingSize:
+            samplingSize = n2
         from iqagent import IncrementalQuantileEstimator
-        est = IncrementalQuantileEstimator()
+        est = IncrementalQuantileEstimator(nbuf=nbuf)
         if Debug:
             print('commonPercentiles=', commonPercentiles)
         if commonPercentiles == None:
@@ -2020,6 +2029,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             criteria[g]['thresholds'] = OrderedDict()
             if criteria[g]['scaleType'] == 'cardinal' and len(actions) > 1:
                 est.reset()
+                sample = 0
                 for x in actions.keys():
                     evx = self.evaluation[g][x]
                     if evx != Decimal('-999'):
@@ -2027,6 +2037,10 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                             evy = self.evaluation[g][y]
                             if x != y and evy != Decimal('-999'):
                                 est.add( float( abs(evx-evy) ) )
+                                sample += 1
+                                if sample > samplingSize:
+                                    break
+                                    break
                 for q in quantile:
                     if Debug:
                         print('-->', q, quantile[q], end=' ')
@@ -2053,28 +2067,35 @@ if __name__ == "__main__":
     from outrankingDigraphs import BipolarOutrankingDigraph
     from weakOrders import QuantilesRankingDigraph
     from randomPerfTabs import *
-
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=31,
-                                            numberOfCriteria=13,
-                                            OrdinalScales=False,
-                                            commonScale=None,
-                                            weightDistribution='equiobjectives',
-                                            #weightScale=(1,5),
-                                            #commonMode=('uniform','variable',2),
-                                            vetoProbability=0.3,
-                                            seed=120)
-    t.showObjectives()
-    #t.showActions(Debug=True)
-    teco = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Eco']['criteria'])
-    tenv = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Env']['criteria'])
-    tsoc = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Soc']['criteria'])
-    geco = BipolarOutrankingDigraph(teco)
-    genv = BipolarOutrankingDigraph(tenv)
-    gsoc = BipolarOutrankingDigraph(tsoc)
-    gfus = FusionLDigraph([geco,genv,gsoc])
-    scc = StrongComponentsCollapsedDigraph(gfus)
-    scc.showActions()
-    scc.exportGraphViz('sccFusionObjectives')
+    from time import time
+    t0 = time()
+    t = RandomCBPerformanceTableau(numberOfActions=5000,
+                                   numberOfCriteria=13,
+                                   samplingSize=100000,
+                                   seed=100)
+    print(time()-t0)
+    t.showCriteria()
+##    t = Random3ObjectivesPerformanceTableau(numberOfActions=31,
+##                                            numberOfCriteria=13,
+##                                            OrdinalScales=False,
+##                                            commonScale=None,
+##                                            weightDistribution='equiobjectives',
+##                                            #weightScale=(1,5),
+##                                            #commonMode=('uniform','variable',2),
+##                                            vetoProbability=0.3,
+##                                            seed=120)
+##    t.showObjectives()
+##    #t.showActions(Debug=True)
+##    teco = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Eco']['criteria'])
+##    tenv = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Env']['criteria'])
+##    tsoc = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Soc']['criteria'])
+##    geco = BipolarOutrankingDigraph(teco)
+##    genv = BipolarOutrankingDigraph(tenv)
+##    gsoc = BipolarOutrankingDigraph(tsoc)
+##    gfus = FusionLDigraph([geco,genv,gsoc])
+##    scc = StrongComponentsCollapsedDigraph(gfus)
+##    scc.showActions()
+##    scc.exportGraphViz('sccFusionObjectives')
     
     
 ##    t.showStatistics()
