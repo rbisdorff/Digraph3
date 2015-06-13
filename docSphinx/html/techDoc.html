@@ -192,7 +192,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1088,7 +1088,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1983,7 +1983,7 @@ called dg1 and dg2.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2014,7 +2014,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2325,6 +2325,22 @@ of chordless odd circuits augmented digraphs.</p>
 <code class="descclassname">digraphs.</code><code class="descname">powerset</code><span class="sig-paren">(</span><em>S</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.powerset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Power set generator iterator.</p>
 <p>Parameter S may be any object that is accepted as input by the set class constructor.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="digraphs.total_size">
+<code class="descclassname">digraphs.</code><code class="descname">total_size</code><span class="sig-paren">(</span><em>o</em>, <em>handlers={}</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.total_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the approximate memory footprint of an object and all of its contents.</p>
+<p>Automatically finds the contents of the following containers and
+their subclasses:  tuple, list, deque, dict, set, frozenset, Digraph and BigDigraph.
+To search other containers, add handlers to iterate over their contents:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>handlers = {SomeContainerClass: iter,</dt>
+<dd>OtherContainerClass: OtherContainerClass.get_elements}</dd>
+</dl>
+</div></blockquote>
+<p>See <a class="reference external" href="http://code.activestate.com/recipes/577504/">http://code.activestate.com/recipes/577504/</a></p>
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
@@ -3275,7 +3291,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3639,7 +3655,7 @@ bipolar integer-valued outranking digraphs.</p>
 
 <dl class="class">
 <dt id="outrankingDigraphs.BipolarOutrankingDigraph">
-<em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">BipolarOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>coalition=None</em>, <em>hasNoVeto=False</em>, <em>hasBipolarVeto=True</em>, <em>Normalized=False</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">BipolarOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>coalition=None</em>, <em>hasNoVeto=False</em>, <em>hasBipolarVeto=True</em>, <em>Normalized=False</em>, <em>Threading=False</em>, <em>WithConcordanceRelation=True</em>, <em>WithVetos=True</em>, <em>nbrCores=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Specialization of the standard OutrankingDigraph class for generating
 new bipolar ordinal-valued outranking digraphs.</p>
@@ -3943,7 +3959,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5621,7 +5637,7 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 
 <dl class="class">
 <dt id="randomDigraphs.RandomGridDigraph">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.GridDigraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary randomly oriented Grid digraphs of dimension n time m
@@ -5837,24 +5853,23 @@ on each of the three objectives.</p>
 
 <dl class="class">
 <dt id="randomPerfTabs.RandomCBPerformanceTableau">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCBPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=13</em>, <em>numberOfCriteria=7</em>, <em>weightDistribution='equiobjectives'</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonPercentiles=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>missingDataProbability=0.0</em>, <em>seed=None</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCBPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=13</em>, <em>numberOfCriteria=7</em>, <em>weightDistribution='equiobjectives'</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonPercentiles=None</em>, <em>samplingSize=100000</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>missingDataProbability=0.0</em>, <em>seed=None</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Full automatic generation of random
 Cost versus Benefit oriented performance tableaux.</p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd><div class="first last line-block">
-<div class="line">If numberOfActions == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated</div>
-<div class="line">If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated</div>
-<div class="line">weightDistribution := {&#8216;equiobjectives&#8217;|&#8217;fixed&#8217;|&#8217;random&#8217;|&#8217;equisignificant&#8217; (default = &#8216;equisignificant&#8217;)}</div>
-<div class="line">default weightScale for &#8216;random&#8217; weightDistribution is 1 - numberOfCriteria</div>
-<div class="line">commonScale parameter is obsolete. The scale of cost criteria is cardinal or ordinal (0-10) with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.</div>
-<div class="line">All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.</div>
-<div class="line">commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).</div>
-<div class="line">CommonPercentiles = {&#8216;ind&#8217;:5, &#8216;pref&#8217;:10, [&#8216;weakveto&#8217;:90,] &#8216;veto&#8217;:95} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.</div>
-</div>
-</dd>
-</dl>
+<p>Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li>If numberOfActions == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated</li>
+<li>If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated</li>
+<li>weightDistribution := {&#8216;equiobjectives&#8217;|&#8217;fixed&#8217;|&#8217;random&#8217;|&#8217;equisignificant&#8217; (default = &#8216;equisignificant&#8217;)}</li>
+<li>default weightScale for &#8216;random&#8217; weightDistribution is 1 - numberOfCriteria</li>
+<li>commonScale parameter is obsolete. The scale of cost criteria is cardinal or ordinal (0-10) with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.</li>
+<li>All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.</li>
+<li>commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).</li>
+<li>CommonPercentiles = {&#8216;ind&#8217;:0.05, &#8216;pref&#8217;:0.10, [&#8216;weakveto&#8217;:0.90,] &#8216;veto&#8217;:&#8216;95} are expressed in centiless (reversed for vetoes) and only concern cardinal criteria.</li>
+</ul>
+</div></blockquote>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Minimal number of decision actions required is 3 !</p>
@@ -6102,7 +6117,9 @@ ie q = order//10.</p>
 <dl class="method">
 <dt id="bigOutrankingDigraphs.BigOutrankingDigraph.computeBoostedKohlerRanking">
 <code class="descname">computeBoostedKohlerRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.computeBoostedKohlerRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders an ordred list of decision actions ranked in decreasing preference direction following Kohler&#8217;s rule on each component.</p>
+<dd><p>Renders an ordred list of decision actions ranked in
+decreasing preference direction following Kohler&#8217;s rule
+on each component.</p>
 </dd></dl>
 
 <dl class="method">
@@ -6147,7 +6164,7 @@ ie q = order//10.</p>
 
 <dl class="method">
 <dt id="bigOutrankingDigraphs.BigOutrankingDigraph.showShort">
-<code class="descname">showShort</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.showShort" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showShort</code><span class="sig-paren">(</span><em>fileName=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.showShort" title="Permalink to this definition">¶</a></dt>
 <dd><p>Default (__repr__) presentation method for big outranking digraphs instances:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bigOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -6185,22 +6202,6 @@ ie q = order//10.</p>
 </div>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="function">
-<dt id="bigOutrankingDigraphs.total_size">
-<code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">total_size</code><span class="sig-paren">(</span><em>o</em>, <em>handlers={}</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.total_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the approximate memory footprint of an object and all of its contents.</p>
-<p>Automatically finds the contents of the following containers and
-their subclasses:  tuple, list, deque, dict, set, frozenset, Digraph and BigDigraph.
-To search other containers, add handlers to iterate over their contents:</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>handlers = {SomeContainerClass: iter,</dt>
-<dd>OtherContainerClass: OtherContainerClass.get_elements}</dd>
-</dl>
-</div></blockquote>
-<p>See <a class="reference external" href="http://code.activestate.com/recipes/577504/">http://code.activestate.com/recipes/577504/</a></p>
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
