@@ -265,6 +265,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                        hasNoVeto=hasNoVeto,
                                                        hasBipolarVeto=True,
                                                         Threading=Threading,
+                                                        WithConcordanceRelation=False,
+                                                        WithVetos=False,
                                                         Debug=Debug)
             else:
                 self.relation = BipolarOutrankingDigraph._constructRelationWithThreading(self,self.criteria,
@@ -274,6 +276,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                        hasNoVeto=hasNoVeto,
                                                         hasBipolarVeto=True,
                                                         Threading=Threading,
+                                                        WithConcordanceRelation=False,
+                                                        WithVetos=False,
                                                         Debug=Debug)
             if LowerClosed:
                 for x in self.actionsOrig:
@@ -318,7 +322,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                            hasBipolarVeto=True,\
                            Debug=False,\
                            hasSymmetricThresholds=True,\
-                           Threading = False,
+                           Threading = False,\
+                           WithConcordanceRelation=False,\
+                           WithVetos=False,\
                            nbrCores=None):
         """
         Specialization of the corresponding BipolarOutrankingDigraph method
@@ -334,6 +340,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                     hasNoVeto=hasNoVeto,\
                                     hasBipolarVeto=hasBipolarVeto,\
                                     Debug=Debug,\
+                                    WithConcordanceRelation=WithConcordanceRelation,\
+                                    WithVetos=WithVetos,\
                                     hasSymmetricThresholds=hasSymmetricThresholds)
         ##
         else:  # parallel computation
@@ -2941,7 +2949,7 @@ if __name__ == "__main__":
 ##    t.saveXMCDA2('test',servingD3=False)
     #t = XMCDA2PerformanceTableau('test')  
     qs = QuantilesSortingDigraph(t,15,LowerClosed=False,
-                                     Threading=True,
+                                     Threading=False,
                                      Debug=False)
     qs.showHTMLQuantileOrdering(strategy='average')
     #qs.showSortingCharacteristics('a01')

@@ -3561,13 +3561,15 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         | nbrCores: controls the effective number of cores that are used in the muliprocessing
 
     """
-    def __init__(self,argPerfTab=None,
-                 coalition=None,
-                 hasNoVeto=False,
-                 hasBipolarVeto=True,
-                 Normalized=False,
-                 Threading=False,
-                 nbrCores=None,
+    def __init__(self,argPerfTab=None,\
+                 coalition=None,\
+                 hasNoVeto=False,\
+                 hasBipolarVeto=True,\
+                 Normalized=False,\
+                 Threading=False,\
+                 WithConcordanceRelation=True,\
+                 WithVetos=True,\
+                 nbrCores=None,\
                  Debug=False):
         from copy import copy
         if argPerfTab == None:
@@ -3577,6 +3579,11 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             perfTab = PerformanceTableau(argPerfTab)
         else:
             perfTab = argPerfTab
+
+        # set Threading parameters
+        if Threading:
+            WithConcordanceRelation = False
+            WithVetos = False
             
         #self.performanceTableau = perfTab
 
@@ -3635,15 +3642,17 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         
         # construct outranking relation
         actionsKeys = list(self.actions.keys())
-        self.relation = self._constructRelationWithThreading(criteria,
-                                                perfTab.evaluation,
-                                                initial=actionsKeys,
-                                                terminal=actionsKeys,
-                                                hasNoVeto=hasNoVeto,
-                                                hasBipolarVeto=hasBipolarVeto,
-                                                hasSymmetricThresholds=True,
-                                                Threading=Threading,
-                                                nbrCores=nbrCores,
+        self.relation = self._constructRelationWithThreading(criteria,\
+                                                perfTab.evaluation,\
+                                                initial=actionsKeys,\
+                                                terminal=actionsKeys,\
+                                                hasNoVeto=hasNoVeto,\
+                                                hasBipolarVeto=hasBipolarVeto,\
+                                                hasSymmetricThresholds=True,\
+                                                Threading=Threading,\
+                                                WithConcordanceRelation=WithConcordanceRelation,\
+                                                WithVetos=WithVetos,\
+                                                nbrCores=nbrCores,\
                                                 Debug=Debug)
 
         if Normalized:
@@ -3703,7 +3712,9 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                            hasBipolarVeto=True,\
                            Debug=False,\
                            hasSymmetricThresholds=True,\
-                           Threading = False,
+                           Threading=False,\
+                           WithConcordanceRelation=True,\
+                           WithVetos=True,\
                            nbrCores=None):
         """
         Specialization of the corresponding BipolarOutrankingDigraph method
@@ -3718,6 +3729,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                     terminal=terminal,\
                                     hasNoVeto=hasNoVeto,\
                                     hasBipolarVeto=hasBipolarVeto,\
+                                    WithConcordanceRelation=WithConcordanceRelation,\
+                                    WithVetos=WithVetos,\
                                     Debug=Debug,\
                                     hasSymmetricThresholds=hasSymmetricThresholds)
         ##
@@ -3762,8 +3775,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                             #terminal=terminal,\
                                             hasNoVeto=hasNoVeto,\
                                             hasBipolarVeto=hasBipolarVeto,\
-                                            withConcordanceRelation=False,
-                                            withVetos=False,                                        
+                                            WithConcordanceRelation=False,
+                                            WithVetos=False,                                        
                                             Debug=False,\
                                             hasSymmetricThresholds=hasSymmetricThresholds)
                     else:
@@ -3773,8 +3786,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                             terminal=splitActions,\
                                             hasNoVeto=hasNoVeto,\
                                             hasBipolarVeto=hasBipolarVeto,\
-                                            withConcordanceRelation=False,
-                                            withVetos=False,
+                                            WithConcordanceRelation=False,
+                                            WithVetos=False,
                                             Debug=False,\
                                             hasSymmetricThresholds=hasSymmetricThresholds)
                     fo.write(dumps(splitRelation,-1))
@@ -3890,8 +3903,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                            terminal=None,\
                            hasNoVeto=False,\
                            hasBipolarVeto=True,\
-                           withConcordanceRelation=True,
-                           withVetos=True,
+                           WithConcordanceRelation=True,\
+                           WithVetos=True,\
                            Debug=False,\
                            hasSymmetricThresholds=True):
         """
@@ -3922,7 +3935,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
         if hasBipolarVeto:
             negativeVetos = []
-            
+    
         largePerformanceDifferencesCount = {}        
         for a in initial:
             largePerformanceDifferencesCount[a] = {}
@@ -4061,9 +4074,9 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     relation[a][b] = outrankindex*Decimal('100.0')
 
         # storing concordance relation and vetoes
-        if withConcordanceRelation:
+        if WithConcordanceRelation:
             self.concordanceRelation = concordanceRelation
-        if withVetos:
+        if WithVetos:
             self.vetos = vetos
             if hasBipolarVeto:
                 self.negativeVetos = negativeVetos
