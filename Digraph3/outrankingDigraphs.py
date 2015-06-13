@@ -3762,6 +3762,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                             #terminal=terminal,\
                                             hasNoVeto=hasNoVeto,\
                                             hasBipolarVeto=hasBipolarVeto,\
+                                            withConcordanceRelation=False,
+                                            withVetos=False,                                        
                                             Debug=False,\
                                             hasSymmetricThresholds=hasSymmetricThresholds)
                     else:
@@ -3771,6 +3773,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                             terminal=splitActions,\
                                             hasNoVeto=hasNoVeto,\
                                             hasBipolarVeto=hasBipolarVeto,\
+                                            withConcordanceRelation=False,
+                                            withVetos=False,
                                             Debug=False,\
                                             hasSymmetricThresholds=hasSymmetricThresholds)
                     fo.write(dumps(splitRelation,-1))
@@ -3886,6 +3890,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                            terminal=None,\
                            hasNoVeto=False,\
                            hasBipolarVeto=True,\
+                           withConcordanceRelation=True,
+                           withVetos=True,
                            Debug=False,\
                            hasSymmetricThresholds=True):
         """
@@ -4055,12 +4061,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     relation[a][b] = outrankindex*Decimal('100.0')
 
         # storing concordance relation and vetoes
-
-        self.concordanceRelation = concordanceRelation
-        self.vetos = vetos
-        if hasBipolarVeto:
-            self.negativeVetos = negativeVetos
-            self.largePerformanceDifferencesCount = largePerformanceDifferencesCount
+        if withConcordanceRelation:
+            self.concordanceRelation = concordanceRelation
+        if withVetos:
+            self.vetos = vetos
+            if hasBipolarVeto:
+                self.negativeVetos = negativeVetos
+                self.largePerformanceDifferencesCount = largePerformanceDifferencesCount
 
         # return outranking relation    
 

@@ -453,6 +453,10 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                 pg = BipolarOutrankingDigraph(pt,Normalized=True)
                 pg.__dict__.pop('criteria')
                 pg.__dict__.pop('evaluation')
+                pg.__dict__.pop('vetos')
+                pg.__dict__.pop('negativeVetos')
+                pg.__dict__.pop('largePerformanceDifferencesCount')
+                pg.__dict__.pop('concordanceRelation')
                 pg.__class__ = Digraph
                 components[compKey]['subGraph'] = pg
                 for x in comp[1]:
