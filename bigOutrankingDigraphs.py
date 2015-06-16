@@ -282,7 +282,8 @@ class BigDigraph(object):
         try:
             import statistics
         except:
-            print('Error importing the statistics module. You need to upgrade your Python to version 3.4+ !'
+            print('Error importing the statistics module.')
+            print('You need to upgrade your Python to version 3.4+ !')
             return      
         self.componentStatistics = {}
         nc = self.nbrComponents
