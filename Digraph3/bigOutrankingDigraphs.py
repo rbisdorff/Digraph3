@@ -279,7 +279,11 @@ class BigDigraph(object):
                        'mean':meanLength,
                        'stdev': stdLength}
         """
-        import statistics
+        try:
+            import statistics
+        except:
+            print('Error importing the statistics module. You need to upgrade your Python to version 3.4+ !'
+            return      
         self.componentStatistics = {}
         nc = self.nbrComponents
         compKeys = list(self.components.keys())
