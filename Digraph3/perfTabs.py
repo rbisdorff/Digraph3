@@ -368,6 +368,10 @@ The performance evaluations of each decision alternative on each criterion are g
             except:
                 self.actions = argDict['actionset']
             try:
+                self.objectives = argDict['objectives']
+            except:
+                pass
+            try:
                 self.weightset = argDict['weightset']
                 self.thresholds = argDict['threshold']
                 self.criteria = {}
@@ -1880,6 +1884,10 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         print('*--- Saving performance tableau in file: <' + str(fileName) + '.py> ---*')
         actions = self.actions
+        try:
+            objectives = self.objectives
+        except:
+            objectives = {}
         criteria = self.criteria
         evaluation = self.evaluation
         fileNameExt = str(fileName)+str('.py')
@@ -1887,13 +1895,26 @@ The performance evaluations of each decision alternative on each criterion are g
         fo.write('# Saved performance Tableau: \n')
         fo.write('from decimal import Decimal\n')
         fo.write('from collections import OrderedDict\n')
+        # actions
         fo.write('actions = {\n')
         for x in actions:
             fo.write('\'%s\': {\'name\': \'%s\'},\n' %(x,x))
         fo.write('}\n')
+        # objectives
+        fo.write('objectives = {\n')
+        for obj in objectives:
+            fo.write('\'%s\': {\'name\': \'%s\',\n' % (obj,objectives[obj]['name']) )
+            fo.write('\'criteria\': %s, \'weight\': %f },\n' % (objectives[obj]['criteria'],\
+                                                                objectives[obj]['weight']))  
+        fo.write('}\n')            
+        # criteria
         fo.write('criteria = {\n') 
         for g in criteria:
             fo.write('\'' +str(g)+'\': {\n')
+            try:
+                fo.write('\'name\': \'%s\',\n' % criteria[g]['name']) 
+            except:
+                pass
             if isDecimal:
                 #fo.write('\'weight\':Decimal("'+str(criteria[g]['weight'])+'"),\'scale\': (Decimal("'+str(criteria[g]['scale'][0])+'"),Decimal("'+str(criteria[g]['scale'][1])+'")),\n')
                 #fo.write('\'thresholds\' :' + str(criteria[g]['thresholds']) + '},\n')
@@ -1909,8 +1930,9 @@ The performance evaluations of each decision alternative on each criterion are g
                     fo.write('\'thresholds\' :' + str(criteria[g]['thresholds']) + '},\n')
                 except:
                     fo.write('},\n')
-                
+            
         fo.write('}\n')
+        # evaluation
         fo.write('evaluation = {\n')
         for g in criteria:
             fo.write('\'' +str(g)+'\': {\n')
@@ -5860,7 +5882,7 @@ if __name__ == "__main__":
 
     g = BipolarOutrankingDigraph(t)
     print(g.computeMarginalVersusGlobalOutrankingCorrelations())
-    print(t.computePerformanceHeatmap(Correlations=True,colorLevels=5,Debug=True))
+    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,Debug=False)
     
     
 ##    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
