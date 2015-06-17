@@ -369,6 +369,8 @@ The performance evaluations of each decision alternative on each criterion are g
                 self.actions = argDict['actionset']
             try:
                 self.objectives = argDict['objectives']
+                for obj in self.objectives:
+                    self.objectives[obj]['weight'] = Decimal(self.objectives[obj]['weight'])
             except:
                 pass
             try:
@@ -1900,13 +1902,23 @@ The performance evaluations of each decision alternative on each criterion are g
         # actions
         fo.write('actions = {\n')
         for x in actions:
-            fo.write('\'%s\': {\'name\': \'%s\'},\n' %(x,x))
+            try:
+                xnameString = actions[x]['name']
+            except:
+                xnameString = str(x)
+            try:
+                xcommentString = actions[x]['comment']
+            except:
+                xcommentString = ''
+            fo.write('\'%s\': {\'name\': \'%s\',\'comment\':\'%s\'},\n' %(x,xnameString,xcommentString))
         fo.write('}\n')
         # objectives
         fo.write('objectives = {\n')
         for obj in objectives:
             fo.write('\'%s\': {\'name\': \'%s\',\n' % (obj,objectives[obj]['name']) )
-            fo.write('\'criteria\': %s, \'weight\': %f },\n' % (objectives[obj]['criteria'],\
+            weightString = '%%.%df' % (valueDigits)
+            objString = '\'criteria\': %s, \'weight\':'+weightString+'},\n'
+            fo.write(objString % (objectives[obj]['criteria'],\
                                                                 objectives[obj]['weight']))  
         fo.write('}\n')            
         # criteria
@@ -5860,6 +5872,8 @@ if __name__ == "__main__":
                                    Debug=False,
                                    missingDataProbability=0.1,
                                    seed=100,Threading=False)
+    t.save(valueDigits=3)
+    tt = PerformanceTableau('tempperftab')
     
 ##    t = ConstantPerformanceTableau(t,
 ##                                   actionsSubset=['a01','a02','a03'],
@@ -5882,9 +5896,9 @@ if __name__ == "__main__":
 ##    actionsList = qsrbc.computeQsRbcRanking()
 ##
 
-    g = BipolarOutrankingDigraph(t)
-    print(g.computeMarginalVersusGlobalOutrankingCorrelations())
-    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,Debug=False)
+##    g = BipolarOutrankingDigraph(t)
+##    print(g.computeMarginalVersusGlobalOutrankingCorrelations())
+##    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,Debug=False)
     
     
 ##    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
