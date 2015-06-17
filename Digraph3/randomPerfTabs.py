@@ -1534,14 +1534,14 @@ class _Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
                 self.criteria[g]['name'] = 'random environmental criterion'
                 self.criteria[g]['objective'] = 'Env'
                 
-        self.objectives = {
+        self.objectives = OrderedDict({
             'Eco': {'name':'Economical aspect',
                   'comment': 'Random3ObjectivesPerformanceTableau generated'},
             'Soc': {'name': 'Societal aspect',
                   'comment': 'Random3ObjectivesPerformanceTableau generated'},
             'Env': {'name':'Environmental aspect',
                   'comment': 'Random3ObjectivesPerformanceTableau generated'}
-            }
+            })
         
         for obj in self.objectives:
             objCriteria = [g for g in self.criteria if self.criteria[g]['objective'] == obj]
@@ -1646,17 +1646,17 @@ class _Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
                 if random.random() < missingDataProbability:
                     self.evaluation[g][x] = Decimal('-999')
                 
-    def showObjectives(self):
-        print('*------ show objectives -------"')
-        for obj in self.objectives:
-                                               
-            print('%s: %s' % (obj, self.objectives[obj]['name']))
-                                               
-            for g in self.objectives[obj]['criteria']:
-                print('  ', g, self.criteria[g]['name'], self.criteria[g]['weight'])
-                                               
-            print('  Total weight: %.2f (%d criteria)\n'\
-                  % (self.objectives[obj]['weight'],len(self.objectives[obj]['criteria'])))
+##    def showObjectives(self):
+##        print('*------ show objectives -------"')
+##        for obj in self.objectives:
+##                                               
+##            print('%s: %s' % (obj, self.objectives[obj]['name']))
+##                                               
+##            for g in self.objectives[obj]['criteria']:
+##                print('  ', g, self.criteria[g]['name'], self.criteria[g]['weight'])
+##                                               
+##            print('  Total weight: %.2f (%d criteria)\n'\
+##                  % (self.objectives[obj]['weight'],len(self.objectives[obj]['criteria'])))
 
     def showActions(self):
         print('*----- show decision action --------------*')
@@ -1730,6 +1730,12 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                     'name': 'random %s decision action' % (actionType),
                     'comment': 'RandomCBPerformanceTableau() generated.',
                     'type': actionType}
+
+        # generate objectives
+        objectives = OrderedDict({
+            'C': {'name': 'Costs', 'criteria':[]},
+            'B': {'name': 'Benefits', 'criteria':[]},
+            })
         
         # generate criteria
         if numberOfCriteria == None:
@@ -1752,11 +1758,15 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                 scaleType = random.choice(maxScaleTypesList)
             criteria[g]['scaleType'] = scaleType
             if criterionType == 'min':
+                criteria[g]['objective'] = 'C'
+                objectives['C']['criteria'].append(g)
                 if scaleType == 'ordinal':
                     criteria[g]['name'] = 'random ordinal cost criterion'
                 else:
                     criteria[g]['name'] = 'random cardinal cost criterion'
             else:
+                criteria[g]['objective'] = 'B'
+                objectives['B']['criteria'].append(g)
                 if scaleType == 'ordinal':
                     criteria[g]['name'] = 'random ordinal benefit criterion'
                 else:
@@ -1846,6 +1856,9 @@ class RandomCBPerformanceTableau(PerformanceTableau):
 
             if Debug:
                 print(criteria[g])
+        for obj in objectives:
+            objectives[obj]['weight'] = sum([criteria[g]['weight']\
+                    for g in criteria if criteria[g]['objective'] == obj])
 
         # generate random evaluations
         
@@ -2003,6 +2016,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
 
         # final storage
         self.actions = actions
+        self.objectives = objectives
         self.criteriaWeightMode = weightMode
         self.criteria = criteria
         self.evaluation = evaluation
@@ -2069,7 +2083,7 @@ if __name__ == "__main__":
     from randomPerfTabs import *
     from time import time
     t0 = time()
-    t = RandomCBPerformanceTableau(numberOfActions=5000,
+    t = RandomCBPerformanceTableau(numberOfActions=20,
                                    numberOfCriteria=13,
                                    samplingSize=100000,
                                    seed=100)
