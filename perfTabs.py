@@ -494,10 +494,15 @@ The performance evaluations of each decision alternative on each criterion are g
         criteriaList.sort()
         for g in criteriaList:
             try:
-                criterionName = self.criteria[g]['name']
+                criterionName = '%s/' % self.objectives[self.criteria[g]['objective']]['name']                                        
             except:
                 criterionName = ''
+            try:
+                criterionName += self.criteria[g]['name']
+            except:
+                pass
             print(g, repr(criterionName))
+            
             print('  Scale =', self.criteria[g]['scale'])
             if IntegerWeights:
                 print('  Weight = %d ' % (self.criteria[g]['weight']))
@@ -513,7 +518,23 @@ The performance evaluations of each decision alternative on each criterion are g
                     print('; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug))
             except:
                 pass
-            print() 
+            print()
+
+    def showObjectives(self):
+        if 'objectives' in self.__dict__:
+            print('*------ show objectives -------"')
+            
+            for obj in self.objectives:
+                                                   
+                print('%s: %s' % (obj, self.objectives[obj]['name']))
+                                                   
+                for g in self.objectives[obj]['criteria']:
+                    print('  ', g, self.criteria[g]['name'], self.criteria[g]['weight'])
+                                                   
+                print('  Total weight: %.2f (%d criteria)\n'\
+                      % (self.objectives[obj]['weight'],len(self.objectives[obj]['criteria'])))
+        else:
+            print('The performance tableau does not contain objectives.')
  
     def convertWeightFloatToDecimal(self):
         """
