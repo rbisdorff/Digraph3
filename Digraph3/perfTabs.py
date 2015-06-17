@@ -1470,6 +1470,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                    pageTitle=None,
                                    ndigits=2,
                                    Ranked=True,
+                                   strategy='optimistic',
                                    Correlations=False,
                                    Threading=False,
                                    Debug=False):
@@ -1484,6 +1485,7 @@ The performance evaluations of each decision alternative on each criterion are g
         if Ranked and actionsList == None:
             from weakOrders import QuantilesRankingDigraph
             qsr = QuantilesRankingDigraph(self,LowerClosed=True,
+                                          strategy=strategy,
                                           Threading=Threading,
                                           Debug=Debug)
             actionsList = qsr.computeQsRbcRanking()
