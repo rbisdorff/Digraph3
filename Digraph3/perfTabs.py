@@ -1929,6 +1929,11 @@ The performance evaluations of each decision alternative on each criterion are g
                 fo.write('\'name\': \'%s\',\n' % criteria[g]['name']) 
             except:
                 pass
+            try:
+                fo.write('\'objective\': \'%s\',\n' % criteria[g]['objective']) 
+            except:
+                pass
+            
             if isDecimal:
                 #fo.write('\'weight\':Decimal("'+str(criteria[g]['weight'])+'"),\'scale\': (Decimal("'+str(criteria[g]['scale'][0])+'"),Decimal("'+str(criteria[g]['scale'][1])+'")),\n')
                 #fo.write('\'thresholds\' :' + str(criteria[g]['thresholds']) + '},\n')
@@ -5871,9 +5876,11 @@ if __name__ == "__main__":
                                    integerWeights=True,
                                    Debug=False,
                                    missingDataProbability=0.1,
-                                   seed=100,Threading=False)
+                                   seed=101,Threading=False)
     t.save(valueDigits=3)
     tt = PerformanceTableau('tempperftab')
+    tt.showObjectives()
+    tt.showCriteria()
     
 ##    t = ConstantPerformanceTableau(t,
 ##                                   actionsSubset=['a01','a02','a03'],
