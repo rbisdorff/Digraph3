@@ -3548,18 +3548,31 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
 class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     """
-    Specialization of the standard OutrankingDigraph class for generating
-    new bipolar ordinal-valued outranking digraphs.
+    Specialization of the abstract OutrankingDigraph root class for generating
+    bipolarly-valued outranking digraphs.
 
     Parameters:
-        | argPerfTab: instance of PerformanceTableau class
-        | coalition: sublist of criteria
-        | hasNoVeto: veto desactivation flag (False by default)
-        | hasBipolarVeto: bipolar versus electre veto activation
-        | Normalized: valuation domain default is [-100,+100]. If True, the valuation doamin is put to [-1,+1].
-        | Threading: allows to profit from multiple processor cores via the multiprocessing module (False by default)
-        | nbrCores: controls the effective number of cores that are used in the muliprocessing
+        * argPerfTab: instance of PerformanceTableau class.
+          If a file name string is given, the performance tableau will directly be loaded first.
+        * coalition: subset of criteria to be used for contruction the outranking digraph.
+        * hasNoVeto: veto desactivation flag (False by default).
+        * hasBipolarVeto: bipolar versus electre veto activation (true by default).
+        * Normalized: valuation domain default is by default in percents [-100,+100].
+          If True, the valuation domain is recoded to [-1.0,+1.0].
+        * WithConcordanceRelation: True by default when not Threading.
+          The self.concordance Relation contains the significance majority margin of the at least as good relation
+          without the large performance difference polarization.
+        * WithVetoCounts: True by default when not threading. All vetos and countervetos
+          are stored in self.vtos and self.negative vetos,
+          as well the counts of large performance differences in self.largePerformanceDifferencesCount.
+        * Threading: allows to profit from multiple processor cores via the multiprocessing module (False by default)
+        * nbrCores: controls the effective number of cores that are used in the muliprocessing.
+          If none given, the os.cpu_count method is used in order to determine the number of availble cores on the machine.
 
+    .. warning::
+
+        If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.
+       
     """
     def __init__(self,argPerfTab=None,\
                  coalition=None,\
@@ -3568,7 +3581,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  Normalized=False,\
                  Threading=False,\
                  WithConcordanceRelation=True,\
-                 WithVetos=True,\
+                 WithVetoCounts=True,\
                  nbrCores=None,\
                  Debug=False):
         from copy import deepcopy 
@@ -3583,7 +3596,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         # set Threading parameters
         if Threading:
             WithConcordanceRelation = False
-            WithVetos = False
+            WithVetoCounts = False
             
         #self.performanceTableau = perfTab
 
@@ -3656,7 +3669,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                                 hasSymmetricThresholds=True,\
                                                 Threading=Threading,\
                                                 WithConcordanceRelation=WithConcordanceRelation,\
-                                                WithVetos=WithVetos,\
+                                                WithVetoCounts=WithVetoCounts,\
                                                 nbrCores=nbrCores,\
                                                 Debug=Debug)
 
@@ -3719,7 +3732,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                            hasSymmetricThresholds=True,\
                            Threading=False,\
                            WithConcordanceRelation=True,\
-                           WithVetos=True,\
+                           WithVetoCounts=True,\
                            nbrCores=None):
         """
         Specialization of the corresponding BipolarOutrankingDigraph method
@@ -3735,7 +3748,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                     hasNoVeto=hasNoVeto,\
                                     hasBipolarVeto=hasBipolarVeto,\
                                     WithConcordanceRelation=WithConcordanceRelation,\
-                                    WithVetos=WithVetos,\
+                                    WithVetoCounts=WithVetoCounts,\
                                     Debug=Debug,\
                                     hasSymmetricThresholds=hasSymmetricThresholds)
         ##
@@ -3781,7 +3794,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                             hasNoVeto=hasNoVeto,\
                                             hasBipolarVeto=hasBipolarVeto,\
                                             WithConcordanceRelation=False,
-                                            WithVetos=False,                                        
+                                            WithVetoCounts=False,                                        
                                             Debug=False,\
                                             hasSymmetricThresholds=hasSymmetricThresholds)
                     else:
@@ -3792,7 +3805,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                             hasNoVeto=hasNoVeto,\
                                             hasBipolarVeto=hasBipolarVeto,\
                                             WithConcordanceRelation=False,
-                                            WithVetos=False,
+                                            WithVetoCounts=False,
                                             Debug=False,\
                                             hasSymmetricThresholds=hasSymmetricThresholds)
                     fo.write(dumps(splitRelation,-1))
@@ -3909,7 +3922,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                            hasNoVeto=False,\
                            hasBipolarVeto=True,\
                            WithConcordanceRelation=True,\
-                           WithVetos=True,\
+                           WithVetoCounts=True,\
                            Debug=False,\
                            hasSymmetricThresholds=True):
         """
@@ -3917,12 +3930,12 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         of a given performance tableau instantiation PerfTab.
 
         Parameters:
-            | PerfTab.criteria, PerfTab.evaluation,
-            | inital nodes, terminal nodes, for restricted purposes 
+            * PerfTab.criteria, PerfTab.evaluation,
+            * inital nodes, terminal nodes, for restricted purposes 
 
         Flags:
-            | hasNoVeto = True inhibits taking into account large performances differences
-            | hasBipolarVeto = False allows to revert (if False) to standard Electre veto handling
+            * hasNoVeto = True inhibits taking into account large performances differences
+            * hasBipolarVeto = False allows to revert (if False) to standard Electre veto handling
             
         """
         ## default setting for digraphs
@@ -4081,7 +4094,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         # storing concordance relation and vetoes
         if WithConcordanceRelation:
             self.concordanceRelation = concordanceRelation
-        if WithVetos:
+        if WithVetoCounts:
             self.vetos = vetos
             if hasBipolarVeto:
                 self.negativeVetos = negativeVetos
