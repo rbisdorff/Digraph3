@@ -3572,7 +3572,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     .. warning::
 
         If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.
-        Removing this limitation is on the todo list and will be removed soon.
+        Removing this limitation is on the todo list and will be done soon.
        
     """
     def __init__(self,argPerfTab=None,\
