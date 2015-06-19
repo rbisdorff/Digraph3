@@ -266,7 +266,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                        hasBipolarVeto=True,
                                                         Threading=Threading,
                                                         WithConcordanceRelation=False,
-                                                        WithVetos=False,
+                                                        WithVetoCounts=False,
                                                         Debug=Debug)
             else:
                 self.relation = BipolarOutrankingDigraph._constructRelationWithThreading(self,self.criteria,
@@ -277,7 +277,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                         hasBipolarVeto=True,
                                                         Threading=Threading,
                                                         WithConcordanceRelation=False,
-                                                        WithVetos=False,
+                                                        WithVetoCounts=False,
                                                         Debug=Debug)
             if LowerClosed:
                 for x in self.actionsOrig:
@@ -324,7 +324,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                            hasSymmetricThresholds=True,\
                            Threading = False,\
                            WithConcordanceRelation=False,\
-                           WithVetos=False,\
+                           WithVetoCounts=False,\
                            nbrCores=None):
         """
         Specialization of the corresponding BipolarOutrankingDigraph method
@@ -341,7 +341,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                     hasBipolarVeto=hasBipolarVeto,\
                                     Debug=Debug,\
                                     WithConcordanceRelation=WithConcordanceRelation,\
-                                    WithVetos=WithVetos,\
+                                    WithVetoCounts=WithVetoCounts,\
                                     hasSymmetricThresholds=hasSymmetricThresholds)
         ##
         else:  # parallel computation
