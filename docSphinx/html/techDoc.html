@@ -1088,7 +1088,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3291,7 +3291,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3674,21 +3674,22 @@ If a file name string is given, the performance tableau will directly be loaded 
 <li>hasBipolarVeto: bipolar versus electre veto activation (true by default).</li>
 <li>Normalized: valuation domain default is by default in percents [-100,+100].
 If True, the valuation domain is recoded to [-1.0,+1.0].</li>
-<li>WithConcordanceRelation: True by default when not Threading.
-The self.concordance Relation contains the significance majority margin of the at least as good relation
+<li>WithConcordanceRelation: True by default when not threading.
+The self.concordanceRelation contains the significance majority margin of the at least as good relation
 without the large performance difference polarization.</li>
 <li>WithVetoCounts: True by default when not threading. All vetos and countervetos
-are stored in self.vtos and self.negative vetos,
-as well the counts of large performance differences in self.largePerformanceDifferencesCount.</li>
-<li>Threading: allows to profit from multiple processor cores via the multiprocessing module (False by default)</li>
-<li>nbrCores: controls the effective number of cores that are used in the muliprocessing.
-If none given, the os.cpu_count method is used in order to determine the number of availble cores on the machine.</li>
+are stored in self.vetos and self.negativeVetos slots,
+as well the counts of large performance differences in self.largePerformanceDifferencesCount slot.</li>
+<li>Threading: False by default. Allows to profit from a SMP machine with multiple processor cores via the multiprocessing module.</li>
+<li>nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases.
+If none is given, the os.cpu_count method is used in order to determine the number of availble cores on the SMP machine.</li>
 </ul>
 </dd>
 </dl>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.</p>
+<p class="last">If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.
+Removing this limitation is on the todo list and will be removed soon.</p>
 </div>
 <dl class="method">
 <dt id="outrankingDigraphs.BipolarOutrankingDigraph.computeCriterionRelation">
@@ -3977,7 +3978,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
