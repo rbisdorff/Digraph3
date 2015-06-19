@@ -1088,7 +1088,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3173,26 +3173,28 @@ xml.etree (for Python 2.5+).</p>
 <p>In this <em>Digraph3</em> module, the root <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class provides a generic <strong>performance table model</strong>. A given object of this class consists in:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>a potential set of decision <strong>actions</strong> : a dictionary describing the potential decision actions or alternatives with &#8216;name&#8217; and &#8216;comment&#8217; attributes,</li>
-<li>a coherent family of <strong>criteria</strong>: a dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,</li>
+<li>a potential set of decision <strong>actions</strong> : an ordered dictionary describing the potential decision actions or alternatives with &#8216;name&#8217; and &#8216;comment&#8217; attributes,</li>
+<li>a coherent family of <strong>criteria</strong>: a ordered dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,</li>
 <li>the <strong>evaluations</strong>: a dictionary of performance evaluations for each decision action or alternative on each criterion function.</li>
 </ol>
 </div></blockquote>
 <p>Structure:</p>
-<div class="highlight-python"><div class="highlight"><pre>actions = {&#39;a1&#39;: {&#39;name&#39;: ..., &#39;comment&#39;: ...},
-           &#39;a2&#39;: {&#39;name&#39;: ..., &#39;comment&#39;: ...},
-           ...}
-criteria = {&#39;g1&#39;: {&#39;weight&#39;:Decimal(&quot;3.00&quot;),
+<div class="highlight-python"><div class="highlight"><pre>actions = OrderedDict[(&#39;a1&#39;, {&#39;name&#39;: ..., &#39;comment&#39;: ...}),
+           (&#39;a2&#39;, {&#39;name&#39;: ..., &#39;comment&#39;: ...}),
+           ...])
+criteria = OrderedDict([
+     (&#39;g1&#39;, {&#39;weight&#39;:Decimal(&quot;3.00&quot;),
+             &#39;scale&#39;: (Decimal(&quot;0.00&quot;),Decimal(&quot;100.00&quot;)),
+             &#39;thresholds&#39; : {&#39;pref&#39;: (Decimal(&#39;20.0&#39;), Decimal(&#39;0.0&#39;)),
+                             &#39;ind&#39;: (Decimal(&#39;10.0&#39;), Decimal(&#39;0.0&#39;)),
+                             &#39;veto&#39;: (Decimal(&#39;80.0&#39;), Decimal(&#39;0.0&#39;))}
+             }),
+     (&#39;g2&#39;, {&#39;weight&#39;:Decimal(&quot;5.00&quot;),
                    &#39;scale&#39;: (Decimal(&quot;0.00&quot;),Decimal(&quot;100.00&quot;)),
                    &#39;thresholds&#39; : {&#39;pref&#39;: (Decimal(&#39;20.0&#39;), Decimal(&#39;0.0&#39;)),
                                    &#39;ind&#39;: (Decimal(&#39;10.0&#39;), Decimal(&#39;0.0&#39;)),
-                                   &#39;veto&#39;: (Decimal(&#39;80.0&#39;), Decimal(&#39;0.0&#39;))} },
-            &#39;g2&#39;: {&#39;weight&#39;:Decimal(&quot;5.00&quot;),
-                   &#39;scale&#39;: (Decimal(&quot;0.00&quot;),Decimal(&quot;100.00&quot;)),
-                   &#39;thresholds&#39; : {&#39;pref&#39;: (Decimal(&#39;20.0&#39;), Decimal(&#39;0.0&#39;)),
-                                   &#39;ind&#39;: (Decimal(&#39;10.0&#39;), Decimal(&#39;0.0&#39;)),
-                                   &#39;veto&#39;: (Decimal(&#39;80.0&#39;), Decimal(&#39;0.0&#39;))} },
-              ...}
+                                   &#39;veto&#39;: (Decimal(&#39;80.0&#39;), Decimal(&#39;0.0&#39;))}}),
+              ...])
 evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39;:Decimal(&quot;99.85&quot;), ...},
               &#39;g2&#39;: {&#39;a1&#39;:Decimal(&quot;88.12&quot;),&#39;a2&#39;:Decimal(&quot;33.25&quot;), ...},
               ...}
@@ -3291,7 +3293,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3523,7 +3525,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.showCriteria">
-<code class="descname">showCriteria</code><span class="sig-paren">(</span><em>IntegerWeights=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.showCriteria" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showCriteria</code><span class="sig-paren">(</span><em>IntegerWeights=False</em>, <em>Alphabetic=False</em>, <em>ByObjectives=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.showCriteria" title="Permalink to this definition">¶</a></dt>
 <dd><p>print Criteria with thresholds and weights.</p>
 </dd></dl>
 
@@ -3689,7 +3691,7 @@ If None is given, the os.cpu_count method is used in order to determine the numb
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.
-Removing this limitation is on the todo list and will be removed soon.</p>
+Removing this limitation is on the todo list and will be done soon.</p>
 </div>
 <dl class="method">
 <dt id="outrankingDigraphs.BipolarOutrankingDigraph.computeCriterionRelation">
@@ -3978,7 +3980,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">

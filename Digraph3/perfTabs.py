@@ -271,26 +271,28 @@ class PerformanceTableau(object):
     """
 In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:
 
-     1. a potential set of decision **actions** : a dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
-     2. a coherent family of **criteria**: a dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
+     1. a potential set of decision **actions** : an ordered dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
+     2. a coherent family of **criteria**: a ordered dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
      3. the **evaluations**: a dictionary of performance evaluations for each decision action or alternative on each criterion function.
 
 Structure::
 
-       actions = {'a1': {'name': ..., 'comment': ...},
-                  'a2': {'name': ..., 'comment': ...},
-                  ...}
-       criteria = {'g1': {'weight':Decimal("3.00"),
+       actions = OrderedDict[('a1', {'name': ..., 'comment': ...}),
+                  ('a2', {'name': ..., 'comment': ...}),
+                  ...])
+       criteria = OrderedDict([
+            ('g1', {'weight':Decimal("3.00"),
+                    'scale': (Decimal("0.00"),Decimal("100.00")),
+                    'thresholds' : {'pref': (Decimal('20.0'), Decimal('0.0')),
+                                    'ind': (Decimal('10.0'), Decimal('0.0')),
+                                    'veto': (Decimal('80.0'), Decimal('0.0'))}
+                    }),
+            ('g2', {'weight':Decimal("5.00"),
                           'scale': (Decimal("0.00"),Decimal("100.00")),
                           'thresholds' : {'pref': (Decimal('20.0'), Decimal('0.0')),
                                           'ind': (Decimal('10.0'), Decimal('0.0')),
-                                          'veto': (Decimal('80.0'), Decimal('0.0'))} },
-                   'g2': {'weight':Decimal("5.00"),
-                          'scale': (Decimal("0.00"),Decimal("100.00")),
-                          'thresholds' : {'pref': (Decimal('20.0'), Decimal('0.0')),
-                                          'ind': (Decimal('10.0'), Decimal('0.0')),
-                                          'veto': (Decimal('80.0'), Decimal('0.0'))} },
-                     ...}
+                                          'veto': (Decimal('80.0'), Decimal('0.0'))}}),
+                     ...])
        evaluation = {'g1': {'a1':Decimal("57.28"),'a2':Decimal("99.85"), ...},
                      'g2': {'a1':Decimal("88.12"),'a2':Decimal("33.25"), ...},
                      ...}
@@ -488,7 +490,7 @@ The performance evaluations of each decision alternative on each criterion are g
             print('  comment:   ',self.actions[x]['comment'])
             print()
     
-    def showCriteria(self,IntegerWeights=False,Debug=False):
+    def showCriteria(self,IntegerWeights=False,Alphabetic=False,ByObjectives=False,Debug=False):
         """
         print Criteria with thresholds and weights.
         """
@@ -496,35 +498,67 @@ The performance evaluations of each decision alternative on each criterion are g
         sumWeights = Decimal('0.0')
         for g in self.criteria:
             sumWeights += self.criteria[g]['weight']
-        criteriaList = [g for g in self.criteria]
-        criteriaList.sort()
-        for g in criteriaList:
-            try:
-                criterionName = '%s/' % self.objectives[self.criteria[g]['objective']]['name']                                        
-            except:
-                criterionName = ''
-            try:
-                criterionName += self.criteria[g]['name']
-            except:
-                pass
-            print(g, repr(criterionName))
-            
-            print('  Scale =', self.criteria[g]['scale'])
-            if IntegerWeights:
-                print('  Weight = %d ' % (self.criteria[g]['weight']))
-            else:
-                weightg = self.criteria[g]['weight']/sumWeights
-                print('  Weight = %.3f ' % (weightg))
-            try:
-                for th in self.criteria[g]['thresholds']:
-                    if Debug:
-                        print('-->>>', th,self.criteria[g]['thresholds'][th][0],self.criteria[g]['thresholds'][th][1])
-                    print('  Threshold %s : %.2f + %.2fx' % (th,self.criteria[g]['thresholds'][th][0],self.criteria[g]['thresholds'][th][1]), end=' ')
-                    #print self.criteria[g]['thresholds'][th]
-                    print('; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug))
-            except:
-                pass
-            print()
+        if ByObjectives:
+            for obj in self.objectives:
+                criteriaList = [g for g in self.criteria if self.criteria[g]['objective']==obj]
+                for g in criteriaList:
+                    try:
+                        criterionName = '%s/' % self.objectives[self.criteria[g]['objective']]['name']                                        
+                    except:
+                        criterionName = ''
+                    try:
+                        criterionName += self.criteria[g]['name']
+                    except:
+                        pass
+                    print(g, repr(criterionName))
+                    
+                    print('  Scale =', self.criteria[g]['scale'])
+                    if IntegerWeights:
+                        print('  Weight = %d ' % (self.criteria[g]['weight']))
+                    else:
+                        weightg = self.criteria[g]['weight']/sumWeights
+                        print('  Weight = %.3f ' % (weightg))
+                    try:
+                        for th in self.criteria[g]['thresholds']:
+                            if Debug:
+                                print('-->>>', th,self.criteria[g]['thresholds'][th][0],self.criteria[g]['thresholds'][th][1])
+                            print('  Threshold %s : %.2f + %.2fx' % (th,self.criteria[g]['thresholds'][th][0],self.criteria[g]['thresholds'][th][1]), end=' ')
+                            #print self.criteria[g]['thresholds'][th]
+                            print('; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug))
+                    except:
+                        pass
+                    print()
+        else:
+            criteriaList = list(self.criteria.keys())
+            if Alphabetic:
+                criteriaList.sort()
+            for g in criteriaList:
+                try:
+                    criterionName = '%s/' % self.objectives[self.criteria[g]['objective']]['name']                                        
+                except:
+                    criterionName = ''
+                try:
+                    criterionName += self.criteria[g]['name']
+                except:
+                    pass
+                print(g, repr(criterionName))
+                
+                print('  Scale =', self.criteria[g]['scale'])
+                if IntegerWeights:
+                    print('  Weight = %d ' % (self.criteria[g]['weight']))
+                else:
+                    weightg = self.criteria[g]['weight']/sumWeights
+                    print('  Weight = %.3f ' % (weightg))
+                try:
+                    for th in self.criteria[g]['thresholds']:
+                        if Debug:
+                            print('-->>>', th,self.criteria[g]['thresholds'][th][0],self.criteria[g]['thresholds'][th][1])
+                        print('  Threshold %s : %.2f + %.2fx' % (th,self.criteria[g]['thresholds'][th][0],self.criteria[g]['thresholds'][th][1]), end=' ')
+                        #print self.criteria[g]['thresholds'][th]
+                        print('; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug))
+                except:
+                    pass
+                print()
 
     def showObjectives(self):
         if 'objectives' in self.__dict__:
@@ -1222,10 +1256,18 @@ The performance evaluations of each decision alternative on each criterion are g
             html += '<table style="background-color:White;" border="1">'
             html += '<tr bgcolor="#9acd32"><th>criterion</th>'
             for x in actionsList:
-                html += '<th bgcolor="#FFF79B">%s</th>' % (str(x))
+                try:
+                    xName = self.actions[x]['shortName']
+                except:
+                    xName = str(x)
+                html += '<th bgcolor="#FFF79B">%s</th>' % (xName)
             html += '</tr>'
             for g in criteriaList:
-                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (str(g))
+                try:
+                    gName = self.criteria[g]['shortName']
+                except:
+                    gName = str(g)
+                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (gName)
                 for x in actionsList:
                     if self.evaluation[g][x] != Decimal("-999"):
                         if self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
@@ -1246,10 +1288,18 @@ The performance evaluations of each decision alternative on each criterion are g
             html += '<table style="background-color:White;" border="1">'
             html += '<tr bgcolor="#9acd32"><th>criterion</th>'
             for g in criteriaList:
-                html += '<th bgcolor="#FFF79B">%s</th>' % (str(g))
+                try:
+                    gName = self.criteria[g]['shortName']
+                except:
+                    gName = str(g)
+                html += '<th bgcolor="#FFF79B">%s</th>' % (gName)
             html += '</tr>'
             for x in actionsList:
-                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (str(x))
+                try:
+                    xName = self.actions[x]['shortName']
+                except:
+                    xName = str(x)
+                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (xName)
                 for g in criteriaList:
                     if self.evaluation[g][x] != Decimal("-999"):
                         if self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
@@ -1616,7 +1666,11 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
         html += '<tr bgcolor=%s><th>criteria</th>' % (columnHeaderColor)
         for g in criteriaList:
-            html += '<th>%s</th>' % (str(g))
+            try:
+                gName = self.criteria[g]['shortName']
+            except:
+                gName = str(g)
+            html += '<th>%s</th>' % (gName)
         html += '</tr>\n'
         html += '<tr><th bgcolor=%s>weights</th>' % (columnHeaderColor)
         for g in criteriaList:
@@ -1630,7 +1684,11 @@ The performance evaluations of each decision alternative on each criterion are g
         if Debug:
             print(html)
         for x in actionsList:
-            html += '<tr><th bgcolor=%s>%s</th>' % (rowHeaderColor,str(x))
+            try:
+                xName = self.actions[x]['shortName']
+            except:
+                xName = str(x)
+            html += '<tr><th bgcolor=%s>%s</th>' % (rowHeaderColor,xName)
             for g in criteriaList:
                 if self.evaluation[g][x] != Decimal("-999"):
                     formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
@@ -1900,57 +1958,70 @@ The performance evaluations of each decision alternative on each criterion are g
         fo.write('from decimal import Decimal\n')
         fo.write('from collections import OrderedDict\n')
         # actions
-        fo.write('actions = {\n')
+        fo.write('actions = OrderedDict([\n')
         for x in actions:
-            try:
-                xnameString = actions[x]['name']
-            except:
-                xnameString = str(x)
-            try:
-                xcommentString = actions[x]['comment']
-            except:
-                xcommentString = ''
-            fo.write('\'%s\': {\'name\': \'%s\',\'comment\':\'%s\'},\n' %(x,xnameString,xcommentString))
-        fo.write('}\n')
+            fo.write('(\'%s\', {\n' % str(x))
+            for it in self.actions[x].keys():
+                fo.write('\'%s\': %s,\n' % (it,repr(self.actions[x][it])) )
+            fo.write('}),\n')
+##            try:
+##                xnameString = actions[x]['name']
+##            except:
+##                xnameString = str(x)
+##            try:
+##                xcommentString = actions[x]['comment']
+##            except:
+##                xcommentString = ''
+##            fo.write('(\'%s\', {\'name\': \'%s\',\'comment\':\'%s\'}),\n' %(x,xnameString,xcommentString))
+##            
+        fo.write('])\n')
         # objectives
-        fo.write('objectives = {\n')
+        fo.write('objectives = OrderedDict([\n')
         for obj in objectives:
-            fo.write('\'%s\': {\'name\': \'%s\',\n' % (obj,objectives[obj]['name']) )
-            weightString = '%%.%df' % (valueDigits)
-            objString = '\'criteria\': %s, \'weight\':'+weightString+'},\n'
-            fo.write(objString % (objectives[obj]['criteria'],\
-                                                                objectives[obj]['weight']))  
-        fo.write('}\n')            
+            fo.write('(\'%s\', {\n' % str(obj))
+            for it in self.objectives[obj].keys():
+                fo.write('\'%s\': %s,\n' % (it,repr(self.objectives[obj][it])))
+            fo.write('}),\n')
+##            fo.write( '(\'%s\', {\'name\': \'%s\',\n' % (obj,objectives[obj]['name']) )
+##            weightString = '%%.%df' % (valueDigits)
+##            objString = '\'criteria\': %s, \'weight\':'+weightString+'}),\n'
+##            fo.write(objString % (objectives[obj]['criteria'],\
+##                                                                objectives[obj]['weight']))  
+        fo.write('])\n')            
         # criteria
-        fo.write('criteria = {\n') 
+        fo.write('criteria = OrderedDict([\n') 
         for g in criteria:
-            fo.write('\'' +str(g)+'\': {\n')
-            try:
-                fo.write('\'name\': \'%s\',\n' % criteria[g]['name']) 
-            except:
-                pass
-            try:
-                fo.write('\'objective\': \'%s\',\n' % criteria[g]['objective']) 
-            except:
-                pass
+            fo.write('(\'%s\', {\n' % str(g))
+            for it in self.criteria[g].keys():
+                fo.write('\'%s\': %s,\n' % (it,repr(self.criteria[g][it])))
+            fo.write('}),\n')
+##            fo.write('(\'' +str(g)+'\', {\n')
+##            try:
+##                fo.write('\'name\': \'%s\',\n' % criteria[g]['name']) 
+##            except:
+##                pass
+##            try:
+##                fo.write('\'objective\': \'%s\',\n' % criteria[g]['objective']) 
+##            except:
+##                pass
             
-            if isDecimal:
-                #fo.write('\'weight\':Decimal("'+str(criteria[g]['weight'])+'"),\'scale\': (Decimal("'+str(criteria[g]['scale'][0])+'"),Decimal("'+str(criteria[g]['scale'][1])+'")),\n')
-                #fo.write('\'thresholds\' :' + str(criteria[g]['thresholds']) + '},\n')
-                weightScaleString = '\'weight\':Decimal("%%.%df"),\'scale\': (Decimal("%%.%df"),Decimal("%%.%df")),\n' % (valueDigits,valueDigits,valueDigits)
-                fo.write(weightScaleString % (criteria[g]['weight'],criteria[g]['scale'][0],criteria[g]['scale'][1]))
-                try:
-                    fo.write('\'thresholds\' : %s },\n' % ( str(criteria[g]['thresholds']) ) )
-                except:
-                    fo.write('},\n')
-            else:
-                fo.write('\'weight\':'+str(criteria[g]['weight'])+',\'scale\':'+str(criteria[g]['scale'])+',\n')
-                try:
-                    fo.write('\'thresholds\' :' + str(criteria[g]['thresholds']) + '},\n')
-                except:
-                    fo.write('},\n')
-            
-        fo.write('}\n')
+##            if isDecimal:
+##                #fo.write('\'weight\':Decimal("'+str(criteria[g]['weight'])+'"),\'scale\': (Decimal("'+str(criteria[g]['scale'][0])+'"),Decimal("'+str(criteria[g]['scale'][1])+'")),\n')
+##                #fo.write('\'thresholds\' :' + str(criteria[g]['thresholds']) + '},\n')
+##                weightScaleString = '\'weight\':Decimal("%%.%df"),\'scale\': (Decimal("%%.%df"),Decimal("%%.%df")),\n' % (valueDigits,valueDigits,valueDigits)
+##                fo.write(weightScaleString % (criteria[g]['weight'],criteria[g]['scale'][0],criteria[g]['scale'][1]))
+##                try:
+##                    fo.write('\'thresholds\' : %s }),\n' % ( str(criteria[g]['thresholds']) ) )
+##                except:
+##                    fo.write('}),\n')
+##            else:
+##                fo.write('\'weight\':'+str(criteria[g]['weight'])+',\'scale\':'+str(criteria[g]['scale'])+',\n')
+##                try:
+##                    fo.write('\'thresholds\' :' + str(criteria[g]['thresholds']) + '}),\n')
+##                except:
+##                    fo.write('}),\n')
+##            
+        fo.write('])\n')
         # evaluation
         fo.write('evaluation = {\n')
         for g in criteria:
@@ -5880,6 +5951,8 @@ if __name__ == "__main__":
     t.save(valueDigits=3)
     tt = PerformanceTableau('tempperftab')
     tt.showObjectives()
+    tt.showCriteria(ByObjectives=True)
+    tt.showCriteria(Alphabetic=True)
     tt.showCriteria()
     
 ##    t = ConstantPerformanceTableau(t,
