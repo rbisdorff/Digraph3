@@ -5026,7 +5026,7 @@ class Digraph(object):
         else:
             return Max
 
-    def save(self,fileName='tempdigraph',option=None,DecimalValuation=True):
+    def save(self,fileName='tempdigraph',option=None,DecimalValuation=True,decDigits=2):
         """Persistent storage of a Digraph class instance in the form of
             a python source code file"""
         print('*--- Saving digraph in file: <' + fileName + '.py> ---*')
@@ -5062,7 +5062,9 @@ class Digraph(object):
             fo.write('\'' + str(x) + '\': {\n')
             for y in actions:
                 if not hasIntegerValuation:
-                    fo.write('\'' + str(y) + '\': Decimal("' + str(relation[x][y]) + '"),\n')
+                    valueString = '\': %%.%df,\n' % (decDigits)
+                    fo.write('\'' + str(y) + (valueString % relation[x][y]))
+                    #fo.write('\'' + str(y) + '\': Decimal("' + str(relation[x][y]) + '"),\n')
                 else:
                     fo.write('\'' + str(y) + '\':' + str(relation[x][y]) + ',\n')
             fo.write('},\n')
