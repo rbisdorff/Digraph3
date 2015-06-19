@@ -3559,19 +3559,20 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         * hasBipolarVeto: bipolar versus electre veto activation (true by default).
         * Normalized: valuation domain default is by default in percents [-100,+100].
           If True, the valuation domain is recoded to [-1.0,+1.0].
-        * WithConcordanceRelation: True by default when not Threading.
-          The self.concordance Relation contains the significance majority margin of the at least as good relation
+        * WithConcordanceRelation: True by default when not threading.
+          The self.concordanceRelation contains the significance majority margin of the at least as good relation
           without the large performance difference polarization.
         * WithVetoCounts: True by default when not threading. All vetos and countervetos
-          are stored in self.vtos and self.negative vetos,
-          as well the counts of large performance differences in self.largePerformanceDifferencesCount.
-        * Threading: allows to profit from multiple processor cores via the multiprocessing module (False by default)
-        * nbrCores: controls the effective number of cores that are used in the muliprocessing.
-          If none given, the os.cpu_count method is used in order to determine the number of availble cores on the machine.
+          are stored in self.vetos and self.negativeVetos slots,
+          as well the counts of large performance differences in self.largePerformanceDifferencesCount slot.
+        * Threading: False by default. Allows to profit from a SMP machine with multiple processor cores via the multiprocessing module.
+        * nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases.
+          If none is given, the os.cpu_count method is used in order to determine the number of availble cores on the SMP machine.
 
     .. warning::
 
         If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.
+        Removing this limitation is on the todo list and will be removed soon.
        
     """
     def __init__(self,argPerfTab=None,\
