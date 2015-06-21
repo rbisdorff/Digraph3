@@ -3171,36 +3171,64 @@ The performance evaluations of each decision alternative on each criterion are g
 #-----------------------
 class PartialPerformanceTableau(PerformanceTableau):
     """
-    Constructor for partial performance tableaux.
+    Constructor for partial performance tableaux concerning a subset of actions and/or criteria and/or objectives
     """
-    def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None):
-        from copy import copy as deepcopy
-        
+    def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None,objectivesSubset=None):
+        from copy import deepcopy
+        from collections import OrderedDict
+        # name
         self.name = 'partial-'+inPerfTab.name
-
+        # actions
         if actionsSubset != None:
-            self.actions = {}
+            actions = OrderedDict()
             for x in actionsSubset:
-                self.actions[x] = deepcopy(inPerfTab.actions[x])
+                actions[x] = deepcopy(inPerfTab.actions[x])
         else:
-            self.actions = deepcopy(inPerfTab.actions)
-
-        if criteriaSubset != None:
-            self.criteria = {}
-            for g in criteriaSubset:
-                self.criteria[g] = deepcopy(inPerfTab.criteria[g])
+            actions = deepcopy(inPerfTab.actions)
+        self.actions = actions
+        # objectives & criteria
+        objectives = OrderedDict()
+        HasObjectives = True
+        if objectivesSubset == None:
+            try:
+                objectives = deepcopy(inPerfTab.objectives)
+            except:
+                HasObjectives = False
+            if criteriaSubset != None:
+                criteria = OrderedDict()
+                if HasObjectives:
+                    for obj in objectives.keys():
+                        objectives[obj]['criteria'] = []
+                for g in criteriaSubset:
+                    criteria[g] = deepcopy(inPerfTab.criteria[g])
+                    if HasObjectives:
+                        obj = criteria[g]['objective']
+                        objectives[obj]['criteria'].append(g)
+            else:
+                criteria = deepcopy(inPerfTab.criteria)
         else:
-            self.criteria = deepcopy(inPerfTab.criteria)
-
+            objectibes = OrderedDict()
+            criteria = OrderedDict()
+            if criteriaSubset == None:
+                criteriaSubset = list(inPerfTab.criteria.keys())
+            for obj in objectivesSubset:
+                objectives[obj] = deepcopy(inPerfTab.objectives[obj])
+                objectives[obj]['criteria'] = []
+                for g in inPerfTab.objectives[obj]['criteria']:
+                    if g in criteriaSubset:
+                        criteria[g] = deepcopy(inPerfTab.criteria[g])
+                        objectives[obj]['criteria'].append(g)
+        self.objectives = objectives
+        self.criteria = criteria
         self.weightPreorder = self.computeWeightPreorder()
-
-        self.evaluation = {}
-        actionsKeys = [x for x in self.actions]
-        criteriaKeys = [g for g in self.criteria]
-        for g in criteriaKeys:
-            self.evaluation[g] = {}
-            for x in actionsKeys:
-                self.evaluation[g][x] = deepcopy(inPerfTab.evaluation[g][x])
+        # evaluations
+        evaluation = {}
+        for g in criteria.keys():
+            evaluation[g] = {}
+            for x in actions.keys():
+                evaluation[g][x] = deepcopy(inPerfTab.evaluation[g][x])
+        self.evaluation = evaluation
+        
 #-----------------------
 class ConstantPerformanceTableau(PerformanceTableau):
     """
@@ -3215,7 +3243,7 @@ class ConstantPerformanceTableau(PerformanceTableau):
     """
     def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None,
                  position=0.5):
-        from copy import copy as deepcopy
+        from copy import deepcopy
         
         self.name = 'constant-'+inPerfTab.name
 

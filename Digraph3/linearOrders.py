@@ -265,7 +265,6 @@ class RandomLinearOrder(LinearOrder):
         """
         constructor for generating random instances of linear orders with a given number of actions (default=10).
         """
-        from copy import copy, deepcopy
         from outrankingDigraphs import RandomOutrankingDigraph
         import random
         random.seed(seed)
@@ -279,10 +278,10 @@ class RandomLinearOrder(LinearOrder):
         if Debug:
             print(g.actions, actionsList)
         self.name = 'randomLinearOrder'
-        self.actions = copy(g.actions)
+        self.actions = g.actions
         self.order = len(self.actions)
-        self.valuationdomain = deepcopy(g.valuationdomain)
-        self.relation = copy(g.relation)
+        self.valuationdomain = g.valuationdomain
+        self.relation = g.relation
         for i in range(self.order):
             x = actionsList[i]
             self.relation[x][x] = self.valuationdomain['med']
@@ -294,7 +293,6 @@ class RandomLinearOrder(LinearOrder):
         self.notgamma = self.notGammaSets()
         if Debug:
             print(self.computeOrder())
-
         
 ######   instantiable class of linear orders
 class RankedPairsOrder(LinearOrder):
