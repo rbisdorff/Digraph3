@@ -8594,7 +8594,7 @@ class RandomTree(Digraph):
     .. warning::
 
        *Obsolete version!* Will be removed in the future. Instead, use
-       the new :py:class:`randomDigraphs.RandomTree` constructor. 
+       the new :py:class:`graphs.RandomTree` constructor. 
 
     """
     def __init__(self,numberOfNodes=5, ndigits=2, hasIntegerValuation=True):
