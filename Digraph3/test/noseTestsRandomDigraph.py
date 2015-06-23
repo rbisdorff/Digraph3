@@ -69,8 +69,9 @@ def testIntegerRandomDigraph():
     g.save()
     g.computeChordlessCircuits(Comments=True,Debug=True)
 
-def testRandomTree():
-    print('*---- random tree instance generation ---*')
-    t = RandomTree(numberOfNodes=10)
-    t.showAll()
-    t.exportGraphViz()
+##def testRandomTree():  # obsolete see graphs module
+##    print('*---- random tree instance generation ---*')
+##    t = RandomTree(numberOfNodes=10)
+##    t.showAll()
+##    t.exportGraphViz()
+

@@ -24,6 +24,7 @@ __version__ = "Branch: 3.3 $"
 
 from digraphs import *
 from decimal import Decimal
+from collections import OrderedDict
 
 #---------- Random Digraph classes -----------------
 
@@ -58,13 +59,13 @@ class RandomDigraph(Digraph):
             else:
                 domain = (0.0,1.0)
             nd = len(str(order))
-            actions = dict()
+            actions = OrderedDict()
             for i in range(order):
                 actionKey = ('a%%0%dd' % nd) % (i+1)
                 actions[actionKey] = {'shortName':actionKey, 'name': 'random decision action'}
             self.actions = actions
-            actionsList = [x for x in self.actions]
-            actionsList.sort()
+##            actionsList = [x for x in self.actions]
+##            actionsList.sort()
             valuationdomain = dict()
             valuationdomain['min'] = Decimal(str(domain[0]))
             valuationdomain['max'] = Decimal(str(domain[1]))
@@ -73,9 +74,9 @@ class RandomDigraph(Digraph):
             valuationdomain['hasIntegerValuation'] = hasIntegerValuation
             self.valuationdomain = valuationdomain
             relation = {}
-            for x in actionsList:
+            for x in actions.keys():
                 relation[x] = {}
-                for y in actionsList:
+                for y in actions.keys():
                     if x == y:
                         relation[x][y] = self.valuationdomain['min']
                     else:
@@ -154,13 +155,13 @@ class RandomValuationDigraph(Digraph):
         self.name = 'randomValuationDigraph'
         self.order = order
         nd = len(str(order))
-        actions = dict()
+        actions = OrderedDict()
         for i in range(order):
             actionKey = ('a%%0%dd' % nd) % (i+1)
             actions[actionKey] = {'shortName':actionKey, 'name': 'random decision action'}
         self.actions = actions
-        actionsList = [x for x in self.actions]
-        actionsList.sort()
+##        actionsList = [x for x in self.actions]
+##        actionsList.sort()
         if hasIntegerValuation:
             precision = pow(10,ndigits) - 1
         else:
@@ -174,9 +175,9 @@ class RandomValuationDigraph(Digraph):
                 self.valuationdomain = {'min':Decimal('0'), 'med':Decimal('0.5'), 'max':Decimal('1.0')}
         self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
         relation = {}
-        for x in actionsList:
+        for x in actions.keys():
             relation[x] = {}
-            for y in actionsList:
+            for y in actions.keys():
                 if x == y:
                     relation[x][y] = self.valuationdomain['med']
                 else:
@@ -211,18 +212,23 @@ class RandomWeakTournament(Digraph):
                  seed=None,
                  Comments=False):
         import random
+        random.seed(seed)
         from decimal import Decimal
 
         self.name = 'randomWeakTournament'
         self.order = order
-        actionlist = list(range(order+1))
-        actionlist.remove(0)
-        actions = []
-        for x in actionlist:
-            actions.append(str(x))
+        nd = len(str(order))
+        actions = OrderedDict()
+        for i in range(order):
+            actionKey = ('a%%0%dd' % nd) % (i+1)
+            actions[actionKey] = {'shortName':actionKey, 'name': 'random decision action'}
         self.actions = actions
-        if seed != None:
-            random.seed(seed)
+##        actionlist = list(range(order+1))
+##        actionlist.remove(0)
+##        actions = []
+##        for x in actionlist:
+##            actions.append(str(x))
+##        self.actions = actions
         Max = pow(10,ndigits)
         Min = - Max
         Med = 0
@@ -233,12 +239,12 @@ class RandomWeakTournament(Digraph):
         else:
             self.valuationdomain = {'hasIntegerValuation':False, 'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
         relation = {}
-        for x in actions:
+        for x in actions.keys():
             relation[x] = {}
-            for y in actions:
+            for y in actions.keys():
                 relation[x][y] = self.valuationdomain['med']
 
-        actionsList = [x for x in actions]
+        actionsList = list(actions.keys())
         random.shuffle(actionsList)
         weaknessDegree = Decimal(str(weaknessDegree))
         forwardDegree = (Decimal('1.0') - weaknessDegree)/Decimal('2')
@@ -313,16 +319,24 @@ class RandomTournament(Digraph):
                  valuationDomain=None,
                  seed=None):
         import random
+        random.seed(seed)
         from decimal import Decimal
 
         self.name = 'randomTournament'
         self.order = order
-        actionlist = list(range(order+1))
-        actionlist.remove(0)
-        actions = []
-        for x in actionlist:
-            actions.append(str(x))
+        nd = len(str(order))
+        actions = OrderedDict()
+        for i in range(order):
+            actionKey = ('a%%0%dd' % nd) % (i+1)
+            actions[actionKey] = {'shortName':actionKey, 'name': 'random decision action'}
         self.actions = actions
+##
+##        actionlist = list(range(order+1))
+##        actionlist.remove(0)
+##        actions = []
+##        for x in actionlist:
+##            actions.append(str(x))
+##        self.actions = actions
         if valuationDomain == None:
             self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
         else:
@@ -333,10 +347,10 @@ class RandomTournament(Digraph):
             relation[x] = {}
             for y in actions:
                 relation[x][y] = Decimal('0.0')
-        if seed != None:
-            random.seed(seed)
+##        if seed != None:
+##            random.seed(seed)
         precision = pow(10,ndigits)
-        actionsList = [x for x in actions]
+        actionsList = list(actions.keys())
         #print actionsList
         n = len(actionsList)
         for i in range(n):
@@ -380,27 +394,25 @@ class RandomFixedSizeDigraph(Digraph):
         else:
             self.name = 'randomFixedSize'
             self.order = order
-            actionlist = list(range(order+1))
-            actionlist.remove(0)
-            actions = []
-            for x in actionlist:
-                actions.append(str(x))
+            nd = len(str(order))
+            actions = OrderedDict()
+            for i in range(order):
+                actionKey = ('a%%0%dd' % nd) % (i+1)
+                actions[actionKey] = {'shortName':actionKey, 'name': 'random decision action'}
             self.actions = actions
             self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
             Min = self.valuationdomain['min']
             Max = self.valuationdomain['max']
             allarcs = []
             relation = {}
-            for x in actions:
+            for x in actions.keys():
                 relation[x] = {}
-                for y in actions:
+                for y in actions.keys():
                     relation[x][y] = Min
                     if x != y:
                         allarcs.append((x,y))
-            for i in range(size):
-                arc = random.choice(allarcs)
+            for arc in random.sample(allarcs,size):
                 relation[arc[0]][arc[1]] = Max
-                allarcs.remove(arc)
             self.relation = relation.copy()
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
@@ -438,19 +450,19 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
             else:
                 self.name = 'randomFixedDegreeSequence'
                 self.order = order
-                actionlist = list(range(order+1))
-                actionlist.remove(0)
-                actions = []
-                for x in actionlist:
-                    actions.append(str(x))
+                nd = len(str(order))
+                actions = OrderedDict()
+                for i in range(order):
+                    actionKey = ('a%%0%dd' % nd) % (i+1)
+                    actions[actionKey] = {'shortName':actionKey, 'name': 'random decision action'}
                 self.actions = actions
                 self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
                 Min = self.valuationdomain['min']
                 Max = self.valuationdomain['max']
                 relation = {}
-                for x in actions:
+                for x in actions.keys():
                     relation[x] = {}
-                    for y in actions:
+                    for y in actions.keys():
                         relation[x][y] = Min
                 # create a random pairing
                 feasable = 0
@@ -461,7 +473,7 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
                     cells = []
                     degreeseq = {}
                     i = 0
-                    for x in actions:
+                    for x in actions.keys():
                         degreeseq[x] = degreeSequence[i]
                         cells.append((x,degree))
                         i += 1
@@ -482,7 +494,7 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
                             if degreeseq[c[0]] == 0:
                                 cells.remove(c)
                     feasable = 1
-                    for x in actions:
+                    for x in actions.keys():
                         if degreeseq[x] != 0:
                             feasable = 0
                             break
@@ -495,83 +507,89 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
                     self.relation = relation.copy()
                     self.gamma = self.gammaSets()
 
-class _RandomTree(Digraph):
-    """
-    Random generator for trees, using random Pruefer codes
-
-    Parameter:
-        numerOfNodes
-
-    """
-    def __init__(self,numberOfNodes=5, ndigits=0, hasIntegerValuation=True, seed=None):
-        import random
-        random.seed(seed)
-        from decimal import Decimal
-        self.name = 'randomTree'
-        self.order = numberOfNodes
-        # generate actions dictionary
-        actions = {}
-        nodes = [str(x+1) for x in range(numberOfNodes)]
-        for x in nodes:
-            actions[x] = {'name': 'node %s' % x}
-        self.actions = actions
-        print(actions)
-        # set valuation domain
-        precision = pow(10,ndigits)
-        if hasIntegerValuation:
-            self.valuationdomain = {'min':-precision, 'med':0, 'max':precision}
-        else:
-            self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
-        self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
-        # init empty relation dictionary
-        relation = {}
-        nodeKeys = [x for x in actions]
-        print(nodeKeys)
-        for x in nodeKeys:
-            relation[x] = {}
-            for y in nodeKeys:
-                relation[x][y] = self.valuationdomain['min']
-        # generate a random pruefer code
-        nodes = [x for x in range(len(nodeKeys))]
-        pruefer = []
-        for i in range(len(nodeKeys)-2):
-            pruefer.append(random.choice(nodes))
-        print(pruefer)
-        # contruct the corresponding relation (a tree)
-        pairs = self._prufer_to_tree(pruefer)
-        for (i,j) in pairs:
-            relation[str(i+1)][str(j+1)] = self.valuationdomain['max']
-            relation[str(j+1)][str(i+1)] = self.valuationdomain['max']
-        self.relation = relation
-        # generate neighboring sets
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
-
-    def _prufer_to_tree(self,a):
-        tree = []
-        T = list(range(0, len(a)+2))
-        print(T)
-        # the degree of each node is how many times it appears
-        # in the sequence
-        deg = [1]*len(T)
-        print(deg)
-        for i in a: deg[i] += 1
-
-        # for each node label i in a, find the first node j with degree 1 and add
-        # the edge (j, i) to the tree
-        for i in a:
-            for j in T:
-                if deg[j] == 1:
-                    tree.append((i,j))
-                    # decrement the degrees of i and j
-                    deg[i] -= 1
-                    deg[j] -= 1
-                    break
-
-        last = [x for x in T if deg[x] == 1]
-        tree.append((last[0],last[1]))
-
-        return tree
+##class _RandomTree(Digraph):
+##    """
+##    Random generator for trees, using random Pruefer codes
+##
+##    Parameter:
+##        numerOfNodes
+##
+##    """
+##    def __init__(self,numberOfNodes=5, ndigits=0, hasIntegerValuation=True, seed=None):
+##        import random
+##        random.seed(seed)
+##        from decimal import Decimal
+##        self.name = 'randomTree'
+##        self.order = numberOfNodes
+##        # generate actions oredered dictionary
+##        nd = len(str(order))
+####        actions = OrderedDict()
+####        for i in range(order):
+####            actionKey = ('a%%0%dd' % nd) % (i+1)
+####            actions[actionKey] = {'shortName':actionKey, 'name': 'random decision action'}
+####        self.actions = actions
+##        actions = OrderedDict()
+##        nodes = [str(x+1) for x in range(numberOfNodes)]
+##        for x in nodes:
+##            actions[x] = {'name': 'node %s' % x}
+##        self.actions = actions
+##        print(actions)
+##        # set valuation domain
+##        precision = pow(10,ndigits)
+##        if hasIntegerValuation:
+##            self.valuationdomain = {'min':-precision, 'med':0, 'max':precision}
+##        else:
+##            self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
+##        self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
+##        # init empty relation dictionary
+##        relation = {}
+####        nodeKeys = [x for x in actions]
+####        print(nodeKeys)
+##        for x in actions.keys():
+##            relation[x] = {}
+##            for y in actions.keys():
+##                relation[x][y] = self.valuationdomain['min']
+##        # generate a random pruefer code
+##        nodes = [x for x in range(len(nodeKeys))]
+##        pruefer = []
+##        for i in range(len(nodeKeys)-2):
+##            pruefer.append(random.choice(nodes))
+##        print(pruefer)
+##        # contruct the corresponding relation (a tree)
+##        pairs = self._prufer_to_tree(pruefer)
+##        for (i,j) in pairs:
+##            relation[str(i+1)][str(j+1)] = self.valuationdomain['max']
+##            relation[str(j+1)][str(i+1)] = self.valuationdomain['max']
+##        self.relation = relation
+##        # generate neighboring sets
+##        self.gamma = self.gammaSets()
+##        self.notGamma = self.notGammaSets()
+##
+##    def _prufer_to_tree(self,a):
+##        tree = []
+##        T = list(range(0, len(a)+2))
+##        print(T)
+##        # the degree of each node is how many times it appears
+##        # in the sequence
+##        deg = [1]*len(T)
+##        print(deg)
+##        for i in a: deg[i] += 1
+##
+##        # for each node label i in a, find the first node j with degree 1 and add
+##        # the edge (j, i) to the tree
+##        for i in a:
+##            for j in T:
+##                if deg[j] == 1:
+##                    tree.append((i,j))
+##                    # decrement the degrees of i and j
+##                    deg[i] -= 1
+##                    deg[j] -= 1
+##                    break
+##
+##        last = [x for x in T if deg[x] == 1]
+##        tree.append((last[0],last[1]))
+##
+##        return tree
 
 
 class RandomRegularDigraph(Digraph):
@@ -592,12 +610,18 @@ class RandomRegularDigraph(Digraph):
         else:
             self.name = 'randomRegular'
             self.order = order
-            actionlist = list(range(order+1))
-            actionlist.remove(0)
-            actions = []
-            for x in actionlist:
-                actions.append(str(x))
+            nd = len(str(order))
+            actions = OrderedDict()
+            for i in range(order):
+                actionKey = ('a%%0%dd' % nd) % (i+1)
+                actions[actionKey] = {'shortName':actionKey, 'name': 'random decision action'}
             self.actions = actions
+##            actionlist = list(range(order+1))
+##            actionlist.remove(0)
+##            actions = []
+##            for x in actionlist:
+##                actions.append(str(x))
+##            self.actions = actions
             self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
             # create a random pairing
             feasable = 0
@@ -607,7 +631,7 @@ class RandomRegularDigraph(Digraph):
                 edges = []
                 cells = []
                 degreeseq = {}
-                for x in actions:
+                for x in actions.keys():
                     degreeseq[x] = degree
                     cells.append((x,degree))
                 while len(cells) > 1:
@@ -635,7 +659,7 @@ class RandomRegularDigraph(Digraph):
                 print('Graph not feasable (2) !!')
             else:
                 relation = {}
-                for x in actions:
+                for x in actions.keys():
                     relation[x] = {}
                     for y in actions:
                         relation[x][y] = self.valuationdomain['min']
