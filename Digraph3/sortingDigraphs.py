@@ -119,6 +119,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
         from copy import copy, deepcopy
         from decimal import Decimal
+        from collections import OrderedDict
 
         # import the performance tableau
         if argPerfTab == None:
@@ -128,27 +129,27 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             perfTab = argPerfTab
         # normalize the actions as a dictionary construct
         if isinstance(perfTab.actions,list):
-            actions = {}
+            actions = OrderedDict()
             for x in perfTab.actions:
                 actions[x] = {'name': str(x)}
             self.actions = actions
         else:
-            self.actions = perfTab.actions.copy()
+            self.actions = deepcopy(perfTab.actions)
 
         # keep a copy of the original actions set before adding the profiles
-        self.actionsOrig = self.actions.copy()
+        self.actionsOrig = deepcopy(self.actions)
 
         #  input the profiles
         if argProfile != None:
             defaultProfiles = False
-            self.criteria = perfTab.criteria.copy()
+            self.criteria = deepcopy(perfTab.criteria)
             self.convertWeightFloatToDecimal()
-            self.evaluation = perfTab.evaluation.copy()
+            self.evaluation = deepcopy(perfTab.evaluation)
             self.convertEvaluationFloatToDecimal()
             if isinstance(argProfile,str): # input from stored instantiation
                 fileName = argProfile
                 fileNameExt = fileName + '.py'
-                profile = {}
+                profile = OrderedDict()
                 exec(compile(open(fileNameExt).read(), fileNameExt, 'exec'),profile)
                 #print(profile)
                 self.name = fileName
@@ -172,13 +173,13 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             lowValue = 0.0
             highValue = 100.00
             # with preference direction = max
-            categories = {}
+            categories = OrderedDict()
             k = int(100 / scaleSteps)
             for i in range(0,100+k,k):
                 categories[str(i)] = {'name':str(i), 'order':i}
             self.categories = deepcopy(categories)
 
-            criteriaCategoryLimits = {}
+            criteriaCategoryLimits = OrderedDict()
             criteriaCategoryLimits['LowerClosed'] = LowerClosed
             for g in self.criteria:
                 criteriaCategoryLimits[g] = {}
@@ -196,9 +197,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         # add the catogory limits to the actions set
         self.profiles = {'min':{},'max':{}}
         self.profileLimits = set()
-        categoryKeys = list(self.categories.keys())
-        criterionKeys = list(self.criteria.keys())
-        for c in categoryKeys:
+##        categoryKeys = list(self.categories.keys())
+##        criterionKeys = list(self.criteria.keys())
+        for c in self.categories.keys():
             cMinKey = c+'-m'
             cMaxKey = c+'-M'
             self.profileLimits.add(cMinKey)
@@ -207,7 +208,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             self.actions[cMaxKey] = {'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
             self.profiles['min'][cMinKey] = {'category': c, 'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
             self.profiles['max'][cMaxKey] = {'category': c, 'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
-            for g in criterionKeys:
+            for g in self.criteria.keys():
                 try:
                     if self.criteria[g]['preferenceDirection'] == 'max':
                         self.evaluation[g][cMinKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['minimum']))
@@ -232,8 +233,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         # construct outranking relation
         if isRobust:
             g = RobustOutrankingDigraph(self)
-            self.valuationdomain = g.valuationdomain.copy()
-            self.relation = g.relation.copy()
+            self.valuationdomain = g.valuationdomain
+            self.relation = g.relation
         else:
             Min = Decimal('%.4f' % minValuation)
             Max = Decimal('%.4f' % maxValuation)
@@ -280,30 +281,30 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                         WithVetoCounts=False,
                                                         Debug=Debug)
             if LowerClosed:
-                for x in self.actionsOrig:
-                    for y in self.actionsOrig:
+                for x in self.actionsOrig.keys():
+                    for y in self.actionsOrig.keys():
                         self.relation[x][y] = Med
                 for x in self.profileLimits:
                     self.relation[x] = {}
-                    for y in self.actions:
+                    for y in self.actions.keys():
                         self.relation[x][y] = Med
             else:
-                for x in self.actionsOrig:
+                for x in self.actionsOrig.keys():
                     self.relation[x] = {}
-                    for y in self.actionsOrig:
+                    for y in self.actionsOrig.keys():
                         self.relation[x][y] = Med
                 for y in self.profileLimits:
-                    for x in self.actions:
+                    for x in self.actions.keys():
                         self.relation[x][y] = Med
 
         # compute weak ordering
         sortingRelation = self.computeSortingRelation(Debug=Debug)
-        for x in self.actionsOrig:
-            for y in self.actionsOrig:
+        for x in self.actionsOrig.keys():
+            for y in self.actionsOrig.keys():
                 self.relation[x][y] = sortingRelation[x][y]
 
         # reset original action set
-        self.actions = self.actionsOrig.copy()
+        self.actions = self.actionsOrig
 
         # compute weak ordering by choosing
         # self.computeRankingByChoosing() !!! not scalable !!!

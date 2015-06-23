@@ -1418,7 +1418,7 @@ class TriangulatedGrid(Graph):
 
 class RandomTree(Graph):
     """
-    Random instance of a tree generated from a random Prüfer code.
+    Instance of a tree generated from a random (or a given) Prüfer code.
 
     .. image:: randomTree.png
        :alt: radomTree instance
