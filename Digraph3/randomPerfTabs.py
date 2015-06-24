@@ -1133,7 +1133,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                       | ['beta','variable',None] (three alpha, beta combinations (5.8661,2.62203)
                       |   chosen by default for 'good', 'fair' and 'weak' evaluations. Constant parameters may be provided.
         * valueDigits := 2 (default, for cardinal scales only)
-        * vetoProbability := x in ]0.0-1.0[ (0.05 default), probability that a cardinal criterion shows a veto preference discrimination threshold.
+        * vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.
         * Debug := True / False (default)
         
     """
@@ -1143,7 +1143,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                  integerWeights = True, OrdinalScales=False, commonScale = None,
                  commonThresholds = None, commonMode = None,
                  valueDigits=2,
-                 vetoProbability=0.05,
+                 vetoProbability=0.5,
                  missingProbability = 0.05,
                  seed= None,
                  Debug=False):
@@ -1338,7 +1338,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                             evaluation[g][a] = Decimal(str(-round(randeval,digits)))
 
             elif str(randomMode[0]) == 'beta':
-                for a in actionsList:
+                for a in actions:
                     m = commonScale[0]
                     M = commonScale[1]
                     if randomMode[1] == 'variable':
@@ -1371,7 +1371,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                     randeval = (u * (M-m)) + m
                     if Debug:
                         print('xm,alpha,beta,u,m,M,randeval',xm,alpha,beta,u,m,M,randeval)
-                    self.actions[a]['generators'][g] = ('beta',alpha,beta)
+                    actions[a]['generators'][g] = ('beta',alpha,beta)
                     if OrdinalScales:
                         if criteria[g]['preferenceDirection'] == 'max':
                             evaluation[g][a] = Decimal(str(round(randeval,0)))
@@ -2083,22 +2083,23 @@ if __name__ == "__main__":
     from randomPerfTabs import *
     from time import time
     t0 = time()
-    t = RandomCBPerformanceTableau(numberOfActions=20,
-                                   numberOfCriteria=13,
-                                   samplingSize=100000,
-                                   seed=100)
-    print(time()-t0)
+##    t = RandomCBPerformanceTableau(numberOfActions=20,
+##                                   numberOfCriteria=13,
+##                                   samplingSize=100000,
+##                                   seed=100)
+##    print(time()-t0)
+##    t.showCriteria()
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=31,
+                                            numberOfCriteria=13,
+                                            OrdinalScales=False,
+                                            commonScale=None,
+                                            weightDistribution='equiobjectives',
+                                            #weightScale=(1,5),
+                                            commonMode=('beta','variable',None),
+                                            vetoProbability=0.5,
+                                            seed=120)
+    t.showObjectives()
     t.showCriteria()
-##    t = Random3ObjectivesPerformanceTableau(numberOfActions=31,
-##                                            numberOfCriteria=13,
-##                                            OrdinalScales=False,
-##                                            commonScale=None,
-##                                            weightDistribution='equiobjectives',
-##                                            #weightScale=(1,5),
-##                                            #commonMode=('uniform','variable',2),
-##                                            vetoProbability=0.3,
-##                                            seed=120)
-##    t.showObjectives()
 ##    #t.showActions(Debug=True)
 ##    teco = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Eco']['criteria'])
 ##    tenv = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Env']['criteria'])
