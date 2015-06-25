@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+#
 # -*- coding: utf-8 -*-
 # Python implementation of digraphs
 # submodule randomPerfTabs.py  for generating random performance tableaux  
