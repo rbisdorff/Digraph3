@@ -417,25 +417,43 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                                         nbrCores=nbrOfCPUs,
                                         Debug=Debug)
         self.runTimes = {'sorting': time() - t0}
+        self.qs = qs
         if Comments:
             print('execution time: %.4f' % (self.runTimes['sorting']))
         # preordering
         tw = time()
         quantilesOrderingStrategy = self.sortingParameters['strategy']
+##        if Threading:
+##            if quantilesOrderingStrategy == 'average':
+##                decomposition = [((qs.categories[str(item[0][2])]['lowLimit'],
+##                                        qs.categories[str(item[0][1])]['highLimit']),item[1])\
+##                                      for item in self._computeQuantileOrderingWithThreading(strategy=quantilesOrderingStrategy,
+##                                             Descending=True)]
+##            elif quantilesOrderingStrategy == 'optimistic':
+##                decomposition = [((qs.categories[str(item[0][1])]['lowLimit'],
+##                                        qs.categories[str(item[0][0])]['highLimit']),item[1])\
+##                                      for item in self._computeQuantileOrdering(WithThreading,strategy=quantilesOrderingStrategy,
+##                                             Descending=True)]
+##            elif quantilesOrderingStrategy == 'pessimistic':
+##                decomposition = [((qs.categories[str(item[0][0])]['lowLimit'],
+##                                        qs.categories[str(item[0][1])]['highLimit']),item[1])\
+##                                      for item in self._computeQuantileOrderingWithThreading(strategy=quantilesOrderingStrategy,
+##                                             Descending=True)]
+##        else:
         if quantilesOrderingStrategy == 'average':
             decomposition = [((qs.categories[str(item[0][2])]['lowLimit'],
                                     qs.categories[str(item[0][1])]['highLimit']),item[1])\
-                                  for item in qs._computeQuantileOrdering(strategy=quantilesOrderingStrategy,
+                                  for item in self._computeQuantileOrdering(strategy=quantilesOrderingStrategy,
                                          Descending=True)]
         elif quantilesOrderingStrategy == 'optimistic':
             decomposition = [((qs.categories[str(item[0][1])]['lowLimit'],
                                     qs.categories[str(item[0][0])]['highLimit']),item[1])\
-                                  for item in qs._computeQuantileOrdering(strategy=quantilesOrderingStrategy,
+                                  for item in self._computeQuantileOrdering(strategy=quantilesOrderingStrategy,
                                          Descending=True)]
         elif quantilesOrderingStrategy == 'pessimistic':
             decomposition = [((qs.categories[str(item[0][0])]['lowLimit'],
                                     qs.categories[str(item[0][1])]['highLimit']),item[1])\
-                                  for item in qs._computeQuantileOrdering(strategy=quantilesOrderingStrategy,
+                                  for item in self._computeQuantileOrdering(strategy=quantilesOrderingStrategy,
                                          Descending=True)]
 
         self.runTimes['preordering'] = time() - tw
@@ -559,6 +577,167 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         except:
             pass
         return 'Default presentation of BigOutrankingDigraphs'
+
+    def _computeQuantileOrdering(self,strategy=None,
+                                Descending=True,
+                                Debug=False):
+        """
+        Renders the quantile interval of the decision actions.
+        *Parameters*:
+            * QuantilesdSortingDigraph instance
+            * Descending: listing in *decreasing* (default) or *increasing* quantile order.
+            * strategy: ordering in an {'optimistic' | 'pessimistic' | 'average' (default)}
+              in the uppest, the lowest or the average potential quantile.
+        
+        """
+        if strategy == None:
+            strategy = self.sortingParameters['strategy']
+        actionsCategories = {}
+        for x in self.actions.keys():
+            a,lowCateg,highCateg,credibility =\
+                     self.showActionCategories(x,Comments=Debug)
+            if strategy == "optimistic":
+                try:
+                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]
+            elif strategy == "pessimistic":
+                try:
+                    actionsCategories[(int(lowCateg),int(highCateg))].append(a)
+                except:
+                    actionsCategories[(int(lowCateg),int(highCateg))] = [a]
+            elif strategy == "average":
+                lc = float(lowCateg)
+                hc = float(highCateg)
+                ac = (lc+hc)/2.0
+                try:
+                    actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
+            else:  # optimistic by default
+                try:
+                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
+                
+        actionsCategIntervals = []
+        for interval in actionsCategories:
+            actionsCategIntervals.append([interval,\
+                                          actionsCategories[interval]])
+        actionsCategIntervals.sort(reverse=Descending)
+
+        return actionsCategIntervals
+    
+
+    def _computeQuantileOrderingWithThreading(self,strategy=None,
+                                Descending=True,
+                                Debug=False,
+                                nbrOfCPUs=None):
+        """
+        Renders the quantile interval of the decision actions.
+        *Parameters*:
+            * QuantilesdSortingDigraph instance
+            * Descending: listing in *decreasing* (default) or *increasing* quantile order.
+            * strategy: ordering in an {'optimistic' | 'pessimistic' | 'average' (default)}
+              in the uppest, the lowest or the average potential quantile.
+        
+        """
+        from multiprocessing import Pool
+        from os import cpu_count
+        if nbrOfCPUs == None:
+            nbrOfCPUs = cpu_count()
+        if strategy == None:
+            strategy = self.sortingParameters['strategy']
+        actionsCategories = {}
+        with Pool(processes=nbrOfCPUs) as pool:
+            for a,lowCateg,highCateg,credibility in pool.imap(self.showActionCategories,self.actions.keys()):
+                if strategy == "optimistic":
+                    try:
+                        actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                    except:
+                        actionsCategories[(int(highCateg),int(lowCateg))] = [a]
+                elif strategy == "pessimistic":
+                    try:
+                        actionsCategories[(int(lowCateg),int(highCateg))].append(a)
+                    except:
+                        actionsCategories[(int(lowCateg),int(highCateg))] = [a]
+                elif strategy == "average":
+                    lc = float(lowCateg)
+                    hc = float(highCateg)
+                    ac = (lc+hc)/2.0
+                    try:
+                        actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
+                    except:
+                        actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
+                else:  # optimistic by default
+                    try:
+                        actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                    except:
+                        actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
+                
+        actionsCategIntervals = []
+        for interval in actionsCategories:
+            actionsCategIntervals.append([interval,\
+                                          actionsCategories[interval]])
+        actionsCategIntervals.sort(reverse=Descending)
+
+        return actionsCategIntervals
+
+    def showActionCategories(self,action,Debug=False,Comments=False):
+        """
+        Renders the union of categories in which the given action is sorted positively or null into.
+        Returns a tuple : action, lowest category key, highest category key, membership credibility !
+        """
+        qs = self.qs
+        Med = qs.valuationdomain['med']
+        sorting = qs.computeSortingCharacteristics(action=action,Comments=Debug)
+        keys = []
+        for c in qs.orderedCategoryKeys():
+            if sorting[action][c]['categoryMembership'] >= Med:
+                if sorting[action][c]['lowLimit'] > Med:
+                    lowLimit = sorting[action][c]['lowLimit']
+                if sorting[action][c]['notHighLimit'] > Med:
+                    notHighLimit = sorting[action][c]['notHighLimit']
+                keys.append(c)
+                if Debug:
+                    print(action, c, sorting[action][c])
+        n = len(keys)
+        try:
+            credibility = min(lowLimit,notHighLimit)
+        except:
+            credibility = Med
+        if n == 0:
+            return None
+        elif n == 1:
+            if Comments:
+                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                     qs.categories[keys[0]]['lowLimit'],\
+                                     qs.categories[keys[0]]['highLimit'],\
+                                     action,\
+                                     credibility,lowLimit,notHighLimit) )
+            return action,\
+                    keys[0],\
+                    keys[0],\
+                    credibility
+        else:
+            if Comments:
+                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                     qs.categories[keys[0]]['lowLimit'],\
+                                     qs.categories[keys[-1]]['highLimit'],\
+                                     action,\
+                                     credibility,lowLimit,notHighLimit) )
+            return action,\
+                    keys[0],\
+                    keys[-1],\
+                    credibility            
+
+    def showActionsSortingResult(self,actionSubset=None,Debug=False):
+        """
+        shows the quantiles sorting result all (default) of a subset of the decision actions.
+        """
+        print('Quantiles sorting result per decision action')
+        for x in actions.keys():
+            self.showActionCategories(x,Debug=Debug,Comments=True)
 
     def showShort(self,fileName=None):
         """
@@ -760,13 +939,13 @@ if __name__ == "__main__":
     t0 = time()
 ##    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,
 ##                                      seed=100)
-    tp = RandomPerformanceTableau(numberOfActions=1000,numberOfCriteria=21,
+    tp = RandomPerformanceTableau(numberOfActions=250,numberOfCriteria=21,
                                       seed=100)
     print(time()-t0)
     print(total_size(tp.evaluation))
     bg1 = BigOutrankingDigraph(tp,quantiles=100,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
-                               minimalComponentSize=100,
+                               minimalComponentSize=1,
                                     Threading=MP,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
     #bg1.showDecomposition()
