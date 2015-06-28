@@ -373,6 +373,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                  WithKohlerRanking=True,
                  minimalComponentSize=None,
                  Threading=True,nbrOfCPUs=None,
+                 save2File=None,
                  Comments=False,
                  Debug=False):
         
@@ -423,23 +424,6 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         # preordering
         tw = time()
         quantilesOrderingStrategy = self.sortingParameters['strategy']
-##        if Threading:
-##            if quantilesOrderingStrategy == 'average':
-##                decomposition = [((qs.categories[str(item[0][2])]['lowLimit'],
-##                                        qs.categories[str(item[0][1])]['highLimit']),item[1])\
-##                                      for item in self._computeQuantileOrderingWithThreading(strategy=quantilesOrderingStrategy,
-##                                             Descending=True)]
-##            elif quantilesOrderingStrategy == 'optimistic':
-##                decomposition = [((qs.categories[str(item[0][1])]['lowLimit'],
-##                                        qs.categories[str(item[0][0])]['highLimit']),item[1])\
-##                                      for item in self._computeQuantileOrdering(WithThreading,strategy=quantilesOrderingStrategy,
-##                                             Descending=True)]
-##            elif quantilesOrderingStrategy == 'pessimistic':
-##                decomposition = [((qs.categories[str(item[0][0])]['lowLimit'],
-##                                        qs.categories[str(item[0][1])]['highLimit']),item[1])\
-##                                      for item in self._computeQuantileOrderingWithThreading(strategy=quantilesOrderingStrategy,
-##                                             Descending=True)]
-##        else:
         if quantilesOrderingStrategy == 'average':
             decomposition = [((qs.categories[str(item[0][2])]['lowLimit'],
                                     qs.categories[str(item[0][1])]['highLimit']),item[1])\
@@ -547,6 +531,9 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         self.runTimes['totalTime'] = time() - ttot
         if Comments:
             print(self.runTimes)
+        if save2File != None:
+            self.showShort(fileName=save2File)
+            
 
     # ----- class methods ------------
 
@@ -634,13 +621,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                                 Debug=False,
                                 nbrOfCPUs=None):
         """
-        Renders the quantile interval of the decision actions.
-        *Parameters*:
-            * QuantilesdSortingDigraph instance
-            * Descending: listing in *decreasing* (default) or *increasing* quantile order.
-            * strategy: ordering in an {'optimistic' | 'pessimistic' | 'average' (default)}
-              in the uppest, the lowest or the average potential quantile.
-        
+        !!! Example of hopelessly inefficient multiprocessing of a rather simple task and insufficient granularity
         """
         from multiprocessing import Pool
         from os import cpu_count
@@ -649,8 +630,11 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         if strategy == None:
             strategy = self.sortingParameters['strategy']
         actionsCategories = {}
+        actions = self.actions
+        showActionCategories = self.showActionCategories
         with Pool(processes=nbrOfCPUs) as pool:
-            for a,lowCateg,highCateg,credibility in pool.imap(self.showActionCategories,self.actions.keys()):
+            for a,lowCateg,highCateg,credibility in pool.imap_unordered(showActionCategories,actions.keys()):
+                # too much non parallel work to do
                 if strategy == "optimistic":
                     try:
                         actionsCategories[(int(highCateg),int(lowCateg))].append(a)
