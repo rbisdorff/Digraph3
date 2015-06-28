@@ -104,9 +104,13 @@ class BigDigraph(object):
         #print(x,cx,y,cy)
         if cx == cy:
             return self.components[cx]['subGraph'].relation[x][y]        
-        elif self.componentRelation[cx][cy] < Med:
+##        elif self.componentRelation[cx][cy] < Med:
+##            return Min
+##        elif self.componentRelation[cx][cy] > Med:
+##            return Max 
+        elif self.components[cx]['rank'] > self.components[cy]['rank']:
             return Min
-        elif self.componentRelation[cx][cy] > Med:
+        else:
             return Max 
 
     def relationOld(self,x,y,Debug=False):
@@ -319,35 +323,35 @@ class BigDigraph(object):
         if Debug:
             print(newMin, newMed, newMax, newAmplitude)
         # loop over all components
-        nc = self.nbrComponents
+##        nc = self.nbrComponents
         print('Recoding the valuation of a BigDigraph instance')
-        compKeys = list(self.components.keys())
-        oldRelation = self.componentRelation
-        newRelation = {}
-        for i in range(nc): 
-            cki = compKeys[i]
+##        compKeys = list(self.components.keys())
+##        oldRelation = self.componentRelation
+##        newRelation = {}
+        for cki in self.components.keys(): 
+##            cki = compKeys[i]
             self.components[cki]['subGraph'].recodeValuation(newMin=newMin,newMax=newMax)
-            newRelation[cki] = {}
-            for j in range(nc):
-                ckj = compKeys[j]
-                if oldRelation[cki][ckj] == oldMax:
-                    newRelation[cki][ckj] = newMax
-                elif oldRelation[cki][ckj] == oldMin:
-                    newRelation[cki][ckj] = newMin
-                elif oldRelation[cki][ckj] == oldMed:
-                    newRelation[cki][ckj] = newMed
-                else:
-                    newRelation[cki][cki] = newMin + \
-                            ((oldRelation[cki][ckj] - oldMin)/oldAmplitude)*newAmplitude
-                    if Debug:
-                        print(cki,ckj,oldRelation[cki][ckj],newRelation[cki][ckj])
+##            newRelation[cki] = {}
+##            for j in range(nc):
+##                ckj = compKeys[j]
+##                if oldRelation[cki][ckj] == oldMax:
+##                    newRelation[cki][ckj] = newMax
+##                elif oldRelation[cki][ckj] == oldMin:
+##                    newRelation[cki][ckj] = newMin
+##                elif oldRelation[cki][ckj] == oldMed:
+##                    newRelation[cki][ckj] = newMed
+##                else:
+##                    newRelation[cki][cki] = newMin + \
+##                            ((oldRelation[cki][ckj] - oldMin)/oldAmplitude)*newAmplitude
+##                    if Debug:
+##                        print(cki,ckj,oldRelation[cki][ckj],newRelation[cki][ckj])
         # update valuation domain                       
         Min = Decimal(str(newMin))
         Max = Decimal(str(newMax))
         Med = (Min+Max)/Decimal('2')
         self.valuationdomain = { 'min':Min, 'max':Max, 'med':Med }
         # update componentRelation
-        self.componentRelation = newRelation
+##        self.componentRelation = newRelation
 
 
 class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
@@ -505,17 +509,17 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         # setting the component relation
         self.valuationdomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
 
-        compRel = {}
-        for cx in components.keys():
-            compRel[cx] = {} 
-            for cy in components.keys():
-                if components[cx]['rank'] < components[cy]['rank']:
-                    compRel[cx][cy] = self.valuationdomain['max']
-                elif components[cx]['rank'] > components[cy]['rank']:
-                    compRel[cx][cy] = self.valuationdomain['min']
-                else:
-                    compRel[cx][cy] = self.valuationdomain['med']
-        self.componentRelation = compRel
+##        compRel = {}
+##        for cx in components.keys():
+##            compRel[cx] = {} 
+##            for cy in components.keys():
+##                if components[cx]['rank'] < components[cy]['rank']:
+##                    compRel[cx][cy] = self.valuationdomain['max']
+##                elif components[cx]['rank'] > components[cy]['rank']:
+##                    compRel[cx][cy] = self.valuationdomain['min']
+##                else:
+##                    compRel[cx][cy] = self.valuationdomain['med']
+##        self.componentRelation = compRel
         
         self.runTimes['decomposing'] = time() - t0
         if Comments:
@@ -919,7 +923,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
 if __name__ == "__main__":
     
     from time import time
-    MP = True
+    MP = False
     t0 = time()
 ##    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,
 ##                                      seed=100)
