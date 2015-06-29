@@ -104,54 +104,10 @@ class BigDigraph(object):
         #print(x,cx,y,cy)
         if cx == cy:
             return self.components[cx]['subGraph'].relation[x][y]        
-##        elif self.componentRelation[cx][cy] < Med:
-##            return Min
-##        elif self.componentRelation[cx][cy] > Med:
-##            return Max 
         elif self.components[cx]['rank'] > self.components[cy]['rank']:
             return Min
         else:
             return Max 
-
-    def relationOld(self,x,y,Debug=False):
-        """
-        Dynamic construction of the global digraph relation.
-        """
-        if x == y:
-            return self.valuationdomain['med']
-        
-        selfActionsList = [(ck,
-                            list(self.components[ck]['subGraph'].actions.keys()))\
-                           for ck in self.components]
-        if Debug:
-            print(selfActionsList)
-
-        precx = []
-        Found = False
-        for ckx in selfActionsList:
-            
-            if x in ckx[1]:    
-                if Debug:
-                    print(precx,ckx[1])
-                if y in precx:
-                    #print('self: %s < %s' % (x,y))
-                    selfRelation = self.valuationdomain['min']
-                elif y in ckx[1]:
-                    #print('self: %s S %s' % (x,y))
-                    selfRelation = self.components[ckx[0]]['subGraph'].relation[x][y] 
-                else:
-                    #print('self: %s > %s' % (x,y))
-                    selfRelation = self.valuationdomain['max']
-                if Debug:
-                    print(selfRelation)
-                Found = True
-                break
-            precx += ckx[1]
-        if Found:
-            return selfRelation
-        else:
-            return None
-        
     
     def computeOrdinalCorrelation(self, other, Debug=False):
         """

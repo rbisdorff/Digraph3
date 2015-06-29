@@ -240,24 +240,6 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             Max = Decimal('%.4f' % maxValuation)
             Med = (Max + Min)/Decimal('2.0')
             self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
-##            if LowerClosed:
-##                self.relation = self._constructRelation(self.criteria,
-##                                                       self.evaluation,
-##                                                       initial=self.actionsOrig,
-##                                                       terminal=self.profileLimits,
-##                                                       hasNoVeto=hasNoVeto,
-##                                                       hasBipolarVeto=True,
-##                                                        Threading=Threading,
-##                                                        Debug=Debug)
-##            else:
-##                self.relation = self._constructRelation(self.criteria,
-##                                                       self.evaluation,
-##                                                       terminal=self.actionsOrig,
-##                                                       initial=self.profileLimits,
-##                                                       hasNoVeto=hasNoVeto,
-##                                                        hasBipolarVeto=True,
-##                                                        Threading=Threading,
-##                                                        Debug=Debug)
             if LowerClosed:
                 self.relation = BipolarOutrankingDigraph._constructRelationWithThreading(self,self.criteria,
                                                        self.evaluation,
@@ -313,201 +295,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         # init general digraph Data
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
-
-    def _constructRelation(self,criteria,\
-                           evaluation,\
-                           initial=None,\
-                           terminal=None,\
-                           hasNoVeto=False,\
-                           hasBipolarVeto=True,\
-                           Debug=False,\
-                           hasSymmetricThresholds=True,\
-                           Threading = False,\
-                           WithConcordanceRelation=False,\
-                           WithVetoCounts=False,\
-                           nbrCores=None):
-        """
-        Specialization of the corresponding BipolarOutrankingDigraph method
-        """
-        from multiprocessing import cpu_count
-        
-        ##
-        if not Threading or cpu_count() < 6:
-            return BipolarOutrankingDigraph._constructRelation(self,criteria,\
-                                    evaluation,\
-                                    initial=initial,\
-                                    terminal=terminal,\
-                                    hasNoVeto=hasNoVeto,\
-                                    hasBipolarVeto=hasBipolarVeto,\
-                                    Debug=Debug,\
-                                    WithConcordanceRelation=WithConcordanceRelation,\
-                                    WithVetoCounts=WithVetoCounts,\
-                                    hasSymmetricThresholds=hasSymmetricThresholds)
-        ##
-        else:  # parallel computation
-            from copy import copy, deepcopy
-            from pickle import dumps, loads, load
-            from multiprocessing import Process, Lock,\
-                                        active_children, cpu_count
-            #Debug=True
-            class myThread(Process):
-                def __init__(self, threadID,\
-                             InitialSplit, tempDirName,\
-                             hasNoVeto, hasBipolarVeto,\
-                             hasSymmetricThresholds, Debug):
-                    Process.__init__(self)
-                    self.threadID = threadID
-                    self.InitialSplit = InitialSplit
-                    self.workingDirectory = tempDirName
-                    self.hasNoVeto = hasNoVeto
-                    self.hasBipolarVeto = hasBipolarVeto,
-                    hasSymmetricThresholds = hasSymmetricThresholds,
-                    self.Debug = Debug
-                def run(self):
-                    from pickle import dumps, loads
-                    from os import chdir
-                    chdir(self.workingDirectory)
-                    if Debug:
-                        print("Starting working in %s on %s" % (self.workingDirectory, self.name))
-                    fi = open('dumpSelf.py','rb')
-                    digraph = loads(fi.read())
-                    fi.close()
-                    fiName = 'splitActions-'+str(self.threadID)+'.py'
-                    fi = open(fiName,'rb')
-                    splitActions = loads(fi.read())
-                    fi.close()
-                    foName = 'splitRelation-'+str(self.threadID)+'.py'
-                    fo = open(foName,'wb')
-                    if self.InitialSplit:
-                        splitRelation = BipolarOutrankingDigraph._constructRelation(digraph,digraph.criteria,\
-                                            digraph.evaluation,\
-                                            initial=splitActions,\
-                                            #terminal=terminal,\
-                                            hasNoVeto=hasNoVeto,\
-                                            hasBipolarVeto=hasBipolarVeto,\
-                                            Debug=False,\
-                                            hasSymmetricThresholds=hasSymmetricThresholds)
-                    else:
-                        splitRelation = BipolarOutrankingDigraph._constructRelation(digraph,digraph.criteria,\
-                                            digraph.evaluation,\
-                                            #initial=initial,\
-                                            terminal=splitActions,\
-                                            hasNoVeto=hasNoVeto,\
-                                            hasBipolarVeto=hasBipolarVeto,\
-                                            Debug=False,\
-                                            hasSymmetricThresholds=hasSymmetricThresholds)
-                    fo.write(dumps(splitRelation,-1))
-                    fo.close()
-            
-            print('Threading ...')
-            from tempfile import TemporaryDirectory
-            with TemporaryDirectory() as tempDirName:
-                from copy import copy, deepcopy
-                #selfDp = deepcopy(self)
-                selfFileName = tempDirName +'/dumpSelf.py'
-                if Debug:
-                    print('temDirName, selfFileName', tempDirName,selfFileName)
-                fo = open(selfFileName,'wb')
-                #pd = dumps(selfDp,-1)
-                pd = dumps(self,-1)
-                fo.write(pd)
-                fo.close()
-                
-                if nbrCores == None:
-                    nbrCores = cpu_count()-2
-                
-                print('Nbr of cpus = ',nbrCores)
-
-                ni = len(initial)
-                nt = len(terminal)
-                if ni < nt:
-                    n = ni
-                    actions2Split = list(initial)
-                    InitialSplit = True
-                else:
-                    n = nt
-                    actions2Split = list(terminal)
-                    InitialSplit = False
-                if Debug:
-                    print('InitialSplit, actions2Split', InitialSplit, actions2Split)
-            
-                nit = n//nbrCores
-                nbrOfJobs = nbrCores
-                if nit*nbrOfJobs < n:
-                    nit += 1
-                while nit*(nbrOfJobs-1) >= n:
-                    nbrOfJobs -= 1
-##                while nit*nbrOfJobs > n:
-##                    nbrOfJobs -= 1
-                #if Debug:
-                print('number of cores =', nbrCores)
-                print('nbr of actions to split',n)
-                print('nbr of jobs = ',nbrOfJobs)    
-                print('nbr of splitActions = ',nit)
-                   
-                relation = {}
-                for x in initial:
-                    relation[x] = {}
-                    for y in terminal:
-                        relation[x][y] = self.valuationdomain['med']
-                i = 0
-                actionsRemain = set(actions2Split)
-                for j in range(nbrOfJobs):
-                    print('iteration = ',j+1,end=" ")
-                    splitActions=[]
-                    for k in range(nit):
-                        if j < (nbrOfJobs -1) and i < n:
-                            splitActions.append(actions2Split[i])
-                        else:
-                            splitActions = list(actionsRemain)
-                        i += 1
-                    print(len(splitActions))
-                    if Debug:
-                        print(splitActions)
-                    actionsRemain = actionsRemain - set(splitActions)
-                    if Debug:
-                        print(actionsRemain)
-                    foName = tempDirName+'/splitActions-'+str(j)+'.py'
-                    fo = open(foName,'wb')
-                    spa = dumps(splitActions,-1)
-                    fo.write(spa)
-                    fo.close()
-                    splitThread = myThread(j,InitialSplit,
-                                           tempDirName,hasNoVeto,hasBipolarVeto,
-                                           hasSymmetricThresholds,Debug)
-                    splitThread.start()
-                    
-                while active_children() != []:
-                    pass
-                    
-                print('Exiting computing threads')
-                for j in range(nbrOfJobs):
-                    if Debug:
-                        print('job',j)
-                    fiName = tempDirName+'/splitActions-'+str(j)+'.py'
-                    fi = open(fiName,'rb')
-                    splitActions = loads(fi.read())
-                    if Debug:
-                        print('splitActions',splitActions)
-                    fi.close()
-                    fiName = tempDirName+'/splitRelation-'+str(j)+'.py'
-                    fi = open(fiName,'rb')
-                    splitRelation = loads(fi.read())
-                    if Debug:
-                        print('splitRelation',splitRelation)
-                    fi.close()
-                    
-                    if InitialSplit:
-                        for x in splitActions:
-                            for y in terminal:
-                                relation[x][y] = splitRelation[x][y]
-                    else:  
-                        for x in initial:
-                            for y in splitActions:
-                                relation[x][y] = splitRelation[x][y]   
-                return relation
-    
+        self.notGamma = self.notGammaSets()    
         
     def htmlCriteriaCategoryLimits(self,tableTitle='Category limits'):
         """
@@ -1348,7 +1136,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                 actions[x] = {'name': str(x)}
             self.actions = actions
         else:
-            self.actions = copy(perfTab.actions)
+            self.actions = deepcopy(perfTab.actions)
 
         # keep a copy of the original actions set before adding the profiles
         self.actionsOrig = deepcopy(self.actions)
@@ -1476,7 +1264,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         Med = (Max + Min)/Decimal('2.0')
         self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
         if LowerClosed:
-            self.relation = self._constructRelation(self.criteria,
+            self.relation = self._constructRelationWithThreading(self.criteria,
                                                    self.evaluation,
                                                    initial=self.actionsOrig,
                                                    terminal=self.profileLimits,
@@ -1485,7 +1273,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                                                     Threading=Threading,
                                                     nbrCores=nbrCores)
         else:
-            self.relation = self._constructRelation(self.criteria,
+            self.relation = self._constructRelationWithThreading(self.criteria,
                                                    self.evaluation,
                                                    terminal=self.actionsOrig,
                                                    initial=self.profileLimits,
