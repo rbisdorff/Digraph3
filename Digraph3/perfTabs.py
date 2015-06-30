@@ -1533,7 +1533,7 @@ The performance evaluations of each decision alternative on each criterion are g
         fileName = '/tmp/performanceHeatmap.html'
         fo = open(fileName,'w')
         if pageTitle == None:
-            pageTitle = 'Heatmap of performance tableau %s' % self.name
+            pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
         if Ranked and actionsList == None:
             from weakOrders import QuantilesRankingDigraph
             qsr = QuantilesRankingDigraph(self,LowerClosed=True,
@@ -1558,6 +1558,7 @@ The performance evaluations of each decision alternative on each criterion are g
     def htmlPerformanceHeatmap(self,criteriaList=None,
                                actionsList=None,
                                ndigits=2,
+                               contentCentered=True,
                                colorLevels=None,
                                pageTitle='Performance Heatmap',
                                Correlations=False,
@@ -1612,7 +1613,16 @@ The performance evaluations of each decision alternative on each criterion are g
         naColor           = '"#FFFFFF"'
         columnHeaderColor = '"#CCFFFF"'
         rowHeaderColor    = '"#FFFFFF"'
-        html = '<h2>%s</h2>' % pageTitle
+
+        html = '<!DOCTYPE html><html><head>\n'
+        html += '<title>%s</title>\n' % 'Digraph3 performance heat map'
+        html += '<style type="text/css">\n'
+        #html += 'table {border-collapse: collapse;}'
+        if contentCentered:
+            html += 'td {text-align: center;}\n'
+        html += '</style>\n'
+        html += '</head>\n<body>\n'
+        html += '<h2>%s</h2>\n' % pageTitle
         
         if criteriaList == None:
             from outrankingDigraphs import BipolarOutrankingDigraph
@@ -1656,7 +1666,7 @@ The performance evaluations of each decision alternative on each criterion are g
                     print(x,g,quantileColor[x][g])
         # legend            
 ##        html += '<i>Color legend: </i>\n'
-##        html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
+##        html += '<table style="background-color:%s; border-collapse: collapse;" border="1">\n' % (backGroundColor) 
 ##        html += '<tr bgcolor=%s><th>quantile</th>' % (columnHeaderColor)
 ##        for col in range(nc):
 ##            html += '<td bgcolor=%s>%s</td>' % (colorPalette[col][1],str(colorPalette[col][0]))
@@ -1712,7 +1722,7 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</table>\n'
         if criteriaCorrelation != None:
             html += '<i>(*) tau: Ordinal (Kendall) correlation of marginal criterion and global outranking relation.</i>\n'
-
+        html += '</body></html>'
         return html
 
     # def _computePerformanceHeatmap(self,criteriaList=None,
@@ -5982,6 +5992,7 @@ if __name__ == "__main__":
     tt.showCriteria(ByObjectives=True)
     tt.showCriteria(Alphabetic=True)
     tt.showCriteria()
+    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0)
     
 ##    t = ConstantPerformanceTableau(t,
 ##                                   actionsSubset=['a01','a02','a03'],
