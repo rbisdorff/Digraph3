@@ -1620,6 +1620,7 @@ The performance evaluations of each decision alternative on each criterion are g
         #html += 'table {border-collapse: collapse;}'
         if contentCentered:
             html += 'td {text-align: center;}\n'
+        html += 'td.na {color: rgb(192,192,192);}\n'
         html += '</style>\n'
         html += '</head>\n<body>\n'
         html += '<h2>%s</h2>\n' % pageTitle
@@ -1704,7 +1705,7 @@ The performance evaluations of each decision alternative on each criterion are g
                     formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
                     html += formatString % (self.evaluation[g][x])
                 else:
-                    html += '<td bgcolor=%s>NA</td>' % naColor
+                    html += '<td bgcolor=%s class="na">NA</td>' % naColor
                 if Debug:
                     print(html)
             html += '</tr>\n'
