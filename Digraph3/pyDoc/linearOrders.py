@@ -54,11 +54,11 @@ class ExtendedPrudentDigraph(Digraph):
     """
 
     def __init__(self,other,prudentBetaLevel=None,CoDual=False,Debug=False):
-        from copy import deepcopy
+        from copy import copy, deepcopy
         self.__class__ = other.__class__
         self.name = 'extprud-'+other.name
         try:
-            self.description = deepcopy(other.description)
+            self.description = copy(other.description)
         except AttributeError:
             pass
         try:
@@ -66,7 +66,7 @@ class ExtendedPrudentDigraph(Digraph):
         except AttributeError:
             pass
         try:
-            self.evaluation = deepcopy(other.evaluation)
+            self.evaluation = copy(other.evaluation)
         except AttributeError:
             pass
 
@@ -97,10 +97,10 @@ class ExtendedPrudentDigraph(Digraph):
                         if Debug:
                             print('cx, x,cy, y', cx,x,cy, y, gcdst.relation[cx][cy])
                         stRelation[x][y] = gcdst.relation[cx][cy]
-        self.actions = deepcopy(other.actions)
+        self.actions = copy(other.actions)
         self.order = len(self.actions)
-        self.valuationdomain = deepcopy(gp.valuationdomain)
-        actionsList = list(self.actions)
+        self.valuationdomain = copy(gp.valuationdomain)
+        actionsList = [x for x in self.actions]
         #Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         #Min = self.valuationdomain['min']
@@ -111,14 +111,6 @@ class ExtendedPrudentDigraph(Digraph):
                 if Debug:
                     print('omax([gp.relation[x][y],stRelation[x][y]])',x,y,[gp.relation[x][y],stRelation[x][y]])
                 relation[x][y] = self.omax([gp.relation[x][y],stRelation[x][y]])    
-                ## if gp.relation[y][x] >= Med and stRelation[x][y] >= Med:
-                ##     relation[x][y] = max(gp.relation[y][x],stRelation[x][y])
-                ## elif gp.relation[y][x] <= Med and stRelation[x][y] <= Med:
-                ##     relation[x][y] = min(gp.relation[y][x],stRelation[x][y])
-                ## else:
-                ##     relation[x][y] = Med
-                ## if self.omax([gp.relation[y][x],stRelation[x][y]]) != relation[x][y]:
-                ##     print 'Error!!!'
         self.relation = relation
         if Debug:
             self.showRelationTable()
@@ -135,7 +127,7 @@ class LinearOrder(Digraph):
     """
     def computeOrder(self):
         """
-        shows the linear order of an instance of the LinearOrcer class
+        computes the linear ordering of an instance of the LinearOrcer class
         """
         degrees = []
         for x in [z for z in self.actions]:
@@ -146,6 +138,12 @@ class LinearOrder(Digraph):
             rankedPairsOrder.append(x[1])
         return rankedPairsOrder
 
+    def showOrdering(self):
+        """
+        shows the linearly ordered actions in list format.
+        """
+        print(self.computeOrder())
+        
     def htmlOrder(self):
         """
         returns the html encoded presentation of a linear order
@@ -263,13 +261,14 @@ class RandomLinearOrder(LinearOrder):
     """
     Instantiates random linear orders
     """
-    def __init__(self,numberOfActions=10,Debug=False,OutrankingModel=False):
+    def __init__(self,numberOfActions=10,Debug=False,OutrankingModel=False,seed=None):
         """
         constructor for generating random instances of linear orders with a given number of actions (default=10).
         """
-        from copy import deepcopy
+        from copy import copy, deepcopy
         from outrankingDigraphs import RandomOutrankingDigraph
         import random
+        random.seed(seed)
         if OutrankingModel:
             g = RandomOutrankingDigraph(numberOfActions=numberOfActions)
         else:
@@ -280,10 +279,10 @@ class RandomLinearOrder(LinearOrder):
         if Debug:
             print(g.actions, actionsList)
         self.name = 'randomLinearOrder'
-        self.actions = deepcopy(g.actions)
+        self.actions = copy(g.actions)
         self.order = len(self.actions)
         self.valuationdomain = deepcopy(g.valuationdomain)
-        self.relation = deepcopy(g.relation)
+        self.relation = copy(g.relation)
         for i in range(self.order):
             x = actionsList[i]
             self.relation[x][x] = self.valuationdomain['med']
@@ -310,7 +309,7 @@ class RankedPairsOrder(LinearOrder):
         the ranked pairs (Lexmin Dias-Lamboray) rule
         Parameter: isExtendedPrudent 
         """
-        from copy import deepcopy
+        from copy import copy, deepcopy
         # construct ranked pairs
 
         if coDual:
@@ -433,10 +432,10 @@ class RankedPairsOrder(LinearOrder):
                         print('added: (%s,%s) characteristic: %.2f (%.1f)' % (y,x, other.relation[y][x],g.relation[y][x]))
                 
         self.name = other.name + '_ranked'        
-        self.actions = deepcopy(other.actions)
+        self.actions = copy(other.actions)
         self.order = len(self.actions)
-        self.valuationdomain = deepcopy(g.valuationdomain)
-        self.relation = deepcopy(g.relation)
+        self.valuationdomain = copy(g.valuationdomain)
+        self.relation = copy(g.relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         if Debug:
@@ -448,13 +447,13 @@ class KohlerOrder(LinearOrder):
     instantiates the Kohler Order from
     a given bipolar-valued Digraph instance
     """
-    def __init__(self,other,coDual=True,Debug=False):
+    def __init__(self,other,coDual=False,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph following
         the Kohler rule 
         """
-        from copy import deepcopy
+        from copy import copy, deepcopy
         # construct ranked pairs
         if coDual:
             otherCoDual = CoDualDigraph(other)
@@ -529,15 +528,253 @@ class KohlerOrder(LinearOrder):
 
             
         self.name = other.name + '_ranked'        
-        self.actions = deepcopy(other.actions)
+        self.actions = copy(other.actions)
         self.order = len(self.actions)
-        self.valuationdomain = deepcopy(g.valuationdomain)
-        self.relation = deepcopy(g.relation)
+        self.valuationdomain = copy(g.valuationdomain)
+        self.relation = copy(g.relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         if Debug:
             self.showRelationTable()
             print('Kohler order: ', self.computeOrder())
+
+from sortingDigraphs import QuantilesSortingDigraph                                              
+class BoostedKohlerOrder(KohlerOrder,QuantilesSortingDigraph):
+    """
+    Boosting the Kohler ranking-by-choosing rule
+    with previous quantiles sorting-
+
+    *Main parameters*:
+          * limitingQuantiles are set by default to len(actions)//2
+            for outranking digraph orders below 200.
+            For higher orders, centiles are used by default.
+          * strategies are: "optimistic" (default), "pessimistic" or "average"
+          * Threading is on (True) by default for CPUs with more than 2 cores.
+
+    .. warning::
+    
+          For larger orders a consistent size of several
+          Giga bytes cpu memory is required!
+          
+    """
+
+    def __init__(self,
+                 argPerfTab=None,
+                 limitingQuantiles=None,
+                 LowerClosed=True,
+                 strategy="optimistic",
+                 PrefThresholds=False,
+                 hasNoVeto=False,
+                 outrankingType = "bipolar",
+                 Threading=False,
+                 nbrCores=None,
+                 chunkSize=1,
+                 Comments=True,
+                 Debug=False):
+        
+        from copy import copy, deepcopy
+        from multiprocessing import cpu_count
+        from outrankingDigraphs import BipolarOutrankingDigraph
+        from sortingDigraphs import QuantilesSortingDigraph
+        from time import time
+
+        ttot = time()
+
+        # import the performance tableau
+        if argPerfTab == None:
+            print('Error: you must provide a valid PerformanceTableau object !!')
+        else:
+            perfTab = argPerfTab
+
+        # quantiles sorting
+        na = len(perfTab.actions)
+        if limitingQuantiles == None:
+            limitingQuantiles = na // 2
+        self.sortingParameters = {}
+        self.sortingParameters['limitingQuantiles'] = limitingQuantiles
+        self.sortingParameters['strategy'] = strategy
+        self.sortingParameters['LowerClosed'] = LowerClosed
+        self.sortingParameters['PrefThresholds'] = PrefThresholds
+        self.sortingParameters['hasNoVeto'] = hasNoVeto
+        self.sortingParameters['Threading'] = Threading
+        self.sortingParameters['nbrCores'] = nbrCores        
+        if Comments:        
+            print('Computing the %d-quantiles sorting digraph ...' % (limitingQuantiles))
+        t0 = time()
+        if Threading and cpu_count() > 2:    
+            qs = QuantilesSortingDigraph(perfTab,
+                         limitingQuantiles=limitingQuantiles,
+                         LowerClosed=LowerClosed,
+                         PrefThresholds=PrefThresholds,
+                         hasNoVeto=hasNoVeto,
+                         outrankingType = outrankingType,
+                         Threading=True,
+                         nbrCores=nbrCores,
+                         CompleteOutranking = False)                
+        else:
+            qs = QuantilesSortingDigraph(perfTab,
+                         limitingQuantiles=limitingQuantiles,
+                         LowerClosed=LowerClosed,
+                         PrefThresholds=PrefThresholds,
+                         hasNoVeto=hasNoVeto,
+                         outrankingType = outrankingType,
+                         CompleteOutranking = True)
+
+        self.runTimes = {'sorting': time() - t0}
+        if Comments:
+            print('execution time: %.4f' % (self.runTimes['sorting']))
+
+        # copying the quantiles sorting results
+        t0 = time()
+        self.name = 'boostedKohler-'+qs.name
+        self.actions = copy(qs.actions)
+        self.order = len(self.actions)
+        self.criteria = copy(qs.criteria)
+        self.evaluation = copy(qs.evaluation)
+        self.valuationdomain = copy(qs.valuationdomain)
+        self.sortingRelation = copy(qs.relation)
+        self.relation = deepcopy(qs.relation)
+        self.categories = copy(qs.categories)
+        self.limitingQuantiles = copy(qs.limitingQuantiles)
+        self.criteriaCategoryLimits = copy(qs.criteriaCategoryLimits)
+        self.profiles = copy(qs.profiles)
+        self.runTimes = {'copying': time() - t0}
+        if Comments:
+            print('execution time: %.4f' % (self.runTimes['copying']))
+
+        # preordering
+        self.strategy = strategy
+        Min = self.valuationdomain['min']
+        Med = self.valuationdomain['med']
+        Max = self.valuationdomain['max']
+##        actionsSet = set([x for x in self.actions])
+##        relation = {}
+##        for x in actionsSet:
+##            relation[x] = {}
+##            for y in actionsSet:
+##                relation[x][y] = Med
+        tw = time()
+        preOrdering = self.computeQuantileOrdering(strategy=strategy)
+        nwo = len(preOrdering)
+        preceedingActions = set([])
+        followingActions = set([x for x in self.actions])
+        catContent = {}
+        for i in range(nwo):
+            currActions = set(preOrdering[i])
+            catContent[i+1] = preOrdering[i]
+            if Debug:
+                print(i+1,currActions)        
+            for x in currActions:
+                for y in preceedingActions:
+                    self.relation[x][y] = Min
+                    self.relation[y][x] = Max
+                for y in followingActions:
+                    self.relation[x][y] = Max
+                    self.relation[y][x] = Min
+            preceedingActions = preceedingActions | currActions
+            followingActions = followingActions - currActions
+            if Debug:
+                print(preceedingActions)
+                print(followingActions)
+        self.runTimes['preordering'] = time() - tw
+        if Comments:
+            print('preordering execution time: %.4f' % self.runTimes['preordering']  )
+
+        # local Kohler ordering
+        t0 = time()
+        for c in range(1,nwo+1):
+            if Debug:
+                print(c, len(catContent[c]))
+            pt = PartialPerformanceTableau(perfTab,catContent[c])
+            gt = BipolarOutrankingDigraph(pt)
+            ko = KohlerOrder(gt)
+            ko.recodeValuation(-100,100)
+            if Debug:
+                ko.showRelationTable()
+            for x in catContent[c]:
+                for y in catContent[c]:
+                    self.relation[x][y] = ko.relation[x][y]
+        self.runTimes['localKohler'] = time() - t0
+
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+
+        self.runTimes['totalTime'] = time() - ttot
+
+    def computePreOrdering(self,Descending=True,strategy=None,Comments=False,Debug=False):
+        """
+        specialisation of the showWeakOrder method
+        """
+        if strategy == None:
+            strategy = self.strategy
+        actionsCategories = {}
+        for x in self.actions:
+            a,lowCateg,highCateg,credibility =\
+                     self.showActionCategories(x,Comments=Debug)
+            if strategy == "optimistic":
+                try:
+                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]
+            elif strategy == "pessimistic":
+                try:
+                    actionsCategories[(int(lowCateg),int(highCateg))].append(a)
+                except:
+                    actionsCategories[(int(lowCateg),int(highCateg))] = [a]
+            elif strategy == "average":
+                lc = float(lowCateg)
+                hc = float(highCateg)
+                ac = (lc+hc)/2.0
+                try:
+                    actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
+            else:  # optimistic by default
+                try:
+                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
+                
+        actionsCategIntervals = []
+        for interval in actionsCategories:
+            actionsCategIntervals.append([interval,\
+                                          actionsCategories[interval]])
+        actionsCategIntervals.sort(reverse=Descending)
+        weakOrdering = []
+        for item in actionsCategIntervals:
+            #print(item)
+            if Comments:
+                if strategy == "optimistic":
+                    if self.criteriaCategoryLimits['LowerClosed']:
+                        print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
+                                                self.categories[str(item[0][0])]['highLimit'],\
+                                                str(item[1])) )
+                    else:
+                        print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
+                                                self.categories[str(item[0][0])]['highLimit'],\
+                                                str(item[1])) )
+                elif strategy == "pessimistic":
+                    if self.criteriaCategoryLimits['LowerClosed']:
+                        print('%s-%s : %s' % (self.categories[str(item[0][0])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'],\
+                                                str(item[1])) )
+                    else:
+                        print('%s-%s : %s' % (self.categories[str(item[0][0])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'],\
+                                                str(item[1])) )                   
+                elif strategy == "average":
+                    if self.criteriaCategoryLimits['LowerClosed']:
+                        print('%s-%s : %s' % (self.categories[str(item[0][2])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'],\
+                                                str(item[1])) )
+                    else:
+                        print('%s-%s : %s' % (self.categories[str(item[0][2])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'],\
+                                                str(item[1])) )
+
+            weakOrdering.append(item[1])
+        return weakOrdering
+
 
 class NetFlowsOrder(LinearOrder):
     """
@@ -550,7 +787,7 @@ class NetFlowsOrder(LinearOrder):
         from a given other digraph following
         the net flows ordering rule
         """
-
+        from copy import copy,deepcopy
         # construct ranked pairs
         if coDual:
             otherCoDual = CoDualDigraph(other)
@@ -562,7 +799,7 @@ class NetFlowsOrder(LinearOrder):
                 print(otherCoDual.valuationdomain)
                 #print netFlows
         else:
-            relation = other.relation
+            relation = deepcopy(other.relation)
             #netFlows = other.computeSingleCriteriaNetflows()
             Max = other.valuationdomain['max']
             if Debug:
@@ -578,7 +815,7 @@ class NetFlowsOrder(LinearOrder):
         # instatiates a Digraph template
         g = IndeterminateDigraph(order=n)
         g.actions = actions
-        g.valuationdomain = {'min':Decimal('-3'), 'med': Decimal('0'), 'max': Decimal('3')}
+        g.valuationdomain = {'min':Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
         g.relation = {}
         for x in g.actions:
             g.relation[x] = {}
@@ -608,7 +845,7 @@ class NetFlowsOrder(LinearOrder):
                 g.relation[y][x] = g.valuationdomain['min']
          
         self.name = other.name + '_ranked'        
-        self.actions = other.actions
+        self.actions = copy(other.actions)
         self.order = len(self.actions)
         self.valuationdomain = g.valuationdomain
         self.relation = g.relation
@@ -616,7 +853,7 @@ class NetFlowsOrder(LinearOrder):
         self.notGamma = self.notGammaSets()
         if Debug:
             self.showRelationTable()
-            print(self.computeOrder())
+            self.showOrdering()
 
 
 ########  instantiates optimal linear orderings
@@ -633,16 +870,13 @@ class KemenyOrder(LinearOrder):
         of all permutations of actions.
         """
         from digraphs import all_perms
-        from copy import deepcopy
+        from copy import copy
         from decimal import Decimal
         
         Min = other.valuationdomain['min']
         Max = other.valuationdomain['max']
         Med = other.valuationdomain['med']
-        actionsList = [x for x in other.actions] 
-        n = len(actionsList)
-        self.order = n
-        relation = deepcopy(other.relation)
+        #relation = copy(other.relation)
         kemenyOrder = other.computeKemenyOrder(orderLimit=orderLimit,Debug=Debug)
         if kemenyOrder == None:
             print('Intantiation error: unable to compute the Kemeny Order !!!')
@@ -651,38 +885,44 @@ class KemenyOrder(LinearOrder):
         if Debug:
             print(KemenyOrder,other.maximalOrders)
         # instatiates a Digraph template
-        
-        g = IndeterminateDigraph(order=n)
-        g.actions = deepcopy(other.actions)
+        actions = copy(other.actions)
         Min = Decimal('-1.0')
         Max = Decimal('1.0')
         Med = Decimal('0.0')
-        g.valuationdomain = {'min': Min, 'med': Med, 'max': Max}
-        g.relation = deepcopy(other.relation)
+        valuationdomain = {'min': Min, 'med': Med, 'max': Max}
+        relation = {}
+        n = len(other.actions)
+        self.order = n
         for i in range(n):
-            for j in range(i+1,n):
-                x = kemenyOrder[0][i]
+            x = kemenyOrder[0][i]
+            relation[x] = {}
+            for j in range(n):
                 y = kemenyOrder[0][j]
                 if Debug:
                     print(x,y)
-                g.relation[x][y] = Max
-                g.relation[y][x] = Min
-
-        for x in g.actions:
-            g.relation[x][x] = Med
-
-        if Debug:
-            print('Kemeny ordered relation table:')
-            g.showRelationTable()
+                relation[x][y] = Med
+                if i < j:
+                    relation[x][y] = Min
+                    try:
+                        relation[y][x] = Max
+                    except:
+                        relation[y] = {x: Max}
+                elif i > j:
+                    relation[x][y] = Max
+                    try:
+                        relation[y][x] = Min
+                    except:
+                        relation[y] = {y: Min}
 
         self.name = other.name + '_ranked'        
-        self.actions = deepcopy(other.actions)
+        self.actions = actions
         self.order = len(self.actions)
-        self.valuationdomain = deepcopy(g.valuationdomain)
-        self.relation = deepcopy(g.relation)
+        self.valuationdomain = valuationdomain
+        self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         if Debug:
+            self.showRelationTable()
             print('Kemeny Order = ', self.computeOrder())
 
 ########  instantiates principal scores' ordering
@@ -707,7 +947,7 @@ class PrincipalOrder(LinearOrder):
 
         The plot file name only matters with a non None image type.
         """
-        from copy import deepcopy
+        from copy import copy, deepcopy
         from decimal import Decimal
         
         Min = other.valuationdomain['min']
@@ -730,39 +970,47 @@ class PrincipalOrder(LinearOrder):
         # instatiates a Digraph template
         
         g = IndeterminateDigraph(order=n)
-        g.actions = deepcopy(other.actions)
+        actions = copy(other.actions)
         Min = Decimal('-1.0')
         Max = Decimal('1.0')
         Med = Decimal('0.0')
-        g.valuationdomain = {'min': Min, 'med': Med, 'max': Max}
-        g.relation = deepcopy(other.relation)
+        valuationdomain = {'min': Min, 'med': Med, 'max': Max}
+        relation = deepcopy(other.relation)
         for i in range(n):
-            for j in range(i+1,n):
-                x = principalScores[i][1]
+            x = principalScores[i][1]
+            relation[x] = {}
+            for j in range(n):
                 y = principalScores[j][1]
-                #if Debug:
-                #    print(x,y)
-                g.relation[x][y] = Max
-                g.relation[y][x] = Min
+                relation[x][y] = Med
+                if i < j:
+                    relation[x][y] = Min
+                    try:
+                        relation[y][x] = Max
+                    except:
+                        relation[y] = {x: Max}
+                elif i > j:
+                    relation[x][y] = Max
+                    try:
+                        relation[y][x] = Min
+                    except:
+                        relation[y] = {x: Min}
 
-        for x in g.actions:
-            g.relation[x][x] = Max
-
-        if Debug:
-            print('principal ordered relation table:')
-            g.showRelationTable()
         # check principal orientation with ordinal correlation sign
-        corr = other.computeOrdinalCorrelation(g.relation)
+        corr = other.computeOrdinalCorrelation(relation)
         if corr['correlation'] < Decimal('0'):
             ReverseScores = True
-            g = ~(g)
+            for i in range(n):
+                x = principalScores[i][1]
+                for j in range(n):
+                    y = principalScores[j][1]
+                    relation[x][y] = -relation[x][y]
         else:
             ReverseScores = False
         self.name = other.name + '_ranked'        
-        self.actions = deepcopy(other.actions)
+        self.actions = copy(other.actions)
         self.order = len(self.actions)
-        self.valuationdomain = deepcopy(g.valuationdomain)
-        self.relation = deepcopy(g.relation)
+        self.valuationdomain = valuationdomain
+        self.relation = relation
         if ReverseScores == False: 
             if Colwise:
                 self.principalColwiseScores = principalScores
@@ -781,21 +1029,23 @@ class PrincipalOrder(LinearOrder):
         self.notGamma = self.notGammaSets()
         if Debug:
             print('Principal Order = ', self.computeOrder())
+            print('principal ordered relation table:')
+            self.showRelationTable()
 
 #----------test  linearOrders module classes  ----------------
 if __name__ == "__main__":
     import sys,array
     from time import time
     from digraphs import *
+    from outrankingDigraphs import *
+    from sortingDigraphs import *
     from linearOrders import *
     from weakOrders import *
 
     print("""
     ****************************************************
     * Python linearOrders module                       *
-    * depends on digraphs module  1.580 +              * 
-    * $Revision: 1.18 $                                *
-    * Copyright (C) 2011 Raymond Bisdorff              *
+    * Copyright (C) 2011-2015 Raymond Bisdorff         *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
     * This is free software, and you are welcome to    *
@@ -805,6 +1055,50 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
 
+    Threading = False
+    print('*-------- Testing KemenyOrder class -------')
+    t = RandomCBPerformanceTableau(numberOfActions=5)
+    t.save('testKemeny')
+    g = BipolarOutrankingDigraph(t)
+    g.showRelationTable()
+    ke = KemenyOrder(g,Debug=False)
+    g.showRelationTable()
+    pri = PrincipalOrder(g)
+    g.showRelationTable()
+    nf = NetFlowsOrder(g)
+    g.showRelationTable()
+    ko = KohlerOrder(g)
+    g.showRelationTable()
+    bko = BoostedKohlerOrder(g)
+    g.showRelationTable()
+    rp = RankedPairsOrder(g)
+    g.showRelationTable()
+    
+##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+##                                   numberOfActions=200)
+##    t.saveXMCDA2('test')
+##    t = XMCDA2PerformanceTableau('uniSorting')
+##    #t = XMCDA2PerformanceTableau('test')
+##    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
+##    ko = KohlerOrder(g)
+##    ko.showOrdering()
+##    bko = BoostedKohlerOrder(t,strategy="average",Threading=Threading,Debug=False)
+##    #qr = QuantilesRankingDigraph(t,100,Threading=Threading)
+##    bko.showSorting()
+##    bko.showOrdering()
+##    #bko.showQuantileOrdering()
+##    #bko.showHTMLRelationTable(actionsList=bko.computeOrder())
+##    print(bko.runTimes)
+##    print(g.computeOrdinalCorrelation(bko))
+##    #print(qr.runTimes)
+##    #print(g.computeOrdinalCorrelation(qr))
+##    print(ko.computeOrdinalCorrelation(bko))
+##    QuantilesRankingDigraph.exportSortingGraphViz(bko)
+##    nf = NetFlowsOrder(g)
+##    #nf.showRelationTable()
+##    nf.showOrdering()
+##    print(g.computeOrdinalCorrelation(nf))
+    
     ## t = RandomRankPerformanceTableau(numberOfActions=20)
     ## t.saveXMCDA2('testRP')
     ## #t = XMCDA2PerformanceTableau('testRP')
@@ -843,18 +1137,18 @@ if __name__ == "__main__":
     ## ## nfs = NetFlowsOrder(g,coDual=False,Debug=False)
     ## ## print 'Net flows        : ', nfs.computeOrder(), nfs.computeKemenyIndex(g
     ## ##)
-    from outrankingDigraphs import RandomBipolarOutrankingDigraph
-    g1 = RandomBipolarOutrankingDigraph(Normalized=True)
-    g1.save('test')
-    g1 = Digraph('test')
-    g1.showRelationTable()
-    p = PrincipalOrder(g1,Colwise=True,imageType=None,Debug=False)
-    print(p.computeOrder())
-    print(g1.computeOrdinalCorrelation(p))
-    #p.showRelationTable()
-    rbc = RankingByChoosingDigraph(g1,Debug=False)
-    #rbc.showRelationTable()
-    pio = PrincipalInOutDegreesOrdering(g1,Debug=True)
+##    from outrankingDigraphs import RandomBipolarOutrankingDigraph
+##    g1 = RandomBipolarOutrankingDigraph(Normalized=True)
+##    g1.save('test')
+##    g1 = Digraph('test')
+##    g1.showRelationTable()
+##    p = PrincipalOrder(g1,Colwise=True,imageType=None,Debug=False)
+##    print(p.computeOrder())
+##    print(g1.computeOrdinalCorrelation(p))
+##    #p.showRelationTable()
+##    rbc = RankingByChoosingDigraph(g1,Debug=False)
+##    #rbc.showRelationTable()
+##    pio = PrincipalInOutDegreesOrdering(g1,Debug=True)
     
 ##    g1.showRelationTable()
 ##    g2 = RandomLinearOrder(numberOfActions=10,Debug=True)
