@@ -8,10 +8,10 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>graphs</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/graphs.py">/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/graphs.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/roknar/Digraph3/pyDoc/graphs.py">/home/roknar/Digraph3/pyDoc/graphs.py</a></font></td></tr></table>
     <p><tt>#&nbsp;-*-&nbsp;coding:utf-8&nbsp;-*-<br>
 #&nbsp;&nbsp;Python&nbsp;3&nbsp;graphs.py&nbsp;module<br>
-#&nbsp;&nbsp;Copyright&nbsp;(C)&nbsp;&nbsp;2011-2013&nbsp;Raymond&nbsp;Bisdorff<br>
+#&nbsp;&nbsp;Copyright&nbsp;(C)&nbsp;&nbsp;2011-2015&nbsp;Raymond&nbsp;Bisdorff<br>
 #############################################</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -45,6 +45,7 @@
 <dl>
 <dt><font face="helvetica, arial"><a href="graphs.html#BestDeterminedSpanningForest">BestDeterminedSpanningForest</a>
 </font></dt><dt><font face="helvetica, arial"><a href="graphs.html#RandomSpanningForest">RandomSpanningForest</a>
+</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#RandomSpanningTree">RandomSpanningTree</a>
 </font></dt></dl>
 </dd>
 <dt><font face="helvetica, arial"><a href="graphs.html#RandomValuationGraph">RandomValuationGraph</a>
@@ -111,21 +112,42 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="BestDeterminedSpanningForest-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="BestDeterminedSpanningForest-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="BestDeterminedSpanningForest-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="BestDeterminedSpanningForest-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="BestDeterminedSpanningForest-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="BestDeterminedSpanningForest-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="BestDeterminedSpanningForest-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="BestDeterminedSpanningForest-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="BestDeterminedSpanningForest-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="BestDeterminedSpanningForest-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="BestDeterminedSpanningForest-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="BestDeterminedSpanningForest-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="BestDeterminedSpanningForest-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -138,14 +160,29 @@ Example:<br>
 
 <dl><dt><a name="BestDeterminedSpanningForest-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="BestDeterminedSpanningForest-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="BestDeterminedSpanningForest-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="BestDeterminedSpanningForest-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="BestDeterminedSpanningForest-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="BestDeterminedSpanningForest-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="BestDeterminedSpanningForest-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="BestDeterminedSpanningForest-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -160,6 +197,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BestDeterminedSpanningForest-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="BestDeterminedSpanningForest-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
@@ -202,21 +245,42 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="CompleteGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="CompleteGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="CompleteGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="CompleteGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="CompleteGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="CompleteGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="CompleteGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="CompleteGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="CompleteGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="CompleteGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="CompleteGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="CompleteGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="CompleteGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -229,14 +293,29 @@ Example:<br>
 
 <dl><dt><a name="CompleteGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="CompleteGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="CompleteGraph-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="CompleteGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CompleteGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="CompleteGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="CompleteGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="CompleteGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -251,6 +330,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="CompleteGraph-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="CompleteGraph-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="CompleteGraph-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="CompleteGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
@@ -298,21 +383,42 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="CycleGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="CycleGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="CycleGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="CycleGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="CycleGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="CycleGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="CycleGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="CycleGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="CycleGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="CycleGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="CycleGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="CycleGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="CycleGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -325,14 +431,29 @@ Example:<br>
 
 <dl><dt><a name="CycleGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="CycleGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="CycleGraph-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="CycleGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CycleGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="CycleGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="CycleGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="CycleGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -347,6 +468,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="CycleGraph-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="CycleGraph-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="CycleGraph-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="CycleGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
@@ -388,21 +515,42 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="DualGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="DualGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="DualGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="DualGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="DualGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="DualGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="DualGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="DualGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="DualGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="DualGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="DualGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="DualGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="DualGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -415,14 +563,29 @@ Example:<br>
 
 <dl><dt><a name="DualGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="DualGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="DualGraph-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="DualGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="DualGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="DualGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="DualGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="DualGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -437,6 +600,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="DualGraph-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DualGraph-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DualGraph-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="DualGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
@@ -477,21 +646,42 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="EmptyGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="EmptyGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="EmptyGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="EmptyGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="EmptyGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="EmptyGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="EmptyGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="EmptyGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="EmptyGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="EmptyGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="EmptyGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="EmptyGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="EmptyGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -504,14 +694,29 @@ Example:<br>
 
 <dl><dt><a name="EmptyGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="EmptyGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="EmptyGraph-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="EmptyGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="EmptyGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="EmptyGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="EmptyGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="EmptyGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -526,6 +731,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="EmptyGraph-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="EmptyGraph-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="EmptyGraph-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="EmptyGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
@@ -590,21 +801,42 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="Graph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="Graph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="Graph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="Graph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="Graph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="Graph-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="Graph-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="Graph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="Graph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="Graph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="Graph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="Graph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="Graph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="Graph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="Graph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -617,14 +849,29 @@ Example:<br>
 
 <dl><dt><a name="Graph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="Graph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="Graph-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="Graph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="Graph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="Graph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="Graph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="Graph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="Graph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -639,6 +886,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="Graph-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Graph-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Graph-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="Graph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
@@ -695,21 +948,42 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="GridGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="GridGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="GridGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="GridGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="GridGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="GridGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="GridGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="GridGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="GridGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="GridGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="GridGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="GridGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="GridGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -722,14 +996,29 @@ Example:<br>
 
 <dl><dt><a name="GridGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="GridGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="GridGraph-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="GridGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="GridGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="GridGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="GridGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="GridGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -744,6 +1033,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="GridGraph-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GridGraph-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GridGraph-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
@@ -806,30 +1101,66 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="IsingModel-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="IsingModel-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="IsingModel-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="IsingModel-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="IsingModel-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="IsingModel-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="IsingModel-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="IsingModel-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="IsingModel-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="IsingModel-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="IsingModel-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
 <dl><dt><a name="IsingModel-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="IsingModel-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="IsingModel-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="IsingModel-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="IsingModel-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="IsingModel-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="IsingModel-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="IsingModel-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -844,6 +1175,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="IsingModel-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="IsingModel-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="IsingModel-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
@@ -934,30 +1271,66 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="MISModel-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="MISModel-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="MISModel-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="MISModel-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="MISModel-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="MISModel-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="MISModel-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="MISModel-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="MISModel-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="MISModel-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="MISModel-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="MISModel-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="MISModel-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
 <dl><dt><a name="MISModel-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="MISModel-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="MISModel-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="MISModel-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="MISModel-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="MISModel-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="MISModel-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="MISModel-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="MISModel-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -972,6 +1345,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="MISModel-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="MISModel-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="MISModel-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="MISModel-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
@@ -1063,21 +1442,42 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="MetropolisChain-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="MetropolisChain-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="MetropolisChain-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="MetropolisChain-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="MetropolisChain-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="MetropolisChain-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="MetropolisChain-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="MetropolisChain-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="MetropolisChain-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="MetropolisChain-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="MetropolisChain-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="MetropolisChain-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="MetropolisChain-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -1090,14 +1490,29 @@ Example:<br>
 
 <dl><dt><a name="MetropolisChain-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="MetropolisChain-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="MetropolisChain-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="MetropolisChain-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="MetropolisChain-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="MetropolisChain-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="MetropolisChain-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="MetropolisChain-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -1112,6 +1527,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="MetropolisChain-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="MetropolisChain-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="MetropolisChain-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="MetropolisChain-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
@@ -1167,7 +1588,10 @@ Methods defined here:<br>
 
 <dl><dt><a name="Q_Coloring-checkFeasibility"><strong>checkFeasibility</strong></a>(self, Comments=True, Debug=False)</dt></dl>
 
-<dl><dt><a name="Q_Coloring-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;q-coloring&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="Q_Coloring-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;q-coloring&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+The&nbsp;graph&nbsp;drawing&nbsp;layout&nbsp;is&nbsp;depending&nbsp;on&nbsp;the&nbsp;graph&nbsp;type,&nbsp;but&nbsp;can&nbsp;be&nbsp;forced&nbsp;to&nbsp;either<br>
+'fdp',&nbsp;'circo'&nbsp;or&nbsp;'neato'&nbsp;with&nbsp;the&nbsp;layout&nbsp;parameter.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=10,edgeProbability=0.4)<br>
@@ -1213,30 +1637,66 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="Q_Coloring-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="Q_Coloring-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="Q_Coloring-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="Q_Coloring-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="Q_Coloring-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="Q_Coloring-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="Q_Coloring-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="Q_Coloring-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="Q_Coloring-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="Q_Coloring-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="Q_Coloring-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
 <dl><dt><a name="Q_Coloring-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="Q_Coloring-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="Q_Coloring-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="Q_Coloring-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="Q_Coloring-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="Q_Coloring-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="Q_Coloring-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="Q_Coloring-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -1251,6 +1711,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Q_Coloring-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Q_Coloring-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="Q_Coloring-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
@@ -1294,21 +1760,42 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="RandomFixedDegreeSequenceGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="RandomFixedDegreeSequenceGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedDegreeSequenceGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedDegreeSequenceGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedDegreeSequenceGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedDegreeSequenceGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedDegreeSequenceGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedDegreeSequenceGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -1321,14 +1808,29 @@ Example:<br>
 
 <dl><dt><a name="RandomFixedDegreeSequenceGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedDegreeSequenceGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedDegreeSequenceGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedDegreeSequenceGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedDegreeSequenceGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedDegreeSequenceGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -1343,6 +1845,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedDegreeSequenceGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
@@ -1381,21 +1889,42 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="RandomFixedSizeGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="RandomFixedSizeGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="RandomFixedSizeGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedSizeGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="RandomFixedSizeGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedSizeGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedSizeGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="RandomFixedSizeGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedSizeGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedSizeGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="RandomFixedSizeGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedSizeGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomFixedSizeGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -1408,14 +1937,29 @@ Example:<br>
 
 <dl><dt><a name="RandomFixedSizeGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedSizeGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="RandomFixedSizeGraph-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedSizeGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedSizeGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedSizeGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="RandomFixedSizeGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedSizeGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -1430,6 +1974,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RandomFixedSizeGraph-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedSizeGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
@@ -1471,21 +2021,42 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="RandomGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="RandomGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="RandomGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="RandomGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="RandomGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="RandomGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="RandomGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="RandomGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="RandomGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="RandomGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="RandomGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -1498,14 +2069,29 @@ Example:<br>
 
 <dl><dt><a name="RandomGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="RandomGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="RandomGraph-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="RandomGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="RandomGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="RandomGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -1520,6 +2106,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="RandomGraph-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RandomGraph-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RandomGraph-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="RandomGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
@@ -1558,21 +2150,42 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="RandomRegularGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="RandomRegularGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="RandomRegularGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="RandomRegularGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="RandomRegularGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomRegularGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="RandomRegularGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="RandomRegularGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="RandomRegularGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="RandomRegularGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="RandomRegularGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="RandomRegularGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomRegularGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -1585,14 +2198,29 @@ Example:<br>
 
 <dl><dt><a name="RandomRegularGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="RandomRegularGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="RandomRegularGraph-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="RandomRegularGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomRegularGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="RandomRegularGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="RandomRegularGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomRegularGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -1607,6 +2235,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="RandomRegularGraph-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RandomRegularGraph-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RandomRegularGraph-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="RandomRegularGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
@@ -1628,7 +2262,7 @@ Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <td colspan=2><tt>Random&nbsp;instance&nbsp;of&nbsp;a&nbsp;spanning&nbsp;forest&nbsp;(one&nbsp;or&nbsp;more&nbsp;trees)<br>
 generated&nbsp;from&nbsp;a&nbsp;random&nbsp;depth&nbsp;first&nbsp;search&nbsp;graph&nbsp;g&nbsp;traversal.<br>
 &nbsp;<br>
-..&nbsp;image::&nbsp;randomSpanningTree.png<br>
+..&nbsp;image::&nbsp;spanningForest.png<br>
 &nbsp;&nbsp;&nbsp;:alt:&nbsp;randomSpanningForest&nbsp;instance<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
@@ -1655,21 +2289,42 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="RandomSpanningForest-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="RandomSpanningForest-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="RandomSpanningForest-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="RandomSpanningForest-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="RandomSpanningForest-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomSpanningForest-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="RandomSpanningForest-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="RandomSpanningForest-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="RandomSpanningForest-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="RandomSpanningForest-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="RandomSpanningForest-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="RandomSpanningForest-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomSpanningForest-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -1682,14 +2337,29 @@ Example:<br>
 
 <dl><dt><a name="RandomSpanningForest-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="RandomSpanningForest-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="RandomSpanningForest-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningForest-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="RandomSpanningForest-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomSpanningForest-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="RandomSpanningForest-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="RandomSpanningForest-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomSpanningForest-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -1705,7 +2375,156 @@ The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
 
+<dl><dt><a name="RandomSpanningForest-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RandomSpanningForest-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RandomSpanningForest-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="RandomSpanningForest-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RandomSpanningTree">class <strong>RandomSpanningTree</strong></a>(<a href="graphs.html#RandomTree">RandomTree</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Uniform&nbsp;random&nbsp;instance&nbsp;of&nbsp;a&nbsp;spanning&nbsp;tree<br>
+generated&nbsp;with&nbsp;Wilson's&nbsp;algorithm&nbsp;from&nbsp;a&nbsp;connected&nbsp;<a href="#Graph">Graph</a>&nbsp;g&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wilson's&nbsp;algorithm&nbsp;only&nbsp;works&nbsp;for&nbsp;connecte&nbsp;graphs.<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomSpanningTree.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;randomSpanningTree&nbsp;instance<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#RandomSpanningTree">RandomSpanningTree</a></dd>
+<dd><a href="graphs.html#RandomTree">RandomTree</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="RandomSpanningTree-__init__"><strong>__init__</strong></a>(self, g, seed=None, Debug=False)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#RandomTree">RandomTree</a>:<br>
+<dl><dt><a name="RandomSpanningTree-tree2Pruefer"><strong>tree2Pruefer</strong></a>(self, vertices=None, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Pruefer&nbsp;code&nbsp;of&nbsp;a&nbsp;given&nbsp;tree.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="RandomSpanningTree-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#RandomSpanningTree-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-setEdgeValue"><strong>setEdgeValue</strong></a>(self, edge, value, Comments=False)</dt><dd><tt>Wrapper&nbsp;for&nbsp;updating&nbsp;the&nbsp;charactreistic&nbsp;valuation&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;instance.<br>
+The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
+edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
+The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RandomSpanningTree-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RandomSpanningTree-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<dl><dt><a name="RandomSpanningTree-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
@@ -1748,21 +2567,42 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="RandomTree-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="RandomTree-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="RandomTree-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="RandomTree-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="RandomTree-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomTree-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="RandomTree-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="RandomTree-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="RandomTree-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="RandomTree-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="RandomTree-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="RandomTree-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomTree-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -1775,14 +2615,29 @@ Example:<br>
 
 <dl><dt><a name="RandomTree-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="RandomTree-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="RandomTree-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="RandomTree-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomTree-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="RandomTree-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="RandomTree-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomTree-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -1797,6 +2652,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="RandomTree-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RandomTree-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RandomTree-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="RandomTree-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
@@ -1839,21 +2700,42 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="RandomValuationGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="RandomValuationGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="RandomValuationGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="RandomValuationGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="RandomValuationGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="RandomValuationGraph-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomValuationGraph-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomValuationGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="RandomValuationGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="RandomValuationGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="RandomValuationGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="RandomValuationGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="RandomValuationGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="RandomValuationGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomValuationGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -1866,14 +2748,29 @@ Example:<br>
 
 <dl><dt><a name="RandomValuationGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="RandomValuationGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="RandomValuationGraph-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="RandomValuationGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="RandomValuationGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomValuationGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="RandomValuationGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="RandomValuationGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomValuationGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -1888,6 +2785,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="RandomValuationGraph-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RandomValuationGraph-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="RandomValuationGraph-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="RandomValuationGraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
@@ -1939,21 +2842,42 @@ Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbs
 <dl><dt><a name="TriangulatedGrid-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
 intance.</tt></dd></dl>
 
+<dl><dt><a name="TriangulatedGrid-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
 <dl><dt><a name="TriangulatedGrid-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
 Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="TriangulatedGrid-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+<dl><dt><a name="TriangulatedGrid-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="TriangulatedGrid-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="TriangulatedGrid-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+<dl><dt><a name="TriangulatedGrid-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
 <dl><dt><a name="TriangulatedGrid-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
-<dl><dt><a name="TriangulatedGrid-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="TriangulatedGrid-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="TriangulatedGrid-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="TriangulatedGrid-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -1966,14 +2890,29 @@ Example:<br>
 
 <dl><dt><a name="TriangulatedGrid-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
 
-<dl><dt><a name="TriangulatedGrid-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+<dl><dt><a name="TriangulatedGrid-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
 
 <dl><dt><a name="TriangulatedGrid-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="TriangulatedGrid-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
 edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
 
-<dl><dt><a name="TriangulatedGrid-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph</tt></dd></dl>
+<dl><dt><a name="TriangulatedGrid-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="TriangulatedGrid-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
 to&nbsp;the&nbsp;parameters&nbsp;given.<br>
@@ -1988,6 +2927,12 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
 edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
 The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="TriangulatedGrid-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TriangulatedGrid-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TriangulatedGrid-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>

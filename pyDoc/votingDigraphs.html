@@ -8,10 +8,10 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>votingDigraphs</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/votingDigraphs.py">/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/votingDigraphs.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/roknar/Digraph3/pyDoc/votingDigraphs.py">/home/roknar/Digraph3/pyDoc/votingDigraphs.py</a></font></td></tr></table>
     <p><tt>#&nbsp;Python&nbsp;3&nbsp;implementation&nbsp;of&nbsp;voting&nbsp;digraphs<br>
 #&nbsp;Refactored&nbsp;from&nbsp;revision&nbsp;1.549&nbsp;of&nbsp;the&nbsp;digraphs&nbsp;module<br>
-#&nbsp;Current&nbsp;revision&nbsp;$Revision:&nbsp;1082&nbsp;$<br>
+#&nbsp;Current&nbsp;revision&nbsp;$Revision:&nbsp;1194&nbsp;$<br>
 #&nbsp;Copyright&nbsp;(C)&nbsp;2011&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
 #<br>
 #&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
@@ -215,7 +215,7 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;S&nbsp;::=&nbsp;remaining&nbsp;nodes;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;I&nbsp;::=&nbsp;current&nbsp;independent&nbsp;choice<br>
 &nbsp;<br>
-..&nbsp;note::&nbsp;&nbsp;&nbsp;&nbsp;<br>
+..&nbsp;note::<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#CondorcetDigraph-MISgen">MISgen</a>(self.actionscopy(),set())</tt></dd></dl>
 
@@ -271,9 +271,13 @@ recursive&nbsp;chordless&nbsp;path&nbsp;extraction&nbsp;strating&nbsp;from&nbsp;
 Pk&nbsp;=&nbsp;[n2,&nbsp;....,&nbsp;n1]&nbsp;and&nbsp;ending&nbsp;in&nbsp;node&nbsp;n2.<br>
 Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-circuitAverageCredibility"><strong>circuitAverageCredibility</strong></a>(self, circuit)</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
+<dl><dt><a name="CondorcetDigraph-circuitAverageCredibility"><strong>circuitAverageCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-circuitMinCredibility"><strong>circuitMinCredibility</strong></a>(self, circuit)</dt><dd><tt>Renders&nbsp;the&nbsp;minimal&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
+<dl><dt><a name="CondorcetDigraph-circuitCredibilities"><strong>circuitCredibilities</strong></a>(self, circuit, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;linking&nbsp;credibilities&nbsp;and&nbsp;the&nbsp;minimal&nbsp;link&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
+
+<dl><dt><a name="CondorcetDigraph-circuitMaxCredibility"><strong>circuitMaxCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;minimal&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
+
+<dl><dt><a name="CondorcetDigraph-circuitMinCredibility"><strong>circuitMinCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;minimal&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
@@ -369,7 +373,7 @@ with&nbsp;the&nbsp;all&nbsp;median&nbsp;valued&nbsp;(indeterminate)&nbsp;digraph
 |&nbsp;[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-computeGoodChoices"><strong>computeGoodChoices</strong></a>(self, Comments=False)</dt><dd><tt>|&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
-|&nbsp;[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]</tt></dd></dl>
+|&nbsp;[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec,(7)cover]</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-computeGoodPirlotChoices"><strong>computeGoodPirlotChoices</strong></a>(self, Comments=False)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices<br>
 using&nbsp;the&nbsp;Pirlot&nbsp;fixpoint&nbsp;algorithm.</tt></dd></dl>
@@ -429,9 +433,6 @@ first&nbsp;rincipal&nbsp;eigenvector&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nb
 &nbsp;&nbsp;&nbsp;The&nbsp;method,&nbsp;relying&nbsp;on&nbsp;writing&nbsp;and&nbsp;reading&nbsp;temporary&nbsp;files&nbsp;in&nbsp;the&nbsp;current<br>
 &nbsp;&nbsp;&nbsp;working&nbsp;directory,&nbsp;is&nbsp;hence&nbsp;not&nbsp;threading&nbsp;and&nbsp;multiprocessing&nbsp;safe&nbsp;!<br>
 &nbsp;&nbsp;&nbsp;(see&nbsp;<a href="digraphs.html#Digraph">Digraph</a>.exportPrincipalImage&nbsp;method)</tt></dd></dl>
-
-<dl><dt><a name="CondorcetDigraph-computePrudentBestChoiceRecommendation"><strong>computePrudentBestChoiceRecommendation</strong></a>(self, CoDual=False, Comments=False, Debug=False, Limited=None)</dt><dd><tt>Renders&nbsp;the&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;after&nbsp;eliminating<br>
-all&nbsp;odd&nbsp;chordless&nbsp;circuits&nbsp;with&nbsp;a&nbsp;minimal&nbsp;cut&nbsp;of&nbsp;the&nbsp;valuation.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-computePrudentBetaLevel"><strong>computePrudentBetaLevel</strong></a>(self, Debug=False)</dt><dd><tt>computes&nbsp;alpha,&nbsp;ie&nbsp;the&nbsp;lowest&nbsp;valuation&nbsp;level,&nbsp;for&nbsp;which&nbsp;the<br>
 bipolarly&nbsp;polarised&nbsp;digraph&nbsp;doesn't&nbsp;contain&nbsp;a&nbsp;chordless&nbsp;circuit.</tt></dd></dl>
@@ -569,11 +570,16 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files.<br>
 Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;bipolar&nbsp;characteristic&nbsp;vector</tt></dd></dl>
+<dl><dt><a name="CondorcetDigraph-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;bipolar&nbsp;characteristic&nbsp;vector<br>
+[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;n&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Max]:<br>
+&nbsp;<br>
+result&nbsp;=&nbsp;sum_x&nbsp;abs(r(x))/(n*(Max-Min)<br>
+&nbsp;<br>
+If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1].</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="CondorcetDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -649,7 +655,7 @@ In&nbsp;both&nbsp;cases,&nbsp;undefined&nbsp;edges&nbsp;can&nbsp;be&nbsp;hidden&
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;then&nbsp;access&nbsp;the&nbsp;index.html&nbsp;via&nbsp;"<a href="http://0.0.0.0:8000/index.html">http://0.0.0.0:8000/index.html</a>".<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;order&nbsp;to&nbsp;load&nbsp;the&nbsp;CSS&nbsp;an&nbsp;active&nbsp;internet&nbsp;connection&nbsp;is&nbsp;needed!</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, bestChoice=set(), worstChoice=set(), noSilent=True, graphType='png', graphSize='7,7', relation=None)</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.</tt></dd></dl>
+<dl><dt><a name="CondorcetDigraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, actionsSubset=None, bestChoice=set(), worstChoice=set(), noSilent=True, graphType='png', graphSize='7,7', relation=None)</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-exportPrincipalImage"><strong>exportPrincipalImage</strong></a>(self, Reduced=False, Colwise=False, plotFileName=None, Type='png', Comments=False)</dt><dd><tt>Export&nbsp;as&nbsp;PNG&nbsp;(default)&nbsp;or&nbsp;PDF&nbsp;the&nbsp;principal&nbsp;projection&nbsp;of<br>
 the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp;eigen&nbsp;vectors.<br>
@@ -759,17 +765,6 @@ computation</tt></dd></dl>
 <dl><dt><a name="CondorcetDigraph-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>epistemic&nbsp;conjunction&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
 computation</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-optimalRankingByChoosing"><strong>optimalRankingByChoosing</strong></a>(self, Odd=True, CoDual=False, Comments=False, Debug=False, Limited=None)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;by&nbsp;choosing&nbsp;result&nbsp;when&nbsp;progressively&nbsp;eliminating<br>
-all&nbsp;chordless&nbsp;(odd&nbsp;only&nbsp;by&nbsp;default)&nbsp;circuits&nbsp;with&nbsp;rising&nbsp;valuation&nbsp;cut&nbsp;levels.<br>
-&nbsp;<br>
-Parameters:<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;CoDual&nbsp;=&nbsp;False&nbsp;(default)/True<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Limited&nbsp;=&nbsp;proportion&nbsp;(in&nbsp;[0,1])&nbsp;*&nbsp;(max&nbsp;-&nbsp;med)&nbsp;of&nbsp;valuationdomain&nbsp;(default&nbsp;=&nbsp;None)<br>
-&nbsp;<br>
-Returns&nbsp;the&nbsp;highest&nbsp;correlated&nbsp;rankingByChoosing&nbsp;with&nbsp;self&nbsp;or&nbsp;<br>
-codual&nbsp;of&nbsp;self,&nbsp;depending&nbsp;on&nbsp;the&nbsp;CoDual&nbsp;flagg.</tt></dd></dl>
-
 <dl><dt><a name="CondorcetDigraph-outDegrees"><strong>outDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;outdegrees</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-outDegreesDistribution"><strong>outDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;outdegrees.</tt></dd></dl>
@@ -823,7 +818,7 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="CondorcetDigraph-showBadChoices"><strong>showBadChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;bad&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-showChoiceVector"><strong>showChoiceVector</strong></a>(self, ch)</dt><dd><tt>show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices</tt></dd></dl>
+<dl><dt><a name="CondorcetDigraph-showChoiceVector"><strong>showChoiceVector</strong></a>(self, ch, ChoiceVector=True)</dt><dd><tt>show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-showChordlessCircuits"><strong>showChordlessCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;(chordless)&nbsp;circuits&nbsp;in&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>.<br>
 Dummy&nbsp;for&nbsp;<a href="#CondorcetDigraph-showCircuits">showCircuits</a>().</tt></dd></dl>
@@ -899,7 +894,7 @@ the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;m
 
 <dl><dt><a name="CondorcetDigraph-showRelationTable"><strong>showRelationTable</strong></a>(self, Sorted=True, IntegerValues=False, actionsSubset=None, relation=None, ndigits=2, ReflexiveTerms=True)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.</tt></dd></dl>
+<dl><dt><a name="CondorcetDigraph-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=True, Debug=False, _OldCoca=False, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-showRubyChoice"><strong>showRubyChoice</strong></a>(self, Comments=False)</dt><dd><tt>dummy&nbsp;for&nbsp;showRubisChoice()<br>
 older&nbsp;versions&nbsp;compatibility</tt></dd></dl>

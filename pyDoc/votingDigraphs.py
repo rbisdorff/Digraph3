@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Python 3 implementation of voting digraphs
 # Refactored from revision 1.549 of the digraphs module
-# Current revision $Revision: 1082 $
+# Current revision $Revision: 1194 $
 # Copyright (C) 2011  Raymond Bisdorff
 #
 #    This program is free software; you can redistribute it and/or modify
@@ -382,7 +382,7 @@ class LinearVotingProfile(VotingProfile):
         """
         compute the instant runoff winner from a linear voting ballot
         """
-        import copy
+        from copy import copy
         from decimal import Decimal
         voters = [x for x in self.voters]
         totalWeight = Decimal("0.0")
@@ -393,8 +393,8 @@ class LinearVotingProfile(VotingProfile):
             print('Total number of votes = ', totalWeight)
             print('Half of the Votes = ', halfWeight)
         candidatesList = [x for x in self.candidates]
-        remainingCandidates = copy.copy(candidatesList)
-        remainingLinearBallot = copy.deepcopy(self.linearBallot)
+        remainingCandidates = copy(candidatesList)
+        remainingLinearBallot = copy(self.linearBallot)
         stage = 1
         while len(remainingCandidates) > 1:
             uninominalVotes = self.computeUninominalVotes(remainingCandidates,remainingLinearBallot)
@@ -808,7 +808,7 @@ class CondorcetDigraph(Digraph):
     
     """
     def __init__(self,argVotingProfile=None,approvalVoting=False,coalition=None,majorityMargins=False,hasIntegerValuation=False):
-        import copy
+        from copy import copy
         if isinstance(argVotingProfile, (VotingProfile,ApprovalVotingProfile)):
             votingProfile = argVotingProfile
         else:
@@ -819,19 +819,19 @@ class CondorcetDigraph(Digraph):
             else:
                 votingProfile = VotingProfile(argVotingProfile)
         self.name = 'rel_' + votingProfile.name
-        self.actions = copy.deepcopy(votingProfile.candidates)
+        self.actions = copy(votingProfile.candidates)
         if coalition == None:
-            voters = copy.deepcopy(votingProfile.voters)
+            voters = copy(votingProfile.voters)
         else:
             voters = {}
             for g in coalition:
                 voters[g] = votingProfile.voters[g]
         self.voters = voters
         if isinstance(votingProfile, (VotingProfile)):
-            self.ballot = copy.deepcopy(votingProfile.ballot)
+            self.ballot = copy(votingProfile.ballot)
             self.relation = self.constructBallotRelation(hasIntegerValuation)
         elif isinstance(votingProfile, (ApprovalVotingProfile)):
-            self.approvalBallot = copy.deepcopy(votingProfile.approvalBallot)
+            self.approvalBallot = copy(votingProfile.approvalBallot)
             if majorityMargins:
                 self.relation = self.constructMajorityMarginsRelation(hasIntegerValuation)
             else:
@@ -1061,7 +1061,7 @@ if __name__ == "__main__":
 
     print('****************************************************')
     print('* Python voting digraphs module                    *')
-    print('* $Revision: 1082 $                                   *')
+    print('* $Revision: 1194 $                                   *')
     print('* Copyright (C) 2006-2007 University of Luxembourg *')
     print('* The module comes with ABSOLUTELY NO WARRANTY     *')
     print('* to the extent permitted by the applicable law.   *')
@@ -1116,7 +1116,7 @@ if __name__ == "__main__":
 
     print('*************************************')
     print('* R.B. September 2008               *')
-    print('* $Revision: 1082 $                   *')
+    print('* $Revision: 1194 $                   *')
     print('*************************************')
 
 #############################

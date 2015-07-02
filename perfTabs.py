@@ -26,6 +26,8 @@ __version__ = "$Revision: 1.37 $"
 # $Source: /home/cvsroot/Digraph/perfTabs.py,v $
 
 from perfTabs import *
+import json
+import decimal
 
 from decimal import Decimal
 from collections import OrderedDict
@@ -35,6 +37,31 @@ try:
     from xml.sax import *
 except:
     print('XML extension will not work with this Python version!')
+
+######################################################################################################################
+#####                                                MCSRDecimalEncoder                                         ######
+#####                                                         START                                             ######
+######################################################################################################################
+
+#extension of the json encoder to encode decimals added by Ian
+class DecimalJSONEncoder(json.JSONEncoder):
+
+    def default(self,obj):
+
+        if isinstance(obj,decimal.Decimal):
+            #cast into float so that the native encoder can handle the rest
+            #since the result is a string only the string representation is used,
+            # which is still identical to the decimal value
+            return float(obj)
+        else:
+            return obj.__dict__
+        return json.JSONEncoder.default(self, obj)
+
+######################################################################################################################
+#####                                                MCSRDecimalEncoder                                         ######
+#####                                                         END                                               ######
+######################################################################################################################
+
 
 class _XMLPerformanceTableauHandler(ContentHandler):
     """
@@ -1318,20 +1345,161 @@ The performance evaluations of each decision alternative on each criterion are g
             html += '</table>'
             
         return html
+
+
+
+    # MCSR serialization added by Ian
+    def to_JSON(self):
+        return json.dumps(self.__dict__,sort_keys=True, indent=4, cls=DecimalJSONEncoder)
+
+
 ######################################################################################################################
-#####                                                computePerformanceHeatmap                                  ######
+#####                                                showHTMLMCSRPerformanceTableau                             ######
 #####                                                         START                                             ######
 ######################################################################################################################
-    def computePerformanceHeatmap(self,criteriaList=None,
+
+    def showHTMLMCSRPerformanceTableau(self):
+
+        """
+        Ask the server for an HTML representation of the performance tableau.
+
+        """
+        import gzip
+        RESTurl = "http://http://leopold-loewenheim.uni.lu//MCSR_REST_Service/RESTful_Example/list"
+        # params = gzip.compress(json.dumps({'type':type(self).__name__, 'typeDict':self.to_JSON()}).encode('utf-8'))
+        params = gzip.compress(json.dumps({'typeDict':self.to_JSON()}).encode('utf-8'))
+        #no encode for requests
+        # params = json.dumps({'type':type(self).__name__, 'typeDict':self.to_JSON()})
+        jsonHeader = {'content-Type': 'application/json','content-Encoding': 'gzip'}
+
+        #urllib
+        import urllib.request
+        req = urllib.request.Request(url=RESTurl, data=params, headers=jsonHeader)
+        resp = urllib.request.urlopen(req)
+        data = resp.read()
+        htmlResp = data.decode('utf-8')
+
+        #requests
+        # import requests
+        # req = requests.post(RESTurl,headers=jsonHeader,data=params)
+        # htmlResp = r.text
+        #print("sent request")
+
+        # # use actual temp file later
+        # tempFile = open('tempHTML.html','w')
+        # tempFile.write(htmlResp)
+        # tempFile.close()
+
+        import tempfile
+        temp=tempfile.NamedTemporaryFile(mode='w+t',delete=False)
+        temp.write(htmlResp)
+        temp.seek(0)
+
+        from urllib.request import pathname2url
+        import os
+        # filePath = 'file:{}'.format(pathname2url(os.path.abspath('tempHTML.html')))
+        filePath = 'file:{}'.format(pathname2url(os.path.abspath(temp.name)))
+
+        import webbrowser
+        # webbrowser.get(using="google-chrome").open(filePath)
+        # webbrowser.get(using="firefox").open(filePath)
+        webbrowser.open(filePath)
+
+        temp.close
+#
+######################################################################################################################
+#####                                                showHTMLMCSRPerformanceTableau                              ######
+#####                                                         END                                             ######
+######################################################################################################################
+
+
+
+######################################################################################################################
+#####                                                computeMCSRPerformanceTableau                              ######
+#####                                                         START                                             ######
+######################################################################################################################
+    def computeMCSRPerformanceTableau(self,isSorted=True,
+                               ndigits=2):
+
+        """
+        Computes the performance table in a JSON compatible format. Used by the Web API.
+        """
+
+        from collections import OrderedDict
+        from decimal import Decimal
+        from digraphs import flatten
+        performanceTableau = {}
+        performanceTableau['title'] = "PerformanceTableau"
+
+        min="minimum"
+        max="maximum"
+
+        minMaxEvaluations = self.computeMinMaxEvaluations()
+
+        #need a dict, but list(self.criteria) is not a dict
+        #therefore I need to construct criteriaList as a dict first
+        criteriaList = {}
+        tempCriteria= list(self.criteria)
+        if isSorted:
+            tempCriteria.sort()
+        for index,c in enumerate(tempCriteria):
+            criteriaList[str(index)] = c
+        criteriaList = OrderedDict(sorted(criteriaList.items(),key=lambda index: int(index[0])))
+
+        performanceTableau["criteriaList"] = criteriaList
+
+        actionsList = list(self.actions)
+        if isSorted:
+            actionsList.sort()
+
+        quantiles=OrderedDict()
+        for index, x in enumerate(actionsList):
+            quantiles[str(index)] = OrderedDict()
+            quantiles[str(index)][x] = {}
+            for gKey,gValue in criteriaList.items():
+                quantilexg = self.computeActionCriterionQuantile(x,gValue)
+                if quantilexg != 'NA':
+
+                    if self.evaluation[gValue][x] != Decimal("-999"):
+                        if self.evaluation[gValue][x] == minMaxEvaluations[gValue]['minimum']:
+                            quantiles[str(index)][x][gKey]={'quantile':self.evaluation[gValue][x],
+                                                            'quantileClass':min}
+                        elif self.evaluation[gValue][x] == minMaxEvaluations[gValue]['maximum']:
+                            quantiles[str(index)][x][gKey]={'quantile':self.evaluation[gValue][x],
+                                                            'quantileClass':max}
+                        else:
+                            quantiles[str(index)][x][gKey]={'quantile':self.evaluation[gValue][x],
+                                                            'quantileClass':"default"}
+
+                else:
+                    break
+            quantiles[str(index)]={x:OrderedDict(sorted(quantiles[str(index)][x].items(),key=lambda index: int(index[0])))}
+
+        quantiles=OrderedDict(sorted(quantiles.items(),key=lambda index: int(index[0])))
+        performanceTableau['quantiles'] = quantiles
+        return performanceTableau
+
+######################################################################################################################
+#####                                                computeMCSRPerformanceTableau                            ######
+#####                                                         END                                             ######
+######################################################################################################################
+
+
+######################################################################################################################
+#####                                                computeMCSRPerformanceHeatmap                              ######
+#####                                                         START                                             ######
+######################################################################################################################
+    def computeMCSRPerformanceHeatmap(self,criteriaList=None,
                                actionsList=None,
                                ndigits=2,
                                colorLevels=7,
+                               Ranked=True,
                                title='Performance Heatmap',
                                Correlations=False,
                                Threading=False,
                                Debug=False):
         """
-        Renders the Brewer RdYlGn colored heatmap of the performance table
+        Computes the Brewer RdYlGn colored heatmap of the performance table
         actions x criteria in ordered dictionary format. Three color levels (5,7 or 9)
         are provided.
 
@@ -1340,31 +1508,40 @@ The performance evaluations of each decision alternative on each criterion are g
         the following ordered dictionary in return::
 
             OrderedDict([
-            ('title', 'Performance Heatmap'),
-            ('colorPalette', [(Decimal('0.2'), '"#FDAE61"', 'q5-1'),
-                              (Decimal('0.4'), '"#FEE08B"', 'q5-2'),
-                              (Decimal('0.6'), '"#FFFFBF"', 'q5-3'),
-                              (Decimal('0.8'), '"#D9EF8B"', 'q5-4'),
-                              (Decimal('1.0'), '"#A6D96A"', 'q5-5')]),
-            ('criteriaList', ['g5', 'g2', 'g4', 'g1', 'g3']),
-            ('criteriaCorrelations', [Decimal('0.71428'),
-                                      Decimal('0.48571'),
-                                      Decimal('0.40952'),
-                                      Decimal('0.35238'),
-                                      Decimal('0.16190')]),
-            ('quantiles', OrderedDict([('a1', [(Decimal('3'), 'q5-2'),
-                                               (Decimal('-17.92'), 'q5-5'),
-                                               (Decimal('26.68'), 'q5-2'),
-                                               (Decimal('1'), 'q5-1'),
-                                               (Decimal('-33.99'), 'q5-3')]),
-                                       ('a2', [(Decimal('6'), 'q5-3'),
-                                               (Decimal('-30.71'), 'q5-5'),
-                                               (Decimal('66.35'), 'q5-4'),
-                                               (Decimal('8'), 'q5-5'),
-                                               (Decimal('-77.77'), 'q5-2')]),
-                                       ('a3', ...
-            ...
-            ])
+                ('title', 'Performance Heatmap'),
+                ('colorPalette', OrderedDict([
+                                  ('0',{'quantile':Decimal('0.2'),'colourValue':"#FDAE61",'quantileClass':'q5_1'}),
+                                  ('1',{'quantile':Decimal('0.4'),'colourValue':"#FEE08B",'quantileClass':'q5_2'}),
+                                  ('2',{'quantile':Decimal('0.6'),'colourValue':"#FFFFBF",'quantileClass':'q5_3'}),
+                                  ('3',{'quantile':Decimal('0.8'),'colourValue':"#D9EF8B",'quantileClass':'q5_4'}),
+                                  ('4',{'quantile':Decimal('1.0'),'colourValue':"#A6D96A",'quantileClass':'q5_5'})
+                ])),
+                ('criteriaList', OrderedDict([('0','g5'), ('1','g2'), ('2','g4'), ('3','g1'), ('4','g3')]),
+                ('criteriaCorrelations', OrderedDict([
+                                                     ('0',Decimal('0.71428')),
+                                                     ('1',Decimal('0.48571')),
+                                                     ('2',Decimal('0.40952')),
+                                                     ('3',Decimal('0.35238')),
+                                                     ('4',Decimal('0.16190'))
+                ])),
+                ('quantiles', OrderedDict([
+                                           ('0',{'a1':OrderedDict([
+                                                             ('0',{'quantile':Decimal('3'), 'qantileClass':q5-2'}),
+                                                             ('1',{'quantile':(Decimal('-17.92'), 'qantileClass':'q5-5'}),
+                                                             ('2',{'quantile':(Decimal('26.68'), 'qantileClass':'q5-2'}),
+                                                             ('3',{'quantile':(Decimal('1'), 'qantileClass':'q5-1'}),
+                                                             ('4',{'quantile':(Decimal('-33.99'), 'qantileClass':'q5-3'})
+                                           ])}),
+                                           ('1',{'a2':OrderedDict([
+                                                             ('0',{'quantile':Decimal('6'), 'qantileClass':q5-3'}),
+                                                             ('1',{'quantile':(Decimal('-30.71'), 'qantileClass':'q5-5'}),
+                                                             ('2',{'quantile':(Decimal('66.35'), 'qantileClass':'q5-4'}),
+                                                             ('3',{'quantile':(Decimal('8'), 'qantileClass':'q5-5'}),
+                                                             ('4',{'quantile':(Decimal('-77.77'), 'qantileClass':'q5-3'})
+                                           ])}),
+                                           ('2', ...
+                ]))...
+            ]))
 
         """
         from collections import OrderedDict
@@ -1373,12 +1550,6 @@ The performance evaluations of each decision alternative on each criterion are g
         heatmap = OrderedDict()
         heatmap['title'] = title
 
-        print(" ")
-        print("TESTING ")
-        print(" ")
-        print("TESTING ALTERNATIVES")
-        print(" ")
-        print(" ")
 
         brewerRdYlGn9Colors = {'0':{'quantile':Decimal('0.1111'),'colourValue':"#D53E4F",'quantileClass':"q9_1"},
                                '1':{'quantile':Decimal('0.2222'),'colourValue':"#F46D43",'quantileClass':"q9_2"},
@@ -1431,53 +1602,64 @@ The performance evaluations of each decision alternative on each criterion are g
                     Comments=False)
                 criteriaList={}
                 correlations={}
+
+                criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
+                criteriaWeightsList.sort(reverse=True)
+
+                criteriaWeights={}
                 for index,c in enumerate(criteriaCorrelations):
                     criteriaList[str(index)]=c[1]
                     correlations[str(index)]=c[0]
+                    for indexW,g in enumerate(criteriaWeightsList):
+                     if (g[1]==c[1]):
+                         criteriaWeights[str(index)]=g[0]
+                         break
             else:
                 criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
                 criteriaWeightsList.sort(reverse=True)
                 criteriaList={}
-                criteriaIndex=0
+                criteriaWeights={}
                 for index,g in enumerate(criteriaWeightsList):
                     criteriaList[str(index)]=g[1]
+                    criteriaWeights[str(index)]=g[0]
 
-                #criteriaList.sort()
                 criteriaCorrelations = None
         else:
             criteriaCorrelations = None
 
-        criteriaList= OrderedDict(sorted(criteriaList.items()))
+        criteriaList= OrderedDict(sorted(criteriaList.items(),key=lambda index: int(index[0])))
         heatmap['criteriaList'] = criteriaList
+
         if criteriaCorrelations != None:
-            correlations= OrderedDict(sorted(correlations.items()))
+            correlations= OrderedDict(sorted(correlations.items(),key=lambda index: int(index[0])))
             heatmap['criteriaCorrelations'] = correlations
-#temporary
-        heatmap['criteriaCorrelations'] = OrderedDict()
-        for index, crit in colorPalette.items():
-            heatmap['criteriaCorrelations'][index] = 34
-#temporary
 
-        #print(heatmap['criteriaCorrelations'])
-        print(" ")
-        print("TESTING ALTERNATIVES")
-        print(" ")
-        print("TESTING ALTERNATIVES")
-        print(" ")
-        print(" ")
-
-
-        if actionsList == None:
-            actionsList = list(self.actions.keys())
-            actionsList.sort()
+            criteriaWeights= OrderedDict(sorted(criteriaWeights.items(),key=lambda index: int(index[0])))
+            heatmap['criteriaWeights'] = criteriaWeights
         else:
-            actionsList = [x for x in flatten(actionsList)]
+            criteriaWeights= OrderedDict(sorted(criteriaWeights.items(),key=lambda index: int(index[0])))
+            heatmap['criteriaWeights'] = criteriaWeights
 
-        #heatmap['actionsList'] = actionsList
+
+        if Ranked and actionsList == None:
+            from weakOrders import QuantilesRankingDigraph
+            qsr = QuantilesRankingDigraph(self,LowerClosed=True,
+                                          Threading=Threading,
+                                          Debug=Debug)
+            tempActionsList = qsr.computeQsRbcRanking()
+            actionsList = [a[0] for a in tempActionsList]
+        else:
+            if actionsList == None:
+                actionsList = list(self.actions.keys())
+                actionsList.sort()
+            else:
+               actionsList = [x for x in flatten(actionsList)]
+
 
         quantiles=OrderedDict()
-        for x in actionsList:
-            quantiles[x] = OrderedDict()
+        for index, x in enumerate(actionsList):
+            quantiles[str(index)] = OrderedDict()
+            quantiles[str(index)][x] = {}
             for gKey,gValue in criteriaList.items():
                 quantilexg = self.computeActionCriterionQuantile(x,gValue)
                 if Debug:
@@ -1487,32 +1669,24 @@ The performance evaluations of each decision alternative on each criterion are g
                         if Debug:
                             print(i, colorPalette[str(i)]['quantile'])
 
-
                         if quantilexg <= colorPalette[str(i)]['quantile']:
-                            #quantiles[x].append((self.evaluation[gValue][x],colorPalette[i]['quantileClass']))
-                            quantiles[x][gKey]={'quantile':self.evaluation[gValue][x],
+                            quantiles[str(index)][x][gKey]={'quantile':self.evaluation[gValue][x],
                                              'quantileClass':colorPalette[str(i)]['quantileClass']}
                             break
                 else:
-                    break
+                    quantiles[str(index)][x][gKey]={'quantile':"N/A",
+                                             'quantileClass':"default"}
                 if Debug:
-                    print(x,g,quantiles[x][gValue])
-            quantiles[x] = OrderedDict(sorted(quantiles[x].items()))
+                    print(x,gValue,quantiles[index][x][gValue])
+            quantiles[str(index)]={x:OrderedDict(sorted(quantiles[str(index)][x].items(),key=lambda index: int(index[0])))}
 
-        for key, value in quantiles.items():
-            print(key)
-        print(" ")
-        print("TESTING ALTERNATIVES")
-        print(" ")
-        print("TESTING ALTERNATIVES")
-        print(" ")
-        print(" ")
 
-        heatmap['quantiles'] = OrderedDict(sorted(quantiles.items()))
+        heatmap['quantiles'] = OrderedDict(sorted(quantiles.items(),key=lambda index: int(index[0])))
+        print('DONE')
         return heatmap 
 
 ######################################################################################################################
-#####                                                computePerformanceHeatmap                                  ######
+#####                                                computeMCSRPerformanceHeatmap                            ######
 #####                                                         END                                             ######
 ######################################################################################################################
 
@@ -4337,6 +4511,7 @@ class _RandomCBPerformanceTableau(PerformanceTableau):
     Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.
     """
 
+
     def __init__(self,numberOfActions = None, \
                  numberOfCriteria = None, \
                  weightDistribution = None,
@@ -4785,6 +4960,8 @@ class _RandomCBPerformanceTableau(PerformanceTableau):
             if Comments:
                 print('criteria',c,' default thresholds:')
                 print(self.criteria[c]['thresholds'])
+
+
 
 ##class _ThreadedRandomCBPerformanceTableau(PerformanceTableau):
 ##    """

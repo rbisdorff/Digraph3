@@ -150,7 +150,7 @@ class WeakOrder(Digraph):
         export GraphViz dot file for weak order (Hasse diagram) drawing filtering.
         """
         import os
-        from copy import deepcopy
+        from copy import copy as deepcopy
 
             
         def _safeName(t0):
@@ -266,6 +266,123 @@ class WeakOrder(Digraph):
 ##
 ##        Digraph.showRankingByChoosing(self,rankingByChoosing)
 
+class KohlerArrowRaynaudFusionDigraph(WeakOrder):
+    """
+    Specialization of the abstract WeakOrder class for 
+    ranking-by-choosing orderings resulting from the epistemic
+    disjunctive (o-max fusion) or conjunctive (o-min operator) fusion of a
+    Kohler linear best ordering and an Arrow-Raynaud linear worst ordering. 
+    """
+    def __init__(self,outrankingDigraph,
+                 fusionOperator='o-max',
+                 Threading=True,
+                 Debug=False):
+        
+        from copy import copy as deepcopy
+        from pickle import dumps, loads, load
+        from linearOrders import KohlerOrder
+        self.Debug=Debug
+        self.Threading = Threading
+        
+        if Threading:
+            from multiprocessing import Process, Lock, active_children, cpu_count
+            class myThread(Process):
+                def __init__(self, threadID, name, direction, tempDirName, Debug):
+                    Process.__init__(self)
+                    self.threadID = threadID
+                    self.name = name
+                    self.direction = direction
+                    self.workingDirectory = tempDirName
+                    self.Debug = Debug
+                def run(self):
+                    from pickle import dumps, loads
+                    from os import chdir
+                    chdir(self.workingDirectory)
+                    from sys import setrecursionlimit
+                    setrecursionlimit(2**20)
+                    if Debug:
+                        print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+                    #threadLock.acquire()
+                    fi = open('dumpDigraph.py','rb')
+                    digraph = loads(fi.read())
+                    fi.close()
+                    if self.direction == 'best':
+                        fo = open('ko.py','wb')
+                        ko = KohlerOrder(digraph)
+                        fo.write(dumps(ko.relation,-1))
+                    elif self.direction == 'worst':
+                        fo = open('ar.py','wb')
+                        ar = KohlerOrder((~(-digraph)))
+                        fo.write(dumps(ar.relation,-1))
+                    fo.close()
+                    #threadLock.release()
+                    
+        digraph=deepcopy(outrankingDigraph)
+        digraph.recodeValuation(-1.0,1.0)
+        self.name = digraph.name
+        #self.__class__ = digraph.__class__
+        self.actions = deepcopy(digraph.actions)
+        self.order = len(self.actions)
+        self.valuationdomain = deepcopy(digraph.valuationdomain)
+        self.originalRelation = digraph.relation
+
+        if Threading and cpu_count()>2:
+            print('Threading ...')
+            from tempfile import TemporaryDirectory
+            with TemporaryDirectory() as tempDirName:
+                digraphFileName = tempDirName +'/dumpDigraph.py'
+                if Debug:
+                    print('temDirName, digraphFileName', tempDirName,digraphFileName)
+                fo = open(digraphFileName,'wb')
+                pd = dumps(digraph,-1)
+                fo.write(pd)
+                fo.close()
+                threadBest = myThread(1,"ComputeBest","best",tempDirName,Debug)
+                threadWorst = myThread(2,"ComputeWorst","worst",tempDirName,Debug)
+                threadBest.start()
+                threadWorst.start()
+                while active_children() != []:
+                    pass
+                print('Exiting computing threads')
+                koFileName = tempDirName +'/ko.py'          
+                fi = open(koFileName,'rb')
+                KohlerRelation = loads(fi.read())
+                fi.close()
+                arFileName = tempDirName + '/ar.py'
+                fi = open(arFileName,'rb')
+                ArrowRaynaudRelation = loads(fi.read())
+                fi.close()
+            
+        else:
+            ko = KohlerOrder(digraph)
+            ar = KohlerOrder((~(-digraph)))
+            KohlerRelation = deepcopy(ko.relation)
+            ArrowRaynaudRelation = deepcopy(ar.relation)
+            
+        if Debug:
+            print('Kohler = ', KohlerRelation)
+            print('ArrowRaynaud = ', ArrowRaynaudRelation)
+            
+        relation = {}
+        for x in self.actions:
+            relation[x] = {}
+            for y in self.actions:
+                if fusionOperator == "o-max":
+                    relation[x][y] = digraph.omax((KohlerRelation[x][y],
+                                                    ArrowRaynaudRelation[x][y]))
+                elif fusionOperator == "o-min":
+                    relation[x][y] = digraph.omin((KohlerRelation[x][y],
+                                                    ArrowRaynaudRelation[x][y]))
+                else:
+                    print('Error: invalid epistemic fusion operator %s' % fusionOperator)
+                if Debug:
+                    print('!',x,y,KohlerRelation[x][y],
+                          ArrowRaynaudRelation[x][y],relFusion[x][y])  
+        self.relation=deepcopy(relation)        
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+
+#---------------------
 class RankingByChoosingDigraph(WeakOrder):
     """
     Specialization of the abstract WeakOrder class for 
@@ -326,7 +443,7 @@ class RankingByChoosingDigraph(WeakOrder):
                  CppAgrum=False,
                  Threading=True):
         
-        from copy import deepcopy
+        from copy import copy, deepcopy
         from pickle import dumps, loads, load
 
         self.CoDual=CoDual
@@ -372,7 +489,7 @@ class RankingByChoosingDigraph(WeakOrder):
         digraph.recodeValuation(-1.0,1.0)
         self.name = digraph.name
         #self.__class__ = digraph.__class__
-        self.actions = deepcopy(digraph.actions)
+        self.actions = copy(digraph.actions)
         self.order = len(self.actions)
         self.valuationdomain = digraph.valuationdomain
         self.originalRelation = digraph.relation
@@ -430,8 +547,8 @@ class RankingByChoosingDigraph(WeakOrder):
                 if Debug:
                     print('!',x,y,relBest[x][y],relLast[x][y],relFusion[x][y])  
         self.relation=relFusion
-        self.rankingByLastChoosing = deepcopy(digraph.rankingByLastChoosing)
-        self.rankingByBestChoosing = deepcopy(digraph.rankingByBestChoosing)
+        self.rankingByLastChoosing = copy(digraph.rankingByLastChoosing)
+        self.rankingByBestChoosing = copy(digraph.rankingByBestChoosing)
         if Debug:
             self.computeRankingByChoosing()
             self.showRankingByChoosing()
@@ -440,14 +557,27 @@ class RankingByChoosingDigraph(WeakOrder):
         self.notGamma = self.notGammaSets()
 
 
+    def showWeakOrder(self,rankingByChoosing=None):
+        """
+        Specialization of generic method.
+        Without argument, a weak ordering is recomputed from the
+        valued self relation.
+        """
+        if rankingByChoosing == None:
+            WeakOrder.showWeakOrder(self,rankingByChoosing=self.computeRankingByChoosing())
+        else:
+            WeakOrder.showWeakOrder(self,rankingByChoosing=rankingByChoosing)
+
+
+
     def showRankingByChoosing(self,rankingByChoosing=None):
         """
         Dummy for showWeakOrder method
         """
         if rankingByChoosing == None:
-            self.showWeakOrder(rankingByChoosing=self.computeRankingByChoosing())
+            WeakOrder.showWeakOrder(self,rankingByChoosing=self.computeRankingByChoosing())
         else:
-            self.showWeakOrder(rankingByChoosing=rankingByChoosing)
+            WeakOrder.showWeakOrder(self,rankingByChoosing=rankingByChoosing)
 
     def computeRankingByBestChoosing(self,Forced=False):
         """
@@ -462,13 +592,14 @@ class RankingByChoosingDigraph(WeakOrder):
         """
         if Forced:
             WeakOrder.computeRankingByLastChoosing(self,CoDual=self.CoDual,CppAgrum=self.CppAgrum)
- 
+
+#--------------------
 class RankingByBestChoosingDigraph(RankingByChoosingDigraph):
     """
     Specialization of abstract WeakOrder class for computing a ranking by best-choosing.
     """
     def __init__(self,digraph,Normalized=True,CoDual=False,Debug=False):
-        from copy import deepcopy
+        from copy import copy as deepcopy
         digraphName = 'ranking-by-best'+digraph.name
         self.name = deepcopy(digraphName)
         self.actions = deepcopy(digraph.actions)
@@ -495,7 +626,7 @@ class RankingByLastChoosingDigraph(RankingByChoosingDigraph):
     Specialization of abstract WeakOrder class for computing a ranking by rejecting.
     """
     def __init__(self,digraph,Normalized=True,CoDual=False,Debug=False):
-        from copy import deepcopy
+        from copy import copy as deepcopy
         digraphName = 'ranking-by-last'+digraph.name
         self.name = deepcopy(digraphName)
         self.actions = deepcopy(digraph.actions)
@@ -522,7 +653,7 @@ class RankingByPrudentChoosingDigraph(RankingByChoosingDigraph):
     Specialization for ranking-by-rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to 20% of the valuation domain maximum (1.0).
     """
     def __init__(self,digraph,CoDual=False,Normalized=True,Odd=True,Limited=0.2,Comments=False,Debug=False,SplitCorrelation=True):
-        from copy import deepcopy
+        from copy import copy, deepcopy
         from time import time
         if Comments:          
             t0 = time()
@@ -532,9 +663,9 @@ class RankingByPrudentChoosingDigraph(RankingByChoosingDigraph):
             digraph_.recodeValuation(-1,1)
         digraphName = 'sorting-by-prudent-choosing'+digraph_.name
         self.name = digraphName
-        self.actions = deepcopy(digraph_.actions)
+        self.actions = copy(digraph_.actions)
         self.order = len(self.actions)
-        self.valuationdomain = deepcopy(digraph_.valuationdomain)
+        self.valuationdomain = copy(digraph_.valuationdomain)
         s1 = RankingByLastChoosingDigraph(digraph_,CoDual=CoDual,Debug=False)
         s2 = RankingByBestChoosingDigraph(digraph_,CoDual=CoDual,Debug=False)
         fus = FusionDigraph(s1,s2)
@@ -572,7 +703,7 @@ class RankingByPrudentChoosingDigraph(RankingByChoosingDigraph):
                     self.rankingByBestChoosing = s2.rankingByBestChoosing
                     self.rankingByLastChoosing = s1.rankingByLastChoosing
         else:
-            self.relation = deepcopy(fus.relation)
+            self.relation = copy(fus.relation)
             self.rankingByBestChoosing = s2.rankingByBestChoosing
             self.rankingByLastChoosing = s1.rankingByLastChoosing
 
@@ -634,7 +765,7 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
                  plotFileName=None,\
                  Threading=True,\
                  Debug=False):
-        from copy import deepcopy
+        from copy import copy, deepcopy
         from linearOrders import PrincipalOrder
         from pickle import dumps, loads, load
 
@@ -688,7 +819,7 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
                 self.actions[x] = {}
                 self.actions[x]['name'] = x
         else:
-            self.actions = deepcopy(digraph.actions)
+            self.actions = digraph.actions
         self.order = len(self.actions)
         self.valuationdomain = digraph.valuationdomain
 
@@ -743,18 +874,18 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
             print(self.actions)
             for x in pl.principalRowwiseScores:
                 print(x)
-        self.principalRowwiseScores = deepcopy(pl.principalRowwiseScores)
+        self.principalRowwiseScores = copy(pl.principalRowwiseScores)
         for x in pl.principalRowwiseScores:
             self.actions[x[1]]['principalRowwiseScore'] = x[0]
         if Debug:
             print('Column wise: ')
             print(pc.principalColwiseScores)
             pc.computeOrder()
-        self.principalColwiseScores = deepcopy(pc.principalColwiseScores)
+        self.principalColwiseScores = copy(pc.principalColwiseScores)
         for x in pc.principalColwiseScores:
             self.actions[x[1]]['principalColwiseScore'] = x[0]
         pf = FusionDigraph(pl,pc,operator=fusionOperator)
-        self.relation = deepcopy(pf.relation)
+        self.relation = copy(pf.relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         #self.computeRankingByChoosing()
@@ -878,7 +1009,7 @@ def _jobTaskRubis(categID):
     from tempfile import TemporaryDirectory
     from os import getcwd, chdir
     from pickle import dumps, loads, load
-    from copy import deepcopy
+    from copy import copy as deepcopy
     from outrankingDigraphs import BipolarOutrankingDigraph
     #from linearOrders import RankedPairsOrder, KohlerOrder
     from weakOrders import PrincipalInOutDegreesOrdering
@@ -932,15 +1063,15 @@ def _jobTaskRubis(categID):
                 catCRbc = {'result': [((digraph.valuationdomain['max'],catContent),\
                                        (digraph.valuationdomain['max'],catContent))]}
 
-        catRbc = deepcopy(catCRbc['result'])
-        currActions = list(catContent)
-        catRelation = digraph.computeRankingByChoosingRelation(\
-                            actionsSubset=currActions,\
-                            rankingByChoosing=catRbc,\
-                            Debug=False)
+##        catRbc = deepcopy(catCRbc['result'])
+##        currActions = list(catContent)
+##        catRelation = digraph.computeRankingByChoosingRelation(\
+##                            actionsSubset=currActions,\
+##                            rankingByChoosing=catRbc,\
+##                            Debug=False)
         
         #print(catRbc,catRelation)
-        splitCatRelation = [catRbc,catRelation]
+        splitCatRelation = [catCRbc['result']]
         chdir(cwd)
     foName = 'splitCatRelation-'+str(categID)+'.py'
     fo = open(foName,'wb')                                            
@@ -953,18 +1084,16 @@ def _jobTaskKohler(categID):
     """
     Task definition for multiprocessing threaded jobs in QsRbcRanking.
     
-    .. note::
+    .. Note::
     
-          The indiviual quantile classes are linarly order with Kohler's ranking rule.
+          The indiviual quantile classes are linarly order with
+          Kohler's ranking rule.
     """
-    from tempfile import TemporaryDirectory
-    from os import getcwd, chdir
     from pickle import dumps, loads, load
-    from copy import deepcopy
+    from copy import copy as deepcopy
     from outrankingDigraphs import BipolarOutrankingDigraph
     from linearOrders import KohlerOrder
     from weakOrders import PrincipalInOutDegreesOrdering
-    maxCatContent = 1000
     Comments = True
     if Comments:
         print("Starting working on category %d" % (categID), end=" ")
@@ -972,60 +1101,61 @@ def _jobTaskKohler(categID):
     fi = open(fiName,'rb')
     pt = loads(fi.read())
     fi.close()
-    with TemporaryDirectory() as TempDirName:
-        cwd = getcwd()
-        chdir(TempDirName)
-        digraph = BipolarOutrankingDigraph(pt,Normalized=True)
-        Max = digraph.valuationdomain['max']
-        Med = digraph.valuationdomain['med']
-        catContent = [x for x in digraph.actions]
-        nc = len(catContent)
-        print(nc,maxCatContent)
-        #print(catContent)
-        if nc <= maxCatContent:
-            currActions = list(catContent)
-            try:
-##               catCRbc = digraph.computeRankingByChoosing(CoDual=True)
-                ko = KohlerOrder(digraph)
-                catCRbc = ko.computeRankingByChoosing()
-            except:
-                if Comments:
-                    print('==>>> Failed Kohler ranking => Principal ranking')
-##              rp = RankedPairsOrder(digraph)
-##              catRbc = rp.computeRankingByChoosing()
-##                ko = KohlerOrder(digraph)
-##                catCRbc = ko.computeRankingByChoosing()
-                try:
-                    pri = PrincipalInOutDegreesOrdering(digraph,Threading=False)
-                    catCRbc = pri.computeWeakOrder()
-                except:
-                    catCRbc = {'result': \
-                               [((digraph.valuationdomain['max'],catContent),\
-                                (digraph.valuationdomain['max'],catContent))]}
-        else:
-            if Comments:
-                print('==>>> Exceeds %d => Kohler ranking' % maxCatContent)
-##            rp = RankedPairsOrder(digraph)
-##            catCRbc = rp.computeRankingByChoosing()
-            ko = KohlerOrder(digraph)
-            catCRbc = ko.computeRankingByChoosing()
-##            try:
-##                pri = PrincipalInOutDegreesOrdering(digraph,Threading=False)
-##                catCRbc = pri.computeWeakOrder()
-##            except:
-##                catCRbc = {'result': [((digraph.valuationdomain['max'],catContent),\
-##                                       (digraph.valuationdomain['max'],catContent))]}
+    digraph = BipolarOutrankingDigraph(pt,Normalized=True)
+    nc = digraph.order
+    if Comments:
+        print(nc)
+    ko = KohlerOrder(digraph)
+    catCRbc = ko.computeRankingByChoosing()
+##    catRelation = digraph.computeRankingByChoosingRelation(\
+##                        rankingByChoosing=catCRbc['result'],\
+##                        Debug=False)
+    splitCatRelation = [catCRbc['result']]
+    foName = 'splitCatRelation-'+str(categID)+'.py'
+    fo = open(foName,'wb')                                            
+    fo.write(dumps(splitCatRelation,-1))
+    fo.close()
+    writestr = 'Finished category %d %d' % (categID,nc)
+    return writestr
 
-        catRbc = deepcopy(catCRbc['result'])
-        currActions = list(catContent)
-        catRelation = digraph.computeRankingByChoosingRelation(\
-                            actionsSubset=currActions,\
-                            rankingByChoosing=catRbc,\
-                            Debug=False)
-        
-        #print(catRbc,catRelation)
-        splitCatRelation = [catRbc,catRelation]
-        chdir(cwd)
+#####
+def _jobTaskKohlerFusion(categID):
+    """
+    Task definition for multiprocessing threaded jobs in Quantiles Ranking.
+    
+    .. Note::
+    
+          The indiviual quantile classes are linarly order with a
+          fusion between Kohler's and Arrow-Raynaud's ranking rules.
+          The latter corresponds to Kohler's rule applied to the codual
+          outranking digraph.
+          
+    """
+    from pickle import dumps, loads, load
+    from copy import copy as deepcopy
+    from outrankingDigraphs import BipolarOutrankingDigraph
+    from linearOrders import KohlerOrder
+    from weakOrders import PrincipalInOutDegreesOrdering
+    Comments = True
+    if Comments:
+        print("Starting working on category %d" % (categID), end=" ")
+    fiName = 'partialPerfTab-'+str(categID)+'.py'
+    fi = open(fiName,'rb')
+    pt = loads(fi.read())
+    fi.close()
+    digraph = BipolarOutrankingDigraph(pt,Normalized=True)
+    nc = digraph.order
+    if Comments:
+        print(nc)
+    ko = KohlerOrder(digraph)
+    kos = KohlerOrder((~(-digraph)))
+    fk = FusionDigraph(ko,kos)
+    catCRbc = KohlerOrder.computeRankingByChoosing(fk)
+    #catRbc = deepcopy(catCRbc['result'])
+##    catRelation = digraph.computeRankingByChoosingRelation(\
+##                        rankingByChoosing=catCRbc['result'],\
+##                        Debug=False)
+    splitCatRelation = [catCRbc['result']]
     foName = 'splitCatRelation-'+str(categID)+'.py'
     fo = open(foName,'wb')                                            
     fo.write(dumps(splitCatRelation,-1))
@@ -1076,7 +1206,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                  Comments=True,
                  Debug=False):
         
-        from copy import deepcopy
+        from copy import copy,deepcopy
         from sortingDigraphs import QuantilesSortingDigraph
         from linearOrders import KohlerOrder
         from multiprocessing import Pool, cpu_count
@@ -1150,7 +1280,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                 print(i+1,weakOrdering[i])        
 
         #qs.recodeValuation(-1,1)
-        qsRelation = deepcopy(qs.relation)
+        qsRelation = copy(qs.relation)
         catRelation = {}
         catRbc = {}
         ## Rbc Threading=False
@@ -1209,11 +1339,11 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                                                        chksize):
                             if Comments:
                                 print(res)               
-                    elif rankingRule == "TestChunkSize":
+                    elif rankingRule == "Test":
                         chksize = 1
 ##                        chksize = len(filledCategKeys)//Nproc
 ##                        for res in pool.imap_unordered(_jobTaskKohler,filledCategKeys):
-                        for res in pool.imap(_jobTaskKohler,
+                        for res in pool.imap(_jobTaskKohlerFusion,
                                                        filledCategKeys,
                                                        chksize):
                             if Comments:
@@ -1232,19 +1362,19 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                         fi.close()
                         if Debug:
                             print(c,'catRbc',splitCatRelation[0])
-                            print(c,'catRelation',splitCatRelation[1])
+                            #print(c,'catRelation',splitCatRelation[1])
                         catRbc[c] = splitCatRelation[0]
-                        catRelation[c] = splitCatRelation[1]
+                        #catRelation[c] = splitCatRelation[1]
                     elif nc == 1:
                         if Debug:
                             print('singleton category %d : %d' % (c,nc))
                             print(catContent[c])
                         catRbc[c] = [((Max,catContent[c]),(Max,catContent[c]))]
-                        for x in catContent[c]:
-                            catRelation[c] = {str(x): {str(x): Med}}
+##                        for x in catContent[c]:
+##                            catRelation[c] = {str(x): {str(x): Med}}
                         if Debug:
                             print(c,'catRbc',catRbc[c])
-                            print(c,'catRelation',catRelation[c])
+                            #print(c,'catRelation',catRelation[c])
                     elif nc == 2:
                         if Debug:
 
@@ -1261,13 +1391,13 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                             catRbc[c] = [((Max,y),(Max,x))]
                         else:
                             catRbc[c] = [((Max,catContent[c]),(Max,catContent[c]))]
-                        catRelation[c] = qs.computeRankingByChoosingRelation(\
-                            actionsSubset=currActions,\
-                            rankingByChoosing=catRbc[c],\
-                            Debug=False)
+##                        catRelation[c] = qs.computeRankingByChoosingRelation(\
+##                            actionsSubset=currActions,\
+##                            rankingByChoosing=catRbc[c],\
+##                            Debug=False)
                         if Debug:
                             print(c,'catRbc',catRbc[c])
-                            print(c,'catRelation',catRelation[c])
+                            #print(c,'catRelation',catRelation[c])
                     
                 chdir(cwd)
                 self.runTimes['postThreading'] = time() - t0 
@@ -1281,46 +1411,46 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                     print(c, len(catContent[c]))
                 if len(catContent[c]) > 0:
                     currActions = list(catContent[c])
-##                    for x in currActions:
-##                        for y in currActions:
-##                            qs.relation[x][y] = qs.relationOrig[x][y]
                     pt = PartialPerformanceTableau(perfTab,currActions)
                     gt = BipolarOutrankingDigraph(pt)
                     if rankingRule == "RubisChoice":
                          rbc = RankingByChoosingDigraph(gt,CoDual=True,Threading=False)
-                         catCRbc = rbc.computeRankingByChoosing()
-##                        catCRbc = qs.computeRankingByChoosing(currActions,CoDual=True)
+                         catCRbc = rbc.computeRankingByChoosing()                      
                     elif rankingRule == "KohlerRule":
-                        #pt = PartialPerformanceTableau(perfTab,currActions)
-                        #gt = BipolarOutrankingDigraph(pt)
                         ko = KohlerOrder(gt)
                         catCRbc = ko.computeRankingByChoosing()
+                    elif rankingRule == "Test":
+                        ko = KohlerOrder(gt)
+                        kos = KohlerOrder((~(-gt)))
+                        fk = FusionDigraph(ko,kos)
+                        catCRbc = KohlerOrder.computeRankingByChoosing(fk)
+                    else:
+                        print('Error: no valid Ranking-by-choosing rule !')
                     if Debug:
                         print(c,catCRbc)
                     catRbc[c] = deepcopy(catCRbc['result'])
-                    currActions = list(catContent[c])
-                    catRelation[c] = qs.computeRankingByChoosingRelation(\
-                        actionsSubset=currActions,\
-                        rankingByChoosing=catCRbc['result'],\
-                        Debug=False)
+##                    catRelation[c] = qs.computeRankingByChoosingRelation(\
+##                        actionsSubset=currActions,\
+##                        rankingByChoosing=catCRbc['result'],\
+##                        Debug=False)
             self.runTimes['withoutThreading'] = time() - t0
 
         self.name = 'qsrbc-'+qs.name
-        self.actions = deepcopy(qs.actions)
+        self.actions = copy(qs.actions)
         self.order = len(self.actions)
-        self.criteria = deepcopy(qs.criteria)
-        self.evaluation = deepcopy(qs.evaluation)
-        self.categories = deepcopy(qs.categories)
-        self.limitingQuantiles = deepcopy(qs.limitingQuantiles)
-        self.criteriaCategoryLimits = deepcopy(qs.criteriaCategoryLimits)
-        self.profiles = deepcopy(qs.profiles)
-        self.valuationdomain = deepcopy(qs.valuationdomain)
-        self.catRbc = deepcopy(catRbc)
+        self.criteria = copy(qs.criteria)
+        self.evaluation = copy(qs.evaluation)
+        self.categories = copy(qs.categories)
+        self.limitingQuantiles = copy(qs.limitingQuantiles)
+        self.criteriaCategoryLimits = copy(qs.criteriaCategoryLimits)
+        self.profiles = copy(qs.profiles)
+        self.valuationdomain = copy(qs.valuationdomain)
+        self.catRbc = copy(catRbc)
         try:
-            self.relationOrig = deepcopy(qs.relationOrig)
+            self.relationOrig = copy(qs.relationOrig)
         except:
             pass
-        self.relation = deepcopy(qsRelation)
+        self.relation = copy(qsRelation)
         self._constructRelation(strategy=strategy,Debug=Debug)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -1553,22 +1683,63 @@ if __name__ == "__main__":
     from outrankingDigraphs import *
     from sortingDigraphs import *
     from weakOrders import *
+    from linearOrders import *
     from time import time
+    
+    Threading=True
 
-    Threading=False
-
-    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                   numberOfActions=100)
-    t.saveXMCDA2('test')
+##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+##                                   numberOfActions=100)
+##    t.saveXMCDA2('test')
     #t = XMCDA2PerformanceTableau('uniSorting')
     t = XMCDA2PerformanceTableau('test')
-    limitingQuantiles = len(t.actions) // 1
+##    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
+##    t0 = time()
+##    ko = KohlerOrder(g)
+##    print(time()-t0)
+##    #ko.showRelationTable()
+##    t0 = time()
+##    ar = KohlerOrder(CoDualDigraph(g))
+##    print(time()-t0)
+##    #ar.showRelationTable()
+##    t0 = time()
+##    koar = KohlerArrowRaynaudFusionDigraph(g,Threading=Threading)
+##    print(time()-t0)
+##    #koar.showRelationTable()
+##    print(g.computeOrdinalCorrelation(ko))
+##    print(g.computeOrdinalCorrelation(ar))
+##    print(g.computeOrdinalCorrelation(koar))
+##    koar.exportGraphViz('test')
+    
+##    Threading=True
+##
+##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+##                                   numberOfActions=250)
+##    t.saveXMCDA2('test')
+##    #t = XMCDA2PerformanceTableau('uniSorting')
+##    #t = XMCDA2PerformanceTableau('test')
+##    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
+    limitingQuantiles = len(t.actions) // 3
     #limitingQuantiles = 7
     #qs = QuantilesSortingDigraph(t,g.order)
     t0 = time()
+    qsfko = QuantilesRankingDigraph(t,limitingQuantiles,
+                              strategy="optimistic",
+                              rankingRule="RubisChoice",
+                              LowerClosed=False,
+                              Threading=Threading,
+                              Debug=False)
+    print('QR Exec. time:', time()-t0, 'sec.')
+    print(qsfko.__class__)
+    #qsfko.showSorting()
+    #qsko.exportSortingGraphViz(Debug=False)
+    t0 = time()
+    print(qsfko.runTimes)
+    print(qsfko.computeOutrankingCorrelation())
+    t0 = time()
     qsko = QuantilesRankingDigraph(t,limitingQuantiles,
                               strategy="optimistic",
-                              rankingRule="KohlerRule",
+                              #rankingRule="Test",
                               LowerClosed=False,
                               Threading=Threading,
                               Debug=False)
@@ -1577,6 +1748,7 @@ if __name__ == "__main__":
     #qsko.exportSortingGraphViz(Debug=False)
     t0 = time()
     print(qsko.runTimes)
+    print(qsko.computeOutrankingCorrelation())
     
 ##    qsrbc = QuantilesRankingDigraph(t,limitingQuantiles,
 ##                              strategy="pessimistic",
