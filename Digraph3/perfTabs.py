@@ -1365,7 +1365,7 @@ The performance evaluations of each decision alternative on each criterion are g
 
         """
         import gzip
-        RESTurl = "http://http://leopold-loewenheim.uni.lu//MCSR_REST_Service/RESTful_Example/list"
+        RESTurl = "http://leopold-loewenheim.uni.lu//MCSR_REST_Service/RESTful_Example/list"
         # params = gzip.compress(json.dumps({'type':type(self).__name__, 'typeDict':self.to_JSON()}).encode('utf-8'))
         params = gzip.compress(json.dumps({'typeDict':self.to_JSON()}).encode('utf-8'))
         #no encode for requests
