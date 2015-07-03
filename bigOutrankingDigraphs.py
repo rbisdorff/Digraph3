@@ -1004,6 +1004,7 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
             class myThread(Process):
                 def __init__(self, threadID,\
                              tempDirName,\
+                             lTest,\
                              Debug):
                     Process.__init__(self)
                     self.threadID = threadID
@@ -1018,35 +1019,36 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
                     chdir(self.workingDirectory)
                     if Debug:
                         print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+                        print('lTest',lTest)
                     fi = open('dumpSelf.py','rb')
                     context = loads(fi.read())
                     fi.close()
-                    i = self.threadID
-                    comp = context.decomposition[i]
-                    if Debug:
-                        print(i, comp)
-                    compKey = ('c%%0%dd' % (context.nd)) % (i+1)
-                    compDict = {compKey: {}}
-                    compDict = {'rank':i}
-                    pt = PartialPerformanceTableau(context,actionsSubset=comp[1])
-                    compDict['lowQtileLimit'] = comp[0][1]
-                    compDict['highQtileLimit'] = comp[0][0]
-                    pg = BipolarOutrankingDigraph(pt,Normalized=True)     
-                    pg.__dict__.pop('criteria')
-                    pg.__dict__.pop('evaluation')
-                    pg.__dict__.pop('vetos')
-                    pg.__dict__.pop('negativeVetos')
-                    pg.__dict__.pop('largePerformanceDifferencesCount')
-                    pg.__dict__.pop('concordanceRelation')
-                    pg.__class__ = Digraph
-                    compDict['subGraph'] = deepcopy(pg)
-                    splitComponent = (compKey,compDict)
-                    if Debug:
-                        print(compDict)
-                    foName = 'splitComponent-'+str(i)+'.py'
-                    fo = open(foName,'wb')
-                    fo.write(dumps(splitComponent,-1))
-                    fo.close()
+                    for i in lTest:
+                        comp = context.decomposition[i]
+                        if Debug:
+                            print(i, comp)
+                        compKey = ('c%%0%dd' % (context.nd)) % (i+1)
+                        compDict = {compKey: {}}
+                        compDict = {'rank':i}
+                        pt = PartialPerformanceTableau(context,actionsSubset=comp[1])
+                        compDict['lowQtileLimit'] = comp[0][1]
+                        compDict['highQtileLimit'] = comp[0][0]
+                        pg = BipolarOutrankingDigraph(pt,Normalized=True)     
+                        pg.__dict__.pop('criteria')
+                        pg.__dict__.pop('evaluation')
+                        pg.__dict__.pop('vetos')
+                        pg.__dict__.pop('negativeVetos')
+                        pg.__dict__.pop('largePerformanceDifferencesCount')
+                        pg.__dict__.pop('concordanceRelation')
+                        pg.__class__ = Digraph
+                        compDict['subGraph'] = deepcopy(pg)
+                        splitComponent = (compKey,compDict)
+                        if Debug:
+                            print(compDict)
+                        foName = 'splitComponent-'+str(i)+'.py'
+                        fo = open(foName,'wb')
+                        fo.write(dumps(splitComponent,-1))
+                        fo.close()
                     
             print('Threading ...')        
             from tempfile import TemporaryDirectory,mkdtemp
@@ -1064,12 +1066,25 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
             fo.write(pd)
             fo.close()
 
+            
             if nbrOfCPUs == None:
                 nbrOfCPUs = cpu_count()-1
             print('Nbr of cpus = ',nbrOfCPUs)
-            for j in range(nc):
-                print('thread = %d/%d' % (j+1,nc),end="...")
-                process = myThread(j,tempDirName,Debug)
+            print('Nbr of components',nc)
+            nbrOfJobs = nc//nbrOfCPUs
+            if nbrOfJobs*nbrOfCPUs < nc:
+                nbrOfJobs += 1
+            print('Nbr of jobs',nbrOfJobs)
+            for j in range(nbrOfJobs):
+                print('thread = %d/%d' % (j+1,nbrOfJobs),end="...")
+                start= j*nbrOfCPUs
+                if (j+1)*nbrOfCPUs < nc:
+                    stop = (j+1)*nbrOfCPUs
+                else:
+                    stop = nc
+                lTest = list(range(start,stop))
+                print(lTest)
+                process = myThread(j,tempDirName,lTest,Debug)
                 process.start()
             while active_children() != []:
                 sleep(1)
