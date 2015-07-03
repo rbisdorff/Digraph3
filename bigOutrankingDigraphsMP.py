@@ -405,7 +405,7 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
         nd = len(str(nc))
         self.compKeyStr = 'c%%0%dd' % (nd)
         if self.sortingParameters['Threading']:
-            with Pool() as pool:
+            with Pool(processes=nbrOfCPUs) as pool:
                 components = OrderedDict([(compKey,compDict) for \
                               compKey,compDict in\
                             pool.map(self._compMPComputation,range(1,nc+1))])
@@ -913,7 +913,7 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
 if __name__ == "__main__":
     
     from time import time
-    MP  = False
+    MP  = True
     t0 = time()
 ##    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,
 ##                                      seed=100)
@@ -923,8 +923,8 @@ if __name__ == "__main__":
     print(total_size(tp.evaluation))
     bg1 = BigOutrankingDigraphMP(tp,quantiles=100,quantilesOrderingStrategy='average',
                                  LowerClosed=False,
-                                 minimalComponentSize=25,
-                                 Threading=MP,Debug=False)
+                                 minimalComponentSize=50,
+                                 Threading=MP,nbrOfCPUs=5,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
     #bg1.showDecomposition()
     print(bg1)

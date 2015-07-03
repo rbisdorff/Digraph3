@@ -1696,7 +1696,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                    pageTitle=None,
                                    ndigits=2,
                                    Ranked=True,
-                                   strategy='optimistic',
+                                   strategy='average',
                                    Correlations=False,
                                    Threading=False,
                                    Debug=False):
@@ -1708,19 +1708,22 @@ The performance evaluations of each decision alternative on each criterion are g
         fo = open(fileName,'w')
         if pageTitle == None:
             pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
-        if Ranked and actionsList == None:
-            from weakOrders import QuantilesRankingDigraph
-            qsr = QuantilesRankingDigraph(self,LowerClosed=True,
-                                          strategy=strategy,
-                                          Threading=Threading,
-                                          Debug=Debug)
-            actionsList = qsr.computeQsRbcRanking()
-            if Debug:
-                print(actionsList)
+##        if Ranked and actionsList == None:
+##            from weakOrders import QuantilesRankingDigraph
+##            qsr = QuantilesRankingDigraph(self,LowerClosed=True,
+##                                          strategy=strategy,
+##                                          limitingQuantiles=colorLevels,
+##                                          Threading=Threading,
+##                                          Debug=Debug)
+##            actionsList = qsr.computeQsRbcRanking()
+##            if Debug:
+##                print(actionsList)
             
         fo.write(self.htmlPerformanceHeatmap(criteriaList=criteriaList,
                                              actionsList=actionsList,
                                              ndigits=ndigits,
+                                             Ranked=Ranked,
+                                             strategy=strategy,
                                              colorLevels=colorLevels,
                                              pageTitle=pageTitle,
                                              Correlations=Correlations,
@@ -1731,6 +1734,8 @@ The performance evaluations of each decision alternative on each criterion are g
 
     def htmlPerformanceHeatmap(self,criteriaList=None,
                                actionsList=None,
+                               Ranked=True,
+                               strategy='average',
                                ndigits=2,
                                contentCentered=True,
                                colorLevels=None,
@@ -1746,6 +1751,7 @@ The performance evaluations of each decision alternative on each criterion are g
         #import collections
         from decimal import Decimal
         from digraphs import flatten
+        from outrankingDigraphs import OutrankingDigraph
                     
         brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#D53E4F"'),
                                (Decimal('0.2222'),'"#F46D43"'),
@@ -1798,13 +1804,25 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</style>\n'
         html += '</head>\n<body>\n'
         html += '<h2>%s</h2>\n' % pageTitle
-        
+
+        if Ranked and actionsList == None:
+            from weakOrders import QuantilesRankingDigraph
+            qsr = QuantilesRankingDigraph(self,LowerClosed=True,
+                                          strategy=strategy,
+                                          limitingQuantiles=colorLevels,
+                                          Threading=Threading,
+                                          Debug=Debug)
+            actionsList = qsr.computeQsRbcRanking()
+            if Debug:
+                print(actionsList)
+
         if criteriaList == None:
-            from outrankingDigraphs import BipolarOutrankingDigraph
-            g = BipolarOutrankingDigraph(self,Threading=Threading)
+##            from outrankingDigraphs import BipolarOutrankingDigraph
+##            g = BipolarOutrankingDigraph(self,Threading=Threading)
             if Correlations:
                 criteriaCorrelation =\
-                    g.computeMarginalVersusGlobalOutrankingCorrelations(\
+        OutrankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations(\
+                            qsr,
                             Threading=Threading)
                 criteriaList = [c[1] for c in criteriaCorrelation]
             else:
