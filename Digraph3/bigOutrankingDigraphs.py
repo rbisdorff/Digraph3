@@ -389,7 +389,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         tw = time()
         quantilesOrderingStrategy = self.sortingParameters['strategy']
         ##if quantilesOrderingStrategy == 'average':
-        decomposition = [[(item[0][2],item[0][1]),item[1]]\
+        decomposition = [[(item[0][0],item[0][1]),item[1]]\
                                   for item in self._computeQuantileOrdering(strategy=quantilesOrderingStrategy,
                                          Descending=True)]
         if Debug:
@@ -594,7 +594,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
 
     def _computeQuantileOrdering(self,strategy=None,
                                 Descending=True,
-                                Debug=False):
+                                Debug=True):
         """
         Renders the quantile interval of the decision actions.
         *Parameters*:
@@ -638,10 +638,17 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             actionsCategIntervals.append([interval,\
                                           actionsCategories[interval]])
         actionsCategIntervals.sort(reverse=Descending)
-
+        if Debug:
+            print(actionsCategIntervals)
         CompSize = self.minimalComponentSize 
         if CompSize == 1:
-            return actionsCategIntervals
+            if Descending:
+                componentsIntervals = [[(item[0][1],item[0][2]),item[1]]\
+                                   for item in actionsCategIntervals]
+            else:
+                componentsIntervals = [[(item[0][2],item[0][1]),item[1]]\
+                                   for item in actionsCategIntervals]
+                
         else:
             componentsIntervals = []
             nc = len(actionsCategIntervals)
@@ -654,66 +661,15 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                 highQtileLimit = comp[0][1]
                 compContent += comp[1]
                 if len(compContent) >= CompSize or i == nc-1:
-                    componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent])
+                    if Descending:
+                        componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent])
+                    else:
+                        componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent])
                     compContent = []
-            return componentsIntervals        
+        if Debug:
+            print(componentsIntervals)
+        return componentsIntervals        
     
-
-##    def _computeQuantileOrderingMP(self,strategy=None,
-##                                Descending=True,
-##                                Debug=False,
-##                                nbrOfCPUs=None):
-##        """
-##        !!! Example of hopelessly inefficient multiprocessing of a rather simple task and insufficient granularity
-##        """
-##        from multiprocessing import Pool
-##        from os import cpu_count
-##        if nbrOfCPUs == None:
-##            nbrOfCPUs = cpu_count()
-##        if strategy == None:
-##            strategy = self.sortingParameters['strategy']
-##        actionsCategoriesList = [] 
-##        actions = self.actions
-##        showActionCategories = self.showActionCategories
-##        with Pool() as pool:
-##            actionsCategoriesList = [(a,lowCateg,highCateg,credibility) for\
-##                                     a,lowCateg,highCateg,credibility in\
-##                                     pool.map(showActionCategories,actions.keys())]
-##        actionsCategories = OrderedDict()
-##        for a,lowCateg,highCateg,credibility in actionsCategoriesList:
-##            # too much non parallel work to do
-##            if strategy == "optimistic":
-##                try:
-##                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
-##                except:
-##                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]
-##            elif strategy == "pessimistic":
-##                try:
-##                    actionsCategories[(int(lowCateg),int(highCateg))].append(a)
-##                except:
-##                    actionsCategories[(int(lowCateg),int(highCateg))] = [a]
-##            elif strategy == "average":
-##                lc = float(lowCateg)
-##                hc = float(highCateg)
-##                ac = (lc+hc)/2.0
-##                try:
-##                    actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
-##                except:
-##                    actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
-##            else:  # optimistic by default
-##                try:
-##                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
-##                except:
-##                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
-##                
-##        actionsCategIntervals = []
-##        for interval in actionsCategories:
-##            actionsCategIntervals.append([interval,\
-##                                          actionsCategories[interval]])
-##        actionsCategIntervals.sort(reverse=Descending)
-##
-##        return actionsCategIntervals
-
     def showActionCategories(self,action,Debug=False,Comments=False):
         """
         Renders the union of categories in which the given action is sorted positively or null into.
@@ -895,7 +851,10 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             sg = comp['subGraph']
             actions = [x for x in sg.actions]
             actions.sort()
-            print('%s. %s-%s : %s' % (compKey,comp['highQtileLimit'],comp['lowQtileLimit'],actions))
+            if direction == 'decreasing':
+                print('%s. %s-%s : %s' % (compKey,comp['highQtileLimit'],comp['lowQtileLimit'],actions))
+            else:
+                print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],actions))
 
     def showRelationTable(self,compKeys=None):
         """
@@ -976,7 +935,7 @@ if __name__ == "__main__":
     print(total_size(tp.evaluation))
     bg1 = BigOutrankingDigraph(tp,quantiles=20,quantilesOrderingStrategy='average',
                                  LowerClosed=True,
-                                 minimalComponentSize=1,
+                                 minimalComponentSize=5,
                                  Threading=MP,nbrOfCPUs=5,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
     bg1.showDecomposition()
