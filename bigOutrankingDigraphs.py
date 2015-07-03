@@ -310,7 +310,7 @@ class BigDigraph(object):
 ##        self.componentRelation = newRelation
 
 
-class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
+class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
     """
     Multiprocessing implementation of the BipolarOutrankingDigraph class
     for large instances (order > 1000)
