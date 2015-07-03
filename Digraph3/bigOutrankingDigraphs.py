@@ -594,7 +594,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
 
     def _computeQuantileOrdering(self,strategy=None,
                                 Descending=True,
-                                Debug=True):
+                                Debug=False):
         """
         Renders the quantile interval of the decision actions.
         *Parameters*:
