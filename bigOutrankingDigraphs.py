@@ -887,16 +887,16 @@ if __name__ == "__main__":
     t0 = time()
 ##    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,
 ##                                      seed=100)
-    tp = RandomPerformanceTableau(numberOfActions=1000,numberOfCriteria=21,
+    tp = RandomPerformanceTableau(numberOfActions=500,numberOfCriteria=21,
                                       seed=100)
     print(time()-t0)
     print(total_size(tp.evaluation))
-    bg1 = BigOutrankingDigraph(tp,quantiles=100,quantilesOrderingStrategy='average',
+    bg1 = BigOutrankingDigraph(tp,quantiles=20,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
                                minimalComponentSize=1,
                                     Threading=MP,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
-    #bg1.showDecomposition()
+    bg1.showDecomposition()
     print(bg1)
     #bg1.recodeValuation(-10,10,Debug=True)
     #print(total_size(bg1))
