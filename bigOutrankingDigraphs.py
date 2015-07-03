@@ -498,7 +498,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                 nbrOfCPUs = cpu_count()-1
             print('Nbr of cpus = ',nbrOfCPUs)
             for j in range(nc):
-                print('thread = ',j+1,end="...")
+                print('thread = %d/%d' % (j+1,nc),end="...")
                 process = myThread(j,tempDirName,Debug)
                 process.start()
             while active_children() != []:
