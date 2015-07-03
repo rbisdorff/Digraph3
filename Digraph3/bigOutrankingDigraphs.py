@@ -974,7 +974,7 @@ if __name__ == "__main__":
                                       seed=100)
     print(time()-t0)
     print(total_size(tp.evaluation))
-    bg1 = BigOutrankingDigraphMP(tp,quantiles=20,quantilesOrderingStrategy='average',
+    bg1 = BigOutrankingDigraph(tp,quantiles=20,quantilesOrderingStrategy='average',
                                  LowerClosed=True,
                                  minimalComponentSize=1,
                                  Threading=MP,nbrOfCPUs=5,Debug=False)
