@@ -1075,11 +1075,11 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
             if nbrOfJobs*nbrOfCPUs < nc:
                 nbrOfJobs += 1
             print('Nbr of jobs',nbrOfJobs)
-            for j in range(nbrOfJobs):
-                print('thread = %d/%d' % (j+1,nbrOfJobs),end="...")
-                start= j*nbrOfCPUs
-                if (j+1)*nbrOfCPUs < nc:
-                    stop = (j+1)*nbrOfCPUs
+            for j in range(nbrOfCPUs):
+                print('thread = %d/%d' % (j+1,nbrOfCPUs),end="...")
+                start= j*nbrOfJobs
+                if (j+1)*nbrOfJobs < nc:
+                    stop = (j+1)*nbrOfJobs
                 else:
                     stop = nc
                 lTest = list(range(start,stop))
@@ -1518,7 +1518,7 @@ if __name__ == "__main__":
                                       seed=100)
     print(time()-t0)
     print(total_size(tp.evaluation))
-    bg1 = BigOutrankingDigraph(tp,quantiles=20,quantilesOrderingStrategy='average',
+    bg1 = BigOutrankingDigraphMP(tp,quantiles=20,quantilesOrderingStrategy='average',
                                  LowerClosed=True,
                                  minimalComponentSize=5,
                                  Threading=MP,nbrOfCPUs=5,Debug=False)
