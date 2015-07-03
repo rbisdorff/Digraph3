@@ -389,35 +389,28 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
         tw = time()
         quantilesOrderingStrategy = self.sortingParameters['strategy']
         ##if quantilesOrderingStrategy == 'average':
-        decomposition = [[(item[0][1],item[0][0]),item[1]]\
+        decomposition = [[(item[0][2],item[0][1]),item[1]]\
                                   for item in self._computeQuantileOrdering(strategy=quantilesOrderingStrategy,
                                          Descending=True)]
-        #print(decomposition)
+        if Debug:
+            print(decomposition)
         self.decomposition = decomposition
         self.runTimes['preordering'] = time() - tw
         if Comments:
             print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )
         # setting components
         t0 = time()
-##        if minimalComponentSize == None:
         nc = len(decomposition)
         self.nbrComponents = nc
-        nd = len(str(nc))
-        self.compKeyStr = 'c%%0%dd' % (nd)
-        if self.sortingParameters['Threading']:
-            with Pool(processes=nbrOfCPUs) as pool:
-                components = OrderedDict([(compKey,compDict) for \
-                              compKey,compDict in\
-                            pool.map(self._compMPComputation,range(1,nc+1))])
-            for compKey in components.keys():
-                for x in components[compKey]['subGraph'].actions.keys():
-                    self.actions[x]['component'] = compKey
-        else:
+        if Debug:
+            print(nc)
+        self.nd = len(str(nc))
+        if not self.sortingParameters['Threading']:
             components = {}
             for i in range(1,nc+1):
                 comp = decomposition[i-1]
                 #print(comp)
-                compKey = ('c%%0%dd' % (nd)) % (i)
+                compKey = ('c%%0%dd' % (self.nd)) % (i)
                 components[compKey] = {'rank':i}
                 #print(perfTab,comp[1])
                 pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
@@ -432,43 +425,103 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
                 pg.__dict__.pop('concordanceRelation')
                 pg.__class__ = Digraph
                 components[compKey]['subGraph'] = pg
+        else:   # if self.sortingParameters['Threading'] == True:
+            from copy import copy, deepcopy
+            from pickle import dumps, loads, load
+            from multiprocessing import Process, Lock,\
+                                        active_children, cpu_count
+            #Debug=True
+            class myThread(Process):
+                def __init__(self, threadID,\
+                             tempDirName,\
+                             Debug):
+                    Process.__init__(self)
+                    self.threadID = threadID
+                    self.workingDirectory = tempDirName
+                    self.Debug = Debug
+                def run(self):
+                    from pickle import dumps, loads
+                    from os import chdir
+                    from copy import deepcopy
+                    from perfTabs import PartialPerformanceTableau
+                    from outrankingDigraphs import BipolarOutrankingDigraph
+                    chdir(self.workingDirectory)
+                    if Debug:
+                        print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+                    fi = open('dumpSelf.py','rb')
+                    context = loads(fi.read())
+                    fi.close()
+                    i = self.threadID
+                    comp = context.decomposition[i]
+                    if Debug:
+                        print(i, comp)
+                    compKey = ('c%%0%dd' % (context.nd)) % (i+1)
+                    compDict = {compKey: {}}
+                    compDict = {'rank':i}
+                    pt = PartialPerformanceTableau(context,actionsSubset=comp[1])
+                    compDict['lowQtileLimit'] = comp[0][1]
+                    compDict['highQtileLimit'] = comp[0][0]
+                    pg = BipolarOutrankingDigraph(pt,Normalized=True)     
+                    pg.__dict__.pop('criteria')
+                    pg.__dict__.pop('evaluation')
+                    pg.__dict__.pop('vetos')
+                    pg.__dict__.pop('negativeVetos')
+                    pg.__dict__.pop('largePerformanceDifferencesCount')
+                    pg.__dict__.pop('concordanceRelation')
+                    pg.__class__ = Digraph
+                    compDict['subGraph'] = deepcopy(pg)
+                    splitComponent = (compKey,compDict)
+                    if Debug:
+                        print(compDict)
+                    foName = 'splitComponent-'+str(i)+'.py'
+                    fo = open(foName,'wb')
+                    fo.write(dumps(splitComponent,-1))
+                    fo.close()
+                    
+            print('Threading ...')        
+            from tempfile import TemporaryDirectory,mkdtemp
+            #with TemporaryDirectory() as tempDirName:
+            tempDirName = mkdtemp()
+            from copy import copy, deepcopy
+            from time import sleep
+            #selfDp = copy(self)
+            selfFileName = tempDirName +'/dumpSelf.py'
+            if Debug:
+                print('temDirName, selfFileName', tempDirName,selfFileName)
+            fo = open(selfFileName,'wb')
+            #pd = dumps(selfDp,-1)
+            pd = dumps(self,-1)
+            fo.write(pd)
+            fo.close()
+
+            if nbrOfCPUs == None:
+                nbrOfCPUs = cpu_count()-1
+            print('Nbr of cpus = ',nbrOfCPUs)
+            for j in range(nc):
+                print('thread = ',j+1,end="...")
+                process = myThread(j,tempDirName,Debug)
+                process.start()
+            while active_children() != []:
+                sleep(1)
+            print('Exit multithreading')
+            componentsList = []
+            for j in range(nc):
+                if Debug:
+                    print('job',j)
+                fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
+                fi = open(fiName,'rb')
+                splitComponent = loads(fi.read())
+                if Debug:
+                    print('splitComponent',splitComponent)
+                componentsList.append(splitComponent)
+            # end of Threading
+        #print(componentsList)
+        components = OrderedDict(componentsList)
+        for compKey in components.keys():
+            for x in components[compKey]['subGraph'].actions.keys():
+                self.actions[x]['component'] = compKey
         self.components = components
-##        else:  # with minimal component size
-##            components = OrderedDict()
-##            ndc = len(decomposition)
-##            nd = len(str(ndc))
-##            compNbr = 1
-##            compContent = []
-##            for i in range(1,ndc+1):
-##                currContLength = len(compContent)
-##                comp = decomposition[i-1]
-##                if currContLength == 0:
-##                    lowQtileLimit = comp[0][1]
-##                compContent += comp[1]
-##
-##                if len(compContent) >= minimalComponentSize or i == ndc:
-##                    compKey = ('c%%0%dd' % (nd)) % (compNbr)
-##                    components[compKey] = {'rank':compNbr}
-##                    pt = PartialPerformanceTableau(perfTab,actionsSubset=compContent)
-##                    components[compKey]['lowQtileLimit'] = lowQtileLimit
-##                    components[compKey]['highQtileLimit'] = comp[0][0]
-##                    pg = BipolarOutrankingDigraph(pt,Normalized=True)
-##                    pg.__dict__.pop('criteria')
-##                    pg.__dict__.pop('evaluation')
-##                    pg.__dict__.pop('vetos')
-##                    pg.__dict__.pop('negativeVetos')
-##                    pg.__dict__.pop('largePerformanceDifferencesCount')
-##                    pg.__dict__.pop('concordanceRelation')
-##                    pg.__class__ = Digraph
-##                    components[compKey]['subGraph'] = pg
-##                    for x in compContent:
-##                        self.actions[x]['component'] = compKey
-##                    compContent = []
-##                    compNbr += 1
-##            self.components = components
-##            self.minimalComponentSize = minimalComponentSize
-##            nc = len(components)
-##            self.nbrComponents = nc
+
         # setting the component relation
         self.valuationdomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
        
@@ -492,24 +545,24 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
 
     # ----- class methods ------------
 
-    def _compMPComputation(self,i):
-        print('thread: %d' % i)
-        comp = self.decomposition[i-1]
-        compKey = self.compKeyStr % (i)
-        compDict = {'rank':i}
-        pt = PartialPerformanceTableau(self,actionsSubset=comp[1])
-        compDict['lowQtileLimit'] = comp[0][0]
-        compDict['highQtileLimit'] = comp[0][1]
-        pg = BipolarOutrankingDigraph(pt,Normalized=True)
-        pg.__dict__.pop('criteria')
-        pg.__dict__.pop('evaluation')
-        pg.__dict__.pop('vetos')
-        pg.__dict__.pop('negativeVetos')
-        pg.__dict__.pop('largePerformanceDifferencesCount')
-        pg.__dict__.pop('concordanceRelation')
-        pg.__class__ = Digraph
-        compDict['subGraph'] = pg
-        return compKey,compDict
+##    def _compMPComputation(self,j):
+##        print('thread: %d' % j)
+##        comp = self.decomposition[j-1]
+##        compKey = self.compKeyStr % (j)
+##        compDict = {'rank':j}
+##        pt = PartialPerformanceTableau(self,actionsSubset=comp[1])
+##        compDict['lowQtileLimit'] = comp[0][2]
+##        compDict['highQtileLimit'] = comp[0][1]
+##        pg = BipolarOutrankingDigraph(pt,Normalized=True)
+##        pg.__dict__.pop('criteria')
+##        pg.__dict__.pop('evaluation')
+##        pg.__dict__.pop('vetos')
+##        pg.__dict__.pop('negativeVetos')
+##        pg.__dict__.pop('largePerformanceDifferencesCount')
+##        pg.__dict__.pop('concordanceRelation')
+##        pg.__class__ = Digraph
+##        compDict['subGraph'] = pg
+##        return compKey,compDict
 
     def __repr__(self,WithComponents=False):
         """
@@ -597,10 +650,10 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
                 currContLength = len(compContent)
                 comp = actionsCategIntervals[i]               
                 if currContLength == 0:
-                    lowQtileLimit = comp[0][1]
+                    lowQtileLimit = comp[0][2]
                 highQtileLimit = comp[0][1]
                 compContent += comp[1]
-                if len(compContent) >= CompSize or i == nc:
+                if len(compContent) >= CompSize or i == nc-1:
                     componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent])
                     compContent = []
             return componentsIntervals        
@@ -917,16 +970,16 @@ if __name__ == "__main__":
     t0 = time()
 ##    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,
 ##                                      seed=100)
-    tp = RandomPerformanceTableau(numberOfActions=1000,numberOfCriteria=21,
+    tp = RandomPerformanceTableau(numberOfActions=500,numberOfCriteria=21,
                                       seed=100)
     print(time()-t0)
     print(total_size(tp.evaluation))
-    bg1 = BigOutrankingDigraphMP(tp,quantiles=100,quantilesOrderingStrategy='average',
-                                 LowerClosed=False,
-                                 minimalComponentSize=50,
+    bg1 = BigOutrankingDigraphMP(tp,quantiles=20,quantilesOrderingStrategy='average',
+                                 LowerClosed=True,
+                                 minimalComponentSize=1,
                                  Threading=MP,nbrOfCPUs=5,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
-    #bg1.showDecomposition()
+    bg1.showDecomposition()
     print(bg1)
     #bg1.recodeValuation(-10,10,Debug=True)
     #print(total_size(bg1))
