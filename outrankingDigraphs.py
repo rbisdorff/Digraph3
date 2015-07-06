@@ -3862,7 +3862,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 i = 0
                 actionsRemain = set(actions2Split)
                 for j in range(nbrOfJobs):
-                    print('iteration = ',j+1,end=" ")
+                    print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ")
                     splitActions=[]
                     for k in range(nit):
                         if j < (nbrOfJobs -1) and i < n:
