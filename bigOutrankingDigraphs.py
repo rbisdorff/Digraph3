@@ -991,7 +991,7 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
                 if (j+1)*nbrOfJobs < nc:
                     stop = (j+1)*nbrOfJobs
                 else:
-                    stop = nc
+                    stop = nc+1
                 lTest = list(range(start,stop))
                 print(lTest)
                 process = myThread(j,tempDirName,lTest,Debug)
