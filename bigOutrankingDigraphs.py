@@ -983,8 +983,8 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
             nbrOfJobs = nc//nbrOfCPUs
             if nbrOfJobs*nbrOfCPUs < nc:
                 nbrOfJobs += 1
-            if nbrOfJobs < nbrOfCPUs:
-                nbrOfJobs,nbrOfCPUs = nbrOfCPUs,nbrOfJobs
+##            if nbrOfJobs < nbrOfCPUs:
+##                nbrOfJobs,nbrOfCPUs = nbrOfCPUs,nbrOfJobs
             print('Nbr of threads = ',nbrOfCPUs)
             print('Nbr of jobs/thread',nbrOfJobs)
             nbrOfThreads = 0
