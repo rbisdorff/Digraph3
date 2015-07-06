@@ -1337,7 +1337,7 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
             print()
 
     def showComponents(self):
-        BigOutrankingDigraph.showDecomposition(self)
+        self.showDecomposition()
 
     def showDecomposition(self,direction='decreasing'):
         
@@ -1352,10 +1352,10 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
             sg = comp['subGraph']
             actions = [x for x in sg.actions]
             actions.sort()
-            if direction == 'decreasing':
-                print('%s. %s-%s : %s' % (compKey,comp['highQtileLimit'],comp['lowQtileLimit'],actions))
-            else:
-                print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],actions))
+            #if self.sortingParameters['LowerClosed']:
+            print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],actions))
+            #else:
+            #    print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],actions))
 
     def showRelationTable(self,compKeys=None):
         """
@@ -1435,11 +1435,11 @@ if __name__ == "__main__":
     print(time()-t0)
     print(total_size(tp.evaluation))
     bg1 = BigOutrankingDigraphMP(tp,quantiles=20,quantilesOrderingStrategy='average',
-                                 LowerClosed=True,
+                                 LowerClosed=False,
                                  minimalComponentSize=5,
                                  Threading=MP,nbrOfCPUs=5,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
-    bg1.showDecomposition()
+    bg1.showDecomposition(direction='increasing')
     print(bg1)
     #bg1.recodeValuation(-10,10,Debug=True)
     #print(total_size(bg1))
