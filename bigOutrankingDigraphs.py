@@ -985,9 +985,8 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
                 nbrOfJobs += 1
             print('Nbr of cpus = ',nbrOfCPUs)
             print('Nbr of jobs',nbrOfJobs)
-            NbrOfThreads = 0
+            nbrOfThreads = 0
             for j in range(nbrOfCPUs):
-                NbrOfThreads += 1
                 print('thread = %d/%d' % (j+1,nbrOfCPUs),end="...")
                 start= j*nbrOfJobs
                 if (j+1)*nbrOfJobs < nc:
@@ -996,11 +995,13 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
                     stop = nc
                 lTest = list(range(start,stop))
                 print(lTest)
-                process = myThread(j,tempDirName,lTest,Debug)
-                process.start()
+                if lTest != []:
+                    process = myThread(j,tempDirName,lTest,Debug)
+                    process.start()
+                    nbrOfThreads += 1
             while active_children() != []:
                 sleep(1)
-            print('Exit multithreading')
+            print('Exit %d threads' % nbrOfThreads)
             componentsList = []
             for j in range(nc):
                 if Debug:
