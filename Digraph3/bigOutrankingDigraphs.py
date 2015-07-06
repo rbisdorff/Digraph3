@@ -23,66 +23,7 @@ from outrankingDigraphs import *
 from sortingDigraphs import *
 from time import time
 from decimal import Decimal
-
-##def total_size(o, handlers={}, verbose=False):
-##    """ Returns the approximate memory footprint of an object and all of its contents.
-##
-##    Automatically finds the contents of the following containers and
-##    their subclasses:  tuple, list, deque, dict, set, frozenset, Digraph and BigDigraph.
-##    To search other containers, add handlers to iterate over their contents:
-##
-##        handlers = {SomeContainerClass: iter,
-##                    OtherContainerClass: OtherContainerClass.get_elements}
-##
-##    See http://code.activestate.com/recipes/577504/  
-##
-##    """
-##    from sys import getsizeof, stderr
-##    from itertools import chain
-##    from collections import deque
-##    
-##    try:
-##        from reprlib import repr
-##    except ImportError:
-##        pass
-##
-##    # built-in containers and their subclasses
-##    dict_handler = lambda d: chain.from_iterable(d.items())
-##    all_handlers = {tuple: iter,
-##                    list: iter,
-##                    deque: iter,
-##                    dict: dict_handler,
-##                    set: iter,
-##                    frozenset: iter,
-##                    }
-##
-##    # Digraph3 objects 
-##    object_handler = lambda d: chain.from_iterable(d.__dict__.items())    
-##    handlers = {BigDigraph: object_handler,
-##                Digraph: object_handler,
-##                PerformanceTableau : object_handler,
-##                }
-##    
-##    all_handlers.update(handlers)     # user handlers take precedence
-##    seen = set()                      # track which object id's have already been seen
-##    default_size = getsizeof(0)       # estimate sizeof object without __sizeof__
-##
-##    def sizeof(o):
-##        if id(o) in seen:       # do not double count the same object
-##            return 0
-##        seen.add(id(o))
-##        s = getsizeof(o, default_size)
-##
-##        if verbose:
-##            print(s, type(o), repr(o), file=stderr)
-##
-##        for typ, handler in all_handlers.items():
-##            if isinstance(o, typ):
-##                s += sum(map(sizeof, handler(o)))
-##                break
-##        return s
-##
-##    return sizeof(o)
+from bigOutrankingDigraphs import *
 
 class BigDigraph(object):
     """
@@ -279,35 +220,15 @@ class BigDigraph(object):
         if Debug:
             print(newMin, newMed, newMax, newAmplitude)
         # loop over all components
-##        nc = self.nbrComponents
         print('Recoding the valuation of a BigDigraph instance')
-##        compKeys = list(self.components.keys())
-##        oldRelation = self.componentRelation
-##        newRelation = {}
         for cki in self.components.keys(): 
-##            cki = compKeys[i]
             self.components[cki]['subGraph'].recodeValuation(newMin=newMin,newMax=newMax)
-##            newRelation[cki] = {}
-##            for j in range(nc):
-##                ckj = compKeys[j]
-##                if oldRelation[cki][ckj] == oldMax:
-##                    newRelation[cki][ckj] = newMax
-##                elif oldRelation[cki][ckj] == oldMin:
-##                    newRelation[cki][ckj] = newMin
-##                elif oldRelation[cki][ckj] == oldMed:
-##                    newRelation[cki][ckj] = newMed
-##                else:
-##                    newRelation[cki][cki] = newMin + \
-##                            ((oldRelation[cki][ckj] - oldMin)/oldAmplitude)*newAmplitude
-##                    if Debug:
-##                        print(cki,ckj,oldRelation[cki][ckj],newRelation[cki][ckj])
-        # update valuation domain                       
+       # update valuation domain                       
         Min = Decimal(str(newMin))
         Max = Decimal(str(newMax))
         Med = (Min+Max)/Decimal('2')
         self.valuationdomain = { 'min':Min, 'max':Max, 'med':Med }
-        # update componentRelation
-##        self.componentRelation = newRelation
+
 ########################
 class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
     """
@@ -326,14 +247,15 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
     For other parameters settings, see the corresponding QuantilesSortingDigraph class.
 
     """
-    def __init__(self,argPerfTab=None,quantiles=None,
-                 quantilesOrderingStrategy='average',
-                 LowerClosed=True,
-                 WithKohlerRanking=True,
-                 minimalComponentSize=None,
-                 Threading=True,nbrOfCPUs=None,
-                 save2File=None,
-                 Comments=False,
+    def __init__(self,argPerfTab=None,quantiles=None,\
+                 quantilesOrderingStrategy='average',\
+                 LowerClosed=True,\
+                 WithKohlerRanking=True,\
+                 minimalComponentSize=None,\
+                 Threading=True,\
+                 nbrOfCPUs=None,\
+                 save2File=None,\
+                 Comments=False,\
                  Debug=False):
         
         from digraphs import Digraph
@@ -461,21 +383,8 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             self.minimalComponentSize = minimalComponentSize
             nc = len(components)
             self.nbrComponents = nc
-        # setting the component relation
+        # setting the valuation domain
         self.valuationdomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
-
-##        compRel = {}
-##        for cx in components.keys():
-##            compRel[cx] = {} 
-##            for cy in components.keys():
-##                if components[cx]['rank'] < components[cy]['rank']:
-##                    compRel[cx][cy] = self.valuationdomain['max']
-##                elif components[cx]['rank'] > components[cy]['rank']:
-##                    compRel[cx][cy] = self.valuationdomain['min']
-##                else:
-##                    compRel[cx][cy] = self.valuationdomain['med']
-##        self.componentRelation = compRel
-        
         self.runTimes['decomposing'] = time() - t0
         if Comments:
             print('decomposing time: %.4f' % self.runTimes['decomposing']  )
@@ -496,13 +405,14 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
 
     # ----- class methods ------------
 
-    def __repr__(self,WithComponents=False):
+    def __repr__(self,WithComponents=False,WithSize=True):
         """
         Default presentation method for big outrankingDigraphs instances.
         """
         print('*----- show short --------------*')
         print('Instance name     : %s' % self.name)
-        print('Size (in bytes)   : %d' % total_size(self))
+        if WithSize:
+            print('Size (in bytes)   : %d' % total_size(self))
         print('# Actions         : %d' % self.order)
         print('# Criteria        : %d' % self.dimension)
         print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
@@ -885,11 +795,11 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
     Multiprocessing implementation of the BipolarOutrankingDigraph class
     for large instances (order > 1000)
 
-    The outranking digraph is with q-tiles sorting decomposed in a partition of more or
+    The outranking digraph is decomposed with a q-tiles sorting into a partition of
     quantile equivalence classes, which are lineraly ordred by average quantile limits. (default).
 
     To each quantile equivalence class is associated a BipolarOutrankingDigraph object
-    which is restricted to the decision actions in this quantile class.
+    which is restricted to a Digraph instance.
 
     By default, q is set to a tenth of the number of decision actions,
     ie q = order//10.
@@ -976,7 +886,7 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
             print(nc)
         self.nd = len(str(nc))
         if not self.sortingParameters['Threading']:
-            components = {}
+            components = OrderedDict()
             for i in range(1,nc+1):
                 comp = decomposition[i-1]
                 #print(comp)
@@ -1099,9 +1009,9 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
                 if Debug:
                     print('splitComponent',splitComponent)
                 componentsList.append(splitComponent)
-            # end of Threading
-        #print(componentsList)
-        components = OrderedDict(componentsList)
+            #print(componentsList)
+            components = OrderedDict(componentsList)
+        # end of Threading
         for compKey in components.keys():
             for x in components[compKey]['subGraph'].actions.keys():
                 self.actions[x]['component'] = compKey
@@ -1149,13 +1059,14 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
 ##        compDict['subGraph'] = pg
 ##        return compKey,compDict
 
-    def __repr__(self,WithComponents=False):
+    def __repr__(self,WithComponents=False,WithSize=True):
         """
         Default presentation method for big outrankingDigraphs instances.
         """
         print('*----- show short --------------*')
         print('Instance name     : %s' % self.name)
-        print('Size (in bytes)   : %d' % total_size(self))
+        if WithSize:
+            print('Size (in bytes)   : %d' % total_size(self))
         print('# Actions         : %d' % self.order)
         print('# Criteria        : %d' % self.dimension)
         print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
