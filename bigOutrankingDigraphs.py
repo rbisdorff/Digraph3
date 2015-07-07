@@ -1180,6 +1180,7 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
     def _computeQuantileOrdering(self,strategy=None,
                                 Descending=True,
                                  Threading=True,
+                                 nbrOfCPUs=None,
                                 Debug=False):
         """
         Renders the quantile interval of the decision actions.
@@ -1195,7 +1196,9 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
         actionsCategories = {}
         for x in self.actions.keys():
             a,lowCateg,highCateg,credibility =\
-                     self.showActionCategories(x,Comments=Debug)
+                     self.showActionCategories(x,Comments=Debug,\
+                                               Threading=Threading,\
+                                               nbrOfCPUs = nbrOfCPUs)
             lowQtileLimit = self.qs.categories[lowCateg]['lowLimit']
             highQtileLimit = self.qs.categories[highCateg]['highLimit']
             if strategy == "optimistic":
@@ -1256,14 +1259,17 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
             print(componentsIntervals)
         return componentsIntervals        
     
-    def showActionCategories(self,action,Debug=False,Comments=False):
+    def showActionCategories(self,action,Debug=False,Comments=False,\
+                             Threading=True,nbrOfCPUs=None):
         """
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
         """
         qs = self.qs
         Med = qs.valuationdomain['med']
-        sorting = qs.computeSortingCharacteristics(action=action,Comments=Debug)
+        sorting = qs.computeSortingCharacteristics(action=action,Comments=Debug,\
+                                                   Threading=Threading,\
+                                                   nbrOfCPUs=nbrOfCPUs)
         keys = []
         for c in qs.orderedCategoryKeys():
             if sorting[action][c]['categoryMembership'] >= Med:
