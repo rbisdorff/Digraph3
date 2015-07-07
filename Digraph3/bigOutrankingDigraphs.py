@@ -1193,7 +1193,6 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
         if strategy == None:
             strategy = self.sortingParameters['strategy']
         actionsCategories = {}
-        sorting = self.computeSortingCharacteristics(Threading=Threading,Debug=Debug)
         for x in self.actions.keys():
             a,lowCateg,highCateg,credibility =\
                      self.showActionCategories(x,Comments=Debug)
