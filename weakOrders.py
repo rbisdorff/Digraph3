@@ -1203,7 +1203,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                  Threading=True,
                  nbrCores=None,
                  chunkSize=1,
-                 Comments=True,
+                 Comments=False,
                  Debug=False):
         
         from copy import copy,deepcopy
@@ -1742,7 +1742,8 @@ if __name__ == "__main__":
                               #rankingRule="Test",
                               LowerClosed=False,
                               Threading=Threading,
-                              Debug=False)
+                              Debug=False,
+                                   Comments=True)
     print('QR Exec. time:', time()-t0, 'sec.')
     #qsko.showSorting()
     #qsko.exportSortingGraphViz(Debug=False)
