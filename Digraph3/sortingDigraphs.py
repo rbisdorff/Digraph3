@@ -1003,7 +1003,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             html += '</table>'
             return html
 
-    def showActionCategories(self,action,Debug=False,Comments=True,Threading=False):
+    def showActionCategories(self,action,Debug=False,Comments=True,\
+                             Threading=False,nbrOfCPUs=None):
         """
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
@@ -1011,7 +1012,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         Med = self.valuationdomain['med']
         sorting = self.computeSortingCharacteristics(action=action,\
                                                      Comments=Debug,\
-                                                     Threading=Threading)
+                                                     Threading=Threading,
+                                                     nbrOfCPUs=nbrOfCPUs)
         keys = []
         for c in self.orderedCategoryKeys():
             if sorting[action][c]['categoryMembership'] >= Med:
