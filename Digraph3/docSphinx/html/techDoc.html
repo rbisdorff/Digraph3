@@ -192,7 +192,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1088,7 +1088,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1983,7 +1983,7 @@ called dg1 and dg2.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2014,7 +2014,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -3141,6 +3141,17 @@ temporary triangulated grids of dimension n times m.</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="perfTabs.DecimalJSONEncoder">
+<em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">DecimalJSONEncoder</code><span class="sig-paren">(</span><em>skipkeys=False</em>, <em>ensure_ascii=True</em>, <em>check_circular=True</em>, <em>allow_nan=True</em>, <em>sort_keys=False</em>, <em>indent=None</em>, <em>separators=None</em>, <em>default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.DecimalJSONEncoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">json.encoder.JSONEncoder</span></code></p>
+<dl class="method">
+<dt id="perfTabs.DecimalJSONEncoder.default">
+<code class="descname">default</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.DecimalJSONEncoder.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="perfTabs.NormalizedPerformanceTableau">
 <em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">NormalizedPerformanceTableau</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>lowValue=0</em>, <em>highValue=100</em>, <em>coalition=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.NormalizedPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
@@ -3293,10 +3304,64 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="perfTabs.PerformanceTableau.computeMCSRPerformanceHeatmap">
+<code class="descname">computeMCSRPerformanceHeatmap</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>actionsList=None</em>, <em>ndigits=2</em>, <em>colorLevels=7</em>, <em>Ranked=True</em>, <em>title='Performance Heatmap'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeMCSRPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the Brewer RdYlGn colored heatmap of the performance table
+actions x criteria in ordered dictionary format. Three color levels (5,7 or 9)
+are provided.</p>
+<p>For a performance tableau with 5 criteria, colorLevels=5 and
+Correlations = True, one obtains for instance
+the following ordered dictionary in return:</p>
+<div class="highlight-python"><div class="highlight"><pre>OrderedDict([
+    (&#39;title&#39;, &#39;Performance Heatmap&#39;),
+    (&#39;colorPalette&#39;, OrderedDict([
+                      (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;0.2&#39;),&#39;colourValue&#39;:&quot;#FDAE61&quot;,&#39;quantileClass&#39;:&#39;q5_1&#39;}),
+                      (&#39;1&#39;,{&#39;quantile&#39;:Decimal(&#39;0.4&#39;),&#39;colourValue&#39;:&quot;#FEE08B&quot;,&#39;quantileClass&#39;:&#39;q5_2&#39;}),
+                      (&#39;2&#39;,{&#39;quantile&#39;:Decimal(&#39;0.6&#39;),&#39;colourValue&#39;:&quot;#FFFFBF&quot;,&#39;quantileClass&#39;:&#39;q5_3&#39;}),
+                      (&#39;3&#39;,{&#39;quantile&#39;:Decimal(&#39;0.8&#39;),&#39;colourValue&#39;:&quot;#D9EF8B&quot;,&#39;quantileClass&#39;:&#39;q5_4&#39;}),
+                      (&#39;4&#39;,{&#39;quantile&#39;:Decimal(&#39;1.0&#39;),&#39;colourValue&#39;:&quot;#A6D96A&quot;,&#39;quantileClass&#39;:&#39;q5_5&#39;})
+    ])),
+    (&#39;criteriaList&#39;, OrderedDict([(&#39;0&#39;,&#39;g5&#39;), (&#39;1&#39;,&#39;g2&#39;), (&#39;2&#39;,&#39;g4&#39;), (&#39;3&#39;,&#39;g1&#39;), (&#39;4&#39;,&#39;g3&#39;)]),
+    (&#39;criteriaCorrelations&#39;, OrderedDict([
+                                         (&#39;0&#39;,Decimal(&#39;0.71428&#39;)),
+                                         (&#39;1&#39;,Decimal(&#39;0.48571&#39;)),
+                                         (&#39;2&#39;,Decimal(&#39;0.40952&#39;)),
+                                         (&#39;3&#39;,Decimal(&#39;0.35238&#39;)),
+                                         (&#39;4&#39;,Decimal(&#39;0.16190&#39;))
+    ])),
+    (&#39;quantiles&#39;, OrderedDict([
+                               (&#39;0&#39;,{&#39;a1&#39;:OrderedDict([
+                                                 (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;3&#39;), &#39;qantileClass&#39;:q5-2&#39;}),
+                                                 (&#39;1&#39;,{&#39;quantile&#39;:(Decimal(&#39;-17.92&#39;), &#39;qantileClass&#39;:&#39;q5-5&#39;}),
+                                                 (&#39;2&#39;,{&#39;quantile&#39;:(Decimal(&#39;26.68&#39;), &#39;qantileClass&#39;:&#39;q5-2&#39;}),
+                                                 (&#39;3&#39;,{&#39;quantile&#39;:(Decimal(&#39;1&#39;), &#39;qantileClass&#39;:&#39;q5-1&#39;}),
+                                                 (&#39;4&#39;,{&#39;quantile&#39;:(Decimal(&#39;-33.99&#39;), &#39;qantileClass&#39;:&#39;q5-3&#39;})
+                               ])}),
+                               (&#39;1&#39;,{&#39;a2&#39;:OrderedDict([
+                                                 (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;6&#39;), &#39;qantileClass&#39;:q5-3&#39;}),
+                                                 (&#39;1&#39;,{&#39;quantile&#39;:(Decimal(&#39;-30.71&#39;), &#39;qantileClass&#39;:&#39;q5-5&#39;}),
+                                                 (&#39;2&#39;,{&#39;quantile&#39;:(Decimal(&#39;66.35&#39;), &#39;qantileClass&#39;:&#39;q5-4&#39;}),
+                                                 (&#39;3&#39;,{&#39;quantile&#39;:(Decimal(&#39;8&#39;), &#39;qantileClass&#39;:&#39;q5-5&#39;}),
+                                                 (&#39;4&#39;,{&#39;quantile&#39;:(Decimal(&#39;-77.77&#39;), &#39;qantileClass&#39;:&#39;q5-3&#39;})
+                               ])}),
+                               (&#39;2&#39;, ...
+    ]))...
+]))
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="perfTabs.PerformanceTableau.computeMCSRPerformanceTableau">
+<code class="descname">computeMCSRPerformanceTableau</code><span class="sig-paren">(</span><em>isSorted=True</em>, <em>ndigits=2</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeMCSRPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the performance table in a JSON compatible format. Used by the Web API.</p>
 </dd></dl>
 
 <dl class="method">
@@ -3319,45 +3384,6 @@ evaluation scale. Therefore the performance tableau is normalized to 0.0-100.0 s
 <dt id="perfTabs.PerformanceTableau.computePerformanceDifferences">
 <code class="descname">computePerformanceDifferences</code><span class="sig-paren">(</span><em>Comments=False</em>, <em>Debug=False</em>, <em>NotPermanentDiffs=True</em>, <em>WithMaxMin=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computePerformanceDifferences" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds to the criteria dictionary the ordered list of all observed performance differences.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="perfTabs.PerformanceTableau.computePerformanceHeatmap">
-<code class="descname">computePerformanceHeatmap</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>actionsList=None</em>, <em>ndigits=2</em>, <em>colorLevels=7</em>, <em>title='Performance Heatmap'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computePerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the Brewer RdYlGn colored heatmap of the performance table
-actions x criteria in ordered dictionary format. Three color levels (5,7 or 9)
-are provided.</p>
-<p>For a performance tableau with 5 criteria, colorLevels=5 and
-Correlations = True, one obtains for instance
-the following ordered dictionary in return:</p>
-<div class="highlight-python"><div class="highlight"><pre>OrderedDict([
-(&#39;title&#39;, &#39;Performance Heatmap&#39;),
-(&#39;colorPalette&#39;, [(Decimal(&#39;0.2&#39;), &#39;&quot;#FDAE61&quot;&#39;, &#39;q5-1&#39;),
-                  (Decimal(&#39;0.4&#39;), &#39;&quot;#FEE08B&quot;&#39;, &#39;q5-2&#39;),
-                  (Decimal(&#39;0.6&#39;), &#39;&quot;#FFFFBF&quot;&#39;, &#39;q5-3&#39;),
-                  (Decimal(&#39;0.8&#39;), &#39;&quot;#D9EF8B&quot;&#39;, &#39;q5-4&#39;),
-                  (Decimal(&#39;1.0&#39;), &#39;&quot;#A6D96A&quot;&#39;, &#39;q5-5&#39;)]),
-(&#39;criteriaList&#39;, [&#39;g5&#39;, &#39;g2&#39;, &#39;g4&#39;, &#39;g1&#39;, &#39;g3&#39;]),
-(&#39;criteriaCorrelations&#39;, [Decimal(&#39;0.71428&#39;),
-                          Decimal(&#39;0.48571&#39;),
-                          Decimal(&#39;0.40952&#39;),
-                          Decimal(&#39;0.35238&#39;),
-                          Decimal(&#39;0.16190&#39;)]),
-(&#39;quantiles&#39;, OrderedDict([(&#39;a1&#39;, [(Decimal(&#39;3&#39;), &#39;q5-2&#39;),
-                                   (Decimal(&#39;-17.92&#39;), &#39;q5-5&#39;),
-                                   (Decimal(&#39;26.68&#39;), &#39;q5-2&#39;),
-                                   (Decimal(&#39;1&#39;), &#39;q5-1&#39;),
-                                   (Decimal(&#39;-33.99&#39;), &#39;q5-3&#39;)]),
-                           (&#39;a2&#39;, [(Decimal(&#39;6&#39;), &#39;q5-3&#39;),
-                                   (Decimal(&#39;-30.71&#39;), &#39;q5-5&#39;),
-                                   (Decimal(&#39;66.35&#39;), &#39;q5-4&#39;),
-                                   (Decimal(&#39;8&#39;), &#39;q5-5&#39;),
-                                   (Decimal(&#39;-77.77&#39;), &#39;q5-2&#39;)]),
-                           (&#39;a3&#39;, ...
-...
-])
-</pre></div>
-</div>
 </dd></dl>
 
 <dl class="method">
@@ -3437,7 +3463,7 @@ Return a Boolen value.</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.htmlPerformanceHeatmap">
-<code class="descname">htmlPerformanceHeatmap</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>actionsList=None</em>, <em>ndigits=2</em>, <em>colorLevels=None</em>, <em>pageTitle='Performance Heatmap'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.htmlPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
+<code class="descname">htmlPerformanceHeatmap</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>actionsList=None</em>, <em>Ranked=True</em>, <em>strategy='average'</em>, <em>ndigits=2</em>, <em>contentCentered=True</em>, <em>colorLevels=None</em>, <em>pageTitle='Performance Heatmap'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.htmlPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the Brewer RdYlGn 9-colored heatmap of the performance table
 actions x criteria in html format.</p>
 </dd></dl>
@@ -3537,8 +3563,14 @@ the values observed in the performance Tableau.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="perfTabs.PerformanceTableau.showHTMLMCSRPerformanceTableau">
+<code class="descname">showHTMLMCSRPerformanceTableau</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLMCSRPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ask the server for an HTML representation of the performance tableau.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap">
-<code class="descname">showHTMLPerformanceHeatmap</code><span class="sig-paren">(</span><em>actionsList=None</em>, <em>criteriaList=None</em>, <em>colorLevels=7</em>, <em>pageTitle=None</em>, <em>ndigits=2</em>, <em>Ranked=True</em>, <em>strategy='optimistic'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showHTMLPerformanceHeatmap</code><span class="sig-paren">(</span><em>actionsList=None</em>, <em>criteriaList=None</em>, <em>colorLevels=7</em>, <em>pageTitle=None</em>, <em>ndigits=2</em>, <em>Ranked=True</em>, <em>strategy='average'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>shows the html heatmap version of the performance tableau in a browser window.</p>
 </dd></dl>
 
@@ -3571,6 +3603,11 @@ the values observed in the performance Tableau.</p>
 <dd><p>show statistics concerning the evaluation distributions
 on each criteria.</p>
 </dd></dl>
+
+<dl class="method">
+<dt id="perfTabs.PerformanceTableau.to_JSON">
+<code class="descname">to_JSON</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.to_JSON" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -3980,7 +4017,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4698,7 +4735,7 @@ ballot = {     # voters x candidates x candidates
 <span id="sortingdigraphs-module"></span><span id="sortingdigraphs-label"></span><h2>sortingDigraphs module<a class="headerlink" href="#module-sortingDigraphs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="sortingDigraphs.QuantilesSortingDigraph">
-<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">QuantilesSortingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=False</em>, <em>PrefThresholds=True</em>, <em>hasNoVeto=False</em>, <em>outrankingType='bipolar'</em>, <em>CompleteOutranking=False</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">QuantilesSortingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=False</em>, <em>PrefThresholds=True</em>, <em>hasNoVeto=False</em>, <em>outrankingType='bipolar'</em>, <em>CompleteOutranking=False</em>, <em>StoreSorting=False</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></code></a></p>
 <p>Specialisation of the sortingDigraph Class
 for sorting of a large set of alternatives into
@@ -4735,7 +4772,7 @@ By default upper closed limits of categories are supposed to be used in the sort
 <img alt="_images/quantilesSorting.png" src="_images/quantilesSorting.png" />
 <dl class="method">
 <dt id="sortingDigraphs.QuantilesSortingDigraph.computeCategoryContents">
-<code class="descname">computeCategoryContents</code><span class="sig-paren">(</span><em>Reverse=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.computeCategoryContents" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeCategoryContents</code><span class="sig-paren">(</span><em>Reverse=False</em>, <em>Comments=False</em>, <em>Store=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.computeCategoryContents" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the sorting results per category.</p>
 </dd></dl>
 
@@ -4755,7 +4792,17 @@ in the uppest, the lowest or the average potential quantile.</li>
 
 <dl class="method">
 <dt id="sortingDigraphs.QuantilesSortingDigraph.computeSortingCharacteristics">
-<code class="descname">computeSortingCharacteristics</code><span class="sig-paren">(</span><em>action=None</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.computeSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeSortingCharacteristics</code><span class="sig-paren">(</span><em>action=None</em>, <em>Comments=False</em>, <em>Store=False</em>, <em>Debug=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.computeSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a bipolar-valued bi-dictionary relation
+representing the degree of credibility of the
+assertion that &#8220;action x in A belongs to category c in C&#8221;,
+ie x outranks low category limit and does not outrank
+the high category limit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.QuantilesSortingDigraph.computeSortingCharacteristicsOld">
+<code class="descname">computeSortingCharacteristicsOld</code><span class="sig-paren">(</span><em>action=None</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.computeSortingCharacteristicsOld" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a bipolar-valued bi-dictionary relation
 representing the degree of credibility of the
 assertion that &#8220;action x in A belongs to category c in C&#8221;,
@@ -4765,7 +4812,7 @@ the high category limit.</p>
 
 <dl class="method">
 <dt id="sortingDigraphs.QuantilesSortingDigraph.computeSortingRelation">
-<code class="descname">computeSortingRelation</code><span class="sig-paren">(</span><em>categoryContents=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.computeSortingRelation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeSortingRelation</code><span class="sig-paren">(</span><em>categoryContents=None</em>, <em>Debug=False</em>, <em>Store=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.computeSortingRelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>constructs a bipolar sorting relation using the category contents.</p>
 </dd></dl>
 
@@ -4928,7 +4975,17 @@ a standard random instance with 10 actions and 13 criteria is generated by defau
 
 <dl class="method">
 <dt id="sortingDigraphs.SortingDigraph.computeSortingCharacteristics">
-<code class="descname">computeSortingCharacteristics</code><span class="sig-paren">(</span><em>action=None</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.SortingDigraph.computeSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeSortingCharacteristics</code><span class="sig-paren">(</span><em>action=None</em>, <em>Comments=False</em>, <em>Debug=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.SortingDigraph.computeSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a bipolar-valued bi-dictionary relation
+representing the degree of credibility of the
+assertion that &#8220;action x in A belongs to category c in C&#8221;,
+ie x outranks low category limit and does not outrank
+the high category limit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.SortingDigraph.computeSortingCharacteristicsOld">
+<code class="descname">computeSortingCharacteristicsOld</code><span class="sig-paren">(</span><em>action=None</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.SortingDigraph.computeSortingCharacteristicsOld" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a bipolar-valued bi-dictionary relation
 representing the degree of credibility of the
 assertion that &#8220;action x in A belongs to category c in C&#8221;,
@@ -5000,7 +5057,7 @@ to the parameters given.</p>
 
 <dl class="method">
 <dt id="sortingDigraphs.SortingDigraph.showActionCategories">
-<code class="descname">showActionCategories</code><span class="sig-paren">(</span><em>action</em>, <em>Debug=False</em>, <em>Comments=True</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.SortingDigraph.showActionCategories" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showActionCategories</code><span class="sig-paren">(</span><em>action</em>, <em>Debug=False</em>, <em>Comments=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.SortingDigraph.showActionCategories" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the union of categories in which the given action is sorted positively or null into.
 Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
 </dd></dl>
@@ -5658,7 +5715,7 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 
 <dl class="class">
 <dt id="randomDigraphs.RandomGridDigraph">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.GridDigraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary randomly oriented Grid digraphs of dimension n time m
@@ -6110,12 +6167,6 @@ By default the valuation domain is normalized ([-1.0;1.0])</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="bigOutrankingDigraphs.BigDigraph.relationOld">
-<code class="descname">relationOld</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigDigraph.relationOld" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dynamic construction of the global digraph relation.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="bigOutrankingDigraphs.BigDigraph.showDecomposition">
 <code class="descname">showDecomposition</code><span class="sig-paren">(</span><em>direction='decreasing'</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigDigraph.showDecomposition" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -6124,7 +6175,7 @@ By default the valuation domain is normalized ([-1.0;1.0])</p>
 
 <dl class="class">
 <dt id="bigOutrankingDigraphs.BigOutrankingDigraph">
-<em class="property">class </em><code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">BigOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>WithKohlerRanking=True</em>, <em>minimalComponentSize=None</em>, <em>Threading=True</em>, <em>nbrOfCPUs=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">BigOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>WithKohlerRanking=True</em>, <em>minimalComponentSize=None</em>, <em>Threading=True</em>, <em>nbrOfCPUs=None</em>, <em>save2File=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#bigOutrankingDigraphs.BigDigraph" title="bigOutrankingDigraphs.BigDigraph"><code class="xref py py-class docutils literal"><span class="pre">bigOutrankingDigraphs.BigDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Multiprocessing implementation of the BipolarOutrankingDigraph class
 for large instances (order &gt; 1000)</p>
@@ -6156,9 +6207,22 @@ on each component.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraph.showActionCategories">
+<code class="descname">showActionCategories</code><span class="sig-paren">(</span><em>action</em>, <em>Debug=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.showActionCategories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the union of categories in which the given action is sorted positively or null into.
+Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="bigOutrankingDigraphs.BigOutrankingDigraph.showActions">
 <code class="descname">showActions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.showActions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints out the actions disctionary.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraph.showActionsSortingResult">
+<code class="descname">showActionsSortingResult</code><span class="sig-paren">(</span><em>actionSubset=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.showActionsSortingResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows the quantiles sorting result all (default) of a subset of the decision actions.</p>
 </dd></dl>
 
 <dl class="method">
@@ -6186,6 +6250,122 @@ on each component.</p>
 <dl class="method">
 <dt id="bigOutrankingDigraphs.BigOutrankingDigraph.showShort">
 <code class="descname">showShort</code><span class="sig-paren">(</span><em>fileName=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.showShort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default (__repr__) presentation method for big outranking digraphs instances:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bigOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BigOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">Threading ...</span>
+<span class="go">Nbr of cpus =  7</span>
+<span class="go">number of cores = 7</span>
+<span class="go">nbr of actions to split 100</span>
+<span class="go">nbr of jobs =  7</span>
+<span class="go">nbr of splitActions =  15</span>
+<span class="go">iteration =  1 15</span>
+<span class="go">iteration =  2 15</span>
+<span class="go">iteration =  3 15</span>
+<span class="go">iteration =  4 15</span>
+<span class="go">iteration =  5 15</span>
+<span class="go">iteration =  6 15</span>
+<span class="go">iteration =  7 10</span>
+<span class="go">Exiting computing threads</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="go">*----- show short --------------*</span>
+<span class="go">Instance name     : randomCBperftab_mp</span>
+<span class="go"># Actions         : 100</span>
+<span class="go"># Criteria        : 13</span>
+<span class="go">Sorting by        : 10-Tiling </span>
+<span class="go">Ordering strategy : average quantile</span>
+<span class="go"># Components      : 11</span>
+<span class="go">----  Constructor run times (in sec.) ----</span>
+<span class="go">Total time        : 0.72743</span>
+<span class="go">QuantilesSorting  : 0.51481</span>
+<span class="go">Preordering       : 0.00292</span>
+<span class="go">Decomposing       : 0.20469</span>
+<span class="go">Ordering          : 0.00500</span>
+<span class="go">Default presentation of BigOutrankingDigraphs</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraphMP">
+<em class="property">class </em><code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">BigOutrankingDigraphMP</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>WithKohlerRanking=True</em>, <em>minimalComponentSize=None</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>save2File=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphMP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#bigOutrankingDigraphs.BigDigraph" title="bigOutrankingDigraphs.BigDigraph"><code class="xref py py-class docutils literal"><span class="pre">bigOutrankingDigraphs.BigDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<p>Multiprocessing implementation of the BipolarOutrankingDigraph class
+for large instances (order &gt; 1000)</p>
+<p>The outranking digraph is decomposed with a q-tiles sorting into a partition of
+quantile equivalence classes, which are lineraly ordred by average quantile limits. (default).</p>
+<p>To each quantile equivalence class is associated a BipolarOutrankingDigraph object
+which is restricted to a Digraph instance.</p>
+<p>By default, q is set to a tenth of the number of decision actions,
+ie q = order//10.</p>
+<p>For other parameters settings, see the corresponding QuantilesSortingDigraph class.</p>
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraphMP.computeBoostedKohlerRanking">
+<code class="descname">computeBoostedKohlerRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphMP.computeBoostedKohlerRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders an ordred list of decision actions ranked in
+decreasing preference direction following Kohler&#8217;s rule
+on each component.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraphMP.computeBoostedRankedPairsRanking">
+<code class="descname">computeBoostedRankedPairsRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphMP.computeBoostedRankedPairsRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders an ordred list of decision actions in decreasing preference direction following Tideman&#8217;s Ranked Pairs rule on each component.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraphMP.ranking2Preorder">
+<code class="descname">ranking2Preorder</code><span class="sig-paren">(</span><em>ranking</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphMP.ranking2Preorder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a preordering (a list of list) of a ranking of decision actions in decreasing preference direction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraphMP.showActionCategories">
+<code class="descname">showActionCategories</code><span class="sig-paren">(</span><em>action</em>, <em>Debug=False</em>, <em>Comments=False</em>, <em>Threading=True</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphMP.showActionCategories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the union of categories in which the given action is sorted positively or null into.
+Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraphMP.showActions">
+<code class="descname">showActions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphMP.showActions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints out the actions disctionary.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraphMP.showActionsSortingResult">
+<code class="descname">showActionsSortingResult</code><span class="sig-paren">(</span><em>actionSubset=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphMP.showActionsSortingResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows the quantiles sorting result all (default) of a subset of the decision actions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraphMP.showComponents">
+<code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphMP.showComponents" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraphMP.showCriteria">
+<code class="descname">showCriteria</code><span class="sig-paren">(</span><em>IntegerWeights=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphMP.showCriteria" title="Permalink to this definition">¶</a></dt>
+<dd><p>print Criteria with thresholds and weights.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraphMP.showDecomposition">
+<code class="descname">showDecomposition</code><span class="sig-paren">(</span><em>direction='decreasing'</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphMP.showDecomposition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraphMP.showRelationTable">
+<code class="descname">showRelationTable</code><span class="sig-paren">(</span><em>compKeys=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphMP.showRelationTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specialized for showing the quantiles decomposed relation table.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraphMP.showShort">
+<code class="descname">showShort</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>WithFileSize=True</em>, <em>WithComponents=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphMP.showShort" title="Permalink to this definition">¶</a></dt>
 <dd><p>Default (__repr__) presentation method for big outranking digraphs instances:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bigOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
