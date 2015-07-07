@@ -632,8 +632,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
 
-
-    def computeSortingCharacteristics(self, action=None, Comments=False):
+    def computeSortingCharacteristicsOld(self, action=None, Comments=False):
         """
         Renders a bipolar-valued bi-dictionary relation
         representing the degree of credibility of the
@@ -680,6 +679,158 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
         return sorting
 
+    def computeSortingCharacteristics(self, action=None, Comments=False, Debug=True,\
+                                        Threading=False, nbrOfCPUs=None):
+        """
+        Renders a bipolar-valued bi-dictionary relation
+        representing the degree of credibility of the
+        assertion that "action x in A belongs to category c in C",
+        ie x outranks low category limit and does not outrank
+        the high category limit.
+        """
+        Min = self.valuationdomain['min']
+        Med = self.valuationdomain['med']
+        Max = self.valuationdomain['max']
+
+        actions = list(self.getActionsKeys(action))
+        na = len(actions)
+            
+        categories = list(self.orderedCategoryKeys())
+
+        try:
+            LowerClosed = self.criteriaCategoryLimits['LowerClosed']
+        except:
+            LowerClosed = True
+        if Threading:
+            from multiprocessing import Process, active_children
+            from pickle import dumps, loads, load
+            from os import cpu_count
+            class myThread(Process):
+                def __init__(self, threadID, tempDirName, actions, catKeys,Debug):
+                    Process.__init__(self)
+                    self.threadID = threadID
+                    self.workingDirectory = tempDirName
+                    self.actions = actions
+                    self.catKeys = catKeys
+                    self.Debug = Debug
+                def run(self):
+                    from pickle import dumps, loads
+                    from os import chdir
+                    chdir(self.workingDirectory)
+                    if self.Debug:
+                        print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+                        print('actions,catKeys',self.actions,self.catKeys)
+                    fi = open('dumpSelf.py','rb')
+                    context = loads(fi.read())
+                    fi.close()
+                    Min = context.valuationdomain['min']
+                    Max = context.valuationdomain['max']
+                    sorting = {}
+                    for x in self.actions:
+                        sorting[x] = {}
+                        for c in self.catKeys:
+                            sorting[x][c] = {}
+                            cMinKey= c+'-m'
+                            cMaxKey= c+'-M'
+                            if LowerClosed:
+                                lowLimit = context.relation[x][cMinKey]
+                                notHighLimit = Max - context.relation[x][cMaxKey] + Min
+                            else:
+                                lowLimit = Max - context.relation[cMinKey][x] + Min
+                                notHighLimit = context.relation[cMaxKey][x]
+                            if Debug:
+                                print('%s in %s: low = %.2f, high = %.2f' % \
+                                      (x, c,lowLimit,notHighLimit), end=' ')
+                            categoryMembership = min(lowLimit,notHighLimit)
+                            sorting[x][c]['lowLimit'] = lowLimit
+                            sorting[x][c]['notHighLimit'] = notHighLimit
+                            sorting[x][c]['categoryMembership'] = categoryMembership
+                            if self.Debug:
+                                print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'],\
+                                   sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+                        if self.Debug:
+                            print(sorting[x])
+                    foName = 'sorting-'+str(self.threadID)+'.py'
+                    fo = open(foName,'wb')
+                    fo.write(dumps(sorting,-1))
+                    fo.close()
+            print('Threaded computing of sorting characteristics ...')        
+            from tempfile import TemporaryDirectory,mkdtemp
+            tempDirName = mkdtemp()
+            selfFileName = tempDirName +'/dumpSelf.py'
+            if Debug:
+                print('temDirName, selfFileName', tempDirName,selfFileName)
+            fo = open(selfFileName,'wb')
+            pd = dumps(self,-1)
+            fo.write(pd)
+            fo.close()
+
+            if nbrOfCPUs == None:
+                nbrOfCPUs = cpu_count()-1
+            print('Nbr of actions',na)
+            
+            nbrOfJobs = na//nbrOfCPUs
+            if nbrOfJobs*nbrOfCPUs < na:
+                nbrOfJobs += 1
+            print('Nbr of threads = ',nbrOfCPUs)
+            print('Nbr of jobs/thread',nbrOfJobs)
+            nbrOfThreads = 0
+            for j in range(nbrOfCPUs):
+                print('thread = %d/%d' % (j+1,nbrOfCPUs),end="...")
+                start= j*nbrOfJobs
+                if (j+1)*nbrOfJobs < na:
+                    stop = (j+1)*nbrOfJobs
+                else:
+                    stop = na
+                thActions = actions[start:stop]
+                if Debug:
+                    print(thActions)
+                if thActions != []:
+                    process = myThread(j,tempDirName,thActions,categories,Debug)
+                    process.start()
+                    nbrOfThreads += 1
+            while active_children() != []:
+                pass
+                #sleep(1)
+            print('Exit %d threads' % nbrOfThreads)
+            sorting = {}
+            for th in range(nbrOfThreads):
+                if Debug:
+                    print('job',th)
+                fiName = tempDirName+'/sorting-'+str(th)+'.py'
+                fi = open(fiName,'rb')
+                sortingThread = loads(fi.read())
+                if Debug:
+                    print('sortingThread',sortingThread)
+                sorting.update(sortingThread)
+        # end of Threading
+        else: # with out Threading 
+            sorting = {}
+            for x in actions:
+                sorting[x] = {}
+                for c in categories:
+                    sorting[x][c] = {}
+                    cMinKey= c+'-m'
+                    cMaxKey= c+'-M'
+                    if LowerClosed:
+                        lowLimit = self.relation[x][cMinKey]
+                        notHighLimit = Max - self.relation[x][cMaxKey] + Min
+                    else:
+                        lowLimit = Max - self.relation[cMinKey][x] + Min
+                        notHighLimit = self.relation[cMaxKey][x]
+                    if Debug:
+                        print('%s in %s: low = %.2f, high = %.2f' % \
+                              (x, c,lowLimit,notHighLimit), end=' ')
+                    categoryMembership = min(lowLimit,notHighLimit)
+                    sorting[x][c]['lowLimit'] = lowLimit
+                    sorting[x][c]['notHighLimit'] = notHighLimit
+                    sorting[x][c]['categoryMembership'] = categoryMembership
+
+                    if Debug:
+                        print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+
+        return sorting
+    
     def showSortingCharacteristics(self, action=None):
         """
         Renders a bipolar-valued bi-dictionary relation
@@ -852,13 +1003,15 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             html += '</table>'
             return html
 
-    def showActionCategories(self,action,Debug=False,Comments=True):
+    def showActionCategories(self,action,Debug=False,Comments=True,Threading=False):
         """
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
         """
         Med = self.valuationdomain['med']
-        sorting = self.computeSortingCharacteristics(action=action,Comments=Debug)
+        sorting = self.computeSortingCharacteristics(action=action,\
+                                                     Comments=Debug,\
+                                                     Threading=Threading)
         keys = []
         for c in self.orderedCategoryKeys():
             if sorting[action][c]['categoryMembership'] >= Med:
@@ -1812,7 +1965,197 @@ class QuantilesSortingDigraph(SortingDigraph):
                     categoryContent[c].append(x)
         return categoryContent
 
-    def computeSortingCharacteristics(self, action=None, Comments=False):
+    def computeSortingCharacteristics(self, action=None, Comments=False, Debug=False,\
+                                        Threading=True, nbrOfCPUs=None):
+        """
+        Renders a bipolar-valued bi-dictionary relation
+        representing the degree of credibility of the
+        assertion that "action x in A belongs to category c in C",
+        ie x outranks low category limit and does not outrank
+        the high category limit.
+        """
+        Min = self.valuationdomain['min']
+        Med = self.valuationdomain['med']
+        Max = self.valuationdomain['max']
+
+        actions = list(self.getActionsKeys(action))
+        na = len(actions)
+            
+        categories = list(self.orderedCategoryKeys())
+
+        try:
+            LowerClosed = self.criteriaCategoryLimits['LowerClosed']
+        except:
+            LowerClosed = True
+        if Threading and action==None:
+            from multiprocessing import Process, active_children
+            from pickle import dumps, loads, load
+            from os import cpu_count
+            class myThread(Process):
+                def __init__(self, threadID, tempDirName, actions, catKeys,Debug):
+                    Process.__init__(self)
+                    self.threadID = threadID
+                    self.workingDirectory = tempDirName
+                    self.actions = actions
+                    self.catKeys = catKeys
+                    self.Debug = Debug
+                def run(self):
+                    from pickle import dumps, loads
+                    from os import chdir
+                    chdir(self.workingDirectory)
+                    if self.Debug:
+                        print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+                        print('actions,catKeys',self.actions,self.catKeys)
+                    fi = open('dumpSelf.py','rb')
+                    context = loads(fi.read())
+                    fi.close()
+                    Min = context.valuationdomain['min']
+                    Max = context.valuationdomain['max']
+                    sorting = {}
+                    nq = len(context.limitingQuantiles) - 1
+                    for x in self.actions:
+                        sorting[x] = {}
+                        for c in self.catKeys:
+                            sorting[x][c] = {}
+                            if LowerClosed:
+                                cKey= c+'-m'
+                            else:
+                                cKey= c+'-M'
+                            if LowerClosed:
+                                lowLimit = context.relation[x][cKey]
+                                if int(c) < nq:
+                                    cMaxKey = str(int(c)+1)+'-m'
+                                    notHighLimit = Max - context.relation[x][cMaxKey] + Min
+                                else:
+                                    notHighLimit = Max
+                            else:
+                                if int(c) > 1:
+                                    cMinKey = str(int(c)-1)+'-M'
+                                    lowLimit = Max - context.relation[cMinKey][x] + Min
+                                else:
+                                    lowLimit = Max
+                                notHighLimit = context.relation[cKey][x]
+##                            cMinKey= c+'-m'
+##                            cMaxKey= c+'-M'
+##                            if LowerClosed:
+##                                lowLimit = context.relation[x][cMinKey]
+##                                notHighLimit = Max - context.relation[x][cMaxKey] + Min
+##                            else:
+##                                lowLimit = Max - context.relation[cMinKey][x] + Min
+##                                notHighLimit = context.relation[cMaxKey][x]
+                            if Debug:
+                                print('%s in %s: low = %.2f, high = %.2f' % \
+                                      (x, c,lowLimit,notHighLimit), end=' ')
+                            categoryMembership = min(lowLimit,notHighLimit)
+                            sorting[x][c]['lowLimit'] = lowLimit
+                            sorting[x][c]['notHighLimit'] = notHighLimit
+                            sorting[x][c]['categoryMembership'] = categoryMembership
+                            if self.Debug:
+                                print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'],\
+                                   sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+                        if self.Debug:
+                            print(sorting[x])
+                    foName = 'sorting-'+str(self.threadID)+'.py'
+                    fo = open(foName,'wb')
+                    fo.write(dumps(sorting,-1))
+                    fo.close()
+            print('Threaded computing of sorting characteristics ...')        
+            from tempfile import TemporaryDirectory,mkdtemp
+            tempDirName = mkdtemp()
+            selfFileName = tempDirName +'/dumpSelf.py'
+            if Debug:
+                print('temDirName, selfFileName', tempDirName,selfFileName)
+            fo = open(selfFileName,'wb')
+            pd = dumps(self,-1)
+            fo.write(pd)
+            fo.close()
+
+            if nbrOfCPUs == None:
+                nbrOfCPUs = cpu_count()-1
+            print('Nbr of actions',na)
+            
+            nbrOfJobs = na//nbrOfCPUs
+            if nbrOfJobs*nbrOfCPUs < na:
+                nbrOfJobs += 1
+            print('Nbr of threads = ',nbrOfCPUs)
+            print('Nbr of jobs/thread',nbrOfJobs)
+            nbrOfThreads = 0
+            for j in range(nbrOfCPUs):
+                print('thread = %d/%d' % (j+1,nbrOfCPUs),end="...")
+                start= j*nbrOfJobs
+                if (j+1)*nbrOfJobs < na:
+                    stop = (j+1)*nbrOfJobs
+                else:
+                    stop = na
+                thActions = actions[start:stop]
+                if Debug:
+                    print(thActions)
+                if thActions != []:
+                    process = myThread(j,tempDirName,thActions,categories,Debug)
+                    process.start()
+                    nbrOfThreads += 1
+            while active_children() != []:
+                pass
+                #sleep(1)
+            print('Exit %d threads' % nbrOfThreads)
+            sorting = {}
+            for th in range(nbrOfThreads):
+                if Debug:
+                    print('job',th)
+                fiName = tempDirName+'/sorting-'+str(th)+'.py'
+                fi = open(fiName,'rb')
+                sortingThread = loads(fi.read())
+                if Debug:
+                    print('sortingThread',sortingThread)
+                sorting.update(sortingThread)
+        # end of Threading
+        else: # with out Threading 
+            sorting = {}
+            nq = len(self.limitingQuantiles) - 1
+            for x in actions:
+                sorting[x] = {}
+                for c in categories:
+                    sorting[x][c] = {}
+                    if LowerClosed:
+                        cKey= c+'-m'
+                    else:
+                        cKey= c+'-M'
+                    if LowerClosed:
+                        lowLimit = self.relation[x][cKey]
+                        if int(c) < nq:
+                            cMaxKey = str(int(c)+1)+'-m'
+                            notHighLimit = Max - self.relation[x][cMaxKey] + Min
+                        else:
+                            notHighLimit = Max
+                    else:
+                        if int(c) > 1:
+                            cMinKey = str(int(c)-1)+'-M'
+                            lowLimit = Max - self.relation[cMinKey][x] + Min
+                        else:
+                            lowLimit = Max
+                        notHighLimit = self.relation[cKey][x]
+##                    cMinKey= c+'-m'
+##                    cMaxKey= c+'-M'
+##                    if LowerClosed:
+##                        lowLimit = self.relation[x][cMinKey]
+##                        notHighLimit = Max - self.relation[x][cMaxKey] + Min
+##                    else:
+##                        lowLimit = Max - self.relation[cMinKey][x] + Min
+##                        notHighLimit = self.relation[cMaxKey][x]
+                    if Debug:
+                        print('%s in %s: low = %.2f, high = %.2f' % \
+                              (x, c,lowLimit,notHighLimit), end=' ')
+                    categoryMembership = min(lowLimit,notHighLimit)
+                    sorting[x][c]['lowLimit'] = lowLimit
+                    sorting[x][c]['notHighLimit'] = notHighLimit
+                    sorting[x][c]['categoryMembership'] = categoryMembership
+
+                    if Debug:
+                        print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+
+        return sorting
+
+    def computeSortingCharacteristicsOld(self, action=None, Comments=False):
         """
         Renders a bipolar-valued bi-dictionary relation
         representing the degree of credibility of the

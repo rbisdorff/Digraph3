@@ -3891,7 +3891,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     
                 print('Exiting computing threads')
                 for j in range(nbrOfJobs):
-                    print('Post job-%d/%d processing' % (j+1,nbrOfJobs))
+                    #print('Post job-%d/%d processing' % (j+1,nbrOfJobs))
                     if Debug:
                         print('job',j)
                     fiName = tempDirName+'/splitActions-'+str(j)+'.py'

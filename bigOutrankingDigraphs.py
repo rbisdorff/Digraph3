@@ -871,7 +871,7 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
         ##if quantilesOrderingStrategy == 'average':
         decomposition = [[(item[0][0],item[0][1]),item[1]]\
                                   for item in self._computeQuantileOrdering(strategy=quantilesOrderingStrategy,
-                                         Descending=True)]
+                                         Descending=True,Threading=Threading)]
         if Debug:
             print(decomposition)
         self.decomposition = decomposition
@@ -908,8 +908,7 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
         else:   # if self.sortingParameters['Threading'] == True:
             from copy import copy, deepcopy
             from pickle import dumps, loads, load
-            from multiprocessing import Process, Lock,\
-                                        active_children, cpu_count
+            from multiprocessing import Process, active_children, cpu_count
             #Debug=True
             class myThread(Process):
                 def __init__(self, threadID,\
@@ -1002,7 +1001,8 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
                     process.start()
                     nbrOfThreads += 1
             while active_children() != []:
-                sleep(1)
+                pass
+                #sleep(1)
             print('Exit %d threads' % nbrOfThreads)
             componentsList = []
             for j in range(nc):
@@ -1044,6 +1044,90 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
             
 
     # ----- class methods ------------
+
+##    def computeCategoryContents(self,Reverse=False,Comments=False):
+##        """
+##        Computes the sorting results per category.
+##        """
+##        actions = list(self.getActionsKeys())
+##        actions.sort()
+##        sorting = self.computeSortingCharacteristics(Comments=Comments)
+##
+##        categoryContent = {}
+##        for c in self.orderedCategoryKeys(Reverse=Reverse):
+##            categoryContent[c] = []
+##            for x in actions:
+##                if sorting[x][c]['categoryMembership'] >= self.valuationdomain['med']:
+##                    categoryContent[c].append(x)
+##        return categoryContent
+##
+##    def computeSortingCharacteristics(self, action=None, Comments=False):
+##        """
+##        Renders a bipolar-valued bi-dictionary relation
+##        representing the degree of credibility of the
+##        assertion that "action x in A belongs to category c in C",
+##        ie x outranks low category limit and does not outrank
+##        the high category limit.
+##        """
+##        Min = self.valuationdomain['min']
+##        Med = self.valuationdomain['med']
+##        Max = self.valuationdomain['max']
+##
+##        actions = self.getActionsKeys(action)
+##            
+##        categories = self.orderedCategoryKeys()
+##
+##        try:
+##            LowerClosed = self.criteriaCategoryLimits['LowerClosed']
+##        except:
+##            LowerClosed = True
+##
+##        if Comments:
+##            if LowerClosed:
+##                print('x  in  K_k\t r(x >= m_k)\t r(x < M_k)\t r(x in K_k)')
+##            else:
+##                print('x  in  K_k\t r(m_k < x)\t r(M_k >= x)\t r(x in K_k)')
+##
+##        sorting = {}
+##        nq = len(self.limitingQuantiles) - 1
+##        for x in actions:
+##            sorting[x] = {}
+##            for c in categories:
+##                sorting[x][c] = {}
+##                if LowerClosed:
+##                    cKey= c+'-m'
+##                else:
+##                    cKey= c+'-M'
+##                if LowerClosed:
+##                    lowLimit = self.relation[x][cKey]
+##                    if int(c) < nq:
+##                        cMaxKey = str(int(c)+1)+'-m'
+##                        notHighLimit = Max - self.relation[x][cMaxKey] + Min
+##                    else:
+##                        notHighLimit = Max
+##                else:
+##                    if int(c) > 1:
+##                        cMinKey = str(int(c)-1)+'-M'
+##                        lowLimit = Max - self.relation[cMinKey][x] + Min
+##                    else:
+##                        lowLimit = Max
+##                    notHighLimit = self.relation[cKey][x]
+##                #if Comments:
+##                #    print('%s in %s: low = %.2f, high = %.2f' % \
+##                #          (x, c,lowLimit,notHighLimit), end=' ')
+##                if Comments:
+##                    print('%s in %s - %s\t' % (x, self.categories[c]['lowLimit'],self.categories[c]['highLimit'],), end=' ')
+##                categoryMembership = min(lowLimit,notHighLimit)
+##                sorting[x][c]['lowLimit'] = lowLimit
+##                sorting[x][c]['notHighLimit'] = notHighLimit
+##                sorting[x][c]['categoryMembership'] = categoryMembership
+##
+##                if Comments:
+##                    #print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+##                    print('%.2f\t\t %.2f\t\t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+##
+##        return sorting
+
 
 ##    def _compMPComputation(self,j):
 ##        print('thread: %d' % j)
@@ -1095,6 +1179,7 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
 
     def _computeQuantileOrdering(self,strategy=None,
                                 Descending=True,
+                                 Threading=True,
                                 Debug=False):
         """
         Renders the quantile interval of the decision actions.
@@ -1108,6 +1193,7 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
         if strategy == None:
             strategy = self.sortingParameters['strategy']
         actionsCategories = {}
+        sorting = self.computeSortingCharacteristics(Threading=Threading,Debug=Debug)
         for x in self.actions.keys():
             a,lowCateg,highCateg,credibility =\
                      self.showActionCategories(x,Comments=Debug)
