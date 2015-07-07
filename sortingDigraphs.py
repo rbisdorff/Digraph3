@@ -1259,15 +1259,16 @@ class QuantilesSortingDigraph(SortingDigraph):
     
     .. image:: quantilesSorting.png
     """
-    def __init__(self,argPerfTab=None,
-                 limitingQuantiles=None,
-                 LowerClosed=False,
-                 PrefThresholds=True,
-                 hasNoVeto=False,
-                 outrankingType = "bipolar",
-                 CompleteOutranking = False,
-                 Threading=False,
-                 nbrCores=None,
+    def __init__(self,argPerfTab=None,\
+                 limitingQuantiles=None,\
+                 LowerClosed=False,\
+                 PrefThresholds=True,\
+                 hasNoVeto=False,\
+                 outrankingType = "bipolar",\
+                 CompleteOutranking = False,\
+                 StoreSorting=False,\
+                 Threading=False,\
+                 nbrCores=None,\
                  Debug=False):
         """
         Constructor for QuantilesSortingBigDigraph instances.
@@ -1454,7 +1455,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                     self.relation[x][y] = Med
 
         # compute weak ordering
-        sortingRelation = self.computeSortingRelation(Debug=Debug)
+        sortingRelation = self.computeSortingRelation(Store=StoreSorting,Debug=Debug,Threading=Threading,nbrOfCPUs=nbrCores)
         for x in self.actionsOrig:
             for y in self.actionsOrig:
                 self.relation[x][y] = sortingRelation[x][y]
@@ -1951,13 +1952,16 @@ class QuantilesSortingDigraph(SortingDigraph):
         else:
             return set([action])           
 
-    def computeCategoryContents(self,Reverse=False,Comments=False):
+    def computeCategoryContents(self,Reverse=False,Comments=False,Store=False,\
+                                Threading=False,nbrOfCPUs=None):
         """
         Computes the sorting results per category.
         """
         actions = list(self.getActionsKeys())
         actions.sort()
-        sorting = self.computeSortingCharacteristics(Comments=Comments)
+        sorting = self.computeSortingCharacteristics(Comments=Comments,Store=Store,\
+                                                     Threading=Threading,\
+                                                     nbrOfCPUs=nbrOfCPUs)
 
         categoryContent = {}
         for c in self.orderedCategoryKeys(Reverse=Reverse):
@@ -1965,10 +1969,12 @@ class QuantilesSortingDigraph(SortingDigraph):
             for x in actions:
                 if sorting[x][c]['categoryMembership'] >= self.valuationdomain['med']:
                     categoryContent[c].append(x)
+        
         return categoryContent
 
-    def computeSortingCharacteristics(self, action=None, Comments=False, Debug=False,\
-                                        Threading=True, nbrOfCPUs=None):
+    def computeSortingCharacteristics(self, action=None, Comments=False,\
+                                      Store=False,Debug=False,\
+                                        Threading=False, nbrOfCPUs=None):
         """
         Renders a bipolar-valued bi-dictionary relation
         representing the degree of credibility of the
@@ -2154,7 +2160,8 @@ class QuantilesSortingDigraph(SortingDigraph):
 
                     if Debug:
                         print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
-
+        if Store:
+            self.sorting = sorting
         return sorting
 
     def computeSortingCharacteristicsOld(self, action=None, Comments=False):
@@ -2309,12 +2316,14 @@ class QuantilesSortingDigraph(SortingDigraph):
             html += '</table>'
             return html
 
-    def computeSortingRelation(self,categoryContents=None,Debug=False):
+    def computeSortingRelation(self,categoryContents=None,Debug=False,Store=False,
+                               Threading=False,nbrOfCPUs=None):
         """
         constructs a bipolar sorting relation using the category contents.
         """
         if categoryContents == None:
-            categoryContents = self.computeCategoryContents()
+            categoryContents = self.computeCategoryContents(Store=Store,\
+                                Threading=Threading,nbrOfCPUs=nbrOfCPUs)
         categoryKeys = self.orderedCategoryKeys()
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
