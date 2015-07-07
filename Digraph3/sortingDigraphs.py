@@ -1269,6 +1269,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                  StoreSorting=False,\
                  Threading=False,\
                  nbrCores=None,\
+                 Comments=False,
                  Debug=False):
         """
         Constructor for QuantilesSortingBigDigraph instances.
@@ -1427,7 +1428,8 @@ class QuantilesSortingDigraph(SortingDigraph):
                                                    hasNoVeto=hasNoVeto,
                                                    hasBipolarVeto=True,
                                                     Threading=Threading,
-                                                    nbrCores=nbrCores)
+                                                    nbrCores=nbrCores,
+                                                    Comments=Comments)
         else:
             self.relation = self._constructRelationWithThreading(self.criteria,
                                                    self.evaluation,
@@ -1436,7 +1438,8 @@ class QuantilesSortingDigraph(SortingDigraph):
                                                    hasNoVeto=hasNoVeto,
                                                     hasBipolarVeto=True,
                                                     Threading=Threading,
-                                                    nbrCores=nbrCores)
+                                                    nbrCores=nbrCores,
+                                                    Comments=Comments)
         if LowerClosed:
             for x in self.actionsOrig:
                 for y in self.actionsOrig:
@@ -1455,7 +1458,10 @@ class QuantilesSortingDigraph(SortingDigraph):
                     self.relation[x][y] = Med
 
         # compute weak ordering
-        sortingRelation = self.computeSortingRelation(Store=StoreSorting,Debug=Debug,Threading=Threading,nbrOfCPUs=nbrCores)
+        sortingRelation = self.computeSortingRelation(Store=StoreSorting,\
+                                                      Debug=Debug,Comments=Comments,\
+                                                      Threading=Threading,\
+                                                      nbrOfCPUs=nbrCores)
         for x in self.actionsOrig:
             for y in self.actionsOrig:
                 self.relation[x][y] = sortingRelation[x][y]
@@ -2067,7 +2073,8 @@ class QuantilesSortingDigraph(SortingDigraph):
                     fo = open(foName,'wb')
                     fo.write(dumps(sorting,-1))
                     fo.close()
-            print('Threaded computing of sorting characteristics ...')        
+            if Comments:
+                print('Threaded computing of sorting characteristics ...')        
             from tempfile import TemporaryDirectory,mkdtemp
             tempDirName = mkdtemp()
             selfFileName = tempDirName +'/dumpSelf.py'
@@ -2080,16 +2087,19 @@ class QuantilesSortingDigraph(SortingDigraph):
 
             if nbrOfCPUs == None:
                 nbrOfCPUs = cpu_count()-1
-            print('Nbr of actions',na)
+            if Comments:
+                print('Nbr of actions',na)
             
             nbrOfJobs = na//nbrOfCPUs
             if nbrOfJobs*nbrOfCPUs < na:
                 nbrOfJobs += 1
-            print('Nbr of threads = ',nbrOfCPUs)
-            print('Nbr of jobs/thread',nbrOfJobs)
+            if Comments:
+                print('Nbr of threads = ',nbrOfCPUs)
+                print('Nbr of jobs/thread',nbrOfJobs)
             nbrOfThreads = 0
             for j in range(nbrOfCPUs):
-                print('thread = %d/%d' % (j+1,nbrOfCPUs),end="...")
+                if Comments:
+                    print('thread = %d/%d' % (j+1,nbrOfCPUs),end="...")
                 start= j*nbrOfJobs
                 if (j+1)*nbrOfJobs < na:
                     stop = (j+1)*nbrOfJobs
@@ -2105,7 +2115,8 @@ class QuantilesSortingDigraph(SortingDigraph):
             while active_children() != []:
                 pass
                 #sleep(1)
-            print('Exit %d threads' % nbrOfThreads)
+            if Comments:
+                print('Exit %d threads' % nbrOfThreads)
             sorting = {}
             for th in range(nbrOfThreads):
                 if Debug:
@@ -2317,13 +2328,13 @@ class QuantilesSortingDigraph(SortingDigraph):
             return html
 
     def computeSortingRelation(self,categoryContents=None,Debug=False,Store=False,
-                               Threading=False,nbrOfCPUs=None):
+                               Threading=False,nbrOfCPUs=None,Comments=False):
         """
         constructs a bipolar sorting relation using the category contents.
         """
         if categoryContents == None:
             categoryContents = self.computeCategoryContents(Store=Store,\
-                                Threading=Threading,nbrOfCPUs=nbrOfCPUs)
+                                Threading=Threading,nbrOfCPUs=nbrOfCPUs,Comments=Comments)
         categoryKeys = self.orderedCategoryKeys()
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']

@@ -69,7 +69,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def computeCriterionCorrelation(self,criterion,Threading=False,Debug=False):
+    def computeCriterionCorrelation(self,criterion,Threading=False,\
+                                    nbrOfCPUs=None,Debug=False,
+                                    Comments=False):
         """
         Renders the ordinal correlation coefficient between
         the global outranking and the marginal criterion relation.
@@ -77,13 +79,16 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         If Threading, the 
         """
         gc = BipolarOutrankingDigraph(self,coalition=[criterion],
-                                      Threading=Threading)
+                                      Threading=Threading,nbrCores=nbrOfCPUs,
+                                      Comments=Comments)
         corr = self.computeOrdinalCorrelation(gc)
         if Debug:
             print(corr)
         return corr
 
-    def computeMarginalVersusGlobalOutrankingCorrelations(self,Sorted=True,Threading=False,nbrCores=None):
+    def computeMarginalVersusGlobalOutrankingCorrelations(self,Sorted=True,\
+                                                          Threading=False,nbrCores=None,\
+                                                          Comments=False):
         """
         Method for computing correlations between each individual criterion relation with the corresponding
         global outranking relation.
@@ -114,7 +119,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             criteriaCorrelation.sort(reverse=True)
         return criteriaCorrelation   
 
-    def showMarginalVersusGlobalOutrankingCorrelation(self,Sorted=True,Threading=False,Comments=True):
+    def showMarginalVersusGlobalOutrankingCorrelation(self,Sorted=True,Threading=False,\
+                                                      nbrOfCPUs=None,Comments=True):
         """
         Show method for computeCriterionCorrelation results.
         """
@@ -122,7 +128,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         criteriaCorrelation = []
         totCorrelation = Decimal('0.0')
         for c in criteriaList:
-            corr = self.computeCriterionCorrelation(c,Threading=Threading)
+            corr = self.computeCriterionCorrelation(c,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
             totCorrelation += corr['correlation']
             criteriaCorrelation.append((corr['correlation'],c))
         if Sorted:
@@ -3584,7 +3590,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  WithConcordanceRelation=True,\
                  WithVetoCounts=True,\
                  nbrCores=None,\
-                 Debug=False):
+                 Debug=False,Comments=True):
         from copy import deepcopy 
         if argPerfTab == None:
             print('Performance tableau required !')
@@ -3672,7 +3678,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                                 WithConcordanceRelation=WithConcordanceRelation,\
                                                 WithVetoCounts=WithVetoCounts,\
                                                 nbrCores=nbrCores,\
-                                                Debug=Debug)
+                                                Debug=Debug,Comments=Comments)
 
         if Normalized:
             self.recodeValuation(-1.0,1.0)
@@ -3734,7 +3740,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                            Threading=False,\
                            WithConcordanceRelation=True,\
                            WithVetoCounts=True,\
-                           nbrCores=None):
+                           nbrCores=None,Comments=False):
         """
         Specialization of the corresponding BipolarOutrankingDigraph method
         """
@@ -3812,7 +3818,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     fo.write(dumps(splitRelation,-1))
                     fo.close()
             
-            print('Threading ...')
+            if Comments:
+                print('Threading ...')
             from tempfile import TemporaryDirectory
             with TemporaryDirectory() as tempDirName:
                 from copy import copy, deepcopy
@@ -3828,7 +3835,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
                 if nbrCores == None:
                     nbrCores = cpu_count()-1
-                print('Nbr of cpus = ',nbrCores)
+                if Comments:
+                    print('Nbr of cpus = ',nbrCores)
 
                 ni = len(initial)
                 nt = len(terminal)
@@ -3862,7 +3870,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 i = 0
                 actionsRemain = set(actions2Split)
                 for j in range(nbrOfJobs):
-                    print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ")
+                    if Comments:
+                        print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ")
                     splitActions=[]
                     for k in range(nit):
                         if j < (nbrOfJobs -1) and i < n:
@@ -3870,7 +3879,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                         else:
                             splitActions = list(actionsRemain)
                         i += 1
-                    print(len(splitActions))
+                    if Comments:
+                        print(len(splitActions))
                     if Debug:
                         print(splitActions)
                     actionsRemain = actionsRemain - set(splitActions)
@@ -3888,8 +3898,9 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     
                 while active_children() != []:
                     pass
-                    
-                print('Exiting computing threads')
+
+                if Comments:    
+                    print('Exiting computing threads')
                 for j in range(nbrOfJobs):
                     #print('Post job-%d/%d processing' % (j+1,nbrOfJobs))
                     if Debug:
@@ -7858,7 +7869,7 @@ if __name__ == "__main__":
                                    weightDistribution='equiobjectives',
                                    seed=100)
     
-    g = BipolarOutrankingDigraph(t,Threading=True)
+    g = BipolarOutrankingDigraph(t,Threading=True,Comments=True)
     Threading = True
     t0 = time()
     criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
