@@ -1592,14 +1592,26 @@ The performance evaluations of each decision alternative on each criterion are g
 
         nc = len(colorPalette)
 
+        if Ranked and actionsList == None:
+            from weakOrders import QuantilesRankingDigraph
+            qsr = QuantilesRankingDigraph(self,LowerClosed=True,
+                                          Threading=Threading,
+                                          Debug=Debug)
+            tempActionsList = qsr.computeQsRbcRanking()
+            actionsList = [a[0] for a in tempActionsList]
+        else:
+            if actionsList == None:
+                actionsList = list(self.actions.keys())
+                actionsList.sort()
+            else:
+               actionsList = [x for x in flatten(actionsList)]
 
         if criteriaList == None:
-            from outrankingDigraphs import BipolarOutrankingDigraph
-            g = BipolarOutrankingDigraph(self,Threading=Threading)
+            from outrankingDigraphs import OutrankingDigraph
             if Correlations:
-                criteriaCorrelations = g.showMarginalVersusGlobalOutrankingCorrelation(
-                    Threading=Threading,
-                    Comments=False)
+                criteriaCorrelations =\
+                    OutrankingDigraph.showMarginalVersusGlobalOutrankingCorrelation(\
+                        qsr,Threading=Threading,Comments=False)
                 criteriaList={}
                 correlations={}
 
@@ -1639,21 +1651,6 @@ The performance evaluations of each decision alternative on each criterion are g
         else:
             criteriaWeights= OrderedDict(sorted(criteriaWeights.items(),key=lambda index: int(index[0])))
             heatmap['criteriaWeights'] = criteriaWeights
-
-
-        if Ranked and actionsList == None:
-            from weakOrders import QuantilesRankingDigraph
-            qsr = QuantilesRankingDigraph(self,LowerClosed=True,
-                                          Threading=Threading,
-                                          Debug=Debug)
-            tempActionsList = qsr.computeQsRbcRanking()
-            actionsList = [a[0] for a in tempActionsList]
-        else:
-            if actionsList == None:
-                actionsList = list(self.actions.keys())
-                actionsList.sort()
-            else:
-               actionsList = [x for x in flatten(actionsList)]
 
 
         quantiles=OrderedDict()
