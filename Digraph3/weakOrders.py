@@ -1014,7 +1014,7 @@ def _jobTaskRubis(categID):
     #from linearOrders import RankedPairsOrder, KohlerOrder
     from weakOrders import PrincipalInOutDegreesOrdering
     maxCatContent = 30
-    Comments = True
+    Comments = False
     if Comments:
         print("Starting working on category %d" % (categID), end=" ")
     fiName = 'partialPerfTab-'+str(categID)+'.py'
@@ -1094,7 +1094,7 @@ def _jobTaskKohler(categID):
     from outrankingDigraphs import BipolarOutrankingDigraph
     from linearOrders import KohlerOrder
     from weakOrders import PrincipalInOutDegreesOrdering
-    Comments = True
+    Comments = False
     if Comments:
         print("Starting working on category %d" % (categID), end=" ")
     fiName = 'partialPerfTab-'+str(categID)+'.py'
@@ -1136,7 +1136,7 @@ def _jobTaskKohlerFusion(categID):
     from outrankingDigraphs import BipolarOutrankingDigraph
     from linearOrders import KohlerOrder
     from weakOrders import PrincipalInOutDegreesOrdering
-    Comments = True
+    Comments = False
     if Comments:
         print("Starting working on category %d" % (categID), end=" ")
     fiName = 'partialPerfTab-'+str(categID)+'.py'
