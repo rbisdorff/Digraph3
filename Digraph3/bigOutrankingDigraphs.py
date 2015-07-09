@@ -1452,6 +1452,7 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
 if __name__ == "__main__":
     
     from time import time
+    from weakOrders import QuantilesRankingDigraph
     MP  = True
     t0 = time()
 ##    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,
@@ -1460,19 +1461,23 @@ if __name__ == "__main__":
                                       seed=100)
     print(time()-t0)
     print(total_size(tp.evaluation))
-    bg1 = BigOutrankingDigraph(tp,quantiles=20,quantilesOrderingStrategy='average',
-                                 LowerClosed=False,
-                                 minimalComponentSize=5,
+    t0 = time()
+    qr = QuantilesRankingDigraph(tp,50,strategy='average')
+    print(time()-t0)
+    qr.showWeakOrder()
+    bg1 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
+                                 LowerClosed=True,
+                                 minimalComponentSize=1,
                                  Threading=MP,nbrOfCPUs=5,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
-    bg1.showDecomposition(direction='increasing')
+    bg1.showDecomposition(direction='decreasing')
     print(bg1)
-    bg2 = BigOutrankingDigraphMP(tp,quantiles=20,quantilesOrderingStrategy='average',
-                                 LowerClosed=False,
+    bg2 = BigOutrankingDigraphMP(tp,quantiles=50,quantilesOrderingStrategy='average',
+                                 LowerClosed=True,
                                  minimalComponentSize=5,
                                  Threading=MP,nbrOfCPUs=5,Debug=False)
     print(bg2.computeDecompositionSummaryStatistics())
-    bg2.showDecomposition(direction='increasing')
+    bg2.showDecomposition(direction='decreasing')
     print(bg2)
     #bg1.recodeValuation(-10,10,Debug=True)
     #print(total_size(bg1))
