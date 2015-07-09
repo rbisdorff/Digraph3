@@ -1026,7 +1026,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             sorting = self.computeSortingCharacteristics(action=action,\
                                                      Comments=Debug,\
                                                      Threading=Threading,
-                                                         StoreSorting=True,
+                                                     StoreSorting=False,
                                                      nbrOfCPUs=nbrOfCPUs)
         keys = []
         for c in self.orderedCategoryKeys():
@@ -1886,6 +1886,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         """
         from math import floor
         from copy import copy, deepcopy
+        LowerClosed = self.criteriaCategoryLimits['LowerClosed']
         gValues = []
         for x in self.actionsOrig:
             if Debug:
@@ -1903,12 +1904,12 @@ class QuantilesSortingDigraph(SortingDigraph):
         n = len(gValues)
         if Debug:
             print('g,n,gValues',g,n,gValues)
+##        if n > 0:
         nf = Decimal(str(n+1))
         limitingQuantiles = copy(self.limitingQuantiles)
         limitingQuantiles.sort()
         if Debug:
             print(limitingQuantiles)
-        LowerClosed = self.criteriaCategoryLimits['LowerClosed']
         if LowerClosed:
             limitingQuantiles = limitingQuantiles[:-1]
         else:
@@ -1966,6 +1967,8 @@ class QuantilesSortingDigraph(SortingDigraph):
                 if Debug:
                     print('quantile',quantile)
                 gQuantiles.append(quantile)
+##        else:
+##            gQuantiles = []
         if Debug:
             print(g,LowerClosed,self.criteria[g]['preferenceDirection'],gQuantiles)
         return gQuantiles
@@ -2021,7 +2024,13 @@ class QuantilesSortingDigraph(SortingDigraph):
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
-        
+
+        try:
+            return self.sorting
+        except:
+            pass
+        if action != None:
+            storeSorting = False
         actions = list(self.getActionsKeys(action))
         na = len(actions)
         if Debug:
@@ -3179,21 +3188,24 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
 
-    t = PerformanceTableau('auditor2_1')
+    #t = PerformanceTableau('auditor2_2')
+    #t.showHTMLPerformanceHeatmap(ndigits=0,Correlations=True)
     #t = XMCDA2PerformanceTableau('spiegel2004')
     #t = XMCDA2PerformanceTableau('ex1')
-##    t = RandomCBPerformanceTableau(numberOfActions=15,
-##                                   numberOfCriteria=5,
-##                                   weightDistribution='equiobjectives')
+    t = RandomCBPerformanceTableau(numberOfActions=15,
+                                   numberOfCriteria=5,
+                                   weightDistribution='equiobjectives',
+                                   seed=100)
 ##    t.saveXMCDA2('test',servingD3=False)
     #t = XMCDA2PerformanceTableau('test')  
+    t.showHTMLPerformanceHeatmap(colorLevels=9,ndigits=2,Correlations=True)
     qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
-                                     Threading=False,
-                                     Debug=False)
+                                     Threading=True,
+                                     Debug=True)
     qs.showHTMLQuantileOrdering(strategy='average')
-    qs.showSortingCharacteristics('a01')
+##    qs.showSortingCharacteristics('a01')
     qs.showWeakOrder()
-    qs.showQuantileOrdering(strategy=None)
+    qs.showQuantileOrdering(strategy='average')
     #qs.exportGraphViz('test')
     qs.showActionsSortingResult()
 
