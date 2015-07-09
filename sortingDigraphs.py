@@ -109,6 +109,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                  isRobust=False,
                  hasNoVeto=False,
                  LowerClosed=True,
+                 StoreSorting=True,
                  Threading=False,
                  nbrCores=None,
                  Debug=False):
@@ -280,7 +281,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                         self.relation[x][y] = Med
 
         # compute weak ordering
-        sortingRelation = self.computeSortingRelation(Debug=Debug)
+        sortingRelation = self.computeSortingRelation(Debug=Debug,)
         for x in self.actionsOrig.keys():
             for y in self.actionsOrig.keys():
                 self.relation[x][y] = sortingRelation[x][y]
@@ -329,12 +330,12 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         s += '</table>'
         return s
 
-    def computeSortingRelation(self,categoryContents=None,Debug=False):
+    def computeSortingRelation(self,categoryContents=None,StoreSorting=True,Debug=False):
         """
         constructs a bipolar sorting relation using the category contents.
         """
         if categoryContents == None:
-            categoryContents = self.computeCategoryContents()
+            categoryContents = self.computeCategoryContents(StoreSorting=True,)
         categoryKeys = self.orderedCategoryKeys()
 
         Max = self.valuationdomain['max']
@@ -679,7 +680,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
         return sorting
 
-    def computeSortingCharacteristics(self, action=None, Comments=False, Debug=True,\
+    def computeSortingCharacteristics(self, action=None, StoreSorting=True,Comments=False, Debug=True,\
                                         Threading=False, nbrOfCPUs=None):
         """
         Renders a bipolar-valued bi-dictionary relation
@@ -828,7 +829,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
                     if Debug:
                         print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
-
+        if StoreSorting:
+            self.sorting = sorting
         return sorting
     
     def showSortingCharacteristics(self, action=None):
@@ -921,13 +923,16 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 print('%s: %s' % (c, str(sorts[c])))
         return sorts
 
-    def computeCategoryContents(self,Reverse=False,Comments=False):
+    def computeCategoryContents(self,Reverse=False,StoreSorting=True,Comments=False):
         """
         Computes the sorting results per category.
         """
         actions = list(self.getActionsKeys())
         actions.sort()
-        sorting = self.computeSortingCharacteristics(Comments=Comments)
+        try:
+            sorting=self.sorting
+        except:
+            sorting = self.computeSortingCharacteristics(StoreSorting=StoreSorting,Comments=Comments)
 
         categoryContent = {}
         for c in self.orderedCategoryKeys(Reverse=Reverse):
@@ -935,6 +940,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             for x in actions:
                 if sorting[x][c]['categoryMembership'] >= self.valuationdomain['med']:
                     categoryContent[c].append(x)
+        if StoreSorting:
+            self.categoryContent = categoryContent
         return categoryContent
                                                      
     def showSorting(self,Reverse=True,isReturningHTML=False):
@@ -944,7 +951,10 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         the method returns a htlm table with the sorting result.
         """
         #from string import replace
-        categoryContent = self.computeCategoryContents()
+        try:
+            categoryContent = self.categoryContent
+        except:
+            categoryContent = self.computeCategoryContents(StoreSorting=True)
         try:
             LowerClosed = self.criteriaCategoryLimits['LowerClosed']
         except:
@@ -1010,9 +1020,13 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
         """
         Med = self.valuationdomain['med']
-        sorting = self.computeSortingCharacteristics(action=action,\
+        try:
+            sorting = self.sorting
+        except:
+            sorting = self.computeSortingCharacteristics(action=action,\
                                                      Comments=Debug,\
                                                      Threading=Threading,
+                                                         StoreSorting=True,
                                                      nbrOfCPUs=nbrOfCPUs)
         keys = []
         for c in self.orderedCategoryKeys():
@@ -1458,7 +1472,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                     self.relation[x][y] = Med
 
         # compute weak ordering
-        sortingRelation = self.computeSortingRelation(Store=StoreSorting,\
+        sortingRelation = self.computeSortingRelation(StoreSorting=StoreSorting,\
                                                       Debug=Debug,Comments=Comments,\
                                                       Threading=Threading,\
                                                       nbrOfCPUs=nbrCores)
@@ -1485,7 +1499,10 @@ class QuantilesSortingDigraph(SortingDigraph):
         """
         from decimal import Decimal
         from weakOrders import WeakOrder
-        cC = self.computeCategoryContents()
+        try:
+            cC = self.categoryContent
+        except:
+            cC = self.computeCategoryContents(StoreSorting=True)
         
         if Descending:
             cCKeys = self.orderedCategoryKeys(Reverse = True)
@@ -1723,7 +1740,10 @@ class QuantilesSortingDigraph(SortingDigraph):
         Specialisation for QuantilesSortingDigraphs.
         """
         from decimal import Decimal
-        cC = self.computeCategoryContents()
+        try:
+            cC = self.categoryContent
+        except:
+            cC = self.computeCategoryContents(StoreSorting=True)
         if Debug:
             print(cC)
         if Descending:
@@ -1936,7 +1956,13 @@ class QuantilesSortingDigraph(SortingDigraph):
                     if PrefThresholds:
                         quantile -= gPrefThrCst - quantile*gPrefThrSlope
                 else:
-                    quantile = gValues[n-1]
+                    if n > 0:
+                        quantile = gValues[n-1]
+                    else:
+                        if self.criteria[g]['preferenceDirection'] == 'min':
+                            quantile = Decimal('-200.0')
+                        else:
+                            quantile = Decimal('-100.0')     
                 if Debug:
                     print('quantile',quantile)
                 gQuantiles.append(quantile)
@@ -1958,14 +1984,18 @@ class QuantilesSortingDigraph(SortingDigraph):
         else:
             return set([action])           
 
-    def computeCategoryContents(self,Reverse=False,Comments=False,Store=False,\
+    def computeCategoryContents(self,Reverse=False,Comments=False,StoreSorting=True,\
                                 Threading=False,nbrOfCPUs=None):
         """
         Computes the sorting results per category.
         """
         actions = list(self.getActionsKeys())
         actions.sort()
-        sorting = self.computeSortingCharacteristics(Comments=Comments,Store=Store,\
+        try:
+            sorting = self.sorting
+        except:
+            sorting = self.computeSortingCharacteristics(Comments=Comments,\
+                                                     StoreSorting=StoreSorting,\
                                                      Threading=Threading,\
                                                      nbrOfCPUs=nbrOfCPUs)
 
@@ -1978,8 +2008,8 @@ class QuantilesSortingDigraph(SortingDigraph):
         
         return categoryContent
 
-    def computeSortingCharacteristics(self, action=None, Comments=False,\
-                                      Store=False,Debug=False,\
+    def computeSortingCharacteristics(self, action=None,Comments=False,\
+                                      StoreSorting=False,Debug=False,\
                                         Threading=False, nbrOfCPUs=None):
         """
         Renders a bipolar-valued bi-dictionary relation
@@ -1991,9 +2021,11 @@ class QuantilesSortingDigraph(SortingDigraph):
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
-
+        
         actions = list(self.getActionsKeys(action))
         na = len(actions)
+        if Debug:
+            print(actions)
             
         categories = list(self.orderedCategoryKeys())
 
@@ -2005,6 +2037,8 @@ class QuantilesSortingDigraph(SortingDigraph):
             from multiprocessing import Process, active_children
             from pickle import dumps, loads, load
             from os import cpu_count
+            if Comments:
+                self.Debug = Debug
             class myThread(Process):
                 def __init__(self, threadID, tempDirName, actions, catKeys,Debug):
                     Process.__init__(self)
@@ -2065,7 +2099,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                             sorting[x][c]['notHighLimit'] = notHighLimit
                             sorting[x][c]['categoryMembership'] = categoryMembership
                             if self.Debug:
-                                print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'],\
+                                print('\t %.2f \t %.2f \t %.2f\n' % (sorting[x][c]['lowLimit'],\
                                    sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
                         if self.Debug:
                             print(sorting[x])
@@ -2161,7 +2195,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                    else:
 ##                        lowLimit = Max - self.relation[cMinKey][x] + Min
 ##                        notHighLimit = self.relation[cMaxKey][x]
-                    if Debug:
+                    if Comments:
                         print('%s in %s: low = %.2f, high = %.2f' % \
                               (x, c,lowLimit,notHighLimit), end=' ')
                     categoryMembership = min(lowLimit,notHighLimit)
@@ -2169,9 +2203,9 @@ class QuantilesSortingDigraph(SortingDigraph):
                     sorting[x][c]['notHighLimit'] = notHighLimit
                     sorting[x][c]['categoryMembership'] = categoryMembership
 
-                    if Debug:
+                    if Comments:
                         print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
-        if Store:
+        if StoreSorting:
             self.sorting = sorting
         return sorting
 
@@ -2238,7 +2272,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 
                 if Comments:
                     #print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
-                    print('%.2f\t\t %.2f\t\t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+                    print('%.2f\t\t %.2f\t\t %.2f\n' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
 
         return sorting
 
@@ -2250,7 +2284,29 @@ class QuantilesSortingDigraph(SortingDigraph):
         ie x outranks low category limit and does not outrank
         the high category limit.
         """
-        self.computeSortingCharacteristics(action=action,Comments=True)
+        try:
+            sorting = self.sorting
+        except:
+            sorting = self.computeSortingCharacteristics(action=action,StoreSorting=True)
+
+        actions = self.getActionsKeys(action)
+            
+        categories = self.orderedCategoryKeys()
+
+        try:
+            LowerClosed = self.criteriaCategoryLimits['LowerClosed']
+        except:
+            LowerClosed = True
+        if LowerClosed:
+            print('x  in  K_k\t r(x >= m_k)\t r(x < M_k)\t r(x in K_k)')
+        else:
+            print('x  in  K_k\t r(m_k < x)\t r(M_k >= x)\t r(x in K_k)')
+
+        for x in actions:
+            for c in categories:
+                print('%s in %s - %s\t' % (x, self.categories[c]['lowLimit'],\
+                        self.categories[c]['highLimit'],), end=' ')
+                print('%.2f\t\t %.2f\t\t %.2f\n' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
 
 
     def showHTMLQuantileOrdering(self,Descending=True,strategy='optimistic'):
@@ -2296,7 +2352,12 @@ class QuantilesSortingDigraph(SortingDigraph):
         """
         #from string import replace
         from copy import copy, deepcopy
-        categoryContent = self.computeCategoryContents()
+
+        try:
+            categoryContent = self.categoryContent
+        except:
+            categoryContent = self.computeCategoryContents(StoreSorting=True)
+
         categoryKeys = self.orderedCategoryKeys(Reverse=Reverse)
         try:
             LowerClosed = self.criteriaCategoryLimits['LowerClosed']
@@ -2327,13 +2388,17 @@ class QuantilesSortingDigraph(SortingDigraph):
             html += '</table>'
             return html
 
-    def computeSortingRelation(self,categoryContents=None,Debug=False,Store=False,
+    def computeSortingRelation(self,categoryContents=None,Debug=False,StoreSorting=True,
                                Threading=False,nbrOfCPUs=None,Comments=False):
         """
         constructs a bipolar sorting relation using the category contents.
         """
+        try:
+            categoryContents = self.categoryContent
+        except:
+            pass
         if categoryContents == None:
-            categoryContents = self.computeCategoryContents(Store=Store,\
+            categoryContents = self.computeCategoryContents(StoreSorting=StoreSorting,\
                                 Threading=Threading,nbrOfCPUs=nbrOfCPUs,Comments=Comments)
         categoryKeys = self.orderedCategoryKeys()
         Max = self.valuationdomain['max']
@@ -2410,8 +2475,9 @@ class _QuantilesSortingDigraph(SortingDigraph):
                  LowerClosed=False,
                  PrefThresholds=True,
                  hasNoVeto=False,
-                 outrankingType = "bipolar",
-                 CompleteOutranking = True,
+                 outrankingType="bipolar",
+                 CompleteOutranking=True,
+                 StoreSorting=True,
                  Threading=False,
                  nbrCores=None,
                  Debug=False):
@@ -2624,7 +2690,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
                         self.relation[x][y] = Med
 
         # compute weak ordering
-        sortingRelation = self.computeSortingRelation(Debug=Debug)
+        sortingRelation = self.computeSortingRelation(StoreSorting=StoreSorting,Debug=Debug)
         for x in self.actionsOrig:
             for y in self.actionsOrig:
                 self.relation[x][y] = sortingRelation[x][y]
@@ -2648,7 +2714,10 @@ class _QuantilesSortingDigraph(SortingDigraph):
         """
         from decimal import Decimal
         from weakOrders import WeakOrder
-        cC = self.computeCategoryContents()
+        try:
+            cC = self.categoryContent
+        except:
+            cC = self.computeCategoryContents(StoreSorting=True)
         
         if Descending:
             cCKeys = self.orderedCategoryKeys(Reverse = True)
@@ -2707,7 +2776,10 @@ class _QuantilesSortingDigraph(SortingDigraph):
         Specialisation for QuantilesSortingDigraphs.
         """
         from decimal import Decimal
-        cC = self.computeCategoryContents()
+        try:
+            cC = self.categoryContent
+        except:
+            cC = self.computeCategoryContents(StoreSorting=True)
         if Debug:
             print(cC)
         if Descending:
@@ -2920,7 +2992,13 @@ class _QuantilesSortingDigraph(SortingDigraph):
                     if PrefThresholds:
                         quantile -= gPrefThrCst - quantile*gPrefThrSlope
                 else:
-                    quantile = gValues[n-1]
+                    if n > 0:
+                        quantile = gValues[n-1]
+                    else:
+                        if self.criteria[g]['preferenceDirection'] == 'min':
+                            quantile = Decimal('-200.0')
+                        else:
+                            quantile = Decimal('-100.0')                      
                 if Debug:
                     print('quantile',quantile)
                 gQuantiles.append(quantile)
@@ -2937,7 +3015,10 @@ class _QuantilesSortingDigraph(SortingDigraph):
         """
         #from string import replace
         from copy import copy, deepcopy
-        categoryContent = self.computeCategoryContents()
+        try:
+            categoryContent = self.categoryContent
+        except:
+            categoryContent = self.computeCategoryContents(StoreSorting=True)
         categoryKeys = self.orderedCategoryKeys(Reverse=Reverse)
         try:
             LowerClosed = self.criteriaCategoryLimits['LowerClosed']
@@ -2965,12 +3046,16 @@ class _QuantilesSortingDigraph(SortingDigraph):
             html += '</table>'
             return html
 
-    def computeSortingRelation(self,categoryContents=None,Debug=False):
+    def computeSortingRelation(self,categoryContents=None,Debug=False,StoreSorting=True):
         """
         constructs a bipolar sorting relation using the category contents.
         """
+        try:
+            categoryContents = self.categoryContent
+        except:
+            pass
         if categoryContents == None:
-            categoryContents = self.computeCategoryContents()
+            categoryContents = self.computeCategoryContents(StoreSorting=True)
         categoryKeys = self.orderedCategoryKeys()
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
@@ -3094,7 +3179,7 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
 
-    t = XMCDA2PerformanceTableau('uniSorting')
+    t = PerformanceTableau('auditor2_1')
     #t = XMCDA2PerformanceTableau('spiegel2004')
     #t = XMCDA2PerformanceTableau('ex1')
 ##    t = RandomCBPerformanceTableau(numberOfActions=15,
@@ -3102,15 +3187,15 @@ if __name__ == "__main__":
 ##                                   weightDistribution='equiobjectives')
 ##    t.saveXMCDA2('test',servingD3=False)
     #t = XMCDA2PerformanceTableau('test')  
-    qs = QuantilesSortingDigraph(t,15,LowerClosed=False,
+    qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
                                      Threading=False,
                                      Debug=False)
     qs.showHTMLQuantileOrdering(strategy='average')
-    #qs.showSortingCharacteristics('a01')
-    #qs.showWeakOrder()
-    #qs.showQuantileOrdering(strategy=None)
+    qs.showSortingCharacteristics('a01')
+    qs.showWeakOrder()
+    qs.showQuantileOrdering(strategy=None)
     #qs.exportGraphViz('test')
-    #qs.showActionsSortingResult()
+    qs.showActionsSortingResult()
 
 ##    qs0 = _QuantilesSortingDigraph(t,15,LowerClosed=False,
 ##                                     Threading=False,
