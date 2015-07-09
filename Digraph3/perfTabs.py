@@ -1495,11 +1495,12 @@ The performance evaluations of each decision alternative on each criterion are g
                 quantilexg = self.computeActionCriterionQuantile(x,gValue)
                 if quantilexg != 'NA':
                     quantile=self.evaluation[gValue][x]
+                    constantQuantile = (minMaxEvaluations[gValue]['minimum'] == minMaxEvaluations[gValue]['maximum'])
                     if quantile != Decimal("-999"):
-                        if quantile == minMaxEvaluations[gValue]['minimum']:
+                        if ((quantile == minMaxEvaluations[gValue]['minimum']) and (not constantQuantile)):
                             quantiles[str(index)][x][gKey]={'quantile':quantile.quantize(Decimal(precision),rounding=decimal.ROUND_DOWN),
                                                             'quantileClass':min}
-                        elif quantile == minMaxEvaluations[gValue]['maximum']:
+                        elif ((quantile == minMaxEvaluations[gValue]['maximum']) and (not constantQuantile)):
                             quantiles[str(index)][x][gKey]={'quantile':quantile.quantize(Decimal(precision),rounding=decimal.ROUND_DOWN),
                                                             'quantileClass':max}
                         else:
