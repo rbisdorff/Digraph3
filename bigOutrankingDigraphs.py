@@ -1460,24 +1460,26 @@ if __name__ == "__main__":
     from weakOrders import QuantilesRankingDigraph
     MP  = True
     t0 = time()
-##    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,
-##                                      seed=100)
-    tp = RandomPerformanceTableau(numberOfActions=750,numberOfCriteria=21,
+    tp = Random3ObjectivesPerformanceTableau(numberOfActions=750,
                                       seed=100)
+##    tp = RandomCBPerformanceTableau(numberOfActions=750,Threading=MP,
+##                                      seed=100)
+##    tp = RandomPerformanceTableau(numberOfActions=100,numberOfCriteria=21,
+##                                      seed=100)
     print(time()-t0)
     print(total_size(tp.evaluation))
     t0 = time()
-    qr = QuantilesRankingDigraph(tp,50,strategy='average',Threading=MP)
+    qr = QuantilesRankingDigraph(tp,75,strategy='average',Threading=MP)
     print(time()-t0)
     qr.showWeakOrder()
-    bg1 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
+    bg1 = BigOutrankingDigraph(tp,quantiles=75,quantilesOrderingStrategy='average',
                                  LowerClosed=True,
                                  minimalComponentSize=1,
                                  Threading=MP,nbrOfCPUs=5,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
     bg1.showDecomposition(direction='decreasing')
     print(bg1)
-    bg2 = BigOutrankingDigraphMP(tp,quantiles=50,quantilesOrderingStrategy='average',
+    bg2 = BigOutrankingDigraphMP(tp,quantiles=75,quantilesOrderingStrategy='average',
                                  LowerClosed=True,
                                  minimalComponentSize=5,
                                  Threading=MP,nbrOfCPUs=5,Debug=False)
@@ -1494,23 +1496,25 @@ if __name__ == "__main__":
 ##    print(total_size(bg2))
 ##    print(bg2.computeDecompositionSummaryStatistics())
 ##    #bg2.showDecomposition()
-##    t0 = time()
-##    g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=MP)
-##    print(time()-t0)
+    t0 = time()
+    g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=MP)
+    print(time()-t0)
 ##    print(total_size(g))
 ##    t0 = time()
 ##    print(bg1.computeOrdinalCorrelation(g,Debug=False))
 ##    print(bg2.computeOrdinalCorrelation(g,Debug=False))
 ##    print(bg2.computeOrdinalCorrelation(bg1,Debug=False))
 ##    print(time()-t0)
-##    bg1.showShort('rest1.text')
-##    bg2.showShort('rest2.text')
+    bg1.showShort('rest1.text')
+    bg2.showShort('rest2.text')
 ##    bg1.showShort()
-##    
-##    preordering1 = bg1.computeRankingPreordering()
-##    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering1)))
+##
+    preordering1 = bg1.ranking2Preorder(bg1.boostedKohlerRanking)
+    print(g.computeOrdinalCorrelation(qr))
+    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering1)))
 ##    preordering2 = bg2.computeRankingPreordering()
-##    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering2)))
+    preordering2 = bg1.ranking2Preorder(bg2.boostedKohlerRanking)
+    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering2)))
 ##    t0 = time()
 ##    test = Decimal('0')
 ##    for x in bg1.actions:
