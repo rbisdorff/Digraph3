@@ -1248,10 +1248,20 @@ The performance evaluations of each decision alternative on each criterion are g
             result[g] = {}
             evaluations = []
             for x in actions:
-                evaluations.append(self.evaluation[g][x])
-            evaluations.sort()
-            result[g]['minimum'] = evaluations[0]
-            result[g]['maximum'] = evaluations[-1]
+                val = self.evaluation[g][x]
+                if val != Decimal('-999'):
+                    evaluations.append(val)
+            n = len(evaluations)
+            if n > 1:
+                evaluations.sort()
+                result[g]['minimum'] = evaluations[0]
+                result[g]['maximum'] = evaluations[-1]
+            elif n == 1:
+                result[g]['minimum'] = evaluations[0]
+                result[g]['maximum'] = evaluations[0]
+            else:
+                result[g]['minimum'] = Decimal('-999')
+                result[g]['maximum'] = Decimal('-999')
         return result
         
     def showHTMLPerformanceTableau(self,isSorted=True,Transposed=False,ndigits=2):
@@ -1297,7 +1307,10 @@ The performance evaluations of each decision alternative on each criterion are g
                 html += '<tr><th bgcolor="#FFF79B">%s</th>' % (gName)
                 for x in actionsList:
                     if self.evaluation[g][x] != Decimal("-999"):
-                        if self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
+                        if minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
+                            formatString = '<td align="right">%% .%df</td>' % ndigits
+                            html += formatString % (self.evaluation[g][x])
+                        elif self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
                             formatString = '<td bgcolor="#ffddff"  align="right">%% .%df</td>' % ndigits
                             html += formatString % (self.evaluation[g][x])
                         elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
@@ -1308,7 +1321,7 @@ The performance evaluations of each decision alternative on each criterion are g
                             html += formatString % (self.evaluation[g][x])
                             
                     else:
-                        html += '<td align="right"><span style="color: LightGrey;">NA</span></td>'
+                        html += '<td align="right"><span style="color: LightGrey;font-size:75%; ">NA</span></td>'
                 html += '</tr>'
             html += '</table>'
         else:
@@ -1329,7 +1342,10 @@ The performance evaluations of each decision alternative on each criterion are g
                 html += '<tr><th bgcolor="#FFF79B">%s</th>' % (xName)
                 for g in criteriaList:
                     if self.evaluation[g][x] != Decimal("-999"):
-                        if self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
+                        if minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
+                            formatString = '<td align="right">%% .%df</td>' % ndigits
+                            html += formatString % (self.evaluation[g][x])
+                        elif self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
                             formatString = '<td bgcolor="#ffddff"  align="right">%% .%df</td>' % ndigits
                             html += formatString % (self.evaluation[g][x])
                         elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
@@ -1340,7 +1356,7 @@ The performance evaluations of each decision alternative on each criterion are g
                             html += formatString % (self.evaluation[g][x])
                             
                     else:
-                        html += '<td align="right"><span style="color: LightGrey;">NA</span></td>'
+                        html += '<td align="right"><span style="color: LightGrey;font-size:75%;">NA</span></td>'
                 html += '</tr>'
             html += '</table>'
             
@@ -1767,18 +1783,11 @@ The performance evaluations of each decision alternative on each criterion are g
         fo = open(fileName,'w')
         if pageTitle == None:
             pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
-        if Ranked and actionsList == None:
-            from weakOrders import QuantilesRankingDigraph
-            qsr = QuantilesRankingDigraph(self,LowerClosed=True,
-                                          strategy=strategy,
-                                          Threading=Threading,
-                                          Debug=Debug)
-            actionsList = qsr.computeQsRbcRanking()
-            if Debug:
-                print(actionsList)
             
         fo.write(self.htmlPerformanceHeatmap(criteriaList=criteriaList,
                                              actionsList=actionsList,
+                                             Ranked=Ranked,
+                                             strategy=strategy,
                                              ndigits=ndigits,
                                              colorLevels=colorLevels,
                                              pageTitle=pageTitle,
@@ -1790,6 +1799,8 @@ The performance evaluations of each decision alternative on each criterion are g
 
     def htmlPerformanceHeatmap(self,criteriaList=None,
                                actionsList=None,
+                               Ranked=True,
+                               strategy='average',
                                ndigits=2,
                                contentCentered=True,
                                colorLevels=None,
@@ -1857,13 +1868,21 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</style>\n'
         html += '</head>\n<body>\n'
         html += '<h2>%s</h2>\n' % pageTitle
-        
+
+        if Ranked and actionsList == None:
+            from weakOrders import QuantilesRankingDigraph
+            qr = QuantilesRankingDigraph(self,LowerClosed=True,
+                                          strategy=strategy,
+                                          Threading=Threading,
+                                          Debug=Debug)
+            actionsList = qr.computeQsRbcRanking()
+            if Debug:
+                print(actionsList)
+
         if criteriaList == None:
-            from outrankingDigraphs import BipolarOutrankingDigraph
-            g = BipolarOutrankingDigraph(self,Threading=Threading)
             if Correlations:
                 criteriaCorrelation =\
-                    g.computeMarginalVersusGlobalOutrankingCorrelations(\
+                    qr.computeMarginalVersusGlobalOutrankingCorrelations(\
                             Threading=Threading)
                 criteriaList = [c[1] for c in criteriaCorrelation]
             else:
