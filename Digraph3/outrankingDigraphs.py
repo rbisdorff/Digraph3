@@ -3590,7 +3590,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  WithConcordanceRelation=True,\
                  WithVetoCounts=True,\
                  nbrCores=None,\
-                 Debug=False,Comments=True):
+                 Debug=False,Comments=False):
         from copy import deepcopy 
         if argPerfTab == None:
             print('Performance tableau required !')
