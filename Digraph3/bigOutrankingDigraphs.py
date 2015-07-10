@@ -819,7 +819,8 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         
 
 ########################
-class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
+from weakOrders import QuantilesRankingDigraph
+class BigOutrankingDigraphMP(BigDigraph,QuantilesRankingDigraph,PerformanceTableau):
     """
     Multiprocessing implementation of the BipolarOutrankingDigraph class
     for large instances (order > 1000)
@@ -889,7 +890,10 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
                                         nbrCores=nbrOfCPUs,
                                         Debug=Debug)
         self.runTimes = {'sorting': time() - t0}
-        self.qs = qs
+#        self.qs = qs
+        self.valuationdomain = deepcopy(qs.valuationdomain)
+        self.profiles = deepcopy(qs.profiles)
+        self.categories = deepcopy(qs.categories)
         self.sorting = deepcopy(qs.sorting)
         if Comments:
             print('execution time: %.4f' % (self.runTimes['sorting']))
@@ -1102,8 +1106,8 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
                      self.computeActionCategories(x,Comments=Comments,Debug=Debug,\
                                                Threading=Threading,\
                                                nbrOfCPUs = nbrOfCPUs)
-            lowQtileLimit = self.qs.categories[lowCateg]['lowLimit']
-            highQtileLimit = self.qs.categories[highCateg]['highLimit']
+            lowQtileLimit = self.categories[lowCateg]['lowLimit']
+            highQtileLimit = self.categories[highCateg]['highLimit']
             if strategy == "optimistic":
                 try:
                     actionsCategories[(highQtileLimit,highQtileLimit,lowQtileLimit)].append(a)
@@ -1168,12 +1172,13 @@ class BigOutrankingDigraphMP(BigDigraph,PerformanceTableau):
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
         """
-        qs = self.qs
+        #qs = self.qs
+        qs = self
         Med = qs.valuationdomain['med']
         try:
             sorting = self.sorting
         except:
-            sorting = qs.computeSortingCharacteristics(action=action,Comments=Comments,\
+            sorting = self.computeSortingCharacteristics(action=action,Comments=Comments,\
                                                    Threading=Threading,\
                                                    nbrOfCPUs=nbrOfCPUs)      
         keys = []
@@ -1457,12 +1462,12 @@ if __name__ == "__main__":
     t0 = time()
 ##    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,
 ##                                      seed=100)
-    tp = RandomPerformanceTableau(numberOfActions=500,numberOfCriteria=21,
+    tp = RandomPerformanceTableau(numberOfActions=750,numberOfCriteria=21,
                                       seed=100)
     print(time()-t0)
     print(total_size(tp.evaluation))
     t0 = time()
-    qr = QuantilesRankingDigraph(tp,50,strategy='average')
+    qr = QuantilesRankingDigraph(tp,50,strategy='average',Threading=MP)
     print(time()-t0)
     qr.showWeakOrder()
     bg1 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
