@@ -250,8 +250,11 @@ def testPartialPerfTabs():
     t.save('testSize1')
     pt1 = PartialPerformanceTableau(t)
     pt1.showAll()
-    pt2 = PartialPerformanceTableau(t,actionsSubset=['a01','a02'],
-                                    criteriaSubset=['g01','g03'])
+    from random import sample
+    actionsSample = sample(list(t.actions.keys()),2)
+    criteriaSample = sample(list(t.criteria.keys()),2)
+    pt2 = PartialPerformanceTableau(t,actionsSubset=actionsSample,
+                                    criteriaSubset=criteriaSample)
     pt2.showAll()
     
 def testSaveCSV():
