@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# testing commit - ian
 # -*- coding: utf-8 -*-
 # Python implementation of digraphs
 # submodule perfTabs.py  for performance tableaux  
@@ -1780,7 +1779,10 @@ The performance evaluations of each decision alternative on each criterion are g
         shows the html heatmap version of the performance tableau in a browser window.
         """
         import webbrowser
-        fileName = '/tmp/performanceHeatmap.html'
+        from tempfile import NamedTemporaryFile
+##        fileName = '/tmp/performanceHeatmap.html'
+        tempFile = NamedTemporaryFile(delete=False)
+        fileName = tempFile.name
         fo = open(fileName,'w')
         if pageTitle == None:
             pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
@@ -1796,6 +1798,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                                  Debug=Debug))
         else:
             pt = PartialPerformanceTableau(self,objectivesSubset=objectivesList)
+            pageTitle = 'Partial Heatmap of Performance Tableau \'%s\'' % self.name
             fo.write(pt.htmlPerformanceHeatmap(criteriaList=criteriaList,
                                                  actionsList=actionsList,
                                                  Ranked=Ranked,
@@ -1987,7 +1990,7 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</tr>\n'
         html += '</table>\n'
         if criteriaCorrelation != None:
-            html += '<i>(*) tau: Ordinal (Kendall) correlation of marginal criterion and global outranking relation.</i>\n'
+            html += '<i>(*) tau: Ordinal (Kendall) correlation of marginal criterion and global linear ranking.</i>\n'
         html += '</body></html>'
         return html
 
@@ -6249,21 +6252,31 @@ if __name__ == "__main__":
 
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
-    t = RandomCBPerformanceTableau(numberOfCriteria=13,
+##    t = RandomCBPerformanceTableau(numberOfCriteria=13,
+##                                   numberOfActions=20,
+##                                   weightDistribution='equiobjectives',
+##                                   integerWeights=True,
+##                                   Debug=False,
+##                                   missingDataProbability=0.1,
+##                                   seed=101,Threading=False)
+    t = Random3ObjectivesPerformanceTableau(numberOfCriteria=13,
                                    numberOfActions=20,
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
                                    Debug=False,
-                                   missingDataProbability=0.1,
-                                   seed=101,Threading=False)
+##                                   missingDataProbability=0.1,
+                                   seed=101)
     t.save(valueDigits=3)
     tt = PerformanceTableau('tempperftab')
     tt.showObjectives()
 ##    tt.showCriteria(ByObjectives=True)
 ##    tt.showCriteria(Alphabetic=True)
 ##    tt.showCriteria()
-    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,objectivesList=['C'])
-    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,objectivesList=['B'])
+    t.showHTMLPerformanceHeatmap(Correlations=True,
+                                 ndigits=0,objectivesList=['Soc','Env'])
+    t.showHTMLPerformanceHeatmap(Correlations=True,
+                                 ndigits=0,objectivesList=['Eco'])
+##    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,objectivesList=['B'])
     
 
     ##    t = ConstantPerformanceTableau(t,

@@ -1226,6 +1226,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             criteria[g]['objective'] = criterionObjective
             criteria[g]['preferenceDirection'] = 'max'           
             criteria[g]['name'] = 'criterion of objective %s' % (criterionObjective)
+            criteria[g]['shortName'] = g + criterionObjective[0:2]
             if commonThresholds == None:                    
                 if OrdinalScales:
                     thresholds = [(1.0,0.0),(2.001,0.0),(8.001,0.0)]
@@ -1727,7 +1728,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         for i in range(numberOfActions):
             actionType = random.choice(actionsTypesList)
             actionKey = ('a%%0%dd' % (nd)) % (i+1)
-            actions[actionKey] = {'shortName':actionKey,
+            actions[actionKey] = {'shortName':actionKey+actionType[0],
                     'name': 'random %s decision action' % (actionType),
                     'comment': 'RandomCBPerformanceTableau() generated.',
                     'type': actionType}
@@ -1748,10 +1749,13 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         criterionTypeCounter = {'min':0,'max':0}
         criteria = OrderedDict()
         for i in range(numberOfCriteria):
-            g = ('g%%0%dd' % ng) % (i+1)
-            criteria[g] = {}
             criterionType = random.choice(criterionTypesList)
             criterionTypeCounter[criterionType] += 1
+            if criterionType == 'min':
+                g = ('c%%0%dd' % ng) % (criterionTypeCounter[criterionType])
+            else:
+                g = ('b%%0%dd' % ng) % (criterionTypeCounter[criterionType])               
+            criteria[g] = {}
             criteria[g]['preferenceDirection'] = criterionType
             if criterionType == 'min':
                 scaleType = random.choice(minScaleTypesList)
@@ -1760,6 +1764,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             criteria[g]['scaleType'] = scaleType
             if criterionType == 'min':
                 criteria[g]['objective'] = 'C'
+                criteria[g]['shortName'] = g
                 objectives['C']['criteria'].append(g)
                 if scaleType == 'ordinal':
                     criteria[g]['name'] = 'random ordinal cost criterion'
@@ -1768,6 +1773,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             else:
                 criteria[g]['objective'] = 'B'
                 objectives['B']['criteria'].append(g)
+                criteria[g]['shortName'] = g
                 if scaleType == 'ordinal':
                     criteria[g]['name'] = 'random ordinal benefit criterion'
                 else:
