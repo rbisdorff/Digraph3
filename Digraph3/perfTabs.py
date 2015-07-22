@@ -1771,6 +1771,8 @@ The performance evaluations of each decision alternative on each criterion are g
                                    pageTitle=None,
                                    ndigits=2,
                                    Ranked=True,
+                                   from_i=None,
+                                   to_i=None,
                                    strategy='optimistic',
                                    Correlations=False,
                                    Threading=False,
@@ -1790,6 +1792,8 @@ The performance evaluations of each decision alternative on each criterion are g
             fo.write(self.htmlPerformanceHeatmap(criteriaList=criteriaList,
                                                  actionsList=actionsList,
                                                  Ranked=Ranked,
+                                                 from_i=from_i,
+                                                 to_i=to_i,
                                                  strategy=strategy,
                                                  ndigits=ndigits,
                                                  colorLevels=colorLevels,
@@ -1802,6 +1806,8 @@ The performance evaluations of each decision alternative on each criterion are g
             fo.write(pt.htmlPerformanceHeatmap(criteriaList=criteriaList,
                                                  actionsList=actionsList,
                                                  Ranked=Ranked,
+                                                 from_i=from_i,
+                                                 to_i=to_i,
                                                  strategy=strategy,
                                                  ndigits=ndigits,
                                                  colorLevels=colorLevels,
@@ -1816,6 +1822,8 @@ The performance evaluations of each decision alternative on each criterion are g
     def htmlPerformanceHeatmap(self,criteriaList=None,
                                actionsList=None,
                                Ranked=True,
+                               from_i=None,
+                               to_i=None,
                                strategy='average',
                                ndigits=2,
                                contentCentered=True,
@@ -1915,7 +1923,16 @@ The performance evaluations of each decision alternative on each criterion are g
         else:
             actionsList = [x for x in flatten(actionsList)]
         quantileColor={}
-        for x in actionsList:
+        if from_i == None:
+            from_i = 0
+        if to_i == None:
+            to_i = len(actionsList)
+        if from_i != 0 or to_i != len(actionsList):
+            html += '<h3>List extract from %d to %d</h3>\n' % (from_i+1,to_i)
+            
+        for i in range(from_i,to_i):
+            x = actionsList[i]
+#        for x in actionsList:
             quantileColor[x] = {}
             for g in criteriaList:
                 quantilexg = self.computeActionCriterionQuantile(x,g)
@@ -1962,7 +1979,9 @@ The performance evaluations of each decision alternative on each criterion are g
             html += '</tr>\n'
         if Debug:
             print(html)
-        for x in actionsList:
+        for i in range(from_i,to_i):
+        #for x in actionsList:
+            x = actionsList[i]
             try:
                 xName = self.actions[x]['shortName']
             except:
@@ -6260,7 +6279,7 @@ if __name__ == "__main__":
 ##                                   missingDataProbability=0.1,
 ##                                   seed=101,Threading=False)
     t = Random3ObjectivesPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=20,
+                                   numberOfActions=50,
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
                                    Debug=False,
@@ -6272,9 +6291,9 @@ if __name__ == "__main__":
 ##    tt.showCriteria(ByObjectives=True)
 ##    tt.showCriteria(Alphabetic=True)
 ##    tt.showCriteria()
-    t.showHTMLPerformanceHeatmap(Correlations=True,
+    t.showHTMLPerformanceHeatmap(Correlations=True,to_i=5,
                                  ndigits=0,objectivesList=['Soc','Env'])
-    t.showHTMLPerformanceHeatmap(Correlations=True,
+    t.showHTMLPerformanceHeatmap(Correlations=True,from_i=5,to_i=10,
                                  ndigits=0,objectivesList=['Eco'])
 ##    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,objectivesList=['B'])
     

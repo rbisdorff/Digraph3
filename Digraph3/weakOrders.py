@@ -1203,7 +1203,6 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                  StoreSorting=True,
                  Threading=True,
                  nbrCores=None,
-                 chunkSize=1,
                  Comments=False,
                  Debug=False):
         
@@ -1336,10 +1335,8 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                             if Comments:
                                 print(res)
                     elif rankingRule == "KohlerRule":
-                        chksize=chunkSize
                         for res in pool.imap(_jobTaskKohler,
-                                                       filledCategKeys,
-                                                       chksize):
+                                                       filledCategKeys):
                             if Comments:
                                 print(res)               
                     elif rankingRule == "Test":
@@ -1689,11 +1686,11 @@ if __name__ == "__main__":
     from linearOrders import *
     from time import time
     
-    Threading=False
-    t = PerformanceTableau('auditor2_1')
-    t.showHTMLPerformanceHeatmap()
-##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-##                                   numberOfActions=100)
+    Threading=True
+##    t = PerformanceTableau('auditor2_1')
+##    t.showHTMLPerformanceHeatmap()
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                   numberOfActions=500,seed=100)
 ##    t.saveXMCDA2('test')
     #t = XMCDA2PerformanceTableau('uniSorting')
 ##    t = XMCDA2PerformanceTableau('test')
