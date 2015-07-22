@@ -1460,7 +1460,7 @@ if __name__ == "__main__":
     from weakOrders import QuantilesRankingDigraph
     MP  = True
     t0 = time()
-    tp = Random3ObjectivesPerformanceTableau(numberOfActions=750,
+    tp = Random3ObjectivesPerformanceTableau(numberOfActions=1000,
                                       seed=100)
 ##    tp = RandomCBPerformanceTableau(numberOfActions=750,Threading=MP,
 ##                                      seed=100)
