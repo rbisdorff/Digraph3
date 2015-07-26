@@ -1905,7 +1905,8 @@ class QuantilesSortingDigraph(SortingDigraph):
         if Debug:
             print('g,n,gValues',g,n,gValues)
 ##        if n > 0:
-        nf = Decimal(str(n+1))
+##        nf = Decimal(str(n+1))
+        nf = Decimal(str(n))
         limitingQuantiles = copy(self.limitingQuantiles)
         limitingQuantiles.sort()
         if Debug:
@@ -3200,14 +3201,15 @@ if __name__ == "__main__":
     #t = XMCDA2PerformanceTableau('test')  
     #t.showHTMLPerformanceHeatmap(colorLevels=9,ndigits=2,Correlations=True)
     qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
-                                     Threading=True,
-                                     Debug=True)
+                                     Threading=False,
+                                     Debug=False)
     qs.showHTMLQuantileOrdering(strategy='average')
 ##    qs.showSortingCharacteristics('a01')
     qs.showWeakOrder()
     qs.showQuantileOrdering(strategy='average')
     #qs.exportGraphViz('test')
     qs.showActionsSortingResult()
+    qs.showHTMLMCRSPerformanceTableau()
 
 ##    qs0 = _QuantilesSortingDigraph(t,15,LowerClosed=False,
 ##                                     Threading=False,
