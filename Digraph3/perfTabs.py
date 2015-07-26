@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# testing commit - ian
 # -*- coding: utf-8 -*-
 # Python implementation of digraphs
 # submodule perfTabs.py  for performance tableaux  
@@ -1766,13 +1767,10 @@ The performance evaluations of each decision alternative on each criterion are g
 
     def showHTMLPerformanceHeatmap(self,actionsList=None,
                                    criteriaList=None,
-                                   objectivesList=None,
                                    colorLevels=7,
                                    pageTitle=None,
                                    ndigits=2,
                                    Ranked=True,
-                                   from_i=None,
-                                   to_i=None,
                                    strategy='optimistic',
                                    Correlations=False,
                                    Threading=False,
@@ -1781,40 +1779,20 @@ The performance evaluations of each decision alternative on each criterion are g
         shows the html heatmap version of the performance tableau in a browser window.
         """
         import webbrowser
-        from tempfile import NamedTemporaryFile
-##        fileName = '/tmp/performanceHeatmap.html'
-        tempFile = NamedTemporaryFile(delete=False)
-        fileName = tempFile.name
+        fileName = '/tmp/performanceHeatmap.html'
         fo = open(fileName,'w')
         if pageTitle == None:
             pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
-        if objectivesList == None:          
-            fo.write(self.htmlPerformanceHeatmap(criteriaList=criteriaList,
-                                                 actionsList=actionsList,
-                                                 Ranked=Ranked,
-                                                 from_i=from_i,
-                                                 to_i=to_i,
-                                                 strategy=strategy,
-                                                 ndigits=ndigits,
-                                                 colorLevels=colorLevels,
-                                                 pageTitle=pageTitle,
-                                                 Correlations=Correlations,
-                                                 Debug=Debug))
-        else:
-            pt = PartialPerformanceTableau(self,objectivesSubset=objectivesList)
-            pageTitle = 'Partial Heatmap of Performance Tableau \'%s\'' % self.name
-            fo.write(pt.htmlPerformanceHeatmap(criteriaList=criteriaList,
-                                                 actionsList=actionsList,
-                                                 Ranked=Ranked,
-                                                 from_i=from_i,
-                                                 to_i=to_i,
-                                                 strategy=strategy,
-                                                 ndigits=ndigits,
-                                                 colorLevels=colorLevels,
-                                                 pageTitle=pageTitle,
-                                                 Correlations=Correlations,
-                                                 Debug=Debug))
             
+        fo.write(self.htmlPerformanceHeatmap(criteriaList=criteriaList,
+                                             actionsList=actionsList,
+                                             Ranked=Ranked,
+                                             strategy=strategy,
+                                             ndigits=ndigits,
+                                             colorLevels=colorLevels,
+                                             pageTitle=pageTitle,
+                                             Correlations=Correlations,
+                                             Debug=Debug))
         fo.close()
         url = 'file://'+fileName
         webbrowser.open_new(url)
@@ -1822,8 +1800,6 @@ The performance evaluations of each decision alternative on each criterion are g
     def htmlPerformanceHeatmap(self,criteriaList=None,
                                actionsList=None,
                                Ranked=True,
-                               from_i=None,
-                               to_i=None,
                                strategy='average',
                                ndigits=2,
                                contentCentered=True,
@@ -1902,7 +1878,7 @@ The performance evaluations of each decision alternative on each criterion are g
             actionsList = qr.computeQsRbcRanking()
             if Debug:
                 print(actionsList)
-        
+
         if criteriaList == None:
             if Correlations:
                 criteriaCorrelation =\
@@ -1923,16 +1899,7 @@ The performance evaluations of each decision alternative on each criterion are g
         else:
             actionsList = [x for x in flatten(actionsList)]
         quantileColor={}
-        if from_i == None:
-            from_i = 0
-        if to_i == None:
-            to_i = len(actionsList)
-        if from_i != 0 or to_i != len(actionsList):
-            html += '<h3>List extract from %d to %d</h3>\n' % (from_i+1,to_i)
-            
-        for i in range(from_i,to_i):
-            x = actionsList[i]
-#        for x in actionsList:
+        for x in actionsList:
             quantileColor[x] = {}
             for g in criteriaList:
                 quantilexg = self.computeActionCriterionQuantile(x,g)
@@ -1979,9 +1946,7 @@ The performance evaluations of each decision alternative on each criterion are g
             html += '</tr>\n'
         if Debug:
             print(html)
-        for i in range(from_i,to_i):
-        #for x in actionsList:
-            x = actionsList[i]
+        for x in actionsList:
             try:
                 xName = self.actions[x]['shortName']
             except:
@@ -2009,7 +1974,7 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</tr>\n'
         html += '</table>\n'
         if criteriaCorrelation != None:
-            html += '<i>(*) tau: Ordinal (Kendall) correlation of marginal criterion and global linear ranking.</i>\n'
+            html += '<i>(*) tau: Ordinal (Kendall) correlation of marginal criterion and global outranking relation.</i>\n'
         html += '</body></html>'
         return html
 
@@ -3471,8 +3436,7 @@ class PartialPerformanceTableau(PerformanceTableau):
     """
     Constructor for partial performance tableaux concerning a subset of actions and/or criteria and/or objectives
     """
-    def __init__(self,inPerfTab,actionsSubset=None,\
-                 criteriaSubset=None,objectivesSubset=None):
+    def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None,objectivesSubset=None):
         from copy import deepcopy
         from collections import OrderedDict
         # name
@@ -3506,7 +3470,7 @@ class PartialPerformanceTableau(PerformanceTableau):
             else:
                 criteria = deepcopy(inPerfTab.criteria)
         else:
-            objectives = OrderedDict()
+            objectibes = OrderedDict()
             criteria = OrderedDict()
             if criteriaSubset == None:
                 criteriaSubset = list(inPerfTab.criteria.keys())
@@ -6271,34 +6235,22 @@ if __name__ == "__main__":
 
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
-##    t = RandomCBPerformanceTableau(numberOfCriteria=13,
-##                                   numberOfActions=20,
-##                                   weightDistribution='equiobjectives',
-##                                   integerWeights=True,
-##                                   Debug=False,
-##                                   missingDataProbability=0.1,
-##                                   seed=101,Threading=False)
-    t = Random3ObjectivesPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=50,
+    t = RandomCBPerformanceTableau(numberOfCriteria=13,
+                                   numberOfActions=20,
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
                                    Debug=False,
-##                                   missingDataProbability=0.1,
-                                   seed=101)
+                                   missingDataProbability=0.1,
+                                   seed=101,Threading=False)
     t.save(valueDigits=3)
     tt = PerformanceTableau('tempperftab')
     tt.showObjectives()
-##    tt.showCriteria(ByObjectives=True)
-##    tt.showCriteria(Alphabetic=True)
-##    tt.showCriteria()
-    t.showHTMLPerformanceHeatmap(Correlations=True,to_i=5,
-                                 ndigits=0,objectivesList=['Soc','Env'])
-    t.showHTMLPerformanceHeatmap(Correlations=True,from_i=5,to_i=10,
-                                 ndigits=0,objectivesList=['Eco'])
-##    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,objectivesList=['B'])
+    tt.showCriteria(ByObjectives=True)
+    tt.showCriteria(Alphabetic=True)
+    tt.showCriteria()
+    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0)
     
-
-    ##    t = ConstantPerformanceTableau(t,
+##    t = ConstantPerformanceTableau(t,
 ##                                   actionsSubset=['a01','a02','a03'],
 ##                                   criteriaSubset=['g01','g02','g03'],
 ##                                   position=0.75)

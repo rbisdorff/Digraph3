@@ -1463,10 +1463,11 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
 
     def showActions(self,Debug=False):
         print('*----- show decision action --------------*')
+        actions = self.actions
         for x in actions:
             print('key: ',x)
-            print('  name:      ',self.actions[x]['name'])
-            print('  profile:   ',self.actions[x]['profile'])
+            print('  name:      ',actions[x]['name'])
+            print('  profile:   ',actions[x]['profile'])
             if Debug:
                 for g in criteria:
                     print(g, self.actions[x]['generators'][g])
