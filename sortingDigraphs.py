@@ -1884,7 +1884,6 @@ class QuantilesSortingDigraph(SortingDigraph):
         """
         Renders the list of limiting quantiles on criteria g
         """
-        #Debug=True
         from math import floor
         from copy import copy, deepcopy
         LowerClosed = self.criteriaCategoryLimits['LowerClosed']
@@ -1906,7 +1905,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         if Debug:
             print('g,n,gValues',g,n,gValues)
 ##        if n > 0:
-        nf = Decimal(str(n))
+        nf = Decimal(str(n+1))
         limitingQuantiles = copy(self.limitingQuantiles)
         limitingQuantiles.sort()
         if Debug:
@@ -3193,22 +3192,22 @@ if __name__ == "__main__":
     #t.showHTMLPerformanceHeatmap(ndigits=0,Correlations=True)
     #t = XMCDA2PerformanceTableau('spiegel2004')
     #t = XMCDA2PerformanceTableau('ex1')
-##    t = RandomCBPerformanceTableau(numberOfActions=15,
-##                                   numberOfCriteria=5,
-##                                   weightDistribution='equiobjectives',
-##                                   seed=100)
+    ## t = RandomCBPerformanceTableau(numberOfActions=15,
+    ##                                numberOfCriteria=5,
+    ##                                weightDistribution='equiobjectives',
+    ##                                seed=100)
 ##    t.saveXMCDA2('test',servingD3=False)
     #t = XMCDA2PerformanceTableau('test')  
-    t.showHTMLPerformanceHeatmap(colorLevels=9,ndigits=2,Correlations=True)
-    qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=True,
-                                     Threading=False,
-                                     Debug=False)
-##    qs.showHTMLQuantileOrdering(strategy='average')
+    #t.showHTMLPerformanceHeatmap(colorLevels=9,ndigits=2,Correlations=True)
+    qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
+                                     Threading=True,
+                                     Debug=True)
+    qs.showHTMLQuantileOrdering(strategy='average')
 ##    qs.showSortingCharacteristics('a01')
-##    qs.showWeakOrder()
-##    qs.showQuantileOrdering(strategy='average')
+    qs.showWeakOrder()
+    qs.showQuantileOrdering(strategy='average')
     #qs.exportGraphViz('test')
-##    qs.showActionsSortingResult()
+    qs.showActionsSortingResult()
 
 ##    qs0 = _QuantilesSortingDigraph(t,15,LowerClosed=False,
 ##                                     Threading=False,
