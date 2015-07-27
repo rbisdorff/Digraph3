@@ -2091,23 +2091,26 @@ if __name__ == "__main__":
     from randomPerfTabs import *
     from time import time
     t0 = time()
-##    t = RandomCBPerformanceTableau(numberOfActions=20,
-##                                   numberOfCriteria=13,
-##                                   samplingSize=100000,
-##                                   seed=100)
-##    print(time()-t0)
+    t = RandomCBPerformanceTableau(numberOfActions=20,
+                                   numberOfCriteria=13,
+                                   samplingSize=100000,
+                                   seed=100)
+    print(time()-t0)
 ##    t.showCriteria()
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=31,
-                                            numberOfCriteria=13,
-                                            OrdinalScales=False,
-                                            commonScale=None,
-                                            weightDistribution='equiobjectives',
-                                            #weightScale=(1,5),
-                                            commonMode=('beta','variable',None),
-                                            vetoProbability=0.5,
-                                            seed=120)
+##    t = Random3ObjectivesPerformanceTableau(numberOfActions=100,
+##                                            numberOfCriteria=13,
+##                                            OrdinalScales=False,
+##                                            commonScale=None,
+##                                            weightDistribution='equiobjectives',
+##                                            #weightScale=(1,5),
+##                                            commonMode=('beta','variable',None),
+##                                            vetoProbability=0.5,
+##                                            seed=120)
     t.showObjectives()
     t.showCriteria()
+    t.csvAllQuantiles('q')
+    print(t.showAllQuantiles())
+    
 ##    #t.showActions(Debug=True)
 ##    teco = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Eco']['criteria'])
 ##    tenv = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Env']['criteria'])

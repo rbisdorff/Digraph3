@@ -78,7 +78,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
         If Threading, the 
         """
-        gc = BipolarOutrankingDigraph(self,coalition=[criterion],
+        gc = BipolarOutrankingDigraph(self,coalition=[criterion],CopyPerfTab=True,
                                       Threading=Threading,nbrCores=nbrOfCPUs,
                                       Comments=Comments)
         corr = self.computeOrdinalCorrelation(gc)
@@ -86,7 +86,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print(corr)
         return corr
 
-    def computeMarginalVersusGlobalOutrankingCorrelations(self,Sorted=True,\
+    def computeMarginalVersusGlobalOutrankingCorrelations(self,Sorted=True,
                                                           Threading=False,nbrCores=None,\
                                                           Comments=False):
         """
@@ -110,9 +110,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 correlations = proc.map(self.computeCriterionCorrelation,criteriaList)
             criteriaCorrelation = [(correlations[i]['correlation'],criteriaList[i]) for i in range(len(criteriaList))]
         else:
-            criteriaList = [x for x in self.criteria]
+            #criteriaList = [x for x in self.criteria]
+            criteria = self.criteria
             criteriaCorrelation = []
-            for c in criteriaList:
+            for c in dict.keys(criteria):
                 corr = self.computeCriterionCorrelation(c,Threading=False)
                 criteriaCorrelation.append((corr['correlation'],c))            
         if Sorted:
@@ -3586,6 +3587,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  hasNoVeto=False,\
                  hasBipolarVeto=True,\
                  Normalized=False,\
+                 CopyPerfTab=True,\
                  Threading=False,\
                  WithConcordanceRelation=True,\
                  WithVetoCounts=True,\
@@ -3615,7 +3617,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 actions[x] = {'name': str(x)}
             self.actions = actions
         else:
-            self.actions = deepcopy(perfTab.actions)
+            if CopyPerfTab:
+                self.actions = deepcopy(perfTab.actions)
+            else:
+                self.actions = perfTab.actions
         Min =   Decimal('-100.0')
         Med =   Decimal('0.0')
         Max =   Decimal('100.0')
@@ -3623,15 +3628,21 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
         if coalition == None:
             try:
-                self.objectives = deepcopy(perfTab.objectives)
+                if CopyPerfTab:
+                    self.objectives = deepcopy(perfTab.objectives)
+                else:
+                    self.objectives = perfTab.objectives
             except:
                 pass
-            self.criteria = deepcopy(perfTab.criteria)
+            if CopyPerfTab:
+                self.criteria = deepcopy(perfTab.criteria)
+            else:
+                self.criteria = perfTab.criteria
             
         else:
             criteria = {}
             for g in coalition:
-                criteria[g] = deepcopy(perfTab.criteria[g])
+                criteria[g] = perfTab.criteria[g]
             self.criteria = criteria
         self.convertWeightFloatToDecimal()
         #  install method Data and parameters
@@ -3656,19 +3667,28 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         self.methodData = methodData
 
         # insert performance Data
-        self.evaluation = deepcopy(perfTab.evaluation)
+        if CopyPerfTab:
+            self.evaluation = deepcopy(perfTab.evaluation)
+        else:
+            self.evaluation = perfTab.evaluation
         self.convertEvaluationFloatToDecimal()
         try:
-            self.description = deepcopy(perfTab.description)
+            if CopyPerfTab:
+                self.description = deepcopy(perfTab.description)
+            else:
+                self.description = perfTab.description
         except:
             pass
         # init general digraph Data
         self.order = len(self.actions)
         
         # construct outranking relation
-        actionsKeys = list(self.actions.keys())
-        self.relation = self._constructRelationWithThreading(self.criteria,\
-                                                self.evaluation,\
+        actions = self.actions
+        criteria = self.criteria
+        evaluation = self.evaluation
+        actionsKeys = list(dict.keys(actions))
+        self.relation = self._constructRelationWithThreading(criteria,\
+                                                evaluation,\
                                                 initial=actionsKeys,\
                                                 terminal=actionsKeys,\
                                                 hasNoVeto=hasNoVeto,\
@@ -3958,7 +3978,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             terminal = self.actions
         
         totalweight = Decimal('0.0')
-        for c in criteria:
+        for c in dict.keys(criteria):
             totalweight = totalweight + criteria[c]['weight']
         relation = {}
         concordanceRelation = {}

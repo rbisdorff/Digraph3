@@ -1252,7 +1252,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                          Threading=True,
                          nbrCores=nbrCores,
                          CompleteOutranking = False,
-                        StoreSorting=StoreSorting,)                
+                        StoreSorting=StoreSorting,Debug=Debug)                
         else:
             qs = QuantilesSortingDigraph(perfTab,
                          limitingQuantiles=limitingQuantiles,
@@ -1263,7 +1263,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                          #maxValuation=maxValuation,
                          outrankingType = outrankingType,
                          CompleteOutranking = True,
-                        StoreSorting=StoreSorting)
+                        StoreSorting=StoreSorting,Debug=Debug)
         self.runTimes = {'sorting': time() - t0}
         if Comments:
             print('execution time: %.4f' % (self.runTimes['sorting']))
@@ -1272,7 +1272,9 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         self.strategy = strategy
         catContent = {}
         tw = time()
-        weakOrdering = QsRbcWeakOrdering.computeWeakOrder(qs,strategy=strategy)
+        weakOrdering = QuantilesRankingDigraph.computeWeakOrder(qs,strategy=strategy)
+        if Debug:
+            print(weakOrdering)
         self.runTimes['preordering'] = time() - tw
         if Comments:
             print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )
@@ -1439,21 +1441,21 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
             self.runTimes['withoutThreading'] = time() - t0
 
         self.name = 'qsrbc-'+qs.name
-        self.actions = copy(qs.actions)
+        self.actions = qs.actions
         self.order = len(self.actions)
-        self.criteria = copy(qs.criteria)
-        self.evaluation = copy(qs.evaluation)
-        self.categories = copy(qs.categories)
-        self.limitingQuantiles = copy(qs.limitingQuantiles)
-        self.criteriaCategoryLimits = copy(qs.criteriaCategoryLimits)
-        self.profiles = copy(qs.profiles)
-        self.valuationdomain = copy(qs.valuationdomain)
-        self.catRbc = copy(catRbc)
+        self.criteria = qs.criteria
+        self.evaluation = qs.evaluation
+        self.categories = qs.categories
+        self.limitingQuantiles = qs.limitingQuantiles
+        self.criteriaCategoryLimits = qs.criteriaCategoryLimits
+        self.profiles = qs.profiles
+        self.valuationdomain = qs.valuationdomain
+        self.catRbc = catRbc
         try:
-            self.relationOrig = copy(qs.relationOrig)
+            self.relationOrig = qs.relationOrig
         except:
             pass
-        self.relation = copy(qsRelation)
+        self.relation = qsRelation
         self._constructRelation(strategy=strategy,Debug=Debug)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -1473,11 +1475,12 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
             Decending = False
         preOrdering = self.computeQsRbcRanking(Descending=Descending,Debug=Debug)
         relation = self.computePreorderRelation(preOrdering,Normalized=False)
-        actionsList = [x for x in self.actions]
+        #actionsList = [x for x in self.actions]
+        actions = self.actions
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
-        for x in actionsList:
-            for y in actionsList:
+        for x in dict.keys(actions):
+            for y in dict.keys(actions):
                 #self.relation[x][y] = relation[x][y]
                 self.relation[x][y] = Max - relation[y][x] + Min 
 
@@ -1487,8 +1490,10 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         """
         if strategy == None:
             strategy = self.strategy
+        actions = self.actions
+        categories = self.categories
         actionsCategories = {}
-        for x in self.actions:
+        for x in actions:
             a,lowCateg,highCateg,credibility =\
                      self.showActionCategories(x,Comments=Debug)
             if strategy == "optimistic":
@@ -1526,30 +1531,30 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
             if Comments:
                 if strategy == "optimistic":
                     if self.criteriaCategoryLimits['LowerClosed']:
-                        print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
-                                                self.categories[str(item[0][0])]['highLimit'],\
+                        print('%s-%s : %s' % (categories[str(item[0][1])]['lowLimit'],\
+                                                categories[str(item[0][0])]['highLimit'],\
                                                 str(item[1])) )
                     else:
-                        print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
-                                                self.categories[str(item[0][0])]['highLimit'],\
+                        print('%s-%s : %s' % (categories[str(item[0][1])]['lowLimit'],\
+                                                categories[str(item[0][0])]['highLimit'],\
                                                 str(item[1])) )
                 elif strategy == "pessimistic":
                     if self.criteriaCategoryLimits['LowerClosed']:
-                        print('%s-%s : %s' % (self.categories[str(item[0][0])]['lowLimit'],\
-                                                self.categories[str(item[0][1])]['highLimit'],\
+                        print('%s-%s : %s' % (categories[str(item[0][0])]['lowLimit'],\
+                                                categories[str(item[0][1])]['highLimit'],\
                                                 str(item[1])) )
                     else:
-                        print('%s-%s : %s' % (self.categories[str(item[0][0])]['lowLimit'],\
-                                                self.categories[str(item[0][1])]['highLimit'],\
+                        print('%s-%s : %s' % (categories[str(item[0][0])]['lowLimit'],\
+                                                categories[str(item[0][1])]['highLimit'],\
                                                 str(item[1])) )                   
                 elif strategy == "average":
                     if self.criteriaCategoryLimits['LowerClosed']:
-                        print('%s-%s : %s' % (self.categories[str(item[0][2])]['lowLimit'],\
-                                                self.categories[str(item[0][1])]['highLimit'],\
+                        print('%s-%s : %s' % (categories[str(item[0][2])]['lowLimit'],\
+                                                categories[str(item[0][1])]['highLimit'],\
                                                 str(item[1])) )
                     else:
-                        print('%s-%s : %s' % (self.categories[str(item[0][2])]['lowLimit'],\
-                                                self.categories[str(item[0][1])]['highLimit'],\
+                        print('%s-%s : %s' % (categories[str(item[0][2])]['lowLimit'],\
+                                                categories[str(item[0][1])]['highLimit'],\
                                                 str(item[1])) )
 
             weakOrdering.append(item[1])
@@ -1639,7 +1644,9 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         """
         ordering = self.computeQsRbcRanking(Descending=Descending,
                                        Comments=False)
-        print([x for x in flatten(ordering)])
+        ordering = [x for x in flatten(ordering)]
+        print(ordering)
+        return ordering
 
     def exportSortingGraphViz(self,fileName=None,direction='decreasing',\
                        noSilent=True,graphType='png',\
@@ -1670,7 +1677,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         """
         selfOrder = self.computePreorderRelation(self.computeQsRbcRanking())
         #print('selfOrder',selfOrder)
-        g = BipolarOutrankingDigraph(self,Threading=Threading)
+        g = BipolarOutrankingDigraph(self,Threading=Threading,CopyPerfTab=False)
         return g.computeOrdinalCorrelation(selfOrder)
 
 #----------               
@@ -1690,8 +1697,8 @@ if __name__ == "__main__":
     from time import time
     
     Threading=False
-    t = PerformanceTableau('auditor2_1')
-    t.showHTMLPerformanceHeatmap()
+    t = PerformanceTableau('auditor2_2')
+    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,Debug=True)
 ##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
 ##                                   numberOfActions=100)
 ##    t.saveXMCDA2('test')
