@@ -1418,10 +1418,13 @@ class QuantilesSortingDigraph(SortingDigraph):
                     evaluation[g][cKey] = Decimal(str(criteriaCategoryLimits[g][int(c)]))
 
         self.profiles = profiles
-        self.profileLimits = list(dict.keys(profiles))
+        profileLimits = list(dict.keys(profiles))
+        profileLimits.sort()
+        self.profileLimits = profileLimits
+        
         if Debug:
-            print('Profiles',profiles)
-
+            print('self.profiles',profiles)
+            print('self.profileLimits',profileLimits)
             
         #self.convertEvaluationFloatToDecimal()
 
