@@ -3212,29 +3212,27 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
 
-    t = PerformanceTableau('auditor2_1')
-    t.showHTMLPerformanceHeatmap(ndigits=0,Correlations=True,Debug=True)
+##    t = PerformanceTableau('auditor2_2')
+##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
     #t = XMCDA2PerformanceTableau('spiegel2004')
     #t = XMCDA2PerformanceTableau('ex1')
-    ## t = RandomCBPerformanceTableau(numberOfActions=15,
-    ##                                numberOfCriteria=5,
-    ##                                weightDistribution='equiobjectives',
-    ##                                seed=100)
+    t = RandomCBPerformanceTableau(numberOfActions=15,
+                                    numberOfCriteria=5,
+                                    weightDistribution='equiobjectives',
+                                    seed=100)
 ##    t.saveXMCDA2('test',servingD3=False)
     #t = XMCDA2PerformanceTableau('test')  
-    #t.showHTMLPerformanceHeatmap(colorLevels=9,ndigits=2,Correlations=True)
-##    qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
-##                                     Threading=False,
-##                                     Debug=False)
-##    qs.showHTMLQuantileOrdering(strategy='average')
-####    qs.showSortingCharacteristics('a01')
-##    qs.showWeakOrder()
-##    qs.showQuantileOrdering(strategy='average')
-##    #qs.exportGraphViz('test')
-##    qs.showActionsSortingResult()
-##    qr = QuantilesRankingDigraph(t,7,LowerClosed=True,PrefThresholds=True,Threading=False)
-##    qr.showRanking()
-##    qr.showSorting()
+    t.showHTMLPerformanceHeatmap(colorLevels=9,ndigits=2,Correlations=True)
+    qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
+                                     Threading=False,
+                                     Debug=False)
+    qs.showHTMLQuantileOrdering(strategy='average')
+    qs.showWeakOrder()
+    qs.showQuantileOrdering(strategy='average')
+    qs.showActionsSortingResult()
+    qr = QuantilesRankingDigraph(t,7,LowerClosed=True,PrefThresholds=True,Threading=False)
+    qr.showRanking()
+    qr.showSorting()
 
 ##    qs0 = _QuantilesSortingDigraph(t,15,LowerClosed=False,
 ##                                     Threading=False,

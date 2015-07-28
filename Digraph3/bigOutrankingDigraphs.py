@@ -253,6 +253,83 @@ class BigDigraph(object):
         Med = (Min+Max)/Decimal('2')
         self.valuationdomain = { 'min':Min, 'max':Max, 'med':Med }
 
+##    def computeCriterionCorrelation(self,criterion,Threading=False,\
+##                                    nbrOfCPUs=None,Debug=False,
+##                                    Comments=False):
+##        """
+##        Renders the ordinal correlation coefficient between
+##        the global outranking and the marginal criterion relation.
+##
+##        If Threading, the 
+##        """
+##        gc = BipolarOutrankingDigraph(self,coalition=[criterion],
+##                                      Normalized=True,CopyPerfTab=False,
+##                                      Threading=Threading,nbrCores=nbrOfCPUs,
+##                                      Comments=Comments)
+##        corr = self.computeOrdinalCorrelation(gc)
+##        if Debug:
+##            print(corr)
+##        return corr
+##
+##    def computeMarginalVersusGlobalOutrankingCorrelations(self,Sorted=True,
+##                                                          Threading=False,nbrCores=None,\
+##                                                          Comments=False):
+##        """
+##        Method for computing correlations between each individual criterion relation with the corresponding
+##        global outranking relation.
+##        
+##        Returns a list of tuples (correlation,criterionKey) sorted by default in decreasing order of the correlation.
+##
+##        If Threading is True, a multiprocessing Pool class is used with a parallel equivalent of the built-in map function.
+##
+##        If nbrCores is not set, the os.cpu_count() function is used to determine the number of
+##        available cores.
+##        """
+##        if Threading:
+##            from multiprocessing import Pool
+##            from os import cpu_count
+##            if nbrCores == None:
+##                nbrCores= cpu_count()
+##            criteriaList = [x for x in self.criteria]
+##            with Pool(nbrCores) as proc:   
+##                correlations = proc.map(self.computeCriterionCorrelation,criteriaList)
+##            criteriaCorrelation = [(correlations[i]['correlation'],criteriaList[i]) for i in range(len(criteriaList))]
+##        else:
+##            #criteriaList = [x for x in self.criteria]
+##            criteria = self.criteria
+##            criteriaCorrelation = []
+##            for c in dict.keys(criteria):
+##                corr = self.computeCriterionCorrelation(c,Threading=False)
+##                criteriaCorrelation.append((corr['correlation'],c))            
+##        if Sorted:
+##            criteriaCorrelation.sort(reverse=True)
+##        return criteriaCorrelation   
+##
+##    def showMarginalVersusGlobalOutrankingCorrelation(self,Sorted=True,Threading=False,\
+##                                                      nbrOfCPUs=None,Comments=True):
+##        """
+##        Show method for computeCriterionCorrelation results.
+##        """
+##        criteria = self.criteria
+##        #criteriaList = [x for x in self.criteria]
+##        criteriaCorrelation = []
+##        totCorrelation = Decimal('0.0')
+##        for c in dict.keys(criteria):
+##            corr = self.computeCriterionCorrelation(c,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
+##            totCorrelation += corr['correlation']
+##            criteriaCorrelation.append((corr['correlation'],c))
+##        if Sorted:
+##            criteriaCorrelation.sort(reverse=True)
+##        if Comments:
+##            print('Marginal versus global outranking correlation')
+##            print('criterion | weight\t correlation')
+##            print('----------|---------------------------')
+##            for x in criteriaCorrelation:
+##                c = x[1]
+##                print('%9s |  %.2f \t %.3f' % (c,self.criteria[c]['weight'],x[0]))
+##            print('Sum(Correlations) : %.3f' % (totCorrelation))
+##            print('Determinateness   : %.3f' % (corr['determination']))
+
 ########################
 class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
     """
@@ -429,34 +506,79 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
 
     # ----- class methods ------------
 
-##    def __repr__(self):
-##        """
-##        Default presentation method for big outrankingDigraphs instances.
-##        """
-##        print('*----- show short --------------*')
-##        print('Instance name     : %s' % self.name)
-##        if WithSize:
-##            print('Size (in bytes)   : %d' % total_size(self))
-##        print('# Actions         : %d' % self.order)
-##        print('# Criteria        : %d' % self.dimension)
-##        print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
-##        print('Ordering strategy : %s' % self.sortingParameters['strategy'])
-##        print('# Components      : %d' % self.nbrComponents)
-##        print('Minimal size      : %d' % self.minimalComponentSize)
-##        print('Maximal size      : %d' % (self.computeDecompositionSummaryStatistics())['max'])
-##        print('Median size      : %d' % (self.computeDecompositionSummaryStatistics())['median'])
-##        if WithComponents:
-##            g.showDecomposition()
-##        print('----  Constructor run times (in sec.) ----')
-##        print('Total time        : %.5f' % self.runTimes['totalTime'])
-##        print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
-##        print('Preordering       : %.5f' % self.runTimes['preordering'])
-##        print('Decomposing       : %.5f' % self.runTimes['decomposing'])
-##        try:
-##            print('Ordering          : %.5f' % self.runTimes['ordering'])
-##        except:
-##            pass
-##        return 'Default presentation of BigOutrankingDigraphs'
+    def computeCriterionCorrelation(self,criterion,Threading=False,\
+                                    nbrOfCPUs=None,Debug=False,
+                                    Comments=False):
+        """
+        Renders the ordinal correlation coefficient between
+        the global outranking and the marginal criterion relation.
+        
+        """
+        #print(criterion)
+        gc = BipolarOutrankingDigraph(self,coalition=[criterion],
+                                      Normalized=True,CopyPerfTab=False,
+                                      Threading=Threading,nbrCores=nbrOfCPUs,
+                                      Comments=Comments)
+        globalOrdering = self.ranking2Preorder(self.boostedKohlerRanking)
+        globalRelation = gc.computePreorderRelation(globalOrdering)
+        corr = gc.computeOrdinalCorrelation(globalRelation)
+        if Debug:
+            print(corr)
+        return corr
+
+    def computeMarginalVersusGlobalOutrankingCorrelations(self,Sorted=True,
+                                                          Threading=False,nbrCores=None,\
+                                                          Comments=False):
+        """
+        Method for computing correlations between each individual criterion relation with the corresponding
+        global outranking relation.
+        
+        Returns a list of tuples (correlation,criterionKey) sorted by default in decreasing order of the correlation.
+
+        If Threading is True, a multiprocessing Pool class is used with a parallel equivalent of the built-in map function.
+
+        If nbrCores is not set, the os.cpu_count() function is used to determine the number of
+        available cores.
+        """
+        if Threading:
+            from multiprocessing import Pool
+            from os import cpu_count
+            if nbrCores == None:
+                nbrCores= cpu_count()
+            criteriaList = [x for x in self.criteria]
+            with Pool(nbrCores) as proc:   
+                correlations = proc.map(self.computeCriterionCorrelation,criteriaList)
+            criteriaCorrelation = [(correlations[i]['correlation'],criteriaList[i]) for i in range(len(criteriaList))]
+        else:
+            #criteriaList = [x for x in self.criteria]
+            criteria = self.criteria
+            criteriaCorrelation = []
+            for c in dict.keys(criteria):
+                corr = self.computeCriterionCorrelation(c,Threading=False)
+                criteriaCorrelation.append((corr['correlation'],c))            
+        if Sorted:
+            criteriaCorrelation.sort(reverse=True)
+        return criteriaCorrelation   
+
+    def showMarginalVersusGlobalOutrankingCorrelation(self,Sorted=True,Threading=False,\
+                                                      nbrOfCPUs=None,Comments=True):
+        """
+        Show method for computeCriterionCorrelation results.
+        """
+        criteria = self.criteria
+        criteriaCorrelation = []
+        for c in criteria:
+            corr = self.computeCriterionCorrelation(c,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
+            criteriaCorrelation.append((corr['correlation'],corr['determination'],c))
+        if Sorted:
+            criteriaCorrelation.sort(reverse=True)
+        if Comments:
+            print('Marginal versus global outranking correlation')
+            print('criterion | weight\t corr\t deter\t corr*deter')
+            print('----------|------------------------------------------')
+            for x in criteriaCorrelation:
+                c = x[2]
+                print('%9s |  %.2f \t %.3f \t %.3f \t %.3f' % (c,criteria[c]['weight'],x[0],x[1],x[0]*x[1]))
 
     def _computeQuantileOrdering(self,strategy=None,
                                 Descending=True,
@@ -1460,12 +1582,12 @@ if __name__ == "__main__":
     from weakOrders import QuantilesRankingDigraph
     MP  = True
     t0 = time()
-    tp = Random3ObjectivesPerformanceTableau(numberOfActions=1000,
-                                      seed=100)
+##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,
+##                                      seed=100)
 ##    tp = RandomCBPerformanceTableau(numberOfActions=750,Threading=MP,
 ##                                      seed=100)
-##    tp = RandomPerformanceTableau(numberOfActions=100,numberOfCriteria=21,
-##                                      seed=100)
+    tp = RandomPerformanceTableau(numberOfActions=100,numberOfCriteria=21,
+                                      seed=100)
     print(time()-t0)
     print(total_size(tp.evaluation))
     t0 = time()
@@ -1473,21 +1595,22 @@ if __name__ == "__main__":
     print(time()-t0)
     qr.showWeakOrder()
     bg1 = BigOutrankingDigraph(tp,quantiles=75,quantilesOrderingStrategy='average',
-                                 LowerClosed=True,
+                                 LowerClosed=False,
                                  minimalComponentSize=1,
                                  Threading=MP,nbrOfCPUs=5,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
     bg1.showDecomposition(direction='decreasing')
     print(bg1)
-    bg2 = BigOutrankingDigraphMP(tp,quantiles=75,quantilesOrderingStrategy='average',
-                                 LowerClosed=True,
-                                 minimalComponentSize=5,
-                                 Threading=MP,nbrOfCPUs=5,Debug=False)
-    print(bg2.computeDecompositionSummaryStatistics())
-    bg2.showDecomposition(direction='decreasing')
-    print(bg2)
-    #bg1.recodeValuation(-10,10,Debug=True)
-    #print(total_size(bg1))
+    bg1.showMarginalVersusGlobalOutrankingCorrelation(Threading=MP)
+##    bg2 = BigOutrankingDigraphMP(tp,quantiles=75,quantilesOrderingStrategy='average',
+##                                 LowerClosed=True,
+##                                 minimalComponentSize=5,
+##                                 Threading=MP,nbrOfCPUs=5,Debug=False)
+##    print(bg2.computeDecompositionSummaryStatistics())
+##    bg2.showDecomposition(direction='decreasing')
+##    print(bg2)
+##    #bg1.recodeValuation(-10,10,Debug=True)
+##    #print(total_size(bg1))
     
 ##    bg2 = BigOutrankingDigraph(tp,quantiles=100,quantilesOrderingStrategy='average',
 ##                                    LowerClosed=False,
@@ -1496,25 +1619,25 @@ if __name__ == "__main__":
 ##    print(total_size(bg2))
 ##    print(bg2.computeDecompositionSummaryStatistics())
 ##    #bg2.showDecomposition()
-    t0 = time()
-    g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=MP)
-    print(time()-t0)
+##    t0 = time()
+##    g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=MP)
+##    print(time()-t0)
 ##    print(total_size(g))
 ##    t0 = time()
 ##    print(bg1.computeOrdinalCorrelation(g,Debug=False))
 ##    print(bg2.computeOrdinalCorrelation(g,Debug=False))
 ##    print(bg2.computeOrdinalCorrelation(bg1,Debug=False))
 ##    print(time()-t0)
-    bg1.showShort('rest1.text')
-    bg2.showShort('rest2.text')
+##    bg1.showShort('rest1.text')
+##    bg2.showShort('rest2.text')
 ##    bg1.showShort()
 ##
-    preordering1 = bg1.ranking2Preorder(bg1.boostedKohlerRanking)
-    print(g.computeOrdinalCorrelation(qr))
-    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering1)))
+##    preordering1 = bg1.ranking2Preorder(bg1.boostedKohlerRanking)
+##    print(g.computeOrdinalCorrelation(qr))
+##    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering1)))
 ##    preordering2 = bg2.computeRankingPreordering()
-    preordering2 = bg1.ranking2Preorder(bg2.boostedKohlerRanking)
-    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering2)))
+##    preordering2 = bg1.ranking2Preorder(bg2.boostedKohlerRanking)
+##    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering2)))
 ##    t0 = time()
 ##    test = Decimal('0')
 ##    for x in bg1.actions:
