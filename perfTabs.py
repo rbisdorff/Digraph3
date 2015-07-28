@@ -1764,6 +1764,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                    pageTitle=None,
                                    ndigits=2,
                                    Ranked=True,
+                                   quantiles=None,
                                    strategy='optimistic',
                                    Correlations=False,
                                    Threading=False,
@@ -1780,6 +1781,7 @@ The performance evaluations of each decision alternative on each criterion are g
         fo.write(self.htmlPerformanceHeatmap(criteriaList=criteriaList,
                                              actionsList=actionsList,
                                              Ranked=Ranked,
+                                             quantiles=quantiles,
                                              strategy=strategy,
                                              ndigits=ndigits,
                                              colorLevels=colorLevels,
@@ -1794,6 +1796,7 @@ The performance evaluations of each decision alternative on each criterion are g
     def htmlPerformanceHeatmap(self,criteriaList=None,
                                actionsList=None,
                                Ranked=True,
+                               quantiles=None,
                                strategy='average',
                                ndigits=2,
                                contentCentered=True,
@@ -1861,15 +1864,30 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</head>\n<body>\n'
         html += '<h2>%s</h2>\n' % pageTitle
 
-        if Ranked and actionsList == None:
-            from weakOrders import QuantilesRankingDigraph
-            qr = QuantilesRankingDigraph(self,LowerClosed=False,
-                                          strategy=strategy,
+
+        if actionsList == None:
+            actions = self.actions
+            actionsList = list(dict.keys(actions))
+            actionsList.sort()
+        na = len(actionsList)
+        
+        if Ranked:
+##            from weakOrders import QuantilesRankingDigraph
+##            qr = QuantilesRankingDigraph(self,LowerClosed=False,
+##                                          strategy=strategy,
+##                                          Threading=Threading,
+##                                          Debug=Debug)
+##            actionsList = [x for x in flatten(qr.computeQsRbcRanking())]
+            if quantiles == None:
+                quantiles = na
+            from bigOutrankingDigraphs import BigOutrankingDigraph
+            qr = BigOutrankingDigraph(self,quantiles=quantiles,LowerClosed=False,
+                                          quantilesOrderingStrategy=strategy,
                                           Threading=Threading,
                                           Debug=Debug)
-            actionsList = [x for x in flatten(qr.computeQsRbcRanking())]
+            actionsList = qr.boostedKohlerRanking
         if Debug:
-                print('1',actionsList)
+            print('1',actionsList)
                 
         if criteriaList == None:
             if Correlations:
@@ -1885,13 +1903,6 @@ The performance evaluations of each decision alternative on each criterion are g
         else:
             criteriaCorrelation = None
             
-        if actionsList == None:
-            actionsList = list(dict.keys(actions))
-            actionsList.sort()
-
-        if Debug:
-            print('3',actionsList)
-        Debug=False
         quantileColor={}
         for x in actionsList:
             quantileColor[x] = {}
@@ -6144,6 +6155,7 @@ if __name__ == "__main__":
     print('FF')
     qsrbc = QuantilesRankingDigraph(t,LowerClosed=False,PrefThresholds=False,Threading=False)
     qsrbc.showSorting()
+    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
 ####    actionsList = qsrbc.computeQsRbcRanking()
 ####
 ##
