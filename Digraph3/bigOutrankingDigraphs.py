@@ -739,15 +739,19 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                     keys[-1],\
                     credibility            
 
-    def showActionsSortingResult(self,actionSubset=None,Debug=False):
+    def showActionsSortingResult(self,actionSubset=None):
         """
         shows the quantiles sorting result all (default) of a subset of the decision actions.
         """
         print('Quantiles sorting result per decision action')
-        for x in actions.keys():
-            self.computeActionCategories(x,Debug=Debug,Show=True)
+        if actionsSubset==None:
+            for x in actions.keys():
+                self.computeActionCategories(x,Show=True)
+        else:
+            for x in actionsSubset:
+                self.computeActionCategories(x,Show=True)
 
-    def showShort(self,fileName=None):
+    def showShort(self,fileName=None,WithFileSize=True):
         """
         Default (__repr__) presentation method for big outranking digraphs instances:
         
@@ -786,12 +790,31 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         
         """
         if fileName == None:
-            print(self)
+            print('*----- show short --------------*')
+            print('Instance name     : %s' % self.name)
+            print('# Actions         : %d' % self.order)
+            print('# Criteria        : %d' % self.dimension)
+            print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
+            print('Ordering strategy : %s' % self.sortingParameters['strategy'])
+            print('# Components      : %d' % self.nbrComponents)
+            print('Minimal size      : %d' % self.minimalComponentSize)
+            print('Maximal size      : %d' % (self.computeDecompositionSummaryStatistics())['max'])
+            print('Median size      : %d' % (self.computeDecompositionSummaryStatistics())['median'])
+            print('----  Constructor run times (in sec.) ----')
+            print('Total time        : %.5f' % self.runTimes['totalTime'])
+            print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
+            print('Preordering       : %.5f' % self.runTimes['preordering'])
+            print('Decomposing       : %.5f' % self.runTimes['decomposing'])
+            try:
+                print('Ordering          : %.5f' % self.runTimes['ordering'])
+            except:
+                pass
         else:
             fo = open(fileName,'a')
             fo.write('*----- show short --------------*')
             fo.write('Instance name      : %s\n' % self.name)
-            fo.write('Size (in bytes)    : %d\n' % total_size(self))
+            if WithFileSize:
+                fo.write('Size (in bytes)    : %d\n' % total_size(self))
             fo.write('# Actions          : %d\n' % self.order)
             fo.write('# Criteria         : %d\n' % self.dimension)
             fo.write('Sorting by         : %d-Tiling\n' % self.sortingParameters['limitingQuantiles'])
@@ -862,38 +885,70 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
     def showDecomposition(self,direction='decreasing'):
         
         print('*--- quantiles decomposition in %s order---*' % (direction) )
-        compKeys = [compKey for compKey in self.components]
-        if direction != 'increasing':
-            compKeys.sort()
-        else:
+        compKeys = [compKey for compKey in self.components.keys()]
+        # the components are ordered from best (1) to worst (n)
+        if direction != 'decreasing':
             compKeys.sort(reverse=True)
+        else:
+            pass
         for compKey in compKeys:
             comp = self.components[compKey]
             sg = comp['subGraph']
-            actions = [x for x in sg.actions]
+            actions = [x for x in dict.keys(sg.actions)]
             actions.sort()
-            print('%s. %s-%s : %s' % (compKey,comp['highQtileLimit'],comp['lowQtileLimit'],actions))
+            if self.sortingParameters['LowerClosed']:
+                print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],actions))
+            else:
+                print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],actions))
 
     def showRelationTable(self,compKeys=None):
         """
         Specialized for showing the quantiles decomposed relation table.
+        Components are stored in an ordered dictionary.
         """
+        components = self.components
         if compKeys == None:
             nc = self.nbrComponents
             print('%d quantiles decomposed relation table in decreasing order' % nc)
-            compKeys = list(self.components.keys())
-            compKeys.sort()
-            for i in range(nc) :
-                cki = compKeys[i]
-                comp = self.components[cki]
+            for compKey in components.keys():
+                comp = components[compKey]
                 pg = comp['subGraph']
-                print('Component :', cki)
+                print('Component :', compKey, end=' ')
+                actions = [ x for x in pg.actions.keys()]
+                print('%s' % actions)
                 if pg.order > 1:
                     pg.showRelationTable()
+                    
         else:
             for compKey in compKeys:
+                comp = components[compkey]
+                pg = comp['subGraph']
                 print('Relation table of component %s' % compKey)
-                self.components[compKey]['subGraph'].showRelationTable()
+                actions = [ x for x in pg.actions.keys()]
+                print('%s' % actions)
+                if pg.order > 1:
+                    pg.showRelationTable()                
+
+##    def showRelationTable(self,compKeys=None):
+##        """
+##        Specialized for showing the quantiles decomposed relation table.
+##        """
+##        if compKeys == None:
+##            nc = self.nbrComponents
+##            print('%d quantiles decomposed relation table in decreasing order' % nc)
+##            compKeys = list(self.components.keys())
+##            compKeys.sort()
+##            for i in range(nc) :
+##                cki = compKeys[i]
+##                comp = self.components[cki]
+##                pg = comp['subGraph']
+##                print('Component :', cki)
+##                if pg.order > 1:
+##                    pg.showRelationTable()
+##        else:
+##            for compKey in compKeys:
+##                print('Relation table of component %s' % compKey)
+##                self.components[compKey]['subGraph'].showRelationTable()
 
     def computeBoostedKohlerRanking(self):
         """
@@ -1345,20 +1400,20 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                     credibility            
     
 
-    def showActionsSortingResult(self,actionSubset=None):
-        """
-        shows the quantiles sorting result all (default) of a subset of the decision actions.
-        """
-        print('Quantiles sorting result per decision action')
-        if actionsSubset==None:
-            for x in actions.keys():
-                self.computeActionCategories(x,Show=True)
-        else:
-            for x in actions.keys():
-                self.computeActionCategories(x,Show=True)
-            
+##    def showActionsSortingResult(self,actionSubset=None):
+##        """
+##        shows the quantiles sorting result all (default) of a subset of the decision actions.
+##        """
+##        print('Quantiles sorting result per decision action')
+##        if actionsSubset==None:
+##            for x in actions.keys():
+##                self.computeActionCategories(x,Show=True)
+##        else:
+##            for x in actionsSubset:
+##                self.computeActionCategories(x,Show=True)
+##            
 
-    def showShort(self,fileName=None,WithFileSize=True,WithComponents=False):
+    def showShort(self,fileName=None,WithFileSize=True):
         """
         Default (__repr__) presentation method for big outranking digraphs instances:
         
@@ -1399,8 +1454,6 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
         if fileName == None:
             print('*----- show short --------------*')
             print('Instance name     : %s' % self.name)
-            if WithFileSize:
-                print('Size (in bytes)   : %d' % total_size(self))
             print('# Actions         : %d' % self.order)
             print('# Criteria        : %d' % self.dimension)
             print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
@@ -1409,8 +1462,6 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
             print('Minimal size      : %d' % self.minimalComponentSize)
             print('Maximal size      : %d' % (self.computeDecompositionSummaryStatistics())['max'])
             print('Median size      : %d' % (self.computeDecompositionSummaryStatistics())['median'])
-            if WithComponents:
-                g.showDecomposition()
             print('----  Constructor run times (in sec.) ----')
             print('Total time        : %.5f' % self.runTimes['totalTime'])
             print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
@@ -1490,47 +1541,10 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                 pass
             print()
 
-    def showComponents(self):
-        self.showDecomposition()
+##    def showComponents(self):
+##        self.showDecomposition()
+##
 
-    def showDecomposition(self,direction='decreasing'):
-        
-        print('*--- quantiles decomposition in %s order---*' % (direction) )
-        compKeys = [compKey for compKey in self.components]
-        if direction != 'increasing':
-            compKeys.sort()
-        else:
-            compKeys.sort(reverse=True)
-        for compKey in compKeys:
-            comp = self.components[compKey]
-            sg = comp['subGraph']
-            actions = [x for x in sg.actions]
-            actions.sort()
-            #if self.sortingParameters['LowerClosed']:
-            print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],actions))
-            #else:
-            #    print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],actions))
-
-    def showRelationTable(self,compKeys=None):
-        """
-        Specialized for showing the quantiles decomposed relation table.
-        """
-        if compKeys == None:
-            nc = self.nbrComponents
-            print('%d quantiles decomposed relation table in decreasing order' % nc)
-            compKeys = list(self.components.keys())
-            compKeys.sort()
-            for i in range(nc) :
-                cki = compKeys[i]
-                comp = self.components[cki]
-                pg = comp['subGraph']
-                print('Component :', cki)
-                if pg.order > 1:
-                    pg.showRelationTable()
-        else:
-            for compKey in compKeys:
-                print('Relation table of component %s' % compKey)
-                self.components[compKey]['subGraph'].showRelationTable()
 
     def computeBoostedKohlerRanking(self):
         """
@@ -1581,10 +1595,10 @@ if __name__ == "__main__":
     
     from time import time
     from weakOrders import QuantilesRankingDigraph
-    MP  = True
+    MP  = False
     t0 = time()
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,
-##                                      seed=100)
+##                                      bgseed=100)
 ##    tp = RandomCBPerformanceTableau(numberOfActions=750,Threading=MP,
 ##                                      seed=100)
     tp = RandomPerformanceTableau(numberOfActions=100,numberOfCriteria=21,
@@ -1595,7 +1609,7 @@ if __name__ == "__main__":
     qr = QuantilesRankingDigraph(tp,75,strategy='average',Threading=MP)
     print(time()-t0)
     qr.showWeakOrder()
-    bg1 = BigOutrankingDigraph(tp,quantiles=75,quantilesOrderingStrategy='average',
+    bg1 = BigOutrankingDigraphMP(tp,quantiles=75,quantilesOrderingStrategy='average',
                                  LowerClosed=False,
                                  minimalComponentSize=1,
                                  Threading=MP,nbrOfCPUs=5,Debug=False)

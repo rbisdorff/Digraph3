@@ -57,6 +57,7 @@ def testMinimalComponentSize():
     print(bg1.computeDecompositionSummaryStatistics())
     bg1.showDecomposition()
     print(bg1)
+    bg1.showRelationTable()
     bg2 = BigOutrankingDigraphMP(tp,quantiles=50,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
                                minimalComponentSize=1,
@@ -64,6 +65,7 @@ def testMinimalComponentSize():
     print(bg2.computeDecompositionSummaryStatistics())
     bg2.showDecomposition()
     print(bg2)
+    bg2.showRelationTable()
     print(bg1.computeOrdinalCorrelation(bg2,Debug=False))
     bg1.recodeValuation(-10,10,Debug=True)
     print(bg2.computeOrdinalCorrelation(bg1,Debug=False))
