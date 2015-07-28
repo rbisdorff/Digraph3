@@ -929,27 +929,6 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                 if pg.order > 1:
                     pg.showRelationTable()                
 
-##    def showRelationTable(self,compKeys=None):
-##        """
-##        Specialized for showing the quantiles decomposed relation table.
-##        """
-##        if compKeys == None:
-##            nc = self.nbrComponents
-##            print('%d quantiles decomposed relation table in decreasing order' % nc)
-##            compKeys = list(self.components.keys())
-##            compKeys.sort()
-##            for i in range(nc) :
-##                cki = compKeys[i]
-##                comp = self.components[cki]
-##                pg = comp['subGraph']
-##                print('Component :', cki)
-##                if pg.order > 1:
-##                    pg.showRelationTable()
-##        else:
-##            for compKey in compKeys:
-##                print('Relation table of component %s' % compKey)
-##                self.components[compKey]['subGraph'].showRelationTable()
-
     def computeBoostedKohlerRanking(self):
         """
         Renders an ordred list of decision actions ranked in
@@ -1560,10 +1539,11 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
 ##                                            for ck in compKeys]))
 ##        nc = self.nbrComponents
 ##
+        components = self.components
         ranking = []
         # self.components is an ordered dictionary in decreasing preference
-        for cki in self.components:
-            comp = self.components[cki]
+        for cki in components.keys():
+            comp = components[cki]
             pg = comp['subGraph']
             pko = KohlerOrder(pg)
             ranking += pko.computeOrder()
@@ -1578,9 +1558,10 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
         
 ##        compKeys = list(self.components.keys())
 ##        compKeys.sort()
+        components = self.components
         ranking = list(chain.from_iterable(\
-            [self.components[ck]['subGraph'].computeRankedPairsOrder()\
-                                          for ck in self.components]))
+            [components[ck]['subGraph'].computeRankedPairsOrder()\
+                                          for ck in components.keys()]))
         return ranking    
 
     def ranking2Preorder(self,ranking):
