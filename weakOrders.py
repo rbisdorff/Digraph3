@@ -1697,116 +1697,23 @@ if __name__ == "__main__":
     from time import time
     
     Threading=False
-    t = PerformanceTableau('auditor2_2')
-    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,Debug=True)
-##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-##                                   numberOfActions=100)
-##    t.saveXMCDA2('test')
-    #t = XMCDA2PerformanceTableau('uniSorting')
-##    t = XMCDA2PerformanceTableau('test')
-##    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
-##    t0 = time()
-##    ko = KohlerOrder(g)
-##    print(time()-t0)
-##    #ko.showRelationTable()
-##    t0 = time()
-##    ar = KohlerOrder(CoDualDigraph(g))
-##    print(time()-t0)
-##    #ar.showRelationTable()
-##    t0 = time()
-##    koar = KohlerArrowRaynaudFusionDigraph(g,Threading=Threading)
-##    print(time()-t0)
-##    #koar.showRelationTable()
-##    print(g.computeOrdinalCorrelation(ko))
-##    print(g.computeOrdinalCorrelation(ar))
-##    print(g.computeOrdinalCorrelation(koar))
-##    koar.exportGraphViz('test')
-    
-##    Threading=True
-##
-##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-##                                   numberOfActions=250)
-##    t.saveXMCDA2('test')
-##    #t = XMCDA2PerformanceTableau('uniSorting')
-##    #t = XMCDA2PerformanceTableau('test')
-##    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
-##    limitingQuantiles = len(t.actions) // 3
+##    t = PerformanceTableau('auditor2_2')
+##    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,Debug=True)
+##    t = XMCDA2PerformanceTableau('uniSorting')
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                   numberOfActions=25)
     limitingQuantiles = 7
-    #qs = QuantilesSortingDigraph(t,g.order)
-    t0 = time()
     qr = QuantilesRankingDigraph(t,limitingQuantiles,
-                              strategy="optimistic",
+                              strategy="average",
                               #rankingRule="RubisChoice",
                               LowerClosed=False,
                               Threading=Threading,
                               Debug=False,
                                  StoreSorting=True)
+    qr.showSorting()
+    qr.showRanking()
     qr.showSortingCharacteristics()
-##    print('QR Exec. time:', time()-t0, 'sec.')
-##    print(qsfko.__class__)
-##    #qsfko.showSorting()
-##    #qsko.exportSortingGraphViz(Debug=False)
-##    t0 = time()
-##    print(qsfko.runTimes)
-##    print(qsfko.computeOutrankingCorrelation())
-##    t0 = time()
-##    qsko = QuantilesRankingDigraph(t,limitingQuantiles,
-##                              strategy="optimistic",
-##                              #rankingRule="Test",
-##                              LowerClosed=False,
-##                              Threading=Threading,
-##                              Debug=False,
-##                                   Comments=True)
-##    print('QR Exec. time:', time()-t0, 'sec.')
-##    #qsko.showSorting()
-##    #qsko.exportSortingGraphViz(Debug=False)
-##    t0 = time()
-##    print(qsko.runTimes)
-##    print(qsko.computeOutrankingCorrelation())
-    
-##    qsrbc = QuantilesRankingDigraph(t,limitingQuantiles,
-##                              strategy="pessimistic",
-##                              #rankingRule="rank-by-choosing",
-##                              rankingRule="KohlerRule",
-##                              LowerClosed=False,
-##                              Threading=Threading,Debug=True)
-##    print(time()-t0)
-##    #qsrbc.showSorting()
-##    qsko.showQsRbcRanking()
-##    qsrbc.showRanking()
-##    koOrder = qsko.computePreorderRelation(qsko.computeQsRbcRanking())
-##    rbcOrder = qsrbc.computePreorderRelation(qsrbc.computeQsRbcRanking())
-##    print(g.computeOrdinalCorrelation(koOrder))
-##    print(g.computeOrdinalCorrelation(rbcOrder))
-##    print(qsko.computeOutrankingCorrelation(Threading=Threading))
-##    print(qsrbc.computeOutrankingCorrelation(Threading=Threading))
-    
-##    qsrbc.showActionsSortingResult()
-##    qsrbc.computeWeakOrder(Comments=True)
-##    qsrbc.computeWeakOrder(Comments=True,strategy="pessimistic")
-##    qsrbc.computeWeakOrder(Comments=True,strategy="average")
-##    qsrbc.showQsRbcRanking()
-##    qsrbc.showWeakOrder()
-##    qsrbc._exportSortingGraphViz("opt",graphType="pdf")
-##    qsrbc.exportGraphViz()
-##    #qsrbc.showOrderedRelationTable()
-##    t0=time()
-##    qsrbcwt = QsRbcWeakOrdering(t,limitingQuantiles,
-##                                             cores=8,
-##                                             Threading=False,
-##                                             Debug=False)
-##    t2 = time()-t0
-##    qsrbcwt.showSorting()
-##    qsrbc.showQsRbcRanking(Descending=True)
-##    qsrbcwt.showQsRbcRanking(Descending=True)
-##    print('qsrbc',t1,'qsrbcwt',t2)
-##    corr = g.computeOrdinalCorrelation(qsrbc)
-##    print('qsrbc',corr['correlation'],\
-##          corr['correlation']*corr['determination'])
-##    corr = g.computeOrdinalCorrelation(qsrbcwt)
-##    print('qsrbcwt', corr['correlation'],\
-##          corr['correlation']*corr['determination'])
-    
+    qr.showQsRbcRanking()
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

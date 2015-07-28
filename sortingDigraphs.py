@@ -2334,7 +2334,10 @@ class QuantilesSortingDigraph(SortingDigraph):
             for c in categories:
                 print('%s in %s - %s\t' % (x, self.categories[c]['lowLimit'],\
                         self.categories[c]['highLimit'],), end=' ')
-                print('%.2f\t\t %.2f\t\t %.2f\n' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+                print('%.2f\t\t %.2f\t\t %.2f' %\
+                      (sorting[x][c]['lowLimit'],\
+                       sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+            print()
 
 
     def showHTMLQuantileOrdering(self,Descending=True,strategy='optimistic'):
