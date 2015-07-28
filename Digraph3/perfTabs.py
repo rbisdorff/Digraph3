@@ -1657,7 +1657,8 @@ The performance evaluations of each decision alternative on each criterion are g
             qsr = QuantilesRankingDigraph(self,LowerClosed=True,
                                           Threading=Threading,
                                           Debug=Debug)
-            actionsList = qsr.showRanking()
+            actionsList = [x for x in flatten(qsr.computeQsRbcRanking())]
+            
         else:
             if actionsList == None:
                 actionsList = list(self.actions.keys())
@@ -1805,8 +1806,6 @@ The performance evaluations of each decision alternative on each criterion are g
         Renders the Brewer RdYlGn 9-colored heatmap of the performance table
         actions x criteria in html format.
         """
-        #import itertools as IT
-        #import collections
         from decimal import Decimal
         from digraphs import flatten
                     
@@ -1868,7 +1867,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                           strategy=strategy,
                                           Threading=Threading,
                                           Debug=Debug)
-            actionsList = qr.showRanking()
+            actionsList = [x for x in flatten(qr.computeQsRbcRanking())]
         if Debug:
                 print('1',actionsList)
                 
@@ -1889,8 +1888,7 @@ The performance evaluations of each decision alternative on each criterion are g
         if actionsList == None:
             actionsList = list(dict.keys(actions))
             actionsList.sort()
-##        else:
-##            actionsList = [x for x in flatten(actionsList)]
+
         if Debug:
             print('3',actionsList)
         Debug=False
@@ -6089,13 +6087,12 @@ if __name__ == "__main__":
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
     t = RandomCBPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=20,
+                                   numberOfActions=30,
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
                                    Debug=False,
                                    missingDataProbability=0.1,
-                                   seed=101,Threading=False)
-    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
+                                   seed=100,Threading=False)
     
 ##    t = ConstantPerformanceTableau(t,
 ##                                   actionsSubset=['a01','a02','a03'],
@@ -6112,42 +6109,74 @@ if __name__ == "__main__":
 ##    t.saveXMCDA2('test')
 ##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('uniSorting')
-##    from weakOrders import *
-##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=True,Threading=False)
-##    qsrbc.showSorting()
-##    actionsList = qsrbc.computeQsRbcRanking()
+    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
+    from weakOrders import *
+    print('TT')
+    qsrbc = QuantilesRankingDigraph(t,LowerClosed=True,PrefThresholds=True,Threading=False)
+    qsrbc.showSorting()
+##    t1 = RandomCBPerformanceTableau(numberOfCriteria=13,
+##                                   numberOfActions=30,
+##                                   weightDistribution='equiobjectives',
+##                                   integerWeights=True,
+##                                   Debug=False,
+##                                   missingDataProbability=0.1,
+##                                   seed=100,Threading=False)
+    print('TF')
+    qsrbc = QuantilesRankingDigraph(t,LowerClosed=True,PrefThresholds=False,Threading=False)
+    qsrbc.showSorting()
+##    t2 = RandomCBPerformanceTableau(numberOfCriteria=13,
+##                                   numberOfActions=30,
+##                                   weightDistribution='equiobjectives',
+##                                   integerWeights=True,
+##                                   Debug=False,
+##                                   missingDataProbability=0.1,
+##                                   seed=100,Threading=False)
+    print('FT')
+    qsrbc = QuantilesRankingDigraph(t,LowerClosed=False,PrefThresholds=True,Threading=False)
+    qsrbc.showSorting()
+##    t = RandomCBPerformanceTableau(numberOfCriteria=13,
+##                                   numberOfActions=30,
+##                                   weightDistribution='equiobjectives',
+##                                   integerWeights=True,
+##                                   Debug=False,
+##                                   missingDataProbability=0.1,
+##                                   seed=100,Threading=False)
+    print('FF')
+    qsrbc = QuantilesRankingDigraph(t,LowerClosed=False,PrefThresholds=False,Threading=False)
+    qsrbc.showSorting()
+####    actionsList = qsrbc.computeQsRbcRanking()
+####
 ##
-
-##    g = BipolarOutrankingDigraph(t)
-##    print(g.computeMarginalVersusGlobalOutrankingCorrelations())
-##    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,Debug=False)
-    
-    
-##    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
-##    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=True))
-##    t.showHTMLPerformanceHeatmap(actionsList=actionsList,colorLevels=7,Ranked=True)
-##    t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,Threading=False)
-##    t.showHTMLPerformanceTableau(Transposed=True)
-##    t.showHTMLPerformanceHeatmap(colorLevels=7,Threading=False)
-##    t.showHTMLPerformanceHeatmap()
-##    pt1 = PartialPerformanceTableau(t)
-##    pt1.showAll()
-##    pt2 = PartialPerformanceTableau(t,actionsSubset=['a01','a02'],criteriaSubset=['g01','g03'])
-##    pt2.showAll()
-    
-##    ## t = PerformanceTableau('test')
-##    t.saveXMCDA2('test',servingD3=False)
-##    t.showCriteria(IntegerWeights=True)
-##    print(t.computeQuantiles(Debug=False))
-##    t.showQuantileSort()
-##    g = BipolarOutrankingDigraph(t)
-##    s = sortingDigraphs.SortingDigraph(g)
-##    s.showSorting()
-##    g.computeRankingByChoosing(CoDual=False)
-##    g.showRankingByChoosing()
-##    prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
-##    prg.showWeakOrder()
-##    print(g.computeOrdinalCorrelation(prg))
+####    g = BipolarOutrankingDigraph(t)
+####    print(g.computeMarginalVersusGlobalOutrankingCorrelations())
+####    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,Debug=False)
+##    
+##    
+####    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
+####    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=True))
+####    t.showHTMLPerformanceHeatmap(actionsList=actionsList,colorLevels=7,Ranked=True)
+####    t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,Threading=False)
+####    t.showHTMLPerformanceTableau(Transposed=True)
+####    t.showHTMLPerformanceHeatmap(colorLevels=7,Threading=False)
+####    t.showHTMLPerformanceHeatmap()
+####    pt1 = PartialPerformanceTableau(t)
+####    pt1.showAll()
+####    pt2 = PartialPerformanceTableau(t,actionsSubset=['a01','a02'],criteriaSubset=['g01','g03'])
+####    pt2.showAll()
+##    
+####    ## t = PerformanceTableau('test')
+####    t.saveXMCDA2('test',servingD3=False)
+####    t.showCriteria(IntegerWeights=True)
+####    print(t.computeQuantiles(Debug=False))
+####    t.showQuantileSort()
+####    g = BipolarOutrankingDigraph(t)
+####    s = sortingDigraphs.SortingDigraph(g)
+####    s.showSorting()
+####    g.computeRankingByChoosing(CoDual=False)
+####    g.showRankingByChoosing()
+####    prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
+####    prg.showWeakOrder()
+####    print(g.computeOrdinalCorrelation(prg))
      
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
