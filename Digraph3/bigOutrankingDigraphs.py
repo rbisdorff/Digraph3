@@ -993,7 +993,8 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
     For other parameters settings, see the corresponding QuantilesSortingDigraph class.
 
     """
-    def __init__(self,argPerfTab=None,quantiles=None,
+    def __init__(self,argPerfTab=None,CopyPerfTab=True,
+                 quantiles=None,
                  quantilesOrderingStrategy='average',
                  LowerClosed=True,
                  WithKohlerRanking=True,
@@ -1009,19 +1010,23 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
         from time import time
         from os import cpu_count
         from multiprocessing import Pool
-        from copy import deepcopy
+        from copy import copy, deepcopy
         
         ttot = time()
         # setting name
         perfTab = argPerfTab
         self.name = perfTab.name + '_mp'
         # setting quantiles sorting parameters
-        self.actions = deepcopy(perfTab.actions)
+        if CopyPerfTab:
+            copy2self = deepcopy
+        else:
+            copy2self = copy
+        self.actions = copy2self(perfTab.actions)
         na = len(self.actions)
         self.order = na
-        self.criteria = deepcopy(perfTab.criteria)
+        self.criteria = copy2self(perfTab.criteria)
         self.dimension = len(perfTab.criteria)
-        self.evaluation = deepcopy(perfTab.evaluation)
+        self.evaluation = copy2self(perfTab.evaluation)
         if quantiles == None:
             quantiles = na//10
         self.sortingParameters = {}
@@ -1037,7 +1042,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
         if Comments:        
             print('Computing the %d-quantiles sorting digraph ...' % (quantiles))
         #if Threading:
-        qs = QuantilesSortingDigraph(argPerfTab=perfTab,
+        qs = QuantilesSortingDigraph(argPerfTab=perfTab,CopyPerfTab=CopyPerfTab,
                                         limitingQuantiles=quantiles,
                                         LowerClosed=LowerClosed,
                                         CompleteOutranking=False,
@@ -1576,28 +1581,27 @@ if __name__ == "__main__":
     
     from time import time
     from weakOrders import QuantilesRankingDigraph
-    MP  = False
-    t0 = time()
-##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,
-##                                      bgseed=100)
-##    tp = RandomCBPerformanceTableau(numberOfActions=750,Threading=MP,
+    MP  = True
+##    t0 = time()
+##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,seed=100)
+##    tp = RandomCBPerformanceTableau(numberOfActions=500,Threading=MP,
 ##                                      seed=100)
-    tp = RandomPerformanceTableau(numberOfActions=100,numberOfCriteria=21,
+    tp = RandomPerformanceTableau(numberOfActions=750,numberOfCriteria=21,
                                       seed=100)
-    print(time()-t0)
-    print(total_size(tp.evaluation))
-    t0 = time()
-    qr = QuantilesRankingDigraph(tp,75,strategy='average',Threading=MP)
-    print(time()-t0)
-    qr.showWeakOrder()
-    bg1 = BigOutrankingDigraphMP(tp,quantiles=75,quantilesOrderingStrategy='average',
+##    print(time()-t0)
+##    print(total_size(tp.evaluation))
+##    t0 = time()
+##    qr = QuantilesRankingDigraph(tp,75,strategy='average',Threading=MP)
+##    print(time()-t0)
+##    qr.showWeakOrder()
+    bg1 = BigOutrankingDigraphMP(tp,CopyPerfTab=False,quantiles=75,quantilesOrderingStrategy='average',
                                  LowerClosed=False,
                                  minimalComponentSize=1,
                                  Threading=MP,nbrOfCPUs=5,Debug=False)
-    print(bg1.computeDecompositionSummaryStatistics())
-    bg1.showDecomposition(direction='decreasing')
+##    print(bg1.computeDecompositionSummaryStatistics())
+##    bg1.showDecomposition(direction='decreasing')
     print(bg1)
-    bg1.showMarginalVersusGlobalOutrankingCorrelation(Threading=MP)
+##    bg1.showMarginalVersusGlobalOutrankingCorrelation(Threading=MP)
 ##    bg2 = BigOutrankingDigraphMP(tp,quantiles=75,quantilesOrderingStrategy='average',
 ##                                 LowerClosed=True,
 ##                                 minimalComponentSize=5,

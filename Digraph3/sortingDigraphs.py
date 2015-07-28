@@ -1274,6 +1274,7 @@ class QuantilesSortingDigraph(SortingDigraph):
     .. image:: quantilesSorting.png
     """
     def __init__(self,argPerfTab=None,\
+                 CopyPerfTab=True,\
                  limitingQuantiles=None,\
                  LowerClosed=False,\
                  PrefThresholds=True,\
@@ -1291,6 +1292,10 @@ class QuantilesSortingDigraph(SortingDigraph):
         """
 
         from copy import copy, deepcopy
+        if CopyPerfTab:
+            copy2self = deepcopy
+        else:
+            copy2self = copy
         from decimal import Decimal
 
         # import the performance tableau
@@ -1302,16 +1307,16 @@ class QuantilesSortingDigraph(SortingDigraph):
             perfTab = argPerfTab
         # normalize the actions as a dictionary construct
         if isinstance(perfTab.actions,list):
-            actions = {}
+            actions = OrderedDict()
             for x in perfTab.actions:
                 actions[x] = {'name': str(x)}
         else:
-            actions = deepcopy(perfTab.actions)
+            actions = copy2self(perfTab.actions)
         actions = actions
         self.actions = actions
 
         # keep a copy of the original actions set before adding the profiles
-        actionsOrig = deepcopy(actions)
+        actionsOrig = OrderedDict(actions)
         self.actionsOrig = actionsOrig
 
         #  normalizing the performance tableau
@@ -1418,8 +1423,8 @@ class QuantilesSortingDigraph(SortingDigraph):
                     evaluation[g][cKey] = Decimal(str(criteriaCategoryLimits[g][int(c)]))
 
         self.profiles = profiles
-        profileLimits = list(dict.keys(profiles))
-        profileLimits.sort()
+        profileLimits = list(profiles.keys())
+        #profileLimits.sort()
         self.profileLimits = profileLimits
         
         if Debug:
