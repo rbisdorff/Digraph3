@@ -942,7 +942,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
 
 ########################
 from weakOrders import QuantilesRankingDigraph
-class BigOutrankingDigraphMP(BigDigraph,QuantilesRankingDigraph,PerformanceTableau):
+class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,PerformanceTableau):
     """
     Multiprocessing implementation of the BipolarOutrankingDigraph class
     for large instances (order > 1000)
@@ -1013,10 +1013,10 @@ class BigOutrankingDigraphMP(BigDigraph,QuantilesRankingDigraph,PerformanceTable
                                         Debug=Debug)
         self.runTimes = {'sorting': time() - t0}
 #        self.qs = qs
-        self.valuationdomain = deepcopy(qs.valuationdomain)
-        self.profiles = deepcopy(qs.profiles)
-        self.categories = deepcopy(qs.categories)
-        self.sorting = deepcopy(qs.sorting)
+        self.valuationdomain = qs.valuationdomain
+        self.profiles = qs.profiles
+        self.categories = qs.categories
+        self.sorting = qs.sorting
         if Comments:
             print('execution time: %.4f' % (self.runTimes['sorting']))
         # preordering
@@ -1121,8 +1121,8 @@ class BigOutrankingDigraphMP(BigDigraph,QuantilesRankingDigraph,PerformanceTable
             from tempfile import TemporaryDirectory,mkdtemp
             #with TemporaryDirectory() as tempDirName:
             tempDirName = mkdtemp()
-            from copy import copy, deepcopy
-            from time import sleep
+            #from copy import copy, deepcopy
+            #from time import sleep
             #selfDp = copy(self)
             selfFileName = tempDirName +'/dumpSelf.py'
             if Debug:
@@ -1162,7 +1162,8 @@ class BigOutrankingDigraphMP(BigDigraph,QuantilesRankingDigraph,PerformanceTable
                 pass
                 #sleep(1)
             print('Exit %d threads' % nbrOfThreads)
-            componentsList = []
+            components = OrderedDict()
+            #componentsList = []
             for j in range(nc):
                 if Debug:
                     print('job',j)
@@ -1171,9 +1172,9 @@ class BigOutrankingDigraphMP(BigDigraph,QuantilesRankingDigraph,PerformanceTable
                 splitComponent = loads(fi.read())
                 if Debug:
                     print('splitComponent',splitComponent)
-                componentsList.append(splitComponent)
+                components[splitComponent[0]] = splitComponent[1]
             #print(componentsList)
-            components = OrderedDict(componentsList)
+            #components = OrderedDict(componentsList)
         # end of Threading
         for compKey in components.keys():
             for x in components[compKey]['subGraph'].actions.keys():

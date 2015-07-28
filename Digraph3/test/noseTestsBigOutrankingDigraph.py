@@ -57,7 +57,7 @@ def testMinimalComponentSize():
     print(bg1.computeDecompositionSummaryStatistics())
     bg1.showDecomposition()
     print(bg1)
-    bg2 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
+    bg2 = BigOutrankingDigraphMP(tp,quantiles=50,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
                                minimalComponentSize=1,
                                     Threading=MP,Debug=False)

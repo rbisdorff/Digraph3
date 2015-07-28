@@ -1894,8 +1894,8 @@ The performance evaluations of each decision alternative on each criterion are g
 ##            actionsList = [x for x in flatten(qr.computeQsRbcRanking())]
             if quantiles == None:
                 quantiles = na
-            from bigOutrankingDigraphs import BigOutrankingDigraph
-            qr = BigOutrankingDigraph(self,quantiles=quantiles,LowerClosed=False,
+            from bigOutrankingDigraphs import BigOutrankingDigraphMP
+            qr = BigOutrankingDigraphMP(self,quantiles=quantiles,LowerClosed=False,
                                           quantilesOrderingStrategy=strategy,
                                           Threading=Threading,
                                           Debug=Debug)
