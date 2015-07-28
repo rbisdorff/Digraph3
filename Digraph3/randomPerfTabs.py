@@ -442,7 +442,8 @@ class FullRandomPerformanceTableau(PerformanceTableau):
                  valueDigits=2,
                  seed = None,
                  Debug = False):
-
+        # import OrderedDict container
+        from collections import OrderedDict
         # set name
         self.name = 'fullrandomperftab'
 
@@ -454,16 +455,14 @@ class FullRandomPerformanceTableau(PerformanceTableau):
         if numberOfActions == None:
             numberOfActions = random.randint(7,30)
         nd = len(str(numberOfActions))
-        actions = dict()
+        actions = OrderedDict()
         for i in range(numberOfActions):
             actionKey = ('a%%0%dd' % (nd)) % (i+1)
             actions[actionKey] = {'shortName':actionKey,
                     'name': 'random decision action',
                     'comment': 'RandomRankPerformanceTableau() generated.' }
         self.actions = actions
-        actionsList = [x for x in actions]
-        actionsList.sort()
-        
+        actionsList = [x for x in actions.keys()]
 
         # generate criterialist
         if numberOfCriteria == None:
@@ -524,7 +523,7 @@ class FullRandomPerformanceTableau(PerformanceTableau):
         # generate criteria dictionary with random thresholds
         if commonScale == None:
             commonScale = [0.0,100.0]
-        criteria = {}
+        criteria = OrderedDict()
         for i in range(len(criteriaList)):
             g = criteriaList[i]
             criteria[g] = {}
@@ -761,13 +760,13 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
             Coalitions=False
 
         from randomNumbers import ExtendedTriangularRandomVariable as RNGTr            
-
+        from collections import OrderedDict
             
         # generate actions
         if numberOfActions == None:
             numberOfActions = 13
         nd = len(str(numberOfActions))
-        actions = dict()
+        actions = OrderedDict()
         for i in range(numberOfActions):
             actionKey = ('a%%0%dd' % (nd)) % (i+1)
             actions[actionKey] = {'shortName':actionKey,
@@ -775,8 +774,8 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                     'comment': 'RandomCoalitionsPerformanceTableau() generated.',
                     'generators': {}}
         self.actions = actions
-        actionsList = [x for x in self.actions]
-        actionsList.sort()
+        actionsList = [x for x in actions.keys()]
+        #actionsList.sort()
         
         # generate criterialist
         if numberOfCriteria == None:
@@ -784,7 +783,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
         ng = len(str(numberOfCriteria))
         criteriaList = [('g%%0%dd' % ng) % (i+1)\
                         for i in range(numberOfCriteria)]
-        criteriaList.sort()
+        #criteriaList.sort()
         
         # generate random weights
         if weightDistribution == None:
@@ -862,7 +861,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
             Coalitions = True
             if Debug:
                 print(criterionCoalitionsList)
-        criteria = {}
+        criteria = OrderedDict()
 
         for gi in range(len(criteriaList)):
             g = criteriaList[gi]
@@ -1461,16 +1460,29 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             print('  Total weight: %.2f (%d criteria)\n'\
                   % (self.objectives[obj]['weight'],len(self.objectives[obj]['criteria'])))
 
-    def showActions(self,Debug=False):
+    def showActions(self,Alphabetic=False):
         print('*----- show decision action --------------*')
         actions = self.actions
-        for x in actions:
-            print('key: ',x)
-            print('  name:      ',actions[x]['name'])
-            print('  profile:   ',actions[x]['profile'])
-            if Debug:
-                for g in criteria:
-                    print(g, self.actions[x]['generators'][g])
+        if Alphabetic:
+            actionsKeys = [x for x in dict.keys(actions)]
+            actionsKeys.sort()
+            for x in actionsKeys:
+                print('key: ',x)
+                try:
+                    print('  short name: ',actions[x]['shortName'])
+                except:
+                    pass
+                print('  name:       ',actions[x]['name'])
+                print('  profile:    ',actions[x]['profile'])
+        else:
+            for x in actions.keys():
+                print('key: ',x)
+                try:
+                    print('  short name: ',actions[x]['shortName'])
+                except:
+                    pass
+                print('  name:      ',actions[x]['name'])
+                print('  profile:   ',actions[x]['profile'])
 
 #---------------
 class _Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
@@ -1548,15 +1560,15 @@ class _Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
         
         for obj in self.objectives:
             objCriteria = [g for g in self.criteria if self.criteria[g]['objective'] == obj]
-            objCriteria.sort()
+            #objCriteria.sort()
             self.objectives[obj]['criteria'] = objCriteria
             objWeight = Decimal('0')
             for g in objCriteria:
                 objWeight += self.criteria[g]['weight']
             self.objectives[obj]['weight'] = objWeight
 
-        actionsList = [x for x in self.actions]
-        for x in actionsList:
+        #actionsList = [x for x in self.actions]
+        for x in dict.keys(self.actions):
             if 'A- B- C-' in self.actions[x]['name']:
                 self.actions[x]['name'] = 'random decision action (Eco- Soc- Env-)'
                 self.actions[x]['profile'] = {'Eco': 'weak', 'Soc': 'weak','Env': 'weak'}
@@ -1640,35 +1652,30 @@ class _Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
                 self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'good','Env': 'good'}
             self.actions[x]['comment'] = 'Random3ObjectivesPerformaceTableau() generated'
 
-        criteriaList = [g for g in self.criteria]
-        criteriaList.sort()
-        actionsList = [x for x in self.actions]
-        actionsList.sort()
-        for g in criteriaList:
-            for x in actionsList:
+##        criteriaList = [g for g in self.criteria]
+##        criteriaList.sort()
+##        actionsList = [x for x in self.actions]
+##        actionsList.sort()
+        for g in dict.keys(self.criteria):
+            for x in dict.keys(self.actions):
                 if random.random() < missingDataProbability:
                     self.evaluation[g][x] = Decimal('-999')
                 
-##    def showObjectives(self):
-##        print('*------ show objectives -------"')
-##        for obj in self.objectives:
-##                                               
-##            print('%s: %s' % (obj, self.objectives[obj]['name']))
-##                                               
-##            for g in self.objectives[obj]['criteria']:
-##                print('  ', g, self.criteria[g]['name'], self.criteria[g]['weight'])
-##                                               
-##            print('  Total weight: %.2f (%d criteria)\n'\
-##                  % (self.objectives[obj]['weight'],len(self.objectives[obj]['criteria'])))
-
-    def showActions(self):
+    def showActions(self,Alphabetic=False):
         print('*----- show decision action --------------*')
-        actionsList = [x for x in self.actions]
-        actionsList.sort()
-        for x in actionsList:
-            print('key: ',x)
-            print('  name:      ',self.actions[x]['name'])
-            print('  profile:   ',self.actions[x]['profile'])
+        actions = self.actions
+        if Alphabtic:
+            actionsKeys = [x for x in dict.keys(actions)]
+            actionsKeys.sort()
+            for x in actionsKeys:
+                print('key: ',x)
+                print('  name:      ',actions[x]['name'])
+                print('  profile:   ',actions[x]['profile'])
+        else:
+            for x in actions.keys():
+                print('key: ',x)
+                print('  name:      ',actions[x]['name'])
+                print('  profile:   ',actions[x]['profile'])
         
 #---------------
 class RandomCBPerformanceTableau(PerformanceTableau):
