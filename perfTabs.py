@@ -500,22 +500,34 @@ The performance evaluations of each decision alternative on each criterion are g
         else:
             return weightedAverage
         
-    def showActions(self):
+    def showActions(self,Alphabetic=False):
         """
         presentation methods for decision actions or alternatives
         """
         print('*----- show decision action --------------*')
-        actionsList = [x for x in self.actions]
-        actionsList.sort()
-        for x in actionsList:
-            print('key: ',x)
-            try:
-                print('  short name:',self.actions[x]['shortName'])
-            except:
-                pass
-            print('  name:      ',self.actions[x]['name'])
-            print('  comment:   ',self.actions[x]['comment'])
-            print()
+        actions = self.actions
+        if Alphabetic:
+            actionsKeys = [x for x in dict.keys(actions)]
+            actionsKeys.sort()
+            for x in actionsKeys:
+                print('key: ',x)
+                try:
+                    print('  short name:',actions[x]['shortName'])
+                except:
+                    pass
+                print('  name:      ',actions[x]['name'])
+                print('  comment:   ',actions[x]['comment'])
+                print()
+        else:
+            for x in actions.keys():
+                print('key: ',x)
+                try:
+                    print('  short name:',actions[x]['shortName'])
+                except:
+                    pass
+                print('  name:      ',actions[x]['name'])
+                print('  comment:   ',actions[x]['comment'])
+                print()
     
     def showCriteria(self,IntegerWeights=False,Alphabetic=False,ByObjectives=False,Debug=False):
         """
@@ -556,10 +568,12 @@ The performance evaluations of each decision alternative on each criterion are g
                         pass
                     print()
         else:
-            criteriaList = list(self.criteria.keys())
             if Alphabetic:
-                criteriaList.sort()
-            for g in criteriaList:
+                criteria = list(dict.keys(self.criteria))
+                criteria.sort()
+            else:
+                criteria = self.criteria
+            for g in criteria.keys():
                 try:
                     criterionName = '%s/' % self.objectives[self.criteria[g]['objective']]['name']                                        
                 except:
