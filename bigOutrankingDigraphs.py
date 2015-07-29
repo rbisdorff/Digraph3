@@ -1047,6 +1047,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                                         LowerClosed=LowerClosed,
                                         CompleteOutranking=False,
                                         StoreSorting=True,
+                                         WithSortingRelation=False,
                                         Threading= self.sortingParameters['Threading'],
                                         nbrCores=nbrOfCPUs,
                                         Debug=Debug)
@@ -1581,12 +1582,12 @@ if __name__ == "__main__":
     
     from time import time
     from weakOrders import QuantilesRankingDigraph
-    MP  = True
+    MP  = False
 ##    t0 = time()
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,seed=100)
 ##    tp = RandomCBPerformanceTableau(numberOfActions=500,Threading=MP,
 ##                                      seed=100)
-    tp = RandomPerformanceTableau(numberOfActions=750,numberOfCriteria=21,
+    tp = RandomPerformanceTableau(numberOfActions=50,numberOfCriteria=21,
                                       seed=100)
 ##    print(time()-t0)
 ##    print(total_size(tp.evaluation))
@@ -1597,7 +1598,7 @@ if __name__ == "__main__":
     bg1 = BigOutrankingDigraphMP(tp,CopyPerfTab=False,quantiles=75,quantilesOrderingStrategy='average',
                                  LowerClosed=False,
                                  minimalComponentSize=1,
-                                 Threading=MP,nbrOfCPUs=5,Debug=False)
+                                 Threading=MP,nbrOfCPUs=None,Debug=False)
 ##    print(bg1.computeDecompositionSummaryStatistics())
 ##    bg1.showDecomposition(direction='decreasing')
     print(bg1)
