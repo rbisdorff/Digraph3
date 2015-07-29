@@ -1280,6 +1280,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                  PrefThresholds=True,\
                  hasNoVeto=False,\
                  outrankingType = "bipolar",\
+                 WithSortingRelation=True,\
                  CompleteOutranking = False,\
                  StoreSorting=False,\
                  Threading=False,\
@@ -1472,46 +1473,46 @@ class QuantilesSortingDigraph(SortingDigraph):
                                                     Threading=Threading,
                                                     nbrCores=nbrCores,
                                                     Comments=Comments)
-        if LowerClosed:
-            for x in dict.keys(actionsOrig):
-                for y in dict.keys(actionsOrig):
-                    relation[x][y] = Med
-            for x in dict.keys(profiles):
-                relation[x] = {}
-                for y in dict.keys(actions):
-                    relation[x][y] = Med
-        else:
-            for x in dict.keys(actionsOrig):
-                relation[x] = {}
-                for y in dict.keys(actionsOrig):
-                    relation[x][y] = Med
-            for y in dict.keys(profiles):
-                for x in dict.keys(actions):
-                    relation[x][y] = Med
+
+        if WithSortingRelation:
+            if LowerClosed:
+                for x in dict.keys(actionsOrig):
+                    for y in dict.keys(actionsOrig):
+                        relation[x][y] = Med
+                for x in dict.keys(profiles):
+                    relation[x] = {}
+                    for y in dict.keys(actions):
+                        relation[x][y] = Med
+            else:
+                for x in dict.keys(actionsOrig):
+                    relation[x] = {}
+                    for y in dict.keys(actionsOrig):
+                        relation[x][y] = Med
+                for y in dict.keys(profiles):
+                    for x in dict.keys(actions):
+                        relation[x][y] = Med
 
         self.relation = relation
         
         # compute weak ordering
-        sortingRelation = self.computeSortingRelation(StoreSorting=StoreSorting,\
-                                                      Debug=Debug,Comments=Comments,\
-                                                      Threading=Threading,\
-                                                      nbrOfCPUs=nbrCores)
-        for x in dict.keys(actionsOrig):
-            for y in dict.keys(actionsOrig):
-                self.relation[x][y] = sortingRelation[x][y]
+        if WithSortingRelation:
+            sortingRelation = self.computeSortingRelation(StoreSorting=StoreSorting,\
+                                                          Debug=Debug,Comments=Comments,\
+                                                          Threading=Threading,\
+                                                          nbrOfCPUs=nbrCores)
+            for x in dict.keys(actionsOrig):
+                for y in dict.keys(actionsOrig):
+                    self.relation[x][y] = sortingRelation[x][y]
+            # reset original action set
+            self.actions = actionsOrig
+            self.order = len(self.actions)
+            self.gamma = self.gammaSets()
+            self.notGamma = self.notGammaSets()
 
-        # reset original action set
-        self.actions = actionsOrig
-        self.order = len(self.actions)
-
-        # compute weak ordering by choosing
-        
-##        if self.order < 20:
-##            self.computeRankingByChoosing(CoDual=True)
-        
-        # init general digraph Data
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
+        else:
+            self.computeCategoryContents(StoreSorting=StoreSorting,\
+                                Threading=Threading,nbrOfCPUs=nbrCores,Comments=Comments)
+ 
 
     def showWeakOrder(self,Descending=True):
         """
