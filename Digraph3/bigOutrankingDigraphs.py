@@ -789,6 +789,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         Default presentation of BigOutrankingDigraphs
         
         """
+        summaryStats = self.computeDecompositionSummaryStatistics()
         if fileName == None:
             print('*----- show short --------------*')
             print('Instance name     : %s' % self.name)
@@ -798,8 +799,8 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             print('Ordering strategy : %s' % self.sortingParameters['strategy'])
             print('# Components      : %d' % self.nbrComponents)
             print('Minimal size      : %d' % self.minimalComponentSize)
-            print('Maximal size      : %d' % (self.computeDecompositionSummaryStatistics())['max'])
-            print('Median size      : %d' % (self.computeDecompositionSummaryStatistics())['median'])
+            print('Maximal size      : %d' % summaryStats['max'])
+            print('Median size       : %d' % summaryStats['median'])
             print('----  Constructor run times (in sec.) ----')
             print('Total time        : %.5f' % self.runTimes['totalTime'])
             print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
@@ -821,8 +822,8 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             fo.write('Ordering strategy  : %s\n' % self.sortingParameters['strategy'])
             fo.write('# Components       : %d\n' % self.nbrComponents)
             fo.write('Minimal size       : %d\n' % self.minimalComponentSize)
-            fo.write('Maximal size       : %d\n' % (self.computeDecompositionSummaryStatistics())['max'])
-            fo.write('Median size        : %d\n' % (self.computeDecompositionSummaryStatistics())['median'])
+            fo.write('Maximal size       : %d\n' % summaryStats['max'])
+            fo.write('Median size        : %d\n' % summaryStats['median'])
             fo.write('*-- Constructor run times (in sec.) --*\n')
             fo.write('Total time         : %.5f\n' % self.runTimes['totalTime'])
             fo.write('QuantilesSorting   : %.5f\n' % self.runTimes['sorting'])
