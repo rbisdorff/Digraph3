@@ -10678,37 +10678,4 @@ if __name__ == "__main__":
 # Log record for changes:
 # $Log: digraphs.py,v $
 #
-# Revision +1.700 2013/10/05 17:22:53  bisi
-# added saveCSV() method to the Digraph class
-#
-# Revision 1.696  2013/01/01 14:10:53  bisi
-# added computePrudentBestChoiceRecommendation() method to the Digraph class
-#
-# Revision 1.694  2012/12/24 15:18:21  bisi
-# compatibility patch for old (-2008) python performance tableaux
-#
-# Revision 1.693  2012/09/11 05:12:14  bisi
-# debugging rankingByChoosing for failure quadruple
-#
-# Revision 1.691  2012/09/06 18:28:44  bisi
-# Added unary __neg__ (-) and __invert__ (~) operators to the Digraph class methods.
-#
-# Revision 1.689  2012/08/12 06:30:21  bisi
-# Added valuation statistics for digraphs
-#
-# Revision 1.688  2012/08/11 05:56:39  bisi
-# added iqagent.py module
-#
-# Revision 1.687  2012/08/04 06:27:35  bisi
-# Refactored RandomWeakTournament class constructor.
-#
-# Revision 1.686  2012/07/31 09:25:18  bisi
-# Added a constructor ConverseDigraph() for the reciprocal of a digraph
-#
-# Revision 1.685  2012/07/20 07:06:37  bisi
-# minor
-#
-# Revision 1.684  2012/07/20 06:50:33  bisi
-# Added computeCorrelation() to the EquivalenceDigraph class.
-#
 #############################
