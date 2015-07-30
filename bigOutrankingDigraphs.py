@@ -1399,88 +1399,88 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
 ##                self.computeActionCategories(x,Show=True)
 ##            
 
-    def showShort(self,fileName=None,WithFileSize=True):
-        """
-        Default (__repr__) presentation method for big outranking digraphs instances:
-        
-        >>> from bigOutrankingDigraphs import *
-        >>> t = RandomCBPerformanceTableau(numberOfActions=100)
-        >>> g = BigOutrankingDigraph(t,quantiles=10)
-        Threading ...
-        Nbr of cpus =  7
-        number of cores = 7
-        nbr of actions to split 100
-        nbr of jobs =  7
-        nbr of splitActions =  15
-        iteration =  1 15
-        iteration =  2 15
-        iteration =  3 15
-        iteration =  4 15
-        iteration =  5 15
-        iteration =  6 15
-        iteration =  7 10
-        Exiting computing threads
-        >>> print(g)
-        *----- show short --------------*
-        Instance name     : randomCBperftab_mp
-        # Actions         : 100
-        # Criteria        : 13
-        Sorting by        : 10-Tiling 
-        Ordering strategy : average quantile
-        # Components      : 11
-        ----  Constructor run times (in sec.) ----
-        Total time        : 0.72743
-        QuantilesSorting  : 0.51481
-        Preordering       : 0.00292
-        Decomposing       : 0.20469
-        Ordering          : 0.00500
-        Default presentation of BigOutrankingDigraphs
-        
-        """
-        if fileName == None:
-            print('*----- show short --------------*')
-            print('Instance name     : %s' % self.name)
-            print('# Actions         : %d' % self.order)
-            print('# Criteria        : %d' % self.dimension)
-            print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
-            print('Ordering strategy : %s' % self.sortingParameters['strategy'])
-            print('# Components      : %d' % self.nbrComponents)
-            print('Minimal size      : %d' % self.minimalComponentSize)
-            print('Maximal size      : %d' % (self.computeDecompositionSummaryStatistics())['max'])
-            print('Median size      : %d' % (self.computeDecompositionSummaryStatistics())['median'])
-            print('----  Constructor run times (in sec.) ----')
-            print('Total time        : %.5f' % self.runTimes['totalTime'])
-            print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
-            print('Preordering       : %.5f' % self.runTimes['preordering'])
-            print('Decomposing       : %.5f' % self.runTimes['decomposing'])
-            try:
-                print('Ordering          : %.5f' % self.runTimes['ordering'])
-            except:
-                pass
-        else:
-            fo = open(fileName,'a')
-            fo.write('*----- show short --------------*')
-            fo.write('Instance name      : %s\n' % self.name)
-            if WithFileSize:
-                fo.write('Size (in bytes)    : %d\n' % total_size(self))
-            fo.write('# Actions          : %d\n' % self.order)
-            fo.write('# Criteria         : %d\n' % self.dimension)
-            fo.write('Sorting by         : %d-Tiling\n' % self.sortingParameters['limitingQuantiles'])
-            fo.write('Ordering strategy  : %s\n' % self.sortingParameters['strategy'])
-            fo.write('# Components       : %d\n' % self.nbrComponents)
-            fo.write('Minimal size       : %d\n' % self.minimalComponentSize)
-            fo.write('Maximal size       : %d\n' % (self.computeDecompositionSummaryStatistics())['max'])
-            fo.write('Median size        : %d\n' % (self.computeDecompositionSummaryStatistics())['median'])
-            fo.write('*-- Constructor run times (in sec.) --*\n')
-            fo.write('Total time         : %.5f\n' % self.runTimes['totalTime'])
-            fo.write('QuantilesSorting   : %.5f\n' % self.runTimes['sorting'])
-            fo.write('Preordering        : %.5f\n' % self.runTimes['preordering'])
-            fo.write('Decomposing        : %.5f\n' % self.runTimes['decomposing'])
-            try:
-                fo.write('Ordering           : %.5f\n' % self.runTimes['ordering'])
-            except:
-                pass
-            fo.close()
+##    def showShort(self,fileName=None,WithFileSize=True):
+##        """
+##        Default (__repr__) presentation method for big outranking digraphs instances:
+##        
+##        >>> from bigOutrankingDigraphs import *
+##        >>> t = RandomCBPerformanceTableau(numberOfActions=100)
+##        >>> g = BigOutrankingDigraph(t,quantiles=10)
+##        Threading ...
+##        Nbr of cpus =  7
+##        number of cores = 7
+##        nbr of actions to split 100
+##        nbr of jobs =  7
+##        nbr of splitActions =  15
+##        iteration =  1 15
+##        iteration =  2 15
+##        iteration =  3 15
+##        iteration =  4 15
+##        iteration =  5 15
+##        iteration =  6 15
+##        iteration =  7 10
+##        Exiting computing threads
+##        >>> print(g)
+##        *----- show short --------------*
+##        Instance name     : randomCBperftab_mp
+##        # Actions         : 100
+##        # Criteria        : 13
+##        Sorting by        : 10-Tiling 
+##        Ordering strategy : average quantile
+##        # Components      : 11
+##        ----  Constructor run times (in sec.) ----
+##        Total time        : 0.72743
+##        QuantilesSorting  : 0.51481
+##        Preordering       : 0.00292
+##        Decomposing       : 0.20469
+##        Ordering          : 0.00500
+##        Default presentation of BigOutrankingDigraphs
+##        
+##        """
+##        if fileName == None:
+##            print('*----- show short --------------*')
+##            print('Instance name     : %s' % self.name)
+##            print('# Actions         : %d' % self.order)
+##            print('# Criteria        : %d' % self.dimension)
+##            print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
+##            print('Ordering strategy : %s' % self.sortingParameters['strategy'])
+##            print('# Components      : %d' % self.nbrComponents)
+##            print('Minimal size      : %d' % self.minimalComponentSize)
+##            print('Maximal size      : %d' % (self.computeDecompositionSummaryStatistics())['max'])
+##            print('Median size       : %d' % (self.computeDecompositionSummaryStatistics())['median'])
+##            print('----  Constructor run times (in sec.) ----')
+##            print('Total time        : %.5f' % self.runTimes['totalTime'])
+##            print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
+##            print('Preordering       : %.5f' % self.runTimes['preordering'])
+##            print('Decomposing       : %.5f' % self.runTimes['decomposing'])
+##            try:
+##                print('Ordering          : %.5f' % self.runTimes['ordering'])
+##            except:
+##                pass
+##        else:
+##            fo = open(fileName,'a')
+##            fo.write('*----- show short --------------*')
+##            fo.write('Instance name      : %s\n' % self.name)
+##            if WithFileSize:
+##                fo.write('Size (in bytes)    : %d\n' % total_size(self))
+##            fo.write('# Actions          : %d\n' % self.order)
+##            fo.write('# Criteria         : %d\n' % self.dimension)
+##            fo.write('Sorting by         : %d-Tiling\n' % self.sortingParameters['limitingQuantiles'])
+##            fo.write('Ordering strategy  : %s\n' % self.sortingParameters['strategy'])
+##            fo.write('# Components       : %d\n' % self.nbrComponents)
+##            fo.write('Minimal size       : %d\n' % self.minimalComponentSize)
+##            fo.write('Maximal size       : %d\n' % (self.computeDecompositionSummaryStatistics())['max'])
+##            fo.write('Median size        : %d\n' % (self.computeDecompositionSummaryStatistics())['median'])
+##            fo.write('*-- Constructor run times (in sec.) --*\n')
+##            fo.write('Total time         : %.5f\n' % self.runTimes['totalTime'])
+##            fo.write('QuantilesSorting   : %.5f\n' % self.runTimes['sorting'])
+##            fo.write('Preordering        : %.5f\n' % self.runTimes['preordering'])
+##            fo.write('Decomposing        : %.5f\n' % self.runTimes['decomposing'])
+##            try:
+##                fo.write('Ordering           : %.5f\n' % self.runTimes['ordering'])
+##            except:
+##                pass
+##            fo.close()
 
     def showActions(self):
         """
