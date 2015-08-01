@@ -947,7 +947,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                 if pg.order > 1:
                     pg.showRelationTable()                
 
-    def computeBoostedKohlerOrder(self):
+    def computeBoostedKohlerRanking(self):
         """
         Renders an ordred list of decision actions ranked in
         decreasing preference direction following Kohler's rule
@@ -961,16 +961,65 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
 ##                                            for ck in compKeys]))
 ##        nc = self.nbrComponents
 ##
-        order = []
+        ranking = []
         # self.components is an ordered dictionary in decreasing preference
         for cki in dict.keys(self.components):
             comp = self.components[cki]
             pg = comp['subGraph']
             pko = KohlerOrder(pg)
-            order += pko.computeOrder()
-        return order    
+            ranking += pko.computeRanking()
+        return ranking
 
-    def computeBoostedRankedPairsOrder(self):
+    def computeBoostedKohlerRanking(self):
+        """
+        Renders an ordred list of decision actions ranked in
+        decreasing preference direction following Kohler's rule
+        on each component.
+        """
+        from linearOrders import KohlerOrder
+##        from itertools import chain      
+##        compKeys = list(self.components.keys())
+##        compKeys.sort()
+##        ranking = list(chain.from_iterable([self.components[ck]['subGraph'].computeKohlerRanking()\
+##                                            for ck in compKeys]))
+##        nc = self.nbrComponents
+##
+        ranking = []
+        
+        # self.components is an ordered dictionary in decreasing preference
+        for cki in self.components:
+            comp = self.components[cki]
+            pg = comp['subGraph']
+            pko = KohlerOrder(pg)
+            ranking += pko.computeRanking()
+        return ranking
+
+    def computeBoostedKohlerOrder(self):
+        """
+        Renders an ordred list of decision actions ranked in
+        increasing preference direction following Kohler's rule
+        on each component.
+        """
+        from linearOrders import KohlerOrder
+##        from itertools import chain      
+##        compKeys = list(self.components.keys())
+##        compKeys.sort()
+##        ranking = list(chain.from_iterable([self.components[ck]['subGraph'].computeKohlerRanking()\
+##                                            for ck in compKeys]))
+##        nc = self.nbrComponents
+##
+        ordering = []
+        compKeys = list(self.components.keys())
+        compKeys.reverse()
+        # self.components is an ordered dictionary in decreasing preference
+        for cki in self.components:
+            comp = self.components[cki]
+            pg = comp['subGraph']
+            pko = KohlerOrder(pg)
+            ordering += pko.computeOrder()
+        return ordering
+
+    def computeBoostedRankedPairsRanking(self):
         """
         Renders an ordred list of decision actions in decreasing preference direction following Tideman's Ranked Pairs rule on each component.
         """
@@ -979,10 +1028,10 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         
 ##        compKeys = list(self.components.keys())
 ##        compKeys.sort()
-        ordering = list(chain.from_iterable(\
+        ranking = list(chain.from_iterable(\
             [self.components[ck]['subGraph'].computeRankedPairsOrder()\
                                           for ck in self.components]))
-        return ordering    
+        return ranking    
 
 ##    def ranking2Preorder(self,ordering):
 ##        """
@@ -1549,7 +1598,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
 ##
 
 
-    def computeBoostedKohlerOrder(self):
+    def computeBoostedKohlerRanking(self):
         """
         Renders an ordred list of decision actions ranked in
         decreasing preference direction following Kohler's rule
@@ -1561,7 +1610,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
         components = self.components
 ##        compKeys = list(self.components.keys())
 ##        compKeys.sort()
-        ranking = list(chain.from_iterable([self.components[ck]['subGraph'].computeKohlerOrder()\
+        ranking = list(chain.from_iterable([self.components[ck]['subGraph'].computeKohlerRanking()\
                                             for ck in components.keys()]))
 ##        nc = self.nbrComponents
 ##
@@ -1575,7 +1624,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
 ##            ranking += pko.computeOrder()
         return ranking    
 
-    def computeBoostedRankedPairsOrder(self):
+    def computeBoostedRankedPairsRanking(self):
         """
         Renders an ordred list of decision actions in decreasing preference direction following Tideman's Ranked Pairs rule on each component.
         """
@@ -1586,7 +1635,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
 ##        compKeys.sort()
         components = self.components
         ranking = list(chain.from_iterable(\
-            [components[ck]['subGraph'].computeRankedPairsOrder()\
+            [components[ck]['subGraph'].computeRankedPairsRanking()\
                                           for ck in components.keys()]))
 ##        ranking = []
 ##        for cki in components.keys():
