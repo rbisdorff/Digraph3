@@ -7460,14 +7460,14 @@ class Digraph(object):
             else:
                 return Med
 
-    def computeKohlerRanking(self,Debug=False):
+    def computeKohlerOrder(self,Debug=False):
         """
         renders a ranking of the actions following Kohler's rule.
         """
         Max = self.valuationdomain['max']
         actionsList = [x for x in self.actions]
         relation = self.relation
-        rank = {}
+        rank = OrderedDict()
         k = 1
         while actionsList != []:
             maximin = []
@@ -7500,7 +7500,7 @@ class Digraph(object):
         actionsList = [x for x in self.actions]
         n = len(actionsList)
         relation = self.relation
-        rank = {}
+        rank = OrderedDict()
         k = 1
         while actionsList != []:
             minimax = []
@@ -7531,6 +7531,7 @@ class Digraph(object):
         ranked pairs rule.
         """
         relation = self.relation
+        actions = self.actions
         actions = [x for x in self.actions]
         actions.sort()
 
@@ -7539,7 +7540,7 @@ class Digraph(object):
         listPairs = []
         for x in actions:
             for y in [z for z in actions if z != x]:
-                listPairs.append((-relation[x][y],(x,y),x,y))
+                listPairs.append((relation[x][y],(x,y),x,y))
         listPairs.sort(reverse=False)
 
         g = IndeterminateDigraph(order=n)
@@ -7665,7 +7666,8 @@ class Digraph(object):
                 print('Exact Kemeny Orders = ', kemenyOrder)
                 print('Exact Kemeny Index = ', kemenyIndex)
                 print('# of permutations  = ', s)
-            
+
+        kemenyOrder.reverse()
         return kemenyOrder, kemenyIndex
 
     def computePrincipalOrder(self, plotFileName=None,
