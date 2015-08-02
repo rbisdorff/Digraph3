@@ -614,7 +614,7 @@ class BoostedKohlerOrder(KohlerOrder,QuantilesSortingDigraph):
                  argPerfTab=None,
                  limitingQuantiles=None,
                  LowerClosed=True,
-                 strategy="optimistic",
+                 strategy="average",
                  PrefThresholds=False,
                  hasNoVeto=False,
                  outrankingType = "bipolar",
@@ -640,8 +640,8 @@ class BoostedKohlerOrder(KohlerOrder,QuantilesSortingDigraph):
 
         # quantiles sorting
         na = len(perfTab.actions)
-        if limitingQuantiles == None:
-            limitingQuantiles = na // 2
+        if limitingQuantiles == None:       
+            limitingQuantiles = max((na // 2),10)
         self.sortingParameters = {}
         self.sortingParameters['limitingQuantiles'] = limitingQuantiles
         self.sortingParameters['strategy'] = strategy
@@ -1128,7 +1128,7 @@ if __name__ == "__main__":
 
     Threading = False
     print('*-------- Testing KemenyOrder class -------')
-#    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,seed=100)
+    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
     t = PerformanceTableau('testLin')    
     g = BipolarOutrankingDigraph(t)
     g.showRelationTable()

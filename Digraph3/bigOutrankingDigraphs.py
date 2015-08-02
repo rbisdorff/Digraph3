@@ -1029,8 +1029,22 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
 ##        compKeys = list(self.components.keys())
 ##        compKeys.sort()
         ranking = list(chain.from_iterable(\
-            [self.components[ck]['subGraph'].computeRankedPairsOrder()\
+            [self.components[ck]['subGraph'].computeRankedPairsRanking()\
                                           for ck in self.components]))
+        return ranking    
+
+    def computeBoostedRankedPairsOrder(self):
+        """
+        Renders an ordred list of decision actions in decreasing preference direction following Tideman's Ranked Pairs rule on each component.
+        """
+        from linearOrders import KohlerOrder
+        from itertools import chain
+        
+        compKeys = list(self.components.keys())
+        compKeys.reverse()
+        ranking = list(chain.from_iterable(\
+            [self.components[ck]['subGraph'].computeRankedPairsOrder()\
+                                          for ck in compKeys]))
         return ranking    
 
 ##    def ranking2Preorder(self,ordering):
