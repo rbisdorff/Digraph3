@@ -2607,7 +2607,8 @@ class Digraph(object):
     def exportPrincipalImage(self, Reduced=False,\
                              Colwise=False,\
                              plotFileName=None,\
-                             Type="png",Comments=False):
+                             Type="png",\
+                             TempDir='.',Comments=False):
         """
         Export as PNG (default) or PDF the principal projection of
         the valued relation using the three principal eigen vectors.
@@ -2616,25 +2617,29 @@ class Digraph(object):
         
             The method, writing and reading temporary files: 
             tempCol.r and rotationCol.csv, resp. tempRow.r and rotationRow.csv,
-            is hence not safe for multiprocessors' threading programs.
+            by default in the working directory (./),
+            is hence not safe for multiprocessing programs, unless a
+            temporary dirctory is provided
 
         """
         
         if Comments:
             print('*----  export 3dplot of type %s -----' % (Type))
+        if TempDir == None:
+            TempDir = '.'
         import os,time
         if plotFileName == None:
-            plotFileName = "%s_principalImage" % self.name
+            plotFileName = "%s/%s_principalImage" % (TempDir,self.name)
         if Colwise:
             plotFileName += "_Colwise"
         else:
             plotFileName += "_Rowwise"
-        self.saveCSV('exportTemp')
+        self.saveCSV('%s/exportTemp' % TempDir)
         if Colwise:
-            fo = open('tempCol.r','w')
+            fo = open('%s/tempCol.r' % TempDir,'w')
         else:
-            fo = open('tempRow.r','w')
-        fo.write("x = read.csv('exportTemp.csv',row.names=1)\n")
+            fo = open('%s/tempRow.r' % TempDir,'w')
+        fo.write("x = read.csv('%s/exportTemp.csv',row.names=1)\n" % TempDir)
         if Colwise:
             fo.write("x = t(x)\n")
         if Reduced:
@@ -2646,9 +2651,9 @@ class Digraph(object):
         fo.write("E = eigen(A, symmetric=TRUE)\n")
         fo.write("P = E$values * t(E$vectors)\n")
         if Colwise:
-            fo.write("write.csv(t(P),'rotationCol.csv',row.names=F)\n")
+            fo.write("write.csv(t(P),'%s/rotationCol.csv',row.names=F)\n" % TempDir)
         else:
-            fo.write("write.csv(t(P),'rotationRow.csv',row.names=F)\n")           
+            fo.write("write.csv(t(P),'%s/rotationRow.csv',row.names=F)\n" % TempDir)           
         if Type == None:
             # no principal image is required
             fo.close()
@@ -2658,17 +2663,17 @@ class Digraph(object):
             fo.write("val = pcaRes$val\n")
             fo.write("nval = length(val)\n")
             if Type == "png":
-                fo.write('png("%s.png",width=480,height=480,bg="cornsilk")\n'\
-                         % (plotFileName) )
+                fo.write('png("%s/%s.png",width=480,height=480,bg="cornsilk")\n'\
+                         % (TempDir,plotFileName) )
             elif Type == "jpeg":
-                fo.write('jpeg("%s.jpg",width=480,height=480,bg="cornsilk")\n'\
-                         % (plotFileName) )
+                fo.write('jpeg("%s/%s.jpg",width=480,height=480,bg="cornsilk")\n'\
+                         % (TempDir,plotFileName) )
             elif Type == "xfig":
-                fo.write('xfig("%s.fig",width=480,height=480,bg="cornsilk")\n'\
-                         % (plotFileName) )
+                fo.write('xfig("%s/%s.fig",width=480,height=480,bg="cornsilk")\n'\
+                         % (TempDir,plotFileName) )
             elif Type == "pdf":
-                fo.write('pdf("%s.pdf",width=6,height=6,bg="cornsilk",title="PCA of relation valuation")\n'\
-                         % (plotFileName) )
+                fo.write('pdf("%s/%s.pdf",width=6,height=6,bg="cornsilk",title="PCA of relation valuation")\n'\
+                         % (TempDir,plotFileName) )
             else:
                 print('Error: Plotting device %s not defined !' % (Type))
                 return
@@ -2692,18 +2697,18 @@ class Digraph(object):
             fo.close()
         if Comments:
             if Colwise:
-                os.system('env R -q --vanilla --verbose < tempCol.r 2>&1')
+                os.system('(cd %s;env R -q --vanilla --verbose < tempCol.r 2>&1)' % TempDir)
             else:
-                os.system('env R -q --vanilla --verbose < tempRow.r 2>&1')               
+                os.system('(cd %s;env R -q --vanilla --verbose < tempRow.r 2>&1)' % TempDir )               
         else:
             if Colwise:
-                os.system('env R -q --vanilla < tempCol.r > /dev/null 2> /dev/null')
+                os.system('(cd %s;env R -q --vanilla < tempCol.r > /dev/null 2> /dev/null)' % TempDir)
             else:
-                os.system('env R -q --vanilla < tempRow.r > /dev/null 2> /dev/null')
+                os.system('(cd %s;env R -q --vanilla < tempRow.r > /dev/null 2> /dev/null)' % TempDir)
                 
         time.sleep(3)     
         if Type != None and Comments:
-            print('See %s.%s ! ' % (plotFileName,Type))
+            print('See %/%s.%s ! ' % (TempDir,plotFileName,Type))
         
         
     def exportGraphViz(self,fileName=None,actionsSubset=None,\
@@ -7670,29 +7675,36 @@ class Digraph(object):
         kemenyOrder.reverse()
         return kemenyOrder, kemenyIndex
 
-    def computePrincipalOrder(self, plotFileName=None,
-                              Colwise=False, imageType=None,
+    def computePrincipalOrder(self, plotFileName=None,\
+                              Colwise=False, imageType=None,\
+                              TempDir=None,\
                               Comments=False, Debug=False):
         """
         renders a ordered list of self.actions using the decreasing scores from the
         first rincipal eigenvector of the covariance of the valued outdegrees of self.
 
-        .. warning::
+        .. note::
 
-           The method, relying on writing and reading temporary files in the current
-           working directory, is hence not threading and multiprocessing safe !
+           The method, relying on writing and reading temporary files by default in a temporary directory is threading and multiprocessing safe !
            (see Digraph.exportPrincipalImage method)
 
         """
         from csv import reader
-        from operator import itemgetter, attrgetter
+        #from operator import itemgetter, attrgetter
+        from tempfile import mkdtemp
+        if TempDir == None:
+            tempDirName = mkdtemp()
+        else:
+            tempDirName = TempDir
         self.exportPrincipalImage(Colwise=Colwise,Comments=Comments,
                                   Type=imageType,
-                                  plotFileName=plotFileName)
+                                  plotFileName=plotFileName,
+                                  TempDir=tempDirName,
+                                  )
         if Colwise:
-            fi = open('rotationCol.csv','r')
+            fi = open('%s/rotationCol.csv' % tempDirName,'r')
         else:
-            fi = open('rotationRow.csv','r')
+            fi = open('%s/rotationRow.csv' % tempDirName,'r')
             
         csvReader = reader(fi)
         R = [x for x in csvReader]

@@ -1015,6 +1015,7 @@ class PrincipalOrder(LinearOrder):
         """
         from copy import copy, deepcopy
         from decimal import Decimal
+        from tempfile import TemporaryDirectory
         
         Min = other.valuationdomain['min']
         Max = other.valuationdomain['max']
@@ -1023,7 +1024,8 @@ class PrincipalOrder(LinearOrder):
         actionsList.sort()
         n = len(actionsList)
         relation = deepcopy(other.relation)
-        principalScores = other.computePrincipalOrder(Colwise=Colwise,
+        with TemporaryDirectory() as tempDirName:
+            principalScores = other.computePrincipalOrder(Colwise=Colwise,
                                                       imageType=imageType,
                                                       plotFileName=plotFileName,
                                                       Debug=Debug)
@@ -1129,7 +1131,7 @@ if __name__ == "__main__":
     Threading = False
     print('*-------- Testing KemenyOrder class -------')
     t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
-    t = PerformanceTableau('testLin')    
+##    t = PerformanceTableau('testLin')    
     g = BipolarOutrankingDigraph(t)
     g.showRelationTable()
     print()
