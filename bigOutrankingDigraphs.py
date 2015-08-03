@@ -536,7 +536,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                                       Normalized=True,CopyPerfTab=False,
                                       Threading=Threading,nbrCores=nbrOfCPUs,
                                       Comments=Comments)
-        globalOrdering = self.ranking2Preorder(self.boostedKohlerOrder)
+        globalOrdering = self.ranking2Preorder(self.boostedKohlerRanking)
         globalRelation = gc.computePreorderRelation(globalOrdering)
         corr = gc.computeOrdinalCorrelation(globalRelation)
         if Debug:
