@@ -1078,10 +1078,49 @@ class Digraph(object):
             print("Error: no ranking by choosing result !!")
             return None
 
+    def computePreRankingRelation(self,preRanking,Normalized=True,Debug=False):
+        """
+        Renders the bipolar-valued relation obtained from
+        a given preRanking in decreasing levels (list of lists) result.
+        """
+        if Normalized:
+            Max = Decimal('1')
+            Med = Decimal('0')
+            Min = Decimal('-1')
+        else:   
+            Max = self.valuationdomain['max']
+            Med = self.valuationdomain['med']
+            Min = self.valuationdomain['min']
+            
+        actions = list(self.actions.keys())
+        currentActions = set(actions)
+        preRankingRelation = {}
+        for x in actions:
+            preRankingRelation[x] = {}
+            for y in actions:
+                preRankingRelation[x][y] = Med
+
+        for eqcl in preRanking:
+            currRest = currentActions - set(eqcl)
+            if Debug:
+                print(currentActions, eqcl, currRest)
+            for x in eqcl:
+                for y in eqcl:
+                    if x != y:
+                        preRankingRelation[x][y] = Max
+                        preRankingRelation[y][x] = Max
+
+            for x in eqcl:
+                for y in currRest:
+                    preRankingRelation[x][y] = Max
+                    preRankingRelation[y][x] = Min
+            currentActions = currentActions - set(eqcl)
+        return preRankingRelation
+
     def computePreorderRelation(self,preorder,Normalized=True,Debug=False):
         """
         Renders the bipolar-valued relation obtained from
-        a given preordering (list of lists) result.
+        a given preordering in increasing levels (list of lists) result.
         """
         if Normalized:
             Max = Decimal('1')
@@ -1112,8 +1151,8 @@ class Digraph(object):
 
             for x in eqcl:
                 for y in currRest:
-                    preorderRelation[x][y] = Max
-                    preorderRelation[y][x] = Min
+                    preorderRelation[x][y] = Min
+                    preorderRelation[y][x] = Max
             currentActions = currentActions - set(eqcl)
         return preorderRelation
 
