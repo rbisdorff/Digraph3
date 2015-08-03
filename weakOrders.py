@@ -1194,7 +1194,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                  argPerfTab=None,
                  limitingQuantiles=None,
                  LowerClosed=True,
-                 strategy="optimistic",
+                 strategy="average",
                  rankingRule="KohlerRule",
                  # alternative "RubisChoice"
                  PrefThresholds=False,
@@ -1467,22 +1467,14 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         Instantiates the weak order by taking the codual of the
         preoder obtained from the actions categories intervals !
         """
-        if strategy == None:
-            strategy = self.strategy
-##        preOrdering = self.computeWeakOrder(strategy=strategy,Debug=Debug)
-        Descending = True
-        if strategy == "pessimistic":
-            Decending = False
-        preOrdering = self.computeQsRbcRanking(Descending=Descending,Debug=Debug)
-        relation = self.computePreorderRelation(preOrdering,Normalized=False)
-        #actionsList = [x for x in self.actions]
+        preRanking = self.computeQsRbcRanking(Descending=True,Debug=Debug)
+        relation = self.computePreRankingRelation(preRanking,Normalized=False)
         actions = self.actions
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
         for x in dict.keys(actions):
             for y in dict.keys(actions):
-                #self.relation[x][y] = relation[x][y]
-                self.relation[x][y] = Max - relation[y][x] + Min 
+                self.relation[x][y] = relation[x][y]
 
     def computeWeakOrder(self,Descending=True,strategy=None,Comments=False,Debug=False):
         """
@@ -1675,10 +1667,50 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         Renders the ordinal (Kendall) correlation of the quantiles ranking
         with the underlying bipolar outranking relation.
         """
-        selfOrder = self.computePreorderRelation(self.computeQsRbcRanking())
+        rankingPreOrder = self.computeRankingRelation(self.computeQsRbcRanking())
         #print('selfOrder',selfOrder)
         g = BipolarOutrankingDigraph(self,Threading=Threading,CopyPerfTab=False)
-        return g.computeOrdinalCorrelation(selfOrder)
+        return g.computeOrdinalCorrelation(rankingPreOrder)
+
+    def computeRankingRelation(self,preorder,Normalized=True,Debug=False):
+        """
+        Renders the bipolar-valued relation obtained from
+        a given preordering in decreasing levels (list of lists) result.
+        """
+        if Normalized:
+            Max = Decimal('1')
+            Med = Decimal('0')
+            Min = Decimal('-1')
+        else:   
+            Max = self.valuationdomain['max']
+            Med = self.valuationdomain['med']
+            Min = self.valuationdomain['min']
+            
+        actions = list(self.actions.keys())
+        currentActions = set(actions)
+        preorderRelation = {}
+        for x in actions:
+            preorderRelation[x] = {}
+            for y in actions:
+                preorderRelation[x][y] = Med
+
+        for eqcl in preorder:
+            currRest = currentActions - set(eqcl)
+            if Debug:
+                print(currentActions, eqcl, currRest)
+            for x in eqcl:
+                for y in eqcl:
+                    if x != y:
+                        preorderRelation[x][y] = Max
+                        preorderRelation[y][x] = Max
+
+            for x in eqcl:
+                for y in currRest:
+                    preorderRelation[x][y] = Max
+                    preorderRelation[y][x] = Min
+            currentActions = currentActions - set(eqcl)
+        return preorderRelation
+
 
 #----------               
 class QsRbcWeakOrdering(QuantilesRankingDigraph):
