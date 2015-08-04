@@ -483,13 +483,13 @@ The performance evaluations of each decision alternative on each criterion are g
             evaluation = self.evaluation
 
         sumWeights = Decimal('0.0')
-        for g in criteria:
+        for g in dict.keys(criteria):
             sumWeights += criteria[g]['weight']
 
         weightedAverage = {} 
-        for x in [z for z in actions]:
+        for x in dict.keys(actions):
             weightedAverage[x] = Decimal('0.0')
-            for g in [z for z in criteria]:
+            for g in dict.keys(criteria):
                 weightedAverage[x] += evaluation[g][x] * criteria[g]['weight'] / sumWeights
         if isListRanked:
             ranked = []
@@ -519,7 +519,7 @@ The performance evaluations of each decision alternative on each criterion are g
                 print('  comment:   ',actions[x]['comment'])
                 print()
         else:
-            for x in actions.keys():
+            for x in dict.keys(actions):
                 print('key: ',x)
                 try:
                     print('  short name:',actions[x]['shortName'])
@@ -533,68 +533,73 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         print Criteria with thresholds and weights.
         """
+        criteria = self.criteria
+        try:
+            objectives = self.objectives
+        except:
+            ByObjectives = False
         print('*----  criteria -----*')
         sumWeights = Decimal('0.0')
-        for g in self.criteria:
-            sumWeights += self.criteria[g]['weight']
+        for g in dict.keys(criteria):
+            sumWeights += criteria[g]['weight']
         if ByObjectives:
-            for obj in self.objectives:
-                criteriaList = [g for g in self.criteria if self.criteria[g]['objective']==obj]
+            for obj in objectives.keys():
+                criteriaList = [g for g in criteria if criteria[g]['objective']==obj]
                 for g in criteriaList:
                     try:
-                        criterionName = '%s/' % self.objectives[self.criteria[g]['objective']]['name']                                        
+                        criterionName = '%s/' % objectives[criteria[g]['objective']]['name']                                        
                     except:
                         criterionName = ''
                     try:
-                        criterionName += self.criteria[g]['name']
+                        criterionName += criteria[g]['name']
                     except:
                         pass
                     print(g, repr(criterionName))
                     
-                    print('  Scale =', self.criteria[g]['scale'])
+                    print('  Scale =', criteria[g]['scale'])
                     if IntegerWeights:
-                        print('  Weight = %d ' % (self.criteria[g]['weight']))
+                        print('  Weight = %d ' % (criteria[g]['weight']))
                     else:
-                        weightg = self.criteria[g]['weight']/sumWeights
+                        weightg = criteria[g]['weight']/sumWeights
                         print('  Weight = %.3f ' % (weightg))
                     try:
-                        for th in self.criteria[g]['thresholds']:
+                        for th in criteria[g]['thresholds']:
                             if Debug:
-                                print('-->>>', th,self.criteria[g]['thresholds'][th][0],self.criteria[g]['thresholds'][th][1])
-                            print('  Threshold %s : %.2f + %.2fx' % (th,self.criteria[g]['thresholds'][th][0],self.criteria[g]['thresholds'][th][1]), end=' ')
+                                print('-->>>', th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1])
+                            print('  Threshold %s : %.2f + %.2fx' %\
+                                  (th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1]), end=' ')
                             #print self.criteria[g]['thresholds'][th]
                             print('; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug))
                     except:
                         pass
                     print()
         else:
+            criteriaList = list(dict.keys(criteria))
             if Alphabetic:
-                criteria = list(dict.keys(self.criteria))
-                criteria.sort()
-            else:
-                criteria = self.criteria
-            for g in criteria.keys():
+                criteriaList.sort()
+            for g in criteriaList:
                 try:
-                    criterionName = '%s/' % self.objectives[self.criteria[g]['objective']]['name']                                        
+                    criterionName = '%s/' % objectives[criteria[g]['objective']]['name']                                        
                 except:
                     criterionName = ''
                 try:
-                    criterionName += self.criteria[g]['name']
+                    criterionName += criteria[g]['name']
                 except:
                     pass
                 print(g, repr(criterionName))
                 
-                print('  Scale =', self.criteria[g]['scale'])
+                print('  Scale =', criteria[g]['scale'])
                 if IntegerWeights:
-                    print('  Weight = %d ' % (self.criteria[g]['weight']))
+                    print('  Weight = %d ' % (criteria[g]['weight']))
                 else:
-                    weightg = self.criteria[g]['weight']/sumWeights
+                    weightg = criteria[g]['weight']/sumWeights
                     print('  Weight = %.3f ' % (weightg))
                 try:
-                    for th in self.criteria[g]['thresholds']:
+                    for th in criteria[g]['thresholds']:
                         if Debug:
-                            print('-->>>', th,self.criteria[g]['thresholds'][th][0],self.criteria[g]['thresholds'][th][1])
-                        print('  Threshold %s : %.2f + %.2fx' % (th,self.criteria[g]['thresholds'][th][0],self.criteria[g]['thresholds'][th][1]), end=' ')
+                            print('-->>>', th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1])
+                        print('  Threshold %s : %.2f + %.2fx'\
+                              % (th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1]), end=' ')
                         #print self.criteria[g]['thresholds'][th]
                         print('; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug))
                 except:
@@ -647,24 +652,26 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         Adds to the criteria dictionary the ordered list of all observed performance differences.
         """
-        
+        criteria = self.criteria
+        actions = self.actions
+        evaluation = self.evaluation
         if Debug:
             Comments = True
         if Comments:
             print('Compute performance differences on each criterion')
-        criteriaList = [x for x in self.criteria]
-        criteriaList.sort()
-        actionsList = [x for x in self.actions]
+        #criteriaList = [x for x in self.criteria]
+        #criteriaList.sort()
+        actionsList = list(dict.keys(actions))
         n = len(actionsList)
         if NotPermanentDiffs:
             performanceDifferences = {}
-        for c in criteriaList:
-            ed = Decimal(str(self.criteria[c]['scale'][1])) - Decimal(str(self.criteria[c]['scale'][0]))
+        for c in criteria.keys():
+            ed = Decimal(str(criteria[c]['scale'][1])) - Decimal(str(criteria[c]['scale'][0]))
             md = Decimal('0')
             #diff = set()
             diffList = []
             for i in range(n):
-                xi = self.evaluation[c][actionsList[i]]
+                xi = evaluation[c][actionsList[i]]
                 if xi != Decimal('-999'):
                     for j in range(i+1,n):
                         xj = self.evaluation[c][actionsList[j]]
@@ -677,9 +684,11 @@ The performance evaluations of each decision alternative on each criterion are g
                             #diff.add(delta)
                             diffList.append(delta)
                             if Debug:
-                                print('-->> i,j, self.evaluation[actionsList[i]],self.evaluation[actionsList[j]], delta, ed,md', i,j, self.evaluation[c][actionsList[i]],self.evaluation[c][actionsList[j]], delta, ed,md,diffList)
-            self.criteria[c]['minimalPerformanceDifference'] = ed
-            self.criteria[c]['maximalPerformanceDifference'] = md
+                                print('-->> i,j, evaluation[actionsList[i]],evaluation[actionsList[j]], delta, ed,md',\
+                                      i,j, evaluation[c][actionsList[i]],evaluation[c][actionsList[j]],\
+                                      delta, ed,md,diffList)
+            criteria[c]['minimalPerformanceDifference'] = ed
+            criteria[c]['maximalPerformanceDifference'] = md
             #diffList = list(diff)
             diffList.sort()
             if NotPermanentDiffs:
@@ -688,11 +697,12 @@ The performance evaluations of each decision alternative on each criterion are g
                 else:
                     performanceDifferences[c] = diffList
             else:
-                self.criteria[c]['performanceDifferences'] = diffList
+                criteria[c]['performanceDifferences'] = diffList
                 if Comments:
-                    print(' -->', c, ': ', self.criteria[c]['minimalPerformanceDifference'], self.criteria[c]['maximalPerformanceDifference'])
-                    print(len(self.criteria[c]['performanceDifferences']),self.criteria[c]['performanceDifferences'])
-                    print(self.criteria[c]['performanceDifferences'][0], self.criteria[c]['performanceDifferences'][-1])
+                    print(' -->', c, ': ', criteria[c]['minimalPerformanceDifference'],\
+                          criteria[c]['maximalPerformanceDifference'])
+                    print(len(criteria[c]['performanceDifferences']),criteria[c]['performanceDifferences'])
+                    print(criteria[c]['performanceDifferences'][0], criteria[c]['performanceDifferences'][-1])
 
         if NotPermanentDiffs:
             return performanceDifferences
@@ -701,23 +711,25 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         Adds to the criteria dictionary the ordered list of all observed performance differences.
         """
+        criteria = self.criteria
         from multiprocessing import Pool
         #from os import cpu_count
         if Debug:
             print('Compute performance differences on each criterion in parallel')
        
-        criteriaList = [x for x in self.criteria]
-        criteriaList.sort()
+        #criteriaList = [x for x in self.criteria]
+        #criteriaList.sort()
 
         with Pool(nbrCores) as proc:
             performanceDifferences = proc.map(self.computeCriterionPerformanceDifferences,criteriaList)
         
-        for i in range(len(criteriaList)):
-            c = criteriaList[i]
+        #for i in range(len(criteriaList)):
+        #    c = criteriaList[i]
+        for c in criteria.keys():
             if not NotPermanentDiffs:
-                self.criteria[c]['performanceDifferences'] = performanceDifferences[i][0]
-            self.criteria[c]['minimalPerformanceDifference'] = performanceDifferences[i][1]
-            self.criteria[c]['maximalPerformanceDifference'] = performanceDifferences[i][2]
+                criteria[c]['performanceDifferences'] = performanceDifferences[i][0]
+            criteria[c]['minimalPerformanceDifference'] = performanceDifferences[i][1]
+            criteria[c]['maximalPerformanceDifference'] = performanceDifferences[i][2]
 
         return performanceDifferences
 
@@ -727,22 +739,24 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         Renders the ordered list of all observed performance differences on the given criterion.
         """
-        
+        evaluation = self.evaluation
+        criteria = self.criteria
+        actions = self.actions
         if Debug:
             Comments = True
         if Comments:
             print('Compute performance differences on criterion %s' % c)
-        actionsList = [x for x in self.actions]
+        actionsList = list(dict.keys(actions))
         n = len(actionsList)
-        ed = Decimal(str(self.criteria[c]['scale'][1])) - Decimal(str(self.criteria[c]['scale'][0]))
+        ed = Decimal(str(criteria[c]['scale'][1])) - Decimal(str(criteria[c]['scale'][0]))
         md = Decimal('0')
         #diff = set()
         diffList = []
         for i in range(n):
-            xi = self.evaluation[c][actionsList[i]]
+            xi = evaluation[c][actionsList[i]]
             if xi != Decimal('-999'):
                 for j in range(i+1,n):
-                    xj = self.evaluation[c][actionsList[j]]
+                    xj = evaluation[c][actionsList[j]]
                     if xj != Decimal('-999'):
                         delta = abs(xi - xj)
                         if delta < ed:
@@ -752,24 +766,16 @@ The performance evaluations of each decision alternative on each criterion are g
                         #diff.add(delta)
                         diffList.append(delta)
                         if Debug:
-                            print('-->> i,j, self.evaluation[actionsList[i]],self.evaluation[actionsList[j]], delta, ed,md', i,j, self.evaluation[c][actionsList[i]],self.evaluation[c][actionsList[j]], delta, ed,md,diffList)
-##        for i in range(n):
-##            for j in range(i+1,n):
-##                delta = abs(self.evaluation[c][actionsList[i]] - self.evaluation[c][actionsList[j]])
-##                if delta < ed:
-##                    ed = delta
-##                if delta > md:
-##                    md = delta
-##                #diff.add(delta)
-##                diffList.append(delta)
-##                if Debug:
-##                    print('-->> i,j, self.evaluation[actionsList[i]],self.evaluation[actionsList[j]], delta, ed,md', i,j, self.evaluation[c][actionsList[i]],self.evaluation[c][actionsList[j]], delta, ed,md,diffList)
-        self.criteria[c]['minimalPerformanceDifference'] = ed
-        self.criteria[c]['maximalPerformanceDifference'] = md
+                            print('-->> i,j, evaluation[actionsList[i]],evaluation[actionsList[j]], delta, ed,md',\
+                                  i,j, evaluation[c][actionsList[i]],evaluation[c][actionsList[j]],\
+                                  delta, ed,md,diffList)
+        criteria[c]['minimalPerformanceDifference'] = ed
+        criteria[c]['maximalPerformanceDifference'] = md
         #diffList = list(diff)
         diffList.sort()
         if Comments:
-            print(' -->', c, ': ', self.criteria[c]['minimalPerformanceDifference'], self.criteria[c]['maximalPerformanceDifference'])
+            print(' -->', c, ': ', criteria[c]['minimalPerformanceDifference'],\
+                  criteria[c]['maximalPerformanceDifference'])
             print(len(diffList),diffList)
             print(diffList[0], diffList[-1])
         
@@ -918,44 +924,73 @@ The performance evaluations of each decision alternative on each criterion are g
                 i += 1
         fo.close()
 
+
+    def showAllQuantiles(self,Sorted=True):
+        """
+        prints the performance quantiles tableau in the session console.
+        """
+        self.computeAllQuantiles(Sorted=Sorted,Comments=True)
+
+    def showHTMLPerformanceQuantiles(self,Sorted=True):
+        """
+        shows the performance quantiles tableau in a browser window.
+        """
+        import webbrowser
+        fileName = '/tmp/performanceQuantiles.html'
+        fo = open(fileName,'w')
+        fo.write(self.computeAllQuantiles(Sorted=Sorted,Comments=False))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
         
-    def showAllQuantiles(self):
+    def computeAllQuantiles(self,Sorted=True,Comments=False):
         """
         renders a html string showing the table of
         the quantiles matrix action x criterion
         """
-##        criteriaList = [x for x in self.criteria]
-##        criteriaList.sort()
-##        actionsList = [x for x in self.actions]
-##        actionsList.sort()
         criteria = self.criteria
+        criteriaList = list(criteria.keys())
+        if Sorted:
+            criteriaList.sort()
         actions = self.actions
+        actionsList = list(actions.keys())
+        if Sorted:
+            actionsList.sort()
         html = '<table style="background-color:White;" border="1">\n'
-        print('criteria | ', end=' ')
+        if Comments:
+            print('criteria | ', end=' ')
         html += '<tr bgcolor="#9acd32"><th>criteria</th>'
-        for g in dict.keys(criteria):
-            print(str(g) + '\t', end=' ')
+        for g in criteriaList:
+            if Comments:
+                print(str(g) + '\t', end=' ')
             html += '<th>%s</th>' % (g)
         html += '</tr>\n'
-        print('\nweights  | ', end=' ') 
+        if Comments:
+            print('\nweights  | ', end=' ') 
         html += '<tr style="text-align: center;" bgcolor="#FFF79B"><td>weights</td>'
-        for g in dict.keys(criteria):
-            print(str(self.criteria[g]['weight']) + '\t', end=' ')
-            html += '<td >%s</td>' % (self.criteria[g]['weight'])
-        html += '</tr>\n'        
-        print('\n-----------------------------------------------------')
-        for x in dict.keys(actions):
-            print(str(x) + '   | ', end=' ')
+        for g in criteriaList:
+            if Comments:
+                print(str(criteria[g]['weight']) + '\t', end=' ')
+            html += '<td >%s</td>' % (criteria[g]['weight'])
+        html += '</tr>\n'
+        if Comments:
+            print('\n-----------------------------------------------------')
+        for x in actionsList:
+            if Comments:
+                print(str(x) + '   | ', end=' ')
             html += '<tr><th  bgcolor="#FFF79B">%s</th>' % (x)
-            for g in dict.keys(criteria):
+            for g in criteriaList:
                 qval = self.computeActionCriterionQuantile(x,g,Debug=False)
                 if qval != 'NA':
-                    print('%.2f\t' % qval, end=' ')
+                    if Comments:
+                        print('%.2f\t' % qval, end=' ')
                     html += '<td>%.2f</td>' % (qval)
                 else:
-                    print('NA\t', end=' ')
+                    if Comments:
+                        print('NA\t', end=' ')
                     html += '<td>NA</td>'
-            print()
+            if Comments:
+                print()
             html += '</tr>\n'
                                           
         html += '</table>\n'
@@ -1878,13 +1913,8 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</head>\n<body>\n'
         html += '<h2>%s</h2>\n' % pageTitle
 
-
-        if actionsList == None:
-            actions = self.actions
-            actionsList = list(dict.keys(actions))
-            actionsList.sort()
-        na = len(actionsList)
-        
+        actions = self.actions
+        na = len(actions)
         if Ranked:
 ##            from weakOrders import QuantilesRankingDigraph
 ##            qr = QuantilesRankingDigraph(self,LowerClosed=False,
@@ -1900,9 +1930,14 @@ The performance evaluations of each decision alternative on each criterion are g
                                           Threading=Threading,
                                           Debug=Debug)
             actionsList = qr.boostedKohlerRanking
+        elif actionsList == None:
+            actionsList = list(dict.keys(actions))
+            actionsList.sort()
+        
         if Debug:
             print('1',actionsList)
-                
+
+        criteria = self.criteria
         if criteriaList == None:
             if Correlations:
                 criteriaCorrelation =\
@@ -1910,8 +1945,10 @@ The performance evaluations of each decision alternative on each criterion are g
                             Threading=Threading)
                 criteriaList = [c[1] for c in criteriaCorrelation]
             else:
-                criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
-                criteriaWeightsList.sort(reverse=True)
+                criteriaList = list(criteria.keys())
+                criteriaList.sort()
+                criteriaWeightsList = [(-criteria[g]['weight'],g) for g in criteriaList]
+                criteriaWeightsList.sort(reverse=False)
                 criteriaList = [g[1] for g in criteriaWeightsList]
                 criteriaCorrelation = None    
         else:
@@ -6134,42 +6171,45 @@ if __name__ == "__main__":
 ##    t.saveXMCDA2('test')
 ##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('uniSorting')
-    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
-    from weakOrders import *
-    print('TT')
-    qsrbc = QuantilesRankingDigraph(t,LowerClosed=True,PrefThresholds=True,Threading=False)
-    qsrbc.showSorting()
-##    t1 = RandomCBPerformanceTableau(numberOfCriteria=13,
-##                                   numberOfActions=30,
-##                                   weightDistribution='equiobjectives',
-##                                   integerWeights=True,
-##                                   Debug=False,
-##                                   missingDataProbability=0.1,
-##                                   seed=100,Threading=False)
-    print('TF')
-    qsrbc = QuantilesRankingDigraph(t,LowerClosed=True,PrefThresholds=False,Threading=False)
-    qsrbc.showSorting()
-##    t2 = RandomCBPerformanceTableau(numberOfCriteria=13,
-##                                   numberOfActions=30,
-##                                   weightDistribution='equiobjectives',
-##                                   integerWeights=True,
-##                                   Debug=False,
-##                                   missingDataProbability=0.1,
-##                                   seed=100,Threading=False)
-    print('FT')
-    qsrbc = QuantilesRankingDigraph(t,LowerClosed=False,PrefThresholds=True,Threading=False)
-    qsrbc.showSorting()
-##    t = RandomCBPerformanceTableau(numberOfCriteria=13,
-##                                   numberOfActions=30,
-##                                   weightDistribution='equiobjectives',
-##                                   integerWeights=True,
-##                                   Debug=False,
-##                                   missingDataProbability=0.1,
-##                                   seed=100,Threading=False)
-    print('FF')
-    qsrbc = QuantilesRankingDigraph(t,LowerClosed=False,PrefThresholds=False,Threading=False)
-    qsrbc.showSorting()
-    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
+##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
+##    from weakOrders import *
+##    print('TT')
+##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=True,PrefThresholds=True,Threading=False)
+##    qsrbc.showSorting()
+####    t1 = RandomCBPerformanceTableau(numberOfCriteria=13,
+####                                   numberOfActions=30,
+####                                   weightDistribution='equiobjectives',
+####                                   integerWeights=True,
+####                                   Debug=False,
+####                                   missingDataProbability=0.1,
+####                                   seed=100,Threading=False)
+##    print('TF')
+##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=True,PrefThresholds=False,Threading=False)
+##    qsrbc.showSorting()
+####    t2 = RandomCBPerformanceTableau(numberOfCriteria=13,
+####                                   numberOfActions=30,
+####                                   weightDistribution='equiobjectives',
+####                                   integerWeights=True,
+####                                   Debug=False,
+####                                   missingDataProbability=0.1,
+####                                   seed=100,Threading=False)
+##    print('FT')
+##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=False,PrefThresholds=True,Threading=False)
+##    qsrbc.showSorting()
+####    t = RandomCBPerformanceTableau(numberOfCriteria=13,
+####                                   numberOfActions=30,
+####                                   weightDistribution='equiobjectives',
+####                                   integerWeights=True,
+####                                   Debug=False,
+####                                   missingDataProbability=0.1,
+####                                   seed=100,Threading=False)
+##    print('FF')
+##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=False,PrefThresholds=False,Threading=False)
+##    qsrbc.showSorting()
+##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
+    t.showHTMLPerformanceQuantiles(Sorted=False)
+    t.showHTMLPerformanceQuantiles(Sorted=True)
+    t.showAllQuantiles(Sorted=True)
 ####    actionsList = qsrbc.computeQsRbcRanking()
 ####
 ##
