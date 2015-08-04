@@ -147,11 +147,11 @@ class LinearOrder(Digraph):
         degrees = []
         for x in list(dict.keys(self.actions)):
             degrees.append((len(self.gamma[x][0]),x))
-        degrees.sort()
-        ranking = []
+        degrees.sort(reverse=False)
+        ordering = []
         for x in degrees:
-            ranking.append(x[1])
-        return ranking
+            ordering.append(x[1])
+        return ordering
 
     def showOrdering(self):
         """
@@ -1065,7 +1065,6 @@ class PrincipalOrder(LinearOrder):
 
         # check principal orientation with ordinal correlation sign
         corr = other.computeOrdinalCorrelation(relation)
-        print(corr)
         if corr['correlation'] < Decimal('0'):
             ReverseScores = True
             for i in range(n):
@@ -1130,8 +1129,8 @@ if __name__ == "__main__":
 
     Threading = False
     print('*-------- Testing KemenyOrder class -------')
-    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
-##    t = PerformanceTableau('testLin')    
+##    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
+    t = PerformanceTableau('testLin')    
     g = BipolarOutrankingDigraph(t)
     g.showRelationTable()
     print()
