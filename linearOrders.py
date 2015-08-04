@@ -861,25 +861,25 @@ class NetFlowsOrder(LinearOrder):
                 #print netFlows
                 
             
-        actions = [x for x in other.actions]
-        actions.sort()
-        n = len(actions)
+        #actions = list(dict.keys(other.actions))
+        #actions.sort()
+        n = len(other.actions)
         
         # instatiates a Digraph template
         g = IndeterminateDigraph(order=n)
-        g.actions = actions
+        g.actions = deepcopy(other.actions)
         g.valuationdomain = {'min':Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
         g.relation = {}
-        for x in g.actions:
+        for x in dict.keys(g.actions):
             g.relation[x] = {}
-            for y in g.actions:
+            for y in dict.keys(g.actions):
                 g.relation[x][y] = g.valuationdomain['med']
 
         netflows = {}
         netFlowsOrder = []
-        for x in actions:
+        for x in dict.keys(g.actions):
             netflows[x] = Decimal('0.0')      
-            for y in actions:
+            for y in dict.keys(g.actions):
                 if y != x:
                     netflows[x] += relation[x][y] - relation[y][x]
             if Debug:
@@ -892,7 +892,6 @@ class NetFlowsOrder(LinearOrder):
         netFlowsRanking = [x[1] for x in netFlowsOrder]
         self.netFlowsRanking = netFlowsRanking
         
-        n = len(g.actions)
         for i in range(n):
             for j in range(i+1,n):
                 x = netFlowsOrder[i][1]
@@ -902,8 +901,8 @@ class NetFlowsOrder(LinearOrder):
                 
          
         self.name = other.name + '_ranked'        
-        self.actions = copy(other.actions)
-        self.order = len(self.actions)
+        self.actions = g.actions
+        self.order = n
         self.valuationdomain = g.valuationdomain
         self.relation = g.relation
         self.gamma = self.gammaSets()
@@ -981,7 +980,7 @@ class KemenyOrder(LinearOrder):
 
         self.name = other.name + '_ranked'        
         self.actions = actions
-        self.order = len(self.actions)
+        self.order = n
         self.valuationdomain = valuationdomain
         self.relation = relation
         self.gamma = self.gammaSets()
