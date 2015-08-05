@@ -1018,6 +1018,40 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             pko = KohlerOrder(pg)
             ordering += pko.computeOrder()
         return ordering
+    
+    def computeBoostedNetFlowsRanking(self):
+        """
+        Renders an ordred list of decision actions ranked in
+        decreasing preference direction following the net flows rule
+        on each component.
+        """
+        from linearOrders import NetFlowsOrder
+        ranking = []
+        # self.components is an ordered dictionary in decreasing preference
+        for cki in self.components:
+            comp = self.components[cki]
+            pg = comp['subGraph']
+            pko = NetFlowsOrder(pg)
+            ranking += pko.computeRanking()
+        return ranking
+
+    def computeBoostedNetFlowsOrder(self):
+        """
+        Renders an ordred list of decision actions ranked in
+        increasing preference direction following the net flowsa rule
+        on each component.
+        """
+        from linearOrders import NetFlowsOrder
+        ordering = []
+        compKeys = list(self.components.keys())
+        compKeys.reverse()
+        # self.components is an ordered dictionary in decreasing preference
+        for cki in compKeys:
+            comp = self.components[cki]
+            pg = comp['subGraph']
+            pko = NetFlowsOrder(pg)
+            ordering += pko.computeOrder()
+        return ordering
 
     def computeBoostedRankedPairsRanking(self):
         """
@@ -1079,6 +1113,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                  quantilesOrderingStrategy='average',
                  LowerClosed=True,
                  WithKohlerOrdering=True,
+                 WithNetFlowsOrdering=False,
                  minimalComponentSize=None,
                  Threading=False,nbrOfCPUs=None,
                  save2File=None,
@@ -1314,6 +1349,12 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
             self.boostedKohlerOrder = self.computeBoostedKohlerOrder()
             self.boostedKohlerRanking = list(self.boostedKohlerOrder)
             self.boostedKohlerRanking.reverse()
+            self.runTimes['ordering'] = time() - t0
+        if WithNetFlowsOrdering:
+            #t0 = time()
+            self.boostedNetFlowsOrder = self.computeBoostedNetFlowsOrder()
+            self.boostedNetFlowsRanking = list(self.boostedNetFlowsOrder)
+            self.boostedNetFlowsRanking.reverse()
             self.runTimes['ordering'] = time() - t0
         if Comments:
             print('ordering time: %.4f' % self.runTimes['ordering']  )
@@ -1689,8 +1730,8 @@ if __name__ == "__main__":
 ##    print(time()-t0)
 ##    qr.showWeakOrder()
     bg1 = BigOutrankingDigraphMP(tp,CopyPerfTab=False,quantiles=75,quantilesOrderingStrategy='average',
-                                 LowerClosed=False,
-                                 minimalComponentSize=1,
+                                 LowerClosed=False,WithNetFlowsOrdering=True,
+                                 minimalComponentSize=5,
                                  Threading=MP,nbrOfCPUs=None,Debug=False)
 ##    print(bg1.computeDecompositionSummaryStatistics())
 ##    bg1.showDecomposition(direction='decreasing')
