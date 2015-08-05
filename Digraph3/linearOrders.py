@@ -912,6 +912,98 @@ class NetFlowsOrder(LinearOrder):
             self.showRelationTable()
             self.showOrdering()
 
+class CopelandOrder(LinearOrder):
+    """
+    instantiates the net Copeland Order from
+    a given bipolar-valued Digraph instance.
+    The Copeland ordering rule ranks the decision actions in decreasing order of the Copeland score,
+    which is the difference between the crisp outranking degree and crisp outranked degree;
+    actually the net flows orering of the corresponding Condorcet digraph.  
+    """
+    def __init__(self,other,coDual=False,Debug=False):
+        """
+        constructor for generating a linear order
+        from a given other digraph following
+        the Copeland ordering rule
+        """
+        from copy import copy,deepcopy
+        # construct ranked pairs
+        if coDual:
+            otherCoDual = CoDualDigraph(other)
+            relation = otherCoDual.relation
+            #netFlows = otherCoDual.computeSingleCriteriaNetflows()
+            Max = otherCoDual.valuationdomain['max']
+            if Debug:
+                otherCoDual.showRelationTable()
+                print(otherCoDual.valuationdomain)
+                #print netFlows
+        else:
+            relation = deepcopy(other.relation)
+            #netFlows = other.computeSingleCriteriaNetflows()
+            Max = other.valuationdomain['max']
+            if Debug:
+                other.showRelationTable()
+                print(other.valuationdomain)
+                #print netFlows
+                
+            
+        #actions = list(dict.keys(other.actions))
+        #actions.sort()
+        n = len(other.actions)
+        
+        # instatiates a Digraph template
+        g = IndeterminateDigraph(order=n)
+        g.actions = deepcopy(other.actions)
+        g.valuationdomain = {'min':Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
+        Med = g.valuationdomain['med']
+        Max = g.valuationdomain['max']
+        Min = g.valuationdomain['min']
+        g.relation = {}
+        for x in dict.keys(g.actions):
+            g.relation[x] = {}
+            for y in dict.keys(g.actions):
+                g.relation[x][y] = Med
+
+        copelandScores = {}
+        copelandOrder = []
+        for x in dict.keys(g.actions):
+            copelandScores[x] = 0   
+            for y in dict.keys(g.actions):
+                if y != x:
+                    xoutDegree = len([y for y in relation[x] if relation[x][y] > Med])
+                    xinDegree = len([x for x in relation[y] if relation[y][x] > Med])
+                    copelandScores[x] += (xoutDegree - xinDegree)
+            if Debug:
+                print('Copeland score for %s = %d' % (x, copelandScores[x]))
+            copelandOrder.append((copelandScores[x],x))
+        copelandOrder.sort(reverse=True)
+        if Debug:
+            print(copelandOrder)
+
+        copelandRanking = [x[1] for x in copelandOrder]
+        self.copelandRanking = copelandRanking
+        if Debug:
+            print(copelandRanking)
+            
+        for i in range(n):
+            for j in range(i+1,n):
+                x = copelandOrder[i][1]
+                y = copelandOrder[j][1]
+                g.relation[x][y] = Max
+                g.relation[y][x] = Min
+                
+         
+        self.name = other.name + '_ranked'        
+        self.actions = g.actions
+        self.order = n
+        self.valuationdomain = g.valuationdomain
+        self.relation = g.relation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        self.copelandOrder = self.computeOrder()
+        if Debug:
+            self.showRelationTable()
+            self.showOrdering()
 
 ########  instantiates optimal linear orderings
 
@@ -1130,7 +1222,7 @@ if __name__ == "__main__":
     print('*-------- Testing KemenyOrder class -------')
 ##    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=7)
     t = PerformanceTableau('testLin')    
-    g = BipolarOutrankingDigraph(t)
+    g = BipolarOutrankingDigraph(t,Normalized=True)
     g.showRelationTable()
     print()
     print('==>> Kemeny ordering:')
@@ -1153,6 +1245,13 @@ if __name__ == "__main__":
     print(nf.netFlowsRanking)
     print(nf.netFlowsOrder)
     print(g.computeOrdinalCorrelation(nf))
+    print()
+    print('==>> Copeland ordering:')
+    cop = CopelandOrder(g)
+    g.showRelationTable()
+    print(cop.copelandRanking)
+    print(cop.copelandOrder)
+    print(g.computeOrdinalCorrelation(cop))
     print()
     print('==>> Kohler ordering:')
     ko = KohlerOrder(g)

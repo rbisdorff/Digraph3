@@ -1094,7 +1094,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3294,6 +3294,13 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 </dd></dl>
 
 <dl class="method">
+<dt id="perfTabs.PerformanceTableau.computeAllQuantiles">
+<code class="descname">computeAllQuantiles</code><span class="sig-paren">(</span><em>Sorted=True</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeAllQuantiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>renders a html string showing the table of
+the quantiles matrix action x criterion</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeCriterionPerformanceDifferences">
 <code class="descname">computeCriterionPerformanceDifferences</code><span class="sig-paren">(</span><em>c</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeCriterionPerformanceDifferences" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the ordered list of all observed performance differences on the given criterion.</p>
@@ -3301,7 +3308,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3568,9 +3575,8 @@ Store the performance Tableau self Actions x Criteria in CSV format.</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.showAllQuantiles">
-<code class="descname">showAllQuantiles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.showAllQuantiles" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders a html string showing the table of
-the quantiles matrix action x criterion</p>
+<code class="descname">showAllQuantiles</code><span class="sig-paren">(</span><em>Sorted=True</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.showAllQuantiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints the performance quantiles tableau in the session console.</p>
 </dd></dl>
 
 <dl class="method">
@@ -3596,6 +3602,12 @@ the values observed in the performance Tableau.</p>
 <dt id="perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap">
 <code class="descname">showHTMLPerformanceHeatmap</code><span class="sig-paren">(</span><em>actionsList=None</em>, <em>criteriaList=None</em>, <em>colorLevels=7</em>, <em>pageTitle=None</em>, <em>ndigits=2</em>, <em>Ranked=True</em>, <em>quantiles=None</em>, <em>strategy='optimistic'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>shows the html heatmap version of the performance tableau in a browser window.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="perfTabs.PerformanceTableau.showHTMLPerformanceQuantiles">
+<code class="descname">showHTMLPerformanceQuantiles</code><span class="sig-paren">(</span><em>Sorted=True</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceQuantiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows the performance quantiles tableau in a browser window.</p>
 </dd></dl>
 
 <dl class="method">
@@ -4042,7 +4054,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5157,6 +5169,17 @@ Giga bytes cpu memory is required!</p>
 <dd><p>specialisation of the showWeakOrder method</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="class">
+<dt id="linearOrders.CopelandOrder">
+<em class="property">class </em><code class="descclassname">linearOrders.</code><code class="descname">CopelandOrder</code><span class="sig-paren">(</span><em>other</em>, <em>coDual=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#linearOrders.CopelandOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#linearOrders.LinearOrder" title="linearOrders.LinearOrder"><code class="xref py py-class docutils literal"><span class="pre">linearOrders.LinearOrder</span></code></a></p>
+<p>instantiates the net Copeland Order from
+a given bipolar-valued Digraph instance.
+The Copeland ordering rule ranks the decision actions in decreasing order of the Copeland score,
+which is the difference between the crisp outranking degree and crisp outranked degree;
+actually the net flows orering of the corresponding Condorcet digraph.</p>
 </dd></dl>
 
 <dl class="class">
