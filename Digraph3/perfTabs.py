@@ -1924,6 +1924,11 @@ The performance evaluations of each decision alternative on each criterion are g
 ##            actionsList = [x for x in flatten(qr.computeQsRbcRanking())]
             if quantiles == None:
                 quantiles = na
+##            from outrankingDigraphs import BipolarOutrankingDigraph
+##            from linearOrders import NetFlowsOrder
+##            g = BipolarOutrankingDigraph(self,Normalized=True)
+##            nf = NetFlowsOrder(g)
+##            actionsList = nf.netFlowsRanking
             from bigOutrankingDigraphs import BigOutrankingDigraphMP
             qr = BigOutrankingDigraphMP(self,quantiles=quantiles,LowerClosed=False,
                                           quantilesOrderingStrategy=strategy,
@@ -1940,10 +1945,18 @@ The performance evaluations of each decision alternative on each criterion are g
         criteria = self.criteria
         if criteriaList == None:
             if Correlations:
-                criteriaCorrelation =\
-                    qr.computeMarginalVersusGlobalOutrankingCorrelations(\
-                            Threading=Threading)
-                criteriaList = [c[1] for c in criteriaCorrelation]
+                if Ranked:       
+                    criteriaCorrelation =\
+                        qr.computeMarginalVersusGlobalOutrankingCorrelations(\
+                                Threading=Threading)
+                    criteriaList = [c[1] for c in criteriaCorrelation]
+                else:
+                    criteriaList = list(criteria.keys())
+                    criteriaList.sort()
+                    criteriaWeightsList = [(-criteria[g]['weight'],g) for g in criteriaList]
+                    criteriaWeightsList.sort(reverse=False)
+                    criteriaList = [g[1] for g in criteriaWeightsList]
+                    criteriaCorrelation = None    
             else:
                 criteriaList = list(criteria.keys())
                 criteriaList.sort()
@@ -6206,10 +6219,10 @@ if __name__ == "__main__":
 ##    print('FF')
 ##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=False,PrefThresholds=False,Threading=False)
 ##    qsrbc.showSorting()
-##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
-    t.showHTMLPerformanceQuantiles(Sorted=False)
-    t.showHTMLPerformanceQuantiles(Sorted=True)
-    t.showAllQuantiles(Sorted=True)
+    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
+##    t.showHTMLPerformanceQuantiles(Sorted=False)
+##    t.showHTMLPerformanceQuantiles(Sorted=True)
+##    t.showAllQuantiles(Sorted=True)
 ####    actionsList = qsrbc.computeQsRbcRanking()
 ####
 ##
