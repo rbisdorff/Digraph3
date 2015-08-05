@@ -1855,7 +1855,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                Threading=False,
                                Debug=False):
         """
-        Renders the Brewer RdYlGn 9-colored heatmap of the performance table
+        Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
         actions x criteria in html format.
         """
         from decimal import Decimal
@@ -1931,10 +1931,11 @@ The performance evaluations of each decision alternative on each criterion are g
 ##            actionsList = nf.netFlowsRanking
             from bigOutrankingDigraphs import BigOutrankingDigraphMP
             qr = BigOutrankingDigraphMP(self,quantiles=quantiles,LowerClosed=False,
-                                          quantilesOrderingStrategy=strategy,
-                                          Threading=Threading,
-                                          Debug=Debug)
-            actionsList = qr.boostedKohlerRanking
+                                        quantilesOrderingStrategy=strategy,
+                                        WithNetFlowsOrdering=True,
+                                        Threading=Threading,
+                                        Debug=Debug)
+            actionsList = qr.boostedNetFlowsRanking
         elif actionsList == None:
             actionsList = list(dict.keys(actions))
             actionsList.sort()
