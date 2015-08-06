@@ -1924,18 +1924,17 @@ The performance evaluations of each decision alternative on each criterion are g
 ##            actionsList = [x for x in flatten(qr.computeQsRbcRanking())]
             if quantiles == None:
                 quantiles = na
-##            from outrankingDigraphs import BipolarOutrankingDigraph
-##            from linearOrders import NetFlowsOrder
-##            g = BipolarOutrankingDigraph(self,Normalized=True)
-##            nf = NetFlowsOrder(g)
-##            actionsList = nf.netFlowsRanking
-            from bigOutrankingDigraphs import BigOutrankingDigraphMP
-            qr = BigOutrankingDigraphMP(self,quantiles=quantiles,LowerClosed=False,
-                                        quantilesOrderingStrategy=strategy,
-                                        WithNetFlowsOrdering=True,
-                                        Threading=Threading,
-                                        Debug=Debug)
-            actionsList = qr.boostedNetFlowsRanking
+            from outrankingDigraphs import BipolarOutrankingDigraph
+            from linearOrders import NetFlowsOrder
+            g = BipolarOutrankingDigraph(self,Normalized=True)
+            actionsList = g.computeNetFlowsRanking()
+##            from bigOutrankingDigraphs import BigOutrankingDigraphMP
+##            qr = BigOutrankingDigraphMP(self,quantiles=quantiles,LowerClosed=False,
+##                                        quantilesOrderingStrategy=strategy,
+##                                        WithNetFlowsOrdering=True,
+##                                        Threading=Threading,
+##                                        Debug=Debug)
+##            actionsList = qr.boostedNetFlowsRanking
         elif actionsList == None:
             actionsList = list(dict.keys(actions))
             actionsList.sort()
@@ -1948,8 +1947,8 @@ The performance evaluations of each decision alternative on each criterion are g
             if Correlations:
                 if Ranked:       
                     criteriaCorrelation =\
-                        qr.computeMarginalVersusGlobalOutrankingCorrelations(\
-                                Threading=Threading)
+                        g.computeMarginalVersusGlobalRankingCorrelations(\
+                                actionsList,Threading=Threading)
                     criteriaList = [c[1] for c in criteriaCorrelation]
                 else:
                     criteriaList = list(criteria.keys())
@@ -2044,7 +2043,7 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</tr>\n'
         html += '</table>\n'
         if criteriaCorrelation != None:
-            html += '<i>(*) tau: Ordinal (Kendall) correlation of marginal criterion and global outranking relation.</i>\n'
+            html += '<i>(*) tau: Ordinal (Kendall) correlation between marginal criterion and global ranking relation.</i>\n'
         html += '</body></html>'
         return html
 

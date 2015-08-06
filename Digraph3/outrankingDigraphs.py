@@ -69,6 +69,63 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
+    def computeMarginalCorrelation(self,args,Threading=False,\
+                                    nbrOfCPUs=None,Debug=False,
+                                    Comments=False):
+        """
+        Renders the ordinal correlation coefficient between
+        the global outranking and the marginal criterion relation.
+
+        If Threading, the
+        """
+        criterion = args[0]
+        relation = args[1]
+        gc = BipolarOutrankingDigraph(self,Normalized=True,coalition=[criterion],CopyPerfTab=True,
+                                      Threading=Threading,nbrCores=nbrOfCPUs,
+                                      Comments=Comments)
+        corr = gc.computeOrdinalCorrelation(relation)
+        if Debug:
+            print(corr)
+        return corr
+
+    def computeMarginalVersusGlobalRankingCorrelations(self,ranking,Sorted=True,
+                                                          Threading=False,nbrCores=None,\
+                                                          Comments=False):
+        """
+        Method for computing correlations between each individual criterion relation with the corresponding
+        global outranking relation.
+        
+        Returns a list of tuples (correlation,criterionKey) sorted by default in decreasing order of the correlation.
+
+        If Threading is True, a multiprocessing Pool class is used with a parallel equivalent of the built-in map function.
+
+        If nbrCores is not set, the os.cpu_count() function is used to determine the number of
+        available cores.
+        """
+        preorder = ranking2preorder(ranking)
+        preorderRelation = self.computePreorderRelation(preorder)
+        
+        if Threading:
+            from multiprocessing import Pool
+            from os import cpu_count
+            if nbrCores == None:
+                nbrCores= cpu_count()
+                
+            argsList = [(x,preorderRelation) for x in self.criteria]
+            with Pool(nbrCores) as proc:   
+                correlations = proc.map(self.computeMarginalCorrelation,argsList)
+            criteriaCorrelation = [(correlations[i]['correlation'],argsList[i][0]) for i in range(len(argsList))]
+        else:
+            #criteriaList = [x for x in self.criteria]
+            criteria = self.criteria
+            criteriaCorrelation = []
+            for c in dict.keys(criteria):
+                corr = self.computeMarginalCorrelation((c,preorderRelation),Threading=False)
+                criteriaCorrelation.append((corr['correlation'],c))            
+        if Sorted:
+            criteriaCorrelation.sort(reverse=True)
+        return criteriaCorrelation   
+
     def computeCriterionCorrelation(self,criterion,Threading=False,\
                                     nbrOfCPUs=None,Debug=False,
                                     Comments=False):
@@ -7884,20 +7941,21 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-    t = RandomCBPerformanceTableau(numberOfActions=100,\
-                                   numberOfCriteria=21,\
+    t = RandomCBPerformanceTableau(numberOfActions=20,\
+                                   numberOfCriteria=13,\
                                    weightDistribution='equiobjectives',
                                    seed=100)
     
-    g = BipolarOutrankingDigraph(t,Threading=True,Comments=True)
-    Threading = True
+    g = BipolarOutrankingDigraph(t,Threading=False,Comments=True)
+    Threading = False
     t0 = time()
     criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
     print(time()-t0)
     print(criteriaCorrelations)
     Threading = False
     t0 = time()
-    criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
+    ranking = g.computeNetFlowsRanking()
+    criteriaCorrelations = g.computeMarginalVersusGlobalRankingCorrelations(ranking,Threading=Threading)
     print(time()-t0)
     print(criteriaCorrelations)
     
