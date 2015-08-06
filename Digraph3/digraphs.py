@@ -7504,9 +7504,64 @@ class Digraph(object):
             else:
                 return Med
 
+    def computeNetFlowsRankingDict(self,Stored=True,Debug=False):
+        """
+        renders an ordered dictionary of the actions (from best to worst)
+        following the net flows ranking rule with rank and net flow attributes.
+        """
+        relation = self.relation
+        netFlowsOrder = []
+        for x in self.actions.keys():
+            xnetflows = Decimal('0.0')      
+            for y in dict.keys(self.actions):
+                if y != x:
+                    xnetflows += relation[x][y] - relation[y][x]
+            if Debug:
+                print('netflow for %s = %.2f' % (x, xnetflows))
+            netFlowsOrder.append((-xnetflows,x))
+            # reversed sorting with keeping the actions natural ordering
+        netFlowsOrder.sort()
+        if Debug:
+            print(netFlowsOrder)
+
+        netFlowsRanking = OrderedDict()
+        k = 1
+        for item in netFlowsOrder:
+            netFlowsRanking[item[1]] = {'rank':k,'netFlow':-item[0]}
+            k += 1
+        if Stored:
+            self.netFlowsRankingDict = netFlowsRanking
+        return netFlowsRanking
+
+    def computeNetFlowsRanking(self,Debug=False):
+        """
+        renders an ordered list (from best to worst) of the actions
+        following the net flows ranking rule.
+        """
+        try:
+            netFlowsRankingDict = self.netFlowsRankingDict
+        except:
+            netFlowsRankingDict = self.computeNetFlowsRankingDict()
+        netFlowsRanking = list(netFlowsRankingDict.keys())
+        return netFlowsRanking
+
+    def computeNetFlowsOrder(self,Debug=False):
+        """
+        renders an ordered list (from worst to best) of the actions
+        following the net flows ranking rule.
+        """
+        try:
+            netFlowsRankingDict = self.netFlowsRankingDict
+        except:
+            netFlowsRankingDict = self.computeNetFlowsRankingDict()
+        netFlowsOrder = list(netFlowsRankingDict.keys())
+        netFlowsOrder.reverse()
+        return netFlowsOrder
+
     def computeKohlerOrder(self,Debug=False):
         """
-        renders a ranking of the actions following Kohler's rule.
+        renders a ranking of the actions following Kohler's rule as an
+        ordered dictionary with rank and majorityMargin attributes.
         """
         Max = self.valuationdomain['max']
         actionsList = [x for x in self.actions]

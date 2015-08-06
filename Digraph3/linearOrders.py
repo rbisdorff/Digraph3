@@ -875,17 +875,18 @@ class NetFlowsOrder(LinearOrder):
             for y in dict.keys(g.actions):
                 g.relation[x][y] = g.valuationdomain['med']
 
-        netflows = {}
+        #netflows = {}
         netFlowsOrder = []
-        for x in dict.keys(g.actions):
-            netflows[x] = Decimal('0.0')      
+        for x in g.actions.keys():
+            xnetflows = Decimal('0.0')      
             for y in dict.keys(g.actions):
                 if y != x:
-                    netflows[x] += relation[x][y] - relation[y][x]
+                    xnetflows += relation[x][y] - relation[y][x]
             if Debug:
-                print('netflow for %s = %.2f' % (x, netflows[x]))
-            netFlowsOrder.append((netflows[x],x))
-        netFlowsOrder.sort(reverse=True)
+                print('netflow for %s = %.2f' % (x, xnetflows))
+            netFlowsOrder.append((-xnetflows,x))
+            # reversed sorting with keeping the actions natural ordering
+        netFlowsOrder.sort()
         if Debug:
             print(netFlowsOrder)
 
@@ -967,11 +968,11 @@ class CopelandOrder(LinearOrder):
         copelandScores = {}
         copelandOrder = []
         for x in dict.keys(g.actions):
-            copelandScores[x] = 0   
+            copelandScores[x] = 0
             for y in dict.keys(g.actions):
                 if y != x:
-                    xoutDegree = len([y for y in relation[x] if relation[x][y] > Med])
-                    xinDegree = len([x for x in relation[y] if relation[y][x] > Med])
+                    xoutDegree = len(other.gamma[x][0])
+                    xinDegree = len(other.gamma[x][1])
                     copelandScores[x] += (xoutDegree - xinDegree)
             if Debug:
                 print('Copeland score for %s = %d' % (x, copelandScores[x]))
