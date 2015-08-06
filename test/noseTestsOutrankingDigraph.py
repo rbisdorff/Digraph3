@@ -661,7 +661,7 @@ def testComputeMarginalVersusGlobalOutrankingCorrelations():
                                    numberOfCriteria=21,\
                                    weightDistribution='equiobjectives',
                                    seed=100) 
-    g = BipolarOutrankingDigraph(t,Threading=True)    
+    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=True)    
     Threading = True
     t0 = time()
     criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
@@ -670,6 +670,27 @@ def testComputeMarginalVersusGlobalOutrankingCorrelations():
     Threading = False
     t0 = time()
     criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
+    print(time()-t0)
+    print(criteriaCorrelations)
+
+def testComputeMarginalVersusGlobalRankingCorrelations():
+    print('*-------- Threaded MarginalVersusGlobalOutranking -------')
+    t = RandomCBPerformanceTableau(numberOfActions=50,\
+                                   numberOfCriteria=21,\
+                                   weightDistribution='equiobjectives',
+                                   seed=100) 
+    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=True)
+    ranking = g.computeNetFlowsRanking()
+    Threading = True
+    t0 = time()
+    criteriaCorrelations = g.computeMarginalVersusGlobalRankingCorrelations(ranking,
+                            Threading=Threading)
+    print(time()-t0)
+    print(criteriaCorrelations)
+    Threading = False
+    t0 = time()
+    criteriaCorrelations = g.computeMarginalVersusGlobalRankingCorrelations(ranking,
+                            Threading=Threading)
     print(time()-t0)
     print(criteriaCorrelations)
 

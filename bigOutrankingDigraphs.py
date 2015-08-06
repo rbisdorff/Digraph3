@@ -1049,8 +1049,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         for cki in compKeys:
             comp = self.components[cki]
             pg = comp['subGraph']
-            pko = NetFlowsOrder(pg)
-            ordering += pko.computeOrder()
+            ordering += pg.computeNetFlowsOrder()
         return ordering
 
     def computeBoostedRankedPairsRanking(self):
@@ -1112,8 +1111,8 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                  quantiles=None,
                  quantilesOrderingStrategy='average',
                  LowerClosed=True,
-                 WithKohlerOrdering=True,
-                 WithNetFlowsOrdering=False,
+                 WithKohlerOrdering=False,
+                 WithNetFlowsOrdering=True,
                  minimalComponentSize=None,
                  Threading=False,nbrOfCPUs=None,
                  save2File=None,

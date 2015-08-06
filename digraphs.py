@@ -60,6 +60,15 @@ def powerset(S):
             yield set([e]) | X
             yield X
 
+# transforms a ranking (list from best to worst) into
+# a preorder ( a list of list from worst to best)
+def ranking2preorder(R):
+    preorder = []
+    for x in R:
+        preorder.append([x])
+    preorder.reverse()
+    return preorder
+
 # flattens a list of lists into a flat list
 import itertools as IT
 import collections
