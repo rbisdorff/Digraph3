@@ -1250,10 +1250,11 @@ class QuantilesSortingDigraph(SortingDigraph):
 
     Example Python3 session:
 
-    >>> from sortingDigraphs import *
+    >>> from sortingDigraphs import QuantilesSortingDigraph
+    >>> from randomPerfTabs import RandomCBPerformanceTableau
     >>> t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,
     ...                                weightDistribution='equiobjectives')
-    >>> qs = QuantilesSortingBigDigraph(t,limitingQuantiles=7)
+    >>> qs = QuantilesSortingDigraph(t,limitingQuantiles=7)
     >>> qs.showSorting()
     *--- Sorting results in descending order ---*
     ]0.86 - 1.00]: 	 []
