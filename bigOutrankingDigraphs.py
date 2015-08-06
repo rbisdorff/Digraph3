@@ -1209,13 +1209,16 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                 pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
                 components[compKey]['lowQtileLimit'] = comp[0][1]
                 components[compKey]['highQtileLimit'] = comp[0][0]
-                pg = BipolarOutrankingDigraph(pt,Normalized=True)
+                pg = BipolarOutrankingDigraph(pt,
+                                              WithConcordanceRelation=False,
+                                              WithVetoCounts=False,
+                                              Normalized=True)
                 pg.__dict__.pop('criteria')
                 pg.__dict__.pop('evaluation')
-                pg.__dict__.pop('vetos')
-                pg.__dict__.pop('negativeVetos')
-                pg.__dict__.pop('largePerformanceDifferencesCount')
-                pg.__dict__.pop('concordanceRelation')
+                #pg.__dict__.pop('vetos')
+                #pg.__dict__.pop('negativeVetos')
+                #pg.__dict__.pop('largePerformanceDifferencesCount')
+                #pg.__dict__.pop('concordanceRelation')
                 pg.__class__ = Digraph
                 components[compKey]['subGraph'] = pg
         else:   # if self.sortingParameters['Threading'] == True:
