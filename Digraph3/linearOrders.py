@@ -361,13 +361,14 @@ class RankedPairsOrder(LinearOrder):
             other.showRelationTable()
             
         relation = other.relation
-        actions = [x for x in other.actions]
-        actions.sort()
+##        actions = [x for x in other.actions]
+##        actions.sort()
+        actions = other.actions
         n = len(actions)
         
         listPairs = []
         for x in actions:
-            for y in [z for z in actions if z != x]:
+            for y in (z for z in actions if z != x):
                 listPairs.append((-relation[x][y],(x,y),x,y))
         listPairs.sort(reverse=Leximin)
         if Debug:
