@@ -6294,7 +6294,7 @@ class Digraph(object):
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
-        actions = self.actions
+        actions = list(self.actions.keys())
         n = len(actions)
         relation = self.relation
         domChoicesSort = []
@@ -6351,7 +6351,7 @@ class Digraph(object):
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
-        actions = self.actions
+        actions = list(self.actions.keys())
         n = len(actions)
         relation = self.relation
         absChoicesSort = []
@@ -8338,7 +8338,12 @@ class EquivalenceDigraph(Digraph):
 
 # ------- Specialisations of the Digraph class -----------
 
-class RandomDigraph(Digraph):
+
+#class RandomDigraph(randomDigraphs.RandomDigraph):
+#    """
+#    dummy
+#    """
+class _RandomDigraph(Digraph):
     """
     .. warning::
 
@@ -8376,7 +8381,12 @@ class RandomDigraph(Digraph):
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
 
-class RandomValuationDigraph(Digraph):
+#class RandomValuationDigraph(randomDigraphs.RandomValuationDigraph):
+#    """
+#    dummy
+#    """
+    
+class _RandomValuationDigraph(Digraph):
     """
     .. warning::
     
@@ -8422,7 +8432,7 @@ class RandomValuationDigraph(Digraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-class RandomWeakTournament(Digraph):
+class _RandomWeakTournament(Digraph):
     """
     .. warning::
 
@@ -8517,7 +8527,7 @@ class RandomWeakTournament(Digraph):
              print(self.order*(self.order-1), self.computeRelationalStructure())
 
 
-class RandomTournament(Digraph):
+class _RandomTournament(Digraph):
     """
    .. warning::
 
@@ -8579,7 +8589,7 @@ class RandomTournament(Digraph):
         self.notGamma = self.notGammaSets()
 
 
-class RandomFixedSizeDigraph(Digraph):
+class _RandomFixedSizeDigraph(Digraph):
     """
     .. warning::
 
@@ -8622,7 +8632,7 @@ class RandomFixedSizeDigraph(Digraph):
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
 
-class RandomFixedDegreeSequenceDigraph(Digraph):
+class _RandomFixedDegreeSequenceDigraph(Digraph):
     """
     .. warning::
 
@@ -8779,7 +8789,7 @@ class RandomTree(Digraph):
         return tree
 
 
-class RandomRegularDigraph(Digraph):
+class _RandomRegularDigraph(Digraph):
     """
     .. warning::
 
@@ -10669,6 +10679,7 @@ class XMCDA2Digraph(Digraph):
 
 ###  replace the old outrankingDigraphs
 #from outrankingDigraphs import *
+from randomDigraphs import *
 
 #############################################
 
