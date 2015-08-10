@@ -297,11 +297,11 @@ class Digraph(object):
         if file == None:
             g = RandomValuationDigraph(order=order)
             self.name = g.name
-            self.actions = copy.deepcopy(g.actions)
+            self.actions = g.actions
             self.order = len(self.actions)
-            self.valuationdomain = copy.deepcopy(g.valuationdomain)
+            self.valuationdomain = g.valuationdomain
             self.convertValuationToDecimal()
-            self.relation = copy.deepcopy(g.relation)
+            self.relation = g.relation
             self.convertRelationToDecimal()
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
@@ -310,11 +310,11 @@ class Digraph(object):
             argDict = {}
             exec(compile(open(fileName).read(), fileName, 'exec'), argDict)
             self.name = file
-            self.actions = copy.deepcopy(argDict['actionset'])
+            self.actions = argDict['actionset']
             self.order = len(self.actions)
-            self.valuationdomain = copy.deepcopy(argDict['valuationdomain'])
+            self.valuationdomain = argDict['valuationdomain']
             self.convertValuationToDecimal()
-            self.relation = copy.deepcopy(argDict['relation'])
+            self.relation = argDict['relation']
             self.convertRelationToDecimal()
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
@@ -400,20 +400,20 @@ class Digraph(object):
         from graphs import Graph
         from copy import copy, deepcopy
         g = Graph()
-        g.name = copy(self.name)
+        g.name = self.name + '_graph'
         if type(self.actions) == list:
             g.vertices = {}
             for x in self.actions:
                 g.vertices[x] = {'name': x, 'shortName': x}
         else:
-            g.vertices = copy(self.actions)    
+            g.vertices = deepcopy(self.actions)    
         g.order = len(g.vertices)
         g.valuationDomain = valuationDomain
         gMin = valuationDomain['min']
         gMed = valuationDomain['med']
         gMax = valuationDomain['max']
         g.edges = {}
-        verticesKeys = [x for x in g.vertices]
+        verticesKeys = list(g.vertices.keys())
         dgMed = self.valuationdomain['med']
         for i in range(g.order):
             for j in range(i+1,g.order):
@@ -1475,13 +1475,13 @@ class Digraph(object):
         from math import sqrt
         mean = Decimal('0.0')
         squares = Decimal('0.0')
-        actions = [x for x in self.actions]
-        n = len(actions)
+        actions = self.actions
+        n = len(self.actions)
         n2 = n * (n-1)
         n2d = Decimal(str(n2))
         relation = self.relation
-        for x in actions:
-            for y in actions:
+        for x in dict.keys(actions):
+            for y in dict.keys(actions):
                 if x != y:
                     mean += relation[x][y]
                     squares += relation[x][y]*relation[x][y]
@@ -1533,7 +1533,7 @@ class Digraph(object):
         from copy import copy,deepcopy
         g = deepcopy(self)
         g.recodeValuation(-1,1)
-        actions = [x for x in g.actions]
+        actions = g.actions
         Med = g.valuationdomain['med']
         
         if MedianCut:
@@ -1551,8 +1551,8 @@ class Digraph(object):
             otherRelation = deepcopy(other)
             
             if MedianCut:
-                for x in g.actions:
-                    for y in g.actions:
+                for x in dict.keys(actions):
+                    for y in dict.keys(actions):
                         if x == y:
                             otherRelation[x][y] = Decimal('0.0')
                         else:
@@ -1569,8 +1569,8 @@ class Digraph(object):
         if filterRelation == None:
             n = len(actions)
             n2 = (n*(n-1))
-            for x in actions:
-                for y in actions:
+            for x in dict.keys(actions):
+                for y in dict.keys(actions):
                     if x != y:
                         corr = min( max(-g.relation[x][y],otherRelation[x][y]), max(g.relation[x][y],-otherRelation[x][y]) )
                         correlation += corr
@@ -1580,8 +1580,8 @@ class Digraph(object):
         else:
             n = len(actions)
             n2 = (n*(n-1))
-            for x in actions:
-                for y in actions:
+            for x in dict.keys(actions):
+                for y in dict.keys(actions):
                     if x != y:
                         if filterRelation[x][y] != Med:
                             corr = min( max(-g.relation[x][y],otherRelation[x][y]), max(g.relation[x][y],-otherRelation[x][y]) )
@@ -1614,9 +1614,9 @@ class Digraph(object):
         other digraph (same nodes or actions).
         """
         KemenyIndex = 0.0
-        actions = [x for x in self.actions]
-        for x in actions:
-            for y in actions:
+        actions = self.actions
+        for x in dict.keys(actions):
+            for y in dict.keys(actions):
                 if x != y:
                     if otherRelation[x][y] > Decimal('0'):
                         KemenyIndex += float(self.relation[x][y])
@@ -1653,11 +1653,11 @@ class Digraph(object):
         """
         Converts the float valued self.relation in a decimal valued one.
         """
-        actions = [x for x in self.actions]
+        actions = self.actions
         relation = {}
-        for x in actions:
+        for x in dict.keys(actions):
             relation[x] = {}
-            for y in actions:
+            for y in dict.keys(actions):
                 relation[x][y] = Decimal(str(self.relation[x][y]))
         self.relation = relation
         #return relation
@@ -1676,13 +1676,13 @@ class Digraph(object):
         xor = XORDigraph(self,digraph,Debug)
         if Debug:
             xor.showRelationTable()
-        actions = [x for x in self.actions]
+        actions = self.actions
         n = len(actions)
         xor.recodeValuation(-1.0,1.0)
 
         kDistance = Decimal("0.0")
-        for x in actions:
-            for y in actions:
+        for x in dict.keys(actions):
+            for y in dict.keys(actions):
                 if x != y:
                     kDistance += xor.relation[x][y]
         kDistance = Decimal(str(kDistance)) / Decimal(str((n * (n-1))))
@@ -1702,7 +1702,7 @@ class Digraph(object):
         xor = XORDigraph(self,digraph,Debug)
         if Debug:
             xor.showRelationTable()
-        actions = [x for x in self.actions]
+        actions = self.actions
         n = len(actions)
 
         k2Distance = xor.size()
@@ -1723,8 +1723,8 @@ class Digraph(object):
         xor = XORDigraph(self,digraph,Debug)
         if Debug:
             xor.showRelationTable()
-        actions = [x for x in self.actions]
-        n = len(actions)
+        #actions = [x for x in self.actions]
+        n = len(self.actions)
 
         k2Distance = xor.coSize() - xor.size()
         k2Distance = Decimal(str(k2Distance)) / Decimal(str((n * (n-1))))
@@ -1737,13 +1737,14 @@ class Digraph(object):
         self.relation[x][y] >= self.valuationdomain['med']
         for all y != x.
         """
-        actions = [x for x in self.actions]
+        actions = self.actions
+        relation = self.relation
         Med = self.valuationdomain['med']
         wCW = []
-        for x in actions:
+        for x in dict.keys(actions):
             Winner = True
-            for y in [z for z in self.actions if z != x]:
-                if self.relation[x][y] < Med:
+            for y in [z for z in dict.leys(actions) if z != x]:
+                if relation[x][y] < Med:
                     Winner = False
                     break
             if Winner:
@@ -1760,13 +1761,14 @@ class Digraph(object):
         self.relation[x][y] > self.valuationdomain['med']
         for all y != x.
         """
-        actions = [x for x in self.actions]
+        actions = self.actions
+        relation = self.relation
         Med = self.valuationdomain['med']
         CW = []
-        for x in actions:
+        for x in dict.keys(actions):
             Winner = True
-            for y in [z for z in self.actions if z != x]:
-                if self.relation[x][y] <= Med:
+            for y in [z for z in dict.keys(actions) if z != x]:
+                if relation[x][y] <= Med:
                     Winner = False
                     break
             if Winner:
@@ -1781,20 +1783,19 @@ class Digraph(object):
         """
         Renders the set of most determined outranking singletons in self.
         """
-        import copy
-        actions = set(self.actions)
+        actions = self.actions
         relation = self.relation
         valuationList = []
-        for x in actions:
-            for y in actions:
+        for x in dict.keys(actions):
+            for y in dict.keys(actions):
                 if relation[x][y] not in valuationList:
                     valuationList.append(relation[x][y])
         valuationList.sort()
         print('Credibility levels:', valuationList)
-        bestSingleChoices = copy.deepcopy(actions)
+        bestSingleChoices = set( list(dict.keys(actions)) )
         i=0
         while bestSingleChoices != set():
-            current = copy.deepcopy(bestSingleChoices)
+            current = set(bestSingleChoices)
             i += 1
             print('i_bestSingleChoices:', i,  bestSingleChoices)
             print('level', valuationList[i])
@@ -1816,13 +1817,13 @@ class Digraph(object):
         """
         Renders a list of more or less unrelated pairs.
         """
-        actions = set(self.actions)
+        actions = self.actions
         relation = self.relation
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
         moreOrLessUnrelatedPairs = []
-        for x in actions:
-            for y in actions:
+        for x in dict.keys(actions):
+            for y in dict.keys(actions):
                 if x != y:
                     if relation[x][y] < Med and relation[x][y] > Min:
                         if relation[y][x] < Med and relation[y][x] > Min:
@@ -1834,13 +1835,13 @@ class Digraph(object):
         """
         Renders a list of more or less unrelated pairs.
         """
-        actions = set(self.actions)
+        actions = self.actions
         relation = self.relation
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
         unrelatedPairs = []
-        for x in actions:
-            for y in actions:
+        for x in dict.keys(actions):
+            for y in dict.keys(actions):
                 if x != y:
                     if relation[x][y] < Med:
                         if relation[y][x] < Med:
@@ -4562,6 +4563,9 @@ class Digraph(object):
         Med = self.valuationdomain['med']
         nb = set()
         for a in self.actions:
+##            if a != node:
+##                if self.relation[a][node] < Med:
+##                    nb.add(a)
             if a != node:
                 if self.relation[a][node] < Med:
                     nb.add(a)

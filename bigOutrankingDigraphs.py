@@ -122,15 +122,15 @@ class BigDigraph(object):
                 print(other.valuationdomain)
                 return
         
-        selfActionsList = [(ck,
+        selfActionsList = ((ck,
                             list(self.components[ck]['subGraph'].actions.keys()))\
-                           for ck in self.components]
+                           for ck in self.components)
         if issubclass(other.__class__,(Digraph)):
             otherActionsList = [( 'c01', list(other.actions.keys()) )]
         else:
-            otherActionsList = [(ck,
+            otherActionsList = ((ck,
                             list(other.components[ck]['subGraph'].actions.keys()))\
-                           for ck in other.components]
+                           for ck in other.components)
         if Debug:
             print(selfActionsList)
             print(otherActionsList)
@@ -381,7 +381,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         from collections import OrderedDict
         from time import time
         from os import cpu_count
-        from copy import deepcopy
+        from copy import copy as deepcopy
         
         ttot = time()
         # setting name
@@ -536,7 +536,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                                       Normalized=True,CopyPerfTab=False,
                                       Threading=Threading,nbrCores=nbrOfCPUs,
                                       Comments=Comments)
-        globalOrdering = self.ranking2Preorder(self.boostedKohlerRanking)
+        globalOrdering = self.ranking2Preorder(self.boostedNetFlowsRanking)
         globalRelation = gc.computePreorderRelation(globalOrdering)
         corr = gc.computeOrdinalCorrelation(globalRelation)
         if Debug:
