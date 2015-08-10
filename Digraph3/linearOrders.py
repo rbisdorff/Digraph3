@@ -300,7 +300,7 @@ class RandomLinearOrder(LinearOrder):
     """
     Instantiates random linear orders
     """
-    def __init__(self,numberOfActions=10,Debug=False,OutrankingModel=False,seed=None):
+    def __init__(self,numberOfActions=10,Debug=False,OutrankingModel=False,Valued=False,seed=None):
         """
         constructor for generating random instances of linear orders with a given number of actions (default=10).
         """
@@ -310,7 +310,7 @@ class RandomLinearOrder(LinearOrder):
         if OutrankingModel:
             g = RandomOutrankingDigraph(numberOfActions=numberOfActions)
         else:
-            g = RandomDigraph(order=numberOfActions)
+            g = RandomValuationDigraph(order=numberOfActions)
         g.recodeValuation(-1,1)
         actionsList = [x for x in g.actions]
         random.shuffle(actionsList)
@@ -326,8 +326,12 @@ class RandomLinearOrder(LinearOrder):
             self.relation[x][x] = self.valuationdomain['med']
             for j in range(i+1,self.order):
                 y = actionsList[j]
-                self.relation[x][y] = self.valuationdomain['max']
-                self.relation[y][x] = self.valuationdomain['min']
+                if Valued:
+                    self.relation[x][y] = abs(g.relation[x][y])
+                    self.relation[y][x] = -abs(g.relation[y][x])
+                else:
+                    self.relation[x][y] = self.valuationdomain['max']
+                    self.relation[y][x] = self.valuationdomain['min']
         self.gamma = self.gammaSets()
         self.notgamma = self.notGammaSets()
         if Debug:

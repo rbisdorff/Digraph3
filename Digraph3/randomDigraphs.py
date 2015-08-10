@@ -22,11 +22,11 @@
 __version__ = "Branch: 3.3 $"
 # ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
-from digraphs import *
 from decimal import Decimal
 from collections import OrderedDict
 
 #---------- Random Digraph classes -----------------
+from digraphs import *
 
 class RandomDigraph(Digraph):
     """
