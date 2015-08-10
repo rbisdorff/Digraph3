@@ -192,7 +192,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1116,7 +1116,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2013,7 +2013,7 @@ called dg1 and dg2.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2044,7 +2044,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2132,61 +2132,6 @@ and the evaluation dictionary into self.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="digraphs.RandomDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RandomDigraph</code><span class="sig-paren">(</span><em>order=9</em>, <em>arcProbability=0.5</em>, <em>hasIntegerValuation=True</em>, <em>Bipolar=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RandomDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last"><em>Obsolete version!</em> Will be removed in the future. Instead, use
-the new <a class="reference internal" href="#randomDigraphs.RandomDigraph" title="randomDigraphs.RandomDigraph"><code class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomDigraph</span></code></a> constructor.</p>
-</div>
-</dd></dl>
-
-<dl class="class">
-<dt id="digraphs.RandomFixedDegreeSequenceDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RandomFixedDegreeSequenceDigraph</code><span class="sig-paren">(</span><em>order=7, degreeSequence=[3, 3, 2, 2, 1, 1, 0]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RandomFixedDegreeSequenceDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last"><em>Obsolete version!</em> Will be removed in the future. Instead, use
-the new <a class="reference internal" href="#randomDigraphs.RandomFixedDegreeSequenceDigraph" title="randomDigraphs.RandomFixedDegreeSequenceDigraph"><code class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomFixedDegreeSequenceDigraph</span></code></a> constructor.</p>
-</div>
-</dd></dl>
-
-<dl class="class">
-<dt id="digraphs.RandomFixedSizeDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RandomFixedSizeDigraph</code><span class="sig-paren">(</span><em>order=7</em>, <em>size=14</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RandomFixedSizeDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last"><em>Obsolete version!</em> Will be removed in the future. Instead, use
-the new <a class="reference internal" href="#randomDigraphs.RandomFixedSizeDigraph" title="randomDigraphs.RandomFixedSizeDigraph"><code class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomFixedSizeDigraph</span></code></a> constructor.</p>
-</div>
-</dd></dl>
-
-<dl class="class">
-<dt id="digraphs.RandomRegularDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RandomRegularDigraph</code><span class="sig-paren">(</span><em>order=7</em>, <em>degree=2</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RandomRegularDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last"><em>Obsolete version!</em> Will be removed in the future. Instead, use
-the new <a class="reference internal" href="#randomDigraphs.RandomRegularDigraph" title="randomDigraphs.RandomRegularDigraph"><code class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomRegularDigraph</span></code></a> constructor.</p>
-</div>
-</dd></dl>
-
-<dl class="class">
-<dt id="digraphs.RandomTournament">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RandomTournament</code><span class="sig-paren">(</span><em>order=10</em>, <em>ndigits=2</em>, <em>isCrisp=True</em>, <em>valuationDomain=None</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RandomTournament" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last"><em>Obsolete version!</em> Will be removed in the future. Instead, use
-the new <a class="reference internal" href="#randomDigraphs.RandomTournament" title="randomDigraphs.RandomTournament"><code class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomTournament</span></code></a> constructor.</p>
-</div>
-</dd></dl>
-
-<dl class="class">
 <dt id="digraphs.RandomTree">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RandomTree</code><span class="sig-paren">(</span><em>numberOfNodes=5</em>, <em>ndigits=2</em>, <em>hasIntegerValuation=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RandomTree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
@@ -2200,28 +2145,6 @@ the new <a class="reference internal" href="#graphs.RandomTree" title="graphs.Ra
 <code class="descname">prufer_to_tree</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RandomTree.prufer_to_tree" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</dd></dl>
-
-<dl class="class">
-<dt id="digraphs.RandomValuationDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RandomValuationDigraph</code><span class="sig-paren">(</span><em>order=9</em>, <em>ndigits=2</em>, <em>Normalized=False</em>, <em>hasIntegerValuation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RandomValuationDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last"><em>Obsolete version!</em> Will be removed in the future. Instead, use
-the new <a class="reference internal" href="#randomDigraphs.RandomValuationDigraph" title="randomDigraphs.RandomValuationDigraph"><code class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomValuationDigraph</span></code></a> constructor.</p>
-</div>
-</dd></dl>
-
-<dl class="class">
-<dt id="digraphs.RandomWeakTournament">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RandomWeakTournament</code><span class="sig-paren">(</span><em>order=10</em>, <em>ndigits=2</em>, <em>hasIntegerValuation=False</em>, <em>weaknessDegree=0.25</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RandomWeakTournament" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last"><em>Obsolete version!</em> Will be removed in the future. Instead, use
-the new <a class="reference internal" href="#randomDigraphs.RandomWeakTournament" title="randomDigraphs.RandomWeakTournament"><code class="xref py py-class docutils literal"><span class="pre">randomDigraphs.RandomWeakTournament</span></code></a> constructor.</p>
-</div>
 </dd></dl>
 
 <dl class="class">
@@ -3335,7 +3258,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4100,7 +4023,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5341,7 +5264,7 @@ outdegrees of the valued digraph &#8216;other&#8217;.</p>
 
 <dl class="class">
 <dt id="linearOrders.RandomLinearOrder">
-<em class="property">class </em><code class="descclassname">linearOrders.</code><code class="descname">RandomLinearOrder</code><span class="sig-paren">(</span><em>numberOfActions=10</em>, <em>Debug=False</em>, <em>OutrankingModel=False</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#linearOrders.RandomLinearOrder" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">linearOrders.</code><code class="descname">RandomLinearOrder</code><span class="sig-paren">(</span><em>numberOfActions=10</em>, <em>Debug=False</em>, <em>OutrankingModel=False</em>, <em>Valued=False</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#linearOrders.RandomLinearOrder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#linearOrders.LinearOrder" title="linearOrders.LinearOrder"><code class="xref py py-class docutils literal"><span class="pre">linearOrders.LinearOrder</span></code></a></p>
 <p>Instantiates random linear orders</p>
 </dd></dl>
@@ -5837,7 +5760,7 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 
 <dl class="class">
 <dt id="randomDigraphs.RandomGridDigraph">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.GridDigraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary randomly oriented Grid digraphs of dimension n time m
