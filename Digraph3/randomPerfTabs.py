@@ -2044,8 +2044,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             nbuf = 1000
         else:
             nbuf = n
-        if n2 < samplingSize:
-            samplingSize = n2
+##        if n2 < samplingSize:
+##            samplingSize = n2
         from iqagent import IncrementalQuantileEstimator
         est = IncrementalQuantileEstimator(nbuf=nbuf)
         if Debug:
@@ -2071,7 +2071,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                                     break
                                     break
                 for q in quantile:
-                    if Debug:
+                    if Comments:
                         print('-->', q, quantile[q], end=' ')
                     criteria[g]['thresholds'][q] = (Decimal(str(est.report(quantile[q]))),Decimal('0'))
             
@@ -2103,6 +2103,7 @@ if __name__ == "__main__":
                                    samplingSize=100000,
                                    seed=100)
     print(time()-t0)
+    t.saveXMCDA2('test2')
 ##    t.showCriteria()
 ##    t = Random3ObjectivesPerformanceTableau(numberOfActions=100,
 ##                                            numberOfCriteria=13,
@@ -2113,6 +2114,7 @@ if __name__ == "__main__":
 ##                                            commonMode=('beta','variable',None),
 ##                                            vetoProbability=0.5,
 ##                                            seed=120)
+
     t.showObjectives()
     t.showCriteria()
     t.csvAllQuantiles('q')
