@@ -7941,23 +7941,33 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-    t = RandomCBPerformanceTableau(numberOfActions=20,\
+    Threading = True
+    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=1000,\
                                    numberOfCriteria=13,\
                                    weightDistribution='equiobjectives',
                                    seed=100)
     
-    g = BipolarOutrankingDigraph(t,Threading=False,Comments=True)
-    Threading = False
-    t0 = time()
-    criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
-    print(time()-t0)
-    print(criteriaCorrelations)
-    Threading = False
-    t0 = time()
-    ranking = g.computeNetFlowsRanking()
-    criteriaCorrelations = g.computeMarginalVersusGlobalRankingCorrelations(ranking,Threading=Threading)
-    print(time()-t0)
-    print(criteriaCorrelations)
+    g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,Comments=True)
+    t2 = Random3ObjectivesPerformanceTableau(numberOfActions=1000,\
+                                   numberOfCriteria=13,\
+                                   weightDistribution='equiobjectives',
+                                   seed=101)
+    
+    g2 = BipolarOutrankingDigraph(t2,Normalized=True,Threading=Threading,Comments=True)
+    from time import time
+    t0 = time();print(g1.computeOrdinalCorrelationMP(g2,Threading=Threading,Debug=False));print(time()-t0)
+#    t0 = time();print(g1.computeOrdinalCorrelation(g2));print(time()-t0)
+    
+##    t0 = time()
+##    criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
+##    print(time()-t0)
+##    print(criteriaCorrelations)
+##    Threading = False
+##    t0 = time()
+##    ranking = g.computeNetFlowsRanking()
+##    criteriaCorrelations = g.computeMarginalVersusGlobalRankingCorrelations(ranking,Threading=Threading)
+##    print(time()-t0)
+##    print(criteriaCorrelations)
     
 ##    t.saveXMCDA2('test')
 ##    t = XMCDA2PerformanceTableau('test')
