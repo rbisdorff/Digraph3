@@ -102,9 +102,16 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         If nbrCores is not set, the os.cpu_count() function is used to determine the number of
         available cores.
         """
+        from copy import deepcopy
         preorder = ranking2preorder(ranking)
         preorderRelation = self.computePreorderRelation(preorder)
-        
+        if self.valuationdomain['min'] != Decimal('-1') or\
+           self.valuationdomain['max'] != Decimal('1'):
+            origValuationdomain = deepcopy(self.valuationdomain)
+            self.recodeValuation(-1,1)
+            Normalizing = True
+        else:
+            Normalizing = False
         if Threading:
             from multiprocessing import Pool
             from os import cpu_count
@@ -124,6 +131,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 criteriaCorrelation.append((corr['correlation'],c))            
         if Sorted:
             criteriaCorrelation.sort(reverse=True)
+        if Normalizing:
+            self.recodeValuation(origValuationdomain['min'],origValuationdomain['max'])
         return criteriaCorrelation   
 
     def computeCriterionCorrelation(self,criterion,Threading=False,\
@@ -135,10 +144,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
         If Threading, the 
         """
-        gc = BipolarOutrankingDigraph(self,coalition=[criterion],CopyPerfTab=True,
+        gc = BipolarOutrankingDigraph(self,Normalized=True,coalition=[criterion],CopyPerfTab=True,
                                       Threading=Threading,nbrCores=nbrOfCPUs,
                                       Comments=Comments)
-        corr = self.computeOrdinalCorrelation(gc)
+        corr = self.computeOrdinalCorrelationMP(gc,Threading=Threading,nbrCPUs=nbrOfCPUs)
         if Debug:
             print(corr)
         return corr
@@ -157,6 +166,14 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         If nbrCores is not set, the os.cpu_count() function is used to determine the number of
         available cores.
         """
+        from copy import deepcopy
+        if self.valuationdomain['min'] != Decimal('-1') or\
+           self.valuationdomain['max'] != Decimal('1'):
+            origValuationdomain = deepcopy(self.valuationdomain)
+            self.recodeValuation(-1,1)
+            Normalizing = True
+        else:
+            Normalizing = False
         if Threading:
             from multiprocessing import Pool
             from os import cpu_count
@@ -175,6 +192,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 criteriaCorrelation.append((corr['correlation'],c))            
         if Sorted:
             criteriaCorrelation.sort(reverse=True)
+        if Normalizing:
+            self.recodeValuation(origValuationdomain['min'],origValuationdomain['max'])
         return criteriaCorrelation   
 
     def showMarginalVersusGlobalOutrankingCorrelation(self,Sorted=True,Threading=False,\
@@ -182,6 +201,14 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         """
         Show method for computeCriterionCorrelation results.
         """
+        from copy import deepcopy
+        if self.valuationdomain['min'] != Decimal('-1') or\
+           self.valuationdomain['max'] != Decimal('1'):
+            origValuationdomain = deepcopy(self.valuationdomain)
+            self.recodeValuation(-1,1)
+            Normalizing = True
+        else:
+            Normalizing = False
         criteriaList = [x for x in self.criteria]
         criteriaCorrelation = []
         totCorrelation = Decimal('0.0')
@@ -200,8 +227,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 print('%9s |  %.2f \t %.3f' % (c,self.criteria[c]['weight'],x[0]))
             print('Sum(Correlations) : %.3f' % (totCorrelation))
             print('Determinateness   : %.3f' % (corr['determination']))
-
-        return criteriaCorrelation
+        if Normalizing:
+            self.recodeValuation(origValuationdomain['min'],origValuationdomain['max'])
+        #return criteriaCorrelation
 
     def computeQuantileSortRelation(self,Debug=False):
         """
@@ -7942,13 +7970,13 @@ if __name__ == "__main__":
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
     Threading = True
-    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=1000,\
+    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=100,\
                                    numberOfCriteria=13,\
                                    weightDistribution='equiobjectives',
                                    seed=100)
     
     g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,Comments=True)
-    t2 = Random3ObjectivesPerformanceTableau(numberOfActions=1000,\
+    t2 = Random3ObjectivesPerformanceTableau(numberOfActions=100,\
                                    numberOfCriteria=13,\
                                    weightDistribution='equiobjectives',
                                    seed=101)
@@ -7958,16 +7986,16 @@ if __name__ == "__main__":
     t0 = time();print(g1.computeOrdinalCorrelationMP(g2,Threading=Threading,Debug=False));print(time()-t0)
 #    t0 = time();print(g1.computeOrdinalCorrelation(g2));print(time()-t0)
     
-##    t0 = time()
-##    criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
-##    print(time()-t0)
-##    print(criteriaCorrelations)
+    t0 = time()
+    criteriaCorrelations = g1.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
+    print(time()-t0)
+    print(criteriaCorrelations)
 ##    Threading = False
-##    t0 = time()
-##    ranking = g.computeNetFlowsRanking()
-##    criteriaCorrelations = g.computeMarginalVersusGlobalRankingCorrelations(ranking,Threading=Threading)
-##    print(time()-t0)
-##    print(criteriaCorrelations)
+    t0 = time()
+    ranking = g1.computeNetFlowsRanking()
+    criteriaCorrelations = g1.computeMarginalVersusGlobalRankingCorrelations(ranking,Threading=Threading)
+    print(time()-t0)
+    print(criteriaCorrelations)
     
 ##    t.saveXMCDA2('test')
 ##    t = XMCDA2PerformanceTableau('test')
