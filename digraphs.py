@@ -6184,12 +6184,12 @@ class Digraph(object):
         return relation_k
 
 
-    def showRubyChoice(self,Comments=False):
+    def showRubyChoice(self,Comments=False,_OldCoca=True):
         """
-        dummy for showRubisChoice()
+        dummy for showRubisBestChoiceRecommendation()
         older versions compatibility
         """
-        self.showRubisBestChoiceRecommendation(Comments=Comments)
+        self.showRubisBestChoiceRecommendation(Comments=Comments,_OldCoca=_OldCoca)
 
     def showRubisBestChoiceRecommendation(self,
                                           Comments=False,
@@ -6210,12 +6210,14 @@ class Digraph(object):
         t0 = time.time()
         n0 = self.order
         if _OldCoca:
-            _selfwcoc = OldCocaDigraph(self,Cpp=Cpp,Comments=Comments)
+            _selfwcoc = _CocaDigraph(self,Cpp=Cpp,Comments=Comments)
+            b1 = 0
         else:
             _selfwcoc = CocaDigraph(self,Cpp=Cpp,Comments=Comments)
+            b1 = _selfwcoc.brakings
         n1 = _selfwcoc.order
         nc = n1 - n0
-        b1 = _selfwcoc.brakings
+        
         self.relation_orig = copy.deepcopy(self.relation)
         if nc > 0 or b1 > 0:
             self.actions_orig = copy.deepcopy(self.actions)
@@ -6320,28 +6322,32 @@ class Digraph(object):
         print('*****************************')
         self.bestChoice = bestChoice
         self.worstChoice = worstChoice
-        if nc > 0:
+        if nc > 0 or b1 > 0:
             self.actions = copy.deepcopy(self.actions_orig)
             self.relation = copy.deepcopy(self.relation_orig)
             self.order = len(self.actions)
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
 
-    def computeRubyChoice(self,CppAgrum=False,Comments=False):
+    def computeRubyChoice(self,CppAgrum=False,Comments=False,_OldCoca=False):
         """
         dummy for computeRubisChoice()
         old versions compatibility.
         """
-        self.computeRubisChoice(CppAgrum=CppAgrum,Comments=Comments)
+        self.computeRubisChoice(CppAgrum=CppAgrum,Comments=Comments,_OldCoca=_OldCoca)
 
-    def computeRubisChoice(self,CppAgrum=False,Comments=False):
+    def computeRubisChoice(self,CppAgrum=False,Comments=False,_OldCoca=False):
         """
         Renders self.strictGoodChoices, self.nullChoices
         self.strictBadChoices, self.nonRobustChoices.
 
-
         CppgArum = False (default | true : use C++/Agrum digraph library
         for computing chordless circuits in self.
+
+        .. warning::
+            Changes in site the outranking digraph by
+            adding or braking chordless odd outranking circuits.
+            
         """
         import copy,time
         if Comments:
@@ -6349,10 +6355,13 @@ class Digraph(object):
 
         n0 = self.order
         t0 = time.time()
-        _selfwcoc = CocaDigraph(self,Cpp=CppAgrum,Comments=Comments)
+        if _OldCoca:
+            _selfwcoc = _CocaDigraph(self,Cpp=CppAgrum,Comments=Comments)
+            b1 = 0
+        else:
+            _selfwcoc = CocaDigraph(self,Cpp=CppAgrum,Comments=Comments)
+            b1 = _selfwcoc.brakings
         t1 = time.time()
-        n1 = _selfwcoc.order
-        nc = n1 - n0
         if Comments:
             print('Execution time: %.3f seconds' % (t1-t0))
             _selfwcoc.showPreKernels()
@@ -6403,6 +6412,15 @@ class Digraph(object):
         if Comments:
             self.showGoodChoices()
             self.showBadChoices()
+        n1 = _selfwcoc.order
+        nc = n1 - n0
+        if nc > 0 or b1 > 0:
+            self.actions = copy.deepcopy(self.actions_orig)
+            self.relation = copy.deepcopy(self.relation_orig)
+            self.order = len(self.actions)
+            self.gamma = self.gammaSets()
+            self.notGamma = self.notGammaSets()
+        
 
     def computeGoodChoiceVector(self,ker,Comments=False):
         """

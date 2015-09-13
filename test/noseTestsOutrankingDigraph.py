@@ -105,6 +105,7 @@ def testRubyChoice():
     g = BipolarOutrankingDigraph(t)
     g.showRelationTable()
     g.showRubyChoice(Comments=True)
+    g.showRubyChoice(Comments=True,_OldCoca=True)
     g.showStatistics()
     
 def testMoreOrlessRelatedPairs():
