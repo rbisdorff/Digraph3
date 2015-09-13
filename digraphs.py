@@ -6215,12 +6215,13 @@ class Digraph(object):
             _selfwcoc = CocaDigraph(self,Cpp=Cpp,Comments=Comments)
         n1 = _selfwcoc.order
         nc = n1 - n0
-        if nc > 0:
+        b1 = _selfwcoc.brakings
+        self.relation_orig = copy.deepcopy(self.relation)
+        if nc > 0 or b1 > 0:
             self.actions_orig = copy.deepcopy(self.actions)
             self.actions = copy.deepcopy(_selfwcoc.actions)
             self.order = len(self.actions)
-        self.relation_orig = copy.deepcopy(self.relation)
-        self.relation = copy.deepcopy(_selfwcoc.relation)
+            self.relation = copy.deepcopy(_selfwcoc.relation)
         if Comments:
             print('List of pseudo-independent choices')
             print(self.actions)
@@ -10232,6 +10233,7 @@ class CocaDigraph(Digraph):
         """
         import copy,time
         order0 = self.order
+        brakings = 0
         if not(isinstance(self.actions,dict)):
             actions = {}
             for x in self.actions:
@@ -10251,7 +10253,7 @@ class CocaDigraph(Digraph):
             degP,degN,minLink = self.circuitCredibilities(cycleList,Debug=Comments)
             if Comments:
                 print(cycleList,cycle,degP,degN,minLink)
-            if degP+degN > Med:
+            if degP+degN >= Med:
                 #print('Adding cycle:', cycle, 'with degree=',degP)
                 cn = '_'
                 dcycle = set()
@@ -10311,6 +10313,7 @@ class CocaDigraph(Digraph):
                 relation[x][y] = Med
                 relation[y][x] = Med
                 circuitsList.remove((cycleList,cycle))
+                brakings += 1
 
         self.actions = actions
         self.order = len(actions)
@@ -10325,6 +10328,13 @@ class CocaDigraph(Digraph):
                 print('  No circuits added !')
             else:
                 print('  ',new,' circuit(s) added!')
+        self.brakings = brakings
+        if Comments:
+            if self.brakings == 0:
+                print('  No circuit brakings !')
+            else:
+                print('  ',brakings,' circuit(s) were braked')
+            
 
     def showCircuits(self,credibility=None):
         """
