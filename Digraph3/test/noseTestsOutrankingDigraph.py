@@ -272,21 +272,21 @@ def testGlobalOutrankingCorrelation():
         #print medianKCorrelation[x]
     print('median K-Correlation:', medianKCorrelation)
 
-def testMedianOutranking():
-    print('*----- test Median Outranking -----*')
-    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=10,integerWeights=True,Debug=False)
-    t.save('debugTest')
-    t = PerformanceTableau('debugTest')
-    g = BipolarOutrankingDigraph(t)
-    g.exportGraphViz('testg')
-    gm = MedianBipolarOutrankingDigraph(t,percentile=(7,12),Debug=False)
-    gm.showPreKernels()
-    gm.exportGraphViz('testgm')
-    gm.showRelationTable()
-    g.showRelationTable()
-    print(g.vetos)
-    g.showRubyChoice()
-    gm.showRubyChoice()
+##def testMedianOutranking():
+##    print('*----- test Median Outranking -----*')
+##    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=10,integerWeights=True,Debug=False)
+##    t.save('debugTest')
+##    t = PerformanceTableau('debugTest')
+##    g = BipolarOutrankingDigraph(t)
+##    g.exportGraphViz('testg')
+##    gm = MedianBipolarOutrankingDigraph(t,percentile=(7,12),Debug=False)
+##    gm.showPreKernels()
+##    gm.exportGraphViz('testgm')
+##    gm.showRelationTable()
+##    g.showRelationTable()
+##    print(g.vetos)
+##    g.showRubyChoice()
+##    gm.showRubyChoice()
 
 def testElectre3OutrankingDigraph():
     print('*----- test Electre3 outranking Digraph -----*')

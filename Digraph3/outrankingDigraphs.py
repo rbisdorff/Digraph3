@@ -4788,7 +4788,7 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         else:
             return Decimal('-1.0')
 
-class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
+class _MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     """
     Parameters: performanceTableau (fileName of valid py code)
                 optional: coalition (sublist of criteria)
@@ -4800,7 +4800,7 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
     a median bipolar outranking digraph.
     """
     def __init__(self,argPerfTab=None,coalition=None,percentile=(1,2),Debug=False):
-        import copy
+        from  copy import deepcopy
         if isinstance(argPerfTab, (PerformanceTableau,RandomPerformanceTableau)):
             perfTab = argPerfTab
         else:
@@ -4821,16 +4821,16 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
         Max =   Decimal('100.0')
         self.valuationdomain = {'min':Min,'med':Med,'max':Max}
         if coalition == None:
-            criteria = copy.copy(perfTab.criteria)
+            criteria = deepcopy(perfTab.criteria)
         else:
             criteria = {}
             for g in coalition:
                 criteria[g] = perfTab.criteria[g]
         self.relation = self._constructRelation(perfTab,percentile,Debug)
         self.criteria = criteria
-        self.evaluation = copy.copy(perfTab.evaluation)
+        self.evaluation = deepcopy(perfTab.evaluation)
         try:
-            self.description = copy.copy(perfTab.description)
+            self.description = deepcopy(perfTab.description)
         except:
             pass
         methodData = {}
@@ -4852,17 +4852,17 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
         Renders the quantile-outranking relation from the data
         of a given performance tableau instantiation PerfTab.
         """
-        import copy
+        from copy import deepcopy
         
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
 
-        criteriaKey = [x for x in t.criteria]
+        #criteriaKey = [x for x in t.criteria]
         criteriaRelation = {}
         criteriaWeight = {}
         criteriaVeto = {}
-        for x in criteriaKey:
+        for x in criteria.keys():
             gx = BipolarOutrankingDigraph(t,coalition=[x])
             
             if Debug:
@@ -4872,13 +4872,13 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
             else:
                 pass
                 
-            criteriaRelation[x] = copy.deepcopy(gx.relation)
+            criteriaRelation[x] = deepcopy(gx.relation)
             criteriaWeight[x] = t.criteria[x]['weight']
-            criteriaVeto[x] = copy.deepcopy(gx.vetos)
+            criteriaVeto[x] = deepcopy(gx.vetos)
 
 
         veto = {}
-        for x in criteriaKey:
+        for x in criteria.keys():
            for v in criteriaVeto[x]:
                 if Debug:
                     print('===>>>> v :', v,v[0][1],v[0][2])
@@ -4898,11 +4898,11 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
         else:
             pass
 
-        actionsKey = [x for x in t.actions]
+        #actionsKey = [x for x in t.actions]
         relation = {}
-        for x in actionsKey:
+        for x in actions.keys():
             relation[x] = {}
-            for y in actionsKey:
+            for y in actions.keys():
                 try:
                     if veto[x][y] == Decimal("-1.0"):
                         relation[x][y] = Min
@@ -4910,7 +4910,7 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
                 except:
                     pass
                 characteristics = []
-                for c in criteriaKey:
+                for c in criteria.keys():
                     for i in range(int(criteriaWeight[c])):
                         characteristics.append(criteriaRelation[c][x][y])
                 characteristics.sort(reverse=False)
@@ -4938,7 +4938,7 @@ class MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
                     pass
 
                 try:
-                    relation[x][y] = min(quantile,veto[x][y]*Decimal("100.0"))
+                    relation[x][y] = min(quantile,veto[x][y])
                 except:
                     relation[x][y] = characteristics[k-1]
                 #print relation[x][y]
