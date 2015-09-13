@@ -6039,19 +6039,19 @@ class Digraph(object):
         nNarcs = 0
         minAmplitude = amplitude
         minLink = None
-        for x in circuit:
-            for y in circuit:
-                if x != y:
-                    if relation[x][y] > Med:
-                        degP += relation[x][y]
-                        nParcs += 1
-                        diffxy = relation[x][y]-relation[y][x]
-                        if minAmplitude > diffxy:
-                            minAmplitude = diffxy
-                            minLink = (x,y)
-                    elif relation[x][y] < Med:
-                        degN += relation[x][y]
-                        nNarcs += 1
+        nc = len(circuit)
+        for i in range(nc):
+            x = circuit[i]
+            for j in range(i+1,nc):
+                y = circuit[j]
+                degP += relation[x][y]
+                nParcs += 1
+                diffxy = relation[x][y]
+                if minAmplitude > diffxy:
+                    minAmplitude = diffxy
+                    minLink = (x,y)
+                degN += relation[y][x]
+                nNarcs += 1
         if nParcs != 0:
             degP /= Decimal(str(nParcs))
         if nNarcs != 0:

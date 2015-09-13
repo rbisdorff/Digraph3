@@ -798,6 +798,16 @@ is by convention 0.0 at determination level 0.0 .</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="digraphs.Digraph.computeOrdinalCorrelationMP">
+<code class="descname">computeOrdinalCorrelationMP</code><span class="sig-paren">(</span><em>other</em>, <em>MedianCut=False</em>, <em>Threading=True</em>, <em>nbrCPUs=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeOrdinalCorrelationMP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multi processing version of the digraphs.computeOrdinalCorrelation() method.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The relation filtering and the MedinaCut option are not implemented in the MP version.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="digraphs.Digraph.computePairwiseClusterComparison">
 <code class="descname">computePairwiseClusterComparison</code><span class="sig-paren">(</span><em>K1</em>, <em>K2</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computePairwiseClusterComparison" title="Permalink to this definition">¶</a></dt>
 <dd><p>compute the pairwise cluster comparison credibility vector
@@ -1298,7 +1308,9 @@ temporary dirctory is provided</p>
 <dl class="method">
 <dt id="digraphs.Digraph.gammaSets">
 <code class="descname">gammaSets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.gammaSets" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the dictionary of neighborhoods {node: (dx,ax)}</p>
+<dd><p>Renders the dictionary of neighborhoods {node: (dx,ax)}
+with set <em>dx</em> gathering the dominated, and set <em>ax</em> gathering
+the absorbed neighborhood.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1471,7 +1483,9 @@ self.circuitsList stored odd chordless circuits from self.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.notGammaSets">
 <code class="descname">notGammaSets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.notGammaSets" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the dictionary of not neighborhoods {node: (dx,ax)}</p>
+<dd><p>Renders the dictionary of neighborhoods {node: (dx,ax)}
+with set <em>dx</em> gathering the not dominated, and set <em>ax</em> gathering
+the not absorbed neighborhood.</p>
 </dd></dl>
 
 <dl class="method">
@@ -2063,41 +2077,6 @@ temporary Kneser digraphs</p>
 <dl class="method">
 <dt id="digraphs.KneserDigraph.showShort">
 <code class="descname">showShort</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph.showShort" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="digraphs.OldCocaDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">OldCocaDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.OldCocaDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd>Stored or memory resident digraph instance.</dd>
-</dl>
-<p>Specialization of general Digraph class for instantiation
-of chordless odd circuits augmented digraphs.</p>
-<dl class="method">
-<dt id="digraphs.OldCocaDigraph.addCircuits">
-<code class="descname">addCircuits</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.OldCocaDigraph.addCircuits" title="Permalink to this definition">¶</a></dt>
-<dd><p>Augmenting self with self.circuits.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphs.OldCocaDigraph.closureChordlessOddCircuits">
-<code class="descname">closureChordlessOddCircuits</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.OldCocaDigraph.closureChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
-<dd><p>Closure of chordless odd circuits extraction.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphs.OldCocaDigraph.showCircuits">
-<code class="descname">showCircuits</code><span class="sig-paren">(</span><em>credibility=None</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.OldCocaDigraph.showCircuits" title="Permalink to this definition">¶</a></dt>
-<dd><p>show methods for chordless odd circuits in CocaGraph</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphs.OldCocaDigraph.showComponents">
-<code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.OldCocaDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -3258,7 +3237,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3845,24 +3824,6 @@ temporary outranking digraphs with equisignificant criteria.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="outrankingDigraphs.MedianBipolarOutrankingDigraph">
-<em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">MedianBipolarOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>coalition=None</em>, <em>percentile=(1</em>, <em>2)</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.MedianBipolarOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<dl class="docutils">
-<dt>Parameters: performanceTableau (fileName of valid py code)</dt>
-<dd><dl class="first last docutils">
-<dt>optional: coalition (sublist of criteria)</dt>
-<dd>percentile as rational (n,d)
-for instance (50,100) or (1,2) renders Q2, (1,4) = Q1
-(1,10) = D1, (3,4) = Q3</dd>
-</dl>
-</dd>
-</dl>
-<p>Specialization of the standard OutrankingDigraph class for generating
-a median bipolar outranking digraph.</p>
-</dd></dl>
-
-<dl class="class">
 <dt id="outrankingDigraphs.MultiCriteriaDissimilarityDigraph">
 <em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">MultiCriteriaDissimilarityDigraph</code><span class="sig-paren">(</span><em>perfTab=None</em>, <em>filePerfTab=None</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.MultiCriteriaDissimilarityDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
@@ -4023,7 +3984,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
