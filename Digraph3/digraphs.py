@@ -6217,10 +6217,10 @@ class Digraph(object):
         nc = n1 - n0
         if nc > 0:
             self.actions_orig = copy.deepcopy(self.actions)
-            self.relation_orig = copy.deepcopy(self.relation)
             self.actions = copy.deepcopy(_selfwcoc.actions)
             self.order = len(self.actions)
-            self.relation = copy.deepcopy(_selfwcoc.relation)
+        self.relation_orig = copy.deepcopy(self.relation)
+        self.relation = copy.deepcopy(_selfwcoc.relation)
         if Comments:
             print('List of pseudo-independent choices')
             print(self.actions)
@@ -6230,17 +6230,22 @@ class Digraph(object):
             self.showRelationTable()
         #self.showPreKernels()
         actions = set([x for x in self.actions])
-        self.dompreKernels = set()
-        self.abspreKernels = set()
-        #t0 = time.time()
-        for choice in self.independentChoices(self.singletons()):
-            restactions = actions - choice[0][0]
-            if restactions <= choice[0][1]:
-                self.dompreKernels.add(choice[0][0])
-            if restactions <= choice[0][2]:
-                self.abspreKernels.add(choice[0][0])
+        self.showPreKernels()
+        if Debug:
+            print(self.dompreKernels,self.abspreKernels)
+##        self.dompreKernels = set()
+##        self.abspreKernels = set()
+##        #t0 = time.time()
+##        for choice in self.independentChoices(self.singletons()):
+##            restactions = actions - choice[0][0]
+##            if restactions <= choice[0][1]:
+##                self.dompreKernels.add(choice[0][0])
+##            if restactions <= choice[0][2]:
+##                self.abspreKernels.add(choice[0][0])
         self.computeGoodChoices(Comments=Comments)
         self.computeBadChoices(Comments=Comments)
+        if Debug:
+            print('good and bad choices: ',self.goodChoices,self.badChoices)
         t1 = time.time()
         print('* --- Rubis best choice recommendation(s) ---*')
         print('  (in decreasing order of determinateness)   ')
@@ -10255,7 +10260,7 @@ class CocaDigraph(Digraph):
             degP,degN,minLink = self.circuitCredibilities(cycleList,Debug=Comments)
             if Comments:
                 print(cycleList,cycle,degP,degN,minLink)
-            if degP+degN >= Med:
+            if degP+degN > Med:
                 #print('Adding cycle:', cycle, 'with degree=',degP)
                 cn = '_'
                 dcycle = set()
@@ -10314,9 +10319,12 @@ class CocaDigraph(Digraph):
                     print('Minimal link put to doubt: ', x,y)
                 relation[x][y] = Med
                 relation[y][x] = Med
+                circuitsList.remove((cycleList,cycle))
 
         self.actions = actions
         self.order = len(actions)
+        self.relation = relation
+        self.circuitsList = circuitsList
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         self.weakGamma = self.weakGammaSets()
