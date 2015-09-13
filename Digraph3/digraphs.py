@@ -6233,15 +6233,6 @@ class Digraph(object):
         self.showPreKernels()
         if Debug:
             print(self.dompreKernels,self.abspreKernels)
-##        self.dompreKernels = set()
-##        self.abspreKernels = set()
-##        #t0 = time.time()
-##        for choice in self.independentChoices(self.singletons()):
-##            restactions = actions - choice[0][0]
-##            if restactions <= choice[0][1]:
-##                self.dompreKernels.add(choice[0][0])
-##            if restactions <= choice[0][2]:
-##                self.abspreKernels.add(choice[0][0])
         self.computeGoodChoices(Comments=Comments)
         self.computeBadChoices(Comments=Comments)
         if Debug:
