@@ -2044,8 +2044,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             nbuf = 1000
         else:
             nbuf = n
-##        if n2 < samplingSize:
-##            samplingSize = n2
+        if n2 < samplingSize:
+            samplingSize = n2
         from iqagent import IncrementalQuantileEstimator
         est = IncrementalQuantileEstimator(nbuf=nbuf)
         if Debug:
@@ -2070,6 +2070,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                                 if sample > samplingSize:
                                     break
                                     break
+                est._update()
                 for q in quantile:
                     if Comments:
                         print('-->', q, quantile[q], end=' ')

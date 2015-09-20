@@ -6349,6 +6349,7 @@ class Digraph(object):
             adding or braking chordless odd outranking circuits.
             
         """
+        print('Passing here',_OldCoca)
         import copy,time
         if Comments:
             print('*--- computing the COCA digraph --*')
@@ -6366,10 +6367,10 @@ class Digraph(object):
             print('Execution time: %.3f seconds' % (t1-t0))
             _selfwcoc.showPreKernels()
         try:
-            actions_orig = copy.deepcopy(self.actions_orig)
+            self.actions_orig = copy.deepcopy(self.actions_orig)
         except:
-            actions_orig = copy.deepcopy(self.actions)
-        self.actions_orig = actions_orig
+            self. actions_orig = copy.deepcopy(self.actions)
+        #self.actions_orig = actions_orig
         self.relation_orig = copy.deepcopy(self.relation)
 
         self.actions = copy.deepcopy(_selfwcoc.actions)
@@ -6420,7 +6421,7 @@ class Digraph(object):
             self.order = len(self.actions)
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
-        
+    
 
     def computeGoodChoiceVector(self,ker,Comments=False):
         """
@@ -7793,6 +7794,37 @@ class Digraph(object):
                 return Med
 
     def computeNetFlowsRankingDict(self,Stored=True,Debug=False):
+        """
+        renders an ordered dictionary of the actions (from best to worst)
+        following the net flows ranking rule with rank and net flow attributes.
+        """
+        relation = self.relation
+        netFlowsOrder = []
+        for x in self.actions.keys():
+            #xnetflows = Decimal('0.0')
+            xnetflows = sum(relation[x][y] - relation[y][x]\
+                            for y in dict.keys(self.actions))
+##            for y in dict.keys(self.actions):
+##                if y != x:
+##                    xnetflows += relation[x][y] - relation[y][x]
+            if Debug:
+                print('netflow for %s = %.2f' % (x, xnetflows))
+            netFlowsOrder.append((-xnetflows,x))
+            # reversed sorting with keeping the actions natural ordering
+        netFlowsOrder.sort()
+        if Debug:
+            print(netFlowsOrder)
+
+        netFlowsRanking = OrderedDict()
+        k = 1
+        for item in netFlowsOrder:
+            netFlowsRanking[item[1]] = {'rank':k,'netFlow':-item[0]}
+            k += 1
+        if Stored:
+            self.netFlowsRankingDict = netFlowsRanking
+        return netFlowsRanking
+
+    def computeNetFlowsRankingDictOld(self,Stored=True,Debug=False):
         """
         renders an ordered dictionary of the actions (from best to worst)
         following the net flows ranking rule with rank and net flow attributes.
@@ -10563,6 +10595,12 @@ class _CocaDigraph(Digraph):
             print(str(k) + ': ' + str(component))
             xk = k + 1
 
+#---------------------
+##class CocaDigraph(_CocaDigraph):
+##    """
+##    CocaDigraph class wrapper for testing purposes only
+##    """
+
 #------------------------------------------
 
 class StrongComponentsCollapsedDigraph(Digraph):
@@ -11069,14 +11107,16 @@ if __name__ == "__main__":
         #g.showAll()
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
-        t = RandomCBPerformanceTableau(numberOfActions=15,seed=1,Comments=True)
-        #t.saveXMCDA2('testP2')
+        t = RandomCBPerformanceTableau(numberOfActions=15,seed=1,Debug=True,Comments=True)
+        t.saveXMCDA2('testP2')
+        t.showCriteria()
         #t = XMCDA2PerformanceTableau('testP')
         g = BipolarOutrankingDigraph(t)
         gcd = ~(-g)
         gcd.computeChordlessCircuits(Odd=True,Comments=True)
         gcd.showPreKernels()
-        gcd.computeRubisChoice()
+        g.computeRubisChoice(Comments=True)
+        g.showCriteria()
         print(gcd.dompreKernels)
         print(gcd.abspreKernels)
         for ker in gcd.dompreKernels:
