@@ -6349,7 +6349,7 @@ class Digraph(object):
             adding or braking chordless odd outranking circuits.
             
         """
-        print('Passing here',_OldCoca)
+        #print('Passing here',_OldCoca)
         import copy,time
         if Comments:
             print('*--- computing the COCA digraph --*')

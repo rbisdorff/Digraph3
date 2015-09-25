@@ -1,7 +1,22 @@
 #!/usr/bin/env python3
-# -*- coding:utf-8 -*-
-#  Python 3 graphs.py module
+#  Digraph3 graphs.py module
+#  Python3.3+ computing resources
 #  Copyright (C)  2011-2015 Raymond Bisdorff
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License along
+#    with this program; if not, write to the Free Software Foundation, Inc.,
+#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
 #############################################
 from decimal import Decimal
 
@@ -2514,7 +2529,8 @@ class MISModel(Graph):
         while unCovered != set() and _iter < maxIter:
             _iter += 1
             print('Iteration: ', _iter)
-            self.generateMIS(Reset=True,nSim=nSim,seed=seed,Debug=Debug)
+            self.generateMIS(Reset=True,
+                             nSim=nSim,seed=seed,Debug=Debug)
             mis,misCover,unCovered = self.checkMIS()
 
     def generateMIS(self,Reset=True,nSim=None,seed=None,Comments=True,Debug=False):
