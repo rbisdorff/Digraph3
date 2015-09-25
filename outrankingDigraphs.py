@@ -2694,7 +2694,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         """
         import codecs,copy
         selfOrig=copy.deepcopy(self)
-        self.computeRubyChoice()
+        self.computeRubyChoice(_OldCoca=True)
 
         if isinstance(self,RobustOutrankingDigraph):
             category = 'Robust Rubis'
@@ -3245,6 +3245,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     fo.write('<element>\n')
                     fo.write('<alternativeID>')
                     if isinstance(x,frozenset):
+                        print(self.actions[x])
                         fo.write(str(self.actions[x]['name']))
                     else:
                         fo.write(str(x))

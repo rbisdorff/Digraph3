@@ -1353,7 +1353,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
             self.boostedKohlerRanking.reverse()
             self.runTimes['ordering'] = time() - t0
         if WithNetFlowsOrdering:
-            #t0 = time()
+            t0 = time()
             self.boostedNetFlowsOrder = self.computeBoostedNetFlowsOrder()
             self.boostedNetFlowsRanking = list(self.boostedNetFlowsOrder)
             self.boostedNetFlowsRanking.reverse()
