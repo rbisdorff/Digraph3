@@ -829,7 +829,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                 pass
         else:
             fo = open(fileName,'a')
-            fo.write('*----- show short --------------*')
+            fo.write('*----- show short --------------*\n')
             fo.write('Instance name      : %s\n' % self.name)
             if WithFileSize:
                 fo.write('Size (in bytes)    : %d\n' % total_size(self))
