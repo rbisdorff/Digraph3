@@ -10281,7 +10281,8 @@ class CocaDigraph(Digraph):
         """
         Augmenting self with self.circuits.
         """
-        import copy,time
+        import time
+        #from copy import deepcopy
         order0 = self.order
         brakings = 0
         if not(isinstance(self.actions,dict)):
@@ -10374,7 +10375,7 @@ class CocaDigraph(Digraph):
         self.weakGamma = self.weakGammaSets()
         new = self.order - order0
         if Comments:
-            if self.order == order0:
+            if new == 0:
                 print('  No circuits added !')
             else:
                 print('  ',new,' circuit(s) added!')
