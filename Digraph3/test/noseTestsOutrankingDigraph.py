@@ -314,7 +314,11 @@ def testElectre3OutrankingDigraph():
 
 def testsaveXMCDA2RubisChoiceRecommendation():
     print('*----- test saveXMCDA2RubisChoiceRecommendation -----*')
-    t = RandomS3PerformanceTableau(numberOfActions=5,numberOfCriteria=7,weightDistribution="random",weightScale=(1,1),integerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=5,numberOfCriteria=7,
+                                   weightDistribution="random",weightScale=(1,1),
+                                   integerWeights=True,
+                                   commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],
+                                   commonMode=['beta',0.5,None])
     #t = XMCDAPerformanceTableau('triPaquets')
     t.saveXMCDA2('test')
     t.saveXMCDA('test1')
@@ -329,7 +333,12 @@ def testsaveXMCDA2RubisChoiceRecommendation():
 
 def testXMCDA2RobustChoiceRecommendation():
     print('*----- test XMCDA2 Robust Choice Recommendation -----*')
-    g = RobustOutrankingDigraph()
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=5,numberOfCriteria=7,
+                                            weightDistribution="random",weightScale=(1,1),
+                                            integerWeights=True,
+                                            commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],
+                                            commonMode=['beta',0.5,None])
+    g = RobustOutrankingDigraph(t)
     g.saveXMCDA2RubisChoiceRecommendation()
 
 def testBipolarVetos():
