@@ -1115,6 +1115,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                  WithNetFlowsOrdering=True,
                  minimalComponentSize=None,
                  Threading=False,nbrOfCPUs=None,
+                 nbrOfThreads=None,
                  save2File=None,
                  Comments=False,
                  Debug=False):
@@ -1293,18 +1294,20 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
 
             
             if nbrOfCPUs == None:
-                nbrOfCPUs = cpu_count()-1
+                nbrOfCPUs = cpu_count()
+            if nbrOfThreads == None:
+                nbrOfThreads = nbrOfCPUs-1
             print('Nbr of components',nc)
-            nbrOfJobs = nc//nbrOfCPUs
-            if nbrOfJobs*nbrOfCPUs < nc:
+            nbrOfJobs = nc//nbrOfThreads
+            if nbrOfJobs*nbrOfThreads < nc:
                 nbrOfJobs += 1
 ##            if nbrOfJobs < nbrOfCPUs:
 ##                nbrOfJobs,nbrOfCPUs = nbrOfCPUs,nbrOfJobs
-            print('Nbr of threads = ',nbrOfCPUs)
+            print('Nbr of threads = ',nbrOfThreads)
             print('Nbr of jobs/thread',nbrOfJobs)
-            nbrOfThreads = 0
-            for j in range(nbrOfCPUs):
-                print('thread = %d/%d' % (j+1,nbrOfCPUs),end="...")
+            nbrOfThreadsUsed = 0
+            for j in range(nbrOfThreads):
+                print('thread = %d/%d' % (j+1,nbrOfThreads),end="...")
                 start= j*nbrOfJobs
                 if (j+1)*nbrOfJobs < nc:
                     stop = (j+1)*nbrOfJobs
@@ -1315,11 +1318,11 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                 if lTest != []:
                     process = myThread(j,tempDirName,lTest,Debug)
                     process.start()
-                    nbrOfThreads += 1
+                    nbrOfThreadsUsed += 1
             while active_children() != []:
                 pass
                 #sleep(1)
-            print('Exit %d threads' % nbrOfThreads)
+            print('Exit %d threads' % nbrOfThreadsUsed)
             components = OrderedDict()
             #componentsList = []
             for j in range(nc):
