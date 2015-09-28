@@ -1203,6 +1203,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                  StoreSorting=True,
                  Threading=True,
                  nbrCores=None,
+                 nbrOfProcesses=None,
                  chunkSize=1,
                  Comments=False,
                  Debug=False):
@@ -1293,9 +1294,12 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
             from pickle import dumps, loads, load
             if nbrCores == None:
                 nbrCores = 8
-            Nproc = cpu_count()
-            if Nproc > nbrCores:
-                Nproc = nbrCores
+            if nbrOfProcesses == None:
+                Nproc = cpu_count()
+                if Nproc > nbrCores:
+                    Nproc = nbrCores
+            else:
+                Nproc = nbrOfProcesses
             from tempfile import TemporaryDirectory
             from os import getcwd, chdir
             with TemporaryDirectory() as tempDirName:
