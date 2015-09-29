@@ -1497,11 +1497,13 @@ class QuantilesSortingDigraph(SortingDigraph):
         self.relation = relation
         
         # compute weak ordering
+        if nbrOfProcesses == None:
+            nbrOfProcesses = nbrCores
         if WithSortingRelation:
             sortingRelation = self.computeSortingRelation(StoreSorting=StoreSorting,\
                                                           Debug=Debug,Comments=Comments,\
                                                           Threading=Threading,\
-                                                          nbrOfCPUs=nbrCores)
+                                                          nbrOfCPUs=nbrOfProcesses)
             for x in dict.keys(actionsOrig):
                 for y in dict.keys(actionsOrig):
                     self.relation[x][y] = sortingRelation[x][y]
@@ -1513,7 +1515,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 
         else:
             self.computeCategoryContents(StoreSorting=StoreSorting,\
-                                Threading=Threading,nbrOfCPUs=nbrCores,Comments=Comments)
+                                Threading=Threading,nbrOfCPUs=nbrOfProcesses,Comments=Comments)
  
 
     def showWeakOrder(self,Descending=True):
@@ -2038,7 +2040,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         
         return categoryContent
 
-    def computeSortingCharacteristics(self, action=None,Comments=True,\
+    def computeSortingCharacteristics(self, action=None,Comments=False,\
                                       StoreSorting=False,Debug=False,\
                                         Threading=False, nbrOfCPUs=None):
         """
@@ -2076,7 +2078,7 @@ class QuantilesSortingDigraph(SortingDigraph):
             if Comments:
                 self.Debug = True
             class myThread(Process):
-                def __init__(self, threadID, tempDirName, actions, catKeys,Debug):
+                def __init__(self, threadID, tempDirName, actions, catKeys, Debug):
                     Process.__init__(self)
                     self.threadID = threadID
                     self.workingDirectory = tempDirName
@@ -2179,7 +2181,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                 if Debug:
                     print(thActions)
                 if thActions != []:
-                    process = myThread(j,tempDirName,thActions,categories,Debug)
+                    process = myThread(j,tempDirName,thActions,categories,self.Debug)
                     process.start()
                     nbrOfThreads += 1
             while active_children() != []:
