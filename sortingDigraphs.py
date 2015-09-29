@@ -2075,10 +2075,9 @@ class QuantilesSortingDigraph(SortingDigraph):
             from multiprocessing import Process, active_children
             from pickle import dumps, loads, load
             from os import cpu_count
-            if Comments:
-                self.Debug = True
-            else:
-                self.Debug = False
+            self.Debug = Debug
+##            if Comments:
+##                self.Debug = True
             class myThread(Process):
                 def __init__(self, threadID, tempDirName, actions, catKeys, Debug):
                     Process.__init__(self)
