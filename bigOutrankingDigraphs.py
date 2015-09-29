@@ -1163,9 +1163,10 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                                         LowerClosed=LowerClosed,
                                         CompleteOutranking=False,
                                         StoreSorting=True,
-                                         WithSortingRelation=False,
+                                        WithSortingRelation=False,
                                         Threading= self.sortingParameters['Threading'],
                                         nbrCores=nbrOfCPUs,
+                                        Comments=Comments,
                                         Debug=Debug)
         self.runTimes = {'sorting': time() - t0}
 #        self.qs = qs
@@ -1244,7 +1245,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                     from outrankingDigraphs import BipolarOutrankingDigraph
                     chdir(self.workingDirectory)
                     if Debug:
-                        print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadID)))
                         print('lTest',lTest)
                     fi = open('dumpSelf.py','rb')
                     context = loads(fi.read())
@@ -1721,7 +1722,7 @@ if __name__ == "__main__":
     
     from time import time
     from weakOrders import QuantilesRankingDigraph
-    MP  = False
+    MP  = True
 ##    t0 = time()
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,seed=100)
 ##    tp = RandomCBPerformanceTableau(numberOfActions=500,Threading=MP,
@@ -1737,7 +1738,7 @@ if __name__ == "__main__":
     bg1 = BigOutrankingDigraphMP(tp,CopyPerfTab=False,quantiles=75,quantilesOrderingStrategy='average',
                                  LowerClosed=False,WithNetFlowsOrdering=True,
                                  minimalComponentSize=5,
-                                 Threading=MP,nbrOfCPUs=None,Debug=False)
+                                 Threading=MP,nbrOfCPUs=5,Comments=True,Debug=False)
 ##    print(bg1.computeDecompositionSummaryStatistics())
 ##    bg1.showDecomposition(direction='decreasing')
     print(bg1)

@@ -3889,7 +3889,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     from os import chdir
                     chdir(self.workingDirectory)
                     if Debug:
-                        print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
                     fi = open('dumpSelf.py','rb')
                     digraph = loads(fi.read())
                     fi.close()
@@ -3901,25 +3901,25 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     fo = open(foName,'wb')
                     if self.InitialSplit:
                         splitRelation = BipolarOutrankingDigraph._constructRelation(digraph,digraph.criteria,\
-                                            digraph.evaluation,\
-                                            initial=splitActions,\
-                                            #terminal=terminal,\
-                                            hasNoVeto=hasNoVeto,\
-                                            hasBipolarVeto=hasBipolarVeto,\
+                                            digraph.evaluation,
+                                            initial=splitActions,
+                                            #terminal=terminal,
+                                            hasNoVeto=hasNoVeto,
+                                            hasBipolarVeto=hasBipolarVeto,
                                             WithConcordanceRelation=False,
-                                            WithVetoCounts=False,                                        
-                                            Debug=False,\
+                                            WithVetoCounts=False,
+                                            Debug=False,
                                             hasSymmetricThresholds=hasSymmetricThresholds)
                     else:
                         splitRelation = BipolarOutrankingDigraph._constructRelation(digraph,digraph.criteria,\
-                                            digraph.evaluation,\
-                                            #initial=initial,\
-                                            terminal=splitActions,\
-                                            hasNoVeto=hasNoVeto,\
-                                            hasBipolarVeto=hasBipolarVeto,\
+                                            digraph.evaluation,
+                                            #initial=initial,
+                                            terminal=splitActions,
+                                            hasNoVeto=hasNoVeto,
+                                            hasBipolarVeto=hasBipolarVeto,
                                             WithConcordanceRelation=False,
                                             WithVetoCounts=False,
-                                            Debug=False,\
+                                            Debug=False,
                                             hasSymmetricThresholds=hasSymmetricThresholds)
                     fo.write(dumps(splitRelation,-1))
                     fo.close()
