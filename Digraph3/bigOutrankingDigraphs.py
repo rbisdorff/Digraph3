@@ -1166,6 +1166,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                                         WithSortingRelation=False,
                                         Threading= self.sortingParameters['Threading'],
                                         nbrCores=nbrOfCPUs,
+                                        nbrOfProcesses=nbrOfThreads,
                                         Comments=Comments,
                                         Debug=Debug)
         self.runTimes = {'sorting': time() - t0}
