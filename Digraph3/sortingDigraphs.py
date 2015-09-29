@@ -1442,7 +1442,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         maxValuation = 100.0
         if CompleteOutranking:
             g = BipolarOutrankingDigraph(normPerfTab,hasNoVeto=hasNoVeto,
-                                         Threading=Threading)
+                                         Threading=Threading,nbrCores=nbrCores)
             g.recodeValuation(minValuation,maxValuation)
             self.relationOrig = g.relation
             Min = g.valuationdomain['min']
@@ -2038,7 +2038,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         
         return categoryContent
 
-    def computeSortingCharacteristics(self, action=None,Comments=False,\
+    def computeSortingCharacteristics(self, action=None,Comments=True,\
                                       StoreSorting=False,Debug=False,\
                                         Threading=False, nbrOfCPUs=None):
         """
@@ -2074,7 +2074,7 @@ class QuantilesSortingDigraph(SortingDigraph):
             from pickle import dumps, loads, load
             from os import cpu_count
             if Comments:
-                self.Debug = Debug
+                self.Debug = True
             class myThread(Process):
                 def __init__(self, threadID, tempDirName, actions, catKeys,Debug):
                     Process.__init__(self)
@@ -2088,7 +2088,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                     from os import chdir
                     chdir(self.workingDirectory)
                     if self.Debug:
-                        print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+                        print("Starting working in %s on %s" % (self.workingDirectory, str(self.threadID)))
                         print('actions,catKeys',self.actions,self.catKeys)
                     fi = open('dumpSelf.py','rb')
                     context = loads(fi.read())
