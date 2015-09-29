@@ -1740,7 +1740,7 @@ if __name__ == "__main__":
                                  minimalComponentSize=5,
                                  Threading=MP,nbrOfCPUs=8,
                                  nbrOfThreads=4,
-                                 Comments=False,Debug=False)
+                                 Comments=True,Debug=False)
 ##    print(bg1.computeDecompositionSummaryStatistics())
 ##    bg1.showDecomposition(direction='decreasing')
     print(bg1)
