@@ -2077,6 +2077,8 @@ class QuantilesSortingDigraph(SortingDigraph):
             from os import cpu_count
             if Comments:
                 self.Debug = True
+            else:
+                self.Debug = False
             class myThread(Process):
                 def __init__(self, threadID, tempDirName, actions, catKeys, Debug):
                     Process.__init__(self)

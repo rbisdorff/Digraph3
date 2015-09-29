@@ -1186,7 +1186,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
         decomposition = [[(item[0][0],item[0][1]),item[1]]\
                 for item in self._computeQuantileOrdering(\
                     strategy=quantilesOrderingStrategy,\
-                    Descending=True,Threading=Threading,nbrOfCPUs=nbrOfCPUs)]
+                    Descending=True,Threading=Threading,nbrOfCPUs=nbrOfThreads)]
         if Debug:
             print(decomposition)
         self.decomposition = decomposition
@@ -1738,7 +1738,9 @@ if __name__ == "__main__":
     bg1 = BigOutrankingDigraphMP(tp,CopyPerfTab=False,quantiles=75,quantilesOrderingStrategy='average',
                                  LowerClosed=False,WithNetFlowsOrdering=True,
                                  minimalComponentSize=5,
-                                 Threading=MP,nbrOfCPUs=5,Comments=True,Debug=False)
+                                 Threading=MP,nbrOfCPUs=8,
+                                 nbrOfThreads=4,
+                                 Comments=False,Debug=False)
 ##    print(bg1.computeDecompositionSummaryStatistics())
 ##    bg1.showDecomposition(direction='decreasing')
     print(bg1)
