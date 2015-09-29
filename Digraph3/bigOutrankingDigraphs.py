@@ -665,7 +665,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         actionsCategoriesList = [] 
         actions = self.actions
         showActionCategories = self.showActionCategories
-        with Pool() as pool:
+        with Pool(processes=nbrOfCPUs) as pool:
             actionsCategoriesList = [(a,lowCateg,highCateg,credibility) for\
                                      a,lowCateg,highCateg,credibility in\
                                      pool.map(showActionCategories,actions.keys())]
