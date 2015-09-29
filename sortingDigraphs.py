@@ -1286,6 +1286,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                  StoreSorting=False,\
                  Threading=False,\
                  nbrCores=None,\
+                 nbrOfProcesses=None,\
                  Comments=False,
                  Debug=False):
         """
