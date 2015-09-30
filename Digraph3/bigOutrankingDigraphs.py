@@ -41,10 +41,10 @@ class BigDigraph(object):
         print('Ordering strategy : %s' % self.sortingParameters['strategy'])
         print('# Components      : %d' % self.nbrComponents)
         print('Minimal size      : %d' % self.minimalComponentSize)
-        sumStat = self.computeDecompositionSummaryStatistics()
-        print('Maximal size      : %d' % (sumStat['max']))
-        print('Median size       : %d' % (sumStat['median']))
-        print('fill rate         : %.3f' % (sumStat['fillrate']))     
+        sumStats = self.computeDecompositionSummaryStatistics()
+        print('Maximal size      : %d' % (sumStats['max']))
+        print('Median size       : %d' % (sumStats['median']))
+        print('fill rate         : %.1f%%' % (sumStats['fillrate']*100.0))     
         print('----  Constructor run times (in sec.) ----')
         print('Total time        : %.5f' % self.runTimes['totalTime'])
         print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
@@ -821,7 +821,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             print('Minimal size      : %d' % self.minimalComponentSize)
             print('Maximal size      : %d' % summaryStats['max'])
             print('Median size       : %d' % summaryStats['median'])
-            print('Fill rate         : %.3f' % summaryStats['fillrate'])
+            print('Fill rate         : %.1f%%' % (summaryStats['fillrate']*100.0))
             print('----  Constructor run times (in sec.) ----')
             print('Total time        : %.5f' % self.runTimes['totalTime'])
             print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
@@ -845,7 +845,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             fo.write('Minimal size       : %d\n' % self.minimalComponentSize)
             fo.write('Maximal size       : %d\n' % summaryStats['max'])
             fo.write('Median size        : %d\n' % summaryStats['median'])
-            fo.write('Fill rate         : %.3f' % summaryStats['fillrate'])
+            fo.write('Fill rate          : %.1f%%\n' % (summaryStats['fillrate']*100.0))
             fo.write('*-- Constructor run times (in sec.) --*\n')
             fo.write('Total time         : %.5f\n' % self.runTimes['totalTime'])
             fo.write('QuantilesSorting   : %.5f\n' % self.runTimes['sorting'])
@@ -1168,7 +1168,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
         # quantiles sorting
         t0 = time()
         if Comments:        
-            print('Computing the %d-quantiles sorting digraph ...' % (quantiles))
+            print('Computing the %d-quantiles sorting digraph of order %d ...' % (quantiles,na))
         #if Threading:
         qs = QuantilesSortingDigraph(argPerfTab=perfTab,CopyPerfTab=CopyPerfTab,
                                         limitingQuantiles=quantiles,
@@ -1290,7 +1290,9 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                         fo.write(dumps(splitComponent,-1))
                         fo.close()
                     
-            print('Threading ...')        
+            if Comments:
+                print('Processing the %d components' % nc )
+                print('Threading ...')        
             from tempfile import TemporaryDirectory,mkdtemp
             #with TemporaryDirectory() as tempDirName:
             tempDirName = mkdtemp()
@@ -1311,24 +1313,27 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                 nbrOfCPUs = cpu_count()
             if nbrOfThreads == None:
                 nbrOfThreads = nbrOfCPUs-1
-            print('Nbr of components',nc)
             nbrOfJobs = nc//nbrOfThreads
             if nbrOfJobs*nbrOfThreads < nc:
                 nbrOfJobs += 1
 ##            if nbrOfJobs < nbrOfCPUs:
 ##                nbrOfJobs,nbrOfCPUs = nbrOfCPUs,nbrOfJobs
-            print('Nbr of threads = ',nbrOfThreads)
-            print('Nbr of jobs/thread',nbrOfJobs)
+            if Comments:
+                print('Nbr of components',nc)            
+                print('Nbr of threads = ',nbrOfThreads)
+                print('Nbr of jobs/thread',nbrOfJobs)
             nbrOfThreadsUsed = 0
             for j in range(nbrOfThreads):
-                print('thread = %d/%d' % (j+1,nbrOfThreads),end="...")
+                if Comments:
+                    print('thread = %d/%d' % (j+1,nbrOfThreads),end="...")
                 start= j*nbrOfJobs
                 if (j+1)*nbrOfJobs < nc:
                     stop = (j+1)*nbrOfJobs
                 else:
                     stop = nc
                 lTest = list(range(start,stop))
-                print(lTest)
+                if Comments:
+                    print(lTest)
                 if lTest != []:
                     process = myThread(j,tempDirName,lTest,Debug)
                     process.start()
@@ -1336,7 +1341,8 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
             while active_children() != []:
                 pass
                 #sleep(1)
-            print('Exit %d threads' % nbrOfThreadsUsed)
+            if Comments:
+                print('Exit %d threads' % nbrOfThreadsUsed)
             components = OrderedDict()
             #componentsList = []
             for j in range(nc):
