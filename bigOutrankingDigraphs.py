@@ -41,8 +41,10 @@ class BigDigraph(object):
         print('Ordering strategy : %s' % self.sortingParameters['strategy'])
         print('# Components      : %d' % self.nbrComponents)
         print('Minimal size      : %d' % self.minimalComponentSize)
-        print('Maximal size      : %d' % (self.computeDecompositionSummaryStatistics())['max'])
-        print('Median size      : %d' % (self.computeDecompositionSummaryStatistics())['median'])
+        sumStat = self.computeDecompositionSummaryStatistics()
+        print('Maximal size      : %d' % (sumStat['max']))
+        print('Median size       : %d' % (sumStat['median']))
+        print('fill rate         : %.3f' % (sumStat['fillrate']))     
         print('----  Constructor run times (in sec.) ----')
         print('Total time        : %.5f' % self.runTimes['totalTime'])
         print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
@@ -218,11 +220,13 @@ class BigDigraph(object):
         medianLength = statistics.median(compLengths)
         meanLength = statistics.mean(compLengths)
         stdLength = statistics.pstdev(compLengths)
+        fillrate = self.computeFillRate()
         summary = {
                    'median':medianLength,
                    'mean':meanLength,
                    'stdev': stdLength,
-                   'max': max(compLengths)}
+                   'max': max(compLengths),
+                   'fillrate': fillrate}
         return summary
 
     def recodeValuation(self,newMin=-1,newMax=1,Debug=False):
@@ -269,6 +273,15 @@ class BigDigraph(object):
         preordering = [[x] for x in ordering]
         return preordering
 
+    def computeFillRate(self):
+        """
+        Renders the sum of the squares (without diagonal) of the orders of the component's subgraphs
+        over the square (without diagonal of the big digraph order. 
+        """
+        fillRate = sum([(self.components[comp]['subGraph'].order*\
+                         (self.components[comp]['subGraph'].order-1))\
+                        for comp in self.components])
+        return fillRate/( bg1.order*(bg1.order-1) )
 
 ##    def computeCriterionCorrelation(self,criterion,Threading=False,\
 ##                                    nbrOfCPUs=None,Debug=False,
@@ -819,6 +832,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             print('Minimal size      : %d' % self.minimalComponentSize)
             print('Maximal size      : %d' % summaryStats['max'])
             print('Median size       : %d' % summaryStats['median'])
+            print('Fill rate         : %.3f' % summaryStats['fillrate'])
             print('----  Constructor run times (in sec.) ----')
             print('Total time        : %.5f' % self.runTimes['totalTime'])
             print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
@@ -842,6 +856,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             fo.write('Minimal size       : %d\n' % self.minimalComponentSize)
             fo.write('Maximal size       : %d\n' % summaryStats['max'])
             fo.write('Median size        : %d\n' % summaryStats['median'])
+            fo.write('Fill rate         : %.3f' % summaryStats['fillrate'])
             fo.write('*-- Constructor run times (in sec.) --*\n')
             fo.write('Total time         : %.5f\n' % self.runTimes['totalTime'])
             fo.write('QuantilesSorting   : %.5f\n' % self.runTimes['sorting'])
@@ -1753,6 +1768,8 @@ if __name__ == "__main__":
     print(bg1.computeDecompositionSummaryStatistics())
     bg1.showDecomposition(direction='increasing')
     print(bg1)
+    fillRate = sum([(bg1.components[comp]['subGraph'].order*(bg1.components[comp]['subGraph'].order-1)) for comp in bg1.components])
+    print( 'fill rate: ', fillRate,fillRate/( bg1.order*(bg1.order-1) ) )
 ##    bg1.showMarginalVersusGlobalOutrankingCorrelation(Threading=MP)
 ##    bg2 = BigOutrankingDigraphMP(tp,quantiles=75,quantilesOrderingStrategy='average',
 ##                                 LowerClosed=True,
