@@ -365,20 +365,18 @@ class BigDigraph(object):
 ########################
 class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
     """
-    Abstract root class !
-    Multiprocessing implementation of the BipolarOutrankingDigraph class
-    for large instances (order > 1000)
-
-    The outranking digraph is with q-tiles sorting decomposed in a partition of more or
+    Abstract root class  for the multiprocessing implementation of big outranking digraphs.
+    
+    The big outranking digraph instance is with q-tiles sorting decomposed in a partition of more or
     quantile equivalence classes, which are lineraly ordred by average quantile limits. (default).
 
     To each quantile equivalence class is associated a BipolarOutrankingDigraph object
     which is restricted to the decision actions in this quantile class.
 
-    By default, q is set to a tenth of the number of decision actions,
+    By default, the number of quantiles q is set to a tenth of the number of decision actions,
     ie q = order//10.
 
-    For other parameters settings, see the corresponding QuantilesSortingDigraph class.
+    For other parameters settings, see the corresponding :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
 
     """
 ##    def __init__(self,argPerfTab=None,quantiles=None,\
