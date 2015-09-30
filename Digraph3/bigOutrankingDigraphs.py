@@ -261,7 +261,7 @@ class BigDigraph(object):
 
     def ranking2Preorder(self,ranking):
         """
-        Renders a preordering (a list of list) of a ranking of decision actions in decreasing preference direction.
+        Renders a preordering (a list of list) of a ranking (best to worst) of decision actions in decreasing preference direction.
         """
         ordering = list(ranking)
         ordering.reverse()
@@ -270,7 +270,7 @@ class BigDigraph(object):
 
     def ordering2Preorder(self,ordering):
         """
-        Renders a preordering (a list of list) of a ranking of decision actions in decreasing preference direction.
+        Renders a preordering (a list of list) of a linar order (worst to best) of decision actions in decreasing preference direction.
         """
         preordering = [[x] for x in ordering]
         return preordering
@@ -283,7 +283,7 @@ class BigDigraph(object):
         fillRate = sum([(self.components[comp]['subGraph'].order*\
                          (self.components[comp]['subGraph'].order-1))\
                         for comp in self.components])
-        return fillRate/( bg1.order*(bg1.order-1) )
+        return fillRate/( self.order*(self.order-1) )
 
 ##    def computeCriterionCorrelation(self,criterion,Threading=False,\
 ##                                    nbrOfCPUs=None,Debug=False,
@@ -789,38 +789,39 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         Default (__repr__) presentation method for big outranking digraphs instances:
         
         >>> from bigOutrankingDigraphs import *
-        >>> t = RandomCBPerformanceTableau(numberOfActions=100)
-        >>> g = BigOutrankingDigraph(t,quantiles=10)
+        >>> t = RandomCBPerformanceTableau(numberOfActions=100,seed=1)
+        >>> g = BigOutrankingDigraphMP(t,quantiles=10,Threading=True)
         Threading ...
-        Nbr of cpus =  7
-        number of cores = 7
-        nbr of actions to split 100
-        nbr of jobs =  7
-        nbr of splitActions =  15
-        iteration =  1 15
-        iteration =  2 15
-        iteration =  3 15
-        iteration =  4 15
-        iteration =  5 15
-        iteration =  6 15
-        iteration =  7 10
-        Exiting computing threads
+        Nbr of components 19
+        Nbr of threads =  7 
+        Nbr of jobs/thread 3
+        thread = 1/7...[0, 1, 2]
+        thread = 2/7...[3, 4, 5]
+        thread = 3/7...[6, 7, 8]
+        thread = 4/7...[9, 10, 11]
+        thread = 5/7...[12, 13, 14]
+        thread = 6/7...[15, 16, 17]
+        thread = 7/7...[18]
+        Exit 7 threads
         >>> print(g)
         *----- show short --------------*
         Instance name     : randomCBperftab_mp
         # Actions         : 100
-        # Criteria        : 13
-        Sorting by        : 10-Tiling 
-        Ordering strategy : average quantile
-        # Components      : 11
+        # Criteria        : 7
+        Sorting by        : 10-Tiling
+        Ordering strategy : average
+        # Components      : 19
+        Minimal size      : 1
+        Maximal size      : 22
+        Median size       : 2
+        fill rate         : 0.116
         ----  Constructor run times (in sec.) ----
-        Total time        : 0.72743
-        QuantilesSorting  : 0.51481
-        Preordering       : 0.00292
-        Decomposing       : 0.20469
-        Ordering          : 0.00500
-        Default presentation of BigOutrankingDigraphs
-        
+        Total time        : 0.14958
+        QuantilesSorting  : 0.06847
+        Preordering       : 0.00071
+        Decomposing       : 0.07366
+        Ordering          : 0.00130
+        <class 'bigOutrankingDigraphs.BigOutrankingDigraphMP'> instance        
         """
         summaryStats = self.computeDecompositionSummaryStatistics()
         if fileName == None:
