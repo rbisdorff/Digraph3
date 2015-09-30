@@ -19,7 +19,7 @@ def testbigOutrankingDigraph():
                                       seed=100)
     print(time()-t0)
     print(total_size(tp.evaluation))
-    bg1 = BigOutrankingDigraph(tp,quantiles=10,quantilesOrderingStrategy='average',
+    bg1 = BigOutrankingDigraphMP(tp,quantiles=10,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
                                minimalComponentSize=None,
                                     Threading=MP,Debug=False)
@@ -31,16 +31,21 @@ def testbigOutrankingDigraph():
     print(time()-t0)
     print(total_size(g))
     t0 = time()
+    print("Big outranking digraph's correlation with standard outranking digraph")
     print(bg1.computeOrdinalCorrelation(g,Debug=False))
     print(time()-t0)
-    ko = bg1.computeBoostedKohlerOrder()
-    preordering1 = bg1.ordering2Preorder(ko)
-    print('Boosted Kohler ranking correlation with complete outranking relation')
+    nf = bg1.computeBoostedNetFlowsOrder()
+    preordering1 = bg1.ordering2Preorder(nf)
+    print('Boosted Netflows ranking correlation with complete outranking relation')
     print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering1)))
-    rp = bg1.computeBoostedRankedPairsOrder()
-    preordering2 = bg1.ordering2Preorder(rp)
-    print('Boosted Ranked Pairs ranking correlation with complete outranking relation')
+    ko = bg1.computeBoostedKohlerOrder()
+    preordering2 = bg1.ordering2Preorder(ko)
+    print('Boosted Kohler ranking correlation with complete outranking relation')
     print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering2)))
+    rp = bg1.computeBoostedRankedPairsOrder()
+    preordering3 = bg1.ordering2Preorder(rp)
+    print('Boosted Ranked Pairs ranking correlation with complete outranking relation')
+    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering3)))
 
 def testMinimalComponentSize():
     print('==>> Testing bigOutrankingDigraph with minimal Component Size instantiation')
@@ -50,7 +55,7 @@ def testMinimalComponentSize():
                                       seed=100)
     print(time()-t0)
     print(total_size(tp.evaluation))
-    bg1 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
+    bg1 = BigOutrankingDigraphMP(tp,quantiles=50,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
                                minimalComponentSize=5,
                                     Threading=MP,Debug=False)
