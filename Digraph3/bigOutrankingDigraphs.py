@@ -790,19 +790,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         
         >>> from bigOutrankingDigraphs import *
         >>> t = RandomCBPerformanceTableau(numberOfActions=100,seed=1)
-        >>> g = BigOutrankingDigraphMP(t,quantiles=10,Threading=True)
-        Threading ...
-        Nbr of components 19
-        Nbr of threads =  7 
-        Nbr of jobs/thread 3
-        thread = 1/7...[0, 1, 2]
-        thread = 2/7...[3, 4, 5]
-        thread = 3/7...[6, 7, 8]
-        thread = 4/7...[9, 10, 11]
-        thread = 5/7...[12, 13, 14]
-        thread = 6/7...[15, 16, 17]
-        thread = 7/7...[18]
-        Exit 7 threads
+        >>> g = BigOutrankingDigraphMP(t,quantiles=10)
         >>> print(g)
         *----- show short --------------*
         Instance name     : randomCBperftab_mp
