@@ -204,7 +204,9 @@ class BigDigraph(object):
             summary = {'max': maxLength,
                        'median':medianLength,
                        'mean':meanLength,
-                       'stdev': stdLength}
+                       'stdev': stdLength,
+                       'fillrate': fillrate,
+                                  (see computeFillRate()}
         """
         try:
             import statistics
