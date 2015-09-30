@@ -1584,15 +1584,18 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 
         print('\n')
 
-    def showPerformanceTableau(self):
+    def showPerformanceTableau(self,actionsSubset=None):
         """
         Print the performance Tableau.
         """
         print('*----  performance tableau -----*')
         criteriaList = list(self.criteria)
         criteriaList.sort()
-        actionsList = list(self.actions)
-        actionsList.sort()
+        if actionsSubset == None:
+            actionsList = list(self.actions)
+            #actionsList.sort()
+        else:
+            actionsList = list(actionsSubset)
         print('criteria | ', end=' ')
         for x in actionsList:
             print('\''+str(x)+'\'  ', end=' ')

@@ -1187,7 +1187,7 @@ The performance evaluations of each decision alternative on each criterion are g
             print('percentile =', percentile)   
         return percentile
 
-    def showPerformanceTableau(self,sorted=True,ndigits=2):
+    def showPerformanceTableau(self,actionsSubset=None,sorted=None,ndigits=2):
         """
         Print the performance Tableau.
         """
@@ -1195,9 +1195,12 @@ The performance evaluations of each decision alternative on each criterion are g
         criteriaList = list(self.criteria)
         if sorted:
             criteriaList.sort()
-        actionsList = list(self.actions)
-        if sorted:
-            actionsList.sort()
+        if actionsSubset == None:
+            actionsList = list(self.actions)
+            if sorted:
+                actionsList.sort()
+        else:
+            actionsList = list(actionsSubset)     
         print('criteria | weights |', end=' ')
         for x in actionsList:
             print('\''+str(x)+'\'  ', end=' ')
