@@ -1138,7 +1138,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3249,7 +3249,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3996,7 +3996,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -6183,13 +6183,13 @@ is by convention 0.0 at determination level 0.0 .</p>
 <dl class="method">
 <dt id="bigOutrankingDigraphs.BigDigraph.ordering2Preorder">
 <code class="descname">ordering2Preorder</code><span class="sig-paren">(</span><em>ordering</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigDigraph.ordering2Preorder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a preordering (a list of list) of a ranking of decision actions in decreasing preference direction.</p>
+<dd><p>Renders a preordering (a list of list) of a linar order (worst to best) of decision actions in decreasing preference direction.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="bigOutrankingDigraphs.BigDigraph.ranking2Preorder">
 <code class="descname">ranking2Preorder</code><span class="sig-paren">(</span><em>ranking</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigDigraph.ranking2Preorder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a preordering (a list of list) of a ranking of decision actions in decreasing preference direction.</p>
+<dd><p>Renders a preordering (a list of list) of a ranking (best to worst) of decision actions in decreasing preference direction.</p>
 </dd></dl>
 
 <dl class="method">
@@ -6334,37 +6334,39 @@ Components are stored in an ordered dictionary.</p>
 <code class="descname">showShort</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>WithFileSize=True</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.showShort" title="Permalink to this definition">¶</a></dt>
 <dd><p>Default (__repr__) presentation method for big outranking digraphs instances:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bigOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BigOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BigOutrankingDigraphMP</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go">Threading ...</span>
-<span class="go">Nbr of cpus =  7</span>
-<span class="go">number of cores = 7</span>
-<span class="go">nbr of actions to split 100</span>
-<span class="go">nbr of jobs =  7</span>
-<span class="go">nbr of splitActions =  15</span>
-<span class="go">iteration =  1 15</span>
-<span class="go">iteration =  2 15</span>
-<span class="go">iteration =  3 15</span>
-<span class="go">iteration =  4 15</span>
-<span class="go">iteration =  5 15</span>
-<span class="go">iteration =  6 15</span>
-<span class="go">iteration =  7 10</span>
-<span class="go">Exiting computing threads</span>
+<span class="go">Nbr of components 19</span>
+<span class="go">Nbr of threads =  7 </span>
+<span class="go">Nbr of jobs/thread 3</span>
+<span class="go">thread = 1/7...[0, 1, 2]</span>
+<span class="go">thread = 2/7...[3, 4, 5]</span>
+<span class="go">thread = 3/7...[6, 7, 8]</span>
+<span class="go">thread = 4/7...[9, 10, 11]</span>
+<span class="go">thread = 5/7...[12, 13, 14]</span>
+<span class="go">thread = 6/7...[15, 16, 17]</span>
+<span class="go">thread = 7/7...[18]</span>
+<span class="go">Exit 7 threads</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">*----- show short --------------*</span>
 <span class="go">Instance name     : randomCBperftab_mp</span>
 <span class="go"># Actions         : 100</span>
-<span class="go"># Criteria        : 13</span>
-<span class="go">Sorting by        : 10-Tiling </span>
-<span class="go">Ordering strategy : average quantile</span>
-<span class="go"># Components      : 11</span>
+<span class="go"># Criteria        : 7</span>
+<span class="go">Sorting by        : 10-Tiling</span>
+<span class="go">Ordering strategy : average</span>
+<span class="go"># Components      : 19</span>
+<span class="go">Minimal size      : 1</span>
+<span class="go">Maximal size      : 22</span>
+<span class="go">Median size       : 2</span>
+<span class="go">fill rate         : 0.116</span>
 <span class="go">----  Constructor run times (in sec.) ----</span>
-<span class="go">Total time        : 0.72743</span>
-<span class="go">QuantilesSorting  : 0.51481</span>
-<span class="go">Preordering       : 0.00292</span>
-<span class="go">Decomposing       : 0.20469</span>
-<span class="go">Ordering          : 0.00500</span>
-<span class="go">Default presentation of BigOutrankingDigraphs</span>
+<span class="go">Total time        : 0.14958</span>
+<span class="go">QuantilesSorting  : 0.06847</span>
+<span class="go">Preordering       : 0.00071</span>
+<span class="go">Decomposing       : 0.07366</span>
+<span class="go">Ordering          : 0.00130</span>
+<span class="go">&lt;class &#39;bigOutrankingDigraphs.BigOutrankingDigraphMP&#39;&gt; instance        </span>
 </pre></div>
 </div>
 </dd></dl>
