@@ -1535,7 +1535,7 @@ class Digraph(object):
         correlation = Decimal('0')
         determination = Decimal('0')
         if Threading and cpu_count() > 4:
-            from cPickle import Pickler, dumps, loads, load
+            from pickle import dumps, loads, load
             from multiprocessing import Process, Lock,\
                                         active_children, cpu_count
             class myThread(Process):
