@@ -4050,15 +4050,19 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     if Debug:
                         print('splitRelation',splitRelation)
                     fi.close()
-                    
+
+                    #relation.update(splitRelation)
+                    from itertools import product
                     if InitialSplit:
-                        for x in splitActions:
-                            for y in terminal:
-                                relation[x][y] = splitRelation[x][y]
-                    else:  
-                        for x in initial:
-                            for y in splitActions:
-                                relation[x][y] = splitRelation[x][y]   
+                        for x,y in product(splitActions,terminal):
+                        #for x in splitActions:
+                        #    for y in terminal:
+                            relation[x][y] = splitRelation[x][y]
+                    else:
+                        for x,y in product(initial,splitActions):
+                        #for x in initial:
+                        #    for y in splitActions:
+                            relation[x][y] = splitRelation[x][y]   
                 return relation
 
     def _constructRelation(self,criteria,\
