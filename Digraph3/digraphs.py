@@ -1598,51 +1598,50 @@ class Digraph(object):
             if Debug:
                 print('Starting threading ...')
             from tempfile import TemporaryDirectory
-            from StringIO import StringIO
             with TemporaryDirectory() as tempDirName:
                 selfFileName = tempDirName +'/dumpActions.py'
                 if Debug:
                     print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
-                #pd = dumps(self.actions,-1)
-                #fo.write(pd)
-                # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
-                buff = StringIO()
-                pickler = Pickler(buff, -1)
-                pickler.fast = 1
-                pickler.dump(self.actions)
-                buff.flush()
-                fo.write(buff.getvalue())
+                pd = dumps(self.actions,-1)
+                fo.write(pd)
+                ## # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
+                ## buff = StringIO()
+                ## pickler = Pickler(buff, -1)
+                ## pickler.fast = 1
+                ## pickler.dump(self.actions)
+                ## buff.flush()
+                ## fo.write(buff.getvalue())
                 # .......
                 fo.close()
                 selfFileName = tempDirName +'/dumpRelation.py'
                 if Debug:
                     print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
-                #pd = dumps(self.relation,-1)
-                #fo.write(pd)
-                # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
-                buff = StringIO()
-                pickler = Pickler(buff, -1)
-                pickler.fast = 1
-                pickler.dump(self.relation)
-                buff.flush()
-                fo.write(buff.getvalue())
+                pd = dumps(self.relation,-1)
+                fo.write(pd)
+                ## # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
+                ## buff = StringIO()
+                ## pickler = Pickler(buff, -1)
+                ## pickler.fast = 1
+                ## pickler.dump(self.relation)
+                ## buff.flush()
+                ## fo.write(buff.getvalue())
                 # .......
                 fo.close()
                 selfFileName = tempDirName +'/dumpOtherRelation.py'
                 if Debug:
                     print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
-                #pd = dumps(otherRelation,-1)
-                #fo.write(pd)
-                # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
-                buff = StringIO()
-                pickler = Pickler(buff, -1)
-                pickler.fast = 1
-                pickler.dump(otherRelation)
-                buff.flush()
-                fo.write(buff.getvalue())
+                pd = dumps(otherRelation,-1)
+                fo.write(pd)
+                ## # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
+                ## buff = StringIO()
+                ## pickler = Pickler(buff, -1)
+                ## pickler.fast = 1
+                ## pickler.dump(otherRelation)
+                ## buff.flush()
+                ## fo.write(buff.getvalue())
                 # .......
                 fo.close()
 
