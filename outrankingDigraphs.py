@@ -3870,7 +3870,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         ##
         else:  # parallel computation
             from copy import copy, deepcopy
-            from pickle import dumps, loads, load
+            from io import BytesIO
+            from pickle import Pickler, dumps, loads, load
             from multiprocessing import Process, Lock,\
                                         active_children, cpu_count
             #Debug=True
@@ -3888,7 +3889,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     hasSymmetricThresholds = hasSymmetricThresholds,
                     self.Debug = Debug
                 def run(self):
-                    from pickle import dumps, loads
+                    from io import BytesIO
+                    from pickle import Pickler, dumps, loads
                     from os import chdir
                     chdir(self.workingDirectory)
                     if Debug:
@@ -3924,9 +3926,17 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                             WithVetoCounts=False,
                                             Debug=False,
                                             hasSymmetricThresholds=hasSymmetricThresholds)
-                    fo.write(dumps(splitRelation,-1))
+                    #fo.write(dumps(splitRelation,-1))
+                    # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
+                    buff = BytesIO()
+                    pickler = Pickler(buff, -1)
+                    pickler.fast = 1
+                    pickler.dump(splitRelation)
+                    buff.flush()
+                    fo.write(buff.getvalue())
                     fo.close()
-            
+                # .......
+             
             if Comments:
                 print('Threading ...')
             from tempfile import TemporaryDirectory
@@ -3938,8 +3948,14 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
                 #pd = dumps(selfDp,-1)
-                pd = dumps(self,-1)
-                fo.write(pd)
+                #pd = dumps(self,-1)
+                #fo.write(pd)
+                buff = BytesIO()
+                pickler = Pickler(buff, -1)
+                pickler.fast = 1
+                pickler.dump(self)
+                buff.flush()
+                fo.write(buff.getvalue())
                 fo.close()
 
                 if nbrCores == None:
@@ -3997,8 +4013,16 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                         print(actionsRemain)
                     foName = tempDirName+'/splitActions-'+str(j)+'.py'
                     fo = open(foName,'wb')
-                    spa = dumps(splitActions,-1)
-                    fo.write(spa)
+                    #spa = dumps(splitActions,-1)
+                    #fo.write(spa)
+                    buff = BytesIO()
+                    pickler = Pickler(buff, -1)
+                    pickler.fast = 1
+                    pickler.dump(splitActions)
+                    buff.flush()
+                    fo.write(buff.getvalue())
+                    fo.close()
+
                     fo.close()
                     splitThread = myThread(j,InitialSplit,
                                            tempDirName,hasNoVeto,hasBipolarVeto,
