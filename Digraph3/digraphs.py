@@ -1535,7 +1535,8 @@ class Digraph(object):
         correlation = Decimal('0')
         determination = Decimal('0')
         if Threading and cpu_count() > 4:
-            from pickle import dumps, loads, load
+            from pickle import Pickler,dumps, loads, load
+            from io import BytesIO
             from multiprocessing import Process, Lock,\
                                         active_children, cpu_count
             class myThread(Process):
@@ -1603,45 +1604,45 @@ class Digraph(object):
                 if Debug:
                     print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
-                pd = dumps(self.actions,-1)
-                fo.write(pd)
-                ## # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
-                ## buff = StringIO()
-                ## pickler = Pickler(buff, -1)
-                ## pickler.fast = 1
-                ## pickler.dump(self.actions)
-                ## buff.flush()
-                ## fo.write(buff.getvalue())
+                #pd = dumps(self.actions,-1)
+                #fo.write(pd)
+                # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
+                buff = BytesIO()
+                pickler = Pickler(buff, -1)
+                pickler.fast = 1
+                pickler.dump(self.actions)
+                buff.flush()
+                fo.write(buff.getvalue())
                 # .......
                 fo.close()
                 selfFileName = tempDirName +'/dumpRelation.py'
                 if Debug:
                     print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
-                pd = dumps(self.relation,-1)
-                fo.write(pd)
-                ## # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
-                ## buff = StringIO()
-                ## pickler = Pickler(buff, -1)
-                ## pickler.fast = 1
-                ## pickler.dump(self.relation)
-                ## buff.flush()
-                ## fo.write(buff.getvalue())
+                #pd = dumps(self.relation,-1)
+                #fo.write(pd)
+                # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
+                buff = BytesIO()
+                pickler = Pickler(buff, -1)
+                pickler.fast = 1
+                pickler.dump(self.relation)
+                buff.flush()
+                fo.write(buff.getvalue())
                 # .......
                 fo.close()
                 selfFileName = tempDirName +'/dumpOtherRelation.py'
                 if Debug:
                     print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
-                pd = dumps(otherRelation,-1)
-                fo.write(pd)
-                ## # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
-                ## buff = StringIO()
-                ## pickler = Pickler(buff, -1)
-                ## pickler.fast = 1
-                ## pickler.dump(otherRelation)
-                ## buff.flush()
-                ## fo.write(buff.getvalue())
+                #pd = dumps(otherRelation,-1)
+                #fo.write(pd)
+                # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
+                buff = BytesIO()
+                pickler = Pickler(buff, -1)
+                pickler.fast = 1
+                pickler.dump(otherRelation)
+                buff.flush()
+                fo.write(buff.getvalue())
                 # .......
                 fo.close()
 
@@ -1683,8 +1684,14 @@ class Digraph(object):
                         print(actionsRemain)
                     foName = tempDirName+'/splitActions-'+str(jb)+'.py'
                     fo = open(foName,'wb')
-                    spa = dumps(splitActions,-1)
-                    fo.write(spa)
+                    #spa = dumps(splitActions,-1)
+                    #fo.write(spa)
+                    buff = BytesIO()
+                    pickler = Pickler(buff, -1)
+                    pickler.fast = 1
+                    pickler.dump(splitActions)
+                    buff.flush()
+                    fo.write(buff.getvalue())
                     fo.close()
                     splitThread = myThread(jb,tempDirName,Debug)
                     splitThread.start()
