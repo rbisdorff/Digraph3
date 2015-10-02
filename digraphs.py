@@ -1535,7 +1535,7 @@ class Digraph(object):
         correlation = Decimal('0')
         determination = Decimal('0')
         if Threading and cpu_count() > 4:
-            from pickle import dumps, loads, load
+            from cPickle import dumps, loads, load
             from multiprocessing import Process, Lock,\
                                         active_children, cpu_count
             class myThread(Process):
@@ -5016,7 +5016,7 @@ class Digraph(object):
                 elif oldrelation[x][y] == oldMed:
                     newrelation[x][y] = newMed
                 else:
-                    newrelation[x][y] = newMin + ((self.relation[x][y] - oldMin)/oldAmplitude)*newAmplitude
+                    newrelation[x][y] = newMin + ((oldrelation[x][y] - oldMin)/oldAmplitude)*newAmplitude
                     if Debug:
                         print(x,y,self.relation[x][y],newrelation[x][y])
         # install new values in self
