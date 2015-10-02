@@ -125,17 +125,18 @@ class BigDigraph(object):
                 return
         
         selfActionsList = ((ck,
-                            list(self.components[ck]['subGraph'].actions.keys()))\
+                            self.components[ck]['subGraph'].actions)\
                            for ck in self.components)
+
         if issubclass(other.__class__,(Digraph)):
-            otherActionsList = [( 'c01', list(other.actions.keys()) )]
+            otherActionsList = [( 'c01', other.actions)]
         else:
             otherActionsList = ((ck,
-                            list(other.components[ck]['subGraph'].actions.keys()))\
+                                 other.components[ck]['subGraph'].actions)\
                            for ck in other.components)
-        if Debug:
-            print(selfActionsList)
-            print(otherActionsList)
+        #if Debug:
+        #    print(selfActionsList)
+        #    print(otherActionsList)
         
         correlation = Decimal('0.0')
         determination = Decimal('0.0')
@@ -147,13 +148,12 @@ class BigDigraph(object):
                         if x != y:
                             selfRelation = self.relation(x,y)
                             try:
-                                otherRelation = other.relation[x][y]
-                            except:
                                 otherRelation = other.relation(x,y)
-                            if Debug:
-                                print(x,y,'self', selfRelation)
-                            if Debug:
-                                print(x,y,'other', otherRelation)
+                            except:
+                                otherRelation = other.relation[x][y]
+                            #if Debug:
+                            #    print(x,y,'self', selfRelation)
+                            #    print(x,y,'other', otherRelation)
                             corr = min( max(-selfRelation,otherRelation), max(selfRelation,-otherRelation) )
                             correlation += corr
                             determination += min( abs(selfRelation),abs(otherRelation) )

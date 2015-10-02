@@ -1526,9 +1526,9 @@ class Digraph(object):
                other.valuationdomain['max'] != Decimal('1'):
                 print('Error: the digraph instance other must be normalized - other.recodeValuation(-1,1) -first !')
                 return None
-            otherRelation = deepcopy(other.relation)
+            otherRelation = other.relation
         else:
-            otherRelation = deepcopy(other)
+            otherRelation = other
 ##        if Debug:
 ##            print(otherRelation)
 ##            
