@@ -147,7 +147,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         gc = BipolarOutrankingDigraph(self,Normalized=True,coalition=[criterion],CopyPerfTab=True,
                                       Threading=Threading,nbrCores=nbrOfCPUs,
                                       Comments=Comments)
-        corr = self.computeOrdinalCorrelationMP(gc,Threading=Threading,nbrCPUs=nbrOfCPUs)
+        corr = self.computeOrdinalCorrelationMP(gc,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
         if Debug:
             print(corr)
         return corr

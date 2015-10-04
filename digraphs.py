@@ -1495,9 +1495,9 @@ class Digraph(object):
             print('mean: %.5f, std. dev.: %.5f' % (mean,stdDev))
         return mean,stdDev
 
-
     def computeOrdinalCorrelationMP(self, other, MedianCut=False,
-                                    Threading=True,nbrCPUs=None,Debug=False):
+                                    Threading=True,nbrOfCPUs=None,
+                                    Comments=False,Debug=False):
         """
         Multi processing version of the digraphs.computeOrdinalCorrelation() method.
         
@@ -1508,20 +1508,21 @@ class Digraph(object):
 
         from multiprocessing import cpu_count
         from copy import copy,deepcopy
+        from itertools import product
         if self.valuationdomain['min'] != Decimal('-1') or\
            self.valuationdomain['max'] != Decimal('1'):
             print('Error: the digraph instance self must be normalized - self.recodeValuation(-1,1) -first !')
             return None
         else:
             g = self
-        actions = g.actions
-        n = len(actions)
+        actionsList = [x for x in g.actions]
+        n = g.order
         n2 = (n*(n-1))
         Med = g.valuationdomain['med']
         
         if not isinstance(other,(dict)):
-            if Debug:
-                print('inputting a Digraph instance')
+            #if Debug:
+            #    print('inputting a Digraph instance')
             if other.valuationdomain['min'] != Decimal('-1') or\
                other.valuationdomain['max'] != Decimal('1'):
                 print('Error: the digraph instance other must be normalized - other.recodeValuation(-1,1) -first !')
@@ -1529,9 +1530,9 @@ class Digraph(object):
             otherRelation = other.relation
         else:
             otherRelation = other
-##        if Debug:
-##            print(otherRelation)
-##            
+        #if Debug:
+        #    print(otherRelation)
+            
         correlation = Decimal('0')
         determination = Decimal('0')
         if Threading and cpu_count() > 4:
@@ -1550,43 +1551,42 @@ class Digraph(object):
                     from os import chdir
                     from decimal import Decimal
                     chdir(self.workingDirectory)
-                    Debug=False
-                    if Debug:
-                        print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+                    #Debug=False
+                    #if Debug:
+                    #    print("Starting working in %s on %s" % (self.workingDirectory, self.name))
                     fi = open('dumpActions.py','rb')
-                    actions = loads(fi.read())
+                    actionsList = loads(fi.read())
                     fi.close()
-                    if Debug:
-                        print(self.threadID,actions)
+                    #if Debug:
+                    #    print(self.threadID,actionsList)
                     fi = open('dumpRelation.py','rb')
                     relation = loads(fi.read())
                     fi.close()
-                    if Debug:
-                        print(self.threadID,relation)
+                    #if Debug:
+                    #    print(self.threadID,relation)
                     fi = open('dumpOtherRelation.py','rb')
                     otherRelation = loads(fi.read())
                     fi.close()
-                    if Debug:
-                        print(self.threadID,relation)
+                    #if Debug:
+                    #    print(self.threadID,relation)
                     fiName = 'splitActions-'+str(self.threadID)+'.py'
                     fi = open(fiName,'rb')
                     splitActions = loads(fi.read())
                     fi.close()
-                    if Debug:
-                        print(self.threadID,splitActions)
-                     # compute partial correlation
+                    #if Debug:
+                    #    print(self.threadID,splitActions)
+                    # compute partial correlation
                     correlation = Decimal('0')
                     determination = Decimal('0')
                     for x in splitActions:
-                        for y in dict.keys(actions):
+                        for y in actionsList:
                             if x != y:
-                                corr = min( max(-g.relation[x][y],otherRelation[x][y]),\
+                                correlation += min( max(-g.relation[x][y],otherRelation[x][y]),\
                                             max(g.relation[x][y],-otherRelation[x][y]) )
-                                correlation += corr
                                 determination += min( abs(g.relation[x][y]),\
                                                       abs(otherRelation[x][y]) )
-                                if Debug:
-                                    print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)
+                                #if Debug:
+                                #    print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)
                     splitCorrelation = {'correlation': correlation,
                                         'determination': determination}
                     # write partial correlation relation 
@@ -1596,77 +1596,53 @@ class Digraph(object):
                     fo.close()
 
             # pre-threading operations
+            if nbrOfCPUs == None:
+                nbrOfCPUs = cpu_count()
             if Debug:
-                print('Starting threading ...')
+                print('Nbr of cpus = ',nbrOfCPUs)
+            if Comments:
+                print('Starting correlation computation with %d threads ...' % nbrOfCPUs)
             from tempfile import TemporaryDirectory
             with TemporaryDirectory() as tempDirName:
                 selfFileName = tempDirName +'/dumpActions.py'
-                if Debug:
-                    print('temDirName, selfFileName', tempDirName,selfFileName)
+                #if Debug:
+                #    print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
-                #pd = dumps(self.actions,-1)
-                #fo.write(pd)
-                # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
-                buff = BytesIO()
-                pickler = Pickler(buff, -1)
-                pickler.fast = 1
-                pickler.dump(self.actions)
-                buff.flush()
-                fo.write(buff.getvalue())
-                # .......
+                pd = dumps(actionsList,-1)
+                fo.write(pd)
                 fo.close()
                 selfFileName = tempDirName +'/dumpRelation.py'
-                if Debug:
-                    print('temDirName, selfFileName', tempDirName,selfFileName)
+                #if Debug:
+                #    print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
-                #pd = dumps(self.relation,-1)
-                #fo.write(pd)
-                # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
-                buff = BytesIO()
-                pickler = Pickler(buff, -1)
-                pickler.fast = 1
-                pickler.dump(self.relation)
-                buff.flush()
-                fo.write(buff.getvalue())
-                # .......
+                pd = dumps(self.relation,-1)
+                fo.write(pd)
                 fo.close()
                 selfFileName = tempDirName +'/dumpOtherRelation.py'
-                if Debug:
-                    print('temDirName, selfFileName', tempDirName,selfFileName)
+                #if Debug:
+                #    print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
-                #pd = dumps(otherRelation,-1)
-                #fo.write(pd)
-                # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
-                buff = BytesIO()
-                pickler = Pickler(buff, -1)
-                pickler.fast = 1
-                pickler.dump(otherRelation)
-                buff.flush()
-                fo.write(buff.getvalue())
-                # .......
+                pd = dumps(otherRelation,-1)
+                fo.write(pd)
                 fo.close()
 
-                if nbrCPUs == None:
-                    nbrCPUs = cpu_count()-1
-                if Debug:
-                    print('Nbr of cpus = ',nbrCPUs)
             
-                nit = n//nbrCPUs
-                nbrOfJobs = nbrCPUs
-                if nit*nbrCPUs < n:
+                nit = n//nbrOfCPUs
+                nbrOfJobs = nbrOfCPUs
+                if nit*nbrOfCPUs < n:
                     nit += 1
                 while nit*(nbrOfJobs-1) >= n:
                     nbrOfJobs -= 1
-                if Debug:
+                if Comments:
                     print('nbr of actions to split',n)
                     print('nbr of jobs = ',nbrOfJobs)    
                     print('nbr of splitActions = ',nit)
                     
                 i = 0
-                actions2Split = list(actions.keys())
-                actionsRemain = set([x for x in actions])
+                actions2Split = actionsList
+                actionsRemain = set(actions2Split)
                 for jb in range(nbrOfJobs):
-                    if Debug:
+                    if Comments:
                         print('Thread = %d/%d' % (jb+1,nbrOfJobs),end=" ")
                     splitActions=[]
                     for k in range(nit):
@@ -1675,23 +1651,16 @@ class Digraph(object):
                         else:
                             splitActions = list(actionsRemain)
                         i += 1
-                    if Debug:
-                        print(len(splitActions))
-                    if Debug:
-                        print(splitActions)
+                    #if Debug:
+                    #    print(len(splitActions))
+                    #    print(splitActions)
                     actionsRemain = actionsRemain - set(splitActions)
-                    if Debug:
-                        print(actionsRemain)
+                    #if Debug:
+                    #    print(actionsRemain)
                     foName = tempDirName+'/splitActions-'+str(jb)+'.py'
                     fo = open(foName,'wb')
-                    #spa = dumps(splitActions,-1)
-                    #fo.write(spa)
-                    buff = BytesIO()
-                    pickler = Pickler(buff, -1)
-                    pickler.fast = 1
-                    pickler.dump(splitActions)
-                    buff.flush()
-                    fo.write(buff.getvalue())
+                    spa = dumps(splitActions,-1)
+                    fo.write(spa)
                     fo.close()
                     splitThread = myThread(jb,tempDirName,Debug)
                     splitThread.start()
@@ -1700,35 +1669,43 @@ class Digraph(object):
                     pass
                 
                 # post threading operations
-                if Debug:    
+                if Comments:    
                     print('Exiting computing threads')
                 for jb in range(nbrOfJobs):
-                    if Debug:
-                        print('Post job-%d/%d processing' % (jb+1,nbrOfJobs))
-                    if Debug:
-                        print('job',jb)
+                    #if Debug:
+                    #    print('Post job-%d/%d processing' % (jb+1,nbrOfJobs))
+                    #    print('job',jb)
                     fiName = tempDirName+'/splitCorrelation-'+str(jb)+'.py'
                     fi = open(fiName,'rb')
                     splitCorrelation = loads(fi.read())
-                    if Debug:
-                        print('splitCorrelation',splitCorrelation)
+                    #if Debug:
+                    #    print('splitCorrelation',splitCorrelation)
                     fi.close()
                     correlation += splitCorrelation['correlation']
                     determination += splitCorrelation['determination']          
                                             
         else: #  no Threading
+            
             if Debug:
                 print('No threading !')
-            for x in dict.keys(actions):
-                for y in dict.keys(actions):
+##            correlation, determination = sum([
+##                (min( max(-g.relation[x][y],otherRelation[x][y]),\
+##                     max(g.relation[x][y],-otherRelation[x][y]) ),\
+##                min( abs(g.relation[x][y]),\
+##                     abs(otherRelation[x][y]) )) for \
+##                (x,y) in product(g.actions, repeat = 2)])
+            
+##            for x,y in product(actions,repeat=1)
+            for x in dict.keys(g.actions):
+                for y in dict.keys(g.actions):
                     if x != y:
                         corr = min( max(-g.relation[x][y],otherRelation[x][y]),\
                                     max(g.relation[x][y],-otherRelation[x][y]) )
                         correlation += corr
                         determination += min( abs(g.relation[x][y]),\
                                               abs(otherRelation[x][y]) )
-                        if Debug:
-                            print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)
+                        #if Debug:
+                        #    print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)
         
                         
         if determination > Decimal('0.0'):
@@ -11137,24 +11114,30 @@ if __name__ == "__main__":
         #from csv import reader
         #g = RandomValuationDigraph()
         #g.showAll()
+        MP=True
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
-        t = RandomCBPerformanceTableau(numberOfActions=15,seed=1,Debug=True,Comments=True)
-        t.saveXMCDA2('testP2')
-        t.showCriteria()
+        t1 = RandomCBPerformanceTableau(numberOfActions=1000,seed=1)
+##        t1.saveXMCDA2('testP2')
+##        t1.showCriteria()
+        t2 = RandomCBPerformanceTableau(numberOfActions=1000,seed=2)
+##        t1.saveXMCDA2('testP2')
+##        t1.showCriteria()
         #t = XMCDA2PerformanceTableau('testP')
-        g = BipolarOutrankingDigraph(t)
-        gcd = ~(-g)
-        gcd.computeChordlessCircuits(Odd=True,Comments=True)
-        gcd.showPreKernels()
-        g.computeRubisChoice(Comments=True)
-        g.showCriteria()
-        print(gcd.dompreKernels)
-        print(gcd.abspreKernels)
-        for ker in gcd.dompreKernels:
-            print(ker, gcd.computeGoodChoiceVector(ker,Comments=False))
-        for ker in gcd.abspreKernels:
-            print(ker, gcd.computeGoodChoiceVector(ker,Comments=False))
+        g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=MP)
+        g2 = BipolarOutrankingDigraph(t2,Normalized=True,Threading=MP)
+        print(g1.computeOrdinalCorrelationMP(g2,Comments=True,nbrOfCPUs=4,Threading=MP))        
+##        gcd = ~(-g)
+##        gcd.computeChordlessCircuits(Odd=True,Comments=True)
+##        gcd.showPreKernels()
+##        g.computeRubisChoice(Comments=True)
+##        g.showCriteria()
+##        print(gcd.dompreKernels)
+##        print(gcd.abspreKernels)
+##        for ker in gcd.dompreKernels:
+##            print(ker, gcd.computeGoodChoiceVector(ker,Comments=False))
+##        for ker in gcd.abspreKernels:
+##            print(ker, gcd.computeGoodChoiceVector(ker,Comments=False))
        
 
         print('*------------------*')
