@@ -3947,15 +3947,14 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 if Debug:
                     print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
-                #pd = dumps(selfDp,-1)
-                #pd = dumps(self,-1)
-                #fo.write(pd)
-                buff = BytesIO()
-                pickler = Pickler(buff, -1)
-                pickler.fast = 1
-                pickler.dump(self)
-                buff.flush()
-                fo.write(buff.getvalue())
+                pd = dumps(self,-1)
+                fo.write(pd)
+##                buff = BytesIO()
+##                pickler = Pickler(buff, -1)
+##                pickler.fast = 1
+##                pickler.dump(self)
+##                buff.flush()
+##                fo.write(buff.getvalue())
                 fo.close()
 
                 if nbrCores == None:
@@ -4013,14 +4012,14 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                         print(actionsRemain)
                     foName = tempDirName+'/splitActions-'+str(j)+'.py'
                     fo = open(foName,'wb')
-                    #spa = dumps(splitActions,-1)
-                    #fo.write(spa)
-                    buff = BytesIO()
-                    pickler = Pickler(buff, -1)
-                    pickler.fast = 1
-                    pickler.dump(splitActions)
-                    buff.flush()
-                    fo.write(buff.getvalue())
+                    spa = dumps(splitActions,-1)
+                    fo.write(spa)
+##                    buff = BytesIO()
+##                    pickler = Pickler(buff, -1)
+##                    pickler.fast = 1
+##                    pickler.dump(splitActions)
+##                    buff.flush()
+##                    fo.write(buff.getvalue())
                     fo.close()
 
                     fo.close()
