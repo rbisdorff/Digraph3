@@ -1485,8 +1485,8 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
         """
         #qs = self.qs
-        qs = self
-        Med = qs.valuationdomain['med']
+        #qs = self
+        Med = self.valuationdomain['med']
         try:
             sorting = self.sorting
         except:
@@ -1494,7 +1494,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                                                    Threading=Threading,\
                                                    nbrOfCPUs=nbrOfCPUs)      
         keys = []
-        for c in qs.orderedCategoryKeys():
+        for c in self.orderedCategoryKeys():
             if sorting[action][c]['categoryMembership'] >= Med:
                 if sorting[action][c]['lowLimit'] > Med:
                     lowLimit = sorting[action][c]['lowLimit']
