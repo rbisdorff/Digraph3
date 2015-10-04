@@ -63,10 +63,10 @@ def powerset(S):
 # transforms a ranking (list from best to worst) into
 # a preorder ( a list of list from worst to best)
 def ranking2preorder(R):
-    preorder = []
-    for x in R:
-        preorder.append([x])
-    preorder.reverse()
+    preorder = [[x] for x in reversed(R)]
+#    for x in R:
+#        preorder.append([x])
+#    preorder.reverse()
     return preorder
 
 # flattens a list of lists into a flat list
