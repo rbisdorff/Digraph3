@@ -552,9 +552,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                                       Comments=Comments)
         globalOrdering = self.ranking2Preorder(self.boostedNetFlowsRanking)
         globalRelation = gc.computePreorderRelation(globalOrdering)
-        corr = gc.computeOrdinalCorrelationMP(globalRelation,
-                                              Threading=Threading,
-                                              nbrCPUs = nbrOfCPUs)
+        corr = gc.computeOrdinalCorrelation(globalRelation)
         if Debug:
             print(corr)
         return corr
