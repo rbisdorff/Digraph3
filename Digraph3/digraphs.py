@@ -2685,6 +2685,43 @@ class Digraph(object):
 
         print()
 
+    def showRelationMap(self,symbols=None,rankingRule="netFlows"):
+        """
+        Prints out in text map format of the location of
+        certainly valiadted and invalidated outrnking situations.
+
+        By default, symbols = {'max':'┬','positive': '+', 'median': ' ',
+                               'negative': '-', 'min': '┴'}
+        """
+        if symbols == None:
+            symbols = {'max':'┬','positive': '+', 'median': ' ',
+                       'negative': '-', 'min': '┴'}
+        if rankingRule == "Kohler":
+            ordering = self.computeKohlerOrder()
+        elif rankingRule == "rankedPairs":
+            ordering = self.computeRankedPairsOrder()
+        else:
+            ordering = self.computeNetFlowsRanking()
+        relation = self.relation
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        for x in ordering:
+            pictStr = ''
+            for y in ordering:
+                if relation[x][y] == Max:
+                    pictStr += symbols['max']
+                elif relation[x][y] == Min:
+                    pictStr += symbols['min']
+                elif relation[x][y] > Med:
+                    pictStr += symbols['positive']
+                elif relation[x][y] ==Med:
+                    pictStr += symbols['median']
+                elif relation[x][y] < Med:
+                    pictStr += symbols['negative']
+            print(pictStr)
+      
+
     def showRelationTable(self,Sorted=True,\
                           IntegerValues=False,\
                           actionsSubset= None,\
@@ -7886,9 +7923,9 @@ class Digraph(object):
         netFlowsOrder.reverse()
         return netFlowsOrder
 
-    def computeKohlerOrder(self,Debug=False):
+    def computeKohlerRankingDict(self,Debug=False):
         """
-        renders a ranking of the actions following Kohler's rule as an
+        renders a ranking from the best to the worst of the actions following Kohler's rule as an
         ordered dictionary with rank and majorityMargin attributes.
         """
         Max = self.valuationdomain['max']
@@ -7918,6 +7955,14 @@ class Digraph(object):
         if Debug:
             print(rank)
         return rank
+
+    def computeKohlerOrder(self):
+        ranking = self.computeKohlerRankingDict()
+        ordering = reversed([x for x in ranking])
+        return ordering
+
+    def computeKohlerRanking(self):
+        return [x for x in self.computeKohlerRankingDict()]
 
     def computeArrowRaynaudRanking(self,Debug=False):
         """
@@ -8018,6 +8063,8 @@ class Digraph(object):
             print('Ranked Pairs Order = ', rankedPairsOrder)
         return rankedPairsOrder
 
+    def computeRankedPairsRanking(self):
+        return reversed([x for x in self.computeRankedPairsOrder()])
 
     def computeKemenyOrder(self,isProbabilistic=False, orderLimit=7, seed=None, sampleSize=1000, Debug=False):
         """
@@ -11114,13 +11161,13 @@ if __name__ == "__main__":
         #from csv import reader
         #g = RandomValuationDigraph()
         #g.showAll()
-        MP=True
+        MP=False
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
-        t1 = RandomCBPerformanceTableau(numberOfActions=1000,seed=1)
+        t1 = RandomCBPerformanceTableau(numberOfActions=50,seed=1)
 ##        t1.saveXMCDA2('testP2')
 ##        t1.showCriteria()
-        t2 = RandomCBPerformanceTableau(numberOfActions=1000,seed=2)
+        t2 = RandomCBPerformanceTableau(numberOfActions=50,seed=2)
 ##        t1.saveXMCDA2('testP2')
 ##        t1.showCriteria()
         #t = XMCDA2PerformanceTableau('testP')
