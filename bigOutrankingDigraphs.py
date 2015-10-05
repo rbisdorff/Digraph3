@@ -263,9 +263,9 @@ class BigDigraph(object):
         """
         Renders a preordering (a list of list) of a ranking (best to worst) of decision actions in decreasing preference direction.
         """
-        ordering = list(ranking)
-        ordering.reverse()
-        preordering = [[x] for x in ordering]
+        #ordering = list(ranking)
+        #ordering.reverse()
+        preordering = [[x] for x in reversed(ordering)]
         return preordering
 
     def ordering2Preorder(self,ordering):
@@ -1013,13 +1013,6 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         on each component.
         """
         from linearOrders import KohlerOrder
-##        from itertools import chain      
-##        compKeys = list(self.components.keys())
-##        compKeys.sort()
-##        ranking = list(chain.from_iterable([self.components[ck]['subGraph'].computeKohlerRanking()\
-##                                            for ck in compKeys]))
-##        nc = self.nbrComponents
-##
         ordering = []
         compKeys = list(self.components.keys())
         compKeys.reverse()
@@ -1057,7 +1050,6 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         ordering = []
         compKeys = list(self.components.keys())
         compKeys.reverse()
-        # self.components is an ordered dictionary in decreasing preference
         for cki in compKeys:
             comp = self.components[cki]
             pg = comp['subGraph']
@@ -1091,14 +1083,6 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             [self.components[ck]['subGraph'].computeRankedPairsOrder()\
                                           for ck in compKeys]))
         return ranking    
-
-##    def ranking2Preorder(self,ordering):
-##        """
-##        Renders a preordering (a list of list) of a ranking of decision actions in decreasing preference direction.
-##        """
-##        preordering = [[x] for x in ordering]
-##        return preordering
-##        
 
 ########################
 from weakOrders import QuantilesRankingDigraph
