@@ -4431,6 +4431,802 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         else:
             return Decimal('-1.0')
 
+class _BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
+    """
+    Specialization of the abstract OutrankingDigraph root class for generating
+    bipolarly-valued outranking digraphs.
+
+    Parameters:
+        * argPerfTab: instance of PerformanceTableau class.
+          If a file name string is given, the performance tableau will directly be loaded first.
+        * coalition: subset of criteria to be used for contruction the outranking digraph.
+        * hasNoVeto: veto desactivation flag (False by default).
+        * hasBipolarVeto: bipolar versus electre veto activation (true by default).
+        * Normalized: the valuation domain is set by default to [-100,+100] (bipolar percents).
+          If True, the valuation domain is recoded to [-1.0,+1.0].
+        * WithConcordanceRelation: True by default when not threading.
+          The self.concordanceRelation contains the significance majority margin of the "at least as good relation as"
+          without the large performance difference polarization.
+        * WithVetoCounts: True by default when not threading. All vetos and countervetos
+          are stored in self.vetos and self.negativeVetos slots,
+          as well the counts of large performance differences in self.largePerformanceDifferencesCount slot.
+        * Threading: False by default. Allows to profit from SMP machines via the Python multiprocessing module.
+        * nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases.
+          If None is given, the os.cpu_count method is used in order to determine the number of availble cores on the SMP machine.
+
+    .. warning::
+
+        If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.
+        Removing this limitation is on the todo list and will be done soon.
+       
+    """
+    def __init__(self,argPerfTab=None,\
+                 coalition=None,\
+                 hasNoVeto=False,\
+                 hasBipolarVeto=True,\
+                 Normalized=False,\
+                 CopyPerfTab=True,\
+                 Threading=False,\
+                 WithConcordanceRelation=True,\
+                 WithVetoCounts=True,\
+                 nbrCores=None,\
+                 Debug=False,Comments=False):
+        from copy import deepcopy 
+        if argPerfTab == None:
+            print('Performance tableau required !')
+            #perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
+        elif isinstance(argPerfTab,(str)):
+            perfTab = PerformanceTableau(argPerfTab)
+        else:
+            perfTab = argPerfTab
+
+        # set Threading parameters
+        if Threading:
+            WithConcordanceRelation = False
+            WithVetoCounts = False
+            
+        #self.performanceTableau = perfTab
+
+        self.name = 'rel_' + perfTab.name
+
+        if isinstance(perfTab.actions,list):
+            actions = {}
+            for x in perfTab.actions:
+                actions[x] = {'name': str(x)}
+            self.actions = actions
+        else:
+            if CopyPerfTab:
+                self.actions = deepcopy(perfTab.actions)
+            else:
+                self.actions = perfTab.actions
+        if Normalized:
+            Min =   Decimal('-1.0')
+            Med =   Decimal('0.0')
+            Max =   Decimal('1.0')
+        else:
+            Min =   Decimal('-100.0')
+            Med =   Decimal('0.0')
+            Max =   Decimal('100.0')
+        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+
+        if coalition == None:
+            try:
+                if CopyPerfTab:
+                    self.objectives = deepcopy(perfTab.objectives)
+                else:
+                    self.objectives = perfTab.objectives
+            except:
+                pass
+            if CopyPerfTab:
+                self.criteria = deepcopy(perfTab.criteria)
+            else:
+                self.criteria = perfTab.criteria
+            
+        else:
+            criteria = {}
+            for g in coalition:
+                criteria[g] = perfTab.criteria[g]
+            self.criteria = criteria
+        self.convertWeightFloatToDecimal()
+        #  install method Data and parameters
+        methodData = {}
+        try:
+            valuationType = perfTab.parameter['valuationType']
+            variant = perfTab.parameter['variant']
+        except:
+            valuationType = 'bipolar'
+            variant = 'standard'
+        methodData['parameter'] = {'valuationType': valuationType, 'variant': variant}
+
+        try:
+            vetoType = perfTab.parameter['vetoType']
+            methodData['parameter']['vetoType'] = vetoType
+        except:
+            vetoType = 'normal'
+            methodData['parameter']['vetoType'] = vetoType
+        if vetoType == 'bipolar':
+            hasBipolarVeto = True
+            
+        self.methodData = methodData
+
+        # insert performance Data
+        if CopyPerfTab:
+            self.evaluation = deepcopy(perfTab.evaluation)
+        else:
+            self.evaluation = perfTab.evaluation
+        self.convertEvaluationFloatToDecimal()
+        try:
+            if CopyPerfTab:
+                self.description = deepcopy(perfTab.description)
+            else:
+                self.description = perfTab.description
+        except:
+            pass
+        # init general digraph Data
+        self.order = len(self.actions)
+        
+        # construct outranking relation
+        actions = self.actions
+        criteria = self.criteria
+        evaluation = self.evaluation
+        actionsKeys = list(dict.keys(actions))
+        self.relation = self._constructRelationWithThreading(criteria,\
+                                                evaluation,\
+                                                initial=actionsKeys,\
+                                                terminal=actionsKeys,\
+                                                hasNoVeto=hasNoVeto,\
+                                                hasBipolarVeto=hasBipolarVeto,\
+                                                hasSymmetricThresholds=True,\
+                                                Threading=Threading,\
+                                                WithConcordanceRelation=WithConcordanceRelation,\
+                                                WithVetoCounts=WithVetoCounts,\
+                                                nbrCores=nbrCores,\
+                                                Debug=Debug,Comments=Comments)
+
+##        if Normalized:
+##            self.recodeValuation(-1.0,1.0)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+
+    def computeCriterionRelation(self,c,a,b,hasSymmetricThresholds=True):
+        """
+        Compute the outranking characteristic for actions x and y
+        on criterion c.
+        """
+        if a == b:
+            return Decimal("1.0")
+        else:
+
+            if self.evaluation[c][a] != Decimal('-999') and self.evaluation[c][b] != Decimal('-999'):		
+                try:
+                    indx = self.criteria[c]['thresholds']['ind'][0]
+                    indy = self.criteria[c]['thresholds']['ind'][1]
+                    if hasSymmetricThresholds:
+                        ind = indx +indy * max(abs(self.evaluation[c][a]), abs(self.evaluation[c][b]))
+                    else:
+                        ind = indx +indy * abs(self.evaluation[c][a])
+                except:
+                    ind = None
+                try:
+                    wpx = self.criteria[c]['thresholds']['weakPreference'][0]
+                    wpy = self.criteria[c]['thresholds']['weakPreference'][1]
+                    if hasSymmetricThresholds:
+                        wp = wpx + wpy * max(abs(self.evaluation[c][a]), abs(self.evaluation[c][b]))
+                    else:
+                        wp = wpx + wpy * abs(self.evaluation[c][a])
+                except:
+                    wp = None
+                try:
+                    px = self.criteria[c]['thresholds']['pref'][0]
+                    py = self.criteria[c]['thresholds']['pref'][1]
+                    if hasSymmetricThresholds:
+                        p = px + py * max(abs(self.evaluation[c][a]), abs(self.evaluation[c][b]))
+                    else:
+                        p = px + py * abs(self.evaluation[c][a]) 
+                except:
+                    p = None
+                d = self.evaluation[c][a] - self.evaluation[c][b]
+
+                return self._localConcordance(d,ind,wp,p)
+
+            else:
+                return Decimal("0.0")
+            
+    def _constructRelationWithThreading(self,criteria,\
+                           evaluation,\
+                           initial=None,\
+                           terminal=None,\
+                           hasNoVeto=False,\
+                           hasBipolarVeto=True,\
+                           Debug=False,\
+                           hasSymmetricThresholds=True,\
+                           Threading=False,\
+                           WithConcordanceRelation=True,\
+                           WithVetoCounts=True,\
+                           nbrCores=None,Comments=False):
+        """
+        Specialization of the corresponding BipolarOutrankingDigraph method
+        """
+        from multiprocessing import cpu_count
+        
+        ##
+        if not Threading or cpu_count() < 6:
+            return self._constructRelation(criteria,\
+                                    evaluation,\
+                                    initial=initial,\
+                                    terminal=terminal,\
+                                    hasNoVeto=hasNoVeto,\
+                                    hasBipolarVeto=hasBipolarVeto,\
+                                    WithConcordanceRelation=WithConcordanceRelation,\
+                                    WithVetoCounts=WithVetoCounts,\
+                                    Debug=Debug,\
+                                    hasSymmetricThresholds=hasSymmetricThresholds)
+        ##
+        else:  # parallel computation
+            from copy import copy, deepcopy
+            from io import BytesIO
+            from pickle import Pickler, dumps, loads, load
+            from multiprocessing import Process, Lock,\
+                                        active_children, cpu_count
+            #Debug=True
+            class myThread(Process):
+                def __init__(self, threadID,\
+                             InitialSplit, tempDirName,\
+                             hasNoVeto, hasBipolarVeto,\
+                             hasSymmetricThresholds, Debug):
+                    Process.__init__(self)
+                    self.threadID = threadID
+                    self.InitialSplit = InitialSplit
+                    self.workingDirectory = tempDirName
+                    self.hasNoVeto = hasNoVeto
+                    self.hasBipolarVeto = hasBipolarVeto,
+                    hasSymmetricThresholds = hasSymmetricThresholds,
+                    self.Debug = Debug
+                def run(self):
+                    from io import BytesIO
+                    from pickle import Pickler, dumps, loads
+                    from os import chdir
+                    chdir(self.workingDirectory)
+                    if Debug:
+                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
+                    fi = open('dumpSelf.py','rb')
+                    digraph = loads(fi.read())
+                    fi.close()
+                    fiName = 'splitActions-'+str(self.threadID)+'.py'
+                    fi = open(fiName,'rb')
+                    splitActions = loads(fi.read())
+                    fi.close()
+                    foName = 'splitRelation-'+str(self.threadID)+'.py'
+                    fo = open(foName,'wb')
+                    if self.InitialSplit:
+                        splitRelation = BipolarOutrankingDigraph._constructRelation(digraph,digraph.criteria,\
+                                            digraph.evaluation,
+                                            initial=splitActions,
+                                            #terminal=terminal,
+                                            hasNoVeto=hasNoVeto,
+                                            hasBipolarVeto=hasBipolarVeto,
+                                            WithConcordanceRelation=False,
+                                            WithVetoCounts=False,
+                                            Debug=False,
+                                            hasSymmetricThresholds=hasSymmetricThresholds)
+                    else:
+                        splitRelation = BipolarOutrankingDigraph._constructRelation(digraph,digraph.criteria,\
+                                            digraph.evaluation,
+                                            #initial=initial,
+                                            terminal=splitActions,
+                                            hasNoVeto=hasNoVeto,
+                                            hasBipolarVeto=hasBipolarVeto,
+                                            WithConcordanceRelation=False,
+                                            WithVetoCounts=False,
+                                            Debug=False,
+                                            hasSymmetricThresholds=hasSymmetricThresholds)
+                    #fo.write(dumps(splitRelation,-1))
+                    # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
+                    buff = BytesIO()
+                    pickler = Pickler(buff, -1)
+                    pickler.fast = 1
+                    pickler.dump(splitRelation)
+                    buff.flush()
+                    fo.write(buff.getvalue())
+                    fo.close()
+                # .......
+             
+            if Comments:
+                print('Threading ...')
+            from tempfile import TemporaryDirectory
+            with TemporaryDirectory() as tempDirName:
+                from copy import copy, deepcopy
+                #selfDp = copy(self)
+                selfFileName = tempDirName +'/dumpSelf.py'
+                if Debug:
+                    print('temDirName, selfFileName', tempDirName,selfFileName)
+                fo = open(selfFileName,'wb')
+                pd = dumps(self,-1)
+                fo.write(pd)
+##                buff = BytesIO()
+##                pickler = Pickler(buff, -1)
+##                pickler.fast = 1
+##                pickler.dump(self)
+##                buff.flush()
+##                fo.write(buff.getvalue())
+                fo.close()
+
+                if nbrCores == None:
+                    nbrCores = cpu_count()-1
+                if Comments:
+                    print('Nbr of cpus = ',nbrCores)
+
+                ni = len(initial)
+                nt = len(terminal)
+                if ni < nt:
+                    n = ni
+                    actions2Split = list(initial)
+                    InitialSplit = True
+                else:
+                    n = nt
+                    actions2Split = list(terminal)
+                    InitialSplit = False
+                if Debug:
+                    print('InitialSplit, actions2Split', InitialSplit, actions2Split)
+            
+                nit = n//nbrCores
+                nbrOfJobs = nbrCores
+                if nit*nbrCores < n:
+                    nit += 1
+                while nit*(nbrOfJobs-1) >= n:
+                    nbrOfJobs -= 1
+                if Debug:
+                    print('nbr of actions to split',n)
+                    print('nbr of jobs = ',nbrOfJobs)    
+                    print('nbr of splitActions = ',nit)
+
+                relation = {}
+                for x in initial:
+                    relation[x] = {}
+                    for y in terminal:
+                        relation[x][y] = self.valuationdomain['med']
+                i = 0
+                actionsRemain = set(actions2Split)
+                for j in range(nbrOfJobs):
+                    if Comments:
+                        print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ")
+                    splitActions=[]
+                    for k in range(nit):
+                        if j < (nbrOfJobs -1) and i < n:
+                            splitActions.append(actions2Split[i])
+                        else:
+                            splitActions = list(actionsRemain)
+                        i += 1
+                    if Comments:
+                        print(len(splitActions))
+                    if Debug:
+                        print(splitActions)
+                    actionsRemain = actionsRemain - set(splitActions)
+                    if Debug:
+                        print(actionsRemain)
+                    foName = tempDirName+'/splitActions-'+str(j)+'.py'
+                    fo = open(foName,'wb')
+                    spa = dumps(splitActions,-1)
+                    fo.write(spa)
+##                    buff = BytesIO()
+##                    pickler = Pickler(buff, -1)
+##                    pickler.fast = 1
+##                    pickler.dump(splitActions)
+##                    buff.flush()
+##                    fo.write(buff.getvalue())
+                    fo.close()
+
+                    fo.close()
+                    splitThread = myThread(j,InitialSplit,
+                                           tempDirName,hasNoVeto,hasBipolarVeto,
+                                           hasSymmetricThresholds,Debug)
+                    splitThread.start()
+                    
+                while active_children() != []:
+                    pass
+
+                if Comments:    
+                    print('Exiting computing threads')
+                for j in range(nbrOfJobs):
+                    #print('Post job-%d/%d processing' % (j+1,nbrOfJobs))
+                    if Debug:
+                        print('job',j)
+                    fiName = tempDirName+'/splitActions-'+str(j)+'.py'
+                    fi = open(fiName,'rb')
+                    splitActions = loads(fi.read())
+                    if Debug:
+                        print('splitActions',splitActions)
+                    fi.close()
+                    fiName = tempDirName+'/splitRelation-'+str(j)+'.py'
+                    fi = open(fiName,'rb')
+                    splitRelation = loads(fi.read())
+                    if Debug:
+                        print('splitRelation',splitRelation)
+                    fi.close()
+
+                    #relation.update(splitRelation)
+                    from itertools import product
+                    if InitialSplit:
+                        for x,y in product(splitActions,terminal):
+                        #for x in splitActions:
+                        #    for y in terminal:
+                            relation[x][y] = splitRelation[x][y]
+                    else:
+                        for x,y in product(initial,splitActions):
+                        #for x in initial:
+                        #    for y in splitActions:
+                            relation[x][y] = splitRelation[x][y]   
+                return relation
+
+    def _constructRelation(self,criteria,\
+                           evaluation,\
+                           initial=None,\
+                           terminal=None,\
+                           hasNoVeto=False,\
+                           hasBipolarVeto=True,\
+                           WithConcordanceRelation=True,\
+                           WithVetoCounts=True,\
+                           Debug=False,\
+                           hasSymmetricThresholds=True):
+        """
+        Renders the biploar valued outranking relation from the data
+        of a given performance tableau instantiation PerfTab.
+
+        Parameters:
+            * PerfTab.criteria, PerfTab.evaluation,
+            * inital nodes, terminal nodes, for restricted purposes 
+
+        Flags:
+            * hasNoVeto = True inhibits taking into account large performances differences
+            * hasBipolarVeto = False allows to revert (if False) to standard Electre veto handling
+            
+        """
+        ## default setting for digraphs
+        if initial == None:
+            initial = self.actions
+        if terminal == None:
+            terminal = self.actions
+        
+##        totalweight = Decimal('0.0')
+##        for c in dict.keys(criteria):
+##            totalweight = totalweight + criteria[c]['weight']
+        totalweight = sum([criteria[c]['weight'] for c in criteria])
+        relation = {}
+        concordanceRelation = {}
+        vetos = []
+
+        if hasBipolarVeto:
+            negativeVetos = []
+    
+        largePerformanceDifferencesCount = {}        
+        for a in initial:
+            largePerformanceDifferencesCount[a] = {}
+            for b in terminal:
+                largePerformanceDifferencesCount[a][b] = {'positive':0,'negative':0}
+
+        for a in initial:
+            relation[a] = {}
+            concordanceRelation[a] = {}
+            for b in terminal:
+                if a == b:
+                    relation[a][b] = Decimal('0.0')
+                    concordanceRelation[a][b] = Decimal('0.0')
+                else:
+                    nc = len(criteria)
+                    concordance = Decimal('0.0')
+
+                    veto = {}
+                    abvetos=[]
+
+                    if hasBipolarVeto:
+                        negativeVeto = {}
+                        abNegativeVetos=[]
+
+                    for c in criteria:
+                        if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+                            try:
+                                indx = criteria[c]['thresholds']['ind'][0]
+                                indy = criteria[c]['thresholds']['ind'][1]
+                                ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                            except:
+                                ind = None
+                            try:
+                                wpx = criteria[c]['thresholds']['weakPreference'][0]
+                                wpy = criteria[c]['thresholds']['weakPreference'][1]
+                                if hasSymmetricThresholds:
+                                    wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                else:
+                                    wp = wpx + wpy * abs(evaluation[c][a]) 
+                            except:
+                                wp = None
+                            try:
+                                px = criteria[c]['thresholds']['pref'][0]
+                                py = criteria[c]['thresholds']['pref'][1]
+                                if hasSymmetricThresholds:
+                                    p = px + py * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                else:
+                                    p = px + py * abs(evaluation[c][a]) 
+                            except:
+                                p = None
+                            d = evaluation[c][a] - evaluation[c][b]
+                            lc0 = self._localConcordance(d,ind,wp,p)
+                            ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
+                            concordance += (lc0 * criteria[c]['weight'])
+                            try:
+                                wvx = criteria[c]['thresholds']['weakVeto'][0]
+                                wvy = criteria[c]['thresholds']['weakVeto'][1]
+                                if hasNoVeto:
+                                    wv = None
+                                else:
+                                    if hasSymmetricThresholds:
+                                        wv = wvx + wvy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                    else:
+                                        wv = wvx + wvy * abs(evaluation[c][a])
+                            except:
+                                wv = None
+                            try:
+                                vx = criteria[c]['thresholds']['veto'][0]
+                                vy = criteria[c]['thresholds']['veto'][1]
+                                if hasNoVeto:
+                                    v = None
+                                else:
+                                    if hasSymmetricThresholds:
+                                        v = vx + vy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                    else:
+                                        v = vx + vy * abs(evaluation[c][a])
+                            except:
+                                v = None
+                            veto[c] = (self._localVeto(d,wv,v),d,wv,v)
+                            if veto[c][0] > Decimal('-1.0'):
+                                abvetos.append((c,veto[c]))
+                                largePerformanceDifferencesCount[a][b]['negative'] -= 1
+                            ## if d < -wv:
+                            ##     print 'd,wv,v,veto[c]',d,wv,v,veto[c]
+                            if hasBipolarVeto:
+                                negativeVeto[c] = (self._localNegativeVeto(d,wv,v),d,wv,v)
+                                if negativeVeto[c][0] > Decimal('-1.0'):
+                                    abNegativeVetos.append((c,negativeVeto[c]))
+                                    largePerformanceDifferencesCount[a][b]['positive'] += 1
+                                ## if d > wv:
+                                ##     print 'd,wv,v,negativeVeto[c]',d,wv,v,negativeVeto[c] 
+                        else:
+                            concordance += Decimal('0.0') * criteria[c]['weight']
+                            veto[c] = (Decimal('-1.0'),None,None,None)
+                            if hasBipolarVeto:
+                                negativeVeto[c] = (Decimal('-1.0'),None,None,None)
+                                
+                    concordindex = concordance / totalweight                 
+                    concordanceRelation[a][b] = concordindex
+                    
+                    ## init vetoes lists and indexes
+                    abVetoes=[]
+                    abNegativeVetoes=[]
+
+                    #  contradictory vetoes
+                    
+                    for c in criteria:
+                        if veto[c][0] >= Decimal('0'):
+                            abVetoes.append((c,veto[c]))
+                        if hasBipolarVeto:
+                            if negativeVeto[c][0] >= Decimal('0'):
+                                abNegativeVetoes.append((c,negativeVeto[c]))
+                                         
+                    if hasBipolarVeto:
+                        vetoes = [-veto[c][0] for c in veto if veto[c][0] > Decimal('-1')]
+                        negativeVetoes = [negativeVeto[c][0] for c in negativeVeto if negativeVeto[c][0] > Decimal('-1')]
+                        if Debug:
+                            print('vetoes = ', vetoes)
+                            print('negativeVetoes = ', negativeVetoes)
+                        omaxList = [concordindex] + vetoes + negativeVetoes
+                        outrankindex = self.omax(omaxList,Debug=Debug)
+                        if Debug:
+                            print('a b outrankindex = ', a,b, outrankindex)
+                    else:
+                        # hasBipolarVeto == False
+                        vetoIndex = Decimal('-1.0')
+                        for c in criteria:
+                            vetoIndex = max(vetoIndex,veto[c][0])
+                        outrankindex = min(concordindex,-vetoIndex)
+
+                    Max = self.valuationdomain['max']                                             
+                    if abVetoes != []:
+                        vetos.append(([a,b,concordindex*Max],abVetoes))
+                    if hasBipolarVeto:
+                        if abNegativeVetoes != []:
+                            negativeVetos.append(([a,b,concordindex*Max],abNegativeVetoes))
+                    relation[a][b] = outrankindex*Max
+
+        # storing concordance relation and vetoes
+        if WithConcordanceRelation:
+            self.concordanceRelation = concordanceRelation
+        if WithVetoCounts:
+            self.vetos = vetos
+            if hasBipolarVeto:
+                self.negativeVetos = negativeVetos
+                self.largePerformanceDifferencesCount = largePerformanceDifferencesCount
+
+        # return outranking relation    
+
+        return relation
+
+
+    
+    def criterionCharacteristicFunction(self,c,a,b,hasSymmetricThresholds=True):
+        """
+        Renders the characteristic value of the comparison of a and b on criterion c.
+        """
+        evaluation = self.evaluation
+        criteria = self.criteria
+        Min = self.valuationdomain['min']
+        Max = self.valuationdomain['max']
+        if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+            try:
+                indx = criteria[c]['thresholds']['ind'][0]
+                indy = criteria[c]['thresholds']['ind'][1]
+                if hasSymmetricThresholds:
+                    ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                else:
+                    ind = indx +indy * abs(evaluation[c][a])
+            except:
+                ind = None
+            try:
+                wpx = criteria[c]['thresholds']['weakPreference'][0]
+                wpy = criteria[c]['thresholds']['weakPreference'][1]
+                if hasSymmetricThresholds:
+                    wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                else:
+                    wp = wpx + wpy * abs(evaluation[c][a])
+            except:
+                wp = None
+            try:
+                px = criteria[c]['thresholds']['pref'][0]
+                py = criteria[c]['thresholds']['pref'][1]
+                if hasSymmetricThresholds:
+                    p = px + py * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                else:
+                    p = px + py * abs(evaluation[c][a])
+            except:
+                p = None
+            d = evaluation[c][a] - evaluation[c][b]
+            return self._localConcordance(d,ind,wp,p)
+        else:
+            return Decimal('0.0')
+
+    def computeSingleCriteriaNetflows(self):
+        """
+        renders the Promethee single criteria netflows matrix M
+        """
+        actionsList = [x for x in self.actions]
+        actionsList.sort()
+        n = len(actionsList)
+        criteriaList = [x for x in self.criteria]
+        criteriaList.sort()
+        matrixM = {}
+        for a in actionsList:
+            matrixM[a] = {}
+            for c in criteriaList:
+                netflow= Decimal('0.0')
+                for b in actionsList:
+                    if a != b:
+                        cab = self.criterionCharacteristicFunction(c,a,b)
+                        cba = self.criterionCharacteristicFunction(c,b,a)
+                        netflow += cab - cba
+                netflow = float(netflow)/float(n-1)
+                matrixM[a][c] = netflow
+        return matrixM
+    
+    def saveSingleCriterionNetflows(self,fileName='tempnetflows.prn',delimiter=' ',Comments=True):
+        """
+        Delimited save of single criteria netflows matrix
+        """
+        actionsList = [x for x in self.actions]
+        actionsList.sort()
+        criteriaList = [x for x in self.criteria]
+        criteriaList.sort()
+        M = self.computeSingleCriteriaNetflows()
+        fo = open(fileName,'w')
+        for a in actionsList:
+            for c in criteriaList:
+                fo.write('%2.2f ' % (M[a][c]))
+            fo.write('\n')
+        fo.close()
+        if Comments:
+            print('Single Criteria Netflows saved on file %s' % (fileName))
+        
+    def _localConcordance(self,d,ind,wp,p):
+        """
+        Parameters: d := diff observed, wp := weak preference threshold,
+        ind := indiffrence threshold, p := prefrence threshold.
+        Renders the concordance index per criteria (-1,0,1)
+        """
+        if p != None:
+            if   d <= -p:
+                return Decimal('-1.0')
+            elif ind != None:
+                if d >= -ind:
+                    return Decimal('1.0')
+                else:
+                    return Decimal('0.0')
+            elif wp != None:
+                if d > -wp:
+                    return Decimal('1.0')
+                else:
+                    return Decimal('0.0')
+            else:
+                if d < Decimal('0.0'):
+                    return Decimal('-1.0')
+                else:
+                    return Decimal('1.0')
+        else:
+            if ind != None:
+                if d >= -ind:
+                    return Decimal('1.0')
+                else:
+                    return Decimal('-1.0')
+            elif wp != None:
+                if d > -wp:
+                    return Decimal('1.0')
+                else:
+                    return Decimal('-1.0')
+            else:
+                if d < Decimal("0.0"):
+                    return Decimal('-1.0')
+                else:
+                    return Decimal('1.0')                
+            
+
+    def _localVeto(self, d, wv, v):
+        """
+        Parameters:
+            d := diff observed, v (wv)  :=  (weak) veto threshold.
+
+        Renders the local veto state (-1,0,1).
+
+        """
+        if v != None:
+            if  d <= - v:
+                return Decimal('1.0')
+            elif wv != None:
+                if d <= - wv:
+                    return Decimal('0.0')
+                else:
+                    return Decimal('-1.0')
+            else:
+                return Decimal('-1.0')        
+        elif wv != None:
+            if d <= -wv:
+                return Decimal('0.0')
+            else:
+                return Decimal('-1.0')
+        else:
+            return Decimal('-1.0')
+
+    def _localNegativeVeto(self, d, wv, v):
+        """
+        Parameters:
+            d := diff observed, v (wv)  :=  (weak) veto threshold.
+
+        Renders the local negative veto state (-1,0,1).
+
+        """
+        if v != None:
+            if  d >= v:
+                return Decimal('1.0')
+            elif wv != None:
+                if d >= wv:
+                    return Decimal('0.0')
+                else:
+                    return Decimal('-1.0')
+            else:
+                return Decimal('-1.0')        
+        elif wv != None:
+            if d >= wv:
+                return Decimal('0.0')
+            else:
+                return Decimal('-1.0')
+        else:
+            return Decimal('-1.0')
+
 
 class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     """
@@ -8001,18 +8797,20 @@ if __name__ == "__main__":
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
     Threading = True
-    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=100,\
+    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
                                    numberOfCriteria=13,\
                                    weightDistribution='equiobjectives',
                                    seed=100)
     
     g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,Comments=True)
-    t2 = Random3ObjectivesPerformanceTableau(numberOfActions=100,\
+    g1.showRelationTable()
+    t2 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
                                    numberOfCriteria=13,\
                                    weightDistribution='equiobjectives',
-                                   seed=101)
+                                   seed=100)
     
     g2 = BipolarOutrankingDigraph(t2,Normalized=True,Threading=Threading,Comments=True)
+    g2.showRelationTable()
     from time import time
     t0 = time();print(g1.computeOrdinalCorrelationMP(g2,Threading=Threading,Debug=False));print(time()-t0)
 #    t0 = time();print(g1.computeOrdinalCorrelation(g2));print(time()-t0)
