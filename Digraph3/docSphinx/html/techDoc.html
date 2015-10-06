@@ -192,7 +192,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1153,7 +1153,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1861,13 +1861,14 @@ the digraph self by reading in the 0-1 misset file format.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.showRelationMap">
 <code class="descname">showRelationMap</code><span class="sig-paren">(</span><em>symbols=None</em>, <em>rankingRule='netFlows'</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.showRelationMap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints out in text map format of the location of
-certainly valiadted and invalidated outrnking situations.</p>
+<dd><p>Prints on the console, in text map format, the location of
+certainly validated and certainly invalidated outranking situations.</p>
 <dl class="docutils">
 <dt>By default, symbols = {&#8216;max&#8217;:&#8217;┬&#8217;,&#8217;positive&#8217;: &#8216;+&#8217;, &#8216;median&#8217;: &#8216; &#8216;,</dt>
 <dd>&#8216;negative&#8217;: &#8216;-&#8216;, &#8216;min&#8217;: &#8216;┴&#8217;}</dd>
 </dl>
-<p>Further available ranking rules are Kohler&#8217;s (rankingRule=&#8221;kohler&#8221;)
+<p>The default ordering of the output is following the net flows ranking rule
+from best to worst actions. Further available ranking rules are Kohler&#8217;s (rankingRule=&#8221;kohler&#8221;)
 and Tideman&#8217;s ranked pairs rule (rankingRule=&#8221;rankedPairs&#8221;)</p>
 <p>Example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
@@ -1898,7 +1899,8 @@ and Tideman&#8217;s ranked pairs rule (rankingRule=&#8221;rankedPairs&#8221;)</p
 <span class="go">----- -----+ +--++-+- -  </span>
 <span class="go">┴┴┴-++-+-┴+ +++┴-+---+ ┴+</span>
 <span class="go">┴--┴┴┴-┴  -  ┴┴ --┴┴+ ┬ +</span>
-<span class="go">----┴┴-┴-----┴┴--   - -+ </span>
+<span class="go">----┴┴-┴-----┴┴--   - -+</span>
+<span class="go">Ranking rule: netFlows</span>
 <span class="gp">&gt;&gt;&gt; </span>
 </pre></div>
 </div>
@@ -2100,7 +2102,7 @@ called dg1 and dg2.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2131,7 +2133,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -3310,7 +3312,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4057,7 +4059,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5794,7 +5796,7 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 
 <dl class="class">
 <dt id="randomDigraphs.RandomGridDigraph">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.GridDigraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary randomly oriented Grid digraphs of dimension n time m

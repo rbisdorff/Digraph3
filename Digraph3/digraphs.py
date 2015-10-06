@@ -2687,13 +2687,14 @@ class Digraph(object):
 
     def showRelationMap(self,symbols=None,rankingRule="netFlows"):
         """
-        Prints out in text map format of the location of
-        certainly valiadted and invalidated outrnking situations.
+        Prints on the console, in text map format, the location of
+        certainly validated and certainly invalidated outranking situations.
 
         By default, symbols = {'max':'┬','positive': '+', 'median': ' ',
                                'negative': '-', 'min': '┴'}
 
-        Further available ranking rules are Kohler's (rankingRule="kohler")
+        The default ordering of the output is following the net flows ranking rule
+        from best to worst actions. Further available ranking rules are Kohler's (rankingRule="kohler")
         and Tideman's ranked pairs rule (rankingRule="rankedPairs")
 
         Example::
@@ -2726,7 +2727,8 @@ class Digraph(object):
             ----- -----+ +--++-+- -  
             ┴┴┴-++-+-┴+ +++┴-+---+ ┴+
             ┴--┴┴┴-┴  -  ┴┴ --┴┴+ ┬ +
-            ----┴┴-┴-----┴┴--   - -+ 
+            ----┴┴-┴-----┴┴--   - -+
+            Ranking rule: netFlows
             >>> 
 
         """
