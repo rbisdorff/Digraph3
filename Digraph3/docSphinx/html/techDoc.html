@@ -3313,7 +3313,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4060,7 +4060,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -6277,12 +6277,93 @@ By default the valuation domain is normalized ([-1.0;1.0])</p>
 <dl class="method">
 <dt id="bigOutrankingDigraphs.BigDigraph.showRelationMap">
 <code class="descname">showRelationMap</code><span class="sig-paren">(</span><em>symbols=None</em>, <em>rankingRule='netFlows'</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigDigraph.showRelationMap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints out in text map format of the location of
-certainly valiadted and invalidated outrnking situations.</p>
+<dd><p>Prints on the console, in text map format, the location of
+certainly validated and certainly invalidated outranking situations.</p>
 <dl class="docutils">
 <dt>By default, symbols = {&#8216;max&#8217;:&#8217;┬&#8217;,&#8217;positive&#8217;: &#8216;+&#8217;, &#8216;median&#8217;: &#8216; &#8216;,</dt>
 <dd>&#8216;negative&#8217;: &#8216;-&#8216;, &#8216;min&#8217;: &#8216;┴&#8217;}</dd>
 </dl>
+<p>The default ordering of the output is following the quantiles sorted boosted net flows ranking rule
+from best to worst actions. Further available ranking rules are Kohler&#8217;s (rankingRule=&#8221;kohler&#8221;)
+and Tideman&#8217;s ranked pairs rule (rankingRule=&#8221;rankedPairs&#8221;)
+Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bigOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">BigOutrankingDigraphMP</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
+<span class="go">*----- show short --------------*</span>
+<span class="go">Instance name     : randomCBperftab_mp</span>
+<span class="go"># Actions         : 50</span>
+<span class="go"># Criteria        : 7</span>
+<span class="go">Sorting by        : 10-Tiling</span>
+<span class="go">Ordering strategy : average</span>
+<span class="go"># Components      : 7</span>
+<span class="go">Minimal size      : 5</span>
+<span class="go">Maximal size      : 13</span>
+<span class="go">Median size       : 6</span>
+<span class="go">fill rate         : 16.898%</span>
+<span class="go">----  Constructor run times (in sec.) ----</span>
+<span class="go">Total time        : 0.08494</span>
+<span class="go">QuantilesSorting  : 0.04339</span>
+<span class="go">Preordering       : 0.00034</span>
+<span class="go">Decomposing       : 0.03989</span>
+<span class="go">Ordering          : 0.00024</span>
+<span class="go">&lt;class &#39;bigOutrankingDigraphs.BigOutrankingDigraphMP&#39;&gt; instance         </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span><span class="o">.</span><span class="n">showRelationMap</span><span class="p">()</span>
+<span class="go"> ┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴ ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go"> + ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">--- -┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">-┴-+ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴ ┬-+┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴   +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴+  +  ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴-+- ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴  + ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴   -  ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴ +++-+++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴+ +++++++++-+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴+- +--+++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴--+ -++++++-+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴++++ +-   ++ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴--+-+ +++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴-+-++- ++++--┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴-++-++- + -+-┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴---- ++- + ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴-+--++++- -++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴--- --+++ ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴+-+-++-+-+ +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴-+- -+++-++ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  -  + + ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  -+ + ++┬++┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++ +++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ -- -+-++  ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++++ ++++++-┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴----- ++-┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  +++- -++-+┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-----++ -++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +-+-+-+ -++┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+   +++ ┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-- --+++  -┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴--┴+ -┴--+ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +++++++┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ +++-+┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴--  +++┬┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴--    ++┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+-+  +++┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +- + --┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴---+++ +┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴- ┴-+++ ┬┬┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ┬┬┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ++ ┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ - -┬┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ -+  ┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ┴  ┬</span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ </span>
+<span class="go">Ranking rule: netFlows</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>
