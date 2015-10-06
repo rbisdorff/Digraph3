@@ -492,7 +492,7 @@ class BigDigraph(object):
 ##            print('Determinateness   : %.3f' % (corr['determination']))
 
 ########################
-class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
+class BigOutrankingDigraph(BigDigraph):
     """
     Abstract root class  for the multiprocessing implementation of big outranking digraphs.
     
