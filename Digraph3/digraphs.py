@@ -2734,18 +2734,18 @@ class Digraph(object):
             symbols = {'max':'┬','positive': '+', 'median': ' ',
                        'negative': '-', 'min': '┴'}
         if rankingRule == "Kohler":
-            ordering = self.computeKohlerOrder()
+            ranking = self.computeKohlerRanking()
         elif rankingRule == "rankedPairs":
-            ordering = self.computeRankedPairsOrder()
+            ranking = self.computeRankedPairsRanking()
         else:
-            ordering = self.computeNetFlowsRanking()
+            ranking = self.computeNetFlowsRanking()
         relation = self.relation
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
-        for x in ordering:
+        for x in ranking:
             pictStr = ''
-            for y in ordering:
+            for y in ranking:
                 if relation[x][y] == Max:
                     pictStr += symbols['max']
                 elif relation[x][y] == Min:
@@ -2757,6 +2757,7 @@ class Digraph(object):
                 elif relation[x][y] < Med:
                     pictStr += symbols['negative']
             print(pictStr)
+        print('Ranking rule: %s' % rankingRule)
       
 
     def showRelationTable(self,Sorted=True,\
@@ -7995,11 +7996,11 @@ class Digraph(object):
 
     def computeKohlerOrder(self):
         ranking = self.computeKohlerRankingDict()
-        ordering = reversed([x for x in ranking])
-        return ordering
-
+        return list(reversed(ranking))
+    
     def computeKohlerRanking(self):
-        return [x for x in self.computeKohlerRankingDict()]
+        ranking = self.computeKohlerRankingDict()
+        return [x for x in ranking]
 
     def computeArrowRaynaudRanking(self,Debug=False):
         """
@@ -8101,7 +8102,8 @@ class Digraph(object):
         return rankedPairsOrder
 
     def computeRankedPairsRanking(self):
-        return reversed([x for x in self.computeRankedPairsOrder()])
+        ordering = self.computeRankedPairsOrder()
+        return [x for x in reversed(ordering)]
 
     def computeKemenyOrder(self,isProbabilistic=False, orderLimit=7, seed=None, sampleSize=1000, Debug=False):
         """
