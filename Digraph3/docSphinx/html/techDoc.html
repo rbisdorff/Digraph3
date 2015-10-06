@@ -686,8 +686,18 @@ Return a tuple: kemenyOrder, kemenyIndex</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computeKohlerOrder">
-<code class="descname">computeKohlerOrder</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeKohlerOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders a ranking of the actions following Kohler&#8217;s rule as an
+<code class="descname">computeKohlerOrder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeKohlerOrder" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.computeKohlerRanking">
+<code class="descname">computeKohlerRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeKohlerRanking" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.computeKohlerRankingDict">
+<code class="descname">computeKohlerRankingDict</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeKohlerRankingDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>renders a ranking from the best to the worst of the actions following Kohler&#8217;s rule as an
 ordered dictionary with rank and majorityMargin attributes.</p>
 </dd></dl>
 
@@ -870,9 +880,14 @@ bipolarly polarised digraph doesn&#8217;t contain a chordless circuit.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.computeRankedPairsOrder">
 <code class="descname">computeRankedPairsOrder</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeRankedPairsOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders a ranking of the actions obtained from the
+<dd><p>renders an actions ordering from the worst to the best obtained from the
 ranked pairs rule.</p>
 </dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.computeRankedPairsRanking">
+<code class="descname">computeRankedPairsRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeRankedPairsRanking" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computeRankingByBestChoosing">
@@ -1841,6 +1856,52 @@ the digraph self by reading in the 0-1 misset file format.</p>
 <dt id="digraphs.Digraph.showRelation">
 <code class="descname">showRelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.showRelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>prints the relation valuation in ##.## format.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.showRelationMap">
+<code class="descname">showRelationMap</code><span class="sig-paren">(</span><em>symbols=None</em>, <em>rankingRule='netFlows'</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.showRelationMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints out in text map format of the location of
+certainly valiadted and invalidated outrnking situations.</p>
+<dl class="docutils">
+<dt>By default, symbols = {&#8216;max&#8217;:&#8217;┬&#8217;,&#8217;positive&#8217;: &#8216;+&#8217;, &#8216;median&#8217;: &#8216; &#8216;,</dt>
+<dd>&#8216;negative&#8217;: &#8216;-&#8216;, &#8216;min&#8217;: &#8216;┴&#8217;}</dd>
+</dl>
+<p>Further available ranking rules are Kohler&#8217;s (rankingRule=&#8221;kohler&#8221;)
+and Tideman&#8217;s ranked pairs rule (rankingRule=&#8221;rankedPairs&#8221;)</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRelationMap</span><span class="p">(</span><span class="n">rankingRule</span><span class="o">=</span><span class="s">&quot;netFlows&quot;</span><span class="p">)</span>
+<span class="go"> +┬+ ++++++++  +++++┬+┬┬+</span>
+<span class="go">+ -  ++++++++ +┬┬+┬+++┬┬+</span>
+<span class="go"> +   ++ ++  ++++┬+┬┬++┬++</span>
+<span class="go">    ++++++++++++++++┬++┬+</span>
+<span class="go">  ┬- + + +++ ┬++++++┬┬+┬┬</span>
+<span class="go">-  -+  -   ┬┬┬+┬┬┬++ ┬+┬┬</span>
+<span class="go">---    ++-+++++++++++++++</span>
+<span class="go">-  +++   -+++++ ++++┬+-┬┬</span>
+<span class="go">---   ++ ++++ +++++++++++</span>
+<span class="go">----- +++ --- ++- ++++┬ +</span>
+<span class="go">-- -- ---+  ++-+++++┬+-++</span>
+<span class="go">-- -+ +-+++ +++-++++┬+┬ +</span>
+<span class="go">----  - ++-- ++++++++++++</span>
+<span class="go">  -+┴ --  - - -  -++┬++┬┬</span>
+<span class="go"> ---++----+--+ --+++ ++┬┬</span>
+<span class="go">---- ┴- -+-++ + --++++┬++</span>
+<span class="go">-┴┴--┴--++--+ ++ ++++++++</span>
+<span class="go">---- ┴--++---++++ ++-+-++</span>
+<span class="go">-┴┴-++----++-+++-- +-++┬ </span>
+<span class="go">--┴----+------+---+  ++┬ </span>
+<span class="go">┴--┴┴ -┴--  -  -++++ ++-+</span>
+<span class="go">----- -----+ +--++-+- -  </span>
+<span class="go">┴┴┴-++-+-┴+ +++┴-+---+ ┴+</span>
+<span class="go">┴--┴┴┴-┴  -  ┴┴ --┴┴+ ┬ +</span>
+<span class="go">----┴┴-┴-----┴┴--   - -+ </span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -3249,7 +3310,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3996,7 +4057,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -6209,6 +6270,17 @@ By default the valuation domain is normalized ([-1.0;1.0])</p>
 <dt id="bigOutrankingDigraphs.BigDigraph.showDecomposition">
 <code class="descname">showDecomposition</code><span class="sig-paren">(</span><em>direction='decreasing'</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigDigraph.showDecomposition" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigDigraph.showRelationMap">
+<code class="descname">showRelationMap</code><span class="sig-paren">(</span><em>symbols=None</em>, <em>rankingRule='netFlows'</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigDigraph.showRelationMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints out in text map format of the location of
+certainly valiadted and invalidated outrnking situations.</p>
+<dl class="docutils">
+<dt>By default, symbols = {&#8216;max&#8217;:&#8217;┬&#8217;,&#8217;positive&#8217;: &#8216;+&#8217;, &#8216;median&#8217;: &#8216; &#8216;,</dt>
+<dd>&#8216;negative&#8217;: &#8216;-&#8216;, &#8216;min&#8217;: &#8216;┴&#8217;}</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
