@@ -79,14 +79,15 @@ class BigDigraph(object):
     def showRelationMap(self,symbols=None,rankingRule="netFlows"):
         """
         Prints on the console, in text map format, the location of
-        certainly validated and certainly invalidated outranking situations.
+        the diagonal outranking components of the big outranking digraph.
 
         By default, symbols = {'max':'┬','positive': '+', 'median': ' ',
                                'negative': '-', 'min': '┴'}
 
         The default ordering of the output is following the quantiles sorted boosted net flows ranking rule
         from best to worst actions. Further available ranking rules are Kohler's (rankingRule="kohler")
-        and Tideman's ranked pairs rule (rankingRule="rankedPairs")
+        and Tideman's ranked pairs rule (rankingRule="rankedPairs").
+        
         Example::
 
             >>> from bigOutrankingDigraphs import *
@@ -201,6 +202,7 @@ class BigDigraph(object):
                 elif relation(x,y) < Med:
                     pictStr += symbols['negative']
             print(pictStr)
+        print('Ranking rule: %s' % rankingRule)
 
     
     def computeOrdinalCorrelation(self, other, Debug=False):
