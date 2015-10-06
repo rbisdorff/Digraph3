@@ -304,12 +304,13 @@ class RandomLinearOrder(LinearOrder):
         """
         constructor for generating random instances of linear orders with a given number of actions (default=10).
         """
-        from outrankingDigraphs import RandomOutrankingDigraph
         import random
         random.seed(seed)
         if OutrankingModel:
+            from outrankingDigraphs import RandomOutrankingDigraph
             g = RandomOutrankingDigraph(numberOfActions=numberOfActions)
         else:
+            from randomDigraphs import RandomValuationDigraph
             g = RandomValuationDigraph(order=numberOfActions)
         g.recodeValuation(-1,1)
         actionsList = [x for x in g.actions]
