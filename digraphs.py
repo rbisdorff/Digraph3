@@ -2692,6 +2692,43 @@ class Digraph(object):
 
         By default, symbols = {'max':'┬','positive': '+', 'median': ' ',
                                'negative': '-', 'min': '┴'}
+
+        Further available ranking rules are Kohler's (rankingRule="kohler")
+        and Tideman's ranked pairs rule (rankingRule="rankedPairs")
+
+        Example::
+
+            >>> from outrankingDigraphs import *
+            >>> t = RandomCBPerformanceTableau(numberOfActions=25,seed=1)
+            >>> g = BipolarOutrankingDigraph(t,Normalized=True)
+            >>> g.showRelationMap(rankingRule="netFlows")
+             +┬+ ++++++++  +++++┬+┬┬+
+            + -  ++++++++ +┬┬+┬+++┬┬+
+             +   ++ ++  ++++┬+┬┬++┬++
+                ++++++++++++++++┬++┬+
+              ┬- + + +++ ┬++++++┬┬+┬┬
+            -  -+  -   ┬┬┬+┬┬┬++ ┬+┬┬
+            ---    ++-+++++++++++++++
+            -  +++   -+++++ ++++┬+-┬┬
+            ---   ++ ++++ +++++++++++
+            ----- +++ --- ++- ++++┬ +
+            -- -- ---+  ++-+++++┬+-++
+            -- -+ +-+++ +++-++++┬+┬ +
+            ----  - ++-- ++++++++++++
+              -+┴ --  - - -  -++┬++┬┬
+             ---++----+--+ --+++ ++┬┬
+            ---- ┴- -+-++ + --++++┬++
+            -┴┴--┴--++--+ ++ ++++++++
+            ---- ┴--++---++++ ++-+-++
+            -┴┴-++----++-+++-- +-++┬ 
+            --┴----+------+---+  ++┬ 
+            ┴--┴┴ -┴--  -  -++++ ++-+
+            ----- -----+ +--++-+- -  
+            ┴┴┴-++-+-┴+ +++┴-+---+ ┴+
+            ┴--┴┴┴-┴  -  ┴┴ --┴┴+ ┬ +
+            ----┴┴-┴-----┴┴--   - -+ 
+            >>> 
+
         """
         if symbols == None:
             symbols = {'max':'┬','positive': '+', 'median': ' ',
@@ -7999,7 +8036,7 @@ class Digraph(object):
 
     def computeRankedPairsOrder(self,Cpp=False,Debug=False):
         """
-        renders a ranking of the actions obtained from the
+        renders an actions ordering from the worst to the best obtained from the
         ranked pairs rule.
         """
         relation = self.relation

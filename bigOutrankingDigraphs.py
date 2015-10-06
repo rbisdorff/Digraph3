@@ -74,7 +74,53 @@ class BigDigraph(object):
         elif self.components[cx]['rank'] > self.components[cy]['rank']:
             return Min
         else:
-            return Max 
+            return Max
+
+    def showRelationMap(self,symbols=None,rankingRule="netFlows"):
+        """
+        Prints out in text map format of the location of
+        certainly valiadted and invalidated outrnking situations.
+
+        By default, symbols = {'max':'┬','positive': '+', 'median': ' ',
+                               'negative': '-', 'min': '┴'}
+        """
+        if symbols == None:
+            symbols = {'max':'┬','positive': '+', 'median': ' ',
+                       'negative': '-', 'min': '┴'}
+        if rankingRule == "Kohler":
+            try:
+                ranking = self.boostedKohlerRanking
+            except:
+                ranking = self.computeBoostedKohlerRanking()
+        elif rankingRule == "rankedPairs":
+            try:
+                ranking = self.boostedRankedPairsRanking
+            except:
+                ranking = self.computeBoostedRankedPairsRanking()
+        else:
+            try:
+                ranking = self.boostedNetFlowsRanking
+            except:
+                ranking = self.computeBoostedNetFlowsRanking()
+        relation = self.relation
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        for x in ranking:
+            pictStr = ''
+            for y in ranking:
+                if relation(x,y) == Max:
+                    pictStr += symbols['max']
+                elif relation(x,y) == Min:
+                    pictStr += symbols['min']
+                elif relation(x,y) > Med:
+                    pictStr += symbols['positive']
+                elif relation(x,y) ==Med:
+                    pictStr += symbols['median']
+                elif relation(x,y) < Med:
+                    pictStr += symbols['negative']
+            print(pictStr)
+
     
     def computeOrdinalCorrelation(self, other, Debug=False):
         """
@@ -1746,6 +1792,7 @@ if __name__ == "__main__":
                                  Comments=False,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
     bg1.showDecomposition(direction='increasing')
+    bg1.showRelationMap()
     print(bg1)
     fillRate = sum([(bg1.components[comp]['subGraph'].order*(bg1.components[comp]['subGraph'].order-1)) for comp in bg1.components])
     print( 'fill rate: ', fillRate,fillRate/( bg1.order*(bg1.order-1) ) )
