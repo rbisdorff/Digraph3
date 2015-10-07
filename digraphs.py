@@ -9391,7 +9391,7 @@ class CirculantDigraph(Digraph):
         
     .. image:: c8.png
         :alt: circulant [1,3] digraph
-        :width: 500 px
+        :width: 300 px
         :align: center
 
     """
