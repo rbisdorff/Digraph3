@@ -274,9 +274,9 @@ and the evaluation dictionary into self.</p>
 </dl>
 <p>Specialization of general Digraph class for instantiation
 of chordless odd circuits augmented digraphs.</p>
-<p>A chordless odd circuit is added if the cumulated credibility of the circuit supporting is larger or
-equal to the cumulated credibility of the converse arcs. In this latter case, the circuit is broken at the weakest asymmetric link,
-i.e. a link (x,y) with minimal difference between r(x S y) - r(y S x).</p>
+<p>A chordless odd circuit is added if the cumulated credibility of the circuit supporting arcs is larger or
+equal to the cumulated credibility of the converse arcs. Otherwise, the circuit is broken at the weakest asymmetric link,
+i.e. a link (<em>x</em>,*y*) with minimal difference between r(<em>x</em> S <em>y</em>) - r(<em>y</em> S <em>x</em>).</p>
 <dl class="method">
 <dt id="digraphs.CocaDigraph.addCircuits">
 <code class="descname">addCircuits</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CocaDigraph.addCircuits" title="Permalink to this definition">¶</a></dt>
@@ -361,7 +361,7 @@ and the evaluation dictionary into self.</p>
 <dl class="class">
 <dt id="digraphs.Digraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">Digraph</code><span class="sig-paren">(</span><em>file=None</em>, <em>order=7</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>General class of digraphs, R.B. March 2006:</p>
 <dl class="docutils">
 <dt>Python data file format:</dt>
@@ -1184,7 +1184,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2486,7 +2486,7 @@ where Max (resp. Min) equals valuation maximum (resp. minimum).</dd>
 <dl class="class">
 <dt id="graphs.Graph">
 <em class="property">class </em><code class="descclassname">graphs.</code><code class="descname">Graph</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>Empty=False</em>, <em>numberOfVertices=7</em>, <em>edgeProbability=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>In the <cite>graphs</cite> module, the root <a class="reference internal" href="#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></code></a> class provides a generic graph model. A given object consists in:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -3213,7 +3213,7 @@ xml.etree (for Python 2.5+).</p>
 <dl class="class">
 <dt id="perfTabs.PerformanceTableau">
 <em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">PerformanceTableau</code><span class="sig-paren">(</span><em>filePerfTab=None</em>, <em>isEmpty=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>In this <em>Digraph3</em> module, the root <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class provides a generic <strong>performance table model</strong>. A given object of this class consists in:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -3344,7 +3344,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4091,7 +4091,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4758,7 +4758,7 @@ from a shuffled list of candidates for each voter.</p>
 <dl class="class">
 <dt id="votingDigraphs.VotingProfile">
 <em class="property">class </em><code class="descclassname">votingDigraphs.</code><code class="descname">VotingProfile</code><span class="sig-paren">(</span><em>fileVotingProfile=None</em><span class="sig-paren">)</span><a class="headerlink" href="#votingDigraphs.VotingProfile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>A general class for storing voting profiles.</p>
 <p>General structure:</p>
 <div class="highlight-python"><div class="highlight"><pre>candidates = {&#39;a&#39;: ...,&#39;b&#39;: ...,&#39;c&#39;: ...,  ... }
@@ -5687,7 +5687,7 @@ valued self relation.</p>
 <dl class="class">
 <dt id="randomNumbers.CauchyRandomVariable">
 <em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">CauchyRandomVariable</code><span class="sig-paren">(</span><em>position=0.0</em>, <em>scale=1.0</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomNumbers.CauchyRandomVariable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Cauchy random variable generator.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -5712,7 +5712,7 @@ valued self relation.</p>
 <dl class="class">
 <dt id="randomNumbers.DiscreteRandomVariable">
 <em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">DiscreteRandomVariable</code><span class="sig-paren">(</span><em>discreteLaw=None</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomNumbers.DiscreteRandomVariable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Discrete random variable generator</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -5773,7 +5773,7 @@ valued self relation.</p>
 <dl class="class">
 <dt id="randomNumbers.ExtendedTriangularRandomVariable">
 <em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">ExtendedTriangularRandomVariable</code><span class="sig-paren">(</span><em>lowLimit=0.0</em>, <em>highLimit=1.0</em>, <em>mode=None</em>, <em>probRepart=0.5</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomNumbers.ExtendedTriangularRandomVariable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Extended triangular random variable generator</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -6242,7 +6242,7 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 <dl class="class">
 <dt id="bigOutrankingDigraphs.BigDigraph">
 <em class="property">class </em><code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">BigDigraph</code><a class="headerlink" href="#bigOutrankingDigraphs.BigDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>abstract root class for lineraly decomposed big digraphs (order &gt; 1000) using multiprocessing ressources.</p>
 <dl class="method">
 <dt id="bigOutrankingDigraphs.BigDigraph.computeDecompositionSummaryStatistics">
