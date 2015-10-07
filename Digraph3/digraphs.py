@@ -10348,9 +10348,9 @@ class CocaDigraph(Digraph):
     Specialization of general Digraph class for instantiation
     of chordless odd circuits augmented digraphs.
 
-    A chordless odd circuit is added if the cumulated credibility of the circuit supporting is larger or
-    equal to the cumulated credibility of the converse arcs. In this latter case, the circuit is broken at the weakest asymmetric link,
-    i.e. a link (x,y) with minimal difference between r(x S y) - r(y S x).
+    A chordless odd circuit is added if the cumulated credibility of the circuit supporting arcs is larger or
+    equal to the cumulated credibility of the converse arcs. Otherwise, the circuit is broken at the weakest asymmetric link,
+    i.e. a link (*x*,*y*) with minimal difference between r(*x* S *y*) - r(*y* S *x*).
 
     """
     def __init__(self,digraph=None,Cpp=False,Piping=False,Comments=False):
