@@ -680,7 +680,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
         return sorting
 
-    def computeSortingCharacteristics(self, action=None, StoreSorting=True,Comments=False, Debug=True,\
+    def computeSortingCharacteristics(self, action=None, StoreSorting=True,Comments=False, Debug=False,\
                                         Threading=False, nbrOfCPUs=None):
         """
         Renders a bipolar-valued bi-dictionary relation
@@ -1047,9 +1047,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             return None
         elif n == 1:
             if Comments:
-                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     self.categories[keys[0]]['lowLimit'],\
-                                     self.categories[keys[0]]['highLimit'],\
+                print('%s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                     self.categories[keys[0]]['name'],\
+                                     #self.categories[keys[0]]['name'],\
                                      action,\
                                      credibility,lowLimit,notHighLimit) )
             return action,\
@@ -1059,8 +1059,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         else:
             if Comments:
                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     self.categories[keys[0]]['lowLimit'],\
-                                     self.categories[keys[-1]]['highLimit'],\
+                                     self.categories[keys[0]]['name'],\
+                                     self.categories[keys[-1]]['name'],\
                                      action,\
                                      credibility,lowLimit,notHighLimit) )
             return action,\
@@ -1516,6 +1516,74 @@ class QuantilesSortingDigraph(SortingDigraph):
         else:
             self.computeCategoryContents(StoreSorting=StoreSorting,\
                                 Threading=Threading,nbrOfCPUs=nbrOfProcesses,Comments=Comments)
+
+    def showActionCategories(self,action,Debug=False,Comments=True,\
+                             Threading=False,nbrOfCPUs=None):
+        """
+        Renders the union of categories in which the given action is sorted positively or null into.
+        Returns a tuple : action, lowest category key, highest category key, membership credibility !
+        """
+        Med = self.valuationdomain['med']
+        try:
+            sorting = self.sorting
+        except:
+            sorting = self.computeSortingCharacteristics(action=action,\
+                                                     Comments=Debug,\
+                                                     Threading=Threading,
+                                                     StoreSorting=False,
+                                                     nbrOfCPUs=nbrOfCPUs)
+        keys = []
+        for c in self.orderedCategoryKeys():
+            if sorting[action][c]['categoryMembership'] >= Med:
+                if sorting[action][c]['lowLimit'] > Med:
+                    lowLimit = sorting[action][c]['lowLimit']
+                if sorting[action][c]['notHighLimit'] > Med:
+                    notHighLimit = sorting[action][c]['notHighLimit']
+                keys.append(c)
+                if Debug:
+                    print(action, c, sorting[action][c])
+        n = len(keys)
+        try:
+            credibility = min(lowLimit,notHighLimit)
+        except:
+            credibility = Med
+        if n == 0:
+            return None
+        elif n == 1:
+            if Comments:
+                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                     self.categories[keys[0]]['lowLimit'],\
+                                     self.categories[keys[0]]['highLimit'],\
+                                     action,\
+                                     credibility,lowLimit,notHighLimit) )
+            return action,\
+                    keys[0],\
+                    keys[0],\
+                    credibility
+        else:
+            if Comments:
+                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                     self.categories[keys[0]]['lowLimit'],\
+                                     self.categories[keys[-1]]['highLimit'],\
+                                     action,\
+                                     credibility,lowLimit,notHighLimit) )
+            return action,\
+                    keys[0],\
+                    keys[-1],\
+                    credibility            
+
+    def showActionsSortingResult(self,actionSubset=None,Debug=False):
+        """
+        shows the quantiles sorting result all (default) of a subset of the decision actions.
+        """
+        if actionSubset == None:
+            actions = [x for x in self.actions]
+            actions.sort()
+        else:
+            actions = [x for x in flatten(actionSubset)]
+        print('Quantiles sorting result per decision action')
+        for x in actions:
+            self.showActionCategories(x,Debug=Debug)
  
 
     def showWeakOrder(self,Descending=True):
