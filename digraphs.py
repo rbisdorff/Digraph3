@@ -9352,12 +9352,47 @@ class CirculantDigraph(Digraph):
                and/or negative circular shifts of value 1 to n.
 
     Specialization of the general Digraph class for generating
-    temporary circulant digraphs
+    temporary circulant digraphs.
 
     Default instantiation C_7:
         | order = 7,
         | valuationdomain = {'min':-1.0,'max':1.0},
         | circulants = [-1,1].
+
+    Example session::
+
+        >>> from digraphs import CirculantDigraph
+        >>> c8 = CirculantDigraph(order=8,circulants=[1,3])
+        >>> c8.exportGraphViz('c8')
+        *---- exporting a dot file dor GraphViz tools ---------*
+        Exporting to c8.dot
+        circo -Tpng c8.dot -o c8.png
+        # see below the graphviz drawing
+        >>> c8.showChordlessCircuits()
+        No circuits yet computed. Run computeChordlessCircuits()!
+        >>> c8.computeChordlessCircuits()
+        [(['1', '4', '7', '8'], frozenset({'7', '4', '1', '8'})), (['1', '4', '5', '6'], frozenset({'6', '5', '4', '1'})), (['1', '4', '5', '8'], frozenset({'5', '4', '1', '8'})), (['1', '2', '3', '6'], frozenset({'6', '3', '2', '1'})), (['1', '2', '5', '6'], frozenset({'6', '5', '2', '1'})), (['1', '2', '5', '8'], frozenset({'5', '2', '1', '8'})), (['2', '3', '6', '7'], frozenset({'6', '3', '2', '7'})), (['2', '3', '4', '7'], frozenset({'4', '3', '2', '7'})), (['2', '5', '6', '7'], frozenset({'6', '7', '2', '5'})), (['3', '6', '7', '8'], frozenset({'6', '3', '7', '8'})), (['3', '4', '7', '8'], frozenset({'7', '3', '4', '8'})), (['3', '4', '5', '8'], frozenset({'3', '4', '5', '8'}))]
+        >>> c8.showChordlessCircuits()
+        *---- Chordless circuits ----*
+        ['1', '4', '7', '8'] , credibility : 1.0
+        ['1', '4', '5', '6'] , credibility : 1.0
+        ['1', '4', '5', '8'] , credibility : 1.0
+        ['1', '2', '3', '6'] , credibility : 1.0
+        ['1', '2', '5', '6'] , credibility : 1.0
+        ['1', '2', '5', '8'] , credibility : 1.0
+        ['2', '3', '6', '7'] , credibility : 1.0
+        ['2', '3', '4', '7'] , credibility : 1.0
+        ['2', '5', '6', '7'] , credibility : 1.0
+        ['3', '6', '7', '8'] , credibility : 1.0
+        ['3', '4', '7', '8'] , credibility : 1.0
+        ['3', '4', '5', '8'] , credibility : 1.0
+        12 circuits.
+        >>>
+        
+    .. image:: c8.png
+        :alt: circulant [1,3] digraph
+        :width: 500 px
+        :align: center
 
     """
     def __init__(self,order=7,valuationdomain = {'min':Decimal('-1.0'),'max':Decimal('1.0')},circulants = [-1,1]):
