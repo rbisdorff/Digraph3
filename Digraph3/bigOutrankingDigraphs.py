@@ -394,7 +394,7 @@ class BigDigraph(object):
         """
         #ordering = list(ranking)
         #ordering.reverse()
-        preordering = [[x] for x in reversed(ordering)]
+        preordering = [[x] for x in reversed(ranking)]
         return preordering
 
     def ordering2Preorder(self,ordering):
