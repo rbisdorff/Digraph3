@@ -804,8 +804,8 @@ The ``checkSampling()`` method (see line 23) generates a randomwalk of *nSim=300
 
 For more technical information and more code examples, look into the technical documentation of the :ref:`graphs-label`. For the readers interested in algorithmic applications of Markov Chains we may recommend consulting O. Häggström's 2002 book: [FMCAA]_.
 
-Who is the lier?
-................
+The Berge mystery story: Who is the lyer ?
+..........................................
 Suppose that the file ``berge.py`` contains the following :py:class:`graphs.Graph` instance data::
 
     vertices = {
