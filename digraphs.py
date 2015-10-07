@@ -9371,7 +9371,7 @@ class CirculantDigraph(Digraph):
         >>> c8.showChordlessCircuits()
         No circuits yet computed. Run computeChordlessCircuits()!
         >>> c8.computeChordlessCircuits()
-        [(['1', '4', '7', '8'], frozenset({'7', '4', '1', '8'})), (['1', '4', '5', '6'], frozenset({'6', '5', '4', '1'})), (['1', '4', '5', '8'], frozenset({'5', '4', '1', '8'})), (['1', '2', '3', '6'], frozenset({'6', '3', '2', '1'})), (['1', '2', '5', '6'], frozenset({'6', '5', '2', '1'})), (['1', '2', '5', '8'], frozenset({'5', '2', '1', '8'})), (['2', '3', '6', '7'], frozenset({'6', '3', '2', '7'})), (['2', '3', '4', '7'], frozenset({'4', '3', '2', '7'})), (['2', '5', '6', '7'], frozenset({'6', '7', '2', '5'})), (['3', '6', '7', '8'], frozenset({'6', '3', '7', '8'})), (['3', '4', '7', '8'], frozenset({'7', '3', '4', '8'})), (['3', '4', '5', '8'], frozenset({'3', '4', '5', '8'}))]
+        ...
         >>> c8.showChordlessCircuits()
         *---- Chordless circuits ----*
         ['1', '4', '7', '8'] , credibility : 1.0
