@@ -18,6 +18,7 @@ def testDefaultSortingDigraph():
     print('*---- testing default instantiation of the SortingDigraph Class ---*')
     s = SortingDigraph(isRobust=False)
     s.showCriteriaCategoryLimits()
+    s.showActionsSortingResult()
     actions = list(s.getActionsKeys())
     sorting = s.computeSortingCharacteristics(Comments=True)
     actions.sort()
