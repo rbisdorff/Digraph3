@@ -205,7 +205,7 @@ and/or negative circular shifts of value 1 to n.</div>
 </dd>
 </dl>
 <p>Specialization of the general Digraph class for generating
-temporary circulant digraphs</p>
+temporary circulant digraphs.</p>
 <dl class="docutils">
 <dt>Default instantiation C_7:</dt>
 <dd><div class="first last line-block">
@@ -215,6 +215,37 @@ temporary circulant digraphs</p>
 </div>
 </dd>
 </dl>
+<p>Example session:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">CirculantDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c8</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">circulants</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c8</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;c8&#39;</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go">Exporting to c8.dot</span>
+<span class="go">circo -Tpng c8.dot -o c8.png</span>
+<span class="go"># see below the graphviz drawing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c8</span><span class="o">.</span><span class="n">showChordlessCircuits</span><span class="p">()</span>
+<span class="go">No circuits yet computed. Run computeChordlessCircuits()!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c8</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
+<span class="go">[([&#39;1&#39;, &#39;4&#39;, &#39;7&#39;, &#39;8&#39;], frozenset({&#39;7&#39;, &#39;4&#39;, &#39;1&#39;, &#39;8&#39;})), ([&#39;1&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;], frozenset({&#39;6&#39;, &#39;5&#39;, &#39;4&#39;, &#39;1&#39;})), ([&#39;1&#39;, &#39;4&#39;, &#39;5&#39;, &#39;8&#39;], frozenset({&#39;5&#39;, &#39;4&#39;, &#39;1&#39;, &#39;8&#39;})), ([&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;6&#39;], frozenset({&#39;6&#39;, &#39;3&#39;, &#39;2&#39;, &#39;1&#39;})), ([&#39;1&#39;, &#39;2&#39;, &#39;5&#39;, &#39;6&#39;], frozenset({&#39;6&#39;, &#39;5&#39;, &#39;2&#39;, &#39;1&#39;})), ([&#39;1&#39;, &#39;2&#39;, &#39;5&#39;, &#39;8&#39;], frozenset({&#39;5&#39;, &#39;2&#39;, &#39;1&#39;, &#39;8&#39;})), ([&#39;2&#39;, &#39;3&#39;, &#39;6&#39;, &#39;7&#39;], frozenset({&#39;6&#39;, &#39;3&#39;, &#39;2&#39;, &#39;7&#39;})), ([&#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;7&#39;], frozenset({&#39;4&#39;, &#39;3&#39;, &#39;2&#39;, &#39;7&#39;})), ([&#39;2&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;], frozenset({&#39;6&#39;, &#39;7&#39;, &#39;2&#39;, &#39;5&#39;})), ([&#39;3&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;], frozenset({&#39;6&#39;, &#39;3&#39;, &#39;7&#39;, &#39;8&#39;})), ([&#39;3&#39;, &#39;4&#39;, &#39;7&#39;, &#39;8&#39;], frozenset({&#39;7&#39;, &#39;3&#39;, &#39;4&#39;, &#39;8&#39;})), ([&#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;8&#39;], frozenset({&#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;8&#39;}))]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c8</span><span class="o">.</span><span class="n">showChordlessCircuits</span><span class="p">()</span>
+<span class="go">*---- Chordless circuits ----*</span>
+<span class="go">[&#39;1&#39;, &#39;4&#39;, &#39;7&#39;, &#39;8&#39;] , credibility : 1.0</span>
+<span class="go">[&#39;1&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;] , credibility : 1.0</span>
+<span class="go">[&#39;1&#39;, &#39;4&#39;, &#39;5&#39;, &#39;8&#39;] , credibility : 1.0</span>
+<span class="go">[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;6&#39;] , credibility : 1.0</span>
+<span class="go">[&#39;1&#39;, &#39;2&#39;, &#39;5&#39;, &#39;6&#39;] , credibility : 1.0</span>
+<span class="go">[&#39;1&#39;, &#39;2&#39;, &#39;5&#39;, &#39;8&#39;] , credibility : 1.0</span>
+<span class="go">[&#39;2&#39;, &#39;3&#39;, &#39;6&#39;, &#39;7&#39;] , credibility : 1.0</span>
+<span class="go">[&#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;7&#39;] , credibility : 1.0</span>
+<span class="go">[&#39;2&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;] , credibility : 1.0</span>
+<span class="go">[&#39;3&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;] , credibility : 1.0</span>
+<span class="go">[&#39;3&#39;, &#39;4&#39;, &#39;7&#39;, &#39;8&#39;] , credibility : 1.0</span>
+<span class="go">[&#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;8&#39;] , credibility : 1.0</span>
+<span class="go">12 circuits.</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/c8.png"><img alt="circulant [1,3] digraph" class="align-center" src="_images/c8.png" style="width: 500px;" /></a>
 <dl class="method">
 <dt id="digraphs.CirculantDigraph.showShort">
 <code class="descname">showShort</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph.showShort" title="Permalink to this definition">¶</a></dt>
@@ -330,7 +361,7 @@ and the evaluation dictionary into self.</p>
 <dl class="class">
 <dt id="digraphs.Digraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">Digraph</code><span class="sig-paren">(</span><em>file=None</em>, <em>order=7</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>General class of digraphs, R.B. March 2006:</p>
 <dl class="docutils">
 <dt>Python data file format:</dt>
@@ -2455,7 +2486,7 @@ where Max (resp. Min) equals valuation maximum (resp. minimum).</dd>
 <dl class="class">
 <dt id="graphs.Graph">
 <em class="property">class </em><code class="descclassname">graphs.</code><code class="descname">Graph</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>Empty=False</em>, <em>numberOfVertices=7</em>, <em>edgeProbability=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>In the <cite>graphs</cite> module, the root <a class="reference internal" href="#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></code></a> class provides a generic graph model. A given object consists in:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -3182,7 +3213,7 @@ xml.etree (for Python 2.5+).</p>
 <dl class="class">
 <dt id="perfTabs.PerformanceTableau">
 <em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">PerformanceTableau</code><span class="sig-paren">(</span><em>filePerfTab=None</em>, <em>isEmpty=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>In this <em>Digraph3</em> module, the root <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class provides a generic <strong>performance table model</strong>. A given object of this class consists in:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -4727,7 +4758,7 @@ from a shuffled list of candidates for each voter.</p>
 <dl class="class">
 <dt id="votingDigraphs.VotingProfile">
 <em class="property">class </em><code class="descclassname">votingDigraphs.</code><code class="descname">VotingProfile</code><span class="sig-paren">(</span><em>fileVotingProfile=None</em><span class="sig-paren">)</span><a class="headerlink" href="#votingDigraphs.VotingProfile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>A general class for storing voting profiles.</p>
 <p>General structure:</p>
 <div class="highlight-python"><div class="highlight"><pre>candidates = {&#39;a&#39;: ...,&#39;b&#39;: ...,&#39;c&#39;: ...,  ... }
@@ -5656,7 +5687,7 @@ valued self relation.</p>
 <dl class="class">
 <dt id="randomNumbers.CauchyRandomVariable">
 <em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">CauchyRandomVariable</code><span class="sig-paren">(</span><em>position=0.0</em>, <em>scale=1.0</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomNumbers.CauchyRandomVariable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Cauchy random variable generator.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -5681,7 +5712,7 @@ valued self relation.</p>
 <dl class="class">
 <dt id="randomNumbers.DiscreteRandomVariable">
 <em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">DiscreteRandomVariable</code><span class="sig-paren">(</span><em>discreteLaw=None</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomNumbers.DiscreteRandomVariable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Discrete random variable generator</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -5742,7 +5773,7 @@ valued self relation.</p>
 <dl class="class">
 <dt id="randomNumbers.ExtendedTriangularRandomVariable">
 <em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">ExtendedTriangularRandomVariable</code><span class="sig-paren">(</span><em>lowLimit=0.0</em>, <em>highLimit=1.0</em>, <em>mode=None</em>, <em>probRepart=0.5</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomNumbers.ExtendedTriangularRandomVariable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Extended triangular random variable generator</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -6211,7 +6242,7 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 <dl class="class">
 <dt id="bigOutrankingDigraphs.BigDigraph">
 <em class="property">class </em><code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">BigDigraph</code><a class="headerlink" href="#bigOutrankingDigraphs.BigDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>abstract root class for lineraly decomposed big digraphs (order &gt; 1000) using multiprocessing ressources.</p>
 <dl class="method">
 <dt id="bigOutrankingDigraphs.BigDigraph.computeDecompositionSummaryStatistics">

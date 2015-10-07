@@ -2580,16 +2580,17 @@ class _QuantilesSortingDigraph(SortingDigraph):
     .. image:: quantilesSorting.png
     """
 
-    def __init__(self,argPerfTab=None,
-                 limitingQuantiles=None,
-                 LowerClosed=False,
-                 PrefThresholds=True,
-                 hasNoVeto=False,
-                 outrankingType="bipolar",
-                 CompleteOutranking=True,
-                 StoreSorting=True,
-                 Threading=False,
-                 nbrCores=None,
+    def __init__(self,argPerfTab=None,\
+                 limitingQuantiles=None,\
+                 LowerClosed=False,\
+                 PrefThresholds=True,\
+                 hasNoVeto=False,\
+                 outrankingType="bipolar",\
+                 CompleteOutranking=True,\
+                 StoreSorting=True,\
+                 DeepcopyPerfTab=True,\
+                 Threading=False,\
+                 nbrCores=None,\
                  Debug=False):
         """
         Constructor for QuantilesSortingDigraph instances.
@@ -2610,18 +2611,18 @@ class _QuantilesSortingDigraph(SortingDigraph):
             actions = {}
             for x in perfTab.actions:
                 actions[x] = {'name': str(x)}
-            self.actions = actions
-        else:
-            self.actions = copy(perfTab.actions)
+            perfTab.actions = actions
 
         # keep a copy of the original actions set before adding the profiles
-        self.actionsOrig = copy(self.actions)
+        self.actionsOrig = deepcopy(self.actions)
 
         #  normalizing the performance tableau
         normPerfTab = NormalizedPerformanceTableau(perfTab)
-        self.criteria = copy(normPerfTab.criteria)
+        self.actions = normPerfTab.actions
+        actionsOrig = deepcopy(self.actions)
+        self.criteria = normPerfTab.criteria
         self.convertWeightFloatToDecimal()
-        self.evaluation = copy(normPerfTab.evaluation)
+        self.evaluation = normPerfTab.evaluation
         self.convertEvaluationFloatToDecimal()
         
         #  compute the limiting quantiles
@@ -2734,8 +2735,8 @@ class _QuantilesSortingDigraph(SortingDigraph):
         self.hasNoVeto = hasNoVeto
         if outrankingType == "robust":
             g = RobustOutrankingDigraph(self)
-            self.valuationdomain = copy(g.valuationdomain)
-            self.relation = copy(g.relation)
+            self.valuationdomain = g.valuationdomain
+            self.relation = g.relation
         elif outrankingType == "likely":
             g = StochasticBipolarOutrankingDigraph(self,
                                                    sampleSize = 50,
@@ -2745,8 +2746,8 @@ class _QuantilesSortingDigraph(SortingDigraph):
                                                    spread = 1.0,
                                                    likelihood = 0.9,
                                                    distribution = 'triangular')
-            self.valuationdomain = copy(g.valuationdomain)
-            self.relation = copy(g.relation)
+            self.valuationdomain = g.valuationdomain
+            self.relation = g.relation
             
         else:
             minValuation = -100.0
@@ -2754,7 +2755,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
             if CompleteOutranking:
                 g = BipolarOutrankingDigraph(normPerfTab,hasNoVeto=hasNoVeto)
                 g.recodeValuation(minValuation,maxValuation)
-                self.relationOrig = deepcopy(g.relation)
+                relationOrig = g.relation
                 Min = g.valuationdomain['min']
                 Max = g.valuationdomain['max']
             else:
@@ -2765,7 +2766,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
             Med = (Max + Min)/Decimal('2.0')
             self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
             if LowerClosed:
-                self.relation = self._constructRelation(self.criteria,
+                relation = self._constructRelation(self.criteria,
                                                        self.evaluation,
                                                        initial=self.actionsOrig,
                                                        terminal=self.profileLimits,
@@ -2774,7 +2775,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
                                                         Threading=Threading,
                                                         nbrCores=nbrCores)
             else:
-                self.relation = self._constructRelation(self.criteria,
+                relation = self._constructRelation(self.criteria,
                                                        self.evaluation,
                                                        terminal=self.actionsOrig,
                                                        initial=self.profileLimits,
@@ -2783,30 +2784,31 @@ class _QuantilesSortingDigraph(SortingDigraph):
                                                         Threading=Threading,
                                                         nbrCores=nbrCores)
             if LowerClosed:
-                for x in self.actionsOrig:
-                    for y in self.actionsOrig:
-                        self.relation[x][y] = Med
+                for x in actionsOrig:
+                    for y in actionsOrig:
+                        relation[x][y] = Med
                 for x in self.profileLimits:
-                    self.relation[x] = {}
+                    relation[x] = {}
                     for y in self.actions:
-                        self.relation[x][y] = Med
+                        relation[x][y] = Med
             else:
-                for x in self.actionsOrig:
-                    self.relation[x] = {}
-                    for y in self.actionsOrig:
-                        self.relation[x][y] = Med
+                for x in actionsOrig:
+                    relation[x] = {}
+                    for y in actionsOrig:
+                        relation[x][y] = Med
                 for y in self.profileLimits:
                     for x in self.actions:
-                        self.relation[x][y] = Med
+                        relation[x][y] = Med
+            self.relation = relation
 
         # compute weak ordering
         sortingRelation = self.computeSortingRelation(StoreSorting=StoreSorting,Debug=Debug)
-        for x in self.actionsOrig:
-            for y in self.actionsOrig:
+        for x in actionsOrig:
+            for y in actionsOrig:
                 self.relation[x][y] = sortingRelation[x][y]
 
         # reset original action set
-        self.actions = self.actionsOrig
+        self.actions = actionsOrig
         self.order = len(self.actions)
 
         # compute weak ordering by choosing
@@ -2856,30 +2858,9 @@ class _QuantilesSortingDigraph(SortingDigraph):
             else:
                 x = list(set(cC[cCKeys[n2]]) - (setx | sety))
             ordering.append( ( (Decimal(str(n2+1)),x),(Decimal(str(n2+1)),x) ) )
-
-##        orderingList = []
-##        for i in range(n2):
-##            x = ordering[i][0][1]
-##            if x != []:
-##                orderingList.append(x)
-##        if 2*n2 < n:
-##            x = ordering[i][0][1]
-##            y = ordering[i][1][1]
-##            if x != []:
-##                orderingList.append(x)
-##            if y != []:
-##                orderingList.append(y)
-##        for i in range(n2):
-##            y = ordering[n2-i-1][1][1]
-##            if y != []:
-##                orderingList.append(y)
-##            
         
         weakOrdering = {'result':ordering}
-
         WeakOrder.showWeakOrder(self,weakOrdering)
-
-##        return orderingList
 
     def computeWeakOrder(self,Descending=True,Debug=False):
         """
@@ -2942,11 +2923,6 @@ class _QuantilesSortingDigraph(SortingDigraph):
             y = ordering[n-i-1][1][1]
             if y != []:
                 orderingList.append(y)
-##            
-##        
-##        weakOrdering = {'result':ordering}
-##
-##        WeakOrder.showWeakOrder(self,weakOrdering)
 
         return orderingList
 
@@ -2978,7 +2954,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
 
     def _computeQuantiles(self,x,Debug=False):
         """
-        renders the limiting quantiles
+        Renders the limiting quantiles.
         """
         from math import floor
         if isinstance(x,int):
@@ -3194,79 +3170,6 @@ class _QuantilesSortingDigraph(SortingDigraph):
                     sortingRelation[y][x] = Max
             currActions = currActions - ibch
         return sortingRelation
-
-##class _OptimalHarmonicQuantilesSortingDigraph(QuantilesSortingDigraph):
-##    """
-##    Specialisation of the QuantilesSortingDigraph Class
-##    for optimal sorting of alternatives into
-##    quantiles delimited ordered classes. 
-##    """
-##    def __init__(self,argPerfTab=None,
-##                 minQuantiles=4,
-##                 maxQuantiles=200,
-##                 LowerClosed=True,
-##                 PrefThresholds=True,
-##                 hasNoVeto=False,
-##                 minValuation=-100.0,
-##                 maxValuation=100.0,
-##                 outrankingType = "bipolar",
-##                 Prudent=False,
-##                 Threading=False,
-##                 Debug=False):
-##        
-##        from copy import copy as deepcopy
-##        if argPerfTab != None:
-##            t = argPerfTab
-##        else:
-##            t = RandomCBPerformanceTableau()
-##        g = BipolarOutrankingDigraph(t)
-##        maxCorr = {'correlation': Decimal('-1.0')}
-##        maxCorr['determination'] = Decimal('0.0')
-##        qs = None
-##        nbrActions = len(t.actions)
-##        nq = nbrActions+1
-##        divNbrActions = []
-##        for i in range(minQuantiles,nq):
-##            if (nbrActions%i) == 0:
-##                divNbrActions.append(i)
-##        if Debug:
-##            print(divNbrActions)
-##        testNQ = [(i+1) for i in divNbrActions]
-##        for m in range(2,10):
-##            if m*(nbrActions+1) < maxQuantiles:
-##                testNQ.append(m*(nbrActions+1))
-##        if Debug:
-##            print(testNQ)
-##        for nq in testNQ:
-##            if Debug:
-##                print( '%d-tiling' % (nq) )
-##            qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,Threading=False)
-##            qs0Corr = g.computeOrdinalCorrelation(qs0)
-##            if Debug:
-##                print( 'correlation0 = %.3f' % qs0Corr['correlation'] )
-##            if Prudent:
-##                if qs0Corr['correlation'] > maxCorr['correlation']:
-##                    maxCorr = deepcopy(qs0Corr)
-##                    maxqs = deepcopy(qs0)                
-##            else:
-##                if qs0Corr['correlation']*qs0Corr['determination'] > maxCorr['correlation']*maxCorr['determination']:
-##                    maxCorr = deepcopy(qs0Corr)
-##                    maxqs = deepcopy(qs0)
-##            
-##        self.name = deepcopy(maxqs.name)
-##        self.actions = deepcopy(maxqs.actions)
-##        self.actionsOrig = deepcopy(maxqs.actionsOrig)
-##        self.order = len(self.actions)
-##        self.criteria = deepcopy(maxqs.criteria)
-##        self.evaluation = deepcopy(maxqs.evaluation)
-##        self.profiles = deepcopy(maxqs.profiles)
-##        self.valuationdomain = deepcopy(maxqs.valuationdomain)
-##        self.relation = deepcopy(maxqs.relation)
-##        self.categories = deepcopy(maxqs.categories)
-##        self.criteriaCategoryLimits = deepcopy(maxqs.criteriaCategoryLimits)
-##        self.limitingQuantiles = deepcopy(maxqs.limitingQuantiles)
-##        self.gamma = self.gammaSets()
-##        self.notGamma = self.notGammaSets()
            
 #----------test SortingDigraph class ----------------
 if __name__ == "__main__":
