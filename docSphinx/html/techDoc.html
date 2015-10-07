@@ -1153,7 +1153,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3313,7 +3313,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4060,7 +4060,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4873,6 +4873,19 @@ the high category limit.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="sortingDigraphs.QuantilesSortingDigraph.showActionCategories">
+<code class="descname">showActionCategories</code><span class="sig-paren">(</span><em>action</em>, <em>Debug=False</em>, <em>Comments=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.showActionCategories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the union of categories in which the given action is sorted positively or null into.
+Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.QuantilesSortingDigraph.showActionsSortingResult">
+<code class="descname">showActionsSortingResult</code><span class="sig-paren">(</span><em>actionSubset=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.showActionsSortingResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows the quantiles sorting result all (default) of a subset of the decision actions.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="sortingDigraphs.QuantilesSortingDigraph.showHTMLQuantileOrdering">
 <code class="descname">showHTMLQuantileOrdering</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>strategy='optimistic'</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.showHTMLQuantileOrdering" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shows the html version of the quantile preordering in a browser window.</p>
@@ -5019,7 +5032,7 @@ a standard random instance with 10 actions and 13 criteria is generated by defau
 
 <dl class="method">
 <dt id="sortingDigraphs.SortingDigraph.computeSortingCharacteristics">
-<code class="descname">computeSortingCharacteristics</code><span class="sig-paren">(</span><em>action=None</em>, <em>StoreSorting=True</em>, <em>Comments=False</em>, <em>Debug=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.SortingDigraph.computeSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeSortingCharacteristics</code><span class="sig-paren">(</span><em>action=None</em>, <em>StoreSorting=True</em>, <em>Comments=False</em>, <em>Debug=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.SortingDigraph.computeSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a bipolar-valued bi-dictionary relation
 representing the degree of credibility of the
 assertion that &#8220;action x in A belongs to category c in C&#8221;,
