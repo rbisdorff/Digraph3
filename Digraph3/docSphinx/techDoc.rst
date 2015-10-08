@@ -17,9 +17,9 @@ Two downlaod options are given:
 ..$svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
        
 2. Or, download and extract the latest distribution tar.gz archive::
-http://leopold-loewenheim.uni.lu/svn/repos/Digraph3/dist/digraphs-Python3-xxx.tar.gz 
+http://leopold-loewenheim.uni.lu/Digraph3/dist/ 
 
-Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://charles-sanders-peirce.uni.lu/bisdorff/>, University of Luxembourg.
+Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>, University of Luxembourg.
 
 To be fully functional, the Digraph3 resources mainly need the `graphviz <http://graphviz.org>`_ tools and the `R statistics resources <http://www.r-project.org>`_ to be installed. When exploring digraph isomorphisms, the `nauty <http://www.cs.sunysb.edu/~algorith/implement/nauty/implement.shtml>`_ isomorphism testing program is required. two specific criteria and actions clustering methods of the Digraph class furthermore require the `calmat <http://leopold-loewenheim.uni.lu/svn/repos/Calmat/>`_ matrix computing resource to be installed. 
 
