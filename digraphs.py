@@ -7910,34 +7910,34 @@ class Digraph(object):
             self.netFlowsRankingDict = netFlowsRanking
         return netFlowsRanking
 
-    def computeNetFlowsRankingDictOld(self,Stored=True,Debug=False):
-        """
-        renders an ordered dictionary of the actions (from best to worst)
-        following the net flows ranking rule with rank and net flow attributes.
-        """
-        relation = self.relation
-        netFlowsOrder = []
-        for x in self.actions.keys():
-            xnetflows = Decimal('0.0')      
-            for y in dict.keys(self.actions):
-                if y != x:
-                    xnetflows += relation[x][y] - relation[y][x]
-            if Debug:
-                print('netflow for %s = %.2f' % (x, xnetflows))
-            netFlowsOrder.append((-xnetflows,x))
-            # reversed sorting with keeping the actions natural ordering
-        netFlowsOrder.sort()
-        if Debug:
-            print(netFlowsOrder)
-
-        netFlowsRanking = OrderedDict()
-        k = 1
-        for item in netFlowsOrder:
-            netFlowsRanking[item[1]] = {'rank':k,'netFlow':-item[0]}
-            k += 1
-        if Stored:
-            self.netFlowsRankingDict = netFlowsRanking
-        return netFlowsRanking
+##    def computeNetFlowsRankingDictOld(self,Stored=True,Debug=False):
+##        """
+##        renders an ordered dictionary of the actions (from best to worst)
+##        following the net flows ranking rule with rank and net flow attributes.
+##        """
+##        relation = self.relation
+##        netFlowsOrder = []
+##        for x in self.actions.keys():
+##            xnetflows = Decimal('0.0')      
+##            for y in dict.keys(self.actions):
+##                if y != x:
+##                    xnetflows += relation[x][y] - relation[y][x]
+##            if Debug:
+##                print('netflow for %s = %.2f' % (x, xnetflows))
+##            netFlowsOrder.append((-xnetflows,x))
+##            # reversed sorting with keeping the actions natural ordering
+##        netFlowsOrder.sort()
+##        if Debug:
+##            print(netFlowsOrder)
+##
+##        netFlowsRanking = OrderedDict()
+##        k = 1
+##        for item in netFlowsOrder:
+##            netFlowsRanking[item[1]] = {'rank':k,'netFlow':-item[0]}
+##            k += 1
+##        if Stored:
+##            self.netFlowsRankingDict = netFlowsRanking
+##        return netFlowsRanking
 
     def computeNetFlowsRanking(self,Debug=False):
         """
@@ -8106,7 +8106,7 @@ class Digraph(object):
 
     def computeRankedPairsRanking(self):
         ordering = self.computeRankedPairsOrder()
-        return [x for x in reversed(ordering)]
+        return list(reversed(ordering))
 
     def computeKemenyOrder(self,isProbabilistic=False, orderLimit=7, seed=None, sampleSize=1000, Debug=False):
         """
