@@ -1275,7 +1275,6 @@ class QuantilesSortingDigraph(SortingDigraph):
     .. image:: quantilesSorting.png
     """
     def __init__(self,argPerfTab=None,\
-                 CopyPerfTab=True,\
                  limitingQuantiles=None,\
                  LowerClosed=False,\
                  PrefThresholds=True,\
@@ -1284,6 +1283,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                  WithSortingRelation=True,\
                  CompleteOutranking = False,\
                  StoreSorting=False,\
+                 CopyPerfTab=False,\
                  Threading=False,\
                  nbrCores=None,\
                  nbrOfProcesses=None,\
@@ -1515,7 +1515,9 @@ class QuantilesSortingDigraph(SortingDigraph):
 
         else:
             self.computeCategoryContents(StoreSorting=StoreSorting,\
-                                Threading=Threading,nbrOfCPUs=nbrOfProcesses,Comments=Comments)
+                                         Threading=Threading,\
+                                         nbrOfCPUs=nbrOfProcesses,\
+                                         Comments=Comments)
 
     def showActionCategories(self,action,Debug=False,Comments=True,\
                              Threading=False,nbrOfCPUs=None):
