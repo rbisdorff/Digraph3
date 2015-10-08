@@ -1232,17 +1232,19 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
     For other parameters settings, see the corresponding QuantilesSortingDigraph class.
 
     """
-    def __init__(self,argPerfTab=None,CopyPerfTab=True,
-                 quantiles=None,
-                 quantilesOrderingStrategy='average',
-                 LowerClosed=True,
-                 WithKohlerOrdering=False,
-                 WithNetFlowsOrdering=True,
-                 minimalComponentSize=None,
-                 Threading=False,nbrOfCPUs=None,
-                 nbrOfThreads=None,
-                 save2File=None,
-                 Comments=False,
+    def __init__(self,argPerfTab=None,\
+                 quantiles=None,\
+                 quantilesOrderingStrategy='average',\
+                 LowerClosed=True,\
+                 WithKohlerOrdering=False,\
+                 WithNetFlowsOrdering=True,\
+                 minimalComponentSize=None,\
+                 Threading=False,\
+                 nbrOfCPUs=None,\
+                 nbrOfThreads=None,\
+                 save2File=None,\
+                 CopyPerfTab=True,\
+                 Comments=False,\
                  Debug=False):
         
         from digraphs import Digraph
@@ -1283,17 +1285,18 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
         if Comments:        
             print('Computing the %d-quantiles sorting digraph of order %d ...' % (quantiles,na))
         #if Threading:
-        qs = QuantilesSortingDigraph(argPerfTab=perfTab,CopyPerfTab=CopyPerfTab,
-                                        limitingQuantiles=quantiles,
-                                        LowerClosed=LowerClosed,
-                                        CompleteOutranking=False,
-                                        StoreSorting=True,
-                                        WithSortingRelation=False,
-                                        Threading= self.sortingParameters['Threading'],
-                                        nbrCores=nbrOfCPUs,
-                                        nbrOfProcesses=nbrOfThreads,
-                                        Comments=Comments,
-                                        Debug=Debug)
+        qs = QuantilesSortingDigraph(argPerfTab=perfTab,\
+                                     limitingQuantiles=quantiles,\
+                                     LowerClosed=LowerClosed,\
+                                     CompleteOutranking=False,\
+                                     StoreSorting=True,\
+                                     WithSortingRelation=False,\
+                                     CopyPerfTab=CopyPerfTab,\
+                                     Threading= self.sortingParameters['Threading'],\
+                                     nbrCores=nbrOfCPUs,\
+                                     nbrOfProcesses=nbrOfThreads,\
+                                     Comments=Comments,\
+                                     Debug=Debug)
         self.runTimes = {'sorting': time() - t0}
 #        self.qs = qs
         self.valuationdomain = qs.valuationdomain
