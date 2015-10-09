@@ -2162,12 +2162,15 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##            if Comments:
 ##                self.Debug = True
             class myThread(Process):
-                def __init__(self, threadID, tempDirName, actions, catKeys, Debug):
+                def __init__(self, threadID, tempDirName, actions, catKeys, nq, Min, Max, Debug):
                     Process.__init__(self)
                     self.threadID = threadID
                     self.workingDirectory = tempDirName
                     self.actions = actions
                     self.catKeys = catKeys
+                    self.nq = nq
+                    self.Min = Min
+                    self.Max = Max
                     self.Debug = Debug
                 def run(self):
                     from pickle import dumps, loads
@@ -2176,35 +2179,42 @@ class QuantilesSortingDigraph(SortingDigraph):
                     if self.Debug:
                         print("Starting working in %s on %s" % (self.workingDirectory, str(self.threadID)))
                         print('actions,catKeys',self.actions,self.catKeys)
-                    fi = open('dumpSelf.py','rb')
-                    context = loads(fi.read())
+                    fi = open('dumpSelfRelation.py','rb')
+                    #context = loads(fi.read())
+                    relation = loads(fi.read())
                     fi.close()
-                    Min = context.valuationdomain['min']
-                    Max = context.valuationdomain['max']
+##                    Min = context.valuationdomain['min']
+##                    Max = context.valuationdomain['max']
+                    Min = self.Min
+                    Max = self.Max
                     sorting = {}
-                    nq = len(context.limitingQuantiles) - 1
-                    for x in self.actions:
+                    nq = self.nq
+                    #nq = len(context.limitingQuantiles) - 1
+                    actions = self.actions
+                    catKeys = self.catKeys
+                    #relation = context.relation
+                    for x in actions:
                         sorting[x] = {}
-                        for c in self.catKeys:
+                        for c in catKeys:
                             sorting[x][c] = {}
                             if LowerClosed:
                                 cKey= c+'-m'
                             else:
                                 cKey= c+'-M'
                             if LowerClosed:
-                                lowLimit = context.relation[x][cKey]
+                                lowLimit = relation[x][cKey]
                                 if int(c) < nq:
                                     cMaxKey = str(int(c)+1)+'-m'
-                                    notHighLimit = Max - context.relation[x][cMaxKey] + Min
+                                    notHighLimit = Max - relation[x][cMaxKey] + Min
                                 else:
                                     notHighLimit = Max
                             else:
                                 if int(c) > 1:
                                     cMinKey = str(int(c)-1)+'-M'
-                                    lowLimit = Max - context.relation[cMinKey][x] + Min
+                                    lowLimit = Max - relation[cMinKey][x] + Min
                                 else:
                                     lowLimit = Max
-                                notHighLimit = context.relation[cKey][x]
+                                notHighLimit = relation[cKey][x]
 ##                            cMinKey= c+'-m'
 ##                            cMaxKey= c+'-M'
 ##                            if LowerClosed:
@@ -2233,11 +2243,11 @@ class QuantilesSortingDigraph(SortingDigraph):
                 print('Threaded computing of sorting characteristics ...')        
             from tempfile import TemporaryDirectory,mkdtemp
             tempDirName = mkdtemp()
-            selfFileName = tempDirName +'/dumpSelf.py'
+            selfFileName = tempDirName +'/dumpSelfRelation.py'
             if Debug:
                 print('temDirName, selfFileName', tempDirName,selfFileName)
             fo = open(selfFileName,'wb')
-            pd = dumps(self,-1)
+            pd = dumps(self.relation,-1)
             fo.write(pd)
             fo.close()
 
@@ -2253,6 +2263,9 @@ class QuantilesSortingDigraph(SortingDigraph):
                 print('Nbr of threads = ',nbrOfCPUs)
                 print('Nbr of jobs/thread',nbrOfJobs)
             nbrOfThreads = 0
+            nq = len(self.limitingQuantiles) -1
+            Max = self.valuationdomain['max']
+            Min = self.valuationdomain['min']
             for j in range(nbrOfCPUs):
                 if Comments:
                     print('thread = %d/%d' % (j+1,nbrOfCPUs),end="...")
@@ -2265,7 +2278,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                 if Debug:
                     print(thActions)
                 if thActions != []:
-                    process = myThread(j,tempDirName,thActions,categories,self.Debug)
+                    process = myThread(j,tempDirName,thActions,categories,nq,Min,Max,self.Debug)
                     process.start()
                     nbrOfThreads += 1
             while active_children() != []:
