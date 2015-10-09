@@ -15,8 +15,7 @@ def testbigOutrankingDigraph():
     print('==>> Testing bigOutrankingDigraph instantiation')
     MP = True
     t0 = time()
-    tp = RandomCBPerformanceTableau(numberOfActions=100,Threading=MP,
-                                      seed=100)
+    tp = RandomCBPerformanceTableau(numberOfActions=100,Threading=MP)
     print(time()-t0)
     print(total_size(tp.evaluation))
     bg1 = BigOutrankingDigraphMP(tp,quantiles=10,quantilesOrderingStrategy='average',
@@ -51,11 +50,10 @@ def testMinimalComponentSize():
     print('==>> Testing bigOutrankingDigraph with minimal Component Size instantiation')
     MP = True
     t0 = time()
-    tp = RandomCBPerformanceTableau(numberOfActions=100,Threading=MP,
-                                      seed=100)
+    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP)
     print(time()-t0)
     print(total_size(tp.evaluation))
-    bg1 = BigOutrankingDigraphMP(tp,quantiles=50,quantilesOrderingStrategy='average',
+    bg1 = BigOutrankingDigraphMP(tp,quantiles=5,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
                                minimalComponentSize=5,
                                     Threading=MP,Debug=False)
@@ -69,10 +67,10 @@ def testMinimalComponentSize():
                                     Threading=MP,Debug=False)
     print(bg2.computeDecompositionSummaryStatistics())
     bg2.showDecomposition()
-    print(bg2)
     bg2.showRelationTable()
     print(bg1.computeOrdinalCorrelation(bg2,Debug=False))
     bg1.recodeValuation(-10,10,Debug=True)
     print(bg2.computeOrdinalCorrelation(bg1,Debug=False))
+    print(bg2)
     
 
