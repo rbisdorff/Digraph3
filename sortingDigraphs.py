@@ -128,21 +128,21 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                numberOfCriteria=13)
         else:
             perfTab = argPerfTab
-        # normalize the actions as a dictionary construct
-        if isinstance(perfTab.actions,list):
-            actions = OrderedDict()
-            for x in perfTab.actions:
-                actions[x] = {'name': str(x)}
-            self.actions = actions
-        else:
-            self.actions = deepcopy(perfTab.actions)
-
         # keep a copy of the original actions set before adding the profiles
-        self.actionsOrig = deepcopy(self.actions)
+        actionsOrig = deepcopy(perfTab.actions)
+        self.actionsOrig = actionsOrig
 
         #  input the profiles
         if argProfile != None:
             defaultProfiles = False
+            # normalize the actions as a dictionary construct
+            if isinstance(perfTab.actions,list):
+                actions = OrderedDict()
+                for x in perfTab.actions:
+                    actions[x] = {'name': str(x)}
+                self.actions = actions
+            else:
+                self.actions = deepcopy(perfTab.actions)
             self.criteria = deepcopy(perfTab.criteria)
             self.convertWeightFloatToDecimal()
             self.evaluation = deepcopy(perfTab.evaluation)
@@ -164,13 +164,12 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             defaultProfiles = True
             self.name = 'sorting_with_default_profiles'
             normPerfTab = NormalizedPerformanceTableau(perfTab)
+            self.actions = normPerfTab.actions
             self.criteria = normPerfTab.criteria
             self.convertWeightFloatToDecimal()
             self.evaluation = normPerfTab.evaluation
             self.convertEvaluationFloatToDecimal()
-
             # supposing all criteria scales between 0.0 and 100.0
-
             lowValue = 0.0
             highValue = 100.00
             # with preference direction = max
@@ -178,8 +177,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             k = int(100 / scaleSteps)
             for i in range(0,100+k,k):
                 categories[str(i)] = {'name':str(i), 'order':i}
-            self.categories = deepcopy(categories)
-
+            self.categories = categories
             criteriaCategoryLimits = OrderedDict()
             criteriaCategoryLimits['LowerClosed'] = LowerClosed
             for g in self.criteria:
@@ -196,39 +194,46 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         #print 'LowerClosed', LowerClosed
 
         # add the catogory limits to the actions set
-        self.profiles = {'min':{},'max':{}}
-        self.profileLimits = set()
+        profiles = {'min':{},'max':{}}
+        profileLimits = set()
+        actions = self.actions
+        criteria = self.criteria
+        evaluation = self.evaluation
 ##        categoryKeys = list(self.categories.keys())
 ##        criterionKeys = list(self.criteria.keys())
-        for c in self.categories.keys():
+        for c in categories.keys():
             cMinKey = c+'-m'
             cMaxKey = c+'-M'
-            self.profileLimits.add(cMinKey)
-            self.profileLimits.add(cMaxKey)
-            self.actions[cMinKey] = {'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
-            self.actions[cMaxKey] = {'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
-            self.profiles['min'][cMinKey] = {'category': c, 'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
-            self.profiles['max'][cMaxKey] = {'category': c, 'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
-            for g in self.criteria.keys():
+            profileLimits.add(cMinKey)
+            profileLimits.add(cMaxKey)
+            actions[cMinKey] = {'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
+            actions[cMaxKey] = {'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
+            profiles['min'][cMinKey] = {'category': c, 'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
+            profiles['max'][cMaxKey] = {'category': c, 'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
+            for g in criteria.keys():
                 try:
-                    if self.criteria[g]['preferenceDirection'] == 'max':
-                        self.evaluation[g][cMinKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['minimum']))
-                        self.evaluation[g][cMaxKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['maximum']))
-                    elif self.criteria[g]['preferenceDirection'] == 'min':
+                    if criteria[g]['preferenceDirection'] == 'max':
+                        evaluation[g][cMinKey] = Decimal(str(criteriaCategoryLimits[g][c]['minimum']))
+                        evaluation[g][cMaxKey] = Decimal(str(criteriaCategoryLimits[g][c]['maximum']))
+                    elif criteria[g]['preferenceDirection'] == 'min':
                         if not defaultProfiles:
-                            highValueg = Decimal(str(self.criteria[g]['scale'][1]))
+                            highValueg = Decimal(str(criteria[g]['scale'][1]))
                         else:
                             highValueg = Decimal(str(highValue))
                         #print 'highValue = ', highValue
-                        self.evaluation[g][cMinKey] = -(highValueg - Decimal(str(self.criteriaCategoryLimits[g][c]['minimum'])))
-                        self.evaluation[g][cMaxKey] = -(highValueg - Decimal(str(self.criteriaCategoryLimits[g][c]['maximum'])))
+                        evaluation[g][cMinKey] = -(highValueg - Decimal(str(criteriaCategoryLimits[g][c]['minimum'])))
+                        evaluation[g][cMaxKey] = -(highValueg - Decimal(str(criteriaCategoryLimits[g][c]['maximum'])))
                     else:
                         print('===>>>>> Error')
                 except:
 
-                    self.evaluation[g][cMinKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['minimum']))
-                    self.evaluation[g][cMaxKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['maximum']))
-
+                    evaluation[g][cMinKey] = Decimal(str(criteriaCategoryLimits[g][c]['minimum']))
+                    evaluation[g][cMaxKey] = Decimal(str(criteriaCategoryLimits[g][c]['maximum']))
+        self.actions = actions
+        self.profiles = profiles
+        self.profileLimits = profileLimits
+        self.criteria = criteria
+        self.evaluation = evaluation
         self.convertEvaluationFloatToDecimal()
 
         # construct outranking relation
@@ -242,10 +247,10 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             Med = (Max + Min)/Decimal('2.0')
             self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
             if LowerClosed:
-                self.relation = BipolarOutrankingDigraph._constructRelationWithThreading(self,self.criteria,
+                relation = BipolarOutrankingDigraph._constructRelationWithThreading(self,criteria,
                                                        self.evaluation,
-                                                       initial=self.actionsOrig,
-                                                       terminal=self.profileLimits,
+                                                       initial=actionsOrig,
+                                                       terminal=profileLimits,
                                                        hasNoVeto=hasNoVeto,
                                                        hasBipolarVeto=True,
                                                         Threading=Threading,
@@ -253,10 +258,10 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                         WithVetoCounts=False,
                                                         Debug=Debug)
             else:
-                self.relation = BipolarOutrankingDigraph._constructRelationWithThreading(self,self.criteria,
+                relation = BipolarOutrankingDigraph._constructRelationWithThreading(self,criteria,
                                                        self.evaluation,
-                                                       terminal=self.actionsOrig,
-                                                       initial=self.profileLimits,
+                                                       terminal=actionsOrig,
+                                                       initial=profileLimits,
                                                        hasNoVeto=hasNoVeto,
                                                         hasBipolarVeto=True,
                                                         Threading=Threading,
@@ -264,30 +269,32 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                         WithVetoCounts=False,
                                                         Debug=Debug)
             if LowerClosed:
-                for x in self.actionsOrig.keys():
-                    for y in self.actionsOrig.keys():
-                        self.relation[x][y] = Med
-                for x in self.profileLimits:
-                    self.relation[x] = {}
-                    for y in self.actions.keys():
-                        self.relation[x][y] = Med
+                for x in actionsOrig.keys():
+                    for y in actionsOrig.keys():
+                        relation[x][y] = Med
+                for x in profileLimits:
+                    relation[x] = {}
+                    for y in actions.keys():
+                        relation[x][y] = Med
             else:
-                for x in self.actionsOrig.keys():
-                    self.relation[x] = {}
-                    for y in self.actionsOrig.keys():
-                        self.relation[x][y] = Med
-                for y in self.profileLimits:
-                    for x in self.actions.keys():
-                        self.relation[x][y] = Med
+                for x in actionsOrig.keys():
+                    relation[x] = {}
+                    for y in actionsOrig.keys():
+                        relation[x][y] = Med
+                for y in profileLimits:
+                    for x in actions.keys():
+                        relation[x][y] = Med
+            self.relation = relation
 
         # compute weak ordering
         sortingRelation = self.computeSortingRelation(Debug=Debug,)
-        for x in self.actionsOrig.keys():
-            for y in self.actionsOrig.keys():
-                self.relation[x][y] = sortingRelation[x][y]
+        relation = self.relation
+        for x in actionsOrig.keys():
+            for y in actionsOrig.keys():
+                relation[x][y] = sortingRelation[x][y]
 
         # reset original action set
-        self.actions = self.actionsOrig
+        self.actions = actionsOrig
 
         # compute weak ordering by choosing
         # self.computeRankingByChoosing() !!! not scalable !!!
@@ -380,11 +387,13 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             LowerClosed = self.criteriaCategoryLimits['LowerClosed']
         except:
             LowerClosed = True
-        criterionKeys = [x for x in self.criteria]
-        categoryKeys = [x for x in self.categories]
-        for g in criterionKeys:
+        criteria = self.criteria
+        categories = self.categories
+        #criterionKeys = [x for x in self.criteria]
+        #categoryKeys = [x for x in self.categories]
+        for g in criteria:
             print(g)
-            for c in categoryKeys:
+            for c in categories:
                 if LowerClosed:
                     print('\t%s [%s; %s[' % (c, self.criteriaCategoryLimits[g][c]['minimum'],self.criteriaCategoryLimits[g][c]['maximum']))
                 else:
@@ -394,10 +403,10 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         """
         extract normal actions keys()
         """
-        profiles_m = set([x for x in list(self.profiles['min'].keys())])
-        profiles_M = set([x for x in list(self.profiles['max'].keys())])
+        profiles_m = set(self.profiles['min'])
+        profiles_M = set(self.profiles['max'])
         if action == None:
-            actionsExt = set([x for x in list(self.actions.keys())])
+            actionsExt = set(self.actions)
             if withoutProfiles:
                 return actionsExt - profiles_m - profiles_M
             else:
@@ -633,52 +642,52 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
 
-    def computeSortingCharacteristicsOld(self, action=None, Comments=False):
-        """
-        Renders a bipolar-valued bi-dictionary relation
-        representing the degree of credibility of the
-        assertion that "action x in A belongs to category c in C",
-        ie x outranks low category limit and does not outrank
-        the high category limit.
-        """
-        Min = self.valuationdomain['min']
-        Med = self.valuationdomain['med']
-        Max = self.valuationdomain['max']
-
-        actions = self.getActionsKeys(action)
-            
-        categories = self.orderedCategoryKeys()
-
-        try:
-            LowerClosed = self.criteriaCategoryLimits['LowerClosed']
-        except:
-            LowerClosed = True
-
-        sorting = {}
-        for x in actions:
-            sorting[x] = {}
-            for c in categories:
-                sorting[x][c] = {}
-                cMinKey= c+'-m'
-                cMaxKey= c+'-M'
-                if LowerClosed:
-                    lowLimit = self.relation[x][cMinKey]
-                    notHighLimit = Max - self.relation[x][cMaxKey] + Min
-                else:
-                    lowLimit = Max - self.relation[cMinKey][x] + Min
-                    notHighLimit = self.relation[cMaxKey][x]
-                if Comments:
-                    print('%s in %s: low = %.2f, high = %.2f' % \
-                          (x, c,lowLimit,notHighLimit), end=' ')
-                categoryMembership = min(lowLimit,notHighLimit)
-                sorting[x][c]['lowLimit'] = lowLimit
-                sorting[x][c]['notHighLimit'] = notHighLimit
-                sorting[x][c]['categoryMembership'] = categoryMembership
-
-                if Comments:
-                    print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
-
-        return sorting
+##    def computeSortingCharacteristicsOld(self, action=None, Comments=False):
+##        """
+##        Renders a bipolar-valued bi-dictionary relation
+##        representing the degree of credibility of the
+##        assertion that "action x in A belongs to category c in C",
+##        ie x outranks low category limit and does not outrank
+##        the high category limit.
+##        """
+##        Min = self.valuationdomain['min']
+##        Med = self.valuationdomain['med']
+##        Max = self.valuationdomain['max']
+##
+##        actions = self.getActionsKeys(action)
+##            
+##        categories = self.orderedCategoryKeys()
+##
+##        try:
+##            LowerClosed = self.criteriaCategoryLimits['LowerClosed']
+##        except:
+##            LowerClosed = True
+##
+##        sorting = {}
+##        for x in actions:
+##            sorting[x] = {}
+##            for c in categories:
+##                sorting[x][c] = {}
+##                cMinKey= c+'-m'
+##                cMaxKey= c+'-M'
+##                if LowerClosed:
+##                    lowLimit = self.relation[x][cMinKey]
+##                    notHighLimit = Max - self.relation[x][cMaxKey] + Min
+##                else:
+##                    lowLimit = Max - self.relation[cMinKey][x] + Min
+##                    notHighLimit = self.relation[cMaxKey][x]
+##                if Comments:
+##                    print('%s in %s: low = %.2f, high = %.2f' % \
+##                          (x, c,lowLimit,notHighLimit), end=' ')
+##                categoryMembership = min(lowLimit,notHighLimit)
+##                sorting[x][c]['lowLimit'] = lowLimit
+##                sorting[x][c]['notHighLimit'] = notHighLimit
+##                sorting[x][c]['categoryMembership'] = categoryMembership
+##
+##                if Comments:
+##                    print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+##
+##        return sorting
 
     def computeSortingCharacteristics(self, action=None, StoreSorting=True,Comments=False, Debug=False,\
                                         Threading=False, nbrOfCPUs=None):
@@ -721,24 +730,28 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     if self.Debug:
                         print("Starting working in %s on %s" % (self.workingDirectory, self.name))
                         print('actions,catKeys',self.actions,self.catKeys)
-                    fi = open('dumpSelf.py','rb')
-                    context = loads(fi.read())
+                    fi = open('dumpSelfRelation.py','rb')
+                    #context = loads(fi.read())
+                    relation = loads(fi.read())
                     fi.close()
                     Min = context.valuationdomain['min']
                     Max = context.valuationdomain['max']
+                    actions = self.actions
+                    catKeys = self.catKeys
+                    #relation = context.relation
                     sorting = {}
-                    for x in self.actions:
+                    for x in actions:
                         sorting[x] = {}
-                        for c in self.catKeys:
+                        for c in catKeys:
                             sorting[x][c] = {}
                             cMinKey= c+'-m'
                             cMaxKey= c+'-M'
                             if LowerClosed:
-                                lowLimit = context.relation[x][cMinKey]
-                                notHighLimit = Max - context.relation[x][cMaxKey] + Min
+                                lowLimit = relation[x][cMinKey]
+                                notHighLimit = Max - relation[x][cMaxKey] + Min
                             else:
-                                lowLimit = Max - context.relation[cMinKey][x] + Min
-                                notHighLimit = context.relation[cMaxKey][x]
+                                lowLimit = Max - relation[cMinKey][x] + Min
+                                notHighLimit = relation[cMaxKey][x]
                             if Debug:
                                 print('%s in %s: low = %.2f, high = %.2f' % \
                                       (x, c,lowLimit,notHighLimit), end=' ')
@@ -758,11 +771,11 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             print('Threaded computing of sorting characteristics ...')        
             from tempfile import TemporaryDirectory,mkdtemp
             tempDirName = mkdtemp()
-            selfFileName = tempDirName +'/dumpSelf.py'
+            selfFileName = tempDirName +'/dumpSelfRelation.py'
             if Debug:
                 print('temDirName, selfFileName', tempDirName,selfFileName)
             fo = open(selfFileName,'wb')
-            pd = dumps(self,-1)
+            pd = dumps(self.relation,-1)
             fo.write(pd)
             fo.close()
 
@@ -3200,7 +3213,7 @@ if __name__ == "__main__":
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
     #t = XMCDA2PerformanceTableau('spiegel2004')
     #t = XMCDA2PerformanceTableau('ex1')
-    t = RandomCBPerformanceTableau(numberOfActions=15,
+    t = RandomCBPerformanceTableau(numberOfActions=150,
                                     numberOfCriteria=5,
                                     weightDistribution='equiobjectives',
                                     seed=100)
@@ -3208,7 +3221,7 @@ if __name__ == "__main__":
     #t = XMCDA2PerformanceTableau('test')  
     t.showHTMLPerformanceHeatmap(colorLevels=9,ndigits=2,Correlations=True)
     qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
-                                     Threading=False,
+                                     Threading=True,
                                      Debug=False)
     qs.showHTMLQuantileOrdering(strategy='average')
     qs.showWeakOrder()
