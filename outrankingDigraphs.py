@@ -3923,8 +3923,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     fi = open(fiName,'rb')
                     splitActions = loads(fi.read())
                     fi.close()
-                    foName = 'splitRelation-'+str(self.threadID)+'.py'
-                    fo = open(foName,'wb')
+                    # compute partiel relation
                     if self.InitialSplit:
                         splitRelation = BipolarOutrankingDigraph._constructRelation(digraph,digraph.criteria,\
                                             digraph.evaluation,
@@ -3947,14 +3946,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                             WithVetoCounts=False,
                                             Debug=False,
                                             hasSymmetricThresholds=hasSymmetricThresholds)
-                    #fo.write(dumps(splitRelation,-1))
-                    # http://lbolla.info/blog/2014/05/14/experiments-in-pickling
-                    buff = BytesIO()
-                    pickler = Pickler(buff, -1)
-                    pickler.fast = 1
-                    pickler.dump(splitRelation)
-                    buff.flush()
-                    fo.write(buff.getvalue())
+                    # store partiel relation
+                    foName = 'splitRelation-'+str(self.threadID)+'.py'
+                    fo = open(foName,'wb')
+                    fo.write(dumps(splitRelation,-1))
                     fo.close()
                 # .......
              
@@ -3963,19 +3958,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             from tempfile import TemporaryDirectory
             with TemporaryDirectory() as tempDirName:
                 from copy import copy, deepcopy
+
                 #selfDp = copy(self)
                 selfFileName = tempDirName +'/dumpSelf.py'
                 if Debug:
                     print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
-                pd = dumps(self,-1)
-                fo.write(pd)
-##                buff = BytesIO()
-##                pickler = Pickler(buff, -1)
-##                pickler.fast = 1
-##                pickler.dump(self)
-##                buff.flush()
-##                fo.write(buff.getvalue())
+                fo.write(dumps(self,-1))
                 fo.close()
 
                 if nbrCores == None:
