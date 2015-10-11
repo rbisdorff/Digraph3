@@ -233,7 +233,7 @@ class LinearOrder(Digraph):
         fo = open(dotName,'w')
         fo.write('digraph G {\n')
         fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\ndigraphs module (graphviz), R. Bisdorff, 2011", size="')
+        fo.write('\\ndigraphs module (graphviz), R. Bisdorff, 2015", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             nodeName = str(actionkeys[i])
@@ -250,7 +250,8 @@ class LinearOrder(Digraph):
                         arcColor = 'black'
                 else:
                     arcColor = 'black'
-                edge = 'n%s-> n%s [dir=forward,style="setlinewidth(%d)",color=%s, arrowhead=normal] ;\n' % (i+1,i+2,self.relation[actionkeys[i]][actionkeys[i+1]],arcColor)
+                edge = 'n%s-> n%s [dir=forward,style="setlinewidth(%d)",color=%s, arrowhead=normal] ;\n' %\
+                       (i+1,i+2,self.relation[actionkeys[i]][actionkeys[i+1]],arcColor)
                 
                 fo.write(edge)
                      
@@ -846,21 +847,19 @@ class NetFlowsOrder(LinearOrder):
         from a given other digraph following
         the net flows ordering rule
         """
-        from copy import copy,deepcopy
+        from copy import deepcopy
+        #from itertools import product
+        
         # construct ranked pairs
         if coDual:
             otherCoDual = CoDualDigraph(other)
-            relation = otherCoDual.relation
-            #netFlows = otherCoDual.computeSingleCriteriaNetflows()
-            Max = otherCoDual.valuationdomain['max']
+            otherRelation = otherCoDual.relation
             if Debug:
                 otherCoDual.showRelationTable()
                 print(otherCoDual.valuationdomain)
                 #print netFlows
         else:
-            relation = deepcopy(other.relation)
-            #netFlows = other.computeSingleCriteriaNetflows()
-            Max = other.valuationdomain['max']
+            otherRelation = other.relation
             if Debug:
                 other.showRelationTable()
                 print(other.valuationdomain)
@@ -872,49 +871,64 @@ class NetFlowsOrder(LinearOrder):
         n = len(other.actions)
         
         # instatiates a Digraph template
-        g = IndeterminateDigraph(order=n)
-        g.actions = deepcopy(other.actions)
-        g.valuationdomain = {'min':Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
-        g.relation = {}
-        for x in dict.keys(g.actions):
-            g.relation[x] = {}
-            for y in dict.keys(g.actions):
-                g.relation[x][y] = g.valuationdomain['med']
-
-        #netflows = {}
-        netFlowsOrder = []
-        for x in g.actions.keys():
-            xnetflows = Decimal('0.0')      
-            for y in dict.keys(g.actions):
-                if y != x:
-                    xnetflows += relation[x][y] - relation[y][x]
-            if Debug:
-                print('netflow for %s = %.2f' % (x, xnetflows))
-            netFlowsOrder.append((-xnetflows,x))
-            # reversed sorting with keeping the actions natural ordering
-        netFlowsOrder.sort()
+        actions = other.actions
+        selfRelation = {}
+        Min = Decimal('-1.0')
+        Med = Decimal('0.0')
+        Max = Decimal('1.0')
+        valuationdomain = {'min': Min,\
+                           'med': Med,\
+                           'max': Max}
+        # compute net flows
+        netFlows = []
+        if other.valuationdomain['med'] == Decimal('0'):
+            for x in actions:
+                xnetflows = sum((otherRelation[x][y] - otherRelation[y][x]\
+                                 for y in actions))
+                if Debug:
+                    print('netflow for %s = %.2f' % (x, xnetflows))
+                netFlows.append((-xnetflows,x))
+                # reversed sorting with keeping the actions natural ordering
+        else:
+            for x in actions:
+                xnetflows = Decimal('0.0')      
+                for y in actions:
+                    if y != x:
+                        xnetflows += otherRelation[x][y] - otherRelation[y][x]
+                if Debug:
+                    print('netflow for %s = %.2f' % (x, xnetflows))
+                netFlows.append((xnetflows,x))
+                # reversed sorting with keeping the actions natural ordering
+        netFlows.sort()
         if Debug:
-            print(netFlowsOrder)
+            print(netFlows)
 
-        netFlowsRanking = [x[1] for x in netFlowsOrder]
+        netFlowsRanking = [x[1] for x in netFlows]
         self.netFlowsRanking = netFlowsRanking
-        
+        self.netFlowsOrder = list(reversed(netFlowsRanking))
+        if Debug:
+            print(self.netFlowsRanking)
+            print(self.netFlowsOrder)
+               
         for i in range(n):
-            for j in range(i+1,n):
-                x = netFlowsOrder[i][1]
-                y = netFlowsOrder[j][1]
-                g.relation[x][y] = g.valuationdomain['max']
-                g.relation[y][x] = g.valuationdomain['min']
+            x = netFlowsRanking[i]
+            selfRelation[x] = {}
+            for j in range(n):
+                y = netFlowsRanking[j]
+                if i < j:
+                    selfRelation[x][y] = Max
+                else:
+                    selfRelation[x][y] = Min
                 
-         
+        if Debug:
+            print(selfRelation) 
         self.name = other.name + '_ranked'        
-        self.actions = g.actions
+        self.actions = actions
         self.order = n
-        self.valuationdomain = g.valuationdomain
-        self.relation = g.relation
+        self.valuationdomain = valuationdomain
+        self.relation = selfRelation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-        self.netFlowsOrder = self.computeOrder()
         if Debug:
             self.showRelationTable()
             self.showOrdering()
