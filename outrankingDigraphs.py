@@ -2691,13 +2691,23 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
 #####    XMCDA 2.0            
 
-    def saveXMCDA2RubisChoiceRecommendation(self,fileName='temp',category='Rubis',subcategory='Choice Recommendation',author='digraphs Module (RB)',reference='saved from Python',comment=True,servingD3=False,relationName='Stilde',graphValuationType='bipolar',variant='standard',instanceID='void',stringNA='NA'):
+    def saveXMCDA2RubisChoiceRecommendation(self,fileName='temp',\
+                                            category='Rubis',subcategory='Choice Recommendation',\
+                                            author='digraphs Module (RB)',reference='saved from Python',\
+                                            comment=True,servingD3=False,relationName='Stilde',\
+                                            graphValuationType='bipolar',variant='standard',\
+                                            instanceID='void',stringNA='NA',\
+                                            Debug=True):
         """
         save complete Rubis problem and result in XMCDA 2.0 format with unicode encoding.
         """
         import codecs,copy
         selfOrig=copy.deepcopy(self)
+        if Debug:
+            print('Debug sel orig:', self.__dict__.keys())
         self.computeRubyChoice(_OldCoca=True)
+        if Debug:
+            print('Debug after computeRubyChoice:', self.__dict__.keys())
 
         if isinstance(self,RobustOutrankingDigraph):
             category = 'Robust Rubis'
@@ -2814,7 +2824,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
         # write potential actions 
         origActionsList = [x for x in self.actions_orig]
-        origActionsList.sort()
+        origActionsList.sort()            
         fo.write('<alternatives mcdaConcept="alternatives">\n')
         fo.write('<description>\n')
         fo.write('<title>%s</title>\n' % ('List of Alternatives'))
@@ -2843,6 +2853,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         
         # coca actions if any
         cocaActionsList = [x for x in self.actions if isinstance(x,frozenset)]
+        if Debug:
+            print('Debug: cocaActionsList',cocaActionsList) 
         if cocaActionsList != []:
             cocaActionsList.sort()
             fo.write('<alternatives mcdaConcept="%s">\n' % ('cocaActions'))
@@ -3248,7 +3260,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     fo.write('<element>\n')
                     fo.write('<alternativeID>')
                     if isinstance(x,frozenset):
-                        print(self.actions[x])
+                        #print(self.actions[x])
                         fo.write(str(self.actions[x]['name']))
                     else:
                         fo.write(str(x))
@@ -4093,9 +4105,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         if terminal == None:
             terminal = self.actions
         
-        totalweight = Decimal('0.0')
-        for c in dict.keys(criteria):
-            totalweight = totalweight + criteria[c]['weight']
+##        totalweight = Decimal('0.0')
+##        for c in dict.keys(criteria):
+##            totalweight = totalweight + criteria[c]['weight']
+        totalweight = sum([criteria[c]['weight'] for c in criteria])
         relation = {}
         concordanceRelation = {}
         vetos = []
@@ -4109,6 +4122,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             for b in terminal:
                 largePerformanceDifferencesCount[a][b] = {'positive':0,'negative':0}
 
+        
+        #nc = len(criteria)
         for a in initial:
             relation[a] = {}
             concordanceRelation[a] = {}
@@ -4117,7 +4132,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     relation[a][b] = Decimal('0.0')
                     concordanceRelation[a][b] = Decimal('0.0')
                 else:
-                    nc = len(criteria)
+                    
                     concordance = Decimal('0.0')
 
                     veto = {}
@@ -4133,7 +4148,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                 indx = criteria[c]['thresholds']['ind'][0]
                                 indy = criteria[c]['thresholds']['ind'][1]
                                 ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
-                            except:
+                            except KeyError:
                                 ind = None
                             try:
                                 wpx = criteria[c]['thresholds']['weakPreference'][0]
@@ -4142,7 +4157,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                     wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                 else:
                                     wp = wpx + wpy * abs(evaluation[c][a]) 
-                            except:
+                            except KeyError:
                                 wp = None
                             try:
                                 px = criteria[c]['thresholds']['pref'][0]
@@ -4151,7 +4166,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                     p = px + py * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                 else:
                                     p = px + py * abs(evaluation[c][a]) 
-                            except:
+                            except KeyError:
                                 p = None
                             d = evaluation[c][a] - evaluation[c][b]
                             lc0 = self._localConcordance(d,ind,wp,p)
@@ -4167,7 +4182,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                         wv = wvx + wvy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                     else:
                                         wv = wvx + wvy * abs(evaluation[c][a])
-                            except:
+                            except KeyError:
                                 wv = None
                             try:
                                 vx = criteria[c]['thresholds']['veto'][0]
@@ -4179,7 +4194,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                         v = vx + vy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                     else:
                                         v = vx + vy * abs(evaluation[c][a])
-                            except:
+                            except KeyError:
                                 v = None
                             veto[c] = (self._localVeto(d,wv,v),d,wv,v)
                             if veto[c][0] > Decimal('-1.0'):

@@ -6455,13 +6455,13 @@ class Digraph(object):
         try:
             self.actions_orig = copy.deepcopy(self.actions_orig)
         except:
-            self. actions_orig = copy.deepcopy(self.actions)
+            self.actions_orig = copy.deepcopy(self.actions)
         #self.actions_orig = actions_orig
         self.relation_orig = copy.deepcopy(self.relation)
 
-        self.actions = copy.deepcopy(_selfwcoc.actions)
+        self.actions = _selfwcoc.actions
         self.order = len(self.actions)
-        self.relation = copy.deepcopy(_selfwcoc.relation)
+        self.relation = _selfwcoc.relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         actions = set([x for x in self.actions])
@@ -6501,12 +6501,12 @@ class Digraph(object):
             self.showBadChoices()
         n1 = _selfwcoc.order
         nc = n1 - n0
-        if nc > 0 or b1 > 0:
-            self.actions = copy.deepcopy(self.actions_orig)
-            self.relation = copy.deepcopy(self.relation_orig)
-            self.order = len(self.actions)
-            self.gamma = self.gammaSets()
-            self.notGamma = self.notGammaSets()
+        #if nc > 0 or b1 > 0:
+        #self.actions = self.actions_orig
+        #self.relation = self.relation_orig
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
     
 
     def computeGoodChoiceVector(self,ker,Comments=False):
@@ -10571,17 +10571,18 @@ class _CocaDigraph(Digraph):
         ## else:
         ##     silent = not(comment)
         if digraph == None:
-            g = RandomValuationDigraph()
-            self.name = str(g.name)
-            self.actions = copy.copy(g.actions)
-            self.valuationdomain = copy.copy(g.valuationdomain)
-            self.relation = copy.copy(g.relation)
+##            g = RandomValuationDigraph()
+##            self.name = str(g.name)
+##            self.actions = g.actions
+##            self.valuationdomain = g.valuationdomain
+##            self.relation = g.relation
+            print('!!! Error: no valid digraph argument provided')
 
         elif isinstance(digraph,(Digraph,OutrankingDigraph,RandomOutrankingDigraph,BipolarOutrankingDigraph)):
             self.name = str(digraph.name)
-            self.actions = copy.copy(digraph.actions)
-            self.valuationdomain = copy.copy(digraph.valuationdomain)
-            self.relation = copy.copy(digraph.relation)
+            self.actions = copy.deepcopy(digraph.actions)
+            self.valuationdomain = copy.deepcopy(digraph.valuationdomain)
+            self.relation = copy.deepcopy(digraph.relation)
         else:
             fileName = digraph + 'py'
             argDict = {}
@@ -10624,7 +10625,7 @@ class _CocaDigraph(Digraph):
         """
         import copy,time
         order0 = self.order
-        if not(isinstance(self.actions,dict)):
+        if isinstance(self.actions,(list,set)):
             actions = {}
             for x in self.actions:
                 actions[x] = {'name':x}

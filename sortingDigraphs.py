@@ -3224,12 +3224,12 @@ if __name__ == "__main__":
 
 ##    t = PerformanceTableau('auditor2_2')
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
-    #t = XMCDA2PerformanceTableau('spiegel2004')
+    t = XMCDA2PerformanceTableau('spiegel2004')
     #t = XMCDA2PerformanceTableau('ex1')
-    t = RandomCBPerformanceTableau(numberOfActions=150,
-                                    numberOfCriteria=5,
-                                    weightDistribution='equiobjectives',
-                                    seed=100)
+##    t = RandomCBPerformanceTableau(numberOfActions=150,
+##                                    numberOfCriteria=5,
+##                                    weightDistribution='equiobjectives',
+##                                    seed=100)
 ##    t.saveXMCDA2('test',servingD3=False)
     #t = XMCDA2PerformanceTableau('test')  
     t.showHTMLPerformanceHeatmap(colorLevels=9,ndigits=2,Correlations=True)
