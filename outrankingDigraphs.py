@@ -2696,16 +2696,22 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                                             author='digraphs Module (RB)',reference='saved from Python',\
                                             comment=True,servingD3=False,relationName='Stilde',\
                                             graphValuationType='bipolar',variant='standard',\
-                                            instanceID='void',stringNA='NA',\
-                                            Debug=True):
+                                            instanceID='void',stringNA='NA',_OldCoca=True,\
+                                            Debug=False):
         """
         save complete Rubis problem and result in XMCDA 2.0 format with unicode encoding.
         """
         import codecs,copy
-        selfOrig=copy.deepcopy(self)
+
+        # save a copy of self
+        selfOrig = copy.deepcopy(self)
         if Debug:
             print('Debug sel orig:', self.__dict__.keys())
-        self.computeRubyChoice(_OldCoca=True)
+
+        # the next command augments self with chordless circuits,
+        # the case given ! _OldCoca is True by default for compatibility reasons
+        # with the old Rubis web services in D3 and D4 for instance !
+        self.computeRubyChoice(_OldCoca=_OldCoca)
         if Debug:
             print('Debug after computeRubyChoice:', self.__dict__.keys())
 
@@ -3360,6 +3366,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         
         if comment:
             print('File: ' + nameExt + ' saved !')
+
+        # restore self to its original content
+        self = selfOrig
 
 class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     """
