@@ -1423,7 +1423,8 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                     
             if Comments:
                 print('Processing the %d components' % nc )
-                print('Threading ...')        
+                print('Threading ...')
+            tdump = time()
             from tempfile import TemporaryDirectory,mkdtemp
             #with TemporaryDirectory() as tempDirName:
             tempDirName = mkdtemp()
@@ -1438,7 +1439,8 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
             pd = dumps(self,-1)
             fo.write(pd)
             fo.close()
-
+            if Comments:
+                print('dumping self: %.5f' % (time() - tdump))
             
             if nbrOfCPUs == None:
                 nbrOfCPUs = cpu_count()
