@@ -1164,10 +1164,10 @@ class BigOutrankingDigraph(BigDigraph):
         components = self.components
         # self.components is an ordered dictionary in decreasing preference
         for cki in components:
-##            comp = self.components[cki]
-##            pg = comp['subGraph']
-            pnf = NetFlowsOrder(components[cki]['subGraph'])
-            ranking += pnf.netFlowsRanking
+            comp = self.components[cki]
+            pg = comp['subGraph']
+##            pnf = NetFlowsOrder(components[cki]['subGraph'])
+            ranking += pg.computeNetFlowsRanking()
         return ranking
 
     def computeBoostedNetFlowsOrder(self):
@@ -1183,8 +1183,8 @@ class BigOutrankingDigraph(BigDigraph):
         for cki in compKeys:
             comp = self.components[cki]
             pg = comp['subGraph']
-            pnf = NetFlowsOrder(pg)
-            ordering += pnf.netFlowsOrder
+            #pnf = NetFlowsOrder(pg)
+            ordering += pg.computeNetFlowsOrder()
         return ordering
 
     def computeBoostedRankedPairsRanking(self):
