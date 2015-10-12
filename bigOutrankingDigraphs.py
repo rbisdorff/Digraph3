@@ -1392,15 +1392,6 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                         pt = PartialPerformanceTableau(context,actionsSubset=comp[1])
                         compDict['lowQtileLimit'] = comp[0][1]
                         compDict['highQtileLimit'] = comp[0][0]
-##                        pg = BipolarOutrankingDigraph(pt,Normalized=True)     
-##                        pg.__dict__.pop('criteria')
-##                        pg.__dict__.pop('evaluation')
-##                        pg.__dict__.pop('vetos')
-##                        pg.__dict__.pop('negativeVetos')
-##                        pg.__dict__.pop('largePerformanceDifferencesCount')
-##                        pg.__dict__.pop('concordanceRelation')
-##                        pg.__class__ = Digraph
-##                        compDict['subGraph'] = deepcopy(pg)
                         compDict['subGraph'] = BipolarOutrankingDigraph(pt,
                                                                         Normalized=True,
                                                                         WithConcordanceRelation=False,
@@ -1465,7 +1456,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                     stop = nc
                 lTest = list(range(start,stop))
                 if Comments:
-                    print(lTest)
+                    print([len(decomposition[i][1]) for i in range(start,stop)])
                 if lTest != []:
                     process = myThread(j,tempDirName,lTest,Debug)
                     process.start()
