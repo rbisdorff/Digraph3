@@ -1376,7 +1376,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                     from perfTabs import PartialPerformanceTableau
                     from outrankingDigraphs import BipolarOutrankingDigraph
                     chdir(self.workingDirectory)
-                    if Debug:
+                    if self.Debug:
                         print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadID)))
                         print('lTest',self.lTest)
                     fi = open('dumpSelf.py','rb')
@@ -1384,7 +1384,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                     fi.close()
                     for i in self.lTest:
                         comp = context.decomposition[i]
-                        if Debug:
+                        if self.Debug:
                             print(i, comp)
                         compKey = ('c%%0%dd' % (context.nd)) % (i+1)
                         compDict = {compKey: {}}
@@ -1392,14 +1392,14 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                         pt = PartialPerformanceTableau(context,actionsSubset=comp[1])
                         compDict['lowQtileLimit'] = comp[0][1]
                         compDict['highQtileLimit'] = comp[0][0]
-                        pg = BipolarOutrankingDigraph(pt,Normalized=True)     
-                        pg.__dict__.pop('criteria')
-                        pg.__dict__.pop('evaluation')
+##                        pg = BipolarOutrankingDigraph(pt,Normalized=True)     
+##                        pg.__dict__.pop('criteria')
+##                        pg.__dict__.pop('evaluation')
 ##                        pg.__dict__.pop('vetos')
 ##                        pg.__dict__.pop('negativeVetos')
 ##                        pg.__dict__.pop('largePerformanceDifferencesCount')
 ##                        pg.__dict__.pop('concordanceRelation')
-                        pg.__class__ = Digraph
+##                        pg.__class__ = Digraph
 ##                        compDict['subGraph'] = deepcopy(pg)
                         compDict['subGraph'] = BipolarOutrankingDigraph(pt,
                                                                         Normalized=True,
@@ -1414,7 +1414,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
 ##                        compDict['subGraph'].__dict__.pop('concordanceRelation')
                         compDict['subGraph'].__class__ = Digraph
                         splitComponent = (compKey,compDict)
-                        if Debug:
+                        if self.Debug:
                             print(compDict)
                         foName = 'splitComponent-'+str(i)+'.py'
                         fo = open(foName,'wb')
