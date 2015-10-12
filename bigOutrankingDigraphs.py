@@ -1435,7 +1435,6 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
             if Debug:
                 print('temDirName, selfFileName', tempDirName,selfFileName)
             fo = open(selfFileName,'wb')
-            #pd = dumps(selfDp,-1)
             pd = dumps(self,-1)
             fo.write(pd)
             fo.close()

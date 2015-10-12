@@ -72,5 +72,20 @@ def testMinimalComponentSize():
     bg1.recodeValuation(-10,10,Debug=True)
     print(bg2.computeOrdinalCorrelation(bg1,Debug=False))
     print(bg2)
-    
+
+def testMPComments():
+    print('==>> Testing commented bigOutrankingDigraph construction')
+    MP = True
+    t0 = time()
+    tp = RandomCBPerformanceTableau(numberOfActions=300,Threading=MP)
+    print(time()-t0)
+    print(total_size(tp.evaluation))
+    bg1 = BigOutrankingDigraphMP(tp,quantiles=5,quantilesOrderingStrategy='average',
+                                 LowerClosed=False,
+                                 minimalComponentSize=5,
+                                 Threading=MP,
+                                 Comments=True,
+                                 Debug=False)
+    print(bg1)
+ 
 
