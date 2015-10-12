@@ -847,30 +847,24 @@ class NetFlowsOrder(LinearOrder):
         from a given other digraph following
         the net flows ordering rule
         """
-        from copy import deepcopy
-        #from itertools import product
-        
-        # construct ranked pairs
+
+        #from copy import deepcopy
+        from collections import OrderedDict
+        from time import time
+
+        #timings
+        tt = time()
+        runTimes = OrderedDict()
+        # prepare local variables
         if coDual:
             otherCoDual = CoDualDigraph(other)
             otherRelation = otherCoDual.relation
-            if Debug:
-                otherCoDual.showRelationTable()
-                print(otherCoDual.valuationdomain)
-                #print netFlows
+##            if Debug:
+##                otherCoDual.showRelationTable()
+##                print(otherCoDual.valuationdomain)
         else:
             otherRelation = other.relation
-            if Debug:
-                other.showRelationTable()
-                print(other.valuationdomain)
-                #print netFlows
-                
-            
-        #actions = list(dict.keys(other.actions))
-        #actions.sort()
         n = len(other.actions)
-        
-        # instatiates a Digraph template
         actions = other.actions
         selfRelation = {}
         Min = Decimal('-1.0')
@@ -879,37 +873,43 @@ class NetFlowsOrder(LinearOrder):
         valuationdomain = {'min': Min,\
                            'med': Med,\
                            'max': Max}
+        runTimes['prepareLocals'] = time()-tt
+        
         # compute net flows
+        tnf = time()
         netFlows = []
-        if other.valuationdomain['med'] == Decimal('0'):
+        if other.valuationdomain['med'] == Med:
             for x in actions:
                 xnetflows = sum((otherRelation[x][y] - otherRelation[y][x]\
                                  for y in actions))
-                if Debug:
-                    print('netflow for %s = %.2f' % (x, xnetflows))
                 netFlows.append((-xnetflows,x))
-                # reversed sorting with keeping the actions natural ordering
+                # reversed sorting with keeping the actions initial ordering
+                # in case of ties
         else:
+            otherMax = other.valuationdomain['max']
+            otherMin = other.valuationdomain['min']
+            
             for x in actions:
-                xnetflows = Decimal('0.0')      
-                for y in actions:
-                    if y != x:
-                        xnetflows += otherRelation[x][y] - otherRelation[y][x]
-                if Debug:
-                    print('netflow for %s = %.2f' % (x, xnetflows))
-                netFlows.append((xnetflows,x))
-                # reversed sorting with keeping the actions natural ordering
+                xnetflows = sum((otherRelation[x][y] +\
+                                (otherMax - otherRelation[y][x] + otherMin)\
+                                 for y in actions))
+                netFlows.append((-xnetflows,x))
+                # reversed sorting with keeping the actions initial ordering
+                # in case of ties
         netFlows.sort()
-        if Debug:
-            print(netFlows)
+##        if Debug:
+##            print(netFlows)
 
         netFlowsRanking = [x[1] for x in netFlows]
         self.netFlowsRanking = netFlowsRanking
         self.netFlowsOrder = list(reversed(netFlowsRanking))
-        if Debug:
-            print(self.netFlowsRanking)
-            print(self.netFlowsOrder)
-               
+##        if Debug:
+##            print(self.netFlowsRanking)
+##            print(self.netFlowsOrder)
+        runTimes['netFlows'] = time() - tnf
+
+        # init relation
+        tr = time()
         for i in range(n):
             x = netFlowsRanking[i]
             selfRelation[x] = {}
@@ -919,9 +919,9 @@ class NetFlowsOrder(LinearOrder):
                     selfRelation[x][y] = Max
                 else:
                     selfRelation[x][y] = Min
-                
-        if Debug:
-            print(selfRelation) 
+        runTimes['relation'] = time() - tr      
+##        if Debug:
+##            print(selfRelation) 
         self.name = other.name + '_ranked'        
         self.actions = actions
         self.order = n
@@ -929,9 +929,11 @@ class NetFlowsOrder(LinearOrder):
         self.relation = selfRelation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-        if Debug:
-            self.showRelationTable()
-            self.showOrdering()
+        runTimes['totalTime'] = time() - tt
+        self.runTimes = runTimes
+##        if Debug:
+##            self.showRelationTable()
+##            self.showOrdering()
 
 class CopelandOrder(LinearOrder):
     """

@@ -1161,12 +1161,13 @@ class BigOutrankingDigraph(BigDigraph):
         """
         from linearOrders import NetFlowsOrder
         ranking = []
+        components = self.components
         # self.components is an ordered dictionary in decreasing preference
-        for cki in self.components:
-            comp = self.components[cki]
-            pg = comp['subGraph']
-            pko = NetFlowsOrder(pg)
-            ranking += pko.computeRanking()
+        for cki in components:
+##            comp = self.components[cki]
+##            pg = comp['subGraph']
+            pnf = NetFlowsOrder(components[cki]['subGraph'])
+            ranking += pnf.netFlowsRanking
         return ranking
 
     def computeBoostedNetFlowsOrder(self):
@@ -1182,7 +1183,8 @@ class BigOutrankingDigraph(BigDigraph):
         for cki in compKeys:
             comp = self.components[cki]
             pg = comp['subGraph']
-            ordering += pg.computeNetFlowsOrder()
+            pnf = NetFlowsOrder(pg)
+            ordering += pnf.netFlowsOrder
         return ordering
 
     def computeBoostedRankedPairsRanking(self):
@@ -1365,6 +1367,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                     Process.__init__(self)
                     self.threadID = threadID
                     self.workingDirectory = tempDirName
+                    self.lTest = lTest
                     self.Debug = Debug
                 def run(self):
                     from pickle import dumps, loads
@@ -1375,11 +1378,11 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                     chdir(self.workingDirectory)
                     if Debug:
                         print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadID)))
-                        print('lTest',lTest)
+                        print('lTest',self.lTest)
                     fi = open('dumpSelf.py','rb')
                     context = loads(fi.read())
                     fi.close()
-                    for i in lTest:
+                    for i in self.lTest:
                         comp = context.decomposition[i]
                         if Debug:
                             print(i, comp)
@@ -1389,22 +1392,26 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                         pt = PartialPerformanceTableau(context,actionsSubset=comp[1])
                         compDict['lowQtileLimit'] = comp[0][1]
                         compDict['highQtileLimit'] = comp[0][0]
-##                        pg = BipolarOutrankingDigraph(pt,Normalized=True)     
-##                        pg.__dict__.pop('criteria')
-##                        pg.__dict__.pop('evaluation')
+                        pg = BipolarOutrankingDigraph(pt,Normalized=True)     
+                        pg.__dict__.pop('criteria')
+                        pg.__dict__.pop('evaluation')
 ##                        pg.__dict__.pop('vetos')
 ##                        pg.__dict__.pop('negativeVetos')
 ##                        pg.__dict__.pop('largePerformanceDifferencesCount')
 ##                        pg.__dict__.pop('concordanceRelation')
-##                        pg.__class__ = Digraph
+                        pg.__class__ = Digraph
 ##                        compDict['subGraph'] = deepcopy(pg)
-                        compDict['subGraph'] = BipolarOutrankingDigraph(pt,Normalized=True)     
+                        compDict['subGraph'] = BipolarOutrankingDigraph(pt,
+                                                                        Normalized=True,
+                                                                        WithConcordanceRelation=False,
+                                                                        WithVetoCounts=False,
+                                                                        CopyPerfTab=False)     
                         compDict['subGraph'].__dict__.pop('criteria')
                         compDict['subGraph'].__dict__.pop('evaluation')
-                        compDict['subGraph'].__dict__.pop('vetos')
-                        compDict['subGraph'].__dict__.pop('negativeVetos')
-                        compDict['subGraph'].__dict__.pop('largePerformanceDifferencesCount')
-                        compDict['subGraph'].__dict__.pop('concordanceRelation')
+##                        compDict['subGraph'].__dict__.pop('vetos')
+##                        compDict['subGraph'].__dict__.pop('negativeVetos')
+##                        compDict['subGraph'].__dict__.pop('largePerformanceDifferencesCount')
+##                        compDict['subGraph'].__dict__.pop('concordanceRelation')
                         compDict['subGraph'].__class__ = Digraph
                         splitComponent = (compKey,compDict)
                         if Debug:
@@ -1496,14 +1503,12 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
         if WithKohlerOrdering:
             t0 = time()
             self.boostedKohlerOrder = self.computeBoostedKohlerOrder()
-            self.boostedKohlerRanking = list(self.boostedKohlerOrder)
-            self.boostedKohlerRanking.reverse()
+            self.boostedKohlerRanking = list(reversed(self.boostedKohlerOrder))
             self.runTimes['ordering'] = time() - t0
         if WithNetFlowsOrdering:
             t0 = time()
             self.boostedNetFlowsOrder = self.computeBoostedNetFlowsOrder()
-            self.boostedNetFlowsRanking = list(self.boostedNetFlowsOrder)
-            self.boostedNetFlowsRanking.reverse()
+            self.boostedNetFlowsRanking = list(reversed(self.boostedNetFlowsOrder))
             self.runTimes['ordering'] = time() - t0
         if Comments:
             print('ordering time: %.4f' % self.runTimes['ordering']  )
