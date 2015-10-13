@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 # Python implementation of digraphs
 # sub-module for outranking digraphs
-# Current revision $Revision: 1.43 $
-# Copyright (C) 2006-20013  Raymond Bisdorff
+# Copyright (C) 2006-20015  Raymond Bisdorff
 #
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -20,7 +19,7 @@
 #
 #######################
 
-__version__ = "$Revision: 1.43 $"
+__version__ = "Revision: Py35"
 
 from digraphs import *
 from xmlrpc.client import ServerProxy
