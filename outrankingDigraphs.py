@@ -3906,12 +3906,14 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             class myThread(Process):
                 def __init__(self, threadID,\
                              InitialSplit, tempDirName,\
+                             splitActions,\
                              hasNoVeto, hasBipolarVeto,\
                              hasSymmetricThresholds, Debug):
                     Process.__init__(self)
                     self.threadID = threadID
                     self.InitialSplit = InitialSplit
                     self.workingDirectory = tempDirName
+                    self.splitActions = splitActions
                     self.hasNoVeto = hasNoVeto
                     self.hasBipolarVeto = hasBipolarVeto,
                     hasSymmetricThresholds = hasSymmetricThresholds,
@@ -3921,15 +3923,16 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     from pickle import Pickler, dumps, loads
                     from os import chdir
                     chdir(self.workingDirectory)
-                    if Debug:
-                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
+##                    if Debug:
+##                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
                     fi = open('dumpSelf.py','rb')
                     digraph = loads(fi.read())
                     fi.close()
-                    fiName = 'splitActions-'+str(self.threadID)+'.py'
-                    fi = open(fiName,'rb')
-                    splitActions = loads(fi.read())
-                    fi.close()
+                    splitActions = self.splitActions
+##                    fiName = 'splitActions-'+str(self.threadID)+'.py'
+##                    fi = open(fiName,'rb')
+##                    splitActions = loads(fi.read())
+##                    fi.close()
                     # compute partiel relation
                     if self.InitialSplit:
                         splitRelation = BipolarOutrankingDigraph._constructRelation(digraph,digraph.criteria,\
@@ -3953,7 +3956,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                             WithVetoCounts=False,
                                             Debug=False,
                                             hasSymmetricThresholds=hasSymmetricThresholds)
-                    # store partiel relation
+                    # store partial relation
                     foName = 'splitRelation-'+str(self.threadID)+'.py'
                     fo = open(foName,'wb')
                     fo.write(dumps(splitRelation,-1))
@@ -3968,8 +3971,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
                 #selfDp = copy(self)
                 selfFileName = tempDirName +'/dumpSelf.py'
-                if Debug:
-                    print('temDirName, selfFileName', tempDirName,selfFileName)
+##                if Debug:
+##                    print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
                 fo.write(dumps(self,-1))
                 fo.close()
@@ -3989,8 +3992,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     n = nt
                     actions2Split = list(terminal)
                     InitialSplit = False
-                if Debug:
-                    print('InitialSplit, actions2Split', InitialSplit, actions2Split)
+##                if Debug:
+##                    print('InitialSplit, actions2Split', InitialSplit, actions2Split)
             
                 nit = n//nbrCores
                 nbrOfJobs = nbrCores
@@ -4010,6 +4013,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                         relation[x][y] = self.valuationdomain['med']
                 i = 0
                 actionsRemain = set(actions2Split)
+                splitActionsList = []
                 for j in range(nbrOfJobs):
                     if Comments:
                         print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ")
@@ -4021,19 +4025,21 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             splitActions = list(actionsRemain)
                         i += 1
                     if Comments:
-                        print(len(splitActions))
-                    if Debug:
-                        print(splitActions)
+                        print('%d' % (len(splitActions)) )
+##                    if Debug:
+##                        print(splitActions)
                     actionsRemain = actionsRemain - set(splitActions)
-                    if Debug:
-                        print(actionsRemain)
-                    foName = tempDirName+'/splitActions-'+str(j)+'.py'
-                    fo = open(foName,'wb')
-                    spa = dumps(splitActions,-1)
-                    fo.write(spa)
-                    fo.close()
+##                    if Debug:
+##                        print(actionsRemain)
+                    splitActionsList.append(splitActions)
+##                    foName = tempDirName+'/splitActions-'+str(j)+'.py'
+##                    fo = open(foName,'wb')
+##                    spa = dumps(splitActions,-1)
+##                    fo.write(spa)
+##                    fo.close()
                     splitThread = myThread(j,InitialSplit,
-                                           tempDirName,hasNoVeto,hasBipolarVeto,
+                                           tempDirName,splitActions,
+                                           hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,Debug)
                     splitThread.start()
                     
@@ -4042,21 +4048,22 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
                 if Comments:    
                     print('Exiting computing threads')
-                for j in range(nbrOfJobs):
+                for j in range(len(splitActionsList)):
                     #print('Post job-%d/%d processing' % (j+1,nbrOfJobs))
                     if Debug:
                         print('job',j)
-                    fiName = tempDirName+'/splitActions-'+str(j)+'.py'
-                    fi = open(fiName,'rb')
-                    splitActions = loads(fi.read())
-                    if Debug:
-                        print('splitActions',splitActions)
-                    fi.close()
+##                    fiName = tempDirName+'/splitActions-'+str(j)+'.py'
+##                    fi = open(fiName,'rb')
+##                    splitActions = loads(fi.read())
+##                    fi.close()
+                    splitActions = splitActionsList[j]
+##                    if Debug:
+##                        print('splitActions',splitActions)
                     fiName = tempDirName+'/splitRelation-'+str(j)+'.py'
                     fi = open(fiName,'rb')
                     splitRelation = loads(fi.read())
-                    if Debug:
-                        print('splitRelation',splitRelation)
+##                    if Debug:
+##                        print('splitRelation',splitRelation)
                     fi.close()
 
                     #relation.update(splitRelation)
@@ -8811,7 +8818,7 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-    Threading = False
+    Threading = True
     t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
                                    numberOfCriteria=13,\
                                    weightDistribution='equiobjectives',

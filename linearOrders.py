@@ -880,8 +880,8 @@ class NetFlowsOrder(LinearOrder):
         netFlows = []
         if other.valuationdomain['med'] == Med:
             for x in actions:
-                xnetflows = sum((otherRelation[x][y] - otherRelation[y][x]\
-                                 for y in actions))
+                xnetflows = sum((otherRelation[x][y] - otherRelation[y][x])\
+                                 for y in actions)
                 netFlows.append((-xnetflows,x))
                 # reversed sorting with keeping the actions initial ordering
                 # in case of ties
@@ -891,8 +891,8 @@ class NetFlowsOrder(LinearOrder):
             
             for x in actions:
                 xnetflows = sum((otherRelation[x][y] +\
-                                (otherMax - otherRelation[y][x] + otherMin)\
-                                 for y in actions))
+                                (otherMax - otherRelation[y][x] + otherMin))\
+                                 for y in actions)
                 netFlows.append((-xnetflows,x))
                 # reversed sorting with keeping the actions initial ordering
                 # in case of ties

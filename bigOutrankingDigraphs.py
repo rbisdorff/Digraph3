@@ -409,9 +409,9 @@ class BigDigraph(object):
         Renders the sum of the squares (without diagonal) of the orders of the component's subgraphs
         over the square (without diagonal of the big digraph order. 
         """
-        fillRate = sum([(self.components[comp]['subGraph'].order*\
+        fillRate = sum((self.components[comp]['subGraph'].order*\
                          (self.components[comp]['subGraph'].order-1))\
-                        for comp in self.components])
+                        for comp in self.components)
         return fillRate/( self.order*(self.order-1) )
 
 ##    def computeCriterionCorrelation(self,criterion,Threading=False,\
