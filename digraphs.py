@@ -7961,7 +7961,7 @@ class Digraph(object):
         following the net flows ranking rule.
         """
         netFlowsRankingDict = self._computeNetFlowsRankingDict()
-        netFlowsOrder = list(reversed(netFlowsRankingDict.keys()))
+        netFlowsOrder = list(reversed(list(netFlowsRankingDict.keys())))
         return netFlowsOrder
 
     def computeKohlerRankingDict(self,Debug=False):
