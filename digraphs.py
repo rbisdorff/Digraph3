@@ -7917,35 +7917,6 @@ class Digraph(object):
             self.netFlowsRankingDict = netFlowsRanking
         return netFlowsRanking
 
-##    def computeNetFlowsRankingDictOld(self,Stored=True,Debug=False):
-##        """
-##        renders an ordered dictionary of the actions (from best to worst)
-##        following the net flows ranking rule with rank and net flow attributes.
-##        """
-##        relation = self.relation
-##        netFlowsOrder = []
-##        for x in self.actions.keys():
-##            xnetflows = Decimal('0.0')      
-##            for y in dict.keys(self.actions):
-##                if y != x:
-##                    xnetflows += relation[x][y] - relation[y][x]
-##            if Debug:
-##                print('netflow for %s = %.2f' % (x, xnetflows))
-##            netFlowsOrder.append((-xnetflows,x))
-##            # reversed sorting with keeping the actions natural ordering
-##        netFlowsOrder.sort()
-##        if Debug:
-##            print(netFlowsOrder)
-##
-##        netFlowsRanking = OrderedDict()
-##        k = 1
-##        for item in netFlowsOrder:
-##            netFlowsRanking[item[1]] = {'rank':k,'netFlow':-item[0]}
-##            k += 1
-##        if Stored:
-##            self.netFlowsRankingDict = netFlowsRanking
-##        return netFlowsRanking
-
     def computeNetFlowsRanking(self):
         """
         renders an ordered list (from best to worst) of the actions
@@ -7963,11 +7934,11 @@ class Digraph(object):
         following the net flows ranking rule.
         """
         try:
-            return list(reversed(list(netFlowsRankingDict.keys())))
+            return list(reversed(list(self.netFlowsRankingDict.keys())))
         except AttributeError:
             netFlowsRankingDict = self._computeNetFlowsRankingDict()
             return list(reversed(list(netFlowsRankingDict.keys())))
-
+        
     def computeKohlerRankingDict(self,Debug=False):
         """
         renders a ranking from the best to the worst of the actions following Kohler's rule as an
