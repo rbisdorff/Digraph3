@@ -33,7 +33,7 @@ Two download options are given:
 
      ..$ git clone https://github.com/rbisdorff/Digraph3 
 
-2. or a suversion client::
+2. or a subversion client::
 
      ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
 
