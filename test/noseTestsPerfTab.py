@@ -119,7 +119,9 @@ def testPerformanceTableauStatistics():
     
 def testXMCDAPerformanceTableauLoading():
     print('*==>> XMCDA Performance tableau loading ---*')
-    t = XMCDAPerformanceTableau('temp')
+    t = RandomPerformanceTableau(seed=1)
+    t.saveXMCDA('testXMCDA',servingD3=False)
+    t = XMCDAPerformanceTableau('testXMCDA')
     t.showPerformanceTableau()
     g = BipolarOutrankingDigraph(t)
     g.showRelationTable()
@@ -140,7 +142,7 @@ def testCBPerformanceTableau():
                                    weightScale=[1,2],\
                                    integerWeights=True,\
                                    commonMode=["normal",50.0,25.0])
-    t.saveXMCDA(fileName='randomPerformanceTableau',servingD3=False)
+    #t.saveXMCDA(fileName='randomPerformanceTableau',servingD3=False)
     t.showCriteria(Debug=False)
     g = BipolarOutrankingDigraph(t)
     g.exportGraphViz()
@@ -152,7 +154,7 @@ def testCoalitionsPerformanceTableau():
                                            Coalitions=False,\
                                            RandomCoalitions=True,\
                                            weightDistribution="equicoalitions")
-    t.saveXMCDA2('test',servingD3=False)
+    t.saveXMCDA2('testCoalitions',servingD3=False)
     t.showCriteria(IntegerWeights=True)
     g = BipolarOutrankingDigraph(t)
     g.computeRankingByChoosing(CoDual=False)
@@ -204,14 +206,14 @@ def testXMCDA2SaveReadPerformanceTableau():
     t = RandomS3PerformanceTableau(numberOfActions=5,numberOfCriteria=15,weightDistribution="random",weightScale=(1,13),integerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
     #t.showAll()
     #t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=7,weightDistribution="random",weightScale=(1,7),integerWeights=True)
-    t.saveXMCDA('test')
+    t.saveXMCDA('testXMCDA')
     g = BipolarOutrankingDigraph(t)
     g.showRelationTable()
-    t1 = XMCDAPerformanceTableau('test')
+    t1 = XMCDAPerformanceTableau('testXMCDA')
     g1 = BipolarOutrankingDigraph(t1)
     g1.showRelationTable()
-    t1.saveXMCDA2('test1')
-    t2 = XMCDAPerformanceTableau('test')
+    t1.saveXMCDA2('testXMCDA2')
+    t2 = XMCDA2PerformanceTableau('testXMCDA2')
     g2 = BipolarOutrankingDigraph(t2)
     g2.showRelationTable()
     
