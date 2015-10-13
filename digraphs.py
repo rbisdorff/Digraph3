@@ -7951,18 +7951,22 @@ class Digraph(object):
         renders an ordered list (from best to worst) of the actions
         following the net flows ranking rule.
         """
-        netFlowsRankingDict = self._computeNetFlowsRankingDict()
-        netFlowsRanking = list(netFlowsRankingDict.keys())
-        return netFlowsRanking
+        try:
+            return list(self.netFlowsRankingDict.keys())
+        except AttributeError:
+            netFlowsRankingDict = self._computeNetFlowsRankingDict()
+            return list(netFlowsRankingDict.keys())
 
     def computeNetFlowsOrder(self):
         """
         renders an ordered list (from worst to best) of the actions
         following the net flows ranking rule.
         """
-        netFlowsRankingDict = self._computeNetFlowsRankingDict()
-        netFlowsOrder = list(reversed(list(netFlowsRankingDict.keys())))
-        return netFlowsOrder
+        try:
+            return list(reversed(list(netFlowsRankingDict.keys())))
+        except AttributeError:
+            netFlowsRankingDict = self._computeNetFlowsRankingDict()
+            return list(reversed(list(netFlowsRankingDict.keys())))
 
     def computeKohlerRankingDict(self,Debug=False):
         """
