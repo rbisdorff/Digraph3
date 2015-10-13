@@ -775,30 +775,16 @@ ordered dictionary with rank and majorityMargin attributes.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computeNetFlowsOrder">
-<code class="descname">computeNetFlowsOrder</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeNetFlowsOrder" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeNetFlowsOrder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeNetFlowsOrder" title="Permalink to this definition">¶</a></dt>
 <dd><p>renders an ordered list (from worst to best) of the actions
 following the net flows ranking rule.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computeNetFlowsRanking">
-<code class="descname">computeNetFlowsRanking</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeNetFlowsRanking" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeNetFlowsRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeNetFlowsRanking" title="Permalink to this definition">¶</a></dt>
 <dd><p>renders an ordered list (from best to worst) of the actions
 following the net flows ranking rule.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphs.Digraph.computeNetFlowsRankingDict">
-<code class="descname">computeNetFlowsRankingDict</code><span class="sig-paren">(</span><em>Stored=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeNetFlowsRankingDict" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders an ordered dictionary of the actions (from best to worst)
-following the net flows ranking rule with rank and net flow attributes.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphs.Digraph.computeNetFlowsRankingDictOld">
-<code class="descname">computeNetFlowsRankingDictOld</code><span class="sig-paren">(</span><em>Stored=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeNetFlowsRankingDictOld" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders an ordered dictionary of the actions (from best to worst)
-following the net flows ranking rule with rank and net flow attributes.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1184,7 +1170,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3344,7 +3330,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4091,7 +4077,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4128,7 +4114,7 @@ the criteria ordinal correlation table.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.saveXMCDA2RubisChoiceRecommendation">
-<code class="descname">saveXMCDA2RubisChoiceRecommendation</code><span class="sig-paren">(</span><em>fileName='temp'</em>, <em>category='Rubis'</em>, <em>subcategory='Choice Recommendation'</em>, <em>author='digraphs Module (RB)'</em>, <em>reference='saved from Python'</em>, <em>comment=True</em>, <em>servingD3=False</em>, <em>relationName='Stilde'</em>, <em>graphValuationType='bipolar'</em>, <em>variant='standard'</em>, <em>instanceID='void'</em>, <em>stringNA='NA'</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.saveXMCDA2RubisChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">saveXMCDA2RubisChoiceRecommendation</code><span class="sig-paren">(</span><em>fileName='temp'</em>, <em>category='Rubis'</em>, <em>subcategory='Choice Recommendation'</em>, <em>author='digraphs Module (RB)'</em>, <em>reference='saved from Python'</em>, <em>comment=True</em>, <em>servingD3=False</em>, <em>relationName='Stilde'</em>, <em>graphValuationType='bipolar'</em>, <em>variant='standard'</em>, <em>instanceID='void'</em>, <em>stringNA='NA'</em>, <em>_OldCoca=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.saveXMCDA2RubisChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
 <dd><p>save complete Rubis problem and result in XMCDA 2.0 format with unicode encoding.</p>
 </dd></dl>
 
@@ -4809,7 +4795,7 @@ ballot = {     # voters x candidates x candidates
 <span id="sortingdigraphs-module"></span><span id="sortingdigraphs-label"></span><h2>sortingDigraphs module<a class="headerlink" href="#module-sortingDigraphs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="sortingDigraphs.QuantilesSortingDigraph">
-<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">QuantilesSortingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>CopyPerfTab=True</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=False</em>, <em>PrefThresholds=True</em>, <em>hasNoVeto=False</em>, <em>outrankingType='bipolar'</em>, <em>WithSortingRelation=True</em>, <em>CompleteOutranking=False</em>, <em>StoreSorting=False</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">QuantilesSortingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=False</em>, <em>PrefThresholds=True</em>, <em>hasNoVeto=False</em>, <em>outrankingType='bipolar'</em>, <em>WithSortingRelation=True</em>, <em>CompleteOutranking=False</em>, <em>StoreSorting=False</em>, <em>CopyPerfTab=False</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></code></a></p>
 <p>Specialisation of the sortingDigraph Class
 for sorting of a large set of alternatives into
@@ -5064,16 +5050,6 @@ a standard random instance with 10 actions and 13 criteria is generated by defau
 <dl class="method">
 <dt id="sortingDigraphs.SortingDigraph.computeSortingCharacteristics">
 <code class="descname">computeSortingCharacteristics</code><span class="sig-paren">(</span><em>action=None</em>, <em>StoreSorting=True</em>, <em>Comments=False</em>, <em>Debug=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.SortingDigraph.computeSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a bipolar-valued bi-dictionary relation
-representing the degree of credibility of the
-assertion that &#8220;action x in A belongs to category c in C&#8221;,
-ie x outranks low category limit and does not outrank
-the high category limit.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.SortingDigraph.computeSortingCharacteristicsOld">
-<code class="descname">computeSortingCharacteristicsOld</code><span class="sig-paren">(</span><em>action=None</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.SortingDigraph.computeSortingCharacteristicsOld" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a bipolar-valued bi-dictionary relation
 representing the degree of credibility of the
 assertion that &#8220;action x in A belongs to category c in C&#8221;,
@@ -6561,7 +6537,7 @@ Components are stored in an ordered dictionary.</p>
 
 <dl class="class">
 <dt id="bigOutrankingDigraphs.BigOutrankingDigraphMP">
-<em class="property">class </em><code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">BigOutrankingDigraphMP</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>CopyPerfTab=True</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>WithKohlerOrdering=False</em>, <em>WithNetFlowsOrdering=True</em>, <em>minimalComponentSize=None</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>nbrOfThreads=None</em>, <em>save2File=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphMP" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">BigOutrankingDigraphMP</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>WithKohlerOrdering=False</em>, <em>WithNetFlowsOrdering=True</em>, <em>minimalComponentSize=None</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>nbrOfThreads=None</em>, <em>save2File=None</em>, <em>CopyPerfTab=True</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphMP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#bigOutrankingDigraphs.BigOutrankingDigraph" title="bigOutrankingDigraphs.BigOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">bigOutrankingDigraphs.BigOutrankingDigraph</span></code></a>, <a class="reference internal" href="#weakOrders.QuantilesRankingDigraph" title="weakOrders.QuantilesRankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">weakOrders.QuantilesRankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Multiprocessing implementation of the BipolarOutrankingDigraph class
 for large instances (order &gt; 1000)</p>

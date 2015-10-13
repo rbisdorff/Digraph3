@@ -102,7 +102,12 @@
 <p>Using the Digraph3 modules is easy. You only need to have installed on your system the <a class="reference external" href="https://www.python.org/doc/">Python</a> programming language of version 3+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.</p>
 <p>Two download options are given:</p>
 <ol class="arabic">
-<li><p class="first">Either (easiest under Linux or Mac OS-X), by using a subversion client:</p>
+<li><p class="first">Either (easiest under Linux or Mac OS-X), by using a git client:</p>
+<div class="highlight-python"><div class="highlight"><pre>..$ git clone https://github.com/rbisdorff/Digraph3
+</pre></div>
+</div>
+</li>
+<li><p class="first">or a suversion client:</p>
 <div class="highlight-python"><div class="highlight"><pre>..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 </pre></div>
 </div>
@@ -130,8 +135,8 @@
 6
 7
 8</pre></div></td><td class="code"><div class="highlight"><pre>[\$HOME/Digraph3]\$ python3
-Python 3.4.0 (default, Apr 11 2014, 13:05:11)
-[GCC 4.8.2] on linux
+Python 3.5.0 (default, Sep 23 2015, 13:39:18)
+[GCC 4.8.4] on linux
 Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
 &gt;&gt;&gt; from digraphs import Digraph
 &gt;&gt;&gt; dg = Digraph(&#39;test/testdigraph&#39;)
@@ -3722,7 +3727,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <table class="docutils footnote" frame="void" id="id30" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id5">2</a>, <a class="fn-backref" href="#id10">3</a>, <a class="fn-backref" href="#id18">4</a>)</em> The <code class="docutils literal"><span class="pre">exportGraphViz</span></code> method is depending on drawing tools from <a class="reference external" href="http://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></code> to install them. There are ready <code class="docutils literal"><span class="pre">dmg</span></code> installers for Mac OS.</td></tr>
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id5">2</a>, <a class="fn-backref" href="#id10">3</a>, <a class="fn-backref" href="#id18">4</a>)</em> The <code class="docutils literal"><span class="pre">exportGraphViz</span></code> method is depending on drawing tools from <a class="reference external" href="http://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></code> to install them. There are ready <code class="docutils literal"><span class="pre">dmg</span></code> installers for Mac OSX.</td></tr>
 </tbody>
 </table>
 </div>

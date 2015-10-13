@@ -29,11 +29,15 @@ Using the Digraph3 modules is easy. You only need to have installed on your syst
 
 Two download options are given:
 
-1. Either (easiest under Linux or Mac OS-X), by using a subversion client::
+1. Either (easiest under Linux or Mac OS-X), by using a git client::
 
-     ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
+     ..$ git clone https://github.com/rbisdorff/Digraph3 
 
-2. Or, with a browser access, download and extract the latest distribution tar.gz archive from this page::
+2. or a suversion client::
+
+     ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
+
+3. Or, with a browser access, download and extract the latest distribution tar.gz archive from this page::
 
      http://leopold-loewenheim.uni.lu/Digraph3/dist/
 
@@ -50,8 +54,8 @@ Starting a python3 session
 You may start an interactive Python3 session in the :code:`Digraph3` directory for exploring the classes and methods provided by the :code:`digraphs` module. To do so, enter the ``python3`` commands following the session prompts marked with >>>. The lines without the prompt are output from the Python interpreter::
 
 	[\$HOME/Digraph3]\$ python3
-	Python 3.4.0 (default, Apr 11 2014, 13:05:11)
-	[GCC 4.8.2] on linux
+	Python 3.5.0 (default, Sep 23 2015, 13:39:18)
+	[GCC 4.8.4] on linux
 	Type "help", "copyright", "credits" or "license" for more information.
 	>>> from digraphs import Digraph
 	>>> dg = Digraph('test/testdigraph')
@@ -2101,5 +2105,5 @@ References
 Footnotes
 .........
 
-.. [1] The ``exportGraphViz`` method is depending on drawing tools from `graphviz <http://graphviz.org/>`_. On Linux Ubuntu or Debian you may try ``sudo apt-get install graphviz`` to install them. There are ready ``dmg`` installers for Mac OS. 
+.. [1] The ``exportGraphViz`` method is depending on drawing tools from `graphviz <http://graphviz.org/>`_. On Linux Ubuntu or Debian you may try ``sudo apt-get install graphviz`` to install them. There are ready ``dmg`` installers for Mac OSX. 
 
