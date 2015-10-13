@@ -3368,7 +3368,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print('File: ' + nameExt + ' saved !')
 
         # restore self to its original content
-        self = selfOrig
+        self.__dict__ = selfOrig.__dict__
+        
 
 class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     """
