@@ -3759,17 +3759,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         criteria = OrderedDict()
         if coalition == None:
             coalition = perfTab.criteria.keys()
-##        
-##        if coalition == None:
-##            if CopyPerfTab:
-##                self.criteria = deepcopy(perfTab.criteria)
-##            else:
-##                self.criteria = perfTab.criteria  
-##        else: # a coalition of criteria only taking into account
-##            criteria = OrderedDict
         for g in coalition:
             criteria[g] = deepcopy(perfTab.criteria[g])
-                
         self.criteria = criteria
         self.convertWeightFloatToDecimal()
 
@@ -4115,7 +4106,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 ##        for c in dict.keys(criteria):
 ##            totalweight = totalweight + criteria[c]['weight']
         totalweight = sum([criteria[c]['weight'] for c in criteria])
-        print('totalWeight',totalweight)
+
         relation = {}
         concordanceRelation = {}
         vetos = []
