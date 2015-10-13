@@ -3694,6 +3694,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     """
     def __init__(self,argPerfTab=None,\
                  coalition=None,\
+                 actionsSubset=None,\
                  hasNoVeto=False,\
                  hasBipolarVeto=True,\
                  Normalized=False,\
@@ -3717,44 +3718,61 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             WithConcordanceRelation = False
             WithVetoCounts = False
             
-        #self.performanceTableau = perfTab
-
+        # transfering the performance tableau data to self
         self.name = 'rel_' + perfTab.name
-
-        if isinstance(perfTab.actions,list):
+        # actions
+        if actionsSubset == None:
+            if isinstance(perfTab.actions,list):
+                actions = {}
+                for x in perfTab.actions:
+                    actions[x] = {'name': str(x)}
+                self.actions = actions
+            else:
+                if CopyPerfTab:
+                    self.actions = deepcopy(perfTab.actions)
+                else:
+                    self.actions = perfTab.actions
+        else:
             actions = {}
-            for x in perfTab.actions:
+            for x in actionsSubset:
                 actions[x] = {'name': str(x)}
             self.actions = actions
+           
+        # valuation domain
+        if Normalized:
+            Min =   Decimal('-1.0')
+            Med =   Decimal('0.0')
+            Max =   Decimal('1.0')
         else:
-            if CopyPerfTab:
-                self.actions = deepcopy(perfTab.actions)
-            else:
-                self.actions = perfTab.actions
-        Min =   Decimal('-100.0')
-        Med =   Decimal('0.0')
-        Max =   Decimal('100.0')
+            Min =   Decimal('-100.0')
+            Med =   Decimal('0.0')
+            Max =   Decimal('100.0')
         self.valuationdomain = {'min':Min,'med':Med,'max':Max}
-
-        if coalition == None:
-            try:
-                if CopyPerfTab:
-                    self.objectives = deepcopy(perfTab.objectives)
-                else:
-                    self.objectives = perfTab.objectives
-            except:
-                pass
+        # objectives and criteria
+        try:
             if CopyPerfTab:
-                self.criteria = deepcopy(perfTab.criteria)
+                self.objectives = deepcopy(perfTab.objectives)
             else:
-                self.criteria = perfTab.criteria
-            
-        else:
-            criteria = {}
-            for g in coalition:
-                criteria[g] = perfTab.criteria[g]
-            self.criteria = criteria
+                self.objectives = perfTab.objectives
+        except:
+            pass
+        criteria = OrderedDict()
+        if coalition == None:
+            coalition = perfTab.criteria.keys()
+##        
+##        if coalition == None:
+##            if CopyPerfTab:
+##                self.criteria = deepcopy(perfTab.criteria)
+##            else:
+##                self.criteria = perfTab.criteria  
+##        else: # a coalition of criteria only taking into account
+##            criteria = OrderedDict
+        for g in coalition:
+            criteria[g] = deepcopy(perfTab.criteria[g])
+                
+        self.criteria = criteria
         self.convertWeightFloatToDecimal()
+
         #  install method Data and parameters
         methodData = {}
         try:
@@ -3764,7 +3782,6 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             valuationType = 'bipolar'
             variant = 'standard'
         methodData['parameter'] = {'valuationType': valuationType, 'variant': variant}
-
         try:
             vetoType = perfTab.parameter['vetoType']
             methodData['parameter']['vetoType'] = vetoType
@@ -3773,7 +3790,6 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             methodData['parameter']['vetoType'] = vetoType
         if vetoType == 'bipolar':
             hasBipolarVeto = True
-            
         self.methodData = methodData
 
         # insert performance Data
@@ -3810,8 +3826,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                                 nbrCores=nbrCores,\
                                                 Debug=Debug,Comments=Comments)
 
-        if Normalized:
-            self.recodeValuation(-1.0,1.0)
+##        if Normalized:
+##            self.recodeValuation(-1.0,1.0)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
@@ -4024,14 +4040,6 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     fo = open(foName,'wb')
                     spa = dumps(splitActions,-1)
                     fo.write(spa)
-##                    buff = BytesIO()
-##                    pickler = Pickler(buff, -1)
-##                    pickler.fast = 1
-##                    pickler.dump(splitActions)
-##                    buff.flush()
-##                    fo.write(buff.getvalue())
-                    fo.close()
-
                     fo.close()
                     splitThread = myThread(j,InitialSplit,
                                            tempDirName,hasNoVeto,hasBipolarVeto,
@@ -4107,6 +4115,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 ##        for c in dict.keys(criteria):
 ##            totalweight = totalweight + criteria[c]['weight']
         totalweight = sum([criteria[c]['weight'] for c in criteria])
+        print('totalWeight',totalweight)
         relation = {}
         concordanceRelation = {}
         vetos = []
@@ -4122,12 +4131,14 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
         
         #nc = len(criteria)
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
         for a in initial:
             relation[a] = {}
             concordanceRelation[a] = {}
             for b in terminal:
                 if a == b:
-                    relation[a][b] = Decimal('0.0')
+                    relation[a][b] = Med
                     concordanceRelation[a][b] = Decimal('0.0')
                 else:
                     
@@ -4247,11 +4258,11 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                         outrankindex = min(concordindex,-vetoIndex)
                                                                  
                     if abVetoes != []:
-                        vetos.append(([a,b,concordindex*Decimal('100.0')],abVetoes))
+                        vetos.append(([a,b,concordindex*Max],abVetoes))
                     if hasBipolarVeto:
                         if abNegativeVetoes != []:
-                            negativeVetos.append(([a,b,concordindex*Decimal('100.0')],abNegativeVetoes))
-                    relation[a][b] = outrankindex*Decimal('100.0')
+                            negativeVetos.append(([a,b,concordindex*Max],abNegativeVetoes))
+                    relation[a][b] = outrankindex*Max
 
         # storing concordance relation and vetoes
         if WithConcordanceRelation:
@@ -8809,7 +8820,7 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-    Threading = True
+    Threading = False
     t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
                                    numberOfCriteria=13,\
                                    weightDistribution='equiobjectives',
