@@ -2259,7 +2259,9 @@ The Ranked-Pairs rule actually renders a Kemeny ranking as we may verify below::
     >>> print("Fitness of Tideman's ranking: %.3f" % corr['correlation'])
     Fitness of Tideman's ranking: 0.918
 
-However, this last ranking rule is again in general not scalable to outranking digraphs of larger orders. We most useful ranking heuristics for big outranking digraphs remain Kohler's and both, the crisp and the valued, Cpeland rules.
+However, this last ranking rule is again in general not scalable to outranking digraphs of larger orders. 
+
+The most useful ranking heuristics in practice for big outranking digraphs are Kohler's, Copeland's, and the Net-Flows rules.
   
 
 Links and appendices
