@@ -1273,23 +1273,23 @@ class Digraph(object):
             for x in ibch:
                 for y in ibch:
                     if x != y:
-                        rankingRelation[x][y] = self.omax([rankingRelation[x][y],abs(relation[x][y])])
-                        rankingRelation[y][x] = self.omax([rankingRelation[x][y],abs(relation[y][x])])
+                        rankingRelation[x][y] = omax(Med,[rankingRelation[x][y],abs(relation[x][y])])
+                        rankingRelation[y][x] = omax(Med,[rankingRelation[x][y],abs(relation[y][x])])
                 for y in ribch:
                     #print(x,y)
                     #print(rankingRelation[x][y])
                     #print(relation[x][y])
-                    rankingRelation[x][y] = self.omax([rankingRelation[x][y],abs(relation[x][y])])
-                    rankingRelation[y][x] = self.omax([rankingRelation[y][x],-abs(relation[y][x])])
+                    rankingRelation[x][y] = omax(Med,[rankingRelation[x][y],abs(relation[x][y])])
+                    rankingRelation[y][x] = omax(Med,[rankingRelation[y][x],-abs(relation[y][x])])
             riwch = set(currActions) - iwch
             for y in iwch:
                 for x in iwch:
                     if x != y:
-                        rankingRelation[x][y] = self.omax([rankingRelation[x][y],abs(relation[x][y])])
-                        rankingRelation[y][x] = self.omax([rankingRelation[y][x],abs(relation[y][x])])
+                        rankingRelation[x][y] = omax(Med,[rankingRelation[x][y],abs(relation[x][y])])
+                        rankingRelation[y][x] = omax(Med,[rankingRelation[y][x],abs(relation[y][x])])
                 for x in riwch:
-                    rankingRelation[x][y] = self.omax([rankingRelation[x][y],abs(relation[x][y])])
-                    rankingRelation[y][x] = self.omax([rankingRelation[y][x],-abs(relation[x][y])])
+                    rankingRelation[x][y] = omax(Med,[rankingRelation[x][y],abs(relation[x][y])])
+                    rankingRelation[y][x] = omax(Med,[rankingRelation[y][x],-abs(relation[x][y])])
             currActions = currActions - (ibch | iwch)
         return rankingRelation
 
