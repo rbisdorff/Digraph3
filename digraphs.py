@@ -8152,7 +8152,7 @@ class Digraph(object):
 
     def computeKemenyOrder(self,isProbabilistic=False, orderLimit=7, seed=None, sampleSize=1000, Debug=False):
         """
-        renders a ranking of the actions with minimal Kemeny index.
+        renders a ordering from worst to best of the actions with maximal Kemeny index.
         Return a tuple: kemenyOrder, kemenyIndex
         """
         from random import seed, shuffle
@@ -8220,13 +8220,28 @@ class Digraph(object):
                         print(maximalOrders)
                     
             self.maximalOrders = maximalOrders
+            self.kemenyIndex = kemenyIndex
             if Debug:
                 print('Exact Kemeny Orders = ', kemenyOrder)
                 print('Exact Kemeny Index = ', kemenyIndex)
                 print('# of permutations  = ', s)
 
-        kemenyOrder.reverse()
+        #kemenyOrder.reverse()
         return kemenyOrder, kemenyIndex
+
+    def computeKemenyRanking(self,orderLimit=7):
+        """
+        Renders a ordering from worst to best of the actions with maximal Kemeny index.
+        Return a tuple: kemenyRanking, kemenyIndex
+        """
+        try:
+            ranking = list(self.maximalOrders[0])
+            ranking.reverse()
+        except AttributeError:
+            self.computeKemenyOrder(orderLimit=orderLimit)
+            ranking = list(self.maximalOrders[0])
+            ranking.reverse()
+        return ranking, self.kemenyIndex
 
     def computePrincipalOrder(self, plotFileName=None,\
                               Colwise=False, imageType=None,\

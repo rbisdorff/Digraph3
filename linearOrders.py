@@ -990,12 +990,12 @@ class CopelandOrder(LinearOrder):
         copelandScores = {}
         copelandOrder = []
         for x in dict.keys(g.actions):
-            copelandScores[x] = 0
-            for y in dict.keys(g.actions):
-                if y != x:
-                    xoutDegree = len(other.gamma[x][0])
-                    xinDegree = len(other.gamma[x][1])
-                    copelandScores[x] += (xoutDegree - xinDegree)
+            #copelandScores[x] = 0
+            #for y in dict.keys(g.actions):
+            #    if y != x:
+            xoutDegree = len(other.gamma[x][0])
+            xinDegree = len(other.gamma[x][1])
+            copelandScores[x] = (xoutDegree - xinDegree)
             if Debug:
                 print('Copeland score for %s = %d' % (x, copelandScores[x]))
             copelandOrder.append((copelandScores[x],x))
