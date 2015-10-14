@@ -1,7 +1,22 @@
 #!/usr/bin/env python3
-# -*- coding:utf-8 -*-
-#  Python 3 graphs.py module
+#  Digraph3 graphs.py module
+#  Python3.3+ computing resources
 #  Copyright (C)  2011-2015 Raymond Bisdorff
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License along
+#    with this program; if not, write to the Free Software Foundation, Inc.,
+#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
 #############################################
 from decimal import Decimal
 
@@ -50,7 +65,6 @@ class Graph(object):
         Constructor for Graph objects.
         """
         from decimal import Decimal
-        from copy import copy as deepcopy
         
         if Empty:
             self.name = 'emptyInstance'
@@ -63,11 +77,11 @@ class Graph(object):
         elif fileName==None:
             g = RandomGraph(order=numberOfVertices,\
                                edgeProbability=edgeProbability)
-            self.name = deepcopy(g.name)
-            self.vertices = deepcopy(g.vertices)
+            self.name = g.name
+            self.vertices = g.vertices
             self.order = len(self.vertices)
-            self.edges = deepcopy(g.edges)
-            self.valuationDomain = deepcopy(g.valuationDomain)
+            self.edges = g.edges
+            self.valuationDomain = g.valuationDomain
             self.size = self.computeSize()
             self.gamma = self.gammaSets()
         else:
@@ -669,7 +683,7 @@ class Graph(object):
         """
         Converts a Graph object into a symmetric Digraph object.
         """
-        from copy import copy as deepcopy
+        from copy import deepcopy
         from digraphs import EmptyDigraph
         dg = EmptyDigraph(order=self.order)
         dg.name = deepcopy(self.name)
@@ -803,7 +817,7 @@ class Graph(object):
             Default values gives a normalized valuation domain
 
         """
-        from copy import copy as deepcopy
+        from copy import deepcopy
         oldMax = self.valuationDomain['max']
         oldMin = self.valuationDomain['min']
         oldMed = self.valuationDomain['med']
@@ -1013,7 +1027,7 @@ class DualGraph(Graph):
 
     """
     def __init__(self,other):
-        from copy import copy as deepcopy
+        from copy import deepcopy
         self.name = 'dual_' + str(other.name)
         try:
             self.description = deepcopy(other.description)
@@ -1162,15 +1176,14 @@ class RandomRegularGraph(Graph):
     temporary random regular graphs of fixed degrees.
     """
     def __init__(self,order=7,degree=2,seed=None):
-        from copy import copy as deepcopy
         from randomDigraphs import RandomRegularDigraph
         rdg = RandomRegularDigraph(order=order,
                                    degree=degree,
                                    seed=seed)
         rg = rdg.digraph2Graph()
-        self.vertices = deepcopy(rg.vertices)
-        self.valuationDomain = deepcopy(rg.valuationDomain)
-        self.edges = deepcopy(rg.edges)
+        self.vertices = rg.vertices
+        self.valuationDomain = rg.valuationDomain
+        self.edges = rg.edges
         self.name = 'randomRegularGraph'
         self.order = len(self.vertices)
         self.size = self.computeSize()
@@ -1239,16 +1252,15 @@ class RandomFixedDegreeSequenceGraph(Graph):
 
     """
     def __init__(self,order=7,degreeSequence=[3,3,2,2,1,1,0],seed=None):
-        from copy import copy as deepcopy
         from randomDigraphs import RandomFixedDegreeSequenceDigraph
         rdg = RandomFixedDegreeSequenceDigraph(order=order,
                                                degreeSequence=degreeSequence,
                                                seed=seed)
         rg = rdg.digraph2Graph()
-        self.vertices = deepcopy(rg.vertices)
+        self.vertices = rg.vertices
         self.order = order
-        self.valuationDomain = deepcopy(rg.valuationDomain)
-        self.edges = deepcopy(rg.edges)
+        self.valuationDomain = rg.valuationDomain
+        self.edges = rg.edges
         self.size = self.computeSize()
         self.name = 'randomFixedDegreeSequenceGraph'
         self.gamma = self.gammaSets()
@@ -1421,7 +1433,7 @@ class TriangulatedGrid(Graph):
 
 class RandomTree(Graph):
     """
-    Random instance of a tree generated from a random Prüfer code.
+    Instance of a tree generated from a random (or a given) Prüfer code.
 
     .. image:: randomTree.png
        :alt: radomTree instance
@@ -1547,7 +1559,7 @@ class RandomSpanningForest(RandomTree):
        :align: center
     """
     def __init__(self,g,seed=None,Debug=False):
-        from copy import copy as deepcopy
+        from copy import deepcopy
         import random
         random.seed(seed)
         self.name= g.name+'_randomSpanningTree'
@@ -1760,7 +1772,7 @@ class BestDeterminedSpanningForest(RandomTree):
 
     """
     def __init__(self,g,seed=None,Debug=False):
-        from copy import copy as deepcopy
+        from copy import deepcopy
         import random
         random.seed(seed)
         self.name= g.name+'_randomSpanningTree'
@@ -1876,7 +1888,7 @@ class Q_Coloring(Graph):
     def __init__(self,g,colors=['gold','lightcoral','lightblue'],
                  nSim=None,maxIter=20,seed=None,
                  Comments=True,Debug=False):
-        from copy import copy as deepcopy
+        from copy import deepcopy
         self.gClass = g.__class__
         self.name = '%s-qcoloring' % g.name
         if isinstance(g.vertices,dict):
@@ -2095,7 +2107,7 @@ class IsingModel(Graph):
     def __init__(self,g,beta=0,
                 nSim=None,
                 Debug=False):
-        from copy import copy as deepcopy
+        from copy import deepcopy
         self.gClass = g.__class__
         self.name = '%s-ising' % g.name
         if isinstance(g.vertices,dict):
@@ -2286,7 +2298,7 @@ class MetropolisChain(Graph):
     """
     def __init__(self,g,
                  probs = None):
-        from copy import copy as deepcopy
+        from copy import deepcopy
         from random import choice
         self.name = '%s-metro' % g.name
         if isinstance(g.vertices,dict):
@@ -2367,7 +2379,6 @@ class MetropolisChain(Graph):
     def saveCSVTransition(self,fileName='transition',Debug=False):
         """Persistent storage of the transition matrix in the form of
             a csv file. """
-        from copy import copy as deepcopy
         import csv
         from decimal import Decimal
         
@@ -2496,7 +2507,7 @@ class MISModel(Graph):
                  maxIter=20,
                  seed=None,
                  Debug=False):
-        from copy import copy as deepcopy
+        from copy import deepcopy
         self.gClass = deepcopy(g.__class__)
         self.name = '%s-mis' % g.name
         if isinstance(g.vertices,dict):
@@ -2518,7 +2529,8 @@ class MISModel(Graph):
         while unCovered != set() and _iter < maxIter:
             _iter += 1
             print('Iteration: ', _iter)
-            self.generateMIS(Reset=True,nSim=nSim,seed=seed,Debug=Debug)
+            self.generateMIS(Reset=True,
+                             nSim=nSim,seed=seed,Debug=Debug)
             mis,misCover,unCovered = self.checkMIS()
 
     def generateMIS(self,Reset=True,nSim=None,seed=None,Comments=True,Debug=False):

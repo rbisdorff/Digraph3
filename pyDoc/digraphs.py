@@ -60,6 +60,15 @@ def powerset(S):
             yield set([e]) | X
             yield X
 
+# transforms a ranking (list from best to worst) into
+# a preorder ( a list of list from worst to best)
+def ranking2preorder(R):
+    preorder = [[x] for x in reversed(R)]
+#    for x in R:
+#        preorder.append([x])
+#    preorder.reverse()
+    return preorder
+
 # flattens a list of lists into a flat list
 import itertools as IT
 import collections
@@ -83,6 +92,68 @@ def flatten(iterable, ltypes=collections.Iterable):
             remainder = IT.chain(first, remainder)
         else:
             yield first
+
+def total_size(o, handlers={}, verbose=False):
+    """ Returns the approximate memory footprint of an object and all of its contents.
+
+    Automatically finds the contents of the following containers and
+    their subclasses:  tuple, list, deque, dict, set, frozenset, Digraph and BigDigraph.
+    To search other containers, add handlers to iterate over their contents:
+
+        handlers = {SomeContainerClass: iter,
+                    OtherContainerClass: OtherContainerClass.get_elements}
+
+    See http://code.activestate.com/recipes/577504/  
+
+    """
+    from sys import getsizeof, stderr
+    from itertools import chain
+    from collections import deque
+    from bigOutrankingDigraphs import BigDigraph
+    
+    try:
+        from reprlib import repr
+    except ImportError:
+        pass
+
+    # built-in containers and their subclasses
+    dict_handler = lambda d: chain.from_iterable(d.items())
+    all_handlers = {tuple: iter,
+                    list: iter,
+                    deque: iter,
+                    dict: dict_handler,
+                    set: iter,
+                    frozenset: iter,
+                    }
+
+    # Digraph3 objects 
+    object_handler = lambda d: chain.from_iterable(d.__dict__.items())    
+    handlers = {BigDigraph: object_handler,
+                Digraph: object_handler,
+                PerformanceTableau : object_handler,
+                }
+    
+    all_handlers.update(handlers)     # user handlers take precedence
+    seen = set()                      # track which object id's have already been seen
+    default_size = getsizeof(0)       # estimate sizeof object without __sizeof__
+
+    def sizeof(o):
+        if id(o) in seen:       # do not double count the same object
+            return 0
+        seen.add(id(o))
+        s = getsizeof(o, default_size)
+
+        if verbose:
+            print(s, type(o), repr(o), file=stderr)
+
+        for typ, handler in all_handlers.items():
+            if isinstance(o, typ):
+                s += sum(map(sizeof, handler(o)))
+                break
+        return s
+
+    return sizeof(o)
+
 
 #----------XML handling class -----------------
 try:
@@ -226,11 +297,11 @@ class Digraph(object):
         if file == None:
             g = RandomValuationDigraph(order=order)
             self.name = g.name
-            self.actions = copy.deepcopy(g.actions)
+            self.actions = g.actions
             self.order = len(self.actions)
-            self.valuationdomain = copy.deepcopy(g.valuationdomain)
+            self.valuationdomain = g.valuationdomain
             self.convertValuationToDecimal()
-            self.relation = copy.deepcopy(g.relation)
+            self.relation = g.relation
             self.convertRelationToDecimal()
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
@@ -239,11 +310,11 @@ class Digraph(object):
             argDict = {}
             exec(compile(open(fileName).read(), fileName, 'exec'), argDict)
             self.name = file
-            self.actions = copy.deepcopy(argDict['actionset'])
+            self.actions = argDict['actionset']
             self.order = len(self.actions)
-            self.valuationdomain = copy.deepcopy(argDict['valuationdomain'])
+            self.valuationdomain = argDict['valuationdomain']
             self.convertValuationToDecimal()
-            self.relation = copy.deepcopy(argDict['relation'])
+            self.relation = argDict['relation']
             self.convertRelationToDecimal()
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
@@ -329,20 +400,20 @@ class Digraph(object):
         from graphs import Graph
         from copy import copy, deepcopy
         g = Graph()
-        g.name = copy(self.name)
+        g.name = self.name + '_graph'
         if type(self.actions) == list:
             g.vertices = {}
             for x in self.actions:
                 g.vertices[x] = {'name': x, 'shortName': x}
         else:
-            g.vertices = copy(self.actions)    
+            g.vertices = deepcopy(self.actions)    
         g.order = len(g.vertices)
         g.valuationDomain = valuationDomain
         gMin = valuationDomain['min']
         gMed = valuationDomain['med']
         gMax = valuationDomain['max']
         g.edges = {}
-        verticesKeys = [x for x in g.vertices]
+        verticesKeys = list(g.vertices.keys())
         dgMed = self.valuationdomain['med']
         for i in range(g.order):
             for j in range(i+1,g.order):
@@ -1016,10 +1087,49 @@ class Digraph(object):
             print("Error: no ranking by choosing result !!")
             return None
 
+    def computePreRankingRelation(self,preRanking,Normalized=True,Debug=False):
+        """
+        Renders the bipolar-valued relation obtained from
+        a given preRanking in decreasing levels (list of lists) result.
+        """
+        if Normalized:
+            Max = Decimal('1')
+            Med = Decimal('0')
+            Min = Decimal('-1')
+        else:   
+            Max = self.valuationdomain['max']
+            Med = self.valuationdomain['med']
+            Min = self.valuationdomain['min']
+            
+        actions = list(self.actions.keys())
+        currentActions = set(actions)
+        preRankingRelation = {}
+        for x in actions:
+            preRankingRelation[x] = {}
+            for y in actions:
+                preRankingRelation[x][y] = Med
+
+        for eqcl in preRanking:
+            currRest = currentActions - set(eqcl)
+            if Debug:
+                print(currentActions, eqcl, currRest)
+            for x in eqcl:
+                for y in eqcl:
+                    if x != y:
+                        preRankingRelation[x][y] = Max
+                        preRankingRelation[y][x] = Max
+
+            for x in eqcl:
+                for y in currRest:
+                    preRankingRelation[x][y] = Max
+                    preRankingRelation[y][x] = Min
+            currentActions = currentActions - set(eqcl)
+        return preRankingRelation
+
     def computePreorderRelation(self,preorder,Normalized=True,Debug=False):
         """
         Renders the bipolar-valued relation obtained from
-        a given preordering (list of lists) result.
+        a given preordering in increasing levels (list of lists) result.
         """
         if Normalized:
             Max = Decimal('1')
@@ -1050,8 +1160,8 @@ class Digraph(object):
 
             for x in eqcl:
                 for y in currRest:
-                    preorderRelation[x][y] = Max
-                    preorderRelation[y][x] = Min
+                    preorderRelation[x][y] = Min
+                    preorderRelation[y][x] = Max
             currentActions = currentActions - set(eqcl)
         return preorderRelation
 
@@ -1365,13 +1475,13 @@ class Digraph(object):
         from math import sqrt
         mean = Decimal('0.0')
         squares = Decimal('0.0')
-        actions = [x for x in self.actions]
-        n = len(actions)
+        actions = self.actions
+        n = len(self.actions)
         n2 = n * (n-1)
         n2d = Decimal(str(n2))
         relation = self.relation
-        for x in actions:
-            for y in actions:
+        for x in dict.keys(actions):
+            for y in dict.keys(actions):
                 if x != y:
                     mean += relation[x][y]
                     squares += relation[x][y]*relation[x][y]
@@ -1385,8 +1495,228 @@ class Digraph(object):
             print('mean: %.5f, std. dev.: %.5f' % (mean,stdDev))
         return mean,stdDev
 
+    def computeOrdinalCorrelationMP(self, other, MedianCut=False,
+                                    Threading=True,nbrOfCPUs=None,
+                                    Comments=False,Debug=False):
+        """
+        Multi processing version of the digraphs.computeOrdinalCorrelation() method.
+        
+        .. note::
+             The relation filtering and the MedinaCut option are not implemented in the MP version.
+             
+        """
 
-    def computeBipolarCorrelation(self, other, MedianCut=False, filterRelation=None, Debug=False):
+        from multiprocessing import cpu_count
+        from copy import copy,deepcopy
+        from itertools import product
+        if self.valuationdomain['min'] != Decimal('-1') or\
+           self.valuationdomain['max'] != Decimal('1'):
+            print('Error: the digraph instance self must be normalized - self.recodeValuation(-1,1) -first !')
+            return None
+        else:
+            g = self
+        actionsList = [x for x in g.actions]
+        n = g.order
+        n2 = (n*(n-1))
+        Med = g.valuationdomain['med']
+        
+        if not isinstance(other,(dict)):
+            #if Debug:
+            #    print('inputting a Digraph instance')
+            if other.valuationdomain['min'] != Decimal('-1') or\
+               other.valuationdomain['max'] != Decimal('1'):
+                print('Error: the digraph instance other must be normalized - other.recodeValuation(-1,1) -first !')
+                return None
+            otherRelation = other.relation
+        else:
+            otherRelation = other
+        #if Debug:
+        #    print(otherRelation)
+            
+        correlation = Decimal('0')
+        determination = Decimal('0')
+        if Threading and cpu_count() > 4:
+            from pickle import Pickler,dumps, loads, load
+            from io import BytesIO
+            from multiprocessing import Process, Lock,\
+                                        active_children, cpu_count
+            class myThread(Process):
+                def __init__(self, threadID,TempDirName,Debug):
+                    Process.__init__(self)
+                    self.threadID = threadID
+                    self.workingDirectory = tempDirName
+                    self.Debug = Debug
+                def run(self):
+                    from pickle import dumps, loads
+                    from os import chdir
+                    from decimal import Decimal
+                    chdir(self.workingDirectory)
+                    #Debug=False
+                    #if Debug:
+                    #    print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+                    fi = open('dumpActions.py','rb')
+                    actionsList = loads(fi.read())
+                    fi.close()
+                    #if Debug:
+                    #    print(self.threadID,actionsList)
+                    fi = open('dumpRelation.py','rb')
+                    relation = loads(fi.read())
+                    fi.close()
+                    #if Debug:
+                    #    print(self.threadID,relation)
+                    fi = open('dumpOtherRelation.py','rb')
+                    otherRelation = loads(fi.read())
+                    fi.close()
+                    #if Debug:
+                    #    print(self.threadID,relation)
+                    fiName = 'splitActions-'+str(self.threadID)+'.py'
+                    fi = open(fiName,'rb')
+                    splitActions = loads(fi.read())
+                    fi.close()
+                    #if Debug:
+                    #    print(self.threadID,splitActions)
+                    # compute partial correlation
+                    correlation = Decimal('0')
+                    determination = Decimal('0')
+                    for x in splitActions:
+                        for y in actionsList:
+                            if x != y:
+                                correlation += min( max(-g.relation[x][y],otherRelation[x][y]),\
+                                            max(g.relation[x][y],-otherRelation[x][y]) )
+                                determination += min( abs(g.relation[x][y]),\
+                                                      abs(otherRelation[x][y]) )
+                                #if Debug:
+                                #    print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)
+                    splitCorrelation = {'correlation': correlation,
+                                        'determination': determination}
+                    # write partial correlation relation 
+                    foName = 'splitCorrelation-'+str(self.threadID)+'.py'
+                    fo = open(foName,'wb')
+                    fo.write(dumps(splitCorrelation,-1))
+                    fo.close()
+
+            # pre-threading operations
+            if nbrOfCPUs == None:
+                nbrOfCPUs = cpu_count()
+            if Debug:
+                print('Nbr of cpus = ',nbrOfCPUs)
+            if Comments:
+                print('Starting correlation computation with %d threads ...' % nbrOfCPUs)
+            from tempfile import TemporaryDirectory
+            with TemporaryDirectory() as tempDirName:
+                selfFileName = tempDirName +'/dumpActions.py'
+                #if Debug:
+                #    print('temDirName, selfFileName', tempDirName,selfFileName)
+                fo = open(selfFileName,'wb')
+                pd = dumps(actionsList,-1)
+                fo.write(pd)
+                fo.close()
+                selfFileName = tempDirName +'/dumpRelation.py'
+                #if Debug:
+                #    print('temDirName, selfFileName', tempDirName,selfFileName)
+                fo = open(selfFileName,'wb')
+                pd = dumps(self.relation,-1)
+                fo.write(pd)
+                fo.close()
+                selfFileName = tempDirName +'/dumpOtherRelation.py'
+                #if Debug:
+                #    print('temDirName, selfFileName', tempDirName,selfFileName)
+                fo = open(selfFileName,'wb')
+                pd = dumps(otherRelation,-1)
+                fo.write(pd)
+                fo.close()
+
+            
+                nit = n//nbrOfCPUs
+                nbrOfJobs = nbrOfCPUs
+                if nit*nbrOfCPUs < n:
+                    nit += 1
+                while nit*(nbrOfJobs-1) >= n:
+                    nbrOfJobs -= 1
+                if Comments:
+                    print('nbr of actions to split',n)
+                    print('nbr of jobs = ',nbrOfJobs)    
+                    print('nbr of splitActions = ',nit)
+                    
+                i = 0
+                actions2Split = actionsList
+                actionsRemain = set(actions2Split)
+                for jb in range(nbrOfJobs):
+                    if Comments:
+                        print('Thread = %d/%d' % (jb+1,nbrOfJobs),end=" ")
+                    splitActions=[]
+                    for k in range(nit):
+                        if jb < (nbrOfJobs -1) and i < n:
+                            splitActions.append(actions2Split[i])
+                        else:
+                            splitActions = list(actionsRemain)
+                        i += 1
+                    #if Debug:
+                    #    print(len(splitActions))
+                    #    print(splitActions)
+                    actionsRemain = actionsRemain - set(splitActions)
+                    #if Debug:
+                    #    print(actionsRemain)
+                    foName = tempDirName+'/splitActions-'+str(jb)+'.py'
+                    fo = open(foName,'wb')
+                    spa = dumps(splitActions,-1)
+                    fo.write(spa)
+                    fo.close()
+                    splitThread = myThread(jb,tempDirName,Debug)
+                    splitThread.start()
+                    
+                while active_children() != []:
+                    pass
+                
+                # post threading operations
+                if Comments:    
+                    print('Exiting computing threads')
+                for jb in range(nbrOfJobs):
+                    #if Debug:
+                    #    print('Post job-%d/%d processing' % (jb+1,nbrOfJobs))
+                    #    print('job',jb)
+                    fiName = tempDirName+'/splitCorrelation-'+str(jb)+'.py'
+                    fi = open(fiName,'rb')
+                    splitCorrelation = loads(fi.read())
+                    #if Debug:
+                    #    print('splitCorrelation',splitCorrelation)
+                    fi.close()
+                    correlation += splitCorrelation['correlation']
+                    determination += splitCorrelation['determination']          
+                                            
+        else: #  no Threading
+            
+            if Debug:
+                print('No threading !')
+##            correlation, determination = sum([
+##                (min( max(-g.relation[x][y],otherRelation[x][y]),\
+##                     max(g.relation[x][y],-otherRelation[x][y]) ),\
+##                min( abs(g.relation[x][y]),\
+##                     abs(otherRelation[x][y]) )) for \
+##                (x,y) in product(g.actions, repeat = 2)])
+            
+##            for x,y in product(actions,repeat=1)
+            for x in dict.keys(g.actions):
+                for y in dict.keys(g.actions):
+                    if x != y:
+                        corr = min( max(-g.relation[x][y],otherRelation[x][y]),\
+                                    max(g.relation[x][y],-otherRelation[x][y]) )
+                        correlation += corr
+                        determination += min( abs(g.relation[x][y]),\
+                                              abs(otherRelation[x][y]) )
+                        #if Debug:
+                        #    print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)
+        
+                        
+        if determination > Decimal('0.0'):
+            correlation /= determination
+            return { 'correlation': correlation,\
+                     'determination': determination / Decimal(str(n2)) }
+        else:
+            return {'correlation': Decimal('0.0'),\
+                    'determination': determination}
+
+    def computeOrdinalCorrelation(self, other, MedianCut=False, filterRelation=None, Debug=False):
         """
         Renders the bipolar correlation K of a
         self.relation when compared
@@ -1423,7 +1753,7 @@ class Digraph(object):
         from copy import copy,deepcopy
         g = deepcopy(self)
         g.recodeValuation(-1,1)
-        actions = [x for x in g.actions]
+        actions = g.actions
         Med = g.valuationdomain['med']
         
         if MedianCut:
@@ -1441,8 +1771,8 @@ class Digraph(object):
             otherRelation = deepcopy(other)
             
             if MedianCut:
-                for x in g.actions:
-                    for y in g.actions:
+                for x in dict.keys(actions):
+                    for y in dict.keys(actions):
                         if x == y:
                             otherRelation[x][y] = Decimal('0.0')
                         else:
@@ -1459,8 +1789,8 @@ class Digraph(object):
         if filterRelation == None:
             n = len(actions)
             n2 = (n*(n-1))
-            for x in actions:
-                for y in actions:
+            for x in dict.keys(actions):
+                for y in dict.keys(actions):
                     if x != y:
                         corr = min( max(-g.relation[x][y],otherRelation[x][y]), max(g.relation[x][y],-otherRelation[x][y]) )
                         correlation += corr
@@ -1470,8 +1800,8 @@ class Digraph(object):
         else:
             n = len(actions)
             n2 = (n*(n-1))
-            for x in actions:
-                for y in actions:
+            for x in dict.keys(actions):
+                for y in dict.keys(actions):
                     if x != y:
                         if filterRelation[x][y] != Med:
                             corr = min( max(-g.relation[x][y],otherRelation[x][y]), max(g.relation[x][y],-otherRelation[x][y]) )
@@ -1489,12 +1819,11 @@ class Digraph(object):
             return {'MedianCut':MedianCut, 'correlation': Decimal('0.0'),\
                     'determination': determination}
 
-
-    def computeOrdinalCorrelation(self, other, MedianCut=False, filterRelation=None, Debug=False):
+    def computeBipolarCorrelation(self, other, MedianCut=False, filterRelation=None, Debug=False):
         """
-        obsolete: dummy replacement for Digraph.computeBipolarCorrelation method
+        obsolete: dummy replacement for Digraph.computeOrdinalCorrelation method
         """
-        return self.computeBipolarCorrelation(other= other,MedianCut=MedianCut,\
+        return self.computeOrdinalCorrelation(other= other,MedianCut=MedianCut,\
                                               filterRelation=filterRelation,Debug=Debug)
 
     def computeKemenyIndex(self, otherRelation):
@@ -1504,9 +1833,9 @@ class Digraph(object):
         other digraph (same nodes or actions).
         """
         KemenyIndex = 0.0
-        actions = [x for x in self.actions]
-        for x in actions:
-            for y in actions:
+        actions = self.actions
+        for x in dict.keys(actions):
+            for y in dict.keys(actions):
                 if x != y:
                     if otherRelation[x][y] > Decimal('0'):
                         KemenyIndex += float(self.relation[x][y])
@@ -1543,7 +1872,7 @@ class Digraph(object):
         """
         Converts the float valued self.relation in a decimal valued one.
         """
-        actions = [x for x in self.actions]
+        actions = self.actions
         relation = {}
         for x in actions:
             relation[x] = {}
@@ -1566,13 +1895,13 @@ class Digraph(object):
         xor = XORDigraph(self,digraph,Debug)
         if Debug:
             xor.showRelationTable()
-        actions = [x for x in self.actions]
+        actions = self.actions
         n = len(actions)
         xor.recodeValuation(-1.0,1.0)
 
         kDistance = Decimal("0.0")
-        for x in actions:
-            for y in actions:
+        for x in dict.keys(actions):
+            for y in dict.keys(actions):
                 if x != y:
                     kDistance += xor.relation[x][y]
         kDistance = Decimal(str(kDistance)) / Decimal(str((n * (n-1))))
@@ -1592,7 +1921,7 @@ class Digraph(object):
         xor = XORDigraph(self,digraph,Debug)
         if Debug:
             xor.showRelationTable()
-        actions = [x for x in self.actions]
+        actions = self.actions
         n = len(actions)
 
         k2Distance = xor.size()
@@ -1613,8 +1942,8 @@ class Digraph(object):
         xor = XORDigraph(self,digraph,Debug)
         if Debug:
             xor.showRelationTable()
-        actions = [x for x in self.actions]
-        n = len(actions)
+        #actions = [x for x in self.actions]
+        n = len(self.actions)
 
         k2Distance = xor.coSize() - xor.size()
         k2Distance = Decimal(str(k2Distance)) / Decimal(str((n * (n-1))))
@@ -1627,13 +1956,14 @@ class Digraph(object):
         self.relation[x][y] >= self.valuationdomain['med']
         for all y != x.
         """
-        actions = [x for x in self.actions]
+        actions = self.actions
+        relation = self.relation
         Med = self.valuationdomain['med']
         wCW = []
         for x in actions:
             Winner = True
-            for y in [z for z in self.actions if z != x]:
-                if self.relation[x][y] < Med:
+            for y in [z for z in actions if z != x]:
+                if relation[x][y] < Med:
                     Winner = False
                     break
             if Winner:
@@ -1650,13 +1980,14 @@ class Digraph(object):
         self.relation[x][y] > self.valuationdomain['med']
         for all y != x.
         """
-        actions = [x for x in self.actions]
+        actions = self.actions
+        relation = self.relation
         Med = self.valuationdomain['med']
         CW = []
-        for x in actions:
+        for x in dict.keys(actions):
             Winner = True
-            for y in [z for z in self.actions if z != x]:
-                if self.relation[x][y] <= Med:
+            for y in [z for z in dict.keys(actions) if z != x]:
+                if relation[x][y] <= Med:
                     Winner = False
                     break
             if Winner:
@@ -1671,20 +2002,19 @@ class Digraph(object):
         """
         Renders the set of most determined outranking singletons in self.
         """
-        import copy
-        actions = set(self.actions)
+        actions = self.actions
         relation = self.relation
         valuationList = []
-        for x in actions:
-            for y in actions:
+        for x in dict.keys(actions):
+            for y in dict.keys(actions):
                 if relation[x][y] not in valuationList:
                     valuationList.append(relation[x][y])
         valuationList.sort()
         print('Credibility levels:', valuationList)
-        bestSingleChoices = copy.deepcopy(actions)
+        bestSingleChoices = set( list(dict.keys(actions)) )
         i=0
         while bestSingleChoices != set():
-            current = copy.deepcopy(bestSingleChoices)
+            current = set(bestSingleChoices)
             i += 1
             print('i_bestSingleChoices:', i,  bestSingleChoices)
             print('level', valuationList[i])
@@ -1706,13 +2036,13 @@ class Digraph(object):
         """
         Renders a list of more or less unrelated pairs.
         """
-        actions = set(self.actions)
+        actions = self.actions
         relation = self.relation
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
         moreOrLessUnrelatedPairs = []
-        for x in actions:
-            for y in actions:
+        for x in dict.keys(actions):
+            for y in dict.keys(actions):
                 if x != y:
                     if relation[x][y] < Med and relation[x][y] > Min:
                         if relation[y][x] < Med and relation[y][x] > Min:
@@ -1724,13 +2054,13 @@ class Digraph(object):
         """
         Renders a list of more or less unrelated pairs.
         """
-        actions = set(self.actions)
+        actions = self.actions
         relation = self.relation
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
         unrelatedPairs = []
-        for x in actions:
-            for y in actions:
+        for x in dict.keys(actions):
+            for y in dict.keys(actions):
                 if x != y:
                     if relation[x][y] < Med:
                         if relation[y][x] < Med:
@@ -2355,6 +2685,84 @@ class Digraph(object):
 
         print()
 
+    def showRelationMap(self,symbols=None,rankingRule="netFlows"):
+        """
+        Prints on the console, in text map format, the location of
+        certainly validated and certainly invalidated outranking situations.
+
+        By default, symbols = {'max':'┬','positive': '+', 'median': ' ',
+                               'negative': '-', 'min': '┴'}
+
+        The default ordering of the output is following the net flows ranking rule
+        from best to worst actions. Further available ranking rules are Kohler's (rankingRule="kohler")
+        and Tideman's ranked pairs rule (rankingRule="rankedPairs")
+
+        Example::
+
+            >>> from outrankingDigraphs import *
+            >>> t = RandomCBPerformanceTableau(numberOfActions=25,seed=1)
+            >>> g = BipolarOutrankingDigraph(t,Normalized=True)
+            >>> gcd = ~(-g)  # strict outranking relation
+            >>> gcd.showRelationMap(rankingRule="netFlows")
+             -   ++++++++  +++++┬+┬┬+
+            - -   + +++++ ++┬+┬+++┬++
+            ┴+  ┴ + ++  ++++┬+┬┬++┬++
+            -   ++ - ++++-++++++┬++┬+
+               - - - ++- ┬- + -+┬+-┬┬
+            -----  -      -┬┬┬-+  -┬┬
+            ----    --+-+++++++++++++
+            -- --+- --++ ++ +++-┬+-┬┬
+            ----  -  -+-- ++--+++++ +
+            ----- ++- --- +---++++┬ +
+            -- -- ---+ -++-+++-+ +-++
+            -- --┴---+  + +-++-+ -  +
+            ---- ┴---+-- ++--++++ - +
+              --┴┴--  --- -  --+ --┬┬
+             ---------+--+ ----- +-┬┬
+            -┴---┴- ---+- + ---+++┬ +
+            -┴┴--┴---+--- ++ -++--+++
+            -----┴--- ---+-+- ++---+ 
+            -┴┴--------------- --++┬ 
+            --┴---------------- --+┬ 
+            ┴--┴┴ -┴--┴┴-┴ --++  ++-+
+            ----┴┴--------------- -  
+            ┴┴┴----+-┴+┴---┴-+---+ ┴+
+            ┴┴-┴┴┴-┴- - -┴┴---┴┴+ ┬ -
+            ----┴┴-┴-----┴┴---  - -- 
+            Ranking rule: netFlows
+            >>> 
+
+        """
+        if symbols == None:
+            symbols = {'max':'┬','positive': '+', 'median': ' ',
+                       'negative': '-', 'min': '┴'}
+        if rankingRule == "Kohler":
+            ranking = self.computeKohlerRanking()
+        elif rankingRule == "rankedPairs":
+            ranking = self.computeRankedPairsRanking()
+        else:
+            ranking = self.computeNetFlowsRanking()
+        relation = self.relation
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        for x in ranking:
+            pictStr = ''
+            for y in ranking:
+                if relation[x][y] == Max:
+                    pictStr += symbols['max']
+                elif relation[x][y] == Min:
+                    pictStr += symbols['min']
+                elif relation[x][y] > Med:
+                    pictStr += symbols['positive']
+                elif relation[x][y] ==Med:
+                    pictStr += symbols['median']
+                elif relation[x][y] < Med:
+                    pictStr += symbols['negative']
+            print(pictStr)
+        print('Ranking rule: %s' % rankingRule)
+      
+
     def showRelationTable(self,Sorted=True,\
                           IntegerValues=False,\
                           actionsSubset= None,\
@@ -2545,7 +2953,8 @@ class Digraph(object):
     def exportPrincipalImage(self, Reduced=False,\
                              Colwise=False,\
                              plotFileName=None,\
-                             Type="png",Comments=False):
+                             Type="png",\
+                             TempDir='.',Comments=False):
         """
         Export as PNG (default) or PDF the principal projection of
         the valued relation using the three principal eigen vectors.
@@ -2554,25 +2963,29 @@ class Digraph(object):
         
             The method, writing and reading temporary files: 
             tempCol.r and rotationCol.csv, resp. tempRow.r and rotationRow.csv,
-            is hence not safe for multiprocessors' threading programs.
+            by default in the working directory (./),
+            is hence not safe for multiprocessing programs, unless a
+            temporary dirctory is provided
 
         """
         
         if Comments:
             print('*----  export 3dplot of type %s -----' % (Type))
+        if TempDir == None:
+            TempDir = '.'
         import os,time
         if plotFileName == None:
-            plotFileName = "%s_principalImage" % self.name
+            plotFileName = "%s/%s_principalImage" % (TempDir,self.name)
         if Colwise:
             plotFileName += "_Colwise"
         else:
             plotFileName += "_Rowwise"
-        self.saveCSV('exportTemp')
+        self.saveCSV('%s/exportTemp' % TempDir)
         if Colwise:
-            fo = open('tempCol.r','w')
+            fo = open('%s/tempCol.r' % TempDir,'w')
         else:
-            fo = open('tempRow.r','w')
-        fo.write("x = read.csv('exportTemp.csv',row.names=1)\n")
+            fo = open('%s/tempRow.r' % TempDir,'w')
+        fo.write("x = read.csv('%s/exportTemp.csv',row.names=1)\n" % TempDir)
         if Colwise:
             fo.write("x = t(x)\n")
         if Reduced:
@@ -2584,9 +2997,9 @@ class Digraph(object):
         fo.write("E = eigen(A, symmetric=TRUE)\n")
         fo.write("P = E$values * t(E$vectors)\n")
         if Colwise:
-            fo.write("write.csv(t(P),'rotationCol.csv',row.names=F)\n")
+            fo.write("write.csv(t(P),'%s/rotationCol.csv',row.names=F)\n" % TempDir)
         else:
-            fo.write("write.csv(t(P),'rotationRow.csv',row.names=F)\n")           
+            fo.write("write.csv(t(P),'%s/rotationRow.csv',row.names=F)\n" % TempDir)           
         if Type == None:
             # no principal image is required
             fo.close()
@@ -2596,17 +3009,17 @@ class Digraph(object):
             fo.write("val = pcaRes$val\n")
             fo.write("nval = length(val)\n")
             if Type == "png":
-                fo.write('png("%s.png",width=480,height=480,bg="cornsilk")\n'\
-                         % (plotFileName) )
+                fo.write('png("%s/%s.png",width=480,height=480,bg="cornsilk")\n'\
+                         % (TempDir,plotFileName) )
             elif Type == "jpeg":
-                fo.write('jpeg("%s.jpg",width=480,height=480,bg="cornsilk")\n'\
-                         % (plotFileName) )
+                fo.write('jpeg("%s/%s.jpg",width=480,height=480,bg="cornsilk")\n'\
+                         % (TempDir,plotFileName) )
             elif Type == "xfig":
-                fo.write('xfig("%s.fig",width=480,height=480,bg="cornsilk")\n'\
-                         % (plotFileName) )
+                fo.write('xfig("%s/%s.fig",width=480,height=480,bg="cornsilk")\n'\
+                         % (TempDir,plotFileName) )
             elif Type == "pdf":
-                fo.write('pdf("%s.pdf",width=6,height=6,bg="cornsilk",title="PCA of relation valuation")\n'\
-                         % (plotFileName) )
+                fo.write('pdf("%s/%s.pdf",width=6,height=6,bg="cornsilk",title="PCA of relation valuation")\n'\
+                         % (TempDir,plotFileName) )
             else:
                 print('Error: Plotting device %s not defined !' % (Type))
                 return
@@ -2630,18 +3043,18 @@ class Digraph(object):
             fo.close()
         if Comments:
             if Colwise:
-                os.system('env R -q --vanilla --verbose < tempCol.r 2>&1')
+                os.system('(cd %s;env R -q --vanilla --verbose < tempCol.r 2>&1)' % TempDir)
             else:
-                os.system('env R -q --vanilla --verbose < tempRow.r 2>&1')               
+                os.system('(cd %s;env R -q --vanilla --verbose < tempRow.r 2>&1)' % TempDir )               
         else:
             if Colwise:
-                os.system('env R -q --vanilla < tempCol.r > /dev/null 2> /dev/null')
+                os.system('(cd %s;env R -q --vanilla < tempCol.r > /dev/null 2> /dev/null)' % TempDir)
             else:
-                os.system('env R -q --vanilla < tempRow.r > /dev/null 2> /dev/null')
+                os.system('(cd %s;env R -q --vanilla < tempRow.r > /dev/null 2> /dev/null)' % TempDir)
                 
         time.sleep(3)     
         if Type != None and Comments:
-            print('See %s.%s ! ' % (plotFileName,Type))
+            print('See %/%s.%s ! ' % (TempDir,plotFileName,Type))
         
         
     def exportGraphViz(self,fileName=None,actionsSubset=None,\
@@ -3484,17 +3897,18 @@ class Digraph(object):
         of the irreflexive and determined arcs of the digraph
         """
         Med = self.valuationdomain['med']
+        relation = self.relation
         averageValuation = Decimal('0.0')
         determined = Decimal('0.0')
-        actions = [x for x in self.actions]
+        actionsList = [x for x in self.actions]
         nbDeterm = 0
-        for x in actions:
-            for y in actions:
+        for x in actionsList:
+            for y in actionsList:
                 if x != y:
-                    if self.relation[x][y] != Med:
+                    if relation[x][y] != Med:
                         nbDeterm += 1
-                        averageValuation += self.relation[x][y]
-                        determined += abs(self.relation[x][y])
+                        averageValuation += relation[x][y]
+                        determined += abs(relation[x][y])
         return averageValuation / determined
 
     def computeDeterminateness(self):
@@ -3504,16 +3918,17 @@ class Digraph(object):
         """
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
-        actionsList = [x for x in self.actions]
         relation = self.relation
+        actions = self.actions
         order = self.order
         deter = Decimal('0.0')
-        for x in actionsList:
-            for y in actionsList:
+        for x in actions:
+            for y in actions:
                 if x != y:
-                    #print relation[x][y], Med, relation[x][y] - Med
+                    #print(relation[x][y], Med, relation[x][y] - Med)
                     deter += abs(relation[x][y] - Med)
-        deter /= order * (order-1) * (Max - Med)
+                    #print(deter)
+        deter = (deter /Decimal(str((order * (order-1))))) * (Max - Med)
         return deter
 
     def showStatistics(self):
@@ -3782,7 +4197,8 @@ class Digraph(object):
         Renders the number of validated non reflexive arcs
         """
         Med = self.valuationdomain['med']
-        actions = [x for x in self.actions]
+        #actions = [x for x in self.actions]
+        actions = self.actions
         relation = self.relation
         size = 0
         for x in actions:
@@ -4370,6 +4786,53 @@ class Digraph(object):
 
 
     def gammaSets(self):
+        """
+        Renders the dictionary of neighborhoods {node: (dx,ax)}
+        with set *dx* gathering the dominated, and set *ax* gathering
+        the absorbed neighborhood.
+
+        """
+        Med = self.valuationdomain['med']
+        actions = self.actions
+        relation = self.relation
+        gamma = {}
+        for x in actions:
+            dx = set()
+            ax = set()
+            for y in actions:
+                if x != y:
+                    if relation[x][y] > Med:
+                        dx.add(y)
+                    if relation[y][x] > Med:
+                        ax.add(y)
+            gamma[x] = (dx,ax)
+        return gamma
+
+    def notGammaSets(self):
+        """
+        Renders the dictionary of neighborhoods {node: (dx,ax)}
+        with set *dx* gathering the not dominated, and set *ax* gathering
+        the not absorbed neighborhood.
+
+        """
+        Med = self.valuationdomain['med']
+        actions = self.actions
+        relation = self.relation
+        notGamma = {}
+        for x in actions:
+            dx = set()
+            ax = set()
+            for y in actions:
+                if x != y:
+                    if relation[x][y] < Med:
+                        dx.add(y)
+                    if relation[y][x] < Med:
+                        ax.add(y)
+            notGamma[x] = (dx,ax)
+        return notGamma
+
+
+    def _gammaSets(self):
         """ Renders the dictionary of neighborhoods {node: (dx,ax)}"""
         gamma = {}
         for x in self.actions:
@@ -4387,7 +4850,7 @@ class Digraph(object):
             weakGamma[x] = (dx,ax)
         return weakGamma
 
-    def notGammaSets(self):
+    def _notGammaSets(self):
         """ Renders the dictionary of not neighborhoods {node: (dx,ax)} """
         notGamma = {}
         for x in self.actions:
@@ -4447,6 +4910,9 @@ class Digraph(object):
         Med = self.valuationdomain['med']
         nb = set()
         for a in self.actions:
+##            if a != node:
+##                if self.relation[a][node] < Med:
+##                    nb.add(a)
             if a != node:
                 if self.relation[a][node] < Med:
                     nb.add(a)
@@ -4594,7 +5060,7 @@ class Digraph(object):
         self.valuationdomain['min'] = newMin
         self.valuationdomain['med'] = newMed
 
-        self.relation = newRelation.copy()
+        self.relation = newRelation
 
 
     def recodeValuation(self,newMin=-1.0,newMax=1.0,Debug=False):
@@ -4607,7 +5073,6 @@ class Digraph(object):
             Default values gives a normalized valuation domain
 
         """
-        from copy import copy
         oldMax = self.valuationdomain['max']
         oldMin = self.valuationdomain['min']
         oldMed = self.valuationdomain['med']
@@ -4637,7 +5102,7 @@ class Digraph(object):
                 elif oldrelation[x][y] == oldMed:
                     newrelation[x][y] = newMed
                 else:
-                    newrelation[x][y] = newMin + ((self.relation[x][y] - oldMin)/oldAmplitude)*newAmplitude
+                    newrelation[x][y] = newMin + ((oldrelation[x][y] - oldMin)/oldAmplitude)*newAmplitude
                     if Debug:
                         print(x,y,self.relation[x][y],newrelation[x][y])
         # install new values in self
@@ -4646,7 +5111,7 @@ class Digraph(object):
         self.valuationdomain['med'] = newMed
         self.valuationdomain['hasIntegerValuation'] = False
 
-        self.relation = copy(newrelation)
+        self.relation = newrelation
 
     def dominantChoices(self,S):
         """
@@ -4964,7 +5429,7 @@ class Digraph(object):
         else:
             return Max
 
-    def save(self,fileName='tempdigraph',option=None,DecimalValuation=True):
+    def save(self,fileName='tempdigraph',option=None,DecimalValuation=True,decDigits=2):
         """Persistent storage of a Digraph class instance in the form of
             a python source code file"""
         print('*--- Saving digraph in file: <' + fileName + '.py> ---*')
@@ -5000,7 +5465,9 @@ class Digraph(object):
             fo.write('\'' + str(x) + '\': {\n')
             for y in actions:
                 if not hasIntegerValuation:
-                    fo.write('\'' + str(y) + '\': Decimal("' + str(relation[x][y]) + '"),\n')
+                    valueString = '\': %%.%df,\n' % (decDigits)
+                    fo.write('\'' + str(y) + (valueString % relation[x][y]))
+                    #fo.write('\'' + str(y) + '\': Decimal("' + str(relation[x][y]) + '"),\n')
                 else:
                     fo.write('\'' + str(y) + '\':' + str(relation[x][y]) + ',\n')
             fo.write('},\n')
@@ -5658,19 +6125,19 @@ class Digraph(object):
         nNarcs = 0
         minAmplitude = amplitude
         minLink = None
-        for x in circuit:
-            for y in circuit:
-                if x != y:
-                    if relation[x][y] > Med:
-                        degP += relation[x][y]
-                        nParcs += 1
-                        diffxy = relation[x][y]-relation[y][x]
-                        if minAmplitude > diffxy:
-                            minAmplitude = diffxy
-                            minLink = (x,y)
-                    elif relation[x][y] < Med:
-                        degN += relation[x][y]
-                        nNarcs += 1
+        nc = len(circuit)
+        for i in range(nc):
+            x = circuit[i]
+            for j in range(i+1,nc):
+                y = circuit[j]
+                degP += relation[x][y]
+                nParcs += 1
+                diffxy = relation[x][y]
+                if minAmplitude > diffxy:
+                    minAmplitude = diffxy
+                    minLink = (x,y)
+                degN += relation[y][x]
+                nNarcs += 1
         if nParcs != 0:
             degP /= Decimal(str(nParcs))
         if nNarcs != 0:
@@ -5803,12 +6270,12 @@ class Digraph(object):
         return relation_k
 
 
-    def showRubyChoice(self,Comments=False):
+    def showRubyChoice(self,Comments=False,_OldCoca=True):
         """
-        dummy for showRubisChoice()
+        dummy for showRubisBestChoiceRecommendation()
         older versions compatibility
         """
-        self.showRubisBestChoiceRecommendation(Comments=Comments)
+        self.showRubisBestChoiceRecommendation(Comments=Comments,_OldCoca=_OldCoca)
 
     def showRubisBestChoiceRecommendation(self,
                                           Comments=False,
@@ -5829,14 +6296,17 @@ class Digraph(object):
         t0 = time.time()
         n0 = self.order
         if _OldCoca:
-            _selfwcoc = OldCocaDigraph(self,Cpp=Cpp,Comments=Comments)
+            _selfwcoc = _CocaDigraph(self,Cpp=Cpp,Comments=Comments)
+            b1 = 0
         else:
             _selfwcoc = CocaDigraph(self,Cpp=Cpp,Comments=Comments)
+            b1 = _selfwcoc.brakings
         n1 = _selfwcoc.order
         nc = n1 - n0
-        if nc > 0:
+        
+        self.relation_orig = copy.deepcopy(self.relation)
+        if nc > 0 or b1 > 0:
             self.actions_orig = copy.deepcopy(self.actions)
-            self.relation_orig = copy.deepcopy(self.relation)
             self.actions = copy.deepcopy(_selfwcoc.actions)
             self.order = len(self.actions)
             self.relation = copy.deepcopy(_selfwcoc.relation)
@@ -5849,17 +6319,13 @@ class Digraph(object):
             self.showRelationTable()
         #self.showPreKernels()
         actions = set([x for x in self.actions])
-        self.dompreKernels = set()
-        self.abspreKernels = set()
-        #t0 = time.time()
-        for choice in self.independentChoices(self.singletons()):
-            restactions = actions - choice[0][0]
-            if restactions <= choice[0][1]:
-                self.dompreKernels.add(choice[0][0])
-            if restactions <= choice[0][2]:
-                self.abspreKernels.add(choice[0][0])
+        self.showPreKernels()
+        if Debug:
+            print(self.dompreKernels,self.abspreKernels)
         self.computeGoodChoices(Comments=Comments)
         self.computeBadChoices(Comments=Comments)
+        if Debug:
+            print('good and bad choices: ',self.goodChoices,self.badChoices)
         t1 = time.time()
         print('* --- Rubis best choice recommendation(s) ---*')
         print('  (in decreasing order of determinateness)   ')
@@ -5942,52 +6408,60 @@ class Digraph(object):
         print('*****************************')
         self.bestChoice = bestChoice
         self.worstChoice = worstChoice
-        if nc > 0:
+        if nc > 0 or b1 > 0:
             self.actions = copy.deepcopy(self.actions_orig)
             self.relation = copy.deepcopy(self.relation_orig)
             self.order = len(self.actions)
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
 
-    def computeRubyChoice(self,CppAgrum=False,Comments=False):
+    def computeRubyChoice(self,CppAgrum=False,Comments=False,_OldCoca=False):
         """
         dummy for computeRubisChoice()
         old versions compatibility.
         """
-        self.computeRubisChoice(CppAgrum=CppAgrum,Comments=Comments)
+        self.computeRubisChoice(CppAgrum=CppAgrum,Comments=Comments,_OldCoca=_OldCoca)
 
-    def computeRubisChoice(self,CppAgrum=False,Comments=False):
+    def computeRubisChoice(self,CppAgrum=False,Comments=False,_OldCoca=False):
         """
         Renders self.strictGoodChoices, self.nullChoices
         self.strictBadChoices, self.nonRobustChoices.
 
-
         CppgArum = False (default | true : use C++/Agrum digraph library
         for computing chordless circuits in self.
+
+        .. warning::
+            Changes in site the outranking digraph by
+            adding or braking chordless odd outranking circuits.
+            
         """
+        #print('Passing here',_OldCoca)
         import copy,time
         if Comments:
             print('*--- computing the COCA digraph --*')
 
         n0 = self.order
         t0 = time.time()
-        _selfwcoc = CocaDigraph(self,Cpp=CppAgrum,Comments=Comments)
+        if _OldCoca:
+            _selfwcoc = _CocaDigraph(self,Cpp=CppAgrum,Comments=Comments)
+            b1 = 0
+        else:
+            _selfwcoc = CocaDigraph(self,Cpp=CppAgrum,Comments=Comments)
+            b1 = _selfwcoc.brakings
         t1 = time.time()
-        n1 = _selfwcoc.order
-        nc = n1 - n0
         if Comments:
             print('Execution time: %.3f seconds' % (t1-t0))
             _selfwcoc.showPreKernels()
         try:
-            actions_orig = copy.deepcopy(self.actions_orig)
+            self.actions_orig = copy.deepcopy(self.actions_orig)
         except:
-            actions_orig = copy.deepcopy(self.actions)
-        self.actions_orig = actions_orig
+            self.actions_orig = copy.deepcopy(self.actions)
+        #self.actions_orig = actions_orig
         self.relation_orig = copy.deepcopy(self.relation)
 
-        self.actions = copy.deepcopy(_selfwcoc.actions)
+        self.actions = _selfwcoc.actions
         self.order = len(self.actions)
-        self.relation = copy.deepcopy(_selfwcoc.relation)
+        self.relation = _selfwcoc.relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         actions = set([x for x in self.actions])
@@ -6025,6 +6499,15 @@ class Digraph(object):
         if Comments:
             self.showGoodChoices()
             self.showBadChoices()
+        n1 = _selfwcoc.order
+        nc = n1 - n0
+        #if nc > 0 or b1 > 0:
+        #self.actions = self.actions_orig
+        #self.relation = self.relation_orig
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+    
 
     def computeGoodChoiceVector(self,ker,Comments=False):
         """
@@ -6177,7 +6660,7 @@ class Digraph(object):
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
-        actions = self.actions
+        actions = list(self.actions.keys())
         n = len(actions)
         relation = self.relation
         domChoicesSort = []
@@ -6234,7 +6717,7 @@ class Digraph(object):
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
-        actions = self.actions
+        actions = list(self.actions.keys())
         n = len(actions)
         relation = self.relation
         absChoicesSort = []
@@ -7396,14 +7879,75 @@ class Digraph(object):
             else:
                 return Med
 
-    def computeKohlerRanking(self,Debug=False):
+    def _computeNetFlowsRankingDict(self,Stored=True,Debug=False):
         """
-        renders a ranking of the actions following Kohler's rule.
+        renders an ordered dictionary of the actions (from best to worst)
+        following the net flows ranking rule with rank and net flow attributes.
+        """
+        relation = self.relation
+        netFlows = []
+        Med = self.valuationdomain['med']
+        if Med == Decimal('0'):
+            for x in self.actions.keys():
+                xnetflows = sum(relation[x][y] - relation[y][x]\
+                                for y in dict.keys(self.actions))
+##                if Debug:
+##                    print('netflow for %s = %.2f' % (x, xnetflows))
+                netFlows.append((-xnetflows,x))
+                # reversed sorting with keeping the actions natural ordering
+            
+        else:
+            Max = self.valuationdomain['max']
+            Min = self.valuationdomain['min']
+            for x in self.actions.keys():
+                xnetflows = sum(relation[x][y] + (Max - relation[y][x] + Min)\
+                                for y in dict.keys(self.actions))
+##                if Debug:
+##                    print('netflow for %s = %.2f' % (x, xnetflows))
+                netFlows.append((-xnetflows,x))
+                # reversed sorting with keeping the actions natural ordering
+        netFlows.sort()
+##        if Debug:
+##            print(netFlows)
+
+        netFlowsRanking = OrderedDict()
+        for k,item in enumerate(netFlows):
+            netFlowsRanking[item[1]] = {'rank':k,'netFlow':-item[0]}
+        if Stored:
+            self.netFlowsRankingDict = netFlowsRanking
+        return netFlowsRanking
+
+    def computeNetFlowsRanking(self):
+        """
+        renders an ordered list (from best to worst) of the actions
+        following the net flows ranking rule.
+        """
+        try:
+            return list(self.netFlowsRankingDict.keys())
+        except AttributeError:
+            netFlowsRankingDict = self._computeNetFlowsRankingDict()
+            return list(netFlowsRankingDict.keys())
+
+    def computeNetFlowsOrder(self):
+        """
+        renders an ordered list (from worst to best) of the actions
+        following the net flows ranking rule.
+        """
+        try:
+            return list(reversed(list(self.netFlowsRankingDict.keys())))
+        except AttributeError:
+            netFlowsRankingDict = self._computeNetFlowsRankingDict()
+            return list(reversed(list(netFlowsRankingDict.keys())))
+        
+    def computeKohlerRankingDict(self,Debug=False):
+        """
+        renders a ranking from the best to the worst of the actions following Kohler's rule as an
+        ordered dictionary with rank and majorityMargin attributes.
         """
         Max = self.valuationdomain['max']
         actionsList = [x for x in self.actions]
         relation = self.relation
-        rank = {}
+        rank = OrderedDict()
         k = 1
         while actionsList != []:
             maximin = []
@@ -7428,6 +7972,14 @@ class Digraph(object):
             print(rank)
         return rank
 
+    def computeKohlerOrder(self):
+        ranking = self.computeKohlerRankingDict()
+        return list(reversed(ranking))
+    
+    def computeKohlerRanking(self):
+        ranking = self.computeKohlerRankingDict()
+        return [x for x in ranking]
+
     def computeArrowRaynaudRanking(self,Debug=False):
         """
         renders a ranking of the actions following Arrow&Raynaud's rule.
@@ -7436,7 +7988,7 @@ class Digraph(object):
         actionsList = [x for x in self.actions]
         n = len(actionsList)
         relation = self.relation
-        rank = {}
+        rank = OrderedDict()
         k = 1
         while actionsList != []:
             minimax = []
@@ -7463,10 +8015,11 @@ class Digraph(object):
 
     def computeRankedPairsOrder(self,Cpp=False,Debug=False):
         """
-        renders a ranking of the actions obtained from the
+        renders an actions ordering from the worst to the best obtained from the
         ranked pairs rule.
         """
         relation = self.relation
+        actions = self.actions
         actions = [x for x in self.actions]
         actions.sort()
 
@@ -7475,7 +8028,7 @@ class Digraph(object):
         listPairs = []
         for x in actions:
             for y in [z for z in actions if z != x]:
-                listPairs.append((-relation[x][y],(x,y),x,y))
+                listPairs.append((relation[x][y],(x,y),x,y))
         listPairs.sort(reverse=False)
 
         g = IndeterminateDigraph(order=n)
@@ -7526,6 +8079,9 @@ class Digraph(object):
             print('Ranked Pairs Order = ', rankedPairsOrder)
         return rankedPairsOrder
 
+    def computeRankedPairsRanking(self):
+        ordering = self.computeRankedPairsOrder()
+        return list(reversed(ordering))
 
     def computeKemenyOrder(self,isProbabilistic=False, orderLimit=7, seed=None, sampleSize=1000, Debug=False):
         """
@@ -7601,32 +8157,40 @@ class Digraph(object):
                 print('Exact Kemeny Orders = ', kemenyOrder)
                 print('Exact Kemeny Index = ', kemenyIndex)
                 print('# of permutations  = ', s)
-            
+
+        kemenyOrder.reverse()
         return kemenyOrder, kemenyIndex
 
-    def computePrincipalOrder(self, plotFileName=None,
-                              Colwise=False, imageType=None,
+    def computePrincipalOrder(self, plotFileName=None,\
+                              Colwise=False, imageType=None,\
+                              TempDir=None,\
                               Comments=False, Debug=False):
         """
         renders a ordered list of self.actions using the decreasing scores from the
         first rincipal eigenvector of the covariance of the valued outdegrees of self.
 
-        .. warning::
+        .. note::
 
-           The method, relying on writing and reading temporary files in the current
-           working directory, is hence not threading and multiprocessing safe !
+           The method, relying on writing and reading temporary files by default in a temporary directory is threading and multiprocessing safe !
            (see Digraph.exportPrincipalImage method)
 
         """
         from csv import reader
-        from operator import itemgetter, attrgetter
+        #from operator import itemgetter, attrgetter
+        from tempfile import mkdtemp
+        if TempDir == None:
+            tempDirName = mkdtemp()
+        else:
+            tempDirName = TempDir
         self.exportPrincipalImage(Colwise=Colwise,Comments=Comments,
                                   Type=imageType,
-                                  plotFileName=plotFileName)
+                                  plotFileName=plotFileName,
+                                  TempDir=tempDirName,
+                                  )
         if Colwise:
-            fi = open('rotationCol.csv','r')
+            fi = open('%s/rotationCol.csv' % tempDirName,'r')
         else:
-            fi = open('rotationRow.csv','r')
+            fi = open('%s/rotationRow.csv' % tempDirName,'r')
             
         csvReader = reader(fi)
         R = [x for x in csvReader]
@@ -7790,31 +8354,31 @@ class CoDualDigraph(Digraph):
     """
 
     def __init__(self,other,Debug=False):
-        from copy import copy, deepcopy
+        from copy import deepcopy
         self.__class__ = other.__class__
         self.name = 'codual-'+other.name
         try:
-            self.description = copy(other.description)
+            self.description = deepcopy(other.description)
         except AttributeError:
             pass
         try:
-            self.criteria = copy(other.criteria)
+            self.criteria = deepcopy(other.criteria)
         except AttributeError:
             pass
         try:
-            self.evaluation = copy(other.evaluation)
+            self.evaluation = deepcopy(other.evaluation)
         except AttributeError:
             pass
-        self.actions = copy(other.actions)
+        self.actions = deepcopy(other.actions)
         self.order = len(self.actions)
-        self.valuationdomain = copy(other.valuationdomain)
-        actionsList = list(self.actions)
+        self.valuationdomain = deepcopy(other.valuationdomain)
+        #actionsList = list(self.actions)
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
         relation = {}
-        for x in actionsList:
+        for x in self.actions:
             relation[x] = {}
-            for y in actionsList:
+            for y in self.actions:
                 relation[x][y] = Max - other.relation[y][x] + Min
         self.relation = relation
         self.gamma = self.gammaSets()
@@ -7835,25 +8399,25 @@ class CoverDigraph(Digraph):
     """
 
     def __init__(self,other, Debug=False):
-        from copy import copy, deepcopy
+        from copy import deepcopy
         self.__class__ = other.__class__
         self.name = 'cover-'+other.name
         try:
-            self.description = copy(other.description)
+            self.description = deepcopy(other.description)
         except AttributeError:
             pass
         try:
-            self.criteria = copy(other.criteria)
+            self.criteria = deepcopy(other.criteria)
         except AttributeError:
             pass
         try:
-            self.evaluation = copy(other.evaluation)
+            self.evaluation = deepcopy(other.evaluation)
         except AttributeError:
             pass
-        self.actions = copy(other.actions)
+        self.actions = deepcopy(other.actions)
         self.order = len(self.actions)
-        self.valuationdomain = copy(other.valuationdomain)
-        actionsList = list(self.actions)
+        self.valuationdomain = deepcopy(other.valuationdomain)
+        #actionsList = list(self.actions)
         #Max = Decimal('2')*other.valuationdomain['max']
         #Med = Decimal('0')
         #Min = -Max
@@ -7861,14 +8425,14 @@ class CoverDigraph(Digraph):
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
         relation = {}
-        for x in actionsList:
+        for x in self.actions:
             relation[x] = {}
-            for y in actionsList:
+            for y in self.actions:
                 if y == x:
                     relation[x][y] = Med
                 else:
                     coverXY = Max
-                    for z in actionsList:
+                    for z in self.actions:
                         if z != x and z != y:
                             coverz = max(other.relation[x][z],(Max-other.relation[y][z]+Min))
                             coverXY = min(coverXY,coverz)
@@ -7894,31 +8458,31 @@ class ConverseDigraph(Digraph):
     """
 
     def __init__(self,other):
-        from copy import copy, deepcopy
+        from copy import deepcopy
         self.__class__ = other.__class__
         self.name = 'converse-'+other.name
         try:
-            self.description = copy(other.description)
+            self.description = deepcopy(other.description)
         except AttributeError:
             pass
         try:
-            self.criteria = copy(other.criteria)
+            self.criteria = deepcopy(other.criteria)
         except AttributeError:
             pass
         try:
-            self.evaluation = copy(other.evaluation)
+            self.evaluation = deepcopy(other.evaluation)
         except AttributeError:
             pass
-        self.actions = copy(other.actions)
+        self.actions = deepcopy(other.actions)
         self.order = len(self.actions)
         self.valuationdomain = deepcopy(other.valuationdomain)
-        actionsList = list(self.actions)
-        max = self.valuationdomain['max']
-        min = self.valuationdomain['min']
+        #actionsList = list(self.actions)
+        #max = self.valuationdomain['max']
+        #min = self.valuationdomain['min']
         relation = {}
-        for x in actionsList:
+        for x in self.actions:
             relation[x] = {}
-            for y in actionsList:
+            for y in self.actions:
                 relation[x][y] = other.relation[y][x]
         self.relation = relation
         self.gamma = self.gammaSets()
@@ -7935,18 +8499,18 @@ class FusionDigraph(Digraph):
     """
 
     def __init__(self,dg1,dg2,operator="o-min"):
-        from copy import copy, deepcopy
+        from copy import deepcopy
         self.name = 'fusion-'+dg1.name+'-'+dg2.name
-        self.actions = copy(dg1.actions)
+        self.actions = deepcopy(dg1.actions)
         self.order = len(dg1.actions)
-        self.valuationdomain = copy(dg1.valuationdomain)
-        actionsList = list(self.actions)
-        max = self.valuationdomain['max']
-        min = self.valuationdomain['min']
+        self.valuationdomain = deepcopy(dg1.valuationdomain)
+        #actionsList = list(self.actions)
+        #max = self.valuationdomain['max']
+        #min = self.valuationdomain['min']
         fusionRelation = {}
-        for x in actionsList:
+        for x in self.actions:
             fusionRelation[x] = {}
-            for y in actionsList:
+            for y in self.actions:
                 if operator == "o-min":
                     fusionRelation[x][y] = self.omin((dg1.relation[x][y],dg2.relation[x][y]))
                 elif operator == "o-max":
@@ -7967,18 +8531,18 @@ class FusionLDigraph(Digraph):
     """
 
     def __init__(self,L,operator="o-min"):
-        from copy import copy, deepcopy
+        from copy import deepcopy
         self.name = 'fusion-'+L[0].name
-        self.actions = copy(L[0].actions)
+        self.actions = deepcopy(L[0].actions)
         self.order = len(L[0].actions)
-        self.valuationdomain = copy(L[0].valuationdomain)
-        actionsList = list(self.actions)
-        max = self.valuationdomain['max']
-        min = self.valuationdomain['min']
+        self.valuationdomain = deepcopy(L[0].valuationdomain)
+        #actionsList = list(self.actions)
+        #Max = self.valuationdomain['max']
+        #Min = self.valuationdomain['min']
         fusionRelation = {}
-        for x in actionsList:
+        for x in self.actions:
             fusionRelation[x] = {}
-            for y in actionsList:
+            for y in self.actions:
                 args = [g.relation[x][y] for g in L]
                 if operator == "o-min":
                     fusionRelation[x][y] = self.omin(args)
@@ -8005,40 +8569,40 @@ class Preorder(Digraph):
     """
 
     def __init__(self,other,direction="best"):
-        from copy import copy, deepcopy
+        from copy import deepcopy
         self.__class__ = other.__class__
         self.name = 'preorder-'+other.name
         try:
-            self.description = copy(other.description)
+            self.description = deepcopy(other.description)
         except AttributeError:
             pass
         try:
-            self.criteria = copy(other.criteria)
+            self.criteria = deepcopy(other.criteria)
         except AttributeError:
             pass
         try:
-            self.evaluation = copy(other.evaluation)
+            self.evaluation = deepcopy(other.evaluation)
         except AttributeError:
             pass
-        self.actions = copy(other.actions)
+        self.actions = deepcopy(other.actions)
         self.order = len(self.actions)
-        self.valuationdomain = copy(other.valuationdomain)
+        self.valuationdomain = deepcopy(other.valuationdomain)
         actionsList = [x for x in self.actions]
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
         relation = {}
-        for x in actionsList:
+        for x in self.actions:
             relation[x] = {}
-            for y in actionsList:
+            for y in self.actions:
                 relation[x][y] = None
 
         if direction == 'best':
             rank = other.bestRanks()
         else:
             rank = other.worstRanks()
-        for i in range(len(actionsList)):
+        for i in range(self.order):
             x = actionsList[i]
-            for j in range(i, len(actionsList)):
+            for j in range(i, self.order):
                 y = actionsList[j]
                 if rank[x] < rank[y]:
                     relation[x][y] = Max
@@ -8063,15 +8627,15 @@ class XORDigraph(Digraph):
     """
 
     def __init__(self,d1,d2,Debug = False):
-        from copy import copy,deepcopy
+        from copy import deepcopy
         self.name = 'XORDigraph'
         if d1.order != d2.order:
             if Debug:
                 print("XORDigraph init ERROR:\n the input digraphs are not of the same order !")
             return None
         self.order = d1.order
-        self.actions = copy(d1.actions)
-        actions = [x for x in self.actions]
+        self.actions = deepcopy(d1.actions)
+        #actions = [x for x in self.actions]
         Mind1 = d1.valuationdomain['min']
         Maxd1 = d1.valuationdomain['max']
         Mind2 = d2.valuationdomain['min']
@@ -8079,9 +8643,9 @@ class XORDigraph(Digraph):
         d1.recodeValuation(-1.0,1.0)
         d2.recodeValuation(-1.0,1.0)
         xorRelation = {}
-        for x in actions:
+        for x in self.actions:
             xorRelation[x] = {}
-            for y in actions:
+            for y in self.actions:
                 xorRelation[x][y] = max( min(d1.relation[x][y],-d2.relation[x][y]), min(d2.relation[x][y],-d1.relation[x][y]) )
                 if Debug:
                     print(x,y,d1.relation[x][y],d2.relation[x][y],xorRelation[x][y])
@@ -8102,15 +8666,15 @@ class EquivalenceDigraph(Digraph):
     """
 
     def __init__(self,d1,d2,Debug = False):
-        from copy import copy, deepcopy
+        from copy import deepcopy
         self.name = 'EquivDigraph'
         if d1.order != d2.order:
             print("EquivDigraph init ERROR:\n the input digraphs are not of the same order !")
             return None
 
         self.order = d1.order
-        self.actions = copy(d1.actions)
-        actions = [x for x in self.actions]
+        self.actions = deepcopy(d1.actions)
+        #actions = [x for x in self.actions]
 
         Mind1 = d1.valuationdomain['min']
         Maxd1 = d1.valuationdomain['max']
@@ -8120,9 +8684,9 @@ class EquivalenceDigraph(Digraph):
         d2.recodeValuation(-1.0,1.0)
 
         equivRelation = {}
-        for x in actions:
+        for x in self.actions:
             equivRelation[x] = {}
-            for y in actions:
+            for y in self.actions:
                 equivRelation[x][y] = min( max(-d1.relation[x][y],d2.relation[x][y]), max(-d2.relation[x][y],d1.relation[x][y]) )
                 if Debug:
                     print(x,y,d1.relation[x][y],d2.relation[x][y],equivRelation[x][y])
@@ -8157,7 +8721,12 @@ class EquivalenceDigraph(Digraph):
 
 # ------- Specialisations of the Digraph class -----------
 
-class RandomDigraph(Digraph):
+
+#class RandomDigraph(randomDigraphs.RandomDigraph):
+#    """
+#    dummy
+#    """
+class _RandomDigraph(Digraph):
     """
     .. warning::
 
@@ -8195,7 +8764,12 @@ class RandomDigraph(Digraph):
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
 
-class RandomValuationDigraph(Digraph):
+#class RandomValuationDigraph(randomDigraphs.RandomValuationDigraph):
+#    """
+#    dummy
+#    """
+    
+class _RandomValuationDigraph(Digraph):
     """
     .. warning::
     
@@ -8241,7 +8815,7 @@ class RandomValuationDigraph(Digraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-class RandomWeakTournament(Digraph):
+class _RandomWeakTournament(Digraph):
     """
     .. warning::
 
@@ -8336,7 +8910,7 @@ class RandomWeakTournament(Digraph):
              print(self.order*(self.order-1), self.computeRelationalStructure())
 
 
-class RandomTournament(Digraph):
+class _RandomTournament(Digraph):
     """
    .. warning::
 
@@ -8398,7 +8972,7 @@ class RandomTournament(Digraph):
         self.notGamma = self.notGammaSets()
 
 
-class RandomFixedSizeDigraph(Digraph):
+class _RandomFixedSizeDigraph(Digraph):
     """
     .. warning::
 
@@ -8441,7 +9015,7 @@ class RandomFixedSizeDigraph(Digraph):
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
 
-class RandomFixedDegreeSequenceDigraph(Digraph):
+class _RandomFixedDegreeSequenceDigraph(Digraph):
     """
     .. warning::
 
@@ -8530,7 +9104,7 @@ class RandomTree(Digraph):
     .. warning::
 
        *Obsolete version!* Will be removed in the future. Instead, use
-       the new :py:class:`randomDigraphs.RandomTree` constructor. 
+       the new :py:class:`graphs.RandomTree` constructor. 
 
     """
     def __init__(self,numberOfNodes=5, ndigits=2, hasIntegerValuation=True):
@@ -8598,7 +9172,7 @@ class RandomTree(Digraph):
         return tree
 
 
-class RandomRegularDigraph(Digraph):
+class _RandomRegularDigraph(Digraph):
     """
     .. warning::
 
@@ -8753,12 +9327,47 @@ class CirculantDigraph(Digraph):
                and/or negative circular shifts of value 1 to n.
 
     Specialization of the general Digraph class for generating
-    temporary circulant digraphs
+    temporary circulant digraphs.
 
     Default instantiation C_7:
         | order = 7,
         | valuationdomain = {'min':-1.0,'max':1.0},
         | circulants = [-1,1].
+
+    Example session::
+
+        >>> from digraphs import CirculantDigraph
+        >>> c8 = CirculantDigraph(order=8,circulants=[1,3])
+        >>> c8.exportGraphViz('c8')
+        *---- exporting a dot file dor GraphViz tools ---------*
+        Exporting to c8.dot
+        circo -Tpng c8.dot -o c8.png
+        # see below the graphviz drawing
+        >>> c8.showChordlessCircuits()
+        No circuits yet computed. Run computeChordlessCircuits()!
+        >>> c8.computeChordlessCircuits()
+        ...
+        >>> c8.showChordlessCircuits()
+        *---- Chordless circuits ----*
+        ['1', '4', '7', '8'] , credibility : 1.0
+        ['1', '4', '5', '6'] , credibility : 1.0
+        ['1', '4', '5', '8'] , credibility : 1.0
+        ['1', '2', '3', '6'] , credibility : 1.0
+        ['1', '2', '5', '6'] , credibility : 1.0
+        ['1', '2', '5', '8'] , credibility : 1.0
+        ['2', '3', '6', '7'] , credibility : 1.0
+        ['2', '3', '4', '7'] , credibility : 1.0
+        ['2', '5', '6', '7'] , credibility : 1.0
+        ['3', '6', '7', '8'] , credibility : 1.0
+        ['3', '4', '7', '8'] , credibility : 1.0
+        ['3', '4', '5', '8'] , credibility : 1.0
+        12 circuits.
+        >>>
+        
+    .. image:: c8.png
+        :alt: circulant [1,3] digraph
+        :width: 300 px
+        :align: center
 
     """
     def __init__(self,order=7,valuationdomain = {'min':Decimal('-1.0'),'max':Decimal('1.0')},circulants = [-1,1]):
@@ -9071,10 +9680,10 @@ class PolarisedDigraph(Digraph):
 
     """
     def __init__(self,digraph=None,level=None,KeepValues=True,AlphaCut=False,StrictCut=False):
-        from copy import copy,deepcopy
+        from copy import deepcopy
         if digraph == None:
             digraph = RandomValuationDigraph()
-        self.valuationdomain = copy(digraph.valuationdomain)
+        self.valuationdomain = deepcopy(digraph.valuationdomain)
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         if level == None:
@@ -9082,7 +9691,7 @@ class PolarisedDigraph(Digraph):
         else:
             level = Decimal(str(level))
         self.name = 'cut_' + str(level)+ '_' + str(digraph.name)
-        self.actions = copy(digraph.actions)
+        self.actions = deepcopy(digraph.actions)
         if AlphaCut:
             self.relation = self._constructAlphaCutRelation(digraph.relation,
                                                            level=level,
@@ -9261,24 +9870,24 @@ class DualDigraph(Digraph):
 
     """
     def __init__(self,other):
-        from copy import copy, deepcopy
+        from copy import deepcopy
         self.name = 'dual_' + str(other.name)
         try:
-            self.description = copy(other.description)
+            self.description = deepcopy(other.description)
         except AttributeError:
             pass
         try:
-            self.criteria = copy(other.criteria)
+            self.criteria = deepcopy(other.criteria)
         except AttributeError:
             pass
         try:
-            self.evaluation = copy(other.evaluation)
+            self.evaluation = deepcopy(other.evaluation)
         except AttributeError:
             pass
-        self.valuationdomain = copy(other.valuationdomain)
+        self.valuationdomain = deepcopy(other.valuationdomain)
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
-        self.actions = copy(other.actions)
+        self.actions = deepcopy(other.actions)
         self.order = len(self.actions)
         self.relation = self._constructRelation(other.relation)
         self.__class__ = other.__class__
@@ -9340,7 +9949,7 @@ class AsymmetricPartialDigraph(Digraph):
 
     """
     def __init__(self,digraph):
-        from copy import copy
+        from copy import deepcopy as copy
         self.valuationdomain = copy(digraph.valuationdomain)
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
@@ -9385,7 +9994,7 @@ class SymmetricPartialDigraph(Digraph):
            
     """
     def __init__(self,digraph):
-        from copy import copy
+        from copy import deepcopy as copy
         self.valuationdomain = copy(digraph.valuationdomain)
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
@@ -9432,7 +10041,7 @@ class kChoicesDigraph(Digraph):
     """
     def __init__(self,digraph=None,k=3):
         import random,sys,array
-        from copy import copy,deepcopy
+        from copy import deepcopy as copy
         from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
         if digraph == None:
             digraph = RandomValuationDigraph()
@@ -9443,7 +10052,7 @@ class kChoicesDigraph(Digraph):
 
         self.valuationdomain = copy(digraph.valuationdomain)
         dactions = [x for x in digraph.actions]
-        drelation = copy(digraph.relation)
+        drelation = digraph.relation
         actions = {}
         for kChoice in Digraph.kChoices(digraph,dactions,k):
             cn = '_'
@@ -9625,7 +10234,7 @@ class CoceDigraph(Digraph):
     """
     def __init__(self,digraph=None,Cpp=False,Piping=False,Comments=False,Debug=False):
         import random,sys,array
-        from copy import copy as deepcopy
+        from copy import deepcopy
         from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
 
         ## if comment == None:
@@ -9635,9 +10244,9 @@ class CoceDigraph(Digraph):
         if digraph == None:
             g = RandomValuationDigraph()
             self.name = str(g.name)
-            self.actions = deepcopy(g.actions)
-            self.valuationdomain = deepcopy(g.valuationdomain)
-            self.relation = deepcopy(g.relation)
+            self.actions = g.actions
+            self.valuationdomain = g.valuationdomain
+            self.relation = g.relation
 
         elif isinstance(digraph,(Digraph,OutrankingDigraph,RandomOutrankingDigraph,BipolarOutrankingDigraph)):
             self.name = str(digraph.name)
@@ -9660,7 +10269,7 @@ class CoceDigraph(Digraph):
         level,pg = self.iterateCocElimination(Comments=Comments, Debug=Debug)
         if pg != None:
             self.name = '%s_pol_%.2f' % (self.name,level)
-            self.relation = deepcopy(pg.relation)
+            self.relation = pg.relation
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
             self.weakGamma = self.weakGammaSets()
@@ -9674,7 +10283,7 @@ class CoceDigraph(Digraph):
         and polarisedDigraph is the resulting digraph instance.
         Renders (None,None) if no chordless odd circuit is detected.
         """
-        from copy import copy as deepcopy
+        from copy import deepcopy
         from time import time
         if Debug:
             Comments=True
@@ -9714,9 +10323,9 @@ class CocaDigraph(Digraph):
     Specialization of general Digraph class for instantiation
     of chordless odd circuits augmented digraphs.
 
-    A chordless odd circuit is added if the cumulated credibility of the circuit supporting is larger or
-    equal to the cumulated credibility of the converse arcs. In this latter case, the circuit is broken at the weakest asymmetric link,
-    i.e. a link (x,y) with minimal difference between r(x S y) - r(y S x).
+    A chordless odd circuit is added if the cumulated credibility of the circuit supporting arcs is larger or
+    equal to the cumulated credibility of the converse arcs. Otherwise, the circuit is broken at the weakest asymmetric link,
+    i.e. a link (*x*,*y*) with minimal difference between r(*x* S *y*) - r(*y* S *x*).
 
     """
     def __init__(self,digraph=None,Cpp=False,Piping=False,Comments=False):
@@ -9729,14 +10338,14 @@ class CocaDigraph(Digraph):
         if digraph == None:
             g = RandomValuationDigraph()
             self.name = str(g.name)
-            self.actions = copy.copy(g.actions)
-            self.valuationdomain = copy.copy(g.valuationdomain)
-            self.relation = copy.deepcopy(g.relation)
+            self.actions = g.actions
+            self.valuationdomain = g.valuationdomain
+            self.relation = g.relation
 
         elif isinstance(digraph,(Digraph,OutrankingDigraph,RandomOutrankingDigraph,BipolarOutrankingDigraph)):
             self.name = str(digraph.name)
-            self.actions = copy.copy(digraph.actions)
-            self.valuationdomain = copy.copy(digraph.valuationdomain)
+            self.actions = copy.deepcopy(digraph.actions)
+            self.valuationdomain = copy.deepcopy(digraph.valuationdomain)
             self.relation = copy.deepcopy(digraph.relation)
         else:
             fileName = digraph + 'py'
@@ -9779,8 +10388,10 @@ class CocaDigraph(Digraph):
         """
         Augmenting self with self.circuits.
         """
-        import copy,time
+        import time
+        #from copy import deepcopy
         order0 = self.order
+        brakings = 0
         if not(isinstance(self.actions,dict)):
             actions = {}
             for x in self.actions:
@@ -9859,18 +10470,29 @@ class CocaDigraph(Digraph):
                     print('Minimal link put to doubt: ', x,y)
                 relation[x][y] = Med
                 relation[y][x] = Med
+                circuitsList.remove((cycleList,cycle))
+                brakings += 1
 
         self.actions = actions
         self.order = len(actions)
+        self.relation = relation
+        self.circuitsList = circuitsList
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         self.weakGamma = self.weakGammaSets()
         new = self.order - order0
         if Comments:
-            if self.order == order0:
+            if new == 0:
                 print('  No circuits added !')
             else:
                 print('  ',new,' circuit(s) added!')
+        self.brakings = brakings
+        if Comments:
+            if self.brakings == 0:
+                print('  No circuit brakings !')
+            else:
+                print('  ',brakings,' circuit(s) were braked')
+            
 
     def showCircuits(self,credibility=None):
         """
@@ -9907,7 +10529,7 @@ class CocaDigraph(Digraph):
             xk = k + 1
 
 #--------------------
-class OldCocaDigraph(Digraph):
+class _CocaDigraph(Digraph):
     """
     Parameters:
         Stored or memory resident digraph instance.
@@ -9924,17 +10546,18 @@ class OldCocaDigraph(Digraph):
         ## else:
         ##     silent = not(comment)
         if digraph == None:
-            g = RandomValuationDigraph()
-            self.name = str(g.name)
-            self.actions = copy.copy(g.actions)
-            self.valuationdomain = copy.copy(g.valuationdomain)
-            self.relation = copy.copy(g.relation)
+##            g = RandomValuationDigraph()
+##            self.name = str(g.name)
+##            self.actions = g.actions
+##            self.valuationdomain = g.valuationdomain
+##            self.relation = g.relation
+            print('!!! Error: no valid digraph argument provided')
 
         elif isinstance(digraph,(Digraph,OutrankingDigraph,RandomOutrankingDigraph,BipolarOutrankingDigraph)):
             self.name = str(digraph.name)
-            self.actions = copy.copy(digraph.actions)
-            self.valuationdomain = copy.copy(digraph.valuationdomain)
-            self.relation = copy.copy(digraph.relation)
+            self.actions = copy.deepcopy(digraph.actions)
+            self.valuationdomain = copy.deepcopy(digraph.valuationdomain)
+            self.relation = copy.deepcopy(digraph.relation)
         else:
             fileName = digraph + 'py'
             argDict = {}
@@ -9977,7 +10600,7 @@ class OldCocaDigraph(Digraph):
         """
         import copy,time
         order0 = self.order
-        if not(isinstance(self.actions,dict)):
+        if isinstance(self.actions,(list,set)):
             actions = {}
             for x in self.actions:
                 actions[x] = {'name':x}
@@ -10081,6 +10704,12 @@ class OldCocaDigraph(Digraph):
             print(str(k) + ': ' + str(component))
             xk = k + 1
 
+#---------------------
+##class CocaDigraph(_CocaDigraph):
+##    """
+##    CocaDigraph class wrapper for testing purposes only
+##    """
+
 #------------------------------------------
 
 class StrongComponentsCollapsedDigraph(Digraph):
@@ -10093,7 +10722,7 @@ class StrongComponentsCollapsedDigraph(Digraph):
            print('Error: you must provide a valid digraph to the constructor!')
         else:
            self.name = digraph.name + '_Scc'
-           self.valuationdomain = copy(digraph.valuationdomain)
+           self.valuationdomain = deepcopy(digraph.valuationdomain)
            scc = digraph.strongComponents()
            actions = {}
            for i,strongComponent in enumerate(scc):
@@ -10488,6 +11117,7 @@ class XMCDA2Digraph(Digraph):
 
 ###  replace the old outrankingDigraphs
 #from outrankingDigraphs import *
+from randomDigraphs import *
 
 #############################################
 
@@ -10495,8 +11125,9 @@ class XMCDA2Digraph(Digraph):
 if __name__ == "__main__":
     import sys,array
     from outrankingDigraphs import OutrankingDigraph,\
-     RandomOutrankingDigraph, BipolarOutrankingDigraph
+    RandomOutrankingDigraph, BipolarOutrankingDigraph
     from votingDigraphs import CondorcetDigraph
+    from randomPerfTabs import *
 
 
     print('****************************************************')
@@ -10583,22 +11214,30 @@ if __name__ == "__main__":
         #from csv import reader
         #g = RandomValuationDigraph()
         #g.showAll()
+        MP=False
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
-        t = RandomCBPerformanceTableau(numberOfActions=15,seed=1)
-        t.saveXMCDA2('test')
-        t = XMCDA2PerformanceTableau('test')
-        g = BipolarOutrankingDigraph(t)
-        gcd =  (-g)
-        gcd.computeChordlessCircuits(Odd=True,Comments=True)
-        gcd.showPreKernels()
-        gcd.computeRubisChoice()
-        print(gcd.dompreKernels)
-        print(gcd.abspreKernels)
-        for ker in gcd.dompreKernels:
-            print(ker, gcd.computeGoodChoiceVector(ker,Comments=False))
-        for ker in gcd.abspreKernels:
-            print(ker, gcd.computeGoodChoiceVector(ker,Comments=False))
+        t1 = RandomCBPerformanceTableau(numberOfActions=50,seed=1)
+##        t1.saveXMCDA2('testP2')
+##        t1.showCriteria()
+        t2 = RandomCBPerformanceTableau(numberOfActions=50,seed=2)
+##        t1.saveXMCDA2('testP2')
+##        t1.showCriteria()
+        #t = XMCDA2PerformanceTableau('testP')
+        g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=MP)
+        g2 = BipolarOutrankingDigraph(t2,Normalized=True,Threading=MP)
+        print(g1.computeOrdinalCorrelationMP(g2,Comments=True,nbrOfCPUs=4,Threading=MP))        
+##        gcd = ~(-g)
+##        gcd.computeChordlessCircuits(Odd=True,Comments=True)
+##        gcd.showPreKernels()
+##        g.computeRubisChoice(Comments=True)
+##        g.showCriteria()
+##        print(gcd.dompreKernels)
+##        print(gcd.abspreKernels)
+##        for ker in gcd.dompreKernels:
+##            print(ker, gcd.computeGoodChoiceVector(ker,Comments=False))
+##        for ker in gcd.abspreKernels:
+##            print(ker, gcd.computeGoodChoiceVector(ker,Comments=False))
        
 
         print('*------------------*')
@@ -10613,38 +11252,5 @@ if __name__ == "__main__":
 #############################
 # Log record for changes:
 # $Log: digraphs.py,v $
-#
-# Revision +1.700 2013/10/05 17:22:53  bisi
-# added saveCSV() method to the Digraph class
-#
-# Revision 1.696  2013/01/01 14:10:53  bisi
-# added computePrudentBestChoiceRecommendation() method to the Digraph class
-#
-# Revision 1.694  2012/12/24 15:18:21  bisi
-# compatibility patch for old (-2008) python performance tableaux
-#
-# Revision 1.693  2012/09/11 05:12:14  bisi
-# debugging rankingByChoosing for failure quadruple
-#
-# Revision 1.691  2012/09/06 18:28:44  bisi
-# Added unary __neg__ (-) and __invert__ (~) operators to the Digraph class methods.
-#
-# Revision 1.689  2012/08/12 06:30:21  bisi
-# Added valuation statistics for digraphs
-#
-# Revision 1.688  2012/08/11 05:56:39  bisi
-# added iqagent.py module
-#
-# Revision 1.687  2012/08/04 06:27:35  bisi
-# Refactored RandomWeakTournament class constructor.
-#
-# Revision 1.686  2012/07/31 09:25:18  bisi
-# Added a constructor ConverseDigraph() for the reciprocal of a digraph
-#
-# Revision 1.685  2012/07/20 07:06:37  bisi
-# minor
-#
-# Revision 1.684  2012/07/20 06:50:33  bisi
-# Added computeCorrelation() to the EquivalenceDigraph class.
 #
 #############################

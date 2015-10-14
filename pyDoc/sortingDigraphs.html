@@ -8,10 +8,10 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>sortingDigraphs</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/roknar/Digraph3/pyDoc/sortingDigraphs.py">/home/roknar/Digraph3/pyDoc/sortingDigraphs.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/sortingDigraphs.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/sortingDigraphs.py</a></font></td></tr></table>
     <p><tt>#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
 #&nbsp;Python&nbsp;implementation&nbsp;of&nbsp;digraphs<br>
-#&nbsp;Current&nbsp;revision&nbsp;$Revision:&nbsp;1249&nbsp;$<br>
+#&nbsp;Current&nbsp;revision&nbsp;$Revision:&nbsp;1545&nbsp;$<br>
 #&nbsp;Copyright&nbsp;(C)&nbsp;2006-2008&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
 #<br>
 #&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
@@ -37,10 +37,12 @@
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="itertools.html">itertools</a><br>
-</td><td width="25%" valign=top><a href="collections.html">collections</a><br>
-</td><td width="25%" valign=top><a href="xml.sax.handler.html">xml.sax.handler</a><br>
-</td><td width="25%" valign=top><a href="xml.sax.xmlreader.html">xml.sax.xmlreader</a><br>
-</td></tr></table></td></tr></table><p>
+<a href="collections.html">collections</a><br>
+</td><td width="25%" valign=top><a href="decimal.html">decimal</a><br>
+<a href="xml.sax.handler.html">xml.sax.handler</a><br>
+</td><td width="25%" valign=top><a href="json.html">json</a><br>
+<a href="xml.sax.xmlreader.html">xml.sax.xmlreader</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -90,10 +92,11 @@ quantiles&nbsp;delimited&nbsp;ordered&nbsp;classes.<br>
 &nbsp;<br>
 Example&nbsp;Python3&nbsp;session:<br>
 &nbsp;<br>
-&gt;&gt;&gt;&nbsp;from&nbsp;sortingDigraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;sortingDigraphs&nbsp;import&nbsp;<a href="#QuantilesSortingDigraph">QuantilesSortingDigraph</a><br>
+&gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;RandomCBPerformanceTableau<br>
 &gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,<br>
 ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weightDistribution='equiobjectives')<br>
-&gt;&gt;&gt;&nbsp;qs&nbsp;=&nbsp;QuantilesSortingBigDigraph(t,limitingQuantiles=7)<br>
+&gt;&gt;&gt;&nbsp;qs&nbsp;=&nbsp;<a href="#QuantilesSortingDigraph">QuantilesSortingDigraph</a>(t,limitingQuantiles=7)<br>
 &gt;&gt;&gt;&nbsp;qs.<a href="#QuantilesSortingDigraph-showSorting">showSorting</a>()<br>
 *---&nbsp;Sorting&nbsp;results&nbsp;in&nbsp;descending&nbsp;order&nbsp;---*<br>
 ]0.86&nbsp;-&nbsp;1.00]:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]<br>
@@ -124,26 +127,37 @@ Example&nbsp;Python3&nbsp;session:<br>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="QuantilesSortingDigraph-__init__"><strong>__init__</strong></a>(self, argPerfTab=None, limitingQuantiles=None, LowerClosed=False, PrefThresholds=True, hasNoVeto=False, outrankingType='bipolar', CompleteOutranking=False, Threading=False, nbrCores=None, Debug=False)</dt><dd><tt>Constructor&nbsp;for&nbsp;QuantilesSortingBigDigraph&nbsp;instances.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-__init__"><strong>__init__</strong></a>(self, argPerfTab=None, limitingQuantiles=None, LowerClosed=False, PrefThresholds=True, hasNoVeto=False, outrankingType='bipolar', WithSortingRelation=True, CompleteOutranking=False, StoreSorting=False, CopyPerfTab=False, Threading=False, nbrCores=None, nbrOfProcesses=None, Comments=False, Debug=False)</dt><dd><tt>Constructor&nbsp;for&nbsp;QuantilesSortingBigDigraph&nbsp;instances.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeCategoryContents"><strong>computeCategoryContents</strong></a>(self, Reverse=False, Comments=False)</dt><dd><tt>Computes&nbsp;the&nbsp;sorting&nbsp;results&nbsp;per&nbsp;category.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-computeCategoryContents"><strong>computeCategoryContents</strong></a>(self, Reverse=False, Comments=False, StoreSorting=True, Threading=False, nbrOfCPUs=None)</dt><dd><tt>Computes&nbsp;the&nbsp;sorting&nbsp;results&nbsp;per&nbsp;category.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-computeQuantileOrdering"><strong>computeQuantileOrdering</strong></a>(self, strategy=None, Descending=True, HTML=False, Comments=False, Debug=False)</dt><dd><tt>*Parameters*:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Descending:&nbsp;listing&nbsp;in&nbsp;*decreasing*&nbsp;(default)&nbsp;or&nbsp;*increasing*&nbsp;quantile&nbsp;order.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;strategy:&nbsp;ordering&nbsp;in&nbsp;an&nbsp;{'optimistic'&nbsp;(default)&nbsp;|&nbsp;'pessimistic'&nbsp;|&nbsp;'average'}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;uppest,&nbsp;the&nbsp;lowest&nbsp;or&nbsp;the&nbsp;average&nbsp;potential&nbsp;quantile.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeSortingCharacteristics"><strong>computeSortingCharacteristics</strong></a>(self, action=None, Comments=False)</dt><dd><tt>Renders&nbsp;a&nbsp;bipolar-valued&nbsp;bi-dictionary&nbsp;relation<br>
+<dl><dt><a name="QuantilesSortingDigraph-computeSortingCharacteristics"><strong>computeSortingCharacteristics</strong></a>(self, action=None, Comments=False, StoreSorting=False, Debug=False, Threading=False, nbrOfCPUs=None)</dt><dd><tt>Renders&nbsp;a&nbsp;bipolar-valued&nbsp;bi-dictionary&nbsp;relation<br>
 representing&nbsp;the&nbsp;degree&nbsp;of&nbsp;credibility&nbsp;of&nbsp;the<br>
 assertion&nbsp;that&nbsp;"action&nbsp;x&nbsp;in&nbsp;A&nbsp;belongs&nbsp;to&nbsp;category&nbsp;c&nbsp;in&nbsp;C",<br>
 ie&nbsp;x&nbsp;outranks&nbsp;low&nbsp;category&nbsp;limit&nbsp;and&nbsp;does&nbsp;not&nbsp;outrank<br>
 the&nbsp;high&nbsp;category&nbsp;limit.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeSortingRelation"><strong>computeSortingRelation</strong></a>(self, categoryContents=None, Debug=False)</dt><dd><tt>constructs&nbsp;a&nbsp;bipolar&nbsp;sorting&nbsp;relation&nbsp;using&nbsp;the&nbsp;category&nbsp;contents.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-computeSortingCharacteristicsOld"><strong>computeSortingCharacteristicsOld</strong></a>(self, action=None, Comments=False)</dt><dd><tt>Renders&nbsp;a&nbsp;bipolar-valued&nbsp;bi-dictionary&nbsp;relation<br>
+representing&nbsp;the&nbsp;degree&nbsp;of&nbsp;credibility&nbsp;of&nbsp;the<br>
+assertion&nbsp;that&nbsp;"action&nbsp;x&nbsp;in&nbsp;A&nbsp;belongs&nbsp;to&nbsp;category&nbsp;c&nbsp;in&nbsp;C",<br>
+ie&nbsp;x&nbsp;outranks&nbsp;low&nbsp;category&nbsp;limit&nbsp;and&nbsp;does&nbsp;not&nbsp;outrank<br>
+the&nbsp;high&nbsp;category&nbsp;limit.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-computeSortingRelation"><strong>computeSortingRelation</strong></a>(self, categoryContents=None, Debug=False, StoreSorting=True, Threading=False, nbrOfCPUs=None, Comments=False)</dt><dd><tt>constructs&nbsp;a&nbsp;bipolar&nbsp;sorting&nbsp;relation&nbsp;using&nbsp;the&nbsp;category&nbsp;contents.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-computeWeakOrder"><strong>computeWeakOrder</strong></a>(self, Descending=True, Debug=False)</dt><dd><tt>Specialisation&nbsp;for&nbsp;QuantilesSortingDigraphs.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-getActionsKeys"><strong>getActionsKeys</strong></a>(self, action=None, withoutProfiles=True)</dt><dd><tt>extract&nbsp;normal&nbsp;actions&nbsp;keys()</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-showActionCategories"><strong>showActionCategories</strong></a>(self, action, Debug=False, Comments=True, Threading=False, nbrOfCPUs=None)</dt><dd><tt>Renders&nbsp;the&nbsp;union&nbsp;of&nbsp;categories&nbsp;in&nbsp;which&nbsp;the&nbsp;given&nbsp;action&nbsp;is&nbsp;sorted&nbsp;positively&nbsp;or&nbsp;null&nbsp;into.<br>
+Returns&nbsp;a&nbsp;tuple&nbsp;:&nbsp;action,&nbsp;lowest&nbsp;category&nbsp;key,&nbsp;highest&nbsp;category&nbsp;key,&nbsp;membership&nbsp;credibility&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-showActionsSortingResult"><strong>showActionsSortingResult</strong></a>(self, actionSubset=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;quantiles&nbsp;sorting&nbsp;result&nbsp;all&nbsp;(default)&nbsp;of&nbsp;a&nbsp;subset&nbsp;of&nbsp;the&nbsp;decision&nbsp;actions.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showHTMLQuantileOrdering"><strong>showHTMLQuantileOrdering</strong></a>(self, Descending=True, strategy='optimistic')</dt><dd><tt>Shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;quantile&nbsp;preordering&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
 &nbsp;<br>
@@ -192,11 +206,6 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 
 <dl><dt><a name="QuantilesSortingDigraph-saveProfilesXMCDA2"><strong>saveProfilesXMCDA2</strong></a>(self, fileName='temp', category='XMCDA 2.0 format', user='sortinDigraphs Module (RB)', version='saved from Python session', title='Sorting categories in XMCDA-2.0 format.', variant='Rubis', valuationType='bipolar', isStringIO=False, stringNA='NA', comment='produced by saveProfilesXMCDA2()')</dt><dd><tt>Save&nbsp;profiles&nbsp;object&nbsp;self&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showActionCategories"><strong>showActionCategories</strong></a>(self, action, Debug=False, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;union&nbsp;of&nbsp;categories&nbsp;in&nbsp;which&nbsp;the&nbsp;given&nbsp;action&nbsp;is&nbsp;sorted&nbsp;positively&nbsp;or&nbsp;null&nbsp;into.<br>
-Returns&nbsp;a&nbsp;tuple&nbsp;:&nbsp;action,&nbsp;lowest&nbsp;category&nbsp;key,&nbsp;highest&nbsp;category&nbsp;key,&nbsp;membership&nbsp;credibility&nbsp;!</tt></dd></dl>
-
-<dl><dt><a name="QuantilesSortingDigraph-showActionsSortingResult"><strong>showActionsSortingResult</strong></a>(self, actionSubset=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;quantiles&nbsp;sorting&nbsp;result&nbsp;all&nbsp;(default)&nbsp;of&nbsp;a&nbsp;subset&nbsp;of&nbsp;the&nbsp;decision&nbsp;actions.</tt></dd></dl>
-
 <dl><dt><a name="QuantilesSortingDigraph-showCriteriaCategoryLimits"><strong>showCriteriaCategoryLimits</strong></a>(self)</dt><dd><tt>Shows&nbsp;category&nbsp;minimum&nbsp;and&nbsp;maximum&nbsp;limits&nbsp;for&nbsp;each&nbsp;criterion.</tt></dd></dl>
 
 <hr>
@@ -220,8 +229,35 @@ Methods inherited from <a href="outrankingDigraphs.html#OutrankingDigraph">outra
 
 <dl><dt><a name="QuantilesSortingDigraph-computeCriteriaCorrelations"><strong>computeCriteriaCorrelations</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;comparison&nbsp;correlations&nbsp;between&nbsp;the&nbsp;criteria</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeCriterionCorrelation"><strong>computeCriterionCorrelation</strong></a>(self, criterion, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordinal&nbsp;correlation&nbsp;coefficient&nbsp;between<br>
-the&nbsp;global&nbsp;outranking&nbsp;and&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;relation.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-computeCriterionCorrelation"><strong>computeCriterionCorrelation</strong></a>(self, criterion, Threading=False, nbrOfCPUs=None, Debug=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordinal&nbsp;correlation&nbsp;coefficient&nbsp;between<br>
+the&nbsp;global&nbsp;outranking&nbsp;and&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;relation.<br>
+&nbsp;<br>
+If&nbsp;Threading,&nbsp;the</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-computeMarginalCorrelation"><strong>computeMarginalCorrelation</strong></a>(self, args, Threading=False, nbrOfCPUs=None, Debug=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordinal&nbsp;correlation&nbsp;coefficient&nbsp;between<br>
+the&nbsp;global&nbsp;outranking&nbsp;and&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;relation.<br>
+&nbsp;<br>
+If&nbsp;Threading,&nbsp;the</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-computeMarginalVersusGlobalOutrankingCorrelations"><strong>computeMarginalVersusGlobalOutrankingCorrelations</strong></a>(self, Sorted=True, Threading=False, nbrCores=None, Comments=False)</dt><dd><tt>Method&nbsp;for&nbsp;computing&nbsp;correlations&nbsp;between&nbsp;each&nbsp;individual&nbsp;criterion&nbsp;relation&nbsp;with&nbsp;the&nbsp;corresponding<br>
+global&nbsp;outranking&nbsp;relation.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;tuples&nbsp;(correlation,criterionKey)&nbsp;sorted&nbsp;by&nbsp;default&nbsp;in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;the&nbsp;correlation.<br>
+&nbsp;<br>
+If&nbsp;Threading&nbsp;is&nbsp;True,&nbsp;a&nbsp;multiprocessing&nbsp;Pool&nbsp;class&nbsp;is&nbsp;used&nbsp;with&nbsp;a&nbsp;parallel&nbsp;equivalent&nbsp;of&nbsp;the&nbsp;built-in&nbsp;map&nbsp;function.<br>
+&nbsp;<br>
+If&nbsp;nbrCores&nbsp;is&nbsp;not&nbsp;set,&nbsp;the&nbsp;os.cpu_count()&nbsp;function&nbsp;is&nbsp;used&nbsp;to&nbsp;determine&nbsp;the&nbsp;number&nbsp;of<br>
+available&nbsp;cores.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-computeMarginalVersusGlobalRankingCorrelations"><strong>computeMarginalVersusGlobalRankingCorrelations</strong></a>(self, ranking, Sorted=True, Threading=False, nbrCores=None, Comments=False)</dt><dd><tt>Method&nbsp;for&nbsp;computing&nbsp;correlations&nbsp;between&nbsp;each&nbsp;individual&nbsp;criterion&nbsp;relation&nbsp;with&nbsp;the&nbsp;corresponding<br>
+global&nbsp;outranking&nbsp;relation.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;tuples&nbsp;(correlation,criterionKey)&nbsp;sorted&nbsp;by&nbsp;default&nbsp;in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;the&nbsp;correlation.<br>
+&nbsp;<br>
+If&nbsp;Threading&nbsp;is&nbsp;True,&nbsp;a&nbsp;multiprocessing&nbsp;Pool&nbsp;class&nbsp;is&nbsp;used&nbsp;with&nbsp;a&nbsp;parallel&nbsp;equivalent&nbsp;of&nbsp;the&nbsp;built-in&nbsp;map&nbsp;function.<br>
+&nbsp;<br>
+If&nbsp;nbrCores&nbsp;is&nbsp;not&nbsp;set,&nbsp;the&nbsp;os.cpu_count()&nbsp;function&nbsp;is&nbsp;used&nbsp;to&nbsp;determine&nbsp;the&nbsp;number&nbsp;of<br>
+available&nbsp;cores.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-computePairwiseComparisons"><strong>computePairwiseComparisons</strong></a>(self, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;pairwise&nbsp;comparison&nbsp;parameters&nbsp;for&nbsp;all&nbsp;pairs&nbsp;of&nbsp;actions</tt></dd></dl>
 
@@ -245,7 +281,7 @@ vetos&nbsp;=&nbsp;{'all':&nbsp;n0,&nbsp;'strong:&nbsp;n1,&nbsp;'weak':n2}.</tt><
 &nbsp;<br>
 Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-defaultDiscriminationThresholds"><strong>defaultDiscriminationThresholds</strong></a>(self, quantile={'weakVeto': 60, 'ind': 10, 'pref': 20, 'veto': 80}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="QuantilesSortingDigraph-defaultDiscriminationThresholds"><strong>defaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'pref': 20, 'ind': 10, 'weakVeto': 60}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 &nbsp;<br>
 Parameters:<br>
@@ -261,7 +297,7 @@ the&nbsp;criteria&nbsp;ordinal&nbsp;correlation&nbsp;table.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-saveCriteriaCorrelationTable"><strong>saveCriteriaCorrelationTable</strong></a>(self, fileName='tempcorr.prn', delimiter=' ', Bipolar=True, Silent=False, Centered=False)</dt><dd><tt>Delimited&nbsp;save&nbsp;of&nbsp;correlation&nbsp;table</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-saveXMCDA2RubisChoiceRecommendation"><strong>saveXMCDA2RubisChoiceRecommendation</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', graphValuationType='bipolar', variant='standard', instanceID='void', stringNA='NA')</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-saveXMCDA2RubisChoiceRecommendation"><strong>saveXMCDA2RubisChoiceRecommendation</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', graphValuationType='bipolar', variant='standard', instanceID='void', stringNA='NA', _OldCoca=True, Debug=False)</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-saveXMCDAOutrankingDigraph"><strong>saveXMCDAOutrankingDigraph</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', valuationType='bipolar', variant='standard', instanceID='void')</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
 
@@ -276,16 +312,16 @@ and&nbsp;performance&nbsp;tableau&nbsp;output</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showCriterionRelationTable"><strong>showCriterionRelationTable</strong></a>(self, criterion, actionsSubset=None)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showMarginalVersusGlobalOutrankingCorrelation"><strong>showMarginalVersusGlobalOutrankingCorrelation</strong></a>(self, Sorted=True, Threading=False, Comments=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;computeCriterionCorrelation&nbsp;results.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-showMarginalVersusGlobalOutrankingCorrelation"><strong>showMarginalVersusGlobalOutrankingCorrelation</strong></a>(self, Sorted=True, Threading=False, nbrOfCPUs=None, Comments=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;computeCriterionCorrelation&nbsp;results.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showPairwiseComparisonsDistributions"><strong>showPairwiseComparisonsDistributions</strong></a>(self)</dt><dd><tt>show&nbsp;the&nbsp;lt,leq,&nbsp;eq,&nbsp;geq,&nbsp;gt&nbsp;distributions&nbsp;for&nbsp;all&nbsp;pairs</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showRelationTable"><strong>showRelationTable</strong></a>(self, IntegerValues=False, actionsSubset=None, Sorted=True, hasLPDDenotation=False, hasLatexFormat=False, hasIntegerValuation=False, relation=None)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-showRelationTable"><strong>showRelationTable</strong></a>(self, IntegerValues=False, actionsSubset=None, Sorted=True, hasLPDDenotation=False, hasLatexFormat=False, hasIntegerValuation=False, relation=None, ReflexiveTerms=True)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>specialize&nbsp;the&nbsp;general&nbsp;showShort&nbsp;method&nbsp;with&nbsp;the&nbsp;criteria.</tt></dd></dl>
 
@@ -394,36 +430,7 @@ of&nbsp;the&nbsp;irreflexive&nbsp;and&nbsp;determined&nbsp;arcs&nbsp;of&nbsp;the
 <dl><dt><a name="QuantilesSortingDigraph-computeBadPirlotChoices"><strong>computeBadPirlotChoices</strong></a>(self, Comments=False)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;bad&nbsp;choices<br>
 using&nbsp;the&nbsp;Pirlot's&nbsp;fixpoint&nbsp;algorithm.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeBipolarCorrelation"><strong>computeBipolarCorrelation</strong></a>(self, other, MedianCut=False, filterRelation=None, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;correlation&nbsp;K&nbsp;of&nbsp;a<br>
-self.<strong>relation</strong>&nbsp;when&nbsp;compared<br>
-with&nbsp;a&nbsp;given&nbsp;compatible&nbsp;(same&nbsp;actions&nbsp;set))&nbsp;digraph&nbsp;or<br>
-a&nbsp;[-1,1]&nbsp;valued&nbsp;compatible&nbsp;relation&nbsp;(same&nbsp;actions&nbsp;set).<br>
-&nbsp;<br>
-If&nbsp;MedianCut=True,&nbsp;the&nbsp;correlation&nbsp;is&nbsp;computed&nbsp;on&nbsp;the&nbsp;median&nbsp;polarized&nbsp;relations.<br>
-&nbsp;<br>
-If&nbsp;filterRelation&nbsp;!=&nbsp;None,&nbsp;the&nbsp;correlation&nbsp;is&nbsp;computed&nbsp;on&nbsp;the&nbsp;partial&nbsp;domain&nbsp;corresponding&nbsp;to&nbsp;the&nbsp;determined&nbsp;part&nbsp;of&nbsp;the&nbsp;filter&nbsp;relation.<br>
-&nbsp;<br>
-..&nbsp;warning::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notice&nbsp;that&nbsp;the&nbsp;'other'&nbsp;relation&nbsp;and/or&nbsp;the&nbsp;'filterRelation',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;case&nbsp;given,&nbsp;must&nbsp;both&nbsp;be&nbsp;normalized,&nbsp;ie&nbsp;[-1,1]-valued&nbsp;!<br>
-&nbsp;<br>
-K&nbsp;=&nbsp;sum_{x&nbsp;!=&nbsp;y}&nbsp;[&nbsp;min(&nbsp;max(-self.<strong>relation</strong>[x][y]),other.relation[x][y]),&nbsp;max(self.<strong>relation</strong>[x][y],-other.relation[x][y])&nbsp;]<br>
-&nbsp;<br>
-K&nbsp;/=&nbsp;sum_{x!=y}&nbsp;[&nbsp;min(abs(self.<strong>relation</strong>[x][y]),abs(other.relation[x][y]))&nbsp;]<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders&nbsp;a&nbsp;tuple&nbsp;with&nbsp;at&nbsp;position&nbsp;0&nbsp;the&nbsp;actual&nbsp;bipolar&nbsp;correlation&nbsp;index<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;in&nbsp;position&nbsp;1&nbsp;the&nbsp;minimal&nbsp;determination&nbsp;level&nbsp;D&nbsp;of&nbsp;self&nbsp;and<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;other&nbsp;relation.<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D&nbsp;=&nbsp;sum_{x&nbsp;!=&nbsp;y}&nbsp;min(abs(self.<strong>relation</strong>[x][y]),abs(other.relation[x][y]))&nbsp;/&nbsp;n(n-1)<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where&nbsp;n&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;actions&nbsp;considered.<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;correlation&nbsp;index&nbsp;with&nbsp;a&nbsp;completely&nbsp;indeterminate&nbsp;relation<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;by&nbsp;convention&nbsp;0.0&nbsp;at&nbsp;determination&nbsp;level&nbsp;0.0&nbsp;.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-computeBipolarCorrelation"><strong>computeBipolarCorrelation</strong></a>(self, other, MedianCut=False, filterRelation=None, Debug=False)</dt><dd><tt>obsolete:&nbsp;dummy&nbsp;replacement&nbsp;for&nbsp;Digraph.computeOrdinalCorrelation&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-computeChordlessCircuits"><strong>computeChordlessCircuits</strong></a>(self, Odd=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;odd&nbsp;circuits&nbsp;detected&nbsp;in&nbsp;a&nbsp;digraph.<br>
 Result&nbsp;(possible&nbsp;empty&nbsp;list)&nbsp;stored&nbsp;in&nbsp;&lt;self.<strong>circuitsList</strong>&gt;<br>
@@ -474,7 +481,12 @@ other&nbsp;digraph&nbsp;(same&nbsp;nodes&nbsp;or&nbsp;actions).</tt></dd></dl>
 <dl><dt><a name="QuantilesSortingDigraph-computeKemenyOrder"><strong>computeKemenyOrder</strong></a>(self, isProbabilistic=False, orderLimit=7, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Kemeny&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder,&nbsp;kemenyIndex</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-computeKohlerRankingDict"><strong>computeKohlerRankingDict</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule&nbsp;as&nbsp;an<br>
+ordered&nbsp;dictionary&nbsp;with&nbsp;rank&nbsp;and&nbsp;majorityMargin&nbsp;attributes.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -493,6 +505,12 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder,&nbsp;kemenyIndex</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-computeMoreOrLessUnrelatedPairs"><strong>computeMoreOrLessUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="QuantilesSortingDigraph-computeNetFlowsOrder"><strong>computeNetFlowsOrder</strong></a>(self)</dt><dd><tt>renders&nbsp;an&nbsp;ordered&nbsp;list&nbsp;(from&nbsp;worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions<br>
+following&nbsp;the&nbsp;net&nbsp;flows&nbsp;ranking&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-computeNetFlowsRanking"><strong>computeNetFlowsRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;an&nbsp;ordered&nbsp;list&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions<br>
+following&nbsp;the&nbsp;net&nbsp;flows&nbsp;ranking&nbsp;rule.</tt></dd></dl>
+
 <dl><dt><a name="QuantilesSortingDigraph-computeODistance"><strong>computeODistance</strong></a>(self, op2, comments=False)</dt><dd><tt>renders&nbsp;the&nbsp;squared&nbsp;normalized&nbsp;distance&nbsp;of<br>
 two&nbsp;digraph&nbsp;valuations.<br>
 Parameters:&nbsp;op2&nbsp;digraphs&nbsp;of&nbsp;same&nbsp;order&nbsp;as&nbsp;self.<br>
@@ -501,7 +519,41 @@ The&nbsp;digraphs&nbsp;must&nbsp;be&nbsp;of&nbsp;same&nbsp;order.</tt></dd></dl>
 <dl><dt><a name="QuantilesSortingDigraph-computeOrbit"><strong>computeOrbit</strong></a>(self, choice, withListing=False)</dt><dd><tt>renders&nbsp;the&nbsp;set&nbsp;of&nbsp;isomorph&nbsp;copies&nbsp;of&nbsp;a&nbsp;choice&nbsp;following<br>
 the&nbsp;automorphism&nbsp;of&nbsp;the&nbsp;digraph&nbsp;self</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeOrdinalCorrelation"><strong>computeOrdinalCorrelation</strong></a>(self, other, MedianCut=False, filterRelation=None, Debug=False)</dt><dd><tt>obsolete:&nbsp;dummy&nbsp;replacement&nbsp;for&nbsp;Digraph.computeBipolarCorrelation&nbsp;method</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-computeOrdinalCorrelation"><strong>computeOrdinalCorrelation</strong></a>(self, other, MedianCut=False, filterRelation=None, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;correlation&nbsp;K&nbsp;of&nbsp;a<br>
+self.<strong>relation</strong>&nbsp;when&nbsp;compared<br>
+with&nbsp;a&nbsp;given&nbsp;compatible&nbsp;(same&nbsp;actions&nbsp;set))&nbsp;digraph&nbsp;or<br>
+a&nbsp;[-1,1]&nbsp;valued&nbsp;compatible&nbsp;relation&nbsp;(same&nbsp;actions&nbsp;set).<br>
+&nbsp;<br>
+If&nbsp;MedianCut=True,&nbsp;the&nbsp;correlation&nbsp;is&nbsp;computed&nbsp;on&nbsp;the&nbsp;median&nbsp;polarized&nbsp;relations.<br>
+&nbsp;<br>
+If&nbsp;filterRelation&nbsp;!=&nbsp;None,&nbsp;the&nbsp;correlation&nbsp;is&nbsp;computed&nbsp;on&nbsp;the&nbsp;partial&nbsp;domain&nbsp;corresponding&nbsp;to&nbsp;the&nbsp;determined&nbsp;part&nbsp;of&nbsp;the&nbsp;filter&nbsp;relation.<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notice&nbsp;that&nbsp;the&nbsp;'other'&nbsp;relation&nbsp;and/or&nbsp;the&nbsp;'filterRelation',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;case&nbsp;given,&nbsp;must&nbsp;both&nbsp;be&nbsp;normalized,&nbsp;ie&nbsp;[-1,1]-valued&nbsp;!<br>
+&nbsp;<br>
+K&nbsp;=&nbsp;sum_{x&nbsp;!=&nbsp;y}&nbsp;[&nbsp;min(&nbsp;max(-self.<strong>relation</strong>[x][y]),other.relation[x][y]),&nbsp;max(self.<strong>relation</strong>[x][y],-other.relation[x][y])&nbsp;]<br>
+&nbsp;<br>
+K&nbsp;/=&nbsp;sum_{x!=y}&nbsp;[&nbsp;min(abs(self.<strong>relation</strong>[x][y]),abs(other.relation[x][y]))&nbsp;]<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders&nbsp;a&nbsp;tuple&nbsp;with&nbsp;at&nbsp;position&nbsp;0&nbsp;the&nbsp;actual&nbsp;bipolar&nbsp;correlation&nbsp;index<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;in&nbsp;position&nbsp;1&nbsp;the&nbsp;minimal&nbsp;determination&nbsp;level&nbsp;D&nbsp;of&nbsp;self&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;other&nbsp;relation.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D&nbsp;=&nbsp;sum_{x&nbsp;!=&nbsp;y}&nbsp;min(abs(self.<strong>relation</strong>[x][y]),abs(other.relation[x][y]))&nbsp;/&nbsp;n(n-1)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where&nbsp;n&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;actions&nbsp;considered.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;correlation&nbsp;index&nbsp;with&nbsp;a&nbsp;completely&nbsp;indeterminate&nbsp;relation<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;by&nbsp;convention&nbsp;0.0&nbsp;at&nbsp;determination&nbsp;level&nbsp;0.0&nbsp;.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-computeOrdinalCorrelationMP"><strong>computeOrdinalCorrelationMP</strong></a>(self, other, MedianCut=False, Threading=True, nbrOfCPUs=None, Comments=False, Debug=False)</dt><dd><tt>Multi&nbsp;processing&nbsp;version&nbsp;of&nbsp;the&nbsp;digraphs.<a href="#QuantilesSortingDigraph-computeOrdinalCorrelation">computeOrdinalCorrelation</a>()&nbsp;method.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;relation&nbsp;filtering&nbsp;and&nbsp;the&nbsp;MedinaCut&nbsp;option&nbsp;are&nbsp;not&nbsp;implemented&nbsp;in&nbsp;the&nbsp;MP&nbsp;version.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-computePairwiseClusterComparison"><strong>computePairwiseClusterComparison</strong></a>(self, K1, K2, Debug=False)</dt><dd><tt>compute&nbsp;the&nbsp;pairwise&nbsp;cluster&nbsp;comparison&nbsp;credibility&nbsp;vector<br>
 from&nbsp;bipolar-valued&nbsp;digraph&nbsp;g.&nbsp;with&nbsp;K1&nbsp;and&nbsp;K2&nbsp;disjoint<br>
@@ -513,23 +565,27 @@ where&nbsp;one&nbsp;and&nbsp;only&nbsp;one&nbsp;item&nbsp;is&nbsp;strictly&nbsp;
 <dl><dt><a name="QuantilesSortingDigraph-computePreKernels"><strong>computePreKernels</strong></a>(self)</dt><dd><tt>computing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computePreorderRelation"><strong>computePreorderRelation</strong></a>(self, preorder, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
-a&nbsp;given&nbsp;preordering&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-computePreRankingRelation"><strong>computePreRankingRelation</strong></a>(self, preRanking, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
+a&nbsp;given&nbsp;preRanking&nbsp;in&nbsp;decreasing&nbsp;levels&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, Comments=False, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
+<dl><dt><a name="QuantilesSortingDigraph-computePreorderRelation"><strong>computePreorderRelation</strong></a>(self, preorder, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
+a&nbsp;given&nbsp;preordering&nbsp;in&nbsp;increasing&nbsp;levels&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, TempDir=None, Comments=False, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
 first&nbsp;rincipal&nbsp;eigenvector&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nbsp;the&nbsp;valued&nbsp;outdegrees&nbsp;of&nbsp;self.<br>
 &nbsp;<br>
-..&nbsp;warning::<br>
+..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;The&nbsp;method,&nbsp;relying&nbsp;on&nbsp;writing&nbsp;and&nbsp;reading&nbsp;temporary&nbsp;files&nbsp;in&nbsp;the&nbsp;current<br>
-&nbsp;&nbsp;&nbsp;working&nbsp;directory,&nbsp;is&nbsp;hence&nbsp;not&nbsp;threading&nbsp;and&nbsp;multiprocessing&nbsp;safe&nbsp;!<br>
+&nbsp;&nbsp;&nbsp;The&nbsp;method,&nbsp;relying&nbsp;on&nbsp;writing&nbsp;and&nbsp;reading&nbsp;temporary&nbsp;files&nbsp;by&nbsp;default&nbsp;in&nbsp;a&nbsp;temporary&nbsp;directory&nbsp;is&nbsp;threading&nbsp;and&nbsp;multiprocessing&nbsp;safe&nbsp;!<br>
 &nbsp;&nbsp;&nbsp;(see&nbsp;Digraph.exportPrincipalImage&nbsp;method)</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-computePrudentBetaLevel"><strong>computePrudentBetaLevel</strong></a>(self, Debug=False)</dt><dd><tt>computes&nbsp;alpha,&nbsp;ie&nbsp;the&nbsp;lowest&nbsp;valuation&nbsp;level,&nbsp;for&nbsp;which&nbsp;the<br>
 bipolarly&nbsp;polarised&nbsp;digraph&nbsp;doesn't&nbsp;contain&nbsp;a&nbsp;chordless&nbsp;circuit.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeRankedPairsOrder"><strong>computeRankedPairsOrder</strong></a>(self, Cpp=False, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;the<br>
+<dl><dt><a name="QuantilesSortingDigraph-computeRankedPairsOrder"><strong>computeRankedPairsOrder</strong></a>(self, Cpp=False, Debug=False)</dt><dd><tt>renders&nbsp;an&nbsp;actions&nbsp;ordering&nbsp;from&nbsp;the&nbsp;worst&nbsp;to&nbsp;the&nbsp;best&nbsp;obtained&nbsp;from&nbsp;the<br>
 ranked&nbsp;pairs&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-computeRankedPairsRanking"><strong>computeRankedPairsRanking</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-computeRankingByBestChoosing"><strong>computeRankingByBestChoosing</strong></a>(self, CoDual=False, CppAgrum=False, Debug=False)</dt><dd><tt>Computes&nbsp;a&nbsp;weak&nbsp;preordering&nbsp;of&nbsp;the&nbsp;self.<strong>actions</strong>&nbsp;by&nbsp;recursive<br>
 best&nbsp;choice&nbsp;elagations.<br>
@@ -577,14 +633,17 @@ the&nbsp;following&nbsp;type&nbsp;of&nbsp;links:<br>
 gt&nbsp;'&gt;',&nbsp;eq&nbsp;'=',&nbsp;lt&nbsp;'&lt;',&nbsp;incomp&nbsp;'&lt;&gt;',<br>
 leq&nbsp;'&lt;=',&nbsp;geq&nbsp;'&gt;=',&nbsp;indeterm&nbsp;'?'</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
+<dl><dt><a name="QuantilesSortingDigraph-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
 self.<strong>strictBadChoices</strong>,&nbsp;self.<strong>nonRobustChoices</strong>.<br>
 &nbsp;<br>
-&nbsp;<br>
 CppgArum&nbsp;=&nbsp;False&nbsp;(default&nbsp;|&nbsp;true&nbsp;:&nbsp;use&nbsp;C++/Agrum&nbsp;digraph&nbsp;library<br>
-for&nbsp;computing&nbsp;chordless&nbsp;circuits&nbsp;in&nbsp;self.</tt></dd></dl>
+for&nbsp;computing&nbsp;chordless&nbsp;circuits&nbsp;in&nbsp;self.<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Changes&nbsp;in&nbsp;site&nbsp;the&nbsp;outranking&nbsp;digraph&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;adding&nbsp;or&nbsp;braking&nbsp;chordless&nbsp;odd&nbsp;outranking&nbsp;circuits.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeRubyChoice"><strong>computeRubyChoice</strong></a>(self, CppAgrum=False, Comments=False)</dt><dd><tt>dummy&nbsp;for&nbsp;<a href="#QuantilesSortingDigraph-computeRubisChoice">computeRubisChoice</a>()<br>
+<dl><dt><a name="QuantilesSortingDigraph-computeRubyChoice"><strong>computeRubyChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False)</dt><dd><tt>dummy&nbsp;for&nbsp;<a href="#QuantilesSortingDigraph-computeRubisChoice">computeRubisChoice</a>()<br>
 old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-computeSizeTransitiveClosure"><strong>computeSizeTransitiveClosure</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -666,7 +725,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="QuantilesSortingDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;Digraph&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;Digraph&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -742,20 +801,24 @@ In&nbsp;both&nbsp;cases,&nbsp;undefined&nbsp;edges&nbsp;can&nbsp;be&nbsp;hidden&
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;then&nbsp;access&nbsp;the&nbsp;index.html&nbsp;via&nbsp;"<a href="http://0.0.0.0:8000/index.html">http://0.0.0.0:8000/index.html</a>".<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;order&nbsp;to&nbsp;load&nbsp;the&nbsp;CSS&nbsp;an&nbsp;active&nbsp;internet&nbsp;connection&nbsp;is&nbsp;needed!</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-exportPrincipalImage"><strong>exportPrincipalImage</strong></a>(self, Reduced=False, Colwise=False, plotFileName=None, Type='png', Comments=False)</dt><dd><tt>Export&nbsp;as&nbsp;PNG&nbsp;(default)&nbsp;or&nbsp;PDF&nbsp;the&nbsp;principal&nbsp;projection&nbsp;of<br>
+<dl><dt><a name="QuantilesSortingDigraph-exportPrincipalImage"><strong>exportPrincipalImage</strong></a>(self, Reduced=False, Colwise=False, plotFileName=None, Type='png', TempDir='.', Comments=False)</dt><dd><tt>Export&nbsp;as&nbsp;PNG&nbsp;(default)&nbsp;or&nbsp;PDF&nbsp;the&nbsp;principal&nbsp;projection&nbsp;of<br>
 the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp;eigen&nbsp;vectors.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;method,&nbsp;writing&nbsp;and&nbsp;reading&nbsp;temporary&nbsp;files:&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;tempCol.r&nbsp;and&nbsp;rotationCol.csv,&nbsp;resp.&nbsp;tempRow.r&nbsp;and&nbsp;rotationRow.csv,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;hence&nbsp;not&nbsp;safe&nbsp;for&nbsp;multiprocessors'&nbsp;threading&nbsp;programs.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;default&nbsp;in&nbsp;the&nbsp;working&nbsp;directory&nbsp;(./),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;hence&nbsp;not&nbsp;safe&nbsp;for&nbsp;multiprocessing&nbsp;programs,&nbsp;unless&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;temporary&nbsp;dirctory&nbsp;is&nbsp;provided</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-flatChoice"><strong>flatChoice</strong></a>(self, ch, Debug=False)</dt><dd><tt>Converts&nbsp;set&nbsp;or&nbsp;list&nbsp;ch&nbsp;recursively&nbsp;to&nbsp;a&nbsp;flat&nbsp;list&nbsp;of&nbsp;items.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-forcedBestSingleChoice"><strong>forcedBestSingleChoice</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;most&nbsp;determined&nbsp;outranking&nbsp;singletons&nbsp;in&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-gammaSets"><strong>gammaSets</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;dictionary&nbsp;of&nbsp;neighborhoods&nbsp;{node:&nbsp;(dx,ax)}</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-gammaSets"><strong>gammaSets</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;dictionary&nbsp;of&nbsp;neighborhoods&nbsp;{node:&nbsp;(dx,ax)}<br>
+with&nbsp;set&nbsp;*dx*&nbsp;gathering&nbsp;the&nbsp;dominated,&nbsp;and&nbsp;set&nbsp;*ax*&nbsp;gathering<br>
+the&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-generateAbsPreKernels"><strong>generateAbsPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;absorbent&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
 
@@ -838,7 +901,9 @@ self.<strong>circuitsList</strong>&nbsp;stored&nbsp;odd&nbsp;chordless&nbsp;circ
 
 <dl><dt><a name="QuantilesSortingDigraph-neighbourhoodDepthDistribution"><strong>neighbourhoodDepthDistribution</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-notGammaSets"><strong>notGammaSets</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;dictionary&nbsp;of&nbsp;not&nbsp;neighborhoods&nbsp;{node:&nbsp;(dx,ax)}</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-notGammaSets"><strong>notGammaSets</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;dictionary&nbsp;of&nbsp;neighborhoods&nbsp;{node:&nbsp;(dx,ax)}<br>
+with&nbsp;set&nbsp;*dx*&nbsp;gathering&nbsp;the&nbsp;not&nbsp;dominated,&nbsp;and&nbsp;set&nbsp;*ax*&nbsp;gathering<br>
+the&nbsp;not&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-notaneighbors"><strong>notaneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;not&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -868,7 +933,7 @@ absorbent&nbsp;in&nbsp;vector.</tt></dd></dl>
 <dl><dt><a name="QuantilesSortingDigraph-readdomvector"><strong>readdomvector</strong></a>(self, x, relation)</dt><dd><tt>Parameter:&nbsp;action&nbsp;x<br>
 dominant&nbsp;out&nbsp;vector.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-save"><strong>save</strong></a>(self, fileName='tempdigraph', option=None, DecimalValuation=True)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;Digraph&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of<br>
+<dl><dt><a name="QuantilesSortingDigraph-save"><strong>save</strong></a>(self, fileName='tempdigraph', option=None, DecimalValuation=True, decDigits=2)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;Digraph&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of<br>
 a&nbsp;python&nbsp;source&nbsp;code&nbsp;file</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-saveCSV"><strong>saveCSV</strong></a>(self, fileName='tempdigraph', Normalized=True, Dual=True, Converse=False, Diagonal=False, Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;Digraph&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of<br>
@@ -968,9 +1033,54 @@ the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;m
 
 <dl><dt><a name="QuantilesSortingDigraph-showRelation"><strong>showRelation</strong></a>(self)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;##.##&nbsp;format.</tt></dd></dl>
 
+<dl><dt><a name="QuantilesSortingDigraph-showRelationMap"><strong>showRelationMap</strong></a>(self, symbols=None, rankingRule='netFlows')</dt><dd><tt>Prints&nbsp;on&nbsp;the&nbsp;console,&nbsp;in&nbsp;text&nbsp;map&nbsp;format,&nbsp;the&nbsp;location&nbsp;of<br>
+certainly&nbsp;validated&nbsp;and&nbsp;certainly&nbsp;invalidated&nbsp;outranking&nbsp;situations.<br>
+&nbsp;<br>
+By&nbsp;default,&nbsp;symbols&nbsp;=&nbsp;{'max':'┬','positive':&nbsp;'+',&nbsp;'median':&nbsp;'&nbsp;',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'negative':&nbsp;'-',&nbsp;'min':&nbsp;'┴'}<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;ordering&nbsp;of&nbsp;the&nbsp;output&nbsp;is&nbsp;following&nbsp;the&nbsp;net&nbsp;flows&nbsp;ranking&nbsp;rule<br>
+from&nbsp;best&nbsp;to&nbsp;worst&nbsp;actions.&nbsp;Further&nbsp;available&nbsp;ranking&nbsp;rules&nbsp;are&nbsp;Kohler's&nbsp;(rankingRule="kohler")<br>
+and&nbsp;Tideman's&nbsp;ranked&nbsp;pairs&nbsp;rule&nbsp;(rankingRule="rankedPairs")<br>
+&nbsp;<br>
+Example::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;RandomCBPerformanceTableau(numberOfActions=25,seed=1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t,Normalized=True)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;gcd&nbsp;=&nbsp;~(-g)&nbsp;&nbsp;#&nbsp;strict&nbsp;outranking&nbsp;relation<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;gcd.<a href="#QuantilesSortingDigraph-showRelationMap">showRelationMap</a>(rankingRule="netFlows")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;++++++++&nbsp;&nbsp;+++++┬+┬┬+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;-&nbsp;&nbsp;&nbsp;+&nbsp;+++++&nbsp;++┬+┬+++┬++<br>
+&nbsp;&nbsp;&nbsp;&nbsp;┴+&nbsp;&nbsp;┴&nbsp;+&nbsp;++&nbsp;&nbsp;++++┬+┬┬++┬++<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;++&nbsp;-&nbsp;++++-++++++┬++┬+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;-&nbsp;-&nbsp;++-&nbsp;┬-&nbsp;+&nbsp;-+┬+-┬┬<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-----&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-┬┬┬-+&nbsp;&nbsp;-┬┬<br>
+&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;&nbsp;&nbsp;&nbsp;--+-+++++++++++++<br>
+&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;--+-&nbsp;--++&nbsp;++&nbsp;+++-┬+-┬┬<br>
+&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;&nbsp;-&nbsp;&nbsp;-+--&nbsp;++--+++++&nbsp;+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-----&nbsp;++-&nbsp;---&nbsp;+---++++┬&nbsp;+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;--&nbsp;---+&nbsp;-++-+++-+&nbsp;+-++<br>
+&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;--┴---+&nbsp;&nbsp;+&nbsp;+-++-+&nbsp;-&nbsp;&nbsp;+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;┴---+--&nbsp;++--++++&nbsp;-&nbsp;+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--┴┴--&nbsp;&nbsp;---&nbsp;-&nbsp;&nbsp;--+&nbsp;--┬┬<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---------+--+&nbsp;-----&nbsp;+-┬┬<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-┴---┴-&nbsp;---+-&nbsp;+&nbsp;---+++┬&nbsp;+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-┴┴--┴---+---&nbsp;++&nbsp;-++--+++<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-----┴---&nbsp;---+-+-&nbsp;++---+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-┴┴---------------&nbsp;--++┬&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;--┴----------------&nbsp;--+┬&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;┴--┴┴&nbsp;-┴--┴┴-┴&nbsp;--++&nbsp;&nbsp;++-+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;----┴┴---------------&nbsp;-&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;┴┴┴----+-┴+┴---┴-+---+&nbsp;┴+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;┴┴-┴┴┴-┴-&nbsp;-&nbsp;-┴┴---┴┴+&nbsp;┬&nbsp;-<br>
+&nbsp;&nbsp;&nbsp;&nbsp;----┴┴-┴-----┴┴---&nbsp;&nbsp;-&nbsp;--&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Ranking&nbsp;rule:&nbsp;netFlows<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd></dl>
+
 <dl><dt><a name="QuantilesSortingDigraph-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=True, Debug=False, _OldCoca=False, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showRubyChoice"><strong>showRubyChoice</strong></a>(self, Comments=False)</dt><dd><tt>dummy&nbsp;for&nbsp;showRubisChoice()<br>
+<dl><dt><a name="QuantilesSortingDigraph-showRubyChoice"><strong>showRubyChoice</strong></a>(self, Comments=False, _OldCoca=True)</dt><dd><tt>dummy&nbsp;for&nbsp;<a href="#QuantilesSortingDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
 older&nbsp;versions&nbsp;compatibility</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showStatistics"><strong>showStatistics</strong></a>(self)</dt><dd><tt>Computes&nbsp;digraph&nbsp;statistics&nbsp;like&nbsp;order,&nbsp;size&nbsp;and&nbsp;arc-density.</tt></dd></dl>
@@ -1025,11 +1135,87 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.Perfo
 
 <dl><dt><a name="QuantilesSortingDigraph-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
+<dl><dt><a name="QuantilesSortingDigraph-computeAllQuantiles"><strong>computeAllQuantiles</strong></a>(self, Sorted=True, Comments=False)</dt><dd><tt>renders&nbsp;a&nbsp;html&nbsp;string&nbsp;showing&nbsp;the&nbsp;table&nbsp;of<br>
+the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
+
 <dl><dt><a name="QuantilesSortingDigraph-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'weakVeto': 60, 'ind': 10, 'pref': 20, 'veto': 80}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="QuantilesSortingDigraph-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'pref': 20, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-computeMCSRPerformanceHeatmap"><strong>computeMCSRPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, ndigits=2, colorLevels=7, Ranked=True, title='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Computes&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
+actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;ordered&nbsp;dictionary&nbsp;format.&nbsp;Three&nbsp;color&nbsp;levels&nbsp;(5,7&nbsp;or&nbsp;9)<br>
+are&nbsp;provided.&nbsp;Used&nbsp;by&nbsp;the&nbsp;Web&nbsp;API.<br>
+&nbsp;<br>
+For&nbsp;a&nbsp;performance&nbsp;tableau&nbsp;with&nbsp;5&nbsp;criteria,&nbsp;colorLevels=5&nbsp;and<br>
+Correlations&nbsp;=&nbsp;True,&nbsp;one&nbsp;obtains&nbsp;for&nbsp;instance<br>
+the&nbsp;following&nbsp;ordered&nbsp;dictionary&nbsp;in&nbsp;return::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('title',&nbsp;'Performance&nbsp;Heatmap'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('precision',&nbsp;2),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('colorPalette',&nbsp;OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('0',{'quantile':Decimal('0.2'),'quantileClass':'q5_1'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('1',{'quantile':Decimal('0.4'),'quantileClass':'q5_2'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('2',{'quantile':Decimal('0.6'),'quantileClass':'q5_3'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('3',{'quantile':Decimal('0.8'),'quantileClass':'q5_4'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('4',{'quantile':Decimal('1.0'),'quantileClass':'q5_5'})<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;])),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('criteriaList',&nbsp;OrderedDict([('0','g5'),&nbsp;('1','g2'),&nbsp;('2','g4'),&nbsp;('3','g1'),&nbsp;('4','g3')]),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('criteriaCorrelations',&nbsp;OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('0',Decimal('0.71428')),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('1',Decimal('0.48571')),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('2',Decimal('0.40952')),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('3',Decimal('0.35238')),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('4',Decimal('0.16190'))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;])),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('quantiles',&nbsp;OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('0',{'a1':OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('0',{'quantile':Decimal('3'),&nbsp;'qantileClass':'q5-2'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('1',{'quantile':Decimal('-17.92'),&nbsp;'qantileClass':'q5-5'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('2',{'quantile':Decimal('26.68'),&nbsp;'qantileClass':'q5-2'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('3',{'quantile':Decimal('1'),&nbsp;'qantileClass':'q5-1'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('4',{'quantile':Decimal('-33.99'),&nbsp;'qantileClass':'q5-3'})<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;])}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('1',{'a2':OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('0',{'quantile':Decimal('6'),&nbsp;'qantileClass':'q5-3'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('1',{'quantile':Decimal('-30.71'),&nbsp;'qantileClass':'q5-5'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('2',{'quantile':Decimal('66.35'),&nbsp;'qantileClass':'q5-4'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('3',{'quantile':Decimal('8'),&nbsp;'qantileClass':'q5-5'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('4',{'quantile':Decimal('-77.77'),&nbsp;'qantileClass':'q5-3'})<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;])}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('2',&nbsp;...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]))...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;]))</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-computeMCSRPerformanceTableau"><strong>computeMCSRPerformanceTableau</strong></a>(self, isSorted=True, ndigits=2, title='Min/Max Performance Tableau', Debug=False)</dt><dd><tt>Computes&nbsp;the&nbsp;performance&nbsp;table&nbsp;in&nbsp;a&nbsp;JSON&nbsp;compatible&nbsp;format&nbsp;with&nbsp;minima&nbsp;and&nbsp;maxima.&nbsp;Used&nbsp;by&nbsp;the&nbsp;Web&nbsp;API.<br>
+&nbsp;<br>
+For&nbsp;a&nbsp;performance&nbsp;tableau&nbsp;with&nbsp;5&nbsp;criteria&nbsp;one&nbsp;obtains&nbsp;for&nbsp;instance<br>
+the&nbsp;following&nbsp;ordered&nbsp;dictionary&nbsp;in&nbsp;return::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('title',&nbsp;'Min/Max&nbsp;Performance&nbsp;Tableau'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('precision',&nbsp;2),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('criteriaList',&nbsp;OrderedDict([('0','g5'),&nbsp;('1','g2'),&nbsp;('2','g4'),&nbsp;('3','g1'),&nbsp;('4','g3')]),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('quantiles',&nbsp;OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('0',{'a1':OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('0',{'quantile':Decimal('3'),&nbsp;'qantileClass':'minimum'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('1',{'quantile':Decimal('-17.92'),&nbsp;'qantileClass':'default'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('2',{'quantile':Decimal('26.68'),&nbsp;'qantileClass':'maximum'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('3',{'quantile':'NaN,&nbsp;'qantileClass':'NaN'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('4',{'quantile':Decimal('-33.99'),&nbsp;'qantileClass':'default'})<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;])}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('1',{'a2':OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('0',{'quantile':Decimal('6'),&nbsp;'qantileClass':'minimum'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('1',{'quantile':Decimal('-30.71'),&nbsp;'qantileClass':'default'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('2',{'quantile':'NaN',&nbsp;'qantileClass':'NaN'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('3',{'quantile':Decimal('8'),&nbsp;'qantileClass':'maximum'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('4',{'quantile':Decimal('-77.77'),&nbsp;'qantileClass':'default'})<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;])}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('2',&nbsp;...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]))...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;]))</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-computeMinMaxEvaluations"><strong>computeMinMaxEvaluations</strong></a>(self, criteria=None, actions=None)</dt><dd><tt>renders&nbsp;minimum&nbsp;and&nbsp;maximum&nbsp;performances&nbsp;on&nbsp;each&nbsp;criterion<br>
 in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum':&nbsp;x}}</tt></dd></dl>
@@ -1039,42 +1225,7 @@ list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
 evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
-
-<dl><dt><a name="QuantilesSortingDigraph-computePerformanceHeatmap"><strong>computePerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, ndigits=2, colorLevels=7, title='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
-actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;dictionary&nbsp;format.&nbsp;Three&nbsp;color&nbsp;levels&nbsp;(5,7&nbsp;or&nbsp;9)<br>
-are&nbsp;provided.<br>
-&nbsp;<br>
-For&nbsp;a&nbsp;performance&nbsp;tableau&nbsp;with&nbsp;5&nbsp;criteria,&nbsp;colorLevels=5&nbsp;and<br>
-Correlations&nbsp;=&nbsp;True,&nbsp;one&nbsp;obtains&nbsp;for&nbsp;instance<br>
-the&nbsp;following&nbsp;ordered&nbsp;dictionary&nbsp;in&nbsp;return::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;OrderedDict([<br>
-&nbsp;&nbsp;&nbsp;&nbsp;('title',&nbsp;'Performance&nbsp;Heatmap'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;('colorPalette',&nbsp;[(Decimal('0.2'),&nbsp;'"#FDAE61"',&nbsp;'q5-1'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('0.4'),&nbsp;'"#FEE08B"',&nbsp;'q5-2'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('0.6'),&nbsp;'"#FFFFBF"',&nbsp;'q5-3'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('0.8'),&nbsp;'"#D9EF8B"',&nbsp;'q5-4'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('1.0'),&nbsp;'"#A6D96A"',&nbsp;'q5-5')]),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;('criteriaList',&nbsp;['g5',&nbsp;'g2',&nbsp;'g4',&nbsp;'g1',&nbsp;'g3']),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;('criteriaCorrelations',&nbsp;[Decimal('0.71428'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decimal('0.48571'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decimal('0.40952'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decimal('0.35238'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decimal('0.16190')]),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;('quantiles',&nbsp;OrderedDict([('a1',&nbsp;[(Decimal('3'),&nbsp;'q5-2'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('-17.92'),&nbsp;'q5-5'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('26.68'),&nbsp;'q5-2'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('1'),&nbsp;'q5-1'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('-33.99'),&nbsp;'q5-3')]),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('a2',&nbsp;[(Decimal('6'),&nbsp;'q5-3'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('-30.71'),&nbsp;'q5-5'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('66.35'),&nbsp;'q5-4'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('8'),&nbsp;'q5-5'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('-77.77'),&nbsp;'q5-2')]),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('a3',&nbsp;...<br>
-&nbsp;&nbsp;&nbsp;&nbsp;...<br>
-&nbsp;&nbsp;&nbsp;&nbsp;])</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True, WithMaxMin=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;self.<a href="#QuantilesSortingDigraph-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -1107,10 +1258,12 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="QuantilesSortingDigraph-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, ndigits=2, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;9-colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
+<dl><dt><a name="QuantilesSortingDigraph-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, Ranked=True, quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
 actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=True, Transposed=False, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-normalizeEvaluations"><strong>normalizeEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, Debug=False)</dt><dd><tt>recode&nbsp;the&nbsp;evaluations&nbsp;between&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;on&nbsp;all&nbsp;criteria</tt></dd></dl>
 
@@ -1119,19 +1272,26 @@ actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-saveXMLRubis"><strong>saveXMLRubis</strong></a>(self, name='temp', category='Rubis', subcategory='new D2 version', author='digraphs Module (RB)', reference='saved from Python')</dt><dd><tt>save&nbsp;temporary&nbsp;performance&nbsp;tableau&nbsp;self&nbsp;in&nbsp;XML&nbsp;Rubis&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showAllQuantiles"><strong>showAllQuantiles</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;html&nbsp;string&nbsp;showing&nbsp;the&nbsp;table&nbsp;of<br>
-the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-showAllQuantiles"><strong>showAllQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>prints&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;the&nbsp;session&nbsp;console.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showCriteria"><strong>showCriteria</strong></a>(self, IntegerWeights=False, Debug=False)</dt><dd><tt>print&nbsp;Criteria&nbsp;with&nbsp;thresholds&nbsp;and&nbsp;weights.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-showCriteria"><strong>showCriteria</strong></a>(self, IntegerWeights=False, Alphabetic=False, ByObjectives=False, Debug=False)</dt><dd><tt>print&nbsp;Criteria&nbsp;with&nbsp;thresholds&nbsp;and&nbsp;weights.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showEvaluationStatistics"><strong>showEvaluationStatistics</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;variance&nbsp;and&nbsp;standard&nbsp;deviation&nbsp;of<br>
 the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, Ranked=True, Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-showHTMLMCSRPerformanceTableau"><strong>showHTMLMCSRPerformanceTableau</strong></a>(self, ndigits=2, title='Min/Max Performance Tableau')</dt><dd><tt>Ask&nbsp;the&nbsp;server&nbsp;for&nbsp;an&nbsp;HTML&nbsp;representation&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, Ranked=True, quantiles=None, strategy='optimistic', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
+<dl><dt><a name="QuantilesSortingDigraph-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
+
 <dl><dt><a name="QuantilesSortingDigraph-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#QuantilesSortingDigraph-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#QuantilesSortingDigraph-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -1223,17 +1383,17 @@ a10&nbsp;in&nbsp;[100-&lt;[&nbsp;&nbsp;-100.00&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="SortingDigraph-__init__"><strong>__init__</strong></a>(self, argPerfTab=None, argProfile=None, scaleSteps=5, minValuation=-100.0, maxValuation=100.0, isRobust=False, hasNoVeto=False, LowerClosed=True, Threading=False, nbrCores=None, Debug=False)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#SortingDigraph">SortingDigraph</a>&nbsp;instances.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-__init__"><strong>__init__</strong></a>(self, argPerfTab=None, argProfile=None, scaleSteps=5, minValuation=-100.0, maxValuation=100.0, isRobust=False, hasNoVeto=False, LowerClosed=True, StoreSorting=True, Threading=False, nbrCores=None, Debug=False)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#SortingDigraph">SortingDigraph</a>&nbsp;instances.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computeCategoryContents"><strong>computeCategoryContents</strong></a>(self, Reverse=False, Comments=False)</dt><dd><tt>Computes&nbsp;the&nbsp;sorting&nbsp;results&nbsp;per&nbsp;category.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-computeCategoryContents"><strong>computeCategoryContents</strong></a>(self, Reverse=False, StoreSorting=True, Comments=False)</dt><dd><tt>Computes&nbsp;the&nbsp;sorting&nbsp;results&nbsp;per&nbsp;category.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computeSortingCharacteristics"><strong>computeSortingCharacteristics</strong></a>(self, action=None, Comments=False)</dt><dd><tt>Renders&nbsp;a&nbsp;bipolar-valued&nbsp;bi-dictionary&nbsp;relation<br>
+<dl><dt><a name="SortingDigraph-computeSortingCharacteristics"><strong>computeSortingCharacteristics</strong></a>(self, action=None, StoreSorting=True, Comments=False, Debug=False, Threading=False, nbrOfCPUs=None)</dt><dd><tt>Renders&nbsp;a&nbsp;bipolar-valued&nbsp;bi-dictionary&nbsp;relation<br>
 representing&nbsp;the&nbsp;degree&nbsp;of&nbsp;credibility&nbsp;of&nbsp;the<br>
 assertion&nbsp;that&nbsp;"action&nbsp;x&nbsp;in&nbsp;A&nbsp;belongs&nbsp;to&nbsp;category&nbsp;c&nbsp;in&nbsp;C",<br>
 ie&nbsp;x&nbsp;outranks&nbsp;low&nbsp;category&nbsp;limit&nbsp;and&nbsp;does&nbsp;not&nbsp;outrank<br>
 the&nbsp;high&nbsp;category&nbsp;limit.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computeSortingRelation"><strong>computeSortingRelation</strong></a>(self, categoryContents=None, Debug=False)</dt><dd><tt>constructs&nbsp;a&nbsp;bipolar&nbsp;sorting&nbsp;relation&nbsp;using&nbsp;the&nbsp;category&nbsp;contents.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-computeSortingRelation"><strong>computeSortingRelation</strong></a>(self, categoryContents=None, StoreSorting=True, Debug=False)</dt><dd><tt>constructs&nbsp;a&nbsp;bipolar&nbsp;sorting&nbsp;relation&nbsp;using&nbsp;the&nbsp;category&nbsp;contents.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-computeWeakOrder"><strong>computeWeakOrder</strong></a>(self, Descending=True, Debug=False)</dt><dd><tt>Specialisation&nbsp;for&nbsp;QuantilesSortingDigraphs.</tt></dd></dl>
 
@@ -1259,7 +1419,7 @@ to&nbsp;the&nbsp;parameters&nbsp;given.<br>
 
 <dl><dt><a name="SortingDigraph-saveProfilesXMCDA2"><strong>saveProfilesXMCDA2</strong></a>(self, fileName='temp', category='XMCDA 2.0 format', user='sortinDigraphs Module (RB)', version='saved from Python session', title='Sorting categories in XMCDA-2.0 format.', variant='Rubis', valuationType='bipolar', isStringIO=False, stringNA='NA', comment='produced by saveProfilesXMCDA2()')</dt><dd><tt>Save&nbsp;profiles&nbsp;object&nbsp;self&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showActionCategories"><strong>showActionCategories</strong></a>(self, action, Debug=False, Comments=True)</dt><dd><tt>Renders&nbsp;the&nbsp;union&nbsp;of&nbsp;categories&nbsp;in&nbsp;which&nbsp;the&nbsp;given&nbsp;action&nbsp;is&nbsp;sorted&nbsp;positively&nbsp;or&nbsp;null&nbsp;into.<br>
+<dl><dt><a name="SortingDigraph-showActionCategories"><strong>showActionCategories</strong></a>(self, action, Debug=False, Comments=True, Threading=False, nbrOfCPUs=None)</dt><dd><tt>Renders&nbsp;the&nbsp;union&nbsp;of&nbsp;categories&nbsp;in&nbsp;which&nbsp;the&nbsp;given&nbsp;action&nbsp;is&nbsp;sorted&nbsp;positively&nbsp;or&nbsp;null&nbsp;into.<br>
 Returns&nbsp;a&nbsp;tuple&nbsp;:&nbsp;action,&nbsp;lowest&nbsp;category&nbsp;key,&nbsp;highest&nbsp;category&nbsp;key,&nbsp;membership&nbsp;credibility&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showActionsSortingResult"><strong>showActionsSortingResult</strong></a>(self, actionSubset=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;quantiles&nbsp;sorting&nbsp;result&nbsp;all&nbsp;(default)&nbsp;of&nbsp;a&nbsp;subset&nbsp;of&nbsp;the&nbsp;decision&nbsp;actions.</tt></dd></dl>
@@ -1299,8 +1459,35 @@ Methods inherited from <a href="outrankingDigraphs.html#OutrankingDigraph">outra
 
 <dl><dt><a name="SortingDigraph-computeCriteriaCorrelations"><strong>computeCriteriaCorrelations</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;comparison&nbsp;correlations&nbsp;between&nbsp;the&nbsp;criteria</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computeCriterionCorrelation"><strong>computeCriterionCorrelation</strong></a>(self, criterion, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordinal&nbsp;correlation&nbsp;coefficient&nbsp;between<br>
-the&nbsp;global&nbsp;outranking&nbsp;and&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;relation.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-computeCriterionCorrelation"><strong>computeCriterionCorrelation</strong></a>(self, criterion, Threading=False, nbrOfCPUs=None, Debug=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordinal&nbsp;correlation&nbsp;coefficient&nbsp;between<br>
+the&nbsp;global&nbsp;outranking&nbsp;and&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;relation.<br>
+&nbsp;<br>
+If&nbsp;Threading,&nbsp;the</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-computeMarginalCorrelation"><strong>computeMarginalCorrelation</strong></a>(self, args, Threading=False, nbrOfCPUs=None, Debug=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordinal&nbsp;correlation&nbsp;coefficient&nbsp;between<br>
+the&nbsp;global&nbsp;outranking&nbsp;and&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;relation.<br>
+&nbsp;<br>
+If&nbsp;Threading,&nbsp;the</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-computeMarginalVersusGlobalOutrankingCorrelations"><strong>computeMarginalVersusGlobalOutrankingCorrelations</strong></a>(self, Sorted=True, Threading=False, nbrCores=None, Comments=False)</dt><dd><tt>Method&nbsp;for&nbsp;computing&nbsp;correlations&nbsp;between&nbsp;each&nbsp;individual&nbsp;criterion&nbsp;relation&nbsp;with&nbsp;the&nbsp;corresponding<br>
+global&nbsp;outranking&nbsp;relation.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;tuples&nbsp;(correlation,criterionKey)&nbsp;sorted&nbsp;by&nbsp;default&nbsp;in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;the&nbsp;correlation.<br>
+&nbsp;<br>
+If&nbsp;Threading&nbsp;is&nbsp;True,&nbsp;a&nbsp;multiprocessing&nbsp;Pool&nbsp;class&nbsp;is&nbsp;used&nbsp;with&nbsp;a&nbsp;parallel&nbsp;equivalent&nbsp;of&nbsp;the&nbsp;built-in&nbsp;map&nbsp;function.<br>
+&nbsp;<br>
+If&nbsp;nbrCores&nbsp;is&nbsp;not&nbsp;set,&nbsp;the&nbsp;os.cpu_count()&nbsp;function&nbsp;is&nbsp;used&nbsp;to&nbsp;determine&nbsp;the&nbsp;number&nbsp;of<br>
+available&nbsp;cores.</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-computeMarginalVersusGlobalRankingCorrelations"><strong>computeMarginalVersusGlobalRankingCorrelations</strong></a>(self, ranking, Sorted=True, Threading=False, nbrCores=None, Comments=False)</dt><dd><tt>Method&nbsp;for&nbsp;computing&nbsp;correlations&nbsp;between&nbsp;each&nbsp;individual&nbsp;criterion&nbsp;relation&nbsp;with&nbsp;the&nbsp;corresponding<br>
+global&nbsp;outranking&nbsp;relation.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;tuples&nbsp;(correlation,criterionKey)&nbsp;sorted&nbsp;by&nbsp;default&nbsp;in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;the&nbsp;correlation.<br>
+&nbsp;<br>
+If&nbsp;Threading&nbsp;is&nbsp;True,&nbsp;a&nbsp;multiprocessing&nbsp;Pool&nbsp;class&nbsp;is&nbsp;used&nbsp;with&nbsp;a&nbsp;parallel&nbsp;equivalent&nbsp;of&nbsp;the&nbsp;built-in&nbsp;map&nbsp;function.<br>
+&nbsp;<br>
+If&nbsp;nbrCores&nbsp;is&nbsp;not&nbsp;set,&nbsp;the&nbsp;os.cpu_count()&nbsp;function&nbsp;is&nbsp;used&nbsp;to&nbsp;determine&nbsp;the&nbsp;number&nbsp;of<br>
+available&nbsp;cores.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-computePairwiseComparisons"><strong>computePairwiseComparisons</strong></a>(self, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;pairwise&nbsp;comparison&nbsp;parameters&nbsp;for&nbsp;all&nbsp;pairs&nbsp;of&nbsp;actions</tt></dd></dl>
 
@@ -1324,7 +1511,7 @@ vetos&nbsp;=&nbsp;{'all':&nbsp;n0,&nbsp;'strong:&nbsp;n1,&nbsp;'weak':n2}.</tt><
 &nbsp;<br>
 Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-defaultDiscriminationThresholds"><strong>defaultDiscriminationThresholds</strong></a>(self, quantile={'weakVeto': 60, 'ind': 10, 'pref': 20, 'veto': 80}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="SortingDigraph-defaultDiscriminationThresholds"><strong>defaultDiscriminationThresholds</strong></a>(self, quantile={'veto': 80, 'pref': 20, 'ind': 10, 'weakVeto': 60}, Debug=False, comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 &nbsp;<br>
 Parameters:<br>
@@ -1340,7 +1527,7 @@ the&nbsp;criteria&nbsp;ordinal&nbsp;correlation&nbsp;table.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-saveCriteriaCorrelationTable"><strong>saveCriteriaCorrelationTable</strong></a>(self, fileName='tempcorr.prn', delimiter=' ', Bipolar=True, Silent=False, Centered=False)</dt><dd><tt>Delimited&nbsp;save&nbsp;of&nbsp;correlation&nbsp;table</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-saveXMCDA2RubisChoiceRecommendation"><strong>saveXMCDA2RubisChoiceRecommendation</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', graphValuationType='bipolar', variant='standard', instanceID='void', stringNA='NA')</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-saveXMCDA2RubisChoiceRecommendation"><strong>saveXMCDA2RubisChoiceRecommendation</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', graphValuationType='bipolar', variant='standard', instanceID='void', stringNA='NA', _OldCoca=True, Debug=False)</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-saveXMCDAOutrankingDigraph"><strong>saveXMCDAOutrankingDigraph</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', valuationType='bipolar', variant='standard', instanceID='void')</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
 
@@ -1355,16 +1542,16 @@ and&nbsp;performance&nbsp;tableau&nbsp;output</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showCriterionRelationTable"><strong>showCriterionRelationTable</strong></a>(self, criterion, actionsSubset=None)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showMarginalVersusGlobalOutrankingCorrelation"><strong>showMarginalVersusGlobalOutrankingCorrelation</strong></a>(self, Sorted=True, Threading=False, Comments=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;computeCriterionCorrelation&nbsp;results.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-showMarginalVersusGlobalOutrankingCorrelation"><strong>showMarginalVersusGlobalOutrankingCorrelation</strong></a>(self, Sorted=True, Threading=False, nbrOfCPUs=None, Comments=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;computeCriterionCorrelation&nbsp;results.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showPairwiseComparisonsDistributions"><strong>showPairwiseComparisonsDistributions</strong></a>(self)</dt><dd><tt>show&nbsp;the&nbsp;lt,leq,&nbsp;eq,&nbsp;geq,&nbsp;gt&nbsp;distributions&nbsp;for&nbsp;all&nbsp;pairs</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showRelationTable"><strong>showRelationTable</strong></a>(self, IntegerValues=False, actionsSubset=None, Sorted=True, hasLPDDenotation=False, hasLatexFormat=False, hasIntegerValuation=False, relation=None)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-showRelationTable"><strong>showRelationTable</strong></a>(self, IntegerValues=False, actionsSubset=None, Sorted=True, hasLPDDenotation=False, hasLatexFormat=False, hasIntegerValuation=False, relation=None, ReflexiveTerms=True)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>specialize&nbsp;the&nbsp;general&nbsp;showShort&nbsp;method&nbsp;with&nbsp;the&nbsp;criteria.</tt></dd></dl>
 
@@ -1473,36 +1660,7 @@ of&nbsp;the&nbsp;irreflexive&nbsp;and&nbsp;determined&nbsp;arcs&nbsp;of&nbsp;the
 <dl><dt><a name="SortingDigraph-computeBadPirlotChoices"><strong>computeBadPirlotChoices</strong></a>(self, Comments=False)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;bad&nbsp;choices<br>
 using&nbsp;the&nbsp;Pirlot's&nbsp;fixpoint&nbsp;algorithm.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computeBipolarCorrelation"><strong>computeBipolarCorrelation</strong></a>(self, other, MedianCut=False, filterRelation=None, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;correlation&nbsp;K&nbsp;of&nbsp;a<br>
-self.<strong>relation</strong>&nbsp;when&nbsp;compared<br>
-with&nbsp;a&nbsp;given&nbsp;compatible&nbsp;(same&nbsp;actions&nbsp;set))&nbsp;digraph&nbsp;or<br>
-a&nbsp;[-1,1]&nbsp;valued&nbsp;compatible&nbsp;relation&nbsp;(same&nbsp;actions&nbsp;set).<br>
-&nbsp;<br>
-If&nbsp;MedianCut=True,&nbsp;the&nbsp;correlation&nbsp;is&nbsp;computed&nbsp;on&nbsp;the&nbsp;median&nbsp;polarized&nbsp;relations.<br>
-&nbsp;<br>
-If&nbsp;filterRelation&nbsp;!=&nbsp;None,&nbsp;the&nbsp;correlation&nbsp;is&nbsp;computed&nbsp;on&nbsp;the&nbsp;partial&nbsp;domain&nbsp;corresponding&nbsp;to&nbsp;the&nbsp;determined&nbsp;part&nbsp;of&nbsp;the&nbsp;filter&nbsp;relation.<br>
-&nbsp;<br>
-..&nbsp;warning::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notice&nbsp;that&nbsp;the&nbsp;'other'&nbsp;relation&nbsp;and/or&nbsp;the&nbsp;'filterRelation',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;case&nbsp;given,&nbsp;must&nbsp;both&nbsp;be&nbsp;normalized,&nbsp;ie&nbsp;[-1,1]-valued&nbsp;!<br>
-&nbsp;<br>
-K&nbsp;=&nbsp;sum_{x&nbsp;!=&nbsp;y}&nbsp;[&nbsp;min(&nbsp;max(-self.<strong>relation</strong>[x][y]),other.relation[x][y]),&nbsp;max(self.<strong>relation</strong>[x][y],-other.relation[x][y])&nbsp;]<br>
-&nbsp;<br>
-K&nbsp;/=&nbsp;sum_{x!=y}&nbsp;[&nbsp;min(abs(self.<strong>relation</strong>[x][y]),abs(other.relation[x][y]))&nbsp;]<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders&nbsp;a&nbsp;tuple&nbsp;with&nbsp;at&nbsp;position&nbsp;0&nbsp;the&nbsp;actual&nbsp;bipolar&nbsp;correlation&nbsp;index<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;in&nbsp;position&nbsp;1&nbsp;the&nbsp;minimal&nbsp;determination&nbsp;level&nbsp;D&nbsp;of&nbsp;self&nbsp;and<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;other&nbsp;relation.<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D&nbsp;=&nbsp;sum_{x&nbsp;!=&nbsp;y}&nbsp;min(abs(self.<strong>relation</strong>[x][y]),abs(other.relation[x][y]))&nbsp;/&nbsp;n(n-1)<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where&nbsp;n&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;actions&nbsp;considered.<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;correlation&nbsp;index&nbsp;with&nbsp;a&nbsp;completely&nbsp;indeterminate&nbsp;relation<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;by&nbsp;convention&nbsp;0.0&nbsp;at&nbsp;determination&nbsp;level&nbsp;0.0&nbsp;.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-computeBipolarCorrelation"><strong>computeBipolarCorrelation</strong></a>(self, other, MedianCut=False, filterRelation=None, Debug=False)</dt><dd><tt>obsolete:&nbsp;dummy&nbsp;replacement&nbsp;for&nbsp;Digraph.computeOrdinalCorrelation&nbsp;method</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-computeChordlessCircuits"><strong>computeChordlessCircuits</strong></a>(self, Odd=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;odd&nbsp;circuits&nbsp;detected&nbsp;in&nbsp;a&nbsp;digraph.<br>
 Result&nbsp;(possible&nbsp;empty&nbsp;list)&nbsp;stored&nbsp;in&nbsp;&lt;self.<strong>circuitsList</strong>&gt;<br>
@@ -1553,7 +1711,12 @@ other&nbsp;digraph&nbsp;(same&nbsp;nodes&nbsp;or&nbsp;actions).</tt></dd></dl>
 <dl><dt><a name="SortingDigraph-computeKemenyOrder"><strong>computeKemenyOrder</strong></a>(self, isProbabilistic=False, orderLimit=7, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Kemeny&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder,&nbsp;kemenyIndex</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SortingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SortingDigraph-computeKohlerRankingDict"><strong>computeKohlerRankingDict</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule&nbsp;as&nbsp;an<br>
+ordered&nbsp;dictionary&nbsp;with&nbsp;rank&nbsp;and&nbsp;majorityMargin&nbsp;attributes.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -1572,6 +1735,12 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder,&nbsp;kemenyIndex</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-computeMoreOrLessUnrelatedPairs"><strong>computeMoreOrLessUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="SortingDigraph-computeNetFlowsOrder"><strong>computeNetFlowsOrder</strong></a>(self)</dt><dd><tt>renders&nbsp;an&nbsp;ordered&nbsp;list&nbsp;(from&nbsp;worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions<br>
+following&nbsp;the&nbsp;net&nbsp;flows&nbsp;ranking&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-computeNetFlowsRanking"><strong>computeNetFlowsRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;an&nbsp;ordered&nbsp;list&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions<br>
+following&nbsp;the&nbsp;net&nbsp;flows&nbsp;ranking&nbsp;rule.</tt></dd></dl>
+
 <dl><dt><a name="SortingDigraph-computeODistance"><strong>computeODistance</strong></a>(self, op2, comments=False)</dt><dd><tt>renders&nbsp;the&nbsp;squared&nbsp;normalized&nbsp;distance&nbsp;of<br>
 two&nbsp;digraph&nbsp;valuations.<br>
 Parameters:&nbsp;op2&nbsp;digraphs&nbsp;of&nbsp;same&nbsp;order&nbsp;as&nbsp;self.<br>
@@ -1580,7 +1749,41 @@ The&nbsp;digraphs&nbsp;must&nbsp;be&nbsp;of&nbsp;same&nbsp;order.</tt></dd></dl>
 <dl><dt><a name="SortingDigraph-computeOrbit"><strong>computeOrbit</strong></a>(self, choice, withListing=False)</dt><dd><tt>renders&nbsp;the&nbsp;set&nbsp;of&nbsp;isomorph&nbsp;copies&nbsp;of&nbsp;a&nbsp;choice&nbsp;following<br>
 the&nbsp;automorphism&nbsp;of&nbsp;the&nbsp;digraph&nbsp;self</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computeOrdinalCorrelation"><strong>computeOrdinalCorrelation</strong></a>(self, other, MedianCut=False, filterRelation=None, Debug=False)</dt><dd><tt>obsolete:&nbsp;dummy&nbsp;replacement&nbsp;for&nbsp;Digraph.computeBipolarCorrelation&nbsp;method</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-computeOrdinalCorrelation"><strong>computeOrdinalCorrelation</strong></a>(self, other, MedianCut=False, filterRelation=None, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;correlation&nbsp;K&nbsp;of&nbsp;a<br>
+self.<strong>relation</strong>&nbsp;when&nbsp;compared<br>
+with&nbsp;a&nbsp;given&nbsp;compatible&nbsp;(same&nbsp;actions&nbsp;set))&nbsp;digraph&nbsp;or<br>
+a&nbsp;[-1,1]&nbsp;valued&nbsp;compatible&nbsp;relation&nbsp;(same&nbsp;actions&nbsp;set).<br>
+&nbsp;<br>
+If&nbsp;MedianCut=True,&nbsp;the&nbsp;correlation&nbsp;is&nbsp;computed&nbsp;on&nbsp;the&nbsp;median&nbsp;polarized&nbsp;relations.<br>
+&nbsp;<br>
+If&nbsp;filterRelation&nbsp;!=&nbsp;None,&nbsp;the&nbsp;correlation&nbsp;is&nbsp;computed&nbsp;on&nbsp;the&nbsp;partial&nbsp;domain&nbsp;corresponding&nbsp;to&nbsp;the&nbsp;determined&nbsp;part&nbsp;of&nbsp;the&nbsp;filter&nbsp;relation.<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notice&nbsp;that&nbsp;the&nbsp;'other'&nbsp;relation&nbsp;and/or&nbsp;the&nbsp;'filterRelation',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;case&nbsp;given,&nbsp;must&nbsp;both&nbsp;be&nbsp;normalized,&nbsp;ie&nbsp;[-1,1]-valued&nbsp;!<br>
+&nbsp;<br>
+K&nbsp;=&nbsp;sum_{x&nbsp;!=&nbsp;y}&nbsp;[&nbsp;min(&nbsp;max(-self.<strong>relation</strong>[x][y]),other.relation[x][y]),&nbsp;max(self.<strong>relation</strong>[x][y],-other.relation[x][y])&nbsp;]<br>
+&nbsp;<br>
+K&nbsp;/=&nbsp;sum_{x!=y}&nbsp;[&nbsp;min(abs(self.<strong>relation</strong>[x][y]),abs(other.relation[x][y]))&nbsp;]<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders&nbsp;a&nbsp;tuple&nbsp;with&nbsp;at&nbsp;position&nbsp;0&nbsp;the&nbsp;actual&nbsp;bipolar&nbsp;correlation&nbsp;index<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;in&nbsp;position&nbsp;1&nbsp;the&nbsp;minimal&nbsp;determination&nbsp;level&nbsp;D&nbsp;of&nbsp;self&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;other&nbsp;relation.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D&nbsp;=&nbsp;sum_{x&nbsp;!=&nbsp;y}&nbsp;min(abs(self.<strong>relation</strong>[x][y]),abs(other.relation[x][y]))&nbsp;/&nbsp;n(n-1)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where&nbsp;n&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;actions&nbsp;considered.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;correlation&nbsp;index&nbsp;with&nbsp;a&nbsp;completely&nbsp;indeterminate&nbsp;relation<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;by&nbsp;convention&nbsp;0.0&nbsp;at&nbsp;determination&nbsp;level&nbsp;0.0&nbsp;.</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-computeOrdinalCorrelationMP"><strong>computeOrdinalCorrelationMP</strong></a>(self, other, MedianCut=False, Threading=True, nbrOfCPUs=None, Comments=False, Debug=False)</dt><dd><tt>Multi&nbsp;processing&nbsp;version&nbsp;of&nbsp;the&nbsp;digraphs.<a href="#SortingDigraph-computeOrdinalCorrelation">computeOrdinalCorrelation</a>()&nbsp;method.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;relation&nbsp;filtering&nbsp;and&nbsp;the&nbsp;MedinaCut&nbsp;option&nbsp;are&nbsp;not&nbsp;implemented&nbsp;in&nbsp;the&nbsp;MP&nbsp;version.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-computePairwiseClusterComparison"><strong>computePairwiseClusterComparison</strong></a>(self, K1, K2, Debug=False)</dt><dd><tt>compute&nbsp;the&nbsp;pairwise&nbsp;cluster&nbsp;comparison&nbsp;credibility&nbsp;vector<br>
 from&nbsp;bipolar-valued&nbsp;digraph&nbsp;g.&nbsp;with&nbsp;K1&nbsp;and&nbsp;K2&nbsp;disjoint<br>
@@ -1592,23 +1795,27 @@ where&nbsp;one&nbsp;and&nbsp;only&nbsp;one&nbsp;item&nbsp;is&nbsp;strictly&nbsp;
 <dl><dt><a name="SortingDigraph-computePreKernels"><strong>computePreKernels</strong></a>(self)</dt><dd><tt>computing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computePreorderRelation"><strong>computePreorderRelation</strong></a>(self, preorder, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
-a&nbsp;given&nbsp;preordering&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-computePreRankingRelation"><strong>computePreRankingRelation</strong></a>(self, preRanking, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
+a&nbsp;given&nbsp;preRanking&nbsp;in&nbsp;decreasing&nbsp;levels&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, Comments=False, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
+<dl><dt><a name="SortingDigraph-computePreorderRelation"><strong>computePreorderRelation</strong></a>(self, preorder, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
+a&nbsp;given&nbsp;preordering&nbsp;in&nbsp;increasing&nbsp;levels&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, TempDir=None, Comments=False, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
 first&nbsp;rincipal&nbsp;eigenvector&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nbsp;the&nbsp;valued&nbsp;outdegrees&nbsp;of&nbsp;self.<br>
 &nbsp;<br>
-..&nbsp;warning::<br>
+..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;The&nbsp;method,&nbsp;relying&nbsp;on&nbsp;writing&nbsp;and&nbsp;reading&nbsp;temporary&nbsp;files&nbsp;in&nbsp;the&nbsp;current<br>
-&nbsp;&nbsp;&nbsp;working&nbsp;directory,&nbsp;is&nbsp;hence&nbsp;not&nbsp;threading&nbsp;and&nbsp;multiprocessing&nbsp;safe&nbsp;!<br>
+&nbsp;&nbsp;&nbsp;The&nbsp;method,&nbsp;relying&nbsp;on&nbsp;writing&nbsp;and&nbsp;reading&nbsp;temporary&nbsp;files&nbsp;by&nbsp;default&nbsp;in&nbsp;a&nbsp;temporary&nbsp;directory&nbsp;is&nbsp;threading&nbsp;and&nbsp;multiprocessing&nbsp;safe&nbsp;!<br>
 &nbsp;&nbsp;&nbsp;(see&nbsp;Digraph.exportPrincipalImage&nbsp;method)</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-computePrudentBetaLevel"><strong>computePrudentBetaLevel</strong></a>(self, Debug=False)</dt><dd><tt>computes&nbsp;alpha,&nbsp;ie&nbsp;the&nbsp;lowest&nbsp;valuation&nbsp;level,&nbsp;for&nbsp;which&nbsp;the<br>
 bipolarly&nbsp;polarised&nbsp;digraph&nbsp;doesn't&nbsp;contain&nbsp;a&nbsp;chordless&nbsp;circuit.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computeRankedPairsOrder"><strong>computeRankedPairsOrder</strong></a>(self, Cpp=False, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;the<br>
+<dl><dt><a name="SortingDigraph-computeRankedPairsOrder"><strong>computeRankedPairsOrder</strong></a>(self, Cpp=False, Debug=False)</dt><dd><tt>renders&nbsp;an&nbsp;actions&nbsp;ordering&nbsp;from&nbsp;the&nbsp;worst&nbsp;to&nbsp;the&nbsp;best&nbsp;obtained&nbsp;from&nbsp;the<br>
 ranked&nbsp;pairs&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-computeRankedPairsRanking"><strong>computeRankedPairsRanking</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="SortingDigraph-computeRankingByBestChoosing"><strong>computeRankingByBestChoosing</strong></a>(self, CoDual=False, CppAgrum=False, Debug=False)</dt><dd><tt>Computes&nbsp;a&nbsp;weak&nbsp;preordering&nbsp;of&nbsp;the&nbsp;self.<strong>actions</strong>&nbsp;by&nbsp;recursive<br>
 best&nbsp;choice&nbsp;elagations.<br>
@@ -1656,14 +1863,17 @@ the&nbsp;following&nbsp;type&nbsp;of&nbsp;links:<br>
 gt&nbsp;'&gt;',&nbsp;eq&nbsp;'=',&nbsp;lt&nbsp;'&lt;',&nbsp;incomp&nbsp;'&lt;&gt;',<br>
 leq&nbsp;'&lt;=',&nbsp;geq&nbsp;'&gt;=',&nbsp;indeterm&nbsp;'?'</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
+<dl><dt><a name="SortingDigraph-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
 self.<strong>strictBadChoices</strong>,&nbsp;self.<strong>nonRobustChoices</strong>.<br>
 &nbsp;<br>
-&nbsp;<br>
 CppgArum&nbsp;=&nbsp;False&nbsp;(default&nbsp;|&nbsp;true&nbsp;:&nbsp;use&nbsp;C++/Agrum&nbsp;digraph&nbsp;library<br>
-for&nbsp;computing&nbsp;chordless&nbsp;circuits&nbsp;in&nbsp;self.</tt></dd></dl>
+for&nbsp;computing&nbsp;chordless&nbsp;circuits&nbsp;in&nbsp;self.<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Changes&nbsp;in&nbsp;site&nbsp;the&nbsp;outranking&nbsp;digraph&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;adding&nbsp;or&nbsp;braking&nbsp;chordless&nbsp;odd&nbsp;outranking&nbsp;circuits.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computeRubyChoice"><strong>computeRubyChoice</strong></a>(self, CppAgrum=False, Comments=False)</dt><dd><tt>dummy&nbsp;for&nbsp;<a href="#SortingDigraph-computeRubisChoice">computeRubisChoice</a>()<br>
+<dl><dt><a name="SortingDigraph-computeRubyChoice"><strong>computeRubyChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False)</dt><dd><tt>dummy&nbsp;for&nbsp;<a href="#SortingDigraph-computeRubisChoice">computeRubisChoice</a>()<br>
 old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-computeSizeTransitiveClosure"><strong>computeSizeTransitiveClosure</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -1745,7 +1955,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="SortingDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;Digraph&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;Digraph&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -1821,20 +2031,24 @@ In&nbsp;both&nbsp;cases,&nbsp;undefined&nbsp;edges&nbsp;can&nbsp;be&nbsp;hidden&
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;then&nbsp;access&nbsp;the&nbsp;index.html&nbsp;via&nbsp;"<a href="http://0.0.0.0:8000/index.html">http://0.0.0.0:8000/index.html</a>".<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;order&nbsp;to&nbsp;load&nbsp;the&nbsp;CSS&nbsp;an&nbsp;active&nbsp;internet&nbsp;connection&nbsp;is&nbsp;needed!</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-exportPrincipalImage"><strong>exportPrincipalImage</strong></a>(self, Reduced=False, Colwise=False, plotFileName=None, Type='png', Comments=False)</dt><dd><tt>Export&nbsp;as&nbsp;PNG&nbsp;(default)&nbsp;or&nbsp;PDF&nbsp;the&nbsp;principal&nbsp;projection&nbsp;of<br>
+<dl><dt><a name="SortingDigraph-exportPrincipalImage"><strong>exportPrincipalImage</strong></a>(self, Reduced=False, Colwise=False, plotFileName=None, Type='png', TempDir='.', Comments=False)</dt><dd><tt>Export&nbsp;as&nbsp;PNG&nbsp;(default)&nbsp;or&nbsp;PDF&nbsp;the&nbsp;principal&nbsp;projection&nbsp;of<br>
 the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp;eigen&nbsp;vectors.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;method,&nbsp;writing&nbsp;and&nbsp;reading&nbsp;temporary&nbsp;files:&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;tempCol.r&nbsp;and&nbsp;rotationCol.csv,&nbsp;resp.&nbsp;tempRow.r&nbsp;and&nbsp;rotationRow.csv,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;hence&nbsp;not&nbsp;safe&nbsp;for&nbsp;multiprocessors'&nbsp;threading&nbsp;programs.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;default&nbsp;in&nbsp;the&nbsp;working&nbsp;directory&nbsp;(./),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;hence&nbsp;not&nbsp;safe&nbsp;for&nbsp;multiprocessing&nbsp;programs,&nbsp;unless&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;temporary&nbsp;dirctory&nbsp;is&nbsp;provided</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-flatChoice"><strong>flatChoice</strong></a>(self, ch, Debug=False)</dt><dd><tt>Converts&nbsp;set&nbsp;or&nbsp;list&nbsp;ch&nbsp;recursively&nbsp;to&nbsp;a&nbsp;flat&nbsp;list&nbsp;of&nbsp;items.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-forcedBestSingleChoice"><strong>forcedBestSingleChoice</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;most&nbsp;determined&nbsp;outranking&nbsp;singletons&nbsp;in&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-gammaSets"><strong>gammaSets</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;dictionary&nbsp;of&nbsp;neighborhoods&nbsp;{node:&nbsp;(dx,ax)}</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-gammaSets"><strong>gammaSets</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;dictionary&nbsp;of&nbsp;neighborhoods&nbsp;{node:&nbsp;(dx,ax)}<br>
+with&nbsp;set&nbsp;*dx*&nbsp;gathering&nbsp;the&nbsp;dominated,&nbsp;and&nbsp;set&nbsp;*ax*&nbsp;gathering<br>
+the&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-generateAbsPreKernels"><strong>generateAbsPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;absorbent&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
 
@@ -1917,7 +2131,9 @@ self.<strong>circuitsList</strong>&nbsp;stored&nbsp;odd&nbsp;chordless&nbsp;circ
 
 <dl><dt><a name="SortingDigraph-neighbourhoodDepthDistribution"><strong>neighbourhoodDepthDistribution</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-notGammaSets"><strong>notGammaSets</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;dictionary&nbsp;of&nbsp;not&nbsp;neighborhoods&nbsp;{node:&nbsp;(dx,ax)}</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-notGammaSets"><strong>notGammaSets</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;dictionary&nbsp;of&nbsp;neighborhoods&nbsp;{node:&nbsp;(dx,ax)}<br>
+with&nbsp;set&nbsp;*dx*&nbsp;gathering&nbsp;the&nbsp;not&nbsp;dominated,&nbsp;and&nbsp;set&nbsp;*ax*&nbsp;gathering<br>
+the&nbsp;not&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-notaneighbors"><strong>notaneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;not&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -1947,7 +2163,7 @@ absorbent&nbsp;in&nbsp;vector.</tt></dd></dl>
 <dl><dt><a name="SortingDigraph-readdomvector"><strong>readdomvector</strong></a>(self, x, relation)</dt><dd><tt>Parameter:&nbsp;action&nbsp;x<br>
 dominant&nbsp;out&nbsp;vector.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-save"><strong>save</strong></a>(self, fileName='tempdigraph', option=None, DecimalValuation=True)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;Digraph&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of<br>
+<dl><dt><a name="SortingDigraph-save"><strong>save</strong></a>(self, fileName='tempdigraph', option=None, DecimalValuation=True, decDigits=2)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;Digraph&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of<br>
 a&nbsp;python&nbsp;source&nbsp;code&nbsp;file</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-saveCSV"><strong>saveCSV</strong></a>(self, fileName='tempdigraph', Normalized=True, Dual=True, Converse=False, Diagonal=False, Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;Digraph&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of<br>
@@ -2047,9 +2263,54 @@ the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;m
 
 <dl><dt><a name="SortingDigraph-showRelation"><strong>showRelation</strong></a>(self)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;##.##&nbsp;format.</tt></dd></dl>
 
+<dl><dt><a name="SortingDigraph-showRelationMap"><strong>showRelationMap</strong></a>(self, symbols=None, rankingRule='netFlows')</dt><dd><tt>Prints&nbsp;on&nbsp;the&nbsp;console,&nbsp;in&nbsp;text&nbsp;map&nbsp;format,&nbsp;the&nbsp;location&nbsp;of<br>
+certainly&nbsp;validated&nbsp;and&nbsp;certainly&nbsp;invalidated&nbsp;outranking&nbsp;situations.<br>
+&nbsp;<br>
+By&nbsp;default,&nbsp;symbols&nbsp;=&nbsp;{'max':'┬','positive':&nbsp;'+',&nbsp;'median':&nbsp;'&nbsp;',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'negative':&nbsp;'-',&nbsp;'min':&nbsp;'┴'}<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;ordering&nbsp;of&nbsp;the&nbsp;output&nbsp;is&nbsp;following&nbsp;the&nbsp;net&nbsp;flows&nbsp;ranking&nbsp;rule<br>
+from&nbsp;best&nbsp;to&nbsp;worst&nbsp;actions.&nbsp;Further&nbsp;available&nbsp;ranking&nbsp;rules&nbsp;are&nbsp;Kohler's&nbsp;(rankingRule="kohler")<br>
+and&nbsp;Tideman's&nbsp;ranked&nbsp;pairs&nbsp;rule&nbsp;(rankingRule="rankedPairs")<br>
+&nbsp;<br>
+Example::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;RandomCBPerformanceTableau(numberOfActions=25,seed=1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t,Normalized=True)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;gcd&nbsp;=&nbsp;~(-g)&nbsp;&nbsp;#&nbsp;strict&nbsp;outranking&nbsp;relation<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;gcd.<a href="#SortingDigraph-showRelationMap">showRelationMap</a>(rankingRule="netFlows")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;++++++++&nbsp;&nbsp;+++++┬+┬┬+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;-&nbsp;&nbsp;&nbsp;+&nbsp;+++++&nbsp;++┬+┬+++┬++<br>
+&nbsp;&nbsp;&nbsp;&nbsp;┴+&nbsp;&nbsp;┴&nbsp;+&nbsp;++&nbsp;&nbsp;++++┬+┬┬++┬++<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;++&nbsp;-&nbsp;++++-++++++┬++┬+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;-&nbsp;-&nbsp;++-&nbsp;┬-&nbsp;+&nbsp;-+┬+-┬┬<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-----&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-┬┬┬-+&nbsp;&nbsp;-┬┬<br>
+&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;&nbsp;&nbsp;&nbsp;--+-+++++++++++++<br>
+&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;--+-&nbsp;--++&nbsp;++&nbsp;+++-┬+-┬┬<br>
+&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;&nbsp;-&nbsp;&nbsp;-+--&nbsp;++--+++++&nbsp;+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-----&nbsp;++-&nbsp;---&nbsp;+---++++┬&nbsp;+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;--&nbsp;---+&nbsp;-++-+++-+&nbsp;+-++<br>
+&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;--┴---+&nbsp;&nbsp;+&nbsp;+-++-+&nbsp;-&nbsp;&nbsp;+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;┴---+--&nbsp;++--++++&nbsp;-&nbsp;+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--┴┴--&nbsp;&nbsp;---&nbsp;-&nbsp;&nbsp;--+&nbsp;--┬┬<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---------+--+&nbsp;-----&nbsp;+-┬┬<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-┴---┴-&nbsp;---+-&nbsp;+&nbsp;---+++┬&nbsp;+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-┴┴--┴---+---&nbsp;++&nbsp;-++--+++<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-----┴---&nbsp;---+-+-&nbsp;++---+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-┴┴---------------&nbsp;--++┬&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;--┴----------------&nbsp;--+┬&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;┴--┴┴&nbsp;-┴--┴┴-┴&nbsp;--++&nbsp;&nbsp;++-+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;----┴┴---------------&nbsp;-&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;┴┴┴----+-┴+┴---┴-+---+&nbsp;┴+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;┴┴-┴┴┴-┴-&nbsp;-&nbsp;-┴┴---┴┴+&nbsp;┬&nbsp;-<br>
+&nbsp;&nbsp;&nbsp;&nbsp;----┴┴-┴-----┴┴---&nbsp;&nbsp;-&nbsp;--&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Ranking&nbsp;rule:&nbsp;netFlows<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd></dl>
+
 <dl><dt><a name="SortingDigraph-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=True, Debug=False, _OldCoca=False, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showRubyChoice"><strong>showRubyChoice</strong></a>(self, Comments=False)</dt><dd><tt>dummy&nbsp;for&nbsp;showRubisChoice()<br>
+<dl><dt><a name="SortingDigraph-showRubyChoice"><strong>showRubyChoice</strong></a>(self, Comments=False, _OldCoca=True)</dt><dd><tt>dummy&nbsp;for&nbsp;<a href="#SortingDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
 older&nbsp;versions&nbsp;compatibility</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showStatistics"><strong>showStatistics</strong></a>(self)</dt><dd><tt>Computes&nbsp;digraph&nbsp;statistics&nbsp;like&nbsp;order,&nbsp;size&nbsp;and&nbsp;arc-density.</tt></dd></dl>
@@ -2104,11 +2365,87 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.Perfo
 
 <dl><dt><a name="SortingDigraph-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
+<dl><dt><a name="SortingDigraph-computeAllQuantiles"><strong>computeAllQuantiles</strong></a>(self, Sorted=True, Comments=False)</dt><dd><tt>renders&nbsp;a&nbsp;html&nbsp;string&nbsp;showing&nbsp;the&nbsp;table&nbsp;of<br>
+the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
+
 <dl><dt><a name="SortingDigraph-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'weakVeto': 60, 'ind': 10, 'pref': 20, 'veto': 80}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="SortingDigraph-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'pref': 20, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-computeMCSRPerformanceHeatmap"><strong>computeMCSRPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, ndigits=2, colorLevels=7, Ranked=True, title='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Computes&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
+actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;ordered&nbsp;dictionary&nbsp;format.&nbsp;Three&nbsp;color&nbsp;levels&nbsp;(5,7&nbsp;or&nbsp;9)<br>
+are&nbsp;provided.&nbsp;Used&nbsp;by&nbsp;the&nbsp;Web&nbsp;API.<br>
+&nbsp;<br>
+For&nbsp;a&nbsp;performance&nbsp;tableau&nbsp;with&nbsp;5&nbsp;criteria,&nbsp;colorLevels=5&nbsp;and<br>
+Correlations&nbsp;=&nbsp;True,&nbsp;one&nbsp;obtains&nbsp;for&nbsp;instance<br>
+the&nbsp;following&nbsp;ordered&nbsp;dictionary&nbsp;in&nbsp;return::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('title',&nbsp;'Performance&nbsp;Heatmap'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('precision',&nbsp;2),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('colorPalette',&nbsp;OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('0',{'quantile':Decimal('0.2'),'quantileClass':'q5_1'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('1',{'quantile':Decimal('0.4'),'quantileClass':'q5_2'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('2',{'quantile':Decimal('0.6'),'quantileClass':'q5_3'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('3',{'quantile':Decimal('0.8'),'quantileClass':'q5_4'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('4',{'quantile':Decimal('1.0'),'quantileClass':'q5_5'})<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;])),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('criteriaList',&nbsp;OrderedDict([('0','g5'),&nbsp;('1','g2'),&nbsp;('2','g4'),&nbsp;('3','g1'),&nbsp;('4','g3')]),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('criteriaCorrelations',&nbsp;OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('0',Decimal('0.71428')),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('1',Decimal('0.48571')),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('2',Decimal('0.40952')),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('3',Decimal('0.35238')),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('4',Decimal('0.16190'))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;])),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('quantiles',&nbsp;OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('0',{'a1':OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('0',{'quantile':Decimal('3'),&nbsp;'qantileClass':'q5-2'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('1',{'quantile':Decimal('-17.92'),&nbsp;'qantileClass':'q5-5'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('2',{'quantile':Decimal('26.68'),&nbsp;'qantileClass':'q5-2'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('3',{'quantile':Decimal('1'),&nbsp;'qantileClass':'q5-1'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('4',{'quantile':Decimal('-33.99'),&nbsp;'qantileClass':'q5-3'})<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;])}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('1',{'a2':OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('0',{'quantile':Decimal('6'),&nbsp;'qantileClass':'q5-3'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('1',{'quantile':Decimal('-30.71'),&nbsp;'qantileClass':'q5-5'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('2',{'quantile':Decimal('66.35'),&nbsp;'qantileClass':'q5-4'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('3',{'quantile':Decimal('8'),&nbsp;'qantileClass':'q5-5'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('4',{'quantile':Decimal('-77.77'),&nbsp;'qantileClass':'q5-3'})<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;])}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('2',&nbsp;...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]))...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;]))</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-computeMCSRPerformanceTableau"><strong>computeMCSRPerformanceTableau</strong></a>(self, isSorted=True, ndigits=2, title='Min/Max Performance Tableau', Debug=False)</dt><dd><tt>Computes&nbsp;the&nbsp;performance&nbsp;table&nbsp;in&nbsp;a&nbsp;JSON&nbsp;compatible&nbsp;format&nbsp;with&nbsp;minima&nbsp;and&nbsp;maxima.&nbsp;Used&nbsp;by&nbsp;the&nbsp;Web&nbsp;API.<br>
+&nbsp;<br>
+For&nbsp;a&nbsp;performance&nbsp;tableau&nbsp;with&nbsp;5&nbsp;criteria&nbsp;one&nbsp;obtains&nbsp;for&nbsp;instance<br>
+the&nbsp;following&nbsp;ordered&nbsp;dictionary&nbsp;in&nbsp;return::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('title',&nbsp;'Min/Max&nbsp;Performance&nbsp;Tableau'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('precision',&nbsp;2),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('criteriaList',&nbsp;OrderedDict([('0','g5'),&nbsp;('1','g2'),&nbsp;('2','g4'),&nbsp;('3','g1'),&nbsp;('4','g3')]),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('quantiles',&nbsp;OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('0',{'a1':OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('0',{'quantile':Decimal('3'),&nbsp;'qantileClass':'minimum'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('1',{'quantile':Decimal('-17.92'),&nbsp;'qantileClass':'default'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('2',{'quantile':Decimal('26.68'),&nbsp;'qantileClass':'maximum'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('3',{'quantile':'NaN,&nbsp;'qantileClass':'NaN'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('4',{'quantile':Decimal('-33.99'),&nbsp;'qantileClass':'default'})<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;])}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('1',{'a2':OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('0',{'quantile':Decimal('6'),&nbsp;'qantileClass':'minimum'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('1',{'quantile':Decimal('-30.71'),&nbsp;'qantileClass':'default'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('2',{'quantile':'NaN',&nbsp;'qantileClass':'NaN'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('3',{'quantile':Decimal('8'),&nbsp;'qantileClass':'maximum'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('4',{'quantile':Decimal('-77.77'),&nbsp;'qantileClass':'default'})<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;])}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('2',&nbsp;...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]))...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;]))</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-computeMinMaxEvaluations"><strong>computeMinMaxEvaluations</strong></a>(self, criteria=None, actions=None)</dt><dd><tt>renders&nbsp;minimum&nbsp;and&nbsp;maximum&nbsp;performances&nbsp;on&nbsp;each&nbsp;criterion<br>
 in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum':&nbsp;x}}</tt></dd></dl>
@@ -2118,42 +2455,7 @@ list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
 evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
-
-<dl><dt><a name="SortingDigraph-computePerformanceHeatmap"><strong>computePerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, ndigits=2, colorLevels=7, title='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
-actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;dictionary&nbsp;format.&nbsp;Three&nbsp;color&nbsp;levels&nbsp;(5,7&nbsp;or&nbsp;9)<br>
-are&nbsp;provided.<br>
-&nbsp;<br>
-For&nbsp;a&nbsp;performance&nbsp;tableau&nbsp;with&nbsp;5&nbsp;criteria,&nbsp;colorLevels=5&nbsp;and<br>
-Correlations&nbsp;=&nbsp;True,&nbsp;one&nbsp;obtains&nbsp;for&nbsp;instance<br>
-the&nbsp;following&nbsp;ordered&nbsp;dictionary&nbsp;in&nbsp;return::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;OrderedDict([<br>
-&nbsp;&nbsp;&nbsp;&nbsp;('title',&nbsp;'Performance&nbsp;Heatmap'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;('colorPalette',&nbsp;[(Decimal('0.2'),&nbsp;'"#FDAE61"',&nbsp;'q5-1'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('0.4'),&nbsp;'"#FEE08B"',&nbsp;'q5-2'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('0.6'),&nbsp;'"#FFFFBF"',&nbsp;'q5-3'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('0.8'),&nbsp;'"#D9EF8B"',&nbsp;'q5-4'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('1.0'),&nbsp;'"#A6D96A"',&nbsp;'q5-5')]),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;('criteriaList',&nbsp;['g5',&nbsp;'g2',&nbsp;'g4',&nbsp;'g1',&nbsp;'g3']),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;('criteriaCorrelations',&nbsp;[Decimal('0.71428'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decimal('0.48571'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decimal('0.40952'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decimal('0.35238'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decimal('0.16190')]),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;('quantiles',&nbsp;OrderedDict([('a1',&nbsp;[(Decimal('3'),&nbsp;'q5-2'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('-17.92'),&nbsp;'q5-5'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('26.68'),&nbsp;'q5-2'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('1'),&nbsp;'q5-1'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('-33.99'),&nbsp;'q5-3')]),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('a2',&nbsp;[(Decimal('6'),&nbsp;'q5-3'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('-30.71'),&nbsp;'q5-5'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('66.35'),&nbsp;'q5-4'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('8'),&nbsp;'q5-5'),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Decimal('-77.77'),&nbsp;'q5-2')]),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('a3',&nbsp;...<br>
-&nbsp;&nbsp;&nbsp;&nbsp;...<br>
-&nbsp;&nbsp;&nbsp;&nbsp;])</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True, WithMaxMin=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;self.<a href="#SortingDigraph-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -2186,10 +2488,12 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="SortingDigraph-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, ndigits=2, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;9-colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
+<dl><dt><a name="SortingDigraph-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, Ranked=True, quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
 actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=True, Transposed=False, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-normalizeEvaluations"><strong>normalizeEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, Debug=False)</dt><dd><tt>recode&nbsp;the&nbsp;evaluations&nbsp;between&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;on&nbsp;all&nbsp;criteria</tt></dd></dl>
 
@@ -2198,19 +2502,26 @@ actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-saveXMLRubis"><strong>saveXMLRubis</strong></a>(self, name='temp', category='Rubis', subcategory='new D2 version', author='digraphs Module (RB)', reference='saved from Python')</dt><dd><tt>save&nbsp;temporary&nbsp;performance&nbsp;tableau&nbsp;self&nbsp;in&nbsp;XML&nbsp;Rubis&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showAllQuantiles"><strong>showAllQuantiles</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;html&nbsp;string&nbsp;showing&nbsp;the&nbsp;table&nbsp;of<br>
-the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-showAllQuantiles"><strong>showAllQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>prints&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;the&nbsp;session&nbsp;console.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showCriteria"><strong>showCriteria</strong></a>(self, IntegerWeights=False, Debug=False)</dt><dd><tt>print&nbsp;Criteria&nbsp;with&nbsp;thresholds&nbsp;and&nbsp;weights.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-showCriteria"><strong>showCriteria</strong></a>(self, IntegerWeights=False, Alphabetic=False, ByObjectives=False, Debug=False)</dt><dd><tt>print&nbsp;Criteria&nbsp;with&nbsp;thresholds&nbsp;and&nbsp;weights.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showEvaluationStatistics"><strong>showEvaluationStatistics</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;variance&nbsp;and&nbsp;standard&nbsp;deviation&nbsp;of<br>
 the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, Ranked=True, Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-showHTMLMCSRPerformanceTableau"><strong>showHTMLMCSRPerformanceTableau</strong></a>(self, ndigits=2, title='Min/Max Performance Tableau')</dt><dd><tt>Ask&nbsp;the&nbsp;server&nbsp;for&nbsp;an&nbsp;HTML&nbsp;representation&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau.</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, Ranked=True, quantiles=None, strategy='optimistic', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
+<dl><dt><a name="SortingDigraph-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
+
 <dl><dt><a name="SortingDigraph-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#SortingDigraph-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#SortingDigraph-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">

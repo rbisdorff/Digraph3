@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # Python implementation of digraphs
-# Current revision $Revision: 1249 $
+# Current revision $Revision: 1545 $
 # Copyright (C) 2006-2008  Raymond Bisdorff
 #
 #    This program is free software; you can redistribute it and/or modify
@@ -109,6 +109,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                  isRobust=False,
                  hasNoVeto=False,
                  LowerClosed=True,
+                 StoreSorting=True,
                  Threading=False,
                  nbrCores=None,
                  Debug=False):
@@ -119,6 +120,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
         from copy import copy, deepcopy
         from decimal import Decimal
+        from collections import OrderedDict
 
         # import the performance tableau
         if argPerfTab == None:
@@ -126,23 +128,21 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                numberOfCriteria=13)
         else:
             perfTab = argPerfTab
-        # normalize the actions as a dictionary construct
-        if isinstance(perfTab.actions,list):
-            actions = {}
-            for x in perfTab.actions:
-                actions[x] = {'name': str(x)}
-            self.actions = actions
-        else:
-            self.actions = deepcopy(perfTab.actions)
-
         # keep a copy of the original actions set before adding the profiles
-        self.actionsOrig = deepcopy(self.actions)
-
-        # actionsOrig = self.actionsOrig
+        actionsOrig = deepcopy(perfTab.actions)
+        self.actionsOrig = actionsOrig
 
         #  input the profiles
         if argProfile != None:
             defaultProfiles = False
+            # normalize the actions as a dictionary construct
+            if isinstance(perfTab.actions,list):
+                actions = OrderedDict()
+                for x in perfTab.actions:
+                    actions[x] = {'name': str(x)}
+                self.actions = actions
+            else:
+                self.actions = deepcopy(perfTab.actions)
             self.criteria = deepcopy(perfTab.criteria)
             self.convertWeightFloatToDecimal()
             self.evaluation = deepcopy(perfTab.evaluation)
@@ -150,7 +150,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             if isinstance(argProfile,str): # input from stored instantiation
                 fileName = argProfile
                 fileNameExt = fileName + '.py'
-                profile = {}
+                profile = OrderedDict()
                 exec(compile(open(fileNameExt).read(), fileNameExt, 'exec'),profile)
                 #print(profile)
                 self.name = fileName
@@ -158,29 +158,27 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 self.criteriaCategoryLimits = profile['criteriaCategoryLimits']
             else: # input from a profiles dictionary
                 self.name = 'sorting_with_given_profile'
-                self.categories = deepcopy(argProfile['categories'])
-                self.criteriaCategoryLimits = deepcopy(argProfile['criteriaCategoryLimits'])
+                self.categories = argProfile['categories'].copy()
+                self.criteriaCategoryLimits = argProfile['criteriaCategoryLimits'].copy()
         else:
             defaultProfiles = True
             self.name = 'sorting_with_default_profiles'
             normPerfTab = NormalizedPerformanceTableau(perfTab)
-            self.criteria = deepcopy(normPerfTab.criteria)
+            self.actions = normPerfTab.actions
+            self.criteria = normPerfTab.criteria
             self.convertWeightFloatToDecimal()
-            self.evaluation = deepcopy(normPerfTab.evaluation)
+            self.evaluation = normPerfTab.evaluation
             self.convertEvaluationFloatToDecimal()
-
             # supposing all criteria scales between 0.0 and 100.0
-
             lowValue = 0.0
             highValue = 100.00
             # with preference direction = max
-            categories = {}
+            categories = OrderedDict()
             k = int(100 / scaleSteps)
             for i in range(0,100+k,k):
                 categories[str(i)] = {'name':str(i), 'order':i}
-            self.categories = deepcopy(categories)
-
-            criteriaCategoryLimits = {}
+            self.categories = categories
+            criteriaCategoryLimits = OrderedDict()
             criteriaCategoryLimits['LowerClosed'] = LowerClosed
             for g in self.criteria:
                 criteriaCategoryLimits[g] = {}
@@ -189,102 +187,114 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                         'minimum':int(c),
                         'maximum':int(c)+k
                         }
-            self.criteriaCategoryLimits = deepcopy(criteriaCategoryLimits)
-
+            self.criteriaCategoryLimits = criteriaCategoryLimits
+            
         # set the category limits type (LowerClosed = True is default)
         self.criteriaCategoryLimits['LowerClosed'] = LowerClosed
         #print 'LowerClosed', LowerClosed
 
         # add the catogory limits to the actions set
-        self.profiles = {'min':{},'max':{}}
-        self.profileLimits = set()
-        for c in list(self.categories.keys()):
+        profiles = {'min':{},'max':{}}
+        profileLimits = set()
+        actions = self.actions
+        criteria = self.criteria
+        evaluation = self.evaluation
+##        categoryKeys = list(self.categories.keys())
+##        criterionKeys = list(self.criteria.keys())
+        for c in categories.keys():
             cMinKey = c+'-m'
             cMaxKey = c+'-M'
-            self.profileLimits.add(cMinKey)
-            self.profileLimits.add(cMaxKey)
-            self.actions[cMinKey] = {'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
-            self.actions[cMaxKey] = {'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
-            self.profiles['min'][cMinKey] = {'category': c, 'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
-            self.profiles['max'][cMaxKey] = {'category': c, 'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
-            for g in list(self.criteria.keys()):
+            profileLimits.add(cMinKey)
+            profileLimits.add(cMaxKey)
+            actions[cMinKey] = {'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
+            actions[cMaxKey] = {'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
+            profiles['min'][cMinKey] = {'category': c, 'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
+            profiles['max'][cMaxKey] = {'category': c, 'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
+            for g in criteria.keys():
                 try:
-                    if self.criteria[g]['preferenceDirection'] == 'max':
-                        self.evaluation[g][cMinKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['minimum']))
-                        self.evaluation[g][cMaxKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['maximum']))
-                    elif self.criteria[g]['preferenceDirection'] == 'min':
+                    if criteria[g]['preferenceDirection'] == 'max':
+                        evaluation[g][cMinKey] = Decimal(str(criteriaCategoryLimits[g][c]['minimum']))
+                        evaluation[g][cMaxKey] = Decimal(str(criteriaCategoryLimits[g][c]['maximum']))
+                    elif criteria[g]['preferenceDirection'] == 'min':
                         if not defaultProfiles:
-                            highValueg = Decimal(str(self.criteria[g]['scale'][1]))
+                            highValueg = Decimal(str(criteria[g]['scale'][1]))
                         else:
                             highValueg = Decimal(str(highValue))
                         #print 'highValue = ', highValue
-                        self.evaluation[g][cMinKey] = -(highValueg - Decimal(str(self.criteriaCategoryLimits[g][c]['minimum'])))
-                        self.evaluation[g][cMaxKey] = -(highValueg - Decimal(str(self.criteriaCategoryLimits[g][c]['maximum'])))
+                        evaluation[g][cMinKey] = -(highValueg - Decimal(str(criteriaCategoryLimits[g][c]['minimum'])))
+                        evaluation[g][cMaxKey] = -(highValueg - Decimal(str(criteriaCategoryLimits[g][c]['maximum'])))
                     else:
                         print('===>>>>> Error')
                 except:
 
-                    self.evaluation[g][cMinKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['minimum']))
-                    self.evaluation[g][cMaxKey] = Decimal(str(self.criteriaCategoryLimits[g][c]['maximum']))
-
-
-
+                    evaluation[g][cMinKey] = Decimal(str(criteriaCategoryLimits[g][c]['minimum']))
+                    evaluation[g][cMaxKey] = Decimal(str(criteriaCategoryLimits[g][c]['maximum']))
+        self.actions = actions
+        self.profiles = profiles
+        self.profileLimits = profileLimits
+        self.criteria = criteria
+        self.evaluation = evaluation
         self.convertEvaluationFloatToDecimal()
 
         # construct outranking relation
         if isRobust:
             g = RobustOutrankingDigraph(self)
-            self.valuationdomain = deepcopy(g.valuationdomain)
-            self.relation = deepcopy(g.relation)
+            self.valuationdomain = g.valuationdomain
+            self.relation = g.relation
         else:
             Min = Decimal('%.4f' % minValuation)
             Max = Decimal('%.4f' % maxValuation)
             Med = (Max + Min)/Decimal('2.0')
             self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
             if LowerClosed:
-                self.relation = self._constructRelation(self.criteria,
+                relation = BipolarOutrankingDigraph._constructRelationWithThreading(self,criteria,
                                                        self.evaluation,
-                                                       initial=self.actionsOrig,
-                                                       terminal=self.profileLimits,
+                                                       initial=actionsOrig,
+                                                       terminal=profileLimits,
                                                        hasNoVeto=hasNoVeto,
                                                        hasBipolarVeto=True,
                                                         Threading=Threading,
+                                                        WithConcordanceRelation=False,
+                                                        WithVetoCounts=False,
                                                         Debug=Debug)
             else:
-                self.relation = self._constructRelation(self.criteria,
+                relation = BipolarOutrankingDigraph._constructRelationWithThreading(self,criteria,
                                                        self.evaluation,
-                                                       terminal=self.actionsOrig,
-                                                       initial=self.profileLimits,
+                                                       terminal=actionsOrig,
+                                                       initial=profileLimits,
                                                        hasNoVeto=hasNoVeto,
                                                         hasBipolarVeto=True,
                                                         Threading=Threading,
+                                                        WithConcordanceRelation=False,
+                                                        WithVetoCounts=False,
                                                         Debug=Debug)
             if LowerClosed:
-                for x in self.actionsOrig:
-                    for y in self.actionsOrig:
-                        self.relation[x][y] = Med
-                for x in self.profileLimits:
-                    self.relation[x] = {}
-                    for y in self.actions:
-                        self.relation[x][y] = Med
+                for x in actionsOrig.keys():
+                    for y in actionsOrig.keys():
+                        relation[x][y] = Med
+                for x in profileLimits:
+                    relation[x] = {}
+                    for y in actions.keys():
+                        relation[x][y] = Med
             else:
-                for x in self.actionsOrig:
-                    self.relation[x] = {}
-                    for y in self.actionsOrig:
-                        self.relation[x][y] = Med
-                for y in self.profileLimits:
-                    for x in self.actions:
-                        self.relation[x][y] = Med
+                for x in actionsOrig.keys():
+                    relation[x] = {}
+                    for y in actionsOrig.keys():
+                        relation[x][y] = Med
+                for y in profileLimits:
+                    for x in actions.keys():
+                        relation[x][y] = Med
+            self.relation = relation
 
         # compute weak ordering
-        sortingRelation = self.computeSortingRelation(Debug=Debug)
-        for x in self.actionsOrig:
-            for y in self.actionsOrig:
-                self.relation[x][y] = sortingRelation[x][y]
+        sortingRelation = self.computeSortingRelation(Debug=Debug,)
+        relation = self.relation
+        for x in actionsOrig.keys():
+            for y in actionsOrig.keys():
+                relation[x][y] = sortingRelation[x][y]
 
         # reset original action set
-        self.actions = deepcopy(self.actionsOrig)
-        self.order = len(self.actions)
+        self.actions = actionsOrig
 
         # compute weak ordering by choosing
         # self.computeRankingByChoosing() !!! not scalable !!!
@@ -293,196 +303,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         # init general digraph Data
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
-
-    def _constructRelation(self,criteria,\
-                           evaluation,\
-                           initial=None,\
-                           terminal=None,\
-                           hasNoVeto=False,\
-                           hasBipolarVeto=True,\
-                           Debug=False,\
-                           hasSymmetricThresholds=True,\
-                           Threading = False,
-                           nbrCores=None):
-        """
-        Specialization of the corresponding BipolarOutrankingDigraph method
-        """
-        from multiprocessing import cpu_count
-        
-        ##
-        if not Threading or cpu_count() < 6:
-            return BipolarOutrankingDigraph._constructRelation(self,criteria,\
-                                    evaluation,\
-                                    initial=initial,\
-                                    terminal=terminal,\
-                                    hasNoVeto=hasNoVeto,\
-                                    hasBipolarVeto=hasBipolarVeto,\
-                                    Debug=Debug,\
-                                    hasSymmetricThresholds=hasSymmetricThresholds)
-        ##
-        else:  # parallel computation
-            from copy import copy, deepcopy
-            from pickle import dumps, loads, load
-            from multiprocessing import Process, Lock,\
-                                        active_children, cpu_count
-            #Debug=True
-            class myThread(Process):
-                def __init__(self, threadID,\
-                             InitialSplit, tempDirName,\
-                             hasNoVeto, hasBipolarVeto,\
-                             hasSymmetricThresholds, Debug):
-                    Process.__init__(self)
-                    self.threadID = threadID
-                    self.InitialSplit = InitialSplit
-                    self.workingDirectory = tempDirName
-                    self.hasNoVeto = hasNoVeto
-                    self.hasBipolarVeto = hasBipolarVeto,
-                    hasSymmetricThresholds = hasSymmetricThresholds,
-                    self.Debug = Debug
-                def run(self):
-                    from pickle import dumps, loads
-                    from os import chdir
-                    chdir(self.workingDirectory)
-                    if Debug:
-                        print("Starting working in %s on %s" % (self.workingDirectory, self.name))
-                    fi = open('dumpSelf.py','rb')
-                    digraph = loads(fi.read())
-                    fi.close()
-                    fiName = 'splitActions-'+str(self.threadID)+'.py'
-                    fi = open(fiName,'rb')
-                    splitActions = loads(fi.read())
-                    fi.close()
-                    foName = 'splitRelation-'+str(self.threadID)+'.py'
-                    fo = open(foName,'wb')
-                    if self.InitialSplit:
-                        splitRelation = BipolarOutrankingDigraph._constructRelation(digraph,digraph.criteria,\
-                                            digraph.evaluation,\
-                                            initial=splitActions,\
-                                            #terminal=terminal,\
-                                            hasNoVeto=hasNoVeto,\
-                                            hasBipolarVeto=hasBipolarVeto,\
-                                            Debug=False,\
-                                            hasSymmetricThresholds=hasSymmetricThresholds)
-                    else:
-                        splitRelation = BipolarOutrankingDigraph._constructRelation(digraph,digraph.criteria,\
-                                            digraph.evaluation,\
-                                            #initial=initial,\
-                                            terminal=splitActions,\
-                                            hasNoVeto=hasNoVeto,\
-                                            hasBipolarVeto=hasBipolarVeto,\
-                                            Debug=False,\
-                                            hasSymmetricThresholds=hasSymmetricThresholds)
-                    fo.write(dumps(splitRelation,-1))
-                    fo.close()
-            
-            print('Threading ...')
-            from tempfile import TemporaryDirectory
-            with TemporaryDirectory() as tempDirName:
-                from copy import copy, deepcopy
-                selfDp = deepcopy(self)
-                selfFileName = tempDirName +'/dumpSelf.py'
-                if Debug:
-                    print('temDirName, selfFileName', tempDirName,selfFileName)
-                fo = open(selfFileName,'wb')
-                pd = dumps(selfDp,-1)
-                fo.write(pd)
-                fo.close()
-                
-                if nbrCores == None:
-                    nbrCores = cpu_count()-1
-                
-                print('Nbr of cpus = ',nbrCores)
-
-                ni = len(initial)
-                nt = len(terminal)
-                if ni > nt:
-                    n = ni
-                    actions2Split = list(initial)
-                    InitialSplit = True
-                else:
-                    n = nt
-                    actions2Split = list(terminal)
-                    InitialSplit = False
-                if Debug:
-                    print('InitialSplit, actions2Split', InitialSplit, actions2Split)
-            
-                nit = n//nbrCores
-                nbrOfJobs = nbrCores
-                if nit*nbrOfJobs < n:
-                    nit += 1
-                while nit*(nbrOfJobs-1) >= n:
-                    nbrOfJobs -= 1
-##                while nit*nbrOfJobs > n:
-##                    nbrOfJobs -= 1
-                #if Debug:
-                print('number of cores =', nbrCores)
-                print('nbr of actions to split',n)
-                print('nbr of jobs = ',nbrOfJobs)    
-                print('nbr of splitActions = ',nit)
-                   
-                relation = {}
-                for x in initial:
-                    relation[x] = {}
-                    for y in terminal:
-                        relation[x][y] = self.valuationdomain['med']
-                i = 0
-                actionsRemain = set(actions2Split)
-                for j in range(nbrOfJobs):
-                    print('iteration = ',j+1,end=" ")
-                    splitActions=[]
-                    for k in range(nit):
-                        if j < (nbrOfJobs -1) and i < n:
-                            splitActions.append(actions2Split[i])
-                        else:
-                            splitActions = list(actionsRemain)
-                        i += 1
-                    print(len(splitActions))
-                    if Debug:
-                        print(splitActions)
-                    actionsRemain = actionsRemain - set(splitActions)
-                    if Debug:
-                        print(actionsRemain)
-                    foName = tempDirName+'/splitActions-'+str(j)+'.py'
-                    fo = open(foName,'wb')
-                    spa = dumps(splitActions,-1)
-                    fo.write(spa)
-                    fo.close()
-                    splitThread = myThread(j,InitialSplit,
-                                           tempDirName,hasNoVeto,hasBipolarVeto,
-                                           hasSymmetricThresholds,Debug)
-                    splitThread.start()
-                    
-                while active_children() != []:
-                    pass
-                    
-                print('Exiting computing threads')
-                for j in range(nbrOfJobs):
-                    if Debug:
-                        print('job',j)
-                    fiName = tempDirName+'/splitActions-'+str(j)+'.py'
-                    fi = open(fiName,'rb')
-                    splitActions = loads(fi.read())
-                    if Debug:
-                        print('splitActions',splitActions)
-                    fi.close()
-                    fiName = tempDirName+'/splitRelation-'+str(j)+'.py'
-                    fi = open(fiName,'rb')
-                    splitRelation = loads(fi.read())
-                    if Debug:
-                        print('splitRelation',splitRelation)
-                    fi.close()
-                    
-                    if InitialSplit:
-                        for x in splitActions:
-                            for y in terminal:
-                                relation[x][y] = splitRelation[x][y]
-                    else:  
-                        for x in initial:
-                            for y in splitActions:
-                                relation[x][y] = splitRelation[x][y]   
-                return relation
-    
+        self.notGamma = self.notGammaSets()    
         
     def htmlCriteriaCategoryLimits(self,tableTitle='Category limits'):
         """
@@ -516,12 +337,12 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         s += '</table>'
         return s
 
-    def computeSortingRelation(self,categoryContents=None,Debug=False):
+    def computeSortingRelation(self,categoryContents=None,StoreSorting=True,Debug=False):
         """
         constructs a bipolar sorting relation using the category contents.
         """
         if categoryContents == None:
-            categoryContents = self.computeCategoryContents()
+            categoryContents = self.computeCategoryContents(StoreSorting=True,)
         categoryKeys = self.orderedCategoryKeys()
 
         Max = self.valuationdomain['max']
@@ -566,11 +387,13 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             LowerClosed = self.criteriaCategoryLimits['LowerClosed']
         except:
             LowerClosed = True
-        criterionKeys = [x for x in self.criteria]
-        categoryKeys = [x for x in self.categories]
-        for g in criterionKeys:
+        criteria = self.criteria
+        categories = self.categories
+        #criterionKeys = [x for x in self.criteria]
+        #categoryKeys = [x for x in self.categories]
+        for g in criteria:
             print(g)
-            for c in categoryKeys:
+            for c in categories:
                 if LowerClosed:
                     print('\t%s [%s; %s[' % (c, self.criteriaCategoryLimits[g][c]['minimum'],self.criteriaCategoryLimits[g][c]['maximum']))
                 else:
@@ -580,10 +403,10 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         """
         extract normal actions keys()
         """
-        profiles_m = set([x for x in list(self.profiles['min'].keys())])
-        profiles_M = set([x for x in list(self.profiles['max'].keys())])
+        profiles_m = set(self.profiles['min'])
+        profiles_M = set(self.profiles['max'])
         if action == None:
-            actionsExt = set([x for x in list(self.actions.keys())])
+            actionsExt = set(self.actions)
             if withoutProfiles:
                 return actionsExt - profiles_m - profiles_M
             else:
@@ -819,8 +642,55 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
 
+##    def computeSortingCharacteristicsOld(self, action=None, Comments=False):
+##        """
+##        Renders a bipolar-valued bi-dictionary relation
+##        representing the degree of credibility of the
+##        assertion that "action x in A belongs to category c in C",
+##        ie x outranks low category limit and does not outrank
+##        the high category limit.
+##        """
+##        Min = self.valuationdomain['min']
+##        Med = self.valuationdomain['med']
+##        Max = self.valuationdomain['max']
+##
+##        actions = self.getActionsKeys(action)
+##            
+##        categories = self.orderedCategoryKeys()
+##
+##        try:
+##            LowerClosed = self.criteriaCategoryLimits['LowerClosed']
+##        except:
+##            LowerClosed = True
+##
+##        sorting = {}
+##        for x in actions:
+##            sorting[x] = {}
+##            for c in categories:
+##                sorting[x][c] = {}
+##                cMinKey= c+'-m'
+##                cMaxKey= c+'-M'
+##                if LowerClosed:
+##                    lowLimit = self.relation[x][cMinKey]
+##                    notHighLimit = Max - self.relation[x][cMaxKey] + Min
+##                else:
+##                    lowLimit = Max - self.relation[cMinKey][x] + Min
+##                    notHighLimit = self.relation[cMaxKey][x]
+##                if Comments:
+##                    print('%s in %s: low = %.2f, high = %.2f' % \
+##                          (x, c,lowLimit,notHighLimit), end=' ')
+##                categoryMembership = min(lowLimit,notHighLimit)
+##                sorting[x][c]['lowLimit'] = lowLimit
+##                sorting[x][c]['notHighLimit'] = notHighLimit
+##                sorting[x][c]['categoryMembership'] = categoryMembership
+##
+##                if Comments:
+##                    print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+##
+##        return sorting
 
-    def computeSortingCharacteristics(self, action=None, Comments=False):
+    def computeSortingCharacteristics(self, action=None, StoreSorting=True,Comments=False, Debug=False,\
+                                        Threading=False, nbrOfCPUs=None):
         """
         Renders a bipolar-valued bi-dictionary relation
         representing the degree of credibility of the
@@ -832,41 +702,150 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
 
-        actions = self.getActionsKeys(action)
+        actions = list(self.getActionsKeys(action))
+        na = len(actions)
             
-        categories = self.orderedCategoryKeys()
+        categories = list(self.orderedCategoryKeys())
 
         try:
             LowerClosed = self.criteriaCategoryLimits['LowerClosed']
         except:
             LowerClosed = True
+        if Threading:
+            from multiprocessing import Process, active_children
+            from pickle import dumps, loads, load
+            from os import cpu_count
+            class myThread(Process):
+                def __init__(self, threadID, tempDirName, actions, catKeys,Debug):
+                    Process.__init__(self)
+                    self.threadID = threadID
+                    self.workingDirectory = tempDirName
+                    self.actions = actions
+                    self.catKeys = catKeys
+                    self.Debug = Debug
+                def run(self):
+                    from pickle import dumps, loads
+                    from os import chdir
+                    chdir(self.workingDirectory)
+                    if self.Debug:
+                        print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+                        print('actions,catKeys',self.actions,self.catKeys)
+                    fi = open('dumpSelfRelation.py','rb')
+                    #context = loads(fi.read())
+                    relation = loads(fi.read())
+                    fi.close()
+                    Min = context.valuationdomain['min']
+                    Max = context.valuationdomain['max']
+                    actions = self.actions
+                    catKeys = self.catKeys
+                    #relation = context.relation
+                    sorting = {}
+                    for x in actions:
+                        sorting[x] = {}
+                        for c in catKeys:
+                            sorting[x][c] = {}
+                            cMinKey= c+'-m'
+                            cMaxKey= c+'-M'
+                            if LowerClosed:
+                                lowLimit = relation[x][cMinKey]
+                                notHighLimit = Max - relation[x][cMaxKey] + Min
+                            else:
+                                lowLimit = Max - relation[cMinKey][x] + Min
+                                notHighLimit = relation[cMaxKey][x]
+                            if Debug:
+                                print('%s in %s: low = %.2f, high = %.2f' % \
+                                      (x, c,lowLimit,notHighLimit), end=' ')
+                            categoryMembership = min(lowLimit,notHighLimit)
+                            sorting[x][c]['lowLimit'] = lowLimit
+                            sorting[x][c]['notHighLimit'] = notHighLimit
+                            sorting[x][c]['categoryMembership'] = categoryMembership
+                            if self.Debug:
+                                print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'],\
+                                   sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+                        if self.Debug:
+                            print(sorting[x])
+                    foName = 'sorting-'+str(self.threadID)+'.py'
+                    fo = open(foName,'wb')
+                    fo.write(dumps(sorting,-1))
+                    fo.close()
+            print('Threaded computing of sorting characteristics ...')        
+            from tempfile import TemporaryDirectory,mkdtemp
+            tempDirName = mkdtemp()
+            selfFileName = tempDirName +'/dumpSelfRelation.py'
+            if Debug:
+                print('temDirName, selfFileName', tempDirName,selfFileName)
+            fo = open(selfFileName,'wb')
+            pd = dumps(self.relation,-1)
+            fo.write(pd)
+            fo.close()
 
-        sorting = {}
-        for x in actions:
-            sorting[x] = {}
-            for c in categories:
-                sorting[x][c] = {}
-                cMinKey= c+'-m'
-                cMaxKey= c+'-M'
-                if LowerClosed:
-                    lowLimit = self.relation[x][cMinKey]
-                    notHighLimit = Max - self.relation[x][cMaxKey] + Min
+            if nbrOfCPUs == None:
+                nbrOfCPUs = cpu_count()-1
+            print('Nbr of actions',na)
+            
+            nbrOfJobs = na//nbrOfCPUs
+            if nbrOfJobs*nbrOfCPUs < na:
+                nbrOfJobs += 1
+            print('Nbr of threads = ',nbrOfCPUs)
+            print('Nbr of jobs/thread',nbrOfJobs)
+            nbrOfThreads = 0
+            for j in range(nbrOfCPUs):
+                print('thread = %d/%d' % (j+1,nbrOfCPUs),end="...")
+                start= j*nbrOfJobs
+                if (j+1)*nbrOfJobs < na:
+                    stop = (j+1)*nbrOfJobs
                 else:
-                    lowLimit = Max - self.relation[cMinKey][x] + Min
-                    notHighLimit = self.relation[cMaxKey][x]
-                if Comments:
-                    print('%s in %s: low = %.2f, high = %.2f' % \
-                          (x, c,lowLimit,notHighLimit), end=' ')
-                categoryMembership = min(lowLimit,notHighLimit)
-                sorting[x][c]['lowLimit'] = lowLimit
-                sorting[x][c]['notHighLimit'] = notHighLimit
-                sorting[x][c]['categoryMembership'] = categoryMembership
+                    stop = na
+                thActions = actions[start:stop]
+                if Debug:
+                    print(thActions)
+                if thActions != []:
+                    process = myThread(j,tempDirName,thActions,categories,Debug)
+                    process.start()
+                    nbrOfThreads += 1
+            while active_children() != []:
+                pass
+                #sleep(1)
+            print('Exit %d threads' % nbrOfThreads)
+            sorting = {}
+            for th in range(nbrOfThreads):
+                if Debug:
+                    print('job',th)
+                fiName = tempDirName+'/sorting-'+str(th)+'.py'
+                fi = open(fiName,'rb')
+                sortingThread = loads(fi.read())
+                if Debug:
+                    print('sortingThread',sortingThread)
+                sorting.update(sortingThread)
+        # end of Threading
+        else: # with out Threading 
+            sorting = {}
+            for x in actions:
+                sorting[x] = {}
+                for c in categories:
+                    sorting[x][c] = {}
+                    cMinKey= c+'-m'
+                    cMaxKey= c+'-M'
+                    if LowerClosed:
+                        lowLimit = self.relation[x][cMinKey]
+                        notHighLimit = Max - self.relation[x][cMaxKey] + Min
+                    else:
+                        lowLimit = Max - self.relation[cMinKey][x] + Min
+                        notHighLimit = self.relation[cMaxKey][x]
+                    if Debug:
+                        print('%s in %s: low = %.2f, high = %.2f' % \
+                              (x, c,lowLimit,notHighLimit), end=' ')
+                    categoryMembership = min(lowLimit,notHighLimit)
+                    sorting[x][c]['lowLimit'] = lowLimit
+                    sorting[x][c]['notHighLimit'] = notHighLimit
+                    sorting[x][c]['categoryMembership'] = categoryMembership
 
-                if Comments:
-                    print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
-
+                    if Debug:
+                        print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+        if StoreSorting:
+            self.sorting = sorting
         return sorting
-
+    
     def showSortingCharacteristics(self, action=None):
         """
         Renders a bipolar-valued bi-dictionary relation
@@ -957,13 +936,16 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 print('%s: %s' % (c, str(sorts[c])))
         return sorts
 
-    def computeCategoryContents(self,Reverse=False,Comments=False):
+    def computeCategoryContents(self,Reverse=False,StoreSorting=True,Comments=False):
         """
         Computes the sorting results per category.
         """
         actions = list(self.getActionsKeys())
         actions.sort()
-        sorting = self.computeSortingCharacteristics(Comments=Comments)
+        try:
+            sorting=self.sorting
+        except:
+            sorting = self.computeSortingCharacteristics(StoreSorting=StoreSorting,Comments=Comments)
 
         categoryContent = {}
         for c in self.orderedCategoryKeys(Reverse=Reverse):
@@ -971,6 +953,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             for x in actions:
                 if sorting[x][c]['categoryMembership'] >= self.valuationdomain['med']:
                     categoryContent[c].append(x)
+        if StoreSorting:
+            self.categoryContent = categoryContent
         return categoryContent
                                                      
     def showSorting(self,Reverse=True,isReturningHTML=False):
@@ -980,7 +964,10 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         the method returns a htlm table with the sorting result.
         """
         #from string import replace
-        categoryContent = self.computeCategoryContents()
+        try:
+            categoryContent = self.categoryContent
+        except:
+            categoryContent = self.computeCategoryContents(StoreSorting=True)
         try:
             LowerClosed = self.criteriaCategoryLimits['LowerClosed']
         except:
@@ -1039,13 +1026,21 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             html += '</table>'
             return html
 
-    def showActionCategories(self,action,Debug=False,Comments=True):
+    def showActionCategories(self,action,Debug=False,Comments=True,\
+                             Threading=False,nbrOfCPUs=None):
         """
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
         """
         Med = self.valuationdomain['med']
-        sorting = self.computeSortingCharacteristics(action=action,Comments=Debug)
+        try:
+            sorting = self.sorting
+        except:
+            sorting = self.computeSortingCharacteristics(action=action,\
+                                                     Comments=Debug,\
+                                                     Threading=Threading,
+                                                     StoreSorting=False,
+                                                     nbrOfCPUs=nbrOfCPUs)
         keys = []
         for c in self.orderedCategoryKeys():
             if sorting[action][c]['categoryMembership'] >= Med:
@@ -1065,9 +1060,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             return None
         elif n == 1:
             if Comments:
-                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     self.categories[keys[0]]['lowLimit'],\
-                                     self.categories[keys[0]]['highLimit'],\
+                print('%s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                     self.categories[keys[0]]['name'],\
+                                     #self.categories[keys[0]]['name'],\
                                      action,\
                                      credibility,lowLimit,notHighLimit) )
             return action,\
@@ -1077,8 +1072,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         else:
             if Comments:
                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     self.categories[keys[0]]['lowLimit'],\
-                                     self.categories[keys[-1]]['highLimit'],\
+                                     self.categories[keys[0]]['name'],\
+                                     self.categories[keys[-1]]['name'],\
                                      action,\
                                      credibility,lowLimit,notHighLimit) )
             return action,\
@@ -1268,10 +1263,11 @@ class QuantilesSortingDigraph(SortingDigraph):
 
     Example Python3 session:
 
-    >>> from sortingDigraphs import *
+    >>> from sortingDigraphs import QuantilesSortingDigraph
+    >>> from randomPerfTabs import RandomCBPerformanceTableau
     >>> t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,
     ...                                weightDistribution='equiobjectives')
-    >>> qs = QuantilesSortingBigDigraph(t,limitingQuantiles=7)
+    >>> qs = QuantilesSortingDigraph(t,limitingQuantiles=7)
     >>> qs.showSorting()
     *--- Sorting results in descending order ---*
     ]0.86 - 1.00]: 	 []
@@ -1291,15 +1287,20 @@ class QuantilesSortingDigraph(SortingDigraph):
     
     .. image:: quantilesSorting.png
     """
-    def __init__(self,argPerfTab=None,
-                 limitingQuantiles=None,
-                 LowerClosed=False,
-                 PrefThresholds=True,
-                 hasNoVeto=False,
-                 outrankingType = "bipolar",
-                 CompleteOutranking = False,
-                 Threading=False,
-                 nbrCores=None,
+    def __init__(self,argPerfTab=None,\
+                 limitingQuantiles=None,\
+                 LowerClosed=False,\
+                 PrefThresholds=True,\
+                 hasNoVeto=False,\
+                 outrankingType = "bipolar",\
+                 WithSortingRelation=True,\
+                 CompleteOutranking = False,\
+                 StoreSorting=False,\
+                 CopyPerfTab=False,\
+                 Threading=False,\
+                 nbrCores=None,\
+                 nbrOfProcesses=None,\
+                 Comments=False,
                  Debug=False):
         """
         Constructor for QuantilesSortingBigDigraph instances.
@@ -1307,31 +1308,42 @@ class QuantilesSortingDigraph(SortingDigraph):
         """
 
         from copy import copy, deepcopy
+        if CopyPerfTab:
+            copy2self = deepcopy
+        else:
+            copy2self = copy
         from decimal import Decimal
 
         # import the performance tableau
         if argPerfTab == None:
-            perfTab = RandomPerformanceTableau(numberOfActions=10,
-                                               numberOfCriteria=13)
+            print('Error: a valid performance tableau is required!')
+##            perfTab = RandomPerformanceTableau(numberOfActions=10,
+##                                               numberOfCriteria=13)
         else:
             perfTab = argPerfTab
         # normalize the actions as a dictionary construct
         if isinstance(perfTab.actions,list):
-            actions = {}
+            actions = OrderedDict()
             for x in perfTab.actions:
                 actions[x] = {'name': str(x)}
-            self.actions = actions
         else:
-            self.actions = copy(perfTab.actions)
+            actions = copy2self(perfTab.actions)
+        actions = actions
+        self.actions = actions
 
         # keep a copy of the original actions set before adding the profiles
-        self.actionsOrig = copy(self.actions)
+        actionsOrig = OrderedDict(actions)
+        self.actionsOrig = actionsOrig
 
         #  normalizing the performance tableau
         normPerfTab = NormalizedPerformanceTableau(perfTab)
-        self.criteria = copy(normPerfTab.criteria)
+
+        # instantiating the performance tableau part
+        criteria = normPerfTab.criteria
+        self.criteria = criteria
         self.convertWeightFloatToDecimal()
-        self.evaluation = copy(normPerfTab.evaluation)
+        evaluation = normPerfTab.evaluation
+        self.evaluation = evaluation
         self.convertEvaluationFloatToDecimal()
         
         #  compute the limiting quantiles
@@ -1345,7 +1357,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                 print('convert to decimal!',limitingQuantiles)
         else:
             limitingQuantiles = self._computeQuantiles(limitingQuantiles,Debug=Debug)
-        self.limitingQuantiles = copy(limitingQuantiles)
+        self.limitingQuantiles = limitingQuantiles
 
         if Debug:
             print('limitingQuantiles',self.limitingQuantiles)
@@ -1355,7 +1367,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         self.LowerClosed = LowerClosed
         lowValue = 0.0
         highValue = 100.00
-        categories = {}
+        categories = OrderedDict()
         k = len(limitingQuantiles)-1
         if LowerClosed:
             for i in range(0,k-1):
@@ -1381,11 +1393,12 @@ class QuantilesSortingDigraph(SortingDigraph):
         self.categories = categories
         if Debug:
             print('categories',self.categories)
+            print('list',list(dict.keys(categories)))
 
         criteriaCategoryLimits = {}
         criteriaCategoryLimits['LowerClosed'] = LowerClosed
-        self.criteriaCategoryLimits = copy(criteriaCategoryLimits)
-        for g in self.criteria:
+        self.criteriaCategoryLimits = criteriaCategoryLimits
+        for g in dict.keys(criteria):
             gQuantiles = self._computeLimitingQuantiles(g,\
                             PrefThresholds=PrefThresholds,Debug=Debug)
             if Debug:
@@ -1398,49 +1411,56 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                    }
         self.criteriaCategoryLimits = criteriaCategoryLimits
         if Debug:
-            print('CriteriaCategoryLimits',self.criteriaCategoryLimits)
+            print('CriteriaCategoryLimits',criteriaCategoryLimits)
 
         # set the category limits type (LowerClosed = True is default)
         # self.criteriaCategoryLimits['LowerClosed'] = LowerClosed
         # print 'LowerClosed', LowerClosed
 
         # add the catogory limits to the actions set
-        self.profiles = {}
-        self.profileLimits = set()
-        for c in list(self.categories.keys()):
+        profiles = OrderedDict()
+        #profileLimits = set()
+        for c in categories:
             if LowerClosed:
                 cKey = c+'-m'
             else:
                 cKey = c+'-M'
-            self.profileLimits.add(cKey)
+            #profileLimits.add(cKey)
             if LowerClosed:
-                self.actions[cKey] = {'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
-                self.profiles[cKey] = {'category': c, 'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
+                actions[cKey] = {'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
+                profiles[cKey] = {'category': c, 'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
             else:
-                self.actions[cKey] = {'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
-                self.profiles[cKey] = {'category': c, 'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
-            for g in list(self.criteria.keys()):
+                actions[cKey] = {'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
+                profiles[cKey] = {'category': c, 'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
+            for g in dict.keys(criteria):
                 if LowerClosed:
-                    self.evaluation[g][cKey] = Decimal(str(self.criteriaCategoryLimits[g][int(c)-1]))
+                    evaluation[g][cKey] = Decimal(str(criteriaCategoryLimits[g][int(c)-1]))
                 else:
-                    self.evaluation[g][cKey] = Decimal(str(self.criteriaCategoryLimits[g][int(c)]))
+                    evaluation[g][cKey] = Decimal(str(criteriaCategoryLimits[g][int(c)]))
+
+        self.profiles = profiles
+        profileLimits = list(profiles.keys())
+        #profileLimits.sort()
+        self.profileLimits = profileLimits
+        
         if Debug:
-            print('Profiles',self.profiles)
-            print('ProfileLimits',self.profileLimits)
+            print('self.profiles',profiles)
+            print('self.profileLimits',profileLimits)
             
-        self.convertEvaluationFloatToDecimal()
+        #self.convertEvaluationFloatToDecimal()
 
         # construct outranking relation
         self.hasNoVeto = hasNoVeto
         minValuation = -100.0
         maxValuation = 100.0
         if CompleteOutranking:
-            g = BipolarOutrankingDigraph(normPerfTab,hasNoVeto=hasNoVeto)
+            g = BipolarOutrankingDigraph(normPerfTab,hasNoVeto=hasNoVeto,
+                                         Threading=Threading,nbrCores=nbrCores)
             g.recodeValuation(minValuation,maxValuation)
-            self.relationOrig = deepcopy(g.relation)
+            self.relationOrig = g.relation
             Min = g.valuationdomain['min']
             Max = g.valuationdomain['max']
-            self.valuationdomain = deepcopy(g.valuationdomain)
+            self.valuationdomain = g.valuationdomain
         else:
             Min = Decimal(str(minValuation))
             Max = Decimal(str(maxValuation))
@@ -1449,58 +1469,137 @@ class QuantilesSortingDigraph(SortingDigraph):
         Med = (Max + Min)/Decimal('2.0')
         self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
         if LowerClosed:
-            self.relation = self._constructRelation(self.criteria,
-                                                   self.evaluation,
-                                                   initial=self.actionsOrig,
-                                                   terminal=self.profileLimits,
+            relation = self._constructRelationWithThreading(criteria,
+                                                   evaluation,
+                                                   initial=actionsOrig,
+                                                   terminal=profiles,
                                                    hasNoVeto=hasNoVeto,
                                                    hasBipolarVeto=True,
                                                     Threading=Threading,
-                                                    nbrCores=nbrCores)
+                                                    nbrCores=nbrCores,
+                                                    Comments=Comments)
         else:
-            self.relation = self._constructRelation(self.criteria,
-                                                   self.evaluation,
-                                                   terminal=self.actionsOrig,
-                                                   initial=self.profileLimits,
+            relation = self._constructRelationWithThreading(criteria,
+                                                   evaluation,
+                                                   terminal=actionsOrig,
+                                                   initial=profiles,
                                                    hasNoVeto=hasNoVeto,
                                                     hasBipolarVeto=True,
                                                     Threading=Threading,
-                                                    nbrCores=nbrCores)
-        if LowerClosed:
-            for x in self.actionsOrig:
-                for y in self.actionsOrig:
-                    self.relation[x][y] = Med
-            for x in self.profileLimits:
-                self.relation[x] = {}
-                for y in self.actions:
-                    self.relation[x][y] = Med
-        else:
-            for x in self.actionsOrig:
-                self.relation[x] = {}
-                for y in self.actionsOrig:
-                    self.relation[x][y] = Med
-            for y in self.profileLimits:
-                for x in self.actions:
-                    self.relation[x][y] = Med
+                                                    nbrCores=nbrCores,
+                                                    Comments=Comments)
 
+        if WithSortingRelation:
+            if LowerClosed:
+                for x in dict.keys(actionsOrig):
+                    for y in dict.keys(actionsOrig):
+                        relation[x][y] = Med
+                for x in dict.keys(profiles):
+                    relation[x] = {}
+                    for y in dict.keys(actions):
+                        relation[x][y] = Med
+            else:
+                for x in dict.keys(actionsOrig):
+                    relation[x] = {}
+                    for y in dict.keys(actionsOrig):
+                        relation[x][y] = Med
+                for y in dict.keys(profiles):
+                    for x in dict.keys(actions):
+                        relation[x][y] = Med
+
+        self.relation = relation
+        
         # compute weak ordering
-        sortingRelation = self.computeSortingRelation(Debug=Debug)
-        for x in self.actionsOrig:
-            for y in self.actionsOrig:
-                self.relation[x][y] = sortingRelation[x][y]
+        if nbrOfProcesses == None:
+            nbrOfProcesses = nbrCores
+        if WithSortingRelation:
+            sortingRelation = self.computeSortingRelation(StoreSorting=StoreSorting,\
+                                                          Debug=Debug,Comments=Comments,\
+                                                          Threading=Threading,\
+                                                          nbrOfCPUs=nbrOfProcesses)
+            for x in dict.keys(actionsOrig):
+                for y in dict.keys(actionsOrig):
+                    self.relation[x][y] = sortingRelation[x][y]
+            # reset original action set
+            self.actions = actionsOrig
+            self.order = len(self.actions)
+            self.gamma = self.gammaSets()
+            self.notGamma = self.notGammaSets()
 
-        # reset original action set
-        self.actions = self.actionsOrig
-        self.order = len(self.actions)
+        else:
+            self.computeCategoryContents(StoreSorting=StoreSorting,\
+                                         Threading=Threading,\
+                                         nbrOfCPUs=nbrOfProcesses,\
+                                         Comments=Comments)
 
-        # compute weak ordering by choosing
-        
-##        if self.order < 20:
-##            self.computeRankingByChoosing(CoDual=True)
-        
-        # init general digraph Data
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
+    def showActionCategories(self,action,Debug=False,Comments=True,\
+                             Threading=False,nbrOfCPUs=None):
+        """
+        Renders the union of categories in which the given action is sorted positively or null into.
+        Returns a tuple : action, lowest category key, highest category key, membership credibility !
+        """
+        Med = self.valuationdomain['med']
+        try:
+            sorting = self.sorting
+        except:
+            sorting = self.computeSortingCharacteristics(action=action,\
+                                                     Comments=Debug,\
+                                                     Threading=Threading,
+                                                     StoreSorting=False,
+                                                     nbrOfCPUs=nbrOfCPUs)
+        keys = []
+        for c in self.orderedCategoryKeys():
+            if sorting[action][c]['categoryMembership'] >= Med:
+                if sorting[action][c]['lowLimit'] > Med:
+                    lowLimit = sorting[action][c]['lowLimit']
+                if sorting[action][c]['notHighLimit'] > Med:
+                    notHighLimit = sorting[action][c]['notHighLimit']
+                keys.append(c)
+                if Debug:
+                    print(action, c, sorting[action][c])
+        n = len(keys)
+        try:
+            credibility = min(lowLimit,notHighLimit)
+        except:
+            credibility = Med
+        if n == 0:
+            return None
+        elif n == 1:
+            if Comments:
+                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                     self.categories[keys[0]]['lowLimit'],\
+                                     self.categories[keys[0]]['highLimit'],\
+                                     action,\
+                                     credibility,lowLimit,notHighLimit) )
+            return action,\
+                    keys[0],\
+                    keys[0],\
+                    credibility
+        else:
+            if Comments:
+                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                     self.categories[keys[0]]['lowLimit'],\
+                                     self.categories[keys[-1]]['highLimit'],\
+                                     action,\
+                                     credibility,lowLimit,notHighLimit) )
+            return action,\
+                    keys[0],\
+                    keys[-1],\
+                    credibility            
+
+    def showActionsSortingResult(self,actionSubset=None,Debug=False):
+        """
+        shows the quantiles sorting result all (default) of a subset of the decision actions.
+        """
+        if actionSubset == None:
+            actions = [x for x in self.actions]
+            actions.sort()
+        else:
+            actions = [x for x in flatten(actionSubset)]
+        print('Quantiles sorting result per decision action')
+        for x in actions:
+            self.showActionCategories(x,Debug=Debug)
+ 
 
     def showWeakOrder(self,Descending=True):
         """
@@ -1508,7 +1607,10 @@ class QuantilesSortingDigraph(SortingDigraph):
         """
         from decimal import Decimal
         from weakOrders import WeakOrder
-        cC = self.computeCategoryContents()
+        try:
+            cC = self.categoryContent
+        except:
+            cC = self.computeCategoryContents(StoreSorting=True)
         
         if Descending:
             cCKeys = self.orderedCategoryKeys(Reverse = True)
@@ -1561,6 +1663,59 @@ class QuantilesSortingDigraph(SortingDigraph):
         WeakOrder.showWeakOrder(self,weakOrdering)
 
 ##        return orderingList
+
+    def _computeQuantileOrdering(self,strategy=None,
+                                Descending=True,
+                                Debug=False):
+        """
+        Renders the 
+        *Parameters*:
+            * Descending: listing in *decreasing* (default) or *increasing* quantile order.
+            * strategy: ordering in an {'optimistic' | 'pessimistic' | 'average' (default)}
+              in the uppest, the lowest or the average potential quantile.
+        
+        """
+        if strategy == None:
+            try:
+                strategy = self.sortingParameters['strategy']
+            except:
+                strategy = 'average'
+        actionsCategories = {}
+        for x in self.actions:
+            a,lowCateg,highCateg,credibility =\
+                     self.showActionCategories(x,Comments=Debug)
+            if strategy == "optimistic":
+                try:
+                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]
+            elif strategy == "pessimistic":
+                try:
+                    actionsCategories[(int(lowCateg),int(highCateg))].append(a)
+                except:
+                    actionsCategories[(int(lowCateg),int(highCateg))] = [a]
+            elif strategy == "average":
+                lc = float(lowCateg)
+                hc = float(highCateg)
+                ac = (lc+hc)/2.0
+                try:
+                    actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
+            else:  # optimistic by default
+                try:
+                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
+                
+        actionsCategIntervals = []
+        for interval in actionsCategories:
+            actionsCategIntervals.append([interval,\
+                                          actionsCategories[interval]])
+        actionsCategIntervals.sort(reverse=Descending)
+
+        return actionsCategIntervals
+
 
     def computeQuantileOrdering(self,strategy=None,
                                 Descending=True,
@@ -1696,7 +1851,10 @@ class QuantilesSortingDigraph(SortingDigraph):
         Specialisation for QuantilesSortingDigraphs.
         """
         from decimal import Decimal
-        cC = self.computeCategoryContents()
+        try:
+            cC = self.categoryContent
+        except:
+            cC = self.computeCategoryContents(StoreSorting=True)
         if Debug:
             print(cC)
         if Descending:
@@ -1839,6 +1997,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         """
         from math import floor
         from copy import copy, deepcopy
+        LowerClosed = self.criteriaCategoryLimits['LowerClosed']
         gValues = []
         for x in self.actionsOrig:
             if Debug:
@@ -1856,12 +2015,13 @@ class QuantilesSortingDigraph(SortingDigraph):
         n = len(gValues)
         if Debug:
             print('g,n,gValues',g,n,gValues)
-        nf = Decimal(str(n+1))
+##        if n > 0:
+##        nf = Decimal(str(n+1))
+        nf = Decimal(str(n))
         limitingQuantiles = copy(self.limitingQuantiles)
         limitingQuantiles.sort()
         if Debug:
             print(limitingQuantiles)
-        LowerClosed = self.criteriaCategoryLimits['LowerClosed']
         if LowerClosed:
             limitingQuantiles = limitingQuantiles[:-1]
         else:
@@ -1909,10 +2069,18 @@ class QuantilesSortingDigraph(SortingDigraph):
                     if PrefThresholds:
                         quantile -= gPrefThrCst - quantile*gPrefThrSlope
                 else:
-                    quantile = gValues[n-1]
+                    if n > 0:
+                        quantile = gValues[n-1]
+                    else:
+                        if self.criteria[g]['preferenceDirection'] == 'min':
+                            quantile = Decimal('-200.0')
+                        else:
+                            quantile = Decimal('-100.0')     
                 if Debug:
                     print('quantile',quantile)
                 gQuantiles.append(quantile)
+##        else:
+##            gQuantiles = []
         if Debug:
             print(g,LowerClosed,self.criteria[g]['preferenceDirection'],gQuantiles)
         return gQuantiles
@@ -1931,13 +2099,20 @@ class QuantilesSortingDigraph(SortingDigraph):
         else:
             return set([action])           
 
-    def computeCategoryContents(self,Reverse=False,Comments=False):
+    def computeCategoryContents(self,Reverse=False,Comments=False,StoreSorting=True,\
+                                Threading=False,nbrOfCPUs=None):
         """
         Computes the sorting results per category.
         """
         actions = list(self.getActionsKeys())
         actions.sort()
-        sorting = self.computeSortingCharacteristics(Comments=Comments)
+        try:
+            sorting = self.sorting
+        except:
+            sorting = self.computeSortingCharacteristics(Comments=Comments,\
+                                                     StoreSorting=StoreSorting,\
+                                                     Threading=Threading,\
+                                                     nbrOfCPUs=nbrOfCPUs)
 
         categoryContent = {}
         for c in self.orderedCategoryKeys(Reverse=Reverse):
@@ -1945,9 +2120,231 @@ class QuantilesSortingDigraph(SortingDigraph):
             for x in actions:
                 if sorting[x][c]['categoryMembership'] >= self.valuationdomain['med']:
                     categoryContent[c].append(x)
+        
         return categoryContent
 
-    def computeSortingCharacteristics(self, action=None, Comments=False):
+    def computeSortingCharacteristics(self, action=None,Comments=False,\
+                                      StoreSorting=False,Debug=False,\
+                                        Threading=False, nbrOfCPUs=None):
+        """
+        Renders a bipolar-valued bi-dictionary relation
+        representing the degree of credibility of the
+        assertion that "action x in A belongs to category c in C",
+        ie x outranks low category limit and does not outrank
+        the high category limit.
+        """
+        Min = self.valuationdomain['min']
+        Med = self.valuationdomain['med']
+        Max = self.valuationdomain['max']
+
+        try:
+            return self.sorting
+        except:
+            pass
+        if action != None:
+            storeSorting = False
+        actions = list(self.getActionsKeys(action))
+        na = len(actions)
+        if Debug:
+            print(actions)
+            
+        categories = list(self.orderedCategoryKeys())
+
+        try:
+            LowerClosed = self.criteriaCategoryLimits['LowerClosed']
+        except:
+            LowerClosed = True
+        if Threading and action==None:
+            from multiprocessing import Process, active_children
+            from pickle import dumps, loads, load
+            from os import cpu_count
+            self.Debug = Debug
+##            if Comments:
+##                self.Debug = True
+            class myThread(Process):
+                def __init__(self, threadID, tempDirName, actions, catKeys, nq, Min, Max, Debug):
+                    Process.__init__(self)
+                    self.threadID = threadID
+                    self.workingDirectory = tempDirName
+                    self.actions = actions
+                    self.catKeys = catKeys
+                    self.nq = nq
+                    self.Min = Min
+                    self.Max = Max
+                    self.Debug = Debug
+                def run(self):
+                    from pickle import dumps, loads
+                    from os import chdir
+                    chdir(self.workingDirectory)
+                    if self.Debug:
+                        print("Starting working in %s on %s" % (self.workingDirectory, str(self.threadID)))
+                        print('actions,catKeys',self.actions,self.catKeys)
+                    fi = open('dumpSelfRelation.py','rb')
+                    #context = loads(fi.read())
+                    relation = loads(fi.read())
+                    fi.close()
+##                    Min = context.valuationdomain['min']
+##                    Max = context.valuationdomain['max']
+                    Min = self.Min
+                    Max = self.Max
+                    sorting = {}
+                    nq = self.nq
+                    #nq = len(context.limitingQuantiles) - 1
+                    actions = self.actions
+                    catKeys = self.catKeys
+                    #relation = context.relation
+                    for x in actions:
+                        sorting[x] = {}
+                        for c in catKeys:
+                            sorting[x][c] = {}
+                            if LowerClosed:
+                                cKey= c+'-m'
+                            else:
+                                cKey= c+'-M'
+                            if LowerClosed:
+                                lowLimit = relation[x][cKey]
+                                if int(c) < nq:
+                                    cMaxKey = str(int(c)+1)+'-m'
+                                    notHighLimit = Max - relation[x][cMaxKey] + Min
+                                else:
+                                    notHighLimit = Max
+                            else:
+                                if int(c) > 1:
+                                    cMinKey = str(int(c)-1)+'-M'
+                                    lowLimit = Max - relation[cMinKey][x] + Min
+                                else:
+                                    lowLimit = Max
+                                notHighLimit = relation[cKey][x]
+##                            cMinKey= c+'-m'
+##                            cMaxKey= c+'-M'
+##                            if LowerClosed:
+##                                lowLimit = context.relation[x][cMinKey]
+##                                notHighLimit = Max - context.relation[x][cMaxKey] + Min
+##                            else:
+##                                lowLimit = Max - context.relation[cMinKey][x] + Min
+##                                notHighLimit = context.relation[cMaxKey][x]
+                            if Debug:
+                                print('%s in %s: low = %.2f, high = %.2f' % \
+                                      (x, c,lowLimit,notHighLimit), end=' ')
+                            categoryMembership = min(lowLimit,notHighLimit)
+                            sorting[x][c]['lowLimit'] = lowLimit
+                            sorting[x][c]['notHighLimit'] = notHighLimit
+                            sorting[x][c]['categoryMembership'] = categoryMembership
+                            if self.Debug:
+                                print('\t %.2f \t %.2f \t %.2f\n' % (sorting[x][c]['lowLimit'],\
+                                   sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+                        if self.Debug:
+                            print(sorting[x])
+                    foName = 'sorting-'+str(self.threadID)+'.py'
+                    fo = open(foName,'wb')
+                    fo.write(dumps(sorting,-1))
+                    fo.close()
+            if Comments:
+                print('Threaded computing of sorting characteristics ...')        
+            from tempfile import TemporaryDirectory,mkdtemp
+            tempDirName = mkdtemp()
+            selfFileName = tempDirName +'/dumpSelfRelation.py'
+            if Debug:
+                print('temDirName, selfFileName', tempDirName,selfFileName)
+            fo = open(selfFileName,'wb')
+            pd = dumps(self.relation,-1)
+            fo.write(pd)
+            fo.close()
+
+            if nbrOfCPUs == None:
+                nbrOfCPUs = cpu_count()-1
+            if Comments:
+                print('Nbr of actions',na)
+            
+            nbrOfJobs = na//nbrOfCPUs
+            if nbrOfJobs*nbrOfCPUs < na:
+                nbrOfJobs += 1
+            if Comments:
+                print('Nbr of threads = ',nbrOfCPUs)
+                print('Nbr of jobs/thread',nbrOfJobs)
+            nbrOfThreads = 0
+            nq = len(self.limitingQuantiles) -1
+            Max = self.valuationdomain['max']
+            Min = self.valuationdomain['min']
+            for j in range(nbrOfCPUs):
+                if Comments:
+                    print('thread = %d/%d' % (j+1,nbrOfCPUs),end="...")
+                start= j*nbrOfJobs
+                if (j+1)*nbrOfJobs < na:
+                    stop = (j+1)*nbrOfJobs
+                else:
+                    stop = na
+                thActions = actions[start:stop]
+                if Debug:
+                    print(thActions)
+                if thActions != []:
+                    process = myThread(j,tempDirName,thActions,categories,nq,Min,Max,self.Debug)
+                    process.start()
+                    nbrOfThreads += 1
+            while active_children() != []:
+                pass
+                #sleep(1)
+            if Comments:
+                print('Exit %d threads' % nbrOfThreads)
+            sorting = {}
+            for th in range(nbrOfThreads):
+                if Debug:
+                    print('job',th)
+                fiName = tempDirName+'/sorting-'+str(th)+'.py'
+                fi = open(fiName,'rb')
+                sortingThread = loads(fi.read())
+                if Debug:
+                    print('sortingThread',sortingThread)
+                sorting.update(sortingThread)
+        # end of Threading
+        else: # with out Threading 
+            sorting = {}
+            nq = len(self.limitingQuantiles) - 1
+            for x in actions:
+                sorting[x] = {}
+                for c in categories:
+                    sorting[x][c] = {}
+                    if LowerClosed:
+                        cKey= c+'-m'
+                    else:
+                        cKey= c+'-M'
+                    if LowerClosed:
+                        lowLimit = self.relation[x][cKey]
+                        if int(c) < nq:
+                            cMaxKey = str(int(c)+1)+'-m'
+                            notHighLimit = Max - self.relation[x][cMaxKey] + Min
+                        else:
+                            notHighLimit = Max
+                    else:
+                        if int(c) > 1:
+                            cMinKey = str(int(c)-1)+'-M'
+                            lowLimit = Max - self.relation[cMinKey][x] + Min
+                        else:
+                            lowLimit = Max
+                        notHighLimit = self.relation[cKey][x]
+##                    cMinKey= c+'-m'
+##                    cMaxKey= c+'-M'
+##                    if LowerClosed:
+##                        lowLimit = self.relation[x][cMinKey]
+##                        notHighLimit = Max - self.relation[x][cMaxKey] + Min
+##                    else:
+##                        lowLimit = Max - self.relation[cMinKey][x] + Min
+##                        notHighLimit = self.relation[cMaxKey][x]
+                    if Comments:
+                        print('%s in %s: low = %.2f, high = %.2f' % \
+                              (x, c,lowLimit,notHighLimit), end=' ')
+                    categoryMembership = min(lowLimit,notHighLimit)
+                    sorting[x][c]['lowLimit'] = lowLimit
+                    sorting[x][c]['notHighLimit'] = notHighLimit
+                    sorting[x][c]['categoryMembership'] = categoryMembership
+
+                    if Comments:
+                        print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+        if StoreSorting:
+            self.sorting = sorting
+        return sorting
+
+    def computeSortingCharacteristicsOld(self, action=None, Comments=False):
         """
         Renders a bipolar-valued bi-dictionary relation
         representing the degree of credibility of the
@@ -2010,7 +2407,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 
                 if Comments:
                     #print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
-                    print('%.2f\t\t %.2f\t\t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+                    print('%.2f\t\t %.2f\t\t %.2f\n' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
 
         return sorting
 
@@ -2022,7 +2419,32 @@ class QuantilesSortingDigraph(SortingDigraph):
         ie x outranks low category limit and does not outrank
         the high category limit.
         """
-        self.computeSortingCharacteristics(action=action,Comments=True)
+        try:
+            sorting = self.sorting
+        except:
+            sorting = self.computeSortingCharacteristics(action=action,StoreSorting=True)
+
+        actions = self.getActionsKeys(action)
+            
+        categories = self.orderedCategoryKeys()
+
+        try:
+            LowerClosed = self.criteriaCategoryLimits['LowerClosed']
+        except:
+            LowerClosed = True
+        if LowerClosed:
+            print('x  in  K_k\t r(x >= m_k)\t r(x < M_k)\t r(x in K_k)')
+        else:
+            print('x  in  K_k\t r(m_k < x)\t r(M_k >= x)\t r(x in K_k)')
+
+        for x in actions:
+            for c in categories:
+                print('%s in %s - %s\t' % (x, self.categories[c]['lowLimit'],\
+                        self.categories[c]['highLimit'],), end=' ')
+                print('%.2f\t\t %.2f\t\t %.2f' %\
+                      (sorting[x][c]['lowLimit'],\
+                       sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+            print()
 
 
     def showHTMLQuantileOrdering(self,Descending=True,strategy='optimistic'):
@@ -2068,7 +2490,12 @@ class QuantilesSortingDigraph(SortingDigraph):
         """
         #from string import replace
         from copy import copy, deepcopy
-        categoryContent = self.computeCategoryContents()
+
+        try:
+            categoryContent = self.categoryContent
+        except:
+            categoryContent = self.computeCategoryContents(StoreSorting=True)
+
         categoryKeys = self.orderedCategoryKeys(Reverse=Reverse)
         try:
             LowerClosed = self.criteriaCategoryLimits['LowerClosed']
@@ -2099,12 +2526,18 @@ class QuantilesSortingDigraph(SortingDigraph):
             html += '</table>'
             return html
 
-    def computeSortingRelation(self,categoryContents=None,Debug=False):
+    def computeSortingRelation(self,categoryContents=None,Debug=False,StoreSorting=True,
+                               Threading=False,nbrOfCPUs=None,Comments=False):
         """
         constructs a bipolar sorting relation using the category contents.
         """
+        try:
+            categoryContents = self.categoryContent
+        except:
+            pass
         if categoryContents == None:
-            categoryContents = self.computeCategoryContents()
+            categoryContents = self.computeCategoryContents(StoreSorting=StoreSorting,\
+                                Threading=Threading,nbrOfCPUs=nbrOfCPUs,Comments=Comments)
         categoryKeys = self.orderedCategoryKeys()
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
@@ -2175,15 +2608,17 @@ class _QuantilesSortingDigraph(SortingDigraph):
     .. image:: quantilesSorting.png
     """
 
-    def __init__(self,argPerfTab=None,
-                 limitingQuantiles=None,
-                 LowerClosed=False,
-                 PrefThresholds=True,
-                 hasNoVeto=False,
-                 outrankingType = "bipolar",
-                 CompleteOutranking = True,
-                 Threading=False,
-                 nbrCores=None,
+    def __init__(self,argPerfTab=None,\
+                 limitingQuantiles=None,\
+                 LowerClosed=False,\
+                 PrefThresholds=True,\
+                 hasNoVeto=False,\
+                 outrankingType="bipolar",\
+                 CompleteOutranking=True,\
+                 StoreSorting=True,\
+                 DeepcopyPerfTab=True,\
+                 Threading=False,\
+                 nbrCores=None,\
                  Debug=False):
         """
         Constructor for QuantilesSortingDigraph instances.
@@ -2204,18 +2639,18 @@ class _QuantilesSortingDigraph(SortingDigraph):
             actions = {}
             for x in perfTab.actions:
                 actions[x] = {'name': str(x)}
-            self.actions = actions
-        else:
-            self.actions = copy(perfTab.actions)
+            perfTab.actions = actions
 
         # keep a copy of the original actions set before adding the profiles
-        self.actionsOrig = copy(self.actions)
+        self.actionsOrig = deepcopy(self.actions)
 
         #  normalizing the performance tableau
         normPerfTab = NormalizedPerformanceTableau(perfTab)
-        self.criteria = copy(normPerfTab.criteria)
+        self.actions = normPerfTab.actions
+        actionsOrig = deepcopy(self.actions)
+        self.criteria = normPerfTab.criteria
         self.convertWeightFloatToDecimal()
-        self.evaluation = copy(normPerfTab.evaluation)
+        self.evaluation = normPerfTab.evaluation
         self.convertEvaluationFloatToDecimal()
         
         #  compute the limiting quantiles
@@ -2328,8 +2763,8 @@ class _QuantilesSortingDigraph(SortingDigraph):
         self.hasNoVeto = hasNoVeto
         if outrankingType == "robust":
             g = RobustOutrankingDigraph(self)
-            self.valuationdomain = copy(g.valuationdomain)
-            self.relation = copy(g.relation)
+            self.valuationdomain = g.valuationdomain
+            self.relation = g.relation
         elif outrankingType == "likely":
             g = StochasticBipolarOutrankingDigraph(self,
                                                    sampleSize = 50,
@@ -2339,8 +2774,8 @@ class _QuantilesSortingDigraph(SortingDigraph):
                                                    spread = 1.0,
                                                    likelihood = 0.9,
                                                    distribution = 'triangular')
-            self.valuationdomain = copy(g.valuationdomain)
-            self.relation = copy(g.relation)
+            self.valuationdomain = g.valuationdomain
+            self.relation = g.relation
             
         else:
             minValuation = -100.0
@@ -2348,7 +2783,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
             if CompleteOutranking:
                 g = BipolarOutrankingDigraph(normPerfTab,hasNoVeto=hasNoVeto)
                 g.recodeValuation(minValuation,maxValuation)
-                self.relationOrig = deepcopy(g.relation)
+                relationOrig = g.relation
                 Min = g.valuationdomain['min']
                 Max = g.valuationdomain['max']
             else:
@@ -2359,7 +2794,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
             Med = (Max + Min)/Decimal('2.0')
             self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
             if LowerClosed:
-                self.relation = self._constructRelation(self.criteria,
+                relation = self._constructRelation(self.criteria,
                                                        self.evaluation,
                                                        initial=self.actionsOrig,
                                                        terminal=self.profileLimits,
@@ -2368,7 +2803,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
                                                         Threading=Threading,
                                                         nbrCores=nbrCores)
             else:
-                self.relation = self._constructRelation(self.criteria,
+                relation = self._constructRelation(self.criteria,
                                                        self.evaluation,
                                                        terminal=self.actionsOrig,
                                                        initial=self.profileLimits,
@@ -2377,30 +2812,31 @@ class _QuantilesSortingDigraph(SortingDigraph):
                                                         Threading=Threading,
                                                         nbrCores=nbrCores)
             if LowerClosed:
-                for x in self.actionsOrig:
-                    for y in self.actionsOrig:
-                        self.relation[x][y] = Med
+                for x in actionsOrig:
+                    for y in actionsOrig:
+                        relation[x][y] = Med
                 for x in self.profileLimits:
-                    self.relation[x] = {}
+                    relation[x] = {}
                     for y in self.actions:
-                        self.relation[x][y] = Med
+                        relation[x][y] = Med
             else:
-                for x in self.actionsOrig:
-                    self.relation[x] = {}
-                    for y in self.actionsOrig:
-                        self.relation[x][y] = Med
+                for x in actionsOrig:
+                    relation[x] = {}
+                    for y in actionsOrig:
+                        relation[x][y] = Med
                 for y in self.profileLimits:
                     for x in self.actions:
-                        self.relation[x][y] = Med
+                        relation[x][y] = Med
+            self.relation = relation
 
         # compute weak ordering
-        sortingRelation = self.computeSortingRelation(Debug=Debug)
-        for x in self.actionsOrig:
-            for y in self.actionsOrig:
+        sortingRelation = self.computeSortingRelation(StoreSorting=StoreSorting,Debug=Debug)
+        for x in actionsOrig:
+            for y in actionsOrig:
                 self.relation[x][y] = sortingRelation[x][y]
 
         # reset original action set
-        self.actions = self.actionsOrig
+        self.actions = actionsOrig
         self.order = len(self.actions)
 
         # compute weak ordering by choosing
@@ -2418,7 +2854,10 @@ class _QuantilesSortingDigraph(SortingDigraph):
         """
         from decimal import Decimal
         from weakOrders import WeakOrder
-        cC = self.computeCategoryContents()
+        try:
+            cC = self.categoryContent
+        except:
+            cC = self.computeCategoryContents(StoreSorting=True)
         
         if Descending:
             cCKeys = self.orderedCategoryKeys(Reverse = True)
@@ -2447,37 +2886,19 @@ class _QuantilesSortingDigraph(SortingDigraph):
             else:
                 x = list(set(cC[cCKeys[n2]]) - (setx | sety))
             ordering.append( ( (Decimal(str(n2+1)),x),(Decimal(str(n2+1)),x) ) )
-
-##        orderingList = []
-##        for i in range(n2):
-##            x = ordering[i][0][1]
-##            if x != []:
-##                orderingList.append(x)
-##        if 2*n2 < n:
-##            x = ordering[i][0][1]
-##            y = ordering[i][1][1]
-##            if x != []:
-##                orderingList.append(x)
-##            if y != []:
-##                orderingList.append(y)
-##        for i in range(n2):
-##            y = ordering[n2-i-1][1][1]
-##            if y != []:
-##                orderingList.append(y)
-##            
         
         weakOrdering = {'result':ordering}
-
         WeakOrder.showWeakOrder(self,weakOrdering)
-
-##        return orderingList
 
     def computeWeakOrder(self,Descending=True,Debug=False):
         """
         Specialisation for QuantilesSortingDigraphs.
         """
         from decimal import Decimal
-        cC = self.computeCategoryContents()
+        try:
+            cC = self.categoryContent
+        except:
+            cC = self.computeCategoryContents(StoreSorting=True)
         if Debug:
             print(cC)
         if Descending:
@@ -2530,11 +2951,6 @@ class _QuantilesSortingDigraph(SortingDigraph):
             y = ordering[n-i-1][1][1]
             if y != []:
                 orderingList.append(y)
-##            
-##        
-##        weakOrdering = {'result':ordering}
-##
-##        WeakOrder.showWeakOrder(self,weakOrdering)
 
         return orderingList
 
@@ -2566,7 +2982,7 @@ class _QuantilesSortingDigraph(SortingDigraph):
 
     def _computeQuantiles(self,x,Debug=False):
         """
-        renders the limiting quantiles
+        Renders the limiting quantiles.
         """
         from math import floor
         if isinstance(x,int):
@@ -2690,7 +3106,13 @@ class _QuantilesSortingDigraph(SortingDigraph):
                     if PrefThresholds:
                         quantile -= gPrefThrCst - quantile*gPrefThrSlope
                 else:
-                    quantile = gValues[n-1]
+                    if n > 0:
+                        quantile = gValues[n-1]
+                    else:
+                        if self.criteria[g]['preferenceDirection'] == 'min':
+                            quantile = Decimal('-200.0')
+                        else:
+                            quantile = Decimal('-100.0')                      
                 if Debug:
                     print('quantile',quantile)
                 gQuantiles.append(quantile)
@@ -2707,7 +3129,10 @@ class _QuantilesSortingDigraph(SortingDigraph):
         """
         #from string import replace
         from copy import copy, deepcopy
-        categoryContent = self.computeCategoryContents()
+        try:
+            categoryContent = self.categoryContent
+        except:
+            categoryContent = self.computeCategoryContents(StoreSorting=True)
         categoryKeys = self.orderedCategoryKeys(Reverse=Reverse)
         try:
             LowerClosed = self.criteriaCategoryLimits['LowerClosed']
@@ -2735,12 +3160,16 @@ class _QuantilesSortingDigraph(SortingDigraph):
             html += '</table>'
             return html
 
-    def computeSortingRelation(self,categoryContents=None,Debug=False):
+    def computeSortingRelation(self,categoryContents=None,Debug=False,StoreSorting=True):
         """
         constructs a bipolar sorting relation using the category contents.
         """
+        try:
+            categoryContents = self.categoryContent
+        except:
+            pass
         if categoryContents == None:
-            categoryContents = self.computeCategoryContents()
+            categoryContents = self.computeCategoryContents(StoreSorting=True)
         categoryKeys = self.orderedCategoryKeys()
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
@@ -2769,79 +3198,6 @@ class _QuantilesSortingDigraph(SortingDigraph):
                     sortingRelation[y][x] = Max
             currActions = currActions - ibch
         return sortingRelation
-
-##class _OptimalHarmonicQuantilesSortingDigraph(QuantilesSortingDigraph):
-##    """
-##    Specialisation of the QuantilesSortingDigraph Class
-##    for optimal sorting of alternatives into
-##    quantiles delimited ordered classes. 
-##    """
-##    def __init__(self,argPerfTab=None,
-##                 minQuantiles=4,
-##                 maxQuantiles=200,
-##                 LowerClosed=True,
-##                 PrefThresholds=True,
-##                 hasNoVeto=False,
-##                 minValuation=-100.0,
-##                 maxValuation=100.0,
-##                 outrankingType = "bipolar",
-##                 Prudent=False,
-##                 Threading=False,
-##                 Debug=False):
-##        
-##        from copy import copy as deepcopy
-##        if argPerfTab != None:
-##            t = argPerfTab
-##        else:
-##            t = RandomCBPerformanceTableau()
-##        g = BipolarOutrankingDigraph(t)
-##        maxCorr = {'correlation': Decimal('-1.0')}
-##        maxCorr['determination'] = Decimal('0.0')
-##        qs = None
-##        nbrActions = len(t.actions)
-##        nq = nbrActions+1
-##        divNbrActions = []
-##        for i in range(minQuantiles,nq):
-##            if (nbrActions%i) == 0:
-##                divNbrActions.append(i)
-##        if Debug:
-##            print(divNbrActions)
-##        testNQ = [(i+1) for i in divNbrActions]
-##        for m in range(2,10):
-##            if m*(nbrActions+1) < maxQuantiles:
-##                testNQ.append(m*(nbrActions+1))
-##        if Debug:
-##            print(testNQ)
-##        for nq in testNQ:
-##            if Debug:
-##                print( '%d-tiling' % (nq) )
-##            qs0 = QuantilesSortingDigraph(t,limitingQuantiles=nq,Threading=False)
-##            qs0Corr = g.computeOrdinalCorrelation(qs0)
-##            if Debug:
-##                print( 'correlation0 = %.3f' % qs0Corr['correlation'] )
-##            if Prudent:
-##                if qs0Corr['correlation'] > maxCorr['correlation']:
-##                    maxCorr = deepcopy(qs0Corr)
-##                    maxqs = deepcopy(qs0)                
-##            else:
-##                if qs0Corr['correlation']*qs0Corr['determination'] > maxCorr['correlation']*maxCorr['determination']:
-##                    maxCorr = deepcopy(qs0Corr)
-##                    maxqs = deepcopy(qs0)
-##            
-##        self.name = deepcopy(maxqs.name)
-##        self.actions = deepcopy(maxqs.actions)
-##        self.actionsOrig = deepcopy(maxqs.actionsOrig)
-##        self.order = len(self.actions)
-##        self.criteria = deepcopy(maxqs.criteria)
-##        self.evaluation = deepcopy(maxqs.evaluation)
-##        self.profiles = deepcopy(maxqs.profiles)
-##        self.valuationdomain = deepcopy(maxqs.valuationdomain)
-##        self.relation = deepcopy(maxqs.relation)
-##        self.categories = deepcopy(maxqs.categories)
-##        self.criteriaCategoryLimits = deepcopy(maxqs.criteriaCategoryLimits)
-##        self.limitingQuantiles = deepcopy(maxqs.limitingQuantiles)
-##        self.gamma = self.gammaSets()
-##        self.notGamma = self.notGammaSets()
            
 #----------test SortingDigraph class ----------------
 if __name__ == "__main__":
@@ -2849,11 +3205,13 @@ if __name__ == "__main__":
     from perfTabs import *
     from outrankingDigraphs import *
     from sortingDigraphs import *
+    from weakOrders import *
+    
     print("""
     ****************************************************
     * Python sortingDigraphs module                    *
     * depends on BipolarOutrankingDigraph and          *
-    * $Revision: 1249 $                                 *
+    * $Revision: 1545 $                                 *
     * Copyright (C) 2010 Raymond Bisdorff              *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
@@ -2864,23 +3222,27 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
 
-    t = XMCDA2PerformanceTableau('uniSorting')
-    #t = XMCDA2PerformanceTableau('spiegel2004')
+##    t = PerformanceTableau('auditor2_2')
+##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
+    t = XMCDA2PerformanceTableau('spiegel2004')
     #t = XMCDA2PerformanceTableau('ex1')
-##    t = RandomCBPerformanceTableau(numberOfActions=15,
-##                                   numberOfCriteria=5,
-##                                   weightDistribution='equiobjectives')
+##    t = RandomCBPerformanceTableau(numberOfActions=150,
+##                                    numberOfCriteria=5,
+##                                    weightDistribution='equiobjectives',
+##                                    seed=100)
 ##    t.saveXMCDA2('test',servingD3=False)
     #t = XMCDA2PerformanceTableau('test')  
-    qs = QuantilesSortingDigraph(t,15,LowerClosed=False,
-                                     Threading=False,
+    t.showHTMLPerformanceHeatmap(colorLevels=9,ndigits=2,Correlations=True)
+    qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
+                                     Threading=True,
                                      Debug=False)
     qs.showHTMLQuantileOrdering(strategy='average')
-    #qs.showSortingCharacteristics('a01')
-    #qs.showWeakOrder()
-    #qs.showQuantileOrdering(strategy=None)
-    #qs.exportGraphViz('test')
-    #qs.showActionsSortingResult()
+    qs.showWeakOrder()
+    qs.showQuantileOrdering(strategy='average')
+    qs.showActionsSortingResult()
+    qr = QuantilesRankingDigraph(t,7,LowerClosed=True,PrefThresholds=True,Threading=False)
+    qr.showRanking()
+    qr.showSorting()
 
 ##    qs0 = _QuantilesSortingDigraph(t,15,LowerClosed=False,
 ##                                     Threading=False,
@@ -2918,7 +3280,7 @@ if __name__ == "__main__":
 
     print('*************************************')
     print('* R.B. december 2010                *')
-    print('* $Revision: 1249 $                  *')
+    print('* $Revision: 1545 $                  *')
     print('*************************************')
 
 #############################

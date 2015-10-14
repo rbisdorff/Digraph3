@@ -26,14 +26,42 @@ __version__ = "$Revision: 1.37 $"
 # $Source: /home/cvsroot/Digraph/perfTabs.py,v $
 
 from perfTabs import *
+import json
+import decimal
 
 from decimal import Decimal
+from collections import OrderedDict
 
 # ----------  old XML handling ------------------
 try:
     from xml.sax import *
 except:
     print('XML extension will not work with this Python version!')
+
+######################################################################################################################
+#####                                                MCSRDecimalEncoder                                         ######
+#####                                                         START                                             ######
+######################################################################################################################
+
+#extension of the json encoder to encode decimals added by Ian
+class _DecimalJSONEncoder(json.JSONEncoder):
+
+    def default(self,obj):
+
+        if isinstance(obj,decimal.Decimal):
+            #cast into float so that the native encoder can handle the rest
+            #since the result is a string only the string representation is used,
+            # which is still identical to the decimal value
+            return float(obj)
+        else:
+            return obj.__dict__
+        return json.JSONEncoder.default(self, obj)
+
+######################################################################################################################
+#####                                                MCSRDecimalEncoder                                         ######
+#####                                                         END                                               ######
+######################################################################################################################
+
 
 class _XMLPerformanceTableauHandler(ContentHandler):
     """
@@ -270,26 +298,28 @@ class PerformanceTableau(object):
     """
 In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:
 
-     1. a potential set of decision **actions** : a dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
-     2. a coherent family of **criteria**: a dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
+     1. a potential set of decision **actions** : an ordered dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
+     2. a coherent family of **criteria**: a ordered dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
      3. the **evaluations**: a dictionary of performance evaluations for each decision action or alternative on each criterion function.
 
 Structure::
 
-       actions = {'a1': {'name': ..., 'comment': ...},
-                  'a2': {'name': ..., 'comment': ...},
-                  ...}
-       criteria = {'g1': {'weight':Decimal("3.00"),
+       actions = OrderedDict[('a1', {'name': ..., 'comment': ...}),
+                  ('a2', {'name': ..., 'comment': ...}),
+                  ...])
+       criteria = OrderedDict([
+            ('g1', {'weight':Decimal("3.00"),
+                    'scale': (Decimal("0.00"),Decimal("100.00")),
+                    'thresholds' : {'pref': (Decimal('20.0'), Decimal('0.0')),
+                                    'ind': (Decimal('10.0'), Decimal('0.0')),
+                                    'veto': (Decimal('80.0'), Decimal('0.0'))}
+                    }),
+            ('g2', {'weight':Decimal("5.00"),
                           'scale': (Decimal("0.00"),Decimal("100.00")),
                           'thresholds' : {'pref': (Decimal('20.0'), Decimal('0.0')),
                                           'ind': (Decimal('10.0'), Decimal('0.0')),
-                                          'veto': (Decimal('80.0'), Decimal('0.0'))} },
-                   'g2': {'weight':Decimal("5.00"),
-                          'scale': (Decimal("0.00"),Decimal("100.00")),
-                          'thresholds' : {'pref': (Decimal('20.0'), Decimal('0.0')),
-                                          'ind': (Decimal('10.0'), Decimal('0.0')),
-                                          'veto': (Decimal('80.0'), Decimal('0.0'))} },
-                     ...}
+                                          'veto': (Decimal('80.0'), Decimal('0.0'))}}),
+                     ...])
        evaluation = {'g1': {'a1':Decimal("57.28"),'a2':Decimal("99.85"), ...},
                      'g2': {'a1':Decimal("88.12"),'a2':Decimal("33.25"), ...},
                      ...}
@@ -356,6 +386,7 @@ The performance evaluations of each decision alternative on each criterion are g
     """
     def __init__(self,filePerfTab=None,isEmpty=False):
         from decimal import Decimal
+        from collections import OrderedDict
         if filePerfTab != None:
             fileName = filePerfTab + '.py'
             argDict = {}
@@ -365,6 +396,12 @@ The performance evaluations of each decision alternative on each criterion are g
                 self.actions = argDict['actions']
             except:
                 self.actions = argDict['actionset']
+            try:
+                self.objectives = argDict['objectives']
+                for obj in self.objectives:
+                    self.objectives[obj]['weight'] = Decimal(self.objectives[obj]['weight'])
+            except:
+                pass
             try:
                 self.weightset = argDict['weightset']
                 self.thresholds = argDict['threshold']
@@ -446,13 +483,13 @@ The performance evaluations of each decision alternative on each criterion are g
             evaluation = self.evaluation
 
         sumWeights = Decimal('0.0')
-        for g in criteria:
+        for g in dict.keys(criteria):
             sumWeights += criteria[g]['weight']
 
         weightedAverage = {} 
-        for x in [z for z in actions]:
+        for x in dict.keys(actions):
             weightedAverage[x] = Decimal('0.0')
-            for g in [z for z in criteria]:
+            for g in dict.keys(criteria):
                 weightedAverage[x] += evaluation[g][x] * criteria[g]['weight'] / sumWeights
         if isListRanked:
             ranked = []
@@ -463,55 +500,127 @@ The performance evaluations of each decision alternative on each criterion are g
         else:
             return weightedAverage
         
-    def showActions(self):
+    def showActions(self,Alphabetic=False):
         """
         presentation methods for decision actions or alternatives
         """
         print('*----- show decision action --------------*')
-        actionsList = [x for x in self.actions]
-        actionsList.sort()
-        for x in actionsList:
-            print('key: ',x)
-            try:
-                print('  short name:',self.actions[x]['shortName'])
-            except:
-                pass
-            print('  name:      ',self.actions[x]['name'])
-            print('  comment:   ',self.actions[x]['comment'])
-            print()
+        actions = self.actions
+        if Alphabetic:
+            actionsKeys = [x for x in dict.keys(actions)]
+            actionsKeys.sort()
+            for x in actionsKeys:
+                print('key: ',x)
+                try:
+                    print('  short name:',actions[x]['shortName'])
+                except:
+                    pass
+                print('  name:      ',actions[x]['name'])
+                print('  comment:   ',actions[x]['comment'])
+                print()
+        else:
+            for x in dict.keys(actions):
+                print('key: ',x)
+                try:
+                    print('  short name:',actions[x]['shortName'])
+                except:
+                    pass
+                print('  name:      ',actions[x]['name'])
+                print('  comment:   ',actions[x]['comment'])
+                print()
     
-    def showCriteria(self,IntegerWeights=False,Debug=False):
+    def showCriteria(self,IntegerWeights=False,Alphabetic=False,ByObjectives=False,Debug=False):
         """
         print Criteria with thresholds and weights.
         """
+        criteria = self.criteria
+        try:
+            objectives = self.objectives
+        except:
+            ByObjectives = False
         print('*----  criteria -----*')
         sumWeights = Decimal('0.0')
-        for g in self.criteria:
-            sumWeights += self.criteria[g]['weight']
-        criteriaList = [g for g in self.criteria]
-        criteriaList.sort()
-        for g in criteriaList:
-            try:
-                criterionName = self.criteria[g]['name']
-            except:
-                criterionName = ''
-            print(g, repr(criterionName))
-            print('  Scale =', self.criteria[g]['scale'])
-            if IntegerWeights:
-                print('  Weight = %d ' % (self.criteria[g]['weight']))
-            else:
-                weightg = self.criteria[g]['weight']/sumWeights
-                print('  Weight = %.3f ' % (weightg))
-            try:
-                for th in self.criteria[g]['thresholds']:
-                    if Debug:
-                        print('-->>>', th,self.criteria[g]['thresholds'][th][0],self.criteria[g]['thresholds'][th][1])
-                    print('  Threshold %s : %.2f + %.2fx' % (th,self.criteria[g]['thresholds'][th][0],self.criteria[g]['thresholds'][th][1]), end=' ')
-                    #print self.criteria[g]['thresholds'][th]
-                    print('; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug))
-            except:
-                pass
-            print() 
+        for g in dict.keys(criteria):
+            sumWeights += criteria[g]['weight']
+        if ByObjectives:
+            for obj in objectives.keys():
+                criteriaList = [g for g in criteria if criteria[g]['objective']==obj]
+                for g in criteriaList:
+                    try:
+                        criterionName = '%s/' % objectives[criteria[g]['objective']]['name']                                        
+                    except:
+                        criterionName = ''
+                    try:
+                        criterionName += criteria[g]['name']
+                    except:
+                        pass
+                    print(g, repr(criterionName))
+                    
+                    print('  Scale =', criteria[g]['scale'])
+                    if IntegerWeights:
+                        print('  Weight = %d ' % (criteria[g]['weight']))
+                    else:
+                        weightg = criteria[g]['weight']/sumWeights
+                        print('  Weight = %.3f ' % (weightg))
+                    try:
+                        for th in criteria[g]['thresholds']:
+                            if Debug:
+                                print('-->>>', th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1])
+                            print('  Threshold %s : %.2f + %.2fx' %\
+                                  (th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1]), end=' ')
+                            #print self.criteria[g]['thresholds'][th]
+                            print('; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug))
+                    except:
+                        pass
+                    print()
+        else:
+            criteriaList = list(dict.keys(criteria))
+            if Alphabetic:
+                criteriaList.sort()
+            for g in criteriaList:
+                try:
+                    criterionName = '%s/' % objectives[criteria[g]['objective']]['name']                                        
+                except:
+                    criterionName = ''
+                try:
+                    criterionName += criteria[g]['name']
+                except:
+                    pass
+                print(g, repr(criterionName))
+                
+                print('  Scale =', criteria[g]['scale'])
+                if IntegerWeights:
+                    print('  Weight = %d ' % (criteria[g]['weight']))
+                else:
+                    weightg = criteria[g]['weight']/sumWeights
+                    print('  Weight = %.3f ' % (weightg))
+                try:
+                    for th in criteria[g]['thresholds']:
+                        if Debug:
+                            print('-->>>', th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1])
+                        print('  Threshold %s : %.2f + %.2fx'\
+                              % (th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1]), end=' ')
+                        #print self.criteria[g]['thresholds'][th]
+                        print('; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug))
+                except:
+                    pass
+                print()
+
+    def showObjectives(self):
+        if 'objectives' in self.__dict__:
+            print('*------ show objectives -------"')
+            
+            for obj in self.objectives:
+                                                   
+                print('%s: %s' % (obj, self.objectives[obj]['name']))
+                                                   
+                for g in self.objectives[obj]['criteria']:
+                    print('  ', g, self.criteria[g]['name'], self.criteria[g]['weight'])
+                                                   
+                print('  Total weight: %.2f (%d criteria)\n'\
+                      % (self.objectives[obj]['weight'],len(self.objectives[obj]['criteria'])))
+        else:
+            print('The performance tableau does not contain objectives.')
  
     def convertWeightFloatToDecimal(self):
         """
@@ -538,28 +647,31 @@ The performance evaluations of each decision alternative on each criterion are g
 
     def computePerformanceDifferences(self,Comments = False,
                                       Debug = False,
-                                      NotPermanentDiffs=True):
+                                      NotPermanentDiffs=True,
+                                      WithMaxMin=False):
         """
         Adds to the criteria dictionary the ordered list of all observed performance differences.
         """
-        
+        criteria = self.criteria
+        actions = self.actions
+        evaluation = self.evaluation
         if Debug:
             Comments = True
         if Comments:
             print('Compute performance differences on each criterion')
-        criteriaList = [x for x in self.criteria]
-        criteriaList.sort()
-        actionsList = [x for x in self.actions]
+        #criteriaList = [x for x in self.criteria]
+        #criteriaList.sort()
+        actionsList = list(dict.keys(actions))
         n = len(actionsList)
         if NotPermanentDiffs:
             performanceDifferences = {}
-        for c in criteriaList:
-            ed = Decimal(str(self.criteria[c]['scale'][1])) - Decimal(str(self.criteria[c]['scale'][0]))
+        for c in criteria.keys():
+            ed = Decimal(str(criteria[c]['scale'][1])) - Decimal(str(criteria[c]['scale'][0]))
             md = Decimal('0')
             #diff = set()
             diffList = []
             for i in range(n):
-                xi = self.evaluation[c][actionsList[i]]
+                xi = evaluation[c][actionsList[i]]
                 if xi != Decimal('-999'):
                     for j in range(i+1,n):
                         xj = self.evaluation[c][actionsList[j]]
@@ -572,44 +684,79 @@ The performance evaluations of each decision alternative on each criterion are g
                             #diff.add(delta)
                             diffList.append(delta)
                             if Debug:
-                                print('-->> i,j, self.evaluation[actionsList[i]],self.evaluation[actionsList[j]], delta, ed,md', i,j, self.evaluation[c][actionsList[i]],self.evaluation[c][actionsList[j]], delta, ed,md,diffList)
-            self.criteria[c]['minimalPerformanceDifference'] = ed
-            self.criteria[c]['maximalPerformanceDifference'] = md
+                                print('-->> i,j, evaluation[actionsList[i]],evaluation[actionsList[j]], delta, ed,md',\
+                                      i,j, evaluation[c][actionsList[i]],evaluation[c][actionsList[j]],\
+                                      delta, ed,md,diffList)
+            criteria[c]['minimalPerformanceDifference'] = ed
+            criteria[c]['maximalPerformanceDifference'] = md
             #diffList = list(diff)
             diffList.sort()
             if NotPermanentDiffs:
-                performanceDifferences[c] = diffList
+                if WithMaxMin:
+                    performanceDifferences[c] = (diffList,ed,md)
+                else:
+                    performanceDifferences[c] = diffList
             else:
-                self.criteria[c]['performanceDifferences'] = diffList
+                criteria[c]['performanceDifferences'] = diffList
                 if Comments:
-                    print(' -->', c, ': ', self.criteria[c]['minimalPerformanceDifference'], self.criteria[c]['maximalPerformanceDifference'])
-                    print(len(self.criteria[c]['performanceDifferences']),self.criteria[c]['performanceDifferences'])
-                    print(self.criteria[c]['performanceDifferences'][0], self.criteria[c]['performanceDifferences'][-1])
+                    print(' -->', c, ': ', criteria[c]['minimalPerformanceDifference'],\
+                          criteria[c]['maximalPerformanceDifference'])
+                    print(len(criteria[c]['performanceDifferences']),criteria[c]['performanceDifferences'])
+                    print(criteria[c]['performanceDifferences'][0], criteria[c]['performanceDifferences'][-1])
 
         if NotPermanentDiffs:
             return performanceDifferences
+        
+    def mpComputePerformanceDifferences(self,NotPermanentDiffs=True,nbrCores=None,Debug=False):
+        """
+        Adds to the criteria dictionary the ordered list of all observed performance differences.
+        """
+        criteria = self.criteria
+        from multiprocessing import Pool
+        #from os import cpu_count
+        if Debug:
+            print('Compute performance differences on each criterion in parallel')
+       
+        #criteriaList = [x for x in self.criteria]
+        #criteriaList.sort()
+
+        with Pool(nbrCores) as proc:
+            performanceDifferences = proc.map(self.computeCriterionPerformanceDifferences,criteriaList)
+        
+        #for i in range(len(criteriaList)):
+        #    c = criteriaList[i]
+        for c in criteria.keys():
+            if not NotPermanentDiffs:
+                criteria[c]['performanceDifferences'] = performanceDifferences[i][0]
+            criteria[c]['minimalPerformanceDifference'] = performanceDifferences[i][1]
+            criteria[c]['maximalPerformanceDifference'] = performanceDifferences[i][2]
+
+        return performanceDifferences
+
 
     def computeCriterionPerformanceDifferences(self,c, Comments = False,
                                       Debug = False):
         """
         Renders the ordered list of all observed performance differences on the given criterion.
         """
-        
+        evaluation = self.evaluation
+        criteria = self.criteria
+        actions = self.actions
         if Debug:
             Comments = True
         if Comments:
             print('Compute performance differences on criterion %s' % c)
-        actionsList = [x for x in self.actions]
+        actionsList = list(dict.keys(actions))
         n = len(actionsList)
-        ed = Decimal(str(self.criteria[c]['scale'][1])) - Decimal(str(self.criteria[c]['scale'][0]))
+        ed = Decimal(str(criteria[c]['scale'][1])) - Decimal(str(criteria[c]['scale'][0]))
         md = Decimal('0')
         #diff = set()
         diffList = []
         for i in range(n):
-            xi = self.evaluation[c][actionsList[i]]
+            xi = evaluation[c][actionsList[i]]
             if xi != Decimal('-999'):
                 for j in range(i+1,n):
-                    xj = self.evaluation[c][actionsList[j]]
+                    xj = evaluation[c][actionsList[j]]
                     if xj != Decimal('-999'):
                         delta = abs(xi - xj)
                         if delta < ed:
@@ -619,58 +766,52 @@ The performance evaluations of each decision alternative on each criterion are g
                         #diff.add(delta)
                         diffList.append(delta)
                         if Debug:
-                            print('-->> i,j, self.evaluation[actionsList[i]],self.evaluation[actionsList[j]], delta, ed,md', i,j, self.evaluation[c][actionsList[i]],self.evaluation[c][actionsList[j]], delta, ed,md,diffList)
-##        for i in range(n):
-##            for j in range(i+1,n):
-##                delta = abs(self.evaluation[c][actionsList[i]] - self.evaluation[c][actionsList[j]])
-##                if delta < ed:
-##                    ed = delta
-##                if delta > md:
-##                    md = delta
-##                #diff.add(delta)
-##                diffList.append(delta)
-##                if Debug:
-##                    print('-->> i,j, self.evaluation[actionsList[i]],self.evaluation[actionsList[j]], delta, ed,md', i,j, self.evaluation[c][actionsList[i]],self.evaluation[c][actionsList[j]], delta, ed,md,diffList)
-        self.criteria[c]['minimalPerformanceDifference'] = ed
-        self.criteria[c]['maximalPerformanceDifference'] = md
+                            print('-->> i,j, evaluation[actionsList[i]],evaluation[actionsList[j]], delta, ed,md',\
+                                  i,j, evaluation[c][actionsList[i]],evaluation[c][actionsList[j]],\
+                                  delta, ed,md,diffList)
+        criteria[c]['minimalPerformanceDifference'] = ed
+        criteria[c]['maximalPerformanceDifference'] = md
         #diffList = list(diff)
         diffList.sort()
         if Comments:
-            print(' -->', c, ': ', self.criteria[c]['minimalPerformanceDifference'], self.criteria[c]['maximalPerformanceDifference'])
+            print(' -->', c, ': ', criteria[c]['minimalPerformanceDifference'],\
+                  criteria[c]['maximalPerformanceDifference'])
             print(len(diffList),diffList)
             print(diffList[0], diffList[-1])
         
-        return diffList
+        return (diffList,ed,md)
             
     def computeActionCriterionPerformanceDifferences(self,refAction,refCriterion,comments = False, Debug = False):
         """
         computes the performances differences observed between the reference action and the others on the given criterion
         """
-        
+        evaluation = self.evaluation
+        actions = self.actions
         if Debug:
             comments = True
         if comments:
             print('Compute performance differences for action %s on criterion %s' % (refAction, refCriterion))
 
-        otherActionsList = [x for x in self.actions]
-        otherActionsList.remove(refAction)
         diff = []
-        for x in otherActionsList:
-            xr = self.evaluation[refCriterion][refAction]
-            xo = self.evaluation[refCriterion][x]
-            if xr != Decimal('-999') and xo != Decimal('-999'):
-                delta = abs(self.evaluation[refCriterion][refAction] - self.evaluation[refCriterion][x])
-                diff.append(delta)
-                if Debug:
-                    print('-->> refAction, x, evaluation[refAction], evaluation[x], delta,diff', refAction,x, self.evaluation[refCriterion][refAction],self.evaluation[refCriterion][x], delta,diff)
+        for x in dict.keys(actions):
+            if x != refAction:
+                xr = evaluation[refCriterion][refAction]
+                xo = evaluation[refCriterion][x]
+                if xr != Decimal('-999') and xo != Decimal('-999'):
+                    delta = abs(evaluation[refCriterion][refAction] - evaluation[refCriterion][x])
+                    diff.append(delta)
+                    if Debug:
+                        print('-->> refAction, x, evaluation[refAction], evaluation[x], delta,diff',\
+                              refAction,x, evaluation[refCriterion][refAction],evaluation[refCriterion][x], delta,diff)
 
         diff.sort()
         return diff
 
-    def computeActionCriterionQuantile(self,action, criterion,Debug=False):
+    def computeActionCriterionQuantile(self,action,criterion,Debug=False):
         """
         renders the quantile of the performance of action on criterion
         """
+        perfsy = self.evaluation[criterion]
         if Debug:
             print(action,criterion)
         perfx = self.evaluation[criterion][action]
@@ -680,8 +821,9 @@ The performance evaluations of each decision alternative on each criterion are g
                 ## indx = self.criteria[criterion]['thresholds']['ind'][0] + self.criteria[criterion]['thresholds']['pref'][1]*perfx
             except:
                 indx = Decimal('0')
-            quantile = float(len([y for y in self.evaluation[criterion]\
-                                  if (y in self.actions) and (self.evaluation[criterion][y] <= perfx+indx)]) )/float(len(self.actions))
+            quantile = float(len([y for y in perfsy\
+                                  if (y in self.actions) and (perfsy[y] != Decimal(-999)) and \
+                                  (perfsy[y] <= perfx+indx)]) )/float(len(self.actions))
             return quantile
         else:
             return 'NA'
@@ -690,28 +832,33 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         renders a quantiles matrix action x criterion with the performance quantile of action on criterion
         """
-        actionsList = [x for x in self.actions]
-        criteriaList = list(self.criteria.keys())
-        if Debug:
-            print(actionsList,criteriaList)
+        #actionsList = [x for x in self.actions]
+        #criteriaList = list(self.criteria.keys())
+##        
+##        if Debug:
+##            print(actionsList,criteriaList)
+        actions = self.actions
         quantiles = {}
-        for x in actionsList:
+        for x in dict.keys(actions):
             quantiles[x] = self.computeActionQuantile(x,Debug)
         self.quantiles = quantiles
+        if Debug:
+            print(quantiles)
         return quantiles
 
     def computeActionQuantile(self,action,Debug=True):
         """
         renders the overall performance quantile of action
         """
-        criteriaList = [x for x in self.criteria]
+        #criteriaList = [x for x in self.criteria]
+        criteria = self.criteria
         criteriaQuantiles = []
         sumWeights = 0
-        for g in criteriaList:
+        for g in dict.keys(criteria):
             agq = self.computeActionCriterionQuantile(action,g,Debug)
             if agq != 'NA':
-                sumWeights += self.criteria[g]['weight']
-                criteriaQuantiles.append((agq,float(self.criteria[g]['weight'])))
+                sumWeights += criteria[g]['weight']
+                criteriaQuantiles.append((agq,float(criteria[g]['weight'])))
         criteriaQuantiles.sort()
         i = 0
         currentQuantile = 0.0
@@ -739,26 +886,30 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         save quantiles matrix criterionxaction in CSV format
         """
+        actions = self.actions
+        criteria = self.criteria
         fileNameExt = fileName+'.csv'
         fo = open(fileNameExt,'w')
-        criteriaList = [x for x in self.criteria]
-        criteriaList.sort()
-        actionsList = [x for x in self.actions]
-        actionsList.sort()
+##        criteriaList = [x for x in self.criteria]
+##        criteriaList.sort()
+##        actionsList = [x for x in self.actions]
+##        actionsList.sort()
         fo.write('# saved quantiles matrix from performance tableau %s \n' % self.name)
         fo.write('"quantiles",')
-        n = len(actionsList)
-        for i in range(n):
-            x = actionsList[i]
+        n = len(actions)
+        i = 0
+        for x in dict.keys(actions):
+            #x = actionsList[i]
             if i < n-1:
                 fo.write('"%s",' % x)
             else:
                 fo.write('"%s"\n' % x)
+            i += 1
         print('\nweights  | ', end=' ') 
-        for g in criteriaList:
+        for g in dict.keys(criteria):
             fo.write('"%s",' % g)
-            for i in range(n):
-                x = actionsList[i]
+            i = 0
+            for x in dict.keys(actions):
                 qval = self.computeActionCriterionQuantile(x,g,Debug=False)
                 if i < n-1:
                     if qval != 'NA':
@@ -770,83 +921,80 @@ The performance evaluations of each decision alternative on each criterion are g
                         fo.write('%.2f\n' % qval)
                     else:
                         fo.write('NA\n')
+                i += 1
         fo.close()
 
+
+    def showAllQuantiles(self,Sorted=True):
+        """
+        prints the performance quantiles tableau in the session console.
+        """
+        self.computeAllQuantiles(Sorted=Sorted,Comments=True)
+
+    def showHTMLPerformanceQuantiles(self,Sorted=True):
+        """
+        shows the performance quantiles tableau in a browser window.
+        """
+        import webbrowser
+        fileName = '/tmp/performanceQuantiles.html'
+        fo = open(fileName,'w')
+        fo.write(self.computeAllQuantiles(Sorted=Sorted,Comments=False))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
         
-    def showAllQuantiles(self):
+    def computeAllQuantiles(self,Sorted=True,Comments=False):
         """
         renders a html string showing the table of
         the quantiles matrix action x criterion
         """
-        criteriaList = [x for x in self.criteria]
-        criteriaList.sort()
-        actionsList = [x for x in self.actions]
-        actionsList.sort()
+        criteria = self.criteria
+        criteriaList = list(criteria.keys())
+        if Sorted:
+            criteriaList.sort()
+        actions = self.actions
+        actionsList = list(actions.keys())
+        if Sorted:
+            actionsList.sort()
         html = '<table style="background-color:White;" border="1">\n'
-        print('criteria | ', end=' ')
+        if Comments:
+            print('criteria | ', end=' ')
         html += '<tr bgcolor="#9acd32"><th>criteria</th>'
         for g in criteriaList:
-            print(str(g) + '\t', end=' ')
+            if Comments:
+                print(str(g) + '\t', end=' ')
             html += '<th>%s</th>' % (g)
         html += '</tr>\n'
-        print('\nweights  | ', end=' ') 
+        if Comments:
+            print('\nweights  | ', end=' ') 
         html += '<tr style="text-align: center;" bgcolor="#FFF79B"><td>weights</td>'
         for g in criteriaList:
-            print(str(self.criteria[g]['weight']) + '\t', end=' ')
-            html += '<td >%s</td>' % (self.criteria[g]['weight'])
-        html += '</tr>\n'        
-        print('\n-----------------------------------------------------')
+            if Comments:
+                print(str(criteria[g]['weight']) + '\t', end=' ')
+            html += '<td >%s</td>' % (criteria[g]['weight'])
+        html += '</tr>\n'
+        if Comments:
+            print('\n-----------------------------------------------------')
         for x in actionsList:
-            print(str(x) + '   | ', end=' ')
+            if Comments:
+                print(str(x) + '   | ', end=' ')
             html += '<tr><th  bgcolor="#FFF79B">%s</th>' % (x)
             for g in criteriaList:
                 qval = self.computeActionCriterionQuantile(x,g,Debug=False)
                 if qval != 'NA':
-                    print('%.2f\t' % qval, end=' ')
+                    if Comments:
+                        print('%.2f\t' % qval, end=' ')
                     html += '<td>%.2f</td>' % (qval)
                 else:
-                    print('NA\t', end=' ')
+                    if Comments:
+                        print('NA\t', end=' ')
                     html += '<td>NA</td>'
-            print()
+            if Comments:
+                print()
             html += '</tr>\n'
                                           
         html += '</table>\n'
         return html
-
-    ## def showAllDiffQuantiles(self):
-    ##     """
-    ##     renders a html string showing the table of
-    ##     the diff quantiles matrix action x criterion
-    ##     """
-    ##     criteriaList = [x for x in self.criteria]
-    ##     criteriaList.sort()
-    ##     actionsList = [x for x in self.actions]
-    ##     actionsList.sort()
-    ##     html = '<table style="background-color:White;" border="1">\n'
-    ##     print 'criteria | ',
-    ##     html += '<tr bgcolor="#9acd32"><th>criteria</th>'
-    ##     for g in criteriaList:
-    ##         print str(g) + '\t',
-    ##         html += '<th>%s</th>' % (g)
-    ##     html += '</tr>\n'
-    ##     print '\nweights  | ', 
-    ##     html += '<tr style="text-align: center;" bgcolor="#FFF79B"><td>weights</td>'
-    ##     for g in criteriaList:
-    ##         print str(self.criteria[g]['weight']) + '\t',
-    ##         html += '<td >%s</td>' % (self.criteria[g]['weight'])
-    ##     html += '</tr>\n'        
-    ##     print '\n-----------------------------------------------------'
-    ##     for x in actionsList:
-    ##         print str(x) + '   | ',
-    ##         html += '<tr><th  bgcolor="#FFF79B">%s</th>' % (x)
-    ##         for g in criteriaList:
-    ##             print '%.2f\t' % self.computeActionCriterionDiffQuantile(x,g,Debug=False),
-    ##             html += '<td>%.2f</td>' % (self.computeActionCriterionDiffQuantile(x,g,Debug=False))
-    ##         print
-    ##         html += '</tr>\n'
-                                          
-    ##     html += '</table>\n'
-    ##     return html
     
     def computeQuantileSort(self):
         """
@@ -917,11 +1065,12 @@ The performance evaluations of each decision alternative on each criterion are g
             print('Installs default discrimination thresholds on each criterion')
 
 #        performanceDifferences = self.computePerformanceDifferences(Debug=Debug,Comments=Comments)
+        criteria = self.criteria
         if criteriaList == None:
-            criteriaList = [x for x in self.criteria]
-            criteriaList.sort()
+            criteriaList = [x for x in dict.keys(criteria)]
+            #criteriaList.sort()
         for c in criteriaList:
-            performanceDifferences = self.computeCriterionPerformanceDifferences(c,
+            performanceDifferences,minDiff,maxDiff = self.computeCriterionPerformanceDifferences(c,
                                                             Comments=Comments,Debug=Debug)
             #vx = self.criteria[c]['performanceDifferences']
             vx = performanceDifferences
@@ -957,13 +1106,13 @@ The performance evaluations of each decision alternative on each criterion are g
                             print(threshold[x])
 
             
-            self.criteria[c]['thresholds'] = {}
+            criteria[c]['thresholds'] = {}
             for x in threshold:
-                self.criteria[c]['thresholds'][x] = (threshold[x],Decimal('0.0'))
+                criteria[c]['thresholds'][x] = (threshold[x],Decimal('0.0'))
 
             if Comments:
                 print('criteria',c,' default thresholds:')
-                print(self.criteria[c]['thresholds'])
+                print(criteria[c]['thresholds'])
 
 
     def computeThresholdPercentile(self,criterion,threshold, Debug=False):
@@ -971,16 +1120,17 @@ The performance evaluations of each decision alternative on each criterion are g
         computes for a given criterion the quantile
         of the performance differences of a given constant threshold.
         """
+        criteria = self.criteria
         try:
-            performanceDifferences = self.criteria[criterion]['performanceDifferences']
+            performanceDifferences = criteria[criterion]['performanceDifferences']
         except:
             #self.computePerformanceDifferences(Debug=Debug)
             #performanceDifferences = self.criteria[criterion]['performanceDifferences']
-            performanceDifferences = self.computeCriterionPerformanceDifferences(criterion)
+            performanceDifferences,minDiff,maxDiff = self.computeCriterionPerformanceDifferences(criterion)
         if Debug:
             print("performanceDifferences = ",performanceDifferences)
         try:
-            quantile = self.criteria[criterion]['thresholds'][threshold][0]     
+            quantile = criteria[criterion]['thresholds'][threshold][0]     
         except:
             return None
         if Debug:
@@ -1007,22 +1157,23 @@ The performance evaluations of each decision alternative on each criterion are g
         except:
             return None
 
-        
-        actionsList = [x for x in self.actions]
-        actionsList.sort()
-
+##        actionsList = [x for x in self.actions]
+##        actionsList.sort()
+        actions = self.actions
+        evaluation = self.evaluation
         count = 0
         total = 0
-        for a in actionsList:
+        for a in dict.keys(actions):
             performanceDifferences = self.computeActionCriterionPerformanceDifferences(a,criterion,Debug)
             if Debug:
                 print('performanceDifferences:', performanceDifferences)
             na = len(performanceDifferences)
             total += na
             i = 0
-            quantile = Decimal(str(th[0])) + abs(self.evaluation[criterion][a])*Decimal(str(th[1]))
+            quantile = Decimal(str(th[0])) + abs(evaluation[criterion][a])*Decimal(str(th[1]))
             if Debug:
-                print('a,na,self.evaluation[criterion][a],th[0],th[1],quantile',a,na,self.evaluation[criterion][a],th[0],th[1],quantile)
+                print('a,na,self.evaluation[criterion][a],th[0],th[1],quantile',\
+                      a,na,evaluation[criterion][a],th[0],th[1],quantile)
             while i < na and performanceDifferences[i] <= quantile:
                 if Debug:
                     print('i, quantile, performanceDifferences[i]',i, quantile, performanceDifferences[i])
@@ -1036,7 +1187,7 @@ The performance evaluations of each decision alternative on each criterion are g
             print('percentile =', percentile)   
         return percentile
 
-    def showPerformanceTableau(self,sorted=True,ndigits=2):
+    def showPerformanceTableau(self,actionsSubset=None,sorted=None,ndigits=2):
         """
         Print the performance Tableau.
         """
@@ -1044,9 +1195,12 @@ The performance evaluations of each decision alternative on each criterion are g
         criteriaList = list(self.criteria)
         if sorted:
             criteriaList.sort()
-        actionsList = list(self.actions)
-        if sorted:
-            actionsList.sort()
+        if actionsSubset == None:
+            actionsList = list(self.actions)
+            if sorted:
+                actionsList.sort()
+        else:
+            actionsList = list(actionsSubset)     
         print('criteria | weights |', end=' ')
         for x in actionsList:
             print('\''+str(x)+'\'  ', end=' ')
@@ -1064,27 +1218,29 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         import itertools as IT
         import collections
-
-        def flatten(iterable, ltypes=collections.Iterable):
-            remainder = iter(iterable)
-            while True:
-                first = next(remainder)
-                if isinstance(first, ltypes) and not isinstance(first, str):
-                    remainder = IT.chain(first, remainder)
-                else:
-                    yield first
+        actions = self.actions
+        criteria = self.criteria
+        evaluation = self.evaluation
+##        def flatten(iterable, ltypes=collections.Iterable):
+##            remainder = iter(iterable)
+##            while True:
+##                first = next(remainder)
+##                if isinstance(first, ltypes) and not isinstance(first, str):
+##                    remainder = IT.chain(first, remainder)
+##                else:
+##                    yield first
         
         fileNameExt = fileName + '.csv'        
         print('*Storing performance tableau in CSV format in file %s'\
               % fileNameExt)
-        criteriaList = list(self.criteria.keys())
+        criteriaList = list(dict.keys(criteria))
         if sorted:
             criteriaList.sort()
         n = len(criteriaList)
         if Debug:
             print(criteriaList)
         if actionsList == None:
-            actionsList = list(self.actions.keys())
+            actionsList = list(dict.keys(actions))
             if sorted:
                 actionsList.sort()
         else:
@@ -1107,8 +1263,8 @@ The performance evaluations of each decision alternative on each criterion are g
         for x in actionsList:
             writeStr = '"%s",' % x
             for i in range(n-1):
-                writeStr += formatStr % self.evaluation[criteriaList[i]][x] + ','
-            writeStr += formatStr % self.evaluation[criteriaList[n-1]][x] + '\n'
+                writeStr += formatStr % evaluation[criteriaList[i]][x] + ','
+            writeStr += formatStr % evaluation[criteriaList[n-1]][x] + '\n'
             if Debug:
                 print(writeStr)
             fo.write(writeStr)
@@ -1120,19 +1276,36 @@ The performance evaluations of each decision alternative on each criterion are g
         renders minimum and maximum performances on each criterion
         in dictionary form: {'g': {'minimum': x, 'maximum': x}}
         """
+        evaluation = self.evaluation 
         if criteria == None:
-            criteria = [x for x in self.criteria]
+            criteria = self.criteria
+            criteriaKeys = [x for x in dict.keys(criteria)]
+        else:
+            criteriaKeys = criteria
         if actions == None:
-            actions = [x for x in self.actions]
+            actions = self.actions
+            actionsKeys = [x for x in dict.keys(actions)]
+        else:
+            actionsKeys = actions
         result = {}
-        for g in criteria:
+        for g in criteriaKeys:
             result[g] = {}
             evaluations = []
-            for x in actions:
-                evaluations.append(self.evaluation[g][x])
-            evaluations.sort()
-            result[g]['minimum'] = evaluations[0]
-            result[g]['maximum'] = evaluations[-1]
+            for x in actionsKeys:
+                val = evaluation[g][x]
+                if val != Decimal('-999'):
+                    evaluations.append(val)
+            n = len(evaluations)
+            if n > 1:
+                evaluations.sort()
+                result[g]['minimum'] = evaluations[0]
+                result[g]['maximum'] = evaluations[-1]
+            elif n == 1:
+                result[g]['minimum'] = evaluations[0]
+                result[g]['maximum'] = evaluations[0]
+            else:
+                result[g]['minimum'] = Decimal('-999')
+                result[g]['maximum'] = Decimal('-999')
         return result
         
     def showHTMLPerformanceTableau(self,isSorted=True,Transposed=False,ndigits=2):
@@ -1148,155 +1321,371 @@ The performance evaluations of each decision alternative on each criterion are g
         webbrowser.open_new(url)
            
             
-    def htmlPerformanceTable(self,isSorted=True,Transposed=False,ndigits=2):
+    def htmlPerformanceTable(self,isSorted=False,Transposed=False,ndigits=2):
         """
         Renders the performance table citerion x actions in html format.
         """
+        criteria = self.criteria
         minMaxEvaluations = self.computeMinMaxEvaluations()
         html = '<h1>Performance table</h1>'
-        criteriaList = list(self.criteria)
+        criteriaKeys = list(dict.keys(criteria))
         if isSorted:
-            criteriaList.sort()
-        actionsList = list(self.actions)
+            criteriaKeys.sort()
+        actions = self.actions
+        actionsKeys = list(dict.keys(actions))
         if isSorted:
-            actionsList.sort()
+            actionsKeys.sort()
+        evaluation = self.evaluation
         if Transposed:
             html += '<table style="background-color:White;" border="1">'
             html += '<tr bgcolor="#9acd32"><th>criterion</th>'
-            for x in actionsList:
-                html += '<th bgcolor="#FFF79B">%s</th>' % (str(x))
+            for x in actionsKeys:
+                try:
+                    xName = actions[x]['shortName']
+                except:
+                    xName = str(x)
+                html += '<th bgcolor="#FFF79B">%s</th>' % (xName)
             html += '</tr>'
-            for g in criteriaList:
-                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (str(g))
-                for x in actionsList:
+            for g in criteriaKeys:
+                try:
+                    gName = criteria[g]['shortName']
+                except:
+                    gName = str(g)
+                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (gName)
+                for x in actionsKeys:
                     if self.evaluation[g][x] != Decimal("-999"):
-                        if self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
+                        if minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
+                            formatString = '<td align="right">%% .%df</td>' % ndigits
+                            html += formatString % (evaluation[g][x])
+                        elif self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
                             formatString = '<td bgcolor="#ffddff"  align="right">%% .%df</td>' % ndigits
-                            html += formatString % (self.evaluation[g][x])
+                            html += formatString % (evaluation[g][x])
                         elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
                             formatString = '<td bgcolor="#ddffdd" align="right">%% .%df</td>' % ndigits
-                            html += formatString % (self.evaluation[g][x])
+                            html += formatString % (evaluation[g][x])
                         else:
                             formatString = '<td align="right">%% .%df</td>' % ndigits
-                            html += formatString % (self.evaluation[g][x])
+                            html += formatString % (evaluation[g][x])
                             
                     else:
-                        html += '<td align="right"><span style="color: LightGrey;">NA</span></td>'
+                        html += '<td align="right"><span style="color: LightGrey;font-size:75%; ">NA</span></td>'
                 html += '</tr>'
             html += '</table>'
         else:
             html += '<table style="background-color:White;" border="1">'
             html += '<tr bgcolor="#9acd32"><th>criterion</th>'
-            for g in criteriaList:
-                html += '<th bgcolor="#FFF79B">%s</th>' % (str(g))
+            for g in criteriaKeys:
+                try:
+                    gName = criteria[g]['shortName']
+                except:
+                    gName = str(g)
+                html += '<th bgcolor="#FFF79B">%s</th>' % (gName)
             html += '</tr>'
-            for x in actionsList:
-                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (str(x))
-                for g in criteriaList:
+            for x in actionsKeys:
+                try:
+                    xName = actions[x]['shortName']
+                except:
+                    xName = str(x)
+                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (xName)
+                for g in criteriaKeys:
                     if self.evaluation[g][x] != Decimal("-999"):
-                        if self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
+                        if minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
+                            formatString = '<td align="right">%% .%df</td>' % ndigits
+                            html += formatString % (evaluation[g][x])
+                        elif self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
                             formatString = '<td bgcolor="#ffddff"  align="right">%% .%df</td>' % ndigits
-                            html += formatString % (self.evaluation[g][x])
+                            html += formatString % (evaluation[g][x])
                         elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
                             formatString = '<td bgcolor="#ddffdd" align="right">%% .%df</td>' % ndigits
-                            html += formatString % (self.evaluation[g][x])
+                            html += formatString % (evaluation[g][x])
                         else:
                             formatString = '<td align="right">%% .%df</td>' % ndigits
-                            html += formatString % (self.evaluation[g][x])
+                            html += formatString % (evaluation[g][x])
                             
                     else:
-                        html += '<td align="right"><span style="color: LightGrey;">NA</span></td>'
+                        html += '<td align="right"><span style="color: LightGrey;font-size:75%;">NA</span></td>'
                 html += '</tr>'
             html += '</table>'
             
         return html
+
+
+
+    # MCSR serialization added by Ian
+    def to_JSON(self):
+        """
+        Convert the performance table .__dict__ into a JSON string
+        """
+        return json.dumps(self.__dict__,sort_keys=True, indent=4, cls=_DecimalJSONEncoder)
+
+
 ######################################################################################################################
-#####                                                computePerformanceHeatmap                                  ######
+#####                                                showHTMLMCSRPerformanceTableau                             ######
 #####                                                         START                                             ######
 ######################################################################################################################
-    def computePerformanceHeatmap(self,criteriaList=None,
+
+    def showHTMLMCSRPerformanceTableau(self,ndigits=2,title='Min/Max Performance Tableau'):
+
+        """
+        Ask the server for an HTML representation of the performance tableau.
+
+        """
+        import gzip
+        RESTurl = "http://leopold-loewenheim.uni.lu/MCSR_REST_Service/Master_Thesis/performance_Tableau"
+        params = gzip.compress(json.dumps({'typeDict':self.to_JSON(),'precision':ndigits,'title':title}).encode('utf-8'))
+        jsonHeader = {'content-Type': 'application/json','content-Encoding': 'gzip'}
+
+        #urllib
+        import urllib.request
+        req = urllib.request.Request(url=RESTurl, data=params, headers=jsonHeader)
+        resp = urllib.request.urlopen(req)
+        data = resp.read()
+        htmlResp = data.decode('utf-8')
+
+        import tempfile
+        temp=tempfile.NamedTemporaryFile(mode='w+t',delete=False)
+        temp.write(htmlResp)
+        temp.seek(0)
+
+        from urllib.request import pathname2url
+        import os
+        filePath = 'file:{}'.format(pathname2url(os.path.abspath(temp.name)))
+
+        import webbrowser
+        webbrowser.open(filePath)
+
+        temp.close
+#
+######################################################################################################################
+#####                                                showHTMLMCSRPerformanceTableau                              ######
+#####                                                         END                                             ######
+######################################################################################################################
+
+
+    # precision string needed to round decimals
+    def _calcPrecision(self,ndigits):
+        if(ndigits!=0):
+            precision='0.'
+        else:
+            precision='0'
+        for x in range(ndigits):
+            precision+='0'
+        return precision
+
+
+######################################################################################################################
+#####                                                computeMCSRPerformanceTableau                              ######
+#####                                                         START                                             ######
+######################################################################################################################
+    def computeMCSRPerformanceTableau(self,isSorted=True,
+                               ndigits=2,title='Min/Max Performance Tableau',Debug=False):
+
+        """
+        Computes the performance table in a JSON compatible format with minima and maxima. Used by the Web API.
+
+        For a performance tableau with 5 criteria one obtains for instance
+        the following ordered dictionary in return::
+
+            OrderedDict([
+                ('title', 'Min/Max Performance Tableau'),
+                ('precision', 2),
+                ('criteriaList', OrderedDict([('0','g5'), ('1','g2'), ('2','g4'), ('3','g1'), ('4','g3')]),
+                ('quantiles', OrderedDict([
+                                           ('0',{'a1':OrderedDict([
+                                                             ('0',{'quantile':Decimal('3'), 'qantileClass':'minimum'}),
+                                                             ('1',{'quantile':Decimal('-17.92'), 'qantileClass':'default'}),
+                                                             ('2',{'quantile':Decimal('26.68'), 'qantileClass':'maximum'}),
+                                                             ('3',{'quantile':'NaN, 'qantileClass':'NaN'}),
+                                                             ('4',{'quantile':Decimal('-33.99'), 'qantileClass':'default'})
+                                           ])}),
+                                           ('1',{'a2':OrderedDict([
+                                                             ('0',{'quantile':Decimal('6'), 'qantileClass':'minimum'}),
+                                                             ('1',{'quantile':Decimal('-30.71'), 'qantileClass':'default'}),
+                                                             ('2',{'quantile':'NaN', 'qantileClass':'NaN'}),
+                                                             ('3',{'quantile':Decimal('8'), 'qantileClass':'maximum'}),
+                                                             ('4',{'quantile':Decimal('-77.77'), 'qantileClass':'default'})
+                                           ])}),
+                                           ('2', ...
+                ]))...
+            ]))
+
+        """
+
+        if Debug: print('/nSTART: computeMCSRPerformanceTableau')
+
+        from collections import OrderedDict
+        from decimal import Decimal
+        from digraphs import flatten
+        performanceTableau = {}
+        performanceTableau['title'] = title
+
+        min="minimum"
+        max="maximum"
+
+        minMaxEvaluations = self.computeMinMaxEvaluations()
+
+        performanceTableau["precision"] = ndigits
+
+        if Debug: print('/nSTART: Calculating criteria list')
+
+        #need a dict, but list(self.criteria) is not a dict
+        #therefore I need to construct criteriaList as a dict first
+        criteriaList = {}
+        tempCriteria= list(self.criteria)
+        if isSorted:
+            tempCriteria.sort()
+        for index,c in enumerate(tempCriteria):
+            criteriaList[str(index)] = c
+        criteriaList = OrderedDict(sorted(criteriaList.items(),key=lambda index: int(index[0])))
+
+        if Debug: print('/nDONE: Calculating criteria list')
+
+        performanceTableau["criteriaList"] = criteriaList
+
+        actionsList = list(self.actions)
+        if isSorted:
+            actionsList.sort()
+
+        precision = self._calcPrecision(ndigits)
+
+        if Debug: print('/nSTART: Calculating quantiles')
+
+        quantiles=OrderedDict()
+        for index, x in enumerate(actionsList):
+            quantiles[str(index)] = OrderedDict()
+            quantiles[str(index)][x] = {}
+            for gKey,gValue in criteriaList.items():
+                quantilexg = self.computeActionCriterionQuantile(x,gValue)
+                if quantilexg != 'NA':
+                    quantile=self.evaluation[gValue][x]
+                    constantQuantile = (minMaxEvaluations[gValue]['minimum'] == minMaxEvaluations[gValue]['maximum'])
+                    if quantile != Decimal("-999"):
+                        if ((quantile == minMaxEvaluations[gValue]['minimum']) and (not constantQuantile)):
+                            quantiles[str(index)][x][gKey]={'quantile':quantile.quantize(Decimal(precision),rounding=decimal.ROUND_DOWN),
+                                                            'quantileClass':min}
+                        elif ((quantile == minMaxEvaluations[gValue]['maximum']) and (not constantQuantile)):
+                            quantiles[str(index)][x][gKey]={'quantile':quantile.quantize(Decimal(precision),rounding=decimal.ROUND_DOWN),
+                                                            'quantileClass':max}
+                        else:
+                            quantiles[str(index)][x][gKey]={'quantile':quantile.quantize(Decimal(precision),rounding=decimal.ROUND_DOWN),
+                                                            'quantileClass':"default"}
+
+                else:
+                    quantiles[str(index)][x][gKey]={'quantile':"NaN",
+                                                            'quantileClass':"NaN"}
+                    # break
+            quantiles[str(index)]={x:OrderedDict(sorted(quantiles[str(index)][x].items(),key=lambda index: int(index[0])))}
+
+        if Debug: print('/nDONE: Calculating quantiles')
+
+        quantiles=OrderedDict(sorted(quantiles.items(),key=lambda index: int(index[0])))
+        performanceTableau['quantiles'] = quantiles
+
+        if Debug: print('/nDONE: computeMCSRPerformanceTableau')
+
+        return performanceTableau
+
+######################################################################################################################
+#####                                                computeMCSRPerformanceTableau                            ######
+#####                                                         END                                             ######
+######################################################################################################################
+
+
+######################################################################################################################
+#####                                                computeMCSRPerformanceHeatmap                              ######
+#####                                                         START                                             ######
+######################################################################################################################
+    def computeMCSRPerformanceHeatmap(self,criteriaList=None,
                                actionsList=None,
                                ndigits=2,
                                colorLevels=7,
+                               Ranked=True,
                                title='Performance Heatmap',
                                Correlations=False,
                                Threading=False,
                                Debug=False):
         """
-        Renders the Brewer RdYlGn colored heatmap of the performance table
+        Computes the Brewer RdYlGn colored heatmap of the performance table
         actions x criteria in ordered dictionary format. Three color levels (5,7 or 9)
-        are provided.
+        are provided. Used by the Web API.
 
         For a performance tableau with 5 criteria, colorLevels=5 and
         Correlations = True, one obtains for instance
         the following ordered dictionary in return::
 
             OrderedDict([
-            ('title', 'Performance Heatmap'),
-            ('colorPalette', [(Decimal('0.2'), '"#FDAE61"', 'q5-1'),
-                              (Decimal('0.4'), '"#FEE08B"', 'q5-2'),
-                              (Decimal('0.6'), '"#FFFFBF"', 'q5-3'),
-                              (Decimal('0.8'), '"#D9EF8B"', 'q5-4'),
-                              (Decimal('1.0'), '"#A6D96A"', 'q5-5')]),
-            ('criteriaList', ['g5', 'g2', 'g4', 'g1', 'g3']),
-            ('criteriaCorrelations', [Decimal('0.71428'),
-                                      Decimal('0.48571'),
-                                      Decimal('0.40952'),
-                                      Decimal('0.35238'),
-                                      Decimal('0.16190')]),
-            ('quantiles', OrderedDict([('a1', [(Decimal('3'), 'q5-2'),
-                                               (Decimal('-17.92'), 'q5-5'),
-                                               (Decimal('26.68'), 'q5-2'),
-                                               (Decimal('1'), 'q5-1'),
-                                               (Decimal('-33.99'), 'q5-3')]),
-                                       ('a2', [(Decimal('6'), 'q5-3'),
-                                               (Decimal('-30.71'), 'q5-5'),
-                                               (Decimal('66.35'), 'q5-4'),
-                                               (Decimal('8'), 'q5-5'),
-                                               (Decimal('-77.77'), 'q5-2')]),
-                                       ('a3', ...
-            ...
-            ])
+                ('title', 'Performance Heatmap'),
+                ('precision', 2),
+                ('colorPalette', OrderedDict([
+                                  ('0',{'quantile':Decimal('0.2'),'quantileClass':'q5_1'}),
+                                  ('1',{'quantile':Decimal('0.4'),'quantileClass':'q5_2'}),
+                                  ('2',{'quantile':Decimal('0.6'),'quantileClass':'q5_3'}),
+                                  ('3',{'quantile':Decimal('0.8'),'quantileClass':'q5_4'}),
+                                  ('4',{'quantile':Decimal('1.0'),'quantileClass':'q5_5'})
+                ])),
+                ('criteriaList', OrderedDict([('0','g5'), ('1','g2'), ('2','g4'), ('3','g1'), ('4','g3')]),
+                ('criteriaCorrelations', OrderedDict([
+                                                     ('0',Decimal('0.71428')),
+                                                     ('1',Decimal('0.48571')),
+                                                     ('2',Decimal('0.40952')),
+                                                     ('3',Decimal('0.35238')),
+                                                     ('4',Decimal('0.16190'))
+                ])),
+                ('quantiles', OrderedDict([
+                                           ('0',{'a1':OrderedDict([
+                                                             ('0',{'quantile':Decimal('3'), 'qantileClass':'q5-2'}),
+                                                             ('1',{'quantile':Decimal('-17.92'), 'qantileClass':'q5-5'}),
+                                                             ('2',{'quantile':Decimal('26.68'), 'qantileClass':'q5-2'}),
+                                                             ('3',{'quantile':Decimal('1'), 'qantileClass':'q5-1'}),
+                                                             ('4',{'quantile':Decimal('-33.99'), 'qantileClass':'q5-3'})
+                                           ])}),
+                                           ('1',{'a2':OrderedDict([
+                                                             ('0',{'quantile':Decimal('6'), 'qantileClass':'q5-3'}),
+                                                             ('1',{'quantile':Decimal('-30.71'), 'qantileClass':'q5-5'}),
+                                                             ('2',{'quantile':Decimal('66.35'), 'qantileClass':'q5-4'}),
+                                                             ('3',{'quantile':Decimal('8'), 'qantileClass':'q5-5'}),
+                                                             ('4',{'quantile':Decimal('-77.77'), 'qantileClass':'q5-3'})
+                                           ])}),
+                                           ('2', ...
+                ]))...
+            ]))
 
         """
+        if Debug: print('/nSTART: computeMCSRPerformanceHeatmap')
+
         from collections import OrderedDict
         from decimal import Decimal
         from digraphs import flatten
         heatmap = OrderedDict()
         heatmap['title'] = title
 
-        print(" ")
-        print("TESTING ")
-        print(" ")
-        print("TESTING ALTERNATIVES")
-        print(" ")
-        print(" ")
+        heatmap["precision"] = ndigits
 
-        brewerRdYlGn9Colors = {'0':{'quantile':Decimal('0.1111'),'colourValue':"#D53E4F",'quantileClass':"q9_1"},
-                               '1':{'quantile':Decimal('0.2222'),'colourValue':"#F46D43",'quantileClass':"q9_2"},
-                               '2':{'quantile':Decimal('0.3333'),'colourValue':"#FDAE61",'quantileClass':"q9_3"},
-                               '3':{'quantile':Decimal('0.4444'),'colourValue':"#FEE08B",'quantileClass':"q9_4"},
-                               '4':{'quantile':Decimal('0.5555'),'colourValue':"#FFFFBF",'quantileClass':"q9_5"},
-                               '5':{'quantile':Decimal('0.6666'),'colourValue':"#D9EF8B",'quantileClass':"q9_6"},
-                               '6':{'quantile':Decimal('0.7777'),'colourValue':"#A6D96A",'quantileClass':"q9_7"},
-                               '7':{'quantile':Decimal('0.8888'),'colourValue':"#65BD63",'quantileClass':"q9_8"},
-                               '8':{'quantile':Decimal('1.0000'),'colourValue':"#1A9850",'quantileClass':"q9_9"}
+        brewerRdYlGn9Colors = {'0':{'quantile':Decimal('0.1111'),'quantileClass':"q9_1"},
+                               '1':{'quantile':Decimal('0.2222'),'quantileClass':"q9_2"},
+                               '2':{'quantile':Decimal('0.3333'),'quantileClass':"q9_3"},
+                               '3':{'quantile':Decimal('0.4444'),'quantileClass':"q9_4"},
+                               '4':{'quantile':Decimal('0.5555'),'quantileClass':"q9_5"},
+                               '5':{'quantile':Decimal('0.6666'),'quantileClass':"q9_6"},
+                               '6':{'quantile':Decimal('0.7777'),'quantileClass':"q9_7"},
+                               '7':{'quantile':Decimal('0.8888'),'quantileClass':"q9_8"},
+                               '8':{'quantile':Decimal('1.0000'),'quantileClass':"q9_9"}
                                }
 
-        brewerRdYlGn7Colors = {'0':{'quantile':Decimal('0.1429'),'colourValue':"#F46D43",'quantileClass':'q7_1'},
-                               '1':{'quantile':Decimal('0.2857'),'colourValue':"#FDAE61",'quantileClass':'q7_2'},
-                               '2':{'quantile':Decimal('0.4286'),'colourValue':"#FEE08B",'quantileClass':'q7_3'},
-                               '3':{'quantile':Decimal('0.5714'),'colourValue':"#FFFFBF",'quantileClass':'q7_4'},
-                               '4':{'quantile':Decimal('0.7143'),'colourValue':"#D9EF8B",'quantileClass':'q7_5'},
-                               '5':{'quantile':Decimal('0.8571'),'colourValue':"#A6D96A",'quantileClass':'q7_6'},
-                               '6':{'quantile':Decimal('1.0000'),'colourValue':"#65BD63",'quantileClass':'q7_7'}
+        brewerRdYlGn7Colors = {'0':{'quantile':Decimal('0.1429'),'quantileClass':'q7_1'},
+                               '1':{'quantile':Decimal('0.2857'),'quantileClass':'q7_2'},
+                               '2':{'quantile':Decimal('0.4286'),'quantileClass':'q7_3'},
+                               '3':{'quantile':Decimal('0.5714'),'quantileClass':'q7_4'},
+                               '4':{'quantile':Decimal('0.7143'),'quantileClass':'q7_5'},
+                               '5':{'quantile':Decimal('0.8571'),'quantileClass':'q7_6'},
+                               '6':{'quantile':Decimal('1.0000'),'quantileClass':'q7_7'}
         }
 
-        brewerRdYlGn5Colors = {'0':{'quantile':Decimal('0.2'),'colourValue':"#FDAE61",'quantileClass':'q5_1'},
-                               '1':{'quantile':Decimal('0.4'),'colourValue':"#FEE08B",'quantileClass':'q5_2'},
-                               '2':{'quantile':Decimal('0.6'),'colourValue':"#FFFFBF",'quantileClass':'q5_3'},
-                               '3':{'quantile':Decimal('0.8'),'colourValue':"#D9EF8B",'quantileClass':'q5_4'},
-                               '4':{'quantile':Decimal('1.0'),'colourValue':"#A6D96A",'quantileClass':'q5_5'}
+        brewerRdYlGn5Colors = {'0':{'quantile':Decimal('0.2'),'quantileClass':'q5_1'},
+                               '1':{'quantile':Decimal('0.4'),'quantileClass':'q5_2'},
+                               '2':{'quantile':Decimal('0.6'),'quantileClass':'q5_3'},
+                               '3':{'quantile':Decimal('0.8'),'quantileClass':'q5_4'},
+                               '4':{'quantile':Decimal('1.0'),'quantileClass':'q5_5'}
         }
 
         if colorLevels == 7:
@@ -1313,63 +1702,81 @@ The performance evaluations of each decision alternative on each criterion are g
 
         nc = len(colorPalette)
 
+        if Debug: print('/nSTART: Calculating action list')
+
+        if Ranked and actionsList == None:
+            from weakOrders import QuantilesRankingDigraph
+            qsr = QuantilesRankingDigraph(self,LowerClosed=True,
+                                          Threading=Threading,
+                                          Debug=Debug)
+            actionsList = [x for x in flatten(qsr.computeQsRbcRanking())]
+            
+        else:
+            if actionsList == None:
+                actionsList = list(self.actions.keys())
+                actionsList.sort()
+
+        if Debug: print('/nDONE: Calculating action list')
+
+        if Debug: print('/nSTART: Calculating criteria list and correlations/weights')
 
         if criteriaList == None:
-            from outrankingDigraphs import BipolarOutrankingDigraph
-            g = BipolarOutrankingDigraph(self,Threading=Threading)
+            from outrankingDigraphs import OutrankingDigraph
             if Correlations:
-                criteriaCorrelations = g.showMarginalVersusGlobalOutrankingCorrelation(
+                criteriaCorrelations = OutrankingDigraph.showMarginalVersusGlobalOutrankingCorrelation(
+                    qsr,
                     Threading=Threading,
                     Comments=False)
                 criteriaList={}
                 correlations={}
+
+                criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
+                criteriaWeightsList.sort(reverse=True)
+
+                criteriaWeights={}
                 for index,c in enumerate(criteriaCorrelations):
                     criteriaList[str(index)]=c[1]
                     correlations[str(index)]=c[0]
+                    for indexW,g in enumerate(criteriaWeightsList):
+                     if (g[1]==c[1]):
+                         criteriaWeights[str(index)]=g[0]
+                         break
             else:
                 criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
                 criteriaWeightsList.sort(reverse=True)
                 criteriaList={}
-                criteriaIndex=0
+                criteriaWeights={}
                 for index,g in enumerate(criteriaWeightsList):
                     criteriaList[str(index)]=g[1]
+                    criteriaWeights[str(index)]=g[0]
 
-                #criteriaList.sort()
                 criteriaCorrelations = None
         else:
             criteriaCorrelations = None
 
-        criteriaList= OrderedDict(sorted(criteriaList.items()))
+        if Debug: print('/nDONE: Calculating criteria list and correlations/weights')
+
+        criteriaList= OrderedDict(sorted(criteriaList.items(),key=lambda index: int(index[0])))
         heatmap['criteriaList'] = criteriaList
+
         if criteriaCorrelations != None:
-            correlations= OrderedDict(sorted(correlations.items()))
+            correlations= OrderedDict(sorted(correlations.items(),key=lambda index: int(index[0])))
             heatmap['criteriaCorrelations'] = correlations
-#temporary
-        heatmap['criteriaCorrelations'] = OrderedDict()
-        for index, crit in colorPalette.items():
-            heatmap['criteriaCorrelations'][index] = 34
-#temporary
 
-        #print(heatmap['criteriaCorrelations'])
-        print(" ")
-        print("TESTING ALTERNATIVES")
-        print(" ")
-        print("TESTING ALTERNATIVES")
-        print(" ")
-        print(" ")
-
-
-        if actionsList == None:
-            actionsList = list(self.actions.keys())
-            actionsList.sort()
+            criteriaWeights= OrderedDict(sorted(criteriaWeights.items(),key=lambda index: int(index[0])))
+            heatmap['criteriaWeights'] = criteriaWeights
         else:
-            actionsList = [x for x in flatten(actionsList)]
+            criteriaWeights= OrderedDict(sorted(criteriaWeights.items(),key=lambda index: int(index[0])))
+            heatmap['criteriaWeights'] = criteriaWeights
 
-        #heatmap['actionsList'] = actionsList
+        precision = self._calcPrecision(ndigits)
+
+        if Debug: print('/nSTART: Calculating quantiles')
 
         quantiles=OrderedDict()
-        for x in actionsList:
-            quantiles[x] = OrderedDict()
+        for index, x in enumerate(actionsList):
+            quantiles[str(index)] = OrderedDict()
+            quantiles[str(index)][x] = {}
             for gKey,gValue in criteriaList.items():
                 quantilexg = self.computeActionCriterionQuantile(x,gValue)
                 if Debug:
@@ -1379,32 +1786,27 @@ The performance evaluations of each decision alternative on each criterion are g
                         if Debug:
                             print(i, colorPalette[str(i)]['quantile'])
 
-
                         if quantilexg <= colorPalette[str(i)]['quantile']:
-                            #quantiles[x].append((self.evaluation[gValue][x],colorPalette[i]['quantileClass']))
-                            quantiles[x][gKey]={'quantile':self.evaluation[gValue][x],
+                            quantiles[str(index)][x][gKey]={'quantile':self.evaluation[gValue][x].quantize(Decimal(precision),rounding=decimal.ROUND_DOWN),
                                              'quantileClass':colorPalette[str(i)]['quantileClass']}
                             break
                 else:
-                    break
+                    quantiles[str(index)][x][gKey]={'quantile':"NaN",
+                                             'quantileClass':"NaN"}
                 if Debug:
-                    print(x,g,quantiles[x][gValue])
-            quantiles[x] = OrderedDict(sorted(quantiles[x].items()))
+                    print(x,gValue,quantiles[index][x][gValue])
+            quantiles[str(index)]={x:OrderedDict(sorted(quantiles[str(index)][x].items(),key=lambda index: int(index[0])))}
 
-        for key, value in quantiles.items():
-            print(key)
-        print(" ")
-        print("TESTING ALTERNATIVES")
-        print(" ")
-        print("TESTING ALTERNATIVES")
-        print(" ")
-        print(" ")
+        if Debug: print('/nSTART: Calculating quantiles')
 
-        heatmap['quantiles'] = OrderedDict(sorted(quantiles.items()))
+
+        heatmap['quantiles'] = OrderedDict(sorted(quantiles.items(),key=lambda index: int(index[0])))
+
+        if Debug: print('/nDONE: computeMCSRPerformanceHeatmap')
         return heatmap 
 
 ######################################################################################################################
-#####                                                computePerformanceHeatmap                                  ######
+#####                                                computeMCSRPerformanceHeatmap                            ######
 #####                                                         END                                             ######
 ######################################################################################################################
 
@@ -1414,6 +1816,8 @@ The performance evaluations of each decision alternative on each criterion are g
                                    pageTitle=None,
                                    ndigits=2,
                                    Ranked=True,
+                                   quantiles=None,
+                                   strategy='optimistic',
                                    Correlations=False,
                                    Threading=False,
                                    Debug=False):
@@ -1424,22 +1828,18 @@ The performance evaluations of each decision alternative on each criterion are g
         fileName = '/tmp/performanceHeatmap.html'
         fo = open(fileName,'w')
         if pageTitle == None:
-            pageTitle = 'Heatmap of performance tableau %s' % self.name
-        if Ranked and actionsList == None:
-            from weakOrders import QuantilesRankingDigraph
-            qsr = QuantilesRankingDigraph(self,LowerClosed=True,
-                                          Threading=Threading,
-                                          Debug=Debug)
-            actionsList = qsr.computeQsRbcRanking()
-            if Debug:
-                print(actionsList)
+            pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
             
         fo.write(self.htmlPerformanceHeatmap(criteriaList=criteriaList,
                                              actionsList=actionsList,
+                                             Ranked=Ranked,
+                                             quantiles=quantiles,
+                                             strategy=strategy,
                                              ndigits=ndigits,
                                              colorLevels=colorLevels,
                                              pageTitle=pageTitle,
                                              Correlations=Correlations,
+                                             Threading=Threading,
                                              Debug=Debug))
         fo.close()
         url = 'file://'+fileName
@@ -1447,18 +1847,20 @@ The performance evaluations of each decision alternative on each criterion are g
 
     def htmlPerformanceHeatmap(self,criteriaList=None,
                                actionsList=None,
+                               Ranked=True,
+                               quantiles=None,
+                               strategy='average',
                                ndigits=2,
+                               contentCentered=True,
                                colorLevels=None,
                                pageTitle='Performance Heatmap',
                                Correlations=False,
                                Threading=False,
                                Debug=False):
         """
-        Renders the Brewer RdYlGn 9-colored heatmap of the performance table
+        Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
         actions x criteria in html format.
         """
-        #import itertools as IT
-        #import collections
         from decimal import Decimal
         from digraphs import flatten
                     
@@ -1502,30 +1904,72 @@ The performance evaluations of each decision alternative on each criterion are g
         naColor           = '"#FFFFFF"'
         columnHeaderColor = '"#CCFFFF"'
         rowHeaderColor    = '"#FFFFFF"'
-        html = '<h2>%s</h2>' % pageTitle
-        
-        if criteriaList == None:
+
+        html = '<!DOCTYPE html><html><head>\n'
+        html += '<title>%s</title>\n' % 'Digraph3 performance heat map'
+        html += '<style type="text/css">\n'
+        #html += 'table {border-collapse: collapse;}'
+        if contentCentered:
+            html += 'td {text-align: center;}\n'
+        html += 'td.na {color: rgb(192,192,192);}\n'
+        html += '</style>\n'
+        html += '</head>\n<body>\n'
+        html += '<h2>%s</h2>\n' % pageTitle
+
+        actions = self.actions
+        na = len(actions)
+        if Ranked:
+##            from weakOrders import QuantilesRankingDigraph
+##            qr = QuantilesRankingDigraph(self,LowerClosed=False,
+##                                          strategy=strategy,
+##                                          Threading=Threading,
+##                                          Debug=Debug)
+##            actionsList = [x for x in flatten(qr.computeQsRbcRanking())]
+            if quantiles == None:
+                quantiles = na
             from outrankingDigraphs import BipolarOutrankingDigraph
-            g = BipolarOutrankingDigraph(self,Threading=Threading)
+            from linearOrders import NetFlowsOrder
+            g = BipolarOutrankingDigraph(self,Normalized=True)
+            actionsList = g.computeNetFlowsRanking()
+##            from bigOutrankingDigraphs import BigOutrankingDigraphMP
+##            qr = BigOutrankingDigraphMP(self,quantiles=quantiles,LowerClosed=False,
+##                                        quantilesOrderingStrategy=strategy,
+##                                        WithNetFlowsOrdering=True,
+##                                        Threading=Threading,
+##                                        Debug=Debug)
+##            actionsList = qr.boostedNetFlowsRanking
+        elif actionsList == None:
+            actionsList = list(dict.keys(actions))
+            actionsList.sort()
+        
+        if Debug:
+            print('1',actionsList)
+
+        criteria = self.criteria
+        if criteriaList == None:
             if Correlations:
-                criteriaCorrelation =\
-                    g.showMarginalVersusGlobalOutrankingCorrelation(\
-                            Threading=Threading,\
-                            Comments=False)
-                criteriaList = [c[1] for c in criteriaCorrelation]
+                if Ranked:       
+                    criteriaCorrelation =\
+                        g.computeMarginalVersusGlobalRankingCorrelations(\
+                                actionsList,Threading=Threading)
+                    criteriaList = [c[1] for c in criteriaCorrelation]
+                else:
+                    criteriaList = list(criteria.keys())
+                    criteriaList.sort()
+                    criteriaWeightsList = [(-criteria[g]['weight'],g) for g in criteriaList]
+                    criteriaWeightsList.sort(reverse=False)
+                    criteriaList = [g[1] for g in criteriaWeightsList]
+                    criteriaCorrelation = None    
             else:
-                criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
-                criteriaWeightsList.sort(reverse=True)
+                criteriaList = list(criteria.keys())
+                criteriaList.sort()
+                criteriaWeightsList = [(-criteria[g]['weight'],g) for g in criteriaList]
+                criteriaWeightsList.sort(reverse=False)
                 criteriaList = [g[1] for g in criteriaWeightsList]
                 criteriaCorrelation = None    
         else:
             criteriaCorrelation = None
-    
-        if actionsList == None:
-            actionsList = list(self.actions.keys())
-            actionsList.sort()
-        else:
-            actionsList = [x for x in flatten(actionsList)]
+            
         quantileColor={}
         for x in actionsList:
             quantileColor[x] = {}
@@ -1547,7 +1991,7 @@ The performance evaluations of each decision alternative on each criterion are g
                     print(x,g,quantileColor[x][g])
         # legend            
 ##        html += '<i>Color legend: </i>\n'
-##        html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
+##        html += '<table style="background-color:%s; border-collapse: collapse;" border="1">\n' % (backGroundColor) 
 ##        html += '<tr bgcolor=%s><th>quantile</th>' % (columnHeaderColor)
 ##        for col in range(nc):
 ##            html += '<td bgcolor=%s>%s</td>' % (colorPalette[col][1],str(colorPalette[col][0]))
@@ -1557,7 +2001,11 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
         html += '<tr bgcolor=%s><th>criteria</th>' % (columnHeaderColor)
         for g in criteriaList:
-            html += '<th>%s</th>' % (str(g))
+            try:
+                gName = self.criteria[g]['shortName']
+            except:
+                gName = str(g)
+            html += '<th>%s</th>' % (gName)
         html += '</tr>\n'
         html += '<tr><th bgcolor=%s>weights</th>' % (columnHeaderColor)
         for g in criteriaList:
@@ -1571,13 +2019,17 @@ The performance evaluations of each decision alternative on each criterion are g
         if Debug:
             print(html)
         for x in actionsList:
-            html += '<tr><th bgcolor=%s>%s</th>' % (rowHeaderColor,str(x))
+            try:
+                xName = self.actions[x]['shortName']
+            except:
+                xName = str(x)
+            html += '<tr><th bgcolor=%s>%s</th>' % (rowHeaderColor,xName)
             for g in criteriaList:
                 if self.evaluation[g][x] != Decimal("-999"):
                     formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
                     html += formatString % (self.evaluation[g][x])
                 else:
-                    html += '<td bgcolor=%s>NA</td>' % naColor
+                    html += '<td bgcolor=%s class="na">NA</td>' % naColor
                 if Debug:
                     print(html)
             html += '</tr>\n'
@@ -1594,152 +2046,9 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</tr>\n'
         html += '</table>\n'
         if criteriaCorrelation != None:
-            html += '<i>(*) tau: Ordinal (Kendall) correlation of marginal criterion and global outranking relation.</i>\n'
-
+            html += '<i>(*) tau: Ordinal (Kendall) correlation between marginal criterion and global ranking relation.</i>\n'
+        html += '</body></html>'
         return html
-
-    def computePerformanceHeatmap(self,criteriaList=None,
-                               actionsList=None,
-                               ndigits=2,
-                               colorLevels=7,
-                               title='Performance Heatmap',
-                               Correlations=False,
-                               Threading=False,
-                               Debug=False):
-        """
-        Renders the Brewer RdYlGn colored heatmap of the performance table
-        actions x criteria in dictionary format. Three color levels (5,7 or 9)
-        are provided.
-
-        For a performance tableau with 5 criteria, colorLevels=5 and
-        Correlations = True, one obtains for instance
-        the following ordered dictionary in return::
-
-            OrderedDict([
-            ('title', 'Performance Heatmap'),
-            ('colorPalette', [(Decimal('0.2'), '"#FDAE61"', 'q5-1'),
-                              (Decimal('0.4'), '"#FEE08B"', 'q5-2'),
-                              (Decimal('0.6'), '"#FFFFBF"', 'q5-3'),
-                              (Decimal('0.8'), '"#D9EF8B"', 'q5-4'),
-                              (Decimal('1.0'), '"#A6D96A"', 'q5-5')]),
-            ('criteriaList', ['g5', 'g2', 'g4', 'g1', 'g3']),
-            ('criteriaCorrelations', [Decimal('0.71428'),
-                                      Decimal('0.48571'),
-                                      Decimal('0.40952'),
-                                      Decimal('0.35238'),
-                                      Decimal('0.16190')]),
-            ('quantiles', OrderedDict([('a1', [(Decimal('3'), 'q5-2'),
-                                               (Decimal('-17.92'), 'q5-5'),
-                                               (Decimal('26.68'), 'q5-2'),
-                                               (Decimal('1'), 'q5-1'),
-                                               (Decimal('-33.99'), 'q5-3')]),
-                                       ('a2', [(Decimal('6'), 'q5-3'),
-                                               (Decimal('-30.71'), 'q5-5'),
-                                               (Decimal('66.35'), 'q5-4'),
-                                               (Decimal('8'), 'q5-5'),
-                                               (Decimal('-77.77'), 'q5-2')]),
-                                       ('a3', ...
-            ...
-            ])
-
-        """
-        from collections import OrderedDict
-        from decimal import Decimal
-        from digraphs import flatten
-        heatmap = OrderedDict()
-        heatmap['title'] = title
-                  
-        brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#D53E4F"','q9-1'),
-                               (Decimal('0.2222'),'"#F46D43"','q9-2'),
-                               (Decimal('0.3333'),'"#FDAE61"','q9-3'),
-                               (Decimal('0.4444'),'"#FEE08B"','q9-4'),
-                               (Decimal('0.5555'),'"#FFFFBF"','q9-5'),
-                               (Decimal('0.6666'),'"#D9EF8B"','q9-6'),
-                               (Decimal('0.7777'),'"#A6D96A"','q9-7'),
-                               (Decimal('0.8888'),'"#65BD63"','q9-8'),
-                               (Decimal('1.0000'),'"#1A9850"','q9-9')]
-        brewerRdYlGn7Colors = [
-                               (Decimal('0.1429'),'"#F46D43"','q7-1'),
-                               (Decimal('0.2857'),'"#FDAE61"','q7-2'),
-                               (Decimal('0.4286'),'"#FEE08B"','q7-3'),
-                               (Decimal('0.5714'),'"#FFFFBF"','q7-4'),
-                               (Decimal('0.7143'),'"#D9EF8B"','q7-5'),
-                               (Decimal('0.8571'),'"#A6D96A"','q7-6'),
-                               (Decimal('1.0000'),'"#65BD63"','q7-7')
-                               ]
-        brewerRdYlGn5Colors = [
-                               (Decimal('0.2'),'"#FDAE61"','q5-1'),
-                               (Decimal('0.4'),'"#FEE08B"','q5-2'),
-                               (Decimal('0.6'),'"#FFFFBF"','q5-3'),
-                               (Decimal('0.8'),'"#D9EF8B"','q5-4'),
-                               (Decimal('1.0'),'"#A6D96A"','q5-5')
-                               ]
-        if colorLevels == 7:
-            colorPalette = brewerRdYlGn7Colors
-        elif colorLevels == 9:
-            colorPalette = brewerRdYlGn9Colors
-        elif colorLevels == 5:
-            colorPalette = brewerRdYlGn5Colors
-        else:
-            colorPalette = brewerRdYlGn7Colors
-
-        heatmap['colorPalette'] = colorPalette
-            
-        nc = len(colorPalette)
-
-        if criteriaList == None:
-            from outrankingDigraphs import BipolarOutrankingDigraph
-            g = BipolarOutrankingDigraph(self,Threading=Threading)
-            if Correlations:
-                criteriaCorrelations = \
-                    g.showMarginalVersusGlobalOutrankingCorrelation(\
-                            Threading=Threading,\
-                            Comments=False)
-                criteriaList = [c[1] for c in criteriaCorrelations]
-                correlations = [c[0] for c in criteriaCorrelations]
-            else:
-                criteriaWeightsList = [(self.criteria[g]['weight'],g) for g in self.criteria.keys()]
-                criteriaWeightsList.sort(reverse=True)
-                criteriaList = [g[1] for g in criteriaWeightsList]
-                criteriaList.sort()
-                criteriaCorrelations = None
-        else:
-            criteriaCorrelations = None
-
-        heatmap['criteriaList'] = criteriaList
-        if criteriaCorrelations != None:
-            heatmap['criteriaCorrelations'] = correlations
-        
-        if actionsList == None:
-            actionsList = list(self.actions.keys())
-            actionsList.sort()
-        else:
-            actionsList = [x for x in flatten(actionsList)]
-
-        #heatmap['actionsList'] = actionsList
-        
-        quantiles=OrderedDict()
-        for x in actionsList:
-            quantiles[x] = []
-            for g in criteriaList:
-                quantilexg = self.computeActionCriterionQuantile(x,g)
-                if Debug:
-                    print(x,g,quantilexg)
-                if quantilexg != 'NA':
-                    for i in range(nc):
-                        if Debug:
-                            print(i, colorPalette[i][0])
-                        
-                        if quantilexg <= colorPalette[i][0]:
-                            quantiles[x].append((self.evaluation[g][x],
-                                                 colorPalette[i][2]))
-                            break
-                else:
-                    quantiles[x][g] = naColor
-                if Debug:
-                    print(x,g,quantiles[x][g])
-        heatmap['quantiles'] = quantiles
-        return heatmap
 
     def computeWeightPreorder(self):
         """
@@ -1829,36 +2138,83 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         print('*--- Saving performance tableau in file: <' + str(fileName) + '.py> ---*')
         actions = self.actions
+        try:
+            objectives = self.objectives
+        except:
+            objectives = {}
         criteria = self.criteria
         evaluation = self.evaluation
         fileNameExt = str(fileName)+str('.py')
         fo = open(fileNameExt, 'w')
         fo.write('# Saved performance Tableau: \n')
         fo.write('from decimal import Decimal\n')
-        fo.write('actions = {\n')
+        fo.write('from collections import OrderedDict\n')
+        # actions
+        fo.write('actions = OrderedDict([\n')
         for x in actions:
-            fo.write('\'%s\': {\'name\': \'%s\'},\n' %(x,x))
-        fo.write('}\n')
-        fo.write('criteria = {\n') 
+            fo.write('(\'%s\', {\n' % str(x))
+            for it in self.actions[x].keys():
+                fo.write('\'%s\': %s,\n' % (it,repr(self.actions[x][it])) )
+            fo.write('}),\n')
+##            try:
+##                xnameString = actions[x]['name']
+##            except:
+##                xnameString = str(x)
+##            try:
+##                xcommentString = actions[x]['comment']
+##            except:
+##                xcommentString = ''
+##            fo.write('(\'%s\', {\'name\': \'%s\',\'comment\':\'%s\'}),\n' %(x,xnameString,xcommentString))
+##            
+        fo.write('])\n')
+        # objectives
+        fo.write('objectives = OrderedDict([\n')
+        for obj in objectives:
+            fo.write('(\'%s\', {\n' % str(obj))
+            for it in self.objectives[obj].keys():
+                fo.write('\'%s\': %s,\n' % (it,repr(self.objectives[obj][it])))
+            fo.write('}),\n')
+##            fo.write( '(\'%s\', {\'name\': \'%s\',\n' % (obj,objectives[obj]['name']) )
+##            weightString = '%%.%df' % (valueDigits)
+##            objString = '\'criteria\': %s, \'weight\':'+weightString+'}),\n'
+##            fo.write(objString % (objectives[obj]['criteria'],\
+##                                                                objectives[obj]['weight']))  
+        fo.write('])\n')            
+        # criteria
+        fo.write('criteria = OrderedDict([\n') 
         for g in criteria:
-            fo.write('\'' +str(g)+'\': {\n')
-            if isDecimal:
-                #fo.write('\'weight\':Decimal("'+str(criteria[g]['weight'])+'"),\'scale\': (Decimal("'+str(criteria[g]['scale'][0])+'"),Decimal("'+str(criteria[g]['scale'][1])+'")),\n')
-                #fo.write('\'thresholds\' :' + str(criteria[g]['thresholds']) + '},\n')
-                weightScaleString = '\'weight\':Decimal("%%.%df"),\'scale\': (Decimal("%%.%df"),Decimal("%%.%df")),\n' % (valueDigits,valueDigits,valueDigits)
-                fo.write(weightScaleString % (criteria[g]['weight'],criteria[g]['scale'][0],criteria[g]['scale'][1]))
-                try:
-                    fo.write('\'thresholds\' : %s },\n' % ( str(criteria[g]['thresholds']) ) )
-                except:
-                    fo.write('},\n')
-            else:
-                fo.write('\'weight\':'+str(criteria[g]['weight'])+',\'scale\':'+str(criteria[g]['scale'])+',\n')
-                try:
-                    fo.write('\'thresholds\' :' + str(criteria[g]['thresholds']) + '},\n')
-                except:
-                    fo.write('},\n')
-                
-        fo.write('}\n')
+            fo.write('(\'%s\', {\n' % str(g))
+            for it in self.criteria[g].keys():
+                fo.write('\'%s\': %s,\n' % (it,repr(self.criteria[g][it])))
+            fo.write('}),\n')
+##            fo.write('(\'' +str(g)+'\', {\n')
+##            try:
+##                fo.write('\'name\': \'%s\',\n' % criteria[g]['name']) 
+##            except:
+##                pass
+##            try:
+##                fo.write('\'objective\': \'%s\',\n' % criteria[g]['objective']) 
+##            except:
+##                pass
+            
+##            if isDecimal:
+##                #fo.write('\'weight\':Decimal("'+str(criteria[g]['weight'])+'"),\'scale\': (Decimal("'+str(criteria[g]['scale'][0])+'"),Decimal("'+str(criteria[g]['scale'][1])+'")),\n')
+##                #fo.write('\'thresholds\' :' + str(criteria[g]['thresholds']) + '},\n')
+##                weightScaleString = '\'weight\':Decimal("%%.%df"),\'scale\': (Decimal("%%.%df"),Decimal("%%.%df")),\n' % (valueDigits,valueDigits,valueDigits)
+##                fo.write(weightScaleString % (criteria[g]['weight'],criteria[g]['scale'][0],criteria[g]['scale'][1]))
+##                try:
+##                    fo.write('\'thresholds\' : %s }),\n' % ( str(criteria[g]['thresholds']) ) )
+##                except:
+##                    fo.write('}),\n')
+##            else:
+##                fo.write('\'weight\':'+str(criteria[g]['weight'])+',\'scale\':'+str(criteria[g]['scale'])+',\n')
+##                try:
+##                    fo.write('\'thresholds\' :' + str(criteria[g]['thresholds']) + '}),\n')
+##                except:
+##                    fo.write('}),\n')
+##            
+        fo.write('])\n')
+        # evaluation
         fo.write('evaluation = {\n')
         for g in criteria:
             fo.write('\'' +str(g)+'\': {\n')
@@ -3007,36 +3363,64 @@ The performance evaluations of each decision alternative on each criterion are g
 #-----------------------
 class PartialPerformanceTableau(PerformanceTableau):
     """
-    Constructor for partial performance tableaux.
+    Constructor for partial performance tableaux concerning a subset of actions and/or criteria and/or objectives
     """
-    def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None):
-        from copy import copy as deepcopy
-        
+    def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None,objectivesSubset=None):
+        from copy import deepcopy
+        from collections import OrderedDict
+        # name
         self.name = 'partial-'+inPerfTab.name
-
+        # actions
         if actionsSubset != None:
-            self.actions = {}
+            actions = OrderedDict()
             for x in actionsSubset:
-                self.actions[x] = deepcopy(inPerfTab.actions[x])
+                actions[x] = deepcopy(inPerfTab.actions[x])
         else:
-            self.actions = deepcopy(inPerfTab.actions)
-
-        if criteriaSubset != None:
-            self.criteria = {}
-            for g in criteriaSubset:
-                self.criteria[g] = deepcopy(inPerfTab.criteria[g])
+            actions = deepcopy(inPerfTab.actions)
+        self.actions = actions
+        # objectives & criteria
+        objectives = OrderedDict()
+        HasObjectives = True
+        if objectivesSubset == None:
+            try:
+                objectives = deepcopy(inPerfTab.objectives)
+            except:
+                HasObjectives = False
+            if criteriaSubset != None:
+                criteria = OrderedDict()
+                if HasObjectives:
+                    for obj in objectives.keys():
+                        objectives[obj]['criteria'] = []
+                for g in criteriaSubset:
+                    criteria[g] = deepcopy(inPerfTab.criteria[g])
+                    if HasObjectives:
+                        obj = criteria[g]['objective']
+                        objectives[obj]['criteria'].append(g)
+            else:
+                criteria = deepcopy(inPerfTab.criteria)
         else:
-            self.criteria = deepcopy(inPerfTab.criteria)
-
+            objectibes = OrderedDict()
+            criteria = OrderedDict()
+            if criteriaSubset == None:
+                criteriaSubset = list(inPerfTab.criteria.keys())
+            for obj in objectivesSubset:
+                objectives[obj] = deepcopy(inPerfTab.objectives[obj])
+                objectives[obj]['criteria'] = []
+                for g in inPerfTab.objectives[obj]['criteria']:
+                    if g in criteriaSubset:
+                        criteria[g] = deepcopy(inPerfTab.criteria[g])
+                        objectives[obj]['criteria'].append(g)
+        self.objectives = objectives
+        self.criteria = criteria
         self.weightPreorder = self.computeWeightPreorder()
-
-        self.evaluation = {}
-        actionsKeys = [x for x in self.actions]
-        criteriaKeys = [g for g in self.criteria]
-        for g in criteriaKeys:
-            self.evaluation[g] = {}
-            for x in actionsKeys:
-                self.evaluation[g][x] = deepcopy(inPerfTab.evaluation[g][x])
+        # evaluations
+        evaluation = {}
+        for g in criteria.keys():
+            evaluation[g] = {}
+            for x in actions.keys():
+                evaluation[g][x] = deepcopy(inPerfTab.evaluation[g][x])
+        self.evaluation = evaluation
+        
 #-----------------------
 class ConstantPerformanceTableau(PerformanceTableau):
     """
@@ -3051,7 +3435,7 @@ class ConstantPerformanceTableau(PerformanceTableau):
     """
     def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None,
                  position=0.5):
-        from copy import copy as deepcopy
+        from copy import deepcopy
         
         self.name = 'constant-'+inPerfTab.name
 
@@ -4134,6 +4518,7 @@ class _RandomCBPerformanceTableau(PerformanceTableau):
     Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.
     """
 
+
     def __init__(self,numberOfActions = None, \
                  numberOfCriteria = None, \
                  weightDistribution = None,
@@ -4582,6 +4967,8 @@ class _RandomCBPerformanceTableau(PerformanceTableau):
             if Comments:
                 print('criteria',c,' default thresholds:')
                 print(self.criteria[c]['thresholds'])
+
+
 
 ##class _ThreadedRandomCBPerformanceTableau(PerformanceTableau):
 ##    """
@@ -5771,17 +6158,20 @@ if __name__ == "__main__":
     import linearOrders
     from weakOrders import *
     from randomPerfTabs import *
+    from time import time
     
     print('*-------- Testing classes and methods -------')
 
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
-    t = RandomCBPerformanceTableau(numberOfCriteria=5,
-                                   numberOfActions=7,
+    t = RandomCBPerformanceTableau(numberOfCriteria=13,
+                                   numberOfActions=30,
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
                                    Debug=False,
-                                   seed=100)
+                                   missingDataProbability=0.1,
+                                   seed=100,Threading=False)
+    
 ##    t = ConstantPerformanceTableau(t,
 ##                                   actionsSubset=['a01','a02','a03'],
 ##                                   criteriaSubset=['g01','g02','g03'],
@@ -5797,41 +6187,78 @@ if __name__ == "__main__":
 ##    t.saveXMCDA2('test')
 ##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('uniSorting')
+##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
 ##    from weakOrders import *
-##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=True,Threading=False)
+##    print('TT')
+##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=True,PrefThresholds=True,Threading=False)
 ##    qsrbc.showSorting()
-##    actionsList = qsrbc.computeQsRbcRanking()
+####    t1 = RandomCBPerformanceTableau(numberOfCriteria=13,
+####                                   numberOfActions=30,
+####                                   weightDistribution='equiobjectives',
+####                                   integerWeights=True,
+####                                   Debug=False,
+####                                   missingDataProbability=0.1,
+####                                   seed=100,Threading=False)
+##    print('TF')
+##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=True,PrefThresholds=False,Threading=False)
+##    qsrbc.showSorting()
+####    t2 = RandomCBPerformanceTableau(numberOfCriteria=13,
+####                                   numberOfActions=30,
+####                                   weightDistribution='equiobjectives',
+####                                   integerWeights=True,
+####                                   Debug=False,
+####                                   missingDataProbability=0.1,
+####                                   seed=100,Threading=False)
+##    print('FT')
+##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=False,PrefThresholds=True,Threading=False)
+##    qsrbc.showSorting()
+####    t = RandomCBPerformanceTableau(numberOfCriteria=13,
+####                                   numberOfActions=30,
+####                                   weightDistribution='equiobjectives',
+####                                   integerWeights=True,
+####                                   Debug=False,
+####                                   missingDataProbability=0.1,
+####                                   seed=100,Threading=False)
+##    print('FF')
+##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=False,PrefThresholds=False,Threading=False)
+##    qsrbc.showSorting()
+    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
+##    t.showHTMLPerformanceQuantiles(Sorted=False)
+##    t.showHTMLPerformanceQuantiles(Sorted=True)
+##    t.showAllQuantiles(Sorted=True)
+####    actionsList = qsrbc.computeQsRbcRanking()
+####
 ##
-
-    g = BipolarOutrankingDigraph(t)
-    #print(g.showMarginalVersusGlobalOutrankingCorrelation(Comments=False))
-    print(t.computePerformanceHeatmap(Correlations=True,colorLevels=5))
-    
-##    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
-##    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=True))
-##    t.showHTMLPerformanceHeatmap(actionsList=actionsList,colorLevels=7,Ranked=True)
-##    t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,Threading=False)
-##    t.showHTMLPerformanceTableau(Transposed=True)
-##    t.showHTMLPerformanceHeatmap(colorLevels=7,Threading=False)
-##    t.showHTMLPerformanceHeatmap()
-##    pt1 = PartialPerformanceTableau(t)
-##    pt1.showAll()
-##    pt2 = PartialPerformanceTableau(t,actionsSubset=['a01','a02'],criteriaSubset=['g01','g03'])
-##    pt2.showAll()
-    
-##    ## t = PerformanceTableau('test')
-##    t.saveXMCDA2('test',servingD3=False)
-##    t.showCriteria(IntegerWeights=True)
-##    print(t.computeQuantiles(Debug=False))
-##    t.showQuantileSort()
-##    g = BipolarOutrankingDigraph(t)
-##    s = sortingDigraphs.SortingDigraph(g)
-##    s.showSorting()
-##    g.computeRankingByChoosing(CoDual=False)
-##    g.showRankingByChoosing()
-##    prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
-##    prg.showWeakOrder()
-##    print(g.computeOrdinalCorrelation(prg))
+####    g = BipolarOutrankingDigraph(t)
+####    print(g.computeMarginalVersusGlobalOutrankingCorrelations())
+####    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,Debug=False)
+##    
+##    
+####    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
+####    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=True))
+####    t.showHTMLPerformanceHeatmap(actionsList=actionsList,colorLevels=7,Ranked=True)
+####    t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,Threading=False)
+####    t.showHTMLPerformanceTableau(Transposed=True)
+####    t.showHTMLPerformanceHeatmap(colorLevels=7,Threading=False)
+####    t.showHTMLPerformanceHeatmap()
+####    pt1 = PartialPerformanceTableau(t)
+####    pt1.showAll()
+####    pt2 = PartialPerformanceTableau(t,actionsSubset=['a01','a02'],criteriaSubset=['g01','g03'])
+####    pt2.showAll()
+##    
+####    ## t = PerformanceTableau('test')
+####    t.saveXMCDA2('test',servingD3=False)
+####    t.showCriteria(IntegerWeights=True)
+####    print(t.computeQuantiles(Debug=False))
+####    t.showQuantileSort()
+####    g = BipolarOutrankingDigraph(t)
+####    s = sortingDigraphs.SortingDigraph(g)
+####    s.showSorting()
+####    g.computeRankingByChoosing(CoDual=False)
+####    g.showRankingByChoosing()
+####    prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
+####    prg.showWeakOrder()
+####    print(g.computeOrdinalCorrelation(prg))
      
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
