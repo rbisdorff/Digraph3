@@ -4001,7 +4001,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     nit += 1
                 while nit*(nbrOfJobs-1) >= n:
                     nbrOfJobs -= 1
-                if Debug:
+                if Comments:
                     print('nbr of actions to split',n)
                     print('nbr of jobs = ',nbrOfJobs)    
                     print('nbr of splitActions = ',nit)
@@ -4050,8 +4050,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     print('Exiting computing threads')
                 for j in range(len(splitActionsList)):
                     #print('Post job-%d/%d processing' % (j+1,nbrOfJobs))
-                    if Debug:
-                        print('job',j)
+##                    if Debug:
+##                        print('job',j)
 ##                    fiName = tempDirName+'/splitActions-'+str(j)+'.py'
 ##                    fi = open(fiName,'rb')
 ##                    splitActions = loads(fi.read())
@@ -4112,7 +4112,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 ##        totalweight = Decimal('0.0')
 ##        for c in dict.keys(criteria):
 ##            totalweight = totalweight + criteria[c]['weight']
-        totalweight = sum([criteria[c]['weight'] for c in criteria])
+        totalweight = sum(criteria[c]['weight'] for c in criteria)
 
         relation = {}
         concordanceRelation = {}
