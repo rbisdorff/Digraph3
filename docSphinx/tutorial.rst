@@ -2124,7 +2124,7 @@ Some ranking rules will work on the associated Condorcet digraph, i.e. the stric
 The Copeland ranking
 ....................
 
-Copeland's rule computes a score for each alternative which results from the difference its crisp outdegree (number of validated (+1) crisp outranking situations) and its crisp indegree (number of validated crisp (+1) outranked situations)::
+Copeland's rule computes a score for each alternative which results from the difference between its crisp outdegree (number of validated (+1) crisp outranking situations) and its crisp indegree (number of validated crisp (+1) outranked situations)::
 
     >>> from linearOrders import CopelandOrder
     >>> cop = CopelandOrder(g,Debug=True)
@@ -2147,7 +2147,7 @@ Copeland's rule results in a linear order which is indeed highly correlated, in 
     >>> print("Fitness of Copeland's ranking: %.3f" % corr['correlation'])
     Fitness of Copeland's ranking: 0.857
 
-The valued version of the Copeland rule, called **Net-Flows** rule, is working this time on the given valued outranking digraph *g*. For each alternative *x* we compute a score that is the sum of the differences between the outranking characteristics r(*x* S *y*) and the outranked characteristics r(*y* S *x*) for all alternatives *y* different from *x*::1
+The valued version of the Copeland rule, called **Net-Flows** rule, is working this time on the given valued outranking digraph *g*. For each alternative *x* we compute a score that is the sum of the differences between the outranking characteristics r(*x* S *y*) and the outranked characteristics r(*y* S *x*) for all alternatives *y* different from *x*::
   
     >>> from linearOrders import NetFlowsOrder
     >>> nf = NetFlowsOrder(g)
@@ -2157,7 +2157,7 @@ The valued version of the Copeland rule, called **Net-Flows** rule, is working t
     >>> print("Fitness of net flows ranking: %.3f" % corr['correlation'])
     Fitness of net flows ranking: 0.828
 
-To appreciate the effective quality of the Copeland and the Net-Flows ranking rules, it is useful to consider both Kemeny's abd Slater's ranking rules.
+To appreciate the effective quality of the Copeland and the Net-Flows ranking rules, it is useful to consider both Kemeny's and Slater's ranking rules.
 
 The Kemeny and the Slater rankings
 ..................................
@@ -2172,7 +2172,7 @@ A Kemeny ranking is a linear order which is closest, in the sense of the ordinal
     >>> print("Fitness of Kemeny's ranking: %.3f" % corr['correlation'])
     Fitness of Kemeny's ranking: 0.918
 
-So, **0.918** is the highest possible ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking relation. A Kemeny ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In in our example we hence obtain::
+So, **0.918** is the highest possible ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking relation. A Kemeny ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In in our example we hence obtain seven potential Kemeny rankings::
 
     >>> ke.maximalOrders
     [['a1', 'a3', 'a4', 'a9', 'a5', 'a8', 'a2', 'a6', 'a7'], 
@@ -2183,7 +2183,7 @@ So, **0.918** is the highest possible ordinal correlation (fitness) any potentia
     ['a1', 'a3', 'a9', 'a5', 'a8', 'a4', 'a6', 'a2', 'a7'], 
     ['a1', 'a3', 'a9', 'a5', 'a8', 'a4', 'a6', 'a7', 'a2']]
 
-Slater's ranking rule is the same as Kemeny's, but instead it is working on the associated crips Condorcet digraph *c*. It gives the following result::
+Slater's ranking rule is the same as Kemeny's, but instead it is working on the associated crisp Condorcet digraph *c*. It gives the following result::
 
     >>> sl = KemenyOrder(c,orderLimit=9)
     >>> sl.showRanking()
