@@ -40,6 +40,73 @@ def all_perms(str):
         for perm in all_perms(str[1:]):
             for i in range(len(perm)+1):
                 yield perm[:i] + str[0:1] + perm[i:]
+# epistemic or symmetric disjunction operator
+def omax(Med,L, Debug=False):
+    """
+    epistemic disjunction for bipolar outranking characteristics
+    computation: Med is the valuation domain median and L is a list of
+    r-valued statement characteristics. 
+    """
+    #Med = self.valuationdomain['med']
+    terms = list(L)
+    termsPlus = []
+    termsMinus = []
+    termsNuls = []
+    for i in range(len(terms)):
+        if terms[i] > Med:
+            termsPlus.append(terms[i])
+        elif terms[i] < Med:
+            termsMinus.append(terms[i])
+        else:
+            termsNuls.append(terms[i])
+##    if Debug:
+##        print('terms', terms)
+##        print('termsPlus',termsPlus)
+##        print('termsMinus', termsMinus)
+##        print('termsNuls', termsNuls)
+    np = len(termsPlus)
+    nm = len(termsMinus)
+    if np > 0 and nm == 0:
+        return max(termsPlus)
+    elif nm > 0 and np == 0:
+        return min(termsMinus)
+    else:
+        return Med
+# epistemic or symmetric conjunction operator
+def omin(M,L, Debug=False):
+    """
+    epistemic conjunction of a list L of bipolar outranking characteristics.
+    Med is the given valuation domain median.
+    """
+    #Med = self.valuationdomain['med']
+    terms = list(L)
+    termsPlus = []
+    termsMinus = []
+    termsNuls = []
+    for i in range(len(terms)):
+        if terms[i] > Med:
+            termsPlus.append(terms[i])
+        elif terms[i] < Med:
+            termsMinus.append(terms[i])
+        else:
+            termsNuls.append(terms[i])
+##    if Debug:
+##        print('terms', terms)
+##        print('termsPlus',termsPlus)
+##        print('termsMinus', termsMinus)
+##        print('termsNuls', termsNuls)
+    np = len(termsPlus)
+    nm = len(termsMinus)
+    if np > 0:
+        if nm > 0:
+            return Med
+        else:
+            return min(termsPlus)
+    else:
+        if nm > 0:
+            return max(termsMinus)
+        else:
+            return Med
 
 # generate all subsets of a given set E
 # Discrete Mathematics BINFO 1 course Lesson 2-sets

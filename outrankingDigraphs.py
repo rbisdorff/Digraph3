@@ -4245,7 +4245,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             print('vetoes = ', vetoes)
                             print('negativeVetoes = ', negativeVetoes)
                         omaxList = [concordindex] + vetoes + negativeVetoes
-                        outrankindex = self.omax(omaxList,Debug=Debug)
+                        outrankindex = omax(Med,omaxList,Debug=Debug)
                         if Debug:
                             print('a b outrankindex = ', a,b, outrankindex)
                     else:
@@ -4926,12 +4926,14 @@ class _BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             for b in terminal:
                 largePerformanceDifferencesCount[a][b] = {'positive':0,'negative':0}
 
+        Max = self.valuationdomain['max']                                             
+        Med = self.valuationdomain['med']
         for a in initial:
             relation[a] = {}
             concordanceRelation[a] = {}
             for b in terminal:
                 if a == b:
-                    relation[a][b] = Decimal('0.0')
+                    relation[a][b] = Med
                     concordanceRelation[a][b] = Decimal('0.0')
                 else:
                     nc = len(criteria)
@@ -5040,7 +5042,7 @@ class _BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             print('vetoes = ', vetoes)
                             print('negativeVetoes = ', negativeVetoes)
                         omaxList = [concordindex] + vetoes + negativeVetoes
-                        outrankindex = self.omax(omaxList,Debug=Debug)
+                        outrankindex = omax(Med,omaxList,Debug=Debug)
                         if Debug:
                             print('a b outrankindex = ', a,b, outrankindex)
                     else:
@@ -5050,7 +5052,6 @@ class _BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             vetoIndex = max(vetoIndex,veto[c][0])
                         outrankindex = min(concordindex,-vetoIndex)
 
-                    Max = self.valuationdomain['max']                                             
                     if abVetoes != []:
                         vetos.append(([a,b,concordindex*Max],abVetoes))
                     if hasBipolarVeto:
