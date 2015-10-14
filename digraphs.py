@@ -8006,7 +8006,7 @@ class Digraph(object):
             netFlowsRankingDict = self._computeNetFlowsRankingDict()
             return list(reversed(list(netFlowsRankingDict.keys())))
         
-    def computeKohlerRankingDict(self,Debug=False):
+    def _computeKohlerRankingDict(self,Debug=False):
         """
         renders a ranking from the best to the worst of the actions following Kohler's rule as an
         ordered dictionary with rank and majorityMargin attributes.
@@ -8040,14 +8040,14 @@ class Digraph(object):
         return rank
 
     def computeKohlerOrder(self):
-        ranking = self.computeKohlerRankingDict()
+        ranking = self._computeKohlerRankingDict()
         return list(reversed(ranking))
     
     def computeKohlerRanking(self):
-        ranking = self.computeKohlerRankingDict()
+        ranking = self._computeKohlerRankingDict()
         return [x for x in ranking]
 
-    def computeArrowRaynaudRanking(self,Debug=False):
+    def _computeArrowRaynaudRankingDict(self,Debug=False):
         """
         renders a ranking of the actions following Arrow&Raynaud's rule.
         """
@@ -8079,6 +8079,15 @@ class Digraph(object):
         if Debug:
             print(rank)
         return rank
+
+    def computeArrowRaynaudOrder(self):
+        ranking = self._computeArrowRaynaudRankingDict()
+        return list(reversed(ranking))
+    
+    def computeArrowRaynaudRanking(self):
+        ranking = self._computeArrowRaynaudRankingDict()
+        return [x for x in ranking]
+
 
     def computeRankedPairsOrder(self,Cpp=False,Debug=False):
         """
