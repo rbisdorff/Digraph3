@@ -192,7 +192,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -575,10 +575,14 @@ absence arc density, strict absence arc densitiy.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="digraphs.Digraph.computeArrowRaynaudOrder">
+<code class="descname">computeArrowRaynaudOrder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeArrowRaynaudOrder" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="digraphs.Digraph.computeArrowRaynaudRanking">
-<code class="descname">computeArrowRaynaudRanking</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeArrowRaynaudRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders a ranking of the actions following Arrow&amp;Raynaud&#8217;s rule.</p>
-</dd></dl>
+<code class="descname">computeArrowRaynaudRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeArrowRaynaudRanking" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computeAverageValuation">
@@ -731,13 +735,6 @@ Return a tuple: kemenyRanking, kemenyIndex</p>
 <dt id="digraphs.Digraph.computeKohlerRanking">
 <code class="descname">computeKohlerRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeKohlerRanking" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-<dl class="method">
-<dt id="digraphs.Digraph.computeKohlerRankingDict">
-<code class="descname">computeKohlerRankingDict</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeKohlerRankingDict" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders a ranking from the best to the worst of the actions following Kohler&#8217;s rule as an
-ordered dictionary with rank and majorityMargin attributes.</p>
-</dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computeMeanInDegree">
@@ -1177,7 +1174,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2127,7 +2124,7 @@ called dg1 and dg2.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2158,7 +2155,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -3352,7 +3349,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4099,7 +4096,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5191,36 +5188,6 @@ the high category limit.</p>
 <div class="section" id="module-linearOrders">
 <span id="linearorders-module"></span><span id="linearorders-label"></span><h2>linearOrders module<a class="headerlink" href="#module-linearOrders" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="linearOrders.BoostedKohlerOrder">
-<em class="property">class </em><code class="descclassname">linearOrders.</code><code class="descname">BoostedKohlerOrder</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=True</em>, <em>strategy='average'</em>, <em>PrefThresholds=False</em>, <em>hasNoVeto=False</em>, <em>outrankingType='bipolar'</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>chunkSize=1</em>, <em>Comments=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#linearOrders.BoostedKohlerOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#linearOrders.KohlerOrder" title="linearOrders.KohlerOrder"><code class="xref py py-class docutils literal"><span class="pre">linearOrders.KohlerOrder</span></code></a>, <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a></p>
-<p>Boosting the Kohler ranking-by-choosing rule
-with previous quantiles sorting-</p>
-<dl class="docutils">
-<dt><em>Main parameters</em>:</dt>
-<dd><ul class="first last simple">
-<li>limitingQuantiles are set by default to len(actions)//2
-for outranking digraph orders below 200.
-For higher orders, centiles are used by default.</li>
-<li>strategies are: &#8220;optimistic&#8221; (default), &#8220;pessimistic&#8221; or &#8220;average&#8221;</li>
-<li>Threading is on (True) by default for CPUs with more than 2 cores.</li>
-</ul>
-</dd>
-</dl>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">For larger orders a consistent size of several
-Giga bytes cpu memory is required!</p>
-</div>
-<dl class="method">
-<dt id="linearOrders.BoostedKohlerOrder.computePreOrdering">
-<code class="descname">computePreOrdering</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>strategy=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#linearOrders.BoostedKohlerOrder.computePreOrdering" title="Permalink to this definition">¶</a></dt>
-<dd><p>specialisation of the showWeakOrder method</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
 <dt id="linearOrders.CopelandOrder">
 <em class="property">class </em><code class="descclassname">linearOrders.</code><code class="descname">CopelandOrder</code><span class="sig-paren">(</span><em>other</em>, <em>coDual=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#linearOrders.CopelandOrder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#linearOrders.LinearOrder" title="linearOrders.LinearOrder"><code class="xref py py-class docutils literal"><span class="pre">linearOrders.LinearOrder</span></code></a></p>
@@ -5839,7 +5806,7 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 
 <dl class="class">
 <dt id="randomDigraphs.RandomGridDigraph">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.GridDigraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary randomly oriented Grid digraphs of dimension n time m
