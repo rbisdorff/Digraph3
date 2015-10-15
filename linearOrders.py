@@ -987,30 +987,24 @@ class CopelandOrder(LinearOrder):
                 g.relation[x][y] = Med
 
         copelandScores = {}
-        copelandOrder = []
-        for x in dict.keys(g.actions):
-            #copelandScores[x] = 0
-            #for y in dict.keys(g.actions):
-            #    if y != x:
+        copelandScoresList = []
+        for x in g.actions:
             xoutDegree = len(other.gamma[x][0])
             xinDegree = len(other.gamma[x][1])
-            copelandScores[x] = (xoutDegree - xinDegree)
+            copelandScores[x] = (xinDegree - xoutDegree) # reversed sort
             if Debug:
                 print('Copeland score for %s = %d' % (x, copelandScores[x]))
-            copelandOrder.append((copelandScores[x],x))
-        copelandOrder.sort(reverse=True)
-        if Debug:
-            print(copelandOrder)
-
-        copelandRanking = [x[1] for x in copelandOrder]
+            copelandScoresList.append((copelandScores[x],x))
+        copelandScoresList.sort()
+        copelandRanking = [x[1] for x in copelandScoresList]
         self.copelandRanking = copelandRanking
         if Debug:
             print(copelandRanking)
             
         for i in range(n):
             for j in range(i+1,n):
-                x = copelandOrder[i][1]
-                y = copelandOrder[j][1]
+                x = copelandScoresList[i][1]
+                y = copelandScoresList[j][1]
                 g.relation[x][y] = Max
                 g.relation[y][x] = Min
                 
@@ -1022,7 +1016,7 @@ class CopelandOrder(LinearOrder):
         self.relation = g.relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-        self.copelandOrder = self.computeOrder()
+        self.copelandOrder = list(reversed(list(copelandRanking)))
         if Debug:
             self.showRelationTable()
             self.showOrdering()
@@ -1052,19 +1046,19 @@ class KemenyOrder(LinearOrder):
         Max = other.valuationdomain['max']
         Med = other.valuationdomain['med']
         #relation = copy(other.relation)
-        kemenyOrder = other.computeKemenyOrder(orderLimit=orderLimit,Debug=Debug)
+        kemenyRankings = other.computeKemenyRanking(orderLimit=orderLimit,Debug=False)
         # [0] = ordered actions list, [1] = maximal Kemeny index
         
-        self.kemenyOrder = kemenyOrder[0]
-        self.maxKemenyIndex = kemenyOrder[1]
-        self.maximalOrders = deepcopy(other.maximalOrders)
+        kemenyRanking = kemenyRankings[0]
+        maxKemenyIndex = kemenyRankings[1]
+        maximalRankings = deepcopy(other.maximalRankings)
         
-        if kemenyOrder == None:
+        if kemenyRankings == None:
             print('Intantiation error: unable to compute the Kemeny Order !!!')
             print('Digraph order %d is required to be lower than 8!' % n)
             return
         if Debug:
-            print(KemenyOrder,other.maximalOrders)
+            print(kemenyRankings,other.maximalRankings)
         
         # instatiates a Digraph template
         actions = deepcopy(other.actions)
@@ -1076,25 +1070,25 @@ class KemenyOrder(LinearOrder):
         n = len(actions)
         self.order = n
         for i in range(n):
-            x = kemenyOrder[0][i]
+            x = kemenyRanking[i]
             relation[x] = {}
             for j in range(n):
-                y = kemenyOrder[0][j]
+                y = kemenyRanking[j]
                 if Debug:
                     print(x,y)
                 relation[x][y] = Med
                 if i < j:
-                    relation[x][y] = Min
-                    try:
-                        relation[y][x] = Max
-                    except:
-                        relation[y] = {x: Max}
-                elif i > j:
                     relation[x][y] = Max
                     try:
                         relation[y][x] = Min
                     except:
-                        relation[y] = {y: Min}
+                        relation[y] = {x: Min}
+                elif i > j:
+                    relation[x][y] = Min
+                    try:
+                        relation[y][x] = Max
+                    except:
+                        relation[y] = {y: Max}
 
         self.name = other.name + '_ranked'        
         self.actions = actions
@@ -1103,10 +1097,13 @@ class KemenyOrder(LinearOrder):
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-        self.kemenyRanking = self.computeRanking()
+        self.kemenyRanking = kemenyRanking
+        self.maxKemenyIndex = maxKemenyIndex
+        self.maximalRankings = maximalRankings
+        self.kemenyOrder = list(reversed(list(kemenyRanking)))
         if Debug:
             self.showRelationTable()
-            print('Kemeny Order = ', self.kemenyRanking)
+            print('Kemeny Ranking = ', self.kemenyRanking)
 
 ########  instantiates principal scores' ordering
 

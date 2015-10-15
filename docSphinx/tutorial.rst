@@ -2140,24 +2140,26 @@ Copeland's rule computes a score for each alternative which results from the dif
 
     >>> from linearOrders import CopelandOrder
     >>> cop = CopelandOrder(g,Debug=True)
-    Copeland score for a1 = 3   (5 - 3)
+    Copeland score for a1 = +3  (5 - 3)
     Copeland score for a2 = -3  (0 - 3)
-    Copeland score for a3 = 7   (8 - 1)
-    Copeland score for a4 = 1   (4 - 3)
+    Copeland score for a3 = +7  (8 - 1)
+    Copeland score for a4 = +1  (4 - 3)
     Copeland score for a5 = -1  (3 - 4)
     Copeland score for a6 = -2  (4 - 6)
     Copeland score for a7 = -5  (0 - 5)
     Copeland score for a8 = -1  (4 - 5)
-    Copeland score for a9 = 1   (4 - 3)
-    ['a7', 'a2', 'a6', 'a5', 'a8', 'a4', 'a9', 'a1', 'a3'] 
+    Copeland score for a9 = +1  (4 - 3)
+    ['a7', 'a2', 'a6', 'a8', 'a5', 'a9', 'a4', 'a1', 'a3'] 
     >>> cop.showRanking()
-    ['a3', 'a1', 'a9', 'a4', 'a8', 'a5', 'a6', 'a2', 'a7']
+    ['a3', 'a1', 'a4', 'a9', 'a5', 'a8', 'a6', 'a2', 'a7']
 
-Copeland's rule results in a linear order which is indeed highly correlated (see [Bis-2012]_), in the ordinal Kendall sense, with the given pairwise outranking relation::
+Notice by the way that Copeland scores are invariant under a codual (converse of the negation) transform of the outranking digraph. Alternative *a3* has the best score (+7), followed by alternative *a1* (+3). Alternatives *a4* and *a9* have the same score (+1); following the lexicographic rule, *a4* is hence ranked before *a9*. Same situation is observed for *a5* and *a8* with a score of -1. 
+
+Copeland's rule actually results in a linear order which is indeed highly correlated, in the ordinal Kendall sense (see [Bis-2012]_), with the given pairwise outranking relation::
 
     >>> corr = g.computeOrdinalCorrelation(cop)
     >>> print("Fitness of Copeland's ranking: %.3f" % corr['correlation'])
-    Fitness of Copeland's ranking: 0.857
+    Fitness of Copeland's ranking: 0.906
 
 The valued version of the Copeland rule, called **Net-Flows** rule, is working this time on the given valued outranking digraph *g*. For each alternative *x* we compute a score that is the sum of the differences between the outranking characteristics r(*x* S *y*) and the outranked characteristics r(*y* S *x*) for all alternatives *y* different from *x*::
   
@@ -2179,12 +2181,12 @@ The valued version of the Copeland rule, called **Net-Flows** rule, is working t
     >>> print("Fitness of net flows ranking: %.3f" % corr['correlation'])
     Fitness of net flows ranking: 0.828
 
-To appreciate the effective quality of the Copeland and the Net-Flows ranking rules, it is useful to consider both Kemeny's and Slater's ranking rules.
+The Net-Flows ranking is here, in this didactic example, not as much correlated with the given outranking relation as its crisp cousin ranking. To appreciate the effective quality of the Copeland and the Net-Flows rankings, it is useful to consider both Kemeny's and Slater's ranking rules.
 
 The Kemeny and the Slater rankings
 ..................................
 
-A Kemeny ranking is a linear order which is closest, in the sense of the ordinal Kendall distance, to the given valued outranking digraph *g*. A Slater ranking is the linear order which is similarly closest to the corresponding crisp Condorcet digraph *c*::
+A **Kemeny** ranking is a linear order which is closest, in the sense of the ordinal Kendall distance, to the given valued outranking digraph *g*. A Slater ranking is the linear order which is similarly closest to the corresponding crisp Condorcet digraph *c*::
 
     >>> from linearOrders import KemenyOrder
     >>> ke = KemenyOrder(g,orderLimit=9) # default orderLimit is 7
@@ -2192,11 +2194,11 @@ A Kemeny ranking is a linear order which is closest, in the sense of the ordinal
     ['a1', 'a3', 'a4', 'a9', 'a5', 'a8', 'a2', 'a6', 'a7']
     >>> corr = g.computeOrdinalCorrelation(ke)
     >>> print("Fitness of Kemeny's ranking: %.3f" % corr['correlation'])
-    Fitness of Kemeny's ranking: 0.918
+    Fitness of Kemeny's ranking: 0.9175
 
-So, **0.918** is the highest possible ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking relation. A Kemeny ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In in our example we hence obtain seven Kemeny rankings with a same maximal Kemeny index of 15.095::
+So, **0.9175** is the highest possible ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking relation. A Kemeny ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example we hence obtain seven optimal Kemeny rankings with a same maximal Kemeny index of 15.095::
 
-    >>> ke.maximalOrders
+    >>> ke.maximalRankings
     [['a1', 'a3', 'a4', 'a9', 'a5', 'a8', 'a2', 'a6', 'a7'], 
     ['a1', 'a3', 'a4', 'a9', 'a5', 'a8', 'a6', 'a2', 'a7'], 
     ['a1', 'a3', 'a4', 'a9', 'a5', 'a8', 'a6', 'a7', 'a2'], 
@@ -2207,20 +2209,20 @@ So, **0.918** is the highest possible ordinal correlation (fitness) any potentia
     >>> ke.maxKemenyIndex
     Decimal('15.095')
 
-It is interesting to notice that all seven Kemeny rankings, in fact, place alternative *a1* at rank 1 before alternative *a3*. The Coepland and Net-Fows rules propose the opposite order.    
+It is interesting to notice that all seven Kemeny rankings, in fact, place alternative *a1* at rank 1 before alternative *a3*. And this is precisely what separates the Copeland ranking (see above) from being optimal in the Kemeny sense. 
 
-Slater's ranking rule is the same as Kemeny's, but instead it is working on the associated crisp Condorcet digraph *c*. It gives the following result::
+Slater's ranking rule is the same as Kemeny's, but instead it is working on the associated crisp Condorcet digraph *c*. It gives the following results::
 
     >>> sl = KemenyOrder(c,orderLimit=9)
+    >>> len(sl.maximalRankings)
+    174
+    >>> sl.maxKemenyIndex
+    Decimal('36.0')
     >>> sl.showRanking()
     ['a1', 'a3', 'a8', 'a4', 'a6', 'a9', 'a5', 'a2', 'a7']
     >>> corr = g.computeOrdinalCorrelation(sl)
     >>> print("Fitness of Slater's ranking: %.3f" % corr['correlation'])
     Fitness of Slater's ranking: 0.844
-    >>> len(sl.maximalOrders)
-    174
-    >>> sl.maxKemenyIndex
-    Decimal('36.0')
 
 We notice here that the crisp Copeland ranking above seams to be slightly better fitting (0.857) then Slater's (0.844), but there are in fact 174 such optimal Slater rankings. 
 

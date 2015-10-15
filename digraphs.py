@@ -8159,7 +8159,9 @@ class Digraph(object):
         ordering = self.computeRankedPairsOrder()
         return list(reversed(ordering))
 
-    def computeKemenyOrder(self,isProbabilistic=False, orderLimit=7, seed=None, sampleSize=1000, Debug=False):
+    def computeKemenyRanking(self,isProbabilistic=False,
+                           orderLimit=7, seed=None,
+                           sampleSize=1000, Debug=False):
         """
         renders a ordering from worst to best of the actions with maximal Kemeny index.
         Return a tuple: kemenyOrder, kemenyIndex
@@ -8179,23 +8181,25 @@ class Digraph(object):
                 seed = seed
             a = list(actions)
             kemenyIndex = Decimal(str(n)) * Decimal(str(n)) *Min
-            kemenyOrder = list(a)
+            kemenyRanking = list(a)
             sampleSize = sampleSize
 
             for s in range(sampleSize):
                 shuffle(a)
                 kcurr = Decimal('0.0')
-                for i in range(n):
-                    for j in range(i+1,n):
-                        kcurr += relation[a[i]][a[j]] - relation[a[j]][a[i]]
+                kcurr = sum((relation[a[i]][a[j]] - relation[a[j]][a[i]])\
+                            for i in range(n) for j in range(i+1,n))
+##                for i in range(n):
+##                    for j in range(i+1,n):
+##                        kcurr += relation[a[i]][a[j]] - relation[a[j]][a[i]]
 
                 if kcurr > kemenyIndex:
                     kemenyIndex = kcurr
-                    kemenyOrder = list(a)
+                    kemenyRanking = list(a)
                     if Debug:
                         print(s, kemenyIndex)
             if Debug:
-                print('Probabilistic Kemeny Order = ', kemenyOrder)
+                print('Probabilistic Kemeny Ranking = ', kemenyRanking)
                 print('Probabilistic Kemeny Index = ', kemenyIndex)
                 print('with samplesize :            ', sampleSize)
 
@@ -8206,49 +8210,50 @@ class Digraph(object):
             if n > orderLimit:
                 return None
             kemenyIndex = Decimal(str(n)) * Decimal(str(n)) * Min
-            kemenyOrder = list(actions)
             s = 1
-            maximalOrders = []
-            for a in all_perms(kemenyOrder):
+            maximalRankings = []
+            for a in all_perms(list(actions)):
                 kcurr = Decimal('0.0')
                 s += 1
-                for i in range(n):
-                    for j in range(i+1,n):
-                        kcurr += relation[a[i]][a[j]] - relation[a[j]][a[i]]
+                kcurr = sum((relation[a[i]][a[j]] - relation[a[j]][a[i]])\
+                            for i in range(n) for j in range(i+1,n))
+##                for i in range(n):
+##                    for j in range(i+1,n):
+##                        kcurr += relation[a[i]][a[j]] - relation[a[j]][a[i]]
                 if Debug:
                     print(s, a, kcurr)
                 if kcurr > kemenyIndex:
                     kemenyIndex = kcurr
-                    kemenyOrder = list(a)
-                    maximalOrders = [kemenyOrder]
+                    kemenyRanking = list(a)
+                    maximalRankings = [kemenyRanking]
                     if Debug:
-                        print(maximalOrders)
+                        print(maximalRanking)
                 elif kcurr == kemenyIndex:
-                    maximalOrders.append(list(a))
+                    maximalRankings.append(list(a))
                     if Debug:
-                        print(maximalOrders)
+                        print(maximalRankings)
                     
-            self.maximalOrders = maximalOrders
+            self.maximalRankings = maximalRankings
             self.kemenyIndex = kemenyIndex
             if Debug:
-                print('Exact Kemeny Orders = ', kemenyOrder)
+                print('Exact Kemeny Orders = ', kemenyRanking)
                 print('Exact Kemeny Index = ', kemenyIndex)
                 print('# of permutations  = ', s)
 
         #kemenyOrder.reverse()
-        return kemenyOrder, kemenyIndex
+        return kemenyRanking, kemenyIndex
 
-    def computeKemenyRanking(self,orderLimit=7):
+    def computeKemenyOrder(self,orderLimit=7,Debug=False):
         """
         Renders a ordering from worst to best of the actions with maximal Kemeny index.
         Return a tuple: kemenyRanking, kemenyIndex
         """
         try:
-            ranking = list(self.maximalOrders[0])
+            ranking = list(self.maximalRankings[0])
             ranking.reverse()
         except AttributeError:
-            self.computeKemenyOrder(orderLimit=orderLimit)
-            ranking = list(self.maximalOrders[0])
+            self.computeKemenyRanking(orderLimit=orderLimit,Debug=Debug)
+            ranking = list(self.maximalRankings[0])
             ranking.reverse()
         return ranking, self.kemenyIndex
 
