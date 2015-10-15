@@ -2182,7 +2182,7 @@ A Kemeny ranking is a linear order which is closest, in the sense of the ordinal
     >>> print("Fitness of Kemeny's ranking: %.3f" % corr['correlation'])
     Fitness of Kemeny's ranking: 0.918
 
-So, **0.918** is the highest possible ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking relation. A Kemeny ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In in our example we hence obtain seven potential Kemeny rankings::
+So, **0.918** is the highest possible ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking relation. A Kemeny ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In in our example we hence obtain seven Kemeny rankings with a same maximal Kemeny index of 15.095::
 
     >>> ke.maximalOrders
     [['a1', 'a3', 'a4', 'a9', 'a5', 'a8', 'a2', 'a6', 'a7'], 
@@ -2208,14 +2208,16 @@ Slater's ranking rule is the same as Kemeny's, but instead it is working on the 
     >>> sl.maxKemenyIndex
     Decimal('36.0')
 
-We notice here that the crisp Copeland ranking (0.857) above seams to be slightly better fitting then Slater's (0.844), but also less discriminating as there are in fact 174 optimal Slater rankings. 
+We notice here that the crisp Copeland ranking above seams to be slightly better fitting (0.857) then Slater's (0.844), but there are in fact 174 such optimal Slater rankings. 
 
-Kemeny's as well as Slater's ranking rules are computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (< 20 objects). More heuristic ranking rules, like the Copeland ones, are therefore needed in practice.
+Kemeny's as well as Slater's ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (< 20 objects). 
+
+More efficient ranking heuristics, like the Net-Flows, are therefore needed in practice.
 
 Kohler's ranking-by-choosing rule
 .................................
 
-Kohler's ranking-by-choosing rule can be formulated like this. 
+Kohler's **ranking-by-choosing** rule can be formulated like this. 
 
 At step *r* (*r* goes from 1 to *n*) do the following:
 
@@ -2232,12 +2234,12 @@ At step *r* (*r* goes from 1 to *n*) do the following:
     >>> print("Fitness of Kohler's ranking: %.3f" % corr['correlation'])
     Fitness of Kohler's ranking: 0.868
 
-Here, we find a slightly better fitness (0.868), as is given with Slater's (0.844) or Copeland's crisp rules (0.857). A further ranking rule is based on a prudent pairwise construction of linear orders that avoids on the fly any cycling pairs of alternatives.
+Here, we find an even better fitness (0.868) when compared with Slater's (0.844) or Copeland's crisp rule (0.857). 
 
 Tideman's Ranked-Pairs rule
 ...........................
 
-The Ranked-Pairs rule may by formulated as follows:
+A further ranking heuristic is based on a prudent incremental construction of linear orders that avoids on the fly any cycling pairs of alternatives. The Ranked-Pairs rule may by formulated as follows:
 
     1. Rank the ordered pairs (*x*, *y*) of alternatives in decreasing order of the outranking characteristic values;
     2. Consider the pairs in that order (ties are resolved by a lexicographic rule):
@@ -2271,7 +2273,7 @@ In our didactical outranking example, we get the following result::
     >>> rp.showRanking()
     ['a1', 'a3', 'a4', 'a9', 'a5', 'a8', 'a2', 'a6', 'a7']
 
-The Ranked-Pairs rule actually renders a Kemeny ranking as we may verify below::
+The Ranked-Pairs rule actually renders one of the seven optimal Kemeny rankings as we may verify below::
  
     >>> corr = g.computeOrdinalCorrelation(rp)
     >>> print("Fitness of Tideman's ranking: %.3f" % corr['correlation'])
@@ -2279,7 +2281,7 @@ The Ranked-Pairs rule actually renders a Kemeny ranking as we may verify below::
 
 However, this last ranking rule is again in general not scalable to outranking digraphs of larger orders. 
 
-The most useful ranking heuristics in practice for big outranking digraphs are Kohler's, Copeland's, and the Net-Flows rules.
+The most useful ranking heuristics in practice for big outranking digraphs are therefore Kohler's and the Net-Flows rules.
   
 
 Links and appendices
