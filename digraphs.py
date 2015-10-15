@@ -8227,7 +8227,7 @@ class Digraph(object):
                     kemenyRanking = list(a)
                     maximalRankings = [kemenyRanking]
                     if Debug:
-                        print(maximalRanking)
+                        print(maximalRankings)
                 elif kcurr == kemenyIndex:
                     maximalRankings.append(list(a))
                     if Debug:

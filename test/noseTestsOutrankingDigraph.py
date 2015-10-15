@@ -434,7 +434,7 @@ def testRankingRules():
     print(gcd.computeRankedPairsOrder())
 
     gcd.computeKemenyOrder(Debug=True)
-    print(gcd.computeKemenyOrder(isProbabilistic=True, seed=1,sampleSize=500))    
+    print(gcd.computeKemenyRanking(isProbabilistic=True, seed=1,sampleSize=500))    
     gcd.computeSlaterOrder(Debug=True)
     print(gcd.computeSlaterOrder(isProbabilistic=True, seed=1,sampleSize=500))
 

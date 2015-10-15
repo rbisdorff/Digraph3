@@ -2161,7 +2161,7 @@ Copeland's rule actually results in a linear order which is indeed highly correl
     >>> print("Fitness of Copeland's ranking: %.3f" % corr['correlation'])
     Fitness of Copeland's ranking: 0.906
 
-The valued version of the Copeland rule, called **Net-Flows** rule, is working this time on the given valued outranking digraph *g*. For each alternative *x* we compute a score that is the sum of the differences between the outranking characteristics :math:`r(x\,S\,y)` and the outranked characteristics :math:`r(y\,S\,x)` for all alternatives *y* different from *x*::
+The valued version of the Copeland rule, called **Net-Flows** rule, is working this time on the given valued outranking digraph *g*. For each alternative *x* we compute a score that is the sum of the differences between the outranking characteristics :math:`r(x\,S\,y)` and the outranked characteristics r(*y* S *x*) for all alternatives *y* different from *x*::
   
     >>> from linearOrders import NetFlowsOrder
     >>> nf = NetFlowsOrder(g)

@@ -113,8 +113,8 @@ def testNonPrudentRankings():
     c.computeRankedPairsOrder(Debug=True)
     print(c.computeRankedPairsOrder())
 
-    c.computeKemenyOrder(Debug=True)
-    print(c.computeKemenyOrder(isProbabilistic=True, seed=1,sampleSize=500, Debug=True))
+    c.computeKemenyRanking(Debug=True)
+    print(c.computeKemenyRanking(isProbabilistic=True, seed=1,sampleSize=500, Debug=True))
     c.computeSlaterOrder(Debug=True)
     print(c.computeSlaterOrder(isProbabilistic=True, seed=1,sampleSize=500, Debug=True))
 
