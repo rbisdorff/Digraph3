@@ -2295,9 +2295,7 @@ The Ranked-Pairs rule actually renders one of the seven optimal Kemeny rankings 
 
 However, this last ranking rule is again not scalable to outranking digraphs of larger orders (> 100). For larger outranking digraphs with several hundred of alternatives, only Kohler's and the Net-Flows ranking heuristics remain computationally efficient.
 
-
-
-The most useful ranking heuristics in practice Links and appendices
+Links and appendices
 --------------------
 
 Documents
