@@ -2250,12 +2250,12 @@ At step *r* (*r* goes from 1 to *n*) do the following:
     >>> print("Fitness of Kohler's ranking: %.3f" % corr['correlation'])
     Fitness of Kohler's ranking: 0.868
 
-Here, we find an even better fitness (0.868) when compared with Slater's (0.844) or Copeland's crisp rule (0.857). 
+Here, we find a better fitness (0.868) when compared with Slater's (0.844) or the Net-Flows result, but not as good as Copeland crisp rule's result (0.906). 
 
 Tideman's Ranked-Pairs rule
 ...........................
 
-A further ranking heuristic is based on a prudent incremental construction of linear orders that avoids on the fly any cycling pairs of alternatives. The **Ranked-Pairs** rule may by formulated as follows:
+A further ranking heuristic is based on a prudent incremental construction of linear orders that avoids on the fly any cycling pairs of alternatives. The **Ranked-Pairs** rule may be formulated as follows:
 
     1. Rank the ordered pairs (*x*, *y*) of alternatives in decreasing order of the outranking characteristic values r(*x* S *y*);
     2. Consider the pairs in that order (ties are resolved by a lexicographic rule):
@@ -2295,7 +2295,7 @@ The Ranked-Pairs rule actually renders one of the seven optimal Kemeny rankings 
     >>> print("Fitness of Tideman's ranking: %.3f" % corr['correlation'])
     Fitness of Tideman's ranking: 0.918
 
-However, this last ranking rule is again not scalable to outranking digraphs of larger orders (> 100). For larger outranking digraphs with several hundred of alternatives, only Kohler's and the Net-Flows ranking heuristics remain computationally efficient.
+Unfortunately, this last ranking rule is again not efficiently scalable to outranking digraphs of larger orders (> 100). For such outranking digraphs, with several hundred of alternatives, only Kohler's and the Net-Flows ranking heuristics remain computationally efficient with a complexity of O(*n*^2).
 
 Links and appendices
 --------------------
