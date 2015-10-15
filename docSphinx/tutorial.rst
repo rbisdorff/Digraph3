@@ -2161,7 +2161,7 @@ Copeland's rule actually results in a linear order which is indeed highly correl
     >>> print("Fitness of Copeland's ranking: %.3f" % corr['correlation'])
     Fitness of Copeland's ranking: 0.906
 
-The valued version of the Copeland rule, called **Net-Flows** rule, is working this time on the given valued outranking digraph *g*. For each alternative *x* we compute a score that is the sum of the differences between the outranking characteristics r(*x* S *y*) and the outranked characteristics r(*y* S *x*) for all alternatives *y* different from *x*::
+The valued version of the Copeland rule, called **Net-Flows** rule, is working this time on the given valued outranking digraph *g*. For each alternative *x* we compute a score that is the sum of the differences between the outranking characteristics :math:`r(x\,S\,y)` and the outranked characteristics :math:`r(y\,S\,x)` for all alternatives *y* different from *x*::
   
     >>> from linearOrders import NetFlowsOrder
     >>> nf = NetFlowsOrder(g)
@@ -2257,7 +2257,7 @@ Tideman's Ranked-Pairs rule
 
 A further ranking heuristic is based on a prudent incremental construction of linear orders that avoids on the fly any cycling pairs of alternatives. The **Ranked-Pairs** rule may be formulated as follows:
 
-    1. Rank the ordered pairs (*x*, *y*) of alternatives in decreasing order of the outranking characteristic values r(*x* S *y*);
+    1. Rank the ordered pairs :math:`(x,y)` of alternatives in decreasing order of the outranking characteristic values :math:`r(x\,S\,y)`;
     2. Consider the pairs in that order (ties are resolved by a lexicographic rule):
 
          - if the next pair does not create a cycle with the pairs already blocked, block this pair;
