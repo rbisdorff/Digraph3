@@ -2123,7 +2123,7 @@ Some ranking rules will work on the associated Condorcet digraph, i.e. the stric
 To estimate how difficult this ranking problem may be, we can have a look at the corresponding *strict* outranking digraph drawing:
 
 .. image:: rankingTutorial.png
-   :width: 200 px
+   :width: 400 px
    :align: center
 
 
