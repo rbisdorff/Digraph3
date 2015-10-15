@@ -1074,8 +1074,6 @@ class KemenyOrder(LinearOrder):
             relation[x] = {}
             for j in range(n):
                 y = kemenyRanking[j]
-                if Debug:
-                    print(x,y)
                 relation[x][y] = Med
                 if i < j:
                     relation[x][y] = Max
