@@ -3769,14 +3769,34 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </div>
 <p>The valued version of the Copeland rule, called <strong>Net-Flows</strong> rule, is working this time on the given valued outranking digraph <em>g</em>. For each alternative <em>x</em> we compute a score that is the sum of the differences between the outranking characteristics r(<em>x</em> S <em>y</em>) and the outranked characteristics r(<em>y</em> S <em>x</em>) for all alternatives <em>y</em> different from <em>x</em>:</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">NetFlowsOrder</span>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">NetFlowsOrder</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nf</span><span class="o">.</span><span class="n">netFlows</span>
+<span class="go">[(Decimal(&#39;7.143&#39;), &#39;a3&#39;),</span>
+<span class="go"> (Decimal(&#39;2.155&#39;), &#39;a9&#39;),</span>
+<span class="go"> (Decimal(&#39;1.214&#39;), &#39;a1&#39;),</span>
+<span class="go"> (Decimal(&#39;-0.429&#39;), &#39;a4&#39;),</span>
+<span class="go"> (Decimal(&#39;-0.690&#39;), &#39;a8&#39;),</span>
+<span class="go"> (Decimal(&#39;-1.631&#39;), &#39;a6&#39;),</span>
+<span class="go"> (Decimal(&#39;-1.774&#39;), &#39;a5&#39;),</span>
+<span class="go"> (Decimal(&#39;-1.845&#39;), &#39;a2&#39;),</span>
+<span class="go"> (Decimal(&#39;-4.143&#39;), &#39;a7&#39;)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nf</span><span class="o">.</span><span class="n">showRanking</span><span class="p">()</span>
 <span class="go">[&#39;a3&#39;, &#39;a9&#39;, &#39;a1&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a6&#39;, &#39;a5&#39;, &#39;a2&#39;, &#39;a7&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">nf</span><span class="p">)</span>
@@ -3805,14 +3825,16 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 <p>So, <strong>0.918</strong> is the highest possible ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking relation. A Kemeny ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In in our example we hence obtain seven potential Kemeny rankings:</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ke</span><span class="o">.</span><span class="n">maximalOrders</span>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ke</span><span class="o">.</span><span class="n">maximalOrders</span>
 <span class="go">[[&#39;a1&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a9&#39;, &#39;a5&#39;, &#39;a8&#39;, &#39;a2&#39;, &#39;a6&#39;, &#39;a7&#39;],</span>
 <span class="go">[&#39;a1&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a9&#39;, &#39;a5&#39;, &#39;a8&#39;, &#39;a6&#39;, &#39;a2&#39;, &#39;a7&#39;],</span>
 <span class="go">[&#39;a1&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a9&#39;, &#39;a5&#39;, &#39;a8&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a2&#39;],</span>
@@ -3820,23 +3842,34 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">[&#39;a1&#39;, &#39;a3&#39;, &#39;a9&#39;, &#39;a5&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a2&#39;, &#39;a6&#39;, &#39;a7&#39;],</span>
 <span class="go">[&#39;a1&#39;, &#39;a3&#39;, &#39;a9&#39;, &#39;a5&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a6&#39;, &#39;a2&#39;, &#39;a7&#39;],</span>
 <span class="go">[&#39;a1&#39;, &#39;a3&#39;, &#39;a9&#39;, &#39;a5&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a2&#39;]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ke</span><span class="o">.</span><span class="n">maxKemenyIndex</span>
+<span class="go">Decimal(&#39;15.095&#39;)</span>
 </pre></div>
 </td></tr></table></div>
 <p>Slater&#8217;s ranking rule is the same as Kemeny&#8217;s, but instead it is working on the associated crisp Condorcet digraph <em>c</em>. It gives the following result:</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span> <span class="o">=</span> <span class="n">KemenyOrder</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span> <span class="o">=</span> <span class="n">KemenyOrder</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span><span class="o">.</span><span class="n">showRanking</span><span class="p">()</span>
 <span class="go">[&#39;a1&#39;, &#39;a3&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a6&#39;, &#39;a9&#39;, &#39;a5&#39;, &#39;a2&#39;, &#39;a7&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">sl</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;Fitness of Slater&#39;s ranking: </span><span class="si">%.3f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">corr</span><span class="p">[</span><span class="s">&#39;correlation&#39;</span><span class="p">])</span>
 <span class="go">Fitness of Slater&#39;s ranking: 0.844</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">maximalOrders</span><span class="p">)</span>
+<span class="go">174</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span><span class="o">.</span><span class="n">maxKemenyIndex</span>
+<span class="go">Decimal(&#39;36.0&#39;)</span>
 </pre></div>
 </td></tr></table></div>
-<p>We notice here that the crisp Copeland ranking (0.857) above seams to be slightly better fitting then Slater&#8217;s (0.844). Kemeny&#8217;s as well as Slater&#8217;s ranking rules are computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (&lt; 20 objects). More heuristic ranking rules, like the Copeland ones, are needed.</p>
+<p>We notice here that the crisp Copeland ranking (0.857) above seams to be slightly better fitting then Slater&#8217;s (0.844), but also less discriminating as there are in fact 174 optimal Slater rankings.</p>
+<p>Kemeny&#8217;s as well as Slater&#8217;s ranking rules are computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (&lt; 20 objects). More heuristic ranking rules, like the Copeland ones, are therefore needed in practice.</p>
 </div>
 <div class="section" id="kohler-s-ranking-by-choosing-rule">
 <h3><a class="toc-backref" href="#id90">Kohler&#8217;s ranking-by-choosing rule</a><a class="headerlink" href="#kohler-s-ranking-by-choosing-rule" title="Permalink to this headline">¶</a></h3>

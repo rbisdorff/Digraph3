@@ -2151,6 +2151,16 @@ The valued version of the Copeland rule, called **Net-Flows** rule, is working t
   
     >>> from linearOrders import NetFlowsOrder
     >>> nf = NetFlowsOrder(g)
+    >>> nf.netFlows
+    [(Decimal('7.143'), 'a3'), 
+     (Decimal('2.155'), 'a9'), 
+     (Decimal('1.214'), 'a1'), 
+     (Decimal('-0.429'), 'a4'), 
+     (Decimal('-0.690'), 'a8'), 
+     (Decimal('-1.631'), 'a6'), 
+     (Decimal('-1.774'), 'a5'), 
+     (Decimal('-1.845'), 'a2'), 
+     (Decimal('-4.143'), 'a7')]
     >>> nf.showRanking()
     ['a3', 'a9', 'a1', 'a4', 'a8', 'a6', 'a5', 'a2', 'a7']
     >>> corr = g.computeOrdinalCorrelation(nf)
@@ -2182,6 +2192,8 @@ So, **0.918** is the highest possible ordinal correlation (fitness) any potentia
     ['a1', 'a3', 'a9', 'a5', 'a8', 'a4', 'a2', 'a6', 'a7'], 
     ['a1', 'a3', 'a9', 'a5', 'a8', 'a4', 'a6', 'a2', 'a7'], 
     ['a1', 'a3', 'a9', 'a5', 'a8', 'a4', 'a6', 'a7', 'a2']]
+    >>> ke.maxKemenyIndex
+    Decimal('15.095')
 
 Slater's ranking rule is the same as Kemeny's, but instead it is working on the associated crisp Condorcet digraph *c*. It gives the following result::
 
@@ -2191,8 +2203,14 @@ Slater's ranking rule is the same as Kemeny's, but instead it is working on the 
     >>> corr = g.computeOrdinalCorrelation(sl)
     >>> print("Fitness of Slater's ranking: %.3f" % corr['correlation'])
     Fitness of Slater's ranking: 0.844
+    >>> len(sl.maximalOrders)
+    174
+    >>> sl.maxKemenyIndex
+    Decimal('36.0')
 
-We notice here that the crisp Copeland ranking (0.857) above seams to be slightly better fitting then Slater's (0.844). Kemeny's as well as Slater's ranking rules are computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (< 20 objects). More heuristic ranking rules, like the Copeland ones, are needed.
+We notice here that the crisp Copeland ranking (0.857) above seams to be slightly better fitting then Slater's (0.844), but also less discriminating as there are in fact 174 optimal Slater rankings. 
+
+Kemeny's as well as Slater's ranking rules are computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (< 20 objects). More heuristic ranking rules, like the Copeland ones, are therefore needed in practice.
 
 Kohler's ranking-by-choosing rule
 .................................

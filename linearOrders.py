@@ -882,9 +882,7 @@ class NetFlowsOrder(LinearOrder):
             for x in actions:
                 xnetflows = sum((otherRelation[x][y] - otherRelation[y][x])\
                                  for y in actions)
-                netFlows.append((-xnetflows,x))
-                # reversed sorting with keeping the actions initial ordering
-                # in case of ties
+                netFlows.append((xnetflows,x))
         else:
             otherMax = other.valuationdomain['max']
             otherMin = other.valuationdomain['min']
@@ -893,10 +891,11 @@ class NetFlowsOrder(LinearOrder):
                 xnetflows = sum((otherRelation[x][y] +\
                                 (otherMax - otherRelation[y][x] + otherMin))\
                                  for y in actions)
-                netFlows.append((-xnetflows,x))
-                # reversed sorting with keeping the actions initial ordering
-                # in case of ties
-        netFlows.sort()
+                netFlows.append((xnetflows,x))
+        # reversed sorting with keeping the actions initial ordering
+        # in case of ties
+        netFlows.sort(reverse=True)
+        self.netFlows = netFlows
 ##        if Debug:
 ##            print(netFlows)
 
@@ -1247,7 +1246,7 @@ if __name__ == "__main__":
 
     Threading = False
     print('*-------- Testing KemenyOrder class -------')
-    t = RandomCBPerformanceTableau(numberOfActions=20,numberOfCriteria=13,seed=1)
+    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=13,seed=1)
     #t = PerformanceTableau('testLin')    
     g = BipolarOutrankingDigraph(t,Normalized=True)
     g.showRelationTable()
@@ -1300,15 +1299,15 @@ if __name__ == "__main__":
     print(g.computeOrdinalCorrelation(ko))
     print(time()-t0)
     print()
-    print('==>> boosted Kohler ordering:')
-    t0 = time()
-    bko = BoostedKohlerOrder(g)
-    #g.showRelationTable()
-    print(bko.boostedKohlerRanking)
-    print(bko.boostedKohlerOrder)
-    print(g.computeOrdinalCorrelation(bko))
-    print(time()-t0)
-    print()
+##    print('==>> boosted Kohler ordering:')
+##    t0 = time()
+##    bko = BoostedKohlerOrder(g)
+##    #g.showRelationTable()
+##    print(bko.boostedKohlerRanking)
+##    print(bko.boostedKohlerOrder)
+##    print(g.computeOrdinalCorrelation(bko))
+##    print(time()-t0)
+##    print()
     print('==>> ranked pairs ordering:')
     t0 = time()
     rp = RankedPairsOrder(g)
