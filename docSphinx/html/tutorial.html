@@ -3730,6 +3730,17 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 <p>To estimate how difficult this ranking problem may be, we can have a look at the corresponding <em>strict</em> outranking digraph drawing:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span> <span class="c"># converse of the negation of g</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;rankingTutorial&#39;</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go">Exporting to rankingTutorial.dot</span>
+<span class="go">dot -Grankdir=BT -Tpng rankingTutorial.dot -o rankingTutorial.png</span>
+</pre></div>
+</td></tr></table></div>
 <a class="reference internal image-reference" href="_images/rankingTutorial.png"><img alt="_images/rankingTutorial.png" class="align-center" src="_images/rankingTutorial.png" style="width: 400px;" /></a>
 </div>
 <div class="section" id="the-copeland-ranking">

@@ -2120,7 +2120,13 @@ Some ranking rules will work on the associated Condorcet digraph, i.e. the stric
     'a8' |   -1   +1   -1   +1   +1   +1    0    -   -1  
     'a9' |    0    0   -1   -1   +1   +1   +1   +1    -  
 
-To estimate how difficult this ranking problem may be, we can have a look at the corresponding *strict* outranking digraph drawing:
+To estimate how difficult this ranking problem may be, we can have a look at the corresponding *strict* outranking digraph drawing::
+
+    >>> gcd = ~(-g) # converse of the negation of g
+    >>> gcd.exportGraphViz('rankingTutorial')
+    *---- exporting a dot file dor GraphViz tools ---------*
+    Exporting to rankingTutorial.dot
+    dot -Grankdir=BT -Tpng rankingTutorial.dot -o rankingTutorial.png
 
 .. image:: rankingTutorial.png
    :width: 400 px
