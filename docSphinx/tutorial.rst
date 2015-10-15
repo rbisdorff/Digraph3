@@ -2076,14 +2076,15 @@ Ranking with multiple incommensurable criteria
 
 The ranking problem
 ...................
-We need to rank without ties a set *X* of items (usally decision alternatives) that are evaluated on multiple performance criteria and for which we may know their pairwise outranking situation characteristics, i.e. r(*x* S *y*) for all *x*, *y* in *X*.
+We need to rank without ties a set *X* of items (usally decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise outranking situation characteristics, i.e. r(*x* S *y*) for all *x*, *y* in *X* (see [BIS-2013]_).
 
-Unfortunately, the Condorcet digraph, associated with a given outranking digraph, presents only exceptionally a linear ordering. Usually, pairwise majority comparisons do not indeed render a complete and transitive outranking relation. 
+Unfortunately, the Condorcet digraph, associated with a given outranking digraph, presents only exceptionally a linear ordering. Usually, pairwise majority comparisons do not render even a complete or, at least, a partial transitive outranking relation. 
 
-Let us consider a sample outranking digraph::
+Let us consider a didactic outranking digraph generated from a random Cost-Benefit performance tableau concerning 9 decision alternatives evaluated on 13 performance criteria::
 
     >>> from outrankingDigraphs import *
-    >>> t = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=13,seed=2)    
+    >>> t = RandomCBPerformanceTableau(numberOfActions=9,
+    ...                                numberOfCriteria=13,seed=2)    
     >>> g = BipolarOutrankingDigraph(t,Normalized=True)
     >>> g.showRelationTable(ReflexiveTerms=False)
     * ---- Relation Table -----
@@ -2101,7 +2102,8 @@ Let us consider a sample outranking digraph::
 
 Some ranking rules will work on the associated Condorcet digraph, i.e. the strict median cut polarised digraph::
 
-    >>> c = PolarisedOutrankingDigraph(g,level=0,KeepValues=False,StrictCut=True)
+    >>> c = PolarisedOutrankingDigraph(g,level=0,KeepValues=False,
+    ...                                StrictCut=True)
     >>> c.showRelationTable(ReflexiveTerms=False,IntegerValues=True)
     * ---- Relation Table -----
      S   |  'a1' 'a2' 'a3' 'a4' 'a5' 'a6' 'a7' 'a8' 'a9',   
@@ -2139,18 +2141,19 @@ The outranking relation is hence very far from a transitive one; s serious probl
     1
     >>> g.showChordlessCircuits()
     *---- Chordless circuits ----*    
-    ['a4', 'a9', 'a8'] , credibility : 0.024 1 circuits.
+    ['a4', 'a9', 'a8'] , credibility : 0.024
 
-There is one chordless circuit detected in the given relation, namely *a4* outranks *a9*, the latter outranks *a8", and *a8* outranks again *a4*. Any potential linear ordering of these three alternatives will contradict in fact the given outranking relation.
 
-Several heuristic ranking rules have been proposed for constructing a linear order which is closest in some sense to a given outranking relation.
+There is one chordless circuit detected in the given outranking digraph *g*, namely *a4* outranks *a9*, the latter outranks *a8", and *a8* outranks again *a4*. Any potential linear ordering of these three alternatives will, in fact, always contradict somehow the given outranking relation.
+
+Several heuristic ranking rules have been proposed for constructing a linear order which is closest in some specific sense to a given outranking relation.
 
 The Digraph3 resources provide some of the most common of these ranking rules, like Copeland's, Kemeny's, Slater's, Kohler and Tideman's ranking rules.
 
 The Copeland ranking
 ....................
 
-Copeland's rule computes, indeed, a score for each alternative which results from the difference between its crisp outdegree (number of validated (+1) crisp outranking situations) and its crisp indegree (number of validated crisp (+1) outranked situations), as observed in the associated codual graph *c* (or in the associted codual digraph above)::
+Copeland's rule, the most intuitive one as it worls well for any outranking relation which models in fact a linear order, computes a score for each alternative resulting from the difference between its crisp outdegree (number of validated (+1) crisp outranking situations) and its crisp indegree (number of validated crisp (+1) outranked situations)::
 
     >>> from linearOrders import CopelandOrder
     >>> cop = CopelandOrder(g,Debug=True)
@@ -2167,7 +2170,7 @@ Copeland's rule computes, indeed, a score for each alternative which results fro
     >>> cop.showRanking()
     ['a3', 'a1', 'a4', 'a9', 'a5', 'a8', 'a6', 'a2', 'a7']
 
-Notice by the way that Copeland scores are in fact invariant under a codual (converse of the negation) transform of the outranking digraph. Alternative *a3* has the best score (+7), followed by alternative *a1* (+3). Alternatives *a4* and *a9* have the same score (+1); following the lexicographic rule, *a4* is hence ranked before *a9*. Same situation is observed for *a5* and *a8* with a score of -1. 
+Notice by the way that Copeland scores, as observed in the associated codual relation table (or in the codual digraph drawing above), are in fact invariant under a codual (converse of the negation) transform of the outranking digraph. Alternative *a3* has the best score (+7), followed by alternative *a1* (+3). Alternatives *a4* and *a9* have the same score (+1); following the lexicographic rule, *a4* is hence ranked before *a9*. Same situation is observed for *a5* and *a8* with a score of -1. 
 
 Copeland's rule actually results in a linear order which is indeed highly correlated, in the ordinal Kendall sense (see [Bis-2012]_), with the given pairwise outranking relation::
 
@@ -2175,7 +2178,7 @@ Copeland's rule actually results in a linear order which is indeed highly correl
     >>> print("Fitness of Copeland's ranking: %.3f" % corr['correlation'])
     Fitness of Copeland's ranking: 0.906
 
-The valued version of the Copeland rule, called **Net-Flows** rule, is working this time on the given valued outranking digraph *g*. For each alternative *x* we compute a score that is the sum of the differences between the outranking characteristics :math:`r(x\,S\,y)` and the outranked characteristics r(*y* S *x*) for all alternatives *y* different from *x*::
+The valued version of the Copeland rule, called **Net-Flows** rule, is working directly on the given valued outranking digraph *g*. For each alternative *x* we compute a net flow score that is the sum of the differences between the **outranking** characteristics :math:`r(x\,S\,y)` and the **outranked** characteristics r(*y* S *x*) for all pairs of alternatives where *y* is different from *x*::
   
     >>> from linearOrders import NetFlowsOrder
     >>> nf = NetFlowsOrder(g)
@@ -2195,12 +2198,12 @@ The valued version of the Copeland rule, called **Net-Flows** rule, is working t
     >>> print("Fitness of net flows ranking: %.3f" % corr['correlation'])
     Fitness of net flows ranking: 0.828
 
-The Net-Flows ranking is here, in this didactic example, not as much correlated with the given outranking relation as its crisp cousin ranking. To appreciate the effective quality of the Copeland and the Net-Flows rankings, it is useful to consider both Kemeny's and Slater's ranking rules.
+The **Net-Flows** ranking is here, in this didactic example, not as much correlated with the given outranking relation as its crisp cousin ranking. To appreciate the effective quality of the Copeland and the Net-Flows rankings, it is useful to consider both Kemeny's and Slater's ranking rules.
 
 The Kemeny and the Slater rankings
 ..................................
 
-A **Kemeny** ranking is a linear order which is closest, in the sense of the ordinal Kendall distance, to the given valued outranking digraph *g*. A Slater ranking is the linear order which is similarly closest to the corresponding crisp Condorcet digraph *c*::
+A **Kemeny** ranking is a linear order which is closest, in the sense of the ordinal Kendall distance (see [Bis-2012]_), to the given valued outranking digraph *g*. A **Slater** ranking is the linear order which is similarly closest to the corresponding crisp Condorcet digraph *c*::
 
     >>> from linearOrders import KemenyOrder
     >>> ke = KemenyOrder(g,orderLimit=9) # default orderLimit is 7
@@ -2223,9 +2226,9 @@ So, **0.9175** is the highest possible ordinal correlation (fitness) any potenti
     >>> ke.maxKemenyIndex
     Decimal('15.095')
 
-It is interesting to notice that all seven Kemeny rankings, in fact, place alternative *a1* at rank 1 before alternative *a3*. And this is precisely what separates the Copeland ranking (see above) from being optimal in the Kemeny sense. 
+It is interesting to notice that all seven Kemeny rankings, in fact, place alternative *a1* at rank 1 before alternative *a3*. And this is precisely the only inversion what separates the Copeland ranking (see above) from being optimal in the Kemeny sense. 
 
-Slater's ranking rule is the same as Kemeny's, but instead it is working on the associated crisp Condorcet digraph *c*. It gives the following results::
+The **Slater** ranking rule is the same as Kemeny's, but it is working, instead,  on the associated crisp Condorcet digraph *c*. It gives the following results::
 
     >>> sl = KemenyOrder(c,orderLimit=9)
     >>> len(sl.maximalRankings)
@@ -2238,7 +2241,7 @@ Slater's ranking rule is the same as Kemeny's, but instead it is working on the 
     >>> print("Fitness of Slater's ranking: %.3f" % corr['correlation'])
     Fitness of Slater's ranking: 0.844
 
-We notice here that the crisp Copeland ranking above seams to be slightly better fitting (0.857) then Slater's (0.844), but there are in fact 174 such optimal Slater rankings. 
+We notice here that the crisp Copeland ranking above seams to be a good fit (0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. What precise ranking result should we adopt ? 
 
 Kemeny's as well as Slater's ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (< 20 objects). 
 
