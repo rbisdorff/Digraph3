@@ -2312,7 +2312,7 @@ The Ranked-Pairs rule actually renders one of the seven optimal Kemeny rankings 
     >>> print("Fitness of Tideman's ranking: %.3f" % corr['correlation'])
     Fitness of Tideman's ranking: 0.918
 
-Unfortunately, this last ranking rule is again not efficiently scalable to outranking digraphs of larger orders (> 100). For such outranking digraphs, with several hundred of alternatives, only Kohler's and the Net-Flows ranking heuristics remain computationally efficient with a complexity of :math:`O(n^2)`.
+Unfortunately, this last ranking rule is again not efficiently scalable to outranking digraphs of larger orders (> 100). For such outranking digraphs, with several hundred of alternatives, only Kohler's and the Net-Flows ranking heuristics remain computationally efficient with a complexity of :math:`O(n^2)` where *n* is the order of the outranking digraph.
 
 Links and appendices
 --------------------
