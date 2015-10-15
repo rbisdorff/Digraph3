@@ -2080,10 +2080,6 @@ We need to rank without ties a set *X* of items (usally decision alternatives) t
 
 Unfortunately, the Condorcet digraph, associated with a given outranking digraph, presents only exceptionally a linear ordering. Usually, pairwise majority comparisons do not indeed render a complete and transitive outranking relation. 
 
-Several heuristic ranking rules have been proposed for constructing a linear order which is closest in some sense to a given outranking relation.
-
-The Digraph3 resources provide some of the most common of these ranking rules, like Copeland's, Kemeny's, Slater's, Kohler and Tideman's ranking rules.
-
 Let us consider a sample outranking digraph::
 
     >>> from outrankingDigraphs import *
@@ -2132,11 +2128,29 @@ To estimate how difficult this ranking problem may be, we can have a look at the
    :width: 400 px
    :align: center
 
+The shown strict outranking relation is apparently not transitive: alternative *a9* outranks alternative *a5* and alternative *a5* outranks *a2*, however *a9* does not outrank *a2* for instance. We may compute the transitivity degree of the outranking digraph, ie the ratio of the number of outranking situations over the number of arcs of the transitive closue of the digraph::
+
+    >>> g.computeTransitivityDegree()
+    Decimal('0.508')
+    
+The outranking relation is hence very far from a transitive one; s serious problem when a linear ording is required. Let us furthermore see if there are any cyclic outrankings::
+    
+    >>> len(g.computeChordlessCircuits())
+    1
+    >>> g.showChordlessCircuits()
+    *---- Chordless circuits ----*    
+    ['a4', 'a9', 'a8'] , credibility : 0.024 1 circuits.
+
+There is one chordless circuit detected in the given relation, namely *a4* outranks *a9*, the latter outranks *a8", and *a8* outranks again *a4*. Any potential linear ordering of these three alternatives will contradict in fact the given outranking relation.
+
+Several heuristic ranking rules have been proposed for constructing a linear order which is closest in some sense to a given outranking relation.
+
+The Digraph3 resources provide some of the most common of these ranking rules, like Copeland's, Kemeny's, Slater's, Kohler and Tideman's ranking rules.
 
 The Copeland ranking
 ....................
 
-Copeland's rule computes a score for each alternative which results from the difference between its crisp outdegree (number of validated (+1) crisp outranking situations) and its crisp indegree (number of validated crisp (+1) outranked situations)::
+Copeland's rule computes, indeed, a score for each alternative which results from the difference between its crisp outdegree (number of validated (+1) crisp outranking situations) and its crisp indegree (number of validated crisp (+1) outranked situations), as observed in the associated codual graph *c* (or in the associted codual digraph above)::
 
     >>> from linearOrders import CopelandOrder
     >>> cop = CopelandOrder(g,Debug=True)
@@ -2153,7 +2167,7 @@ Copeland's rule computes a score for each alternative which results from the dif
     >>> cop.showRanking()
     ['a3', 'a1', 'a4', 'a9', 'a5', 'a8', 'a6', 'a2', 'a7']
 
-Notice by the way that Copeland scores are invariant under a codual (converse of the negation) transform of the outranking digraph. Alternative *a3* has the best score (+7), followed by alternative *a1* (+3). Alternatives *a4* and *a9* have the same score (+1); following the lexicographic rule, *a4* is hence ranked before *a9*. Same situation is observed for *a5* and *a8* with a score of -1. 
+Notice by the way that Copeland scores are in fact invariant under a codual (converse of the negation) transform of the outranking digraph. Alternative *a3* has the best score (+7), followed by alternative *a1* (+3). Alternatives *a4* and *a9* have the same score (+1); following the lexicographic rule, *a4* is hence ranked before *a9*. Same situation is observed for *a5* and *a8* with a score of -1. 
 
 Copeland's rule actually results in a linear order which is indeed highly correlated, in the ordinal Kendall sense (see [Bis-2012]_), with the given pairwise outranking relation::
 

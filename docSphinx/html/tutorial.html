@@ -3663,8 +3663,6 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <h3><a class="toc-backref" href="#id87">The ranking problem</a><a class="headerlink" href="#the-ranking-problem" title="Permalink to this headline">¶</a></h3>
 <p>We need to rank without ties a set <em>X</em> of items (usally decision alternatives) that are evaluated on multiple performance criteria and for which we may know their pairwise outranking situation characteristics, i.e. r(<em>x</em> S <em>y</em>) for all <em>x</em>, <em>y</em> in <em>X</em>.</p>
 <p>Unfortunately, the Condorcet digraph, associated with a given outranking digraph, presents only exceptionally a linear ordering. Usually, pairwise majority comparisons do not indeed render a complete and transitive outranking relation.</p>
-<p>Several heuristic ranking rules have been proposed for constructing a linear order which is closest in some sense to a given outranking relation.</p>
-<p>The Digraph3 resources provide some of the most common of these ranking rules, like Copeland&#8217;s, Kemeny&#8217;s, Slater&#8217;s, Kohler and Tideman&#8217;s ranking rules.</p>
 <p>Let us consider a sample outranking digraph:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -3742,10 +3740,30 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 <a class="reference internal image-reference" href="_images/rankingTutorial.png"><img alt="_images/rankingTutorial.png" class="align-center" src="_images/rankingTutorial.png" style="width: 400px;" /></a>
+<p>The shown strict outranking relation is apparently not transitive: alternative <em>a9</em> outranks alternative <em>a5</em> and alternative <em>a5</em> outranks <em>a2</em>, however <em>a9</em> does not outrank <em>a2</em> for instance. We may compute the transitivity degree of the outranking digraph, ie the ratio of the number of outranking situations over the number of arcs of the transitive closue of the digraph:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
+<span class="go">Decimal(&#39;0.508&#39;)</span>
+</pre></div>
+</div>
+<p>The outranking relation is hence very far from a transitive one; s serious problem when a linear ording is required. Let us furthermore see if there are any cyclic outrankings:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">())</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChordlessCircuits</span><span class="p">()</span>
+<span class="go">*---- Chordless circuits ----*</span>
+<span class="go">[&#39;a4&#39;, &#39;a9&#39;, &#39;a8&#39;] , credibility : 0.024 1 circuits.</span>
+</pre></div>
+</td></tr></table></div>
+<p>There is one chordless circuit detected in the given relation, namely <em>a4</em> outranks <em>a9</em>, the latter outranks <em>a8&#8221;, and *a8</em> outranks again <em>a4</em>. Any potential linear ordering of these three alternatives will contradict in fact the given outranking relation.</p>
+<p>Several heuristic ranking rules have been proposed for constructing a linear order which is closest in some sense to a given outranking relation.</p>
+<p>The Digraph3 resources provide some of the most common of these ranking rules, like Copeland&#8217;s, Kemeny&#8217;s, Slater&#8217;s, Kohler and Tideman&#8217;s ranking rules.</p>
 </div>
 <div class="section" id="the-copeland-ranking">
 <h3><a class="toc-backref" href="#id88">The Copeland ranking</a><a class="headerlink" href="#the-copeland-ranking" title="Permalink to this headline">¶</a></h3>
-<p>Copeland&#8217;s rule computes a score for each alternative which results from the difference between its crisp outdegree (number of validated (+1) crisp outranking situations) and its crisp indegree (number of validated crisp (+1) outranked situations):</p>
+<p>Copeland&#8217;s rule computes, indeed, a score for each alternative which results from the difference between its crisp outdegree (number of validated (+1) crisp outranking situations) and its crisp indegree (number of validated crisp (+1) outranked situations), as observed in the associated codual graph <em>c</em> (or in the associted codual digraph above):</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3775,14 +3793,14 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">[&#39;a3&#39;, &#39;a1&#39;, &#39;a4&#39;, &#39;a9&#39;, &#39;a5&#39;, &#39;a8&#39;, &#39;a6&#39;, &#39;a2&#39;, &#39;a7&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Notice by the way that Copeland scores are invariant under a codual (converse of the negation) transform of the outranking digraph. Alternative <em>a3</em> has the best score (+7), followed by alternative <em>a1</em> (+3). Alternatives <em>a4</em> and <em>a9</em> have the same score (+1); following the lexicographic rule, <em>a4</em> is hence ranked before <em>a9</em>. Same situation is observed for <em>a5</em> and <em>a8</em> with a score of -1.</p>
+<p>Notice by the way that Copeland scores are in fact invariant under a codual (converse of the negation) transform of the outranking digraph. Alternative <em>a3</em> has the best score (+7), followed by alternative <em>a1</em> (+3). Alternatives <em>a4</em> and <em>a9</em> have the same score (+1); following the lexicographic rule, <em>a4</em> is hence ranked before <em>a9</em>. Same situation is observed for <em>a5</em> and <em>a8</em> with a score of -1.</p>
 <p>Copeland&#8217;s rule actually results in a linear order which is indeed highly correlated, in the ordinal Kendall sense (see <a class="reference internal" href="#bis-2012" id="id30">[Bis-2012]</a>), with the given pairwise outranking relation:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">cop</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;Fitness of Copeland&#39;s ranking: </span><span class="si">%.3f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">corr</span><span class="p">[</span><span class="s">&#39;correlation&#39;</span><span class="p">])</span>
 <span class="go">Fitness of Copeland&#39;s ranking: 0.906</span>
 </pre></div>
 </div>
-<p>The valued version of the Copeland rule, called <strong>Net-Flows</strong> rule, is working this time on the given valued outranking digraph <em>g</em>. For each alternative <em>x</em> we compute a score that is the sum of the differences between the outranking characteristics <img class="math" src="_images/math/1057d77b407580c943a18eff633c58ceaab4f97a.png" alt="r(x\,S\,y)"/> and the outranked characteristics <img class="math" src="_images/math/0e84065eedd87d495cac26161443d0a1f6dd36b2.png" alt="r(y\,S\,x)"/> for all alternatives <em>y</em> different from <em>x</em>:</p>
+<p>The valued version of the Copeland rule, called <strong>Net-Flows</strong> rule, is working this time on the given valued outranking digraph <em>g</em>. For each alternative <em>x</em> we compute a score that is the sum of the differences between the outranking characteristics <img class="math" src="_images/math/1057d77b407580c943a18eff633c58ceaab4f97a.png" alt="r(x\,S\,y)"/> and the outranked characteristics r(<em>y</em> S <em>x</em>) for all alternatives <em>y</em> different from <em>x</em>:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
