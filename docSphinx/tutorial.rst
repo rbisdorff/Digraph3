@@ -2120,6 +2120,12 @@ Some ranking rules will work on the associated Condorcet digraph, i.e. the stric
     'a8' |   -1   +1   -1   +1   +1   +1    0    -   -1  
     'a9' |    0    0   -1   -1   +1   +1   +1   +1    -  
 
+To estimate how difficult this ranking problem may be, we can have a look at the corresponding *strict* outranking digraph drawing:
+
+.. image:: rankingTutorial.png
+   :width: 200 px
+   :align: center
+
 
 The Copeland ranking
 ....................
