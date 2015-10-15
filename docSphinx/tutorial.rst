@@ -44,7 +44,7 @@ Two download options are given:
 Purpose
 .......
 
-The basic idea of these Python3 modules is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankins, linear ordering, etc. Most of the available computing resources are meant to illustrate the *Algorithmic Decision Theory* course given in the University of Luxembourg Master in Information and Computer Science (MICS). 
+The basic idea of these Python3 modules is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the *Algorithmic Decision Theory* course given in the University of Luxembourg Master in Information and Computer Science (MICS). 
 
 The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
 
@@ -141,7 +141,7 @@ Some simple methods are easily applicable to this instantiated Digraph object *d
 	mean degree : 1.80
 	                                  :  [0, 1, 2, 3, 4, 'inf']
 	neighbourhood-depths distribution :  [0, 0, 2, 2, 1, 0]
-	mean neighbourhood depth : 2.80
+	mean neighborhood depth : 2.80
 	digraph diameter :  4
 	agglomeration distribution :
 	1 : 50.00
@@ -212,7 +212,7 @@ With the ``save()`` method we may keep a backup version for future use of *dg* w
     '6'    | -0.84  0.00 -0.40 -0.96 -0.18   -   -0.22	 
     '7'    |  0.88  0.72  0.82  0.52 -0.84  0.04  -	 
     >>> dg.showNeighborhoods()
-    Neighborhoods osberved in digraph 'randomdomValuation' 
+    Neighborhoods observed in digraph 'randomdomValuation' 
     Gamma     :
     '1': in => {'5', '7', '4'}, out => {'5', '7', '6', '3', '4'}
     '2': in => {'7', '3'}, out => {'5', '7', '4'}
@@ -368,7 +368,7 @@ Computing the dual, respectively the converse, may also be done with prefixing t
 Symmetric and transitive closures
 .................................
 
-Symmetric and transtive closure in site constructors are also available, Note that it is a good idea,before going ahead with these in-site operations that irreversibly modify the original dg object, to previously make a backup version of *dg*. The simplest storage method, always provide by the generic :py:func:`diggraphs.Digraph.save()` writes out in a named file the python content in string representation:
+Symmetric and transitive closure in-site constructors are also available. Note that it is a good idea, before going ahead with these in-site operations who irreversibly modify the original *dg* object, to previously make a backup version of *dg*. The simplest storage method, always provided by the generic :py:func:`diggraphs.Digraph.save()`, writes out in a named file the python content of the Digraph object in string representation:
     >>> dg.save('tutRandValDigraph')
     >>> dg.closeSymmetric()
     >>> dg.closeTransitive()
@@ -381,7 +381,7 @@ Symmetric and transtive closure in site constructors are also available, Note th
 Strong components
 .................
 
-As the original digraph *dg* was connected (see above the result of the ``dg.showShort()`` command), both the symmetric and transitive closures operated together, will necessarily produce a single strong commponent, i.e. a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Using the :py:class:`digraphs.StrongComponentsCollapsedDigraph` constructor here will render a single hyper-node gathering all the original nodes :
+As the original digraph *dg* was connected (see above the result of the ``dg.showShort()`` command), both the symmetric and transitive closures operated together, will necessarily produce a single strong component, i.e. a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Using the :py:class:`digraphs.StrongComponentsCollapsedDigraph` constructor here will render a single hyper-node gathering all the original nodes :
     >>> from digraphs import StrongComponentsCollapsedDigraph
     >>> sc = StrongComponentsCollapsedDigraph(dg)
     >>> sc.showAll()
@@ -405,7 +405,7 @@ As the original digraph *dg* was connected (see above the result of the ``dg.sho
 CSV storage
 ...........
 
-Sometimes it is required to exchange the graph valuation data in CSV format with a statistical package like `R <http://www.r-project.org/>`_. For this purpose it is possible to export the digraph data into a CSV file. The valuation domain is hereby normalized by default to the range [-1,1] and the diagonal put by defalut to the minimal value -1:
+Sometimes it is required to exchange the graph valuation data in CSV format with a statistical package like `R <http://www.r-project.org/>`_. For this purpose it is possible to export the digraph data into a CSV file. The valuation domain is hereby normalized by default to the range [-1,1] and the diagonal put by default to the minimal value -1:
 	>>> dg = Digraph('tutRandValDigraph')
 	>>> dg.saveCSV('tutRandValDigraph')
 	# content of file tutRandValDigraph.csv
@@ -440,7 +440,7 @@ It is as well possible to show a colored version of the valued relation table in
    :width: 400 px
    :align: center
 
-Positive arcs are shown in green and negative in red. Indetermiate -zero-valued- links, like the reflexive diagonal ones or the link between node *6* and node *2*, are shown in gray.
+Positive arcs are shown in green and negative in red. Indeterminate -zero-valued- links, like the reflexive diagonal ones or the link between node *6* and node *2*, are shown in gray.
 
 Complete, empty and indeterminate digraphs
 ..........................................
@@ -763,7 +763,7 @@ Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids*
 Simulating Metropolis random walks
 ..................................
 
-Finally, we provide the :py:class:`graphs.MetropolisChain` class, a specialization of the :py:class:`graphs.Graph` class, for implementing a generic **Metropolis MCMC** (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  :code:`probs = {‘v1’: x, ‘v2’: y, ...}` for visiting each vertice (see lines 14-22). 
+Finally, we provide the :py:class:`graphs.MetropolisChain` class, a specialization of the :py:class:`graphs.Graph` class, for implementing a generic **Metropolis MCMC** (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  :code:`probs = {‘v1’: x, ‘v2’: y, ...}` for visiting each vertex (see lines 14-22). 
         >>> from graphs import MetropolisChain
 	>>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
 	>>> g.showShort()
@@ -777,7 +777,7 @@ Finally, we provide the :py:class:`graphs.MetropolisChain` class, a specializati
 	v3 -> ['v5', 'v1']
 	v4 -> ['v2', 'v5', 'v1']
 	v5 -> ['v3', 'v4']
-	>>> probs = {}  # initialise a potential stationary probability vector 
+	>>> probs = {}  # initialize a potential stationary probability vector 
 	>>> n = g.order # for instance: probs[v_i] = n-i/Sum(1:n) for i in 1:n
 	>>> i = 0
 	>>> verticesList = [x for x in g.vertices]
@@ -804,11 +804,11 @@ Finally, we provide the :py:class:`graphs.MetropolisChain` class, a specializati
 	  'v4' |  0.33   0.33    0.00    0.08    0.25
 	  'v5' |  0.00   0.00    0.50    0.50    0.00
 
-The ``checkSampling()`` method (see line 23) generates a randomwalk of *nSim=30000* steps on the given graph and records by the way the observed relative frequency with which each vertice is passed by. In this exmaple, the stationary transition probability distribution, shown by the ``showTransitionMatrix()`` method above (see lines 31-), is quite adequately simulated.
+The ``checkSampling()`` method (see line 23) generates a random walk of *nSim=30000* steps on the given graph and records by the way the observed relative frequency with which each vertex is passed by. In this example, the stationary transition probability distribution, shown by the ``showTransitionMatrix()`` method above (see lines 31-), is quite adequately simulated.
 
 For more technical information and more code examples, look into the technical documentation of the :ref:`graphs-label`. For the readers interested in algorithmic applications of Markov Chains we may recommend consulting O. Häggström's 2002 book: [FMCAA]_.
 
-The Berge mystery story: Who is the lyer ?
+The Berge mystery story: Who is the lier ?
 ..........................................
 Suppose that the file ``berge.py`` contains the following :py:class:`graphs.Graph` instance data::
 
@@ -839,7 +839,7 @@ Suppose that the file ``berge.py`` contains the following :py:class:`graphs.Grap
     frozenset(['E','I']) : 1, 
     }
 
-This data concerns the famous *Berge mystery story* (see Golumbic, M. C. Algorithmic Graph Theory and Perfect Graphs, *Annals of Discrete Mathematics* 57 p. 20) Six professors (labelled *A*, *B*, *C*, *D*, *E* and *I*) had been to the library on the day that a rare tractate was stolen. Each entered once, stayed for some time, and then left. If two professors were in the lbrary at the same time, then at least one of them saw the other. Detectives questioned the professors and gathered the testimonies that *A* saw *B* and *E*; *B* saw *A* and *I*; *C* saw *D* and *I*; *D* saw *A* and *I*; *E* saw *B* and *I*; and *I* saw *C* and *E*. This data is gathered in the previous file, where each positive edge :math:`\{x,y\}` models the testimony that, either *x* saw *y*, or, *y* saw *x*.
+This data concerns the famous *Berge mystery story* (see Golumbic, M. C. Algorithmic Graph Theory and Perfect Graphs, *Annals of Discrete Mathematics* 57 p. 20) Six professors (labeled *A*, *B*, *C*, *D*, *E* and *I*) had been to the library on the day that a rare tractate was stolen. Each entered once, stayed for some time, and then left. If two professors were in the library at the same time, then at least one of them saw the other. Detectives questioned the professors and gathered the testimonies that *A* saw *B* and *E*; *B* saw *A* and *I*; *C* saw *D* and *I*; *D* saw *A* and *I*; *E* saw *B* and *I*; and *I* saw *C* and *E*. This data is gathered in the previous file, where each positive edge :math:`\{x,y\}` models the testimony that, either *x* saw *y*, or, *y* saw *x*.
 
 Example Python3 session:
     >>> from graphs import Graph
@@ -876,7 +876,7 @@ From graph theory we know that time interval intersection graphs must in fact be
         (['D', 'I', 'E', 'A', 'D'], frozenset({'D', 'E', 'I', 'A'})), 
         (['D', 'I', 'B', 'A', 'D'], frozenset({'D', 'B', 'I', 'A'}))]
 
-We see three intersection cycles of length 4, which is impossible to occurr on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt the testimony that he indeed saw *A*, we obtain a correctly triangulated graph:
+We see three intersection cycles of length 4, which is impossible to occur on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt the testimony that he indeed saw *A*, we obtain a correctly triangulated graph:
 	>>> g.setEdgeValue( ('D','A'), 0)
 	>>> g.showShort()
 	*---- short description of the graph ----*
@@ -941,7 +941,7 @@ The module provides a :py:class:`votingDigraphs.RandomLinearVotingProfile` class
      'v5': ['a2', 'a3', 'a1'], 'v2': ['a3', 'a2', 'a1']}
      >>> ...
 
-Notice that in this example, all voters are considered to be equi-significant. Their linear ballots can be viewd with the ``showLinearBallots`` method:
+Notice that in this example, all voters are considered to be equi-significant. Their linear ballots can be viewed with the ``showLinearBallots`` method:
     >>> v.showLinearBallots()
     voters(weight)	 candidates rankings
     v4(1.0): 	 ['a1', 'a2', 'a3']
@@ -951,7 +951,7 @@ Notice that in this example, all voters are considered to be equi-significant. T
     v2(1.0): 	 ['a3', 'a1', 'a2']
     >>> ...
 
-Editing of the linear voting profile may be acheived by storing the data in a file, edit it, and reload it again:
+Editing of the linear voting profile may be achieved by storing the data in a file, edit it, and reload it again:
     >>> v.save('tutorialLinearVotingProfile')
     *--- Saving linear profile in file: <tutorialLinearVotingProfile.py> ---*
     >>> v = LinearVotingProfile('tutorialLinearVotingProfile')
@@ -959,7 +959,7 @@ Editing of the linear voting profile may be acheived by storing the data in a fi
 Computing the winner
 ....................
 
-We may easily compute **uninominal votes**, i.e. how many times a candidate was ranked first, and see who is consequently the **simple majority** winner(s) in this election. 
+We may easily compute **uni-nominal votes**, i.e. how many times a candidate was ranked first, and see who is consequently the **simple majority** winner(s) in this election. 
     >>> v.computeUninominalVotes()
     {'a2': 1.0, 'a1': 2.0, 'a3': 2.0}
     >>> v.computeSimpleMajorityWinner()
@@ -1054,7 +1054,7 @@ Usually, when aggregating linear ballots, there appear cyclic social preferences
     
 Now, we cannot find any completely positive row in the relation table. No one of the five candidates is beating all the others with an absolute majority of votes. There is no Condorcet winner anymore. In fact, when looking at a graphviz drawing of this Condorcet digraph, we may observe cyclic preferences, like (*a1* > *a2* > *a3* > *a1*) for instance. 
     >>> cdg.exportGraphViz('cycles')
-    *---- exporting a dot file dor GraphViz tools ---------*
+    *---- exporting a dot file for GraphViz tools ---------*
     Exporting to cycles.dot
     dot -Grankdir=BT -Tpng cycles.dot -o cycles.png
 
@@ -1068,9 +1068,9 @@ But, there may be many cycles appearing in a digraph, and, we may detect and enu
      (['a2', 'a4', 'a5'], frozenset({'a2', 'a5', 'a4'})), 
      (['a2', 'a4', 'a1'], frozenset({'a2', 'a1', 'a4'}))]
 
-Condorcet's approach for determining the winner of an election is hence not decisive in all circomstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see [BIS-2008]_). 
+Condorcet's approach for determining the winner of an election is hence not decisive in all circumstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see [BIS-2008]_). 
 
-Many more tools for exploiting voting results are available, see the thechnical documentation of the :ref:`votingDiGraphs-label`.
+Many more tools for exploiting voting results are available, see the technical documentation of the :ref:`votingDiGraphs-label`.
 
 Back to :ref:`Tutorial-label`
 
@@ -1114,7 +1114,7 @@ With the help of the :py:class:`outrankingDigraphs.RandomBipolarOutrankingDigrap
        comment:    RandomPerformanceTableau() generated.
        >>> ...
 
-In this example we consider furthermore a family of seven equisignificant cardinal criteria functions *g01*, *g02*, ..., *g07*, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation's uncertainty and imprecision, each criterion function *g1* to *g7* admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations: 
+In this example we consider furthermore a family of seven equisignificant cardinal criteria functions *g01*, *g02*, ..., *g07*, measuring the performance of each alternative on a rational scale from 0.0 to 100.00. In order to capture the evaluation's uncertainty and imprecision, each criterion function *g1* to *g7* admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations: 
         >>> odg.showCriteria()
 	*----  criteria -----*
 	g01 'digraphs.RandomPerformanceTableau() instance'
@@ -1176,7 +1176,7 @@ We may, furthermore, rank the alternatives on the basis of the weighted marginal
    :width: 400 px
    :align: center
 
-There is no doubt that action *a03*, with a performance in the highest quintile in five out of seven criteria, appears definitely to be best performing. Action *a05* shows a more or less average performance on most criteria, wheras action *a02* appears to be the weakest alternative.
+There is no doubt that action *a03*, with a performance in the highest quintile in five out of seven criteria, appears definitely to be best performing. Action *a05* shows a more or less average performance on most criteria, whereas action *a02* appears to be the weakest alternative.
 
 Valuation semantics
 ...................
@@ -1237,7 +1237,7 @@ The outranking valuation characteristic appears as **majority margin** resulting
 	 Valuation in range: -37.00 to +37.00; global concordance: +31.00
 	>>> ...
 
-This time, we observe a considerable out-performance of *a03* against *a02* on criterion g02 (see second row in the relation table above). We therefore notice a positively polarised *certainly confirmed* outranking situation in this case [BIS-2013]_. 
+This time, we observe a considerable out-performance of *a03* against *a02* on criterion g02 (see second row in the relation table above). We therefore notice a positively polarized *certainly confirmed* outranking situation in this case [BIS-2013]_. 
 
 Recoding the valuation
 ......................
@@ -1309,7 +1309,7 @@ The resulting XML file my be visualized in a browser window (other than Chrome o
 
 We recover the original bipolarly valued outranking characteristics, and we may restart again the preference modelling process. 
 
-Many more tools for exploiting bipolarly valued outranking digraphs are available in the Digraph3 resources (see the thechnical documentation of the :ref:`outrankingDiGraphs-label` and the :ref:`perfTabs-label`).
+Many more tools for exploiting bipolarly valued outranking digraphs are available in the Digraph3 resources (see the technical documentation of the :ref:`outrankingDiGraphs-label` and the :ref:`perfTabs-label`).
 
 Back to :ref:`Tutorial-label`
 
@@ -1326,16 +1326,16 @@ Generating random performance tableaux
 The `randomPerfTabs <techDoc.html#randomPerfTabs>`_ module
 ..........................................................
 
-This module provides several random performance tableaux generators, i.e. PerformanceTableau class instances (see the `perfTabs <techDoc.html#perftabs-label>`_ module), mainly for the purpose of testing implemented versions of methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tuorial concerns the four most useful generators:
+This module provides several random performance tableaux generators, i.e. PerformanceTableau class instances (see the `perfTabs <techDoc.html#perftabs-label>`_ module), mainly for the purpose of testing implemented versions of methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tutorial concerns the four most useful generators:
 
     1. The simplest model, called **RandomPerformaceTableau**, generates
        a set of *n* decision actions, a set of *m* real-valued
        performance criteria, ranging by default from 0.0 to 100.0,
        associated with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale. 
-    2. In order to study aggregation of linear orders, we provide a model called **RandomRankPerformanceTableau** which provides lineraly ordered performances without ties on multple criteria for a given number of decision actions.
+    2. In order to study aggregation of linear orders, we provide a model called **RandomRankPerformanceTableau** which provides linearly ordered performances without ties on multiple criteria for a given number of decision actions.
     3. One of the most useful random generator, called
        **RandomCBPerformanceTableau**, proposes two decision objectives,
-       named *Costs* (to be mimized) respectively *Benefits* (to be
+       named *Costs* (to be minimized) respectively *Benefits* (to be
        maximized) model; its purpose being to generate more or less
        contradictory performances on these two, usually opposed,
        objectives. *Low costs* will randomly be coupled with *low
@@ -1354,7 +1354,7 @@ The ``RandomPerformanceTableau generator``, the simplest of the kind, specialize
     * numberOfCriteria := number performance criteria.
     * weightDistribution := 'random' (default) | 'fixed' | 'equisignificant'.
          | If 'random', weights are uniformly selected randomly
-         | form the given weight scale;
+         | from the given weight scale;
          | If 'fixed', the weightScale must provided a corresponding weights
          | distribution;
          | If 'equisignificant', all criterion weights are put to unity.
@@ -1364,9 +1364,9 @@ The ``RandomPerformanceTableau generator``, the simplest of the kind, specialize
     * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. For each threshold type *x* in *{q,p,v}*, the float x0 value represents a constant and the float x1 value a proportional value. Default values are [(10.0,0.0),(20.0,0.0),(80.0,0,0)]. 
     * commonMode := common random distribution of random performance measurements:
          | ('uniform',Min,Max), uniformly distributed float values on the given common scales' range. 
-         | ('normal',mu,sigma), truncated Gaussion distribution. 
-         | ('triangular',mode,repartition), generalized triangular distribution with a probility repartition parameter specifying the probability mass accumulated until the mode value.
-         | ('beta',alpha,beta), a beta genarator with standard alpha and beta parameters.
+         | ('normal',mu,sigma), truncated Gaussian distribution. 
+         | ('triangular',mode,repartition), generalized triangular distribution with a probability repartition parameter specifying the probability mass accumulated until the mode value.
+         | ('beta',alpha,beta), a beta generator with standard alpha and beta parameters.
     * valueDigits := <integer>, precision of performance measurements (2 decimal digits by default).
         
 Code example:
@@ -1397,7 +1397,7 @@ The `RandomRankPerformanceTableau <techDoc.html#randomPerfTabs.RandomRankPerform
 
 Random generator for multiple criteria ranked (without ties) performances of a
 given number of decision actions. On each criterion,
-all decision actions are hence lineraly ordered. The ``RandomRankPerformanceTableau`` class is
+all decision actions are hence linearly ordered. The ``RandomRankPerformanceTableau`` class is
 matching the ``RandomLinearVotingProfile`` class provided by  the `votingDigraphs <techDoc.html#votingDigraphs-label>`_ module.  
         
 *Parameters*:
@@ -1429,7 +1429,7 @@ Random generation of *Cost* versus *Benefit* oriented performance tableaux follo
     * If *numberOfCriteria* == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated
     * *weightDistribution* = {'equiobjectives'|'fixed'|'random'|'equisignificant' (default = 'equisignificant')}
     * default *weightScale* for 'random' weightDistribution is 1 - numberOfCriteria
-    * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.
+    * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 whereas ordinal criteria are evaluated with integers between 0 and 10.
     * commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).
     * commonPercentiles = {'ind':5, 'pref':10, ['weakveto':90,] 'veto':95} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.
 
@@ -1470,7 +1470,7 @@ Random generation of *Cost* versus *Benefit* oriented performance tableaux follo
       Threshold veto : 73.19 + 0.00x ; percentile:  0.952
     ...
 
-In this example we notice the three types of decision actions, as well as two types of criteria with either an ordinal or a cardinal performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the *indifference* and 10% below the *preference* discrimanting threshold. About 5% will be considered as *considerably large*. More statistics about the generated performances is available as follows:
+In this example we notice the three types of decision actions, as well as two types of criteria with either an ordinal or a cardinal performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the *indifference* and 10% below the *preference* discriminating threshold. About 5% will be considered as *considerably large*. More statistics about the generated performances is available as follows:
 
     >>> t.showStatistics()
     *-------- Performance tableau summary statistics -------*
@@ -1504,7 +1504,7 @@ In this example we notice the three types of decision actions, as well as two ty
       standard difference deviation : 39.02
     ...
 
-A (potentially ranked) colored heatmap with 5 color levels is also provided:
+A (potentially ranked) colored heat map with 5 color levels is also provided:
     
     >>> t.showHTMLPerformanceHeatmap(colorLevels=5,Ranked=False)
 
@@ -1512,7 +1512,7 @@ A (potentially ranked) colored heatmap with 5 color levels is also provided:
    :width: 500 px
    :align: center
 
-Such a performance tableau may be stored and reaccessed in the XMCDA2 encoded format:
+Such a performance tableau may be stored and re-accessed in the XMCDA2 encoded format:
     >>> t.saveXMCDA2('temp')
     *----- saving performance tableau in XMCDA 2.0 format  -------------*
     File: temp.xml saved !
@@ -1538,7 +1538,7 @@ Back to :ref:`Tutorial-label`
 The `Random3ObjectivesPerformanceTableau <techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau>`_ generator
 ......................................................................................................................
 
-The class provides a generator of random performace tableaux concerning three preferential decision objectives which take into account *economical*, *societal* as well as *environmental* aspects.
+The class provides a generator of random performance tableaux concerning three preferential decision objectives which take into account *economical*, *societal* as well as *environmental* aspects.
 
 Each decision action is qualified randomly as performing *weak* (-), *fair* (~) or *good* (+) on each of the three objectives. 
 
@@ -1629,7 +1629,7 @@ For each objective, one way this compute a partial bipolar outranking digraph:
     >>> gsoc = BipolarOutrankingDigraph(tsoc)
     >>> genv = BipolarOutrankingDigraph(tenv)
 
-Thes three partial digraphs model the preferences represented in each of the partial performance tableaux. One may aggregate these three preferential with an epitemic fusion operator:
+These three partial digraphs model the preferences represented in each of the partial performance tableaux. One may aggregate these three preferential with an epistemic fusion operator:
     >>> from digraphs import FusionLDigraph
     >>> gfus = FusionLDigraph([geco,gsoc,genv])
     >>> gfus.strongComponents()
@@ -1659,9 +1659,9 @@ Thes three partial digraphs model the preferences represented in each of the par
       name:       _a26_
       comment:    collapsed strong component
 
-A graphviz drawing illustrates the apprent preferential links between the strong components:
+A graphviz drawing illustrates the apparent preferential links between the strong components:
     >>> scc.exportGraphViz('scFusionObjectives')
-    *---- exporting a dot file dor GraphViz tools ---------*
+    *---- exporting a dot file for GraphViz tools ---------*
     Exporting to scFusionObjectives.dot
     dot -Grankdir=BT -Tpng scFusionObjectives.dot -o scFusionObjectives.png
 
@@ -1787,7 +1787,7 @@ We thus recover all the input data. To measure the actual preference discriminat
 
 On the *Costs* criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative *Comfort* criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged *considerably large* (line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria. 
  
-A colorful comparison of all the performances is shown by the **heatmap** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles:
+A colorful comparison of all the performances is shown by the **heat map** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles:
     >>> t.showHTMLPerformanceHeatmap(colorLevels=5)
 
 .. image:: officeChoiceHeatmap.png
@@ -1927,7 +1927,7 @@ We notice three potential best choice recommendations: the Condorcet winner *D* 
       characteristic vector = { 'B': 0.00, 'E': 0.00, 'F': 0.00, 
                  'D': 0.00, 'A': 0.00, 'G': 0.00, 'C': 0.00 }
 
-We notice in line 7 above that the most significantly supported best choice recommendation is indeed the Condorcet winner *D* with a majority of 56% of the criteria significance (see line 13). Both other recommandation candidates, as well as the worst choice candidate are not positively validated as best choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see lines 27 and 37) and seams hence not actually comparable to its competitors.
+We notice in line 7 above that the most significantly supported best choice recommendation is indeed the Condorcet winner *D* with a majority of 56% of the criteria significance (see line 13). Both other recommendation candidates, as well as the worst choice candidate are not positively validated as best choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see lines 27 and 37) and seams hence not actually comparable to its competitors.
  
 The same Rubis best choice recommendation, encoded in XMCDA 2.0, is as well provided by the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg:
     >>> from outrankingDigraphs import RubisRestServer
@@ -1955,7 +1955,7 @@ and, in a system browser window, browse the `solution file`_.
 
 Here, we find confirmed again that alternative *D*, indeed, appears to be the most significant best choice candidate. 
 
-Yet, what about alternative *G*, the other good compromise best choice we have noticed from the performance heatmap shown above?
+Yet, what about alternative *G*, the other good compromise best choice we have noticed from the performance heat map shown above?
 
 Strictly best choice
 ....................
@@ -2078,7 +2078,7 @@ The ranking problem
 ...................
 We need to rank without ties a set *X* of items (usally decision alternatives) that are evaluated on multiple performance criteria and for which we may know their pairwise outranking situation characteristics, i.e. r(*x* S *y*) for all *x*, *y* in *X*.
 
-Unfortunately, the Condorcet digraph, associated with a given outranking digraph, presents only exceptionnaly a linear ordering. Usually, pairwise majority comparisons do not indeed render a complete and transitive outranking relation. 
+Unfortunately, the Condorcet digraph, associated with a given outranking digraph, presents only exceptionally a linear ordering. Usually, pairwise majority comparisons do not indeed render a complete and transitive outranking relation. 
 
 Several heuristic ranking rules have been proposed for constructing a linear order which is closest in some sense to a given outranking relation.
 
@@ -2124,7 +2124,7 @@ To estimate how difficult this ranking problem may be, we can have a look at the
 
     >>> gcd = ~(-g) # converse of the negation of g
     >>> gcd.exportGraphViz('rankingTutorial')
-    *---- exporting a dot file dor GraphViz tools ---------*
+    *---- exporting a dot file for GraphViz tools ---------*
     Exporting to rankingTutorial.dot
     dot -Grankdir=BT -Tpng rankingTutorial.dot -o rankingTutorial.png
 
@@ -2207,6 +2207,8 @@ So, **0.918** is the highest possible ordinal correlation (fitness) any potentia
     >>> ke.maxKemenyIndex
     Decimal('15.095')
 
+It is interesting to notice that all seven Kemeny rankings, in fact, place alternative *a1* at rank 1 before alternative *a3*. The Coepland and Net-Fows rules propose the opposite order.    
+
 Slater's ranking rule is the same as Kemeny's, but instead it is working on the associated crisp Condorcet digraph *c*. It gives the following result::
 
     >>> sl = KemenyOrder(c,orderLimit=9)
@@ -2224,7 +2226,7 @@ We notice here that the crisp Copeland ranking above seams to be slightly better
 
 Kemeny's as well as Slater's ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (< 20 objects). 
 
-More efficient ranking heuristics, like the Net-Flows, are therefore needed in practice.
+More efficient ranking heuristics, like the Copeland and the Net-Flows rules, are therefore needed in practice.
 
 Kohler's ranking-by-choosing rule
 .................................
@@ -2251,15 +2253,15 @@ Here, we find an even better fitness (0.868) when compared with Slater's (0.844)
 Tideman's Ranked-Pairs rule
 ...........................
 
-A further ranking heuristic is based on a prudent incremental construction of linear orders that avoids on the fly any cycling pairs of alternatives. The Ranked-Pairs rule may by formulated as follows:
+A further ranking heuristic is based on a prudent incremental construction of linear orders that avoids on the fly any cycling pairs of alternatives. The **Ranked-Pairs** rule may by formulated as follows:
 
-    1. Rank the ordered pairs (*x*, *y*) of alternatives in decreasing order of the outranking characteristic values;
+    1. Rank the ordered pairs (*x*, *y*) of alternatives in decreasing order of the outranking characteristic values r(*x* S *y*);
     2. Consider the pairs in that order (ties are resolved by a lexicographic rule):
 
          - if the next pair does not create a cycle with the pairs already blocked, block this pair;
          - if the next pair creates a cycle with the already blocked pairs, skip it.
 
-In our didactical outranking example, we get the following result::
+In our didactic outranking example, we get the following result::
 
     >>> from linearOrders import RankedPairsOrder
     >>> rp = RankedPairsOrder(g,Debug=True)
@@ -2291,12 +2293,11 @@ The Ranked-Pairs rule actually renders one of the seven optimal Kemeny rankings 
     >>> print("Fitness of Tideman's ranking: %.3f" % corr['correlation'])
     Fitness of Tideman's ranking: 0.918
 
-However, this last ranking rule is again in general not scalable to outranking digraphs of larger orders. 
+However, this last ranking rule is again not scalable to outranking digraphs of larger orders (> 100). For larger outranking digraphs with several hundred of alternatives, only Kohler's and the Net-Flows ranking heuristics remain computationally efficient.
 
-The most useful ranking heuristics in practice for big outranking digraphs are therefore Kohler's and the Net-Flows rules.
-  
 
-Links and appendices
+
+The most useful ranking heuristics in practice Links and appendices
 --------------------
 
 Documents
