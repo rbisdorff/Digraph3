@@ -2267,7 +2267,7 @@ At step *r* (*r* goes from 1 to *n*) do the following:
     >>> print("Fitness of Kohler's ranking: %.3f" % corr['correlation'])
     Fitness of Kohler's ranking: 0.868
 
-Here, we find a better fitness (0.868) when compared with Slater's (0.844) or the Net-Flows result, but not as good as Copeland crisp rule's result (0.906). 
+Here, we find a better fitness (0.868) when compared with Slater's (0.844) or the Net-Flows result (0.828), but not as good as Copeland crisp rule's result (0.906). 
 
 Tideman's Ranked-Pairs rule
 ...........................
