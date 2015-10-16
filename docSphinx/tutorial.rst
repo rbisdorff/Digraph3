@@ -2183,7 +2183,7 @@ Copeland's rule actually renders a linear order which is indeed highly correlate
 The Net-Flows ranking
 ....................
 
-The valued version of the Copeland rule, called **Net-Flows** rule, is working directly on the given valued outranking digraph *g*. For each alternative *x* we compute a net flow score that is the sum of the differences between the **outranking** characteristics :math:`r(x\,S\,y)` and the **outranked** characteristics :math:`r(y\,S\,x)` for all pairs of alternatives where *y* is different from *x*::
+The valued version of the Copeland rule, called **Net-Flows** rule, is working directly on the given valued outranking digraph *g*. For each alternative *x* we compute a net flow score that is the sum of the differences between the **outranking** characteristics :math:`r(x\,S\,y)` and the **outranked** characteristics r(*y* S *x*) for all pairs of alternatives where *y* is different from *x*::
   
     >>> from linearOrders import NetFlowsOrder
     >>> nf = NetFlowsOrder(g)
