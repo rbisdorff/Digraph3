@@ -8602,15 +8602,15 @@ class FusionDigraph(Digraph):
         self.valuationdomain = deepcopy(dg1.valuationdomain)
         #actionsList = list(self.actions)
         #max = self.valuationdomain['max']
-        #min = self.valuationdomain['min']
+        Med = self.valuationdomain['med']
         fusionRelation = {}
         for x in self.actions:
             fusionRelation[x] = {}
             for y in self.actions:
                 if operator == "o-min":
-                    fusionRelation[x][y] = self.omin((dg1.relation[x][y],dg2.relation[x][y]))
+                    fusionRelation[x][y] = omin(Med,(dg1.relation[x][y],dg2.relation[x][y]))
                 elif operator == "o-max":
-                    fusionRelation[x][y] = self.omax((dg1.relation[x][y],dg2.relation[x][y]))
+                    fusionRelation[x][y] = omax(Med,(dg1.relation[x][y],dg2.relation[x][y]))
                 else:
                     print('Error: invalid epistemic fusion operator %s' % operator)
         self.relation = fusionRelation
@@ -8634,16 +8634,16 @@ class FusionLDigraph(Digraph):
         self.valuationdomain = deepcopy(L[0].valuationdomain)
         #actionsList = list(self.actions)
         #Max = self.valuationdomain['max']
-        #Min = self.valuationdomain['min']
+        Med = self.valuationdomain['med']
         fusionRelation = {}
         for x in self.actions:
             fusionRelation[x] = {}
             for y in self.actions:
                 args = [g.relation[x][y] for g in L]
                 if operator == "o-min":
-                    fusionRelation[x][y] = self.omin(args)
+                    fusionRelation[x][y] = omin(Med,args)
                 elif operator == "o-max":
-                    fusionRelation[x][y] = self.omax(args)
+                    fusionRelation[x][y] = omax(Med,args)
                 else:
                     print('Error: invalid epistemic fusion operator %s' % operator)
         self.relation = fusionRelation
@@ -8736,8 +8736,16 @@ class XORDigraph(Digraph):
         Maxd1 = d1.valuationdomain['max']
         Mind2 = d2.valuationdomain['min']
         Maxd2 = d2.valuationdomain['max']
-        d1.recodeValuation(-1.0,1.0)
-        d2.recodeValuation(-1.0,1.0)
+        if (Mind1 != Mind2) or (Maxd1 != Maxd2):
+            if Debug:
+                print('!!! valuation recoding required !!!')
+                print(d1.name,d1.valuationdomain)
+                print(d2.name,d2.valuationdomain)
+            d1.recodeValuation(-1.0,1.0)
+            d2.recodeValuation(-1.0,1.0)
+            Recoded = True
+        else:
+            Recoded = False
         xorRelation = {}
         for x in self.actions:
             xorRelation[x] = {}
@@ -8747,11 +8755,14 @@ class XORDigraph(Digraph):
                     print(x,y,d1.relation[x][y],d2.relation[x][y],xorRelation[x][y])
 
         self.relation = xorRelation
-        self.valuationdomain = {'min': Decimal("-1.0"),
-                                'med': Decimal("0.0"),
-                                'max': Decimal("1.0")}
-        d1.recodeValuation(Mind1,Maxd1)
-        d2.recodeValuation(Mind2,Maxd2)
+        if Recoded:
+            self.valuationdomain = {'min': Decimal("-1.0"),
+                                    'med': Decimal("0.0"),
+                                    'max': Decimal("1.0")}
+            d1.recodeValuation(Mind1,Maxd1)
+            d2.recodeValuation(Mind2,Maxd2)
+        else:
+            self.valuationdomain = dict(d1.valuationdomain.items())
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
@@ -8776,24 +8787,38 @@ class EquivalenceDigraph(Digraph):
         Maxd1 = d1.valuationdomain['max']
         Mind2 = d2.valuationdomain['min']
         Maxd2 = d2.valuationdomain['max']
-        d1.recodeValuation(-1.0,1.0)
-        d2.recodeValuation(-1.0,1.0)
+        if (Mind1 != Mind2) or (Maxd1 != Maxd2):
+            if Debug:
+                print('!!! valuation recoding required !!!')
+                print(d1.name,d1.valuationdomain)
+                print(d2.name,d2.valuationdomain)
+            d1.recodeValuation(-1.0,1.0)
+            d2.recodeValuation(-1.0,1.0)
+            Recoded = True
+        else:
+            Recoded = False
 
         equivRelation = {}
         for x in self.actions:
             equivRelation[x] = {}
             for y in self.actions:
                 equivRelation[x][y] = min( max(-d1.relation[x][y],d2.relation[x][y]), max(-d2.relation[x][y],d1.relation[x][y]) )
-                if Debug:
-                    print(x,y,d1.relation[x][y],d2.relation[x][y],equivRelation[x][y])
+##                if Debug:
+##                    print(x,y,d1.relation[x][y],d2.relation[x][y],equivRelation[x][y])
 
         self.relation = equivRelation
         self.valuationdomain = {'min': Decimal("-1.0"),
                                 'med': Decimal("0.0"),
                                 'max': Decimal("1.0")}
 
-        d1.recodeValuation(Mind1,Maxd1)
-        d2.recodeValuation(Mind2,Maxd2)
+        if Recoded:
+            self.valuationdomain = {'min': Decimal("-1.0"),
+                                    'med': Decimal("0.0"),
+                                    'max': Decimal("1.0")}
+            d1.recodeValuation(Mind1,Maxd1)
+            d2.recodeValuation(Mind2,Maxd2)
+        else:
+            self.valuationdomain = dict(d1.valuationdomain.items())
 
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -8805,7 +8830,8 @@ class EquivalenceDigraph(Digraph):
         """
         corr = Decimal('0')
         dterm = Decimal('0')
-        actions = [x for x in self.actions]
+        #actions = [x for x in self.actions]
+        actions = self.actions
         relation = self.relation
         for x in actions:
             for y in actions:
@@ -9400,7 +9426,7 @@ class IndeterminateDigraph(Digraph):
             self.__class__ = other.__class__
             self.order = other.order
             actions = other.actions
-            self.valuationdomain = other.valuationdomain
+            self.valuationdomain = dict(other.valuationdomain.items())
             Med = self.valuationdomain['med']
 
         self.actions = actions
