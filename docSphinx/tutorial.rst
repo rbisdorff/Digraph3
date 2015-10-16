@@ -2181,7 +2181,7 @@ Copeland's rule actually renders a linear order which is indeed highly correlate
     Fitness of Copeland's ranking: 0.906
 
 The Net-Flows ranking
-....................
+.....................
 
 The valued version of the Copeland rule, called **Net-Flows** rule, is working directly on the given valued outranking digraph *g*. For each alternative *x* we compute a net flow score that is the sum of the differences between the **outranking** characteristics :math:`r(x\,S\,y)` and the **outranked** characteristics r(*y* S *x*) for all pairs of alternatives where *y* is different from *x*::
   
@@ -2319,7 +2319,7 @@ The Ranked-Pairs rule actually renders one of the seven optimal Kemeny rankings 
     >>> print("Fitness of Tideman's ranking: %.3f" % corr['correlation'])
     Fitness of Tideman's ranking: 0.918
 
-Unfortunately, the Ranked-Pairs ranking rule is again not efficiently scalable to outranking digraphs of larger orders (> 100). For such outranking digraphs, with several hundred of alternatives, only Kohler's and the Net-Flows ranking heuristics remain computationally efficient with a complexity of :math:`O(n^2)` where *n* is the order of the outranking digraph.
+Unfortunately, the Ranked-Pairs ranking rule is again not efficiently scalable to outranking digraphs of larger orders (> 100). For such outranking digraphs, with several hundred of alternatives, only the Net-Flows ranking heuristics, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the outranking digraph, remains in fact computationally efficient.
 
 Links and appendices
 --------------------
