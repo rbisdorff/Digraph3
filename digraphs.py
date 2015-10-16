@@ -73,7 +73,7 @@ def omax(Med,L, Debug=False):
     else:
         return Med
 # epistemic or symmetric conjunction operator
-def omin(M,L, Debug=False):
+def omin(Med,L, Debug=False):
     """
     epistemic conjunction of a list L of bipolar outranking characteristics.
     Med is the given valuation domain median.
