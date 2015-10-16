@@ -54,27 +54,35 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body"><p class="first">Raymond Bisdorff, University of Luxembourg FSTC/CSC</p>
-</td>
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Raymond Bisdorff, University of Luxembourg FSTC/CSC</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Version:</th><td class="field-body"><p class="first">Revision: Python 3.4</p>
-</td>
+<tr class="field-even field"><th class="field-name">Version:</th><td class="field-body">Revision: Python 3.4</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Copyright:</th><td class="field-body"><ol class="first last upperalpha simple" start="18">
-<li>Bisdorff 2013-2014</li>
-</ol>
-</td>
+<tr class="field-odd field"><th class="field-name">Copyright:</th><td class="field-body"><a class="reference external" href="http://leopold-loewenheim.uni.lu/bisdorff/">R. Bisdorff</a> 2013-2015</td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="introduction">
 <span id="technical-label"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p><strong>Dowloading the Digraph3 ressources</strong></p>
-<p>Two downlaod options are given:</p>
-<p>1. Either (easiest under Linux or Mac OS-X), by using a subversion client::
-..$svn co <a class="reference external" href="http://leopold-loewenheim.uni.lu/svn/repos/Digraph3">http://leopold-loewenheim.uni.lu/svn/repos/Digraph3</a></p>
-<p>2. Or, download and extract the latest distribution tar.gz archive::
-<a class="reference external" href="http://leopold-loewenheim.uni.lu/Digraph3/dist/">http://leopold-loewenheim.uni.lu/Digraph3/dist/</a></p>
+<p>Three download options are given:</p>
+<ol class="arabic">
+<li><p class="first">Either (easiest under Linux or Mac OS-X), by using a git client:</p>
+<div class="highlight-python"><div class="highlight"><pre>..$ git clone https://github.com/rbisdorff/Digraph3
+</pre></div>
+</div>
+</li>
+<li><p class="first">or a subversion client:</p>
+<div class="highlight-python"><div class="highlight"><pre>..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
+</pre></div>
+</div>
+</li>
+<li><p class="first">Or, with a browser access, download and extract the latest distribution tar.gz archive from this page:</p>
+<div class="highlight-python"><div class="highlight"><pre>http://leopold-loewenheim.uni.lu/Digraph3/dist/
+</pre></div>
+</div>
+</li>
+</ol>
 <p>Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff &lt;<a class="reference external" href="http://leopold-loewenheim.uni.lu/bisdorff/">http://leopold-loewenheim.uni.lu/bisdorff/</a>&gt;, University of Luxembourg.</p>
 <p>To be fully functional, the Digraph3 resources mainly need the <a class="reference external" href="http://graphviz.org">graphviz</a> tools and the <a class="reference external" href="http://www.r-project.org">R statistics resources</a> to be installed. When exploring digraph isomorphisms, the <a class="reference external" href="http://www.cs.sunysb.edu/~algorith/implement/nauty/implement.shtml">nauty</a> isomorphism testing program is required. two specific criteria and actions clustering methods of the Digraph class furthermore require the <a class="reference external" href="http://leopold-loewenheim.uni.lu/svn/repos/Calmat/">calmat</a> matrix computing resource to be installed.</p>
 <p><strong>Organisation of the Digraph3 python3 source code</strong></p>
@@ -148,7 +156,7 @@
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#bigoutrankingdigraphs-label"><span>bigOutrankingDigraphs module</span></a></dt>
-<dd><p class="first last">Sparse implementation for large outranking digraphs (order &gt; 1000).</p>
+<dd><p class="first last">Compressed implementation design for large outranking digraphs (order &gt; 1000).</p>
 </dd>
 </dl>
 </li>
@@ -192,7 +200,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1174,7 +1182,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2124,7 +2132,7 @@ called dg1 and dg2.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2155,7 +2163,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -3349,7 +3357,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4096,7 +4104,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5806,7 +5814,7 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 
 <dl class="class">
 <dt id="randomDigraphs.RandomGridDigraph">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.GridDigraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary randomly oriented Grid digraphs of dimension n time m

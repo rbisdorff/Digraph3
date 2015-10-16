@@ -2,7 +2,7 @@ Technical Reference of the Digraph3 modules
 ===========================================
 :Author: Raymond Bisdorff, University of Luxembourg FSTC/CSC
 :Version: Revision: Python 3.4
-:Copyright: R. Bisdorff 2013-2014
+:Copyright: `R. Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2015
 
 .. _Technical-label:
 
@@ -11,13 +11,19 @@ Introduction
 
 **Dowloading the Digraph3 ressources**
 
-Two downlaod options are given:
-    
-1. Either (easiest under Linux or Mac OS-X), by using a subversion client::
-..$svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
-       
-2. Or, download and extract the latest distribution tar.gz archive::
-http://leopold-loewenheim.uni.lu/Digraph3/dist/ 
+Three download options are given:
+
+1. Either (easiest under Linux or Mac OS-X), by using a git client::
+
+     ..$ git clone https://github.com/rbisdorff/Digraph3 
+
+2. or a subversion client::
+
+     ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
+
+3. Or, with a browser access, download and extract the latest distribution tar.gz archive from this page::
+
+     http://leopold-loewenheim.uni.lu/Digraph3/dist/
 
 Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>, University of Luxembourg.
 
@@ -50,7 +56,7 @@ The Digraph3 source code is split into several interdependent modules of which t
 * :ref:`randomPerfTabs-label` 
      Various implemented random performance tableau models.
 * :ref:`bigOutrankingDigraphs-label` 
-     Sparse implementation for large outranking digraphs (order > 1000).
+     Compressed implementation design for large outranking digraphs (order > 1000).
 
 .. toctree::
    :maxdepth: 2

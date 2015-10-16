@@ -4,7 +4,7 @@ Tutorials of the Digraph3 resources
 ===================================
 :Author: Raymond Bisdorff, University of Luxembourg FSTC/CSC
 :Version: Revision: Python 3.4
-:Copyright: R. Bisdorff 2014
+:Copyright: `R. Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2015
 
 .. contents:: Table of Contents
 	:depth: 1
@@ -27,7 +27,7 @@ Downloading of the Digraph3 resources
 
 Using the Digraph3 modules is easy. You only need to have installed on your system the `Python <https://www.python.org/doc/>`_ programming language of version 3+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.
 
-Two download options are given:
+Three download options are given:
 
 1. Either (easiest under Linux or Mac OS-X), by using a git client::
 
