@@ -888,8 +888,8 @@ class NetFlowsOrder(LinearOrder):
             otherMin = other.valuationdomain['min']
             
             for x in actions:
-                xnetflows = sum((otherRelation[x][y] +\
-                                (otherMax - otherRelation[y][x] + otherMin))\
+                xnetflows = sum((otherRelation[y][x] +\
+                                (otherMax - otherRelation[x][y] + otherMin))\
                                  for y in actions)
                 netFlows.append((xnetflows,x))
         # reversed sorting with keeping the actions initial ordering
@@ -901,7 +901,8 @@ class NetFlowsOrder(LinearOrder):
 
         netFlowsRanking = [x[1] for x in netFlows]
         self.netFlowsRanking = netFlowsRanking
-        self.netFlowsOrder = list(reversed(netFlowsRanking))
+        netFlowsOrder = list(reversed(netFlowsRanking))
+        self.netFlowsOrder = netFlowsOrder
 ##        if Debug:
 ##            print(self.netFlowsRanking)
 ##            print(self.netFlowsOrder)
@@ -935,6 +936,87 @@ class NetFlowsOrder(LinearOrder):
 ##            self.showOrdering()
 
 class CopelandOrder(LinearOrder):
+    """
+    instantiates the Copèeland Order from
+    a given bipolar-valued Digraph instance
+    """
+    def __init__(self,other,coDual=False,Debug=False):
+        """
+        constructor for generating a linear order
+        from a given other digraph following
+        the Copeland ordering rule
+        """
+
+        #from copy import deepcopy
+        from collections import OrderedDict
+        from time import time
+
+        #timings
+        tt = time()
+        runTimes = OrderedDict()
+        # prepare local variables
+        if coDual:
+            otherCoDual = CoDualDigraph(other)
+            otherRelation = otherCoDual.relation
+##            if Debug:
+##                otherCoDual.showRelationTable()
+##                print(otherCoDual.valuationdomain)
+        else:
+            otherRelation = other.relation
+        n = len(other.actions)
+        actions = other.actions
+        gamma = other.gamma
+        selfRelation = {}
+        Min = Decimal('-1.0')
+        Med = Decimal('0.0')
+        Max = Decimal('1.0')
+        valuationdomain = {'min': Min,\
+                           'med': Med,\
+                           'max': Max}
+        runTimes['prepareLocals'] = time()-tt
+        
+        # compute net flows
+        tnf = time()
+        copelandScores = []
+        for x in actions:
+            copelandScore = len(gamma[x][1]) - len(gamma[x][0])
+            copelandScores.append((copelandScore,x))
+        # reversed sorting with keeping the actions initial ordering
+        # in case of ties
+        copelandScores.sort(reverse=True)
+        self.copelandScores = copelandScores
+
+        copelandOrder = [x[1] for x in copelandScores]
+        self.copelandOrder = copelandOrder
+        copelandRanking = list(reversed(copelandOrder))
+        self.copelandRanking = copelandRanking
+        runTimes['copeland'] = time() - tnf
+
+        # init relation
+        tr = time()
+        for i in range(n):
+            x = copelandRanking[i]
+            selfRelation[x] = {}
+            for j in range(n):
+                y = copelandRanking[j]
+                if i < j:
+                    selfRelation[x][y] = Max
+                else:
+                    selfRelation[x][y] = Min
+        runTimes['relation'] = time() - tr      
+##        if Debug:
+##            print(selfRelation) 
+        self.name = other.name + '_ranked'        
+        self.actions = actions
+        self.order = n
+        self.valuationdomain = valuationdomain
+        self.relation = selfRelation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        runTimes['totalTime'] = time() - tt
+        self.runTimes = runTimes
+
+class _CopelandOrder(LinearOrder):
     """
     instantiates the net Copeland Order from
     a given bipolar-valued Digraph instance.
@@ -1241,14 +1323,14 @@ if __name__ == "__main__":
 
     Threading = False
     print('*-------- Testing KemenyOrder class -------')
-    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=13,seed=1)
+    t = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=13,seed=2)
     #t = PerformanceTableau('testLin')    
     g = BipolarOutrankingDigraph(t,Normalized=True)
     g.showRelationTable()
     print()
     print('==>> Kemeny ordering:')
     t0 = time()
-    ke = KemenyOrder(g,Debug=False)
+    ke = KemenyOrder(g,Debug=False,orderLimit=9)
     #g.showRelationTable()
     try:
         print(ke.kemenyRanking)
@@ -1294,15 +1376,6 @@ if __name__ == "__main__":
     print(g.computeOrdinalCorrelation(ko))
     print(time()-t0)
     print()
-##    print('==>> boosted Kohler ordering:')
-##    t0 = time()
-##    bko = BoostedKohlerOrder(g)
-##    #g.showRelationTable()
-##    print(bko.boostedKohlerRanking)
-##    print(bko.boostedKohlerOrder)
-##    print(g.computeOrdinalCorrelation(bko))
-##    print(time()-t0)
-##    print()
     print('==>> ranked pairs ordering:')
     t0 = time()
     rp = RankedPairsOrder(g)
