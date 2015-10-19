@@ -39,6 +39,7 @@ class BigDigraph(object):
         print('# Criteria        : %d' % self.dimension)
         print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
         print('Ordering strategy : %s' % self.sortingParameters['strategy'])
+        print('Ranking rule      : %s' % self.componentRankingRule)
         print('# Components      : %d' % self.nbrComponents)
         print('Minimal size      : %d' % self.minimalComponentSize)
         sumStats = self.computeDecompositionSummaryStatistics()
@@ -76,7 +77,7 @@ class BigDigraph(object):
         else:
             return Max
 
-    def showRelationMap(self,symbols=None,rankingRule="netFlows"):
+    def showRelationMap(self,symbols=None):
         """
         Prints on the console, in text map format, the location of
         the diagonal outranking components of the big outranking digraph.
@@ -100,6 +101,7 @@ class BigDigraph(object):
             # Criteria        : 7
             Sorting by        : 10-Tiling
             Ordering strategy : average
+            Ranking Rule      : Copeland
             # Components      : 7
             Minimal size      : 5
             Maximal size      : 13
@@ -163,34 +165,19 @@ class BigDigraph(object):
             ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ -+  ┬
             ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ┴  ┬
             ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ 
-            Ranking rule: netFlows
+            Component ranking rule: Copeland
             >>> 
         """
         if symbols == None:
             symbols = {'max':'┬','positive': '+', 'median': ' ',
                        'negative': '-', 'min': '┴'}
-        if rankingRule == "Kohler":
-            try:
-                ranking = self.boostedKohlerRanking
-            except:
-                ranking = self.computeBoostedKohlerRanking()
-        elif rankingRule == "rankedPairs":
-            try:
-                ranking = self.boostedRankedPairsRanking
-            except:
-                ranking = self.computeBoostedRankedPairsRanking()
-        else:
-            try:
-                ranking = self.boostedNetFlowsRanking
-            except:
-                ranking = self.computeBoostedNetFlowsRanking()
         relation = self.relation
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
-        for x in ranking:
+        for x in self.boostedRanking:
             pictStr = ''
-            for y in ranking:
+            for y in self.boostedRanking:
                 if relation(x,y) == Max:
                     pictStr += symbols['max']
                 elif relation(x,y) == Min:
@@ -202,7 +189,7 @@ class BigDigraph(object):
                 elif relation(x,y) < Med:
                     pictStr += symbols['negative']
             print(pictStr)
-        print('Ranking rule: %s' % rankingRule)
+        print('Component ranking rule: %s' % self.componentRankingRule)
 
     
     def computeOrdinalCorrelation(self, other, Debug=False):
@@ -679,7 +666,7 @@ class BigOutrankingDigraph(BigDigraph):
                                       Normalized=True,CopyPerfTab=False,
                                       Threading=Threading,nbrCores=nbrOfCPUs,
                                       Comments=Comments)
-        globalOrdering = self.ranking2Preorder(self.boostedNetFlowsRanking)
+        globalOrdering = self.ranking2Preorder(self.boostedRanking)
         globalRelation = gc.computePreorderRelation(globalOrdering)
         corr = gc.computeOrdinalCorrelation(globalRelation)
         if Debug:
@@ -925,6 +912,7 @@ class BigOutrankingDigraph(BigDigraph):
         # Criteria        : 7
         Sorting by        : 10-Tiling
         Ordering strategy : average
+        Ranking rule      : Copeland
         # Components      : 19
         Minimal size      : 1
         Maximal size      : 22
@@ -946,6 +934,7 @@ class BigOutrankingDigraph(BigDigraph):
             print('# Criteria        : %d' % self.dimension)
             print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
             print('Ordering strategy : %s' % self.sortingParameters['strategy'])
+            print('Ranking rule      : %s' % self.componentRankingRule)
             print('# Components      : %d' % self.nbrComponents)
             print('Minimal size      : %d' % self.minimalComponentSize)
             print('Maximal size      : %d' % summaryStats['max'])
@@ -970,6 +959,7 @@ class BigOutrankingDigraph(BigDigraph):
             fo.write('# Criteria         : %d\n' % self.dimension)
             fo.write('Sorting by         : %d-Tiling\n' % self.sortingParameters['limitingQuantiles'])
             fo.write('Ordering strategy  : %s\n' % self.sortingParameters['strategy'])
+            fo.write('Local ranking rule : %s\n' % self.componentRankingRule)
             fo.write('# Components       : %d\n' % self.nbrComponents)
             fo.write('Minimal size       : %d\n' % self.minimalComponentSize)
             fo.write('Maximal size       : %d\n' % summaryStats['max'])
@@ -1088,132 +1078,176 @@ class BigOutrankingDigraph(BigDigraph):
                 if pg.order > 1:
                     pg.showRelationTable()                
 
-    def computeBoostedKohlerRanking(self):
-        """
-        Renders an ordred list of decision actions ranked in
-        decreasing preference direction following Kohler's rule
-        on each component.
-        """
-        from linearOrders import KohlerOrder
-##        from itertools import chain      
-##        compKeys = list(self.components.keys())
-##        compKeys.sort()
-##        ranking = list(chain.from_iterable([self.components[ck]['subGraph'].computeKohlerRanking()\
-##                                            for ck in compKeys]))
-##        nc = self.nbrComponents
-##
-        ranking = []
-        # self.components is an ordered dictionary in decreasing preference
-        for cki in dict.keys(self.components):
-            comp = self.components[cki]
-            pg = comp['subGraph']
-            pko = KohlerOrder(pg)
-            ranking += pko.computeRanking()
-        return ranking
 
-    def computeBoostedKohlerRanking(self):
-        """
-        Renders an ordred list of decision actions ranked in
-        decreasing preference direction following Kohler's rule
-        on each component.
-        """
-        from linearOrders import KohlerOrder
-##        from itertools import chain      
-##        compKeys = list(self.components.keys())
-##        compKeys.sort()
-##        ranking = list(chain.from_iterable([self.components[ck]['subGraph'].computeKohlerRanking()\
-##                                            for ck in compKeys]))
-##        nc = self.nbrComponents
-##
-        ranking = []
-        
-        # self.components is an ordered dictionary in decreasing preference
-        for cki in self.components:
-            comp = self.components[cki]
-            pg = comp['subGraph']
-            pko = KohlerOrder(pg)
-            ranking += pko.computeRanking()
-        return ranking
-
-    def computeBoostedKohlerOrder(self):
-        """
-        Renders an ordred list of decision actions ranked in
-        increasing preference direction following Kohler's rule
-        on each component.
-        """
-        from linearOrders import KohlerOrder
-        ordering = []
-        compKeys = list(self.components.keys())
-        compKeys.reverse()
-        # self.components is an ordered dictionary in decreasing preference
-        for cki in compKeys:
-            comp = self.components[cki]
-            pg = comp['subGraph']
-            pko = KohlerOrder(pg)
-            ordering += pko.computeOrder()
-        return ordering
-    
-    def computeBoostedNetFlowsRanking(self):
+    def computeBoostedRanking(self,rankingRule='Copeland'):
         """
         Renders an ordred list of decision actions ranked in
         decreasing preference direction following the net flows rule
         on each component.
         """
-        from linearOrders import NetFlowsOrder
+        from linearOrders import NetFlowsOrder,KohlerOrder,CopelandOrder
         ranking = []
         components = self.components
         # self.components is an ordered dictionary in decreasing preference
         for cki in components:
             comp = self.components[cki]
             pg = comp['subGraph']
-##            pnf = NetFlowsOrder(components[cki]['subGraph'])
-            ranking += pg.computeNetFlowsRanking()
+            if rankingRule == 'Copeland':
+                opg = CopelandOrder(pg)
+                ranking += opg.copelandRanking
+            elif rankingRule == 'NetFlows':
+                opg = NetFlowsOrder(pg)
+                ranking += opg.netFlowsRanking
+            elif rankingRule == 'Kohler':
+                opg = KohlerOrder(pg)
+                ranking += opg.kohlerRanking
         return ranking
 
-    def computeBoostedNetFlowsOrder(self):
+    def computeBoostedOrdering(self,orderingRule='Copeland'):
         """
         Renders an ordred list of decision actions ranked in
-        increasing preference direction following the net flowsa rule
+        increasing preference direction following by default the Copeland rule
         on each component.
         """
-        from linearOrders import NetFlowsOrder
+        from linearOrders import NetFlowsOrder,KohlerOrder,CopelandOrder
         ordering = []
-        compKeys = list(self.components.keys())
-        compKeys.reverse()
-        for cki in compKeys:
+        components = self.components
+        # self.components is an ordered dictionary in decreasing preference
+        for cki in components:
             comp = self.components[cki]
             pg = comp['subGraph']
-            #pnf = NetFlowsOrder(pg)
-            ordering += pg.computeNetFlowsOrder()
+            if orderingRule == 'Copeland':
+                opg = CopelandOrder(pg)
+                ordering += opg.copelandOrder
+            elif orderingRule == 'NetFlows':
+                opg = NetFlowsOrder(pg)
+                ordering += opg.netFlowsOrder
+            elif orderingRule == 'Kohler':
+                opg = KohlerOrder(pg)
+                ordering += opg.kohlerOrder
         return ordering
 
-    def computeBoostedRankedPairsRanking(self):
-        """
-        Renders an ordred list of decision actions in decreasing preference direction following Tideman's Ranked Pairs rule on each component.
-        """
-        from linearOrders import KohlerOrder
-        from itertools import chain
-        
+##    def computeBoostedKohlerRanking(self):
+##        """
+##        Renders an ordred list of decision actions ranked in
+##        decreasing preference direction following Kohler's rule
+##        on each component.
+##        """
+##        from linearOrders import KohlerOrder
+####        from itertools import chain      
+####        compKeys = list(self.components.keys())
+####        compKeys.sort()
+####        ranking = list(chain.from_iterable([self.components[ck]['subGraph'].computeKohlerRanking()\
+####                                            for ck in compKeys]))
+####        nc = self.nbrComponents
+####
+##        ranking = []
+##        
+##        # self.components is an ordered dictionary in decreasing preference
+##        for cki in self.components:
+##            comp = self.components[cki]
+##            pg = comp['subGraph']
+##            pko = KohlerOrder(pg)
+##            ranking += pko.computeRanking()
+##        return ranking
+##
+##    def computeBoostedKohlerOrder(self):
+##        """
+##        Renders an ordred list of decision actions ranked in
+##        increasing preference direction following Kohler's rule
+##        on each component.
+##        """
+##        from linearOrders import KohlerOrder
+##        ordering = []
 ##        compKeys = list(self.components.keys())
-##        compKeys.sort()
-        ranking = list(chain.from_iterable(\
-            [self.components[ck]['subGraph'].computeRankedPairsRanking()\
-                                          for ck in self.components]))
-        return ranking    
-
-    def computeBoostedRankedPairsOrder(self):
-        """
-        Renders an ordred list of decision actions in decreasing preference direction following Tideman's Ranked Pairs rule on each component.
-        """
-        from linearOrders import KohlerOrder
-        from itertools import chain
-        
-        compKeys = list(self.components.keys())
-        compKeys.reverse()
-        ranking = list(chain.from_iterable(\
-            [self.components[ck]['subGraph'].computeRankedPairsOrder()\
-                                          for ck in compKeys]))
-        return ranking    
+##        compKeys.reverse()
+##        # self.components is an ordered dictionary in decreasing preference
+##        for cki in compKeys:
+##            comp = self.components[cki]
+##            pg = comp['subGraph']
+##            pko = KohlerOrder(pg)
+##            ordering += pko.computeOrder()
+##        return ordering
+##
+##    def computeBoostedNetFlowsRanking(self):
+##        """
+##        Renders an ordred list of decision actions ranked in
+##        decreasing preference direction following the net flows rule
+##        on each component.
+##        """
+##        from linearOrders import NetFlowsOrder
+##        ranking = []
+##        components = self.components
+##        # self.components is an ordered dictionary in decreasing preference
+##        for cki in components:
+##            comp = self.components[cki]
+##            pg = comp['subGraph']
+####            pnf = NetFlowsOrder(components[cki]['subGraph'])
+##            ranking += pg.computeNetFlowsRanking()
+##        return ranking
+##
+##    
+##    def computeBoostedNetFlowsRanking(self):
+##        """
+##        Renders an ordred list of decision actions ranked in
+##        decreasing preference direction following the net flows rule
+##        on each component.
+##        """
+##        from linearOrders import NetFlowsOrder
+##        ranking = []
+##        components = self.components
+##        # self.components is an ordered dictionary in decreasing preference
+##        for cki in components:
+##            comp = self.components[cki]
+##            pg = comp['subGraph']
+####            pnf = NetFlowsOrder(components[cki]['subGraph'])
+##            ranking += pg.computeNetFlowsRanking()
+##        return ranking
+##
+##    def computeBoostedNetFlowsOrder(self):
+##        """
+##        Renders an ordred list of decision actions ranked in
+##        increasing preference direction following the net flowsa rule
+##        on each component.
+##        """
+##        from linearOrders import NetFlowsOrder
+##        ordering = []
+##        compKeys = list(self.components.keys())
+##        compKeys.reverse()
+##        for cki in compKeys:
+##            comp = self.components[cki]
+##            pg = comp['subGraph']
+##            #pnf = NetFlowsOrder(pg)
+##            ordering += pg.computeNetFlowsOrder()
+##        return ordering
+##
+##    def computeBoostedRankedPairsRanking(self):
+##        """
+##        Renders an ordred list of decision actions in decreasing preference direction following Tideman's Ranked Pairs rule on each component.
+##        """
+##        from linearOrders import KohlerOrder
+##        from itertools import chain
+##        
+####        compKeys = list(self.components.keys())
+####        compKeys.sort()
+##        ranking = list(chain.from_iterable(\
+##            [self.components[ck]['subGraph'].computeRankedPairsRanking()\
+##                                          for ck in self.components]))
+##        return ranking    
+##
+##    def computeBoostedRankedPairsOrder(self):
+##        """
+##        Renders an ordred list of decision actions in decreasing preference direction following Tideman's Ranked Pairs rule on each component.
+##        """
+##        from linearOrders import KohlerOrder
+##        from itertools import chain
+##        
+##        compKeys = list(self.components.keys())
+##        compKeys.reverse()
+##        ranking = list(chain.from_iterable(\
+##            [self.components[ck]['subGraph'].computeRankedPairsOrder()\
+##                                          for ck in compKeys]))
+##        return ranking    
 
 ########################
 from weakOrders import QuantilesRankingDigraph
@@ -1238,8 +1272,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                  quantiles=None,\
                  quantilesOrderingStrategy='average',\
                  LowerClosed=True,\
-                 WithKohlerOrdering=False,\
-                 WithNetFlowsOrdering=True,\
+                 componentRankingRule='Copeland',\
                  minimalComponentSize=None,\
                  Threading=False,\
                  nbrOfCPUs=None,\
@@ -1492,18 +1525,24 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
         if Comments:
             print('decomposing time: %.4f' % self.runTimes['decomposing']  )
         # Kohler ranking-by-choosing all components
-        if WithKohlerOrdering:
-            t0 = time()
-            self.boostedKohlerOrder = self.computeBoostedKohlerOrder()
-            self.boostedKohlerRanking = list(reversed(self.boostedKohlerOrder))
-            self.runTimes['ordering'] = time() - t0
-        if WithNetFlowsOrdering:
-            t0 = time()
-            self.boostedNetFlowsOrder = self.computeBoostedNetFlowsOrder()
-            self.boostedNetFlowsRanking = list(reversed(self.boostedNetFlowsOrder))
-            self.runTimes['ordering'] = time() - t0
-        if Comments:
-            print('ordering time: %.4f' % self.runTimes['ordering']  )
+        self.componentRankingRule = componentRankingRule
+        t0 = time()
+        self.boostedRanking = self.computeBoostedRanking(rankingRule=componentRankingRule)
+        self.boostedOrder = list(reversed(self.boostedRanking))
+        self.runTimes['ordering'] = time() - t0
+##        if orderingRule == 'Copeland':
+##        elif orderingRule == 'NetFlows':
+##            t0 = time()
+##            self.boostedNetFlowsOrder = self.computeBoostedOrder()
+##            self.boostedNetFlowsRanking = list(reversed(self.boostedNetFlowsOrder))
+##            self.runTimes['ordering'] = time() - t0
+##        elif orderingRule == 'Kohler':
+##            t0 = time()
+##            self.boostedKohlerOrder = self.computeBoostedKohlerOrder()
+##            self.boostedKohlerRanking = list(reversed(self.boostedKohlerOrder))
+##            self.runTimes['ordering'] = time() - t0
+##        if Comments:
+        print('ordering time: %.4f' % self.runTimes['ordering']  )
         
         self.runTimes['totalTime'] = time() - ttot
         if Comments:
@@ -1876,7 +1915,7 @@ if __name__ == "__main__":
 ##    print(time()-t0)
 ##    qr.showWeakOrder()
     bg1 = BigOutrankingDigraphMP(tp,CopyPerfTab=False,quantiles=75,quantilesOrderingStrategy='average',
-                                 LowerClosed=True,WithNetFlowsOrdering=True,
+                                 LowerClosed=True,
                                  minimalComponentSize=5,
                                  Threading=MP,nbrOfCPUs=8,
                                  nbrOfThreads=4,
@@ -1885,8 +1924,8 @@ if __name__ == "__main__":
     bg1.showDecomposition(direction='increasing')
     bg1.showRelationMap()
     print(bg1)
-    fillRate = sum([(bg1.components[comp]['subGraph'].order*(bg1.components[comp]['subGraph'].order-1)) for comp in bg1.components])
-    print( 'fill rate: ', fillRate,fillRate/( bg1.order*(bg1.order-1) ) )
+##    fillRate = sum([(bg1.components[comp]['subGraph'].order*(bg1.components[comp]['subGraph'].order-1)) for comp in bg1.components])
+##    print( 'fill rate: ', fillRate,fillRate/( bg1.order*(bg1.order-1) ) )
 ##    bg1.showMarginalVersusGlobalOutrankingCorrelation(Threading=MP)
 ##    bg2 = BigOutrankingDigraphMP(tp,quantiles=75,quantilesOrderingStrategy='average',
 ##                                 LowerClosed=True,
