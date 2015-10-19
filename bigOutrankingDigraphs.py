@@ -1412,17 +1412,21 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                     if self.Debug:
                         print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadID)))
                         print('lTest',self.lTest)
-                    fi = open('dumpSelf.py','rb')
-                    context = loads(fi.read())
+                    fi = open('dumpPerfTab.py','rb')
+                    perfTab = loads(fi.read())
                     fi.close()
+                    fi = open('dumpDecomp.py','rb')
+                    decomposition = loads(fi.read())
+                    fi.close()
+                    nd = len(decomposition)
                     for i in self.lTest:
-                        comp = context.decomposition[i]
+                        comp = decomposition[i]
                         if self.Debug:
                             print(i, comp)
-                        compKey = ('c%%0%dd' % (context.nd)) % (i+1)
+                        compKey = ('c%%0%dd' % (nd)) % (i+1)
                         compDict = {compKey: {}}
                         compDict = {'rank':i}
-                        pt = PartialPerformanceTableau(context,actionsSubset=comp[1])
+                        pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
                         compDict['lowQtileLimit'] = comp[0][1]
                         compDict['highQtileLimit'] = comp[0][0]
                         compDict['subGraph'] = BipolarOutrankingDigraph(pt,
@@ -1455,15 +1459,24 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
             #from copy import copy, deepcopy
             #from time import sleep
             #selfDp = copy(self)
-            selfFileName = tempDirName +'/dumpSelf.py'
+            selfFileName = tempDirName +'/dumpPerfTab.py'
             if Debug:
                 print('temDirName, selfFileName', tempDirName,selfFileName)
             fo = open(selfFileName,'wb')
-            pd = dumps(self,-1)
+            pd = dumps(perfTab,-1)
+            fo.write(pd)
+            fo.close()
+##            if Comments:
+##                print('dumping perfTab: %.5f' % (time() - tdump))
+            selfFileName = tempDirName +'/dumpDecomp.py'
+            if Debug:
+                print('temDirName, selfFileName', tempDirName,selfFileName)
+            fo = open(selfFileName,'wb')
+            pd = dumps(decomposition,-1)
             fo.write(pd)
             fo.close()
             if Comments:
-                print('dumping self: %.5f' % (time() - tdump))
+                print('dumping time: %.5f' % (time() - tdump))
             
             if nbrOfCPUs == None:
                 nbrOfCPUs = cpu_count()
@@ -1901,12 +1914,12 @@ if __name__ == "__main__":
     
     from time import time
     from weakOrders import QuantilesRankingDigraph
-    MP  = False
+    MP  = True
 ##    t0 = time()
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,seed=100)
 ##    tp = RandomCBPerformanceTableau(numberOfActions=500,Threading=MP,
 ##                                      seed=100)
-    tp = RandomPerformanceTableau(numberOfActions=50,numberOfCriteria=21,
+    tp = RandomPerformanceTableau(numberOfActions=500,numberOfCriteria=21,
                                       seed=100)
 ##    print(time()-t0)
 ##    print(total_size(tp.evaluation))
@@ -1914,15 +1927,15 @@ if __name__ == "__main__":
 ##    qr = QuantilesRankingDigraph(tp,75,strategy='average',Threading=MP)
 ##    print(time()-t0)
 ##    qr.showWeakOrder()
-    bg1 = BigOutrankingDigraphMP(tp,CopyPerfTab=False,quantiles=75,quantilesOrderingStrategy='average',
+    bg1 = BigOutrankingDigraphMP(tp,CopyPerfTab=False,quantiles=25,quantilesOrderingStrategy='average',
                                  LowerClosed=True,
                                  minimalComponentSize=5,
                                  Threading=MP,nbrOfCPUs=8,
                                  nbrOfThreads=4,
-                                 Comments=False,Debug=False)
-    print(bg1.computeDecompositionSummaryStatistics())
-    bg1.showDecomposition(direction='increasing')
-    bg1.showRelationMap()
+                                 Comments=True,Debug=False)
+    #print(bg1.computeDecompositionSummaryStatistics())
+    #bg1.showDecomposition(direction='increasing')
+    #bg1.showRelationMap()
     print(bg1)
 ##    fillRate = sum([(bg1.components[comp]['subGraph'].order*(bg1.components[comp]['subGraph'].order-1)) for comp in bg1.components])
 ##    print( 'fill rate: ', fillRate,fillRate/( bg1.order*(bg1.order-1) ) )
