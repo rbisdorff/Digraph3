@@ -1401,8 +1401,8 @@ class QuantilesSortingDigraph(SortingDigraph):
         for g in dict.keys(criteria):
             gQuantiles = self._computeLimitingQuantiles(g,\
                             PrefThresholds=PrefThresholds,Debug=Debug)
-            if Debug:
-                print(g,gQuantiles)
+##            if Debug:
+##                print(g,gQuantiles)
             criteriaCategoryLimits[g] = gQuantiles
 ##            for c in categories:
 ##                criteriaCategoryLimits[g][c]={
@@ -2145,8 +2145,8 @@ class QuantilesSortingDigraph(SortingDigraph):
             storeSorting = False
         actions = list(self.getActionsKeys(action))
         na = len(actions)
-        if Debug:
-            print(actions)
+##        if Debug:
+##            print(actions)
             
         categories = list(self.orderedCategoryKeys())
 
@@ -2162,7 +2162,8 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##            if Comments:
 ##                self.Debug = True
             class myThread(Process):
-                def __init__(self, threadID, tempDirName, actions, catKeys, nq, Min, Max, Debug):
+                def __init__(self, threadID, tempDirName,
+                             actions, catKeys, nq, Min, Max, Debug):
                     Process.__init__(self)
                     self.threadID = threadID
                     self.workingDirectory = tempDirName
@@ -2176,9 +2177,9 @@ class QuantilesSortingDigraph(SortingDigraph):
                     from pickle import dumps, loads
                     from os import chdir
                     chdir(self.workingDirectory)
-                    if self.Debug:
-                        print("Starting working in %s on %s" % (self.workingDirectory, str(self.threadID)))
-                        print('actions,catKeys',self.actions,self.catKeys)
+##                    if self.Debug:
+##                        print("Starting working in %s on %s" % (self.workingDirectory, str(self.threadID)))
+##                        print('actions,catKeys',self.actions,self.catKeys)
                     fi = open('dumpSelfRelation.py','rb')
                     #context = loads(fi.read())
                     relation = loads(fi.read())
@@ -2230,11 +2231,11 @@ class QuantilesSortingDigraph(SortingDigraph):
                             sorting[x][c]['lowLimit'] = lowLimit
                             sorting[x][c]['notHighLimit'] = notHighLimit
                             sorting[x][c]['categoryMembership'] = categoryMembership
-                            if self.Debug:
-                                print('\t %.2f \t %.2f \t %.2f\n' % (sorting[x][c]['lowLimit'],\
-                                   sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
-                        if self.Debug:
-                            print(sorting[x])
+##                            if self.Debug:
+##                                print('\t %.2f \t %.2f \t %.2f\n' % (sorting[x][c]['lowLimit'],\
+##                                   sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+##                        if self.Debug:
+##                            print(sorting[x])
                     foName = 'sorting-'+str(self.threadID)+'.py'
                     fo = open(foName,'wb')
                     fo.write(dumps(sorting,-1))
@@ -2244,8 +2245,8 @@ class QuantilesSortingDigraph(SortingDigraph):
             from tempfile import TemporaryDirectory,mkdtemp
             tempDirName = mkdtemp()
             selfFileName = tempDirName +'/dumpSelfRelation.py'
-            if Debug:
-                print('temDirName, selfFileName', tempDirName,selfFileName)
+##            if Debug:
+##                print('temDirName, selfFileName', tempDirName,selfFileName)
             fo = open(selfFileName,'wb')
             pd = dumps(self.relation,-1)
             fo.write(pd)
@@ -2275,8 +2276,8 @@ class QuantilesSortingDigraph(SortingDigraph):
                 else:
                     stop = na
                 thActions = actions[start:stop]
-                if Debug:
-                    print(thActions)
+##                if Debug:
+##                    print(thActions)
                 if thActions != []:
                     process = myThread(j,tempDirName,thActions,categories,nq,Min,Max,self.Debug)
                     process.start()
@@ -2288,13 +2289,13 @@ class QuantilesSortingDigraph(SortingDigraph):
                 print('Exit %d threads' % nbrOfThreads)
             sorting = {}
             for th in range(nbrOfThreads):
-                if Debug:
-                    print('job',th)
+##                if Debug:
+##                    print('job',th)
                 fiName = tempDirName+'/sorting-'+str(th)+'.py'
                 fi = open(fiName,'rb')
                 sortingThread = loads(fi.read())
-                if Debug:
-                    print('sortingThread',sortingThread)
+##                if Debug:
+##                    print('sortingThread',sortingThread)
                 sorting.update(sortingThread)
         # end of Threading
         else: # with out Threading 
