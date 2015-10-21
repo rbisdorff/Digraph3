@@ -1164,7 +1164,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             actionKey = ('a%%0%dd' % (nd)) % (i+1)
             actions[actionKey] = {'shortName':actionKey,
                     'name': 'random decision action',
-                    'comment': 'Random3ObjectivesPerformanceTableau() generated.',
+                    'comment': '3 Objectives',
                     'generators': {}}
 ##        self.actions = actions
 ##        actionsList = [x for x in self.actions]
@@ -1738,7 +1738,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             actionKey = ('a%%0%dd' % (nd)) % (i+1)
             actions[actionKey] = {'shortName':actionKey+actionType[0],
                     'name': 'random %s decision action' % (actionType),
-                    'comment': 'RandomCBPerformanceTableau() generated.',
+                    'comment': 'Cost-Benefit',
                     'type': actionType}
 
         # generate objectives

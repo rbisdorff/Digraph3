@@ -1660,6 +1660,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
         #qs = self.qs
         #qs = self
         Med = self.valuationdomain['med']
+        categories = self.categories
         try:
             sorting = self.sorting
         except:
@@ -1667,7 +1668,8 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                                                    Threading=Threading,\
                                                    nbrOfCPUs=nbrOfCPUs)      
         keys = []
-        for c in self.orderedCategoryKeys():
+        for c in categories:
+        #for c in self.orderedCategoryKeys():
             Above = False
             if sorting[action][c]['categoryMembership'] >= Med:
                 Above = True
