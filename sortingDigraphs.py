@@ -689,7 +689,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 ##
 ##        return sorting
 
-    def computeSortingCharacteristics(self, action=None, StoreSorting=True,Comments=False, Debug=False,\
+    def computeSortingCharacteristics(self, action=None, StoreSorting=True,\
+                                      Comments=False, Debug=False,\
                                         Threading=False, nbrOfCPUs=None):
         """
         Renders a bipolar-valued bi-dictionary relation
@@ -752,7 +753,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                             else:
                                 lowLimit = Max - relation[cMinKey][x] + Min
                                 notHighLimit = relation[cMaxKey][x]
-                            if Debug:
+                            if self.Debug:
                                 print('%s in %s: low = %.2f, high = %.2f' % \
                                       (x, c,lowLimit,notHighLimit), end=' ')
                             categoryMembership = min(lowLimit,notHighLimit)
@@ -2158,7 +2159,6 @@ class QuantilesSortingDigraph(SortingDigraph):
             from multiprocessing import Process, active_children
             from pickle import dumps, loads, load
             from os import cpu_count
-            self.Debug = Debug
 ##            if Comments:
 ##                self.Debug = True
             class myThread(Process):
@@ -2279,7 +2279,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                if Debug:
 ##                    print(thActions)
                 if thActions != []:
-                    process = myThread(j,tempDirName,thActions,categories,nq,Min,Max,self.Debug)
+                    process = myThread(j,tempDirName,thActions,categories,nq,Min,Max,Debug)
                     process.start()
                     nbrOfThreads += 1
             while active_children() != []:
@@ -2331,7 +2331,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                    else:
 ##                        lowLimit = Max - self.relation[cMinKey][x] + Min
 ##                        notHighLimit = self.relation[cMaxKey][x]
-                    if Comments:
+                    if Debug:
                         print('%s in %s: low = %.2f, high = %.2f' % \
                               (x, c,lowLimit,notHighLimit), end=' ')
                     categoryMembership = min(lowLimit,notHighLimit)
@@ -2339,13 +2339,13 @@ class QuantilesSortingDigraph(SortingDigraph):
                     sorting[x][c]['notHighLimit'] = notHighLimit
                     sorting[x][c]['categoryMembership'] = categoryMembership
 
-                    if Comments:
+                    if Debug:
                         print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
         if StoreSorting:
             self.sorting = sorting
         return sorting
 
-    def computeSortingCharacteristicsOld(self, action=None, Comments=False):
+    def _computeSortingCharacteristicsOld(self, action=None, Comments=False):
         """
         Renders a bipolar-valued bi-dictionary relation
         representing the degree of credibility of the
@@ -3222,7 +3222,7 @@ if __name__ == "__main__":
     """)
 
     print('*-------- Testing class and methods -------')
-
+    MP = False
 ##    t = PerformanceTableau('auditor2_2')
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
     t = XMCDA2PerformanceTableau('spiegel2004')
@@ -3235,13 +3235,14 @@ if __name__ == "__main__":
     #t = XMCDA2PerformanceTableau('test')  
     t.showHTMLPerformanceHeatmap(colorLevels=9,ndigits=2,Correlations=True)
     qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
-                                     Threading=True,
+                                     Threading=MP,
                                      Debug=False)
     qs.showHTMLQuantileOrdering(strategy='average')
     qs.showWeakOrder()
     qs.showQuantileOrdering(strategy='average')
     qs.showActionsSortingResult()
-    qr = QuantilesRankingDigraph(t,7,LowerClosed=True,PrefThresholds=True,Threading=False)
+    qr = QuantilesRankingDigraph(t,7,LowerClosed=True,PrefThresholds=True,
+                                 Threading=MP)
     qr.showRanking()
     qr.showSorting()
 
