@@ -419,11 +419,11 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         Renders the ordered list of category keys
         based on self.categories['order'] numeric values.
         """
-        categoriesSort = []
-        for c in list(self.categories.keys()):
-            categoriesSort.append((self.categories[c]['order'],c))
-        categoriesSort.sort()
-        orderedCategoryKeys = [x for (o,x) in categoriesSort]
+##        categoriesSort = []
+##        for c in list(self.categories.keys()):
+##            categoriesSort.append((self.categories[c]['order'],c))
+##        categoriesSort.sort()
+        orderedCategoryKeys = list(self.categories.keys())
         if Reverse:
             orderedCategoryKeys.reverse()
         return orderedCategoryKeys
@@ -706,7 +706,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         actions = list(self.getActionsKeys(action))
         na = len(actions)
             
-        categories = list(self.orderedCategoryKeys())
+        #categories = list(self.orderedCategoryKeys())
+        categories = self.categories
 
         try:
             LowerClosed = self.criteriaCategoryLimits['LowerClosed']
@@ -2149,8 +2150,9 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##        if Debug:
 ##            print(actions)
             
-        categories = list(self.orderedCategoryKeys())
-
+        #categories = list(self.orderedCategoryKeys())
+        categories = list(self.categories.keys())
+        selfRelation = self.relation
         try:
             LowerClosed = self.criteriaCategoryLimits['LowerClosed']
         except:
@@ -2248,7 +2250,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##            if Debug:
 ##                print('temDirName, selfFileName', tempDirName,selfFileName)
             fo = open(selfFileName,'wb')
-            pd = dumps(self.relation,-1)
+            pd = dumps(selfRelation,-1)
             fo.write(pd)
             fo.close()
 
@@ -2310,19 +2312,19 @@ class QuantilesSortingDigraph(SortingDigraph):
                     else:
                         cKey= c+'-M'
                     if LowerClosed:
-                        lowLimit = self.relation[x][cKey]
+                        lowLimit = selfRelation[x][cKey]
                         if int(c) < nq:
                             cMaxKey = str(int(c)+1)+'-m'
-                            notHighLimit = Max - self.relation[x][cMaxKey] + Min
+                            notHighLimit = Max - selfRelation[x][cMaxKey] + Min
                         else:
                             notHighLimit = Max
                     else:
                         if int(c) > 1:
                             cMinKey = str(int(c)-1)+'-M'
-                            lowLimit = Max - self.relation[cMinKey][x] + Min
+                            lowLimit = Max - selfRelation[cMinKey][x] + Min
                         else:
                             lowLimit = Max
-                        notHighLimit = self.relation[cKey][x]
+                        notHighLimit = selfRelation[cKey][x]
 ##                    cMinKey= c+'-m'
 ##                    cMaxKey= c+'-M'
 ##                    if LowerClosed:
@@ -2331,16 +2333,16 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                    else:
 ##                        lowLimit = Max - self.relation[cMinKey][x] + Min
 ##                        notHighLimit = self.relation[cMaxKey][x]
-                    if Debug:
-                        print('%s in %s: low = %.2f, high = %.2f' % \
-                              (x, c,lowLimit,notHighLimit), end=' ')
+##                    if Debug:
+##                        print('%s in %s: low = %.2f, high = %.2f' % \
+##                              (x, c,lowLimit,notHighLimit), end=' ')
                     categoryMembership = min(lowLimit,notHighLimit)
                     sorting[x][c]['lowLimit'] = lowLimit
                     sorting[x][c]['notHighLimit'] = notHighLimit
                     sorting[x][c]['categoryMembership'] = categoryMembership
 
-                    if Debug:
-                        print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+##                    if Debug:
+##                        print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
         if StoreSorting:
             self.sorting = sorting
         return sorting
@@ -3222,7 +3224,7 @@ if __name__ == "__main__":
     """)
 
     print('*-------- Testing class and methods -------')
-    MP = False
+    MP = True
 ##    t = PerformanceTableau('auditor2_2')
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
     t = XMCDA2PerformanceTableau('spiegel2004')
