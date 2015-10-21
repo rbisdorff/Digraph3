@@ -773,6 +773,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             print('Threaded computing of sorting characteristics ...')        
             from tempfile import TemporaryDirectory,mkdtemp
             tempDirName = mkdtemp()
+            td = time()
             selfFileName = tempDirName +'/dumpSelfRelation.py'
             if Debug:
                 print('temDirName, selfFileName', tempDirName,selfFileName)
@@ -780,7 +781,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             pd = dumps(self.relation,-1)
             fo.write(pd)
             fo.close()
-
+            if Comments:
+                print('Relation dump: %.5f' % (time()-td))
+           
             if nbrOfCPUs == None:
                 nbrOfCPUs = cpu_count()-1
             print('Nbr of actions',na)
@@ -2541,7 +2544,8 @@ class QuantilesSortingDigraph(SortingDigraph):
         if categoryContents == None:
             categoryContents = self.computeCategoryContents(StoreSorting=StoreSorting,\
                                 Threading=Threading,nbrOfCPUs=nbrOfCPUs,Comments=Comments)
-        categoryKeys = self.orderedCategoryKeys()
+        #categoryKeys = self.orderedCategoryKeys()
+        #categoryKeys = list(self.categories.keys())
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
@@ -2555,8 +2559,9 @@ class QuantilesSortingDigraph(SortingDigraph):
                 
         if Debug:
             print('categoryContents',categoryContents)
-        for i in categoryKeys:
-            ibch = set(categoryContents[i])
+        #for i in categoryKeys:
+        for c in self.categories.keys():
+            ibch = set(categoryContents[c])
             ribch = set(currActions) - ibch
             if Debug:
                 print('ibch,ribch',ibch,ribch)
