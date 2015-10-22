@@ -1668,7 +1668,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                                                    Threading=Threading,\
                                                    nbrOfCPUs=nbrOfCPUs)      
         keys = []
-        for c in categories:
+        for c in categories.keys():
         #for c in self.orderedCategoryKeys():
             Above = False
             if sorting[action][c]['categoryMembership'] >= Med:
@@ -1680,9 +1680,8 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                 keys.append(c)
                 if Debug:
                     print(action, c, sorting[action][c])
-            else:
-                if Above:
-                    break
+            elif Above:
+                break
         n = len(keys)
         try:
             credibility = min(lowLimit,notHighLimit)
@@ -1719,20 +1718,22 @@ if __name__ == "__main__":
     
     from time import time
     from weakOrders import QuantilesRankingDigraph
-    MP  = True
+    MP  = False
 ##    t0 = time()
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,seed=100)
-##    tp = RandomCBPerformanceTableau(numberOfActions=500,Threading=MP,
-##                                      seed=100)
-    tp = RandomPerformanceTableau(numberOfActions=1000,numberOfCriteria=21,
+    tp = RandomCBPerformanceTableau(numberOfActions=500,Threading=MP,
                                       seed=100)
+##    tp = RandomPerformanceTableau(numberOfActions=1000,numberOfCriteria=21,
+##                                      seed=100)
 ##    print(time()-t0)
 ##    print(total_size(tp.evaluation))
 ##    t0 = time()
 ##    qr = QuantilesRankingDigraph(tp,75,strategy='average',Threading=MP)
 ##    print(time()-t0)
 ##    qr.showWeakOrder()
-    bg1 = BigOutrankingDigraphMP(tp,CopyPerfTab=False,quantiles=100,quantilesOrderingStrategy='average',
+    bg1 = BigOutrankingDigraphMP(tp,CopyPerfTab=True,quantiles=100,
+                                 quantilesOrderingStrategy='average',
+                                 componentRankingRule='NetFlows',
                                  LowerClosed=True,
                                  minimalComponentSize=5,
                                  Threading=MP,nbrOfCPUs=8,

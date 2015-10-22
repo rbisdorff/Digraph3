@@ -3884,8 +3884,14 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         from multiprocessing import cpu_count
         
         ##
+        
         if not Threading or cpu_count() < 6:
-            return self._constructRelation(criteria,\
+            if not hasBipolarVeto or WithConcordanceRelation or WithVetoCounts:
+                constructRelation = self._constructRelation
+            else:
+                constructRelation = self._constructRelationSimple
+
+            return constructRelation(criteria,\
                                     evaluation,\
                                     initial=initial,\
                                     terminal=terminal,\
@@ -3934,8 +3940,14 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 ##                    splitActions = loads(fi.read())
 ##                    fi.close()
                     # compute partiel relation
+                    if not hasBipolarVeto or WithConcordanceRelation or WithVetoCounts:
+                        constructRelation = BipolarOutrankingDigraph._constructRelation
+                    else:
+                        constructRelation = BipolarOutrankingDigraph._constructRelationSimple
                     if self.InitialSplit:
-                        splitRelation = BipolarOutrankingDigraph._constructRelation(digraph,digraph.criteria,\
+                        #splitRelation = BipolarOutrankingDigraph._constructRelation(
+                        splitRelation = constructRelation(
+                                            digraph,digraph.criteria,\
                                             digraph.evaluation,
                                             initial=splitActions,
                                             #terminal=terminal,
@@ -3946,7 +3958,9 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                             Debug=False,
                                             hasSymmetricThresholds=hasSymmetricThresholds)
                     else:
-                        splitRelation = BipolarOutrankingDigraph._constructRelation(digraph,digraph.criteria,\
+                        #splitRelation = BipolarOutrankingDigraph._constructRelation(
+                        splitRelation = constructRelation(
+                                            digraph,digraph.criteria,\
                                             digraph.evaluation,
                                             #initial=initial,
                                             terminal=splitActions,
@@ -4080,6 +4094,148 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             relation[x][y] = splitRelation[x][y]   
                 return relation
 
+    def _constructRelationSimple(self,criteria,\
+                           evaluation,\
+                           initial=None,\
+                           terminal=None,\
+                           hasNoVeto=False,\
+                           hasBipolarVeto=True,\
+                           WithConcordanceRelation=False,\
+                           WithVetoCounts=False,\
+                           hasSymmetricThresholds=True,\
+                           Debug=False):
+        """
+        Renders the biploar valued outranking relation from the data
+        of a given performance tableau instantiation PerfTab.
+
+        Parameters:
+            * PerfTab.criteria, PerfTab.evaluation,
+            * inital nodes, terminal nodes, for restricted purposes 
+            
+        """
+        ## default setting for digraphs
+        if initial == None:
+            initial = self.actions
+        if terminal == None:
+            terminal = self.actions
+        
+##        totalweight = Decimal('0.0')
+##        for c in dict.keys(criteria):
+##            totalweight = totalweight + criteria[c]['weight']
+        totalweight = sum(criteria[c]['weight'] for c in criteria)
+
+        relation = {}
+        vetos = []
+        negativeVetos = []
+        
+        #nc = len(criteria)
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        for a in initial:
+            relation[a] = {}
+            for b in terminal:
+                if a == b:
+                    relation[a][b] = Med
+                else:
+                    concordance = Decimal('0.0')
+                    veto = {}
+                    abvetos=[]
+                    negativeVeto = {}
+                    abNegativeVetos=[]
+
+                    for c in criteria:
+                        if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+                            try:
+                                indx = criteria[c]['thresholds']['ind'][0]
+                                indy = criteria[c]['thresholds']['ind'][1]
+                                ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                            except KeyError:
+                                ind = None
+                            try:
+                                wpx = criteria[c]['thresholds']['weakPreference'][0]
+                                wpy = criteria[c]['thresholds']['weakPreference'][1]
+                                if hasSymmetricThresholds:
+                                    wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                else:
+                                    wp = wpx + wpy * abs(evaluation[c][a]) 
+                            except KeyError:
+                                wp = None
+                            try:
+                                px = criteria[c]['thresholds']['pref'][0]
+                                py = criteria[c]['thresholds']['pref'][1]
+                                if hasSymmetricThresholds:
+                                    p = px + py * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                else:
+                                    p = px + py * abs(evaluation[c][a]) 
+                            except KeyError:
+                                p = None
+                            d = evaluation[c][a] - evaluation[c][b]
+                            lc0 = self._localConcordance(d,ind,wp,p)
+                            ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
+                            concordance = concordance + (lc0 * criteria[c]['weight'])
+                            try:
+                                wvx = criteria[c]['thresholds']['weakVeto'][0]
+                                wvy = criteria[c]['thresholds']['weakVeto'][1]
+                                if hasNoVeto:
+                                    wv = None
+                                else:
+                                    if hasSymmetricThresholds:
+                                        wv = wvx + wvy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                    else:
+                                        wv = wvx + wvy * abs(evaluation[c][a])
+                            except KeyError:
+                                wv = None
+                            try:
+                                vx = criteria[c]['thresholds']['veto'][0]
+                                vy = criteria[c]['thresholds']['veto'][1]
+                                v = vx + vy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                            except KeyError:
+                                v = None
+                            veto[c] = (self._localVeto(d,wv,v),d,wv,v)
+                            if veto[c][0] > Decimal('-1.0'):
+                                abvetos.append((c,veto[c]))
+                            
+                            negativeVeto[c] = (self._localNegativeVeto(d,wv,v),d,wv,v)
+                            if negativeVeto[c][0] > Decimal('-1.0'):
+                                abNegativeVetos.append((c,negativeVeto[c]))
+                        else:
+                            concordance = concordance + Decimal('0.0') * criteria[c]['weight']
+                            veto[c] = (Decimal('-1.0'),None,None,None)
+                            negativeVeto[c] = (Decimal('-1.0'),None,None,None)
+                                
+                    concordindex = concordance / totalweight                 
+                    
+                    ## init vetoes lists and indexes
+                    abVetoes=[]
+                    abNegativeVetoes=[]
+
+                    #  contradictory vetoes
+                    
+                    for c in criteria:
+                        if veto[c][0] >= Decimal('0'):
+                            abVetoes.append((c,veto[c]))
+                        if negativeVeto[c][0] >= Decimal('0'):
+                            abNegativeVetoes.append((c,negativeVeto[c]))
+                                         
+                    vetoes = [-veto[c][0] for c in veto if veto[c][0] > Decimal('-1')]
+                    negativeVetoes = [negativeVeto[c][0] for c in negativeVeto if negativeVeto[c][0] > Decimal('-1')]
+##                    if Debug:
+##                        print('vetoes = ', vetoes)
+##                        print('negativeVetoes = ', negativeVetoes)
+                    omaxList = [concordindex] + vetoes + negativeVetoes
+                    outrankindex = omax(Med,omaxList,Debug=Debug)
+                                                                 
+                    if abVetoes != []:
+                        vetos.append(([a,b,concordindex*Max],abVetoes))
+                    if abNegativeVetoes != []:
+                        negativeVetos.append(([a,b,concordindex*Max],abNegativeVetoes))
+                    relation[a][b] = outrankindex*Max
+
+        # return outranking relation    
+
+        return relation
+
+
     def _constructRelation(self,criteria,\
                            evaluation,\
                            initial=None,\
@@ -4120,7 +4276,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
         if hasBipolarVeto:
             negativeVetos = []
-    
+
         largePerformanceDifferencesCount = {}        
         for a in initial:
             largePerformanceDifferencesCount[a] = {}
