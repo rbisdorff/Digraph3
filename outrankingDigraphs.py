@@ -4143,17 +4143,17 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     negativeVeto = {}
                     abNegativeVetos=[]
 
-                    for c in criteria:
+                    for c,crit in criteria.items():
                         if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
                             try:
-                                indx = criteria[c]['thresholds']['ind'][0]
-                                indy = criteria[c]['thresholds']['ind'][1]
+                                indx = crit['thresholds']['ind'][0]
+                                indy = crit['thresholds']['ind'][1]
                                 ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                             except KeyError:
                                 ind = None
                             try:
-                                wpx = criteria[c]['thresholds']['weakPreference'][0]
-                                wpy = criteria[c]['thresholds']['weakPreference'][1]
+                                wpx = crit['thresholds']['weakPreference'][0]
+                                wpy = crit['thresholds']['weakPreference'][1]
                                 if hasSymmetricThresholds:
                                     wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                 else:
@@ -4161,8 +4161,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             except KeyError:
                                 wp = None
                             try:
-                                px = criteria[c]['thresholds']['pref'][0]
-                                py = criteria[c]['thresholds']['pref'][1]
+                                px = crit['thresholds']['pref'][0]
+                                py = crit['thresholds']['pref'][1]
                                 if hasSymmetricThresholds:
                                     p = px + py * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                 else:
@@ -4172,10 +4172,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             d = evaluation[c][a] - evaluation[c][b]
                             lc0 = self._localConcordance(d,ind,wp,p)
                             ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
-                            concordance = concordance + (lc0 * criteria[c]['weight'])
+                            concordance = concordance + (lc0 * crit['weight'])
                             try:
-                                wvx = criteria[c]['thresholds']['weakVeto'][0]
-                                wvy = criteria[c]['thresholds']['weakVeto'][1]
+                                wvx = crit['thresholds']['weakVeto'][0]
+                                wvy = crit['thresholds']['weakVeto'][1]
                                 if hasNoVeto:
                                     wv = None
                                 else:
@@ -4186,8 +4186,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             except KeyError:
                                 wv = None
                             try:
-                                vx = criteria[c]['thresholds']['veto'][0]
-                                vy = criteria[c]['thresholds']['veto'][1]
+                                vx = crit['thresholds']['veto'][0]
+                                vy = crit['thresholds']['veto'][1]
                                 v = vx + vy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                             except KeyError:
                                 v = None
@@ -4211,7 +4211,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
                     #  contradictory vetoes
                     
-                    for c in criteria:
+                    for c in criteria.keys():
                         if veto[c][0] >= Decimal('0'):
                             abVetoes.append((c,veto[c]))
                         if negativeVeto[c][0] >= Decimal('0'):
