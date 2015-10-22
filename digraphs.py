@@ -1839,16 +1839,17 @@ class Digraph(object):
             
             if MedianCut:
                 for x in dict.keys(actions):
+                    rx = otherRelation[x]
                     for y in dict.keys(actions):
                         if x == y:
-                            otherRelation[x][y] = Decimal('0.0')
+                            rx[y] = Decimal('0.0')
                         else:
-                            if otherRelation[x][y] > Med:
-                                otherRelation[x][y] = Decimal('1.0')
-                            elif otherRelation[x][y] < Med:
-                                otherRelation[x][y] = Decimal('-1.0')
+                            if rx[y] > Med:
+                                rx[y] = Decimal('1.0')
+                            elif rx[y] < Med:
+                                rx[y] = Decimal('-1.0')
                             else:
-                                otherRelation[x][y] = Decimal('0.0')
+                                rx[y] = Decimal('0.0')
 
         correlation = Decimal('0.0')
         determination = Decimal('0.0')
@@ -1857,13 +1858,15 @@ class Digraph(object):
             n = len(actions)
             n2 = (n*(n-1))
             for x in dict.keys(actions):
+                grx = g.relation[x]
+                orx = otherRelation[x]
                 for y in dict.keys(actions):
                     if x != y:
-                        corr = min( max(-g.relation[x][y],otherRelation[x][y]), max(g.relation[x][y],-otherRelation[x][y]) )
+                        corr = min( max(-grx[y],orx[y]), max(grx[y],-orx[y]) )
                         correlation += corr
-                        determination += min( abs(g.relation[x][y]),abs(otherRelation[x][y]) )
+                        determination += min( abs(grx[y]),abs(orx[y]) )
                         if Debug:
-                            print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)
+                            print(x,y,grx[y],orx[y],correlation,determination)
         else:
             n = len(actions)
             n2 = (n*(n-1))
@@ -1902,12 +1905,14 @@ class Digraph(object):
         KemenyIndex = 0.0
         actions = self.actions
         for x in dict.keys(actions):
+            srx = self.relation[x]
+            orx = otherRelation[x]
             for y in dict.keys(actions):
                 if x != y:
-                    if otherRelation[x][y] > Decimal('0'):
-                        KemenyIndex += float(self.relation[x][y])
-                    elif otherRelation[x][y] < Decimal('0'):
-                        KemenyIndex -= float(self.relation[x][y])
+                    if orx[y] > Decimal('0'):
+                        KemenyIndex += float(srx[y])
+                    elif orx[y] < Decimal('0'):
+                        KemenyIndex -= float(srx[y])
         return KemenyIndex
 
     def flatChoice(self,ch,Debug=False):
@@ -1943,8 +1948,10 @@ class Digraph(object):
         relation = {}
         for x in actions:
             relation[x] = {}
+            rx = relation[x]
+            srx = self.relation[x]
             for y in actions:
-                relation[x][y] = Decimal(str(self.relation[x][y]))
+                rx[y] = Decimal(str(srx[y]))
         self.relation = relation
         #return relation
 
@@ -4866,9 +4873,10 @@ class Digraph(object):
         for x in actions:
             dx = set()
             ax = set()
+            rx = relation[x]
             for y in actions:
                 if x != y:
-                    if relation[x][y] > Med:
+                    if rx[y] > Med:
                         dx.add(y)
                     if relation[y][x] > Med:
                         ax.add(y)
@@ -4889,9 +4897,10 @@ class Digraph(object):
         for x in actions:
             dx = set()
             ax = set()
+            rx = relation[x]
             for y in actions:
                 if x != y:
-                    if relation[x][y] < Med:
+                    if rx[y] < Med:
                         dx.add(y)
                     if relation[y][x] < Med:
                         ax.add(y)

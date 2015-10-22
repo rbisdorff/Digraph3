@@ -997,12 +997,13 @@ class CopelandOrder(LinearOrder):
         for i in range(n):
             x = copelandRanking[i]
             selfRelation[x] = {}
+            srx = selfRelation[x]
             for j in range(n):
                 y = copelandRanking[j]
                 if i < j:
-                    selfRelation[x][y] = Max
+                    srx[y] = Max
                 else:
-                    selfRelation[x][y] = Min
+                    srx[y] = Min
         runTimes['relation'] = time() - tr      
 ##        if Debug:
 ##            print(selfRelation) 
