@@ -3357,7 +3357,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4104,7 +4104,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4881,16 +4881,6 @@ in the uppest, the lowest or the average potential quantile.</li>
 <dl class="method">
 <dt id="sortingDigraphs.QuantilesSortingDigraph.computeSortingCharacteristics">
 <code class="descname">computeSortingCharacteristics</code><span class="sig-paren">(</span><em>action=None</em>, <em>Comments=False</em>, <em>StoreSorting=False</em>, <em>Debug=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.computeSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a bipolar-valued bi-dictionary relation
-representing the degree of credibility of the
-assertion that &#8220;action x in A belongs to category c in C&#8221;,
-ie x outranks low category limit and does not outrank
-the high category limit.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.QuantilesSortingDigraph.computeSortingCharacteristicsOld">
-<code class="descname">computeSortingCharacteristicsOld</code><span class="sig-paren">(</span><em>action=None</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.computeSortingCharacteristicsOld" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a bipolar-valued bi-dictionary relation
 representing the degree of credibility of the
 assertion that &#8220;action x in A belongs to category c in C&#8221;,
