@@ -1554,8 +1554,8 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
 ##            self.boostedKohlerOrder = self.computeBoostedKohlerOrder()
 ##            self.boostedKohlerRanking = list(reversed(self.boostedKohlerOrder))
 ##            self.runTimes['ordering'] = time() - t0
-##        if Comments:
-        print('ordering time: %.4f' % self.runTimes['ordering']  )
+        if Comments:
+            print('ordering time: %.4f' % self.runTimes['ordering']  )
         
         self.runTimes['totalTime'] = time() - ttot
         if Comments:
