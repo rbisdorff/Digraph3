@@ -332,9 +332,9 @@ class BigDigraph(object):
             return      
         self.componentStatistics = {}
         nc = self.nbrComponents
-        compKeys = list(self.components.keys())
-        compLengths = [self.components[ck]['subGraph'].order \
-                       for ck in compKeys]
+        #compKeys = list(self.components.keys())
+        compLengths = [comp['subGraph'].order \
+                       for comp in self.components.values()]
         medianLength = statistics.median(compLengths)
         meanLength = statistics.mean(compLengths)
         stdLength = statistics.pstdev(compLengths)
@@ -981,8 +981,8 @@ class BigOutrankingDigraph(BigDigraph):
         Prints out the actions disctionary.
         """
         actionsList = []
-        for ck in self.components:
-            comp = self.components[ck]
+        for comp in self.components.values:
+            #comp = self.components[ck]
             actionsList += [(x,comp['subGraph'].actions[x]['name'],comp['subGraph'].actions[x]['comment'],) for x in comp['subGraph'].actions]
         actionsList.sort()
         print('List of decision actions')
@@ -1000,23 +1000,26 @@ class BigOutrankingDigraph(BigDigraph):
         criteriaList = [c for c in self.criteria]
         criteriaList.sort()
         for c in criteriaList:
+            critc = self.criteria[c]
             try:
-                criterionName = self.criteria[c]['name']
+                criterionName = critc['name']
             except:
                 criterionName = ''
             print(c, repr(criterionName))
-            print('  Scale =', self.criteria[c]['scale'])
+            print('  Scale =', critc['scale'])
             if IntegerWeights:
-                print('  Weight = %d ' % (self.criteria[c]['weight']))
+                print('  Weight = %d ' % (critc['weight']))
             else:
-                weightg = self.criteria[c]['weight']/sumWeights
+                weightg = critc['weight']/sumWeights
                 print('  Weight = %.3f ' % (weightg))
             try:
-                for th in pg.criteria[c]['thresholds']:
+                for th in critc['thresholds']:
                     if Debug:
-                        print('-->>>', th,self.criteria[c]['thresholds'][th][0],self.criteria[c]['thresholds'][th][1])
-                    print('  Threshold %s : %.2f + %.2fx' % (th,self.criteria[c]['thresholds'][th][0],
-                                                             self.criteria[c]['thresholds'][th][1]), end=' ')
+                        print('-->>>', th,critc['thresholds'][th][0],
+                              critc['thresholds'][th][1])
+                    print('  Threshold %s : %.2f + %.2fx' %\
+                          (th,critc['thresholds'][th][0],
+                           critc['thresholds'][th][1]), end=' ')
             except:
                 pass
             print()
@@ -1059,8 +1062,8 @@ class BigOutrankingDigraph(BigDigraph):
         if compKeys == None:
             nc = self.nbrComponents
             print('%d quantiles decomposed relation table in decreasing order' % nc)
-            for compKey in components.keys():
-                comp = components[compKey]
+            for compKey,comp in components.items():
+                #comp = components[compKey]
                 pg = comp['subGraph']
                 print('Component :', compKey, end=' ')
                 actions = [ x for x in pg.actions.keys()]
@@ -1113,8 +1116,8 @@ class BigOutrankingDigraph(BigDigraph):
         ordering = []
         components = self.components
         # self.components is an ordered dictionary in decreasing preference
-        for cki in components:
-            comp = self.components[cki]
+        for comp in components.values():
+            #comp = self.components[cki]
             pg = comp['subGraph']
             if orderingRule == 'Copeland':
                 opg = CopelandOrder(pg)
