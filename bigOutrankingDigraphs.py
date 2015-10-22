@@ -1089,8 +1089,8 @@ class BigOutrankingDigraph(BigDigraph):
         ranking = []
         components = self.components
         # self.components is an ordered dictionary in decreasing preference
-        for cki in components:
-            comp = self.components[cki]
+        for comp in components.values():
+            #comp = self.components[cki]
             pg = comp['subGraph']
             if rankingRule == 'Copeland':
                 opg = CopelandOrder(pg)
@@ -1526,8 +1526,8 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
             #print(componentsList)
             #components = OrderedDict(componentsList)
         # end of Threading
-        for compKey in components.keys():
-            for x in components[compKey]['subGraph'].actions.keys():
+        for compKey,comp in components.items():
+            for x in comp['subGraph'].actions.keys():
                 self.actions[x]['component'] = compKey
         self.components = components
 
