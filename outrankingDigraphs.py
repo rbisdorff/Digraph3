@@ -3886,7 +3886,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         ##
         
         if not Threading or cpu_count() < 6:
-            if not hasBipolarVeto or WithConcordanceRelation or WithVetoCounts:
+            if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
                 constructRelation = self._constructRelation
             else:
                 constructRelation = self._constructRelationSimple
@@ -3940,7 +3940,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 ##                    splitActions = loads(fi.read())
 ##                    fi.close()
                     # compute partiel relation
-                    if not hasBipolarVeto or WithConcordanceRelation or WithVetoCounts:
+                    if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
                         constructRelation = BipolarOutrankingDigraph._constructRelation
                     else:
                         constructRelation = BipolarOutrankingDigraph._constructRelationSimple

@@ -1480,6 +1480,8 @@ class QuantilesSortingDigraph(SortingDigraph):
                                                    terminal=profiles,
                                                    hasNoVeto=hasNoVeto,
                                                    hasBipolarVeto=True,
+                                                   WithConcordanceRelation=False,
+                                                   WithVetoCounts=False,       
                                                     Threading=Threading,
                                                     nbrCores=nbrCores,
                                                     Comments=Comments)
@@ -1490,6 +1492,8 @@ class QuantilesSortingDigraph(SortingDigraph):
                                                    initial=profiles,
                                                    hasNoVeto=hasNoVeto,
                                                     hasBipolarVeto=True,
+                                                    WithConcordanceRelation=False,
+                                                    WithVetoCounts=False,
                                                     Threading=Threading,
                                                     nbrCores=nbrCores,
                                                     Comments=Comments)
