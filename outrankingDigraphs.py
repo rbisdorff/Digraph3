@@ -4122,7 +4122,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 ##        totalweight = Decimal('0.0')
 ##        for c in dict.keys(criteria):
 ##            totalweight = totalweight + criteria[c]['weight']
-        totalweight = sum(criteria[c]['weight'] for c in criteria)
+        totalweight = sum(crit['weight'] for crit in criteria.values())
 
         relation = {}
         vetos = []
@@ -4305,17 +4305,17 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                         negativeVeto = {}
                         abNegativeVetos=[]
 
-                    for c in criteria:
+                    for c,crit in criteria.items():
                         if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
                             try:
-                                indx = criteria[c]['thresholds']['ind'][0]
-                                indy = criteria[c]['thresholds']['ind'][1]
+                                indx = crit['thresholds']['ind'][0]
+                                indy = crit['thresholds']['ind'][1]
                                 ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                             except KeyError:
                                 ind = None
                             try:
-                                wpx = criteria[c]['thresholds']['weakPreference'][0]
-                                wpy = criteria[c]['thresholds']['weakPreference'][1]
+                                wpx = crit['thresholds']['weakPreference'][0]
+                                wpy = crit['thresholds']['weakPreference'][1]
                                 if hasSymmetricThresholds:
                                     wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                 else:
@@ -4323,8 +4323,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             except KeyError:
                                 wp = None
                             try:
-                                px = criteria[c]['thresholds']['pref'][0]
-                                py = criteria[c]['thresholds']['pref'][1]
+                                px = crit['thresholds']['pref'][0]
+                                py = crit['thresholds']['pref'][1]
                                 if hasSymmetricThresholds:
                                     p = px + py * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                 else:
@@ -4336,8 +4336,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
                             concordance = concordance + (lc0 * criteria[c]['weight'])
                             try:
-                                wvx = criteria[c]['thresholds']['weakVeto'][0]
-                                wvy = criteria[c]['thresholds']['weakVeto'][1]
+                                wvx = crit['thresholds']['weakVeto'][0]
+                                wvy = crit['thresholds']['weakVeto'][1]
                                 if hasNoVeto:
                                     wv = None
                                 else:
@@ -4348,8 +4348,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             except KeyError:
                                 wv = None
                             try:
-                                vx = criteria[c]['thresholds']['veto'][0]
-                                vy = criteria[c]['thresholds']['veto'][1]
+                                vx = crit['thresholds']['veto'][0]
+                                vy = crit['thresholds']['veto'][1]
                                 if hasNoVeto:
                                     v = None
                                 else:
@@ -4387,7 +4387,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
                     #  contradictory vetoes
                     
-                    for c in criteria:
+                    for c in criteria.keys():
                         if veto[c][0] >= Decimal('0'):
                             abVetoes.append((c,veto[c]))
                         if hasBipolarVeto:
@@ -4437,39 +4437,39 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         """
         Renders the characteristic value of the comparison of a and b on criterion c.
         """
-        evaluation = self.evaluation
-        criteria = self.criteria
+        evalc = self.evaluation[c]
+        crit = self.criteria[c]
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
-        if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+        if evalc[a] != Decimal('-999') and evalc[b] != Decimal('-999'):		
             try:
-                indx = criteria[c]['thresholds']['ind'][0]
-                indy = criteria[c]['thresholds']['ind'][1]
+                indx = crit['thresholds']['ind'][0]
+                indy = crit['thresholds']['ind'][1]
                 if hasSymmetricThresholds:
-                    ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                    ind = indx +indy * max(abs(evalc[a]),abs(evalc[b]))
                 else:
-                    ind = indx +indy * abs(evaluation[c][a])
+                    ind = indx +indy * abs(evalc[a])
             except:
                 ind = None
             try:
-                wpx = criteria[c]['thresholds']['weakPreference'][0]
-                wpy = criteria[c]['thresholds']['weakPreference'][1]
+                wpx = crit['thresholds']['weakPreference'][0]
+                wpy = crit['thresholds']['weakPreference'][1]
                 if hasSymmetricThresholds:
-                    wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                    wp = wpx + wpy * max(abs(evalc[a]),abs(evalc[b]))
                 else:
-                    wp = wpx + wpy * abs(evaluation[c][a])
+                    wp = wpx + wpy * abs(evalc[c][a])
             except:
                 wp = None
             try:
-                px = criteria[c]['thresholds']['pref'][0]
-                py = criteria[c]['thresholds']['pref'][1]
+                px = crit['thresholds']['pref'][0]
+                py = crit['thresholds']['pref'][1]
                 if hasSymmetricThresholds:
-                    p = px + py * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                    p = px + py * max(abs(evalc[a]),abs(evalc[b]))
                 else:
-                    p = px + py * abs(evaluation[c][a])
+                    p = px + py * abs(evalc[a])
             except:
                 p = None
-            d = evaluation[c][a] - evaluation[c][b]
+            d = evalc[a] - evalc[b]
             return self._localConcordance(d,ind,wp,p)
         else:
             return Decimal('0.0')
