@@ -4133,9 +4133,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         Med = self.valuationdomain['med']
         for a in initial:
             relation[a] = {}
+            ra = relation[a]
             for b in terminal:
                 if a == b:
-                    relation[a][b] = Med
+                    ra[b] = Med
                 else:
                     concordance = Decimal('0.0')
                     veto = {}
@@ -4234,7 +4235,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                         vetos.append(([a,b,concordindex*Max],abVetoes))
                     if abNegativeVetoes != []:
                         negativeVetos.append(([a,b,concordindex*Max],abNegativeVetoes))
-                    relation[a][b] = outrankindex*Max
+                    ra[b] = outrankindex*Max
 
         # return outranking relation    
 
@@ -4285,8 +4286,9 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         largePerformanceDifferencesCount = {}        
         for a in initial:
             largePerformanceDifferencesCount[a] = {}
+            lpda = largePerformanceDifferencesCount[a]
             for b in terminal:
-                largePerformanceDifferencesCount[a][b] = {'positive':0,'negative':0}
+                lpda[b] = {'positive':0,'negative':0}
 
         
         #nc = len(criteria)
@@ -4294,11 +4296,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         Med = self.valuationdomain['med']
         for a in initial:
             relation[a] = {}
+            ra = relation[a]
             concordanceRelation[a] = {}
+            crda = concordanceRelation[a]
             for b in terminal:
                 if a == b:
-                    relation[a][b] = Med
-                    concordanceRelation[a][b] = Decimal('0.0')
+                    ra[b] = Med
+                    crda[b] = Decimal('0.0')
                 else:
                     
                     concordance = Decimal('0.0')
@@ -4387,7 +4391,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                 negativeVeto[c] = (Decimal('-1.0'),None,None,None)
                                 
                     concordindex = concordance / totalweight                 
-                    concordanceRelation[a][b] = concordindex
+                    crda[b] = concordindex
                     
                     ## init vetoes lists and indexes
                     abVetoes=[]
@@ -4424,7 +4428,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     if hasBipolarVeto:
                         if abNegativeVetoes != []:
                             negativeVetos.append(([a,b,concordindex*Max],abNegativeVetoes))
-                    relation[a][b] = outrankindex*Max
+                    ra[b] = outrankindex*Max
 
         # storing concordance relation and vetoes
         if WithConcordanceRelation:
@@ -4445,39 +4449,41 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         """
         Renders the characteristic value of the comparison of a and b on criterion c.
         """
-        evalc = self.evaluation[c]
+        evalca = self.evaluation[c][a]
+        evalcb = self.evaluation[c][b]
+        maxAB = max(abs(evalca),abs(evalcb))
         crit = self.criteria[c]
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
-        if evalc[a] != Decimal('-999') and evalc[b] != Decimal('-999'):		
+        if evalca != Decimal('-999') and evalcb != Decimal('-999'):		
             try:
                 indx = crit['thresholds']['ind'][0]
                 indy = crit['thresholds']['ind'][1]
                 if hasSymmetricThresholds:
-                    ind = indx +indy * max(abs(evalc[a]),abs(evalc[b]))
+                    ind = indx +indy * maxAB
                 else:
-                    ind = indx +indy * abs(evalc[a])
+                    ind = indx +indy * abs(evalca)
             except:
                 ind = None
             try:
                 wpx = crit['thresholds']['weakPreference'][0]
                 wpy = crit['thresholds']['weakPreference'][1]
                 if hasSymmetricThresholds:
-                    wp = wpx + wpy * max(abs(evalc[a]),abs(evalc[b]))
+                    wp = wpx + wpy * maxAB
                 else:
-                    wp = wpx + wpy * abs(evalc[c][a])
+                    wp = wpx + wpy * abs(evalca)
             except:
                 wp = None
             try:
                 px = crit['thresholds']['pref'][0]
                 py = crit['thresholds']['pref'][1]
                 if hasSymmetricThresholds:
-                    p = px + py * max(abs(evalc[a]),abs(evalc[b]))
+                    p = px + py * maxAB
                 else:
-                    p = px + py * abs(evalc[a])
+                    p = px + py * abs(evalca)
             except:
                 p = None
-            d = evalc[a] - evalc[b]
+            d = evalca - evalcb
             return self._localConcordance(d,ind,wp,p)
         else:
             return Decimal('0.0')
