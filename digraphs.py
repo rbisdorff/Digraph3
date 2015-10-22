@@ -5170,17 +5170,19 @@ class Digraph(object):
         newrelation = {}
         for x in actions:
             newrelation[x] = {}
+            nrx = newrelation[x]
+            orx = oldrelation[x]
             for y in actions:
-                if oldrelation[x][y] == oldMax:
-                    newrelation[x][y] = newMax
-                elif oldrelation[x][y] == oldMin:
-                    newrelation[x][y] = newMin
-                elif oldrelation[x][y] == oldMed:
-                    newrelation[x][y] = newMed
+                if orx[y] == oldMax:
+                    nrx[y] = newMax
+                elif orx[y] == oldMin:
+                    nrx[y] = newMin
+                elif orx[y] == oldMed:
+                    nrx[y] = newMed
                 else:
-                    newrelation[x][y] = newMin + ((oldrelation[x][y] - oldMin)/oldAmplitude)*newAmplitude
+                    nrx[y] = newMin + ((orx[y] - oldMin)/oldAmplitude)*newAmplitude
                     if Debug:
-                        print(x,y,self.relation[x][y],newrelation[x][y])
+                        print(x,y,orx[y],nrx[y])
         # install new values in self
         self.valuationdomain['max'] = newMax
         self.valuationdomain['min'] = newMin
