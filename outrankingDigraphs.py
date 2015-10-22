@@ -4144,32 +4144,36 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     abNegativeVetos=[]
 
                     for c,crit in criteria.items():
-                        if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+                        evalca = evaluation[c][a]
+                        evalcb = evaluation[c][b]
+                        maxAB = max(abs(evalca),abs(evalcb))
+                        
+                        if evalca != Decimal('-999') and evalcb != Decimal('-999'):		
                             try:
                                 indx = crit['thresholds']['ind'][0]
                                 indy = crit['thresholds']['ind'][1]
-                                ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                ind = indx +indy * maxAB
                             except KeyError:
                                 ind = None
                             try:
                                 wpx = crit['thresholds']['weakPreference'][0]
                                 wpy = crit['thresholds']['weakPreference'][1]
                                 if hasSymmetricThresholds:
-                                    wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                    wp = wpx + wpy * maxAB
                                 else:
-                                    wp = wpx + wpy * abs(evaluation[c][a]) 
+                                    wp = wpx + wpy * abs(evalca) 
                             except KeyError:
                                 wp = None
                             try:
                                 px = crit['thresholds']['pref'][0]
                                 py = crit['thresholds']['pref'][1]
                                 if hasSymmetricThresholds:
-                                    p = px + py * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                    p = px + py * maxAB
                                 else:
-                                    p = px + py * abs(evaluation[c][a]) 
+                                    p = px + py * abs(evalca) 
                             except KeyError:
                                 p = None
-                            d = evaluation[c][a] - evaluation[c][b]
+                            d = evalca - evalcb
                             lc0 = self._localConcordance(d,ind,wp,p)
                             ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
                             concordance = concordance + (lc0 * crit['weight'])
@@ -4180,15 +4184,15 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                     wv = None
                                 else:
                                     if hasSymmetricThresholds:
-                                        wv = wvx + wvy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                        wv = wvx + wvy * maxAB
                                     else:
-                                        wv = wvx + wvy * abs(evaluation[c][a])
+                                        wv = wvx + wvy * abs(evalca)
                             except KeyError:
                                 wv = None
                             try:
                                 vx = crit['thresholds']['veto'][0]
                                 vy = crit['thresholds']['veto'][1]
-                                v = vx + vy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                v = vx + vy * maxAB
                             except KeyError:
                                 v = None
                             veto[c] = (self._localVeto(d,wv,v),d,wv,v)
@@ -4199,7 +4203,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             if negativeVeto[c][0] > Decimal('-1.0'):
                                 abNegativeVetos.append((c,negativeVeto[c]))
                         else:
-                            concordance = concordance + Decimal('0.0') * criteria[c]['weight']
+                            concordance = concordance + Decimal('0.0') * crit['weight']
                             veto[c] = (Decimal('-1.0'),None,None,None)
                             negativeVeto[c] = (Decimal('-1.0'),None,None,None)
                                 
@@ -4218,7 +4222,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             abNegativeVetoes.append((c,negativeVeto[c]))
                                          
                     vetoes = [-veto[c][0] for c in veto if veto[c][0] > Decimal('-1')]
-                    negativeVetoes = [negativeVeto[c][0] for c in negativeVeto if negativeVeto[c][0] > Decimal('-1')]
+                    negativeVetoes = [negativeVeto[c][0] for c in negativeVeto\
+                                      if negativeVeto[c][0] > Decimal('-1')]
 ##                    if Debug:
 ##                        print('vetoes = ', vetoes)
 ##                        print('negativeVetoes = ', negativeVetoes)
@@ -4306,35 +4311,38 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                         abNegativeVetos=[]
 
                     for c,crit in criteria.items():
-                        if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+                        evalca = evaluation[c][a]
+                        evalcb = evaluation[c][b]
+                        maxAB = max(abs(evalca),abs(evalcb))
+                        if evalca != Decimal('-999') and evalcb != Decimal('-999'):		
                             try:
                                 indx = crit['thresholds']['ind'][0]
                                 indy = crit['thresholds']['ind'][1]
-                                ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                ind = indx +indy * maxAB
                             except KeyError:
                                 ind = None
                             try:
                                 wpx = crit['thresholds']['weakPreference'][0]
                                 wpy = crit['thresholds']['weakPreference'][1]
                                 if hasSymmetricThresholds:
-                                    wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                    wp = wpx + wpy * maxAB
                                 else:
-                                    wp = wpx + wpy * abs(evaluation[c][a]) 
+                                    wp = wpx + wpy * abs(evalca) 
                             except KeyError:
                                 wp = None
                             try:
                                 px = crit['thresholds']['pref'][0]
                                 py = crit['thresholds']['pref'][1]
                                 if hasSymmetricThresholds:
-                                    p = px + py * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                    p = px + py * maxAB
                                 else:
-                                    p = px + py * abs(evaluation[c][a]) 
+                                    p = px + py * abs(evalca) 
                             except KeyError:
                                 p = None
-                            d = evaluation[c][a] - evaluation[c][b]
+                            d = evalca - evalcb
                             lc0 = self._localConcordance(d,ind,wp,p)
                             ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
-                            concordance = concordance + (lc0 * criteria[c]['weight'])
+                            concordance = concordance + (lc0 * crit['weight'])
                             try:
                                 wvx = crit['thresholds']['weakVeto'][0]
                                 wvy = crit['thresholds']['weakVeto'][1]
@@ -4342,9 +4350,9 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                     wv = None
                                 else:
                                     if hasSymmetricThresholds:
-                                        wv = wvx + wvy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                        wv = wvx + wvy * maxAB
                                     else:
-                                        wv = wvx + wvy * abs(evaluation[c][a])
+                                        wv = wvx + wvy * abs(evalca)
                             except KeyError:
                                 wv = None
                             try:
@@ -4354,9 +4362,9 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                     v = None
                                 else:
                                     if hasSymmetricThresholds:
-                                        v = vx + vy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                        v = vx + vy * maxAB
                                     else:
-                                        v = vx + vy * abs(evaluation[c][a])
+                                        v = vx + vy * abs(evalca)
                             except KeyError:
                                 v = None
                             veto[c] = (self._localVeto(d,wv,v),d,wv,v)
@@ -4373,7 +4381,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                 ## if d > wv:
                                 ##     print 'd,wv,v,negativeVeto[c]',d,wv,v,negativeVeto[c] 
                         else:
-                            concordance = concordance + Decimal('0.0') * criteria[c]['weight']
+                            concordance = concordance + Decimal('0.0') * crit['weight']
                             veto[c] = (Decimal('-1.0'),None,None,None)
                             if hasBipolarVeto:
                                 negativeVeto[c] = (Decimal('-1.0'),None,None,None)
