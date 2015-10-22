@@ -1278,7 +1278,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                  nbrOfCPUs=None,\
                  nbrOfThreads=None,\
                  save2File=None,\
-                 CopyPerfTab=False,\
+                 CopyPerfTab=True,\
                  Comments=False,\
                  Debug=False):
         
