@@ -270,17 +270,20 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                         Debug=Debug)
             if LowerClosed:
                 for x in actionsOrig.keys():
+                    rx = relation[x]
                     for y in actionsOrig.keys():
-                        relation[x][y] = Med
+                        rx[y] = Med
                 for x in profileLimits:
                     relation[x] = {}
+                    rx = relation[x]
                     for y in actions.keys():
-                        relation[x][y] = Med
+                        rx[y] = Med
             else:
                 for x in actionsOrig.keys():
                     relation[x] = {}
+                    rx = relation[x]
                     for y in actionsOrig.keys():
-                        relation[x][y] = Med
+                        rx[y] = Med
                 for y in profileLimits:
                     for x in actions.keys():
                         relation[x][y] = Med
@@ -290,8 +293,10 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         sortingRelation = self.computeSortingRelation(Debug=Debug,)
         relation = self.relation
         for x in actionsOrig.keys():
+            rx = relation[x]
+            srx = sortingRelation[x]
             for y in actionsOrig.keys():
-                relation[x][y] = sortingRelation[x][y]
+                rx[y] = srx[y]
 
         # reset original action set
         self.actions = actionsOrig
@@ -354,8 +359,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         sortingRelation = {}
         for x in actions:
             sortingRelation[x] = {}
+            srx = sortingRelation[x]
             for y in actions:
-                sortingRelation[x][y] = Med
+                srx[y] = Med
                 
         if Debug:
             print('categoryContents',categoryContents)
@@ -945,6 +951,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         """
         Computes the sorting results per category.
         """
+        Med = self.valuationdomain['med']
         actions = list(self.getActionsKeys())
         actions.sort()
         try:
@@ -956,7 +963,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         for c in self.orderedCategoryKeys(Reverse=Reverse):
             categoryContent[c] = []
             for x in actions:
-                if sorting[x][c]['categoryMembership'] >= self.valuationdomain['med']:
+                if sorting[x][c]['categoryMembership'] >= Med:
                     categoryContent[c].append(x)
         if StoreSorting:
             self.categoryContent = categoryContent
@@ -1501,17 +1508,20 @@ class QuantilesSortingDigraph(SortingDigraph):
         if WithSortingRelation:
             if LowerClosed:
                 for x in dict.keys(actionsOrig):
+                    rx = relation[x]
                     for y in dict.keys(actionsOrig):
-                        relation[x][y] = Med
+                        rx[y] = Med
                 for x in dict.keys(profiles):
                     relation[x] = {}
+                    rx = relation[x]
                     for y in dict.keys(actions):
-                        relation[x][y] = Med
+                        rx[y] = Med
             else:
                 for x in dict.keys(actionsOrig):
                     relation[x] = {}
+                    rx = relation[x]
                     for y in dict.keys(actionsOrig):
-                        relation[x][y] = Med
+                        rx[y] = Med
                 for y in dict.keys(profiles):
                     for x in dict.keys(actions):
                         relation[x][y] = Med
@@ -1527,8 +1537,10 @@ class QuantilesSortingDigraph(SortingDigraph):
                                                           Threading=Threading,\
                                                           nbrOfCPUs=nbrOfProcesses)
             for x in dict.keys(actionsOrig):
+                rx = self.relation[x]
+                srx = sortingRelation[x]
                 for y in dict.keys(actionsOrig):
-                    self.relation[x][y] = sortingRelation[x][y]
+                    rx[y] = srx[y]
             # reset original action set
             self.actions = actionsOrig
             self.order = len(self.actions)
