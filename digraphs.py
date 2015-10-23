@@ -8485,8 +8485,9 @@ class CoDualDigraph(Digraph):
         relation = {}
         for x in self.actions:
             relation[x] = {}
+            rx = relation[x]
             for y in self.actions:
-                relation[x][y] = Max - other.relation[y][x] + Min
+                rx[y] = Max - other.relation[y][x] + Min
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -8534,18 +8535,21 @@ class CoverDigraph(Digraph):
         relation = {}
         for x in self.actions:
             relation[x] = {}
+            rx = relation[x]
+            orx = other.relation[x]
             for y in self.actions:
+                ory = other.relation[y]
                 if y == x:
-                    relation[x][y] = Med
+                    rx[y] = Med
                 else:
                     coverXY = Max
                     for z in self.actions:
                         if z != x and z != y:
-                            coverz = max(other.relation[x][z],(Max-other.relation[y][z]+Min))
+                            coverz = max(orx[z],(Max-ory[z]+Min))
                             coverXY = min(coverXY,coverz)
-                            if Debug:
-                                print(x,y,z,other.relation[x][z],(Max-other.relation[y][z]+Min),coverz,coverXY)
-                    relation[x][y] = min(other.relation[x][y],coverXY)
+##                            if Debug:
+##                                print(x,y,z,other.relation[x][z],(Max-other.relation[y][z]+Min),coverz,coverXY)
+                    rx[y] = min(orx[y],coverXY)
         self.relation = relation
         #self.recodeValuation(other.valuationdomain['min'],other.valuationdomain['max'])
         self.gamma = self.gammaSets()
@@ -8589,8 +8593,9 @@ class ConverseDigraph(Digraph):
         relation = {}
         for x in self.actions:
             relation[x] = {}
+            rx = relation[x]
             for y in self.actions:
-                relation[x][y] = other.relation[y][x]
+                rx[y] = other.relation[y][x]
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -8617,11 +8622,14 @@ class FusionDigraph(Digraph):
         fusionRelation = {}
         for x in self.actions:
             fusionRelation[x] = {}
+            fx = fusionRelation[x]
+            dg1x = dg1.relation[x]
+            dg2x = dg2.relation[x]
             for y in self.actions:
                 if operator == "o-min":
-                    fusionRelation[x][y] = omin(Med,(dg1.relation[x][y],dg2.relation[x][y]))
+                    fx[y] = omin(Med,(dg1x[y],dg2x[y]))
                 elif operator == "o-max":
-                    fusionRelation[x][y] = omax(Med,(dg1.relation[x][y],dg2.relation[x][y]))
+                    fx[y] = omax(Med,(dg1x[y],dg2x[y]))
                 else:
                     print('Error: invalid epistemic fusion operator %s' % operator)
         self.relation = fusionRelation
@@ -8649,12 +8657,14 @@ class FusionLDigraph(Digraph):
         fusionRelation = {}
         for x in self.actions:
             fusionRelation[x] = {}
+            fx = fusionRelation[x]
+            gx = g.relation[x]
             for y in self.actions:
-                args = [g.relation[x][y] for g in L]
+                args = [gx[y] for g in L]
                 if operator == "o-min":
-                    fusionRelation[x][y] = omin(Med,args)
+                    fx[y] = omin(Med,args)
                 elif operator == "o-max":
-                    fusionRelation[x][y] = omax(Med,args)
+                    fx[y] = omax(Med,args)
                 else:
                     print('Error: invalid epistemic fusion operator %s' % operator)
         self.relation = fusionRelation
@@ -8700,8 +8710,9 @@ class Preorder(Digraph):
         relation = {}
         for x in self.actions:
             relation[x] = {}
+            rx = relation[x]
             for y in self.actions:
-                relation[x][y] = None
+                rx[y] = None
 
         if direction == 'best':
             rank = other.bestRanks()
@@ -8760,10 +8771,13 @@ class XORDigraph(Digraph):
         xorRelation = {}
         for x in self.actions:
             xorRelation[x] = {}
+            xorx = xorRelation[x]
+            d1x = d1.relation[x]
+            d2x = d2.relation[x]
             for y in self.actions:
-                xorRelation[x][y] = max( min(d1.relation[x][y],-d2.relation[x][y]), min(d2.relation[x][y],-d1.relation[x][y]) )
-                if Debug:
-                    print(x,y,d1.relation[x][y],d2.relation[x][y],xorRelation[x][y])
+                xorx[y] = max( min(d1x[y],-d2x[y]), min(d2x[y],-d1x[y]) )
+##                if Debug:
+##                    print(x,y,d1.relation[x][y],d2.relation[x][y],xorRelation[x][y])
 
         self.relation = xorRelation
         if Recoded:
@@ -8812,8 +8826,11 @@ class EquivalenceDigraph(Digraph):
         equivRelation = {}
         for x in self.actions:
             equivRelation[x] = {}
+            eqvx = equivRelation[x]
+            d1x = d1.relation[x]
+            d2x = d2.relation[x]
             for y in self.actions:
-                equivRelation[x][y] = min( max(-d1.relation[x][y],d2.relation[x][y]), max(-d2.relation[x][y],d1.relation[x][y]) )
+                eqvx[y] = min( max(-d1x[y],d2x[y]), max(-d2x[y],d1x[y]) )
 ##                if Debug:
 ##                    print(x,y,d1.relation[x][y],d2.relation[x][y],equivRelation[x][y])
 
@@ -8844,11 +8861,11 @@ class EquivalenceDigraph(Digraph):
         #actions = [x for x in self.actions]
         actions = self.actions
         relation = self.relation
-        for x in actions:
-            for y in actions:
+        for x,rx in relation.items():
+            for y,rxy in rx.items():
                 if x != y:
-                    corr += relation[x][y]
-                    dterm += abs(relation[x][y])
+                    corr += rxy
+                    dterm += abs(xy)
         return corr / dterm
 
 

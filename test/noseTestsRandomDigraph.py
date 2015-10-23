@@ -60,7 +60,7 @@ def testRandomTournament():
     t.showRelationTable()
     t = RandomTournament(order=5,isCrisp=True)
     t.showRelationTable()
-    t = RandomTournament(order=5,valuationDomain={'min':Decimal('-10'),'med': Decimal('0'),'max':Decimal('10')})
+    t = RandomTournament(order=5,valuationDomain=(-10,10))
     t.showRelationTable()
 
 def testIntegerRandomDigraph():

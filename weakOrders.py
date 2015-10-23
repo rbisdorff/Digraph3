@@ -537,15 +537,18 @@ class RankingByChoosingDigraph(WeakOrder):
         relFusion = {}
         for x in digraph.actions:
             relFusion[x] = {}
+            fx = relFusion[x]
+            bx = relBest[x]
+            lx = relLast[x]
             for y in digraph.actions:
                 if fusionOperator == "o-max":
-                    relFusion[x][y] = digraph.omax((relBest[x][y],relLast[x][y]))
+                    fx[y] = digraph.omax((bx[y],lx[y]))
                 elif fusionOperator == "o-min":
-                    relFusion[x][y] = digraph.omin((relBest[x][y],relLast[x][y]))
+                    fx[y] = digraph.omin((bx[y],lx[y]))
                 else:
                     print('Error: invalid epistemic fusion operator %s' % operator)
-                if Debug:
-                    print('!',x,y,relBest[x][y],relLast[x][y],relFusion[x][y])  
+##                if Debug:
+##                    print('!',x,y,relBest[x][y],relLast[x][y],relFusion[x][y])  
         self.relation=relFusion
         self.rankingByLastChoosing = copy(digraph.rankingByLastChoosing)
         self.rankingByBestChoosing = copy(digraph.rankingByBestChoosing)
@@ -1361,8 +1364,9 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                 if Comments:
                     print('Finished all threads in %.4f sec.' % (self.runTimes['ranking-by-choosing']) )
                 t0 = time()
-                for c in range(1,nwo+1):                    
-                    nc = len(catContent[c])
+                for c in range(1,nwo+1):
+                    ccc = catContent[c]
+                    nc = len(ccc)
                     #print('%d/%d' % (c,nwo), end = ',')
                     if nc > 2:
                         fiName = 'splitCatRelation-'+str(c)+'.py'
@@ -1378,7 +1382,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                         if Debug:
                             print('singleton category %d : %d' % (c,nc))
                             print(catContent[c])
-                        catRbc[c] = [((Max,catContent[c]),(Max,catContent[c]))]
+                        catRbc[c] = [((Max,ccc),(Max,ccc))]
 ##                        for x in catContent[c]:
 ##                            catRelation[c] = {str(x): {str(x): Med}}
                         if Debug:
@@ -1389,17 +1393,17 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
 
                             print('pair category %d : %d' % (c,nc))
                             print(catContent[c])
-                        currActions = list(catContent[c])
+                        currActions = list(ccc)
                         pt = PartialPerformanceTableau(perfTab,currActions)
                         gt = BipolarOutrankingDigraph(pt)
-                        x = catContent[c][0]
-                        y = catContent[c][1]
+                        x = ccc[0]
+                        y = ccc[1]
                         if gt.relation[x][y] > gt.relation[x][y]:
                             catRbc[c] = [((Max,x),(Max,y))]
                         elif gt.relation[x][y] < gt.relation[x][y]:
                             catRbc[c] = [((Max,y),(Max,x))]
                         else:
-                            catRbc[c] = [((Max,catContent[c]),(Max,catContent[c]))]
+                            catRbc[c] = [((Max,ccc),(Max,ccc))]
 ##                        catRelation[c] = qs.computeRankingByChoosingRelation(\
 ##                            actionsSubset=currActions,\
 ##                            rankingByChoosing=catRbc[c],\
@@ -1476,9 +1480,11 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         actions = self.actions
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
-        for x in dict.keys(actions):
-            for y in dict.keys(actions):
-                self.relation[x][y] = relation[x][y]
+        for x in self.actions:
+            srx = self.relation[x]
+            rx = relation[x]
+            for y in self.actions:
+                srx[y] = rx[y]
 
     def computeWeakOrder(self,Descending=True,strategy=None,Comments=False,Debug=False):
         """
@@ -1695,22 +1701,25 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         preorderRelation = {}
         for x in actions:
             preorderRelation[x] = {}
+            prx = preorderRelation[x]
             for y in actions:
-                preorderRelation[x][y] = Med
+                prx[y] = Med
 
         for eqcl in preorder:
             currRest = currentActions - set(eqcl)
             if Debug:
                 print(currentActions, eqcl, currRest)
             for x in eqcl:
+                preqx = preorderRelation[x]
                 for y in eqcl:
                     if x != y:
-                        preorderRelation[x][y] = Max
+                        preqx[y] = Max
                         preorderRelation[y][x] = Max
 
             for x in eqcl:
+                preqx = preorderRelation[x]
                 for y in currRest:
-                    preorderRelation[x][y] = Max
+                    preqx[y] = Max
                     preorderRelation[y][x] = Min
             currentActions = currentActions - set(eqcl)
         return preorderRelation

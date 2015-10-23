@@ -67,23 +67,27 @@ class RandomDigraph(Digraph):
 ##            actionsList = [x for x in self.actions]
 ##            actionsList.sort()
             valuationdomain = dict()
-            valuationdomain['min'] = Decimal(str(domain[0]))
-            valuationdomain['max'] = Decimal(str(domain[1]))
-            valuationdomain['med'] = valuationdomain['min'] + \
-                (valuationdomain['max']-valuationdomain['min'])/Decimal('2.0')
+            Min = Decimal(str(domain[0]))
+            Max = Decimal(str(domain[1]))
+            Med = Min + \
+                (Max-Min)/Decimal('2.0')
+            valuationdomain['min'] = Min
+            valuationdomain['max'] = Max
+            valuationdomain['med'] = Med
             valuationdomain['hasIntegerValuation'] = hasIntegerValuation
             self.valuationdomain = valuationdomain
             relation = {}
             for x in actions.keys():
                 relation[x] = {}
+                rx = relation[x]
                 for y in actions.keys():
                     if x == y:
-                        relation[x][y] = self.valuationdomain['min']
+                        rx[y] = Min
                     else:
                         if random.random() <= arcProbability:
-                            relation[x][y] = self.valuationdomain['max']
+                            rx[y] = Max
                         else:
-                            relation[x][y] = self.valuationdomain['min']
+                            rx[y] = Min
             self.relation = relation
             self.order = order
             self.name = 'randomDigraph'
@@ -174,19 +178,21 @@ class RandomValuationDigraph(Digraph):
             else:
                 self.valuationdomain = {'min':Decimal('0'), 'med':Decimal('0.5'), 'max':Decimal('1.0')}
         self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
+        Med = self.valuationdomain['med']
         relation = {}
         for x in actions.keys():
             relation[x] = {}
+            rx = relation[x]
             for y in actions.keys():
                 if x == y:
-                    relation[x][y] = self.valuationdomain['med']
+                    rx[y] = Med
                 else:
                     if hasIntegerValuation:
-                        relation[x][y] = (2*random.randrange(start=0,stop=precision)) - precision
+                        rx[y] = (2*random.randrange(start=0,stop=precision)) - precision
                     elif Normalized:
-                        relation[x][y] = (Decimal(str(round(float(random.randrange(start=0,stop=precision))/precision,ndigits))) * Decimal('2.0')) - Decimal('1.0')
+                        rx[y] = (Decimal(str(round(float(random.randrange(start=0,stop=precision))/precision,ndigits))) * Decimal('2.0')) - Decimal('1.0')
                     else:
-                        relation[x][y] = Decimal(str(round(float(random.randrange(start=0,stop=precision))/precision,ndigits)))
+                        rx[y] = Decimal(str(round(float(random.randrange(start=0,stop=precision))/precision,ndigits)))
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -241,8 +247,9 @@ class RandomWeakTournament(Digraph):
         relation = {}
         for x in actions.keys():
             relation[x] = {}
+            rx = relation[x]
             for y in actions.keys():
-                relation[x][y] = self.valuationdomain['med']
+                rx[y] = self.valuationdomain['med']
 
         actionsList = list(actions.keys())
         random.shuffle(actionsList)
@@ -252,11 +259,12 @@ class RandomWeakTournament(Digraph):
         #print actionsList
         n = len(actionsList)
         for i in range(n):
+            rai = relation[actionsList[i]]
             for j in range(i,n):
                 #print i,j
                 if i == j:
                     #print actionsList[i],actionsList[j]
-                    relation[actionsList[i]][actionsList[j]] = self.valuationdomain['med']
+                    rai[actionsList[j]] = Med
                 else:
                     u = Decimal(str(random.randint(0,precision)))/dPrecision
                     u1 = Decimal(str(random.randint(0,precision)))
@@ -287,10 +295,10 @@ class RandomWeakTournament(Digraph):
                             randeval2 = u2/dPrecision
 
                     if hasIntegerValuation:
-                        relation[actionsList[i]][actionsList[j]] = Decimal(str(randeval1))
+                        rai[actionsList[j]] = Decimal(str(randeval1))
                         relation[actionsList[j]][actionsList[i]] = Decimal(str(randeval2))
                     else:
-                        relation[actionsList[i]][actionsList[j]] = Decimal(str(round(randeval1,ndigits)))
+                        rai[actionsList[j]] = Decimal(str(round(randeval1,ndigits)))
                         relation[actionsList[j]][actionsList[i]] = Decimal(str(round(randeval2,ndigits)))
 
 
@@ -316,7 +324,7 @@ class RandomTournament(Digraph):
 
     def __init__(self,order=10,ndigits=2,
                  isCrisp=True,
-                 valuationDomain=None,
+                 valuationDomain=[-1,1],
                  seed=None):
         import random
         random.seed(seed)
@@ -340,13 +348,21 @@ class RandomTournament(Digraph):
         if valuationDomain == None:
             self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
         else:
-            self.valuationdomain = valuationDomain
+            print(valuationDomain)
+            vdMax = Decimal(str(valuationDomain[0]))
+            vdMin = Decimal(str(valuationDomain[1]))
+            self.valuationdomain = {'min': vdMax, 'max': vdMin}
+            self.valuationdomain['med'] = (vdMin + vdMax)/Decimal('2.0')
         valuationRange = self.valuationdomain['max'] - self.valuationdomain['min']
+        Max = self.valuationdomain['max']
+        Min = self.valuationdomain['min']
+        Med = self.valuationdomain['med']
         relation = {}
         for x in actions:
             relation[x] = {}
+            rx = relation[x]
             for y in actions:
-                relation[x][y] = Decimal('0.0')
+                rx[y] = Decimal('0.0')
 ##        if seed != None:
 ##            random.seed(seed)
         precision = pow(10,ndigits)
@@ -354,25 +370,27 @@ class RandomTournament(Digraph):
         #print actionsList
         n = len(actionsList)
         for i in range(n):
+            rai = relation[actionsList[i]]
             for j in range(i,n):
+                raj = relation[actionsList[j]]
                 #print i,j
                 if i == j:
                     #print actionsList[i],actionsList[j]
-                    relation[actionsList[i]][actionsList[j]] = self.valuationdomain['med']
+                    rai[actionsList[j]] = Med
                 else:
                     u = random.randint(0,precision)
                     if isCrisp:
                         if u < Decimal(str(precision))/Decimal('2'):
-                            relation[actionsList[i]][actionsList[j]] = self.valuationdomain['min']
-                            relation[actionsList[j]][actionsList[i]] = self.valuationdomain['max']
+                            rai[actionsList[j]] = Min
+                            raj[actionsList[i]] = Max
                         else:
-                            relation[actionsList[i]][actionsList[j]] = self.valuationdomain['max']
-                            relation[actionsList[j]][actionsList[i]] = self.valuationdomain['min']
+                            rai[actionsList[j]] = Max
+                            raj[actionsList[i]] = Min
                     else:
-                        randeval = self.valuationdomain['min'] + Decimal(str(u))/Decimal(str(precision))*valuationRange
+                        randeval = Min + Decimal(str(u))/Decimal(str(precision))*valuationRange
                         valuation = Decimal(str(round(randeval,ndigits)))
-                        relation[actionsList[i]][actionsList[j]] = valuation
-                        relation[actionsList[j]][actionsList[i]] = self.valuationdomain['max'] - valuation + self.valuationdomain['min']
+                        rai[actionsList[j]] = valuation
+                        raj[actionsList[i]] = Max - valuation + Min
 
         self.relation = relation
         self.gamma = self.gammaSets()
@@ -407,8 +425,9 @@ class RandomFixedSizeDigraph(Digraph):
             relation = {}
             for x in actions.keys():
                 relation[x] = {}
+                rx = relation[x] 
                 for y in actions.keys():
-                    relation[x][y] = Min
+                    rx[y] = Min
                     if x != y:
                         allarcs.append((x,y))
             for arc in random.sample(allarcs,size):
@@ -462,8 +481,9 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
                 relation = {}
                 for x in actions.keys():
                     relation[x] = {}
+                    rx = relation[x]
                     for y in actions.keys():
-                        relation[x][y] = Min
+                        rx[y] = Min
                 # create a random pairing
                 feasable = 0
                 s = 0
