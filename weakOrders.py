@@ -1478,8 +1478,6 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         preRanking = self.computeQsRbcRanking(Descending=True,Debug=Debug)
         relation = self.computePreRankingRelation(preRanking,Normalized=False)
         actions = self.actions
-        Max = self.valuationdomain['max']
-        Min = self.valuationdomain['min']
         for x in self.actions:
             srx = self.relation[x]
             rx = relation[x]
