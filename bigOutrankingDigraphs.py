@@ -396,9 +396,8 @@ class BigDigraph(object):
         Renders the sum of the squares (without diagonal) of the orders of the component's subgraphs
         over the square (without diagonal of the big digraph order. 
         """
-        fillRate = sum((self.components[comp]['subGraph'].order*\
-                         (self.components[comp]['subGraph'].order-1))\
-                        for comp in self.components)
+        fillRate = sum((comp['subGraph'].order*comp['subGraph'].order-1)\
+                        for comp in self.components.values())
         return fillRate/( self.order*(self.order-1) )
 
 ##    def computeCriterionCorrelation(self,criterion,Threading=False,\
@@ -1065,7 +1064,7 @@ class BigOutrankingDigraph(BigDigraph):
             for compKey,comp in components.items():
                 #comp = components[compKey]
                 pg = comp['subGraph']
-                print('Component :', compKey, end=' ')
+                print('Component : %s' % compKey, end=' ')
                 actions = [ x for x in pg.actions.keys()]
                 print('%s' % actions)
                 if pg.order > 1:
@@ -1075,7 +1074,7 @@ class BigOutrankingDigraph(BigDigraph):
             for compKey in compKeys:
                 comp = components[compkey]
                 pg = comp['subGraph']
-                print('Relation table of component %s' % compKey)
+                print('Relation table of component %s' % str(compKey))
                 actions = [ x for x in pg.actions.keys()]
                 print('%s' % actions)
                 if pg.order > 1:
@@ -1364,14 +1363,14 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
         t0 = time()
         nc = len(decomposition)
         self.nbrComponents = nc
-        if Debug:
-            print(nc)
+        #if Debug:
+        print(nc)
         self.nd = len(str(nc))
         if not self.sortingParameters['Threading']:
             components = OrderedDict()
             for i in range(1,nc+1):
                 comp = decomposition[i-1]
-                #print(comp)
+                print(comp)
                 compKey = ('c%%0%dd' % (self.nd)) % (i)
                 components[compKey] = {'rank':i}
                 #print(perfTab,comp[1])
@@ -1421,7 +1420,8 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                     fi = open('dumpDecomp.py','rb')
                     decomposition = loads(fi.read())
                     fi.close()
-                    nd = len(decomposition)
+                    nc = len(decomposition)
+                    nd = len(str(nc))
                     for i in self.lTest:
                         comp = decomposition[i]
                         if self.Debug:
