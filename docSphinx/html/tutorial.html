@@ -130,14 +130,16 @@
 5
 6
 7
-8</pre></div></td><td class="code"><div class="highlight"><pre>[\$HOME/Digraph3]\$ python3
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre>[\$HOME/Digraph3]\$ python3
 Python 3.5.0 (default, Sep 23 2015, 13:39:18)
 [GCC 4.8.4] on linux
 Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
 &gt;&gt;&gt; from digraphs import Digraph
 &gt;&gt;&gt; dg = Digraph(&#39;test/testdigraph&#39;)
-&gt;&gt;&gt; dg.save(&#39;tutorialdigraph&#39;)
-&gt;&gt;&gt; ...
+&gt;&gt;&gt; dg.save(&#39;tutorialDigraph&#39;)
+*--- Saving digraph in file: &lt;tutorialDigraph.py&gt; ---*
+&gt;&gt;&gt;
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -166,8 +168,8 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
  9
 10
 11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># automatically generated random irreflexive digraph</span>
-<span class="n">actionset</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;2&#39;</span><span class="p">,</span><span class="s">&#39;3&#39;</span><span class="p">,</span><span class="s">&#39;4&#39;</span><span class="p">,</span><span class="s">&#39;5&#39;</span><span class="p">,]</span>
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># Saved digraph instance</span>
+<span class="n">actionset</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;2&#39;</span><span class="p">,</span><span class="s">&#39;3&#39;</span><span class="p">,</span><span class="s">&#39;4&#39;</span><span class="p">,</span><span class="s">&#39;5&#39;</span><span class="p">}</span>
 <span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;min&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
                    <span class="s">&#39;med&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                    <span class="s">&#39;max&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
@@ -205,7 +207,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 18</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="s">&#39;tutorialDigraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
 <span class="go">*----- show details --------------*</span>
-<span class="go">Digraph          : tutorialdigraph</span>
+<span class="go">Digraph          : tutorialDigraph</span>
 <span class="go">Actions          : [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;]</span>
 <span class="go">Valuation domain : {&#39;med&#39;: Decimal(&#39;0&#39;),</span>
 <span class="go">                    &#39;max&#39;: Decimal(&#39;1&#39;),</span>
@@ -2025,17 +2027,11 @@ linearBallot = {
 <p>It is worthwhile noticing that <em>green</em> and <em>red</em> marked evaluations indicate <em>best</em>, respectively <em>worst</em>, performances of an alternative on a criterion. In this example, we may hence notice that alternative <em>a03</em> is in fact best performing on <em>four</em> out of <em>seven</em> criteria.</p>
 <dl class="docutils">
 <dt>We may, furthermore, rank the alternatives on the basis of the weighted marginal quintiles and visualize the same performance tableau in an even more colorful and sorted setting:</dt>
-<dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">QSRbcWeakOrdering</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">qsrbc</span> <span class="o">=</span> <span class="n">QsRbcWeakOrdering</span><span class="p">(</span><span class="n">odg</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ordering</span> <span class="o">=</span> <span class="n">qsrbc</span><span class="o">.</span><span class="n">computeQsRbcRanking</span><span class="p">()</span>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">QuantilesRankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">ordering</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/tutorialHeatmap.png"><img alt="_images/tutorialHeatmap.png" class="align-center" src="_images/tutorialHeatmap.png" style="width: 400px;" /></a>

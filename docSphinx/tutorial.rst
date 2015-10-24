@@ -59,8 +59,9 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
 	Type "help", "copyright", "credits" or "license" for more information.
 	>>> from digraphs import Digraph
 	>>> dg = Digraph('test/testdigraph')
-	>>> dg.save('tutorialdigraph')
-	>>> ...
+	>>> dg.save('tutorialDigraph')
+	*--- Saving digraph in file: <tutorialDigraph.py> ---*
+        >>> 
 
 ``Digraph`` object structure
 ............................
@@ -78,8 +79,8 @@ Permanent storage
 
 The :code:`dg.save('tutorialDigraph')` command stores the digraph *dg* in a file named :code:`tutorialDigraph.py` with the following content::
 
-       # automatically generated random irreflexive digraph
-       actionset = ['1','2','3','4','5',]
+       # Saved digraph instance
+       actionset = {'1','2','3','4','5'}
        valuationdomain = {'min': -1,
                           'med': 0,
                           'max': 1}
@@ -99,7 +100,7 @@ We may reload a previously saved ``Digraph`` instance from the file named :code:
         >>> dg = Digraph('tutorialDigraph')
        	>>> dg.showAll()
 	*----- show details --------------*
-	Digraph          : tutorialdigraph
+	Digraph          : tutorialDigraph
 	Actions          : ['1', '2', '3', '4', '5']
 	Valuation domain : {'med': Decimal('0'), 
                             'max': Decimal('1'), 
@@ -1166,9 +1167,7 @@ We may visualize the same performance tableau in a two-colors setting in the def
 It is worthwhile noticing that *green* and *red* marked evaluations indicate *best*, respectively *worst*, performances of an alternative on a criterion. In this example, we may hence notice that alternative *a03* is in fact best performing on *four* out of *seven* criteria.
 
 We may, furthermore, rank the alternatives on the basis of the weighted marginal quintiles and visualize the same performance tableau in an even more colorful and sorted setting:
-        >>> from weakOrders import QSRbcWeakOrdering
-        >>> qsrbc = QsRbcWeakOrdering(odg,10)
-        >>> ordering = qsrbc.computeQsRbcRanking()
+        >>> from weakOrders import QuantilesRankingDigraph
         >>> odg.showHTMLPerformanceHeatmap(ordering,colorLevels=5)
         >>> ...
 
