@@ -2280,13 +2280,13 @@ linearBallot = {
 <p>This module provides several random performance tableaux generators, i.e. PerformanceTableau class instances (see the <a class="reference external" href="techDoc.html#perftabs-label">perfTabs</a> module), mainly for the purpose of testing implemented versions of methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tutorial concerns the four most useful generators:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>The simplest model, called <strong>RandomPerformaceTableau</strong>, generates
+<li>The simplest model, called <code class="xref py py-class docutils literal"><span class="pre">RandomPerformaceTableau</span></code>, generates
 a set of <em>n</em> decision actions, a set of <em>m</em> real-valued
 performance criteria, ranging by default from 0.0 to 100.0,
 associated with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale.</li>
-<li>In order to study aggregation of linear orders, we provide a model called <strong>RandomRankPerformanceTableau</strong> which provides linearly ordered performances without ties on multiple criteria for a given number of decision actions.</li>
+<li>In order to study aggregation of linear orders, we provide a model called <code class="xref py py-class docutils literal"><span class="pre">RandomRankPerformanceTableau</span></code> which provides linearly ordered performances without ties on multiple criteria for a given number of decision actions.</li>
 <li>One of the most useful random generator, called
-<strong>RandomCBPerformanceTableau</strong>, proposes two decision objectives,
+<code class="xref py py-class docutils literal"><span class="pre">RandomCBPerformanceTableau</span></code>, proposes two decision objectives,
 named <em>Costs</em> (to be minimized) respectively <em>Benefits</em> (to be
 maximized) model; its purpose being to generate more or less
 contradictory performances on these two, usually opposed,
@@ -2295,7 +2295,8 @@ benefits</em>, whereas <em>high costs</em> will randomly be coupled with high be
 <li>Many multiple criteria decision problems concern three decision
 objectives which take into account <em>economical</em>, <em>societal</em> as
 well as <em>environmental</em> aspects. For this type of performance
-tableau model, we provide a specific generator, called <strong>Random3ObjectivesPerformanceTableau</strong>.</li>
+tableau model, we provide a specific generator, called
+<code class="xref py py-class docutils literal"><span class="pre">Random3ObjectivesPerformanceTableau</span></code> .</li>
 </ol>
 </div></blockquote>
 </div>
