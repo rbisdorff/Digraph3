@@ -1542,16 +1542,18 @@ class Digraph(object):
         from math import sqrt
         mean = Decimal('0.0')
         squares = Decimal('0.0')
-        actions = self.actions
-        n = len(self.actions)
+        #actions = self.actions
+        #n = len(self.actions)
+        
+        n = self.order
         n2 = n * (n-1)
         n2d = Decimal(str(n2))
         relation = self.relation
-        for x in dict.keys(actions):
-            for y in dict.keys(actions):
+        for x,rx in relation.items():
+            for y,rxy in rx.items():
                 if x != y:
-                    mean += relation[x][y]
-                    squares += relation[x][y]*relation[x][y]
+                    mean += rxy
+                    squares += rxy*rxy
         mean = mean / n2d
         if Sampling:
             var = ( squares / (n2d-Decimal('1')) ) - (mean * mean)
@@ -1646,12 +1648,14 @@ class Digraph(object):
                     correlation = Decimal('0')
                     determination = Decimal('0')
                     for x in splitActions:
+                        grx = g.relation[x]
+                        orx = otherRelation[x]
                         for y in actionsList:
                             if x != y:
-                                correlation += min( max(-g.relation[x][y],otherRelation[x][y]),\
-                                            max(g.relation[x][y],-otherRelation[x][y]) )
-                                determination += min( abs(g.relation[x][y]),\
-                                                      abs(otherRelation[x][y]) )
+                                correlation += min( max(-grx[y],orx[y]),\
+                                            max(grx[y],-orx[y]) )
+                                determination += min( abs(grx[y]),\
+                                                      abs(orx[y]) )
                                 #if Debug:
                                 #    print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)
                     splitCorrelation = {'correlation': correlation,
@@ -1764,13 +1768,15 @@ class Digraph(object):
             
 ##            for x,y in product(actions,repeat=1)
             for x in dict.keys(g.actions):
+                grx = g.relation[x]
+                orx = otherRelation[x]
                 for y in dict.keys(g.actions):
                     if x != y:
-                        corr = min( max(-g.relation[x][y],otherRelation[x][y]),\
-                                    max(g.relation[x][y],-otherRelation[x][y]) )
+                        corr = min( max(-grx[y],orx[y]),\
+                                    max(grx[y],-orx[y]) )
                         correlation += corr
-                        determination += min( abs(g.relation[x][y]),\
-                                              abs(otherRelation[x][y]) )
+                        determination += min( abs(grx[y]),\
+                                              abs(orx[y]) )
                         #if Debug:
                         #    print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)
         
@@ -2035,9 +2041,10 @@ class Digraph(object):
         Med = self.valuationdomain['med']
         wCW = []
         for x in actions:
+            rx = relation[x]
             Winner = True
             for y in [z for z in actions if z != x]:
-                if relation[x][y] < Med:
+                if rx[y] < Med:
                     Winner = False
                     break
             if Winner:
@@ -2058,10 +2065,11 @@ class Digraph(object):
         relation = self.relation
         Med = self.valuationdomain['med']
         CW = []
-        for x in dict.keys(actions):
+        for x in actions:
+            rx = relation[x]
             Winner = True
-            for y in [z for z in dict.keys(actions) if z != x]:
-                if relation[x][y] <= Med:
+            for y in [z for z in actions if z != x]:
+                if rx[y] <= Med:
                     Winner = False
                     break
             if Winner:
@@ -2094,10 +2102,11 @@ class Digraph(object):
             print('level', valuationList[i])
             for x in current:
                 #print 'x', x
+                rx = relation[x]
                 notBest = False
                 for y in actions:
                     #print 'y', y, relation[x][y]
-                    if x != y and relation[x][y] < valuationList[i]:
+                    if x != y and rx[y] < valuationList[i]:
                         notBest = True
                 if notBest:
                     bestSingleChoices.remove(x)
@@ -2149,8 +2158,9 @@ class Digraph(object):
         actions = set(self.actions)
         relation = self.relation.copy()
         for x in actions:
+            rx = relation[x]
             for y in actions:
-                relation[x][y] = max(relation[x][y],relation[y][x])
+                rx[y] = max(rx[y],relation[y][x])
         self.relation = relation.copy()
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -2161,17 +2171,20 @@ class Digraph(object):
         """
         import copy
         Med = self.valuationdomain['med']
-        actionsList = [x for x in self.actions]
+        #actionsList = [x for x in self.actions]
+        actions = self.actions
         relationOrig = copy.deepcopy(self.relation)
         self.closeTransitive()
         relation = self.relation
         n0 = Decimal('0')
         n1 = Decimal('0')
-        for x in actionsList:
-            for y in actionsList:
-                if relationOrig[x][y] > Med:
+        for x in actions:
+            rox = relationOrig[x]
+            rx = relation[x]
+            for y in actions:
+                if rox[y] > Med:
                     n0 += 1
-                if relation[x][y] > Med:
+                if rx[y] > Med:
                     n1 += 1
         self.relation = copy.deepcopy(relationOrig)
         self.gamma = self.gammaSets()
@@ -2187,14 +2200,14 @@ class Digraph(object):
         """
         import copy
         Med = self.valuationdomain['med']
-        actionsList = [x for x in self.actions]
+        #actionsList = [x for x in self.actions]
         relationOrig = copy.deepcopy(self.relation)
         self.closeTransitive()
-        relation = self.relation
+        #relation = self.relation
         n1 = 0
-        for x in actionsList:
-            for y in actionsList:
-                if relation[x][y] > Med:
+        for rx in self.relation.values():
+            for rxy in rx.values():
+                if rxy > Med:
                     n1 += 1
         self.relation = copy.deepcopy(relationOrig)
         self.gamma = self.gammaSets()
@@ -2821,17 +2834,18 @@ class Digraph(object):
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
         for x in ranking:
+            rx = relation[x]
             pictStr = ''
             for y in ranking:
-                if relation[x][y] == Max:
+                if rx[y] == Max:
                     pictStr += symbols['max']
-                elif relation[x][y] == Min:
+                elif rx[y] == Min:
                     pictStr += symbols['min']
-                elif relation[x][y] > Med:
+                elif rx[y] > Med:
                     pictStr += symbols['positive']
-                elif relation[x][y] ==Med:
+                elif rx[y] ==Med:
                     pictStr += symbols['median']
-                elif relation[x][y] < Med:
+                elif rx[y] < Med:
                     pictStr += symbols['negative']
             print(pictStr)
         print('Ranking rule: %s' % rankingRule)
@@ -3974,15 +3988,15 @@ class Digraph(object):
         relation = self.relation
         averageValuation = Decimal('0.0')
         determined = Decimal('0.0')
-        actionsList = [x for x in self.actions]
+        #actionsList = [x for x in self.actions]
         nbDeterm = 0
-        for x in actionsList:
-            for y in actionsList:
+        for x,rx in relation.items():
+            for y,rxy in rx.items():
                 if x != y:
-                    if relation[x][y] != Med:
+                    if rxy != Med:
                         nbDeterm += 1
-                        averageValuation += relation[x][y]
-                        determined += abs(relation[x][y])
+                        averageValuation += rxy
+                        determined += abs(rxy)
         return averageValuation / determined
 
     def computeDeterminateness(self):
@@ -3993,14 +4007,14 @@ class Digraph(object):
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         relation = self.relation
-        actions = self.actions
+        #actions = self.actions
         order = self.order
         deter = Decimal('0.0')
-        for x in actions:
-            for y in actions:
+        for x,rx in relation.items():
+            for y,rxy in rx.items():
                 if x != y:
                     #print(relation[x][y], Med, relation[x][y] - Med)
-                    deter += abs(relation[x][y] - Med)
+                    deter += abs(rxy - Med)
                     #print(deter)
         deter = (deter /Decimal(str((order * (order-1))))) * (Max - Med)
         return deter
@@ -4043,11 +4057,11 @@ class Digraph(object):
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         deter = Decimal('0.0')
-        for x in actions:
-            for y in actions:
+        for x,rx in relation.items():
+            for y,rxy in rx.items():
                 if x != y:
                     # print(relation[x][y], Med)
-                    deter += abs(relation[x][y] - Med)
+                    deter += abs(rxy - Med)
         deter /= order * (order-1) * (Max - Med)
         #  output results
         print('for digraph              : <' + str(self.name) + '.py>')
@@ -4254,14 +4268,14 @@ class Digraph(object):
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
         determ = Decimal("0.0")
-        actions = [x for x in self.actions]
-        for x in actions:
-            for y in actions:
+        #actions = [x for x in self.actions]
+        for x,rx in self.relation.items():
+            for y,rxy in rx.items():
                 if x != y:
-                    if self.relation[x][y] > Med:
-                        determ += self.relation[x][y]
+                    if rxy > Med:
+                        determ += rxy
                     else:
-                        determ += Max - self.relation[x][y] + Min
+                        determ += Max - rxy + Min
         n = self.order * (self.order - 1)
         averageDeterm = determ / Decimal(str(n))
         return  averageDeterm
@@ -4272,13 +4286,13 @@ class Digraph(object):
         """
         Med = self.valuationdomain['med']
         #actions = [x for x in self.actions]
-        actions = self.actions
-        relation = self.relation
+        #actions = self.actions
+        #relation = self.relation
         size = 0
-        for x in actions:
-            for y in actions:
+        for x,rx  in self.relation.items():
+            for y,rxy in rx.items():
                 if x != y:
-                    if relation[x][y] > Med:
+                    if rxy > Med:
                         size += 1
         return size
 
@@ -4287,13 +4301,13 @@ class Digraph(object):
         Renders the number of non validated non reflexive arcs
         """
         Med = self.valuationdomain['med']
-        actions = [x for x in self.actions]
-        relation = self.relation
+        #actions = [x for x in self.actions]
+        #relation = self.relation
         coSize = 0
-        for x in actions:
-            for y in actions:
+        for x,rx in self.relation.items():
+            for y,rxy in rx.items():
                 if x != y:
-                    if relation[x][y] < Med:
+                    if rxy < Med:
                         coSize += 1
         return coSize
 
@@ -4308,11 +4322,12 @@ class Digraph(object):
         size = 0
         undeterm = 0
         for x in choice:
+            rx = relation[x]
             for y in choice:
                 if x != y:
-                    if relation[x][y] > Med:
+                    if rx[y] > Med:
                         size += 1
-                    if relation[x][y] == Med:
+                    if rx[y] == Med:
                         undeterm += 1
         if len(choice) < 2:
             arcDensity = 0.0
@@ -5518,7 +5533,7 @@ class Digraph(object):
         Max = self.valuationdomain['max']
         fileNameExt = str(fileName)+str('.py')
         fo = open(fileNameExt, 'w')
-        fo.write('# automatically generated random irreflexive digraph\n')
+        fo.write('# Saved digraph instance\n')
         if DecimalValuation:
             fo.write('from decimal import Decimal\n')
         fo.write('actionset = {\n')
@@ -6308,7 +6323,7 @@ class Digraph(object):
         for x in actions:
             relation_k[x] = {}
             for y in actions:
-                relation_k[x][y] = {}
+                #relation_k[x][y] = {}
                 if x == y:
                     relation_k[x][y] = Min
                 elif x in choice and y in choice:
@@ -6334,7 +6349,7 @@ class Digraph(object):
         for x in actions:
             relation_k[x] = {}
             for y in actions:
-                relation_k[x][y] = {}
+                #relation_k[x][y] = {}
                 if x == y:
                     relation_k[x][y] = Min
                 elif x in choice and y in choice:

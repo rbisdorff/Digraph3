@@ -1444,9 +1444,10 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
 
         # insert missing data
         for g in criteria:
+            sevalg = self.evaluation[g]
             for x in actions:
                 if random.random() < missingProbability:
-                    self.evaluation[g][x] = Decimal('-999')
+                    sevalg[x] = Decimal('-999')
 
     def showObjectives(self):
         print('*------ show objectives -------"')

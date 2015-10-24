@@ -246,8 +246,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         rankingRelation = {}
         for x in actions:
             rankingRelation[x] = {}
+            rrx = rankingRelation[x]
             for y in actions:
-                rankingRelation[x][y] = Med
+                rrx[y] = Med
         for i in range(n):
             x = quantileSorting[i][1]
             for j in range(i+1,n):
@@ -2887,34 +2888,35 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         #fo.write('<type>%s</type>\n' % ('criteria'))
         fo.write('</description>\n')       
         for g in criteriaList:
+            critg = criteria[g]
             try:
-                criterionName = str(criteria[g]['name'])
+                criterionName = str(critg['name'])
             except:
                 criterionName = 'nameless'
             
             fo.write('<criterion id="%s" name="%s" mcdaConcept="%s">\n' % (g,criterionName,'criterion') )
             fo.write('<description>\n')
             try:
-                fo.write('<comment>%s</comment>\n' % (str(criteria[g]['comment'])) )
+                fo.write('<comment>%s</comment>\n' % (str(critg['comment'])) )
             except:
                 fo.write('<comment>%s</comment>\n' % ('no comment') )
             fo.write('<version>%s</version>\n' % ('performance') )
             fo.write('</description>\n')
             fo.write('<active>true</active>\n')
             try:
-                if criteria[g]['IntegerWeights']:
-                    fo.write('<criterionValue><value><integer>%d</integer></value></criterionValue>\n' % (criteria[g]['weight']) )
+                if critg['IntegerWeights']:
+                    fo.write('<criterionValue><value><integer>%d</integer></value></criterionValue>\n' % (critg['weight']) )
                 else:
-                    fo.write('<criterionValue><value><real>%.2f</real></value></criterionValue>\n' % (criteria[g]['weight']) )
+                    fo.write('<criterionValue><value><real>%.2f</real></value></criterionValue>\n' % (critg['weight']) )
             except:
-                fo.write('<criterionValue><value><real>%.2f</real></value></criterionValue>\n' % (criteria[g]['weight']) )
+                fo.write('<criterionValue><value><real>%.2f</real></value></criterionValue>\n' % (critg['weight']) )
  
             #fo.write('<criterionFunction category="%s" subCategory="%s" >\n' % ('Rubis','performance'))
             fo.write('<scale>\n')
             fo.write('<quantitative>\n')
             try:
-                fo.write('<preferenceDirection>%s</preferenceDirection>\n' % (criteria[g]['preferenceDirection']) )
-                if criteria[g]['preferenceDirection'] == 'min':
+                fo.write('<preferenceDirection>%s</preferenceDirection>\n' % (critg['preferenceDirection']) )
+                if critg['preferenceDirection'] == 'min':
                     #pdir = -1
                     pdir = 1
                 else:
@@ -2922,84 +2924,84 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             except:
                 fo.write('<preferenceDirection>%s</preferenceDirection>\n' % ('max') )
                 pdir = 1
-            fo.write('<minimum><real>%.2f</real></minimum>\n' % (criteria[g]['scale'][0]) )
-            fo.write('<maximum><real>%.2f</real></maximum>\n' % (criteria[g]['scale'][1]) )
+            fo.write('<minimum><real>%.2f</real></minimum>\n' % (critg['scale'][0]) )
+            fo.write('<maximum><real>%.2f</real></maximum>\n' % (critg['scale'][1]) )
 
             fo.write('</quantitative>\n')
             fo.write('</scale>\n')
             fo.write('<thresholds>\n')
             try:
-                if criteria[g]['thresholds']['ind'] != None:
+                if critg['thresholds']['ind'] != None:
                     fo.write('<threshold id="%s">\n' % ('ind'))
-                    if criteria[g]['thresholds']['ind'][1] != Decimal('0.0'):
+                    if critg['thresholds']['ind'][1] != Decimal('0.0'):
                         fo.write('<linear>\n')
-                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['ind'][1]) )
-                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['ind'][0]) )
+                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*critg['thresholds']['ind'][1]) )
+                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (critg['thresholds']['ind'][0]) )
                         fo.write('</linear>\n')
                     else:
                         fo.write('<constant>\n')
-                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['ind'][0]) )
+                        fo.write('<real>%.2f</real>\n' % (critg['thresholds']['ind'][0]) )
                         fo.write('</constant>\n')                       
                     fo.write('</threshold>\n')
                 
             except:
                 pass
             try:
-                if criteria[g]['thresholds']['weakPreference'] != None:
+                if critg['thresholds']['weakPreference'] != None:
                     fo.write('<threshold id="%s">\n' % ('weakPreference'))
-                    if criteria[g]['thresholds']['weakPreference'][1] != Decimal('0.0'):
+                    if critg['thresholds']['weakPreference'][1] != Decimal('0.0'):
                         fo.write('<linear>\n')
-                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['weakPreference'][1]) )
-                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['weakPreference'][0]) )
+                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*critg['thresholds']['weakPreference'][1]) )
+                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (critg['thresholds']['weakPreference'][0]) )
                         fo.write('</linear>\n')
                     else:
                         fo.write('<constant>\n')
-                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['weakPreference'][0]) )
+                        fo.write('<real>%.2f</real>\n' % (critg['thresholds']['weakPreference'][0]) )
                         fo.write('</constant>\n')                       
                     fo.write('</threshold>\n')
             except:
                 pass
             try:
-                if criteria[g]['thresholds']['pref'] != None:
+                if critg['thresholds']['pref'] != None:
                     fo.write('<threshold id="%s">\n' % ('pref'))
-                    if criteria[g]['thresholds']['pref'][1] != Decimal('0.0'):
+                    if criteg['thresholds']['pref'][1] != Decimal('0.0'):
                         fo.write('<linear>\n')
-                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['pref'][1]) )
-                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['pref'][0]) )
+                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*critg['thresholds']['pref'][1]) )
+                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (critg['thresholds']['pref'][0]) )
                         fo.write('</linear>\n')
                     else:
                         fo.write('<constant>\n')
-                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['pref'][0]) )
+                        fo.write('<real>%.2f</real>\n' % (critg['thresholds']['pref'][0]) )
                         fo.write('</constant>\n')                       
                     fo.write('</threshold>\n')
             except:
                 pass
             try:
-                if criteria[g]['thresholds']['weakVeto'] != None:
+                if critg['thresholds']['weakVeto'] != None:
                     fo.write('<threshold id="%s">\n' % ('weakVeto'))
-                    if criteria[g]['thresholds']['weakVeto'][1] != Decimal('0.0'):
+                    if critg['thresholds']['weakVeto'][1] != Decimal('0.0'):
                         fo.write('<linear>\n')
-                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['weakVeto'][1]) )
-                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['weakVeto'][0]) )
+                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*critg['thresholds']['weakVeto'][1]) )
+                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (critg['thresholds']['weakVeto'][0]) )
                         fo.write('</linear>\n')
                     else:
                         fo.write('<constant>\n')
-                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['weakVeto'][0]) )
+                        fo.write('<real>%.2f</real>\n' % (critg['thresholds']['weakVeto'][0]) )
                         fo.write('</constant>\n')                       
                     fo.write('</threshold>\n')
             except:
                 pass
             try:
-                if criteria[g]['thresholds']['veto'] != None:
+                if critg['thresholds']['veto'] != None:
                     fo.write('<threshold id="%s">\n' % ('veto'))
-                    if criteria[g]['thresholds']['veto'][1] != Decimal('0.0'):
+                    if critg['thresholds']['veto'][1] != Decimal('0.0'):
                         fo.write('<linear>\n')
-                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['veto'][1]) )
-                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['veto'][0]) )
+                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*critg['thresholds']['veto'][1]) )
+                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (critg['thresholds']['veto'][0]) )
                         fo.write('</linear>\n')
                     else:
                         fo.write('<constant>\n')
-                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['veto'][0]) )
+                        fo.write('<real>%.2f</real>\n' % (critg['thresholds']['veto'][0]) )
                         fo.write('</constant>\n')                       
                     fo.write('</threshold>\n')
             except:
