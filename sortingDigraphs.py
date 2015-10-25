@@ -2185,11 +2185,11 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                self.Debug = True
             class myThread(Process):
                 def __init__(self, threadID, tempDirName,
-                             actions, nq, Min, Max, LowerClosed, Debug):
+                             nq, Min, Max, LowerClosed, Debug):
                     Process.__init__(self)
                     self.threadID = threadID
                     self.workingDirectory = tempDirName
-                    self.actions = actions
+                    #self.actions = actions
                     self.nq = nq
                     self.Min = Min
                     self.Max = Max
@@ -2210,6 +2210,10 @@ class QuantilesSortingDigraph(SortingDigraph):
                     #context = loads(fi.read())
                     catKeys = loads(fi.read())
                     fi.close()
+                    fi = open('dumpActions%d.py' % j,'rb')
+                    #context = loads(fi.read())
+                    actions = loads(fi.read())
+                    fi.close()
 ##                    Min = context.valuationdomain['min']
 ##                    Max = context.valuationdomain['max']
                     Min = self.Min
@@ -2218,7 +2222,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                     sorting = {}
                     nq = self.nq
                     #nq = len(context.limitingQuantiles) - 1
-                    actions = self.actions
+                    #actions = self.actions
                     #catKeys = self.catKeys
                     #relation = context.relation
                     for x in actions:
@@ -2316,8 +2320,13 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                if Debug:
 ##                    print(thActions)
                 if thActions != []:
-                    process = myThread(j,tempDirName,thActions,
-                                       nq,Min,Max,LowerClosed,Debug)
+                    selfFileName = tempDirName +'/dumpActions%d.py' % j
+                    fo = open(selfFileName,'wb')
+                    pd = dumps(thActions,-1)
+                    fo.write(pd)
+                    fo.close()            
+                    process = myThread(j,tempDirName,nq,Min,Max,
+                                       LowerClosed,Debug)
                     process.start()
                     nbrOfThreads += 1
             while active_children() != []:
