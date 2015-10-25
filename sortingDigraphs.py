@@ -2185,12 +2185,11 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                self.Debug = True
             class myThread(Process):
                 def __init__(self, threadID, tempDirName,
-                             actions, catKeys, nq, Min, Max, LowerClosed, Debug):
+                             actions, nq, Min, Max, LowerClosed, Debug):
                     Process.__init__(self)
                     self.threadID = threadID
                     self.workingDirectory = tempDirName
                     self.actions = actions
-                    self.catKeys = catKeys
                     self.nq = nq
                     self.Min = Min
                     self.Max = Max
@@ -2207,6 +2206,10 @@ class QuantilesSortingDigraph(SortingDigraph):
                     #context = loads(fi.read())
                     relation = loads(fi.read())
                     fi.close()
+                    fi = open('dumpCategories.py','rb')
+                    #context = loads(fi.read())
+                    catKeys = loads(fi.read())
+                    fi.close()
 ##                    Min = context.valuationdomain['min']
 ##                    Max = context.valuationdomain['max']
                     Min = self.Min
@@ -2216,7 +2219,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                     nq = self.nq
                     #nq = len(context.limitingQuantiles) - 1
                     actions = self.actions
-                    catKeys = self.catKeys
+                    #catKeys = self.catKeys
                     #relation = context.relation
                     for x in actions:
                         sorting[x] = {}
@@ -2277,7 +2280,13 @@ class QuantilesSortingDigraph(SortingDigraph):
             pd = dumps(selfRelation,-1)
             fo.write(pd)
             fo.close()
-            
+            selfFileName = tempDirName +'/dumpCategories.py'
+##            if Debug:
+##                print('temDirName, selfFileName', tempDirName,selfFileName)
+            fo = open(selfFileName,'wb')
+            pd = dumps(categories,-1)
+            fo.write(pd)
+            fo.close()            
             if nbrOfCPUs == None:
                 nbrOfCPUs = cpu_count()-1
             if Comments:
@@ -2308,7 +2317,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                    print(thActions)
                 if thActions != []:
                     process = myThread(j,tempDirName,thActions,
-                                       categories,nq,Min,Max,LowerClosed,Debug)
+                                       nq,Min,Max,LowerClosed,Debug)
                     process.start()
                     nbrOfThreads += 1
             while active_children() != []:
