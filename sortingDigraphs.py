@@ -2220,8 +2220,9 @@ class QuantilesSortingDigraph(SortingDigraph):
                     #relation = context.relation
                     for x in actions:
                         sorting[x] = {}
+                        sorx = sorting[x]
                         for c in catKeys:
-                            sorting[x][c] = {}
+                            sorx[c] = {}
                             if LowerClosed:
                                 cKey= c+'-m'
                             else:
@@ -2252,9 +2253,9 @@ class QuantilesSortingDigraph(SortingDigraph):
                                 print('%s in %s: low = %.2f, high = %.2f' % \
                                       (x, c,lowLimit,notHighLimit), end=' ')
                             categoryMembership = min(lowLimit,notHighLimit)
-                            sorting[x][c]['lowLimit'] = lowLimit
-                            sorting[x][c]['notHighLimit'] = notHighLimit
-                            sorting[x][c]['categoryMembership'] = categoryMembership
+                            sorx[c]['lowLimit'] = lowLimit
+                            sorx[c]['notHighLimit'] = notHighLimit
+                            sorx[c]['categoryMembership'] = categoryMembership
 ##                            if self.Debug:
 ##                                print('\t %.2f \t %.2f \t %.2f\n' % (sorting[x][c]['lowLimit'],\
 ##                                   sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
