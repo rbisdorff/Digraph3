@@ -2220,19 +2220,17 @@ class QuantilesSortingDigraph(SortingDigraph):
                     #relation = context.relation
                     for x in actions:
                         sorting[x] = {}
-                        sorx = sorting[x]
-                        rx = relation[x]
                         for c in catKeys:
-                            sorx[c] = {}
+                            sorting[x][c] = {}
                             if LowerClosed:
                                 cKey= c+'-m'
                             else:
                                 cKey= c+'-M'
                             if LowerClosed:
-                                lowLimit = rx[cKey]
+                                lowLimit = relation[x][cKey]
                                 if int(c) < nq:
                                     cMaxKey = str(int(c)+1)+'-m'
-                                    notHighLimit = Max - rx[cMaxKey] + Min
+                                    notHighLimit = Max - relation[x][cMaxKey] + Min
                                 else:
                                     notHighLimit = Max
                             else:
@@ -2285,13 +2283,13 @@ class QuantilesSortingDigraph(SortingDigraph):
                 print('Dump relation: %.5f' % (time()-td))
                 print('Nbr of actions',na)
                 
+            
             nbrOfJobs = na//nbrOfCPUs
             if nbrOfJobs*nbrOfCPUs < na:
                 nbrOfJobs += 1
             if Comments:
                 print('Nbr of threads = ',nbrOfCPUs)
                 print('Nbr of jobs/thread',nbrOfJobs)
-                
             nbrOfThreads = 0
             nq = len(self.limitingQuantiles) -1
             Max = self.valuationdomain['max']
@@ -2308,7 +2306,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                if Debug:
 ##                    print(thActions)
                 if thActions != []:
-                    process = myThread(j,tempDirName,thActions,\
+                    process = myThread(j,tempDirName,thActions,
                                        categories,nq,Min,Max,LowerClosed,Debug)
                     process.start()
                     nbrOfThreads += 1
@@ -2327,26 +2325,23 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                if Debug:
 ##                    print('sortingThread',sortingThread)
                 sorting.update(sortingThread)
-                
         # end of Threading
         else: # with out Threading 
             sorting = {}
             nq = len(self.limitingQuantiles) - 1
             for x in actions:
                 sorting[x] = {}
-                sorx = sorting[x]
-                srx = selfRelation[x]
                 for c in categories:
-                    sx[c] = {}
+                    sorting[x][c] = {}
                     if LowerClosed:
                         cKey= c+'-m'
                     else:
                         cKey= c+'-M'
                     if LowerClosed:
-                        lowLimit = srx[cKey]
+                        lowLimit = selfRelation[x][cKey]
                         if int(c) < nq:
                             cMaxKey = str(int(c)+1)+'-m'
-                            notHighLimit = Max - srx[cMaxKey] + Min
+                            notHighLimit = Max - selfRelation[x][cMaxKey] + Min
                         else:
                             notHighLimit = Max
                     else:
@@ -2368,9 +2363,9 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                        print('%s in %s: low = %.2f, high = %.2f' % \
 ##                              (x, c,lowLimit,notHighLimit), end=' ')
                     categoryMembership = min(lowLimit,notHighLimit)
-                    sorx[c]['lowLimit'] = lowLimit
-                    sorx[c]['notHighLimit'] = notHighLimit
-                    sorx[c]['categoryMembership'] = categoryMembership
+                    sorting[x][c]['lowLimit'] = lowLimit
+                    sorting[x][c]['notHighLimit'] = notHighLimit
+                    sorting[x][c]['categoryMembership'] = categoryMembership
 
 ##                    if Debug:
 ##                        print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
