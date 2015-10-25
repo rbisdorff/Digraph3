@@ -3694,6 +3694,24 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         Removing this limitation is on the todo list and will be done soon.
        
     """
+    def __repr__(self):
+        """
+        Default presentation method for BipolarOutrankingDigraph instance.
+        """
+        print('*----- show short --------------*')
+        print('Instance name    : %s' % self.name)
+        print('# Actions        : %d' % self.order)
+        print('# Criteria       : %d' % len(self.criteria))
+        print('Size             : %d' % self.computeSize())
+        print('Determinateness  : %.3f' % (self.computeDeterminateness()) )
+        print('----  Constructor run times (in sec.) ----')
+        print('#Threads         : %d' % self.nbrThreads)
+        print('Total time       : %.5f' % self.runTimes['totalTime'])
+        print('Data input       : %.5f' % self.runTimes['dataInput'])
+        print('Compute relation : %.5f' % self.runTimes['computeRelation'])
+        print('Gamma sets       : %.5f' % self.runTimes['gammaSets'])
+        return '%s instance' % str(self.__class__)
+    
     def __init__(self,argPerfTab=None,\
                  coalition=None,\
                  actionsSubset=None,\
@@ -3706,7 +3724,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  WithVetoCounts=True,\
                  nbrCores=None,\
                  Debug=False,Comments=False):
-        from copy import deepcopy 
+        from copy import deepcopy
+        from time import time
+
+        # set initial time stamp
+        tt = time()
+
+        # ----  performance tableau data input 
         if argPerfTab == None:
             print('Performance tableau required !')
             #perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
@@ -3801,7 +3825,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         # init general digraph Data
         self.order = len(self.actions)
         
-        # construct outranking relation
+        # finished data input time stamp
+        self.runTimes = {'dataInput': time()-tt }
+
+        # ---------- construct outranking relation
+        # initial time stamp
+        tcp = time()
+        
         actions = self.actions
         criteria = self.criteria
         evaluation = self.evaluation
@@ -3818,12 +3848,18 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                                 WithVetoCounts=WithVetoCounts,\
                                                 nbrCores=nbrCores,\
                                                 Debug=Debug,Comments=Comments)
+        # finished relation computing time stamp
+        self.runTimes['computeRelation'] = time() - tcp
 
-##        if Normalized:
-##            self.recodeValuation(-1.0,1.0)
+        # ----  computing the gamma sets
+        tg = time()
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+        self.runTimes['gammaSets'] = time() - tg 
 
+        # total constructor time
+        self.runTimes['totalTime'] = time() - tt
+        
     def computeCriterionRelation(self,c,a,b,hasSymmetricThresholds=True):
         """
         Compute the outranking characteristic for actions x and y
@@ -3887,7 +3923,11 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         
         ##
         
-        if not Threading or cpu_count() < 6:
+        if not Threading or cpu_count() < 2:
+            # set threading parameter
+            self.nbrThreads = 1
+
+            # !! concordance relation and veto counts need a complex constructor
             if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
                 constructRelation = self._constructRelation
             else:
@@ -3994,9 +4034,11 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 fo.close()
 
                 if nbrCores == None:
-                    nbrCores = cpu_count()-1
+                    nbrCores = cpu_count()
                 if Comments:
                     print('Nbr of cpus = ',nbrCores)
+                # set number of threads
+                self.nbrThreads = nbrCores
 
                 ni = len(initial)
                 nt = len(terminal)
@@ -8995,35 +9037,38 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-    Threading = True
+    Threading = False
     t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
                                    numberOfCriteria=13,\
                                    weightDistribution='equiobjectives',
                                    seed=100)
     
-    g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,Comments=True)
-    g1.showRelationTable()
-    t2 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
-                                   numberOfCriteria=13,\
-                                   weightDistribution='equiobjectives',
-                                   seed=100)
-    
-    g2 = BipolarOutrankingDigraph(t2,Normalized=True,Threading=Threading,Comments=True)
-    g2.showRelationTable()
-    from time import time
-    t0 = time();print(g1.computeOrdinalCorrelationMP(g2,Threading=Threading,Debug=False));print(time()-t0)
-#    t0 = time();print(g1.computeOrdinalCorrelation(g2));print(time()-t0)
-    
-    t0 = time()
-    criteriaCorrelations = g1.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
-    print(time()-t0)
-    print(criteriaCorrelations)
-##    Threading = False
-    t0 = time()
-    ranking = g1.computeNetFlowsRanking()
-    criteriaCorrelations = g1.computeMarginalVersusGlobalRankingCorrelations(ranking,Threading=Threading)
-    print(time()-t0)
-    print(criteriaCorrelations)
+    g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,nbrCores=4,Comments=True)
+    print(g1.runTimes)
+    #g1.showRelationTable()
+##    t2 = Random3ObjectivesPerformanceTableau(numberOfActions=300,\
+##                                   numberOfCriteria=13,\
+##                                   weightDistribution='equiobjectives',
+##                                   seed=100)
+##    
+##    g2 = BipolarOutrankingDigraph(t2,Normalized=True,Threading=Threading,Comments=True)
+    #g2.showRelationTable()
+##    from time import time
+##    t0 = time();print(g1.computeOrdinalCorrelationMP(g2,Threading=Threading,Debug=False));print(time()-t0)
+##    #t0 = time();print(g1.computeOrdinalCorrelation(g2));print(time()-t0)
+##    
+##    t0 = time()
+##    criteriaCorrelations = g1.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
+##    print(time()-t0)
+##    print(criteriaCorrelations)
+####    Threading = False
+##    t0 = time()
+##    ranking = g1.computeNetFlowsRanking()
+##    criteriaCorrelations = g1.computeMarginalVersusGlobalRankingCorrelations(ranking,Threading=Threading)
+##    print(time()-t0)
+##    print(criteriaCorrelations)
+    print(g1)
+##    print(g2)
     
 ##    t.saveXMCDA2('test')
 ##    t = XMCDA2PerformanceTableau('test')

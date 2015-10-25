@@ -421,7 +421,7 @@ def testXORDigraph():
     gxor.showShort()
     gxor.showRelationTable()
 
-    print('size of XOR(g1,g2) = ', gxor.size())
+    print('size of XOR(g1,g2) = ', gxor.computeSize())
     print('crisp K-Distance d(g1,g2) = ', g1.crispKDistance(g2))
     print('bipolar K-Correlation d(g1,g2) = ', g1.bipolarKCorrelation(g2))
     print('bipolar K-Distance d(g2,g1) = ', g2.bipolarKDistance(g2))

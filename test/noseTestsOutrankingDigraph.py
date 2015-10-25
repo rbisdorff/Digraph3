@@ -92,6 +92,7 @@ def testBipolarOutrankingDigraph():
     t = RandomPerformanceTableau()
     g = BipolarOutrankingDigraph(t)
     g.showAll()
+    print(g)
     print(g.valuationdomain)
     print('unrelated pairs:')
     print(g.computeUnrelatedPairs())
@@ -107,6 +108,7 @@ def testRubyChoice():
     g.showRubyChoice(Comments=True)
     g.showRubyChoice(Comments=True,_OldCoca=True)
     g.showStatistics()
+    print(g)
     
 def testMoreOrlessRelatedPairs():
     print('*==>> test more or less unrelated pairs extraction ---*')
@@ -273,34 +275,13 @@ def testGlobalOutrankingCorrelation():
         #print medianKCorrelation[x]
     print('median K-Correlation:', medianKCorrelation)
 
-##def testMedianOutranking():
-##    print('*----- test Median Outranking -----*')
-##    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=10,integerWeights=True,Debug=False)
-##    t.save('debugTest')
-##    t = PerformanceTableau('debugTest')
-##    g = BipolarOutrankingDigraph(t)
-##    g.exportGraphViz('testg')
-##    gm = MedianBipolarOutrankingDigraph(t,percentile=(7,12),Debug=False)
-##    gm.showPreKernels()
-##    gm.exportGraphViz('testgm')
-##    gm.showRelationTable()
-##    g.showRelationTable()
-##    print(g.vetos)
-##    g.showRubyChoice()
-##    gm.showRubyChoice()
-
 def testElectre3OutrankingDigraph():
     print('*----- test Electre3 outranking Digraph -----*')
     t3 = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=13,weightDistribution="random",weightScale=(1,13),integerWeights=True,commonThresholds=[(2.5,0.1),(5.0,0.15),(50.0,0.0),(60.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None],Electre3=False, vetoProbability=0.5)
-    ## t3 = XMCDAPerformanceTableau('triPaquetsS3')
-    #t3.showCriteria()
-    ## gs3nv = Electre3OutrankingDigraph(t3,hasNoVeto=True)
     gs3 = Electre3OutrankingDigraph(t3,hasNoVeto=False)
-    ## gs3.showCriteria()
     print(gs3.computeVetos(realVetosOnly=True))
     g = BipolarOutrankingDigraph(t3)
     gnv = BipolarOutrankingDigraph(t3,hasNoVeto=True)
-    ## g.recodeValuation(0.0,100.0)
     g.showRelationTable()
     gnv.showRelationTable()
     actionsList=[x for x in g.actions]
@@ -319,7 +300,6 @@ def testsaveXMCDA2RubisChoiceRecommendation():
                                    integerWeights=True,
                                    commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],
                                    commonMode=['beta',0.5,None])
-    #t = XMCDAPerformanceTableau('triPaquets')
     t.saveXMCDA2('test')
     t.saveXMCDA('test1')
     t1 = XMCDAPerformanceTableau('test1')
@@ -345,7 +325,6 @@ def testBipolarVetos():
     print('*----- test bipolar vetos -----*')
     t = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
     t.save()
-    #t = PerformanceTableau('tempperftab')
     gnv = BipolarOutrankingDigraph(t,hasBipolarVeto=True)
     gnv.exportGraphViz('gnvtest')
     g = BipolarOutrankingDigraph(t,hasBipolarVeto=False)
@@ -386,8 +365,7 @@ def testStringIOXMCDA2Encoding():
     T = PerformanceTableau()
     problemTextmmap = T.saveXMCDA2(isStringIO=True)
     problemText = T.saveXMCDA2String()
-    if problemTextmmap != problemText:
-        
+    if problemTextmmap != problemText:       
         print('Error')
         fo = open('problemTextmmap.txt','w')
         fo.write(problemTextmmap)
@@ -395,7 +373,6 @@ def testStringIOXMCDA2Encoding():
         fo = open('problemText.txt','w')
         fo.write(problemText)
         fo.close()
-        
         exit(1)
         
 def testHTMLTables():

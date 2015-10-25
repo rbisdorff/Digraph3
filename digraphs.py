@@ -2004,7 +2004,7 @@ class Digraph(object):
         actions = self.actions
         n = len(actions)
 
-        k2Distance = xor.size()
+        k2Distance = xor.computeSize()
         k2Distance = Decimal(str(k2Distance)) / Decimal(str((n * (n-1))))
 
         return k2Distance
@@ -2025,7 +2025,7 @@ class Digraph(object):
         #actions = [x for x in self.actions]
         n = len(self.actions)
 
-        k2Distance = xor.coSize() - xor.size()
+        k2Distance = xor.computeCoSize() - xor.computeSize()
         k2Distance = Decimal(str(k2Distance)) / Decimal(str((n * (n-1))))
 
         return k2Distance
@@ -2036,17 +2036,18 @@ class Digraph(object):
         self.relation[x][y] >= self.valuationdomain['med']
         for all y != x.
         """
-        actions = self.actions
+        #actions = self.actions
         relation = self.relation
         Med = self.valuationdomain['med']
         wCW = []
-        for x in actions:
-            rx = relation[x]
+        for x,rx in relation.items():
+            #rx = relation[x]
             Winner = True
-            for y in [z for z in actions if z != x]:
-                if rx[y] < Med:
-                    Winner = False
-                    break
+            for y,rxy in rx.items():
+                if x != y:
+                    if rx[y] < Med:
+                        Winner = False
+                        break
             if Winner:
                 wCW.append(x)
         try:
@@ -2061,17 +2062,18 @@ class Digraph(object):
         self.relation[x][y] > self.valuationdomain['med']
         for all y != x.
         """
-        actions = self.actions
+        #actions = self.actions
         relation = self.relation
         Med = self.valuationdomain['med']
         CW = []
-        for x in actions:
-            rx = relation[x]
+        for x,rx in relation.items():
+            #rx = relation[x]
             Winner = True
-            for y in [z for z in actions if z != x]:
-                if rx[y] <= Med:
-                    Winner = False
-                    break
+            for y,rxy in rx.items():
+                if x != y:
+                    if rxy <= Med:
+                        Winner = False
+                        break
             if Winner:
                 CW.append(x)
         try:
@@ -2157,10 +2159,10 @@ class Digraph(object):
         """
         actions = set(self.actions)
         relation = self.relation.copy()
-        for x in actions:
-            rx = relation[x]
-            for y in actions:
-                rx[y] = max(rx[y],relation[y][x])
+        for x,rx in relation.items():
+            #rx = relation[x]
+            for y,rxy in rx.items():
+                rxy = max(rxy,relation[y][x])
         self.relation = relation.copy()
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -4280,7 +4282,7 @@ class Digraph(object):
         averageDeterm = determ / Decimal(str(n))
         return  averageDeterm
 
-    def size(self):
+    def computeSize(self):
         """
         Renders the number of validated non reflexive arcs
         """
@@ -4296,7 +4298,7 @@ class Digraph(object):
                         size += 1
         return size
 
-    def coSize(self):
+    def computeCoSize(self):
         """
         Renders the number of non validated non reflexive arcs
         """
@@ -7978,12 +7980,13 @@ class Digraph(object):
         following the net flows ranking rule with rank and net flow attributes.
         """
         relation = self.relation
+        actions = self.actions
         netFlows = []
         Med = self.valuationdomain['med']
         if Med == Decimal('0'):
-            for x in self.actions.keys():
-                xnetflows = sum(relation[x][y] - relation[y][x]\
-                                for y in dict.keys(self.actions))
+            for x,rx in relation.items():
+                xnetflows = sum(rx[y] - relation[y][x]\
+                                for y in actions.keys())
 ##                if Debug:
 ##                    print('netflow for %s = %.2f' % (x, xnetflows))
                 netFlows.append((-xnetflows,x))
@@ -7992,9 +7995,9 @@ class Digraph(object):
         else:
             Max = self.valuationdomain['max']
             Min = self.valuationdomain['min']
-            for x in self.actions.keys():
-                xnetflows = sum(relation[x][y] + (Max - relation[y][x] + Min)\
-                                for y in dict.keys(self.actions))
+            for x,rx in rleation.items():
+                xnetflows = sum(rx[y] + (Max - relation[y][x] + Min)\
+                                for y in actions)
 ##                if Debug:
 ##                    print('netflow for %s = %.2f' % (x, xnetflows))
                 netFlows.append((-xnetflows,x))
@@ -8121,16 +8124,17 @@ class Digraph(object):
         ranked pairs rule.
         """
         relation = self.relation
-        actions = self.actions
+        #actions = self.actions
         actions = [x for x in self.actions]
         actions.sort()
 
         n = len(actions)
 
         listPairs = []
-        for x in actions:
-            for y in [z for z in actions if z != x]:
-                listPairs.append((relation[x][y],(x,y),x,y))
+        for x,rx in relation.items():
+            for y,rxy in rx.items():
+                if x != y:
+                    listPairs.append((rxy,(x,y),x,y))
         listPairs.sort(reverse=False)
 
         g = IndeterminateDigraph(order=n)
@@ -8142,8 +8146,9 @@ class Digraph(object):
         g.relation = {}
         for x in g.actions:
             g.relation[x] = {}
+            grx = g.relation[x]
             for y in g.actions:
-                g.relation[x][y] = Min
+                grx[y] = Min
 
         rankedPairs = [x[1] for x in listPairs]
         for pair in rankedPairs:
@@ -8151,8 +8156,10 @@ class Digraph(object):
                 print('next pair: ', pair)
             x = pair[0]
             y = pair[1]
-            if g.relation[x][y] == Min and g.relation[y][x] == Min:
-                g.relation[x][y] = Max
+            grxy = g.relation[x][y]
+            gryx = g.relation[y][x]
+            if grxy == Min and gryx == Min:
+                grxy = Max
                 g.gamma = g.gammaSets()
                 g.notGamma = g.notGammaSets()
                 if Cpp:
@@ -8162,10 +8169,11 @@ class Digraph(object):
                 if len(circ) != 0:
                     if Debug:
                         print(circ)
-                    g.relation[x][y] = Min
-                else:
-                    if Debug:
-                        print('added: (%s,%s) characteristic: %.2f' % (x,y, self.relation[x][y]))
+                    grxy = Min
+##                else:
+##                    if Debug:
+##                        print('added: (%s,%s) characteristic: %.2f' %\
+##                              (x,y, self.relation[x][y]))
 
         g.gamma = g.gammaSets()
 
@@ -8397,17 +8405,21 @@ class Digraph(object):
                 kcurr = 0
                 s += 1
                 for i in range(n):
+                    ai = a[i]
+                    rai = relation[a[i]]
                     for j in range(i+1,n):
+                        aj = a[j]
                         if CopySign:
-                            kcurr += copysign(1,relation[a[i]][a[j]]) - copysign(1,relation[a[j]][a[i]])
+                            kcurr += copysign(1,rai[aj]) -\
+                                     copysign(1,relation[aj][ai])
                         else:
-                            if relation[a[i]][a[j]] > 0:
+                            if rai[aj] > 0:
                                 kcurr += 1
-                            elif relation[a[i]][a[j]] < 0:
+                            elif rai[aj] < 0:
                                 kcurr -= 1
-                            if relation[a[j]][a[i]] > 0:
+                            if relation[aj][ai] > 0:
                                 kcurr -= 1
-                            elif relation[a[j]][a[i]] < 0:
+                            elif relation[aj][ai] < 0:
                                 kcurr += 1
                         #kcurr += copysign(1,relation[a[i]][a[j]]) - copysign(1,relation[a[j]][a[i]])
                 if Debug:
@@ -8435,6 +8447,7 @@ class Digraph(object):
         where one and only one item is strictly positive.
         """
         from decimal import Decimal
+        relation = self.relation
         n = Decimal(str(len(K1)*len(K2)))
         if Debug:
             print('K1 = ', K1, ', K2 = ', K2, ', n = ', n)
@@ -8442,9 +8455,10 @@ class Digraph(object):
         rK1SK2 = Decimal('0')
         rK2SK1 = Decimal('0')
         for x in K1:
+            rx = relation[x]
             for y in K2:
-                rK1SK2 += self.relation[x][y]
-                rK2SK1 += self.relation[y][x]
+                rK1SK2 += rx[y]
+                rK2SK1 += relation[y][x]
 
         if Debug:
             print('r(K1 >= K2) = ', rK1SK2/n, ' r(K2 >= K1) = ', rK2SK1/n)
@@ -11382,10 +11396,10 @@ if __name__ == "__main__":
         MP=False
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
-        t1 = RandomCBPerformanceTableau(numberOfActions=50,seed=1)
+        t1 = RandomCBPerformanceTableau(numberOfActions=10,seed=1)
 ##        t1.saveXMCDA2('testP2')
 ##        t1.showCriteria()
-        t2 = RandomCBPerformanceTableau(numberOfActions=50,seed=2)
+        t2 = RandomCBPerformanceTableau(numberOfActions=10,seed=2)
 ##        t1.saveXMCDA2('testP2')
 ##        t1.showCriteria()
         #t = XMCDA2PerformanceTableau('testP')
