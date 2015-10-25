@@ -1391,7 +1391,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                 components[compKey]['subGraph'] = pg
         else:   # if self.sortingParameters['Threading'] == True:
             from copy import copy, deepcopy
-            from pickle import dumps, loads, load
+            from pickle import dumps, loads, load, dump
             from multiprocessing import Process, active_children, cpu_count
             #Debug=True
             class myThread(Process):
@@ -1466,8 +1466,9 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
             if Debug:
                 print('temDirName, selfFileName', tempDirName,selfFileName)
             fo = open(selfFileName,'wb')
-            pd = dumps(perfTab,-1)
-            fo.write(pd)
+##            pd = dumps(perfTab,-1)
+##            fo.write(pd)
+            dump(perfTab,fo,-1)
             fo.close()
 ##            if Comments:
 ##                print('dumping perfTab: %.5f' % (time() - tdump))
@@ -1477,6 +1478,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
             fo = open(selfFileName,'wb')
             pd = dumps(decomposition,-1)
             fo.write(pd)
+##            dump(decomposition,fo,-1)
             fo.close()
             if Comments:
                 print('dumping time: %.5f' % (time() - tdump))
@@ -1721,7 +1723,7 @@ if __name__ == "__main__":
     
     from time import time
     from weakOrders import QuantilesRankingDigraph
-    MP  = False
+    MP  = True
 ##    t0 = time()
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,seed=100)
     tp = RandomCBPerformanceTableau(numberOfActions=500,Threading=MP,

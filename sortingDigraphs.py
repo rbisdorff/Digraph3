@@ -2185,7 +2185,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                self.Debug = True
             class myThread(Process):
                 def __init__(self, threadID, tempDirName,
-                             actions, catKeys, nq, Min, Max, Debug):
+                             actions, catKeys, nq, Min, Max, LowerClosed, Debug):
                     Process.__init__(self)
                     self.threadID = threadID
                     self.workingDirectory = tempDirName
@@ -2194,6 +2194,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                     self.nq = nq
                     self.Min = Min
                     self.Max = Max
+                    self.LowerClosed = LowerClosed
                     self.Debug = Debug
                 def run(self):
                     from pickle import dumps, loads
@@ -2210,6 +2211,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                    Max = context.valuationdomain['max']
                     Min = self.Min
                     Max = self.Max
+                    LowerClosed = self.LowerClosed
                     sorting = {}
                     nq = self.nq
                     #nq = len(context.limitingQuantiles) - 1
@@ -2218,17 +2220,19 @@ class QuantilesSortingDigraph(SortingDigraph):
                     #relation = context.relation
                     for x in actions:
                         sorting[x] = {}
+                        sorx = sorting[x]
+                        rx = relation[x]
                         for c in catKeys:
-                            sorting[x][c] = {}
+                            sorx[c] = {}
                             if LowerClosed:
                                 cKey= c+'-m'
                             else:
                                 cKey= c+'-M'
                             if LowerClosed:
-                                lowLimit = relation[x][cKey]
+                                lowLimit = rx[cKey]
                                 if int(c) < nq:
                                     cMaxKey = str(int(c)+1)+'-m'
-                                    notHighLimit = Max - relation[x][cMaxKey] + Min
+                                    notHighLimit = Max - rx[cMaxKey] + Min
                                 else:
                                     notHighLimit = Max
                             else:
@@ -2281,13 +2285,13 @@ class QuantilesSortingDigraph(SortingDigraph):
                 print('Dump relation: %.5f' % (time()-td))
                 print('Nbr of actions',na)
                 
-            
             nbrOfJobs = na//nbrOfCPUs
             if nbrOfJobs*nbrOfCPUs < na:
                 nbrOfJobs += 1
             if Comments:
                 print('Nbr of threads = ',nbrOfCPUs)
                 print('Nbr of jobs/thread',nbrOfJobs)
+                
             nbrOfThreads = 0
             nq = len(self.limitingQuantiles) -1
             Max = self.valuationdomain['max']
@@ -2304,7 +2308,8 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                if Debug:
 ##                    print(thActions)
                 if thActions != []:
-                    process = myThread(j,tempDirName,thActions,categories,nq,Min,Max,Debug)
+                    process = myThread(j,tempDirName,thActions,\
+                                       categories,nq,Min,Max,LowerClosed,Debug)
                     process.start()
                     nbrOfThreads += 1
             while active_children() != []:
@@ -2322,23 +2327,26 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                if Debug:
 ##                    print('sortingThread',sortingThread)
                 sorting.update(sortingThread)
+                
         # end of Threading
         else: # with out Threading 
             sorting = {}
             nq = len(self.limitingQuantiles) - 1
             for x in actions:
                 sorting[x] = {}
+                sorx = sorting[x]
+                srx = selfRelation[x]
                 for c in categories:
-                    sorting[x][c] = {}
+                    sx[c] = {}
                     if LowerClosed:
                         cKey= c+'-m'
                     else:
                         cKey= c+'-M'
                     if LowerClosed:
-                        lowLimit = selfRelation[x][cKey]
+                        lowLimit = srx[cKey]
                         if int(c) < nq:
                             cMaxKey = str(int(c)+1)+'-m'
-                            notHighLimit = Max - selfRelation[x][cMaxKey] + Min
+                            notHighLimit = Max - srx[cMaxKey] + Min
                         else:
                             notHighLimit = Max
                     else:
@@ -2360,9 +2368,9 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                        print('%s in %s: low = %.2f, high = %.2f' % \
 ##                              (x, c,lowLimit,notHighLimit), end=' ')
                     categoryMembership = min(lowLimit,notHighLimit)
-                    sorting[x][c]['lowLimit'] = lowLimit
-                    sorting[x][c]['notHighLimit'] = notHighLimit
-                    sorting[x][c]['categoryMembership'] = categoryMembership
+                    sorx[c]['lowLimit'] = lowLimit
+                    sorx[c]['notHighLimit'] = notHighLimit
+                    sorx[c]['categoryMembership'] = categoryMembership
 
 ##                    if Debug:
 ##                        print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
