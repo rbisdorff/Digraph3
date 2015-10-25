@@ -2210,7 +2210,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                     #context = loads(fi.read())
                     catKeys = loads(fi.read())
                     fi.close()
-                    fi = open('dumpActions%d.py' % j,'rb')
+                    fi = open('dumpActions%d.py' % self.threadID,'rb')
                     #context = loads(fi.read())
                     actions = loads(fi.read())
                     fi.close()
