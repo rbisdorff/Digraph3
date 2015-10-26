@@ -45,7 +45,7 @@ class BigDigraph(object):
         sumStats = self.computeDecompositionSummaryStatistics()
         print('Maximal size      : %d' % (sumStats['max']))
         print('Median size       : %d' % (sumStats['median']))
-        print('fill rate         : %.3f%%' % (sumStats['fillrate']*100.0))     
+        print('fill rate         : %.3f%%' % (self.fillRate*100.0))     
         print('----  Constructor run times (in sec.) ----')
         print('Total time        : %.5f' % self.runTimes['totalTime'])
         print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
@@ -1529,9 +1529,17 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
             #print(componentsList)
             #components = OrderedDict(componentsList)
         # end of Threading
+        #fillRate = sum((comp['subGraph'].order*comp['subGraph'].order-1)\
+        #                for comp in self.components.values())
+        #return fillRate/( self.order*(self.order-1) )
+        
+        fillRate = 0 
         for compKey,comp in components.items():
-            for x in comp['subGraph'].actions.keys():
+            pg = comp['subGraph']
+            fillRate += pg.order*(pg.order-1)
+            for x in pg.actions.keys():
                 self.actions[x]['component'] = compKey
+        self.fillRate = fillRate / (na*(na-1))
         self.components = components
 
         # setting the component relation
