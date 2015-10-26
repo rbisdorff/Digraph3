@@ -1363,14 +1363,12 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
         t0 = time()
         nc = len(decomposition)
         self.nbrComponents = nc
-        #if Debug:
-        print(nc)
         self.nd = len(str(nc))
         if not self.sortingParameters['Threading']:
             components = OrderedDict()
             for i in range(1,nc+1):
                 comp = decomposition[i-1]
-                print(comp)
+                #print(comp)
                 compKey = ('c%%0%dd' % (self.nd)) % (i)
                 components[compKey] = {'rank':i}
                 #print(perfTab,comp[1])

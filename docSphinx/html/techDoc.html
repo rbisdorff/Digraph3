@@ -555,12 +555,6 @@ Optimized with marking of visited chordless P1s.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="digraphs.Digraph.coSize">
-<code class="descname">coSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.coSize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the number of non validated non reflexive arcs</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="digraphs.Digraph.collectcomps">
 <code class="descname">collectcomps</code><span class="sig-paren">(</span><em>x</em>, <em>A</em>, <em>ncomp</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.collectcomps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recursive subroutine of the components method.</p>
@@ -630,6 +624,12 @@ Result (possible empty list) stored in &lt;self.circuitsList&gt;
 holding a possibly empty list tuples with at position 0 the
 list of adjacent actions of the circuit and at position 1
 the set of actions in the stored circuit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.computeCoSize">
+<code class="descname">computeCoSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeCoSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the number of non validated non reflexive arcs</p>
 </dd></dl>
 
 <dl class="method">
@@ -1016,6 +1016,12 @@ res = ((netdet,singleton,dom,absorb)+)</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="digraphs.Digraph.computeSize">
+<code class="descname">computeSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the number of validated non reflexive arcs</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="digraphs.Digraph.computeSizeTransitiveClosure">
 <code class="descname">computeSizeTransitiveClosure</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeSizeTransitiveClosure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the size of the transitive closure of a digraph.</p>
@@ -1182,7 +1188,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1987,12 +1993,6 @@ res = ((netdet,sigleton,dom,absorb)+)</p>
 <code class="descname">singletons</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.singletons" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of singletons and neighborhoods
 [(singx1, +nx1, -nx1, not(+nx1 or -nx1)),.... ]</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphs.Digraph.size">
-<code class="descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the number of validated non reflexive arcs</p>
 </dd></dl>
 
 <dl class="method">
@@ -3357,7 +3357,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4104,7 +4104,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
