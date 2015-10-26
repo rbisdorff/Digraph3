@@ -338,13 +338,13 @@ class BigDigraph(object):
         medianLength = statistics.median(compLengths)
         meanLength = statistics.mean(compLengths)
         stdLength = statistics.pstdev(compLengths)
-        fillrate = self.computeFillRate()
+        #fillrate = self.computeFillRate()
         summary = {
                    'median':medianLength,
                    'mean':meanLength,
                    'stdev': stdLength,
                    'max': max(compLengths),
-                   'fillrate': fillrate}
+                   'fillrate': self.fillRate}
         return summary
 
     def recodeValuation(self,newMin=-1,newMax=1,Debug=False):
