@@ -37,15 +37,14 @@ class BigDigraph(object):
         print('Instance name     : %s' % self.name)
         print('# Actions         : %d' % self.order)
         print('# Criteria        : %d' % self.dimension)
-        print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
-        print('Ordering strategy : %s' % self.sortingParameters['strategy'])
+        print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'] )
+        print('Ordering strategy : %s' % self.sortingParameters['strategy'] )
         print('Ranking rule      : %s' % self.componentRankingRule)
         print('# Components      : %d' % self.nbrComponents)
-        print('Minimal size      : %d' % self.minimalComponentSize)
-        sumStats = self.computeDecompositionSummaryStatistics()
-        print('Maximal size      : %d' % (sumStats['max']))
-        print('Median size       : %d' % (sumStats['median']))
-        print('fill rate         : %.3f%%' % (self.fillRate*100.0))     
+        print('Minimal order     : %d' % self.minimalComponentSize)
+        print('Maximal order     : %d' % self.maximalComponentSize)
+        print('Average order     : %.1f' % (self.order/self.nbrComponents) )
+        print('fill rate         : %.3f%%' % (self.fillRate*100.0) )     
         print('----  Constructor run times (in sec.) ----')
         print('Total time        : %.5f' % self.runTimes['totalTime'])
         print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
@@ -330,20 +329,17 @@ class BigDigraph(object):
             print('Error importing the statistics module.')
             print('You need to upgrade your Python to version 3.4+ !')
             return      
-        self.componentStatistics = {}
         nc = self.nbrComponents
-        #compKeys = list(self.components.keys())
         compLengths = [comp['subGraph'].order \
                        for comp in self.components.values()]
         medianLength = statistics.median(compLengths)
-        meanLength = statistics.mean(compLengths)
         stdLength = statistics.pstdev(compLengths)
-        #fillrate = self.computeFillRate()
         summary = {
+                   'min': self.minimalComponentSize,
+                   'max': self.maximalComponentSize,
                    'median':medianLength,
-                   'mean':meanLength,
+                   'mean':self.order/nc,
                    'stdev': stdLength,
-                   'max': max(compLengths),
                    'fillrate': self.fillRate}
         return summary
 
@@ -925,7 +921,7 @@ class BigOutrankingDigraph(BigDigraph):
         Ordering          : 0.00130
         <class 'bigOutrankingDigraphs.BigOutrankingDigraphMP'> instance        
         """
-        summaryStats = self.computeDecompositionSummaryStatistics()
+        #summaryStats = self.computeDecompositionSummaryStatistics()
         if fileName == None:
             print('*----- show short --------------*')
             print('Instance name     : %s' % self.name)
@@ -935,10 +931,10 @@ class BigOutrankingDigraph(BigDigraph):
             print('Ordering strategy : %s' % self.sortingParameters['strategy'])
             print('Ranking rule      : %s' % self.componentRankingRule)
             print('# Components      : %d' % self.nbrComponents)
-            print('Minimal size      : %d' % self.minimalComponentSize)
-            print('Maximal size      : %d' % summaryStats['max'])
-            print('Median size       : %d' % summaryStats['median'])
-            print('Fill rate         : %.3f%%' % (summaryStats['fillrate']*100.0))
+            print('Minimal order     : %d' % self.minimalComponentSize)
+            print('Maximal order     : %d' % self.maximalComponentSize)
+            print('Average order     : %.1f' % (self.order/self.nbrComponents))
+            print('Fill rate         : %.3f%%' % (self.fillRate*100.0))
             print('----  Constructor run times (in sec.) ----')
             print('Total time        : %.5f' % self.runTimes['totalTime'])
             print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
@@ -961,9 +957,9 @@ class BigOutrankingDigraph(BigDigraph):
             fo.write('Local ranking rule : %s\n' % self.componentRankingRule)
             fo.write('# Components       : %d\n' % self.nbrComponents)
             fo.write('Minimal size       : %d\n' % self.minimalComponentSize)
-            fo.write('Maximal size       : %d\n' % summaryStats['max'])
-            fo.write('Median size        : %d\n' % summaryStats['median'])
-            fo.write('Fill rate          : %.3f%%\n' % (summaryStats['fillrate']*100.0))
+            fo.write('Maximal order      : %d\n' % self.maximalComponentSize)
+            fo.write('Average order      : %.1f\n' % (self.order/self.nbrComponents))
+            fo.write('Fill rate          : %.3f%%\n' % (self.fillRate*100.0))
             fo.write('*-- Constructor run times (in sec.) --*\n')
             fo.write('Total time         : %.5f\n' % self.runTimes['totalTime'])
             fo.write('QuantilesSorting   : %.5f\n' % self.runTimes['sorting'])
@@ -1533,13 +1529,18 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
         #                for comp in self.components.values())
         #return fillRate/( self.order*(self.order-1) )
         
-        fillRate = 0 
+        fillRate = 0
+        maximalComponentSize = 0
         for compKey,comp in components.items():
             pg = comp['subGraph']
-            fillRate += pg.order*(pg.order-1)
+            npg = pg.order
+            if npg > maximalComponentSize:
+                maximalComponentSize = npg
+            fillRate += npg*(npg-1)
             for x in pg.actions.keys():
                 self.actions[x]['component'] = compKey
         self.fillRate = fillRate / (na*(na-1))
+        self.maximalComponentSize = maximalComponentSize
         self.components = components
 
         # setting the component relation
@@ -1754,6 +1755,8 @@ if __name__ == "__main__":
     #bg1.showDecomposition(direction='increasing')
     #bg1.showRelationMap()
     print(bg1)
+    bg1.showShort()
+    bg1.showShort('testShowShort')
 ##    fillRate = sum([(bg1.components[comp]['subGraph'].order*(bg1.components[comp]['subGraph'].order-1)) for comp in bg1.components])
 ##    print( 'fill rate: ', fillRate,fillRate/( bg1.order*(bg1.order-1) ) )
 ##    bg1.showMarginalVersusGlobalOutrankingCorrelation(Threading=MP)
