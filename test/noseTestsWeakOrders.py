@@ -147,3 +147,14 @@ def testKohlerArrowRaynaudFusionDigraph():
     print(g.computeOrdinalCorrelation(ar))
     print(g.computeOrdinalCorrelation(koar))
     koar.exportGraphViz('test')
+
+def testKemenyWeakOrder():
+    print('*====>>>> test KemenyWeakOrder class ---------')
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                   numberOfActions=8,seed=105)
+    g = BipolarOutrankingDigraph(t)
+    g.exportGraphViz('testg')
+    wke = KemenyWeakOrder(g,orderLimit=8)
+    wke.exportGraphViz('testwke')
+    print(wke.relation)
+

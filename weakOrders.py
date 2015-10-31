@@ -276,7 +276,7 @@ class KemenyWeakOrder(WeakOrder):
     from digraphs import ranking2preorder, omax, omin
     def __init__(self,other,orderLimit=7,
                  fusionOperator=omax,
-                 Debug=True):
+                 Debug=False):
         if other.order > orderLimit:
             print('Digraph order %d to high. The default limit (7) may be changed with the oderLimit argument.')
             return
