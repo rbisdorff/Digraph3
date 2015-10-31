@@ -3639,17 +3639,17 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
     MP = True
-##    t = PerformanceTableau('auditor2_2')
+    t = PerformanceTableau('auditor2_2')
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
-    t = XMCDA2PerformanceTableau('spiegel2004')
-    #t = XMCDA2PerformanceTableau('ex1')
-##    t = RandomCBPerformanceTableau(numberOfActions=150,
-##                                    numberOfCriteria=5,
+##    t = XMCDA2PerformanceTableau('spiegel2004')
+##    t = XMCDA2PerformanceTableau('ex1')
+##    t = RandomCBPerformanceTableau(numberOfActions=50,
+##                                    numberOfCriteria=13,
 ##                                    weightDistribution='equiobjectives',
-##                                    seed=100)
+##                                    seed=None)
 ##    t.saveXMCDA2('test',servingD3=False)
     #t = XMCDA2PerformanceTableau('test')  
-    t.showHTMLPerformanceHeatmap(colorLevels=9,ndigits=2,Correlations=True)
+    t.showHTMLPerformanceHeatmap(colorLevels=5,ndigits=0,Correlations=True)
     qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
                                      Threading=MP,Comments=True,
                                      Debug=False)

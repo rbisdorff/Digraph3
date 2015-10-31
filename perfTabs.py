@@ -1928,9 +1928,11 @@ The performance evaluations of each decision alternative on each criterion are g
             if quantiles == None:
                 quantiles = na
             from outrankingDigraphs import BipolarOutrankingDigraph
-            from linearOrders import NetFlowsOrder
+            from linearOrders import CopelandOrder
             g = BipolarOutrankingDigraph(self,Normalized=True)
-            actionsList = g.computeNetFlowsRanking()
+            #actionsList = g.computeNetFlowsRanking()
+            cop = CopelandOrder(g)
+            actionsList = cop.computeRanking()
 ##            from bigOutrankingDigraphs import BigOutrankingDigraphMP
 ##            qr = BigOutrankingDigraphMP(self,quantiles=quantiles,LowerClosed=False,
 ##                                        quantilesOrderingStrategy=strategy,
@@ -1951,7 +1953,7 @@ The performance evaluations of each decision alternative on each criterion are g
                 if Ranked:       
                     criteriaCorrelation =\
                         g.computeMarginalVersusGlobalRankingCorrelations(\
-                                actionsList,Threading=Threading)
+                                actionsList,ValuedCorrelation=True,Threading=Threading)
                     criteriaList = [c[1] for c in criteriaCorrelation]
                 else:
                     criteriaList = list(criteria.keys())

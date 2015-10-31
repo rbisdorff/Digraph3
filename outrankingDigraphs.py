@@ -87,7 +87,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print(corr)
         return corr
 
-    def computeMarginalVersusGlobalRankingCorrelations(self,ranking,Sorted=True,
+    def computeMarginalVersusGlobalRankingCorrelations(self,ranking,Sorted=True,ValuedCorrelation=False,
                                                           Threading=False,nbrCores=None,\
                                                           Comments=False):
         """
@@ -120,14 +120,20 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             argsList = [(x,preorderRelation) for x in self.criteria]
             with Pool(nbrCores) as proc:   
                 correlations = proc.map(self.computeMarginalCorrelation,argsList)
-            criteriaCorrelation = [(correlations[i]['correlation'],argsList[i][0]) for i in range(len(argsList))]
+            if ValuedCorrelation:
+                criteriaCorrelation = [(correlations[i]['correlation']*correlations[i]['determination'],argsList[i][0]) for i in range(len(argsList))]
+            else:
+                criteriaCorrelation = [(correlations[i]['correlation'],argsList[i][0]) for i in range(len(argsList))]
         else:
             #criteriaList = [x for x in self.criteria]
             criteria = self.criteria
             criteriaCorrelation = []
             for c in dict.keys(criteria):
                 corr = self.computeMarginalCorrelation((c,preorderRelation),Threading=False)
-                criteriaCorrelation.append((corr['correlation'],c))            
+                if ValuedCorrelation:
+                    criteriaCorrelation.append((corr['correlation']*corr['determination'],c))            
+                else:
+                    criteriaCorrelation.append((corr['correlation'],c))            
         if Sorted:
             criteriaCorrelation.sort(reverse=True)
         if Normalizing:
