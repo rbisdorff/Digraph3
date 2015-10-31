@@ -273,15 +273,14 @@ class KemenyWeakOrder(WeakOrder):
     disjunctive (o-max fusion) or conjunctive (o-min operator) fusion of
     all optimal Kemeny linear orderings.
     """
-    from digraphs import ranking2preorder, omax, omin
     def __init__(self,other,orderLimit=7,
-                 fusionOperator=omax,
                  Debug=False):
+        
         if other.order > orderLimit:
             print('Digraph order %d to high. The default limit (7) may be changed with the oderLimit argument.')
             return
                   
-        
+        from digraphs import ranking2preorder, omax
         from copy import deepcopy
         from decimal import Decimal
 
@@ -312,7 +311,7 @@ class KemenyWeakOrder(WeakOrder):
             relation[x] = {}
             for y in self.actions:
                 L = [relations[i][x][y] for i in range(len(relations))]
-                relation[x][y] = fusionOperator(Med,L)
+                relation[x][y] = omax(Med,L)
                 if Debug:
                     print(x,y,L,relation[x][y])
         if Debug:
