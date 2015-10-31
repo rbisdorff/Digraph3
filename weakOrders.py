@@ -270,8 +270,8 @@ class KemenyWeakOrder(WeakOrder):
     """
     Specialization of the abstract WeakOrder class for 
     weak orderings resulting from the epistemic
-    disjunctive (o-max fusion) or conjunctive (o-min operator) fusion of
-    all optimal Kemeny linear orderings.
+    disjunctive fusion (omax operator) of
+    all potential Kemeny linear orderings.
     """
     def __init__(self,other,orderLimit=7,
                  Debug=False):
