@@ -648,7 +648,7 @@ class BigOutrankingDigraph(BigDigraph):
 
     # ----- class methods ------------
 
-    def computeCriterionCorrelation(self,criterion,Threading=False,\
+    def computeCriterion2RankingCorrelation(self,criterion,Threading=False,\
                                     nbrOfCPUs=None,Debug=False,
                                     Comments=False):
         """
@@ -668,7 +668,7 @@ class BigOutrankingDigraph(BigDigraph):
             print(corr)
         return corr
 
-    def computeMarginalVersusGlobalOutrankingCorrelations(self,Sorted=True,
+    def computeMarginalVersusGlobalOutrankingCorrelations(self,Sorted=True,ValuedCorrelation=False,
                                                           Threading=False,nbrCores=None,\
                                                           Comments=False):
         """
@@ -689,20 +689,27 @@ class BigOutrankingDigraph(BigDigraph):
                 nbrCores= cpu_count()
             criteriaList = [x for x in self.criteria]
             with Pool(nbrCores) as proc:   
-                correlations = proc.map(self.computeCriterionCorrelation,criteriaList)
-            criteriaCorrelation = [(correlations[i]['correlation'],criteriaList[i]) for i in range(len(criteriaList))]
+                correlations = proc.map(self.computeCriterion2RankingCorrelation,criteriaList)
+            if ValuedCorrelation:
+                criteriaCorrelation = [(correlations[i]['correlation']*correlations[i]['determination'],criteriaList[i]) for i in range(len(criteriaList))]
+            else:
+                criteriaCorrelation = [(correlations[i]['correlation'],criteriaList[i]) for i in range(len(criteriaList))]
         else:
             #criteriaList = [x for x in self.criteria]
             criteria = self.criteria
             criteriaCorrelation = []
             for c in dict.keys(criteria):
-                corr = self.computeCriterionCorrelation(c,Threading=False)
-                criteriaCorrelation.append((corr['correlation'],c))            
+                corr = self.computeCriterion2RankingCorrelation(c,Threading=False)
+                if ValuedCorrelation:
+                    criteriaCorrelation.append((corr['correlation']*corr['determination'],c))            
+                else:
+                    criteriaCorrelation.append((corr['correlation'],c))            
         if Sorted:
             criteriaCorrelation.sort(reverse=True)
         return criteriaCorrelation   
 
-    def showMarginalVersusGlobalOutrankingCorrelation(self,Sorted=True,Threading=False,\
+    def showMarginalVersusGlobalOutrankingCorrelation(self,Sorted=True,\
+                                                      Threading=False,\
                                                       nbrOfCPUs=None,Comments=True):
         """
         Show method for computeCriterionCorrelation results.
@@ -710,7 +717,7 @@ class BigOutrankingDigraph(BigDigraph):
         criteria = self.criteria
         criteriaCorrelation = []
         for c in criteria:
-            corr = self.computeCriterionCorrelation(c,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
+            corr = self.computeCriterion2RankingCorrelation(c,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
             criteriaCorrelation.append((corr['correlation'],corr['determination'],c))
         if Sorted:
             criteriaCorrelation.sort(reverse=True)
@@ -1757,9 +1764,10 @@ if __name__ == "__main__":
     print(bg1)
     bg1.showShort()
     bg1.showShort('testShowShort')
+    print(bg1.computeMarginalVersusGlobalOutrankingCorrelations(ValuedCorrelation=True,Threading=MP))
 ##    fillRate = sum([(bg1.components[comp]['subGraph'].order*(bg1.components[comp]['subGraph'].order-1)) for comp in bg1.components])
 ##    print( 'fill rate: ', fillRate,fillRate/( bg1.order*(bg1.order-1) ) )
-##    bg1.showMarginalVersusGlobalOutrankingCorrelation(Threading=MP)
+    bg1.showMarginalVersusGlobalOutrankingCorrelation(Threading=MP)
 ##    bg2 = BigOutrankingDigraphMP(tp,quantiles=75,quantilesOrderingStrategy='average',
 ##                                 LowerClosed=True,
 ##                                 minimalComponentSize=5,

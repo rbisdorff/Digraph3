@@ -266,6 +266,62 @@ class WeakOrder(Digraph):
 ##
 ##        Digraph.showRankingByChoosing(self,rankingByChoosing)
 
+class KemenyWeakOrder(WeakOrder):
+    """
+    Specialization of the abstract WeakOrder class for 
+    weak orderings resulting from the epistemic
+    disjunctive (o-max fusion) or conjunctive (o-min operator) fusion of
+    all optimal Kemeny linear orderings.
+    """
+    from digraphs import ranking2preorder, omax, omin
+    def __init__(self,other,orderLimit=7,
+                 fusionOperator=omax,
+                 Debug=True):
+        if other.order > orderLimit:
+            print('Digraph order %d to high. The default limit (7) may be changed with the oderLimit argument.')
+            return
+                  
+        
+        from copy import deepcopy
+        from decimal import Decimal
+
+        self.__dict__ = deepcopy(other.__dict__)
+        self.name = other.name + '_wk'
+        self.valuationdomain['min'] = Decimal('-1')
+        self.valuationdomain['max'] = Decimal('1')
+        self.valuationdomain['med'] = Decimal('0')
+        Med = self.valuationdomain['med']
+        #relation = copy(other.relation)
+        if self.computeKemenyRanking(orderLimit=orderLimit,Debug=False) == None:
+        # [0] = ordered actions list, [1] = maximal Kemeny index
+            print('Intantiation error: unable to compute the Kemeny Order !!!')
+            print('Digraph order %d is required to be lower than 8!' % n)
+            return
+        kemenyRankings = self.maximalRankings
+        if Debug:
+            print(kemenyRankings)
+        relations = []
+        for rel in kemenyRankings:
+            print(rel)
+            relations.append(self.computePreorderRelation(ranking2preorder(rel)))
+        if Debug:
+            print(relations)
+        relation = {}
+        
+        for x in self.actions:
+            relation[x] = {}
+            for y in self.actions:
+                L = [relations[i][x][y] for i in range(len(relations))]
+                relation[x][y] = fusionOperator(Med,L)
+                if Debug:
+                    print(x,y,L,relation[x][y])
+        if Debug:
+            print(relation)
+        self.relation = relation
+        print(self.relation)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+
 class KohlerArrowRaynaudFusionDigraph(WeakOrder):
     """
     Specialization of the abstract WeakOrder class for 
@@ -1744,19 +1800,24 @@ if __name__ == "__main__":
 ##    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,Debug=True)
 ##    t = XMCDA2PerformanceTableau('uniSorting')
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                   numberOfActions=25)
-    limitingQuantiles = 7
-    qr = QuantilesRankingDigraph(t,limitingQuantiles,
-                              strategy="average",
-                              #rankingRule="RubisChoice",
-                              LowerClosed=False,
-                              Threading=Threading,
-                              Debug=False,
-                                 StoreSorting=True)
-    qr.showSorting()
-    qr.showRanking()
-    qr.showSortingCharacteristics()
-    qr.showQsRbcRanking()
+                                   numberOfActions=8,seed=105)
+    g = BipolarOutrankingDigraph(t)
+    g.exportGraphViz('testg')
+    wke = KemenyWeakOrder(g,orderLimit=8)
+    wke.exportGraphViz('testwke')
+    print(wke.relation)
+##    limitingQuantiles = 7
+##    qr = QuantilesRankingDigraph(t,limitingQuantiles,
+##                              strategy="average",
+##                              #rankingRule="RubisChoice",
+##                              LowerClosed=False,
+##                              Threading=Threading,
+##                              Debug=False,
+##                                 StoreSorting=True)
+##    qr.showSorting()
+##    qr.showRanking()
+##    qr.showSortingCharacteristics()
+##    qr.showQsRbcRanking()
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
