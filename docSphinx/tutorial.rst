@@ -2232,7 +2232,7 @@ So, **0.9175** is the highest possible ordinal correlation (fitness) any potenti
     >>> ke.maxKemenyIndex
     Decimal('15.095')
 
-We may visualize the partial order defined by the epistemic disjunction of these seven Kemeny rankings (see :py:class:`weakOrders.KemenyWeakOrder`) as follows::
+We may visualize the partial order defined by the epistemic disjunction of these seven Kemeny rankings (see `weakOrders module <techDoc.html#weakOrders-label>`_) as follows::
 
     >>> from weakOrders import KemenyWeakOrder
     >>> wke = KemenyWeakOrder(g,orderLimit=9)
