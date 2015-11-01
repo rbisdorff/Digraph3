@@ -3646,9 +3646,10 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <li><a class="reference internal" href="#the-ranking-problem" id="id89">The ranking problem</a></li>
 <li><a class="reference internal" href="#the-copeland-ranking" id="id90">The Copeland ranking</a></li>
 <li><a class="reference internal" href="#the-net-flows-ranking" id="id91">The Net-Flows ranking</a></li>
-<li><a class="reference internal" href="#the-kemeny-and-the-slater-rankings" id="id92">The Kemeny and the Slater rankings</a></li>
-<li><a class="reference internal" href="#kohler-s-ranking-by-choosing-rule" id="id93">Kohler&#8217;s ranking-by-choosing rule</a></li>
-<li><a class="reference internal" href="#tideman-s-ranked-pairs-rule" id="id94">Tideman&#8217;s Ranked-Pairs rule</a></li>
+<li><a class="reference internal" href="#kemeny-rankings" id="id92">Kemeny rankings</a></li>
+<li><a class="reference internal" href="#slater-rankings" id="id93">Slater rankings</a></li>
+<li><a class="reference internal" href="#kohler-s-ranking-by-choosing-rule" id="id94">Kohler&#8217;s ranking-by-choosing rule</a></li>
+<li><a class="reference internal" href="#tideman-s-ranked-pairs-rule" id="id95">Tideman&#8217;s Ranked-Pairs rule</a></li>
 </ul>
 </div>
 <div class="section" id="the-ranking-problem">
@@ -3837,11 +3838,11 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 <p>The <strong>Net-Flows</strong> ranking is here, in this didactic example, not as much correlated with the given outranking relation as its crisp cousin ranking.</p>
-<p>To appreciate the effective quality of both the Copeland and the Net-Flows rankings, it is useful to consider Kemeny&#8217;s and Slater&#8217;s ranking rules.</p>
+<p>To appreciate the effective quality of both the Copeland and the Net-Flows rankings, it is useful to consider Kemeny&#8217;s and Slater&#8217;s optimal ranking rules.</p>
 </div>
-<div class="section" id="the-kemeny-and-the-slater-rankings">
-<h3><a class="toc-backref" href="#id92">The Kemeny and the Slater rankings</a><a class="headerlink" href="#the-kemeny-and-the-slater-rankings" title="Permalink to this headline">¶</a></h3>
-<p>A <strong>Kemeny</strong> ranking is a linear order which is closest, in the sense of the ordinal Kendall distance (see <a class="reference internal" href="#bis-2012" id="id32">[Bis-2012]</a>), to the given valued outranking digraph <em>g</em>. A <strong>Slater</strong> ranking is the linear order which is similarly closest to the corresponding crisp Condorcet digraph <em>c</em>:</p>
+<div class="section" id="kemeny-rankings">
+<h3><a class="toc-backref" href="#id92">Kemeny rankings</a><a class="headerlink" href="#kemeny-rankings" title="Permalink to this headline">¶</a></h3>
+<p>A <strong>Kemeny</strong> ranking is a linear order which is closest, in the sense of the ordinal Kendall distance (see <a class="reference internal" href="#bis-2012" id="id32">[Bis-2012]</a>), to the given valued outranking digraph <em>g</em>:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -3879,7 +3880,39 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">Decimal(&#39;15.095&#39;)</span>
 </pre></div>
 </td></tr></table></div>
+<p>We may visualize the partial order defined by the epistemic disjunction of these seven Kemeny rankings as follows:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">KemenyWeakOrder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wke</span> <span class="o">=</span> <span class="n">KemenyWeakOrder</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wke</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorialKemeny&#39;</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="go">Exporting to tutorialKemeny.dot</span>
+<span class="go">0 { rank = same; a1; }</span>
+<span class="go">1 { rank = same; a3; }</span>
+<span class="go">2 { rank = same; a4; a9; }</span>
+<span class="go">3 { rank = same; a5; }</span>
+<span class="go">4 { rank = same; a8; }</span>
+<span class="go">5 { rank = same; a2; a6; }</span>
+<span class="go">6 { rank = same; a7; }</span>
+<span class="go">dot -Grankdir=TB -Tpng tutorialKemeny.dot -o tutorialKemeny.png</span>
+</pre></div>
+</td></tr></table></div>
+<a class="reference internal image-reference" href="_images/tutorialKemeny.png"><img alt="_images/tutorialKemeny.png" class="align-center" src="_images/tutorialKemeny.png" style="width: 100pt;" /></a>
 <p>It is interesting to notice that all seven Kemeny rankings place alternative <em>a1</em> at rank 1 before alternative <em>a3</em>. This is precisely the only inversion that separates the Copeland ranking (see above) from being optimal in the Kemeny sense.</p>
+</div>
+<div class="section" id="slater-rankings">
+<h3><a class="toc-backref" href="#id93">Slater rankings</a><a class="headerlink" href="#slater-rankings" title="Permalink to this headline">¶</a></h3>
 <p>The <strong>Slater</strong> ranking rule is similar to Kemeny&#8217;s, but it is working, instead,  on the associated crisp Condorcet digraph <em>c</em>. It renders here the following results:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -3893,21 +3926,23 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 10</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span> <span class="o">=</span> <span class="n">KemenyOrder</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">)</span>
 <span class="go">174</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span><span class="o">.</span><span class="n">maxKemenyIndex</span>
-<span class="go">Decimal(&#39;36.0&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span><span class="o">.</span><span class="n">showRanking</span><span class="p">()</span>
 <span class="go">[&#39;a1&#39;, &#39;a3&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a6&#39;, &#39;a9&#39;, &#39;a5&#39;, &#39;a2&#39;, &#39;a7&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">sl</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;Fitness of Slater&#39;s ranking: </span><span class="si">%.3f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">corr</span><span class="p">[</span><span class="s">&#39;correlation&#39;</span><span class="p">])</span>
 <span class="go">Fitness of Slater&#39;s ranking: 0.844</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">slw</span> <span class="o">=</span> <span class="n">KemenyWeakOrder</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">slw</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorialSlater&#39;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<p>We notice that the crisp Slater ranking is a rather good fit (0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. What precise ranking result should we adopt ?</p>
-<p>Kemeny&#8217;s as well as Slater&#8217;s ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (&lt; 20 objects).</p>
+<p>We notice that the first crisp Slater ranking is a rather good fit (0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the follwowing partial ordering:</p>
+<a class="reference internal image-reference" href="_images/tutorialSlater.png"><img alt="_images/tutorialSlater.png" class="align-center" src="_images/tutorialSlater.png" style="width: 150pt;" /></a>
+<p>What precise ranking result should we hence adopt ?</p>
+<p>Kemeny&#8217;s as well as Slater&#8217;s ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (&lt; 15 objects).</p>
 <p>More efficient ranking heuristics, like the Copeland and the Net-Flows rules, are therefore needed in practice.</p>
 </div>
 <div class="section" id="kohler-s-ranking-by-choosing-rule">
-<h3><a class="toc-backref" href="#id93">Kohler&#8217;s ranking-by-choosing rule</a><a class="headerlink" href="#kohler-s-ranking-by-choosing-rule" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id94">Kohler&#8217;s ranking-by-choosing rule</a><a class="headerlink" href="#kohler-s-ranking-by-choosing-rule" title="Permalink to this headline">¶</a></h3>
 <p>Kohler&#8217;s <strong>ranking-by-choosing</strong> rule can be formulated like this.</p>
 <p>At step <em>r</em> (<em>r</em> goes from 1 to <em>n</em>) do the following:</p>
 <blockquote>
@@ -3936,7 +3971,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>Here, we find a better fitness (0.868) when compared with Slater&#8217;s (0.844) or the Net-Flows result (0.828), but not as good as Copeland crisp rule&#8217;s result (0.906).</p>
 </div>
 <div class="section" id="tideman-s-ranked-pairs-rule">
-<h3><a class="toc-backref" href="#id94">Tideman&#8217;s Ranked-Pairs rule</a><a class="headerlink" href="#tideman-s-ranked-pairs-rule" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id95">Tideman&#8217;s Ranked-Pairs rule</a><a class="headerlink" href="#tideman-s-ranked-pairs-rule" title="Permalink to this headline">¶</a></h3>
 <p>A further ranking heuristic, the <strong>Ranked-Pairs</strong> rule, is based on a prudent incremental construction of linear orders that avoids on the fly any cycling outrankings. The ranking procedure may be formulated as follows:</p>
 <blockquote>
 <div><ol class="arabic">
@@ -4183,7 +4218,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <li><a class="reference internal" href="#the-ranking-problem">The ranking problem</a></li>
 <li><a class="reference internal" href="#the-copeland-ranking">The Copeland ranking</a></li>
 <li><a class="reference internal" href="#the-net-flows-ranking">The Net-Flows ranking</a></li>
-<li><a class="reference internal" href="#the-kemeny-and-the-slater-rankings">The Kemeny and the Slater rankings</a></li>
+<li><a class="reference internal" href="#kemeny-rankings">Kemeny rankings</a></li>
+<li><a class="reference internal" href="#slater-rankings">Slater rankings</a></li>
 <li><a class="reference internal" href="#kohler-s-ranking-by-choosing-rule">Kohler&#8217;s ranking-by-choosing rule</a></li>
 <li><a class="reference internal" href="#tideman-s-ranked-pairs-rule">Tideman&#8217;s Ranked-Pairs rule</a></li>
 </ul>

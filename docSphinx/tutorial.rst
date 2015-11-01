@@ -2204,12 +2204,12 @@ The valued version of the Copeland rule, called **Net-Flows** rule, is working d
 
 The **Net-Flows** ranking is here, in this didactic example, not as much correlated with the given outranking relation as its crisp cousin ranking. 
 
-To appreciate the effective quality of both the Copeland and the Net-Flows rankings, it is useful to consider Kemeny's and Slater's ranking rules.
+To appreciate the effective quality of both the Copeland and the Net-Flows rankings, it is useful to consider Kemeny's and Slater's optimal ranking rules.
 
-The Kemeny and the Slater rankings
-..................................
+Kemeny rankings
+...............
 
-A **Kemeny** ranking is a linear order which is closest, in the sense of the ordinal Kendall distance (see [Bis-2012]_), to the given valued outranking digraph *g*. A **Slater** ranking is the linear order which is similarly closest to the corresponding crisp Condorcet digraph *c*::
+A **Kemeny** ranking is a linear order which is closest, in the sense of the ordinal Kendall distance (see [Bis-2012]_), to the given valued outranking digraph *g*::
 
     >>> from linearOrders import KemenyOrder
     >>> ke = KemenyOrder(g,orderLimit=9) # default orderLimit is 7
@@ -2232,24 +2232,53 @@ So, **0.9175** is the highest possible ordinal correlation (fitness) any potenti
     >>> ke.maxKemenyIndex
     Decimal('15.095')
 
-It is interesting to notice that all seven Kemeny rankings place alternative *a1* at rank 1 before alternative *a3*. This is precisely the only inversion that separates the Copeland ranking (see above) from being optimal in the Kemeny sense. 
+We may visualize the partial order defined by the epistemic disjunction of these seven Kemeny rankings as follows::
+
+    >>> from weakOrders import KemenyWeakOrder
+    >>> wke = KemenyWeakOrder(g,orderLimit=9)
+    >>> wke.exportGraphViz('tutorialKemeny')
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to tutorialKemeny.dot
+    0 { rank = same; a1; }
+    1 { rank = same; a3; }
+    2 { rank = same; a4; a9; }
+    3 { rank = same; a5; }
+    4 { rank = same; a8; }
+    5 { rank = same; a2; a6; }
+    6 { rank = same; a7; }
+    dot -Grankdir=TB -Tpng tutorialKemeny.dot -o tutorialKemeny.png
+
+.. image:: tutorialKemeny.png
+   :width: 100pt
+   :align: center
+
+It is interesting to notice that all seven Kemeny rankings place alternative *a1* at rank 1 before alternative *a3*. This is precisely the only inversion that separates the Copeland ranking (see above) from being optimal in the Kemeny sense.
+
+Slater rankings
+...............
 
 The **Slater** ranking rule is similar to Kemeny's, but it is working, instead,  on the associated crisp Condorcet digraph *c*. It renders here the following results::
 
     >>> sl = KemenyOrder(c,orderLimit=9)
     >>> len(sl.maximalRankings)
     174
-    >>> sl.maxKemenyIndex
-    Decimal('36.0')
     >>> sl.showRanking()
     ['a1', 'a3', 'a8', 'a4', 'a6', 'a9', 'a5', 'a2', 'a7']
     >>> corr = g.computeOrdinalCorrelation(sl)
     >>> print("Fitness of Slater's ranking: %.3f" % corr['correlation'])
     Fitness of Slater's ranking: 0.844
+    >>> slw = KemenyWeakOrder(c,orderLimit=9)
+    >>> slw.exportGraphViz('tutorialSlater')
 
-We notice that the crisp Slater ranking is a rather good fit (0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. What precise ranking result should we adopt ? 
+We notice that the first crisp Slater ranking is a rather good fit (0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the follwowing partial ordering:
 
-Kemeny's as well as Slater's ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (< 20 objects). 
+.. image:: tutorialSlater.png
+    :width: 150pt
+    :align: center
+
+What precise ranking result should we hence adopt ? 
+
+Kemeny's as well as Slater's ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (< 15 objects). 
 
 More efficient ranking heuristics, like the Copeland and the Net-Flows rules, are therefore needed in practice. 
 
