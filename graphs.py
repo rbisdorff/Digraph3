@@ -105,6 +105,112 @@ class Graph(object):
         new.__class__ = self.__class__
         return new
 
+#-----------Dias/Castonguay/Longo/Jradi--------*
+    def __degreeLabelling(self):
+        """
+        p 14
+        """
+        degree = {}
+        color = {}
+        for v in self.vertices:
+            degree[v] = len(self.gamma[v])
+            color[v] = 'white'
+##            for u in self.gamma[v]:
+##                degree[v] += 1
+            
+        labelling = {}
+        for i in range(1,self.order+1):
+            minDegree = self.order
+            for x in self.vertices:
+                if color[x] == 'white' and degree[x] < minDegree:
+                    v = x
+                    minDegree = degree[x]
+            labelling[v] = i
+            color[v] = 'black'
+            print(v,i,minDegree)
+            for u in self.gamma[v]:
+                if color[u] == 'white':
+                    degree[u] -= 1
+        self.degree = degree
+        self.color = color
+        self.labelling = labelling
+        return labelling
+
+    def _degreeLabelling(self):
+        labelling = {}
+        i = 1
+        for v in self.vertices:
+            labelling[v] = i
+            i += 1
+        self.labelling = labelling
+        return labelling
+    
+    def _triplets(self):
+        """ p.15 """
+        from itertools import product
+        tG = set()
+        cycles = set()
+        for u in self.vertices:
+            for x,y in product(self.gamma[u],repeat=2):
+                if x != y:
+##                    print(u,self.labelling[u],
+##                          x,self.labelling[x],
+##                          y,self.labelling[y])
+##                    if self.labelling[u] < self.labelling[x] and \
+##                       self.labelling[x] < self.labelling[y]:
+                    if u < x and x < y:
+                        if self.edges[frozenset([x,y])] < self.valuationDomain['med']:
+##                            print('tG',x,u,y)
+                            tG.add((x,u,y))
+##                        else:
+##                            cycles.add((x,u,y))
+        self.tG = tG
+        self.cycles = cycles
+        return tG,cycles
+
+    def _chordlessCycles(self):
+        """ p.14 """
+##        labelling = self._degreeLabelling()
+        tG,cycles = self._triplets()
+        self.blocked = {}
+        for u in self.vertices:
+            self.blocked[u] = 0
+        while tG != set():
+            p = tG.pop()
+            u = p[1]
+            for x in self.gamma[u]:
+                self.blocked[x] += 1
+            cycles = self._ccVisit(p,cycles,u)
+            for x in self.gamma[u]:
+                if self.blocked[x] > 0:
+                    self.blocked[x] -= 1
+        return cycles
+
+    def _ccVisit(self,p,cycles,u):
+        """ p.15 """
+        ut = p[-1]
+        u1 = p[0]
+
+        for x in self.gamma[ut]:
+            self.blocked[x] += 1
+
+        for v in self.gamma[ut]:
+            if v > u and self.blocked[v] == 1:
+                p1 = p + tuple([v])
+                if self.edges[frozenset([u1,v])] > self.valuationDomain['med']:
+                    cycles.add(p1)
+                else:
+                    cycles = self._ccVisit(p1,cycles,u)
+
+        for x in self.gamma[ut]:
+            if self.blocked[x] > 0:
+                self.blocked[x] -= 1
+
+        return cycles
+        
+            
+#----------------------------------------
+
     def _chordlessPaths(self,Pk,v0,Comments=False,Debug=False):
         """
         recursice chordless precycle (len > 3) construction:
@@ -2662,132 +2768,28 @@ class MISModel(Graph):
         except:
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
+                
 
-
+    
+    
 # --------------testing the module ----
 if __name__ == '__main__':
 
-    g = RandomGraph(order=10,edgeProbability=1/3,seed=200)
+    from time import time
+    g = GridGraph(4,4)
+
+    print(g._degreeLabelling())
+    print(g._triplets())
+    t0 = time();print(len(g._chordlessCycles()));print(time()-t0)
+    t0 = time();print(len(g.computeChordlessCycles(Comments=False)));print(time()-t0)
+    
+    
     #g.save('test')
     #g = Graph('test')
-    ust = RandomSpanningTree(g,seed=200,Debug=False)
-    ust.showShort()
-    ust.showMore()
-    ust.dfs = ust.randomDepthFirstSearch()
-    ust.exportGraphViz(withSpanningTree=True)
-    print(ust.prueferCode)
+##    ust = RandomSpanningTree(g,seed=200,Debug=False)
+##    ust.showShort()
+##    ust.showMore()
+##    ust.dfs = ust.randomDepthFirstSearch()
+##    ust.exportGraphViz(withSpanningTree=True)
+##    print(ust.prueferCode)
     
-##    g = RandomGraph(order=20,edgeProbability=1/3,seed=200)
-##    #g = CompleteGraph(order=10)
-##    g.showShort()
-##    g.showMore()
-##    print(g.computeNeighbourhoodDepthDistribution(Debug=False))
-##    for v in g.vertices:
-##        print(v,g.computeNeighbourhoodDepth(v))
-##    print(g.isConnected(), g.computeComponents())
-##    g.exportGraphViz()
-##    print('diameter: ',g.computeDiameter())
-##    g.showMIS()
-##    mis = MISModel(g,seed=1)
-##    mis.exportGraphViz()
-##    g.showCliques()
-
-    
-    #g.computeDegreeDistribution()
-####    g = RandomRegularGraph(seed=100)
-    #g = GridGraph(n=10,m=10)
-    #g = TriangulatedGrid(n=10,m=10)
-##    g.save()
-##    g.exportGraphViz('graph200')
-##    #print(g.randomDepthFirstSearch(seed=None,Debug=False))
-##    #g.exportGraphViz(withSpanningTree=True,layout="circo")
-##    mt = BestDeterminedSpanningForest(g,Debug=True)
-##    mt.exportGraphViz(layout="circo")
-##    t = RandomTree(Debug=True,seed=100)
-##    print(t.prueferCode)
-##    print(t.tree2Pruefer())
-##    rsp = RandomSpanningForest(g,seed=100)
-##    print(rsp.prueferCodes)
-##    rsp.exportGraphViz(withSpanningTree=True)
-    
-##    from digraphs import KneserDigraph
-##    pdg = KneserDigraph()
-##    p = pdg.digraph2Graph()
-####    p = RandomGraph(order=10,edgeProbability=0.1,seed=100)
-##    p.randomDepthFirstSearch(seed=10)
-##    p.exportGraphViz(withSpanningTree=True)
-##    print(p.dfs)
-##    spt = RandomSpanningForest(p,seed=1)
-##    print(spt.dfs)
-##    spt.exportGraphViz()
-##    
-##    c = CycleGraph()
-##    c.showShort()
-##
-##    g = RandomGraph(seed=100)
-##    g.showShort()
-##    g = RandomFixedDegreeSequenceGraph(seed=100)
-##    g.showShort()
-##    rg = RandomRegularGraph(seed=100)
-##    rg.showShort()
-##    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
-##    rfs.showShort()
-##    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
-##    rfs.showShort()
-##    
-##    g = TriangulatedGrid(n=5,m=5)
-##    #g.showShort()
-##    g.exportGraphViz()
-##    
-##    g = Graph(numberOfVertices=5,edgeProbability=0.5)
-##    g.showShort()
-##    g.save('test')
-##    probs = {}
-##    n = g.order
-##    i = 0
-##    verticesList = [x for x in g.vertices]
-##    verticesList.sort()
-##    for x in verticesList:
-##        probs[x] = (n - i)/(n*(n+1)/2)
-##        i += 1
-##    sumProbs = 0.0
-##    for x in verticesList:
-##        sumProbs += probs[x]
-##    met = MetropolisChain(g,probs)
-##    #met = MetropolisChain(g)
-##    #met.showShort()
-##    frequency = met.checkSampling(verticesList[0],nSim=30000)
-##    for x in verticesList:
-##        try:
-##            print(x,probs[x],frequency[x])
-##        except:
-##            print(x,0.0,0.0)
-##    met.showTransitionMatrix()
-##    met.saveCSVTransition()
-##    # Q-Colorings
-##    g = Graph(numberOfVertices=30,edgeProbability=0.1)
-##    #g = GridGraph(n=6,m=6)
-##    g.showShort()
-##    qc = Q_Coloring(g,nSim=100000,colors=['gold','lightcyan','lightcoral'],Debug=False)
-##    qc.checkFeasibility(Comments=True)
-##    qc.exportGraphViz()
-##    # Ising Models
-##    g = GridGraph(n=5,m=5)
-##    g.showShort()
-##    im = IsingModel(g,beta=0.441,nSim=30000,Debug=False)
-##    H = im.computeSpinEnergy()
-##    print( 'Spin energy = %d/%d = %.3f' % (H,im.size,H/im.size) )
-##    print(im.SpinEnergy)
-##    im.exportGraphViz(edgeColor='lightgrey',graphSize="(5,5)",graphType="pdf",colors=['gold','coral'])
-##    im.save()
-##    # MIS Models
-##    g = GridGraph(n=10,m=10)
-##    #g = Graph(numberOfVertices=30,edgeProbability=0.1)
-##    g.showShort()
-##    im = MISModel(g,nSim=100,Debug=False)
-##    im.checkMIS(Comments=True)
-##    print('MIS       = ',im.mis)
-##    print('Covered   = ',im.misCover)
-##    print('Uncovered = ',im.unCovered)
-##    print('MIS size  = ',len(im.mis))
-##    im.exportGraphViz(misColor='coral')

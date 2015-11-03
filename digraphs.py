@@ -407,6 +407,90 @@ class Digraph(object):
         new.__class__ = self.__class__
         return new
 
+#-----------Dias/Castonguay/Longo/Jradi--------*
+    
+    def _triplets(self):
+        """ p.15 """
+        from itertools import product
+        tG = set()
+        circuits = []
+        for u in self.actions:
+            outAsymGammaU = self.gamma[u][0] - self.gamma[u][1]
+            inAsymGammaU = self.gamma[u][1] - self.gamma[u][0]
+            for x in outAsymGammaU:
+                for y in inAsymGammaU:
+                    if x != y:
+##                    print(u,self.labelling[u],
+##                          x,self.labelling[x],
+##                          y,self.labelling[y])
+##                    if self.labelling[u] < self.labelling[x] and \
+##                       self.labelling[x] < self.labelling[y]:
+                        if u < x and x < y:
+                            if self.relation[x][y] <= self.valuationdomain['med']:
+##                              print('tG',x,u,y)
+                                tG.add((x,u,y))
+                            else:
+                                circ = [y,u,x]
+                                circuits.append((circ,frozenset(circ)))
+        #self.tG = tG
+        #self.circuits = circuits
+        return tG,circuits
+
+    def _chordlessCycles(self,Comments=False):
+        """ p.14 """
+##        labelling = self._degreeLabelling()
+        tG,self.circuits = self._triplets()
+        if Comments:
+            print('There are %d starting triplets !' % len(tG) )
+        self.blocked = {}
+        for u in self.actions:
+            self.blocked[u] = 0
+        while tG != set():
+            p = tG.pop()
+            u = p[1]
+            inAsymGammaU =  (self.gamma[u][1] - self.gamma[u][0])
+            outAsymGammaU = (self.gamma[u][0] - self.gamma[u][1])
+            for x in inAsymGammaU or x in outAsymGammaU:
+                #print(x)
+                self.blocked[x] += 1
+            self._ccVisit(p,u,Comments=Comments)
+            for x in (inAsymGammaU | outAsymGammaU):
+                if self.blocked[x] > 0:
+                    self.blocked[x] -= 1
+        return self.circuits
+
+    def _ccVisit(self,p,u,Comments=False):
+        """ p.15 """
+        ut = p[-1]
+        u1 = p[0]
+        inAsymGammaUt = self.gamma[ut][1] - self.gamma[ut][0]
+        outAsymGammaUt = self.gamma[ut][0] - self.gamma[ut][1]
+        #print(ut,asymGammaUt)
+        for x in (inAsymGammaUt | outAsymGammaUt):
+            self.blocked[x] += 1
+
+        for v in inAsymGammaUt:
+            if v > u and self.blocked[v] == 1:
+                p1 = p + tuple([v])
+                if self.relation[u1][v] > self.valuationdomain['med']:
+                    circ = list(reversed(p1))
+                    if Comments:
+                        print('circuit certificate: ',circ)
+                    self.circuits.append((circ,frozenset(circ)))
+                else:
+                    self._ccVisit(p1,u,Comments=Comments)
+
+        for x in (inAsymGammaUt | outAsymGammaUt):
+            if self.blocked[x] > 0:
+                self.blocked[x] -= 1
+
+        return
+        
+            
+#----------------------------------------
+
+
+
     def topologicalSort(self,Debug=False):
         """
         If self is acyclic, adds topological sort number to each node of self
@@ -11390,22 +11474,30 @@ if __name__ == "__main__":
 
     else:
         print('*-------- Testing classes and methods -------')
+
+        from time import time
+        g = GridDigraph(8,8,hasMedianSplitOrientation=True)
+        g.exportGraphViz()
+        t0 = time();print(len(g.computeChordlessCircuits()));print(time()-t0)
+        #g.showChordlessCircuits()
+        t0 = time();print(len(g._chordlessCycles(Comments=False)));print(time()-t0)
+        #print(g.circuits)
         #from csv import reader
         #g = RandomValuationDigraph()
         #g.showAll()
-        MP=False
-        from outrankingDigraphs import BipolarOutrankingDigraph
-        from randomPerfTabs import RandomCBPerformanceTableau
-        t1 = RandomCBPerformanceTableau(numberOfActions=10,seed=1)
-##        t1.saveXMCDA2('testP2')
-##        t1.showCriteria()
-        t2 = RandomCBPerformanceTableau(numberOfActions=10,seed=2)
-##        t1.saveXMCDA2('testP2')
-##        t1.showCriteria()
-        #t = XMCDA2PerformanceTableau('testP')
-        g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=MP)
-        g2 = BipolarOutrankingDigraph(t2,Normalized=True,Threading=MP)
-        print(g1.computeOrdinalCorrelationMP(g2,Comments=True,nbrOfCPUs=4,Threading=MP))        
+##        MP=False
+##        from outrankingDigraphs import BipolarOutrankingDigraph
+##        from randomPerfTabs import RandomCBPerformanceTableau
+##        t1 = RandomCBPerformanceTableau(numberOfActions=10,seed=1)
+####        t1.saveXMCDA2('testP2')
+####        t1.showCriteria()
+##        t2 = RandomCBPerformanceTableau(numberOfActions=10,seed=2)
+####        t1.saveXMCDA2('testP2')
+####        t1.showCriteria()
+##        #t = XMCDA2PerformanceTableau('testP')
+##        g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=MP)
+##        g2 = BipolarOutrankingDigraph(t2,Normalized=True,Threading=MP)
+##        print(g1.computeOrdinalCorrelationMP(g2,Comments=True,nbrOfCPUs=4,Threading=MP))        
 ##        gcd = ~(-g)
 ##        gcd.computeChordlessCircuits(Odd=True,Comments=True)
 ##        gcd.showPreKernels()
