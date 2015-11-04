@@ -442,7 +442,15 @@ class Digraph(object):
         return tG
 
     def computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
-        """ p.14 """
+        """ 
+        Renders the set of all chordless odd circuits detected in a digraph.
+        Result (possible empty list) stored in <self.circuitsList>
+        holding a possibly empty list tuples with at position 0 the
+        list of adjacent actions of the circuit and at position 1
+        the set of actions in the stored circuit.
+        Inspired by Dias, Castonguay, Longo, Jradi, Algorithmica (forthcoming).
+        """
+
 ##        labelling = self._degreeLabelling()
         tG = self._triplets(Comments=Comments)
         #self.circuits=[]
