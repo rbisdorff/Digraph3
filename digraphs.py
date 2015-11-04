@@ -425,7 +425,7 @@ class Digraph(object):
 ##                          y,self.labelling[y])
 ##                    if self.labelling[u] < self.labelling[x] and \
 ##                       self.labelling[x] < self.labelling[y]:
-                        if u < x and u < y:
+                        if str(u) < str(x) and str(u) < str(y):
                             #print('x,u,y',x,u,y)
                             if self.relation[y][x] <= self.valuationdomain['med'] and\
                                self.relation[x][y] <= self.valuationdomain['med']:
@@ -441,7 +441,7 @@ class Digraph(object):
         #self.circuits = circuits
         return tG
 
-    def _chordlessCycles(self,Comments=False):
+    def computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
         """ p.14 """
 ##        labelling = self._degreeLabelling()
         tG = self._triplets(Comments=Comments)
@@ -459,13 +459,13 @@ class Digraph(object):
             for x in (inAsymGammaU |outAsymGammaU):
                 #print(x)
                 self.blocked[x] += 1
-            self._ccVisit(p,u,Comments=Comments)
+            self._ccVisit(p,u,Odd=Odd,Comments=Comments)
             for x in (inAsymGammaU | outAsymGammaU):
                 if self.blocked[x] > 0:
                     self.blocked[x] -= 1
         return self.circuitsList
 
-    def _ccVisit(self,p,u,Comments=False):
+    def _ccVisit(self,p,u,Odd=False,Comments=False):
         """ p.15 """
         ut = p[-1]
         u1 = p[0]
@@ -476,15 +476,23 @@ class Digraph(object):
             self.blocked[x] += 1
 
         for v in inAsymGammaUt:
-            if v > u and self.blocked[v] == 1:
+            if str(v) > str(u) and self.blocked[v] == 1:
                 p1 = p + tuple([v])
                 if self.relation[u1][v] > self.valuationdomain['med']:
-                    circ = list(reversed(p1))
-                    if Comments:
-                        print('circuit certificate: ',circ)
-                    self.circuitsList.append((circ,frozenset(circ)))
+                    if Odd:
+                        if (len(p1) % 2) != 1:
+                            OddFlag=False
+                        else:
+                            OddFlag = True
+                    else:
+                        OddFlag = True
+                    if OddFlag:
+                        circ = list(reversed(p1))
+                        if Comments:
+                            print('circuit certificate: ',circ)
+                        self.circuitsList.append((circ,frozenset(circ)))
                 else:
-                    self._ccVisit(p1,u,Comments=Comments)
+                    self._ccVisit(p1,u,Odd=Odd,Comments=Comments)
 
         for x in (inAsymGammaUt | outAsymGammaUt):
             if self.blocked[x] > 0:
@@ -6013,7 +6021,7 @@ class Digraph(object):
         self.circuitsList = result
         return result
 
-    def computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
+    def _computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
         """
         Renders the set of all chordless odd circuits detected in a digraph.
         Result (possible empty list) stored in <self.circuitsList>
@@ -6030,8 +6038,7 @@ class Digraph(object):
 
         actionsList = list(self.actions)
         self.visitedArcs = set()
-        chordlessCircuits = []
-
+        chordlessCircuits = []       
         for x in actionsList:
             P = [x]
             if Comments:
@@ -11486,8 +11493,8 @@ if __name__ == "__main__":
         #g = RandomTournament(order=5,seed=1)
         #g = RandomValuationDigraph(seed=1)
         #g.exportGraphViz()
-#        t0 = time();print(len(g.computeChordlessCircuits()));print(time()-t0)
-        t0 = time();print(len(g._chordlessCycles(Comments=False)));print(time()-t0)
+        t0 = time();print(len(g.computeChordlessCircuits(Odd=True,Comments=True)));print(time()-t0)
+        #t0 = time();print(len(g._computeChordlessCircuits(Comments=False)));print(time()-t0)
         g.showChordlessCircuits()
         #print(g.circuits)
         #from csv import reader

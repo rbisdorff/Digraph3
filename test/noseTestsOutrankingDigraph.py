@@ -348,7 +348,7 @@ def testGridDigraphs():
     t0 = time()
     G.computeChordlessCircuits()
     t1 = time()
-    print(len(G.chordlessCircuits), t1-t0)
+    print(len(G.circuitsList), t1-t0)
     G.showChordlessCircuits()
 
 def testEquiSignificanceMajorityOutrankingDigraph():
