@@ -409,11 +409,11 @@ class Digraph(object):
 
 #-----------Dias/Castonguay/Longo/Jradi--------*
     
-    def _triplets(self):
+    def _triplets(self,Comments=False):
         """ p.15 """
         from itertools import product
         tG = set()
-        circuits = []
+        self.circuitsList = []
         for u in self.actions:
             outAsymGammaU = self.gamma[u][0] - self.gamma[u][1]
             inAsymGammaU = self.gamma[u][1] - self.gamma[u][0]
@@ -425,21 +425,27 @@ class Digraph(object):
 ##                          y,self.labelling[y])
 ##                    if self.labelling[u] < self.labelling[x] and \
 ##                       self.labelling[x] < self.labelling[y]:
-                        if u < x and x < y:
-                            if self.relation[x][y] <= self.valuationdomain['med']:
-##                              print('tG',x,u,y)
+                        if u < x and u < y:
+                            #print('x,u,y',x,u,y)
+                            if self.relation[y][x] <= self.valuationdomain['med'] and\
+                               self.relation[x][y] <= self.valuationdomain['med']:
+                                if Comments:
+                                    print('Initial triplet: ',x,u,y)
                                 tG.add((x,u,y))
-                            else:
+                            elif self.relation[y][x] < self.valuationdomain['med']:
                                 circ = [y,u,x]
-                                circuits.append((circ,frozenset(circ)))
+                                if Comments:
+                                    print('Circuit certificate:', circ)
+                                self.circuitsList.append((circ,frozenset(circ)))
         #self.tG = tG
         #self.circuits = circuits
-        return tG,circuits
+        return tG
 
     def _chordlessCycles(self,Comments=False):
         """ p.14 """
 ##        labelling = self._degreeLabelling()
-        tG,self.circuits = self._triplets()
+        tG = self._triplets(Comments=Comments)
+        #self.circuits=[]
         if Comments:
             print('There are %d starting triplets !' % len(tG) )
         self.blocked = {}
@@ -450,14 +456,14 @@ class Digraph(object):
             u = p[1]
             inAsymGammaU =  (self.gamma[u][1] - self.gamma[u][0])
             outAsymGammaU = (self.gamma[u][0] - self.gamma[u][1])
-            for x in inAsymGammaU or x in outAsymGammaU:
+            for x in (inAsymGammaU |outAsymGammaU):
                 #print(x)
                 self.blocked[x] += 1
             self._ccVisit(p,u,Comments=Comments)
             for x in (inAsymGammaU | outAsymGammaU):
                 if self.blocked[x] > 0:
                     self.blocked[x] -= 1
-        return self.circuits
+        return self.circuitsList
 
     def _ccVisit(self,p,u,Comments=False):
         """ p.15 """
@@ -476,7 +482,7 @@ class Digraph(object):
                     circ = list(reversed(p1))
                     if Comments:
                         print('circuit certificate: ',circ)
-                    self.circuits.append((circ,frozenset(circ)))
+                    self.circuitsList.append((circ,frozenset(circ)))
                 else:
                     self._ccVisit(p1,u,Comments=Comments)
 
@@ -6089,10 +6095,10 @@ class Digraph(object):
                 print('No circuits observed in this digraph.')
             else:
                 print('*---- Chordless circuits ----*')
-                for (circList,circSet) in self.circuitsList:
-                    deg = self.circuitMinCredibility(circList)
-                    print(circList, ', credibility :', deg)
                 print('%d circuits.' % (len(self.circuitsList)))
+                for i,(circList,circSet) in enumerate(self.circuitsList):
+                    deg = self.circuitMinCredibility(circList)
+                    print('%d: ' % (i+1), circList, ', credibility :', deg)
         except:
             print('No circuits yet computed. Run computeChordlessCircuits()!')
 
@@ -11476,11 +11482,13 @@ if __name__ == "__main__":
         print('*-------- Testing classes and methods -------')
 
         from time import time
-        g = GridDigraph(8,8,hasMedianSplitOrientation=True)
-        g.exportGraphViz()
-        t0 = time();print(len(g.computeChordlessCircuits()));print(time()-t0)
-        #g.showChordlessCircuits()
+        g = GridDigraph(4,4,hasMedianSplitOrientation=True)
+        #g = RandomTournament(order=5,seed=1)
+        #g = RandomValuationDigraph(seed=1)
+        #g.exportGraphViz()
+#        t0 = time();print(len(g.computeChordlessCircuits()));print(time()-t0)
         t0 = time();print(len(g._chordlessCycles(Comments=False)));print(time()-t0)
+        g.showChordlessCircuits()
         #print(g.circuits)
         #from csv import reader
         #g = RandomValuationDigraph()

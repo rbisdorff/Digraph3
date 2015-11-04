@@ -2776,12 +2776,12 @@ class MISModel(Graph):
 if __name__ == '__main__':
 
     from time import time
-    g = GridGraph(4,4)
+    g = GridGraph(6,10)
 
     print(g._degreeLabelling())
     print(g._triplets())
     t0 = time();print(len(g._chordlessCycles()));print(time()-t0)
-    t0 = time();print(len(g.computeChordlessCycles(Comments=False)));print(time()-t0)
+    #t0 = time();print(len(g.computeChordlessCycles(Comments=False)));print(time()-t0)
     
     
     #g.save('test')
