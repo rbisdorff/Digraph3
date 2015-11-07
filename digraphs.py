@@ -426,8 +426,8 @@ class Digraph(object):
 ##                    if self.labelling[u] < self.labelling[x] and \
 ##                       self.labelling[x] < self.labelling[y]:
                         if str(u) < str(x) and str(u) < str(y):
-                            if Debug:
-                                print('x,u,y',x,u,y)
+##                            if Debug:
+##                                print('x,u,y',x,u,y)
                             if self.relation[y][x] <= self.valuationdomain['med'] and\
                                self.relation[x][y] <= self.valuationdomain['med']:
                                 if Comments:
@@ -463,15 +463,14 @@ class Digraph(object):
             self.blocked[u] = 0
         for p in tG:
             u = p[1]
-            if Debug:
-                print('===>>>',p,u)
-            #inAsymGammaU =  (self.gamma[u][1] - self.gamma[u][0])
-            #outAsymGammaU = (self.gamma[u][0] - self.gamma[u][1])
-            for x in (self.gamma[u][1] | self.gamma[u][0]):
+##            if Debug:
+##                print('===>>>',p,u)
+            gammaU = (self.gamma[u][1] | self.gamma[u][0])
+            for x in gammaU:
                 #print(x)
                 self.blocked[x] += 1
             self._ccVisit(p,u,Odd=Odd,Comments=Comments)
-            for x in (self.gamma[u][1] | self.gamma[u][0]):
+            for x in gammaU:
                 if self.blocked[x] > 0:
                     self.blocked[x] -= 1
         return self.circuitsList
@@ -482,16 +481,16 @@ class Digraph(object):
         u1 = p[0]
         inAsymGammaUt = self.gamma[ut][1] - self.gamma[ut][0]
         gammaUt = self.gamma[ut][0] | self.gamma[ut][1]
-        if Debug:
-            print(self.gamma[ut][1],ut,self.gamma[ut][0])
+##        if Debug:
+##            print(self.gamma[ut][1],ut,self.gamma[ut][0])
         for x in gammaUt:
             self.blocked[x] += 1
 
         for v in inAsymGammaUt:
             if str(v) > str(u) and self.blocked[v] == 1:
                 p1 = p + tuple([v])
-                if Debug:
-                    print(p1)
+##                if Debug:
+##                    print(p1)
                 if self.relation[u1][v] > self.valuationdomain['med'] and\
                    self.relation[v][u1] <= self.valuationdomain['med']:
                     if Odd:
@@ -515,8 +514,8 @@ class Digraph(object):
                 ##     self._ccVisit(p,u,Odd=Odd,Comments=Comments)
                 elif self.relation[u1][v] <= self.valuationdomain['med'] and\
                     self.relation[v][u1] <= self.valuationdomain['med'] :
-                    if Debug:
-                        print('continue with ', p1)
+##                    if Debug:
+##                        print('continue with ', p1)
                     self._ccVisit(p1,u,Odd=Odd,Comments=Comments)
                     #for x in (inAsymGammaUt | outAsymGammaUt):
                     #if self.blocked[x] > 0:
@@ -11522,24 +11521,32 @@ if __name__ == "__main__":
         #g.exportGraphViz()
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
-        for s in range(1,100):
-            print(s)
-            t1 = RandomPerformanceTableau(numberOfActions=20,seed=s)
-            g = BipolarOutrankingDigraph(t1,Normalized=True)
-            #g = RandomDigraph(order=20,seed=s)
-            #g = RandomTournament(order=25,seed=s)
-            #g = GridDigraph(30,30,hasMedianSplitOrientation=False)
-            t0 = time();print(len(g._computeChordlessCircuits(Odd=False,
-                                                              Comments=False)));print(time()-t0)
-            #g.showChordlessCircuits()
-            new = len(g.circuitsList)
-            t0 = time();print(len(g.computeChordlessCircuits(Comments=False)));print(time()-t0)
-            #g.showChordlessCircuits()
-            #g.showRelationTable(actionsSubset=['a05', 'a13', 'a17', 'a01', 'a08'])
-            old = len(g.circuitsList)
-            if new != old:
-                print(s,new,old)
-                break
+        with open('res.csv','w') as fo:
+            fo.write('"card","tnew","told"\n')
+            for s in range(100,1000):
+                print(s)
+                t1 = RandomCBPerformanceTableau(numberOfActions=30,seed=s)
+                g = BipolarOutrankingDigraph(t1,Normalized=True)
+                #g = RandomDigraph(order=20,seed=s)
+                #g = RandomTournament(order=25,seed=s)
+                #g = GridDigraph(30,30,hasMedianSplitOrientation=False)
+                t0 = time()
+                print(len(g._computeChordlessCircuits(Odd=False,Comments=False)))
+                tnew = (time()-t0)
+                     
+                #g.showChordlessCircuits()
+                new = len(g.circuitsList)
+                t0 = time()
+                print(len(g.computeChordlessCircuits(Comments=False)))
+                told = (time()-t0)
+                #g.showChordlessCircuits()
+                #g.showRelationTable(actionsSubset=['a05', 'a13', 'a17', 'a01', 'a08'])
+                old = len(g.circuitsList)
+                if new != old:
+                    print(s,new,old)
+                    break
+                fo.write('%d,%.5f,%.5f\n' %(new,tnew,told))
+
             
         #print(g.circuits)
         #from csv import reader
