@@ -11522,13 +11522,13 @@ if __name__ == "__main__":
         #g.exportGraphViz()
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
-        for s in range(1,2):
+        for s in range(1,100):
             print(s)
-            #t1 = RandomPerformanceTableau(numberOfActions=20,seed=s)
-            #g = BipolarOutrankingDigraph(t1,Normalized=True)
+            t1 = RandomPerformanceTableau(numberOfActions=20,seed=s)
+            g = BipolarOutrankingDigraph(t1,Normalized=True)
             #g = RandomDigraph(order=20,seed=s)
             #g = RandomTournament(order=25,seed=s)
-            g = GridDigraph(30,30,hasMedianSplitOrientation=False)
+            #g = GridDigraph(30,30,hasMedianSplitOrientation=False)
             t0 = time();print(len(g._computeChordlessCircuits(Odd=False,
                                                               Comments=False)));print(time()-t0)
             #g.showChordlessCircuits()
@@ -11537,9 +11537,9 @@ if __name__ == "__main__":
             #g.showChordlessCircuits()
             #g.showRelationTable(actionsSubset=['a05', 'a13', 'a17', 'a01', 'a08'])
             old = len(g.circuitsList)
-            #if new != old:
-            #    print(s,new,old)
-            #    break
+            if new != old:
+                print(s,new,old)
+                break
             
         #print(g.circuits)
         #from csv import reader
