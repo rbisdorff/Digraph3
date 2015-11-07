@@ -443,7 +443,7 @@ class Digraph(object):
         #self.circuits = circuits
         return tG
 
-    def _computeChordlessCircuits(self,Odd=False,Comments=False,Debug=True):
+    def _computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
         """ 
         Renders the set of all chordless odd circuits detected in a digraph.
         Result (possible empty list) stored in <self.circuitsList>
@@ -465,8 +465,8 @@ class Digraph(object):
             u = p[1]
             if Debug:
                 print('===>>>',p,u)
-            inAsymGammaU =  (self.gamma[u][1] - self.gamma[u][0])
-            outAsymGammaU = (self.gamma[u][0] - self.gamma[u][1])
+            #inAsymGammaU =  (self.gamma[u][1] - self.gamma[u][0])
+            #outAsymGammaU = (self.gamma[u][0] - self.gamma[u][1])
             for x in (self.gamma[u][1] | self.gamma[u][0]):
                 #print(x)
                 self.blocked[x] += 1
@@ -476,15 +476,15 @@ class Digraph(object):
                     self.blocked[x] -= 1
         return self.circuitsList
 
-    def _ccVisit(self,p,u,Odd=False,Comments=False,Debug=True):
+    def _ccVisit(self,p,u,Odd=False,Comments=False,Debug=False):
         """ p.15 """
         ut = p[-1]
         u1 = p[0]
         inAsymGammaUt = self.gamma[ut][1] - self.gamma[ut][0]
-        outAsymGammaUt = self.gamma[ut][0] - self.gamma[ut][1]
+        gammaUt = self.gamma[ut][0] | self.gamma[ut][1]
         if Debug:
-            print(inAsymGammaUt,ut,outAsymGammaUt)
-        for x in (inAsymGammaUt | outAsymGammaUt):
+            print(self.gamma[ut][1],ut,self.gamma[ut][0])
+        for x in gammaUt:
             self.blocked[x] += 1
 
         for v in inAsymGammaUt:
@@ -514,7 +514,7 @@ class Digraph(object):
                 ##         self.blocked[x] -= 1
                 ##     self._ccVisit(p,u,Odd=Odd,Comments=Comments)
                 elif self.relation[u1][v] <= self.valuationdomain['med'] and\
-                   self.relation[v][u1] <= self.valuationdomain['med']:
+                    self.relation[v][u1] <= self.valuationdomain['med'] :
                     if Debug:
                         print('continue with ', p1)
                     self._ccVisit(p1,u,Odd=Odd,Comments=Comments)
@@ -522,7 +522,7 @@ class Digraph(object):
                     #if self.blocked[x] > 0:
                     #    self.blocked[x] -= 1
                     
-        for x in (inAsymGammaUt | outAsymGammaUt):
+        for x in (gammaUt):
             if self.blocked[x] > 0:
                 self.blocked[x] -= 1
 
@@ -11517,27 +11517,29 @@ if __name__ == "__main__":
         print('*-------- Testing classes and methods -------')
 
         from time import time
-        g = GridDigraph(4,4,hasMedianSplitOrientation=True)
         #g = RandomTournament(order=5,seed=1)
         #g = RandomValuationDigraph(seed=1)
         #g.exportGraphViz()
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
-        for s in range(1,100):
+        for s in range(1,2):
             print(s)
-            t1 = RandomCBPerformanceTableau(numberOfActions=20,seed=138+s)
-            g = BipolarOutrankingDigraph(t1,Normalized=True)
+            #t1 = RandomPerformanceTableau(numberOfActions=20,seed=s)
+            #g = BipolarOutrankingDigraph(t1,Normalized=True)
+            #g = RandomDigraph(order=20,seed=s)
+            #g = RandomTournament(order=25,seed=s)
+            g = GridDigraph(30,30,hasMedianSplitOrientation=False)
             t0 = time();print(len(g._computeChordlessCircuits(Odd=False,
-                                                              Comments=True)));print(time()-t0)
-            g.showChordlessCircuits()
+                                                              Comments=False)));print(time()-t0)
+            #g.showChordlessCircuits()
             new = len(g.circuitsList)
             t0 = time();print(len(g.computeChordlessCircuits(Comments=False)));print(time()-t0)
-            g.showChordlessCircuits()
- #           g.showRelationTable(actionsSubset= ['a20', 'a07', 'a11', 'a01', 'a05'])
+            #g.showChordlessCircuits()
+            #g.showRelationTable(actionsSubset=['a05', 'a13', 'a17', 'a01', 'a08'])
             old = len(g.circuitsList)
-            if new != old:
-                print(s,new,old)
-                break
+            #if new != old:
+            #    print(s,new,old)
+            #    break
             
         #print(g.circuits)
         #from csv import reader
