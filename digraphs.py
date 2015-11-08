@@ -411,7 +411,7 @@ class Digraph(object):
     
     def _triplets(self,Comments=False,Debug=False):
         """ p.15 """
-        from itertools import product
+        Med = self.valuationdomain['med']
         tG = []
         self.circuitsList = []
         for u in self.actions:
@@ -420,27 +420,20 @@ class Digraph(object):
             for x in outAsymGammaU:
                 for y in inAsymGammaU:
                     if x != y:
-##                    print(u,self.labelling[u],
-##                          x,self.labelling[x],
-##                          y,self.labelling[y])
-##                    if self.labelling[u] < self.labelling[x] and \
-##                       self.labelling[x] < self.labelling[y]:
                         if str(u) < str(x) and str(u) < str(y):
 ##                            if Debug:
 ##                                print('x,u,y',x,u,y)
-                            if self.relation[y][x] <= self.valuationdomain['med'] and\
-                               self.relation[x][y] <= self.valuationdomain['med']:
+                            if self.relation[y][x] <= Med and\
+                               self.relation[x][y] <= Med:
                                 if Comments:
                                     print('Initial triplet: ',x,u,y)
                                 tG.append((x,u,y))
-                            elif self.relation[x][y] > self.valuationdomain['med'] and\
-                              self.relation[y][x] <= self.valuationdomain['med']:
+                            elif self.relation[x][y] > Med and\
+                              self.relation[y][x] <= Med:
                                 circ = [y,u,x]
                                 if Comments:
                                     print('Circuit certificate:', circ)
                                 self.circuitsList.append((circ,frozenset(circ)))
-        #self.tG = tG
-        #self.circuits = circuits
         return tG
 
     def _computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
@@ -450,12 +443,14 @@ class Digraph(object):
         holding a possibly empty list tuples with at position 0 the
         list of adjacent actions of the circuit and at position 1
         the set of actions in the stored circuit.
-        Inspired by Dias, Castonguay, Longo, Jradi, Algorithmica (forthcoming).
+        Inspired by Dias, Castonguay, Longo, Jradi, Algorithmica (2015).
+
+        Returns a possibly empty list of tuples (circuit,frozenset(circuit)).
+
+        If Odd == True, only circuits of odd length are retained in the result. 
         """
 
-##        labelling = self._degreeLabelling()
         tG = self._triplets(Comments=Comments)
-        #self.circuits=[]
         if Comments:
             print('There are %d starting triplets !' % len(tG) )
         self.blocked = {}
@@ -477,6 +472,7 @@ class Digraph(object):
 
     def _ccVisit(self,p,u,Odd=False,Comments=False,Debug=False):
         """ p.15 """
+        Med = self.valuationdomain['med']
         ut = p[-1]
         u1 = p[0]
         inAsymGammaUt = self.gamma[ut][1] - self.gamma[ut][0]
@@ -491,8 +487,8 @@ class Digraph(object):
                 p1 = p + tuple([v])
 ##                if Debug:
 ##                    print(p1)
-                if self.relation[u1][v] > self.valuationdomain['med'] and\
-                   self.relation[v][u1] <= self.valuationdomain['med']:
+                if self.relation[u1][v] > Med and\
+                   self.relation[v][u1] <= Med:
                     if Odd:
                         if (len(p1) % 2) != 1:
                             OddFlag=False
@@ -505,29 +501,19 @@ class Digraph(object):
                         if Comments:
                             print('circuit certificate: ',circ)
                         self.circuitsList.append((circ,frozenset(circ)))
-                ## elif self.relation[v][u] > self.valuationdomain['med'] or\
-                ##   self.relation[u][v] > self.valuationdomain['med']:
-                ##     print('1 continue with ',p)
-                ##     for x in (inAsymGammaUt | outAsymGammaUt):
-                ##     #if self.blocked[x] > 0:
-                ##         self.blocked[x] -= 1
-                ##     self._ccVisit(p,u,Odd=Odd,Comments=Comments)
-                elif self.relation[u1][v] <= self.valuationdomain['med'] and\
-                    self.relation[v][u1] <= self.valuationdomain['med'] :
+
+                elif self.relation[u1][v] <= Med and\
+                    self.relation[v][u1] <= Med :
 ##                    if Debug:
 ##                        print('continue with ', p1)
                     self._ccVisit(p1,u,Odd=Odd,Comments=Comments)
-                    #for x in (inAsymGammaUt | outAsymGammaUt):
-                    #if self.blocked[x] > 0:
-                    #    self.blocked[x] -= 1
                     
         for x in (gammaUt):
             if self.blocked[x] > 0:
                 self.blocked[x] -= 1
 
         return
-        
-            
+          
 #----------------------------------------
 
 
@@ -11521,14 +11507,14 @@ if __name__ == "__main__":
         #g.exportGraphViz()
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
-        with open('res.csv','w') as fo:
+        with open('resRT.csv','w') as fo:
             fo.write('"card","tnew","told"\n')
-            for s in range(100,1000):
+            for s in range(1000):
                 print(s)
-                t1 = RandomCBPerformanceTableau(numberOfActions=30,seed=s)
-                g = BipolarOutrankingDigraph(t1,Normalized=True)
+                #t1 = Random3ObjectivesPerformanceTableau(numberOfActions=30,seed=s)
+                #g = BipolarOutrankingDigraph(t1,Normalized=True)
                 #g = RandomDigraph(order=20,seed=s)
-                #g = RandomTournament(order=25,seed=s)
+                g = RandomTournament(order=25,seed=s)
                 #g = GridDigraph(30,30,hasMedianSplitOrientation=False)
                 t0 = time()
                 print(len(g._computeChordlessCircuits(Odd=False,Comments=False)))
@@ -11537,7 +11523,7 @@ if __name__ == "__main__":
                 #g.showChordlessCircuits()
                 new = len(g.circuitsList)
                 t0 = time()
-                print(len(g.computeChordlessCircuits(Comments=False)))
+                print(len(g.computeChordlessCircuits(Odd=False,Comments=False)))
                 told = (time()-t0)
                 #g.showChordlessCircuits()
                 #g.showRelationTable(actionsSubset=['a05', 'a13', 'a17', 'a01', 'a08'])

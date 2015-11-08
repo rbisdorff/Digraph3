@@ -348,7 +348,7 @@ class RandomTournament(Digraph):
         if valuationDomain == None:
             self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
         else:
-            print(valuationDomain)
+            #print(valuationDomain)
             vdMax = Decimal(str(valuationDomain[0]))
             vdMin = Decimal(str(valuationDomain[1]))
             self.valuationdomain = {'min': vdMax, 'max': vdMin}

@@ -145,10 +145,10 @@ class Graph(object):
         self.labelling = labelling
         return labelling
     
-    def _triplets(self):
+    def _triplets(self,Comments=False):
         """ p.15 """
         from itertools import product
-        tG = set()
+        tG = []
         cycles = set()
         for u in self.vertices:
             for x,y in product(self.gamma[u],repeat=2):
@@ -160,37 +160,42 @@ class Graph(object):
 ##                       self.labelling[x] < self.labelling[y]:
                     if u < x and x < y:
                         if self.edges[frozenset([x,y])] < self.valuationDomain['med']:
-##                            print('tG',x,u,y)
-                            tG.add((x,u,y))
-##                        else:
-##                            cycles.add((x,u,y))
-        self.tG = tG
-        self.cycles = cycles
+                            if Comments:
+                                print('inital triple:',x,u,y)
+                            tG.append((x,u,y))
+                        else:
+                            if Comments:
+                                print('3-cycle:',x,u,y)
+                            cycles.add((x,u,y))
+        #self.tG = tG
+        #self.cycles = cycles
         return tG,cycles
 
-    def _chordlessCycles(self):
+    def _chordlessCycles(self,Comments=False):
         """ p.14 """
 ##        labelling = self._degreeLabelling()
-        tG,cycles = self._triplets()
+        triplets,cycles = self._triplets(Comments=Comments)
         self.blocked = {}
         for u in self.vertices:
             self.blocked[u] = 0
-        while tG != set():
-            p = tG.pop()
+        for p in triplets:
+            if Comments:
+                print('===>>>', p)
             u = p[1]
             for x in self.gamma[u]:
                 self.blocked[x] += 1
-            cycles = self._ccVisit(p,cycles,u)
+            cycles = self._ccVisit(p,cycles,u,Comments=Comments)
             for x in self.gamma[u]:
                 if self.blocked[x] > 0:
                     self.blocked[x] -= 1
         return cycles
 
-    def _ccVisit(self,p,cycles,u):
+    def _ccVisit(self,p,cycles,u,Comments=False):
         """ p.15 """
         ut = p[-1]
         u1 = p[0]
-
+        if Comments:
+            print(p,u1,u,ut)
         for x in self.gamma[ut]:
             self.blocked[x] += 1
 
@@ -198,9 +203,13 @@ class Graph(object):
             if v > u and self.blocked[v] == 1:
                 p1 = p + tuple([v])
                 if self.edges[frozenset([u1,v])] > self.valuationDomain['med']:
+                    if Comments:
+                        print('Cycle certificate: ', p1)
                     cycles.add(p1)
                 else:
-                    cycles = self._ccVisit(p1,cycles,u)
+                    if Comments:
+                        print('comtinue...',p1)
+                    cycles = self._ccVisit(p1,cycles,u,Comments=Comments)
 
         for x in self.gamma[ut]:
             if self.blocked[x] > 0:
@@ -230,7 +239,7 @@ class Graph(object):
                 detectedChordlessCycle = True
                 if Debug:
                     print('Pk, len(Pk)', Pk, len(Pk))
-                if len(Pk) > 3:
+                if len(Pk) > 2:
                     # only cycles of length 4 and more are holes in fact
                     self.xCC.append(Pk)
                     Pk.append(v0)
@@ -2776,12 +2785,13 @@ class MISModel(Graph):
 if __name__ == '__main__':
 
     from time import time
-    g = GridGraph(6,10)
-
-    print(g._degreeLabelling())
-    print(g._triplets())
-    t0 = time();print(len(g._chordlessCycles()));print(time()-t0)
-    #t0 = time();print(len(g.computeChordlessCycles(Comments=False)));print(time()-t0)
+    g = GridGraph(4,4)
+    g = RandomGraph(seed=4)
+    g.exportGraphViz()
+    #print(g._degreeLabelling())
+    #print(g._triplets(Comments=True))
+    t0 = time();print(len(g._chordlessCycles(Comments=True)));print(time()-t0)
+    t0 = time();print(len(g.computeChordlessCycles(Comments=False)));print(time()-t0)
     
     
     #g.save('test')
