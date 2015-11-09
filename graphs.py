@@ -174,6 +174,7 @@ class Graph(object):
 
     def _chordlessCycles(self,Comments=False):
         """ p.14 """
+        #self.visitedChordlessPathsNew = []
         self.degreeLabelling()
         triplets,cycles = self._triplets(Comments=Comments)
         if Comments:
@@ -198,10 +199,11 @@ class Graph(object):
     def _ccVisit(self,p,cycles,u,Comments=False):
         """ p.15 """
         #labelling = self.labelling
+        #self.visitedChordlessPathsNew.append(p)
         ut = p[-1]
         u1 = p[0]
-        if Comments:
-            print(p,u1,u,ut)
+##        if Comments:
+##            print(p,u1,u,ut)
         for x in self.gamma[ut]:
             self.blocked[x] += 1
 
@@ -214,7 +216,7 @@ class Graph(object):
                     cycles.add(p1)
                 else:
                     if Comments:
-                        print('comtinue...',p1)
+                        print('continue ...',p1)
                     cycles = self._ccVisit(p1,cycles,u,Comments=Comments)
 
         for x in self.gamma[ut]:
@@ -237,14 +239,16 @@ class Graph(object):
         detectedChordlessCycle = False
         self.visitedChordlessPaths.add(frozenset(Pk))
         Med = self.valuationDomain['med']
-        e = frozenset([v0,vn])
-        if len(e) > 1:
+        
+        #if len(e) > 1:
+        if v0 != vn:
             # not a reflexive link
+            e = frozenset([v0,vn])
             if self.edges[e] > Med and len(Pk) > 2:
                 # we close the chordless pre cycle here
                 detectedChordlessCycle = True
-                if Debug:
-                    print('Pk, len(Pk)', Pk, len(Pk))
+##                if Debug:
+##                    print('Pk, len(Pk)', Pk, len(Pk))
                 if len(Pk) > 3:
                     # only cycles of length 4 and more are holes in fact
                     self.xCC.append(Pk)
@@ -256,44 +260,45 @@ class Graph(object):
             NBvn = set(self.gamma[vn]) - set(Pk[1:len(Pk)])
             # exterior neighborhood of vn
 
-            if Debug:
-                print('vn, NBvn, Pk, Pk[1:len(Pk)] = ', vn, NBvn, Pk, Pk[1:len(Pk)])
-            while NBvn != set():
+##            if Debug:
+##                print('vn, NBvn, Pk, Pk[1:len(Pk)] = ', vn, NBvn, Pk, Pk[1:len(Pk)])
+            #while NBvn != set():
+            for v in NBvn:
                 # we try in turn all neighbours of vn
-                v = NBvn.pop()
+                #v = NBvn.pop()
                 vCP = set(Pk)
                 vCP.add(v)
                 vCP = frozenset(vCP)
-                if Debug:
-                    print('v,vCP  =', v,vCP)
+##                if Debug:
+##                    print('v,vCP  =', v,vCP)
                 if vCP not in self.visitedChordlessPaths:
                     # test history of paths
                     P = list(Pk)
-                    if Debug:
-                        print('P,P[:-1] = ', P,P[:-1])
+##                    if Debug:
+##                        print('P,P[:-1] = ', P,P[:-1])
                     noChord = True
                     for x in P[:-1]:
-                        if Debug:
-                            print('x = ', x)
+##                        if Debug:
+##                            print('x = ', x)
                         if x != v0:
                             # we avoid the initial vertex
                             # to stay with a chordless precycle
                             ex = frozenset([x,v])
-                            if Debug:
-                                print('x, v, ex = ',x,v,ex)
+##                            if Debug:
+##                                print('x, v, ex = ',x,v,ex)
                             if self.edges[ex] > Med:
                                 # there is a chord
                                 noChord = False
                                 break
                     if noChord:
                         P.append(v)
-                        if Debug:
-                            print('P,v0',P,v0)
+##                        if Debug:
+##                            print('P,v0',P,v0)
                         if self._chordlessPaths(P,v0,Comments,Debug):
                             # we continue with the current chordless precycle
                             detectedChordlessCycle=True
-            if Debug:
-                print('No further chordless precycles from ',vn,' to ',v0)
+##            if Debug:
+##                print('No further chordless precycles from ',vn,' to ',v0)
         return detectedChordlessCycle
 
     def _MISgen(self,S,I):
@@ -1182,24 +1187,27 @@ class CycleGraph(Graph):
 
     """
     def __init__(self,order=5,seed=None,Debug=False):
+        from collections import OrderedDict
         self.name = 'cycleGraph'
         self.order = order
         nd = len(str(order))
-        vertices = dict()
+        vertices = OrderedDict()
         for i in range(order):
             vertexKey = ('v%%0%dd' % nd) % (i+1)
             vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
+        verticesList = [key for key in vertices]
         self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
         Min = self.valuationDomain['min']
         Max = self.valuationDomain['max']
-        edges = dict()
-        verticesList = [v for v in vertices]
-        verticesList.sort()
-        for x in verticesList:
-            for y in verticesList:
-                edgeKey = frozenset([x,y])
-                edges[edgeKey] = Min
+        edges = OrderedDict()
+        #verticesList = [v for v in vertices]
+        #verticesList.sort()
+        for x in vertices:
+            for y in vertices:
+                if x != y:
+                    edgeKey = frozenset([x,y])
+                    edges[edgeKey] = Min
         for i in range(order-1):
             edgeKey = frozenset(verticesList[i:i+2])
             edges[edgeKey] = Max
@@ -2791,13 +2799,13 @@ class MISModel(Graph):
 if __name__ == '__main__':
 
     from time import time
-    g = GridGraph(4,10)
-    #g = RandomGraph(seed=4)
-    g.exportGraphViz()
+    #g = GridGraph(4,4)
+    g = RandomGraph(seed=4)
+    #g.exportGraphViz()
     #print(g._degreeLabelling())
     #print(g._triplets(Comments=True))
     t0 = time();print(len(g._chordlessCycles(Comments=False)));print(time()-t0)
-    t0 = time();print(len(g.computeChordlessCycles(Comments=False)));print(time()-t0)
+    #t0 = time();print(len(g.computeChordlessCycles(Comments=False)));print(time()-t0)
     
     
     #g.save('test')
