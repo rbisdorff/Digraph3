@@ -106,7 +106,7 @@ class Graph(object):
         return new
 
 #-----------Dias/Castonguay/Longo/Jradi--------*
-    def __degreeLabelling(self):
+    def degreeLabelling(self):
         """
         p 14
         """
@@ -116,7 +116,7 @@ class Graph(object):
             degree[v] = len(self.gamma[v])
             color[v] = 'white'
 ##            for u in self.gamma[v]:
-##                degree[v] += 1
+##                degree[v] += 1g
             
         labelling = {}
         for i in range(1,self.order+1):
@@ -127,27 +127,28 @@ class Graph(object):
                     minDegree = degree[x]
             labelling[v] = i
             color[v] = 'black'
-            print(v,i,minDegree)
+            #print(v,i,minDegree)
             for u in self.gamma[v]:
                 if color[u] == 'white':
                     degree[u] -= 1
-        self.degree = degree
-        self.color = color
+        #self.degree = degree
+        #self.color = color
         self.labelling = labelling
         return labelling
 
-    def _degreeLabelling(self):
-        labelling = {}
-        i = 1
-        for v in self.vertices:
-            labelling[v] = i
-            i += 1
-        self.labelling = labelling
-        return labelling
+##    def _degreeLabelling(self):
+##        labelling = {}
+##        i = 1
+##        for v in self.vertices:
+##            labelling[v] = i
+##            i += 1
+##        self.labelling = labelling
+##        return labelling
     
     def _triplets(self,Comments=False):
         """ p.15 """
         from itertools import product
+        labelling = self.labelling
         tG = []
         cycles = set()
         for u in self.vertices:
@@ -156,9 +157,9 @@ class Graph(object):
 ##                    print(u,self.labelling[u],
 ##                          x,self.labelling[x],
 ##                          y,self.labelling[y])
-##                    if self.labelling[u] < self.labelling[x] and \
-##                       self.labelling[x] < self.labelling[y]:
-                    if u < x and x < y:
+                    if labelling[u] < labelling[x] and \
+                       labelling[x] < labelling[y]:
+##                    if u < x and x < y:
                         if self.edges[frozenset([x,y])] < self.valuationDomain['med']:
                             if Comments:
                                 print('inital triple:',x,u,y)
@@ -173,8 +174,12 @@ class Graph(object):
 
     def _chordlessCycles(self,Comments=False):
         """ p.14 """
-##        labelling = self._degreeLabelling()
+        self.degreeLabelling()
         triplets,cycles = self._triplets(Comments=Comments)
+        if Comments:
+            print('# of initial triplets:',len(triplets))
+            print('# of 3-cycles        :',len(cycles))
+            
         self.blocked = {}
         for u in self.vertices:
             self.blocked[u] = 0
@@ -192,6 +197,7 @@ class Graph(object):
 
     def _ccVisit(self,p,cycles,u,Comments=False):
         """ p.15 """
+        #labelling = self.labelling
         ut = p[-1]
         u1 = p[0]
         if Comments:
@@ -200,7 +206,7 @@ class Graph(object):
             self.blocked[x] += 1
 
         for v in self.gamma[ut]:
-            if v > u and self.blocked[v] == 1:
+            if self.labelling[v] > self.labelling[u] and self.blocked[v] == 1:
                 p1 = p + tuple([v])
                 if self.edges[frozenset([u1,v])] > self.valuationDomain['med']:
                     if Comments:
@@ -239,7 +245,7 @@ class Graph(object):
                 detectedChordlessCycle = True
                 if Debug:
                     print('Pk, len(Pk)', Pk, len(Pk))
-                if len(Pk) > 2:
+                if len(Pk) > 3:
                     # only cycles of length 4 and more are holes in fact
                     self.xCC.append(Pk)
                     Pk.append(v0)
@@ -2785,12 +2791,12 @@ class MISModel(Graph):
 if __name__ == '__main__':
 
     from time import time
-    g = GridGraph(4,4)
-    g = RandomGraph(seed=4)
+    g = GridGraph(4,10)
+    #g = RandomGraph(seed=4)
     g.exportGraphViz()
     #print(g._degreeLabelling())
     #print(g._triplets(Comments=True))
-    t0 = time();print(len(g._chordlessCycles(Comments=True)));print(time()-t0)
+    t0 = time();print(len(g._chordlessCycles(Comments=False)));print(time()-t0)
     t0 = time();print(len(g.computeChordlessCycles(Comments=False)));print(time()-t0)
     
     

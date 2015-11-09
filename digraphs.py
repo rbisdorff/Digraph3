@@ -436,7 +436,7 @@ class Digraph(object):
                                 self.circuitsList.append((circ,frozenset(circ)))
         return tG
 
-    def _computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
+    def computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
         """ 
         Renders the set of all chordless odd circuits detected in a digraph.
         Result (possible empty list) stored in <self.circuitsList>
@@ -6034,7 +6034,7 @@ class Digraph(object):
         self.circuitsList = result
         return result
 
-    def computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
+    def _computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
         """
         Renders the set of all chordless odd circuits detected in a digraph.
         Result (possible empty list) stored in <self.circuitsList>
