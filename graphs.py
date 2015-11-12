@@ -185,6 +185,7 @@ class Graph(object):
         for u in self.vertices:
             self.blocked[u] = 0
         for p in triplets:
+            print(p,self.blocked)
             if Comments:
                 print('===>>>', p)
             u = p[1]
@@ -2800,7 +2801,7 @@ if __name__ == '__main__':
 
     from time import time
     #g = GridGraph(4,4)
-    g = RandomGraph(seed=4)
+    g = RandomGraph(order=10,seed=10)
     #g.exportGraphViz()
     #print(g._degreeLabelling())
     #print(g._triplets(Comments=True))

@@ -691,7 +691,8 @@ class BigOutrankingDigraph(BigDigraph):
             with Pool(nbrCores) as proc:   
                 correlations = proc.map(self.computeCriterion2RankingCorrelation,criteriaList)
             if ValuedCorrelation:
-                criteriaCorrelation = [(correlations[i]['correlation']*correlations[i]['determination'],criteriaList[i]) for i in range(len(criteriaList))]
+                criteriaCorrelation = [(correlations[i]['correlation']*\
+                                        correlations[i]['determination'],criteriaList[i]) for i in range(len(criteriaList))]
             else:
                 criteriaCorrelation = [(correlations[i]['correlation'],criteriaList[i]) for i in range(len(criteriaList))]
         else:
