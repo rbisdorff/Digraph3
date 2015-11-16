@@ -172,8 +172,15 @@ class Graph(object):
         #self.cycles = cycles
         return tG,cycles
 
-    def computeChordlessCycles(self,Cycle3=False,Comments=False):
-        """ p.14 """
+    def computeChordlessCycles(self,Cycle3=False,Comments=False,Debug=False):
+        """
+        Renders the set of all chordless cycles observed in a Graph
+        intance. Inspired from Dias, Castonguay, Longo & Jradi,
+        Algorithmica 2015.
+        """
+
+        if Debug:
+            Comments=True
         #self.visitedChordlessPathsNew = []
         self.degreeLabelling()
         triplets,cycles3 = self._triplets(Comments=Comments)
