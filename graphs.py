@@ -172,20 +172,25 @@ class Graph(object):
         #self.cycles = cycles
         return tG,cycles
 
-    def _chordlessCycles(self,Comments=False):
+    def computeChordlessCycles(self,Cycle3=False,Comments=False):
         """ p.14 """
         #self.visitedChordlessPathsNew = []
         self.degreeLabelling()
-        triplets,cycles = self._triplets(Comments=Comments)
+        triplets,cycles3 = self._triplets(Comments=Comments)
         if Comments:
             print('# of initial triplets:',len(triplets))
-            print('# of 3-cycles        :',len(cycles))
+            print('# of 3-cycles        :',len(cycles3))
+        if Cycle3:
+            cycles = cycles3
+        else:
+            cycles = set()
             
         self.blocked = {}
         for u in self.vertices:
             self.blocked[u] = 0
         for p in triplets:
-            print(p,self.blocked)
+            if Comments:
+                print(p,self.blocked)
             if Comments:
                 print('===>>>', p)
             u = p[1]
@@ -229,7 +234,7 @@ class Graph(object):
             
 #----------------------------------------
 
-    def _chordlessPaths(self,Pk,v0,Comments=False,Debug=False):
+    def _chordlessPaths(self,Pk,v0,Cycle3=False,Comments=False,Debug=False):
         """
         recursice chordless precycle (len > 3) construction:
             Pk is the current pre chordless cycle
@@ -240,7 +245,10 @@ class Graph(object):
         detectedChordlessCycle = False
         self.visitedChordlessPaths.add(frozenset(Pk))
         Med = self.valuationDomain['med']
-        
+        if Cycle3:
+            minPreCycleLength = 2
+        else: # only cycles of length 4 and more are holes in fact
+            minPreCycleLength = 3
         #if len(e) > 1:
         if v0 != vn:
             # not a reflexive link
@@ -250,7 +258,7 @@ class Graph(object):
                 detectedChordlessCycle = True
 ##                if Debug:
 ##                    print('Pk, len(Pk)', Pk, len(Pk))
-                if len(Pk) > 3:
+                if len(Pk) > minPreCycleLength:
                     # only cycles of length 4 and more are holes in fact
                     self.xCC.append(Pk)
                     Pk.append(v0)
@@ -295,7 +303,7 @@ class Graph(object):
                         P.append(v)
 ##                        if Debug:
 ##                            print('P,v0',P,v0)
-                        if self._chordlessPaths(P,v0,Comments,Debug):
+                        if self._chordlessPaths(P,v0,Cycle3=Cycle3,Comments=Comments,Debug=Debug):
                             # we continue with the current chordless precycle
                             detectedChordlessCycle=True
 ##            if Debug:
@@ -369,10 +377,10 @@ class Graph(object):
             s = s + [(frozenset([x]),self.gamma[x],indep)]
         return s
 
-    def computeChordlessCycles(self,Comments=True,Debug=False):
+    def _computeChordlessCycles(self,Cycle3=False,Comments=True,Debug=False):
         """
         Renders the set of all chordless cycles observed in a Graph
-        intance.
+        intance. Obsolete home brewed version.
         """
         verticesKeys = [x for x in self.vertices]
         self.visitedChordlessPaths = set()
@@ -380,7 +388,7 @@ class Graph(object):
         for v in verticesKeys:
             P = [v]
             self.xCC = []
-            if self._chordlessPaths(P,v,Comments=Comments,Debug=Debug):
+            if self._chordlessPaths(P,v,Cycle3=Cycle3,Comments=Comments,Debug=Debug):
                 chordlessCycles += self.xCC
         self.chordlessCycles = chordlessCycles
         chordlessCyclesList = [ (x,frozenset(x)) for x in chordlessCycles]
@@ -2801,12 +2809,12 @@ if __name__ == '__main__':
 
     from time import time
     #g = GridGraph(4,4)
-    g = RandomGraph(order=10,seed=10)
+    g = RandomGraph(order=30,seed=10)
     #g.exportGraphViz()
     #print(g._degreeLabelling())
     #print(g._triplets(Comments=True))
-    t0 = time();print(len(g._chordlessCycles(Comments=False)));print(time()-t0)
-    #t0 = time();print(len(g.computeChordlessCycles(Comments=False)));print(time()-t0)
+    t0 = time();print(len(g._computeChordlessCycles(Cycle3=True,Comments=False)));print(time()-t0)
+    t0 = time();print(len(g.computeChordlessCycles(Cycle3=True,Comments=False)));print(time()-t0)
     
     
     #g.save('test')
