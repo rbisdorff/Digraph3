@@ -11659,7 +11659,7 @@ if __name__ == "__main__":
                 #g.showChordlessCircuits()
                 new = len(g.circuitsList)
                 t0 = time()
-                print(len(g._computeChordlessCircuits(Odd=True,Comments=False)))
+                print(len(g.computeChordlessCircuits(Odd=True,Comments=False)))
                 told = (time()-t0)
                 #g.showChordlessCircuits()
                 #g.showRelationTable(actionsSubset=['a05', 'a13', 'a17', 'a01', 'a08'])

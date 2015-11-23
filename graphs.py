@@ -172,6 +172,137 @@ class Graph(object):
         #self.cycles = cycles
         return tG,cycles
 
+##    def _computeChordlessCyclesMP(self,Odd=False,\
+##                                   Threading=False,nbrOfCPUs=None,\
+##                                   Comments=False,Debug=False):
+##        """ 
+##        Multiprocessing version of computeChordlessCycles().
+##        
+##        Renders the set of all chordless odd cycless detected in an undirrected  graph.
+##        Result (possible empty list) stored in <self.cyclesList>
+##        holding a possibly empty list tuples with at position 0 the
+##        list of adjacent actions of the circuit and at position 1
+##        the set of actions in the stored circuit.
+##        Inspired by Dias, Castonguay, Longo, Jradi, Algorithmica (2015).
+##
+##        Returns a possibly empty list of tuples (cycle,frozenset(cycle)).
+##
+##        If Odd == True, only cycless of odd length are retained in the result. 
+##        """
+##
+##        tG,self.cyclesList = self._triplets(Comments=Comments)
+##        if Comments:
+##            print('There are %d starting triplets !' % len(tG) )
+##        self.blocked = {}
+##        if Threading:
+##            self.Odd = Odd
+##            self.Comments = Comments
+##            from multiprocessing import Pool
+##            from os import cpu_count
+##            if nbrOfCPUs == None:
+##                nbrOfCPUs= cpu_count()
+##            with Pool(nbrOfCPUs) as proc:   
+##                cycless = proc.map(self._computeChordlessPathsFromInitialTriplet,tG)
+##                #print(circuits)
+##            for i in range(len(tG)):
+##                if Debug:
+##                    print(i,cycles[i])
+##                if cycles[i] != []:
+##                    for c in cycles[i]:
+##                        #print(circ)
+##                        self.cyclesList.append(c)
+##        else:
+##            for p in tG:
+##                u = p[1]
+####                if Debug:
+####                    print('===>>>',p,u)
+##                gammaU = (self.gamma[u][1] | self.gamma[u][0])
+##                for x in gammaU:
+##                    #print(x)
+##                    self.blocked[x] += 1
+##                self.cyclesList.append(self._ccVisit(p,u,
+##                                                  Odd=Odd,
+##                                                  Comments=Comments))
+##                for x in gammaU:
+##                    if self.blocked[x] > 0:
+##                        self.blocked[x] -= 1
+##        if Debug:
+##            print(self.cyclessList)
+##        return self.cyclessList
+##
+##    def _computeChordlessPathsFromInitialTriplet(self,p,Debug=False):
+##        if self.Comments:
+##            print('===>> thread : ',p)
+##        u = p[1]
+##        blocked = {}
+##        for x in self.actions:
+##            blocked[x] = 0
+##        circuits = []
+##        gammaU = (self.gamma[u][1] | self.gamma[u][0])
+##        for x in gammaU:
+##            blocked[x] += 1
+##        cycless,blocked = self._ccVisitMP(cycless,blocked,p,u,Odd=self.Odd,Comments=self.Comments)
+##        for x in gammaU:
+##            if blocked[x] > 0:
+##                blocked[x] -= 1
+##        if self.Comments:
+##            print(p,cycless)
+##        for x in self.actions:
+##            if blocked[x] > 1:
+##                blocked[x] = 0
+##        if Debug:
+##            print(p,'return',c<cless)
+##        return cycless
+##
+##    def _ccVisitMP(self,cyless,blocked,p,u,
+##                   Odd=False,Comments=False,Debug=False):
+##        """ p.15 """
+##        Med = self.valuationdomain['med']
+##        ut = p[-1]
+##        u1 = p[0]
+##        inAsymGammaUt = self.gamma[ut][1] - self.gamma[ut][0]
+##        gammaUt = self.gamma[ut][0] | self.gamma[ut][1]
+##        if Debug:
+##            print(p,self.gamma[ut][1],ut,self.gamma[ut][0])
+##        for x in gammaUt:
+##            blocked[x] += 1
+##        for v in inAsymGammaUt:
+##            if str(v) > str(u) and blocked[v] == 1:
+##                p1 = p + tuple([v])
+##                if Debug:
+##                    print(p,p1)
+##                if self.relation[u1][v] > Med and\
+##                   self.relation[v][u1] <= Med:
+##                    if Odd:
+##                        if (len(p1) % 2) != 1:
+##                            OddFlag=False
+##                        else:
+##                            OddFlag = True
+##                    else:
+##                        OddFlag = True
+##                    if OddFlag:
+##                        circ = list(reversed(p1))
+##                        if Comments:
+##                            print(p,'cycle certificate: ',circ)
+##                        circuits.append((circ,frozenset(circ)))
+##
+##                elif self.relation[u1][v] <= Med and\
+##                    self.relation[v][u1] <= Med :
+##                    if Debug:
+##                        print(p,'continue with ', p1)
+##                    cycles,blocked = self._ccVisitMP(cycles,blocked,
+##                                                    p1,u,Odd=Odd,
+##                                                    Comments=Comments)
+####                    circuits.append(circuits1)
+##                    if Debug:
+##                        print(p,cycles)
+##        for x in (gammaUt):
+##            if blocked[x] > 0:
+##                blocked[x] -= 1
+##
+##        return cycles,blocked
+
+
     def computeChordlessCycles(self,Cycle3=False,Comments=False,Debug=False):
         """
         Renders the set of all chordless cycles observed in a Graph
