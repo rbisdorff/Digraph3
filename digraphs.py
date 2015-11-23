@@ -436,7 +436,7 @@ class Digraph(object):
                                 self.circuitsList.append((circ,frozenset(circ)))
         return tG
 
-    def _computeChordlessCircuitsMP(self,Odd=False,\
+    def computeChordlessCircuitsMP(self,Odd=False,\
                                    Threading=False,nbrOfCPUs=None,\
                                    Comments=False,Debug=False):
         """ 
