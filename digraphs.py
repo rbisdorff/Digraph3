@@ -457,10 +457,14 @@ class Digraph(object):
         tG = self._triplets(Comments=Comments)
         if Comments:
             print('There are %d starting triplets !' % len(tG) )
-        self.blocked = {}
+        blocked = {}
+        for x in self.actions:
+            blocked[x] = 0
+        self.blocked = blocked
         if Threading:
             self.Odd = Odd
             self.Comments = Comments
+            self.Debug = Debug
             from multiprocessing import Pool
             from os import cpu_count
             if nbrOfCPUs == None:
@@ -484,9 +488,7 @@ class Digraph(object):
                 for x in gammaU:
                     #print(x)
                     self.blocked[x] += 1
-                self.circuitsList.append(self._ccVisit(p,u,
-                                                  Odd=Odd,
-                                                  Comments=Comments))
+                self._ccVisit(p,u,Odd=Odd,Comments=Comments)
                 for x in gammaU:
                     if self.blocked[x] > 0:
                         self.blocked[x] -= 1
@@ -494,10 +496,12 @@ class Digraph(object):
             print(self.circuitsList)
         return self.circuitsList
 
-    def _computeChordlessPathsFromInitialTriplet(self,p,Debug=False):
+    def _computeChordlessPathsFromInitialTriplet(self,p):
         if self.Comments:
             print('===>> thread : ',p)
+        Debug = self.Debug
         u = p[1]
+        #blocked = self.blocked
         blocked = {}
         for x in self.actions:
             blocked[x] = 0
@@ -505,22 +509,23 @@ class Digraph(object):
         gammaU = (self.gamma[u][1] | self.gamma[u][0])
         for x in gammaU:
             blocked[x] += 1
-        circuits,blocked = self._ccVisitMP(circuits,blocked,p,u,Odd=self.Odd,Comments=self.Comments)
+        circuits,blocked = self._ccVisitMP(circuits,blocked,p,u,Odd=self.Odd)
         for x in gammaU:
             if blocked[x] > 0:
                 blocked[x] -= 1
         if self.Comments:
             print(p,circuits)
-        for x in self.actions:
-            if blocked[x] > 1:
-                blocked[x] = 0
+##        for x in self.actions:
+##            blocked[x] = 0
         if Debug:
             print(p,'return',circuits)
         return circuits
 
     def _ccVisitMP(self,circuits,blocked,p,u,
-                   Odd=False,Comments=False,Debug=False):
+                   Odd=False):
         """ p.15 """
+        Comments = self.Comments
+        Debug = self.Debug
         Med = self.valuationdomain['med']
         ut = p[-1]
         u1 = p[0]
@@ -555,8 +560,7 @@ class Digraph(object):
                     if Debug:
                         print(p,'continue with ', p1)
                     circuits,blocked = self._ccVisitMP(circuits,blocked,
-                                                    p1,u,Odd=Odd,
-                                                    Comments=Comments)
+                                                    p1,u,Odd=Odd)
 ##                    circuits.append(circuits1)
                     if Debug:
                         print(p,circuits)
@@ -568,7 +572,7 @@ class Digraph(object):
 
 
 ###################################3333
-    def computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
+    def _computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
         """ 
         Renders the set of all chordless odd circuits detected in a digraph.
         Result (possible empty list) stored in <self.circuitsList>
@@ -6166,7 +6170,7 @@ class Digraph(object):
         self.circuitsList = result
         return result
 
-    def _computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
+    def computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
         """
         Renders the set of all chordless odd circuits detected in a digraph.
         Result (possible empty list) stored in <self.circuitsList>
@@ -11641,33 +11645,39 @@ if __name__ == "__main__":
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
         MP = True
-        with open('resRT.csv','w') as fo:
-            fo.write('"card","tnew","told"\n')
-            for s in range(2,10):
-                print(s)
-                t1 = Random3ObjectivesPerformanceTableau(numberOfActions=100,seed=s)
-                g = BipolarOutrankingDigraph(t1,Normalized=True)
+        with open('resGR.csv','w') as fo:
+            fo.write('"card","tnewMP","tnew","told"\n')
+            for s in range(2,3):
+                print('Simulation: ',s)
+                #t1 = Random3ObjectivesPerformanceTableau(numberOfActions=100,seed=s)
+                #g = BipolarOutrankingDigraph(t1,Normalized=True)
                 #g = RandomDigraph(order=250,seed=s)
                 #g = RandomTournament(order=25,seed=s)
-                #g = GridDigraph(30,30,hasMedianSplitOrientation=False)
+                g = GridDigraph(7,7,hasMedianSplitOrientation=True)
                 t0 = time()
-                print(len(g.computeChordlessCircuitsMP(Odd=True,
+                print(len(g.computeChordlessCircuitsMP(Odd=False,
                                                        Comments=False,
                                                        Threading=MP)))
-                tnew = (time()-t0)
-                     
+                tnewMP = (time()-t0)
+                print(tnewMP)     
                 #g.showChordlessCircuits()
+                t0 = time()
+                print(len(g._computeChordlessCircuits(Odd=False,
+                                                       Comments=False)))
+                tnew = (time()-t0)
+                print(tnew)     
                 new = len(g.circuitsList)
                 t0 = time()
-                print(len(g.computeChordlessCircuits(Odd=True,Comments=False)))
+                print(len(g.computeChordlessCircuits(Odd=False,Comments=False)))
                 told = (time()-t0)
+                print(told)
                 #g.showChordlessCircuits()
                 #g.showRelationTable(actionsSubset=['a05', 'a13', 'a17', 'a01', 'a08'])
                 old = len(g.circuitsList)
                 if new != old:
                     print(s,new,old)
                     break
-                fo.write('%d,%.5f,%.5f\n' %(new,tnew,told))
+                fo.write('%d,%.5f,%.5f,%.5f\n' %(new,tnewMP,tnew,told))
 
             
         #print(g.circuits)
