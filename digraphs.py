@@ -30,6 +30,25 @@ from randomPerfTabs import *
 from decimal import Decimal
 
 #---------- general methods -----------------
+# from High Performance Python M Gorelick & I Ozswald
+# O'Reilly 2014 p.27
+from functools import wraps
+from time import time
+def timefn(fn):
+    """
+    A decorator for automate run time measurements
+    from "High Performance Python" by  M Gorelick & I Ozswald
+    O'Reilly 2014 p.27
+    """
+    @wraps(fn)
+    def measure_time(*args,**kwargs):
+        t1 = time()
+        result = fn(*args,**kwargs)
+        t2 = time()
+        print("@timefn:" + fn.__name__ + " took " + str(t2-t1) + " sec.")
+        return result
+    return measure_time
+
 # generate all permutations from a string or a list
 # From Michael Davies's recipe:
 # http://snippets.dzone.com/posts/show/753
@@ -436,6 +455,7 @@ class Digraph(object):
                                 self.circuitsList.append((circ,frozenset(circ)))
         return tG
 
+    @timefn
     def computeChordlessCircuitsMP(self,Odd=False,\
                                    Threading=False,nbrOfCPUs=None,\
                                    Comments=False,Debug=False):
@@ -11646,14 +11666,14 @@ if __name__ == "__main__":
         from randomPerfTabs import RandomCBPerformanceTableau
         MP = True
         with open('resGR.csv','w') as fo:
-            fo.write('"card","tnewMP","tnew","told"\n')
+            #fo.write('"card","tnewMP","tnew","told"\n')
             for s in range(2,3):
                 print('Simulation: ',s)
                 #t1 = Random3ObjectivesPerformanceTableau(numberOfActions=100,seed=s)
                 #g = BipolarOutrankingDigraph(t1,Normalized=True)
                 #g = RandomDigraph(order=250,seed=s)
                 #g = RandomTournament(order=25,seed=s)
-                g = GridDigraph(7,7,hasMedianSplitOrientation=True)
+                g = GridDigraph(8,8,hasMedianSplitOrientation=True)
                 t0 = time()
                 print(len(g.computeChordlessCircuitsMP(Odd=False,
                                                        Comments=False,
@@ -11677,7 +11697,7 @@ if __name__ == "__main__":
                 if new != old:
                     print(s,new,old)
                     break
-                fo.write('%d,%.5f,%.5f,%.5f\n' %(new,tnewMP,tnew,told))
+                #fo.write('%d,%.5f,%.5f,%.5f\n' %(new,tnewMP,tnew,told))
 
             
         #print(g.circuits)
