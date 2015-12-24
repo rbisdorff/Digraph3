@@ -1171,7 +1171,7 @@ class Graph(object):
         # check vertices' existance
         verticesIds = [x for x in self.vertices]
         if (edge[0] not in verticesIds) or (edge[1] not in verticesIds):
-            self.showShort()
+            #self.showShort()
             print('!!! Error: edge %s not found !!!' % str(edge))
             return         
         # check new edge value
@@ -1622,6 +1622,171 @@ class GridGraph(Graph):
         print('order         : ', self.order)
         print('size          : ', self.size)
 
+#--------------------------
+class SnakeGraph(GridGraph):
+    """
+    Snake graphs S(p/q) are made up of all the integer grid squares between
+    the lower and upper Christofel paths of the rational number p/q, 
+    where p and q are two coprime integers such that
+    0 <= p <= q, i.e. p/q gives an irreducible ratio between 0 and 1.
+
+    S(4/7) snake graph instance::
+    
+        >>> from graphs import SnakeGraph
+        >>> s4_7 = SnakeGraph(p=4,q=7)
+        >>> s4_7.showShort()
+        *---- short description of the snake graph ----*
+        Name             : 'snakeGraph'
+        Rational p/q     : 4/7
+        Christoffel words:
+        Upper word       :  BBABABA
+        Lower word       :  ABABABB
+        >>> s4_7.exportGraphViz('4_7_snake')
+
+    .. image:: 4_7_snake.png
+       :alt: 4/7 snake graph instance
+       :width: 300 px
+       :align: center
+
+    """
+    
+    def __init__(self,p,q):
+        from math import floor, ceil
+        self.name = '%d_%d_snakeGraph' % (p,q)
+        # vertices
+        self.n = q
+        self.m = p
+        vertices = {}
+        gridNodes={}
+        for x in range(q+1):
+            for y in range(p+1):
+                vertex = str(x)+'-'+str(y)
+                gridNodes[vertex]=(x,y)
+                vertices[vertex] = {'name': 'gridnode', 'shortName': vertex}
+        order = len(vertices)
+        self.order = order
+        self.vertices = vertices
+        self.gridNodes = gridNodes
+        # valuation domain
+        Min = Decimal('-1')
+        Med = Decimal('0')
+        Max = Decimal('1')
+        self.valuationDomain = {'min': Min,
+                                'med': Med,
+                                'max': Max}
+        # edges
+        edges = {} # instantiate edges
+        verticesKeys = [x for x in vertices]
+        for x in verticesKeys:
+            for y in verticesKeys:
+                if x != y:
+                    if gridNodes[x][1] == gridNodes[y][1]:
+                        if gridNodes[x][0] == gridNodes[y][0]-1 :
+                            edges[frozenset([x,y])] = Med
+                        elif gridNodes[x][0] == gridNodes[y][0]+1:
+                            edges[frozenset([x,y])] = Med
+                        else:
+                            edges[frozenset([x,y])] = Min
+                    elif gridNodes[x][0] == gridNodes[y][0]:
+                        if gridNodes[x][1] == gridNodes[y][1]-1:
+                            edges[frozenset([x,y])] = Med
+                        elif gridNodes[x][1] == gridNodes[y][1]+1:
+                            edges[frozenset([x,y])] = Med
+                        else:
+                            edges[frozenset([x,y])] = Min
+                    else:
+                        edges[frozenset([x,y])] = Min
+        self.edges = edges
+        # snake lower Christoffel path
+        k = [0 for i in range(q+1)]
+        for i in range(q+1):
+            k[i] = floor((p/q)*i)
+        print(k)
+        for i in range(q):
+            if k[i] == k[i+1]:
+                x = '%d-%d' % (i,k[i])
+                y = '%d-%d' % (i+1,k[i+1])
+                self.setEdgeValue((x,y),Max)
+            else:
+                x = '%d-%d' % (i,k[i])
+                y = '%d-%d' % (i+1,k[i])
+                self.setEdgeValue((x,y),Max)
+                x = '%d-%d' % (i+1,k[i])
+                y = '%d-%d' % (i+1,k[i+1])
+                self.setEdgeValue((x,y),Max)
+        # snake upper  Christoffel path
+        K = [0 for i in range(q+1)]
+        for i in range(q+1):
+            K[i] = ceil((p/q)*i)
+        print(K)
+        for i in range(q):
+            if K[i] == K[i+1]:
+                x = '%d-%d' % (i,K[i])
+                y = '%d-%d' % (i+1,K[i])
+                print(x,y)
+                self.setEdgeValue((x,y),Max)
+            else:
+                x = '%d-%d' % (i,K[i])
+                y = '%d-%d' % (i,K[i+1])
+                print(x,y)
+                self.setEdgeValue((x,y),Max)
+                x = '%d-%d' % (i,K[i+1])
+                y = '%d-%d' % (i+1,K[i+1])
+                print(x,y)
+                self.setEdgeValue((x,y),Max)                
+                    
+        # storing graph instance
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+
+        # ChristoffelWord
+        lcw = ''
+        ucw = ''
+        for i in range(1,q+1):
+            if k[i]-k[i-1] == 0:
+                lcw += 'A'
+            else:
+                lcw += 'B'
+            if K[i]-K[i-1] == 0:
+                ucw += 'A'
+            else:
+                ucw += 'B'
+        self.cw = (lcw,ucw)
+
+    def showShort(self,WithVertices=False):
+        """
+        Show method for SnakeGraph instances.
+        """
+        print('*---- short description of the snake graph ----*')
+        print('Name             : \'%s\'' % (self.name) )
+        print('Rational p/q     : %d/%d' % (self.m,self.n))
+        print('Christoffel words:')
+        print('Upper word       : ',self.cw[1])
+        print('Lower word       : ',self.cw[0])
+        if WithVertices:
+            vKeys = [x for x in self.vertices]
+            vKeys.sort()
+            print('Vertices         : ', vKeys)
+            print('Valuation domain : ', self.valuationDomain)
+            print('Gamma function   : ')
+            for v in vKeys:
+                if self.gamma[v] != set():
+                    print('%s -> %s' % (v, list(self.gamma[v])))
+
+    def __repr__(self):
+        """
+        Show method for SnakeGraph instances.
+        """
+        print('*---- short description of the snake graph ----*')
+        print('Name             : \'%s\'' % (self.name) )
+        print('Rational p/q     : %d/%d' % (self.m,self.n))
+        print('Christoffel words:')
+        print('Upper word       : ',self.cw[1])
+        print('Lower word       : ',self.cw[0])
+        return 'graphs.SnakeGraph(GridGraph) instance'
+        
+
+#---------------------
 class TriangulatedGrid(Graph):
     """
     Specialization of the general Graph class for generating
@@ -2945,14 +3110,20 @@ class MISModel(Graph):
 # --------------testing the module ----
 if __name__ == '__main__':
 
-    from time import time
-    #g = GridGraph(4,4)
-    g = RandomGraph(order=30,seed=10)
-    #g.exportGraphViz()
-    #print(g._degreeLabelling())
-    #print(g._triplets(Comments=True))
-    t0 = time();print(len(g._computeChordlessCycles(Cycle3=True,Comments=False)));print(time()-t0)
-    t0 = time();print(len(g.computeChordlessCycles(Cycle3=True,Comments=False)));print(time()-t0)
+
+        from graphs import SnakeGraph
+        S = SnakeGraph(p=4,q=7)
+        S.showShort()
+        S.exportGraphViz('4_7_snake')
+
+##    from time import time
+##    #g = GridGraph(4,4)
+##    g = RandomGraph(order=30,seed=10)
+##    #g.exportGraphViz()
+##    #print(g._degreeLabelling())
+##    #print(g._triplets(Comments=True))
+##    t0 = time();print(len(g._computeChordlessCycles(Cycle3=True,Comments=False)));print(time()-t0)
+##    t0 = time();print(len(g.computeChordlessCycles(Cycle3=True,Comments=False)));print(time()-t0)
     
     
     #g.save('test')

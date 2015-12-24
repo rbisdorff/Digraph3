@@ -13,6 +13,12 @@ def testGridGraph():
     g = GridGraph(n=4,m=4)
     g.showShort()
 
+def testSnakeGraph():
+    print('==>> Testing SnakeGraph instantiation')
+    s = SnakeGraph(p=4,q=7)
+    s.showShort()
+    s.exportGraphViz('4_7_snake')
+
 def testGraph():
     print('==>> Testing Graph instantiation')
     g = RandomGraph(order=7,edgeProbability=0.5)

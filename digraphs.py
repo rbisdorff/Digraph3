@@ -455,7 +455,7 @@ class Digraph(object):
                                 self.circuitsList.append((circ,frozenset(circ)))
         return tG
 
-    @timefn
+    #@timefn
     def computeChordlessCircuitsMP(self,Odd=False,\
                                    Threading=False,nbrOfCPUs=None,\
                                    Comments=False,Debug=False):
@@ -591,7 +591,8 @@ class Digraph(object):
         return circuits,blocked
 
 
-###################################3333
+###################################
+    #@timefn
     def _computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
         """ 
         Renders the set of all chordless odd circuits detected in a digraph.
@@ -6190,6 +6191,7 @@ class Digraph(object):
         self.circuitsList = result
         return result
 
+    #@timefn
     def computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
         """
         Renders the set of all chordless odd circuits detected in a digraph.
@@ -11664,16 +11666,16 @@ if __name__ == "__main__":
         #g.exportGraphViz()
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
-        MP = True
+        MP = False
         with open('resGR.csv','w') as fo:
             #fo.write('"card","tnewMP","tnew","told"\n')
             for s in range(2,3):
                 print('Simulation: ',s)
-                #t1 = Random3ObjectivesPerformanceTableau(numberOfActions=100,seed=s)
-                #g = BipolarOutrankingDigraph(t1,Normalized=True)
+                t1 = Random3ObjectivesPerformanceTableau(numberOfActions=100,seed=s)
+                g = BipolarOutrankingDigraph(t1,Normalized=True)
                 #g = RandomDigraph(order=250,seed=s)
                 #g = RandomTournament(order=25,seed=s)
-                g = GridDigraph(8,8,hasMedianSplitOrientation=True)
+                #g = GridDigraph(8,8,hasMedianSplitOrientation=True)
                 t0 = time()
                 print(len(g.computeChordlessCircuitsMP(Odd=False,
                                                        Comments=False,
