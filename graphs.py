@@ -1632,8 +1632,8 @@ class SnakeGraph(GridGraph):
     where p and q are two coprime integers such that
     0 <= p <= q, i.e. p/q gives an irreducible ratio between 0 and 1.
     
-    *Reference*: M. Aigner, Markov's Theorem and 100 Yeras of the Uniqueness Conjecture,
-     Springer, 2013, p. 141-149
+    *Reference*: M. Aigner,
+    Markov's Theorem and 100 Years of the Uniqueness Conjecture, Springer, 2013, p. 141-149
 
     S(4/7) snake graph instance::
     
