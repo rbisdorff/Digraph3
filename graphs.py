@@ -1631,6 +1631,9 @@ class SnakeGraph(GridGraph):
     the lower and upper Christofel paths of the rational number p/q, 
     where p and q are two coprime integers such that
     0 <= p <= q, i.e. p/q gives an irreducible ratio between 0 and 1.
+    
+    *Reference*: M. Aigner, Markov's Theorem and 100 Yeras of the Uniqueness Conjecture,
+     Springer, 2013, p. 141-149
 
     S(4/7) snake graph instance::
     
@@ -1643,8 +1646,7 @@ class SnakeGraph(GridGraph):
         Christoffel words:
         Upper word       :  BBABABA
         Lower word       :  ABABABB
-        >>> s4_7.exportGraphViz('4_7_snake',
-        ... lineWidth=3,arcColor='red')
+        >>> s4_7.exportGraphViz('4_7_snake',lineWidth=3,arcColor='red')
 
     .. image:: 4_7_snake.png
        :alt: 4/7 snake graph instance
