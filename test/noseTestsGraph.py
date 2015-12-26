@@ -17,7 +17,7 @@ def testSnakeGraph():
     print('==>> Testing SnakeGraph instantiation')
     s = SnakeGraph(p=4,q=7)
     s.showShort()
-    s.exportGraphViz('4_7_snake')
+    s.exportGraphViz('4_7_snake',lineWidth=3,arcColor="red")
 
 def testGraph():
     print('==>> Testing Graph instantiation')
