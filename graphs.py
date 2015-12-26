@@ -794,7 +794,9 @@ class Graph(object):
                        noSilent=True,
                        graphType='png',graphSize='7,7',
                        withSpanningTree=False,
-                       layout=None):
+                       layout=None,
+                       arcColor='black',
+                       lineWidth=1):
         """
         Exports GraphViz dot file  for graph drawing filtering.
 
@@ -873,7 +875,7 @@ class Graph(object):
         ' [dir=both,style="setlinewidth(3)",color=red, arrowhead=none, arrowtail=none] ;\n'                                          
                         else:
                             arrowFormat = \
-        ' [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;\n'
+        ' [dir=both,style="setlinewidth(%d)",color=%s, arrowhead=none, arrowtail=none] ;\n' % (lineWidth,arcColor)
                         edge0 = edge+'-- n'+str(j+1)+arrowFormat
                         fo.write(edge0)
                     elif edges[frozenset([vertexkeys[i],vertexkeys[j]])] == Med:
@@ -1641,7 +1643,8 @@ class SnakeGraph(GridGraph):
         Christoffel words:
         Upper word       :  BBABABA
         Lower word       :  ABABABB
-        >>> s4_7.exportGraphViz('4_7_snake')
+        >>> s4_7.exportGraphViz('4_7_snake',
+        ... lineWidth=3,arcColor='red')
 
     .. image:: 4_7_snake.png
        :alt: 4/7 snake graph instance
@@ -3112,9 +3115,9 @@ if __name__ == '__main__':
 
 
         from graphs import SnakeGraph
-        S = SnakeGraph(p=4,q=7)
+        S = SnakeGraph(p=3,q=7)
         S.showShort()
-        S.exportGraphViz('4_7_snake')
+        S.exportGraphViz('4_7_snake',lineWidth=3,arcColor="red")
 
 ##    from time import time
 ##    #g = GridGraph(4,4)
