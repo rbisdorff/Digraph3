@@ -3865,6 +3865,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
         # total constructor time
         self.runTimes['totalTime'] = time() - tt
+        if Comments:
+            print(self)
         
     def computeCriterionRelation(self,c,a,b,hasSymmetricThresholds=True):
         """
@@ -9073,7 +9075,7 @@ if __name__ == "__main__":
 ##    criteriaCorrelations = g1.computeMarginalVersusGlobalRankingCorrelations(ranking,Threading=Threading)
 ##    print(time()-t0)
 ##    print(criteriaCorrelations)
-    print(g1)
+##    print(g1)
 ##    print(g2)
     
 ##    t.saveXMCDA2('test')
