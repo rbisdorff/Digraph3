@@ -1487,8 +1487,8 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
             
             if nbrOfCPUs == None:
                 nbrOfCPUs = cpu_count()
-            #if nbrOfThreads == None:
-            nbrOfThreads = nbrOfCPUs-1
+            if nbrOfThreads == None:
+                nbrOfThreads = nbrOfCPUs-1
             nbrOfJobs = nc//nbrOfThreads
             if nbrOfJobs*nbrOfThreads < nc:
                 nbrOfJobs += 1
