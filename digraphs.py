@@ -8378,13 +8378,35 @@ class Digraph(object):
         return rank
 
     def computeArrowRaynaudOrder(self):
+        """
+        renders a linear ordering from worst to best of the actions following Arrow&Raynaud's rule.
+        """
         ranking = self._computeArrowRaynaudRankingDict()
         return list(reversed(ranking))
     
     def computeArrowRaynaudRanking(self):
+        """
+        renders a linear ranking from best to worst of the actions following Arrow&Raynaud's rule.
+        """
         ranking = self._computeArrowRaynaudRankingDict()
         return [x for x in ranking]
 
+    def computeCopelandRanking(self):
+        """
+        renders a linear ranking from best to worst of the actions
+        following Copelands's rule.
+        """
+        gamma = self.gamma
+        copelandScores = []
+        for x in self.actions:
+            copelandScore = len(gamma[x][1]) - len(gamma[x][0])
+            copelandScores.append((copelandScore,x))
+        # reversed sorting with keeping the actions initial ordering
+        # in case of ties
+        copelandScores.sort()
+        copelandRanking = [x[1] for x in copelandScores]
+        self.copelandRanking = copelandRanking
+        return copelandRanking
 
     def computeRankedPairsOrder(self,Cpp=False,Debug=False):
         """
