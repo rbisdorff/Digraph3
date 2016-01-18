@@ -1027,8 +1027,8 @@ class BigOutrankingDigraph(BigDigraph):
                 pass
             print()
 
-    def showComponents(self):
-        BigOutrankingDigraph.showDecomposition(self)
+    def showComponents(self,direction='increasing'):
+        BigOutrankingDigraph.showDecomposition(self,direction=direction)
 
     def showDecomposition(self,direction='decreasing'):
         
@@ -1044,17 +1044,7 @@ class BigOutrankingDigraph(BigDigraph):
             comp = self.components[compKey]
             sg = comp['subGraph']
             actions = [x for x in sg.actions]
-            print('%s. %s-%s : %s' % (compKey,comp['highQtileLimit'],comp['lowQtileLimit'],actions))
-##            if direction == 'decreasing':
-##                if self.sortingParameters['LowerClosed']:
-##                    print('%s. %s-%s : %s' % (compKey,comp['highQtileLimit'],comp['lowQtileLimit'],actions))
-##                else:
-##                    print('%s. %s-%s : %s' % (compKey,comp['highQtileLimit'],comp['lowQtileLimit'],actions))
-##            else:
-##                if self.sortingParameters['LowerClosed']:
-##                    print('%s. %s-%s : %s' % (compKey,comp['highQtileLimit'],comp['lowQtileLimit'],actions))
-##                else:
-##                    print('%s. %s-%s : %s' % (compKey,comp['highQtileLimit'],comp['lowQtileLimit'],actions))
+            print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],actions))
 
     def showRelationTable(self,compKeys=None):
         """
