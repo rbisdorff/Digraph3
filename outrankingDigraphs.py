@@ -234,7 +234,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print('Determinateness   : %.3f' % (corr['determination']))
         if Normalizing:
             self.recodeValuation(origValuationdomain['min'],origValuationdomain['max'])
-        #return criteriaCorrelation
+        return criteriaCorrelation
 
     def computeQuantileSortRelation(self,Debug=False):
         """
