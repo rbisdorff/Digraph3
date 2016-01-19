@@ -1734,7 +1734,7 @@ The performance evaluations of each decision alternative on each criterion are g
         if criteriaList == None:
             from outrankingDigraphs import OutrankingDigraph
             if Correlations:
-                criteriaCorrelations = OutrankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations(
+                criteriaCorrelations = OutrankingDigraph.showMarginalVersusGlobalOutrankingCorrelation(
                     qsr,
                     Threading=Threading,
                     Comments=False)
