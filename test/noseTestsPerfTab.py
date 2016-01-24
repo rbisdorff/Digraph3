@@ -53,6 +53,7 @@ def testRandomPerformanceTableau():
     t = RandomPerformanceTableau(numberOfActions=10,numberOfCriteria=7,commonMode=('normal',50,20))
     t.showAll()
     print(t.computeWeightedAveragePerformances(isNormalized=True,lowValue=0.0,highValue=20.0))
+    t.showPairwiseComparison('a01','a02')
 
 def testNormalizedPerformanceTableau():
     print('*-------- Testing Normalization of Performance Tableaux  -------')
