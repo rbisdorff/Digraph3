@@ -22,6 +22,13 @@ Working with the :code:`digraphs` module
 .. highlight:: python
 	:linenothreshold: 5
 
+Purpose
+.......
+
+The basic idea of these Python3 modules is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the *Algorithmic Decision Theory* course given in the University of Luxembourg Master in Information and Computer Science (MICS). 
+
+The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
+
 Downloading of the Digraph3 resources
 .....................................
 
@@ -40,13 +47,6 @@ Three download options are given:
 3. Or, with a browser access, download and extract the latest distribution tar.gz archive from this page::
 
      http://leopold-loewenheim.uni.lu/Digraph3/dist/
-
-Purpose
-.......
-
-The basic idea of these Python3 modules is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the *Algorithmic Decision Theory* course given in the University of Luxembourg Master in Information and Computer Science (MICS). 
-
-The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
 
 Starting a python3 session
 ..........................
