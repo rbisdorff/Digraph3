@@ -1,8 +1,8 @@
 Technical Reference of the Digraph3 modules
 ===========================================
 :Author: Raymond Bisdorff, University of Luxembourg FSTC/CSC
-:Version: Revision: Python 3.4
-:Copyright: `R. Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2015
+:Version: Revision: Python 3.5
+:Copyright: `R. Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2016
 
 .. _Technical-label:
 
