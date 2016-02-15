@@ -19,7 +19,7 @@
 
 
 \title{Digraph3 Documentation}
-\date{February 02, 2016}
+\date{February 15, 2016}
 \release{3.4-769}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{}
@@ -37,67 +37,67 @@
     \PYG@it{\PYG@bf{\PYG@ff{#1}}}}}}}
 \def\PYG#1#2{\PYG@reset\PYG@toks#1+\relax+\PYG@do{#2}}
 
-\expandafter\def\csname PYG@tok@sr\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.14,0.33,0.53}{##1}}}
-\expandafter\def\csname PYG@tok@vi\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.73,0.38,0.84}{##1}}}
-\expandafter\def\csname PYG@tok@gp\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.78,0.36,0.04}{##1}}}
-\expandafter\def\csname PYG@tok@cs\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.25,0.50,0.56}{##1}}\def\PYG@bc##1{\setlength{\fboxsep}{0pt}\colorbox[rgb]{1.00,0.94,0.94}{\strut ##1}}}
-\expandafter\def\csname PYG@tok@vc\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.73,0.38,0.84}{##1}}}
-\expandafter\def\csname PYG@tok@gr\endcsname{\def\PYG@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
-\expandafter\def\csname PYG@tok@ow\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
-\expandafter\def\csname PYG@tok@err\endcsname{\def\PYG@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
-\expandafter\def\csname PYG@tok@kr\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
-\expandafter\def\csname PYG@tok@gh\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
-\expandafter\def\csname PYG@tok@ni\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.84,0.33,0.22}{##1}}}
-\expandafter\def\csname PYG@tok@nb\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
-\expandafter\def\csname PYG@tok@vg\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.73,0.38,0.84}{##1}}}
-\expandafter\def\csname PYG@tok@nt\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.02,0.16,0.45}{##1}}}
-\expandafter\def\csname PYG@tok@m\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.13,0.50,0.31}{##1}}}
-\expandafter\def\csname PYG@tok@bp\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
-\expandafter\def\csname PYG@tok@il\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.13,0.50,0.31}{##1}}}
 \expandafter\def\csname PYG@tok@ge\endcsname{\let\PYG@it=\textit}
-\expandafter\def\csname PYG@tok@sx\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.78,0.36,0.04}{##1}}}
-\expandafter\def\csname PYG@tok@si\endcsname{\let\PYG@it=\textit\def\PYG@tc##1{\textcolor[rgb]{0.44,0.63,0.82}{##1}}}
-\expandafter\def\csname PYG@tok@nn\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.05,0.52,0.71}{##1}}}
-\expandafter\def\csname PYG@tok@c1\endcsname{\let\PYG@it=\textit\def\PYG@tc##1{\textcolor[rgb]{0.25,0.50,0.56}{##1}}}
-\expandafter\def\csname PYG@tok@gt\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
-\expandafter\def\csname PYG@tok@ss\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.32,0.47,0.09}{##1}}}
-\expandafter\def\csname PYG@tok@sd\endcsname{\let\PYG@it=\textit\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
-\expandafter\def\csname PYG@tok@mo\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.13,0.50,0.31}{##1}}}
-\expandafter\def\csname PYG@tok@nv\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.73,0.38,0.84}{##1}}}
-\expandafter\def\csname PYG@tok@c\endcsname{\let\PYG@it=\textit\def\PYG@tc##1{\textcolor[rgb]{0.25,0.50,0.56}{##1}}}
-\expandafter\def\csname PYG@tok@mb\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.13,0.50,0.31}{##1}}}
-\expandafter\def\csname PYG@tok@k\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
-\expandafter\def\csname PYG@tok@gd\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
-\expandafter\def\csname PYG@tok@kp\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
-\expandafter\def\csname PYG@tok@sh\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
 \expandafter\def\csname PYG@tok@na\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
-\expandafter\def\csname PYG@tok@nd\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.33,0.33,0.33}{##1}}}
-\expandafter\def\csname PYG@tok@gi\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
-\expandafter\def\csname PYG@tok@nl\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.00,0.13,0.44}{##1}}}
-\expandafter\def\csname PYG@tok@kd\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
-\expandafter\def\csname PYG@tok@kc\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
-\expandafter\def\csname PYG@tok@sb\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
-\expandafter\def\csname PYG@tok@nf\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.02,0.16,0.49}{##1}}}
-\expandafter\def\csname PYG@tok@go\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.20,0.20,0.20}{##1}}}
-\expandafter\def\csname PYG@tok@s\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
-\expandafter\def\csname PYG@tok@no\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.38,0.68,0.84}{##1}}}
-\expandafter\def\csname PYG@tok@kn\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
-\expandafter\def\csname PYG@tok@kt\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.56,0.13,0.00}{##1}}}
-\expandafter\def\csname PYG@tok@gu\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
-\expandafter\def\csname PYG@tok@cp\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
-\expandafter\def\csname PYG@tok@w\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
-\expandafter\def\csname PYG@tok@se\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
-\expandafter\def\csname PYG@tok@mf\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.13,0.50,0.31}{##1}}}
-\expandafter\def\csname PYG@tok@sc\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
-\expandafter\def\csname PYG@tok@cm\endcsname{\let\PYG@it=\textit\def\PYG@tc##1{\textcolor[rgb]{0.25,0.50,0.56}{##1}}}
-\expandafter\def\csname PYG@tok@s2\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
-\expandafter\def\csname PYG@tok@ne\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
-\expandafter\def\csname PYG@tok@nc\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.05,0.52,0.71}{##1}}}
-\expandafter\def\csname PYG@tok@s1\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
 \expandafter\def\csname PYG@tok@mi\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.13,0.50,0.31}{##1}}}
-\expandafter\def\csname PYG@tok@mh\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.13,0.50,0.31}{##1}}}
+\expandafter\def\csname PYG@tok@s2\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
+\expandafter\def\csname PYG@tok@sb\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
+\expandafter\def\csname PYG@tok@sd\endcsname{\let\PYG@it=\textit\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
+\expandafter\def\csname PYG@tok@c\endcsname{\let\PYG@it=\textit\def\PYG@tc##1{\textcolor[rgb]{0.25,0.50,0.56}{##1}}}
+\expandafter\def\csname PYG@tok@si\endcsname{\let\PYG@it=\textit\def\PYG@tc##1{\textcolor[rgb]{0.44,0.63,0.82}{##1}}}
+\expandafter\def\csname PYG@tok@c1\endcsname{\let\PYG@it=\textit\def\PYG@tc##1{\textcolor[rgb]{0.25,0.50,0.56}{##1}}}
+\expandafter\def\csname PYG@tok@gr\endcsname{\def\PYG@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PYG@tok@gu\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PYG@tok@kd\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
+\expandafter\def\csname PYG@tok@nf\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.02,0.16,0.49}{##1}}}
+\expandafter\def\csname PYG@tok@kr\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
+\expandafter\def\csname PYG@tok@mo\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.13,0.50,0.31}{##1}}}
 \expandafter\def\csname PYG@tok@gs\endcsname{\let\PYG@bf=\textbf}
+\expandafter\def\csname PYG@tok@nd\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.33,0.33,0.33}{##1}}}
+\expandafter\def\csname PYG@tok@go\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.20,0.20,0.20}{##1}}}
+\expandafter\def\csname PYG@tok@mf\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.13,0.50,0.31}{##1}}}
+\expandafter\def\csname PYG@tok@gp\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.78,0.36,0.04}{##1}}}
+\expandafter\def\csname PYG@tok@sh\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
+\expandafter\def\csname PYG@tok@se\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
+\expandafter\def\csname PYG@tok@kp\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
+\expandafter\def\csname PYG@tok@bp\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
 \expandafter\def\csname PYG@tok@o\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PYG@tok@no\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.38,0.68,0.84}{##1}}}
+\expandafter\def\csname PYG@tok@cs\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.25,0.50,0.56}{##1}}\def\PYG@bc##1{\setlength{\fboxsep}{0pt}\colorbox[rgb]{1.00,0.94,0.94}{\strut ##1}}}
+\expandafter\def\csname PYG@tok@ow\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
+\expandafter\def\csname PYG@tok@sx\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.78,0.36,0.04}{##1}}}
+\expandafter\def\csname PYG@tok@vc\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.73,0.38,0.84}{##1}}}
+\expandafter\def\csname PYG@tok@s1\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
+\expandafter\def\csname PYG@tok@cm\endcsname{\let\PYG@it=\textit\def\PYG@tc##1{\textcolor[rgb]{0.25,0.50,0.56}{##1}}}
+\expandafter\def\csname PYG@tok@vi\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.73,0.38,0.84}{##1}}}
+\expandafter\def\csname PYG@tok@nv\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.73,0.38,0.84}{##1}}}
+\expandafter\def\csname PYG@tok@cp\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
+\expandafter\def\csname PYG@tok@vg\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.73,0.38,0.84}{##1}}}
+\expandafter\def\csname PYG@tok@kc\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
+\expandafter\def\csname PYG@tok@w\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PYG@tok@err\endcsname{\def\PYG@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PYG@tok@kt\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.56,0.13,0.00}{##1}}}
+\expandafter\def\csname PYG@tok@m\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.13,0.50,0.31}{##1}}}
+\expandafter\def\csname PYG@tok@gi\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PYG@tok@ni\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.84,0.33,0.22}{##1}}}
+\expandafter\def\csname PYG@tok@kn\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
+\expandafter\def\csname PYG@tok@mh\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.13,0.50,0.31}{##1}}}
+\expandafter\def\csname PYG@tok@nc\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.05,0.52,0.71}{##1}}}
+\expandafter\def\csname PYG@tok@k\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
+\expandafter\def\csname PYG@tok@ne\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
+\expandafter\def\csname PYG@tok@nt\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.02,0.16,0.45}{##1}}}
+\expandafter\def\csname PYG@tok@mb\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.13,0.50,0.31}{##1}}}
+\expandafter\def\csname PYG@tok@s\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
+\expandafter\def\csname PYG@tok@nn\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.05,0.52,0.71}{##1}}}
+\expandafter\def\csname PYG@tok@nl\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.00,0.13,0.44}{##1}}}
+\expandafter\def\csname PYG@tok@il\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.13,0.50,0.31}{##1}}}
+\expandafter\def\csname PYG@tok@gd\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PYG@tok@sr\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.14,0.33,0.53}{##1}}}
+\expandafter\def\csname PYG@tok@nb\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.00,0.44,0.13}{##1}}}
+\expandafter\def\csname PYG@tok@gt\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PYG@tok@sc\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.25,0.44,0.63}{##1}}}
+\expandafter\def\csname PYG@tok@gh\endcsname{\let\PYG@bf=\textbf\def\PYG@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PYG@tok@ss\endcsname{\def\PYG@tc##1{\textcolor[rgb]{0.32,0.47,0.09}{##1}}}
 
 \def\PYGZbs{\char`\\}
 \def\PYGZus{\char`\_}
@@ -142,7 +142,7 @@ Revision: Python 3.5
 
 
 \chapter{Introduction}
-\label{index:introduction}\label{index:documentation-of-the-digraph3-resources}\label{index:introduction-label}
+\label{index:introduction-label}\label{index:documentation-of-the-digraph3-resources}\label{index:introduction}
 This documentation describes the Python3 resources for implementing decision aid algorithms in the context of a bipolarly-valued outranking approach (\footnote{\begin{enumerate}
 \setcounter{enumi}{17}
 \item {} 
@@ -161,7 +161,7 @@ Bisdorff (2013) ``On Polarizing Outranking Relations with Large Performance Diff
 
 
 \section{Tutorials of the Digraph3 resources}
-\label{tutorial:tutorial-label}\label{tutorial::doc}\label{tutorial:tutorials-of-the-digraph3-resources}\begin{quote}\begin{description}
+\label{tutorial::doc}\label{tutorial:tutorial-label}\label{tutorial:tutorials-of-the-digraph3-resources}\begin{quote}\begin{description}
 \item[{Author}] \leavevmode
 Raymond Bisdorff, University of Luxembourg FSTC/CSC
 
@@ -212,7 +212,7 @@ Revision: Python 3.5
 
 
 \subsection{Working with the \texttt{digraphs} module}
-\label{tutorial:digraphs-tutorial-label}\label{tutorial:working-with-the-digraphs-module}\setbox0\vbox{
+\label{tutorial:working-with-the-digraphs-module}\label{tutorial:digraphs-tutorial-label}\setbox0\vbox{
 \begin{minipage}{0.95\linewidth}
 \begin{itemize}
 \item {} 
@@ -427,7 +427,7 @@ Back to {\hyperref[tutorial:tutorial-label]{\emph{\DUspan{}{Tutorials of the Dig
 
 
 \subsection{Manipulating \texttt{Digraph} objects}
-\label{tutorial:manipulating-digraph-objects}\label{tutorial:digraph-tools-label}\setbox0\vbox{
+\label{tutorial:digraph-tools-label}\label{tutorial:manipulating-digraph-objects}\setbox0\vbox{
 \begin{minipage}{0.95\linewidth}
 \begin{itemize}
 \item {} 
@@ -1295,7 +1295,7 @@ Back to {\hyperref[tutorial:tutorial-label]{\emph{\DUspan{}{Tutorials of the Dig
 
 
 \subsection{Computing the winner of an election}
-\label{tutorial:linearvoting-label}\label{tutorial:computing-the-winner-of-an-election}\setbox0\vbox{
+\label{tutorial:computing-the-winner-of-an-election}\label{tutorial:linearvoting-label}\setbox0\vbox{
 \begin{minipage}{0.95\linewidth}
 \begin{itemize}
 \item {} 
@@ -3497,7 +3497,7 @@ Tutorial
 \label{tutorial:footnotes}
 
 \section{Technical Reference of the Digraph3 modules}
-\label{techDoc:technical-reference-of-the-digraph3-modules}\label{techDoc::doc}\begin{quote}\begin{description}
+\label{techDoc::doc}\label{techDoc:technical-reference-of-the-digraph3-modules}\begin{quote}\begin{description}
 \item[{Author}] \leavevmode
 Raymond Bisdorff, University of Luxembourg FSTC/CSC
 
@@ -3511,7 +3511,7 @@ Revision: Python 3.5
 
 
 \subsection{Introduction}
-\label{techDoc:introduction}\label{techDoc:technical-label}
+\label{techDoc:technical-label}\label{techDoc:introduction}
 \textbf{Dowloading the Digraph3 ressources}
 
 Three download options are given:
@@ -3665,7 +3665,7 @@ fileName (without the extension .csv).
 \index{CirculantDigraph (class in digraphs)}
 
 \begin{fulllineitems}
-\phantomsection\label{techDoc:digraphs.CirculantDigraph}\pysiglinewithargsret{\strong{class }\code{digraphs.}\bfcode{CirculantDigraph}}{\emph{order=7, valuationdomain=\{`min': Decimal(`-1.0'), `max': Decimal(`1.0')\}, circulants={[}-1, 1{]}}}{}
+\phantomsection\label{techDoc:digraphs.CirculantDigraph}\pysiglinewithargsret{\strong{class }\code{digraphs.}\bfcode{CirculantDigraph}}{\emph{order=7, valuationdomain=\{`max': Decimal(`1.0'), `min': Decimal(`-1.0')\}, circulants={[}-1, 1{]}}}{}
 Bases: {\hyperref[techDoc:digraphs.Digraph]{\emph{\code{digraphs.Digraph}}}}
 \begin{description}
 \item[{Parameters:}] \leavevmode
@@ -4951,7 +4951,7 @@ Renders the (by default non-oriented) diameter of the digraph instance
 \index{digraph2Graph() (digraphs.Digraph method)}
 
 \begin{fulllineitems}
-\phantomsection\label{techDoc:digraphs.Digraph.digraph2Graph}\pysiglinewithargsret{\bfcode{digraph2Graph}}{\emph{valuationDomain=\{`med': 0}, \emph{`min': -1}, \emph{`max': 1\}}, \emph{Debug=False}, \emph{conjunctiveConversion=True}}{}
+\phantomsection\label{techDoc:digraphs.Digraph.digraph2Graph}\pysiglinewithargsret{\bfcode{digraph2Graph}}{\emph{valuationDomain=\{`max': 1}, \emph{`med': 0}, \emph{`min': -1\}}, \emph{Debug=False}, \emph{conjunctiveConversion=True}}{}
 Convert a Digraph instance to a Graph instance.
 
 \end{fulllineitems}
@@ -6155,7 +6155,7 @@ operator = ``o-min'' \textbar{} ``o-max'' (epistemic conjunctive or dijunctive f
 \index{GridDigraph (class in digraphs)}
 
 \begin{fulllineitems}
-\phantomsection\label{techDoc:digraphs.GridDigraph}\pysiglinewithargsret{\strong{class }\code{digraphs.}\bfcode{GridDigraph}}{\emph{n=5}, \emph{m=5}, \emph{valuationdomain=\{`min': -1.0}, \emph{`max': 1.0\}}, \emph{hasRandomOrientation=False}, \emph{hasMedianSplitOrientation=False}}{}
+\phantomsection\label{techDoc:digraphs.GridDigraph}\pysiglinewithargsret{\strong{class }\code{digraphs.}\bfcode{GridDigraph}}{\emph{n=5}, \emph{m=5}, \emph{valuationdomain=\{`max': 1.0}, \emph{`min': -1.0\}}, \emph{hasRandomOrientation=False}, \emph{hasMedianSplitOrientation=False}}{}
 Bases: {\hyperref[techDoc:digraphs.Digraph]{\emph{\code{digraphs.Digraph}}}}
 \begin{description}
 \item[{Parameters:}] \leavevmode
@@ -6196,7 +6196,7 @@ temporary empty graphs of order 5 in \{-1,0,1\}.
 \index{KneserDigraph (class in digraphs)}
 
 \begin{fulllineitems}
-\phantomsection\label{techDoc:digraphs.KneserDigraph}\pysiglinewithargsret{\strong{class }\code{digraphs.}\bfcode{KneserDigraph}}{\emph{n=5}, \emph{j=2}, \emph{valuationdomain=\{`min': -1.0}, \emph{`max': 1.0\}}}{}
+\phantomsection\label{techDoc:digraphs.KneserDigraph}\pysiglinewithargsret{\strong{class }\code{digraphs.}\bfcode{KneserDigraph}}{\emph{n=5}, \emph{j=2}, \emph{valuationdomain=\{`max': 1.0}, \emph{`min': -1.0\}}}{}
 Bases: {\hyperref[techDoc:digraphs.Digraph]{\emph{\code{digraphs.Digraph}}}}
 \begin{description}
 \item[{Parameters:}] \leavevmode
@@ -6519,7 +6519,7 @@ Back to the {\hyperref[techDoc:technical-label]{\emph{\DUspan{}{Introduction}}}}
 
 
 \subsection{graphs module}
-\label{techDoc:graphs-module}\label{techDoc:graphs-label}
+\label{techDoc:graphs-label}\label{techDoc:graphs-module}
 A tutorial with coding examples is available here: {\hyperref[tutorial:graphs-tutorial-label]{\emph{\DUspan{}{Working with the graphs module}}}}
 \phantomsection\label{techDoc:module-graphs}\index{graphs (module)}\index{BestDeterminedSpanningForest (class in graphs)}
 
@@ -7535,7 +7535,7 @@ Back to the {\hyperref[techDoc:technical-label]{\emph{\DUspan{}{Introduction}}}}
 
 
 \subsection{perfTabs module}
-\label{techDoc:module-perfTabs}\label{techDoc:perftabs-label}\label{techDoc:perftabs-module}\index{perfTabs (module)}\index{ConstantPerformanceTableau (class in perfTabs)}
+\label{techDoc:module-perfTabs}\label{techDoc:perftabs-module}\label{techDoc:perftabs-label}\index{perfTabs (module)}\index{ConstantPerformanceTableau (class in perfTabs)}
 
 \begin{fulllineitems}
 \phantomsection\label{techDoc:perfTabs.ConstantPerformanceTableau}\pysiglinewithargsret{\strong{class }\code{perfTabs.}\bfcode{ConstantPerformanceTableau}}{\emph{inPerfTab}, \emph{actionsSubset=None}, \emph{criteriaSubset=None}, \emph{position=0.5}}{}
@@ -7747,7 +7747,7 @@ Renders the ordered list of all observed performance differences on the given cr
 \index{computeDefaultDiscriminationThresholds() (perfTabs.PerformanceTableau method)}
 
 \begin{fulllineitems}
-\phantomsection\label{techDoc:perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds}\pysiglinewithargsret{\bfcode{computeDefaultDiscriminationThresholds}}{\emph{criteriaList=None}, \emph{quantile=\{`veto': 80}, \emph{`weakVeto': 60}, \emph{`pref': 20}, \emph{`ind': 10\}}, \emph{Debug=False}, \emph{Comments=False}}{}
+\phantomsection\label{techDoc:perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds}\pysiglinewithargsret{\bfcode{computeDefaultDiscriminationThresholds}}{\emph{criteriaList=None}, \emph{quantile=\{`ind': 10}, \emph{`veto': 80}, \emph{`pref': 20}, \emph{`weakVeto': 60\}}, \emph{Debug=False}, \emph{Comments=False}}{}
 updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = \{`ind': 10, `pref': 20, `weakVeto': 60, `veto: 80\}.
@@ -8265,7 +8265,7 @@ Back to the {\hyperref[techDoc:technical-label]{\emph{\DUspan{}{Introduction}}}}
 
 
 \subsection{outrankingDigraphs module}
-\label{techDoc:outrankingdigraphs-module}\label{techDoc:outrankingdigraphs-label}\label{techDoc:module-outrankingDigraphs}\index{outrankingDigraphs (module)}\index{BipolarIntegerOutrankingDigraph (class in outrankingDigraphs)}
+\label{techDoc:outrankingdigraphs-label}\label{techDoc:outrankingdigraphs-module}\label{techDoc:module-outrankingDigraphs}\index{outrankingDigraphs (module)}\index{BipolarIntegerOutrankingDigraph (class in outrankingDigraphs)}
 
 \begin{fulllineitems}
 \phantomsection\label{techDoc:outrankingDigraphs.BipolarIntegerOutrankingDigraph}\pysiglinewithargsret{\strong{class }\code{outrankingDigraphs.}\bfcode{BipolarIntegerOutrankingDigraph}}{\emph{argPerfTab=None}, \emph{coalition=None}, \emph{hasBipolarVeto=True}, \emph{hasSymmetricThresholds=True}}{}
@@ -8743,7 +8743,7 @@ Based on the triangle summation formula.
 \index{defaultDiscriminationThresholds() (outrankingDigraphs.OutrankingDigraph method)}
 
 \begin{fulllineitems}
-\phantomsection\label{techDoc:outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds}\pysiglinewithargsret{\bfcode{defaultDiscriminationThresholds}}{\emph{quantile=\{`veto': 80}, \emph{`weakVeto': 60}, \emph{`pref': 20}, \emph{`ind': 10\}}, \emph{Debug=False}, \emph{comments=False}}{}
+\phantomsection\label{techDoc:outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds}\pysiglinewithargsret{\bfcode{defaultDiscriminationThresholds}}{\emph{quantile=\{`ind': 10}, \emph{`veto': 80}, \emph{`pref': 20}, \emph{`weakVeto': 60\}}, \emph{Debug=False}, \emph{comments=False}}{}
 updates the discrimination thresholds with the percentiles
 from the performance differences.
 \begin{description}
@@ -9227,7 +9227,7 @@ Back to the {\hyperref[techDoc:technical-label]{\emph{\DUspan{}{Introduction}}}}
 
 
 \subsection{votingDigraphs module}
-\label{techDoc:votingdigraphs-module}\label{techDoc:votingdigraphs-label}\label{techDoc:module-votingDigraphs}\index{votingDigraphs (module)}\index{ApprovalVotingProfile (class in votingDigraphs)}
+\label{techDoc:votingdigraphs-module}\label{techDoc:module-votingDigraphs}\label{techDoc:votingdigraphs-label}\index{votingDigraphs (module)}\index{ApprovalVotingProfile (class in votingDigraphs)}
 
 \begin{fulllineitems}
 \phantomsection\label{techDoc:votingDigraphs.ApprovalVotingProfile}\pysiglinewithargsret{\strong{class }\code{votingDigraphs.}\bfcode{ApprovalVotingProfile}}{\emph{fileVotingProfile=None}}{}
@@ -9665,7 +9665,7 @@ Back to the {\hyperref[techDoc:technical-label]{\emph{\DUspan{}{Introduction}}}}
 
 
 \subsection{sortingDigraphs module}
-\label{techDoc:sortingdigraphs-label}\label{techDoc:module-sortingDigraphs}\label{techDoc:sortingdigraphs-module}\index{sortingDigraphs (module)}\index{QuantilesSortingDigraph (class in sortingDigraphs)}
+\label{techDoc:sortingdigraphs-module}\label{techDoc:sortingdigraphs-label}\label{techDoc:module-sortingDigraphs}\index{sortingDigraphs (module)}\index{QuantilesSortingDigraph (class in sortingDigraphs)}
 
 \begin{fulllineitems}
 \phantomsection\label{techDoc:sortingDigraphs.QuantilesSortingDigraph}\pysiglinewithargsret{\strong{class }\code{sortingDigraphs.}\bfcode{QuantilesSortingDigraph}}{\emph{argPerfTab=None}, \emph{limitingQuantiles=None}, \emph{LowerClosed=False}, \emph{PrefThresholds=True}, \emph{hasNoVeto=False}, \emph{outrankingType='bipolar'}, \emph{WithSortingRelation=True}, \emph{CompleteOutranking=False}, \emph{StoreSorting=False}, \emph{CopyPerfTab=False}, \emph{Threading=False}, \emph{nbrCores=None}, \emph{nbrOfProcesses=None}, \emph{Comments=False}, \emph{Debug=False}}{}
@@ -10118,7 +10118,7 @@ Back to the {\hyperref[techDoc:technical-label]{\emph{\DUspan{}{Introduction}}}}
 
 
 \subsection{linearOrders module}
-\label{techDoc:module-linearOrders}\label{techDoc:linearorders-label}\label{techDoc:linearorders-module}\index{linearOrders (module)}\index{CopelandOrder (class in linearOrders)}
+\label{techDoc:linearorders-module}\label{techDoc:linearorders-label}\label{techDoc:module-linearOrders}\index{linearOrders (module)}\index{CopelandOrder (class in linearOrders)}
 
 \begin{fulllineitems}
 \phantomsection\label{techDoc:linearOrders.CopelandOrder}\pysiglinewithargsret{\strong{class }\code{linearOrders.}\bfcode{CopelandOrder}}{\emph{other}, \emph{coDual=False}, \emph{Debug=False}}{}
@@ -10301,7 +10301,7 @@ Back to the {\hyperref[techDoc:technical-label]{\emph{\DUspan{}{Introduction}}}}
 
 
 \subsection{weakOrders module}
-\label{techDoc:weakorders-label}\label{techDoc:module-weakOrders}\label{techDoc:weakorders-module}\index{weakOrders (module)}\index{KemenyWeakOrder (class in weakOrders)}
+\label{techDoc:module-weakOrders}\label{techDoc:weakorders-label}\label{techDoc:weakorders-module}\index{weakOrders (module)}\index{KemenyWeakOrder (class in weakOrders)}
 
 \begin{fulllineitems}
 \phantomsection\label{techDoc:weakOrders.KemenyWeakOrder}\pysiglinewithargsret{\strong{class }\code{weakOrders.}\bfcode{KemenyWeakOrder}}{\emph{other}, \emph{orderLimit=7}, \emph{Debug=False}}{}
@@ -10727,7 +10727,7 @@ Back to the {\hyperref[techDoc:technical-label]{\emph{\DUspan{}{Introduction}}}}
 
 
 \subsection{randomNumbers module}
-\label{techDoc:randomnumbers-label}\label{techDoc:module-randomNumbers}\label{techDoc:randomnumbers-module}\index{randomNumbers (module)}\index{CauchyRandomVariable (class in randomNumbers)}
+\label{techDoc:randomnumbers-module}\label{techDoc:module-randomNumbers}\label{techDoc:randomnumbers-label}\index{randomNumbers (module)}\index{CauchyRandomVariable (class in randomNumbers)}
 
 \begin{fulllineitems}
 \phantomsection\label{techDoc:randomNumbers.CauchyRandomVariable}\pysiglinewithargsret{\strong{class }\code{randomNumbers.}\bfcode{CauchyRandomVariable}}{\emph{position=0.0}, \emph{scale=1.0}, \emph{seed=None}, \emph{Debug=False}}{}
@@ -10870,7 +10870,7 @@ Back to the {\hyperref[techDoc:technical-label]{\emph{\DUspan{}{Introduction}}}}
 
 
 \subsection{randomDigraphs module}
-\label{techDoc:module-randomDigraphs}\label{techDoc:randomdigraphs-module}\label{techDoc:randomdigraphs-label}\index{randomDigraphs (module)}\index{RandomDigraph (class in randomDigraphs)}
+\label{techDoc:randomdigraphs-label}\label{techDoc:module-randomDigraphs}\label{techDoc:randomdigraphs-module}\index{randomDigraphs (module)}\index{RandomDigraph (class in randomDigraphs)}
 
 \begin{fulllineitems}
 \phantomsection\label{techDoc:randomDigraphs.RandomDigraph}\pysiglinewithargsret{\strong{class }\code{randomDigraphs.}\bfcode{RandomDigraph}}{\emph{order=9}, \emph{arcProbability=0.5}, \emph{hasIntegerValuation=True}, \emph{Bipolar=True}, \emph{seed=None}}{}
@@ -10932,7 +10932,7 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 \index{RandomGridDigraph (class in randomDigraphs)}
 
 \begin{fulllineitems}
-\phantomsection\label{techDoc:randomDigraphs.RandomGridDigraph}\pysiglinewithargsret{\strong{class }\code{randomDigraphs.}\bfcode{RandomGridDigraph}}{\emph{n=5}, \emph{m=5}, \emph{valuationdomain=\{`min': -1.0}, \emph{`max': 1.0\}}, \emph{seed=None}, \emph{Debug=False}}{}
+\phantomsection\label{techDoc:randomDigraphs.RandomGridDigraph}\pysiglinewithargsret{\strong{class }\code{randomDigraphs.}\bfcode{RandomGridDigraph}}{\emph{n=5}, \emph{m=5}, \emph{valuationdomain=\{`max': 1.0}, \emph{`min': -1.0\}}, \emph{seed=None}, \emph{Debug=False}}{}
 Bases: {\hyperref[techDoc:digraphs.GridDigraph]{\emph{\code{digraphs.GridDigraph}}}}
 
 Specialization of the general Digraph class for generating
@@ -11102,7 +11102,7 @@ Back to the {\hyperref[techDoc:technical-label]{\emph{\DUspan{}{Introduction}}}}
 
 
 \subsection{randomPerfTabs module}
-\label{techDoc:module-randomPerfTabs}\label{techDoc:randomperftabs-label}\label{techDoc:randomperftabs-module}\index{randomPerfTabs (module)}\index{FullRandomPerformanceTableau (class in randomPerfTabs)}
+\label{techDoc:randomperftabs-label}\label{techDoc:randomperftabs-module}\label{techDoc:module-randomPerfTabs}\index{randomPerfTabs (module)}\index{FullRandomPerformanceTableau (class in randomPerfTabs)}
 
 \begin{fulllineitems}
 \phantomsection\label{techDoc:randomPerfTabs.FullRandomPerformanceTableau}\pysiglinewithargsret{\strong{class }\code{randomPerfTabs.}\bfcode{FullRandomPerformanceTableau}}{\emph{numberOfActions=None}, \emph{numberOfCriteria=None}, \emph{weightDistribution=None}, \emph{weightScale=None}, \emph{integerWeights=True}, \emph{commonScale=None}, \emph{commonThresholds=None}, \emph{commonMode=None}, \emph{valueDigits=2}, \emph{seed=None}, \emph{Debug=False}}{}
@@ -11435,19 +11435,20 @@ Back to the {\hyperref[techDoc:technical-label]{\emph{\DUspan{}{Introduction}}}}
 
 
 \subsection{bigOutrankingDigraphs module}
-\label{techDoc:module-bigOutrankingDigraphs}\label{techDoc:bigoutrankingdigraphs-label}\label{techDoc:bigoutrankingdigraphs-module}\index{bigOutrankingDigraphs (module)}\index{BigDigraph (class in bigOutrankingDigraphs)}
+\label{techDoc:bigoutrankingdigraphs-label}\label{techDoc:module-bigOutrankingDigraphs}\label{techDoc:bigoutrankingdigraphs-module}\index{bigOutrankingDigraphs (module)}\index{BigDigraph (class in bigOutrankingDigraphs)}
 
 \begin{fulllineitems}
 \phantomsection\label{techDoc:bigOutrankingDigraphs.BigDigraph}\pysigline{\strong{class }\code{bigOutrankingDigraphs.}\bfcode{BigDigraph}}
 Bases: \href{http://docs.python.org/library/functions.html\#object}{\code{object}}
 
-abstract root class for lineraly decomposed big digraphs (order \textgreater{} 1000) using multiprocessing ressources.
+abstract root class for linearly decomposed big digraphs (order \textgreater{} 1000)
+using multiprocessing ressources.
 \index{computeDecompositionSummaryStatistics() (bigOutrankingDigraphs.BigDigraph method)}
 
 \begin{fulllineitems}
 \phantomsection\label{techDoc:bigOutrankingDigraphs.BigDigraph.computeDecompositionSummaryStatistics}\pysiglinewithargsret{\bfcode{computeDecompositionSummaryStatistics}}{}{}
 Returns the summary of the distribution of the length of
-the components as dictionary:
+the components as follows:
 
 \begin{Verbatim}[commandchars=\\\{\}]
 summary = \PYGZob{}\PYGZsq{}max\PYGZsq{}: maxLength,
@@ -11465,7 +11466,7 @@ summary = \PYGZob{}\PYGZsq{}max\PYGZsq{}: maxLength,
 \begin{fulllineitems}
 \phantomsection\label{techDoc:bigOutrankingDigraphs.BigDigraph.computeFillRate}\pysiglinewithargsret{\bfcode{computeFillRate}}{}{}
 Renders the sum of the squares (without diagonal) of the orders of the component's subgraphs
-over the square (without diagonal of the big digraph order.
+over the square (without diagonal) of the big digraph order.
 
 \end{fulllineitems}
 
@@ -11503,7 +11504,7 @@ is by convention 0.0 at determination level 0.0 .
 
 \begin{fulllineitems}
 \phantomsection\label{techDoc:bigOutrankingDigraphs.BigDigraph.ordering2Preorder}\pysiglinewithargsret{\bfcode{ordering2Preorder}}{\emph{ordering}}{}
-Renders a preordering (a list of list) of a linar order (worst to best) of decision actions in decreasing preference direction.
+Renders a preordering (a list of list) of a linar order (worst to best) of decision actions in increasing preference direction.
 
 \end{fulllineitems}
 
@@ -11511,7 +11512,7 @@ Renders a preordering (a list of list) of a linar order (worst to best) of decis
 
 \begin{fulllineitems}
 \phantomsection\label{techDoc:bigOutrankingDigraphs.BigDigraph.ranking2Preorder}\pysiglinewithargsret{\bfcode{ranking2Preorder}}{\emph{ranking}}{}
-Renders a preordering (a list of list) of a ranking (best to worst) of decision actions in decreasing preference direction.
+Renders a preordering (a list of list) of a ranking (best to worst) of decision actions in increasing preference direction.
 
 \end{fulllineitems}
 
@@ -11519,8 +11520,8 @@ Renders a preordering (a list of list) of a ranking (best to worst) of decision 
 
 \begin{fulllineitems}
 \phantomsection\label{techDoc:bigOutrankingDigraphs.BigDigraph.recodeValuation}\pysiglinewithargsret{\bfcode{recodeValuation}}{\emph{newMin=-1}, \emph{newMax=1}, \emph{Debug=False}}{}
-Specialized for recoding the valuation of all the partial digraphs and the component relation.
-By default the valuation domain is normalized ({[}-1.0;1.0{]})
+Specialization for recoding the valuation of all the partial digraphs and the component relation.
+By default the valuation domain is normalized to {[}-1;1{]}
 
 \end{fulllineitems}
 
@@ -11528,7 +11529,7 @@ By default the valuation domain is normalized ({[}-1.0;1.0{]})
 
 \begin{fulllineitems}
 \phantomsection\label{techDoc:bigOutrankingDigraphs.BigDigraph.relation}\pysiglinewithargsret{\bfcode{relation}}{\emph{x}, \emph{y}, \emph{Debug=False}}{}
-Dynamic construction of the global digraph relation.
+Dynamic construction of the global outranking characteristic function \emph{r(x S y)}.
 
 \end{fulllineitems}
 
@@ -11536,6 +11537,9 @@ Dynamic construction of the global digraph relation.
 
 \begin{fulllineitems}
 \phantomsection\label{techDoc:bigOutrankingDigraphs.BigDigraph.showDecomposition}\pysiglinewithargsret{\bfcode{showDecomposition}}{\emph{direction='decreasing'}}{}
+Prints on the console the decomposition structure of the sparse outranking digraph instance
+in \emph{decreasing} (default) or \emph{increasing} preference direction.
+
 \end{fulllineitems}
 
 \index{showRelationMap() (bigOutrankingDigraphs.BigDigraph method)}
@@ -11648,11 +11652,11 @@ Bases: {\hyperref[techDoc:bigOutrankingDigraphs.BigDigraph]{\emph{\code{bigOutra
 
 Abstract root class  for the multiprocessing implementation of big outranking digraphs.
 
-The big outranking digraph instance is with q-tiles sorting decomposed in a partition of more or
-quantile equivalence classes, which are lineraly ordred by average quantile limits. (default).
+The big outranking digraph instance is decomposed with a q-tiling sort into a partition
+of quantile equivalence classes which are linearly ordered by average quantile limits (default).
 
-To each quantile equivalence class is associated a BipolarOutrankingDigraph object
-which is restricted to the decision actions in this quantile class.
+With each quantile equivalence class is associated a BipolarOutrankingDigraph object
+which is restricted to the decision actions gathered in this quantile equivalence class.
 
 By default, the number of quantiles q is set to a tenth of the number of decision actions,
 ie q = order//10.
@@ -11799,14 +11803,15 @@ Default (\_\_repr\_\_) presentation method for big outranking digraphs instances
 \phantomsection\label{techDoc:bigOutrankingDigraphs.BigOutrankingDigraphMP}\pysiglinewithargsret{\strong{class }\code{bigOutrankingDigraphs.}\bfcode{BigOutrankingDigraphMP}}{\emph{argPerfTab=None}, \emph{quantiles=None}, \emph{quantilesOrderingStrategy='average'}, \emph{LowerClosed=True}, \emph{componentRankingRule='Copeland'}, \emph{minimalComponentSize=None}, \emph{Threading=False}, \emph{nbrOfCPUs=None}, \emph{nbrOfThreads=None}, \emph{save2File=None}, \emph{CopyPerfTab=True}, \emph{Comments=False}, \emph{Debug=False}}{}
 Bases: {\hyperref[techDoc:bigOutrankingDigraphs.BigOutrankingDigraph]{\emph{\code{bigOutrankingDigraphs.BigOutrankingDigraph}}}}, {\hyperref[techDoc:weakOrders.QuantilesRankingDigraph]{\emph{\code{weakOrders.QuantilesRankingDigraph}}}}, {\hyperref[techDoc:perfTabs.PerformanceTableau]{\emph{\code{perfTabs.PerformanceTableau}}}}
 
-Multiprocessing implementation of the BipolarOutrankingDigraph class
+Multiprocessing implementation of the abstract BipolarOutrankingDigraph class
 for large instances (order \textgreater{} 1000)
 
-The outranking digraph is decomposed with a q-tiles sorting into a partition of
-quantile equivalence classes, which are lineraly ordred by average quantile limits. (default).
+The outranking digraph is decomposed with a q-tiling sort into a partition of
+quantile equivalence classes, which are linearly ordred by average quantile limits (default).
 
-To each quantile equivalence class is associated a BipolarOutrankingDigraph object
-which is restricted to a Digraph instance.
+Wich each quantile equivalence class is associated a BipolarOutrankingDigraph object
+which is by default restricted to a Digraph instance;
+the corresponding restricted performance tableau being dropped.
 
 By default, q is set to a tenth of the number of decision actions,
 ie q = order//10.
