@@ -27,7 +27,8 @@ from bigOutrankingDigraphs import *
 
 class BigDigraph(object):
     """
-    abstract root class for lineraly decomposed big digraphs (order > 1000) using multiprocessing ressources.
+    abstract root class for linearly decomposed big digraphs (order > 1000)
+    using multiprocessing ressources.
     """
     def __repr__(self):
         """
@@ -478,11 +479,11 @@ class BigOutrankingDigraph(BigDigraph):
     """
     Abstract root class  for the multiprocessing implementation of big outranking digraphs.
     
-    The big outranking digraph instance is with q-tiles sorting decomposed in a partition of more or
-    quantile equivalence classes, which are lineraly ordred by average quantile limits. (default).
+    The big outranking digraph instance is decomposed with a q-tiling sort into a partition
+    of quantile equivalence classes which are linearly ordered by average quantile limits (default).
 
-    To each quantile equivalence class is associated a BipolarOutrankingDigraph object
-    which is restricted to the decision actions in this quantile class.
+    With each quantile equivalence class is associated a BipolarOutrankingDigraph object
+    which is restricted to the decision actions gathered in this quantile equivalence class.
 
     By default, the number of quantiles q is set to a tenth of the number of decision actions,
     ie q = order//10.
@@ -1249,14 +1250,15 @@ class BigOutrankingDigraph(BigDigraph):
 from weakOrders import QuantilesRankingDigraph
 class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,PerformanceTableau):
     """
-    Multiprocessing implementation of the BipolarOutrankingDigraph class
+    Multiprocessing implementation of the abstract BipolarOutrankingDigraph class
     for large instances (order > 1000)
 
-    The outranking digraph is decomposed with a q-tiles sorting into a partition of
-    quantile equivalence classes, which are lineraly ordred by average quantile limits. (default).
+    The outranking digraph is decomposed with a q-tiling sort into a partition of
+    quantile equivalence classes, which are linearly ordred by average quantile limits (default).
 
-    To each quantile equivalence class is associated a BipolarOutrankingDigraph object
-    which is restricted to a Digraph instance.
+    Wich each quantile equivalence class is associated a BipolarOutrankingDigraph object
+    which is by default restricted to a Digraph instance;
+    the corresponding restricted performance tableau being dropped.
 
     By default, q is set to a tenth of the number of decision actions,
     ie q = order//10.
@@ -1586,6 +1588,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                                  Comments=False):
         """
         Renders the quantile interval of the decision actions.
+        
         *Parameters*:
             * QuantilesdSortingDigraph instance
             * Descending: listing in *decreasing* (default) or *increasing* quantile order.
