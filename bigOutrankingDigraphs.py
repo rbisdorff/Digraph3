@@ -59,7 +59,7 @@ class BigDigraph(object):
     
     def relation(self,x,y,Debug=False):
         """
-        Dynamic construction of the global digraph relation.
+        Dynamic construction of the global outranking characteristic function *r(x S y)*.
         """
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
@@ -284,6 +284,10 @@ class BigDigraph(object):
                     'determination': determination}
         
     def showDecomposition(self,direction='decreasing'):
+        """
+        Prints on the console the decomposition structure of the sparse outranking digraph instance
+        in *decreasing* (default) or *increasing* preference direction.
+        """
         
         print('*--- Relation decomposition in %s order---*' % (direction) )
         compKeys = [compKey for compKey in self.components]
@@ -315,7 +319,7 @@ class BigDigraph(object):
     def computeDecompositionSummaryStatistics(self):
         """
         Returns the summary of the distribution of the length of
-        the components as dictionary::
+        the components as follows::
         
             summary = {'max': maxLength,
                        'median':medianLength,
@@ -346,8 +350,8 @@ class BigDigraph(object):
 
     def recodeValuation(self,newMin=-1,newMax=1,Debug=False):
         """
-        Specialized for recoding the valuation of all the partial digraphs and the component relation.
-        By default the valuation domain is normalized ([-1.0;1.0])
+        Specialization for recoding the valuation of all the partial digraphs and the component relation.
+        By default the valuation domain is normalized to [-1;1]
         """
         # saving old and new valuation domain
         oldMax = self.valuationdomain['max']
@@ -374,7 +378,7 @@ class BigDigraph(object):
 
     def ranking2Preorder(self,ranking):
         """
-        Renders a preordering (a list of list) of a ranking (best to worst) of decision actions in decreasing preference direction.
+        Renders a preordering (a list of list) of a ranking (best to worst) of decision actions in increasing preference direction.
         """
         #ordering = list(ranking)
         #ordering.reverse()
@@ -383,7 +387,7 @@ class BigDigraph(object):
 
     def ordering2Preorder(self,ordering):
         """
-        Renders a preordering (a list of list) of a linar order (worst to best) of decision actions in decreasing preference direction.
+        Renders a preordering (a list of list) of a linar order (worst to best) of decision actions in increasing preference direction.
         """
         preordering = [[x] for x in ordering]
         return preordering
@@ -391,7 +395,7 @@ class BigDigraph(object):
     def computeFillRate(self):
         """
         Renders the sum of the squares (without diagonal) of the orders of the component's subgraphs
-        over the square (without diagonal of the big digraph order. 
+        over the square (without diagonal) of the big digraph order. 
         """
         fillRate = sum((comp['subGraph'].order*comp['subGraph'].order-1)\
                         for comp in self.components.values())
