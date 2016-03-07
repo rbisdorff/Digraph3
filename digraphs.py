@@ -3183,7 +3183,14 @@ class Digraph(object):
                     
             print()
         print('\n')
-        print('Valuation domain: ', self.valuationdomain)
+        if hasIntegerValuation:
+            print('Valuation domain: [%d;%+d]'% (self.valuationdomain['min'],
+                                                 self.valuationdomain['max']))
+        else:
+            formatString = 'Valuation domain: [%%2.%df;%%2.%df]\n' % (ndigits,ndigits)
+            print( formatString % (self.valuationdomain['min'],
+                                   self.valuationdomain['max']))
+            
 
     def showHTMLRelationTable(self,actionsList=None,
                               IntegerValues=False,
@@ -3215,6 +3222,8 @@ class Digraph(object):
         renders the relation valuation in actions X actions html table format.
         """
         Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        Max = self.valuationdomain['max']
         if actionsSubset == None:
             actions = self.actions
         else:
@@ -3281,6 +3290,11 @@ class Digraph(object):
                         s += '<td>%2.2f</td>' % (self.relation[x[1]][y[1]])
             s += '</tr>'
         s += '</table>'
+        if hasIntegerValuation:
+            s += '<p>Valuation domain: [%d; %+d]</p>' % (Min,Max)
+        else:
+            s += '<p>Valuation domain: [%.2f; %+.2f]</p>' % (Min,Max)
+            
         return s
 
     def showdre(self):

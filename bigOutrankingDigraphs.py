@@ -1735,10 +1735,10 @@ if __name__ == "__main__":
     
     from time import time
     from weakOrders import QuantilesRankingDigraph
-    MP  = True
+    MP  = False
 ##    t0 = time()
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,seed=100)
-    tp = RandomCBPerformanceTableau(numberOfActions=500,Threading=MP,
+    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,
                                       seed=100)
 ##    tp = RandomPerformanceTableau(numberOfActions=1000,numberOfCriteria=21,
 ##                                      seed=100)
@@ -1784,7 +1784,7 @@ if __name__ == "__main__":
 ##    print(bg2.computeDecompositionSummaryStatistics())
 ##    #bg2.showDecomposition()
 ##    t0 = time()
-##    g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=MP)
+    g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=MP)
 ##    print(time()-t0)
 ##    print(total_size(g))
 ##    t0 = time()
@@ -1802,19 +1802,19 @@ if __name__ == "__main__":
 ##    preordering2 = bg2.computeRankingPreordering()
 ##    preordering2 = bg1.ranking2Preorder(bg2.boostedKohlerRanking)
 ##    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering2)))
-##    t0 = time()
-##    test = Decimal('0')
-##    for x in bg1.actions:
-##        for y in bg1.actions:
-##            test+=bg1.relation(x,y)
-##    print('bg time:',time()-t0)
-##    
-##    t0 = time()
-##    test = Decimal('0')
-##    for x in g.actions:
-##        for y in g.actions:
-##            test+=g.relation[x][y]
-##    print('g time:',time()-t0)
+    t0 = time()
+    test = Decimal('0')
+    for x in bg1.actions:
+        for y in bg1.actions:
+            test+=bg1.relation(x,y)
+    print('bg time:',time()-t0)
+    
+    t0 = time()
+    test = Decimal('0')
+    for x in g.actions:
+        for y in g.actions:
+            test+=g.relation[x][y]
+    print('g time:',time()-t0)
 ##    
 
 

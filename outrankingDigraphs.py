@@ -6082,7 +6082,8 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         Min = -totalWeight
         Med = Decimal('0')
         Max = totalWeight
-        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+        self.valuationdomain = {'min':Min,'med':Med,'max':Max,
+                                'hasIntegerValuation':True}
         
         evaluation = copy.copy(perfTab.evaluation)
         
