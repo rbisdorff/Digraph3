@@ -37,7 +37,11 @@ runs a nose test suite in the ./test directory (python3 nose package required  .
 
      ../Digraph3$ make verboseTests
 
-runs a verbose (with stdout not captured) nose test suite 
+runs a verbose (with stdout not captured) nose test suite::
+
+     ../Digraph3$ make pTests
+
+runs the nose test suite in multiple processing mode when multiple cores are detected.
 
 Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>, University of Luxembourg.
 
