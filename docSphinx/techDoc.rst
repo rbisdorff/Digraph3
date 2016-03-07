@@ -6,7 +6,7 @@ Technical Reference of the Digraph3 modules
 
 .. _Technical-label:
 
-Introduction
+Installation
 ------------
 
 **Dowloading the Digraph3 ressources**
@@ -24,6 +24,20 @@ Three download options are given:
 3. Or, with a browser access, download and extract the latest distribution tar.gz archive from this page::
 
      http://leopold-loewenheim.uni.lu/Digraph3/dist/
+
+On Linux or Mac OS, ..$ cd to the extracted <Digraph3> directory::
+
+     ../Digraph3$ make install
+
+installs (with sudo !!) the digraphs module in the current running python environment. Pythhon 3.5 (or later) environment is recoomemded::
+
+     ../Digraph3$ make tests
+
+runs a nose test suite in the ./test directory (python3 nose package required  ..$ pip3 install nose )::
+
+     ../Digraph3$ make verboseTests
+
+runs a verbose (with stdout not captured) nose test suite 
 
 Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>, University of Luxembourg.
 

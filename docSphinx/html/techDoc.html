@@ -62,8 +62,8 @@
 </tr>
 </tbody>
 </table>
-<div class="section" id="introduction">
-<span id="technical-label"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installation">
+<span id="technical-label"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p><strong>Dowloading the Digraph3 ressources</strong></p>
 <p>Three download options are given:</p>
 <ol class="arabic">
@@ -83,6 +83,19 @@
 </div>
 </li>
 </ol>
+<p>On Linux or Mac OS, ..$ cd to the extracted &lt;Digraph3&gt; directory:</p>
+<div class="highlight-python"><div class="highlight"><pre>../Digraph3$ make install
+</pre></div>
+</div>
+<p>installs (with sudo !!) the digraphs module in the current running python environment. Pythhon 3.5 (or later) environment is recoomemded:</p>
+<div class="highlight-python"><div class="highlight"><pre>../Digraph3$ make tests
+</pre></div>
+</div>
+<p>runs a nose test suite in the ./test directory (python3 nose package required  ..$ pip3 install nose ):</p>
+<div class="highlight-python"><div class="highlight"><pre>../Digraph3$ make verboseTests
+</pre></div>
+</div>
+<p>runs a verbose (with stdout not captured) nose test suite</p>
 <p>Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff &lt;<a class="reference external" href="http://leopold-loewenheim.uni.lu/bisdorff/">http://leopold-loewenheim.uni.lu/bisdorff/</a>&gt;, University of Luxembourg.</p>
 <p>To be fully functional, the Digraph3 resources mainly need the <a class="reference external" href="http://graphviz.org">graphviz</a> tools and the <a class="reference external" href="http://www.r-project.org">R statistics resources</a> to be installed. When exploring digraph isomorphisms, the <a class="reference external" href="http://www.cs.sunysb.edu/~algorith/implement/nauty/implement.shtml">nauty</a> isomorphism testing program is required. two specific criteria and actions clustering methods of the Digraph class furthermore require the <a class="reference external" href="http://leopold-loewenheim.uni.lu/svn/repos/Calmat/">calmat</a> matrix computing resource to be installed.</p>
 <p><strong>Organisation of the Digraph3 python3 source code</strong></p>
@@ -2431,7 +2444,7 @@ To search other containers, add handlers to iterate over their contents:</p>
 <p>See <a class="reference external" href="http://code.activestate.com/recipes/577504/">http://code.activestate.com/recipes/577504/</a></p>
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
 </div>
 <div class="section" id="graphs-module">
 <span id="graphs-label"></span><h2>graphs module<a class="headerlink" href="#graphs-module" title="Permalink to this headline">¶</a></h2>
@@ -3248,7 +3261,7 @@ temporary triangulated grids of dimension n times m.</p>
 
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
 </div>
 <div class="section" id="module-perfTabs">
 <span id="perftabs-module"></span><span id="perftabs-label"></span><h2>perfTabs module<a class="headerlink" href="#module-perfTabs" title="Permalink to this headline">¶</a></h2>
@@ -3427,7 +3440,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3828,7 +3841,7 @@ xml.etree (for Python 2.5+).</p>
 
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
 </div>
 <div class="section" id="module-outrankingDigraphs">
 <span id="outrankingdigraphs-module"></span><span id="outrankingdigraphs-label"></span><h2>outrankingDigraphs module<a class="headerlink" href="#module-outrankingDigraphs" title="Permalink to this headline">¶</a></h2>
@@ -4181,7 +4194,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4545,7 +4558,7 @@ neglecting all considerable large performance differences polarisations.</p>
 temporary unanimous outranking digraphs</p>
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
 </div>
 <div class="section" id="module-votingDigraphs">
 <span id="votingdigraphs-module"></span><span id="votingdigraphs-label"></span><h2>votingDigraphs module<a class="headerlink" href="#module-votingDigraphs" title="Permalink to this headline">¶</a></h2>
@@ -4893,7 +4906,7 @@ ballot = {     # voters x candidates x candidates
 
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
 </div>
 <div class="section" id="module-sortingDigraphs">
 <span id="sortingdigraphs-module"></span><span id="sortingdigraphs-label"></span><h2>sortingDigraphs module<a class="headerlink" href="#module-sortingDigraphs" title="Permalink to this headline">¶</a></h2>
@@ -5258,7 +5271,7 @@ the high category limit.</p>
 
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
 </div>
 <div class="section" id="module-linearOrders">
 <span id="linearorders-module"></span><span id="linearorders-label"></span><h2>linearOrders module<a class="headerlink" href="#module-linearOrders" title="Permalink to this headline">¶</a></h2>
@@ -5395,7 +5408,7 @@ outdegrees of the valued digraph &#8216;other&#8217;.</p>
 a given bipolar-valued Digraph instance</p>
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
 </div>
 <div class="section" id="module-weakOrders">
 <span id="weakorders-module"></span><span id="weakorders-label"></span><h2>weakOrders module<a class="headerlink" href="#module-weakOrders" title="Permalink to this headline">¶</a></h2>
@@ -5727,7 +5740,7 @@ valued self relation.</p>
 
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
 </div>
 <div class="section" id="module-randomNumbers">
 <span id="randomnumbers-module"></span><span id="randomnumbers-label"></span><h2>randomNumbers module<a class="headerlink" href="#module-randomNumbers" title="Permalink to this headline">¶</a></h2>
@@ -5840,7 +5853,7 @@ valued self relation.</p>
 
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
 </div>
 <div class="section" id="module-randomDigraphs">
 <span id="randomdigraphs-module"></span><span id="randomdigraphs-label"></span><h2>randomDigraphs module<a class="headerlink" href="#module-randomDigraphs" title="Permalink to this headline">¶</a></h2>
@@ -6012,7 +6025,7 @@ else valuation domain = [-1.0,1.0]</li>
 </dl>
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
 </div>
 <div class="section" id="module-randomPerfTabs">
 <span id="randomperftabs-module"></span><span id="randomperftabs-label"></span><h2>randomPerfTabs module<a class="headerlink" href="#module-randomPerfTabs" title="Permalink to this headline">¶</a></h2>
@@ -6282,7 +6295,7 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 <p>Obsolete dummy class for backports.</p>
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
 </div>
 <div class="section" id="module-bigOutrankingDigraphs">
 <span id="bigoutrankingdigraphs-module"></span><span id="bigoutrankingdigraphs-label"></span><h2>bigOutrankingDigraphs module<a class="headerlink" href="#module-bigOutrankingDigraphs" title="Permalink to this headline">¶</a></h2>
@@ -6606,7 +6619,7 @@ Returns a tuple : action, lowest category key, highest category key, membership 
 
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Introduction</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
 </div>
 <div class="section" id="indices-and-tables">
 <h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
@@ -6633,7 +6646,7 @@ Returns a tuple : action, lowest category key, highest category key, membership 
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Technical Reference of the Digraph3 modules</a><ul>
-<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#digraphs-module">digraphs module</a></li>
 <li><a class="reference internal" href="#graphs-module">graphs module</a></li>
 <li><a class="reference internal" href="#module-perfTabs">perfTabs module</a></li>
