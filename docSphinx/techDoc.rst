@@ -43,8 +43,6 @@ runs a verbose (with stdout not captured) nose test suite::
 
 runs the nose test suite in multiple processing mode when multiple cores are detected.
 
-Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>, University of Luxembourg.
-
 To be fully functional, the Digraph3 resources mainly need the `graphviz <http://graphviz.org>`_ tools and the `R statistics resources <http://www.r-project.org>`_ to be installed. When exploring digraph isomorphisms, the `nauty <http://www.cs.sunysb.edu/~algorith/implement/nauty/implement.shtml>`_ isomorphism testing program is required. Two specific criteria and actions clustering methods of the `OutrankingDigraph <techDoc.html#outrankingDigraphs.OutrankingDigraph>`_ class furthermore require the `calmat <http://leopold-loewenheim.uni.lu/svn/repos/Calmat/>`_ matrix computing resource to be installed. 
 
 **Organisation of the Digraph3 python3 source code**
@@ -75,6 +73,8 @@ The Digraph3 source code is split into several interdependent modules of which t
      Various implemented random performance tableau models.
 * :ref:`bigOutrankingDigraphs-label` 
      Compressed implementation design for large outranking digraphs (order > 1000).
+
+Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>, University of Luxembourg.
 
 .. toctree::
    :maxdepth: 2
