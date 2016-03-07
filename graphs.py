@@ -1790,7 +1790,6 @@ class SnakeGraph(GridGraph):
         print('Lower word       : ',self.cw[0])
         return 'graphs.SnakeGraph(GridGraph) instance'
         
-
 #---------------------
 class TriangulatedGrid(Graph):
     """
