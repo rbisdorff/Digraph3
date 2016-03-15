@@ -19,7 +19,7 @@
 #
 #######################
 
-__version__ = "Branch: 3.3 $"
+__version__ = "Branch: 3.5 $"
 # ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
 from digraphs import *
@@ -4300,7 +4300,8 @@ class Digraph(object):
                     #print(relation[x][y], Med, relation[x][y] - Med)
                     deter += abs(rxy - Med)
                     #print(deter)
-        deter = (deter /Decimal(str((order * (order-1))))) * (Max - Med)
+        #deter = (deter /Decimal(str((order * (order-1))))) * (Max - Med)
+        deter = (deter /Decimal(str((order * (order-1)))))
         return deter
 
     def showStatistics(self):
