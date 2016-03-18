@@ -105,7 +105,274 @@ class Graph(object):
         new.__class__ = self.__class__
         return new
 
-    def _chordlessPaths(self,Pk,v0,Comments=False,Debug=False):
+#-----------Dias/Castonguay/Longo/Jradi--------*
+    def degreeLabelling(self):
+        """
+        p 14
+        """
+        degree = {}
+        color = {}
+        for v in self.vertices:
+            degree[v] = len(self.gamma[v])
+            color[v] = 'white'
+##            for u in self.gamma[v]:
+##                degree[v] += 1g
+            
+        labelling = {}
+        for i in range(1,self.order+1):
+            minDegree = self.order
+            for x in self.vertices:
+                if color[x] == 'white' and degree[x] < minDegree:
+                    v = x
+                    minDegree = degree[x]
+            labelling[v] = i
+            color[v] = 'black'
+            #print(v,i,minDegree)
+            for u in self.gamma[v]:
+                if color[u] == 'white':
+                    degree[u] -= 1
+        #self.degree = degree
+        #self.color = color
+        self.labelling = labelling
+        return labelling
+
+##    def _degreeLabelling(self):
+##        labelling = {}
+##        i = 1
+##        for v in self.vertices:
+##            labelling[v] = i
+##            i += 1
+##        self.labelling = labelling
+##        return labelling
+    
+    def _triplets(self,Comments=False):
+        """ p.15 """
+        from itertools import product
+        labelling = self.labelling
+        tG = []
+        cycles = set()
+        for u in self.vertices:
+            for x,y in product(self.gamma[u],repeat=2):
+                if x != y:
+##                    print(u,self.labelling[u],
+##                          x,self.labelling[x],
+##                          y,self.labelling[y])
+                    if labelling[u] < labelling[x] and \
+                       labelling[x] < labelling[y]:
+##                    if u < x and x < y:
+                        if self.edges[frozenset([x,y])] < self.valuationDomain['med']:
+                            if Comments:
+                                print('inital triple:',x,u,y)
+                            tG.append((x,u,y))
+                        else:
+                            if Comments:
+                                print('3-cycle:',x,u,y)
+                            cycles.add((x,u,y))
+        #self.tG = tG
+        #self.cycles = cycles
+        return tG,cycles
+
+##    def _computeChordlessCyclesMP(self,Odd=False,\
+##                                   Threading=False,nbrOfCPUs=None,\
+##                                   Comments=False,Debug=False):
+##        """ 
+##        Multiprocessing version of computeChordlessCycles().
+##        
+##        Renders the set of all chordless odd cycless detected in an undirrected  graph.
+##        Result (possible empty list) stored in <self.cyclesList>
+##        holding a possibly empty list tuples with at position 0 the
+##        list of adjacent actions of the circuit and at position 1
+##        the set of actions in the stored circuit.
+##        Inspired by Dias, Castonguay, Longo, Jradi, Algorithmica (2015).
+##
+##        Returns a possibly empty list of tuples (cycle,frozenset(cycle)).
+##
+##        If Odd == True, only cycless of odd length are retained in the result. 
+##        """
+##
+##        tG,self.cyclesList = self._triplets(Comments=Comments)
+##        if Comments:
+##            print('There are %d starting triplets !' % len(tG) )
+##        self.blocked = {}
+##        if Threading:
+##            self.Odd = Odd
+##            self.Comments = Comments
+##            from multiprocessing import Pool
+##            from os import cpu_count
+##            if nbrOfCPUs == None:
+##                nbrOfCPUs= cpu_count()
+##            with Pool(nbrOfCPUs) as proc:   
+##                cycless = proc.map(self._computeChordlessPathsFromInitialTriplet,tG)
+##                #print(circuits)
+##            for i in range(len(tG)):
+##                if Debug:
+##                    print(i,cycles[i])
+##                if cycles[i] != []:
+##                    for c in cycles[i]:
+##                        #print(circ)
+##                        self.cyclesList.append(c)
+##        else:
+##            for p in tG:
+##                u = p[1]
+####                if Debug:
+####                    print('===>>>',p,u)
+##                gammaU = (self.gamma[u][1] | self.gamma[u][0])
+##                for x in gammaU:
+##                    #print(x)
+##                    self.blocked[x] += 1
+##                self.cyclesList.append(self._ccVisit(p,u,
+##                                                  Odd=Odd,
+##                                                  Comments=Comments))
+##                for x in gammaU:
+##                    if self.blocked[x] > 0:
+##                        self.blocked[x] -= 1
+##        if Debug:
+##            print(self.cyclessList)
+##        return self.cyclessList
+##
+##    def _computeChordlessPathsFromInitialTriplet(self,p,Debug=False):
+##        if self.Comments:
+##            print('===>> thread : ',p)
+##        u = p[1]
+##        blocked = {}
+##        for x in self.actions:
+##            blocked[x] = 0
+##        circuits = []
+##        gammaU = (self.gamma[u][1] | self.gamma[u][0])
+##        for x in gammaU:
+##            blocked[x] += 1
+##        cycless,blocked = self._ccVisitMP(cycless,blocked,p,u,Odd=self.Odd,Comments=self.Comments)
+##        for x in gammaU:
+##            if blocked[x] > 0:
+##                blocked[x] -= 1
+##        if self.Comments:
+##            print(p,cycless)
+##        for x in self.actions:
+##            if blocked[x] > 1:
+##                blocked[x] = 0
+##        if Debug:
+##            print(p,'return',c<cless)
+##        return cycless
+##
+##    def _ccVisitMP(self,cyless,blocked,p,u,
+##                   Odd=False,Comments=False,Debug=False):
+##        """ p.15 """
+##        Med = self.valuationdomain['med']
+##        ut = p[-1]
+##        u1 = p[0]
+##        inAsymGammaUt = self.gamma[ut][1] - self.gamma[ut][0]
+##        gammaUt = self.gamma[ut][0] | self.gamma[ut][1]
+##        if Debug:
+##            print(p,self.gamma[ut][1],ut,self.gamma[ut][0])
+##        for x in gammaUt:
+##            blocked[x] += 1
+##        for v in inAsymGammaUt:
+##            if str(v) > str(u) and blocked[v] == 1:
+##                p1 = p + tuple([v])
+##                if Debug:
+##                    print(p,p1)
+##                if self.relation[u1][v] > Med and\
+##                   self.relation[v][u1] <= Med:
+##                    if Odd:
+##                        if (len(p1) % 2) != 1:
+##                            OddFlag=False
+##                        else:
+##                            OddFlag = True
+##                    else:
+##                        OddFlag = True
+##                    if OddFlag:
+##                        circ = list(reversed(p1))
+##                        if Comments:
+##                            print(p,'cycle certificate: ',circ)
+##                        circuits.append((circ,frozenset(circ)))
+##
+##                elif self.relation[u1][v] <= Med and\
+##                    self.relation[v][u1] <= Med :
+##                    if Debug:
+##                        print(p,'continue with ', p1)
+##                    cycles,blocked = self._ccVisitMP(cycles,blocked,
+##                                                    p1,u,Odd=Odd,
+##                                                    Comments=Comments)
+####                    circuits.append(circuits1)
+##                    if Debug:
+##                        print(p,cycles)
+##        for x in (gammaUt):
+##            if blocked[x] > 0:
+##                blocked[x] -= 1
+##
+##        return cycles,blocked
+
+
+    def computeChordlessCycles(self,Cycle3=False,Comments=False,Debug=False):
+        """
+        Renders the set of all chordless cycles observed in a Graph
+        intance. Inspired from Dias, Castonguay, Longo & Jradi,
+        Algorithmica 2015.
+        """
+
+        if Debug:
+            Comments=True
+        #self.visitedChordlessPathsNew = []
+        self.degreeLabelling()
+        triplets,cycles3 = self._triplets(Comments=Comments)
+        if Comments:
+            print('# of initial triplets:',len(triplets))
+            print('# of 3-cycles        :',len(cycles3))
+        if Cycle3:
+            cycles = cycles3
+        else:
+            cycles = set()
+            
+        self.blocked = {}
+        for u in self.vertices:
+            self.blocked[u] = 0
+        for p in triplets:
+            if Comments:
+                print(p,self.blocked)
+            if Comments:
+                print('===>>>', p)
+            u = p[1]
+            for x in self.gamma[u]:
+                self.blocked[x] += 1
+            cycles = self._ccVisit(p,cycles,u,Comments=Comments)
+            for x in self.gamma[u]:
+                if self.blocked[x] > 0:
+                    self.blocked[x] -= 1
+        return cycles
+
+    def _ccVisit(self,p,cycles,u,Comments=False):
+        """ p.15 """
+        #labelling = self.labelling
+        #self.visitedChordlessPathsNew.append(p)
+        ut = p[-1]
+        u1 = p[0]
+##        if Comments:
+##            print(p,u1,u,ut)
+        for x in self.gamma[ut]:
+            self.blocked[x] += 1
+
+        for v in self.gamma[ut]:
+            if self.labelling[v] > self.labelling[u] and self.blocked[v] == 1:
+                p1 = p + tuple([v])
+                if self.edges[frozenset([u1,v])] > self.valuationDomain['med']:
+                    if Comments:
+                        print('Cycle certificate: ', p1)
+                    cycles.add(p1)
+                else:
+                    if Comments:
+                        print('continue ...',p1)
+                    cycles = self._ccVisit(p1,cycles,u,Comments=Comments)
+
+        for x in self.gamma[ut]:
+            if self.blocked[x] > 0:
+                self.blocked[x] -= 1
+
+        return cycles
+        
+            
+#----------------------------------------
+
+    def _chordlessPaths(self,Pk,v0,Cycle3=False,Comments=False,Debug=False):
         """
         recursice chordless precycle (len > 3) construction:
             Pk is the current pre chordless cycle
@@ -116,15 +383,20 @@ class Graph(object):
         detectedChordlessCycle = False
         self.visitedChordlessPaths.add(frozenset(Pk))
         Med = self.valuationDomain['med']
-        e = frozenset([v0,vn])
-        if len(e) > 1:
+        if Cycle3:
+            minPreCycleLength = 2
+        else: # only cycles of length 4 and more are holes in fact
+            minPreCycleLength = 3
+        #if len(e) > 1:
+        if v0 != vn:
             # not a reflexive link
+            e = frozenset([v0,vn])
             if self.edges[e] > Med and len(Pk) > 2:
                 # we close the chordless pre cycle here
                 detectedChordlessCycle = True
-                if Debug:
-                    print('Pk, len(Pk)', Pk, len(Pk))
-                if len(Pk) > 3:
+##                if Debug:
+##                    print('Pk, len(Pk)', Pk, len(Pk))
+                if len(Pk) > minPreCycleLength:
                     # only cycles of length 4 and more are holes in fact
                     self.xCC.append(Pk)
                     Pk.append(v0)
@@ -135,44 +407,45 @@ class Graph(object):
             NBvn = set(self.gamma[vn]) - set(Pk[1:len(Pk)])
             # exterior neighborhood of vn
 
-            if Debug:
-                print('vn, NBvn, Pk, Pk[1:len(Pk)] = ', vn, NBvn, Pk, Pk[1:len(Pk)])
-            while NBvn != set():
+##            if Debug:
+##                print('vn, NBvn, Pk, Pk[1:len(Pk)] = ', vn, NBvn, Pk, Pk[1:len(Pk)])
+            #while NBvn != set():
+            for v in NBvn:
                 # we try in turn all neighbours of vn
-                v = NBvn.pop()
+                #v = NBvn.pop()
                 vCP = set(Pk)
                 vCP.add(v)
                 vCP = frozenset(vCP)
-                if Debug:
-                    print('v,vCP  =', v,vCP)
+##                if Debug:
+##                    print('v,vCP  =', v,vCP)
                 if vCP not in self.visitedChordlessPaths:
                     # test history of paths
                     P = list(Pk)
-                    if Debug:
-                        print('P,P[:-1] = ', P,P[:-1])
+##                    if Debug:
+##                        print('P,P[:-1] = ', P,P[:-1])
                     noChord = True
                     for x in P[:-1]:
-                        if Debug:
-                            print('x = ', x)
+##                        if Debug:
+##                            print('x = ', x)
                         if x != v0:
                             # we avoid the initial vertex
                             # to stay with a chordless precycle
                             ex = frozenset([x,v])
-                            if Debug:
-                                print('x, v, ex = ',x,v,ex)
+##                            if Debug:
+##                                print('x, v, ex = ',x,v,ex)
                             if self.edges[ex] > Med:
                                 # there is a chord
                                 noChord = False
                                 break
                     if noChord:
                         P.append(v)
-                        if Debug:
-                            print('P,v0',P,v0)
-                        if self._chordlessPaths(P,v0,Comments,Debug):
+##                        if Debug:
+##                            print('P,v0',P,v0)
+                        if self._chordlessPaths(P,v0,Cycle3=Cycle3,Comments=Comments,Debug=Debug):
                             # we continue with the current chordless precycle
                             detectedChordlessCycle=True
-            if Debug:
-                print('No further chordless precycles from ',vn,' to ',v0)
+##            if Debug:
+##                print('No further chordless precycles from ',vn,' to ',v0)
         return detectedChordlessCycle
 
     def _MISgen(self,S,I):
@@ -242,10 +515,10 @@ class Graph(object):
             s = s + [(frozenset([x]),self.gamma[x],indep)]
         return s
 
-    def computeChordlessCycles(self,Comments=True,Debug=False):
+    def _computeChordlessCycles(self,Cycle3=False,Comments=True,Debug=False):
         """
         Renders the set of all chordless cycles observed in a Graph
-        intance.
+        intance. Obsolete home brewed version.
         """
         verticesKeys = [x for x in self.vertices]
         self.visitedChordlessPaths = set()
@@ -253,7 +526,7 @@ class Graph(object):
         for v in verticesKeys:
             P = [v]
             self.xCC = []
-            if self._chordlessPaths(P,v,Comments=Comments,Debug=Debug):
+            if self._chordlessPaths(P,v,Cycle3=Cycle3,Comments=Comments,Debug=Debug):
                 chordlessCycles += self.xCC
         self.chordlessCycles = chordlessCycles
         chordlessCyclesList = [ (x,frozenset(x)) for x in chordlessCycles]
@@ -521,7 +794,9 @@ class Graph(object):
                        noSilent=True,
                        graphType='png',graphSize='7,7',
                        withSpanningTree=False,
-                       layout=None):
+                       layout=None,
+                       arcColor='black',
+                       lineWidth=1):
         """
         Exports GraphViz dot file  for graph drawing filtering.
 
@@ -600,7 +875,7 @@ class Graph(object):
         ' [dir=both,style="setlinewidth(3)",color=red, arrowhead=none, arrowtail=none] ;\n'                                          
                         else:
                             arrowFormat = \
-        ' [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;\n'
+        ' [dir=both,style="setlinewidth(%d)",color=%s, arrowhead=none, arrowtail=none] ;\n' % (lineWidth,arcColor)
                         edge0 = edge+'-- n'+str(j+1)+arrowFormat
                         fo.write(edge0)
                     elif edges[frozenset([vertexkeys[i],vertexkeys[j]])] == Med:
@@ -898,7 +1173,7 @@ class Graph(object):
         # check vertices' existance
         verticesIds = [x for x in self.vertices]
         if (edge[0] not in verticesIds) or (edge[1] not in verticesIds):
-            self.showShort()
+            #self.showShort()
             print('!!! Error: edge %s not found !!!' % str(edge))
             return         
         # check new edge value
@@ -1061,24 +1336,27 @@ class CycleGraph(Graph):
 
     """
     def __init__(self,order=5,seed=None,Debug=False):
+        from collections import OrderedDict
         self.name = 'cycleGraph'
         self.order = order
         nd = len(str(order))
-        vertices = dict()
+        vertices = OrderedDict()
         for i in range(order):
             vertexKey = ('v%%0%dd' % nd) % (i+1)
             vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
+        verticesList = [key for key in vertices]
         self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
         Min = self.valuationDomain['min']
         Max = self.valuationDomain['max']
-        edges = dict()
-        verticesList = [v for v in vertices]
-        verticesList.sort()
-        for x in verticesList:
-            for y in verticesList:
-                edgeKey = frozenset([x,y])
-                edges[edgeKey] = Min
+        edges = OrderedDict()
+        #verticesList = [v for v in vertices]
+        #verticesList.sort()
+        for x in vertices:
+            for y in vertices:
+                if x != y:
+                    edgeKey = frozenset([x,y])
+                    edges[edgeKey] = Min
         for i in range(order-1):
             edgeKey = frozenset(verticesList[i:i+2])
             edges[edgeKey] = Max
@@ -1346,6 +1624,173 @@ class GridGraph(Graph):
         print('order         : ', self.order)
         print('size          : ', self.size)
 
+#--------------------------
+class SnakeGraph(GridGraph):
+    """
+    Snake graphs S(p/q) are made up of all the integer grid squares between
+    the lower and upper Christofel paths of the rational number p/q, 
+    where p and q are two coprime integers such that
+    0 <= p <= q, i.e. p/q gives an irreducible ratio between 0 and 1.
+    
+    *Reference*: M. Aigner,
+    Markov's Theorem and 100 Years of the Uniqueness Conjecture, Springer, 2013, p. 141-149
+
+    S(4/7) snake graph instance::
+    
+        >>> from graphs import SnakeGraph
+        >>> s4_7 = SnakeGraph(p=4,q=7)
+        >>> s4_7.showShort()
+        *---- short description of the snake graph ----*
+        Name             : 'snakeGraph'
+        Rational p/q     : 4/7
+        Christoffel words:
+        Upper word       :  BBABABA
+        Lower word       :  ABABABB
+        >>> s4_7.exportGraphViz('4_7_snake',lineWidth=3,arcColor='red')
+
+    .. image:: 4_7_snake.png
+       :alt: 4/7 snake graph instance
+       :width: 300 px
+       :align: center
+
+    """
+    
+    def __init__(self,p,q):
+        from math import floor, ceil
+        self.name = '%d_%d_snakeGraph' % (p,q)
+        # vertices
+        self.n = q
+        self.m = p
+        vertices = {}
+        gridNodes={}
+        for x in range(q+1):
+            for y in range(p+1):
+                vertex = str(x)+'-'+str(y)
+                gridNodes[vertex]=(x,y)
+                vertices[vertex] = {'name': 'gridnode', 'shortName': vertex}
+        order = len(vertices)
+        self.order = order
+        self.vertices = vertices
+        self.gridNodes = gridNodes
+        # valuation domain
+        Min = Decimal('-1')
+        Med = Decimal('0')
+        Max = Decimal('1')
+        self.valuationDomain = {'min': Min,
+                                'med': Med,
+                                'max': Max}
+        # edges
+        edges = {} # instantiate edges
+        verticesKeys = [x for x in vertices]
+        for x in verticesKeys:
+            for y in verticesKeys:
+                if x != y:
+                    if gridNodes[x][1] == gridNodes[y][1]:
+                        if gridNodes[x][0] == gridNodes[y][0]-1 :
+                            edges[frozenset([x,y])] = Med
+                        elif gridNodes[x][0] == gridNodes[y][0]+1:
+                            edges[frozenset([x,y])] = Med
+                        else:
+                            edges[frozenset([x,y])] = Min
+                    elif gridNodes[x][0] == gridNodes[y][0]:
+                        if gridNodes[x][1] == gridNodes[y][1]-1:
+                            edges[frozenset([x,y])] = Med
+                        elif gridNodes[x][1] == gridNodes[y][1]+1:
+                            edges[frozenset([x,y])] = Med
+                        else:
+                            edges[frozenset([x,y])] = Min
+                    else:
+                        edges[frozenset([x,y])] = Min
+        self.edges = edges
+        # snake lower Christoffel path
+        k = [0 for i in range(q+1)]
+        for i in range(q+1):
+            k[i] = floor((p/q)*i)
+        print(k)
+        for i in range(q):
+            if k[i] == k[i+1]:
+                x = '%d-%d' % (i,k[i])
+                y = '%d-%d' % (i+1,k[i+1])
+                self.setEdgeValue((x,y),Max)
+            else:
+                x = '%d-%d' % (i,k[i])
+                y = '%d-%d' % (i+1,k[i])
+                self.setEdgeValue((x,y),Max)
+                x = '%d-%d' % (i+1,k[i])
+                y = '%d-%d' % (i+1,k[i+1])
+                self.setEdgeValue((x,y),Max)
+        # snake upper  Christoffel path
+        K = [0 for i in range(q+1)]
+        for i in range(q+1):
+            K[i] = ceil((p/q)*i)
+        print(K)
+        for i in range(q):
+            if K[i] == K[i+1]:
+                x = '%d-%d' % (i,K[i])
+                y = '%d-%d' % (i+1,K[i])
+                print(x,y)
+                self.setEdgeValue((x,y),Max)
+            else:
+                x = '%d-%d' % (i,K[i])
+                y = '%d-%d' % (i,K[i+1])
+                print(x,y)
+                self.setEdgeValue((x,y),Max)
+                x = '%d-%d' % (i,K[i+1])
+                y = '%d-%d' % (i+1,K[i+1])
+                print(x,y)
+                self.setEdgeValue((x,y),Max)                
+                    
+        # storing graph instance
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+
+        # ChristoffelWord
+        lcw = ''
+        ucw = ''
+        for i in range(1,q+1):
+            if k[i]-k[i-1] == 0:
+                lcw += 'A'
+            else:
+                lcw += 'B'
+            if K[i]-K[i-1] == 0:
+                ucw += 'A'
+            else:
+                ucw += 'B'
+        self.cw = (lcw,ucw)
+
+    def showShort(self,WithVertices=False):
+        """
+        Show method for SnakeGraph instances.
+        """
+        print('*---- short description of the snake graph ----*')
+        print('Name             : \'%s\'' % (self.name) )
+        print('Rational p/q     : %d/%d' % (self.m,self.n))
+        print('Christoffel words:')
+        print('Upper word       : ',self.cw[1])
+        print('Lower word       : ',self.cw[0])
+        if WithVertices:
+            vKeys = [x for x in self.vertices]
+            vKeys.sort()
+            print('Vertices         : ', vKeys)
+            print('Valuation domain : ', self.valuationDomain)
+            print('Gamma function   : ')
+            for v in vKeys:
+                if self.gamma[v] != set():
+                    print('%s -> %s' % (v, list(self.gamma[v])))
+
+    def __repr__(self):
+        """
+        Show method for SnakeGraph instances.
+        """
+        print('*---- short description of the snake graph ----*')
+        print('Name             : \'%s\'' % (self.name) )
+        print('Rational p/q     : %d/%d' % (self.m,self.n))
+        print('Christoffel words:')
+        print('Upper word       : ',self.cw[1])
+        print('Lower word       : ',self.cw[0])
+        return 'graphs.SnakeGraph(GridGraph) instance'
+        
+#---------------------
 class TriangulatedGrid(Graph):
     """
     Specialization of the general Graph class for generating
@@ -2662,132 +3107,35 @@ class MISModel(Graph):
         except:
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
+                
 
-
+    
+    
 # --------------testing the module ----
 if __name__ == '__main__':
 
-    g = RandomGraph(order=10,edgeProbability=1/3,seed=200)
+
+        from graphs import SnakeGraph
+        S = SnakeGraph(p=3,q=7)
+        S.showShort()
+        S.exportGraphViz('4_7_snake',lineWidth=3,arcColor="red")
+
+##    from time import time
+##    #g = GridGraph(4,4)
+##    g = RandomGraph(order=30,seed=10)
+##    #g.exportGraphViz()
+##    #print(g._degreeLabelling())
+##    #print(g._triplets(Comments=True))
+##    t0 = time();print(len(g._computeChordlessCycles(Cycle3=True,Comments=False)));print(time()-t0)
+##    t0 = time();print(len(g.computeChordlessCycles(Cycle3=True,Comments=False)));print(time()-t0)
+    
+    
     #g.save('test')
     #g = Graph('test')
-    ust = RandomSpanningTree(g,seed=200,Debug=False)
-    ust.showShort()
-    ust.showMore()
-    ust.dfs = ust.randomDepthFirstSearch()
-    ust.exportGraphViz(withSpanningTree=True)
-    print(ust.prueferCode)
+##    ust = RandomSpanningTree(g,seed=200,Debug=False)
+##    ust.showShort()
+##    ust.showMore()
+##    ust.dfs = ust.randomDepthFirstSearch()
+##    ust.exportGraphViz(withSpanningTree=True)
+##    print(ust.prueferCode)
     
-##    g = RandomGraph(order=20,edgeProbability=1/3,seed=200)
-##    #g = CompleteGraph(order=10)
-##    g.showShort()
-##    g.showMore()
-##    print(g.computeNeighbourhoodDepthDistribution(Debug=False))
-##    for v in g.vertices:
-##        print(v,g.computeNeighbourhoodDepth(v))
-##    print(g.isConnected(), g.computeComponents())
-##    g.exportGraphViz()
-##    print('diameter: ',g.computeDiameter())
-##    g.showMIS()
-##    mis = MISModel(g,seed=1)
-##    mis.exportGraphViz()
-##    g.showCliques()
-
-    
-    #g.computeDegreeDistribution()
-####    g = RandomRegularGraph(seed=100)
-    #g = GridGraph(n=10,m=10)
-    #g = TriangulatedGrid(n=10,m=10)
-##    g.save()
-##    g.exportGraphViz('graph200')
-##    #print(g.randomDepthFirstSearch(seed=None,Debug=False))
-##    #g.exportGraphViz(withSpanningTree=True,layout="circo")
-##    mt = BestDeterminedSpanningForest(g,Debug=True)
-##    mt.exportGraphViz(layout="circo")
-##    t = RandomTree(Debug=True,seed=100)
-##    print(t.prueferCode)
-##    print(t.tree2Pruefer())
-##    rsp = RandomSpanningForest(g,seed=100)
-##    print(rsp.prueferCodes)
-##    rsp.exportGraphViz(withSpanningTree=True)
-    
-##    from digraphs import KneserDigraph
-##    pdg = KneserDigraph()
-##    p = pdg.digraph2Graph()
-####    p = RandomGraph(order=10,edgeProbability=0.1,seed=100)
-##    p.randomDepthFirstSearch(seed=10)
-##    p.exportGraphViz(withSpanningTree=True)
-##    print(p.dfs)
-##    spt = RandomSpanningForest(p,seed=1)
-##    print(spt.dfs)
-##    spt.exportGraphViz()
-##    
-##    c = CycleGraph()
-##    c.showShort()
-##
-##    g = RandomGraph(seed=100)
-##    g.showShort()
-##    g = RandomFixedDegreeSequenceGraph(seed=100)
-##    g.showShort()
-##    rg = RandomRegularGraph(seed=100)
-##    rg.showShort()
-##    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
-##    rfs.showShort()
-##    rfs = RandomFixedSizeGraph(order=5,size=7,seed=100,Debug=True)
-##    rfs.showShort()
-##    
-##    g = TriangulatedGrid(n=5,m=5)
-##    #g.showShort()
-##    g.exportGraphViz()
-##    
-##    g = Graph(numberOfVertices=5,edgeProbability=0.5)
-##    g.showShort()
-##    g.save('test')
-##    probs = {}
-##    n = g.order
-##    i = 0
-##    verticesList = [x for x in g.vertices]
-##    verticesList.sort()
-##    for x in verticesList:
-##        probs[x] = (n - i)/(n*(n+1)/2)
-##        i += 1
-##    sumProbs = 0.0
-##    for x in verticesList:
-##        sumProbs += probs[x]
-##    met = MetropolisChain(g,probs)
-##    #met = MetropolisChain(g)
-##    #met.showShort()
-##    frequency = met.checkSampling(verticesList[0],nSim=30000)
-##    for x in verticesList:
-##        try:
-##            print(x,probs[x],frequency[x])
-##        except:
-##            print(x,0.0,0.0)
-##    met.showTransitionMatrix()
-##    met.saveCSVTransition()
-##    # Q-Colorings
-##    g = Graph(numberOfVertices=30,edgeProbability=0.1)
-##    #g = GridGraph(n=6,m=6)
-##    g.showShort()
-##    qc = Q_Coloring(g,nSim=100000,colors=['gold','lightcyan','lightcoral'],Debug=False)
-##    qc.checkFeasibility(Comments=True)
-##    qc.exportGraphViz()
-##    # Ising Models
-##    g = GridGraph(n=5,m=5)
-##    g.showShort()
-##    im = IsingModel(g,beta=0.441,nSim=30000,Debug=False)
-##    H = im.computeSpinEnergy()
-##    print( 'Spin energy = %d/%d = %.3f' % (H,im.size,H/im.size) )
-##    print(im.SpinEnergy)
-##    im.exportGraphViz(edgeColor='lightgrey',graphSize="(5,5)",graphType="pdf",colors=['gold','coral'])
-##    im.save()
-##    # MIS Models
-##    g = GridGraph(n=10,m=10)
-##    #g = Graph(numberOfVertices=30,edgeProbability=0.1)
-##    g.showShort()
-##    im = MISModel(g,nSim=100,Debug=False)
-##    im.checkMIS(Comments=True)
-##    print('MIS       = ',im.mis)
-##    print('Covered   = ',im.misCover)
-##    print('Uncovered = ',im.unCovered)
-##    print('MIS size  = ',len(im.mis))
-##    im.exportGraphViz(misColor='coral')

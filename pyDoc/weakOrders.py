@@ -266,6 +266,61 @@ class WeakOrder(Digraph):
 ##
 ##        Digraph.showRankingByChoosing(self,rankingByChoosing)
 
+class KemenyWeakOrder(WeakOrder):
+    """
+    Specialization of the abstract WeakOrder class for 
+    weak orderings resulting from the epistemic
+    disjunctive fusion (omax operator) of
+    all potential Kemeny linear orderings.
+    """
+    def __init__(self,other,orderLimit=7,
+                 Debug=False):
+        
+        if other.order > orderLimit:
+            print('Digraph order %d to high. The default limit (7) may be changed with the oderLimit argument.')
+            return
+                  
+        from digraphs import ranking2preorder, omax
+        from copy import deepcopy
+        from decimal import Decimal
+
+        self.__dict__ = deepcopy(other.__dict__)
+        self.name = other.name + '_wk'
+        self.valuationdomain['min'] = Decimal('-1')
+        self.valuationdomain['max'] = Decimal('1')
+        self.valuationdomain['med'] = Decimal('0')
+        Med = self.valuationdomain['med']
+        #relation = copy(other.relation)
+        if self.computeKemenyRanking(orderLimit=orderLimit,Debug=False) == None:
+        # [0] = ordered actions list, [1] = maximal Kemeny index
+            print('Intantiation error: unable to compute the Kemeny Order !!!')
+            print('Digraph order %d is required to be lower than 8!' % n)
+            return
+        kemenyRankings = self.maximalRankings
+        if Debug:
+            print(kemenyRankings)
+        relations = []
+        for rel in kemenyRankings:
+            print(rel)
+            relations.append(self.computePreorderRelation(ranking2preorder(rel)))
+        if Debug:
+            print(relations)
+        relation = {}
+        
+        for x in self.actions:
+            relation[x] = {}
+            for y in self.actions:
+                L = [relations[i][x][y] for i in range(len(relations))]
+                relation[x][y] = omax(Med,L)
+                if Debug:
+                    print(x,y,L,relation[x][y])
+        if Debug:
+            print(relation)
+        self.relation = relation
+        print(self.relation)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+
 class KohlerArrowRaynaudFusionDigraph(WeakOrder):
     """
     Specialization of the abstract WeakOrder class for 
@@ -537,15 +592,18 @@ class RankingByChoosingDigraph(WeakOrder):
         relFusion = {}
         for x in digraph.actions:
             relFusion[x] = {}
+            fx = relFusion[x]
+            bx = relBest[x]
+            lx = relLast[x]
             for y in digraph.actions:
                 if fusionOperator == "o-max":
-                    relFusion[x][y] = digraph.omax((relBest[x][y],relLast[x][y]))
+                    fx[y] = digraph.omax((bx[y],lx[y]))
                 elif fusionOperator == "o-min":
-                    relFusion[x][y] = digraph.omin((relBest[x][y],relLast[x][y]))
+                    fx[y] = digraph.omin((bx[y],lx[y]))
                 else:
                     print('Error: invalid epistemic fusion operator %s' % operator)
-                if Debug:
-                    print('!',x,y,relBest[x][y],relLast[x][y],relFusion[x][y])  
+##                if Debug:
+##                    print('!',x,y,relBest[x][y],relLast[x][y],relFusion[x][y])  
         self.relation=relFusion
         self.rankingByLastChoosing = copy(digraph.rankingByLastChoosing)
         self.rankingByBestChoosing = copy(digraph.rankingByBestChoosing)
@@ -1361,8 +1419,9 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                 if Comments:
                     print('Finished all threads in %.4f sec.' % (self.runTimes['ranking-by-choosing']) )
                 t0 = time()
-                for c in range(1,nwo+1):                    
-                    nc = len(catContent[c])
+                for c in range(1,nwo+1):
+                    ccc = catContent[c]
+                    nc = len(ccc)
                     #print('%d/%d' % (c,nwo), end = ',')
                     if nc > 2:
                         fiName = 'splitCatRelation-'+str(c)+'.py'
@@ -1378,7 +1437,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
                         if Debug:
                             print('singleton category %d : %d' % (c,nc))
                             print(catContent[c])
-                        catRbc[c] = [((Max,catContent[c]),(Max,catContent[c]))]
+                        catRbc[c] = [((Max,ccc),(Max,ccc))]
 ##                        for x in catContent[c]:
 ##                            catRelation[c] = {str(x): {str(x): Med}}
                         if Debug:
@@ -1389,17 +1448,17 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
 
                             print('pair category %d : %d' % (c,nc))
                             print(catContent[c])
-                        currActions = list(catContent[c])
+                        currActions = list(ccc)
                         pt = PartialPerformanceTableau(perfTab,currActions)
                         gt = BipolarOutrankingDigraph(pt)
-                        x = catContent[c][0]
-                        y = catContent[c][1]
+                        x = ccc[0]
+                        y = ccc[1]
                         if gt.relation[x][y] > gt.relation[x][y]:
                             catRbc[c] = [((Max,x),(Max,y))]
                         elif gt.relation[x][y] < gt.relation[x][y]:
                             catRbc[c] = [((Max,y),(Max,x))]
                         else:
-                            catRbc[c] = [((Max,catContent[c]),(Max,catContent[c]))]
+                            catRbc[c] = [((Max,ccc),(Max,ccc))]
 ##                        catRelation[c] = qs.computeRankingByChoosingRelation(\
 ##                            actionsSubset=currActions,\
 ##                            rankingByChoosing=catRbc[c],\
@@ -1474,11 +1533,11 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         preRanking = self.computeQsRbcRanking(Descending=True,Debug=Debug)
         relation = self.computePreRankingRelation(preRanking,Normalized=False)
         actions = self.actions
-        Max = self.valuationdomain['max']
-        Min = self.valuationdomain['min']
-        for x in dict.keys(actions):
-            for y in dict.keys(actions):
-                self.relation[x][y] = relation[x][y]
+        for x in self.actions:
+            srx = self.relation[x]
+            rx = relation[x]
+            for y in self.actions:
+                srx[y] = rx[y]
 
     def computeWeakOrder(self,Descending=True,strategy=None,Comments=False,Debug=False):
         """
@@ -1695,22 +1754,25 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         preorderRelation = {}
         for x in actions:
             preorderRelation[x] = {}
+            prx = preorderRelation[x]
             for y in actions:
-                preorderRelation[x][y] = Med
+                prx[y] = Med
 
         for eqcl in preorder:
             currRest = currentActions - set(eqcl)
             if Debug:
                 print(currentActions, eqcl, currRest)
             for x in eqcl:
+                preqx = preorderRelation[x]
                 for y in eqcl:
                     if x != y:
-                        preorderRelation[x][y] = Max
+                        preqx[y] = Max
                         preorderRelation[y][x] = Max
 
             for x in eqcl:
+                preqx = preorderRelation[x]
                 for y in currRest:
-                    preorderRelation[x][y] = Max
+                    preqx[y] = Max
                     preorderRelation[y][x] = Min
             currentActions = currentActions - set(eqcl)
         return preorderRelation
@@ -1737,19 +1799,24 @@ if __name__ == "__main__":
 ##    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,Debug=True)
 ##    t = XMCDA2PerformanceTableau('uniSorting')
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                   numberOfActions=25)
-    limitingQuantiles = 7
-    qr = QuantilesRankingDigraph(t,limitingQuantiles,
-                              strategy="average",
-                              #rankingRule="RubisChoice",
-                              LowerClosed=False,
-                              Threading=Threading,
-                              Debug=False,
-                                 StoreSorting=True)
-    qr.showSorting()
-    qr.showRanking()
-    qr.showSortingCharacteristics()
-    qr.showQsRbcRanking()
+                                   numberOfActions=8,seed=105)
+    g = BipolarOutrankingDigraph(t)
+    g.exportGraphViz('testg')
+    wke = KemenyWeakOrder(g,orderLimit=8)
+    wke.exportGraphViz('testwke')
+    print(wke.relation)
+##    limitingQuantiles = 7
+##    qr = QuantilesRankingDigraph(t,limitingQuantiles,
+##                              strategy="average",
+##                              #rankingRule="RubisChoice",
+##                              LowerClosed=False,
+##                              Threading=Threading,
+##                              Debug=False,
+##                                 StoreSorting=True)
+##    qr.showSorting()
+##    qr.showRanking()
+##    qr.showSortingCharacteristics()
+##    qr.showQsRbcRanking()
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

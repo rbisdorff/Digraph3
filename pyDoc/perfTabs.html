@@ -106,7 +106,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="ConstantPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="ConstantPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'pref': 20, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="ConstantPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'ind': 10, 'weakVeto': 60, 'pref': 20, 'veto': 80}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -224,10 +224,10 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="ConstantPerformanceTableau-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="ConstantPerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, Ranked=True, quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
+<dl><dt><a name="ConstantPerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, RankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
 actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="ConstantPerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
+<dl><dt><a name="ConstantPerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="ConstantPerformanceTableau-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -262,13 +262,16 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="ConstantPerformanceTableau-showHTMLMCSRPerformanceTableau"><strong>showHTMLMCSRPerformanceTableau</strong></a>(self, ndigits=2, title='Min/Max Performance Tableau')</dt><dd><tt>Ask&nbsp;the&nbsp;server&nbsp;for&nbsp;an&nbsp;HTML&nbsp;representation&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau.</tt></dd></dl>
 
-<dl><dt><a name="ConstantPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, Ranked=True, quantiles=None, strategy='optimistic', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="ConstantPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, RankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="ConstantPerformanceTableau-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="ConstantPerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="ConstantPerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="ConstantPerformanceTableau-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ConstantPerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="ConstantPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, sorted=None, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
@@ -320,7 +323,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="NormalizedPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="NormalizedPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'pref': 20, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="NormalizedPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'ind': 10, 'weakVeto': 60, 'pref': 20, 'veto': 80}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -438,10 +441,10 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="NormalizedPerformanceTableau-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="NormalizedPerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, Ranked=True, quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
+<dl><dt><a name="NormalizedPerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, RankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
 actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="NormalizedPerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
+<dl><dt><a name="NormalizedPerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="NormalizedPerformanceTableau-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -476,13 +479,16 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="NormalizedPerformanceTableau-showHTMLMCSRPerformanceTableau"><strong>showHTMLMCSRPerformanceTableau</strong></a>(self, ndigits=2, title='Min/Max Performance Tableau')</dt><dd><tt>Ask&nbsp;the&nbsp;server&nbsp;for&nbsp;an&nbsp;HTML&nbsp;representation&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau.</tt></dd></dl>
 
-<dl><dt><a name="NormalizedPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, Ranked=True, quantiles=None, strategy='optimistic', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="NormalizedPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, RankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="NormalizedPerformanceTableau-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="NormalizedPerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="NormalizedPerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="NormalizedPerformanceTableau-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="NormalizedPerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="NormalizedPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, sorted=None, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
@@ -536,7 +542,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="OldXMCDAPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="OldXMCDAPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'pref': 20, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="OldXMCDAPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'ind': 10, 'weakVeto': 60, 'pref': 20, 'veto': 80}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -654,10 +660,10 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="OldXMCDAPerformanceTableau-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="OldXMCDAPerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, Ranked=True, quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
+<dl><dt><a name="OldXMCDAPerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, RankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
 actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="OldXMCDAPerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
+<dl><dt><a name="OldXMCDAPerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="OldXMCDAPerformanceTableau-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -692,13 +698,16 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="OldXMCDAPerformanceTableau-showHTMLMCSRPerformanceTableau"><strong>showHTMLMCSRPerformanceTableau</strong></a>(self, ndigits=2, title='Min/Max Performance Tableau')</dt><dd><tt>Ask&nbsp;the&nbsp;server&nbsp;for&nbsp;an&nbsp;HTML&nbsp;representation&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau.</tt></dd></dl>
 
-<dl><dt><a name="OldXMCDAPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, Ranked=True, quantiles=None, strategy='optimistic', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="OldXMCDAPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, RankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="OldXMCDAPerformanceTableau-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="OldXMCDAPerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="OldXMCDAPerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="OldXMCDAPerformanceTableau-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="OldXMCDAPerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="OldXMCDAPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, sorted=None, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
@@ -748,7 +757,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="PartialPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="PartialPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'pref': 20, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="PartialPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'ind': 10, 'weakVeto': 60, 'pref': 20, 'veto': 80}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -866,10 +875,10 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="PartialPerformanceTableau-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="PartialPerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, Ranked=True, quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
+<dl><dt><a name="PartialPerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, RankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
 actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="PartialPerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
+<dl><dt><a name="PartialPerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="PartialPerformanceTableau-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -904,13 +913,16 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="PartialPerformanceTableau-showHTMLMCSRPerformanceTableau"><strong>showHTMLMCSRPerformanceTableau</strong></a>(self, ndigits=2, title='Min/Max Performance Tableau')</dt><dd><tt>Ask&nbsp;the&nbsp;server&nbsp;for&nbsp;an&nbsp;HTML&nbsp;representation&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau.</tt></dd></dl>
 
-<dl><dt><a name="PartialPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, Ranked=True, quantiles=None, strategy='optimistic', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="PartialPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, RankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="PartialPerformanceTableau-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="PartialPerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="PartialPerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="PartialPerformanceTableau-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="PartialPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, sorted=None, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
@@ -1037,7 +1049,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="PerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'pref': 20, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'ind': 10, 'weakVeto': 60, 'pref': 20, 'veto': 80}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1155,10 +1167,10 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="PerformanceTableau-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="PerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, Ranked=True, quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
+<dl><dt><a name="PerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, RankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
 actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="PerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
+<dl><dt><a name="PerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="PerformanceTableau-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -1193,13 +1205,16 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="PerformanceTableau-showHTMLMCSRPerformanceTableau"><strong>showHTMLMCSRPerformanceTableau</strong></a>(self, ndigits=2, title='Min/Max Performance Tableau')</dt><dd><tt>Ask&nbsp;the&nbsp;server&nbsp;for&nbsp;an&nbsp;HTML&nbsp;representation&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau.</tt></dd></dl>
 
-<dl><dt><a name="PerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, Ranked=True, quantiles=None, strategy='optimistic', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="PerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, RankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="PerformanceTableau-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="PerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="PerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="PerformanceTableau-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="PerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, sorted=None, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
@@ -1257,7 +1272,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2PerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="XMCDA2PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'pref': 20, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="XMCDA2PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'ind': 10, 'weakVeto': 60, 'pref': 20, 'veto': 80}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1375,10 +1390,10 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="XMCDA2PerformanceTableau-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="XMCDA2PerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, Ranked=True, quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
+<dl><dt><a name="XMCDA2PerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, RankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
 actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="XMCDA2PerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
+<dl><dt><a name="XMCDA2PerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2PerformanceTableau-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -1413,13 +1428,16 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="XMCDA2PerformanceTableau-showHTMLMCSRPerformanceTableau"><strong>showHTMLMCSRPerformanceTableau</strong></a>(self, ndigits=2, title='Min/Max Performance Tableau')</dt><dd><tt>Ask&nbsp;the&nbsp;server&nbsp;for&nbsp;an&nbsp;HTML&nbsp;representation&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau.</tt></dd></dl>
 
-<dl><dt><a name="XMCDA2PerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, Ranked=True, quantiles=None, strategy='optimistic', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="XMCDA2PerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, RankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2PerformanceTableau-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="XMCDA2PerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="XMCDA2PerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2PerformanceTableau-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="XMCDA2PerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2PerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, sorted=None, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
@@ -1474,7 +1492,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="XMCDAPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="XMCDAPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'pref': 20, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="XMCDAPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'ind': 10, 'weakVeto': 60, 'pref': 20, 'veto': 80}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1592,10 +1610,10 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="XMCDAPerformanceTableau-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="XMCDAPerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, Ranked=True, quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
+<dl><dt><a name="XMCDAPerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, RankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
 actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="XMCDAPerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
+<dl><dt><a name="XMCDAPerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="XMCDAPerformanceTableau-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -1630,13 +1648,16 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="XMCDAPerformanceTableau-showHTMLMCSRPerformanceTableau"><strong>showHTMLMCSRPerformanceTableau</strong></a>(self, ndigits=2, title='Min/Max Performance Tableau')</dt><dd><tt>Ask&nbsp;the&nbsp;server&nbsp;for&nbsp;an&nbsp;HTML&nbsp;representation&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau.</tt></dd></dl>
 
-<dl><dt><a name="XMCDAPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, Ranked=True, quantiles=None, strategy='optimistic', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="XMCDAPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, RankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="XMCDAPerformanceTableau-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="XMCDAPerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="XMCDAPerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="XMCDAPerformanceTableau-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="XMCDAPerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="XMCDAPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, sorted=None, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
@@ -1687,7 +1708,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="XMLPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="XMLPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'pref': 20, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="XMLPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'ind': 10, 'weakVeto': 60, 'pref': 20, 'veto': 80}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1805,10 +1826,10 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="XMLPerformanceTableau-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="XMLPerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, Ranked=True, quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
+<dl><dt><a name="XMLPerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, RankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
 actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="XMLPerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
+<dl><dt><a name="XMLPerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="XMLPerformanceTableau-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -1843,13 +1864,16 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="XMLPerformanceTableau-showHTMLMCSRPerformanceTableau"><strong>showHTMLMCSRPerformanceTableau</strong></a>(self, ndigits=2, title='Min/Max Performance Tableau')</dt><dd><tt>Ask&nbsp;the&nbsp;server&nbsp;for&nbsp;an&nbsp;HTML&nbsp;representation&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau.</tt></dd></dl>
 
-<dl><dt><a name="XMLPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, Ranked=True, quantiles=None, strategy='optimistic', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="XMLPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, RankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="XMLPerformanceTableau-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="XMLPerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="XMLPerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="XMLPerformanceTableau-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="XMLPerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="XMLPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, sorted=None, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
@@ -1905,7 +1929,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="XMLRubisPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="XMLRubisPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'pref': 20, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="XMLRubisPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'ind': 10, 'weakVeto': 60, 'pref': 20, 'veto': 80}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -2023,10 +2047,10 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="XMLRubisPerformanceTableau-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="XMLRubisPerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, Ranked=True, quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
+<dl><dt><a name="XMLRubisPerformanceTableau-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, criteriaList=None, actionsList=None, RankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
 actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="XMLRubisPerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
+<dl><dt><a name="XMLRubisPerformanceTableau-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="XMLRubisPerformanceTableau-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -2061,13 +2085,16 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="XMLRubisPerformanceTableau-showHTMLMCSRPerformanceTableau"><strong>showHTMLMCSRPerformanceTableau</strong></a>(self, ndigits=2, title='Min/Max Performance Tableau')</dt><dd><tt>Ask&nbsp;the&nbsp;server&nbsp;for&nbsp;an&nbsp;HTML&nbsp;representation&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau.</tt></dd></dl>
 
-<dl><dt><a name="XMLRubisPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, Ranked=True, quantiles=None, strategy='optimistic', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="XMLRubisPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, RankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="XMLRubisPerformanceTableau-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="XMLRubisPerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="XMLRubisPerformanceTableau-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="XMLRubisPerformanceTableau-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="XMLRubisPerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="XMLRubisPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, sorted=None, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 

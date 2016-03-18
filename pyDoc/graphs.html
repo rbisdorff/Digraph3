@@ -47,7 +47,12 @@
 </font></dt><dt><font face="helvetica, arial"><a href="graphs.html#DualGraph">DualGraph</a>
 </font></dt><dt><font face="helvetica, arial"><a href="graphs.html#EmptyGraph">EmptyGraph</a>
 </font></dt><dt><font face="helvetica, arial"><a href="graphs.html#GridGraph">GridGraph</a>
-</font></dt><dt><font face="helvetica, arial"><a href="graphs.html#IsingModel">IsingModel</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="graphs.html#SnakeGraph">SnakeGraph</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="graphs.html#IsingModel">IsingModel</a>
 </font></dt><dt><font face="helvetica, arial"><a href="graphs.html#MISModel">MISModel</a>
 </font></dt><dt><font face="helvetica, arial"><a href="graphs.html#MetropolisChain">MetropolisChain</a>
 </font></dt><dt><font face="helvetica, arial"><a href="graphs.html#Q_Coloring">Q_Coloring</a>
@@ -124,8 +129,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="BestDeterminedSpanningForest-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="BestDeterminedSpanningForest-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="BestDeterminedSpanningForest-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="BestDeterminedSpanningForest-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -159,10 +165,12 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 <dl><dt><a name="BestDeterminedSpanningForest-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
+<dl><dt><a name="BestDeterminedSpanningForest-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
 <dl><dt><a name="BestDeterminedSpanningForest-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="BestDeterminedSpanningForest-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="BestDeterminedSpanningForest-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -257,8 +265,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="CompleteGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="CompleteGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="CompleteGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="CompleteGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -292,10 +301,12 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 <dl><dt><a name="CompleteGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
+<dl><dt><a name="CompleteGraph-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
 <dl><dt><a name="CompleteGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="CompleteGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="CompleteGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -395,8 +406,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="CycleGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="CycleGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="CycleGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="CycleGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -430,10 +442,12 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 <dl><dt><a name="CycleGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
+<dl><dt><a name="CycleGraph-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
 <dl><dt><a name="CycleGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="CycleGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="CycleGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -527,8 +541,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="DualGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="DualGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="DualGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="DualGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -562,10 +577,12 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 <dl><dt><a name="DualGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
+<dl><dt><a name="DualGraph-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
 <dl><dt><a name="DualGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="DualGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="DualGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -658,8 +675,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="EmptyGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="EmptyGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="EmptyGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="EmptyGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -693,10 +711,12 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 <dl><dt><a name="EmptyGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
+<dl><dt><a name="EmptyGraph-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
 <dl><dt><a name="EmptyGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="EmptyGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="EmptyGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -813,8 +833,9 @@ Example&nbsp;python3&nbsp;session:<br>
 <dl><dt><a name="Graph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="Graph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="Graph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="Graph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -848,10 +869,12 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 <dl><dt><a name="Graph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
+<dl><dt><a name="Graph-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
 <dl><dt><a name="Graph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="Graph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="Graph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -960,8 +983,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="GridGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="GridGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="GridGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="GridGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -995,10 +1019,12 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 <dl><dt><a name="GridGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
+<dl><dt><a name="GridGraph-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
 <dl><dt><a name="GridGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="GridGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="GridGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -1113,8 +1139,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="IsingModel-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="IsingModel-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="IsingModel-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="IsingModel-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -1147,6 +1174,8 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 
 <dl><dt><a name="IsingModel-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
+<dl><dt><a name="IsingModel-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
 
 <dl><dt><a name="IsingModel-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
@@ -1283,8 +1312,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="MISModel-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="MISModel-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="MISModel-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="MISModel-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -1317,6 +1347,8 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 
 <dl><dt><a name="MISModel-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
+<dl><dt><a name="MISModel-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
 
 <dl><dt><a name="MISModel-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
@@ -1454,8 +1486,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="MetropolisChain-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="MetropolisChain-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="MetropolisChain-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="MetropolisChain-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -1489,10 +1522,12 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 <dl><dt><a name="MetropolisChain-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
+<dl><dt><a name="MetropolisChain-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
 <dl><dt><a name="MetropolisChain-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="MetropolisChain-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="MetropolisChain-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -1649,8 +1684,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="Q_Coloring-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="Q_Coloring-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="Q_Coloring-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="Q_Coloring-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -1683,6 +1719,8 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 
 <dl><dt><a name="Q_Coloring-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
+<dl><dt><a name="Q_Coloring-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
 
 <dl><dt><a name="Q_Coloring-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
@@ -1772,8 +1810,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="RandomFixedDegreeSequenceGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedDegreeSequenceGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedDegreeSequenceGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -1807,10 +1846,12 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 <dl><dt><a name="RandomFixedDegreeSequenceGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
 <dl><dt><a name="RandomFixedDegreeSequenceGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedDegreeSequenceGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomFixedDegreeSequenceGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -1901,8 +1942,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="RandomFixedSizeGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedSizeGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="RandomFixedSizeGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedSizeGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -1936,10 +1978,12 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 <dl><dt><a name="RandomFixedSizeGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
+<dl><dt><a name="RandomFixedSizeGraph-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
 <dl><dt><a name="RandomFixedSizeGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedSizeGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomFixedSizeGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -2033,8 +2077,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="RandomGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="RandomGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="RandomGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="RandomGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -2068,10 +2113,12 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 <dl><dt><a name="RandomGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
+<dl><dt><a name="RandomGraph-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
 <dl><dt><a name="RandomGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="RandomGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -2162,8 +2209,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="RandomRegularGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="RandomRegularGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="RandomRegularGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="RandomRegularGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -2197,10 +2245,12 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 <dl><dt><a name="RandomRegularGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
+<dl><dt><a name="RandomRegularGraph-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
 <dl><dt><a name="RandomRegularGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="RandomRegularGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomRegularGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -2301,8 +2351,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="RandomSpanningForest-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="RandomSpanningForest-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="RandomSpanningForest-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="RandomSpanningForest-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -2336,10 +2387,12 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 <dl><dt><a name="RandomSpanningForest-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
+<dl><dt><a name="RandomSpanningForest-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
 <dl><dt><a name="RandomSpanningForest-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="RandomSpanningForest-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomSpanningForest-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -2444,8 +2497,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="RandomSpanningTree-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="RandomSpanningTree-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="RandomSpanningTree-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="RandomSpanningTree-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -2479,10 +2533,12 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 <dl><dt><a name="RandomSpanningTree-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
+<dl><dt><a name="RandomSpanningTree-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
 <dl><dt><a name="RandomSpanningTree-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="RandomSpanningTree-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomSpanningTree-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -2579,8 +2635,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="RandomTree-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="RandomTree-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="RandomTree-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="RandomTree-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -2614,10 +2671,12 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 <dl><dt><a name="RandomTree-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
+<dl><dt><a name="RandomTree-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
 <dl><dt><a name="RandomTree-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="RandomTree-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomTree-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -2712,8 +2771,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="RandomValuationGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="RandomValuationGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="RandomValuationGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="RandomValuationGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -2747,10 +2807,12 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 <dl><dt><a name="RandomValuationGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
+<dl><dt><a name="RandomValuationGraph-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
 <dl><dt><a name="RandomValuationGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="RandomValuationGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="RandomValuationGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
@@ -2821,6 +2883,164 @@ Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SnakeGraph">class <strong>SnakeGraph</strong></a>(<a href="graphs.html#GridGraph">GridGraph</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Snake&nbsp;graphs&nbsp;S(p/q)&nbsp;are&nbsp;made&nbsp;up&nbsp;of&nbsp;all&nbsp;the&nbsp;integer&nbsp;grid&nbsp;squares&nbsp;between<br>
+the&nbsp;lower&nbsp;and&nbsp;upper&nbsp;Christofel&nbsp;paths&nbsp;of&nbsp;the&nbsp;rational&nbsp;number&nbsp;p/q,&nbsp;<br>
+where&nbsp;p&nbsp;and&nbsp;q&nbsp;are&nbsp;two&nbsp;coprime&nbsp;integers&nbsp;such&nbsp;that<br>
+0&nbsp;&lt;=&nbsp;p&nbsp;&lt;=&nbsp;q,&nbsp;i.e.&nbsp;p/q&nbsp;gives&nbsp;an&nbsp;irreducible&nbsp;ratio&nbsp;between&nbsp;0&nbsp;and&nbsp;1.<br>
+&nbsp;<br>
+*Reference*:&nbsp;M.&nbsp;Aigner,<br>
+Markov's&nbsp;Theorem&nbsp;and&nbsp;100&nbsp;Years&nbsp;of&nbsp;the&nbsp;Uniqueness&nbsp;Conjecture,&nbsp;Springer,&nbsp;2013,&nbsp;p.&nbsp;141-149<br>
+&nbsp;<br>
+S(4/7)&nbsp;snake&nbsp;graph&nbsp;instance::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;<a href="#SnakeGraph">SnakeGraph</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s4_7&nbsp;=&nbsp;<a href="#SnakeGraph">SnakeGraph</a>(p=4,q=7)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s4_7.<a href="#SnakeGraph-showShort">showShort</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*----&nbsp;short&nbsp;description&nbsp;of&nbsp;the&nbsp;snake&nbsp;graph&nbsp;----*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;'snakeGraph'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Rational&nbsp;p/q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4/7<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Christoffel&nbsp;words:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Upper&nbsp;word&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;BBABABA<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lower&nbsp;word&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;ABABABB<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s4_7.<a href="#SnakeGraph-exportGraphViz">exportGraphViz</a>('4_7_snake',lineWidth=3,arcColor='red')<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;4_7_snake.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;4/7&nbsp;snake&nbsp;graph&nbsp;instance<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="graphs.html#SnakeGraph">SnakeGraph</a></dd>
+<dd><a href="graphs.html#GridGraph">GridGraph</a></dd>
+<dd><a href="graphs.html#Graph">Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SnakeGraph-__init__"><strong>__init__</strong></a>(self, p, q)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;objects.</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;<a href="#SnakeGraph">SnakeGraph</a>&nbsp;instances.</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-showShort"><strong>showShort</strong></a>(self, WithVertices=False)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;<a href="#SnakeGraph">SnakeGraph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><a name="SnakeGraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#SnakeGraph-exportGraphViz">exportGraphViz</a>('randomGraph'))<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><tt>Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-isTree"><strong>isTree</strong></a>(self)</dt><dd><tt>Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-setEdgeValue"><strong>setEdgeValue</strong></a>(self, edge, value, Comments=False)</dt><dd><tt>Wrapper&nbsp;for&nbsp;updating&nbsp;the&nbsp;charactreistic&nbsp;valuation&nbsp;of&nbsp;a&nbsp;<a href="#Graph">Graph</a>&nbsp;instance.<br>
+The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
+edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
+The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="SnakeGraph-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SnakeGraph-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SnakeGraph-showMore"><strong>showMore</strong></a>(self)</dt><dd><tt>Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="TriangulatedGrid">class <strong>TriangulatedGrid</strong></a>(<a href="graphs.html#Graph">Graph</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
@@ -2854,8 +3074,9 @@ Methods inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <dl><dt><a name="TriangulatedGrid-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Graph">Graph</a>&nbsp;instances.<br>
 Returns&nbsp;a&nbsp;<a href="#DualGraph">DualGraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
-<dl><dt><a name="TriangulatedGrid-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
-intance.</tt></dd></dl>
+<dl><dt><a name="TriangulatedGrid-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.</tt></dd></dl>
 
 <dl><dt><a name="TriangulatedGrid-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
 &nbsp;<br>
@@ -2889,10 +3110,12 @@ Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp
 <dl><dt><a name="TriangulatedGrid-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
 (result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</tt></dd></dl>
 
+<dl><dt><a name="TriangulatedGrid-degreeLabelling"><strong>degreeLabelling</strong></a>(self)</dt><dd><tt>p&nbsp;14</tt></dd></dl>
+
 <dl><dt><a name="TriangulatedGrid-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><tt>Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
 of&nbsp;the&nbsp;vertex&nbsp;keys.</tt></dd></dl>
 
-<dl><dt><a name="TriangulatedGrid-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+<dl><dt><a name="TriangulatedGrid-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, noSilent=True, graphType='png', graphSize='7,7', withSpanningTree=False, layout=None, arcColor='black', lineWidth=1)</dt><dd><tt>Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
 &nbsp;<br>
 Example:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>

@@ -87,7 +87,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print(corr)
         return corr
 
-    def computeMarginalVersusGlobalRankingCorrelations(self,ranking,Sorted=True,
+    def computeMarginalVersusGlobalRankingCorrelations(self,ranking,Sorted=True,ValuedCorrelation=False,
                                                           Threading=False,nbrCores=None,\
                                                           Comments=False):
         """
@@ -120,14 +120,20 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             argsList = [(x,preorderRelation) for x in self.criteria]
             with Pool(nbrCores) as proc:   
                 correlations = proc.map(self.computeMarginalCorrelation,argsList)
-            criteriaCorrelation = [(correlations[i]['correlation'],argsList[i][0]) for i in range(len(argsList))]
+            if ValuedCorrelation:
+                criteriaCorrelation = [(correlations[i]['correlation']*correlations[i]['determination'],argsList[i][0]) for i in range(len(argsList))]
+            else:
+                criteriaCorrelation = [(correlations[i]['correlation'],argsList[i][0]) for i in range(len(argsList))]
         else:
             #criteriaList = [x for x in self.criteria]
             criteria = self.criteria
             criteriaCorrelation = []
             for c in dict.keys(criteria):
                 corr = self.computeMarginalCorrelation((c,preorderRelation),Threading=False)
-                criteriaCorrelation.append((corr['correlation'],c))            
+                if ValuedCorrelation:
+                    criteriaCorrelation.append((corr['correlation']*corr['determination'],c))            
+                else:
+                    criteriaCorrelation.append((corr['correlation'],c))            
         if Sorted:
             criteriaCorrelation.sort(reverse=True)
         if Normalizing:
@@ -228,7 +234,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print('Determinateness   : %.3f' % (corr['determination']))
         if Normalizing:
             self.recodeValuation(origValuationdomain['min'],origValuationdomain['max'])
-        #return criteriaCorrelation
+        return criteriaCorrelation
 
     def computeQuantileSortRelation(self,Debug=False):
         """
@@ -246,8 +252,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         rankingRelation = {}
         for x in actions:
             rankingRelation[x] = {}
+            rrx = rankingRelation[x]
             for y in actions:
-                rankingRelation[x][y] = Med
+                rrx[y] = Med
         for i in range(n):
             x = quantileSorting[i][1]
             for j in range(i+1,n):
@@ -2887,34 +2894,35 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         #fo.write('<type>%s</type>\n' % ('criteria'))
         fo.write('</description>\n')       
         for g in criteriaList:
+            critg = criteria[g]
             try:
-                criterionName = str(criteria[g]['name'])
+                criterionName = str(critg['name'])
             except:
                 criterionName = 'nameless'
             
             fo.write('<criterion id="%s" name="%s" mcdaConcept="%s">\n' % (g,criterionName,'criterion') )
             fo.write('<description>\n')
             try:
-                fo.write('<comment>%s</comment>\n' % (str(criteria[g]['comment'])) )
+                fo.write('<comment>%s</comment>\n' % (str(critg['comment'])) )
             except:
                 fo.write('<comment>%s</comment>\n' % ('no comment') )
             fo.write('<version>%s</version>\n' % ('performance') )
             fo.write('</description>\n')
             fo.write('<active>true</active>\n')
             try:
-                if criteria[g]['IntegerWeights']:
-                    fo.write('<criterionValue><value><integer>%d</integer></value></criterionValue>\n' % (criteria[g]['weight']) )
+                if critg['IntegerWeights']:
+                    fo.write('<criterionValue><value><integer>%d</integer></value></criterionValue>\n' % (critg['weight']) )
                 else:
-                    fo.write('<criterionValue><value><real>%.2f</real></value></criterionValue>\n' % (criteria[g]['weight']) )
+                    fo.write('<criterionValue><value><real>%.2f</real></value></criterionValue>\n' % (critg['weight']) )
             except:
-                fo.write('<criterionValue><value><real>%.2f</real></value></criterionValue>\n' % (criteria[g]['weight']) )
+                fo.write('<criterionValue><value><real>%.2f</real></value></criterionValue>\n' % (critg['weight']) )
  
             #fo.write('<criterionFunction category="%s" subCategory="%s" >\n' % ('Rubis','performance'))
             fo.write('<scale>\n')
             fo.write('<quantitative>\n')
             try:
-                fo.write('<preferenceDirection>%s</preferenceDirection>\n' % (criteria[g]['preferenceDirection']) )
-                if criteria[g]['preferenceDirection'] == 'min':
+                fo.write('<preferenceDirection>%s</preferenceDirection>\n' % (critg['preferenceDirection']) )
+                if critg['preferenceDirection'] == 'min':
                     #pdir = -1
                     pdir = 1
                 else:
@@ -2922,84 +2930,84 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             except:
                 fo.write('<preferenceDirection>%s</preferenceDirection>\n' % ('max') )
                 pdir = 1
-            fo.write('<minimum><real>%.2f</real></minimum>\n' % (criteria[g]['scale'][0]) )
-            fo.write('<maximum><real>%.2f</real></maximum>\n' % (criteria[g]['scale'][1]) )
+            fo.write('<minimum><real>%.2f</real></minimum>\n' % (critg['scale'][0]) )
+            fo.write('<maximum><real>%.2f</real></maximum>\n' % (critg['scale'][1]) )
 
             fo.write('</quantitative>\n')
             fo.write('</scale>\n')
             fo.write('<thresholds>\n')
             try:
-                if criteria[g]['thresholds']['ind'] != None:
+                if critg['thresholds']['ind'] != None:
                     fo.write('<threshold id="%s">\n' % ('ind'))
-                    if criteria[g]['thresholds']['ind'][1] != Decimal('0.0'):
+                    if critg['thresholds']['ind'][1] != Decimal('0.0'):
                         fo.write('<linear>\n')
-                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['ind'][1]) )
-                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['ind'][0]) )
+                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*critg['thresholds']['ind'][1]) )
+                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (critg['thresholds']['ind'][0]) )
                         fo.write('</linear>\n')
                     else:
                         fo.write('<constant>\n')
-                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['ind'][0]) )
+                        fo.write('<real>%.2f</real>\n' % (critg['thresholds']['ind'][0]) )
                         fo.write('</constant>\n')                       
                     fo.write('</threshold>\n')
                 
             except:
                 pass
             try:
-                if criteria[g]['thresholds']['weakPreference'] != None:
+                if critg['thresholds']['weakPreference'] != None:
                     fo.write('<threshold id="%s">\n' % ('weakPreference'))
-                    if criteria[g]['thresholds']['weakPreference'][1] != Decimal('0.0'):
+                    if critg['thresholds']['weakPreference'][1] != Decimal('0.0'):
                         fo.write('<linear>\n')
-                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['weakPreference'][1]) )
-                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['weakPreference'][0]) )
+                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*critg['thresholds']['weakPreference'][1]) )
+                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (critg['thresholds']['weakPreference'][0]) )
                         fo.write('</linear>\n')
                     else:
                         fo.write('<constant>\n')
-                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['weakPreference'][0]) )
+                        fo.write('<real>%.2f</real>\n' % (critg['thresholds']['weakPreference'][0]) )
                         fo.write('</constant>\n')                       
                     fo.write('</threshold>\n')
             except:
                 pass
             try:
-                if criteria[g]['thresholds']['pref'] != None:
+                if critg['thresholds']['pref'] != None:
                     fo.write('<threshold id="%s">\n' % ('pref'))
-                    if criteria[g]['thresholds']['pref'][1] != Decimal('0.0'):
+                    if criteg['thresholds']['pref'][1] != Decimal('0.0'):
                         fo.write('<linear>\n')
-                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['pref'][1]) )
-                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['pref'][0]) )
+                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*critg['thresholds']['pref'][1]) )
+                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (critg['thresholds']['pref'][0]) )
                         fo.write('</linear>\n')
                     else:
                         fo.write('<constant>\n')
-                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['pref'][0]) )
+                        fo.write('<real>%.2f</real>\n' % (critg['thresholds']['pref'][0]) )
                         fo.write('</constant>\n')                       
                     fo.write('</threshold>\n')
             except:
                 pass
             try:
-                if criteria[g]['thresholds']['weakVeto'] != None:
+                if critg['thresholds']['weakVeto'] != None:
                     fo.write('<threshold id="%s">\n' % ('weakVeto'))
-                    if criteria[g]['thresholds']['weakVeto'][1] != Decimal('0.0'):
+                    if critg['thresholds']['weakVeto'][1] != Decimal('0.0'):
                         fo.write('<linear>\n')
-                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['weakVeto'][1]) )
-                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['weakVeto'][0]) )
+                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*critg['thresholds']['weakVeto'][1]) )
+                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (critg['thresholds']['weakVeto'][0]) )
                         fo.write('</linear>\n')
                     else:
                         fo.write('<constant>\n')
-                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['weakVeto'][0]) )
+                        fo.write('<real>%.2f</real>\n' % (critg['thresholds']['weakVeto'][0]) )
                         fo.write('</constant>\n')                       
                     fo.write('</threshold>\n')
             except:
                 pass
             try:
-                if criteria[g]['thresholds']['veto'] != None:
+                if critg['thresholds']['veto'] != None:
                     fo.write('<threshold id="%s">\n' % ('veto'))
-                    if criteria[g]['thresholds']['veto'][1] != Decimal('0.0'):
+                    if critg['thresholds']['veto'][1] != Decimal('0.0'):
                         fo.write('<linear>\n')
-                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['veto'][1]) )
-                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['veto'][0]) )
+                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*critg['thresholds']['veto'][1]) )
+                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (critg['thresholds']['veto'][0]) )
                         fo.write('</linear>\n')
                     else:
                         fo.write('<constant>\n')
-                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['veto'][0]) )
+                        fo.write('<real>%.2f</real>\n' % (critg['thresholds']['veto'][0]) )
                         fo.write('</constant>\n')                       
                     fo.write('</threshold>\n')
             except:
@@ -3692,6 +3700,24 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         Removing this limitation is on the todo list and will be done soon.
        
     """
+    def __repr__(self):
+        """
+        Default presentation method for BipolarOutrankingDigraph instance.
+        """
+        print('*----- show short --------------*')
+        print('Instance name    : %s' % self.name)
+        print('# Actions        : %d' % self.order)
+        print('# Criteria       : %d' % len(self.criteria))
+        print('Size             : %d' % self.computeSize())
+        print('Determinateness  : %.3f' % (self.computeDeterminateness()) )
+        print('----  Constructor run times (in sec.) ----')
+        print('#Threads         : %d' % self.nbrThreads)
+        print('Total time       : %.5f' % self.runTimes['totalTime'])
+        print('Data input       : %.5f' % self.runTimes['dataInput'])
+        print('Compute relation : %.5f' % self.runTimes['computeRelation'])
+        print('Gamma sets       : %.5f' % self.runTimes['gammaSets'])
+        return '%s instance' % str(self.__class__)
+    
     def __init__(self,argPerfTab=None,\
                  coalition=None,\
                  actionsSubset=None,\
@@ -3704,7 +3730,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  WithVetoCounts=True,\
                  nbrCores=None,\
                  Debug=False,Comments=False):
-        from copy import deepcopy 
+        from copy import deepcopy
+        from time import time
+
+        # set initial time stamp
+        tt = time()
+
+        # ----  performance tableau data input 
         if argPerfTab == None:
             print('Performance tableau required !')
             #perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
@@ -3799,7 +3831,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         # init general digraph Data
         self.order = len(self.actions)
         
-        # construct outranking relation
+        # finished data input time stamp
+        self.runTimes = {'dataInput': time()-tt }
+
+        # ---------- construct outranking relation
+        # initial time stamp
+        tcp = time()
+        
         actions = self.actions
         criteria = self.criteria
         evaluation = self.evaluation
@@ -3816,12 +3854,20 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                                 WithVetoCounts=WithVetoCounts,\
                                                 nbrCores=nbrCores,\
                                                 Debug=Debug,Comments=Comments)
+        # finished relation computing time stamp
+        self.runTimes['computeRelation'] = time() - tcp
 
-##        if Normalized:
-##            self.recodeValuation(-1.0,1.0)
+        # ----  computing the gamma sets
+        tg = time()
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+        self.runTimes['gammaSets'] = time() - tg 
 
+        # total constructor time
+        self.runTimes['totalTime'] = time() - tt
+        if Comments:
+            print(self)
+        
     def computeCriterionRelation(self,c,a,b,hasSymmetricThresholds=True):
         """
         Compute the outranking characteristic for actions x and y
@@ -3884,8 +3930,18 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         from multiprocessing import cpu_count
         
         ##
-        if not Threading or cpu_count() < 6:
-            return self._constructRelation(criteria,\
+        
+        if not Threading or cpu_count() < 2:
+            # set threading parameter
+            self.nbrThreads = 1
+
+            # !! concordance relation and veto counts need a complex constructor
+            if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
+                constructRelation = self._constructRelation
+            else:
+                constructRelation = self._constructRelationSimple
+
+            return constructRelation(criteria,\
                                     evaluation,\
                                     initial=initial,\
                                     terminal=terminal,\
@@ -3934,8 +3990,14 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 ##                    splitActions = loads(fi.read())
 ##                    fi.close()
                     # compute partiel relation
+                    if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
+                        constructRelation = BipolarOutrankingDigraph._constructRelation
+                    else:
+                        constructRelation = BipolarOutrankingDigraph._constructRelationSimple
                     if self.InitialSplit:
-                        splitRelation = BipolarOutrankingDigraph._constructRelation(digraph,digraph.criteria,\
+                        #splitRelation = BipolarOutrankingDigraph._constructRelation(
+                        splitRelation = constructRelation(
+                                            digraph,digraph.criteria,\
                                             digraph.evaluation,
                                             initial=splitActions,
                                             #terminal=terminal,
@@ -3946,7 +4008,9 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                             Debug=False,
                                             hasSymmetricThresholds=hasSymmetricThresholds)
                     else:
-                        splitRelation = BipolarOutrankingDigraph._constructRelation(digraph,digraph.criteria,\
+                        #splitRelation = BipolarOutrankingDigraph._constructRelation(
+                        splitRelation = constructRelation(
+                                            digraph,digraph.criteria,\
                                             digraph.evaluation,
                                             #initial=initial,
                                             terminal=splitActions,
@@ -3978,9 +4042,11 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 fo.close()
 
                 if nbrCores == None:
-                    nbrCores = cpu_count()-1
+                    nbrCores = cpu_count()
                 if Comments:
                     print('Nbr of cpus = ',nbrCores)
+                # set number of threads
+                self.nbrThreads = nbrCores
 
                 ni = len(initial)
                 nt = len(terminal)
@@ -4066,19 +4132,171 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 ##                        print('splitRelation',splitRelation)
                     fi.close()
 
-                    #relation.update(splitRelation)
-                    from itertools import product
+                    #relation update with splitRelation)                    
+                
                     if InitialSplit:
-                        for x,y in product(splitActions,terminal):
-                        #for x in splitActions:
-                        #    for y in terminal:
-                            relation[x][y] = splitRelation[x][y]
+                        #for x,y in product(splitActions,terminal):
+                        for x in splitActions:
+                            rx = relation[x]
+                            sprx = splitRelation[x]
+                            for y in terminal:
+                                rx[y] = sprx[y]
                     else:
-                        for x,y in product(initial,splitActions):
-                        #for x in initial:
-                        #    for y in splitActions:
-                            relation[x][y] = splitRelation[x][y]   
+                        #for x,y in product(initial,splitActions):
+                        for x in initial:
+                            rx = relation[x]
+                            sprx = splitRelation[x]
+                            for y in splitActions:
+                                rx[y] = sprx[y]   
                 return relation
+
+    def _constructRelationSimple(self,criteria,\
+                           evaluation,\
+                           initial=None,\
+                           terminal=None,\
+                           hasNoVeto=False,\
+                           hasBipolarVeto=True,\
+                           WithConcordanceRelation=False,\
+                           WithVetoCounts=False,\
+                           hasSymmetricThresholds=True,\
+                           Debug=False):
+        """
+        Renders the biploar valued outranking relation from the data
+        of a given performance tableau instantiation PerfTab.
+
+        Parameters:
+            * PerfTab.criteria, PerfTab.evaluation,
+            * inital nodes, terminal nodes, for restricted purposes 
+            
+        """
+        ## default setting for digraphs
+        if initial == None:
+            initial = self.actions
+        if terminal == None:
+            terminal = self.actions
+        
+##        totalweight = Decimal('0.0')
+##        for c in dict.keys(criteria):
+##            totalweight = totalweight + criteria[c]['weight']
+        totalweight = sum(crit['weight'] for crit in criteria.values())
+
+        relation = {}
+        vetos = []
+        negativeVetos = []
+        
+        #nc = len(criteria)
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        for a in initial:
+            relation[a] = {}
+            ra = relation[a]
+            for b in terminal:
+                if a == b:
+                    ra[b] = Med
+                else:
+                    concordance = Decimal('0.0')
+                    veto = {}
+                    abvetos=[]
+                    negativeVeto = {}
+                    abNegativeVetos=[]
+
+                    for c,crit in criteria.items():
+                        evalca = evaluation[c][a]
+                        evalcb = evaluation[c][b]
+                        maxAB = max(abs(evalca),abs(evalcb))
+                        
+                        if evalca != Decimal('-999') and evalcb != Decimal('-999'):		
+                            try:
+                                indx = crit['thresholds']['ind'][0]
+                                indy = crit['thresholds']['ind'][1]
+                                ind = indx +indy * maxAB
+                            except KeyError:
+                                ind = None
+                            try:
+                                wpx = crit['thresholds']['weakPreference'][0]
+                                wpy = crit['thresholds']['weakPreference'][1]
+                                if hasSymmetricThresholds:
+                                    wp = wpx + wpy * maxAB
+                                else:
+                                    wp = wpx + wpy * abs(evalca) 
+                            except KeyError:
+                                wp = None
+                            try:
+                                px = crit['thresholds']['pref'][0]
+                                py = crit['thresholds']['pref'][1]
+                                if hasSymmetricThresholds:
+                                    p = px + py * maxAB
+                                else:
+                                    p = px + py * abs(evalca) 
+                            except KeyError:
+                                p = None
+                            d = evalca - evalcb
+                            lc0 = self._localConcordance(d,ind,wp,p)
+                            ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
+                            concordance = concordance + (lc0 * crit['weight'])
+                            try:
+                                wvx = crit['thresholds']['weakVeto'][0]
+                                wvy = crit['thresholds']['weakVeto'][1]
+                                if hasNoVeto:
+                                    wv = None
+                                else:
+                                    if hasSymmetricThresholds:
+                                        wv = wvx + wvy * maxAB
+                                    else:
+                                        wv = wvx + wvy * abs(evalca)
+                            except KeyError:
+                                wv = None
+                            try:
+                                vx = crit['thresholds']['veto'][0]
+                                vy = crit['thresholds']['veto'][1]
+                                v = vx + vy * maxAB
+                            except KeyError:
+                                v = None
+                            veto[c] = (self._localVeto(d,wv,v),d,wv,v)
+                            if veto[c][0] > Decimal('-1.0'):
+                                abvetos.append((c,veto[c]))
+                            
+                            negativeVeto[c] = (self._localNegativeVeto(d,wv,v),d,wv,v)
+                            if negativeVeto[c][0] > Decimal('-1.0'):
+                                abNegativeVetos.append((c,negativeVeto[c]))
+                        else:
+                            concordance = concordance + Decimal('0.0') * crit['weight']
+                            veto[c] = (Decimal('-1.0'),None,None,None)
+                            negativeVeto[c] = (Decimal('-1.0'),None,None,None)
+                                
+                    concordindex = concordance / totalweight                 
+                    
+                    ## init vetoes lists and indexes
+                    abVetoes=[]
+                    abNegativeVetoes=[]
+
+                    #  contradictory vetoes
+                    
+                    for c in criteria.keys():
+                        if veto[c][0] >= Decimal('0'):
+                            abVetoes.append((c,veto[c]))
+                        if negativeVeto[c][0] >= Decimal('0'):
+                            abNegativeVetoes.append((c,negativeVeto[c]))
+                                         
+                    vetoes = [-veto[c][0] for c in veto if veto[c][0] > Decimal('-1')]
+                    negativeVetoes = [negativeVeto[c][0] for c in negativeVeto\
+                                      if negativeVeto[c][0] > Decimal('-1')]
+##                    if Debug:
+##                        print('vetoes = ', vetoes)
+##                        print('negativeVetoes = ', negativeVetoes)
+                    omaxList = [concordindex] + vetoes + negativeVetoes
+                    outrankindex = omax(Med,omaxList,Debug=Debug)
+                                                                 
+                    if abVetoes != []:
+                        vetos.append(([a,b,concordindex*Max],abVetoes))
+                    if abNegativeVetoes != []:
+                        negativeVetos.append(([a,b,concordindex*Max],abNegativeVetoes))
+                    ra[b] = outrankindex*Max
+
+        # return outranking relation    
+
+        return relation
+
 
     def _constructRelation(self,criteria,\
                            evaluation,\
@@ -4120,12 +4338,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
         if hasBipolarVeto:
             negativeVetos = []
-    
+
         largePerformanceDifferencesCount = {}        
         for a in initial:
             largePerformanceDifferencesCount[a] = {}
+            lpda = largePerformanceDifferencesCount[a]
             for b in terminal:
-                largePerformanceDifferencesCount[a][b] = {'positive':0,'negative':0}
+                lpda[b] = {'positive':0,'negative':0}
 
         
         #nc = len(criteria)
@@ -4133,11 +4352,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         Med = self.valuationdomain['med']
         for a in initial:
             relation[a] = {}
+            ra = relation[a]
             concordanceRelation[a] = {}
+            crda = concordanceRelation[a]
             for b in terminal:
                 if a == b:
-                    relation[a][b] = Med
-                    concordanceRelation[a][b] = Decimal('0.0')
+                    ra[b] = Med
+                    crda[b] = Decimal('0.0')
                 else:
                     
                     concordance = Decimal('0.0')
@@ -4149,58 +4370,61 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                         negativeVeto = {}
                         abNegativeVetos=[]
 
-                    for c in criteria:
-                        if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+                    for c,crit in criteria.items():
+                        evalca = evaluation[c][a]
+                        evalcb = evaluation[c][b]
+                        maxAB = max(abs(evalca),abs(evalcb))
+                        if evalca != Decimal('-999') and evalcb != Decimal('-999'):		
                             try:
-                                indx = criteria[c]['thresholds']['ind'][0]
-                                indy = criteria[c]['thresholds']['ind'][1]
-                                ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                indx = crit['thresholds']['ind'][0]
+                                indy = crit['thresholds']['ind'][1]
+                                ind = indx +indy * maxAB
                             except KeyError:
                                 ind = None
                             try:
-                                wpx = criteria[c]['thresholds']['weakPreference'][0]
-                                wpy = criteria[c]['thresholds']['weakPreference'][1]
+                                wpx = crit['thresholds']['weakPreference'][0]
+                                wpy = crit['thresholds']['weakPreference'][1]
                                 if hasSymmetricThresholds:
-                                    wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                    wp = wpx + wpy * maxAB
                                 else:
-                                    wp = wpx + wpy * abs(evaluation[c][a]) 
+                                    wp = wpx + wpy * abs(evalca) 
                             except KeyError:
                                 wp = None
                             try:
-                                px = criteria[c]['thresholds']['pref'][0]
-                                py = criteria[c]['thresholds']['pref'][1]
+                                px = crit['thresholds']['pref'][0]
+                                py = crit['thresholds']['pref'][1]
                                 if hasSymmetricThresholds:
-                                    p = px + py * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                    p = px + py * maxAB
                                 else:
-                                    p = px + py * abs(evaluation[c][a]) 
+                                    p = px + py * abs(evalca) 
                             except KeyError:
                                 p = None
-                            d = evaluation[c][a] - evaluation[c][b]
+                            d = evalca - evalcb
                             lc0 = self._localConcordance(d,ind,wp,p)
                             ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
-                            concordance = concordance + (lc0 * criteria[c]['weight'])
+                            concordance = concordance + (lc0 * crit['weight'])
                             try:
-                                wvx = criteria[c]['thresholds']['weakVeto'][0]
-                                wvy = criteria[c]['thresholds']['weakVeto'][1]
+                                wvx = crit['thresholds']['weakVeto'][0]
+                                wvy = crit['thresholds']['weakVeto'][1]
                                 if hasNoVeto:
                                     wv = None
                                 else:
                                     if hasSymmetricThresholds:
-                                        wv = wvx + wvy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                        wv = wvx + wvy * maxAB
                                     else:
-                                        wv = wvx + wvy * abs(evaluation[c][a])
+                                        wv = wvx + wvy * abs(evalca)
                             except KeyError:
                                 wv = None
                             try:
-                                vx = criteria[c]['thresholds']['veto'][0]
-                                vy = criteria[c]['thresholds']['veto'][1]
+                                vx = crit['thresholds']['veto'][0]
+                                vy = crit['thresholds']['veto'][1]
                                 if hasNoVeto:
                                     v = None
                                 else:
                                     if hasSymmetricThresholds:
-                                        v = vx + vy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                                        v = vx + vy * maxAB
                                     else:
-                                        v = vx + vy * abs(evaluation[c][a])
+                                        v = vx + vy * abs(evalca)
                             except KeyError:
                                 v = None
                             veto[c] = (self._localVeto(d,wv,v),d,wv,v)
@@ -4217,13 +4441,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                 ## if d > wv:
                                 ##     print 'd,wv,v,negativeVeto[c]',d,wv,v,negativeVeto[c] 
                         else:
-                            concordance = concordance + Decimal('0.0') * criteria[c]['weight']
+                            concordance = concordance + Decimal('0.0') * crit['weight']
                             veto[c] = (Decimal('-1.0'),None,None,None)
                             if hasBipolarVeto:
                                 negativeVeto[c] = (Decimal('-1.0'),None,None,None)
                                 
                     concordindex = concordance / totalweight                 
-                    concordanceRelation[a][b] = concordindex
+                    crda[b] = concordindex
                     
                     ## init vetoes lists and indexes
                     abVetoes=[]
@@ -4231,7 +4455,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 
                     #  contradictory vetoes
                     
-                    for c in criteria:
+                    for c in criteria.keys():
                         if veto[c][0] >= Decimal('0'):
                             abVetoes.append((c,veto[c]))
                         if hasBipolarVeto:
@@ -4245,7 +4469,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             print('vetoes = ', vetoes)
                             print('negativeVetoes = ', negativeVetoes)
                         omaxList = [concordindex] + vetoes + negativeVetoes
-                        outrankindex = self.omax(omaxList,Debug=Debug)
+                        outrankindex = omax(Med,omaxList,Debug=Debug)
                         if Debug:
                             print('a b outrankindex = ', a,b, outrankindex)
                     else:
@@ -4260,7 +4484,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     if hasBipolarVeto:
                         if abNegativeVetoes != []:
                             negativeVetos.append(([a,b,concordindex*Max],abNegativeVetoes))
-                    relation[a][b] = outrankindex*Max
+                    ra[b] = outrankindex*Max
 
         # storing concordance relation and vetoes
         if WithConcordanceRelation:
@@ -4281,39 +4505,41 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         """
         Renders the characteristic value of the comparison of a and b on criterion c.
         """
-        evaluation = self.evaluation
-        criteria = self.criteria
+        evalca = self.evaluation[c][a]
+        evalcb = self.evaluation[c][b]
+        maxAB = max(abs(evalca),abs(evalcb))
+        crit = self.criteria[c]
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
-        if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+        if evalca != Decimal('-999') and evalcb != Decimal('-999'):		
             try:
-                indx = criteria[c]['thresholds']['ind'][0]
-                indy = criteria[c]['thresholds']['ind'][1]
+                indx = crit['thresholds']['ind'][0]
+                indy = crit['thresholds']['ind'][1]
                 if hasSymmetricThresholds:
-                    ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                    ind = indx +indy * maxAB
                 else:
-                    ind = indx +indy * abs(evaluation[c][a])
+                    ind = indx +indy * abs(evalca)
             except:
                 ind = None
             try:
-                wpx = criteria[c]['thresholds']['weakPreference'][0]
-                wpy = criteria[c]['thresholds']['weakPreference'][1]
+                wpx = crit['thresholds']['weakPreference'][0]
+                wpy = crit['thresholds']['weakPreference'][1]
                 if hasSymmetricThresholds:
-                    wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                    wp = wpx + wpy * maxAB
                 else:
-                    wp = wpx + wpy * abs(evaluation[c][a])
+                    wp = wpx + wpy * abs(evalca)
             except:
                 wp = None
             try:
-                px = criteria[c]['thresholds']['pref'][0]
-                py = criteria[c]['thresholds']['pref'][1]
+                px = crit['thresholds']['pref'][0]
+                py = crit['thresholds']['pref'][1]
                 if hasSymmetricThresholds:
-                    p = px + py * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                    p = px + py * maxAB
                 else:
-                    p = px + py * abs(evaluation[c][a])
+                    p = px + py * abs(evalca)
             except:
                 p = None
-            d = evaluation[c][a] - evaluation[c][b]
+            d = evalca - evalcb
             return self._localConcordance(d,ind,wp,p)
         else:
             return Decimal('0.0')
@@ -4926,12 +5152,14 @@ class _BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             for b in terminal:
                 largePerformanceDifferencesCount[a][b] = {'positive':0,'negative':0}
 
+        Max = self.valuationdomain['max']                                             
+        Med = self.valuationdomain['med']
         for a in initial:
             relation[a] = {}
             concordanceRelation[a] = {}
             for b in terminal:
                 if a == b:
-                    relation[a][b] = Decimal('0.0')
+                    relation[a][b] = Med
                     concordanceRelation[a][b] = Decimal('0.0')
                 else:
                     nc = len(criteria)
@@ -5040,7 +5268,7 @@ class _BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             print('vetoes = ', vetoes)
                             print('negativeVetoes = ', negativeVetoes)
                         omaxList = [concordindex] + vetoes + negativeVetoes
-                        outrankindex = self.omax(omaxList,Debug=Debug)
+                        outrankindex = omax(Med,omaxList,Debug=Debug)
                         if Debug:
                             print('a b outrankindex = ', a,b, outrankindex)
                     else:
@@ -5050,7 +5278,6 @@ class _BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             vetoIndex = max(vetoIndex,veto[c][0])
                         outrankindex = min(concordindex,-vetoIndex)
 
-                    Max = self.valuationdomain['max']                                             
                     if abVetoes != []:
                         vetos.append(([a,b,concordindex*Max],abVetoes))
                     if hasBipolarVeto:
@@ -5855,7 +6082,8 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         Min = -totalWeight
         Med = Decimal('0')
         Max = totalWeight
-        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+        self.valuationdomain = {'min':Min,'med':Med,'max':Max,
+                                'hasIntegerValuation':True}
         
         evaluation = copy.copy(perfTab.evaluation)
         
@@ -8818,35 +9046,38 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-    Threading = True
+    Threading = False
     t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
                                    numberOfCriteria=13,\
                                    weightDistribution='equiobjectives',
                                    seed=100)
     
-    g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,Comments=True)
-    g1.showRelationTable()
-    t2 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
-                                   numberOfCriteria=13,\
-                                   weightDistribution='equiobjectives',
-                                   seed=100)
-    
-    g2 = BipolarOutrankingDigraph(t2,Normalized=True,Threading=Threading,Comments=True)
-    g2.showRelationTable()
-    from time import time
-    t0 = time();print(g1.computeOrdinalCorrelationMP(g2,Threading=Threading,Debug=False));print(time()-t0)
-#    t0 = time();print(g1.computeOrdinalCorrelation(g2));print(time()-t0)
-    
-    t0 = time()
-    criteriaCorrelations = g1.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
-    print(time()-t0)
-    print(criteriaCorrelations)
-##    Threading = False
-    t0 = time()
-    ranking = g1.computeNetFlowsRanking()
-    criteriaCorrelations = g1.computeMarginalVersusGlobalRankingCorrelations(ranking,Threading=Threading)
-    print(time()-t0)
-    print(criteriaCorrelations)
+    g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,nbrCores=4,Comments=True)
+    print(g1.runTimes)
+    #g1.showRelationTable()
+##    t2 = Random3ObjectivesPerformanceTableau(numberOfActions=300,\
+##                                   numberOfCriteria=13,\
+##                                   weightDistribution='equiobjectives',
+##                                   seed=100)
+##    
+##    g2 = BipolarOutrankingDigraph(t2,Normalized=True,Threading=Threading,Comments=True)
+    #g2.showRelationTable()
+##    from time import time
+##    t0 = time();print(g1.computeOrdinalCorrelationMP(g2,Threading=Threading,Debug=False));print(time()-t0)
+##    #t0 = time();print(g1.computeOrdinalCorrelation(g2));print(time()-t0)
+##    
+##    t0 = time()
+##    criteriaCorrelations = g1.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
+##    print(time()-t0)
+##    print(criteriaCorrelations)
+####    Threading = False
+##    t0 = time()
+##    ranking = g1.computeNetFlowsRanking()
+##    criteriaCorrelations = g1.computeMarginalVersusGlobalRankingCorrelations(ranking,Threading=Threading)
+##    print(time()-t0)
+##    print(criteriaCorrelations)
+##    print(g1)
+##    print(g2)
     
 ##    t.saveXMCDA2('test')
 ##    t = XMCDA2PerformanceTableau('test')

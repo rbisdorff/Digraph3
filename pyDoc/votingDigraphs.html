@@ -285,8 +285,6 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="CondorcetDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Irreflexive=True, Reverse=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-coSize"><strong>coSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;non&nbsp;validated&nbsp;non&nbsp;reflexive&nbsp;arcs</tt></dd></dl>
-
 <dl><dt><a name="CondorcetDigraph-collectcomps"><strong>collectcomps</strong></a>(self, x, A, ncomp)</dt><dd><tt>Recursive&nbsp;subroutine&nbsp;of&nbsp;the&nbsp;components&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
@@ -296,6 +294,8 @@ renders&nbsp;six&nbsp;densitiy&nbsp;parameters:<br>
 arc&nbsp;density,&nbsp;double&nbsp;arc&nbsp;density,<br>
 single&nbsp;arc&nbsp;density,&nbsp;strict&nbsp;single&nbsp;arc&nbsp;density,<br>
 absence&nbsp;arc&nbsp;density,&nbsp;strict&nbsp;absence&nbsp;arc&nbsp;densitiy.</tt></dd></dl>
+
+<dl><dt><a name="CondorcetDigraph-computeArrowRaynaudOrder"><strong>computeArrowRaynaudOrder</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ordering&nbsp;from&nbsp;worst&nbsp;to&nbsp;best&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Arrow&amp;Raynaud's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-computeAverageValuation"><strong>computeAverageValuation</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;bipolar&nbsp;average&nbsp;correlation&nbsp;between<br>
 self&nbsp;and&nbsp;the&nbsp;crisp&nbsp;complete&nbsp;digraph&nbsp;of&nbsp;same&nbsp;order<br>
@@ -315,6 +315,21 @@ holding&nbsp;a&nbsp;possibly&nbsp;empty&nbsp;list&nbsp;tuples&nbsp;with&nbsp;at&
 list&nbsp;of&nbsp;adjacent&nbsp;actions&nbsp;of&nbsp;the&nbsp;circuit&nbsp;and&nbsp;at&nbsp;position&nbsp;1<br>
 the&nbsp;set&nbsp;of&nbsp;actions&nbsp;in&nbsp;the&nbsp;stored&nbsp;circuit.</tt></dd></dl>
 
+<dl><dt><a name="CondorcetDigraph-computeChordlessCircuitsMP"><strong>computeChordlessCircuitsMP</strong></a>(self, Odd=False, Threading=False, nbrOfCPUs=None, Comments=False, Debug=False)</dt><dd><tt>Multiprocessing&nbsp;version&nbsp;of&nbsp;<a href="#CondorcetDigraph-computeChordlessCircuits">computeChordlessCircuits</a>().<br>
+&nbsp;<br>
+Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;odd&nbsp;circuits&nbsp;detected&nbsp;in&nbsp;a&nbsp;digraph.<br>
+Result&nbsp;(possible&nbsp;empty&nbsp;list)&nbsp;stored&nbsp;in&nbsp;&lt;self.<strong>circuitsList</strong>&gt;<br>
+holding&nbsp;a&nbsp;possibly&nbsp;empty&nbsp;list&nbsp;tuples&nbsp;with&nbsp;at&nbsp;position&nbsp;0&nbsp;the<br>
+list&nbsp;of&nbsp;adjacent&nbsp;actions&nbsp;of&nbsp;the&nbsp;circuit&nbsp;and&nbsp;at&nbsp;position&nbsp;1<br>
+the&nbsp;set&nbsp;of&nbsp;actions&nbsp;in&nbsp;the&nbsp;stored&nbsp;circuit.<br>
+Inspired&nbsp;by&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo,&nbsp;Jradi,&nbsp;Algorithmica&nbsp;(2015).<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;possibly&nbsp;empty&nbsp;list&nbsp;of&nbsp;tuples&nbsp;(circuit,frozenset(circuit)).<br>
+&nbsp;<br>
+If&nbsp;Odd&nbsp;==&nbsp;True,&nbsp;only&nbsp;circuits&nbsp;of&nbsp;odd&nbsp;length&nbsp;are&nbsp;retained&nbsp;in&nbsp;the&nbsp;result.</tt></dd></dl>
+
+<dl><dt><a name="CondorcetDigraph-computeCoSize"><strong>computeCoSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;non&nbsp;validated&nbsp;non&nbsp;reflexive&nbsp;arcs</tt></dd></dl>
+
 <dl><dt><a name="CondorcetDigraph-computeConcentrationIndex"><strong>computeConcentrationIndex</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
@@ -322,6 +337,9 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="CondorcetDigraph-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
+
+<dl><dt><a name="CondorcetDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
+following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-computeCppChordlessCircuits"><strong>computeCppChordlessCircuits</strong></a>(self, Odd=False, Debug=False)</dt><dd><tt>python&nbsp;wrapper&nbsp;for&nbsp;the&nbsp;C++/Agrum&nbsp;based&nbsp;chordless&nbsp;circuits&nbsp;enumeration<br>
 exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files</tt></dd></dl>
@@ -355,13 +373,13 @@ using&nbsp;the&nbsp;Pirlot&nbsp;fixpoint&nbsp;algorithm.</tt></dd></dl>
 compared&nbsp;with&nbsp;a&nbsp;given&nbsp;crisp&nbsp;valued&nbsp;relation&nbsp;of&nbsp;a&nbsp;compatible<br>
 other&nbsp;digraph&nbsp;(same&nbsp;nodes&nbsp;or&nbsp;actions).</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-computeKemenyOrder"><strong>computeKemenyOrder</strong></a>(self, isProbabilistic=False, orderLimit=7, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Kemeny&nbsp;index.<br>
+<dl><dt><a name="CondorcetDigraph-computeKemenyOrder"><strong>computeKemenyOrder</strong></a>(self, orderLimit=7, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordering&nbsp;from&nbsp;worst&nbsp;to&nbsp;best&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;maximal&nbsp;Kemeny&nbsp;index.<br>
+Return&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking,&nbsp;kemenyIndex</tt></dd></dl>
+
+<dl><dt><a name="CondorcetDigraph-computeKemenyRanking"><strong>computeKemenyRanking</strong></a>(self, isProbabilistic=False, orderLimit=7, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ordering&nbsp;from&nbsp;worst&nbsp;to&nbsp;best&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;maximal&nbsp;Kemeny&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder,&nbsp;kemenyIndex</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="CondorcetDigraph-computeKohlerRankingDict"><strong>computeKohlerRankingDict</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule&nbsp;as&nbsp;an<br>
-ordered&nbsp;dictionary&nbsp;with&nbsp;rank&nbsp;and&nbsp;majorityMargin&nbsp;attributes.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -525,6 +543,8 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 minus&nbsp;outrankedness&nbsp;credibilities&nbsp;of&nbsp;all&nbsp;singleton&nbsp;choices.<br>
 res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 
+<dl><dt><a name="CondorcetDigraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;validated&nbsp;non&nbsp;reflexive&nbsp;arcs</tt></dd></dl>
+
 <dl><dt><a name="CondorcetDigraph-computeSizeTransitiveClosure"><strong>computeSizeTransitiveClosure</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
@@ -604,7 +624,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="CondorcetDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="CondorcetDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -989,8 +1009,6 @@ res&nbsp;=&nbsp;((netdet,sigleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="CondorcetDigraph-singletons"><strong>singletons</strong></a>(self)</dt><dd><tt>list&nbsp;of&nbsp;singletons&nbsp;and&nbsp;neighborhoods<br>
 [(singx1,&nbsp;+nx1,&nbsp;-nx1,&nbsp;not(+nx1&nbsp;or&nbsp;-nx1)),....&nbsp;]</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-size"><strong>size</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;validated&nbsp;non&nbsp;reflexive&nbsp;arcs</tt></dd></dl>
-
 <dl><dt><a name="CondorcetDigraph-sizeSubGraph"><strong>sizeSubGraph</strong></a>(self, choice)</dt><dd><tt>Output:&nbsp;(size,&nbsp;undeterm,arcDensity).<br>
 Renders&nbsp;the&nbsp;arc&nbsp;density&nbsp;of&nbsp;the&nbsp;induced&nbsp;subgraph.</tt></dd></dl>
 
@@ -1344,6 +1362,17 @@ Data descriptors defined here:<br>
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
 </td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-time"><strong>time</strong></a>(...)</dt><dd><tt><a href="#-time">time</a>()&nbsp;-&gt;&nbsp;floating&nbsp;point&nbsp;number<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;current&nbsp;time&nbsp;in&nbsp;seconds&nbsp;since&nbsp;the&nbsp;Epoch.<br>
+Fractions&nbsp;of&nbsp;a&nbsp;second&nbsp;may&nbsp;be&nbsp;present&nbsp;if&nbsp;the&nbsp;system&nbsp;clock&nbsp;provides&nbsp;them.</tt></dd></dl>
+</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
 <td colspan=3 valign=bottom>&nbsp;<br>

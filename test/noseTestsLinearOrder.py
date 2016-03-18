@@ -54,11 +54,20 @@ def testKohlerOrdering():
 def testNetFlowsOrdering():
     print("*==>> testing NetFlowsOrder Class ----*")
     t = RandomCBPerformanceTableau(numberOfActions=5)
-    t.saveXMCDA2('testkohler')
+    t.saveXMCDA2('testnf')
     g = BipolarOutrankingDigraph(t)
     #g.showRelationTable()
     nfo = NetFlowsOrder(g,coDual=False,Debug=True)
     print(nfo.computeOrder())
+
+def testOutFlowsOrdering():
+    print("*==>> testing OutFlowsOrder Class ----*")
+    t = RandomCBPerformanceTableau(numberOfActions=5)
+    t.saveXMCDA2('testof')
+    g = BipolarOutrankingDigraph(t)
+    #g.showRelationTable()
+    ofo = OutFlowsOrder(g,coDual=False,Debug=True)
+    print(ofo.computeOrder())
 
 def testRandomLinearOrders():
     print("*==>> testing RandomLinearOrder Class ----*")
