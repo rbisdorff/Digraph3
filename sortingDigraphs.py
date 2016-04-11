@@ -101,17 +101,18 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
     """
 
-    def __init__(self,argPerfTab=None,
-                 argProfile=None,
-                 scaleSteps=5,
-                 minValuation=-100.0,
-                 maxValuation=100.0,
-                 isRobust=False,
-                 hasNoVeto=False,
-                 LowerClosed=True,
-                 StoreSorting=True,
-                 Threading=False,
-                 nbrCores=None,
+    def __init__(self,argPerfTab=None,\
+                 argProfile=None,\
+                 scaleSteps=5,\
+                 minValuation=-100.0,\
+                 maxValuation=100.0,\
+                 isRobust=False,\
+                 hasNoVeto=False,\
+                 LowerClosed=True,\
+                 StoreSorting=True,\
+                 Threading=False,\
+                 tempDir=None,\
+                 nbrCores=None,\
                  Debug=False):
         """
         Constructor for SortingDigraph instances.
@@ -254,6 +255,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                        hasNoVeto=hasNoVeto,
                                                        hasBipolarVeto=True,
                                                         Threading=Threading,
+                                                        tempDir=tempDir,
                                                         WithConcordanceRelation=False,
                                                         WithVetoCounts=False,
                                                         Debug=Debug)
@@ -265,6 +267,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                        hasNoVeto=hasNoVeto,
                                                         hasBipolarVeto=True,
                                                         Threading=Threading,
+                                                        tempDir=tempDir,
                                                         WithConcordanceRelation=False,
                                                         WithVetoCounts=False,
                                                         Debug=Debug)
@@ -1310,6 +1313,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                  StoreSorting=False,\
                  CopyPerfTab=False,\
                  Threading=False,\
+                 tempDir=None,\
                  nbrCores=None,\
                  nbrOfProcesses=None,\
                  Comments=False,
@@ -1495,6 +1499,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                                                    WithConcordanceRelation=False,
                                                    WithVetoCounts=False,       
                                                     Threading=Threading,
+                                                        tempDir=tempDir,
                                                     nbrCores=nbrCores,
                                                     Comments=Comments,
                                                     WithSortingRelation=WithSortingRelation,
@@ -1569,6 +1574,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                            Debug=False,\
                            hasSymmetricThresholds=True,\
                            Threading=False,\
+                           tempDir=None,\
                            WithConcordanceRelation=True,\
                            WithVetoCounts=True,\
                             WithSortingRelation=True,\
@@ -1779,13 +1785,13 @@ class QuantilesSortingDigraph(SortingDigraph):
             if Comments:
                 print('Threading ...')
             from tempfile import TemporaryDirectory
-            with TemporaryDirectory() as tempDirName:
+            with TemporaryDirectory(dir=tempDir) as tempDirName:
                 from copy import copy, deepcopy
 
                 #selfDp = copy(self)
                 selfFileName = tempDirName +'/dumpSelf.py'
-##                if Debug:
-##                    print('temDirName, selfFileName', tempDirName,selfFileName)
+                if Debug:
+                    print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
                 fo.write(dumps(self,-1))
                 fo.close()
@@ -3651,8 +3657,8 @@ if __name__ == "__main__":
     #t = XMCDA2PerformanceTableau('test')  
     t.showHTMLPerformanceHeatmap(colorLevels=5,ndigits=0,Correlations=True)
     qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
-                                     Threading=MP,Comments=True,
-                                     Debug=False)
+                                     Threading=MP,tempDir='.',Comments=True,
+                                     Debug=True)
     qs.showHTMLQuantileOrdering(strategy='average')
     qs.showWeakOrder()
     qs.showQuantileOrdering(strategy='average')
