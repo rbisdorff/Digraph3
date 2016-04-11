@@ -166,7 +166,7 @@ class ExtendedTriangularRandomVariable():
             if probRepart >= 0.0 and probRepart <= 1.0:
                 self.r = probRepart
             else:
-                print('!!! Error: mode out of value range !!')
+                print('!!! Error: probility repartition out of value range !!')
             
         
     def random(self):

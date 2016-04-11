@@ -3726,6 +3726,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  Normalized=False,\
                  CopyPerfTab=True,\
                  Threading=False,\
+                 tempDir=None,\
                  WithConcordanceRelation=True,\
                  WithVetoCounts=True,\
                  nbrCores=None,\
@@ -3850,6 +3851,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                                 hasBipolarVeto=hasBipolarVeto,\
                                                 hasSymmetricThresholds=True,\
                                                 Threading=Threading,\
+                                                tempDir=tempDir,\
                                                 WithConcordanceRelation=WithConcordanceRelation,\
                                                 WithVetoCounts=WithVetoCounts,\
                                                 nbrCores=nbrCores,\
@@ -3920,7 +3922,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                            hasBipolarVeto=True,\
                            Debug=False,\
                            hasSymmetricThresholds=True,\
-                           Threading=False,\
+                           Threading=False,
+                           tempDir=None,\
                            WithConcordanceRelation=True,\
                            WithVetoCounts=True,\
                            nbrCores=None,Comments=False):
@@ -4030,13 +4033,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             if Comments:
                 print('Threading ...')
             from tempfile import TemporaryDirectory
-            with TemporaryDirectory() as tempDirName:
+            with TemporaryDirectory(dir=tempDir) as tempDirName:
                 from copy import copy, deepcopy
 
                 #selfDp = copy(self)
                 selfFileName = tempDirName +'/dumpSelf.py'
-##                if Debug:
-##                    print('temDirName, selfFileName', tempDirName,selfFileName)
+                if Debug:
+                    print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
                 fo.write(dumps(self,-1))
                 fo.close()
@@ -9046,13 +9049,14 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-    Threading = False
+    Threading = True
     t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
                                    numberOfCriteria=13,\
                                    weightDistribution='equiobjectives',
                                    seed=100)
     
-    g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,nbrCores=4,Comments=True)
+    g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,
+                                  tempDir='.',nbrCores=4,Comments=True,Debug=True)
     print(g1.runTimes)
     #g1.showRelationTable()
 ##    t2 = Random3ObjectivesPerformanceTableau(numberOfActions=300,\
