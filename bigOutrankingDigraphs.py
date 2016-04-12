@@ -1277,6 +1277,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                  componentRankingRule='Copeland',\
                  minimalComponentSize=None,\
                  Threading=False,\
+                 tempDir=None,\
                  nbrOfCPUs=None,\
                  nbrOfThreads=None,\
                  save2File=None,\
@@ -1330,6 +1331,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                                      WithSortingRelation=False,\
                                      CopyPerfTab=CopyPerfTab,\
                                      Threading= self.sortingParameters['Threading'],\
+                                     tempDir=tempDir,\
                                      nbrCores=nbrOfCPUs,\
                                      nbrOfProcesses=nbrOfThreads,\
                                      Comments=Comments,\
@@ -1455,79 +1457,80 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                 print('Threading ...')
             tdump = time()
             from tempfile import TemporaryDirectory,mkdtemp
-            #with TemporaryDirectory() as tempDirName:
-            tempDirName = mkdtemp()
-            #from copy import copy, deepcopy
-            #from time import sleep
-            #selfDp = copy(self)
-            selfFileName = tempDirName +'/dumpPerfTab.py'
-            if Debug:
-                print('temDirName, selfFileName', tempDirName,selfFileName)
-            fo = open(selfFileName,'wb')
-##            pd = dumps(perfTab,-1)
-##            fo.write(pd)
-            dump(perfTab,fo,-1)
-            fo.close()
-##            if Comments:
-##                print('dumping perfTab: %.5f' % (time() - tdump))
-            selfFileName = tempDirName +'/dumpDecomp.py'
-            if Debug:
-                print('temDirName, selfFileName', tempDirName,selfFileName)
-            fo = open(selfFileName,'wb')
-            pd = dumps(decomposition,-1)
-            fo.write(pd)
-##            dump(decomposition,fo,-1)
-            fo.close()
-            if Comments:
-                print('dumping time: %.5f' % (time() - tdump))
-            
-            if nbrOfCPUs == None:
-                nbrOfCPUs = cpu_count()
-            if nbrOfThreads == None:
-                nbrOfThreads = nbrOfCPUs-1
-            nbrOfJobs = nc//nbrOfThreads
-            if nbrOfJobs*nbrOfThreads < nc:
-                nbrOfJobs += 1
-##            if nbrOfJobs < nbrOfCPUs:
-##                nbrOfJobs,nbrOfCPUs = nbrOfCPUs,nbrOfJobs
-            if Comments:
-                print('Nbr of components',nc)            
-                print('Nbr of threads = ',nbrOfThreads)
-                print('Nbr of jobs/thread',nbrOfJobs)
-            nbrOfThreadsUsed = 0
-            for j in range(nbrOfThreads):
-                if Comments:
-                    print('thread = %d/%d' % (j+1,nbrOfThreads),end="...")
-                start= j*nbrOfJobs
-                if (j+1)*nbrOfJobs < nc:
-                    stop = (j+1)*nbrOfJobs
-                else:
-                    stop = nc
-                lTest = list(range(start,stop))
-                if Comments:
-                    print([len(decomposition[i][1]) for i in range(start,stop)])
-                if lTest != []:
-                    process = myThread(j,tempDirName,lTest,Debug)
-                    process.start()
-                    nbrOfThreadsUsed += 1
-            while active_children() != []:
-                pass
-                #sleep(1)
-            if Comments:
-                print('Exit %d threads' % nbrOfThreadsUsed)
-            components = OrderedDict()
-            #componentsList = []
-            for j in range(nc):
+            with TemporaryDirectory(dir=tempDir) as tempDirName:
+                #tempDirName = mkdtemp(dir=tempDir)
+                #tempDirName = TemporaryDirectory(dir=tempDir).name
+                #from copy import copy, deepcopy
+                #from time import sleep
+                #selfDp = copy(self)
+                selfFileName = tempDirName +'/dumpPerfTab.py'
                 if Debug:
-                    print('job',j)
-                fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
-                fi = open(fiName,'rb')
-                splitComponent = loads(fi.read())
+                    print('temDirName, selfFileName', tempDirName,selfFileName)
+                fo = open(selfFileName,'wb')
+    ##            pd = dumps(perfTab,-1)
+    ##            fo.write(pd)
+                dump(perfTab,fo,-1)
+                fo.close()
+    ##            if Comments:
+    ##                print('dumping perfTab: %.5f' % (time() - tdump))
+                selfFileName = tempDirName +'/dumpDecomp.py'
                 if Debug:
-                    print('splitComponent',splitComponent)
-                components[splitComponent[0]] = splitComponent[1]
-            #print(componentsList)
-            #components = OrderedDict(componentsList)
+                    print('temDirName, selfFileName', tempDirName,selfFileName)
+                fo = open(selfFileName,'wb')
+                pd = dumps(decomposition,-1)
+                fo.write(pd)
+    ##            dump(decomposition,fo,-1)
+                fo.close()
+                if Comments:
+                    print('dumping time: %.5f' % (time() - tdump))
+                
+                if nbrOfCPUs == None:
+                    nbrOfCPUs = cpu_count()
+                if nbrOfThreads == None:
+                    nbrOfThreads = nbrOfCPUs-1
+                nbrOfJobs = nc//nbrOfThreads
+                if nbrOfJobs*nbrOfThreads < nc:
+                    nbrOfJobs += 1
+    ##            if nbrOfJobs < nbrOfCPUs:
+    ##                nbrOfJobs,nbrOfCPUs = nbrOfCPUs,nbrOfJobs
+                if Comments:
+                    print('Nbr of components',nc)            
+                    print('Nbr of threads = ',nbrOfThreads)
+                    print('Nbr of jobs/thread',nbrOfJobs)
+                nbrOfThreadsUsed = 0
+                for j in range(nbrOfThreads):
+                    if Comments:
+                        print('thread = %d/%d' % (j+1,nbrOfThreads),end="...")
+                    start= j*nbrOfJobs
+                    if (j+1)*nbrOfJobs < nc:
+                        stop = (j+1)*nbrOfJobs
+                    else:
+                        stop = nc
+                    lTest = list(range(start,stop))
+                    if Comments:
+                        print([len(decomposition[i][1]) for i in range(start,stop)])
+                    if lTest != []:
+                        process = myThread(j,tempDirName,lTest,Debug)
+                        process.start()
+                        nbrOfThreadsUsed += 1
+                while active_children() != []:
+                    pass
+                    #sleep(1)
+                if Comments:
+                    print('Exit %d threads' % nbrOfThreadsUsed)
+                components = OrderedDict()
+                #componentsList = []
+                for j in range(nc):
+                    if Debug:
+                        print('job',j)
+                    fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
+                    fi = open(fiName,'rb')
+                    splitComponent = loads(fi.read())
+                    if Debug:
+                        print('splitComponent',splitComponent)
+                    components[splitComponent[0]] = splitComponent[1]
+                #print(componentsList)
+                #components = OrderedDict(componentsList)
         # end of Threading
         #fillRate = sum((comp['subGraph'].order*comp['subGraph'].order-1)\
         #                for comp in self.components.values())
@@ -1548,7 +1551,9 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
         self.components = components
 
         # setting the component relation
-        self.valuationdomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
+        self.valuationdomain = {'min':Decimal('-1'),
+                                'med':Decimal('0'),
+                                'max':Decimal('1')}
        
         self.runTimes['decomposing'] = time() - t0
         if Comments:
@@ -1735,7 +1740,7 @@ if __name__ == "__main__":
     
     from time import time
     from weakOrders import QuantilesRankingDigraph
-    MP  = False
+    MP  = True
 ##    t0 = time()
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,seed=100)
     tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,
@@ -1754,6 +1759,7 @@ if __name__ == "__main__":
                                  LowerClosed=True,
                                  minimalComponentSize=5,
                                  Threading=MP,nbrOfCPUs=8,
+                                 tempDir='.',
                                  nbrOfThreads=4,
                                  Comments=True,Debug=False)
     #print(bg1.computeDecompositionSummaryStatistics())
