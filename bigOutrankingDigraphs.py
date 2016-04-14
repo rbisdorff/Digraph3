@@ -1786,7 +1786,7 @@ class BigOutrankingDigraphDev(BigOutrankingDigraph,QuantilesRankingDigraph,Perfo
             self.actions = copy2self(perfTab.actions)
         else:
             copy2self = copy
-            self.actions = copyself(perfTab.actions)
+            self.actions = copy2self(perfTab.actions)
         na = len(self.actions)
         self.order = na
         self.criteria = copy2self(perfTab.criteria)
