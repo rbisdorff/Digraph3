@@ -15,7 +15,8 @@ def testbigOutrankingDigraph():
     print('==>> Testing bigOutrankingDigraph instantiation')
     MP = True
     t0 = time()
-    tp = RandomCBPerformanceTableau(numberOfActions=100,Threading=MP)
+    tp = Random3ObjectivesPerformanceTableau(numberOfActions=100,
+                                             BigData=True)
     print(time()-t0)
     print(total_size(tp.evaluation))
     bg1 = BigOutrankingDigraphMP(tp,quantiles=10,quantilesOrderingStrategy='average',
@@ -46,7 +47,7 @@ def testMinimalComponentSize():
     print('==>> Testing bigOutrankingDigraph with minimal Component Size instantiation')
     MP = True
     t0 = time()
-    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP)
+    tp = RandomCBPerformanceTableau(numberOfActions=200,BigData=True,Threading=MP)
     print(time()-t0)
     print(total_size(tp.evaluation))
     bg1 = BigOutrankingDigraphMP(tp,quantiles=5,quantilesOrderingStrategy='average',

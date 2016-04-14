@@ -83,17 +83,18 @@ class RandomPerformanceTableau(PerformanceTableau):
             }
 
     """
-    def __init__(self,numberOfActions = 13,
-                 numberOfCriteria = 7,
-                 weightDistribution = 'equisignificant',
-                 weightScale=None,
-                 integerWeights=True,
-                 commonScale = (0.0,100.0),
-                 commonThresholds = ((10.0,0.0),(20.0,0.0),(80.0,0.0)),
-                 commonMode = None,
-                 valueDigits = 2,
-                 missingDataProbability = 0.0,
-                 seed = None,
+    def __init__(self,numberOfActions = 13,\
+                 numberOfCriteria = 7,\
+                 weightDistribution = 'equisignificant',\
+                 weightScale=None,\
+                 integerWeights=True,\
+                 commonScale = (0.0,100.0),\
+                 commonThresholds = ((10.0,0.0),(20.0,0.0),(80.0,0.0)),\
+                 commonMode = None,\
+                 valueDigits = 2,\
+                 missingDataProbability = 0.0,\
+                 BigData=False,\
+                 seed = None,\
                  Debug = False):
         
         import sys,time,math
@@ -111,10 +112,14 @@ class RandomPerformanceTableau(PerformanceTableau):
         nd = len(str(numberOfActions))
         actions = OrderedDict()
         for i in range(numberOfActions):
-            actionKey = ('a%%0%dd' % (nd)) % (i+1)
-            actions[actionKey] = {'shortName':actionKey,
-                    'name': 'random decision action',
-                    'comment': 'RandomPerformanceTableau() generated.' }
+            if BigData:
+                actionName = ('a%%0%dd' % (nd)) % (i+1)
+                actions[i] = {'name': actionName}
+            else:   
+                actionKey = ('a%%0%dd' % (nd)) % (i+1)
+                actions[actionKey] = {'shortName':actionKey,
+                        'name': 'random decision action',
+                        'comment': 'RandomPerformanceTableau() generated.' }
                 
 #        # generate weights
         if weightScale == None:
@@ -328,7 +333,8 @@ class RandomRankPerformanceTableau(PerformanceTableau):
     def __init__(self,numberOfActions = 13, numberOfCriteria = 7,\
                  weightDistribution = 'equisignificant', weightScale=None,\
                  commonThresholds = None, integerWeights=True,\
-                 seed = None,
+                 BigData=False,\
+                 seed = None,\
                  Debug = False):
         """
         """
@@ -344,11 +350,14 @@ class RandomRankPerformanceTableau(PerformanceTableau):
         nd = len(str(numberOfActions))
         actions = OrderedDict()
         for i in range(numberOfActions):
-            actionKey = ('a%%0%dd' % (nd)) % (i+1)
-            actions[actionKey] = {'shortName':actionKey,
-                    'name': 'random decision action',
-                    'comment': 'RandomRankPerformanceTableau() generated.' }
-
+            if BigData:
+                actionName = ('a%%0%dd' % (nd)) % (i+1)
+                actions[i] = {'name': actionName}
+            else:   
+                actionKey = ('a%%0%dd' % (nd)) % (i+1)
+                actions[actionKey] = {'shortName':actionKey,
+                        'name': 'random decision action',
+                        'comment': 'RandomPerformanceTableau() generated.' }
         # generate the criteria weights
         if weightScale == None:
             weightScale = (1,numberOfCriteria)
@@ -741,14 +750,15 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
         
     """
 
-    def __init__(self,numberOfActions = None, numberOfCriteria = None,
-                 weightDistribution = None, weightScale=None,
-                 integerWeights = True, commonScale = None,
-                 commonThresholds = None, commonMode = None,
-                 valueDigits=2, Coalitions=True, VariableGenerators=True,
-                 OrdinalScales=False, Debug=False, RandomCoalitions=False,
-                 vetoProbability=None,
-                 seed= None,
+    def __init__(self,numberOfActions = None, numberOfCriteria = None,\
+                 weightDistribution = None, weightScale=None,\
+                 integerWeights = True, commonScale = None,\
+                 commonThresholds = None, commonMode = None,\
+                 valueDigits=2, Coalitions=True, VariableGenerators=True,\
+                 OrdinalScales=False, Debug=False, RandomCoalitions=False,\
+                 vetoProbability=None,\
+                 BigData=False,\
+                 seed= None,\
                  Electre3=True):
         
         # naming
@@ -769,10 +779,15 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
         actions = OrderedDict()
         for i in range(numberOfActions):
             actionKey = ('a%%0%dd' % (nd)) % (i+1)
-            actions[actionKey] = {'shortName':actionKey,
-                    'name': 'random decision action',
-                    'comment': 'RandomCoalitionsPerformanceTableau() generated.',
-                    'generators': {}}
+            if BigData:
+                actions[i] = {'shortName':actionKey,
+                              'name': actionKey,
+                              'generators': {}}
+            else:   
+                actions[actionKey] = {'shortName':actionKey,
+                        'name': 'random decision action',
+                        'comment': 'RandomCoalitionsPerformanceTableau() generated.',
+                        'generators': {}}
         self.actions = actions
         actionsList = [x for x in actions.keys()]
         #actionsList.sort()
@@ -1138,14 +1153,16 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         
     """
 
-    def __init__(self,numberOfActions = 20, numberOfCriteria = 13,
-                 weightDistribution = 'equiobjectives', weightScale=None,
-                 integerWeights = True, OrdinalScales=False, commonScale = None,
-                 commonThresholds = None, commonMode = None,
-                 valueDigits=2,
-                 vetoProbability=0.5,
-                 missingProbability = 0.05,
-                 seed= None,
+    def __init__(self,numberOfActions = 20, numberOfCriteria = 13,\
+                 weightDistribution = 'equiobjectives', weightScale=None,\
+                 integerWeights = True, OrdinalScales=False,\
+                 commonScale = None,\
+                 commonThresholds = None, commonMode = None,\
+                 valueDigits=2,\
+                 vetoProbability=0.5,\
+                 missingProbability = 0.05,\
+                 BigData=False,\
+                 seed= None,\
                  Debug=False):
         
         # naming
@@ -1162,10 +1179,13 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         actions = OrderedDict()
         for i in range(numberOfActions):
             actionKey = ('a%%0%dd' % (nd)) % (i+1)
-            actions[actionKey] = {'shortName':actionKey,
-                    'name': 'random decision action',
-                    'comment': '3 Objectives',
-                    'generators': {}}
+            if BigData:
+                actions[i] = {'name': actionKey,'generators': {}}
+            else:      
+                actions[actionKey] = {'shortName':actionKey,
+                        'name': 'random decision action',
+                        'comment': '3 Objectives',
+                        'generators': {}}
 ##        self.actions = actions
 ##        actionsList = [x for x in self.actions]
 ##        actionsList.sort()
@@ -1504,13 +1524,14 @@ class _Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
         are set at random for each coalition and action.
     
     """
-    def __init__(self,numberOfActions = 20, numberOfCriteria = 13,
-                 weightDistribution = 'equiobjectives', weightScale=None,
-                 integerWeights = True, commonScale = (0.0,100.0),
-                 commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)],
-                 commonDistribution = ['triangular','variable',0.5],
-                 missingDataProbability = 0.05,
-                 valueDigits=2,
+    def __init__(self,numberOfActions = 20, numberOfCriteria = 13,\
+                 weightDistribution = 'equiobjectives', weightScale=None,\
+                 integerWeights = True, commonScale = (0.0,100.0),\
+                 commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)],\
+                 commonDistribution = ['triangular','variable',0.5],\
+                 missingDataProbability = 0.05,\
+                 valueDigits=2,\
+                 BigData=False,\
                  Debug=False, 
                  seed= None):
         from copy import deepcopy
@@ -1536,6 +1557,7 @@ class _Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
                                                commonMode=commonDistribution,
                                                VariableGenerators=VariableGenerators,
                                                valueDigits=valueDigits,
+                                               BigData=BigData,
                                                Debug=Debug, seed=seed)
 
         self.__dict__ = t.__dict__
@@ -1701,20 +1723,21 @@ class RandomCBPerformanceTableau(PerformanceTableau):
 
     """
 
-    def __init__(self,numberOfActions = 13,
-                 numberOfCriteria = 7,
-                 weightDistribution = 'equiobjectives',
-                 weightScale=None,
-                 integerWeights = True,
-                 commonScale = None, commonThresholds = None,
-                 commonPercentiles= None,
-                 samplingSize = 100000,
-                 commonMode = None,
-                 valueDigits = 2,
-                 missingDataProbability = 0.0,
-                 seed = None,
-                 Threading = False,
-                 nbrCores = None,
+    def __init__(self,numberOfActions = 13,\
+                 numberOfCriteria = 7,\
+                 weightDistribution = 'equiobjectives',\
+                 weightScale=None,\
+                 integerWeights = True,\
+                 commonScale = None, commonThresholds = None,\
+                 commonPercentiles= None,\
+                 samplingSize = 100000,\
+                 commonMode = None,\
+                 valueDigits = 2,\
+                 missingDataProbability = 0.0,\
+                 BigData=False,\
+                 seed = None,\
+                 Threading = False,\
+                 nbrCores = None,\
                  Debug=False,Comments=False):
         """
         Constructor for RadomCBPerformanceTableau instances.
@@ -1736,12 +1759,17 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         actions = OrderedDict()
         for i in range(numberOfActions):
             actionType = random.choice(actionsTypesList)
-            actionKey = ('a%%0%dd' % (nd)) % (i+1)
-            actions[actionKey] = {'shortName':actionKey+actionType[0],
-                    'name': 'random %s decision action' % (actionType),
-                    'comment': 'Cost-Benefit',
-                    'type': actionType}
-
+            if BigData:
+                actionName = ('a%%0%dd' % (nd)) % (i+1)
+                actions[i] = {'shortName':actionName+actionType[0],
+                              'name':actionName+actionType[0],
+                              'type': actionType}
+            else:   
+                actionKey = ('a%%0%dd' % (nd)) % (i+1)
+                actions[actionKey] = {'shortName':actionKey+actionType[0],
+                        'name': 'random %s decision action' % (actionType),
+                        'comment': 'Cost-Benefit',
+                        'type': actionType}
         # generate objectives
         objectives = OrderedDict({
             'C': {'name': 'Costs', 'criteria':[]},
@@ -2103,6 +2131,7 @@ if __name__ == "__main__":
     t = RandomCBPerformanceTableau(numberOfActions=20,
                                    numberOfCriteria=13,
                                    samplingSize=100000,
+                                   BigData=True,
                                    seed=100)
     print(time()-t0)
     t.saveXMCDA2('test2')
@@ -2112,7 +2141,7 @@ if __name__ == "__main__":
 ##                                            OrdinalScales=False,
 ##                                            commonScale=None,
 ##                                            weightDistribution='equiobjectives',
-##                                            #weightScale=(1,5),
+##     #weightScale=(1,5),
 ##                                            commonMode=('beta','variable',None),
 ##                                            vetoProbability=0.5,
 ##                                            seed=120)
