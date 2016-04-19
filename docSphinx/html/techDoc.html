@@ -1228,7 +1228,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2272,6 +2272,23 @@ the new <a class="reference internal" href="#graphs.RandomTree" title="graphs.Ra
 </dd></dl>
 
 <dl class="class">
+<dt id="digraphs.RedhefferDigraph">
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RedhefferDigraph</code><span class="sig-paren">(</span><em>order=5</em>, <em>valuationdomain=(-1.0</em>, <em>1.0)</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RedhefferDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>order &gt; 0; valuationdomain=(Min,Max).</dd>
+</dl>
+<p>Specialization of the general Digraph class for generating
+temporary Redheffer digraphs.</p>
+<dl class="method">
+<dt id="digraphs.RedhefferDigraph.factorization">
+<code class="descname">factorization</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.RedhefferDigraph.factorization" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="digraphs.StrongComponentsCollapsedDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">StrongComponentsCollapsedDigraph</code><span class="sig-paren">(</span><em>digraph=None</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.StrongComponentsCollapsedDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
@@ -2370,6 +2387,11 @@ digraphs d1 and d2 of same order.</p>
 <dd></dd></dl>
 
 <dl class="function">
+<dt id="digraphs.factorization">
+<code class="descclassname">digraphs.</code><code class="descname">factorization</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.factorization" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
 <dt id="digraphs.flatten">
 <code class="descclassname">digraphs.</code><code class="descname">flatten</code><span class="sig-paren">(</span><em>iterable</em>, <em>ltypes=&lt;class 'collections.abc.Iterable'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.flatten" title="Permalink to this definition">¶</a></dt>
 <dd><p>Flattens a list of lists into a flat list.</p>
@@ -2380,6 +2402,16 @@ digraphs d1 and d2 of same order.</p>
 </pre></div>
 </div>
 </dd></dl>
+
+<dl class="function">
+<dt id="digraphs.gcd">
+<code class="descclassname">digraphs.</code><code class="descname">gcd</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.gcd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="digraphs.isprime">
+<code class="descclassname">digraphs.</code><code class="descname">isprime</code><span class="sig-paren">(</span><em>n</em>, <em>precision=7</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.isprime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="class">
 <dt id="digraphs.kChoicesDigraph">
@@ -2398,6 +2430,11 @@ of chordless odd circuits augmented digraphs.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="digraphs.lcm">
+<code class="descclassname">digraphs.</code><code class="descname">lcm</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.lcm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
 <dt id="digraphs.omax">
 <code class="descclassname">digraphs.</code><code class="descname">omax</code><span class="sig-paren">(</span><em>Med</em>, <em>L</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.omax" title="Permalink to this definition">¶</a></dt>
 <dd><p>epistemic disjunction for bipolar outranking characteristics
@@ -2413,11 +2450,26 @@ Med is the given valuation domain median.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="digraphs.pollard_brent">
+<code class="descclassname">digraphs.</code><code class="descname">pollard_brent</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.pollard_brent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
 <dt id="digraphs.powerset">
 <code class="descclassname">digraphs.</code><code class="descname">powerset</code><span class="sig-paren">(</span><em>S</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.powerset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Power set generator iterator.</p>
 <p>Parameter S may be any object that is accepted as input by the set class constructor.</p>
 </dd></dl>
+
+<dl class="function">
+<dt id="digraphs.primefactors">
+<code class="descclassname">digraphs.</code><code class="descname">primefactors</code><span class="sig-paren">(</span><em>n</em>, <em>sort=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.primefactors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="digraphs.primesbelow">
+<code class="descclassname">digraphs.</code><code class="descname">primesbelow</code><span class="sig-paren">(</span><em>N</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.primesbelow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="function">
 <dt id="digraphs.ranking2preorder">
@@ -2447,6 +2499,11 @@ To search other containers, add handlers to iterate over their contents:</p>
 </div></blockquote>
 <p>See <a class="reference external" href="http://code.activestate.com/recipes/577504/">http://code.activestate.com/recipes/577504/</a></p>
 </dd></dl>
+
+<dl class="function">
+<dt id="digraphs.totient">
+<code class="descclassname">digraphs.</code><code class="descname">totient</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.totient" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
 </div>
@@ -3444,7 +3501,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3879,7 +3936,7 @@ bipolar integer-valued outranking digraphs.</p>
 
 <dl class="class">
 <dt id="outrankingDigraphs.BipolarOutrankingDigraph">
-<em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">BipolarOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>coalition=None</em>, <em>actionsSubset=None</em>, <em>hasNoVeto=False</em>, <em>hasBipolarVeto=True</em>, <em>Normalized=False</em>, <em>CopyPerfTab=True</em>, <em>Threading=False</em>, <em>WithConcordanceRelation=True</em>, <em>WithVetoCounts=True</em>, <em>nbrCores=None</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">BipolarOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>coalition=None</em>, <em>actionsSubset=None</em>, <em>hasNoVeto=False</em>, <em>hasBipolarVeto=True</em>, <em>Normalized=False</em>, <em>CopyPerfTab=True</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>WithConcordanceRelation=True</em>, <em>WithVetoCounts=True</em>, <em>nbrCores=None</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Specialization of the abstract OutrankingDigraph root class for generating
 bipolarly-valued outranking digraphs.</p>
@@ -4198,7 +4255,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -4916,7 +4973,7 @@ ballot = {     # voters x candidates x candidates
 <span id="sortingdigraphs-module"></span><span id="sortingdigraphs-label"></span><h2>sortingDigraphs module<a class="headerlink" href="#module-sortingDigraphs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="sortingDigraphs.QuantilesSortingDigraph">
-<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">QuantilesSortingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=False</em>, <em>PrefThresholds=True</em>, <em>hasNoVeto=False</em>, <em>outrankingType='bipolar'</em>, <em>WithSortingRelation=True</em>, <em>CompleteOutranking=False</em>, <em>StoreSorting=False</em>, <em>CopyPerfTab=False</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">QuantilesSortingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=False</em>, <em>PrefThresholds=True</em>, <em>hasNoVeto=False</em>, <em>outrankingType='bipolar'</em>, <em>WithSortingRelation=True</em>, <em>CompleteOutranking=False</em>, <em>StoreSorting=False</em>, <em>CopyPerfTab=False</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></code></a></p>
 <p>Specialisation of the sortingDigraph Class
 for sorting of a large set of alternatives into
@@ -5074,7 +5131,7 @@ the high category limit.</p>
 
 <dl class="class">
 <dt id="sortingDigraphs.SortingDigraph">
-<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">SortingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>argProfile=None</em>, <em>scaleSteps=5</em>, <em>minValuation=-100.0</em>, <em>maxValuation=100.0</em>, <em>isRobust=False</em>, <em>hasNoVeto=False</em>, <em>LowerClosed=True</em>, <em>StoreSorting=True</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.SortingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">SortingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>argProfile=None</em>, <em>scaleSteps=5</em>, <em>minValuation=-100.0</em>, <em>maxValuation=100.0</em>, <em>isRobust=False</em>, <em>hasNoVeto=False</em>, <em>LowerClosed=True</em>, <em>StoreSorting=True</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.SortingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Specialisation of the digraphs.BipolarOutrankingDigraph Class
 for Condorcet based multicriteria sorting of alternatives.</p>
@@ -5385,6 +5442,14 @@ of an instance of the LinearOrcer class by sorting by outdegrees (gamma[x][0]).<
 <em class="property">class </em><code class="descclassname">linearOrders.</code><code class="descname">NetFlowsOrder</code><span class="sig-paren">(</span><em>other</em>, <em>coDual=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#linearOrders.NetFlowsOrder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#linearOrders.LinearOrder" title="linearOrders.LinearOrder"><code class="xref py py-class docutils literal"><span class="pre">linearOrders.LinearOrder</span></code></a></p>
 <p>instantiates the net flows Order from
+a given bipolar-valued Digraph instance</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="linearOrders.OutFlowsOrder">
+<em class="property">class </em><code class="descclassname">linearOrders.</code><code class="descname">OutFlowsOrder</code><span class="sig-paren">(</span><em>other</em>, <em>coDual=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#linearOrders.OutFlowsOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#linearOrders.LinearOrder" title="linearOrders.LinearOrder"><code class="xref py py-class docutils literal"><span class="pre">linearOrders.LinearOrder</span></code></a></p>
+<p>instantiates the out flows Order from
 a given bipolar-valued Digraph instance</p>
 </dd></dl>
 
@@ -6048,7 +6113,7 @@ else valuation domain = [-1.0,1.0]</li>
 
 <dl class="class">
 <dt id="randomPerfTabs.Random3ObjectivesPerformanceTableau">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">Random3ObjectivesPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=20</em>, <em>numberOfCriteria=13</em>, <em>weightDistribution='equiobjectives'</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>OrdinalScales=False</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>vetoProbability=0.5</em>, <em>missingProbability=0.05</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">Random3ObjectivesPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=20</em>, <em>numberOfCriteria=13</em>, <em>weightDistribution='equiobjectives'</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>OrdinalScales=False</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>vetoProbability=0.5</em>, <em>missingProbability=0.05</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Specialization of the PerformanceTableau
 for 3 objectives: <em>Eco</em>, <em>Soc</em> and <em>Env</em>.</p>
@@ -6121,7 +6186,7 @@ on each of the three objectives.</p>
 
 <dl class="class">
 <dt id="randomPerfTabs.RandomCBPerformanceTableau">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCBPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=13</em>, <em>numberOfCriteria=7</em>, <em>weightDistribution='equiobjectives'</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonPercentiles=None</em>, <em>samplingSize=100000</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>missingDataProbability=0.0</em>, <em>seed=None</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCBPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=13</em>, <em>numberOfCriteria=7</em>, <em>weightDistribution='equiobjectives'</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonPercentiles=None</em>, <em>samplingSize=100000</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>missingDataProbability=0.0</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Full automatic generation of random
 Cost versus Benefit oriented performance tableaux.</p>
@@ -6146,7 +6211,7 @@ Cost versus Benefit oriented performance tableaux.</p>
 
 <dl class="class">
 <dt id="randomPerfTabs.RandomCoalitionsPerformanceTableau">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCoalitionsPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>Coalitions=True</em>, <em>VariableGenerators=True</em>, <em>OrdinalScales=False</em>, <em>Debug=False</em>, <em>RandomCoalitions=False</em>, <em>vetoProbability=None</em>, <em>seed=None</em>, <em>Electre3=True</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomCoalitionsPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCoalitionsPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>Coalitions=True</em>, <em>VariableGenerators=True</em>, <em>OrdinalScales=False</em>, <em>Debug=False</em>, <em>RandomCoalitions=False</em>, <em>vetoProbability=None</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Electre3=True</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomCoalitionsPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Full automatic generation of performance tableaux with random coalitions of criteria</p>
 <dl class="docutils">
@@ -6175,7 +6240,7 @@ Cost versus Benefit oriented performance tableaux.</p>
 
 <dl class="class">
 <dt id="randomPerfTabs.RandomPerformanceTableau">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=13</em>, <em>numberOfCriteria=7</em>, <em>weightDistribution='equisignificant'</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=(0.0</em>, <em>100.0)</em>, <em>commonThresholds=((10.0</em>, <em>0.0)</em>, <em>(20.0</em>, <em>0.0)</em>, <em>(80.0</em>, <em>0.0))</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>missingDataProbability=0.0</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=13</em>, <em>numberOfCriteria=7</em>, <em>weightDistribution='equisignificant'</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=(0.0</em>, <em>100.0)</em>, <em>commonThresholds=((10.0</em>, <em>0.0)</em>, <em>(20.0</em>, <em>0.0)</em>, <em>(80.0</em>, <em>0.0))</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>missingDataProbability=0.0</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Specialization of the PerformanceTableau class for generating a temporary
 random performance tableau.</p>
@@ -6255,7 +6320,7 @@ and considerable performance difference discrimination thresholds.</p>
 
 <dl class="class">
 <dt id="randomPerfTabs.RandomRankPerformanceTableau">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomRankPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=13</em>, <em>numberOfCriteria=7</em>, <em>weightDistribution='equisignificant'</em>, <em>weightScale=None</em>, <em>commonThresholds=None</em>, <em>integerWeights=True</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomRankPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomRankPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=13</em>, <em>numberOfCriteria=7</em>, <em>weightDistribution='equisignificant'</em>, <em>weightScale=None</em>, <em>commonThresholds=None</em>, <em>integerWeights=True</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomRankPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Specialization of the PerformanceTableau class for generating a temporary
 random performance tableau.</p>
@@ -6294,7 +6359,7 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 
 <dl class="class">
 <dt id="randomPerfTabs.RandomS3PerformanceTableau">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomS3PerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>Coalitions=True</em>, <em>VariableGenerators=True</em>, <em>OrdinalScales=False</em>, <em>Debug=False</em>, <em>RandomCoalitions=False</em>, <em>vetoProbability=None</em>, <em>seed=None</em>, <em>Electre3=True</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomS3PerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomS3PerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>Coalitions=True</em>, <em>VariableGenerators=True</em>, <em>OrdinalScales=False</em>, <em>Debug=False</em>, <em>RandomCoalitions=False</em>, <em>vetoProbability=None</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Electre3=True</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomS3PerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#randomPerfTabs.RandomCoalitionsPerformanceTableau" title="randomPerfTabs.RandomCoalitionsPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomCoalitionsPerformanceTableau</span></code></a></p>
 <p>Obsolete dummy class for backports.</p>
 </dd></dl>
@@ -6601,8 +6666,31 @@ Components are stored in an ordered dictionary.</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraphDev">
+<em class="property">class </em><code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">BigOutrankingDigraphDev</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>componentRankingRule='Copeland'</em>, <em>minimalComponentSize=None</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrOfCPUs=None</em>, <em>nbrOfThreads=None</em>, <em>save2File=None</em>, <em>CopyPerfTab=True</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphDev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#bigOutrankingDigraphs.BigOutrankingDigraph" title="bigOutrankingDigraphs.BigOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">bigOutrankingDigraphs.BigOutrankingDigraph</span></code></a>, <a class="reference internal" href="#weakOrders.QuantilesRankingDigraph" title="weakOrders.QuantilesRankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">weakOrders.QuantilesRankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<p>Multiprocessing implementation of the abstract BipolarOutrankingDigraph class
+for large instances (order &gt; 1000)</p>
+<p>The outranking digraph is decomposed with a q-tiling sort into a partition of
+quantile equivalence classes, which are linearly ordred by average quantile limits (default).</p>
+<p>Wich each quantile equivalence class is associated a BipolarOutrankingDigraph object
+which is by default restricted to a Digraph instance;
+the corresponding restricted performance tableau being dropped.</p>
+<p>By default, q is set to a tenth of the number of decision actions,
+ie q = order//10.</p>
+<p>For other parameters settings, see the corresponding QuantilesSortingDigraph class.</p>
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraphDev.computeActionCategories">
+<code class="descname">computeActionCategories</code><span class="sig-paren">(</span><em>action</em>, <em>Show=False</em>, <em>Debug=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphDev.computeActionCategories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the union of categories in which the given action is sorted positively or null into.
+Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="bigOutrankingDigraphs.BigOutrankingDigraphMP">
-<em class="property">class </em><code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">BigOutrankingDigraphMP</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>componentRankingRule='Copeland'</em>, <em>minimalComponentSize=None</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>nbrOfThreads=None</em>, <em>save2File=None</em>, <em>CopyPerfTab=True</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphMP" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">BigOutrankingDigraphMP</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>componentRankingRule='Copeland'</em>, <em>minimalComponentSize=None</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrOfCPUs=None</em>, <em>nbrOfThreads=None</em>, <em>save2File=None</em>, <em>CopyPerfTab=True</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphMP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#bigOutrankingDigraphs.BigOutrankingDigraph" title="bigOutrankingDigraphs.BigOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">bigOutrankingDigraphs.BigOutrankingDigraph</span></code></a>, <a class="reference internal" href="#weakOrders.QuantilesRankingDigraph" title="weakOrders.QuantilesRankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">weakOrders.QuantilesRankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Multiprocessing implementation of the abstract BipolarOutrankingDigraph class
 for large instances (order &gt; 1000)</p>
