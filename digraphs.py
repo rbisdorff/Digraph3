@@ -240,6 +240,141 @@ def total_size(o, handlers={}, verbose=False):
 
     return sizeof(o)
 
+### arithmetics
+def primesbelow(N):
+    # http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188
+    #""" Input N>=6, Returns a list of primes, 2 <= p < N """
+    correction = N % 6 > 1
+    N = {0:N, 1:N-1, 2:N+4, 3:N+3, 4:N+2, 5:N+1}[N%6]
+    sieve = [True] * (N // 3)
+    sieve[0] = False
+    for i in range(int(N ** .5) // 3 + 1):
+        if sieve[i]:
+            k = (3 * i + 1) | 1
+            sieve[k*k // 3::2*k] = [False] * ((N//6 - (k*k)//6 - 1)//k + 1)
+            sieve[(k*k + 4*k - 2*k*(i%2)) // 3::2*k] = [False] * ((N // 6 - (k*k + 4*k - 2*k*(i%2))//6 - 1) // k + 1)
+    return [2, 3] + [(3 * i + 1) | 1 for i in range(1, N//3 - correction) if sieve[i]]
+
+smallprimeset = set(primesbelow(100000))
+_smallprimeset = 100000
+def isprime(n, precision=7):
+    # http://en.wikipedia.org/wiki/Miller-Rabin_primality_test#Algorithm_and_running_time
+    if n == 1 or n % 2 == 0:
+        return False
+    elif n < 1:
+        raise ValueError("Out of bounds, first argument must be > 0")
+    elif n < _smallprimeset:
+        return n in smallprimeset
+
+
+    d = n - 1
+    s = 0
+    while d % 2 == 0:
+        d //= 2
+        s += 1
+
+    for repeat in range(precision):
+        a = random.randrange(2, n - 2)
+        x = pow(a, d, n)
+
+        if x == 1 or x == n - 1: continue
+
+        for r in range(s - 1):
+            x = pow(x, 2, n)
+            if x == 1: return False
+            if x == n - 1: break
+        else: return False
+
+    return True
+
+# https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/
+def pollard_brent(n):
+    if n % 2 == 0: return 2
+    if n % 3 == 0: return 3
+
+    y, c, m = random.randint(1, n-1), random.randint(1, n-1), random.randint(1, n-1)
+    g, r, q = 1, 1, 1
+    while g == 1:
+        x = y
+        for i in range(r):
+            y = (pow(y, 2, n) + c) % n
+
+        k = 0
+        while k < r and g==1:
+            ys = y
+            for i in range(min(m, r-k)):
+                y = (pow(y, 2, n) + c) % n
+                q = q * abs(x-y) % n
+            g = gcd(q, n)
+            k += m
+        r *= 2
+    if g == n:
+        while True:
+            ys = (pow(ys, 2, n) + c) % n
+            g = gcd(abs(x - ys), n)
+            if g > 1:
+                break
+
+    return g
+
+smallprimes = primesbelow(1000) # might seem low, but 1000*1000 = 1000000, so this will fully factor every composite < 1000000
+def primefactors(n, sort=False):
+    factors = []
+
+    limit = int(n ** .5) + 1
+    for checker in smallprimes:
+        if checker > limit: break
+        while n % checker == 0:
+            factors.append(checker)
+            n //= checker
+            limit = int(n ** .5) + 1
+            if checker > limit: break
+
+    if n < 2: return factors
+
+    while n > 1:
+        if isprime(n):
+            factors.append(n)
+            break
+        factor = pollard_brent(n) # trial division did not fully factor, switch to pollard-brent
+        factors.extend(primefactors(factor)) # recurse to factor the not necessarily prime factor returned by pollard-brent
+        n //= factor
+
+    if sort: factors.sort()
+
+    return factors
+
+def factorization(n):
+    factors = {}
+    for p1 in primefactors(n):
+        try:
+            factors[p1] += 1
+        except KeyError:
+            factors[p1] = 1
+    return factors
+
+totients = {}
+def totient(n):
+    if n == 0: return 1
+
+    try: return totients[n]
+    except KeyError: pass
+
+    tot = 1
+    for p, exp in factorization(n).items():
+        tot *= (p - 1)  *  p ** (exp - 1)
+
+    totients[n] = tot
+    return tot
+
+def gcd(a, b):
+    if a == b: return a
+    while b > 0: a, b = b, a % b
+    return a
+
+def lcm(a, b):
+    return abs(a * b) // gcd(a, b)
+
 
 #----------XML handling class -----------------
 try:
@@ -2426,12 +2561,13 @@ class Digraph(object):
         Produces the symmetric closure of self.relation.
         """
         actions = set(self.actions)
-        relation = self.relation.copy()
-        for x,rx in relation.items():
-            #rx = relation[x]
-            for y,rxy in rx.items():
-                rxy = max(rxy,relation[y][x])
-        self.relation = relation.copy()
+        symRelation = {}
+        relation = self.relation
+        for x in relation:
+            symRelation[x] = {} 
+            for y in relation[x]:
+                 symRelation[x][y] = max(relation[x][y],relation[y][x])
+        self.relation = symRelation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
@@ -10150,6 +10286,49 @@ class CompleteDigraph(Digraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
+class RedhefferDigraph(Digraph):
+    """
+    Parameters:
+        order > 0; valuationdomain=(Min,Max).
+
+    Specialization of the general Digraph class for generating
+    temporary Redheffer digraphs.
+    """
+    ############### helper functions
+
+    from digraphs import factorization
+    
+
+    def __init__(self,order=5,valuationdomain = (-1.0,1.0)):
+        import sys,array,copy
+        self.name = 'Redheffer'
+        self.order = order
+        actionlist = list(range(order+1))
+        actionlist.remove(0)
+        actions = {}
+        for x in actionlist:
+            actions[x] = {'name':str(x)}
+        self.actions = actions
+        Max = Decimal(str((valuationdomain[1])))
+        Min = Decimal(str((valuationdomain[0])))
+        Med = (Max + Min)/Decimal('2')
+        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+        relation = {}
+        for x in actions:
+            relation[x] = {}
+            for y in actions:
+                if x == y:
+                    relation[x][y] = Min
+                elif x == 1 or y == 1:
+                    relation[x][y] = Max
+                elif x < y and (y%x) == 0:
+                    relation[x][y] = Max
+                else:
+                    relation[x][y] = Min
+        self.relation = relation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+
 
 class PolarisedDigraph(Digraph):
     """
@@ -11698,45 +11877,46 @@ if __name__ == "__main__":
         print('*-------- Testing classes and methods -------')
 
         from time import time
+        dg = RedhefferDigraph(order=8)
         #g = RandomTournament(order=5,seed=1)
         #g = RandomValuationDigraph(seed=1)
         #g.exportGraphViz()
-        from outrankingDigraphs import BipolarOutrankingDigraph
-        from randomPerfTabs import RandomCBPerformanceTableau
-        MP = False
-        with open('resGR.csv','w') as fo:
-            #fo.write('"card","tnewMP","tnew","told"\n')
-            for s in range(2,3):
-                print('Simulation: ',s)
-                t1 = Random3ObjectivesPerformanceTableau(numberOfActions=100,seed=s)
-                g = BipolarOutrankingDigraph(t1,Normalized=True)
-                #g = RandomDigraph(order=250,seed=s)
-                #g = RandomTournament(order=25,seed=s)
-                #g = GridDigraph(8,8,hasMedianSplitOrientation=True)
-                t0 = time()
-                print(len(g.computeChordlessCircuitsMP(Odd=False,
-                                                       Comments=False,
-                                                       Threading=MP)))
-                tnewMP = (time()-t0)
-                print(tnewMP)     
-                #g.showChordlessCircuits()
-                t0 = time()
-                print(len(g._computeChordlessCircuits(Odd=False,
-                                                       Comments=False)))
-                tnew = (time()-t0)
-                print(tnew)     
-                new = len(g.circuitsList)
-                t0 = time()
-                print(len(g.computeChordlessCircuits(Odd=False,Comments=False)))
-                told = (time()-t0)
-                print(told)
-                #g.showChordlessCircuits()
-                #g.showRelationTable(actionsSubset=['a05', 'a13', 'a17', 'a01', 'a08'])
-                old = len(g.circuitsList)
-                if new != old:
-                    print(s,new,old)
-                    break
-                #fo.write('%d,%.5f,%.5f,%.5f\n' %(new,tnewMP,tnew,told))
+##        from outrankingDigraphs import BipolarOutrankingDigraph
+##        from randomPerfTabs import RandomCBPerformanceTableau
+##        MP = False
+##        with open('resGR.csv','w') as fo:
+##            #fo.write('"card","tnewMP","tnew","told"\n')
+##            for s in range(2,3):
+##                print('Simulation: ',s)
+##                t1 = Random3ObjectivesPerformanceTableau(numberOfActions=100,seed=s)
+##                g = BipolarOutrankingDigraph(t1,Normalized=True)
+##                #g = RandomDigraph(order=250,seed=s)
+##                #g = RandomTournament(order=25,seed=s)
+##                #g = GridDigraph(8,8,hasMedianSplitOrientation=True)
+##                t0 = time()
+##                print(len(g.computeChordlessCircuitsMP(Odd=False,
+##                                                       Comments=False,
+##                                                       Threading=MP)))
+##                tnewMP = (time()-t0)
+##                print(tnewMP)     
+##                #g.showChordlessCircuits()
+##                t0 = time()
+##                print(len(g._computeChordlessCircuits(Odd=False,
+##                                                       Comments=False)))
+##                tnew = (time()-t0)
+##                print(tnew)     
+##                new = len(g.circuitsList)
+##                t0 = time()
+##                print(len(g.computeChordlessCircuits(Odd=False,Comments=False)))
+##                told = (time()-t0)
+##                print(told)
+##                #g.showChordlessCircuits()
+##                #g.showRelationTable(actionsSubset=['a05', 'a13', 'a17', 'a01', 'a08'])
+##                old = len(g.circuitsList)
+##                if new != old:
+##                    print(s,new,old)
+##                    break
+##                #fo.write('%d,%.5f,%.5f,%.5f\n' %(new,tnewMP,tnew,told))
 
             
         #print(g.circuits)
