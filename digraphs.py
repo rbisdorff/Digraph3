@@ -6000,11 +6000,11 @@ class Digraph(object):
             fo.write('}\n')
         fo.close()
 
-    def saveCSV(self,fileName='tempdigraph',Normalized=True,
-                Dual=True,Converse=False,Diagonal=False,Debug=False):
+    def saveCSV(self,fileName='tempdigraph',Normalized=False,
+                Dual=False,Converse=False,Diagonal=False,Debug=False):
         """Persistent storage of a Digraph class instance in the form of
             a csv file. """
-        from copy import copy,deepcopy
+        from copy import deepcopy
         import csv
         com = ''
         if Normalized:
@@ -6034,7 +6034,7 @@ class Digraph(object):
         if Debug:
             print(headerText)
         csvfo.writerow(headerText)
-        dg = copy(self)
+        dg = deepcopy(self)
         if Normalized:
             dg.recodeValuation(-1,1)
         Min = dg.valuationdomain['min']
