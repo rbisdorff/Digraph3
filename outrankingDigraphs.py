@@ -2967,21 +2967,21 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     fo.write('</threshold>\n')
             except:
                 pass
-            try:
-                if critg['thresholds']['pref'] != None:
-                    fo.write('<threshold id="%s">\n' % ('pref'))
-                    if criteg['thresholds']['pref'][1] != Decimal('0.0'):
-                        fo.write('<linear>\n')
-                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*critg['thresholds']['pref'][1]) )
-                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (critg['thresholds']['pref'][0]) )
-                        fo.write('</linear>\n')
-                    else:
-                        fo.write('<constant>\n')
-                        fo.write('<real>%.2f</real>\n' % (critg['thresholds']['pref'][0]) )
-                        fo.write('</constant>\n')                       
-                    fo.write('</threshold>\n')
-            except:
-                pass
+##            try:
+            if critg['thresholds']['pref'] != None:
+                fo.write('<threshold id="%s">\n' % ('pref'))
+                if critg['thresholds']['pref'][1] != Decimal('0.0'):
+                    fo.write('<linear>\n')
+                    fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*critg['thresholds']['pref'][1]) )
+                    fo.write('<intercept><real>%.2f</real></intercept>\n' % (critg['thresholds']['pref'][0]) )
+                    fo.write('</linear>\n')
+                else:
+                    fo.write('<constant>\n')
+                    fo.write('<real>%.2f</real>\n' % (critg['thresholds']['pref'][0]) )
+                    fo.write('</constant>\n')                       
+                fo.write('</threshold>\n')
+##            except:
+##                pass
             try:
                 if critg['thresholds']['weakVeto'] != None:
                     fo.write('<threshold id="%s">\n' % ('weakVeto'))
@@ -9049,15 +9049,16 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-    Threading = True
+    Threading = False
     t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
                                    numberOfCriteria=13,\
                                    weightDistribution='equiobjectives',
                                    seed=100)
     
     g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,
-                                  tempDir='.',nbrCores=4,Comments=True,Debug=True)
+                                  tempDir='.',nbrCores=4,Comments=True,Debug=False)
     print(g1.runTimes)
+    g1.saveXMCDA2RubisChoiceRecommendation()
     #g1.showRelationTable()
 ##    t2 = Random3ObjectivesPerformanceTableau(numberOfActions=300,\
 ##                                   numberOfCriteria=13,\
