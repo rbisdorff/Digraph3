@@ -2967,21 +2967,21 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     fo.write('</threshold>\n')
             except:
                 pass
-##            try:
-            if critg['thresholds']['pref'] != None:
-                fo.write('<threshold id="%s">\n' % ('pref'))
-                if critg['thresholds']['pref'][1] != Decimal('0.0'):
-                    fo.write('<linear>\n')
-                    fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*critg['thresholds']['pref'][1]) )
-                    fo.write('<intercept><real>%.2f</real></intercept>\n' % (critg['thresholds']['pref'][0]) )
-                    fo.write('</linear>\n')
-                else:
-                    fo.write('<constant>\n')
-                    fo.write('<real>%.2f</real>\n' % (critg['thresholds']['pref'][0]) )
-                    fo.write('</constant>\n')                       
-                fo.write('</threshold>\n')
-##            except:
-##                pass
+            try:
+                if critg['thresholds']['pref'] != None:
+                    fo.write('<threshold id="%s">\n' % ('pref'))
+                    if critg['thresholds']['pref'][1] != Decimal('0.0'):
+                        fo.write('<linear>\n')
+                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*critg['thresholds']['pref'][1]) )
+                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (critg['thresholds']['pref'][0]) )
+                        fo.write('</linear>\n')
+                    else:
+                        fo.write('<constant>\n')
+                        fo.write('<real>%.2f</real>\n' % (critg['thresholds']['pref'][0]) )
+                        fo.write('</constant>\n')                       
+                    fo.write('</threshold>\n')
+            except:
+                pass
             try:
                 if critg['thresholds']['weakVeto'] != None:
                     fo.write('<threshold id="%s">\n' % ('weakVeto'))
