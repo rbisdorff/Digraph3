@@ -6627,6 +6627,8 @@ class Digraph(object):
         """
         Renders the average linking credibilities and the minimal link of a COC.
         """
+        if Debug:
+            print(circuit)
         actions = self.actions
         relation = self.relation
         Med = self.valuationdomain['med']
@@ -10317,11 +10319,11 @@ class RedhefferDigraph(Digraph):
         for x in actions:
             relation[x] = {}
             for y in actions:
-                if x == y:
-                    relation[x][y] = Min
-                elif x == 1 or y == 1:
+##                if x == y:
+##                    relation[x][y] = Min
+                if x == 1 or y == 1:
                     relation[x][y] = Max
-                elif x < y and (y%x) == 0:
+                elif x <= y and (y%x) == 0:
                     relation[x][y] = Max
                 else:
                     relation[x][y] = Min
@@ -11157,29 +11159,29 @@ class CocaDigraph(Digraph):
                 print('  ',brakings,' circuit(s) were braked')
             
 
-    def showCircuits(self,credibility=None):
+    def showCircuits(self,credibility=None,Debug=False):
         """
         show methods for chordless odd circuits in CocaGraph
         """
         print('*---- Chordless circuits ----*')
         for (circList,circSet) in self.circuitsList:
             if credibility == 'maximal':
-                degM = self.circuitMaxCredibility(circSet)
+                degM = self.circuitMaxCredibility(circList,Debug=Debug)
                 print(circList, ', maximal credibility :', degM)
             elif credibility == 'minimal':
-                degm = self.circuitMinCredibility(circSet)
+                degm = self.circuitMinCredibility(circList,Debug=Debug)
                 print(circList, ', minimal credibility :', degm)
             elif credibility == 'average':
-                degm = self.circuitMinCredibility(circSet)
+                degm = self.circuitMinCredibility(circList,Debug=Debug)
                 print(circList, ', average credibility :', degm)
             else:
-                degP,degN,minLink = self.circuitCredibilities(circSet)
+                degP,degN,minLink = self.circuitCredibilities(circList,Debug=Debug)
                 print(circList, ', marginal credibility :', degP+degN)
                 x = minLink[0]
                 y = minLink[1]
                 print('minimal link: ', minLink, self.relation[x][y],self.relation[y][x]) 
             
-        print('Coca graph of order %d with %d odd chordles circuits.' % (len(self.actions), len(self.circuitsList)))
+        print('Coca graph of order %d with %d odd chordless circuits.' % (len(self.actions), len(self.circuitsList)))
         #print len(aself.circuitsList),' cirduits
 
     def showComponents(self):
@@ -11877,7 +11879,7 @@ if __name__ == "__main__":
         print('*-------- Testing classes and methods -------')
 
         from time import time
-        dg = RedhefferDigraph(order=8)
+        dg = RedhefferDigraph(order=113)
         #g = RandomTournament(order=5,seed=1)
         #g = RandomValuationDigraph(seed=1)
         #g.exportGraphViz()
