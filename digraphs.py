@@ -6634,24 +6634,30 @@ class Digraph(object):
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
-        amplitude = Max - Min
+        maxAmplitude = abs(Max) + abs(Min)
         degP = Med
         degN = Med
         nParcs = 0
         nNarcs = 0
-        minAmplitude = amplitude
+        minAmplitude = maxAmplitude
         minLink = None
         nc = len(circuit)
         for i in range(nc):
             x = circuit[i]
             for j in range(i+1,nc):
                 y = circuit[j]
+                if Debug:
+                    print(x,y,end=',')
                 degP += relation[x][y]
                 nParcs += 1
-                diffxy = relation[x][y]
-                if minAmplitude > diffxy:
+                diffxy = abs(relation[x][y]) + abs(relation[y][x])
+                if Debug:
+                    print(relation[x][y],relation[y][x],diffxy,end=',')
+                if minAmplitude >= diffxy:
                     minAmplitude = diffxy
                     minLink = (x,y)
+                if Debug:
+                    print(minLink)
                 degN += relation[y][x]
                 nNarcs += 1
         if nParcs != 0:
@@ -11027,21 +11033,22 @@ class CocaDigraph(Digraph):
         self.weakGamma = self.weakGammaSets()
         self.closureChordlessOddCircuits(Cpp=Cpp,Piping=Piping,Comments=Comments)
 
-    def closureChordlessOddCircuits(self,Cpp=False,Piping=False,Comments=True):
+    def closureChordlessOddCircuits(self,Cpp=False,Piping=False,Comments=True,Debug=False):
         """
         Closure of chordless odd circuits extraction.
         """
         newCircuits = None
         self.circuitsList = []
+        self.brakings = 0
         while newCircuits != set():
             initialCircuits = set([x for cl,x in self.circuitsList])
             if Cpp:
                 if Piping:
-                    self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Comments)
+                    self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)
                 else:
-                    self.computeCppChordlessCircuits(Odd=True,Debug=Comments)
+                    self.computeCppChordlessCircuits(Odd=True,Debug=Debug)
             else:
-                self.computeChordlessCircuits(Odd=True,Comments=Comments)
+                self.computeChordlessCircuits(Odd=True,Comments=Debug)
             #print(self.circuitsList)
             self.addCircuits(Comments=Comments)
             currentCircuits = set([x for cl,x in self.circuitsList])
@@ -11056,7 +11063,7 @@ class CocaDigraph(Digraph):
         import time
         #from copy import deepcopy
         order0 = self.order
-        brakings = 0
+        brakings = self.brakings
         if not(isinstance(self.actions,dict)):
             actions = {}
             for x in self.actions:
@@ -11072,11 +11079,12 @@ class CocaDigraph(Digraph):
         gamma = self.gamma
         relation = self.relation
         Med = valuationdomain['med']
+        currentCircuits = list(circuitsList)
         for (cycleList,cycle) in circuitsList:
             degP,degN,minLink = self.circuitCredibilities(cycleList,Debug=Comments)
             if Comments:
                 print(cycleList,cycle,degP,degN,minLink)
-            if degP+degN >= Med:
+            if degP+degN > Med:
                 #print('Adding cycle:', cycle, 'with degree=',degP)
                 cn = '_'
                 dcycle = set()
@@ -11135,13 +11143,13 @@ class CocaDigraph(Digraph):
                     print('Minimal link put to doubt: ', x,y)
                 relation[x][y] = Med
                 relation[y][x] = Med
-                circuitsList.remove((cycleList,cycle))
+                currentCircuits.remove((cycleList,cycle))
                 brakings += 1
 
         self.actions = actions
         self.order = len(actions)
         self.relation = relation
-        self.circuitsList = circuitsList
+        self.circuitsList = currentCircuits
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         self.weakGamma = self.weakGammaSets()
@@ -11156,7 +11164,7 @@ class CocaDigraph(Digraph):
             if self.brakings == 0:
                 print('  No circuit brakings !')
             else:
-                print('  ',brakings,' circuit(s) were braked')
+                print('  ',brakings,' circuit(s) were broken')
             
 
     def showCircuits(self,credibility=None,Debug=False):
