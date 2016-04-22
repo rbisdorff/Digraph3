@@ -11106,7 +11106,7 @@ class CocaDigraph(Digraph):
                         gamma[x] = (dx0,dx1)
                         relxcn = relation[x]
                         #relxcn[cycle] = valuationdomain['max']
-                        relxcn[cycle] = degP
+                        relxcn[cycle] = degP + degN
                         relation[x] = relxcn
                     else:
                         relxy = valuationdomain['min']
