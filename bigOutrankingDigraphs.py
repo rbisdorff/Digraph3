@@ -1380,6 +1380,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                 pg = BipolarOutrankingDigraph(pt,
                                               WithConcordanceRelation=False,
                                               WithVetoCounts=False,
+                                              BigData=True,
                                               Normalized=True)
                 pg.__dict__.pop('criteria')
                 pg.__dict__.pop('evaluation')
@@ -1434,6 +1435,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                         compDict['highQtileLimit'] = comp[0][0]
                         compDict['subGraph'] = BipolarOutrankingDigraph(pt,
                                                                         Normalized=True,
+                                                                        BigData=True,
                                                                         WithConcordanceRelation=False,
                                                                         WithVetoCounts=False,
                                                                         CopyPerfTab=False)     
@@ -1735,7 +1737,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                     credibility            
 
 ######  in development
-class BigOutrankingDigraphDev(BigOutrankingDigraph,QuantilesRankingDigraph,PerformanceTableau):
+class _BigOutrankingDigraphDev(BigOutrankingDigraph,QuantilesRankingDigraph,PerformanceTableau):
     """
     Multiprocessing implementation of the abstract BipolarOutrankingDigraph class
     for large instances (order > 1000)

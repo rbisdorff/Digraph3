@@ -3725,6 +3725,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  hasBipolarVeto=True,\
                  Normalized=False,\
                  CopyPerfTab=True,\
+                 BigData=False,\
                  Threading=False,\
                  tempDir=None,\
                  WithConcordanceRelation=True,\
@@ -3793,7 +3794,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         if coalition == None:
             coalition = perfTab.criteria.keys()
         for g in coalition:
-            criteria[g] = deepcopy(perfTab.criteria[g])
+            if CopyPerfTab:
+                criteria[g] = deepcopy(perfTab.criteria[g])
+            else:
+                criteria[g] = perfTab.criteria[g]
         self.criteria = criteria
         self.convertWeightFloatToDecimal()
 
@@ -3821,11 +3825,12 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             self.evaluation = deepcopy(perfTab.evaluation)
         else:
             self.evaluation = perfTab.evaluation
-        self.convertEvaluationFloatToDecimal()
+        if not BigData:
+            self.convertEvaluationFloatToDecimal()
         try:
             if CopyPerfTab:
                 self.description = deepcopy(perfTab.description)
-            else:
+            elif not BigData:
                 self.description = perfTab.description
         except:
             pass
