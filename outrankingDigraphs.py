@@ -8859,11 +8859,6 @@ class RubisRestServer(ServerProxy):
     xmlrpc-cgi Proxy Server for accessing on-line
     a Rubis Rest Solver.
 
-    *Parameters*:
-    
-        * performanceTableau (fileName of valid XMCDA2 code, required)
-        * coalition (sublist of criteria, optional)
-
     Example Python3 session:
     
         >>> from outrankingDigraphs import RubisRestServer
@@ -8932,9 +8927,11 @@ class RubisRestServer(ServerProxy):
         """
         Submit PerformanceTableau class instances.
 
-        *Parameter*:
+        *Parameters*:
 
              * valuation: 'bipolar', 'robust', 'integer'
+             * hasVeto: Switch on or off vetoes
+             * argTitle: set specific application title
 
         """
         self.name = perfTab.name
