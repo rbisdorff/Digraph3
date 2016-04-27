@@ -8881,7 +8881,7 @@ class RubisRestServer(ServerProxy):
         >>> solver.submitProblem(t)
         The problem submission was successful !
         Server ticket: l4qfAP0RfBBvyjsL
-        >>> solver.viewSolution()
+        >>> solver.showHTMLSolution()
         Created new window in existing browser session.
         >>> solver.saveXMCDA2Solution()
         The solution request was successful.
@@ -9006,7 +9006,7 @@ class RubisRestServer(ServerProxy):
         except:
             print(answer['message'])
 
-    def showSolution(self,ticket=None,valuation=None):
+    def showHTMLSolution(self,ticket=None,valuation=None):
         """
         Show XMCDA 2.0 solution in a default browser window.
         The valuation parameter may set the correct style sheet.
