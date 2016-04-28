@@ -1381,6 +1381,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                                               WithConcordanceRelation=False,
                                               WithVetoCounts=False,
                                               BigData=True,
+                                              CopyPerfTab=False,
                                               Normalized=True)
                 pg.__dict__.pop('criteria')
                 pg.__dict__.pop('evaluation')
@@ -1560,23 +1561,13 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
         self.runTimes['decomposing'] = time() - t0
         if Comments:
             print('decomposing time: %.4f' % self.runTimes['decomposing']  )
-        # Kohler ranking-by-choosing all components
+
+       # ranking-by-choosing all components
         self.componentRankingRule = componentRankingRule
         t0 = time()
         self.boostedRanking = self.computeBoostedRanking(rankingRule=componentRankingRule)
         self.boostedOrder = list(reversed(self.boostedRanking))
         self.runTimes['ordering'] = time() - t0
-##        if orderingRule == 'Copeland':
-##        elif orderingRule == 'NetFlows':
-##            t0 = time()
-##            self.boostedNetFlowsOrder = self.computeBoostedOrder()
-##            self.boostedNetFlowsRanking = list(reversed(self.boostedNetFlowsOrder))
-##            self.runTimes['ordering'] = time() - t0
-##        elif orderingRule == 'Kohler':
-##            t0 = time()
-##            self.boostedKohlerOrder = self.computeBoostedKohlerOrder()
-##            self.boostedKohlerRanking = list(reversed(self.boostedKohlerOrder))
-##            self.runTimes['ordering'] = time() - t0
         if Comments:
             print('ordering time: %.4f' % self.runTimes['ordering']  )
         
@@ -2228,10 +2219,10 @@ if __name__ == "__main__":
     
     from time import time
     from weakOrders import QuantilesRankingDigraph
-    MP  = True
+    MP  = False
 ##    t0 = time()
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,seed=100)
-    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,
+    tp = RandomCBPerformanceTableau(numberOfActions=500,Threading=MP,
                                       seed=100)
 ##    tp = RandomPerformanceTableau(numberOfActions=1000,numberOfCriteria=21,
 ##                                      seed=100)
@@ -2241,11 +2232,11 @@ if __name__ == "__main__":
 ##    qr = QuantilesRankingDigraph(tp,75,strategy='average',Threading=MP)
 ##    print(time()-t0)
 ##    qr.showWeakOrder()
-    bg1 = BigOutrankingDigraphDev(tp,CopyPerfTab=True,quantiles=100,
+    bg1 = BigOutrankingDigraphMP(tp,CopyPerfTab=True,quantiles=25,
                                  quantilesOrderingStrategy='average',
                                  componentRankingRule='NetFlows',
                                  LowerClosed=True,
-                                 minimalComponentSize=5,
+                                 minimalComponentSize=10,
                                  Threading=MP,nbrOfCPUs=8,
                                  tempDir='.',
                                  nbrOfThreads=4,
