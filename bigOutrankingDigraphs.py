@@ -2013,44 +2013,44 @@ class BigOutrankingDigraphDev(BigOutrankingDigraph,QuantilesRankingDigraph,Perfo
                         process.start()
                         nbrOfThreadsUsed += 1
                 nbg = len(bigPartialGraphs)
-                while active_children() != [] or bigPartialGraphs != []:
+                while active_children() != []:
                     #pass
-                    #sleep(1)
-                    i = bigPartialGraphs.pop()
-                    comp = decomposition[i]
-                    if Comments:
-                        print('bigGraph',i, len(comp[1]))
-                    compKey = ('c%%0%dd' % (self.nd)) % (i+1)
-                    compDict = {compKey: {}}
-                    compDict = {'rank':i}
-                    pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
-                    compDict['lowQtileLimit'] = comp[0][1]
-                    compDict['highQtileLimit'] = comp[0][0]
-                    compDict['subGraph'] = BipolarOutrankingDigraph(pt,
-                                                                    Normalized=True,
-                                                                    WithConcordanceRelation=False,
-                                                                    WithVetoCounts=False,
-                                                                    Threading=True,
-                                                                    nbrCores=nbrOfThreads,
-                                                                    CopyPerfTab=False)     
-                    compDict['subGraph'].__dict__.pop('criteria')
-                    compDict['subGraph'].__dict__.pop('evaluation')
-##                        compDict['subGraph'].__dict__.pop('vetos')
-##                        compDict['subGraph'].__dict__.pop('negativeVetos')
-##                        compDict['subGraph'].__dict__.pop('largePerformanceDifferencesCount')
-##                        compDict['subGraph'].__dict__.pop('concordanceRelation')
-                    compDict['subGraph'].__class__ = Digraph
-                    splitComponent = (compKey,compDict)
-                    if Debug:
-                        print(compDict)
-                    foName = tempDirName+'/splitComponent-'+str(i)+'.py'
-                    fo = open(foName,'wb')
-                    fo.write(dumps(splitComponent,-1))
-                    fo.close()
-
+                    while bigPartialGraphs != []:
+                        i = bigPartialGraphs.pop()
+                        comp = decomposition[i]
+                        if Comments:
+                            print('bigGraph',i, len(comp[1]))
+                        compKey = ('c%%0%dd' % (self.nd)) % (i+1)
+                        compDict = {compKey: {}}
+                        compDict = {'rank':i}
+                        pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
+                        compDict['lowQtileLimit'] = comp[0][1]
+                        compDict['highQtileLimit'] = comp[0][0]
+                        compDict['subGraph'] = BipolarOutrankingDigraph(pt,
+                                                                        Normalized=True,
+                                                                        WithConcordanceRelation=False,
+                                                                        WithVetoCounts=False,
+                                                                        Threading=True,
+                                                                        nbrCores=nbrOfThreads,
+                                                                        CopyPerfTab=False)     
+                        compDict['subGraph'].__dict__.pop('criteria')
+                        compDict['subGraph'].__dict__.pop('evaluation')
+    ##                        compDict['subGraph'].__dict__.pop('vetos')
+    ##                        compDict['subGraph'].__dict__.pop('negativeVetos')
+    ##                        compDict['subGraph'].__dict__.pop('largePerformanceDifferencesCount')
+    ##                        compDict['subGraph'].__dict__.pop('concordanceRelation')
+                        compDict['subGraph'].__class__ = Digraph
+                        splitComponent = (compKey,compDict)
+                        if Debug:
+                            print(compDict)
+                        foName = tempDirName+'/splitComponent-'+str(i)+'.py'
+                        fo = open(foName,'wb')
+                        fo.write(dumps(splitComponent,-1))
+                        fo.close()
+                    print('Exit %d bigGraphs' % nbg)
                 if Comments:
                     print('Exit %d threads' % nbrOfThreadsUsed)
-                    print('Exit %d bigGraphs' % nbg)
+                    
                 components = OrderedDict()
                 #componentsList = []
                 for j in range(nc):
@@ -2370,7 +2370,3 @@ if __name__ == "__main__":
 ##            test+=g.relation[x][y]
 ##    print('g time:',time()-t0)
 ##    
-
-
-    
-
