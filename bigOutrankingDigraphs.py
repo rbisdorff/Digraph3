@@ -1754,7 +1754,7 @@ class BigOutrankingDigraphDev(BigOutrankingDigraph,QuantilesRankingDigraph,Perfo
                  minimalComponentSize=None,\
                  Threading=False,\
                  tempDir=None,\
-                 componentThreadingThreshold=50,\
+                 #componentThreadingThreshold=50,\
                  nbrOfCPUs=None,\
                  nbrOfThreads=None,\
                  save2File=None,\
@@ -1975,79 +1975,90 @@ class BigOutrankingDigraphDev(BigOutrankingDigraph,QuantilesRankingDigraph,Perfo
                 if Comments:
                     print('dumping time: %.5f' % (time() - tdump))
 
-                bigPartialGraphs = []
+                #bigPartialGraphs = []
                 if nbrOfCPUs == None:
                     nbrOfCPUs = cpu_count()
                 if nbrOfThreads == None:
                     nbrOfThreads = nbrOfCPUs-1
-                nbrOfJobs = nc//nbrOfThreads
-                if nbrOfJobs*nbrOfThreads < nc:
-                    nbrOfJobs += 1
-    ##            if nbrOfJobs < nbrOfCPUs:
-    ##                nbrOfJobs,nbrOfCPUs = nbrOfCPUs,nbrOfJobs
+    ##                nbrOfJobs = nc//nbrOfThreads
+    ##                if nbrOfJobs*nbrOfThreads < nc:
+    ##                    nbrOfJobs += 1
+                nbrOfLocals = self.order//nbrOfThreads
+                if nbrOfLocals*nbrOfThreads < self.order:
+                    nbrOfLocals += 1
                 if Comments:
                     print('Nbr of components',nc)            
                     print('Nbr of threads = ',nbrOfThreads)
-                    print('Nbr of jobs/thread',nbrOfJobs)
+                    #print('Nbr of jobs/thread',nbrOfJobs)
+                    print('Nbr of locals/job',nbrOfLocals)
                 nbrOfThreadsUsed = 0
+                #start = 0
+                #stop = -1
+                i = 0
                 for j in range(nbrOfThreads):
                     if Comments:
                         print('thread = %d/%d' % (j+1,nbrOfThreads),end="...")
-                    start= j*nbrOfJobs
-                    if (j+1)*nbrOfJobs < nc:
-                        stop = (j+1)*nbrOfJobs
-                    else:
-                        stop = nc
+                    #start= j*nbrOfJobs
+                    #start = stop + 1
+    ##                    if (j+1)*nbrOfJobs < nc:
+    ##                        stop = (j+1)*nbrOfJobs
+    ##                    else:
+    ##                        stop = nc
                     #lTest = list(range(start,stop))
                     lTest = []
-                    for i in range(start,stop):
-                        if len(decomposition[i][1]) < componentThreadingThreshold:
-                            lTest.append(i)
-                        else:
-                            bigPartialGraphs.append(i)
+                    threadLoad = 0
+                    while threadLoad <= nbrOfLocals and i < (nc):
+                        lTest.append(i)
+                        threadLoad += len(decomposition[i][1])
+                        i += 1
+                    #for i in range(start,stop):
+                    #    if len(decomposition[i][1]) < componentThreadingThreshold:
+                    #        lTest.append(i)
+                    #    else:
+                    #        bigPartialGraphs.append(i)
                     if Comments:
                         print('Threaded:',[len(decomposition[i][1]) for i in lTest])
-                        print('Kept    :',[len(decomposition[i][1]) for i in bigPartialGraphs])
+                        #print('Kept    :',[len(decomposition[i][1]) for i in bigPartialGraphs])
                     if lTest != []:
                         process = myThread(j,tempDirName,lTest,Debug)
                         process.start()
                         nbrOfThreadsUsed += 1
-                nbg = len(bigPartialGraphs)
+                #nbg = len(bigPartialGraphs)
                 while active_children() != []:
-                    #pass
-                    while bigPartialGraphs != []:
-                        i = bigPartialGraphs.pop()
-                        comp = decomposition[i]
-                        if Comments:
-                            print('bigGraph',i, len(comp[1]))
-                        compKey = ('c%%0%dd' % (self.nd)) % (i+1)
-                        compDict = {compKey: {}}
-                        compDict = {'rank':i}
-                        pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
-                        compDict['lowQtileLimit'] = comp[0][1]
-                        compDict['highQtileLimit'] = comp[0][0]
-                        compDict['subGraph'] = BipolarOutrankingDigraph(pt,
-                                                                        Normalized=True,
-                                                                        WithConcordanceRelation=False,
-                                                                        WithVetoCounts=False,
-                                                                        Threading=True,
-                                                                        nbrCores=nbrOfThreads,
-                                                                        CopyPerfTab=False)     
-                        compDict['subGraph'].__dict__.pop('criteria')
-                        compDict['subGraph'].__dict__.pop('evaluation')
-    ##                        compDict['subGraph'].__dict__.pop('vetos')
-    ##                        compDict['subGraph'].__dict__.pop('negativeVetos')
-    ##                        compDict['subGraph'].__dict__.pop('largePerformanceDifferencesCount')
-    ##                        compDict['subGraph'].__dict__.pop('concordanceRelation')
-                        compDict['subGraph'].__class__ = Digraph
-                        splitComponent = (compKey,compDict)
-                        if Debug:
-                            print(compDict)
-                        foName = tempDirName+'/splitComponent-'+str(i)+'.py'
-                        fo = open(foName,'wb')
-                        fo.write(dumps(splitComponent,-1))
-                        fo.close()
-                    print('Exit %d bigGraphs' % nbg)
+                    pass
+    ##                    while bigPartialGraphs != []:
+    ##                        i = bigPartialGraphs.pop()
+    ##                        comp = decomposition[i]
+    ##                        if Comments:
+    ##                            print('bigGraph',i, len(comp[1]))
+    ##                        compKey = ('c%%0%dd' % (self.nd)) % (i+1)
+    ##                        compDict = {compKey: {}}
+    ##                        compDict = {'rank':i}
+    ##                        pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
+    ##                        compDict['lowQtileLimit'] = comp[0][1]
+    ##                        compDict['highQtileLimit'] = comp[0][0]
+    ##                        compDict['subGraph'] = BipolarOutrankingDigraph(pt,
+    ##                                                                        Normalized=True,
+    ##                                                                        WithConcordanceRelation=False,
+    ##                                                                        WithVetoCounts=False,
+    ##                                                                        Threading=True,
+    ##                                                                        nbrCores=nbrOfThreads,
+    ##                                                                        CopyPerfTab=False)     
+    ##                        compDict['subGraph'].__dict__.pop('criteria')
+    ##                        compDict['subGraph'].__dict__.pop('evaluation')
+    ##    ##                        compDict['subGraph'].__dict__.pop('vetos')
+    ##    ##                        compDict['subGraph'].__dict__.pop('negativeVetos')
+    ##    ##                        compDict['subGraph'].__dict__.pop('largePerformanceDifferencesCount')
+    ##    ##                        compDict['subGraph'].__dict__.pop('concordanceRelation')
+    ##                        compDict['subGraph'].__class__ = Digraph
+    ##                        splitComponent = (compKey,compDict)
+    ##                        if Debug:
+    ##                            print(compDict)
+    ##                        foName = tempDirName+'/splitComponent-'+str(i)+'.py'
+    ##                        fo = open(foName,'wb')
+    ##                        fo.write(dumps(splitComponent,-1))
+    ##                        fo.close()
+    ##                    print('Exit %d bigGraphs' % nbg)
                 if Comments:
                     print('Exit %d threads' % nbrOfThreadsUsed)
                     
@@ -2275,35 +2286,35 @@ if __name__ == "__main__":
     from time import time
     from weakOrders import QuantilesRankingDigraph
     MP  = True
-    nbrActions=2000
+    nbrActions=1000
 ##    t0 = time()
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,seed=100)
 
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
                                       seed=100)
-    bg1 = BigOutrankingDigraphMP(tp,CopyPerfTab=True,quantiles=50,
+    ##    bg1 = BigOutrankingDigraphMP(tp,CopyPerfTab=True,quantiles=50,
+    ##                                 quantilesOrderingStrategy='average',
+    ##                                 componentRankingRule='NetFlows',
+    ##                                 LowerClosed=True,
+    ##                                 minimalComponentSize=10,
+    ##                                 Threading=MP,nbrOfCPUs=8,
+    ##                                 #tempDir='.',
+    ##                                 nbrOfThreads=8,
+    ##                                 Comments=False,Debug=False,
+    ##                                 save2File='testbgMP')
+    ##    print(bg1)
+    ##    
+    ##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
+    ##                                      seed=100)
+    
+    bg2 = BigOutrankingDigraphDev(tp,CopyPerfTab=True,quantiles=40,
                                  quantilesOrderingStrategy='average',
                                  componentRankingRule='NetFlows',
                                  LowerClosed=True,
                                  minimalComponentSize=10,
                                  Threading=MP,nbrOfCPUs=8,
-                                 #tempDir='.',
-                                 nbrOfThreads=8,
-                                 Comments=False,Debug=False,
-                                 save2File='testbgMP')
-    print(bg1)
-    
-    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
-                                      seed=100)
-    
-    bg2 = BigOutrankingDigraphDev(tp,CopyPerfTab=True,quantiles=50,
-                                 quantilesOrderingStrategy='average',
-                                 componentRankingRule='NetFlows',
-                                 LowerClosed=True,
-                                 minimalComponentSize=10,
-                                 Threading=MP,nbrOfCPUs=8,
-                                  componentThreadingThreshold=50,
-                                 #tempDir='.',
+                                 #componentThreadingThreshold=50,
+                                 tempDir='.',
                                  nbrOfThreads=8,
                                  Comments=True,Debug=False,
                                  save2File='testbgDev')

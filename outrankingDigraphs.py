@@ -9052,15 +9052,15 @@ if __name__ == "__main__":
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
     Threading = False
-    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
-                                   numberOfCriteria=13,\
+    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=500,\
+                                   numberOfCriteria=21,\
                                    weightDistribution='equiobjectives',
                                    seed=100)
     
     g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,
-                                  tempDir='.',nbrCores=4,Comments=True,Debug=False)
-    print(g1.runTimes)
-    g1.saveXMCDA2RubisChoiceRecommendation()
+                                  tempDir=None,nbrCores=8,Comments=True,Debug=False)
+    print(g1)
+    #g1.saveXMCDA2RubisChoiceRecommendation()
     #g1.showRelationTable()
 ##    t2 = Random3ObjectivesPerformanceTableau(numberOfActions=300,\
 ##                                   numberOfCriteria=13,\
