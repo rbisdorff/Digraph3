@@ -1228,7 +1228,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3501,7 +3501,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4255,7 +4255,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -6447,7 +6447,7 @@ in <em>decreasing</em> (default) or <em>increasing</em> preference direction.</p
 
 <dl class="method">
 <dt id="bigOutrankingDigraphs.BigDigraph.showRelationMap">
-<code class="descname">showRelationMap</code><span class="sig-paren">(</span><em>symbols=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigDigraph.showRelationMap" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showRelationMap</code><span class="sig-paren">(</span><em>fromIndex=None</em>, <em>toIndex=None</em>, <em>symbols=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigDigraph.showRelationMap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints on the console, in text map format, the location of
 the diagonal outranking components of the big outranking digraph.</p>
 <dl class="docutils">
@@ -6542,7 +6542,7 @@ and Tideman&#8217;s ranked pairs rule (rankingRule=&#8221;rankedPairs&#8221;).</
 
 <dl class="class">
 <dt id="bigOutrankingDigraphs.BigOutrankingDigraph">
-<em class="property">class </em><code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">BigOutrankingDigraph</code><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">BigOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>componentRankingRule='Copeland'</em>, <em>minimalComponentSize=None</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrOfCPUs=None</em>, <em>nbrOfThreads=None</em>, <em>save2File=None</em>, <em>CopyPerfTab=True</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#bigOutrankingDigraphs.BigDigraph" title="bigOutrankingDigraphs.BigDigraph"><code class="xref py py-class docutils literal"><span class="pre">bigOutrankingDigraphs.BigDigraph</span></code></a></p>
 <p>Abstract root class  for the multiprocessing implementation of big outranking digraphs.</p>
 <p>The big outranking digraph instance is decomposed with a q-tiling sort into a partition
@@ -6552,6 +6552,13 @@ which is restricted to the decision actions gathered in this quantile equivalenc
 <p>By default, the number of quantiles q is set to a tenth of the number of decision actions,
 ie q = order//10.</p>
 <p>For other parameters settings, see the corresponding <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a> class.</p>
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraph.computeActionCategories">
+<code class="descname">computeActionCategories</code><span class="sig-paren">(</span><em>action</em>, <em>Show=False</em>, <em>Debug=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.computeActionCategories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the union of categories in which the given action is sorted positively or null into.
+Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="bigOutrankingDigraphs.BigOutrankingDigraph.computeBoostedOrdering">
 <code class="descname">computeBoostedOrdering</code><span class="sig-paren">(</span><em>orderingRule='Copeland'</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph.computeBoostedOrdering" title="Permalink to this definition">¶</a></dt>
@@ -6656,6 +6663,29 @@ Components are stored in an ordered dictionary.</p>
 <span class="go">&lt;class &#39;bigOutrankingDigraphs.BigOutrankingDigraphMP&#39;&gt; instance        </span>
 </pre></div>
 </div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraphDev">
+<em class="property">class </em><code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">BigOutrankingDigraphDev</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>componentRankingRule='Copeland'</em>, <em>minimalComponentSize=None</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrOfCPUs=None</em>, <em>nbrOfThreads=None</em>, <em>save2File=None</em>, <em>CopyPerfTab=True</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphDev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#bigOutrankingDigraphs.BigOutrankingDigraph" title="bigOutrankingDigraphs.BigOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">bigOutrankingDigraphs.BigOutrankingDigraph</span></code></a>, <a class="reference internal" href="#weakOrders.QuantilesRankingDigraph" title="weakOrders.QuantilesRankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">weakOrders.QuantilesRankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<p>Multiprocessing implementation of the abstract BipolarOutrankingDigraph class
+for large instances (order &gt; 1000)</p>
+<p>The outranking digraph is decomposed with a q-tiling sort into a partition of
+quantile equivalence classes, which are linearly ordred by average quantile limits (default).</p>
+<p>Wich each quantile equivalence class is associated a BipolarOutrankingDigraph object
+which is by default restricted to a Digraph instance;
+the corresponding restricted performance tableau being dropped.</p>
+<p>By default, q is set to a tenth of the number of decision actions,
+ie q = order//10.</p>
+<p>For other parameters settings, see the corresponding QuantilesSortingDigraph class.</p>
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigOutrankingDigraphDev.computeActionCategories">
+<code class="descname">computeActionCategories</code><span class="sig-paren">(</span><em>action</em>, <em>Show=False</em>, <em>Debug=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphDev.computeActionCategories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the union of categories in which the given action is sorted positively or null into.
+Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
 </dd></dl>
 
 </dd></dl>

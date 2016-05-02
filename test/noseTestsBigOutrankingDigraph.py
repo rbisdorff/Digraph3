@@ -19,7 +19,7 @@ def testbigOutrankingDigraph():
                                              BigData=True)
     print(time()-t0)
     print(total_size(tp.evaluation))
-    bg1 = BigOutrankingDigraphMP(tp,quantiles=10,quantilesOrderingStrategy='average',
+    bg1 = BigOutrankingDigraph(tp,quantiles=10,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
                                minimalComponentSize=None,
                                     Threading=MP,Debug=False)
@@ -50,7 +50,7 @@ def testMinimalComponentSize():
     tp = RandomCBPerformanceTableau(numberOfActions=200,BigData=True,Threading=MP)
     print(time()-t0)
     print(total_size(tp.evaluation))
-    bg1 = BigOutrankingDigraphMP(tp,quantiles=5,quantilesOrderingStrategy='average',
+    bg1 = BigOutrankingDigraph(tp,quantiles=5,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
                                minimalComponentSize=5,
                                     Threading=MP,Debug=False)
@@ -58,7 +58,7 @@ def testMinimalComponentSize():
     bg1.showDecomposition()
     print(bg1)
     bg1.showRelationTable()
-    bg2 = BigOutrankingDigraphMP(tp,quantiles=50,quantilesOrderingStrategy='average',
+    bg2 = BigOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
                                minimalComponentSize=1,
                                     Threading=MP,Debug=False)
@@ -77,7 +77,7 @@ def testMPComments():
     tp = RandomCBPerformanceTableau(numberOfActions=300,Threading=MP)
     print(time()-t0)
     print(total_size(tp.evaluation))
-    bg1 = BigOutrankingDigraphMP(tp,quantiles=5,quantilesOrderingStrategy='average',
+    bg1 = BigOutrankingDigraph(tp,quantiles=5,quantilesOrderingStrategy='average',
                                  LowerClosed=False,
                                  minimalComponentSize=5,
                                  Threading=MP,

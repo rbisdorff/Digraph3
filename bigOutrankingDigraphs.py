@@ -77,7 +77,7 @@ class BigDigraph(object):
         else:
             return Max
 
-    def showRelationMap(self,symbols=None):
+    def showRelationMap(self,fromIndex=None,toIndex=None,symbols=None):
         """
         Prints on the console, in text map format, the location of
         the diagonal outranking components of the big outranking digraph.
@@ -175,9 +175,13 @@ class BigDigraph(object):
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
-        for x in self.boostedRanking:
+        if fromIndex == None:
+            fromIndex = 0
+        if toIndex == None:
+            toIndex = len(self.boostedRanking)
+        for x in self.boostedRanking[fromIndex:toIndex]:
             pictStr = ''
-            for y in self.boostedRanking:
+            for y in self.boostedRanking[fromIndex:toIndex]:
                 if relation(x,y) == Max:
                     pictStr += symbols['max']
                 elif relation(x,y) == Min:
@@ -479,6 +483,8 @@ class BigDigraph(object):
 ##            print('Determinateness   : %.3f' % (corr['determination']))
 
 ########################
+
+from weakOrders import QuantilesRankingDigraph
 class BigOutrankingDigraph(BigDigraph):
     """
     Abstract root class  for the multiprocessing implementation of big outranking digraphs.
@@ -495,163 +501,446 @@ class BigOutrankingDigraph(BigDigraph):
     For other parameters settings, see the corresponding :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
 
     """
-##    def __init__(self,argPerfTab=None,quantiles=None,\
-##                 quantilesOrderingStrategy='average',\
-##                 LowerClosed=True,\
-##                 WithKohlerOrdering=True,\
-##                 minimalComponentSize=None,\
-##                 Threading=True,\
-##                 nbrOfCPUs=None,\
-##                 save2File=None,\
-##                 Comments=False,\
-##                 Debug=False):
-##        
-##        from digraphs import Digraph
-##        from sortingDigraphs import QuantilesSortingDigraph
-##        from collections import OrderedDict
-##        from time import time
-##        from os import cpu_count
-##        from copy import copy as deepcopy
-##        
-##        ttot = time()
-##        # setting name
-##        perfTab = argPerfTab
-##        self.name = perfTab.name + '_mp'
-##        # setting quantiles sorting parameters
-##        self.actions = deepcopy(perfTab.actions)
-##        na = len(self.actions)
-##        self.order = na
-##        self.criteria = deepcopy(perfTab.criteria)
-##        self.dimension = len(perfTab.criteria)
-##        self.evaluation = deepcopy(perfTab.evaluation)
-##        if quantiles == None:
-##            quantiles = na//10
-##        self.sortingParameters = {}
-##        self.sortingParameters['limitingQuantiles'] = quantiles
-##        self.sortingParameters['strategy'] = quantilesOrderingStrategy
-##        self.sortingParameters['LowerClosed'] = LowerClosed
-##        self.sortingParameters['Threading'] = Threading
-##        self.sortingParameters['PrefThresholds'] = False
-##        self.sortingParameters['hasNoVeto'] = False
-##        self.nbrOfCPUSs = nbrOfCPUs
-##        # quantiles sorting
-##        t0 = time()
-##        if Comments:        
-##            print('Computing the %d-quantiles sorting digraph ...' % (quantiles))
-##        #if Threading:
-##        qs = QuantilesSortingDigraph(argPerfTab=perfTab,
-##                                        limitingQuantiles=quantiles,
-##                                        LowerClosed=LowerClosed,
-##                                        CompleteOutranking=False,
-##                                        Threading=Threading,
-##                                        nbrCores=nbrOfCPUs,
-##                                        Debug=Debug)
-##        self.runTimes = {'sorting': time() - t0}
-##        self.qs = qs
-##        if Comments:
-##            print('execution time: %.4f' % (self.runTimes['sorting']))
-##        # preordering
-##        tw = time()
-##        quantilesOrderingStrategy = self.sortingParameters['strategy']
-##        if quantilesOrderingStrategy == 'average':
-##            decomposition = [((qs.categories[str(item[0][2])]['lowLimit'],
-##                                    qs.categories[str(item[0][1])]['highLimit']),item[1])\
-##                                  for item in self._computeQuantileOrdering(strategy=quantilesOrderingStrategy,
-##                                         Descending=True)]
-##        elif quantilesOrderingStrategy == 'optimistic':
-##            decomposition = [((qs.categories[str(item[0][1])]['lowLimit'],
-##                                    qs.categories[str(item[0][0])]['highLimit']),item[1])\
-##                                  for item in self._computeQuantileOrdering(strategy=quantilesOrderingStrategy,
-##                                         Descending=True)]
-##        elif quantilesOrderingStrategy == 'pessimistic':
-##            decomposition = [((qs.categories[str(item[0][0])]['lowLimit'],
-##                                    qs.categories[str(item[0][1])]['highLimit']),item[1])\
-##                                  for item in self._computeQuantileOrdering(strategy=quantilesOrderingStrategy,
-##                                         Descending=True)]
-##
-##        self.runTimes['preordering'] = time() - tw
-##        if Comments:
-##            print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )
-##        # setting components
-##        t0 = time()
-##        if minimalComponentSize == None:
-##            components = OrderedDict()
-##            nc = len(decomposition)
-##            self.nbrComponents = nc
-##            nd = len(str(nc))
-##            for i in range(1,nc+1):
-##                comp = decomposition[i-1]
-##                compKey = ('c%%0%dd' % (nd)) % (i)
-##                components[compKey] = {'rank':i}
-##                pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
-##                components[compKey]['lowQtileLimit'] = comp[0][1]
-##                components[compKey]['highQtileLimit'] = comp[0][0]
-##                pg = BipolarOutrankingDigraph(pt,Normalized=True)
-##                pg.__dict__.pop('criteria')
-##                pg.__dict__.pop('evaluation')
-##                pg.__dict__.pop('vetos')
-##                pg.__dict__.pop('negativeVetos')
-##                pg.__dict__.pop('largePerformanceDifferencesCount')
-##                pg.__dict__.pop('concordanceRelation')
-##                pg.__class__ = Digraph
-##                components[compKey]['subGraph'] = pg
-##                for x in comp[1]:
-##                    self.actions[x]['component'] = compKey
-##            self.components = components
-##            self.minimalComponentSize = 1
-##        else:  # with minimal component size
-##            components = OrderedDict()
-##            ndc = len(decomposition)
-##            nd = len(str(ndc))
-##            compNbr = 1
-##            compContent = []
-##            for i in range(1,ndc+1):
-##                currContLength = len(compContent)
-##                comp = decomposition[i-1]
-##                if currContLength == 0:
-##                    lowQtileLimit = comp[0][1]
-##                compContent += comp[1]
-##
-##                if len(compContent) >= minimalComponentSize or i == ndc:
-##                    compKey = ('c%%0%dd' % (nd)) % (compNbr)
-##                    components[compKey] = {'rank':compNbr}
-##                    pt = PartialPerformanceTableau(perfTab,actionsSubset=compContent)
-##                    components[compKey]['lowQtileLimit'] = lowQtileLimit
-##                    components[compKey]['highQtileLimit'] = comp[0][0]
-##                    pg = BipolarOutrankingDigraph(pt,Normalized=True)
-##                    pg.__dict__.pop('criteria')
-##                    pg.__dict__.pop('evaluation')
-##                    pg.__class__ = Digraph
-##                    components[compKey]['subGraph'] = pg
-##                    for x in compContent:
-##                        self.actions[x]['component'] = compKey
-##                    compContent = []
-##                    compNbr += 1
-##            self.components = components
-##            self.minimalComponentSize = minimalComponentSize
-##            nc = len(components)
-##            self.nbrComponents = nc
-##        # setting the valuation domain
-##        self.valuationdomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
-##        self.runTimes['decomposing'] = time() - t0
-##        if Comments:
-##            print('decomposing time: %.4f' % self.runTimes['decomposing']  )
-##        # Kohler ranking-by-choosing all components
-##        if WithKohlerOrdering:
-##            t0 = time()
-##            self.boostedKohlerOrder = self.computeBoostedKohlerOrder()
-##            self.runTimes['ordering'] = time() - t0
-##        if Comments:
-##            print('ordering time: %.4f' % self.runTimes['ordering']  )
-##        
-##        self.runTimes['totalTime'] = time() - ttot
-##        if Comments:
-##            print(self.runTimes)
-##        if save2File != None:
-##            self.showShort(fileName=save2File)
-##            
+    def __init__(self,argPerfTab=None,\
+                 quantiles=None,\
+                 quantilesOrderingStrategy='average',\
+                 LowerClosed=True,\
+                 componentRankingRule='Copeland',\
+                 minimalComponentSize=None,\
+                 Threading=False,\
+                 tempDir=None,\
+                 #componentThreadingThreshold=50,\
+                 nbrOfCPUs=None,\
+                 nbrOfThreads=None,\
+                 save2File=None,\
+                 CopyPerfTab=True,\
+                 Comments=False,\
+                 Debug=False):
+        
+        from digraphs import Digraph
+        from sortingDigraphs import QuantilesSortingDigraph
+        from collections import OrderedDict
+        from time import time
+        from os import cpu_count
+        from multiprocessing import Pool
+        from copy import copy, deepcopy
+        
+        ttot = time()
+
+        # setting name
+        perfTab = argPerfTab
+        self.name = perfTab.name + '_mp'
+        # setting quantiles sorting parameters
+        if CopyPerfTab:
+            copy2self = deepcopy
+            self.actions = copy2self(perfTab.actions)
+        else:
+            copy2self = copy
+            self.actions = copy2self(perfTab.actions)
+        na = len(self.actions)
+        self.order = na
+        self.criteria = copy2self(perfTab.criteria)
+        self.dimension = len(perfTab.criteria)
+        self.evaluation = copy2self(perfTab.evaluation)
+        #######
+        if quantiles == None:
+            quantiles = na//10
+        self.sortingParameters = {}
+        self.sortingParameters['limitingQuantiles'] = quantiles
+        self.sortingParameters['strategy'] = quantilesOrderingStrategy
+        self.sortingParameters['LowerClosed'] = LowerClosed
+        self.sortingParameters['Threading'] = Threading
+        self.sortingParameters['PrefThresholds'] = False
+        self.sortingParameters['hasNoVeto'] = False
+        self.nbrOfCPUs = nbrOfCPUs
+        # quantiles sorting
+        t0 = time()
+        if Comments:        
+            print('Computing the %d-quantiles sorting digraph of order %d ...' % (quantiles,na))
+        qs = QuantilesSortingDigraph(argPerfTab=perfTab,\
+                                     limitingQuantiles=quantiles,\
+                                     LowerClosed=LowerClosed,\
+                                     CompleteOutranking=False,\
+                                     StoreSorting=True,\
+                                     WithSortingRelation=False,\
+                                     CopyPerfTab=CopyPerfTab,\
+                                     Threading= self.sortingParameters['Threading'],\
+                                     tempDir=tempDir,\
+                                     nbrCores=nbrOfCPUs,\
+                                     nbrOfProcesses=nbrOfThreads,\
+                                     Comments=Comments,\
+                                     Debug=Debug)
+        self.runTimes = {'sorting': time() - t0}
+        self.valuationdomain = qs.valuationdomain
+        self.profiles = qs.profiles
+        self.categories = qs.categories
+        self.sorting = qs.sorting
+        if Comments:
+            print('execution time: %.4f' % (self.runTimes['sorting']))
+        # preordering
+        if minimalComponentSize == None:
+            minimalComponentSize = 1
+        self.minimalComponentSize = minimalComponentSize
+        tw = time()
+        quantilesOrderingStrategy = self.sortingParameters['strategy']
+        ##if quantilesOrderingStrategy == 'average':
+        decomposition = [[(item[0][0],item[0][1]),item[1]]\
+                for item in self._computeQuantileOrdering(\
+                    strategy=quantilesOrderingStrategy,\
+                    Descending=True,Threading=Threading,nbrOfCPUs=nbrOfCPUs)]
+        if Debug:
+            print(decomposition)
+        self.decomposition = decomposition
+        self.runTimes['preordering'] = time() - tw
+        if Comments:
+            print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )
+        # setting components
+        t0 = time()
+        nc = len(decomposition)
+        self.nbrComponents = nc
+        self.nd = len(str(nc))
+        if not self.sortingParameters['Threading']:
+            components = OrderedDict()
+            for i in range(1,nc+1):
+                comp = decomposition[i-1]
+                compKey = ('c%%0%dd' % (self.nd)) % (i)
+                components[compKey] = {'rank':i}
+                pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
+                components[compKey]['lowQtileLimit'] = comp[0][1]
+                components[compKey]['highQtileLimit'] = comp[0][0]
+                pg = BipolarOutrankingDigraph(pt,
+                                          WithConcordanceRelation=False,
+                                          WithVetoCounts=False,
+                                          Normalized=True,
+                                          CopyPerfTab=False)
+                pg.__dict__.pop('criteria')
+                pg.__dict__.pop('evaluation')
+                pg.__class__ = Digraph
+                components[compKey]['subGraph'] = pg
+        else:   # if self.sortingParameters['Threading'] == True:
+            from copy import copy, deepcopy
+            from pickle import dumps, loads, load, dump
+            from multiprocessing import Process, active_children, cpu_count
+            #Debug=True
+            class myThread(Process):
+                def __init__(self, threadID,\
+                             tempDirName,\
+                             lTest,\
+                             Debug):
+                    Process.__init__(self)
+                    self.threadID = threadID
+                    self.workingDirectory = tempDirName
+                    self.lTest = lTest
+                    self.Debug = Debug
+                def run(self):
+                    from pickle import dumps, loads
+                    from os import chdir
+                    from copy import deepcopy
+                    from perfTabs import PartialPerformanceTableau
+                    from outrankingDigraphs import BipolarOutrankingDigraph
+                    chdir(self.workingDirectory)
+                    if self.Debug:
+                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadID)))
+                        print('lTest',self.lTest)
+                    fi = open('dumpPerfTab.py','rb')
+                    perfTab = loads(fi.read())
+                    fi.close()
+                    fi = open('dumpDecomp.py','rb')
+                    decomposition = loads(fi.read())
+                    fi.close()
+                    nc = len(decomposition)
+                    nd = len(str(nc))
+                    for i in self.lTest:
+                        comp = decomposition[i]
+                        if self.Debug:
+                            print(i, comp)
+                        compKey = ('c%%0%dd' % (nd)) % (i+1)
+                        compDict = {compKey: {}}
+                        compDict = {'rank':i}
+                        pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
+                        compDict['lowQtileLimit'] = comp[0][1]
+                        compDict['highQtileLimit'] = comp[0][0]
+                        compDict['subGraph'] = BipolarOutrankingDigraph(pt,
+                                                                        Normalized=True,
+                                                                        WithConcordanceRelation=False,
+                                                                        WithVetoCounts=False,
+                                                                        CopyPerfTab=False)     
+                        compDict['subGraph'].__dict__.pop('criteria')
+                        compDict['subGraph'].__dict__.pop('evaluation')
+                        compDict['subGraph'].__class__ = Digraph
+                        splitComponent = (compKey,compDict)
+                        if self.Debug:
+                            print(compDict)
+                        foName = 'splitComponent-'+str(i)+'.py'
+                        fo = open(foName,'wb')
+                        fo.write(dumps(splitComponent,-1))
+                        fo.close()
+                    
+            if Comments:
+                print('Processing the %d components' % nc )
+                print('Threading ...')
+            tdump = time()
+            from tempfile import TemporaryDirectory,mkdtemp
+            with TemporaryDirectory(dir=tempDir) as tempDirName:
+                #use this below dedented if the tempory directory should not be deleted
+                #tempDirName = mkdtemp(dir=tempDir)
+                selfFileName = tempDirName +'/dumpPerfTab.py'
+                if Debug:
+                    print('temDirName, selfFileName', tempDirName,selfFileName)
+                fo = open(selfFileName,'wb')
+                dump(perfTab,fo,-1)
+                fo.close()
+                if Comments:
+                    print('dumping perfTab: %.5f' % (time() - tdump))
+                selfFileName = tempDirName +'/dumpDecomp.py'
+                if Debug:
+                    print('temDirName, selfFileName', tempDirName,selfFileName)
+                fo = open(selfFileName,'wb')
+                pd = dumps(decomposition,-1)
+                fo.write(pd)
+                fo.close()
+                if Comments:
+                    print('dumping time: %.5f' % (time() - tdump))
+
+                if nbrOfCPUs == None:
+                    nbrOfCPUs = cpu_count()
+                if nbrOfThreads == None:
+                    nbrOfThreads = nbrOfCPUs-1
+                nbrOfLocals = self.order//nbrOfThreads
+                if nbrOfLocals*nbrOfThreads < self.order:
+                    nbrOfLocals += 1
+                if Comments:
+                    print('Nbr of components',nc)            
+                    print('Nbr of threads = ',nbrOfThreads)
+                    print('Nbr of locals/job',nbrOfLocals)
+                nbrOfThreadsUsed = 0
+                i = 0
+                for j in range(nbrOfThreads):
+                    if Comments:
+                        print('thread = %d/%d' % (j+1,nbrOfThreads),end="...")
+                    lTest = []
+                    threadLoad = 0
+                    while threadLoad <= nbrOfLocals and i < (nc):
+                        lTest.append(i)
+                        threadLoad += len(decomposition[i][1])
+                        i += 1
+                    #for i in range(start,stop):
+                    #    if len(decomposition[i][1]) < componentThreadingThreshold:
+                    #        lTest.append(i)
+                    #    else:
+                    #        bigPartialGraphs.append(i)
+                    if Comments:
+                        print('Threaded:',[len(decomposition[i][1]) for i in lTest])
+                        #print('Kept    :',[len(decomposition[i][1]) for i in bigPartialGraphs])
+                    if lTest != []:
+                        process = myThread(j,tempDirName,lTest,Debug)
+                        process.start()
+                        nbrOfThreadsUsed += 1
+                #nbg = len(bigPartialGraphs)
+                while active_children() != []:
+                    pass
+                if Comments:
+                    print('Exit %d threads' % nbrOfThreadsUsed)
+                    
+                components = OrderedDict()
+                #componentsList = []
+                for j in range(nc):
+                    if Debug:
+                        print('job',j)
+                    fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
+                    fi = open(fiName,'rb')
+                    splitComponent = loads(fi.read())
+                    if Debug:
+                        print('splitComponent',splitComponent)
+                    components[splitComponent[0]] = splitComponent[1]
+        
+        fillRate = 0
+        maximalComponentSize = 0
+        for compKey,comp in components.items():
+            pg = comp['subGraph']
+            npg = pg.order
+            if npg > maximalComponentSize:
+                maximalComponentSize = npg
+            fillRate += npg*(npg-1)
+            for x in pg.actions.keys():
+                self.actions[x]['component'] = compKey
+        self.fillRate = fillRate / (na*(na-1))
+        self.maximalComponentSize = maximalComponentSize
+        self.components = components
+
+        # setting the component relation
+        self.valuationdomain = {'min':Decimal('-1'),
+                                'med':Decimal('0'),
+                                'max':Decimal('1')}
+       
+        self.runTimes['decomposing'] = time() - t0
+        if Comments:
+            print('decomposing time: %.4f' % self.runTimes['decomposing']  )
+        # Kohler ranking-by-choosing all components
+        self.componentRankingRule = componentRankingRule
+        t0 = time()
+        self.boostedRanking = self.computeBoostedRanking(rankingRule=componentRankingRule)
+        self.boostedOrder = list(reversed(self.boostedRanking))
+        self.runTimes['ordering'] = time() - t0
+
+        if Comments:
+            print('ordering time: %.4f' % self.runTimes['ordering']  )
+        
+        self.runTimes['totalTime'] = time() - ttot
+        if Comments:
+            print(self.runTimes)
+        if save2File != None:
+            self.showShort(fileName=save2File)
+            
 
     # ----- class methods ------------
+
+
+
+    def _computeQuantileOrdering(self,strategy=None,
+                                Descending=True,
+                                 Threading=False,
+                                 nbrOfCPUs=None,
+                                Debug=False,
+                                 Comments=False):
+        """
+        Renders the quantile interval of the decision actions.
+        
+        *Parameters*:
+            * QuantilesdSortingDigraph instance
+            * Descending: listing in *decreasing* (default) or *increasing* quantile order.
+            * strategy: ordering in an {'optimistic' | 'pessimistic' | 'average' (default)}
+              in the uppest, the lowest or the average potential quantile.
+        
+        """
+        if strategy == None:
+            strategy = self.sortingParameters['strategy']
+        actionsCategories = {}
+        for x in self.actions:
+            a,lowCateg,highCateg,credibility =\
+                     self.computeActionCategories(x,Comments=Comments,Debug=Debug,\
+                                               Threading=Threading,\
+                                               nbrOfCPUs = nbrOfCPUs)
+            lowQtileLimit = self.categories[lowCateg]['lowLimit']
+            highQtileLimit = self.categories[highCateg]['highLimit']
+            if strategy == "optimistic":
+                try:
+                    actionsCategories[(highQtileLimit,highQtileLimit,lowQtileLimit)].append(a)
+                except:
+                    actionsCategories[(highQtileLimit,highQtileLimit,lowQtileLimit)] = [a]
+            elif strategy == "pessimistic":
+                try:
+                    actionsCategories[(lowQtileLimit,highQtileLimit,lowQtileLimit)].append(a)
+                except:
+                    actionsCategories[(lowQtileLimit,highQtileLimit,lowQtileLimit)] = [a]
+            elif strategy == "average":
+                lc = float(lowCateg)
+                hc = float(highCateg)
+                ac = (lc+hc)/2.0
+                try:
+                    actionsCategories[(ac,highQtileLimit,lowQtileLimit)].append(a)
+                except:
+                    actionsCategories[(ac,highQtileLimit,lowQtileLimit)] = [a]
+            else:
+                print('Error: startegy %s unkonwon' % strategy)
+                
+        actionsCategIntervals = []
+        for interval in actionsCategories:
+            actionsCategIntervals.append([interval,\
+                                          actionsCategories[interval]])
+        actionsCategIntervals.sort(reverse=Descending)
+        if Debug:
+            print(actionsCategIntervals)
+        CompSize = self.minimalComponentSize 
+        if CompSize == 1:
+            if Descending:
+                componentsIntervals = [[(item[0][1],item[0][2]),item[1]]\
+                                   for item in actionsCategIntervals]
+            else:
+                componentsIntervals = [[(item[0][2],item[0][1]),item[1]]\
+                                   for item in actionsCategIntervals]
+                
+        else:
+            componentsIntervals = []
+            nc = len(actionsCategIntervals)
+            compContent = []
+            for i in range(nc):
+                currContLength = len(compContent)
+                comp = actionsCategIntervals[i]               
+                if currContLength == 0:
+                    lowQtileLimit = comp[0][1]
+                highQtileLimit = comp[0][2]
+                compContent += comp[1]
+                if len(compContent) >= CompSize or i == nc-1:
+                    if Descending:
+                        componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent])
+                    else:
+                        componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent])
+                    compContent = []
+        if Debug:
+            print(componentsIntervals)
+        return componentsIntervals        
+
+    def computeActionCategories(self,action,Show=False,Debug=False,Comments=False,\
+                             Threading=False,nbrOfCPUs=None):
+        """
+        Renders the union of categories in which the given action is sorted positively or null into.
+        Returns a tuple : action, lowest category key, highest category key, membership credibility !
+        """
+        #qs = self.qs
+        #qs = self
+        Med = self.valuationdomain['med']
+        categories = self.categories
+        try:
+            sorting = self.sorting
+        except:
+            sorting = self.computeSortingCharacteristics(action=action,Comments=Comments,\
+                                                   Threading=Threading,\
+                                                   nbrOfCPUs=nbrOfCPUs)      
+        keys = []
+        for c in categories.keys():
+        #for c in self.orderedCategoryKeys():
+            Above = False
+            if sorting[action][c]['categoryMembership'] >= Med:
+                Above = True
+                if sorting[action][c]['lowLimit'] > Med:
+                    lowLimit = sorting[action][c]['lowLimit']
+                if sorting[action][c]['notHighLimit'] > Med:
+                    notHighLimit = sorting[action][c]['notHighLimit']    
+                keys.append(c)
+                if Debug:
+                    print(action, c, sorting[action][c])
+            elif Above:
+                break
+        n = len(keys)
+        try:
+            credibility = min(lowLimit,notHighLimit)
+        except:
+            credibility = Med
+        if n == 0:
+            return None
+        elif n == 1:
+            if Show:
+                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                     qs.categories[keys[0]]['lowLimit'],\
+                                     qs.categories[keys[0]]['highLimit'],\
+                                     action,\
+                                     credibility,lowLimit,notHighLimit) )
+            return action,\
+                    keys[0],\
+                    keys[0],\
+                    credibility
+        else:
+            if Show:
+                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                     qs.categories[keys[0]]['lowLimit'],\
+                                     qs.categories[keys[-1]]['highLimit'],\
+                                     action,\
+                                     credibility,lowLimit,notHighLimit) )
+            return action,\
+                    keys[0],\
+                    keys[-1],\
+                    credibility            
 
     def computeCriterion2RankingCorrelation(self,criterion,Threading=False,\
                                     nbrOfCPUs=None,Debug=False,
@@ -734,165 +1023,6 @@ class BigOutrankingDigraph(BigDigraph):
             for x in criteriaCorrelation:
                 c = x[2]
                 print('%9s |  %.2f \t %.3f \t %.3f \t %.3f' % (c,criteria[c]['weight'],x[0],x[1],x[0]*x[1]))
-
-##    def _computeQuantileOrdering(self,strategy=None,
-##                                Descending=True,
-##                                Debug=False,
-##                                 Comments=False):
-##        """
-##        Renders the quantile interval of the decision actions.
-##        *Parameters*:
-##            * QuantilesdSortingDigraph instance
-##            * Descending: listing in *decreasing* (default) or *increasing* quantile order.
-##            * strategy: ordering in an {'optimistic' | 'pessimistic' | 'average' (default)}
-##              in the uppest, the lowest or the average potential quantile.
-##        
-##        """
-##        if strategy == None:
-##            strategy = self.sortingParameters['strategy']
-##        actionsCategories = {}
-##        for x in self.actions.keys():
-##            a,lowCateg,highCateg,credibility =\
-##                     self.computeActionCategories(x,Comments=Comments)
-##            if strategy == "optimistic":
-##                try:
-##                    actionsCategories[(int(highCateg),int(highCateg),int(lowCateg))].append(a)
-##                except:
-##                    actionsCategories[(int(highCateg),int(highCateg),int(lowCateg))] = [a]
-##            elif strategy == "pessimistic":
-##                try:
-##                    actionsCategories[(int(lowCateg),int(lowCateg),int(highCateg))].append(a)
-##                except:
-##                    actionsCategories[(int(lowCateg),int(lowCateg),int(highCateg))] = [a]
-##            elif strategy == "average":
-##                lc = float(lowCateg)
-##                hc = float(highCateg)
-##                ac = (lc+hc)/2.0
-##                try:
-##                    actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
-##                except:
-##                    actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
-####            else:  # optimistic by default
-####                try:
-####                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
-####                except:
-####                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
-##                
-##        actionsCategIntervals = []
-##        for interval in actionsCategories:
-##            actionsCategIntervals.append([interval,\
-##                                          actionsCategories[interval]])
-##        actionsCategIntervals.sort(reverse=Descending)
-##
-##        return actionsCategIntervals
-##    
-##
-##    def _computeQuantileOrderingMP(self,strategy=None,
-##                                Descending=True,
-##                                Debug=False,
-##                                nbrOfCPUs=None):
-##        """
-##        !!! Example of hopelessly inefficient multiprocessing of a rather simple task and insufficient granularity
-##        """
-##        from multiprocessing import Pool
-##        from os import cpu_count
-##        if nbrOfCPUs == None:
-##            nbrOfCPUs = cpu_count()
-##        if strategy == None:
-##            strategy = self.sortingParameters['strategy']
-##        actionsCategoriesList = [] 
-##        actions = self.actions
-##        showActionCategories = self.showActionCategories
-##        with Pool(processes=nbrOfCPUs) as pool:
-##            actionsCategoriesList = [(a,lowCateg,highCateg,credibility) for\
-##                                     a,lowCateg,highCateg,credibility in\
-##                                     pool.map(showActionCategories,actions.keys())]
-##        actionsCategories = OrderedDict()
-##        for a,lowCateg,highCateg,credibility in actionsCategoriesList:
-##            # too much non parallel work to do
-##            if strategy == "optimistic":
-##                try:
-##                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
-##                except:
-##                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]
-##            elif strategy == "pessimistic":
-##                try:
-##                    actionsCategories[(int(lowCateg),int(highCateg))].append(a)
-##                except:
-##                    actionsCategories[(int(lowCateg),int(highCateg))] = [a]
-##            elif strategy == "average":
-##                lc = float(lowCateg)
-##                hc = float(highCateg)
-##                ac = (lc+hc)/2.0
-##                try:
-##                    actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
-##                except:
-##                    actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
-##            else:  # optimistic by default
-##                try:
-##                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
-##                except:
-##                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
-##                
-##        actionsCategIntervals = []
-##        for interval in actionsCategories:
-##            actionsCategIntervals.append([interval,\
-##                                          actionsCategories[interval]])
-##        actionsCategIntervals.sort(reverse=Descending)
-##
-##        return actionsCategIntervals
-##
-##    def computeActionCategories(self,action,Debug=False,Show=False,Comments=False,Threading=False,nbrOfCPUs=None):
-##        """
-##        Renders the union of categories in which the given action is sorted positively or null into.
-##        Returns a tuple : action, lowest category key, highest category key, membership credibility !
-##        """
-##        qs = self.qs
-##        Med = qs.valuationdomain['med']
-##        try:
-##            sorting = self.sorting
-##        except:
-##            sorting = qs.computeSortingCharacteristics(action=action,Comments=Comments,Debug=Debug,\
-##                                                   Threading=Threading,nbrOfCPUs=nbrOfCPUs)
-##        keys = []
-##        for c in qs.orderedCategoryKeys():
-##            if sorting[action][c]['categoryMembership'] >= Med:
-##                if sorting[action][c]['lowLimit'] > Med:
-##                    lowLimit = sorting[action][c]['lowLimit']
-##                if sorting[action][c]['notHighLimit'] > Med:
-##                    notHighLimit = sorting[action][c]['notHighLimit']
-##                keys.append(c)
-##                if Debug:
-##                    print(action, c, sorting[action][c])
-##        n = len(keys)
-##        try:
-##            credibility = min(lowLimit,notHighLimit)
-##        except:
-##            credibility = Med
-##        if n == 0:
-##            return None
-##        elif n == 1:
-##            if Show:
-##                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-##                                     qs.categories[keys[0]]['lowLimit'],\
-##                                     qs.categories[keys[0]]['highLimit'],\
-##                                     action,\
-##                                     credibility,lowLimit,notHighLimit) )
-##            return action,\
-##                    keys[0],\
-##                    keys[0],\
-##                    credibility
-##        else:
-##            if Show:
-##                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-##                                     qs.categories[keys[0]]['lowLimit'],\
-##                                     qs.categories[keys[-1]]['highLimit'],\
-##                                     action,\
-##                                     credibility,lowLimit,notHighLimit) )
-##            return action,\
-##                    keys[0],\
-##                    keys[-1],\
-##                    credibility            
 
     def showActionsSortingResult(self,actionsSubset=None):
         """
@@ -1251,7 +1381,6 @@ class BigOutrankingDigraph(BigDigraph):
 ##        return ranking    
 
 ########################
-from weakOrders import QuantilesRankingDigraph
 class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,PerformanceTableau):
     """
     Multiprocessing implementation of the abstract BipolarOutrankingDigraph class
@@ -2292,36 +2421,35 @@ if __name__ == "__main__":
 
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
                                       seed=100)
-    ##    bg1 = BigOutrankingDigraphMP(tp,CopyPerfTab=True,quantiles=50,
-    ##                                 quantilesOrderingStrategy='average',
-    ##                                 componentRankingRule='NetFlows',
-    ##                                 LowerClosed=True,
-    ##                                 minimalComponentSize=10,
-    ##                                 Threading=MP,nbrOfCPUs=8,
-    ##                                 #tempDir='.',
-    ##                                 nbrOfThreads=8,
-    ##                                 Comments=False,Debug=False,
-    ##                                 save2File='testbgMP')
-    ##    print(bg1)
-    ##    
-    ##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
-    ##                                      seed=100)
-    
-    bg2 = BigOutrankingDigraphDev(tp,CopyPerfTab=True,quantiles=40,
+    bg1 = BigOutrankingDigraphMP(tp,CopyPerfTab=True,quantiles=50,
                                  quantilesOrderingStrategy='average',
                                  componentRankingRule='NetFlows',
                                  LowerClosed=True,
                                  minimalComponentSize=10,
                                  Threading=MP,nbrOfCPUs=8,
-                                 #componentThreadingThreshold=50,
-                                 tempDir='.',
+                                 #tempDir='.',
+                                 nbrOfThreads=8,
+                                 Comments=False,Debug=False,
+                                 save2File='testbgMP')
+    print(bg1)
+    
+    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
+                                      seed=100)
+    
+    bg2 = BigOutrankingDigraph(tp,CopyPerfTab=True,quantiles=50,
+                                 quantilesOrderingStrategy='average',
+                                 componentRankingRule='NetFlows',
+                                 LowerClosed=True,
+                                 minimalComponentSize=10,
+                                 Threading=MP,nbrOfCPUs=8,
+                                 #tempDir='.',
                                  nbrOfThreads=8,
                                  Comments=True,Debug=False,
                                  save2File='testbgDev')
     print(bg2)
     #print(bg1.computeDecompositionSummaryStatistics())
     #bg1.showDecomposition(direction='increasing')
-    #bg1.showRelationMap()
+    bg2.showRelationMap(0,100)
 ##    print(bg1)
 ##    bg1.showShort()
 ##    bg1.showShort('testShowShort')
