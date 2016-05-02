@@ -6129,7 +6129,7 @@ class Digraph(object):
     def detectChordlessPath(self,Pk,n2,Comments=False,Debug=False):
         """
         New procedure from Agrum study April 2009
-        recursive chordless path extraction strating from path
+        recursive chordless path extraction starting from path
         Pk = [n2, ...., n1] and ending in node n2.
         Optimized with marking of visited chordless P1s.
         """
@@ -8639,6 +8639,10 @@ class Digraph(object):
         return rankedPairsOrder
 
     def computeRankedPairsRanking(self):
+        """
+        renders an actions ordering from the best to the worst obtained from the
+        ranked pairs rule.
+        """
         ordering = self.computeRankedPairsOrder()
         return list(reversed(ordering))
 
@@ -8647,7 +8651,7 @@ class Digraph(object):
                            sampleSize=1000, Debug=False):
         """
         renders a ordering from worst to best of the actions with maximal Kemeny index.
-        Return a tuple: kemenyOrder, kemenyIndex
+        Return a tuple: kemenyRanking (from best to worst), kemenyIndex
         """
         from random import seed, shuffle
         from digraphs import all_perms
@@ -8729,7 +8733,7 @@ class Digraph(object):
     def computeKemenyOrder(self,orderLimit=7,Debug=False):
         """
         Renders a ordering from worst to best of the actions with maximal Kemeny index.
-        Return a tuple: kemenyRanking, kemenyIndex
+        Return a tuple: kemenyOrder (from worst to best), kemenyIndex
         """
         try:
             ranking = list(self.maximalRankings[0])
