@@ -27,7 +27,7 @@ from bigOutrankingDigraphs import *
 
 class BigDigraph(object):
     """
-    abstract root class for linearly decomposed big digraphs (order > 1000)
+    Abstract root class for linearly decomposed big digraphs (order > 1000)
     using multiprocessing ressources.
     """
     def __repr__(self):
@@ -487,7 +487,7 @@ class BigDigraph(object):
 from weakOrders import QuantilesRankingDigraph
 class BigOutrankingDigraph(BigDigraph):
     """
-    Abstract root class  for the multiprocessing implementation of big outranking digraphs.
+    Main class for the multiprocessing implementation of big outranking digraphs.
     
     The big outranking digraph instance is decomposed with a q-tiling sort into a partition
     of quantile equivalence classes which are linearly ordered by average quantile limits (default).
@@ -495,13 +495,14 @@ class BigOutrankingDigraph(BigDigraph):
     With each quantile equivalence class is associated a BipolarOutrankingDigraph object
     which is restricted to the decision actions gathered in this quantile equivalence class.
 
-    By default, the number of quantiles q is set to a tenth of the number of decision actions,
-    ie q = order//10.
-
+    By default, the number of quantiles q is set to a twentieth of the number of decision actions,
+    ie q = order//10. The effective number of quantiles may be much lower for large orders;
+    for instance quantiles = 250 may give good results for a digraph of order 25000.
+    
     For other parameters settings, see the corresponding :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
 
     """
-    def __init__(self,argPerfTab=None,\
+    def __init__(self,argPerfTab,\
                  quantiles=None,\
                  quantilesOrderingStrategy='average',\
                  LowerClosed=True,\
@@ -532,16 +533,17 @@ class BigOutrankingDigraph(BigDigraph):
         self.name = perfTab.name + '_mp'
         # setting quantiles sorting parameters
         if CopyPerfTab:
-            copy2self = deepcopy
-            self.actions = copy2self(perfTab.actions)
+            self.actions = deepcopy(perfTab.actions)
+            self.criteria = deepcopy(perfTab.criteria)
+            self.evaluation = deepcopy(perfTab.evaluation)
         else:
-            copy2self = copy
-            self.actions = copy2self(perfTab.actions)
+            self.actions = perfTab.actions
+            self.criteria = perfTab.criteria
+            self.evaluation = perfTab.evaluation
         na = len(self.actions)
         self.order = na
-        self.criteria = copy2self(perfTab.criteria)
         self.dimension = len(perfTab.criteria)
-        self.evaluation = copy2self(perfTab.evaluation)
+        
         #######
         if quantiles == None:
             quantiles = na//10
@@ -1383,6 +1385,8 @@ class BigOutrankingDigraph(BigDigraph):
 ########################
 class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,PerformanceTableau):
     """
+    !!! Development and testing implementation !!!
+    
     Multiprocessing implementation of the abstract BipolarOutrankingDigraph class
     for large instances (order > 1000)
 
@@ -1859,6 +1863,8 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
 ######  in development
 class BigOutrankingDigraphDev(BigOutrankingDigraph,QuantilesRankingDigraph,PerformanceTableau):
     """
+    !!! In Development, only for testing purposes
+
     Multiprocessing implementation of the abstract BipolarOutrankingDigraph class
     for large instances (order > 1000)
 
@@ -2414,14 +2420,14 @@ if __name__ == "__main__":
     
     from time import time
     from weakOrders import QuantilesRankingDigraph
-    MP  = True
-    nbrActions=1000
+    MP  = False
+    nbrActions=200
 ##    t0 = time()
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,seed=100)
 
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
                                       seed=100)
-    bg1 = BigOutrankingDigraphMP(tp,CopyPerfTab=True,quantiles=50,
+    bg1 = BigOutrankingDigraphMP(tp,CopyPerfTab=True,quantiles=20,
                                  quantilesOrderingStrategy='average',
                                  componentRankingRule='NetFlows',
                                  LowerClosed=True,
@@ -2436,7 +2442,7 @@ if __name__ == "__main__":
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
                                       seed=100)
     
-    bg2 = BigOutrankingDigraph(tp,CopyPerfTab=True,quantiles=50,
+    bg2 = BigOutrankingDigraph(tp,CopyPerfTab=False,quantiles=20,
                                  quantilesOrderingStrategy='average',
                                  componentRankingRule='NetFlows',
                                  LowerClosed=True,
