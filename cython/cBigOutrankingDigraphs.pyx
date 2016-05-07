@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-#cython: language_level(3), boundcheck=False
-# cPython3 implementation of Digraph3
+# cython: language_level(3), boundcheck=False
+# Python 3 implementation of digraphs
 # sub-module for big outranking digraphs
-# Copyright (C) 2016  Raymond Bisdorff
+# Copyright (C) 2015  Raymond Bisdorff
 #
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by

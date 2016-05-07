@@ -234,7 +234,7 @@ def total_size(o, handlers={}, verbose=False):
 
         for typ, handler in all_handlers.items():
             if isinstance(o, typ):
-                s += sum(map(getsizeof,handler(o)))
+                s += sum(map(sizeof, handler(o)))
                 break
         return s
 

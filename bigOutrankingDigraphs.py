@@ -484,8 +484,8 @@ class BigDigraph(object):
 
 ########################
 
-from weakOrders import QuantilesRankingDigraph
-class BigOutrankingDigraph(BigDigraph):
+#from weakOrders import QuantilesRankingDigraph
+class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
     """
     Main class for the multiprocessing implementation of big outranking digraphs.
     
@@ -1383,7 +1383,7 @@ class BigOutrankingDigraph(BigDigraph):
 ##        return ranking    
 
 ########################
-class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,PerformanceTableau):
+class BigOutrankingDigraphMP(BigOutrankingDigraph,PerformanceTableau):
     """
     !!! Development and testing implementation !!!
     
@@ -1861,7 +1861,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                     credibility            
 
 ######  in development
-class BigOutrankingDigraphDev(BigOutrankingDigraph,QuantilesRankingDigraph,PerformanceTableau):
+class BigOutrankingDigraphDev(BigOutrankingDigraph,PerformanceTableau):
     """
     !!! In Development, only for testing purposes
 

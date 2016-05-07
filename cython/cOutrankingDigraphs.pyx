@@ -21,7 +21,7 @@
 
 __version__ = "Revision: Py35"
 
-from cDigraphs import *
+from digraphs import *
 from xmlrpc.client import ServerProxy
 from cOutrankingDigraphs import *
 
