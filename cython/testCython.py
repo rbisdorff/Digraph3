@@ -26,13 +26,13 @@ from os import path
 from randomPerfTabs import Random3ObjectivesPerformanceTableau
 
 # parameters
-sampleSize = 100
+sampleSize = 1
 MP = True
-nbrOfCPUs = 22
-nbrActions = 20000
+nbrOfCPUs = 4
+nbrActions = 1000
 nbrCriteria = 21
 commonPar=('beta','variable',None)
-qtiles = 200
+qtiles = 50
 minimalSize = 10
 seed = 5
 fileName = 'CythonA%dObj21q%ds%dc%dgaia164.csv' % (nbrActions,qtiles,minimalSize,nbrOfCPUs)

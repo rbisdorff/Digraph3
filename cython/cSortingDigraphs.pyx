@@ -19,7 +19,7 @@
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 #######################
-from digraphs import *
+from cDigraphs import *
 from cOutrankingDigraphs import *
 from cSortingDigraphs import *
 
