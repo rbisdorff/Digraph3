@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# cython: language_level(3), boundcheck=False
 # Python 3 implementation of digraphs
 # sub-module for big outranking digraphs
 # Copyright (C) 2015  Raymond Bisdorff
@@ -18,11 +17,12 @@
 #    with this program; if not, write to the Free Software Foundation, Inc.,
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
-#######################
+######################
+
 import cython
+
 from cOutrankingDigraphs import *
 from cSortingDigraphs import *
-from weakOrders import QuantilesRankingDigraph
 from time import time
 from decimal import Decimal
 from cBigOutrankingDigraphs import *
@@ -59,7 +59,7 @@ class BigDigraph(object):
             pass
         return '%s instance' % str(self.__class__)
     
-    def relation(self,int x,int y,Debug=False):
+    def relation(self,x,y,Debug=False):
         """
         Dynamic construction of the global outranking characteristic function *r(x S y)*.
         """
@@ -486,7 +486,8 @@ class BigDigraph(object):
 
 ########################
 
-class BigOutrankingDigraph(BigDigraph):
+#from weakOrders import QuantilesRankingDigraph
+class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
     """
     Main class for the multiprocessing implementation of big outranking digraphs.
     
@@ -503,25 +504,45 @@ class BigOutrankingDigraph(BigDigraph):
     For other parameters settings, see the corresponding :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
 
     """
+    
+    @cython.locals(quantiles=cython.int,
+                   na=cython.int,
+                   dimension=cython.int,
+                   nc=cython.int,
+                   nd=cython.int,
+                   LowerClosed=cython.bint,
+                   minimalComponentSize=cython.int,
+                   Threading=cython.bint,
+                   CopyPerfTan=cython.bint,
+                   Comments=cython.bint,
+                   Debug=cython.bint,
+                   ttot=cython.double,
+                   t0=cython.double,
+                   tw=cython.double,
+                   tdump=cython.double,
+                   fillRate=cython.double,
+                   maximalComponentSize=cython.int,
+                   nbrOfCPUs=cython.int,
+                   nbrOfThreads=cython.int,
+                   #quantilesOrderingStrategy=cython.p_char,
+                   #componentRankingRule=cython.p_char
+                   )
+    
     def __init__(self,argPerfTab,\
-                 int quantiles=0,\
-                 quantilesOrderingStrategy='average',\
-                 bint LowerClosed=True,\
-                 componentRankingRule='Copeland',\
-                 int minimalComponentSize=1,\
-                 bint Threading=False,\
+                 quantiles=0,\
+                 quantilesOrderingStrategy="average",\
+                 LowerClosed=True,\
+                 componentRankingRule="Copeland",\
+                 minimalComponentSize=1,\
+                 Threading=False,\
                  tempDir=None,\
                  #componentThreadingThreshold=50,\
-                 nbrOfCPUs=None,\
-                 nbrOfThreads=None,\
+                 nbrOfCPUs=0,\
+                 nbrOfThreads=0,\
                  save2File=None,\
-                 bint CopyPerfTab=False,\
-                 bint Comments=False,\
-                 bint Debug=False):
-        
-        cdef int na,nc,i,j,npg,maximalComponentSize,nd
-        #cdef public int order,dimension
-        cdef double ttot,t0,tdump,fillrate
+                 CopyPerfTab=True,\
+                 Comments=False,\
+                 Debug=False):
         
         from digraphs import Digraph
         from cSortingDigraphs import QuantilesSortingDigraph
@@ -530,7 +551,12 @@ class BigOutrankingDigraph(BigDigraph):
         from os import cpu_count
         from multiprocessing import Pool
         from copy import copy, deepcopy
-        
+
+        if cython.compiled:
+            print('Cythonized BigOutrankingDigraph class')
+        else:
+            print('Pure Python BigOutrankingDigraph class')
+   
         ttot = time()
 
         # setting name
@@ -547,10 +573,10 @@ class BigOutrankingDigraph(BigDigraph):
             self.evaluation = perfTab.evaluation
         na = len(self.actions)
         self.order = na
-        self.dimension = len(perfTab.criteria)
+        dimension = len(perfTab.criteria)
+        self.dimension = dimension
         
         #######
-        
         if quantiles == 0:
             quantiles = na//10
         self.sortingParameters = {}
@@ -586,8 +612,8 @@ class BigOutrankingDigraph(BigDigraph):
         if Comments:
             print('execution time: %.4f' % (self.runTimes['sorting']))
         # preordering
-        #if minimalComponentSize == None:
-        #    minimalComponentSize = 1
+##        if minimalComponentSize == None:
+##            minimalComponentSize = 1
         self.minimalComponentSize = minimalComponentSize
         tw = time()
         quantilesOrderingStrategy = self.sortingParameters['strategy']
@@ -606,7 +632,8 @@ class BigOutrankingDigraph(BigDigraph):
         t0 = time()
         nc = len(decomposition)
         self.nbrComponents = nc
-        self.nd = len(str(nc))
+        nd = len(str(nc))
+        self.nd = nd
         if not self.sortingParameters['Threading']:
             components = OrderedDict()
             for i in range(1,nc+1):
@@ -645,7 +672,7 @@ class BigOutrankingDigraph(BigDigraph):
                     from os import chdir
                     from copy import deepcopy
                     from perfTabs import PartialPerformanceTableau
-                    from cOutrankingDigraphs import BipolarOutrankingDigraph
+                    from outrankingDigraphs import BipolarOutrankingDigraph
                     chdir(self.workingDirectory)
                     if self.Debug:
                         print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadID)))
@@ -710,9 +737,9 @@ class BigOutrankingDigraph(BigDigraph):
                 if Comments:
                     print('dumping time: %.5f' % (time() - tdump))
 
-                if nbrOfCPUs == None:
+                if nbrOfCPUs == 0:
                     nbrOfCPUs = cpu_count()
-                if nbrOfThreads == None:
+                if nbrOfThreads == 0:
                     nbrOfThreads = nbrOfCPUs-1
                 nbrOfLocals = self.order//nbrOfThreads
                 if nbrOfLocals*nbrOfThreads < self.order:
@@ -761,7 +788,7 @@ class BigOutrankingDigraph(BigDigraph):
                     if Debug:
                         print('splitComponent',splitComponent)
                     components[splitComponent[0]] = splitComponent[1]
-        
+
         fillRate = 0
         maximalComponentSize = 0
         for compKey,comp in components.items():
@@ -821,9 +848,6 @@ class BigOutrankingDigraph(BigDigraph):
               in the uppest, the lowest or the average potential quantile.
         
         """
-        cdef int nc
-        cdef double lc, hc, ac 
-        
         if strategy == None:
             strategy = self.sortingParameters['strategy']
         actionsCategories = {}
@@ -898,7 +922,6 @@ class BigOutrankingDigraph(BigDigraph):
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
         """
-        cdef int n
         #qs = self.qs
         #qs = self
         Med = self.valuationdomain['med']
@@ -1393,7 +1416,7 @@ class BigOutrankingDigraph(BigDigraph):
 ##        return ranking    
 
 ########################
-class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,PerformanceTableau):
+class BigOutrankingDigraphMP(BigOutrankingDigraph,PerformanceTableau):
     """
     !!! Development and testing implementation !!!
     
@@ -1429,7 +1452,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                  Debug=False):
         
         from digraphs import Digraph
-        from cSortingDigraphs import QuantilesSortingDigraph
+        from sortingDigraphs import QuantilesSortingDigraph
         from collections import OrderedDict
         from time import time
         from os import cpu_count
@@ -1554,7 +1577,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                     from os import chdir
                     from copy import deepcopy
                     from perfTabs import PartialPerformanceTableau
-                    from cOutrankingDigraphs import BipolarOutrankingDigraph
+                    from outrankingDigraphs import BipolarOutrankingDigraph
                     chdir(self.workingDirectory)
                     if self.Debug:
                         print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadID)))
@@ -1871,7 +1894,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,QuantilesRankingDigraph,Perfor
                     credibility            
 
 ######  in development
-class BigOutrankingDigraphDev(BigOutrankingDigraph,QuantilesRankingDigraph,PerformanceTableau):
+class BigOutrankingDigraphDev(BigOutrankingDigraph,PerformanceTableau):
     """
     !!! In Development, only for testing purposes
 
@@ -1908,7 +1931,7 @@ class BigOutrankingDigraphDev(BigOutrankingDigraph,QuantilesRankingDigraph,Perfo
                  Debug=False):
         
         from digraphs import Digraph
-        from cSortingDigraphs import QuantilesSortingDigraph
+        from sortingDigraphs import QuantilesSortingDigraph
         from collections import OrderedDict
         from time import time
         from os import cpu_count
@@ -2045,7 +2068,7 @@ class BigOutrankingDigraphDev(BigOutrankingDigraph,QuantilesRankingDigraph,Perfo
                     from os import chdir
                     from copy import deepcopy
                     from perfTabs import PartialPerformanceTableau
-                    from cOutrankingDigraphs import BipolarOutrankingDigraph
+                    from outrankingDigraphs import BipolarOutrankingDigraph
                     chdir(self.workingDirectory)
                     if self.Debug:
                         print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadID)))
@@ -2279,11 +2302,11 @@ class BigOutrankingDigraphDev(BigOutrankingDigraph,QuantilesRankingDigraph,Perfo
 
 
     def _computeQuantileOrdering(self,strategy=None,
-                                bint Descending=True,
-                                 bint Threading=False,
+                                Descending=True,
+                                 Threading=False,
                                  nbrOfCPUs=None,
-                                bint Debug=False,
-                                 bint Comments=False):
+                                Debug=False,
+                                 Comments=False):
         """
         Renders the quantile interval of the decision actions.
         
@@ -2362,8 +2385,8 @@ class BigOutrankingDigraphDev(BigOutrankingDigraph,QuantilesRankingDigraph,Perfo
             print(componentsIntervals)
         return componentsIntervals        
 
-    def computeActionCategories(self,action,bint Show=False,bint Debug=False,bint Comments=False,\
-                             bint Threading=False,nbrOfCPUs=None):
+    def computeActionCategories(self,action,Show=False,Debug=False,Comments=False,\
+                             Threading=False,nbrOfCPUs=None):
         """
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
