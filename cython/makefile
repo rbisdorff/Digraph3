@@ -1,16 +1,26 @@
-odg:
+FLAG = inplace
+
+codg:
 		cython -3 -X boundscheck=False cOutrankingDigraphs.pyx
-		python3 csetupODG.py build_ext --inplace
-so:
+bodg:
+		python3 csetupODG.py build_ext ${FLAG}
+cso:
 		cython -3 -X boundscheck=False cSortingDigraphs.pyx
-		python3 csetupSO.py build_ext --inplace
-bg:
+bso:
+		python3 csetupSO.py build_ext ${FLAG}
+cbg:
 		cython -3 -X boundscheck=False cBigOutrankingDigraphs.py
-		python3 csetupBG.py build_ext --inplace
-all:
+bbg:
+		python3 csetupBG.py build_ext ${FLAG}
+call:
 		cython -3 -X boundscheck=False cOutrankingDigraphs.pyx
-		python3 csetupODG.py build_ext --inplace
 		cython -3 -X boundscheck=False cSortingDigraphs.pyx
-		python3 csetupSO.py build_ext --inplace
 		cython -3 -X boundscheck=False cBigOutrankingDigraphs.py
-		python3 csetupBG.py build_ext --inplace
+inplace:
+		python3 csetupODG.py build_ext ${FLAG}
+		python3 csetupSO.py build_ext ${FLAG}
+		python3 csetupBG.py build_ext ${FLAG}
+install:
+		sudo python3 csetupODG.py build_ext
+		sudo python3 csetupSO.py build_ext
+		sudo python3 csetupBG.py build_ext
