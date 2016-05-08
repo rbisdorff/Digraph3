@@ -19,7 +19,7 @@
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 #######################
-
+import cython
 from cOutrankingDigraphs import *
 from cSortingDigraphs import *
 from time import time
@@ -817,8 +817,8 @@ class BigOutrankingDigraph(BigDigraph):
               in the uppest, the lowest or the average potential quantile.
         
         """
-        cdef int x,nc
-        cdef double lc,hc,ac 
+        cdef int nc
+        cdef double lc, hc, ac 
         
         if strategy == None:
             strategy = self.sortingParameters['strategy']
@@ -888,7 +888,7 @@ class BigOutrankingDigraph(BigDigraph):
             print(componentsIntervals)
         return componentsIntervals        
 
-    def computeActionCategories(self,int action,Show=False,Debug=False,Comments=False,\
+    def computeActionCategories(self,action,Show=False,Debug=False,Comments=False,\
                              Threading=False,nbrOfCPUs=None):
         """
         Renders the union of categories in which the given action is sorted positively or null into.
