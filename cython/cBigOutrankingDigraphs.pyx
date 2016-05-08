@@ -22,6 +22,7 @@
 import cython
 from cOutrankingDigraphs import *
 from cSortingDigraphs import *
+from weakOrders import QuantilesRankingDigraph
 from time import time
 from decimal import Decimal
 from cBigOutrankingDigraphs import *
@@ -485,7 +486,6 @@ class BigDigraph(object):
 
 ########################
 
-from weakOrders import QuantilesRankingDigraph
 class BigOutrankingDigraph(BigDigraph):
     """
     Main class for the multiprocessing implementation of big outranking digraphs.
@@ -506,18 +506,22 @@ class BigOutrankingDigraph(BigDigraph):
     def __init__(self,argPerfTab,\
                  int quantiles=0,\
                  quantilesOrderingStrategy='average',\
-                 LowerClosed=True,\
+                 bint LowerClosed=True,\
                  componentRankingRule='Copeland',\
                  int minimalComponentSize=1,\
-                 Threading=False,\
+                 bint Threading=False,\
                  tempDir=None,\
                  #componentThreadingThreshold=50,\
                  nbrOfCPUs=None,\
                  nbrOfThreads=None,\
                  save2File=None,\
-                 CopyPerfTab=False,\
-                 Comments=False,\
-                 Debug=False):
+                 bint CopyPerfTab=False,\
+                 bint Comments=False,\
+                 bint Debug=False):
+        
+        cdef int na,nc,i,j,npg,maximalComponentSize,nd
+        #cdef public int order,dimension
+        cdef double ttot,t0,tdump,fillrate
         
         from digraphs import Digraph
         from cSortingDigraphs import QuantilesSortingDigraph
@@ -2275,11 +2279,11 @@ class BigOutrankingDigraphDev(BigOutrankingDigraph,QuantilesRankingDigraph,Perfo
 
 
     def _computeQuantileOrdering(self,strategy=None,
-                                Descending=True,
-                                 Threading=False,
+                                bint Descending=True,
+                                 bint Threading=False,
                                  nbrOfCPUs=None,
-                                Debug=False,
-                                 Comments=False):
+                                bint Debug=False,
+                                 bint Comments=False):
         """
         Renders the quantile interval of the decision actions.
         
@@ -2358,8 +2362,8 @@ class BigOutrankingDigraphDev(BigOutrankingDigraph,QuantilesRankingDigraph,Perfo
             print(componentsIntervals)
         return componentsIntervals        
 
-    def computeActionCategories(self,action,Show=False,Debug=False,Comments=False,\
-                             Threading=False,nbrOfCPUs=None):
+    def computeActionCategories(self,action,bint Show=False,bint Debug=False,bint Comments=False,\
+                             bint Threading=False,nbrOfCPUs=None):
         """
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !

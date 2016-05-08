@@ -29,7 +29,7 @@ from randomPerfTabs import Random3ObjectivesPerformanceTableau
 sampleSize = 1
 MP = True
 nbrOfCPUs = 4
-nbrActions = 500
+nbrActions = 1000
 nbrCriteria = 21
 commonPar=('beta','variable',None)
 qtiles = 50
@@ -77,7 +77,7 @@ for s in range(sampleSize):
 #                                    commonPercentiles={'ind':0.01,'pref':0.025,'veto':0.975},
                                         commonMode=commonPar,
 #                                        Threading=MP,
-                                        BigData=False,
+                                        BigData=True,
 #                                        nbrCores=nbrOfCPUs,
                                         seed=seed)
 
