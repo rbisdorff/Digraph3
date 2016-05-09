@@ -66,7 +66,7 @@ for s in range(sampleSize):
                                Threading=MP,
                                nbrOfCPUs=nbrOfCPUs,
                                CopyPerfTab=False,
-                               Comments=False,
+                               Comments=True,
                                Debug=False)
 
     print(bg1)
@@ -88,7 +88,7 @@ for s in range(sampleSize):
                                Threading=MP,
                                CopyPerfTab=False,
                                nbrOfCPUs=nbrOfCPUs,
-                               Comments=False,
+                               Comments=True,
                                Debug=False)
 
     print(bg2)

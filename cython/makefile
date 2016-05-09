@@ -1,4 +1,4 @@
-FLAG = inplace
+FLAG = --inplace
 
 codg:
 		cython -3 -X boundscheck=False cOutrankingDigraphs.pyx
@@ -21,6 +21,7 @@ inplace:
 		python3 csetupSO.py build_ext ${FLAG}
 		python3 csetupBG.py build_ext ${FLAG}
 install:
-		sudo python3 csetupODG.py build_ext
-		sudo python3 csetupSO.py build_ext
-		sudo python3 csetupBG.py build_ext
+		sudo python3 csetupODG.py install
+		sudo python3 csetupSO.py install
+		sudo python3 csetupBG.py install
+

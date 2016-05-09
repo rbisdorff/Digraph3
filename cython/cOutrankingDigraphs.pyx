@@ -3721,17 +3721,21 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     def __init__(self,argPerfTab=None,\
                  coalition=None,\
                  actionsSubset=None,\
-                 hasNoVeto=False,\
-                 hasBipolarVeto=True,\
-                 Normalized=False,\
-                 CopyPerfTab=True,\
-                 BigData=False,\
-                 Threading=False,\
+                 bint hasNoVeto=False,\
+                 bint hasBipolarVeto=True,\
+                 bint Normalized=False,\
+                 bint CopyPerfTab=True,\
+                 bint BigData=False,\
+                 bint Threading=False,\
                  tempDir=None,\
-                 WithConcordanceRelation=True,\
-                 WithVetoCounts=True,\
+                 bint WithConcordanceRelation=True,\
+                 bint WithVetoCounts=True,\
                  nbrCores=None,\
                  Debug=False,Comments=False):
+                 
+        cdef int x
+        cdef double tt, tcp, tg
+        
         from copy import deepcopy
         from time import time
 
@@ -3923,18 +3927,21 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                            evaluation,\
                            initial=None,\
                            terminal=None,\
-                           hasNoVeto=False,\
-                           hasBipolarVeto=True,\
-                           Debug=False,\
-                           hasSymmetricThresholds=True,\
-                           Threading=False,
+                           bint hasNoVeto=False,\
+                           bint hasBipolarVeto=True,\
+                           bint Debug=False,\
+                           bint hasSymmetricThresholds=True,\
+                           bint Threading=False,
                            tempDir=None,\
-                           WithConcordanceRelation=True,\
-                           WithVetoCounts=True,\
+                           bint WithConcordanceRelation=True,\
+                           bint WithVetoCounts=True,\
                            nbrCores=None,Comments=False):
         """
         Specialization of the corresponding BipolarOutrankingDigraph method
         """
+        
+        cdef int x, y, i, j, ni, nt, n, nit, nbrOfJobs
+        
         from multiprocessing import cpu_count
         
         ##
@@ -4162,12 +4169,12 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                            evaluation,\
                            initial=None,\
                            terminal=None,\
-                           hasNoVeto=False,\
-                           hasBipolarVeto=True,\
-                           WithConcordanceRelation=False,\
-                           WithVetoCounts=False,\
-                           hasSymmetricThresholds=True,\
-                           Debug=False):
+                           bint hasNoVeto=False,\
+                           bint hasBipolarVeto=True,\
+                           bint WithConcordanceRelation=False,\
+                           bint WithVetoCounts=False,\
+                           bint hasSymmetricThresholds=True,\
+                           bint Debug=False):
         """
         Renders the biploar valued outranking relation from the data
         of a given performance tableau instantiation PerfTab.
@@ -4177,6 +4184,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             * inital nodes, terminal nodes, for restricted purposes 
             
         """
+        cdef int a, b, 
         ## default setting for digraphs
         if initial == None:
             initial = self.actions
@@ -4310,12 +4318,12 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                            evaluation,\
                            initial=None,\
                            terminal=None,\
-                           hasNoVeto=False,\
-                           hasBipolarVeto=True,\
-                           WithConcordanceRelation=True,\
-                           WithVetoCounts=True,\
-                           Debug=False,\
-                           hasSymmetricThresholds=True):
+                           bint hasNoVeto=False,\
+                           bint hasBipolarVeto=True,\
+                           bint WithConcordanceRelation=True,\
+                           bint WithVetoCounts=True,\
+                           bint Debug=False,\
+                           bint hasSymmetricThresholds=True):
         """
         Renders the biploar valued outranking relation from the data
         of a given performance tableau instantiation PerfTab.

@@ -59,6 +59,7 @@ class BigDigraph(object):
             pass
         return '%s instance' % str(self.__class__)
     
+    @cython.locals(x=cython.int,y=cython.int)
     def relation(self,x,y,Debug=False):
         """
         Dynamic construction of the global outranking characteristic function *r(x S y)*.
@@ -78,7 +79,8 @@ class BigDigraph(object):
             return Min
         else:
             return Max
-
+    
+    @cython.locals(x=cython.int)
     def showRelationMap(self,fromIndex=None,toIndex=None,symbols=None):
         """
         Prints on the console, in text map format, the location of
@@ -197,7 +199,7 @@ class BigDigraph(object):
             print(pictStr)
         print('Component ranking rule: %s' % self.componentRankingRule)
 
-    
+    @cython.locals(x=cython.int,y=cython.int)
     def computeOrdinalCorrelation(self, other, Debug=False):
         """
         Renders the ordinal correlation K of a BigDigraph instance
@@ -382,6 +384,7 @@ class BigDigraph(object):
         Med = (Min+Max)/Decimal('2')
         self.valuationdomain = { 'min':Min, 'max':Max, 'med':Med }
 
+    @cython.locals(x=cython.int)
     def ranking2Preorder(self,ranking):
         """
         Renders a preordering (a list of list) of a ranking (best to worst) of decision actions in increasing preference direction.
@@ -391,6 +394,7 @@ class BigDigraph(object):
         preordering = [[x] for x in reversed(ranking)]
         return preordering
 
+    @cython.locals(x=cython.int)
     def ordering2Preorder(self,ordering):
         """
         Renders a preordering (a list of list) of a linar order (worst to best) of decision actions in increasing preference direction.
@@ -398,6 +402,7 @@ class BigDigraph(object):
         preordering = [[x] for x in ordering]
         return preordering
 
+    @cython.locals(fillRate=cython.double)
     def computeFillRate(self):
         """
         Renders the sum of the squares (without diagonal) of the orders of the component's subgraphs
@@ -522,12 +527,11 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                    tdump=cython.double,
                    fillRate=cython.double,
                    maximalComponentSize=cython.int,
-                   nbrOfCPUs=cython.int,
-                   nbrOfThreads=cython.int,
+                   #nbrOfCPUs=cython.int,
+                   #nbrOfThreads=cython.int,
                    #quantilesOrderingStrategy=cython.p_char,
                    #componentRankingRule=cython.p_char
                    )
-    
     def __init__(self,argPerfTab,\
                  quantiles=0,\
                  quantilesOrderingStrategy="average",\
@@ -537,8 +541,8 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                  Threading=False,\
                  tempDir=None,\
                  #componentThreadingThreshold=50,\
-                 nbrOfCPUs=0,\
-                 nbrOfThreads=0,\
+                 nbrOfCPUs=None,\
+                 nbrOfThreads=None,\
                  save2File=None,\
                  CopyPerfTab=True,\
                  Comments=False,\
@@ -737,9 +741,9 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                 if Comments:
                     print('dumping time: %.5f' % (time() - tdump))
 
-                if nbrOfCPUs == 0:
+                if nbrOfCPUs == None:
                     nbrOfCPUs = cpu_count()
-                if nbrOfThreads == 0:
+                if nbrOfThreads == None:
                     nbrOfThreads = nbrOfCPUs-1
                 nbrOfLocals = self.order//nbrOfThreads
                 if nbrOfLocals*nbrOfThreads < self.order:
