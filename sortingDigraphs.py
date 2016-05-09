@@ -100,6 +100,26 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     
 
     """
+    def __repr__(self):
+        """
+        Default presentation method for SortingDigraph instance.
+        """
+        print('*----- show short --------------*')
+        print('Instance name    : %s' % self.name)
+        print('# Actions        : %d' % self.order)
+        print('# Criteria       : %d' % len(self.criteria))
+        print('# Categories     : %d' % len(self.categories))
+        print('Lowerclosed      : %s' % str(self.criteriaCategoryLimits['LowerClosed']))
+        print('Size             : %d' % self.computeSize())
+        print('Determinateness  : %.3f' % (self.computeDeterminateness()) )
+        print('----  Constructor run times (in sec.) ----')
+        print('#Threads         : %d' % self.nbrThreads)
+        print('Total time       : %.5f' % self.runTimes['totalTime'])
+        print('Data input       : %.5f' % self.runTimes['dataInput'])
+        print('Compute profiles : %.5f' % self.runTimes['computeProfiles'])
+        print('Compute relation : %.5f' % self.runTimes['computeRelation'])
+        print('weak ordering    : %.5f' % self.runTimes['weakOrdering'])
+        return '%s instance' % str(self.__class__)
 
     def __init__(self,argPerfTab=None,\
                  argProfile=None,\
@@ -122,8 +142,10 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         from copy import copy, deepcopy
         from decimal import Decimal
         from collections import OrderedDict
+        from time import time
 
         # import the performance tableau
+        tt = time()
         if argPerfTab == None:
             perfTab = RandomPerformanceTableau(numberOfActions=10,
                                                numberOfCriteria=13)
@@ -132,7 +154,6 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         # keep a copy of the original actions set before adding the profiles
         actionsOrig = deepcopy(perfTab.actions)
         self.actionsOrig = actionsOrig
-
         #  input the profiles
         if argProfile != None:
             defaultProfiles = False
@@ -192,9 +213,12 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             
         # set the category limits type (LowerClosed = True is default)
         self.criteriaCategoryLimits['LowerClosed'] = LowerClosed
+        
         #print 'LowerClosed', LowerClosed
+        self.runTimes={'dataInput': time()-tt}
 
         # add the catogory limits to the actions set
+        t0 = time()
         profiles = {'min':{},'max':{}}
         profileLimits = set()
         actions = self.actions
@@ -236,8 +260,11 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.criteria = criteria
         self.evaluation = evaluation
         self.convertEvaluationFloatToDecimal()
+        self.runTimes['computeProfiles'] =  time()-t0
 
+        
         # construct outranking relation
+        t0 = time()
         if isRobust:
             g = RobustOutrankingDigraph(self)
             self.valuationdomain = g.valuationdomain
@@ -291,8 +318,10 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     for x in actions.keys():
                         relation[x][y] = Med
             self.relation = relation
-
+        self.runTimes['computeRelation'] = time()-t0
+        
         # compute weak ordering
+        t0 = time()
         sortingRelation = self.computeSortingRelation(Debug=Debug,)
         relation = self.relation
         for x in actionsOrig.keys():
@@ -311,7 +340,10 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         # init general digraph Data
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()    
+        self.notGamma = self.notGammaSets()
+        self.runTimes['weakOrdering'] = time()-t0
+        self.runTimes['totalTime'] = time()-tt
+        
         
     def htmlCriteriaCategoryLimits(self,tableTitle='Category limits'):
         """
@@ -1322,7 +1354,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         Constructor for QuantilesSortingBigDigraph instances.
 
         """
-
+        from time import time
         from copy import copy, deepcopy
         if CopyPerfTab:
             copy2self = deepcopy
@@ -1331,6 +1363,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         from decimal import Decimal
 
         # import the performance tableau
+        tt = time()
         if argPerfTab == None:
             print('Error: a valid performance tableau is required!')
 ##            perfTab = RandomPerformanceTableau(numberOfActions=10,
@@ -1361,8 +1394,10 @@ class QuantilesSortingDigraph(SortingDigraph):
         evaluation = normPerfTab.evaluation
         self.evaluation = evaluation
         self.convertEvaluationFloatToDecimal()
-        
+        self.runTimes = {'dataInput': time()-tt}
+
         #  compute the limiting quantiles
+        t0 = time()
         if isinstance(limitingQuantiles,list):
             self.name = 'sorting_with_given_quantiles'
             newLimitingQuantiles = []
@@ -1464,8 +1499,10 @@ class QuantilesSortingDigraph(SortingDigraph):
             print('self.profileLimits',profileLimits)
             
         #self.convertEvaluationFloatToDecimal()
-
+        self.runTimes['computeProfiles'] = time() - t0
+        
         # construct outranking relation
+        t0 = time()
         self.hasNoVeto = hasNoVeto
         minValuation = -100.0
         maxValuation = 100.0
@@ -1539,8 +1576,10 @@ class QuantilesSortingDigraph(SortingDigraph):
                         relation[x][y] = Med
 
             self.relation = relation
+            self.runTimes['computeRelation'] = time() - t0
         
             # compute weak ordering
+            t0 = time()
             if nbrOfProcesses == None:
                 nbrOfProcesses = nbrCores
 
@@ -1558,6 +1597,9 @@ class QuantilesSortingDigraph(SortingDigraph):
             self.order = len(self.actions)
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
+            self.runTimes['weakOrdering'] = time() - t0
+
+            self.runTimes['totalTime'] = time() - tt
 
 ##        else:
 ##            self.computeCategoryContents(StoreSorting=StoreSorting,\
@@ -3644,18 +3686,20 @@ if __name__ == "__main__":
     """)
 
     print('*-------- Testing class and methods -------')
-    MP = True
-    t = PerformanceTableau('auditor2_2')
+    MP = False
+##    t = PerformanceTableau('auditor2_2')
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
 ##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('ex1')
-##    t = RandomCBPerformanceTableau(numberOfActions=50,
-##                                    numberOfCriteria=13,
-##                                    weightDistribution='equiobjectives',
-##                                    seed=None)
+    t = RandomCBPerformanceTableau(numberOfActions=50,
+                                    numberOfCriteria=13,
+                                    weightDistribution='equiobjectives',
+                                    seed=1)
+    so = SortingDigraph(t)
+    
 ##    t.saveXMCDA2('test',servingD3=False)
     #t = XMCDA2PerformanceTableau('test')  
-    t.showHTMLPerformanceHeatmap(colorLevels=5,ndigits=0,Correlations=True)
+    #t.showHTMLPerformanceHeatmap(colorLevels=5,ndigits=0,Correlations=True)
     qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
                                      Threading=MP,tempDir='.',Comments=True,
                                      Debug=True)

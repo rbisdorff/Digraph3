@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # browserauth installation script
 #
 
@@ -12,7 +12,7 @@ setup(name='Digraph3',
         'iqagent','graphs','htmlmodel','randomNumbers','randomDigraphs','randomPerfTabs',
         'bigOutrankingDigraphs'],
       license='http://leopold-loewenheim.uni.lu/Digraph3/digraph3_copyright.html',
-      url='http://leoopold-loewenheim.uni.lu/Digraph3/',
+      url='http://leoopold-loewenheim.uni.lu/docDigraph3/',
       description='Lets you add bipolar graph and digraphs methods to your applications',
       author='Raymond Bisdorff',
       author_email='raymond.bisdorff@uni.lu',
