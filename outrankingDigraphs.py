@@ -7863,14 +7863,21 @@ class DissimilarityOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     Specialization of the OutrankingDigraph class for generating
     temporary dissimilarity random graphs
     """
-    def __init__(self,filePerfTab=None):
+    def __init__(self,argPerfTab=None):
+        if argPerfTab == None:
+            print('Performance tableau required !')
+            perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
+        elif isinstance(argPerfTab,(str)):
+            perfTab = PerformanceTableau(argPerfTab)
+        else:
+            perfTab = argPerfTab
         import sys,copy
-        if filePerfTab == None:
-            t = RandomPerformanceTableau()
-            filePerfTab = 'randomPerf'
-            t.save(filePerfTab)
-        perfTab = PerformanceTableau(filePerfTab)
-        self.name = 'rel_'+str(filePerfTab)
+##        if filePerfTab == None:
+##            t = RandomPerformanceTableau()
+##            filePerfTab = 'randomPerf'
+##            t.save(filePerfTab)
+##        perfTab = PerformanceTableau(filePerfTab)
+        self.name = 'rel_'+perfTab.name
         self.actions = copy.copy(perfTab.actions)
         Min = Decimal('0.0')
         Med = Decimal('50.0')

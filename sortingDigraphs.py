@@ -144,16 +144,34 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         from collections import OrderedDict
         from time import time
 
-        # import the performance tableau
+        # import or generate a performance tableau
         tt = time()
         if argPerfTab == None:
+            print('!!! No valid performance tableau given!!')
+            print('!!! Random standard performance tableau generated!!')
+            from randomPerfTabs import RandomPerformanceTableau
             perfTab = RandomPerformanceTableau(numberOfActions=10,
                                                numberOfCriteria=13)
         else:
             perfTab = argPerfTab
+
+##        # normalize the actions as a dictionary construct
+##        if isinstance(perfTab.actions,list):
+##            actions = OrderedDict()
+##            for x in perfTab.actions:
+##                actions[x] = {'name': str(x)}
+##            self.actions = actions
+##        else:
+##            self.actions = deepcopy(perfTab.actions)
+##        self.criteria = deepcopy(perfTab.criteria)
+##        self.convertWeightFloatToDecimal()
+##        self.evaluation = deepcopy(perfTab.evaluation)
+##        self.convertEvaluationFloatToDecimal()
+
         # keep a copy of the original actions set before adding the profiles
         actionsOrig = deepcopy(perfTab.actions)
         self.actionsOrig = actionsOrig
+        
         #  input the profiles
         if argProfile != None:
             defaultProfiles = False
@@ -178,10 +196,15 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 self.name = fileName
                 self.categories = profile['categories']
                 self.criteriaCategoryLimits = profile['criteriaCategoryLimits']
+#                self.profiles = profile['profiles']
+#                self.profileLimits = set(self.profiles['min']) | \
+#                                     set(self.profiles['max'])
             else: # input from a profiles dictionary
                 self.name = 'sorting_with_given_profile'
                 self.categories = argProfile['categories'].copy()
                 self.criteriaCategoryLimits = argProfile['criteriaCategoryLimits'].copy()
+#                self.profiles = {}
+
         else:
             defaultProfiles = True
             self.name = 'sorting_with_default_profiles'
@@ -211,21 +234,21 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                         }
             self.criteriaCategoryLimits = criteriaCategoryLimits
             
-        # set the category limits type (LowerClosed = True is default)
-        self.criteriaCategoryLimits['LowerClosed'] = LowerClosed
-        
-        #print 'LowerClosed', LowerClosed
+            # set the category limits type (LowerClosed = True is default)
+            self.criteriaCategoryLimits['LowerClosed'] = LowerClosed
+            
         self.runTimes={'dataInput': time()-tt}
+        
 
         # add the catogory limits to the actions set
-        t0 = time()
-        profiles = {'min':{},'max':{}}
-        profileLimits = set()
         actions = self.actions
         criteria = self.criteria
         evaluation = self.evaluation
-##        categoryKeys = list(self.categories.keys())
-##        criterionKeys = list(self.criteria.keys())
+        categories = self.categories
+        criteriaCategoryLimits = self.criteriaCategoryLimits
+        t0 = time()
+        profiles = {'min':{},'max':{}}
+        profileLimits = set()
         for c in categories.keys():
             cMinKey = c+'-m'
             cMaxKey = c+'-M'
@@ -254,12 +277,19 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
                     evaluation[g][cMinKey] = Decimal(str(criteriaCategoryLimits[g][c]['minimum']))
                     evaluation[g][cMaxKey] = Decimal(str(criteriaCategoryLimits[g][c]['maximum']))
-        self.actions = actions
+                #print 'LowerClosed', LowerClosed
         self.profiles = profiles
         self.profileLimits = profileLimits
-        self.criteria = criteria
         self.evaluation = evaluation
         self.convertEvaluationFloatToDecimal()
+##        else
+##            profiles = self.profiles
+##            profileLimits = self.profileLimits
+                
+        #self.actions = actions
+        #self.profiles = profiles
+        #self.profileLimits = profileLimits
+        #self.criteria = criteria
         self.runTimes['computeProfiles'] =  time()-t0
 
         
@@ -343,6 +373,43 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.notGamma = self.notGammaSets()
         self.runTimes['weakOrdering'] = time()-t0
         self.runTimes['totalTime'] = time()-tt
+
+    def saveProfiles(self,fileName='tempProfiles'):
+
+        fileName += '.py'
+        print('*--- Saving profiles in file: <%s> ---*' % fileName)
+        with open(fileName,'w') as fo:
+            fo.write('# profiles save method from the SortingDigraph class\n')
+            fo.write('from collections import OrderedDict\n')
+            # save categories
+            fo.write('categories = OrderedDict([\n')
+            for c in self.categories:
+                fo.write('(\'%s\',%s),\n' % (c,str(self.categories[c])))
+            fo.write('])\n')
+##            # save profiles
+##            fo.write('profiles = {\n')
+##            fo.write('\'min\': {\n')
+##            for p in self.profiles['min']:
+##                fo.write('\'%s\': %s,\n' % (p,str(self.profiles['min'][p])))
+##            fo.write('},\n')
+##            fo.write('\'max\': {\n')
+##            for p in self.profiles['max']:
+##                fo.write('\'%s\': %s,\n' % (p,str(self.profiles['max'][p])))
+##            fo.write('}}\n')
+            # save criteria category limits
+            fo.write('criteriaCategoryLimits = OrderedDict([\n')
+            fo.write('(\'LowerClosed\',%s),\n' %\
+                     (str(self.criteriaCategoryLimits['LowerClosed'])) )
+            for g in self.criteria:
+                fo.write('(\'%s\',{\n' % (g))
+                for c in self.categories:
+                    fo.write('\'%s\' :%s,\n' %\
+                             (c,str(self.criteriaCategoryLimits[g][c])) )
+                fo.write('}),\n')
+            fo.write('])\n')
+        # close
+        
+                 
         
         
     def htmlCriteriaCategoryLimits(self,tableTitle='Category limits'):
@@ -3691,27 +3758,41 @@ if __name__ == "__main__":
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
 ##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('ex1')
-    t = RandomCBPerformanceTableau(numberOfActions=50,
-                                    numberOfCriteria=13,
+    t = RandomCBPerformanceTableau(numberOfActions=10,
+                                    numberOfCriteria=5,
                                     weightDistribution='equiobjectives',
                                     seed=1)
+    nt = NormalizedPerformanceTableau(t)
     so = SortingDigraph(t)
+##    print(so.categories)
+##    print(so.profiles)
+##    print(so.criteriaCategoryLimits)
+    so.showSorting()
+    so.saveProfiles('testProfile')
+    t.save()
+    nt = NormalizedPerformanceTableau(t)
+    so1 = SortingDigraph(nt,'testProfile')
+    so1.showSorting()
+    categoriesData = {'categories': so.categories,\
+                      'criteriaCategoryLimits': so.criteriaCategoryLimits}
+    so2 = SortingDigraph(nt,categoriesData)
+    so2.showSorting()
     
 ##    t.saveXMCDA2('test',servingD3=False)
     #t = XMCDA2PerformanceTableau('test')  
     #t.showHTMLPerformanceHeatmap(colorLevels=5,ndigits=0,Correlations=True)
-    qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
-                                     Threading=MP,tempDir='.',Comments=True,
-                                     Debug=True)
-    qs.showHTMLQuantileOrdering(strategy='average')
-    qs.showWeakOrder()
-    qs.showQuantileOrdering(strategy='average')
-    qs.showActionsSortingResult()
-    qr = QuantilesRankingDigraph(t,7,LowerClosed=True,PrefThresholds=True,
-                                 Comments=True,
-                                 Threading=MP)
-    qr.showRanking()
-    qr.showSorting()
+##    qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
+##                                     Threading=MP,tempDir='.',Comments=True,
+##                                     Debug=True)
+##    qs.showHTMLQuantileOrdering(strategy='average')
+##    qs.showWeakOrder()
+##    qs.showQuantileOrdering(strategy='average')
+##    qs.showActionsSortingResult()
+##    qr = QuantilesRankingDigraph(t,7,LowerClosed=True,PrefThresholds=True,
+##                                 Comments=True,
+##                                 Threading=MP)
+##    qr.showRanking()
+##    qr.showSorting()
 
 ##    qs0 = _QuantilesSortingDigraph(t,15,LowerClosed=False,
 ##                                     Threading=False,
