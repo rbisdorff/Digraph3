@@ -450,6 +450,114 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         s += '</table>'
         return s
 
+    def computeWeakOrder(self,Descending=True,strategy='average',Comments=False,Debug=False):
+        """
+        specialisation of the showWeakOrder method.
+        The weak ordering strategy may be:
+
+           "optimistic" (ranked by highest category limits),
+           "pessimistic" (ranked by lowest category limits) or
+           "average" (ranked by average category limits)
+        """
+        actions = self.actions
+        categories = self.categories
+        actionsCategories = {}
+        for x in actions:
+            a,lowCateg,highCateg,credibility =\
+                     self.showActionCategories(x,Comments=Debug)
+            if strategy == "optimistic":
+                try:
+                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]
+            elif strategy == "pessimistic":
+                try:
+                    actionsCategories[(int(lowCateg),int(highCateg))].append(a)
+                except:
+                    actionsCategories[(int(lowCateg),int(highCateg))] = [a]
+            elif strategy == "average":
+                lc = float(lowCateg)
+                hc = float(highCateg)
+                ac = (lc+hc)/2.0
+                try:
+                    actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
+            else:  # optimistic by default
+                try:
+                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
+                
+        actionsCategIntervals = []
+        for interval in actionsCategories:
+            actionsCategIntervals.append([interval,\
+                                          actionsCategories[interval]])
+        actionsCategIntervals.sort(reverse=Descending)
+        weakOrdering = []
+        for item in actionsCategIntervals:
+            #print(item)
+            if Comments:
+                if strategy == "optimistic":
+                    #if self.criteriaCategoryLimits['LowerClosed']:
+                    if item[0][1] == item[0][0]:
+                        print('   [%s] : %s' % (str(item[0][1]),\
+                                            str(item[1]) ) )
+                    else:
+                        print('[%s-%s] : %s' % (str(item[0][1]),\
+                                            str(item[0][0]),\
+                                            str(item[1]) ) )
+                            
+##                    else:
+##                        if item[0][1] == item[0][0]:
+##                            print('   [%s] : %s' % (str(item[0][1]),\
+##                                                str(item[1]) ) )
+##                        else:
+##                            print('[%s-%s] : %s' % (str(item[0][1]),\
+##                                                str(item[0][0]),\
+##                                                str(item[1]) ) )
+                            
+                elif strategy == "pessimistic":
+                    #if self.criteriaCategoryLimits['LowerClosed']:
+                    if item[0][1] == item[0][0]:
+                        print('   [%s] : %s' % (str(item[0][0]),\
+                                            str(item[1]) ) )
+                    else:
+                        print('[%s-%s] : %s' % (str(item[0][0]),\
+                                            str(item[0][1]),\
+                                            str(item[1]) ) )
+                            
+##                    else:
+##                        if item[0][1] == item[0][0]:
+##                            print('   [%s] : %s' % (str(item[0][0]),\
+##                                                str(item[1]) ) )
+##                        else:
+##                            print('[%s-%s] : %s' % (str(item[0][0]),\
+##                                                str(item[0][1]),\
+##                                                str(item[1]) ) )
+                elif strategy == "average":
+                    #if self.criteriaCategoryLimits['LowerClosed']:
+                    if item[0][1] == item[0][2]:
+                        print('   [%s] : %s' % (str(item[0][2]),\
+                                            str(item[1]) ) )
+                    else:
+                        print('[%s-%s] : %s' % (str(item[0][2]),\
+                                            str(item[0][1]),\
+                                            str(item[1]) ) )
+                            
+##                    else:
+##                        if item[0][1] == item[0][2]:
+##                            print('   [%s] : %s' % (str(item[0][2]),\
+##                                                str(item[1]) ) )
+##                        else:
+##                            print('[%s-%s] : %s' % (str(item[0][2]),\
+##                                                str(item[0][1]),\
+##                                                str(item[1]) ) )
+
+            weakOrdering.append(item[1])
+        return weakOrdering
+
+
     def computeSortingRelation(self,categoryContents=None,StoreSorting=True,Debug=False):
         """
         constructs a bipolar sorting relation using the category contents.
@@ -542,7 +650,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             orderedCategoryKeys.reverse()
         return orderedCategoryKeys
 
-    def computeWeakOrder(self,Descending=True,Debug=False):
+    def _computeWeakOrder(self,Descending=True,Debug=False):
         """
         Specialisation for QuantilesSortingDigraphs.
         """
@@ -3762,27 +3870,34 @@ if __name__ == "__main__":
     MP = False
 ##    t = PerformanceTableau('auditor2_2')
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
-##    t = XMCDA2PerformanceTableau('spiegel2004')
+    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('ex1')
-    t = RandomCBPerformanceTableau(numberOfActions=10,
-                                    numberOfCriteria=5,
-                                    weightDistribution='equiobjectives',
-                                    seed=1)
+##    t = RandomCBPerformanceTableau(numberOfActions=20,
+##                                    numberOfCriteria=13,
+##                                    weightDistribution='equiobjectives',
+##                                    seed=1)
     nt = NormalizedPerformanceTableau(t)
-    so = SortingDigraph(t)
+    so = SortingDigraph(t,scaleSteps=10)
 ##    print(so.categories)
 ##    print(so.profiles)
 ##    print(so.criteriaCategoryLimits)
     so.showSorting()
-    so.saveProfiles('testProfile')
-    t.save()
-    nt = NormalizedPerformanceTableau(t)
-    so1 = SortingDigraph(nt,'testProfile')
-    so1.showSorting()
-    categoriesData = {'categories': so.categories,\
-                      'criteriaCategoryLimits': so.criteriaCategoryLimits}
-    so2 = SortingDigraph(nt,categoriesData)
-    so2.showSorting()
+    print('optimistic')
+    so.computeWeakOrder(strategy='optimistic',Comments=True)
+    print('pessimistic')
+    so.computeWeakOrder(strategy='pessimistic',Comments=True)
+    print('average')
+    so.computeWeakOrder(Comments=True)
+                                                                            
+##    so.saveProfiles('testProfile')
+##    t.save()
+##    nt = NormalizedPerformanceTableau(t)
+##    so1 = SortingDigraph(nt,'testProfile')
+##    so1.showSorting()
+##    categoriesData = {'categories': so.categories,\
+##                      'criteriaCategoryLimits': so.criteriaCategoryLimits}
+##    so2 = SortingDigraph(nt,categoriesData)
+##    so2.showSorting()
     
 ##    t.saveXMCDA2('test',servingD3=False)
     #t = XMCDA2PerformanceTableau('test')  
