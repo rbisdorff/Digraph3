@@ -40,13 +40,13 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
     Template of required data::
 
-        self.categories = {'c01': { 'name': 'week','order': 0,
+        self.categories = {'c01': { 'name': 'week','order': 1,
                                     'comment': 'lowest category',},
-                           'c02': { 'name': 'ok','order': 1,
+                           'c02': { 'name': 'ok','order': 2,
                                     'comment': 'medium category',},
-                           'c03': { 'name': 'good','order': 2,
+                           'c03': { 'name': 'good','order': 3,
                                     'comment': 'highest category',},
-                           'c04': { 'name': 'excellent','order': 3,
+                           'c04': { 'name': 'excellent','order': 4,
                                     'comment': 'highest category',},
         }
         self.criteriaCategoryLimits['LowerClosed'] = True # default
@@ -225,19 +225,26 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             highValue = 100.00
             # with preference direction = max
             categories = OrderedDict()
-            k = int(100 / scaleSteps)
-            for i in range(0,100+k,k):
-                categories[str(i)] = {'name':str(i), 'order':i}
+            k = highValue / scaleSteps
+            nd = len(str(scaleSteps))
+            for i in range(scaleSteps):
+                categories[str(i)] = {'name':('c%%0%dd' % (nd)) % (i+1),\
+                                     'order':i,\
+                                     'lowLimit': Decimal('%.2f' % (i*k)),\
+                                     'highLimit': Decimal('%.2f' % ((i+1)*k))}
             self.categories = categories
             criteriaCategoryLimits = OrderedDict()
             criteriaCategoryLimits['LowerClosed'] = LowerClosed
             for g in self.criteria:
                 criteriaCategoryLimits[g] = {}
+                k = self.criteria[g]['scale'][1] / scaleSteps
+                i = 0
                 for c in categories:
                     criteriaCategoryLimits[g][c]={
-                        'minimum':int(c),
-                        'maximum':int(c)+k
+                        'minimum': Decimal('%.2f' % (i*k)),
+                        'maximum': Decimal('%.2f' % ((i+1)*k))
                         }
+                    i += 1
             self.criteriaCategoryLimits = criteriaCategoryLimits
             
             # set the category limits type (LowerClosed = True is default)
@@ -380,14 +387,15 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.runTimes['weakOrdering'] = time()-t0
         self.runTimes['totalTime'] = time()-tt
 
-    def saveProfiles(self,fileName='tempProfiles'):
+    def saveCategories(self,fileName='tempCategories'):
 
         fileName += '.py'
-        print('*--- Saving profiles in file: <%s> ---*' % fileName)
+        print('*--- Saving sorting categories in file: <%s> ---*' % fileName)
         with open(fileName,'w') as fo:
-            fo.write('# profiles save method from the SortingDigraph class\n')
+            fo.write('# categories save method from the SortingDigraph class\n')
             fo.write('from collections import OrderedDict\n')
-            # save categories
+            fo.write('from decimal import Decimal\n')
+           # save categories
             fo.write('categories = OrderedDict([\n')
             for c in self.categories:
                 fo.write('(\'%s\',%s),\n' % (c,str(self.categories[c])))
@@ -465,29 +473,35 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         for x in actions:
             a,lowCateg,highCateg,credibility =\
                      self.showActionCategories(x,Comments=Debug)
-            if strategy == "optimistic":
+            if strategy == 'average': # average by default
+                lc = categories[lowCateg]['lowLimit']
+                hc = categories[highCateg]['highLimit']
+                ac = (lc+hc)/Decimal('2.0')
                 try:
-                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                    actionsCategories[(ac,categories[highCateg]['highLimit'],\
+                                       categories[lowCateg]['lowLimit'])].append(a)
                 except:
-                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]
-            elif strategy == "pessimistic":
+                    actionsCategories[(ac,categories[highCateg]['highLimit'],\
+                                       categories[lowCateg]['lowLimit'])] = [a]
+            else: # strategy == "optimistic" or "pessimistic":
                 try:
-                    actionsCategories[(int(lowCateg),int(highCateg))].append(a)
+                    actionsCategories[(categories[highCateg]['highLimit'],\
+                                       categories[lowCateg]['lowLimit'])].append(a)
                 except:
-                    actionsCategories[(int(lowCateg),int(highCateg))] = [a]
-            elif strategy == "average":
-                lc = float(lowCateg)
-                hc = float(highCateg)
-                ac = (lc+hc)/2.0
-                try:
-                    actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
-                except:
-                    actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
-            else:  # optimistic by default
-                try:
-                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
-                except:
-                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
+                    actionsCategories[(categories[highCateg]['highLimit'],\
+                                       categories[lowCateg]['lowLimit'])] = [a]
+##            elif strategy == "pessimistic":
+##                try:
+##                    actionsCategories[(categories[lowCateg]['lowLimit'],\
+##                                       categories[highCateg]['highLimit'])].append(a)
+##                except:
+##                    actionsCategories[(categories[lowCateg]['lowLimit'],\
+##                                       categories[highCateg]['highLimit'])] = [a]
+##            else:  # optimistic by default
+##                try:
+##                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+##                except:
+##                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
                 
         actionsCategIntervals = []
         for interval in actionsCategories:
@@ -498,65 +512,37 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         for item in actionsCategIntervals:
             #print(item)
             if Comments:
-                if strategy == "optimistic":
-                    #if self.criteriaCategoryLimits['LowerClosed']:
-                    if item[0][1] == item[0][0]:
-                        print('   [%s] : %s' % (str(item[0][1]),\
-                                            str(item[1]) ) )
-                    else:
-                        print('[%s-%s] : %s' % (str(item[0][1]),\
-                                            str(item[0][0]),\
-                                            str(item[1]) ) )
-                            
-##                    else:
-##                        if item[0][1] == item[0][0]:
-##                            print('   [%s] : %s' % (str(item[0][1]),\
-##                                                str(item[1]) ) )
-##                        else:
-##                            print('[%s-%s] : %s' % (str(item[0][1]),\
-##                                                str(item[0][0]),\
-##                                                str(item[1]) ) )
-                            
-                elif strategy == "pessimistic":
-                    #if self.criteriaCategoryLimits['LowerClosed']:
-                    if item[0][1] == item[0][0]:
-                        print('   [%s] : %s' % (str(item[0][0]),\
-                                            str(item[1]) ) )
-                    else:
-                        print('[%s-%s] : %s' % (str(item[0][0]),\
-                                            str(item[0][1]),\
-                                            str(item[1]) ) )
-                            
-##                    else:
-##                        if item[0][1] == item[0][0]:
-##                            print('   [%s] : %s' % (str(item[0][0]),\
-##                                                str(item[1]) ) )
-##                        else:
-##                            print('[%s-%s] : %s' % (str(item[0][0]),\
-##                                                str(item[0][1]),\
-##                                                str(item[1]) ) )
-                elif strategy == "average":
+                if strategy == "average":
                     #if self.criteriaCategoryLimits['LowerClosed']:
                     if item[0][1] == item[0][2]:
-                        print('   [%s] : %s' % (str(item[0][2]),\
+                        print(']%s-%s] : %s' % (str(item[0][1]),\
+                                                str(item[0][2]),\
                                             str(item[1]) ) )
                     else:
-                        print('[%s-%s] : %s' % (str(item[0][2]),\
+                        print(']%s-%s] : %s' % (str(item[0][1]),\
+                                            str(item[0][2]),\
+                                            str(item[1]) ) )
+                else:
+                    #if self.criteriaCategoryLimits['LowerClosed']:
+                    if item[0][1] == item[0][0]:
+                        print(']%s-%s] : %s' % (str(item[0][0]),\
+                                                   str(item[0][1]),\
+                                            str(item[1]) ) )
+                    else:
+                        print(']%s-%s] : %s' % (str(item[0][0]),\
                                             str(item[0][1]),\
                                             str(item[1]) ) )
+                                                        
                             
-##                    else:
-##                        if item[0][1] == item[0][2]:
-##                            print('   [%s] : %s' % (str(item[0][2]),\
-##                                                str(item[1]) ) )
-##                        else:
-##                            print('[%s-%s] : %s' % (str(item[0][2]),\
-##                                                str(item[0][1]),\
-##                                                str(item[1]) ) )
+                            
 
             weakOrdering.append(item[1])
         return weakOrdering
 
+    def showWeakOrder(self,Descending=True,strategy='average'):
+        """ dummy for computeWeakOrder with Comments=True """
+        self.computeWeakOrder(Descending=Descending,strategy=strategy,Comments=True)
+        
 
     def computeSortingRelation(self,categoryContents=None,StoreSorting=True,Debug=False):
         """
@@ -863,53 +849,6 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         except:
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
-
-##    def computeSortingCharacteristicsOld(self, action=None, Comments=False):
-##        """
-##        Renders a bipolar-valued bi-dictionary relation
-##        representing the degree of credibility of the
-##        assertion that "action x in A belongs to category c in C",
-##        ie x outranks low category limit and does not outrank
-##        the high category limit.
-##        """
-##        Min = self.valuationdomain['min']
-##        Med = self.valuationdomain['med']
-##        Max = self.valuationdomain['max']
-##
-##        actions = self.getActionsKeys(action)
-##            
-##        categories = self.orderedCategoryKeys()
-##
-##        try:
-##            LowerClosed = self.criteriaCategoryLimits['LowerClosed']
-##        except:
-##            LowerClosed = True
-##
-##        sorting = {}
-##        for x in actions:
-##            sorting[x] = {}
-##            for c in categories:
-##                sorting[x][c] = {}
-##                cMinKey= c+'-m'
-##                cMaxKey= c+'-M'
-##                if LowerClosed:
-##                    lowLimit = self.relation[x][cMinKey]
-##                    notHighLimit = Max - self.relation[x][cMaxKey] + Min
-##                else:
-##                    lowLimit = Max - self.relation[cMinKey][x] + Min
-##                    notHighLimit = self.relation[cMaxKey][x]
-##                if Comments:
-##                    print('%s in %s: low = %.2f, high = %.2f' % \
-##                          (x, c,lowLimit,notHighLimit), end=' ')
-##                categoryMembership = min(lowLimit,notHighLimit)
-##                sorting[x][c]['lowLimit'] = lowLimit
-##                sorting[x][c]['notHighLimit'] = notHighLimit
-##                sorting[x][c]['categoryMembership'] = categoryMembership
-##
-##                if Comments:
-##                    print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
-##
-##        return sorting
 
     def computeSortingCharacteristics(self, action=None, StoreSorting=True,\
                                       Comments=False, Debug=False,\
@@ -3870,24 +3809,27 @@ if __name__ == "__main__":
     MP = False
 ##    t = PerformanceTableau('auditor2_2')
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
-    t = XMCDA2PerformanceTableau('spiegel2004')
+##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('ex1')
-##    t = RandomCBPerformanceTableau(numberOfActions=20,
-##                                    numberOfCriteria=13,
-##                                    weightDistribution='equiobjectives',
-##                                    seed=1)
+    t = RandomCBPerformanceTableau(numberOfActions=25,
+                                    numberOfCriteria=13,
+                                    weightDistribution='equiobjectives',
+                                    seed=1)
     nt = NormalizedPerformanceTableau(t)
-    so = SortingDigraph(t,scaleSteps=10)
-##    print(so.categories)
+##    so = SortingDigraph(t,scaleSteps=10,Debug=True)
+##    so.saveCategories()
+##    so = SortingDigraph('grafittiPerfTab','grafittiCategories')
+    so = SortingDigraph(nt,'tempCategories')
+    print(so.categories)
 ##    print(so.profiles)
 ##    print(so.criteriaCategoryLimits)
     so.showSorting()
     print('optimistic')
-    so.computeWeakOrder(strategy='optimistic',Comments=True)
+    so.showWeakOrder(strategy='optimistic')
     print('pessimistic')
-    so.computeWeakOrder(strategy='pessimistic',Comments=True)
+    so.showWeakOrder(strategy='pessimistic')
     print('average')
-    so.computeWeakOrder(Comments=True)
+    so.showWeakOrder()
                                                                             
 ##    so.saveProfiles('testProfile')
 ##    t.save()
