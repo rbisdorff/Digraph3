@@ -152,6 +152,12 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             from randomPerfTabs import RandomPerformanceTableau
             perfTab = RandomPerformanceTableau(numberOfActions=10,
                                                numberOfCriteria=13)
+        elif isinstance(argPerfTab,str):
+            try:
+                perfTab = XMCDA2PerformanceTableau(argPerfTab)
+            except:
+                print('Performance Tableau not in XMCDA2 format!')
+                perfTab = None
         else:
             perfTab = argPerfTab
 
