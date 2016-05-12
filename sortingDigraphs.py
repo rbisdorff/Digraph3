@@ -58,7 +58,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 'c1': {'minimum':0, 'maximum':25},
                 'c2': {'minimum':25, 'maximum':50},
                 'c3': {'minimum':50, 'maximum':75},
-                'c4': {'minimum':75, 'maximum':120},
+                'c4': {'minimum':75, 'maximum':200},
          }
 
     A template named tempProfile.py is providied in the digraphs module distribution.
@@ -94,12 +94,12 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     # into ordered adjacent categories gives following result:
     >>> so.showWeakOrder(strategy='average',Descending=True)
     Weak ordering by average normalized 5-sorting limits
-    ] >  -80.0] : ['a02', 'a03']
-    ] >  -60.0] : ['a11']
-    ]80.0-60.0] : ['a07', 'a08', 'a10', 'a13']
-    ]80.0-40.0] : ['a04', 'a09', 'a12']
-    ]60.0-40.0] : ['a05', 'a06']
-    ]40.0-20.0] : ['a01']
+    ]  >  -80.0] : ['a02', 'a03']
+    ]100.0-60.0] : ['a11']
+    ] 80.0-60.0] : ['a07', 'a08', 'a10', 'a13']
+    ] 80.0-40.0] : ['a04', 'a09', 'a12']
+    ] 60.0-40.0] : ['a05', 'a06']
+    ] 40.0-20.0] : ['a01']
 
     """
     def __repr__(self):
@@ -256,8 +256,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     i += 1
             self.criteriaCategoryLimits = criteriaCategoryLimits
             
-            # set the category limits type (LowerClosed = True is default)
-            self.criteriaCategoryLimits['LowerClosed'] = LowerClosed
+            # set the category limits type (LowerClosed = True)
+            self.criteriaCategoryLimits['LowerClosed'] = True
             
         self.runTimes={'dataInput': time()-tt}
         
@@ -522,13 +522,14 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         if Comments:
             k = len(self.categories)
             print('Weak ordering with %s normalized %d-sorting limits' % (strategy,k) )
-        for item in actionsCategIntervals:
+        
+        for ci,item in enumerate(actionsCategIntervals):
             #print(item)
             if Comments:
                 if strategy == "average":
                     if Descending:
-                        if item[0][1] == item[0][2]:
-                            print(']%s-%s] : %s' % (str(item[0][1]),\
+                        if ci == 0:
+                            print('] > -%s] : %s' % (\
                                                     str(item[0][2]),\
                                                 str(item[1]) ) )
                         else:
@@ -536,9 +537,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                 str(item[0][2]),\
                                                 str(item[1]) ) )
                     else:
-                        if item[0][1] == item[0][2]:
-                            print('[%s-%s[ : %s' % (str(item[0][2]),\
-                                                    str(item[0][1]),\
+                        if ci == (len(actionsCategIntervals)-1):
+                            print('[%s- < [ : %s' % (str(item[0][2]),\
                                                 str(item[1]) ) )
                         else:
                             print('[%s-%s[ : %s' % (str(item[0][2]),\
@@ -546,8 +546,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                 str(item[1]) ) )
                 else:
                     if Descending:
-                        if item[0][1] == item[0][0]:
-                            print(']%s-%s] : %s' % (str(item[0][0]),\
+                        if ci == 0:
+                            print('] > -%s] : %s' % (
                                                        str(item[0][1]),\
                                                 str(item[1]) ) )
                         else:
@@ -555,9 +555,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                 str(item[0][1]),\
                                                 str(item[1]) ) )
                     else:
-                        if item[0][1] == item[0][0]:
-                            print('[%s-%s[ : %s' % (str(item[0][1]),\
-                                                       str(item[0][0]),\
+                        if ci == (len(actionsCategIntervals)-1):
+                            print('[%s- < [ : %s' % (str(item[0][1]),\
                                                 str(item[1]) ) )
                         else:
                             print('[%s-%s[ : %s' % (str(item[0][1]),\
@@ -3840,19 +3839,19 @@ if __name__ == "__main__":
     MP = False
 ##    t = PerformanceTableau('auditor2_2')
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
-    t = XMCDA2PerformanceTableau('spiegel2004')
+##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('ex1')
-##    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
-##                                    numberOfCriteria=13,
-##                                    weightDistribution='equiobjectives',
-##                                            missingProbability=0.05,
-##                                    seed=1)
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
+                                    numberOfCriteria=13,
+                                    weightDistribution='equiobjectives',
+                                            missingProbability=0.05,
+                                    seed=1)
     nt = NormalizedPerformanceTableau(t)
 ##    so = SortingDigraph(t,scaleSteps=10,Debug=True)
-##    so.saveCategories()
 ##    so = SortingDigraph('grafittiPerfTab','grafittiCategories')
     so = SortingDigraph(t,scaleSteps=7,Debug=True)
     print(so.categories)
+    so.saveCategories('testCategories')
 ##    print(so.profiles)
 ##    print(so.criteriaCategoryLimits)
     so.showSorting(Reverse=False)
@@ -3862,6 +3861,8 @@ if __name__ == "__main__":
     so.showWeakOrder(strategy='pessimistic')
     print('average')
     so.showWeakOrder()
+    so1 = SortingDigraph(nt,'testCategories')
+    so1.showWeakOrder()
                                                                             
 ##    so.saveProfiles('testProfile')
 ##    t.save()

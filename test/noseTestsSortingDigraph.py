@@ -30,6 +30,31 @@ def testDefaultSortingDigraph():
     for c in s.orderedCategoryKeys():
         print(c, sorts[c])
 
+def testSortingDigraphComputeWeakOrder():
+    print('*---- testing computeWeakOrder() of the SortingDigraph Class ---*')
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
+                                    numberOfCriteria=13,
+                                    weightDistribution='equiobjectives',
+                                    missingProbability=0.05,
+                                    seed=1)
+    nt = NormalizedPerformanceTableau(t)
+    so = SortingDigraph(t,scaleSteps=7,Debug=True)
+    print(so.categories)
+    so.saveCategories('testCategories')
+    so.showSorting(Reverse=False)
+    print('optimistic')
+    so.showWeakOrder(Descending=True,strategy='optimistic')
+    print('pessimistic')
+    so.showWeakOrder(strategy='pessimistic')
+    print('average')
+    so.showWeakOrder()
+    so1 = SortingDigraph(nt,'testCategories')
+    print(so.computeWeakOrder())
+    so1.showWeakOrder()
+    print(so1.computeWeakOrder())
+    so.exportGraphViz('testWO')
+    
+    
 def testRobustSortingDigraphClass():
     print('*---- testing SortingDigraph class instantiation ---*')
     t = RandomPerformanceTableau(numberOfCriteria=5)
