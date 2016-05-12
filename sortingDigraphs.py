@@ -221,28 +221,35 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             self.evaluation = normPerfTab.evaluation
             self.convertEvaluationFloatToDecimal()
             # supposing all criteria scales between 0.0 and 100.0
-            lowValue = 0.0
-            highValue = 100.00
+            lowValue = Decimal('0.0')
+            highValue = Decimal('100.0')
             # with preference direction = max
             categories = OrderedDict()
-            k = highValue / scaleSteps
+            k = highValue / Decimal(str(scaleSteps))
             nd = len(str(scaleSteps))
             for i in range(scaleSteps):
                 categories[str(i)] = {'name':('c%%0%dd' % (nd)) % (i+1),\
                                      'order':i,\
-                                     'lowLimit': Decimal('%.2f' % (i*k)),\
-                                     'highLimit': Decimal('%.2f' % ((i+1)*k))}
+                                     'lowLimit': Decimal('%.1f' % (i*k)),\
+                                     'highLimit': Decimal('%.1f' % ((i+1)*k))}            
             self.categories = categories
             criteriaCategoryLimits = OrderedDict()
             criteriaCategoryLimits['LowerClosed'] = LowerClosed
             for g in self.criteria:
                 criteriaCategoryLimits[g] = {}
-                k = self.criteria[g]['scale'][1] / scaleSteps
+                k = (self.criteria[g]['scale'][1] - \
+                     self.criteria[g]['scale'][0]) / scaleSteps
                 i = 0
                 for c in categories:
+                    if i < (scaleSteps-1):
+                        gHighLimit = Decimal('%.1f' %\
+                                    (self.criteria[g]['scale'][0] + (i+1)*k))
+                    else:
+                        gHighLimit = Decimal('%.1f' % (2*self.criteria[g]['scale'][1]))
                     criteriaCategoryLimits[g][c]={
-                        'minimum': Decimal('%.2f' % (i*k)),
-                        'maximum': Decimal('%.2f' % ((i+1)*k))
+                        'minimum': Decimal('%.1f' %\
+                                    (self.criteria[g]['scale'][0] + i*k)),
+                        'maximum': Decimal('%.1f' % gHighLimit)
                         }
                     i += 1
             self.criteriaCategoryLimits = criteriaCategoryLimits
@@ -280,7 +287,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                         if not defaultProfiles:
                             highValueg = Decimal(str(criteria[g]['scale'][1]))
                         else:
-                            highValueg = Decimal(str(highValue))
+                            highValueg = Decimal('%.1f' % highValue)
                         #print 'highValue = ', highValue
                         evaluation[g][cMinKey] = -(highValueg - Decimal(str(criteriaCategoryLimits[g][c]['minimum'])))
                         evaluation[g][cMaxKey] = -(highValueg - Decimal(str(criteriaCategoryLimits[g][c]['maximum'])))
@@ -458,7 +465,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         s += '</table>'
         return s
 
-    def computeWeakOrder(self,Descending=True,strategy='average',Comments=False,Debug=False):
+    def computeWeakOrder(self,Descending=False,strategy='average',Comments=False,Debug=False):
         """
         specialisation of the showWeakOrder method.
         The weak ordering strategy may be:
@@ -509,29 +516,50 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                           actionsCategories[interval]])
         actionsCategIntervals.sort(reverse=Descending)
         weakOrdering = []
+        if Comments:
+            k = len(self.categories)
+            print('Weak ordering with %s normalized %d-sorting limits' % (strategy,k) )
         for item in actionsCategIntervals:
             #print(item)
             if Comments:
                 if strategy == "average":
-                    #if self.criteriaCategoryLimits['LowerClosed']:
-                    if item[0][1] == item[0][2]:
-                        print(']%s-%s] : %s' % (str(item[0][1]),\
+                    if Descending:
+                        if item[0][1] == item[0][2]:
+                            print(']%s-%s] : %s' % (str(item[0][1]),\
+                                                    str(item[0][2]),\
+                                                str(item[1]) ) )
+                        else:
+                            print(']%s-%s] : %s' % (str(item[0][1]),\
                                                 str(item[0][2]),\
-                                            str(item[1]) ) )
+                                                str(item[1]) ) )
                     else:
-                        print(']%s-%s] : %s' % (str(item[0][1]),\
-                                            str(item[0][2]),\
-                                            str(item[1]) ) )
+                        if item[0][1] == item[0][2]:
+                            print('[%s-%s[ : %s' % (str(item[0][2]),\
+                                                    str(item[0][1]),\
+                                                str(item[1]) ) )
+                        else:
+                            print('[%s-%s[ : %s' % (str(item[0][2]),\
+                                                str(item[0][1]),\
+                                                str(item[1]) ) )
                 else:
-                    #if self.criteriaCategoryLimits['LowerClosed']:
-                    if item[0][1] == item[0][0]:
-                        print(']%s-%s] : %s' % (str(item[0][0]),\
-                                                   str(item[0][1]),\
-                                            str(item[1]) ) )
+                    if Descending:
+                        if item[0][1] == item[0][0]:
+                            print(']%s-%s] : %s' % (str(item[0][0]),\
+                                                       str(item[0][1]),\
+                                                str(item[1]) ) )
+                        else:
+                            print(']%s-%s] : %s' % (str(item[0][0]),\
+                                                str(item[0][1]),\
+                                                str(item[1]) ) )
                     else:
-                        print(']%s-%s] : %s' % (str(item[0][0]),\
-                                            str(item[0][1]),\
-                                            str(item[1]) ) )
+                        if item[0][1] == item[0][0]:
+                            print('[%s-%s[ : %s' % (str(item[0][1]),\
+                                                       str(item[0][0]),\
+                                                str(item[1]) ) )
+                        else:
+                            print('[%s-%s[ : %s' % (str(item[0][1]),\
+                                                str(item[0][0]),\
+                                                str(item[1]) ) )
                                                         
                             
                             
@@ -539,7 +567,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             weakOrdering.append(item[1])
         return weakOrdering
 
-    def showWeakOrder(self,Descending=True,strategy='average'):
+    def showWeakOrder(self,Descending=False,strategy='average'):
         """ dummy for computeWeakOrder with Comments=True """
         self.computeWeakOrder(Descending=Descending,strategy=strategy,Comments=True)
         
@@ -3809,23 +3837,24 @@ if __name__ == "__main__":
     MP = False
 ##    t = PerformanceTableau('auditor2_2')
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
-##    t = XMCDA2PerformanceTableau('spiegel2004')
+    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('ex1')
-    t = RandomCBPerformanceTableau(numberOfActions=25,
-                                    numberOfCriteria=13,
-                                    weightDistribution='equiobjectives',
-                                    seed=1)
+##    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
+##                                    numberOfCriteria=13,
+##                                    weightDistribution='equiobjectives',
+##                                            missingProbability=0.05,
+##                                    seed=1)
     nt = NormalizedPerformanceTableau(t)
 ##    so = SortingDigraph(t,scaleSteps=10,Debug=True)
 ##    so.saveCategories()
 ##    so = SortingDigraph('grafittiPerfTab','grafittiCategories')
-    so = SortingDigraph(nt,'tempCategories')
+    so = SortingDigraph(t,scaleSteps=7,Debug=True)
     print(so.categories)
 ##    print(so.profiles)
 ##    print(so.criteriaCategoryLimits)
-    so.showSorting()
+    so.showSorting(Reverse=False)
     print('optimistic')
-    so.showWeakOrder(strategy='optimistic')
+    so.showWeakOrder(Descending=True,strategy='optimistic')
     print('pessimistic')
     so.showWeakOrder(strategy='pessimistic')
     print('average')
