@@ -91,11 +91,11 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     ]1 - 0]: 	 []
     # Notice that some alternatives, like a04, a09, a11 and a12 are sorted
     # into more than one adjacent category. Weak ordering the sorting result
-    # into ordered category intervals gives following result:
+    # into ordered adjacent categories gives following result:
     >>> so.showWeakOrder(strategy='average',Descending=True)
     Weak ordering by average normalized 5-sorting limits
-    ]100.0-80.0] : ['a02', 'a03']
-    ]100.0-60.0] : ['a11']
+    ] >  -80.0] : ['a02', 'a03']
+    ] >  -60.0] : ['a11']
     ]80.0-60.0] : ['a07', 'a08', 'a10', 'a13']
     ]80.0-40.0] : ['a04', 'a09', 'a12']
     ]60.0-40.0] : ['a05', 'a06']

@@ -1230,7 +1230,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3503,7 +3503,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4034,7 +4034,7 @@ neglecting all considerable large performance differences polarisations.</p>
 
 <dl class="class">
 <dt id="outrankingDigraphs.DissimilarityOutrankingDigraph">
-<em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">DissimilarityOutrankingDigraph</code><span class="sig-paren">(</span><em>filePerfTab=None</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.DissimilarityOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">DissimilarityOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.DissimilarityOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -4257,7 +4257,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5147,23 +5147,27 @@ respecting the order of the categories.</p>
 </li>
 </ul>
 </div></blockquote>
-<p>Template of required data:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">categories</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;c01&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;week&#39;</span><span class="p">,</span><span class="s">&#39;order&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                            <span class="s">&#39;comment&#39;</span><span class="p">:</span> <span class="s">&#39;lowest category&#39;</span><span class="p">,},</span>
-                   <span class="s">&#39;c02&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;ok&#39;</span><span class="p">,</span><span class="s">&#39;order&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                            <span class="s">&#39;comment&#39;</span><span class="p">:</span> <span class="s">&#39;medium category&#39;</span><span class="p">,},</span>
-                   <span class="s">&#39;c03&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;good&#39;</span><span class="p">,</span><span class="s">&#39;order&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-                            <span class="s">&#39;comment&#39;</span><span class="p">:</span> <span class="s">&#39;highest category&#39;</span><span class="p">,},</span>
-                   <span class="s">&#39;c04&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;excellent&#39;</span><span class="p">,</span><span class="s">&#39;order&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-                            <span class="s">&#39;comment&#39;</span><span class="p">:</span> <span class="s">&#39;highest category&#39;</span><span class="p">,},</span>
-<span class="p">}</span>
-<span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="s">&#39;LowerClosed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span> <span class="c"># default</span>
-<span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s">&#39;c01&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;minimum&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#39;maximum&#39;</span><span class="p">:</span><span class="mi">25</span><span class="p">},</span>
-        <span class="s">&#39;c02&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;minimum&#39;</span><span class="p">:</span><span class="mi">25</span><span class="p">,</span> <span class="s">&#39;maximum&#39;</span><span class="p">:</span><span class="mi">50</span><span class="p">},</span>
-        <span class="s">&#39;c03&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;minimum&#39;</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span> <span class="s">&#39;maximum&#39;</span><span class="p">:</span><span class="mi">75</span><span class="p">},</span>
-        <span class="s">&#39;c04&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;minimum&#39;</span><span class="p">:</span><span class="mi">75</span><span class="p">,</span> <span class="s">&#39;maximum&#39;</span><span class="p">:</span><span class="mi">120</span><span class="p">},</span>
- <span class="p">}</span>
+<p>Template of required data for a 4-sorting:</p>
+<div class="highlight-python"><div class="highlight"><pre>categories = {&#39;c1&#39;: { &#39;name&#39;: &#39;week&#39;,&#39;order&#39;: 1,
+                      &#39;lowLimit&#39;: 0,&#39;highLimit&#39;: 25,
+                      &#39;comment&#39;: &#39;lowest category&#39;,},
+              &#39;c2&#39;: { &#39;name&#39;: &#39;ok&#39;,&#39;order&#39;: 2,
+                      &#39;lowLimit&#39;: 25,&#39;highLimit&#39;: 50,
+                      &#39;comment&#39;: &#39;medium category&#39;,},
+              &#39;c3&#39;: { &#39;name&#39;: &#39;good&#39;,&#39;order&#39;: 3,
+                      &#39;lowLimit&#39;: 50,&#39;highLimit&#39;: 75,
+                      &#39;comment&#39;: &#39;highest category&#39;,},
+              &#39;c4&#39;: { &#39;name&#39;: &#39;excellent&#39;,&#39;order&#39;: 4,
+                      &#39;lowLimit&#39;: 75,&#39;highLimit&#39;: 100,                               &#39;heigLimit&#39;: Decimal(&#39;100.0&#39;).
+                      &#39;comment&#39;: &#39;highest category&#39;,},
+}
+criteriaCategoryLimits[&#39;LowerClosed&#39;] = True # default
+criteriaCategoryLimits[g] = {
+        &#39;c1&#39;: {&#39;minimum&#39;:0, &#39;maximum&#39;:25},
+        &#39;c2&#39;: {&#39;minimum&#39;:25, &#39;maximum&#39;:50},
+        &#39;c3&#39;: {&#39;minimum&#39;:50, &#39;maximum&#39;:75},
+        &#39;c4&#39;: {&#39;minimum&#39;:75, &#39;maximum&#39;:120},
+ }
 </pre></div>
 </div>
 <p>A template named tempProfile.py is providied in the digraphs module distribution.</p>
@@ -5173,37 +5177,36 @@ respecting the order of the categories.</p>
 where categories and a profile my be read from. If no such filename is given,
 then a default profile with five, equally spaced, categories is used
 on each criteria. By default lower-closed limts of categories are
-supposed to be used in the sorting.If no performance tableau instance is given,
-a standard random instance with 10 actions and 13 criteria is generated by default.</p>
+supposed to be used in the sorting.</p>
 </div>
 <p>Example Python3 session</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="n">SortingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">SortingDigraph</span><span class="p">()</span> <span class="o">%%</span> <span class="n">Based</span> <span class="n">on</span> <span class="n">a</span> <span class="n">random</span> <span class="n">performance</span> <span class="n">tableau</span> 
-<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
-<span class="go">[&#39;a07&#39;, &#39;a06&#39;, &#39;a05&#39;, &#39;a04&#39;, &#39;a03&#39;, &#39;a02&#39;, &#39;a01&#39;, &#39;a10&#39;, &#39;a09&#39;, &#39;a08&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+<span class="go">[&#39;a01&#39;, &#39;a02&#39;, &#39;a03&#39;, &#39;a04&#39;, &#39;a05&#39;, &#39;a06&#39;, &#39;a07&#39;, &#39;a08&#39;,</span>
+<span class="go">&#39;a09&#39;, &#39;a10&#39;, &#39;a11&#39;, &#39;a12&#39;, &#39;a13&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">so</span> <span class="o">=</span> <span class="n">SortingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">scaleSteps</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="go"># so gives a sorting result into five lower closed ordered</span>
+<span class="go"># categories enumerated from 0 to 5.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">so</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
 <span class="go">*--- Sorting results in descending order ---*</span>
-<span class="go">]&gt; - 100]:   []</span>
-<span class="go">]100 - 80]:  [&#39;a03&#39;, &#39;a09&#39;]</span>
-<span class="go">]80 - 60]:   [&#39;a02&#39;, &#39;a04&#39;, &#39;a05&#39;, &#39;a06&#39;, &#39;a07&#39;, &#39;a08&#39;]</span>
-<span class="go">]60 - 40]:   [&#39;a01&#39;, &#39;a10&#39;]</span>
-<span class="go">]40 - 20]:   []</span>
-<span class="go">]20 - 0]:    []</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">showSortingCharacteristics</span><span class="p">(</span><span class="s">&#39;a10&#39;</span><span class="p">)</span>
-<span class="go">x  in  K_k    r(x &gt;= m_k)   r(x &lt; M_k)  r(x in K_k)</span>
-<span class="go">a10 in [0-20[    100.00      -85.98       -85.98</span>
-<span class="go">a10 in [20-40[    85.98      -49.53       -49.53</span>
-<span class="go">a10 in [40-60[    49.53       20.56        20.56</span>
-<span class="go">a10 in [60-80[   -20.56       34.58       -20.56</span>
-<span class="go">a10 in [80-100[  -34.58      100.00       -34.58</span>
-<span class="go">a10 in [100-&lt;[  -100.00      100.00      -100.00</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="go">{&#39;determination&#39;: Decimal(&#39;0.2438213914849428868120456904&#39;),</span>
-<span class="go">&#39;MedianCut&#39;: False,</span>
-<span class="go">&#39;correlation&#39;: Decimal(&#39;0.6482112436115843270868824533&#39;)}</span>
-<span class="gp">&gt;&gt;&gt; </span>
+<span class="go">]&gt; - 4]:     [&#39;a02&#39;, &#39;a03&#39;, &#39;a11&#39;]</span>
+<span class="go">]4 - 3]:     [&#39;a04&#39;, &#39;a07&#39;, &#39;a08&#39;, &#39;a09&#39;, &#39;a10&#39;, &#39;a11&#39;, &#39;a12&#39;, &#39;a13&#39;]</span>
+<span class="go">]3 - 2]:     [&#39;a04&#39;, &#39;a05&#39;, &#39;a06&#39;, &#39;a09&#39;, &#39;a12&#39;]</span>
+<span class="go">]2 - 1]:     [&#39;a01&#39;]</span>
+<span class="go">]1 - 0]:     []</span>
+<span class="go"># Notice that some alternatives, like a04, a09, a11 and a12 are sorted</span>
+<span class="go"># into more than one adjacent category. Weak ordering the sorting result</span>
+<span class="go"># into ordered adjacent categories gives following result:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">so</span><span class="o">.</span><span class="n">showWeakOrder</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s">&#39;average&#39;</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">Weak ordering by average normalized 5-sorting limits</span>
+<span class="go">] &gt;  -80.0] : [&#39;a02&#39;, &#39;a03&#39;]</span>
+<span class="go">] &gt;  -60.0] : [&#39;a11&#39;]</span>
+<span class="go">]80.0-60.0] : [&#39;a07&#39;, &#39;a08&#39;, &#39;a10&#39;, &#39;a13&#39;]</span>
+<span class="go">]80.0-40.0] : [&#39;a04&#39;, &#39;a09&#39;, &#39;a12&#39;]</span>
+<span class="go">]60.0-40.0] : [&#39;a05&#39;, &#39;a06&#39;]</span>
+<span class="go">]40.0-20.0] : [&#39;a01&#39;]</span>
 </pre></div>
 </div>
 <dl class="method">
@@ -5230,8 +5233,13 @@ the high category limit.</p>
 
 <dl class="method">
 <dt id="sortingDigraphs.SortingDigraph.computeWeakOrder">
-<code class="descname">computeWeakOrder</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.SortingDigraph.computeWeakOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Specialisation for QuantilesSortingDigraphs.</p>
+<code class="descname">computeWeakOrder</code><span class="sig-paren">(</span><em>Descending=False</em>, <em>strategy='average'</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.SortingDigraph.computeWeakOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>specialisation of the showWeakOrder method.
+The weak ordering strategy may be:</p>
+<blockquote>
+<div>&#8220;optimistic&#8221; (ranked by highest category limits),
+&#8220;pessimistic&#8221; (ranked by lowest category limits) or
+&#8220;average&#8221; (ranked by average category limits)</div></blockquote>
 </dd></dl>
 
 <dl class="method">
@@ -5277,6 +5285,11 @@ to the parameters given.</p>
 <p class="last">Default values gives a normalized valuation domain</p>
 </div>
 </dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.SortingDigraph.saveCategories">
+<code class="descname">saveCategories</code><span class="sig-paren">(</span><em>fileName='tempCategories'</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.SortingDigraph.saveCategories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="sortingDigraphs.SortingDigraph.saveProfilesXMCDA2">
@@ -5325,6 +5338,12 @@ representing the degree of credibility of the
 assertion that &#8220;action x in A belongs to category c in C&#8221;,
 ie x outranks low category limit and does not outrank
 the high category limit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.SortingDigraph.showWeakOrder">
+<code class="descname">showWeakOrder</code><span class="sig-paren">(</span><em>Descending=False</em>, <em>strategy='average'</em><span class="sig-paren">)</span><a class="headerlink" href="#sortingDigraphs.SortingDigraph.showWeakOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>dummy for computeWeakOrder with Comments=True</p>
 </dd></dl>
 
 </dd></dl>
@@ -6545,7 +6564,7 @@ and Tideman&#8217;s ranked pairs rule (rankingRule=&#8221;rankedPairs&#8221;).</
 <dl class="class">
 <dt id="bigOutrankingDigraphs.BigOutrankingDigraph">
 <em class="property">class </em><code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">BigOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>componentRankingRule='Copeland'</em>, <em>minimalComponentSize=None</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrOfCPUs=None</em>, <em>nbrOfThreads=None</em>, <em>save2File=None</em>, <em>CopyPerfTab=True</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#bigOutrankingDigraphs.BigDigraph" title="bigOutrankingDigraphs.BigDigraph"><code class="xref py py-class docutils literal"><span class="pre">bigOutrankingDigraphs.BigDigraph</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#bigOutrankingDigraphs.BigDigraph" title="bigOutrankingDigraphs.BigDigraph"><code class="xref py py-class docutils literal"><span class="pre">bigOutrankingDigraphs.BigDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Main class for the multiprocessing implementation of big outranking digraphs.</p>
 <p>The big outranking digraph instance is decomposed with a q-tiling sort into a partition
 of quantile equivalence classes which are linearly ordered by average quantile limits (default).</p>
@@ -6673,7 +6692,7 @@ Components are stored in an ordered dictionary.</p>
 <dl class="class">
 <dt id="bigOutrankingDigraphs.BigOutrankingDigraphDev">
 <em class="property">class </em><code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">BigOutrankingDigraphDev</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>componentRankingRule='Copeland'</em>, <em>minimalComponentSize=None</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrOfCPUs=None</em>, <em>nbrOfThreads=None</em>, <em>save2File=None</em>, <em>CopyPerfTab=True</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphDev" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#bigOutrankingDigraphs.BigOutrankingDigraph" title="bigOutrankingDigraphs.BigOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">bigOutrankingDigraphs.BigOutrankingDigraph</span></code></a>, <a class="reference internal" href="#weakOrders.QuantilesRankingDigraph" title="weakOrders.QuantilesRankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">weakOrders.QuantilesRankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#bigOutrankingDigraphs.BigOutrankingDigraph" title="bigOutrankingDigraphs.BigOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">bigOutrankingDigraphs.BigOutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>!!! In Development, only for testing purposes</p>
 <p>Multiprocessing implementation of the abstract BipolarOutrankingDigraph class
 for large instances (order &gt; 1000)</p>
@@ -6697,7 +6716,7 @@ Returns a tuple : action, lowest category key, highest category key, membership 
 <dl class="class">
 <dt id="bigOutrankingDigraphs.BigOutrankingDigraphMP">
 <em class="property">class </em><code class="descclassname">bigOutrankingDigraphs.</code><code class="descname">BigOutrankingDigraphMP</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>componentRankingRule='Copeland'</em>, <em>minimalComponentSize=None</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrOfCPUs=None</em>, <em>nbrOfThreads=None</em>, <em>save2File=None</em>, <em>CopyPerfTab=True</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigOutrankingDigraphMP" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#bigOutrankingDigraphs.BigOutrankingDigraph" title="bigOutrankingDigraphs.BigOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">bigOutrankingDigraphs.BigOutrankingDigraph</span></code></a>, <a class="reference internal" href="#weakOrders.QuantilesRankingDigraph" title="weakOrders.QuantilesRankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">weakOrders.QuantilesRankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#bigOutrankingDigraphs.BigOutrankingDigraph" title="bigOutrankingDigraphs.BigOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">bigOutrankingDigraphs.BigOutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>!!! Development and testing implementation !!!</p>
 <p>Multiprocessing implementation of the abstract BipolarOutrankingDigraph class
 for large instances (order &gt; 1000)</p>
