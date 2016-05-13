@@ -479,6 +479,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         actions = self.actions
         categories = self.categories
         actionsCategories = {}
+        actionsCategoryLimits = {}
         for x in actions:
             a,lowCateg,highCateg,credibility =\
                      self.showActionCategories(x,Comments=Debug)
@@ -488,17 +489,20 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 ac = (lc+hc)/Decimal('2.0')
                 try:
                     actionsCategories[(ac,categories[highCateg]['highLimit'],\
-                                       categories[lowCateg]['lowLimit'])].append(a)
+                        categories[lowCateg]['lowLimit'])]['categoryContent'].append(a)
                 except:
                     actionsCategories[(ac,categories[highCateg]['highLimit'],\
-                                       categories[lowCateg]['lowLimit'])] = [a]
+                                       categories[lowCateg]['lowLimit'])] =\
+                                        {'categoryContent': [a], 'categoryInterval': (lowCateg,highCateg)}
             else: # strategy == "optimistic" or "pessimistic":
                 try:
                     actionsCategories[(categories[highCateg]['highLimit'],\
-                                       categories[lowCateg]['lowLimit'])].append(a)
+                                       categories[lowCateg]['lowLimit'])]['categoryContent'].append(a)
                 except:
                     actionsCategories[(categories[highCateg]['highLimit'],\
-                                       categories[lowCateg]['lowLimit'])] = [a]
+                                       categories[lowCateg]['lowLimit'])] =\
+                                        {'categoryContent': [a], 'categoryInterval': (lowCateg,highCateg)}                                                            
+
 ##            elif strategy == "pessimistic":
 ##                try:
 ##                    actionsCategories[(categories[lowCateg]['lowLimit'],\
@@ -511,7 +515,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 ##                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
 ##                except:
 ##                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
-                
+        #print(actionsCategories)    
         actionsCategIntervals = []
         for interval in actionsCategories:
             #print(interval)
@@ -519,54 +523,36 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                           actionsCategories[interval]])
         actionsCategIntervals.sort(reverse=Descending)
         weakOrdering = []
+        catKeys = [x for x in self.categories]
+        #print(catKeys)
         if Comments:
             k = len(self.categories)
             print('Weak ordering with %s normalized %d-sorting limits' % (strategy,k) )
         
         for ci,item in enumerate(actionsCategIntervals):
-            #print(item)
+            #print(item[1])
+            interval = item[1]['categoryInterval']
+            content = item[1]['categoryContent']
             if Comments:
-                if strategy == "average":
-                    if Descending:
-                        if ci == 0:
-                            print('] > -%s] : %s' % (\
-                                                    str(item[0][2]),\
-                                                str(item[1]) ) )
-                        else:
-                            print(']%s-%s] : %s' % (str(item[0][1]),\
-                                                str(item[0][2]),\
-                                                str(item[1]) ) )
+##                if strategy == "average":
+                if Descending:
+                    if interval[1] == interval[0]:
+                        print('[%s]   : %s' % (interval[0],content) )
                     else:
-                        if ci == (len(actionsCategIntervals)-1):
-                            print('[%s- < [ : %s' % (str(item[0][2]),\
-                                                str(item[1]) ) )
-                        else:
-                            print('[%s-%s[ : %s' % (str(item[0][2]),\
-                                                str(item[0][1]),\
-                                                str(item[1]) ) )
+                        print('[%s-%s] : %s' % (interval[1],\
+                                            interval[0],\
+                                            content ) )
                 else:
-                    if Descending:
-                        if ci == 0:
-                            print('] > -%s] : %s' % (
-                                                       str(item[0][1]),\
-                                                str(item[1]) ) )
-                        else:
-                            print(']%s-%s] : %s' % (str(item[0][0]),\
-                                                str(item[0][1]),\
-                                                str(item[1]) ) )
+                    if interval[0] == interval[1]:
+                        print('[%s]   : %s' % (interval[1],\
+                                            content ) )
                     else:
-                        if ci == (len(actionsCategIntervals)-1):
-                            print('[%s- < [ : %s' % (str(item[0][1]),\
-                                                str(item[1]) ) )
-                        else:
-                            print('[%s-%s[ : %s' % (str(item[0][1]),\
-                                                str(item[0][0]),\
-                                                str(item[1]) ) )
-                                                        
-                            
+                        print('[%s-%s] : %s' % (interval[0],\
+                                            interval[1],\
+                                            content ) )                           
                             
 
-            weakOrdering.append(item[1])
+            weakOrdering.append(content)
         return weakOrdering
 
     def showWeakOrder(self,Descending=False,strategy='average'):
@@ -1177,42 +1163,45 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 html = '<h2>Sorting results in descending order</h2>'
                 html += '<table style="background-color:White;" border="1"><tr bgcolor="#9acd32"><th>Categories</th><th>Assorting</th></tr>'
             for c in self.orderedCategoryKeys(Reverse=Reverse):
+                cName = self.categories[c]['name']
                 if LowerClosed:
-                    print(']%s - %s]:' % (prev_c,c), end=' ')
+                    print(']%s - %s]:' % (prev_c,cName), end=' ')
                     print('\t',categoryContent[c])
                     if isReturningHTML:
                         html += '<tr><td bgcolor="#FFF79B">]%s - %s]</td>' % (prev_c,c)
                         catString = str(categoryContent[c])
                         html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
                 else:
-                    print('[%s - %s[:' % (prev_c,c), end=' ')
+                    print('[%s - %s[:' % (prev_c,cName), end=' ')
                     print('\t',categoryContent[c])
                     if isReturningHTML:
                         html += '<tr><td bgcolor="#FFF79B">[%s - %s[</td>' % (prev_c,c)
                         catString = str(categoryContent[c])
                         html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
-                prev_c = c
+                prev_c = cName
         else:
             print('\n*--- Sorting results in ascending order ---*\n')
             if isReturningHTML:
                 html = '<h2>Sorting results in ascending order</h2>'
                 html += '<table style="background-color:White;" border="1"><tr bgcolor="#9acd32"><th>Categories</th><th>Assorting</th></tr>'
             cat = [x for x in self.orderedCategoryKeys(Reverse=Reverse)]
+            cat.append('<')
+            catNames =  [self.categories[x]['name'] for x in self.orderedCategoryKeys(Reverse=Reverse)]                              
             if isReturningHTML:
-                cat.append('&lt;')
+                catNames.append('&lt;')
             else:
-                cat.append('<')
+                catNames.append('<')
 
             for i in range(len(cat)-1):
                 if LowerClosed:
-                    print('[%s - %s[:' % (cat[i],cat[i+1]), end=' ')
+                    print('[%s - %s[:' % (catNames[i],catNames[i+1]), end=' ')
                     print('\t',categoryContent[cat[i]])
                     if isReturningHTML:
                         html += '<tr><td bgcolor="#FFF79B">]%s - %s]</td>' % (cat[i],cat[i+1])
                         catString = str(categoryContent[cat[i]])
                         html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
                 else:
-                    print(']%s - %s]:' % (cat[i],cat[i+1]), end=' ')
+                    print(']%s - %s]:' % (catNames[i],catNames[i+1]), end=' ')
                     print('\t',categoryContent[cat[i]])
                     if isReturningHTML:
                         html += '<tr><td bgcolor="#FFF79B">[%s - %s[</td>' % (cat[i],cat[i+1])
@@ -3847,14 +3836,15 @@ if __name__ == "__main__":
                                             missingProbability=0.05,
                                     seed=1)
     nt = NormalizedPerformanceTableau(t)
-##    so = SortingDigraph(t,scaleSteps=10,Debug=True)
+    so = SortingDigraph(t,scaleSteps=10,Debug=True)
 ##    so = SortingDigraph('grafittiPerfTab','grafittiCategories')
-    so = SortingDigraph(t,scaleSteps=7,Debug=True)
+##    so = SortingDigraph(t,scaleSteps=7,Debug=True)
     print(so.categories)
     so.saveCategories('testCategories')
 ##    print(so.profiles)
 ##    print(so.criteriaCategoryLimits)
     so.showSorting(Reverse=False)
+    so.showSorting()
     print('optimistic')
     so.showWeakOrder(Descending=True,strategy='optimistic')
     print('pessimistic')
