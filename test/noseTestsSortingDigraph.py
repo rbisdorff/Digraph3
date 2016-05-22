@@ -106,7 +106,7 @@ def testLowerOpenClosedCategories():
     t.save('test')
     s = SortingDigraph(t,LowerClosed=True)
     s.showSorting(Reverse=True)
-    s1 = SortingDigraph(t,LowerClosed=False)
+    s1 = SortingDigraph('test',LowerClosed=False)
     s1.showSorting(Reverse=True)
 
 def testQuantilesSortingDigraph():

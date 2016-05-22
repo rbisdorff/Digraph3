@@ -257,7 +257,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             self.criteriaCategoryLimits = criteriaCategoryLimits
             
             # set the category limits type (LowerClosed = True)
-            self.criteriaCategoryLimits['LowerClosed'] = True
+            self.criteriaCategoryLimits['LowerClosed'] = LowerClosed
             
         self.runTimes={'dataInput': time()-tt}
         
@@ -304,6 +304,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.profileLimits = profileLimits
         self.evaluation = evaluation
         self.convertEvaluationFloatToDecimal()
+        self.LowerClosed = LowerClosed
 ##        else
 ##            profiles = self.profiles
 ##            profileLimits = self.profileLimits
@@ -901,12 +902,13 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             from pickle import dumps, loads, load
             from os import cpu_count
             class myThread(Process):
-                def __init__(self, threadID, tempDirName, actions, catKeys,Debug):
+                def __init__(self, threadID, tempDirName, actions, catKeys,LowerClosed,Debug):
                     Process.__init__(self)
                     self.threadID = threadID
                     self.workingDirectory = tempDirName
                     self.actions = actions
                     self.catKeys = catKeys
+                    self.LowerClosed = LowerClosed
                     self.Debug = Debug
                 def run(self):
                     from pickle import dumps, loads
@@ -923,6 +925,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     Max = context.valuationdomain['max']
                     actions = self.actions
                     catKeys = self.catKeys
+                    LowerClosed = self.LowerClosed
                     #relation = context.relation
                     sorting = {}
                     for x in actions:
@@ -988,7 +991,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                 if Debug:
                     print(thActions)
                 if thActions != []:
-                    process = myThread(j,tempDirName,thActions,categories,Debug)
+                    process = myThread(j,tempDirName,thActions,categories,LowerClosed,Debug)
                     process.start()
                     nbrOfThreads += 1
             while active_children() != []:
@@ -1048,7 +1051,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
         actions = self.getActionsKeys(action)
             
-        categories = self.orderedCategoryKeys()
+        categoryKeys = self.orderedCategoryKeys()
 
         try:
             LowerClosed = self.criteriaCategoryLimits['LowerClosed']
@@ -1062,10 +1065,10 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             print('x  in  K_k\t r(m_k < x)\t r(M_k >= x)\t r(x in K_k)')
         for x in actions:
             sorting[x] = {}
-            for c in categories:
-                sorting[x][c] = {}
-                cMinKey= c+'-m'
-                cMaxKey= c+'-M'
+            for i in range(len(categoryKeys)):
+                sorting[x][categoryKeys[i]] = {}
+                cMinKey= categoryKeys[i]+'-m'
+                cMaxKey= categoryKeys[i]+'-M'
                 if LowerClosed:
                     lowLimit = self.relation[x][cMinKey]
                     notHighLimit = Max - self.relation[x][cMaxKey] + Min
@@ -1073,14 +1076,24 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     lowLimit = Max - self.relation[cMinKey][x] + Min
                     notHighLimit = self.relation[cMaxKey][x]
                 if LowerClosed:
-                    print('%s in [%s - [\t' % (x, c), end=' ')
+                    if i < (len(categoryKeys)-1):
+                        print('%s in [%s - %s[\t' % (x, categoryKeys[i],categoryKeys[i+1]), end=' ')
+                    else:
+                        print('%s in [%s - %s[\t' % (x, categoryKeys[i],' '), end=' ')
+                        
                 else:
-                    print('%s in [ - %s[\t' % (x, c), end=' ')
+                    if i == 0:
+                        print('%s in ]%s - %s]\t' % (x, ' ',categoryKeys[i]), end=' ')
+                    else:
+                        print('%s in ]%s - %s]\t' % (x, categoryKeys[i-1],categoryKeys[i]), end=' ')
+                        
                 categoryMembership = min(lowLimit,notHighLimit)
-                sorting[x][c]['lowLimit'] = lowLimit
-                sorting[x][c]['notHighLimit'] = notHighLimit
-                sorting[x][c]['categoryMembership'] = categoryMembership
-                print('%.2f\t\t %.2f\t\t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+                sorting[x][categoryKeys[i]]['lowLimit'] = lowLimit
+                sorting[x][categoryKeys[i]]['notHighLimit'] = notHighLimit
+                sorting[x][categoryKeys[i]]['categoryMembership'] = categoryMembership
+                print('%.2f\t\t %.2f\t\t %.2f' % (sorting[x][categoryKeys[i]]['lowLimit'],\
+                                                  sorting[x][categoryKeys[i]]['notHighLimit'],\
+                                                  sorting[x][categoryKeys[i]]['categoryMembership']))
 
     def _computePessimisticSorting(self, Comments=False):
         """
@@ -3831,24 +3844,25 @@ if __name__ == "__main__":
     """)
 
     print('*-------- Testing class and methods -------')
-    MP = False
-    t = PerformanceTableau('auditor2_1')
+    MP = True
+##    t = PerformanceTableau('auditor2_1')
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
 ##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('ex1')
-##    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
-##                                    numberOfCriteria=13,
-##                                    weightDistribution='equiobjectives',
-##                                            missingProbability=0.05,
-##                                    seed=1)
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
+                                    numberOfCriteria=13,
+                                    weightDistribution='equiobjectives',
+                                            missingProbability=0.05,
+                                    seed=1)
     nt = NormalizedPerformanceTableau(t)
-    so = SortingDigraph(t,scaleSteps=5,Debug=True)
+    so = SortingDigraph(t,scaleSteps=5,LowerClosed=True,Debug=True)
 ##    so = SortingDigraph('grafittiPerfTab','grafittiCategories')
 ##    so = SortingDigraph(t,scaleSteps=7,Debug=True)
     print(so.categories)
     so.saveCategories('testCategories')
 ##    print(so.profiles)
 ##    print(so.criteriaCategoryLimits)
+    so.showSortingCharacteristics()
     so.showSorting(Reverse=False)
     so.showSorting()
     print('optimistic')
@@ -3857,7 +3871,9 @@ if __name__ == "__main__":
     so.showWeakOrder(strategy='pessimistic')
     print('average')
     so.showWeakOrder()
-    so1 = SortingDigraph(nt,'testCategories')
+    so1 = SortingDigraph(nt,scaleSteps=5,LowerClosed=False)
+    so1.showSorting()
+    so1.showSortingCharacteristics()
     so1.showWeakOrder()
                                                                             
 ##    so.saveProfiles('testProfile')
