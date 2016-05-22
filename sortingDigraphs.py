@@ -537,18 +537,24 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 ##                if strategy == "average":
                 if Descending:
                     if interval[1] == interval[0]:
-                        print('[%s]   : %s' % (interval[0],content) )
+                        catName0 = self.categories[interval[0]]['name']
+                        print('[%s]   : %s' % (catName0,content) )
                     else:
-                        print('[%s-%s] : %s' % (interval[1],\
-                                            interval[0],\
+                        catName0 = self.categories[interval[0]]['name']
+                        catName1 = self.categories[interval[1]]['name']
+                        print('[%s-%s] : %s' % (catName1,\
+                                            catName0,\
                                             content ) )
                 else:
                     if interval[0] == interval[1]:
-                        print('[%s]   : %s' % (interval[1],\
+                        catName1 = self.categories[interval[1]]['name']
+                        print('[%s]   : %s' % (catName1,\
                                             content ) )
                     else:
-                        print('[%s-%s] : %s' % (interval[0],\
-                                            interval[1],\
+                        catName0 = self.categories[interval[0]]['name']
+                        catName1 = self.categories[interval[1]]['name']
+                        print('[%s-%s] : %s' % (catName0,\
+                                            catName1,\
                                             content ) )                           
                             
 
@@ -3826,17 +3832,17 @@ if __name__ == "__main__":
 
     print('*-------- Testing class and methods -------')
     MP = False
-##    t = PerformanceTableau('auditor2_2')
+    t = PerformanceTableau('auditor2_1')
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
 ##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('ex1')
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
-                                    numberOfCriteria=13,
-                                    weightDistribution='equiobjectives',
-                                            missingProbability=0.05,
-                                    seed=1)
+##    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
+##                                    numberOfCriteria=13,
+##                                    weightDistribution='equiobjectives',
+##                                            missingProbability=0.05,
+##                                    seed=1)
     nt = NormalizedPerformanceTableau(t)
-    so = SortingDigraph(t,scaleSteps=10,Debug=True)
+    so = SortingDigraph(t,scaleSteps=5,Debug=True)
 ##    so = SortingDigraph('grafittiPerfTab','grafittiCategories')
 ##    so = SortingDigraph(t,scaleSteps=7,Debug=True)
     print(so.categories)
