@@ -3334,7 +3334,7 @@ class Digraph(object):
                             Colored=True,\
                             tableTitle='Relation Map',\
                             relationName='r(x S y)',\
-                            symbols=['+','&middot;','&nbsp;','-','_']
+                            symbols=['+','&middot;','&nbsp;','&#150;','&#151;']
                             ):
         """
         Launches a browser window with the colored relation map of self.
@@ -3346,6 +3346,7 @@ class Digraph(object):
                                         Colored=Colored,
                                         tableTitle=tableTitle,
                                         symbols=symbols,
+                                        ContentCentered=True,
                                         relationName=relationName))
         fo.close()
         url = 'file://'+fileName
@@ -3356,7 +3357,8 @@ class Digraph(object):
                           relationName='r(x R y)',
                           actionsSubset= None,
                           symbols=['+','&middot;','&nbsp;','-','_'],
-                          Colored=False):
+                          Colored=True,
+                          ContentCentered=True):
         """
         renders the relation map in actions X actions html table format.
         """
@@ -3367,11 +3369,18 @@ class Digraph(object):
             actions = self.actions
         else:
             actions = actionsSubset
-        s = ''
+        s  = '<!DOCTYPE html><html><head>\n'
+        s += '<title>%s</title>\n' % 'Digraph3 relation map'
+        s += '<style type="text/css">\n'
+        if ContentCentered:
+            s += 'td {text-align: center;}\n'
+        s += 'td.na {color: rgb(192,192,192);}\n'
+        s += '</style>\n'
+        s += '</head>\n<body>\n'
         s += '<h1>%s</h1>' % tableTitle
-        s += '<table border="0">'
+        s += '<table border="0">\n'
         if Colored:
-            s += '<tr bgcolor="#9acd32"><th>%s</th>' % relationName
+            s += '<tr bgcolor="#9acd32"><th>%s</th>\n' % relationName
         else:
             s += '<tr><th>%s</th>' % relationName
         #actions = [x for x in actions]
@@ -3389,60 +3398,62 @@ class Digraph(object):
 
         for x in actionsList:
             if Colored:
-                s += '<th bgcolor="#FFF79B">%s</th>' % (x[0])
+                s += '<th bgcolor="#FFF79B">%s</th>\n' % (x[0])
             else:
-                s += '<th>%s</th>' % (x[0])
-        s += '</tr>'
+                s += '<th>%s</th\n>' % (x[0])
+        s += '</tr>\n'
         for x in actionsList:
             s += '<tr>'
             if Colored:
-                s += '<th bgcolor="#FFF79B">%s</th>' % (x[0])
+                s += '<th bgcolor="#FFF79B">%s</th>\n' % (x[0])
             else:
-                s += '<th>%s</th>' % (x[0])
+                s += '<th>%s</th>\n' % (x[0])
             for y in actionsList:
                 if Colored:
                     if self.relation[x[1]][y[1]] == Max:
-                        s += '<td bgcolor="#66ff66" align="center"><b>%s</b></td>' % symbols[0]
+                        s += '<td bgcolor="#66ff66"><b>%s</b></td>\n' % symbols[0]
                     elif self.relation[x[1]][y[1]] > Med:
-                        s += '<td bgcolor="#ddffdd" align="center">%s</td>' % symbols[1]
+                        s += '<td bgcolor="#ddffdd">%s</td>' % symbols[1]
                     elif self.relation[x[1]][y[1]] == Min:
-                        s += '<td bgcolor="#ff6666"  align="center"><b>%s</b></td>' % symbols[4]
+                        s += '<td bgcolor="#ff6666"><b>%s</b></td\n>' % symbols[4]
                     elif self.relation[x[1]][y[1]] < Med:
-                        s += '<td bgcolor="#ffdddd"  align="center">%s</td>' % symbols[3]
+                        s += '<td bgcolor="#ffdddd">%s</td>\n' % symbols[3]
                     else:
-                        s += '<td bgcolor="#ffffff" align="center" >%s</td>' % symbols[2]
+                        s += '<td bgcolor="#ffffff">%s</td>\n' % symbols[2]
                 else:
                     if self.relation[x[1]][y[1]] == Max:
-                        s += '<td align="center"><b>%s</b></td>'  % symbols[0]
+                        s += '<td><b>%s</b></td>\n'  % symbols[0]
                     elif self.relation[x[1]][y[1]] > Med:
-                        s += '<td align="center">%s</td>' % symbols[1]
+                        s += '<td>%s</td>\n' % symbols[1]
                     elif self.relation[x[1]][y[1]] == Min:
-                        s += '<td align="center"><b>%s</b></td>' % symbols[4]
+                        s += '<td><b>%s</b></td>\n' % symbols[4]
                     elif self.relation[x[1]][y[1]] < Med:
-                        s += '<td align="center">%s</td>' % symbols[3]
+                        s += '<td>\n' % symbols[3]
                     else:
-                        s += '<td align="center" >%s</td>' % symbols[2]
+                        s += '<td>%s</td>\n' % symbols[2]
             s += '</tr>'
-        s += '</table>'
+        s += '</table>\n'
         # legend
-        s += '<span style="font-size: 50%">'
-        s += '<table border="1"><tr><th colspan="2"><i>Semantics</i></th></tr>'
+        s += '<span style="font-size: 75%">\n'
+        s += '<table border="1"><tr><th colspan="2"><i>Semantics</i></th></tr>\n'
         if Colored:
-            s += '<tr><td bgcolor="#66ff66" align="center">%s</td><td>certainly valid</td></tr>' % symbols[0]
-            s += '<tr><td bgcolor="#ddffdd" align="center">%s</td><td>valid</td></tr>' % symbols[1]
-            s += '<tr><td>%s</td><td>indeterminate</td></tr>' % symbols[2]
-            s += '<tr><td bgcolor="#ffdddd" align="center">%s</td><td>invalid</td></tr>' % symbols[3]
-            s += '<tr><td bgcolor="#ff6666" align="center">%s</td><td>certainly invalid</td></tr>' % symbols[4]
-            s += '</table>'
+            s += '<tr><td bgcolor="#66ff66" align="center">%s</td><td>certainly valid</td></tr>\n' % symbols[0]
+            s += '<tr><td bgcolor="#ddffdd" align="center">%s</td><td>valid</td></tr>\n' % symbols[1]
+            s += '<tr><td>%s</td><td>indeterminate</td></tr>\n' % symbols[2]
+            s += '<tr><td bgcolor="#ffdddd" align="center">%s</td><td>invalid</td></tr>\n' % symbols[3]
+            s += '<tr><td bgcolor="#ff6666" align="center">%s</td><td>certainly invalid</td></tr>\n' % symbols[4]
+            s += '</table>\n'
         else:
-            s += '<tr><td align="center">%s</td><td>certainly valid</td></tr>' % symbols[0]
-            s += '<tr><td align="center">%s</td><td>valid</td></tr>' % symbols[1]
-            s += '<tr><td align="center">%s</td><td>indeterminate</td></tr>' % symbols[2]
-            s += '<tr><td align="center">%s</td><td>invalid</td></tr>' % symbols[3]
-            s += '<tr><td align="center">%s</td><td>certainly invalid</td></tr>' % symbols[4]
-            s += '</table>'
-        s += '</span>'
-            
+            s += '<tr><td align="center">%s</td><td>certainly valid</td></tr>\n' % symbols[0]
+            s += '<tr><td align="center">%s</td><td>valid</td></tr>\n' % symbols[1]
+            s += '<tr><td align="center">%s</td><td>indeterminate</td></tr>\n' % symbols[2]
+            s += '<tr><td align="center">%s</td><td>invalid</td></tr>\n' % symbols[3]
+            s += '<tr><td align="center">%s</td><td>certainly invalid</td></tr>\n' % symbols[4]
+            s += '</table>\n'
+        s += '</span>\n'
+        # html footer
+        s += '</body>\n'
+        s += '</html>\n'
         return s
 
 
@@ -12015,11 +12026,14 @@ if __name__ == "__main__":
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
         from linearOrders import CopelandOrder
-        t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
+        t1 = RandomPerformanceTableau(numberOfActions=20,seed=10)
         g = BipolarOutrankingDigraph(t1,Normalized=True)
         cop = CopelandOrder(g)
-        g.showHTMLRelationMap(cop.copelandRanking)
-        g.showHTMLRelationMap(Colored=False)
+        #g.showHTMLRelationMap(cop.copelandRanking)
+        gcd = CoDualDigraph(g)
+        gcd.showHTMLRelationMap(cop.copelandOrder)
+       
+        #g.showHTMLRelationMap(Colored=False)
         #g.exportGraphViz()
 ##        from outrankingDigraphs import BipolarOutrankingDigraph
 ##        from randomPerfTabs import RandomCBPerformanceTableau

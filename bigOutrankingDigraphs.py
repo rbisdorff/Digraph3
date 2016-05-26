@@ -195,6 +195,122 @@ class BigDigraph(object):
             print(pictStr)
         print('Component ranking rule: %s' % self.componentRankingRule)
 
+    def showHTMLRelationMap(self,actionsSubset=None,\
+                            Colored=True,\
+                            tableTitle='Relation Map',\
+                            relationName='r(x S y)',\
+                            symbols=['+','&middot;','&nbsp;','&#150;','&#151;']
+                            ):
+        """
+        Launches a browser window with the colored relation map of self.
+        """
+        import webbrowser
+        fileName = '/tmp/relationMap.html'
+        fo = open(fileName,'w')
+        fo.write(self.htmlRelationMap(actionsSubset=None,
+                                        Colored=Colored,
+                                        tableTitle=tableTitle,
+                                        symbols=symbols,
+                                        ContentCentered=True,
+                                        relationName=relationName))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+        
+        
+    def htmlRelationMap(self,actionsSubset=None,
+                          tableTitle='Relation Map',
+                          relationName='r(x R y)',
+                          symbols=['+','&middot;','&nbsp;','-','_'],
+                          Colored=True,
+                          ContentCentered=True):
+        """
+        renders the relation map in actions X actions html table format.
+        """
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        Max = self.valuationdomain['max']
+        if actionsSubset == None:
+            print(self.boostedRanking)
+            actionsList = self.boostedRanking
+        else:
+            actionsList = actionsSubset
+
+        print(actionsList)
+        s  = '<!DOCTYPE html><html><head>\n'
+        s += '<title>%s</title>\n' % 'Digraph3 relation map'
+        s += '<style type="text/css">\n'
+        if ContentCentered:
+            s += 'td {text-align: center;}\n'
+        s += 'td.na {color: rgb(192,192,192);}\n'
+        s += '</style>\n'
+        s += '</head>\n<body>\n'
+        s += '<h1>%s</h1>' % tableTitle
+        s += '<table border="0">\n'
+        if Colored:
+            s += '<tr bgcolor="#9acd32"><th>%s</th>\n' % relationName
+        else:
+            s += '<tr><th>%s</th>' % relationName
+
+        for x in actionsList:
+            if Colored:
+                s += '<th bgcolor="#FFF79B">%s</th>\n' % (x)
+            else:
+                s += '<th>%s</th\n>' % (x)
+        s += '</tr>\n'
+        for x in actionsList:
+            s += '<tr>'
+            if Colored:
+                s += '<th bgcolor="#FFF79B">%s</th>\n' % (x)
+            else:
+                s += '<th>%s</th>\n' % (x)
+            for y in actionsList:
+                if Colored:
+                    if self.relation(x,y) == Max:
+                        s += '<td bgcolor="#66ff66"><b>%s</b></td>\n' % symbols[0]
+                    elif self.relation(x,y) > Med:
+                        s += '<td bgcolor="#ddffdd">%s</td>' % symbols[1]
+                    elif self.relation(x,y) == Min:
+                        s += '<td bgcolor="#ff6666"><b>%s</b></td\n>' % symbols[4]
+                    elif self.relation(x,y) < Med:
+                        s += '<td bgcolor="#ffdddd">%s</td>\n' % symbols[3]
+                    else:
+                        s += '<td bgcolor="#ffffff">%s</td>\n' % symbols[2]
+                else:
+                    if self.relation(x,y) == Max:
+                        s += '<td><b>%s</b></td>\n'  % symbols[0]
+                    elif self.relation(x,y) > Med:
+                        s += '<td>%s</td>\n' % symbols[1]
+                    elif self.relation(x,y) == Min:
+                        s += '<td><b>%s</b></td>\n' % symbols[4]
+                    elif self.relation(x,y) < Med:
+                        s += '<td>\n' % symbols[3]
+                    else:
+                        s += '<td>%s</td>\n' % symbols[2]
+            s += '</tr>'
+        s += '</table>\n'
+        # legend
+        s += '<span style="font-size: 75%">\n'
+        s += '<table border="1"><tr><th colspan="2"><i>Semantics</i></th></tr>\n'
+        if Colored:
+            s += '<tr><td bgcolor="#66ff66" align="center">%s</td><td>certainly valid</td></tr>\n' % symbols[0]
+            s += '<tr><td bgcolor="#ddffdd" align="center">%s</td><td>valid</td></tr>\n' % symbols[1]
+            s += '<tr><td>%s</td><td>indeterminate</td></tr>\n' % symbols[2]
+            s += '<tr><td bgcolor="#ffdddd" align="center">%s</td><td>invalid</td></tr>\n' % symbols[3]
+            s += '<tr><td bgcolor="#ff6666" align="center">%s</td><td>certainly invalid</td></tr>\n' % symbols[4]
+            s += '</table>\n'
+        else:
+            s += '<tr><td align="center">%s</td><td>certainly valid</td></tr>\n' % symbols[0]
+            s += '<tr><td align="center">%s</td><td>valid</td></tr>\n' % symbols[1]
+            s += '<tr><td align="center">%s</td><td>indeterminate</td></tr>\n' % symbols[2]
+            s += '<tr><td align="center">%s</td><td>invalid</td></tr>\n' % symbols[3]
+            s += '<tr><td align="center">%s</td><td>certainly invalid</td></tr>\n' % symbols[4]
+            s += '</table>\n'
+        s += '</span>\n'
+        # html footer
+        s += '</body>\n'
+        s += '</html>\n'
+        return s
     
     def computeOrdinalCorrelation(self, other, Debug=False):
         """
@@ -2421,7 +2537,7 @@ if __name__ == "__main__":
     from time import time
     from weakOrders import QuantilesRankingDigraph
     MP  = False
-    nbrActions=200
+    nbrActions=50
 ##    t0 = time()
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,seed=100)
 
@@ -2455,7 +2571,7 @@ if __name__ == "__main__":
     print(bg2)
     #print(bg1.computeDecompositionSummaryStatistics())
     #bg1.showDecomposition(direction='increasing')
-    bg2.showRelationMap(0,100)
+    bg2.showHTMLRelationMap(0,100)
 ##    print(bg1)
 ##    bg1.showShort()
 ##    bg1.showShort('testShowShort')
