@@ -3178,7 +3178,7 @@ class Digraph(object):
 
         print()
 
-    def showRelationMap(self,symbols=None,rankingRule="netFlows"):
+    def showRelationMap(self,symbols=None,rankingRule="Copeland"):
         """
         Prints on the console, in text map format, the location of
         certainly validated and certainly invalidated outranking situations.
@@ -3186,9 +3186,9 @@ class Digraph(object):
         By default, symbols = {'max':'┬','positive': '+', 'median': ' ',
                                'negative': '-', 'min': '┴'}
 
-        The default ordering of the output is following the net flows ranking rule
-        from best to worst actions. Further available ranking rules are Kohler's (rankingRule="kohler")
-        and Tideman's ranked pairs rule (rankingRule="rankedPairs")
+        The default ordering of the output is following the Copeland ranking rule
+        from best to worst actions. Further available ranking rules are net flows (rankingRule="netFlows"),
+        Kohler's (rankingRule="kohler"), and Tideman's ranked pairs rule (rankingRule="rankedPairs").
 
         Example::
 
@@ -3229,12 +3229,15 @@ class Digraph(object):
         if symbols == None:
             symbols = {'max':'┬','positive': '+', 'median': ' ',
                        'negative': '-', 'min': '┴'}
-        if rankingRule == "Kohler":
-            ranking = self.computeKohlerRanking()
+        if rankingRule == "Copeland":
+            ranking = self.computeCopelandRanking()
+        elif rankingRule == "netFlows":
+            ranking = self.computeNetFlowsRanking()
         elif rankingRule == "rankedPairs":
             ranking = self.computeRankedPairsRanking()
         else:
-            ranking = self.computeNetFlowsRanking()
+            rankingRule = "Copeland"
+            ranking = self.computeCopelandRanking()
         relation = self.relation
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
@@ -3327,6 +3330,121 @@ class Digraph(object):
             print( formatString % (self.valuationdomain['min'],
                                    self.valuationdomain['max']))
             
+    def showHTMLRelationMap(self,actionsList=None,\
+                            Colored=True,\
+                            tableTitle='Relation Map',\
+                            relationName='r(x S y)',\
+                            symbols=['+','&middot;','&nbsp;','-','_']
+                            ):
+        """
+        Launches a browser window with the colored relation map of self.
+        """
+        import webbrowser
+        fileName = '/tmp/relationMap.html'
+        fo = open(fileName,'w')
+        fo.write(self.htmlRelationMap(actionsSubset=actionsList,
+                                        Colored=Colored,
+                                        tableTitle=tableTitle,
+                                        symbols=symbols,
+                                        relationName=relationName))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+        
+        
+    def htmlRelationMap(self,tableTitle='Relation Map',
+                          relationName='r(x R y)',
+                          actionsSubset= None,
+                          symbols=['+','&middot;','&nbsp;','-','_'],
+                          Colored=False):
+        """
+        renders the relation map in actions X actions html table format.
+        """
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        Max = self.valuationdomain['max']
+        if actionsSubset == None:
+            actions = self.actions
+        else:
+            actions = actionsSubset
+        s = ''
+        s += '<h1>%s</h1>' % tableTitle
+        s += '<table border="0">'
+        if Colored:
+            s += '<tr bgcolor="#9acd32"><th>%s</th>' % relationName
+        else:
+            s += '<tr><th>%s</th>' % relationName
+        #actions = [x for x in actions]
+        actionsList = []
+        for x in actions:
+            if isinstance(x,frozenset):
+                try:
+                    actionsList += [(actions[x]['shortName'],x)]
+                except KeyError:
+                    actionsList += [(actions[x]['name'],x)]
+            else:
+                actionsList += [(str(x),str(x))]
+        if actionsSubset == None:
+            actionsList.sort()
+
+        for x in actionsList:
+            if Colored:
+                s += '<th bgcolor="#FFF79B">%s</th>' % (x[0])
+            else:
+                s += '<th>%s</th>' % (x[0])
+        s += '</tr>'
+        for x in actionsList:
+            s += '<tr>'
+            if Colored:
+                s += '<th bgcolor="#FFF79B">%s</th>' % (x[0])
+            else:
+                s += '<th>%s</th>' % (x[0])
+            for y in actionsList:
+                if Colored:
+                    if self.relation[x[1]][y[1]] == Max:
+                        s += '<td bgcolor="#66ff66" align="center"><b>%s</b></td>' % symbols[0]
+                    elif self.relation[x[1]][y[1]] > Med:
+                        s += '<td bgcolor="#ddffdd" align="center">%s</td>' % symbols[1]
+                    elif self.relation[x[1]][y[1]] == Min:
+                        s += '<td bgcolor="#ff6666"  align="center"><b>%s</b></td>' % symbols[4]
+                    elif self.relation[x[1]][y[1]] < Med:
+                        s += '<td bgcolor="#ffdddd"  align="center">%s</td>' % symbols[3]
+                    else:
+                        s += '<td bgcolor="#ffffff" align="center" >%s</td>' % symbols[2]
+                else:
+                    if self.relation[x[1]][y[1]] == Max:
+                        s += '<td align="center"><b>%s</b></td>'  % symbols[0]
+                    elif self.relation[x[1]][y[1]] > Med:
+                        s += '<td align="center">%s</td>' % symbols[1]
+                    elif self.relation[x[1]][y[1]] == Min:
+                        s += '<td align="center"><b>%s</b></td>' % symbols[4]
+                    elif self.relation[x[1]][y[1]] < Med:
+                        s += '<td align="center">%s</td>' % symbols[3]
+                    else:
+                        s += '<td align="center" >%s</td>' % symbols[2]
+            s += '</tr>'
+        s += '</table>'
+        # legend
+        s += '<span style="font-size: 50%">'
+        s += '<table border="1"><tr><th colspan="2"><i>Semantics</i></th></tr>'
+        if Colored:
+            s += '<tr><td bgcolor="#66ff66" align="center">%s</td><td>certainly valid</td></tr>' % symbols[0]
+            s += '<tr><td bgcolor="#ddffdd" align="center">%s</td><td>valid</td></tr>' % symbols[1]
+            s += '<tr><td>%s</td><td>indeterminate</td></tr>' % symbols[2]
+            s += '<tr><td bgcolor="#ffdddd" align="center">%s</td><td>invalid</td></tr>' % symbols[3]
+            s += '<tr><td bgcolor="#ff6666" align="center">%s</td><td>certainly invalid</td></tr>' % symbols[4]
+            s += '</table>'
+        else:
+            s += '<tr><td align="center">%s</td><td>certainly valid</td></tr>' % symbols[0]
+            s += '<tr><td align="center">%s</td><td>valid</td></tr>' % symbols[1]
+            s += '<tr><td align="center">%s</td><td>indeterminate</td></tr>' % symbols[2]
+            s += '<tr><td align="center">%s</td><td>invalid</td></tr>' % symbols[3]
+            s += '<tr><td align="center">%s</td><td>certainly invalid</td></tr>' % symbols[4]
+            s += '</table>'
+        s += '</span>'
+            
+        return s
+
 
     def showHTMLRelationTable(self,actionsList=None,
                               IntegerValues=False,
@@ -3337,7 +3455,7 @@ class Digraph(object):
         Launches a browser window with the colored relation table of self.
         """
         import webbrowser
-        fileName = '/tmp/relationTable.html'
+        fileName = '/tmp/relationMap.html'
         fo = open(fileName,'w')
         fo.write(self.htmlRelationTable(actionsSubset=actionsList,
                                         isColored=Colored,
@@ -11891,9 +12009,17 @@ if __name__ == "__main__":
         print('*-------- Testing classes and methods -------')
 
         from time import time
-        dg = RedhefferDigraph(order=113)
+        ##dg = RedhefferDigraph(order=113)
         #g = RandomTournament(order=5,seed=1)
         #g = RandomValuationDigraph(seed=1)
+        from outrankingDigraphs import BipolarOutrankingDigraph
+        from randomPerfTabs import RandomCBPerformanceTableau
+        from linearOrders import CopelandOrder
+        t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
+        g = BipolarOutrankingDigraph(t1,Normalized=True)
+        cop = CopelandOrder(g)
+        g.showHTMLRelationMap(cop.copelandRanking)
+        g.showHTMLRelationMap(Colored=False)
         #g.exportGraphViz()
 ##        from outrankingDigraphs import BipolarOutrankingDigraph
 ##        from randomPerfTabs import RandomCBPerformanceTableau

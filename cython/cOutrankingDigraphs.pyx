@@ -9064,7 +9064,7 @@ if __name__ == "__main__":
                                    numberOfCriteria=21,\
                                    weightDistribution='equiobjectives',
                                    seed=100)
-    
+    t1.showActions()
     g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,
                                   tempDir=None,nbrCores=8,Comments=True,Debug=False)
     print(g1)

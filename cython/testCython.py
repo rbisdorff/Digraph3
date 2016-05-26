@@ -26,10 +26,10 @@ from os import path
 from randomPerfTabs import Random3ObjectivesPerformanceTableau
 
 # parameters
-sampleSize = 1
+sampleSize = 3
 MP = True
 nbrOfCPUs = 4
-nbrActions = 1000
+nbrActions = 2000
 nbrCriteria = 21
 commonPar=('beta','variable',None)
 qtiles = 50

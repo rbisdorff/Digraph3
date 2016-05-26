@@ -659,6 +659,15 @@ def testHTMLTables():
     t = RandomPerformanceTableau()
     print(t.htmlPerformanceTable())
 
+def testHTMLMaps():
+    from outrankingDigraphs import BipolarOutrankingDigraph
+    from randomPerfTabs import RandomCBPerformanceTableau
+    from linearOrders import CopelandOrder
+    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
+    g = BipolarOutrankingDigraph(t1,Normalized=True)
+    cop = CopelandOrder(g)
+    print(g.htmlRelationMap(cop.copelandRanking))
+    print(g.htmlRelationMap(Colored=False))
 
 def testCoveringIndex():
     print('*--- test computing the covering index for a choice ---*')

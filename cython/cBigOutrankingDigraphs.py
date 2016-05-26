@@ -1313,10 +1313,11 @@ if __name__ == "__main__":
     
     from time import time
     from weakOrders import QuantilesRankingDigraph
+    from randomPerfTabs import Random3ObjectivesPerformanceTableau
     MP  = False
     nbrActions=1000
 ##    t0 = time()
-    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=100)
+    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=100,BigData=True)
 
 ##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,seed=100)
 

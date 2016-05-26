@@ -3847,13 +3847,13 @@ if __name__ == "__main__":
     MP = True
 ##    t = PerformanceTableau('auditor2_1')
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
-##    t = XMCDA2PerformanceTableau('spiegel2004')
+    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('ex1')
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
-                                    numberOfCriteria=13,
-                                    weightDistribution='equiobjectives',
-                                            missingProbability=0.05,
-                                    seed=1)
+##    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
+##                                    numberOfCriteria=13,
+##                                    weightDistribution='equiobjectives',
+##                                            missingProbability=0.05,
+##                                    seed=1)
     nt = NormalizedPerformanceTableau(t)
     so = SortingDigraph(t,scaleSteps=5,LowerClosed=True,Debug=True)
 ##    so = SortingDigraph('grafittiPerfTab','grafittiCategories')
