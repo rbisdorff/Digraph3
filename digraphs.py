@@ -3419,7 +3419,8 @@ class Digraph(object):
                     elif self.relation[x[1]][y[1]] < Med:
                         s += '<td bgcolor="#ffdddd">%s</td>\n' % symbols[3]
                     else:
-                        s += '<td bgcolor="#ffffff">%s</td>\n' % symbols[2]
+                        #s += '<td bgcolor="#ffffff">%s</td>\n' % symbols[2]
+                        s += '<td class="na">%s</td>\n' % symbols[2]
                 else:
                     if self.relation[x[1]][y[1]] == Max:
                         s += '<td><b>%s</b></td>\n'  % symbols[0]

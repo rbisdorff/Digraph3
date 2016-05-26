@@ -231,12 +231,10 @@ class BigDigraph(object):
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
         if actionsSubset == None:
-            print(self.boostedRanking)
             actionsList = self.boostedRanking
         else:
             actionsList = actionsSubset
 
-        print(actionsList)
         s  = '<!DOCTYPE html><html><head>\n'
         s += '<title>%s</title>\n' % 'Digraph3 relation map'
         s += '<style type="text/css">\n'
@@ -290,22 +288,26 @@ class BigDigraph(object):
             s += '</tr>'
         s += '</table>\n'
         # legend
-        s += '<span style="font-size: 75%">\n'
-        s += '<table border="1"><tr><th colspan="2"><i>Semantics</i></th></tr>\n'
+        s += '<span style="font-size: 100%">\n'
+        s += '<table border="1">\n'
+        s += '<tr><th align="left" colspan="5">Ranking rules:</th><td align="left" colspan="5">%s, %s quantile ordering</td></tr>\n'\
+                                % (self.componentRankingRule,self.sortingParameters['strategy'])
+        s += '<tr><th align="left" colspan="10"><i>Symbol legend</i></th></tr>\n'
+        s += '<tr>'
         if Colored:
-            s += '<tr><td bgcolor="#66ff66" align="center">%s</td><td>certainly valid</td></tr>\n' % symbols[0]
-            s += '<tr><td bgcolor="#ddffdd" align="center">%s</td><td>valid</td></tr>\n' % symbols[1]
-            s += '<tr><td>%s</td><td>indeterminate</td></tr>\n' % symbols[2]
-            s += '<tr><td bgcolor="#ffdddd" align="center">%s</td><td>invalid</td></tr>\n' % symbols[3]
-            s += '<tr><td bgcolor="#ff6666" align="center">%s</td><td>certainly invalid</td></tr>\n' % symbols[4]
-            s += '</table>\n'
+            s += '<td bgcolor="#66ff66" align="center">%s</td><td>certainly valid</td>\n' % symbols[0]
+            s += '<td bgcolor="#ddffdd" align="center">%s</td><td>valid</td>\n' % symbols[1]
+            s += '<td>%s</td><td>indeterminate</td>\n' % symbols[2]
+            s += '<td bgcolor="#ffdddd" align="center">%s</td><td>invalid</td>\n' % symbols[3]
+            s += '<td bgcolor="#ff6666" align="center">%s</td><td>certainly invalid</td>\n' % symbols[4]
         else:
-            s += '<tr><td align="center">%s</td><td>certainly valid</td></tr>\n' % symbols[0]
-            s += '<tr><td align="center">%s</td><td>valid</td></tr>\n' % symbols[1]
-            s += '<tr><td align="center">%s</td><td>indeterminate</td></tr>\n' % symbols[2]
-            s += '<tr><td align="center">%s</td><td>invalid</td></tr>\n' % symbols[3]
-            s += '<tr><td align="center">%s</td><td>certainly invalid</td></tr>\n' % symbols[4]
-            s += '</table>\n'
+            s += '<td align="center">%s</td><td>certainly valid</td>\n' % symbols[0]
+            s += '<td align="center">%s</td><td>valid</td>\n' % symbols[1]
+            s += '<td align="center">%s</td><td>indeterminate</td>\n' % symbols[2]
+            s += '<td align="center">%s</td><td>invalid</td>\n' % symbols[3]
+            s += '<td align="center">%s</td><td>certainly invalid</td>\n' % symbols[4]
+        s += '</tr>'
+        s += '</table>\n'
         s += '</span>\n'
         # html footer
         s += '</body>\n'
