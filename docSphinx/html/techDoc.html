@@ -1436,6 +1436,12 @@ the absorbed neighborhood.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="digraphs.Digraph.htmlRelationMap">
+<code class="descname">htmlRelationMap</code><span class="sig-paren">(</span><em>tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.htmlRelationMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>renders the relation map in actions X actions html table format.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="digraphs.Digraph.htmlRelationTable">
 <code class="descname">htmlRelationTable</code><span class="sig-paren">(</span><em>tableTitle='Valued Relation Table'</em>, <em>relationName='r(x R y)'</em>, <em>hasIntegerValues=False</em>, <em>actionsSubset=None</em>, <em>isColored=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.htmlRelationTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>renders the relation valuation in actions X actions html table format.</p>
@@ -1785,6 +1791,12 @@ Dummy for showCircuits().</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="digraphs.Digraph.showHTMLRelationMap">
+<code class="descname">showHTMLRelationMap</code><span class="sig-paren">(</span><em>actionsList=None, Colored=True, tableTitle='Relation Map', relationName='r(x S y)', symbols=['+', '&amp;middot;', '&amp;nbsp;', '&amp;#150;', '&amp;#151;']</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.showHTMLRelationMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Launches a browser window with the colored relation map of self.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="digraphs.Digraph.showHTMLRelationTable">
 <code class="descname">showHTMLRelationTable</code><span class="sig-paren">(</span><em>actionsList=None</em>, <em>IntegerValues=False</em>, <em>Colored=True</em>, <em>tableTitle='Valued Adjacency Matrix'</em>, <em>relationName='r(x S y)'</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.showHTMLRelationTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Launches a browser window with the colored relation table of self.</p>
@@ -1937,16 +1949,16 @@ the digraph self by reading in the 0-1 misset file format.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showRelationMap">
-<code class="descname">showRelationMap</code><span class="sig-paren">(</span><em>symbols=None</em>, <em>rankingRule='netFlows'</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.showRelationMap" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showRelationMap</code><span class="sig-paren">(</span><em>symbols=None</em>, <em>rankingRule='Copeland'</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.showRelationMap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints on the console, in text map format, the location of
 certainly validated and certainly invalidated outranking situations.</p>
 <dl class="docutils">
 <dt>By default, symbols = {&#8216;max&#8217;:&#8217;┬&#8217;,&#8217;positive&#8217;: &#8216;+&#8217;, &#8216;median&#8217;: &#8216; &#8216;,</dt>
 <dd>&#8216;negative&#8217;: &#8216;-&#8216;, &#8216;min&#8217;: &#8216;┴&#8217;}</dd>
 </dl>
-<p>The default ordering of the output is following the net flows ranking rule
-from best to worst actions. Further available ranking rules are Kohler&#8217;s (rankingRule=&#8221;kohler&#8221;)
-and Tideman&#8217;s ranked pairs rule (rankingRule=&#8221;rankedPairs&#8221;)</p>
+<p>The default ordering of the output is following the Copeland ranking rule
+from best to worst actions. Further available ranking rules are net flows (rankingRule=&#8221;netFlows&#8221;),
+Kohler&#8217;s (rankingRule=&#8221;kohler&#8221;), and Tideman&#8217;s ranked pairs rule (rankingRule=&#8221;rankedPairs&#8221;).</p>
 <p>Example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -3503,7 +3515,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4257,7 +4269,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -6435,6 +6447,12 @@ is by convention 0.0 at determination level 0.0 .</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="bigOutrankingDigraphs.BigDigraph.htmlRelationMap">
+<code class="descname">htmlRelationMap</code><span class="sig-paren">(</span><em>actionsSubset=None, tableTitle='Relation Map', relationName='r(x R y)', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigDigraph.htmlRelationMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>renders the relation map in actions X actions html table format.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="bigOutrankingDigraphs.BigDigraph.ordering2Preorder">
 <code class="descname">ordering2Preorder</code><span class="sig-paren">(</span><em>ordering</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigDigraph.ordering2Preorder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a preordering (a list of list) of a linar order (worst to best) of decision actions in increasing preference direction.</p>
@@ -6464,6 +6482,12 @@ By default the valuation domain is normalized to [-1;1]</p>
 <code class="descname">showDecomposition</code><span class="sig-paren">(</span><em>direction='decreasing'</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigDigraph.showDecomposition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints on the console the decomposition structure of the sparse outranking digraph instance
 in <em>decreasing</em> (default) or <em>increasing</em> preference direction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bigOutrankingDigraphs.BigDigraph.showHTMLRelationMap">
+<code class="descname">showHTMLRelationMap</code><span class="sig-paren">(</span><em>actionsSubset=None, Colored=True, tableTitle='Relation Map', relationName='r(x S y)', symbols=['+', '&amp;middot;', '&amp;nbsp;', '&amp;#150;', '&amp;#151;']</em><span class="sig-paren">)</span><a class="headerlink" href="#bigOutrankingDigraphs.BigDigraph.showHTMLRelationMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Launches a browser window with the colored relation map of self.</p>
 </dd></dl>
 
 <dl class="method">
