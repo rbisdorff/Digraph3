@@ -3429,7 +3429,7 @@ class Digraph(object):
                     elif self.relation[x[1]][y[1]] == Min:
                         s += '<td><b>%s</b></td>\n' % symbols[4]
                     elif self.relation[x[1]][y[1]] < Med:
-                        s += '<td>\n' % symbols[3]
+                        s += '<td>%s</td>\n' % symbols[3]
                     else:
                         s += '<td>%s</td>\n' % symbols[2]
             s += '</tr>'
