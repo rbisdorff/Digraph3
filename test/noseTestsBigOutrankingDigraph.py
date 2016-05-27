@@ -85,4 +85,22 @@ def testMPComments():
                                  Debug=False)
     print(bg1)
  
+def testRelationMap():
+    print('==>> Testing relation map construction')
+    MP = True
+    t0 = time()
+    tp = RandomCBPerformanceTableau(numberOfActions=300,Threading=MP)
+    bg1 = BigOutrankingDigraph(tp,quantiles=5,quantilesOrderingStrategy='average',
+                                 LowerClosed=False,
+                                 minimalComponentSize=5,
+                                 Threading=MP,
+                                 Comments=True,
+                                 Debug=False)
+    bg1.showRelationMap(fromIndex=0,toIndex=50,
+                        symbols = {'max':'┬','positive': '+', 'median': ' ',
+                               'negative': '-', 'min': '┴'} )
+    print(bg1.htmlRelationMap(actionsSubset=bg1.boostedRanking,
+                              tableTitle='Test relation map',
+                              Colored=True))
 
+   
