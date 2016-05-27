@@ -3331,18 +3331,23 @@ class Digraph(object):
                                    self.valuationdomain['max']))
             
     def showHTMLRelationMap(self,actionsList=None,\
+                            rankingRule='Copeland',\
                             Colored=True,\
                             tableTitle='Relation Map',\
                             relationName='r(x S y)',\
-                            symbols=['+','&middot;','&nbsp;','&#150;','&#151;']
+                            symbols=['┬','&middot;','&nbsp;','&#150;','┴']
                             ):
         """
+{'max':'┬','positive': '+', 'median': ' ',
+                       'negative': '-', 'min': '┴'}
         Launches a browser window with the colored relation map of self.
+        See corresponding Digraph.showRelationMap() method.
         """
         import webbrowser
         fileName = '/tmp/relationMap.html'
         fo = open(fileName,'w')
         fo.write(self.htmlRelationMap(actionsSubset=actionsList,
+                                      rankingRule=rankingRule,
                                         Colored=Colored,
                                         tableTitle=tableTitle,
                                         symbols=symbols,
@@ -3353,11 +3358,12 @@ class Digraph(object):
         webbrowser.open_new(url)
         
         
-    def htmlRelationMap(self,tableTitle='Relation Map',
-                          relationName='r(x R y)',
-                          actionsSubset= None,
-                          symbols=['+','&middot;','&nbsp;','-','_'],
-                          Colored=True,
+    def htmlRelationMap(self,tableTitle='Relation Map',\
+                          relationName='r(x R y)',\
+                          actionsSubset= None,\
+                          rankingRule='Copeland',\
+                          symbols=['+','&middot;','&nbsp;','-','_'],\
+                          Colored=True,\
                           ContentCentered=True):
         """
         renders the relation map in actions X actions html table format.
@@ -3365,11 +3371,31 @@ class Digraph(object):
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
-        if actionsSubset == None:
-            actions = self.actions
+        # construct ranking and actionsList
+        if actionsSubset != None:
+            ranking = actionsSubset
         else:
-            actions = actionsSubset
+            if rankingRule == "Copeland":
+                ranking = self.computeCopelandRanking()
+            elif rankingRule == "netFlows":
+                ranking = self.computeNetFlowsRanking()
+            elif rankingRule == "rankedPairs":
+                ranking = self.computeRankedPairsRanking()
+            else:
+                rankingRule = "Copeland"
+                ranking = self.computeCopelandRanking()
+        actionsList = []
+        for x in ranking:
+            if isinstance(x,frozenset):
+                try:
+                    actionsList += [(actions[x]['shortName'],x)]
+                except KeyError:
+                    actionsList += [(actions[x]['name'],x)]
+            else:
+                actionsList += [(str(x),str(x))]
+        # construct html text
         s  = '<!DOCTYPE html><html><head>\n'
+        s += '<meta charset="UTF-8">\n'
         s += '<title>%s</title>\n' % 'Digraph3 relation map'
         s += '<style type="text/css">\n'
         if ContentCentered:
@@ -3378,23 +3404,12 @@ class Digraph(object):
         s += '</style>\n'
         s += '</head>\n<body>\n'
         s += '<h1>%s</h1>' % tableTitle
+        s += '<h2>Ranking rule: %s</h2>' % rankingRule
         s += '<table border="0">\n'
         if Colored:
             s += '<tr bgcolor="#9acd32"><th>%s</th>\n' % relationName
         else:
             s += '<tr><th>%s</th>' % relationName
-        #actions = [x for x in actions]
-        actionsList = []
-        for x in actions:
-            if isinstance(x,frozenset):
-                try:
-                    actionsList += [(actions[x]['shortName'],x)]
-                except KeyError:
-                    actionsList += [(actions[x]['name'],x)]
-            else:
-                actionsList += [(str(x),str(x))]
-        if actionsSubset == None:
-            actionsList.sort()
 
         for x in actionsList:
             if Colored:
@@ -12030,9 +12045,9 @@ if __name__ == "__main__":
         t1 = RandomPerformanceTableau(numberOfActions=20,seed=10)
         g = BipolarOutrankingDigraph(t1,Normalized=True)
         cop = CopelandOrder(g)
-        #g.showHTMLRelationMap(cop.copelandRanking)
-        gcd = CoDualDigraph(g)
-        gcd.showHTMLRelationMap(cop.copelandOrder)
+        g.showHTMLRelationMap(rankingRule='rankedPairs')
+        #gcd = CoDualDigraph(g)
+        #gcd.showHTMLRelationMap(cop.copelandOrder)
        
         #g.showHTMLRelationMap(Colored=False)
         #g.exportGraphViz()
