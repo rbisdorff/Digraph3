@@ -3335,11 +3335,9 @@ class Digraph(object):
                             Colored=True,\
                             tableTitle='Relation Map',\
                             relationName='r(x S y)',\
-                            symbols=['┬','&middot;','&nbsp;','&#150;','┴']
+                            symbols=['+','&middot;','&nbsp;','&#150;','&#151']
                             ):
         """
-{'max':'┬','positive': '+', 'median': ' ',
-                       'negative': '-', 'min': '┴'}
         Launches a browser window with the colored relation map of self.
         See corresponding Digraph.showRelationMap() method.
         """
