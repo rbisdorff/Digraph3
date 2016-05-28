@@ -3236,8 +3236,9 @@ class Digraph(object):
         elif rankingRule == "rankedPairs":
             ranking = self.computeRankedPairsRanking()
         else:
-            rankingRule = "Copeland"
-            ranking = self.computeCopelandRanking()
+            rankingRule = "Alphabetic"
+            ranking = [x for x in self.actions]
+            ranking.sort()
         relation = self.relation
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
@@ -3380,8 +3381,9 @@ class Digraph(object):
             elif rankingRule == "rankedPairs":
                 ranking = self.computeRankedPairsRanking()
             else:
-                rankingRule = "Copeland"
-                ranking = self.computeCopelandRanking()
+                rankingRule = "Alphabetic"
+                ranking = [x for x in self.actions]
+                ranking.sort()
         actionsList = []
         for x in ranking:
             if isinstance(x,frozenset):
