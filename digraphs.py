@@ -3341,6 +3341,21 @@ class Digraph(object):
         """
         Launches a browser window with the colored relation map of self.
         See corresponding Digraph.showRelationMap() method.
+
+        Example::
+
+            >>> from outrankingDigraphs import *
+            >>> t = RandomCBPerformanceTableau(numberOfActions=25,seed=1)
+            >>> g = BipolarOutrankingDigraph(t,Normalized=True)
+            >>> gcd = ~(-g)  # strict outranking relation
+            >>> gcd.showHTMLRelationMap(rankingRule="netFlows")
+            
+        .. image:: relationMap.png
+           :alt: Browser view of a relation map
+           :width: 300 px
+           :align: center
+    
+   
         """
         import webbrowser
         fileName = '/tmp/relationMap.html'
