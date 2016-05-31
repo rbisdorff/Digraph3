@@ -3352,7 +3352,7 @@ class Digraph(object):
             
         .. image:: relationMap.png
            :alt: Browser view of a relation map
-           :width: 300 px
+           :width: 400 px
            :align: center
     
    
