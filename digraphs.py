@@ -493,7 +493,7 @@ class _XMLDigraphHandler(ContentHandler):
 class Digraph(object):
     """
     Genuine root class of all Digraph3 modules.
-    See http://leopold-loewenheim.uni.lu/docDigraph3/tutorial.html#id48
+    See `tutorial working with the digraphs module <http://leopold-loewenheim.uni.lu/docDigraph3/tutorial.html#digraph-object-structure>`_ 
 
     Python data file format:
        * actionset = {'1': {'name': 'a1', 'shortName': ...},
