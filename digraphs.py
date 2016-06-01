@@ -9096,7 +9096,7 @@ class CoDualDigraph(Digraph):
     Instantiates the associated codual -converse of the negation- (deep) copy of
     a given Digraph instance called *other*.
 
-    ..note::
+    .. note::
 
          Instantiates *self* as other.__class__ !
          And, deepcopies, the case given, the other.description, the other.criteria
