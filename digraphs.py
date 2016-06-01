@@ -9093,13 +9093,14 @@ class Digraph(object):
 
 class CoDualDigraph(Digraph):
     """
-    Instantiates the associated codual digraph from
-    a given Digraph called other.
+    Instantiates the associated codual -converse of the negation- (deep) copy of
+    a given Digraph instance called *other*.
 
-    Instantiates as other.__class__ !
+    ..notice::
 
-    Copies the case given the description, the criteria
-    and the evaluation dictionary into self.
+         Instantiates *self* as other.__class__ !
+         And, deepcopies, the case given, the other.description, the other.criteria
+         and the other.evaluation dictionaries into self.
     """
 
     def __init__(self,other,Debug=False):
@@ -11153,14 +11154,17 @@ class CoceDigraph(Digraph):
 class CocaDigraph(Digraph):
     """
     Parameters:
-        Stored or memory resident digraph instance.
+
+        - digraph: Stored or memory resident digraph instance.
+        - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.
+        - Piping: using OS pipes for data in- and output between Python and C++.
 
     Specialization of general Digraph class for instantiation
     of chordless odd circuits augmented digraphs.
 
     A chordless odd circuit is added if the cumulated credibility of the circuit supporting arcs is larger or
     equal to the cumulated credibility of the converse arcs. Otherwise, the circuit is broken at the weakest asymmetric link,
-    i.e. a link (*x*,*y*) with minimal difference between r(*x* S *y*) - r(*y* S *x*).
+    i.e. a link (*x*, *y*) with minimal difference between r(*x* S *y*) - r(*y* S *x*).
 
     """
     def __init__(self,digraph=None,Cpp=False,Piping=False,Comments=False):
