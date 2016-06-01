@@ -80,7 +80,7 @@ Permanent storage
 The :code:`dg.save('tutorialDigraph')` command stores the digraph *dg* in a file named :code:`tutorialDigraph.py` with the following content::
 
        # Saved digraph instance
-       actionset = {'1','2','3','4','5'}
+       actionset = ['1','2','3','4','5']
        valuationdomain = {'min': -1,
                           'med': 0,
                           'max': 1}

@@ -402,7 +402,8 @@ and the other.evaluation dictionaries into self.</p>
 <dt id="digraphs.Digraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">Digraph</code><span class="sig-paren">(</span><em>file=None</em>, <em>order=7</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
-<p>General class of digraphs, R.B. March 2006:</p>
+<p>Genuine root class of all Digraph3 modules.
+See <a class="reference external" href="http://leopold-loewenheim.uni.lu/docDigraph3/tutorial.html#id48">http://leopold-loewenheim.uni.lu/docDigraph3/tutorial.html#id48</a></p>
 <dl class="docutils">
 <dt>Python data file format:</dt>
 <dd><ul class="first last">
@@ -419,7 +420,7 @@ and the other.evaluation dictionaries into self.</p>
 </li>
 </ul>
 </dd>
-<dt>Example python3 (3.3+ recommended) session::</dt>
+<dt>Example python3 (3.5+ recommended) session::</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">Digraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="s">&#39;tempdigraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
@@ -3548,7 +3549,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4302,7 +4303,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">

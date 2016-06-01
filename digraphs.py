@@ -492,7 +492,8 @@ class _XMLDigraphHandler(ContentHandler):
 
 class Digraph(object):
     """
-    General class of digraphs, R.B. March 2006:
+    Genuine root class of all Digraph3 modules.
+    See http://leopold-loewenheim.uni.lu/docDigraph3/tutorial.html#id48
 
     Python data file format:
        * actionset = {'1': {'name': 'a1', 'shortName': ...},
@@ -501,7 +502,7 @@ class Digraph(object):
        * valuationdomain = { 'min':-1, 'med':0, 'max': 1}
        * relation = { '1': { '1':0, '2': 1, ...}, ...}
 
-    Example python3 (3.3+ recommended) session::
+    Example python3 (3.5+ recommended) session::
        >>> from digraphs import Digraph
        >>> g = Digraph('tempdigraph')
        >>> g.showShort()
@@ -511,6 +512,8 @@ class Digraph(object):
        Valuation domain : {'med': Decimal("-1.0"), 'max': Decimal("1.0"), 'min': Decimal("0.0")}
        *--- Connected Components ---*
        1: ['1', '2', '3']
+
+      
 
     """
     def __init__(self,file=None,order=7):
