@@ -9140,13 +9140,15 @@ class CoDualDigraph(Digraph):
 
 class CoverDigraph(Digraph):
     """
-    Instantiates the associated cover relation from
-    a given Digraph called other.
+    Instantiates the associated cover relation -immediate neighbours- from
+    a given Digraph called *other*. The Hasse diagram for instance is the cover
+    relation of a transitive digraph.
 
-    Instantiates as other.__class__ !
-
-    Copies the case given the description, the criteria
-    and the evaluation dictionary into self.
+    .. note::
+    
+        Instantiates as other.__class__ !
+        Copies the case given the other.description, the other.criteria
+        and the other.evaluation dictionaries into self.
     """
 
     def __init__(self,other, Debug=False):
@@ -11062,7 +11064,10 @@ class _WeakCocaDigraph(Digraph):
 class CoceDigraph(Digraph):
     """
     Parameters:
-        Stored or memory resident digraph instance.
+
+        - digraph: Stored or memory resident digraph instance.
+        - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.
+        - Piping: using OS pipes for data in- and output between Python and C++.
 
     Specialization of general Digraph class for instantiation
     of chordless odd circuits eliminated digraphs.
@@ -11372,8 +11377,14 @@ class CocaDigraph(Digraph):
 #--------------------
 class _CocaDigraph(Digraph):
     """
+
+    Old CocaDigraph class without circuit elimination !
+    
     Parameters:
-        Stored or memory resident digraph instance.
+
+        - digraph: Stored or memory resident digraph instance.
+        - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.
+        - Piping: using OS pipes for data in- and output between Python and C++.
 
     Specialization of general Digraph class for instantiation
     of chordless odd circuits augmented digraphs.
