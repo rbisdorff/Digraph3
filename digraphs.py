@@ -495,9 +495,11 @@ class Digraph(object):
     General class of digraphs, R.B. March 2006:
 
     Python data file format:
-       * actionset = ['1','2','3','4','5']
-       * valuationdomain = { 'min':0, 'med':1, 'max': 2}
-       * relation = { '1': { '1':0, '2': 2, ...}, ...}
+       * actionset = {'1': {'name': 'a1', 'shortName': ...},
+                      '2': {'name': 'a1', ...},
+                      ... }
+       * valuationdomain = { 'min':-1, 'med':0, 'max': 1}
+       * relation = { '1': { '1':0, '2': 1, ...}, ...}
 
     Example python3 (3.3+ recommended) session::
        >>> from digraphs import Digraph
@@ -506,7 +508,7 @@ class Digraph(object):
        *----- show short --------------*
        Digraph          : tempdigraph
        Actions          : ['1', '2', '3']
-       Valuation domain : {'med': Decimal("0.5"), 'max': Decimal("1.0"), 'min': Decimal("0")}
+       Valuation domain : {'med': Decimal("-1.0"), 'max': Decimal("1.0"), 'min': Decimal("0.0")}
        *--- Connected Components ---*
        1: ['1', '2', '3']
 
