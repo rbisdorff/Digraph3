@@ -23,7 +23,7 @@ __version__ = "Revision: Py35"
 
 from digraphs import *
 from xmlrpc.client import ServerProxy
-from cOutrankingDigraphs import *
+from cOutrankingDigraphsDev import *
 
 #-------------------------------------------
         
@@ -9051,9 +9051,9 @@ if __name__ == "__main__":
 
     import copy
     from time import time, sleep
-    from cOutrankingDigraphs import BipolarOutrankingDigraph
+    from cOutrankingDigraphsDev import BipolarOutrankingDigraph
     from weakOrders import RankingByChoosingDigraph
-    from cOutrankingDigraphs import RubisRestServer
+    from cOutrankingDigraphsDev import RubisRestServer
     
     print('*-------- Testing classes and methods -------')
 

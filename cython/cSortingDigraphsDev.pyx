@@ -20,8 +20,8 @@
 #
 #######################
 from digraphs import *
-from cOutrankingDigraphs import *
-from cSortingDigraphs import *
+from cOutrankingDigraphsDev import *
+from cSortingDigraphsDev import *
 
 class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     """
@@ -1691,7 +1691,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                     from io import BytesIO
                     from pickle import Pickler, dumps, loads
                     from os import chdir
-                    from cOutrankingDigraphs import BipolarOutrankingDigraph
+                    from cOutrankingDigraphsDev import BipolarOutrankingDigraph
                     chdir(self.workingDirectory)
 ##                    if Debug:
 ##                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
@@ -3626,8 +3626,8 @@ class QuantilesSortingDigraph(SortingDigraph):
 if __name__ == "__main__":
     from time import time
     from perfTabs import *
-    from cOutrankingDigraphs import *
-    from cSortingDigraphs import *
+    from cOutrankingDigraphsDev import *
+    from cSortingDigraphsDev import *
     from weakOrders import *
     
     print("""

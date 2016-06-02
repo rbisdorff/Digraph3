@@ -21,11 +21,11 @@
 
 import cython
 
-from cOutrankingDigraphs import *
-from cSortingDigraphs import *
+from cOutrankingDigraphsDev import *
+from cSortingDigraphsDev import *
 from time import time
 from decimal import Decimal
-from cBigOutrankingDigraphs import *
+from cBigOutrankingDigraphsDev import *
 
 class BigDigraph(object):
     """
@@ -549,17 +549,14 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                  Debug=False):
         
         from digraphs import Digraph
-        from cSortingDigraphs import QuantilesSortingDigraph
+        from cSortingDigraphsDev import QuantilesSortingDigraph
         from collections import OrderedDict
         from time import time
         from os import cpu_count
         from multiprocessing import Pool
         from copy import copy, deepcopy
 
-        if cython.compiled:
-            print('Cythonized BigOutrankingDigraph class')
-        else:
-            print('Pure Python BigOutrankingDigraph class')
+        print('Cythonized BigOutrankingDigraphDev class')
    
         ttot = time()
 
@@ -676,7 +673,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                     from os import chdir
                     from copy import deepcopy
                     from perfTabs import PartialPerformanceTableau
-                    from cOutrankingDigraphs import BipolarOutrankingDigraph
+                    from cOutrankingDigraphsDev import BipolarOutrankingDigraph
                     chdir(self.workingDirectory)
                     if self.Debug:
                         print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadID)))
