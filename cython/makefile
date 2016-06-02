@@ -24,4 +24,28 @@ install:
 		sudo python3 csetupODG.py install
 		sudo python3 csetupSO.py install
 		sudo python3 csetupBG.py install
+codgdev:
+		cython -3 -X boundscheck=False cOutrankingDigraphsDev.pyx
+bodgdev:
+		python3 csetupODGDev.py build_ext ${FLAG}
+csodev:
+		cython -3 -X boundscheck=False cSortingDigraphsDev.pyx
+bsodev:
+		python3 csetupSODev.py build_ext ${FLAG}
+cbgdev:
+		cython -3 -X boundscheck=False cBigOutrankingDigraphsDev.pyx
+bbgdev:
+		python3 csetupBGDev.py build_ext ${FLAG}
+calldev:
+		cython -3 -X boundscheck=False cOutrankingDigraphsDev.pyx
+		cython -3 -X boundscheck=False cSortingDigraphsDev.pyx
+		cython -3 -X boundscheck=False cBigOutrankingDigraphsDev.pyx
+inplacedev:
+		python3 csetupODGDev.py build_ext ${FLAG}
+		python3 csetupSODev.py build_ext ${FLAG}
+		python3 csetupBGDev.py build_ext ${FLAG}
+installdev:
+		sudo python3 csetupODGDev.py install
+		sudo python3 csetupSODev.py install
+		sudo python3 csetupBGDev.py install
 
