@@ -18,8 +18,9 @@
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 #######################
-import cBigOutrankingDigraphs as Bg
-import cBigOutrankingDigraphsDev as cBg
+#import cBigOutrankingDigraphsDev as Bg
+#import cBigOutrankingDigraphsDev as cBg
+from cOutrankingDigraphsDev import *
 #from bigOutrankingDigraphs import *
 from time import time
 from os import path
@@ -29,19 +30,19 @@ from randomPerfTabs import Random3ObjectivesPerformanceTableau
 sampleSize = 100
 MP = True
 nbrOfCPUs = 6
-nbrActions = 2000
+nbrActions = 500
 nbrCriteria = 21
 commonPar=('beta','variable',None)
 qtiles = 50
 minimalSize = 10
-seed = 10
+seed = 55
 fileName = 'CythonA%dObj21q%ds%dc%dgaia164.csv' % (nbrActions,qtiles,minimalSize,nbrOfCPUs)
 # write header row
 if path.isfile(fileName):
 	pass
 else:
 	fo = open(fileName,'w')
-	fo.write('"tt","tti","pr","pri","dc","dci","s","si","sd"\n')
+	fo.write('"tt","tti","dt","dti","rl","rli","gs","gsi","sd"\n')
 	fo.close()
 
 for s in range(sampleSize):
@@ -59,17 +60,9 @@ for s in range(sampleSize):
                                     seed=seed)
     print(tp1.name)
     #t0 = time()
-    bg1 = Bg.BigOutrankingDigraph(tp1,quantiles=qtiles,
-                               quantilesOrderingStrategy='average',
-                               minimalComponentSize=minimalSize,
-                               LowerClosed=True,
-                               Threading=MP,
-                               nbrOfCPUs=nbrOfCPUs,
-                               CopyPerfTab=False,
-                               Comments=True,
-                               Debug=False)
+    g1 = BipolarOutrankingDigraph(tp1,Threading=MP,nbrCores=nbrOfCPUs)
 
-    print(bg1)
+    print(g1)
     
     tp2 = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,
                                     numberOfCriteria=nbrCriteria,
@@ -81,23 +74,15 @@ for s in range(sampleSize):
 #                                        nbrCores=nbrOfCPUs,
                                         seed=seed)
 
-    bg2 = cBg.BigOutrankingDigraph(tp2,quantiles=qtiles,
-                               quantilesOrderingStrategy='average',
-                               minimalComponentSize=minimalSize,
-                               LowerClosed=True,
-                               Threading=MP,
-                               CopyPerfTab=False,
-                               nbrOfCPUs=nbrOfCPUs,
-                               Comments=True,
-                               Debug=False)
+    g2 = IntegerBipolarOutrankingDigraph(tp2,Threading=MP,nbrCores=nbrOfCPUs)
 
-    print(bg2)
+    print(g2)
     fo = open(fileName,'a')
     wstr = '%.4f,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f,%d\n'\
-             % (bg1.runTimes['totalTime'],bg2.runTimes['totalTime'],\
-                bg1.runTimes['preordering'],bg2.runTimes['preordering'],\
-                bg1.runTimes['decomposing'],bg2.runTimes['decomposing'],\
-                bg1.runTimes['sorting'],bg2.runTimes['sorting'],seed)
+             % (g1.runTimes['totalTime'],g2.runTimes['totalTime'],\
+                g1.runTimes['dataInput'],g2.runTimes['dataInput'],\
+                g1.runTimes['computeRelation'],g2.runTimes['computeRelation'],\
+                g1.runTimes['gammaSets'],g2.runTimes['gammaSets'],seed)
     fo.write(wstr)
     fo.close()
     print(wstr)

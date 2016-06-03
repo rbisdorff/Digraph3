@@ -547,7 +547,9 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                  CopyPerfTab=True,\
                  Comments=False,\
                  Debug=False):
-        
+
+        cdef int i, j, totalWeight = 0
+        cdef int nbrOfLocals,nbrOfThreadsUsed,threadLoad
         from digraphs import Digraph
         from cSortingDigraphsDev import QuantilesSortingDigraph
         from collections import OrderedDict
@@ -555,6 +557,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         from os import cpu_count
         from multiprocessing import Pool
         from copy import copy, deepcopy
+        from cOutrankingDigraphsDev import IntegerBipolarOutrankingDigraph
 
         print('Cythonized BigOutrankingDigraphDev class')
    
@@ -576,6 +579,9 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         self.order = na
         dimension = len(perfTab.criteria)
         self.dimension = dimension
+        for g in self.criteria:
+            self.criteria[g]['weight'] = int(self.criteria[g]['weight'])
+            totalWeight += self.criteria[g]['weight']
         
         #######
         if quantiles == 0:
@@ -644,14 +650,14 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                 pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
                 components[compKey]['lowQtileLimit'] = comp[0][1]
                 components[compKey]['highQtileLimit'] = comp[0][0]
-                pg = BipolarOutrankingDigraph(pt,
+                pg = IntegerBipolarOutrankingDigraph(pt,
                                           WithConcordanceRelation=False,
                                           WithVetoCounts=False,
-                                          Normalized=True,
+                                          #Normalized=True,
                                           CopyPerfTab=False)
                 pg.__dict__.pop('criteria')
                 pg.__dict__.pop('evaluation')
-                pg.__class__ = Digraph
+                #pg.__class__ = Digraph
                 components[compKey]['subGraph'] = pg
         else:   # if self.sortingParameters['Threading'] == True:
             from copy import copy, deepcopy
@@ -673,7 +679,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                     from os import chdir
                     from copy import deepcopy
                     from perfTabs import PartialPerformanceTableau
-                    from cOutrankingDigraphsDev import BipolarOutrankingDigraph
+                    from cOutrankingDigraphsDev import IntegerBipolarOutrankingDigraph
                     chdir(self.workingDirectory)
                     if self.Debug:
                         print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadID)))
@@ -696,14 +702,14 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                         pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
                         compDict['lowQtileLimit'] = comp[0][1]
                         compDict['highQtileLimit'] = comp[0][0]
-                        compDict['subGraph'] = BipolarOutrankingDigraph(pt,
-                                                                        Normalized=True,
+                        compDict['subGraph'] = IntegerBipolarOutrankingDigraph(pt,
+                                                                        #Normalized=True,
                                                                         WithConcordanceRelation=False,
                                                                         WithVetoCounts=False,
                                                                         CopyPerfTab=False)     
                         compDict['subGraph'].__dict__.pop('criteria')
                         compDict['subGraph'].__dict__.pop('evaluation')
-                        compDict['subGraph'].__class__ = Digraph
+                        #compDict['subGraph'].__class__ = Digraph
                         splitComponent = (compKey,compDict)
                         if self.Debug:
                             print(compDict)
@@ -805,9 +811,10 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         self.components = components
 
         # setting the component relation
-        self.valuationdomain = {'min':Decimal('-1'),
-                                'med':Decimal('0'),
-                                'max':Decimal('1')}
+        
+        self.valuationdomain = {'min': -totalWeight,
+                                'med': 0,
+                                'max': totalWeight}
        
         self.runTimes['decomposing'] = time() - t0
         if Comments:
@@ -934,6 +941,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
         """
+        cdef int n,Med,lowLimit=0,notHighLimit=0,credibility
         #qs = self.qs
         #qs = self
         Med = self.valuationdomain['med']

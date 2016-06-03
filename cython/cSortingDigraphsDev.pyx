@@ -19,9 +19,12 @@
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 #######################
+import cython
+
 from digraphs import *
 from cOutrankingDigraphsDev import *
 from cSortingDigraphsDev import *
+
 
 class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     """
@@ -104,21 +107,22 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     def __init__(self,argPerfTab=None,\
                  argProfile=None,\
                  scaleSteps=5,\
-                 minValuation=-100.0,\
-                 maxValuation=100.0,\
-                 isRobust=False,\
-                 hasNoVeto=False,\
-                 LowerClosed=True,\
-                 StoreSorting=True,\
-                 Threading=False,\
+                 bint IntegerValued=False,\
+                 minValuation=Decimal('-100.0'),\
+                 maxValuation=Decimal('100.00'),\
+                 bint isRobust=False,\
+                 bint hasNoVeto=False,\
+                 bint LowerClosed=True,\
+                 bint StoreSorting=True,\
+                 bint Threading=False,\
                  tempDir=None,\
                  nbrCores=None,\
-                 Debug=False):
+                 bint Debug=False):
         """
         Constructor for SortingDigraph instances.
 
         """
-
+        cdef int totalWeight=0
         from copy import copy, deepcopy
         from decimal import Decimal
         from collections import OrderedDict
@@ -233,6 +237,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.actions = actions
         self.profiles = profiles
         self.profileLimits = profileLimits
+        for g in criteria:
+            criteria[g]['weight'] = int(criteria[g]['weight'])
+            totalWeight += criteria[g]['weight']
         self.criteria = criteria
         self.evaluation = evaluation
         self.convertEvaluationFloatToDecimal()
@@ -243,12 +250,18 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             self.valuationdomain = g.valuationdomain
             self.relation = g.relation
         else:
-            Min = Decimal('%.4f' % minValuation)
-            Max = Decimal('%.4f' % maxValuation)
-            Med = (Max + Min)/Decimal('2.0')
+            if IntegerValued:
+                Min = -totalWeight
+                Max = 0
+                Med = totalWeight
+            else:
+                Min = Decimal('%.4f' % minValuation)
+                Max = Decimal('%.4f' % maxValuation)
+                Med = (Max + Min)/Decimal('2.0')
+
             self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
             if LowerClosed:
-                relation = BipolarOutrankingDigraph._constructRelationWithThreading(self,criteria,
+                relation = IntegerBipolarOutrankingDigraph._constructRelationWithThreading(self,criteria,
                                                        self.evaluation,
                                                        initial=actionsOrig,
                                                        terminal=profileLimits,
@@ -260,7 +273,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                         WithVetoCounts=False,
                                                         Debug=Debug)
             else:
-                relation = BipolarOutrankingDigraph._constructRelationWithThreading(self,criteria,
+                relation = IntegerBipolarOutrankingDigraph._constructRelationWithThreading(self,criteria,
                                                        self.evaluation,
                                                        terminal=actionsOrig,
                                                        initial=profileLimits,
@@ -1263,7 +1276,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.relation = copy(newrelation)
 
 #-------------
-        
+      
 class QuantilesSortingDigraph(SortingDigraph):
     """
     Specialisation of the sortingDigraph Class
@@ -1304,25 +1317,26 @@ class QuantilesSortingDigraph(SortingDigraph):
     """
     def __init__(self,argPerfTab=None,\
                  limitingQuantiles=None,\
-                 LowerClosed=False,\
-                 PrefThresholds=True,\
-                 hasNoVeto=False,\
+                 bint LowerClosed=False,\
+                 bint PrefThresholds=True,\
+                 bint hasNoVeto=False,\
                  outrankingType = "bipolar",\
-                 WithSortingRelation=True,\
-                 CompleteOutranking = False,\
-                 StoreSorting=False,\
-                 CopyPerfTab=False,\
-                 Threading=False,\
+                 bint IntegerValued=False,\
+                 bint WithSortingRelation=True,\
+                 bint CompleteOutranking = False,\
+                 bint StoreSorting=False,\
+                 bint CopyPerfTab=False,\
+                 bint Threading=False,\
                  tempDir=None,\
                  nbrCores=None,\
                  nbrOfProcesses=None,\
-                 Comments=False,
-                 Debug=False):
+                 bint Comments=False,
+                 bint Debug=False):
         """
         Constructor for QuantilesSortingBigDigraph instances.
 
         """
-
+        cdef int totalWeight = 0
         from copy import copy, deepcopy
         if CopyPerfTab:
             copy2self = deepcopy
@@ -1356,8 +1370,12 @@ class QuantilesSortingDigraph(SortingDigraph):
 
         # instantiating the performance tableau part
         criteria = normPerfTab.criteria
+        if IntegerValued:
+            for g in criteria:
+                criteria[g]['weight'] = int(criteria[g]['weight'])
+                totalWeight += criteria[g]['weight']
         self.criteria = criteria
-        self.convertWeightFloatToDecimal()
+        #self.convertWeightFloatToDecimal()
         evaluation = normPerfTab.evaluation
         self.evaluation = evaluation
         self.convertEvaluationFloatToDecimal()
@@ -1469,20 +1487,28 @@ class QuantilesSortingDigraph(SortingDigraph):
         self.hasNoVeto = hasNoVeto
         minValuation = -100.0
         maxValuation = 100.0
+        if IntegerValued:
+            ODG = IntegerBipolarOutrankingDigraph
+        else:
+            ODG = BipolarOutrankingDigraph
         if CompleteOutranking:
-            g = BipolarOutrankingDigraph(normPerfTab,hasNoVeto=hasNoVeto,
+            g = ODG(normPerfTab,hasNoVeto=hasNoVeto,
                                          Threading=Threading,nbrCores=nbrCores)
-            g.recodeValuation(minValuation,maxValuation)
+            if not IntegerValued:
+                g.recodeValuation(minValuation,maxValuation)
             self.relationOrig = g.relation
             Min = g.valuationdomain['min']
             Max = g.valuationdomain['max']
             self.valuationdomain = g.valuationdomain
         else:
-            Min = Decimal(str(minValuation))
-            Max = Decimal(str(maxValuation))
-##                Min = Decimal('-100')
-##                Max = Decimal('100')
-        Med = (Max + Min)/Decimal('2.0')
+            if IntegerValued:
+                Min = -totalWeight
+                Max = totalWeight
+                Med = 0
+            else:
+                Min = Decimal(str(minValuation))
+                Max = Decimal(str(maxValuation))
+                Med = (Max + Min)/Decimal('2.0')
         self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
         if LowerClosed:
             initial=actionsOrig
