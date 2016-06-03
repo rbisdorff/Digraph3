@@ -601,6 +601,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         qs = QuantilesSortingDigraph(argPerfTab=perfTab,\
                                      limitingQuantiles=quantiles,\
                                      LowerClosed=LowerClosed,\
+                                     IntegerValued=True,\
                                      CompleteOutranking=False,\
                                      StoreSorting=True,\
                                      WithSortingRelation=False,\
