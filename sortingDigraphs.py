@@ -1732,12 +1732,12 @@ class QuantilesSortingDigraph(SortingDigraph):
                 for y in dict.keys(profiles):
                     for x in dict.keys(actions):
                         relation[x][y] = Med
-
             self.relation = relation
-            self.runTimes['computeRelation'] = time() - t0
-        
-            # compute weak ordering
-            t0 = time()
+        self.runTimes['computeRelation'] = time() - t0
+
+        # compute weak ordering
+        t0 = time()
+        if WithSortingRelation:
             if nbrOfProcesses == None:
                 nbrOfProcesses = nbrCores
 
@@ -1750,14 +1750,16 @@ class QuantilesSortingDigraph(SortingDigraph):
                 srx = sortingRelation[x]
                 for y in dict.keys(actionsOrig):
                     rx[y] = srx[y]
-            # reset original action set
+                    
+        self.runTimes['weakOrdering'] = time() - t0
+        # reset original action set
+        if WithSortingRelation:
             self.actions = actionsOrig
             self.order = len(self.actions)
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
-            self.runTimes['weakOrdering'] = time() - t0
 
-            self.runTimes['totalTime'] = time() - tt
+        self.runTimes['totalTime'] = time() - tt
 
 ##        else:
 ##            self.computeCategoryContents(StoreSorting=StoreSorting,\

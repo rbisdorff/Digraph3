@@ -4586,7 +4586,7 @@ class Digraph(object):
 
     def computeDeterminateness(self):
         """
-        Computes the Kendalll distance of self
+        Computes the Kendalll distance in % of self
         with the all median valued (indeterminate) digraph.
         """
         Max = self.valuationdomain['max']
@@ -4602,8 +4602,8 @@ class Digraph(object):
                     deter += abs(rxy - Med)
                     #print(deter)
         #deter = (deter /Decimal(str((order * (order-1))))) * (Max - Med)
-        deter = (deter /Decimal(str((order * (order-1)))))
-        return deter
+        deter = ( Decimal(str(deter)) / Decimal(str((order * (order-1)))) )
+        return deter/(Decimal(str(Max-Med)))*Decimal('100')
 
     def showStatistics(self):
         """

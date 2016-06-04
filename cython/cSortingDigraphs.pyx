@@ -1322,7 +1322,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         Constructor for QuantilesSortingBigDigraph instances.
 
         """
-
+        from time import time
         from copy import copy, deepcopy
         if CopyPerfTab:
             copy2self = deepcopy
@@ -1330,6 +1330,7 @@ class QuantilesSortingDigraph(SortingDigraph):
             copy2self = copy
         from decimal import Decimal
 
+        tt = time()
         # import the performance tableau
         if argPerfTab == None:
             print('Error: a valid performance tableau is required!')
@@ -1361,7 +1362,9 @@ class QuantilesSortingDigraph(SortingDigraph):
         evaluation = normPerfTab.evaluation
         self.evaluation = evaluation
         self.convertEvaluationFloatToDecimal()
-        
+        self.runTimes = {'dataInput': time()-tt}
+
+        t0 = time()
         #  compute the limiting quantiles
         if isinstance(limitingQuantiles,list):
             self.name = 'sorting_with_given_quantiles'
@@ -1464,7 +1467,9 @@ class QuantilesSortingDigraph(SortingDigraph):
             print('self.profileLimits',profileLimits)
             
         #self.convertEvaluationFloatToDecimal()
+        self.runTimes['computeProfiles'] = time() - t0
 
+        t0 = time()
         # construct outranking relation
         self.hasNoVeto = hasNoVeto
         minValuation = -100.0
@@ -1518,6 +1523,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                                                    Comments=Comments)
 
         if WithSortingRelation:
+            # compute complete AxA relation
             if LowerClosed:
                 for x in dict.keys(actionsOrig):
                     rx = relation[x]
@@ -1539,7 +1545,11 @@ class QuantilesSortingDigraph(SortingDigraph):
                         relation[x][y] = Med
 
             self.relation = relation
-        
+            
+        self.runTimes['computeRelation'] = time() - t0
+
+        t0 = time()
+        if WithSortingRelation:
             # compute weak ordering
             if nbrOfProcesses == None:
                 nbrOfProcesses = nbrCores
@@ -1553,17 +1563,38 @@ class QuantilesSortingDigraph(SortingDigraph):
                 srx = sortingRelation[x]
                 for y in dict.keys(actionsOrig):
                     rx[y] = srx[y]
+                    
+        self.runTimes['weakOrdering'] = time() - t0
+
+        if WithSortingRelation:
             # reset original action set
             self.actions = actionsOrig
             self.order = len(self.actions)
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
 
-##        else:
-##            self.computeCategoryContents(StoreSorting=StoreSorting,\
-##                                         Threading=Threading,\
-##                                         nbrOfCPUs=nbrOfProcesses,\
-##                                         Comments=Comments)
+        self.runTimes['totalTime'] = time() - tt
+
+### --------  class methods
+
+    def __repr__(self):
+        """
+        Default presentation method for QuantilesSortingDigraph instance.
+        """
+        print('*----- show short --------------*')
+        print('Instance name    : %s' % self.name)
+        print('# Actions        : %d' % self.order)
+        print('# Criteria       : %d' % len(self.criteria))
+        print('Size             : %d' % self.computeSize())
+        print('Determinateness  : %.3f' % (self.computeDeterminateness()) )
+        print('----  Constructor run times (in sec.) ----')
+        print('#Threads         : %d' % self.nbrThreads)
+        print('Total time       : %.5f' % self.runTimes['totalTime'])
+        print('Data input       : %.5f' % self.runTimes['dataInput'])
+        print('Compute profiles : %.5f' % self.runTimes['computeProfiles'])
+        print('Compute relation : %.5f' % self.runTimes['computeRelation'])
+        print('Weak ordering    : %.5f' % self.runTimes['weakOrdering'])
+        return '%s instance' % str(self.__class__)
 
     def _constructRelationWithThreading(self,criteria,\
                            evaluation,\
