@@ -403,13 +403,15 @@ class BigDigraph(object):
         return preordering
 
     @cython.locals(fillRate=cython.double)
-    def computeFillRate(self):
+    def computeFillRate(self,Debug=False):
         """
         Renders the sum of the squares (without diagonal) of the orders of the component's subgraphs
         over the square (without diagonal) of the big digraph order. 
         """
         fillRate = sum((comp['subGraph'].order*comp['subGraph'].order-1)\
                         for comp in self.components.values())
+        if Debug:
+            print('sumFillRate = ',fillRate)
         return fillRate/( self.order*(self.order-1) )
 
 ##    def computeCriterionCorrelation(self,criterion,Threading=False,\
@@ -797,19 +799,19 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                         print('splitComponent',splitComponent)
                     components[splitComponent[0]] = splitComponent[1]
 
-        fillRate = 0
+        #fillRate = 0
         maximalComponentSize = 0
         for compKey,comp in components.items():
             pg = comp['subGraph']
             npg = pg.order
             if npg > maximalComponentSize:
                 maximalComponentSize = npg
-            fillRate += npg*(npg-1)
+            #fillRate += npg*(npg-1)
             for x in pg.actions.keys():
                 self.actions[x]['component'] = compKey
-        self.fillRate = fillRate / (na*(na-1))
         self.maximalComponentSize = maximalComponentSize
         self.components = components
+        self.fillRate = self.computeFillRate()
 
         # setting the component relation
         
@@ -1237,7 +1239,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             actions = [x for x in sg.actions]
             print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],actions))
 
-    def showRelationTable(self,compKeys=None):
+    def showRelationTable(self,IntegerValues=True,compKeys=None):
         """
         Specialized for showing the quantiles decomposed relation table.
         Components are stored in an ordered dictionary.
@@ -1253,7 +1255,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                 actions = [ x for x in pg.actions.keys()]
                 print('%s' % actions)
                 if pg.order > 1:
-                    pg.showRelationTable()
+                    pg.showRelationTable(IntegerValues=IntegerValues)
                     
         else:
             for compKey in compKeys:
@@ -1263,7 +1265,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                 actions = [ x for x in pg.actions.keys()]
                 print('%s' % actions)
                 if pg.order > 1:
-                    pg.showRelationTable()                
+                    pg.showRelationTable(IntegerValues=IntegerValues)                
 
 
     def computeBoostedRanking(self,rankingRule='Copeland'):
