@@ -399,7 +399,7 @@ class BigDigraph(object):
         Renders the sum of the squares (without diagonal) of the orders of the component's subgraphs
         over the square (without diagonal) of the big digraph order. 
         """
-        cdef double fillRate
+        #cdef double fillRate
         fillRate = sum((comp['subGraph'].order*comp['subGraph'].order-1)\
                         for comp in self.components.values())
         if Debug:
