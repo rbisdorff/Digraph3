@@ -106,7 +106,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
     def __init__(self,argPerfTab=None,\
                  argProfile=None,\
-                 scaleSteps=5,\
+                 int scaleSteps=5,\
                  bint IntegerValued=False,\
                  minValuation=Decimal('-100.0'),\
                  maxValuation=Decimal('100.00'),\
@@ -122,7 +122,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         Constructor for SortingDigraph instances.
 
         """
-        cdef int totalWeight=0
+        cdef int i, k, totalWeight=0
         from copy import copy, deepcopy
         from decimal import Decimal
         from collections import OrderedDict
@@ -1337,7 +1337,8 @@ class QuantilesSortingDigraph(SortingDigraph):
         Constructor for QuantilesSortingBigDigraph instances.
 
         """
-        cdef int totalWeight = 0
+        cdef int k, i, ox, oy, totalWeight = 0
+        cdef float lowValue=0.0, highValue=100.0
         cdef double tt,t0
         
         from time import time
@@ -1404,10 +1405,10 @@ class QuantilesSortingDigraph(SortingDigraph):
             print('limitingQuantiles',self.limitingQuantiles)
 
         # supposing all criteria scales between 0.0 and 100.0
-        # with preference direction = max
+        # with preference direction = "max"
         self.LowerClosed = LowerClosed
-        lowValue = 0.0
-        highValue = 100.00
+        #lowValue = 0.0
+        #highValue = 100.00
         categories = OrderedDict()
         k = len(limitingQuantiles)-1
         if LowerClosed:
@@ -1537,7 +1538,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                                                         tempDir=tempDir,
                                                     nbrCores=nbrCores,
                                                     Comments=Comments,
-                                                    WithSortingRelation=WithSortingRelation,
+                                                    WithSortingRelation=False,
                                                     StoreSorting=StoreSorting)
 ##        else:
 ##            relation = self._constructRelationWithThreading(criteria,
@@ -1552,56 +1553,56 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                                                    nbrCores=nbrCores,
 ##                                                    Comments=Comments)
 
-        if WithSortingRelation:
-            # compute complete AxA relation
-            if LowerClosed:
-                for x in dict.keys(actionsOrig):
-                    rx = relation[x]
-                    for y in dict.keys(actionsOrig):
-                        rx[y] = Med
-                for x in dict.keys(profiles):
-                    relation[x] = {}
-                    rx = relation[x]
-                    for y in dict.keys(actions):
-                        rx[y] = Med
-            else:
-                for x in dict.keys(actionsOrig):
-                    relation[x] = {}
-                    rx = relation[x]
-                    for y in dict.keys(actionsOrig):
-                        rx[y] = Med
-                for y in dict.keys(profiles):
-                    for x in dict.keys(actions):
-                        relation[x][y] = Med
+        ## if WithSortingRelation:
+        ##     # compute complete AxA relation
+        ##     if LowerClosed:
+        ##         for ox in dict.keys(actionsOrig):
+        ##             rx = relation[ox]
+        ##             for oy in dict.keys(actionsOrig):
+        ##                 rx[oy] = Med
+        ##         for x in dict.keys(profiles):
+        ##             relation[x] = {}
+        ##             rx = relation[x]
+        ##             for y in dict.keys(actions):
+        ##                 rx[y] = Med
+        ##     else:
+        ##         for ox in dict.keys(actionsOrig):
+        ##             relation[ox] = {}
+        ##             rx = relation[ox]
+        ##             for oy in dict.keys(actionsOrig):
+        ##                 rx[oy] = Med
+        ##         for y in dict.keys(profiles):
+        ##             for x in dict.keys(actions):
+        ##                 relation[x][y] = Med
 
-            self.relation = relation
+        ##     self.relation = relation
             
         self.runTimes['computeRelation'] = time() - t0
 
-        t0 = time()
-        if WithSortingRelation:        
-            # compute weak ordering
-            if nbrOfProcesses == None:
-                nbrOfProcesses = nbrCores
+        ## t0 = time()
+        ## if WithSortingRelation:        
+        ##     # compute weak ordering
+        ##     if nbrOfProcesses == None:
+        ##         nbrOfProcesses = nbrCores
 
-            sortingRelation = self.computeSortingRelation(StoreSorting=StoreSorting,\
-                                                          Debug=Debug,Comments=Comments,\
-                                                          Threading=Threading,\
-                                                          nbrOfCPUs=nbrOfProcesses)
-            for x in dict.keys(actionsOrig):
-                rx = self.relation[x]
-                srx = sortingRelation[x]
-                for y in dict.keys(actionsOrig):
-                    rx[y] = srx[y]
+        ##     sortingRelation = self.computeSortingRelation(StoreSorting=StoreSorting,\
+        ##                                                   Debug=Debug,Comments=Comments,\
+        ##                                                   Threading=Threading,\
+        ##                                                   nbrOfCPUs=nbrOfProcesses)
+        ##     for ox in dict.keys(actionsOrig):
+        ##         rx = self.relation[ox]
+        ##         srx = sortingRelation[ox]
+        ##         for oy in dict.keys(actionsOrig):
+        ##             rx[oy] = srx[oy]
                     
-        self.runTimes['weakOrdering'] = time() - t0
+        ## self.runTimes['weakOrdering'] = time() - t0
 
-        if WithSortingRelation:
-            # reset original action set
-            self.actions = actionsOrig
-            self.order = len(self.actions)
-            self.gamma = self.gammaSets()
-            self.notGamma = self.notGammaSets()
+        ## if WithSortingRelation:
+        ##     # reset original action set
+        ##     self.actions = actionsOrig
+        ##     self.order = len(self.actions)
+        ##     self.gamma = self.gammaSets()
+        ##     self.notGamma = self.notGammaSets()
 
         self.runTimes['totalTime'] = time() - tt
 
@@ -1623,7 +1624,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         print('Data input       : %.5f' % self.runTimes['dataInput'])
         print('Compute profiles : %.5f' % self.runTimes['computeProfiles'])
         print('Compute relation : %.5f' % self.runTimes['computeRelation'])
-        print('Weak ordering    : %.5f' % self.runTimes['weakOrdering'])
+        #print('Weak ordering    : %.5f' % self.runTimes['weakOrdering'])
         return '%s instance' % str(self.__class__)
 
     def _constructRelationWithThreading(self,criteria,\
@@ -1638,12 +1639,14 @@ class QuantilesSortingDigraph(SortingDigraph):
                            tempDir=None,\
                            WithConcordanceRelation=True,\
                            WithVetoCounts=True,\
-                            WithSortingRelation=True,\
+                            WithSortingRelation=False,\
                             StoreSorting=True,\
                            nbrCores=None,Comments=False):
         """
         Specialization of the corresponding BipolarOutrankingDigraph method
         """
+        cdef int x, n, nq, ni, nt, nbrOfJobs, nit, i, j, Min, Max, Med
+        cdef bint LowerClosed
         from multiprocessing import cpu_count
         
         LowerClosed = self.criteriaCategoryLimits['LowerClosed']        
@@ -1673,8 +1676,8 @@ class QuantilesSortingDigraph(SortingDigraph):
                                     WithVetoCounts=WithVetoCounts,\
                                     Debug=Debug,\
                                     hasSymmetricThresholds=hasSymmetricThresholds)
-            if WithSortingRelation:
-                self.relation = relation
+            ## if WithSortingRelation:
+            ##     self.relation = relation
 
             # compute quantiles sorting result
             if LowerClosed:
@@ -1723,7 +1726,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                         categoryContent[c].append(x)
             self.categoryContent = categoryContent
 
-            return relation
+            ## return relation
             
         ##
         else:  # parallel computation
@@ -1734,11 +1737,11 @@ class QuantilesSortingDigraph(SortingDigraph):
                                         active_children, cpu_count
             #Debug=True
             class myThread(Process):
-                def __init__(self, threadID,\
+                def __init__(self, int threadID,\
                              InitialSplit, tempDirName,\
                              splitActions,\
-                             hasNoVeto, hasBipolarVeto,\
-                             hasSymmetricThresholds, Debug):
+                             bint hasNoVeto, bint hasBipolarVeto,\
+                             bint hasSymmetricThresholds, bint Debug):
                     Process.__init__(self)
                     self.threadID = threadID
                     self.InitialSplit = InitialSplit
@@ -1749,6 +1752,8 @@ class QuantilesSortingDigraph(SortingDigraph):
                     hasSymmetricThresholds = hasSymmetricThresholds,
                     self.Debug = Debug
                 def run(self):
+                    cdef int x, nq, Min, Med, Max, lowLimit, notHighLimit
+                    cdef bint LowerClosed
                     from io import BytesIO
                     from pickle import Pickler, dumps, loads
                     from os import chdir
@@ -1971,16 +1976,16 @@ class QuantilesSortingDigraph(SortingDigraph):
                                 for y in self.profiles:
                                     rx[y] = sprx[y]
                         else:
-                            #for x,y in product(initial,splitActions):
-                            for x in self.profiles:
+                            #for px,x in product(initial,splitActions):
+                            for px in self.profiles:
                                 try:
-                                    rx = relation[x]
+                                    rx = relation[px]
                                 except KeyError:
-                                    relation[x] = {}
-                                    rx = relation[x]
-                                sprx = splitRelation[x]
-                                for y in splitActions:
-                                    rx[y] = sprx[y]
+                                    relation[px] = {}
+                                    rx = relation[px]
+                                sprx = splitRelation[px]
+                                for x in splitActions:
+                                    rx[x] = sprx[x]
                 self.categoryContent = categoryContent
                 if StoreSorting:
                     self.sorting = sorting
