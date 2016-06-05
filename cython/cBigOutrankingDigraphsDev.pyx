@@ -935,7 +935,6 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             print(componentsIntervals)
         return componentsIntervals
         
-        
     ## @cython.locals(action=cython.int,
     ##                Show=cython.bint,
     ##                Debug=cython.bint,
@@ -944,7 +943,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                                 bint Show=False,
                                 bint Debug=False,
                                 bint Comments=False,\
-                             bint Threading=False,nbrOfCPUs=None):
+                                bint Threading=False,nbrOfCPUs=None):
         """
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
