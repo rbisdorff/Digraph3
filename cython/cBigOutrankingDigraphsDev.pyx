@@ -544,7 +544,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
 
         cdef int i, j, totalWeight = 0
         cdef int nbrOfLocals,nbrOfThreadsUsed,threadLoad
-        cdef double ttot, t0, tw, tdump, fillRate
+        cdef double ttot, t0, tw, tdump
         cdef int maximalComponentSize
         
         from digraphs import Digraph
@@ -553,6 +553,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         from time import time
         from os import cpu_count
         from multiprocessing import Pool
+        #from cython.parallel import prange
         from copy import copy, deepcopy
         from cOutrankingDigraphsDev import IntegerBipolarOutrankingDigraph
 
@@ -663,7 +664,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             from multiprocessing import Process, active_children, cpu_count
             #Debug=True
             class myThread(Process):
-                def __init__(self, threadID,\
+                def __init__(self, int threadID,\
                              tempDirName,\
                              lTest,\
                              Debug):
@@ -673,6 +674,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                     self.lTest = lTest
                     self.Debug = Debug
                 def run(self):
+                    cdef int i,nc,nd
                     from pickle import dumps, loads
                     from os import chdir
                     from copy import deepcopy
@@ -701,6 +703,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                         compDict['lowQtileLimit'] = comp[0][1]
                         compDict['highQtileLimit'] = comp[0][0]
                         compDict['subGraph'] = IntegerBipolarOutrankingDigraph(pt,
+                                                                        #actionsSubset=comp[1],
                                                                         #Normalized=True,
                                                                         WithConcordanceRelation=False,
                                                                         WithVetoCounts=False,
@@ -794,19 +797,21 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                         print('splitComponent',splitComponent)
                     components[splitComponent[0]] = splitComponent[1]
 
-        #fillRate = 0
+        # storing components, fillRate and maximalComponentSize
+
+        self.components = components
+        fillRate = 0
         maximalComponentSize = 0
         for compKey,comp in components.items():
             pg = comp['subGraph']
             npg = pg.order
             if npg > maximalComponentSize:
                 maximalComponentSize = npg
-            #fillRate += npg*(npg-1)
+            fillRate += npg*(npg-1)
             for x in pg.actions.keys():
                 self.actions[x]['component'] = compKey
+        self.fillRate = fillRate/(self.order * (self.order-1))
         self.maximalComponentSize = maximalComponentSize
-        self.components = components
-        self.fillRate = self.computeFillRate()
 
         # setting the component relation
         
