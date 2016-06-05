@@ -49,3 +49,17 @@ installdev:
 		sudo python3 csetupSODev.py install
 		sudo python3 csetupBGDev.py install
 
+cBigOutrankingDigraphsTests:
+		make install
+		(cd test; nosetests3 -v noseTestsBigOutrankingDigraph.py)
+verboseCBigOutrankingDigraphsTests:
+		make install
+		(cd test; nosetests3 -vs noseTestsBigOutrankingDigraph.py)
+cBigOutrankingDigraphsDevTests:
+		make installdev
+		(cd test; nosetests3 -v noseTestsBigOutrankingDigraphDev.py)
+verboseCBigOutrankingDigraphsDevTests:
+		make installdev
+		(cd test; nosetests3 -vs noseTestsBigOutrankingDigraphDev.py)
+
+

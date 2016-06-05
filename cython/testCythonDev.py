@@ -35,7 +35,7 @@ commonPar=('beta','variable',None)
 qtiles = 50
 minimalSize = 10
 seed = 10
-fileName = 'CythonA%dObj21q%ds%dc%dgaia164.csv' % (nbrActions,qtiles,minimalSize,nbrOfCPUs)
+fileName = 'CythonA%dObj21q%ds%dc%dhome.csv' % (nbrActions,qtiles,minimalSize,nbrOfCPUs)
 # write header row
 if path.isfile(fileName):
 	pass
@@ -62,7 +62,7 @@ for s in range(sampleSize):
     bg1 = Bg.BigOutrankingDigraph(tp1,quantiles=qtiles,
                                quantilesOrderingStrategy='average',
                                minimalComponentSize=minimalSize,
-                               LowerClosed=True,
+                               LowerClosed=False,
                                Threading=MP,
                                nbrOfCPUs=nbrOfCPUs,
                                CopyPerfTab=False,
@@ -84,7 +84,7 @@ for s in range(sampleSize):
     bg2 = cBg.BigOutrankingDigraph(tp2,quantiles=qtiles,
                                quantilesOrderingStrategy='average',
                                minimalComponentSize=minimalSize,
-                               LowerClosed=True,
+                               LowerClosed=False,
                                Threading=MP,
                                CopyPerfTab=False,
                                nbrOfCPUs=nbrOfCPUs,

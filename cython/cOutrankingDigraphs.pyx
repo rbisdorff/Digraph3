@@ -1545,13 +1545,13 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             hasIntegerValuation = IntegerValues
         
         for x in actionsList:
-            print("'"+x[0]+"',  ", end=' ')
+            print("'"+str(x[0])+"',  ", end=' ')
         print('\n-----|------------------------------------------------------------')
         for x in actionsList:
             if hasLatexFormat:
-                print("$"+x[0]+"$ & ", end=' ')
+                print("$"+str(x[0])+"$ & ", end=' ')
             else:
-                print("'"+x[0]+"' |  ", end=' ')
+                print("'"+str(x[0])+"' |  ", end=' ')
             for y in actionsList:
                 if x == y and not ReflexiveTerms:
                     if hasLPDDenotation:
@@ -3733,7 +3733,6 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  nbrCores=None,\
                  Debug=False,Comments=False):
                  
-        cdef int x
         cdef double tt, tcp, tg
         
         from copy import deepcopy
@@ -3940,7 +3939,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         Specialization of the corresponding BipolarOutrankingDigraph method
         """
         
-        cdef int x, y, i, j, ni, nt, n, nit, nbrOfJobs
+        cdef int i, j, ni, nt, n, nit, nbrOfJobs
         
         from multiprocessing import cpu_count
         

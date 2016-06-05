@@ -199,6 +199,126 @@ class BigDigraph(object):
             print(pictStr)
         print('Component ranking rule: %s' % self.componentRankingRule)
 
+    def showHTMLRelationMap(self,actionsSubset=None,\
+                            Colored=True,\
+                            tableTitle='Relation Map',\
+                            relationName='r(x S y)',\
+                            symbols=['+','&middot;','&nbsp;','&#150;','&#151;']
+                            ):
+        """
+        Launches a browser window with the colored relation map of self.
+        """
+        import webbrowser
+        fileName = '/tmp/relationMap.html'
+        fo = open(fileName,'w')
+        fo.write(self.htmlRelationMap(actionsSubset=None,
+                                        Colored=Colored,
+                                        tableTitle=tableTitle,
+                                        symbols=symbols,
+                                        ContentCentered=True,
+                                        relationName=relationName))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+        
+        
+    def htmlRelationMap(self,actionsSubset=None,
+                          tableTitle='Relation Map',
+                          relationName='r(x R y)',
+                          symbols=['+','&middot;','&nbsp;','-','_'],
+                          Colored=True,
+                          ContentCentered=True):
+        """
+        renders the relation map in actions X actions html table format.
+        """
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        Max = self.valuationdomain['max']
+        if actionsSubset == None:
+            actionsList = self.boostedRanking
+        else:
+            actionsList = actionsSubset
+
+        s  = '<!DOCTYPE html><html><head>\n'
+        s += '<title>%s</title>\n' % 'Digraph3 relation map'
+        s += '<style type="text/css">\n'
+        if ContentCentered:
+            s += 'td {text-align: center;}\n'
+        s += 'td.na {color: rgb(192,192,192);}\n'
+        s += '</style>\n'
+        s += '</head>\n<body>\n'
+        s += '<h1>%s</h1>' % tableTitle
+        s += '<table border="0">\n'
+        if Colored:
+            s += '<tr bgcolor="#9acd32"><th>%s</th>\n' % relationName
+        else:
+            s += '<tr><th>%s</th>' % relationName
+
+        for x in actionsList:
+            if Colored:
+                s += '<th bgcolor="#FFF79B">%s</th>\n' % (x)
+            else:
+                s += '<th>%s</th\n>' % (x)
+        s += '</tr>\n'
+        for x in actionsList:
+            s += '<tr>'
+            if Colored:
+                s += '<th bgcolor="#FFF79B">%s</th>\n' % (x)
+            else:
+                s += '<th>%s</th>\n' % (x)
+            for y in actionsList:
+                if Colored:
+                    if self.relation(x,y) == Max:
+                        s += '<td bgcolor="#66ff66"><b>%s</b></td>\n' % symbols[0]
+                    elif self.relation(x,y) > Med:
+                        s += '<td bgcolor="#ddffdd">%s</td>' % symbols[1]
+                    elif self.relation(x,y) == Min:
+                        s += '<td bgcolor="#ff6666"><b>%s</b></td\n>' % symbols[4]
+                    elif self.relation(x,y) < Med:
+                        s += '<td bgcolor="#ffdddd">%s</td>\n' % symbols[3]
+                    else:
+                        s += '<td bgcolor="#ffffff">%s</td>\n' % symbols[2]
+                else:
+                    if self.relation(x,y) == Max:
+                        s += '<td><b>%s</b></td>\n'  % symbols[0]
+                    elif self.relation(x,y) > Med:
+                        s += '<td>%s</td>\n' % symbols[1]
+                    elif self.relation(x,y) == Min:
+                        s += '<td><b>%s</b></td>\n' % symbols[4]
+                    elif self.relation(x,y) < Med:
+                        s += '<td>\n' % symbols[3]
+                    else:
+                        s += '<td>%s</td>\n' % symbols[2]
+            s += '</tr>'
+        s += '</table>\n'
+        # legend
+        s += '<span style="font-size: 100%">\n'
+        s += '<table border="1">\n'
+        s += '<tr><th align="left" colspan="5">Ranking rules:</th><td align="left" colspan="5">%s, %s quantile ordering</td></tr>\n'\
+                                % (self.componentRankingRule,self.sortingParameters['strategy'])
+        s += '<tr><th align="left" colspan="10"><i>Symbol legend</i></th></tr>\n'
+        s += '<tr>'
+        if Colored:
+            s += '<td bgcolor="#66ff66" align="center">%s</td><td>certainly valid</td>\n' % symbols[0]
+            s += '<td bgcolor="#ddffdd" align="center">%s</td><td>valid</td>\n' % symbols[1]
+            s += '<td>%s</td><td>indeterminate</td>\n' % symbols[2]
+            s += '<td bgcolor="#ffdddd" align="center">%s</td><td>invalid</td>\n' % symbols[3]
+            s += '<td bgcolor="#ff6666" align="center">%s</td><td>certainly invalid</td>\n' % symbols[4]
+        else:
+            s += '<td align="center">%s</td><td>certainly valid</td>\n' % symbols[0]
+            s += '<td align="center">%s</td><td>valid</td>\n' % symbols[1]
+            s += '<td align="center">%s</td><td>indeterminate</td>\n' % symbols[2]
+            s += '<td align="center">%s</td><td>invalid</td>\n' % symbols[3]
+            s += '<td align="center">%s</td><td>certainly invalid</td>\n' % symbols[4]
+        s += '</tr>'
+        s += '</table>\n'
+        s += '</span>\n'
+        # html footer
+        s += '</body>\n'
+        s += '</html>\n'
+        return s
+
+        
     @cython.locals(x=cython.int,y=cython.int)
     def computeOrdinalCorrelation(self, other, Debug=False):
         """
@@ -510,7 +630,8 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
 
     """
     
-    @cython.locals(quantiles=cython.int,
+    @cython.locals(x=cython.int,
+                   quantiles=cython.int,
                    na=cython.int,
                    dimension=cython.int,
                    nc=cython.int,
