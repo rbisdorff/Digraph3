@@ -19,7 +19,7 @@
 #
 ######################
 
-import cython
+#import cython
 
 from cOutrankingDigraphsDev import *
 from cSortingDigraphsDev import *
@@ -59,8 +59,8 @@ class BigDigraph(object):
             pass
         return '%s instance' % str(self.__class__)
     
-    @cython.locals(x=cython.int,y=cython.int)
-    def relation(self,x,y,Debug=False):
+    #@cython.locals(x=cython.int,y=cython.int)
+    def relation(self,int x,int y,Debug=False):
         """
         Dynamic construction of the global outranking characteristic function *r(x S y)*.
         """
@@ -80,7 +80,7 @@ class BigDigraph(object):
         else:
             return Max
     
-    @cython.locals(x=cython.int)
+    #@cython.locals(x=cython.int)
     def showRelationMap(self,fromIndex=None,toIndex=None,symbols=None):
         """
         Prints on the console, in text map format, the location of
@@ -172,6 +172,8 @@ class BigDigraph(object):
             Component ranking rule: Copeland
             >>> 
         """
+        cdef int x
+        
         if symbols == None:
             symbols = {'max':'┬','positive': '+', 'median': ' ',
                        'negative': '-', 'min': '┴'}
@@ -199,7 +201,7 @@ class BigDigraph(object):
             print(pictStr)
         print('Component ranking rule: %s' % self.componentRankingRule)
 
-    @cython.locals(x=cython.int,y=cython.int)
+    #@cython.locals(x=cython.int,y=cython.int)
     def computeOrdinalCorrelation(self, other, Debug=False):
         """
         Renders the ordinal correlation K of a BigDigraph instance
@@ -227,7 +229,7 @@ class BigDigraph(object):
              is by convention 0.0 at determination level 0.0 .
 
         """
-
+        cdef int x, y
         if self.valuationdomain['min'] != Decimal('-1.0'):
                 print('Error: the BigDigraph instance must be normalized !!')
                 print(self.valuationdomain)
@@ -296,7 +298,7 @@ class BigDigraph(object):
         Prints on the console the decomposition structure of the sparse outranking digraph instance
         in *decreasing* (default) or *increasing* preference direction.
         """
-        
+        cdef int x
         print('*--- Relation decomposition in %s order---*' % (direction) )
         compKeys = [compKey for compKey in self.components]
         if direction != 'increasing':
@@ -310,20 +312,6 @@ class BigDigraph(object):
             actions.sort()
             print('%s: %s' % (compKey,actions))
 
-
-##    def __repr__(self,WithComponents=False):
-##        """
-##        Default presentation method for BigDigraph instances.
-##        """
-##        print('*----- show short --------------*')
-##        print('Instance name     :', self.name)
-##        print('Instance class    :', self.__class__)
-##        print('# Nodes           :', self.order)
-##        print('# Components      :', self.nbrComponents)
-##        if WithComponents:
-##            g.showDecomposition()
-##        return 'Default presentation of BigDigraph instances'
-
     def computeDecompositionSummaryStatistics(self):
         """
         Returns the summary of the distribution of the length of
@@ -336,6 +324,7 @@ class BigDigraph(object):
                        'fillrate': fillrate,
                                   (see computeFillRate()}
         """
+        cdef int nc
         try:
             import statistics
         except:
@@ -356,7 +345,7 @@ class BigDigraph(object):
                    'fillrate': self.fillRate}
         return summary
 
-    def recodeValuation(self,newMin=-1,newMax=1,Debug=False):
+    def recodeValuation(self,newMin=-1, newMax=1,Debug=False):
         """
         Specialization for recoding the valuation of all the partial digraphs and the component relation.
         By default the valuation domain is normalized to [-1;1]
@@ -384,30 +373,33 @@ class BigDigraph(object):
         Med = (Min+Max)/Decimal('2')
         self.valuationdomain = { 'min':Min, 'max':Max, 'med':Med }
 
-    @cython.locals(x=cython.int)
+    #@cython.locals(x=cython.int)
     def ranking2Preorder(self,ranking):
         """
         Renders a preordering (a list of list) of a ranking (best to worst) of decision actions in increasing preference direction.
         """
+        cdef int x
         #ordering = list(ranking)
         #ordering.reverse()
         preordering = [[x] for x in reversed(ranking)]
         return preordering
 
-    @cython.locals(x=cython.int)
+    #@cython.locals(x=cython.int)
     def ordering2Preorder(self,ordering):
         """
         Renders a preordering (a list of list) of a linar order (worst to best) of decision actions in increasing preference direction.
         """
+        cdef int x
         preordering = [[x] for x in ordering]
         return preordering
 
-    @cython.locals(fillRate=cython.double)
+    #@cython.locals(fillRate=cython.double)
     def computeFillRate(self,Debug=False):
         """
         Renders the sum of the squares (without diagonal) of the orders of the component's subgraphs
         over the square (without diagonal) of the big digraph order. 
         """
+        cdef double fillRate
         fillRate = sum((comp['subGraph'].order*comp['subGraph'].order-1)\
                         for comp in self.components.values())
         if Debug:
@@ -512,46 +504,49 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
 
     """
     
-    @cython.locals(quantiles=cython.int,
-                   na=cython.int,
-                   dimension=cython.int,
-                   nc=cython.int,
-                   nd=cython.int,
-                   LowerClosed=cython.bint,
-                   minimalComponentSize=cython.int,
-                   Threading=cython.bint,
-                   CopyPerfTan=cython.bint,
-                   Comments=cython.bint,
-                   Debug=cython.bint,
-                   ttot=cython.double,
-                   t0=cython.double,
-                   tw=cython.double,
-                   tdump=cython.double,
-                   fillRate=cython.double,
-                   maximalComponentSize=cython.int,
-                   #nbrOfCPUs=cython.int,
-                   #nbrOfThreads=cython.int,
-                   #quantilesOrderingStrategy=cython.p_char,
-                   #componentRankingRule=cython.p_char
-                   )
+    ## @cython.locals(quantiles=cython.int,
+    ##                na=cython.int,
+    ##                dimension=cython.int,
+    ##                nc=cython.int,
+    ##                nd=cython.int,
+    ##                LowerClosed=cython.bint,
+    ##                minimalComponentSize=cython.int,
+    ##                Threading=cython.bint,
+    ##                CopyPerfTan=cython.bint,
+    ##                Comments=cython.bint,
+    ##                Debug=cython.bint,
+    ##                ttot=cython.double,
+    ##                t0=cython.double,
+    ##                tw=cython.double,
+    ##                tdump=cython.double,
+    ##                fillRate=cython.double,
+    ##                maximalComponentSize=cython.int,
+    ##                #nbrOfCPUs=cython.int,
+    ##                #nbrOfThreads=cython.int,
+    ##                #quantilesOrderingStrategy=cython.p_char,
+    ##                #componentRankingRule=cython.p_char
+    ##                )
     def __init__(self,argPerfTab,\
-                 quantiles=0,\
+                 int quantiles=0,\
                  quantilesOrderingStrategy="average",\
-                 LowerClosed=True,\
+                 bint LowerClosed=True,\
                  componentRankingRule="Copeland",\
-                 minimalComponentSize=1,\
-                 Threading=False,\
+                 int minimalComponentSize=1,\
+                 bint Threading=False,\
                  tempDir=None,\
                  #componentThreadingThreshold=50,\
                  nbrOfCPUs=None,\
                  nbrOfThreads=None,\
                  save2File=None,\
-                 CopyPerfTab=True,\
-                 Comments=False,\
-                 Debug=False):
+                 bint CopyPerfTab=True,\
+                 bint Comments=False,\
+                 bint Debug=False):
 
         cdef int i, j, totalWeight = 0
         cdef int nbrOfLocals,nbrOfThreadsUsed,threadLoad
+        cdef double ttot, t0, tw, tdump, fillRate
+        cdef int maximalComponentSize
+        
         from digraphs import Digraph
         from cSortingDigraphsDev import QuantilesSortingDigraph
         from collections import OrderedDict
@@ -842,19 +837,19 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
     # ----- class methods ------------
 
 
-    @cython.locals(x=cython.int,
-                   i=cython.int,
-                   nc=cython.int,
-                   Descending=cython.bint,
-                   Threading=cython.bint,
-                   Debug=cython.bint,
-                   Comments=cython.bint)
+    ## @cython.locals(x=cython.int,
+    ##                i=cython.int,
+    ##                nc=cython.int,
+    ##                Descending=cython.bint,
+    ##                Threading=cython.bint,
+    ##                Debug=cython.bint,
+    ##                Comments=cython.bint)
     def _computeQuantileOrdering(self,strategy=None,
-                                Descending=True,
-                                 Threading=False,
+                                bint Descending=True,
+                                 bint Threading=False,
                                  nbrOfCPUs=None,
-                                Debug=False,
-                                 Comments=False):
+                                bint Debug=False,
+                                 bint Comments=False):
         """
         Renders the quantile interval of the decision actions.
         
@@ -865,6 +860,8 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
               in the uppest, the lowest or the average potential quantile.
         
         """
+        cdef int x,i,nc,compSize
+        cdef double ac
         if strategy == None:
             strategy = self.sortingParameters['strategy']
         actionsCategories = {}
@@ -934,12 +931,15 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         return componentsIntervals
         
         
-    @cython.locals(action=cython.int,
-                   Show=cython.bint,
-                   Debug=cython.bint,
-                   Comments=cython.bint)
-    def computeActionCategories(self,action,Show=False,Debug=False,Comments=False,\
-                             Threading=False,nbrOfCPUs=None):
+    ## @cython.locals(action=cython.int,
+    ##                Show=cython.bint,
+    ##                Debug=cython.bint,
+    ##                Comments=cython.bint)
+    def computeActionCategories(self,int action,
+                                bint Show=False,
+                                bint Debug=False,
+                                bint Comments=False,\
+                             bint Threading=False,nbrOfCPUs=None):
         """
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
@@ -1000,9 +1000,11 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                     keys[-1],\
                     credibility            
 
-    def computeCriterion2RankingCorrelation(self,criterion,Threading=False,\
-                                    nbrOfCPUs=None,Debug=False,
-                                    Comments=False):
+    def computeCriterion2RankingCorrelation(self,criterion,
+                                            bint Threading=False,\
+                                    nbrOfCPUs=None,
+                                    bint Debug=False,
+                                    bint Comments=False):
         """
         Renders the ordinal correlation coefficient between
         the global outranking and the marginal criterion relation.
@@ -1020,9 +1022,11 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             print(corr)
         return corr
 
-    def computeMarginalVersusGlobalOutrankingCorrelations(self,Sorted=True,ValuedCorrelation=False,
-                                                          Threading=False,nbrCores=None,\
-                                                          Comments=False):
+    def computeMarginalVersusGlobalOutrankingCorrelations(self,
+                                bint Sorted=True,
+                                bint ValuedCorrelation=False,
+                                bint Threading=False,nbrCores=None,\
+                                bint Comments=False):
         """
         Method for computing correlations between each individual criterion relation with the corresponding
         global outranking relation.
@@ -1034,6 +1038,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         If nbrCores is not set, the os.cpu_count() function is used to determine the number of
         available cores.
         """
+        cdef int i
         if Threading:
             from multiprocessing import Pool
             from os import cpu_count
@@ -1061,9 +1066,11 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             criteriaCorrelation.sort(reverse=True)
         return criteriaCorrelation   
 
-    def showMarginalVersusGlobalOutrankingCorrelation(self,Sorted=True,\
-                                                      Threading=False,\
-                                                      nbrOfCPUs=None,Comments=True):
+    def showMarginalVersusGlobalOutrankingCorrelation(self,
+                                                      bint Sorted=True,\
+                                                      bint Threading=False,\
+                                                      nbrOfCPUs=None,\
+                                                      bint Comments=True):
         """
         Show method for computeCriterionCorrelation results.
         """
@@ -1094,7 +1101,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
             for x in actionsSubset:
                 self.computeActionCategories(x,Show=True)
 
-    def showShort(self,fileName=None,WithFileSize=True):
+    def showShort(self,fileName=None,bint WithFileSize=True):
         """
         Default (__repr__) presentation method for big outranking digraphs instances:
         
@@ -1244,6 +1251,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         Specialized for showing the quantiles decomposed relation table.
         Components are stored in an ordered dictionary.
         """
+        cdef int nc
         components = self.components
         if compKeys == None:
             nc = self.nbrComponents
@@ -1316,29 +1324,28 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                 ordering += opg.kohlerOrder
         return ordering
 
-#----------test classes and methods ----------------
-if __name__ == "__main__":
+## #----------test classes and methods ----------------
+## if __name__ == "__main__":
     
-    from time import time
-    from weakOrders import QuantilesRankingDigraph
-    from randomPerfTabs import Random3ObjectivesPerformanceTableau
-    MP  = False
-    nbrActions=1000
-##    t0 = time()
-    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=100,BigData=True)
+##     from time import time
+##     from weakOrders import QuantilesRankingDigraph
+##     from randomPerfTabs import Random3ObjectivesPerformanceTableau
+##     MP  = False
+##     nbrActions=1000
+## ##    t0 = time()
+##     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=100,BigData=True)
 
-##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,seed=100)
+## ##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,seed=100)
 
-    bg1 = BigOutrankingDigraph(tp,CopyPerfTab=True,quantiles=50,
-                                 quantilesOrderingStrategy='average',
-                                 componentRankingRule='NetFlows',
-                                 LowerClosed=True,
-                                 minimalComponentSize=10,
-                                 Threading=MP,nbrOfCPUs=8,
-                                 #tempDir='.',
-                                 nbrOfThreads=8,
-                                 Comments=False,Debug=False,
-                                 save2File='testbgMP')
-    print(bg1)
-    
+##     bg1 = BigOutrankingDigraph(tp,CopyPerfTab=True,quantiles=50,
+##                                  quantilesOrderingStrategy='average',
+##                                  componentRankingRule='NetFlows',
+##                                  LowerClosed=True,
+##                                  minimalComponentSize=10,
+##                                  Threading=MP,nbrOfCPUs=8,
+##                                  #tempDir='.',
+##                                  nbrOfThreads=8,
+##                                  Comments=False,Debug=False,
+##                                  save2File='testbgMP')
+##     print(bg1)    
 
