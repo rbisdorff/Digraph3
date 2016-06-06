@@ -666,11 +666,12 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     self.lTest = lTest
                     self.Debug = Debug
                 def run(self):
-                    cdef int i,nc,nd
+                    cdef int i,nc,nd,totalWeight=0
                     from pickle import dumps, loads
                     from os import chdir
                     from copy import deepcopy
                     from perfTabs import PartialPerformanceTableau
+                    from digraphs import EmptyDigraph
                     from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph
                     chdir(self.workingDirectory)
                     if self.Debug:
@@ -694,15 +695,27 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                         pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
                         compDict['lowQtileLimit'] = comp[0][1]
                         compDict['highQtileLimit'] = comp[0][0]
-                        compDict['subGraph'] = IntegerBipolarOutrankingDigraph(pt,
-                                                                        #actionsSubset=comp[1],
-                                                                        #Normalized=True,
-                                                                        WithConcordanceRelation=False,
-                                                                        WithVetoCounts=False,
-                                                                        CopyPerfTab=False)     
-                        compDict['subGraph'].__dict__.pop('criteria')
-                        compDict['subGraph'].__dict__.pop('evaluation')
-                        #compDict['subGraph'].__class__ = Digraph
+                        pg = EmptyDigraph()
+                        pg.__class__ = IntegerBipolarOutrankingDigraph
+                        pg.actions = pt.actions
+                        for g in pt.criteria:
+                            totalWeight += int(pt.criteria[g]['weight'])
+                        pg.valuationdomain = {'min': -totalWeight,
+                                              'med': 0,
+                                              'max': totalWeight}
+                        pg.relation = pg._constructRelationSimple(pt.criteria,pt.evaluation)
+                        pg.gamma = pg.gammaSets()
+                        pg.notGamma = pg.notGammaSets()
+                        compDict['subGraph'] = pg
+                        ## compDict['subGraph'] = IntegerBipolarOutrankingDigraph(pt,
+                        ##                                                 #actionsSubset=comp[1],
+                        ##                                                 #Normalized=True,
+                        ##                                                 WithConcordanceRelation=False,
+                        ##                                                 WithVetoCounts=False,
+                        ##                                                 CopyPerfTab=False)     
+                        ## compDict['subGraph'].__dict__.pop('criteria')
+                        ## compDict['subGraph'].__dict__.pop('evaluation')
+                        
                         splitComponent = (compKey,compDict)
                         if self.Debug:
                             print(compDict)
