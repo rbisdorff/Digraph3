@@ -1239,13 +1239,19 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         Prints out the actions disctionary.
         """
         actionsList = []
-        for comp in self.components.values:
+        for comp in self.components.values():
             #comp = self.components[ck]
-            actionsList += [(x,comp['subGraph'].actions[x]['name'],comp['subGraph'].actions[x]['comment'],) for x in comp['subGraph'].actions]
+            try:
+                actionsList += [(x,comp['subGraph'].actions[x]['name'],comp['subGraph'].actions[x]['comment'],) for x in comp['subGraph'].actions]
+            except:
+                actionsList += [(x,comp['subGraph'].actions[x]['name']) for x in comp['subGraph'].actions]
         actionsList.sort()
         print('List of decision actions')
         for ax in actionsList:
-            print('%s: %s (%s)' % ax)
+            try:
+                print('%s: %s (%s)' % ax)
+            except:
+                print('%s: %s' % ax)
 
     def showCriteria(self,IntegerWeights=False,Debug=False):
         """
