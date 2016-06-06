@@ -1853,8 +1853,8 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                         fi = open(fiName,'rb')
                         splitSorting = loads(fi.read())
                         sorting.update(splitSorting)
-                    if Comments:
-                        print('Collect result ',j)
+                    ## if Comments:
+                    ##     print('Collect result ',j)
                 self.categoryContent = categoryContent
                 if StoreSorting:
                     self.sorting = sorting
