@@ -4999,8 +4999,8 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                                 hasSymmetricThresholds=True,\
                                                 Threading=Threading,\
                                                 tempDir=tempDir,\
-                                                WithConcordanceRelation=WithConcordanceRelation,\
-                                                WithVetoCounts=WithVetoCounts,\
+                                                #WithConcordanceRelation=WithConcordanceRelation,\
+                                                #WithVetoCounts=WithVetoCounts,\
                                                 nbrCores=nbrCores,\
                                                 Debug=Debug,Comments=Comments)
         # finished relation computing time stamp
@@ -5076,8 +5076,8 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                            bint hasSymmetricThresholds=True,\
                            bint Threading=False,
                            tempDir=None,\
-                           bint WithConcordanceRelation=True,\
-                           bint WithVetoCounts=True,\
+                           #bint WithConcordanceRelation=False,\
+                           #bint WithVetoCounts=False,\
                            nbrCores=None,Comments=False):
         """
         Specialization of the corresponding BipolarOutrankingDigraph method
@@ -5094,10 +5094,10 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             self.nbrThreads = 1
 
             # !! concordance relation and veto counts need a complex constructor
-            if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
-                constructRelation = self._constructRelation
-            else:
-                constructRelation = self._constructRelationSimple
+            ## if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
+            ##     constructRelation = self._constructRelation
+            ## else:
+            constructRelation = self._constructRelationSimple
 
             return constructRelation(criteria,\
                                     evaluation,\
@@ -5105,8 +5105,8 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                     terminal=terminal,\
                                     hasNoVeto=hasNoVeto,\
                                     hasBipolarVeto=hasBipolarVeto,\
-                                    WithConcordanceRelation=WithConcordanceRelation,\
-                                    WithVetoCounts=WithVetoCounts,\
+                                    #WithConcordanceRelation=WithConcordanceRelation,\
+                                    #WithVetoCounts=WithVetoCounts,\
                                     Debug=Debug,\
                                     hasSymmetricThresholds=hasSymmetricThresholds)
         ##
@@ -5164,8 +5164,8 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                             #terminal=terminal,
                                             hasNoVeto=self.hasNoVeto,
                                             hasBipolarVeto=self.hasBipolarVeto,
-                                            WithConcordanceRelation=False,
-                                            WithVetoCounts=False,
+                                            #WithConcordanceRelation=False,
+                                            #WithVetoCounts=False,
                                             Debug=False,
                                             hasSymmetricThresholds=self.hasSymmetricThresholds)
                     else:
@@ -5317,8 +5317,8 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                            terminal=None,\
                            bint hasNoVeto=False,\
                            bint hasBipolarVeto=True,\
-                           bint WithConcordanceRelation=False,\
-                           bint WithVetoCounts=False,\
+                           #bint WithConcordanceRelation=False,\
+                           #bint WithVetoCounts=False,\
                            bint hasSymmetricThresholds=True,\
                            bint Debug=False):
         """

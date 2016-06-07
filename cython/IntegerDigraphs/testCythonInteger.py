@@ -30,10 +30,10 @@ from randomPerfTabs import Random3ObjectivesPerformanceTableau
 sampleSize = 10
 MP = True
 nbrOfCPUs = 6
-nbrActions = 2000
+nbrActions = 1000
 nbrCriteria = 21
 commonPar=('beta','variable',None)
-qtiles = 50
+qtiles = 25
 minimalSize = 10
 seed = 10
 fileName = 'CythonA%dObj21q%ds%dc%dhome.csv' % (nbrActions,qtiles,minimalSize,nbrOfCPUs)

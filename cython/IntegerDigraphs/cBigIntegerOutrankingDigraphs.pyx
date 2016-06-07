@@ -410,16 +410,11 @@ class BigIntegerDigraph(object):
         Renders the sum of the squares (without diagonal) of the orders of the component's subgraphs
         over the square (without diagonal) of the big digraph order. 
         """
-        cdef long n2=0
-        cdef long fillRateSum
-        cdef double fillRate
         
         fillRateSum = sum((comp['subGraph'].order*comp['subGraph'].order-1)\
                         for comp in self.components.values())
-        if Debug:
-            print('sumFillRate = ',fillRateSum)
         n2 = self.order*(self.order-1)
-        fillRate = fillRateSum/float(n2)
+        fillRate = float(fillRateSum)/n2
         return fillRate
 
 ##    def computeCriterionCorrelation(self,criterion,Threading=False,\
@@ -694,33 +689,17 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                         compKey = ('c%%0%dd' % (nd)) % (i+1)
                         compDict = {compKey: {}}
                         compDict = {'rank':i}
-                        #pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
+                        pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
                         compDict['lowQtileLimit'] = comp[0][1]
                         compDict['highQtileLimit'] = comp[0][0]
-                        pg = EmptyDigraph()
-                        pg.__class__ = IntegerBipolarOutrankingDigraph
-                        actions = OrderedDict()
-                        for x in comp[1]:
-                            actions[x] = {'name': str(x)}
-                        pg.actions = actions
-                        pg.order = len(pg.actions)
-                        for g in perfTab.criteria:
-                            totalWeight += int(perfTab.criteria[g]['weight'])
-                        pg.valuationdomain = {'min': -totalWeight,
-                                              'med': 0,
-                                              'max': totalWeight}
-                        pg.relation = pg._constructRelationSimple(perfTab.criteria,perfTab.evaluation)
-                        pg.gamma = pg.gammaSets()
-                        pg.notGamma = pg.notGammaSets()
-                        compDict['subGraph'] = pg
-                        ## compDict['subGraph'] = IntegerBipolarOutrankingDigraph(pt,
-                        ##                                                 #actionsSubset=comp[1],
-                        ##                                                 #Normalized=True,
-                        ##                                                 WithConcordanceRelation=False,
-                        ##                                                 WithVetoCounts=False,
-                        ##                                                 CopyPerfTab=False)     
-                        ## compDict['subGraph'].__dict__.pop('criteria')
-                        ## compDict['subGraph'].__dict__.pop('evaluation')
+                        compDict['subGraph'] = IntegerBipolarOutrankingDigraph(pt,
+                                                                         #actionsSubset=comp[1],
+                                                                         #Normalized=True,
+                                                                         WithConcordanceRelation=False,
+                                                                         WithVetoCounts=False,
+                                                                         CopyPerfTab=False)     
+                        compDict['subGraph'].__dict__.pop('criteria')
+                        compDict['subGraph'].__dict__.pop('evaluation')
                         
                         splitComponent = (compKey,compDict)
                         if self.Debug:
