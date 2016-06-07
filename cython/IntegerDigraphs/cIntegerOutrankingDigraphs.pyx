@@ -5083,8 +5083,8 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         Specialization of the corresponding BipolarOutrankingDigraph method
         """
         
-        cdef int i, j, ni, nt, n, nit, nbrOfJobs
-        from array import array
+        cdef int x, i, j, ni, nt, n, nit, nbrOfJobs
+        #from array import array
         from multiprocessing import cpu_count
         
         ##
@@ -5119,12 +5119,12 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                         active_children, cpu_count
             #Debug=True
             class myThread(Process):
-                def __init__(self, int threadID,\
+                def __init__(self, threadID,\
                              bint InitialSplit, tempDirName,\
                              splitActions,\
                              bint hasNoVeto, bint hasBipolarVeto,\
-                             bint hasSymmetricThresholds, Debug):
-                    from array import array
+                             bint hasSymmetricThresholds, bint Debug):
+                    #from array import array
                     Process.__init__(self)
                     self.threadID = threadID
                     self.InitialSplit = InitialSplit
@@ -5138,7 +5138,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     from io import BytesIO
                     from pickle import Pickler, dumps, loads
                     from os import chdir
-                    from array import array
+                    #from array import array
                     chdir(self.workingDirectory)
 ##                    if Debug:
 ##                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
@@ -5208,16 +5208,18 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     print('Nbr of cpus = ',nbrCores)
                 # set number of threads
                 self.nbrThreads = nbrCores
-                actions2Split = array('i')
+                #actions2Split = array('i')
+                actions2Split = []
                 ni = len(initial)
                 nt = len(terminal)
                 if ni < nt:
                     n = ni
-                    actions2Split.extend(initial)
+                    #actions2Split.extend(initial)
+                    actions2Split = list(initial)
                     InitialSplit = True
                 else:
                     n = nt
-                    actions2Split.extend(terminal)
+                    actions2Split = list(terminal)
                     InitialSplit = False
 ##                if Debug:
 ##                    print('InitialSplit, actions2Split', InitialSplit, actions2Split)
@@ -5244,12 +5246,13 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 for j in range(nbrOfJobs):
                     if Comments:
                         print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ")
-                    splitActions = array('i')
+                    #splitActions = array('i')
+                    sokitActions = []
                     for k in range(nit):
                         if j < (nbrOfJobs -1) and i < n:
-                            splitActions.extend([actions2Split[i]])
+                            splitActions.append(actions2Split[i])
                         else:
-                            splitActions = array('i', list(actionsRemain))
+                            splitActions = list(actionsRemain)
                         i += 1
                     if Comments:
                         print('%d' % (len(splitActions)) )
@@ -5304,11 +5307,11 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                 rx[y] = sprx[y]
                     else:
                         #for x,y in product(initial,splitActions):
-                        for x in initial:
-                            rx = relation[x]
-                            sprx = splitRelation[x]
-                            for y in splitActions:
-                                rx[y] = sprx[y]   
+                        for y in initial:
+                            ry = relation[y]
+                            spry = splitRelation[y]
+                            for x in splitActions:
+                                ry[x] = spry[x]   
                 return relation
 
     def _constructRelationSimple(self,criteria,\
