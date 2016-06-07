@@ -64,6 +64,8 @@ class BigIntegerDigraph(object):
         """
         Dynamic construction of the global outranking characteristic function *r(x S y)*.
         """
+        cdef int Min, Med, Max
+        
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
@@ -230,6 +232,7 @@ class BigIntegerDigraph(object):
         cdef int x, y, Min, Max, oMin, oMax, corr, determ, otherRelation
         cdef long n2=0, corrSum=0, determSum=0
         cdef double correlation=0.0, determination=0.0
+        
         ## if self.valuationdomain['min'] != Decimal('-1.0'):
         ##         print('Error: the BigDigraph instance must be normalized !!')
         ##         print(self.valuationdomain)

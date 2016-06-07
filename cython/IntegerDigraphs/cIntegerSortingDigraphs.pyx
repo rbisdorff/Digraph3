@@ -1638,8 +1638,11 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 def __init__(self, int threadID,\
                              bint InitialSplit, tempDirName,\
                              splitActions,\
-                             bint hasNoVeto=False, bint hasBipolarVeto=True,\
-                             bint hasSymmetricThresholds=True, bint Debug=False):
+                             bint hasNoVeto=False,
+                             bint hasBipolarVeto=True,\
+                             bint hasSymmetricThresholds=True,
+                             bint Debug=False):
+                    
                     Process.__init__(self)
                     self.threadID = threadID
                     self.InitialSplit = InitialSplit
