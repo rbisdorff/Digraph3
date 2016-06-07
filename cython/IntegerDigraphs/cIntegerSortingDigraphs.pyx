@@ -1477,15 +1477,15 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
 
         if LowerClosed:
-            initial=actionsOrig
-            terminal=profiles
+            initialArg = actionsOrig
+            terminalArg = profiles
         else:
-            initial=profiles
-            terminal=actionsOrig
+            initialArg  = profiles
+            terminalArg = actionsOrig
         relation = self._constructRelationWithThreading(criteria,
                                                    evaluation,
-                                                   initial=initial,
-                                                   terminal=terminal,
+                                                   initial=initialArg,
+                                                   terminal=terminalArg,
                                                    hasNoVeto=hasNoVeto,
                                                    hasBipolarVeto=True,
                                                    WithConcordanceRelation=False,
@@ -1537,7 +1537,6 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                            tempDir=None,\
                            bint WithConcordanceRelation=False,\
                            bint WithVetoCounts=False,\
-                            #WithSortingRelation=False,\
                            StoreSorting=True,\
                            nbrCores=None,Comments=False):
         """
@@ -1548,6 +1547,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         
         from array import array        
         from multiprocessing import cpu_count
+        from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph
         
         LowerClosed = self.criteriaCategoryLimits['LowerClosed']        
 
@@ -1564,16 +1564,14 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             ## if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
             ##     constructRelation = self._constructRelation
             ## else:
-            constructRelation = self._constructRelationSimple
+            constructRelation = IntegerBipolarOutrankingDigraph._constructRelationSimple
 
-            relation = constructRelation(criteria,\
+            relation = constructRelationSimple(self, criteria,\
                                     evaluation,\
                                     initial=initial,\
                                     terminal=terminal,\
                                     hasNoVeto=hasNoVeto,\
                                     hasBipolarVeto=hasBipolarVeto,\
-                                    WithConcordanceRelation=False,\
-                                    WithVetoCounts=False,\
                                     Debug=Debug,\
                                     hasSymmetricThresholds=hasSymmetricThresholds)
 
@@ -1674,7 +1672,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                     Med = digraph.valuationdomain['med']
                     Max = digraph.valuationdomain['max']
                     splitActions = self.splitActions
-                    constructRelation = IntegerBipolarOutrankingDigraph._constructRelation
+                    constructRelation = IntegerBipolarOutrankingDigraph._constructRelationSimple
                     if self.InitialSplit:
                         initialIn = splitActions
                         terminalIn = digraph.profiles
@@ -1688,8 +1686,6 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                                             terminal=terminalIn,\
                                             hasNoVeto=self.hasNoVeto,\
                                             hasBipolarVeto=self.hasBipolarVeto,\
-                                            WithConcordanceRelation=False,\
-                                            WithVetoCounts=False,\
                                             Debug=False,\
                                             hasSymmetricThresholds=self.hasSymmetricThresholds)
                     foName = 'splitRelation-'+str(self.threadID)+'.py'
