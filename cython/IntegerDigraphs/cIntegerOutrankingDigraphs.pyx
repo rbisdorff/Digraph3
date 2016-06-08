@@ -23,7 +23,7 @@ __version__ = "Revision: Py35"
 
 from digraphs import *
 from xmlrpc.client import ServerProxy
-from cIntegerOutrankingDigraphs import *
+from cOutrankingDigraphs import *
 
 #-------------------------------------------
         
@@ -4872,7 +4872,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  nbrCores=None,\
                  Debug=False,Comments=False):
                  
-        cdef int x, totalWeight=0, Min, Max, Med
+        cdef int n, nt, totalWeight=0, Min, Max, Med
         cdef double tt, tcp, tg
         
         from copy import deepcopy
@@ -4930,18 +4930,16 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 criteria[g] = deepcopy(perfTab.criteria[g])
             else:
                 criteria[g] = perfTab.criteria[g]
-        for g in criteria:
-            criteria[g]['weight'] = int(criteria[g]['weight'])
-            totalWeight += criteria[g]['weight']
         self.criteria = criteria
-        #self.convertWeightsToIntegers()
+        self.convertWeightsToIntegers()
            
         # valuation domain
+        for g in self.criteria:
+            totalWeight += self.criteria[g]['weight']
         Min =   -totalWeight
         Med =   0
         Max =   totalWeight
         self.valuationdomain = {'min':Min,'med':Med,'max':Max}
-        self.totalWeight = totalWeight
 
         #  install method Data and parameters
         methodData = {}
@@ -4999,8 +4997,8 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                                 hasSymmetricThresholds=True,\
                                                 Threading=Threading,\
                                                 tempDir=tempDir,\
-                                                #WithConcordanceRelation=WithConcordanceRelation,\
-                                                #WithVetoCounts=WithVetoCounts,\
+                                                WithConcordanceRelation=WithConcordanceRelation,\
+                                                WithVetoCounts=WithVetoCounts,\
                                                 nbrCores=nbrCores,\
                                                 Debug=Debug,Comments=Comments)
         # finished relation computing time stamp
@@ -5017,10 +5015,10 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         if Comments:
             print(self)
 
-    ## def convertWeightsToIntegers(self):
-    ##     cdef int intWeight
-    ##     for g in self.criteria:
-    ##         self.criteria[g]['weight'] = int(self.criteria[g]['weight'])
+    def convertWeightsToIntegers(self):
+        cdef int intWeight
+        for g in self.criteria:
+            self.criteria[g]['weight'] = int(self.criteria[g]['weight'])
         
     def computeCriterionRelation(self,c,a,b,hasSymmetricThresholds=True):
         """
@@ -5076,15 +5074,15 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                            bint hasSymmetricThresholds=True,\
                            bint Threading=False,
                            tempDir=None,\
-                           #bint WithConcordanceRelation=False,\
-                           #bint WithVetoCounts=False,\
+                           bint WithConcordanceRelation=True,\
+                           bint WithVetoCounts=True,\
                            nbrCores=None,Comments=False):
         """
         Specialization of the corresponding BipolarOutrankingDigraph method
         """
         
         cdef int i, j, ni, nt, n, nit, nbrOfJobs
-        from array import array
+        
         from multiprocessing import cpu_count
         
         ##
@@ -5094,10 +5092,10 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             self.nbrThreads = 1
 
             # !! concordance relation and veto counts need a complex constructor
-            ## if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
-            ##     constructRelation = self._constructRelation
-            ## else:
-            constructRelation = self._constructRelationSimple
+            if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
+                constructRelation = self._constructRelation
+            else:
+                constructRelation = self._constructRelationSimple
 
             return constructRelation(criteria,\
                                     evaluation,\
@@ -5105,8 +5103,8 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                     terminal=terminal,\
                                     hasNoVeto=hasNoVeto,\
                                     hasBipolarVeto=hasBipolarVeto,\
-                                    #WithConcordanceRelation=WithConcordanceRelation,\
-                                    #WithVetoCounts=WithVetoCounts,\
+                                    WithConcordanceRelation=WithConcordanceRelation,\
+                                    WithVetoCounts=WithVetoCounts,\
                                     Debug=Debug,\
                                     hasSymmetricThresholds=hasSymmetricThresholds)
         ##
@@ -5114,17 +5112,15 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             from copy import copy, deepcopy
             from io import BytesIO
             from pickle import Pickler, dumps, loads, load
-            
             from multiprocessing import Process, Lock,\
                                         active_children, cpu_count
             #Debug=True
             class myThread(Process):
-                def __init__(self, int threadID,\
-                             bint InitialSplit, tempDirName,\
+                def __init__(self, threadID,\
+                             InitialSplit, tempDirName,\
                              splitActions,\
-                             bint hasNoVeto, bint hasBipolarVeto,\
-                             bint hasSymmetricThresholds, Debug):
-                    from array import array
+                             hasNoVeto, hasBipolarVeto,\
+                             hasSymmetricThresholds, Debug):
                     Process.__init__(self)
                     self.threadID = threadID
                     self.InitialSplit = InitialSplit
@@ -5132,13 +5128,12 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     self.splitActions = splitActions
                     self.hasNoVeto = hasNoVeto
                     self.hasBipolarVeto = hasBipolarVeto,
-                    self.hasSymmetricThresholds = hasSymmetricThresholds,
+                    hasSymmetricThresholds = hasSymmetricThresholds,
                     self.Debug = Debug
                 def run(self):
                     from io import BytesIO
                     from pickle import Pickler, dumps, loads
                     from os import chdir
-                    from array import array
                     chdir(self.workingDirectory)
 ##                    if Debug:
 ##                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
@@ -5151,25 +5146,36 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 ##                    splitActions = loads(fi.read())
 ##                    fi.close()
                     # compute partiel relation
-                    ## if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
-                    ##     constructRelation = IntegerBipolarOutrankingDigraph._constructRelation
-                    ## else:
-                    constructRelation = IntegerBipolarOutrankingDigraph._constructRelationSimple
-                    if self.InitialSplit:
-                        initialArg = splitActions
-                        terminalArg = None
+                    if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
+                        constructRelation = IntegerBipolarOutrankingDigraph._constructRelation
                     else:
-                        initialArg = None
-                        terminalArg = splitActions
-                    splitRelation = constructRelation(
+                        constructRelation = IntegerBipolarOutrankingDigraph._constructRelationSimple
+                    if self.InitialSplit:
+                        #splitRelation = BipolarOutrankingDigraph._constructRelation(
+                        splitRelation = constructRelation(
                                             digraph,digraph.criteria,\
                                             digraph.evaluation,
-                                            initial=initialArg,
-                                            terminal=terminalArg,
-                                            hasNoVeto=self.hasNoVeto,
-                                            hasBipolarVeto=self.hasBipolarVeto,
+                                            initial=splitActions,
+                                            #terminal=terminal,
+                                            hasNoVeto=hasNoVeto,
+                                            hasBipolarVeto=hasBipolarVeto,
+                                            WithConcordanceRelation=False,
+                                            WithVetoCounts=False,
                                             Debug=False,
-                                            hasSymmetricThresholds=self.hasSymmetricThresholds)
+                                            hasSymmetricThresholds=hasSymmetricThresholds)
+                    else:
+                        #splitRelation = BipolarOutrankingDigraph._constructRelation(
+                        splitRelation = constructRelation(
+                                            digraph,digraph.criteria,\
+                                            digraph.evaluation,
+                                            #initial=initial,
+                                            terminal=splitActions,
+                                            hasNoVeto=hasNoVeto,
+                                            hasBipolarVeto=hasBipolarVeto,
+                                            WithConcordanceRelation=False,
+                                            WithVetoCounts=False,
+                                            Debug=False,
+                                            hasSymmetricThresholds=hasSymmetricThresholds)
                     # store partial relation
                     foName = 'splitRelation-'+str(self.threadID)+'.py'
                     fo = open(foName,'wb')
@@ -5181,7 +5187,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 print('Threading ...')
             from tempfile import TemporaryDirectory
             with TemporaryDirectory(dir=tempDir) as tempDirName:
-                #from copy import copy, deepcopy
+                from copy import copy, deepcopy
 
                 #selfDp = copy(self)
                 selfFileName = tempDirName +'/dumpSelf.py'
@@ -5197,16 +5203,16 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     print('Nbr of cpus = ',nbrCores)
                 # set number of threads
                 self.nbrThreads = nbrCores
-                actions2Split = array('i')
+
                 ni = len(initial)
                 nt = len(terminal)
                 if ni < nt:
                     n = ni
-                    actions2Split.extend(initial)
+                    actions2Split = list(initial)
                     InitialSplit = True
                 else:
                     n = nt
-                    actions2Split.extend(terminal)
+                    actions2Split = list(terminal)
                     InitialSplit = False
 ##                if Debug:
 ##                    print('InitialSplit, actions2Split', InitialSplit, actions2Split)
@@ -5233,12 +5239,12 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 for j in range(nbrOfJobs):
                     if Comments:
                         print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ")
-                    splitActions = array('i')
+                    splitActions=[]
                     for k in range(nit):
                         if j < (nbrOfJobs -1) and i < n:
-                            splitActions.extend([actions2Split[i]])
+                            splitActions.append(actions2Split[i])
                         else:
-                            splitActions = array('i', list(actionsRemain))
+                            splitActions = list(actionsRemain)
                         i += 1
                     if Comments:
                         print('%d' % (len(splitActions)) )
@@ -5306,8 +5312,8 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                            terminal=None,\
                            bint hasNoVeto=False,\
                            bint hasBipolarVeto=True,\
-                           #bint WithConcordanceRelation=False,\
-                           #bint WithVetoCounts=False,\
+                           bint WithConcordanceRelation=False,\
+                           bint WithVetoCounts=False,\
                            bint hasSymmetricThresholds=True,\
                            bint Debug=False):
         """
@@ -5319,7 +5325,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             * inital nodes, terminal nodes, for restricted purposes 
             
         """
-        #cdef int a, b, 
+        
         ## default setting for digraphs
         if initial == None:
             initial = self.actions
@@ -5329,7 +5335,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 ##        totalweight = Decimal('0.0')
 ##        for c in dict.keys(criteria):
 ##            totalweight = totalweight + criteria[c]['weight']
-##        totalweight = sum(crit['weight'] for crit in criteria.values())
+        totalweight = sum(crit['weight'] for crit in criteria.values())
 
         relation = {}
         vetos = []

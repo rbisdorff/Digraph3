@@ -202,7 +202,7 @@ class BigIntegerDigraph(object):
         print('Component ranking rule: %s' % self.componentRankingRule)
 
     #@cython.locals(x=cython.int,y=cython.int)
-    def computeOrdinalCorrelation(self, object other, bint Debug=False):
+    def computeOrdinalCorrelation(self, other, bint Debug=False):
         """
         Renders the ordinal correlation K of a BigDigraph instance
         when compared with a given compatible (same actions set) other Digraph or

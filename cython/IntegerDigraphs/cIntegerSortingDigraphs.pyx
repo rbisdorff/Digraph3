@@ -1504,6 +1504,8 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         self.order = len(self.actions)
 
         self.runTimes['totalTime'] = time() - tt
+        if Comments:
+            print('total time for construction the %s instance: %.4f' % (str(self.__class__),time()-tt))
 
 ### --------  class methods
 
