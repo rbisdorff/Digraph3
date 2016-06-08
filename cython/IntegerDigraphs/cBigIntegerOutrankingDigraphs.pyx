@@ -521,7 +521,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
     def __init__(self,argPerfTab,\
                  int quantiles=0,\
                  quantilesOrderingStrategy="average",\
-                 bint LowerClosed=True,\
+                 bint LowerClosed=False,\
                  componentRankingRule="Copeland",\
                  int minimalComponentSize=1,\
                  bint Threading=False,\
@@ -530,7 +530,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                  nbrOfCPUs=None,\
                  nbrOfThreads=None,\
                  save2File=None,\
-                 bint CopyPerfTab=True,\
+                 bint CopyPerfTab=False,\
                  bint Comments=False,\
                  bint Debug=False):
 
@@ -603,10 +603,10 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                                      Comments=Comments,\
                                      Debug=Debug)
         self.runTimes = {'sorting': time() - t0}
-        self.valuationdomain = qs.valuationdomain
-        self.profiles = qs.profiles
-        self.categories = qs.categories
-        self.sorting = qs.sorting
+        self.valuationdomain = copy(qs.valuationdomain)
+        self.profiles = copy(qs.profiles)
+        self.categories = copy(qs.categories)
+        self.sorting = copy(qs.sorting)
         if Comments:
             print('execution time: %.4f' % (self.runTimes['sorting']))
         # preordering
