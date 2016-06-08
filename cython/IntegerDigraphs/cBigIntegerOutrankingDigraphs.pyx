@@ -695,13 +695,17 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                         pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
                         compDict['lowQtileLimit'] = comp[0][1]
                         compDict['highQtileLimit'] = comp[0][0]
+                        if len(comp[1]) > 100:
+                            Threading = True
+                        else:
+                            Threading = False
                         compDict['subGraph'] = IntegerBipolarOutrankingDigraph(pt,
                                                                          #actionsSubset=comp[1],
                                                                          #Normalized=True,
                                                                          WithConcordanceRelation=False,
                                                                          WithVetoCounts=False,
                                                                          CopyPerfTab=False,
-                                                                         Threading=True,
+                                                                         Threading=Threading,
                                                                          nbrCores=2)     
                         compDict['subGraph'].__dict__.pop('criteria')
                         compDict['subGraph'].__dict__.pop('evaluation')
