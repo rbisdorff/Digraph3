@@ -648,7 +648,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                                           CopyPerfTab=False)
                 pg.__dict__.pop('criteria')
                 pg.__dict__.pop('evaluation')
-                #pg.__class__ = Digraph
+                pg.__class__ = Digraph
                 components[compKey]['subGraph'] = pg
         else:   # if self.sortingParameters['Threading'] == True:
             from copy import copy, deepcopy
@@ -671,7 +671,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     from os import chdir
                     from copy import deepcopy
                     from perfTabs import PartialPerformanceTableau
-                    from digraphs import EmptyDigraph
+                    from digraphs import Digraph
                     from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph
                     chdir(self.workingDirectory)
                     if self.Debug:
@@ -703,7 +703,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                                                                          CopyPerfTab=False)     
                         compDict['subGraph'].__dict__.pop('criteria')
                         compDict['subGraph'].__dict__.pop('evaluation')
-                        
+                        compDict['subGraph'].__class__ = Digraph
                         splitComponent = (compKey,compDict)
                         if self.Debug:
                             print(compDict)
@@ -1226,7 +1226,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             print()
 
     def showComponents(self,direction='increasing'):
-        BigOutrankingDigraph.showDecomposition(self,direction=direction)
+        BigIntegerOutrankingDigraph.showDecomposition(self,direction=direction)
 
     def showDecomposition(self,direction='decreasing'):
         

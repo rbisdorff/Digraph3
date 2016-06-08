@@ -1566,7 +1566,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             ## else:
             constructRelation = IntegerBipolarOutrankingDigraph._constructRelationSimple
 
-            relation = constructRelationSimple(self, criteria,\
+            relation = constructRelation(self, criteria,\
                                     evaluation,\
                                     initial=initial,\
                                     terminal=terminal,\
