@@ -603,10 +603,10 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                                      Comments=Comments,\
                                      Debug=Debug)
         self.runTimes = {'sorting': time() - t0}
-        self.valuationdomain = copy(qs.valuationdomain)
-        self.profiles = copy(qs.profiles)
-        self.categories = copy(qs.categories)
-        self.sorting = copy(qs.sorting)
+        self.valuationdomain = qs.valuationdomain
+        self.profiles = qs.profiles
+        self.categories = qs.categories
+        self.sorting = qs.sorting
         if Comments:
             print('execution time: %.4f' % (self.runTimes['sorting']))
         # preordering
