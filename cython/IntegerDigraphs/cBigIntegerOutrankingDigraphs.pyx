@@ -526,7 +526,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                  int minimalComponentSize=1,\
                  bint Threading=False,\
                  tempDir=None,\
-                 #componentThreadingThreshold=50,\
+                 int componentThreadingThreshold=50,\
+                 int nbrOfSubProcesses=0,
                  nbrOfCPUs=None,\
                  nbrOfThreads=None,\
                  save2File=None,\
@@ -588,19 +589,20 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         t0 = time()
         if Comments:        
             print('Computing the %d-quantiles sorting digraph of order %d ...' % (quantiles,na))
-        qs = IntegerQuantilesSortingDigraph(argPerfTab=perfTab,\
-                                     limitingQuantiles=quantiles,\
-                                     LowerClosed=LowerClosed,\
-                                     #IntegerValued=True,\
-                                     CompleteOutranking=False,\
-                                     StoreSorting=True,\
-                                     #WithSortingRelation=False,\
-                                     CopyPerfTab=CopyPerfTab,\
-                                     Threading= self.sortingParameters['Threading'],\
-                                     tempDir=tempDir,\
-                                     nbrCores=nbrOfCPUs,\
-                                     nbrOfProcesses=nbrOfThreads,\
-                                     Comments=Comments,\
+        qs = IntegerQuantilesSortingDigraph(argPerfTab=perfTab,
+                                     limitingQuantiles=quantiles,
+                                     LowerClosed=LowerClosed,
+                                     #IntegerValued=True,
+                                     CompleteOutranking=False,
+                                     StoreSorting=True,
+                                     #WithSortingRelation=False,
+                                     CopyPerfTab=CopyPerfTab,
+                                     Threading= self.sortingParameters['Threading'],
+                                     tempDir=tempDir,
+                                     nbrCores=nbrOfCPUs,
+                                     nbrOfProcesses=nbrOfThreads,
+                                     #componentThreadingThreshold=50,
+                                     Comments=Comments,
                                      Debug=Debug)
         self.runTimes = {'sorting': time() - t0}
         self.valuationdomain = qs.valuationdomain
@@ -619,7 +621,9 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         decomposition = [[(item[0][0],item[0][1]),item[1]]\
                 for item in self._computeQuantileOrdering(\
                     strategy=quantilesOrderingStrategy,\
-                    Descending=True,Threading=Threading,nbrOfCPUs=nbrOfCPUs)]
+                    Descending=True,
+                    Threading=Threading,
+                    nbrOfCPUs=nbrOfCPUs)]
         if Debug:
             print(decomposition)
         self.decomposition = decomposition
@@ -659,12 +663,17 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 def __init__(self, int threadID,\
                              tempDirName,\
                              lTest,\
-                             Debug,DaemonFlag):
-                    Process.__init__(self,daemon=DaemonFlag)
+                             Debug,nbrOfSubProcesses,componentThreadingThreshold):
+                    if nbrOfSubProcesses > 0:
+                        Process.__init__(self,daemon=False)
+                    else:
+                        Process.__init__(self,daemon=True)
                     self.threadID = threadID
                     self.workingDirectory = tempDirName
                     self.lTest = lTest
                     self.Debug = Debug
+                    self.nbrOfSubProcesses = nbrOfSubProcesses
+                    self.componentThreadingThreshold = componentThreadingThreshold
                 def run(self):
                     cdef int i,nc,nd,totalWeight=0
                     from pickle import dumps, loads
@@ -695,8 +704,11 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                         pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
                         compDict['lowQtileLimit'] = comp[0][1]
                         compDict['highQtileLimit'] = comp[0][0]
-                        if len(comp[1]) > 100:
-                            Threading = True
+                        if self.nbrOfSubProcesses > 0:
+                            if len(comp[1]) > self.componentThreadingThreshold:
+                                Threading = True
+                            else:
+                                Threading = False
                         else:
                             Threading = False
                         compDict['subGraph'] = IntegerBipolarOutrankingDigraph(pt,
@@ -706,7 +718,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                                                                          WithVetoCounts=False,
                                                                          CopyPerfTab=False,
                                                                          Threading=Threading,
-                                                                         nbrCores=2)     
+                                                                         nbrCores=self.nbrOfSubProcesses)     
                         compDict['subGraph'].__dict__.pop('criteria')
                         compDict['subGraph'].__dict__.pop('evaluation')
                         compDict['subGraph'].__class__ = Digraph
@@ -757,7 +769,6 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     print('Nbr of locals/job',nbrOfLocals)
                 nbrOfThreadsUsed = 0
                 i = 0
-                DaemonFlag = False # set to False for subprocessing
                 for j in range(nbrOfThreads):
                     if Comments:
                         print('thread = %d/%d' % (j+1,nbrOfThreads),end="...")
@@ -776,7 +787,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                         print('Threaded:',[len(decomposition[i][1]) for i in lTest])
                         #print('Kept    :',[len(decomposition[i][1]) for i in bigPartialGraphs])
                     if lTest != []:
-                        process = myThread(j,tempDirName,lTest,Debug,DaemonFlag)
+                        process = myThread(j,tempDirName,lTest,Debug,nbrOfSubProcesses,componentThreadingThreshold)
                         process.start()
                         nbrOfThreadsUsed += 1
                 #nbg = len(bigPartialGraphs)

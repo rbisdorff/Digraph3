@@ -31,6 +31,8 @@ sampleSize = 10
 MP = True
 nbrOfCPUs = 4
 nbrOfThreads = 4
+nbrOfSubProcesses = 2
+componentThreadingThreshold = 50
 nbrActions = 2000
 nbrCriteria = 21
 commonPar=('beta','variable',None)
@@ -91,6 +93,8 @@ for s in range(sampleSize):
                                CopyPerfTab=False,
                                nbrOfCPUs=nbrOfCPUs,
                                nbrOfThreads=nbrOfThreads,
+                               nbrOfSubProcesses=nbrOfSubProcesses,
+                               componentThreadingThreshold=componentThreadingThreshold,
                                Comments=True,
                                Debug=False)
 
