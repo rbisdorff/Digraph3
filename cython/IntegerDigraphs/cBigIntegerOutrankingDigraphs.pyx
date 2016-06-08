@@ -659,8 +659,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 def __init__(self, int threadID,\
                              tempDirName,\
                              lTest,\
-                             Debug):
-                    Process.__init__(self)
+                             Debug,DaemonFlag):
+                    Process.__init__(self,daemon=DaemonFlag)
                     self.threadID = threadID
                     self.workingDirectory = tempDirName
                     self.lTest = lTest
@@ -700,7 +700,9 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                                                                          #Normalized=True,
                                                                          WithConcordanceRelation=False,
                                                                          WithVetoCounts=False,
-                                                                         CopyPerfTab=False)     
+                                                                         CopyPerfTab=False,
+                                                                         Threading=True,
+                                                                         nbrCores=2)     
                         compDict['subGraph'].__dict__.pop('criteria')
                         compDict['subGraph'].__dict__.pop('evaluation')
                         compDict['subGraph'].__class__ = Digraph
@@ -751,6 +753,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     print('Nbr of locals/job',nbrOfLocals)
                 nbrOfThreadsUsed = 0
                 i = 0
+                DaemonFlag = False # set to False for subprocessing
                 for j in range(nbrOfThreads):
                     if Comments:
                         print('thread = %d/%d' % (j+1,nbrOfThreads),end="...")
@@ -769,7 +772,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                         print('Threaded:',[len(decomposition[i][1]) for i in lTest])
                         #print('Kept    :',[len(decomposition[i][1]) for i in bigPartialGraphs])
                     if lTest != []:
-                        process = myThread(j,tempDirName,lTest,Debug)
+                        process = myThread(j,tempDirName,lTest,Debug,DaemonFlag)
                         process.start()
                         nbrOfThreadsUsed += 1
                 #nbg = len(bigPartialGraphs)

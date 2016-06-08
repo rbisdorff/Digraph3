@@ -29,7 +29,8 @@ from randomPerfTabs import Random3ObjectivesPerformanceTableau
 # parameters
 sampleSize = 10
 MP = True
-nbrOfCPUs = 6
+nbrOfCPUs = 4
+nbrOfThreads = 4
 nbrActions = 2000
 nbrCriteria = 21
 commonPar=('beta','variable',None)
@@ -89,6 +90,7 @@ for s in range(sampleSize):
                                Threading=MP,
                                CopyPerfTab=False,
                                nbrOfCPUs=nbrOfCPUs,
+                               nbrOfThreads=nbrOfThreads,
                                Comments=True,
                                Debug=False)
 
