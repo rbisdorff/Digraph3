@@ -3956,7 +3956,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         """
         
         cdef int i, j, ni, nt, n, nit, nbrOfJobs
-        
+        cdef bint InitialSplit
         from multiprocessing import cpu_count
         
         ##
@@ -3985,16 +3985,19 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         else:  # parallel computation
             from copy import copy, deepcopy
             from io import BytesIO
+            from array import array
+
             from pickle import Pickler, dumps, loads, load
             from multiprocessing import Process, Lock,\
                                         active_children, cpu_count
             #Debug=True
             class myThread(Process):
-                def __init__(self, threadID,\
-                             InitialSplit, tempDirName,\
+                def __init__(self, int threadID,\
+                             bint InitialSplit, tempDirName,\
                              splitActions,\
-                             hasNoVeto, hasBipolarVeto,\
-                             hasSymmetricThresholds, Debug):
+                             bint hasNoVeto, bint hasBipolarVeto,\
+                             bint hasSymmetricThresholds, bint Debug):
+                    from array import array
                     Process.__init__(self)
                     self.threadID = threadID
                     self.InitialSplit = InitialSplit
@@ -4005,6 +4008,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     hasSymmetricThresholds = hasSymmetricThresholds,
                     self.Debug = Debug
                 def run(self):
+                    from array import array
                     from io import BytesIO
                     from pickle import Pickler, dumps, loads
                     from os import chdir
@@ -4025,31 +4029,36 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     else:
                         constructRelation = BipolarOutrankingDigraph._constructRelationSimple
                     if self.InitialSplit:
-                        #splitRelation = BipolarOutrankingDigraph._constructRelation(
-                        splitRelation = constructRelation(
-                                            digraph,digraph.criteria,\
-                                            digraph.evaluation,
-                                            initial=splitActions,
-                                            #terminal=terminal,
-                                            hasNoVeto=hasNoVeto,
-                                            hasBipolarVeto=hasBipolarVeto,
-                                            WithConcordanceRelation=False,
-                                            WithVetoCounts=False,
-                                            Debug=False,
-                                            hasSymmetricThresholds=hasSymmetricThresholds)
+                        initialIn = splitActions
+                        terminalIn = None
                     else:
+                        initialIn = None
+                        terminalIn = splitActions
                         #splitRelation = BipolarOutrankingDigraph._constructRelation(
-                        splitRelation = constructRelation(
+                    splitRelation = constructRelation(
                                             digraph,digraph.criteria,\
                                             digraph.evaluation,
-                                            #initial=initial,
-                                            terminal=splitActions,
+                                            initial=initialIn,
+                                            terminal=terminalIn,
                                             hasNoVeto=hasNoVeto,
                                             hasBipolarVeto=hasBipolarVeto,
                                             WithConcordanceRelation=False,
                                             WithVetoCounts=False,
                                             Debug=False,
                                             hasSymmetricThresholds=hasSymmetricThresholds)
+                    ## else:
+                    ##     #splitRelation = BipolarOutrankingDigraph._constructRelation(
+                    ##     splitRelation = constructRelation(
+                    ##                         digraph,digraph.criteria,\
+                    ##                         digraph.evaluation,
+                    ##                         #initial=initial,
+                    ##                         terminal=splitActions,
+                    ##                         hasNoVeto=hasNoVeto,
+                    ##                         hasBipolarVeto=hasBipolarVeto,
+                    ##                         WithConcordanceRelation=False,
+                    ##                         WithVetoCounts=False,
+                    ##                         Debug=False,
+                    ##                         hasSymmetricThresholds=hasSymmetricThresholds)
                     # store partial relation
                     foName = 'splitRelation-'+str(self.threadID)+'.py'
                     fo = open(foName,'wb')
@@ -4070,23 +4079,23 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 fo = open(selfFileName,'wb')
                 fo.write(dumps(self,-1))
                 fo.close()
-
+                
                 if nbrCores == None:
                     nbrCores = cpu_count()
                 if Comments:
                     print('Nbr of cpus = ',nbrCores)
                 # set number of threads
                 self.nbrThreads = nbrCores
-
+                #actions2Split = array('i')
                 ni = len(initial)
                 nt = len(terminal)
                 if ni < nt:
                     n = ni
-                    actions2Split = list(initial)
+                    actions2Split = array('i',initial)
                     InitialSplit = True
                 else:
                     n = nt
-                    actions2Split = list(terminal)
+                    actions2Split = array('i',terminal)
                     InitialSplit = False
 ##                if Debug:
 ##                    print('InitialSplit, actions2Split', InitialSplit, actions2Split)
@@ -4113,12 +4122,12 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                 for j in range(nbrOfJobs):
                     if Comments:
                         print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ")
-                    splitActions=[]
+                    splitActions= array('i')
                     for k in range(nit):
                         if j < (nbrOfJobs -1) and i < n:
-                            splitActions.append(actions2Split[i])
+                            splitActions.extend([actions2Split[i]])
                         else:
-                            splitActions = list(actionsRemain)
+                            splitActions = array('i',actionsRemain)
                         i += 1
                     if Comments:
                         print('%d' % (len(splitActions)) )
