@@ -1545,25 +1545,13 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             hasIntegerValuation = IntegerValues
         
         for x in actionsList:
-            if hasIntegerValuation:
-                print("'%d',  " % x[0], end=' ')
-            else:
-                print("'"+x[0]+"',  ", end=' ')
-                
+            print("'"+x[0]+"',  ", end=' ')
         print('\n-----|------------------------------------------------------------')
         for x in actionsList:
             if hasLatexFormat:
-                if hasIntegerValuation:
-                    print("$%d$ & " % x[0], end=' ')
-                else:
-                    print("$"+x[0]+"$ & ", end=' ')
-                    
+                print("$"+x[0]+"$ & ", end=' ')
             else:
-                if hasIntegerValuation:
-                    print("'%d' |  " % x[0] , end=' ')
-                else:
-                    print("'"+str(x[0])+"' |  ", end=' ')
-                    
+                print("'"+x[0]+"' |  ", end=' ')
             for y in actionsList:
                 if x == y and not ReflexiveTerms:
                     if hasLPDDenotation:
@@ -1593,11 +1581,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             else:
                 print()
             if hasLPDDenotation:
-                if hasIntegerValuation:
-                    print("'%d' | " % x[0], end=' ')
-                else:
-                    print("'"+x[0]+"' | ", end=' ')
-                    
+                print("'"+x[0]+"' | ", end=' ')
                 for y in actionsList:
                     print('(%+d,%+d)' % (largePerformanceDifferencesCount[x[1]][y[1]]['positive'],\
                                           largePerformanceDifferencesCount[x[1]][y[1]]['negative']), end=' ')
@@ -3749,6 +3733,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  nbrCores=None,\
                  Debug=False,Comments=False):
                  
+        cdef int x
         cdef double tt, tcp, tg
         
         from copy import deepcopy
@@ -3955,7 +3940,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         Specialization of the corresponding BipolarOutrankingDigraph method
         """
         
-        cdef int i, j, ni, nt, n, nit, nbrOfJobs
+        cdef int x, y, i, j, ni, nt, n, nit, nbrOfJobs
         
         from multiprocessing import cpu_count
         
@@ -4199,7 +4184,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             * inital nodes, terminal nodes, for restricted purposes 
             
         """
-        ## cdef int a, b, 
+        cdef int a, b, 
         ## default setting for digraphs
         if initial == None:
             initial = self.actions
@@ -4535,9 +4520,6 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     def criterionCharacteristicFunction(self,c,a,b,hasSymmetricThresholds=True):
         """
         Renders the characteristic value of the comparison of a and b on criterion c.
-        .. warning::
-
-           No veto or counterveto is taken into account.
         """
         evalca = self.evaluation[c][a]
         evalcb = self.evaluation[c][b]
@@ -4582,8 +4564,6 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         """
         renders the Promethee single criteria netflows matrix M
         """
-        cdef int n
-        cdef double netflow
         actionsList = [x for x in self.actions]
         actionsList.sort()
         n = len(actionsList)
@@ -4872,7 +4852,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  nbrCores=None,\
                  Debug=False,Comments=False):
                  
-        cdef int n, nt, totalWeight=0, Min, Max, Med
+        cdef int x,totalWeight=0
         cdef double tt, tcp, tg
         
         from copy import deepcopy
@@ -5081,7 +5061,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         Specialization of the corresponding BipolarOutrankingDigraph method
         """
         
-        cdef int i, j, ni, nt, n, nit, nbrOfJobs
+        cdef int x, y, i, j, ni, nt, n, nit, nbrOfJobs
         
         from multiprocessing import cpu_count
         
