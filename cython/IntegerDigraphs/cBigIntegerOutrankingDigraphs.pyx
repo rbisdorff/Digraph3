@@ -649,7 +649,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                                           WithConcordanceRelation=False,
                                           WithVetoCounts=False,
                                           #Normalized=True,
-                                          CopyPerfTab=False)
+                                          CopyPerfTab=False,
+                                          BigData=True)
                 pg.__dict__.pop('criteria')
                 pg.__dict__.pop('evaluation')
                 pg.__class__ = Digraph
@@ -714,6 +715,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                         compDict['subGraph'] = IntegerBipolarOutrankingDigraph(pt,
                                                                          #actionsSubset=comp[1],
                                                                          #Normalized=True,
+                                                                         BigData=True,
                                                                          WithConcordanceRelation=False,
                                                                          WithVetoCounts=False,
                                                                          CopyPerfTab=False,

@@ -4979,13 +4979,13 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             self.evaluation = perfTab.evaluation
         if not BigData:
             self.convertEvaluationFloatToDecimal()
-        try:
-            if CopyPerfTab:
-                self.description = deepcopy(perfTab.description)
-            elif not BigData:
-                self.description = perfTab.description
-        except:
-            pass
+            try:
+                if CopyPerfTab:
+                    self.description = deepcopy(perfTab.description)
+                else:
+                    self.description = perfTab.description
+            except:
+                pass
         # init general digraph Data
         self.order = len(self.actions)
         
