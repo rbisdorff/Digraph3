@@ -781,10 +781,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                         currLen = len(currComp)
                         if (threadLoad + currLen) <= nbrOfLocals:
                             lTest.append(i)
-                            threadLoad += currLen
                             i += 1
-                        else:
-                            break
+                        threadLoad += currLen
                     if Comments:
                         print('Threaded:',[len(decomposition[k][1]) for k in lTest])
                     if lTest != []:
