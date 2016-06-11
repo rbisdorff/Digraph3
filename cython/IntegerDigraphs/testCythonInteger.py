@@ -73,7 +73,7 @@ for s in range(sampleSize):
                                Comments=True,
                                Debug=False)
 
-    print(bg1)
+##     print(bg1)
     
     tp2 = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,
                                     numberOfCriteria=nbrCriteria,
@@ -101,10 +101,10 @@ for s in range(sampleSize):
     print(bg2)
     ## bg2.showActions()
     ## bg2.showCriteria()
-    bg2.showDecomposition()
+    ## bg2.showDecomposition()
     ## bg2.showRelationTable()
     ## print(bg2.computeBoostedRanking())
-    bg2.showRelationMap(toIndex=80)
+    ## bg2.showRelationMap(toIndex=80)
     #print(bg2.computeBoostedOrdering())
     #bg1.recodeValuation(-720,720)
     #print(bg1.valuationdomain)

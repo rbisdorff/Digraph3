@@ -535,7 +535,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                  bint Comments=False,\
                  bint Debug=False):
 
-        cdef int i, j, totalWeight = 0
+        cdef int i, j, nc, bd, totalWeight = 0
         cdef int nbrOfLocals,nbrOfThreadsUsed,threadLoad
         cdef double ttot, t0, tw, tdump
         cdef int maximalComponentSize
@@ -762,7 +762,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     nbrOfCPUs = cpu_count()
                 if nbrOfThreads == None:
                     nbrOfThreads = nbrOfCPUs-1
-                nbrOfLocals = self.order//nbrOfThreads
+                nbrOfLocals = self.order//(nbrOfThreads-1)
                 if nbrOfLocals*nbrOfThreads < self.order:
                     nbrOfLocals += 1
                 if Comments:
@@ -776,22 +776,24 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                         print('thread = %d/%d' % (j+1,nbrOfThreads),end="...")
                     lTest = []
                     threadLoad = 0
-                    while threadLoad <= nbrOfLocals and i < (nc):
-                        lTest.append(i)
-                        threadLoad += len(decomposition[i][1])
-                        i += 1
-                    #for i in range(start,stop):
-                    #    if len(decomposition[i][1]) < componentThreadingThreshold:
-                    #        lTest.append(i)
-                    #    else:
-                    #        bigPartialGraphs.append(i)
+                    while (threadLoad <= nbrOfLocals) and i < (nc):
+                        currComp = decomposition[i][1]
+                        currLen = len(currComp)
+                        if (threadLoad + currLen) <= nbrOfLocals:
+                            lTest.append(i)
+                            threadLoad += currLen
+                            i += 1
+                        else:
+                            break
                     if Comments:
-                        print('Threaded:',[len(decomposition[i][1]) for i in lTest])
-                        #print('Kept    :',[len(decomposition[i][1]) for i in bigPartialGraphs])
+                        print('Threaded:',[len(decomposition[k][1]) for k in lTest])
                     if lTest != []:
-                        process = myThread(j,tempDirName,lTest,Debug,nbrOfSubProcesses,componentThreadingThreshold)
+                        process = myThread(j,tempDirName,lTest,\
+                                           Debug,nbrOfSubProcesses,componentThreadingThreshold)
                         process.start()
                         nbrOfThreadsUsed += 1
+                    
+                    
                 #nbg = len(bigPartialGraphs)
                 while active_children() != []:
                     pass
