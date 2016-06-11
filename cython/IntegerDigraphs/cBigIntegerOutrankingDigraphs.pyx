@@ -774,8 +774,9 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 for j in range(nbrOfThreads):
                     if Comments:
                         print('thread = %d/%d' % (j+1,nbrOfThreads),end="...")
-                    lTest = []
-                    threadLoad = 0
+                    lTest = [i]
+                    threadLoad = len(decomposition[i][1])
+                    i += 1
                     while (threadLoad <= nbrOfLocals) and i < (nc):
                         currComp = decomposition[i][1]
                         currLen = len(currComp)
