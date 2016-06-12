@@ -771,13 +771,15 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     print('Nbr of locals/job',nbrOfLocals)
                 nbrOfThreadsUsed = 0
                 i = 0
-                for j in range(nbrOfThreads):
+                #for j in range(nbrOfThreads):
+                j = 0
+                while i < nc:
                     if Comments:
-                        print('thread = %d/%d' % (j+1,nbrOfThreads),end="...")
+                        print('Thread = %d/%d' % (j+1,nbrOfThreads),end="...")
                     lTest = [i]
                     threadLoad = len(decomposition[i][1])
                     i += 1
-                    while (threadLoad <= nbrOfLocals) and i < (nc):
+                    while (threadLoad <= nbrOfLocals) and (i < nc):
                         currComp = decomposition[i][1]
                         currLen = len(currComp)
                         if (threadLoad + currLen) <= nbrOfLocals:
@@ -785,12 +787,15 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                             i += 1
                         threadLoad += currLen
                     if Comments:
-                        print('Threaded:',[len(decomposition[k][1]) for k in lTest])
-                    if lTest != []:
-                        process = myThread(j,tempDirName,lTest,\
+                        content = [len(decomposition[k][1]) for k in lTest]
+                        print('threaded:',content)
+                        print('  Thread load:',sum(content))
+                    #if lTest != []:
+                    process = myThread(j,tempDirName,lTest,\
                                            Debug,nbrOfSubProcesses,componentThreadingThreshold)
-                        process.start()
-                        nbrOfThreadsUsed += 1
+                    process.start()
+                    nbrOfThreadsUsed += 1
+                    j += 1
                     
                     
                 #nbg = len(bigPartialGraphs)
