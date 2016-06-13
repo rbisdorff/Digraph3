@@ -1315,6 +1315,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         cdef int k, i, ox, totalWeight = 0
         cdef double tt,t0,
         cdef float q, lowValue=0.0, highValue=100.0
+        from cRandPerfTabs import NormalizedPerformanceTableau
         
         from time import time
         from copy import copy, deepcopy
@@ -1322,7 +1323,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             copy2self = deepcopy
         else:
             copy2self = copy
-        from decimal import Decimal
+        #from decimal import Decimal
 
         tt = time()
         # import the performance tableau
@@ -1360,7 +1361,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         #self.convertWeightFloatToDecimal()
         evaluation = normPerfTab.evaluation
         self.evaluation = evaluation
-        self.convertEvaluationFloatToDecimal()
+        #self.convertEvaluationFloatToDecimal()
         self.runTimes = {'dataInput': time()-tt}
 
         t0 = time()
@@ -1369,7 +1370,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             self.name = 'sorting_with_given_quantiles'
             newLimitingQuantiles = []
             for q in limitingQuantiles:
-                newLimitingQuantiles.append(Decimal(str(q)))
+                newLimitingQuantiles.append(q)
             limitingQuantiles = newLimitingQuantiles
             if Debug:
                 print('convert to decimal!',limitingQuantiles)
@@ -1452,9 +1453,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 profiles[cKey] = {'category': c, 'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
             for g in dict.keys(criteria):
                 if LowerClosed:
-                    evaluation[g][cKey] = Decimal(str(criteriaCategoryLimits[g][int(c)-1]))
+                    evaluation[g][cKey] = criteriaCategoryLimits[g][int(c)-1]
                 else:
-                    evaluation[g][cKey] = Decimal(str(criteriaCategoryLimits[g][int(c)]))
+                    evaluation[g][cKey] = criteriaCategoryLimits[g][int(c)]
 
         self.profiles = profiles
         profileLimits = list(profiles.keys())
@@ -2303,19 +2304,19 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             for g in self.criteria:
                 try:
                     pref = self.criteria[g]['thresholds']['ind'][0] + \
-                           (self.criteria[g]['thresholds']['ind'][1]*Decimal('100'))
+                           (self.criteria[g]['thresholds']['ind'][1]*100.0)
                     pth.append(pref)
                 except:
                     pass
-            amp = max(Decimal('1'),min(pth))
-            n = int(floor(Decimal('100')/amp))
+            amp = max(1,min(pth))
+            n = int(100.0/amp)
             if Debug:
                 print('Detected preference thresholds = ',pth)
                 print('amplitude, n',amp,n)
 
         limitingQuantiles = []
         for i in range(n+1):
-            limitingQuantiles.append( Decimal(str(i)) / Decimal(str(n)) )
+            limitingQuantiles.append( i / float(n) )
         self.name = 'sorting_with_%d-tile_limits' % n
         return limitingQuantiles
                                          
@@ -2338,14 +2339,15 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 gPrefThrCst = self.criteria[g]['thresholds']['pref'][0]
                 gPrefThrSlope = self.criteria[g]['thresholds']['pref'][1]
             except:
-                gPrefThrCst = Decimal('0')
-                gPrefThrSlope = Decimal('0')            
+                gPrefThrCst = 0.0
+                gPrefThrSlope = 0.0            
         n = len(gValues)
         if Debug:
             print('g,n,gValues',g,n,gValues)
 ##        if n > 0:
 ##        nf = Decimal(str(n+1))
-        nf = Decimal(str(n))
+        #nf = Decimal(str(n))
+        nf = float(n)
         limitingQuantiles = copy(self.limitingQuantiles)
         limitingQuantiles.sort()
         if Debug:
@@ -2361,20 +2363,20 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         if LowerClosed:
             # we ignore the 1.00 quantile and replace it with +infty
             for q in self.limitingQuantiles:
-                r = (Decimal(str(nf)) * q)
+                r = (nf * q)
                 rq = int(floor(r))
                 if Debug:
                     print('r,rq',r,rq, end=' ')
                 if rq < (n-1):
                     quantile = gValues[rq]\
-                        + ((r-Decimal(str(rq)))*(gValues[rq+1]-gValues[rq]))
+                        + ( (r-rq)*(gValues[rq+1]-gValues[rq]) )
                     if rq > 0 and PrefThresholds:
                         quantile += gPrefThrCst + quantile*gPrefThrSlope
                 else :
                     if self.criteria[g]['preferenceDirection'] == 'min':
-                        quantile = Decimal('100.0')
+                        quantile = 100.0
                     else:
-                        quantile = Decimal('200.0')
+                        quantile = 200.0
                 if Debug:
                     print('quantile',quantile)
                 gQuantiles.append(quantile)               
@@ -2382,18 +2384,18 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         else:  # upper closed categories
             # we ignore the quantile 0.0 and replace it with -\infty            
             for q in self.limitingQuantiles:
-                r = (Decimal(str(nf)) * q)
+                r = (nf * q)
                 rq = int(floor(r))
                 if Debug:
                     print('r,rq',r,rq, end=' ')
                 if rq == 0:
                     if self.criteria[g]['preferenceDirection'] == 'min':
-                        quantile = Decimal('-200.0')
+                        quantile = -200.0
                     else:
-                        quantile = Decimal('-100.0')
+                        quantile = -100.0
                 elif rq < (n-1):
                     quantile = gValues[rq]\
-                        + ((r-Decimal(str(rq)))*(gValues[rq+1]-gValues[rq]))
+                        + ((r-rq)*(gValues[rq+1]-gValues[rq]))
                     if PrefThresholds:
                         quantile -= gPrefThrCst - quantile*gPrefThrSlope
                 else:
@@ -2401,9 +2403,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                         quantile = gValues[n-1]
                     else:
                         if self.criteria[g]['preferenceDirection'] == 'min':
-                            quantile = Decimal('-200.0')
+                            quantile = -200.0
                         else:
-                            quantile = Decimal('-100.0')     
+                            quantile = -100.0     
                 if Debug:
                     print('quantile',quantile)
                 gQuantiles.append(quantile)

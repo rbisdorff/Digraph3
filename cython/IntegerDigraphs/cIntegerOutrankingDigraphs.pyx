@@ -58,9 +58,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 criteria[g] = perfTab.criteria[g]
         #self.relation = self._constructRelation(criteria,perfTab.evaluation, self.weightPreorder)
         self.criteria = criteria
-        self.convertWeightFloatToDecimal()
+        #self.convertWeightFloatToDecimal()
         self.evaluation = copy.deepcopy(perfTab.evaluation)
-        self.convertEvaluationFloatToDecimal()
+        #self.convertEvaluationFloatToDecimal()
         self.relation = self._constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)
         methodData = {}
         methodData['parameter'] = {'valuationType':'normalized','variant':'unipolar'}
@@ -3819,7 +3819,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             else:
                 criteria[g] = perfTab.criteria[g]
         self.criteria = criteria
-        self.convertWeightFloatToDecimal()
+        #self.convertWeightFloatToDecimal()
 
         #  install method Data and parameters
         methodData = {}
@@ -3845,8 +3845,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             self.evaluation = deepcopy(perfTab.evaluation)
         else:
             self.evaluation = perfTab.evaluation
-        if not BigData:
-            self.convertEvaluationFloatToDecimal()
+        ## if not BigData:
+        ##     self.convertEvaluationFloatToDecimal()
         try:
             if CopyPerfTab:
                 self.description = deepcopy(perfTab.description)
@@ -4979,7 +4979,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         else:
             self.evaluation = perfTab.evaluation
         if not BigData:
-            self.convertEvaluationFloatToDecimal()
+            #self.convertEvaluationFloatToDecimal()
             try:
                 if CopyPerfTab:
                     self.description = deepcopy(perfTab.description)

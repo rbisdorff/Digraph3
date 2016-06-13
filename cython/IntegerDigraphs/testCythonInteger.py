@@ -24,19 +24,20 @@ import cBigIntegerOutrankingDigraphs as iBg
 #from bigOutrankingDigraphs import *
 from time import time
 from os import path
-from randomPerfTabs import Random3ObjectivesPerformanceTableau
+from cRandPerfTabs import Random3ObjectivesPerformanceTableau as cR3ObjPT
+from randomPerfTabs import Random3ObjectivesPerformanceTableau as R3ObjPT
 
 # parameters
 sampleSize = 10
 MP = True
 nbrOfCPUs = 4
 nbrOfThreads = 4
-nbrOfSubProcesses = 2
+nbrOfSubProcesses = 0
 componentThreadingThreshold = 50
 nbrActions = 2000
 nbrCriteria = 21
 commonPar=('beta','variable',None)
-qtiles = 75
+qtiles = 50
 minimalSize = 10
 seed = 10
 fileName = 'CythonA%dObj21q%ds%dc%dhome.csv' % (nbrActions,qtiles,minimalSize,nbrOfCPUs)
@@ -52,7 +53,8 @@ for s in range(sampleSize):
     seed += 1
     print('sample %d\n' % (s+1))
     # main starting
-    tp1 = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,
+    t0 = time()
+    tp1 = R3ObjPT(numberOfActions=nbrActions,
                                     numberOfCriteria=nbrCriteria,
                                     weightDistribution='equiobjectives',
 #                                    commonPercentiles={'ind':0.01,'pref':0.025,'veto':0.975},
@@ -62,6 +64,7 @@ for s in range(sampleSize):
 #                                    nbrCores=nbrOfCPUs,
                                     seed=seed)
     print(tp1.name)
+    print(time()-t0)
     #t0 = time()
     bg1 = Bg.BigOutrankingDigraph(tp1,quantiles=qtiles,
                                quantilesOrderingStrategy='average',
@@ -74,17 +77,18 @@ for s in range(sampleSize):
                                Debug=False)
 
 ##     print(bg1)
-    
-    tp2 = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,
+    t0 = time()
+    tp2 = cR3ObjPT(numberOfActions=nbrActions,
                                     numberOfCriteria=nbrCriteria,
                                     weightDistribution='equiobjectives',
 #                                    commonPercentiles={'ind':0.01,'pref':0.025,'veto':0.975},
                                         commonMode=commonPar,
 #                                        Threading=MP,
-                                        BigData=True,
+                                        #BigData=True,
 #                                        nbrCores=nbrOfCPUs,
                                         seed=seed)
-
+    print(tp2.name)
+    print(time()-t0)
     bg2 = iBg.BigIntegerOutrankingDigraph(tp2,quantiles=qtiles,
                                quantilesOrderingStrategy='average',
                                minimalComponentSize=minimalSize,
