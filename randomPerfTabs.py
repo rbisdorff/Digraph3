@@ -134,7 +134,7 @@ class RandomPerformanceTableau(PerformanceTableau):
         elif weightDistribution == 'fixed':
             weightsList = []
             sumWeights = Decimal('0.0')
-            for i in range(ng):
+            for i in range(numberOCriteria):
                 if i == 0:
                     weightsList.append(Decimal(str(weightScale[1])))
                     sumWeights += weightScale[1]
@@ -2097,7 +2097,6 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                                 est.add( float( abs(evx-evy) ) )
                                 sample += 1
                                 if sample > samplingSize:
-                                    break
                                     break
                 est._update()
                 for q in quantile:

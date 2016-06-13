@@ -17,10 +17,12 @@ call:
 		cython -3 -X boundscheck=False cIntegerSortingDigraphs.pyx
 		cython -3 -X boundscheck=False cBigIntegerOutrankingDigraphs.pyx
 inplace:
+		python3 csetupRandPerfTabs.py build_ext ${FLAG}
 		python3 csetupODGInteger.py build_ext ${FLAG}
 		python3 csetupSOInteger.py build_ext ${FLAG}
 		python3 csetupBGInteger.py build_ext ${FLAG}
 install:
+		sudo python3 csetupRandPerfTabs.py install
 		sudo python3 csetupODGInteger.py install
 		sudo python3 csetupSOInteger.py install
 		sudo python3 csetupBGInteger.py install
