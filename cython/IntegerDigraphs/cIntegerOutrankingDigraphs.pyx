@@ -4755,49 +4755,49 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         Removing this limitation is on the todo list and will be done soon.
        
     """
-    def _localConcordance(self,float d, ind, wp, p):
+    def _localConcordance(self,float d, float ind, float wp, float p):
         """
         Parameters: d := diff observed, wp := weak preference threshold,
         ind := indiffrence threshold, p := prefrence threshold.
         Renders the concordance index per criteria (-1,0,1)
         """
-        if p != None:
+        if p > -1.0:
             if   d <= -p:
                 return -1
-            elif ind != None:
+            elif ind > -1.0:
                 if d >= -ind:
                     return 1
                 else:
                     return 0
-            elif wp != None:
+            elif wp > -1.0:
                 if d > -wp:
                     return 1
                 else:
                     return 0
             else:
-                if d < Decimal("0.0"):
+                if d < 0.0:
                     return -1
                 else:
                     return 1
         else:
-            if ind != None:
+            if ind > -1.0:
                 if d >= -ind:
                     return 1
                 else:
                     return -1
-            elif wp != None:
+            elif wp > -1.0:
                 if d > -wp:
                     return 1
                 else:
                     return -1
             else:
-                if d < Decimal("0.0"):
+                if d < 0.0:
                     return -1
                 else:
                     return 1                
             
 
-    def _localVeto(self, float d, wv, v):
+    def _localVeto(self, float d, float wv, float v):
         """
         Parameters:
             d := diff observed, v (wv)  :=  (weak) veto threshold.
@@ -4805,17 +4805,17 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         Renders the local veto state (-1,0,1).
 
         """
-        if v != None:
+        if v > -1.0:
             if  d <= - v:
                 return 1
-            elif wv != None:
+            elif wv > -1.0:
                 if d <= - wv:
                     return 0
                 else:
                     return -1
             else:
                 return -1        
-        elif wv != None:
+        elif wv > -1.0:
             if d <= -wv:
                 return 0
             else:
@@ -4823,7 +4823,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         else:
             return -1
 
-    def _localNegativeVeto(self, float d, wv, v):
+    def _localNegativeVeto(self, float d, float wv, float v):
         """
         Parameters:
             d := diff observed, v (wv)  :=  (weak) veto threshold.
@@ -4831,17 +4831,17 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         Renders the local negative veto state (-1,0,1).
 
         """
-        if v != None:
+        if v > -1.0:
             if  d >= v:
                 return 1
-            elif wv != None:
+            elif wv > -1.0:
                 if d >= wv:
                     return 0
                 else:
                     return -1
             else:
                 return -1        
-        elif wv != None:
+        elif wv > -1.0:
             if d >= wv:
                 return 0
             else:
@@ -5051,7 +5051,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     else:
                         ind = indx +indy * abs(self.evaluation[c][a])
                 except:
-                    ind = None
+                    ind = -1.0
                 try:
                     wpx = self.criteria[c]['thresholds']['weakPreference'][0]
                     wpy = self.criteria[c]['thresholds']['weakPreference'][1]
@@ -5060,7 +5060,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     else:
                         wp = wpx + wpy * abs(self.evaluation[c][a])
                 except:
-                    wp = None
+                    wp = -1.0
                 try:
                     px = self.criteria[c]['thresholds']['pref'][0]
                     py = self.criteria[c]['thresholds']['pref'][1]
@@ -5069,7 +5069,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     else:
                         p = px + py * abs(self.evaluation[c][a]) 
                 except:
-                    p = None
+                    p = -1.0
                 d = self.evaluation[c][a] - self.evaluation[c][b]
 
                 return self._localConcordance(d,ind,wp,p)
@@ -5388,7 +5388,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                 indy = crit['thresholds']['ind'][1]
                                 ind = indx +indy * maxAB
                             except KeyError:
-                                ind = None
+                                ind = -1.0
                             try:
                                 wpx = crit['thresholds']['weakPreference'][0]
                                 wpy = crit['thresholds']['weakPreference'][1]
@@ -5397,7 +5397,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                 else:
                                     wp = wpx + wpy * abs(evalca) 
                             except KeyError:
-                                wp = None
+                                wp = -1.0
                             try:
                                 px = crit['thresholds']['pref'][0]
                                 py = crit['thresholds']['pref'][1]
@@ -5406,7 +5406,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                 else:
                                     p = px + py * abs(evalca) 
                             except KeyError:
-                                p = None
+                                p = -1
                             d = evalca - evalcb
                             lc0 = self._localConcordance(d,ind,wp,p)
                             ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
@@ -5415,20 +5415,20 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                 wvx = crit['thresholds']['weakVeto'][0]
                                 wvy = crit['thresholds']['weakVeto'][1]
                                 if hasNoVeto:
-                                    wv = None
+                                    wv = -1.0
                                 else:
                                     if hasSymmetricThresholds:
                                         wv = wvx + wvy * maxAB
                                     else:
                                         wv = wvx + wvy * abs(evalca)
                             except KeyError:
-                                wv = None
+                                wv = -1.0
                             try:
                                 vx = crit['thresholds']['veto'][0]
                                 vy = crit['thresholds']['veto'][1]
                                 v = vx + vy * maxAB
                             except KeyError:
-                                v = None
+                                v = -1.0
                             veto[c] = (self._localVeto(d,wv,v),d,wv,v)
                             if veto[c][0] > -1:
                                 abvetos.append((c,veto[c]))
