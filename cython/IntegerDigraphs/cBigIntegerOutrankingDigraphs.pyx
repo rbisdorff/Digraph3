@@ -1212,8 +1212,9 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         """
         print Criteria with thresholds and weights.
         """
+        cdef int sumWeights = 0
         print('*----  criteria -----*')
-        sumWeights = Decimal('0.0')
+        #sumWeights = 0
         for g in self.criteria:
             sumWeights += self.criteria[g]['weight']
         criteriaList = [c for c in self.criteria]

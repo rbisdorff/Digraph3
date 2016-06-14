@@ -4755,7 +4755,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         Removing this limitation is on the todo list and will be done soon.
        
     """
-    def _localConcordance(self,d,ind,wp,p):
+    def _localConcordance(self,float d, ind, wp, p):
         """
         Parameters: d := diff observed, wp := weak preference threshold,
         ind := indiffrence threshold, p := prefrence threshold.
@@ -4797,7 +4797,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     return 1                
             
 
-    def _localVeto(self, d, wv, v):
+    def _localVeto(self, float d, wv, v):
         """
         Parameters:
             d := diff observed, v (wv)  :=  (weak) veto threshold.
@@ -4823,7 +4823,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         else:
             return -1
 
-    def _localNegativeVeto(self, d, wv, v):
+    def _localNegativeVeto(self, float d, wv, v):
         """
         Parameters:
             d := diff observed, v (wv)  :=  (weak) veto threshold.
