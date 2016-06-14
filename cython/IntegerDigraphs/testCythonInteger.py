@@ -72,6 +72,7 @@ for s in range(sampleSize):
                                LowerClosed=False,
                                Threading=MP,
                                nbrOfCPUs=nbrOfCPUs,
+                               nbrOfThreads=nbrOfThreads,
                                CopyPerfTab=False,
                                Comments=True,
                                Debug=False)
@@ -96,7 +97,7 @@ for s in range(sampleSize):
                                Threading=MP,
                                CopyPerfTab=False,
                                nbrOfCPUs=nbrOfCPUs,
-                               nbrOfThreads=nbrOfThreads,
+                               nbrOfThreads=nbrOfCPUs,
                                nbrOfSubProcesses=nbrOfSubProcesses,
                                componentThreadingThreshold=componentThreadingThreshold,
                                Comments=True,

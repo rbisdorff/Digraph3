@@ -18,6 +18,7 @@
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 #######################
+cimport cython
 
 __version__ = "Revision: Py35"
 
@@ -4630,7 +4631,9 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         fo.close()
         if Comments:
             print('Single Criteria Netflows saved on file %s' % (fileName))
-        
+
+######################################
+
     def _localConcordance(self,d,ind,wp,p):
         """
         Parameters: d := diff observed, wp := weak preference threshold,
@@ -4725,7 +4728,112 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         else:
             return Decimal('-1.0')
 
-#############   dev
+
+#############  cython
+######################################################
+@cython.boundscheck(False)  
+cdef inline int _localConcordance(float d, float ind, float wp, float p):
+    """
+    Parameters: d := diff observed, wp := weak preference threshold,
+    ind := indiffrence threshold, p := prefrence threshold.
+    Renders the concordance index per criteria (-1,0,1)
+
+            .. notice::  all parameters are float None == -1.0 !
+
+    """
+    if p > -1.0:
+        if   d <= -p:
+            return -1
+        elif ind > -1.0:
+            if d >= -ind:
+                return 1
+            else:
+                return 0
+        elif wp > -1.0:
+            if d > -wp:
+                return 1
+            else:
+                return 0
+        else:
+            if d < 0.0:
+                return -1
+            else:
+                return 1
+    else:
+        if ind > -1.0:
+            if d >= -ind:
+                return 1
+            else:
+                return -1
+        elif wp > -1.0:
+            if d > -wp:
+                return 1
+            else:
+                return -1
+        else:
+            if d < 0.0:
+                return -1
+            else:
+                return 1                
+
+
+cdef inline int _localVeto(float d, float wv, float v):
+    """
+    Parameters:
+        d := diff observed, v (wv)  :=  (weak) veto threshold.
+
+    .. notice::  all parameters are float None == -1.0 !
+
+    Renders the local veto state (-1,0,1).
+
+    """
+    if v > -1.0:
+        if  d <= - v:
+            return 1
+        elif wv > -1.0:
+            if d <= - wv:
+                return 0
+            else:
+                return -1
+        else:
+            return -1        
+    elif wv > -1.0:
+        if d <= -wv:
+            return 0
+        else:
+            return -1
+    else:
+        return -1
+
+cdef int _localNegativeVeto(float d, float wv, float v):
+    """
+    Parameters:
+        d := diff observed, v (wv)  :=  (weak) veto threshold.
+
+    .. notice::  all parameters are float None == -1.0 !
+
+    Renders the local negative veto state (-1,0,1).
+
+    """
+    if v > -1.0:
+        if  d >= v:
+            return 1
+        elif wv > -1.0:
+            if d >= wv:
+                return 0
+            else:
+                return -1
+        else:
+            return -1        
+    elif wv > -1.0:
+        if d >= wv:
+            return 0
+        else:
+            return -1
+    else:
+        return -1
+
+
 class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     """
     Specialization of the abstract OutrankingDigraph root class for generating
@@ -4755,99 +4863,6 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         Removing this limitation is on the todo list and will be done soon.
        
     """
-    def _localConcordance(self,float d, float ind, float wp, float p):
-        """
-        Parameters: d := diff observed, wp := weak preference threshold,
-        ind := indiffrence threshold, p := prefrence threshold.
-        Renders the concordance index per criteria (-1,0,1)
-        """
-        if p > -1.0:
-            if   d <= -p:
-                return -1
-            elif ind > -1.0:
-                if d >= -ind:
-                    return 1
-                else:
-                    return 0
-            elif wp > -1.0:
-                if d > -wp:
-                    return 1
-                else:
-                    return 0
-            else:
-                if d < 0.0:
-                    return -1
-                else:
-                    return 1
-        else:
-            if ind > -1.0:
-                if d >= -ind:
-                    return 1
-                else:
-                    return -1
-            elif wp > -1.0:
-                if d > -wp:
-                    return 1
-                else:
-                    return -1
-            else:
-                if d < 0.0:
-                    return -1
-                else:
-                    return 1                
-            
-
-    def _localVeto(self, float d, float wv, float v):
-        """
-        Parameters:
-            d := diff observed, v (wv)  :=  (weak) veto threshold.
-
-        Renders the local veto state (-1,0,1).
-
-        """
-        if v > -1.0:
-            if  d <= - v:
-                return 1
-            elif wv > -1.0:
-                if d <= - wv:
-                    return 0
-                else:
-                    return -1
-            else:
-                return -1        
-        elif wv > -1.0:
-            if d <= -wv:
-                return 0
-            else:
-                return -1
-        else:
-            return -1
-
-    def _localNegativeVeto(self, float d, float wv, float v):
-        """
-        Parameters:
-            d := diff observed, v (wv)  :=  (weak) veto threshold.
-
-        Renders the local negative veto state (-1,0,1).
-
-        """
-        if v > -1.0:
-            if  d >= v:
-                return 1
-            elif wv > -1.0:
-                if d >= wv:
-                    return 0
-                else:
-                    return -1
-            else:
-                return -1        
-        elif wv > -1.0:
-            if d >= wv:
-                return 0
-            else:
-                return -1
-        else:
-            return -1
 
     def __repr__(self):
         """
@@ -5408,7 +5423,7 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             except KeyError:
                                 p = -1
                             d = evalca - evalcb
-                            lc0 = self._localConcordance(d,ind,wp,p)
+                            lc0 = _localConcordance(d,ind,wp,p)
                             ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
                             concordance = concordance + (lc0 * crit['weight'])
                             try:
@@ -5429,11 +5444,11 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                 v = vx + vy * maxAB
                             except KeyError:
                                 v = -1.0
-                            veto[c] = (self._localVeto(d,wv,v),d,wv,v)
+                            veto[c] = (_localVeto(d,wv,v),d,wv,v)
                             if veto[c][0] > -1:
                                 abvetos.append((c,veto[c]))
                             
-                            negativeVeto[c] = (self._localNegativeVeto(d,wv,v),d,wv,v)
+                            negativeVeto[c] = (_localNegativeVeto(d,wv,v),d,wv,v)
                             if negativeVeto[c][0] > -1:
                                 abNegativeVetos.append((c,negativeVeto[c]))
                         else:
