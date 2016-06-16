@@ -95,84 +95,6 @@ class BigIntegerDigraph(object):
         from best to worst actions. Further available ranking rules are Kohler's (rankingRule="kohler")
         and Tideman's ranked pairs rule (rankingRule="rankedPairs").
         
-        Example::
-
-            >>> from bigOutrankingDigraphs import *
-            >>> t = RandomCBPerformanceTableau(numberOfActions=50,seed=1)
-            >>> bg = BigOutrankingDigraphMP(t,quantiles=10,minimalComponentSize=5)
-            >>> print(bg)
-            *----- show short --------------*
-            Instance name     : randomCBperftab_mp
-            # Actions         : 50
-            # Criteria        : 7
-            Sorting by        : 10-Tiling
-            Ordering strategy : average
-            Ranking Rule      : Copeland
-            # Components      : 7
-            Minimal size      : 5
-            Maximal size      : 13
-            Median size       : 6
-            fill rate         : 16.898%
-            ----  Constructor run times (in sec.) ----
-            Total time        : 0.08494
-            QuantilesSorting  : 0.04339
-            Preordering       : 0.00034
-            Decomposing       : 0.03989
-            Ordering          : 0.00024
-            <class 'bigOutrankingDigraphs.BigOutrankingDigraphMP'> instance         
-            >>> bg.showRelationMap()
-             ┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴ ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-             + ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            --- -┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            -┴-+ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴ ┬-+┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴   +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴+  +  ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴-+- ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴  + ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴   -  ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴ +++-+++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴+ +++++++++-+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴+- +--+++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴--+ -++++++-+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴++++ +-   ++ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴--+-+ +++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴-+-++- ++++--┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴-++-++- + -+-┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴---- ++- + ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴-+--++++- -++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴--- --+++ ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴+-+-++-+-+ +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴-+- -+++-++ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  -  + + ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  -+ + ++┬++┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++ +++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ -- -+-++  ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++++ ++++++-┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴----- ++-┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  +++- -++-+┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-----++ -++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +-+-+-+ -++┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+   +++ ┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-- --+++  -┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴--┴+ -┴--+ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +++++++┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ +++-+┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴--  +++┬┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴--    ++┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+-+  +++┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +- + --┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴---+++ +┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴- ┴-+++ ┬┬┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ┬┬┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ++ ┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ - -┬┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ -+  ┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ┴  ┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ 
-            Component ranking rule: Copeland
-            >>> 
         """
         cdef int x, y, Max, Med, Min
         
@@ -200,6 +122,146 @@ class BigIntegerDigraph(object):
                     pictStr += symbols['negative']
             print(pictStr)
         print('Component ranking rule: %s' % self.componentRankingRule)
+
+    def showHTMLRelationMap(self,int fromIndex=0,int toIndex=0,\
+                            bint Colored=True,\
+                            tableTitle='Relation Map',\
+                            relationName='r(x S y)',\
+                            symbols=['+','&middot;','&nbsp;','&#150;','&#151']
+                            ):
+        """
+        Launches a browser window with the colored relation map of self.
+        See corresponding Digraph.showRelationMap() method.
+
+        Example::
+
+            >>> from outrankingDigraphs import *
+            >>> t = RandomCBPerformanceTableau(numberOfActions=25,seed=1)
+            >>> g = BipolarOutrankingDigraph(t,Normalized=True)
+            >>> gcd = ~(-g)  # strict outranking relation
+            >>> gcd.showHTMLRelationMap(rankingRule="netFlows")
+            
+        .. image:: relationMap.png
+           :alt: Browser view of a relation map
+           :width: 600 px
+           :align: center
+    
+   
+        """
+        import webbrowser
+        fileName = '/tmp/relationMap.html'
+        fo = open(fileName,'w')
+        fo.write(self.htmlRelationMap(fromIndex=fromIndex,
+                                      toIndex=toIndex,
+                                      Colored=Colored,
+                                      tableTitle=tableTitle,
+                                      symbols=symbols,
+                                      ContentCentered=True,
+                                      relationName=relationName))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+        
+        
+    def htmlRelationMap(self,int fromIndex=0,int toIndex=0,\
+                            tableTitle='Relation Map',\
+                          relationName='r(x R y)',\
+                          rankingRule='Copeland',\
+                          symbols=['+','&middot;','&nbsp;','-','_'],\
+                          bint Colored=True,\
+                          bint ContentCentered=True):
+        """
+        renders the relation map in actions X actions html table format.
+        """
+        cdef int Min, Med, Max
+        
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        Max = self.valuationdomain['max']
+        # construct ranking and actionsList
+        if toIndex == 0:
+            toIndex = len(self.boostedRanking)
+
+        actionsList = [(str(x),x) for x in self.boostedRanking[fromIndex:toIndex]]
+        # construct html text
+        s  = '<!DOCTYPE html><html><head>\n'
+        s += '<meta charset="UTF-8">\n'
+        s += '<title>%s</title>\n' % 'Digraph3 relation map'
+        s += '<style type="text/css">\n'
+        if ContentCentered:
+            s += 'td {text-align: center;}\n'
+        s += 'td.na {color: rgb(192,192,192);}\n'
+        s += '</style>\n'
+        s += '</head>\n<body>\n'
+        s += '<h1>%s</h1>' % tableTitle
+        s += '<h2>Ranking rule: %s</h2>' % rankingRule
+        s += '<table border="0">\n'
+        if Colored:
+            s += '<tr bgcolor="#9acd32"><th>%s</th>\n' % relationName
+        else:
+            s += '<tr><th>%s</th>' % relationName
+
+        for x in actionsList:
+            if Colored:
+                s += '<th bgcolor="#FFF79B">%s</th>\n' % (x[0])
+            else:
+                s += '<th>%s</th\n>' % (x[0])
+        s += '</tr>\n'
+        for x in actionsList:
+            s += '<tr>'
+            if Colored:
+                s += '<th bgcolor="#FFF79B">%s</th>\n' % (x[0])
+            else:
+                s += '<th>%s</th>\n' % (x[0])
+            for y in actionsList:
+                if Colored:
+                    if self.relation(x[1],y[1]) == Max:
+                        s += '<td bgcolor="#66ff66"><b>%s</b></td>\n' % symbols[0]
+                    elif self.relation(x[1],y[1]) > Med:
+                        s += '<td bgcolor="#ddffdd">%s</td>' % symbols[1]
+                    elif self.relation(x[1],y[1]) == Min:
+                        s += '<td bgcolor="#ff6666"><b>%s</b></td\n>' % symbols[4]
+                    elif self.relation(x[1],y[1]) < Med:
+                        s += '<td bgcolor="#ffdddd">%s</td>\n' % symbols[3]
+                    else:
+                        #s += '<td bgcolor="#ffffff">%s</td>\n' % symbols[2]
+                        s += '<td class="na">%s</td>\n' % symbols[2]
+                else:
+                    if self.relation(x[1],y[1]) == Max:
+                        s += '<td><b>%s</b></td>\n'  % symbols[0]
+                    elif self.relation(x[1],y[1]) > Med:
+                        s += '<td>%s</td>\n' % symbols[1]
+                    elif self.relation(x[1],y[1]) == Min:
+                        s += '<td><b>%s</b></td>\n' % symbols[4]
+                    elif self.relation(x[1],y[1]) < Med:
+                        s += '<td>%s</td>\n' % symbols[3]
+                    else:
+                        s += '<td>%s</td>\n' % symbols[2]
+            s += '</tr>'
+        s += '</table>\n'
+        # legend
+        s += '<span style="font-size: 75%">\n'
+        s += '<table border="1"><tr><th colspan="2"><i>Semantics</i></th></tr>\n'
+        if Colored:
+            s += '<tr><td bgcolor="#66ff66" align="center">%s</td><td>certainly valid</td></tr>\n' % symbols[0]
+            s += '<tr><td bgcolor="#ddffdd" align="center">%s</td><td>valid</td></tr>\n' % symbols[1]
+            s += '<tr><td>%s</td><td>indeterminate</td></tr>\n' % symbols[2]
+            s += '<tr><td bgcolor="#ffdddd" align="center">%s</td><td>invalid</td></tr>\n' % symbols[3]
+            s += '<tr><td bgcolor="#ff6666" align="center">%s</td><td>certainly invalid</td></tr>\n' % symbols[4]
+            s += '</table>\n'
+        else:
+            s += '<tr><td align="center">%s</td><td>certainly valid</td></tr>\n' % symbols[0]
+            s += '<tr><td align="center">%s</td><td>valid</td></tr>\n' % symbols[1]
+            s += '<tr><td align="center">%s</td><td>indeterminate</td></tr>\n' % symbols[2]
+            s += '<tr><td align="center">%s</td><td>invalid</td></tr>\n' % symbols[3]
+            s += '<tr><td align="center">%s</td><td>certainly invalid</td></tr>\n' % symbols[4]
+            s += '</table>\n'
+        s += '</span>\n'
+        # html footer
+        s += '</body>\n'
+        s += '</html>\n'
+        return s
+
 
     #@cython.locals(x=cython.int,y=cython.int)
     def computeOrdinalCorrelation(self, other, bint Debug=False):

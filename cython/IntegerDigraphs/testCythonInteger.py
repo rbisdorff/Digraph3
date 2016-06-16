@@ -30,8 +30,8 @@ from randomPerfTabs import Random3ObjectivesPerformanceTableau as R3ObjPT
 # parameters
 sampleSize = 10
 MP = True
-nbrOfCPUs = 4
-nbrOfThreads = 4
+nbrOfCPUs = 8
+nbrOfThreads = 8
 nbrOfSubProcesses = 0
 componentThreadingThreshold = 50
 nbrActions = 1000
