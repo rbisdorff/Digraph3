@@ -229,8 +229,9 @@ class BigIntegerDigraph(object):
              is by convention 0.0 at determination level 0.0 .
 
         """
-        cdef int x, y, Min, Max, oMin, oMax, corr, determ, otherRelation
-        cdef long n2=0, corrSum=0, determSum=0
+        cdef int x, y, sMax, oMax, selfMultiple=1, otherMultiple=1
+        cdef int corr, determ, selfRelation, otherRelation
+        cdef int corrSum=0, determSum=0
         cdef double correlation=0.0, determination=0.0
         
         ## if self.valuationdomain['min'] != Decimal('-1.0'):
@@ -238,73 +239,52 @@ class BigIntegerDigraph(object):
         ##         print(self.valuationdomain)
         ##         return
 
-        Min = self.valuationdomain['min']
-        Med = self.valuationdomain['med']
-        Max = self.valuationdomain['max']
-        oMin = int(other.valuationdomain['min'])
+        sMax = self.valuationdomain['max']
         oMax = int(other.valuationdomain['max'])
         if Debug:
-            print('self', Min, Max)
-            print('other', oMin, oMax)
+            print('self Max', sMax)
+            print('other Max', oMax)
         if issubclass(other.__class__,(Digraph,BigIntegerDigraph)):
             if Debug:
                 print('other is a %s instance' % other.__class__)
                 #print('self', self.valuationdomain)
                 #print('other', other.valuationdomain)
-        if (oMin != Min) or (oMax != Max) :
-            print('Error: the other digraph must be recoded !!')
-            print('self', self.valuationdomain)
-            print('other', other.valuationdomain)
-            return
-        ## else:
-        ##     print(oMin,Min,oMax,Max)
-     
-        selfActionsList = ((ck,
-                            self.components[ck]['subGraph'].actions)\
-                           for ck in self.components)
-
-        if issubclass(other.__class__,(Digraph)):
-            otherActionsList = [( 'c01', other.actions)]
-        else:
-            otherActionsList = ((ck,
-                                 other.components[ck]['subGraph'].actions)\
-                           for ck in other.components)
-        #if Debug:
-        #    print(selfActionsList)
-        #    print(otherActionsList)
+        if (oMax != sMax) :
+            selfMultiple = oMax
+            otherMultiple = sMax
+        if Debug:
+            print('self', selfMultiple)
+            print('other', otherMultiple)
         
-        #correlation = Decimal('0.0')
-        #determination = Decimal('0.0')
-
-        for ckx in selfActionsList:
-            for x in ckx[1]:
-                for cky in otherActionsList:
-                    for y in cky[1]:
-                        if x != y:
-                            selfRelation = self.relation(x,y)
-                            try:
-                                otherRelation = other.relation(x,y)
-                            except:
-                                otherRelation = int(other.relation[x][y])
-                            ## if Debug:
-                            ##    print(x,y,'self', selfRelation)
-                            ##    print(x,y,'other', otherRelation)
-                            corr = min( max(-selfRelation,otherRelation),\
-                                         max(selfRelation,-otherRelation) )
-                            corrSum += corr
-                            determ = min( abs(selfRelation),abs(otherRelation) )
-                            determSum += determ
+        #     print('Error: the other digraph must be recoded !!')
+        #     print('self', self.valuationdomain)
+        #     print('other', other.valuationdomain)
+        #     return
+        for x in self.actions:
+            for y in self.actions:
+                if x != y:
+                    selfRelation = self.relation(x,y) * selfMultiple
+                    try:
+                        otherRelation = other.relation(x,y) * otherMultiple
+                    except:
+                        otherRelation = int(other.relation[x][y]) * otherMultiple
+                    #if Debug:
+                    #   print(x,y,'self', selfRelation)
+                    #   print(x,y,'other', otherRelation)
+                    corr = min( max(-selfRelation,otherRelation),\
+                                 max(selfRelation,-otherRelation) )
+                    corrSum += corr
+                    determ = min( abs(selfRelation),abs(otherRelation) )
+                    determSum += determ
 
         if determSum > 0:
             correlation = float(corrSum) / float(determSum)
             n2 = (self.order*self.order) - self.order
             determination = (float(determSum) / n2)
-            determination /= abs(Max - Med)
-            return { 'correlation': correlation,\
+            determination /= (sMax * selfMultiple)
+            
+        return { 'correlation': correlation,\
                      'determination': determination }
-        else:
-            return {'correlation': 0.0,\
-                    'determination': 0.0}
         
     def showDecomposition(self,direction='decreasing'):
         """
@@ -358,34 +338,22 @@ class BigIntegerDigraph(object):
                    'fillrate': self.fillRate}
         return summary
 
-    def recodeValuation(self,newMin=-1, newMax=1,Debug=False):
+    def recodeIntegerValuation(self,int otherMax=1,Debug=False):
         """
         Specialization for recoding the valuation of all the partial digraphs and the component relation.
         By default the valuation domain is normalized to [-1;1]
         """
-        # saving old and new valuation domain
-        oldMax = self.valuationdomain['max']
-        oldMin = self.valuationdomain['min']
-        oldMed = self.valuationdomain['med']
-        oldAmplitude = oldMax - oldMin
-        if Debug:
-            print(oldMin, oldMed, oldMax, oldAmplitude)
-
-        newMin = Decimal(str(newMin))
-        newMax = Decimal(str(newMax))
-        newMed = Decimal('%.3f' % ((newMax + newMin)/Decimal('2.0')))
-        newAmplitude = newMax - newMin
-        if Debug:
-            print(newMin, newMed, newMax, newAmplitude)
-        # loop over all components
-        print('Recoding the valuation of a BigDigraph instance')
+        # update valuation domain
+        self.valuationdomain['max'] *= otherMax
+        self.valuationdomain['min'] *= otherMax
+        # update components' valuation domain and relation
         for cki in self.components.keys(): 
-            self.components[cki]['subGraph'].recodeValuation(newMin=newMin,newMax=newMax)
-       # update valuation domain                       
-        Min = Decimal(str(newMin))
-        Max = Decimal(str(newMax))
-        Med = (Min+Max)/Decimal('2')
-        self.valuationdomain = { 'min':Min, 'max':Max, 'med':Med }
+            pg = self.components[cki]['subGraph']
+            pg.valuationdomain['min'] *= otherMax
+            pg.valuationdomain['max'] *= otherMax
+            for x in pg.actions:
+                for y in pg.actions:
+                    pg.relation[x][y] *= otherMax 
 
     #@cython.locals(x=cython.int)
     def ranking2Preorder(self,ranking):
@@ -995,8 +963,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         elif n == 1:
             if Show:
                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     qs.categories[keys[0]]['lowLimit'],\
-                                     qs.categories[keys[0]]['highLimit'],\
+                                     self.categories[keys[0]]['lowLimit'],\
+                                     self.categories[keys[0]]['highLimit'],\
                                      action,\
                                      credibility,lowLimit,notHighLimit) )
             return action,\
@@ -1006,8 +974,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         else:
             if Show:
                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     qs.categories[keys[0]]['lowLimit'],\
-                                     qs.categories[keys[-1]]['highLimit'],\
+                                     self.categories[keys[0]]['lowLimit'],\
+                                     self.categories[keys[-1]]['highLimit'],\
                                      action,\
                                      credibility,lowLimit,notHighLimit) )
             return action,\
@@ -1261,7 +1229,11 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             comp = self.components[compKey]
             sg = comp['subGraph']
             actions = [x for x in sg.actions]
+            #if self.sortingParameters['LowerClosed']:
             print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],actions))
+            #else:
+            #    print('%s. %s-%s : %s' % (compKey,comp['highQtileLimit'],comp['lowQtileLimit'],actions))
+                
 
     def showRelationTable(self,IntegerValues=True,compKeys=None):
         """
