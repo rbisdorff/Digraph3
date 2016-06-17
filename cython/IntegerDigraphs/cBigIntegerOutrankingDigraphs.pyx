@@ -125,7 +125,7 @@ class BigIntegerDigraph(object):
 
     def showHTMLRelationMap(self,int fromIndex=0,int toIndex=0,\
                             bint Colored=True,\
-                            tableTitle='Relation Map',\
+                            tableTitle='Big Relation Map',\
                             relationName='r(x S y)',\
                             symbols=['+','&middot;','&nbsp;','&#150;','&#151']
                             ):
@@ -164,9 +164,9 @@ class BigIntegerDigraph(object):
         
         
     def htmlRelationMap(self,int fromIndex=0,int toIndex=0,\
-                            tableTitle='Relation Map',\
+                            tableTitle='Big Relation Map',\
                           relationName='r(x R y)',\
-                          rankingRule='Copeland',\
+                          #rankingRule='Copeland',\
                           symbols=['+','&middot;','&nbsp;','-','_'],\
                           bint Colored=True,\
                           bint ContentCentered=True):
@@ -194,7 +194,7 @@ class BigIntegerDigraph(object):
         s += '</style>\n'
         s += '</head>\n<body>\n'
         s += '<h1>%s</h1>' % tableTitle
-        s += '<h2>Ranking rule: %s</h2>' % rankingRule
+        s += '<h2>Component ranking rule: %s</h2>' % self.componentRankingRule
         s += '<table border="0">\n'
         if Colored:
             s += '<tr bgcolor="#9acd32"><th>%s</th>\n' % relationName

@@ -71,7 +71,7 @@ def testMinimalComponentSize():
     print(bg2.computeOrdinalCorrelation(bg1,Debug=True))
     print(bg2)
     bg2.showRelationMap(0,50)
-    bg2.showHTMLRelationMap(0,100)
+    bg2.showHTMLRelationMap(0,100,Colored=False)
 
 ## def testMPComments():
 ##     print('==>> Testing commented bigOutrankingDigraph construction')
