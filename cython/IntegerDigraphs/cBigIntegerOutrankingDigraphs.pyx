@@ -54,6 +54,7 @@ class BigIntegerDigraph(object):
         print('Average order     : %.1f' % (self.order/self.nbrComponents) )
         print('fill rate         : %.3f%%' % (self.fillRate*100.0) )     
         print('----  Constructor run times (in sec.) ----')
+        print('Nbr of threads    : %d' % self.nbrOfCPUs)
         print('Total time        : %.5f' % self.runTimes['totalTime'])
         print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
         print('Preordering       : %.5f' % self.runTimes['preordering'])
@@ -456,82 +457,6 @@ class BigIntegerDigraph(object):
         fillRate = float(fillRateSum)/n2
         return fillRate
 
-##    def computeCriterionCorrelation(self,criterion,Threading=False,\
-##                                    nbrOfCPUs=None,Debug=False,
-##                                    Comments=False):
-##        """
-##        Renders the ordinal correlation coefficient between
-##        the global outranking and the marginal criterion relation.
-##
-##        If Threading, the 
-##        """
-##        gc = BipolarOutrankingDigraph(self,coalition=[criterion],
-##                                      Normalized=True,CopyPerfTab=False,
-##                                      Threading=Threading,nbrCores=nbrOfCPUs,
-##                                      Comments=Comments)
-##        corr = self.computeOrdinalCorrelation(gc)
-##        if Debug:
-##            print(corr)
-##        return corr
-##
-##    def computeMarginalVersusGlobalOutrankingCorrelations(self,Sorted=True,
-##                                                          Threading=False,nbrCores=None,\
-##                                                          Comments=False):
-##        """
-##        Method for computing correlations between each individual criterion relation with the corresponding
-##        global outranking relation.
-##        
-##        Returns a list of tuples (correlation,criterionKey) sorted by default in decreasing order of the correlation.
-##
-##        If Threading is True, a multiprocessing Pool class is used with a parallel equivalent of the built-in map function.
-##
-##        If nbrCores is not set, the os.cpu_count() function is used to determine the number of
-##        available cores.
-##        """
-##        if Threading:
-##            from multiprocessing import Pool
-##            from os import cpu_count
-##            if nbrCores == None:
-##                nbrCores= cpu_count()
-##            criteriaList = [x for x in self.criteria]
-##            with Pool(nbrCores) as proc:   
-##                correlations = proc.map(self.computeCriterionCorrelation,criteriaList)
-##            criteriaCorrelation = [(correlations[i]['correlation'],criteriaList[i]) for i in range(len(criteriaList))]
-##        else:
-##            #criteriaList = [x for x in self.criteria]
-##            criteria = self.criteria
-##            criteriaCorrelation = []
-##            for c in dict.keys(criteria):
-##                corr = self.computeCriterionCorrelation(c,Threading=False)
-##                criteriaCorrelation.append((corr['correlation'],c))            
-##        if Sorted:
-##            criteriaCorrelation.sort(reverse=True)
-##        return criteriaCorrelation   
-##
-##    def showMarginalVersusGlobalOutrankingCorrelation(self,Sorted=True,Threading=False,\
-##                                                      nbrOfCPUs=None,Comments=True):
-##        """
-##        Show method for computeCriterionCorrelation results.
-##        """
-##        criteria = self.criteria
-##        #criteriaList = [x for x in self.criteria]
-##        criteriaCorrelation = []
-##        totCorrelation = Decimal('0.0')
-##        for c in dict.keys(criteria):
-##            corr = self.computeCriterionCorrelation(c,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
-##            totCorrelation += corr['correlation']
-##            criteriaCorrelation.append((corr['correlation'],c))
-##        if Sorted:
-##            criteriaCorrelation.sort(reverse=True)
-##        if Comments:
-##            print('Marginal versus global outranking correlation')
-##            print('criterion | weight\t correlation')
-##            print('----------|---------------------------')
-##            for x in criteriaCorrelation:
-##                c = x[1]
-##                print('%9s |  %.2f \t %.3f' % (c,self.criteria[c]['weight'],x[0]))
-##            print('Sum(Correlations) : %.3f' % (totCorrelation))
-##            print('Determinateness   : %.3f' % (corr['determination']))
 
 ########################
 
@@ -564,8 +489,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                  tempDir=None,\
                  int componentThreadingThreshold=50,\
                  int nbrOfSubProcesses=0,
-                 nbrOfCPUs=None,\
-                 nbrOfThreads=None,\
+                 int nbrOfCPUs=1,\
+                 int nbrOfThreads=1,\
                  save2File=None,\
                  bint CopyPerfTab=False,\
                  bint Comments=False,\
