@@ -77,7 +77,7 @@ for s in range(sampleSize):
                                Comments=True,
                                Debug=False)
 
-##     print(bg1)
+    print(bg1)
     t0 = time()
     tp2 = cR3ObjPT(numberOfActions=nbrActions,
                                     numberOfCriteria=nbrCriteria,

@@ -70,10 +70,11 @@ def testMinimalComponentSize():
     #bg2.showRelationTable()
     print(bg1.computeOrdinalCorrelation(bg2,Debug=True))
     #bg1.recodeValuation(-1,1,Debug=True)
-    print(bg2.computeOrdinalCorrelation(bg1,Debug=True))
+    print(bg2.computeOrdinalCorrelation(bg2,Debug=True))
     print(bg2)
     bg2.showRelationMap(0,50)
     bg2.showHTMLRelationMap(0,0,Colored=True)
+    t0=time();print(bg2.computeDeterminateness());print(time()-t0,'sec.')
 
 ## def testMPComments():
 ##     print('==>> Testing commented bigOutrankingDigraph construction')

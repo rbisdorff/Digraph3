@@ -1375,4 +1375,33 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 ordering += opg.kohlerOrder
         return ordering
 
+    def computeDeterminateness(self, InPercent=True):
+        """
+        Computes the Kendalll distance in % of self
+        with the all median valued (indeterminate) digraph.
+
+        deter = (sum_{x,y in X} abs[r(xSy) - Med])/(oder*order-1)
+        """
+        
+        cdef int Max, Med, order, x, y
+        cdef float deter=0.0
+        
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+
+        actions = self.actions
+        relation = self.relation
+        order = self.order
+
+        for x in actions:
+            for y in actions:
+                if x != y:
+                    deter += abs(relation(x,y) - Med)
+
+        deter = deter / (order * (order-1))
+        if InPercent:
+            return deter/(Max-Med)*100.0
+        else:
+            return deter
+
 ########################################################33
