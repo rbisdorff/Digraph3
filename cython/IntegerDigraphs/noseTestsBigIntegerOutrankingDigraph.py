@@ -47,7 +47,7 @@ def testMinimalComponentSize():
     print('==>> Testing bigOutrankingDigraph with minimal Component Size instantiation')
     MP = True
     t0 = time()
-    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,seed=1)
+    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,seed=None)
     print(time()-t0)
     print(total_size(tp.evaluation))
     bg1 = BigIntegerOutrankingDigraph(tp,quantiles=5,quantilesOrderingStrategy='average',
@@ -58,10 +58,12 @@ def testMinimalComponentSize():
     bg1.showDecomposition()
     print(bg1)
     bg1.showRelationTable()
-    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,seed=1)
-    bg2 = BigIntegerOutrankingDigraph(tp,quantiles=10,quantilesOrderingStrategy='average',
+    tp = RandomPerformanceTableau(numberOfActions=200,seed=None)
+    #tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,seed=None)
+    #tp = Random3ObjectivesPerformanceTableau(numberOfActions=200,seed=None)
+    bg2 = BigIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
-                               minimalComponentSize=10,
+                               minimalComponentSize=200,
                                     Threading=MP,Debug=False)
     print(bg2.computeDecompositionSummaryStatistics())
     bg2.showDecomposition(direction="increasing")
@@ -71,7 +73,7 @@ def testMinimalComponentSize():
     print(bg2.computeOrdinalCorrelation(bg1,Debug=True))
     print(bg2)
     bg2.showRelationMap(0,50)
-    bg2.showHTMLRelationMap(0,100,Colored=False)
+    bg2.showHTMLRelationMap(0,0,Colored=True)
 
 ## def testMPComments():
 ##     print('==>> Testing commented bigOutrankingDigraph construction')

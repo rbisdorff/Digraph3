@@ -308,6 +308,12 @@ class Graph(object):
         Renders the set of all chordless cycles observed in a Graph
         intance. Inspired from Dias, Castonguay, Longo & Jradi,
         Algorithmica 2015.
+
+        .. note::
+
+             By default, a chordless cycle must have at least length 4.If the Cycle3 flag is set to True,
+             the cyclicly closed triplets will be inserted as 3-cycles in the result.
+             
         """
 
         if Debug:
