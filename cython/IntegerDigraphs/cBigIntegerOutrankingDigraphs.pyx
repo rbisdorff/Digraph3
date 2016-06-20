@@ -20,12 +20,17 @@
 ######################
 
 #import cython
+cimport cython
+
+cdef extern from "detertest.h":
+    int ABS(int a)
 
 from cIntegerOutrankingDigraphs import *
 from cIntegerSortingDigraphs import *
 from time import time
 from decimal import Decimal
 from cBigIntegerOutrankingDigraphs import *
+
 
 class BigIntegerDigraph(object):
     """
@@ -1383,8 +1388,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         deter = (sum_{x,y in X} abs[r(xSy) - Med])/(oder*order-1)
         """
         
-        cdef int Max, Med, order, x, y
-        cdef float deter=0.0
+        cdef int Max, Med, order, x, y, sumDeter=0
+        cdef float deter
         
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
@@ -1396,9 +1401,9 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         for x in actions:
             for y in actions:
                 if x != y:
-                    deter += abs(relation(x,y) - Med)
+                    sumDeter += ABS(relation(x,y) - Med)
 
-        deter = deter / (order * (order-1))
+        deter = float(sumDeter) / (order * (order-1))
         if InPercent:
             return deter/(Max-Med)*100.0
         else:
