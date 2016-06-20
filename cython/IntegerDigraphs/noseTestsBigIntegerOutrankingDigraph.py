@@ -75,6 +75,7 @@ def testMinimalComponentSize():
     bg2.showRelationMap(0,50)
     bg2.showHTMLRelationMap(0,0,Colored=True)
     t0=time();print(bg2.computeDeterminateness());print(time()-t0,'sec.')
+    bg2.showBestChoiceRecommendation()
 
 ## def testMPComments():
 ##     print('==>> Testing commented bigOutrankingDigraph construction')

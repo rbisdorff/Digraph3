@@ -64,7 +64,21 @@ class BigIntegerDigraph(object):
         except:
             pass
         return '%s instance' % str(self.__class__)
-    
+
+
+    def showBestChoiceRecommendation(self):
+        """
+        update of rubisBestChoice Recommendation for big digraphs.
+        """
+        from digraphs import Digraph as DG
+        c1 = (list(self.components.keys()))[0]
+        g1 = self.components[c1]['subGraph']
+        actionsList = [ x for x in g1.actions]
+        if len(g1.actions) > 1:
+            g1.showRubisBestChoiceRecommendation(g1,ChoiceVector=False)
+        else:
+            print('Best choice recommendation: \'%s\'' % (g1.actions[actionsList[0]]['name']))
+                  
     def relation(self, int x, int y):
         """
         Dynamic construction of the global outranking characteristic function *r(x S y)*.
@@ -158,7 +172,7 @@ class BigIntegerDigraph(object):
         import webbrowser
         fileName = '/tmp/relationMap.html'
         fo = open(fileName,'w')
-        fo.write(self.htmlRelationMap(fromIndex=fromIndex,
+        fo.write(self._htmlRelationMap(fromIndex=fromIndex,
                                       toIndex=toIndex,
                                       Colored=Colored,
                                       tableTitle=tableTitle,
@@ -170,7 +184,7 @@ class BigIntegerDigraph(object):
         webbrowser.open_new(url)
         
         
-    def htmlRelationMap(self,int fromIndex=0,int toIndex=0,\
+    def _htmlRelationMap(self,int fromIndex=0,int toIndex=0,\
                             tableTitle='Big Relation Map',\
                           relationName='r(x R y)',\
                           #rankingRule='Copeland',\
@@ -189,7 +203,7 @@ class BigIntegerDigraph(object):
         if toIndex == 0:
             toIndex = len(self.boostedRanking)
 
-        actionsList = [(str(x),x) for x in self.boostedRanking[fromIndex:toIndex]]
+        actionsList = [(self.actions[x]['name'],x) for x in self.boostedRanking[fromIndex:toIndex]]
         # construct html text
         s  = '<!DOCTYPE html><html><head>\n'
         s += '<meta charset="UTF-8">\n'
@@ -407,10 +421,9 @@ class BigIntegerDigraph(object):
                    'fillrate': self.fillRate}
         return summary
 
-    def recodeIntegerValuation(self,int otherMax=1,Debug=False):
+    def _recodeIntegerValuation(self,int otherMax=1,Debug=False):
         """
         Specialization for recoding the valuation of all the partial digraphs and the component relation.
-        By default the valuation domain is normalized to [-1;1]
         """
         # update valuation domain
         self.valuationdomain['max'] *= otherMax
@@ -1334,5 +1347,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             return deter/(Max-Med)*100.0
         else:
             return deter
+
+
 
 ########################################################33
