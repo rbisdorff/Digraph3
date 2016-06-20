@@ -313,7 +313,7 @@ class Graph(object):
         if Debug:
             Comments=True
         #self.visitedChordlessPathsNew = []
-        self.degreeLabelling()
+        self._degreeLabelling()
         triplets,cycles3 = self._triplets(Comments=Comments)
         if Comments:
             print('# of initial triplets:',len(triplets))

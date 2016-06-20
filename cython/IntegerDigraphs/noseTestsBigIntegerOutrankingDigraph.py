@@ -73,9 +73,18 @@ def testMinimalComponentSize():
     print(bg2.computeOrdinalCorrelation(bg2,Debug=True))
     print(bg2)
     bg2.showRelationMap(0,50)
-    bg2.showHTMLRelationMap(0,0,Colored=True)
+
+def testBestChoiceRecommendation():
+    print('==>> Testing best choice recommendations')
+    MP = True
+    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,seed=None)
+    bg2 = BigIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
+                                LowerClosed=False,
+                               minimalComponentSize=10,
+                                    Threading=MP,Debug=False)
     t0=time();print(bg2.computeDeterminateness());print(time()-t0,'sec.')
-    bg2.showBestChoiceRecommendation()
+    bg2.showHTMLRelationMap(0,0,Colored=True)
+    bg2.showBestChoiceRecommendation(Comments=False)
 
 ## def testMPComments():
 ##     print('==>> Testing commented bigOutrankingDigraph construction')
