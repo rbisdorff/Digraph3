@@ -63,7 +63,7 @@ def testMinimalComponentSize():
     #tp = Random3ObjectivesPerformanceTableau(numberOfActions=200,seed=None)
     bg2 = BigIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
-                               minimalComponentSize=200,
+                               minimalComponentSize=1,
                                     Threading=MP,Debug=False)
     print(bg2.computeDecompositionSummaryStatistics())
     bg2.showDecomposition(direction="increasing")

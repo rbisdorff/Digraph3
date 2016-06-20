@@ -64,8 +64,7 @@ class BigIntegerDigraph(object):
             pass
         return '%s instance' % str(self.__class__)
     
-    #@cython.locals(x=cython.int,y=cython.int)
-    def relation(self, int x, int y, bint Debug=False):
+    def relation(self, int x, int y):
         """
         Dynamic construction of the global outranking characteristic function *r(x S y)*.
         """
@@ -77,11 +76,13 @@ class BigIntegerDigraph(object):
         
         if x == y:
             return Med
+        
         cx = self.actions[x]['component']
         cy = self.actions[y]['component']
-        #print(x,cx,y,cy)
+
         if cx == cy:
-            return self.components[cx]['subGraph'].relation[x][y]        
+            rxpg = self.components[cx]['subGraph'].relation
+            return rxpg[x][y]
         elif self.components[cx]['rank'] > self.components[cy]['rank']:
             return Min
         else:
