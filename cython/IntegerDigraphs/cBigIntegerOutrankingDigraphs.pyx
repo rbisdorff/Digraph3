@@ -21,12 +21,14 @@
 
 #import cython
 cimport cython
+from cpython cimport array
+import array
 
 cdef extern from "detertest.h":
     int ABS(int a)
 
-from cIntegerOutrankingDigraphs import *
-from cIntegerSortingDigraphs import *
+#from cIntegerOutrankingDigraphs import *
+#from cIntegerSortingDigraphs import *
 from time import time
 from decimal import Decimal
 from cBigIntegerOutrankingDigraphs import *
@@ -761,6 +763,7 @@ class BigIntegerDigraph(object):
 ########################
 
 #from weakOrders import QuantilesRankingDigraph
+from cRandPerfTabs import PerformanceTableau
 class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
     """
     Main class for the multiprocessing implementation of big outranking digraphs.
@@ -800,12 +803,14 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         cdef int nbrOfLocals,nbrOfThreadsUsed,threadLoad
         cdef double ttot, t0, tw, tdump
         cdef int maximalComponentSize
+        cdef array.array lTest=array.array('i')
         
         from digraphs import Digraph
         from cIntegerSortingDigraphs import IntegerQuantilesSortingDigraph
         from collections import OrderedDict
         from time import time
         from os import cpu_count
+        #from array import array
         from multiprocessing import Pool
         #from cython.parallel import prange
         from copy import copy, deepcopy
@@ -924,7 +929,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 def __init__(self, int threadID,\
                              tempDirName,\
                              lTest,\
-                             Debug,nbrOfSubProcesses,componentThreadingThreshold):
+                             Debug,int nbrOfSubProcesses, int componentThreadingThreshold):
+                    #from array import array
                     if nbrOfSubProcesses > 0:
                         Process.__init__(self,daemon=False)
                     else:
@@ -939,7 +945,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     cdef int i,nc,nd,totalWeight=0
                     from pickle import dumps, loads
                     from os import chdir
-                    from copy import deepcopy
+                    #from copy import deepcopy
+                    #from array import array
                     from perfTabs import PartialPerformanceTableau
                     from digraphs import Digraph
                     from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph
@@ -1017,10 +1024,10 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 if Comments:
                     print('dumping time: %.5f' % (time() - tdump))
 
-                if nbrOfCPUs == None:
-                    nbrOfCPUs = cpu_count()
-                if nbrOfThreads == None:
-                    nbrOfThreads = nbrOfCPUs-1
+                # if nbrOfCPUs == None:
+                #     nbrOfCPUs = cpu_count()
+                # if nbrOfThreads == None:
+                #     nbrOfThreads = nbrOfCPUs-1
                 nbrOfLocals = self.order//nbrOfThreads
                 if nbrOfLocals*nbrOfThreads < self.order:
                     nbrOfLocals += 1
@@ -1033,7 +1040,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 for j in range(nbrOfThreads):
                     if Comments:
                         print('thread = %d/%d' % (j+1,nbrOfThreads),end="...")
-                    lTest = []
+                    lTest = array.array('i')
                     threadLoad = 0
                     while threadLoad <= nbrOfLocals and i < (nc):
                         lTest.append(i)
@@ -1380,30 +1387,6 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
     def showShort(self,fileName=None,bint WithFileSize=True):
         """
         Default (__repr__) presentation method for big outranking digraphs instances:
-        
-        >>> from bigOutrankingDigraphs import *
-        >>> t = RandomCBPerformanceTableau(numberOfActions=100,seed=1)
-        >>> g = BigOutrankingDigraphMP(t,quantiles=10)
-        >>> print(g)
-        *----- show short --------------*
-        Instance name     : randomCBperftab_mp
-        # Actions         : 100
-        # Criteria        : 7
-        Sorting by        : 10-Tiling
-        Ordering strategy : average
-        Ranking rule      : Copeland
-        # Components      : 19
-        Minimal size      : 1
-        Maximal size      : 22
-        Median size       : 2
-        fill rate         : 0.116
-        ----  Constructor run times (in sec.) ----
-        Total time        : 0.14958
-        QuantilesSorting  : 0.06847
-        Preordering       : 0.00071
-        Decomposing       : 0.07366
-        Ordering          : 0.00130
-        <class 'bigOutrankingDigraphs.BigOutrankingDigraphMP'> instance        
         """
         #summaryStats = self.computeDecompositionSummaryStatistics()
         if fileName == None:
@@ -1420,6 +1403,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             print('Average order     : %.1f' % (self.order/self.nbrComponents))
             print('Fill rate         : %.3f%%' % (self.fillRate*100.0))
             print('----  Constructor run times (in sec.) ----')
+            print('Nbr of thread     : %d' % self.nbrOfCPUs)
             print('Total time        : %.5f' % self.runTimes['totalTime'])
             print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
             print('Preordering       : %.5f' % self.runTimes['preordering'])
@@ -1445,6 +1429,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             fo.write('Average order      : %.1f\n' % (self.order/self.nbrComponents))
             fo.write('Fill rate          : %.3f%%\n' % (self.fillRate*100.0))
             fo.write('*-- Constructor run times (in sec.) --*\n')
+            fo.write('# Threads          : %d' % self.nbrOfCPUs)
             fo.write('Total time         : %.5f\n' % self.runTimes['totalTime'])
             fo.write('QuantilesSorting   : %.5f\n' % self.runTimes['sorting'])
             fo.write('Preordering        : %.5f\n' % self.runTimes['preordering'])
@@ -1469,7 +1454,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         for ax in actionsList:
             print('%s: %s' % ax)
 
-    def showCriteria(self,IntegerWeights=False,Debug=False):
+    def showCriteria(self, bint IntegerWeights=False, bint Debug=False):
         """
         print Criteria with thresholds and weights.
         """
@@ -1505,10 +1490,10 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 pass
             print()
 
-    def showComponents(self,direction='increasing'):
+    def showComponents(self, direction='increasing'):
         BigIntegerOutrankingDigraph.showDecomposition(self,direction=direction)
 
-    def showDecomposition(self,direction='decreasing'):
+    def showDecomposition(self, direction='decreasing'):
         
         print('*--- quantiles decomposition in %s order---*' % (direction) )
         #compKeys = [compKey for compKey in self.components.keys()]
@@ -1528,7 +1513,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             #    print('%s. %s-%s : %s' % (compKey,comp['highQtileLimit'],comp['lowQtileLimit'],actions))
                 
 
-    def showRelationTable(self,IntegerValues=True,compKeys=None):
+    def showRelationTable(self, bint IntegerValues=True, compKeys=None):
         """
         Specialized for showing the quantiles decomposed relation table.
         Components are stored in an ordered dictionary.
@@ -1558,7 +1543,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     pg.showRelationTable(IntegerValues=IntegerValues)                
 
 
-    def computeBoostedRanking(self,rankingRule='Copeland'):
+    def computeBoostedRanking(self, rankingRule='Copeland'):
         """
         Renders an ordred list of decision actions ranked in
         decreasing preference direction following the net flows rule
@@ -1582,7 +1567,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 ranking += opg.kohlerRanking
         return ranking
 
-    def computeBoostedOrdering(self,orderingRule='Copeland'):
+    def computeBoostedOrdering(self, orderingRule='Copeland'):
         """
         Renders an ordred list of decision actions ranked in
         increasing preference direction following by default the Copeland rule
@@ -1606,7 +1591,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 ordering += opg.kohlerOrder
         return ordering
 
-    def computeDeterminateness(self, InPercent=True):
+    def computeDeterminateness(self, bint InPercent=True):
         """
         Computes the Kendalll distance in % of self
         with the all median valued (indeterminate) digraph.

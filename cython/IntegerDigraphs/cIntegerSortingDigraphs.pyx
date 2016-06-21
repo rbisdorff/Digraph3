@@ -1741,7 +1741,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                         categoryContent[c] = array('i')
                         for x in splitActions:
                             if sorting[x][c]['categoryMembership'] >= Med:
-                                categoryContent[c].extend([x])
+                                categoryContent[c].append(x)
 
                     #self.categoryContent = categoryContent
                     foName = 'splitCategoryContent-'+str(self.threadID)+'.py'
