@@ -30,14 +30,14 @@ from randomPerfTabs import Random3ObjectivesPerformanceTableau as R3ObjPT
 # parameters
 sampleSize = 10
 MP = True
-nbrOfCPUs = 8
-nbrOfThreads = 8
-nbrOfSubProcesses = 0
+nbrOfCPUs = 4
+nbrOfThreads = 4
+nbrOfSubProcesses = 2
 componentThreadingThreshold = 50
-nbrActions = 1000
+nbrActions = 2500
 nbrCriteria = 21
 commonPar=('beta','variable',None)
-qtiles = 50
+qtiles = 75
 minimalSize = 10
 seed = 10
 fileName = 'CythonA%dObj21q%ds%dc%dhome.csv' % (nbrActions,qtiles,minimalSize,nbrOfCPUs)
