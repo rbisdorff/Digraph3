@@ -20,12 +20,19 @@
 ######################
 
 #import cython
+cimport cython
+from cpython cimport array
+import array
 
-from cIntegerOutrankingDigraphs import *
-from cIntegerSortingDigraphs import *
+cdef extern from "detertest.h":
+    int ABS(int a)
+
+#from cIntegerOutrankingDigraphs import *
+#from cIntegerSortingDigraphs import *
 from time import time
 from decimal import Decimal
 from cBigIntegerOutrankingDigraphs import *
+
 
 class BigIntegerDigraph(object):
     """
@@ -49,6 +56,7 @@ class BigIntegerDigraph(object):
         print('Average order     : %.1f' % (self.order/self.nbrComponents) )
         print('fill rate         : %.3f%%' % (self.fillRate*100.0) )     
         print('----  Constructor run times (in sec.) ----')
+        print('Nbr of threads    : %d' % self.nbrOfCPUs)
         print('Total time        : %.5f' % self.runTimes['totalTime'])
         print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
         print('Preordering       : %.5f' % self.runTimes['preordering'])
@@ -58,9 +66,309 @@ class BigIntegerDigraph(object):
         except:
             pass
         return '%s instance' % str(self.__class__)
-    
-    #@cython.locals(x=cython.int,y=cython.int)
-    def relation(self, int x, int y, bint Debug=False):
+
+    def showBestChoiceRecommendation(self,Comments=False,ChoiceVector=False,Debug=False):
+        """
+        Update of rubisBestChoice Recommendation for big digraphs.
+        To do: limit to best choice; worst choice should be a separate method()
+        """
+        from digraphs import Digraph as DG
+        # best choices
+        c1 = (list(self.components.keys()))[0]
+        g1 = self.components[c1]['subGraph']
+        if len(g1.actions) > 1:
+            self.showRubisBestChoiceRecommendation(g1,Debug=Debug,ChoiceVector=False,Comments=Comments)
+        else:
+            actionsNames = [g1.actions[x]['name'] for x in g1.actions]
+            print('Best choice recommendation: \'%s\'' % (actionsNames[0]))
+        # worst choices
+        cn = (list(self.components.keys()))[-1]
+        gn = self.components[cn]['subGraph']
+        if len(gn.actions) > 1:
+            self.showRubisWorstChoiceRecommendation(gn,Debug=Debug,ChoiceVector=False,Comments=Comments)
+        else:
+            actionsNames = [gn.actions[x]['name'] for x in gn.actions]
+            print('Worst choice recommendation: \'%s\'' % (actionsNames[-1]))
+
+
+    def showRubisBestChoiceRecommendation(self,g1,
+                                          Comments=False,
+                                          ChoiceVector=True,
+                                          Debug=False,
+                                          _OldCoca=False,
+                                          Cpp=False):
+        """
+        Renders the Rubis Best choice recommendation of the first component.
+        """
+        import copy,time
+        if Debug:
+            Comments = True
+        print('***********************')
+        print('Best Choice Recommendation')
+        if Comments:
+            print('All comments !!!')
+        t0 = time.time()
+        n0 = g1.order
+        if _OldCoca:
+            _selfwcoc = _CocaDigraph(g1,Cpp=Cpp,Comments=Comments)
+            b1 = 0
+        else:
+            _selfwcoc = CocaDigraph(g1,Cpp=Cpp,Comments=Comments)
+            b1 = _selfwcoc.brakings
+        n1 = _selfwcoc.order
+        nc = n1 - n0
+        
+        g1.relation_orig = copy.deepcopy(g1.relation)
+        if nc > 0 or b1 > 0:
+            g1.actions_orig = copy.deepcopy(g1.actions)
+            g1.actions = copy.deepcopy(_selfwcoc.actions)
+            g1.order = len(g1.actions)
+            g1.relation = copy.deepcopy(_selfwcoc.relation)
+        if Comments:
+            print('List of pseudo-independent choices')
+            print(g1.actions)
+        g1.gamma = g1.gammaSets()
+        g1.notGamma = g1.notGammaSets()
+        if Debug:
+            g1.showRelationTable()
+        #self.showPreKernels()
+        actions = set([x for x in g1.actions])
+        g1.computePreKernels()
+        #if Debug:
+        #    print(self.dompreKernels,self.abspreKernels)
+        g1.computeGoodChoices(Comments=Comments)
+        g1.computeBadChoices(Comments=Comments)
+        if Debug:
+            print('good and bad choices: ',g1.goodChoices,g1.badChoices)
+        t1 = time.time()
+        print('* --- Best choice recommendation(s) ---*')
+        print('  (in decreasing order of determinateness)   ')
+        print('Credibility domain: ', g1.valuationdomain)
+        Med = g1.valuationdomain['med']
+        bestChoice = set()
+        worstChoice = set()
+        for gch in g1.goodChoices:
+            if gch[0] <= Med:
+                goodChoice = True
+                for bch in g1.badChoices:
+                    if gch[5] == bch[5]:
+                        #if gch[0] == bch[0]:
+                        if gch[3] == gch[4]:
+                            if Comments:
+                                print('null choice ')
+                                g1.showChoiceVector(gch,
+                                                      ChoiceVector=ChoiceVector)
+                                g1.showChoiceVector(bch,
+                                                      ChoiceVector=ChoiceVector)
+                            goodChoice = False
+                        elif gch[4] > gch[3]:
+                            if Comments:
+                                print('outranked choice ')
+                                g1.showChoiceVector(gch,
+                                                      ChoiceVector=ChoiceVector)
+                                g1.showChoiceVector(bch,
+                                                      ChoiceVector=ChoiceVector)
+                            goodChoice = False
+                        else:
+                            goodChoice = True
+                if goodChoice:
+                    print(' === >> potential BCR ')
+                    g1.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                    if bestChoice == set():
+                        bestChoice = gch[5]
+            else:
+                if Comments:
+                    print('non robust best choice ')
+                    g1.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+        # for bch in self.badChoices:
+        #     if bch[0] <= Med:
+        #         badChoice = True
+        #         nullChoice = False
+        #         for gch in self.goodChoices:
+        #             if bch[5] == gch[5]:
+        #                 #if gch[0] == bch[0]:
+        #                 if bch[3] == bch[4]:
+        #                     if Comments:
+        #                         print('null choice ')
+        #                         self.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+        #                         self.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+        #                     badChoice = False
+        #                     nullChoice = True
+        #                 elif bch[3] > bch[4]:
+        #                     if Comments:
+        #                         print('outranking choice ')
+        #                         self.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+        #                         self.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+        #                     badChoice = False
+        #                 else:
+        #                     badChoice = True
+        #         if badChoice:
+        #             print(' === >> potential worst choice ')
+        #             self.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+        #             if worstChoice == set():
+        #                 worstChoice = bch[5]
+        #         elif nullChoice:
+        #             print(' === >> ambiguous choice ')
+        #             self.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+        #             if worstChoice == set():
+        #                 worstChoice = bch[5]
+
+        #     else:
+        #         if Comments:
+        #             print('non robust worst choice ')
+        #             self.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+        print()
+        print('Execution time: %.3f seconds' % (t1-t0))
+        print('*****************************')
+        self.bestChoice = bestChoice
+        #self.worstChoice = worstChoice
+        if nc > 0 or b1 > 0:
+            g1.actions = copy.deepcopy(self.actions_orig)
+            g1.relation = copy.deepcopy(self.relation_orig)
+            g1.order = len(self.actions)
+            g1.gamma = self.gammaSets()
+            g1.notGamma = self.notGammaSets()
+
+    def showRubisWorstChoiceRecommendation(self,g1,
+                                          Comments=False,
+                                          ChoiceVector=True,
+                                          Debug=False,
+                                          _OldCoca=False,
+                                          Cpp=False):
+        """
+        Renders the Rubis Worst choice recommendation of the first component.
+        """
+        import copy,time
+        if Debug:
+            Comments = True
+        print('***********************')
+        print('Worst Choice Recommendation')
+        if Comments:
+            print('All comments !!!')
+        t0 = time.time()
+        n0 = g1.order
+        if _OldCoca:
+            _selfwcoc = _CocaDigraph(g1,Cpp=Cpp,Comments=Comments)
+            b1 = 0
+        else:
+            _selfwcoc = CocaDigraph(g1,Cpp=Cpp,Comments=Comments)
+            b1 = _selfwcoc.brakings
+        n1 = _selfwcoc.order
+        nc = n1 - n0
+        
+        g1.relation_orig = copy.deepcopy(g1.relation)
+        if nc > 0 or b1 > 0:
+            g1.actions_orig = copy.deepcopy(g1.actions)
+            g1.actions = copy.deepcopy(_selfwcoc.actions)
+            g1.order = len(g1.actions)
+            g1.relation = copy.deepcopy(_selfwcoc.relation)
+        if Comments:
+            print('List of pseudo-independent choices')
+            print(g1.actions)
+        g1.gamma = g1.gammaSets()
+        g1.notGamma = g1.notGammaSets()
+        if Debug:
+            g1.showRelationTable()
+        #self.showPreKernels()
+        actions = set([x for x in g1.actions])
+        g1.computePreKernels()
+        #if Debug:
+        #    print(self.dompreKernels,self.abspreKernels)
+        g1.computeGoodChoices(Comments=Comments)
+        g1.computeBadChoices(Comments=Comments)
+        if Debug:
+            print('good and bad choices: ',g1.goodChoices,g1.badChoices)
+        t1 = time.time()
+        print('* --- Best choice recommendation(s) ---*')
+        print('  (in decreasing order of determinateness)   ')
+        print('Credibility domain: ', g1.valuationdomain)
+        Med = g1.valuationdomain['med']
+        bestChoice = set()
+        worstChoice = set()
+        # for gch in g1.goodChoices:
+        #     if gch[0] <= Med:
+        #         goodChoice = True
+        #         for bch in g1.badChoices:
+        #             if gch[5] == bch[5]:
+        #                 #if gch[0] == bch[0]:
+        #                 if gch[3] == gch[4]:
+        #                     if Comments:
+        #                         print('null choice ')
+        #                         g1.showChoiceVector(gch,
+        #                                               ChoiceVector=ChoiceVector)
+        #                         g1.showChoiceVector(bch,
+        #                                               ChoiceVector=ChoiceVector)
+        #                     goodChoice = False
+        #                 elif gch[4] > gch[3]:
+        #                     if Comments:
+        #                         print('outranked choice ')
+        #                         g1.showChoiceVector(gch,
+        #                                               ChoiceVector=ChoiceVector)
+        #                         g1.showChoiceVector(bch,
+        #                                               ChoiceVector=ChoiceVector)
+        #                     goodChoice = False
+        #                 else:
+        #                     goodChoice = True
+        #         if goodChoice:
+        #             print(' === >> potential BCR ')
+        #             g1.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+        #             if bestChoice == set():
+        #                 bestChoice = gch[5]
+        #     else:
+        #         if Comments:
+        #             print('non robust best choice ')
+        #             g1.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+        for bch in g1.badChoices:
+            if bch[0] <= Med:
+                badChoice = True
+                nullChoice = False
+                for gch in g1.goodChoices:
+                    if bch[5] == gch[5]:
+                        #if gch[0] == bch[0]:
+                        if bch[3] == bch[4]:
+                            if Comments:
+                                print('null choice ')
+                                g1.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                                g1.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                            badChoice = False
+                            nullChoice = True
+                        elif bch[3] > bch[4]:
+                            if Comments:
+                                print('outranking choice ')
+                                g1.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                                g1.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                            badChoice = False
+                        else:
+                            badChoice = True
+                if badChoice:
+                    print(' === >> potential worst choice ')
+                    g1.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                    if worstChoice == set():
+                        worstChoice = bch[5]
+                elif nullChoice:
+                    print(' === >> ambiguous choice ')
+                    g1.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                    if worstChoice == set():
+                        worstChoice = bch[5]
+
+            else:
+                if Comments:
+                    print('non robust worst choice ')
+                    g1.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+        print()
+        print('Execution time: %.3f seconds' % (t1-t0))
+        print('*****************************')
+        #self.bestChoice = bestChoice
+        self.worstChoice = worstChoice
+        if nc > 0 or b1 > 0:
+            g1.actions = copy.deepcopy(self.actions_orig)
+            g1.relation = copy.deepcopy(self.relation_orig)
+            g1.order = len(self.actions)
+            g1.gamma = self.gammaSets()
+            g1.notGamma = self.notGammaSets()
+
+                  
+    def relation(self, int x, int y):
         """
         Dynamic construction of the global outranking characteristic function *r(x S y)*.
         """
@@ -72,11 +380,13 @@ class BigIntegerDigraph(object):
         
         if x == y:
             return Med
+        
         cx = self.actions[x]['component']
         cy = self.actions[y]['component']
-        #print(x,cx,y,cy)
+
         if cx == cy:
-            return self.components[cx]['subGraph'].relation[x][y]        
+            rxpg = self.components[cx]['subGraph'].relation
+            return rxpg[x][y]
         elif self.components[cx]['rank'] > self.components[cy]['rank']:
             return Min
         else:
@@ -151,7 +461,7 @@ class BigIntegerDigraph(object):
         import webbrowser
         fileName = '/tmp/relationMap.html'
         fo = open(fileName,'w')
-        fo.write(self.htmlRelationMap(fromIndex=fromIndex,
+        fo.write(self._htmlRelationMap(fromIndex=fromIndex,
                                       toIndex=toIndex,
                                       Colored=Colored,
                                       tableTitle=tableTitle,
@@ -163,7 +473,7 @@ class BigIntegerDigraph(object):
         webbrowser.open_new(url)
         
         
-    def htmlRelationMap(self,int fromIndex=0,int toIndex=0,\
+    def _htmlRelationMap(self,int fromIndex=0,int toIndex=0,\
                             tableTitle='Big Relation Map',\
                           relationName='r(x R y)',\
                           #rankingRule='Copeland',\
@@ -182,7 +492,7 @@ class BigIntegerDigraph(object):
         if toIndex == 0:
             toIndex = len(self.boostedRanking)
 
-        actionsList = [(str(x),x) for x in self.boostedRanking[fromIndex:toIndex]]
+        actionsList = [(self.actions[x]['name'],x) for x in self.boostedRanking[fromIndex:toIndex]]
         # construct html text
         s  = '<!DOCTYPE html><html><head>\n'
         s += '<meta charset="UTF-8">\n'
@@ -400,10 +710,9 @@ class BigIntegerDigraph(object):
                    'fillrate': self.fillRate}
         return summary
 
-    def recodeIntegerValuation(self,int otherMax=1,Debug=False):
+    def _recodeIntegerValuation(self,int otherMax=1,Debug=False):
         """
         Specialization for recoding the valuation of all the partial digraphs and the component relation.
-        By default the valuation domain is normalized to [-1;1]
         """
         # update valuation domain
         self.valuationdomain['max'] *= otherMax
@@ -450,86 +759,11 @@ class BigIntegerDigraph(object):
         fillRate = float(fillRateSum)/n2
         return fillRate
 
-##    def computeCriterionCorrelation(self,criterion,Threading=False,\
-##                                    nbrOfCPUs=None,Debug=False,
-##                                    Comments=False):
-##        """
-##        Renders the ordinal correlation coefficient between
-##        the global outranking and the marginal criterion relation.
-##
-##        If Threading, the 
-##        """
-##        gc = BipolarOutrankingDigraph(self,coalition=[criterion],
-##                                      Normalized=True,CopyPerfTab=False,
-##                                      Threading=Threading,nbrCores=nbrOfCPUs,
-##                                      Comments=Comments)
-##        corr = self.computeOrdinalCorrelation(gc)
-##        if Debug:
-##            print(corr)
-##        return corr
-##
-##    def computeMarginalVersusGlobalOutrankingCorrelations(self,Sorted=True,
-##                                                          Threading=False,nbrCores=None,\
-##                                                          Comments=False):
-##        """
-##        Method for computing correlations between each individual criterion relation with the corresponding
-##        global outranking relation.
-##        
-##        Returns a list of tuples (correlation,criterionKey) sorted by default in decreasing order of the correlation.
-##
-##        If Threading is True, a multiprocessing Pool class is used with a parallel equivalent of the built-in map function.
-##
-##        If nbrCores is not set, the os.cpu_count() function is used to determine the number of
-##        available cores.
-##        """
-##        if Threading:
-##            from multiprocessing import Pool
-##            from os import cpu_count
-##            if nbrCores == None:
-##                nbrCores= cpu_count()
-##            criteriaList = [x for x in self.criteria]
-##            with Pool(nbrCores) as proc:   
-##                correlations = proc.map(self.computeCriterionCorrelation,criteriaList)
-##            criteriaCorrelation = [(correlations[i]['correlation'],criteriaList[i]) for i in range(len(criteriaList))]
-##        else:
-##            #criteriaList = [x for x in self.criteria]
-##            criteria = self.criteria
-##            criteriaCorrelation = []
-##            for c in dict.keys(criteria):
-##                corr = self.computeCriterionCorrelation(c,Threading=False)
-##                criteriaCorrelation.append((corr['correlation'],c))            
-##        if Sorted:
-##            criteriaCorrelation.sort(reverse=True)
-##        return criteriaCorrelation   
-##
-##    def showMarginalVersusGlobalOutrankingCorrelation(self,Sorted=True,Threading=False,\
-##                                                      nbrOfCPUs=None,Comments=True):
-##        """
-##        Show method for computeCriterionCorrelation results.
-##        """
-##        criteria = self.criteria
-##        #criteriaList = [x for x in self.criteria]
-##        criteriaCorrelation = []
-##        totCorrelation = Decimal('0.0')
-##        for c in dict.keys(criteria):
-##            corr = self.computeCriterionCorrelation(c,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
-##            totCorrelation += corr['correlation']
-##            criteriaCorrelation.append((corr['correlation'],c))
-##        if Sorted:
-##            criteriaCorrelation.sort(reverse=True)
-##        if Comments:
-##            print('Marginal versus global outranking correlation')
-##            print('criterion | weight\t correlation')
-##            print('----------|---------------------------')
-##            for x in criteriaCorrelation:
-##                c = x[1]
-##                print('%9s |  %.2f \t %.3f' % (c,self.criteria[c]['weight'],x[0]))
-##            print('Sum(Correlations) : %.3f' % (totCorrelation))
-##            print('Determinateness   : %.3f' % (corr['determination']))
 
 ########################
 
 #from weakOrders import QuantilesRankingDigraph
+from cRandPerfTabs import PerformanceTableau
 class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
     """
     Main class for the multiprocessing implementation of big outranking digraphs.
@@ -558,8 +792,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                  tempDir=None,\
                  int componentThreadingThreshold=50,\
                  int nbrOfSubProcesses=0,
-                 nbrOfCPUs=None,\
-                 nbrOfThreads=None,\
+                 int nbrOfCPUs=1,\
+                 int nbrOfThreads=1,\
                  save2File=None,\
                  bint CopyPerfTab=False,\
                  bint Comments=False,\
@@ -569,12 +803,14 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         cdef int nbrOfLocals,nbrOfThreadsUsed,threadLoad
         cdef double ttot, t0, tw, tdump
         cdef int maximalComponentSize
+        cdef array.array lTest=array.array('i')
         
         from digraphs import Digraph
         from cIntegerSortingDigraphs import IntegerQuantilesSortingDigraph
         from collections import OrderedDict
         from time import time
         from os import cpu_count
+        #from array import array
         from multiprocessing import Pool
         #from cython.parallel import prange
         from copy import copy, deepcopy
@@ -693,7 +929,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 def __init__(self, int threadID,\
                              tempDirName,\
                              lTest,\
-                             Debug,nbrOfSubProcesses,componentThreadingThreshold):
+                             Debug,int nbrOfSubProcesses, int componentThreadingThreshold):
+                    #from array import array
                     if nbrOfSubProcesses > 0:
                         Process.__init__(self,daemon=False)
                     else:
@@ -708,7 +945,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     cdef int i,nc,nd,totalWeight=0
                     from pickle import dumps, loads
                     from os import chdir
-                    from copy import deepcopy
+                    #from copy import deepcopy
+                    #from array import array
                     from perfTabs import PartialPerformanceTableau
                     from digraphs import Digraph
                     from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph
@@ -786,10 +1024,10 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 if Comments:
                     print('dumping time: %.5f' % (time() - tdump))
 
-                if nbrOfCPUs == None:
-                    nbrOfCPUs = cpu_count()
-                if nbrOfThreads == None:
-                    nbrOfThreads = nbrOfCPUs-1
+                # if nbrOfCPUs == None:
+                #     nbrOfCPUs = cpu_count()
+                # if nbrOfThreads == None:
+                #     nbrOfThreads = nbrOfCPUs-1
                 nbrOfLocals = self.order//nbrOfThreads
                 if nbrOfLocals*nbrOfThreads < self.order:
                     nbrOfLocals += 1
@@ -802,7 +1040,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 for j in range(nbrOfThreads):
                     if Comments:
                         print('thread = %d/%d' % (j+1,nbrOfThreads),end="...")
-                    lTest = []
+                    lTest = array.array('i')
                     threadLoad = 0
                     while threadLoad <= nbrOfLocals and i < (nc):
                         lTest.append(i)
@@ -1149,30 +1387,6 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
     def showShort(self,fileName=None,bint WithFileSize=True):
         """
         Default (__repr__) presentation method for big outranking digraphs instances:
-        
-        >>> from bigOutrankingDigraphs import *
-        >>> t = RandomCBPerformanceTableau(numberOfActions=100,seed=1)
-        >>> g = BigOutrankingDigraphMP(t,quantiles=10)
-        >>> print(g)
-        *----- show short --------------*
-        Instance name     : randomCBperftab_mp
-        # Actions         : 100
-        # Criteria        : 7
-        Sorting by        : 10-Tiling
-        Ordering strategy : average
-        Ranking rule      : Copeland
-        # Components      : 19
-        Minimal size      : 1
-        Maximal size      : 22
-        Median size       : 2
-        fill rate         : 0.116
-        ----  Constructor run times (in sec.) ----
-        Total time        : 0.14958
-        QuantilesSorting  : 0.06847
-        Preordering       : 0.00071
-        Decomposing       : 0.07366
-        Ordering          : 0.00130
-        <class 'bigOutrankingDigraphs.BigOutrankingDigraphMP'> instance        
         """
         #summaryStats = self.computeDecompositionSummaryStatistics()
         if fileName == None:
@@ -1189,6 +1403,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             print('Average order     : %.1f' % (self.order/self.nbrComponents))
             print('Fill rate         : %.3f%%' % (self.fillRate*100.0))
             print('----  Constructor run times (in sec.) ----')
+            print('Nbr of thread     : %d' % self.nbrOfCPUs)
             print('Total time        : %.5f' % self.runTimes['totalTime'])
             print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
             print('Preordering       : %.5f' % self.runTimes['preordering'])
@@ -1214,6 +1429,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             fo.write('Average order      : %.1f\n' % (self.order/self.nbrComponents))
             fo.write('Fill rate          : %.3f%%\n' % (self.fillRate*100.0))
             fo.write('*-- Constructor run times (in sec.) --*\n')
+            fo.write('# Threads          : %d' % self.nbrOfCPUs)
             fo.write('Total time         : %.5f\n' % self.runTimes['totalTime'])
             fo.write('QuantilesSorting   : %.5f\n' % self.runTimes['sorting'])
             fo.write('Preordering        : %.5f\n' % self.runTimes['preordering'])
@@ -1238,7 +1454,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         for ax in actionsList:
             print('%s: %s' % ax)
 
-    def showCriteria(self,IntegerWeights=False,Debug=False):
+    def showCriteria(self, bint IntegerWeights=False, bint Debug=False):
         """
         print Criteria with thresholds and weights.
         """
@@ -1274,10 +1490,10 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 pass
             print()
 
-    def showComponents(self,direction='increasing'):
+    def showComponents(self, direction='increasing'):
         BigIntegerOutrankingDigraph.showDecomposition(self,direction=direction)
 
-    def showDecomposition(self,direction='decreasing'):
+    def showDecomposition(self, direction='decreasing'):
         
         print('*--- quantiles decomposition in %s order---*' % (direction) )
         #compKeys = [compKey for compKey in self.components.keys()]
@@ -1297,7 +1513,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             #    print('%s. %s-%s : %s' % (compKey,comp['highQtileLimit'],comp['lowQtileLimit'],actions))
                 
 
-    def showRelationTable(self,IntegerValues=True,compKeys=None):
+    def showRelationTable(self, bint IntegerValues=True, compKeys=None):
         """
         Specialized for showing the quantiles decomposed relation table.
         Components are stored in an ordered dictionary.
@@ -1327,7 +1543,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     pg.showRelationTable(IntegerValues=IntegerValues)                
 
 
-    def computeBoostedRanking(self,rankingRule='Copeland'):
+    def computeBoostedRanking(self, rankingRule='Copeland'):
         """
         Renders an ordred list of decision actions ranked in
         decreasing preference direction following the net flows rule
@@ -1351,7 +1567,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 ranking += opg.kohlerRanking
         return ranking
 
-    def computeBoostedOrdering(self,orderingRule='Copeland'):
+    def computeBoostedOrdering(self, orderingRule='Copeland'):
         """
         Renders an ordred list of decision actions ranked in
         increasing preference direction following by default the Copeland rule
@@ -1375,7 +1591,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 ordering += opg.kohlerOrder
         return ordering
 
-    def computeDeterminateness(self, InPercent=True):
+    def computeDeterminateness(self, bint InPercent=True):
         """
         Computes the Kendalll distance in % of self
         with the all median valued (indeterminate) digraph.
@@ -1383,8 +1599,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         deter = (sum_{x,y in X} abs[r(xSy) - Med])/(oder*order-1)
         """
         
-        cdef int Max, Med, order, x, y
-        cdef float deter=0.0
+        cdef int Max, Med, order, x, y, sumDeter=0
+        cdef float deter
         
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
@@ -1396,12 +1612,14 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         for x in actions:
             for y in actions:
                 if x != y:
-                    deter += abs(relation(x,y) - Med)
+                    sumDeter += ABS(relation(x,y) - Med)
 
-        deter = deter / (order * (order-1))
+        deter = float(sumDeter) / (order * (order-1))
         if InPercent:
             return deter/(Max-Med)*100.0
         else:
             return deter
+
+
 
 ########################################################33
