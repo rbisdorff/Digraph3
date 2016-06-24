@@ -28,16 +28,16 @@ from cRandPerfTabs import Random3ObjectivesPerformanceTableau as cR3ObjPT
 from randomPerfTabs import Random3ObjectivesPerformanceTableau as R3ObjPT
 
 # parameters
-sampleSize = 10
+sampleSize = 500
 MP = True
-nbrOfCPUs = 4
-nbrOfThreads = 4
+nbrOfCPUs = 24
+nbrOfThreads = 24
 nbrOfSubProcesses = 2
-componentThreadingThreshold = 50
-nbrActions = 2500
+componentThreadingThreshold = 60
+nbrActions = 5000
 nbrCriteria = 21
 commonPar=('beta','variable',None)
-qtiles = 75
+qtiles = 60
 minimalSize = 10
 seed = 10
 fileName = 'CythonA%dObj21q%ds%dc%dhome.csv' % (nbrActions,qtiles,minimalSize,nbrOfCPUs)
@@ -77,7 +77,7 @@ for s in range(sampleSize):
                                Comments=True,
                                Debug=False)
 
-    print(bg1)
+##     print(bg1)
     t0 = time()
     tp2 = cR3ObjPT(numberOfActions=nbrActions,
                                     numberOfCriteria=nbrCriteria,

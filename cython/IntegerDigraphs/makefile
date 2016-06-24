@@ -21,9 +21,9 @@ inplace:
 		python3 csetupODGInteger.py build_ext ${FLAG}
 		python3 csetupSOInteger.py build_ext ${FLAG}
 		python3 csetupBGInteger.py build_ext ${FLAG}
-install:
-		sudo python3 csetupRandPerfTabs.py install
-		sudo python3 csetupODGInteger.py install
-		sudo python3 csetupSOInteger.py install
-		sudo python3 csetupBGInteger.py install
+installVenv:
+		python3 csetupRandPerfTabs.py install
+		python3 csetupODGInteger.py install
+		python3 csetupSOInteger.py install
+		python3 csetupBGInteger.py install
 

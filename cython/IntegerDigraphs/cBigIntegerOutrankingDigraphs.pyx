@@ -986,6 +986,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                                                                          WithVetoCounts=False,
                                                                          CopyPerfTab=False,
                                                                          Threading=Threading,
+                                                                         tempDir='.',
                                                                          nbrCores=self.nbrOfSubProcesses)     
                         compDict['subGraph'].__dict__.pop('criteria')
                         compDict['subGraph'].__dict__.pop('evaluation')
