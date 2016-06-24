@@ -26,18 +26,20 @@ from time import time
 from os import path
 from cRandPerfTabs import Random3ObjectivesPerformanceTableau as cR3ObjPT
 from randomPerfTabs import Random3ObjectivesPerformanceTableau as R3ObjPT
+from multiprocessing import set_start_method
 
 # parameters
-sampleSize = 500
+sampleSize = 10
 MP = True
-nbrOfCPUs = 24
-nbrOfThreads = 24
+nbrOfCPUs = 4
+nbrOfThreads = 4
 nbrOfSubProcesses = 2
-componentThreadingThreshold = 60
-nbrActions = 5000
+#set_start_method('fork')
+componentThreadingThreshold = 50
+nbrActions = 2500
 nbrCriteria = 21
 commonPar=('beta','variable',None)
-qtiles = 60
+qtiles = 75
 minimalSize = 10
 seed = 10
 fileName = 'CythonA%dObj21q%ds%dc%dhome.csv' % (nbrActions,qtiles,minimalSize,nbrOfCPUs)
@@ -77,7 +79,7 @@ for s in range(sampleSize):
                                Comments=True,
                                Debug=False)
 
-##     print(bg1)
+    print(bg1)
     t0 = time()
     tp2 = cR3ObjPT(numberOfActions=nbrActions,
                                     numberOfCriteria=nbrCriteria,

@@ -7,13 +7,14 @@
 # # Current $Revision: 1.8 $
 ########################
 
-from digraphs import *
+from cIntegerOutrankingDigraphs import *
 from cBigIntegerOutrankingDigraphs import *
 from cRandPerfTabs import *
 from time import time
 
 def testbigOutrankingDigraph():
     print('==>> Testing bigOutrankingDigraph instantiation')
+    #from outrankingDigraphs import BipolarOutrankingDigraph
     MP = True
     t0 = time()
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=100)
@@ -27,7 +28,7 @@ def testbigOutrankingDigraph():
     bg1.showDecomposition()
     print(bg1)
     t0 = time()
-    g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=MP)
+    g = IntegerBipolarOutrankingDigraph(tp,Threading=MP)
     print(time()-t0)
     print(total_size(g))
     t0 = time()

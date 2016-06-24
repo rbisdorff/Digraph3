@@ -27,8 +27,9 @@ import array
 cdef extern from "detertest.h":
     int ABS(int a)
 
-#from cIntegerOutrankingDigraphs import *
-#from cIntegerSortingDigraphs import *
+
+from cIntegerOutrankingDigraphs import *
+from cIntegerSortingDigraphs import *
 from time import time
 from decimal import Decimal
 from cBigIntegerOutrankingDigraphs import *
@@ -811,7 +812,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         from time import time
         from os import cpu_count
         #from array import array
-        from multiprocessing import Pool
+        from multiprocessing import Pool            
         #from cython.parallel import prange
         from copy import copy, deepcopy
         from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph
@@ -1390,6 +1391,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         Default (__repr__) presentation method for big outranking digraphs instances:
         """
         #summaryStats = self.computeDecompositionSummaryStatistics()
+        from digraphs import total_size
         if fileName == None:
             print('*----- show short --------------*')
             print('Instance name     : %s' % self.name)
