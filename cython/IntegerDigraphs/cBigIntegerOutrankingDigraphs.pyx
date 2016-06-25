@@ -1386,7 +1386,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             for x in actionsSubset:
                 self.computeActionCategories(x,Show=True)
 
-    def showShort(self,fileName=None,bint WithFileSize=True):
+    def showShort(self,fileName=None,bint WithFileSize=False):
         """
         Default (__repr__) presentation method for big outranking digraphs instances:
         """
@@ -1432,7 +1432,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             fo.write('Average order      : %.1f\n' % (self.order/self.nbrComponents))
             fo.write('Fill rate          : %.3f%%\n' % (self.fillRate*100.0))
             fo.write('*-- Constructor run times (in sec.) --*\n')
-            fo.write('# Threads          : %d' % self.nbrOfCPUs)
+            fo.write('# Threads          : %d\n' % self.nbrOfCPUs)
             fo.write('Total time         : %.5f\n' % self.runTimes['totalTime'])
             fo.write('QuantilesSorting   : %.5f\n' % self.runTimes['sorting'])
             fo.write('Preordering        : %.5f\n' % self.runTimes['preordering'])
