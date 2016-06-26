@@ -1995,7 +1995,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 
     def _computeQuantileOrdering(self,strategy=None,
                                 Descending=True,
-                                Debug=False):
+                                Debug=False,
+                                     Threading=False,
+                                     nbrOfCPUs=None):
         """
         Renders the 
         *Parameters*:
@@ -2012,7 +2014,8 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         actionsCategories = {}
         for x in self.actions:
             a,lowCateg,highCateg,credibility =\
-                     self.showActionCategories(x,Comments=Debug)
+                     self.showActionCategories(x,Comments=Debug,\
+                            Threading=Threading,nbrOfCPUs=nbrOfCPUs)
             if strategy == "optimistic":
                 try:
                     actionsCategories[(int(highCateg),int(lowCateg))].append(a)
