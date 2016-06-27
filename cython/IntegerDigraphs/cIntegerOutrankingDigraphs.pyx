@@ -1499,12 +1499,12 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         self.showPreKernels()
 
 
-    def showRelationTable(self,IntegerValues=False,
+    def showRelationTable(self,IntegerValues=True,
                           actionsSubset= None,
                           Sorted=True,
                           hasLPDDenotation=False,
                           hasLatexFormat=False,
-                          hasIntegerValuation=False,
+                          hasIntegerValuation=True,
                           relation=None,
                           ReflexiveTerms=True):
         """

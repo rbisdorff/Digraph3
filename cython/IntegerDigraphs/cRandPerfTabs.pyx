@@ -28,8 +28,41 @@ from collections import OrderedDict
 
 #########################################
 # generators for random PerformanceTableaux
+class cPerformanceTableau(PerformanceTableau):
+    """
+    Abstract root class for cythenized performace tableau methods.
+    """
+    def convertWeight2Integer(self):
+        """
+        Convert significance weights from Decimal format
+        to int format.
+        """
+        criteria = self.criteria
+        for g in criteria:
+            criteria[g]['weight'] = int(criteria[g]['weight'])
+        self.criteria = criteria
 
-class RandomPerformanceTableau(PerformanceTableau):
+    def convertEvaluation2Float(self):
+        """
+        Convert evaluations from decimal format to float
+        """
+        evaluation = self.evaluation
+        actions = self.actions
+        criteria = self.criteria
+        for g in criteria:
+            for x in actions:
+                evaluation[g][x] = float(evaluation[g][x])
+        self.evaluation = evaluation
+
+    def convertDiscriminationThresholds2Float(self):
+        criteria = self.criteria
+        for g in criteria:
+            for th in criteria[g]['thresholds']:
+                d = criteria[g]['thresholds'][th]
+                d1 = (float(d[0]),float(d[1]))
+                criteria[g]['thresholds'][th] = d1
+
+class RandomPerformanceTableau(cPerformanceTableau):
     """
     Specialization of the PerformanceTableau class for generating a temporary
     random performance tableau.
@@ -290,7 +323,7 @@ class RandomPerformanceTableau(PerformanceTableau):
         self.weightPreorder = self.computeWeightPreorder()
 
 # -----------------
-class RandomRankPerformanceTableau(PerformanceTableau):
+class RandomRankPerformanceTableau(cPerformanceTableau):
     """
     Specialization of the PerformanceTableau class for generating a temporary
     random performance tableau.
@@ -697,7 +730,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
 ##         for g in evaluation:
 ##             print(g, evaluation[g])
 
-class RandomCoalitionsPerformanceTableau(PerformanceTableau):
+class RandomCoalitionsPerformanceTableau(cPerformanceTableau):
     """
     Full automatic generation of performance tableaux with random coalitions of criteria
 
@@ -1062,7 +1095,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
         self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
 
-class Random3ObjectivesPerformanceTableau(PerformanceTableau):
+class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
     """
     Specialization of the PerformanceTableau
     for 3 objectives: *Eco*, *Soc* and *Env*.
@@ -1607,7 +1640,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
 ##                 print('  profile:   ',actions[x]['profile'])
         
 #---------------
-class RandomCBPerformanceTableau(PerformanceTableau):
+class RandomCBPerformanceTableau(cPerformanceTableau):
     """
     Full automatic generation of random
     Cost versus Benefit oriented performance tableaux.

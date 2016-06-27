@@ -34,7 +34,6 @@ from time import time
 from decimal import Decimal
 from cBigIntegerOutrankingDigraphs import *
 
-
 class BigIntegerDigraph(object):
     """
     Abstract root class for linearly decomposed big digraphs (order > 1000)
@@ -805,7 +804,10 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         cdef double ttot, t0, tw, tdump
         cdef int maximalComponentSize
         cdef array.array lTest=array.array('i')
-        
+
+        global perfTab
+        global decomposition
+
         from digraphs import Digraph
         from cIntegerSortingDigraphs import IntegerQuantilesSortingDigraph
         from collections import OrderedDict
@@ -905,6 +907,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         self.nd = nd
         if not self.sortingParameters['Threading']:
             components = OrderedDict()
+            boostedRanking = []
             for i in range(1,nc+1):
                 comp = decomposition[i-1]
                 compKey = ('c%%0%dd' % (self.nd)) % (i)
@@ -917,6 +920,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                                           WithVetoCounts=False,
                                           #Normalized=True,
                                           CopyPerfTab=False)
+                boostedRanking += pg.computeCopelandRanking()
                 pg.__dict__.pop('criteria')
                 pg.__dict__.pop('evaluation')
                 pg.__class__ = Digraph
@@ -943,6 +947,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     self.nbrOfSubProcesses = nbrOfSubProcesses
                     self.componentThreadingThreshold = componentThreadingThreshold
                 def run(self):
+                    global perfTab
+                    global decomposition
                     cdef int i,nc,nd,totalWeight=0
                     from pickle import dumps, loads
                     from os import chdir
@@ -955,12 +961,12 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     if self.Debug:
                         print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadID)))
                         print('lTest',self.lTest)
-                    fi = open('dumpPerfTab.py','rb')
-                    perfTab = loads(fi.read())
-                    fi.close()
-                    fi = open('dumpDecomp.py','rb')
-                    decomposition = loads(fi.read())
-                    fi.close()
+                    #fi = open('dumpPerfTab.py','rb')
+                    #perfTab = loads(fi.read())
+                    #fi.close()
+                    #fi = open('dumpDecomp.py','rb')
+                    #decomposition = loads(fi.read())
+                    #fi.close()
                     nc = len(decomposition)
                     nd = len(str(nc))
                     for i in self.lTest:
@@ -988,13 +994,14 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                                                                          CopyPerfTab=False,
                                                                          Threading=Threading,
                                                                          tempDir='.',
-                                                                         nbrCores=self.nbrOfSubProcesses)     
+                                                                         nbrCores=self.nbrOfSubProcesses)
+                        ranking = compDict['subGraph'].computeCopelandRanking()
                         compDict['subGraph'].__dict__.pop('criteria')
                         compDict['subGraph'].__dict__.pop('evaluation')
                         compDict['subGraph'].__class__ = Digraph
-                        splitComponent = (compKey,compDict)
+                        splitComponent = {'compKey':compKey,'compDict':compDict,'ranking':ranking}
                         if self.Debug:
-                            print(compDict)
+                            print(splitComponent)
                         foName = 'splitComponent-'+str(i)+'.py'
                         fo = open(foName,'wb')
                         fo.write(dumps(splitComponent,-1))
@@ -1008,23 +1015,23 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             with TemporaryDirectory(dir=tempDir) as tempDirName:
                 #use this below dedented if the tempory directory should not be deleted
                 #tempDirName = mkdtemp(dir=tempDir)
-                selfFileName = tempDirName +'/dumpPerfTab.py'
-                if Debug:
-                    print('temDirName, selfFileName', tempDirName,selfFileName)
-                fo = open(selfFileName,'wb')
-                dump(perfTab,fo,-1)
-                fo.close()
-                if Comments:
-                    print('dumping perfTab: %.5f' % (time() - tdump))
-                selfFileName = tempDirName +'/dumpDecomp.py'
-                if Debug:
-                    print('temDirName, selfFileName', tempDirName,selfFileName)
-                fo = open(selfFileName,'wb')
-                pd = dumps(decomposition,-1)
-                fo.write(pd)
-                fo.close()
-                if Comments:
-                    print('dumping time: %.5f' % (time() - tdump))
+                #selfFileName = tempDirName +'/dumpPerfTab.py'
+                #if Debug:
+                #    print('temDirName, selfFileName', tempDirName,selfFileName)
+                #fo = open(selfFileName,'wb')
+                #dump(perfTab,fo,-1)
+                #fo.close()
+                #if Comments:
+                #    print('dumping perfTab: %.5f' % (time() - tdump))
+                #selfFileName = tempDirName +'/dumpDecomp.py'
+                #if Debug:
+                #    print('temDirName, selfFileName', tempDirName,selfFileName)
+                #fo = open(selfFileName,'wb')
+                #pd = dumps(decomposition,-1)
+                #fo.write(pd)
+                #fo.close()
+                #if Comments:
+                #    print('dumping time: %.5f' % (time() - tdump))
 
                 # if nbrOfCPUs == None:
                 #     nbrOfCPUs = cpu_count()
@@ -1068,6 +1075,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     
                 components = OrderedDict()
                 #componentsList = []
+                boostedRanking = []
                 for j in range(nc):
                     if Debug:
                         print('job',j)
@@ -1076,7 +1084,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     splitComponent = loads(fi.read())
                     if Debug:
                         print('splitComponent',splitComponent)
-                    components[splitComponent[0]] = splitComponent[1]
+                    components[splitComponent['compKey']] = splitComponent['compDict']
+                    boostedRanking += splitComponent['ranking']
 
         # storing components, fillRate and maximalComponentSize
 
@@ -1106,8 +1115,9 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         # Kohler ranking-by-choosing all components
         self.componentRankingRule = componentRankingRule
         t0 = time()
-        self.boostedRanking = self.computeBoostedRanking(rankingRule=componentRankingRule)
-        self.boostedOrder = list(reversed(self.boostedRanking))
+        #self.boostedRanking = self.computeBoostedRanking(rankingRule=componentRankingRule)
+        #self.boostedOrder = list(reversed(self.boostedRanking))
+        self.boostedRanking = boostedRanking
         self.runTimes['ordering'] = time() - t0
 
         if Comments:
@@ -1117,7 +1127,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         if Comments:
             print(self.runTimes)
         if save2File != None:
-            self.showShort(fileName=save2File)
+            self.showShort(fileName=save2File,WithFileSize=False)
             
 
     # ----- class methods ------------
