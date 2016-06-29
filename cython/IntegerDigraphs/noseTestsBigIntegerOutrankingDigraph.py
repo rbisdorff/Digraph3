@@ -9,7 +9,9 @@
 
 from cIntegerOutrankingDigraphs import *
 from cBigIntegerOutrankingDigraphs import *
-from cRandPerfTabs import *
+from cRandPerfTabs import Random3ObjectivesPerformanceTableau as cR3ObjPT
+#from randomPerfTabs import Random3ObjectivesPerformanceTableau as R3ObjPT
+#from outrankingDigraphs import BipolarOutrankingDigraph
 from time import time
 
 def testbigOutrankingDigraph():
@@ -17,10 +19,11 @@ def testbigOutrankingDigraph():
     #from outrankingDigraphs import BipolarOutrankingDigraph
     MP = True
     t0 = time()
-    tp = Random3ObjectivesPerformanceTableau(numberOfActions=100)
+    ctp = cR3ObjPT(numberOfActions=100,seed=100)
+    #tp = R3ObjPT(numberOfActions=100,seed=100)
     print(time()-t0)
-    print(total_size(tp.evaluation))
-    bg1 = BigIntegerOutrankingDigraph(tp,quantiles=10,quantilesOrderingStrategy='average',
+    print(total_size(ctp.evaluation))
+    bg1 = BigIntegerOutrankingDigraph(ctp,quantiles=10,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
                                minimalComponentSize=1,
                                     Threading=MP,Debug=False)
@@ -28,21 +31,14 @@ def testbigOutrankingDigraph():
     bg1.showDecomposition()
     print(bg1)
     t0 = time()
-    g = IntegerBipolarOutrankingDigraph(tp,Threading=MP)
+    gi = IntegerBipolarOutrankingDigraph(ctp,Threading=MP)
+    #g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=MP)
     print(time()-t0)
-    print(total_size(g))
+    print(total_size(gi))
     t0 = time()
     print("Big outranking digraph's correlation with standard outranking digraph")
-    print(bg1.computeOrdinalCorrelation(g,Debug=False))
+    print(bg1.computeOrdinalCorrelation(gi,Debug=False))
     print(time()-t0)
-    nf = bg1.computeBoostedRanking(rankingRule="NetFlows")
-    preordering1 = bg1.ranking2Preorder(nf)
-    print('Boosted Netflows ranking correlation with complete outranking relation')
-    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering1)))
-    ko = bg1.computeBoostedRanking(rankingRule="Kohler")
-    preordering2 = bg1.ranking2Preorder(ko)
-    print('Boosted Kohler ranking correlation with complete outranking relation')
-    print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering2)))
 
 def testMinimalComponentSize():
     print('==>> Testing bigOutrankingDigraph with minimal Component Size instantiation')
@@ -64,14 +60,15 @@ def testMinimalComponentSize():
     #tp = Random3ObjectivesPerformanceTableau(numberOfActions=200,seed=None)
     bg2 = BigIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
-                               minimalComponentSize=10,
+                               minimalComponentSize=20,
                                     Threading=MP,Debug=False)
     print(bg2.computeDecompositionSummaryStatistics())
     bg2.showDecomposition(direction="increasing")
+    bg2.showDecomposition()
     #bg2.showRelationTable()
-    print(bg1.computeOrdinalCorrelation(bg2,Debug=True))
+    print(bg1.computeOrdinalCorrelation(bg2,Debug=False))
     #bg1.recodeValuation(-1,1,Debug=True)
-    print(bg2.computeOrdinalCorrelation(bg2,Debug=True))
+    print(bg2.computeOrdinalCorrelation(bg2,Debug=False))
     print(bg2)
     bg2.showRelationMap(0,50)
 

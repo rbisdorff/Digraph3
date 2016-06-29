@@ -62,6 +62,15 @@ class cPerformanceTableau(PerformanceTableau):
                 d1 = (float(d[0]),float(d[1]))
                 criteria[g]['thresholds'][th] = d1
 
+    def convertDiscriminationThresholds2Decimal(self):
+        from decimal import Decimal
+        criteria = self.criteria
+        for g in criteria:
+            for th in criteria[g]['thresholds']:
+                d = criteria[g]['thresholds'][th]
+                d1 = (Decimal(str(d[0])),Decimal(str(d[1])))
+                criteria[g]['thresholds'][th] = d1
+
 class RandomPerformanceTableau(cPerformanceTableau):
     """
     Specialization of the PerformanceTableau class for generating a temporary

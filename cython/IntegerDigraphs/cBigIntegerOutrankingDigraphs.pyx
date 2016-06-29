@@ -223,11 +223,11 @@ class BigIntegerDigraph(object):
         self.bestChoice = bestChoice
         #self.worstChoice = worstChoice
         if nc > 0 or b1 > 0:
-            g1.actions = copy.deepcopy(self.actions_orig)
-            g1.relation = copy.deepcopy(self.relation_orig)
-            g1.order = len(self.actions)
-            g1.gamma = self.gammaSets()
-            g1.notGamma = self.notGammaSets()
+            g1.actions = copy.deepcopy(g1.actions_orig)
+            g1.relation = copy.deepcopy(g1.relation_orig)
+            g1.order = len(g1.actions)
+            g1.gamma = g1.gammaSets()
+            g1.notGamma = g1.notGammaSets()
 
     def showRubisWorstChoiceRecommendation(self,g1,
                                           Comments=False,
@@ -361,18 +361,18 @@ class BigIntegerDigraph(object):
         #self.bestChoice = bestChoice
         self.worstChoice = worstChoice
         if nc > 0 or b1 > 0:
-            g1.actions = copy.deepcopy(self.actions_orig)
-            g1.relation = copy.deepcopy(self.relation_orig)
-            g1.order = len(self.actions)
-            g1.gamma = self.gammaSets()
-            g1.notGamma = self.notGammaSets()
+            g1.actions = copy.deepcopy(g1.actions_orig)
+            g1.relation = copy.deepcopy(g1.relation_orig)
+            g1.order = len(g1.actions)
+            g1.gamma = g1.gammaSets()
+            g1.notGamma = g1.notGammaSets()
 
                   
     def relation(self, int x, int y):
         """
         Dynamic construction of the global outranking characteristic function *r(x S y)*.
         """
-        cdef int Min, Med, Max
+        cdef int Min, Med, Max, rx, ry
         
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
@@ -383,11 +383,13 @@ class BigIntegerDigraph(object):
         
         cx = self.actions[x]['component']
         cy = self.actions[y]['component']
-
-        if cx == cy:
+        rx = self.components[cx]['rank']
+        ry = self.components[cy]['rank']
+        
+        if rx == ry:
             rxpg = self.components[cx]['subGraph'].relation
             return rxpg[x][y]
-        elif self.components[cx]['rank'] > self.components[cy]['rank']:
+        elif rx > ry:
             return Min
         else:
             return Max
@@ -640,9 +642,9 @@ class BigIntegerDigraph(object):
                         otherRelation = other.relation(x,y) * otherMultiple
                     except:
                         otherRelation = int(other.relation[x][y]) * otherMultiple
-                    #if Debug:
-                    #   print(x,y,'self', selfRelation)
-                    #   print(x,y,'other', otherRelation)
+                    if Debug:
+                       print(x,y,'self', selfRelation)
+                       print(x,y,'other', otherRelation)
                     corr = min( max(-selfRelation,otherRelation),\
                                  max(selfRelation,-otherRelation) )
                     corrSum += corr
@@ -1211,16 +1213,22 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             compContent = []
             for i in range(nc):
                 currContLength = len(compContent)
-                comp = actionsCategIntervals[i]               
+                comp = actionsCategIntervals[i]
                 if currContLength == 0:
-                    lowQtileLimit = comp[0][1]
-                highQtileLimit = comp[0][2]
+                    if Descending:
+                        lowQtileLimit = comp[0][1]
+                    else:
+                        lowQtileLimit = comp[0][2]
+                if Descending:
+                    highQtileLimit = comp[0][2]
+                else:
+                    highQtileLimit = comp[0][1]
                 compContent += comp[1]
                 if len(compContent) >= CompSize or i == nc-1:
-                    if Descending:
-                        componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent])
-                    else:
-                        componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent])
+                    #if Descending:
+                    #componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent])
+                    #else:
+                    componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent])
                     compContent = []
         if Debug:
             print(componentsIntervals)

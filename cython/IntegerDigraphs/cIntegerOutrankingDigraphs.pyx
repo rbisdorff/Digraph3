@@ -4166,6 +4166,84 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         return relation
 
 
+    def computeOrdinalCorrelation(self, other, bint Debug=False):
+        """
+        Renders the ordinal correlation K of an integer Digraph instance
+        when compared with a given compatible (same actions set) other integer Digraph or
+        Digraph instance.
+        
+        K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]
+
+        K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]
+
+        .. note::
+
+             The global outranking relation of BigDigraph instances is contructed on the fly
+             from the ordered dictionary of the components.
+
+             Renders a tuple with at position 0 the actual bipolar correlation index
+             and in position 1 the minimal determination level D of self and
+             the other relation.
+
+             D = sum_{x != y} min(abs(self.relation(x,y)),abs(other.relation(x,y)) / n(n-1)
+
+             where n is the number of actions considered.
+
+             The correlation index with a completely indeterminate relation
+             is by convention 0.0 at determination level 0.0 .
+
+        """
+        cdef int x, y, sMax, oMax, selfMultiple=1, otherMultiple=1
+        cdef int corr, determ, selfRelation, otherRelation
+        cdef int corrSum=0, determSum=0
+        cdef double correlation=0.0, determination=0.0
+        
+        ## if self.valuationdomain['min'] != Decimal('-1.0'):
+        ##         print('Error: the BigDigraph instance must be normalized !!')
+        ##         print(self.valuationdomain)
+        ##         return
+
+        sMax = self.valuationdomain['max']
+        oMax = int(other.valuationdomain['max'])
+        if Debug:
+            print('self Max', sMax)
+            print('other Max', oMax)
+        if (oMax != sMax) :
+            selfMultiple = oMax
+            otherMultiple = sMax
+        #if Debug:
+        print('self', selfMultiple)
+        print('other', otherMultiple)
+        
+        #     print('Error: the other digraph must be recoded !!')
+        #     print('self', self.valuationdomain)
+        #     print('other', other.valuationdomain)
+        #     return
+        for x in self.actions:
+            for y in self.actions:
+                if x != y:
+                    selfRelation = self.relation(x,y) * selfMultiple
+                    try:
+                        otherRelation = other.relation(x,y) * otherMultiple
+                    except:
+                        otherRelation = int(other.relation[x][y]) * otherMultiple
+                    if Debug:
+                       print(x,y,'self', selfRelation)
+                       print(x,y,'other', otherRelation)
+                    corr = min( max(-selfRelation,otherRelation),\
+                                 max(selfRelation,-otherRelation) )
+                    corrSum += corr
+                    determ = min( abs(selfRelation),abs(otherRelation) )
+                    determSum += determ
+
+        if determSum > 0:
+            correlation = float(corrSum) / float(determSum)
+            n2 = (self.order*self.order) - self.order
+            determination = (float(determSum) / n2)
+            determination /= (sMax * selfMultiple)
+            
+        return { 'correlation': correlation,\
+                     'determination': determination }
 
 
     
