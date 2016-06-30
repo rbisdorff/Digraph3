@@ -25,6 +25,7 @@ def testbigOutrankingDigraph():
     print(total_size(ctp.evaluation))
     bg1 = BigIntegerOutrankingDigraph(ctp,quantiles=10,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
+                                CopyPerfTab=True,
                                minimalComponentSize=1,
                                     Threading=MP,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
@@ -49,6 +50,7 @@ def testMinimalComponentSize():
     print(total_size(tp.evaluation))
     bg1 = BigIntegerOutrankingDigraph(tp,quantiles=5,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
+                                CopyPerfTab=True,
                                minimalComponentSize=5,
                                     Threading=MP,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
@@ -81,36 +83,26 @@ def testBestChoiceRecommendation():
                                minimalComponentSize=10,
                                     Threading=MP,Debug=False)
     t0=time();print(bg2.computeDeterminateness());print(time()-t0,'sec.')
-    bg2.showHTMLRelationMap(0,0,Colored=True)
+    #bg2.showHTMLRelationMap(0,0,Colored=True)
     bg2.showBestChoiceRecommendation(Comments=False)
 
-## def testMPComments():
-##     print('==>> Testing commented bigOutrankingDigraph construction')
-##     MP = True
-##     t0 = time()
-##     tp = RandomCBPerformanceTableau(numberOfActions=300,Threading=MP,BigData=True)
-##     print(time()-t0)
-##     print(total_size(tp.evaluation))
-##     bg1 = BigOutrankingDigraph(tp,quantiles=5,quantilesOrderingStrategy='average',
-##                                  LowerClosed=False,
-##                                  minimalComponentSize=5,
-##                                  Threading=MP,
-##                                  Comments=True,
-##                                  Debug=False)
-##     print(bg1)
- 
-## def testRelationMap():
-##     print('==>> Testing relation map construction')
-##     MP = True
-##     t0 = time()
-##     tp = RandomCBPerformanceTableau(numberOfActions=300,Threading=MP,BigData=True)
-##     bg1 = BigOutrankingDigraph(tp,quantiles=5,quantilesOrderingStrategy='average',
-##                                  LowerClosed=False,
-##                                  minimalComponentSize=5,
-##                                  Threading=MP,
-##                                  Comments=True,
-##                                  Debug=False)
-##     bg1.showRelationMap(fromIndex=0,toIndex=50,
-##                         symbols = {'max':'┬','positive': '+', 'median': ' ',
-##                                'negative': '-', 'min': '┴'} )
+def testOrdinalCorrelation():
+    print('==>> Testing best choice recommendations')
+    MP = True
+    tp = Random3ObjectivesPerformanceTableau(numberOfActions=100,seed=1)
+    bg1 = BigIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
+                                LowerClosed=False,
+                                CopyPerfTab=True,
+                               minimalComponentSize=1,
+                                    Threading=MP,Debug=False)
+    bg1.showDecomposition()
+    bg2 = BigIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
+                                LowerClosed=False,
+                               minimalComponentSize=100,
+                                    Threading=MP,Comments=True,Debug=False)
+    bg2.showDecomposition()
+    bg2._computeQuantileOrdering(Debug=False)
+    #print(bg2.components['c1'])
+    print(bg1.computeOrdinalCorrelation(bg2,Debug=False))
+
    

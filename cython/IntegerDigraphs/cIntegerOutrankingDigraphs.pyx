@@ -4211,9 +4211,9 @@ class IntegerBipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         if (oMax != sMax) :
             selfMultiple = oMax
             otherMultiple = sMax
-        #if Debug:
-        print('self', selfMultiple)
-        print('other', otherMultiple)
+        if Debug:
+            print('self', selfMultiple)
+            print('other', otherMultiple)
         
         #     print('Error: the other digraph must be recoded !!')
         #     print('self', self.valuationdomain)

@@ -383,6 +383,7 @@ class BigIntegerDigraph(object):
         
         cx = self.actions[x]['component']
         cy = self.actions[y]['component']
+        #print(self.components)
         rx = self.components[cx]['rank']
         ry = self.components[cy]['rank']
         
@@ -615,20 +616,20 @@ class BigIntegerDigraph(object):
 
         sMax = self.valuationdomain['max']
         oMax = int(other.valuationdomain['max'])
-        if Debug:
-            print('self Max', sMax)
-            print('other Max', oMax)
-        if issubclass(other.__class__,(Digraph,BigIntegerDigraph)):
-            if Debug:
-                print('other is a %s instance' % other.__class__)
+        #if Debug:
+        #    print('self Max', sMax)
+        #    print('other Max', oMax)
+        #if issubclass(other.__class__,(Digraph,BigIntegerDigraph)):
+        #    if Debug:
+        #        print('other is a %s instance' % other.__class__)
                 #print('self', self.valuationdomain)
                 #print('other', other.valuationdomain)
         if (oMax != sMax) :
             selfMultiple = oMax
             otherMultiple = sMax
-        if Debug:
-            print('self', selfMultiple)
-            print('other', otherMultiple)
+        #if Debug:
+        #    print('self', selfMultiple)
+        #    print('other', otherMultiple)
         
         #     print('Error: the other digraph must be recoded !!')
         #     print('self', self.valuationdomain)
@@ -642,9 +643,9 @@ class BigIntegerDigraph(object):
                         otherRelation = other.relation(x,y) * otherMultiple
                     except:
                         otherRelation = int(other.relation[x][y]) * otherMultiple
-                    if Debug:
-                       print(x,y,'self', selfRelation)
-                       print(x,y,'other', otherRelation)
+                    #if Debug:
+                    #   print(x,y,'self', selfRelation)
+                    #   print(x,y,'other', otherRelation)
                     corr = min( max(-selfRelation,otherRelation),\
                                  max(selfRelation,-otherRelation) )
                     corrSum += corr
@@ -1165,7 +1166,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         actionsCategories = {}
         for x in self.actions:
             a,lowCateg,highCateg,credibility =\
-                     self.computeActionCategories(x,Comments=Comments,Debug=Debug,\
+                     self.computeActionCategories(x,Comments=Comments,Debug=False,\
                                                Threading=Threading,\
                                                nbrOfCPUs = nbrOfCPUs)
             lowQtileLimit = self.categories[lowCateg]['lowLimit']
@@ -1190,14 +1191,17 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     actionsCategories[(ac,highQtileLimit,lowQtileLimit)] = [a]
             else:
                 print('Error: startegy %s unkonwon' % strategy)
+            #if Debug:
+            #    print('action',a)
+            #    print('actionsCategories',actionsCategories)
                 
         actionsCategIntervals = []
         for interval in actionsCategories:
             actionsCategIntervals.append([interval,\
                                           actionsCategories[interval]])
         actionsCategIntervals.sort(reverse=Descending)
-        if Debug:
-            print(actionsCategIntervals)
+        #if Debug:
+        #    print(actionsCategIntervals)
         CompSize = self.minimalComponentSize 
         if CompSize == 1:
             if Descending:
@@ -1228,6 +1232,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     #if Descending:
                     #componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent])
                     #else:
+                    compContent.sort()
                     componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent])
                     compContent = []
         if Debug:
