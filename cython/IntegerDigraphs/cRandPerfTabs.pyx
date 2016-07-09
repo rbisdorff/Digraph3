@@ -1397,7 +1397,7 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
         for obj in objectives:
             objCriteria = [g for g in criteria if criteria[g]['objective'] == obj]
             objectives[obj]['criteria'] = objCriteria
-            #objWeight = 0
+            objWeight = 0
             for g in objCriteria:
                 objWeight += criteria[g]['weight']
             objectives[obj]['weight'] = objWeight
