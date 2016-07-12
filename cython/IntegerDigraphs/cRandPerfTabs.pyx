@@ -71,6 +71,85 @@ class cPerformanceTableau(PerformanceTableau):
                 d1 = (Decimal(str(d[0])),Decimal(str(d[1])))
                 criteria[g]['thresholds'][th] = d1
 
+    def showCriteria(self,IntegerWeights=True,Alphabetic=False,ByObjectives=True,Debug=False):
+        """
+        print Criteria with thresholds and weights.
+        """
+        criteria = self.criteria
+        try:
+            objectives = self.objectives
+        except:
+            ByObjectives = False
+        print('*----  criteria -----*')
+##        sumWeights = Decimal('0.0')
+##        for g in criteria:
+##            sumWeights += criteria[g]['weight']
+        sumWeights = sum([criteria[g]['weight'] for g in criteria])
+        if ByObjectives:
+            for obj in objectives.keys():
+                criteriaList = [g for g in criteria if criteria[g]['objective']==obj]
+                for g in criteriaList:
+                    try:
+                        criterionName = '%s/' % objectives[criteria[g]['objective']]['name']                                        
+                    except:
+                        criterionName = ''
+                    try:
+                        criterionName += criteria[g]['name']
+                    except:
+                        pass
+                    print(g, repr(criterionName))
+                    
+                    print('  Scale =', criteria[g]['scale'])
+                    if IntegerWeights:
+                        print('  Weight = %d ' % (criteria[g]['weight']))
+                    else:
+                        weightg = criteria[g]['weight']/sumWeights
+                        print('  Weight = %.3f ' % (weightg))
+                    try:
+                        for th in criteria[g]['thresholds']:
+                            if Debug:
+                                print('-->>>', th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1])
+                            print('  Threshold %s : %.2f + %.2fx' %\
+                                  (th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1]), end=' ')
+                            #print self.criteria[g]['thresholds'][th]
+                            #print('; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug))
+                    except:
+                        pass
+                    print()
+        else:
+            criteriaList = list(dict.keys(criteria))
+            if Alphabetic:
+                criteriaList.sort()
+            for g in criteriaList:
+                try:
+                    criterionName = '%s/' % objectives[criteria[g]['objective']]['name']                                        
+                except:
+                    criterionName = ''
+                try:
+                    criterionName += criteria[g]['name']
+                except:
+                    pass
+                print(g, repr(criterionName))
+                
+                print('  Scale =', criteria[g]['scale'])
+                if IntegerWeights:
+                    print('  Weight = %d ' % (criteria[g]['weight']))
+                else:
+                    weightg = criteria[g]['weight']/sumWeights
+                    print('  Weight = %.3f ' % (weightg))
+                try:
+                    for th in criteria[g]['thresholds']:
+                        if Debug:
+                            print('-->>>', th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1])
+                        print('  Threshold %s : %.2f + %.2fx'\
+                              % (th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1]), end=' ')
+                        #print self.criteria[g]['thresholds'][th]
+                        #print('; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug))
+                except:
+                    pass
+                print()
+
+
 class RandomPerformanceTableau(cPerformanceTableau):
     """
     Specialization of the PerformanceTableau class for generating a temporary

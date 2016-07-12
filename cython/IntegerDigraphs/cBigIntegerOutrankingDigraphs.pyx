@@ -658,8 +658,79 @@ class BigIntegerDigraph(object):
             determination = (float(determSum) / n2)
             determination /= (sMax * selfMultiple)
             
-        return { 'correlation': correlation,\
+            return { 'correlation': correlation,\
                      'determination': determination }
+        else:
+            return { 'correlation': 0.0,\
+                     'determination': 0.0 }
+
+    #@cython.locals(x=cython.int,y=cython.int)
+    def computeRankingCorrelation(self, ranking, bint Debug=False):
+        """
+        Renders the ordinal correlation K of a BigDigraph instance
+        when compared with a given linear ranking of its actions
+        
+        K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]
+
+        K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]
+
+        .. note::
+
+             The global outranking relation of BigDigraph instances is contructed on the fly
+             from the ordered dictionary of the components.
+
+             Renders a tuple with at position 0 the actual bipolar correlation index
+             and in position 1 the minimal determination level D of self and
+             the other relation.
+
+             D = sum_{x != y} min(abs(self.relation(x,y)),abs(other.relation(x,y)) / n(n-1)
+
+             where n is the number of actions considered.
+
+             The correlation index with a completely indeterminate relation
+             is by convention 0.0 at determination level 0.0 .
+
+        """
+        cdef int i, j, x, y, sMax, oMax, selfMultiple=1, otherMultiple=1
+        cdef int corr, determ, selfRelation, otherRelation
+        cdef int corrSum=0, determSum=0
+        cdef double correlation=0.0, determination=0.0
+        
+        sMax = self.valuationdomain['max']
+        # selfMultiple = 1
+        otherMultiple = sMax
+        n = len(ranking)
+        for i in range(n-1):
+            x = ranking[i]
+            for j in range(i+1,n):
+                y = ranking[j]
+                selfRelation = self.relation(x,y)
+                otherRelation = sMax
+                corr = min( max(-selfRelation,otherRelation),\
+                            max(selfRelation,-otherRelation) )
+                corrSum += corr
+                determ = min( abs(selfRelation),abs(otherRelation) )
+                determSum += determ
+                selfRelation = self.relation(y,x)
+                otherRelation = -sMax
+                corr = min( max(-selfRelation,otherRelation),\
+                            max(selfRelation,-otherRelation) )
+                corrSum += corr
+                determ = min( abs(selfRelation),abs(otherRelation) )
+                determSum += determ
+
+        if determSum > 0:
+            correlation = float(corrSum) / float(determSum)
+            n2 = (self.order*self.order) - self.order
+            determination = (float(determSum) / n2)
+            determination /= (sMax * selfMultiple)
+            
+            return { 'correlation': correlation,\
+                     'determination': determination }
+        else:
+            return { 'correlation': 0.0,\
+                     'determination': 0.0 }
+
         
     def showDecomposition(self,direction='decreasing'):
         """
