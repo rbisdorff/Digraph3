@@ -456,4 +456,5 @@ installVenv:
 #		python3.3 setup.py install
 #		python3.4 setup.py install
 
-
+installPyPy:
+		pypy3 setup.py install
