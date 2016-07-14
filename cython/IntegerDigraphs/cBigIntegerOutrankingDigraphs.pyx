@@ -25,7 +25,7 @@ from cpython cimport array
 import array
 
 cdef extern from "detertest.h":
-    int ABS(int a)
+    inline int ABS(int a)
 
 
 from cIntegerOutrankingDigraphs import *
