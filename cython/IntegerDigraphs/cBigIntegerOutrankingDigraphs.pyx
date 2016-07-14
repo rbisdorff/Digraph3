@@ -835,6 +835,45 @@ class BigIntegerDigraph(object):
 
 
 ########################
+# multiprocessing workers
+def worker(input):
+    for Comments,args in iter(input.get, 'STOP'):
+        result = decompose(*args)
+        if Comments:
+            print(result)
+
+# def compute(func,args):
+#     result = func(*args)
+#     print( '%d/%d = %s' % \
+#            (args[1], args[2],result))
+
+def decompose(i,nc,tempDirName):
+    global perfTab
+    global decomposition
+    from pickle import dumps
+    comp = decomposition[i]
+    nd = len(str(nc))
+    compKey = ('c%%0%dd' % (nd)) % (i+1)
+    compDict = {'rank':i}
+    compDict['lowQtileLimit'] = comp[0][1]
+    compDict['highQtileLimit'] = comp[0][0]
+    pg = IntegerBipolarOutrankingDigraph(perfTab,
+                    actionsSubset=comp[1],
+                    WithConcordanceRelation=False,
+                    WithVetoCounts=False,
+                    CopyPerfTab=False,
+                    Threading=False)
+    pg.computeCopelandRanking()
+    pg.__dict__.pop('criteria')
+    pg.__dict__.pop('evaluation')
+    pg.__class__ = Digraph
+    compDict['subGraph'] = pg
+    splitComponent = {'compKey':i,'compDict':compDict}
+    foName = tempDirName+'/splitComponent-'+str(i)+'.py'
+    fo = open(foName,'wb')
+    fo.write(dumps(splitComponent,-1))
+    fo.close()
+    return '%d/%d %s OK (%d)' % (i,nc,compKey,len(comp[1]) )
 
 #from weakOrders import QuantilesRankingDigraph
 from cRandPerfTabs import PerformanceTableau
@@ -1002,150 +1041,29 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         else:   # if self.sortingParameters['Threading'] == True:
             from copy import copy, deepcopy
             from pickle import dumps, loads, load, dump
-            from multiprocessing import Process, active_children, cpu_count
-            #Debug=True
-            class myThread(Process):
-                def __init__(self, int threadID,\
-                             tempDirName,\
-                             lTest,\
-                             Debug,int nbrOfSubProcesses, int componentThreadingThreshold):
-                    #from array import array
-                    if nbrOfSubProcesses > 0:
-                        Process.__init__(self,daemon=False)
-                    else:
-                        Process.__init__(self,daemon=True)
-                    self.threadID = threadID
-                    self.workingDirectory = tempDirName
-                    self.lTest = lTest
-                    self.Debug = Debug
-                    self.nbrOfSubProcesses = nbrOfSubProcesses
-                    self.componentThreadingThreshold = componentThreadingThreshold
-                def run(self):
-                    global perfTab
-                    global decomposition
-                    cdef int i,nc,nd,totalWeight=0
-                    from pickle import dumps, loads
-                    from os import chdir
-                    #from copy import deepcopy
-                    #from array import array
-                    from perfTabs import PartialPerformanceTableau
-                    from digraphs import Digraph
-                    from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph
-                    chdir(self.workingDirectory)
-                    if self.Debug:
-                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadID)))
-                        print('lTest',self.lTest)
-                    #fi = open('dumpPerfTab.py','rb')
-                    #perfTab = loads(fi.read())
-                    #fi.close()
-                    #fi = open('dumpDecomp.py','rb')
-                    #decomposition = loads(fi.read())
-                    #fi.close()
-                    nc = len(decomposition)
-                    nd = len(str(nc))
-                    for i in self.lTest:
-                        comp = decomposition[i]
-                        if self.Debug:
-                            print(i, comp)
-                        compKey = ('c%%0%dd' % (nd)) % (i+1)
-                        compDict = {compKey: {}}
-                        compDict = {'rank':i}
-                        pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
-                        compDict['lowQtileLimit'] = comp[0][1]
-                        compDict['highQtileLimit'] = comp[0][0]
-                        if self.nbrOfSubProcesses > 0:
-                            if len(comp[1]) > self.componentThreadingThreshold:
-                                Threading = True
-                            else:
-                                Threading = False
-                        else:
-                            Threading = False
-                        compDict['subGraph'] = IntegerBipolarOutrankingDigraph(pt,
-                                                                         #actionsSubset=comp[1],
-                                                                         #Normalized=True,
-                                                                         WithConcordanceRelation=False,
-                                                                         WithVetoCounts=False,
-                                                                         CopyPerfTab=False,
-                                                                         Threading=Threading,
-                                                                         tempDir='.',
-                                                                         nbrCores=self.nbrOfSubProcesses)
-                        ranking = compDict['subGraph'].computeCopelandRanking()
-                        compDict['subGraph'].__dict__.pop('criteria')
-                        compDict['subGraph'].__dict__.pop('evaluation')
-                        compDict['subGraph'].__class__ = Digraph
-                        splitComponent = {'compKey':compKey,'compDict':compDict,'ranking':ranking}
-                        if self.Debug:
-                            print(splitComponent)
-                        foName = 'splitComponent-'+str(i)+'.py'
-                        fo = open(foName,'wb')
-                        fo.write(dumps(splitComponent,-1))
-                        fo.close()
-                    
+            from multiprocessing import Process, Queue,active_children, cpu_count                 
             if Comments:
                 print('Processing the %d components' % nc )
                 print('Threading ...')
-            tdump = time()
+            #tdump = time()
             from tempfile import TemporaryDirectory,mkdtemp
             with TemporaryDirectory(dir=tempDir) as tempDirName:
-                #use this below dedented if the tempory directory should not be deleted
-                #tempDirName = mkdtemp(dir=tempDir)
-                #selfFileName = tempDirName +'/dumpPerfTab.py'
-                #if Debug:
-                #    print('temDirName, selfFileName', tempDirName,selfFileName)
-                #fo = open(selfFileName,'wb')
-                #dump(perfTab,fo,-1)
-                #fo.close()
-                #if Comments:
-                #    print('dumping perfTab: %.5f' % (time() - tdump))
-                #selfFileName = tempDirName +'/dumpDecomp.py'
-                #if Debug:
-                #    print('temDirName, selfFileName', tempDirName,selfFileName)
-                #fo = open(selfFileName,'wb')
-                #pd = dumps(decomposition,-1)
-                #fo.write(pd)
-                #fo.close()
-                #if Comments:
-                #    print('dumping time: %.5f' % (time() - tdump))
+                ## tasks queue and workers launching
+                NUMBER_OF_WORKERS = nbrOfCPUs
+                TASKS = [(Comments,(i,nc,tempDirName)) for i in range(nc) if len(decomposition[i])>1]
+                task_queue = Queue()
+                for task in TASKS:
+                    task_queue.put(task)
+                for i in range(NUMBER_OF_WORKERS):
+                    Process(target=worker,args=(task_queue,)).start()
+                print('started')
+                for i in range(NUMBER_OF_WORKERS):
+                    task_queue.put('STOP')                   
 
-                # if nbrOfCPUs == None:
-                #     nbrOfCPUs = cpu_count()
-                # if nbrOfThreads == None:
-                #     nbrOfThreads = nbrOfCPUs-1
-                nbrOfLocals = self.order//nbrOfThreads
-                if nbrOfLocals*nbrOfThreads < self.order:
-                    nbrOfLocals += 1
-                if Comments:
-                    print('Nbr of components',nc)            
-                    print('Nbr of threads = ',nbrOfThreads)
-                    print('Nbr of locals/job',nbrOfLocals)
-                nbrOfThreadsUsed = 0
-                i = 0
-                for j in range(nbrOfThreads):
-                    if Comments:
-                        print('thread = %d/%d' % (j+1,nbrOfThreads),end="...")
-                    lTest = array.array('i')
-                    threadLoad = 0
-                    while threadLoad <= nbrOfLocals and i < (nc):
-                        lTest.append(i)
-                        threadLoad += len(decomposition[i][1])
-                        i += 1
-                    #for i in range(start,stop):
-                    #    if len(decomposition[i][1]) < componentThreadingThreshold:
-                    #        lTest.append(i)
-                    #    else:
-                    #        bigPartialGraphs.append(i)
-                    if Comments:
-                        print('Threaded:',[len(decomposition[i][1]) for i in lTest])
-                        #print('Kept    :',[len(decomposition[i][1]) for i in bigPartialGraphs])
-                    if lTest != []:
-                        process = myThread(j,tempDirName,lTest,Debug,nbrOfSubProcesses,componentThreadingThreshold)
-                        process.start()
-                        nbrOfThreadsUsed += 1
-                #nbg = len(bigPartialGraphs)
                 while active_children() != []:
                     pass
                 if Comments:
-                    print('Exit %d threads' % nbrOfThreadsUsed)
+                    print('Exit %d threads' % NUMBER_OF_WORKERS)
                     
                 components = OrderedDict()
                 #componentsList = []
@@ -1159,7 +1077,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     if Debug:
                         print('splitComponent',splitComponent)
                     components[splitComponent['compKey']] = splitComponent['compDict']
-                    boostedRanking += splitComponent['ranking']
+                    boostedRanking += splitComponent['compDict']['subGraph'].copelandRanking
 
         # storing components, fillRate and maximalComponentSize
 

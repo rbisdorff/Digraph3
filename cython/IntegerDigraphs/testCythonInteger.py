@@ -40,7 +40,7 @@ nbrActions = 2500
 nbrCriteria = 21
 commonPar=('beta','variable',None)
 qtiles = 75
-minimalSize = 10
+minimalSize = 20
 seed = 10
 fileName = 'CythonA%dObj21q%ds%dc%dhome.csv' % (nbrActions,qtiles,minimalSize,nbrOfCPUs)
 # write header row
