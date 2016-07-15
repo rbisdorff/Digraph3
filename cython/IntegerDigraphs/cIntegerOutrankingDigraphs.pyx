@@ -330,8 +330,9 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         criteria = self.criteria
         evaluation = self.evaluation
         actionsKeys = list(dict.keys(actions))
-        self.relation = self._constructRelationWithThreading(criteria,\
-                                                evaluation,\
+        self.relation = self._constructRelationWithThreading(
+                                                #criteria,\
+                                                #evaluation,\
                                                 initial=actionsKeys,\
                                                 terminal=actionsKeys,\
                                                 hasNoVeto=hasNoVeto,\
@@ -406,8 +407,9 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
             else:
                 return 0
             
-    def _constructRelationWithThreading(self,criteria,\
-                           evaluation,\
+    def _constructRelationWithThreading(self,
+                           #criteria,\
+                           #evaluation,\
                            initial=None,\
                            terminal=None,\
                            bint hasNoVeto=False,\
@@ -441,8 +443,9 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
             ## else:
             constructRelation = self._constructRelationSimple
 
-            return constructRelation(criteria,\
-                                    evaluation,\
+            return constructRelation(
+                                    #criteria,\
+                                    #evaluation,\
                                     initial=initial,\
                                     terminal=terminal,\
                                     hasNoVeto=hasNoVeto,\
@@ -458,6 +461,8 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
             from pickle import Pickler, dumps, loads, load
             from multiprocessing import Process, Lock,\
                                         active_children, cpu_count
+            global digraph
+            
             #Debug=True
             class myThread(Process):
                 def __init__(self, int threadID,\
@@ -479,12 +484,13 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                     from pickle import Pickler, dumps, loads
                     from os import chdir
                     from array import array
+                    global digraph
                     chdir(self.workingDirectory)
 ##                    if Debug:
 ##                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
-                    fi = open('dumpSelf.py','rb')
-                    digraph = loads(fi.read())
-                    fi.close()
+                    #fi = open('dumpSelf.py','rb')
+                    #digraph = loads(fi.read())
+                    #fi.close()
                     splitActions = self.splitActions
 ##                    fiName = 'splitActions-'+str(self.threadID)+'.py'
 ##                    fi = open(fiName,'rb')
@@ -503,8 +509,9 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                         terminalIn = splitActions
                         #splitRelation = BipolarOutrankingDigraph._constructRelation(
                     splitRelation = constructRelation(
-                                            digraph,digraph.criteria,\
-                                            digraph.evaluation,
+                                            digraph,
+                                            #digraph.criteria,\
+                                            #digraph.evaluation,\
                                             initial=initialIn,
                                             terminal=terminalIn,
                                             hasNoVeto=self.hasNoVeto,
@@ -538,14 +545,14 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
             from tempfile import TemporaryDirectory
             with TemporaryDirectory(dir=tempDir) as tempDirName:
                 from copy import copy, deepcopy
-
+                digraph = self
                 #selfDp = copy(self)
-                selfFileName = tempDirName +'/dumpSelf.py'
-                if Debug:
-                    print('temDirName, selfFileName', tempDirName,selfFileName)
-                fo = open(selfFileName,'wb')
-                fo.write(dumps(self,-1))
-                fo.close()
+                #selfFileName = tempDirName +'/dumpSelf.py'
+                #if Debug:
+                #    print('temDirName, selfFileName', tempDirName,selfFileName)
+                #fo = open(selfFileName,'wb')
+                #fo.write(dumps(self,-1))
+                #fo.close()
 
                 if nbrCores == None:
                     nbrCores = cpu_count()
@@ -656,8 +663,9 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                                 rx[y] = sprx[y]   
                 return relation
 
-    def _constructRelationSimple(self,criteria,\
-                           evaluation,\
+    def _constructRelationSimple(self,
+                           #criteria,\
+                           #evaluation,\
                            initial=None,\
                            terminal=None,\
                            bint hasNoVeto=False,\
@@ -677,6 +685,9 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         """
 
         cdef int totalWeight, Max, Med, concordance=0, lc0
+
+        criteria = self.criteria
+        evaluation = self.evaluation
         
         ## default setting for digraphs
         if initial == None:

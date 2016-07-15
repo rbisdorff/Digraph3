@@ -232,8 +232,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         else:
             initialArg  = profiles
             terminalArg = actionsOrig
-        relation = self._constructRelationWithThreading(criteria,
-                                                   evaluation,
+        relation = self._constructRelationWithThreading(
+                                                   #criteria,
+                                                   #evaluation,
                                                    initial=initialArg,
                                                    terminal=terminalArg,
                                                    hasNoVeto=hasNoVeto,
@@ -277,8 +278,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         print('Compute relation : %.5f' % self.runTimes['computeRelation'])
         return '%s instance' % str(self.__class__)
 
-    def _constructRelationWithThreading(self,criteria,\
-                           evaluation,\
+    def _constructRelationWithThreading(self,
+                            #criteria,\
+                           #evaluation,\
                            initial=None,\
                            terminal=None,\
                            bint hasNoVeto=False,\
@@ -318,8 +320,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             ## else:
             constructRelation = IntegerBipolarOutrankingDigraph._constructRelationSimple
 
-            relation = constructRelation(self, criteria,\
-                                    evaluation,\
+            relation = constructRelation(self,
+                                    #criteria,\
+                                    #evaluation,\
                                     initial=initial,\
                                     terminal=terminal,\
                                     hasNoVeto=hasNoVeto,\
@@ -432,8 +435,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                         initialIn = digraph.profiles
                         terminalIn = splitActions
                     splitRelation = constructRelation(
-                                            digraph,digraph.criteria,\
-                                            digraph.evaluation,\
+                                            digraph,
+                                            #digraph.criteria,\
+                                            #digraph.evaluation,\
                                             initial=initialIn,\
                                             terminal=terminalIn,\
                                             hasNoVeto=self.hasNoVeto,\
