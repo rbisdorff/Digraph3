@@ -912,11 +912,10 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                  bint Comments=False,\
                  bint Debug=False):
 
-        cdef int i, j, nc, nd, totalWeight = 0
+        cdef int i, j, totalWeight = 0
         cdef int nbrOfLocals,nbrOfThreadsUsed,threadLoad
         cdef double ttot, t0, tw, tdump
-        cdef int maximalComponentSize=0
-        cdef long fillRateSum=0
+        cdef int maximalComponentSize
         cdef array.array lTest=array.array('i')
 
         global perfTab
@@ -1067,8 +1066,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     print('Exit %d threads' % NUMBER_OF_WORKERS)
                     
                 components = OrderedDict()
-                # long fillRateSum = 0
-                # int maximalComponentSize = 0
+                #componentsList = []
                 boostedRanking = []
                 for j in range(nc):
                     if Debug:
@@ -1076,34 +1074,25 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
                     fi = open(fiName,'rb')
                     splitComponent = loads(fi.read())
-                    compKey = splitComponent['compKey']
-                    comp  = splitComponent['compDict']
                     if Debug:
                         print('splitComponent',splitComponent)
-                    components[compKey] = comp
-                    pg = comp['subGraph']
-                    npg = pg.order
-                    if npg > maximalComponentSize:
-                        maximalComponentSize = npg
-                    fillRateSum += npg*(npg-1)
-                    for x in pg.actions.keys():
-                        self.actions[x]['component'] = compKey
-                    boostedRanking += pg.copelandRanking
+                    components[splitComponent['compKey']] = splitComponent['compDict']
+                    boostedRanking += splitComponent['compDict']['subGraph'].copelandRanking
 
         # storing components, fillRate and maximalComponentSize
 
         self.components = components
-        # fillRate = 0
-        # maximalComponentSize = 0
-        # for compKey,comp in components.items():
-        #     pg = comp['subGraph']
-        #     npg = pg.order
-        #     if npg > maximalComponentSize:
-        #         maximalComponentSize = npg
-        #     fillRate += npg*(npg-1)
-        #     for x in pg.actions.keys():
-        #         self.actions[x]['component'] = compKey
-        self.fillRate = float(fillRateSum)/(na * (na-1))
+        fillRate = 0
+        maximalComponentSize = 0
+        for compKey,comp in components.items():
+            pg = comp['subGraph']
+            npg = pg.order
+            if npg > maximalComponentSize:
+                maximalComponentSize = npg
+            fillRate += npg*(npg-1)
+            for x in pg.actions.keys():
+                self.actions[x]['component'] = compKey
+        self.fillRate = fillRate/(self.order * (self.order-1))
         self.maximalComponentSize = maximalComponentSize
 
         # setting the component relation
