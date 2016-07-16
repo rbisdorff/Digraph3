@@ -40,7 +40,7 @@ nbrActions = 2500
 nbrCriteria = 21
 commonPar=('beta','variable',None)
 qtiles = 75
-minimalSize = 20
+minimalSize = 10
 seed = 10
 fileName = 'CythonA%dObj21q%ds%dc%dhome.csv' % (nbrActions,qtiles,minimalSize,nbrOfCPUs)
 # write header row
@@ -102,7 +102,7 @@ for s in range(sampleSize):
                                nbrOfThreads=nbrOfCPUs,
                                nbrOfSubProcesses=nbrOfSubProcesses,
                                componentThreadingThreshold=componentThreadingThreshold,
-                               Comments=True,
+                               Comments=False,
                                Debug=False)
 
     print(bg2)

@@ -847,7 +847,8 @@ def worker(input):
 #     print( '%d/%d = %s' % \
 #            (args[1], args[2],result))
 
-def decompose(i,nc,tempDirName):
+def decompose(int i,int nc,tempDirName):
+    cdef int nd
     global perfTab
     global decomposition
     from pickle import dumps
@@ -873,7 +874,7 @@ def decompose(i,nc,tempDirName):
     fo = open(foName,'wb')
     fo.write(dumps(splitComponent,-1))
     fo.close()
-    return '%d/%d %s OK (%d)' % (i,nc,compKey,len(comp[1]) )
+    return '%d/%d (%d)' % (i,nc,pg.order)
 
 #from weakOrders import QuantilesRankingDigraph
 from cRandPerfTabs import PerformanceTableau

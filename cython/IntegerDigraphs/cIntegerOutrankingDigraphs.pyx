@@ -281,7 +281,10 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         Min =   -totalWeight
         Med =   0
         Max =   totalWeight
-        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+        self.valuationdomain = {'min': Min,
+                                'med': Med,
+                                'max': Max,
+                                'hasIntegerValuation': True}
 
         #  install method Data and parameters
         methodData = {}
@@ -1238,48 +1241,6 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         else:
             return 0
 
-    # def computeSingleCriteriaNetflows(self):
-    #     """
-    #     renders the integer actions x criteria netflows matrix M[a][c] 
-    #     """
-    #     cdef int netflow=0, cab, cba
-    #     actionsList = [x for x in self.actions]
-    #     n = len(actionsList)
-    #     criteriaList = [x for x in self.criteria]
-    #     matrixM = {}
-    #     for a in actionsList:
-    #         matrixM[a] = {}
-    #         for c in criteriaList:
-    #             netflow= Decimal('0.0')
-    #             for b in actionsList:
-    #                 if a != b:
-    #                     cab = self.criterionCharacteristicFunction(c,a,b)
-    #                     cba = self.criterionCharacteristicFunction(c,b,a)
-    #                     netflow += cab - cba
-    #             #netflow = float(netflow)/float(n-1)
-    #             matrixM[a][c] = netflow
-    #     return matrixM
-    
-    # def saveSingleCriterionNetflows(self,fileName='tempnetflows.prn',delimiter=' ',Comments=True):
-    #     """
-    #     Delimited save of integer actions x criteria netflows matrix
-    #     """
-    #     cdef int a
-    #     actionsList = [x for x in self.actions]
-    #     #actionsList.sort()
-    #     criteriaList = [x for x in self.criteria]
-    #     #criteriaList.sort()
-    #     M = self.computeSingleCriteriaNetflows()
-    #     fo = open(fileName,'w')
-    #     for a in actionsList:
-    #         for c in criteriaList:
-    #             fo.write('%2.2f ' % (M[a][c]))
-    #         fo.write('\n')
-    #     fo.close()
-    #     if Comments:
-    #         print('Single Criteria Netflows saved on file %s' % (fileName))
-
-
     def computeDeterminateness(self):
         """
         Computes the Kendalll distance in % of self
@@ -1302,7 +1263,18 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                     #print(deter)
         #deter = (deter /Decimal(str((order * (order-1))))) * (Max - Med)
         deter = float(deterSum) / float(order * (order-1))
-        return deter/(float(Max-Med)*100.0)
+        return (deter/float(Max-Med))*100.0
 
+    def convertValuation2Decimal(self):
+        from decimal import Decimal
+        self.valuationdomain['min'] = Decimal('%.2f' % self.valuationdomain['min'])
+        self.valuationdomain['med'] = Decimal('%.2f' % self.valuationdomain['med'])
+        self.valuationdomain['max'] = Decimal('%.2f' % self.valuationdomain['max'])
+        for x,rx in self.relation.items():
+            for y,rxy in rx.items():
+                rxy = Decimal('%.2f' % rxy)
+        from outrankingDigraphs import BipolarOutrankingDigraph
+        self.__class__ = BipolarOutrankingDigraph
+        
 
 ############################
