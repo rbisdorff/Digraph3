@@ -847,7 +847,7 @@ def worker(input):
 #     print( '%d/%d = %s' % \
 #            (args[1], args[2],result))
 
-def decompose(int i,int nc,tempDirName):
+def decompose(int i, int nc,tempDirName):
     cdef int nd
     global perfTab
     global decomposition
@@ -901,7 +901,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                  quantilesOrderingStrategy="average",\
                  bint LowerClosed=False,\
                  componentRankingRule="Copeland",\
-                 int minimalComponentSize=1,\
+                 int minimalComponentSize=2,\
                  bint Threading=False,\
                  tempDir=None,\
                  int componentThreadingThreshold=50,\
@@ -1051,7 +1051,9 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             with TemporaryDirectory(dir=tempDir) as tempDirName:
                 ## tasks queue and workers launching
                 NUMBER_OF_WORKERS = nbrOfCPUs
-                TASKS = [(Comments,(i,nc,tempDirName)) for i in range(nc) if len(decomposition[i])>1]
+                tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]
+                tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
+                TASKS = [(Comments,(pos[0],nc,tempDirName)) for pos in tasksIndex]
                 task_queue = Queue()
                 for task in TASKS:
                     task_queue.put(task)

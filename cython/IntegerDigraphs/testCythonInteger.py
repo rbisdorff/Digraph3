@@ -102,7 +102,7 @@ for s in range(sampleSize):
                                nbrOfThreads=nbrOfCPUs,
                                nbrOfSubProcesses=nbrOfSubProcesses,
                                componentThreadingThreshold=componentThreadingThreshold,
-                               Comments=False,
+                               Comments=True,
                                Debug=False)
 
     print(bg2)
