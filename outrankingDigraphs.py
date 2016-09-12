@@ -93,7 +93,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print(corr)
         return corr
 
-    def computeMarginalVersusGlobalRankingCorrelations(self,ranking,Sorted=True,ValuedCorrelation=False,
+    def computeMarginalVersusGlobalRankingCorrelations(self,ranking,
+                                                           Sorted=True,ValuedCorrelation=False,
                                                           Threading=False,nbrCores=None,\
                                                           Comments=False):
         """
