@@ -880,6 +880,23 @@ the automorphism of the digraph self</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="digraphs.Digraph.computeOrderCorrelation">
+<code class="descname">computeOrderCorrelation</code><span class="sig-paren">(</span><em>order</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeOrderCorrelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the ordinal correlation K of a digraph instance
+when compared with a given linear order (from worst to best) of its actions</p>
+<p>K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]</p>
+<p>K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Renders a dictionary with the key &#8216;correlation&#8217; containing the actual bipolar correlation index and the key &#8216;determination&#8217; containing the minimal determination level D of self and the other relation.</p>
+<p>D = sum_{x != y} min(abs(self.relation(x,y)),abs(other.relation(x,y)) / n(n-1)</p>
+<p>where n is the number of actions considered.</p>
+<p class="last">The correlation index with a completely indeterminate relation
+is by convention 0.0 at determination level 0.0 .</p>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="digraphs.Digraph.computeOrdinalCorrelation">
 <code class="descname">computeOrdinalCorrelation</code><span class="sig-paren">(</span><em>other</em>, <em>MedianCut=False</em>, <em>filterRelation=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeOrdinalCorrelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the bipolar correlation K of a
@@ -1041,6 +1058,25 @@ was computed on the codual of self.</p>
 <code class="descname">computeRankingByLastChoosingRelation</code><span class="sig-paren">(</span><em>rankingByLastChoosing=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeRankingByLastChoosingRelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the bipolar-valued relation obtained from
 the self.rankingByLastChoosing result.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.computeRankingCorrelation">
+<code class="descname">computeRankingCorrelation</code><span class="sig-paren">(</span><em>ranking</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeRankingCorrelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the ordinal correlation K of a digraph instance
+when compared with a given linear ranking of its actions</p>
+<p>K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]</p>
+<p>K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Renders a tuple with at position 0 the actual bipolar correlation index
+and in position 1 the minimal determination level D of self and
+the other relation.</p>
+<p>D = sum_{x != y} min(abs(self.relation(x,y)),abs(other.relation(x,y)) / n(n-1)</p>
+<p>where n is the number of actions considered.</p>
+<p class="last">The correlation index with a completely indeterminate relation
+is by convention 0.0 at determination level 0.0 .</p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -1254,7 +1290,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3548,7 +3584,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4212,7 +4248,15 @@ outranking digraphs</p>
 <code class="descname">computeCriterionCorrelation</code><span class="sig-paren">(</span><em>criterion</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.computeCriterionCorrelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the ordinal correlation coefficient between
 the global outranking and the marginal criterion relation.</p>
-<p>If Threading, the</p>
+<p>Uses the digraphs.computeOrdinalCorrelationMP().</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Renders a dictionary with the key &#8216;correlation&#8217; containing the actual bipolar correlation index and the key &#8216;determination&#8217; containing the minimal determination level D of the self outranking and the marginal criterion relation.</p>
+<p>D = sum_{x != y} min(abs(self.relation(x,y)),abs(marginalCriterionRelation(x,y)) / n(n-1)</p>
+<p>where n is the number of actions considered.</p>
+<p class="last">The correlation index with a completely indeterminate relation
+is by convention 0.0 at determination level 0.0 .</p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -4302,7 +4346,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">

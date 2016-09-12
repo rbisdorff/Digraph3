@@ -2047,9 +2047,7 @@ class Digraph(object):
 
         .. note::
 
-             Renders a tuple with at position 0 the actual bipolar correlation index
-             and in position 1 the minimal determination level D of self and
-             the other relation.
+             Renders a dictionary with the key 'correlation' containing the actual bipolar correlation index and the key 'determination' containing the minimal determination level D of self and the other relation.
 
              D = sum_{x != y} min(abs(self.relation(x,y)),abs(other.relation(x,y)) / n(n-1)
 

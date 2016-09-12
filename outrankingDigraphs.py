@@ -147,7 +147,18 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         Renders the ordinal correlation coefficient between
         the global outranking and the marginal criterion relation.
 
-        If Threading, the 
+        Uses the digraphs.computeOrdinalCorrelationMP().
+
+        .. note::
+
+             Renders a dictionary with the key 'correlation' containing the actual bipolar correlation index and the key 'determination' containing the minimal determination level D of the self outranking and the marginal criterion relation.
+
+             D = sum_{x != y} min(abs(self.relation(x,y)),abs(marginalCriterionRelation(x,y)) / n(n-1)
+
+             where n is the number of actions considered.
+
+             The correlation index with a completely indeterminate relation
+             is by convention 0.0 at determination level 0.0 .
         """
         gc = BipolarOutrankingDigraph(self,Normalized=True,coalition=[criterion],CopyPerfTab=True,
                                       Threading=Threading,nbrCores=nbrOfCPUs,
