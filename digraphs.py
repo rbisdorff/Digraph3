@@ -2056,6 +2056,10 @@ class Digraph(object):
              The correlation index with a completely indeterminate relation
              is by convention 0.0 at determination level 0.0 .
 
+        .. warning::
+
+             self must be a normalized outranking digraph instance !
+
         """
         
         selfMax = self.valuationdomain['max']

@@ -73,16 +73,22 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                                     Comments=False):
         """
         Renders the ordinal correlation coefficient between
-        the global outranking and the marginal criterion relation.
+        the marginal criterion relation and a 
+        given normalized outranking relation.
 
-        If Threading, the
+        args = (criterion,relation)
         """
         criterion = args[0]
         relation = args[1]
-        gc = BipolarOutrankingDigraph(self,Normalized=True,coalition=[criterion],CopyPerfTab=True,
-                                      Threading=Threading,nbrCores=nbrOfCPUs,
-                                      Comments=Comments)
-        corr = gc.computeOrdinalCorrelation(relation)
+        gc = BipolarOutrankingDigraph(self,Normalized=True,
+                                          coalition=[criterion],
+                                          CopyPerfTab=True,
+                                          Threading=Threading,
+                                          nbrCores=nbrOfCPUs,
+                                          Comments=Comments)
+        corr = gc.computeOrdinalCorrelationMP(relation,
+                                              Threading=Threading,
+                                              nbrOfCPUs=nbrOfCPUs)
         if Debug:
             print(corr)
         return corr
