@@ -359,11 +359,7 @@ class BigDigraph(object):
                 print('Error: the other bigDigraph instance must be normalized !!')
                 print(other.valuationdomain)
                 return
-        
-        #selfActionsList = list(self.actions.keys())
-        # if Debug:
-        #     print(selfActionsList)
-        
+                
         correlation = Decimal('0.0')
         determination = Decimal('0.0')
 
@@ -443,7 +439,7 @@ class BigDigraph(object):
             print('You need to upgrade your Python to version 3.4+ !')
             return      
         nc = self.nbrComponents
-        compLengths = [comp['subGraph'].order \
+        compLengths = [comp['subGraph'].order\
                        for comp in self.components.values()]
         medianLength = statistics.median(compLengths)
         stdLength = statistics.pstdev(compLengths)
@@ -505,7 +501,7 @@ class BigDigraph(object):
         Renders the sum of the squares (without diagonal) of the orders of the component's subgraphs
         over the square (without diagonal) of the big digraph order. 
         """
-        fillRate = sum((comp['subGraph'].order*comp['subGraph'].order-1)\
+        fillRate = sum((comp['subGraph'].order*(comp['subGraph'].order-1))\
                         for comp in self.components.values())
         return fillRate/( self.order*(self.order-1) )
 
@@ -1792,7 +1788,7 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,PerformanceTableau):
             fillRate += npg*(npg-1)
             for x in pg.actions.keys():
                 self.actions[x]['component'] = compKey
-        self.fillRate = fillRate / (na*(na-1))
+        self.fillRate /= (na*(na-1))
         self.maximalComponentSize = maximalComponentSize
         self.components = components
 
