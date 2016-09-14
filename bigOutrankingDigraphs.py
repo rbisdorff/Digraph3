@@ -1065,7 +1065,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                                     Comments=False):
         """
         Renders the ordinal correlation coefficient between
-        the global outranking and the marginal criterion relation.
+        the global linar ranking and the marginal criterion relation.
         
         """
         #print(criterion)
@@ -1084,15 +1084,13 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
                                                           Threading=False,nbrCores=None,\
                                                           Comments=False):
         """
-        Method for computing correlations between each individual criterion relation with the corresponding
-        global outranking relation.
+        Method for computing correlations between each individual criterion relation with the corresponding global ranking relation.
         
         Returns a list of tuples (correlation,criterionKey) sorted by default in decreasing order of the correlation.
 
         If Threading is True, a multiprocessing Pool class is used with a parallel equivalent of the built-in map function.
 
-        If nbrCores is not set, the os.cpu_count() function is used to determine the number of
-        available cores.
+        If nbrCores is not set, the os.cpu_count() function is used to determine the number of available cores.
         """
         if Threading:
             from multiprocessing import Pool
@@ -1135,7 +1133,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         if Sorted:
             criteriaCorrelation.sort(reverse=True)
         if Comments:
-            print('Marginal versus global outranking correlation')
+            print('Marginal versus global linear ranking correlation')
             print('criterion | weight\t corr\t deter\t corr*deter')
             print('----------|------------------------------------------')
             for x in criteriaCorrelation:
@@ -1337,7 +1335,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
     def computeBoostedRanking(self,rankingRule='Copeland'):
         """
         Renders an ordred list of decision actions ranked in
-        decreasing preference direction following the net flows rule
+        decreasing preference direction following the rankingRule
         on each component.
         """
         from linearOrders import NetFlowsOrder,KohlerOrder,CopelandOrder
@@ -1361,7 +1359,7 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
     def computeBoostedOrdering(self,orderingRule='Copeland'):
         """
         Renders an ordred list of decision actions ranked in
-        increasing preference direction following by default the Copeland rule
+        increasing preference direction following the orderingRule
         on each component.
         """
         from linearOrders import NetFlowsOrder,KohlerOrder,CopelandOrder
@@ -1507,7 +1505,9 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
 ########################
 class BigOutrankingDigraphMP(BigOutrankingDigraph,PerformanceTableau):
     """
-    !!! Development and testing implementation !!!
+    .. warning::
+         
+        !!! Development and testing implementation !!!
     
     Multiprocessing implementation of the abstract BipolarOutrankingDigraph class
     for large instances (order > 1000)
@@ -1985,7 +1985,9 @@ class BigOutrankingDigraphMP(BigOutrankingDigraph,PerformanceTableau):
 ######  in development
 class BigOutrankingDigraphDev(BigOutrankingDigraph,PerformanceTableau):
     """
-    !!! In Development, only for testing purposes
+    .. warning::
+
+       !!! In Development, only for testing purposes
 
     Multiprocessing implementation of the abstract BipolarOutrankingDigraph class
     for large instances (order > 1000)
