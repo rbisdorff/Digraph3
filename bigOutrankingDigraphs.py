@@ -1024,8 +1024,8 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         elif n == 1:
             if Show:
                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     qs.categories[keys[0]]['lowLimit'],\
-                                     qs.categories[keys[0]]['highLimit'],\
+                                     categories[keys[0]]['lowLimit'],\
+                                     categories[keys[0]]['highLimit'],\
                                      action,\
                                      credibility,lowLimit,notHighLimit) )
             return action,\
@@ -1035,8 +1035,8 @@ class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
         else:
             if Show:
                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     qs.categories[keys[0]]['lowLimit'],\
-                                     qs.categories[keys[-1]]['highLimit'],\
+                                     categories[keys[0]]['lowLimit'],\
+                                     categories[keys[-1]]['highLimit'],\
                                      action,\
                                      credibility,lowLimit,notHighLimit) )
             return action,\
