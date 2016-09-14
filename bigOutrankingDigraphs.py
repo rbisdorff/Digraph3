@@ -346,54 +346,42 @@ class BigDigraph(object):
                 return
         
         if issubclass(other.__class__,(Digraph)):
-            if Debug:
-                print('other is a Digraph instance')
+            # if Debug:
+            #     print('other is a Digraph instance')
             if other.valuationdomain['min'] != Decimal('-1.0'):
                 print('Error: the other digraph must be normalized !!')
                 print(other.valuationdomain)
                 return
         elif isinstance(other,(BigDigraph)):
-            if Debug:
-                print('other is a BigDigraph instance')
+            # if Debug:
+            #     print('other is a BigDigraph instance')
             if other.valuationdomain['min'] != Decimal('-1.0'):
                 print('Error: the other bigDigraph instance must be normalized !!')
                 print(other.valuationdomain)
                 return
         
-        selfActionsList = ((ck,
-                            self.components[ck]['subGraph'].actions)\
-                           for ck in self.components)
-
-        if issubclass(other.__class__,(Digraph)):
-            otherActionsList = [( 'c01', other.actions)]
-        else:
-            otherActionsList = ((ck,
-                                 other.components[ck]['subGraph'].actions)\
-                           for ck in other.components)
-        #if Debug:
-        #    print(selfActionsList)
-        #    print(otherActionsList)
+        selfActionsList = list(self.actions.keys())
+        # if Debug:
+        #     print(selfActionsList)
         
         correlation = Decimal('0.0')
         determination = Decimal('0.0')
 
-        for ckx in selfActionsList:
-            for x in ckx[1]:
-                for cky in otherActionsList:
-                    for y in cky[1]:
-                        if x != y:
-                            selfRelation = self.relation(x,y)
-                            try:
-                                otherRelation = other.relation(x,y)
-                            except:
-                                otherRelation = other.relation[x][y]
-                            #if Debug:
-                            #    print(x,y,'self', selfRelation)
-                            #    print(x,y,'other', otherRelation)
-                            corr = min( max(-selfRelation,otherRelation), max(selfRelation,-otherRelation) )
-                            correlation += corr
-                            determination += min( abs(selfRelation),abs(otherRelation) )
-
+        for x in selfActionsList:
+            for y in selfActionsList:
+                if x != y:
+                    selfRelation = self.relation(x,y)
+                    try:
+                        otherRelation = other.relation(x,y)
+                    except:
+                        otherRelation = other.relation[x][y]
+                        if Debug:
+                            print(x,y,'self', selfRelation)
+                            print(x,y,'other', otherRelation)
+                    corr = min( max(-selfRelation,otherRelation), max(selfRelation,-otherRelation) )
+                    correlation += corr
+                    determination += min( abs(selfRelation),abs(otherRelation) )
+                    
         if determination > Decimal('0.0'):
             correlation /= determination
             n2 = (self.order*self.order) - self.order
