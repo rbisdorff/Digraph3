@@ -329,9 +329,7 @@ class BigDigraph(object):
              The global outranking relation of BigDigraph instances is contructed on the fly
              from the ordered dictionary of the components.
 
-             Renders a tuple with at position 0 the actual bipolar correlation index
-             and in position 1 the minimal determination level D of self and
-             the other relation.
+             Renders a dictionary with a 'correlation' key containing the actual bipolar correlation index and a 'determination' key containing the minimal determination level D of self and the other relation.
 
              D = sum_{x != y} min(abs(self.relation(x,y)),abs(other.relation(x,y)) / n(n-1)
 
