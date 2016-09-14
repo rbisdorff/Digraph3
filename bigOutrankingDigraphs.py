@@ -360,24 +360,24 @@ class BigDigraph(object):
                 print(other.valuationdomain)
                 return
         
-        selfActionsList = list(self.actions.keys())
+        #selfActionsList = list(self.actions.keys())
         # if Debug:
         #     print(selfActionsList)
         
         correlation = Decimal('0.0')
         determination = Decimal('0.0')
 
-        for x in selfActionsList:
-            for y in selfActionsList:
+        for x in self.actions.keys():
+            for y in self.actions.keys():
                 if x != y:
                     selfRelation = self.relation(x,y)
                     try:
                         otherRelation = other.relation(x,y)
                     except:
                         otherRelation = other.relation[x][y]
-                        if Debug:
-                            print(x,y,'self', selfRelation)
-                            print(x,y,'other', otherRelation)
+                        #if Debug:
+                        #    print(x,y,'self', selfRelation)
+                        #    print(x,y,'other', otherRelation)
                     corr = min( max(-selfRelation,otherRelation), max(selfRelation,-otherRelation) )
                     correlation += corr
                     determination += min( abs(selfRelation),abs(otherRelation) )
