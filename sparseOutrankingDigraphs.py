@@ -929,7 +929,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             print(corr)
         return corr
 
-    def computeMarginalVersusGlobalOutrankingCorrelations(self,Sorted=True,ValuedCorrelation=False,
+    def computeMarginalVersusGlobalRankingCorrelations(self,Sorted=True,ValuedCorrelation=False,
                                                           Threading=False,nbrCores=None,\
                                                           Comments=False):
         """
@@ -968,7 +968,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             criteriaCorrelation.sort(reverse=True)
         return criteriaCorrelation   
 
-    def showMarginalVersusGlobalOutrankingCorrelation(self,Sorted=True,\
+    def showMarginalVersusGlobalRankingCorrelation(self,Sorted=True,\
                                                       Threading=False,\
                                                       nbrOfCPUs=None,Comments=True):
         """
@@ -1134,7 +1134,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             print()
 
     def showComponents(self,direction='increasing'):
-        BigOutrankingDigraph.showDecomposition(self,direction=direction)
+        SparseOutrankingDigraph.showDecomposition(self,direction=direction)
 
     def showDecomposition(self,direction='decreasing'):
         
@@ -1222,7 +1222,7 @@ if __name__ == "__main__":
     
     from time import time
     from weakOrders import QuantilesRankingDigraph
-    MP  = True
+    MP  = False
     nbrActions=100
 ##    t0 = time()
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,seed=100)
