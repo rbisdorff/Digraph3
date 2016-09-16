@@ -488,6 +488,49 @@ class SparseOutrankingDigraph(OutrankingDigraph):
 
 
 ########################
+# multiprocessing workers
+def worker(input):
+    for Comments,args in iter(input.get, 'STOP'):
+        result = decompose(*args)
+        if Comments:
+            print(result)
+
+def decompose(i, nc,tempDirName,componentRankingRule):
+    global perfTab
+    global decomposition
+    from pickle import dumps
+    from outrankingDigraphs import BipolarOutrankingDigraph
+    from linearOrders import CopelandOrder,NetFlowsOrder
+
+    comp = decomposition[i]
+    nd = len(str(nc))
+    compKey = ('c%%0%dd' % (nd)) % (i+1)
+    compDict = {'rank':i}
+    compDict['lowQtileLimit'] = comp[0][1]
+    compDict['highQtileLimit'] = comp[0][0]
+    pg = BipolarOutrankingDigraph(perfTab,
+                    actionsSubset=comp[1],
+                    WithConcordanceRelation=False,
+                    WithVetoCounts=False,
+                    CopyPerfTab=False,
+                    Threading=False)
+    if componentRankingRule == 'Copeland':
+        cop = CopelandOrder(pg)
+        pg.ranking = cop.copelandRanking
+    elif componentRankingRule == 'NetFlows':
+        nf = NetFlowsOrder(pg)
+        pg.ranking = nf.netFlowsRanking
+    print(pg.ranking)
+    pg.__dict__.pop('criteria')
+    pg.__dict__.pop('evaluation')
+    pg.__class__ = Digraph
+    compDict['subGraph'] = pg
+    splitComponent = {'compKey':i,'compDict':compDict}
+    foName = tempDirName+'/splitComponent-'+str(i)+'.py'
+    fo = open(foName,'wb')
+    fo.write(dumps(splitComponent,-1))
+    fo.close()
+    return '%d/%d (%d)' % (i,nc,pg.order)
 
 class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
     """
@@ -515,15 +558,16 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                  Threading=False,\
                  tempDir=None,\
                  #componentThreadingThreshold=50,\
-                 nbrOfCPUs=None,\
-                 nbrOfThreads=None,\
+                 nbrOfCPUs=1,\
+                 nbrOfThreads=1,\
                  save2File=None,\
                  CopyPerfTab=True,\
                  Comments=False,\
                  Debug=False):
+
+        global perfTab
+        global decomposition
         
-        #from digraphs import Digraph
-        #from sortingDigraphs import QuantilesSortingDigraph
         from collections import OrderedDict
         from time import time
         from os import cpu_count
@@ -587,6 +631,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         if minimalComponentSize == None:
             minimalComponentSize = 1
         self.minimalComponentSize = minimalComponentSize
+        self.componentRankingRule = componentRankingRule
         tw = time()
         quantilesOrderingStrategy = self.sortingParameters['strategy']
         ##if quantilesOrderingStrategy == 'average':
@@ -624,142 +669,53 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 pg.__class__ = Digraph
                 components[compKey]['subGraph'] = pg
         else:   # if self.sortingParameters['Threading'] == True:
-            from copy import copy, deepcopy
-            from pickle import dumps, loads, load, dump
-            from multiprocessing import Process, active_children, cpu_count
-            #Debug=True
-            class myThread(Process):
-                def __init__(self, threadID,\
-                             tempDirName,\
-                             lTest,\
-                             Debug):
-                    Process.__init__(self)
-                    self.threadID = threadID
-                    self.workingDirectory = tempDirName
-                    self.lTest = lTest
-                    self.Debug = Debug
-                def run(self):
-                    from pickle import dumps, loads
-                    from os import chdir
-                    from copy import deepcopy
-                    from perfTabs import PartialPerformanceTableau
-                    from outrankingDigraphs import BipolarOutrankingDigraph
-                    chdir(self.workingDirectory)
-                    if self.Debug:
-                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadID)))
-                        print('lTest',self.lTest)
-                    fi = open('dumpPerfTab.py','rb')
-                    perfTab = loads(fi.read())
-                    fi.close()
-                    fi = open('dumpDecomp.py','rb')
-                    decomposition = loads(fi.read())
-                    fi.close()
-                    nc = len(decomposition)
-                    nd = len(str(nc))
-                    for i in self.lTest:
-                        comp = decomposition[i]
-                        if self.Debug:
-                            print(i, comp)
-                        compKey = ('c%%0%dd' % (nd)) % (i+1)
-                        compDict = {compKey: {}}
-                        compDict = {'rank':i}
-                        pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
-                        compDict['lowQtileLimit'] = comp[0][1]
-                        compDict['highQtileLimit'] = comp[0][0]
-                        compDict['subGraph'] = BipolarOutrankingDigraph(pt,
-                                                                        Normalized=True,
-                                                                        WithConcordanceRelation=False,
-                                                                        WithVetoCounts=False,
-                                                                        CopyPerfTab=False)     
-                        compDict['subGraph'].__dict__.pop('criteria')
-                        compDict['subGraph'].__dict__.pop('evaluation')
-                        compDict['subGraph'].__class__ = Digraph
-                        splitComponent = (compKey,compDict)
-                        if self.Debug:
-                            print(compDict)
-                        foName = 'splitComponent-'+str(i)+'.py'
-                        fo = open(foName,'wb')
-                        fo.write(dumps(splitComponent,-1))
-                        fo.close()
-                    
-            if Comments:
-                print('Processing the %d components' % nc )
-                print('Threading ...')
-            tdump = time()
-            from tempfile import TemporaryDirectory,mkdtemp
-            with TemporaryDirectory(dir=tempDir) as tempDirName:
-                #use this below dedented if the tempory directory should not be deleted
-                #tempDirName = mkdtemp(dir=tempDir)
-                selfFileName = tempDirName +'/dumpPerfTab.py'
-                if Debug:
-                    print('temDirName, selfFileName', tempDirName,selfFileName)
-                fo = open(selfFileName,'wb')
-                dump(perfTab,fo,-1)
-                fo.close()
+                from copy import copy, deepcopy
+                from pickle import dumps, loads, load, dump
+                from multiprocessing import Process, Queue,active_children, cpu_count                 
                 if Comments:
-                    print('dumping perfTab: %.5f' % (time() - tdump))
-                selfFileName = tempDirName +'/dumpDecomp.py'
-                if Debug:
-                    print('temDirName, selfFileName', tempDirName,selfFileName)
-                fo = open(selfFileName,'wb')
-                pd = dumps(decomposition,-1)
-                fo.write(pd)
-                fo.close()
-                if Comments:
-                    print('dumping time: %.5f' % (time() - tdump))
+                    print('Processing the %d components' % nc )
+                    print('Threading ...')
+                #tdump = time()
+                from tempfile import TemporaryDirectory,mkdtemp
+                with TemporaryDirectory(dir=tempDir) as tempDirName:
+                    ## tasks queue and workers launching
+                    NUMBER_OF_WORKERS = nbrOfCPUs
+                    tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]
+                    tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
+                    TASKS = [(Comments,(pos[0],nc,tempDirName,componentRankingRule)) for pos in tasksIndex]
+                    task_queue = Queue()
+                    for task in TASKS:
+                        task_queue.put(task)
+                    for i in range(NUMBER_OF_WORKERS):
+                        Process(target=worker,args=(task_queue,)).start()
+                    print('started')
+                    for i in range(NUMBER_OF_WORKERS):
+                        task_queue.put('STOP')                   
 
-                if nbrOfCPUs == None:
-                    nbrOfCPUs = cpu_count()
-                if nbrOfThreads == None:
-                    nbrOfThreads = nbrOfCPUs-1
-                nbrOfLocals = self.order//nbrOfThreads
-                if nbrOfLocals*nbrOfThreads < self.order:
-                    nbrOfLocals += 1
-                if Comments:
-                    print('Nbr of components',nc)            
-                    print('Nbr of threads = ',nbrOfThreads)
-                    print('Nbr of locals/job',nbrOfLocals)
-                nbrOfThreadsUsed = 0
-                i = 0
-                for j in range(nbrOfThreads):
+                    while active_children() != []:
+                        pass
                     if Comments:
-                        print('thread = %d/%d' % (j+1,nbrOfThreads),end="...")
-                    lTest = []
-                    threadLoad = 0
-                    while threadLoad <= nbrOfLocals and i < (nc):
-                        lTest.append(i)
-                        threadLoad += len(decomposition[i][1])
-                        i += 1
-                    #for i in range(start,stop):
-                    #    if len(decomposition[i][1]) < componentThreadingThreshold:
-                    #        lTest.append(i)
-                    #    else:
-                    #        bigPartialGraphs.append(i)
-                    if Comments:
-                        print('Threaded:',[len(decomposition[i][1]) for i in lTest])
-                        #print('Kept    :',[len(decomposition[i][1]) for i in bigPartialGraphs])
-                    if lTest != []:
-                        process = myThread(j,tempDirName,lTest,Debug)
-                        process.start()
-                        nbrOfThreadsUsed += 1
-                #nbg = len(bigPartialGraphs)
-                while active_children() != []:
-                    pass
-                if Comments:
-                    print('Exit %d threads' % nbrOfThreadsUsed)
+                        print('Exit %d threads' % NUMBER_OF_WORKERS)
+                        
+                    components = OrderedDict()
+                    #componentsList = []
+                    boostedRanking = []
+                    for j in range(nc):
+                        if Debug:
+                            print('job',j)
+                        fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
+                        fi = open(fiName,'rb')
+                        splitComponent = loads(fi.read())
+                        if Debug:
+                            print('splitComponent',splitComponent)
+                        components[splitComponent['compKey']] = splitComponent['compDict']
+                        boostedRanking += splitComponent['compDict']['subGraph'].ranking
+                    self.boostedRanking = boostedRanking
+                    self.boostedOrder = list(reversed(self.boostedRanking))
                     
-                components = OrderedDict()
-                #componentsList = []
-                for j in range(nc):
-                    if Debug:
-                        print('job',j)
-                    fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
-                    fi = open(fiName,'rb')
-                    splitComponent = loads(fi.read())
-                    if Debug:
-                        print('splitComponent',splitComponent)
-                    components[splitComponent[0]] = splitComponent[1]
-        
+        # storing components, fillRate and maximalComponentSize
+
+        self.components = components
         fillRate = 0
         maximalComponentSize = 0
         for compKey,comp in components.items():
@@ -770,9 +726,11 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             fillRate += npg*(npg-1)
             for x in pg.actions.keys():
                 self.actions[x]['component'] = compKey
-        self.fillRate = fillRate / (na*(na-1))
+        self.fillRate = fillRate/(self.order * (self.order-1))
         self.maximalComponentSize = maximalComponentSize
-        self.components = components
+
+
+
 
         # setting the component relation
         self.valuationdomain = {'min':Decimal('-1'),
@@ -782,16 +740,19 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         self.runTimes['decomposing'] = time() - t0
         if Comments:
             print('decomposing time: %.4f' % self.runTimes['decomposing']  )
-        # Kohler ranking-by-choosing all components
-        self.componentRankingRule = componentRankingRule
-        t0 = time()
-        self.boostedRanking = self.computeBoostedRanking(rankingRule=componentRankingRule)
-        self.boostedOrder = list(reversed(self.boostedRanking))
-        self.runTimes['ordering'] = time() - t0
 
+        #  compute boosted ranking in not threaded exceution
+        if not self.sortingParameters['Threading']:
+            self.componentRankingRule = componentRankingRule
+            t0 = time()
+            self.boostedRanking = self.computeBoostedRanking(rankingRule=componentRankingRule)
+            self.boostedOrder = list(reversed(self.boostedRanking))
+            self.runTimes['ordering'] = time() - t0
+        else:
+            self.runTimes['ordering'] = 0
         if Comments:
             print('ordering time: %.4f' % self.runTimes['ordering']  )
-        
+        ########
         self.runTimes['totalTime'] = time() - ttot
         if Comments:
             print(self.runTimes)
@@ -1261,7 +1222,7 @@ if __name__ == "__main__":
     
     from time import time
     from weakOrders import QuantilesRankingDigraph
-    MP  = False
+    MP  = True
     nbrActions=100
 ##    t0 = time()
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,seed=100)
@@ -1270,10 +1231,10 @@ if __name__ == "__main__":
                                       seed=100)
     bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=10,
                                  quantilesOrderingStrategy='average',
-                                 componentRankingRule='NetFlows',
-                                 LowerClosed=True,
+                                 componentRankingRule='Copeland',
+                                 LowerClosed=False,
                                  minimalComponentSize=10,
-                                 Threading=MP,nbrOfCPUs=8,
+                                 Threading=False,nbrOfCPUs=8,
                                  #tempDir='.',
                                  nbrOfThreads=8,
                                  Comments=False,Debug=False,
