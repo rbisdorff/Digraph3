@@ -116,6 +116,38 @@ verboseDigraphsTests:
 		cp iqagent.py test/
 		(cd test; nosetests3 -vs noseTestsDigraph.py)
 
+sparseOutrankingDigraphsTests:
+		cp digraphs.py test/
+		cp perfTabs.py test/
+		cp outrankingDigraphs.py test/
+		cp sortingDigraphs.py test/
+		cp votingDigraphs.py test/
+		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
+		cp randomNumbers.py test/
+		cp randomDigraphs.py test/
+		cp randomPerfTabs.py test/
+		cp sparseOutrankingDigraphs.py test/
+		cp iqagent.py test/
+		(cd test; nosetests3 -v noseTestsSparseOutrankingDigraph.py)
+
+verboseSparseOutrankingDigraphsTests:
+		cp digraphs.py test/
+		cp perfTabs.py test/
+		cp outrankingDigraphs.py test/
+		cp sortingDigraphs.py test/
+		cp votingDigraphs.py test/
+		cp linearOrders.py test/
+		cp weakOrders.py test/
+		cp graphs.py test/
+		cp randomNumbers.py test/
+		cp randomDigraphs.py test/
+		cp randomPerfTabs.py test/
+		cp sparseOutrankingDigraphs.py test/
+		cp iqagent.py test/
+		(cd test; nosetests3 -vs noseTestsSparseOutrankingDigraph.py)
+
 bigOutrankingDigraphsTests:
 		cp digraphs.py test/
 		cp perfTabs.py test/
