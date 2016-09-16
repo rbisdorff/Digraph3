@@ -813,7 +813,13 @@ class Digraph(object):
           
 #----------------------------------------
 
-
+    def relationFct(self,x,y):
+        """
+        wrapper for self.relation dictionary access to ensure interoperability
+        with the sparse and big outranking digraph implementation model.
+        """
+        return self.relation[x][y]
+#------------------------------------
 
     def topologicalSort(self,Debug=False):
         """

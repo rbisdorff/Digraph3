@@ -141,7 +141,7 @@ class LinearOrder(Digraph):
 
     def computeOrder(self):
         """
-        computes the linear ordering from lowest (wort) to highest (best)
+        computes the linear ordering from lowest (worst) to highest (best)
         of an instance of the LinearOrcer class by sorting by indegrees (gamma[x][1]).
         """
         degrees = []

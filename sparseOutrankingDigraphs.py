@@ -1250,23 +1250,9 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         increasing preference direction following the orderingRule
         on each component.
         """
-        from linearOrders import NetFlowsOrder,KohlerOrder,CopelandOrder
-        ordering = []
-        components = self.components
-        # self.components is an ordered dictionary in decreasing preference
-        for comp in components.values():
-            #comp = self.components[cki]
-            pg = comp['subGraph']
-            if orderingRule == 'Copeland':
-                opg = CopelandOrder(pg)
-                ordering += opg.copelandOrder
-            elif orderingRule == 'NetFlows':
-                opg = NetFlowsOrder(pg)
-                ordering += opg.netFlowsOrder
-            elif orderingRule == 'Kohler':
-                opg = KohlerOrder(pg)
-                ordering += opg.kohlerOrder
-        return ordering
+        ranking = self.computeBoostedRanking(rankingRule=orderingRule)
+        ranking.reverse()
+        return ranking
 
 #######################################################################
 #######################################################################

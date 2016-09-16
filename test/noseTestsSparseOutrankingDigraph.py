@@ -36,10 +36,12 @@ def testSparseOutrankingDigraph():
     print(time()-t0)
     nf = bg1.computeBoostedOrdering(orderingRule="NetFlows")
     preordering1 = bg1.ordering2Preorder(nf)
+    print(nf,preordering1)
     print('Boosted Netflows ranking correlation with complete outranking relation')
     print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering1)))
     ko = bg1.computeBoostedOrdering(orderingRule="Kohler")
     preordering2 = bg1.ordering2Preorder(ko)
+    print(ko,preordering2)
     print('Boosted Kohler ranking correlation with complete outranking relation')
     print(g.computeOrdinalCorrelation(g.computePreorderRelation(preordering2)))
 
