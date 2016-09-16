@@ -84,15 +84,14 @@ class SparseOutrankingDigraph(OutrankingDigraph):
         By default, symbols = {'max':'┬','positive': '+', 'median': ' ',
                                'negative': '-', 'min': '┴'}
 
-        The default ordering of the output is following the quantiles sorted boosted net flows ranking rule
-        from best to worst actions. Further available ranking rules are Kohler's (rankingRule="kohler")
-        and Tideman's ranked pairs rule (rankingRule="rankedPairs").
+        The default ordering of the output is following the quantiles sorted ranking rule
+        from best to worst actions.
         
         Example::
 
-            >>> from preRankedSparseOutrankingDigraphs import *
+            >>> from sparseOutrankingDigraphs import *
             >>> t = RandomCBPerformanceTableau(numberOfActions=50,seed=1)
-            >>> bg = PreRankedSparseOutrankingDigraph(t,quantiles=10,minimalComponentSize=5)
+            >>> bg = PreRankedOutrankingDigraph(t,quantiles=10,minimalComponentSize=5)
             >>> print(bg)
             *----- show short --------------*
             Instance name     : randomCBperftab_mp
@@ -112,7 +111,7 @@ class SparseOutrankingDigraph(OutrankingDigraph):
             Preordering       : 0.00034
             Decomposing       : 0.03989
             Ordering          : 0.00024
-            <class 'sparseOutrankingDigraphs.PreRankedSparseOutrankingDigraph'> instance         
+            <class 'sparseOutrankingDigraphs.PreRankedOutrankingDigraph'> instance         
             >>> bg.showRelationMap()
              ┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
             ┴ ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
@@ -315,9 +314,8 @@ class SparseOutrankingDigraph(OutrankingDigraph):
     
     def computeOrdinalCorrelation(self, other, Debug=False):
         """
-        Renders the ordinal correlation K of a BigDigraph instance
-        when compared with a given compatible (same actions set) other Digraph or
-        BigDigraph instance.
+        Renders the ordinal correlation K of a SpareOutrakingDigraph instance
+        when compared with a given compatible (same actions set) other Digraph instance.
         
         K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]
 
@@ -325,7 +323,7 @@ class SparseOutrankingDigraph(OutrankingDigraph):
 
         .. note::
 
-             The global outranking relation of BigDigraph instances is contructed on the fly
+             The global outranking relation of SparesOutrankingDigraph instances is contructed on the fly
              from the ordered dictionary of the components.
 
              Renders a dictionary with a 'correlation' key containing the actual bipolar correlation index K and a 'determination' key containing the minimal determination level D of self and the other relation, where
