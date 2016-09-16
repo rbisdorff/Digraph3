@@ -71,8 +71,8 @@ The Digraph3 source code is split into several interdependent modules of which t
      Various implemented random digraph models.
 * :ref:`randomPerfTabs-label` 
      Various implemented random performance tableau models.
-* :ref:`bigOutrankingDigraphs-label` 
-     Compressed implementation design for large outranking digraphs (order > 1000).
+* :ref:`sparseOutrankingDigraphs-label` 
+     Sparse implementation design for large outranking digraphs (order > 1000).
 
 Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>, University of Luxembourg.
 
@@ -215,12 +215,12 @@ randomPerfTabs module
 
 Back to the :ref:`Technical-label`
 
-.. _bigOutrankingDigraphs-label:
+.. _sparseOutrankingDigraphs-label:
       
-bigOutrankingDigraphs module
------------------------------
+sparseOutrankingDigraphs module
+--------------------------------
 
-.. automodule:: bigOutrankingDigraphs
+.. automodule:: sparseOutrankingDigraphs
    :member-order: alphabetical
    :no-inherited-members:
    :members:
