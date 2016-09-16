@@ -4,13 +4,15 @@ XMCDA-2.0-0 stylesheets for the Rubis web service ports
 xmcda2Rubis.xsl		     stylesheet for the submitProblem port
 xmcda2RubisChoiceES.xsl	     stylesheet for the requestSolution port
 xmcda2RubisChoiceLoew.xsl    stylesheet for the requestSolution port
+xmcda2RubisRobustChoiceES.xsl	     stylesheet for the requestSolution port
+xmcda2RubisRobustChoiceLoew.xsl    stylesheet for the requestSolution port
 
 demo examples:
 
 exampleRubisPerfTab.xml  to see with xmcda2Rubis.xsl
 exampleRubisChoiceES.xml to see with xncda2RubisChoiceES.xsl
 
-RB July 2014
+RB September 2016
 
 
 

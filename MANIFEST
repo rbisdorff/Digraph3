@@ -13,6 +13,7 @@ randomNumbers.py
 randomDigraphs.py
 randomPerfTabs.py
 bigOutrankingDigraphs.py
+sparseOutrankingDigraph.py
 htmlmodel.py
 makefile
 MANIFEST
