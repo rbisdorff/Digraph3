@@ -77,7 +77,7 @@ def testMPComments():
     tp = RandomCBPerformanceTableau(numberOfActions=300,Threading=MP)
     print(time()-t0)
     print(total_size(tp.evaluation))
-    bg1 = PreRankedOutrankingDigraph(tp,quantiles=5,quantilesOrderingStrategy='average',
+    bg1 = PreRankedOutrankingDigraph(tp,quantiles=20,quantilesOrderingStrategy='average',
                                  LowerClosed=False,
                                  minimalComponentSize=5,
                                  Threading=MP,
@@ -90,7 +90,7 @@ def testRelationMap():
     MP = True
     t0 = time()
     tp = RandomCBPerformanceTableau(numberOfActions=300,Threading=MP)
-    bg1 = PreRankedOutrankingDigraph(tp,quantiles=5,quantilesOrderingStrategy='average',
+    bg1 = PreRankedOutrankingDigraph(tp,quantiles=20,quantilesOrderingStrategy='average',
                                  LowerClosed=False,
                                  minimalComponentSize=5,
                                  Threading=MP,
@@ -99,8 +99,4 @@ def testRelationMap():
     bg1.showRelationMap(fromIndex=0,toIndex=50,
                         symbols = {'max':'┬','positive': '+', 'median': ' ',
                                'negative': '-', 'min': '┴'} )
-    print(bg1.htmlRelationMap(actionsSubset=bg1.boostedRanking,
-                              tableTitle='Test relation map',
-                              Colored=True))
-
-   
+    bg1.showHTMLRelationMap(actionsSubset=bg1.boostedRanking)
