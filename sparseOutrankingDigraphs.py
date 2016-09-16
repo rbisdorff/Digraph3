@@ -83,9 +83,6 @@ class SparseOutrankingDigraph(OutrankingDigraph):
 
         By default, symbols = {'max':'┬','positive': '+', 'median': ' ',
                                'negative': '-', 'min': '┴'}
-
-        The default ordering of the output is following the quantiles sorted ranking rule
-        from best to worst actions.
         
         Example::
 
