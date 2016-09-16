@@ -513,20 +513,26 @@ The performance evaluations of each decision alternative on each criterion are g
                 print('key: ',x)
                 try:
                     print('  short name:',actions[x]['shortName'])
-                except:
+                except KeyError:
                     pass
                 print('  name:      ',actions[x]['name'])
-                print('  comment:   ',actions[x]['comment'])
+                try:
+                    print('  comment:   ',actions[x]['comment'])
+                except KeyError:
+                    pass
                 print()
         else:
             for x in dict.keys(actions):
                 print('key: ',x)
                 try:
                     print('  short name:',actions[x]['shortName'])
-                except:
+                except KeyError:
                     pass
                 print('  name:      ',actions[x]['name'])
-                print('  comment:   ',actions[x]['comment'])
+                try:
+                    print('  comment:   ',actions[x]['comment'])
+                except KeyError:
+                    pass
                 print()
 
     def showPairwiseComparison(self,a,b,hasSymetricThresholds=True,Debug=False,isReturningHTML=False,hasSymmetricThresholds=True):

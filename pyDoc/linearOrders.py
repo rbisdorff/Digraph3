@@ -141,7 +141,7 @@ class LinearOrder(Digraph):
 
     def computeOrder(self):
         """
-        computes the linear ordering from lowest (wort) to highest (best)
+        computes the linear ordering from lowest (worst) to highest (best)
         of an instance of the LinearOrcer class by sorting by indegrees (gamma[x][1]).
         """
         degrees = []
@@ -882,14 +882,16 @@ class NetFlowsOrder(LinearOrder):
             for x in actions:
                 xnetflows = sum((otherRelation[x][y] - otherRelation[y][x])\
                                  for y in actions)
+##                xnetflows = sum((otherRelation[x][y])\
+##                                 for y in actions)
                 netFlows.append((xnetflows,x))
         else:
             otherMax = other.valuationdomain['max']
             otherMin = other.valuationdomain['min']
             
             for x in actions:
-                xnetflows = sum((otherRelation[y][x] +\
-                                (otherMax - otherRelation[x][y] + otherMin))\
+                xnetflows = sum((otherRelation[x][y] +\
+                                (otherMax - otherRelation[y][x] + otherMin))\
                                  for y in actions)
                 netFlows.append((xnetflows,x))
         # reversed sorting with keeping the actions initial ordering
@@ -915,6 +917,109 @@ class NetFlowsOrder(LinearOrder):
             selfRelation[x] = {}
             for j in range(n):
                 y = netFlowsRanking[j]
+                if i < j:
+                    selfRelation[x][y] = Max
+                else:
+                    selfRelation[x][y] = Min
+        runTimes['relation'] = time() - tr      
+##        if Debug:
+##            print(selfRelation) 
+        self.name = other.name + '_ranked'        
+        self.actions = actions
+        self.order = n
+        self.valuationdomain = valuationdomain
+        self.relation = selfRelation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        runTimes['totalTime'] = time() - tt
+        self.runTimes = runTimes
+##        if Debug:
+##            self.showRelationTable()
+##            self.showOrdering()
+
+class OutFlowsOrder(LinearOrder):
+    """
+    instantiates the out flows Order from
+    a given bipolar-valued Digraph instance
+    """
+    def __init__(self,other,coDual=False,Debug=False):
+        """
+        constructor for generating a linear order
+        from a given other digraph following
+        the out flows ordering rule
+        """
+
+        #from copy import deepcopy
+        from collections import OrderedDict
+        from time import time
+
+        #timings
+        tt = time()
+        runTimes = OrderedDict()
+        # prepare local variables
+        if coDual:
+            otherCoDual = CoDualDigraph(other)
+            otherRelation = otherCoDual.relation
+##            if Debug:
+##                otherCoDual.showRelationTable()
+##                print(otherCoDual.valuationdomain)
+        else:
+            otherRelation = other.relation
+        n = len(other.actions)
+        actions = other.actions
+        selfRelation = {}
+        Min = Decimal('-1.0')
+        Med = Decimal('0.0')
+        Max = Decimal('1.0')
+        valuationdomain = {'min': Min,\
+                           'med': Med,\
+                           'max': Max}
+        runTimes['prepareLocals'] = time()-tt
+        
+        # compute net flows
+        tnf = time()
+        outFlows = []
+        if other.valuationdomain['med'] == Med:
+            for x in actions:
+##                xoutFlows = sum((otherRelation[x][y] - otherRelation[y][x])\
+##                                 for y in actions)
+                xoutFlows = sum((otherRelation[x][y])\
+                                 for y in actions)
+                outFlows.append((xoutFlows,x))
+        else:
+            otherMax = other.valuationdomain['max']
+            otherMin = other.valuationdomain['min']
+            
+            for x in actions:
+##                xoutFlows = sum((otherRelation[x][y] +\
+##                                (otherMax - otherRelation[y][x] + otherMin))\
+##                                 for y in actions)
+                xoutFlows = sum((otherRelation[x][y])\
+                                 for y in actions)
+                outFlows.append((xoutFlows,x))
+        # reversed sorting with keeping the actions initial ordering
+        # in case of ties
+        outFlows.sort(reverse=True)
+        self.outFlows = outFlows
+##        if Debug:
+##            print(outFlows)
+
+        outFlowsRanking = [x[1] for x in outFlows]
+        self.outFlowsRanking = outFlowsRanking
+        outFlowsOrder = list(reversed(outFlowsRanking))
+        self.outFlowsOrder = outFlowsOrder
+##        if Debug:
+##            print(self.outFlowsRanking)
+##            print(self.outFlowsOrder)
+        runTimes['outFlows'] = time() - tnf
+
+        # init relation
+        tr = time()
+        for i in range(n):
+            x = outFlowsRanking[i]
+            selfRelation[x] = {}
+            for j in range(n):
+                y = outFlowsRanking[j]
                 if i < j:
                     selfRelation[x][y] = Max
                 else:
@@ -1357,6 +1462,15 @@ if __name__ == "__main__":
     print(nf.netFlowsRanking)
     print(nf.netFlowsOrder)
     print(g.computeOrdinalCorrelation(nf))
+    print(time()-t0)
+    print()
+    print('==>> out flows ordering:')
+    t0 = time()
+    of = OutFlowsOrder(g)
+    #g.showRelationTable()
+    print(of.outFlowsRanking)
+    print(of.outFlowsOrder)
+    print(g.computeOrdinalCorrelation(of))
     print(time()-t0)
     print()
     print('==>> Copeland ordering:')

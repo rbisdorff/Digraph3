@@ -106,17 +106,16 @@ class Graph(object):
         return new
 
 #-----------Dias/Castonguay/Longo/Jradi--------*
-    def degreeLabelling(self):
+    def _degreeLabelling(self):
         """
-        p 14
+        Inspired from Dias, Castonguay, Longo & Jradi,
+        Algorithmica 2015, p 14
         """
         degree = {}
         color = {}
         for v in self.vertices:
             degree[v] = len(self.gamma[v])
             color[v] = 'white'
-##            for u in self.gamma[v]:
-##                degree[v] += 1g
             
         labelling = {}
         for i in range(1,self.order+1):
@@ -131,22 +130,17 @@ class Graph(object):
             for u in self.gamma[v]:
                 if color[u] == 'white':
                     degree[u] -= 1
-        #self.degree = degree
-        #self.color = color
+
         self.labelling = labelling
         return labelling
 
-##    def _degreeLabelling(self):
-##        labelling = {}
-##        i = 1
-##        for v in self.vertices:
-##            labelling[v] = i
-##            i += 1
-##        self.labelling = labelling
-##        return labelling
     
     def _triplets(self,Comments=False):
-        """ p.15 """
+        """
+        p.15 Inspired from Dias, Castonguay, Longo & Jradi,
+        Algorithmica 2015.
+        """
+    
         from itertools import product
         labelling = self.labelling
         tG = []
@@ -308,12 +302,18 @@ class Graph(object):
         Renders the set of all chordless cycles observed in a Graph
         intance. Inspired from Dias, Castonguay, Longo & Jradi,
         Algorithmica 2015.
+
+        .. note::
+
+             By default, a chordless cycle must have at least length 4.If the Cycle3 flag is set to True,
+             the cyclicly closed triplets will be inserted as 3-cycles in the result.
+             
         """
 
         if Debug:
             Comments=True
         #self.visitedChordlessPathsNew = []
-        self.degreeLabelling()
+        self._degreeLabelling()
         triplets,cycles3 = self._triplets(Comments=Comments)
         if Comments:
             print('# of initial triplets:',len(triplets))

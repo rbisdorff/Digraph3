@@ -73,21 +73,28 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                                     Comments=False):
         """
         Renders the ordinal correlation coefficient between
-        the global outranking and the marginal criterion relation.
+        the marginal criterion relation and a 
+        given normalized outranking relation.
 
-        If Threading, the
+        args = (criterion,relation)
         """
         criterion = args[0]
         relation = args[1]
-        gc = BipolarOutrankingDigraph(self,Normalized=True,coalition=[criterion],CopyPerfTab=True,
-                                      Threading=Threading,nbrCores=nbrOfCPUs,
-                                      Comments=Comments)
-        corr = gc.computeOrdinalCorrelation(relation)
+        gc = BipolarOutrankingDigraph(self,Normalized=True,
+                                          coalition=[criterion],
+                                          CopyPerfTab=True,
+                                          Threading=Threading,
+                                          nbrCores=nbrOfCPUs,
+                                          Comments=Comments)
+        corr = gc.computeOrdinalCorrelationMP(relation,
+                                              Threading=Threading,
+                                              nbrOfCPUs=nbrOfCPUs)
         if Debug:
             print(corr)
         return corr
 
-    def computeMarginalVersusGlobalRankingCorrelations(self,ranking,Sorted=True,ValuedCorrelation=False,
+    def computeMarginalVersusGlobalRankingCorrelations(self,ranking,
+                                                           Sorted=True,ValuedCorrelation=False,
                                                           Threading=False,nbrCores=None,\
                                                           Comments=False):
         """
@@ -147,7 +154,18 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         Renders the ordinal correlation coefficient between
         the global outranking and the marginal criterion relation.
 
-        If Threading, the 
+        Uses the digraphs.computeOrdinalCorrelationMP().
+
+        .. note::
+
+             Renders a dictionary with the key 'correlation' containing the actual bipolar correlation index and the key 'determination' containing the minimal determination level D of the self outranking and the marginal criterion relation.
+
+             D = sum_{x != y} min(abs(self.relation(x,y)),abs(marginalCriterionRelation(x,y)) / n(n-1)
+
+             where n is the number of actions considered.
+
+             The correlation index with a completely indeterminate relation
+             is by convention 0.0 at determination level 0.0 .
         """
         gc = BipolarOutrankingDigraph(self,Normalized=True,coalition=[criterion],CopyPerfTab=True,
                                       Threading=Threading,nbrCores=nbrOfCPUs,
@@ -2970,7 +2988,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             try:
                 if critg['thresholds']['pref'] != None:
                     fo.write('<threshold id="%s">\n' % ('pref'))
-                    if criteg['thresholds']['pref'][1] != Decimal('0.0'):
+                    if critg['thresholds']['pref'][1] != Decimal('0.0'):
                         fo.write('<linear>\n')
                         fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*critg['thresholds']['pref'][1]) )
                         fo.write('<intercept><real>%.2f</real></intercept>\n' % (critg['thresholds']['pref'][0]) )
@@ -3725,7 +3743,9 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  hasBipolarVeto=True,\
                  Normalized=False,\
                  CopyPerfTab=True,\
+                 BigData=False,\
                  Threading=False,\
+                 tempDir=None,\
                  WithConcordanceRelation=True,\
                  WithVetoCounts=True,\
                  nbrCores=None,\
@@ -3792,7 +3812,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         if coalition == None:
             coalition = perfTab.criteria.keys()
         for g in coalition:
-            criteria[g] = deepcopy(perfTab.criteria[g])
+            if CopyPerfTab:
+                criteria[g] = deepcopy(perfTab.criteria[g])
+            else:
+                criteria[g] = perfTab.criteria[g]
         self.criteria = criteria
         self.convertWeightFloatToDecimal()
 
@@ -3820,11 +3843,12 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             self.evaluation = deepcopy(perfTab.evaluation)
         else:
             self.evaluation = perfTab.evaluation
-        self.convertEvaluationFloatToDecimal()
+        if not BigData:
+            self.convertEvaluationFloatToDecimal()
         try:
             if CopyPerfTab:
                 self.description = deepcopy(perfTab.description)
-            else:
+            elif not BigData:
                 self.description = perfTab.description
         except:
             pass
@@ -3850,6 +3874,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                                 hasBipolarVeto=hasBipolarVeto,\
                                                 hasSymmetricThresholds=True,\
                                                 Threading=Threading,\
+                                                tempDir=tempDir,\
                                                 WithConcordanceRelation=WithConcordanceRelation,\
                                                 WithVetoCounts=WithVetoCounts,\
                                                 nbrCores=nbrCores,\
@@ -3920,7 +3945,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                            hasBipolarVeto=True,\
                            Debug=False,\
                            hasSymmetricThresholds=True,\
-                           Threading=False,\
+                           Threading=False,
+                           tempDir=None,\
                            WithConcordanceRelation=True,\
                            WithVetoCounts=True,\
                            nbrCores=None,Comments=False):
@@ -4030,13 +4056,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             if Comments:
                 print('Threading ...')
             from tempfile import TemporaryDirectory
-            with TemporaryDirectory() as tempDirName:
+            with TemporaryDirectory(dir=tempDir) as tempDirName:
                 from copy import copy, deepcopy
 
                 #selfDp = copy(self)
                 selfFileName = tempDirName +'/dumpSelf.py'
-##                if Debug:
-##                    print('temDirName, selfFileName', tempDirName,selfFileName)
+                if Debug:
+                    print('temDirName, selfFileName', tempDirName,selfFileName)
                 fo = open(selfFileName,'wb')
                 fo.write(dumps(self,-1))
                 fo.close()
@@ -7855,14 +7881,21 @@ class DissimilarityOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     Specialization of the OutrankingDigraph class for generating
     temporary dissimilarity random graphs
     """
-    def __init__(self,filePerfTab=None):
+    def __init__(self,argPerfTab=None):
+        if argPerfTab == None:
+            print('Performance tableau required !')
+            perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
+        elif isinstance(argPerfTab,(str)):
+            perfTab = PerformanceTableau(argPerfTab)
+        else:
+            perfTab = argPerfTab
         import sys,copy
-        if filePerfTab == None:
-            t = RandomPerformanceTableau()
-            filePerfTab = 'randomPerf'
-            t.save(filePerfTab)
-        perfTab = PerformanceTableau(filePerfTab)
-        self.name = 'rel_'+str(filePerfTab)
+##        if filePerfTab == None:
+##            t = RandomPerformanceTableau()
+##            filePerfTab = 'randomPerf'
+##            t.save(filePerfTab)
+##        perfTab = PerformanceTableau(filePerfTab)
+        self.name = 'rel_'+perfTab.name
         self.actions = copy.copy(perfTab.actions)
         Min = Decimal('0.0')
         Med = Decimal('50.0')
@@ -8851,11 +8884,6 @@ class RubisRestServer(ServerProxy):
     xmlrpc-cgi Proxy Server for accessing on-line
     a Rubis Rest Solver.
 
-    *Parameters*:
-    
-        * performanceTableau (fileName of valid XMCDA2 code, required)
-        * coalition (sublist of criteria, optional)
-
     Example Python3 session:
     
         >>> from outrankingDigraphs import RubisRestServer
@@ -8873,7 +8901,7 @@ class RubisRestServer(ServerProxy):
         >>> solver.submitProblem(t)
         The problem submission was successful !
         Server ticket: l4qfAP0RfBBvyjsL
-        >>> solver.viewSolution()
+        >>> solver.showHTMLSolution()
         Created new window in existing browser session.
         >>> solver.saveXMCDA2Solution()
         The solution request was successful.
@@ -8924,9 +8952,11 @@ class RubisRestServer(ServerProxy):
         """
         Submit PerformanceTableau class instances.
 
-        *Parameter*:
+        *Parameters*:
 
              * valuation: 'bipolar', 'robust', 'integer'
+             * hasVeto: Switch on or off vetoes
+             * argTitle: set specific application title
 
         """
         self.name = perfTab.name
@@ -8998,7 +9028,7 @@ class RubisRestServer(ServerProxy):
         except:
             print(answer['message'])
 
-    def showSolution(self,ticket=None,valuation=None):
+    def showHTMLSolution(self,ticket=None,valuation=None):
         """
         Show XMCDA 2.0 solution in a default browser window.
         The valuation parameter may set the correct style sheet.
@@ -9046,14 +9076,16 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-    Threading = False
-    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
-                                   numberOfCriteria=13,\
+    Threading = True
+    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=500,\
+                                   numberOfCriteria=21,\
                                    weightDistribution='equiobjectives',
                                    seed=100)
     
-    g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,nbrCores=4,Comments=True)
-    print(g1.runTimes)
+    g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,
+                                  tempDir=None,nbrCores=8,Comments=True,Debug=False)
+    print(g1)
+    #g1.saveXMCDA2RubisChoiceRecommendation()
     #g1.showRelationTable()
 ##    t2 = Random3ObjectivesPerformanceTableau(numberOfActions=300,\
 ##                                   numberOfCriteria=13,\
