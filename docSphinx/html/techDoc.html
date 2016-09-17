@@ -1294,7 +1294,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -1747,6 +1747,13 @@ to the parameters given.</p>
 <p class="first admonition-title">Note</p>
 <p class="last">Default values gives a normalized valuation domain</p>
 </div>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.relationFct">
+<code class="descname">relationFct</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.relationFct" title="Permalink to this definition">¶</a></dt>
+<dd><p>wrapper for self.relation dictionary access to ensure interoperability
+with the sparse and big outranking digraph implementation model.</p>
 </dd></dl>
 
 <dl class="method">
@@ -3588,7 +3595,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4351,7 +4358,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5498,7 +5505,7 @@ other digraph (same nodes or actions).</p>
 <dl class="method">
 <dt id="linearOrders.LinearOrder.computeOrder">
 <code class="descname">computeOrder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#linearOrders.LinearOrder.computeOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>computes the linear ordering from lowest (wort) to highest (best)
+<dd><p>computes the linear ordering from lowest (worst) to highest (best)
 of an instance of the LinearOrcer class by sorting by indegrees (gamma[x][1]).</p>
 </dd></dl>
 
@@ -6480,7 +6487,7 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 <span id="sparseoutrankingdigraphs-module"></span><span id="sparseoutrankingdigraphs-label"></span><h2>sparseOutrankingDigraphs module<a class="headerlink" href="#module-sparseOutrankingDigraphs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="sparseOutrankingDigraphs.PreRankedOutrankingDigraph">
-<em class="property">class </em><code class="descclassname">sparseOutrankingDigraphs.</code><code class="descname">PreRankedOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>componentRankingRule='Copeland'</em>, <em>minimalComponentSize=None</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrOfCPUs=None</em>, <em>nbrOfThreads=None</em>, <em>save2File=None</em>, <em>CopyPerfTab=True</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sparseOutrankingDigraphs.</code><code class="descname">PreRankedOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>componentRankingRule='Copeland'</em>, <em>minimalComponentSize=None</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrOfCPUs=1</em>, <em>nbrOfThreads=1</em>, <em>save2File=None</em>, <em>CopyPerfTab=True</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#sparseOutrankingDigraphs.SparseOutrankingDigraph" title="sparseOutrankingDigraphs.SparseOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sparseOutrankingDigraphs.SparseOutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Main class for the multiprocessing implementation of pre-ranked sparse outranking digraphs.</p>
 <p>The sparse outranking digraph instance is decomposed with a q-tiling sort into a partition
@@ -6491,6 +6498,20 @@ which is restricted to the decision actions gathered in this quantile equivalenc
 ie q = order//10. The effective number of quantiles may be much lower for large orders;
 for instance quantiles = 250 may give good results for a digraph of order 25000.</p>
 <p>For other parameters settings, see the corresponding <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a> class.</p>
+<dl class="method">
+<dt id="sparseOutrankingDigraphs.PreRankedOutrankingDigraph.actionOrder">
+<code class="descname">actionOrder</code><span class="sig-paren">(</span><em>action</em>, <em>ordering=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.actionOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the order of a decision action in a given ordering</p>
+<p>If orderinging == None, the self.boostedOrdering attribute is used.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sparseOutrankingDigraphs.PreRankedOutrankingDigraph.actionRank">
+<code class="descname">actionRank</code><span class="sig-paren">(</span><em>action</em>, <em>ranking=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.actionRank" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the rank of a decision action in a given ranking</p>
+<p>If ranking == None, the self.boostedRanking attribute is used.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeActionCategories">
 <code class="descname">computeActionCategories</code><span class="sig-paren">(</span><em>action</em>, <em>Show=False</em>, <em>Debug=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeActionCategories" title="Permalink to this definition">¶</a></dt>
@@ -6522,8 +6543,8 @@ the global linar ranking and the marginal criterion relation.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations">
-<code class="descname">computeMarginalVersusGlobalOutrankingCorrelations</code><span class="sig-paren">(</span><em>Sorted=True</em>, <em>ValuedCorrelation=False</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations" title="Permalink to this definition">¶</a></dt>
+<dt id="sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeMarginalVersusGlobalRankingCorrelations">
+<code class="descname">computeMarginalVersusGlobalRankingCorrelations</code><span class="sig-paren">(</span><em>Sorted=True</em>, <em>ValuedCorrelation=False</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeMarginalVersusGlobalRankingCorrelations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method for computing correlations between each individual criterion relation with the corresponding global ranking relation.</p>
 <p>Returns a list of tuples (correlation,criterionKey) sorted by default in decreasing order of the correlation.</p>
 <p>If Threading is True, a multiprocessing Pool class is used with a parallel equivalent of the built-in map function.</p>
@@ -6559,8 +6580,8 @@ the global linar ranking and the marginal criterion relation.</p>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showMarginalVersusGlobalOutrankingCorrelation">
-<code class="descname">showMarginalVersusGlobalOutrankingCorrelation</code><span class="sig-paren">(</span><em>Sorted=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>Comments=True</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showMarginalVersusGlobalOutrankingCorrelation" title="Permalink to this definition">¶</a></dt>
+<dt id="sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showMarginalVersusGlobalRankingCorrelation">
+<code class="descname">showMarginalVersusGlobalRankingCorrelation</code><span class="sig-paren">(</span><em>Sorted=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>Comments=True</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showMarginalVersusGlobalRankingCorrelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show method for computeCriterionCorrelation results.</p>
 </dd></dl>
 
@@ -6785,6 +6806,16 @@ the diagonal outranking components of the sparse outranking digraph.</p>
 </dd></dl>
 
 </dd></dl>
+
+<dl class="function">
+<dt id="sparseOutrankingDigraphs.decompose">
+<code class="descclassname">sparseOutrankingDigraphs.</code><code class="descname">decompose</code><span class="sig-paren">(</span><em>i</em>, <em>nc</em>, <em>tempDirName</em>, <em>componentRankingRule</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.decompose" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="sparseOutrankingDigraphs.worker">
+<code class="descclassname">sparseOutrankingDigraphs.</code><code class="descname">worker</code><span class="sig-paren">(</span><em>input</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.worker" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
 </div>

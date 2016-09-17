@@ -1215,6 +1215,26 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         ranking.reverse()
         return ranking
 
+    def actionRank(self,action,ranking=None):
+        """
+        Renders the rank of a decision action in a given ranking
+
+        If ranking == None, the self.boostedRanking attribute is used.
+        """
+        if ranking == None:
+            ranking = self.boostedRanking
+        return ranking.index(action) +1
+
+    def actionOrder(self,action,ordering=None):
+        """
+        Renders the order of a decision action in a given ordering
+
+        If orderinging == None, the self.boostedOrdering attribute is used.
+        """
+        if ordering == None:
+            ordering = self.boostedOrder
+        return ordering.index(action) +1
+
 #######################################################################
 #######################################################################
 #----------test classes and methods ----------------

@@ -102,3 +102,19 @@ def testRelationMap():
                         symbols = {'max':'┬','positive': '+', 'median': ' ',
                                'negative': '-', 'min': '┴'} )
     bg1.showHTMLRelationMap(actionsSubset=bg1.boostedRanking)
+
+def testActionRankOrder():
+    print('==>> Testing relation map construction')
+    MP = True
+    tp = RandomCBPerformanceTableau(numberOfActions=100,Threading=MP,seed=100)
+    bg1 = PreRankedOutrankingDigraph(tp,quantiles=10,quantilesOrderingStrategy='average',
+                                 LowerClosed=False,
+                                 minimalComponentSize=10,
+                                 Threading=MP,
+                                 Comments=False,
+                                 Debug=False)
+    rkg = bg1.boostedRanking
+    assert bg1.actionRank(rkg[0]) == 1, "error in actionRank fct"
+    assert bg1.actionOrder(rkg[99]) == 1, "error in actionOrder fct"
+    
+    
