@@ -76,6 +76,26 @@ class SparseOutrankingDigraph(OutrankingDigraph):
         else:
             return Max
 
+    def sortingRelation(self,x,y,Debug=False):
+        """
+        Dynamic construction of the quantiles sorting characteristic function *r(x QS y)*.
+        """
+        Min = self.valuationdomain['min']
+        Med = self.valuationdomain['med']
+        Max = self.valuationdomain['max']
+        
+        if x == y:
+            return Med
+        cx = self.actions[x]['component']
+        cy = self.actions[y]['component']
+        #print(x,cx,y,cy)
+        if cx == cy:
+            return Med      
+        elif self.components[cx]['rank'] > self.components[cy]['rank']:
+            return Min
+        else:
+            return Max
+
     def showRelationMap(self,fromIndex=None,toIndex=None,symbols=None):
         """
         Prints on the console, in text map format, the location of
@@ -486,6 +506,261 @@ class SparseOutrankingDigraph(OutrankingDigraph):
                         for comp in self.components.values())
         return fillRate/( self.order*(self.order-1) )
 
+    def exportGraphViz(self,fileName=None,actionsSubset=None,\
+                       bestChoice=set(),worstChoice=set(),\
+                       noSilent=True,graphType='png',graphSize='7,7',
+                       relation=None):
+        """
+        export GraphViz dot file  for graph drawing filtering.
+        """
+        import os
+        if noSilent:
+            print('*---- exporting a dot file dor GraphViz tools ---------*')
+        if actionsSubset == None:
+            actionkeys = [x for x in self.actions]
+        else:
+            actionkeys = [x for x in actionsSubset]
+        n = len(actionkeys)
+        if relation == None:
+            relation = self.relation
+        Med = self.valuationdomain['med']
+        i = 0
+        if fileName == None:
+            name = self.name
+        else:
+            name = fileName
+        dotName = name+'.dot'
+        if noSilent:
+            print('Exporting to '+dotName)
+        if bestChoice != set():
+            rankBestString = '{rank=max; '
+        if worstChoice != set():
+            rankWorstString = '{rank=min; '
+        fo = open(dotName,'w')
+        fo.write('digraph G {\n')
+        fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
+        fo.write('\\nRubis Python Server (graphviz), R. Bisdorff, 2008", size="')
+        fo.write(graphSize),fo.write('"];\n')
+        for i in range(n):
+            try:
+                nodeName = self.actions[actionkeys[i]]['shortName']
+            except:
+                try:
+                    nodeName = self.actions[actionskeys[i]]['name']
+                except:
+                    nodeName = str(actionkeys[i])
+            node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
+            if actionkeys[i] in bestChoice:
+                node += ', style = "filled", color = gold];\n'
+                rankBestString += 'n'+str(i+1)+' '
+            elif actionkeys[i] in worstChoice:
+                node += ', style = "filled", color = lightblue];\n'
+                rankWorstString += 'n'+str(i+1)+' '
+            else:
+                node += '];\n'
+            fo.write(node)
+        if bestChoice != set():
+            rankBestString += '}\n'
+        if worstChoice != set():
+            rankWorstString += '}\n'
+##         for i in range(n):
+##             edge = 'n'+str(i+1)
+##             for j in range(n):
+##                 if i != j and relation[actions[i]][actions[j]] > Med:
+##                     edge0 = edge+'-> n'+str(j+1)+';\n'
+##                     fo.write(edge0)
+##                     j += 1
+##             i += 1
+        for i in range(n):
+            for j in range(i+1, n):
+                edge = 'n'+str(i+1)
+                if relation(actionkeys[i],actionkeys[j]) > Med and relation(actionkeys[j],actionkeys[i])> Med:
+                    edge0 = edge+'-> n'+str(j+1)+' [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;\n'
+                    fo.write(edge0)
+                elif relation(actionkeys[i],actionkeys[j]) > Med and relation(actionkeys[j],actionkeys[i])== Med:
+                    edge0 = edge+'-> n'+str(j+1)+' [dir=both, color=black, arrowhead=normal, arrowtail=empty] ;\n'
+                    fo.write(edge0)
+                elif relation(actionkeys[i],actionkeys[j]) == Med and relation(actionkeys[j],actionkeys[i]) > Med:
+                    edge0 = edge+'-> n'+str(j+1)+' [dir=both, color=black, arrowtail=normal, arrowhead=empty] ;\n'
+                    fo.write(edge0)
+                elif relation(actionkeys[i],actionkeys[j]) == Med and relation(actionkeys[j],actionkeys[i]) == Med:
+                    edge0 = edge+'-> n'+str(j+1)+' [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;\n'
+                    fo.write(edge0)
+                elif relation(actionkeys[i],actionkeys[j]) > Med and relation(actionkeys[j],actionkeys[i]) <  Med:
+                    edge0 = edge+'-> n'+str(j+1)+' [dir=forward, color=black] ;\n'
+                    fo.write(edge0)
+                elif relation(actionkeys[i],actionkeys[j]) == Med and relation(actionkeys[j],actionkeys[i]) <  Med:
+                    edge0 = edge+'-> n'+str(j+1)+' [dir=forward, color=grey, arrowhead=empty] ;\n'
+                    fo.write(edge0)
+                elif relation(actionkeys[i],actionkeys[j]) < Med and relation(actionkeys[j],actionkeys[i]) >  Med:
+                    edge0 = edge+'-> n'+str(j+1)+' [dir=back, color=black] ;\n'
+                    fo.write(edge0)
+                elif relation(actionkeys[i],actionkeys[j]) < Med and relation(actionkeys[j],actionkeys[i]) ==  Med:
+                    edge0 = edge+'-> n'+str(j+1)+' [dir=back, color=grey, arrowtail=empty] ;\n'
+                    fo.write(edge0)
+
+        if bestChoice != set():
+            fo.write(rankBestString)
+        if worstChoice != set():
+            fo.write(rankWorstString)
+        fo.write('}\n')
+        fo.close()
+        if type(self) == CirculantDigraph:
+            commandString = 'circo -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
+        elif type(self) == RandomTree:
+            commandString = 'neato -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
+        else:
+            commandString = 'dot -Grankdir=BT -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+            #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+
+        if noSilent:
+            print(commandString)
+        try:
+            os.system(commandString)
+        except:
+            if noSilent:
+                print('graphViz tools not avalaible! Please check installation.')
+
+    def exportSortingGraphViz(self,fileName=None,\
+                              actionsSubset=None,\
+                              direction='decreasing',\
+                       noSilent=True,graphType='pdf',\
+                       graphSize='7,7',\
+                       fontSize=10,
+                       relation=None,
+                       Debug=False):
+        """
+        export GraphViz dot file for weak order (Hasse diagram) drawing
+        filtering from SortingDigraph instances.
+
+        Example::
+
+            >>> print('==>> Testing graph viz export of sorting Hasse diagram')
+            >>> MP  = True
+            >>> nbrActions=100
+            >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
+            ...                         Threading=MP,
+            ...                         seed=100)
+            >>> bg = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=20,
+            ...                             quantilesOrderingStrategy='average',
+            ...                             componentRankingRule='Copeland',
+            ...                             LowerClosed=False,
+            ...                             minimalComponentSize=1,
+            ...                            Threading=MP,nbrOfCPUs=8,
+            ...                            #tempDir='.',
+            ...                             nbrOfThreads=8,
+            ...                             Comments=False,Debug=False,
+            ...                             save2File='testbgMP')
+            >>> print(bg)
+            >>> bg.showComponents()
+            >>> bg.exportSortingGraphViz(actionsSubset=bg.boostedRanking[:100])     
+
+
+        .. image:: preRankndDigraph.png
+           :alt: pre-ranked digraph
+           :width: 300 px
+           :align: center
+        """
+        import os
+        from copy import copy, deepcopy
+
+        def _safeName(t0):
+            try:
+                t = t0.split(sep="-")
+                t1 = t[0]
+                n = len(t)
+                if n > 1:
+                    for i in range(1,n):
+                        t1 += '%s%s' % ('_',t[i])
+                return t1
+            except:
+                print('Error in nodeName: %s !!' % t0, type(t0))
+                return t0
+                
+        compKeys = list(self.components.keys())
+        if direction != 'decreasing':
+            compKeys.reverse()
+        if Debug:
+            print(compKeys)
+                    
+        if noSilent:
+            print('*---- exporting a dot file for GraphViz tools ---------*')
+        if actionsSubset == None:
+            actionsKeys = [x for x in self.actions]
+        else:
+            actionsKeys = actionsSubset
+        n = len(actionsKeys)
+        if relation == None:
+            relation = self.sortingRelation
+        Med = self.valuationdomain['med']
+        i = 0
+        if fileName == None:
+            name = self.name
+        else:
+            name = fileName
+        dotName = name+'.dot'
+        if noSilent:
+            print('Exporting to '+dotName)
+##        if bestChoice != set():
+##            rankBestString = '{rank=max; '
+##        if worstChoice != set():
+##            rankWorstString = '{rank=min; '
+        fo = open(dotName,'w')
+        fo.write('digraph G {\n')
+        fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
+        fo.write('\\nweakOrders module (graphviz)\\n R. Bisdorff, 2014", size="')
+        fo.write(graphSize),fo.write('",fontsize=%d];\n' % fontSize)
+        # nodes
+        for x in actionsKeys:
+            try:
+                nodeName = self.actions[x]['shortName']
+            except:
+                nodeName = str(x)
+            node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
+                   % (str(_safeName(x)),_safeName(nodeName),fontSize)
+            fo.write(node)
+        # same ranks for Hasses equivalence classes
+        prtComp = []
+        k = len(compKeys)
+        for i in range(k):
+            ich = [ x for x in self.components[compKeys[i]]['subGraph'].actions.keys() if x in actionsKeys]
+            if ich != []:
+                prtComp.append(ich)
+                sameRank = '{ rank = same; '
+                for x in ich:
+                    sameRank += str(_safeName(x))+'; '
+                sameRank += '}\n'
+                print(i,sameRank)
+                fo.write(sameRank)
+        k = len(prtComp)
+        print(prtComp)
+        for i in range(1,k):
+            for x in prtComp[i-1]:
+                for y in prtComp[i]:
+                    #edge = 'n'+str(i+1)+'-> n'+str(i+2)+' [dir=forward,style="setlinewidth(1)",color=black, arrowhead=normal] ;\n'
+                    if self.sortingRelation(x,y) > self.valuationdomain['med']:
+                        arcColor = 'black'
+                        edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (_safeName(x),_safeName(y),1,arcColor)
+                        fo.write(edge)
+                    elif self.sortingRelation(y,x) > self.valuationdomain['med']:
+                        arcColor = 'black'
+                        edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (_safeName(y),_safeName(x),1,arcColor)
+                        fo.write(edge)
+                                                  
+        fo.write('}\n \n')
+        fo.close()
+        # restore original relation
+        #self.relation = copy(originalRelation)
+
+        commandString = 'dot -Grankdir=TB -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+            #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        if noSilent:
+            print(commandString)
+        try:
+            os.system(commandString)
+        except:
+            if noSilent:
+                print('graphViz tools not avalaible! Please check installation.')
 
 ########################
 # multiprocessing workers
@@ -1233,7 +1508,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         """
         if ordering == None:
             ordering = self.boostedOrder
-        return ordering.index(action) +1
+        return ordering.index(action) +1        
 
 #######################################################################
 #######################################################################
@@ -1249,17 +1524,19 @@ if __name__ == "__main__":
 
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
                                       seed=100)
-    bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=10,
+    bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=20,
                                  quantilesOrderingStrategy='average',
                                  componentRankingRule='Copeland',
                                  LowerClosed=False,
-                                 minimalComponentSize=10,
+                                 minimalComponentSize=1,
                                  Threading=False,nbrOfCPUs=8,
                                  #tempDir='.',
                                  nbrOfThreads=8,
                                  Comments=False,Debug=False,
                                  save2File='testbgMP')
     print(bg1)
+    bg1.showComponents()
+    bg1.exportSortingGraphViz(actionsSubset=bg1.boostedRanking[:100])
     
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
                                       seed=100)

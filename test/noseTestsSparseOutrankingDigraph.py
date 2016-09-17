@@ -104,9 +104,9 @@ def testRelationMap():
     bg1.showHTMLRelationMap(actionsSubset=bg1.boostedRanking)
 
 def testActionRankOrder():
-    print('==>> Testing relation map construction')
+    print('==>> Testing action rank and order methods')
     MP = True
-    tp = RandomCBPerformanceTableau(numberOfActions=100,Threading=MP,seed=100)
+    tp = RandomCBPerformanceTableau(numberOfActions=100,Threading=MP)
     bg1 = PreRankedOutrankingDigraph(tp,quantiles=10,quantilesOrderingStrategy='average',
                                  LowerClosed=False,
                                  minimalComponentSize=10,
@@ -114,7 +114,26 @@ def testActionRankOrder():
                                  Comments=False,
                                  Debug=False)
     rkg = bg1.boostedRanking
-    assert bg1.actionRank(rkg[0]) == 1, "error in actionRank fct"
-    assert bg1.actionOrder(rkg[99]) == 1, "error in actionOrder fct"
-    
+    assert bg1.actionRank(rkg[0],ranking=rkg) == 1, "error in actionRank fct"
+    assert bg1.actionOrder(rkg[99],ordering=rkg) == 100, "error in actionOrder fct"
+
+def testexportSortingGraphViz():
+    print('==>> Testing graph viz export of sorting Hasse diagram')
+    MP  = True
+    nbrActions=100
+    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
+                                      seed=100)
+    bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=20,
+                                 quantilesOrderingStrategy='average',
+                                 componentRankingRule='Copeland',
+                                 LowerClosed=False,
+                                 minimalComponentSize=1,
+                                 Threading=MP,nbrOfCPUs=8,
+                                 #tempDir='.',
+                                 nbrOfThreads=8,
+                                 Comments=False,Debug=False,
+                                 save2File='testbgMP')
+    print(bg1)
+    bg1.showComponents()
+    bg1.exportSortingGraphViz(actionsSubset=bg1.boostedRanking[:100])     
     
