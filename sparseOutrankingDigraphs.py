@@ -818,13 +818,13 @@ class SparseOutrankingDigraph(OutrankingDigraph):
 
 ########################
 # multiprocessing workers
-def worker(input):
+def _worker(input):
     for Comments,args in iter(input.get, 'STOP'):
-        result = decompose(*args)
+        result = _decompose(*args)
         if Comments:
             print(result)
 
-def decompose(i, nc,tempDirName,componentRankingRule):
+def _decompose(i, nc,tempDirName,componentRankingRule):
     global perfTab
     global decomposition
     from pickle import dumps
@@ -1016,7 +1016,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                     for task in TASKS:
                         task_queue.put(task)
                     for i in range(NUMBER_OF_WORKERS):
-                        Process(target=worker,args=(task_queue,)).start()
+                        Process(target=_worker,args=(task_queue,)).start()
                     print('started')
                     for i in range(NUMBER_OF_WORKERS):
                         task_queue.put('STOP')                   
