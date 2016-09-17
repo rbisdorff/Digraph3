@@ -217,7 +217,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1294,7 +1294,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2267,7 +2267,7 @@ called dg1 and dg2.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2298,7 +2298,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -3595,7 +3595,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4358,7 +4358,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -6087,7 +6087,7 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 
 <dl class="class">
 <dt id="randomDigraphs.RandomGridDigraph">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.GridDigraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary randomly oriented Grid digraphs of dimension n time m
@@ -6697,14 +6697,69 @@ filtering from SortingDigraph instances.</p>
 <span class="gp">... </span>                           <span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="c">#tempDir=&#39;.&#39;,</span>
 <span class="gp">... </span>                            <span class="n">nbrOfThreads</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="n">Comments</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="n">save2File</span><span class="o">=</span><span class="s">&#39;testbgMP&#39;</span><span class="p">)</span>
+<span class="gp">... </span>                            <span class="n">Comments</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
+<span class="go">*----- show short --------------*</span>
+<span class="go">Instance name     : randomCBperftab_mp</span>
+<span class="go"># Actions         : 100</span>
+<span class="go"># Criteria        : 7</span>
+<span class="go">Sorting by        : 20-Tiling</span>
+<span class="go">Ordering strategy : average</span>
+<span class="go">Ranking rule      : Copeland</span>
+<span class="go"># Components      : 36</span>
+<span class="go">Minimal order     : 1</span>
+<span class="go">Maximal order     : 11</span>
+<span class="go">Average order     : 2.8</span>
+<span class="go">fill rate         : 4.121%</span>
+<span class="go">----  Constructor run times (in sec.) ----</span>
+<span class="go">Total time        : 0.15991</span>
+<span class="go">QuantilesSorting  : 0.11717</span>
+<span class="go">Preordering       : 0.00066</span>
+<span class="go">Decomposing       : 0.04009</span>
+<span class="go">Ordering          : 0.00000</span>
+<span class="go">&lt;class &#39;sparseOutrankingDigraphs.PreRankedOutrankingDigraph&#39;&gt; instance</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span><span class="o">.</span><span class="n">showComponents</span><span class="p">()</span>
+<span class="go">*--- Relation decomposition in increasing order---*</span>
+<span class="go">35: [&#39;a010&#39;]</span>
+<span class="go">34: [&#39;a024&#39;, &#39;a060&#39;]</span>
+<span class="go">33: [&#39;a012&#39;]</span>
+<span class="go">32: [&#39;a018&#39;]</span>
+<span class="go">31: [&#39;a004&#39;, &#39;a054&#39;, &#39;a075&#39;, &#39;a082&#39;]</span>
+<span class="go">30: [&#39;a099&#39;]</span>
+<span class="go">29: [&#39;a065&#39;]</span>
+<span class="go">28: [&#39;a025&#39;, &#39;a027&#39;, &#39;a029&#39;, &#39;a041&#39;, &#39;a059&#39;]</span>
+<span class="go">27: [&#39;a063&#39;]</span>
+<span class="go">26: [&#39;a047&#39;, &#39;a066&#39;]</span>
+<span class="go">25: [&#39;a021&#39;]</span>
+<span class="go">24: [&#39;a007&#39;]</span>
+<span class="go">23: [&#39;a044&#39;]</span>
+<span class="go">22: [&#39;a037&#39;, &#39;a062&#39;, &#39;a090&#39;, &#39;a094&#39;, &#39;a098&#39;, &#39;a100&#39;]</span>
+<span class="go">21: [&#39;a005&#39;, &#39;a040&#39;, &#39;a051&#39;, &#39;a093&#39;]</span>
+<span class="go">20: [&#39;a015&#39;, &#39;a030&#39;, &#39;a052&#39;, &#39;a055&#39;, &#39;a064&#39;, &#39;a077&#39;]</span>
+<span class="go">19: [&#39;a006&#39;, &#39;a061&#39;]</span>
+<span class="go">18: [&#39;a049&#39;]</span>
+<span class="go">17: [&#39;a001&#39;, &#39;a033&#39;]</span>
+<span class="go">16: [&#39;a016&#39;, &#39;a028&#39;, &#39;a032&#39;, &#39;a035&#39;, &#39;a057&#39;, &#39;a079&#39;, &#39;a084&#39;, &#39;a095&#39;]</span>
+<span class="go">15: [&#39;a043&#39;]</span>
+<span class="go">14: [&#39;a002&#39;, &#39;a017&#39;, &#39;a023&#39;, &#39;a034&#39;, &#39;a067&#39;, &#39;a072&#39;, &#39;a073&#39;, &#39;a074&#39;, &#39;a088&#39;, &#39;a089&#39;, &#39;a097&#39;]</span>
+<span class="go">13: [&#39;a048&#39;]</span>
+<span class="go">12: [&#39;a078&#39;, &#39;a092&#39;]</span>
+<span class="go">11: [&#39;a070&#39;]</span>
+<span class="go">10: [&#39;a014&#39;, &#39;a026&#39;, &#39;a039&#39;, &#39;a058&#39;, &#39;a068&#39;, &#39;a083&#39;, &#39;a086&#39;]</span>
+<span class="go">9: [&#39;a008&#39;, &#39;a022&#39;, &#39;a038&#39;, &#39;a081&#39;, &#39;a091&#39;, &#39;a096&#39;]</span>
+<span class="go">8: [&#39;a020&#39;]</span>
+<span class="go">7: [&#39;a069&#39;]</span>
+<span class="go">6: [&#39;a045&#39;]</span>
+<span class="go">5: [&#39;a003&#39;, &#39;a009&#39;, &#39;a013&#39;, &#39;a031&#39;, &#39;a036&#39;, &#39;a056&#39;, &#39;a076&#39;]</span>
+<span class="go">4: [&#39;a042&#39;, &#39;a071&#39;]</span>
+<span class="go">3: [&#39;a085&#39;]</span>
+<span class="go">2: [&#39;a019&#39;, &#39;a080&#39;, &#39;a087&#39;]</span>
+<span class="go">1: [&#39;a046&#39;]</span>
+<span class="go">0: [&#39;a011&#39;, &#39;a050&#39;, &#39;a053&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span><span class="o">.</span><span class="n">exportSortingGraphViz</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">bg</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span>     
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/preRankedDigraph.png"><img alt="pre-ranked digraph" class="align-center" src="_images/preRankedDigraph.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/preRankedDigraph.png"><img alt="pre-ranked digraph" class="align-center" src="_images/preRankedDigraph.png" style="width: 400px;" /></a>
 </dd></dl>
 
 <dl class="method">

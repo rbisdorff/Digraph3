@@ -649,16 +649,70 @@ class SparseOutrankingDigraph(OutrankingDigraph):
             ...                            Threading=MP,nbrOfCPUs=8,
             ...                            #tempDir='.',
             ...                             nbrOfThreads=8,
-            ...                             Comments=False,Debug=False,
-            ...                             save2File='testbgMP')
+            ...                             Comments=False,Debug=False)
             >>> print(bg)
+            *----- show short --------------*
+            Instance name     : randomCBperftab_mp
+            # Actions         : 100
+            # Criteria        : 7
+            Sorting by        : 20-Tiling
+            Ordering strategy : average
+            Ranking rule      : Copeland
+            # Components      : 36
+            Minimal order     : 1
+            Maximal order     : 11
+            Average order     : 2.8
+            fill rate         : 4.121%
+            ----  Constructor run times (in sec.) ----
+            Total time        : 0.15991
+            QuantilesSorting  : 0.11717
+            Preordering       : 0.00066
+            Decomposing       : 0.04009
+            Ordering          : 0.00000
+            <class 'sparseOutrankingDigraphs.PreRankedOutrankingDigraph'> instance
             >>> bg.showComponents()
+            *--- Relation decomposition in increasing order---*
+            35: ['a010']
+            34: ['a024', 'a060']
+            33: ['a012']
+            32: ['a018']
+            31: ['a004', 'a054', 'a075', 'a082']
+            30: ['a099']
+            29: ['a065']
+            28: ['a025', 'a027', 'a029', 'a041', 'a059']
+            27: ['a063']
+            26: ['a047', 'a066']
+            25: ['a021']
+            24: ['a007']
+            23: ['a044']
+            22: ['a037', 'a062', 'a090', 'a094', 'a098', 'a100']
+            21: ['a005', 'a040', 'a051', 'a093']
+            20: ['a015', 'a030', 'a052', 'a055', 'a064', 'a077']
+            19: ['a006', 'a061']
+            18: ['a049']
+            17: ['a001', 'a033']
+            16: ['a016', 'a028', 'a032', 'a035', 'a057', 'a079', 'a084', 'a095']
+            15: ['a043']
+            14: ['a002', 'a017', 'a023', 'a034', 'a067', 'a072', 'a073', 'a074', 'a088', 'a089', 'a097']
+            13: ['a048']
+            12: ['a078', 'a092']
+            11: ['a070']
+            10: ['a014', 'a026', 'a039', 'a058', 'a068', 'a083', 'a086']
+            9: ['a008', 'a022', 'a038', 'a081', 'a091', 'a096']
+            8: ['a020']
+            7: ['a069']
+            6: ['a045']
+            5: ['a003', 'a009', 'a013', 'a031', 'a036', 'a056', 'a076']
+            4: ['a042', 'a071']
+            3: ['a085']
+            2: ['a019', 'a080', 'a087']
+            1: ['a046']
+            0: ['a011', 'a050', 'a053']
             >>> bg.exportSortingGraphViz(actionsSubset=bg.boostedRanking[:100])     
-
 
         .. image:: preRankedDigraph.png
            :alt: pre-ranked digraph
-           :width: 300 px
+           :width: 400 px
            :align: center
         """
         import os
