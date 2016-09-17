@@ -656,7 +656,7 @@ class SparseOutrankingDigraph(OutrankingDigraph):
             >>> bg.exportSortingGraphViz(actionsSubset=bg.boostedRanking[:100])     
 
 
-        .. image:: preRankndDigraph.png
+        .. image:: preRankedDigraph.png
            :alt: pre-ranked digraph
            :width: 300 px
            :align: center

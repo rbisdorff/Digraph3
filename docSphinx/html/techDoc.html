@@ -3595,7 +3595,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4358,7 +4358,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -6704,7 +6704,7 @@ filtering from SortingDigraph instances.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span><span class="o">.</span><span class="n">exportSortingGraphViz</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">bg</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span>     
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="preRankndDigraph.pdf"><img alt="pre-ranked digraph" class="align-center" src="preRankndDigraph.pdf" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/preRankedDigraph.png"><img alt="pre-ranked digraph" class="align-center" src="_images/preRankedDigraph.png" style="width: 300px;" /></a>
 </dd></dl>
 
 <dl class="method">
