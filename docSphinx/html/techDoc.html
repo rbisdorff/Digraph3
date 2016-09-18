@@ -1294,7 +1294,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3595,7 +3595,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4358,7 +4358,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -6549,6 +6549,14 @@ the global linar ranking and the marginal criterion relation.</p>
 <p>Returns a list of tuples (correlation,criterionKey) sorted by default in decreasing order of the correlation.</p>
 <p>If Threading is True, a multiprocessing Pool class is used with a parallel equivalent of the built-in map function.</p>
 <p>If nbrCores is not set, the os.cpu_count() function is used to determine the number of available cores.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sparseOutrankingDigraphs.PreRankedOutrankingDigraph.htmlPerformanceHeatmap">
+<code class="descname">htmlPerformanceHeatmap</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>actionsList=None</em>, <em>RankingRule='Copeland'</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>ndigits=2</em>, <em>contentCentered=True</em>, <em>colorLevels=None</em>, <em>pageTitle='Performance Heatmap'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.htmlPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specialization of the generic perfTabs method for spare outranking digraphs.</p>
+<p>Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
+actions x criteria in html format.</p>
 </dd></dl>
 
 <dl class="method">
