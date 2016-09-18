@@ -849,7 +849,6 @@ def _decompose(i, nc,tempDirName,componentRankingRule):
     elif componentRankingRule == 'NetFlows':
         nf = NetFlowsOrder(pg)
         pg.ranking = nf.netFlowsRanking
-    print(pg.ranking)
     pg.__dict__.pop('criteria')
     pg.__dict__.pop('evaluation')
     pg.__class__ = Digraph
