@@ -1237,11 +1237,19 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 commonScale = (0.0,100.0)
 
         criteria = OrderedDict()
+        objectivesKeys = list(objectives.keys())
         ng = len(str(numberOfCriteria))
         for i in range(numberOfCriteria):
             g = ('g%%0%dd' % ng) % (i+1)
             criteria[g] = {}
-            criterionObjective = random.choice(list(objectives.keys()))
+            if i == 0:
+                criterionObjective = 'Eco'
+            elif i == 1:
+                criterionObjective = 'Soc'
+            elif i == 2:
+                criterionObjective = 'Env'
+            else:    
+                criterionObjective = random.choice(objectivesKeys)
             criteria[g]['objective'] = criterionObjective
             criteria[g]['preferenceDirection'] = 'max'           
             criteria[g]['name'] = 'criterion of objective %s' % (criterionObjective)
@@ -1786,7 +1794,13 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         criterionTypeCounter = {'min':0,'max':0}
         criteria = OrderedDict()
         for i in range(numberOfCriteria):
-            criterionType = random.choice(criterionTypesList)
+            # at least one cost and one benefit criterion is selected
+            if i == 0:
+                criterionType = 'min'
+            elif i == 1:
+                criterionType = 'max'
+            else:
+                criterionType = random.choice(criterionTypesList)
             criterionTypeCounter[criterionType] += 1
             if criterionType == 'min':
                 g = ('c%%0%dd' % ng) % (criterionTypeCounter[criterionType])
@@ -2126,29 +2140,29 @@ if __name__ == "__main__":
     from weakOrders import QuantilesRankingDigraph
     from randomPerfTabs import *
     from time import time
-    t0 = time()
-    t = RandomCBPerformanceTableau(numberOfActions=20,
-                                   numberOfCriteria=13,
-                                   samplingSize=100000,
-                                   BigData=True,
-                                   seed=100)
-    print(time()-t0)
-    t.saveXMCDA2('test2')
+##    t0 = time()
+##    t = RandomCBPerformanceTableau(numberOfActions=20,
+##                                   numberOfCriteria=13,
+##                                   samplingSize=100000,
+##                                   BigData=True,
+##                                   seed=100)
+##    print(time()-t0)
+##    t.saveXMCDA2('test2')
 ##    t.showCriteria()
-##    t = Random3ObjectivesPerformanceTableau(numberOfActions=100,
-##                                            numberOfCriteria=13,
-##                                            OrdinalScales=False,
-##                                            commonScale=None,
-##                                            weightDistribution='equiobjectives',
-##     #weightScale=(1,5),
-##                                            commonMode=('beta','variable',None),
-##                                            vetoProbability=0.5,
-##                                            seed=120)
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=100,
+                                            numberOfCriteria=13,
+                                            OrdinalScales=False,
+                                            commonScale=None,
+                                            weightDistribution='equiobjectives',
+     #weightScale=(1,5),
+                                            commonMode=('beta','variable',None),
+                                            vetoProbability=0.5,
+                                            seed=120)
 
     t.showObjectives()
     t.showCriteria()
     t.csvAllQuantiles('q')
-    print(t.showAllQuantiles())
+    t.showAllQuantiles()
     
 ##    #t.showActions(Debug=True)
 ##    teco = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Eco']['criteria'])
