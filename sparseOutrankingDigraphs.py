@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """
 Digraph3 collection of python3 modules for Algorithmic Decision Theory applications
+
 Module for sparse pre-ranked outranking digraphs
+
 Copyright (C) 2016  Raymond Bisdorff
 
 This program is free software; you can redistribute it and/or modify
