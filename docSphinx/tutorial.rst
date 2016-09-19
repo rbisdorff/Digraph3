@@ -2348,6 +2348,92 @@ The Ranked-Pairs rule actually renders one of the seven optimal Kemeny rankings 
     Fitness of Tideman's ranking: 0.918
 
 Unfortunately, the Ranked-Pairs ranking rule is again not efficiently scalable to outranking digraphs of larger orders (> 100). For such outranking digraphs, with several hundred of alternatives, only the Copeland and the Net-Flows ranking rules, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the outranking digraph, remain in fact computationally efficient.
+ 
+Ranking big performance tableaux
+................................
+
+None of the previous ranking heuristic, using essentially only the information given by the outranking relation, are scalable for big outranking digraphs gathering millions of pairwise outranking situations. We may notice, however, that An outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance tableau for linearly decomposing big sets of decision alternatives into ordered quantiles equivalence classes. This decomposition will lead to a pre-ranked sparse outranking digraph.
+
+In the following example, we generate, by using multiprossing techniques, first, a cost benefit performance tableau of 100 decision alternatives and, secondly, construct a pre-ranked sparse outranking digraph instance called *bg*. Notice bwt the *BigData* flag used here for generating a parcimonous performance tableau::
+
+    >>> from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
+    >>> tp = RandomCBPerformanceTableau(numberOfActions=100,BigData=True,
+    ...                                 Threading=MP,
+    ...                                 seed=100)
+    >>> bg = PreRankedOutrankingDigraph(tp,quantiles=20,
+    ...                                 LowerClosed=False,
+    ...                                 minimalComponentSize=10,
+    ...                                 Threading=True)
+    >>> print(bg)
+    *----- show short --------------*
+    Instance name     : randomCBperftab_mp
+    # Actions         : 100
+    # Criteria        : 7
+    Sorting by        : 10-Tiling
+    Ordering strategy : average
+    Ranking rule      : Copeland
+    # Components      : 20
+    Minimal order     : 1
+    Maximal order     : 20
+    Average order     : 5.0
+    fill rate         : 10.061%
+    ----  Constructor run times (in sec.) ----
+    Total time        : 0.17790
+    QuantilesSorting  : 0.09019
+    Preordering       : 0.00043
+    Decomposing       : 0.08522
+    Ordering          : 0.00000
+    <class 'sparseOutrankingDigraphs.PreRankedOutrankingDigraph'> instance
+
+The total run time of the PreRankedOutrankingDigraph is less than a fifth of a second and the multiple criteria deciles sorting leads to 20 quantiles equivalence classes. The corresponding pre-ranked decomposition may be visualized as follows::
+
+    >>> bg.showDecomposition()
+    *--- quantiles decomposition in decreasing order---*
+    0. ]0.80-0.90] : [49, 10, 52]
+    1. ]0.70-0.90] : [45]
+    2. ]0.70-0.80] : [18, 84, 86, 79]
+    3. ]0.60-0.80] : [41, 70]
+    4. ]0.50-0.80] : [44]
+    5. ]0.60-0.70] : [2, 35, 68, 37, 7, 8, 75, 12, 80, 21, 55, 90, 30, 95]
+    6. ]0.50-0.70] : [19]
+    7. ]0.40-0.70] : [69]
+    8. ]0.50-0.60] : [96, 1, 66, 67, 38, 33, 72, 73, 71, 13, 77, 16, 82,
+		      85, 22, 25, 88, 57, 87, 91]
+    9. ]0.30-0.70] : [42]
+    10. ]0.40-0.60] : [47]
+    11. ]0.30-0.60] : [0, 32, 48]
+    12. ]0.40-0.50] : [34, 5, 31, 83, 76, 78, 15, 51, 14, 54, 56, 27, 60,
+		       29, 94, 63]
+    13. ]0.30-0.50] : [4, 50, 92, 39]
+    14. ]0.20-0.50] : [43]
+    15. ]0.30-0.40] : [97, 99, 36, 6, 89, 61, 93]
+    16. ]0.20-0.40] : [65, 20, 46, 62]
+    17. ]0.20-0.30] : [64, 81, 3, 53, 24, 40, 74, 28, 26, 58]
+    18. ]0.10-0.30] : [17, 98, 11]
+    19. ]0.10-0.20] : [9, 59, 23]
+
+Best decile class (]80%-90%]) gathers decision alternatives *49*, *10*, and *52*. Worst decile equivalence class (]10%-20%]) gathers alternatives *9*, *59*, and *23*.
+
+Each one of these 20 ordered components may now be locally ranked now by using a suitable ranking rules. Best operational results, both in run times and quality, are given more or less equally given with the Copeland and the NetFlows rules. The eventual linear order is the following::
+  
+    >>> print(bg.boostedOrder)
+    [59, 9, 23, 17, 11, 98, 26, 81, 40, 64, 3, 74,
+    28, 53, 24, 58, 65, 62, 46, 20, 93, 89, 97, 61,
+    99, 6, 36, 43, 4, 50, 39, 92, 94, 60, 14, 76, 63,
+    51, 56, 34, 5, 54, 27, 78, 15, 29, 31, 83, 32, 0,
+    48, 47, 42, 16, 1, 66, 72, 71, 38, 57, 33, 73, 88,
+    85, 82, 22, 96, 91, 67, 87, 13, 77, 25, 69, 19, 21,
+    95, 35, 80, 37, 7, 12, 68, 2, 90, 55, 30, 75, 8, 44,
+    41, 70, 79, 86, 84, 18, 45, 49, 10, 52]
+
+Alternative *52" appears first ranked whereas alternative *59* is last ranked. The quality of this ranking result may be assessed by computing its ordinal correlation with the corresponding standard outranking digraph::
+
+    >>> g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=True)
+    >>> g.computeOrderCorrelation(bg.boostedOrder)
+    {'correlation': 0.7485,
+     'determination': 0.4173}
+
+This ranking heuristic is readily scalable with ad hoc HPC tuning to several millions of decision alternatives.
 
 Links and appendices
 --------------------
@@ -2383,6 +2469,7 @@ References
 
 .. [BIS-2006] R. Bisdorff, M. Pirlot and M. Roubens (2006). Choices and kernels from bipolar valued digraphs. *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <http://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf>`_)
 
+.. [BIS-2016] R. Bisdorff (2016). On linear ranking from trillions of pairwise outranking situations. Research Note 16-1, FSTC/ILIAS Decision Systems Group, University of Luxembourg pp. 1-6 (dowloadable  `PDF file 625.3 kB <http://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf>`_)
 
 
 Footnotes

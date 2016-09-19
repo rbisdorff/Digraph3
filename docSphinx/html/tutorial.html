@@ -3650,6 +3650,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <li><a class="reference internal" href="#slater-rankings" id="id93">Slater rankings</a></li>
 <li><a class="reference internal" href="#kohler-s-ranking-by-choosing-rule" id="id94">Kohler&#8217;s ranking-by-choosing rule</a></li>
 <li><a class="reference internal" href="#tideman-s-ranked-pairs-rule" id="id95">Tideman&#8217;s Ranked-Pairs rule</a></li>
+<li><a class="reference internal" href="#ranking-big-performance-tableaux" id="id96">Ranking big performance tableaux</a></li>
 </ul>
 </div>
 <div class="section" id="the-ranking-problem">
@@ -4043,6 +4044,147 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <p>Unfortunately, the Ranked-Pairs ranking rule is again not efficiently scalable to outranking digraphs of larger orders (&gt; 100). For such outranking digraphs, with several hundred of alternatives, only the Copeland and the Net-Flows ranking rules, with a polynomial complexity of <img class="math" src="_images/math/050b75980d00e72d3a1d37cb7d030ca5f0eb012c.png" alt="O(n^2)"/> where <em>n</em> is the order of the outranking digraph, remain in fact computationally efficient.</p>
 </div>
+<div class="section" id="ranking-big-performance-tableaux">
+<h3><a class="toc-backref" href="#id96">Ranking big performance tableaux</a><a class="headerlink" href="#ranking-big-performance-tableaux" title="Permalink to this headline">¶</a></h3>
+<p>None of the previous ranking heuristic, using essentially only the information given by the outranking relation, are scalable for big outranking digraphs gathering millions of pairwise outranking situations. We may notice, however, that An outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance tableau for linearly decomposing big sets of decision alternatives into ordered quantiles equivalence classes. This decomposition will lead to a pre-ranked sparse outranking digraph.</p>
+<p>In the following example, we generate, by using multiprossing techniques, first, a cost benefit performance tableau of 100 decision alternatives and, secondly, construct a pre-ranked sparse outranking digraph instance called <em>bg</em>. Notice bwt the <em>BigData</em> flag used here for generating a parcimonous performance tableau:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">PreRankedOutrankingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">BigData</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="gp">... </span>                                <span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span>
+<span class="gp">... </span>                                <span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+<span class="gp">... </span>                                <span class="n">LowerClosed</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<span class="gp">... </span>                                <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="gp">... </span>                                <span class="n">Threading</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
+<span class="go">*----- show short --------------*</span>
+<span class="go">Instance name     : randomCBperftab_mp</span>
+<span class="go"># Actions         : 100</span>
+<span class="go"># Criteria        : 7</span>
+<span class="go">Sorting by        : 10-Tiling</span>
+<span class="go">Ordering strategy : average</span>
+<span class="go">Ranking rule      : Copeland</span>
+<span class="go"># Components      : 20</span>
+<span class="go">Minimal order     : 1</span>
+<span class="go">Maximal order     : 20</span>
+<span class="go">Average order     : 5.0</span>
+<span class="go">fill rate         : 10.061%</span>
+<span class="go">----  Constructor run times (in sec.) ----</span>
+<span class="go">Total time        : 0.17790</span>
+<span class="go">QuantilesSorting  : 0.09019</span>
+<span class="go">Preordering       : 0.00043</span>
+<span class="go">Decomposing       : 0.08522</span>
+<span class="go">Ordering          : 0.00000</span>
+<span class="go">&lt;class &#39;sparseOutrankingDigraphs.PreRankedOutrankingDigraph&#39;&gt; instance</span>
+</pre></div>
+</td></tr></table></div>
+<p>The total run time of the PreRankedOutrankingDigraph is less than a fifth of a second and the multiple criteria deciles sorting leads to 20 quantiles equivalence classes. The corresponding pre-ranked decomposition may be visualized as follows:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span><span class="o">.</span><span class="n">showDecomposition</span><span class="p">()</span>
+<span class="go">*--- quantiles decomposition in decreasing order---*</span>
+<span class="go">0. ]0.80-0.90] : [49, 10, 52]</span>
+<span class="go">1. ]0.70-0.90] : [45]</span>
+<span class="go">2. ]0.70-0.80] : [18, 84, 86, 79]</span>
+<span class="go">3. ]0.60-0.80] : [41, 70]</span>
+<span class="go">4. ]0.50-0.80] : [44]</span>
+<span class="go">5. ]0.60-0.70] : [2, 35, 68, 37, 7, 8, 75, 12, 80, 21, 55, 90, 30, 95]</span>
+<span class="go">6. ]0.50-0.70] : [19]</span>
+<span class="go">7. ]0.40-0.70] : [69]</span>
+<span class="go">8. ]0.50-0.60] : [96, 1, 66, 67, 38, 33, 72, 73, 71, 13, 77, 16, 82,</span>
+<span class="go">                  85, 22, 25, 88, 57, 87, 91]</span>
+<span class="go">9. ]0.30-0.70] : [42]</span>
+<span class="go">10. ]0.40-0.60] : [47]</span>
+<span class="go">11. ]0.30-0.60] : [0, 32, 48]</span>
+<span class="go">12. ]0.40-0.50] : [34, 5, 31, 83, 76, 78, 15, 51, 14, 54, 56, 27, 60,</span>
+<span class="go">                   29, 94, 63]</span>
+<span class="go">13. ]0.30-0.50] : [4, 50, 92, 39]</span>
+<span class="go">14. ]0.20-0.50] : [43]</span>
+<span class="go">15. ]0.30-0.40] : [97, 99, 36, 6, 89, 61, 93]</span>
+<span class="go">16. ]0.20-0.40] : [65, 20, 46, 62]</span>
+<span class="go">17. ]0.20-0.30] : [64, 81, 3, 53, 24, 40, 74, 28, 26, 58]</span>
+<span class="go">18. ]0.10-0.30] : [17, 98, 11]</span>
+<span class="go">19. ]0.10-0.20] : [9, 59, 23]</span>
+</pre></div>
+</td></tr></table></div>
+<p>Best decile class (]80%-90%]) gathers decision alternatives <em>49</em>, <em>10</em>, and <em>52</em>. Worst decile equivalence class (]10%-20%]) gathers alternatives <em>9</em>, <em>59</em>, and <em>23</em>.</p>
+<p>Each one of these 20 ordered components may now be locally ranked now by using a suitable ranking rules. Best operational results, both in run times and quality, are given more or less equally given with the Copeland and the NetFlows rules. The eventual linear order is the following:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">bg</span><span class="o">.</span><span class="n">boostedOrder</span><span class="p">)</span>
+<span class="go">[59, 9, 23, 17, 11, 98, 26, 81, 40, 64, 3, 74,</span>
+<span class="go">28, 53, 24, 58, 65, 62, 46, 20, 93, 89, 97, 61,</span>
+<span class="go">99, 6, 36, 43, 4, 50, 39, 92, 94, 60, 14, 76, 63,</span>
+<span class="go">51, 56, 34, 5, 54, 27, 78, 15, 29, 31, 83, 32, 0,</span>
+<span class="go">48, 47, 42, 16, 1, 66, 72, 71, 38, 57, 33, 73, 88,</span>
+<span class="go">85, 82, 22, 96, 91, 67, 87, 13, 77, 25, 69, 19, 21,</span>
+<span class="go">95, 35, 80, 37, 7, 12, 68, 2, 90, 55, 30, 75, 8, 44,</span>
+<span class="go">41, 70, 79, 86, 84, 18, 45, 49, 10, 52]</span>
+</pre></div>
+</td></tr></table></div>
+<p>Alternative <em>52&#8221; appears first ranked whereas alternative *59</em> is last ranked. The quality of this ranking result may be assessed by computing its ordinal correlation with the corresponding standard outranking digraph:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">bg</span><span class="o">.</span><span class="n">boostedOrder</span><span class="p">)</span>
+<span class="go">{&#39;correlation&#39;: 0.7485,</span>
+<span class="go"> &#39;determination&#39;: 0.4173}</span>
+</pre></div>
+</div>
+<p>This ranking heuristic is readily scalable with ad hoc HPC tuning to several millions of decision alternatives.</p>
+</div>
 </div>
 <div class="section" id="links-and-appendices">
 <h2><a class="toc-backref" href="#id44">Links and appendices</a><a class="headerlink" href="#links-and-appendices" title="Permalink to this headline">¶</a></h2>
@@ -4123,6 +4265,15 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id28">[BIS-2006]</a></td><td><ol class="first last upperalpha simple" start="18">
 <li>Bisdorff, M. Pirlot and M. Roubens (2006). Choices and kernels from bipolar valued digraphs. <em>European Journal of Operational Research</em>, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version <a class="reference external" href="http://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf">PDF file 257.3Kb</a>)</li>
+</ol>
+</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="bis-2016" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[BIS-2016]</td><td><ol class="first last upperalpha simple" start="18">
+<li>Bisdorff (2016). On linear ranking from trillions of pairwise outranking situations. Research Note 16-1, FSTC/ILIAS Decision Systems Group, University of Luxembourg pp. 1-6 (dowloadable  <a class="reference external" href="http://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf">PDF file 625.3 kB</a>)</li>
 </ol>
 </td></tr>
 </tbody>
@@ -4222,6 +4373,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <li><a class="reference internal" href="#slater-rankings">Slater rankings</a></li>
 <li><a class="reference internal" href="#kohler-s-ranking-by-choosing-rule">Kohler&#8217;s ranking-by-choosing rule</a></li>
 <li><a class="reference internal" href="#tideman-s-ranked-pairs-rule">Tideman&#8217;s Ranked-Pairs rule</a></li>
+<li><a class="reference internal" href="#ranking-big-performance-tableaux">Ranking big performance tableaux</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#links-and-appendices">Links and appendices</a><ul>
