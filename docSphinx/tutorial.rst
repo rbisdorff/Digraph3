@@ -2352,9 +2352,9 @@ Unfortunately, the Ranked-Pairs ranking rule is again not efficiently scalable t
 Ranking big performance tableaux
 ................................
 
-None of the previous ranking heuristic, using essentially only the information given by the outranking relation, are scalable for big outranking digraphs gathering millions of pairwise outranking situations. We may notice, however, that An outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance tableau for linearly decomposing big sets of decision alternatives into ordered quantiles equivalence classes. This decomposition will lead to a pre-ranked sparse outranking digraph.
+None of the previous ranking heuristics, using essentially only the information given by the outranking relation, are scalable for big outranking digraphs gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into ordered quantiles equivalence classes. This decomposition will lead to a pre-ranked sparse outranking digraph.
 
-In the following example, we generate, by using multiprossing techniques, first, a cost benefit performance tableau of 100 decision alternatives and, secondly, construct a pre-ranked sparse outranking digraph instance called *bg*. Notice bwt the *BigData* flag used here for generating a parcimonous performance tableau::
+In the coding example, we generate for instance, by using multiprossing techniques, first, a cost benefit performance tableau of 100 decision alternatives and, secondly, we construct a **pre-ranked sparse outranking digraph** instance called *bg*. Notice bwt the *BigData* flag used here for generating a parcimonous performance tableau::
 
     >>> from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
     >>> tp = RandomCBPerformanceTableau(numberOfActions=100,BigData=True,
@@ -2385,7 +2385,7 @@ In the following example, we generate, by using multiprossing techniques, first,
     Ordering          : 0.00000
     <class 'sparseOutrankingDigraphs.PreRankedOutrankingDigraph'> instance
 
-The total run time of the PreRankedOutrankingDigraph is less than a fifth of a second and the multiple criteria deciles sorting leads to 20 quantiles equivalence classes. The corresponding pre-ranked decomposition may be visualized as follows::
+The total run time of the :py:class:`PreRankedOutrankingDigraph` constructor (see class documentation `<http://leopold-loewenheim.uni.lu/docDigraph3/techDoc.html#module-sparseOutrankingDigraphs>`_ ) is less than a fifth of a second. The corresponding multiple criteria deciles sorting leads to 20 quantiles equivalence classes. The corresponding pre-ranked decomposition may be visualized as follows::
 
     >>> bg.showDecomposition()
     *--- quantiles decomposition in decreasing order---*
@@ -2412,9 +2412,9 @@ The total run time of the PreRankedOutrankingDigraph is less than a fifth of a s
     18. ]0.10-0.30] : [17, 98, 11]
     19. ]0.10-0.20] : [9, 59, 23]
 
-Best decile class (]80%-90%]) gathers decision alternatives *49*, *10*, and *52*. Worst decile equivalence class (]10%-20%]) gathers alternatives *9*, *59*, and *23*.
+The best decile (]80%-90%]) gathers decision alternatives *49*, *10*, and *52*. Worst decile (]10%-20%]) gathers alternatives *9*, *59*, and *23*.
 
-Each one of these 20 ordered components may now be locally ranked now by using a suitable ranking rules. Best operational results, both in run times and quality, are given more or less equally given with the Copeland and the NetFlows rules. The eventual linear order is the following::
+Each one of these 20 ordered components may now be locally ranked now by using a suitable ranking rules. Best operational results, both in run times and quality, are more or less equally given with the Copeland and the NetFlows rules. The eventually obtained linear ordering is the following::
   
     >>> print(bg.boostedOrder)
     [59, 9, 23, 17, 11, 98, 26, 81, 40, 64, 3, 74,
@@ -2433,7 +2433,7 @@ Alternative *52" appears first ranked whereas alternative *59* is last ranked. T
     {'correlation': 0.7485,
      'determination': 0.4173}
 
-This ranking heuristic is readily scalable with ad hoc HPC tuning to several millions of decision alternatives.
+This ranking heuristic is readily scalable with ad hoc HPC tuning to several millions of decision alternatives (see [BIS-2016]_).
 
 Links and appendices
 --------------------
