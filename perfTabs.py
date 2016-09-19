@@ -2119,11 +2119,6 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</style>\n'
         html += '</head>\n<body>\n'
         html += '<h2>%s</h2>\n' % pageTitle
-        if argActionsList == None:
-            argActionsList = [x for x in self.actions]
-        na = len(argActionsList)
-        if Debug:
-            print('1',argActionsList)
         
         from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
         if argCriteriaList == None:
@@ -2131,17 +2126,21 @@ The performance evaluations of each decision alternative on each criterion are g
             criteriaList = None
         else:
             criteriaList = argCriteriaList
-        pt = PartialPerformanceTableau(self,actionsSubset=argActionsList,criteriaSubset=argCriteriaList)
+        #pt = PartialPerformanceTableau(self,actionsSubset=argActionsList,criteriaSubset=argCriteriaList)
         if Debug:
             pt.showAll()
         if RankingRule == None:
             RankingRule = 'Copeland'
-        g = PreRankedOutrankingDigraph(pt,LowerClosed=False,
+        g = PreRankedOutrankingDigraph(self,LowerClosed=False,
                                        componentRankingRule=RankingRule,Threading=Threading,
                                        nbrOfCPUs=nbrOfCPUs)
-        actionsList = g.boostedRanking
+        if argActionsList == None:
+            actionsList = g.boostedRanking
+        else:
+            actionsList = argActionsList
+        na = len(actionsList)
         if Debug:
-            print('2',actionsList)
+            print('1',actionsList)
        
 ##        if RankingRule == 'Copeland':
 ##            if quantiles == None:
@@ -6440,7 +6439,7 @@ if __name__ == "__main__":
 ##    qsrbc.showSorting()
 ##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
 ##    t.showHTMLPerformanceHeatmap(Threading=False,RankingRule=None,Correlations=True,ndigits=0)
-    t.showHTMLPerformanceHeatmap(criteriaList=list(t.criteria.keys()),Threading=False,RankingRule=None,
+    t.showHTMLPerformanceHeatmap(actionsList=list(t.actions.keys())[:20],criteriaList=list(t.criteria.keys()),Threading=False,RankingRule=None,
                                  Correlations=True,ndigits=0,
                                  Debug=False)
 ##    t.showHTMLPerformanceQuantiles(Sorted=False)
