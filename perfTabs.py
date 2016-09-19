@@ -2021,6 +2021,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                    strategy='average',
                                    Correlations=False,
                                    Threading=False,
+                                   nbrOfCPUs=1,
                                    Debug=False):
         """
         shows the html heatmap version of the performance tableau in a browser window.
@@ -2031,8 +2032,8 @@ The performance evaluations of each decision alternative on each criterion are g
         if pageTitle == None:
             pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
             
-        fo.write(self.htmlPerformanceHeatmap(criteriaList=criteriaList,
-                                             actionsList=actionsList,
+        fo.write(self.htmlPerformanceHeatmap(argCriteriaList=criteriaList,
+                                             argActionsList=actionsList,
                                              RankingRule=RankingRule,
                                              quantiles=quantiles,
                                              strategy=strategy,
@@ -2041,13 +2042,14 @@ The performance evaluations of each decision alternative on each criterion are g
                                              pageTitle=pageTitle,
                                              Correlations=Correlations,
                                              Threading=Threading,
+                                             nbrOfCPUs=1,
                                              Debug=Debug))
         fo.close()
         url = 'file://'+fileName
         webbrowser.open_new(url)
 
-    def htmlPerformanceHeatmap(self,criteriaList=None,
-                               actionsList=None,
+    def htmlPerformanceHeatmap(self,argCriteriaList=None,
+                               argActionsList=None,
                                RankingRule='Copeland',
                                quantiles=None,
                                strategy='average',
@@ -2057,6 +2059,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                pageTitle='Performance Heatmap',
                                Correlations=False,
                                Threading=False,
+                               nbrOfCPUs=1,
                                Debug=False):
         """
         Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
@@ -2116,53 +2119,72 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</style>\n'
         html += '</head>\n<body>\n'
         html += '<h2>%s</h2>\n' % pageTitle
-        if actionsList == None:
-            actionsList = [x for x in self.actions]
-        na = len(actionsList)
-        if RankingRule == 'Copeland':
-            if quantiles == None:
-                quantiles = na
-            from outrankingDigraphs import BipolarOutrankingDigraph
-            from linearOrders import CopelandOrder
-            g = BipolarOutrankingDigraph(self,actionsSubset=actionsList,Normalized=True)
-            #actionsList = g.computeNetFlowsRanking()
-            cop = CopelandOrder(g)
-            actionsList = cop.computeRanking()
-        if RankingRule == 'NetFlows':
-            if quantiles == None:
-                quantiles = na
-            from outrankingDigraphs import BipolarOutrankingDigraph
-            from linearOrders import NetFlowsOrder
-            g = BipolarOutrankingDigraph(self,actionsSubset=actionsList,Normalized=True)
-            actionsList = g.computeNetFlowsRanking()
-        
+        if argActionsList == None:
+            argActionsList = [x for x in self.actions]
+        na = len(argActionsList)
         if Debug:
-            print('1',actionsList)
+            print('1',argActionsList)
+        
+        from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
+        if argCriteriaList == None:
+            argCriteriaList = list(self.criteria.keys())
+            criteriaList = None
+        else:
+            criteriaList = argCriteriaList
+        pt = PartialPerformanceTableau(self,actionsSubset=argActionsList,criteriaSubset=argCriteriaList)
+        if Debug:
+            pt.showAll()
+        if RankingRule == None:
+            RankingRule = 'Copeland'
+        g = PreRankedOutrankingDigraph(pt,LowerClosed=False,
+                                       componentRankingRule=RankingRule,Threading=Threading,
+                                       nbrOfCPUs=nbrOfCPUs)
+        actionsList = g.boostedRanking
+        if Debug:
+            print('2',actionsList)
+       
+##        if RankingRule == 'Copeland':
+##            if quantiles == None:
+##                quantiles = na
+##            from outrankingDigraphs import BipolarOutrankingDigraph
+##            from linearOrders import CopelandOrder
+##            g = BipolarOutrankingDigraph(self,actionsSubset=actionsList,Normalized=True)
+##            #actionsList = g.computeNetFlowsRanking()
+##            cop = CopelandOrder(g)
+##            actionsList = cop.computeRanking()
+##        if RankingRule == 'NetFlows':
+##            if quantiles == None:
+##                quantiles = na
+##            from outrankingDigraphs import BipolarOutrankingDigraph
+##            from linearOrders import NetFlowsOrder
+##            g = BipolarOutrankingDigraph(self,actionsSubset=actionsList,Normalized=True)
+##            actionsList = g.computeNetFlowsRanking()
+        
 
         criteria = self.criteria
         if criteriaList == None:
             if Correlations:
-                if RankingRule != None:       
-                    criteriaCorrelation =\
+                criteriaCorrelation =\
                         g.computeMarginalVersusGlobalRankingCorrelations(\
-                                actionsList,ValuedCorrelation=True,Threading=Threading)
-                    criteriaList = [c[1] for c in criteriaCorrelation]
-                else:
-                    criteriaList = list(criteria.keys())
-                    criteriaList.sort()
-                    criteriaWeightsList = [(-criteria[g]['weight'],g) for g in criteriaList]
-                    criteriaWeightsList.sort(reverse=False)
-                    criteriaList = [g[1] for g in criteriaWeightsList]
-                    criteriaCorrelation = None    
+                                actionsList,ValuedCorrelation=True,Threading=Threading,
+                                nbrCores=nbrOfCPUs)
+                criteriaList = [c[1] for c in criteriaCorrelation]
             else:
                 criteriaList = list(criteria.keys())
                 criteriaList.sort()
                 criteriaWeightsList = [(-criteria[g]['weight'],g) for g in criteriaList]
                 criteriaWeightsList.sort(reverse=False)
                 criteriaList = [g[1] for g in criteriaWeightsList]
-                criteriaCorrelation = None    
+                criteriaCorrelation = None
         else:
-            criteriaCorrelation = None
+            criteriaList = list(criteria.keys())
+            if Correlations:
+                criteriaCorrelation =\
+                        g.computeMarginalVersusGlobalRankingCorrelations(\
+                                actionsList,ValuedCorrelation=True,Threading=Threading,
+                                nbrCores=nbrOfCPUs)
+            else:
+                criteriaCorrelation = None
             
         quantileColor={}
         for x in actionsList:
@@ -6418,7 +6440,9 @@ if __name__ == "__main__":
 ##    qsrbc.showSorting()
 ##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
 ##    t.showHTMLPerformanceHeatmap(Threading=False,RankingRule=None,Correlations=True,ndigits=0)
-    t.showHTMLPerformanceHeatmap(Threading=False,RankingRule='NetFlows',Correlations=True,ndigits=0)
+    t.showHTMLPerformanceHeatmap(criteriaList=list(t.criteria.keys()),Threading=False,RankingRule=None,
+                                 Correlations=True,ndigits=0,
+                                 Debug=False)
 ##    t.showHTMLPerformanceQuantiles(Sorted=False)
 ##    t.showHTMLPerformanceQuantiles(Sorted=True)
 ##    t.showAllQuantiles(Sorted=True)

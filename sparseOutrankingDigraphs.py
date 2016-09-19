@@ -844,12 +844,12 @@ def _decompose(i, nc,tempDirName,componentRankingRule):
                     WithVetoCounts=False,
                     CopyPerfTab=False,
                     Threading=False)
-    if componentRankingRule == 'Copeland':
-        cop = CopelandOrder(pg)
-        pg.ranking = cop.copelandRanking
-    elif componentRankingRule == 'NetFlows':
+    if componentRankingRule == 'NetFlows':
         nf = NetFlowsOrder(pg)
         pg.ranking = nf.netFlowsRanking
+    else:
+        cop = CopelandOrder(pg)
+        pg.ranking = cop.copelandRanking
     pg.__dict__.pop('criteria')
     pg.__dict__.pop('evaluation')
     pg.__class__ = Digraph
