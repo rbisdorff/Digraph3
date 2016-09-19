@@ -18,7 +18,9 @@
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 #######################
-
+"""
+Test
+"""
 from outrankingDigraphs import *
 from sortingDigraphs import *
 from time import time
@@ -1557,7 +1559,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         """
         Renders the order of a decision action in a given ordering
 
-        If orderinging == None, the self.boostedOrdering attribute is used.
+        If ordering == None, the self.boostedOrder attribute is used.
         """
         if ordering == None:
             ordering = self.boostedOrder

@@ -3595,7 +3595,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4358,7 +4358,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -6485,6 +6485,7 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 </div>
 <div class="section" id="module-sparseOutrankingDigraphs">
 <span id="sparseoutrankingdigraphs-module"></span><span id="sparseoutrankingdigraphs-label"></span><h2>sparseOutrankingDigraphs module<a class="headerlink" href="#module-sparseOutrankingDigraphs" title="Permalink to this headline">¶</a></h2>
+<p>Test</p>
 <dl class="class">
 <dt id="sparseOutrankingDigraphs.PreRankedOutrankingDigraph">
 <em class="property">class </em><code class="descclassname">sparseOutrankingDigraphs.</code><code class="descname">PreRankedOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>componentRankingRule='Copeland'</em>, <em>minimalComponentSize=None</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrOfCPUs=1</em>, <em>nbrOfThreads=1</em>, <em>save2File=None</em>, <em>CopyPerfTab=True</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
@@ -6502,7 +6503,7 @@ for instance quantiles = 250 may give good results for a digraph of order 25000.
 <dt id="sparseOutrankingDigraphs.PreRankedOutrankingDigraph.actionOrder">
 <code class="descname">actionOrder</code><span class="sig-paren">(</span><em>action</em>, <em>ordering=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.actionOrder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the order of a decision action in a given ordering</p>
-<p>If orderinging == None, the self.boostedOrdering attribute is used.</p>
+<p>If ordering == None, the self.boostedOrder attribute is used.</p>
 </dd></dl>
 
 <dl class="method">
