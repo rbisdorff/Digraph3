@@ -279,10 +279,10 @@ def testHTMPerformanceHeatmap():
                                    Debug=False)
     actionsList = [x for x in t.actions.keys()]
     criteriaList = [g for g in t.criteria.keys()]
-    print(t.htmlPerformanceHeatmap(actionsList=actionsList,
-                                   criteriaList=criteriaList,
+    print(t.htmlPerformanceHeatmap(argActionsList=actionsList,
+                                   argCriteriaList=criteriaList,
                                    colorLevels=9,
                                    Correlations=True,
                                    ndigits=4,
-                                   Debug=True))
+                                   Debug=False))
     

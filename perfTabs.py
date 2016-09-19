@@ -2016,6 +2016,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                    colorLevels=7,
                                    pageTitle=None,
                                    ndigits=2,
+                                   SparseModel=True,
                                    RankingRule='Copeland',
                                    quantiles=None,
                                    strategy='average',
@@ -2034,6 +2035,7 @@ The performance evaluations of each decision alternative on each criterion are g
             
         fo.write(self.htmlPerformanceHeatmap(argCriteriaList=criteriaList,
                                              argActionsList=actionsList,
+                                             SparseModel=SparseModel,
                                              RankingRule=RankingRule,
                                              quantiles=quantiles,
                                              strategy=strategy,
@@ -2050,6 +2052,7 @@ The performance evaluations of each decision alternative on each criterion are g
 
     def htmlPerformanceHeatmap(self,argCriteriaList=None,
                                argActionsList=None,
+                               SparseModel=True,
                                RankingRule='Copeland',
                                quantiles=None,
                                strategy='average',
@@ -2126,39 +2129,43 @@ The performance evaluations of each decision alternative on each criterion are g
             criteriaList = None
         else:
             criteriaList = argCriteriaList
-        #pt = PartialPerformanceTableau(self,actionsSubset=argActionsList,criteriaSubset=argCriteriaList)
-        if Debug:
-            pt.showAll()
+
         if RankingRule == None:
             RankingRule = 'Copeland'
-        g = PreRankedOutrankingDigraph(self,LowerClosed=False,
+        na = len(self.actions)
+        if SparseModel:
+            if na < 100:
+                q = na
+            else:
+                q = None
+            g = PreRankedOutrankingDigraph(self,quantiles=q,LowerClosed=False,
                                        componentRankingRule=RankingRule,Threading=Threading,
                                        nbrOfCPUs=nbrOfCPUs)
-        if argActionsList == None:
-            actionsList = g.boostedRanking
-        else:
-            actionsList = argActionsList
-        na = len(actionsList)
+            if argActionsList == None:
+                actionsList = g.boostedRanking
+            else:
+                actionsList = argActionsList
+        else: # standard outranking model
+            if RankingRule == 'NetFlows':
+                if quantiles == None:
+                    quantiles = na
+                from outrankingDigraphs import BipolarOutrankingDigraph
+                from linearOrders import NetFlowsOrder
+                g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
+                actionsList = g.computeNetFlowsRanking()
+            else:
+                if quantiles == None:
+                    quantiles = na
+                from outrankingDigraphs import BipolarOutrankingDigraph
+                from linearOrders import CopelandOrder
+                g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
+                #actionsList = g.computeNetFlowsRanking()
+                cop = CopelandOrder(g)
+                actionsList = cop.computeRanking()
+
         if Debug:
             print('1',actionsList)
        
-##        if RankingRule == 'Copeland':
-##            if quantiles == None:
-##                quantiles = na
-##            from outrankingDigraphs import BipolarOutrankingDigraph
-##            from linearOrders import CopelandOrder
-##            g = BipolarOutrankingDigraph(self,actionsSubset=actionsList,Normalized=True)
-##            #actionsList = g.computeNetFlowsRanking()
-##            cop = CopelandOrder(g)
-##            actionsList = cop.computeRanking()
-##        if RankingRule == 'NetFlows':
-##            if quantiles == None:
-##                quantiles = na
-##            from outrankingDigraphs import BipolarOutrankingDigraph
-##            from linearOrders import NetFlowsOrder
-##            g = BipolarOutrankingDigraph(self,actionsSubset=actionsList,Normalized=True)
-##            actionsList = g.computeNetFlowsRanking()
-        
 
         criteria = self.criteria
         if criteriaList == None:
@@ -6380,7 +6387,7 @@ if __name__ == "__main__":
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
     t = RandomCBPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=30,
+                                   numberOfActions=7,
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
                                    Debug=False,
@@ -6438,9 +6445,10 @@ if __name__ == "__main__":
 ##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=False,PrefThresholds=False,Threading=False)
 ##    qsrbc.showSorting()
 ##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
-##    t.showHTMLPerformanceHeatmap(Threading=False,RankingRule=None,Correlations=True,ndigits=0)
-    t.showHTMLPerformanceHeatmap(actionsList=list(t.actions.keys())[:20],criteriaList=list(t.criteria.keys()),Threading=False,RankingRule=None,
-                                 Correlations=True,ndigits=0,
+    t.showHTMLPerformanceHeatmap(quantiles=25,Threading=False,RankingRule=None,Correlations=True,ndigits=0)
+    t.showHTMLPerformanceHeatmap(actionsList=list(t.actions),criteriaList=list(t.criteria.keys()),
+                                 Threading=False,RankingRule=None,SparseModel=False,
+                                Correlations=True,ndigits=0,
                                  Debug=False)
 ##    t.showHTMLPerformanceQuantiles(Sorted=False)
 ##    t.showHTMLPerformanceQuantiles(Sorted=True)
