@@ -2017,6 +2017,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                    pageTitle=None,
                                    ndigits=2,
                                    SparseModel=True,
+                                   minimalComponentSize=1,
                                    RankingRule='Copeland',
                                    quantiles=None,
                                    strategy='average',
@@ -2036,6 +2037,7 @@ The performance evaluations of each decision alternative on each criterion are g
         fo.write(self.htmlPerformanceHeatmap(argCriteriaList=criteriaList,
                                              argActionsList=actionsList,
                                              SparseModel=SparseModel,
+                                             minimalComponentSize=minimalComponentSize,
                                              RankingRule=RankingRule,
                                              quantiles=quantiles,
                                              strategy=strategy,
@@ -2053,6 +2055,7 @@ The performance evaluations of each decision alternative on each criterion are g
     def htmlPerformanceHeatmap(self,argCriteriaList=None,
                                argActionsList=None,
                                SparseModel=True,
+                               minimalComponentSize=1,
                                RankingRule='Copeland',
                                quantiles=None,
                                strategy='average',
@@ -2139,6 +2142,7 @@ The performance evaluations of each decision alternative on each criterion are g
             else:
                 q = None
             g = PreRankedOutrankingDigraph(self,quantiles=q,LowerClosed=False,
+                                           minimalComponentSize=minimalComponentSize,
                                        componentRankingRule=RankingRule,Threading=Threading,
                                        nbrOfCPUs=nbrOfCPUs)
             if argActionsList == None:
@@ -6445,11 +6449,12 @@ if __name__ == "__main__":
 ##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=False,PrefThresholds=False,Threading=False)
 ##    qsrbc.showSorting()
 ##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
-    t.showHTMLPerformanceHeatmap(quantiles=25,Threading=False,RankingRule=None,Correlations=True,ndigits=0)
-    t.showHTMLPerformanceHeatmap(actionsList=list(t.actions),criteriaList=list(t.criteria.keys()),
-                                 Threading=False,RankingRule=None,SparseModel=False,
-                                Correlations=True,ndigits=0,
-                                 Debug=False)
+    t.showHTMLPerformanceHeatmap(quantiles=11,Threading=False,RankingRule=None,
+                                 Correlations=True,ndigits=0)
+##    t.showHTMLPerformanceHeatmap(actionsList=list(t.actions),criteriaList=list(t.criteria.keys()),
+##                                 Threading=False,RankingRule=None,SparseModel=False,
+##                                Correlations=True,ndigits=0,
+##                                 Debug=False)
 ##    t.showHTMLPerformanceQuantiles(Sorted=False)
 ##    t.showHTMLPerformanceQuantiles(Sorted=True)
 ##    t.showAllQuantiles(Sorted=True)
