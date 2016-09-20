@@ -4156,7 +4156,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 <p>The best decile (]80%-90%]) gathers decision alternatives <em>49</em>, <em>10</em>, and <em>52</em>. Worst decile (]10%-20%]) gathers alternatives <em>9</em>, <em>59</em>, and <em>23</em>.</p>
-<p>Each one of these 20 ordered components may now be locally ranked now by using a suitable ranking rules. Best operational results, both in run times and quality, are more or less equally given with the Copeland and the NetFlows rules. The eventually obtained linear ordering is the following:</p>
+<p>Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the Copeland and the NetFlows rules. The eventually obtained linear ordering (from the worst to best) is the following:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -4176,7 +4176,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">41, 70, 79, 86, 84, 18, 45, 49, 10, 52]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Alternative <em>52&#8221; appears first ranked whereas alternative *59</em> is last ranked. The quality of this ranking result may be assessed by computing its ordinal correlation with the corresponding standard outranking digraph:</p>
+<p>Alternative <em>52</em> appears first ranked, whereas alternative <em>59</em> is last ranked. The quality of this ranking result may be assessed by computing its ordinal correlation with the corresponding standard outranking relation:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">bg</span><span class="o">.</span><span class="n">boostedOrder</span><span class="p">)</span>
 <span class="go">{&#39;correlation&#39;: 0.7485,</span>

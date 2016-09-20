@@ -2414,7 +2414,7 @@ The total run time of the :py:class:`PreRankedOutrankingDigraph` constructor (se
 
 The best decile (]80%-90%]) gathers decision alternatives *49*, *10*, and *52*. Worst decile (]10%-20%]) gathers alternatives *9*, *59*, and *23*.
 
-Each one of these 20 ordered components may now be locally ranked now by using a suitable ranking rules. Best operational results, both in run times and quality, are more or less equally given with the Copeland and the NetFlows rules. The eventually obtained linear ordering is the following::
+Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the Copeland and the NetFlows rules. The eventually obtained linear ordering (from the worst to best) is the following::
   
     >>> print(bg.boostedOrder)
     [59, 9, 23, 17, 11, 98, 26, 81, 40, 64, 3, 74,
@@ -2426,7 +2426,7 @@ Each one of these 20 ordered components may now be locally ranked now by using a
     95, 35, 80, 37, 7, 12, 68, 2, 90, 55, 30, 75, 8, 44,
     41, 70, 79, 86, 84, 18, 45, 49, 10, 52]
 
-Alternative *52" appears first ranked whereas alternative *59* is last ranked. The quality of this ranking result may be assessed by computing its ordinal correlation with the corresponding standard outranking digraph::
+Alternative *52* appears first ranked, whereas alternative *59* is last ranked. The quality of this ranking result may be assessed by computing its ordinal correlation with the corresponding standard outranking relation::
 
     >>> g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=True)
     >>> g.computeOrderCorrelation(bg.boostedOrder)
