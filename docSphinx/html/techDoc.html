@@ -217,7 +217,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1294,7 +1294,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2267,7 +2267,7 @@ called dg1 and dg2.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2298,7 +2298,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -3497,23 +3497,27 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 </div>
 <dl class="docutils">
 <dt>With the help of the <code class="xref py py-class docutils literal"><span class="pre">perfTabs.RandomPerformanceTableau</span></code> class let us generate for illustration a random performance tableau concerning 7 decision actions or alternatives denoted <em>a01</em>, <em>a02</em>, ..., <em>a07</em>:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
-<span class="go">                                  numberOfCriteria=7,</span>
-<span class="go">                                  weightDistribution=&#39;equisignificant&#39;)</span>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
-<span class="go">*----- show decision actions --------------*</span>
-<span class="go">key:  a01</span>
-<span class="go">name:       random decision action</span>
-<span class="go">comment:    RandomPerformanceTableau() generated.</span>
-<span class="go">key:  a02</span>
-<span class="go">name:       random decision action</span>
-<span class="go">comment:    RandomPerformanceTableau() generated.</span>
-<span class="gp">...</span>
-<span class="gp">...</span>
-<span class="go">key:  a07</span>
-<span class="go">name:       random decision action</span>
-<span class="go">comment:    RandomPerformanceTableau() generated.</span>
+<span class="go">    *----- show decision action --------------*</span>
+<span class="go">    key:  a01</span>
+<span class="go">      short name: a01</span>
+<span class="go">      name:       random decision action</span>
+<span class="go">      comment:    RandomPerformanceTableau() generated.</span>
+<span class="go">    key:  a02</span>
+<span class="go">      short name: a02</span>
+<span class="go">      name:       random decision action</span>
+<span class="go">      comment:    RandomPerformanceTableau() generated.</span>
+<span class="go">    key:  a03</span>
+<span class="go">      short name: a03</span>
+<span class="go">      name:       random decision action</span>
+<span class="go">      comment:    RandomPerformanceTableau() generated.</span>
+<span class="go">    ...</span>
+<span class="go">    ...</span>
+<span class="go">    key:  a07</span>
+<span class="go">    name:       random decision action</span>
+<span class="go">    comment:    RandomPerformanceTableau() generated.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
 </pre></div>
 </div>
@@ -3521,45 +3525,57 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 <dt>In this example we consider furthermore a family of seven equisignificant cardinal criteria functions <em>g01</em>, <em>g02</em>, ..., <em>g07</em>, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation&#8217;s uncertainty and imprecision, each criterion function <em>g1</em> to <em>g7</em> admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations: </dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">(</span><span class="n">IntegerWeights</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go">    *----  criteria -----*</span>
-<span class="go">    g01 &#39;digraphs.RandomPerformanceTableau() instance&#39;</span>
-<span class="go">      Scale = [0.0, 100.0]</span>
-<span class="go">      Weight = 1</span>
+<span class="go">    g1 &#39;RandomPerformanceTableau() instance&#39;</span>
+<span class="go">      Scale = (0.0, 100.0)</span>
+<span class="go">      Weight = 1 </span>
+<span class="go">      Threshold ind : 10.00 + 0.00x ; percentile:  0.20</span>
+<span class="go">      Threshold veto : 80.00 + 0.00x ; percentile:  0.93</span>
 <span class="go">      Threshold pref : 20.00 + 0.00x ; percentile:  0.28</span>
-<span class="go">      Threshold ind : 10.00 + 0.00x ; percentile:  0.095</span>
+<span class="go">    g2 &#39;RandomPerformanceTableau() instance&#39;</span>
+<span class="go">      Scale = (0.0, 100.0)</span>
+<span class="go">      Weight = 1 </span>
+<span class="go">      Threshold ind : 10.00 + 0.00x ; percentile:  0.18</span>
 <span class="go">      Threshold veto : 80.00 + 0.00x ; percentile:  1.0</span>
-<span class="go">    g02 &#39;digraphs.RandomPerformanceTableau() instance&#39;</span>
-<span class="go">      Scale = [0.0, 100.0]</span>
-<span class="go">      Weight = 1</span>
-<span class="go">      Threshold pref : 20.00 + 0.00x ; percentile:  0.33</span>
-<span class="go">      Threshold ind : 10.00 + 0.00x ; percentile:  0.19</span>
-<span class="go">      Threshold veto : 80.00 + 0.00x ; percentile:  0.95</span>
+<span class="go">      Threshold pref : 20.00 + 0.00x ; percentile:  0.37</span>
+<span class="go">    g3 &#39;RandomPerformanceTableau() instance&#39;</span>
+<span class="go">      Scale = (0.0, 100.0)</span>
+<span class="go">      Weight = 1 </span>
+<span class="go">      Threshold ind : 10.00 + 0.00x ; percentile:  0.15</span>
+<span class="go">      Threshold veto : 80.00 + 0.00x ; percentile:  0.96</span>
+<span class="go">      Threshold pref : 20.00 + 0.00x ; percentile:  0.29</span>
 <span class="go">    ...</span>
 <span class="go">    ...</span>
-<span class="go">    g07 &#39;digraphs.RandomPerformanceTableau() instance&#39;</span>
-<span class="go">      Scale = [0.0, 100.0]</span>
-<span class="go">      Weight = 1</span>
-<span class="go">      Threshold pref : 20.00 + 0.00x ; percentile:  0.476</span>
-<span class="go">      Threshold ind : 10.00 + 0.00x ; percentile:  0.238</span>
-<span class="go">      Threshold veto : 80.00 + 0.00x ; percentile:  1.0</span>
+<span class="go">    g7 &#39;RandomPerformanceTableau() instance&#39;</span>
+<span class="go">      Scale = (0.0, 100.0)</span>
+<span class="go">      Weight = 1 </span>
+<span class="go">      Threshold ind : 10.00 + 0.00x ; percentile:  0.17</span>
+<span class="go">      Threshold veto : 80.00 + 0.00x ; percentile:  0.97</span>
+<span class="go">      Threshold pref : 20.00 + 0.00x ; percentile:  0.37</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
 </pre></div>
 </div>
 </dd>
 <dt>The performance evaluations of each decision alternative on each criterion are gathered in a <em>performance tableau</em>:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
-<span class="go">*----  performance tableau -----*</span>
-<span class="go">criteria | weights | &#39;a01&#39;  &#39;a02&#39;  &#39;a03&#39;  &#39;a04&#39;  &#39;a05&#39;  &#39;a06&#39;  &#39;a07&#39;</span>
-<span class="go">---------|-----------------------------------------------------------</span>
-<span class="go">  &#39;g01&#39;  |    1    | 94.92  89.11  98.94  37.82  66.02   8.91  71.08</span>
-<span class="go">  &#39;g02&#39;  |    1    | 82.98   6.50  80.24  53.94   8.21  68.14  83.05</span>
-<span class="go">  &#39;g03&#39;  |    1    | 89.41  41.42  53.84  61.69  67.29  78.18   3.08</span>
-<span class="go">  &#39;g04&#39;  |    1    | 61.75   0.16  92.84  49.95  18.95  57.74  59.93</span>
-<span class="go">  &#39;g05&#39;  |    1    |  8.65  58.28  91.99  51.35  70.00  89.79  23.59</span>
-<span class="go">  &#39;g06&#39;  |    1    | 22.96  69.02  21.35  91.37  17.07  41.97   8.31</span>
-<span class="go">  &#39;g07&#39;  |    1    | 19.25  56.16  49.67  24.09  50.38  18.83  33.08</span>
+<span class="go">    *----  performance tableau -----*</span>
+<span class="go">    criteria | weights |    &#39;a01&#39;     &#39;a02&#39;     &#39;a03&#39;   ...     &#39;a12&#39;    &#39;a13&#39;   </span>
+<span class="go">    ----------|---------------------------------------------------------------------</span>
+<span class="go">       &#39;g1&#39;   |      1       |   14.57   45.49   77.08    ...   93.30   94.71  </span>
+<span class="go">       &#39;g2&#39;   |      1       |   33.54   30.94   76.80    ...   55.54   90.12  </span>
+<span class="go">       &#39;g3&#39;   |      1       |   81.80   16.04   64.85    ...   23.72   44.82  </span>
+<span class="go">       &#39;g4&#39;   |      1       |   63.78   90.23   12.66    ...  52.82   34.33  </span>
+<span class="go">       &#39;g5&#39;   |      1       |   85.42   36.30   48.36    ...   76.70   51.36  </span>
+<span class="go">       &#39;g6&#39;   |      1       |   49.35   58.27   14.72    ...   21.91   30.99  </span>
+<span class="go">       &#39;g7&#39;   |      1       |   62.12   65.08   74.87    ...   38.98   93.64  </span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
 </pre></div>
 </div>
+</dd>
+<dt>A more useful display is available in the default browser:</dt>
+<dd><div class="first highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="last reference internal image-reference" href="_images/perfTabsExample.png"><img alt="HTML heat map of the performance tableau" class="align-center" src="_images/perfTabsExample.png" style="width: 300px;" /></a>
 </dd>
 </dl>
 <dl class="method">
@@ -3595,7 +3611,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4385,7 +4401,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -6114,7 +6130,7 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 
 <dl class="class">
 <dt id="randomDigraphs.RandomGridDigraph">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.GridDigraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary randomly oriented Grid digraphs of dimension n time m

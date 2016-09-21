@@ -325,64 +325,81 @@ Structure::
                      ...}
 
 With the help of the :py:class:`perfTabs.RandomPerformanceTableau` class let us generate for illustration a random performance tableau concerning 7 decision actions or alternatives denoted *a01*, *a02*, ..., *a07*:
-       >>> from perfTabs import RandomPerformanceTableau
-       >>> rt = RandomPerformanceTableau(numberOfActions=7,
-                                         numberOfCriteria=7,
-                                         weightDistribution='equisignificant')
-       >>> rt.showActions()
-       *----- show decision actions --------------*
-       key:  a01
-       name:       random decision action
-       comment:    RandomPerformanceTableau() generated.
-       key:  a02
-       name:       random decision action
-       comment:    RandomPerformanceTableau() generated.
-       ...
-       ...
-       key:  a07
-       name:       random decision action
-       comment:    RandomPerformanceTableau() generated.
-       >>> ...
-       
+    >>> from randomPerfTabs import RandomPerformanceTableau
+    >>> rt = RandomPerformanceTableau(seed=100)
+    >>> rt.showActions()
+        *----- show decision action --------------*
+        key:  a01
+          short name: a01
+          name:       random decision action
+          comment:    RandomPerformanceTableau() generated.
+        key:  a02
+          short name: a02
+          name:       random decision action
+          comment:    RandomPerformanceTableau() generated.
+        key:  a03
+          short name: a03
+          name:       random decision action
+          comment:    RandomPerformanceTableau() generated.
+        ...
+        ...
+        key:  a07
+        name:       random decision action
+        comment:    RandomPerformanceTableau() generated.
+    >>> ...
+   
 In this example we consider furthermore a family of seven equisignificant cardinal criteria functions *g01*, *g02*, ..., *g07*, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation's uncertainty and imprecision, each criterion function *g1* to *g7* admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations: 
     >>> rt.showCriteria(IntegerWeights=True)
-	*----  criteria -----*
-	g01 'digraphs.RandomPerformanceTableau() instance'
-	  Scale = [0.0, 100.0]
-	  Weight = 1
-	  Threshold pref : 20.00 + 0.00x ; percentile:  0.28
-	  Threshold ind : 10.00 + 0.00x ; percentile:  0.095
-	  Threshold veto : 80.00 + 0.00x ; percentile:  1.0
-	g02 'digraphs.RandomPerformanceTableau() instance'
-	  Scale = [0.0, 100.0]
-	  Weight = 1
-	  Threshold pref : 20.00 + 0.00x ; percentile:  0.33
-	  Threshold ind : 10.00 + 0.00x ; percentile:  0.19
-	  Threshold veto : 80.00 + 0.00x ; percentile:  0.95
-	...
-	...
-	g07 'digraphs.RandomPerformanceTableau() instance'
-	  Scale = [0.0, 100.0]
-	  Weight = 1
-	  Threshold pref : 20.00 + 0.00x ; percentile:  0.476
-	  Threshold ind : 10.00 + 0.00x ; percentile:  0.238
-	  Threshold veto : 80.00 + 0.00x ; percentile:  1.0
+        *----  criteria -----*
+        g1 'RandomPerformanceTableau() instance'
+          Scale = (0.0, 100.0)
+          Weight = 1 
+          Threshold ind : 10.00 + 0.00x ; percentile:  0.20
+          Threshold veto : 80.00 + 0.00x ; percentile:  0.93
+          Threshold pref : 20.00 + 0.00x ; percentile:  0.28
+        g2 'RandomPerformanceTableau() instance'
+          Scale = (0.0, 100.0)
+          Weight = 1 
+          Threshold ind : 10.00 + 0.00x ; percentile:  0.18
+          Threshold veto : 80.00 + 0.00x ; percentile:  1.0
+          Threshold pref : 20.00 + 0.00x ; percentile:  0.37
+        g3 'RandomPerformanceTableau() instance'
+          Scale = (0.0, 100.0)
+          Weight = 1 
+          Threshold ind : 10.00 + 0.00x ; percentile:  0.15
+          Threshold veto : 80.00 + 0.00x ; percentile:  0.96
+          Threshold pref : 20.00 + 0.00x ; percentile:  0.29
+        ...
+        ...
+        g7 'RandomPerformanceTableau() instance'
+          Scale = (0.0, 100.0)
+          Weight = 1 
+          Threshold ind : 10.00 + 0.00x ; percentile:  0.17
+          Threshold veto : 80.00 + 0.00x ; percentile:  0.97
+          Threshold pref : 20.00 + 0.00x ; percentile:  0.37
     >>> ...
 
 The performance evaluations of each decision alternative on each criterion are gathered in a *performance tableau*:
     >>> rt.showPerformanceTableau()
-    *----  performance tableau -----*
-    criteria | weights | 'a01'  'a02'  'a03'  'a04'  'a05'  'a06'  'a07'
-    ---------|-----------------------------------------------------------
-      'g01'  |    1    | 94.92  89.11  98.94  37.82  66.02   8.91  71.08
-      'g02'  |    1    | 82.98   6.50  80.24  53.94   8.21  68.14  83.05
-      'g03'  |    1    | 89.41  41.42  53.84  61.69  67.29  78.18   3.08
-      'g04'  |    1    | 61.75   0.16  92.84  49.95  18.95  57.74  59.93
-      'g05'  |    1    |  8.65  58.28  91.99  51.35  70.00  89.79  23.59
-      'g06'  |    1    | 22.96  69.02  21.35  91.37  17.07  41.97   8.31
-      'g07'  |    1    | 19.25  56.16  49.67  24.09  50.38  18.83  33.08
+        *----  performance tableau -----*
+        criteria | weights |    'a01'     'a02'     'a03'   ...     'a12'    'a13'   
+        ----------|---------------------------------------------------------------------
+           'g1'   |      1       |   14.57   45.49   77.08    ...   93.30   94.71  
+           'g2'   |      1       |   33.54   30.94   76.80    ...   55.54   90.12  
+           'g3'   |      1       |   81.80   16.04   64.85    ...   23.72   44.82  
+           'g4'   |      1       |   63.78   90.23   12.66    ...  52.82   34.33  
+           'g5'   |      1       |   85.42   36.30   48.36    ...   76.70   51.36  
+           'g6'   |      1       |   49.35   58.27   14.72    ...   21.91   30.99  
+           'g7'   |      1       |   62.12   65.08   74.87    ...   38.98   93.64  
     >>> ...
 
+A more useful display is available in the default browser:
+    >>> rt.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True)
+
+    .. image:: perfTabsExample.png
+       :alt: HTML heat map of the performance tableau
+       :width: 300 px
+       :align: center
     """
     def __init__(self,filePerfTab=None,isEmpty=False):
         from decimal import Decimal
@@ -507,7 +524,7 @@ The performance evaluations of each decision alternative on each criterion are g
         print('*----- show decision action --------------*')
         actions = self.actions
         if Alphabetic:
-            actionsKeys = [x for x in dict.keys(actions)]
+            actionsKeys = [x for x in self.actions.keys()]
             actionsKeys.sort()
             for x in actionsKeys:
                 print('key: ',x)
@@ -522,7 +539,7 @@ The performance evaluations of each decision alternative on each criterion are g
                     pass
                 print()
         else:
-            for x in dict.keys(actions):
+            for x in self.actions:
                 print('key: ',x)
                 try:
                     print('  short name:',actions[x]['shortName'])
@@ -764,7 +781,7 @@ The performance evaluations of each decision alternative on each criterion are g
                         pass
                     print()
         else:
-            criteriaList = list(dict.keys(criteria))
+            criteriaList = list(self.criteria.keys())
             if Alphabetic:
                 criteriaList.sort()
             for g in criteriaList:
