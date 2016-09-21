@@ -398,7 +398,7 @@ A more useful display is available in the default browser:
 
     .. image:: perfTabsExample.png
        :alt: HTML heat map of the performance tableau
-       :width: 300 px
+       :width: 600 px
        :align: center
     """
     def __init__(self,filePerfTab=None,isEmpty=False):
