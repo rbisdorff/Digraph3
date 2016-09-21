@@ -2095,7 +2095,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                Debug=False):
         """
         Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
-        actions x criteria in html format.
+        actions x criteria in html format. See the corresponding *showHTMLPerformanceHeatMap* method.
         """
         from decimal import Decimal
         from digraphs import flatten
