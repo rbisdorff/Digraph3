@@ -3595,7 +3595,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3887,8 +3887,35 @@ the values observed in the performance Tableau.</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap">
-<code class="descname">showHTMLPerformanceHeatmap</code><span class="sig-paren">(</span><em>actionsList=None</em>, <em>criteriaList=None</em>, <em>colorLevels=7</em>, <em>pageTitle=None</em>, <em>ndigits=2</em>, <em>SparseModel=True</em>, <em>minimalComponentSize=1</em>, <em>RankingRule='Copeland'</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showHTMLPerformanceHeatmap</code><span class="sig-paren">(</span><em>actionsList=None</em>, <em>criteriaList=None</em>, <em>colorLevels=7</em>, <em>pageTitle=None</em>, <em>ndigits=2</em>, <em>SparseModel=True</em>, <em>minimalComponentSize=1</em>, <em>RankingRule='Copeland'</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>shows the html heatmap version of the performance tableau in a browser window.</p>
+<p><strong>Parameters</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>actionsList</em> and <em>criteriaList</em>, if provided,  give the possibility to show partial performance tableaux.</li>
+<li>ndigits = 0 may be used to show integer evaluation values.</li>
+<li>If no actionsList is provided, the decision actions are ordered from the best to the worst. This
+ranking is obtained by default with a sparse PreRankedOutrankingDigraph construction.
+A standard BipolarOutrankingDigraph is used instead when the SparseModel flag is put to False.</li>
+<li>The minimalComponentSize allows to control the fill rate of the pre-ranked model.
+If <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
+in fact equivalent to the standard model.</li>
+<li>It may interesting in some cases to use <em>RankingRule</em> = &#8216;NetFlows&#8217;.</li>
+<li>Quantiles used for the pre-ranked decomposition are put by default to <em>n</em>
+(the number of decision alternatives) for n &lt; 50. For larger cardinalities up to 1000, quantiles = n/10.
+For bigger performance tableaux the quantiles parameter may be set to a much lower value
+not exceeding usually 1000.</li>
+<li>The pre-ranking may be obtained with three ordering strategies for the
+quantiles equivalence classes: &#8216;average&#8217; (default), &#8216;optimistic&#8217; or  &#8216;pessimistic&#8217;.</li>
+<li>With Correlations=True and criteriaList = None, the criteria will be presented in decreasing
+order of the correlations between the marginal criterion ranking and the ranking used for
+presenting the ecision alternatives.</li>
+<li>For large performance Tableaux, multiprocessing techniques may be used by setting
+Threading = True in order to speed up the computations; especially when Correlations is set to True.</li>
+<li>By default, the number of available cores, will be detected. It may be wise to indicate the number of
+effective singled threaded cores, when hyperthreading is present.</li>
+</ul>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
@@ -4358,7 +4385,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">

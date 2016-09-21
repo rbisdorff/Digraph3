@@ -2023,10 +2023,36 @@ The performance evaluations of each decision alternative on each criterion are g
                                    strategy='average',
                                    Correlations=False,
                                    Threading=False,
-                                   nbrOfCPUs=1,
+                                   nbrOfCPUs=None,
                                    Debug=False):
         """
         shows the html heatmap version of the performance tableau in a browser window.
+
+        **Parameters**:
+
+              - *actionsList* and *criteriaList*, if provided,  give the possibility to show partial performance tableaux.
+              - ndigits = 0 may be used to show integer evaluation values.
+              - If no actionsList is provided, the decision actions are ordered from the best to the worst. This
+                ranking is obtained by default with a sparse PreRankedOutrankingDigraph construction.
+                A standard BipolarOutrankingDigraph is used instead when the SparseModel flag is put to False.
+              - The minimalComponentSize allows to control the fill rate of the pre-ranked model.
+                If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be
+                in fact equivalent to the standard model.
+              - It may interesting in some cases to use *RankingRule* = 'NetFlows'.
+              - Quantiles used for the pre-ranked decomposition are put by default to *n*
+                (the number of decision alternatives) for n < 50. For larger cardinalities up to 1000, quantiles = n/10.
+                For bigger performance tableaux the quantiles parameter may be set to a much lower value
+                not exceeding usually 1000.
+              - The pre-ranking may be obtained with three ordering strategies for the
+                quantiles equivalence classes: 'average' (default), 'optimistic' or  'pessimistic'.
+              - With Correlations=True and criteriaList = None, the criteria will be presented in decreasing
+                order of the correlations between the marginal criterion ranking and the ranking used for
+                presenting the ecision alternatives.
+              - For large performance Tableaux, multiprocessing techniques may be used by setting
+                Threading = True in order to speed up the computations; especially when Correlations is set to True.
+              - By default, the number of available cores, will be detected. It may be wise to indicate the number of
+                effective singled threaded cores, when hyperthreading is present.
+        
         """
         import webbrowser
         fileName = '/tmp/performanceHeatmap.html'
