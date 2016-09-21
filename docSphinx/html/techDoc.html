@@ -217,7 +217,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1294,7 +1294,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2267,7 +2267,7 @@ called dg1 and dg2.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2298,7 +2298,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -3595,7 +3595,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3893,27 +3893,27 @@ the values observed in the performance Tableau.</p>
 <blockquote>
 <div><ul class="simple">
 <li><em>actionsList</em> and <em>criteriaList</em>, if provided,  give the possibility to show partial performance tableaux.</li>
-<li>ndigits = 0 may be used to show integer evaluation values.</li>
-<li>If no actionsList is provided, the decision actions are ordered from the best to the worst. This
-ranking is obtained by default with a sparse PreRankedOutrankingDigraph construction.
-A standard BipolarOutrankingDigraph is used instead when the SparseModel flag is put to False.</li>
-<li>The minimalComponentSize allows to control the fill rate of the pre-ranked model.
+<li><em>ndigits</em> = 0 may be used to show integer evaluation values.</li>
+<li>If no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst. This
+ranking is obtained by default with a sparse <em>PreRankedOutrankingDigraph</em> construction.
+A standard <em>BipolarOutrankingDigraph</em> is used instead when the <em>SparseModel</em> flag is put to <em>False</em>.</li>
+<li>The <em>minimalComponentSize</em> allows to control the fill rate of the pre-ranked model.
 If <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
 in fact equivalent to the standard model.</li>
 <li>It may interesting in some cases to use <em>RankingRule</em> = &#8216;NetFlows&#8217;.</li>
 <li>Quantiles used for the pre-ranked decomposition are put by default to <em>n</em>
-(the number of decision alternatives) for n &lt; 50. For larger cardinalities up to 1000, quantiles = n/10.
-For bigger performance tableaux the quantiles parameter may be set to a much lower value
+(the number of decision alternatives) for <em>n</em> &lt; 50. For larger cardinalities up to 1000, quantiles = <em>n</em> /10.
+For bigger performance tableaux the <em>quantiles</em> parameter may be set to a much lower value
 not exceeding usually 1000.</li>
 <li>The pre-ranking may be obtained with three ordering strategies for the
 quantiles equivalence classes: &#8216;average&#8217; (default), &#8216;optimistic&#8217; or  &#8216;pessimistic&#8217;.</li>
-<li>With Correlations=True and criteriaList = None, the criteria will be presented in decreasing
-order of the correlations between the marginal criterion ranking and the ranking used for
-presenting the ecision alternatives.</li>
-<li>For large performance Tableaux, multiprocessing techniques may be used by setting
-Threading = True in order to speed up the computations; especially when Correlations is set to True.</li>
-<li>By default, the number of available cores, will be detected. It may be wise to indicate the number of
-effective singled threaded cores, when hyperthreading is present.</li>
+<li>With <em>Correlations</em> = <em>True</em> and <em>criteriaList</em> = <em>None</em>, the criteria will be presented from left to right in decreasing
+order of the correlations between the marginal criterion based ranking and the global ranking used for
+presenting the decision alternatives.</li>
+<li>For large performance Tableaux, <em>multiprocessing</em> techniques may be used by setting
+<em>Threading</em> = <em>True</em> in order to speed up the computations; especially when <em>Correlations</em> i= <em>True</em>.</li>
+<li>By default, the number of cores available, will be detected. It may be efficient in a HPC context
+to indicate the exact number of singled threaded cores in fact allocated to the job.</li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -4385,7 +4385,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -6114,7 +6114,7 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 
 <dl class="class">
 <dt id="randomDigraphs.RandomGridDigraph">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.GridDigraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary randomly oriented Grid digraphs of dimension n time m
