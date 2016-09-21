@@ -2049,7 +2049,7 @@ The performance evaluations of each decision alternative on each criterion are g
                 order of the correlations between the marginal criterion based ranking and the global ranking used for
                 presenting the decision alternatives.
               - For large performance Tableaux, *multiprocessing* techniques may be used by setting
-                *Threading* = *True* in order to speed up the computations; especially when *Correlations* i= *True*.
+                *Threading* = *True* in order to speed up the computations; especially when *Correlations* = *True*.
               - By default, the number of cores available, will be detected. It may be efficient in a HPC context
                 to indicate the exact number of singled threaded cores in fact allocated to the job.
         
