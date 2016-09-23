@@ -22,17 +22,26 @@ def testRandomPerformanceTableau():
     t.showAll()
     print(t.computeWeightedAveragePerformances(isNormalized=True,
                                                lowValue=0.0,highValue=20.0))
-    t = RandomPerformanceTableau(weightScale=(1,10),
+    t1 = RandomPerformanceTableau(weightScale=(1,10),
                                  commonScale=(0.0,50),
                                  commonMode=('triangular',30,0.5),
-                                 seed=None)
-    t.showStatistics()
-    t = RandomPerformanceTableau(weightScale=(1,10),
+                                 seed=1)
+    t1.showStatistics()
+    t2 = RandomPerformanceTableau(weightScale=(1,10),
                                  commonScale=(0.0,50),
                                  commonMode=('beta',None,None),
                                  seed=None)
-    t.showStatistics()
-
+    t2.showStatistics()
+    t3 = RandomPerformanceTableau(weightScale=(1,10),
+                                 commonScale=(0.0,50),
+                                 commonMode=('beta',None,None),
+                                 seed=1)
+    g1 = BipolarOutrankingDigraph(t1,Normalized=True)
+    g2 = BipolarOutrankingDigraph(t3,Normalized=True)
+    corr= g1.computeOrdinalCorrelation(g2)
+    print('==>',corr)
+    assert corr['correlation'] != Decimal('1'), 'seed on RandomPerformance not OK !' 
+    
 def testRandomRankPerformanceTableau():
     print('==>> Testing Random Rank Performance Tableau instantiation')
     t = RandomRankPerformanceTableau(numberOfActions=10,
@@ -41,10 +50,10 @@ def testRandomRankPerformanceTableau():
     t.showAll()
     print(t.computeWeightedAveragePerformances(isNormalized=True,
                                                lowValue=0.0,highValue=20.0))
-    t = RandomRankPerformanceTableau(weightScale=(1,10),
+    t1 = RandomRankPerformanceTableau(weightScale=(1,10),
                                      weightDistribution='random',
-                                 seed=None)
-    t.showStatistics()
+                                 seed=10)
+    t1.showStatistics()
 
 def testFullRandomPerformanceTableau():
     print('==>> Testing Full Random Performance Tableau instantiation')

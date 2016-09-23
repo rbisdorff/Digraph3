@@ -228,7 +228,8 @@ class RandomPerformanceTableau(PerformanceTableau):
                 r  = 0.5
             else:
                 r  = commonMode[2]
-            rng = RNGTr(m,M,xm,r)
+            rdseed = random.random()
+            rng = RNGTr(m,M,xm,r,seed=rdseed)
             for g in criteria:
                 evaluation[g] = {}
                 for a in actions:
@@ -635,7 +636,8 @@ class FullRandomPerformanceTableau(PerformanceTableau):
                         r  = commonMode[2]
                 except:
                     r  = 0.5
-                rng = RNG(m,M,xm,r)
+                rdseed = random.random()
+                rng = RNG(m,M,xm,r,seed=rdseed)
                 for a in actionsList:
 ##                    u = random.random()
 ##                    if u < r:
@@ -2155,7 +2157,7 @@ if __name__ == "__main__":
                                             commonScale=None,
                                             weightDistribution='equiobjectives',
      #weightScale=(1,5),
-                                            commonMode=('beta','variable',None),
+                                            commonMode=('triangular','variable',None),
                                             vetoProbability=0.5,
                                             seed=120)
 
@@ -2163,6 +2165,7 @@ if __name__ == "__main__":
     t.showCriteria()
     t.csvAllQuantiles('q')
     t.showAllQuantiles()
+    t.showStatistics()
     
 ##    #t.showActions(Debug=True)
 ##    teco = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Eco']['criteria'])
