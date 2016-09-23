@@ -393,13 +393,6 @@ The performance evaluations of each decision alternative on each criterion are g
            'g7'   |      1       |   62.12   65.08   74.87    ...   38.98   93.64  
     >>> ...
 
-A more useful display is available in the default browser:
-    >>> rt.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True)
-
-    .. image:: perfTabsExample.png
-       :alt: HTML heat map of the performance tableau
-       :width: 600 px
-       :align: center
     """
     def __init__(self,filePerfTab=None,isEmpty=False):
         from decimal import Decimal
@@ -2043,7 +2036,8 @@ A more useful display is available in the default browser:
                                    nbrOfCPUs=None,
                                    Debug=False):
         """
-        shows the html heatmap version of the performance tableau in a browser window.
+        shows the html heatmap version of the performance tableau in a browser window
+        (see perfTabs.htmlPerformanceHeatMap() method ).
 
         **Parameters**:
 
@@ -2069,6 +2063,16 @@ A more useful display is available in the default browser:
                 *Threading* = *True* in order to speed up the computations; especially when *Correlations* = *True*.
               - By default, the number of cores available, will be detected. It may be efficient in a HPC context
                 to indicate the exact number of singled threaded cores in fact allocated to the job.
+
+
+        >>> from randomPerfTabs import RandomPerformanceTableau
+        >>> rt = RandomPerformanceTableau(seed=100)
+        >>> rt.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True)
+
+        .. image:: perfTabsExample.png
+           :alt: HTML heat map of the performance tableau
+           :width: 600 px
+           :align: center
         
         """
         import webbrowser
@@ -2110,9 +2114,11 @@ A more useful display is available in the default browser:
                                Threading=False,
                                nbrOfCPUs=1,
                                Debug=False):
-        """
+        """       
         Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
-        actions x criteria in html format. See the corresponding *showHTMLPerformanceHeatMap* method.
+        actions x criteria in html format.
+
+        See the corresponding perfTabs.showHTMLPerformanceHeatMap() method.
         """
         from decimal import Decimal
         from digraphs import flatten
