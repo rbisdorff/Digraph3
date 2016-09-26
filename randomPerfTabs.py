@@ -58,7 +58,7 @@ class RandomPerformanceTableau(PerformanceTableau):
         * valueDigits := <integer>, precision of performance measurements
           (2 decimal digits by default).
         
-    Code example::
+    Code example:
         >>> from randomPerfTabs import RandomPerformanceTableau
         >>> t = RandomPerformanceTableau(numberOfActions=3,numberOfCriteria=1,seed=100)
         >>> t.actions
@@ -74,7 +74,6 @@ class RandomPerformanceTableau(PerformanceTableau):
                     'name': 'digraphs.RandomPerformanceTableau() instance',
                     'comment': 'Arguments: ; weightDistribution=random;
                         weightScale=(1, 1); commonMode=None'}}
-
         >>> t.evaluation
             {'g01': {'a01': Decimal('45.95'),
                      'a02': Decimal('95.17'),
@@ -344,12 +343,12 @@ class RandomPerformanceGenerator(object):
         
     def randomAction(self):
         """
-        Returns::
-        >>> {'action': key,
-        ...          'evaluation': {'g1': Decimal(...),
-        ...                                'g2': Decimal(...),
-        ...                                     ... }
-        ...      }
+        Returns:
+            >>> {'action': key,
+            ...          'evaluation': {'g1': Decimal(...),
+            ...                                'g2': Decimal(...),
+            ...                                     ... }
+            ...      }
         """
         # generate action key
         self.counter += 1

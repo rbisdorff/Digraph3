@@ -4224,12 +4224,17 @@ Cost versus Benefit oriented performance tableaux.</p>
 <dl class="method">
 <dt id="randomPerfTabs.RandomPerformanceGenerator.randomAction">
 <code class="descname">randomAction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomPerformanceGenerator.randomAction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns::
-&gt;&gt;&gt; {&#8216;action&#8217;: key,
-...          &#8216;evaluation&#8217;: {&#8216;g1&#8217;: Decimal(...),
-...                                &#8216;g2&#8217;: Decimal(...),
-...                                     ... }
-...      }</p>
+<dd><dl class="docutils">
+<dt>Returns:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="s">&#39;action&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span>
+<span class="gp">... </span>         <span class="s">&#39;evaluation&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;g1&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>
+<span class="gp">... </span>                               <span class="s">&#39;g2&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>
+<span class="gp">... </span>                                    <span class="o">...</span> <span class="p">}</span>
+<span class="gp">... </span>     <span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -4296,8 +4301,8 @@ and considerable performance difference discrimination thresholds.</p>
 </li>
 </ul>
 </dd>
-<dt>Code example::</dt>
-<dd><div class="first highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+<dt>Code example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">actions</span>
 <span class="go">    {&#39;a1&#39;: {&#39;comment&#39;: &#39;RandomPerformanceTableau() generated.&#39;, &#39;name&#39;: &#39;random decision action&#39;},</span>
@@ -4312,9 +4317,7 @@ and considerable performance difference discrimination thresholds.</p>
 <span class="go">            &#39;name&#39;: &#39;digraphs.RandomPerformanceTableau() instance&#39;,</span>
 <span class="go">            &#39;comment&#39;: &#39;Arguments: ; weightDistribution=random;</span>
 <span class="go">                weightScale=(1, 1); commonMode=None&#39;}}</span>
-</pre></div>
-</div>
-<div class="last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">evaluation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">evaluation</span>
 <span class="go">    {&#39;g01&#39;: {&#39;a01&#39;: Decimal(&#39;45.95&#39;),</span>
 <span class="go">             &#39;a02&#39;: Decimal(&#39;95.17&#39;),</span>
 <span class="go">             &#39;a03&#39;: Decimal(&#39;17.47&#39;)</span>
