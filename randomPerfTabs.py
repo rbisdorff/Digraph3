@@ -2299,15 +2299,10 @@ class RandomCBPerformanceGenerator(object):
         """
         Returns {
         
-             'action': {'shortName': ..., 'name': ...,
-                            'type': 'neutral'|'advantageous'|'cheap',
-                            key': actionKey},                   
+             { 'action': { key': actionKey, 'shortName': ..., 'name': ...,
+                            'type': 'neutral'|'advantageous'|'cheap'},                   
 
-            'evaluation': {'g1': Decimal(...),
-                                             'g2': Decimal(...),
-                                             ... }                                 
-
-                      }
+            'evaluation': {'g1': Decimal(...), 'g2': Decimal(...), ... } }                              
 
         """
         # generate action key
