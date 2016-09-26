@@ -343,13 +343,8 @@ class RandomPerformanceGenerator(object):
         
     def randomAction(self):
         """
-        Returns:
-        
-            >>> {'action': key,
-            ...          'evaluation': {'g1': Decimal(...),
-            ...                                'g2': Decimal(...),
-            ...                                     ... }
-            ...      }
+        Returns
+        ``{'action': key, 'evaluation': {'g1': Decimal(...), 'g2': Decimal(...), ... }}``
         """
         # generate action key
         self.counter += 1
