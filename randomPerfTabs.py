@@ -104,9 +104,10 @@ class RandomPerformanceTableau(PerformanceTableau):
         import random
         random.seed(seed)
         from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
-
+        
         # seeting tableau name
         self.name = 'randomperftab'
+        self.BigData = BigData
         
         # generate actions
         nd = len(str(numberOfActions))
@@ -205,7 +206,10 @@ class RandomPerformanceTableau(PerformanceTableau):
         # generate evaluations
         if commonMode == None:
             commonMode = ['uniform',None,None]
+        self.commonMode = commonMode
         digits=valueDigits
+        self.digits = digits
+        self.commonScale = commonScale
 
         evaluation = {}        
         if str(commonMode[0]) == 'uniform':          
@@ -294,7 +298,8 @@ class RandomPerformanceTableau(PerformanceTableau):
             print('mode error in random evaluation generator !!')
             print(str(commonMode[0]))
             #sys.exit(1)
-        # randomly insert missing data 
+        # randomly insert missing data
+        self.missingDataProbability = missingDataProbability 
         for c in criteria:
             for x in actions:
                 if random.random() < missingDataProbability:
@@ -307,7 +312,138 @@ class RandomPerformanceTableau(PerformanceTableau):
         # store weights preorder
         self.weightPreorder = self.computeWeightPreorder()
 
-# -----------------
+class RandomPerformanceGenerator(object):
+    """
+    Generates random decision actions.
+    Returns a dictionary with an 'action' and an 'evaluation' key.
+    """
+    def __init__(self,argPerfTab,actionNamePrefix='a',
+                 instanceCounter=0,seed=None):
+        """
+        Set the initial state of the random generator.
+        """
+        import random
+        random.seed(seed)
+
+        self.random = random
+        self.perfTab = argPerfTab
+        self.actionNamePrefix = actionNamePrefix
+        if instanceCounter == 0:
+            self.counter = len(argPerfTab.actions)
+        else:
+            self.counter = instanceCounter
+        self.nd = len(str(self.counter))
+
+        self.commonMode = argPerfTab.commonMode
+        if str(self.commonMode[0]) == 'triangular':
+            from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
+            rdseed = random.random()
+            self.rng = RNGTr(m,M,xm,r,seed=rdseed)
+            
+        self.commonScale = argPerfTab.commonScale
+        
+    def randomAction(self):
+        """
+        Returns a new random decision alternative
+        """
+        # generate action key
+        self.counter += 1
+        actionKey = ('%s%%0%dd' % (self.actionNamePrefix,self.nd)) % (self.counter)
+
+        # generate random evaluation
+
+        random = self.random
+        commonMode = self.commonMode
+        commonScale = self.commonScale
+        digits = self.perfTab.digits
+        criteria = self.perfTab.criteria
+
+        evaluation = {}
+        
+        if str(commonMode[0]) == 'uniform':          
+            for g in criteria:
+                evaluation[g] = {}
+                randeval = random.uniform(commonScale[0],commonScale[1])
+                evaluation[g] = Decimal(str(round(randeval,digits)))
+                    
+        elif str(self.commonMode[0]) == 'triangular':
+            for g in criteria:
+                evaluation[g] = Decimal(str(round(rng.random(),digits)))
+                    
+        elif str(commonMode[0]) == 'beta':
+            m = commonScale[0]
+            M = commonScale[1]
+            if commonMode[1] == None:
+                xm = 0.5
+            else:
+                xm = commonMode[1]
+                
+            if commonMode[2] == None:
+                if xm > 0.5:
+                    beta = 2.0
+                    alpha = 1.0/(1-xm)
+                else:
+                    alpha = 2.0
+                    beta = 1.0/xm
+            else:
+                alpha = commonMode[2][0]
+                beta = commonMode[2][1]
+            if Debug:
+                print('alpha,beta', alpha,beta)
+            for g in criteria:
+                u = random.betavariate(alpha,beta)
+                randeval = (u * (M-m)) + m
+                evaluation[g] = Decimal(str(round(randeval,digits)))
+
+        elif str(commonMode[0]) == 'normal':
+            if commonMode[1] == None:
+                mu = (commonScale[1]-commonScale[0])/2.0
+            else:
+                mu = commonMode[1]
+            if commonMode[2] == None:
+                sigma = (commonScale[1]-commonScale[0])/4.0
+            else:
+                sigma = commonMode[2]
+            for g in criteria:
+                notfound = True 
+                while notfound:
+                    randeval = random.normalvariate(mu,sigma)
+                    if randeval >= commonScale[0] and  randeval <= commonScale[1]:
+                        notfound = False
+                evaluation[g] = Decimal(str(round(randeval,digits)))
+
+        # randomly insert missing data
+        missingDataProbability = self.perfTab.missingDataProbability
+        for c in criteria:
+            if random.random() < missingDataProbability:
+                evaluation[c] = Decimal('-999')
+
+        # return a new random decision alternative
+        return {'action': actionKey,'evaluation':evaluation}
+
+    def randomUpdate(self,nbrOfRandomActions=1):
+        """
+        Updates *self.perfTab* with *n* = *nbrOfActions* new random decision alternatives.
+
+        .. note::
+
+            The update will modify the generator's given performance tableau instance by
+            either adding new actions with their random evaluations,
+            or updating the performances of already existing decision actions.
+        """
+        actions = self.perfTab.actions
+        criteria = self.perfTab.criteria
+        evaluation = self.perfTab.evaluation
+        for i in range(nbrOfRandomActions):
+            newAction = self.randomAction()
+            newEvaluation = newAction['evaluation']
+            newKey = newAction['action']
+            actions[newKey] = {'name':newKey}
+            for g in criteria:
+                evaluation[g][newKey] = newEvaluation[g]
+                
+##################
+#-----------------
 class RandomRankPerformanceTableau(PerformanceTableau):
     """
     Specialization of the PerformanceTableau class for generating a temporary
@@ -2151,21 +2287,21 @@ if __name__ == "__main__":
 ##    print(time()-t0)
 ##    t.saveXMCDA2('test2')
 ##    t.showCriteria()
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=100,
-                                            numberOfCriteria=13,
-                                            OrdinalScales=False,
-                                            commonScale=None,
-                                            weightDistribution='equiobjectives',
-     #weightScale=(1,5),
-                                            commonMode=('triangular','variable',None),
-                                            vetoProbability=0.5,
-                                            seed=120)
-
-    t.showObjectives()
-    t.showCriteria()
-    t.csvAllQuantiles('q')
-    t.showAllQuantiles()
-    t.showStatistics()
+##    t = Random3ObjectivesPerformanceTableau(numberOfActions=100,
+##                                            numberOfCriteria=13,
+##                                            OrdinalScales=False,
+##                                            commonScale=None,
+##                                            weightDistribution='equiobjectives',
+##     #weightScale=(1,5),
+##                                            commonMode=('triangular','variable',None),
+##                                            vetoProbability=0.5,
+##                                            seed=120)
+##
+##    t.showObjectives()
+##    t.showCriteria()
+##    t.csvAllQuantiles('q')
+##    t.showAllQuantiles()
+##    t.showStatistics()
     
 ##    #t.showActions(Debug=True)
 ##    teco = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Eco']['criteria'])
@@ -2186,9 +2322,24 @@ if __name__ == "__main__":
 ##    print('*---------- test percentiles of variable thresholds --------*') 
 ####    t = RandomCoalitionsPerformanceTableau(weightDistribution='equicoalitions',
 ####                                           seed=100)
-##    t = RandomPerformanceTableau(commonThresholds=[(90,0),(100,0),(110,0)],
-##                                           seed=100)
-##    t.showAll()
+    t = RandomPerformanceTableau(commonScale=(0,10),commonThresholds=[(10,0),(20,0),(90,0)],
+                                           seed=100)
+    t.showAll()
+    rag1 = RandomPerformanceGenerator(t,actionNamePrefix='b',seed=100)
+    sampleSize = 5
+    for s in range(sampleSize):
+        newAction = rag1.randomAction()
+        ak = newAction['action']
+        t.actions[ak] = {'name': ak}
+        for ev in t.evaluation:
+            for g in t.evaluation:
+                t.evaluation[g][ak] = newAction['evaluation'][g]
+    t.showHTMLPerformanceHeatmap(Correlations=True)
+    rag2 = RandomPerformanceGenerator(t,actionNamePrefix='c',seed=110)
+    rag2.randomUpdate(nbrOfRandomActions=5)
+    t.showHTMLPerformanceHeatmap(Correlations=True)
+    
+    
 ##
 ##    t.computeDefaultDiscriminationThresholds(quantile={'ind':10.0,'pref':20.0,'weakVeto':90.0,'veto':95.0})
 ##    for g in [y for y in t.criteria]:

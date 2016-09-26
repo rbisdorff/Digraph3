@@ -1294,7 +1294,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3605,7 +3605,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4403,7 +4403,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -6398,6 +6398,32 @@ Cost versus Benefit oriented performance tableaux.</p>
 </div>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="randomPerfTabs.RandomPerformanceGenerator">
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomPerformanceGenerator</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>actionNamePrefix='a'</em>, <em>instanceCounter=0</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomPerformanceGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Generates random decision actions.
+Returns a dictionary with an &#8216;action&#8217; and an &#8216;evaluation&#8217; key.</p>
+<dl class="method">
+<dt id="randomPerfTabs.RandomPerformanceGenerator.randomAction">
+<code class="descname">randomAction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomPerformanceGenerator.randomAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new random decision alternative</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="randomPerfTabs.RandomPerformanceGenerator.randomUpdate">
+<code class="descname">randomUpdate</code><span class="sig-paren">(</span><em>nbrOfRandomActions=1</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomPerformanceGenerator.randomUpdate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates <em>self.perfTab</em> with <em>n</em> = <em>nbrOfActions</em> new random decision alternatives.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The update will modify the generator&#8217;s given performance tableau instance by
+either adding new actions with their random evaluations,
+or updating the performances of already existing decision actions.</p>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">

@@ -175,3 +175,22 @@ def testPercentilesOfThresholds():
     t.showCriteria(Debug=False)
     t.saveXMCDA2('testPerc',servingD3=False)
 
+def testRandomPerformanceGenerators():
+    print('*---------- test dynamic updates of a random performance tableau --------*') 
+    t = RandomPerformanceTableau(commonScale=(0,10),commonThresholds=[(10,0),(20,0),(90,0)],
+                                           seed=100)
+    t.showAll()
+    rag1 = RandomPerformanceGenerator(t,actionNamePrefix='b',seed=100)
+    sampleSize = 5
+    for s in range(sampleSize):
+        newAction = rag1.randomAction()
+        ak = newAction['action']
+        t.actions[ak] = {'name': ak}
+        for ev in t.evaluation:
+            for g in t.evaluation:
+                t.evaluation[g][ak] = newAction['evaluation'][g]
+    t.showHTMLPerformanceHeatmap(Correlations=True)
+    rag2 = RandomPerformanceGenerator(t,actionNamePrefix='c',seed=110)
+    rag2.randomUpdate(nbrOfRandomActions=5)
+    t.showHTMLPerformanceHeatmap(Correlations=True)
+ 
