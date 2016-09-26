@@ -84,6 +84,7 @@ class RandomPerformanceTableau(PerformanceTableau):
 
     """
     def __init__(self,numberOfActions = 13,\
+                 actionNamePrefix = 'a',\
                  numberOfCriteria = 7,\
                  weightDistribution = 'equisignificant',\
                  weightScale=None,\
@@ -114,10 +115,10 @@ class RandomPerformanceTableau(PerformanceTableau):
         actions = OrderedDict()
         for i in range(numberOfActions):
             if BigData:
-                actionName = ('a%%0%dd' % (nd)) % (i+1)
+                actionName = ('%s%%0%dd' % (actionNamePrefix,nd)) % (i+1)
                 actions[i] = {'name': actionName}
             else:   
-                actionKey = ('a%%0%dd' % (nd)) % (i+1)
+                actionKey = ('%s%%0%dd' % (actionNamePrefix,nd)) % (i+1)
                 actions[actionKey] = {'shortName':actionKey,
                         'name': 'random decision action',
                         'comment': 'RandomPerformanceTableau() generated.' }
@@ -314,8 +315,7 @@ class RandomPerformanceTableau(PerformanceTableau):
 
 class RandomPerformanceGenerator(object):
     """
-    Generates random decision actions.
-    Returns a dictionary with an 'action' and an 'evaluation' key.
+    Generates and/or new decision actions with random evaluation for a given RandomPerformanceTableau instance.
     """
     def __init__(self,argPerfTab,actionNamePrefix='a',
                  instanceCounter=0,seed=None):
@@ -344,7 +344,11 @@ class RandomPerformanceGenerator(object):
         
     def randomAction(self):
         """
-        Returns a new random decision alternative
+        Returns {'action': key,
+                       'evaluation': {'g1': Decimal(...),
+                                             'g2': Decimal(...),
+                                             ... }
+                      }
         """
         # generate action key
         self.counter += 1
@@ -427,7 +431,7 @@ class RandomPerformanceGenerator(object):
 
         .. note::
 
-            The update will modify the generator's given performance tableau instance by
+            The update will modify the generator's given performance tableau instance by,
             either adding new actions with their random evaluations,
             or updating the performances of already existing decision actions.
         """
