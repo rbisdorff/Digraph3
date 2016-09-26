@@ -344,6 +344,7 @@ class RandomPerformanceGenerator(object):
     def randomAction(self):
         """
         Returns:
+        
             >>> {'action': key,
             ...          'evaluation': {'g1': Decimal(...),
             ...                                'g2': Decimal(...),
