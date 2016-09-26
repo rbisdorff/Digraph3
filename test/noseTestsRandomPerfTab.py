@@ -189,8 +189,26 @@ def testRandomPerformanceGenerators():
         for ev in t.evaluation:
             for g in t.evaluation:
                 t.evaluation[g][ak] = newAction['evaluation'][g]
-    t.showHTMLPerformanceHeatmap(Correlations=True)
+    #t.showHTMLPerformanceHeatmap(Correlations=True)
     rag2 = RandomPerformanceGenerator(t,actionNamePrefix='c',seed=110)
     rag2.randomUpdate(nbrOfRandomActions=5)
     t.showHTMLPerformanceHeatmap(Correlations=True)
  
+def testRandomCBPerformanceGenerators():
+    print('*---------- test dynamic updates of a random CB performance tableau --------*') 
+    t = RandomCBPerformanceTableau(numberOfActions=10,
+                                           seed=100)
+    t.showAll()
+    rag1 = RandomCBPerformanceGenerator(t,actionNamePrefix='b',seed=100)
+    sampleSize = 5
+    for s in range(sampleSize):
+        newAction = rag1.randomAction()
+        ak = newAction['action'].pop('key')
+        t.actions[ak] = newAction['action']
+        for ev in t.evaluation:
+            for g in t.evaluation:
+                t.evaluation[g][ak] = newAction['evaluation'][g]
+    #t.showHTMLPerformanceHeatmap(Correlations=True)
+    rag2 = RandomCBPerformanceGenerator(t,actionNamePrefix='c',seed=110)
+    rag2.randomUpdate(nbrOfRandomActions=5)
+    t.showHTMLPerformanceHeatmap(Correlations=True)

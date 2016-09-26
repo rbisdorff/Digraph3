@@ -1900,13 +1900,19 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         # randomizer init
         import random
         random.seed(seed)
-
+        self.random = random
+        self.digits = valueDigits
+        self.BigData = BigData
+        self.missingDataProbability = missingDataProbability
+        self.Debug = Debug
+        
         # generate actions
         if numberOfActions == None:
             numberOfActions = random.randint(10,31)
         nd = len(str(numberOfActions))
-        actionsTypesList = ['cheap','neutral','advantageous']        
+        self.actionsTypesList = ['cheap','neutral','advantageous']        
         actions = OrderedDict()
+        actionsTypesList = self.actionsTypesList
         for i in range(numberOfActions):
             actionType = random.choice(actionsTypesList)
             if BigData:
@@ -2267,6 +2273,202 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         # update criteria
         self.criteria = criteria
 
+class RandomCBPerformanceGenerator(object):
+    """
+    Generates and/or new decision actions with random evaluation for a given RandomCBPerformanceTableau instance.
+    """
+    def __init__(self,argPerfTab,actionNamePrefix='a',
+                 instanceCounter=0,seed=None):
+        """
+        Set the initial state of the random generator.
+        """
+        import random
+        random.seed(seed)
+
+        self.random = random
+        self.perfTab = argPerfTab
+        self.actionNamePrefix = actionNamePrefix
+        if instanceCounter == 0:
+            self.counter = len(argPerfTab.actions)
+        else:
+            self.counter = instanceCounter
+        self.nd = len(str(self.counter))
+       
+    def randomAction(self):
+        """
+        Returns {'action': {'shortName': ...,
+                                       'name': ...,
+                                       'type': 'neutral'|'advantageous'|'cheap',
+                                       'key': actionKey},
+                       'evaluation': {'g1': Decimal(...),
+                                             'g2': Decimal(...),
+                                             ... }
+                      }
+        """
+        # generate action key
+        self.counter += 1
+        actionType = self.random.choice(self.perfTab.actionsTypesList)
+        if self.perfTab.BigData:
+            actionName = ('%s%%0%dd' % (self.actionNamePrefix,self.nd)) % (self.counter)
+            actionKey = self.counter
+            action = {'shortName': actionName+actionType[0],
+                              'name': actionName+actionType[0],
+                              'type': actionType,
+                              'key': actionKey}
+        else:   
+            actionKey = ('%s%%0%dd' % (self.actionNamePrefix,self.nd)) % (self.counter)
+            action = {'shortName':actionKey+actionType[0],
+                        'name': 'random %s decision action' % (actionType),
+                        'comment': 'Cost-Benefit',
+                        'type': actionType,
+                        'key': actionKey}
+
+        # generate random evaluation
+
+        random = self.random
+        digits = self.perfTab.digits
+        criteria = self.perfTab.criteria
+        
+        # generate random evaluations
+        Debug = self.perfTab.Debug
+        evaluation = {}
+        for g in criteria:
+            criterionScale = criteria[g]['scale']
+            amplitude = criterionScale[1] - criterionScale[0]
+            x30=criterionScale[0] + amplitude*0.3
+            x50=criterionScale[0] + amplitude*0.5
+            x70=criterionScale[0] + amplitude*0.7
+            if Debug:
+                print('g, criterionx30,x50,x70', g, criteria[g], x30,x50,x70)
+            evaluation[g] = {}
+            randomMode = criteria[g]['randomMode']
+            if str(randomMode[0]) == 'uniform':          
+                randeval = random.uniform(criterionScale[0],criterionScale[1])
+                if criteria[g]['preferenceDirection'] == 'max':
+                        evaluation[g] = Decimal(str(round(randeval,digits)))
+                else:
+                        evaluation[g] = Decimal(str(-round(randeval,digits)))
+            elif str(randomMode[0]) == 'triangular':
+                from math import sqrt
+                m = criterionScale[0]
+                M = criterionScale[1]
+                #r  = randomMode[2]
+                #xm = randomMode[1]
+                if action['type'] == 'advantageous':
+                    xm = x70
+                    r = 0.50
+                elif action['type'] == 'cheap':
+                    xm = x30
+                    r = 0.50
+                else:
+                    xm = x50
+                    r = 0.50
+                    
+                deltaMinus = 1.0 - (criterionScale[0]/xm)
+                deltaPlus  = (criterionScale[1]/xm) - 1.0
+
+                u = random.random()
+                #print 'm,xm,M,r,u', m,xm,M,r,u 
+                if u < r:
+                    #randeval = m + (math.sqrt(r*u*(m-xm)**2))/r
+                    randeval = m + sqrt(u/r)*(xm-m)
+                else:
+                    #randeval = (M*r - M + math.sqrt((-1+r)*(-1+u)*(M-xm)**2))/(-1+r)
+                    randeval = M - sqrt((1-u)/(1-r))*(M-xm)
+                
+                if criteria[g]['preferenceDirection'] == 'max':
+                    evaluation[g] = Decimal(str(round(randeval,digits)))
+                else:
+                    evaluation[g] = Decimal(str(-round(randeval,digits)))
+                #print randeval, criteria[g]['preferenceDirection'], evaluation[g][a]
+                        
+            elif str(randomMode[0]) == 'normal':
+                ## amplitude = criterionScale[1]-criterionScale[0]
+                ## x70 = criterionScale[0] + 0.7 * amplitude
+                ## x50 = criterionScale[0] + 0.5 * amplitude
+                ## x30 = criterionScale[0] + 0.3 * amplitude
+                
+                if action['type'] == 'advantageous':
+                    mu = x70
+                    sigma = 0.20 * amplitude
+                elif action['type'] == 'cheap':
+                    mu = x30
+                    sigma = 0.20 * amplitude
+                else:
+                    mu = x50
+                    sigma = 0.25 * amplitude
+                notfound = True 
+                while notfound:
+                    randeval = random.normalvariate(mu,sigma)
+                    ## if Debug:
+                    ##     print 'g,commonScale,randeval', g,commonScale,randeval
+                    if randeval >= criterionScale[0] and  randeval <= criterionScale[1]:
+                        notfound = False
+                if criteria[g]['preferenceDirection'] == 'max':
+                    evaluation[g] = Decimal(str(round(randeval,digits)))
+                else:
+                    evaluation[g] = Decimal(str(-round(randeval,digits)))
+            elif str(randomMode[0]) == 'beta':
+                m = criterionScale[0]
+                M = criterionScale[1]
+                if action['type'] == 'advantageous':
+                    # xm = 0.7 sdtdev = 0.15
+                    alpha = 5.8661
+                    beta = 2.62203
+                elif action['type'] == 'cheap':
+                    # xm = 0.3, stdev = 0.15
+                    alpha = 2.62203
+                    beta = 5.8661
+                else:
+                    # xm = 0.5, stdev = 0.15
+                    alpha = 5.05556
+                    beta = 5.05556
+                
+                u = random.betavariate(alpha,beta)
+                randeval = (u * (M-m)) + m
+                if criteria[g]['preferenceDirection'] == 'max':
+                    evaluation[g] = Decimal(str(round(randeval,digits)))
+                else:
+                    evaluation[g] = Decimal(str(-round(randeval,digits)))
+                if Debug:
+                    print('alpha,beta,u,m,M,randeval',alpha,beta,u,m,M,randeval)
+                        
+        if Debug:
+            print(evaluation)
+
+        # randomly insert missing data
+        missingDataProbability = self.perfTab.missingDataProbability
+        for g in criteria:
+            if random.random() < missingDataProbability:
+                evaluation[g] = Decimal('-999')
+
+        # return a new random decision alternative
+        return {'action': action,'evaluation':evaluation}
+
+    def randomUpdate(self,nbrOfRandomActions=1):
+        """
+        Updates *self.perfTab* with *n* = *nbrOfActions* new random decision alternatives.
+
+        .. note::
+
+            The update will modify the generator's given performance tableau instance by,
+            either adding new actions with their random evaluations,
+            or updating the performances of already existing decision actions.
+        """
+        actions = self.perfTab.actions
+        criteria = self.perfTab.criteria
+        evaluation = self.perfTab.evaluation
+        for i in range(nbrOfRandomActions):
+            newAction = self.randomAction()
+            newEvaluation = newAction['evaluation']
+            newKey = newAction['action'].pop('key')
+            actions[newKey] = newAction['action']
+            for g in criteria:
+                evaluation[g][newKey] = newEvaluation[g]
+
+
+
+##############################
 class RandomS3PerformanceTableau(RandomCoalitionsPerformanceTableau):
     """
     Obsolete dummy class for backports.
@@ -2326,20 +2528,20 @@ if __name__ == "__main__":
 ##    print('*---------- test percentiles of variable thresholds --------*') 
 ####    t = RandomCoalitionsPerformanceTableau(weightDistribution='equicoalitions',
 ####                                           seed=100)
-    t = RandomPerformanceTableau(commonScale=(0,10),commonThresholds=[(10,0),(20,0),(90,0)],
+    t = RandomCBPerformanceTableau(numberOfActions=10,
                                            seed=100)
     t.showAll()
-    rag1 = RandomPerformanceGenerator(t,actionNamePrefix='b',seed=100)
+    rag1 = RandomCBPerformanceGenerator(t,actionNamePrefix='b',seed=100)
     sampleSize = 5
     for s in range(sampleSize):
         newAction = rag1.randomAction()
-        ak = newAction['action']
-        t.actions[ak] = {'name': ak}
+        ak = newAction['action'].pop('key')
+        t.actions[ak] = newAction['action']
         for ev in t.evaluation:
             for g in t.evaluation:
                 t.evaluation[g][ak] = newAction['evaluation'][g]
     t.showHTMLPerformanceHeatmap(Correlations=True)
-    rag2 = RandomPerformanceGenerator(t,actionNamePrefix='c',seed=110)
+    rag2 = RandomCBPerformanceGenerator(t,actionNamePrefix='c',seed=110)
     rag2.randomUpdate(nbrOfRandomActions=5)
     t.showHTMLPerformanceHeatmap(Correlations=True)
     
