@@ -2293,11 +2293,9 @@ class RandomCBPerformanceGenerator(object):
        
     def randomAction(self):
         """
-        Returns ``{ 'action': { 'key': actionKey, 'shortName': ..., 'name': ..., ``
-         ``                   'type': 'neutral'|'advantageous'|'cheap'}, ``
-         ``   'evaluation': {'g1': Decimal(...), 'g2': Decimal(...), ... }``
-         ``}``
-            
+        Returns :code:`{ 'action': { 'key': actionKey, 'shortName': ..., 'name': ...,  
+                                         'type': 'neutral'|'advantageous'|'cheap'},
+                        'evaluation': {'g1': Decimal(...), 'g2': Decimal(...), ... }}` .
         """
         # generate action key
         self.counter += 1
