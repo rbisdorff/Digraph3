@@ -177,7 +177,7 @@ def testPercentilesOfThresholds():
 
 def testRandomPerformanceGenerators():
     print('*---------- test dynamic updates of a random performance tableau --------*') 
-    t = RandomPerformanceTableau(commonScale=(0,10),commonThresholds=[(10,0),(20,0),(90,0)],
+    t = RandomPerformanceTableau(nbrOfActions=0,commonScale=(0,10),commonThresholds=[(10,0),(20,0),(90,0)],
                                            seed=100)
     t.showAll()
     rag1 = RandomPerformanceGenerator(t,actionNamePrefix='b',seed=100)
