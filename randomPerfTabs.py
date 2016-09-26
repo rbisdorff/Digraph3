@@ -1871,6 +1871,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
 
     def __init__(self,numberOfActions = 13,\
                  numberOfCriteria = 7,\
+                 name = 'randomCBperftab',\
                  weightDistribution = 'equiobjectives',\
                  weightScale=None,\
                  integerWeights = True,\
@@ -1891,15 +1892,18 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         """
 
         import sys,math,copy
-        
-        self.name = 'randomCBperftab'
-        # randomizer init
         import random
+
+        # randomizer init
         random.seed(seed)
-        self.random = random
+
+        # store argument values
+        self.name = name
         self.digits = valueDigits
         self.BigData = BigData
         self.missingDataProbability = missingDataProbability
+        self.commonPercentiles = commonPercentiles
+        self.samplingSize = samplingSize
         self.Debug = Debug
         
         # generate actions
@@ -2269,6 +2273,61 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         # update criteria
         self.criteria = criteria
 
+
+    def updateDiscriminationThresholds(self,Comments=False,Debug=False):
+        """
+        Recomputes performance discrimination thresholds from commonPercentiles.
+
+        .. note::
+
+            Overwrites all previous criterion discrimination thresholds !
+            
+        """
+        actions = self.actions
+        n = len(actions)
+        n2 = (n*n) - n
+        if n < 1000:
+            nbuf = 1000
+        else:
+            nbuf = n
+        samplingSize = self.samplingSize
+        if n2 < samplingSize:
+            samplingSize = n2
+        from iqagent import IncrementalQuantileEstimator
+        est = IncrementalQuantileEstimator(nbuf=nbuf)
+        commonPercentiles = self.commonPercentiles
+        if Debug:
+            print('commonPercentiles=', commonPercentiles)
+        if commonPercentiles == None:
+            quantile = OrderedDict({'ind':0.05, 'pref':0.10 , 'veto':0.95})
+        else:
+            quantile = commonPercentiles
+        criteria = self.criteria
+        for g in criteria:
+            criteria[g]['thresholds'] = OrderedDict()
+            if criteria[g]['scaleType'] == 'cardinal' and n > 1:
+                est.reset()
+                sample = 0
+                for x in actions.keys():
+                    evx = self.evaluation[g][x]
+                    if evx != Decimal('-999'):
+                        for y in actions.keys():
+                            evy = self.evaluation[g][y]
+                            if x != y and evy != Decimal('-999'):
+                                est.add( float( abs(evx-evy) ) )
+                                sample += 1
+                                if sample > samplingSize:
+                                    break
+                est._update()
+                for q in quantile:
+                    if Comments:
+                        print('-->', q, quantile[q], end=' ')
+                    criteria[g]['thresholds'][q] = (Decimal(str(est.report(quantile[q]))),Decimal('0'))
+            
+            if Comments:
+                print('criteria',g,' default thresholds:')
+                print(criteria[g]['thresholds'])
+
 class RandomCBPerformanceGenerator(object):
     """
     Generates and/or new decision actions with random evaluation for a
@@ -2460,7 +2519,7 @@ class RandomCBPerformanceGenerator(object):
             for g in criteria:
                 evaluation[g][newKey] = newEvaluation[g]
 
-
+        
 
 ##############################
 class RandomS3PerformanceTableau(RandomCoalitionsPerformanceTableau):
@@ -2534,10 +2593,11 @@ if __name__ == "__main__":
         for ev in t.evaluation:
             for g in t.evaluation:
                 t.evaluation[g][ak] = newAction['evaluation'][g]
-    t.showHTMLPerformanceHeatmap(Correlations=True)
+    #t.showHTMLPerformanceHeatmap(Correlations=True)
     rag2 = RandomCBPerformanceGenerator(t,actionNamePrefix='c',seed=110)
     rag2.randomUpdate(nbrOfRandomActions=5)
-    t.showHTMLPerformanceHeatmap(Correlations=True)
+    #t.showHTMLPerformanceHeatmap(Correlations=True)
+    t.updateDiscriminationThresholds(Comments=True,Debug=True)
     
     
 ##

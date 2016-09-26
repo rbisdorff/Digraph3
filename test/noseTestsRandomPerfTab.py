@@ -192,7 +192,7 @@ def testRandomPerformanceGenerators():
     #t.showHTMLPerformanceHeatmap(Correlations=True)
     rag2 = RandomPerformanceGenerator(t,actionNamePrefix='c',seed=110)
     rag2.randomUpdate(nbrOfRandomActions=5)
-    t.showHTMLPerformanceHeatmap(Correlations=True)
+    #t.showHTMLPerformanceHeatmap(Correlations=True)
  
 def testRandomCBPerformanceGenerators():
     print('*---------- test dynamic updates of a random CB performance tableau --------*') 
@@ -211,4 +211,5 @@ def testRandomCBPerformanceGenerators():
     #t.showHTMLPerformanceHeatmap(Correlations=True)
     rag2 = RandomCBPerformanceGenerator(t,actionNamePrefix='c',seed=110)
     rag2.randomUpdate(nbrOfRandomActions=5)
+    t.updateDiscriminationThresholds(Comments=True)
     t.showHTMLPerformanceHeatmap(Correlations=True)
