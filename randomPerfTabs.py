@@ -344,11 +344,12 @@ class RandomPerformanceGenerator(object):
         
     def randomAction(self):
         """
-        Returns {'action': key,
-                       'evaluation': {'g1': Decimal(...),
-                                             'g2': Decimal(...),
-                                             ... }
-                      }
+        Returns
+        >>> {'action': key,
+        ...          'evaluation': {'g1': Decimal(...),
+        ...                                'g2': Decimal(...),
+        ...                                     ... }
+        ...      }
         """
         # generate action key
         self.counter += 1
@@ -2297,10 +2298,11 @@ class RandomCBPerformanceGenerator(object):
        
     def randomAction(self):
         """
-        Returns { 'action': { 'key': actionKey, 'shortName': ..., 'name': ...,
-                                         'type': 'neutral'|'advantageous'|'cheap'},              
-                        'evaluation': {'g1': Decimal(...), 'g2': Decimal(...), ... } }                    
-
+        Returns
+        >>> { 'action': { 'key': actionKey, 'shortName': ..., 'name': ...,
+        ...                         'type': 'neutral'|'advantageous'|'cheap'},              
+        ...         'evaluation': {'g1': Decimal(...), 'g2': Decimal(...), ... }
+        ...       }
         """
         # generate action key
         self.counter += 1
