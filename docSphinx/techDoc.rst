@@ -119,10 +119,26 @@ perfTabs module
 
 Back to the :ref:`Technical-label`
 
+.. _randomPerfTabs-label:
+      
+randomPerfTabs module
+----------------------
+
+A tutorial with coding examples is available here: :ref:`RandomPerformaceTableau-Tutorial-label`
+
+.. automodule:: randomPerfTabs
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Technical-label`
+
 .. _outrankingDigraphs-label:
 
 outrankingDigraphs module
 -------------------------
+
+A tutorial with coding examples is available here: :ref:`OutrankingDigraphs-Tutorial-label`
 
 .. automodule:: outrankingDigraphs
    :member-order: alphabetical
@@ -131,12 +147,12 @@ outrankingDigraphs module
 
 Back to the :ref:`Technical-label`
 
-.. _votingDigraphs-label:
+.. _sparseOutrankingDigraphs-label:
 
-votingDigraphs module
----------------------
+sparseOutrankingDigraphs module
+--------------------------------
 
-.. automodule:: votingDigraphs
+.. automodule:: sparseOutrankingDigraphs
    :member-order: alphabetical
    :no-inherited-members:
    :members:
@@ -155,10 +171,26 @@ sortingDigraphs module
 
 Back to the :ref:`Technical-label`
 
+.. _votingDigraphs-label:
+
+votingDigraphs module
+---------------------
+
+A tutorial with coding examples is available here: :ref:`VotingDigraphs-label`
+
+.. automodule:: votingDigraphs
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Technical-label`
+
 .. _linearOrders-label:
 
 linearOrders module
 -------------------
+
+A tutorial with coding examples is available here: :ref:`LinearVoting-Tutorial-label`
 
 .. automodule:: linearOrders
    :member-order: alphabetical
@@ -197,30 +229,6 @@ randomDigraphs module
 ----------------------
 
 .. automodule:: randomDigraphs
-   :member-order: alphabetical
-   :no-inherited-members:
-   :members:
-
-Back to the :ref:`Technical-label`
-
-.. _randomPerfTabs-label:
-      
-randomPerfTabs module
-----------------------
-
-.. automodule:: randomPerfTabs
-   :member-order: alphabetical
-   :no-inherited-members:
-   :members:
-
-Back to the :ref:`Technical-label`
-
-.. _sparseOutrankingDigraphs-label:
-      
-sparseOutrankingDigraphs module
---------------------------------
-
-.. automodule:: sparseOutrankingDigraphs
    :member-order: alphabetical
    :no-inherited-members:
    :members:

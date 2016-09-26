@@ -2275,7 +2275,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
 
 class RandomCBPerformanceGenerator(object):
     """
-    Generates and/or new decision actions with random evaluation for a given RandomCBPerformanceTableau instance.
+    Generates and/or new decision actions with random evaluation for a
+    given RandomCBPerformanceTableau instance.
     """
     def __init__(self,argPerfTab,actionNamePrefix='a',
                  instanceCounter=0,seed=None):
@@ -2296,14 +2297,18 @@ class RandomCBPerformanceGenerator(object):
        
     def randomAction(self):
         """
-        Returns {'action': {'shortName': ...,
-                                       'name': ...,
-                                       'type': 'neutral'|'advantageous'|'cheap',
-                                       'key': actionKey},
-                       'evaluation': {'g1': Decimal(...),
+        Returns {
+        
+             'action': {'shortName': ..., 'name': ...,
+                            'type': 'neutral'|'advantageous'|'cheap',
+                            key': actionKey},                   
+
+            'evaluation': {'g1': Decimal(...),
                                              'g2': Decimal(...),
-                                             ... }
+                                             ... }                                 
+
                       }
+
         """
         # generate action key
         self.counter += 1

@@ -904,7 +904,7 @@ We see three intersection cycles of length 4, which is impossible to occur on th
 
 Back to :ref:`Tutorial-label`
 
-.. _LinearVoting-label:
+.. _LinearVoting-Tutorial-label:
 
 Computing the winner of an election
 -----------------------------------
