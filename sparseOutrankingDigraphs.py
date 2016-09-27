@@ -1187,25 +1187,28 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         #qs = self
         Med = self.valuationdomain['med']
         categories = self.categories
+        
         try:
-            sorting = self.sorting
+            sortinga = self.sorting[action]
         except:
             sorting = self.computeSortingCharacteristics(action=action,Comments=Comments,\
                                                    Threading=Threading,\
-                                                   nbrOfCPUs=nbrOfCPUs)      
+                                                   nbrOfCPUs=nbrOfCPUs)
+            sortinga = sorting[action]
+            
         keys = []
         for c in categories.keys():
         #for c in self.orderedCategoryKeys():
             Above = False
-            if sorting[action][c]['categoryMembership'] >= Med:
+            if sortinga[c]['categoryMembership'] >= Med:
                 Above = True
-                if sorting[action][c]['lowLimit'] > Med:
-                    lowLimit = sorting[action][c]['lowLimit']
-                if sorting[action][c]['notHighLimit'] > Med:
-                    notHighLimit = sorting[action][c]['notHighLimit']    
+                if sortinga[c]['lowLimit'] > Med:
+                    lowLimit = sortinga[c]['lowLimit']
+                if sortinga[c]['notHighLimit'] > Med:
+                    notHighLimit = sortinga[c]['notHighLimit']    
                 keys.append(c)
                 if Debug:
-                    print(action, c, sorting[action][c])
+                    print(action, c, sortinga[c])
             elif Above:
                 break
         n = len(keys)
@@ -1237,6 +1240,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                     keys[0],\
                     keys[-1],\
                     credibility            
+
+
 
     def computeCriterion2RankingCorrelation(self,criterion,Threading=False,\
                                     nbrOfCPUs=None,Debug=False,
