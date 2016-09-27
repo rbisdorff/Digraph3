@@ -35,7 +35,7 @@ def testSortingDigraphComputeWeakOrder():
     t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
                                     numberOfCriteria=13,
                                     weightDistribution='equiobjectives',
-                                    missingProbability=0.05,
+                                    missingDataProbability=0.05,
                                     seed=1)
     nt = NormalizedPerformanceTableau(t)
     so = SortingDigraph(t,scaleSteps=7,Debug=True)
