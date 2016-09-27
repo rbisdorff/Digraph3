@@ -943,7 +943,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                                      StoreSorting=True,\
                                      WithSortingRelation=False,\
                                      CopyPerfTab=CopyPerfTab,\
-                                     Threading= self.sortingParameters['Threading'],\
+                                     Threading=Threading,\
                                      tempDir=tempDir,\
                                      nbrCores=nbrOfCPUs,\
                                      nbrOfProcesses=nbrOfThreads,\
@@ -954,6 +954,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         self.profiles = qs.profiles
         self.categories = qs.categories
         self.sorting = qs.sorting
+        self.evaluation = qs.evaluation
+        
         if Comments:
             print('execution time: %.4f' % (self.runTimes['sorting']))
         # preordering
