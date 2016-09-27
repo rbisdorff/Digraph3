@@ -1298,13 +1298,18 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                  commonThresholds = None, commonMode = None,\
                  valueDigits=2,\
                  vetoProbability=0.5,\
-                 missingProbability = 0.05,\
+                 missingDataProbability = 0.05,\
                  BigData=False,\
                  seed= None,\
                  Debug=False):
         
         # naming
         self.name = 'random3ObjectivesPerfTab'
+        self.valueDigits = valueDigits
+        self.BigData = BigData
+        self.OrdinalScales = OrdinalScales
+        self.missingDataProbability = missingDataProbability
+        
         # randomizer init
         import random
         random.seed(seed)
@@ -1373,6 +1378,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 commonScale = (0,10)
             else:
                 commonScale = (0.0,100.0)
+        self.commonScale = commonScale
 
         criteria = OrderedDict()
         objectivesKeys = list(objectives.keys())
@@ -1439,13 +1445,14 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                     print(criteria[g]['weight'])
                 
         # allocate (criterion,action) to coalition supporting type
-        objectiveSupportingType = [('good','+'),('fair','~'),('weak','-')]
+        objectiveSupportingTypes = [('good','+'),('fair','~'),('weak','-')]
+        self.objectiveSupportingTypes = objectiveSupportingTypes
         for x in actions:
             profile = {}
             for obj in objectives:
                 if Debug:
                     print(objectives,obj)
-                ost = random.choice(objectiveSupportingType)
+                ost = random.choice(objectiveSupportingTypes)
                 actions[x][obj]=ost[0]
                 actions[x]['name'] =\
                     actions[x]['name'] + ' '+ str(obj) + ost[1]
@@ -1612,7 +1619,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         for g in criteria:
             sevalg = self.evaluation[g]
             for x in actions:
-                if random.random() < missingProbability:
+                if random.random() < missingDataProbability:
                     sevalg[x] = Decimal('-999')
 
     def showObjectives(self):
@@ -1650,6 +1657,226 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                     pass
                 print('  name:      ',actions[x]['name'])
                 print('  profile:   ',actions[x]['profile'])
+
+class Random3ObjectivesPerformanceGenerator(object):
+    """
+    Generates and/or new decision actions with random evaluation for a
+    given Random3ObjectivesPerformanceTableau instance.
+    """
+    def __init__(self,argPerfTab,actionNamePrefix='a',
+                 instanceCounter=0,seed=None,Debug=False):
+        """
+        Set the initial state of the random generator.
+        """
+        import random
+        random.seed(seed)
+        self.random = random
+        from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
+        self.RNGTr = RNGTr
+        self.perfTab = argPerfTab
+        self.actionNamePrefix = actionNamePrefix
+        if instanceCounter == 0:
+            self.counter = len(argPerfTab.actions)
+        else:
+            self.counter = instanceCounter
+        self.nd = len(str(self.counter))
+        self.Debug = Debug
+        
+    def randomAction(self):
+        """
+        Returns a dictionary with following content:
+
+        { 'action': { 'key': actionKey, 'shortName': ..., 'name': ...,  ... },                        
+        'evaluation': {'g1': Decimal(...), 'g2': Decimal(...), ... }  }
+        """
+        # generate random evaluation
+        Debug = self.Debug
+        random = self.random
+        digits = self.perfTab.valueDigits
+        criteria = self.perfTab.criteria
+        objectives = self.perfTab.objectives
+        objectiveSupportingTypes = self.perfTab.objectiveSupportingTypes
+        commonScale = self.perfTab.commonScale
+        OrdinalScales = self.perfTab.OrdinalScales
+
+        # generate action key and record
+        self.counter += 1
+        if self.perfTab.BigData:
+            actionName = ('%s%%0%dd' % (self.actionNamePrefix,self.nd)) % (self.counter)
+            actionKey = self.counter
+            action = {'shortName': actionName,
+                              'name': actionName,
+                              'key': actionKey,
+                              'generators': {}}
+        else:   
+            actionKey = ('%s%%0%dd' % (self.actionNamePrefix,self.nd)) % (self.counter)
+            action = {'shortName':actionKey,
+                        'name': 'random decision action',
+                        'comment': '3 Objectives',
+                        'key': actionKey,
+                        'generators': {}}
+
+        # allocate coalition supporting types
+        profile = {}
+        for obj in objectives:
+            if Debug:
+                print(objectives,obj)
+            ost = random.choice(objectiveSupportingTypes)
+            action[obj]=ost[0]
+            action['name'] =\
+                    action['name'] + ' '+ str(obj) + ost[1]
+            profile[obj] = action[obj]
+        action['profile'] = profile
+        if Debug:
+            print(action)
+        
+        # generate random evaluations
+        evaluation = {}
+        for g in criteria:
+            randomMode= criteria[g]['randomMode']
+            aobj = criteria[g]['objective']
+
+            # uniform distribution
+            if str(randomMode[0]) == 'uniform':          
+                if randomMode[1] == 'variable':
+                    #aobj = criteria[g]['objective']
+                    if actions['profile'][aobj] == 'weak':
+                        randomRange = (commonScale[0],
+                                       commonScale[0]+0.7*(commonScale[1]-commonScale[0]))
+                    elif action['profile'][aobj] == 'fair':
+                        randomRange = (commonScale[0]+0.3*(commonScale[1]-commonScale[0]),
+                                       commonScale[0]+0.7*(commonScale[1]-commonScale[0]))
+                    elif action['profile'][aobj] == 'good':
+                        randomRange = (commonScale[0]+0.3*(commonScale[1]-commonScale[0]),
+                                      commonScale[1])       
+                    action['comment'] += ': %s %s' % (randomMode[0],randomRange)
+                else:
+                    randomRange = (commonScale[1],commonScale[2]) 
+                randeval = random.uniform(randomRange[0],randomRange[1])
+                action['generators'][g] = (randomMode[0],randomRange)
+                if OrdinalScales:
+                    if criteria[g]['preferenceDirection'] == 'max':
+                        evaluation[g] = Decimal(str(round(randeval,0)))
+                    else:
+                        evaluation[g] = Decimal(str(-round(randeval,0)))
+                else:
+                    if criteria[g]['preferenceDirection'] == 'max':
+                        evaluation[g] = Decimal(str(round(randeval,digits)))
+                    else:
+                        evaluation[g] = Decimal(str(-round(randeval,digits)))
+                        
+            # beta distribution
+            elif str(randomMode[0]) == 'beta':
+                m = commonScale[0]
+                M = commonScale[1]
+                if randomMode[1] == 'variable':
+                    if action['profile'][aobj] == 'good':
+                        # mode = 75, stdev = 15
+                        #xm = 75
+                        alpha = 5.8661
+                        beta = 2.62203
+                    elif action['profile'][aobj] == 'fair':
+                        # nmode = 50, stdev = 15
+                        #xm = 50
+                        alpha = 5.05556
+                        beta = 5.05556
+                    elif action['profile'][aobj] == 'weak':
+                        # mode = 25, stdev = 15
+                        # xm = 25
+                        alpha = 2.62203
+                        beta = 5.8661                         
+                else:
+                    xm = randomMode[1]
+                    if xm > 0.5:
+                        beta = 2.0
+                        alpha = 1.0/(1-xm)
+                    else:
+                        alpha = 2.0
+                        beta = 1.0 / xm
+                if Debug:
+                    print('alpha,beta', alpha,beta)
+                u = random.betavariate(alpha,beta)
+                randeval = (u * (M-m)) + m
+                if Debug:
+                    print('xm,alpha,beta,u,m,M,randeval',xm,alpha,beta,u,m,M,randeval)
+                action['generators'][g] = ('beta',alpha,beta)
+                if OrdinalScales:
+                    if criteria[g]['preferenceDirection'] == 'max':
+                        evaluation[g] = Decimal(str(round(randeval,0)))
+                    else:
+                        evaluation[g] = Decimal(str(-round(randeval,0)))
+                else:
+                    if criteria[g]['preferenceDirection'] == 'max':
+                        evaluation[g] = Decimal(str(round(randeval,digits)))
+                    else:
+                        evaluation[g] = Decimal(str(-round(randeval,digits)))
+            # triangular
+            elif str(randomMode[0]) == 'triangular':
+                m = commonScale[0]
+                M = commonScale[1]
+                span = commonScale[1]-commonScale[0]
+                if randomMode[1] == 'variable':
+                    if action['profile'][aobj] == 'good':
+                        xm = 0.7*span
+                    elif action['profile'][aobj] == 'fair':
+                        xm = 0.5*span
+                    elif action['profile'][aobj] == 'weak':
+                        xm = 0.3*span
+                else:
+                    xm = randomMode[1]
+                r  = randomMode[2]
+                action['generators'][g] = (randomMode[0],xm,r)
+                # setting a speudo random seed
+                rdseed = random.random()
+                rngtr = self.RNGTr(m,M,xm,r,seed=rdseed)
+                randeval = rngtr.random()
+                if OrdinalScales:
+                    if criteria[g]['preferenceDirection'] == 'max':
+                        evaluation[g] = Decimal(str(round(randeval,0)))
+                    else:
+                        evaluation[g] = Decimal(str(-round(randeval,0)))
+                else:
+                    if criteria[g]['preferenceDirection'] == 'max':
+                        evaluation[g] = Decimal(str(round(randeval,digits)))
+                    else:
+                        evaluation[g] = Decimal(str(-round(randeval,digits)))
+               
+                if Debug:
+                    print(randeval, criteria[g]['preferenceDirection'], evaluation[g])
+                        
+        if Debug:
+            print(evaluation)
+
+        # randomly insert missing data
+        missingDataProbability = self.perfTab.missingDataProbability
+        for g in criteria:
+            if random.random() < missingDataProbability:
+                evaluation[g] = Decimal('-999')
+
+        # return a new random decision alternative
+        return {'action': action,'evaluation':evaluation}
+
+    def randomUpdate(self,nbrOfRandomActions=1):
+        """
+        Updates *self.perfTab* with *n* = *nbrOfActions* new random decision alternatives.
+
+        .. note::
+
+            The update will modify the generator's given performance tableau instance by,
+            either adding new actions with their random evaluations,
+            or updating the performances of already existing decision actions.
+        """
+        actions = self.perfTab.actions
+        criteria = self.perfTab.criteria
+        evaluation = self.perfTab.evaluation
+        for i in range(nbrOfRandomActions):
+            newAction = self.randomAction()
+            newEvaluation = newAction['evaluation']
+            newKey = newAction['action'].pop('key')
+            actions[newKey] = newAction['action']
+            for g in criteria:
+                evaluation[g][newKey] = newEvaluation[g]
+
 
 #---------------
 class _Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
@@ -2581,10 +2808,10 @@ if __name__ == "__main__":
 ##    print('*---------- test percentiles of variable thresholds --------*') 
 ####    t = RandomCoalitionsPerformanceTableau(weightDistribution='equicoalitions',
 ####                                           seed=100)
-    t = RandomCBPerformanceTableau(numberOfActions=10,
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=10,OrdinalScales=True,
                                            seed=100)
     t.showAll()
-    rag1 = RandomCBPerformanceGenerator(t,actionNamePrefix='b',seed=100)
+    rag1 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='b',seed=100)
     sampleSize = 5
     for s in range(sampleSize):
         newAction = rag1.randomAction()
@@ -2594,10 +2821,10 @@ if __name__ == "__main__":
             for g in t.evaluation:
                 t.evaluation[g][ak] = newAction['evaluation'][g]
     #t.showHTMLPerformanceHeatmap(Correlations=True)
-    rag2 = RandomCBPerformanceGenerator(t,actionNamePrefix='c',seed=110)
+    rag2 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='c',seed=110)
     rag2.randomUpdate(nbrOfRandomActions=5)
-    #t.showHTMLPerformanceHeatmap(Correlations=True)
-    t.updateDiscriminationThresholds(Comments=True,Debug=True)
+    t.showHTMLPerformanceHeatmap(ndigits=0,Correlations=True)
+    # t.updateDiscriminationThresholds(Comments=True,Debug=True)
     
     
 ##
