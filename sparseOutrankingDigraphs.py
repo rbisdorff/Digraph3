@@ -955,6 +955,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         self.categories = qs.categories
         self.sorting = qs.sorting
         self.evaluation = qs.evaluation
+        self.evaluation = self.restoreOriginalEvaluations()
         
         if Comments:
             print('execution time: %.4f' % (self.runTimes['sorting']))
@@ -1468,6 +1469,9 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             except:
                 pass
             print()
+
+    def showCriteriaQuantiles(self):
+        self.showPerformanceTableau(actionsSubset=self.profiles)
 
     def showComponents(self,direction='increasing'):
         SparseOutrankingDigraph.showDecomposition(self,direction=direction)

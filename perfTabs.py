@@ -3635,6 +3635,50 @@ The performance evaluations of each decision alternative on each criterion are g
                     
         return normEvaluation
 
+    def restoreOriginalEvaluations(self,lowValue=0.0,highValue=100.0,Debug=False):
+        """
+        recode the evaluations to their original values on all criteria
+        """
+        evaluation = self.evaluation
+        criteria = self.criteria
+        lowValue = Decimal(str(lowValue))
+        highValue = Decimal(str(highValue))
+        amplitude = highValue-lowValue
+        if Debug:
+            print('lowValue', lowValue, 'amplitude', amplitude)
+        criterionKeys = [x for x in evaluation]
+        restoredEvaluation = {}
+        for g in criterionKeys:
+            restoredEvaluation[g] = {}
+            glow = Decimal(str(criteria[g]['scale'][0]))
+            ghigh = Decimal(str(criteria[g]['scale'][1]))
+            gamp = ghigh - glow
+            if Debug:
+                print('-->> g, glow, ghigh, gamp', g, glow, ghigh, gamp)
+            for x in evaluation[g]:
+                if evaluation[g][x] != Decimal('-999'):
+                    evalx = abs(evaluation[g][x])
+                    if Debug:
+                        print(evalx)
+                    ## normEvaluation[g][x] = lowValue + ((evalx-glow)/gamp)*amplitude
+                    try:
+                        if criteria[g]['preferenceDirection'] == 'min':
+                            sign = Decimal('-1')
+                        else:
+                            sign = Decimal('1')
+                        #normEvaluation[g][x] = (lowValue + ((evalx-glow)/gamp)*amplitude)*sign
+                        restoredEvaluation[g][x] = (glow + ((evalx-lowValue)/amplitude)*gamp)*sign
+                    except:
+                        self.criteria[g]['preferenceDirection'] = 'max'
+                        restoredEvaluation[g][x] = glow+ ((evalx-lowValue)/amplitude)*gamp
+                        
+                    if Debug:
+                        print(criteria[g]['preferenceDirection'], evaluation[g][x], restoredEvaluation[g][x])
+                else:
+                    restoredEvaluation[g][x] = Decimal('-999')
+                    
+        return restoredEvaluation
+
 #-----------------------
 class PartialPerformanceTableau(PerformanceTableau):
     """
