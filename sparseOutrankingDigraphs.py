@@ -26,7 +26,7 @@ from time import time
 from decimal import Decimal
 from sparseOutrankingDigraphs import *
 
-class SparseOutrankingDigraph(OutrankingDigraph):
+class SparseOutrankingDigraph(BipolarOutrankingDigraph):
     """
     Abstract root class for linearly decomposed sparse digraphs.
     """
@@ -907,16 +907,18 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
 
         # setting name
         perfTab = argPerfTab
-        self.name = perfTab.name + '_mp'
         # setting quantiles sorting parameters
         if CopyPerfTab:
-            self.actions = deepcopy(perfTab.actions)
-            self.criteria = deepcopy(perfTab.criteria)
-            self.evaluation = deepcopy(perfTab.evaluation)
+            self.__dict__ = deepcopy(perfTab.__dict__)
+##            self.actions = deepcopy(perfTab.actions)
+##            self.criteria = deepcopy(perfTab.criteria)
+##            self.evaluation = deepcopy(perfTab.evaluation)
         else:
-            self.actions = perfTab.actions
-            self.criteria = perfTab.criteria
-            self.evaluation = perfTab.evaluation
+            self.__dict__.update(perfTab.__dict__)
+##            self.actions = perfTab.actions
+##            self.criteria = perfTab.criteria
+##            self.evaluation = perfTab.evaluation
+        self.name = perfTab.name + '_pr'
         na = len(self.actions)
         self.order = na
         self.dimension = len(perfTab.criteria)
@@ -1778,22 +1780,22 @@ if __name__ == "__main__":
                                  save2File='testbgMP')
     print(bg1)
     bg1.showComponents()
-    bg1.exportSortingGraphViz(actionsSubset=bg1.boostedRanking[:100])
+    #bg1.exportSortingGraphViz(actionsSubset=bg1.boostedRanking[:100])
     
-    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
-                                      seed=100)
-    
-    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=False,quantiles=10,
-                                 quantilesOrderingStrategy='average',
-                                 componentRankingRule='NetFlows',
-                                 LowerClosed=True,
-                                 minimalComponentSize=10,
-                                 Threading=MP,nbrOfCPUs=8,
-                                 #tempDir='.',
-                                 nbrOfThreads=8,
-                                 Comments=True,Debug=False,
-                                 save2File='testbgDev')
-    print(bg2)
+##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
+##                                      seed=100)
+##    
+##    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=False,quantiles=10,
+##                                 quantilesOrderingStrategy='average',
+##                                 componentRankingRule='NetFlows',
+##                                 LowerClosed=True,
+##                                 minimalComponentSize=10,
+##                                 Threading=MP,nbrOfCPUs=8,
+##                                 #tempDir='.',
+##                                 nbrOfThreads=8,
+##                                 Comments=True,Debug=False,
+##                                 save2File='testbgDev')
+##    print(bg2)
     #print(bg1.computeDecompositionSummaryStatistics())
     #bg1.showDecomposition(direction='increasing')
-    bg2.showHTMLRelationMap(0,100)
+    #bg2.showHTMLRelationMap(0,100)

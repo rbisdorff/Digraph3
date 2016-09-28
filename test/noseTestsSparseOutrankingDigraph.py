@@ -60,6 +60,7 @@ def testMinimalComponentSize():
     bg1.showDecomposition()
     print(bg1)
     bg1.showRelationTable()
+    #tp = RandomCBPerformanceTableau(numberOfActions=200,BigData=True,Threading=MP)
     bg2 = PreRankedOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
                                minimalComponentSize=1,
