@@ -1577,8 +1577,10 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             ordering = self.boostedOrder
         return ordering.index(action) +1
 
-    def htmlPerformanceHeatmap(self,criteriaList=None,
-                               actionsList=None,
+    def htmlPerformanceHeatmap(self,argCriteriaList=None,
+                               argActionsList=None,
+                               SparseModel=True,
+                               minimalComponentSize=1,
                                RankingRule='Copeland',
                                quantiles=None,
                                strategy='average',
@@ -1588,6 +1590,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                                pageTitle='Performance Heatmap',
                                Correlations=False,
                                Threading=False,
+                               nbrOfCPUs=None,
                                Debug=False):
         """
         Specialization of the generic perfTabs method for spare outranking digraphs.
@@ -1649,15 +1652,17 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         html += '</style>\n'
         html += '</head>\n<body>\n'
         html += '<h2>%s</h2>\n' % pageTitle
-        if actionsList == None:
+        if argActionsList == None:
             actionsList = self.boostedRanking
+        else:
+            actionsList = argActionsList
         na = len(actionsList)
         
         if Debug:
             print('1',actionsList)
 
         criteria = self.criteria
-        if criteriaList == None:
+        if argCriteriaList == None:
             if Correlations:
                 criteriaCorrelation =\
                         self.computeMarginalVersusGlobalRankingCorrelations(\
@@ -1671,6 +1676,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 criteriaList = [g[1] for g in criteriaWeightsList]
                 criteriaCorrelation = None    
         else:
+            criteria = argCriteriaList
             criteriaCorrelation = None
             
         quantileColor={}
@@ -1815,7 +1821,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
 
         return sorting
 
-    def showNewActionCategories(self,action,sorting,Debug=False,Comments=True):
+    def computeNewActionCategories(self,action,sorting,Debug=False,Comments=False):
         """
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
@@ -1861,6 +1867,13 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                     keys[-1],\
                     credibility            
 
+    def showNewActionCategories(self,action,sorting):
+        """
+        Prints the union of categories in which the given action is sorted positively or null into.
+        """
+        self.computeNewActionCategories(action,sorting,Comments=True)
+
+        
     def showNewActionsSortingResult(self,actions,sorting,Debug=False):
         """
         shows the quantiles sorting result all (default) of a subset of the decision actions.
@@ -1886,7 +1899,7 @@ if __name__ == "__main__":
     bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=20,
                                  quantilesOrderingStrategy='average',
                                  componentRankingRule='Copeland',
-                                 LowerClosed=True,
+                                 LowerClosed=False,
                                  minimalComponentSize=1,
                                  Threading=False,nbrOfCPUs=8,
                                  #tempDir='.',
@@ -1908,9 +1921,22 @@ if __name__ == "__main__":
     print(newRelation)
     newSorting = bg1.computeNewSortingCharacteristics(newActions,newRelation)
     print(newSorting)
-    bg1.showNewActionsSortingResult(newActions,newSorting)
-    bg1.sorting.update(newSorting)
-    bg1.showActionsSortingResult()
+    for x in newActions:
+        res = bg1.computeNewActionCategories(x,newSorting)
+        bg1.showNewActionCategories(x,newSorting)
+        Found = False
+        for compKey in bg1.components:
+            comp = bg1.components[compKey]
+            if comp['lowQtileLimit'] == bg1.categories[res[1]]['lowLimit'] and\
+               comp['highQtileLimit'] == bg1.categories[res[2]]['highLimit']:
+                Found = True
+                print('new Action \'%s\' joins component %s-%s: %s' % (res[0],comp['lowQtileLimit'],\
+                                                comp['highQtileLimit'], list(comp['subGraph'].actions.keys())) )
+        if not Found:
+            print('New component: %s-%s : [\'%s\'] needs to be inserted!' %\
+                  (bg1.categories[res[1]]['lowLimit'],bg1.categories[res[2]]['highLimit'],res[0]) )
+##    bg1.sorting.update(newSorting)
+##    bg1.showActionsSortingResult()
 
     
     
