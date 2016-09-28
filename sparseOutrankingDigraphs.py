@@ -1753,7 +1753,122 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         html += '</body></html>'
         return html
 
+    def computeNewSortingCharacteristics(self, actions, relation, Comments=False):
+        """
+        Renders a bipolar-valued bi-dictionary relation
+        representing the degree of credibility of the
+        assertion that "actions x in A belongs to category c in C",
+        i.e. x outranks low category limit and does not outrank
+        the high category limit (if LowerClosed).
+        """
+        Min = self.valuationdomain['min']
+        Med = self.valuationdomain['med']
+        Max = self.valuationdomain['max']
 
+        categories = self.categories
+
+        LowerClosed = self.sortingParameters['LowerClosed']
+
+        if Comments:
+            if LowerClosed:
+                print('x  in  K_k\t r(x >= m_k)\t r(x < M_k)\t r(x in K_k)')
+            else:
+                print('x  in  K_k\t r(m_k < x)\t r(M_k >= x)\t r(x in K_k)')
+
+        sorting = {}
+        nq = self.sortingParameters['limitingQuantiles']
+        for x in actions:
+            sorting[x] = {}
+            for c in categories:
+                sorting[x][c] = {}
+                if LowerClosed:
+                    cKey= c+'-m'
+                else:
+                    cKey= c+'-M'
+                if LowerClosed:
+                    lowLimit = relation[x][cKey]
+                    if int(c) < nq:
+                        cMaxKey = str(int(c)+1)+'-m'
+                        notHighLimit = Max - relation[x][cMaxKey] + Min
+                    else:
+                        notHighLimit = Max
+                else:
+                    if int(c) > 1:
+                        cMinKey = str(int(c)-1)+'-M'
+                        lowLimit = Max - relation[cMinKey][x] + Min
+                    else:
+                        lowLimit = Max
+                    notHighLimit = relation[cKey][x]
+                #if Comments:
+                #    print('%s in %s: low = %.2f, high = %.2f' % \
+                #          (x, c,lowLimit,notHighLimit), end=' ')
+                if Comments:
+                    print('%s in %s - %s\t' % (x, categories[c]['lowLimit'],categories[c]['highLimit'],), end=' ')
+                categoryMembership = min(lowLimit,notHighLimit)
+                sorting[x][c]['lowLimit'] = lowLimit
+                sorting[x][c]['notHighLimit'] = notHighLimit
+                sorting[x][c]['categoryMembership'] = categoryMembership
+
+                if Comments:
+                    #print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+                    print('%.2f\t\t %.2f\t\t %.2f\n' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+
+        return sorting
+
+    def showNewActionCategories(self,action,sorting,Debug=False,Comments=True):
+        """
+        Renders the union of categories in which the given action is sorted positively or null into.
+        Returns a tuple : action, lowest category key, highest category key, membership credibility !
+        """
+        Med = self.valuationdomain['med']
+        keys = []
+        for c in self.categories:
+            if sorting[action][c]['categoryMembership'] >= Med:
+                if sorting[action][c]['lowLimit'] > Med:
+                    lowLimit = sorting[action][c]['lowLimit']
+                if sorting[action][c]['notHighLimit'] > Med:
+                    notHighLimit = sorting[action][c]['notHighLimit']
+                keys.append(c)
+                if Debug:
+                    print(action, c, sorting[action][c])
+        n = len(keys)
+        try:
+            credibility = min(lowLimit,notHighLimit)
+        except:
+            credibility = Med
+        if n == 0:
+            return None
+        elif n == 1:
+            if Comments:
+                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                     self.categories[keys[0]]['lowLimit'],\
+                                     self.categories[keys[0]]['highLimit'],\
+                                     action,\
+                                     credibility,lowLimit,notHighLimit) )
+            return action,\
+                    keys[0],\
+                    keys[0],\
+                    credibility
+        else:
+            if Comments:
+                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                     self.categories[keys[0]]['lowLimit'],\
+                                     self.categories[keys[-1]]['highLimit'],\
+                                     action,\
+                                     credibility,lowLimit,notHighLimit) )
+            return action,\
+                    keys[0],\
+                    keys[-1],\
+                    credibility            
+
+    def showNewActionsSortingResult(self,actions,sorting,Debug=False):
+        """
+        shows the quantiles sorting result all (default) of a subset of the decision actions.
+        """
+        print('Quantiles sorting result per decision action')
+        for x in actions:
+            self.showNewActionCategories(x,sorting,Debug=Debug)
+ 
 #######################################################################
 #######################################################################
 #----------test classes and methods ----------------
@@ -1771,7 +1886,7 @@ if __name__ == "__main__":
     bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=20,
                                  quantilesOrderingStrategy='average',
                                  componentRankingRule='Copeland',
-                                 LowerClosed=False,
+                                 LowerClosed=True,
                                  minimalComponentSize=1,
                                  Threading=False,nbrOfCPUs=8,
                                  #tempDir='.',
@@ -1780,6 +1895,25 @@ if __name__ == "__main__":
                                  save2File='testbgMP')
     print(bg1)
     bg1.showComponents()
+    rag = RandomCBPerformanceGenerator(bg1,actionNamePrefix='t')
+    rag.randomUpdate(2)
+    newActions = [key for key in bg1.actions if key[0] == 't']
+    print(newActions)
+    if bg1.sortingParameters['LowerClosed']:
+        newRelation = bg1._constructRelationSimple(bg1.criteria,bg1.evaluation,
+                                               initial=newActions,terminal=bg1.profiles)
+    else:
+        newRelation = bg1._constructRelationSimple(bg1.criteria,bg1.evaluation,
+                                               initial=bg1.profiles,terminal=newActions)
+    print(newRelation)
+    newSorting = bg1.computeNewSortingCharacteristics(newActions,newRelation)
+    print(newSorting)
+    bg1.showNewActionsSortingResult(newActions,newSorting)
+    bg1.sorting.update(newSorting)
+    bg1.showActionsSortingResult()
+
+    
+    
     #bg1.exportSortingGraphViz(actionsSubset=bg1.boostedRanking[:100])
     
 ##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
