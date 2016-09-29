@@ -6225,7 +6225,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
         * stringInput: instantiates from an XMCDA 2.0 encoded string argument.
            
     """
-
+    from collections import OrderedDict
+    
     def __init__(self,fileName='temp',HasSeparatedWeights=False,
                  HasSeparatedThresholds=False,stringInput=None,
                  Debug=False):
@@ -6293,7 +6294,7 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
                 parameter[tag] = value
                 #print tag,value
         self.parameter = parameter
-        actions = {}
+        actions = OrderedDict()
         # get alternatives' description
         description = {}
         for elem in [x for x in XMCDA.find('alternatives').find('description').getchildren()]:
@@ -6317,7 +6318,7 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
                 except:
                     pass
         self.actions = actions
-        criteria = {}
+        criteria = OrderedDict()
         # get criteria' description
         if XMCDA.find('criteria').find('description') != None:
             description = {}
