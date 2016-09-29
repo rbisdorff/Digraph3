@@ -836,8 +836,9 @@ def _decompose(i, nc,tempDirName,componentRankingRule):
     nd = len(str(nc))
     compKey = ('c%%0%dd' % (nd)) % (i+1)
     compDict = {'rank':i}
-    compDict['lowQtileLimit'] = comp[0][1]
-    compDict['highQtileLimit'] = comp[0][0]
+    compDict['lowQtileLimit'] = comp[0][0]
+    compDict['highQtileLimit'] = comp[0][1]
+    compDict['score'] = (comp[2],comp[3],comp[4])
     pg = BipolarOutrankingDigraph(perfTab,
                     actionsSubset=comp[1],
                     WithConcordanceRelation=False,
@@ -969,7 +970,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         tw = time()
         quantilesOrderingStrategy = self.sortingParameters['strategy']
         ##if quantilesOrderingStrategy == 'average':
-        decomposition = [[(item[0][0],item[0][1]),item[1]]\
+        decomposition = [[(item[0][0],item[0][1]),item[1],item[2],item[3],item[4]]\
                 for item in self._computeQuantileOrdering(\
                     strategy=quantilesOrderingStrategy,\
                     Descending=True,Threading=Threading,nbrOfCPUs=nbrOfCPUs)]
@@ -988,11 +989,12 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             components = OrderedDict()
             for i in range(1,nc+1):
                 comp = decomposition[i-1]
+                #print('==>>',comp)
                 compKey = ('c%%0%dd' % (self.nd)) % (i)
                 components[compKey] = {'rank':i}
                 pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
-                components[compKey]['lowQtileLimit'] = comp[0][1]
-                components[compKey]['highQtileLimit'] = comp[0][0]
+                components[compKey]['lowQtileLimit'] = comp[0][0]
+                components[compKey]['highQtileLimit'] = comp[0][1]
                 pg = BipolarOutrankingDigraph(pt,
                                           WithConcordanceRelation=False,
                                           WithVetoCounts=False,
@@ -1002,6 +1004,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 pg.__dict__.pop('evaluation')
                 pg.__class__ = Digraph
                 components[compKey]['subGraph'] = pg
+                components[compKey]['score']=(comp[2],comp[3],comp[4])
         else:   # if self.sortingParameters['Threading'] == True:
                 from copy import copy, deepcopy
                 from pickle import dumps, loads, load, dump
@@ -1125,40 +1128,35 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             lowQtileLimit = self.categories[lowCateg]['lowLimit']
             highQtileLimit = self.categories[highCateg]['highLimit']
             if strategy == "optimistic":
-                try:
-                    actionsCategories[(highQtileLimit,highQtileLimit,lowQtileLimit)].append(a)
-                except:
-                    actionsCategories[(highQtileLimit,highQtileLimit,lowQtileLimit)] = [a]
+                score = highQtileLimit
             elif strategy == "pessimistic":
-                try:
-                    actionsCategories[(lowQtileLimit,highQtileLimit,lowQtileLimit)].append(a)
-                except:
-                    actionsCategories[(lowQtileLimit,highQtileLimit,lowQtileLimit)] = [a]
-            elif strategy == "average":
+                score = lowQtileLimit
+            else:   #strategy == "average":
                 lc = float(lowCateg)
                 hc = float(highCateg)
-                ac = (lc+hc)/2.0
-                try:
-                    actionsCategories[(ac,highQtileLimit,lowQtileLimit)].append(a)
-                except:
-                    actionsCategories[(ac,highQtileLimit,lowQtileLimit)] = [a]
-            else:
-                print('Error: startegy %s unkonwon' % strategy)
+                score = (lc+hc)/2.0
+            #print(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)
+            try:
+                actionsCategories[(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)].append(a)
+            except:
+                actionsCategories[(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)] = [a]
+
+        #print(actionsCategories)
                 
         actionsCategIntervals = []
         for interval in actionsCategories:
             actionsCategIntervals.append([interval,\
                                           actionsCategories[interval]])
         actionsCategIntervals.sort(reverse=Descending)
-        if Debug:
-            print(actionsCategIntervals)
+        #if Debug:
+        #print(actionsCategIntervals)
         CompSize = self.minimalComponentSize 
         if CompSize == 1:
             if Descending:
-                componentsIntervals = [[(item[0][1],item[0][2]),item[1]]\
+                componentsIntervals = [[(item[0][1],item[0][2]),item[1],item[0][0],item[0][3],item[0][4]]\
                                    for item in actionsCategIntervals]
             else:
-                componentsIntervals = [[(item[0][2],item[0][1]),item[1]]\
+                componentsIntervals = [[(item[0][2],item[0][1]),item[1],item[0][0],item[0][3],item[0][4]]\
                                    for item in actionsCategIntervals]
                 
         else:
@@ -1167,16 +1165,22 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             compContent = []
             for i in range(nc):
                 currContLength = len(compContent)
-                comp = actionsCategIntervals[i]               
+                comp = actionsCategIntervals[i]
+                #print(comp)
                 if currContLength == 0:
-                    lowQtileLimit = comp[0][1]
-                highQtileLimit = comp[0][2]
+                    lowQtileLimit = comp[0][2]
+                highQtileLimit = comp[0][1]             
                 compContent += comp[1]
                 if len(compContent) >= CompSize or i == nc-1:
+                    score = comp[0][0]
+                    lowCateg = comp[0][3]
+                    highCateg = comp[0][4]
                     if Descending:
-                        componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent])
+                        componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent,\
+                                                    score,lowCateg,highCateg])
                     else:
-                        componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent])
+                        componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent,\
+                                                    score,lowCateg,highCateg])
                     compContent = []
         if Debug:
             print(componentsIntervals)
@@ -1492,7 +1496,11 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             comp = self.components[compKey]
             sg = comp['subGraph']
             actions = [x for x in sg.actions]
-            print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],actions))
+            #if direction == 'decreasing':
+            #print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],actions))
+            #else:
+            print('%s. %s-%s : %s' % (compKey,comp['highQtileLimit'],comp['lowQtileLimit'],actions))
+                
 
     def showRelationTable(self,compKeys=None):
         """
@@ -1899,7 +1907,7 @@ if __name__ == "__main__":
     bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=20,
                                  quantilesOrderingStrategy='average',
                                  componentRankingRule='Copeland',
-                                 LowerClosed=False,
+                                 LowerClosed=True,
                                  minimalComponentSize=1,
                                  Threading=False,nbrOfCPUs=8,
                                  #tempDir='.',
@@ -1907,7 +1915,7 @@ if __name__ == "__main__":
                                  Comments=False,Debug=False,
                                  save2File='testbgMP')
     print(bg1)
-    bg1.showComponents()
+    bg1.showComponents(direction='descending')
     rag = RandomCBPerformanceGenerator(bg1,actionNamePrefix='t')
     rag.randomUpdate(2)
     newActions = [key for key in bg1.actions if key[0] == 't']
@@ -1923,18 +1931,35 @@ if __name__ == "__main__":
     print(newSorting)
     for x in newActions:
         res = bg1.computeNewActionCategories(x,newSorting)
+        print(res,bg1.categories[res[1]]['lowLimit'],bg1.categories[res[2]]['highLimit'])
+        #compute score
+        strategy = bg1.sortingParameters['strategy']
+        if strategy == 'optimistic':
+            score = float(res[1])
+        elif strategy == 'pessimistic':
+            score = float(res[2])
+        else:
+            score = (float(res[1])+float(res[2]))/2.0
+            
         bg1.showNewActionCategories(x,newSorting)
-        Found = False
         for compKey in bg1.components:
             comp = bg1.components[compKey]
+            #print(score,comp)
             if comp['lowQtileLimit'] == bg1.categories[res[1]]['lowLimit'] and\
                comp['highQtileLimit'] == bg1.categories[res[2]]['highLimit']:
                 Found = True
-                print('new Action \'%s\' joins component %s-%s: %s' % (res[0],comp['lowQtileLimit'],\
-                                                comp['highQtileLimit'], list(comp['subGraph'].actions.keys())) )
-        if not Found:
-            print('New component: %s-%s : [\'%s\'] needs to be inserted!' %\
+                print('new Action \'%s\' joins component %s-%s: %s (%s)' % (res[0],comp['lowQtileLimit'],\
+                                                comp['highQtileLimit'], list(comp['subGraph'].actions.keys()), str(comp['score']) ) )
+                break
+            if score > comp['score'][0]:
+                print('New component: %s-%s : [\'%s\'] needs to be inserted!' %\
                   (bg1.categories[res[1]]['lowLimit'],bg1.categories[res[2]]['highLimit'],res[0]) )
+                break
+
+    bg1.sorting.update(newSorting)
+    bg1.showDecomposition(direction='increasing')
+    bg1.showDecomposition(direction='decreasing')
+    
 ##    bg1.sorting.update(newSorting)
 ##    bg1.showActionsSortingResult()
 
