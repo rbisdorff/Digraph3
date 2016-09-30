@@ -2160,25 +2160,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                 #keys.append(c)
                 if Debug:
                     print(action, c, sorting[action][c], keys)
-        #n = len(keys)
-        #try:
         credibility = min(lowLimit,notHighLimit)
-        #except:
-        #   credibility = Med
-##        if n == 0:
-##            return None
-##        elif n == 1:
-##            if Comments:
-##                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-##                                     self.categories[keys[0]]['lowLimit'],\
-##                                     self.categories[keys[0]]['highLimit'],\
-##                                     action,\
-##                                     credibility,lowLimit,notHighLimit) )
-##            return action,\
-##                    keys[0],\
-##                    keys[0],\
-##                    credibility
-##        else:
         if Comments:
             print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
                                  self.categories[keys[0]]['lowLimit'],\
@@ -3856,13 +3838,13 @@ if __name__ == "__main__":
     MP = True
 ##    t = PerformanceTableau('auditor2_1')
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
-    t = XMCDA2PerformanceTableau('spiegel2004')
+##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('ex1')
-##    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
-##                                    numberOfCriteria=13,
-##                                    weightDistribution='equiobjectives',
-##                                            missingProbability=0.05,
-##                                    seed=1)
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
+                                    numberOfCriteria=13,
+                                    weightDistribution='equiobjectives',
+                                    missingDataProbability=0.05,
+                                    seed=1)
     nt = NormalizedPerformanceTableau(t)
 ##    so = SortingDigraph(t,scaleSteps=5,LowerClosed=True,Debug=True)
 ####    so = SortingDigraph('grafittiPerfTab','grafittiCategories')

@@ -625,45 +625,72 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                                                      Threading=Threading,
                                                      StoreSorting=False,
                                                      nbrOfCPUs=nbrOfCPUs)
-        keys = []
+        catKeys = self.orderedCategoryKeys()
+        lowLimit = sorting[action][catKeys[0]]['lowLimit']
+        notHighLimit = sorting[action][catKeys[-1]]['notHighLimit']
+        keys = [catKeys[0],catKeys[-1]]  # action is sorted by default in all categories 
         for c in self.orderedCategoryKeys():
             if sorting[action][c]['categoryMembership'] >= Med:
                 if sorting[action][c]['lowLimit'] > Med:
                     lowLimit = sorting[action][c]['lowLimit']
+                    keys[0] = c  # the highest lowLimit is remembered
                 if sorting[action][c]['notHighLimit'] > Med:
                     notHighLimit = sorting[action][c]['notHighLimit']
-                keys.append(c)
+                    keys[1] = c  # the highest notHighLimit (lowest HigLimit) is remembered
                 if Debug:
-                    print(action, c, sorting[action][c])
-        n = len(keys)
-        try:
-            credibility = min(lowLimit,notHighLimit)
-        except:
-            credibility = Med
-        if n == 0:
-            return None
-        elif n == 1:
-            if Comments:
-                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     self.categories[keys[0]]['lowLimit'],\
-                                     self.categories[keys[0]]['highLimit'],\
-                                     action,\
-                                     credibility,lowLimit,notHighLimit) )
-            return action,\
-                    keys[0],\
-                    keys[0],\
-                    credibility
-        else:
-            if Comments:
-                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     self.categories[keys[0]]['lowLimit'],\
-                                     self.categories[keys[-1]]['highLimit'],\
-                                     action,\
-                                     credibility,lowLimit,notHighLimit) )
-            return action,\
-                    keys[0],\
-                    keys[-1],\
-                    credibility            
+                    print(action, c, sorting[action][c],keys)
+        credibility = min(lowLimit,notHighLimit)
+        if Comments:
+            print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                 self.categories[keys[0]]['name'],\
+                                 self.categories[keys[1]]['name'],\
+                                 action,\
+                                 credibility,lowLimit,notHighLimit) )
+        return action,\
+                keys[0],\
+                keys[1],\
+                credibility            
+
+
+        #     keys = []
+        # for c in self.orderedCategoryKeys():
+        #     if sorting[action][c]['categoryMembership'] >= Med:
+        #         if sorting[action][c]['lowLimit'] > Med:
+        #             lowLimit = sorting[action][c]['lowLimit']
+        #         if sorting[action][c]['notHighLimit'] > Med:
+        #             notHighLimit = sorting[action][c]['notHighLimit']
+        #         keys.append(c)
+        #         if Debug:
+        #             print(action, c, sorting[action][c])
+        # n = len(keys)
+        # try:
+        #     credibility = min(lowLimit,notHighLimit)
+        # except:
+        #     credibility = Med
+        # if n == 0:
+        #     return None
+        # elif n == 1:
+        #     if Comments:
+        #         print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+        #                              self.categories[keys[0]]['lowLimit'],\
+        #                              self.categories[keys[0]]['highLimit'],\
+        #                              action,\
+        #                              credibility,lowLimit,notHighLimit) )
+        #     return action,\
+        #             keys[0],\
+        #             keys[0],\
+        #             credibility
+        # else:
+        #     if Comments:
+        #         print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+        #                              self.categories[keys[0]]['lowLimit'],\
+        #                              self.categories[keys[-1]]['highLimit'],\
+        #                              action,\
+        #                              credibility,lowLimit,notHighLimit) )
+        #     return action,\
+        #             keys[0],\
+        #             keys[-1],\
+        #             credibility            
 
     def showActionsSortingResult(self,actionSubset=None,Debug=False):
         """
