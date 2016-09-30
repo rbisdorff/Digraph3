@@ -227,9 +227,13 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                     (self.criteria[g]['scale'][0] + (i+1)*k))
                     else:
                         gHighLimit = Decimal('%.1f' % (2*self.criteria[g]['scale'][1]))
+                    if i > 0:
+                        gLowLimit = Decimal('%.1f' %\
+                                    (self.criteria[g]['scale'][0] + (i)*k))
+                    else:
+                        gLowLimit = Decimal('%.1f' % (-self.criteria[g]['scale'][1]))
                     criteriaCategoryLimits[g][c]={
-                        'minimum': Decimal('%.1f' %\
-                                    (self.criteria[g]['scale'][0] + i*k)),
+                        'minimum': Decimal('%.1f' % gLowLimit),
                         'maximum': Decimal('%.1f' % gHighLimit)
                         }
                     i += 1
@@ -1257,45 +1261,28 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         catKeys = self.orderedCategoryKeys()
         lowLimit = sorting[action][catKeys[0]]['lowLimit']
         notHighLimit = sorting[action][catKeys[-1]]['notHighLimit']
-        keys = [catKeys[0],catKeys[-1]]
+        keys = [catKeys[0],catKeys[-1]]  # action is sorted by default in all categories 
         for c in self.orderedCategoryKeys():
             if sorting[action][c]['categoryMembership'] >= Med:
                 if sorting[action][c]['lowLimit'] > Med:
                     lowLimit = sorting[action][c]['lowLimit']
+                    keys[0] = c  # the highest lowLimit is remembered
                 if sorting[action][c]['notHighLimit'] > Med:
                     notHighLimit = sorting[action][c]['notHighLimit']
-                keys.append(c)
+                    keys[1] = c  # the highest notHighLimit (lowest HigLimit) is remembered
                 if Debug:
-                    print(action, c, sorting[action][c])
-        n = len(keys)
-        try:
-            credibility = min(lowLimit,notHighLimit)
-        except:
-            credibility = Med
-        if n == 0:
-            return None
-        elif n == 1:
-            if Comments:
-                print('%s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     self.categories[keys[0]]['name'],\
-                                     #self.categories[keys[0]]['name'],\
-                                     action,\
-                                     credibility,lowLimit,notHighLimit) )
-            return action,\
-                    keys[0],\
-                    keys[0],\
-                    credibility
-        else:
-            if Comments:
-                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     self.categories[keys[0]]['name'],\
-                                     self.categories[keys[-1]]['name'],\
-                                     action,\
-                                     credibility,lowLimit,notHighLimit) )
-            return action,\
-                    keys[0],\
-                    keys[-1],\
-                    credibility            
+                    print(action, c, sorting[action][c],keys)
+        credibility = min(lowLimit,notHighLimit)
+        if Comments:
+            print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                 self.categories[keys[0]]['name'],\
+                                 self.categories[keys[1]]['name'],\
+                                 action,\
+                                 credibility,lowLimit,notHighLimit) )
+        return action,\
+                keys[0],\
+                keys[1],\
+                credibility            
 
     def showActionsSortingResult(self,actionSubset=None,Debug=False):
         """
@@ -2158,45 +2145,50 @@ class QuantilesSortingDigraph(SortingDigraph):
                                                      Threading=Threading,
                                                      StoreSorting=False,
                                                      nbrOfCPUs=nbrOfCPUs)
-        keys = []
+        catKeys = self.orderedCategoryKeys()
+        keys = [catKeys[0],[catKeys[-1]]]
+        lowLimit = sorting[action][catKeys[0]]['lowLimit']
+        notHighLimit = sorting[action][catKeys[-1]]['lowLimit']
         for c in self.orderedCategoryKeys():
             if sorting[action][c]['categoryMembership'] >= Med:
                 if sorting[action][c]['lowLimit'] > Med:
                     lowLimit = sorting[action][c]['lowLimit']
+                    keys[0] = c
                 if sorting[action][c]['notHighLimit'] > Med:
                     notHighLimit = sorting[action][c]['notHighLimit']
-                keys.append(c)
+                    keys[1] = c
+                #keys.append(c)
                 if Debug:
-                    print(action, c, sorting[action][c])
-        n = len(keys)
-        try:
-            credibility = min(lowLimit,notHighLimit)
-        except:
-            credibility = Med
-        if n == 0:
-            return None
-        elif n == 1:
-            if Comments:
-                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     self.categories[keys[0]]['lowLimit'],\
-                                     self.categories[keys[0]]['highLimit'],\
-                                     action,\
-                                     credibility,lowLimit,notHighLimit) )
-            return action,\
-                    keys[0],\
-                    keys[0],\
-                    credibility
-        else:
-            if Comments:
-                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     self.categories[keys[0]]['lowLimit'],\
-                                     self.categories[keys[-1]]['highLimit'],\
-                                     action,\
-                                     credibility,lowLimit,notHighLimit) )
-            return action,\
-                    keys[0],\
-                    keys[-1],\
-                    credibility            
+                    print(action, c, sorting[action][c], keys)
+        #n = len(keys)
+        #try:
+        credibility = min(lowLimit,notHighLimit)
+        #except:
+        #   credibility = Med
+##        if n == 0:
+##            return None
+##        elif n == 1:
+##            if Comments:
+##                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+##                                     self.categories[keys[0]]['lowLimit'],\
+##                                     self.categories[keys[0]]['highLimit'],\
+##                                     action,\
+##                                     credibility,lowLimit,notHighLimit) )
+##            return action,\
+##                    keys[0],\
+##                    keys[0],\
+##                    credibility
+##        else:
+        if Comments:
+            print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                 self.categories[keys[0]]['lowLimit'],\
+                                 self.categories[keys[-1]]['highLimit'],\
+                                 action,\
+                                 credibility,lowLimit,notHighLimit) )
+        return action,\
+                keys[0],\
+                keys[1],\
+                credibility            
 
     def showActionsSortingResult(self,actionSubset=None,Debug=False):
         """
@@ -3888,7 +3880,10 @@ if __name__ == "__main__":
 ##    so.showWeakOrder(strategy='pessimistic')
 ##    print('average')
 ##    so.showWeakOrder()
-    so1 = SortingDigraph(nt,scaleSteps=10,LowerClosed=True)
+    so1 = SortingDigraph(nt,scaleSteps=10,LowerClosed=False)
+    so1.computeWeakOrder(Comments=True)
+    so1.showPerformanceTableau(actionsSubset=so1.profiles['min'])
+    so1.showPerformanceTableau(actionsSubset=so1.profiles['max'])
 ##    so1.showSorting()
 ##    so1.showSortingCharacteristics()
     
