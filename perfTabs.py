@@ -1510,7 +1510,7 @@ The performance evaluations of each decision alternative on each criterion are g
         
     def showHTMLPerformanceTableau(self,isSorted=True,\
                                    Transposed=False,ndigits=2,\
-                                   ContentCentered=True):
+                                   ContentCentered=True,title=None):
         """
         shows the html version of the performance tableau in a browser window.
         """
@@ -1520,7 +1520,8 @@ The performance evaluations of each decision alternative on each criterion are g
         fo.write(self.htmlPerformanceTable(isSorted=isSorted,\
                                            Transposed=Transposed,\
                                            ndigits=ndigits,
-                                           ContentCentered=ContentCentered))
+                                           ContentCentered=ContentCentered,
+                                           title=title))
         fo.close()
         url = 'file://'+fileName
         webbrowser.open_new(url)
@@ -1528,18 +1529,22 @@ The performance evaluations of each decision alternative on each criterion are g
             
     def htmlPerformanceTable(self,isSorted=False,\
                              Transposed=False,ndigits=2,\
-                             ContentCentered=True):
+                             ContentCentered=True,
+                             title=None):
         """
         Renders the performance table citerion x actions in html format.
         """
         criteria = self.criteria
         minMaxEvaluations = self.computeMinMaxEvaluations()
-        html = '<h1>Performance table %s</h1>' % self.name
-        criteriaKeys = list(dict.keys(criteria))
+        if title == None:
+            html = '<h1>Performance table %s</h1>' % self.name
+        else:
+            html = '<h1>%s</h1>' % title            
+        criteriaKeys = list(criteria.keys())
         if isSorted:
             criteriaKeys.sort()
         actions = self.actions
-        actionsKeys = list(dict.keys(actions))
+        actionsKeys = list(actions.keys())
         if isSorted:
             actionsKeys.sort()
         evaluation = self.evaluation
@@ -2317,7 +2322,7 @@ The performance evaluations of each decision alternative on each criterion are g
         for col in range(0,nc):
             html += '<td bgcolor=%s>&nbsp;%.2f&#037;</td>' % (colorPalette[col][1],
                                                                    #colorPalette[col-1][0],
-                                                                   colorPalette[col][0])
+                                                                   colorPalette[col][0]*Decimal('100.0'))
         html += '</tr>\n'
         html += '</table>\n'
         if criteriaCorrelation != None:

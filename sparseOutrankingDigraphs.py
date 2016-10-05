@@ -1759,7 +1759,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         for col in range(0,nc):
             html += '<td bgcolor=%s>&nbsp;%.2f&#037;</td>' % (colorPalette[col][1],
                                                                    #colorPalette[col-1][0],
-                                                                   colorPalette[col][0])
+                                                                   colorPalette[col][0]*Decimal('100.0'))
         html += '</tr>\n'
         html += '</table>\n'
         if criteriaCorrelation != None:
