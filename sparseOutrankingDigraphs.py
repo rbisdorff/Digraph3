@@ -97,7 +97,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         else:
             return Max
 
-    def showRelationMap(self,fromIndex=None,toIndex=None,symbols=None):
+    def showRelationMap(self,fromIndex=None,toIndex=None,symbols=None,actionsList=None):
         """
         Prints on the console, in text map format, the location of
         the diagonal outranking components of the sparse outranking digraph.
@@ -191,13 +191,17 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
+        if actionsList == None:
+            ranking = self.boostedRanking
+        else:
+            ranking = actionsList
         if fromIndex == None:
             fromIndex = 0
         if toIndex == None:
-            toIndex = len(self.boostedRanking)
-        for x in self.boostedRanking[fromIndex:toIndex]:
+            toIndex = len(ranking)
+        for x in ranking[fromIndex:toIndex]:
             pictStr = ''
-            for y in self.boostedRanking[fromIndex:toIndex]:
+            for y in ranking[fromIndex:toIndex]:
                 if relation(x,y) == Max:
                     pictStr += symbols['max']
                 elif relation(x,y) == Min:
@@ -209,7 +213,10 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
                 elif relation(x,y) < Med:
                     pictStr += symbols['negative']
             print(pictStr)
-        print('Component ranking rule: %s' % self.componentRankingRule)
+        if actionsList == None:
+            print('Component ranking rule: %s' % self.componentRankingRule)
+        else:
+            print('List of actions provided.')
 
     def showHTMLRelationMap(self,actionsSubset=None,\
                             Colored=True,\
@@ -882,7 +889,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
     def __init__(self,argPerfTab,\
                  quantiles=None,\
                  quantilesOrderingStrategy='average',\
-                 LowerClosed=True,\
+                 LowerClosed=False,\
                  componentRankingRule='Copeland',\
                  minimalComponentSize=None,\
                  Threading=False,\
@@ -1501,6 +1508,74 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             #else:
             print('%s. %s-%s : %s' % (compKey,comp['highQtileLimit'],comp['lowQtileLimit'],actions))
                 
+    def computeCategoryContents(self,Reverse=False,Comments=False,StoreSorting=True,\
+                                Threading=False,nbrOfCPUs=None):
+        """
+        Computes the sorting results per category.
+        """
+        try:
+            sorting = self.sorting
+        except:
+            sorting = self.computeSortingCharacteristics(Comments=Comments,\
+                                                     StoreSorting=StoreSorting,\
+                                                     Threading=Threading,\
+                                                     nbrOfCPUs=nbrOfCPUs)
+
+        categoryContent = {}
+        for c in self.categories:
+            categoryContent[c] = []
+            for x in self.actions:
+                if sorting[x][c]['categoryMembership'] >= self.valuationdomain['med']:
+                    categoryContent[c].append(x)
+        
+        return categoryContent
+
+    def showSorting(self,Descending=True,isReturningHTML=False,Debug=False):
+        """
+        Shows sorting results in decreasing or increasing (Reverse=False)
+        order of the categories. If isReturningHTML is True (default = False)
+        the method returns a htlm table with the sorting result.
+        
+        """
+        #from string import replace
+        #from copy import copy, deepcopy
+
+        try:
+            categoryContent = self.categoryContent
+        except:
+            categoryContent = self.computeCategoryContents(StoreSorting=True)
+
+        categoryKeys = list(self.categories.keys())
+        if Descending:
+            categoryKeys.reverse()
+        try:
+            LowerClosed = self.criteriaCategoryLimits['LowerClosed']
+        except:
+            LowerClosed = False
+
+        if Descending:
+            print('\n*--- Sorting results in descending order ---*\n')
+            if isReturningHTML:
+                html = '<h2>Sorting results in descending order</h2>'
+                html += '<table style="background-color:White;" border="1"><tr bgcolor="#9acd32"><th>Categories</th><th>Assorting</th></tr>'
+        else:
+            print('\n*--- Sorting results in ascending order ---*\n')
+            if isReturningHTML:
+                html = '<h2>Sorting results in ascending order</h2>'
+                html += '<table style="background-color:White;" border="1"><tr bgcolor="#9acd32"><th>Categories</th><th>Assorting</th></tr>'
+
+        for c in categoryKeys:
+            print('%s:' % (self.categories[c]['name']), end=' ')
+            print('\t',categoryContent[c])
+            if isReturningHTML:
+                #html += '<tr><td bgcolor="#FFF79B">[%s - %s[</td>' % (limprevc,limc)
+                html += '<tr><td bgcolor="#FFF79B">%s</td>' % (self.categories[c]['name'])
+                catString = str(categoryContent[c])
+                html += '<td>%s</td></tr>' % catString.replace('\'','&apos;')
+
+        if isReturningHTML:
+            html += '</table>'
+            return html
 
     def showRelationTable(self,compKeys=None):
         """
