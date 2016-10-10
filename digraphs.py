@@ -2073,9 +2073,9 @@ class Digraph(object):
             print("Error: self's valuationdomain  must be normalized !")
             return
         n = len(order)
-        corrSum = 0
-        determSum = 0
-        for i in range(n-1):
+        corrSum = Decimal('0')
+        determSum = Decimal('0')
+        for i in range(n):
             x = order[i]
             for j in range(i+1,n):
                 y = order[j]
@@ -2087,6 +2087,10 @@ class Digraph(object):
                 corrSum += corr
                 determ = min( abs(selfRelation),abs(otherRelation) )
                 determSum += determ
+##        for j in range(n-1):
+##            y = order[j]
+##            for i in range(i+1,n):
+##                x = order[i]
                 # y > x
                 selfRelation = self.relation[y][x]
                 otherRelation = selfMax
@@ -2097,10 +2101,10 @@ class Digraph(object):
                 determSum += determ
 
         if determSum > 0:
-            correlation = float(corrSum) / float(determSum)
+            correlation = corrSum / determSum
             n2 = (self.order*self.order) - self.order
-            determination = (float(determSum) / n2)
-            determination /= float(selfMax)
+            determination = determSum / Decimal(str(n2))
+            #determination /= selfMax
             
             return { 'correlation': correlation,\
                      'determination': determination }

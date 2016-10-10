@@ -1975,10 +1975,10 @@ if __name__ == "__main__":
     MP  = False
     nbrActions=100
 ##    t0 = time()
-##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=500,seed=100)
+    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions)
 
-    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
-                                      seed=100)
+##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP)
+##                                      seed=100)
     bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=20,
                                  quantilesOrderingStrategy='average',
                                  componentRankingRule='Copeland',
@@ -1991,7 +1991,8 @@ if __name__ == "__main__":
                                  save2File='testbgMP')
     print(bg1)
     bg1.showComponents(direction='descending')
-    rag = RandomCBPerformanceGenerator(bg1,actionNamePrefix='t')
+##    rag = RandomCBPerformanceGenerator(bg1,actionNamePrefix='t')
+    rag = Random3ObjectivesPerformanceGenerator(bg1,actionNamePrefix='t')
     rag.randomUpdate(2)
     newActions = [key for key in bg1.actions if key[0] == 't']
     print(newActions)
@@ -2034,6 +2035,7 @@ if __name__ == "__main__":
     bg1.sorting.update(newSorting)
     bg1.showDecomposition(direction='increasing')
     bg1.showDecomposition(direction='decreasing')
+    bg1.showSorting()
     
 ##    bg1.sorting.update(newSorting)
 ##    bg1.showActionsSortingResult()
