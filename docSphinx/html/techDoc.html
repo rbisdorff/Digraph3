@@ -3605,7 +3605,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3799,7 +3799,7 @@ actions x criteria in html format.</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.htmlPerformanceTable">
-<code class="descname">htmlPerformanceTable</code><span class="sig-paren">(</span><em>isSorted=False</em>, <em>Transposed=False</em>, <em>ndigits=2</em>, <em>ContentCentered=True</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.htmlPerformanceTable" title="Permalink to this definition">¶</a></dt>
+<code class="descname">htmlPerformanceTable</code><span class="sig-paren">(</span><em>isSorted=False</em>, <em>Transposed=False</em>, <em>ndigits=2</em>, <em>ContentCentered=True</em>, <em>title=None</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.htmlPerformanceTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the performance table citerion x actions in html format.</p>
 </dd></dl>
 
@@ -3950,7 +3950,7 @@ to indicate the exact number of singled threaded cores in fact allocated to the 
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.showHTMLPerformanceTableau">
-<code class="descname">showHTMLPerformanceTableau</code><span class="sig-paren">(</span><em>isSorted=True</em>, <em>Transposed=False</em>, <em>ndigits=2</em>, <em>ContentCentered=True</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showHTMLPerformanceTableau</code><span class="sig-paren">(</span><em>isSorted=True</em>, <em>Transposed=False</em>, <em>ndigits=2</em>, <em>ContentCentered=True</em>, <em>title=None</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>shows the html version of the performance tableau in a browser window.</p>
 </dd></dl>
 
@@ -4848,7 +4848,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5227,16 +5227,16 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
 <dl class="class">
 <dt id="sparseOutrankingDigraphs.PreRankedOutrankingDigraph">
-<em class="property">class </em><code class="descclassname">sparseOutrankingDigraphs.</code><code class="descname">PreRankedOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=True</em>, <em>componentRankingRule='Copeland'</em>, <em>minimalComponentSize=None</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrOfCPUs=1</em>, <em>nbrOfThreads=1</em>, <em>save2File=None</em>, <em>CopyPerfTab=True</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sparseOutrankingDigraphs.</code><code class="descname">PreRankedOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>quantiles=None</em>, <em>quantilesOrderingStrategy='average'</em>, <em>LowerClosed=False</em>, <em>componentRankingRule='Copeland'</em>, <em>minimalComponentSize=1</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrOfCPUs=1</em>, <em>nbrOfThreads=1</em>, <em>save2File=None</em>, <em>CopyPerfTab=True</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#sparseOutrankingDigraphs.SparseOutrankingDigraph" title="sparseOutrankingDigraphs.SparseOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sparseOutrankingDigraphs.SparseOutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Main class for the multiprocessing implementation of pre-ranked sparse outranking digraphs.</p>
 <p>The sparse outranking digraph instance is decomposed with a q-tiling sort into a partition
 of quantile equivalence classes which are linearly ordered by average quantile limits (default).</p>
 <p>With each quantile equivalence class is associated a BipolarOutrankingDigraph object
 which is restricted to the decision actions gathered in this quantile equivalence class.</p>
-<p>By default, the number of quantiles q is set to a twentieth of the number of decision actions,
-ie q = order//10. The effective number of quantiles may be much lower for large orders;
-for instance quantiles = 250 may give good results for a digraph of order 25000.</p>
+<p>By default, the number of quantiles is set to a tenth of the number of decision actions,
+i.e. quantiles = order//10. The effective number of quantiles can be much lower for large orders;
+for instance quantiles = 250 gives good results for a digraph of order 25000.</p>
 <p>For other parameters settings, see the corresponding <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a> class.</p>
 <dl class="method">
 <dt id="sparseOutrankingDigraphs.PreRankedOutrankingDigraph.actionOrder">
@@ -5273,6 +5273,12 @@ on each component.</p>
 <dd><p>Renders an ordred list of decision actions ranked in
 decreasing preference direction following the rankingRule
 on each component.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeCategoryContents">
+<code class="descname">computeCategoryContents</code><span class="sig-paren">(</span><em>Reverse=False</em>, <em>Comments=False</em>, <em>StoreSorting=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeCategoryContents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the sorting results per category.</p>
 </dd></dl>
 
 <dl class="method">
@@ -5403,6 +5409,14 @@ Components are stored in an ordered dictionary.</p>
 <span class="go">&lt;class &#39;sparseOutrankingDigraphs.PreRankedOutrankingDigraph&#39;&gt; instance        </span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="method">
+<dt id="sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showSorting">
+<code class="descname">showSorting</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>isReturningHTML=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showSorting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows sorting results in decreasing or increasing (Reverse=False)
+order of the categories. If isReturningHTML is True (default = False)
+the method returns a htlm table with the sorting result.</p>
 </dd></dl>
 
 </dd></dl>
@@ -5590,7 +5604,7 @@ in <em>decreasing</em> (default) or <em>increasing</em> preference direction.</p
 
 <dl class="method">
 <dt id="sparseOutrankingDigraphs.SparseOutrankingDigraph.showRelationMap">
-<code class="descname">showRelationMap</code><span class="sig-paren">(</span><em>fromIndex=None</em>, <em>toIndex=None</em>, <em>symbols=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.SparseOutrankingDigraph.showRelationMap" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showRelationMap</code><span class="sig-paren">(</span><em>fromIndex=None</em>, <em>toIndex=None</em>, <em>symbols=None</em>, <em>actionsList=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.SparseOutrankingDigraph.showRelationMap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints on the console, in text map format, the location of
 the diagonal outranking components of the sparse outranking digraph.</p>
 <dl class="docutils">

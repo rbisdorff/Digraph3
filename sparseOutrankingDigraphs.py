@@ -879,9 +879,9 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
     With each quantile equivalence class is associated a BipolarOutrankingDigraph object
     which is restricted to the decision actions gathered in this quantile equivalence class.
 
-    By default, the number of quantiles q is set to a twentieth of the number of decision actions,
-    ie q = order//10. The effective number of quantiles may be much lower for large orders;
-    for instance quantiles = 250 may give good results for a digraph of order 25000.
+    By default, the number of quantiles is set to a tenth of the number of decision actions,
+    i.e. quantiles = order//10. The effective number of quantiles can be much lower for large orders;
+    for instance quantiles = 250 gives good results for a digraph of order 25000.
     
     For other parameters settings, see the corresponding :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
 
@@ -891,7 +891,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                  quantilesOrderingStrategy='average',\
                  LowerClosed=False,\
                  componentRankingRule='Copeland',\
-                 minimalComponentSize=None,\
+                 minimalComponentSize=1,\
                  Threading=False,\
                  tempDir=None,\
                  #componentThreadingThreshold=50,\
