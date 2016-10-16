@@ -4985,9 +4985,12 @@ class Digraph(object):
 
     def graphDetermination(self):
         """
-        Output: average relative arc determination.
+        Output: average arc determination relatiive to the amplitude = maximum - median
+        of the self valuation domain.
 
-        averageDeterm = ( sum_(x,y) [ abs( relf-relation[x][y] - Med )] / n ) / ( Max-Med )
+        averageDeterm = ( sum_(x,y) [ abs( relf-relation[x][y] - Med )] / n ) / ( Max-Med ),
+
+        where Med = self.valuationdomain['med'] and Max = slef.valuationdomain['max'].
         
         """
         Min = self.valuationdomain['min']
