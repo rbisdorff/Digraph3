@@ -4983,14 +4983,13 @@ class Digraph(object):
                     break
         return diameter
 
-    def graphDetermination(self):
+    def graphDetermination(self,Normalized=True):
         """
-        Output: average arc determination relatiive to the amplitude = maximum - median
-        of the self valuation domain.
+        Output: average normalized (by default) arc determination:
 
-        averageDeterm = ( sum_(x,y) [ abs( relf-relation[x][y] - Med )] / n ) / ( Max-Med ),
+        averageDeterm = ( sum_(x,y) [ abs( relf-relation[x][y] - Med )] / n ) / [( Max-Med ) if Normalized],
 
-        where Med = self.valuationdomain['med'] and Max = slef.valuationdomain['max'].
+        where Med = self.valuationdomain['med'] and Max = self.valuationdomain['max'].
         
         """
         Min = self.valuationdomain['min']
@@ -5003,7 +5002,10 @@ class Digraph(object):
                     determ += rxy - Med
                 else:
                     determ += Med - rxy
-        averageDeterm = (determ / Decimal(str(self.order)))/(Max-Med)
+        if Normalized:
+            averageDeterm = (determ / Decimal(str(self.order)))/(Max-Med)
+        else:
+            averageDeterm = (determ / Decimal(str(self.order)))
         return  averageDeterm
 
     def computeSize(self):
