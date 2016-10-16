@@ -72,7 +72,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         on each criteria. By default lower-closed limts of categories are
         supposed to be used in the sorting.
 
-    Example Python3 session
+    Example Python3 session:
 
     >>> from sortingDigraphs import SortingDigraph
     >>> from randomPerfTabs import RandomPerformanceTableau
